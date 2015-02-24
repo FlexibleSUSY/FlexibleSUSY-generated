@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 23 Feb 2015 14:21:48
+// File generated at Tue 24 Feb 2015 17:51:05
 
 #ifndef MSSMNoFV_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
 #define MSSMNoFV_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
@@ -44,16 +44,19 @@ public:
 
    void clear();
    double get_initial_scale_guess() const;
+   const MSSMNoFV_input_parameters& get_input_parameters() const;
+   MSSMNoFV<Two_scale>* get_model() const;
    void initialize();
    void set_input_parameters(const MSSMNoFV_input_parameters&);
+
+protected:
+   void update_scale();
 
 private:
    double scale;
    double initial_scale_guess;
    MSSMNoFV<Two_scale>* model;
    MSSMNoFV_input_parameters inputPars;
-
-   void update_scale();
 };
 
 } // namespace flexiblesusy

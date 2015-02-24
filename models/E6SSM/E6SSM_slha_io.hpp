@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 23 Feb 2015 13:02:40
+// File generated at Tue 24 Feb 2015 17:35:54
 
 #ifndef E6SSM_SLHA_IO_H
 #define E6SSM_SLHA_IO_H
@@ -398,11 +398,13 @@ void E6SSM_slha_io::fill_physical(E6SSM_slha<T>& model) const
       PHYSICAL(UHpp) = UHpp;
    }
 
+   PHYSICAL(MVG) = slha_io.read_entry("MASS", 21);
    PHYSICAL(MGlu) = slha_io.read_entry("MASS", 1000021);
    PHYSICAL(MFv)(0) = slha_io.read_entry("MASS", 12);
    PHYSICAL(MFv)(1) = slha_io.read_entry("MASS", 14);
    PHYSICAL(MFv)(2) = slha_io.read_entry("MASS", 16);
    PHYSICAL(MChaP) = slha_io.read_entry("MASS", 1000091);
+   PHYSICAL(MVP) = slha_io.read_entry("MASS", 22);
    PHYSICAL(MVZ) = slha_io.read_entry("MASS", 23);
    PHYSICAL(MVZp) = slha_io.read_entry("MASS", 31);
    PHYSICAL(MSd)(0) = slha_io.read_entry("MASS", 1000001);
@@ -481,8 +483,6 @@ void E6SSM_slha_io::fill_physical(E6SSM_slha<T>& model) const
    PHYSICAL(MSHpp)(1) = slha_io.read_entry("MASS", 93);
    PHYSICAL(MChiP)(0) = slha_io.read_entry("MASS", 1000092);
    PHYSICAL(MChiP)(1) = slha_io.read_entry("MASS", 1000094);
-   PHYSICAL(MVG) = slha_io.read_entry("MASS", 21);
-   PHYSICAL(MVP) = slha_io.read_entry("MASS", 22);
    PHYSICAL(MVWm) = slha_io.read_entry("MASS", 24);
 
 }

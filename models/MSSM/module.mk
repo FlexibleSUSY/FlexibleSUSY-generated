@@ -18,8 +18,7 @@ MSSM_TWO_SCALE_MK := \
 		$(MSSM_TWO_SCALE_SOFT_MK)
 
 MSSM_SLHA_INPUT := \
-		$(DIR)/LesHouches.in.MSSM \
-		$(DIR)/LesHouches.in.MSSM~
+		$(DIR)/LesHouches.in.MSSM
 
 MSSM_GNUPLOT := \
 		$(DIR)/MSSM_plot_rgflow.gnuplot \

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 23 Feb 2015 13:39:54
+// File generated at Tue 24 Feb 2015 17:44:45
 
 #ifndef MSSMRHN_SLHA_IO_H
 #define MSSMRHN_SLHA_IO_H
@@ -310,7 +310,9 @@ void MSSMRHN_slha_io::fill_physical(MSSMRHN_slha<T>& model) const
       PHYSICAL(UV) = UV;
    }
 
+   PHYSICAL(MVG) = slha_io.read_entry("MASS", 21);
    PHYSICAL(MGlu) = slha_io.read_entry("MASS", 1000021);
+   PHYSICAL(MVP) = slha_io.read_entry("MASS", 22);
    PHYSICAL(MVZ) = slha_io.read_entry("MASS", 23);
    PHYSICAL(MSd)(0) = slha_io.read_entry("MASS", 1000001);
    PHYSICAL(MSd)(1) = slha_io.read_entry("MASS", 1000003);
@@ -361,8 +363,6 @@ void MSSMRHN_slha_io::fill_physical(MSSMRHN_slha<T>& model) const
    PHYSICAL(MFu)(0) = slha_io.read_entry("MASS", 2);
    PHYSICAL(MFu)(1) = slha_io.read_entry("MASS", 4);
    PHYSICAL(MFu)(2) = slha_io.read_entry("MASS", 6);
-   PHYSICAL(MVG) = slha_io.read_entry("MASS", 21);
-   PHYSICAL(MVP) = slha_io.read_entry("MASS", 22);
    PHYSICAL(MVWm) = slha_io.read_entry("MASS", 24);
 
 }

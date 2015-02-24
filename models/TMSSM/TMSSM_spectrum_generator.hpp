@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 23 Feb 2015 12:32:43
+// File generated at Tue 24 Feb 2015 17:31:35
 
 #ifndef TMSSM_SPECTRUM_GENERATOR_H
 #define TMSSM_SPECTRUM_GENERATOR_H
@@ -31,7 +31,7 @@
 
 #include "coupling_monitor.hpp"
 #include "error.hpp"
-#include "higgs_2loop_corrections.hpp"
+#include "two_loop_corrections.hpp"
 #include "numerics.hpp"
 #include "two_scale_running_precision.hpp"
 #include "two_scale_solver.hpp"
@@ -76,7 +76,7 @@ public:
    void set_calculate_sm_masses(bool flag) { calculate_sm_masses = flag; }
    void set_force_output(bool flag) { force_output = flag; }
    void set_threshold_corrections_loop_order(unsigned t) { threshold_corrections_loop_order = t; }
-   void set_higgs_2loop_corrections(const Higgs_2loop_corrections& c) { model.set_higgs_2loop_corrections(c); }
+   void set_two_loop_corrections(const Two_loop_corrections& c) { model.set_two_loop_corrections(c); }
 
    void run(const QedQcd& oneset, const TMSSM_input_parameters& input);
    void write_running_couplings(const std::string& filename = "TMSSM_rge_running.dat") const;

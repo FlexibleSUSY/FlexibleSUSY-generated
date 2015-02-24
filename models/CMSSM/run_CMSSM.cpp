@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 23 Feb 2015 14:24:15
+// File generated at Tue 24 Feb 2015 17:53:38
 
 #include "CMSSM_input_parameters.hpp"
 #include "CMSSM_slha_io.hpp"
@@ -87,8 +87,8 @@ int main(int argc, const char* argv[])
       spectrum_generator_settings.get(Spectrum_generator_settings::beta_loop_order));
    spectrum_generator.set_threshold_corrections_loop_order(
       spectrum_generator_settings.get(Spectrum_generator_settings::threshold_corrections_loop_order));
-   spectrum_generator.set_higgs_2loop_corrections(
-      spectrum_generator_settings.get_higgs_2loop_corrections());
+   spectrum_generator.set_two_loop_corrections(
+      spectrum_generator_settings.get_two_loop_corrections());
 
    spectrum_generator.run(oneset, input);
 

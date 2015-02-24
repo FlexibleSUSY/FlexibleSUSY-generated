@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 23 Feb 2015 13:36:11
+// File generated at Tue 24 Feb 2015 17:46:06
 
 /**
  * @file NMSSM_two_scale_model.hpp
@@ -24,8 +24,8 @@
  *        value problem using the two_scale solver by solvingt EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Mon 23 Feb 2015 13:36:11 with FlexibleSUSY
- * 1.0.4 (git commit: v1.0.4-341-gb865fd3) and SARAH 4.4.6 .
+ * This file was generated at Tue 24 Feb 2015 17:46:06 with FlexibleSUSY
+ * 1.0.4 (git commit: v1.0.4-355-g539c238) and SARAH 4.4.6 .
  */
 
 #ifndef NMSSM_TWO_SCALE_H
@@ -36,7 +36,7 @@
 #include "NMSSM_physical.hpp"
 #include "NMSSM_info.hpp"
 #include "two_scale_model.hpp"
-#include "higgs_2loop_corrections.hpp"
+#include "two_loop_corrections.hpp"
 #include "problems.hpp"
 #include "config.h"
 
@@ -77,7 +77,7 @@ public:
    void reorder_pole_masses();
    void set_ewsb_iteration_precision(double);
    void set_ewsb_loop_order(unsigned);
-   void set_higgs_2loop_corrections(const Higgs_2loop_corrections&);
+   void set_two_loop_corrections(const Two_loop_corrections&);
    void set_number_of_ewsb_iterations(std::size_t);
    void set_number_of_mass_iterations(std::size_t);
    void set_pole_mass_loop_order(unsigned);
@@ -642,6 +642,9 @@ Eigen::Array<double,2,1> get_MPseudoscalarHiggs() const;
    std::complex<double> self_energy_Fu_1_heavy_rotated(double p , unsigned gO1, unsigned gO2) const;
    std::complex<double> self_energy_Fu_PR_heavy_rotated(double p , unsigned gO1, unsigned gO2) const;
    std::complex<double> self_energy_Fu_PL_heavy_rotated(double p , unsigned gO1, unsigned gO2) const;
+   std::complex<double> self_energy_Fu_1_heavy(double p , unsigned gO1, unsigned gO2) const;
+   std::complex<double> self_energy_Fu_PR_heavy(double p , unsigned gO1, unsigned gO2) const;
+   std::complex<double> self_energy_Fu_PL_heavy(double p , unsigned gO1, unsigned gO2) const;
    std::complex<double> tadpole_hh(unsigned gO1) const;
 
    void calculate_MSu_3rd_generation(double&, double&, double&) const;
@@ -722,7 +725,7 @@ private:
    static const std::size_t number_of_ewsb_equations = 3;
    NMSSM_physical physical; ///< contains the pole masses and mixings
    Problems<NMSSM_info::NUMBER_OF_PARTICLES> problems;
-   Higgs_2loop_corrections higgs_2loop_corrections; ///< used Higgs 2-loop corrections
+   Two_loop_corrections two_loop_corrections; ///< used 2-loop corrections
 #ifdef ENABLE_THREADS
    std::exception_ptr thread_exception;
    static std::mutex mtx_fortran; /// locks fortran functions

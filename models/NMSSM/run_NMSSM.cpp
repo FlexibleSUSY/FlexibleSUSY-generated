@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 23 Feb 2015 13:36:11
+// File generated at Tue 24 Feb 2015 17:46:06
 
 #include "NMSSM_input_parameters.hpp"
 #include "NMSSM_slha_io.hpp"
@@ -87,8 +87,8 @@ int main(int argc, const char* argv[])
       spectrum_generator_settings.get(Spectrum_generator_settings::beta_loop_order));
    spectrum_generator.set_threshold_corrections_loop_order(
       spectrum_generator_settings.get(Spectrum_generator_settings::threshold_corrections_loop_order));
-   spectrum_generator.set_higgs_2loop_corrections(
-      spectrum_generator_settings.get_higgs_2loop_corrections());
+   spectrum_generator.set_two_loop_corrections(
+      spectrum_generator_settings.get_two_loop_corrections());
 
    spectrum_generator.run(oneset, input);
 

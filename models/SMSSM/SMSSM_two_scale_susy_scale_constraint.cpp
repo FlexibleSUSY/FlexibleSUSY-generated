@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 23 Feb 2015 13:21:39
+// File generated at Tue 24 Feb 2015 17:42:32
 
 #include "SMSSM_two_scale_susy_scale_constraint.hpp"
 #include "SMSSM_two_scale_model.hpp"
@@ -94,6 +94,16 @@ double SMSSM_susy_scale_constraint<Two_scale>::get_scale() const
 double SMSSM_susy_scale_constraint<Two_scale>::get_initial_scale_guess() const
 {
    return initial_scale_guess;
+}
+
+const SMSSM_input_parameters& SMSSM_susy_scale_constraint<Two_scale>::get_input_parameters() const
+{
+   return inputPars;
+}
+
+SMSSM<Two_scale>* SMSSM_susy_scale_constraint<Two_scale>::get_model() const
+{
+   return model;
 }
 
 void SMSSM_susy_scale_constraint<Two_scale>::set_model(Two_scale_model* model_)

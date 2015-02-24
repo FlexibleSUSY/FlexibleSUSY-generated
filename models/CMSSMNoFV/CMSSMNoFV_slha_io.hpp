@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 23 Feb 2015 14:10:56
+// File generated at Tue 24 Feb 2015 17:48:25
 
 #ifndef CMSSMNoFV_SLHA_IO_H
 #define CMSSMNoFV_SLHA_IO_H
@@ -275,7 +275,9 @@ void CMSSMNoFV_slha_io::fill_physical(CMSSMNoFV_slha<T>& model) const
       PHYSICAL(ZTau) = ZTau;
    }
 
+   PHYSICAL(MVG) = slha_io.read_entry("MASS", 21);
    PHYSICAL(MGlu) = slha_io.read_entry("MASS", 1000021);
+   PHYSICAL(MVP) = slha_io.read_entry("MASS", 22);
    PHYSICAL(MVZ) = slha_io.read_entry("MASS", 23);
    PHYSICAL(MFd) = slha_io.read_entry("MASS", 1);
    PHYSICAL(MFs) = slha_io.read_entry("MASS", 3);
@@ -320,8 +322,6 @@ void CMSSMNoFV_slha_io::fill_physical(CMSSMNoFV_slha<T>& model) const
    PHYSICAL(MChi)(3) = slha_io.read_entry("MASS", 1000035);
    PHYSICAL(MCha)(0) = slha_io.read_entry("MASS", 1000024);
    PHYSICAL(MCha)(1) = slha_io.read_entry("MASS", 1000037);
-   PHYSICAL(MVG) = slha_io.read_entry("MASS", 21);
-   PHYSICAL(MVP) = slha_io.read_entry("MASS", 22);
    PHYSICAL(MVWm) = slha_io.read_entry("MASS", 24);
 
 }
@@ -517,6 +517,8 @@ void CMSSMNoFV_slha_io::set_extra(
    {
       std::ostringstream block;
       block << "Block MASS Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(6, (Pole(MFt)), "Pole(MFt)")
+            << FORMAT_ELEMENT(24, (Pole(MVWm)), "Pole(MVWm)")
             << FORMAT_ELEMENT(1000021, (Pole(MGlu)), "Pole(MGlu)")
             << FORMAT_ELEMENT(1000012, (Pole(MSveL)), "Pole(MSveL)")
             << FORMAT_ELEMENT(1000014, (Pole(MSvmL)), "Pole(MSvmL)")

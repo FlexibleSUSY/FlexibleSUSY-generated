@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 23 Feb 2015 14:11:30
+// File generated at Tue 24 Feb 2015 17:49:06
 
 #include "MSSMNoFVatMGUT_slha_io.hpp"
 #include "MSSMNoFVatMGUT_input_parameters.hpp"
@@ -199,6 +199,8 @@ void MSSMNoFVatMGUT_slha_io::set_mass(const MSSMNoFVatMGUT_physical& physical,
 
    if (write_sm_masses) {
       mass
+         << FORMAT_MASS(21, LOCALPHYSICAL(MVG), "VG")
+         << FORMAT_MASS(22, LOCALPHYSICAL(MVP), "VP")
          << FORMAT_MASS(23, LOCALPHYSICAL(MVZ), "VZ")
          << FORMAT_MASS(1, LOCALPHYSICAL(MFd), "Fd")
          << FORMAT_MASS(3, LOCALPHYSICAL(MFs), "Fs")
@@ -212,8 +214,6 @@ void MSSMNoFVatMGUT_slha_io::set_mass(const MSSMNoFVatMGUT_physical& physical,
          << FORMAT_MASS(11, LOCALPHYSICAL(MFe), "Fe")
          << FORMAT_MASS(13, LOCALPHYSICAL(MFm), "Fm")
          << FORMAT_MASS(15, LOCALPHYSICAL(MFtau), "Ftau")
-         << FORMAT_MASS(21, LOCALPHYSICAL(MVG), "VG")
-         << FORMAT_MASS(22, LOCALPHYSICAL(MVP), "VP")
       ;
    }
 

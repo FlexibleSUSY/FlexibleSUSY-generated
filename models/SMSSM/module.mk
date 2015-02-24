@@ -18,7 +18,6 @@ SMSSM_TWO_SCALE_MK := \
 		$(SMSSM_TWO_SCALE_SOFT_MK)
 
 SMSSM_SLHA_INPUT := \
-		$(DIR)/LesHouches.in.SMSSM~ \
 		$(DIR)/LesHouches.in.SMSSM
 
 SMSSM_GNUPLOT := \

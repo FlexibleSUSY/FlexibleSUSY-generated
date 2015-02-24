@@ -18,8 +18,7 @@ CMSSM_TWO_SCALE_MK := \
 		$(CMSSM_TWO_SCALE_SOFT_MK)
 
 CMSSM_SLHA_INPUT := \
-		$(DIR)/LesHouches.in.CMSSM \
-		$(DIR)/LesHouches.in.CMSSM~
+		$(DIR)/LesHouches.in.CMSSM
 
 CMSSM_GNUPLOT := \
 		$(DIR)/CMSSM_plot_rgflow.gnuplot \

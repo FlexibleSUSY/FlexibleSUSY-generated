@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 23 Feb 2015 13:31:15
+// File generated at Tue 24 Feb 2015 17:42:45
 
 #ifndef NUTNMSSM_SLHA_IO_H
 #define NUTNMSSM_SLHA_IO_H
@@ -284,10 +284,12 @@ void NUTNMSSM_slha_io::fill_physical(NUTNMSSM_slha<T>& model) const
       PHYSICAL(ZUR) = ZUR;
    }
 
+   PHYSICAL(MVG) = slha_io.read_entry("MASS", 21);
    PHYSICAL(MGlu) = slha_io.read_entry("MASS", 1000021);
    PHYSICAL(MFv)(0) = slha_io.read_entry("MASS", 12);
    PHYSICAL(MFv)(1) = slha_io.read_entry("MASS", 14);
    PHYSICAL(MFv)(2) = slha_io.read_entry("MASS", 16);
+   PHYSICAL(MVP) = slha_io.read_entry("MASS", 22);
    PHYSICAL(MVZ) = slha_io.read_entry("MASS", 23);
    PHYSICAL(MSd)(0) = slha_io.read_entry("MASS", 1000001);
    PHYSICAL(MSd)(1) = slha_io.read_entry("MASS", 1000003);
@@ -332,8 +334,6 @@ void NUTNMSSM_slha_io::fill_physical(NUTNMSSM_slha<T>& model) const
    PHYSICAL(MFu)(0) = slha_io.read_entry("MASS", 2);
    PHYSICAL(MFu)(1) = slha_io.read_entry("MASS", 4);
    PHYSICAL(MFu)(2) = slha_io.read_entry("MASS", 6);
-   PHYSICAL(MVG) = slha_io.read_entry("MASS", 21);
-   PHYSICAL(MVP) = slha_io.read_entry("MASS", 22);
    PHYSICAL(MVWm) = slha_io.read_entry("MASS", 24);
 
 }

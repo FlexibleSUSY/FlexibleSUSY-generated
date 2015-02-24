@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 23 Feb 2015 12:25:45
+// File generated at Tue 24 Feb 2015 17:29:31
 
 /**
  * @file SM_two_scale_model.hpp
@@ -24,8 +24,8 @@
  *        value problem using the two_scale solver by solvingt EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Mon 23 Feb 2015 12:25:45 with FlexibleSUSY
- * 1.0.4 (git commit: v1.0.4-341-gb865fd3) and SARAH 4.4.6 .
+ * This file was generated at Tue 24 Feb 2015 17:29:31 with FlexibleSUSY
+ * 1.0.4 (git commit: v1.0.4-355-g539c238) and SARAH 4.4.6 .
  */
 
 #ifndef SM_TWO_SCALE_H
@@ -36,7 +36,7 @@
 #include "SM_physical.hpp"
 #include "SM_info.hpp"
 #include "two_scale_model.hpp"
-#include "higgs_2loop_corrections.hpp"
+#include "two_loop_corrections.hpp"
 #include "problems.hpp"
 #include "config.h"
 
@@ -77,7 +77,7 @@ public:
    void reorder_pole_masses();
    void set_ewsb_iteration_precision(double);
    void set_ewsb_loop_order(unsigned);
-   void set_higgs_2loop_corrections(const Higgs_2loop_corrections&);
+   void set_two_loop_corrections(const Two_loop_corrections&);
    void set_number_of_ewsb_iterations(std::size_t);
    void set_number_of_mass_iterations(std::size_t);
    void set_pole_mass_loop_order(unsigned);
@@ -101,11 +101,13 @@ public:
    virtual void set_precision(double);
 
 
+   double get_MVG() const { return MVG; }
    double get_MHp() const { return MHp; }
    const Eigen::Array<double,3,1>& get_MFv() const { return MFv; }
    double get_MFv(int i) const { return MFv(i); }
    double get_MAh() const { return MAh; }
    double get_Mhh() const { return Mhh; }
+   double get_MVP() const { return MVP; }
    double get_MVZ() const { return MVZ; }
    const Eigen::Array<double,3,1>& get_MFd() const { return MFd; }
    double get_MFd(int i) const { return MFd(i); }
@@ -113,8 +115,6 @@ public:
    double get_MFu(int i) const { return MFu(i); }
    const Eigen::Array<double,3,1>& get_MFe() const { return MFe; }
    double get_MFe(int i) const { return MFe(i); }
-   double get_MVG() const { return MVG; }
-   double get_MVP() const { return MVP; }
    double get_MVWp() const { return MVWp; }
 
 
@@ -133,6 +133,8 @@ public:
    const std::complex<double>& get_Ue(int i, int k) const { return Ue(i,k); }
 
 
+   double get_mass_matrix_VG() const;
+   void calculate_MVG();
    double get_mass_matrix_Hp() const;
    void calculate_MHp();
    Eigen::Matrix<double,3,3> get_mass_matrix_Fv() const;
@@ -141,6 +143,8 @@ public:
    void calculate_MAh();
    double get_mass_matrix_hh() const;
    void calculate_Mhh();
+   double get_mass_matrix_VP() const;
+   void calculate_MVP();
    double get_mass_matrix_VZ() const;
    void calculate_MVZ();
    Eigen::Matrix<double,3,3> get_mass_matrix_Fd() const;
@@ -149,10 +153,6 @@ public:
    void calculate_MFu();
    Eigen::Matrix<double,3,3> get_mass_matrix_Fe() const;
    void calculate_MFe();
-   double get_mass_matrix_VG() const;
-   void calculate_MVG();
-   double get_mass_matrix_VP() const;
-   void calculate_MVP();
    double get_mass_matrix_VWp() const;
    void calculate_MVWp();
 
@@ -360,21 +360,24 @@ public:
    std::complex<double> self_energy_Fu_1_heavy_rotated(double p , unsigned gO1, unsigned gO2) const;
    std::complex<double> self_energy_Fu_PR_heavy_rotated(double p , unsigned gO1, unsigned gO2) const;
    std::complex<double> self_energy_Fu_PL_heavy_rotated(double p , unsigned gO1, unsigned gO2) const;
+   std::complex<double> self_energy_Fu_1_heavy(double p , unsigned gO1, unsigned gO2) const;
+   std::complex<double> self_energy_Fu_PR_heavy(double p , unsigned gO1, unsigned gO2) const;
+   std::complex<double> self_energy_Fu_PL_heavy(double p , unsigned gO1, unsigned gO2) const;
    std::complex<double> tadpole_hh() const;
 
 
 
 
+   void calculate_MVG_pole();
    void calculate_MHp_pole();
    void calculate_MFv_pole();
    void calculate_MAh_pole();
    void calculate_Mhh_pole();
+   void calculate_MVP_pole();
    void calculate_MVZ_pole();
    void calculate_MFd_pole();
    void calculate_MFu_pole();
    void calculate_MFe_pole();
-   void calculate_MVG_pole();
-   void calculate_MVP_pole();
    void calculate_MVWp_pole();
    double calculate_MVWp_pole(double);
    double calculate_MVZ_pole(double);
@@ -425,7 +428,7 @@ private:
    static const std::size_t number_of_ewsb_equations = 1;
    SM_physical physical; ///< contains the pole masses and mixings
    Problems<SM_info::NUMBER_OF_PARTICLES> problems;
-   Higgs_2loop_corrections higgs_2loop_corrections; ///< used Higgs 2-loop corrections
+   Two_loop_corrections two_loop_corrections; ///< used 2-loop corrections
 #ifdef ENABLE_THREADS
    std::exception_ptr thread_exception;
    static std::mutex mtx_fortran; /// locks fortran functions
@@ -453,16 +456,16 @@ private:
    double G0(double, double, double) const;
 
    // DR-bar masses
+   double MVG;
    double MHp;
    Eigen::Array<double,3,1> MFv;
    double MAh;
    double Mhh;
+   double MVP;
    double MVZ;
    Eigen::Array<double,3,1> MFd;
    Eigen::Array<double,3,1> MFu;
    Eigen::Array<double,3,1> MFe;
-   double MVG;
-   double MVP;
    double MVWp;
 
    // DR-bar mixing matrices

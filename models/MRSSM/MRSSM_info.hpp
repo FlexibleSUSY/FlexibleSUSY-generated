@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 23 Feb 2015 12:39:15
+// File generated at Tue 24 Feb 2015 17:31:34
 
 #ifndef MRSSM_INFO_H
 #define MRSSM_INFO_H
@@ -26,8 +26,8 @@
 namespace flexiblesusy {
 
 namespace MRSSM_info {
-   enum Particles : unsigned {Glu, Fv, SOc, VZ, Sd, Sv, Su, Se, hh, Ah, Rh, Hpm
-      , Rpm, Chi, Cha1, Cha2, Fe, Fd, Fu, VG, VP, VWm, NUMBER_OF_PARTICLES};
+   enum Particles : unsigned {VG, Glu, Fv, SOc, VP, VZ, Sd, Sv, Su, Se, hh, Ah,
+      Rh, Hpm, Rpm, Chi, Cha1, Cha2, Fe, Fd, Fu, VWm, NUMBER_OF_PARTICLES};
 
    enum Parameters : unsigned {Yd00, Yd01, Yd02, Yd10, Yd11, Yd12, Yd20, Yd21,
       Yd22, Ye00, Ye01, Ye02, Ye10, Ye11, Ye12, Ye20, Ye21, Ye22, LamTD, LamTU,

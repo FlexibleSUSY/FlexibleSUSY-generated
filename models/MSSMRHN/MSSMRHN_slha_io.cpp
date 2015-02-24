@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 23 Feb 2015 13:39:54
+// File generated at Tue 24 Feb 2015 17:44:45
 
 #include "MSSMRHN_slha_io.hpp"
 #include "MSSMRHN_input_parameters.hpp"
@@ -172,6 +172,8 @@ void MSSMRHN_slha_io::set_mass(const MSSMRHN_physical& physical,
 
    if (write_sm_masses) {
       mass
+         << FORMAT_MASS(21, LOCALPHYSICAL(MVG), "VG")
+         << FORMAT_MASS(22, LOCALPHYSICAL(MVP), "VP")
          << FORMAT_MASS(23, LOCALPHYSICAL(MVZ), "VZ")
          << FORMAT_MASS(12, LOCALPHYSICAL(MFv(0)), "Fv(1)")
          << FORMAT_MASS(14, LOCALPHYSICAL(MFv(1)), "Fv(2)")
@@ -188,8 +190,6 @@ void MSSMRHN_slha_io::set_mass(const MSSMRHN_physical& physical,
          << FORMAT_MASS(2, LOCALPHYSICAL(MFu(0)), "Fu(1)")
          << FORMAT_MASS(4, LOCALPHYSICAL(MFu(1)), "Fu(2)")
          << FORMAT_MASS(6, LOCALPHYSICAL(MFu(2)), "Fu(3)")
-         << FORMAT_MASS(21, LOCALPHYSICAL(MVG), "VG")
-         << FORMAT_MASS(22, LOCALPHYSICAL(MVP), "VP")
       ;
    }
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 23 Feb 2015 14:20:21
+// File generated at Tue 24 Feb 2015 17:49:36
 
 #ifndef CMSSMNoFV_PHYSICAL_H
 #define CMSSMNoFV_PHYSICAL_H
@@ -34,7 +34,9 @@ struct CMSSMNoFV_physical {
    void clear();
    void print(std::ostream&) const;
 
+   double MVG;
    double MGlu;
+   double MVP;
    double MVZ;
    double MFd;
    double MFs;
@@ -65,8 +67,6 @@ struct CMSSMNoFV_physical {
    Eigen::Array<double,2,1> MHpm;
    Eigen::Array<double,4,1> MChi;
    Eigen::Array<double,2,1> MCha;
-   double MVG;
-   double MVP;
    double MVWm;
 
    Eigen::Matrix<double,2,2> ZD;

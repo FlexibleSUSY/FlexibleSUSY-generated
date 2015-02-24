@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 23 Feb 2015 14:21:47
+// File generated at Tue 24 Feb 2015 17:51:11
 
 #include "MSSMatMGUT_two_scale_susy_scale_constraint.hpp"
 #include "MSSMatMGUT_two_scale_model.hpp"
@@ -90,6 +90,16 @@ double MSSMatMGUT_susy_scale_constraint<Two_scale>::get_scale() const
 double MSSMatMGUT_susy_scale_constraint<Two_scale>::get_initial_scale_guess() const
 {
    return initial_scale_guess;
+}
+
+const MSSMatMGUT_input_parameters& MSSMatMGUT_susy_scale_constraint<Two_scale>::get_input_parameters() const
+{
+   return inputPars;
+}
+
+MSSMatMGUT<Two_scale>* MSSMatMGUT_susy_scale_constraint<Two_scale>::get_model() const
+{
+   return model;
 }
 
 void MSSMatMGUT_susy_scale_constraint<Two_scale>::set_model(Two_scale_model* model_)

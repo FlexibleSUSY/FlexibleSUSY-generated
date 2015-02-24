@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 23 Feb 2015 12:25:45
+// File generated at Tue 24 Feb 2015 17:29:31
 
 #ifndef SM_PHYSICAL_H
 #define SM_PHYSICAL_H
@@ -34,16 +34,16 @@ struct SM_physical {
    void clear();
    void print(std::ostream&) const;
 
+   double MVG;
    double MHp;
    Eigen::Array<double,3,1> MFv;
    double MAh;
    double Mhh;
+   double MVP;
    double MVZ;
    Eigen::Array<double,3,1> MFd;
    Eigen::Array<double,3,1> MFu;
    Eigen::Array<double,3,1> MFe;
-   double MVG;
-   double MVP;
    double MVWp;
 
    Eigen::Matrix<std::complex<double>,3,3> Vd;

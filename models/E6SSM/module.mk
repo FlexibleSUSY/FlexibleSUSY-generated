@@ -18,8 +18,7 @@ E6SSM_TWO_SCALE_MK := \
 		$(E6SSM_TWO_SCALE_SOFT_MK)
 
 E6SSM_SLHA_INPUT := \
-		$(DIR)/LesHouches.in.E6SSM \
-		$(DIR)/LesHouches.in.E6SSM~
+		$(DIR)/LesHouches.in.E6SSM
 
 E6SSM_GNUPLOT := \
 		$(DIR)/E6SSM_plot_rgflow.gnuplot \

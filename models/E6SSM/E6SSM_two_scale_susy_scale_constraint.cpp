@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 23 Feb 2015 13:02:42
+// File generated at Tue 24 Feb 2015 17:35:56
 
 #include "E6SSM_two_scale_susy_scale_constraint.hpp"
 #include "E6SSM_two_scale_model.hpp"
@@ -97,6 +97,16 @@ double E6SSM_susy_scale_constraint<Two_scale>::get_scale() const
 double E6SSM_susy_scale_constraint<Two_scale>::get_initial_scale_guess() const
 {
    return initial_scale_guess;
+}
+
+const E6SSM_input_parameters& E6SSM_susy_scale_constraint<Two_scale>::get_input_parameters() const
+{
+   return inputPars;
+}
+
+E6SSM<Two_scale>* E6SSM_susy_scale_constraint<Two_scale>::get_model() const
+{
+   return model;
 }
 
 void E6SSM_susy_scale_constraint<Two_scale>::set_model(Two_scale_model* model_)

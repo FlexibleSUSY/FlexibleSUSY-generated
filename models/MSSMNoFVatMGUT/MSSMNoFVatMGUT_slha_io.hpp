@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 23 Feb 2015 14:11:30
+// File generated at Tue 24 Feb 2015 17:49:06
 
 #ifndef MSSMNoFVatMGUT_SLHA_IO_H
 #define MSSMNoFVatMGUT_SLHA_IO_H
@@ -275,7 +275,9 @@ void MSSMNoFVatMGUT_slha_io::fill_physical(MSSMNoFVatMGUT_slha<T>& model) const
       PHYSICAL(ZTau) = ZTau;
    }
 
+   PHYSICAL(MVG) = slha_io.read_entry("MASS", 21);
    PHYSICAL(MGlu) = slha_io.read_entry("MASS", 1000021);
+   PHYSICAL(MVP) = slha_io.read_entry("MASS", 22);
    PHYSICAL(MVZ) = slha_io.read_entry("MASS", 23);
    PHYSICAL(MFd) = slha_io.read_entry("MASS", 1);
    PHYSICAL(MFs) = slha_io.read_entry("MASS", 3);
@@ -320,8 +322,6 @@ void MSSMNoFVatMGUT_slha_io::fill_physical(MSSMNoFVatMGUT_slha<T>& model) const
    PHYSICAL(MChi)(3) = slha_io.read_entry("MASS", 1000035);
    PHYSICAL(MCha)(0) = slha_io.read_entry("MASS", 1000024);
    PHYSICAL(MCha)(1) = slha_io.read_entry("MASS", 1000037);
-   PHYSICAL(MVG) = slha_io.read_entry("MASS", 21);
-   PHYSICAL(MVP) = slha_io.read_entry("MASS", 22);
    PHYSICAL(MVWm) = slha_io.read_entry("MASS", 24);
 
 }

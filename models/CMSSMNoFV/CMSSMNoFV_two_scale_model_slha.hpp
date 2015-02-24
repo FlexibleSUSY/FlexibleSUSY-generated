@@ -21,7 +21,7 @@
  * @brief contains wrapper class for model class in SLHA convention
  */
 
-// File generated at Mon 23 Feb 2015 14:20:21
+// File generated at Tue 24 Feb 2015 17:49:36
 
 #ifndef CMSSMNoFV_TWO_SCALE_SLHA_H
 #define CMSSMNoFV_TWO_SCALE_SLHA_H
@@ -55,7 +55,9 @@ public:
    virtual void calculate_spectrum();
    virtual void print(std::ostream&) const;
 
+   double get_MVG_pole_slha() const { return physical_slha.MVG; }
    double get_MGlu_pole_slha() const { return physical_slha.MGlu; }
+   double get_MVP_pole_slha() const { return physical_slha.MVP; }
    double get_MVZ_pole_slha() const { return physical_slha.MVZ; }
    double get_MFd_pole_slha() const { return physical_slha.MFd; }
    double get_MFs_pole_slha() const { return physical_slha.MFs; }
@@ -100,8 +102,6 @@ public:
    double get_MChi_pole_slha(int i) const { return physical_slha.MChi(i); }
    const Eigen::Array<double,2,1>& get_MCha_pole_slha() const { return physical_slha.MCha; }
    double get_MCha_pole_slha(int i) const { return physical_slha.MCha(i); }
-   double get_MVG_pole_slha() const { return physical_slha.MVG; }
-   double get_MVP_pole_slha() const { return physical_slha.MVP; }
    double get_MVWm_pole_slha() const { return physical_slha.MVWm; }
 
    const Eigen::Matrix<double,2,2>& get_ZD_pole_slha() const { return physical_slha.ZD; }

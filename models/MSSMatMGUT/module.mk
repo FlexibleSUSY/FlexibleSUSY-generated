@@ -18,7 +18,6 @@ MSSMatMGUT_TWO_SCALE_MK := \
 		$(MSSMatMGUT_TWO_SCALE_SOFT_MK)
 
 MSSMatMGUT_SLHA_INPUT := \
-		$(DIR)/LesHouches.in.MSSMatMGUT~ \
 		$(DIR)/LesHouches.in.MSSMatMGUT
 
 MSSMatMGUT_GNUPLOT := \

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 23 Feb 2015 12:32:43
+// File generated at Tue 24 Feb 2015 17:31:35
 
 #ifndef TMSSM_PHYSICAL_H
 #define TMSSM_PHYSICAL_H
@@ -34,8 +34,10 @@ struct TMSSM_physical {
    void clear();
    void print(std::ostream&) const;
 
+   double MVG;
    double MGlu;
    Eigen::Array<double,3,1> MFv;
+   double MVP;
    double MVZ;
    Eigen::Array<double,6,1> MSd;
    Eigen::Array<double,3,1> MSv;
@@ -49,8 +51,6 @@ struct TMSSM_physical {
    Eigen::Array<double,3,1> MFe;
    Eigen::Array<double,3,1> MFd;
    Eigen::Array<double,3,1> MFu;
-   double MVG;
-   double MVP;
    double MVWm;
 
    Eigen::Matrix<double,6,6> ZD;

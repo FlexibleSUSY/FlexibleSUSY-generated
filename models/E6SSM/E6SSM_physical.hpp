@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 23 Feb 2015 13:30:30
+// File generated at Tue 24 Feb 2015 17:41:30
 
 #ifndef E6SSM_PHYSICAL_H
 #define E6SSM_PHYSICAL_H
@@ -34,9 +34,11 @@ struct E6SSM_physical {
    void clear();
    void print(std::ostream&) const;
 
+   double MVG;
    double MGlu;
    Eigen::Array<double,3,1> MFv;
    double MChaP;
+   double MVP;
    double MVZ;
    double MVZp;
    Eigen::Array<double,6,1> MSd;
@@ -62,8 +64,6 @@ struct E6SSM_physical {
    Eigen::Array<double,2,1> MSHp0;
    Eigen::Array<double,2,1> MSHpp;
    Eigen::Array<double,2,1> MChiP;
-   double MVG;
-   double MVP;
    double MVWm;
 
    Eigen::Matrix<double,6,6> ZD;

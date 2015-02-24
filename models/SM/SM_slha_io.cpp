@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 23 Feb 2015 12:25:19
+// File generated at Tue 24 Feb 2015 17:29:22
 
 #include "SM_slha_io.hpp"
 #include "SM_input_parameters.hpp"
@@ -132,10 +132,12 @@ void SM_slha_io::set_mass(const SM_physical& physical,
 
    if (write_sm_masses) {
       mass
+         << FORMAT_MASS(21, LOCALPHYSICAL(MVG), "VG")
          << FORMAT_MASS(12, LOCALPHYSICAL(MFv(0)), "Fv(1)")
          << FORMAT_MASS(14, LOCALPHYSICAL(MFv(1)), "Fv(2)")
          << FORMAT_MASS(16, LOCALPHYSICAL(MFv(2)), "Fv(3)")
          << FORMAT_MASS(25, LOCALPHYSICAL(Mhh), "hh")
+         << FORMAT_MASS(22, LOCALPHYSICAL(MVP), "VP")
          << FORMAT_MASS(23, LOCALPHYSICAL(MVZ), "VZ")
          << FORMAT_MASS(1, LOCALPHYSICAL(MFd(0)), "Fd(1)")
          << FORMAT_MASS(3, LOCALPHYSICAL(MFd(1)), "Fd(2)")
@@ -146,8 +148,6 @@ void SM_slha_io::set_mass(const SM_physical& physical,
          << FORMAT_MASS(11, LOCALPHYSICAL(MFe(0)), "Fe(1)")
          << FORMAT_MASS(13, LOCALPHYSICAL(MFe(1)), "Fe(2)")
          << FORMAT_MASS(15, LOCALPHYSICAL(MFe(2)), "Fe(3)")
-         << FORMAT_MASS(21, LOCALPHYSICAL(MVG), "VG")
-         << FORMAT_MASS(22, LOCALPHYSICAL(MVP), "VP")
       ;
    }
 
