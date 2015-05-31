@@ -21,7 +21,7 @@
  * @brief contains wrapper class for model class in SLHA convention
  */
 
-// File generated at Tue 24 Feb 2015 17:29:31
+// File generated at Sun 31 May 2015 12:22:45
 
 #ifndef SM_TWO_SCALE_SLHA_H
 #define SM_TWO_SCALE_SLHA_H
@@ -47,7 +47,9 @@ public:
    virtual ~SM_slha();
 
    virtual void clear();
-   void convert_to_slha(); ///< converts pole masses to SLHA convention
+   void convert_to_slha(); ///< converts pole masses and couplings to SLHA convention
+   const Eigen::Matrix<std::complex<double>,3,3>& get_ckm_matrix() const { return ckm; }
+   const Eigen::Matrix<std::complex<double>,3,3>& get_pmns_matrix() const { return pmns; }
    const SM_physical& get_physical_slha() const; ///< returns pole masses to SLHA convention
    SM_physical& get_physical_slha(); ///< returns pole masses to SLHA convention
 
@@ -84,9 +86,52 @@ public:
    const Eigen::Matrix<std::complex<double>,3,3>& get_Ue_pole_slha() const { return physical_slha.Ue; }
    const std::complex<double>& get_Ue_pole_slha(int i, int k) const { return physical_slha.Ue(i,k); }
 
+   const Eigen::Array<double,3,1>& get_Yu_slha() const { return Yu_slha; }
+   double get_Yu_slha(int i) const { return Yu_slha(i); }
+   const Eigen::Array<double,3,1>& get_Yd_slha() const { return Yd_slha; }
+   double get_Yd_slha(int i) const { return Yd_slha(i); }
+   const Eigen::Array<double,3,1>& get_Ye_slha() const { return Ye_slha; }
+   double get_Ye_slha(int i) const { return Ye_slha(i); }
+
+
+
+   const Eigen::Matrix<std::complex<double>,3,3>& get_Vd_slha() const { return Vd_slha; }
+   const std::complex<double>& get_Vd_slha(int i, int k) const { return Vd_slha(i,k); }
+   const Eigen::Matrix<std::complex<double>,3,3>& get_Vu_slha() const { return Vu_slha; }
+   const std::complex<double>& get_Vu_slha(int i, int k) const { return Vu_slha(i,k); }
+   const Eigen::Matrix<std::complex<double>,3,3>& get_Ud_slha() const { return Ud_slha; }
+   const std::complex<double>& get_Ud_slha(int i, int k) const { return Ud_slha(i,k); }
+   const Eigen::Matrix<std::complex<double>,3,3>& get_Uu_slha() const { return Uu_slha; }
+   const std::complex<double>& get_Uu_slha(int i, int k) const { return Uu_slha(i,k); }
+   const Eigen::Matrix<std::complex<double>,3,3>& get_Ve_slha() const { return Ve_slha; }
+   const std::complex<double>& get_Ve_slha(int i, int k) const { return Ve_slha(i,k); }
+   const Eigen::Matrix<std::complex<double>,3,3>& get_Ue_slha() const { return Ue_slha; }
+   const std::complex<double>& get_Ue_slha(int i, int k) const { return Ue_slha(i,k); }
+
 
 private:
    SM_physical physical_slha; ///< contains the pole masses and mixings in slha convention
+   Eigen::Matrix<std::complex<double>,3,3> ckm;
+   Eigen::Matrix<std::complex<double>,3,3> pmns;
+   Eigen::Array<double,3,1> Yu_slha;
+   Eigen::Array<double,3,1> Yd_slha;
+   Eigen::Array<double,3,1> Ye_slha;
+
+   Eigen::Matrix<std::complex<double>,3,3> Vd_slha;
+   Eigen::Matrix<std::complex<double>,3,3> Vu_slha;
+   Eigen::Matrix<std::complex<double>,3,3> Ud_slha;
+   Eigen::Matrix<std::complex<double>,3,3> Uu_slha;
+   Eigen::Matrix<std::complex<double>,3,3> Ve_slha;
+   Eigen::Matrix<std::complex<double>,3,3> Ue_slha;
+
+
+
+
+   void calculate_ckm_matrix();
+   void calculate_pmns_matrix();
+   void convert_yukawa_couplings_to_slha();
+   void convert_trilinear_couplings_to_slha();
+   void convert_soft_squared_masses_to_slha();
 };
 
 } // namespace flexiblesusy

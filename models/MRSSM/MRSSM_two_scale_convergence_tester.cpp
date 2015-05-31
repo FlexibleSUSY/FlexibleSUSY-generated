@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:31:32
+// File generated at Sun 31 May 2015 12:24:58
 
 #include "MRSSM_two_scale_convergence_tester.hpp"
 #include <cmath>
@@ -54,48 +54,49 @@ double MRSSM_convergence_tester<Two_scale>::max_rel_diff() const
    const MRSSM<Two_scale>& ol = get_last_iteration_model();
    const MRSSM<Two_scale>& ne = get_model();
 
-   double diff[47] = { 0 };
+   double diff[48] = { 0 };
 
    diff[0] = MaxRelDiff(OLD(MGlu),NEW(MGlu));
-   diff[1] = MaxRelDiff(OLD(MSOc),NEW(MSOc));
+   diff[1] = MaxRelDiff(OLD(MsigmaO),NEW(MsigmaO));
+   diff[2] = MaxRelDiff(OLD(MphiO),NEW(MphiO));
    for (unsigned i = 0; i < 6; i++) {
-      diff[i + 2] = MaxRelDiff(OLD1(MSd,i),NEW1(MSd,i));
+      diff[i + 3] = MaxRelDiff(OLD1(MSd,i),NEW1(MSd,i));
    }
    for (unsigned i = 0; i < 3; i++) {
-      diff[i + 8] = MaxRelDiff(OLD1(MSv,i),NEW1(MSv,i));
+      diff[i + 9] = MaxRelDiff(OLD1(MSv,i),NEW1(MSv,i));
    }
    for (unsigned i = 0; i < 6; i++) {
-      diff[i + 11] = MaxRelDiff(OLD1(MSu,i),NEW1(MSu,i));
+      diff[i + 12] = MaxRelDiff(OLD1(MSu,i),NEW1(MSu,i));
    }
    for (unsigned i = 0; i < 6; i++) {
-      diff[i + 17] = MaxRelDiff(OLD1(MSe,i),NEW1(MSe,i));
+      diff[i + 18] = MaxRelDiff(OLD1(MSe,i),NEW1(MSe,i));
    }
    for (unsigned i = 0; i < 4; i++) {
-      diff[i + 23] = MaxRelDiff(OLD1(Mhh,i),NEW1(Mhh,i));
+      diff[i + 24] = MaxRelDiff(OLD1(Mhh,i),NEW1(Mhh,i));
    }
    for (unsigned i = 1; i < 4; i++) {
-      diff[i + 27] = MaxRelDiff(OLD1(MAh,i),NEW1(MAh,i));
+      diff[i + 28] = MaxRelDiff(OLD1(MAh,i),NEW1(MAh,i));
    }
    for (unsigned i = 0; i < 2; i++) {
-      diff[i + 31] = MaxRelDiff(OLD1(MRh,i),NEW1(MRh,i));
+      diff[i + 32] = MaxRelDiff(OLD1(MRh,i),NEW1(MRh,i));
    }
    for (unsigned i = 1; i < 4; i++) {
-      diff[i + 33] = MaxRelDiff(OLD1(MHpm,i),NEW1(MHpm,i));
+      diff[i + 34] = MaxRelDiff(OLD1(MHpm,i),NEW1(MHpm,i));
    }
    for (unsigned i = 0; i < 2; i++) {
-      diff[i + 37] = MaxRelDiff(OLD1(MRpm,i),NEW1(MRpm,i));
+      diff[i + 38] = MaxRelDiff(OLD1(MRpm,i),NEW1(MRpm,i));
    }
    for (unsigned i = 0; i < 4; i++) {
-      diff[i + 39] = MaxRelDiff(OLD1(MChi,i),NEW1(MChi,i));
+      diff[i + 40] = MaxRelDiff(OLD1(MChi,i),NEW1(MChi,i));
    }
    for (unsigned i = 0; i < 2; i++) {
-      diff[i + 43] = MaxRelDiff(OLD1(MCha1,i),NEW1(MCha1,i));
+      diff[i + 44] = MaxRelDiff(OLD1(MCha1,i),NEW1(MCha1,i));
    }
    for (unsigned i = 0; i < 2; i++) {
-      diff[i + 45] = MaxRelDiff(OLD1(MCha2,i),NEW1(MCha2,i));
+      diff[i + 46] = MaxRelDiff(OLD1(MCha2,i),NEW1(MCha2,i));
    }
 
-   return *std::max_element(diff, diff + 47);
+   return *std::max_element(diff, diff + 48);
 
 }
 

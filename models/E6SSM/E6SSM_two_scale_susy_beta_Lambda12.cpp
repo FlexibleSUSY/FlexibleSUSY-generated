@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:35:06
+// File generated at Sun 31 May 2015 12:30:14
 
 #include "E6SSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -40,9 +40,9 @@ Eigen::Matrix<double,2,2> E6SSM_susy_parameters::calc_beta_Lambda12_one_loop(con
 
    Eigen::Matrix<double,2,2> beta_Lambda12;
 
-   beta_Lambda12 = oneOver16PiSqr*(Lambda12*(3*traceKappaAdjKappa + 2*
+   beta_Lambda12 = (oneOver16PiSqr*(Lambda12*(3*traceKappaAdjKappa + 2*
       traceLambda12AdjLambda12 + 2*AbsSqr(Lambdax) - 0.6*Sqr(g1) - 3*Sqr(g2) -
-      1.9*Sqr(gN)) + 2*(Lambda12*(Lambda12).adjoint()*Lambda12));
+      1.9*Sqr(gN)) + 2*(Lambda12*(Lambda12).adjoint()*Lambda12))).real();
 
 
    return beta_Lambda12;
@@ -69,9 +69,9 @@ Eigen::Matrix<double,2,2> E6SSM_susy_parameters::calc_beta_Lambda12_two_loop(con
 
    Eigen::Matrix<double,2,2> beta_Lambda12;
 
-   beta_Lambda12 = twoLoop*(0.005*Lambda12*(1188*Power(g1,4) + 3300*Power
-      (g2,4) + 3933*Power(gN,4) - 1200*traceKappaAdjKappaKappaAdjKappa - 800*
-      traceLambda12AdjLambda12Lambda12AdjLambda12 + 240*
+   beta_Lambda12 = (twoLoop*(0.005*Lambda12*(1188*Power(g1,4) + 3300*
+      Power(g2,4) + 3933*Power(gN,4) - 1200*traceKappaAdjKappaKappaAdjKappa -
+      800*traceLambda12AdjLambda12Lambda12AdjLambda12 + 240*
       traceLambda12AdjLambda12*Sqr(g1) + 1200*traceLambda12AdjLambda12*Sqr(g2)
       + 360*Sqr(g1)*Sqr(g2) - 80*AbsSqr(Lambdax)*(15*traceYdAdjYd + 5*
       traceYeAdjYe - 3*(-5*traceYuAdjYu + Sqr(g1) + 5*Sqr(g2) - Sqr(gN))) + 40*
@@ -80,7 +80,7 @@ Eigen::Matrix<double,2,2> E6SSM_susy_parameters::calc_beta_Lambda12_two_loop(con
       gN) - 800*Sqr(Conj(Lambdax))*Sqr(Lambdax)) + (-6*traceKappaAdjKappa - 4*
       traceLambda12AdjLambda12 - 4*AbsSqr(Lambdax) + 2.5*Sqr(gN))*(Lambda12*(
       Lambda12).adjoint()*Lambda12) - 2*(Lambda12*(Lambda12).adjoint()*Lambda12
-      *(Lambda12).adjoint()*Lambda12));
+      *(Lambda12).adjoint()*Lambda12))).real();
 
 
    return beta_Lambda12;

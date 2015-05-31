@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:49:08
+// File generated at Sun 31 May 2015 12:52:24
 
 #ifndef MSSMNoFVatMGUT_TWO_SCALE_LOW_SCALE_CONSTRAINT_H
 #define MSSMNoFVatMGUT_TWO_SCALE_LOW_SCALE_CONSTRAINT_H
@@ -38,17 +38,18 @@ template<>
 class MSSMNoFVatMGUT_low_scale_constraint<Two_scale> : public Constraint<Two_scale> {
 public:
    MSSMNoFVatMGUT_low_scale_constraint();
-   MSSMNoFVatMGUT_low_scale_constraint(MSSMNoFVatMGUT<Two_scale>*, const MSSMNoFVatMGUT_input_parameters&, const QedQcd&);
+   MSSMNoFVatMGUT_low_scale_constraint(MSSMNoFVatMGUT<Two_scale>*, const QedQcd&);
    virtual ~MSSMNoFVatMGUT_low_scale_constraint();
    virtual void apply();
    virtual double get_scale() const;
    virtual void set_model(Two_scale_model*);
 
    void clear();
+   const Eigen::Matrix<std::complex<double>,3,3>& get_ckm();
+   const Eigen::Matrix<std::complex<double>,3,3>& get_pmns();
    double get_initial_scale_guess() const;
    void initialize();
    const QedQcd& get_sm_parameters() const;
-   void set_input_parameters(const MSSMNoFVatMGUT_input_parameters&);
    void set_sm_parameters(const QedQcd&);
    void set_threshold_corrections_loop_order(unsigned); ///< threshold corrections loop order
 
@@ -56,8 +57,10 @@ private:
    double scale;
    double initial_scale_guess;
    MSSMNoFVatMGUT<Two_scale>* model;
-   MSSMNoFVatMGUT_input_parameters inputPars;
    QedQcd oneset;
+   Eigen::Matrix<std::complex<double>,3,3> ckm;
+   Eigen::Matrix<std::complex<double>,3,3> pmns;
+   Eigen::Matrix<double,3,3> neutrinoDRbar;
    double MWDRbar;
    double MZDRbar;
    double AlphaS;
@@ -74,6 +77,7 @@ private:
    void calculate_Yu_DRbar();
    void calculate_Yd_DRbar();
    void calculate_Ye_DRbar();
+   void calculate_MNeutrino_DRbar();
    double calculate_delta_alpha_em(double) const;
    double calculate_delta_alpha_s(double) const;
    void recalculate_mw_pole();

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:31:31
+// File generated at Sun 31 May 2015 12:24:56
 
 #include "MRSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -37,7 +37,7 @@ double MRSSM_soft_parameters::calc_beta_moc2_one_loop(const Soft_traces& soft_tr
 
    double beta_moc2;
 
-   beta_moc2 = 0;
+   beta_moc2 = Re(0);
 
 
    return beta_moc2;
@@ -55,7 +55,7 @@ double MRSSM_soft_parameters::calc_beta_moc2_two_loop(const Soft_traces& soft_tr
 
    double beta_moc2;
 
-   beta_moc2 = 24*Power(g3,4)*Tr23*twoLoop;
+   beta_moc2 = Re(24*Power(g3,4)*Tr23*twoLoop);
 
 
    return beta_moc2;

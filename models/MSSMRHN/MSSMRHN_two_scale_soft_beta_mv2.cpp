@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:44:43
+// File generated at Sun 31 May 2015 12:46:12
 
 #include "MSSMRHN_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -37,9 +37,9 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_mv2_one_loop(const 
 
    Eigen::Matrix<double,3,3> beta_mv2;
 
-   beta_mv2 = 2*oneOver16PiSqr*(2*mHu2*(Yv*Yv.adjoint()) + 2*(TYv*(TYv)
+   beta_mv2 = (2*oneOver16PiSqr*(2*mHu2*(Yv*Yv.adjoint()) + 2*(TYv*(TYv)
       .adjoint()) + mv2*Yv*Yv.adjoint() + 2*(Yv*ml2*Yv.adjoint()) + Yv*
-      Yv.adjoint()*mv2);
+      Yv.adjoint()*mv2)).real();
 
 
    return beta_mv2;
@@ -68,8 +68,8 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_mv2_two_loop(const 
 
    Eigen::Matrix<double,3,3> beta_mv2;
 
-   beta_mv2 = twoLoop*(0.8*(-15*traceconjTYuTpTYu - 5*traceconjTYvTpTYv -
-      5*traceml2AdjYvYv - 15*tracemq2AdjYuYu - 15*tracemu2YuAdjYu - 5*
+   beta_mv2 = (twoLoop*(0.8*(-15*traceconjTYuTpTYu - 5*traceconjTYvTpTYv
+      - 5*traceml2AdjYvYv - 15*tracemq2AdjYuYu - 15*tracemu2YuAdjYu - 5*
       tracemv2YvAdjYv - 30*mHu2*traceYuAdjYu - 10*mHu2*traceYvAdjYv + 3*mHu2*
       Sqr(g1) + 6*AbsSqr(MassB)*Sqr(g1) + 15*mHu2*Sqr(g2) + 30*AbsSqr(MassWB)*
       Sqr(g2))*(Yv*Yv.adjoint()) - 0.4*(2*(15*traceAdjYuTYu + 5*traceAdjYvTYv +
@@ -97,7 +97,7 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_mv2_two_loop(const 
       Ye.adjoint()*me2*Ye*Yv.adjoint()) + 10*(Yv*Ye.adjoint()*Ye*ml2*Yv.adjoint
       ()) + 5*(Yv*Ye.adjoint()*Ye*Yv.adjoint()*mv2) + 10*(Yv*Yv.adjoint()*mv2*
       Yv*Yv.adjoint()) + 10*(Yv*Yv.adjoint()*Yv*ml2*Yv.adjoint()) + 5*(Yv*
-      Yv.adjoint()*Yv*Yv.adjoint()*mv2)));
+      Yv.adjoint()*Yv*Yv.adjoint()*mv2)))).real();
 
 
    return beta_mv2;

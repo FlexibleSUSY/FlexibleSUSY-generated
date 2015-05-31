@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:42:46
+// File generated at Sun 31 May 2015 12:43:08
 
 #include "NUTNMSSM_two_scale_susy_scale_constraint.hpp"
 #include "NUTNMSSM_two_scale_model.hpp"
@@ -32,11 +32,12 @@
 
 namespace flexiblesusy {
 
-#define INPUTPARAMETER(p) inputPars.p
+#define INPUTPARAMETER(p) model->get_input().p
 #define MODELPARAMETER(p) model->get_##p()
+#define PHASE(p) model->get_##p()
 #define BETAPARAMETER(p) beta_functions.get_##p()
 #define BETA(p) beta_##p
-#define SM(p) Electroweak_constants::p
+#define LowEnergyConstant(p) Electroweak_constants::p
 #define STANDARDDEVIATION(p) Electroweak_constants::Error_##p
 #define Pole(p) model->get_physical().p
 #define MODEL model
@@ -47,16 +48,13 @@ NUTNMSSM_susy_scale_constraint<Two_scale>::NUTNMSSM_susy_scale_constraint()
    , scale(0.)
    , initial_scale_guess(0.)
    , model(0)
-   , inputPars()
 {
 }
 
 NUTNMSSM_susy_scale_constraint<Two_scale>::NUTNMSSM_susy_scale_constraint(
-   NUTNMSSM<Two_scale>* model_,
-   const NUTNMSSM_input_parameters& inputPars_)
+   NUTNMSSM<Two_scale>* model_)
    : Constraint<Two_scale>()
    , model(model_)
-   , inputPars(inputPars_)
 {
    initialize();
 }
@@ -78,9 +76,9 @@ void NUTNMSSM_susy_scale_constraint<Two_scale>::apply()
    const auto KappaInput = INPUTPARAMETER(KappaInput);
    const auto MuEff = INPUTPARAMETER(MuEff);
 
-   MODEL->set_Lambdax(LambdaInput);
-   MODEL->set_Kappa(KappaInput);
-   MODEL->set_vS((1.4142135623730951*MuEff)/LambdaInput);
+   MODEL->set_Lambdax(Re(LambdaInput));
+   MODEL->set_Kappa(Re(KappaInput));
+   MODEL->set_vS(Re((1.4142135623730951*MuEff)/LambdaInput));
 
 
    // the parameters, which are fixed by the EWSB eqs., will now be
@@ -101,7 +99,10 @@ double NUTNMSSM_susy_scale_constraint<Two_scale>::get_initial_scale_guess() cons
 
 const NUTNMSSM_input_parameters& NUTNMSSM_susy_scale_constraint<Two_scale>::get_input_parameters() const
 {
-   return inputPars;
+   assert(model && "Error: NUTNMSSM_susy_scale_constraint::"
+          "get_input_parameters(): model pointer is zero.");
+
+   return model->get_input();
 }
 
 NUTNMSSM<Two_scale>* NUTNMSSM_susy_scale_constraint<Two_scale>::get_model() const
@@ -112,11 +113,6 @@ NUTNMSSM<Two_scale>* NUTNMSSM_susy_scale_constraint<Two_scale>::get_model() cons
 void NUTNMSSM_susy_scale_constraint<Two_scale>::set_model(Two_scale_model* model_)
 {
    model = cast_model<NUTNMSSM<Two_scale>*>(model_);
-}
-
-void NUTNMSSM_susy_scale_constraint<Two_scale>::set_input_parameters(const NUTNMSSM_input_parameters& inputPars_)
-{
-   inputPars = inputPars_;
 }
 
 void NUTNMSSM_susy_scale_constraint<Two_scale>::clear()

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:29:17
+// File generated at Sun 31 May 2015 12:22:40
 
 #ifndef SM_TWO_SCALE_susy_parameters_H
 #define SM_TWO_SCALE_susy_parameters_H
@@ -49,6 +49,7 @@ public:
    virtual void print(std::ostream&) const;
    virtual void set(const Eigen::ArrayXd&);
    const SM_input_parameters& get_input() const;
+   SM_input_parameters& get_input();
    void set_input_parameters(const SM_input_parameters&);
 
    SM_susy_parameters calc_beta() const;
@@ -128,6 +129,8 @@ private:
 };
 
 std::ostream& operator<<(std::ostream&, const SM_susy_parameters&);
+
+#undef TRACE_STRUCT_TYPE
 
 } // namespace flexiblesusy
 

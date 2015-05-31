@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:29:22
+// File generated at Sun 31 May 2015 12:22:45
 
 #include "SM_two_scale_low_scale_constraint.hpp"
 #include "SM_two_scale_model.hpp"
@@ -34,15 +34,18 @@
 
 namespace flexiblesusy {
 
-#define INPUTPARAMETER(p) inputPars.p
+#define INPUTPARAMETER(p) model->get_input().p
 #define MODELPARAMETER(p) model->get_##p()
+#define PHASE(p) model->get_##p()
 #define BETAPARAMETER(p) beta_functions.get_##p()
 #define BETA(p) beta_##p
-#define SM(p) Electroweak_constants::p
+#define LowEnergyConstant(p) Electroweak_constants::p
 #define STANDARDDEVIATION(p) Electroweak_constants::Error_##p
 #define Pole(p) model->get_physical().p
 #define MODEL model
 #define MODELCLASSNAME SM<Two_scale>
+#define CKM ckm
+#define PMNS pmns
 #define THETAW theta_w
 #define ALPHA_EM_DRBAR alpha_em_drbar
 #define CALCULATE_DRBAR_MASSES() model->calculate_DRbar_masses()
@@ -52,8 +55,9 @@ SM_low_scale_constraint<Two_scale>::SM_low_scale_constraint()
    , scale(0.)
    , initial_scale_guess(0.)
    , model(0)
-   , inputPars()
    , oneset()
+   , ckm()
+   , pmns()
    , MWDRbar(0.)
    , MZDRbar(0.)
    , AlphaS(0.)
@@ -65,14 +69,19 @@ SM_low_scale_constraint<Two_scale>::SM_low_scale_constraint()
    , self_energy_w_at_mw(0.)
    , threshold_corrections_loop_order(1)
 {
+   ckm << 1., 0., 0.,
+          0., 1., 0.,
+          0., 0., 1.;
+
+   pmns << 1., 0., 0.,
+           0., 1., 0.,
+           0., 0., 1.;
 }
 
 SM_low_scale_constraint<Two_scale>::SM_low_scale_constraint(
-   SM<Two_scale>* model_,
-   const SM_input_parameters& inputPars_, const QedQcd& oneset_)
+   SM<Two_scale>* model_, const QedQcd& oneset_)
    : Constraint<Two_scale>()
    , model(model_)
-   , inputPars(inputPars_)
    , oneset(oneset_)
    , new_g1(0.)
    , new_g2(0.)
@@ -98,7 +107,7 @@ void SM_low_scale_constraint<Two_scale>::apply()
    const auto g1 = MODELPARAMETER(g1);
    const auto g2 = MODELPARAMETER(g2);
 
-   MODEL->set_v((2*MZDRbar)/Sqrt(0.6*Sqr(g1) + Sqr(g2)));
+   MODEL->set_v(Re((2*MZDRbar)/Sqrt(0.6*Sqr(g1) + Sqr(g2))));
    calculate_Yu_DRbar();
    calculate_Yd_DRbar();
    calculate_Ye_DRbar();
@@ -109,6 +118,16 @@ void SM_low_scale_constraint<Two_scale>::apply()
    model->set_g3(new_g3);
 
    recalculate_mw_pole();
+}
+
+const Eigen::Matrix<std::complex<double>,3,3>& SM_low_scale_constraint<Two_scale>::get_ckm()
+{
+   return ckm;
+}
+
+const Eigen::Matrix<std::complex<double>,3,3>& SM_low_scale_constraint<Two_scale>::get_pmns()
+{
+   return pmns;
 }
 
 double SM_low_scale_constraint<Two_scale>::get_scale() const
@@ -124,11 +143,6 @@ double SM_low_scale_constraint<Two_scale>::get_initial_scale_guess() const
 void SM_low_scale_constraint<Two_scale>::set_model(Two_scale_model* model_)
 {
    model = cast_model<SM<Two_scale>*>(model_);
-}
-
-void SM_low_scale_constraint<Two_scale>::set_input_parameters(const SM_input_parameters& inputPars_)
-{
-   inputPars = inputPars_;
 }
 
 void SM_low_scale_constraint<Two_scale>::set_sm_parameters(const QedQcd& oneset_)
@@ -163,7 +177,7 @@ void SM_low_scale_constraint<Two_scale>::initialize()
    assert(model && "SM_low_scale_constraint<Two_scale>::"
           "initialize(): model pointer is zero.");
 
-   initial_scale_guess = SM(MZ);
+   initial_scale_guess = LowEnergyConstant(MZ);
 
    scale = initial_scale_guess;
 
@@ -175,6 +189,8 @@ void SM_low_scale_constraint<Two_scale>::initialize()
    new_g1 = 0.;
    new_g2 = 0.;
    new_g3 = 0.;
+   ckm = oneset.get_complex_ckm();
+   pmns = oneset.get_complex_pmns();
    self_energy_w_at_mw = 0.;
 }
 
@@ -183,7 +199,7 @@ void SM_low_scale_constraint<Two_scale>::update_scale()
    assert(model && "SM_low_scale_constraint<Two_scale>::"
           "update_scale(): model pointer is zero.");
 
-   scale = SM(MZ);
+   scale = LowEnergyConstant(MZ);
 
 
 }
@@ -194,6 +210,8 @@ void SM_low_scale_constraint<Two_scale>::calculate_threshold_corrections()
           " set is not defined at the same scale as the low-energy"
           " constraint.  You need to run the low-energy data set to this"
           " scale!");
+   assert(model && "SM_low_scale_constraint<Two_scale>::"
+          "calculate_threshold_corrections(): model pointer is zero");
 
    const double alpha_em = oneset.displayAlpha(ALPHA);
    const double alpha_s  = oneset.displayAlpha(ALPHAS);
@@ -228,6 +246,9 @@ void SM_low_scale_constraint<Two_scale>::calculate_threshold_corrections()
 
 double SM_low_scale_constraint<Two_scale>::calculate_theta_w(double alpha_em_drbar)
 {
+   assert(model && "SM_low_scale_constraint<Two_scale>::"
+          "calculate_theta_w(): model pointer is zero");
+
    double theta_w = 0.;
 
    using namespace weinberg_angle;
@@ -242,7 +263,7 @@ double SM_low_scale_constraint<Two_scale>::calculate_theta_w(double alpha_em_drb
    const double gY            = MODEL->get_g1() * 0.7745966692414834;
    const double g2            = MODEL->get_g2();
    const double g3            = MODEL->get_g3();
-   const double ymu           = MODEL->get_Ye(1,1);
+   const double ymu           = Re(MODEL->get_Ye(1,1));
    const double pizztMZ       = Re(MODEL->self_energy_VZ(mz_pole));
    const double piwwt0        = Re(MODEL->self_energy_VWp(0.));
    self_energy_w_at_mw        = Re(MODEL->self_energy_VWp(mw_pole));
@@ -255,16 +276,21 @@ double SM_low_scale_constraint<Two_scale>::calculate_theta_w(double alpha_em_drb
    se_data.gY       = gY;
    se_data.g2       = g2;
 
-   const double pizztMZ_corrected =
-      Weinberg_angle::replace_mtop_in_self_energy_z(pizztMZ, mz_pole,
-         se_data);
+   double pizztMZ_corrected = pizztMZ;
+   double piwwtMW_corrected = self_energy_w_at_mw;
+   double piwwt0_corrected  = piwwt0;
 
-   const double piwwtMW_corrected =
-      Weinberg_angle::replace_mtop_in_self_energy_w(self_energy_w_at_mw,
-         mw_pole, se_data);
-
-   const double piwwt0_corrected =
-      Weinberg_angle::replace_mtop_in_self_energy_w(piwwt0, 0., se_data);
+   if (model->get_thresholds() > 1) {
+      pizztMZ_corrected =
+         Weinberg_angle::replace_mtop_in_self_energy_z(pizztMZ, mz_pole,
+            se_data);
+      piwwtMW_corrected =
+         Weinberg_angle::replace_mtop_in_self_energy_w(
+            self_energy_w_at_mw, mw_pole, se_data);
+      piwwt0_corrected =
+         Weinberg_angle::replace_mtop_in_self_energy_w(piwwt0, 0.,
+            se_data);
+   }
 
    Weinberg_angle::Data data;
    data.scale               = scale;
@@ -302,6 +328,9 @@ double SM_low_scale_constraint<Two_scale>::calculate_theta_w(double alpha_em_drb
 
 void SM_low_scale_constraint<Two_scale>::calculate_DRbar_gauge_couplings()
 {
+   assert(model && "SM_low_scale_constraint<Two_scale>::"
+          "calculate_DRbar_gauge_couplings(): model pointer is zero");
+
    calculate_threshold_corrections();
 
    new_g1 = 1.2909944487358056*EDRbar*Sec(ThetaWDRbar);
@@ -312,12 +341,14 @@ void SM_low_scale_constraint<Two_scale>::calculate_DRbar_gauge_couplings()
 
 double SM_low_scale_constraint<Two_scale>::calculate_delta_alpha_em(double alphaEm) const
 {
+   assert(model && "SM_low_scale_constraint<Two_scale>::"
+          "calculate_delta_alpha_em(): model pointer is zero");
+
    const double currentScale = model->get_scale();
    const auto MFu = MODELPARAMETER(MFu);
 
-   const double delta_alpha_em_SM = 0.15915494309189535*alphaEm*(
-      0.3333333333333333 - 1.7777777777777777*FiniteLog(Abs(MFu(2)/currentScale)))
-      ;
+   const double delta_alpha_em_SM = -0.28294212105225836*alphaEm*FiniteLog(Abs(
+      MFu(2)/currentScale));
 
    const double delta_alpha_em = 0;
 
@@ -327,6 +358,9 @@ double SM_low_scale_constraint<Two_scale>::calculate_delta_alpha_em(double alpha
 
 double SM_low_scale_constraint<Two_scale>::calculate_delta_alpha_s(double alphaS) const
 {
+   assert(model && "SM_low_scale_constraint<Two_scale>::"
+          "calculate_delta_alpha_s(): model pointer is zero");
+
    const double currentScale = model->get_scale();
    const auto MFu = MODELPARAMETER(MFu);
 
@@ -348,7 +382,10 @@ void SM_low_scale_constraint<Two_scale>::calculate_DRbar_yukawa_couplings()
 
 void SM_low_scale_constraint<Two_scale>::calculate_Yu_DRbar()
 {
-   Eigen::Matrix<double,3,3> topDRbar(Eigen::Matrix<double,3,3>::Zero());
+   assert(model && "SM_low_scale_constraint<Two_scale>::"
+          "calculate_Yu_DRbar(): model pointer is zero");
+
+   Eigen::Matrix<std::complex<double>,3,3> topDRbar(ZEROMATRIXCOMPLEX(3,3));
    topDRbar(0,0)      = oneset.displayMass(mUp);
    topDRbar(1,1)      = oneset.displayMass(mCharm);
    topDRbar(2,2)      = oneset.displayMass(mTop);
@@ -357,13 +394,16 @@ void SM_low_scale_constraint<Two_scale>::calculate_Yu_DRbar()
       topDRbar(2,2) = model->calculate_MFu_DRbar(oneset.displayPoleMt(), 2);
 
    const auto v = MODELPARAMETER(v);
-   MODEL->set_Yu(-((1.4142135623730951*topDRbar)/v).transpose());
+   MODEL->set_Yu((-((1.4142135623730951*topDRbar)/v).transpose()).real());
 
 }
 
 void SM_low_scale_constraint<Two_scale>::calculate_Yd_DRbar()
 {
-   Eigen::Matrix<double,3,3> bottomDRbar(Eigen::Matrix<double,3,3>::Zero());
+   assert(model && "SM_low_scale_constraint<Two_scale>::"
+          "calculate_Yd_DRbar(): model pointer is zero");
+
+   Eigen::Matrix<std::complex<double>,3,3> bottomDRbar(ZEROMATRIXCOMPLEX(3,3));
    bottomDRbar(0,0)   = oneset.displayMass(mDown);
    bottomDRbar(1,1)   = oneset.displayMass(mStrange);
    bottomDRbar(2,2)   = oneset.displayMass(mBottom);
@@ -372,23 +412,40 @@ void SM_low_scale_constraint<Two_scale>::calculate_Yd_DRbar()
       bottomDRbar(2,2) = model->calculate_MFd_DRbar(oneset.displayMass(mBottom), 2);
 
    const auto v = MODELPARAMETER(v);
-   MODEL->set_Yd(((1.4142135623730951*bottomDRbar)/v).transpose());
+   MODEL->set_Yd((((1.4142135623730951*bottomDRbar)/v).transpose()).real());
 
 }
 
 void SM_low_scale_constraint<Two_scale>::calculate_Ye_DRbar()
 {
-   Eigen::Matrix<double,3,3> electronDRbar(Eigen::Matrix<double,3,3>::Zero());
+   assert(model && "SM_low_scale_constraint<Two_scale>::"
+          "calculate_Ye_DRbar(): model pointer is zero");
+
+   Eigen::Matrix<std::complex<double>,3,3> electronDRbar(ZEROMATRIXCOMPLEX(3,3));
    electronDRbar(0,0) = oneset.displayMass(mElectron);
    electronDRbar(1,1) = oneset.displayMass(mMuon);
    electronDRbar(2,2) = oneset.displayMass(mTau);
 
-   if (model->get_thresholds())
+   if (model->get_thresholds()) {
+      electronDRbar(0,0) = model->calculate_MFe_DRbar(oneset.displayMass(mElectron), 0);
+      electronDRbar(1,1) = model->calculate_MFe_DRbar(oneset.displayMass(mMuon), 1);
       electronDRbar(2,2) = model->calculate_MFe_DRbar(oneset.displayMass(mTau), 2);
+   }
 
    const auto v = MODELPARAMETER(v);
-   MODEL->set_Ye(((1.4142135623730951*electronDRbar)/v).transpose());
+   MODEL->set_Ye((((1.4142135623730951*electronDRbar)/v).transpose()).real());
 
+}
+
+void SM_low_scale_constraint<Two_scale>::calculate_MNeutrino_DRbar()
+{
+   assert(model && "SM_low_scale_constraint<Two_scale>::"
+          "calculate_MNeutrino_DRbar(): model pointer is zero");
+
+   neutrinoDRbar.setZero();
+   neutrinoDRbar(0,0) = oneset.displayNeutrinoPoleMass(1);
+   neutrinoDRbar(1,1) = oneset.displayNeutrinoPoleMass(2);
+   neutrinoDRbar(2,2) = oneset.displayNeutrinoPoleMass(3);
 }
 
 /**
@@ -396,6 +453,9 @@ void SM_low_scale_constraint<Two_scale>::calculate_Ye_DRbar()
  */
 void SM_low_scale_constraint<Two_scale>::recalculate_mw_pole()
 {
+   assert(model && "SM_low_scale_constraint<Two_scale>::"
+          "recalculate_mw_pole(): model pointer is zero");
+
    if (!model->get_thresholds())
       return;
 

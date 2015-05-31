@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:31:34
+// File generated at Sun 31 May 2015 12:25:00
 
 #ifndef MRSSM_SLHA_IO_H
 #define MRSSM_SLHA_IO_H
@@ -25,6 +25,7 @@
 #include "MRSSM_info.hpp"
 #include "MRSSM_physical.hpp"
 #include "slha_io.hpp"
+#include "ckm.hpp"
 #include "ew_input.hpp"
 
 #include <Eigen/Core>
@@ -33,13 +34,10 @@
 
 #define Pole(p) physical.p
 #define PHYSICAL(p) model.get_physical().p
+#define PHYSICAL_SLHA(p) model.get_physical_slha().p
 #define LOCALPHYSICAL(p) physical.p
 #define MODELPARAMETER(p) model.get_##p()
-#define DEFINE_PARAMETER(p)                                            \
-   typename std::remove_const<typename std::remove_reference<decltype(MODELPARAMETER(p))>::type>::type p;
-#define DEFINE_POLE_MASS(p)                                            \
-   typename std::remove_const<typename std::remove_reference<decltype(PHYSICAL(p))>::type>::type p;
-#define SM(p) Electroweak_constants::p
+#define LowEnergyConstant(p) Electroweak_constants::p
 #define SCALES(p) scales.p
 
 namespace flexiblesusy {
@@ -61,6 +59,7 @@ public:
 
    void fill(QedQcd& qedqcd) const { slha_io.fill(qedqcd); }
    void fill(MRSSM_input_parameters&) const;
+   void fill(MRSSM_mass_eigenstates&) const;
    template <class T> void fill(MRSSM_slha<T>&) const;
    void fill(Spectrum_generator_settings&) const;
    double get_parameter_output_scale() const;
@@ -80,8 +79,6 @@ public:
    static void fill_extpar_tuple(MRSSM_input_parameters&, int, double);
    static void fill_flexiblesusy_tuple(Spectrum_generator_settings&, int, double);
 
-   static void convert_to_slha_convention(MRSSM_physical&);
-
    template <class T>
    static void fill_slhaea(SLHAea::Coll&, const MRSSM_slha<T>&, const QedQcd&, const MRSSM_scales&);
 
@@ -99,9 +96,11 @@ private:
    void set_mass(const MRSSM_physical&, bool);
    void set_mixing_matrices(const MRSSM_physical&, bool);
    template <class T> void set_model_parameters(const MRSSM_slha<T>&);
+   void set_ckm(const Eigen::Matrix<std::complex<double>,3,3>&, double);
+   void set_pmns(const Eigen::Matrix<std::complex<double>,3,3>&, double);
    double read_scale() const;
-   template <class T> void fill_drbar_parameters(MRSSM_slha<T>&) const;
-   template <class T> void fill_physical(MRSSM_slha<T>&) const;
+   void fill_drbar_parameters(MRSSM_mass_eigenstates&) const;
+   void fill_physical(MRSSM_physical&) const;
 };
 
 /**
@@ -111,262 +110,8 @@ private:
 template <class T>
 void MRSSM_slha_io::fill(MRSSM_slha<T>& model) const
 {
-   fill_drbar_parameters(model);
-   fill_physical(model);
-}
-
-/**
- * Reads DR-bar parameters from a SLHA output file.
- */
-template <class T>
-void MRSSM_slha_io::fill_drbar_parameters(MRSSM_slha<T>& model) const
-{
-   model.set_g1(slha_io.read_entry("gauge", 1) * 1.2909944487358056);
-   model.set_g2(slha_io.read_entry("gauge", 2));
-   model.set_g3(slha_io.read_entry("gauge", 3));
-   {
-      DEFINE_PARAMETER(Yu);
-      slha_io.read_block("Yu", Yu);
-      model.set_Yu(Yu);
-   }
-   {
-      DEFINE_PARAMETER(Yd);
-      slha_io.read_block("Yd", Yd);
-      model.set_Yd(Yd);
-   }
-   {
-      DEFINE_PARAMETER(Ye);
-      slha_io.read_block("Ye", Ye);
-      model.set_Ye(Ye);
-   }
-   model.set_Mu(slha_io.read_entry("HMIX", 1));
-   model.set_BMu(slha_io.read_entry("HMIX", 101));
-   {
-      DEFINE_PARAMETER(mq2);
-      slha_io.read_block("MSQ2", mq2);
-      model.set_mq2(mq2);
-   }
-   {
-      DEFINE_PARAMETER(me2);
-      slha_io.read_block("MSE2", me2);
-      model.set_me2(me2);
-   }
-   {
-      DEFINE_PARAMETER(ml2);
-      slha_io.read_block("MSL2", ml2);
-      model.set_ml2(ml2);
-   }
-   {
-      DEFINE_PARAMETER(mu2);
-      slha_io.read_block("MSU2", mu2);
-      model.set_mu2(mu2);
-   }
-   {
-      DEFINE_PARAMETER(md2);
-      slha_io.read_block("MSD2", md2);
-      model.set_md2(md2);
-   }
-   model.set_mHd2(slha_io.read_entry("MSOFT", 21));
-   model.set_mHu2(slha_io.read_entry("MSOFT", 22));
-   model.set_vd(slha_io.read_entry("HMIX", 102));
-   model.set_vu(slha_io.read_entry("HMIX", 103));
-   model.set_mS2(slha_io.read_entry("NMSSMRUN", 10));
-   model.set_mT2(slha_io.read_entry("MSOFT", 110));
-   model.set_moc2(slha_io.read_entry("MSOFT", 111));
-   model.set_vS(slha_io.read_entry("NMSSMRUN", 5));
-   model.set_vT(slha_io.read_entry("HMIX", 310));
-   model.set_MDBS(slha_io.read_entry("MSOFT", 300));
-   model.set_MDWBT(slha_io.read_entry("MSOFT", 301));
-   model.set_MDGoc(slha_io.read_entry("MSOFT", 302));
-   model.set_MuD(slha_io.read_entry("HMIX", 201));
-   model.set_MuU(slha_io.read_entry("HMIX", 202));
-   model.set_BMuD(slha_io.read_entry("HMIX", 203));
-   model.set_BMuU(slha_io.read_entry("HMIX", 204));
-   model.set_LamSD(slha_io.read_entry("HMIX", 301));
-   model.set_LamSU(slha_io.read_entry("HMIX", 302));
-   model.set_LamTD(slha_io.read_entry("HMIX", 303));
-   model.set_LamTU(slha_io.read_entry("HMIX", 304));
-   model.set_mRd2(slha_io.read_entry("MSOFT", 50));
-   model.set_mRu2(slha_io.read_entry("MSOFT", 51));
-
-
-   model.set_scale(read_scale());
-}
-
-/**
- * Reads pole masses and mixing matrices from a SLHA output file.
- */
-template <class T>
-void MRSSM_slha_io::fill_physical(MRSSM_slha<T>& model) const
-{
-   {
-      DEFINE_PARAMETER(ZD);
-      slha_io.read_block("DSQMIX", ZD);
-      PHYSICAL(ZD) = ZD;
-   }
-   {
-      DEFINE_PARAMETER(ZU);
-      slha_io.read_block("USQMIX", ZU);
-      PHYSICAL(ZU) = ZU;
-   }
-   {
-      DEFINE_PARAMETER(ZE);
-      slha_io.read_block("SELMIX", ZE);
-      PHYSICAL(ZE) = ZE;
-   }
-   {
-      DEFINE_PARAMETER(ZV);
-      slha_io.read_block("SNUMIX", ZV);
-      PHYSICAL(ZV) = ZV;
-   }
-   {
-      DEFINE_PARAMETER(ZH);
-      slha_io.read_block("SCALARMIX", ZH);
-      PHYSICAL(ZH) = ZH;
-   }
-   {
-      DEFINE_PARAMETER(ZA);
-      slha_io.read_block("PSEUDOSCALARMIX", ZA);
-      PHYSICAL(ZA) = ZA;
-   }
-   {
-      DEFINE_PARAMETER(ZP);
-      slha_io.read_block("CHARGEMIX", ZP);
-      PHYSICAL(ZP) = ZP;
-   }
-   {
-      DEFINE_PARAMETER(ZEL);
-      slha_io.read_block("UELMIX", ZEL);
-      PHYSICAL(ZEL) = ZEL;
-   }
-   {
-      DEFINE_PARAMETER(ZER);
-      slha_io.read_block("UERMIX", ZER);
-      PHYSICAL(ZER) = ZER;
-   }
-   {
-      DEFINE_PARAMETER(ZDL);
-      slha_io.read_block("UDLMIX", ZDL);
-      PHYSICAL(ZDL) = ZDL;
-   }
-   {
-      DEFINE_PARAMETER(ZDR);
-      slha_io.read_block("UDRMIX", ZDR);
-      PHYSICAL(ZDR) = ZDR;
-   }
-   {
-      DEFINE_PARAMETER(ZUL);
-      slha_io.read_block("UULMIX", ZUL);
-      PHYSICAL(ZUL) = ZUL;
-   }
-   {
-      DEFINE_PARAMETER(ZUR);
-      slha_io.read_block("UURMIX", ZUR);
-      PHYSICAL(ZUR) = ZUR;
-   }
-   {
-      DEFINE_PARAMETER(ZHR);
-      slha_io.read_block("RHMIX", ZHR);
-      PHYSICAL(ZHR) = ZHR;
-   }
-   {
-      DEFINE_PARAMETER(ZRP);
-      slha_io.read_block("RPMIX", ZRP);
-      PHYSICAL(ZRP) = ZRP;
-   }
-   {
-      DEFINE_PARAMETER(ZN1);
-      slha_io.read_block("N1MIX", ZN1);
-      PHYSICAL(ZN1) = ZN1;
-   }
-   {
-      DEFINE_PARAMETER(ZN2);
-      slha_io.read_block("N2MIX", ZN2);
-      PHYSICAL(ZN2) = ZN2;
-   }
-   {
-      DEFINE_PARAMETER(UP1);
-      slha_io.read_block("V1MIX", UP1);
-      PHYSICAL(UP1) = UP1;
-   }
-   {
-      DEFINE_PARAMETER(UM1);
-      slha_io.read_block("U1MIX", UM1);
-      PHYSICAL(UM1) = UM1;
-   }
-   {
-      DEFINE_PARAMETER(UP2);
-      slha_io.read_block("V2MIX", UP2);
-      PHYSICAL(UP2) = UP2;
-   }
-   {
-      DEFINE_PARAMETER(UM2);
-      slha_io.read_block("U2MIX", UM2);
-      PHYSICAL(UM2) = UM2;
-   }
-
-   PHYSICAL(MVG) = slha_io.read_entry("MASS", 21);
-   PHYSICAL(MGlu) = slha_io.read_entry("MASS", 1000021);
-   PHYSICAL(MFv)(0) = slha_io.read_entry("MASS", 12);
-   PHYSICAL(MFv)(1) = slha_io.read_entry("MASS", 14);
-   PHYSICAL(MFv)(2) = slha_io.read_entry("MASS", 16);
-   PHYSICAL(MSOc) = slha_io.read_entry("MASS", 3000021);
-   PHYSICAL(MVP) = slha_io.read_entry("MASS", 22);
-   PHYSICAL(MVZ) = slha_io.read_entry("MASS", 23);
-   PHYSICAL(MSd)(0) = slha_io.read_entry("MASS", 1000001);
-   PHYSICAL(MSd)(1) = slha_io.read_entry("MASS", 1000003);
-   PHYSICAL(MSd)(2) = slha_io.read_entry("MASS", 1000005);
-   PHYSICAL(MSd)(3) = slha_io.read_entry("MASS", 2000001);
-   PHYSICAL(MSd)(4) = slha_io.read_entry("MASS", 2000003);
-   PHYSICAL(MSd)(5) = slha_io.read_entry("MASS", 2000005);
-   PHYSICAL(MSv)(0) = slha_io.read_entry("MASS", 1000012);
-   PHYSICAL(MSv)(1) = slha_io.read_entry("MASS", 1000014);
-   PHYSICAL(MSv)(2) = slha_io.read_entry("MASS", 1000016);
-   PHYSICAL(MSu)(0) = slha_io.read_entry("MASS", 1000002);
-   PHYSICAL(MSu)(1) = slha_io.read_entry("MASS", 1000004);
-   PHYSICAL(MSu)(2) = slha_io.read_entry("MASS", 1000006);
-   PHYSICAL(MSu)(3) = slha_io.read_entry("MASS", 2000002);
-   PHYSICAL(MSu)(4) = slha_io.read_entry("MASS", 2000004);
-   PHYSICAL(MSu)(5) = slha_io.read_entry("MASS", 2000006);
-   PHYSICAL(MSe)(0) = slha_io.read_entry("MASS", 1000011);
-   PHYSICAL(MSe)(1) = slha_io.read_entry("MASS", 1000013);
-   PHYSICAL(MSe)(2) = slha_io.read_entry("MASS", 1000015);
-   PHYSICAL(MSe)(3) = slha_io.read_entry("MASS", 2000011);
-   PHYSICAL(MSe)(4) = slha_io.read_entry("MASS", 2000013);
-   PHYSICAL(MSe)(5) = slha_io.read_entry("MASS", 2000015);
-   PHYSICAL(Mhh)(0) = slha_io.read_entry("MASS", 25);
-   PHYSICAL(Mhh)(1) = slha_io.read_entry("MASS", 35);
-   PHYSICAL(Mhh)(2) = slha_io.read_entry("MASS", 45);
-   PHYSICAL(Mhh)(3) = slha_io.read_entry("MASS", 55);
-   PHYSICAL(MAh)(1) = slha_io.read_entry("MASS", 36);
-   PHYSICAL(MAh)(2) = slha_io.read_entry("MASS", 46);
-   PHYSICAL(MAh)(3) = slha_io.read_entry("MASS", 56);
-   PHYSICAL(MRh)(0) = slha_io.read_entry("MASS", 401);
-   PHYSICAL(MRh)(1) = slha_io.read_entry("MASS", 402);
-   PHYSICAL(MHpm)(1) = slha_io.read_entry("MASS", 37);
-   PHYSICAL(MHpm)(2) = slha_io.read_entry("MASS", 47);
-   PHYSICAL(MHpm)(3) = slha_io.read_entry("MASS", 57);
-   PHYSICAL(MRpm)(0) = slha_io.read_entry("MASS", 410);
-   PHYSICAL(MRpm)(1) = slha_io.read_entry("MASS", 411);
-   PHYSICAL(MChi)(0) = slha_io.read_entry("MASS", 1000022);
-   PHYSICAL(MChi)(1) = slha_io.read_entry("MASS", 1000023);
-   PHYSICAL(MChi)(2) = slha_io.read_entry("MASS", 1000025);
-   PHYSICAL(MChi)(3) = slha_io.read_entry("MASS", 1000035);
-   PHYSICAL(MCha1)(0) = slha_io.read_entry("MASS", 1000024);
-   PHYSICAL(MCha1)(1) = slha_io.read_entry("MASS", 1000037);
-   PHYSICAL(MCha2)(0) = slha_io.read_entry("MASS", 2000024);
-   PHYSICAL(MCha2)(1) = slha_io.read_entry("MASS", 2000037);
-   PHYSICAL(MFe)(0) = slha_io.read_entry("MASS", 11);
-   PHYSICAL(MFe)(1) = slha_io.read_entry("MASS", 13);
-   PHYSICAL(MFe)(2) = slha_io.read_entry("MASS", 15);
-   PHYSICAL(MFd)(0) = slha_io.read_entry("MASS", 1);
-   PHYSICAL(MFd)(1) = slha_io.read_entry("MASS", 3);
-   PHYSICAL(MFd)(2) = slha_io.read_entry("MASS", 5);
-   PHYSICAL(MFu)(0) = slha_io.read_entry("MASS", 2);
-   PHYSICAL(MFu)(1) = slha_io.read_entry("MASS", 4);
-   PHYSICAL(MFu)(2) = slha_io.read_entry("MASS", 6);
-   PHYSICAL(MVWm) = slha_io.read_entry("MASS", 24);
-
+   fill(static_cast<MRSSM_mass_eigenstates&>(model));
+   fill_physical(model.get_physical_slha());
 }
 
 template <class T>
@@ -429,9 +174,9 @@ void MRSSM_slha_io::set_model_parameters(const MRSSM_slha<T>& model)
       ;
       slha_io.set_block(block);
    }
-   slha_io.set_block("Yu", MODELPARAMETER(Yu), "Yu", model.get_scale());
-   slha_io.set_block("Yd", MODELPARAMETER(Yd), "Yd", model.get_scale());
-   slha_io.set_block("Ye", MODELPARAMETER(Ye), "Ye", model.get_scale());
+   slha_io.set_block("Yu", ToMatrix(MODELPARAMETER(Yu_slha)), "Yu", model.get_scale());
+   slha_io.set_block("Yd", ToMatrix(MODELPARAMETER(Yd_slha)), "Yd", model.get_scale());
+   slha_io.set_block("Ye", ToMatrix(MODELPARAMETER(Ye_slha)), "Ye", model.get_scale());
    {
       std::ostringstream block;
       block << "Block HMIX Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
@@ -451,11 +196,11 @@ void MRSSM_slha_io::set_model_parameters(const MRSSM_slha<T>& model)
       ;
       slha_io.set_block(block);
    }
-   slha_io.set_block("MSQ2", MODELPARAMETER(mq2), "mq2", model.get_scale());
-   slha_io.set_block("MSE2", MODELPARAMETER(me2), "me2", model.get_scale());
-   slha_io.set_block("MSL2", MODELPARAMETER(ml2), "ml2", model.get_scale());
-   slha_io.set_block("MSU2", MODELPARAMETER(mu2), "mu2", model.get_scale());
-   slha_io.set_block("MSD2", MODELPARAMETER(md2), "md2", model.get_scale());
+   slha_io.set_block("MSQ2", MODELPARAMETER(mq2_slha), "mq2", model.get_scale());
+   slha_io.set_block("MSE2", MODELPARAMETER(me2_slha), "me2", model.get_scale());
+   slha_io.set_block("MSL2", MODELPARAMETER(ml2_slha), "ml2", model.get_scale());
+   slha_io.set_block("MSU2", MODELPARAMETER(mu2_slha), "mu2", model.get_scale());
+   slha_io.set_block("MSD2", MODELPARAMETER(md2_slha), "md2", model.get_scale());
    {
       std::ostringstream block;
       block << "Block MSOFT Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
@@ -524,8 +269,22 @@ void MRSSM_slha_io::set_spectrum(const MRSSM_slha<T>& model)
    set_model_parameters(model);
    set_mass(physical, write_sm_masses);
    set_mixing_matrices(physical, write_sm_masses);
+
+   if (slha_io.get_modsel().quark_flavour_violated)
+      set_ckm(model.get_ckm_matrix(), model.get_scale());
+
+   if (slha_io.get_modsel().lepton_flavour_violated)
+      set_pmns(model.get_pmns_matrix(), model.get_scale());
 }
 
 } // namespace flexiblesusy
+
+#undef Pole
+#undef PHYSICAL
+#undef PHYSICAL_SLHA
+#undef LOCALPHYSICAL
+#undef MODELPARAMETER
+#undef LowEnergyConstant
+#undef SCALES
 
 #endif

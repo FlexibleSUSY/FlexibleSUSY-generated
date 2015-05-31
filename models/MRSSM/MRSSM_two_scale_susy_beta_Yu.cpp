@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:31:20
+// File generated at Sun 31 May 2015 12:24:49
 
 #include "MRSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -38,10 +38,10 @@ Eigen::Matrix<double,3,3> MRSSM_susy_parameters::calc_beta_Yu_one_loop(const Sus
 
    Eigen::Matrix<double,3,3> beta_Yu;
 
-   beta_Yu = oneOver16PiSqr*(Yu*(3*traceYuAdjYu + AbsSqr(LamSU) + 1.5*
+   beta_Yu = (oneOver16PiSqr*(Yu*(3*traceYuAdjYu + AbsSqr(LamSU) + 1.5*
       AbsSqr(LamTU) - 0.8666666666666667*Sqr(g1) - 3*Sqr(g2) -
       5.333333333333333*Sqr(g3)) + Yu*Yd.adjoint()*Yd + 3*(Yu*Yu.adjoint()*Yu))
-      ;
+      ).real();
 
 
    return beta_Yu;
@@ -63,8 +63,8 @@ Eigen::Matrix<double,3,3> MRSSM_susy_parameters::calc_beta_Yu_two_loop(const Sus
 
    Eigen::Matrix<double,3,3> beta_Yu;
 
-   beta_Yu = twoLoop*(Yu*(6.615555555555556*Power(g1,4) + 16.5*Power(g2,4
-      ) + 14.222222222222221*Power(g3,4) - 3*traceYdAdjYuYuAdjYd - 9*
+   beta_Yu = (twoLoop*(Yu*(6.615555555555556*Power(g1,4) + 16.5*Power(g2,
+      4) + 14.222222222222221*Power(g3,4) - 3*traceYdAdjYuYuAdjYd - 9*
       traceYuAdjYuYuAdjYu - 2*AbsSqr(LamSD)*AbsSqr(LamSU) - 3*AbsSqr(LamSU)*
       AbsSqr(LamTU) - 1.5*AbsSqr(LamTD)*AbsSqr(LamTU) + 0.8*traceYuAdjYu*Sqr(g1
       ) + 6*AbsSqr(LamTU)*Sqr(g2) + Sqr(g1)*Sqr(g2) + 16*traceYuAdjYu*Sqr(g3) +
@@ -75,7 +75,7 @@ Eigen::Matrix<double,3,3> MRSSM_susy_parameters::calc_beta_Yu_two_loop(const Sus
       (Yu*Yu.adjoint()*Yu) - 4.5*AbsSqr(LamTU)*(Yu*Yu.adjoint()*Yu) + 0.4*Sqr(
       g1)*(Yu*Yu.adjoint()*Yu) + 6*Sqr(g2)*(Yu*Yu.adjoint()*Yu) - 2*(Yu*
       Yd.adjoint()*Yd*Yd.adjoint()*Yd) - 2*(Yu*Yd.adjoint()*Yd*Yu.adjoint()*Yu)
-      - 4*(Yu*Yu.adjoint()*Yu*Yu.adjoint()*Yu));
+      - 4*(Yu*Yu.adjoint()*Yu*Yu.adjoint()*Yu))).real();
 
 
    return beta_Yu;

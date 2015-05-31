@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:30:18
+// File generated at Sun 31 May 2015 12:23:40
 
 #include "TMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -41,12 +41,13 @@ Eigen::Matrix<double,3,3> TMSSM_soft_parameters::calc_beta_TYd_one_loop(const So
 
    Eigen::Matrix<double,3,3> beta_TYd;
 
-   beta_TYd = oneOver16PiSqr*(3*traceYdAdjYd*TYd + traceYeAdjYe*TYd + 1.5
-      *AbsSqr(Lambdax)*TYd - 0.4666666666666667*Sqr(g1)*TYd - 3*Sqr(g2)*TYd -
-      5.333333333333333*Sqr(g3)*TYd + Yd*(6*traceAdjYdTYd + 2*traceAdjYeTYe +
-      0.9333333333333333*MassB*Sqr(g1) + 6*MassWB*Sqr(g2) + 10.666666666666666*
-      MassG*Sqr(g3) + 3*Conj(Lambdax)*TLambdax) + 4*(Yd*Yd.adjoint()*TYd) + 2*(
-      Yd*Yu.adjoint()*TYu) + 5*(TYd*Yd.adjoint()*Yd) + TYd*Yu.adjoint()*Yu);
+   beta_TYd = (oneOver16PiSqr*(3*traceYdAdjYd*TYd + traceYeAdjYe*TYd +
+      1.5*AbsSqr(Lambdax)*TYd - 0.4666666666666667*Sqr(g1)*TYd - 3*Sqr(g2)*TYd
+      - 5.333333333333333*Sqr(g3)*TYd + Yd*(6*traceAdjYdTYd + 2*traceAdjYeTYe +
+      0.9333333333333333*MassB*Sqr(g1) + 6*MassWB*Sqr(g2) + 10.666666666666666
+      *MassG*Sqr(g3) + 3*Conj(Lambdax)*TLambdax) + 4*(Yd*Yd.adjoint()*TYd) + 2*
+      (Yd*Yu.adjoint()*TYu) + 5*(TYd*Yd.adjoint()*Yd) + TYd*Yu.adjoint()*Yu))
+      .real();
 
 
    return beta_TYd;
@@ -76,13 +77,13 @@ Eigen::Matrix<double,3,3> TMSSM_soft_parameters::calc_beta_TYd_two_loop(const So
 
    Eigen::Matrix<double,3,3> beta_TYd;
 
-   beta_TYd = twoLoop*(3.188888888888889*Power(g1,4)*TYd + 13.5*Power(g2,
-      4)*TYd - 1.7777777777777777*Power(g3,4)*TYd - 9*traceYdAdjYdYdAdjYd*TYd -
-      3*traceYdAdjYuYuAdjYd*TYd - 3*traceYeAdjYeYeAdjYe*TYd - 4.5*traceYuAdjYu
-      *AbsSqr(Lambdax)*TYd - 0.4*traceYdAdjYd*Sqr(g1)*TYd + 1.2*traceYeAdjYe*
-      Sqr(g1)*TYd + 6*AbsSqr(Lambdax)*Sqr(g2)*TYd + Sqr(g1)*Sqr(g2)*TYd + 16*
-      traceYdAdjYd*Sqr(g3)*TYd + 0.8888888888888888*Sqr(g1)*Sqr(g3)*TYd + 8*Sqr
-      (g2)*Sqr(g3)*TYd - 3.75*Sqr(Conj(Lambdax))*Sqr(Lambdax)*TYd -
+   beta_TYd = (twoLoop*(3.188888888888889*Power(g1,4)*TYd + 13.5*Power(g2
+      ,4)*TYd - 1.7777777777777777*Power(g3,4)*TYd - 9*traceYdAdjYdYdAdjYd*TYd
+      - 3*traceYdAdjYuYuAdjYd*TYd - 3*traceYeAdjYeYeAdjYe*TYd - 4.5*
+      traceYuAdjYu*AbsSqr(Lambdax)*TYd - 0.4*traceYdAdjYd*Sqr(g1)*TYd + 1.2*
+      traceYeAdjYe*Sqr(g1)*TYd + 6*AbsSqr(Lambdax)*Sqr(g2)*TYd + Sqr(g1)*Sqr(g2
+      )*TYd + 16*traceYdAdjYd*Sqr(g3)*TYd + 0.8888888888888888*Sqr(g1)*Sqr(g3)*
+      TYd + 8*Sqr(g2)*Sqr(g3)*TYd - 3.75*Sqr(Conj(Lambdax))*Sqr(Lambdax)*TYd -
       0.022222222222222223*Yd*(2*(287*Power(g1,4)*MassB - 160*Power(g3,4)*MassG
       + 1215*Power(g2,4)*MassWB + 810*traceYdAdjYdTYdAdjYd + 135*
       traceYdAdjYuTYuAdjYd + 270*traceYeAdjYeTYeAdjYe + 135*
@@ -110,7 +111,7 @@ Eigen::Matrix<double,3,3> TMSSM_soft_parameters::calc_beta_TYd_two_loop(const So
       *TYd) - 4*(Yd*Yu.adjoint()*Yu*Yu.adjoint()*TYu) - 4*(Yd*Yu.adjoint()*TYu*
       Yd.adjoint()*Yd) - 4*(Yd*Yu.adjoint()*TYu*Yu.adjoint()*Yu) - 6*(TYd*
       Yd.adjoint()*Yd*Yd.adjoint()*Yd) - 4*(TYd*Yu.adjoint()*Yu*Yd.adjoint()*Yd
-      ) - 2*(TYd*Yu.adjoint()*Yu*Yu.adjoint()*Yu));
+      ) - 2*(TYd*Yu.adjoint()*Yu*Yu.adjoint()*Yu))).real();
 
 
    return beta_TYd;

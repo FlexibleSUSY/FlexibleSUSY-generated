@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:35:50
+// File generated at Sun 31 May 2015 12:31:05
 
 #include "UMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -40,11 +40,12 @@ Eigen::Matrix<double,3,3> UMSSM_soft_parameters::calc_beta_ml2_one_loop(const So
 
    Eigen::Matrix<double,3,3> beta_ml2;
 
-   beta_ml2 = oneOver16PiSqr*(2*mHd2*(Ye.adjoint()*Ye) + 2*((TYe).adjoint
-      ()*TYe) + ml2*Ye.adjoint()*Ye + 2*(Ye.adjoint()*me2*Ye) + Ye.adjoint()*Ye
-      *ml2 - 0.7745966692414834*g1*Tr11*UNITMATRIX(3) + 2*gp*Ql*Tr14*UNITMATRIX
-      (3) - 1.2*AbsSqr(MassB)*Sqr(g1)*UNITMATRIX(3) - 6*AbsSqr(MassWB)*Sqr(g2)*
-      UNITMATRIX(3) - 8*AbsSqr(MassU)*Sqr(gp)*Sqr(Ql)*UNITMATRIX(3));
+   beta_ml2 = (oneOver16PiSqr*(2*mHd2*(Ye.adjoint()*Ye) + 2*((TYe)
+      .adjoint()*TYe) + ml2*Ye.adjoint()*Ye + 2*(Ye.adjoint()*me2*Ye) +
+      Ye.adjoint()*Ye*ml2 - 0.7745966692414834*g1*Tr11*UNITMATRIX(3) + 2*gp*Ql*
+      Tr14*UNITMATRIX(3) - 1.2*AbsSqr(MassB)*Sqr(g1)*UNITMATRIX(3) - 6*AbsSqr(
+      MassWB)*Sqr(g2)*UNITMATRIX(3) - 8*AbsSqr(MassU)*Sqr(gp)*Sqr(Ql)*
+      UNITMATRIX(3))).real();
 
 
    return beta_ml2;
@@ -88,7 +89,7 @@ Eigen::Matrix<double,3,3> UMSSM_soft_parameters::calc_beta_ml2_two_loop(const So
 
    Eigen::Matrix<double,3,3> beta_ml2;
 
-   beta_ml2 = twoLoop*(-6*traceconjTYdTpTYd*(Ye.adjoint()*Ye) - 2*
+   beta_ml2 = (twoLoop*(-6*traceconjTYdTpTYd*(Ye.adjoint()*Ye) - 2*
       traceconjTYeTpTYe*(Ye.adjoint()*Ye) - 6*tracemd2YdAdjYd*(Ye.adjoint()*Ye)
       - 2*traceme2YeAdjYe*(Ye.adjoint()*Ye) - 2*traceml2AdjYeYe*(Ye.adjoint()*
       Ye) - 6*tracemq2AdjYdYd*(Ye.adjoint()*Ye) - 12*mHd2*traceYdAdjYd*(
@@ -141,7 +142,7 @@ Eigen::Matrix<double,3,3> UMSSM_soft_parameters::calc_beta_ml2_two_loop(const So
       (MassB + 2*MassU)*(3*Qd + 3*Qe - QHd + QHu - 4*Ql + 3*Qq - 6*Qu)*Sqr(g1))
       + 5*Ql*((2*MassU + MassWB)*Sqr(g2) + 2*MassU*Sqr(gp)*(9*Sqr(Qd) + 3*Sqr(
       Qe) + 2*Sqr(QHd) + 2*Sqr(QHu) + 8*Sqr(Ql) + 18*Sqr(Qq) + Sqr(Qs) + 9*Sqr(
-      Qu))))*UNITMATRIX(3)));
+      Qu))))*UNITMATRIX(3)))).real();
 
 
    return beta_ml2;

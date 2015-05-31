@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:45:20
+// File generated at Sun 31 May 2015 12:44:12
 
 #include "NMSSM_two_scale_initial_guesser.hpp"
 #include "NMSSM_two_scale_model.hpp"
@@ -30,14 +30,14 @@
 
 namespace flexiblesusy {
 
-#define INPUTPARAMETER(p) input_pars.p
+#define INPUTPARAMETER(p) model->get_input().p
 #define MODELPARAMETER(p) model->get_##p()
-#define SM(p) Electroweak_constants::p
+#define PHASE(p) model->get_##p()
+#define LowEnergyConstant(p) Electroweak_constants::p
 #define MODEL model
 
 NMSSM_initial_guesser<Two_scale>::NMSSM_initial_guesser(
    NMSSM<Two_scale>* model_,
-   const NMSSM_input_parameters& input_pars_,
    const QedQcd& oneset_,
    const NMSSM_low_scale_constraint<Two_scale>& low_constraint_,
    const NMSSM_susy_scale_constraint<Two_scale>& susy_constraint_,
@@ -45,7 +45,6 @@ NMSSM_initial_guesser<Two_scale>::NMSSM_initial_guesser(
 )
    : Initial_guesser<Two_scale>()
    , model(model_)
-   , input_pars(input_pars_)
    , oneset(oneset_)
    , mu_guess(0.)
    , mc_guess(0.)
@@ -90,12 +89,12 @@ void NMSSM_initial_guesser<Two_scale>::guess()
    const auto TanBeta = INPUTPARAMETER(TanBeta);
    const auto LambdaInput = INPUTPARAMETER(LambdaInput);
 
-   MODEL->set_vd(SM(vev)/Sqrt(1 + Sqr(TanBeta)));
-   MODEL->set_vu((TanBeta*SM(vev))/Sqrt(1 + Sqr(TanBeta)));
-   MODEL->set_Lambdax(LambdaInput);
-   MODEL->set_Kappa(0.1);
-   MODEL->set_vS(1000);
-   MODEL->set_ms2(Sqr(SM(MZ)));
+   MODEL->set_vd(Re(LowEnergyConstant(vev)/Sqrt(1 + Sqr(TanBeta))));
+   MODEL->set_vu(Re((TanBeta*LowEnergyConstant(vev))/Sqrt(1 + Sqr(TanBeta))));
+   MODEL->set_Lambdax(Re(LambdaInput));
+   MODEL->set_Kappa(Re(0.1));
+   MODEL->set_vS(Re(1000));
+   MODEL->set_ms2(Re(Sqr(LowEnergyConstant(MZ))));
    calculate_Yu_DRbar();
    calculate_Yd_DRbar();
    calculate_Ye_DRbar();
@@ -132,12 +131,12 @@ void NMSSM_initial_guesser<Two_scale>::guess_susy_parameters()
    const auto TanBeta = INPUTPARAMETER(TanBeta);
    const auto LambdaInput = INPUTPARAMETER(LambdaInput);
 
-   MODEL->set_vd(SM(vev)/Sqrt(1 + Sqr(TanBeta)));
-   MODEL->set_vu((TanBeta*SM(vev))/Sqrt(1 + Sqr(TanBeta)));
-   MODEL->set_Lambdax(LambdaInput);
-   MODEL->set_Kappa(0.1);
-   MODEL->set_vS(1000);
-   MODEL->set_ms2(Sqr(SM(MZ)));
+   MODEL->set_vd(Re(LowEnergyConstant(vev)/Sqrt(1 + Sqr(TanBeta))));
+   MODEL->set_vu(Re((TanBeta*LowEnergyConstant(vev))/Sqrt(1 + Sqr(TanBeta))));
+   MODEL->set_Lambdax(Re(LambdaInput));
+   MODEL->set_Kappa(Re(0.1));
+   MODEL->set_vS(Re(1000));
+   MODEL->set_ms2(Re(Sqr(LowEnergyConstant(MZ))));
    calculate_Yu_DRbar();
    calculate_Yd_DRbar();
    calculate_Ye_DRbar();
@@ -158,13 +157,13 @@ void NMSSM_initial_guesser<Two_scale>::calculate_DRbar_yukawa_couplings()
  */
 void NMSSM_initial_guesser<Two_scale>::calculate_Yu_DRbar()
 {
-   Eigen::Matrix<double,3,3> topDRbar(Eigen::Matrix<double,3,3>::Zero());
+   Eigen::Matrix<std::complex<double>,3,3> topDRbar(ZEROMATRIXCOMPLEX(3,3));
    topDRbar(0,0) = mu_guess;
    topDRbar(1,1) = mc_guess;
    topDRbar(2,2) = mt_guess;
 
    const auto vu = MODELPARAMETER(vu);
-   MODEL->set_Yu(((1.4142135623730951*topDRbar)/vu).transpose());
+   MODEL->set_Yu((((1.4142135623730951*topDRbar)/vu).transpose()).real());
 
 }
 
@@ -175,13 +174,13 @@ void NMSSM_initial_guesser<Two_scale>::calculate_Yu_DRbar()
  */
 void NMSSM_initial_guesser<Two_scale>::calculate_Yd_DRbar()
 {
-   Eigen::Matrix<double,3,3> bottomDRbar(Eigen::Matrix<double,3,3>::Zero());
+   Eigen::Matrix<std::complex<double>,3,3> bottomDRbar(ZEROMATRIXCOMPLEX(3,3));
    bottomDRbar(0,0) = md_guess;
    bottomDRbar(1,1) = ms_guess;
    bottomDRbar(2,2) = mb_guess;
 
    const auto vd = MODELPARAMETER(vd);
-   MODEL->set_Yd(((1.4142135623730951*bottomDRbar)/vd).transpose());
+   MODEL->set_Yd((((1.4142135623730951*bottomDRbar)/vd).transpose()).real());
 
 }
 
@@ -192,13 +191,13 @@ void NMSSM_initial_guesser<Two_scale>::calculate_Yd_DRbar()
  */
 void NMSSM_initial_guesser<Two_scale>::calculate_Ye_DRbar()
 {
-   Eigen::Matrix<double,3,3> electronDRbar(Eigen::Matrix<double,3,3>::Zero());
+   Eigen::Matrix<std::complex<double>,3,3> electronDRbar(ZEROMATRIXCOMPLEX(3,3));
    electronDRbar(0,0) = me_guess;
    electronDRbar(1,1) = mm_guess;
    electronDRbar(2,2) = mtau_guess;
 
    const auto vd = MODELPARAMETER(vd);
-   MODEL->set_Ye(((1.4142135623730951*electronDRbar)/vd).transpose());
+   MODEL->set_Ye((((1.4142135623730951*electronDRbar)/vd).transpose()).real());
 
 }
 

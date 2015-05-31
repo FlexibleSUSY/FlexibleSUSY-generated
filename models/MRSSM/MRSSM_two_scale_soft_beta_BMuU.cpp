@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:31:27
+// File generated at Sun 31 May 2015 12:24:52
 
 #include "MRSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -38,9 +38,9 @@ double MRSSM_soft_parameters::calc_beta_BMuU_one_loop(const Soft_traces& soft_tr
 
    double beta_BMuU;
 
-   beta_BMuU = oneOver16PiSqr*(4*LamSU*BMuD*Conj(LamSD) + BMuU*(3*
+   beta_BMuU = Re(oneOver16PiSqr*(4*LamSU*BMuD*Conj(LamSD) + BMuU*(3*
       traceYuAdjYu + 6*AbsSqr(LamSU) + 3*AbsSqr(LamTU) - 0.6*Sqr(g1) - 3*Sqr(g2
-      )));
+      ))));
 
 
    return beta_BMuU;
@@ -62,14 +62,14 @@ double MRSSM_soft_parameters::calc_beta_BMuU_two_loop(const Soft_traces& soft_tr
 
    double beta_BMuU;
 
-   beta_BMuU = 0.1*twoLoop*(-8*LamSU*BMuD*Conj(LamSD)*(15*traceYdAdjYd +
-      5*traceYeAdjYe + 10*AbsSqr(LamSD) + 15*AbsSqr(LamTD) - 9*Sqr(g1) - 45*Sqr
-      (g2)) + BMuU*(45*Power(g1,4) + 165*Power(g2,4) - 30*traceYdAdjYuYuAdjYd -
-      90*traceYuAdjYuYuAdjYu + 8*traceYuAdjYu*Sqr(g1) + 18*Sqr(g1)*Sqr(g2) +
-      15*AbsSqr(LamTU)*(-3*traceYuAdjYu - 2*AbsSqr(LamTD) + 8*Sqr(g2)) + 2*
-      AbsSqr(LamSU)*(-75*traceYuAdjYu - 20*AbsSqr(LamSD) - 90*AbsSqr(LamTU) +
-      36*Sqr(g1) + 180*Sqr(g2)) + 160*traceYuAdjYu*Sqr(g3) - 140*Sqr(LamSU)*Sqr
-      (Conj(LamSU)) - 75*Sqr(LamTU)*Sqr(Conj(LamTU))));
+   beta_BMuU = Re(0.1*twoLoop*(-8*LamSU*BMuD*Conj(LamSD)*(15*traceYdAdjYd
+      + 5*traceYeAdjYe + 10*AbsSqr(LamSD) + 15*AbsSqr(LamTD) - 9*Sqr(g1) - 45*
+      Sqr(g2)) + BMuU*(45*Power(g1,4) + 165*Power(g2,4) - 30*
+      traceYdAdjYuYuAdjYd - 90*traceYuAdjYuYuAdjYu + 8*traceYuAdjYu*Sqr(g1) +
+      18*Sqr(g1)*Sqr(g2) + 15*AbsSqr(LamTU)*(-3*traceYuAdjYu - 2*AbsSqr(LamTD)
+      + 8*Sqr(g2)) + 2*AbsSqr(LamSU)*(-75*traceYuAdjYu - 20*AbsSqr(LamSD) - 90*
+      AbsSqr(LamTU) + 36*Sqr(g1) + 180*Sqr(g2)) + 160*traceYuAdjYu*Sqr(g3) -
+      140*Sqr(LamSU)*Sqr(Conj(LamSU)) - 75*Sqr(LamTU)*Sqr(Conj(LamTU)))));
 
 
    return beta_BMuU;

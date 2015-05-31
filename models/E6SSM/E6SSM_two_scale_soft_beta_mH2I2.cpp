@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:35:48
+// File generated at Sun 31 May 2015 12:30:51
 
 #include "E6SSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -39,14 +39,14 @@ Eigen::Matrix<double,2,2> E6SSM_soft_parameters::calc_beta_mH2I2_one_loop(const 
 
    Eigen::Matrix<double,2,2> beta_mH2I2;
 
-   beta_mH2I2 = oneOver16PiSqr*(2*ms2*(Lambda12.conjugate()*(Lambda12)
+   beta_mH2I2 = (oneOver16PiSqr*(2*ms2*(Lambda12.conjugate()*(Lambda12)
       .transpose()) + 2*(TLambda12.conjugate()*(TLambda12).transpose()) + mH2I2
       *Lambda12.conjugate()*(Lambda12).transpose() + 2*(Lambda12.conjugate()*
       mH1I2.conjugate()*(Lambda12).transpose()) + Lambda12.conjugate()*(
       Lambda12).transpose()*mH2I2 + 0.7745966692414834*g1*Tr11*UNITMATRIX(2) -
       0.6324555320336759*gN*Tr14*UNITMATRIX(2) - 1.2*AbsSqr(MassB)*Sqr(g1)*
       UNITMATRIX(2) - 6*AbsSqr(MassWB)*Sqr(g2)*UNITMATRIX(2) - 0.8*AbsSqr(
-      MassBp)*Sqr(gN)*UNITMATRIX(2));
+      MassBp)*Sqr(gN)*UNITMATRIX(2))).real();
 
 
    return beta_mH2I2;
@@ -92,8 +92,8 @@ Eigen::Matrix<double,2,2> E6SSM_soft_parameters::calc_beta_mH2I2_two_loop(const 
 
    Eigen::Matrix<double,2,2> beta_mH2I2;
 
-   beta_mH2I2 = twoLoop*(-6*traceconjTKappaTpTKappa*(Lambda12.conjugate()
-      *(Lambda12).transpose()) - 4*traceconjTLambda12TpTLambda12*(
+   beta_mH2I2 = (twoLoop*(-6*traceconjTKappaTpTKappa*(Lambda12.conjugate(
+      )*(Lambda12).transpose()) - 4*traceconjTLambda12TpTLambda12*(
       Lambda12.conjugate()*(Lambda12).transpose()) - 12*ms2*traceKappaAdjKappa*
       (Lambda12.conjugate()*(Lambda12).transpose()) - 6*
       traceKappaAdjKappaconjmDx2*(Lambda12.conjugate()*(Lambda12).transpose())
@@ -158,7 +158,7 @@ Eigen::Matrix<double,2,2> E6SSM_soft_parameters::calc_beta_mH2I2_two_loop(const 
       MassBp)*Sqr(gN))*UNITMATRIX(2) + 0.12*Conj(MassBp)*Sqr(gN)*(50*MassBp*(
       Lambda12.conjugate()*(Lambda12).transpose()) - 25*(Lambda12.conjugate()*(
       TLambda12).transpose()) + 2*(3*(MassB + 2*MassBp)*Sqr(g1) + 5*(2*MassBp +
-      MassWB)*Sqr(g2) + 96*MassBp*Sqr(gN))*UNITMATRIX(2)));
+      MassWB)*Sqr(g2) + 96*MassBp*Sqr(gN))*UNITMATRIX(2)))).real();
 
 
    return beta_mH2I2;

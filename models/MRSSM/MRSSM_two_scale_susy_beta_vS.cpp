@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:31:22
+// File generated at Sun 31 May 2015 12:24:50
 
 #include "MRSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -37,7 +37,7 @@ double MRSSM_susy_parameters::calc_beta_vS_one_loop(const Susy_traces& susy_trac
 
    double beta_vS;
 
-   beta_vS = -2*oneOver16PiSqr*vS*(AbsSqr(LamSD) + AbsSqr(LamSU));
+   beta_vS = Re(-2*oneOver16PiSqr*vS*(AbsSqr(LamSD) + AbsSqr(LamSU)));
 
 
    return beta_vS;
@@ -57,10 +57,10 @@ double MRSSM_susy_parameters::calc_beta_vS_two_loop(const Susy_traces& susy_trac
 
    double beta_vS;
 
-   beta_vS = 0.4*twoLoop*vS*(AbsSqr(LamSD)*(15*traceYdAdjYd + 5*
+   beta_vS = Re(0.4*twoLoop*vS*(AbsSqr(LamSD)*(15*traceYdAdjYd + 5*
       traceYeAdjYe + 15*AbsSqr(LamTD) - 3*Sqr(g1) - 15*Sqr(g2)) + AbsSqr(LamSU)
       *(10*AbsSqr(LamSU) - 3*(-5*traceYuAdjYu - 5*AbsSqr(LamTU) + Sqr(g1) + 5*
-      Sqr(g2))) + 10*Sqr(LamSD)*Sqr(Conj(LamSD)));
+      Sqr(g2))) + 10*Sqr(LamSD)*Sqr(Conj(LamSD))));
 
 
    return beta_vS;

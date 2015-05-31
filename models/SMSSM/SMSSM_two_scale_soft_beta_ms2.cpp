@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:42:28
+// File generated at Sun 31 May 2015 12:39:38
 
 #include "SMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -37,8 +37,8 @@ double SMSSM_soft_parameters::calc_beta_ms2_one_loop(const Soft_traces& soft_tra
 
    double beta_ms2;
 
-   beta_ms2 = 4*oneOver16PiSqr*(3*ms2*AbsSqr(Kappa) + (mHd2 + mHu2 + ms2)
-      *AbsSqr(Lambdax) + AbsSqr(TKappa) + AbsSqr(TLambdax));
+   beta_ms2 = Re(4*oneOver16PiSqr*(3*ms2*AbsSqr(Kappa) + (mHd2 + mHu2 +
+      ms2)*AbsSqr(Lambdax) + AbsSqr(TKappa) + AbsSqr(TLambdax)));
 
 
    return beta_ms2;
@@ -73,7 +73,7 @@ double SMSSM_soft_parameters::calc_beta_ms2_two_loop(const Soft_traces& soft_tra
 
    double beta_ms2;
 
-   beta_ms2 = -0.8*twoLoop*(120*ms2*Sqr(Conj(Kappa))*Sqr(Kappa) + 20*(
+   beta_ms2 = Re(-0.8*twoLoop*(120*ms2*Sqr(Conj(Kappa))*Sqr(Kappa) + 20*(
       mHd2 + mHu2 + ms2)*Sqr(Conj(Lambdax))*Sqr(Lambdax) + Conj(TLambdax)*(
       Lambdax*(15*traceAdjYdTYd + 5*traceAdjYeTYe + 3*(5*traceAdjYuTYu + MassB*
       Sqr(g1) + 5*MassWB*Sqr(g2))) + (15*traceYdAdjYd + 5*traceYeAdjYe - 3*(-5*
@@ -93,7 +93,7 @@ double SMSSM_soft_parameters::calc_beta_ms2_two_loop(const Soft_traces& soft_tra
       20*Conj(TKappa)*Kappa*TLambdax + 3*Conj(MassB)*Sqr(g1)*(-2*MassB*Lambdax
       + TLambdax) + 15*Conj(MassWB)*Sqr(g2)*(-2*MassWB*Lambdax + TLambdax)) +
       20*Conj(Kappa)*((mHd2 + mHu2 + 4*ms2)*AbsSqr(Lambdax)*Kappa + 4*AbsSqr(
-      TKappa)*Kappa + Conj(TLambdax)*(Lambdax*TKappa + Kappa*TLambdax)));
+      TKappa)*Kappa + Conj(TLambdax)*(Lambdax*TKappa + Kappa*TLambdax))));
 
 
    return beta_ms2;

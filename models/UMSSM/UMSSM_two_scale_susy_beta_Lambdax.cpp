@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:35:13
+// File generated at Sun 31 May 2015 12:30:42
 
 #include "UMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -43,10 +43,10 @@ double UMSSM_susy_parameters::calc_beta_Lambdax_one_loop(const Susy_traces& susy
 
    double beta_Lambdax;
 
-   beta_Lambdax = oneOver16PiSqr*(3*traceYdAdjYd*Lambdax + traceYeAdjYe*
-      Lambdax + 3*traceYuAdjYu*Lambdax - 0.6*Lambdax*Sqr(g1) - 3*Lambdax*Sqr(g2
-      ) - 2*Lambdax*Sqr(gp)*Sqr(QHd) - 2*Lambdax*Sqr(gp)*Sqr(QHu) - 2*Lambdax*
-      Sqr(gp)*Sqr(Qs) + 4*Conj(Lambdax)*Sqr(Lambdax));
+   beta_Lambdax = Re(oneOver16PiSqr*(3*traceYdAdjYd*Lambdax +
+      traceYeAdjYe*Lambdax + 3*traceYuAdjYu*Lambdax - 0.6*Lambdax*Sqr(g1) - 3*
+      Lambdax*Sqr(g2) - 2*Lambdax*Sqr(gp)*Sqr(QHd) - 2*Lambdax*Sqr(gp)*Sqr(QHu)
+      - 2*Lambdax*Sqr(gp)*Sqr(Qs) + 4*Conj(Lambdax)*Sqr(Lambdax)));
 
 
    return beta_Lambdax;
@@ -78,9 +78,9 @@ double UMSSM_susy_parameters::calc_beta_Lambdax_two_loop(const Susy_traces& susy
 
    double beta_Lambdax;
 
-   beta_Lambdax = -0.02*twoLoop*Lambdax*(-207*Power(g1,4) - 375*Power(g2,
-      4) - 400*Power(gp,4)*Power(QHd,4) - 400*Power(gp,4)*Power(QHu,4) - 300*
-      Power(gp,4)*Power(Qs,4) + 450*traceYdAdjYdYdAdjYd + 300*
+   beta_Lambdax = Re(-0.02*twoLoop*Lambdax*(-207*Power(g1,4) - 375*Power(
+      g2,4) - 400*Power(gp,4)*Power(QHd,4) - 400*Power(gp,4)*Power(QHu,4) - 300
+      *Power(gp,4)*Power(Qs,4) + 450*traceYdAdjYdYdAdjYd + 300*
       traceYdAdjYuYuAdjYd + 150*traceYeAdjYeYeAdjYe + 450*traceYuAdjYuYuAdjYu -
       60*traceYeAdjYe*Sqr(g1) - 40*traceYuAdjYu*Sqr(g1) - 90*Sqr(g1)*Sqr(g2) -
       800*traceYuAdjYu*Sqr(g3) + 180*Qd*QHd*Sqr(g1)*Sqr(gp) + 180*Qe*QHd*Sqr(
@@ -105,7 +105,7 @@ double UMSSM_susy_parameters::calc_beta_Lambdax_two_loop(const Susy_traces& susy
       *Sqr(Qs) - 1800*Power(gp,4)*Sqr(Qq)*Sqr(Qs) - 300*traceYuAdjYu*Sqr(gp)*
       Sqr(Qu) - 900*Power(gp,4)*Sqr(QHd)*Sqr(Qu) - 900*Power(gp,4)*Sqr(QHu)*Sqr
       (Qu) - 900*Power(gp,4)*Sqr(Qs)*Sqr(Qu) + 500*Sqr(Conj(Lambdax))*Sqr(
-      Lambdax));
+      Lambdax)));
 
 
    return beta_Lambdax;

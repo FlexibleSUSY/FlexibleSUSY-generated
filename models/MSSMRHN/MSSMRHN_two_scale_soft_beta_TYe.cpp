@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:44:29
+// File generated at Sun 31 May 2015 12:45:53
 
 #include "MSSMRHN_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -41,10 +41,11 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_TYe_one_loop(const 
 
    Eigen::Matrix<double,3,3> beta_TYe;
 
-   beta_TYe = oneOver16PiSqr*(Ye*(6*traceAdjYdTYd + 2*traceAdjYeTYe + 3.6
-      *MassB*Sqr(g1) + 6*MassWB*Sqr(g2)) + 3*traceYdAdjYd*TYe + traceYeAdjYe*
-      TYe - 1.8*Sqr(g1)*TYe - 3*Sqr(g2)*TYe + 4*(Ye*Ye.adjoint()*TYe) + 2*(Ye*
-      Yv.adjoint()*TYv) + 5*(TYe*Ye.adjoint()*Ye) + TYe*Yv.adjoint()*Yv);
+   beta_TYe = (oneOver16PiSqr*(Ye*(6*traceAdjYdTYd + 2*traceAdjYeTYe +
+      3.6*MassB*Sqr(g1) + 6*MassWB*Sqr(g2)) + 3*traceYdAdjYd*TYe + traceYeAdjYe
+      *TYe - 1.8*Sqr(g1)*TYe - 3*Sqr(g2)*TYe + 4*(Ye*Ye.adjoint()*TYe) + 2*(Ye*
+      Yv.adjoint()*TYv) + 5*(TYe*Ye.adjoint()*Ye) + TYe*Yv.adjoint()*Yv)).real(
+      );
 
 
    return beta_TYe;
@@ -79,8 +80,8 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_TYe_two_loop(const 
 
    Eigen::Matrix<double,3,3> beta_TYe;
 
-   beta_TYe = 0.1*twoLoop*(-4*Ye*(135*Power(g1,4)*MassB + 75*Power(g2,4)*
-      MassWB + 90*traceYdAdjYdTYdAdjYd + 15*traceYdAdjYuTYuAdjYd + 30*
+   beta_TYe = (0.1*twoLoop*(-4*Ye*(135*Power(g1,4)*MassB + 75*Power(g2,4)
+      *MassWB + 90*traceYdAdjYdTYdAdjYd + 15*traceYdAdjYuTYuAdjYd + 30*
       traceYeAdjYeTYeAdjYe + 5*traceYeAdjYvTYvAdjYe + 15*traceYuAdjYdTYdAdjYu +
       5*traceYvAdjYeTYeAdjYv + 2*traceAdjYdTYd*Sqr(g1) - 6*traceAdjYeTYe*Sqr(
       g1) + 6*MassB*traceYeAdjYe*Sqr(g1) + 9*MassB*Sqr(g1)*Sqr(g2) + 9*MassWB*
@@ -103,7 +104,7 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_TYe_two_loop(const 
       Yv.adjoint()*Yv*Yv.adjoint()*TYv) - 40*(Ye*Yv.adjoint()*TYv*Ye.adjoint()*
       Ye) - 40*(Ye*Yv.adjoint()*TYv*Yv.adjoint()*Yv) - 60*(TYe*Ye.adjoint()*Ye*
       Ye.adjoint()*Ye) - 40*(TYe*Yv.adjoint()*Yv*Ye.adjoint()*Ye) - 20*(TYe*
-      Yv.adjoint()*Yv*Yv.adjoint()*Yv));
+      Yv.adjoint()*Yv*Yv.adjoint()*Yv))).real();
 
 
    return beta_TYe;

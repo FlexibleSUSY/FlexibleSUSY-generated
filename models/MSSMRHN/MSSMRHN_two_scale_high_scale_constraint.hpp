@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:44:46
+// File generated at Sun 31 May 2015 12:46:18
 
 #ifndef MSSMRHN_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
 #define MSSMRHN_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
@@ -36,7 +36,7 @@ template<>
 class MSSMRHN_high_scale_constraint<Two_scale> : public Constraint<Two_scale> {
 public:
    MSSMRHN_high_scale_constraint();
-   MSSMRHN_high_scale_constraint(MSSMRHN<Two_scale>*, const MSSMRHN_input_parameters&);
+   MSSMRHN_high_scale_constraint(MSSMRHN<Two_scale>*);
    virtual ~MSSMRHN_high_scale_constraint();
    virtual void apply();
    virtual double get_scale() const;
@@ -44,17 +44,18 @@ public:
 
    void clear();
    double get_initial_scale_guess() const;
+   const MSSMRHN_input_parameters& get_input_parameters() const;
+   MSSMRHN<Two_scale>* get_model() const;
    void initialize();
-   void set_input_parameters(const MSSMRHN_input_parameters&);
    void set_scale(double); ///< fix unification scale (0 = unfixed)
+
+protected:
+   void update_scale();
 
 private:
    double scale;
    double initial_scale_guess;
    MSSMRHN<Two_scale>* model;
-   MSSMRHN_input_parameters inputPars;
-
-   void update_scale();
 };
 
 } // namespace flexiblesusy

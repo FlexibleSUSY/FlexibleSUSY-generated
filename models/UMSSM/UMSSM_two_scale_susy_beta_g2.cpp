@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:35:14
+// File generated at Sun 31 May 2015 12:30:43
 
 #include "UMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -37,7 +37,7 @@ double UMSSM_susy_parameters::calc_beta_g2_one_loop(const Susy_traces& susy_trac
 
    double beta_g2;
 
-   beta_g2 = Power(g2,3)*oneOver16PiSqr;
+   beta_g2 = Re(Power(g2,3)*oneOver16PiSqr);
 
 
    return beta_g2;
@@ -61,10 +61,10 @@ double UMSSM_susy_parameters::calc_beta_g2_two_loop(const Susy_traces& susy_trac
 
    double beta_g2;
 
-   beta_g2 = 0.2*Power(g2,3)*twoLoop*(-30*traceYdAdjYd - 10*traceYeAdjYe
-      - 30*traceYuAdjYu - 10*AbsSqr(Lambdax) + 9*Sqr(g1) + 125*Sqr(g2) + 120*
-      Sqr(g3) + 10*Sqr(gp)*Sqr(QHd) + 10*Sqr(gp)*Sqr(QHu) + 30*Sqr(gp)*Sqr(Ql)
-      + 90*Sqr(gp)*Sqr(Qq));
+   beta_g2 = Re(0.2*Power(g2,3)*twoLoop*(-30*traceYdAdjYd - 10*
+      traceYeAdjYe - 30*traceYuAdjYu - 10*AbsSqr(Lambdax) + 9*Sqr(g1) + 125*Sqr
+      (g2) + 120*Sqr(g3) + 10*Sqr(gp)*Sqr(QHd) + 10*Sqr(gp)*Sqr(QHu) + 30*Sqr(
+      gp)*Sqr(Ql) + 90*Sqr(gp)*Sqr(Qq)));
 
 
    return beta_g2;

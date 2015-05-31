@@ -16,11 +16,14 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:46:06
+// File generated at Sun 31 May 2015 12:45:28
 
 #include "NMSSM_physical.hpp"
+#include "slha_io.hpp"
 
 #include <iostream>
+
+#define LOCALPHYSICAL(p) p
 
 namespace flexiblesusy {
 
@@ -86,6 +89,28 @@ void NMSSM_physical::clear()
    ZUL = Eigen::Matrix<std::complex<double>,3,3>::Zero();
    ZUR = Eigen::Matrix<std::complex<double>,3,3>::Zero();
    MVWm = 0.;
+
+}
+
+/**
+ * Convert masses and mixing matrices to Haber-Kane convention:
+ * Fermion masses are always positive and mixing matrices are allowed
+ * to be complex.
+ */
+void NMSSM_physical::convert_to_hk()
+{
+   SLHA_io::convert_symmetric_fermion_mixings_to_hk(LOCALPHYSICAL(MChi), LOCALPHYSICAL(ZN));
+
+}
+
+/**
+ * Convert masses and mixing matrices to SLHA convention: Fermion
+ * mixing matrices are always real and fermion masses are allowed to
+ * be negative.
+ */
+void NMSSM_physical::convert_to_slha()
+{
+   SLHA_io::convert_symmetric_fermion_mixings_to_slha(LOCALPHYSICAL(MChi), LOCALPHYSICAL(ZN));
 
 }
 

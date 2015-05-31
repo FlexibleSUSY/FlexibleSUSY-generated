@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:35:48
+// File generated at Sun 31 May 2015 12:30:51
 
 #include "E6SSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -38,8 +38,8 @@ Eigen::Matrix<double,2,2> E6SSM_soft_parameters::calc_beta_msI2_one_loop(const S
 
    Eigen::Matrix<double,2,2> beta_msI2;
 
-   beta_msI2 = 0.5*gN*oneOver16PiSqr*(3.1622776601683795*Tr14 - 10*gN*
-      AbsSqr(MassBp))*UNITMATRIX(2);
+   beta_msI2 = (0.5*gN*oneOver16PiSqr*(3.1622776601683795*Tr14 - 10*gN*
+      AbsSqr(MassBp))*UNITMATRIX(2)).real();
 
 
    return beta_msI2;
@@ -58,8 +58,8 @@ Eigen::Matrix<double,2,2> E6SSM_soft_parameters::calc_beta_msI2_two_loop(const S
 
    Eigen::Matrix<double,2,2> beta_msI2;
 
-   beta_msI2 = 0.25*gN*twoLoop*(20*gN*Tr2U144 + 25.298221281347036*Tr34 +
-      639*Power(gN,3)*AbsSqr(MassBp))*UNITMATRIX(2);
+   beta_msI2 = (0.25*gN*twoLoop*(20*gN*Tr2U144 + 25.298221281347036*Tr34
+      + 639*Power(gN,3)*AbsSqr(MassBp))*UNITMATRIX(2)).real();
 
 
    return beta_msI2;

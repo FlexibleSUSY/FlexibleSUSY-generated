@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:30:10
+// File generated at Sun 31 May 2015 12:23:37
 
 #include "TMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -37,7 +37,7 @@ double TMSSM_susy_parameters::calc_beta_vT_one_loop(const Susy_traces& susy_trac
 
    double beta_vT;
 
-   beta_vT = oneOver16PiSqr*vT*(-AbsSqr(Lambdax) + 4*Sqr(g2));
+   beta_vT = Re(oneOver16PiSqr*vT*(-AbsSqr(Lambdax) + 4*Sqr(g2)));
 
 
    return beta_vT;
@@ -57,9 +57,9 @@ double TMSSM_susy_parameters::calc_beta_vT_two_loop(const Susy_traces& susy_trac
 
    double beta_vT;
 
-   beta_vT = twoLoop*(-12.666666666666666*Power(g2,4)*vT + 0.2*vT*AbsSqr(
-      Lambdax)*(15*traceYdAdjYd + 5*traceYeAdjYe - 3*(-5*traceYuAdjYu + Sqr(g1)
-      + 5*Sqr(g2))) + 3*vT*Sqr(Conj(Lambdax))*Sqr(Lambdax));
+   beta_vT = Re(twoLoop*(-12.666666666666666*Power(g2,4)*vT + 0.2*vT*
+      AbsSqr(Lambdax)*(15*traceYdAdjYd + 5*traceYeAdjYe - 3*(-5*traceYuAdjYu +
+      Sqr(g1) + 5*Sqr(g2))) + 3*vT*Sqr(Conj(Lambdax))*Sqr(Lambdax)));
 
 
    return beta_vT;

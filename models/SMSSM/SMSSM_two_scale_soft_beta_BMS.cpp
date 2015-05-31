@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:42:17
+// File generated at Sun 31 May 2015 12:39:24
 
 #include "SMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -37,9 +37,9 @@ double SMSSM_soft_parameters::calc_beta_BMS_one_loop(const Soft_traces& soft_tra
 
    double beta_BMS;
 
-   beta_BMS = oneOver16PiSqr*(4*(2*AbsSqr(Kappa) + AbsSqr(Lambdax))*BMS +
-      8*(BMu*Conj(Lambdax)*Kappa + MS*Conj(Kappa)*TKappa + MS*Conj(Lambdax)*
-      TLambdax));
+   beta_BMS = Re(oneOver16PiSqr*(4*(2*AbsSqr(Kappa) + AbsSqr(Lambdax))*
+      BMS + 8*(BMu*Conj(Lambdax)*Kappa + MS*Conj(Kappa)*TKappa + MS*Conj(
+      Lambdax)*TLambdax)));
 
 
    return beta_BMS;
@@ -62,7 +62,7 @@ double SMSSM_soft_parameters::calc_beta_BMS_two_loop(const Soft_traces& soft_tra
 
    double beta_BMS;
 
-   beta_BMS = -0.8*twoLoop*(BMS*(40*AbsSqr(Kappa)*AbsSqr(Lambdax) +
+   beta_BMS = Re(-0.8*twoLoop*(BMS*(40*AbsSqr(Kappa)*AbsSqr(Lambdax) +
       AbsSqr(Lambdax)*(15*traceYdAdjYd + 5*traceYeAdjYe + 15*traceYuAdjYu + 10*
       AbsSqr(Lambdax) - 3*Sqr(g1) - 15*Sqr(g2)) + 40*Sqr(Conj(Kappa))*Sqr(Kappa
       )) + 2*(50*MS*Kappa*Sqr(Conj(Kappa))*TKappa + 10*Sqr(Conj(Lambdax))*(BMu*
@@ -75,7 +75,7 @@ double SMSSM_soft_parameters::calc_beta_BMS_two_loop(const Soft_traces& soft_tra
       45*MassWB*Kappa*Mu*Sqr(g2) + 15*MS*traceYdAdjYd*TLambdax + 5*MS*
       traceYeAdjYe*TLambdax + 15*MS*traceYuAdjYu*TLambdax - 3*MS*Sqr(g1)*
       TLambdax - 15*MS*Sqr(g2)*TLambdax + 10*MS*Conj(Kappa)*(2*Lambdax*TKappa +
-      3*Kappa*TLambdax))));
+      3*Kappa*TLambdax)))));
 
 
    return beta_BMS;

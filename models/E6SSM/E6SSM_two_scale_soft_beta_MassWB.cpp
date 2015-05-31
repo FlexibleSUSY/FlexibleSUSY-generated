@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:35:51
+// File generated at Sun 31 May 2015 12:30:55
 
 #include "E6SSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -37,7 +37,7 @@ double E6SSM_soft_parameters::calc_beta_MassWB_one_loop(const Soft_traces& soft_
 
    double beta_MassWB;
 
-   beta_MassWB = 8*MassWB*oneOver16PiSqr*Sqr(g2);
+   beta_MassWB = Re(8*MassWB*oneOver16PiSqr*Sqr(g2));
 
 
    return beta_MassWB;
@@ -64,13 +64,13 @@ double E6SSM_soft_parameters::calc_beta_MassWB_two_loop(const Soft_traces& soft_
 
    double beta_MassWB;
 
-   beta_MassWB = 0.4*twoLoop*Sqr(g2)*(10*traceAdjLambda12TLambda12 + 30*
-      traceAdjYdTYd + 10*traceAdjYeTYe + 30*traceAdjYuTYu - 10*MassWB*
+   beta_MassWB = Re(0.4*twoLoop*Sqr(g2)*(10*traceAdjLambda12TLambda12 +
+      30*traceAdjYdTYd + 10*traceAdjYeTYe + 30*traceAdjYuTYu - 10*MassWB*
       traceLambda12AdjLambda12 - 30*MassWB*traceYdAdjYd - 10*MassWB*
       traceYeAdjYe - 30*MassWB*traceYuAdjYu + 18*MassB*Sqr(g1) + 18*MassWB*Sqr(
       g1) + 460*MassWB*Sqr(g2) + 120*MassG*Sqr(g3) + 120*MassWB*Sqr(g3) + 17*
       MassBp*Sqr(gN) + 17*MassWB*Sqr(gN) - 10*Conj(Lambdax)*(MassWB*Lambdax -
-      TLambdax));
+      TLambdax)));
 
 
    return beta_MassWB;

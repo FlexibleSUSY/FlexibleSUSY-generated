@@ -18,6 +18,7 @@ lowMSSM_TWO_SCALE_MK := \
 		$(lowMSSM_TWO_SCALE_SOFT_MK)
 
 lowMSSM_SLHA_INPUT := \
+		$(DIR)/LesHouches.in.lowMSSM~ \
 		$(DIR)/LesHouches.in.lowMSSM
 
 lowMSSM_GNUPLOT := \
@@ -34,6 +35,7 @@ LIBlowMSSM_HDR :=
 
 ifneq ($(findstring two_scale,$(ALGORITHMS)),)
 LIBlowMSSM_SRC += \
+		$(DIR)/lowMSSM_mass_eigenstates.cpp \
 		$(DIR)/lowMSSM_info.cpp \
 		$(DIR)/lowMSSM_input_parameters.cpp \
 		$(DIR)/lowMSSM_slha_io.cpp \
@@ -55,6 +57,7 @@ EXElowMSSM_SRC += \
 LIBlowMSSM_HDR += \
 		$(DIR)/lowMSSM_convergence_tester.hpp \
 		$(DIR)/lowMSSM_high_scale_constraint.hpp \
+		$(DIR)/lowMSSM_mass_eigenstates.hpp \
 		$(DIR)/lowMSSM_info.hpp \
 		$(DIR)/lowMSSM_initial_guesser.hpp \
 		$(DIR)/lowMSSM_input_parameters.hpp \

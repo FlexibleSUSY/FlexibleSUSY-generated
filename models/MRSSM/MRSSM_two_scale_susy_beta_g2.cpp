@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:31:21
+// File generated at Sun 31 May 2015 12:24:50
 
 #include "MRSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -37,7 +37,7 @@ double MRSSM_susy_parameters::calc_beta_g2_one_loop(const Susy_traces& susy_trac
 
    double beta_g2;
 
-   beta_g2 = 4*Power(g2,3)*oneOver16PiSqr;
+   beta_g2 = Re(4*Power(g2,3)*oneOver16PiSqr);
 
 
    return beta_g2;
@@ -57,9 +57,10 @@ double MRSSM_susy_parameters::calc_beta_g2_two_loop(const Susy_traces& susy_trac
 
    double beta_g2;
 
-   beta_g2 = 0.2*Power(g2,3)*twoLoop*(-30*traceYdAdjYd - 10*traceYeAdjYe
-      - 30*traceYuAdjYu - 10*AbsSqr(LamSD) - 10*AbsSqr(LamSU) - 35*AbsSqr(LamTD
-      ) - 35*AbsSqr(LamTU) + 12*Sqr(g1) + 280*Sqr(g2) + 120*Sqr(g3));
+   beta_g2 = Re(0.2*Power(g2,3)*twoLoop*(-30*traceYdAdjYd - 10*
+      traceYeAdjYe - 30*traceYuAdjYu - 10*AbsSqr(LamSD) - 10*AbsSqr(LamSU) - 35
+      *AbsSqr(LamTD) - 35*AbsSqr(LamTU) + 12*Sqr(g1) + 280*Sqr(g2) + 120*Sqr(g3
+      )));
 
 
    return beta_g2;

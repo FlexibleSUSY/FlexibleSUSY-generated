@@ -34,6 +34,7 @@ LIBMSSMRHN_HDR :=
 
 ifneq ($(findstring two_scale,$(ALGORITHMS)),)
 LIBMSSMRHN_SRC += \
+		$(DIR)/MSSMRHN_mass_eigenstates.cpp \
 		$(DIR)/MSSMRHN_info.cpp \
 		$(DIR)/MSSMRHN_input_parameters.cpp \
 		$(DIR)/MSSMRHN_slha_io.cpp \
@@ -55,6 +56,7 @@ EXEMSSMRHN_SRC += \
 LIBMSSMRHN_HDR += \
 		$(DIR)/MSSMRHN_convergence_tester.hpp \
 		$(DIR)/MSSMRHN_high_scale_constraint.hpp \
+		$(DIR)/MSSMRHN_mass_eigenstates.hpp \
 		$(DIR)/MSSMRHN_info.hpp \
 		$(DIR)/MSSMRHN_initial_guesser.hpp \
 		$(DIR)/MSSMRHN_input_parameters.hpp \

@@ -20,6 +20,9 @@ NUTNMSSM_TWO_SCALE_MK := \
 NUTNMSSM_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.NUTNMSSM_1308.1333_BP2 \
 		$(DIR)/LesHouches.in.NUTNMSSM_1308.1333_BP1 \
+		$(DIR)/LesHouches.in.NUTNMSSM_1308.1333_BP3~ \
+		$(DIR)/LesHouches.in.NUTNMSSM_1308.1333_BP1~ \
+		$(DIR)/LesHouches.in.NUTNMSSM_1308.1333_BP2~ \
 		$(DIR)/LesHouches.in.NUTNMSSM_1308.1333_BP3
 
 NUTNMSSM_GNUPLOT := \
@@ -36,6 +39,7 @@ LIBNUTNMSSM_HDR :=
 
 ifneq ($(findstring two_scale,$(ALGORITHMS)),)
 LIBNUTNMSSM_SRC += \
+		$(DIR)/NUTNMSSM_mass_eigenstates.cpp \
 		$(DIR)/NUTNMSSM_info.cpp \
 		$(DIR)/NUTNMSSM_input_parameters.cpp \
 		$(DIR)/NUTNMSSM_slha_io.cpp \
@@ -57,6 +61,7 @@ EXENUTNMSSM_SRC += \
 LIBNUTNMSSM_HDR += \
 		$(DIR)/NUTNMSSM_convergence_tester.hpp \
 		$(DIR)/NUTNMSSM_high_scale_constraint.hpp \
+		$(DIR)/NUTNMSSM_mass_eigenstates.hpp \
 		$(DIR)/NUTNMSSM_info.hpp \
 		$(DIR)/NUTNMSSM_initial_guesser.hpp \
 		$(DIR)/NUTNMSSM_input_parameters.hpp \

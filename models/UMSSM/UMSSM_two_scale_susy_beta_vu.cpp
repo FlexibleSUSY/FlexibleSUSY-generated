@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:35:15
+// File generated at Sun 31 May 2015 12:30:44
 
 #include "UMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -39,8 +39,8 @@ double UMSSM_susy_parameters::calc_beta_vu_one_loop(const Susy_traces& susy_trac
 
    double beta_vu;
 
-   beta_vu = 0.1*oneOver16PiSqr*vu*(-30*traceYuAdjYu - 10*AbsSqr(Lambdax)
-      + 3*Sqr(g1) + 15*Sqr(g2) + 20*Sqr(gp)*Sqr(QHu));
+   beta_vu = Re(0.1*oneOver16PiSqr*vu*(-30*traceYuAdjYu - 10*AbsSqr(
+      Lambdax) + 3*Sqr(g1) + 15*Sqr(g2) + 20*Sqr(gp)*Sqr(QHu)));
 
 
    return beta_vu;
@@ -70,8 +70,8 @@ double UMSSM_susy_parameters::calc_beta_vu_two_loop(const Susy_traces& susy_trac
 
    double beta_vu;
 
-   beta_vu = -0.005*twoLoop*vu*(207*Power(g1,4) + 275*Power(g2,4) + 800*
-      Power(gp,4)*Power(QHu,4) - 600*traceYdAdjYuYuAdjYd - 1800*
+   beta_vu = Re(-0.005*twoLoop*vu*(207*Power(g1,4) + 275*Power(g2,4) +
+      800*Power(gp,4)*Power(QHu,4) - 600*traceYdAdjYuYuAdjYd - 1800*
       traceYuAdjYuYuAdjYu + 90*Sqr(g1)*Sqr(g2) + 360*Qd*QHu*Sqr(g1)*Sqr(gp) +
       360*Qe*QHu*Sqr(g1)*Sqr(gp) - 120*QHd*QHu*Sqr(g1)*Sqr(gp) - 360*QHu*Ql*Sqr
       (g1)*Sqr(gp) + 360*QHu*Qq*Sqr(g1)*Sqr(gp) - 720*QHu*Qu*Sqr(g1)*Sqr(gp) +
@@ -82,7 +82,7 @@ double UMSSM_susy_parameters::calc_beta_vu_two_loop(const Susy_traces& susy_trac
       Lambdax)*(-30*traceYdAdjYd - 10*traceYeAdjYe + 3*Sqr(g1) + 15*Sqr(g2) +
       20*Sqr(gp)*Sqr(QHd) + 20*Sqr(gp)*Sqr(Qs)) + 1800*Power(gp,4)*Sqr(QHu)*Sqr
       (Qu) + 20*traceYuAdjYu*(17*Sqr(g1) + 45*Sqr(g2) + 160*Sqr(g3) + 60*Sqr(gp
-      )*Sqr(Qq) + 60*Sqr(gp)*Sqr(Qu)) - 600*Sqr(Conj(Lambdax))*Sqr(Lambdax));
+      )*Sqr(Qq) + 60*Sqr(gp)*Sqr(Qu)) - 600*Sqr(Conj(Lambdax))*Sqr(Lambdax)));
 
 
    return beta_vu;

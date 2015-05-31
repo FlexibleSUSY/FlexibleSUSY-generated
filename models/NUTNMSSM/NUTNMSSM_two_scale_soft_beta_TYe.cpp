@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:42:28
+// File generated at Sun 31 May 2015 12:42:47
 
 #include "NUTNMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -41,11 +41,11 @@ Eigen::Matrix<double,3,3> NUTNMSSM_soft_parameters::calc_beta_TYe_one_loop(const
 
    Eigen::Matrix<double,3,3> beta_TYe;
 
-   beta_TYe = oneOver16PiSqr*(3*traceYdAdjYd*TYe + traceYeAdjYe*TYe +
+   beta_TYe = (oneOver16PiSqr*(3*traceYdAdjYd*TYe + traceYeAdjYe*TYe +
       AbsSqr(Lambdax)*TYe - 1.8*Sqr(g1)*TYe - 3*Sqr(g2)*TYe + Ye*(6*
       traceAdjYdTYd + 2*traceAdjYeTYe + 3.6*MassB*Sqr(g1) + 6*MassWB*Sqr(g2) +
       2*Conj(Lambdax)*TLambdax) + 4*(Ye*Ye.adjoint()*TYe) + 5*(TYe*Ye.adjoint()
-      *Ye));
+      *Ye))).real();
 
 
    return beta_TYe;
@@ -75,7 +75,7 @@ Eigen::Matrix<double,3,3> NUTNMSSM_soft_parameters::calc_beta_TYe_two_loop(const
 
    Eigen::Matrix<double,3,3> beta_TYe;
 
-   beta_TYe = twoLoop*(13.5*Power(g1,4)*TYe + 7.5*Power(g2,4)*TYe - 9*
+   beta_TYe = (twoLoop*(13.5*Power(g1,4)*TYe + 7.5*Power(g2,4)*TYe - 9*
       traceYdAdjYdYdAdjYd*TYe - 3*traceYdAdjYuYuAdjYd*TYe - 3*
       traceYeAdjYeYeAdjYe*TYe - 3*traceYuAdjYu*AbsSqr(Lambdax)*TYe - 2*AbsSqr(
       Kappa)*AbsSqr(Lambdax)*TYe - 0.4*traceYdAdjYd*Sqr(g1)*TYe + 1.2*
@@ -97,7 +97,7 @@ Eigen::Matrix<double,3,3> NUTNMSSM_soft_parameters::calc_beta_TYe_two_loop(const
       - 5*AbsSqr(Lambdax)*(TYe*Ye.adjoint()*Ye) - 1.2*Sqr(g1)*(TYe*Ye.adjoint(
       )*Ye) + 12*Sqr(g2)*(TYe*Ye.adjoint()*Ye) - 6*(Ye*Ye.adjoint()*Ye*
       Ye.adjoint()*TYe) - 8*(Ye*Ye.adjoint()*TYe*Ye.adjoint()*Ye) - 6*(TYe*
-      Ye.adjoint()*Ye*Ye.adjoint()*Ye));
+      Ye.adjoint()*Ye*Ye.adjoint()*Ye))).real();
 
 
    return beta_TYe;

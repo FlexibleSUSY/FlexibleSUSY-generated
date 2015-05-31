@@ -16,26 +16,29 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:34:04
+// File generated at Sun 31 May 2015 12:28:19
 
 #include "MRSSM_physical.hpp"
+#include "slha_io.hpp"
 
 #include <iostream>
+
+#define LOCALPHYSICAL(p) p
 
 namespace flexiblesusy {
 
 MRSSM_physical::MRSSM_physical()
    :
-    MVG(0), MGlu(0), MFv(Eigen::Array<double,3,1>::Zero()), MSOc(0), MVP(0),
-       MVZ(0), MSd(Eigen::Array<double,6,1>::Zero()), MSv(Eigen::Array<double,3,1>
-       ::Zero()), MSu(Eigen::Array<double,6,1>::Zero()), MSe(Eigen::Array<double,6
-       ,1>::Zero()), Mhh(Eigen::Array<double,4,1>::Zero()), MAh(Eigen::Array<
-       double,4,1>::Zero()), MRh(Eigen::Array<double,2,1>::Zero()), MHpm(
-       Eigen::Array<double,4,1>::Zero()), MRpm(Eigen::Array<double,2,1>::Zero()),
-       MChi(Eigen::Array<double,4,1>::Zero()), MCha1(Eigen::Array<double,2,1>
-       ::Zero()), MCha2(Eigen::Array<double,2,1>::Zero()), MFe(Eigen::Array<double
-       ,3,1>::Zero()), MFd(Eigen::Array<double,3,1>::Zero()), MFu(Eigen::Array<
-       double,3,1>::Zero()), MVWm(0)
+    MVG(0), MGlu(0), MFv(Eigen::Array<double,3,1>::Zero()), MsigmaO(0), MphiO(
+       0), MVP(0), MVZ(0), MSd(Eigen::Array<double,6,1>::Zero()), MSv(Eigen::Array
+       <double,3,1>::Zero()), MSu(Eigen::Array<double,6,1>::Zero()), MSe(
+       Eigen::Array<double,6,1>::Zero()), Mhh(Eigen::Array<double,4,1>::Zero()),
+       MAh(Eigen::Array<double,4,1>::Zero()), MRh(Eigen::Array<double,2,1>::Zero()
+       ), MHpm(Eigen::Array<double,4,1>::Zero()), MRpm(Eigen::Array<double,2,1>
+       ::Zero()), MChi(Eigen::Array<double,4,1>::Zero()), MCha1(Eigen::Array<
+       double,2,1>::Zero()), MCha2(Eigen::Array<double,2,1>::Zero()), MFe(
+       Eigen::Array<double,3,1>::Zero()), MFd(Eigen::Array<double,3,1>::Zero()),
+       MFu(Eigen::Array<double,3,1>::Zero()), MVWm(0)
 
    , ZD(Eigen::Matrix<double,6,6>::Zero()), ZV(Eigen::Matrix<double,3,3>::Zero(
       )), ZU(Eigen::Matrix<double,6,6>::Zero()), ZE(Eigen::Matrix<double,6,6>
@@ -60,7 +63,8 @@ void MRSSM_physical::clear()
    MVG = 0.;
    MGlu = 0.;
    MFv = Eigen::Matrix<double,3,1>::Zero();
-   MSOc = 0.;
+   MsigmaO = 0.;
+   MphiO = 0.;
    MVP = 0.;
    MVZ = 0.;
    MSd = Eigen::Matrix<double,6,1>::Zero();
@@ -103,6 +107,26 @@ void MRSSM_physical::clear()
 
 }
 
+/**
+ * Convert masses and mixing matrices to Haber-Kane convention:
+ * Fermion masses are always positive and mixing matrices are allowed
+ * to be complex.
+ */
+void MRSSM_physical::convert_to_hk()
+{
+
+}
+
+/**
+ * Convert masses and mixing matrices to SLHA convention: Fermion
+ * mixing matrices are always real and fermion masses are allowed to
+ * be negative.
+ */
+void MRSSM_physical::convert_to_slha()
+{
+
+}
+
 void MRSSM_physical::print(std::ostream& ostr) const
 {
    ostr << "----------------------------------------\n"
@@ -111,7 +135,8 @@ void MRSSM_physical::print(std::ostream& ostr) const
    ostr << "MVG = " << MVG << '\n';
    ostr << "MGlu = " << MGlu << '\n';
    ostr << "MFv = " << MFv.transpose() << '\n';
-   ostr << "MSOc = " << MSOc << '\n';
+   ostr << "MsigmaO = " << MsigmaO << '\n';
+   ostr << "MphiO = " << MphiO << '\n';
    ostr << "MVP = " << MVP << '\n';
    ostr << "MVZ = " << MVZ << '\n';
    ostr << "MSd = " << MSd.transpose() << '\n';

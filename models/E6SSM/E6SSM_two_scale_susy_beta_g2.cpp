@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:35:07
+// File generated at Sun 31 May 2015 12:30:15
 
 #include "E6SSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -37,7 +37,7 @@ double E6SSM_susy_parameters::calc_beta_g2_one_loop(const Susy_traces& susy_trac
 
    double beta_g2;
 
-   beta_g2 = 4*Power(g2,3)*oneOver16PiSqr;
+   beta_g2 = Re(4*Power(g2,3)*oneOver16PiSqr);
 
 
    return beta_g2;
@@ -59,9 +59,9 @@ double E6SSM_susy_parameters::calc_beta_g2_two_loop(const Susy_traces& susy_trac
 
    double beta_g2;
 
-   beta_g2 = 0.2*Power(g2,3)*twoLoop*(-10*traceLambda12AdjLambda12 - 30*
-      traceYdAdjYd - 10*traceYeAdjYe - 30*traceYuAdjYu - 10*AbsSqr(Lambdax) +
-      18*Sqr(g1) + 230*Sqr(g2) + 120*Sqr(g3) + 17*Sqr(gN));
+   beta_g2 = Re(0.2*Power(g2,3)*twoLoop*(-10*traceLambda12AdjLambda12 -
+      30*traceYdAdjYd - 10*traceYeAdjYe - 30*traceYuAdjYu - 10*AbsSqr(Lambdax)
+      + 18*Sqr(g1) + 230*Sqr(g2) + 120*Sqr(g3) + 17*Sqr(gN)));
 
 
    return beta_g2;

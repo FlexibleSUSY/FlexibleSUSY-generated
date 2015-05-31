@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:36:06
+// File generated at Sun 31 May 2015 12:31:26
 
 #ifndef UMSSM_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
 #define UMSSM_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
@@ -36,7 +36,7 @@ template<>
 class UMSSM_high_scale_constraint<Two_scale> : public Constraint<Two_scale> {
 public:
    UMSSM_high_scale_constraint();
-   UMSSM_high_scale_constraint(UMSSM<Two_scale>*, const UMSSM_input_parameters&);
+   UMSSM_high_scale_constraint(UMSSM<Two_scale>*);
    virtual ~UMSSM_high_scale_constraint();
    virtual void apply();
    virtual double get_scale() const;
@@ -44,17 +44,18 @@ public:
 
    void clear();
    double get_initial_scale_guess() const;
+   const UMSSM_input_parameters& get_input_parameters() const;
+   UMSSM<Two_scale>* get_model() const;
    void initialize();
-   void set_input_parameters(const UMSSM_input_parameters&);
    void set_scale(double); ///< fix unification scale (0 = unfixed)
+
+protected:
+   void update_scale();
 
 private:
    double scale;
    double initial_scale_guess;
    UMSSM<Two_scale>* model;
-   UMSSM_input_parameters inputPars;
-
-   void update_scale();
 };
 
 } // namespace flexiblesusy

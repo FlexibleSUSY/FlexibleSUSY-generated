@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:35:45
+// File generated at Sun 31 May 2015 12:30:57
 
 #include "UMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -42,14 +42,14 @@ Eigen::Matrix<double,3,3> UMSSM_soft_parameters::calc_beta_TYu_one_loop(const So
 
    Eigen::Matrix<double,3,3> beta_TYu;
 
-   beta_TYu = oneOver16PiSqr*(3*traceYuAdjYu*TYu + AbsSqr(Lambdax)*TYu -
-      0.8666666666666667*Sqr(g1)*TYu - 3*Sqr(g2)*TYu - 5.333333333333333*Sqr(g3
-      )*TYu - 2*Sqr(gp)*Sqr(QHu)*TYu - 2*Sqr(gp)*Sqr(Qq)*TYu - 2*Sqr(gp)*Sqr(Qu
-      )*TYu + Yu*(6*traceAdjYuTYu + 1.7333333333333334*MassB*Sqr(g1) + 6*MassWB
-      *Sqr(g2) + 10.666666666666666*MassG*Sqr(g3) + 4*MassU*Sqr(gp)*Sqr(QHu) +
-      4*MassU*Sqr(gp)*Sqr(Qq) + 4*MassU*Sqr(gp)*Sqr(Qu) + 2*Conj(Lambdax)*
-      TLambdax) + 2*(Yu*Yd.adjoint()*TYd) + 4*(Yu*Yu.adjoint()*TYu) + TYu*
-      Yd.adjoint()*Yd + 5*(TYu*Yu.adjoint()*Yu));
+   beta_TYu = (oneOver16PiSqr*(3*traceYuAdjYu*TYu + AbsSqr(Lambdax)*TYu -
+      0.8666666666666667*Sqr(g1)*TYu - 3*Sqr(g2)*TYu - 5.333333333333333*Sqr(
+      g3)*TYu - 2*Sqr(gp)*Sqr(QHu)*TYu - 2*Sqr(gp)*Sqr(Qq)*TYu - 2*Sqr(gp)*Sqr(
+      Qu)*TYu + Yu*(6*traceAdjYuTYu + 1.7333333333333334*MassB*Sqr(g1) + 6*
+      MassWB*Sqr(g2) + 10.666666666666666*MassG*Sqr(g3) + 4*MassU*Sqr(gp)*Sqr(
+      QHu) + 4*MassU*Sqr(gp)*Sqr(Qq) + 4*MassU*Sqr(gp)*Sqr(Qu) + 2*Conj(Lambdax
+      )*TLambdax) + 2*(Yu*Yd.adjoint()*TYd) + 4*(Yu*Yu.adjoint()*TYu) + TYu*
+      Yd.adjoint()*Yd + 5*(TYu*Yu.adjoint()*Yu))).real();
 
 
    return beta_TYu;
@@ -85,8 +85,8 @@ Eigen::Matrix<double,3,3> UMSSM_soft_parameters::calc_beta_TYu_two_loop(const So
 
    Eigen::Matrix<double,3,3> beta_TYu;
 
-   beta_TYu = twoLoop*(6.095555555555555*Power(g1,4)*TYu + 7.5*Power(g2,4
-      )*TYu - 1.7777777777777777*Power(g3,4)*TYu + 8*Power(gp,4)*Power(QHu,4)*
+   beta_TYu = (twoLoop*(6.095555555555555*Power(g1,4)*TYu + 7.5*Power(g2,
+      4)*TYu - 1.7777777777777777*Power(g3,4)*TYu + 8*Power(gp,4)*Power(QHu,4)*
       TYu + 40*Power(gp,4)*Power(Qq,4)*TYu + 22*Power(gp,4)*Power(Qu,4)*TYu - 3
       *traceYdAdjYuYuAdjYd*TYu - 9*traceYuAdjYuYuAdjYu*TYu - 3*traceYdAdjYd*
       AbsSqr(Lambdax)*TYu - traceYeAdjYe*AbsSqr(Lambdax)*TYu + 0.8*traceYuAdjYu
@@ -167,7 +167,7 @@ Eigen::Matrix<double,3,3> UMSSM_soft_parameters::calc_beta_TYu_two_loop(const So
       Yu.adjoint()*Yu) - 6*(Yu*Yu.adjoint()*Yu*Yu.adjoint()*TYu) - 8*(Yu*
       Yu.adjoint()*TYu*Yu.adjoint()*Yu) - 2*(TYu*Yd.adjoint()*Yd*Yd.adjoint()*
       Yd) - 4*(TYu*Yd.adjoint()*Yd*Yu.adjoint()*Yu) - 6*(TYu*Yu.adjoint()*Yu*
-      Yu.adjoint()*Yu));
+      Yu.adjoint()*Yu))).real();
 
 
    return beta_TYu;

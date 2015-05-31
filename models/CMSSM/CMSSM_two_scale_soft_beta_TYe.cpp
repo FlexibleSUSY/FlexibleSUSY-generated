@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:52:56
+// File generated at Sun 31 May 2015 12:56:29
 
 #include "CMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -41,10 +41,10 @@ Eigen::Matrix<double,3,3> CMSSM_soft_parameters::calc_beta_TYe_one_loop(const So
 
    Eigen::Matrix<double,3,3> beta_TYe;
 
-   beta_TYe = oneOver16PiSqr*(Ye*(6*traceAdjYdTYd + 2*traceAdjYeTYe + 3.6
-      *MassB*Sqr(g1) + 6*MassWB*Sqr(g2)) + 3*traceYdAdjYd*TYe + traceYeAdjYe*
-      TYe - 1.8*Sqr(g1)*TYe - 3*Sqr(g2)*TYe + 4*(Ye*Ye.adjoint()*TYe) + 5*(TYe*
-      Ye.adjoint()*Ye));
+   beta_TYe = (oneOver16PiSqr*(Ye*(6*traceAdjYdTYd + 2*traceAdjYeTYe +
+      3.6*MassB*Sqr(g1) + 6*MassWB*Sqr(g2)) + 3*traceYdAdjYd*TYe + traceYeAdjYe
+      *TYe - 1.8*Sqr(g1)*TYe - 3*Sqr(g2)*TYe + 4*(Ye*Ye.adjoint()*TYe) + 5*(TYe
+      *Ye.adjoint()*Ye))).real();
 
 
    return beta_TYe;
@@ -72,8 +72,8 @@ Eigen::Matrix<double,3,3> CMSSM_soft_parameters::calc_beta_TYe_two_loop(const So
 
    Eigen::Matrix<double,3,3> beta_TYe;
 
-   beta_TYe = 0.1*twoLoop*(-4*Ye*(135*Power(g1,4)*MassB + 75*Power(g2,4)*
-      MassWB + 90*traceYdAdjYdTYdAdjYd + 15*traceYdAdjYuTYuAdjYd + 30*
+   beta_TYe = (0.1*twoLoop*(-4*Ye*(135*Power(g1,4)*MassB + 75*Power(g2,4)
+      *MassWB + 90*traceYdAdjYdTYdAdjYd + 15*traceYdAdjYuTYuAdjYd + 30*
       traceYeAdjYeTYeAdjYe + 15*traceYuAdjYdTYdAdjYu + 2*traceAdjYdTYd*Sqr(g1)
       - 6*traceAdjYeTYe*Sqr(g1) + 6*MassB*traceYeAdjYe*Sqr(g1) + 9*MassB*Sqr(g1
       )*Sqr(g2) + 9*MassWB*Sqr(g1)*Sqr(g2) - 80*traceAdjYdTYd*Sqr(g3) +
@@ -88,7 +88,7 @@ Eigen::Matrix<double,3,3> CMSSM_soft_parameters::calc_beta_TYe_two_loop(const So
       Ye) - 50*traceYeAdjYe*(TYe*Ye.adjoint()*Ye) - 12*Sqr(g1)*(TYe*Ye.adjoint(
       )*Ye) + 120*Sqr(g2)*(TYe*Ye.adjoint()*Ye) - 60*(Ye*Ye.adjoint()*Ye*
       Ye.adjoint()*TYe) - 80*(Ye*Ye.adjoint()*TYe*Ye.adjoint()*Ye) - 60*(TYe*
-      Ye.adjoint()*Ye*Ye.adjoint()*Ye));
+      Ye.adjoint()*Ye*Ye.adjoint()*Ye))).real();
 
 
    return beta_TYe;

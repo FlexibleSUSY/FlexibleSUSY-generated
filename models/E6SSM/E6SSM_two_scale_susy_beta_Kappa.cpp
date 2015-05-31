@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:35:05
+// File generated at Sun 31 May 2015 12:30:13
 
 #include "E6SSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -40,10 +40,10 @@ Eigen::Matrix<double,3,3> E6SSM_susy_parameters::calc_beta_Kappa_one_loop(const 
 
    Eigen::Matrix<double,3,3> beta_Kappa;
 
-   beta_Kappa = oneOver16PiSqr*(Kappa*(3*traceKappaAdjKappa + 2*
+   beta_Kappa = (oneOver16PiSqr*(Kappa*(3*traceKappaAdjKappa + 2*
       traceLambda12AdjLambda12 + 2*AbsSqr(Lambdax) - 0.26666666666666666*Sqr(g1
       ) - 5.333333333333333*Sqr(g3) - 1.9*Sqr(gN)) + 2*(Kappa*(Kappa).adjoint()
-      *Kappa));
+      *Kappa))).real();
 
 
    return beta_Kappa;
@@ -70,7 +70,7 @@ Eigen::Matrix<double,3,3> E6SSM_susy_parameters::calc_beta_Kappa_two_loop(const 
 
    Eigen::Matrix<double,3,3> beta_Kappa;
 
-   beta_Kappa = twoLoop*(Kappa*(2.5955555555555554*Power(g1,4) +
+   beta_Kappa = (twoLoop*(Kappa*(2.5955555555555554*Power(g1,4) +
       14.222222222222221*Power(g3,4) + 19.665*Power(gN,4) - 6*
       traceKappaAdjKappaKappaAdjKappa - 4*
       traceLambda12AdjLambda12Lambda12AdjLambda12 + 1.2*
@@ -82,7 +82,7 @@ Eigen::Matrix<double,3,3> E6SSM_susy_parameters::calc_beta_Kappa_two_loop(const 
       3.466666666666667*Sqr(g3)*Sqr(gN) - 4*Sqr(Conj(Lambdax))*Sqr(Lambdax)) +
       (-6*traceKappaAdjKappa - 4*traceLambda12AdjLambda12 - 4*AbsSqr(Lambdax) +
       2.5*Sqr(gN))*(Kappa*(Kappa).adjoint()*Kappa) - 2*(Kappa*(Kappa).adjoint(
-      )*Kappa*(Kappa).adjoint()*Kappa));
+      )*Kappa*(Kappa).adjoint()*Kappa))).real();
 
 
    return beta_Kappa;

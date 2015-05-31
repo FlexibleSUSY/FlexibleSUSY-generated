@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:36:00
+// File generated at Sun 31 May 2015 12:31:18
 
 #include "UMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -40,12 +40,12 @@ Eigen::Matrix<double,3,3> UMSSM_soft_parameters::calc_beta_mu2_one_loop(const So
 
    Eigen::Matrix<double,3,3> beta_mu2;
 
-   beta_mu2 = oneOver16PiSqr*(4*mHu2*(Yu*Yu.adjoint()) + 4*(TYu*(TYu)
+   beta_mu2 = (oneOver16PiSqr*(4*mHu2*(Yu*Yu.adjoint()) + 4*(TYu*(TYu)
       .adjoint()) + 2*(mu2*Yu*Yu.adjoint()) + 4*(Yu*mq2*Yu.adjoint()) + 2*(Yu*
       Yu.adjoint()*mu2) - 1.0327955589886444*g1*Tr11*UNITMATRIX(3) + 2*gp*Qu*
       Tr14*UNITMATRIX(3) - 2.1333333333333333*AbsSqr(MassB)*Sqr(g1)*UNITMATRIX(
       3) - 10.666666666666666*AbsSqr(MassG)*Sqr(g3)*UNITMATRIX(3) - 8*AbsSqr(
-      MassU)*Sqr(gp)*Sqr(Qu)*UNITMATRIX(3));
+      MassU)*Sqr(gp)*Sqr(Qu)*UNITMATRIX(3))).real();
 
 
    return beta_mu2;
@@ -83,10 +83,10 @@ Eigen::Matrix<double,3,3> UMSSM_soft_parameters::calc_beta_mu2_two_loop(const So
 
    Eigen::Matrix<double,3,3> beta_mu2;
 
-   beta_mu2 = 0.008888888888888889*twoLoop*(2*Conj(MassB)*Sqr(g1)*(45*(-2
-      *MassB*(Yu*Yu.adjoint()) + TYu*Yu.adjoint()) + 4*(642*MassB*Sqr(g1) + 5*(
-      16*(2*MassB + MassG)*Sqr(g3) - 3*(2*MassB + MassU)*(9*Qd + 9*Qe - 3*QHd +
-      3*QHu - 9*Ql + 9*Qq - 22*Qu)*Qu*Sqr(gp)))*UNITMATRIX(3)) + 5*(32*Conj(
+   beta_mu2 = (0.008888888888888889*twoLoop*(2*Conj(MassB)*Sqr(g1)*(45*(
+      -2*MassB*(Yu*Yu.adjoint()) + TYu*Yu.adjoint()) + 4*(642*MassB*Sqr(g1) + 5
+      *(16*(2*MassB + MassG)*Sqr(g3) - 3*(2*MassB + MassU)*(9*Qd + 9*Qe - 3*QHd
+      + 3*QHu - 9*Ql + 9*Qq - 22*Qu)*Qu*Sqr(gp)))*UNITMATRIX(3)) + 5*(32*Conj(
       MassG)*Sqr(g3)*(4*(MassB + 2*MassG)*Sqr(g1) + 15*(-2*MassG*Sqr(g3) + (2*
       MassG + MassU)*Sqr(gp)*Sqr(Qu)))*UNITMATRIX(3) - 3*(3*(2*(15*
       traceconjTYuTpTYu + 15*tracemq2AdjYuYu + 15*tracemu2YuAdjYu + 30*mHu2*
@@ -133,7 +133,7 @@ Eigen::Matrix<double,3,3> UMSSM_soft_parameters::calc_beta_mu2_two_loop(const So
       Yu.adjoint()) + Qu*(-2*(MassB + 2*MassU)*(9*Qd + 9*Qe - 3*QHd + 3*QHu - 9
       *Ql + 9*Qq - 22*Qu)*Sqr(g1) + 5*Qu*(8*(MassG + 2*MassU)*Sqr(g3) + 9*MassU
       *Sqr(gp)*(9*Sqr(Qd) + 3*Sqr(Qe) + 2*Sqr(QHd) + 2*Sqr(QHu) + 6*Sqr(Ql) +
-      18*Sqr(Qq) + Sqr(Qs) + 11*Sqr(Qu))))*UNITMATRIX(3)))));
+      18*Sqr(Qq) + Sqr(Qs) + 11*Sqr(Qu))))*UNITMATRIX(3)))))).real();
 
 
    return beta_mu2;

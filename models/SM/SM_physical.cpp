@@ -16,11 +16,14 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:29:31
+// File generated at Sun 31 May 2015 12:22:54
 
 #include "SM_physical.hpp"
+#include "slha_io.hpp"
 
 #include <iostream>
+
+#define LOCALPHYSICAL(p) p
 
 namespace flexiblesusy {
 
@@ -58,6 +61,26 @@ void SM_physical::clear()
    Ve = Eigen::Matrix<std::complex<double>,3,3>::Zero();
    Ue = Eigen::Matrix<std::complex<double>,3,3>::Zero();
    MVWp = 0.;
+
+}
+
+/**
+ * Convert masses and mixing matrices to Haber-Kane convention:
+ * Fermion masses are always positive and mixing matrices are allowed
+ * to be complex.
+ */
+void SM_physical::convert_to_hk()
+{
+
+}
+
+/**
+ * Convert masses and mixing matrices to SLHA convention: Fermion
+ * mixing matrices are always real and fermion masses are allowed to
+ * be negative.
+ */
+void SM_physical::convert_to_slha()
+{
 
 }
 

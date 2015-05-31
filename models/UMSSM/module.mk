@@ -18,7 +18,8 @@ UMSSM_TWO_SCALE_MK := \
 		$(UMSSM_TWO_SCALE_SOFT_MK)
 
 UMSSM_SLHA_INPUT := \
-		$(DIR)/LesHouches.in.UMSSM
+		$(DIR)/LesHouches.in.UMSSM \
+		$(DIR)/LesHouches.in.UMSSM~
 
 UMSSM_GNUPLOT := \
 		$(DIR)/UMSSM_plot_rgflow.gnuplot \
@@ -34,6 +35,7 @@ LIBUMSSM_HDR :=
 
 ifneq ($(findstring two_scale,$(ALGORITHMS)),)
 LIBUMSSM_SRC += \
+		$(DIR)/UMSSM_mass_eigenstates.cpp \
 		$(DIR)/UMSSM_info.cpp \
 		$(DIR)/UMSSM_input_parameters.cpp \
 		$(DIR)/UMSSM_slha_io.cpp \
@@ -55,6 +57,7 @@ EXEUMSSM_SRC += \
 LIBUMSSM_HDR += \
 		$(DIR)/UMSSM_convergence_tester.hpp \
 		$(DIR)/UMSSM_high_scale_constraint.hpp \
+		$(DIR)/UMSSM_mass_eigenstates.hpp \
 		$(DIR)/UMSSM_info.hpp \
 		$(DIR)/UMSSM_initial_guesser.hpp \
 		$(DIR)/UMSSM_input_parameters.hpp \

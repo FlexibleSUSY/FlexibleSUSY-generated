@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:35:08
+// File generated at Sun 31 May 2015 12:30:17
 
 #include "E6SSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -40,8 +40,8 @@ double E6SSM_susy_parameters::calc_beta_vs_one_loop(const Susy_traces& susy_trac
 
    double beta_vs;
 
-   beta_vs = 0.25*oneOver16PiSqr*vs*(-12*traceKappaAdjKappa - 8*
-      traceLambda12AdjLambda12 - 8*AbsSqr(Lambdax) + 5*Sqr(gN));
+   beta_vs = Re(0.25*oneOver16PiSqr*vs*(-12*traceKappaAdjKappa - 8*
+      traceLambda12AdjLambda12 - 8*AbsSqr(Lambdax) + 5*Sqr(gN)));
 
 
    return beta_vs;
@@ -68,14 +68,14 @@ double E6SSM_susy_parameters::calc_beta_vs_two_loop(const Susy_traces& susy_trac
 
    double beta_vs;
 
-   beta_vs = -0.00625*twoLoop*vs*(1065*Power(gN,4) - 960*
+   beta_vs = Re(-0.00625*twoLoop*vs*(1065*Power(gN,4) - 960*
       traceKappaAdjKappaKappaAdjKappa - 640*
       traceLambda12AdjLambda12Lambda12AdjLambda12 + 192*
       traceLambda12AdjLambda12*Sqr(g1) + 960*traceLambda12AdjLambda12*Sqr(g2) +
       208*traceLambda12AdjLambda12*Sqr(gN) + 16*AbsSqr(Lambdax)*(-60*
       traceYdAdjYd - 20*traceYeAdjYe - 60*traceYuAdjYu + 12*Sqr(g1) + 60*Sqr(g2
       ) + 13*Sqr(gN)) + 8*traceKappaAdjKappa*(16*Sqr(g1) + 320*Sqr(g3) + 39*Sqr
-      (gN)) - 640*Sqr(Conj(Lambdax))*Sqr(Lambdax));
+      (gN)) - 640*Sqr(Conj(Lambdax))*Sqr(Lambdax)));
 
 
    return beta_vs;

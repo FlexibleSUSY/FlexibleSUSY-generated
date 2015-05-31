@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:35:12
+// File generated at Sun 31 May 2015 12:30:41
 
 #include "UMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -42,10 +42,10 @@ Eigen::Matrix<double,3,3> UMSSM_susy_parameters::calc_beta_Yd_one_loop(const Sus
 
    Eigen::Matrix<double,3,3> beta_Yd;
 
-   beta_Yd = oneOver16PiSqr*(Yd*(3*traceYdAdjYd + traceYeAdjYe + AbsSqr(
+   beta_Yd = (oneOver16PiSqr*(Yd*(3*traceYdAdjYd + traceYeAdjYe + AbsSqr(
       Lambdax) - 0.4666666666666667*Sqr(g1) - 3*Sqr(g2) - 5.333333333333333*Sqr
       (g3) - 2*Sqr(gp)*Sqr(Qd) - 2*Sqr(gp)*Sqr(QHd) - 2*Sqr(gp)*Sqr(Qq)) + 3*(
-      Yd*Yd.adjoint()*Yd) + Yd*Yu.adjoint()*Yu);
+      Yd*Yd.adjoint()*Yd) + Yd*Yu.adjoint()*Yu)).real();
 
 
    return beta_Yd;
@@ -76,11 +76,11 @@ Eigen::Matrix<double,3,3> UMSSM_susy_parameters::calc_beta_Yd_two_loop(const Sus
 
    Eigen::Matrix<double,3,3> beta_Yd;
 
-   beta_Yd = twoLoop*(Yd*(3.188888888888889*Power(g1,4) + 7.5*Power(g2,4)
-      - 1.7777777777777777*Power(g3,4) + 22*Power(gp,4)*Power(Qd,4) + 8*Power(
-      gp,4)*Power(QHd,4) + 40*Power(gp,4)*Power(Qq,4) - 9*traceYdAdjYdYdAdjYd -
-      3*traceYdAdjYuYuAdjYd - 3*traceYeAdjYeYeAdjYe + 1.2*traceYeAdjYe*Sqr(g1)
-      + Sqr(g1)*Sqr(g2) + 0.8888888888888888*Sqr(g1)*Sqr(g3) + 8*Sqr(g2)*Sqr(
+   beta_Yd = (twoLoop*(Yd*(3.188888888888889*Power(g1,4) + 7.5*Power(g2,4
+      ) - 1.7777777777777777*Power(g3,4) + 22*Power(gp,4)*Power(Qd,4) + 8*Power
+      (gp,4)*Power(QHd,4) + 40*Power(gp,4)*Power(Qq,4) - 9*traceYdAdjYdYdAdjYd
+      - 3*traceYdAdjYuYuAdjYd - 3*traceYeAdjYeYeAdjYe + 1.2*traceYeAdjYe*Sqr(g1
+      ) + Sqr(g1)*Sqr(g2) + 0.8888888888888888*Sqr(g1)*Sqr(g3) + 8*Sqr(g2)*Sqr(
       g3) + 2.4*Qd*Qe*Sqr(g1)*Sqr(gp) - 4.4*Qd*QHd*Sqr(g1)*Sqr(gp) - 3.6*Qe*QHd
       *Sqr(g1)*Sqr(gp) + 0.8*Qd*QHu*Sqr(g1)*Sqr(gp) - 1.2*QHd*QHu*Sqr(g1)*Sqr(
       gp) - 2.4*Qd*Ql*Sqr(g1)*Sqr(gp) + 3.6*QHd*Ql*Sqr(g1)*Sqr(gp) + 3.6*Qd*Qq*
@@ -110,7 +110,7 @@ Eigen::Matrix<double,3,3> UMSSM_susy_parameters::calc_beta_Yd_two_loop(const Sus
       2*Sqr(gp)*Sqr(QHu)*(Yd*Yu.adjoint()*Yu) - 2*Sqr(gp)*Sqr(Qq)*(Yd*
       Yu.adjoint()*Yu) + 2*Sqr(gp)*Sqr(Qu)*(Yd*Yu.adjoint()*Yu) - 4*(Yd*
       Yd.adjoint()*Yd*Yd.adjoint()*Yd) - 2*(Yd*Yu.adjoint()*Yu*Yd.adjoint()*Yd)
-      - 2*(Yd*Yu.adjoint()*Yu*Yu.adjoint()*Yu));
+      - 2*(Yd*Yu.adjoint()*Yu*Yu.adjoint()*Yu))).real();
 
 
    return beta_Yd;

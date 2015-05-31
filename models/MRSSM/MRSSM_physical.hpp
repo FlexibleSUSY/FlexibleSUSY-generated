@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:34:04
+// File generated at Sun 31 May 2015 12:28:19
 
 #ifndef MRSSM_PHYSICAL_H
 #define MRSSM_PHYSICAL_H
@@ -32,12 +32,15 @@ namespace flexiblesusy {
 struct MRSSM_physical {
    MRSSM_physical();
    void clear();
+   void convert_to_hk();   ///< converts pole masses to HK convention
+   void convert_to_slha(); ///< converts pole masses to SLHA convention
    void print(std::ostream&) const;
 
    double MVG;
    double MGlu;
    Eigen::Array<double,3,1> MFv;
-   double MSOc;
+   double MsigmaO;
+   double MphiO;
    double MVP;
    double MVZ;
    Eigen::Array<double,6,1> MSd;

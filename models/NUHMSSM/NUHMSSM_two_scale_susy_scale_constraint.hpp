@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:47:06
+// File generated at Sun 31 May 2015 12:48:52
 
 #ifndef NUHMSSM_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
 #define NUHMSSM_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
@@ -36,7 +36,7 @@ template<>
 class NUHMSSM_susy_scale_constraint<Two_scale> : public Constraint<Two_scale> {
 public:
    NUHMSSM_susy_scale_constraint();
-   NUHMSSM_susy_scale_constraint(NUHMSSM<Two_scale>*, const NUHMSSM_input_parameters&);
+   NUHMSSM_susy_scale_constraint(NUHMSSM<Two_scale>*);
    virtual ~NUHMSSM_susy_scale_constraint();
    virtual void apply();
    virtual double get_scale() const;
@@ -47,7 +47,6 @@ public:
    const NUHMSSM_input_parameters& get_input_parameters() const;
    NUHMSSM<Two_scale>* get_model() const;
    void initialize();
-   void set_input_parameters(const NUHMSSM_input_parameters&);
 
 protected:
    void update_scale();
@@ -56,7 +55,6 @@ private:
    double scale;
    double initial_scale_guess;
    NUHMSSM<Two_scale>* model;
-   NUHMSSM_input_parameters inputPars;
 };
 
 } // namespace flexiblesusy

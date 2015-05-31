@@ -16,10 +16,11 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:30:07
+// File generated at Sun 31 May 2015 12:23:34
 
 #include "TMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
+#include "functors.hpp"
 
 #include <iostream>
 
@@ -62,7 +63,7 @@ TMSSM_susy_parameters::TMSSM_susy_parameters(
 
 Eigen::ArrayXd TMSSM_susy_parameters::beta() const
 {
-   return calc_beta().get();
+   return calc_beta().get().unaryExpr(Chop<double>(get_zero_threshold()));
 }
 
 TMSSM_susy_parameters TMSSM_susy_parameters::calc_beta() const
@@ -126,18 +127,20 @@ Eigen::Matrix<double,3,3> CLASSNAME::get_SqSq() const
 {
    Eigen::Matrix<double,3,3> anomDim;
 
-   anomDim = oneOver16PiSqr*(Yd.adjoint()*Yd + Yu.adjoint()*Yu -
-      0.03333333333333333*(Sqr(g1) + 45*Sqr(g2) + 80*Sqr(g3))*UNITMATRIX(3));
+   anomDim = (oneOver16PiSqr*(Yd.adjoint()*Yd + Yu.adjoint()*Yu -
+      0.03333333333333333*(Sqr(g1) + 45*Sqr(g2) + 80*Sqr(g3))*UNITMATRIX(3)))
+      .real();
 
    if (get_loops() > 1) {
-      anomDim += twoLoop*(-1.5*AbsSqr(Lambdax)*(Yu.adjoint()*Yu) + 0.8
-         *Sqr(g1)*(Yu.adjoint()*Yu) - 2*(Yd.adjoint()*Yd*Yd.adjoint()*Yd) - 2*(
-         Yu.adjoint()*Yu*Yu.adjoint()*Yu) + Yd.adjoint()*Yd*(-1.5*AbsSqr(
+      anomDim += (twoLoop*(-1.5*AbsSqr(Lambdax)*(Yu.adjoint()*Yu) +
+         0.8*Sqr(g1)*(Yu.adjoint()*Yu) - 2*(Yd.adjoint()*Yd*Yd.adjoint()*Yd) -
+         2*(Yu.adjoint()*Yu*Yu.adjoint()*Yu) + Yd.adjoint()*Yd*(-1.5*AbsSqr(
          Lambdax) + 0.4*Sqr(g1) - 3*(Yd*Yd.adjoint()).trace() - (Ye*Ye.adjoint(
          )).trace()) - 3*(Yu.adjoint()*Yu)*(Yu*Yu.adjoint()).trace() + (
          0.22111111111111112*Power(g1,4) + 6.75*Power(g2,4) -
          0.8888888888888888*Power(g3,4) + 8*Sqr(g2)*Sqr(g3) +
-         0.011111111111111112*Sqr(g1)*(9*Sqr(g2) + 16*Sqr(g3)))*UNITMATRIX(3));
+         0.011111111111111112*Sqr(g1)*(9*Sqr(g2) + 16*Sqr(g3)))*UNITMATRIX(3)))
+         .real();
    }
 
    return anomDim;
@@ -147,14 +150,14 @@ Eigen::Matrix<double,3,3> CLASSNAME::get_SlSl() const
 {
    Eigen::Matrix<double,3,3> anomDim;
 
-   anomDim = oneOver16PiSqr*(Ye.adjoint()*Ye - 0.3*(Sqr(g1) + 5*Sqr(g2))*
-      UNITMATRIX(3));
+   anomDim = (oneOver16PiSqr*(Ye.adjoint()*Ye - 0.3*(Sqr(g1) + 5*Sqr(g2))
+      *UNITMATRIX(3))).real();
 
    if (get_loops() > 1) {
-      anomDim += twoLoop*(-2*(Ye.adjoint()*Ye*Ye.adjoint()*Ye) +
+      anomDim += (twoLoop*(-2*(Ye.adjoint()*Ye*Ye.adjoint()*Ye) +
          Ye.adjoint()*Ye*(-1.5*AbsSqr(Lambdax) + 1.2*Sqr(g1) - 3*(Yd*Yd.adjoint
          ()).trace() - (Ye*Ye.adjoint()).trace()) + 0.09*(23*Power(g1,4) + 75*
-         Power(g2,4) + 10*Sqr(g1)*Sqr(g2))*UNITMATRIX(3));
+         Power(g2,4) + 10*Sqr(g1)*Sqr(g2))*UNITMATRIX(3))).real();
    }
 
    return anomDim;
@@ -164,17 +167,17 @@ double CLASSNAME::get_SHdSHd() const
 {
    double anomDim = 0;
 
-   anomDim = oneOver16PiSqr*(1.5*AbsSqr(Lambdax) - 0.3*Sqr(g1) - 1.5*Sqr(
-      g2) + 3*(Yd*Yd.adjoint()).trace() + (Ye*Ye.adjoint()).trace());
+   anomDim = Re(oneOver16PiSqr*(1.5*AbsSqr(Lambdax) - 0.3*Sqr(g1) - 1.5*
+      Sqr(g2) + 3*(Yd*Yd.adjoint()).trace() + (Ye*Ye.adjoint()).trace()));
 
    if (get_loops() > 1) {
-      anomDim += twoLoop*(2.07*Power(g1,4) + 6.75*Power(g2,4) + 0.9*
-         Sqr(g1)*Sqr(g2) - 3.75*Sqr(Conj(Lambdax))*Sqr(Lambdax) - 0.4*(Sqr(g1)
-         - 40*Sqr(g3))*(Yd*Yd.adjoint()).trace() + 1.2*Sqr(g1)*(Ye*Ye.adjoint()
-         ).trace() + Conj(Lambdax)*(6*Lambdax*Sqr(g2) - 4.5*Lambdax*(Yu*
+      anomDim += Re(twoLoop*(2.07*Power(g1,4) + 6.75*Power(g2,4) + 0.9
+         *Sqr(g1)*Sqr(g2) - 3.75*Sqr(Conj(Lambdax))*Sqr(Lambdax) - 0.4*(Sqr(g1)
+         - 40*Sqr(g3))*(Yd*Yd.adjoint()).trace() + 1.2*Sqr(g1)*(Ye*Ye.adjoint(
+         )).trace() + Conj(Lambdax)*(6*Lambdax*Sqr(g2) - 4.5*Lambdax*(Yu*
          Yu.adjoint()).trace()) - 9*(Yd*Yd.adjoint()*Yd*Yd.adjoint()).trace() -
          3*(Yd*Yu.adjoint()*Yu*Yd.adjoint()).trace() - 3*(Ye*Ye.adjoint()*Ye*
-         Ye.adjoint()).trace());
+         Ye.adjoint()).trace()));
    }
 
    return anomDim;
@@ -184,16 +187,16 @@ double CLASSNAME::get_SHuSHu() const
 {
    double anomDim = 0;
 
-   anomDim = -0.3*oneOver16PiSqr*(-5*AbsSqr(Lambdax) + Sqr(g1) + 5*Sqr(g2
-      ) - 10*(Yu*Yu.adjoint()).trace());
+   anomDim = Re(-0.3*oneOver16PiSqr*(-5*AbsSqr(Lambdax) + Sqr(g1) + 5*Sqr
+      (g2) - 10*(Yu*Yu.adjoint()).trace()));
 
    if (get_loops() > 1) {
-      anomDim += twoLoop*(2.07*Power(g1,4) + 6.75*Power(g2,4) + 0.9*
-         Sqr(g1)*Sqr(g2) - 3.75*Sqr(Conj(Lambdax))*Sqr(Lambdax) + 1.5*AbsSqr(
+      anomDim += Re(twoLoop*(2.07*Power(g1,4) + 6.75*Power(g2,4) + 0.9
+         *Sqr(g1)*Sqr(g2) - 3.75*Sqr(Conj(Lambdax))*Sqr(Lambdax) + 1.5*AbsSqr(
          Lambdax)*(4*Sqr(g2) - 3*(Yd*Yd.adjoint()).trace() - (Ye*Ye.adjoint())
          .trace()) + 0.8*(Sqr(g1) + 20*Sqr(g3))*(Yu*Yu.adjoint()).trace() - 3*(
          Yd*Yu.adjoint()*Yu*Yd.adjoint()).trace() - 9*(Yu*Yu.adjoint()*Yu*
-         Yu.adjoint()).trace());
+         Yu.adjoint()).trace()));
    }
 
    return anomDim;
@@ -203,16 +206,16 @@ Eigen::Matrix<double,3,3> CLASSNAME::get_SdRSdR() const
 {
    Eigen::Matrix<double,3,3> anomDim;
 
-   anomDim = oneOver16PiSqr*(2*(Yd.conjugate()*Yd.transpose()) -
-      0.13333333333333333*(Sqr(g1) + 20*Sqr(g3))*UNITMATRIX(3));
+   anomDim = (oneOver16PiSqr*(2*(Yd.conjugate()*Yd.transpose()) -
+      0.13333333333333333*(Sqr(g1) + 20*Sqr(g3))*UNITMATRIX(3))).real();
 
    if (get_loops() > 1) {
-      anomDim += twoLoop*(-2*(Yd.conjugate()*Yd.transpose()*
+      anomDim += (twoLoop*(-2*(Yd.conjugate()*Yd.transpose()*
          Yd.conjugate()*Yd.transpose() + Yd.conjugate()*Yu.transpose()*
          Yu.conjugate()*Yd.transpose()) + Yd.conjugate()*Yd.transpose()*(-3*
          AbsSqr(Lambdax) + 0.4*Sqr(g1) + 6*Sqr(g2) - 6*(Yd*Yd.adjoint()).trace(
          ) - 2*(Ye*Ye.adjoint()).trace()) + 0.008888888888888889*(101*Power(g1,
-         4) - 100*Power(g3,4) + 80*Sqr(g1)*Sqr(g3))*UNITMATRIX(3));
+         4) - 100*Power(g3,4) + 80*Sqr(g1)*Sqr(g3))*UNITMATRIX(3))).real();
    }
 
    return anomDim;
@@ -222,16 +225,16 @@ Eigen::Matrix<double,3,3> CLASSNAME::get_SuRSuR() const
 {
    Eigen::Matrix<double,3,3> anomDim;
 
-   anomDim = oneOver16PiSqr*(2*(Yu.conjugate()*Yu.transpose()) -
-      0.5333333333333333*(Sqr(g1) + 5*Sqr(g3))*UNITMATRIX(3));
+   anomDim = (oneOver16PiSqr*(2*(Yu.conjugate()*Yu.transpose()) -
+      0.5333333333333333*(Sqr(g1) + 5*Sqr(g3))*UNITMATRIX(3))).real();
 
    if (get_loops() > 1) {
-      anomDim += twoLoop*(-2*(Yu.conjugate()*Yd.transpose()*
+      anomDim += (twoLoop*(-2*(Yu.conjugate()*Yd.transpose()*
          Yd.conjugate()*Yu.transpose() + Yu.conjugate()*Yu.transpose()*
          Yu.conjugate()*Yu.transpose()) + Yu.conjugate()*Yu.transpose()*(-3*
          AbsSqr(Lambdax) - 0.4*Sqr(g1) + 6*Sqr(g2) - 6*(Yu*Yu.adjoint()).trace(
          )) + 0.035555555555555556*(107*Power(g1,4) - 25*Power(g3,4) + 80*Sqr(
-         g1)*Sqr(g3))*UNITMATRIX(3));
+         g1)*Sqr(g3))*UNITMATRIX(3))).real();
    }
 
    return anomDim;
@@ -241,14 +244,15 @@ Eigen::Matrix<double,3,3> CLASSNAME::get_SeRSeR() const
 {
    Eigen::Matrix<double,3,3> anomDim;
 
-   anomDim = oneOver16PiSqr*(2*(Ye.conjugate()*Ye.transpose()) - 1.2*Sqr(
-      g1)*UNITMATRIX(3));
+   anomDim = (oneOver16PiSqr*(2*(Ye.conjugate()*Ye.transpose()) - 1.2*Sqr
+      (g1)*UNITMATRIX(3))).real();
 
    if (get_loops() > 1) {
-      anomDim += twoLoop*(-2*(Ye.conjugate()*Ye.transpose()*
+      anomDim += (twoLoop*(-2*(Ye.conjugate()*Ye.transpose()*
          Ye.conjugate()*Ye.transpose()) + Ye.conjugate()*Ye.transpose()*(-3*
          AbsSqr(Lambdax) - 1.2*Sqr(g1) + 6*Sqr(g2) - 6*(Yd*Yd.adjoint()).trace(
-         ) - 2*(Ye*Ye.adjoint()).trace()) + 9.36*Power(g1,4)*UNITMATRIX(3));
+         ) - 2*(Ye*Ye.adjoint()).trace()) + 9.36*Power(g1,4)*UNITMATRIX(3)))
+         .real();
    }
 
    return anomDim;
@@ -258,13 +262,13 @@ double CLASSNAME::get_STST() const
 {
    double anomDim = 0;
 
-   anomDim = oneOver16PiSqr*(AbsSqr(Lambdax) - 4*Sqr(g2));
+   anomDim = Re(oneOver16PiSqr*(AbsSqr(Lambdax) - 4*Sqr(g2)));
 
    if (get_loops() > 1) {
-      anomDim += twoLoop*(28*Power(g2,4) - 3*Sqr(Conj(Lambdax))*Sqr(
-         Lambdax) + 0.2*AbsSqr(Lambdax)*(3*Sqr(g1) - 5*Sqr(g2) - 15*(Yd*
+      anomDim += Re(twoLoop*(28*Power(g2,4) - 3*Sqr(Conj(Lambdax))*Sqr
+         (Lambdax) + 0.2*AbsSqr(Lambdax)*(3*Sqr(g1) - 5*Sqr(g2) - 15*(Yd*
          Yd.adjoint()).trace() - 5*(Ye*Ye.adjoint()).trace() - 15*(Yu*
-         Yu.adjoint()).trace()));
+         Yu.adjoint()).trace())));
    }
 
    return anomDim;
@@ -380,6 +384,11 @@ const TMSSM_input_parameters& TMSSM_susy_parameters::get_input() const
    return input;
 }
 
+TMSSM_input_parameters& TMSSM_susy_parameters::get_input()
+{
+   return input;
+}
+
 void TMSSM_susy_parameters::set_input_parameters(const TMSSM_input_parameters& input_)
 {
    input = input_;
@@ -387,17 +396,17 @@ void TMSSM_susy_parameters::set_input_parameters(const TMSSM_input_parameters& i
 
 void TMSSM_susy_parameters::calc_susy_traces(Susy_traces& susy_traces) const
 {
-   TRACE_STRUCT.traceYdAdjYd = (Yd*Yd.adjoint()).trace();
-   TRACE_STRUCT.traceYeAdjYe = (Ye*Ye.adjoint()).trace();
-   TRACE_STRUCT.traceYuAdjYu = (Yu*Yu.adjoint()).trace();
-   TRACE_STRUCT.traceYdAdjYdYdAdjYd = (Yd*Yd.adjoint()*Yd*Yd.adjoint()).trace()
-      ;
-   TRACE_STRUCT.traceYdAdjYuYuAdjYd = (Yd*Yu.adjoint()*Yu*Yd.adjoint()).trace()
-      ;
-   TRACE_STRUCT.traceYeAdjYeYeAdjYe = (Ye*Ye.adjoint()*Ye*Ye.adjoint()).trace()
-      ;
-   TRACE_STRUCT.traceYuAdjYuYuAdjYu = (Yu*Yu.adjoint()*Yu*Yu.adjoint()).trace()
-      ;
+   TRACE_STRUCT.traceYdAdjYd = Re((Yd*Yd.adjoint()).trace());
+   TRACE_STRUCT.traceYeAdjYe = Re((Ye*Ye.adjoint()).trace());
+   TRACE_STRUCT.traceYuAdjYu = Re((Yu*Yu.adjoint()).trace());
+   TRACE_STRUCT.traceYdAdjYdYdAdjYd = Re((Yd*Yd.adjoint()*Yd*Yd.adjoint())
+      .trace());
+   TRACE_STRUCT.traceYdAdjYuYuAdjYd = Re((Yd*Yu.adjoint()*Yu*Yd.adjoint())
+      .trace());
+   TRACE_STRUCT.traceYeAdjYeYeAdjYe = Re((Ye*Ye.adjoint()*Ye*Ye.adjoint())
+      .trace());
+   TRACE_STRUCT.traceYuAdjYuYuAdjYu = Re((Yu*Yu.adjoint()*Yu*Yu.adjoint())
+      .trace());
 
 }
 

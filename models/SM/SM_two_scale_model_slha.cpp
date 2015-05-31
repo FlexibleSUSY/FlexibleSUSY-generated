@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:29:31
+// File generated at Sun 31 May 2015 12:22:45
 
 /**
  * @file SM_two_scale_model_slha.cpp
@@ -24,15 +24,20 @@
  */
 
 #include "SM_two_scale_model_slha.hpp"
-#include "SM_slha_io.hpp"
+#include "slha_io.hpp"
+#include "ckm.hpp"
+#include "pmns.hpp"
 
 namespace flexiblesusy {
 
 #define CLASSNAME SM_slha<Two_scale>
+#define LOCALPHYSICAL(p) physical.p
 
 CLASSNAME::SM_slha(const SM_input_parameters& input_)
    : SM<Two_scale>(input_)
    , physical_slha()
+   , ckm(Eigen::Matrix<std::complex<double>,3,3>::Identity())
+   , pmns(Eigen::Matrix<std::complex<double>,3,3>::Identity())
 {
 }
 
@@ -67,7 +72,53 @@ void CLASSNAME::calculate_spectrum()
 void CLASSNAME::convert_to_slha()
 {
    physical_slha = get_physical();
-   SM_slha_io::convert_to_slha_convention(physical_slha);
+   physical_slha.convert_to_slha();
+
+   convert_yukawa_couplings_to_slha();
+   calculate_ckm_matrix();
+   calculate_pmns_matrix();
+   convert_trilinear_couplings_to_slha();
+   convert_soft_squared_masses_to_slha();
+}
+
+void CLASSNAME::calculate_ckm_matrix()
+{
+   ckm = Vu_slha * Vd_slha.adjoint();
+   CKM_parameters::to_pdg_convention(ckm, Vu_slha, Vd_slha, Uu_slha, Ud_slha);
+
+}
+
+void CLASSNAME::calculate_pmns_matrix()
+{
+   pmns << 1, 0, 0, 0, 1, 0, 0, 0, 1;
+
+}
+
+/**
+ * Convert Yukawa couplings to SLHA convention
+ */
+void CLASSNAME::convert_yukawa_couplings_to_slha()
+{
+   fs_svd(Yu, Yu_slha, Uu_slha, Vu_slha);
+   fs_svd(Yd, Yd_slha, Ud_slha, Vd_slha);
+   fs_svd(Ye, Ye_slha, Ue_slha, Ve_slha);
+
+}
+
+/**
+ * Convert trilinear couplings to SLHA convention
+ */
+void CLASSNAME::convert_trilinear_couplings_to_slha()
+{
+
+}
+
+/**
+ * Convert trilinear couplings to SLHA convention
+ */
+void CLASSNAME::convert_soft_squared_masses_to_slha()
+{
+
 }
 
 const SM_physical& CLASSNAME::get_physical_slha() const

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:35:53
+// File generated at Sun 31 May 2015 12:31:08
 
 #include "UMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -48,13 +48,13 @@ double UMSSM_soft_parameters::calc_beta_mHd2_one_loop(const Soft_traces& soft_tr
 
    double beta_mHd2;
 
-   beta_mHd2 = oneOver16PiSqr*(-0.7745966692414834*g1*Tr11 + 2*gp*QHd*
+   beta_mHd2 = Re(oneOver16PiSqr*(-0.7745966692414834*g1*Tr11 + 2*gp*QHd*
       Tr14 + 6*traceconjTYdTpTYd + 2*traceconjTYeTpTYe + 6*tracemd2YdAdjYd + 2*
       traceme2YeAdjYe + 2*traceml2AdjYeYe + 6*tracemq2AdjYdYd + 6*mHd2*
       traceYdAdjYd + 2*mHd2*traceYeAdjYe + 2*mHd2*AbsSqr(Lambdax) + 2*mHu2*
       AbsSqr(Lambdax) + 2*ms2*AbsSqr(Lambdax) + 2*AbsSqr(TLambdax) - 1.2*AbsSqr
       (MassB)*Sqr(g1) - 6*AbsSqr(MassWB)*Sqr(g2) - 8*AbsSqr(MassU)*Sqr(gp)*Sqr(
-      QHd));
+      QHd)));
 
 
    return beta_mHd2;
@@ -139,9 +139,9 @@ double UMSSM_soft_parameters::calc_beta_mHd2_two_loop(const Soft_traces& soft_tr
 
    double beta_mHd2;
 
-   beta_mHd2 = twoLoop*(6*Power(g2,4)*Tr22 - 3.0983866769659336*g1*gp*QHd
-      *Tr2U114 - 3.0983866769659336*g1*gp*QHd*Tr2U141 - 3.0983866769659336*g1*
-      Tr31 + 8*gp*QHd*Tr34 - 36*tracemd2YdAdjYdYdAdjYd - 6*
+   beta_mHd2 = Re(twoLoop*(6*Power(g2,4)*Tr22 - 3.0983866769659336*g1*gp*
+      QHd*Tr2U114 - 3.0983866769659336*g1*gp*QHd*Tr2U141 - 3.0983866769659336*
+      g1*Tr31 + 8*gp*QHd*Tr34 - 36*tracemd2YdAdjYdYdAdjYd - 6*
       tracemd2YdAdjYuYuAdjYd - 12*traceme2YeAdjYeYeAdjYe - 12*
       traceml2AdjYeYeAdjYeYe - 36*tracemq2AdjYdYdAdjYdYd - 6*
       tracemq2AdjYdYdAdjYuYu - 6*tracemq2AdjYuYuAdjYdYd - 6*
@@ -219,7 +219,7 @@ double UMSSM_soft_parameters::calc_beta_mHd2_two_loop(const Soft_traces& soft_tr
       traceYdAdjYd*(Sqr(Qd) - Sqr(QHd) + Sqr(Qq)) + 30*MassU*Sqr(gp)*Sqr(QHd)*
       Sqr(Qs) + 270*MassU*Sqr(gp)*Sqr(QHd)*Sqr(Qu) - 5*Conj(Lambdax)*(Sqr(QHd)
       - Sqr(QHu) - Sqr(Qs))*(2*MassU*Lambdax - TLambdax)) - 6*traceconjTYuTpYu*
-      Conj(Lambdax)*TLambdax);
+      Conj(Lambdax)*TLambdax));
 
 
    return beta_mHd2;

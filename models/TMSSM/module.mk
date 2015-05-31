@@ -18,7 +18,8 @@ TMSSM_TWO_SCALE_MK := \
 		$(TMSSM_TWO_SCALE_SOFT_MK)
 
 TMSSM_SLHA_INPUT := \
-		$(DIR)/LesHouches.in.TMSSM
+		$(DIR)/LesHouches.in.TMSSM \
+		$(DIR)/LesHouches.in.TMSSM~
 
 TMSSM_GNUPLOT := \
 		$(DIR)/TMSSM_plot_rgflow.gnuplot \
@@ -34,6 +35,7 @@ LIBTMSSM_HDR :=
 
 ifneq ($(findstring two_scale,$(ALGORITHMS)),)
 LIBTMSSM_SRC += \
+		$(DIR)/TMSSM_mass_eigenstates.cpp \
 		$(DIR)/TMSSM_info.cpp \
 		$(DIR)/TMSSM_input_parameters.cpp \
 		$(DIR)/TMSSM_slha_io.cpp \
@@ -55,6 +57,7 @@ EXETMSSM_SRC += \
 LIBTMSSM_HDR += \
 		$(DIR)/TMSSM_convergence_tester.hpp \
 		$(DIR)/TMSSM_high_scale_constraint.hpp \
+		$(DIR)/TMSSM_mass_eigenstates.hpp \
 		$(DIR)/TMSSM_info.hpp \
 		$(DIR)/TMSSM_initial_guesser.hpp \
 		$(DIR)/TMSSM_input_parameters.hpp \

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:51:08
+// File generated at Sun 31 May 2015 12:54:55
 
 #include "MSSMatMGUT_input_parameters.hpp"
 
@@ -30,6 +30,9 @@ std::ostream& operator<<(std::ostream& ostr, const MSSMatMGUT_input_parameters& 
    ostr << "SignMu = " << INPUT(SignMu) << ", ";
    ostr << "mHd2IN = " << INPUT(mHd2IN) << ", ";
    ostr << "mHu2IN = " << INPUT(mHu2IN) << ", ";
+   ostr << "Aeij = " << INPUT(Aeij) << ", ";
+   ostr << "Adij = " << INPUT(Adij) << ", ";
+   ostr << "Auij = " << INPUT(Auij) << ", ";
    ostr << "mq2Input = " << INPUT(mq2Input) << ", ";
    ostr << "ml2Input = " << INPUT(ml2Input) << ", ";
    ostr << "md2Input = " << INPUT(md2Input) << ", ";
@@ -38,9 +41,6 @@ std::ostream& operator<<(std::ostream& ostr, const MSSMatMGUT_input_parameters& 
    ostr << "MassBInput = " << INPUT(MassBInput) << ", ";
    ostr << "MassWBInput = " << INPUT(MassWBInput) << ", ";
    ostr << "MassGInput = " << INPUT(MassGInput) << ", ";
-   ostr << "Aeij = " << INPUT(Aeij) << ", ";
-   ostr << "Adij = " << INPUT(Adij) << ", ";
-   ostr << "Auij = " << INPUT(Auij) << ", ";
 
    return ostr;
 }

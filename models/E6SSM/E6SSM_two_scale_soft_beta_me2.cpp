@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:35:43
+// File generated at Sun 31 May 2015 12:30:45
 
 #include "E6SSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -39,11 +39,11 @@ Eigen::Matrix<double,3,3> E6SSM_soft_parameters::calc_beta_me2_one_loop(const So
 
    Eigen::Matrix<double,3,3> beta_me2;
 
-   beta_me2 = oneOver16PiSqr*(4*mHd2*(Ye*Ye.adjoint()) + 4*(TYe*(TYe)
+   beta_me2 = (oneOver16PiSqr*(4*mHd2*(Ye*Ye.adjoint()) + 4*(TYe*(TYe)
       .adjoint()) + 2*(me2*Ye*Ye.adjoint()) + 4*(Ye*ml2*Ye.adjoint()) + 2*(Ye*
       Ye.adjoint()*me2) + 1.5491933384829668*g1*Tr11*UNITMATRIX(3) +
       0.31622776601683794*gN*Tr14*UNITMATRIX(3) - 4.8*AbsSqr(MassB)*Sqr(g1)*
-      UNITMATRIX(3) - 0.2*AbsSqr(MassBp)*Sqr(gN)*UNITMATRIX(3));
+      UNITMATRIX(3) - 0.2*AbsSqr(MassBp)*Sqr(gN)*UNITMATRIX(3))).real();
 
 
    return beta_me2;
@@ -78,7 +78,7 @@ Eigen::Matrix<double,3,3> E6SSM_soft_parameters::calc_beta_me2_two_loop(const So
 
    Eigen::Matrix<double,3,3> beta_me2;
 
-   beta_me2 = twoLoop*(-12*traceconjTYdTpTYd*(Ye*Ye.adjoint()) - 4*
+   beta_me2 = (twoLoop*(-12*traceconjTYdTpTYd*(Ye*Ye.adjoint()) - 4*
       traceconjTYeTpTYe*(Ye*Ye.adjoint()) - 12*tracemd2YdAdjYd*(Ye*Ye.adjoint()
       ) - 4*traceme2YeAdjYe*(Ye*Ye.adjoint()) - 4*traceml2AdjYeYe*(Ye*
       Ye.adjoint()) - 12*tracemq2AdjYdYd*(Ye*Ye.adjoint()) - 24*mHd2*
@@ -119,7 +119,8 @@ Eigen::Matrix<double,3,3> E6SSM_soft_parameters::calc_beta_me2_two_loop(const So
       Conj(MassBp)*Sqr(gN)*(80*(2*MassBp*(Ye*Ye.adjoint()) - TYe*Ye.adjoint())
       + (-8*(MassB + 2*MassBp)*Sqr(g1) + 189*MassBp*Sqr(gN))*UNITMATRIX(3)) +
       0.24*Conj(MassB)*Sqr(g1)*(10*(-2*MassB*(Ye*Ye.adjoint()) + TYe*Ye.adjoint
-      ()) + (648*MassB*Sqr(g1) - (2*MassB + MassBp)*Sqr(gN))*UNITMATRIX(3)));
+      ()) + (648*MassB*Sqr(g1) - (2*MassB + MassBp)*Sqr(gN))*UNITMATRIX(3))))
+      .real();
 
 
    return beta_me2;

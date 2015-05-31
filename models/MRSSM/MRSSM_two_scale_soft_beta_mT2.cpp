@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:31:31
+// File generated at Sun 31 May 2015 12:24:56
 
 #include "MRSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -37,8 +37,8 @@ double MRSSM_soft_parameters::calc_beta_mT2_one_loop(const Soft_traces& soft_tra
 
    double beta_mT2;
 
-   beta_mT2 = 2*oneOver16PiSqr*((mHd2 + mRd2 + mT2)*AbsSqr(LamTD) + (mHu2
-      + mRu2 + mT2)*AbsSqr(LamTU));
+   beta_mT2 = Re(2*oneOver16PiSqr*((mHd2 + mRd2 + mT2)*AbsSqr(LamTD) + (
+      mHu2 + mRu2 + mT2)*AbsSqr(LamTU)));
 
 
    return beta_mT2;
@@ -65,7 +65,7 @@ double MRSSM_soft_parameters::calc_beta_mT2_two_loop(const Soft_traces& soft_tra
 
    double beta_mT2;
 
-   beta_mT2 = -0.4*twoLoop*(-40*Power(g2,4)*Tr22 + AbsSqr(LamTD)*(15*
+   beta_mT2 = Re(-0.4*twoLoop*(-40*Power(g2,4)*Tr22 + AbsSqr(LamTD)*(15*
       tracemd2YdAdjYd + 5*traceme2YeAdjYe + 5*traceml2AdjYeYe + 15*
       tracemq2AdjYdYd + 15*(2*mHd2 + mRd2 + mT2)*traceYdAdjYd + 10*mHd2*
       traceYeAdjYe + 5*mRd2*traceYeAdjYe + 5*mT2*traceYeAdjYe + 10*(2*mHd2 + 2*
@@ -75,7 +75,7 @@ double MRSSM_soft_parameters::calc_beta_mT2_two_loop(const Soft_traces& soft_tra
       )*traceYuAdjYu + 10*(2*mHu2 + 2*mRu2 + mS2 + mT2)*AbsSqr(LamSU) - 3*mHu2*
       Sqr(g1) - 3*mRu2*Sqr(g1) - 3*mT2*Sqr(g1) + 5*mHu2*Sqr(g2) + 5*mRu2*Sqr(g2
       ) + 5*mT2*Sqr(g2)) + 30*(mHd2 + mRd2 + mT2)*Sqr(LamTD)*Sqr(Conj(LamTD)) +
-      30*(mHu2 + mRu2 + mT2)*Sqr(LamTU)*Sqr(Conj(LamTU)));
+      30*(mHu2 + mRu2 + mT2)*Sqr(LamTU)*Sqr(Conj(LamTU))));
 
 
    return beta_mT2;

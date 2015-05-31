@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:44:30
+// File generated at Sun 31 May 2015 12:45:54
 
 #include "MSSMRHN_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -41,12 +41,12 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_TYu_one_loop(const 
 
    Eigen::Matrix<double,3,3> beta_TYu;
 
-   beta_TYu = oneOver16PiSqr*(Yu*(6*traceAdjYuTYu + 2*traceAdjYvTYv +
+   beta_TYu = (oneOver16PiSqr*(Yu*(6*traceAdjYuTYu + 2*traceAdjYvTYv +
       1.7333333333333334*MassB*Sqr(g1) + 6*MassWB*Sqr(g2) + 10.666666666666666*
       MassG*Sqr(g3)) + 3*traceYuAdjYu*TYu + traceYvAdjYv*TYu -
       0.8666666666666667*Sqr(g1)*TYu - 3*Sqr(g2)*TYu - 5.333333333333333*Sqr(g3
       )*TYu + 2*(Yu*Yd.adjoint()*TYd) + 4*(Yu*Yu.adjoint()*TYu) + TYu*
-      Yd.adjoint()*Yd + 5*(TYu*Yu.adjoint()*Yu));
+      Yd.adjoint()*Yd + 5*(TYu*Yu.adjoint()*Yu))).real();
 
 
    return beta_TYu;
@@ -81,7 +81,7 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_TYu_two_loop(const 
 
    Eigen::Matrix<double,3,3> beta_TYu;
 
-   beta_TYu = twoLoop*(Yu*(-24.38222222222222*Power(g1,4)*MassB +
+   beta_TYu = (twoLoop*(Yu*(-24.38222222222222*Power(g1,4)*MassB +
       7.111111111111111*Power(g3,4)*MassG - 30*Power(g2,4)*MassWB - 6*
       traceYdAdjYuTYuAdjYd - 2*traceYeAdjYvTYvAdjYe - 6*traceYuAdjYdTYdAdjYu -
       36*traceYuAdjYuTYuAdjYu - 2*traceYvAdjYeTYeAdjYv - 12*
@@ -109,7 +109,7 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_TYu_two_loop(const 
       TYd*Yd.adjoint()*Yd) - 4*(Yu*Yd.adjoint()*TYd*Yu.adjoint()*Yu) - 6*(Yu*
       Yu.adjoint()*Yu*Yu.adjoint()*TYu) - 8*(Yu*Yu.adjoint()*TYu*Yu.adjoint()*
       Yu) - 2*(TYu*Yd.adjoint()*Yd*Yd.adjoint()*Yd) - 4*(TYu*Yd.adjoint()*Yd*
-      Yu.adjoint()*Yu) - 6*(TYu*Yu.adjoint()*Yu*Yu.adjoint()*Yu));
+      Yu.adjoint()*Yu) - 6*(TYu*Yu.adjoint()*Yu*Yu.adjoint()*Yu))).real();
 
 
    return beta_TYu;

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:44:31
+// File generated at Sun 31 May 2015 12:45:56
 
 #include "MSSMRHN_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -41,10 +41,11 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_TYv_one_loop(const 
 
    Eigen::Matrix<double,3,3> beta_TYv;
 
-   beta_TYv = oneOver16PiSqr*(Yv*(6*traceAdjYuTYu + 2*traceAdjYvTYv + 1.2
-      *MassB*Sqr(g1) + 6*MassWB*Sqr(g2)) + 3*traceYuAdjYu*TYv + traceYvAdjYv*
-      TYv - 0.6*Sqr(g1)*TYv - 3*Sqr(g2)*TYv + 2*(Yv*Ye.adjoint()*TYe) + 4*(Yv*
-      Yv.adjoint()*TYv) + TYv*Ye.adjoint()*Ye + 5*(TYv*Yv.adjoint()*Yv));
+   beta_TYv = (oneOver16PiSqr*(Yv*(6*traceAdjYuTYu + 2*traceAdjYvTYv +
+      1.2*MassB*Sqr(g1) + 6*MassWB*Sqr(g2)) + 3*traceYuAdjYu*TYv + traceYvAdjYv
+      *TYv - 0.6*Sqr(g1)*TYv - 3*Sqr(g2)*TYv + 2*(Yv*Ye.adjoint()*TYe) + 4*(Yv*
+      Yv.adjoint()*TYv) + TYv*Ye.adjoint()*Ye + 5*(TYv*Yv.adjoint()*Yv))).real(
+      );
 
 
    return beta_TYv;
@@ -79,8 +80,8 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_TYv_two_loop(const 
 
    Eigen::Matrix<double,3,3> beta_TYv;
 
-   beta_TYv = twoLoop*(-0.08*Yv*(207*Power(g1,4)*MassB + 375*Power(g2,4)*
-      MassWB + 75*traceYdAdjYuTYuAdjYd + 25*traceYeAdjYvTYvAdjYe + 75*
+   beta_TYv = (twoLoop*(-0.08*Yv*(207*Power(g1,4)*MassB + 375*Power(g2,4)
+      *MassWB + 75*traceYdAdjYuTYuAdjYd + 25*traceYeAdjYvTYvAdjYe + 75*
       traceYuAdjYdTYdAdjYu + 450*traceYuAdjYuTYuAdjYu + 25*traceYvAdjYeTYeAdjYv
       + 150*traceYvAdjYvTYvAdjYv + 45*MassB*Sqr(g1)*Sqr(g2) + 45*MassWB*Sqr(g1
       )*Sqr(g2) - 20*traceAdjYuTYu*(Sqr(g1) + 20*Sqr(g3)) + 20*traceYuAdjYu*(
@@ -104,7 +105,7 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_TYv_two_loop(const 
       Yv.adjoint()*Yv) - 6*(Yv*Yv.adjoint()*Yv*Yv.adjoint()*TYv) - 8*(Yv*
       Yv.adjoint()*TYv*Yv.adjoint()*Yv) - 2*(TYv*Ye.adjoint()*Ye*Ye.adjoint()*
       Ye) - 4*(TYv*Ye.adjoint()*Ye*Yv.adjoint()*Yv) - 6*(TYv*Yv.adjoint()*Yv*
-      Yv.adjoint()*Yv));
+      Yv.adjoint()*Yv))).real();
 
 
    return beta_TYv;

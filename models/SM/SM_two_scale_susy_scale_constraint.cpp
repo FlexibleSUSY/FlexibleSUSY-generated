@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:29:22
+// File generated at Sun 31 May 2015 12:22:44
 
 #include "SM_two_scale_susy_scale_constraint.hpp"
 #include "SM_two_scale_model.hpp"
@@ -32,11 +32,12 @@
 
 namespace flexiblesusy {
 
-#define INPUTPARAMETER(p) inputPars.p
+#define INPUTPARAMETER(p) model->get_input().p
 #define MODELPARAMETER(p) model->get_##p()
+#define PHASE(p) model->get_##p()
 #define BETAPARAMETER(p) beta_functions.get_##p()
 #define BETA(p) beta_##p
-#define SM(p) Electroweak_constants::p
+#define LowEnergyConstant(p) Electroweak_constants::p
 #define STANDARDDEVIATION(p) Electroweak_constants::Error_##p
 #define Pole(p) model->get_physical().p
 #define MODEL model
@@ -47,16 +48,13 @@ SM_susy_scale_constraint<Two_scale>::SM_susy_scale_constraint()
    , scale(0.)
    , initial_scale_guess(0.)
    , model(0)
-   , inputPars()
 {
 }
 
 SM_susy_scale_constraint<Two_scale>::SM_susy_scale_constraint(
-   SM<Two_scale>* model_,
-   const SM_input_parameters& inputPars_)
+   SM<Two_scale>* model_)
    : Constraint<Two_scale>()
    , model(model_)
-   , inputPars(inputPars_)
 {
    initialize();
 }
@@ -76,7 +74,7 @@ void SM_susy_scale_constraint<Two_scale>::apply()
    // apply user-defined susy scale constraints
    const auto LambdaIN = INPUTPARAMETER(LambdaIN);
 
-   MODEL->set_Lambdax(LambdaIN);
+   MODEL->set_Lambdax(Re(LambdaIN));
 
 
    // the parameters, which are fixed by the EWSB eqs., will now be
@@ -97,7 +95,10 @@ double SM_susy_scale_constraint<Two_scale>::get_initial_scale_guess() const
 
 const SM_input_parameters& SM_susy_scale_constraint<Two_scale>::get_input_parameters() const
 {
-   return inputPars;
+   assert(model && "Error: SM_susy_scale_constraint::"
+          "get_input_parameters(): model pointer is zero.");
+
+   return model->get_input();
 }
 
 SM<Two_scale>* SM_susy_scale_constraint<Two_scale>::get_model() const
@@ -108,11 +109,6 @@ SM<Two_scale>* SM_susy_scale_constraint<Two_scale>::get_model() const
 void SM_susy_scale_constraint<Two_scale>::set_model(Two_scale_model* model_)
 {
    model = cast_model<SM<Two_scale>*>(model_);
-}
-
-void SM_susy_scale_constraint<Two_scale>::set_input_parameters(const SM_input_parameters& inputPars_)
-{
-   inputPars = inputPars_;
 }
 
 void SM_susy_scale_constraint<Two_scale>::clear()

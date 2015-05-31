@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:41:06
+// File generated at Sun 31 May 2015 12:37:54
 
 #include "UMSSM_input_parameters.hpp"
 #include "UMSSM_spectrum_generator.hpp"
@@ -135,6 +135,7 @@ int main(int argc, char* argv[])
 
    UMSSM_spectrum_generator<algorithm_type> spectrum_generator;
    spectrum_generator.set_precision_goal(1.0e-4);
+   spectrum_generator.set_beta_zero_threshold(1e-11);
    spectrum_generator.set_max_iterations(0);         // 0 == automatic
    spectrum_generator.set_calculate_sm_masses(0);    // 0 == no
    spectrum_generator.set_parameter_output_scale(0); // 0 == susy scale

@@ -18,7 +18,8 @@ MSSMNoFV_TWO_SCALE_MK := \
 		$(MSSMNoFV_TWO_SCALE_SOFT_MK)
 
 MSSMNoFV_SLHA_INPUT := \
-		$(DIR)/LesHouches.in.MSSMNoFV
+		$(DIR)/LesHouches.in.MSSMNoFV \
+		$(DIR)/LesHouches.in.MSSMNoFV~
 
 MSSMNoFV_GNUPLOT := \
 		$(DIR)/MSSMNoFV_plot_rgflow.gnuplot \
@@ -34,6 +35,7 @@ LIBMSSMNoFV_HDR :=
 
 ifneq ($(findstring two_scale,$(ALGORITHMS)),)
 LIBMSSMNoFV_SRC += \
+		$(DIR)/MSSMNoFV_mass_eigenstates.cpp \
 		$(DIR)/MSSMNoFV_info.cpp \
 		$(DIR)/MSSMNoFV_input_parameters.cpp \
 		$(DIR)/MSSMNoFV_slha_io.cpp \
@@ -55,6 +57,7 @@ EXEMSSMNoFV_SRC += \
 LIBMSSMNoFV_HDR += \
 		$(DIR)/MSSMNoFV_convergence_tester.hpp \
 		$(DIR)/MSSMNoFV_high_scale_constraint.hpp \
+		$(DIR)/MSSMNoFV_mass_eigenstates.hpp \
 		$(DIR)/MSSMNoFV_info.hpp \
 		$(DIR)/MSSMNoFV_initial_guesser.hpp \
 		$(DIR)/MSSMNoFV_input_parameters.hpp \

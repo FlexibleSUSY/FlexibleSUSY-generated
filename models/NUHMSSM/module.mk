@@ -18,7 +18,8 @@ NUHMSSM_TWO_SCALE_MK := \
 		$(NUHMSSM_TWO_SCALE_SOFT_MK)
 
 NUHMSSM_SLHA_INPUT := \
-		$(DIR)/LesHouches.in.NUHMSSM
+		$(DIR)/LesHouches.in.NUHMSSM \
+		$(DIR)/LesHouches.in.NUHMSSM~
 
 NUHMSSM_GNUPLOT := \
 		$(DIR)/NUHMSSM_plot_rgflow.gnuplot \
@@ -34,6 +35,7 @@ LIBNUHMSSM_HDR :=
 
 ifneq ($(findstring two_scale,$(ALGORITHMS)),)
 LIBNUHMSSM_SRC += \
+		$(DIR)/NUHMSSM_mass_eigenstates.cpp \
 		$(DIR)/NUHMSSM_info.cpp \
 		$(DIR)/NUHMSSM_input_parameters.cpp \
 		$(DIR)/NUHMSSM_slha_io.cpp \
@@ -55,6 +57,7 @@ EXENUHMSSM_SRC += \
 LIBNUHMSSM_HDR += \
 		$(DIR)/NUHMSSM_convergence_tester.hpp \
 		$(DIR)/NUHMSSM_high_scale_constraint.hpp \
+		$(DIR)/NUHMSSM_mass_eigenstates.hpp \
 		$(DIR)/NUHMSSM_info.hpp \
 		$(DIR)/NUHMSSM_initial_guesser.hpp \
 		$(DIR)/NUHMSSM_input_parameters.hpp \

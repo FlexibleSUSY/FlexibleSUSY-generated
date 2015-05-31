@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:48:27
+// File generated at Sun 31 May 2015 12:50:17
 
 #ifndef CMSSMNoFV_SUSY_SCALE_CONSTRAINT_H
 #define CMSSMNoFV_SUSY_SCALE_CONSTRAINT_H

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:34:04
+// File generated at Sun 31 May 2015 12:28:19
 
 #include "MRSSM_input_parameters.hpp"
 #include "MRSSM_slha_io.hpp"
@@ -85,6 +85,8 @@ int main(int argc, const char* argv[])
       spectrum_generator_settings.get(Spectrum_generator_settings::ewsb_loop_order));
    spectrum_generator.set_beta_loop_order(
       spectrum_generator_settings.get(Spectrum_generator_settings::beta_loop_order));
+   spectrum_generator.set_beta_zero_threshold(
+      spectrum_generator_settings.get(Spectrum_generator_settings::beta_zero_threshold));
    spectrum_generator.set_threshold_corrections_loop_order(
       spectrum_generator_settings.get(Spectrum_generator_settings::threshold_corrections_loop_order));
    spectrum_generator.set_two_loop_corrections(

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:48:53
+// File generated at Sun 31 May 2015 12:52:00
 
 #ifndef MSSMNoFVatMGUT_TWO_SCALE_soft_parameters_H
 #define MSSMNoFVatMGUT_TWO_SCALE_soft_parameters_H
@@ -210,5 +210,7 @@ private:
 std::ostream& operator<<(std::ostream&, const MSSMNoFVatMGUT_soft_parameters&);
 
 } // namespace flexiblesusy
+
+#undef TRACE_STRUCT_TYPE
 
 #endif

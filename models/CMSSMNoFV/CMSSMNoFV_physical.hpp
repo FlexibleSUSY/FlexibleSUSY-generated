@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:49:36
+// File generated at Sun 31 May 2015 12:52:22
 
 #ifndef CMSSMNoFV_PHYSICAL_H
 #define CMSSMNoFV_PHYSICAL_H
@@ -32,6 +32,8 @@ namespace flexiblesusy {
 struct CMSSMNoFV_physical {
    CMSSMNoFV_physical();
    void clear();
+   void convert_to_hk();   ///< converts pole masses to HK convention
+   void convert_to_slha(); ///< converts pole masses to SLHA convention
    void print(std::ostream&) const;
 
    double MVG;

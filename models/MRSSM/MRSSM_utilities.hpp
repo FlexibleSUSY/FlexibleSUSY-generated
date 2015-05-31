@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:31:34
+// File generated at Sun 31 May 2015 12:25:00
 
 #ifndef MRSSM_UTILITIES_H
 #define MRSSM_UTILITIES_H
@@ -88,7 +88,8 @@ void MRSSM_spectrum_plotter::extract_spectrum(const MRSSM<T>& model)
    scale = model.get_scale();
 
    spectrum.push_back(TParticle("Glu", "\\tilde{g}", to_valarray(PHYSICAL(MGlu))));
-   spectrum.push_back(TParticle("SOc", "o", to_valarray(PHYSICAL(MSOc))));
+   spectrum.push_back(TParticle("sigmaO", "\\sigma_o", to_valarray(PHYSICAL(MsigmaO))));
+   spectrum.push_back(TParticle("phiO", "\\phi_o", to_valarray(PHYSICAL(MphiO))));
    spectrum.push_back(TParticle("Sd", "\\tilde{d}", to_valarray(PHYSICAL(MSd))));
    spectrum.push_back(TParticle("Sv", "\\tilde{\\nu}", to_valarray(PHYSICAL(MSv))));
    spectrum.push_back(TParticle("Su", "\\tilde{u}", to_valarray(PHYSICAL(MSu))));
@@ -122,5 +123,8 @@ std::valarray<double> MRSSM_spectrum_plotter::to_valarray(const Eigen::Array<Sca
 }
 
 } // namespace flexiblesusy
+
+#undef PHYSICAL
+#undef MODELPARAMETER
 
 #endif

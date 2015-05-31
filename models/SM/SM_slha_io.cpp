@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:29:22
+// File generated at Sun 31 May 2015 12:22:44
 
 #include "SM_slha_io.hpp"
 #include "SM_input_parameters.hpp"
 #include "logger.hpp"
 #include "wrappers.hpp"
-#include "numerics.hpp"
+#include "numerics2.hpp"
 #include "spectrum_generator_settings.hpp"
 #include "lowe.h"
 #include "config.h"
@@ -31,6 +31,16 @@
 #include <sstream>
 #include <iostream>
 #include <boost/bind.hpp>
+
+#define Pole(p) physical.p
+#define PHYSICAL(p) model.get_physical().p
+#define PHYSICAL_SLHA(p) model.get_physical_slha().p
+#define LOCALPHYSICAL(p) physical.p
+#define MODELPARAMETER(p) model.get_##p()
+#define DEFINE_PARAMETER(p)                                            \
+   typename std::remove_const<typename std::remove_reference<decltype(MODELPARAMETER(p))>::type>::type p;
+#define DEFINE_PHYSICAL_PARAMETER(p) decltype(LOCALPHYSICAL(p)) p;
+#define LowEnergyConstant(p) Electroweak_constants::p
 
 using namespace softsusy;
 
@@ -178,6 +188,22 @@ void SM_slha_io::set_mixing_matrices(const SM_physical& physical,
 
 }
 
+void SM_slha_io::set_ckm(
+   const Eigen::Matrix<std::complex<double>,3,3>& ckm_matrix,
+   double scale)
+{
+   slha_io.set_block("VCKM"  , ckm_matrix.real(), "Re(CKM)", scale);
+   slha_io.set_block("IMVCKM", ckm_matrix.imag(), "Im(CKM)", scale);
+}
+
+void SM_slha_io::set_pmns(
+   const Eigen::Matrix<std::complex<double>,3,3>& pmns_matrix,
+   double scale)
+{
+   slha_io.set_block("VPMNS"  , pmns_matrix.real(), "Re(PMNS)", scale);
+   slha_io.set_block("IMVPMNS", pmns_matrix.imag(), "Im(PMNS)", scale);
+}
+
 /**
  * Write SLHA object to file.
  *
@@ -227,6 +253,51 @@ void SM_slha_io::fill(SM_input_parameters& input) const
 }
 
 /**
+ * Reads DR-bar parameters from a SLHA output file.
+ */
+void SM_slha_io::fill_drbar_parameters(SM_mass_eigenstates& model) const
+{
+   model.set_g1(slha_io.read_entry("gauge", 1) * 1.2909944487358056);
+   model.set_g2(slha_io.read_entry("gauge", 2));
+   model.set_g3(slha_io.read_entry("gauge", 3));
+   {
+      DEFINE_PARAMETER(Yu);
+      slha_io.read_block("Yu", Yu);
+      model.set_Yu(Yu);
+   }
+   {
+      DEFINE_PARAMETER(Yd);
+      slha_io.read_block("Yd", Yd);
+      model.set_Yd(Yd);
+   }
+   {
+      DEFINE_PARAMETER(Ye);
+      slha_io.read_block("Ye", Ye);
+      model.set_Ye(Ye);
+   }
+   model.set_mu2(slha_io.read_entry("SM", 1));
+   model.set_Lambdax(slha_io.read_entry("SM", 2));
+   model.set_v(slha_io.read_entry("HMIX", 3));
+
+
+   model.set_scale(read_scale());
+}
+
+/**
+ * Reads DR-bar parameters, pole masses and mixing matrices (in
+ * Haber-Kane convention) from a SLHA output file.
+ */
+void SM_slha_io::fill(SM_mass_eigenstates& model) const
+{
+   fill_drbar_parameters(model);
+
+   SM_physical physical_hk;
+   fill_physical(physical_hk);
+   physical_hk.convert_to_hk();
+   model.get_physical() = physical_hk;
+}
+
+/**
  * Fill struct of spectrum generator settings from SLHA object
  * (FlexibleSUSY block)
  *
@@ -270,6 +341,62 @@ void SM_slha_io::fill_flexiblesusy_tuple(Spectrum_generator_settings& settings,
 }
 
 /**
+ * Reads pole masses and mixing matrices from a SLHA output file.
+ */
+void SM_slha_io::fill_physical(SM_physical& physical) const
+{
+   {
+      DEFINE_PHYSICAL_PARAMETER(Vu);
+      slha_io.read_block("UULMIX", Vu);
+      LOCALPHYSICAL(Vu) = Vu;
+   }
+   {
+      DEFINE_PHYSICAL_PARAMETER(Vd);
+      slha_io.read_block("UDLMIX", Vd);
+      LOCALPHYSICAL(Vd) = Vd;
+   }
+   {
+      DEFINE_PHYSICAL_PARAMETER(Uu);
+      slha_io.read_block("UURMIX", Uu);
+      LOCALPHYSICAL(Uu) = Uu;
+   }
+   {
+      DEFINE_PHYSICAL_PARAMETER(Ud);
+      slha_io.read_block("UDRMIX", Ud);
+      LOCALPHYSICAL(Ud) = Ud;
+   }
+   {
+      DEFINE_PHYSICAL_PARAMETER(Ve);
+      slha_io.read_block("UELMIX", Ve);
+      LOCALPHYSICAL(Ve) = Ve;
+   }
+   {
+      DEFINE_PHYSICAL_PARAMETER(Ue);
+      slha_io.read_block("UERMIX", Ue);
+      LOCALPHYSICAL(Ue) = Ue;
+   }
+
+   LOCALPHYSICAL(MVG) = slha_io.read_entry("MASS", 21);
+   LOCALPHYSICAL(MFv)(0) = slha_io.read_entry("MASS", 12);
+   LOCALPHYSICAL(MFv)(1) = slha_io.read_entry("MASS", 14);
+   LOCALPHYSICAL(MFv)(2) = slha_io.read_entry("MASS", 16);
+   LOCALPHYSICAL(Mhh) = slha_io.read_entry("MASS", 25);
+   LOCALPHYSICAL(MVP) = slha_io.read_entry("MASS", 22);
+   LOCALPHYSICAL(MVZ) = slha_io.read_entry("MASS", 23);
+   LOCALPHYSICAL(MFd)(0) = slha_io.read_entry("MASS", 1);
+   LOCALPHYSICAL(MFd)(1) = slha_io.read_entry("MASS", 3);
+   LOCALPHYSICAL(MFd)(2) = slha_io.read_entry("MASS", 5);
+   LOCALPHYSICAL(MFu)(0) = slha_io.read_entry("MASS", 2);
+   LOCALPHYSICAL(MFu)(1) = slha_io.read_entry("MASS", 4);
+   LOCALPHYSICAL(MFu)(2) = slha_io.read_entry("MASS", 6);
+   LOCALPHYSICAL(MFe)(0) = slha_io.read_entry("MASS", 11);
+   LOCALPHYSICAL(MFe)(1) = slha_io.read_entry("MASS", 13);
+   LOCALPHYSICAL(MFe)(2) = slha_io.read_entry("MASS", 15);
+   LOCALPHYSICAL(MVWp) = slha_io.read_entry("MASS", 24);
+
+}
+
+/**
  * Reads the renormalization scales from all DR-bar parameter blocks.
  * If blocks with different scales are found the last scale is
  * returned and a warning is printed.
@@ -290,18 +417,6 @@ double SM_slha_io::read_scale() const
    }
 
    return scale;
-}
-
-/**
- * Convert masses and mixing matrices to SLHA convention: Fermion
- * mixing matrices are always real and fermion masses are allowed to
- * be negative.
- *
- * @param physical struct of physical parameters to convert
- */
-void SM_slha_io::convert_to_slha_convention(SM_physical& physical)
-{
-
 }
 
 } // namespace flexiblesusy

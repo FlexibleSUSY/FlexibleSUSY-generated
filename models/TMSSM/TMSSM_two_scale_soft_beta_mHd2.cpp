@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:30:26
+// File generated at Sun 31 May 2015 12:23:48
 
 #include "TMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -46,12 +46,12 @@ double TMSSM_soft_parameters::calc_beta_mHd2_one_loop(const Soft_traces& soft_tr
 
    double beta_mHd2;
 
-   beta_mHd2 = oneOver16PiSqr*(-0.7745966692414834*g1*Tr11 + 6*
+   beta_mHd2 = Re(oneOver16PiSqr*(-0.7745966692414834*g1*Tr11 + 6*
       traceconjTYdTpTYd + 2*traceconjTYeTpTYe + 6*tracemd2YdAdjYd + 2*
       traceme2YeAdjYe + 2*traceml2AdjYeYe + 6*tracemq2AdjYdYd + 6*mHd2*
       traceYdAdjYd + 2*mHd2*traceYeAdjYe + 3*mHd2*AbsSqr(Lambdax) + 3*mHu2*
       AbsSqr(Lambdax) + 3*mT2*AbsSqr(Lambdax) + 3*AbsSqr(TLambdax) - 1.2*AbsSqr
-      (MassB)*Sqr(g1) - 6*AbsSqr(MassWB)*Sqr(g2));
+      (MassB)*Sqr(g1) - 6*AbsSqr(MassWB)*Sqr(g2)));
 
 
    return beta_mHd2;
@@ -124,8 +124,8 @@ double TMSSM_soft_parameters::calc_beta_mHd2_two_loop(const Soft_traces& soft_tr
 
    double beta_mHd2;
 
-   beta_mHd2 = twoLoop*(6*Power(g2,4)*Tr22 - 3.0983866769659336*g1*Tr31 -
-      36*tracemd2YdAdjYdYdAdjYd - 6*tracemd2YdAdjYuYuAdjYd - 12*
+   beta_mHd2 = Re(twoLoop*(6*Power(g2,4)*Tr22 - 3.0983866769659336*g1*
+      Tr31 - 36*tracemd2YdAdjYdYdAdjYd - 6*tracemd2YdAdjYuYuAdjYd - 12*
       traceme2YeAdjYeYeAdjYe - 12*traceml2AdjYeYeAdjYeYe - 36*
       tracemq2AdjYdYdAdjYdYd - 6*tracemq2AdjYdYdAdjYuYu - 6*
       tracemq2AdjYuYuAdjYdYd - 6*tracemu2YuAdjYdYdAdjYu - 36*
@@ -156,7 +156,7 @@ double TMSSM_soft_parameters::calc_beta_mHd2_two_loop(const Soft_traces& soft_tr
       Lambdax) - 15*mHu2*Sqr(Conj(Lambdax))*Sqr(Lambdax) - 15*mT2*Sqr(Conj(
       Lambdax))*Sqr(Lambdax) + 0.6*Conj(MassWB)*Sqr(g2)*(3*(MassB + 2*MassWB)*
       Sqr(g1) + 115*MassWB*Sqr(g2) + 20*Conj(Lambdax)*(2*MassWB*Lambdax -
-      TLambdax)) - 9*traceconjTYuTpYu*Conj(Lambdax)*TLambdax);
+      TLambdax)) - 9*traceconjTYuTpYu*Conj(Lambdax)*TLambdax));
 
 
    return beta_mHd2;

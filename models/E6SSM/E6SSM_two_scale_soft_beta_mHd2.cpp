@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:35:38
+// File generated at Sun 31 May 2015 12:30:39
 
 #include "E6SSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -47,13 +47,13 @@ double E6SSM_soft_parameters::calc_beta_mHd2_one_loop(const Soft_traces& soft_tr
 
    double beta_mHd2;
 
-   beta_mHd2 = oneOver16PiSqr*(-0.7745966692414834*g1*Tr11 -
+   beta_mHd2 = Re(oneOver16PiSqr*(-0.7745966692414834*g1*Tr11 -
       0.9486832980505138*gN*Tr14 + 6*traceconjTYdTpTYd + 2*traceconjTYeTpTYe +
       6*tracemd2YdAdjYd + 2*traceme2YeAdjYe + 2*traceml2AdjYeYe + 6*
       tracemq2AdjYdYd + 6*mHd2*traceYdAdjYd + 2*mHd2*traceYeAdjYe + 2*mHd2*
       AbsSqr(Lambdax) + 2*mHu2*AbsSqr(Lambdax) + 2*ms2*AbsSqr(Lambdax) + 2*
       AbsSqr(TLambdax) - 1.2*AbsSqr(MassB)*Sqr(g1) - 6*AbsSqr(MassWB)*Sqr(g2) -
-      1.8*AbsSqr(MassBp)*Sqr(gN));
+      1.8*AbsSqr(MassBp)*Sqr(gN)));
 
 
    return beta_mHd2;
@@ -152,7 +152,7 @@ double E6SSM_soft_parameters::calc_beta_mHd2_two_loop(const Soft_traces& soft_tr
 
    double beta_mHd2;
 
-   beta_mHd2 = twoLoop*(6*Power(g2,4)*Tr22 + 1.4696938456699067*g1*gN*
+   beta_mHd2 = Re(twoLoop*(6*Power(g2,4)*Tr22 + 1.4696938456699067*g1*gN*
       Tr2U114 + 1.4696938456699067*g1*gN*Tr2U141 - 3.0983866769659336*g1*Tr31 -
       3.794733192202055*gN*Tr34 - 36*tracemd2YdAdjYdYdAdjYd - 6*
       tracemd2YdAdjYuYuAdjYd - 12*traceme2YeAdjYeYeAdjYe - 12*
@@ -210,7 +210,7 @@ double E6SSM_soft_parameters::calc_beta_mHd2_two_loop(const Soft_traces& soft_tr
       Sqr(gN) + 200*Conj(Lambdax)*(2*MassBp*Lambdax - TLambdax)) - 6*
       traceconjTKappaTpKappa*Conj(Lambdax)*TLambdax - 4*
       traceconjTLambda12TpLambda12*Conj(Lambdax)*TLambdax - 6*traceconjTYuTpYu*
-      Conj(Lambdax)*TLambdax);
+      Conj(Lambdax)*TLambdax));
 
 
    return beta_mHd2;

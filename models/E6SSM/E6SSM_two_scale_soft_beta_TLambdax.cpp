@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:35:32
+// File generated at Sun 31 May 2015 12:30:31
 
 #include "E6SSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -49,12 +49,12 @@ double E6SSM_soft_parameters::calc_beta_TLambdax_one_loop(const Soft_traces& sof
 
    double beta_TLambdax;
 
-   beta_TLambdax = oneOver16PiSqr*(0.2*Lambdax*(30*traceAdjKappaTKappa +
-      20*traceAdjLambda12TLambda12 + 30*traceAdjYdTYd + 10*traceAdjYeTYe + 30*
-      traceAdjYuTYu + 6*MassB*Sqr(g1) + 30*MassWB*Sqr(g2) + 19*MassBp*Sqr(gN))
-      + (3*traceKappaAdjKappa + 2*traceLambda12AdjLambda12 + 3*traceYdAdjYd +
-      traceYeAdjYe + 3*traceYuAdjYu + 12*AbsSqr(Lambdax) - 0.6*Sqr(g1) - 3*Sqr(
-      g2) - 1.9*Sqr(gN))*TLambdax);
+   beta_TLambdax = Re(oneOver16PiSqr*(0.2*Lambdax*(30*traceAdjKappaTKappa
+      + 20*traceAdjLambda12TLambda12 + 30*traceAdjYdTYd + 10*traceAdjYeTYe +
+      30*traceAdjYuTYu + 6*MassB*Sqr(g1) + 30*MassWB*Sqr(g2) + 19*MassBp*Sqr(gN
+      )) + (3*traceKappaAdjKappa + 2*traceLambda12AdjLambda12 + 3*traceYdAdjYd
+      + traceYeAdjYe + 3*traceYuAdjYu + 12*AbsSqr(Lambdax) - 0.6*Sqr(g1) - 3*
+      Sqr(g2) - 1.9*Sqr(gN))*TLambdax));
 
 
    return beta_TLambdax;
@@ -100,8 +100,8 @@ double E6SSM_soft_parameters::calc_beta_TLambdax_two_loop(const Soft_traces& sof
 
    double beta_TLambdax;
 
-   beta_TLambdax = twoLoop*(-0.02*Lambdax*(1188*Power(g1,4)*MassB + 3933*
-      Power(gN,4)*MassBp + 3300*Power(g2,4)*MassWB + 1200*
+   beta_TLambdax = Re(twoLoop*(-0.02*Lambdax*(1188*Power(g1,4)*MassB +
+      3933*Power(gN,4)*MassBp + 3300*Power(g2,4)*MassWB + 1200*
       traceKappaAdjKappaTKappaAdjKappa + 800*
       traceLambda12AdjLambda12TLambda12AdjLambda12 + 1800*traceYdAdjYdTYdAdjYd
       + 600*traceYdAdjYuTYuAdjYd + 600*traceYeAdjYeTYeAdjYe + 600*
@@ -117,8 +117,8 @@ double E6SSM_soft_parameters::calc_beta_TLambdax_two_loop(const Soft_traces& sof
       traceAdjKappaTKappa*Sqr(gN) + 120*traceAdjLambda12TLambda12*Sqr(gN) + 60*
       traceAdjYdTYd*Sqr(gN) + 20*traceAdjYeTYe*Sqr(gN) + 30*traceAdjYuTYu*Sqr(
       gN) - 180*MassBp*traceKappaAdjKappa*Sqr(gN) - 120*MassBp*
-      traceLambda12AdjLambda12*Sqr(gN) - 30*MassBp*traceYuAdjYu*Sqr(gN) + 39*
-      MassB*Sqr(g1)*Sqr(gN) + 39*MassBp*Sqr(g1)*Sqr(gN) + 195*MassBp*Sqr(g2)*
+      traceLambda12AdjLambda12*Sqr(gN) - 30*MassBp*traceYuAdjYu*Sqr(gN) + 27*
+      MassB*Sqr(g1)*Sqr(gN) + 27*MassBp*Sqr(g1)*Sqr(gN) + 195*MassBp*Sqr(g2)*
       Sqr(gN) + 195*MassWB*Sqr(g2)*Sqr(gN) + 20*traceYeAdjYe*(6*MassB*Sqr(g1) -
       MassBp*Sqr(gN)) - 20*traceYdAdjYd*(2*MassB*Sqr(g1) - 80*MassG*Sqr(g3) +
       3*MassBp*Sqr(gN))) + (5.94*Power(g1,4) + 16.5*Power(g2,4) + 19.665*Power(
@@ -129,7 +129,7 @@ double E6SSM_soft_parameters::calc_beta_TLambdax_two_loop(const Soft_traces& sof
       traceYuAdjYu*Sqr(g1) + 6*traceLambda12AdjLambda12*Sqr(g2) + 1.8*Sqr(g1)*
       Sqr(g2) + 16*traceKappaAdjKappa*Sqr(g3) + 16*traceYuAdjYu*Sqr(g3) + 0.2*
       traceYeAdjYe*(6*Sqr(g1) - Sqr(gN)) - 1.8*traceKappaAdjKappa*Sqr(gN) - 1.2
-      *traceLambda12AdjLambda12*Sqr(gN) - 0.3*traceYuAdjYu*Sqr(gN) + 0.39*Sqr(
+      *traceLambda12AdjLambda12*Sqr(gN) - 0.3*traceYuAdjYu*Sqr(gN) + 0.27*Sqr(
       g1)*Sqr(gN) + 1.95*Sqr(g2)*Sqr(gN) - 0.2*traceYdAdjYd*(2*Sqr(g1) - 80*Sqr
       (g3) + 3*Sqr(gN)))*TLambdax - 50*Sqr(Conj(Lambdax))*Sqr(Lambdax)*TLambdax
       - 0.1*AbsSqr(Lambdax)*(2*Lambdax*(60*traceAdjKappaTKappa + 40*
@@ -137,7 +137,7 @@ double E6SSM_soft_parameters::calc_beta_TLambdax_two_loop(const Soft_traces& sof
       traceAdjYuTYu + 12*MassB*Sqr(g1) + 60*MassWB*Sqr(g2) + 13*MassBp*Sqr(gN))
       - 3*(-60*traceKappaAdjKappa - 40*traceLambda12AdjLambda12 - 90*
       traceYdAdjYd - 30*traceYeAdjYe - 90*traceYuAdjYu + 12*Sqr(g1) + 60*Sqr(g2
-      ) + 13*Sqr(gN))*TLambdax));
+      ) + 13*Sqr(gN))*TLambdax)));
 
 
    return beta_TLambdax;

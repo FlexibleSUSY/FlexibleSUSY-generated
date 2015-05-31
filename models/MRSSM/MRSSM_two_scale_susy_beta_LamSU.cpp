@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:31:20
+// File generated at Sun 31 May 2015 12:24:49
 
 #include "MRSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -38,9 +38,9 @@ double MRSSM_susy_parameters::calc_beta_LamSU_one_loop(const Susy_traces& susy_t
 
    double beta_LamSU;
 
-   beta_LamSU = oneOver16PiSqr*(2*LamSU*AbsSqr(LamSD) - 0.6*LamSU*(-5*
+   beta_LamSU = Re(oneOver16PiSqr*(2*LamSU*AbsSqr(LamSD) - 0.6*LamSU*(-5*
       traceYuAdjYu - 5*AbsSqr(LamTU) + Sqr(g1) + 5*Sqr(g2)) + 4*Conj(LamSU)*Sqr
-      (LamSU));
+      (LamSU)));
 
 
    return beta_LamSU;
@@ -62,15 +62,15 @@ double MRSSM_susy_parameters::calc_beta_LamSU_two_loop(const Susy_traces& susy_t
 
    double beta_LamSU;
 
-   beta_LamSU = -0.1*LamSU*twoLoop*(-45*Power(g1,4) - 165*Power(g2,4) +
-      30*traceYdAdjYuYuAdjYd + 90*traceYuAdjYuYuAdjYu + 45*traceYuAdjYu*AbsSqr(
-      LamTU) + 30*AbsSqr(LamTD)*AbsSqr(LamTU) - 8*traceYuAdjYu*Sqr(g1) + 4*
-      AbsSqr(LamSD)*(15*traceYdAdjYd + 5*traceYeAdjYe + 10*AbsSqr(LamSU) + 15*
-      AbsSqr(LamTD) - 3*Sqr(g1) - 15*Sqr(g2)) - 120*AbsSqr(LamTU)*Sqr(g2) - 18*
-      Sqr(g1)*Sqr(g2) - 6*AbsSqr(LamSU)*(-15*traceYuAdjYu - 20*AbsSqr(LamTU) +
-      2*Sqr(g1) + 10*Sqr(g2)) - 160*traceYuAdjYu*Sqr(g3) + 40*Sqr(LamSD)*Sqr(
-      Conj(LamSD)) + 100*Sqr(LamSU)*Sqr(Conj(LamSU)) + 75*Sqr(LamTU)*Sqr(Conj(
-      LamTU)));
+   beta_LamSU = Re(-0.1*LamSU*twoLoop*(-45*Power(g1,4) - 165*Power(g2,4)
+      + 30*traceYdAdjYuYuAdjYd + 90*traceYuAdjYuYuAdjYu + 45*traceYuAdjYu*
+      AbsSqr(LamTU) + 30*AbsSqr(LamTD)*AbsSqr(LamTU) - 8*traceYuAdjYu*Sqr(g1) +
+      4*AbsSqr(LamSD)*(15*traceYdAdjYd + 5*traceYeAdjYe + 10*AbsSqr(LamSU) +
+      15*AbsSqr(LamTD) - 3*Sqr(g1) - 15*Sqr(g2)) - 120*AbsSqr(LamTU)*Sqr(g2) -
+      18*Sqr(g1)*Sqr(g2) - 6*AbsSqr(LamSU)*(-15*traceYuAdjYu - 20*AbsSqr(LamTU)
+      + 2*Sqr(g1) + 10*Sqr(g2)) - 160*traceYuAdjYu*Sqr(g3) + 40*Sqr(LamSD)*Sqr
+      (Conj(LamSD)) + 100*Sqr(LamSU)*Sqr(Conj(LamSU)) + 75*Sqr(LamTU)*Sqr(Conj(
+      LamTU))));
 
 
    return beta_LamSU;

@@ -16,13 +16,12 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:30:35
+// File generated at Sun 31 May 2015 12:23:57
 
 #ifndef TMSSM_TWO_SCALE_INITIAL_GUESSER_H
 #define TMSSM_TWO_SCALE_INITIAL_GUESSER_H
 
 #include "TMSSM_initial_guesser.hpp"
-#include "TMSSM_input_parameters.hpp"
 #include "TMSSM_two_scale_low_scale_constraint.hpp"
 #include "TMSSM_two_scale_susy_scale_constraint.hpp"
 #include "TMSSM_two_scale_high_scale_constraint.hpp"
@@ -46,7 +45,6 @@ template<>
 class TMSSM_initial_guesser<Two_scale> : public Initial_guesser<Two_scale> {
 public:
    TMSSM_initial_guesser(TMSSM<Two_scale>*,
-                               const TMSSM_input_parameters&,
                                const QedQcd&,
                                const TMSSM_low_scale_constraint<Two_scale>&,
                                const TMSSM_susy_scale_constraint<Two_scale>&,
@@ -58,7 +56,6 @@ public:
 
 private:
    TMSSM<Two_scale>* model; ///< pointer to model class
-   TMSSM_input_parameters input_pars;
    QedQcd oneset;   ///< Standard Model low-energy data
    double mu_guess; ///< guessed DR-bar mass of up-quark
    double mc_guess; ///< guessed DR-bar mass of charm-quark

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:34:04
+// File generated at Sun 31 May 2015 12:28:19
 
 #include "MRSSM_input_parameters.hpp"
 #include "MRSSM_spectrum_generator.hpp"
@@ -37,6 +37,24 @@ void print_usage()
       "Usage: run_cmd_line_MRSSM.x [options]\n"
       "Options:\n"
       "  --TanBeta=<value>\n"
+      "  --LamTDInput=<value>\n"
+      "  --LamTUInput=<value>\n"
+      "  --LamSDInput=<value>\n"
+      "  --LamSUInput=<value>\n"
+      "  --MuInput=<value>\n"
+      "  --MuDInput=<value>\n"
+      "  --MuUInput=<value>\n"
+      "  --vTInput=<value>\n"
+      "  --vSInput=<value>\n"
+      "  --BMuInput=<value>\n"
+      "  --BMuDInput=<value>\n"
+      "  --BMuUInput=<value>\n"
+      "  --moc2Input=<value>\n"
+      "  --mRd2Input=<value>\n"
+      "  --mRu2Input=<value>\n"
+      "  --MDBSInput=<value>\n"
+      "  --MDWBTInput=<value>\n"
+      "  --MDGocInput=<value>\n"
 
       "  --help,-h                         print this help message"
              << std::endl;
@@ -49,6 +67,60 @@ void set_command_line_parameters(int argc, char* argv[],
       const char* option = argv[i];
 
       if(Command_line_options::get_parameter_value(option, "--TanBeta=", input.TanBeta))
+         continue;
+
+      if(Command_line_options::get_parameter_value(option, "--LamTDInput=", input.LamTDInput))
+         continue;
+
+      if(Command_line_options::get_parameter_value(option, "--LamTUInput=", input.LamTUInput))
+         continue;
+
+      if(Command_line_options::get_parameter_value(option, "--LamSDInput=", input.LamSDInput))
+         continue;
+
+      if(Command_line_options::get_parameter_value(option, "--LamSUInput=", input.LamSUInput))
+         continue;
+
+      if(Command_line_options::get_parameter_value(option, "--MuInput=", input.MuInput))
+         continue;
+
+      if(Command_line_options::get_parameter_value(option, "--MuDInput=", input.MuDInput))
+         continue;
+
+      if(Command_line_options::get_parameter_value(option, "--MuUInput=", input.MuUInput))
+         continue;
+
+      if(Command_line_options::get_parameter_value(option, "--vTInput=", input.vTInput))
+         continue;
+
+      if(Command_line_options::get_parameter_value(option, "--vSInput=", input.vSInput))
+         continue;
+
+      if(Command_line_options::get_parameter_value(option, "--BMuInput=", input.BMuInput))
+         continue;
+
+      if(Command_line_options::get_parameter_value(option, "--BMuDInput=", input.BMuDInput))
+         continue;
+
+      if(Command_line_options::get_parameter_value(option, "--BMuUInput=", input.BMuUInput))
+         continue;
+
+      if(Command_line_options::get_parameter_value(option, "--moc2Input=", input.moc2Input))
+         continue;
+
+      if(Command_line_options::get_parameter_value(option, "--mRd2Input=", input.mRd2Input))
+         continue;
+
+      if(Command_line_options::get_parameter_value(option, "--mRu2Input=", input.mRu2Input))
+         continue;
+
+      if(Command_line_options::get_parameter_value(option, "--MDBSInput=", input.MDBSInput))
+         continue;
+
+      if(Command_line_options::get_parameter_value(option, "--MDWBTInput=", input.MDWBTInput))
+         continue;
+
+      if(Command_line_options::get_parameter_value(option, "--MDGocInput=", input.MDGocInput))
          continue;
 
       
@@ -79,6 +151,7 @@ int main(int argc, char* argv[])
 
    MRSSM_spectrum_generator<algorithm_type> spectrum_generator;
    spectrum_generator.set_precision_goal(1.0e-4);
+   spectrum_generator.set_beta_zero_threshold(1e-11);
    spectrum_generator.set_max_iterations(0);         // 0 == automatic
    spectrum_generator.set_calculate_sm_masses(0);    // 0 == no
    spectrum_generator.set_parameter_output_scale(0); // 0 == susy scale

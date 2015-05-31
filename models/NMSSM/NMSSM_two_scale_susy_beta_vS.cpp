@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:44:15
+// File generated at Sun 31 May 2015 12:42:42
 
 #include "NMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -37,7 +37,7 @@ double NMSSM_susy_parameters::calc_beta_vS_one_loop(const Susy_traces& susy_trac
 
    double beta_vS;
 
-   beta_vS = -2*oneOver16PiSqr*vS*(AbsSqr(Kappa) + AbsSqr(Lambdax));
+   beta_vS = Re(-2*oneOver16PiSqr*vS*(AbsSqr(Kappa) + AbsSqr(Lambdax)));
 
 
    return beta_vS;
@@ -57,9 +57,10 @@ double NMSSM_susy_parameters::calc_beta_vS_two_loop(const Susy_traces& susy_trac
 
    double beta_vS;
 
-   beta_vS = twoLoop*(8*vS*AbsSqr(Kappa)*AbsSqr(Lambdax) + 0.4*vS*AbsSqr(
-      Lambdax)*(15*traceYdAdjYd + 5*traceYeAdjYe + 15*traceYuAdjYu + 10*AbsSqr(
-      Lambdax) - 3*Sqr(g1) - 15*Sqr(g2)) + 8*vS*Sqr(Conj(Kappa))*Sqr(Kappa));
+   beta_vS = Re(twoLoop*(8*vS*AbsSqr(Kappa)*AbsSqr(Lambdax) + 0.4*vS*
+      AbsSqr(Lambdax)*(15*traceYdAdjYd + 5*traceYeAdjYe + 15*traceYuAdjYu + 10*
+      AbsSqr(Lambdax) - 3*Sqr(g1) - 15*Sqr(g2)) + 8*vS*Sqr(Conj(Kappa))*Sqr(
+      Kappa)));
 
 
    return beta_vS;

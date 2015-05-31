@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:29:21
+// File generated at Sun 31 May 2015 12:22:43
 
 #include "SM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -40,8 +40,9 @@ double SM_soft_parameters::calc_beta_mu2_one_loop(const Soft_traces& soft_traces
 
    double beta_mu2;
 
-   beta_mu2 = oneOver16PiSqr*(6*mu2*traceYdAdjYd + 2*mu2*traceYeAdjYe + 6
-      *mu2*traceYuAdjYu + 6*mu2*Lambdax - 0.9*mu2*Sqr(g1) - 4.5*mu2*Sqr(g2));
+   beta_mu2 = Re(oneOver16PiSqr*(6*mu2*traceYdAdjYd + 2*mu2*traceYeAdjYe
+      + 6*mu2*traceYuAdjYu + 6*mu2*Lambdax - 0.9*mu2*Sqr(g1) - 4.5*mu2*Sqr(g2))
+      );
 
 
    return beta_mu2;
@@ -65,14 +66,14 @@ double SM_soft_parameters::calc_beta_mu2_two_loop(const Soft_traces& soft_traces
 
    double beta_mu2;
 
-   beta_mu2 = 0.0025*mu2*twoLoop*(1671*Power(g1,4) - 3625*Power(g2,4) -
-      5400*traceYdAdjYdYdAdjYd - 8400*traceYdAdjYuYuAdjYd - 1800*
+   beta_mu2 = Re(0.0025*mu2*twoLoop*(1671*Power(g1,4) - 3625*Power(g2,4)
+      - 5400*traceYdAdjYdYdAdjYd - 8400*traceYdAdjYuYuAdjYd - 1800*
       traceYeAdjYeYeAdjYe - 5400*traceYuAdjYuYuAdjYu - 14400*traceYuAdjYu*
       Lambdax + 1700*traceYuAdjYu*Sqr(g1) + 2880*Lambdax*Sqr(g1) + 4500*
       traceYuAdjYu*Sqr(g2) + 14400*Lambdax*Sqr(g2) + 450*Sqr(g1)*Sqr(g2) + 300*
       traceYeAdjYe*(-16*Lambdax + 5*Sqr(g1) + 5*Sqr(g2)) + 16000*traceYuAdjYu*
       Sqr(g3) + 100*traceYdAdjYd*(-144*Lambdax + 5*Sqr(g1) + 45*Sqr(g2) + 160*
-      Sqr(g3)) - 6000*Sqr(Lambdax));
+      Sqr(g3)) - 6000*Sqr(Lambdax)));
 
 
    return beta_mu2;

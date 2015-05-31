@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:31:30
+// File generated at Sun 31 May 2015 12:24:55
 
 #include "MRSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -38,9 +38,9 @@ Eigen::Matrix<double,3,3> MRSSM_soft_parameters::calc_beta_mu2_one_loop(const So
 
    Eigen::Matrix<double,3,3> beta_mu2;
 
-   beta_mu2 = oneOver16PiSqr*(2*(2*mHu2*(Yu*Yu.adjoint()) + mu2*Yu*
+   beta_mu2 = (oneOver16PiSqr*(2*(2*mHu2*(Yu*Yu.adjoint()) + mu2*Yu*
       Yu.adjoint() + 2*(Yu*mq2*Yu.adjoint()) + Yu*Yu.adjoint()*mu2) -
-      1.0327955589886444*g1*Tr11*UNITMATRIX(3));
+      1.0327955589886444*g1*Tr11*UNITMATRIX(3))).real();
 
 
    return beta_mu2;
@@ -63,9 +63,9 @@ Eigen::Matrix<double,3,3> MRSSM_soft_parameters::calc_beta_mu2_two_loop(const So
 
    Eigen::Matrix<double,3,3> beta_mu2;
 
-   beta_mu2 = twoLoop*(-0.4*(30*tracemq2AdjYuYu + 30*tracemu2YuAdjYu + 60
-      *mHu2*traceYuAdjYu + 10*(2*mHu2 + mRu2 + mS2)*AbsSqr(LamSU) + 15*(2*mHu2
-      + mRu2 + mT2)*AbsSqr(LamTU) + 2*mHu2*Sqr(g1) - 30*mHu2*Sqr(g2))*(Yu*
+   beta_mu2 = (twoLoop*(-0.4*(30*tracemq2AdjYuYu + 30*tracemu2YuAdjYu +
+      60*mHu2*traceYuAdjYu + 10*(2*mHu2 + mRu2 + mS2)*AbsSqr(LamSU) + 15*(2*
+      mHu2 + mRu2 + mT2)*AbsSqr(LamTU) + 2*mHu2*Sqr(g1) - 30*mHu2*Sqr(g2))*(Yu*
       Yu.adjoint()) - 6*traceYuAdjYu*(mu2*Yu*Yu.adjoint()) - 2*AbsSqr(LamSU)*(
       mu2*Yu*Yu.adjoint()) - 3*AbsSqr(LamTU)*(mu2*Yu*Yu.adjoint()) - 0.4*Sqr(g1
       )*(mu2*Yu*Yu.adjoint()) + 6*Sqr(g2)*(mu2*Yu*Yu.adjoint()) - 12*
@@ -83,7 +83,7 @@ Eigen::Matrix<double,3,3> MRSSM_soft_parameters::calc_beta_mu2_two_loop(const So
       Yd.adjoint()*Yd*Yu.adjoint()*mu2) - 4*(Yu*Yu.adjoint()*mu2*Yu*Yu.adjoint(
       )) - 4*(Yu*Yu.adjoint()*Yu*mq2*Yu.adjoint()) - 2*(Yu*Yu.adjoint()*Yu*
       Yu.adjoint()*mu2) + 1.0666666666666667*(10*Power(g3,4)*Tr23 + g1*(2*g1*
-      Tr2U111 - 3.872983346207417*Tr31))*UNITMATRIX(3));
+      Tr2U111 - 3.872983346207417*Tr31))*UNITMATRIX(3))).real();
 
 
    return beta_mu2;

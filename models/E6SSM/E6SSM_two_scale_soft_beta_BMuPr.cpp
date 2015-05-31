@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:35:33
+// File generated at Sun 31 May 2015 12:30:32
 
 #include "E6SSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -37,9 +37,9 @@ double E6SSM_soft_parameters::calc_beta_BMuPr_one_loop(const Soft_traces& soft_t
 
    double beta_BMuPr;
 
-   beta_BMuPr = 0.2*oneOver16PiSqr*(-(BMuPr*(3*Sqr(g1) + 15*Sqr(g2) + 2*
-      Sqr(gN))) + 2*MuPr*(3*MassB*Sqr(g1) + 15*MassWB*Sqr(g2) + 2*MassBp*Sqr(gN
-      )));
+   beta_BMuPr = Re(0.2*oneOver16PiSqr*(-(BMuPr*(3*Sqr(g1) + 15*Sqr(g2) +
+      2*Sqr(gN))) + 2*MuPr*(3*MassB*Sqr(g1) + 15*MassWB*Sqr(g2) + 2*MassBp*Sqr(
+      gN))));
 
 
    return beta_BMuPr;
@@ -56,11 +56,11 @@ double E6SSM_soft_parameters::calc_beta_BMuPr_two_loop(const Soft_traces& soft_t
 
    double beta_BMuPr;
 
-   beta_BMuPr = -0.06*twoLoop*(-(BMuPr*(99*Power(g1,4) + 275*Power(g2,4)
-      + 64*Power(gN,4) + 20*Sqr(g2)*Sqr(gN) + Sqr(g1)*(30*Sqr(g2) + 4*Sqr(gN)))
-      ) + 4*MuPr*(99*Power(g1,4)*MassB + 64*Power(gN,4)*MassBp + 275*Power(g2,4
-      )*MassWB + 10*(MassBp + MassWB)*Sqr(g2)*Sqr(gN) + Sqr(g1)*(15*(MassB +
-      MassWB)*Sqr(g2) + 2*(MassB + MassBp)*Sqr(gN))));
+   beta_BMuPr = Re(-0.06*twoLoop*(-(BMuPr*(99*Power(g1,4) + 275*Power(g2,
+      4) + 64*Power(gN,4) + 20*Sqr(g2)*Sqr(gN) + 6*Sqr(g1)*(5*Sqr(g2) + 2*Sqr(
+      gN)))) + 4*MuPr*(99*Power(g1,4)*MassB + 64*Power(gN,4)*MassBp + 275*Power
+      (g2,4)*MassWB + 10*(MassBp + MassWB)*Sqr(g2)*Sqr(gN) + 3*Sqr(g1)*(5*(
+      MassB + MassWB)*Sqr(g2) + 2*(MassB + MassBp)*Sqr(gN)))));
 
 
    return beta_BMuPr;

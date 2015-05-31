@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:35:34
+// File generated at Sun 31 May 2015 12:30:34
 
 #include "E6SSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -39,14 +39,15 @@ Eigen::Matrix<double,3,3> E6SSM_soft_parameters::calc_beta_mq2_one_loop(const So
 
    Eigen::Matrix<double,3,3> beta_mq2;
 
-   beta_mq2 = oneOver16PiSqr*(2*mHd2*(Yd.adjoint()*Yd) + 2*mHu2*(
+   beta_mq2 = (oneOver16PiSqr*(2*mHd2*(Yd.adjoint()*Yd) + 2*mHu2*(
       Yu.adjoint()*Yu) + 2*((TYd).adjoint()*TYd) + 2*((TYu).adjoint()*TYu) +
       mq2*Yd.adjoint()*Yd + mq2*Yu.adjoint()*Yu + 2*(Yd.adjoint()*md2*Yd) +
       Yd.adjoint()*Yd*mq2 + 2*(Yu.adjoint()*mu2*Yu) + Yu.adjoint()*Yu*mq2 +
       0.2581988897471611*g1*Tr11*UNITMATRIX(3) + 0.31622776601683794*gN*Tr14*
       UNITMATRIX(3) - 0.13333333333333333*AbsSqr(MassB)*Sqr(g1)*UNITMATRIX(3) -
       6*AbsSqr(MassWB)*Sqr(g2)*UNITMATRIX(3) - 10.666666666666666*AbsSqr(MassG
-      )*Sqr(g3)*UNITMATRIX(3) - 0.2*AbsSqr(MassBp)*Sqr(gN)*UNITMATRIX(3));
+      )*Sqr(g3)*UNITMATRIX(3) - 0.2*AbsSqr(MassBp)*Sqr(gN)*UNITMATRIX(3))).real
+      ();
 
 
    return beta_mq2;
@@ -89,7 +90,7 @@ Eigen::Matrix<double,3,3> E6SSM_soft_parameters::calc_beta_mq2_two_loop(const So
 
    Eigen::Matrix<double,3,3> beta_mq2;
 
-   beta_mq2 = twoLoop*(-6*traceconjTYdTpTYd*(Yd.adjoint()*Yd) - 2*
+   beta_mq2 = (twoLoop*(-6*traceconjTYdTpTYd*(Yd.adjoint()*Yd) - 2*
       traceconjTYeTpTYe*(Yd.adjoint()*Yd) - 6*tracemd2YdAdjYd*(Yd.adjoint()*Yd)
       - 2*traceme2YeAdjYe*(Yd.adjoint()*Yd) - 2*traceml2AdjYeYe*(Yd.adjoint()*
       Yd) - 6*tracemq2AdjYdYd*(Yd.adjoint()*Yd) - 12*mHd2*traceYdAdjYd*(
@@ -166,7 +167,7 @@ Eigen::Matrix<double,3,3> E6SSM_soft_parameters::calc_beta_mq2_two_loop(const So
       gN)*(120*(6*MassBp*(Yd.adjoint()*Yd) - 3*(Yd.adjoint()*TYd) + 2*MassBp*(
       Yu.adjoint()*Yu) - Yu.adjoint()*TYu) + (-22*(MassB + 2*MassBp)*Sqr(g1) +
       90*(2*MassBp + MassWB)*Sqr(g2) + 320*MassBp*Sqr(g3) + 160*MassG*Sqr(g3) +
-      1701*MassBp*Sqr(gN))*UNITMATRIX(3)));
+      1701*MassBp*Sqr(gN))*UNITMATRIX(3)))).real();
 
 
    return beta_mq2;

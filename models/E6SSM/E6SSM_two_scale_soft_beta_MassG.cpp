@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:35:51
+// File generated at Sun 31 May 2015 12:30:55
 
 #include "E6SSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -37,7 +37,7 @@ double E6SSM_soft_parameters::calc_beta_MassG_one_loop(const Soft_traces& soft_t
 
    double beta_MassG;
 
-   beta_MassG = 0;
+   beta_MassG = Re(0);
 
 
    return beta_MassG;
@@ -60,11 +60,11 @@ double E6SSM_soft_parameters::calc_beta_MassG_two_loop(const Soft_traces& soft_t
 
    double beta_MassG;
 
-   beta_MassG = 2*twoLoop*Sqr(g3)*(2*traceAdjKappaTKappa + 4*
+   beta_MassG = Re(2*twoLoop*Sqr(g3)*(2*traceAdjKappaTKappa + 4*
       traceAdjYdTYd + 4*traceAdjYuTYu - 2*MassG*traceKappaAdjKappa - 4*MassG*
       traceYdAdjYd - 4*MassG*traceYuAdjYu + 3*MassB*Sqr(g1) + 3*MassG*Sqr(g1) +
       9*MassG*Sqr(g2) + 9*MassWB*Sqr(g2) + 96*MassG*Sqr(g3) + 3*MassBp*Sqr(gN)
-      + 3*MassG*Sqr(gN));
+      + 3*MassG*Sqr(gN)));
 
 
    return beta_MassG;

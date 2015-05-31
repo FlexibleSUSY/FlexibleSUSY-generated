@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:35:46
+// File generated at Sun 31 May 2015 12:30:48
 
 #include "E6SSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -53,13 +53,13 @@ double E6SSM_soft_parameters::calc_beta_ms2_one_loop(const Soft_traces& soft_tra
 
    double beta_ms2;
 
-   beta_ms2 = oneOver16PiSqr*(1.5811388300841898*gN*Tr14 + 6*
+   beta_ms2 = Re(oneOver16PiSqr*(1.5811388300841898*gN*Tr14 + 6*
       traceconjTKappaTpTKappa + 4*traceconjTLambda12TpTLambda12 + 6*ms2*
       traceKappaAdjKappa + 6*traceKappaAdjKappaconjmDx2 + 6*
       traceKappaconjmDxbar2AdjKappa + 4*ms2*traceLambda12AdjLambda12 + 4*
       traceLambda12AdjLambda12conjmH2I2 + 4*tracemH1I2AdjLambda12Lambda12 + 4*(
       mHd2 + mHu2 + ms2)*AbsSqr(Lambdax) + 4*AbsSqr(TLambdax) - 5*AbsSqr(MassBp
-      )*Sqr(gN));
+      )*Sqr(gN)));
 
 
    return beta_ms2;
@@ -144,7 +144,7 @@ double E6SSM_soft_parameters::calc_beta_ms2_two_loop(const Soft_traces& soft_tra
 
    double beta_ms2;
 
-   beta_ms2 = 0.05*twoLoop*(3*Conj(MassBp)*Sqr(gN)*(24*
+   beta_ms2 = Re(0.05*twoLoop*(3*Conj(MassBp)*Sqr(gN)*(24*
       traceAdjKappaTKappa + 16*traceAdjLambda12TLambda12 - 48*MassBp*
       traceKappaAdjKappa - 32*MassBp*traceLambda12AdjLambda12 + 1065*MassBp*Sqr
       (gN) + 16*Conj(Lambdax)*(-2*MassBp*Lambdax + TLambdax)) + 4*(
@@ -204,7 +204,7 @@ double E6SSM_soft_parameters::calc_beta_ms2_two_loop(const Soft_traces& soft_tra
       TLambdax)*(Lambdax*(15*traceAdjYdTYd + 5*traceAdjYeTYe + 15*traceAdjYuTYu
       + 3*MassB*Sqr(g1) + 15*MassWB*Sqr(g2) - 3*MassBp*Sqr(gN)) + (15*
       traceYdAdjYd + 5*traceYeAdjYe + 15*traceYuAdjYu - 3*Sqr(g1) - 15*Sqr(g2)
-      + 3*Sqr(gN))*TLambdax)));
+      + 3*Sqr(gN))*TLambdax))));
 
 
    return beta_ms2;

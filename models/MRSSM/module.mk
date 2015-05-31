@@ -18,6 +18,7 @@ MRSSM_TWO_SCALE_MK := \
 		$(MRSSM_TWO_SCALE_SOFT_MK)
 
 MRSSM_SLHA_INPUT := \
+		$(DIR)/LesHouches.in.MRSSM~ \
 		$(DIR)/LesHouches.in.MRSSM
 
 MRSSM_GNUPLOT := \
@@ -34,6 +35,7 @@ LIBMRSSM_HDR :=
 
 ifneq ($(findstring two_scale,$(ALGORITHMS)),)
 LIBMRSSM_SRC += \
+		$(DIR)/MRSSM_mass_eigenstates.cpp \
 		$(DIR)/MRSSM_info.cpp \
 		$(DIR)/MRSSM_input_parameters.cpp \
 		$(DIR)/MRSSM_slha_io.cpp \
@@ -55,6 +57,7 @@ EXEMRSSM_SRC += \
 LIBMRSSM_HDR += \
 		$(DIR)/MRSSM_convergence_tester.hpp \
 		$(DIR)/MRSSM_high_scale_constraint.hpp \
+		$(DIR)/MRSSM_mass_eigenstates.hpp \
 		$(DIR)/MRSSM_info.hpp \
 		$(DIR)/MRSSM_initial_guesser.hpp \
 		$(DIR)/MRSSM_input_parameters.hpp \

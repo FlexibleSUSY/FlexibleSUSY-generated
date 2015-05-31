@@ -18,6 +18,7 @@ NMSSM_TWO_SCALE_MK := \
 		$(NMSSM_TWO_SCALE_SOFT_MK)
 
 NMSSM_SLHA_INPUT := \
+		$(DIR)/LesHouches.in.NMSSM~ \
 		$(DIR)/LesHouches.in.NMSSM
 
 NMSSM_GNUPLOT := \
@@ -34,6 +35,7 @@ LIBNMSSM_HDR :=
 
 ifneq ($(findstring two_scale,$(ALGORITHMS)),)
 LIBNMSSM_SRC += \
+		$(DIR)/NMSSM_mass_eigenstates.cpp \
 		$(DIR)/NMSSM_info.cpp \
 		$(DIR)/NMSSM_input_parameters.cpp \
 		$(DIR)/NMSSM_slha_io.cpp \
@@ -55,6 +57,7 @@ EXENMSSM_SRC += \
 LIBNMSSM_HDR += \
 		$(DIR)/NMSSM_convergence_tester.hpp \
 		$(DIR)/NMSSM_high_scale_constraint.hpp \
+		$(DIR)/NMSSM_mass_eigenstates.hpp \
 		$(DIR)/NMSSM_info.hpp \
 		$(DIR)/NMSSM_initial_guesser.hpp \
 		$(DIR)/NMSSM_input_parameters.hpp \

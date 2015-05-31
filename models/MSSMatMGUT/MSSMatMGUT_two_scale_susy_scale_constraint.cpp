@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:51:11
+// File generated at Sun 31 May 2015 12:54:59
 
 #include "MSSMatMGUT_two_scale_susy_scale_constraint.hpp"
 #include "MSSMatMGUT_two_scale_model.hpp"
@@ -32,11 +32,12 @@
 
 namespace flexiblesusy {
 
-#define INPUTPARAMETER(p) inputPars.p
+#define INPUTPARAMETER(p) model->get_input().p
 #define MODELPARAMETER(p) model->get_##p()
+#define PHASE(p) model->get_##p()
 #define BETAPARAMETER(p) beta_functions.get_##p()
 #define BETA(p) beta_##p
-#define SM(p) Electroweak_constants::p
+#define LowEnergyConstant(p) Electroweak_constants::p
 #define STANDARDDEVIATION(p) Electroweak_constants::Error_##p
 #define Pole(p) model->get_physical().p
 #define MODEL model
@@ -47,16 +48,13 @@ MSSMatMGUT_susy_scale_constraint<Two_scale>::MSSMatMGUT_susy_scale_constraint()
    , scale(0.)
    , initial_scale_guess(0.)
    , model(0)
-   , inputPars()
 {
 }
 
 MSSMatMGUT_susy_scale_constraint<Two_scale>::MSSMatMGUT_susy_scale_constraint(
-   MSSMatMGUT<Two_scale>* model_,
-   const MSSMatMGUT_input_parameters& inputPars_)
+   MSSMatMGUT<Two_scale>* model_)
    : Constraint<Two_scale>()
    , model(model_)
-   , inputPars(inputPars_)
 {
    initialize();
 }
@@ -94,7 +92,10 @@ double MSSMatMGUT_susy_scale_constraint<Two_scale>::get_initial_scale_guess() co
 
 const MSSMatMGUT_input_parameters& MSSMatMGUT_susy_scale_constraint<Two_scale>::get_input_parameters() const
 {
-   return inputPars;
+   assert(model && "Error: MSSMatMGUT_susy_scale_constraint::"
+          "get_input_parameters(): model pointer is zero.");
+
+   return model->get_input();
 }
 
 MSSMatMGUT<Two_scale>* MSSMatMGUT_susy_scale_constraint<Two_scale>::get_model() const
@@ -105,11 +106,6 @@ MSSMatMGUT<Two_scale>* MSSMatMGUT_susy_scale_constraint<Two_scale>::get_model() 
 void MSSMatMGUT_susy_scale_constraint<Two_scale>::set_model(Two_scale_model* model_)
 {
    model = cast_model<MSSMatMGUT<Two_scale>*>(model_);
-}
-
-void MSSMatMGUT_susy_scale_constraint<Two_scale>::set_input_parameters(const MSSMatMGUT_input_parameters& inputPars_)
-{
-   inputPars = inputPars_;
 }
 
 void MSSMatMGUT_susy_scale_constraint<Two_scale>::clear()

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:35:13
+// File generated at Sun 31 May 2015 12:30:41
 
 #include "UMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -42,9 +42,9 @@ Eigen::Matrix<double,3,3> UMSSM_susy_parameters::calc_beta_Ye_one_loop(const Sus
 
    Eigen::Matrix<double,3,3> beta_Ye;
 
-   beta_Ye = oneOver16PiSqr*(Ye*(3*traceYdAdjYd + traceYeAdjYe + AbsSqr(
+   beta_Ye = (oneOver16PiSqr*(Ye*(3*traceYdAdjYd + traceYeAdjYe + AbsSqr(
       Lambdax) - 1.8*Sqr(g1) - 3*Sqr(g2) - 2*Sqr(gp)*Sqr(Qe) - 2*Sqr(gp)*Sqr(
-      QHd) - 2*Sqr(gp)*Sqr(Ql)) + 3*(Ye*Ye.adjoint()*Ye));
+      QHd) - 2*Sqr(gp)*Sqr(Ql)) + 3*(Ye*Ye.adjoint()*Ye))).real();
 
 
    return beta_Ye;
@@ -75,7 +75,7 @@ Eigen::Matrix<double,3,3> UMSSM_susy_parameters::calc_beta_Ye_two_loop(const Sus
 
    Eigen::Matrix<double,3,3> beta_Ye;
 
-   beta_Ye = twoLoop*(0.1*Ye*(135*Power(g1,4) + 75*Power(g2,4) + 100*
+   beta_Ye = (twoLoop*(0.1*Ye*(135*Power(g1,4) + 75*Power(g2,4) + 100*
       Power(gp,4)*Power(Qe,4) + 80*Power(gp,4)*Power(QHd,4) + 160*Power(gp,4)*
       Power(Ql,4) - 90*traceYdAdjYdYdAdjYd - 30*traceYdAdjYuYuAdjYd - 30*
       traceYeAdjYeYeAdjYe + 12*traceYeAdjYe*Sqr(g1) + 18*Sqr(g1)*Sqr(g2) + 72*
@@ -102,7 +102,7 @@ Eigen::Matrix<double,3,3> UMSSM_susy_parameters::calc_beta_Ye_two_loop(const Sus
       Conj(Lambdax))*Sqr(Lambdax)) + (-9*traceYdAdjYd - 3*traceYeAdjYe - 3*
       AbsSqr(Lambdax) + 6*Sqr(g2) - 2*Sqr(gp)*Sqr(Qe) + 6*Sqr(gp)*Sqr(QHd) + 2*
       Sqr(gp)*Sqr(Ql))*(Ye*Ye.adjoint()*Ye) - 4*(Ye*Ye.adjoint()*Ye*Ye.adjoint(
-      )*Ye));
+      )*Ye))).real();
 
 
    return beta_Ye;

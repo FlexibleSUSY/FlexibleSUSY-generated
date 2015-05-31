@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:35:55
+// File generated at Sun 31 May 2015 12:31:02
 
 #include "E6SSM_two_scale_high_scale_constraint.hpp"
 #include "E6SSM_two_scale_model.hpp"
@@ -26,7 +26,7 @@
 #include "gsl_utils.hpp"
 #include "minimizer.hpp"
 #include "root_finder.hpp"
-#include "numerics.hpp"
+#include "numerics2.hpp"
 
 #include <cassert>
 #include <cmath>
@@ -35,11 +35,12 @@
 
 namespace flexiblesusy {
 
-#define INPUTPARAMETER(p) inputPars.p
+#define INPUTPARAMETER(p) model->get_input().p
 #define MODELPARAMETER(p) model->get_##p()
+#define PHASE(p) model->get_##p()
 #define BETAPARAMETER(p) beta_functions.get_##p()
 #define BETA(p) beta_##p
-#define SM(p) Electroweak_constants::p
+#define LowEnergyConstant(p) Electroweak_constants::p
 #define STANDARDDEVIATION(p) Electroweak_constants::Error_##p
 #define Pole(p) model->get_physical().p
 #define MODEL model
@@ -50,16 +51,13 @@ E6SSM_high_scale_constraint<Two_scale>::E6SSM_high_scale_constraint()
    , scale(0.)
    , initial_scale_guess(0.)
    , model(0)
-   , inputPars()
 {
 }
 
 E6SSM_high_scale_constraint<Two_scale>::E6SSM_high_scale_constraint(
-   E6SSM<Two_scale>* model_,
-   const E6SSM_input_parameters& inputPars_)
+   E6SSM<Two_scale>* model_)
    : Constraint<Two_scale>()
    , model(model_)
-   , inputPars(inputPars_)
 {
    initialize();
 }
@@ -73,26 +71,26 @@ void E6SSM_high_scale_constraint<Two_scale>::apply()
    assert(model && "Error: E6SSM_high_scale_constraint::apply():"
           " model pointer must not be zero");
 
-   if (std::fabs(model->get_g1()) > 3.0) {
+   if (std::fabs(model->get_g1()) > 3.54491) {
 #ifdef ENABLE_VERBOSE
       ERROR("E6SSM_high_scale_constraint: Non-perturbative gauge "
             "coupling g1 = " << model->get_g1());
 #endif
-      model->set_g1(1.0);
+      model->set_g1(3.54491);
    }
-   if (std::fabs(model->get_g2()) > 3.0) {
+   if (std::fabs(model->get_g2()) > 3.54491) {
 #ifdef ENABLE_VERBOSE
       ERROR("E6SSM_high_scale_constraint: Non-perturbative gauge "
             "coupling g2 = " << model->get_g2());
 #endif
-      model->set_g2(1.0);
+      model->set_g2(3.54491);
    }
-   if (std::fabs(model->get_g3()) > 3.0) {
+   if (std::fabs(model->get_g3()) > 3.54491) {
 #ifdef ENABLE_VERBOSE
       ERROR("E6SSM_high_scale_constraint: Non-perturbative gauge "
             "coupling g3 = " << model->get_g3());
 #endif
-      model->set_g3(1.0);
+      model->set_g3(3.54491);
    }
 
    update_scale();
@@ -108,32 +106,32 @@ void E6SSM_high_scale_constraint<Two_scale>::apply()
    const auto Yd = MODELPARAMETER(Yd);
    const auto Yu = MODELPARAMETER(Yu);
 
-   MODEL->set_gN(g1);
-   MODEL->set_TYe(Azero*Ye);
-   MODEL->set_TYd(Azero*Yd);
-   MODEL->set_TYu(Azero*Yu);
-   MODEL->set_mq2(Sqr(m0)*UNITMATRIX(3));
-   MODEL->set_ml2(Sqr(m0)*UNITMATRIX(3));
-   MODEL->set_md2(Sqr(m0)*UNITMATRIX(3));
-   MODEL->set_mu2(Sqr(m0)*UNITMATRIX(3));
-   MODEL->set_me2(Sqr(m0)*UNITMATRIX(3));
-   MODEL->set_mDx2(Sqr(m0)*UNITMATRIX(3));
-   MODEL->set_mDxbar2(Sqr(m0)*UNITMATRIX(3));
-   MODEL->set_mH1I2(Sqr(m0)*UNITMATRIX(2));
-   MODEL->set_mH2I2(Sqr(m0)*UNITMATRIX(2));
-   MODEL->set_msI2(Sqr(m0)*UNITMATRIX(2));
-   MODEL->set_mHp2(Sqr(m0));
-   MODEL->set_mHpbar2(Sqr(m0));
-   MODEL->set_Kappa(KappaInput*UNITMATRIX(3));
-   MODEL->set_Lambda12(Lambda12Input*UNITMATRIX(2));
-   MODEL->set_Lambdax(LambdaInput);
-   MODEL->set_TKappa(Azero*KappaInput*UNITMATRIX(3));
-   MODEL->set_TLambda12(Azero*Lambda12Input*UNITMATRIX(2));
-   MODEL->set_TLambdax(Azero*LambdaInput);
-   MODEL->set_MassB(m12);
-   MODEL->set_MassWB(m12);
-   MODEL->set_MassG(m12);
-   MODEL->set_MassBp(m12);
+   MODEL->set_gN(Re(g1));
+   MODEL->set_TYe((Azero*Ye).real());
+   MODEL->set_TYd((Azero*Yd).real());
+   MODEL->set_TYu((Azero*Yu).real());
+   MODEL->set_mq2((Sqr(m0)*UNITMATRIX(3)).real());
+   MODEL->set_ml2((Sqr(m0)*UNITMATRIX(3)).real());
+   MODEL->set_md2((Sqr(m0)*UNITMATRIX(3)).real());
+   MODEL->set_mu2((Sqr(m0)*UNITMATRIX(3)).real());
+   MODEL->set_me2((Sqr(m0)*UNITMATRIX(3)).real());
+   MODEL->set_mDx2((Sqr(m0)*UNITMATRIX(3)).real());
+   MODEL->set_mDxbar2((Sqr(m0)*UNITMATRIX(3)).real());
+   MODEL->set_mH1I2((Sqr(m0)*UNITMATRIX(2)).real());
+   MODEL->set_mH2I2((Sqr(m0)*UNITMATRIX(2)).real());
+   MODEL->set_msI2((Sqr(m0)*UNITMATRIX(2)).real());
+   MODEL->set_mHp2(Re(Sqr(m0)));
+   MODEL->set_mHpbar2(Re(Sqr(m0)));
+   MODEL->set_Kappa((KappaInput*UNITMATRIX(3)).real());
+   MODEL->set_Lambda12((Lambda12Input*UNITMATRIX(2)).real());
+   MODEL->set_Lambdax(Re(LambdaInput));
+   MODEL->set_TKappa((Azero*KappaInput*UNITMATRIX(3)).real());
+   MODEL->set_TLambda12((Azero*Lambda12Input*UNITMATRIX(2)).real());
+   MODEL->set_TLambdax(Re(Azero*LambdaInput));
+   MODEL->set_MassB(Re(m12));
+   MODEL->set_MassWB(Re(m12));
+   MODEL->set_MassG(Re(m12));
+   MODEL->set_MassBp(Re(m12));
 
    {
       const auto g1 = MODELPARAMETER(g1);
@@ -148,45 +146,45 @@ void E6SSM_high_scale_constraint<Two_scale>::apply()
       const auto Yu = MODELPARAMETER(Yu);
 
       if (MaxAbsValue(g1) > 3.5449077018110318)
-         model->get_problems().flag_non_perturbative_parameter_warning("g1", MaxAbsValue(g1), model->get_scale(), 3.5449077018110318);
+         model->get_problems().flag_non_perturbative_parameter("g1", MaxAbsValue(g1), model->get_scale(), 3.5449077018110318);
       else
-         model->get_problems().unflag_non_perturbative_parameter_warning("g1");
+         model->get_problems().unflag_non_perturbative_parameter("g1");
       if (MaxAbsValue(g2) > 3.5449077018110318)
-         model->get_problems().flag_non_perturbative_parameter_warning("g2", MaxAbsValue(g2), model->get_scale(), 3.5449077018110318);
+         model->get_problems().flag_non_perturbative_parameter("g2", MaxAbsValue(g2), model->get_scale(), 3.5449077018110318);
       else
-         model->get_problems().unflag_non_perturbative_parameter_warning("g2");
+         model->get_problems().unflag_non_perturbative_parameter("g2");
       if (MaxAbsValue(g3) > 3.5449077018110318)
-         model->get_problems().flag_non_perturbative_parameter_warning("g3", MaxAbsValue(g3), model->get_scale(), 3.5449077018110318);
+         model->get_problems().flag_non_perturbative_parameter("g3", MaxAbsValue(g3), model->get_scale(), 3.5449077018110318);
       else
-         model->get_problems().unflag_non_perturbative_parameter_warning("g3");
+         model->get_problems().unflag_non_perturbative_parameter("g3");
       if (MaxAbsValue(gN) > 3.5449077018110318)
-         model->get_problems().flag_non_perturbative_parameter_warning("gN", MaxAbsValue(gN), model->get_scale(), 3.5449077018110318);
+         model->get_problems().flag_non_perturbative_parameter("gN", MaxAbsValue(gN), model->get_scale(), 3.5449077018110318);
       else
-         model->get_problems().unflag_non_perturbative_parameter_warning("gN");
+         model->get_problems().unflag_non_perturbative_parameter("gN");
       if (MaxAbsValue(Yd) > 3.5449077018110318)
-         model->get_problems().flag_non_perturbative_parameter_warning("Yd", MaxAbsValue(Yd), model->get_scale(), 3.5449077018110318);
+         model->get_problems().flag_non_perturbative_parameter("Yd", MaxAbsValue(Yd), model->get_scale(), 3.5449077018110318);
       else
-         model->get_problems().unflag_non_perturbative_parameter_warning("Yd");
+         model->get_problems().unflag_non_perturbative_parameter("Yd");
       if (MaxAbsValue(Ye) > 3.5449077018110318)
-         model->get_problems().flag_non_perturbative_parameter_warning("Ye", MaxAbsValue(Ye), model->get_scale(), 3.5449077018110318);
+         model->get_problems().flag_non_perturbative_parameter("Ye", MaxAbsValue(Ye), model->get_scale(), 3.5449077018110318);
       else
-         model->get_problems().unflag_non_perturbative_parameter_warning("Ye");
+         model->get_problems().unflag_non_perturbative_parameter("Ye");
       if (MaxAbsValue(Kappa) > 3.5449077018110318)
-         model->get_problems().flag_non_perturbative_parameter_warning("Kappa", MaxAbsValue(Kappa), model->get_scale(), 3.5449077018110318);
+         model->get_problems().flag_non_perturbative_parameter("Kappa", MaxAbsValue(Kappa), model->get_scale(), 3.5449077018110318);
       else
-         model->get_problems().unflag_non_perturbative_parameter_warning("Kappa");
+         model->get_problems().unflag_non_perturbative_parameter("Kappa");
       if (MaxAbsValue(Lambda12) > 3.5449077018110318)
-         model->get_problems().flag_non_perturbative_parameter_warning("Lambda12", MaxAbsValue(Lambda12), model->get_scale(), 3.5449077018110318);
+         model->get_problems().flag_non_perturbative_parameter("Lambda12", MaxAbsValue(Lambda12), model->get_scale(), 3.5449077018110318);
       else
-         model->get_problems().unflag_non_perturbative_parameter_warning("Lambda12");
+         model->get_problems().unflag_non_perturbative_parameter("Lambda12");
       if (MaxAbsValue(Lambdax) > 3.5449077018110318)
-         model->get_problems().flag_non_perturbative_parameter_warning("Lambdax", MaxAbsValue(Lambdax), model->get_scale(), 3.5449077018110318);
+         model->get_problems().flag_non_perturbative_parameter("Lambdax", MaxAbsValue(Lambdax), model->get_scale(), 3.5449077018110318);
       else
-         model->get_problems().unflag_non_perturbative_parameter_warning("Lambdax");
+         model->get_problems().unflag_non_perturbative_parameter("Lambdax");
       if (MaxAbsValue(Yu) > 3.5449077018110318)
-         model->get_problems().flag_non_perturbative_parameter_warning("Yu", MaxAbsValue(Yu), model->get_scale(), 3.5449077018110318);
+         model->get_problems().flag_non_perturbative_parameter("Yu", MaxAbsValue(Yu), model->get_scale(), 3.5449077018110318);
       else
-         model->get_problems().unflag_non_perturbative_parameter_warning("Yu");
+         model->get_problems().unflag_non_perturbative_parameter("Yu");
 
    }
 }
@@ -201,14 +199,19 @@ double E6SSM_high_scale_constraint<Two_scale>::get_initial_scale_guess() const
    return initial_scale_guess;
 }
 
+const E6SSM_input_parameters& E6SSM_high_scale_constraint<Two_scale>::get_input_parameters() const
+{
+   return model->get_input();
+}
+
+E6SSM<Two_scale>* E6SSM_high_scale_constraint<Two_scale>::get_model() const
+{
+   return model;
+}
+
 void E6SSM_high_scale_constraint<Two_scale>::set_model(Two_scale_model* model_)
 {
    model = cast_model<E6SSM<Two_scale>*>(model_);
-}
-
-void E6SSM_high_scale_constraint<Two_scale>::set_input_parameters(const E6SSM_input_parameters& inputPars_)
-{
-   inputPars = inputPars_;
 }
 
 void E6SSM_high_scale_constraint<Two_scale>::set_scale(double s)
@@ -246,7 +249,7 @@ void E6SSM_high_scale_constraint<Two_scale>::update_scale()
    const auto beta_g1 = BETAPARAMETER(g1);
    const auto beta_g2 = BETAPARAMETER(g2);
 
-   scale = currentScale*exp((-g1 + g2)/(BETA(g1) - BETA(g2)));
+   scale = currentScale*Exp((-g1 + g2)/(BETA(g1) - BETA(g2)));
 
 
    if (errno == ERANGE) {

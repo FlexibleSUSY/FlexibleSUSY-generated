@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:36:02
+// File generated at Sun 31 May 2015 12:31:20
 
 #include "UMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -39,8 +39,8 @@ double UMSSM_soft_parameters::calc_beta_ms2_one_loop(const Soft_traces& soft_tra
 
    double beta_ms2;
 
-   beta_ms2 = oneOver16PiSqr*(2*gp*Qs*Tr14 + 4*(mHd2 + mHu2 + ms2)*AbsSqr
-      (Lambdax) + 4*AbsSqr(TLambdax) - 8*AbsSqr(MassU)*Sqr(gp)*Sqr(Qs));
+   beta_ms2 = Re(oneOver16PiSqr*(2*gp*Qs*Tr14 + 4*(mHd2 + mHu2 + ms2)*
+      AbsSqr(Lambdax) + 4*AbsSqr(TLambdax) - 8*AbsSqr(MassU)*Sqr(gp)*Sqr(Qs)));
 
 
    return beta_ms2;
@@ -85,9 +85,9 @@ double UMSSM_soft_parameters::calc_beta_ms2_two_loop(const Soft_traces& soft_tra
 
    double beta_ms2;
 
-   beta_ms2 = twoLoop*(8*gp*Qs*Tr34 - 12*traceYdAdjYd*AbsSqr(TLambdax) -
-      4*traceYeAdjYe*AbsSqr(TLambdax) - 12*traceYuAdjYu*AbsSqr(TLambdax) - 12*
-      traceAdjYdTYd*Conj(TLambdax)*Lambdax - 4*traceAdjYeTYe*Conj(TLambdax)*
+   beta_ms2 = Re(twoLoop*(8*gp*Qs*Tr34 - 12*traceYdAdjYd*AbsSqr(TLambdax)
+      - 4*traceYeAdjYe*AbsSqr(TLambdax) - 12*traceYuAdjYu*AbsSqr(TLambdax) -
+      12*traceAdjYdTYd*Conj(TLambdax)*Lambdax - 4*traceAdjYeTYe*Conj(TLambdax)*
       Lambdax - 12*traceAdjYuTYu*Conj(TLambdax)*Lambdax + 2.4*AbsSqr(TLambdax)*
       Sqr(g1) - 2.4*MassB*Conj(TLambdax)*Lambdax*Sqr(g1) + 12*AbsSqr(TLambdax)*
       Sqr(g2) - 12*MassWB*Conj(TLambdax)*Lambdax*Sqr(g2) + 8*AbsSqr(TLambdax)*
@@ -116,7 +116,7 @@ double UMSSM_soft_parameters::calc_beta_ms2_two_loop(const Soft_traces& soft_tra
       Lambdax*Sqr(gp)*Sqr(Qs) - 10*ms2*Lambdax*Sqr(gp)*Sqr(Qs) + 3*Conj(MassB)*
       Sqr(g1)*(2*MassB*Lambdax - TLambdax) + 15*Conj(MassWB)*Sqr(g2)*(2*MassWB*
       Lambdax - TLambdax) - 15*traceconjTYdTpYd*TLambdax - 5*traceconjTYeTpYe*
-      TLambdax - 15*traceconjTYuTpYu*TLambdax));
+      TLambdax - 15*traceconjTYuTpYu*TLambdax)));
 
 
    return beta_ms2;

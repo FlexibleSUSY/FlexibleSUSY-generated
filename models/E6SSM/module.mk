@@ -18,7 +18,8 @@ E6SSM_TWO_SCALE_MK := \
 		$(E6SSM_TWO_SCALE_SOFT_MK)
 
 E6SSM_SLHA_INPUT := \
-		$(DIR)/LesHouches.in.E6SSM
+		$(DIR)/LesHouches.in.E6SSM \
+		$(DIR)/LesHouches.in.E6SSM~
 
 E6SSM_GNUPLOT := \
 		$(DIR)/E6SSM_plot_rgflow.gnuplot \
@@ -34,6 +35,7 @@ LIBE6SSM_HDR :=
 
 ifneq ($(findstring two_scale,$(ALGORITHMS)),)
 LIBE6SSM_SRC += \
+		$(DIR)/E6SSM_mass_eigenstates.cpp \
 		$(DIR)/E6SSM_info.cpp \
 		$(DIR)/E6SSM_input_parameters.cpp \
 		$(DIR)/E6SSM_slha_io.cpp \
@@ -55,6 +57,7 @@ EXEE6SSM_SRC += \
 LIBE6SSM_HDR += \
 		$(DIR)/E6SSM_convergence_tester.hpp \
 		$(DIR)/E6SSM_high_scale_constraint.hpp \
+		$(DIR)/E6SSM_mass_eigenstates.hpp \
 		$(DIR)/E6SSM_info.hpp \
 		$(DIR)/E6SSM_initial_guesser.hpp \
 		$(DIR)/E6SSM_input_parameters.hpp \

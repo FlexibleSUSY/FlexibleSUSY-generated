@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:29:31
+// File generated at Sun 31 May 2015 12:22:54
 
 #ifndef SM_SPECTRUM_GENERATOR_H
 #define SM_SPECTRUM_GENERATOR_H
@@ -31,9 +31,11 @@
 #include "coupling_monitor.hpp"
 #include "error.hpp"
 #include "two_loop_corrections.hpp"
-#include "numerics.hpp"
+#include "numerics2.hpp"
 #include "two_scale_running_precision.hpp"
 #include "two_scale_solver.hpp"
+
+#include <limits>
 
 namespace flexiblesusy {
 
@@ -48,6 +50,8 @@ public:
       , low_scale(0.)
       , parameter_output_scale(0.)
       , precision_goal(1.0e-4)
+      , reached_precision(std::numeric_limits<double>::infinity())
+      , beta_zero_threshold(1.0e-11)
       , max_iterations(0)
       , beta_loop_order(2)
       , threshold_corrections_loop_order(2)
@@ -64,11 +68,13 @@ public:
       return model.get_problems();
    }
    int get_exit_code() const { return get_problems().have_problem(); }
+   double get_reached_precision() const { return reached_precision; }
    void set_parameter_output_scale(double s) { parameter_output_scale = s; }
    void set_precision_goal(double precision_goal_) { precision_goal = precision_goal_; }
    void set_pole_mass_loop_order(unsigned l) { model.set_pole_mass_loop_order(l); }
    void set_ewsb_loop_order(unsigned l) { model.set_ewsb_loop_order(l); }
    void set_beta_loop_order(unsigned l) { beta_loop_order = l; }
+   void set_beta_zero_threshold(double t) { beta_zero_threshold = t; }
    void set_max_iterations(unsigned n) { max_iterations = n; }
    void set_calculate_sm_masses(bool flag) { calculate_sm_masses = flag; }
    void set_force_output(bool flag) { force_output = flag; }
@@ -87,6 +93,8 @@ private:
    double susy_scale, low_scale;
    double parameter_output_scale; ///< output scale for running parameters
    double precision_goal; ///< precision goal
+   double reached_precision; ///< the precision that was reached
+   double beta_zero_threshold; ///< beta function zero threshold
    unsigned max_iterations; ///< maximum number of iterations
    unsigned beta_loop_order; ///< beta-function loop order
    unsigned threshold_corrections_loop_order; ///< threshold corrections loop order
@@ -109,6 +117,14 @@ template <class T>
 void SM_spectrum_generator<T>::run(const QedQcd& oneset,
                                 const SM_input_parameters& input)
 {
+   model.clear();
+   model.set_input_parameters(input);
+   model.do_calculate_sm_pole_masses(calculate_sm_masses);
+   model.do_force_output(force_output);
+   model.set_loops(beta_loop_order);
+   model.set_thresholds(threshold_corrections_loop_order);
+   model.set_zero_threshold(beta_zero_threshold);
+
    susy_scale_constraint.clear();
    low_scale_constraint .clear();
 
@@ -116,32 +132,24 @@ void SM_spectrum_generator<T>::run(const QedQcd& oneset,
    susy_scale_constraint.set_model(&model);
    low_scale_constraint .set_model(&model);
 
-   susy_scale_constraint.set_input_parameters(input);
-   low_scale_constraint .set_input_parameters(input);
    low_scale_constraint .set_sm_parameters(oneset);
 
    susy_scale_constraint.initialize();
    low_scale_constraint .initialize();
 
-   std::vector<Constraint<T>*> upward_constraints(2, NULL);
+   std::vector<Constraint<T>*> upward_constraints(2);
    upward_constraints[0] = &low_scale_constraint;
    upward_constraints[1] = &susy_scale_constraint;
 
-   std::vector<Constraint<T>*> downward_constraints(2, NULL);
+   std::vector<Constraint<T>*> downward_constraints(2);
    downward_constraints[0] = &susy_scale_constraint;
    downward_constraints[1] = &low_scale_constraint;
-
-   model.set_input_parameters(input);
-   model.do_calculate_sm_pole_masses(calculate_sm_masses);
-   model.do_force_output(force_output);
-   model.set_loops(beta_loop_order);
-   model.set_thresholds(threshold_corrections_loop_order);
 
    SM_convergence_tester<T> convergence_tester(&model, precision_goal);
    if (max_iterations > 0)
       convergence_tester.set_max_iterations(max_iterations);
 
-   SM_initial_guesser<T> initial_guesser(&model, input, oneset,
+   SM_initial_guesser<T> initial_guesser(&model, oneset,
                                                   low_scale_constraint,
                                                   susy_scale_constraint);
    Two_scale_increasing_precision precision(10.0, precision_goal);
@@ -153,11 +161,13 @@ void SM_spectrum_generator<T>::run(const QedQcd& oneset,
    solver.add_model(&model, upward_constraints, downward_constraints);
 
    susy_scale = low_scale = 0.;
+   reached_precision = std::numeric_limits<double>::infinity();
 
    try {
       solver.solve();
       susy_scale = susy_scale_constraint.get_scale();
       low_scale  = low_scale_constraint.get_scale();
+      reached_precision = convergence_tester.get_current_accuracy();
 
       model.run_to(susy_scale);
       model.solve_ewsb();

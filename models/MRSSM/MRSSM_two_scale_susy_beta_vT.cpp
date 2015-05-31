@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:31:22
+// File generated at Sun 31 May 2015 12:24:50
 
 #include "MRSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -37,8 +37,8 @@ double MRSSM_susy_parameters::calc_beta_vT_one_loop(const Susy_traces& susy_trac
 
    double beta_vT;
 
-   beta_vT = oneOver16PiSqr*vT*(-AbsSqr(LamTD) - AbsSqr(LamTU) + 4*Sqr(g2
-      ));
+   beta_vT = Re(oneOver16PiSqr*vT*(-AbsSqr(LamTD) - AbsSqr(LamTU) + 4*Sqr
+      (g2)));
 
 
    return beta_vT;
@@ -58,11 +58,11 @@ double MRSSM_susy_parameters::calc_beta_vT_two_loop(const Susy_traces& susy_trac
 
    double beta_vT;
 
-   beta_vT = 0.06666666666666667*twoLoop*vT*(-220*Power(g2,4) + 3*AbsSqr(
-      LamTD)*(15*traceYdAdjYd + 5*traceYeAdjYe + 10*AbsSqr(LamSD) - 3*Sqr(g1) -
-      15*Sqr(g2)) + 3*AbsSqr(LamTU)*(10*AbsSqr(LamSU) - 3*(-5*traceYuAdjYu +
-      Sqr(g1) + 5*Sqr(g2))) + 45*Sqr(LamTD)*Sqr(Conj(LamTD)) + 45*Sqr(LamTU)*
-      Sqr(Conj(LamTU)));
+   beta_vT = Re(0.06666666666666667*twoLoop*vT*(-220*Power(g2,4) + 3*
+      AbsSqr(LamTD)*(15*traceYdAdjYd + 5*traceYeAdjYe + 10*AbsSqr(LamSD) - 3*
+      Sqr(g1) - 15*Sqr(g2)) + 3*AbsSqr(LamTU)*(10*AbsSqr(LamSU) - 3*(-5*
+      traceYuAdjYu + Sqr(g1) + 5*Sqr(g2))) + 45*Sqr(LamTD)*Sqr(Conj(LamTD)) +
+      45*Sqr(LamTU)*Sqr(Conj(LamTU))));
 
 
    return beta_vT;

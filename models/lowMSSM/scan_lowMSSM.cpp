@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:46:55
+// File generated at Sun 31 May 2015 12:47:51
 
 #include "lowMSSM_input_parameters.hpp"
 #include "lowMSSM_spectrum_generator.hpp"
@@ -38,6 +38,11 @@ void print_usage()
       "Usage: scan_lowMSSM.x [options]\n"
       "Options:\n"
       "  --TanBeta=<value>\n"
+      "  --MuInput=<value>\n"
+      "  --BMuInput=<value>\n"
+      "  --MassBInput=<value>\n"
+      "  --MassWBInput=<value>\n"
+      "  --MassGInput=<value>\n"
 
       "  --help,-h                         print this help message"
              << std::endl;
@@ -50,6 +55,21 @@ void set_command_line_parameters(int argc, char* argv[],
       const char* option = argv[i];
 
       if(Command_line_options::get_parameter_value(option, "--TanBeta=", input.TanBeta))
+         continue;
+
+      if(Command_line_options::get_parameter_value(option, "--MuInput=", input.MuInput))
+         continue;
+
+      if(Command_line_options::get_parameter_value(option, "--BMuInput=", input.BMuInput))
+         continue;
+
+      if(Command_line_options::get_parameter_value(option, "--MassBInput=", input.MassBInput))
+         continue;
+
+      if(Command_line_options::get_parameter_value(option, "--MassWBInput=", input.MassWBInput))
+         continue;
+
+      if(Command_line_options::get_parameter_value(option, "--MassGInput=", input.MassGInput))
          continue;
 
       

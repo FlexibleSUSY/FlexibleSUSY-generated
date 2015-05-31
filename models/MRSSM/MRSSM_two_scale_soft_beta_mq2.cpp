@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:31:28
+// File generated at Sun 31 May 2015 12:24:53
 
 #include "MRSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -38,10 +38,10 @@ Eigen::Matrix<double,3,3> MRSSM_soft_parameters::calc_beta_mq2_one_loop(const So
 
    Eigen::Matrix<double,3,3> beta_mq2;
 
-   beta_mq2 = oneOver16PiSqr*(2*mHd2*(Yd.adjoint()*Yd) + 2*mHu2*(
+   beta_mq2 = (oneOver16PiSqr*(2*mHd2*(Yd.adjoint()*Yd) + 2*mHu2*(
       Yu.adjoint()*Yu) + mq2*Yd.adjoint()*Yd + mq2*Yu.adjoint()*Yu + 2*(
       Yd.adjoint()*md2*Yd) + Yd.adjoint()*Yd*mq2 + 2*(Yu.adjoint()*mu2*Yu) +
-      Yu.adjoint()*Yu*mq2 + 0.2581988897471611*g1*Tr11*UNITMATRIX(3));
+      Yu.adjoint()*Yu*mq2 + 0.2581988897471611*g1*Tr11*UNITMATRIX(3))).real();
 
 
    return beta_mq2;
@@ -71,7 +71,7 @@ Eigen::Matrix<double,3,3> MRSSM_soft_parameters::calc_beta_mq2_two_loop(const So
 
    Eigen::Matrix<double,3,3> beta_mq2;
 
-   beta_mq2 = twoLoop*((-6*tracemd2YdAdjYd - 2*traceme2YeAdjYe - 2*
+   beta_mq2 = (twoLoop*((-6*tracemd2YdAdjYd - 2*traceme2YeAdjYe - 2*
       traceml2AdjYeYe - 6*tracemq2AdjYdYd - 12*mHd2*traceYdAdjYd - 4*mHd2*
       traceYeAdjYe - 2*(2*mHd2 + mRd2 + mS2)*AbsSqr(LamSD) - 3*(2*mHd2 + mRd2 +
       mT2)*AbsSqr(LamTD) + 0.8*mHd2*Sqr(g1))*(Yd.adjoint()*Yd) - 6*
@@ -104,7 +104,7 @@ Eigen::Matrix<double,3,3> MRSSM_soft_parameters::calc_beta_mq2_two_loop(const So
       Yu.adjoint()*Yu) - 4*(Yu.adjoint()*Yu*Yu.adjoint()*mu2*Yu) - 2*(
       Yu.adjoint()*Yu*Yu.adjoint()*Yu*mq2) + 0.13333333333333333*(45*Power(g2,4
       )*Tr22 + 80*Power(g3,4)*Tr23 + g1*(g1*Tr2U111 + 7.745966692414834*Tr31))*
-      UNITMATRIX(3));
+      UNITMATRIX(3))).real();
 
 
    return beta_mq2;

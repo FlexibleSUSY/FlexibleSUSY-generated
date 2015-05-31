@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:50:16
+// File generated at Sun 31 May 2015 12:54:02
 
 #ifndef MSSMNoFVatMGUT_PHYSICAL_H
 #define MSSMNoFVatMGUT_PHYSICAL_H
@@ -32,6 +32,8 @@ namespace flexiblesusy {
 struct MSSMNoFVatMGUT_physical {
    MSSMNoFVatMGUT_physical();
    void clear();
+   void convert_to_hk();   ///< converts pole masses to HK convention
+   void convert_to_slha(); ///< converts pole masses to SLHA convention
    void print(std::ostream&) const;
 
    double MVG;

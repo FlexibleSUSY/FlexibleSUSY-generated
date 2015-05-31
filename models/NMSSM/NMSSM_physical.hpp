@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:46:06
+// File generated at Sun 31 May 2015 12:45:28
 
 #ifndef NMSSM_PHYSICAL_H
 #define NMSSM_PHYSICAL_H
@@ -32,6 +32,8 @@ namespace flexiblesusy {
 struct NMSSM_physical {
    NMSSM_physical();
    void clear();
+   void convert_to_hk();   ///< converts pole masses to HK convention
+   void convert_to_slha(); ///< converts pole masses to SLHA convention
    void print(std::ostream&) const;
 
    double MVG;

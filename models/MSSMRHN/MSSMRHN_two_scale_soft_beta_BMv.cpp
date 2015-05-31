@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:44:33
+// File generated at Sun 31 May 2015 12:45:58
 
 #include "MSSMRHN_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -37,9 +37,9 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_BMv_one_loop(const 
 
    Eigen::Matrix<double,3,3> beta_BMv;
 
-   beta_BMv = 2*oneOver16PiSqr*(2*(Mv*Yv.conjugate()*(TYv).transpose()) +
-      Yv*Yv.adjoint()*BMv + BMv*Yv.conjugate()*Yv.transpose() + 2*(TYv*
-      Yv.adjoint()*Mv));
+   beta_BMv = (2*oneOver16PiSqr*(2*(Mv*Yv.conjugate()*(TYv).transpose())
+      + Yv*Yv.adjoint()*BMv + BMv*Yv.conjugate()*Yv.transpose() + 2*(TYv*
+      Yv.adjoint()*Mv))).real();
 
 
    return beta_BMv;
@@ -60,7 +60,7 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_BMv_two_loop(const 
 
    Eigen::Matrix<double,3,3> beta_BMv;
 
-   beta_BMv = -0.4*twoLoop*(2*(15*traceAdjYuTYu + 5*traceAdjYvTYv + 3*
+   beta_BMv = (-0.4*twoLoop*(2*(15*traceAdjYuTYu + 5*traceAdjYvTYv + 3*
       MassB*Sqr(g1) + 15*MassWB*Sqr(g2))*(Mv*Yv.conjugate()*Yv.transpose()) + (
       30*traceYuAdjYu + 10*traceYvAdjYv - 6*(Sqr(g1) + 5*Sqr(g2)))*(Mv*
       Yv.conjugate()*(TYv).transpose()) + 30*traceAdjYuTYu*(Yv*Yv.adjoint()*Mv)
@@ -82,7 +82,7 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_BMv_two_loop(const 
       Mv) + 5*(BMv*Yv.conjugate()*Ye.transpose()*Ye.conjugate()*Yv.transpose())
       + 5*(BMv*Yv.conjugate()*Yv.transpose()*Yv.conjugate()*Yv.transpose()) +
       10*(TYv*Ye.adjoint()*Ye*Yv.adjoint()*Mv) + 10*(TYv*Yv.adjoint()*Yv*
-      Yv.adjoint()*Mv));
+      Yv.adjoint()*Mv))).real();
 
 
    return beta_BMv;

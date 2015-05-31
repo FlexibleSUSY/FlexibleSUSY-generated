@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:42:18
+// File generated at Sun 31 May 2015 12:39:26
 
 #include "SMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -37,11 +37,11 @@ double SMSSM_soft_parameters::calc_beta_LL1_one_loop(const Soft_traces& soft_tra
 
    double beta_LL1;
 
-   beta_LL1 = 2*oneOver16PiSqr*(MS*BMS*Conj(Kappa) + 2*MS*BMu*Conj(
+   beta_LL1 = Re(2*oneOver16PiSqr*(MS*BMS*Conj(Kappa) + 2*MS*BMu*Conj(
       Lambdax) + 2*ms2*Conj(MS)*Kappa + 2*mHd2*Conj(Mu)*Lambdax + 2*mHu2*Conj(
       Mu)*Lambdax + AbsSqr(Kappa)*LL1 + AbsSqr(Lambdax)*LL1 + Conj(BMS)*TKappa
       + 2*L1*Conj(Kappa)*TKappa + 2*Conj(BMu)*TLambdax + 2*L1*Conj(Lambdax)*
-      TLambdax);
+      TLambdax));
 
 
    return beta_LL1;
@@ -76,17 +76,17 @@ double SMSSM_soft_parameters::calc_beta_LL1_two_loop(const Soft_traces& soft_tra
 
    double beta_LL1;
 
-   beta_LL1 = -0.4*twoLoop*(30*L1*traceAdjYdTYd*AbsSqr(Lambdax) + 10*L1*
-      traceAdjYeTYe*AbsSqr(Lambdax) + 30*L1*traceAdjYuTYu*AbsSqr(Lambdax) + 20*
-      MS*(AbsSqr(Kappa) + AbsSqr(Lambdax))*BMS*Conj(Kappa) + 30*MS*traceYdAdjYd
-      *BMu*Conj(Lambdax) + 10*MS*traceYeAdjYe*BMu*Conj(Lambdax) + 30*MS*
-      traceYuAdjYu*BMu*Conj(Lambdax) + 30*traceAdjYdTYd*Conj(BMu)*Lambdax + 10*
-      traceAdjYeTYe*Conj(BMu)*Lambdax + 30*traceAdjYuTYu*Conj(BMu)*Lambdax + 30
-      *traceconjTYdTpTYd*Conj(Mu)*Lambdax + 10*traceconjTYeTpTYe*Conj(Mu)*
-      Lambdax + 30*traceconjTYuTpTYu*Conj(Mu)*Lambdax + 60*mHd2*traceYdAdjYd*
-      Conj(Mu)*Lambdax + 30*mHu2*traceYdAdjYd*Conj(Mu)*Lambdax + 30*
-      traceYdAdjYdconjmd2*Conj(Mu)*Lambdax + 30*traceYdconjmq2AdjYd*Conj(Mu)*
-      Lambdax + 20*mHd2*traceYeAdjYe*Conj(Mu)*Lambdax + 10*mHu2*traceYeAdjYe*
+   beta_LL1 = Re(-0.4*twoLoop*(30*L1*traceAdjYdTYd*AbsSqr(Lambdax) + 10*
+      L1*traceAdjYeTYe*AbsSqr(Lambdax) + 30*L1*traceAdjYuTYu*AbsSqr(Lambdax) +
+      20*MS*(AbsSqr(Kappa) + AbsSqr(Lambdax))*BMS*Conj(Kappa) + 30*MS*
+      traceYdAdjYd*BMu*Conj(Lambdax) + 10*MS*traceYeAdjYe*BMu*Conj(Lambdax) +
+      30*MS*traceYuAdjYu*BMu*Conj(Lambdax) + 30*traceAdjYdTYd*Conj(BMu)*Lambdax
+      + 10*traceAdjYeTYe*Conj(BMu)*Lambdax + 30*traceAdjYuTYu*Conj(BMu)*
+      Lambdax + 30*traceconjTYdTpTYd*Conj(Mu)*Lambdax + 10*traceconjTYeTpTYe*
+      Conj(Mu)*Lambdax + 30*traceconjTYuTpTYu*Conj(Mu)*Lambdax + 60*mHd2*
+      traceYdAdjYd*Conj(Mu)*Lambdax + 30*mHu2*traceYdAdjYd*Conj(Mu)*Lambdax +
+      30*traceYdAdjYdconjmd2*Conj(Mu)*Lambdax + 30*traceYdconjmq2AdjYd*Conj(Mu)
+      *Lambdax + 20*mHd2*traceYeAdjYe*Conj(Mu)*Lambdax + 10*mHu2*traceYeAdjYe*
       Conj(Mu)*Lambdax + 10*traceYeAdjYeconjme2*Conj(Mu)*Lambdax + 10*
       traceYeconjml2AdjYe*Conj(Mu)*Lambdax + 30*mHd2*traceYuAdjYu*Conj(Mu)*
       Lambdax + 60*mHu2*traceYuAdjYu*Conj(Mu)*Lambdax + 30*traceYuAdjYuconjmu2*
@@ -123,7 +123,7 @@ double SMSSM_soft_parameters::calc_beta_LL1_two_loop(const Soft_traces& soft_tra
       Conj(Mu)*Sqr(g1)*TLambdax - 30*Conj(BMu)*Sqr(g2)*TLambdax - 30*L1*Conj(
       Lambdax)*Sqr(g2)*TLambdax + 30*MassWB*Conj(Mu)*Sqr(g2)*TLambdax + 20*Conj
       (Kappa)*Conj(Lambdax)*Sqr(MS)*TLambdax + 40*L1*Lambdax*Sqr(Conj(Lambdax))
-      *TLambdax + 20*MS*Mu*Sqr(Conj(Lambdax))*TLambdax);
+      *TLambdax + 20*MS*Mu*Sqr(Conj(Lambdax))*TLambdax));
 
 
    return beta_LL1;

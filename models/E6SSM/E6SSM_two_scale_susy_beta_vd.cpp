@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:35:08
+// File generated at Sun 31 May 2015 12:30:16
 
 #include "E6SSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -39,8 +39,8 @@ double E6SSM_susy_parameters::calc_beta_vd_one_loop(const Susy_traces& susy_trac
 
    double beta_vd;
 
-   beta_vd = 0.05*oneOver16PiSqr*vd*(-60*traceYdAdjYd - 20*traceYeAdjYe -
-      20*AbsSqr(Lambdax) + 6*Sqr(g1) + 30*Sqr(g2) + 9*Sqr(gN));
+   beta_vd = Re(0.05*oneOver16PiSqr*vd*(-60*traceYdAdjYd - 20*
+      traceYeAdjYe - 20*AbsSqr(Lambdax) + 6*Sqr(g1) + 30*Sqr(g2) + 9*Sqr(gN)));
 
 
    return beta_vd;
@@ -66,14 +66,15 @@ double E6SSM_susy_parameters::calc_beta_vd_two_loop(const Susy_traces& susy_trac
 
    double beta_vd;
 
-   beta_vd = -0.00125*twoLoop*vd*(1188*Power(g1,4) + 2900*Power(g2,4) +
-      1773*Power(gN,4) - 7200*traceYdAdjYdYdAdjYd - 2400*traceYdAdjYuYuAdjYd -
-      2400*traceYeAdjYeYeAdjYe + 1200*traceYeAdjYe*Sqr(g1) + 1200*traceYeAdjYe*
-      Sqr(g2) + 360*Sqr(g1)*Sqr(g2) + 200*traceYeAdjYe*Sqr(gN) - 36*Sqr(g1)*Sqr
-      (gN) + 540*Sqr(g2)*Sqr(gN) + 200*traceYdAdjYd*(2*Sqr(g1) + 18*Sqr(g2) +
-      64*Sqr(g3) + 3*Sqr(gN)) + 40*AbsSqr(Lambdax)*(-60*traceKappaAdjKappa - 40
-      *traceLambda12AdjLambda12 - 60*traceYuAdjYu + 6*Sqr(g1) + 30*Sqr(g2) + 29
-      *Sqr(gN)) - 2400*Sqr(Conj(Lambdax))*Sqr(Lambdax));
+   beta_vd = Re(-0.00125*twoLoop*vd*(1188*Power(g1,4) + 2900*Power(g2,4)
+      + 1773*Power(gN,4) - 7200*traceYdAdjYdYdAdjYd - 2400*traceYdAdjYuYuAdjYd
+      - 2400*traceYeAdjYeYeAdjYe + 1200*traceYeAdjYe*Sqr(g1) + 1200*
+      traceYeAdjYe*Sqr(g2) + 360*Sqr(g1)*Sqr(g2) + 200*traceYeAdjYe*Sqr(gN) -
+      36*Sqr(g1)*Sqr(gN) + 540*Sqr(g2)*Sqr(gN) + 200*traceYdAdjYd*(2*Sqr(g1) +
+      18*Sqr(g2) + 64*Sqr(g3) + 3*Sqr(gN)) + 40*AbsSqr(Lambdax)*(-60*
+      traceKappaAdjKappa - 40*traceLambda12AdjLambda12 - 60*traceYuAdjYu + 6*
+      Sqr(g1) + 30*Sqr(g2) + 29*Sqr(gN)) - 2400*Sqr(Conj(Lambdax))*Sqr(Lambdax)
+      ));
 
 
    return beta_vd;

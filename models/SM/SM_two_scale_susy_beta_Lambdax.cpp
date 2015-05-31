@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:29:19
+// File generated at Sun 31 May 2015 12:22:41
 
 #include "SM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -43,11 +43,11 @@ double SM_susy_parameters::calc_beta_Lambdax_one_loop(const Susy_traces& susy_tr
 
    double beta_Lambdax;
 
-   beta_Lambdax = oneOver16PiSqr*(0.27*Power(g1,4) + 2.25*Power(g2,4) -
-      12*traceYdAdjYdYdAdjYd - 4*traceYeAdjYeYeAdjYe - 12*traceYuAdjYuYuAdjYu +
-      12*traceYdAdjYd*Lambdax + 4*traceYeAdjYe*Lambdax + 12*traceYuAdjYu*
+   beta_Lambdax = Re(oneOver16PiSqr*(0.27*Power(g1,4) + 2.25*Power(g2,4)
+      - 12*traceYdAdjYdYdAdjYd - 4*traceYeAdjYeYeAdjYe - 12*traceYuAdjYuYuAdjYu
+      + 12*traceYdAdjYd*Lambdax + 4*traceYeAdjYe*Lambdax + 12*traceYuAdjYu*
       Lambdax - 1.8*Lambdax*Sqr(g1) - 9*Lambdax*Sqr(g2) + 0.9*Sqr(g1)*Sqr(g2) +
-      12*Sqr(Lambdax));
+      12*Sqr(Lambdax)));
 
 
    return beta_Lambdax;
@@ -83,8 +83,8 @@ double SM_susy_parameters::calc_beta_Lambdax_two_loop(const Susy_traces& susy_tr
 
    double beta_Lambdax;
 
-   beta_Lambdax = twoLoop*(-3.411*Power(g1,6) + 38.125*Power(g2,6) + 60*
-      traceYdAdjYdYdAdjYdYdAdjYd + 12*traceYdAdjYdYdAdjYuYuAdjYd - 24*
+   beta_Lambdax = Re(twoLoop*(-3.411*Power(g1,6) + 38.125*Power(g2,6) +
+      60*traceYdAdjYdYdAdjYdYdAdjYd + 12*traceYdAdjYdYdAdjYuYuAdjYd - 24*
       traceYdAdjYuYuAdjYdYdAdjYd - 12*traceYdAdjYuYuAdjYuYuAdjYd + 20*
       traceYeAdjYeYeAdjYeYeAdjYe - 3.42*Power(g1,4)*traceYuAdjYu - 4.5*Power(g2
       ,4)*traceYuAdjYu + 60*traceYuAdjYuYuAdjYuYuAdjYu + 9.435*Power(g1,4)*
@@ -101,7 +101,7 @@ double SM_susy_parameters::calc_beta_Lambdax_two_loop(const Susy_traces& susy_tr
       Lambdax*(-9*Lambdax + 10*Sqr(g3))) - 72*traceYuAdjYu*Sqr(Lambdax) + 10.8*
       Sqr(g1)*Sqr(Lambdax) + 54*Sqr(g2)*Sqr(Lambdax) - 0.3*traceYeAdjYe*(15*
       Power(g1,4) - Sqr(g1)*(25*Lambdax + 22*Sqr(g2)) + 5*(Power(g2,4) - 5*
-      Lambdax*Sqr(g2) + 16*Sqr(Lambdax))));
+      Lambdax*Sqr(g2) + 16*Sqr(Lambdax)))));
 
 
    return beta_Lambdax;

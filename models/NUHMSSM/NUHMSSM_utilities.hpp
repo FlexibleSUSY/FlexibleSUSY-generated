@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:47:05
+// File generated at Sun 31 May 2015 12:48:49
 
 #ifndef NUHMSSM_UTILITIES_H
 #define NUHMSSM_UTILITIES_H
@@ -118,5 +118,8 @@ std::valarray<double> NUHMSSM_spectrum_plotter::to_valarray(const Eigen::Array<S
 }
 
 } // namespace flexiblesusy
+
+#undef PHYSICAL
+#undef MODELPARAMETER
 
 #endif

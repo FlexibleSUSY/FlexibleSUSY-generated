@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:31:29
+// File generated at Sun 31 May 2015 12:24:54
 
 #include "MRSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -44,10 +44,10 @@ double MRSSM_soft_parameters::calc_beta_mHd2_one_loop(const Soft_traces& soft_tr
 
    double beta_mHd2;
 
-   beta_mHd2 = oneOver16PiSqr*(-0.7745966692414834*g1*Tr11 + 6*
+   beta_mHd2 = Re(oneOver16PiSqr*(-0.7745966692414834*g1*Tr11 + 6*
       tracemd2YdAdjYd + 2*traceme2YeAdjYe + 2*traceml2AdjYeYe + 6*
       tracemq2AdjYdYd + 6*mHd2*traceYdAdjYd + 2*mHd2*traceYeAdjYe + 2*(mHd2 +
-      mRd2 + mS2)*AbsSqr(LamSD) + 3*(mHd2 + mRd2 + mT2)*AbsSqr(LamTD));
+      mRd2 + mS2)*AbsSqr(LamSD) + 3*(mHd2 + mRd2 + mT2)*AbsSqr(LamTD)));
 
 
    return beta_mHd2;
@@ -92,10 +92,10 @@ double MRSSM_soft_parameters::calc_beta_mHd2_two_loop(const Soft_traces& soft_tr
 
    double beta_mHd2;
 
-   beta_mHd2 = twoLoop*(-2*AbsSqr(LamSD)*(2*(mHd2 + mHu2 + mRd2 + mRu2 +
-      2*mS2)*AbsSqr(LamSU) + 3*(2*mHd2 + 2*mRd2 + mS2 + mT2)*AbsSqr(LamTD)) + 3
-      *AbsSqr(LamTD)*(-((mHd2 + mHu2 + mRd2 + mRu2 + 2*mT2)*AbsSqr(LamTU)) + 4*
-      (mHd2 + mRd2 + mT2)*Sqr(g2)) + 0.4*(15*Power(g2,4)*Tr22 -
+   beta_mHd2 = Re(twoLoop*(-2*AbsSqr(LamSD)*(2*(mHd2 + mHu2 + mRd2 + mRu2
+      + 2*mS2)*AbsSqr(LamSU) + 3*(2*mHd2 + 2*mRd2 + mS2 + mT2)*AbsSqr(LamTD))
+      + 3*AbsSqr(LamTD)*(-((mHd2 + mHu2 + mRd2 + mRu2 + 2*mT2)*AbsSqr(LamTU)) +
+      4*(mHd2 + mRd2 + mT2)*Sqr(g2)) + 0.4*(15*Power(g2,4)*Tr22 -
       7.745966692414834*g1*Tr31 - 90*tracemd2YdAdjYdYdAdjYd - 15*
       tracemd2YdAdjYuYuAdjYd - 30*traceme2YeAdjYeYeAdjYe - 30*
       traceml2AdjYeYeAdjYeYe - 90*tracemq2AdjYdYdAdjYdYd - 15*
@@ -107,7 +107,7 @@ double MRSSM_soft_parameters::calc_beta_mHd2_two_loop(const Soft_traces& soft_tr
       Sqr(g1) + 6*mHd2*traceYeAdjYe*Sqr(g1) - 2*mHd2*traceYdAdjYd*(Sqr(g1) - 40
       *Sqr(g3)) + 80*tracemd2YdAdjYd*Sqr(g3) + 80*tracemq2AdjYdYd*Sqr(g3)) - 12
       *(mHd2 + mRd2 + mS2)*Sqr(LamSD)*Sqr(Conj(LamSD)) - 15*(mHd2 + mRd2 + mT2)
-      *Sqr(LamTD)*Sqr(Conj(LamTD)));
+      *Sqr(LamTD)*Sqr(Conj(LamTD))));
 
 
    return beta_mHd2;

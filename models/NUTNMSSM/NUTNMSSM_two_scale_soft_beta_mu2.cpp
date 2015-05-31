@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:42:40
+// File generated at Sun 31 May 2015 12:42:59
 
 #include "NUTNMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -38,11 +38,11 @@ Eigen::Matrix<double,3,3> NUTNMSSM_soft_parameters::calc_beta_mu2_one_loop(const
 
    Eigen::Matrix<double,3,3> beta_mu2;
 
-   beta_mu2 = oneOver16PiSqr*(4*mHu2*(Yu*Yu.adjoint()) + 4*(TYu*(TYu)
+   beta_mu2 = (oneOver16PiSqr*(4*mHu2*(Yu*Yu.adjoint()) + 4*(TYu*(TYu)
       .adjoint()) + 2*(mu2*Yu*Yu.adjoint()) + 4*(Yu*mq2*Yu.adjoint()) + 2*(Yu*
       Yu.adjoint()*mu2) - 1.0327955589886444*g1*Tr11*UNITMATRIX(3) -
       2.1333333333333333*AbsSqr(MassB)*Sqr(g1)*UNITMATRIX(3) -
-      10.666666666666666*AbsSqr(MassG)*Sqr(g3)*UNITMATRIX(3));
+      10.666666666666666*AbsSqr(MassG)*Sqr(g3)*UNITMATRIX(3))).real();
 
 
    return beta_mu2;
@@ -68,7 +68,7 @@ Eigen::Matrix<double,3,3> NUTNMSSM_soft_parameters::calc_beta_mu2_two_loop(const
 
    Eigen::Matrix<double,3,3> beta_mu2;
 
-   beta_mu2 = twoLoop*(-12*traceconjTYuTpTYu*(Yu*Yu.adjoint()) - 12*
+   beta_mu2 = (twoLoop*(-12*traceconjTYuTpTYu*(Yu*Yu.adjoint()) - 12*
       tracemq2AdjYuYu*(Yu*Yu.adjoint()) - 12*tracemu2YuAdjYu*(Yu*Yu.adjoint())
       - 24*mHu2*traceYuAdjYu*(Yu*Yu.adjoint()) - 4*mHd2*AbsSqr(Lambdax)*(Yu*
       Yu.adjoint()) - 8*mHu2*AbsSqr(Lambdax)*(Yu*Yu.adjoint()) - 4*ms2*AbsSqr(
@@ -105,7 +105,7 @@ Eigen::Matrix<double,3,3> NUTNMSSM_soft_parameters::calc_beta_mu2_two_loop(const
       2.8444444444444446*Conj(MassG)*Sqr(g3)*(-2*(MassB + 2*MassG)*Sqr(g1) + 15
       *MassG*Sqr(g3))*UNITMATRIX(3) + 0.017777777777777778*Conj(MassB)*Sqr(g1)*
       (45*(-2*MassB*(Yu*Yu.adjoint()) + TYu*Yu.adjoint()) + 8*(321*MassB*Sqr(g1
-      ) + 40*(2*MassB + MassG)*Sqr(g3))*UNITMATRIX(3)));
+      ) + 40*(2*MassB + MassG)*Sqr(g3))*UNITMATRIX(3)))).real();
 
 
    return beta_mu2;

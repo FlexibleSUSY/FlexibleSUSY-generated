@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:44:43
+// File generated at Sun 31 May 2015 12:46:13
 
 #include "MSSMRHN_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -37,7 +37,7 @@ double MSSMRHN_soft_parameters::calc_beta_MassWB_one_loop(const Soft_traces& sof
 
    double beta_MassWB;
 
-   beta_MassWB = 2*MassWB*oneOver16PiSqr*Sqr(g2);
+   beta_MassWB = Re(2*MassWB*oneOver16PiSqr*Sqr(g2));
 
 
    return beta_MassWB;
@@ -62,11 +62,11 @@ double MSSMRHN_soft_parameters::calc_beta_MassWB_two_loop(const Soft_traces& sof
 
    double beta_MassWB;
 
-   beta_MassWB = 0.4*twoLoop*Sqr(g2)*(30*traceAdjYdTYd + 10*traceAdjYeTYe
-      + 30*traceAdjYuTYu + 10*traceAdjYvTYv - 30*MassWB*traceYdAdjYd - 10*
-      MassWB*traceYeAdjYe - 30*MassWB*traceYuAdjYu - 10*MassWB*traceYvAdjYv + 9
-      *MassB*Sqr(g1) + 9*MassWB*Sqr(g1) + 250*MassWB*Sqr(g2) + 120*MassG*Sqr(g3
-      ) + 120*MassWB*Sqr(g3));
+   beta_MassWB = Re(0.4*twoLoop*Sqr(g2)*(30*traceAdjYdTYd + 10*
+      traceAdjYeTYe + 30*traceAdjYuTYu + 10*traceAdjYvTYv - 30*MassWB*
+      traceYdAdjYd - 10*MassWB*traceYeAdjYe - 30*MassWB*traceYuAdjYu - 10*
+      MassWB*traceYvAdjYv + 9*MassB*Sqr(g1) + 9*MassWB*Sqr(g1) + 250*MassWB*Sqr
+      (g2) + 120*MassG*Sqr(g3) + 120*MassWB*Sqr(g3)));
 
 
    return beta_MassWB;

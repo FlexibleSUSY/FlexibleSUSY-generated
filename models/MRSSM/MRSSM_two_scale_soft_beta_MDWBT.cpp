@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:31:32
+// File generated at Sun 31 May 2015 12:24:56
 
 #include "MRSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -37,7 +37,7 @@ double MRSSM_soft_parameters::calc_beta_MDWBT_one_loop(const Soft_traces& soft_t
 
    double beta_MDWBT;
 
-   beta_MDWBT = MDWBT*oneOver16PiSqr*(AbsSqr(LamTD) + AbsSqr(LamTU));
+   beta_MDWBT = Re(MDWBT*oneOver16PiSqr*(AbsSqr(LamTD) + AbsSqr(LamTU)));
 
 
    return beta_MDWBT;
@@ -57,14 +57,14 @@ double MRSSM_soft_parameters::calc_beta_MDWBT_two_loop(const Soft_traces& soft_t
 
    double beta_MDWBT;
 
-   beta_MDWBT = 0.2*MDWBT*twoLoop*(440*Power(g2,4) - 15*traceYdAdjYd*
+   beta_MDWBT = Re(0.2*MDWBT*twoLoop*(440*Power(g2,4) - 15*traceYdAdjYd*
       AbsSqr(LamTD) - 5*traceYeAdjYe*AbsSqr(LamTD) - 15*traceYuAdjYu*AbsSqr(
       LamTU) + 3*AbsSqr(LamTD)*Sqr(g1) + 3*AbsSqr(LamTU)*Sqr(g1) - 30*
       traceYdAdjYd*Sqr(g2) - 10*traceYeAdjYe*Sqr(g2) - 30*traceYuAdjYu*Sqr(g2)
       - 40*AbsSqr(LamTD)*Sqr(g2) - 40*AbsSqr(LamTU)*Sqr(g2) + 12*Sqr(g1)*Sqr(g2
       ) - 10*AbsSqr(LamSD)*(AbsSqr(LamTD) + Sqr(g2)) - 10*AbsSqr(LamSU)*(AbsSqr
       (LamTU) + Sqr(g2)) + 120*Sqr(g2)*Sqr(g3) - 15*Sqr(LamTD)*Sqr(Conj(LamTD))
-      - 15*Sqr(LamTU)*Sqr(Conj(LamTU)));
+      - 15*Sqr(LamTU)*Sqr(Conj(LamTU))));
 
 
    return beta_MDWBT;

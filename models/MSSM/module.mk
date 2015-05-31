@@ -18,7 +18,8 @@ MSSM_TWO_SCALE_MK := \
 		$(MSSM_TWO_SCALE_SOFT_MK)
 
 MSSM_SLHA_INPUT := \
-		$(DIR)/LesHouches.in.MSSM
+		$(DIR)/LesHouches.in.MSSM \
+		$(DIR)/LesHouches.in.MSSM~
 
 MSSM_GNUPLOT := \
 		$(DIR)/MSSM_plot_rgflow.gnuplot \
@@ -34,6 +35,7 @@ LIBMSSM_HDR :=
 
 ifneq ($(findstring two_scale,$(ALGORITHMS)),)
 LIBMSSM_SRC += \
+		$(DIR)/MSSM_mass_eigenstates.cpp \
 		$(DIR)/MSSM_info.cpp \
 		$(DIR)/MSSM_input_parameters.cpp \
 		$(DIR)/MSSM_slha_io.cpp \
@@ -55,6 +57,7 @@ EXEMSSM_SRC += \
 LIBMSSM_HDR += \
 		$(DIR)/MSSM_convergence_tester.hpp \
 		$(DIR)/MSSM_high_scale_constraint.hpp \
+		$(DIR)/MSSM_mass_eigenstates.hpp \
 		$(DIR)/MSSM_info.hpp \
 		$(DIR)/MSSM_initial_guesser.hpp \
 		$(DIR)/MSSM_input_parameters.hpp \

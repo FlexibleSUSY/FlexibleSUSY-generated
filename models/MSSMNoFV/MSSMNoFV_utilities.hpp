@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:51:03
+// File generated at Sun 31 May 2015 12:54:22
 
 #ifndef MSSMNoFV_UTILITIES_H
 #define MSSMNoFV_UTILITIES_H
@@ -134,5 +134,8 @@ std::valarray<double> MSSMNoFV_spectrum_plotter::to_valarray(const Eigen::Array<
 }
 
 } // namespace flexiblesusy
+
+#undef PHYSICAL
+#undef MODELPARAMETER
 
 #endif

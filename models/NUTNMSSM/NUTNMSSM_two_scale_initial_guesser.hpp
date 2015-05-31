@@ -16,13 +16,12 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:42:47
+// File generated at Sun 31 May 2015 12:43:09
 
 #ifndef NUTNMSSM_TWO_SCALE_INITIAL_GUESSER_H
 #define NUTNMSSM_TWO_SCALE_INITIAL_GUESSER_H
 
 #include "NUTNMSSM_initial_guesser.hpp"
-#include "NUTNMSSM_input_parameters.hpp"
 #include "NUTNMSSM_two_scale_low_scale_constraint.hpp"
 #include "NUTNMSSM_two_scale_susy_scale_constraint.hpp"
 #include "NUTNMSSM_two_scale_high_scale_constraint.hpp"
@@ -46,7 +45,6 @@ template<>
 class NUTNMSSM_initial_guesser<Two_scale> : public Initial_guesser<Two_scale> {
 public:
    NUTNMSSM_initial_guesser(NUTNMSSM<Two_scale>*,
-                               const NUTNMSSM_input_parameters&,
                                const QedQcd&,
                                const NUTNMSSM_low_scale_constraint<Two_scale>&,
                                const NUTNMSSM_susy_scale_constraint<Two_scale>&,
@@ -58,7 +56,6 @@ public:
 
 private:
    NUTNMSSM<Two_scale>* model; ///< pointer to model class
-   NUTNMSSM_input_parameters input_pars;
    QedQcd oneset;   ///< Standard Model low-energy data
    double mu_guess; ///< guessed DR-bar mass of up-quark
    double mc_guess; ///< guessed DR-bar mass of charm-quark

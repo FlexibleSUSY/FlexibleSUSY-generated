@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:35:47
+// File generated at Sun 31 May 2015 12:30:49
 
 #include "E6SSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -39,13 +39,13 @@ Eigen::Matrix<double,2,2> E6SSM_soft_parameters::calc_beta_mH1I2_one_loop(const 
 
    Eigen::Matrix<double,2,2> beta_mH1I2;
 
-   beta_mH1I2 = oneOver16PiSqr*(2*ms2*((Lambda12).adjoint()*Lambda12) + 2
-      *((TLambda12).adjoint()*TLambda12) + mH1I2*(Lambda12).adjoint()*Lambda12
+   beta_mH1I2 = (oneOver16PiSqr*(2*ms2*((Lambda12).adjoint()*Lambda12) +
+      2*((TLambda12).adjoint()*TLambda12) + mH1I2*(Lambda12).adjoint()*Lambda12
       + 2*((Lambda12).adjoint()*mH2I2.conjugate()*Lambda12) + (Lambda12)
       .adjoint()*Lambda12*mH1I2 - 0.7745966692414834*g1*Tr11*UNITMATRIX(2) -
       0.9486832980505138*gN*Tr14*UNITMATRIX(2) - 1.2*AbsSqr(MassB)*Sqr(g1)*
       UNITMATRIX(2) - 6*AbsSqr(MassWB)*Sqr(g2)*UNITMATRIX(2) - 1.8*AbsSqr(
-      MassBp)*Sqr(gN)*UNITMATRIX(2));
+      MassBp)*Sqr(gN)*UNITMATRIX(2))).real();
 
 
    return beta_mH1I2;
@@ -91,8 +91,8 @@ Eigen::Matrix<double,2,2> E6SSM_soft_parameters::calc_beta_mH1I2_two_loop(const 
 
    Eigen::Matrix<double,2,2> beta_mH1I2;
 
-   beta_mH1I2 = twoLoop*(-6*traceconjTKappaTpTKappa*((Lambda12).adjoint()
-      *Lambda12) - 4*traceconjTLambda12TpTLambda12*((Lambda12).adjoint()*
+   beta_mH1I2 = (twoLoop*(-6*traceconjTKappaTpTKappa*((Lambda12).adjoint(
+      )*Lambda12) - 4*traceconjTLambda12TpTLambda12*((Lambda12).adjoint()*
       Lambda12) - 12*ms2*traceKappaAdjKappa*((Lambda12).adjoint()*Lambda12) - 6
       *traceKappaAdjKappaconjmDx2*((Lambda12).adjoint()*Lambda12) - 6*
       traceKappaconjmDxbar2AdjKappa*((Lambda12).adjoint()*Lambda12) - 8*ms2*
@@ -146,7 +146,7 @@ Eigen::Matrix<double,2,2> E6SSM_soft_parameters::calc_beta_mH1I2_two_loop(const 
       UNITMATRIX(2) + 0.01*Conj(MassBp)*Sqr(gN)*(200*(2*MassBp*((Lambda12)
       .adjoint()*Lambda12) - (Lambda12).adjoint()*TLambda12) - 9*(2*(MassB + 2*
       MassBp)*Sqr(g1) - 3*(10*(2*MassBp + MassWB)*Sqr(g2) + 197*MassBp*Sqr(gN))
-      )*UNITMATRIX(2)));
+      )*UNITMATRIX(2)))).real();
 
 
    return beta_mH1I2;

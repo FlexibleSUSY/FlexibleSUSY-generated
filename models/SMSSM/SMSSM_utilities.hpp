@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:42:30
+// File generated at Sun 31 May 2015 12:39:42
 
 #ifndef SMSSM_UTILITIES_H
 #define SMSSM_UTILITIES_H
@@ -118,5 +118,8 @@ std::valarray<double> SMSSM_spectrum_plotter::to_valarray(const Eigen::Array<Sca
 }
 
 } // namespace flexiblesusy
+
+#undef PHYSICAL
+#undef MODELPARAMETER
 
 #endif

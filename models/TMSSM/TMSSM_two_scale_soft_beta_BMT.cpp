@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:30:22
+// File generated at Sun 31 May 2015 12:23:44
 
 #include "TMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -37,8 +37,8 @@ double TMSSM_soft_parameters::calc_beta_BMT_one_loop(const Soft_traces& soft_tra
 
    double beta_BMT;
 
-   beta_BMT = 2*oneOver16PiSqr*(AbsSqr(Lambdax)*BMT + 8*MassWB*MT*Sqr(g2)
-      - 4*BMT*Sqr(g2) + 2*MT*Conj(Lambdax)*TLambdax);
+   beta_BMT = Re(2*oneOver16PiSqr*(AbsSqr(Lambdax)*BMT + 8*MassWB*MT*Sqr(
+      g2) - 4*BMT*Sqr(g2) + 2*MT*Conj(Lambdax)*TLambdax));
 
 
    return beta_BMT;
@@ -61,13 +61,13 @@ double TMSSM_soft_parameters::calc_beta_BMT_two_loop(const Soft_traces& soft_tra
 
    double beta_BMT;
 
-   beta_BMT = -0.4*twoLoop*(BMT*(-140*Power(g2,4) + AbsSqr(Lambdax)*(15*
-      traceYdAdjYd + 5*traceYeAdjYe + 15*traceYuAdjYu - 3*Sqr(g1) + 5*Sqr(g2))
-      + 15*Sqr(Conj(Lambdax))*Sqr(Lambdax)) + 2*MT*(280*Power(g2,4)*MassWB + 30
-      *Lambdax*Sqr(Conj(Lambdax))*TLambdax + Conj(Lambdax)*(Lambdax*(15*
+   beta_BMT = Re(-0.4*twoLoop*(BMT*(-140*Power(g2,4) + AbsSqr(Lambdax)*(
+      15*traceYdAdjYd + 5*traceYeAdjYe + 15*traceYuAdjYu - 3*Sqr(g1) + 5*Sqr(g2
+      )) + 15*Sqr(Conj(Lambdax))*Sqr(Lambdax)) + 2*MT*(280*Power(g2,4)*MassWB +
+      30*Lambdax*Sqr(Conj(Lambdax))*TLambdax + Conj(Lambdax)*(Lambdax*(15*
       traceAdjYdTYd + 5*traceAdjYeTYe + 15*traceAdjYuTYu + 3*MassB*Sqr(g1) - 5*
       MassWB*Sqr(g2)) + (15*traceYdAdjYd + 5*traceYeAdjYe + 15*traceYuAdjYu - 3
-      *Sqr(g1) + 5*Sqr(g2))*TLambdax)));
+      *Sqr(g1) + 5*Sqr(g2))*TLambdax))));
 
 
    return beta_BMT;

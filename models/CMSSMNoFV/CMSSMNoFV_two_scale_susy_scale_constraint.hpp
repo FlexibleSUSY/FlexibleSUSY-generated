@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:48:27
+// File generated at Sun 31 May 2015 12:50:17
 
 #ifndef CMSSMNoFV_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
 #define CMSSMNoFV_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
@@ -36,7 +36,7 @@ template<>
 class CMSSMNoFV_susy_scale_constraint<Two_scale> : public Constraint<Two_scale> {
 public:
    CMSSMNoFV_susy_scale_constraint();
-   CMSSMNoFV_susy_scale_constraint(CMSSMNoFV<Two_scale>*, const CMSSMNoFV_input_parameters&);
+   CMSSMNoFV_susy_scale_constraint(CMSSMNoFV<Two_scale>*);
    virtual ~CMSSMNoFV_susy_scale_constraint();
    virtual void apply();
    virtual double get_scale() const;
@@ -47,7 +47,6 @@ public:
    const CMSSMNoFV_input_parameters& get_input_parameters() const;
    CMSSMNoFV<Two_scale>* get_model() const;
    void initialize();
-   void set_input_parameters(const CMSSMNoFV_input_parameters&);
 
 protected:
    void update_scale();
@@ -56,7 +55,6 @@ private:
    double scale;
    double initial_scale_guess;
    CMSSMNoFV<Two_scale>* model;
-   CMSSMNoFV_input_parameters inputPars;
 };
 
 } // namespace flexiblesusy

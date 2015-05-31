@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:42:27
+// File generated at Sun 31 May 2015 12:42:46
 
 #include "NUTNMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -41,12 +41,13 @@ Eigen::Matrix<double,3,3> NUTNMSSM_soft_parameters::calc_beta_TYd_one_loop(const
 
    Eigen::Matrix<double,3,3> beta_TYd;
 
-   beta_TYd = oneOver16PiSqr*(3*traceYdAdjYd*TYd + traceYeAdjYe*TYd +
+   beta_TYd = (oneOver16PiSqr*(3*traceYdAdjYd*TYd + traceYeAdjYe*TYd +
       AbsSqr(Lambdax)*TYd - 0.4666666666666667*Sqr(g1)*TYd - 3*Sqr(g2)*TYd -
       5.333333333333333*Sqr(g3)*TYd + Yd*(6*traceAdjYdTYd + 2*traceAdjYeTYe +
       0.9333333333333333*MassB*Sqr(g1) + 6*MassWB*Sqr(g2) + 10.666666666666666*
       MassG*Sqr(g3) + 2*Conj(Lambdax)*TLambdax) + 4*(Yd*Yd.adjoint()*TYd) + 2*(
-      Yd*Yu.adjoint()*TYu) + 5*(TYd*Yd.adjoint()*Yd) + TYd*Yu.adjoint()*Yu);
+      Yd*Yu.adjoint()*TYu) + 5*(TYd*Yd.adjoint()*Yd) + TYd*Yu.adjoint()*Yu))
+      .real();
 
 
    return beta_TYd;
@@ -76,8 +77,8 @@ Eigen::Matrix<double,3,3> NUTNMSSM_soft_parameters::calc_beta_TYd_two_loop(const
 
    Eigen::Matrix<double,3,3> beta_TYd;
 
-   beta_TYd = twoLoop*(3.188888888888889*Power(g1,4)*TYd + 7.5*Power(g2,4
-      )*TYd - 1.7777777777777777*Power(g3,4)*TYd - 9*traceYdAdjYdYdAdjYd*TYd -
+   beta_TYd = (twoLoop*(3.188888888888889*Power(g1,4)*TYd + 7.5*Power(g2,
+      4)*TYd - 1.7777777777777777*Power(g3,4)*TYd - 9*traceYdAdjYdYdAdjYd*TYd -
       3*traceYdAdjYuYuAdjYd*TYd - 3*traceYeAdjYeYeAdjYe*TYd - 3*traceYuAdjYu*
       AbsSqr(Lambdax)*TYd - 2*AbsSqr(Kappa)*AbsSqr(Lambdax)*TYd - 0.4*
       traceYdAdjYd*Sqr(g1)*TYd + 1.2*traceYeAdjYe*Sqr(g1)*TYd + Sqr(g1)*Sqr(g2)
@@ -111,7 +112,7 @@ Eigen::Matrix<double,3,3> NUTNMSSM_soft_parameters::calc_beta_TYd_two_loop(const
       Yu.adjoint()*Yu*Yu.adjoint()*TYu) - 4*(Yd*Yu.adjoint()*TYu*Yd.adjoint()*
       Yd) - 4*(Yd*Yu.adjoint()*TYu*Yu.adjoint()*Yu) - 6*(TYd*Yd.adjoint()*Yd*
       Yd.adjoint()*Yd) - 4*(TYd*Yu.adjoint()*Yu*Yd.adjoint()*Yd) - 2*(TYd*
-      Yu.adjoint()*Yu*Yu.adjoint()*Yu));
+      Yu.adjoint()*Yu*Yu.adjoint()*Yu))).real();
 
 
    return beta_TYd;

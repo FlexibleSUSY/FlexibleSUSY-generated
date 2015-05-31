@@ -18,7 +18,8 @@ SM_TWO_SCALE_MK := \
 		$(SM_TWO_SCALE_SOFT_MK)
 
 SM_SLHA_INPUT := \
-		$(DIR)/LesHouches.in.SM
+		$(DIR)/LesHouches.in.SM \
+		$(DIR)/LesHouches.in.SM~
 
 SM_GNUPLOT := \
 		$(DIR)/SM_plot_rgflow.gnuplot \
@@ -34,6 +35,7 @@ LIBSM_HDR :=
 
 ifneq ($(findstring two_scale,$(ALGORITHMS)),)
 LIBSM_SRC += \
+		$(DIR)/SM_mass_eigenstates.cpp \
 		$(DIR)/SM_info.cpp \
 		$(DIR)/SM_input_parameters.cpp \
 		$(DIR)/SM_slha_io.cpp \
@@ -55,6 +57,7 @@ EXESM_SRC += \
 LIBSM_HDR += \
 		$(DIR)/SM_convergence_tester.hpp \
 		$(DIR)/SM_high_scale_constraint.hpp \
+		$(DIR)/SM_mass_eigenstates.hpp \
 		$(DIR)/SM_info.hpp \
 		$(DIR)/SM_initial_guesser.hpp \
 		$(DIR)/SM_input_parameters.hpp \

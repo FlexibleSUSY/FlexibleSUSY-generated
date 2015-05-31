@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:35:55
+// File generated at Sun 31 May 2015 12:31:11
 
 #include "UMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -44,11 +44,11 @@ double UMSSM_soft_parameters::calc_beta_mHu2_one_loop(const Soft_traces& soft_tr
 
    double beta_mHu2;
 
-   beta_mHu2 = oneOver16PiSqr*(0.7745966692414834*g1*Tr11 + 2*gp*QHu*Tr14
-      + 6*traceconjTYuTpTYu + 6*tracemq2AdjYuYu + 6*tracemu2YuAdjYu + 6*mHu2*
-      traceYuAdjYu + 2*mHd2*AbsSqr(Lambdax) + 2*mHu2*AbsSqr(Lambdax) + 2*ms2*
-      AbsSqr(Lambdax) + 2*AbsSqr(TLambdax) - 1.2*AbsSqr(MassB)*Sqr(g1) - 6*
-      AbsSqr(MassWB)*Sqr(g2) - 8*AbsSqr(MassU)*Sqr(gp)*Sqr(QHu));
+   beta_mHu2 = Re(oneOver16PiSqr*(0.7745966692414834*g1*Tr11 + 2*gp*QHu*
+      Tr14 + 6*traceconjTYuTpTYu + 6*tracemq2AdjYuYu + 6*tracemu2YuAdjYu + 6*
+      mHu2*traceYuAdjYu + 2*mHd2*AbsSqr(Lambdax) + 2*mHu2*AbsSqr(Lambdax) + 2*
+      ms2*AbsSqr(Lambdax) + 2*AbsSqr(TLambdax) - 1.2*AbsSqr(MassB)*Sqr(g1) - 6*
+      AbsSqr(MassWB)*Sqr(g2) - 8*AbsSqr(MassU)*Sqr(gp)*Sqr(QHu)));
 
 
    return beta_mHu2;
@@ -124,9 +124,9 @@ double UMSSM_soft_parameters::calc_beta_mHu2_two_loop(const Soft_traces& soft_tr
 
    double beta_mHu2;
 
-   beta_mHu2 = twoLoop*(6*Power(g2,4)*Tr22 + 3.0983866769659336*g1*gp*QHu
-      *Tr2U114 + 3.0983866769659336*g1*gp*QHu*Tr2U141 + 3.0983866769659336*g1*
-      Tr31 + 8*gp*QHu*Tr34 - 6*tracemd2YdAdjYuYuAdjYd - 6*
+   beta_mHu2 = Re(twoLoop*(6*Power(g2,4)*Tr22 + 3.0983866769659336*g1*gp*
+      QHu*Tr2U114 + 3.0983866769659336*g1*gp*QHu*Tr2U141 + 3.0983866769659336*
+      g1*Tr31 + 8*gp*QHu*Tr34 - 6*tracemd2YdAdjYuYuAdjYd - 6*
       tracemq2AdjYdYdAdjYuYu - 6*tracemq2AdjYuYuAdjYdYd - 36*
       tracemq2AdjYuYuAdjYuYu - 6*tracemu2YuAdjYdYdAdjYu - 36*
       tracemu2YuAdjYuYuAdjYu - 6*traceYdAdjTYuTYuAdjYd - 6*
@@ -180,7 +180,7 @@ double UMSSM_soft_parameters::calc_beta_mHu2_two_loop(const Soft_traces& soft_tr
       2*MassU*Sqr(gp)*(9*Sqr(Qd) + 3*Sqr(Qe) + 2*Sqr(QHd) + 4*Sqr(QHu) + 6*Sqr
       (Ql) + 18*Sqr(Qq) + Sqr(Qs) + 9*Sqr(Qu))))) + 5*Conj(Lambdax)*(Sqr(QHd) -
       Sqr(QHu) + Sqr(Qs))*(2*MassU*Lambdax - TLambdax)) - 6*traceconjTYdTpYd*
-      Conj(Lambdax)*TLambdax - 2*traceconjTYeTpYe*Conj(Lambdax)*TLambdax);
+      Conj(Lambdax)*TLambdax - 2*traceconjTYeTpYe*Conj(Lambdax)*TLambdax));
 
 
    return beta_mHu2;

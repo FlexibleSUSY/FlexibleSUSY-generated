@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 24 Feb 2015 17:31:26
+// File generated at Sun 31 May 2015 12:24:52
 
 #ifndef MRSSM_TWO_SCALE_soft_parameters_H
 #define MRSSM_TWO_SCALE_soft_parameters_H
@@ -200,5 +200,7 @@ private:
 std::ostream& operator<<(std::ostream&, const MRSSM_soft_parameters&);
 
 } // namespace flexiblesusy
+
+#undef TRACE_STRUCT_TYPE
 
 #endif
