@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 31 May 2015 12:56:40
+// File generated at Mon 8 Jun 2015 18:08:53
 
 #ifndef CMSSM_INFO_H
 #define CMSSM_INFO_H

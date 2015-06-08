@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 31 May 2015 12:31:07
+// File generated at Mon 8 Jun 2015 17:49:09
 
 /**
  * @file E6SSM_two_scale_model_slha.cpp

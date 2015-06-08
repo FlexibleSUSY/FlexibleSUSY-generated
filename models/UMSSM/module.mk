@@ -18,8 +18,7 @@ UMSSM_TWO_SCALE_MK := \
 		$(UMSSM_TWO_SCALE_SOFT_MK)
 
 UMSSM_SLHA_INPUT := \
-		$(DIR)/LesHouches.in.UMSSM \
-		$(DIR)/LesHouches.in.UMSSM~
+		$(DIR)/LesHouches.in.UMSSM
 
 UMSSM_GNUPLOT := \
 		$(DIR)/UMSSM_plot_rgflow.gnuplot \

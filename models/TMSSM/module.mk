@@ -18,8 +18,7 @@ TMSSM_TWO_SCALE_MK := \
 		$(TMSSM_TWO_SCALE_SOFT_MK)
 
 TMSSM_SLHA_INPUT := \
-		$(DIR)/LesHouches.in.TMSSM \
-		$(DIR)/LesHouches.in.TMSSM~
+		$(DIR)/LesHouches.in.TMSSM
 
 TMSSM_GNUPLOT := \
 		$(DIR)/TMSSM_plot_rgflow.gnuplot \

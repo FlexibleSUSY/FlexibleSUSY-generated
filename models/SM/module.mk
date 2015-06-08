@@ -18,8 +18,7 @@ SM_TWO_SCALE_MK := \
 		$(SM_TWO_SCALE_SOFT_MK)
 
 SM_SLHA_INPUT := \
-		$(DIR)/LesHouches.in.SM \
-		$(DIR)/LesHouches.in.SM~
+		$(DIR)/LesHouches.in.SM
 
 SM_GNUPLOT := \
 		$(DIR)/SM_plot_rgflow.gnuplot \

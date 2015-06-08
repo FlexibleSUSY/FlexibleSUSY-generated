@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 31 May 2015 12:49:48
+// File generated at Mon 8 Jun 2015 18:03:11
 
 /**
  * @file NUHMSSM_two_scale_model.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Sun 31 May 2015 12:49:48 with FlexibleSUSY
- * 1.1.0 (git commit: v1.1.0) and SARAH 4.5.6 .
+ * This file was generated at Mon 8 Jun 2015 18:03:11 with FlexibleSUSY
+ * 1.1.1 (git commit: v1.1.1) and SARAH 4.5.6 .
  */
 
 #include "NUHMSSM_two_scale_model.hpp"

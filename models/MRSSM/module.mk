@@ -18,7 +18,6 @@ MRSSM_TWO_SCALE_MK := \
 		$(MRSSM_TWO_SCALE_SOFT_MK)
 
 MRSSM_SLHA_INPUT := \
-		$(DIR)/LesHouches.in.MRSSM~ \
 		$(DIR)/LesHouches.in.MRSSM
 
 MRSSM_GNUPLOT := \

@@ -18,7 +18,6 @@ lowMSSM_TWO_SCALE_MK := \
 		$(lowMSSM_TWO_SCALE_SOFT_MK)
 
 lowMSSM_SLHA_INPUT := \
-		$(DIR)/LesHouches.in.lowMSSM~ \
 		$(DIR)/LesHouches.in.lowMSSM
 
 lowMSSM_GNUPLOT := \

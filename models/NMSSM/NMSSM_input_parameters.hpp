@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 31 May 2015 12:44:06
+// File generated at Mon 8 Jun 2015 17:59:24
 
 #ifndef NMSSM_INPUT_PARAMETERS_H
 #define NMSSM_INPUT_PARAMETERS_H

@@ -18,8 +18,7 @@ NUHMSSM_TWO_SCALE_MK := \
 		$(NUHMSSM_TWO_SCALE_SOFT_MK)
 
 NUHMSSM_SLHA_INPUT := \
-		$(DIR)/LesHouches.in.NUHMSSM \
-		$(DIR)/LesHouches.in.NUHMSSM~
+		$(DIR)/LesHouches.in.NUHMSSM
 
 NUHMSSM_GNUPLOT := \
 		$(DIR)/NUHMSSM_plot_rgflow.gnuplot \

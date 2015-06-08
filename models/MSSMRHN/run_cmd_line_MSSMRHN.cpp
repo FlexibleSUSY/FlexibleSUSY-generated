@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 31 May 2015 12:47:23
+// File generated at Mon 8 Jun 2015 18:01:26
 
 #include "MSSMRHN_input_parameters.hpp"
 #include "MSSMRHN_spectrum_generator.hpp"

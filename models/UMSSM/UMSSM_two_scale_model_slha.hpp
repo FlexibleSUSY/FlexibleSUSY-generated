@@ -21,7 +21,7 @@
  * @brief contains wrapper class for model class in SLHA convention
  */
 
-// File generated at Sun 31 May 2015 12:31:30
+// File generated at Mon 8 Jun 2015 17:49:27
 
 #ifndef UMSSM_TWO_SCALE_SLHA_H
 #define UMSSM_TWO_SCALE_SLHA_H
@@ -29,6 +29,10 @@
 #include "UMSSM_two_scale_model.hpp"
 #include "UMSSM_physical.hpp"
 #include "UMSSM_model_slha.hpp"
+#include "wrappers.hpp"
+
+#define PHYSICAL_SLHA(p) physical_slha.p
+#define PHYSICAL_SLHA_REAL(p) Re(physical_slha.p)
 
 namespace flexiblesusy {
 
@@ -57,71 +61,71 @@ public:
    virtual void calculate_spectrum();
    virtual void print(std::ostream&) const;
 
-   double get_MVG_pole_slha() const { return physical_slha.MVG; }
-   double get_MGlu_pole_slha() const { return physical_slha.MGlu; }
-   const Eigen::Array<double,3,1>& get_MFv_pole_slha() const { return physical_slha.MFv; }
-   double get_MFv_pole_slha(int i) const { return physical_slha.MFv(i); }
-   double get_MVP_pole_slha() const { return physical_slha.MVP; }
-   double get_MVZ_pole_slha() const { return physical_slha.MVZ; }
-   double get_MVZp_pole_slha() const { return physical_slha.MVZp; }
-   const Eigen::Array<double,6,1>& get_MSd_pole_slha() const { return physical_slha.MSd; }
-   double get_MSd_pole_slha(int i) const { return physical_slha.MSd(i); }
-   const Eigen::Array<double,3,1>& get_MSv_pole_slha() const { return physical_slha.MSv; }
-   double get_MSv_pole_slha(int i) const { return physical_slha.MSv(i); }
-   const Eigen::Array<double,6,1>& get_MSu_pole_slha() const { return physical_slha.MSu; }
-   double get_MSu_pole_slha(int i) const { return physical_slha.MSu(i); }
-   const Eigen::Array<double,6,1>& get_MSe_pole_slha() const { return physical_slha.MSe; }
-   double get_MSe_pole_slha(int i) const { return physical_slha.MSe(i); }
-   const Eigen::Array<double,3,1>& get_Mhh_pole_slha() const { return physical_slha.Mhh; }
-   double get_Mhh_pole_slha(int i) const { return physical_slha.Mhh(i); }
-   const Eigen::Array<double,3,1>& get_MAh_pole_slha() const { return physical_slha.MAh; }
-   double get_MAh_pole_slha(int i) const { return physical_slha.MAh(i); }
-   const Eigen::Array<double,2,1>& get_MHpm_pole_slha() const { return physical_slha.MHpm; }
-   double get_MHpm_pole_slha(int i) const { return physical_slha.MHpm(i); }
-   const Eigen::Array<double,6,1>& get_MChi_pole_slha() const { return physical_slha.MChi; }
-   double get_MChi_pole_slha(int i) const { return physical_slha.MChi(i); }
-   const Eigen::Array<double,2,1>& get_MCha_pole_slha() const { return physical_slha.MCha; }
-   double get_MCha_pole_slha(int i) const { return physical_slha.MCha(i); }
-   const Eigen::Array<double,3,1>& get_MFe_pole_slha() const { return physical_slha.MFe; }
-   double get_MFe_pole_slha(int i) const { return physical_slha.MFe(i); }
-   const Eigen::Array<double,3,1>& get_MFd_pole_slha() const { return physical_slha.MFd; }
-   double get_MFd_pole_slha(int i) const { return physical_slha.MFd(i); }
-   const Eigen::Array<double,3,1>& get_MFu_pole_slha() const { return physical_slha.MFu; }
-   double get_MFu_pole_slha(int i) const { return physical_slha.MFu(i); }
-   double get_MVWm_pole_slha() const { return physical_slha.MVWm; }
+   double get_MVG_pole_slha() const { return PHYSICAL_SLHA(MVG); }
+   double get_MGlu_pole_slha() const { return PHYSICAL_SLHA(MGlu); }
+   const Eigen::Array<double,3,1>& get_MFv_pole_slha() const { return PHYSICAL_SLHA(MFv); }
+   double get_MFv_pole_slha(int i) const { return PHYSICAL_SLHA(MFv(i)); }
+   double get_MVP_pole_slha() const { return PHYSICAL_SLHA(MVP); }
+   double get_MVZ_pole_slha() const { return PHYSICAL_SLHA(MVZ); }
+   double get_MVZp_pole_slha() const { return PHYSICAL_SLHA(MVZp); }
+   const Eigen::Array<double,6,1>& get_MSd_pole_slha() const { return PHYSICAL_SLHA(MSd); }
+   double get_MSd_pole_slha(int i) const { return PHYSICAL_SLHA(MSd(i)); }
+   const Eigen::Array<double,3,1>& get_MSv_pole_slha() const { return PHYSICAL_SLHA(MSv); }
+   double get_MSv_pole_slha(int i) const { return PHYSICAL_SLHA(MSv(i)); }
+   const Eigen::Array<double,6,1>& get_MSu_pole_slha() const { return PHYSICAL_SLHA(MSu); }
+   double get_MSu_pole_slha(int i) const { return PHYSICAL_SLHA(MSu(i)); }
+   const Eigen::Array<double,6,1>& get_MSe_pole_slha() const { return PHYSICAL_SLHA(MSe); }
+   double get_MSe_pole_slha(int i) const { return PHYSICAL_SLHA(MSe(i)); }
+   const Eigen::Array<double,3,1>& get_Mhh_pole_slha() const { return PHYSICAL_SLHA(Mhh); }
+   double get_Mhh_pole_slha(int i) const { return PHYSICAL_SLHA(Mhh(i)); }
+   const Eigen::Array<double,3,1>& get_MAh_pole_slha() const { return PHYSICAL_SLHA(MAh); }
+   double get_MAh_pole_slha(int i) const { return PHYSICAL_SLHA(MAh(i)); }
+   const Eigen::Array<double,2,1>& get_MHpm_pole_slha() const { return PHYSICAL_SLHA(MHpm); }
+   double get_MHpm_pole_slha(int i) const { return PHYSICAL_SLHA(MHpm(i)); }
+   const Eigen::Array<double,6,1>& get_MChi_pole_slha() const { return PHYSICAL_SLHA(MChi); }
+   double get_MChi_pole_slha(int i) const { return PHYSICAL_SLHA(MChi(i)); }
+   const Eigen::Array<double,2,1>& get_MCha_pole_slha() const { return PHYSICAL_SLHA(MCha); }
+   double get_MCha_pole_slha(int i) const { return PHYSICAL_SLHA(MCha(i)); }
+   const Eigen::Array<double,3,1>& get_MFe_pole_slha() const { return PHYSICAL_SLHA(MFe); }
+   double get_MFe_pole_slha(int i) const { return PHYSICAL_SLHA(MFe(i)); }
+   const Eigen::Array<double,3,1>& get_MFd_pole_slha() const { return PHYSICAL_SLHA(MFd); }
+   double get_MFd_pole_slha(int i) const { return PHYSICAL_SLHA(MFd(i)); }
+   const Eigen::Array<double,3,1>& get_MFu_pole_slha() const { return PHYSICAL_SLHA(MFu); }
+   double get_MFu_pole_slha(int i) const { return PHYSICAL_SLHA(MFu(i)); }
+   double get_MVWm_pole_slha() const { return PHYSICAL_SLHA(MVWm); }
 
-   const Eigen::Matrix<double,6,6>& get_ZD_pole_slha() const { return physical_slha.ZD; }
-   double get_ZD_pole_slha(int i, int k) const { return physical_slha.ZD(i,k); }
-   const Eigen::Matrix<double,3,3>& get_ZV_pole_slha() const { return physical_slha.ZV; }
-   double get_ZV_pole_slha(int i, int k) const { return physical_slha.ZV(i,k); }
-   const Eigen::Matrix<double,6,6>& get_ZU_pole_slha() const { return physical_slha.ZU; }
-   double get_ZU_pole_slha(int i, int k) const { return physical_slha.ZU(i,k); }
-   const Eigen::Matrix<double,6,6>& get_ZE_pole_slha() const { return physical_slha.ZE; }
-   double get_ZE_pole_slha(int i, int k) const { return physical_slha.ZE(i,k); }
-   const Eigen::Matrix<double,3,3>& get_ZH_pole_slha() const { return physical_slha.ZH; }
-   double get_ZH_pole_slha(int i, int k) const { return physical_slha.ZH(i,k); }
-   const Eigen::Matrix<double,3,3>& get_ZA_pole_slha() const { return physical_slha.ZA; }
-   double get_ZA_pole_slha(int i, int k) const { return physical_slha.ZA(i,k); }
-   const Eigen::Matrix<double,2,2>& get_ZP_pole_slha() const { return physical_slha.ZP; }
-   double get_ZP_pole_slha(int i, int k) const { return physical_slha.ZP(i,k); }
-   const Eigen::Matrix<std::complex<double>,6,6>& get_ZN_pole_slha() const { return physical_slha.ZN; }
-   const std::complex<double>& get_ZN_pole_slha(int i, int k) const { return physical_slha.ZN(i,k); }
-   const Eigen::Matrix<std::complex<double>,2,2>& get_UM_pole_slha() const { return physical_slha.UM; }
-   const std::complex<double>& get_UM_pole_slha(int i, int k) const { return physical_slha.UM(i,k); }
-   const Eigen::Matrix<std::complex<double>,2,2>& get_UP_pole_slha() const { return physical_slha.UP; }
-   const std::complex<double>& get_UP_pole_slha(int i, int k) const { return physical_slha.UP(i,k); }
-   const Eigen::Matrix<std::complex<double>,3,3>& get_ZEL_pole_slha() const { return physical_slha.ZEL; }
-   const std::complex<double>& get_ZEL_pole_slha(int i, int k) const { return physical_slha.ZEL(i,k); }
-   const Eigen::Matrix<std::complex<double>,3,3>& get_ZER_pole_slha() const { return physical_slha.ZER; }
-   const std::complex<double>& get_ZER_pole_slha(int i, int k) const { return physical_slha.ZER(i,k); }
-   const Eigen::Matrix<std::complex<double>,3,3>& get_ZDL_pole_slha() const { return physical_slha.ZDL; }
-   const std::complex<double>& get_ZDL_pole_slha(int i, int k) const { return physical_slha.ZDL(i,k); }
-   const Eigen::Matrix<std::complex<double>,3,3>& get_ZDR_pole_slha() const { return physical_slha.ZDR; }
-   const std::complex<double>& get_ZDR_pole_slha(int i, int k) const { return physical_slha.ZDR(i,k); }
-   const Eigen::Matrix<std::complex<double>,3,3>& get_ZUL_pole_slha() const { return physical_slha.ZUL; }
-   const std::complex<double>& get_ZUL_pole_slha(int i, int k) const { return physical_slha.ZUL(i,k); }
-   const Eigen::Matrix<std::complex<double>,3,3>& get_ZUR_pole_slha() const { return physical_slha.ZUR; }
-   const std::complex<double>& get_ZUR_pole_slha(int i, int k) const { return physical_slha.ZUR(i,k); }
+   const Eigen::Matrix<double,6,6>& get_ZD_pole_slha() const { return PHYSICAL_SLHA(ZD); }
+   double get_ZD_pole_slha(int i, int k) const { return PHYSICAL_SLHA(ZD(i,k)); }
+   const Eigen::Matrix<double,3,3>& get_ZV_pole_slha() const { return PHYSICAL_SLHA(ZV); }
+   double get_ZV_pole_slha(int i, int k) const { return PHYSICAL_SLHA(ZV(i,k)); }
+   const Eigen::Matrix<double,6,6>& get_ZU_pole_slha() const { return PHYSICAL_SLHA(ZU); }
+   double get_ZU_pole_slha(int i, int k) const { return PHYSICAL_SLHA(ZU(i,k)); }
+   const Eigen::Matrix<double,6,6>& get_ZE_pole_slha() const { return PHYSICAL_SLHA(ZE); }
+   double get_ZE_pole_slha(int i, int k) const { return PHYSICAL_SLHA(ZE(i,k)); }
+   const Eigen::Matrix<double,3,3>& get_ZH_pole_slha() const { return PHYSICAL_SLHA(ZH); }
+   double get_ZH_pole_slha(int i, int k) const { return PHYSICAL_SLHA(ZH(i,k)); }
+   const Eigen::Matrix<double,3,3>& get_ZA_pole_slha() const { return PHYSICAL_SLHA(ZA); }
+   double get_ZA_pole_slha(int i, int k) const { return PHYSICAL_SLHA(ZA(i,k)); }
+   const Eigen::Matrix<double,2,2>& get_ZP_pole_slha() const { return PHYSICAL_SLHA(ZP); }
+   double get_ZP_pole_slha(int i, int k) const { return PHYSICAL_SLHA(ZP(i,k)); }
+   const Eigen::Matrix<std::complex<double>,6,6>& get_ZN_pole_slha() const { return PHYSICAL_SLHA(ZN); }
+   double get_ZN_pole_slha(int i, int k) const { return PHYSICAL_SLHA_REAL(ZN(i,k)); }
+   const Eigen::Matrix<std::complex<double>,2,2>& get_UM_pole_slha() const { return PHYSICAL_SLHA(UM); }
+   double get_UM_pole_slha(int i, int k) const { return PHYSICAL_SLHA_REAL(UM(i,k)); }
+   const Eigen::Matrix<std::complex<double>,2,2>& get_UP_pole_slha() const { return PHYSICAL_SLHA(UP); }
+   double get_UP_pole_slha(int i, int k) const { return PHYSICAL_SLHA_REAL(UP(i,k)); }
+   const Eigen::Matrix<std::complex<double>,3,3>& get_ZEL_pole_slha() const { return PHYSICAL_SLHA(ZEL); }
+   const std::complex<double>& get_ZEL_pole_slha(int i, int k) const { return PHYSICAL_SLHA(ZEL(i,k)); }
+   const Eigen::Matrix<std::complex<double>,3,3>& get_ZER_pole_slha() const { return PHYSICAL_SLHA(ZER); }
+   const std::complex<double>& get_ZER_pole_slha(int i, int k) const { return PHYSICAL_SLHA(ZER(i,k)); }
+   const Eigen::Matrix<std::complex<double>,3,3>& get_ZDL_pole_slha() const { return PHYSICAL_SLHA(ZDL); }
+   const std::complex<double>& get_ZDL_pole_slha(int i, int k) const { return PHYSICAL_SLHA(ZDL(i,k)); }
+   const Eigen::Matrix<std::complex<double>,3,3>& get_ZDR_pole_slha() const { return PHYSICAL_SLHA(ZDR); }
+   const std::complex<double>& get_ZDR_pole_slha(int i, int k) const { return PHYSICAL_SLHA(ZDR(i,k)); }
+   const Eigen::Matrix<std::complex<double>,3,3>& get_ZUL_pole_slha() const { return PHYSICAL_SLHA(ZUL); }
+   const std::complex<double>& get_ZUL_pole_slha(int i, int k) const { return PHYSICAL_SLHA(ZUL(i,k)); }
+   const Eigen::Matrix<std::complex<double>,3,3>& get_ZUR_pole_slha() const { return PHYSICAL_SLHA(ZUR); }
+   const std::complex<double>& get_ZUR_pole_slha(int i, int k) const { return PHYSICAL_SLHA(ZUR(i,k)); }
 
    const Eigen::Array<double,3,1>& get_Yu_slha() const { return Yu_slha; }
    double get_Yu_slha(int i) const { return Yu_slha(i); }
@@ -196,5 +200,8 @@ private:
 };
 
 } // namespace flexiblesusy
+
+#undef PHYSICAL_SLHA
+#undef PHYSICAL_SLHA_REAL
 
 #endif

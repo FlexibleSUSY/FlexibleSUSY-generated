@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 31 May 2015 12:41:22
+// File generated at Mon 8 Jun 2015 17:57:23
 
 /**
  * @file lowNMSSM_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Sun 31 May 2015 12:41:22 with FlexibleSUSY
- * 1.1.0 (git commit: v1.1.0) and SARAH 4.5.6 .
+ * This file was generated at Mon 8 Jun 2015 17:57:23 with FlexibleSUSY
+ * 1.1.1 (git commit: v1.1.1) and SARAH 4.5.6 .
  */
 
 #include "lowNMSSM_mass_eigenstates.hpp"
@@ -18707,6 +18707,12 @@ void CLASSNAME::calculate_Mhh_pole()
       double two_loop[6] = { 0. };
       if (pole_mass_loop_order > 1)
          self_energy_hh_2loop(two_loop);
+         for (unsigned i = 0; i < 6; i++) {
+            if (!std::isfinite(two_loop[i])) {
+               two_loop[i] = 0.;
+               problems.flag_bad_mass(lowNMSSM_info::hh);
+            }
+         }
 
       for (unsigned es = 0; es < 3; ++es) {
 
@@ -18780,6 +18786,12 @@ void CLASSNAME::calculate_MAh_pole()
       double two_loop[6] = { 0. };
       if (pole_mass_loop_order > 1)
          self_energy_Ah_2loop(two_loop);
+         for (unsigned i = 0; i < 6; i++) {
+            if (!std::isfinite(two_loop[i])) {
+               two_loop[i] = 0.;
+               problems.flag_bad_mass(lowNMSSM_info::Ah);
+            }
+         }
 
       for (unsigned es = 0; es < 3; ++es) {
          // skip goldstone bosons

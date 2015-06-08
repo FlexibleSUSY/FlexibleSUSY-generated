@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 31 May 2015 12:25:00
+// File generated at Mon 8 Jun 2015 17:44:00
 
 #include "MRSSM_slha_io.hpp"
 #include "MRSSM_input_parameters.hpp"

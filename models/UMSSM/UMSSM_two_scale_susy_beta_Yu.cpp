@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 31 May 2015 12:30:43
+// File generated at Mon 8 Jun 2015 17:48:52
 
 #include "UMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
