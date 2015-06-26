@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:42:30
+// File generated at Fri 26 Jun 2015 18:57:59
 
 #include "TMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -68,6 +68,25 @@ double TMSSM_soft_parameters::calc_beta_BMT_two_loop(const Soft_traces& soft_tra
       traceAdjYdTYd + 5*traceAdjYeTYe + 15*traceAdjYuTYu + 3*MassB*Sqr(g1) - 5*
       MassWB*Sqr(g2)) + (15*traceYdAdjYd + 5*traceYeAdjYe + 15*traceYuAdjYu - 3
       *Sqr(g1) + 5*Sqr(g2))*TLambdax))));
+
+
+   return beta_BMT;
+}
+
+/**
+ * Calculates the three-loop beta function of BMT.
+ *
+ * @return three-loop beta function
+ */
+double TMSSM_soft_parameters::calc_beta_BMT_three_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_BMT;
+
+   beta_BMT = 0;
 
 
    return beta_BMT;

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:43:56
+// File generated at Fri 26 Jun 2015 18:59:15
 
 #include "MRSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -58,6 +58,25 @@ double MRSSM_soft_parameters::calc_beta_MDGoc_two_loop(const Soft_traces& soft_t
 
    beta_MDGoc = Re(0.2*MDGoc*twoLoop*Sqr(g3)*(-20*traceYdAdjYd - 20*
       traceYuAdjYu + 11*Sqr(g1) + 45*Sqr(g2) + 520*Sqr(g3)));
+
+
+   return beta_MDGoc;
+}
+
+/**
+ * Calculates the three-loop beta function of MDGoc.
+ *
+ * @return three-loop beta function
+ */
+double MRSSM_soft_parameters::calc_beta_MDGoc_three_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MDGoc;
+
+   beta_MDGoc = 0;
 
 
    return beta_MDGoc;

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:41:19
+// File generated at Fri 26 Jun 2015 18:57:01
 
 #include "SM_input_parameters.hpp"
 
@@ -27,6 +27,7 @@ namespace flexiblesusy {
 std::ostream& operator<<(std::ostream& ostr, const SM_input_parameters& input)
 {
    ostr << "LambdaIN = " << INPUT(LambdaIN) << ", ";
+   ostr << "Qin = " << INPUT(Qin) << ", ";
 
    return ostr;
 }

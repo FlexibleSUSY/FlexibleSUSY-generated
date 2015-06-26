@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:49:04
+// File generated at Fri 26 Jun 2015 19:03:31
 
 #ifndef E6SSM_SLHA_IO_H
 #define E6SSM_SLHA_IO_H
@@ -65,6 +65,8 @@ public:
    double get_parameter_output_scale() const;
    const SLHA_io& get_slha_io() const { return slha_io; }
    void read_from_file(const std::string&);
+   void read_from_source(const std::string&);
+   void read_from_stream(std::istream&);
    void set_extpar(const E6SSM_input_parameters&);
    template <class T> void set_extra(const E6SSM_slha<T>&, const E6SSM_scales&);
    void set_minpar(const E6SSM_input_parameters&);

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:43:56
+// File generated at Fri 26 Jun 2015 18:59:15
 
 #include "MRSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -77,6 +77,25 @@ double MRSSM_soft_parameters::calc_beta_mRd2_two_loop(const Soft_traces& soft_tr
       - (mHd2 + mHu2 + mRd2 + mRu2 + 2*mT2)*AbsSqr(LamTU) + 4*mHd2*Sqr(g2) + 4
       *mRd2*Sqr(g2) + 4*mT2*Sqr(g2)) - 12*(mHd2 + mRd2 + mS2)*Sqr(LamSD)*Sqr(
       Conj(LamSD)) - 15*(mHd2 + mRd2 + mT2)*Sqr(LamTD)*Sqr(Conj(LamTD))));
+
+
+   return beta_mRd2;
+}
+
+/**
+ * Calculates the three-loop beta function of mRd2.
+ *
+ * @return three-loop beta function
+ */
+double MRSSM_soft_parameters::calc_beta_mRd2_three_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_mRd2;
+
+   beta_mRd2 = 0;
 
 
    return beta_mRd2;

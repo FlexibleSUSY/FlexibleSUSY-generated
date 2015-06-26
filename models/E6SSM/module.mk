@@ -66,6 +66,7 @@ LIBE6SSM_HDR += \
 		$(DIR)/E6SSM_model_slha.hpp \
 		$(DIR)/E6SSM_physical.hpp \
 		$(DIR)/E6SSM_slha_io.hpp \
+		$(DIR)/E6SSM_spectrum_generator_interface.hpp \
 		$(DIR)/E6SSM_spectrum_generator.hpp \
 		$(DIR)/E6SSM_susy_scale_constraint.hpp \
 		$(DIR)/E6SSM_utilities.hpp \
@@ -234,13 +235,13 @@ $(LIBE6SSM): $(LIBE6SSM_OBJ)
 		$(MAKELIB) $@ $^
 
 $(RUN_E6SSM_EXE): $(RUN_E6SSM_OBJ) $(LIBE6SSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
 
 $(RUN_CMD_LINE_E6SSM_EXE): $(RUN_CMD_LINE_E6SSM_OBJ) $(LIBE6SSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
 
 $(SCAN_E6SSM_EXE): $(SCAN_E6SSM_OBJ) $(LIBE6SSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBE6SSM_DEP) $(EXEE6SSM_DEP)
 ALLSRC += $(LIBE6SSM_SRC) $(EXEE6SSM_SRC)

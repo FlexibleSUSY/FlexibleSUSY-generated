@@ -65,6 +65,7 @@ LIBSM_HDR += \
 		$(DIR)/SM_model_slha.hpp \
 		$(DIR)/SM_physical.hpp \
 		$(DIR)/SM_slha_io.hpp \
+		$(DIR)/SM_spectrum_generator_interface.hpp \
 		$(DIR)/SM_spectrum_generator.hpp \
 		$(DIR)/SM_susy_scale_constraint.hpp \
 		$(DIR)/SM_utilities.hpp \
@@ -233,13 +234,13 @@ $(LIBSM): $(LIBSM_OBJ)
 		$(MAKELIB) $@ $^
 
 $(RUN_SM_EXE): $(RUN_SM_OBJ) $(LIBSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
 
 $(RUN_CMD_LINE_SM_EXE): $(RUN_CMD_LINE_SM_OBJ) $(LIBSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
 
 $(SCAN_SM_EXE): $(SCAN_SM_OBJ) $(LIBSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBSM_DEP) $(EXESM_DEP)
 ALLSRC += $(LIBSM_SRC) $(EXESM_SRC)

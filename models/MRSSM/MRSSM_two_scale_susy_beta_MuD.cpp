@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:43:48
+// File generated at Fri 26 Jun 2015 18:59:08
 
 #include "MRSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -70,6 +70,25 @@ double MRSSM_susy_parameters::calc_beta_MuD_two_loop(const Susy_traces& susy_tra
       Sqr(g1)*Sqr(g2) + 15*AbsSqr(LamTD)*(-3*traceYdAdjYd - traceYeAdjYe - 2*
       AbsSqr(LamTU) + 8*Sqr(g2)) + 160*traceYdAdjYd*Sqr(g3) - 60*Sqr(LamSD)*Sqr
       (Conj(LamSD)) - 75*Sqr(LamTD)*Sqr(Conj(LamTD))));
+
+
+   return beta_MuD;
+}
+
+/**
+ * Calculates the three-loop beta function of MuD.
+ *
+ * @return three-loop beta function
+ */
+double MRSSM_susy_parameters::calc_beta_MuD_three_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MuD;
+
+   beta_MuD = 0;
 
 
    return beta_MuD;

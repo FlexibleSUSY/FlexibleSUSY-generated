@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:48:52
+// File generated at Fri 26 Jun 2015 19:03:23
 
 #include "UMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -106,6 +106,25 @@ double UMSSM_susy_parameters::calc_beta_Lambdax_two_loop(const Susy_traces& susy
       Sqr(Qu) - 900*Power(gp,4)*Sqr(QHd)*Sqr(Qu) - 900*Power(gp,4)*Sqr(QHu)*Sqr
       (Qu) - 900*Power(gp,4)*Sqr(Qs)*Sqr(Qu) + 500*Sqr(Conj(Lambdax))*Sqr(
       Lambdax)));
+
+
+   return beta_Lambdax;
+}
+
+/**
+ * Calculates the three-loop beta function of Lambdax.
+ *
+ * @return three-loop beta function
+ */
+double UMSSM_susy_parameters::calc_beta_Lambdax_three_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_Lambdax;
+
+   beta_Lambdax = 0;
 
 
    return beta_Lambdax;

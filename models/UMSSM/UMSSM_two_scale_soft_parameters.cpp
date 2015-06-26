@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:48:57
+// File generated at Fri 26 Jun 2015 19:03:27
 
 #include "UMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -106,6 +106,9 @@ UMSSM_soft_parameters UMSSM_soft_parameters::calc_beta() const
       beta_MassG += calc_beta_MassG_two_loop(TRACE_STRUCT);
       beta_MassU += calc_beta_MassU_two_loop(TRACE_STRUCT);
 
+      if (get_loops() > 2) {
+
+      }
    }
 
 

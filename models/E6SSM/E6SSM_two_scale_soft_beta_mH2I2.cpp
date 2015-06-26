@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:48:57
+// File generated at Fri 26 Jun 2015 19:03:25
 
 #include "E6SSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -159,6 +159,25 @@ Eigen::Matrix<double,2,2> E6SSM_soft_parameters::calc_beta_mH2I2_two_loop(const 
       Lambda12.conjugate()*(Lambda12).transpose()) - 25*(Lambda12.conjugate()*(
       TLambda12).transpose()) + 2*(3*(MassB + 2*MassBp)*Sqr(g1) + 5*(2*MassBp +
       MassWB)*Sqr(g2) + 96*MassBp*Sqr(gN))*UNITMATRIX(2)))).real();
+
+
+   return beta_mH2I2;
+}
+
+/**
+ * Calculates the three-loop beta function of mH2I2.
+ *
+ * @return three-loop beta function
+ */
+Eigen::Matrix<double,2,2> E6SSM_soft_parameters::calc_beta_mH2I2_three_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,2,2> beta_mH2I2;
+
+   beta_mH2I2 = ZEROMATRIX(2,2);
 
 
    return beta_mH2I2;

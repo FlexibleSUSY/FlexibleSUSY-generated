@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 18:06:09
+// File generated at Fri 26 Jun 2015 19:19:59
 
 /**
  * @file MSSMNoFVatMGUT_two_scale_model.hpp
@@ -24,8 +24,8 @@
  *        value problem using the two_scale solver by solvingt EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Mon 8 Jun 2015 18:06:09 with FlexibleSUSY
- * 1.1.1 (git commit: v1.1.1) and SARAH 4.5.6 .
+ * This file was generated at Fri 26 Jun 2015 19:19:59 with FlexibleSUSY
+ * 1.2.0 (git commit: v1.2.0) and SARAH 4.5.8 .
  */
 
 #ifndef MSSMNoFVatMGUT_TWO_SCALE_H

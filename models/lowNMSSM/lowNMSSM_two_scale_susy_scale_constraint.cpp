@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:56:31
+// File generated at Fri 26 Jun 2015 19:10:24
 
 #include "lowNMSSM_two_scale_susy_scale_constraint.hpp"
 #include "lowNMSSM_two_scale_model.hpp"
@@ -72,6 +72,7 @@ void lowNMSSM_susy_scale_constraint<Two_scale>::apply()
    update_scale();
 
    // apply user-defined susy scale constraints
+   const auto TanBeta = INPUTPARAMETER(TanBeta);
    const auto KappaInput = INPUTPARAMETER(KappaInput);
    const auto LambdaInput = INPUTPARAMETER(LambdaInput);
    const auto AKappaInput = INPUTPARAMETER(AKappaInput);
@@ -98,10 +99,14 @@ void lowNMSSM_susy_scale_constraint<Two_scale>::apply()
    const auto AtInput = INPUTPARAMETER(AtInput);
    const auto AbInput = INPUTPARAMETER(AbInput);
    const auto ATauInput = INPUTPARAMETER(ATauInput);
+   const auto vd = MODELPARAMETER(vd);
+   const auto vu = MODELPARAMETER(vu);
    const auto Yu = MODELPARAMETER(Yu);
    const auto Yd = MODELPARAMETER(Yd);
    const auto Ye = MODELPARAMETER(Ye);
 
+   MODEL->set_vd(Re(Sqrt((Sqr(vd) + Sqr(vu))/(1 + Sqr(TanBeta)))));
+   MODEL->set_vu(Re(TanBeta*Sqrt((Sqr(vd) + Sqr(vu))/(1 + Sqr(TanBeta)))));
    MODEL->set_Kappa(Re(KappaInput));
    MODEL->set_Lambdax(Re(LambdaInput));
    MODEL->set_TKappa(Re(AKappaInput*KappaInput));

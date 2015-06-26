@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:43:45
+// File generated at Fri 26 Jun 2015 18:59:06
 
 #include "MRSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -111,6 +111,9 @@ MRSSM_susy_parameters MRSSM_susy_parameters::calc_beta() const
       beta_vT += calc_beta_vT_two_loop(TRACE_STRUCT);
       beta_vS += calc_beta_vS_two_loop(TRACE_STRUCT);
 
+      if (get_loops() > 2) {
+
+      }
    }
 
 

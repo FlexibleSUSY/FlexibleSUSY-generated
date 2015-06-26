@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 18:04:36
+// File generated at Fri 26 Jun 2015 19:18:39
 
 #include "MSSMNoFVatMGUT_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -91,6 +91,25 @@ double MSSMNoFVatMGUT_soft_parameters::calc_beta_BMu_two_loop(const Soft_traces&
       g2) - 400*traceAdjYdTYd*Sqr(g3) - 400*traceAdjYuTYu*Sqr(g3) + 400*MassG*
       traceYuAdjYu*Sqr(g3) - 10*traceYdAdjYd*(MassB*Sqr(g1) - 40*MassG*Sqr(g3))
       )));
+
+
+   return beta_BMu;
+}
+
+/**
+ * Calculates the three-loop beta function of BMu.
+ *
+ * @return three-loop beta function
+ */
+double MSSMNoFVatMGUT_soft_parameters::calc_beta_BMu_three_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_BMu;
+
+   beta_BMu = 0;
 
 
    return beta_BMu;

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:48:26
+// File generated at Fri 26 Jun 2015 19:03:00
 
 #include "E6SSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -83,6 +83,25 @@ Eigen::Matrix<double,3,3> E6SSM_susy_parameters::calc_beta_Kappa_two_loop(const 
       (-6*traceKappaAdjKappa - 4*traceLambda12AdjLambda12 - 4*AbsSqr(Lambdax) +
       2.5*Sqr(gN))*(Kappa*(Kappa).adjoint()*Kappa) - 2*(Kappa*(Kappa).adjoint(
       )*Kappa*(Kappa).adjoint()*Kappa))).real();
+
+
+   return beta_Kappa;
+}
+
+/**
+ * Calculates the three-loop beta function of Kappa.
+ *
+ * @return three-loop beta function
+ */
+Eigen::Matrix<double,3,3> E6SSM_susy_parameters::calc_beta_Kappa_three_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_Kappa;
+
+   beta_Kappa = ZEROMATRIX(3,3);
 
 
    return beta_Kappa;

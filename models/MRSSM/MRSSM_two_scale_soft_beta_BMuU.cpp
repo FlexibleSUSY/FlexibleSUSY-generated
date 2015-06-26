@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:43:51
+// File generated at Fri 26 Jun 2015 18:59:12
 
 #include "MRSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -70,6 +70,25 @@ double MRSSM_soft_parameters::calc_beta_BMuU_two_loop(const Soft_traces& soft_tr
       + 8*Sqr(g2)) + 2*AbsSqr(LamSU)*(-75*traceYuAdjYu - 20*AbsSqr(LamSD) - 90*
       AbsSqr(LamTU) + 36*Sqr(g1) + 180*Sqr(g2)) + 160*traceYuAdjYu*Sqr(g3) -
       140*Sqr(LamSU)*Sqr(Conj(LamSU)) - 75*Sqr(LamTU)*Sqr(Conj(LamTU)))));
+
+
+   return beta_BMuU;
+}
+
+/**
+ * Calculates the three-loop beta function of BMuU.
+ *
+ * @return three-loop beta function
+ */
+double MRSSM_soft_parameters::calc_beta_BMuU_three_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_BMuU;
+
+   beta_BMuU = 0;
 
 
    return beta_BMuU;

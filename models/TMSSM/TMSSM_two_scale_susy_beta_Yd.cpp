@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:42:20
+// File generated at Fri 26 Jun 2015 18:57:50
 
 #include "TMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -76,6 +76,25 @@ Eigen::Matrix<double,3,3> TMSSM_susy_parameters::calc_beta_Yd_two_loop(const Sus
       - 1.5*AbsSqr(Lambdax)*(Yd*Yu.adjoint()*Yu) + 0.8*Sqr(g1)*(Yd*Yu.adjoint(
       )*Yu) - 4*(Yd*Yd.adjoint()*Yd*Yd.adjoint()*Yd) - 2*(Yd*Yu.adjoint()*Yu*
       Yd.adjoint()*Yd) - 2*(Yd*Yu.adjoint()*Yu*Yu.adjoint()*Yu))).real();
+
+
+   return beta_Yd;
+}
+
+/**
+ * Calculates the three-loop beta function of Yd.
+ *
+ * @return three-loop beta function
+ */
+Eigen::Matrix<double,3,3> TMSSM_susy_parameters::calc_beta_Yd_three_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_Yd;
+
+   beta_Yd = ZEROMATRIX(3,3);
 
 
    return beta_Yd;

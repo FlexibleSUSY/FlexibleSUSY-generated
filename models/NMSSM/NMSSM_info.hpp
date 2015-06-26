@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:59:25
+// File generated at Fri 26 Jun 2015 19:15:09
 
 #ifndef NMSSM_INFO_H
 #define NMSSM_INFO_H

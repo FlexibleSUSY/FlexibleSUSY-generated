@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:41:34
+// File generated at Fri 26 Jun 2015 18:57:11
 
 #include "SM_input_parameters.hpp"
 #include "SM_spectrum_generator.hpp"
@@ -38,6 +38,7 @@ void print_usage()
       "Usage: scan_SM.x [options]\n"
       "Options:\n"
       "  --LambdaIN=<value>\n"
+      "  --Qin=<value>\n"
 
       "  --help,-h                         print this help message"
              << std::endl;
@@ -50,6 +51,9 @@ void set_command_line_parameters(int argc, char* argv[],
       const char* option = argv[i];
 
       if(Command_line_options::get_parameter_value(option, "--LambdaIN=", input.LambdaIN))
+         continue;
+
+      if(Command_line_options::get_parameter_value(option, "--Qin=", input.Qin))
          continue;
 
       

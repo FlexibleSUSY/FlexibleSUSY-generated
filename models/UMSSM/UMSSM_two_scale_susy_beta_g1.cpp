@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:48:52
+// File generated at Fri 26 Jun 2015 19:03:23
 
 #include "UMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -69,6 +69,25 @@ double UMSSM_susy_parameters::calc_beta_g1_two_loop(const Susy_traces& susy_trac
       Sqr(g2) + 440*Sqr(g3) + 60*Sqr(gp)*Sqr(Qd) + 180*Sqr(gp)*Sqr(Qe) + 30*Sqr
       (gp)*Sqr(QHd) + 30*Sqr(gp)*Sqr(QHu) + 90*Sqr(gp)*Sqr(Ql) + 30*Sqr(gp)*Sqr
       (Qq) + 240*Sqr(gp)*Sqr(Qu)));
+
+
+   return beta_g1;
+}
+
+/**
+ * Calculates the three-loop beta function of g1.
+ *
+ * @return three-loop beta function
+ */
+double UMSSM_susy_parameters::calc_beta_g1_three_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_g1;
+
+   beta_g1 = 0;
 
 
    return beta_g1;

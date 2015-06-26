@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:41:15
+// File generated at Fri 26 Jun 2015 18:56:57
 
 #ifndef SM_TWO_SCALE_susy_parameters_H
 #define SM_TWO_SCALE_susy_parameters_H
@@ -113,18 +113,25 @@ private:
 
    double calc_beta_g1_one_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g1_two_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_g1_three_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g2_one_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g2_two_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_g2_three_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g3_one_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g3_two_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_g3_three_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Lambdax_one_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Lambdax_two_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_Lambdax_three_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_Yu_one_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_Yu_two_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_Yu_three_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_Yd_one_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_Yd_two_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_Yd_three_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_Ye_one_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_Ye_two_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_Ye_three_loop(const TRACE_STRUCT_TYPE&) const;
 
 };
 

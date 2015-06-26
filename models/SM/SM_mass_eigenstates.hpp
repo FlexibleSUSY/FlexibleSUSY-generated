@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:41:34
+// File generated at Fri 26 Jun 2015 18:57:11
 
 /**
  * @file SM_mass_eigenstates.hpp
@@ -24,8 +24,8 @@
  *        value problem using the two_scale solver by solvingt EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Mon 8 Jun 2015 17:41:34 with FlexibleSUSY
- * 1.1.1 (git commit: v1.1.1) and SARAH 4.5.6 .
+ * This file was generated at Fri 26 Jun 2015 18:57:11 with FlexibleSUSY
+ * 1.2.0 (git commit: v1.2.0) and SARAH 4.5.8 .
  */
 
 #ifndef SM_IMODEL_H
@@ -66,6 +66,7 @@ public:
    void calculate_DRbar_masses();
    void calculate_DRbar_parameters();
    void calculate_pole_masses();
+   void check_pole_masses_for_tachyons();
    virtual void clear();
    void clear_DRbar_parameters();
    void do_calculate_sm_pole_masses(bool);
@@ -166,13 +167,13 @@ public:
    double CpconjHpbargZgWp() const;
    double CpHpconjHpAhAh() const;
    double CpHpconjHphhhh() const;
-   std::complex<double> CpHpconjHpVZVZ() const;
    double CpHpconjHpconjHpHp() const;
-   double CpHpconjHpconjVWpVWp() const;
    std::complex<double> CpconjHpVWpAh() const;
    double CpconjHpVWphh() const;
    double CpconjHpVPHp() const;
    double CpconjHpVZHp() const;
+   double CpHpconjHpconjVWpVWp() const;
+   std::complex<double> CpHpconjHpVZVZ() const;
    std::complex<double> CpconjHpbarFdFuPR(unsigned gI1, unsigned gI2) const;
    std::complex<double> CpconjHpbarFdFuPL(unsigned gI1, unsigned gI2) const;
    double CpconjHpbarFeFvPR(unsigned , unsigned ) const;
@@ -182,11 +183,11 @@ public:
    std::complex<double> CpAhbargWpCgWpC() const;
    double CpAhAhAhAh() const;
    double CpAhAhhhhh() const;
-   std::complex<double> CpAhAhVZVZ() const;
    double CpAhAhconjHpHp() const;
-   double CpAhAhconjVWpVWp() const;
    std::complex<double> CpAhVZhh() const;
    std::complex<double> CpAhconjVWpHp() const;
+   double CpAhAhconjVWpVWp() const;
+   std::complex<double> CpAhAhVZVZ() const;
    std::complex<double> CpAhbarFdFdPR(unsigned gI1, unsigned gI2) const;
    std::complex<double> CpAhbarFdFdPL(unsigned gI1, unsigned gI2) const;
    std::complex<double> CpAhbarFeFePR(unsigned gI1, unsigned gI2) const;
@@ -203,11 +204,11 @@ public:
    double CphhconjVWpVWp() const;
    double CphhhhAhAh() const;
    double Cphhhhhhhh() const;
-   std::complex<double> CphhhhVZVZ() const;
    double CphhhhconjHpHp() const;
-   double CphhhhconjVWpVWp() const;
    std::complex<double> CphhVZAh() const;
    double CphhconjVWpHp() const;
+   double CphhhhconjVWpVWp() const;
+   std::complex<double> CphhhhVZVZ() const;
    std::complex<double> CphhbarFdFdPR(unsigned gI1, unsigned gI2) const;
    std::complex<double> CphhbarFdFdPL(unsigned gI1, unsigned gI2) const;
    std::complex<double> CphhbarFeFePR(unsigned gI1, unsigned gI2) const;
@@ -369,6 +370,7 @@ public:
    void tadpole_equations(double[number_of_ewsb_equations]) const;
 
 
+   void self_energy_hh_2loop(double result[1]) const;
 
 
    void calculate_MVG_pole();

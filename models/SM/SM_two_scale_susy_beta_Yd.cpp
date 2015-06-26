@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:41:17
+// File generated at Fri 26 Jun 2015 18:56:59
 
 #include "SM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -80,6 +80,25 @@ Eigen::Matrix<double,3,3> SM_susy_parameters::calc_beta_Yd_two_loop(const Susy_t
       Yd*Yd.adjoint()*Yd) - 4*(Yd*Yd.adjoint()*Yd*Yu.adjoint()*Yu) - Yd*
       Yu.adjoint()*Yu*Yd.adjoint()*Yd + 11*(Yd*Yu.adjoint()*Yu*Yu.adjoint()*Yu)
       )))).real();
+
+
+   return beta_Yd;
+}
+
+/**
+ * Calculates the three-loop beta function of Yd.
+ *
+ * @return three-loop beta function
+ */
+Eigen::Matrix<double,3,3> SM_susy_parameters::calc_beta_Yd_three_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_Yd;
+
+   beta_Yd = (ZEROMATRIX(3,3)).real();
 
 
    return beta_Yd;

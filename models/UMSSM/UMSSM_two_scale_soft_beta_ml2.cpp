@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:49:09
+// File generated at Fri 26 Jun 2015 19:03:39
 
 #include "UMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -143,6 +143,25 @@ Eigen::Matrix<double,3,3> UMSSM_soft_parameters::calc_beta_ml2_two_loop(const So
       + 5*Ql*((2*MassU + MassWB)*Sqr(g2) + 2*MassU*Sqr(gp)*(9*Sqr(Qd) + 3*Sqr(
       Qe) + 2*Sqr(QHd) + 2*Sqr(QHu) + 8*Sqr(Ql) + 18*Sqr(Qq) + Sqr(Qs) + 9*Sqr(
       Qu))))*UNITMATRIX(3)))).real();
+
+
+   return beta_ml2;
+}
+
+/**
+ * Calculates the three-loop beta function of ml2.
+ *
+ * @return three-loop beta function
+ */
+Eigen::Matrix<double,3,3> UMSSM_soft_parameters::calc_beta_ml2_three_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_ml2;
+
+   beta_ml2 = ZEROMATRIX(3,3);
 
 
    return beta_ml2;

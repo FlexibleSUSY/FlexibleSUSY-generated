@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:48:38
+// File generated at Fri 26 Jun 2015 19:03:10
 
 #include "E6SSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -128,6 +128,25 @@ Eigen::Matrix<double,2,2> E6SSM_soft_parameters::calc_beta_TLambda12_two_loop(co
       ()*TLambda12) - 4*(Lambda12*(Lambda12).adjoint()*TLambda12*(Lambda12)
       .adjoint()*Lambda12) - 3*(TLambda12*(Lambda12).adjoint()*Lambda12*(
       Lambda12).adjoint()*Lambda12))).real();
+
+
+   return beta_TLambda12;
+}
+
+/**
+ * Calculates the three-loop beta function of TLambda12.
+ *
+ * @return three-loop beta function
+ */
+Eigen::Matrix<double,2,2> E6SSM_soft_parameters::calc_beta_TLambda12_three_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,2,2> beta_TLambda12;
+
+   beta_TLambda12 = ZEROMATRIX(2,2);
 
 
    return beta_TLambda12;

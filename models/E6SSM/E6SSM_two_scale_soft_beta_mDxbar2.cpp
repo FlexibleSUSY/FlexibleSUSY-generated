@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:48:59
+// File generated at Fri 26 Jun 2015 19:03:27
 
 #include "E6SSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -155,6 +155,25 @@ Eigen::Matrix<double,3,3> E6SSM_soft_parameters::calc_beta_mDxbar2_two_loop(cons
       .transpose()*Kappa.conjugate()) + 3*(24*(MassB + 2*MassBp)*Sqr(g1) + 160*
       (2*MassBp + MassG)*Sqr(g3) + 1773*MassBp*Sqr(gN))*UNITMATRIX(3)))).real()
       ;
+
+
+   return beta_mDxbar2;
+}
+
+/**
+ * Calculates the three-loop beta function of mDxbar2.
+ *
+ * @return three-loop beta function
+ */
+Eigen::Matrix<double,3,3> E6SSM_soft_parameters::calc_beta_mDxbar2_three_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_mDxbar2;
+
+   beta_mDxbar2 = ZEROMATRIX(3,3);
 
 
    return beta_mDxbar2;

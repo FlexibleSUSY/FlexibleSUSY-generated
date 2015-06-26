@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 18:03:11
+// File generated at Fri 26 Jun 2015 19:17:23
 
 #include "NUHMSSM_input_parameters.hpp"
 #include "NUHMSSM_spectrum_generator.hpp"

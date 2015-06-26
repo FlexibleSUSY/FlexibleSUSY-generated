@@ -18,7 +18,13 @@ lowNMSSM_TWO_SCALE_MK := \
 		$(lowNMSSM_TWO_SCALE_SOFT_MK)
 
 lowNMSSM_SLHA_INPUT := \
+		$(DIR)/LesHouches.in.TP3 \
 		$(DIR)/LesHouches.in.lowNMSSM_goldstone_tachyon \
+		$(DIR)/LesHouches.in.TP6 \
+		$(DIR)/LesHouches.in.TP1 \
+		$(DIR)/LesHouches.in.TP4 \
+		$(DIR)/LesHouches.in.TP5 \
+		$(DIR)/LesHouches.in.TP2 \
 		$(DIR)/LesHouches.in.lowNMSSM.pseudoscalar \
 		$(DIR)/LesHouches.in.lowNMSSM
 
@@ -67,6 +73,7 @@ LIBlowNMSSM_HDR += \
 		$(DIR)/lowNMSSM_model_slha.hpp \
 		$(DIR)/lowNMSSM_physical.hpp \
 		$(DIR)/lowNMSSM_slha_io.hpp \
+		$(DIR)/lowNMSSM_spectrum_generator_interface.hpp \
 		$(DIR)/lowNMSSM_spectrum_generator.hpp \
 		$(DIR)/lowNMSSM_susy_scale_constraint.hpp \
 		$(DIR)/lowNMSSM_utilities.hpp \
@@ -235,13 +242,13 @@ $(LIBlowNMSSM): $(LIBlowNMSSM_OBJ)
 		$(MAKELIB) $@ $^
 
 $(RUN_lowNMSSM_EXE): $(RUN_lowNMSSM_OBJ) $(LIBlowNMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
 
 $(RUN_CMD_LINE_lowNMSSM_EXE): $(RUN_CMD_LINE_lowNMSSM_OBJ) $(LIBlowNMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
 
 $(SCAN_lowNMSSM_EXE): $(SCAN_lowNMSSM_OBJ) $(LIBlowNMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBlowNMSSM_DEP) $(EXElowNMSSM_DEP)
 ALLSRC += $(LIBlowNMSSM_SRC) $(EXElowNMSSM_SRC)

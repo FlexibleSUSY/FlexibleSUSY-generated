@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:48:40
+// File generated at Fri 26 Jun 2015 19:03:11
 
 #include "E6SSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -138,6 +138,25 @@ double E6SSM_soft_parameters::calc_beta_TLambdax_two_loop(const Soft_traces& sof
       - 3*(-60*traceKappaAdjKappa - 40*traceLambda12AdjLambda12 - 90*
       traceYdAdjYd - 30*traceYeAdjYe - 90*traceYuAdjYu + 12*Sqr(g1) + 60*Sqr(g2
       ) + 13*Sqr(gN))*TLambdax)));
+
+
+   return beta_TLambdax;
+}
+
+/**
+ * Calculates the three-loop beta function of TLambdax.
+ *
+ * @return three-loop beta function
+ */
+double E6SSM_soft_parameters::calc_beta_TLambdax_three_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_TLambdax;
+
+   beta_TLambdax = 0;
 
 
    return beta_TLambdax;

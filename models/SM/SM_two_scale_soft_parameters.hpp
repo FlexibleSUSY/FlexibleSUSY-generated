@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:41:18
+// File generated at Fri 26 Jun 2015 18:57:00
 
 #ifndef SM_TWO_SCALE_soft_parameters_H
 #define SM_TWO_SCALE_soft_parameters_H
@@ -76,8 +76,10 @@ private:
 
    double calc_beta_mu2_one_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_mu2_two_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_mu2_three_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_v_one_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_v_two_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_v_three_loop(const TRACE_STRUCT_TYPE&) const;
 
 };
 

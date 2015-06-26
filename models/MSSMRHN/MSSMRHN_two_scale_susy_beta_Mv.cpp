@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 18:00:20
+// File generated at Fri 26 Jun 2015 19:14:22
 
 #include "MSSMRHN_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -64,6 +64,25 @@ Eigen::Matrix<double,3,3> MSSMRHN_susy_parameters::calc_beta_Mv_two_loop(const S
       Yv.conjugate()*Yv.transpose()*Yv.conjugate()*Yv.transpose() + Yv*
       Ye.adjoint()*Ye*Yv.adjoint()*Mv + Yv*Yv.adjoint()*Yv*Yv.adjoint()*Mv)))
       .real();
+
+
+   return beta_Mv;
+}
+
+/**
+ * Calculates the three-loop beta function of Mv.
+ *
+ * @return three-loop beta function
+ */
+Eigen::Matrix<double,3,3> MSSMRHN_susy_parameters::calc_beta_Mv_three_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_Mv;
+
+   beta_Mv = ZEROMATRIX(3,3);
 
 
    return beta_Mv;

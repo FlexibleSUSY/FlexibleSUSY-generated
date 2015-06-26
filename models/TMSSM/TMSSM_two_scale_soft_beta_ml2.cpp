@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:42:32
+// File generated at Fri 26 Jun 2015 18:58:01
 
 #include "TMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -106,6 +106,25 @@ Eigen::Matrix<double,3,3> TMSSM_soft_parameters::calc_beta_ml2_two_loop(const So
       MassWB)*Sqr(g1) + 115*MassWB*Sqr(g2))*UNITMATRIX(3) + 0.12*Conj(MassB)*
       Sqr(g1)*(40*MassB*(Ye.adjoint()*Ye) - 20*(Ye.adjoint()*TYe) + 3*(69*MassB
       *Sqr(g1) + 5*(2*MassB + MassWB)*Sqr(g2))*UNITMATRIX(3)))).real();
+
+
+   return beta_ml2;
+}
+
+/**
+ * Calculates the three-loop beta function of ml2.
+ *
+ * @return three-loop beta function
+ */
+Eigen::Matrix<double,3,3> TMSSM_soft_parameters::calc_beta_ml2_three_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_ml2;
+
+   beta_ml2 = ZEROMATRIX(3,3);
 
 
    return beta_ml2;

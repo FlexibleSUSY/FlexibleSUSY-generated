@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:49:21
+// File generated at Fri 26 Jun 2015 19:03:50
 
 #include "UMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -72,6 +72,25 @@ double UMSSM_soft_parameters::calc_beta_MassWB_two_loop(const Soft_traces& soft_
       Sqr(QHu) + 10*MassWB*Sqr(gp)*Sqr(QHu) + 30*MassU*Sqr(gp)*Sqr(Ql) + 30*
       MassWB*Sqr(gp)*Sqr(Ql) + 90*MassU*Sqr(gp)*Sqr(Qq) + 90*MassWB*Sqr(gp)*Sqr
       (Qq) - 10*Conj(Lambdax)*(MassWB*Lambdax - TLambdax)));
+
+
+   return beta_MassWB;
+}
+
+/**
+ * Calculates the three-loop beta function of MassWB.
+ *
+ * @return three-loop beta function
+ */
+double UMSSM_soft_parameters::calc_beta_MassWB_three_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MassWB;
+
+   beta_MassWB = 0;
 
 
    return beta_MassWB;

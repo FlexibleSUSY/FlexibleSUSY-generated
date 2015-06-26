@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:43:55
+// File generated at Fri 26 Jun 2015 18:59:15
 
 #include "MRSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -56,6 +56,25 @@ double MRSSM_soft_parameters::calc_beta_moc2_two_loop(const Soft_traces& soft_tr
    double beta_moc2;
 
    beta_moc2 = Re(24*Power(g3,4)*Tr23*twoLoop);
+
+
+   return beta_moc2;
+}
+
+/**
+ * Calculates the three-loop beta function of moc2.
+ *
+ * @return three-loop beta function
+ */
+double MRSSM_soft_parameters::calc_beta_moc2_three_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_moc2;
+
+   beta_moc2 = 0;
 
 
    return beta_moc2;

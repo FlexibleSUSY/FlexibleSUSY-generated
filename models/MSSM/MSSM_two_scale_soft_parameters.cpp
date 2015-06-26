@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 18:08:33
+// File generated at Fri 26 Jun 2015 19:22:07
 
 #include "MSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -102,6 +102,9 @@ MSSM_soft_parameters MSSM_soft_parameters::calc_beta() const
       beta_MassWB += calc_beta_MassWB_two_loop(TRACE_STRUCT);
       beta_MassG += calc_beta_MassG_two_loop(TRACE_STRUCT);
 
+      if (get_loops() > 2) {
+
+      }
    }
 
 

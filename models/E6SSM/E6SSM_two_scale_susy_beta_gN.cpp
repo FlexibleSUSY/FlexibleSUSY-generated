@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:48:28
+// File generated at Fri 26 Jun 2015 19:03:01
 
 #include "E6SSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -64,6 +64,25 @@ double E6SSM_susy_parameters::calc_beta_gN_two_loop(const Susy_traces& susy_trac
       traceLambda12AdjLambda12 - 210*traceYdAdjYd - 70*traceYeAdjYe - 90*
       traceYuAdjYu - 190*AbsSqr(Lambdax) + 162*Sqr(g1) + 510*Sqr(g2) + 1200*Sqr
       (g3) + 458*Sqr(gN)));
+
+
+   return beta_gN;
+}
+
+/**
+ * Calculates the three-loop beta function of gN.
+ *
+ * @return three-loop beta function
+ */
+double E6SSM_susy_parameters::calc_beta_gN_three_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_gN;
+
+   beta_gN = 0;
 
 
    return beta_gN;

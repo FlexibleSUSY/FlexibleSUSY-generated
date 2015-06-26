@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:57:18
+// File generated at Fri 26 Jun 2015 19:11:33
 
 /**
  * @file SMSSM_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Mon 8 Jun 2015 17:57:18 with FlexibleSUSY
- * 1.1.1 (git commit: v1.1.1) and SARAH 4.5.6 .
+ * This file was generated at Fri 26 Jun 2015 19:11:33 with FlexibleSUSY
+ * 1.2.0 (git commit: v1.2.0) and SARAH 4.5.8 .
  */
 
 #include "SMSSM_mass_eigenstates.hpp"
@@ -904,7 +904,7 @@ void CLASSNAME::copy_DRbar_masses_to_pole_masses()
 
 /**
  * reorders DRbar masses so that golstones are placed at the index
- * specified in the model files definition of the associuated
+ * specified in the model files definition of the associated
  * gauge boson (see Z-boson definition in default particles.m file
  * in the Models directory of your SARAH distribution for example)
  */
@@ -927,6 +927,22 @@ void CLASSNAME::reorder_pole_masses()
    move_goldstone_to(0, MVWm, PHYSICAL(MHpm), PHYSICAL(ZP));
 
 }
+
+/**
+ * Checks the pole masses for tachyons
+ */
+void CLASSNAME::check_pole_masses_for_tachyons()
+{
+   if (PHYSICAL(MSd).tail<6>().minCoeff() < 0.) problems.flag_tachyon(Sd);
+   if (PHYSICAL(MSv).tail<3>().minCoeff() < 0.) problems.flag_tachyon(Sv);
+   if (PHYSICAL(MSu).tail<6>().minCoeff() < 0.) problems.flag_tachyon(Su);
+   if (PHYSICAL(MSe).tail<6>().minCoeff() < 0.) problems.flag_tachyon(Se);
+   if (PHYSICAL(Mhh).tail<3>().minCoeff() < 0.) problems.flag_tachyon(hh);
+   if (PHYSICAL(MAh).tail<2>().minCoeff() < 0.) problems.flag_tachyon(Ah);
+   if (PHYSICAL(MHpm).tail<1>().minCoeff() < 0.) problems.flag_tachyon(Hpm);
+
+}
+
 /**
  * calculates spectrum for model once the DRbar parameters at
  * at low energies are known
@@ -943,6 +959,8 @@ void CLASSNAME::calculate_spectrum()
       copy_DRbar_masses_to_pole_masses();
    else
       reorder_pole_masses();
+
+   check_pole_masses_for_tachyons();
 
    if (problems.have_problem() && !force_output) {
       clear_DRbar_parameters();
@@ -2077,53 +2095,58 @@ std::complex<double> CLASSNAME::CpUSdconjUSdhhhh(unsigned gO1, unsigned gO2, uns
       tmp_37 += KroneckerDelta(gO1,3 + j1)*KroneckerDelta(gO2,3 + j1);
    }
    tmp_36 += tmp_37;
-   result += (0.1*Sqr(g1)*ZH(gI1,0)*ZH(gI2,0)) * tmp_36;
+   result += (0.1*Conj(ZH(gI1,0))*Conj(ZH(gI2,0))*Sqr(g1)) * tmp_36;
    std::complex<double> tmp_38;
    std::complex<double> tmp_39;
-   for (unsigned j3 = 0; j3 < 3; ++j3) {
-      std::complex<double> tmp_40;
-      std::complex<double> tmp_41;
-      for (unsigned j2 = 0; j2 < 3; ++j2) {
-         std::complex<double> tmp_42;
-         std::complex<double> tmp_43;
-         for (unsigned j1 = 0; j1 < 3; ++j1) {
-            tmp_43 += Conj(Yd(j3,j1))*Yd(j2,j1);
-         }
-         tmp_42 += tmp_43;
-         tmp_41 += (KroneckerDelta(gO2,3 + j2)) * tmp_42;
-      }
-      tmp_40 += tmp_41;
-      tmp_39 += (KroneckerDelta(gO1,3 + j3)) * tmp_40;
+   for (unsigned j1 = 0; j1 < 3; ++j1) {
+      tmp_39 += KroneckerDelta(gO1,3 + j1)*KroneckerDelta(gO2,3 + j1);
    }
    tmp_38 += tmp_39;
-   result += (-(ZH(gI1,0)*ZH(gI2,0))) * tmp_38;
-   if (gO1 < 3) {
-      result += 0.05*KroneckerDelta(gO1,gO2)*Sqr(g1)*ZH(gI1,0)*ZH(gI2,0);
-   }
-   if (gO1 < 3) {
-      result += 0.25*KroneckerDelta(gO1,gO2)*Sqr(g2)*ZH(gI1,0)*ZH(gI2,0);
-   }
-   if (gO1 < 3 && gO2 < 3) {
-      std::complex<double> tmp_44;
-      std::complex<double> tmp_45;
-      for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_45 += Conj(Yd(j1,gO2))*Yd(j1,gO1);
+   result += (-0.1*Conj(ZH(gI1,1))*Conj(ZH(gI2,1))*Sqr(g1)) * tmp_38;
+   std::complex<double> tmp_40;
+   std::complex<double> tmp_41;
+   for (unsigned j3 = 0; j3 < 3; ++j3) {
+      std::complex<double> tmp_42;
+      std::complex<double> tmp_43;
+      for (unsigned j2 = 0; j2 < 3; ++j2) {
+         std::complex<double> tmp_44;
+         std::complex<double> tmp_45;
+         for (unsigned j1 = 0; j1 < 3; ++j1) {
+            tmp_45 += Conj(Yd(j3,j1))*Yd(j2,j1);
+         }
+         tmp_44 += tmp_45;
+         tmp_43 += (KroneckerDelta(gO2,3 + j2)) * tmp_44;
       }
-      tmp_44 += tmp_45;
-      result += (-(ZH(gI1,0)*ZH(gI2,0))) * tmp_44;
+      tmp_42 += tmp_43;
+      tmp_41 += (KroneckerDelta(gO1,3 + j3)) * tmp_42;
    }
-   std::complex<double> tmp_46;
-   std::complex<double> tmp_47;
-   for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_47 += KroneckerDelta(gO1,3 + j1)*KroneckerDelta(gO2,3 + j1);
-   }
-   tmp_46 += tmp_47;
-   result += (-0.1*Sqr(g1)*ZH(gI1,1)*ZH(gI2,1)) * tmp_46;
+   tmp_40 += tmp_41;
+   result += (-(Conj(ZH(gI1,0))*Conj(ZH(gI2,0)))) * tmp_40;
    if (gO1 < 3) {
-      result += -0.05*KroneckerDelta(gO1,gO2)*Sqr(g1)*ZH(gI1,1)*ZH(gI2,1);
+      result += 0.05*Conj(ZH(gI1,0))*Conj(ZH(gI2,0))*KroneckerDelta(gO1,gO2)
+         *Sqr(g1);
    }
    if (gO1 < 3) {
-      result += -0.25*KroneckerDelta(gO1,gO2)*Sqr(g2)*ZH(gI1,1)*ZH(gI2,1);
+      result += 0.25*Conj(ZH(gI1,0))*Conj(ZH(gI2,0))*KroneckerDelta(gO1,gO2)
+         *Sqr(g2);
+   }
+   if (gO1 < 3) {
+      result += -0.05*Conj(ZH(gI1,1))*Conj(ZH(gI2,1))*KroneckerDelta(gO1,gO2
+         )*Sqr(g1);
+   }
+   if (gO1 < 3) {
+      result += -0.25*Conj(ZH(gI1,1))*Conj(ZH(gI2,1))*KroneckerDelta(gO1,gO2
+         )*Sqr(g2);
+   }
+   if (gO1 < 3) {
+      std::complex<double> tmp_46;
+      std::complex<double> tmp_47;
+      for (unsigned j1 = 0; j1 < 3; ++j1) {
+         tmp_47 += KroneckerDelta(gO2,3 + j1)*Yd(j1,gO1);
+      }
+      tmp_46 += tmp_47;
+      result += (0.5*Conj(Lambdax)*Conj(ZH(gI1,2))*Conj(ZH(gI2,1))) * tmp_46
+         ;
    }
    if (gO1 < 3) {
       std::complex<double> tmp_48;
@@ -2132,7 +2155,8 @@ std::complex<double> CLASSNAME::CpUSdconjUSdhhhh(unsigned gO1, unsigned gO2, uns
          tmp_49 += KroneckerDelta(gO2,3 + j1)*Yd(j1,gO1);
       }
       tmp_48 += tmp_49;
-      result += (0.5*Conj(Lambdax)*ZH(gI1,2)*ZH(gI2,1)) * tmp_48;
+      result += (0.5*Conj(Lambdax)*Conj(ZH(gI1,1))*Conj(ZH(gI2,2))) * tmp_48
+         ;
    }
    if (gO2 < 3) {
       std::complex<double> tmp_50;
@@ -2141,25 +2165,25 @@ std::complex<double> CLASSNAME::CpUSdconjUSdhhhh(unsigned gO1, unsigned gO2, uns
          tmp_51 += Conj(Yd(j1,gO2))*KroneckerDelta(gO1,3 + j1);
       }
       tmp_50 += tmp_51;
-      result += (0.5*Lambdax*ZH(gI1,2)*ZH(gI2,1)) * tmp_50;
+      result += (0.5*Conj(ZH(gI1,2))*Conj(ZH(gI2,1))*Lambdax) * tmp_50;
    }
-   if (gO1 < 3) {
+   if (gO2 < 3) {
       std::complex<double> tmp_52;
       std::complex<double> tmp_53;
       for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_53 += KroneckerDelta(gO2,3 + j1)*Yd(j1,gO1);
+         tmp_53 += Conj(Yd(j1,gO2))*KroneckerDelta(gO1,3 + j1);
       }
       tmp_52 += tmp_53;
-      result += (0.5*Conj(Lambdax)*ZH(gI1,1)*ZH(gI2,2)) * tmp_52;
+      result += (0.5*Conj(ZH(gI1,1))*Conj(ZH(gI2,2))*Lambdax) * tmp_52;
    }
-   if (gO2 < 3) {
+   if (gO1 < 3 && gO2 < 3) {
       std::complex<double> tmp_54;
       std::complex<double> tmp_55;
       for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_55 += Conj(Yd(j1,gO2))*KroneckerDelta(gO1,3 + j1);
+         tmp_55 += Conj(Yd(j1,gO2))*Yd(j1,gO1);
       }
       tmp_54 += tmp_55;
-      result += (0.5*Lambdax*ZH(gI1,1)*ZH(gI2,2)) * tmp_54;
+      result += (-(Conj(ZH(gI1,0))*Conj(ZH(gI2,0)))) * tmp_54;
    }
 
    return result;
@@ -3161,107 +3185,105 @@ std::complex<double> CLASSNAME::CpconjUSdSdhh(unsigned gO2, unsigned gI1, unsign
       tmp_297 += Conj(ZD(gI1,3 + j1))*KroneckerDelta(gO2,3 + j1);
    }
    tmp_296 += tmp_297;
-   result += (0.1*vd*Sqr(g1)*ZH(gI2,0)) * tmp_296;
+   result += (0.1*vd*Conj(ZH(gI2,0))*Sqr(g1)) * tmp_296;
    std::complex<double> tmp_298;
    std::complex<double> tmp_299;
-   for (unsigned j2 = 0; j2 < 3; ++j2) {
-      std::complex<double> tmp_300;
-      std::complex<double> tmp_301;
-      for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_301 += KroneckerDelta(gO2,3 + j1)*TYd(j1,j2);
-      }
-      tmp_300 += tmp_301;
-      tmp_299 += (Conj(ZD(gI1,j2))) * tmp_300;
+   for (unsigned j1 = 0; j1 < 3; ++j1) {
+      tmp_299 += Conj(ZD(gI1,3 + j1))*KroneckerDelta(gO2,3 + j1);
    }
    tmp_298 += tmp_299;
-   result += (-0.7071067811865475*ZH(gI2,0)) * tmp_298;
-   std::complex<double> tmp_302;
-   std::complex<double> tmp_303;
-   for (unsigned j3 = 0; j3 < 3; ++j3) {
-      std::complex<double> tmp_304;
-      std::complex<double> tmp_305;
-      for (unsigned j2 = 0; j2 < 3; ++j2) {
-         std::complex<double> tmp_306;
-         std::complex<double> tmp_307;
-         for (unsigned j1 = 0; j1 < 3; ++j1) {
-            tmp_307 += Conj(Yd(j3,j1))*Yd(j2,j1);
-         }
-         tmp_306 += tmp_307;
-         tmp_305 += (KroneckerDelta(gO2,3 + j2)) * tmp_306;
-      }
-      tmp_304 += tmp_305;
-      tmp_303 += (Conj(ZD(gI1,3 + j3))) * tmp_304;
-   }
-   tmp_302 += tmp_303;
-   result += (-(vd*ZH(gI2,0))) * tmp_302;
-   if (gO2 < 3) {
-      result += 0.05*vd*Conj(ZD(gI1,gO2))*Sqr(g1)*ZH(gI2,0);
-   }
-   if (gO2 < 3) {
-      result += 0.25*vd*Conj(ZD(gI1,gO2))*Sqr(g2)*ZH(gI2,0);
-   }
-   if (gO2 < 3) {
-      std::complex<double> tmp_308;
-      std::complex<double> tmp_309;
+   result += (-0.1*vu*Conj(ZH(gI2,1))*Sqr(g1)) * tmp_298;
+   std::complex<double> tmp_300;
+   std::complex<double> tmp_301;
+   for (unsigned j2 = 0; j2 < 3; ++j2) {
+      std::complex<double> tmp_302;
+      std::complex<double> tmp_303;
       for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_309 += Conj(ZD(gI1,3 + j1))*Conj(TYd(j1,gO2));
+         tmp_303 += KroneckerDelta(gO2,3 + j1)*Yd(j1,j2);
       }
-      tmp_308 += tmp_309;
-      result += (-0.7071067811865475*ZH(gI2,0)) * tmp_308;
+      tmp_302 += tmp_303;
+      tmp_301 += (Conj(ZD(gI1,j2))) * tmp_302;
    }
-   if (gO2 < 3) {
+   tmp_300 += tmp_301;
+   result += (0.5*vS*Conj(Lambdax)*Conj(ZH(gI2,1))) * tmp_300;
+   std::complex<double> tmp_304;
+   std::complex<double> tmp_305;
+   for (unsigned j2 = 0; j2 < 3; ++j2) {
+      std::complex<double> tmp_306;
+      std::complex<double> tmp_307;
+      for (unsigned j1 = 0; j1 < 3; ++j1) {
+         tmp_307 += KroneckerDelta(gO2,3 + j1)*Yd(j1,j2);
+      }
+      tmp_306 += tmp_307;
+      tmp_305 += (Conj(ZD(gI1,j2))) * tmp_306;
+   }
+   tmp_304 += tmp_305;
+   result += (0.7071067811865475*Conj(Mu)*Conj(ZH(gI2,1))) * tmp_304;
+   std::complex<double> tmp_308;
+   std::complex<double> tmp_309;
+   for (unsigned j2 = 0; j2 < 3; ++j2) {
       std::complex<double> tmp_310;
       std::complex<double> tmp_311;
-      for (unsigned j2 = 0; j2 < 3; ++j2) {
-         std::complex<double> tmp_312;
-         std::complex<double> tmp_313;
-         for (unsigned j1 = 0; j1 < 3; ++j1) {
-            tmp_313 += Conj(Yd(j1,gO2))*Yd(j1,j2);
-         }
-         tmp_312 += tmp_313;
-         tmp_311 += (Conj(ZD(gI1,j2))) * tmp_312;
+      for (unsigned j1 = 0; j1 < 3; ++j1) {
+         tmp_311 += KroneckerDelta(gO2,3 + j1)*Yd(j1,j2);
       }
       tmp_310 += tmp_311;
-      result += (-(vd*ZH(gI2,0))) * tmp_310;
+      tmp_309 += (Conj(ZD(gI1,j2))) * tmp_310;
    }
-   std::complex<double> tmp_314;
-   std::complex<double> tmp_315;
-   for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_315 += Conj(ZD(gI1,3 + j1))*KroneckerDelta(gO2,3 + j1);
+   tmp_308 += tmp_309;
+   result += (0.5*vu*Conj(Lambdax)*Conj(ZH(gI2,2))) * tmp_308;
+   std::complex<double> tmp_312;
+   std::complex<double> tmp_313;
+   for (unsigned j2 = 0; j2 < 3; ++j2) {
+      std::complex<double> tmp_314;
+      std::complex<double> tmp_315;
+      for (unsigned j1 = 0; j1 < 3; ++j1) {
+         tmp_315 += KroneckerDelta(gO2,3 + j1)*TYd(j1,j2);
+      }
+      tmp_314 += tmp_315;
+      tmp_313 += (Conj(ZD(gI1,j2))) * tmp_314;
    }
-   tmp_314 += tmp_315;
-   result += (-0.1*vu*Sqr(g1)*ZH(gI2,1)) * tmp_314;
+   tmp_312 += tmp_313;
+   result += (-0.7071067811865475*Conj(ZH(gI2,0))) * tmp_312;
    std::complex<double> tmp_316;
    std::complex<double> tmp_317;
-   for (unsigned j2 = 0; j2 < 3; ++j2) {
+   for (unsigned j3 = 0; j3 < 3; ++j3) {
       std::complex<double> tmp_318;
       std::complex<double> tmp_319;
-      for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_319 += KroneckerDelta(gO2,3 + j1)*Yd(j1,j2);
+      for (unsigned j2 = 0; j2 < 3; ++j2) {
+         std::complex<double> tmp_320;
+         std::complex<double> tmp_321;
+         for (unsigned j1 = 0; j1 < 3; ++j1) {
+            tmp_321 += Conj(Yd(j3,j1))*Yd(j2,j1);
+         }
+         tmp_320 += tmp_321;
+         tmp_319 += (KroneckerDelta(gO2,3 + j2)) * tmp_320;
       }
       tmp_318 += tmp_319;
-      tmp_317 += (Conj(ZD(gI1,j2))) * tmp_318;
+      tmp_317 += (Conj(ZD(gI1,3 + j3))) * tmp_318;
    }
    tmp_316 += tmp_317;
-   result += (0.5*vS*Conj(Lambdax)*ZH(gI2,1)) * tmp_316;
-   std::complex<double> tmp_320;
-   std::complex<double> tmp_321;
-   for (unsigned j2 = 0; j2 < 3; ++j2) {
+   result += (-(vd*Conj(ZH(gI2,0)))) * tmp_316;
+   if (gO2 < 3) {
+      result += 0.05*vd*Conj(ZD(gI1,gO2))*Conj(ZH(gI2,0))*Sqr(g1);
+   }
+   if (gO2 < 3) {
+      result += 0.25*vd*Conj(ZD(gI1,gO2))*Conj(ZH(gI2,0))*Sqr(g2);
+   }
+   if (gO2 < 3) {
+      result += -0.05*vu*Conj(ZD(gI1,gO2))*Conj(ZH(gI2,1))*Sqr(g1);
+   }
+   if (gO2 < 3) {
+      result += -0.25*vu*Conj(ZD(gI1,gO2))*Conj(ZH(gI2,1))*Sqr(g2);
+   }
+   if (gO2 < 3) {
       std::complex<double> tmp_322;
       std::complex<double> tmp_323;
       for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_323 += KroneckerDelta(gO2,3 + j1)*Yd(j1,j2);
+         tmp_323 += Conj(Yd(j1,gO2))*Conj(ZD(gI1,3 + j1));
       }
       tmp_322 += tmp_323;
-      tmp_321 += (Conj(ZD(gI1,j2))) * tmp_322;
-   }
-   tmp_320 += tmp_321;
-   result += (0.7071067811865475*Conj(Mu)*ZH(gI2,1)) * tmp_320;
-   if (gO2 < 3) {
-      result += -0.05*vu*Conj(ZD(gI1,gO2))*Sqr(g1)*ZH(gI2,1);
-   }
-   if (gO2 < 3) {
-      result += -0.25*vu*Conj(ZD(gI1,gO2))*Sqr(g2)*ZH(gI2,1);
+      result += (0.5*vS*Conj(ZH(gI2,1))*Lambdax) * tmp_322;
    }
    if (gO2 < 3) {
       std::complex<double> tmp_324;
@@ -3270,7 +3292,7 @@ std::complex<double> CLASSNAME::CpconjUSdSdhh(unsigned gO2, unsigned gI1, unsign
          tmp_325 += Conj(Yd(j1,gO2))*Conj(ZD(gI1,3 + j1));
       }
       tmp_324 += tmp_325;
-      result += (0.5*vS*Lambdax*ZH(gI2,1)) * tmp_324;
+      result += (0.7071067811865475*Conj(ZH(gI2,1))*Mu) * tmp_324;
    }
    if (gO2 < 3) {
       std::complex<double> tmp_326;
@@ -3279,29 +3301,31 @@ std::complex<double> CLASSNAME::CpconjUSdSdhh(unsigned gO2, unsigned gI1, unsign
          tmp_327 += Conj(Yd(j1,gO2))*Conj(ZD(gI1,3 + j1));
       }
       tmp_326 += tmp_327;
-      result += (0.7071067811865475*Mu*ZH(gI2,1)) * tmp_326;
+      result += (0.5*vu*Conj(ZH(gI2,2))*Lambdax) * tmp_326;
    }
-   std::complex<double> tmp_328;
-   std::complex<double> tmp_329;
-   for (unsigned j2 = 0; j2 < 3; ++j2) {
+   if (gO2 < 3) {
+      std::complex<double> tmp_328;
+      std::complex<double> tmp_329;
+      for (unsigned j1 = 0; j1 < 3; ++j1) {
+         tmp_329 += Conj(ZD(gI1,3 + j1))*Conj(TYd(j1,gO2));
+      }
+      tmp_328 += tmp_329;
+      result += (-0.7071067811865475*Conj(ZH(gI2,0))) * tmp_328;
+   }
+   if (gO2 < 3) {
       std::complex<double> tmp_330;
       std::complex<double> tmp_331;
-      for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_331 += KroneckerDelta(gO2,3 + j1)*Yd(j1,j2);
+      for (unsigned j2 = 0; j2 < 3; ++j2) {
+         std::complex<double> tmp_332;
+         std::complex<double> tmp_333;
+         for (unsigned j1 = 0; j1 < 3; ++j1) {
+            tmp_333 += Conj(Yd(j1,gO2))*Yd(j1,j2);
+         }
+         tmp_332 += tmp_333;
+         tmp_331 += (Conj(ZD(gI1,j2))) * tmp_332;
       }
       tmp_330 += tmp_331;
-      tmp_329 += (Conj(ZD(gI1,j2))) * tmp_330;
-   }
-   tmp_328 += tmp_329;
-   result += (0.5*vu*Conj(Lambdax)*ZH(gI2,2)) * tmp_328;
-   if (gO2 < 3) {
-      std::complex<double> tmp_332;
-      std::complex<double> tmp_333;
-      for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_333 += Conj(Yd(j1,gO2))*Conj(ZD(gI1,3 + j1));
-      }
-      tmp_332 += tmp_333;
-      result += (0.5*vu*Lambdax*ZH(gI2,2)) * tmp_332;
+      result += (-(vd*Conj(ZH(gI2,0)))) * tmp_330;
    }
 
    return result;
@@ -3551,8 +3575,8 @@ std::complex<double> CLASSNAME::CpUSvconjUSvhhhh(unsigned gO1, unsigned gO2, uns
 {
    std::complex<double> result;
 
-   result = -0.05*KroneckerDelta(gO1,gO2)*(3*Sqr(g1) + 5*Sqr(g2))*(ZH(gI1,0)*ZH
-      (gI2,0) - ZH(gI1,1)*ZH(gI2,1));
+   result = -0.05*(Conj(ZH(gI1,0))*Conj(ZH(gI2,0)) - Conj(ZH(gI1,1))*Conj(ZH(
+      gI2,1)))*KroneckerDelta(gO1,gO2)*(3*Sqr(g1) + 5*Sqr(g2));
 
    return result;
 }
@@ -3562,16 +3586,16 @@ std::complex<double> CLASSNAME::CpconjUSvSvhh(unsigned gO2, unsigned gI1, unsign
    std::complex<double> result;
 
    if (gI1 < 3) {
-      result += -0.15*vd*Conj(ZV(gI1,gO2))*Sqr(g1)*ZH(gI2,0);
+      result += -0.15*vd*Conj(ZH(gI2,0))*Conj(ZV(gI1,gO2))*Sqr(g1);
    }
    if (gI1 < 3) {
-      result += -0.25*vd*Conj(ZV(gI1,gO2))*Sqr(g2)*ZH(gI2,0);
+      result += -0.25*vd*Conj(ZH(gI2,0))*Conj(ZV(gI1,gO2))*Sqr(g2);
    }
    if (gI1 < 3) {
-      result += 0.15*vu*Conj(ZV(gI1,gO2))*Sqr(g1)*ZH(gI2,1);
+      result += 0.15*vu*Conj(ZH(gI2,1))*Conj(ZV(gI1,gO2))*Sqr(g1);
    }
    if (gI1 < 3) {
-      result += 0.25*vu*Conj(ZV(gI1,gO2))*Sqr(g2)*ZH(gI2,1);
+      result += 0.25*vu*Conj(ZH(gI2,1))*Conj(ZV(gI1,gO2))*Sqr(g2);
    }
 
    return result;
@@ -4167,89 +4191,95 @@ std::complex<double> CLASSNAME::CpUSuconjUSuhhhh(unsigned gO1, unsigned gO2, uns
       tmp_459 += KroneckerDelta(gO1,3 + j1)*KroneckerDelta(gO2,3 + j1);
    }
    tmp_458 += tmp_459;
-   result += (-0.2*Sqr(g1)*ZH(gI1,0)*ZH(gI2,0)) * tmp_458;
-   if (gO1 < 3) {
-      result += 0.05*KroneckerDelta(gO1,gO2)*Sqr(g1)*ZH(gI1,0)*ZH(gI2,0);
-   }
-   if (gO1 < 3) {
-      result += -0.25*KroneckerDelta(gO1,gO2)*Sqr(g2)*ZH(gI1,0)*ZH(gI2,0);
-   }
-   if (gO1 < 3) {
-      std::complex<double> tmp_460;
-      std::complex<double> tmp_461;
-      for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_461 += KroneckerDelta(gO2,3 + j1)*Yu(j1,gO1);
-      }
-      tmp_460 += tmp_461;
-      result += (0.5*Conj(Lambdax)*ZH(gI1,2)*ZH(gI2,0)) * tmp_460;
-   }
-   if (gO2 < 3) {
-      std::complex<double> tmp_462;
-      std::complex<double> tmp_463;
-      for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_463 += Conj(Yu(j1,gO2))*KroneckerDelta(gO1,3 + j1);
-      }
-      tmp_462 += tmp_463;
-      result += (0.5*Lambdax*ZH(gI1,2)*ZH(gI2,0)) * tmp_462;
-   }
-   std::complex<double> tmp_464;
-   std::complex<double> tmp_465;
+   result += (-0.2*Conj(ZH(gI1,0))*Conj(ZH(gI2,0))*Sqr(g1)) * tmp_458;
+   std::complex<double> tmp_460;
+   std::complex<double> tmp_461;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_465 += KroneckerDelta(gO1,3 + j1)*KroneckerDelta(gO2,3 + j1);
+      tmp_461 += KroneckerDelta(gO1,3 + j1)*KroneckerDelta(gO2,3 + j1);
    }
-   tmp_464 += tmp_465;
-   result += (0.2*Sqr(g1)*ZH(gI1,1)*ZH(gI2,1)) * tmp_464;
-   std::complex<double> tmp_466;
-   std::complex<double> tmp_467;
+   tmp_460 += tmp_461;
+   result += (0.2*Conj(ZH(gI1,1))*Conj(ZH(gI2,1))*Sqr(g1)) * tmp_460;
+   std::complex<double> tmp_462;
+   std::complex<double> tmp_463;
    for (unsigned j3 = 0; j3 < 3; ++j3) {
+      std::complex<double> tmp_464;
+      std::complex<double> tmp_465;
+      for (unsigned j2 = 0; j2 < 3; ++j2) {
+         std::complex<double> tmp_466;
+         std::complex<double> tmp_467;
+         for (unsigned j1 = 0; j1 < 3; ++j1) {
+            tmp_467 += Conj(Yu(j3,j1))*Yu(j2,j1);
+         }
+         tmp_466 += tmp_467;
+         tmp_465 += (KroneckerDelta(gO2,3 + j2)) * tmp_466;
+      }
+      tmp_464 += tmp_465;
+      tmp_463 += (KroneckerDelta(gO1,3 + j3)) * tmp_464;
+   }
+   tmp_462 += tmp_463;
+   result += (-(Conj(ZH(gI1,1))*Conj(ZH(gI2,1)))) * tmp_462;
+   if (gO1 < 3) {
+      result += 0.05*Conj(ZH(gI1,0))*Conj(ZH(gI2,0))*KroneckerDelta(gO1,gO2)
+         *Sqr(g1);
+   }
+   if (gO1 < 3) {
+      result += -0.25*Conj(ZH(gI1,0))*Conj(ZH(gI2,0))*KroneckerDelta(gO1,gO2
+         )*Sqr(g2);
+   }
+   if (gO1 < 3) {
+      result += -0.05*Conj(ZH(gI1,1))*Conj(ZH(gI2,1))*KroneckerDelta(gO1,gO2
+         )*Sqr(g1);
+   }
+   if (gO1 < 3) {
+      result += 0.25*Conj(ZH(gI1,1))*Conj(ZH(gI2,1))*KroneckerDelta(gO1,gO2)
+         *Sqr(g2);
+   }
+   if (gO1 < 3) {
       std::complex<double> tmp_468;
       std::complex<double> tmp_469;
-      for (unsigned j2 = 0; j2 < 3; ++j2) {
-         std::complex<double> tmp_470;
-         std::complex<double> tmp_471;
-         for (unsigned j1 = 0; j1 < 3; ++j1) {
-            tmp_471 += Conj(Yu(j3,j1))*Yu(j2,j1);
-         }
-         tmp_470 += tmp_471;
-         tmp_469 += (KroneckerDelta(gO2,3 + j2)) * tmp_470;
+      for (unsigned j1 = 0; j1 < 3; ++j1) {
+         tmp_469 += KroneckerDelta(gO2,3 + j1)*Yu(j1,gO1);
       }
       tmp_468 += tmp_469;
-      tmp_467 += (KroneckerDelta(gO1,3 + j3)) * tmp_468;
-   }
-   tmp_466 += tmp_467;
-   result += (-(ZH(gI1,1)*ZH(gI2,1))) * tmp_466;
-   if (gO1 < 3) {
-      result += -0.05*KroneckerDelta(gO1,gO2)*Sqr(g1)*ZH(gI1,1)*ZH(gI2,1);
+      result += (0.5*Conj(Lambdax)*Conj(ZH(gI1,2))*Conj(ZH(gI2,0))) *
+         tmp_468;
    }
    if (gO1 < 3) {
-      result += 0.25*KroneckerDelta(gO1,gO2)*Sqr(g2)*ZH(gI1,1)*ZH(gI2,1);
+      std::complex<double> tmp_470;
+      std::complex<double> tmp_471;
+      for (unsigned j1 = 0; j1 < 3; ++j1) {
+         tmp_471 += KroneckerDelta(gO2,3 + j1)*Yu(j1,gO1);
+      }
+      tmp_470 += tmp_471;
+      result += (0.5*Conj(Lambdax)*Conj(ZH(gI1,0))*Conj(ZH(gI2,2))) *
+         tmp_470;
    }
-   if (gO1 < 3 && gO2 < 3) {
+   if (gO2 < 3) {
       std::complex<double> tmp_472;
       std::complex<double> tmp_473;
       for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_473 += Conj(Yu(j1,gO2))*Yu(j1,gO1);
+         tmp_473 += Conj(Yu(j1,gO2))*KroneckerDelta(gO1,3 + j1);
       }
       tmp_472 += tmp_473;
-      result += (-(ZH(gI1,1)*ZH(gI2,1))) * tmp_472;
+      result += (0.5*Conj(ZH(gI1,2))*Conj(ZH(gI2,0))*Lambdax) * tmp_472;
    }
-   if (gO1 < 3) {
+   if (gO2 < 3) {
       std::complex<double> tmp_474;
       std::complex<double> tmp_475;
       for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_475 += KroneckerDelta(gO2,3 + j1)*Yu(j1,gO1);
+         tmp_475 += Conj(Yu(j1,gO2))*KroneckerDelta(gO1,3 + j1);
       }
       tmp_474 += tmp_475;
-      result += (0.5*Conj(Lambdax)*ZH(gI1,0)*ZH(gI2,2)) * tmp_474;
+      result += (0.5*Conj(ZH(gI1,0))*Conj(ZH(gI2,2))*Lambdax) * tmp_474;
    }
-   if (gO2 < 3) {
+   if (gO1 < 3 && gO2 < 3) {
       std::complex<double> tmp_476;
       std::complex<double> tmp_477;
       for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_477 += Conj(Yu(j1,gO2))*KroneckerDelta(gO1,3 + j1);
+         tmp_477 += Conj(Yu(j1,gO2))*Yu(j1,gO1);
       }
       tmp_476 += tmp_477;
-      result += (0.5*Lambdax*ZH(gI1,0)*ZH(gI2,2)) * tmp_476;
+      result += (-(Conj(ZH(gI1,1))*Conj(ZH(gI2,1)))) * tmp_476;
    }
 
    return result;
@@ -5020,64 +5050,53 @@ std::complex<double> CLASSNAME::CpconjUSuSuhh(unsigned gO2, unsigned gI1, unsign
       tmp_663 += Conj(ZU(gI1,3 + j1))*KroneckerDelta(gO2,3 + j1);
    }
    tmp_662 += tmp_663;
-   result += (-0.2*vd*Sqr(g1)*ZH(gI2,0)) * tmp_662;
+   result += (-0.2*vd*Conj(ZH(gI2,0))*Sqr(g1)) * tmp_662;
    std::complex<double> tmp_664;
    std::complex<double> tmp_665;
-   for (unsigned j2 = 0; j2 < 3; ++j2) {
-      std::complex<double> tmp_666;
-      std::complex<double> tmp_667;
-      for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_667 += KroneckerDelta(gO2,3 + j1)*Yu(j1,j2);
-      }
-      tmp_666 += tmp_667;
-      tmp_665 += (Conj(ZU(gI1,j2))) * tmp_666;
+   for (unsigned j1 = 0; j1 < 3; ++j1) {
+      tmp_665 += Conj(ZU(gI1,3 + j1))*KroneckerDelta(gO2,3 + j1);
    }
    tmp_664 += tmp_665;
-   result += (0.5*vS*Conj(Lambdax)*ZH(gI2,0)) * tmp_664;
-   std::complex<double> tmp_668;
-   std::complex<double> tmp_669;
+   result += (0.2*vu*Conj(ZH(gI2,1))*Sqr(g1)) * tmp_664;
+   std::complex<double> tmp_666;
+   std::complex<double> tmp_667;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
-      std::complex<double> tmp_670;
-      std::complex<double> tmp_671;
+      std::complex<double> tmp_668;
+      std::complex<double> tmp_669;
       for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_671 += KroneckerDelta(gO2,3 + j1)*Yu(j1,j2);
+         tmp_669 += KroneckerDelta(gO2,3 + j1)*Yu(j1,j2);
       }
-      tmp_670 += tmp_671;
-      tmp_669 += (Conj(ZU(gI1,j2))) * tmp_670;
+      tmp_668 += tmp_669;
+      tmp_667 += (Conj(ZU(gI1,j2))) * tmp_668;
    }
-   tmp_668 += tmp_669;
-   result += (0.7071067811865475*Conj(Mu)*ZH(gI2,0)) * tmp_668;
-   if (gO2 < 3) {
-      result += 0.05*vd*Conj(ZU(gI1,gO2))*Sqr(g1)*ZH(gI2,0);
-   }
-   if (gO2 < 3) {
-      result += -0.25*vd*Conj(ZU(gI1,gO2))*Sqr(g2)*ZH(gI2,0);
-   }
-   if (gO2 < 3) {
+   tmp_666 += tmp_667;
+   result += (0.5*vS*Conj(Lambdax)*Conj(ZH(gI2,0))) * tmp_666;
+   std::complex<double> tmp_670;
+   std::complex<double> tmp_671;
+   for (unsigned j2 = 0; j2 < 3; ++j2) {
       std::complex<double> tmp_672;
       std::complex<double> tmp_673;
       for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_673 += Conj(Yu(j1,gO2))*Conj(ZU(gI1,3 + j1));
+         tmp_673 += KroneckerDelta(gO2,3 + j1)*Yu(j1,j2);
       }
       tmp_672 += tmp_673;
-      result += (0.5*vS*Lambdax*ZH(gI2,0)) * tmp_672;
+      tmp_671 += (Conj(ZU(gI1,j2))) * tmp_672;
    }
-   if (gO2 < 3) {
-      std::complex<double> tmp_674;
-      std::complex<double> tmp_675;
+   tmp_670 += tmp_671;
+   result += (0.7071067811865475*Conj(Mu)*Conj(ZH(gI2,0))) * tmp_670;
+   std::complex<double> tmp_674;
+   std::complex<double> tmp_675;
+   for (unsigned j2 = 0; j2 < 3; ++j2) {
+      std::complex<double> tmp_676;
+      std::complex<double> tmp_677;
       for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_675 += Conj(Yu(j1,gO2))*Conj(ZU(gI1,3 + j1));
+         tmp_677 += KroneckerDelta(gO2,3 + j1)*Yu(j1,j2);
       }
-      tmp_674 += tmp_675;
-      result += (0.7071067811865475*Mu*ZH(gI2,0)) * tmp_674;
+      tmp_676 += tmp_677;
+      tmp_675 += (Conj(ZU(gI1,j2))) * tmp_676;
    }
-   std::complex<double> tmp_676;
-   std::complex<double> tmp_677;
-   for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_677 += Conj(ZU(gI1,3 + j1))*KroneckerDelta(gO2,3 + j1);
-   }
-   tmp_676 += tmp_677;
-   result += (0.2*vu*Sqr(g1)*ZH(gI2,1)) * tmp_676;
+   tmp_674 += tmp_675;
+   result += (0.5*vd*Conj(Lambdax)*Conj(ZH(gI2,2))) * tmp_674;
    std::complex<double> tmp_678;
    std::complex<double> tmp_679;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
@@ -5090,7 +5109,7 @@ std::complex<double> CLASSNAME::CpconjUSuSuhh(unsigned gO2, unsigned gI1, unsign
       tmp_679 += (Conj(ZU(gI1,j2))) * tmp_680;
    }
    tmp_678 += tmp_679;
-   result += (-0.7071067811865475*ZH(gI2,1)) * tmp_678;
+   result += (-0.7071067811865475*Conj(ZH(gI2,1))) * tmp_678;
    std::complex<double> tmp_682;
    std::complex<double> tmp_683;
    for (unsigned j3 = 0; j3 < 3; ++j3) {
@@ -5109,58 +5128,69 @@ std::complex<double> CLASSNAME::CpconjUSuSuhh(unsigned gO2, unsigned gI1, unsign
       tmp_683 += (Conj(ZU(gI1,3 + j3))) * tmp_684;
    }
    tmp_682 += tmp_683;
-   result += (-(vu*ZH(gI2,1))) * tmp_682;
+   result += (-(vu*Conj(ZH(gI2,1)))) * tmp_682;
    if (gO2 < 3) {
-      result += -0.05*vu*Conj(ZU(gI1,gO2))*Sqr(g1)*ZH(gI2,1);
+      result += 0.05*vd*Conj(ZH(gI2,0))*Conj(ZU(gI1,gO2))*Sqr(g1);
    }
    if (gO2 < 3) {
-      result += 0.25*vu*Conj(ZU(gI1,gO2))*Sqr(g2)*ZH(gI2,1);
+      result += -0.25*vd*Conj(ZH(gI2,0))*Conj(ZU(gI1,gO2))*Sqr(g2);
+   }
+   if (gO2 < 3) {
+      result += -0.05*vu*Conj(ZH(gI2,1))*Conj(ZU(gI1,gO2))*Sqr(g1);
+   }
+   if (gO2 < 3) {
+      result += 0.25*vu*Conj(ZH(gI2,1))*Conj(ZU(gI1,gO2))*Sqr(g2);
    }
    if (gO2 < 3) {
       std::complex<double> tmp_688;
       std::complex<double> tmp_689;
       for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_689 += Conj(ZU(gI1,3 + j1))*Conj(TYu(j1,gO2));
+         tmp_689 += Conj(Yu(j1,gO2))*Conj(ZU(gI1,3 + j1));
       }
       tmp_688 += tmp_689;
-      result += (-0.7071067811865475*ZH(gI2,1)) * tmp_688;
+      result += (0.5*vS*Conj(ZH(gI2,0))*Lambdax) * tmp_688;
    }
    if (gO2 < 3) {
       std::complex<double> tmp_690;
       std::complex<double> tmp_691;
-      for (unsigned j2 = 0; j2 < 3; ++j2) {
-         std::complex<double> tmp_692;
-         std::complex<double> tmp_693;
-         for (unsigned j1 = 0; j1 < 3; ++j1) {
-            tmp_693 += Conj(Yu(j1,gO2))*Yu(j1,j2);
-         }
-         tmp_692 += tmp_693;
-         tmp_691 += (Conj(ZU(gI1,j2))) * tmp_692;
+      for (unsigned j1 = 0; j1 < 3; ++j1) {
+         tmp_691 += Conj(Yu(j1,gO2))*Conj(ZU(gI1,3 + j1));
       }
       tmp_690 += tmp_691;
-      result += (-(vu*ZH(gI2,1))) * tmp_690;
+      result += (0.7071067811865475*Conj(ZH(gI2,0))*Mu) * tmp_690;
    }
-   std::complex<double> tmp_694;
-   std::complex<double> tmp_695;
-   for (unsigned j2 = 0; j2 < 3; ++j2) {
+   if (gO2 < 3) {
+      std::complex<double> tmp_692;
+      std::complex<double> tmp_693;
+      for (unsigned j1 = 0; j1 < 3; ++j1) {
+         tmp_693 += Conj(Yu(j1,gO2))*Conj(ZU(gI1,3 + j1));
+      }
+      tmp_692 += tmp_693;
+      result += (0.5*vd*Conj(ZH(gI2,2))*Lambdax) * tmp_692;
+   }
+   if (gO2 < 3) {
+      std::complex<double> tmp_694;
+      std::complex<double> tmp_695;
+      for (unsigned j1 = 0; j1 < 3; ++j1) {
+         tmp_695 += Conj(ZU(gI1,3 + j1))*Conj(TYu(j1,gO2));
+      }
+      tmp_694 += tmp_695;
+      result += (-0.7071067811865475*Conj(ZH(gI2,1))) * tmp_694;
+   }
+   if (gO2 < 3) {
       std::complex<double> tmp_696;
       std::complex<double> tmp_697;
-      for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_697 += KroneckerDelta(gO2,3 + j1)*Yu(j1,j2);
+      for (unsigned j2 = 0; j2 < 3; ++j2) {
+         std::complex<double> tmp_698;
+         std::complex<double> tmp_699;
+         for (unsigned j1 = 0; j1 < 3; ++j1) {
+            tmp_699 += Conj(Yu(j1,gO2))*Yu(j1,j2);
+         }
+         tmp_698 += tmp_699;
+         tmp_697 += (Conj(ZU(gI1,j2))) * tmp_698;
       }
       tmp_696 += tmp_697;
-      tmp_695 += (Conj(ZU(gI1,j2))) * tmp_696;
-   }
-   tmp_694 += tmp_695;
-   result += (0.5*vd*Conj(Lambdax)*ZH(gI2,2)) * tmp_694;
-   if (gO2 < 3) {
-      std::complex<double> tmp_698;
-      std::complex<double> tmp_699;
-      for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_699 += Conj(Yu(j1,gO2))*Conj(ZU(gI1,3 + j1));
-      }
-      tmp_698 += tmp_699;
-      result += (0.5*vd*Lambdax*ZH(gI2,2)) * tmp_698;
+      result += (-(vu*Conj(ZH(gI2,1)))) * tmp_696;
    }
 
    return result;
@@ -5510,53 +5540,58 @@ std::complex<double> CLASSNAME::CpUSeconjUSehhhh(unsigned gO1, unsigned gO2, uns
       tmp_749 += KroneckerDelta(gO1,3 + j1)*KroneckerDelta(gO2,3 + j1);
    }
    tmp_748 += tmp_749;
-   result += (0.3*Sqr(g1)*ZH(gI1,0)*ZH(gI2,0)) * tmp_748;
+   result += (0.3*Conj(ZH(gI1,0))*Conj(ZH(gI2,0))*Sqr(g1)) * tmp_748;
    std::complex<double> tmp_750;
    std::complex<double> tmp_751;
-   for (unsigned j3 = 0; j3 < 3; ++j3) {
-      std::complex<double> tmp_752;
-      std::complex<double> tmp_753;
-      for (unsigned j2 = 0; j2 < 3; ++j2) {
-         std::complex<double> tmp_754;
-         std::complex<double> tmp_755;
-         for (unsigned j1 = 0; j1 < 3; ++j1) {
-            tmp_755 += Conj(Ye(j3,j1))*Ye(j2,j1);
-         }
-         tmp_754 += tmp_755;
-         tmp_753 += (KroneckerDelta(gO2,3 + j2)) * tmp_754;
-      }
-      tmp_752 += tmp_753;
-      tmp_751 += (KroneckerDelta(gO1,3 + j3)) * tmp_752;
+   for (unsigned j1 = 0; j1 < 3; ++j1) {
+      tmp_751 += KroneckerDelta(gO1,3 + j1)*KroneckerDelta(gO2,3 + j1);
    }
    tmp_750 += tmp_751;
-   result += (-(ZH(gI1,0)*ZH(gI2,0))) * tmp_750;
-   if (gO1 < 3) {
-      result += -0.15*KroneckerDelta(gO1,gO2)*Sqr(g1)*ZH(gI1,0)*ZH(gI2,0);
-   }
-   if (gO1 < 3) {
-      result += 0.25*KroneckerDelta(gO1,gO2)*Sqr(g2)*ZH(gI1,0)*ZH(gI2,0);
-   }
-   if (gO1 < 3 && gO2 < 3) {
-      std::complex<double> tmp_756;
-      std::complex<double> tmp_757;
-      for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_757 += Conj(Ye(j1,gO2))*Ye(j1,gO1);
+   result += (-0.3*Conj(ZH(gI1,1))*Conj(ZH(gI2,1))*Sqr(g1)) * tmp_750;
+   std::complex<double> tmp_752;
+   std::complex<double> tmp_753;
+   for (unsigned j3 = 0; j3 < 3; ++j3) {
+      std::complex<double> tmp_754;
+      std::complex<double> tmp_755;
+      for (unsigned j2 = 0; j2 < 3; ++j2) {
+         std::complex<double> tmp_756;
+         std::complex<double> tmp_757;
+         for (unsigned j1 = 0; j1 < 3; ++j1) {
+            tmp_757 += Conj(Ye(j3,j1))*Ye(j2,j1);
+         }
+         tmp_756 += tmp_757;
+         tmp_755 += (KroneckerDelta(gO2,3 + j2)) * tmp_756;
       }
-      tmp_756 += tmp_757;
-      result += (-(ZH(gI1,0)*ZH(gI2,0))) * tmp_756;
+      tmp_754 += tmp_755;
+      tmp_753 += (KroneckerDelta(gO1,3 + j3)) * tmp_754;
    }
-   std::complex<double> tmp_758;
-   std::complex<double> tmp_759;
-   for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_759 += KroneckerDelta(gO1,3 + j1)*KroneckerDelta(gO2,3 + j1);
-   }
-   tmp_758 += tmp_759;
-   result += (-0.3*Sqr(g1)*ZH(gI1,1)*ZH(gI2,1)) * tmp_758;
+   tmp_752 += tmp_753;
+   result += (-(Conj(ZH(gI1,0))*Conj(ZH(gI2,0)))) * tmp_752;
    if (gO1 < 3) {
-      result += 0.15*KroneckerDelta(gO1,gO2)*Sqr(g1)*ZH(gI1,1)*ZH(gI2,1);
+      result += -0.15*Conj(ZH(gI1,0))*Conj(ZH(gI2,0))*KroneckerDelta(gO1,gO2
+         )*Sqr(g1);
    }
    if (gO1 < 3) {
-      result += -0.25*KroneckerDelta(gO1,gO2)*Sqr(g2)*ZH(gI1,1)*ZH(gI2,1);
+      result += 0.25*Conj(ZH(gI1,0))*Conj(ZH(gI2,0))*KroneckerDelta(gO1,gO2)
+         *Sqr(g2);
+   }
+   if (gO1 < 3) {
+      result += 0.15*Conj(ZH(gI1,1))*Conj(ZH(gI2,1))*KroneckerDelta(gO1,gO2)
+         *Sqr(g1);
+   }
+   if (gO1 < 3) {
+      result += -0.25*Conj(ZH(gI1,1))*Conj(ZH(gI2,1))*KroneckerDelta(gO1,gO2
+         )*Sqr(g2);
+   }
+   if (gO1 < 3) {
+      std::complex<double> tmp_758;
+      std::complex<double> tmp_759;
+      for (unsigned j1 = 0; j1 < 3; ++j1) {
+         tmp_759 += KroneckerDelta(gO2,3 + j1)*Ye(j1,gO1);
+      }
+      tmp_758 += tmp_759;
+      result += (0.5*Conj(Lambdax)*Conj(ZH(gI1,2))*Conj(ZH(gI2,1))) *
+         tmp_758;
    }
    if (gO1 < 3) {
       std::complex<double> tmp_760;
@@ -5565,7 +5600,8 @@ std::complex<double> CLASSNAME::CpUSeconjUSehhhh(unsigned gO1, unsigned gO2, uns
          tmp_761 += KroneckerDelta(gO2,3 + j1)*Ye(j1,gO1);
       }
       tmp_760 += tmp_761;
-      result += (0.5*Conj(Lambdax)*ZH(gI1,2)*ZH(gI2,1)) * tmp_760;
+      result += (0.5*Conj(Lambdax)*Conj(ZH(gI1,1))*Conj(ZH(gI2,2))) *
+         tmp_760;
    }
    if (gO2 < 3) {
       std::complex<double> tmp_762;
@@ -5574,25 +5610,25 @@ std::complex<double> CLASSNAME::CpUSeconjUSehhhh(unsigned gO1, unsigned gO2, uns
          tmp_763 += Conj(Ye(j1,gO2))*KroneckerDelta(gO1,3 + j1);
       }
       tmp_762 += tmp_763;
-      result += (0.5*Lambdax*ZH(gI1,2)*ZH(gI2,1)) * tmp_762;
+      result += (0.5*Conj(ZH(gI1,2))*Conj(ZH(gI2,1))*Lambdax) * tmp_762;
    }
-   if (gO1 < 3) {
+   if (gO2 < 3) {
       std::complex<double> tmp_764;
       std::complex<double> tmp_765;
       for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_765 += KroneckerDelta(gO2,3 + j1)*Ye(j1,gO1);
+         tmp_765 += Conj(Ye(j1,gO2))*KroneckerDelta(gO1,3 + j1);
       }
       tmp_764 += tmp_765;
-      result += (0.5*Conj(Lambdax)*ZH(gI1,1)*ZH(gI2,2)) * tmp_764;
+      result += (0.5*Conj(ZH(gI1,1))*Conj(ZH(gI2,2))*Lambdax) * tmp_764;
    }
-   if (gO2 < 3) {
+   if (gO1 < 3 && gO2 < 3) {
       std::complex<double> tmp_766;
       std::complex<double> tmp_767;
       for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_767 += Conj(Ye(j1,gO2))*KroneckerDelta(gO1,3 + j1);
+         tmp_767 += Conj(Ye(j1,gO2))*Ye(j1,gO1);
       }
       tmp_766 += tmp_767;
-      result += (0.5*Lambdax*ZH(gI1,1)*ZH(gI2,2)) * tmp_766;
+      result += (-(Conj(ZH(gI1,0))*Conj(ZH(gI2,0)))) * tmp_766;
    }
 
    return result;
@@ -6392,107 +6428,105 @@ std::complex<double> CLASSNAME::CpconjUSeSehh(unsigned gO2, unsigned gI1, unsign
       tmp_955 += Conj(ZE(gI1,3 + j1))*KroneckerDelta(gO2,3 + j1);
    }
    tmp_954 += tmp_955;
-   result += (0.3*vd*Sqr(g1)*ZH(gI2,0)) * tmp_954;
+   result += (0.3*vd*Conj(ZH(gI2,0))*Sqr(g1)) * tmp_954;
    std::complex<double> tmp_956;
    std::complex<double> tmp_957;
-   for (unsigned j2 = 0; j2 < 3; ++j2) {
-      std::complex<double> tmp_958;
-      std::complex<double> tmp_959;
-      for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_959 += KroneckerDelta(gO2,3 + j1)*TYe(j1,j2);
-      }
-      tmp_958 += tmp_959;
-      tmp_957 += (Conj(ZE(gI1,j2))) * tmp_958;
+   for (unsigned j1 = 0; j1 < 3; ++j1) {
+      tmp_957 += Conj(ZE(gI1,3 + j1))*KroneckerDelta(gO2,3 + j1);
    }
    tmp_956 += tmp_957;
-   result += (-0.7071067811865475*ZH(gI2,0)) * tmp_956;
-   std::complex<double> tmp_960;
-   std::complex<double> tmp_961;
-   for (unsigned j3 = 0; j3 < 3; ++j3) {
-      std::complex<double> tmp_962;
-      std::complex<double> tmp_963;
-      for (unsigned j2 = 0; j2 < 3; ++j2) {
-         std::complex<double> tmp_964;
-         std::complex<double> tmp_965;
-         for (unsigned j1 = 0; j1 < 3; ++j1) {
-            tmp_965 += Conj(Ye(j3,j1))*Ye(j2,j1);
-         }
-         tmp_964 += tmp_965;
-         tmp_963 += (KroneckerDelta(gO2,3 + j2)) * tmp_964;
-      }
-      tmp_962 += tmp_963;
-      tmp_961 += (Conj(ZE(gI1,3 + j3))) * tmp_962;
-   }
-   tmp_960 += tmp_961;
-   result += (-(vd*ZH(gI2,0))) * tmp_960;
-   if (gO2 < 3) {
-      result += -0.15*vd*Conj(ZE(gI1,gO2))*Sqr(g1)*ZH(gI2,0);
-   }
-   if (gO2 < 3) {
-      result += 0.25*vd*Conj(ZE(gI1,gO2))*Sqr(g2)*ZH(gI2,0);
-   }
-   if (gO2 < 3) {
-      std::complex<double> tmp_966;
-      std::complex<double> tmp_967;
+   result += (-0.3*vu*Conj(ZH(gI2,1))*Sqr(g1)) * tmp_956;
+   std::complex<double> tmp_958;
+   std::complex<double> tmp_959;
+   for (unsigned j2 = 0; j2 < 3; ++j2) {
+      std::complex<double> tmp_960;
+      std::complex<double> tmp_961;
       for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_967 += Conj(ZE(gI1,3 + j1))*Conj(TYe(j1,gO2));
+         tmp_961 += KroneckerDelta(gO2,3 + j1)*Ye(j1,j2);
       }
-      tmp_966 += tmp_967;
-      result += (-0.7071067811865475*ZH(gI2,0)) * tmp_966;
+      tmp_960 += tmp_961;
+      tmp_959 += (Conj(ZE(gI1,j2))) * tmp_960;
    }
-   if (gO2 < 3) {
+   tmp_958 += tmp_959;
+   result += (0.5*vS*Conj(Lambdax)*Conj(ZH(gI2,1))) * tmp_958;
+   std::complex<double> tmp_962;
+   std::complex<double> tmp_963;
+   for (unsigned j2 = 0; j2 < 3; ++j2) {
+      std::complex<double> tmp_964;
+      std::complex<double> tmp_965;
+      for (unsigned j1 = 0; j1 < 3; ++j1) {
+         tmp_965 += KroneckerDelta(gO2,3 + j1)*Ye(j1,j2);
+      }
+      tmp_964 += tmp_965;
+      tmp_963 += (Conj(ZE(gI1,j2))) * tmp_964;
+   }
+   tmp_962 += tmp_963;
+   result += (0.7071067811865475*Conj(Mu)*Conj(ZH(gI2,1))) * tmp_962;
+   std::complex<double> tmp_966;
+   std::complex<double> tmp_967;
+   for (unsigned j2 = 0; j2 < 3; ++j2) {
       std::complex<double> tmp_968;
       std::complex<double> tmp_969;
-      for (unsigned j2 = 0; j2 < 3; ++j2) {
-         std::complex<double> tmp_970;
-         std::complex<double> tmp_971;
-         for (unsigned j1 = 0; j1 < 3; ++j1) {
-            tmp_971 += Conj(Ye(j1,gO2))*Ye(j1,j2);
-         }
-         tmp_970 += tmp_971;
-         tmp_969 += (Conj(ZE(gI1,j2))) * tmp_970;
+      for (unsigned j1 = 0; j1 < 3; ++j1) {
+         tmp_969 += KroneckerDelta(gO2,3 + j1)*Ye(j1,j2);
       }
       tmp_968 += tmp_969;
-      result += (-(vd*ZH(gI2,0))) * tmp_968;
+      tmp_967 += (Conj(ZE(gI1,j2))) * tmp_968;
    }
-   std::complex<double> tmp_972;
-   std::complex<double> tmp_973;
-   for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_973 += Conj(ZE(gI1,3 + j1))*KroneckerDelta(gO2,3 + j1);
+   tmp_966 += tmp_967;
+   result += (0.5*vu*Conj(Lambdax)*Conj(ZH(gI2,2))) * tmp_966;
+   std::complex<double> tmp_970;
+   std::complex<double> tmp_971;
+   for (unsigned j2 = 0; j2 < 3; ++j2) {
+      std::complex<double> tmp_972;
+      std::complex<double> tmp_973;
+      for (unsigned j1 = 0; j1 < 3; ++j1) {
+         tmp_973 += KroneckerDelta(gO2,3 + j1)*TYe(j1,j2);
+      }
+      tmp_972 += tmp_973;
+      tmp_971 += (Conj(ZE(gI1,j2))) * tmp_972;
    }
-   tmp_972 += tmp_973;
-   result += (-0.3*vu*Sqr(g1)*ZH(gI2,1)) * tmp_972;
+   tmp_970 += tmp_971;
+   result += (-0.7071067811865475*Conj(ZH(gI2,0))) * tmp_970;
    std::complex<double> tmp_974;
    std::complex<double> tmp_975;
-   for (unsigned j2 = 0; j2 < 3; ++j2) {
+   for (unsigned j3 = 0; j3 < 3; ++j3) {
       std::complex<double> tmp_976;
       std::complex<double> tmp_977;
-      for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_977 += KroneckerDelta(gO2,3 + j1)*Ye(j1,j2);
+      for (unsigned j2 = 0; j2 < 3; ++j2) {
+         std::complex<double> tmp_978;
+         std::complex<double> tmp_979;
+         for (unsigned j1 = 0; j1 < 3; ++j1) {
+            tmp_979 += Conj(Ye(j3,j1))*Ye(j2,j1);
+         }
+         tmp_978 += tmp_979;
+         tmp_977 += (KroneckerDelta(gO2,3 + j2)) * tmp_978;
       }
       tmp_976 += tmp_977;
-      tmp_975 += (Conj(ZE(gI1,j2))) * tmp_976;
+      tmp_975 += (Conj(ZE(gI1,3 + j3))) * tmp_976;
    }
    tmp_974 += tmp_975;
-   result += (0.5*vS*Conj(Lambdax)*ZH(gI2,1)) * tmp_974;
-   std::complex<double> tmp_978;
-   std::complex<double> tmp_979;
-   for (unsigned j2 = 0; j2 < 3; ++j2) {
+   result += (-(vd*Conj(ZH(gI2,0)))) * tmp_974;
+   if (gO2 < 3) {
+      result += -0.15*vd*Conj(ZE(gI1,gO2))*Conj(ZH(gI2,0))*Sqr(g1);
+   }
+   if (gO2 < 3) {
+      result += 0.25*vd*Conj(ZE(gI1,gO2))*Conj(ZH(gI2,0))*Sqr(g2);
+   }
+   if (gO2 < 3) {
+      result += 0.15*vu*Conj(ZE(gI1,gO2))*Conj(ZH(gI2,1))*Sqr(g1);
+   }
+   if (gO2 < 3) {
+      result += -0.25*vu*Conj(ZE(gI1,gO2))*Conj(ZH(gI2,1))*Sqr(g2);
+   }
+   if (gO2 < 3) {
       std::complex<double> tmp_980;
       std::complex<double> tmp_981;
       for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_981 += KroneckerDelta(gO2,3 + j1)*Ye(j1,j2);
+         tmp_981 += Conj(Ye(j1,gO2))*Conj(ZE(gI1,3 + j1));
       }
       tmp_980 += tmp_981;
-      tmp_979 += (Conj(ZE(gI1,j2))) * tmp_980;
-   }
-   tmp_978 += tmp_979;
-   result += (0.7071067811865475*Conj(Mu)*ZH(gI2,1)) * tmp_978;
-   if (gO2 < 3) {
-      result += 0.15*vu*Conj(ZE(gI1,gO2))*Sqr(g1)*ZH(gI2,1);
-   }
-   if (gO2 < 3) {
-      result += -0.25*vu*Conj(ZE(gI1,gO2))*Sqr(g2)*ZH(gI2,1);
+      result += (0.5*vS*Conj(ZH(gI2,1))*Lambdax) * tmp_980;
    }
    if (gO2 < 3) {
       std::complex<double> tmp_982;
@@ -6501,7 +6535,7 @@ std::complex<double> CLASSNAME::CpconjUSeSehh(unsigned gO2, unsigned gI1, unsign
          tmp_983 += Conj(Ye(j1,gO2))*Conj(ZE(gI1,3 + j1));
       }
       tmp_982 += tmp_983;
-      result += (0.5*vS*Lambdax*ZH(gI2,1)) * tmp_982;
+      result += (0.7071067811865475*Conj(ZH(gI2,1))*Mu) * tmp_982;
    }
    if (gO2 < 3) {
       std::complex<double> tmp_984;
@@ -6510,29 +6544,31 @@ std::complex<double> CLASSNAME::CpconjUSeSehh(unsigned gO2, unsigned gI1, unsign
          tmp_985 += Conj(Ye(j1,gO2))*Conj(ZE(gI1,3 + j1));
       }
       tmp_984 += tmp_985;
-      result += (0.7071067811865475*Mu*ZH(gI2,1)) * tmp_984;
+      result += (0.5*vu*Conj(ZH(gI2,2))*Lambdax) * tmp_984;
    }
-   std::complex<double> tmp_986;
-   std::complex<double> tmp_987;
-   for (unsigned j2 = 0; j2 < 3; ++j2) {
+   if (gO2 < 3) {
+      std::complex<double> tmp_986;
+      std::complex<double> tmp_987;
+      for (unsigned j1 = 0; j1 < 3; ++j1) {
+         tmp_987 += Conj(ZE(gI1,3 + j1))*Conj(TYe(j1,gO2));
+      }
+      tmp_986 += tmp_987;
+      result += (-0.7071067811865475*Conj(ZH(gI2,0))) * tmp_986;
+   }
+   if (gO2 < 3) {
       std::complex<double> tmp_988;
       std::complex<double> tmp_989;
-      for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_989 += KroneckerDelta(gO2,3 + j1)*Ye(j1,j2);
+      for (unsigned j2 = 0; j2 < 3; ++j2) {
+         std::complex<double> tmp_990;
+         std::complex<double> tmp_991;
+         for (unsigned j1 = 0; j1 < 3; ++j1) {
+            tmp_991 += Conj(Ye(j1,gO2))*Ye(j1,j2);
+         }
+         tmp_990 += tmp_991;
+         tmp_989 += (Conj(ZE(gI1,j2))) * tmp_990;
       }
       tmp_988 += tmp_989;
-      tmp_987 += (Conj(ZE(gI1,j2))) * tmp_988;
-   }
-   tmp_986 += tmp_987;
-   result += (0.5*vu*Conj(Lambdax)*ZH(gI2,2)) * tmp_986;
-   if (gO2 < 3) {
-      std::complex<double> tmp_990;
-      std::complex<double> tmp_991;
-      for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_991 += Conj(Ye(j1,gO2))*Conj(ZE(gI1,3 + j1));
-      }
-      tmp_990 += tmp_991;
-      result += (0.5*vu*Lambdax*ZH(gI2,2)) * tmp_990;
+      result += (-(vd*Conj(ZH(gI2,0)))) * tmp_988;
    }
 
    return result;
@@ -6774,34 +6810,47 @@ std::complex<double> CLASSNAME::CpUhhUhhhhhh(unsigned gO1, unsigned gO2, unsigne
 {
    std::complex<double> result;
 
-   result = 0.05*(KroneckerDelta(0,gO1)*(-(KroneckerDelta(0,gO2)*(3*(3*Sqr(g1)
-      + 5*Sqr(g2))*ZH(gI1,0)*ZH(gI2,0) + (20*AbsSqr(Lambdax) - 3*Sqr(g1) - 5*Sqr(
-      g2))*ZH(gI1,1)*ZH(gI2,1) + 20*AbsSqr(Lambdax)*ZH(gI1,2)*ZH(gI2,2))) +
-      KroneckerDelta(1,gO2)*((-20*AbsSqr(Lambdax) + 3*Sqr(g1) + 5*Sqr(g2))*ZH(gI1,
-      1)*ZH(gI2,0) + (-20*AbsSqr(Lambdax) + 3*Sqr(g1) + 5*Sqr(g2))*ZH(gI1,0)*ZH(
-      gI2,1) + 10*(Conj(Lambdax)*Kappa + Conj(Kappa)*Lambdax)*ZH(gI1,2)*ZH(gI2,2))
-      + 10*KroneckerDelta(2,gO2)*(Conj(Kappa)*Lambdax*(ZH(gI1,2)*ZH(gI2,1) + ZH(
-      gI1,1)*ZH(gI2,2)) + Conj(Lambdax)*(ZH(gI1,2)*(-2*Lambdax*ZH(gI2,0) + Kappa*
-      ZH(gI2,1)) + (-2*Lambdax*ZH(gI1,0) + Kappa*ZH(gI1,1))*ZH(gI2,2)))) +
-      KroneckerDelta(1,gO1)*(KroneckerDelta(1,gO2)*((-20*AbsSqr(Lambdax) + 3*Sqr(
-      g1) + 5*Sqr(g2))*ZH(gI1,0)*ZH(gI2,0) - 3*(3*Sqr(g1) + 5*Sqr(g2))*ZH(gI1,1)*
-      ZH(gI2,1) - 20*AbsSqr(Lambdax)*ZH(gI1,2)*ZH(gI2,2)) + KroneckerDelta(0,gO2)*
-      ((-20*AbsSqr(Lambdax) + 3*Sqr(g1) + 5*Sqr(g2))*ZH(gI1,1)*ZH(gI2,0) + (-20*
-      AbsSqr(Lambdax) + 3*Sqr(g1) + 5*Sqr(g2))*ZH(gI1,0)*ZH(gI2,1) + 10*(Conj(
-      Lambdax)*Kappa + Conj(Kappa)*Lambdax)*ZH(gI1,2)*ZH(gI2,2)) + 10*
-      KroneckerDelta(2,gO2)*(Conj(Kappa)*Lambdax*(ZH(gI1,2)*ZH(gI2,0) + ZH(gI1,0)*
-      ZH(gI2,2)) + Conj(Lambdax)*(ZH(gI1,2)*(Kappa*ZH(gI2,0) - 2*Lambdax*ZH(gI2,1)
-      ) + (Kappa*ZH(gI1,0) - 2*Lambdax*ZH(gI1,1))*ZH(gI2,2)))) - 10*KroneckerDelta
-      (2,gO1)*(Conj(Lambdax)*(KroneckerDelta(2,gO2)*(ZH(gI1,0)*(2*Lambdax*ZH(gI2,0
-      ) - Kappa*ZH(gI2,1)) + ZH(gI1,1)*(-(Kappa*ZH(gI2,0)) + 2*Lambdax*ZH(gI2,1)))
-      + KroneckerDelta(0,gO2)*(ZH(gI1,2)*(2*Lambdax*ZH(gI2,0) - Kappa*ZH(gI2,1))
-      + (2*Lambdax*ZH(gI1,0) - Kappa*ZH(gI1,1))*ZH(gI2,2)) - KroneckerDelta(1,gO2)
-      *(ZH(gI1,2)*(Kappa*ZH(gI2,0) - 2*Lambdax*ZH(gI2,1)) + (Kappa*ZH(gI1,0) - 2*
-      Lambdax*ZH(gI1,1))*ZH(gI2,2))) - Conj(Kappa)*(KroneckerDelta(2,gO2)*(Lambdax
-      *ZH(gI1,1)*ZH(gI2,0) + Lambdax*ZH(gI1,0)*ZH(gI2,1) - 12*Kappa*ZH(gI1,2)*ZH(
-      gI2,2)) + Lambdax*(KroneckerDelta(1,gO2)*(ZH(gI1,2)*ZH(gI2,0) + ZH(gI1,0)*ZH
-      (gI2,2)) + KroneckerDelta(0,gO2)*(ZH(gI1,2)*ZH(gI2,1) + ZH(gI1,1)*ZH(gI2,2))
-      ))));
+   result = 0.05*(-10*Conj(ZH(gI1,2))*(-(Conj(Kappa)*((Conj(ZH(gI2,1))*(
+      KroneckerDelta(0,gO2)*KroneckerDelta(2,gO1) + KroneckerDelta(0,gO1)*
+      KroneckerDelta(2,gO2)) + Conj(ZH(gI2,0))*(KroneckerDelta(1,gO2)*
+      KroneckerDelta(2,gO1) + KroneckerDelta(1,gO1)*KroneckerDelta(2,gO2)))*
+      Lambdax + Conj(ZH(gI2,2))*(-12*KroneckerDelta(2,gO1)*KroneckerDelta(2,gO2)*
+      Kappa + KroneckerDelta(0,gO2)*KroneckerDelta(1,gO1)*Lambdax + KroneckerDelta
+      (0,gO1)*KroneckerDelta(1,gO2)*Lambdax))) + Conj(Lambdax)*(Conj(ZH(gI2,0))*(-
+      (KroneckerDelta(1,gO2)*KroneckerDelta(2,gO1)*Kappa) + 2*KroneckerDelta(0,gO2
+      )*KroneckerDelta(2,gO1)*Lambdax + KroneckerDelta(2,gO2)*(-(KroneckerDelta(1,
+      gO1)*Kappa) + 2*KroneckerDelta(0,gO1)*Lambdax)) - Conj(ZH(gI2,1))*(
+      KroneckerDelta(0,gO2)*KroneckerDelta(2,gO1)*Kappa - 2*KroneckerDelta(1,gO2)*
+      KroneckerDelta(2,gO1)*Lambdax + KroneckerDelta(2,gO2)*(KroneckerDelta(0,gO1)
+      *Kappa - 2*KroneckerDelta(1,gO1)*Lambdax)) + Conj(ZH(gI2,2))*(KroneckerDelta
+      (0,gO1)*(-(KroneckerDelta(1,gO2)*Kappa) + 2*KroneckerDelta(0,gO2)*Lambdax) +
+      KroneckerDelta(1,gO1)*(-(KroneckerDelta(0,gO2)*Kappa) + 2*KroneckerDelta(1,
+      gO2)*Lambdax)))) + Conj(ZH(gI1,1))*(10*Conj(ZH(gI2,2))*(Conj(Kappa)*(
+      KroneckerDelta(0,gO2)*KroneckerDelta(2,gO1) + KroneckerDelta(0,gO1)*
+      KroneckerDelta(2,gO2))*Lambdax + Conj(Lambdax)*(KroneckerDelta(0,gO2)*
+      KroneckerDelta(2,gO1)*Kappa - 2*KroneckerDelta(1,gO2)*KroneckerDelta(2,gO1)*
+      Lambdax + KroneckerDelta(2,gO2)*(KroneckerDelta(0,gO1)*Kappa - 2*
+      KroneckerDelta(1,gO1)*Lambdax))) + Conj(ZH(gI2,1))*(-20*AbsSqr(Lambdax)*
+      KroneckerDelta(2,gO1)*KroneckerDelta(2,gO2) - 3*KroneckerDelta(1,gO1)*
+      KroneckerDelta(1,gO2)*(3*Sqr(g1) + 5*Sqr(g2)) + KroneckerDelta(0,gO1)*
+      KroneckerDelta(0,gO2)*(-20*AbsSqr(Lambdax) + 3*Sqr(g1) + 5*Sqr(g2))) + Conj(
+      ZH(gI2,0))*(10*KroneckerDelta(2,gO1)*KroneckerDelta(2,gO2)*(Conj(Lambdax)*
+      Kappa + Conj(Kappa)*Lambdax) + KroneckerDelta(0,gO2)*KroneckerDelta(1,gO1)*(
+      -20*AbsSqr(Lambdax) + 3*Sqr(g1) + 5*Sqr(g2)) + KroneckerDelta(0,gO1)*
+      KroneckerDelta(1,gO2)*(-20*AbsSqr(Lambdax) + 3*Sqr(g1) + 5*Sqr(g2)))) + Conj
+      (ZH(gI1,0))*(10*Conj(ZH(gI2,2))*(Conj(Kappa)*(KroneckerDelta(1,gO2)*
+      KroneckerDelta(2,gO1) + KroneckerDelta(1,gO1)*KroneckerDelta(2,gO2))*Lambdax
+      + Conj(Lambdax)*(KroneckerDelta(1,gO2)*KroneckerDelta(2,gO1)*Kappa - 2*
+      KroneckerDelta(0,gO2)*KroneckerDelta(2,gO1)*Lambdax + KroneckerDelta(2,gO2)*
+      (KroneckerDelta(1,gO1)*Kappa - 2*KroneckerDelta(0,gO1)*Lambdax))) - Conj(ZH(
+      gI2,0))*(20*AbsSqr(Lambdax)*KroneckerDelta(2,gO1)*KroneckerDelta(2,gO2) +
+      KroneckerDelta(1,gO1)*KroneckerDelta(1,gO2)*(20*AbsSqr(Lambdax) - 3*Sqr(g1)
+      - 5*Sqr(g2)) + 3*KroneckerDelta(0,gO1)*KroneckerDelta(0,gO2)*(3*Sqr(g1) + 5*
+      Sqr(g2))) + Conj(ZH(gI2,1))*(10*KroneckerDelta(2,gO1)*KroneckerDelta(2,gO2)*
+      (Conj(Lambdax)*Kappa + Conj(Kappa)*Lambdax) + KroneckerDelta(0,gO2)*
+      KroneckerDelta(1,gO1)*(-20*AbsSqr(Lambdax) + 3*Sqr(g1) + 5*Sqr(g2)) +
+      KroneckerDelta(0,gO1)*KroneckerDelta(1,gO2)*(-20*AbsSqr(Lambdax) + 3*Sqr(g1)
+      + 5*Sqr(g2)))));
 
    return result;
 }
@@ -6883,55 +6932,60 @@ std::complex<double> CLASSNAME::CpUhhhhAh(unsigned gO2, unsigned gI1, unsigned g
    std::complex<double> result;
 
    result = std::complex<double>(0,0.25)*(-1.4142135623730951*Conj(TLambdax)*
-      Conj(ZA(gI2,2))*KroneckerDelta(1,gO2)*ZH(gI1,0) - 1.4142135623730951*Conj(
-      TLambdax)*Conj(ZA(gI2,1))*KroneckerDelta(2,gO2)*ZH(gI1,0) -
-      1.4142135623730951*Conj(MS)*Conj(ZA(gI2,2))*KroneckerDelta(1,gO2)*Lambdax*ZH
-      (gI1,0) - 2*vS*Conj(Kappa)*Conj(ZA(gI2,2))*KroneckerDelta(1,gO2)*Lambdax*ZH(
-      gI1,0) + 1.4142135623730951*Conj(MS)*Conj(ZA(gI2,1))*KroneckerDelta(2,gO2)*
-      Lambdax*ZH(gI1,0) + 2*vS*Conj(Kappa)*Conj(ZA(gI2,1))*KroneckerDelta(2,gO2)*
-      Lambdax*ZH(gI1,0) - 2*vu*Conj(Kappa)*Conj(ZA(gI2,2))*KroneckerDelta(2,gO2)*
-      Lambdax*ZH(gI1,0) + 1.4142135623730951*Conj(ZA(gI2,2))*KroneckerDelta(1,gO2)
-      *TLambdax*ZH(gI1,0) + 1.4142135623730951*Conj(ZA(gI2,1))*KroneckerDelta(2,
-      gO2)*TLambdax*ZH(gI1,0) - 1.4142135623730951*Conj(TLambdax)*Conj(ZA(gI2,2))*
-      KroneckerDelta(0,gO2)*ZH(gI1,1) - 1.4142135623730951*Conj(TLambdax)*Conj(ZA(
-      gI2,0))*KroneckerDelta(2,gO2)*ZH(gI1,1) - 1.4142135623730951*Conj(MS)*Conj(
-      ZA(gI2,2))*KroneckerDelta(0,gO2)*Lambdax*ZH(gI1,1) - 2*vS*Conj(Kappa)*Conj(
-      ZA(gI2,2))*KroneckerDelta(0,gO2)*Lambdax*ZH(gI1,1) + 1.4142135623730951*Conj
-      (MS)*Conj(ZA(gI2,0))*KroneckerDelta(2,gO2)*Lambdax*ZH(gI1,1) + 2*vS*Conj(
-      Kappa)*Conj(ZA(gI2,0))*KroneckerDelta(2,gO2)*Lambdax*ZH(gI1,1) - 2*vd*Conj(
-      Kappa)*Conj(ZA(gI2,2))*KroneckerDelta(2,gO2)*Lambdax*ZH(gI1,1) +
-      1.4142135623730951*Conj(ZA(gI2,2))*KroneckerDelta(0,gO2)*TLambdax*ZH(gI1,1)
-      + 1.4142135623730951*Conj(ZA(gI2,0))*KroneckerDelta(2,gO2)*TLambdax*ZH(gI1,1
-      ) - 2.8284271247461903*Conj(Mu)*Conj(ZA(gI2,2))*Lambdax*(KroneckerDelta(0,
-      gO2)*ZH(gI1,0) + KroneckerDelta(1,gO2)*ZH(gI1,1)) - 1.4142135623730951*Conj(
-      TLambdax)*Conj(ZA(gI2,1))*KroneckerDelta(0,gO2)*ZH(gI1,2) -
-      1.4142135623730951*Conj(TLambdax)*Conj(ZA(gI2,0))*KroneckerDelta(1,gO2)*ZH(
-      gI1,2) + 2.8284271247461903*MS*Conj(Kappa)*Conj(ZA(gI2,2))*KroneckerDelta(2,
-      gO2)*ZH(gI1,2) + 2.8284271247461903*Conj(TKappa)*Conj(ZA(gI2,2))*
-      KroneckerDelta(2,gO2)*ZH(gI1,2) - 2.8284271247461903*Conj(MS)*Conj(ZA(gI2,2)
-      )*KroneckerDelta(2,gO2)*Kappa*ZH(gI1,2) + 1.4142135623730951*Conj(MS)*Conj(
-      ZA(gI2,1))*KroneckerDelta(0,gO2)*Lambdax*ZH(gI1,2) + 2*vS*Conj(Kappa)*Conj(
-      ZA(gI2,1))*KroneckerDelta(0,gO2)*Lambdax*ZH(gI1,2) - 2*vu*Conj(Kappa)*Conj(
-      ZA(gI2,2))*KroneckerDelta(0,gO2)*Lambdax*ZH(gI1,2) + 1.4142135623730951*Conj
-      (MS)*Conj(ZA(gI2,0))*KroneckerDelta(1,gO2)*Lambdax*ZH(gI1,2) + 2*vS*Conj(
-      Kappa)*Conj(ZA(gI2,0))*KroneckerDelta(1,gO2)*Lambdax*ZH(gI1,2) - 2*vd*Conj(
-      Kappa)*Conj(ZA(gI2,2))*KroneckerDelta(1,gO2)*Lambdax*ZH(gI1,2) + 2*vu*Conj(
-      Kappa)*Conj(ZA(gI2,0))*KroneckerDelta(2,gO2)*Lambdax*ZH(gI1,2) + 2*vd*Conj(
-      Kappa)*Conj(ZA(gI2,1))*KroneckerDelta(2,gO2)*Lambdax*ZH(gI1,2) -
-      2.8284271247461903*Conj(ZA(gI2,2))*KroneckerDelta(2,gO2)*TKappa*ZH(gI1,2) +
-      1.4142135623730951*Conj(ZA(gI2,1))*KroneckerDelta(0,gO2)*TLambdax*ZH(gI1,2)
-      + 1.4142135623730951*Conj(ZA(gI2,0))*KroneckerDelta(1,gO2)*TLambdax*ZH(gI1,2
-      ) + Conj(Lambdax)*(-(Conj(ZA(gI2,1))*(KroneckerDelta(0,gO2)*(
-      1.4142135623730951*MS + 2*vS*Kappa)*ZH(gI1,2) + KroneckerDelta(2,gO2)*((
-      1.4142135623730951*MS + 2*vS*Kappa)*ZH(gI1,0) + 2*vd*Kappa*ZH(gI1,2)))) -
-      Conj(ZA(gI2,0))*(KroneckerDelta(1,gO2)*(1.4142135623730951*MS + 2*vS*Kappa)*
-      ZH(gI1,2) + KroneckerDelta(2,gO2)*((1.4142135623730951*MS + 2*vS*Kappa)*ZH(
-      gI1,1) + 2*vu*Kappa*ZH(gI1,2))) + Conj(ZA(gI2,2))*(2*KroneckerDelta(2,gO2)*
-      Kappa*(vu*ZH(gI1,0) + vd*ZH(gI1,1)) + KroneckerDelta(0,gO2)*(
-      2.8284271247461903*Mu*ZH(gI1,0) + (1.4142135623730951*MS + 2*vS*Kappa)*ZH(
-      gI1,1) + 2*vu*Kappa*ZH(gI1,2)) + KroneckerDelta(1,gO2)*((1.4142135623730951*
-      MS + 2*vS*Kappa)*ZH(gI1,0) + 2*(1.4142135623730951*Mu*ZH(gI1,1) + vd*Kappa*
-      ZH(gI1,2))))));
+      Conj(ZA(gI2,2))*Conj(ZH(gI1,1))*KroneckerDelta(0,gO2) - 1.4142135623730951*
+      Conj(TLambdax)*Conj(ZA(gI2,1))*Conj(ZH(gI1,2))*KroneckerDelta(0,gO2) -
+      1.4142135623730951*Conj(TLambdax)*Conj(ZA(gI2,2))*Conj(ZH(gI1,0))*
+      KroneckerDelta(1,gO2) - 1.4142135623730951*Conj(TLambdax)*Conj(ZA(gI2,0))*
+      Conj(ZH(gI1,2))*KroneckerDelta(1,gO2) - 1.4142135623730951*Conj(TLambdax)*
+      Conj(ZA(gI2,1))*Conj(ZH(gI1,0))*KroneckerDelta(2,gO2) - 1.4142135623730951*
+      Conj(TLambdax)*Conj(ZA(gI2,0))*Conj(ZH(gI1,1))*KroneckerDelta(2,gO2) +
+      2.8284271247461903*MS*Conj(Kappa)*Conj(ZA(gI2,2))*Conj(ZH(gI1,2))*
+      KroneckerDelta(2,gO2) + 2.8284271247461903*Conj(TKappa)*Conj(ZA(gI2,2))*Conj
+      (ZH(gI1,2))*KroneckerDelta(2,gO2) - 2.8284271247461903*Conj(MS)*Conj(ZA(gI2,
+      2))*Conj(ZH(gI1,2))*KroneckerDelta(2,gO2)*Kappa - 1.4142135623730951*Conj(MS
+      )*Conj(ZA(gI2,2))*Conj(ZH(gI1,1))*KroneckerDelta(0,gO2)*Lambdax - 2*vS*Conj(
+      Kappa)*Conj(ZA(gI2,2))*Conj(ZH(gI1,1))*KroneckerDelta(0,gO2)*Lambdax +
+      1.4142135623730951*Conj(MS)*Conj(ZA(gI2,1))*Conj(ZH(gI1,2))*KroneckerDelta(0
+      ,gO2)*Lambdax + 2*vS*Conj(Kappa)*Conj(ZA(gI2,1))*Conj(ZH(gI1,2))*
+      KroneckerDelta(0,gO2)*Lambdax - 2*vu*Conj(Kappa)*Conj(ZA(gI2,2))*Conj(ZH(gI1
+      ,2))*KroneckerDelta(0,gO2)*Lambdax - 1.4142135623730951*Conj(MS)*Conj(ZA(gI2
+      ,2))*Conj(ZH(gI1,0))*KroneckerDelta(1,gO2)*Lambdax - 2*vS*Conj(Kappa)*Conj(
+      ZA(gI2,2))*Conj(ZH(gI1,0))*KroneckerDelta(1,gO2)*Lambdax +
+      1.4142135623730951*Conj(MS)*Conj(ZA(gI2,0))*Conj(ZH(gI1,2))*KroneckerDelta(1
+      ,gO2)*Lambdax + 2*vS*Conj(Kappa)*Conj(ZA(gI2,0))*Conj(ZH(gI1,2))*
+      KroneckerDelta(1,gO2)*Lambdax - 2*vd*Conj(Kappa)*Conj(ZA(gI2,2))*Conj(ZH(gI1
+      ,2))*KroneckerDelta(1,gO2)*Lambdax - 2.8284271247461903*Conj(Mu)*Conj(ZA(gI2
+      ,2))*(Conj(ZH(gI1,0))*KroneckerDelta(0,gO2) + Conj(ZH(gI1,1))*KroneckerDelta
+      (1,gO2))*Lambdax + 1.4142135623730951*Conj(MS)*Conj(ZA(gI2,1))*Conj(ZH(gI1,0
+      ))*KroneckerDelta(2,gO2)*Lambdax + 2*vS*Conj(Kappa)*Conj(ZA(gI2,1))*Conj(ZH(
+      gI1,0))*KroneckerDelta(2,gO2)*Lambdax - 2*vu*Conj(Kappa)*Conj(ZA(gI2,2))*
+      Conj(ZH(gI1,0))*KroneckerDelta(2,gO2)*Lambdax + 1.4142135623730951*Conj(MS)*
+      Conj(ZA(gI2,0))*Conj(ZH(gI1,1))*KroneckerDelta(2,gO2)*Lambdax + 2*vS*Conj(
+      Kappa)*Conj(ZA(gI2,0))*Conj(ZH(gI1,1))*KroneckerDelta(2,gO2)*Lambdax - 2*vd*
+      Conj(Kappa)*Conj(ZA(gI2,2))*Conj(ZH(gI1,1))*KroneckerDelta(2,gO2)*Lambdax +
+      2*vu*Conj(Kappa)*Conj(ZA(gI2,0))*Conj(ZH(gI1,2))*KroneckerDelta(2,gO2)*
+      Lambdax + 2*vd*Conj(Kappa)*Conj(ZA(gI2,1))*Conj(ZH(gI1,2))*KroneckerDelta(2,
+      gO2)*Lambdax + Conj(Lambdax)*(-(Conj(ZA(gI2,1))*(Conj(ZH(gI1,0))*
+      KroneckerDelta(2,gO2)*(1.4142135623730951*MS + 2*vS*Kappa) + Conj(ZH(gI1,2))
+      *(2*vd*KroneckerDelta(2,gO2)*Kappa + KroneckerDelta(0,gO2)*(
+      1.4142135623730951*MS + 2*vS*Kappa)))) - Conj(ZA(gI2,0))*(Conj(ZH(gI1,1))*
+      KroneckerDelta(2,gO2)*(1.4142135623730951*MS + 2*vS*Kappa) + Conj(ZH(gI1,2))
+      *(2*vu*KroneckerDelta(2,gO2)*Kappa + KroneckerDelta(1,gO2)*(
+      1.4142135623730951*MS + 2*vS*Kappa))) + Conj(ZA(gI2,2))*(2*Conj(ZH(gI1,2))*(
+      vu*KroneckerDelta(0,gO2) + vd*KroneckerDelta(1,gO2))*Kappa + Conj(ZH(gI1,0))
+      *(2*vu*KroneckerDelta(2,gO2)*Kappa + KroneckerDelta(1,gO2)*(
+      1.4142135623730951*MS + 2*vS*Kappa) + 2.8284271247461903*KroneckerDelta(0,
+      gO2)*Mu) + Conj(ZH(gI1,1))*(KroneckerDelta(0,gO2)*(1.4142135623730951*MS + 2
+      *vS*Kappa) + 2*(vd*KroneckerDelta(2,gO2)*Kappa + 1.4142135623730951*
+      KroneckerDelta(1,gO2)*Mu)))) - 2.8284271247461903*Conj(ZA(gI2,2))*Conj(ZH(
+      gI1,2))*KroneckerDelta(2,gO2)*TKappa + 1.4142135623730951*Conj(ZA(gI2,2))*
+      Conj(ZH(gI1,1))*KroneckerDelta(0,gO2)*TLambdax + 1.4142135623730951*Conj(ZA(
+      gI2,1))*Conj(ZH(gI1,2))*KroneckerDelta(0,gO2)*TLambdax + 1.4142135623730951*
+      Conj(ZA(gI2,2))*Conj(ZH(gI1,0))*KroneckerDelta(1,gO2)*TLambdax +
+      1.4142135623730951*Conj(ZA(gI2,0))*Conj(ZH(gI1,2))*KroneckerDelta(1,gO2)*
+      TLambdax + 1.4142135623730951*Conj(ZA(gI2,1))*Conj(ZH(gI1,0))*KroneckerDelta
+      (2,gO2)*TLambdax + 1.4142135623730951*Conj(ZA(gI2,0))*Conj(ZH(gI1,1))*
+      KroneckerDelta(2,gO2)*TLambdax);
 
    return result;
 }
@@ -6940,56 +6994,69 @@ std::complex<double> CLASSNAME::CpUhhhhhh(unsigned gO2, unsigned gI1, unsigned g
 {
    std::complex<double> result;
 
-   result = 0.05*(KroneckerDelta(1,gO2)*(ZH(gI1,1)*(vd*(-20*AbsSqr(Lambdax) + 3
-      *Sqr(g1) + 5*Sqr(g2))*ZH(gI2,0) - 3*vu*(3*Sqr(g1) + 5*Sqr(g2))*ZH(gI2,1) -
-      10*(2*vS*AbsSqr(Lambdax) + 1.4142135623730951*Conj(Mu)*Lambdax +
-      1.4142135623730951*Conj(Lambdax)*Mu)*ZH(gI2,2)) + ZH(gI1,0)*(vu*(-20*AbsSqr(
-      Lambdax) + 3*Sqr(g1) + 5*Sqr(g2))*ZH(gI2,0) + vd*(-20*AbsSqr(Lambdax) + 3*
-      Sqr(g1) + 5*Sqr(g2))*ZH(gI2,1) + 5*(1.4142135623730951*MS*Conj(Lambdax) +
+   result = 0.05*(-5*Conj(ZH(gI1,2))*(-1.4142135623730951*Conj(TLambdax)*Conj(
+      ZH(gI2,1))*KroneckerDelta(0,gO2) - 1.4142135623730951*Conj(TLambdax)*Conj(ZH
+      (gI2,0))*KroneckerDelta(1,gO2) + 24*vS*AbsSqr(Kappa)*Conj(ZH(gI2,2))*
+      KroneckerDelta(2,gO2) + 8.485281374238571*MS*Conj(Kappa)*Conj(ZH(gI2,2))*
+      KroneckerDelta(2,gO2) + 2.8284271247461903*Conj(TKappa)*Conj(ZH(gI2,2))*
+      KroneckerDelta(2,gO2) + 8.485281374238571*Conj(MS)*Conj(ZH(gI2,2))*
+      KroneckerDelta(2,gO2)*Kappa + 2.8284271247461903*Conj(Mu)*Conj(ZH(gI2,0))*
+      KroneckerDelta(0,gO2)*Lambdax - 1.4142135623730951*Conj(MS)*Conj(ZH(gI2,1))*
+      KroneckerDelta(0,gO2)*Lambdax - 2*vS*Conj(Kappa)*Conj(ZH(gI2,1))*
+      KroneckerDelta(0,gO2)*Lambdax - 2*vu*Conj(Kappa)*Conj(ZH(gI2,2))*
+      KroneckerDelta(0,gO2)*Lambdax - 1.4142135623730951*Conj(MS)*Conj(ZH(gI2,0))*
+      KroneckerDelta(1,gO2)*Lambdax - 2*vS*Conj(Kappa)*Conj(ZH(gI2,0))*
+      KroneckerDelta(1,gO2)*Lambdax + 2.8284271247461903*Conj(Mu)*Conj(ZH(gI2,1))*
+      KroneckerDelta(1,gO2)*Lambdax - 2*vd*Conj(Kappa)*Conj(ZH(gI2,2))*
+      KroneckerDelta(1,gO2)*Lambdax - 2*vu*Conj(Kappa)*Conj(ZH(gI2,0))*
+      KroneckerDelta(2,gO2)*Lambdax - 2*vd*Conj(Kappa)*Conj(ZH(gI2,1))*
+      KroneckerDelta(2,gO2)*Lambdax + Conj(Lambdax)*(-2*Conj(ZH(gI2,2))*(
+      KroneckerDelta(0,gO2)*(vu*Kappa - 2*vd*Lambdax) + KroneckerDelta(1,gO2)*(vd*
+      Kappa - 2*vu*Lambdax)) + Conj(ZH(gI2,0))*(-(KroneckerDelta(1,gO2)*(
+      1.4142135623730951*MS + 2*vS*Kappa)) - 2*KroneckerDelta(2,gO2)*(vu*Kappa - 2
+      *vd*Lambdax) + 2*KroneckerDelta(0,gO2)*(2*vS*Lambdax + 1.4142135623730951*Mu
+      )) + Conj(ZH(gI2,1))*(-(KroneckerDelta(0,gO2)*(1.4142135623730951*MS + 2*vS*
+      Kappa)) - 2*KroneckerDelta(2,gO2)*(vd*Kappa - 2*vu*Lambdax) + 2*
+      KroneckerDelta(1,gO2)*(2*vS*Lambdax + 1.4142135623730951*Mu))) +
+      2.8284271247461903*Conj(ZH(gI2,2))*KroneckerDelta(2,gO2)*TKappa -
+      1.4142135623730951*Conj(ZH(gI2,1))*KroneckerDelta(0,gO2)*TLambdax -
+      1.4142135623730951*Conj(ZH(gI2,0))*KroneckerDelta(1,gO2)*TLambdax) + Conj(ZH
+      (gI1,1))*(Conj(ZH(gI2,1))*(-10*KroneckerDelta(2,gO2)*(2*vS*AbsSqr(Lambdax) +
+      1.4142135623730951*Conj(Mu)*Lambdax + 1.4142135623730951*Conj(Lambdax)*Mu)
+      - 3*vu*KroneckerDelta(1,gO2)*(3*Sqr(g1) + 5*Sqr(g2)) + vd*KroneckerDelta(0,
+      gO2)*(-20*AbsSqr(Lambdax) + 3*Sqr(g1) + 5*Sqr(g2))) + 5*Conj(ZH(gI2,2))*(
+      1.4142135623730951*MS*Conj(Lambdax)*KroneckerDelta(0,gO2) +
+      1.4142135623730951*Conj(TLambdax)*KroneckerDelta(0,gO2) - 4*vS*AbsSqr(
+      Lambdax)*KroneckerDelta(1,gO2) - 4*vu*AbsSqr(Lambdax)*KroneckerDelta(2,gO2)
+      + 2*vS*Conj(Lambdax)*KroneckerDelta(0,gO2)*Kappa + 2*vd*Conj(Lambdax)*
+      KroneckerDelta(2,gO2)*Kappa + 1.4142135623730951*Conj(MS)*KroneckerDelta(0,
+      gO2)*Lambdax - 2.8284271247461903*Conj(Mu)*KroneckerDelta(1,gO2)*Lambdax + 2
+      *Conj(Kappa)*(vS*KroneckerDelta(0,gO2) + vd*KroneckerDelta(2,gO2))*Lambdax -
+      2.8284271247461903*Conj(Lambdax)*KroneckerDelta(1,gO2)*Mu +
+      1.4142135623730951*KroneckerDelta(0,gO2)*TLambdax) + Conj(ZH(gI2,0))*(vu*
+      KroneckerDelta(0,gO2)*(-20*AbsSqr(Lambdax) + 3*Sqr(g1) + 5*Sqr(g2)) + vd*
+      KroneckerDelta(1,gO2)*(-20*AbsSqr(Lambdax) + 3*Sqr(g1) + 5*Sqr(g2)) + 5*
+      KroneckerDelta(2,gO2)*(1.4142135623730951*MS*Conj(Lambdax) +
       1.4142135623730951*Conj(TLambdax) + 2*vS*Conj(Lambdax)*Kappa +
       1.4142135623730951*Conj(MS)*Lambdax + 2*vS*Conj(Kappa)*Lambdax +
-      1.4142135623730951*TLambdax)*ZH(gI2,2)) + 5*ZH(gI1,2)*(1.4142135623730951*MS
-      *Conj(Lambdax)*ZH(gI2,0) + 1.4142135623730951*Conj(TLambdax)*ZH(gI2,0) + 2*
-      vS*Conj(Lambdax)*Kappa*ZH(gI2,0) + 1.4142135623730951*Conj(MS)*Lambdax*ZH(
-      gI2,0) + 1.4142135623730951*TLambdax*ZH(gI2,0) - 4*vS*AbsSqr(Lambdax)*ZH(gI2
-      ,1) - 2.8284271247461903*Conj(Mu)*Lambdax*ZH(gI2,1) - 2.8284271247461903*
-      Conj(Lambdax)*Mu*ZH(gI2,1) - 4*vu*AbsSqr(Lambdax)*ZH(gI2,2) + 2*vd*Conj(
-      Lambdax)*Kappa*ZH(gI2,2) + 2*Conj(Kappa)*Lambdax*(vS*ZH(gI2,0) + vd*ZH(gI2,2
-      )))) + KroneckerDelta(0,gO2)*(-(ZH(gI1,0)*(3*vd*(3*Sqr(g1) + 5*Sqr(g2))*ZH(
-      gI2,0) + vu*(20*AbsSqr(Lambdax) - 3*Sqr(g1) - 5*Sqr(g2))*ZH(gI2,1) + 10*(2*
-      vS*AbsSqr(Lambdax) + 1.4142135623730951*Conj(Mu)*Lambdax +
-      1.4142135623730951*Conj(Lambdax)*Mu)*ZH(gI2,2))) + ZH(gI1,1)*(vu*(-20*AbsSqr
-      (Lambdax) + 3*Sqr(g1) + 5*Sqr(g2))*ZH(gI2,0) + vd*(-20*AbsSqr(Lambdax) + 3*
-      Sqr(g1) + 5*Sqr(g2))*ZH(gI2,1) + 5*(1.4142135623730951*MS*Conj(Lambdax) +
+      1.4142135623730951*TLambdax))) + Conj(ZH(gI1,0))*(-(Conj(ZH(gI2,0))*(10*
+      KroneckerDelta(2,gO2)*(2*vS*AbsSqr(Lambdax) + 1.4142135623730951*Conj(Mu)*
+      Lambdax + 1.4142135623730951*Conj(Lambdax)*Mu) + vu*KroneckerDelta(1,gO2)*(
+      20*AbsSqr(Lambdax) - 3*Sqr(g1) - 5*Sqr(g2)) + 3*vd*KroneckerDelta(0,gO2)*(3*
+      Sqr(g1) + 5*Sqr(g2)))) - 5*Conj(ZH(gI2,2))*(-1.4142135623730951*Conj(
+      TLambdax)*KroneckerDelta(1,gO2) + 2.8284271247461903*Conj(Mu)*KroneckerDelta
+      (0,gO2)*Lambdax - 1.4142135623730951*Conj(MS)*KroneckerDelta(1,gO2)*Lambdax
+      - 2*vS*Conj(Kappa)*KroneckerDelta(1,gO2)*Lambdax - 2*vu*Conj(Kappa)*
+      KroneckerDelta(2,gO2)*Lambdax + Conj(Lambdax)*(-(KroneckerDelta(1,gO2)*(
+      1.4142135623730951*MS + 2*vS*Kappa)) - 2*KroneckerDelta(2,gO2)*(vu*Kappa - 2
+      *vd*Lambdax) + 2*KroneckerDelta(0,gO2)*(2*vS*Lambdax + 1.4142135623730951*Mu
+      )) - 1.4142135623730951*KroneckerDelta(1,gO2)*TLambdax) + Conj(ZH(gI2,1))*(
+      vu*KroneckerDelta(0,gO2)*(-20*AbsSqr(Lambdax) + 3*Sqr(g1) + 5*Sqr(g2)) + vd*
+      KroneckerDelta(1,gO2)*(-20*AbsSqr(Lambdax) + 3*Sqr(g1) + 5*Sqr(g2)) + 5*
+      KroneckerDelta(2,gO2)*(1.4142135623730951*MS*Conj(Lambdax) +
       1.4142135623730951*Conj(TLambdax) + 2*vS*Conj(Lambdax)*Kappa +
       1.4142135623730951*Conj(MS)*Lambdax + 2*vS*Conj(Kappa)*Lambdax +
-      1.4142135623730951*TLambdax)*ZH(gI2,2)) - 5*ZH(gI1,2)*(2.8284271247461903*
-      Conj(Mu)*Lambdax*ZH(gI2,0) - 1.4142135623730951*Conj(TLambdax)*ZH(gI2,1) -
-      1.4142135623730951*Conj(MS)*Lambdax*ZH(gI2,1) - 2*vS*Conj(Kappa)*Lambdax*ZH(
-      gI2,1) - 1.4142135623730951*TLambdax*ZH(gI2,1) - 2*vu*Conj(Kappa)*Lambdax*ZH
-      (gI2,2) + Conj(Lambdax)*(2*(2*vS*Lambdax + 1.4142135623730951*Mu)*ZH(gI2,0)
-      - (1.4142135623730951*MS + 2*vS*Kappa)*ZH(gI2,1) - 2*(vu*Kappa - 2*vd*
-      Lambdax)*ZH(gI2,2)))) - 5*KroneckerDelta(2,gO2)*(2.8284271247461903*Conj(Mu)
-      *Lambdax*ZH(gI1,0)*ZH(gI2,0) - 1.4142135623730951*Conj(TLambdax)*ZH(gI1,1)*
-      ZH(gI2,0) - 1.4142135623730951*Conj(MS)*Lambdax*ZH(gI1,1)*ZH(gI2,0) - 2*vS*
-      Conj(Kappa)*Lambdax*ZH(gI1,1)*ZH(gI2,0) - 1.4142135623730951*TLambdax*ZH(gI1
-      ,1)*ZH(gI2,0) - 2*vu*Conj(Kappa)*Lambdax*ZH(gI1,2)*ZH(gI2,0) -
-      1.4142135623730951*Conj(TLambdax)*ZH(gI1,0)*ZH(gI2,1) - 1.4142135623730951*
-      Conj(MS)*Lambdax*ZH(gI1,0)*ZH(gI2,1) - 2*vS*Conj(Kappa)*Lambdax*ZH(gI1,0)*ZH
-      (gI2,1) - 1.4142135623730951*TLambdax*ZH(gI1,0)*ZH(gI2,1) +
-      2.8284271247461903*Conj(Mu)*Lambdax*ZH(gI1,1)*ZH(gI2,1) - 2*vd*Conj(Kappa)*
-      Lambdax*ZH(gI1,2)*ZH(gI2,1) - 2*vu*Conj(Kappa)*Lambdax*ZH(gI1,0)*ZH(gI2,2) -
-      2*vd*Conj(Kappa)*Lambdax*ZH(gI1,1)*ZH(gI2,2) + 24*vS*AbsSqr(Kappa)*ZH(gI1,2
-      )*ZH(gI2,2) + 8.485281374238571*MS*Conj(Kappa)*ZH(gI1,2)*ZH(gI2,2) +
-      2.8284271247461903*Conj(TKappa)*ZH(gI1,2)*ZH(gI2,2) + 8.485281374238571*Conj
-      (MS)*Kappa*ZH(gI1,2)*ZH(gI2,2) + 2.8284271247461903*TKappa*ZH(gI1,2)*ZH(gI2,
-      2) + Conj(Lambdax)*(-2*ZH(gI1,2)*((vu*Kappa - 2*vd*Lambdax)*ZH(gI2,0) + (vd*
-      Kappa - 2*vu*Lambdax)*ZH(gI2,1)) + ZH(gI1,0)*(2*(2*vS*Lambdax +
-      1.4142135623730951*Mu)*ZH(gI2,0) - (1.4142135623730951*MS + 2*vS*Kappa)*ZH(
-      gI2,1) - 2*(vu*Kappa - 2*vd*Lambdax)*ZH(gI2,2)) + ZH(gI1,1)*(-((
-      1.4142135623730951*MS + 2*vS*Kappa)*ZH(gI2,0)) + 2*(2*vS*Lambdax +
-      1.4142135623730951*Mu)*ZH(gI2,1) - 2*(vd*Kappa - 2*vu*Lambdax)*ZH(gI2,2)))))
-      ;
+      1.4142135623730951*TLambdax))));
 
    return result;
 }
@@ -8438,24 +8505,32 @@ std::complex<double> CLASSNAME::CpUAhUAhhhhh(unsigned gO1, unsigned gO2, unsigne
 {
    std::complex<double> result;
 
-   result = 0.05*(KroneckerDelta(1,gO1)*(KroneckerDelta(1,gO2)*((-20*AbsSqr(
-      Lambdax) + 3*Sqr(g1) + 5*Sqr(g2))*ZH(gI1,0)*ZH(gI2,0) - (3*Sqr(g1) + 5*Sqr(
-      g2))*ZH(gI1,1)*ZH(gI2,1) - 20*AbsSqr(Lambdax)*ZH(gI1,2)*ZH(gI2,2)) + 10*(
-      Conj(Lambdax)*Kappa + Conj(Kappa)*Lambdax)*(-(KroneckerDelta(0,gO2)*ZH(gI1,2
-      )*ZH(gI2,2)) + KroneckerDelta(2,gO2)*(ZH(gI1,2)*ZH(gI2,0) + ZH(gI1,0)*ZH(gI2
-      ,2)))) + KroneckerDelta(0,gO1)*(-(KroneckerDelta(0,gO2)*((3*Sqr(g1) + 5*Sqr(
-      g2))*ZH(gI1,0)*ZH(gI2,0) + (20*AbsSqr(Lambdax) - 3*Sqr(g1) - 5*Sqr(g2))*ZH(
-      gI1,1)*ZH(gI2,1) + 20*AbsSqr(Lambdax)*ZH(gI1,2)*ZH(gI2,2))) + 10*(Conj(
-      Lambdax)*Kappa + Conj(Kappa)*Lambdax)*(-(KroneckerDelta(1,gO2)*ZH(gI1,2)*ZH(
-      gI2,2)) + KroneckerDelta(2,gO2)*(ZH(gI1,2)*ZH(gI2,1) + ZH(gI1,1)*ZH(gI2,2)))
-      ) - 10*KroneckerDelta(2,gO1)*(Conj(Lambdax)*(KroneckerDelta(2,gO2)*(ZH(gI1,0
-      )*(2*Lambdax*ZH(gI2,0) + Kappa*ZH(gI2,1)) + ZH(gI1,1)*(Kappa*ZH(gI2,0) + 2*
-      Lambdax*ZH(gI2,1))) - Kappa*(KroneckerDelta(1,gO2)*(ZH(gI1,2)*ZH(gI2,0) + ZH
-      (gI1,0)*ZH(gI2,2)) + KroneckerDelta(0,gO2)*(ZH(gI1,2)*ZH(gI2,1) + ZH(gI1,1)*
-      ZH(gI2,2)))) + Conj(Kappa)*(KroneckerDelta(2,gO2)*(Lambdax*ZH(gI1,1)*ZH(gI2,
-      0) + Lambdax*ZH(gI1,0)*ZH(gI2,1) + 4*Kappa*ZH(gI1,2)*ZH(gI2,2)) - Lambdax*(
-      KroneckerDelta(1,gO2)*(ZH(gI1,2)*ZH(gI2,0) + ZH(gI1,0)*ZH(gI2,2)) +
-      KroneckerDelta(0,gO2)*(ZH(gI1,2)*ZH(gI2,1) + ZH(gI1,1)*ZH(gI2,2))))));
+   result = 0.05*(-10*Conj(ZH(gI1,2))*(Conj(Kappa)*(-((Conj(ZH(gI2,1))*(
+      KroneckerDelta(0,gO2)*KroneckerDelta(2,gO1) + KroneckerDelta(0,gO1)*
+      KroneckerDelta(2,gO2)) + Conj(ZH(gI2,0))*(KroneckerDelta(1,gO2)*
+      KroneckerDelta(2,gO1) + KroneckerDelta(1,gO1)*KroneckerDelta(2,gO2)))*
+      Lambdax) + Conj(ZH(gI2,2))*(4*KroneckerDelta(2,gO1)*KroneckerDelta(2,gO2)*
+      Kappa + KroneckerDelta(0,gO2)*KroneckerDelta(1,gO1)*Lambdax + KroneckerDelta
+      (0,gO1)*KroneckerDelta(1,gO2)*Lambdax)) + Conj(Lambdax)*(-((Conj(ZH(gI2,1))*
+      (KroneckerDelta(0,gO2)*KroneckerDelta(2,gO1) + KroneckerDelta(0,gO1)*
+      KroneckerDelta(2,gO2)) + Conj(ZH(gI2,0))*(KroneckerDelta(1,gO2)*
+      KroneckerDelta(2,gO1) + KroneckerDelta(1,gO1)*KroneckerDelta(2,gO2)))*Kappa)
+      + Conj(ZH(gI2,2))*(KroneckerDelta(0,gO1)*(KroneckerDelta(1,gO2)*Kappa + 2*
+      KroneckerDelta(0,gO2)*Lambdax) + KroneckerDelta(1,gO1)*(KroneckerDelta(0,gO2
+      )*Kappa + 2*KroneckerDelta(1,gO2)*Lambdax)))) + Conj(ZH(gI1,0))*(10*(-(Conj(
+      ZH(gI2,1))*KroneckerDelta(2,gO1)*KroneckerDelta(2,gO2)) + Conj(ZH(gI2,2))*(
+      KroneckerDelta(1,gO2)*KroneckerDelta(2,gO1) + KroneckerDelta(1,gO1)*
+      KroneckerDelta(2,gO2)))*(Conj(Lambdax)*Kappa + Conj(Kappa)*Lambdax) - Conj(
+      ZH(gI2,0))*(20*AbsSqr(Lambdax)*KroneckerDelta(2,gO1)*KroneckerDelta(2,gO2) +
+      KroneckerDelta(1,gO1)*KroneckerDelta(1,gO2)*(20*AbsSqr(Lambdax) - 3*Sqr(g1)
+      - 5*Sqr(g2)) + KroneckerDelta(0,gO1)*KroneckerDelta(0,gO2)*(3*Sqr(g1) + 5*
+      Sqr(g2)))) + Conj(ZH(gI1,1))*(10*(-(Conj(ZH(gI2,0))*KroneckerDelta(2,gO1)*
+      KroneckerDelta(2,gO2)) + Conj(ZH(gI2,2))*(KroneckerDelta(0,gO2)*
+      KroneckerDelta(2,gO1) + KroneckerDelta(0,gO1)*KroneckerDelta(2,gO2)))*(Conj(
+      Lambdax)*Kappa + Conj(Kappa)*Lambdax) + Conj(ZH(gI2,1))*(-20*AbsSqr(Lambdax)
+      *KroneckerDelta(2,gO1)*KroneckerDelta(2,gO2) - KroneckerDelta(1,gO1)*
+      KroneckerDelta(1,gO2)*(3*Sqr(g1) + 5*Sqr(g2)) + KroneckerDelta(0,gO1)*
+      KroneckerDelta(0,gO2)*(-20*AbsSqr(Lambdax) + 3*Sqr(g1) + 5*Sqr(g2)))));
 
    return result;
 }
@@ -8532,56 +8607,74 @@ std::complex<double> CLASSNAME::CpUAhhhAh(unsigned gO2, unsigned gI1, unsigned g
 {
    std::complex<double> result;
 
-   result = 0.05*(5*Conj(ZA(gI2,2))*(1.4142135623730951*MS*Conj(Lambdax)*
-      KroneckerDelta(1,gO2)*ZH(gI1,0) - 1.4142135623730951*Conj(TLambdax)*
-      KroneckerDelta(1,gO2)*ZH(gI1,0) - 4*vd*AbsSqr(Lambdax)*KroneckerDelta(2,gO2)
-      *ZH(gI1,0) + 2*vS*Conj(Lambdax)*KroneckerDelta(1,gO2)*Kappa*ZH(gI1,0) - 2*vu
-      *Conj(Lambdax)*KroneckerDelta(2,gO2)*Kappa*ZH(gI1,0) - 1.4142135623730951*
-      KroneckerDelta(1,gO2)*TLambdax*ZH(gI1,0) + 1.4142135623730951*MS*Conj(
-      Lambdax)*KroneckerDelta(0,gO2)*ZH(gI1,1) - 1.4142135623730951*Conj(TLambdax)
-      *KroneckerDelta(0,gO2)*ZH(gI1,1) - 4*vu*AbsSqr(Lambdax)*KroneckerDelta(2,gO2
-      )*ZH(gI1,1) + 2*vS*Conj(Lambdax)*KroneckerDelta(0,gO2)*Kappa*ZH(gI1,1) - 2*
-      vd*Conj(Lambdax)*KroneckerDelta(2,gO2)*Kappa*ZH(gI1,1) - 1.4142135623730951*
-      KroneckerDelta(0,gO2)*TLambdax*ZH(gI1,1) + 2.8284271247461903*Conj(TKappa)*
-      KroneckerDelta(2,gO2)*ZH(gI1,2) + 2*vu*Conj(Lambdax)*KroneckerDelta(0,gO2)*
-      Kappa*ZH(gI1,2) + 2*vd*Conj(Lambdax)*KroneckerDelta(1,gO2)*Kappa*ZH(gI1,2) +
-      2.8284271247461903*KroneckerDelta(2,gO2)*TKappa*ZH(gI1,2) +
-      1.4142135623730951*Conj(MS)*(KroneckerDelta(1,gO2)*Lambdax*ZH(gI1,0) +
-      KroneckerDelta(0,gO2)*Lambdax*ZH(gI1,1) - 2*KroneckerDelta(2,gO2)*Kappa*ZH(
-      gI1,2)) + 2*Conj(Kappa)*(KroneckerDelta(1,gO2)*Lambdax*(vS*ZH(gI1,0) + vd*ZH
-      (gI1,2)) + KroneckerDelta(0,gO2)*Lambdax*(vS*ZH(gI1,1) + vu*ZH(gI1,2)) -
-      KroneckerDelta(2,gO2)*(vu*Lambdax*ZH(gI1,0) + vd*Lambdax*ZH(gI1,1) + (
-      1.4142135623730951*MS + 4*vS*Kappa)*ZH(gI1,2)))) + Conj(ZA(gI2,1))*(
-      KroneckerDelta(1,gO2)*(vd*(-20*AbsSqr(Lambdax) + 3*Sqr(g1) + 5*Sqr(g2))*ZH(
-      gI1,0) - vu*(3*Sqr(g1) + 5*Sqr(g2))*ZH(gI1,1) - 10*(2*vS*AbsSqr(Lambdax) +
-      1.4142135623730951*Conj(Mu)*Lambdax + 1.4142135623730951*Conj(Lambdax)*Mu)*
-      ZH(gI1,2)) + 5*(1.4142135623730951*MS*Conj(Lambdax)*KroneckerDelta(2,gO2)*ZH
-      (gI1,0) - 1.4142135623730951*Conj(TLambdax)*KroneckerDelta(2,gO2)*ZH(gI1,0)
-      + 2*vS*Conj(Lambdax)*KroneckerDelta(2,gO2)*Kappa*ZH(gI1,0) -
-      1.4142135623730951*KroneckerDelta(2,gO2)*TLambdax*ZH(gI1,0) -
-      1.4142135623730951*MS*Conj(Lambdax)*KroneckerDelta(0,gO2)*ZH(gI1,2) -
-      1.4142135623730951*Conj(TLambdax)*KroneckerDelta(0,gO2)*ZH(gI1,2) - 2*vS*
-      Conj(Lambdax)*KroneckerDelta(0,gO2)*Kappa*ZH(gI1,2) + 2*vd*Conj(Lambdax)*
-      KroneckerDelta(2,gO2)*Kappa*ZH(gI1,2) - 1.4142135623730951*KroneckerDelta(0,
-      gO2)*TLambdax*ZH(gI1,2) + 1.4142135623730951*Conj(MS)*Lambdax*(
-      KroneckerDelta(2,gO2)*ZH(gI1,0) - KroneckerDelta(0,gO2)*ZH(gI1,2)) + 2*Conj(
-      Kappa)*Lambdax*(-(vS*KroneckerDelta(0,gO2)*ZH(gI1,2)) + KroneckerDelta(2,gO2
-      )*(vS*ZH(gI1,0) + vd*ZH(gI1,2))))) - Conj(ZA(gI2,0))*(KroneckerDelta(0,gO2)*
-      (vd*(3*Sqr(g1) + 5*Sqr(g2))*ZH(gI1,0) + vu*(20*AbsSqr(Lambdax) - 3*Sqr(g1) -
-      5*Sqr(g2))*ZH(gI1,1) + 10*(2*vS*AbsSqr(Lambdax) + 1.4142135623730951*Conj(
-      Mu)*Lambdax + 1.4142135623730951*Conj(Lambdax)*Mu)*ZH(gI1,2)) - 5*(
-      1.4142135623730951*MS*Conj(Lambdax)*KroneckerDelta(2,gO2)*ZH(gI1,1) -
-      1.4142135623730951*Conj(TLambdax)*KroneckerDelta(2,gO2)*ZH(gI1,1) + 2*vS*
-      Conj(Lambdax)*KroneckerDelta(2,gO2)*Kappa*ZH(gI1,1) - 1.4142135623730951*
-      KroneckerDelta(2,gO2)*TLambdax*ZH(gI1,1) - 1.4142135623730951*MS*Conj(
-      Lambdax)*KroneckerDelta(1,gO2)*ZH(gI1,2) - 1.4142135623730951*Conj(TLambdax)
-      *KroneckerDelta(1,gO2)*ZH(gI1,2) - 2*vS*Conj(Lambdax)*KroneckerDelta(1,gO2)*
-      Kappa*ZH(gI1,2) + 2*vu*Conj(Lambdax)*KroneckerDelta(2,gO2)*Kappa*ZH(gI1,2) -
-      1.4142135623730951*KroneckerDelta(1,gO2)*TLambdax*ZH(gI1,2) +
-      1.4142135623730951*Conj(MS)*Lambdax*(KroneckerDelta(2,gO2)*ZH(gI1,1) -
-      KroneckerDelta(1,gO2)*ZH(gI1,2)) + 2*Conj(Kappa)*Lambdax*(-(vS*
-      KroneckerDelta(1,gO2)*ZH(gI1,2)) + KroneckerDelta(2,gO2)*(vS*ZH(gI1,1) + vu*
-      ZH(gI1,2))))));
+   result = 0.05*(7.0710678118654755*MS*Conj(Lambdax)*Conj(ZA(gI2,2))*Conj(ZH(
+      gI1,1))*KroneckerDelta(0,gO2) - 7.0710678118654755*Conj(TLambdax)*Conj(ZA(
+      gI2,2))*Conj(ZH(gI1,1))*KroneckerDelta(0,gO2) - 7.0710678118654755*MS*Conj(
+      Lambdax)*Conj(ZA(gI2,1))*Conj(ZH(gI1,2))*KroneckerDelta(0,gO2) -
+      7.0710678118654755*Conj(TLambdax)*Conj(ZA(gI2,1))*Conj(ZH(gI1,2))*
+      KroneckerDelta(0,gO2) - 20*vd*AbsSqr(Lambdax)*Conj(ZA(gI2,1))*Conj(ZH(gI1,0)
+      )*KroneckerDelta(1,gO2) + 7.0710678118654755*MS*Conj(Lambdax)*Conj(ZA(gI2,2)
+      )*Conj(ZH(gI1,0))*KroneckerDelta(1,gO2) - 7.0710678118654755*Conj(TLambdax)*
+      Conj(ZA(gI2,2))*Conj(ZH(gI1,0))*KroneckerDelta(1,gO2) - 20*vS*AbsSqr(Lambdax
+      )*Conj(ZA(gI2,1))*Conj(ZH(gI1,2))*KroneckerDelta(1,gO2) + 7.0710678118654755
+      *MS*Conj(Lambdax)*Conj(ZA(gI2,1))*Conj(ZH(gI1,0))*KroneckerDelta(2,gO2) -
+      7.0710678118654755*Conj(TLambdax)*Conj(ZA(gI2,1))*Conj(ZH(gI1,0))*
+      KroneckerDelta(2,gO2) - 20*vd*AbsSqr(Lambdax)*Conj(ZA(gI2,2))*Conj(ZH(gI1,0)
+      )*KroneckerDelta(2,gO2) - 20*vu*AbsSqr(Lambdax)*Conj(ZA(gI2,2))*Conj(ZH(gI1,
+      1))*KroneckerDelta(2,gO2) - 40*vS*AbsSqr(Kappa)*Conj(ZA(gI2,2))*Conj(ZH(gI1,
+      2))*KroneckerDelta(2,gO2) - 14.142135623730951*MS*Conj(Kappa)*Conj(ZA(gI2,2)
+      )*Conj(ZH(gI1,2))*KroneckerDelta(2,gO2) + 14.142135623730951*Conj(TKappa)*
+      Conj(ZA(gI2,2))*Conj(ZH(gI1,2))*KroneckerDelta(2,gO2) + 10*vS*Conj(Lambdax)*
+      Conj(ZA(gI2,2))*Conj(ZH(gI1,1))*KroneckerDelta(0,gO2)*Kappa - 10*vS*Conj(
+      Lambdax)*Conj(ZA(gI2,1))*Conj(ZH(gI1,2))*KroneckerDelta(0,gO2)*Kappa + 10*vu
+      *Conj(Lambdax)*Conj(ZA(gI2,2))*Conj(ZH(gI1,2))*KroneckerDelta(0,gO2)*Kappa +
+      10*vS*Conj(Lambdax)*Conj(ZA(gI2,2))*Conj(ZH(gI1,0))*KroneckerDelta(1,gO2)*
+      Kappa + 10*vd*Conj(Lambdax)*Conj(ZA(gI2,2))*Conj(ZH(gI1,2))*KroneckerDelta(1
+      ,gO2)*Kappa + 10*vS*Conj(Lambdax)*Conj(ZA(gI2,1))*Conj(ZH(gI1,0))*
+      KroneckerDelta(2,gO2)*Kappa - 10*vu*Conj(Lambdax)*Conj(ZA(gI2,2))*Conj(ZH(
+      gI1,0))*KroneckerDelta(2,gO2)*Kappa - 10*vd*Conj(Lambdax)*Conj(ZA(gI2,2))*
+      Conj(ZH(gI1,1))*KroneckerDelta(2,gO2)*Kappa + 10*vd*Conj(Lambdax)*Conj(ZA(
+      gI2,1))*Conj(ZH(gI1,2))*KroneckerDelta(2,gO2)*Kappa + 10*vS*Conj(Kappa)*Conj
+      (ZA(gI2,2))*Conj(ZH(gI1,1))*KroneckerDelta(0,gO2)*Lambdax - 10*vS*Conj(Kappa
+      )*Conj(ZA(gI2,1))*Conj(ZH(gI1,2))*KroneckerDelta(0,gO2)*Lambdax + 10*vu*Conj
+      (Kappa)*Conj(ZA(gI2,2))*Conj(ZH(gI1,2))*KroneckerDelta(0,gO2)*Lambdax + 10*
+      vS*Conj(Kappa)*Conj(ZA(gI2,2))*Conj(ZH(gI1,0))*KroneckerDelta(1,gO2)*Lambdax
+      - 14.142135623730951*Conj(Mu)*Conj(ZA(gI2,1))*Conj(ZH(gI1,2))*
+      KroneckerDelta(1,gO2)*Lambdax + 10*vd*Conj(Kappa)*Conj(ZA(gI2,2))*Conj(ZH(
+      gI1,2))*KroneckerDelta(1,gO2)*Lambdax + 10*vS*Conj(Kappa)*Conj(ZA(gI2,1))*
+      Conj(ZH(gI1,0))*KroneckerDelta(2,gO2)*Lambdax - 10*vu*Conj(Kappa)*Conj(ZA(
+      gI2,2))*Conj(ZH(gI1,0))*KroneckerDelta(2,gO2)*Lambdax - 10*vd*Conj(Kappa)*
+      Conj(ZA(gI2,2))*Conj(ZH(gI1,1))*KroneckerDelta(2,gO2)*Lambdax + 10*vd*Conj(
+      Kappa)*Conj(ZA(gI2,1))*Conj(ZH(gI1,2))*KroneckerDelta(2,gO2)*Lambdax +
+      7.0710678118654755*Conj(MS)*(Conj(ZA(gI2,1))*(-(Conj(ZH(gI1,2))*
+      KroneckerDelta(0,gO2)) + Conj(ZH(gI1,0))*KroneckerDelta(2,gO2))*Lambdax +
+      Conj(ZA(gI2,2))*(-2*Conj(ZH(gI1,2))*KroneckerDelta(2,gO2)*Kappa + Conj(ZH(
+      gI1,1))*KroneckerDelta(0,gO2)*Lambdax + Conj(ZH(gI1,0))*KroneckerDelta(1,gO2
+      )*Lambdax)) - 14.142135623730951*Conj(Lambdax)*Conj(ZA(gI2,1))*Conj(ZH(gI1,2
+      ))*KroneckerDelta(1,gO2)*Mu + 3*vd*Conj(ZA(gI2,1))*Conj(ZH(gI1,0))*
+      KroneckerDelta(1,gO2)*Sqr(g1) - 3*vu*Conj(ZA(gI2,1))*Conj(ZH(gI1,1))*
+      KroneckerDelta(1,gO2)*Sqr(g1) + 5*vd*Conj(ZA(gI2,1))*Conj(ZH(gI1,0))*
+      KroneckerDelta(1,gO2)*Sqr(g2) - 5*vu*Conj(ZA(gI2,1))*Conj(ZH(gI1,1))*
+      KroneckerDelta(1,gO2)*Sqr(g2) + 14.142135623730951*Conj(ZA(gI2,2))*Conj(ZH(
+      gI1,2))*KroneckerDelta(2,gO2)*TKappa - 7.0710678118654755*Conj(ZA(gI2,2))*
+      Conj(ZH(gI1,1))*KroneckerDelta(0,gO2)*TLambdax - 7.0710678118654755*Conj(ZA(
+      gI2,1))*Conj(ZH(gI1,2))*KroneckerDelta(0,gO2)*TLambdax - 7.0710678118654755*
+      Conj(ZA(gI2,2))*Conj(ZH(gI1,0))*KroneckerDelta(1,gO2)*TLambdax -
+      7.0710678118654755*Conj(ZA(gI2,1))*Conj(ZH(gI1,0))*KroneckerDelta(2,gO2)*
+      TLambdax - Conj(ZA(gI2,0))*(vd*Conj(ZH(gI1,0))*KroneckerDelta(0,gO2)*(3*Sqr(
+      g1) + 5*Sqr(g2)) - Conj(ZH(gI1,1))*(vu*KroneckerDelta(0,gO2)*(-20*AbsSqr(
+      Lambdax) + 3*Sqr(g1) + 5*Sqr(g2)) + 5*KroneckerDelta(2,gO2)*(
+      1.4142135623730951*MS*Conj(Lambdax) - 1.4142135623730951*Conj(TLambdax) + 2*
+      vS*Conj(Lambdax)*Kappa + 1.4142135623730951*Conj(MS)*Lambdax + 2*vS*Conj(
+      Kappa)*Lambdax - 1.4142135623730951*TLambdax)) + 5*Conj(ZH(gI1,2))*(
+      1.4142135623730951*Conj(TLambdax)*KroneckerDelta(1,gO2) + 2.8284271247461903
+      *Conj(Mu)*KroneckerDelta(0,gO2)*Lambdax + 1.4142135623730951*Conj(MS)*
+      KroneckerDelta(1,gO2)*Lambdax + 2*vS*Conj(Kappa)*KroneckerDelta(1,gO2)*
+      Lambdax - 2*vu*Conj(Kappa)*KroneckerDelta(2,gO2)*Lambdax + Conj(Lambdax)*(-2
+      *vu*KroneckerDelta(2,gO2)*Kappa + KroneckerDelta(1,gO2)*(1.4142135623730951*
+      MS + 2*vS*Kappa) + 2*KroneckerDelta(0,gO2)*(2*vS*Lambdax +
+      1.4142135623730951*Mu)) + 1.4142135623730951*KroneckerDelta(1,gO2)*TLambdax)
+      ));
 
    return result;
 }
@@ -8590,51 +8683,63 @@ std::complex<double> CLASSNAME::CpUAhhhhh(unsigned gO2, unsigned gI1, unsigned g
 {
    std::complex<double> result;
 
-   result = std::complex<double>(0,0.25)*(-1.4142135623730951*Conj(TLambdax)*
-      KroneckerDelta(2,gO2)*ZH(gI1,1)*ZH(gI2,0) - 1.4142135623730951*Conj(MS)*
-      KroneckerDelta(2,gO2)*Lambdax*ZH(gI1,1)*ZH(gI2,0) - 2*vS*Conj(Kappa)*
-      KroneckerDelta(2,gO2)*Lambdax*ZH(gI1,1)*ZH(gI2,0) + 1.4142135623730951*
-      KroneckerDelta(2,gO2)*TLambdax*ZH(gI1,1)*ZH(gI2,0) - 1.4142135623730951*Conj
-      (TLambdax)*KroneckerDelta(1,gO2)*ZH(gI1,2)*ZH(gI2,0) + 1.4142135623730951*
-      Conj(MS)*KroneckerDelta(1,gO2)*Lambdax*ZH(gI1,2)*ZH(gI2,0) + 2*vS*Conj(Kappa
-      )*KroneckerDelta(1,gO2)*Lambdax*ZH(gI1,2)*ZH(gI2,0) - 2*vu*Conj(Kappa)*
-      KroneckerDelta(2,gO2)*Lambdax*ZH(gI1,2)*ZH(gI2,0) + 1.4142135623730951*
-      KroneckerDelta(1,gO2)*TLambdax*ZH(gI1,2)*ZH(gI2,0) - 1.4142135623730951*Conj
-      (TLambdax)*KroneckerDelta(2,gO2)*ZH(gI1,0)*ZH(gI2,1) - 1.4142135623730951*
-      Conj(MS)*KroneckerDelta(2,gO2)*Lambdax*ZH(gI1,0)*ZH(gI2,1) - 2*vS*Conj(Kappa
-      )*KroneckerDelta(2,gO2)*Lambdax*ZH(gI1,0)*ZH(gI2,1) + 1.4142135623730951*
-      KroneckerDelta(2,gO2)*TLambdax*ZH(gI1,0)*ZH(gI2,1) - 1.4142135623730951*Conj
-      (TLambdax)*KroneckerDelta(0,gO2)*ZH(gI1,2)*ZH(gI2,1) + 1.4142135623730951*
-      Conj(MS)*KroneckerDelta(0,gO2)*Lambdax*ZH(gI1,2)*ZH(gI2,1) + 2*vS*Conj(Kappa
-      )*KroneckerDelta(0,gO2)*Lambdax*ZH(gI1,2)*ZH(gI2,1) - 2*vd*Conj(Kappa)*
-      KroneckerDelta(2,gO2)*Lambdax*ZH(gI1,2)*ZH(gI2,1) + 1.4142135623730951*
-      KroneckerDelta(0,gO2)*TLambdax*ZH(gI1,2)*ZH(gI2,1) - 2.8284271247461903*Conj
-      (Mu)*KroneckerDelta(2,gO2)*Lambdax*(ZH(gI1,0)*ZH(gI2,0) + ZH(gI1,1)*ZH(gI2,1
-      )) - 1.4142135623730951*Conj(TLambdax)*KroneckerDelta(1,gO2)*ZH(gI1,0)*ZH(
-      gI2,2) + 1.4142135623730951*Conj(MS)*KroneckerDelta(1,gO2)*Lambdax*ZH(gI1,0)
-      *ZH(gI2,2) + 2*vS*Conj(Kappa)*KroneckerDelta(1,gO2)*Lambdax*ZH(gI1,0)*ZH(gI2
-      ,2) - 2*vu*Conj(Kappa)*KroneckerDelta(2,gO2)*Lambdax*ZH(gI1,0)*ZH(gI2,2) +
-      1.4142135623730951*KroneckerDelta(1,gO2)*TLambdax*ZH(gI1,0)*ZH(gI2,2) -
-      1.4142135623730951*Conj(TLambdax)*KroneckerDelta(0,gO2)*ZH(gI1,1)*ZH(gI2,2)
-      + 1.4142135623730951*Conj(MS)*KroneckerDelta(0,gO2)*Lambdax*ZH(gI1,1)*ZH(gI2
-      ,2) + 2*vS*Conj(Kappa)*KroneckerDelta(0,gO2)*Lambdax*ZH(gI1,1)*ZH(gI2,2) - 2
-      *vd*Conj(Kappa)*KroneckerDelta(2,gO2)*Lambdax*ZH(gI1,1)*ZH(gI2,2) +
-      1.4142135623730951*KroneckerDelta(0,gO2)*TLambdax*ZH(gI1,1)*ZH(gI2,2) +
-      2.8284271247461903*MS*Conj(Kappa)*KroneckerDelta(2,gO2)*ZH(gI1,2)*ZH(gI2,2)
-      + 2.8284271247461903*Conj(TKappa)*KroneckerDelta(2,gO2)*ZH(gI1,2)*ZH(gI2,2)
-      - 2.8284271247461903*Conj(MS)*KroneckerDelta(2,gO2)*Kappa*ZH(gI1,2)*ZH(gI2,2
-      ) + 2*vu*Conj(Kappa)*KroneckerDelta(0,gO2)*Lambdax*ZH(gI1,2)*ZH(gI2,2) + 2*
-      vd*Conj(Kappa)*KroneckerDelta(1,gO2)*Lambdax*ZH(gI1,2)*ZH(gI2,2) -
-      2.8284271247461903*KroneckerDelta(2,gO2)*TKappa*ZH(gI1,2)*ZH(gI2,2) + Conj(
-      Lambdax)*(-(KroneckerDelta(1,gO2)*((1.4142135623730951*MS + 2*vS*Kappa)*ZH(
-      gI1,0)*ZH(gI2,2) + ZH(gI1,2)*((1.4142135623730951*MS + 2*vS*Kappa)*ZH(gI2,0)
-      + 2*vd*Kappa*ZH(gI2,2)))) - KroneckerDelta(0,gO2)*((1.4142135623730951*MS +
-      2*vS*Kappa)*ZH(gI1,1)*ZH(gI2,2) + ZH(gI1,2)*((1.4142135623730951*MS + 2*vS*
-      Kappa)*ZH(gI2,1) + 2*vu*Kappa*ZH(gI2,2))) + KroneckerDelta(2,gO2)*(2*Kappa*
-      ZH(gI1,2)*(vu*ZH(gI2,0) + vd*ZH(gI2,1)) + ZH(gI1,0)*(2.8284271247461903*Mu*
-      ZH(gI2,0) + (1.4142135623730951*MS + 2*vS*Kappa)*ZH(gI2,1) + 2*vu*Kappa*ZH(
-      gI2,2)) + ZH(gI1,1)*((1.4142135623730951*MS + 2*vS*Kappa)*ZH(gI2,0) + 2*(
-      1.4142135623730951*Mu*ZH(gI2,1) + vd*Kappa*ZH(gI2,2))))));
+   result = std::complex<double>(0,0.25)*(-1.4142135623730951*MS*Conj(Lambdax)*
+      Conj(ZH(gI1,2))*Conj(ZH(gI2,1))*KroneckerDelta(0,gO2) - 1.4142135623730951*
+      Conj(TLambdax)*Conj(ZH(gI1,2))*Conj(ZH(gI2,1))*KroneckerDelta(0,gO2) -
+      1.4142135623730951*MS*Conj(Lambdax)*Conj(ZH(gI1,1))*Conj(ZH(gI2,2))*
+      KroneckerDelta(0,gO2) - 1.4142135623730951*Conj(TLambdax)*Conj(ZH(gI1,1))*
+      Conj(ZH(gI2,2))*KroneckerDelta(0,gO2) - 1.4142135623730951*MS*Conj(Lambdax)*
+      Conj(ZH(gI1,2))*Conj(ZH(gI2,0))*KroneckerDelta(1,gO2) - 1.4142135623730951*
+      Conj(TLambdax)*Conj(ZH(gI1,2))*Conj(ZH(gI2,0))*KroneckerDelta(1,gO2) -
+      1.4142135623730951*MS*Conj(Lambdax)*Conj(ZH(gI1,0))*Conj(ZH(gI2,2))*
+      KroneckerDelta(1,gO2) - 1.4142135623730951*Conj(TLambdax)*Conj(ZH(gI1,0))*
+      Conj(ZH(gI2,2))*KroneckerDelta(1,gO2) + 1.4142135623730951*MS*Conj(Lambdax)*
+      Conj(ZH(gI1,1))*Conj(ZH(gI2,0))*KroneckerDelta(2,gO2) - 1.4142135623730951*
+      Conj(TLambdax)*Conj(ZH(gI1,1))*Conj(ZH(gI2,0))*KroneckerDelta(2,gO2) +
+      1.4142135623730951*MS*Conj(Lambdax)*Conj(ZH(gI1,0))*Conj(ZH(gI2,1))*
+      KroneckerDelta(2,gO2) - 1.4142135623730951*Conj(TLambdax)*Conj(ZH(gI1,0))*
+      Conj(ZH(gI2,1))*KroneckerDelta(2,gO2) + 2.8284271247461903*Conj(TKappa)*Conj
+      (ZH(gI1,2))*Conj(ZH(gI2,2))*KroneckerDelta(2,gO2) - 2*vS*Conj(Lambdax)*Conj(
+      ZH(gI1,2))*Conj(ZH(gI2,1))*KroneckerDelta(0,gO2)*Kappa - 2*vS*Conj(Lambdax)*
+      Conj(ZH(gI1,1))*Conj(ZH(gI2,2))*KroneckerDelta(0,gO2)*Kappa - 2*vu*Conj(
+      Lambdax)*Conj(ZH(gI1,2))*Conj(ZH(gI2,2))*KroneckerDelta(0,gO2)*Kappa - 2*vS*
+      Conj(Lambdax)*Conj(ZH(gI1,2))*Conj(ZH(gI2,0))*KroneckerDelta(1,gO2)*Kappa -
+      2*vS*Conj(Lambdax)*Conj(ZH(gI1,0))*Conj(ZH(gI2,2))*KroneckerDelta(1,gO2)*
+      Kappa - 2*vd*Conj(Lambdax)*Conj(ZH(gI1,2))*Conj(ZH(gI2,2))*KroneckerDelta(1,
+      gO2)*Kappa + 2*vS*Conj(Lambdax)*Conj(ZH(gI1,1))*Conj(ZH(gI2,0))*
+      KroneckerDelta(2,gO2)*Kappa + 2*vu*Conj(Lambdax)*Conj(ZH(gI1,2))*Conj(ZH(gI2
+      ,0))*KroneckerDelta(2,gO2)*Kappa + 2*vS*Conj(Lambdax)*Conj(ZH(gI1,0))*Conj(
+      ZH(gI2,1))*KroneckerDelta(2,gO2)*Kappa + 2*vd*Conj(Lambdax)*Conj(ZH(gI1,2))*
+      Conj(ZH(gI2,1))*KroneckerDelta(2,gO2)*Kappa + 2*vu*Conj(Lambdax)*Conj(ZH(gI1
+      ,0))*Conj(ZH(gI2,2))*KroneckerDelta(2,gO2)*Kappa + 2*vd*Conj(Lambdax)*Conj(
+      ZH(gI1,1))*Conj(ZH(gI2,2))*KroneckerDelta(2,gO2)*Kappa - 2.8284271247461903*
+      Conj(Mu)*Conj(ZH(gI1,0))*Conj(ZH(gI2,0))*KroneckerDelta(2,gO2)*Lambdax -
+      2.8284271247461903*Conj(Mu)*Conj(ZH(gI1,1))*Conj(ZH(gI2,1))*KroneckerDelta(2
+      ,gO2)*Lambdax + 1.4142135623730951*Conj(MS)*((Conj(ZH(gI1,1))*(Conj(ZH(gI2,2
+      ))*KroneckerDelta(0,gO2) - Conj(ZH(gI2,0))*KroneckerDelta(2,gO2)) + Conj(ZH(
+      gI1,0))*(Conj(ZH(gI2,2))*KroneckerDelta(1,gO2) - Conj(ZH(gI2,1))*
+      KroneckerDelta(2,gO2)))*Lambdax + Conj(ZH(gI1,2))*(-2*Conj(ZH(gI2,2))*
+      KroneckerDelta(2,gO2)*Kappa + Conj(ZH(gI2,1))*KroneckerDelta(0,gO2)*Lambdax
+      + Conj(ZH(gI2,0))*KroneckerDelta(1,gO2)*Lambdax)) + 2*Conj(Kappa)*((Conj(ZH(
+      gI1,1))*(-(vS*Conj(ZH(gI2,0))*KroneckerDelta(2,gO2)) + Conj(ZH(gI2,2))*(vS*
+      KroneckerDelta(0,gO2) - vd*KroneckerDelta(2,gO2))) + Conj(ZH(gI1,0))*(-(vS*
+      Conj(ZH(gI2,1))*KroneckerDelta(2,gO2)) + Conj(ZH(gI2,2))*(vS*KroneckerDelta(
+      1,gO2) - vu*KroneckerDelta(2,gO2))))*Lambdax + Conj(ZH(gI1,2))*(Conj(ZH(gI2,
+      1))*(vS*KroneckerDelta(0,gO2) - vd*KroneckerDelta(2,gO2))*Lambdax + Conj(ZH(
+      gI2,0))*(vS*KroneckerDelta(1,gO2) - vu*KroneckerDelta(2,gO2))*Lambdax + Conj
+      (ZH(gI2,2))*(1.4142135623730951*MS*KroneckerDelta(2,gO2) + vu*KroneckerDelta
+      (0,gO2)*Lambdax + vd*KroneckerDelta(1,gO2)*Lambdax))) + 2.8284271247461903*
+      Conj(Lambdax)*Conj(ZH(gI1,0))*Conj(ZH(gI2,0))*KroneckerDelta(2,gO2)*Mu +
+      2.8284271247461903*Conj(Lambdax)*Conj(ZH(gI1,1))*Conj(ZH(gI2,1))*
+      KroneckerDelta(2,gO2)*Mu - 2.8284271247461903*Conj(ZH(gI1,2))*Conj(ZH(gI2,2)
+      )*KroneckerDelta(2,gO2)*TKappa + 1.4142135623730951*Conj(ZH(gI1,2))*Conj(ZH(
+      gI2,1))*KroneckerDelta(0,gO2)*TLambdax + 1.4142135623730951*Conj(ZH(gI1,1))*
+      Conj(ZH(gI2,2))*KroneckerDelta(0,gO2)*TLambdax + 1.4142135623730951*Conj(ZH(
+      gI1,2))*Conj(ZH(gI2,0))*KroneckerDelta(1,gO2)*TLambdax + 1.4142135623730951*
+      Conj(ZH(gI1,0))*Conj(ZH(gI2,2))*KroneckerDelta(1,gO2)*TLambdax +
+      1.4142135623730951*Conj(ZH(gI1,1))*Conj(ZH(gI2,0))*KroneckerDelta(2,gO2)*
+      TLambdax + 1.4142135623730951*Conj(ZH(gI1,0))*Conj(ZH(gI2,1))*KroneckerDelta
+      (2,gO2)*TLambdax);
 
    return result;
 }
@@ -9629,9 +9734,9 @@ std::complex<double> CLASSNAME::CpUAhVZhh(unsigned gO2, unsigned gI2) const
 {
    std::complex<double> result;
 
-   result = std::complex<double>(0,-0.1)*(5*g2*Cos(ThetaW()) +
-      3.872983346207417*g1*Sin(ThetaW()))*(KroneckerDelta(0,gO2)*ZH(gI2,0) -
-      KroneckerDelta(1,gO2)*ZH(gI2,1));
+   result = std::complex<double>(0,-0.1)*(Conj(ZH(gI2,0))*KroneckerDelta(0,gO2)
+      - Conj(ZH(gI2,1))*KroneckerDelta(1,gO2))*(5*g2*Cos(ThetaW()) +
+      3.872983346207417*g1*Sin(ThetaW()));
 
    return result;
 }
@@ -9760,19 +9865,21 @@ std::complex<double> CLASSNAME::CpconjUHpmHpmhh(unsigned gO2, unsigned gI1, unsi
 {
    std::complex<double> result;
 
-   result = 0.05*(-(KroneckerDelta(1,gO2)*(10*ZH(gI2,2)*(1.4142135623730951*
-      Conj(MS)*Lambdax*ZP(gI1,0) + 2*vS*Conj(Kappa)*Lambdax*ZP(gI1,0) +
-      1.4142135623730951*TLambdax*ZP(gI1,0) + 2*vS*AbsSqr(Lambdax)*ZP(gI1,1) +
-      1.4142135623730951*Conj(Mu)*Lambdax*ZP(gI1,1) + 1.4142135623730951*Conj(
-      Lambdax)*Mu*ZP(gI1,1)) + ZH(gI2,0)*(5*vu*(-2*AbsSqr(Lambdax) + Sqr(g2))*ZP(
-      gI1,0) + vd*(-3*Sqr(g1) + 5*Sqr(g2))*ZP(gI1,1)) + ZH(gI2,1)*(5*vd*(-2*AbsSqr
-      (Lambdax) + Sqr(g2))*ZP(gI1,0) + vu*(3*Sqr(g1) + 5*Sqr(g2))*ZP(gI1,1)))) -
-      KroneckerDelta(0,gO2)*(ZH(gI2,1)*((-3*vu*Sqr(g1) + 5*vu*Sqr(g2))*ZP(gI1,0) +
-      5*vd*(-2*AbsSqr(Lambdax) + Sqr(g2))*ZP(gI1,1)) + ZH(gI2,0)*(vd*(3*Sqr(g1) +
-      5*Sqr(g2))*ZP(gI1,0) + 5*vu*(-2*AbsSqr(Lambdax) + Sqr(g2))*ZP(gI1,1)) + 10*
-      ZH(gI2,2)*(1.4142135623730951*(Conj(Mu)*Lambdax*ZP(gI1,0) + Conj(TLambdax)*
-      ZP(gI1,1)) + Conj(Lambdax)*((2*vS*Lambdax + 1.4142135623730951*Mu)*ZP(gI1,0)
-      + (1.4142135623730951*MS + 2*vS*Kappa)*ZP(gI1,1)))));
+   result = 0.05*(-(Conj(ZH(gI2,0))*(KroneckerDelta(0,gO2)*(vd*(3*Sqr(g1) + 5*
+      Sqr(g2))*ZP(gI1,0) + 5*vu*(-2*AbsSqr(Lambdax) + Sqr(g2))*ZP(gI1,1)) +
+      KroneckerDelta(1,gO2)*(5*vu*(-2*AbsSqr(Lambdax) + Sqr(g2))*ZP(gI1,0) + vd*(
+      -3*Sqr(g1) + 5*Sqr(g2))*ZP(gI1,1)))) + Conj(ZH(gI2,1))*(KroneckerDelta(0,gO2
+      )*(vu*(3*Sqr(g1) - 5*Sqr(g2))*ZP(gI1,0) - 5*vd*(-2*AbsSqr(Lambdax) + Sqr(g2)
+      )*ZP(gI1,1)) - KroneckerDelta(1,gO2)*(5*vd*(-2*AbsSqr(Lambdax) + Sqr(g2))*ZP
+      (gI1,0) + vu*(3*Sqr(g1) + 5*Sqr(g2))*ZP(gI1,1))) - 10*Conj(ZH(gI2,2))*(
+      1.4142135623730951*Conj(MS)*KroneckerDelta(1,gO2)*Lambdax*ZP(gI1,0) + 2*vS*
+      Conj(Kappa)*KroneckerDelta(1,gO2)*Lambdax*ZP(gI1,0) + 1.4142135623730951*
+      KroneckerDelta(1,gO2)*TLambdax*ZP(gI1,0) + 1.4142135623730951*Conj(TLambdax)
+      *KroneckerDelta(0,gO2)*ZP(gI1,1) + 1.4142135623730951*Conj(Mu)*Lambdax*(
+      KroneckerDelta(0,gO2)*ZP(gI1,0) + KroneckerDelta(1,gO2)*ZP(gI1,1)) + Conj(
+      Lambdax)*(KroneckerDelta(1,gO2)*(2*vS*Lambdax + 1.4142135623730951*Mu)*ZP(
+      gI1,1) + KroneckerDelta(0,gO2)*((2*vS*Lambdax + 1.4142135623730951*Mu)*ZP(
+      gI1,0) + (1.4142135623730951*MS + 2*vS*Kappa)*ZP(gI1,1)))));
 
    return result;
 }
@@ -9840,16 +9947,19 @@ std::complex<double> CLASSNAME::CpUHpmconjUHpmhhhh(unsigned gO1, unsigned gO2, u
 {
    std::complex<double> result;
 
-   result = 0.05*(KroneckerDelta(1,gO1)*(KroneckerDelta(1,gO2)*((3*Sqr(g1) - 5*
-      Sqr(g2))*ZH(gI1,0)*ZH(gI2,0) - (3*Sqr(g1) + 5*Sqr(g2))*ZH(gI1,1)*ZH(gI2,1) -
-      20*AbsSqr(Lambdax)*ZH(gI1,2)*ZH(gI2,2)) - 5*KroneckerDelta(0,gO2)*((-2*
-      AbsSqr(Lambdax) + Sqr(g2))*ZH(gI1,1)*ZH(gI2,0) + (-2*AbsSqr(Lambdax) + Sqr(
-      g2))*ZH(gI1,0)*ZH(gI2,1) + 4*Conj(Lambdax)*Kappa*ZH(gI1,2)*ZH(gI2,2))) -
-      KroneckerDelta(0,gO1)*(KroneckerDelta(0,gO2)*((3*Sqr(g1) + 5*Sqr(g2))*ZH(gI1
-      ,0)*ZH(gI2,0) + (-3*Sqr(g1) + 5*Sqr(g2))*ZH(gI1,1)*ZH(gI2,1) + 20*AbsSqr(
-      Lambdax)*ZH(gI1,2)*ZH(gI2,2)) + 5*KroneckerDelta(1,gO2)*((-2*AbsSqr(Lambdax)
-      + Sqr(g2))*ZH(gI1,1)*ZH(gI2,0) + (-2*AbsSqr(Lambdax) + Sqr(g2))*ZH(gI1,0)*
-      ZH(gI2,1) + 4*Conj(Kappa)*Lambdax*ZH(gI1,2)*ZH(gI2,2))));
+   result = 0.05*(-20*Conj(ZH(gI1,2))*Conj(ZH(gI2,2))*(Conj(Kappa)*
+      KroneckerDelta(0,gO1)*KroneckerDelta(1,gO2)*Lambdax + Conj(Lambdax)*(
+      KroneckerDelta(0,gO1)*KroneckerDelta(0,gO2)*Lambdax + KroneckerDelta(1,gO1)*
+      (KroneckerDelta(0,gO2)*Kappa + KroneckerDelta(1,gO2)*Lambdax))) - Conj(ZH(
+      gI1,0))*(5*Conj(ZH(gI2,1))*(KroneckerDelta(0,gO2)*KroneckerDelta(1,gO1) +
+      KroneckerDelta(0,gO1)*KroneckerDelta(1,gO2))*(-2*AbsSqr(Lambdax) + Sqr(g2))
+      + Conj(ZH(gI2,0))*(KroneckerDelta(1,gO1)*KroneckerDelta(1,gO2)*(-3*Sqr(g1) +
+      5*Sqr(g2)) + KroneckerDelta(0,gO1)*KroneckerDelta(0,gO2)*(3*Sqr(g1) + 5*Sqr
+      (g2)))) + Conj(ZH(gI1,1))*(-5*Conj(ZH(gI2,0))*(KroneckerDelta(0,gO2)*
+      KroneckerDelta(1,gO1) + KroneckerDelta(0,gO1)*KroneckerDelta(1,gO2))*(-2*
+      AbsSqr(Lambdax) + Sqr(g2)) + Conj(ZH(gI2,1))*(KroneckerDelta(0,gO1)*
+      KroneckerDelta(0,gO2)*(3*Sqr(g1) - 5*Sqr(g2)) - KroneckerDelta(1,gO1)*
+      KroneckerDelta(1,gO2)*(3*Sqr(g1) + 5*Sqr(g2)))));
 
    return result;
 }
@@ -10532,8 +10642,8 @@ std::complex<double> CLASSNAME::CpconjUHpmVWmhh(unsigned gO2, unsigned gI2) cons
 {
    std::complex<double> result;
 
-   result = 0.5*g2*(KroneckerDelta(0,gO2)*ZH(gI2,0) - KroneckerDelta(1,gO2)*ZH(
-      gI2,1));
+   result = 0.5*g2*(Conj(ZH(gI2,0))*KroneckerDelta(0,gO2) - Conj(ZH(gI2,1))*
+      KroneckerDelta(1,gO2));
 
    return result;
 }
@@ -10631,9 +10741,9 @@ std::complex<double> CLASSNAME::CpVZVZhhhh(unsigned gI1, unsigned gI2) const
 {
    std::complex<double> result;
 
-   result = 0.05*(7.745966692414834*g1*g2*Sin(2*ThetaW()) + 3*Sqr(g1) + 5*Sqr(
-      g2) + Cos(2*ThetaW())*(-3*Sqr(g1) + 5*Sqr(g2)))*(ZH(gI1,0)*ZH(gI2,0) + ZH(
-      gI1,1)*ZH(gI2,1));
+   result = 0.05*(Conj(ZH(gI1,0))*Conj(ZH(gI2,0)) + Conj(ZH(gI1,1))*Conj(ZH(gI2
+      ,1)))*(7.745966692414834*g1*g2*Sin(2*ThetaW()) + 3*Sqr(g1) + 5*Sqr(g2) + Cos
+      (2*ThetaW())*(-3*Sqr(g1) + 5*Sqr(g2)));
 
    return result;
 }
@@ -10652,8 +10762,9 @@ std::complex<double> CLASSNAME::CpVZhhAh(unsigned gI1, unsigned gI2) const
 {
    std::complex<double> result;
 
-   result = std::complex<double>(0,-0.5)*(g2*Cos(ThetaW()) + 0.7745966692414834
-      *g1*Sin(ThetaW()))*(Conj(ZA(gI2,0))*ZH(gI1,0) - Conj(ZA(gI2,1))*ZH(gI1,1));
+   result = std::complex<double>(0,-0.5)*(Conj(ZA(gI2,0))*Conj(ZH(gI1,0)) -
+      Conj(ZA(gI2,1))*Conj(ZH(gI1,1)))*(g2*Cos(ThetaW()) + 0.7745966692414834*g1*
+      Sin(ThetaW()));
 
    return result;
 }
@@ -10969,8 +11080,8 @@ std::complex<double> CLASSNAME::CpVZVZhh(unsigned gI2) const
 {
    std::complex<double> result;
 
-   result = 0.5*Sqr(g2*Cos(ThetaW()) + 0.7745966692414834*g1*Sin(ThetaW()))*(vd
-      *ZH(gI2,0) + vu*ZH(gI2,1));
+   result = 0.5*(vd*Conj(ZH(gI2,0)) + vu*Conj(ZH(gI2,1)))*Sqr(g2*Cos(ThetaW())
+      + 0.7745966692414834*g1*Sin(ThetaW()));
 
    return result;
 }
@@ -11079,7 +11190,7 @@ std::complex<double> CLASSNAME::CpconjVWmHpmhh(unsigned gI1, unsigned gI2) const
 {
    std::complex<double> result;
 
-   result = 0.5*g2*(ZH(gI2,0)*ZP(gI1,0) - ZH(gI2,1)*ZP(gI1,1));
+   result = 0.5*g2*(Conj(ZH(gI2,0))*ZP(gI1,0) - Conj(ZH(gI2,1))*ZP(gI1,1));
 
    return result;
 }
@@ -11107,7 +11218,8 @@ std::complex<double> CLASSNAME::CpVWmconjVWmhhhh(unsigned gI1, unsigned gI2) con
 {
    std::complex<double> result;
 
-   result = 0.5*Sqr(g2)*(ZH(gI1,0)*ZH(gI2,0) + ZH(gI1,1)*ZH(gI2,1));
+   result = 0.5*(Conj(ZH(gI1,0))*Conj(ZH(gI2,0)) + Conj(ZH(gI1,1))*Conj(ZH(gI2,
+      1)))*Sqr(g2);
 
    return result;
 }
@@ -11275,7 +11387,7 @@ std::complex<double> CLASSNAME::CpconjVWmVWmhh(unsigned gI2) const
 {
    std::complex<double> result;
 
-   result = 0.5*Sqr(g2)*(vd*ZH(gI2,0) + vu*ZH(gI2,1));
+   result = 0.5*(vd*Conj(ZH(gI2,0)) + vu*Conj(ZH(gI2,1)))*Sqr(g2);
 
    return result;
 }
@@ -11412,19 +11524,19 @@ std::complex<double> CLASSNAME::CpUChihhChiPL(unsigned gO2, unsigned gI1, unsign
 {
    std::complex<double> result;
 
-   result = 0.1*(-5*g2*Conj(ZN(gI2,1))*KroneckerDelta(2,gO2)*ZH(gI1,0) +
-      7.0710678118654755*Conj(ZN(gI2,4))*KroneckerDelta(3,gO2)*Lambdax*ZH(gI1,0) +
-      7.0710678118654755*Conj(ZN(gI2,3))*KroneckerDelta(4,gO2)*Lambdax*ZH(gI1,0)
-      - 3.872983346207417*g1*Conj(ZN(gI2,3))*KroneckerDelta(0,gO2)*ZH(gI1,1) + 5*
-      g2*Conj(ZN(gI2,3))*KroneckerDelta(1,gO2)*ZH(gI1,1) + 5*g2*Conj(ZN(gI2,1))*
-      KroneckerDelta(3,gO2)*ZH(gI1,1) + 7.0710678118654755*Conj(ZN(gI2,4))*
-      KroneckerDelta(2,gO2)*Lambdax*ZH(gI1,1) + 3.872983346207417*g1*Conj(ZN(gI2,0
-      ))*(KroneckerDelta(2,gO2)*ZH(gI1,0) - KroneckerDelta(3,gO2)*ZH(gI1,1)) -
-      14.142135623730951*Conj(ZN(gI2,4))*KroneckerDelta(4,gO2)*Kappa*ZH(gI1,2) +
-      7.0710678118654755*Conj(ZN(gI2,3))*KroneckerDelta(2,gO2)*Lambdax*ZH(gI1,2) +
-      Conj(ZN(gI2,2))*(3.872983346207417*g1*KroneckerDelta(0,gO2)*ZH(gI1,0) - 5*
-      g2*KroneckerDelta(1,gO2)*ZH(gI1,0) + 7.0710678118654755*Lambdax*(
-      KroneckerDelta(4,gO2)*ZH(gI1,1) + KroneckerDelta(3,gO2)*ZH(gI1,2))));
+   result = 0.1*(7.0710678118654755*Conj(ZH(gI1,2))*(-2*Conj(ZN(gI2,4))*
+      KroneckerDelta(4,gO2)*Kappa + Conj(ZN(gI2,3))*KroneckerDelta(2,gO2)*Lambdax
+      + Conj(ZN(gI2,2))*KroneckerDelta(3,gO2)*Lambdax) + Conj(ZH(gI1,1))*(Conj(ZN(
+      gI2,3))*(-3.872983346207417*g1*KroneckerDelta(0,gO2) + 5*g2*KroneckerDelta(1
+      ,gO2)) - 3.872983346207417*g1*Conj(ZN(gI2,0))*KroneckerDelta(3,gO2) + 5*g2*
+      Conj(ZN(gI2,1))*KroneckerDelta(3,gO2) + 7.0710678118654755*Conj(ZN(gI2,4))*
+      KroneckerDelta(2,gO2)*Lambdax + 7.0710678118654755*Conj(ZN(gI2,2))*
+      KroneckerDelta(4,gO2)*Lambdax) + Conj(ZH(gI1,0))*(Conj(ZN(gI2,2))*(
+      3.872983346207417*g1*KroneckerDelta(0,gO2) - 5*g2*KroneckerDelta(1,gO2)) +
+      3.872983346207417*g1*Conj(ZN(gI2,0))*KroneckerDelta(2,gO2) - 5*g2*Conj(ZN(
+      gI2,1))*KroneckerDelta(2,gO2) + 7.0710678118654755*Conj(ZN(gI2,4))*
+      KroneckerDelta(3,gO2)*Lambdax + 7.0710678118654755*Conj(ZN(gI2,3))*
+      KroneckerDelta(4,gO2)*Lambdax));
 
    return result;
 }
@@ -11433,17 +11545,17 @@ std::complex<double> CLASSNAME::CpUChihhChiPR(unsigned gO1, unsigned gI1, unsign
 {
    std::complex<double> result;
 
-   result = 0.1*(3.872983346207417*g1*KroneckerDelta(0,gO1)*ZH(gI1,0)*ZN(gI2,2)
-      - 5*g2*KroneckerDelta(1,gO1)*ZH(gI1,0)*ZN(gI2,2) + 7.0710678118654755*Conj(
-      Lambdax)*KroneckerDelta(4,gO1)*ZH(gI1,1)*ZN(gI2,2) + 7.0710678118654755*Conj
-      (Lambdax)*KroneckerDelta(4,gO1)*ZH(gI1,0)*ZN(gI2,3) - 3.872983346207417*g1*
-      KroneckerDelta(0,gO1)*ZH(gI1,1)*ZN(gI2,3) + 5*g2*KroneckerDelta(1,gO1)*ZH(
-      gI1,1)*ZN(gI2,3) - 14.142135623730951*Conj(Kappa)*KroneckerDelta(4,gO1)*ZH(
-      gI1,2)*ZN(gI2,4) + KroneckerDelta(3,gO1)*(ZH(gI1,1)*(-3.872983346207417*g1*
-      ZN(gI2,0) + 5*g2*ZN(gI2,1)) + 7.0710678118654755*Conj(Lambdax)*(ZH(gI1,2)*ZN
-      (gI2,2) + ZH(gI1,0)*ZN(gI2,4))) + KroneckerDelta(2,gO1)*(ZH(gI1,0)*(
-      3.872983346207417*g1*ZN(gI2,0) - 5*g2*ZN(gI2,1)) + 7.0710678118654755*Conj(
-      Lambdax)*(ZH(gI1,2)*ZN(gI2,3) + ZH(gI1,1)*ZN(gI2,4))));
+   result = 0.1*(Conj(ZH(gI1,0))*(KroneckerDelta(2,gO1)*(3.872983346207417*g1*
+      ZN(gI2,0) - 5*g2*ZN(gI2,1)) + 3.872983346207417*g1*KroneckerDelta(0,gO1)*ZN(
+      gI2,2) - 5*g2*KroneckerDelta(1,gO1)*ZN(gI2,2) + 7.0710678118654755*Conj(
+      Lambdax)*KroneckerDelta(4,gO1)*ZN(gI2,3) + 7.0710678118654755*Conj(Lambdax)*
+      KroneckerDelta(3,gO1)*ZN(gI2,4)) + 7.0710678118654755*Conj(ZH(gI1,2))*(Conj(
+      Lambdax)*(KroneckerDelta(3,gO1)*ZN(gI2,2) + KroneckerDelta(2,gO1)*ZN(gI2,3))
+      - 2*Conj(Kappa)*KroneckerDelta(4,gO1)*ZN(gI2,4)) + Conj(ZH(gI1,1))*(
+      KroneckerDelta(3,gO1)*(-3.872983346207417*g1*ZN(gI2,0) + 5*g2*ZN(gI2,1)) + (
+      -3.872983346207417*g1*KroneckerDelta(0,gO1) + 5*g2*KroneckerDelta(1,gO1))*ZN
+      (gI2,3) + 7.0710678118654755*Conj(Lambdax)*(KroneckerDelta(4,gO1)*ZN(gI2,2)
+      + KroneckerDelta(2,gO1)*ZN(gI2,4))));
 
    return result;
 }
@@ -11788,9 +11900,9 @@ std::complex<double> CLASSNAME::CpbarUChahhChaPL(unsigned gO2, unsigned gI1, uns
 {
    std::complex<double> result;
 
-   result = -0.7071067811865475*(g2*Conj(UM(gI2,0))*KroneckerDelta(1,gO2)*ZH(
-      gI1,1) + Conj(UM(gI2,1))*(g2*KroneckerDelta(0,gO2)*ZH(gI1,0) +
-      KroneckerDelta(1,gO2)*Lambdax*ZH(gI1,2)));
+   result = -0.7071067811865475*(g2*Conj(UM(gI2,0))*Conj(ZH(gI1,1))*
+      KroneckerDelta(1,gO2) + Conj(UM(gI2,1))*(g2*Conj(ZH(gI1,0))*KroneckerDelta(0
+      ,gO2) + Conj(ZH(gI1,2))*KroneckerDelta(1,gO2)*Lambdax));
 
    return result;
 }
@@ -11799,9 +11911,9 @@ std::complex<double> CLASSNAME::CpbarUChahhChaPR(unsigned gO1, unsigned gI1, uns
 {
    std::complex<double> result;
 
-   result = -0.7071067811865475*(g2*KroneckerDelta(0,gO1)*UP(gI2,1)*ZH(gI1,1) +
-      KroneckerDelta(1,gO1)*(g2*UP(gI2,0)*ZH(gI1,0) + Conj(Lambdax)*UP(gI2,1)*ZH(
-      gI1,2)));
+   result = -0.7071067811865475*(g2*Conj(ZH(gI1,0))*KroneckerDelta(1,gO1)*UP(
+      gI2,0) + (g2*Conj(ZH(gI1,1))*KroneckerDelta(0,gO1) + Conj(Lambdax)*Conj(ZH(
+      gI1,2))*KroneckerDelta(1,gO1))*UP(gI2,1));
 
    return result;
 }
@@ -12132,7 +12244,7 @@ std::complex<double> CLASSNAME::CpbarUFehhFePL(unsigned gO2, unsigned gI1, unsig
          tmp_1861 += Conj(ZEL(gI2,j2))*Ye(gO2,j2);
       }
       tmp_1860 += tmp_1861;
-      result += (-0.7071067811865475*ZH(gI1,0)) * tmp_1860;
+      result += (-0.7071067811865475*Conj(ZH(gI1,0))) * tmp_1860;
    }
 
    return result;
@@ -12149,7 +12261,7 @@ std::complex<double> CLASSNAME::CpbarUFehhFePR(unsigned gO1, unsigned gI1, unsig
          tmp_1863 += Conj(Ye(j1,gO1))*ZER(gI2,j1);
       }
       tmp_1862 += tmp_1863;
-      result += (-0.7071067811865475*ZH(gI1,0)) * tmp_1862;
+      result += (-0.7071067811865475*Conj(ZH(gI1,0))) * tmp_1862;
    }
 
    return result;
@@ -12350,7 +12462,7 @@ std::complex<double> CLASSNAME::CpbarUFdhhFdPL(unsigned gO2, unsigned gI1, unsig
          tmp_1877 += Conj(ZDL(gI2,j2))*Yd(gO2,j2);
       }
       tmp_1876 += tmp_1877;
-      result += (-0.7071067811865475*ZH(gI1,0)) * tmp_1876;
+      result += (-0.7071067811865475*Conj(ZH(gI1,0))) * tmp_1876;
    }
 
    return result;
@@ -12367,7 +12479,7 @@ std::complex<double> CLASSNAME::CpbarUFdhhFdPR(unsigned gO1, unsigned gI1, unsig
          tmp_1879 += Conj(Yd(j1,gO1))*ZDR(gI2,j1);
       }
       tmp_1878 += tmp_1879;
-      result += (-0.7071067811865475*ZH(gI1,0)) * tmp_1878;
+      result += (-0.7071067811865475*Conj(ZH(gI1,0))) * tmp_1878;
    }
 
    return result;
@@ -12686,7 +12798,7 @@ std::complex<double> CLASSNAME::CpbarUFuhhFuPL(unsigned gO2, unsigned gI1, unsig
          tmp_1901 += Conj(ZUL(gI2,j2))*Yu(gO2,j2);
       }
       tmp_1900 += tmp_1901;
-      result += (-0.7071067811865475*ZH(gI1,1)) * tmp_1900;
+      result += (-0.7071067811865475*Conj(ZH(gI1,1))) * tmp_1900;
    }
 
    return result;
@@ -12703,7 +12815,7 @@ std::complex<double> CLASSNAME::CpbarUFuhhFuPR(unsigned gO1, unsigned gI1, unsig
          tmp_1903 += Conj(Yu(j1,gO1))*ZUR(gI2,j1);
       }
       tmp_1902 += tmp_1903;
-      result += (-0.7071067811865475*ZH(gI1,1)) * tmp_1902;
+      result += (-0.7071067811865475*Conj(ZH(gI1,1))) * tmp_1902;
    }
 
    return result;
@@ -13064,7 +13176,7 @@ std::complex<double> CLASSNAME::CpbarFehhFePL(unsigned gO2, unsigned gI1, unsign
       tmp_1933 += (Conj(ZEL(gI2,j2))) * tmp_1934;
    }
    tmp_1932 += tmp_1933;
-   result += (-0.7071067811865475*ZH(gI1,0)) * tmp_1932;
+   result += (-0.7071067811865475*Conj(ZH(gI1,0))) * tmp_1932;
 
    return result;
 }
@@ -13085,7 +13197,7 @@ std::complex<double> CLASSNAME::CpbarFehhFePR(unsigned gO1, unsigned gI1, unsign
       tmp_1937 += (ZEL(gO1,j2)) * tmp_1938;
    }
    tmp_1936 += tmp_1937;
-   result += (-0.7071067811865475*ZH(gI1,0)) * tmp_1936;
+   result += (-0.7071067811865475*Conj(ZH(gI1,0))) * tmp_1936;
 
    return result;
 }
@@ -13288,7 +13400,7 @@ std::complex<double> CLASSNAME::CpbarFdhhFdPL(unsigned gO2, unsigned gI1, unsign
       tmp_1969 += (Conj(ZDL(gI2,j2))) * tmp_1970;
    }
    tmp_1968 += tmp_1969;
-   result += (-0.7071067811865475*ZH(gI1,0)) * tmp_1968;
+   result += (-0.7071067811865475*Conj(ZH(gI1,0))) * tmp_1968;
 
    return result;
 }
@@ -13309,7 +13421,7 @@ std::complex<double> CLASSNAME::CpbarFdhhFdPR(unsigned gO1, unsigned gI1, unsign
       tmp_1973 += (ZDL(gO1,j2)) * tmp_1974;
    }
    tmp_1972 += tmp_1973;
-   result += (-0.7071067811865475*ZH(gI1,0)) * tmp_1972;
+   result += (-0.7071067811865475*Conj(ZH(gI1,0))) * tmp_1972;
 
    return result;
 }
@@ -13648,7 +13760,7 @@ std::complex<double> CLASSNAME::CpbarFuhhFuPL(unsigned gO2, unsigned gI1, unsign
       tmp_2033 += (Conj(ZUL(gI2,j2))) * tmp_2034;
    }
    tmp_2032 += tmp_2033;
-   result += (-0.7071067811865475*ZH(gI1,1)) * tmp_2032;
+   result += (-0.7071067811865475*Conj(ZH(gI1,1))) * tmp_2032;
 
    return result;
 }
@@ -13669,7 +13781,7 @@ std::complex<double> CLASSNAME::CpbarFuhhFuPR(unsigned gO1, unsigned gI1, unsign
       tmp_2037 += (ZUL(gO1,j2)) * tmp_2038;
    }
    tmp_2036 += tmp_2037;
-   result += (-0.7071067811865475*ZH(gI1,1)) * tmp_2036;
+   result += (-0.7071067811865475*Conj(ZH(gI1,1))) * tmp_2036;
 
    return result;
 }
@@ -19288,7 +19400,6 @@ void CLASSNAME::calculate_MSd_pole()
    const Eigen::Matrix<double,6,6> M_tree(get_mass_matrix_Sd());
 
    for (unsigned es = 0; es < 6; ++es) {
-
       const double p = Abs(MSd(es));
       for (unsigned i1 = 0; i1 < 6; ++i1) {
          for (unsigned i2 = i1; i2 < 6; ++i2) {
@@ -19310,10 +19421,7 @@ void CLASSNAME::calculate_MSd_pole()
          fs_diagonalize_hermitian(M_1loop, eigen_values, mix_ZD);
       #endif
 
-      if (eigen_values(es) < 0.)
-         problems.flag_tachyon(Sd);
-
-      PHYSICAL(MSd(es)) = AbsSqrt(eigen_values(es));
+      PHYSICAL(MSd(es)) = SignedAbsSqrt(eigen_values(es));
       if (es == 0)
          PHYSICAL(ZD) = mix_ZD;
    }
@@ -19329,7 +19437,6 @@ void CLASSNAME::calculate_MSv_pole()
    const Eigen::Matrix<double,3,3> M_tree(get_mass_matrix_Sv());
 
    for (unsigned es = 0; es < 3; ++es) {
-
       const double p = Abs(MSv(es));
       for (unsigned i1 = 0; i1 < 3; ++i1) {
          for (unsigned i2 = i1; i2 < 3; ++i2) {
@@ -19351,10 +19458,7 @@ void CLASSNAME::calculate_MSv_pole()
          fs_diagonalize_hermitian(M_1loop, eigen_values, mix_ZV);
       #endif
 
-      if (eigen_values(es) < 0.)
-         problems.flag_tachyon(Sv);
-
-      PHYSICAL(MSv(es)) = AbsSqrt(eigen_values(es));
+      PHYSICAL(MSv(es)) = SignedAbsSqrt(eigen_values(es));
       if (es == 0)
          PHYSICAL(ZV) = mix_ZV;
    }
@@ -19370,7 +19474,6 @@ void CLASSNAME::calculate_MSu_pole()
    const Eigen::Matrix<double,6,6> M_tree(get_mass_matrix_Su());
 
    for (unsigned es = 0; es < 6; ++es) {
-
       const double p = Abs(MSu(es));
       for (unsigned i1 = 0; i1 < 6; ++i1) {
          for (unsigned i2 = i1; i2 < 6; ++i2) {
@@ -19392,10 +19495,7 @@ void CLASSNAME::calculate_MSu_pole()
          fs_diagonalize_hermitian(M_1loop, eigen_values, mix_ZU);
       #endif
 
-      if (eigen_values(es) < 0.)
-         problems.flag_tachyon(Su);
-
-      PHYSICAL(MSu(es)) = AbsSqrt(eigen_values(es));
+      PHYSICAL(MSu(es)) = SignedAbsSqrt(eigen_values(es));
       if (es == 0)
          PHYSICAL(ZU) = mix_ZU;
    }
@@ -19411,7 +19511,6 @@ void CLASSNAME::calculate_MSe_pole()
    const Eigen::Matrix<double,6,6> M_tree(get_mass_matrix_Se());
 
    for (unsigned es = 0; es < 6; ++es) {
-
       const double p = Abs(MSe(es));
       for (unsigned i1 = 0; i1 < 6; ++i1) {
          for (unsigned i2 = i1; i2 < 6; ++i2) {
@@ -19433,10 +19532,7 @@ void CLASSNAME::calculate_MSe_pole()
          fs_diagonalize_hermitian(M_1loop, eigen_values, mix_ZE);
       #endif
 
-      if (eigen_values(es) < 0.)
-         problems.flag_tachyon(Se);
-
-      PHYSICAL(MSe(es)) = AbsSqrt(eigen_values(es));
+      PHYSICAL(MSe(es)) = SignedAbsSqrt(eigen_values(es));
       if (es == 0)
          PHYSICAL(ZE) = mix_ZE;
    }
@@ -19468,7 +19564,6 @@ void CLASSNAME::calculate_Mhh_pole()
          }
 
       for (unsigned es = 0; es < 3; ++es) {
-
          const double p = Abs(old_Mhh(es));
          for (unsigned i1 = 0; i1 < 3; ++i1) {
             for (unsigned i2 = i1; i2 < 3; ++i2) {
@@ -19500,10 +19595,7 @@ void CLASSNAME::calculate_Mhh_pole()
                mix_ZH);
          #endif
 
-         if (eigen_values(es) < 0.)
-            problems.flag_tachyon(hh);
-
-         PHYSICAL(Mhh(es)) = AbsSqrt(eigen_values(es));
+         PHYSICAL(Mhh(es)) = SignedAbsSqrt(eigen_values(es));
          if (es == 0)
             PHYSICAL(ZH) = mix_ZH;
       }
@@ -19547,12 +19639,6 @@ void CLASSNAME::calculate_MAh_pole()
          }
 
       for (unsigned es = 0; es < 3; ++es) {
-         // skip goldstone bosons
-         if (is_equal_rel(MAh(es), MVZ, 1e-10)) {
-            PHYSICAL(MAh(es)) = MVZ;
-            continue;
-         }
-
          const double p = Abs(old_MAh(es));
          for (unsigned i1 = 0; i1 < 3; ++i1) {
             for (unsigned i2 = i1; i2 < 3; ++i2) {
@@ -19584,10 +19670,7 @@ void CLASSNAME::calculate_MAh_pole()
                mix_ZA);
          #endif
 
-         if (eigen_values(es) < 0.)
-            problems.flag_tachyon(Ah);
-
-         PHYSICAL(MAh(es)) = AbsSqrt(eigen_values(es));
+         PHYSICAL(MAh(es)) = SignedAbsSqrt(eigen_values(es));
          if (es == 1)
             PHYSICAL(ZA) = mix_ZA;
       }
@@ -19620,12 +19703,6 @@ void CLASSNAME::calculate_MHpm_pole()
       const Eigen::Matrix<double,2,2> M_tree(get_mass_matrix_Hpm());
 
       for (unsigned es = 0; es < 2; ++es) {
-         // skip goldstone bosons
-         if (is_equal_rel(MHpm(es), MVWm, 1e-10)) {
-            PHYSICAL(MHpm(es)) = MVWm;
-            continue;
-         }
-
          const double p = Abs(old_MHpm(es));
          for (unsigned i1 = 0; i1 < 2; ++i1) {
             for (unsigned i2 = i1; i2 < 2; ++i2) {
@@ -19650,10 +19727,7 @@ void CLASSNAME::calculate_MHpm_pole()
                mix_ZP);
          #endif
 
-         if (eigen_values(es) < 0.)
-            problems.flag_tachyon(Hpm);
-
-         PHYSICAL(MHpm(es)) = AbsSqrt(eigen_values(es));
+         PHYSICAL(MHpm(es)) = SignedAbsSqrt(eigen_values(es));
          if (es == 1)
             PHYSICAL(ZP) = mix_ZP;
       }

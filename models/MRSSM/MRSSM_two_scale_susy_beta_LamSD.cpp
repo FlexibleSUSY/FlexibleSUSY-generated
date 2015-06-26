@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:43:46
+// File generated at Fri 26 Jun 2015 18:59:07
 
 #include "MRSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -74,6 +74,25 @@ double MRSSM_susy_parameters::calc_beta_LamSD_two_loop(const Susy_traces& susy_t
       (-5*traceYuAdjYu - 5*AbsSqr(LamTU) + Sqr(g1) + 5*Sqr(g2)) - 160*
       traceYdAdjYd*Sqr(g3) + 100*Sqr(LamSD)*Sqr(Conj(LamSD)) + 40*Sqr(LamSU)*
       Sqr(Conj(LamSU)) + 75*Sqr(LamTD)*Sqr(Conj(LamTD))));
+
+
+   return beta_LamSD;
+}
+
+/**
+ * Calculates the three-loop beta function of LamSD.
+ *
+ * @return three-loop beta function
+ */
+double MRSSM_susy_parameters::calc_beta_LamSD_three_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_LamSD;
+
+   beta_LamSD = 0;
 
 
    return beta_LamSD;

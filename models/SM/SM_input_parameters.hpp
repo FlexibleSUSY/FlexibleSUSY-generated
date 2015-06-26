@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:41:19
+// File generated at Fri 26 Jun 2015 18:57:01
 
 #ifndef SM_INPUT_PARAMETERS_H
 #define SM_INPUT_PARAMETERS_H
@@ -28,9 +28,10 @@ namespace flexiblesusy {
 
 struct SM_input_parameters {
    double LambdaIN;
+   double Qin;
 
    SM_input_parameters()
-      : LambdaIN(0)
+      : LambdaIN(0), Qin(0)
 
    {}
 };

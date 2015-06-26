@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:56:29
+// File generated at Fri 26 Jun 2015 19:10:22
 
 #ifndef lowNMSSM_SLHA_IO_H
 #define lowNMSSM_SLHA_IO_H
@@ -65,6 +65,8 @@ public:
    double get_parameter_output_scale() const;
    const SLHA_io& get_slha_io() const { return slha_io; }
    void read_from_file(const std::string&);
+   void read_from_source(const std::string&);
+   void read_from_stream(std::istream&);
    void set_extpar(const lowNMSSM_input_parameters&);
    template <class T> void set_extra(const lowNMSSM_slha<T>&, const lowNMSSM_scales&);
    void set_minpar(const lowNMSSM_input_parameters&);
@@ -292,21 +294,33 @@ void lowNMSSM_slha_io::set_extra(
             << FORMAT_ELEMENT(3, (MODELPARAMETER(MassG)), "MassG")
             << FORMAT_ELEMENT(21, (MODELPARAMETER(mHd2)), "mHd2")
             << FORMAT_ELEMENT(22, (MODELPARAMETER(mHu2)), "mHu2")
-            << FORMAT_ELEMENT(31, (Sqrt(MODELPARAMETER(ml2)(0,0))), "Sqrt(ml2(0,0))")
-            << FORMAT_ELEMENT(32, (Sqrt(MODELPARAMETER(ml2)(1,1))), "Sqrt(ml2(1,1))")
-            << FORMAT_ELEMENT(33, (Sqrt(MODELPARAMETER(ml2)(2,2))), "Sqrt(ml2(2,2))")
-            << FORMAT_ELEMENT(34, (Sqrt(MODELPARAMETER(me2)(0,0))), "Sqrt(me2(0,0))")
-            << FORMAT_ELEMENT(35, (Sqrt(MODELPARAMETER(me2)(1,1))), "Sqrt(me2(1,1))")
-            << FORMAT_ELEMENT(36, (Sqrt(MODELPARAMETER(me2)(2,2))), "Sqrt(me2(2,2))")
-            << FORMAT_ELEMENT(41, (Sqrt(MODELPARAMETER(mq2)(0,0))), "Sqrt(mq2(0,0))")
-            << FORMAT_ELEMENT(42, (Sqrt(MODELPARAMETER(mq2)(1,1))), "Sqrt(mq2(1,1))")
-            << FORMAT_ELEMENT(43, (Sqrt(MODELPARAMETER(mq2)(2,2))), "Sqrt(mq2(2,2))")
-            << FORMAT_ELEMENT(44, (Sqrt(MODELPARAMETER(mu2)(0,0))), "Sqrt(mu2(0,0))")
-            << FORMAT_ELEMENT(45, (Sqrt(MODELPARAMETER(mu2)(1,1))), "Sqrt(mu2(1,1))")
-            << FORMAT_ELEMENT(46, (Sqrt(MODELPARAMETER(mu2)(2,2))), "Sqrt(mu2(2,2))")
-            << FORMAT_ELEMENT(47, (Sqrt(MODELPARAMETER(md2)(0,0))), "Sqrt(md2(0,0))")
-            << FORMAT_ELEMENT(48, (Sqrt(MODELPARAMETER(md2)(1,1))), "Sqrt(md2(1,1))")
-            << FORMAT_ELEMENT(49, (Sqrt(MODELPARAMETER(md2)(2,2))), "Sqrt(md2(2,2))")
+            << FORMAT_ELEMENT(31, (SignedAbsSqrt(MODELPARAMETER(ml2)(0,0))), "SignedAbsSqrt(ml2(0,0))")
+            << FORMAT_ELEMENT(32, (SignedAbsSqrt(MODELPARAMETER(ml2)(1,1))), "SignedAbsSqrt(ml2(1,1))")
+            << FORMAT_ELEMENT(33, (SignedAbsSqrt(MODELPARAMETER(ml2)(2,2))), "SignedAbsSqrt(ml2(2,2))")
+            << FORMAT_ELEMENT(34, (SignedAbsSqrt(MODELPARAMETER(me2)(0,0))), "SignedAbsSqrt(me2(0,0))")
+            << FORMAT_ELEMENT(35, (SignedAbsSqrt(MODELPARAMETER(me2)(1,1))), "SignedAbsSqrt(me2(1,1))")
+            << FORMAT_ELEMENT(36, (SignedAbsSqrt(MODELPARAMETER(me2)(2,2))), "SignedAbsSqrt(me2(2,2))")
+            << FORMAT_ELEMENT(41, (SignedAbsSqrt(MODELPARAMETER(mq2)(0,0))), "SignedAbsSqrt(mq2(0,0))")
+            << FORMAT_ELEMENT(42, (SignedAbsSqrt(MODELPARAMETER(mq2)(1,1))), "SignedAbsSqrt(mq2(1,1))")
+            << FORMAT_ELEMENT(43, (SignedAbsSqrt(MODELPARAMETER(mq2)(2,2))), "SignedAbsSqrt(mq2(2,2))")
+            << FORMAT_ELEMENT(44, (SignedAbsSqrt(MODELPARAMETER(mu2)(0,0))), "SignedAbsSqrt(mu2(0,0))")
+            << FORMAT_ELEMENT(45, (SignedAbsSqrt(MODELPARAMETER(mu2)(1,1))), "SignedAbsSqrt(mu2(1,1))")
+            << FORMAT_ELEMENT(46, (SignedAbsSqrt(MODELPARAMETER(mu2)(2,2))), "SignedAbsSqrt(mu2(2,2))")
+            << FORMAT_ELEMENT(47, (SignedAbsSqrt(MODELPARAMETER(md2)(0,0))), "SignedAbsSqrt(md2(0,0))")
+            << FORMAT_ELEMENT(48, (SignedAbsSqrt(MODELPARAMETER(md2)(1,1))), "SignedAbsSqrt(md2(1,1))")
+            << FORMAT_ELEMENT(49, (SignedAbsSqrt(MODELPARAMETER(md2)(2,2))), "SignedAbsSqrt(md2(2,2))")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block NMSSMRUN Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(1, (MODELPARAMETER(Lambdax)), "Lambdax")
+            << FORMAT_ELEMENT(2, (MODELPARAMETER(Kappa)), "Kappa")
+            << FORMAT_ELEMENT(3, (MODELPARAMETER(TLambdax)/MODELPARAMETER(Lambdax)), "TLambdax/Lambdax")
+            << FORMAT_ELEMENT(4, (MODELPARAMETER(TKappa)/MODELPARAMETER(Kappa)), "TKappa/Kappa")
+            << FORMAT_ELEMENT(5, (0.7071067811865475*MODELPARAMETER(vS)*MODELPARAMETER(Lambdax)), "0.7071067811865475*vS*Lambdax")
+            << FORMAT_ELEMENT(10, (MODELPARAMETER(ms2)), "ms2")
       ;
       slha_io.set_block(block);
    }

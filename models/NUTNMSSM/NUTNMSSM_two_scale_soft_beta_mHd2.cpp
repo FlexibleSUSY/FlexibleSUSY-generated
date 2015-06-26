@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:58:23
+// File generated at Fri 26 Jun 2015 19:12:31
 
 #include "NUTNMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -154,6 +154,25 @@ double NUTNMSSM_soft_parameters::calc_beta_mHd2_two_loop(const Soft_traces& soft
       Lambdax*TKappa + Kappa*TLambdax)) + 10*Conj(Kappa)*((mHd2 + mHu2 + 4*ms2)
       *AbsSqr(Lambdax)*Kappa + Conj(TLambdax)*(Lambdax*TKappa + Kappa*TLambdax)
       )))));
+
+
+   return beta_mHd2;
+}
+
+/**
+ * Calculates the three-loop beta function of mHd2.
+ *
+ * @return three-loop beta function
+ */
+double NUTNMSSM_soft_parameters::calc_beta_mHd2_three_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_mHd2;
+
+   beta_mHd2 = 0;
 
 
    return beta_mHd2;

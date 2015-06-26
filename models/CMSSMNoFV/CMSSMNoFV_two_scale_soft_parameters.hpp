@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 18:03:28
+// File generated at Fri 26 Jun 2015 19:17:57
 
 #ifndef CMSSMNoFV_TWO_SCALE_soft_parameters_H
 #define CMSSMNoFV_TWO_SCALE_soft_parameters_H
@@ -178,32 +178,46 @@ private:
 
    Eigen::Matrix<double,3,3> calc_beta_TYd_one_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_TYd_two_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_TYd_three_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_TYe_one_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_TYe_two_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_TYe_three_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_TYu_one_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_TYu_two_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_TYu_three_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_BMu_one_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_BMu_two_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_BMu_three_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_mq2_one_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_mq2_two_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_mq2_three_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_ml2_one_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_ml2_two_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_ml2_three_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_mHd2_one_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_mHd2_two_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_mHd2_three_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_mHu2_one_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_mHu2_two_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_mHu2_three_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_md2_one_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_md2_two_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_md2_three_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_mu2_one_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_mu2_two_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_mu2_three_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_me2_one_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_me2_two_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_me2_three_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassB_one_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassB_two_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_MassB_three_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassWB_one_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassWB_two_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_MassWB_three_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassG_one_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassG_two_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_MassG_three_loop(const TRACE_STRUCT_TYPE&) const;
 
 };
 

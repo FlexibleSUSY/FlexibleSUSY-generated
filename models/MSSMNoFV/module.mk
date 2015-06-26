@@ -65,6 +65,7 @@ LIBMSSMNoFV_HDR += \
 		$(DIR)/MSSMNoFV_model_slha.hpp \
 		$(DIR)/MSSMNoFV_physical.hpp \
 		$(DIR)/MSSMNoFV_slha_io.hpp \
+		$(DIR)/MSSMNoFV_spectrum_generator_interface.hpp \
 		$(DIR)/MSSMNoFV_spectrum_generator.hpp \
 		$(DIR)/MSSMNoFV_susy_scale_constraint.hpp \
 		$(DIR)/MSSMNoFV_utilities.hpp \
@@ -233,13 +234,13 @@ $(LIBMSSMNoFV): $(LIBMSSMNoFV_OBJ)
 		$(MAKELIB) $@ $^
 
 $(RUN_MSSMNoFV_EXE): $(RUN_MSSMNoFV_OBJ) $(LIBMSSMNoFV) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
 
 $(RUN_CMD_LINE_MSSMNoFV_EXE): $(RUN_CMD_LINE_MSSMNoFV_OBJ) $(LIBMSSMNoFV) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
 
 $(SCAN_MSSMNoFV_EXE): $(SCAN_MSSMNoFV_OBJ) $(LIBMSSMNoFV) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBMSSMNoFV_DEP) $(EXEMSSMNoFV_DEP)
 ALLSRC += $(LIBMSSMNoFV_SRC) $(EXEMSSMNoFV_SRC)

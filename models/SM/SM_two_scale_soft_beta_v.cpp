@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:41:19
+// File generated at Fri 26 Jun 2015 18:57:00
 
 #include "SM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -71,6 +71,25 @@ double SM_soft_parameters::calc_beta_v_two_loop(const Soft_traces& soft_traces) 
       ) + 6300*traceYuAdjYu*Sqr(g2) - 90*Sqr(g1)*Sqr(g2) + 60*traceYeAdjYe*(27*
       Sqr(g1) + 35*Sqr(g2)) + 16000*traceYuAdjYu*Sqr(g3) + 20*traceYdAdjYd*(43*
       Sqr(g1) + 315*Sqr(g2) + 800*Sqr(g3)) + 1200*Sqr(Lambdax)));
+
+
+   return beta_v;
+}
+
+/**
+ * Calculates the three-loop beta function of v.
+ *
+ * @return three-loop beta function
+ */
+double SM_soft_parameters::calc_beta_v_three_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_v;
+
+   beta_v = 0;
 
 
    return beta_v;

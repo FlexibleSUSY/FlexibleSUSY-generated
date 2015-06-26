@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:47:04
+// File generated at Fri 26 Jun 2015 19:01:49
 
 #include "MRSSM_physical.hpp"
 #include "slha_io.hpp"
@@ -29,31 +29,31 @@ namespace flexiblesusy {
 
 MRSSM_physical::MRSSM_physical()
    :
-    MVG(0), MGlu(0), MFv(Eigen::Array<double,3,1>::Zero()), MsigmaO(0), MphiO(
-       0), MVP(0), MVZ(0), MSd(Eigen::Array<double,6,1>::Zero()), MSv(Eigen::Array
-       <double,3,1>::Zero()), MSu(Eigen::Array<double,6,1>::Zero()), MSe(
-       Eigen::Array<double,6,1>::Zero()), Mhh(Eigen::Array<double,4,1>::Zero()),
-       MAh(Eigen::Array<double,4,1>::Zero()), MRh(Eigen::Array<double,2,1>::Zero()
-       ), MHpm(Eigen::Array<double,4,1>::Zero()), MRpm(Eigen::Array<double,2,1>
-       ::Zero()), MChi(Eigen::Array<double,4,1>::Zero()), MCha1(Eigen::Array<
-       double,2,1>::Zero()), MCha2(Eigen::Array<double,2,1>::Zero()), MFe(
-       Eigen::Array<double,3,1>::Zero()), MFd(Eigen::Array<double,3,1>::Zero()),
-       MFu(Eigen::Array<double,3,1>::Zero()), MVWm(0)
+    MVG(0), MGlu(0), MFv(Eigen::Array<double,3,1>::Zero()), MSRdp(0), MSRum(0)
+       , MsigmaO(0), MphiO(0), MVP(0), MVZ(0), MSd(Eigen::Array<double,6,1>::Zero(
+       )), MSv(Eigen::Array<double,3,1>::Zero()), MSu(Eigen::Array<double,6,1>
+       ::Zero()), MSe(Eigen::Array<double,6,1>::Zero()), Mhh(Eigen::Array<double,4
+       ,1>::Zero()), MAh(Eigen::Array<double,4,1>::Zero()), MRh(Eigen::Array<
+       double,2,1>::Zero()), MHpm(Eigen::Array<double,4,1>::Zero()), MChi(
+       Eigen::Array<double,4,1>::Zero()), MCha1(Eigen::Array<double,2,1>::Zero()),
+       MCha2(Eigen::Array<double,2,1>::Zero()), MFe(Eigen::Array<double,3,1>
+       ::Zero()), MFd(Eigen::Array<double,3,1>::Zero()), MFu(Eigen::Array<double,3
+       ,1>::Zero()), MVWm(0)
 
    , ZD(Eigen::Matrix<double,6,6>::Zero()), ZV(Eigen::Matrix<double,3,3>::Zero(
       )), ZU(Eigen::Matrix<double,6,6>::Zero()), ZE(Eigen::Matrix<double,6,6>
       ::Zero()), ZH(Eigen::Matrix<double,4,4>::Zero()), ZA(Eigen::Matrix<double,4,
       4>::Zero()), ZHR(Eigen::Matrix<double,2,2>::Zero()), ZP(Eigen::Matrix<double
-      ,4,4>::Zero()), ZRP(Eigen::Matrix<double,2,2>::Zero()), ZN1(Eigen::Matrix<
-      std::complex<double>,4,4>::Zero()), ZN2(Eigen::Matrix<std::complex<double>,4
-      ,4>::Zero()), UM1(Eigen::Matrix<std::complex<double>,2,2>::Zero()), UP1(
-      Eigen::Matrix<std::complex<double>,2,2>::Zero()), UM2(Eigen::Matrix<
-      std::complex<double>,2,2>::Zero()), UP2(Eigen::Matrix<std::complex<double>,2
-      ,2>::Zero()), ZEL(Eigen::Matrix<std::complex<double>,3,3>::Zero()), ZER(
-      Eigen::Matrix<std::complex<double>,3,3>::Zero()), ZDL(Eigen::Matrix<
-      std::complex<double>,3,3>::Zero()), ZDR(Eigen::Matrix<std::complex<double>,3
-      ,3>::Zero()), ZUL(Eigen::Matrix<std::complex<double>,3,3>::Zero()), ZUR(
-      Eigen::Matrix<std::complex<double>,3,3>::Zero())
+      ,4,4>::Zero()), ZN1(Eigen::Matrix<std::complex<double>,4,4>::Zero()), ZN2(
+      Eigen::Matrix<std::complex<double>,4,4>::Zero()), UM1(Eigen::Matrix<
+      std::complex<double>,2,2>::Zero()), UP1(Eigen::Matrix<std::complex<double>,2
+      ,2>::Zero()), UM2(Eigen::Matrix<std::complex<double>,2,2>::Zero()), UP2(
+      Eigen::Matrix<std::complex<double>,2,2>::Zero()), ZEL(Eigen::Matrix<
+      std::complex<double>,3,3>::Zero()), ZER(Eigen::Matrix<std::complex<double>,3
+      ,3>::Zero()), ZDL(Eigen::Matrix<std::complex<double>,3,3>::Zero()), ZDR(
+      Eigen::Matrix<std::complex<double>,3,3>::Zero()), ZUL(Eigen::Matrix<
+      std::complex<double>,3,3>::Zero()), ZUR(Eigen::Matrix<std::complex<double>,3
+      ,3>::Zero())
 
 {
 }
@@ -63,6 +63,8 @@ void MRSSM_physical::clear()
    MVG = 0.;
    MGlu = 0.;
    MFv = Eigen::Matrix<double,3,1>::Zero();
+   MSRdp = 0.;
+   MSRum = 0.;
    MsigmaO = 0.;
    MphiO = 0.;
    MVP = 0.;
@@ -83,8 +85,6 @@ void MRSSM_physical::clear()
    ZHR = Eigen::Matrix<double,2,2>::Zero();
    MHpm = Eigen::Matrix<double,4,1>::Zero();
    ZP = Eigen::Matrix<double,4,4>::Zero();
-   MRpm = Eigen::Matrix<double,2,1>::Zero();
-   ZRP = Eigen::Matrix<double,2,2>::Zero();
    MChi = Eigen::Matrix<double,4,1>::Zero();
    ZN1 = Eigen::Matrix<std::complex<double>,4,4>::Zero();
    ZN2 = Eigen::Matrix<std::complex<double>,4,4>::Zero();
@@ -135,6 +135,8 @@ void MRSSM_physical::print(std::ostream& ostr) const
    ostr << "MVG = " << MVG << '\n';
    ostr << "MGlu = " << MGlu << '\n';
    ostr << "MFv = " << MFv.transpose() << '\n';
+   ostr << "MSRdp = " << MSRdp << '\n';
+   ostr << "MSRum = " << MSRum << '\n';
    ostr << "MsigmaO = " << MsigmaO << '\n';
    ostr << "MphiO = " << MphiO << '\n';
    ostr << "MVP = " << MVP << '\n';
@@ -147,7 +149,6 @@ void MRSSM_physical::print(std::ostream& ostr) const
    ostr << "MAh = " << MAh.transpose() << '\n';
    ostr << "MRh = " << MRh.transpose() << '\n';
    ostr << "MHpm = " << MHpm.transpose() << '\n';
-   ostr << "MRpm = " << MRpm.transpose() << '\n';
    ostr << "MChi = " << MChi.transpose() << '\n';
    ostr << "MCha1 = " << MCha1.transpose() << '\n';
    ostr << "MCha2 = " << MCha2.transpose() << '\n';
@@ -167,7 +168,6 @@ void MRSSM_physical::print(std::ostream& ostr) const
    ostr << "ZA = " << ZA << '\n';
    ostr << "ZHR = " << ZHR << '\n';
    ostr << "ZP = " << ZP << '\n';
-   ostr << "ZRP = " << ZRP << '\n';
    ostr << "ZN1 = " << ZN1 << '\n';
    ostr << "ZN2 = " << ZN2 << '\n';
    ostr << "UM1 = " << UM1 << '\n';

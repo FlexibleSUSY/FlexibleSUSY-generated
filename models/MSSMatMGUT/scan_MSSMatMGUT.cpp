@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 18:07:50
+// File generated at Fri 26 Jun 2015 19:21:26
 
 #include "MSSMatMGUT_input_parameters.hpp"
 #include "MSSMatMGUT_spectrum_generator.hpp"

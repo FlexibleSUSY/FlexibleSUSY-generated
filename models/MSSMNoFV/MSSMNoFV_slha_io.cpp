@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 18:06:34
+// File generated at Fri 26 Jun 2015 19:20:43
 
 #include "MSSMNoFV_slha_io.hpp"
 #include "MSSMNoFV_input_parameters.hpp"
@@ -307,6 +307,28 @@ void MSSMNoFV_slha_io::read_from_file(const std::string& file_name)
 {
    slha_io.read_from_file(file_name);
    slha_io.read_modsel();
+}
+
+/**
+ * Read SLHA object from source
+ *
+ * calls SLHA_io::read_from_source()
+ *
+ * @param source source name
+ */
+void MSSMNoFV_slha_io::read_from_source(const std::string& source)
+{
+   slha_io.read_from_source(source);
+}
+
+/**
+ * Read SLHA object from stream
+ *
+ * @param istr stream name
+ */
+void MSSMNoFV_slha_io::read_from_stream(std::istream& istr)
+{
+   slha_io.read_from_stream(istr);
 }
 
 /**

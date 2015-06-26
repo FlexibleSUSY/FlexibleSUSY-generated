@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 18:07:08
+// File generated at Fri 26 Jun 2015 19:20:51
 
 #include "MSSMatMGUT_slha_io.hpp"
 #include "MSSMatMGUT_input_parameters.hpp"
@@ -280,6 +280,28 @@ void MSSMatMGUT_slha_io::read_from_file(const std::string& file_name)
 {
    slha_io.read_from_file(file_name);
    slha_io.read_modsel();
+}
+
+/**
+ * Read SLHA object from source
+ *
+ * calls SLHA_io::read_from_source()
+ *
+ * @param source source name
+ */
+void MSSMatMGUT_slha_io::read_from_source(const std::string& source)
+{
+   slha_io.read_from_source(source);
+}
+
+/**
+ * Read SLHA object from stream
+ *
+ * @param istr stream name
+ */
+void MSSMatMGUT_slha_io::read_from_stream(std::istream& istr)
+{
+   slha_io.read_from_stream(istr);
 }
 
 /**

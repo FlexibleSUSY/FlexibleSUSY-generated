@@ -18,6 +18,7 @@ NUTNMSSM_TWO_SCALE_MK := \
 		$(NUTNMSSM_TWO_SCALE_SOFT_MK)
 
 NUTNMSSM_SLHA_INPUT := \
+		$(DIR)/LesHouches.in.NUTNMSSM \
 		$(DIR)/LesHouches.in.NUTNMSSM_1308.1333_BP2 \
 		$(DIR)/LesHouches.in.NUTNMSSM_1308.1333_BP1 \
 		$(DIR)/LesHouches.in.NUTNMSSM_1308.1333_BP3
@@ -67,6 +68,7 @@ LIBNUTNMSSM_HDR += \
 		$(DIR)/NUTNMSSM_model_slha.hpp \
 		$(DIR)/NUTNMSSM_physical.hpp \
 		$(DIR)/NUTNMSSM_slha_io.hpp \
+		$(DIR)/NUTNMSSM_spectrum_generator_interface.hpp \
 		$(DIR)/NUTNMSSM_spectrum_generator.hpp \
 		$(DIR)/NUTNMSSM_susy_scale_constraint.hpp \
 		$(DIR)/NUTNMSSM_utilities.hpp \
@@ -235,13 +237,13 @@ $(LIBNUTNMSSM): $(LIBNUTNMSSM_OBJ)
 		$(MAKELIB) $@ $^
 
 $(RUN_NUTNMSSM_EXE): $(RUN_NUTNMSSM_OBJ) $(LIBNUTNMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
 
 $(RUN_CMD_LINE_NUTNMSSM_EXE): $(RUN_CMD_LINE_NUTNMSSM_OBJ) $(LIBNUTNMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
 
 $(SCAN_NUTNMSSM_EXE): $(SCAN_NUTNMSSM_OBJ) $(LIBNUTNMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBNUTNMSSM_DEP) $(EXENUTNMSSM_DEP)
 ALLSRC += $(LIBNUTNMSSM_SRC) $(EXENUTNMSSM_SRC)

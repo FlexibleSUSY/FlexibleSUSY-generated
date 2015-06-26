@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:48:44
+// File generated at Fri 26 Jun 2015 19:03:14
 
 #include "E6SSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -123,6 +123,25 @@ Eigen::Matrix<double,3,3> E6SSM_soft_parameters::calc_beta_ml2_two_loop(const So
       0.12*Conj(MassB)*Sqr(g1)*(40*MassB*(Ye.adjoint()*Ye) - 20*(Ye.adjoint()*
       TYe) + 3*(99*MassB*Sqr(g1) + 5*(2*MassB + MassWB)*Sqr(g2) + 2*(2*MassB +
       MassBp)*Sqr(gN))*UNITMATRIX(3)))).real();
+
+
+   return beta_ml2;
+}
+
+/**
+ * Calculates the three-loop beta function of ml2.
+ *
+ * @return three-loop beta function
+ */
+Eigen::Matrix<double,3,3> E6SSM_soft_parameters::calc_beta_ml2_three_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_ml2;
+
+   beta_ml2 = ZEROMATRIX(3,3);
 
 
    return beta_ml2;

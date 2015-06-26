@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:58:21
+// File generated at Fri 26 Jun 2015 19:12:29
 
 #include "NUTNMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -106,6 +106,25 @@ Eigen::Matrix<double,3,3> NUTNMSSM_soft_parameters::calc_beta_ml2_two_loop(const
       Sqr(g1) + 55*MassWB*Sqr(g2))*UNITMATRIX(3) + 0.12*Conj(MassB)*Sqr(g1)*(40
       *MassB*(Ye.adjoint()*Ye) - 20*(Ye.adjoint()*TYe) + 3*(69*MassB*Sqr(g1) +
       5*(2*MassB + MassWB)*Sqr(g2))*UNITMATRIX(3)))).real();
+
+
+   return beta_ml2;
+}
+
+/**
+ * Calculates the three-loop beta function of ml2.
+ *
+ * @return three-loop beta function
+ */
+Eigen::Matrix<double,3,3> NUTNMSSM_soft_parameters::calc_beta_ml2_three_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_ml2;
+
+   beta_ml2 = ZEROMATRIX(3,3);
 
 
    return beta_ml2;

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 18:09:33
+// File generated at Fri 26 Jun 2015 19:23:16
 
 /**
  * @file CMSSM_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Mon 8 Jun 2015 18:09:33 with FlexibleSUSY
- * 1.1.1 (git commit: v1.1.1) and SARAH 4.5.6 .
+ * This file was generated at Fri 26 Jun 2015 19:23:16 with FlexibleSUSY
+ * 1.2.0 (git commit: v1.2.0) and SARAH 4.5.8 .
  */
 
 #include "CMSSM_mass_eigenstates.hpp"
@@ -799,7 +799,7 @@ void CLASSNAME::copy_DRbar_masses_to_pole_masses()
 
 /**
  * reorders DRbar masses so that golstones are placed at the index
- * specified in the model files definition of the associuated
+ * specified in the model files definition of the associated
  * gauge boson (see Z-boson definition in default particles.m file
  * in the Models directory of your SARAH distribution for example)
  */
@@ -822,6 +822,22 @@ void CLASSNAME::reorder_pole_masses()
    move_goldstone_to(0, MVWm, PHYSICAL(MHpm), PHYSICAL(ZP));
 
 }
+
+/**
+ * Checks the pole masses for tachyons
+ */
+void CLASSNAME::check_pole_masses_for_tachyons()
+{
+   if (PHYSICAL(MSd).tail<6>().minCoeff() < 0.) problems.flag_tachyon(Sd);
+   if (PHYSICAL(MSv).tail<3>().minCoeff() < 0.) problems.flag_tachyon(Sv);
+   if (PHYSICAL(MSu).tail<6>().minCoeff() < 0.) problems.flag_tachyon(Su);
+   if (PHYSICAL(MSe).tail<6>().minCoeff() < 0.) problems.flag_tachyon(Se);
+   if (PHYSICAL(Mhh).tail<2>().minCoeff() < 0.) problems.flag_tachyon(hh);
+   if (PHYSICAL(MAh).tail<1>().minCoeff() < 0.) problems.flag_tachyon(Ah);
+   if (PHYSICAL(MHpm).tail<1>().minCoeff() < 0.) problems.flag_tachyon(Hpm);
+
+}
+
 /**
  * calculates spectrum for model once the DRbar parameters at
  * at low energies are known
@@ -838,6 +854,8 @@ void CLASSNAME::calculate_spectrum()
       copy_DRbar_masses_to_pole_masses();
    else
       reorder_pole_masses();
+
+   check_pole_masses_for_tachyons();
 
    if (problems.have_problem() && !force_output) {
       clear_DRbar_parameters();
@@ -17163,7 +17181,6 @@ void CLASSNAME::calculate_MSd_pole()
    const Eigen::Matrix<double,6,6> M_tree(get_mass_matrix_Sd());
 
    for (unsigned es = 0; es < 6; ++es) {
-
       const double p = Abs(MSd(es));
       for (unsigned i1 = 0; i1 < 6; ++i1) {
          for (unsigned i2 = i1; i2 < 6; ++i2) {
@@ -17185,10 +17202,7 @@ void CLASSNAME::calculate_MSd_pole()
          fs_diagonalize_hermitian(M_1loop, eigen_values, mix_ZD);
       #endif
 
-      if (eigen_values(es) < 0.)
-         problems.flag_tachyon(Sd);
-
-      PHYSICAL(MSd(es)) = AbsSqrt(eigen_values(es));
+      PHYSICAL(MSd(es)) = SignedAbsSqrt(eigen_values(es));
       if (es == 0)
          PHYSICAL(ZD) = mix_ZD;
    }
@@ -17204,7 +17218,6 @@ void CLASSNAME::calculate_MSv_pole()
    const Eigen::Matrix<double,3,3> M_tree(get_mass_matrix_Sv());
 
    for (unsigned es = 0; es < 3; ++es) {
-
       const double p = Abs(MSv(es));
       for (unsigned i1 = 0; i1 < 3; ++i1) {
          for (unsigned i2 = i1; i2 < 3; ++i2) {
@@ -17226,10 +17239,7 @@ void CLASSNAME::calculate_MSv_pole()
          fs_diagonalize_hermitian(M_1loop, eigen_values, mix_ZV);
       #endif
 
-      if (eigen_values(es) < 0.)
-         problems.flag_tachyon(Sv);
-
-      PHYSICAL(MSv(es)) = AbsSqrt(eigen_values(es));
+      PHYSICAL(MSv(es)) = SignedAbsSqrt(eigen_values(es));
       if (es == 0)
          PHYSICAL(ZV) = mix_ZV;
    }
@@ -17245,7 +17255,6 @@ void CLASSNAME::calculate_MSu_pole()
    const Eigen::Matrix<double,6,6> M_tree(get_mass_matrix_Su());
 
    for (unsigned es = 0; es < 6; ++es) {
-
       const double p = Abs(MSu(es));
       for (unsigned i1 = 0; i1 < 6; ++i1) {
          for (unsigned i2 = i1; i2 < 6; ++i2) {
@@ -17267,10 +17276,7 @@ void CLASSNAME::calculate_MSu_pole()
          fs_diagonalize_hermitian(M_1loop, eigen_values, mix_ZU);
       #endif
 
-      if (eigen_values(es) < 0.)
-         problems.flag_tachyon(Su);
-
-      PHYSICAL(MSu(es)) = AbsSqrt(eigen_values(es));
+      PHYSICAL(MSu(es)) = SignedAbsSqrt(eigen_values(es));
       if (es == 0)
          PHYSICAL(ZU) = mix_ZU;
    }
@@ -17286,7 +17292,6 @@ void CLASSNAME::calculate_MSe_pole()
    const Eigen::Matrix<double,6,6> M_tree(get_mass_matrix_Se());
 
    for (unsigned es = 0; es < 6; ++es) {
-
       const double p = Abs(MSe(es));
       for (unsigned i1 = 0; i1 < 6; ++i1) {
          for (unsigned i2 = i1; i2 < 6; ++i2) {
@@ -17308,10 +17313,7 @@ void CLASSNAME::calculate_MSe_pole()
          fs_diagonalize_hermitian(M_1loop, eigen_values, mix_ZE);
       #endif
 
-      if (eigen_values(es) < 0.)
-         problems.flag_tachyon(Se);
-
-      PHYSICAL(MSe(es)) = AbsSqrt(eigen_values(es));
+      PHYSICAL(MSe(es)) = SignedAbsSqrt(eigen_values(es));
       if (es == 0)
          PHYSICAL(ZE) = mix_ZE;
    }
@@ -17343,7 +17345,6 @@ void CLASSNAME::calculate_Mhh_pole()
          }
 
       for (unsigned es = 0; es < 2; ++es) {
-
          const double p = Abs(old_Mhh(es));
          for (unsigned i1 = 0; i1 < 2; ++i1) {
             for (unsigned i2 = i1; i2 < 2; ++i2) {
@@ -17372,10 +17373,7 @@ void CLASSNAME::calculate_Mhh_pole()
                mix_ZH);
          #endif
 
-         if (eigen_values(es) < 0.)
-            problems.flag_tachyon(hh);
-
-         PHYSICAL(Mhh(es)) = AbsSqrt(eigen_values(es));
+         PHYSICAL(Mhh(es)) = SignedAbsSqrt(eigen_values(es));
          if (es == 0)
             PHYSICAL(ZH) = mix_ZH;
       }
@@ -17419,12 +17417,6 @@ void CLASSNAME::calculate_MAh_pole()
          }
 
       for (unsigned es = 0; es < 2; ++es) {
-         // skip goldstone bosons
-         if (is_equal_rel(MAh(es), MVZ, 1e-10)) {
-            PHYSICAL(MAh(es)) = MVZ;
-            continue;
-         }
-
          const double p = Abs(old_MAh(es));
          for (unsigned i1 = 0; i1 < 2; ++i1) {
             for (unsigned i2 = i1; i2 < 2; ++i2) {
@@ -17453,10 +17445,7 @@ void CLASSNAME::calculate_MAh_pole()
                mix_ZA);
          #endif
 
-         if (eigen_values(es) < 0.)
-            problems.flag_tachyon(Ah);
-
-         PHYSICAL(MAh(es)) = AbsSqrt(eigen_values(es));
+         PHYSICAL(MAh(es)) = SignedAbsSqrt(eigen_values(es));
          if (es == 1)
             PHYSICAL(ZA) = mix_ZA;
       }
@@ -17489,12 +17478,6 @@ void CLASSNAME::calculate_MHpm_pole()
       const Eigen::Matrix<double,2,2> M_tree(get_mass_matrix_Hpm());
 
       for (unsigned es = 0; es < 2; ++es) {
-         // skip goldstone bosons
-         if (is_equal_rel(MHpm(es), MVWm, 1e-10)) {
-            PHYSICAL(MHpm(es)) = MVWm;
-            continue;
-         }
-
          const double p = Abs(old_MHpm(es));
          for (unsigned i1 = 0; i1 < 2; ++i1) {
             for (unsigned i2 = i1; i2 < 2; ++i2) {
@@ -17519,10 +17502,7 @@ void CLASSNAME::calculate_MHpm_pole()
                mix_ZP);
          #endif
 
-         if (eigen_values(es) < 0.)
-            problems.flag_tachyon(Hpm);
-
-         PHYSICAL(MHpm(es)) = AbsSqrt(eigen_values(es));
+         PHYSICAL(MHpm(es)) = SignedAbsSqrt(eigen_values(es));
          if (es == 1)
             PHYSICAL(ZP) = mix_ZP;
       }

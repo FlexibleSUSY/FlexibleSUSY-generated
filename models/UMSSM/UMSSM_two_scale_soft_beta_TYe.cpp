@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:49:00
+// File generated at Fri 26 Jun 2015 19:03:31
 
 #include "UMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -63,8 +63,8 @@ Eigen::Matrix<double,3,3> UMSSM_soft_parameters::calc_beta_TYe_one_loop(const So
  */
 Eigen::Matrix<double,3,3> UMSSM_soft_parameters::calc_beta_TYe_two_loop(const Soft_traces& soft_traces) const
 {
-   const auto Qe = INPUT(Qe);
    const auto Qd = INPUT(Qd);
+   const auto Qe = INPUT(Qe);
    const auto QHd = INPUT(QHd);
    const auto QHu = INPUT(QHu);
    const auto Ql = INPUT(Ql);
@@ -93,40 +93,61 @@ Eigen::Matrix<double,3,3> UMSSM_soft_parameters::calc_beta_TYe_two_loop(const So
       gp,4)*Power(Ql,4)*TYe - 9*traceYdAdjYdYdAdjYd*TYe - 3*traceYdAdjYuYuAdjYd
       *TYe - 3*traceYeAdjYeYeAdjYe*TYe - 3*traceYuAdjYu*AbsSqr(Lambdax)*TYe -
       0.4*traceYdAdjYd*Sqr(g1)*TYe + 1.2*traceYeAdjYe*Sqr(g1)*TYe + 1.8*Sqr(g1)
-      *Sqr(g2)*TYe + 16*traceYdAdjYd*Sqr(g3)*TYe + 6*traceYdAdjYd*Sqr(gp)*Sqr(
-      Qd)*TYe + 2*traceYeAdjYe*Sqr(gp)*Sqr(Qe)*TYe + 4.8*Sqr(g1)*Sqr(gp)*Sqr(Qe
-      )*TYe + 18*Power(gp,4)*Sqr(Qd)*Sqr(Qe)*TYe - 6*traceYdAdjYd*Sqr(gp)*Sqr(
-      QHd)*TYe - 2*traceYeAdjYe*Sqr(gp)*Sqr(QHd)*TYe - 2*AbsSqr(Lambdax)*Sqr(gp
-      )*Sqr(QHd)*TYe + 1.2*Sqr(g1)*Sqr(gp)*Sqr(QHd)*TYe + 6*Sqr(g2)*Sqr(gp)*Sqr
-      (QHd)*TYe + 18*Power(gp,4)*Sqr(Qd)*Sqr(QHd)*TYe + 10*Power(gp,4)*Sqr(Qe)*
-      Sqr(QHd)*TYe + 2*AbsSqr(Lambdax)*Sqr(gp)*Sqr(QHu)*TYe + 4*Power(gp,4)*Sqr
-      (Qe)*Sqr(QHu)*TYe + 4*Power(gp,4)*Sqr(QHd)*Sqr(QHu)*TYe + 2*traceYeAdjYe*
-      Sqr(gp)*Sqr(Ql)*TYe + 1.2*Sqr(g1)*Sqr(gp)*Sqr(Ql)*TYe + 6*Sqr(g2)*Sqr(gp)
-      *Sqr(Ql)*TYe + 18*Power(gp,4)*Sqr(Qd)*Sqr(Ql)*TYe + 18*Power(gp,4)*Sqr(Qe
-      )*Sqr(Ql)*TYe + 16*Power(gp,4)*Sqr(QHd)*Sqr(Ql)*TYe + 4*Power(gp,4)*Sqr(
-      QHu)*Sqr(Ql)*TYe + 6*traceYdAdjYd*Sqr(gp)*Sqr(Qq)*TYe + 36*Power(gp,4)*
-      Sqr(Qe)*Sqr(Qq)*TYe + 36*Power(gp,4)*Sqr(QHd)*Sqr(Qq)*TYe + 36*Power(gp,4
-      )*Sqr(Ql)*Sqr(Qq)*TYe + 2*AbsSqr(Lambdax)*Sqr(gp)*Sqr(Qs)*TYe + 2*Power(
-      gp,4)*Sqr(Qe)*Sqr(Qs)*TYe + 2*Power(gp,4)*Sqr(QHd)*Sqr(Qs)*TYe + 2*Power(
-      gp,4)*Sqr(Ql)*Sqr(Qs)*TYe + 18*Power(gp,4)*Sqr(Qe)*Sqr(Qu)*TYe + 18*Power
-      (gp,4)*Sqr(QHd)*Sqr(Qu)*TYe + 18*Power(gp,4)*Sqr(Ql)*Sqr(Qu)*TYe - 3*Sqr(
-      Conj(Lambdax))*Sqr(Lambdax)*TYe - 0.4*Ye*(135*Power(g1,4)*MassB + 75*
-      Power(g2,4)*MassWB + 100*Power(gp,4)*MassU*Power(Qe,4) + 80*Power(gp,4)*
-      MassU*Power(QHd,4) + 160*Power(gp,4)*MassU*Power(Ql,4) + 90*
+      *Sqr(g2)*TYe + 16*traceYdAdjYd*Sqr(g3)*TYe + 7.2*Qd*Qe*Sqr(g1)*Sqr(gp)*
+      TYe - 3.6*Qd*QHd*Sqr(g1)*Sqr(gp)*TYe - 6*Qe*QHd*Sqr(g1)*Sqr(gp)*TYe + 2.4
+      *Qe*QHu*Sqr(g1)*Sqr(gp)*TYe - 1.2*QHd*QHu*Sqr(g1)*Sqr(gp)*TYe - 3.6*Qd*Ql
+      *Sqr(g1)*Sqr(gp)*TYe - 10.8*Qe*Ql*Sqr(g1)*Sqr(gp)*TYe + 4.8*QHd*Ql*Sqr(g1
+      )*Sqr(gp)*TYe - 1.2*QHu*Ql*Sqr(g1)*Sqr(gp)*TYe + 7.2*Qe*Qq*Sqr(g1)*Sqr(gp
+      )*TYe - 3.6*QHd*Qq*Sqr(g1)*Sqr(gp)*TYe - 3.6*Ql*Qq*Sqr(g1)*Sqr(gp)*TYe -
+      14.4*Qe*Qu*Sqr(g1)*Sqr(gp)*TYe + 7.2*QHd*Qu*Sqr(g1)*Sqr(gp)*TYe + 7.2*Ql*
+      Qu*Sqr(g1)*Sqr(gp)*TYe + 6*traceYdAdjYd*Sqr(gp)*Sqr(Qd)*TYe + 2*
+      traceYeAdjYe*Sqr(gp)*Sqr(Qe)*TYe + 12*Sqr(g1)*Sqr(gp)*Sqr(Qe)*TYe + 18*
+      Power(gp,4)*Sqr(Qd)*Sqr(Qe)*TYe - 6*traceYdAdjYd*Sqr(gp)*Sqr(QHd)*TYe - 2
+      *traceYeAdjYe*Sqr(gp)*Sqr(QHd)*TYe - 2*AbsSqr(Lambdax)*Sqr(gp)*Sqr(QHd)*
+      TYe + 2.4*Sqr(g1)*Sqr(gp)*Sqr(QHd)*TYe + 6*Sqr(g2)*Sqr(gp)*Sqr(QHd)*TYe +
+      18*Power(gp,4)*Sqr(Qd)*Sqr(QHd)*TYe + 10*Power(gp,4)*Sqr(Qe)*Sqr(QHd)*
+      TYe + 2*AbsSqr(Lambdax)*Sqr(gp)*Sqr(QHu)*TYe + 4*Power(gp,4)*Sqr(Qe)*Sqr(
+      QHu)*TYe + 4*Power(gp,4)*Sqr(QHd)*Sqr(QHu)*TYe + 2*traceYeAdjYe*Sqr(gp)*
+      Sqr(Ql)*TYe + 4.8*Sqr(g1)*Sqr(gp)*Sqr(Ql)*TYe + 6*Sqr(g2)*Sqr(gp)*Sqr(Ql)
+      *TYe + 18*Power(gp,4)*Sqr(Qd)*Sqr(Ql)*TYe + 18*Power(gp,4)*Sqr(Qe)*Sqr(Ql
+      )*TYe + 16*Power(gp,4)*Sqr(QHd)*Sqr(Ql)*TYe + 4*Power(gp,4)*Sqr(QHu)*Sqr(
+      Ql)*TYe + 6*traceYdAdjYd*Sqr(gp)*Sqr(Qq)*TYe + 36*Power(gp,4)*Sqr(Qe)*Sqr
+      (Qq)*TYe + 36*Power(gp,4)*Sqr(QHd)*Sqr(Qq)*TYe + 36*Power(gp,4)*Sqr(Ql)*
+      Sqr(Qq)*TYe + 2*AbsSqr(Lambdax)*Sqr(gp)*Sqr(Qs)*TYe + 2*Power(gp,4)*Sqr(
+      Qe)*Sqr(Qs)*TYe + 2*Power(gp,4)*Sqr(QHd)*Sqr(Qs)*TYe + 2*Power(gp,4)*Sqr(
+      Ql)*Sqr(Qs)*TYe + 18*Power(gp,4)*Sqr(Qe)*Sqr(Qu)*TYe + 18*Power(gp,4)*Sqr
+      (QHd)*Sqr(Qu)*TYe + 18*Power(gp,4)*Sqr(Ql)*Sqr(Qu)*TYe - 3*Sqr(Conj(
+      Lambdax))*Sqr(Lambdax)*TYe - 0.4*Ye*(135*Power(g1,4)*MassB + 75*Power(g2,
+      4)*MassWB + 100*Power(gp,4)*MassU*Power(Qe,4) + 80*Power(gp,4)*MassU*
+      Power(QHd,4) + 160*Power(gp,4)*MassU*Power(Ql,4) + 90*
       traceYdAdjYdTYdAdjYd + 15*traceYdAdjYuTYuAdjYd + 30*traceYeAdjYeTYeAdjYe
       + 15*traceYuAdjYdTYdAdjYu + 2*traceAdjYdTYd*Sqr(g1) - 6*traceAdjYeTYe*Sqr
       (g1) + 6*MassB*traceYeAdjYe*Sqr(g1) + 9*MassB*Sqr(g1)*Sqr(g2) + 9*MassWB*
-      Sqr(g1)*Sqr(g2) - 80*traceAdjYdTYd*Sqr(g3) - 30*traceAdjYdTYd*Sqr(gp)*Sqr
-      (Qd) - 10*traceAdjYeTYe*Sqr(gp)*Sqr(Qe) + 10*MassU*traceYeAdjYe*Sqr(gp)*
-      Sqr(Qe) + 24*MassB*Sqr(g1)*Sqr(gp)*Sqr(Qe) + 24*MassU*Sqr(g1)*Sqr(gp)*Sqr
-      (Qe) + 180*Power(gp,4)*MassU*Sqr(Qd)*Sqr(Qe) + 30*traceAdjYdTYd*Sqr(gp)*
-      Sqr(QHd) + 10*traceAdjYeTYe*Sqr(gp)*Sqr(QHd) - 10*MassU*traceYeAdjYe*Sqr(
-      gp)*Sqr(QHd) + 6*MassB*Sqr(g1)*Sqr(gp)*Sqr(QHd) + 6*MassU*Sqr(g1)*Sqr(gp)
-      *Sqr(QHd) + 30*MassU*Sqr(g2)*Sqr(gp)*Sqr(QHd) + 30*MassWB*Sqr(g2)*Sqr(gp)
-      *Sqr(QHd) + 180*Power(gp,4)*MassU*Sqr(Qd)*Sqr(QHd) + 100*Power(gp,4)*
-      MassU*Sqr(Qe)*Sqr(QHd) + 40*Power(gp,4)*MassU*Sqr(Qe)*Sqr(QHu) + 40*Power
-      (gp,4)*MassU*Sqr(QHd)*Sqr(QHu) - 10*traceAdjYeTYe*Sqr(gp)*Sqr(Ql) + 10*
-      MassU*traceYeAdjYe*Sqr(gp)*Sqr(Ql) + 6*MassB*Sqr(g1)*Sqr(gp)*Sqr(Ql) + 6*
+      Sqr(g1)*Sqr(g2) - 80*traceAdjYdTYd*Sqr(g3) + 36*MassB*Qd*Qe*Sqr(g1)*Sqr(
+      gp) + 36*MassU*Qd*Qe*Sqr(g1)*Sqr(gp) - 18*MassB*Qd*QHd*Sqr(g1)*Sqr(gp) -
+      18*MassU*Qd*QHd*Sqr(g1)*Sqr(gp) - 30*MassB*Qe*QHd*Sqr(g1)*Sqr(gp) - 30*
+      MassU*Qe*QHd*Sqr(g1)*Sqr(gp) + 12*MassB*Qe*QHu*Sqr(g1)*Sqr(gp) + 12*MassU
+      *Qe*QHu*Sqr(g1)*Sqr(gp) - 6*MassB*QHd*QHu*Sqr(g1)*Sqr(gp) - 6*MassU*QHd*
+      QHu*Sqr(g1)*Sqr(gp) - 18*MassB*Qd*Ql*Sqr(g1)*Sqr(gp) - 18*MassU*Qd*Ql*Sqr
+      (g1)*Sqr(gp) - 54*MassB*Qe*Ql*Sqr(g1)*Sqr(gp) - 54*MassU*Qe*Ql*Sqr(g1)*
+      Sqr(gp) + 24*MassB*QHd*Ql*Sqr(g1)*Sqr(gp) + 24*MassU*QHd*Ql*Sqr(g1)*Sqr(
+      gp) - 6*MassB*QHu*Ql*Sqr(g1)*Sqr(gp) - 6*MassU*QHu*Ql*Sqr(g1)*Sqr(gp) +
+      36*MassB*Qe*Qq*Sqr(g1)*Sqr(gp) + 36*MassU*Qe*Qq*Sqr(g1)*Sqr(gp) - 18*
+      MassB*QHd*Qq*Sqr(g1)*Sqr(gp) - 18*MassU*QHd*Qq*Sqr(g1)*Sqr(gp) - 18*MassB
+      *Ql*Qq*Sqr(g1)*Sqr(gp) - 18*MassU*Ql*Qq*Sqr(g1)*Sqr(gp) - 72*MassB*Qe*Qu*
+      Sqr(g1)*Sqr(gp) - 72*MassU*Qe*Qu*Sqr(g1)*Sqr(gp) + 36*MassB*QHd*Qu*Sqr(g1
+      )*Sqr(gp) + 36*MassU*QHd*Qu*Sqr(g1)*Sqr(gp) + 36*MassB*Ql*Qu*Sqr(g1)*Sqr(
+      gp) + 36*MassU*Ql*Qu*Sqr(g1)*Sqr(gp) - 30*traceAdjYdTYd*Sqr(gp)*Sqr(Qd) -
+      10*traceAdjYeTYe*Sqr(gp)*Sqr(Qe) + 10*MassU*traceYeAdjYe*Sqr(gp)*Sqr(Qe)
+      + 60*MassB*Sqr(g1)*Sqr(gp)*Sqr(Qe) + 60*MassU*Sqr(g1)*Sqr(gp)*Sqr(Qe) +
+      180*Power(gp,4)*MassU*Sqr(Qd)*Sqr(Qe) + 30*traceAdjYdTYd*Sqr(gp)*Sqr(QHd)
+      + 10*traceAdjYeTYe*Sqr(gp)*Sqr(QHd) - 10*MassU*traceYeAdjYe*Sqr(gp)*Sqr(
+      QHd) + 12*MassB*Sqr(g1)*Sqr(gp)*Sqr(QHd) + 12*MassU*Sqr(g1)*Sqr(gp)*Sqr(
+      QHd) + 30*MassU*Sqr(g2)*Sqr(gp)*Sqr(QHd) + 30*MassWB*Sqr(g2)*Sqr(gp)*Sqr(
+      QHd) + 180*Power(gp,4)*MassU*Sqr(Qd)*Sqr(QHd) + 100*Power(gp,4)*MassU*Sqr
+      (Qe)*Sqr(QHd) + 40*Power(gp,4)*MassU*Sqr(Qe)*Sqr(QHu) + 40*Power(gp,4)*
+      MassU*Sqr(QHd)*Sqr(QHu) - 10*traceAdjYeTYe*Sqr(gp)*Sqr(Ql) + 10*MassU*
+      traceYeAdjYe*Sqr(gp)*Sqr(Ql) + 24*MassB*Sqr(g1)*Sqr(gp)*Sqr(Ql) + 24*
       MassU*Sqr(g1)*Sqr(gp)*Sqr(Ql) + 30*MassU*Sqr(g2)*Sqr(gp)*Sqr(Ql) + 30*
       MassWB*Sqr(g2)*Sqr(gp)*Sqr(Ql) + 180*Power(gp,4)*MassU*Sqr(Qd)*Sqr(Ql) +
       180*Power(gp,4)*MassU*Sqr(Qe)*Sqr(Ql) + 160*Power(gp,4)*MassU*Sqr(QHd)*
@@ -153,6 +174,25 @@ Eigen::Matrix<double,3,3> UMSSM_soft_parameters::calc_beta_TYe_two_loop(const So
       Sqr(QHd)*(TYe*Ye.adjoint()*Ye) + 6*Sqr(gp)*Sqr(Ql)*(TYe*Ye.adjoint()*Ye)
       - 6*(Ye*Ye.adjoint()*Ye*Ye.adjoint()*TYe) - 8*(Ye*Ye.adjoint()*TYe*
       Ye.adjoint()*Ye) - 6*(TYe*Ye.adjoint()*Ye*Ye.adjoint()*Ye))).real();
+
+
+   return beta_TYe;
+}
+
+/**
+ * Calculates the three-loop beta function of TYe.
+ *
+ * @return three-loop beta function
+ */
+Eigen::Matrix<double,3,3> UMSSM_soft_parameters::calc_beta_TYe_three_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_TYe;
+
+   beta_TYe = ZEROMATRIX(3,3);
 
 
    return beta_TYe;

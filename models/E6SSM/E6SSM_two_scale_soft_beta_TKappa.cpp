@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:48:37
+// File generated at Fri 26 Jun 2015 19:03:09
 
 #include "E6SSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -129,6 +129,25 @@ Eigen::Matrix<double,3,3> E6SSM_soft_parameters::calc_beta_TKappa_two_loop(const
       .adjoint()*TKappa) - 4*(Kappa*(Kappa).adjoint()*TKappa*(Kappa).adjoint()*
       Kappa) - 3*(TKappa*(Kappa).adjoint()*Kappa*(Kappa).adjoint()*Kappa)))
       .real();
+
+
+   return beta_TKappa;
+}
+
+/**
+ * Calculates the three-loop beta function of TKappa.
+ *
+ * @return three-loop beta function
+ */
+Eigen::Matrix<double,3,3> E6SSM_soft_parameters::calc_beta_TKappa_three_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_TKappa;
+
+   beta_TKappa = ZEROMATRIX(3,3);
 
 
    return beta_TKappa;

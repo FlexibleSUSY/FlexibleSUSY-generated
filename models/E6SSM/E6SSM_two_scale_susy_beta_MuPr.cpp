@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:48:27
+// File generated at Fri 26 Jun 2015 19:03:01
 
 #include "E6SSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -58,6 +58,25 @@ double E6SSM_susy_parameters::calc_beta_MuPr_two_loop(const Susy_traces& susy_tr
    beta_MuPr = Re(0.06*twoLoop*MuPr*(99*Power(g1,4) + 275*Power(g2,4) +
       64*Power(gN,4) + 20*Sqr(g2)*Sqr(gN) + 6*Sqr(g1)*(5*Sqr(g2) + 2*Sqr(gN))))
       ;
+
+
+   return beta_MuPr;
+}
+
+/**
+ * Calculates the three-loop beta function of MuPr.
+ *
+ * @return three-loop beta function
+ */
+double E6SSM_susy_parameters::calc_beta_MuPr_three_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MuPr;
+
+   beta_MuPr = 0;
 
 
    return beta_MuPr;

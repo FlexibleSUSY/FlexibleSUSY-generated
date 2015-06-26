@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:41:15
+// File generated at Fri 26 Jun 2015 18:56:57
 
 #include "SM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -86,6 +86,16 @@ SM_susy_parameters SM_susy_parameters::calc_beta() const
       beta_Yd += calc_beta_Yd_two_loop(TRACE_STRUCT);
       beta_Ye += calc_beta_Ye_two_loop(TRACE_STRUCT);
 
+      if (get_loops() > 2) {
+         beta_g1 += calc_beta_g1_three_loop(TRACE_STRUCT);
+         beta_g2 += calc_beta_g2_three_loop(TRACE_STRUCT);
+         beta_g3 += calc_beta_g3_three_loop(TRACE_STRUCT);
+         beta_Lambdax += calc_beta_Lambdax_three_loop(TRACE_STRUCT);
+         beta_Yu += calc_beta_Yu_three_loop(TRACE_STRUCT);
+         beta_Yd += calc_beta_Yd_three_loop(TRACE_STRUCT);
+         beta_Ye += calc_beta_Ye_three_loop(TRACE_STRUCT);
+
+      }
    }
 
 

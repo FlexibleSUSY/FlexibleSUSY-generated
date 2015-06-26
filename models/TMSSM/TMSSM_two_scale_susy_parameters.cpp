@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:42:20
+// File generated at Fri 26 Jun 2015 18:57:50
 
 #include "TMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -98,6 +98,9 @@ TMSSM_susy_parameters TMSSM_susy_parameters::calc_beta() const
       beta_vu += calc_beta_vu_two_loop(TRACE_STRUCT);
       beta_vT += calc_beta_vT_two_loop(TRACE_STRUCT);
 
+      if (get_loops() > 2) {
+
+      }
    }
 
 

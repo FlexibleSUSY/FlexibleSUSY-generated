@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:48:34
+// File generated at Fri 26 Jun 2015 19:03:06
 
 #include "E6SSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -144,6 +144,9 @@ E6SSM_soft_parameters E6SSM_soft_parameters::calc_beta() const
       beta_MassG += calc_beta_MassG_two_loop(TRACE_STRUCT);
       beta_MassBp += calc_beta_MassBp_two_loop(TRACE_STRUCT);
 
+      if (get_loops() > 2) {
+
+      }
    }
 
 

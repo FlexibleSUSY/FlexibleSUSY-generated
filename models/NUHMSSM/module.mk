@@ -65,6 +65,7 @@ LIBNUHMSSM_HDR += \
 		$(DIR)/NUHMSSM_model_slha.hpp \
 		$(DIR)/NUHMSSM_physical.hpp \
 		$(DIR)/NUHMSSM_slha_io.hpp \
+		$(DIR)/NUHMSSM_spectrum_generator_interface.hpp \
 		$(DIR)/NUHMSSM_spectrum_generator.hpp \
 		$(DIR)/NUHMSSM_susy_scale_constraint.hpp \
 		$(DIR)/NUHMSSM_utilities.hpp \
@@ -233,13 +234,13 @@ $(LIBNUHMSSM): $(LIBNUHMSSM_OBJ)
 		$(MAKELIB) $@ $^
 
 $(RUN_NUHMSSM_EXE): $(RUN_NUHMSSM_OBJ) $(LIBNUHMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
 
 $(RUN_CMD_LINE_NUHMSSM_EXE): $(RUN_CMD_LINE_NUHMSSM_OBJ) $(LIBNUHMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
 
 $(SCAN_NUHMSSM_EXE): $(SCAN_NUHMSSM_OBJ) $(LIBNUHMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBNUHMSSM_DEP) $(EXENUHMSSM_DEP)
 ALLSRC += $(LIBNUHMSSM_SRC) $(EXENUHMSSM_SRC)

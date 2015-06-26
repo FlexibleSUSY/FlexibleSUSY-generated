@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:48:28
+// File generated at Fri 26 Jun 2015 19:03:02
 
 #include "E6SSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -71,6 +71,25 @@ double E6SSM_susy_parameters::calc_beta_vu_two_loop(const Susy_traces& susy_trac
       AbsSqr(Lambdax)*(-30*traceKappaAdjKappa - 20*traceLambda12AdjLambda12 -
       30*traceYdAdjYd - 10*traceYeAdjYe + 3*Sqr(g1) + 15*Sqr(g2) + 17*Sqr(gN))
       - 600*Sqr(Conj(Lambdax))*Sqr(Lambdax)));
+
+
+   return beta_vu;
+}
+
+/**
+ * Calculates the three-loop beta function of vu.
+ *
+ * @return three-loop beta function
+ */
+double E6SSM_susy_parameters::calc_beta_vu_three_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_vu;
+
+   beta_vu = 0;
 
 
    return beta_vu;

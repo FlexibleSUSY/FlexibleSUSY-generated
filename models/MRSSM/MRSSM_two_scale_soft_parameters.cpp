@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:43:50
+// File generated at Fri 26 Jun 2015 18:59:11
 
 #include "MRSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -109,6 +109,9 @@ MRSSM_soft_parameters MRSSM_soft_parameters::calc_beta() const
       beta_MDWBT += calc_beta_MDWBT_two_loop(TRACE_STRUCT);
       beta_MDGoc += calc_beta_MDGoc_two_loop(TRACE_STRUCT);
 
+      if (get_loops() > 2) {
+
+      }
    }
 
 

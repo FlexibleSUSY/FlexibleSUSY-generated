@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:58:28
+// File generated at Fri 26 Jun 2015 19:12:35
 
 #include "NUTNMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -65,6 +65,25 @@ double NUTNMSSM_soft_parameters::calc_beta_MassWB_two_loop(const Soft_traces& so
       traceYeAdjYe - 30*MassWB*traceYuAdjYu + 9*MassB*Sqr(g1) + 9*MassWB*Sqr(g1
       ) + 250*MassWB*Sqr(g2) + 120*MassG*Sqr(g3) + 120*MassWB*Sqr(g3) - 10*Conj
       (Lambdax)*(MassWB*Lambdax - TLambdax)));
+
+
+   return beta_MassWB;
+}
+
+/**
+ * Calculates the three-loop beta function of MassWB.
+ *
+ * @return three-loop beta function
+ */
+double NUTNMSSM_soft_parameters::calc_beta_MassWB_three_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MassWB;
+
+   beta_MassWB = 0;
 
 
    return beta_MassWB;

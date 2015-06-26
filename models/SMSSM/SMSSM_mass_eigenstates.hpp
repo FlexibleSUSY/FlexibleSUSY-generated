@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:57:18
+// File generated at Fri 26 Jun 2015 19:11:33
 
 /**
  * @file SMSSM_mass_eigenstates.hpp
@@ -24,8 +24,8 @@
  *        value problem using the two_scale solver by solvingt EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Mon 8 Jun 2015 17:57:18 with FlexibleSUSY
- * 1.1.1 (git commit: v1.1.1) and SARAH 4.5.6 .
+ * This file was generated at Fri 26 Jun 2015 19:11:33 with FlexibleSUSY
+ * 1.2.0 (git commit: v1.2.0) and SARAH 4.5.8 .
  */
 
 #ifndef SMSSM_IMODEL_H
@@ -66,6 +66,7 @@ public:
    void calculate_DRbar_masses();
    void calculate_DRbar_parameters();
    void calculate_pole_masses();
+   void check_pole_masses_for_tachyons();
    virtual void clear();
    void clear_DRbar_parameters();
    void do_calculate_sm_pole_masses(bool);

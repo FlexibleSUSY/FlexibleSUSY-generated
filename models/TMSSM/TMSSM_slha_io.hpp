@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:42:41
+// File generated at Fri 26 Jun 2015 18:58:09
 
 #ifndef TMSSM_SLHA_IO_H
 #define TMSSM_SLHA_IO_H
@@ -65,6 +65,8 @@ public:
    double get_parameter_output_scale() const;
    const SLHA_io& get_slha_io() const { return slha_io; }
    void read_from_file(const std::string&);
+   void read_from_source(const std::string&);
+   void read_from_stream(std::istream&);
    void set_extpar(const TMSSM_input_parameters&);
    template <class T> void set_extra(const TMSSM_slha<T>&, const TMSSM_scales&);
    void set_minpar(const TMSSM_input_parameters&);

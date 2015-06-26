@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:55:43
+// File generated at Fri 26 Jun 2015 19:09:50
 
 #include "SMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -61,6 +61,25 @@ double SMSSM_susy_parameters::calc_beta_L1_two_loop(const Susy_traces& susy_trac
       AbsSqr(Lambdax)*(15*traceYdAdjYd + 5*traceYeAdjYe + 15*traceYuAdjYu + 10*
       AbsSqr(Lambdax) - 3*Sqr(g1) - 15*Sqr(g2)) + 20*Sqr(Conj(Kappa))*Sqr(Kappa
       )));
+
+
+   return beta_L1;
+}
+
+/**
+ * Calculates the three-loop beta function of L1.
+ *
+ * @return three-loop beta function
+ */
+double SMSSM_susy_parameters::calc_beta_L1_three_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_L1;
+
+   beta_L1 = 0;
 
 
    return beta_L1;

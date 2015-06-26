@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:48:26
+// File generated at Fri 26 Jun 2015 19:03:00
 
 #include "E6SSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -81,6 +81,25 @@ Eigen::Matrix<double,2,2> E6SSM_susy_parameters::calc_beta_Lambda12_two_loop(con
       traceLambda12AdjLambda12 - 4*AbsSqr(Lambdax) + 2.5*Sqr(gN))*(Lambda12*(
       Lambda12).adjoint()*Lambda12) - 2*(Lambda12*(Lambda12).adjoint()*Lambda12
       *(Lambda12).adjoint()*Lambda12))).real();
+
+
+   return beta_Lambda12;
+}
+
+/**
+ * Calculates the three-loop beta function of Lambda12.
+ *
+ * @return three-loop beta function
+ */
+Eigen::Matrix<double,2,2> E6SSM_susy_parameters::calc_beta_Lambda12_three_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,2,2> beta_Lambda12;
+
+   beta_Lambda12 = ZEROMATRIX(2,2);
 
 
    return beta_Lambda12;

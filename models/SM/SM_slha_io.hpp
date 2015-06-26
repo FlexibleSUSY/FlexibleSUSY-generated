@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:41:20
+// File generated at Fri 26 Jun 2015 18:57:01
 
 #ifndef SM_SLHA_IO_H
 #define SM_SLHA_IO_H
@@ -65,6 +65,8 @@ public:
    double get_parameter_output_scale() const;
    const SLHA_io& get_slha_io() const { return slha_io; }
    void read_from_file(const std::string&);
+   void read_from_source(const std::string&);
+   void read_from_stream(std::istream&);
    void set_extpar(const SM_input_parameters&);
    template <class T> void set_extra(const SM_slha<T>&, const SM_scales&);
    void set_minpar(const SM_input_parameters&);

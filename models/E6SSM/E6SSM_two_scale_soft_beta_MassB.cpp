@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:49:00
+// File generated at Fri 26 Jun 2015 19:03:28
 
 #include "E6SSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,6 +73,25 @@ double E6SSM_soft_parameters::calc_beta_MassB_two_loop(const Soft_traces& soft_t
       - 130*MassB*traceYuAdjYu + 468*MassB*Sqr(g1) + 270*MassB*Sqr(g2) + 270*
       MassWB*Sqr(g2) + 600*MassB*Sqr(g3) + 600*MassG*Sqr(g3) + 81*MassB*Sqr(gN)
       + 81*MassBp*Sqr(gN) - 30*Conj(Lambdax)*(MassB*Lambdax - TLambdax)));
+
+
+   return beta_MassB;
+}
+
+/**
+ * Calculates the three-loop beta function of MassB.
+ *
+ * @return three-loop beta function
+ */
+double E6SSM_soft_parameters::calc_beta_MassB_three_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MassB;
+
+   beta_MassB = 0;
 
 
    return beta_MassB;

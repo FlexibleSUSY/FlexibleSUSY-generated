@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:55:55
+// File generated at Fri 26 Jun 2015 19:10:04
 
 #include "SMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -124,6 +124,25 @@ double SMSSM_soft_parameters::calc_beta_LL1_two_loop(const Soft_traces& soft_tra
       Lambdax)*Sqr(g2)*TLambdax + 30*MassWB*Conj(Mu)*Sqr(g2)*TLambdax + 20*Conj
       (Kappa)*Conj(Lambdax)*Sqr(MS)*TLambdax + 40*L1*Lambdax*Sqr(Conj(Lambdax))
       *TLambdax + 20*MS*Mu*Sqr(Conj(Lambdax))*TLambdax));
+
+
+   return beta_LL1;
+}
+
+/**
+ * Calculates the three-loop beta function of LL1.
+ *
+ * @return three-loop beta function
+ */
+double SMSSM_soft_parameters::calc_beta_LL1_three_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_LL1;
+
+   beta_LL1 = 0;
 
 
    return beta_LL1;

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:43:45
+// File generated at Fri 26 Jun 2015 18:59:06
 
 #ifndef MRSSM_TWO_SCALE_susy_parameters_H
 #define MRSSM_TWO_SCALE_susy_parameters_H
@@ -150,38 +150,55 @@ private:
 
    Eigen::Matrix<double,3,3> calc_beta_Yd_one_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_Yd_two_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_Yd_three_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_Ye_one_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_Ye_two_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_Ye_three_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_LamTD_one_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_LamTD_two_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_LamTD_three_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_LamTU_one_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_LamTU_two_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_LamTU_three_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_LamSD_one_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_LamSD_two_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_LamSD_three_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_LamSU_one_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_LamSU_two_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_LamSU_three_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_Yu_one_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_Yu_two_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_Yu_three_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Mu_one_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Mu_two_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_Mu_three_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MuD_one_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MuD_two_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_MuD_three_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MuU_one_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MuU_two_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_MuU_three_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g1_one_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g1_two_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_g1_three_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g2_one_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g2_two_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_g2_three_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g3_one_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g3_two_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_g3_three_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_vd_one_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_vd_two_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_vd_three_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_vu_one_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_vu_two_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_vu_three_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_vT_one_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_vT_two_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_vT_three_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_vS_one_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_vS_two_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_vS_three_loop(const TRACE_STRUCT_TYPE&) const;
 
 };
 

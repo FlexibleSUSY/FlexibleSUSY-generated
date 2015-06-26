@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:41:34
+// File generated at Fri 26 Jun 2015 18:57:11
 
 /**
  * @file SM_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Mon 8 Jun 2015 17:41:34 with FlexibleSUSY
- * 1.1.1 (git commit: v1.1.1) and SARAH 4.5.6 .
+ * This file was generated at Fri 26 Jun 2015 18:57:11 with FlexibleSUSY
+ * 1.2.0 (git commit: v1.2.0) and SARAH 4.5.8 .
  */
 
 #include "SM_mass_eigenstates.hpp"
@@ -44,6 +44,7 @@
 #include "pv.hpp"
 #include "functors.hpp"
 
+#include "sm_twoloophiggs.hpp"
 
 
 #include <cmath>
@@ -669,7 +670,7 @@ void CLASSNAME::copy_DRbar_masses_to_pole_masses()
 
 /**
  * reorders DRbar masses so that golstones are placed at the index
- * specified in the model files definition of the associuated
+ * specified in the model files definition of the associated
  * gauge boson (see Z-boson definition in default particles.m file
  * in the Models directory of your SARAH distribution for example)
  */
@@ -688,6 +689,16 @@ void CLASSNAME::reorder_pole_masses()
 {
 
 }
+
+/**
+ * Checks the pole masses for tachyons
+ */
+void CLASSNAME::check_pole_masses_for_tachyons()
+{
+   if (PHYSICAL(Mhh) < 0.) problems.flag_tachyon(hh);
+
+}
+
 /**
  * calculates spectrum for model once the DRbar parameters at
  * at low energies are known
@@ -704,6 +715,8 @@ void CLASSNAME::calculate_spectrum()
       copy_DRbar_masses_to_pole_masses();
    else
       reorder_pole_masses();
+
+   check_pole_masses_for_tachyons();
 
    if (problems.have_problem() && !force_output) {
       clear_DRbar_parameters();
@@ -1091,30 +1104,11 @@ double CLASSNAME::CpHpconjHphhhh() const
    return result;
 }
 
-std::complex<double> CLASSNAME::CpHpconjHpVZVZ() const
-{
-   std::complex<double> result;
-
-   result = 0.1*(-7.745966692414834*g1*g2*Cos(ThetaW())*Sin(ThetaW()) + 5*Sqr(
-      g2)*Sqr(Cos(ThetaW())) + 3*Sqr(g1)*Sqr(Sin(ThetaW())));
-
-   return result;
-}
-
 double CLASSNAME::CpHpconjHpconjHpHp() const
 {
    double result = 0.0;
 
    result = -2*Lambdax;
-
-   return result;
-}
-
-double CLASSNAME::CpHpconjHpconjVWpVWp() const
-{
-   double result = 0.0;
-
-   result = 0.5*Sqr(g2);
 
    return result;
 }
@@ -1151,6 +1145,25 @@ double CLASSNAME::CpconjHpVZHp() const
    double result = 0.0;
 
    result = 0.1*(-5*g2*Cos(ThetaW()) + 3.872983346207417*g1*Sin(ThetaW()));
+
+   return result;
+}
+
+double CLASSNAME::CpHpconjHpconjVWpVWp() const
+{
+   double result = 0.0;
+
+   result = 0.5*Sqr(g2);
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpHpconjHpVZVZ() const
+{
+   std::complex<double> result;
+
+   result = 0.1*(-7.745966692414834*g1*g2*Cos(ThetaW())*Sin(ThetaW()) + 5*Sqr(
+      g2)*Sqr(Cos(ThetaW())) + 3*Sqr(g1)*Sqr(Sin(ThetaW())));
 
    return result;
 }
@@ -1266,30 +1279,11 @@ double CLASSNAME::CpAhAhhhhh() const
    return result;
 }
 
-std::complex<double> CLASSNAME::CpAhAhVZVZ() const
-{
-   std::complex<double> result;
-
-   result = 0.1*(g1*Sin(ThetaW())*(7.745966692414834*g2*Cos(ThetaW()) + 3*g1*
-      Sin(ThetaW())) + 5*Sqr(g2)*Sqr(Cos(ThetaW())));
-
-   return result;
-}
-
 double CLASSNAME::CpAhAhconjHpHp() const
 {
    double result = 0.0;
 
    result = -Lambdax;
-
-   return result;
-}
-
-double CLASSNAME::CpAhAhconjVWpVWp() const
-{
-   double result = 0.0;
-
-   result = 0.5*Sqr(g2);
 
    return result;
 }
@@ -1309,6 +1303,25 @@ std::complex<double> CLASSNAME::CpAhconjVWpHp() const
    std::complex<double> result;
 
    result = std::complex<double>(0,-0.5)*g2;
+
+   return result;
+}
+
+double CLASSNAME::CpAhAhconjVWpVWp() const
+{
+   double result = 0.0;
+
+   result = 0.5*Sqr(g2);
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpAhAhVZVZ() const
+{
+   std::complex<double> result;
+
+   result = 0.1*(g1*Sin(ThetaW())*(7.745966692414834*g2*Cos(ThetaW()) + 3*g1*
+      Sin(ThetaW())) + 5*Sqr(g2)*Sqr(Cos(ThetaW())));
 
    return result;
 }
@@ -1530,30 +1543,11 @@ double CLASSNAME::Cphhhhhhhh() const
    return result;
 }
 
-std::complex<double> CLASSNAME::CphhhhVZVZ() const
-{
-   std::complex<double> result;
-
-   result = 0.1*(g1*Sin(ThetaW())*(7.745966692414834*g2*Cos(ThetaW()) + 3*g1*
-      Sin(ThetaW())) + 5*Sqr(g2)*Sqr(Cos(ThetaW())));
-
-   return result;
-}
-
 double CLASSNAME::CphhhhconjHpHp() const
 {
    double result = 0.0;
 
    result = -Lambdax;
-
-   return result;
-}
-
-double CLASSNAME::CphhhhconjVWpVWp() const
-{
-   double result = 0.0;
-
-   result = 0.5*Sqr(g2);
 
    return result;
 }
@@ -1573,6 +1567,25 @@ double CLASSNAME::CphhconjVWpHp() const
    double result = 0.0;
 
    result = 0.5*g2;
+
+   return result;
+}
+
+double CLASSNAME::CphhhhconjVWpVWp() const
+{
+   double result = 0.0;
+
+   result = 0.5*Sqr(g2);
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CphhhhVZVZ() const
+{
+   std::complex<double> result;
+
+   result = 0.1*(g1*Sin(ThetaW())*(7.745966692414834*g2*Cos(ThetaW()) + 3*g1*
+      Sin(ThetaW())) + 5*Sqr(g2)*Sqr(Cos(ThetaW())));
 
    return result;
 }
@@ -4831,6 +4844,26 @@ std::complex<double> CLASSNAME::tadpole_hh() const
 
 
 
+void CLASSNAME::self_energy_hh_2loop(double result[1]) const
+{
+   const double mt = MFu(2);
+   const double yt = Yu(2,2);
+   const double gs = g3;
+   const double scale = get_scale();
+   double self_energy = 0.;
+
+   if (HIGGS_2LOOP_CORRECTION_AT_AT) {
+      self_energy += self_energy_higgs_2loop_at_at_sm(scale, mt, yt);
+   }
+
+   if (HIGGS_2LOOP_CORRECTION_AT_AS) {
+      self_energy += self_energy_higgs_2loop_at_as_sm(scale, mt, yt, gs);
+   }
+
+   result[0] = self_energy;
+
+}
+
 
 
 
@@ -4860,13 +4893,15 @@ void CLASSNAME::calculate_Mhh_pole()
    do {
       const double M_tree(get_mass_matrix_hh());
       const double p = old_Mhh;
-      const double self_energy = Re(self_energy_hh(p));
+      double self_energy = Re(self_energy_hh(p));
+      if (pole_mass_loop_order > 1) {
+         double two_loop[1] = { 0. };
+         self_energy_hh_2loop(two_loop);
+         self_energy += two_loop[0];
+      }
       const double mass_sqr = M_tree - self_energy;
 
-      if (mass_sqr < 0.)
-         problems.flag_tachyon(hh);
-
-      PHYSICAL(Mhh) = AbsSqrt(mass_sqr);
+      PHYSICAL(Mhh) = SignedAbsSqrt(mass_sqr);
 
       new_Mhh = PHYSICAL(Mhh);
       diff = MaxRelDiff(new_Mhh, old_Mhh);

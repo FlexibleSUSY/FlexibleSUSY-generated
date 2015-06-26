@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:56:32
+// File generated at Fri 26 Jun 2015 19:10:25
 
 #include "lowNMSSM_two_scale_low_scale_constraint.hpp"
 #include "lowNMSSM_two_scale_model.hpp"
@@ -104,17 +104,18 @@ void lowNMSSM_low_scale_constraint<Two_scale>::apply()
    update_scale();
    calculate_DRbar_gauge_couplings();
 
-   const auto TanBeta = INPUTPARAMETER(TanBeta);
    const auto g1 = MODELPARAMETER(g1);
    const auto g2 = MODELPARAMETER(g2);
+   const auto vd = MODELPARAMETER(vd);
+   const auto vu = MODELPARAMETER(vu);
 
    calculate_Yu_DRbar();
    calculate_Yd_DRbar();
    calculate_Ye_DRbar();
-   MODEL->set_vd(Re((2*MZDRbar)/(Sqrt(0.6*Sqr(g1) + Sqr(g2))*Sqrt(1 + Sqr(
-      TanBeta)))));
-   MODEL->set_vu(Re((2*MZDRbar*TanBeta)/(Sqrt(0.6*Sqr(g1) + Sqr(g2))*Sqrt(1 +
-      Sqr(TanBeta)))));
+   MODEL->set_vd(Re((2*MZDRbar)/(Sqrt(0.6*Sqr(g1) + Sqr(g2))*Sqrt(1 + Sqr(vu)
+      /Sqr(vd)))));
+   MODEL->set_vu(Re((2*MZDRbar*vu)/(vd*Sqrt(0.6*Sqr(g1) + Sqr(g2))*Sqrt(1 + Sqr
+      (vu)/Sqr(vd)))));
 
 
    model->set_g1(new_g1);

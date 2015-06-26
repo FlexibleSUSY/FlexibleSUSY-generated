@@ -21,7 +21,7 @@
  * @brief contains wrapper class for model class in SLHA convention
  */
 
-// File generated at Mon 8 Jun 2015 17:44:04
+// File generated at Fri 26 Jun 2015 18:59:21
 
 #ifndef MRSSM_TWO_SCALE_SLHA_H
 #define MRSSM_TWO_SCALE_SLHA_H
@@ -65,6 +65,8 @@ public:
    double get_MGlu_pole_slha() const { return PHYSICAL_SLHA(MGlu); }
    const Eigen::Array<double,3,1>& get_MFv_pole_slha() const { return PHYSICAL_SLHA(MFv); }
    double get_MFv_pole_slha(int i) const { return PHYSICAL_SLHA(MFv(i)); }
+   double get_MSRdp_pole_slha() const { return PHYSICAL_SLHA(MSRdp); }
+   double get_MSRum_pole_slha() const { return PHYSICAL_SLHA(MSRum); }
    double get_MsigmaO_pole_slha() const { return PHYSICAL_SLHA(MsigmaO); }
    double get_MphiO_pole_slha() const { return PHYSICAL_SLHA(MphiO); }
    double get_MVP_pole_slha() const { return PHYSICAL_SLHA(MVP); }
@@ -85,8 +87,6 @@ public:
    double get_MRh_pole_slha(int i) const { return PHYSICAL_SLHA(MRh(i)); }
    const Eigen::Array<double,4,1>& get_MHpm_pole_slha() const { return PHYSICAL_SLHA(MHpm); }
    double get_MHpm_pole_slha(int i) const { return PHYSICAL_SLHA(MHpm(i)); }
-   const Eigen::Array<double,2,1>& get_MRpm_pole_slha() const { return PHYSICAL_SLHA(MRpm); }
-   double get_MRpm_pole_slha(int i) const { return PHYSICAL_SLHA(MRpm(i)); }
    const Eigen::Array<double,4,1>& get_MChi_pole_slha() const { return PHYSICAL_SLHA(MChi); }
    double get_MChi_pole_slha(int i) const { return PHYSICAL_SLHA(MChi(i)); }
    const Eigen::Array<double,2,1>& get_MCha1_pole_slha() const { return PHYSICAL_SLHA(MCha1); }
@@ -117,8 +117,6 @@ public:
    double get_ZHR_pole_slha(int i, int k) const { return PHYSICAL_SLHA(ZHR(i,k)); }
    const Eigen::Matrix<double,4,4>& get_ZP_pole_slha() const { return PHYSICAL_SLHA(ZP); }
    double get_ZP_pole_slha(int i, int k) const { return PHYSICAL_SLHA(ZP(i,k)); }
-   const Eigen::Matrix<double,2,2>& get_ZRP_pole_slha() const { return PHYSICAL_SLHA(ZRP); }
-   double get_ZRP_pole_slha(int i, int k) const { return PHYSICAL_SLHA(ZRP(i,k)); }
    const Eigen::Matrix<std::complex<double>,4,4>& get_ZN1_pole_slha() const { return PHYSICAL_SLHA(ZN1); }
    const std::complex<double>& get_ZN1_pole_slha(int i, int k) const { return PHYSICAL_SLHA(ZN1(i,k)); }
    const Eigen::Matrix<std::complex<double>,4,4>& get_ZN2_pole_slha() const { return PHYSICAL_SLHA(ZN2); }

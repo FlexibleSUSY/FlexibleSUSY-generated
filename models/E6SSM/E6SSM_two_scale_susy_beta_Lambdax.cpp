@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:48:27
+// File generated at Fri 26 Jun 2015 19:03:00
 
 #include "E6SSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -92,6 +92,25 @@ double E6SSM_susy_parameters::calc_beta_Lambdax_two_loop(const Susy_traces& susy
       traceLambda12AdjLambda12 - 90*traceYdAdjYd - 30*traceYeAdjYe - 90*
       traceYuAdjYu + 12*Sqr(g1) + 60*Sqr(g2) + 13*Sqr(gN)) + 2000*Sqr(Conj(
       Lambdax))*Sqr(Lambdax)));
+
+
+   return beta_Lambdax;
+}
+
+/**
+ * Calculates the three-loop beta function of Lambdax.
+ *
+ * @return three-loop beta function
+ */
+double E6SSM_susy_parameters::calc_beta_Lambdax_three_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_Lambdax;
+
+   beta_Lambdax = 0;
 
 
    return beta_Lambdax;

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:41:20
+// File generated at Fri 26 Jun 2015 18:57:01
 
 #include "SM_slha_io.hpp"
 #include "SM_input_parameters.hpp"
@@ -67,6 +67,11 @@ void SM_slha_io::clear()
  */
 void SM_slha_io::set_extpar(const SM_input_parameters& input)
 {
+   std::ostringstream extpar;
+
+   extpar << "Block EXTPAR\n";
+   extpar << FORMAT_ELEMENT(0, input.Qin, "Qin");
+   slha_io.set_block(extpar);
 
 }
 
@@ -234,6 +239,28 @@ void SM_slha_io::read_from_file(const std::string& file_name)
 }
 
 /**
+ * Read SLHA object from source
+ *
+ * calls SLHA_io::read_from_source()
+ *
+ * @param source source name
+ */
+void SM_slha_io::read_from_source(const std::string& source)
+{
+   slha_io.read_from_source(source);
+}
+
+/**
+ * Read SLHA object from stream
+ *
+ * @param istr stream name
+ */
+void SM_slha_io::read_from_stream(std::istream& istr)
+{
+   slha_io.read_from_stream(istr);
+}
+
+/**
  * Fill struct of model input parameters from SLHA object (MINPAR and
  * EXTPAR blocks)
  *
@@ -325,6 +352,7 @@ void SM_slha_io::fill_extpar_tuple(SM_input_parameters& input,
                                                 int key, double value)
 {
    switch (key) {
+   case 0: input.Qin = value; break;
    default: WARNING("Unrecognized key: " << key); break;
    }
 

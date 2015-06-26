@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:43:49
+// File generated at Fri 26 Jun 2015 18:59:09
 
 #include "MRSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -61,6 +61,25 @@ double MRSSM_susy_parameters::calc_beta_vS_two_loop(const Susy_traces& susy_trac
       traceYeAdjYe + 15*AbsSqr(LamTD) - 3*Sqr(g1) - 15*Sqr(g2)) + AbsSqr(LamSU)
       *(10*AbsSqr(LamSU) - 3*(-5*traceYuAdjYu - 5*AbsSqr(LamTU) + Sqr(g1) + 5*
       Sqr(g2))) + 10*Sqr(LamSD)*Sqr(Conj(LamSD))));
+
+
+   return beta_vS;
+}
+
+/**
+ * Calculates the three-loop beta function of vS.
+ *
+ * @return three-loop beta function
+ */
+double MRSSM_susy_parameters::calc_beta_vS_three_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_vS;
+
+   beta_vS = 0;
 
 
    return beta_vS;

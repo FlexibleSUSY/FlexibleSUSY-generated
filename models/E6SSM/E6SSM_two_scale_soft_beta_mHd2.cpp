@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:48:47
+// File generated at Fri 26 Jun 2015 19:03:17
 
 #include "E6SSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -211,6 +211,25 @@ double E6SSM_soft_parameters::calc_beta_mHd2_two_loop(const Soft_traces& soft_tr
       traceconjTKappaTpKappa*Conj(Lambdax)*TLambdax - 4*
       traceconjTLambda12TpLambda12*Conj(Lambdax)*TLambdax - 6*traceconjTYuTpYu*
       Conj(Lambdax)*TLambdax));
+
+
+   return beta_mHd2;
+}
+
+/**
+ * Calculates the three-loop beta function of mHd2.
+ *
+ * @return three-loop beta function
+ */
+double E6SSM_soft_parameters::calc_beta_mHd2_three_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_mHd2;
+
+   beta_mHd2 = 0;
 
 
    return beta_mHd2;

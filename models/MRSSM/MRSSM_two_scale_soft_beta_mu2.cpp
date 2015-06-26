@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:43:54
+// File generated at Fri 26 Jun 2015 18:59:14
 
 #include "MRSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -84,6 +84,25 @@ Eigen::Matrix<double,3,3> MRSSM_soft_parameters::calc_beta_mu2_two_loop(const So
       )) - 4*(Yu*Yu.adjoint()*Yu*mq2*Yu.adjoint()) - 2*(Yu*Yu.adjoint()*Yu*
       Yu.adjoint()*mu2) + 1.0666666666666667*(10*Power(g3,4)*Tr23 + g1*(2*g1*
       Tr2U111 - 3.872983346207417*Tr31))*UNITMATRIX(3))).real();
+
+
+   return beta_mu2;
+}
+
+/**
+ * Calculates the three-loop beta function of mu2.
+ *
+ * @return three-loop beta function
+ */
+Eigen::Matrix<double,3,3> MRSSM_soft_parameters::calc_beta_mu2_three_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_mu2;
+
+   beta_mu2 = ZEROMATRIX(3,3);
 
 
    return beta_mu2;

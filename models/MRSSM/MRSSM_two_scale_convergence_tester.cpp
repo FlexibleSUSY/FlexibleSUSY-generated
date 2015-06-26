@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:43:59
+// File generated at Fri 26 Jun 2015 18:59:17
 
 #include "MRSSM_two_scale_convergence_tester.hpp"
 #include <cmath>
@@ -57,34 +57,33 @@ double MRSSM_convergence_tester<Two_scale>::max_rel_diff() const
    double diff[48] = { 0 };
 
    diff[0] = MaxRelDiff(OLD(MGlu),NEW(MGlu));
-   diff[1] = MaxRelDiff(OLD(MsigmaO),NEW(MsigmaO));
-   diff[2] = MaxRelDiff(OLD(MphiO),NEW(MphiO));
+   diff[1] = MaxRelDiff(OLD(MSRdp),NEW(MSRdp));
+   diff[2] = MaxRelDiff(OLD(MSRum),NEW(MSRum));
+   diff[3] = MaxRelDiff(OLD(MsigmaO),NEW(MsigmaO));
+   diff[4] = MaxRelDiff(OLD(MphiO),NEW(MphiO));
    for (unsigned i = 0; i < 6; i++) {
-      diff[i + 3] = MaxRelDiff(OLD1(MSd,i),NEW1(MSd,i));
+      diff[i + 5] = MaxRelDiff(OLD1(MSd,i),NEW1(MSd,i));
    }
    for (unsigned i = 0; i < 3; i++) {
-      diff[i + 9] = MaxRelDiff(OLD1(MSv,i),NEW1(MSv,i));
+      diff[i + 11] = MaxRelDiff(OLD1(MSv,i),NEW1(MSv,i));
    }
    for (unsigned i = 0; i < 6; i++) {
-      diff[i + 12] = MaxRelDiff(OLD1(MSu,i),NEW1(MSu,i));
+      diff[i + 14] = MaxRelDiff(OLD1(MSu,i),NEW1(MSu,i));
    }
    for (unsigned i = 0; i < 6; i++) {
-      diff[i + 18] = MaxRelDiff(OLD1(MSe,i),NEW1(MSe,i));
+      diff[i + 20] = MaxRelDiff(OLD1(MSe,i),NEW1(MSe,i));
    }
    for (unsigned i = 0; i < 4; i++) {
-      diff[i + 24] = MaxRelDiff(OLD1(Mhh,i),NEW1(Mhh,i));
+      diff[i + 26] = MaxRelDiff(OLD1(Mhh,i),NEW1(Mhh,i));
    }
    for (unsigned i = 1; i < 4; i++) {
-      diff[i + 28] = MaxRelDiff(OLD1(MAh,i),NEW1(MAh,i));
+      diff[i + 30] = MaxRelDiff(OLD1(MAh,i),NEW1(MAh,i));
    }
    for (unsigned i = 0; i < 2; i++) {
-      diff[i + 32] = MaxRelDiff(OLD1(MRh,i),NEW1(MRh,i));
+      diff[i + 34] = MaxRelDiff(OLD1(MRh,i),NEW1(MRh,i));
    }
    for (unsigned i = 1; i < 4; i++) {
-      diff[i + 34] = MaxRelDiff(OLD1(MHpm,i),NEW1(MHpm,i));
-   }
-   for (unsigned i = 0; i < 2; i++) {
-      diff[i + 38] = MaxRelDiff(OLD1(MRpm,i),NEW1(MRpm,i));
+      diff[i + 36] = MaxRelDiff(OLD1(MHpm,i),NEW1(MHpm,i));
    }
    for (unsigned i = 0; i < 4; i++) {
       diff[i + 40] = MaxRelDiff(OLD1(MChi,i),NEW1(MChi,i));

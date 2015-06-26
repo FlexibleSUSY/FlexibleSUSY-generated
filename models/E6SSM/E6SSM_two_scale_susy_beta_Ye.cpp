@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:48:25
+// File generated at Fri 26 Jun 2015 19:02:59
 
 #include "E6SSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -76,6 +76,25 @@ Eigen::Matrix<double,3,3> E6SSM_susy_parameters::calc_beta_Ye_two_loop(const Sus
       gN)) - 120*Sqr(Conj(Lambdax))*Sqr(Lambdax)) + 1.5*(-6*traceYdAdjYd - 2*
       traceYeAdjYe - 2*AbsSqr(Lambdax) + 4*Sqr(g2) + Sqr(gN))*(Ye*Ye.adjoint()*
       Ye) - 4*(Ye*Ye.adjoint()*Ye*Ye.adjoint()*Ye))).real();
+
+
+   return beta_Ye;
+}
+
+/**
+ * Calculates the three-loop beta function of Ye.
+ *
+ * @return three-loop beta function
+ */
+Eigen::Matrix<double,3,3> E6SSM_susy_parameters::calc_beta_Ye_three_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_Ye;
+
+   beta_Ye = ZEROMATRIX(3,3);
 
 
    return beta_Ye;

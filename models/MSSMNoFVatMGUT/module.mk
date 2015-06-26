@@ -65,6 +65,7 @@ LIBMSSMNoFVatMGUT_HDR += \
 		$(DIR)/MSSMNoFVatMGUT_model_slha.hpp \
 		$(DIR)/MSSMNoFVatMGUT_physical.hpp \
 		$(DIR)/MSSMNoFVatMGUT_slha_io.hpp \
+		$(DIR)/MSSMNoFVatMGUT_spectrum_generator_interface.hpp \
 		$(DIR)/MSSMNoFVatMGUT_spectrum_generator.hpp \
 		$(DIR)/MSSMNoFVatMGUT_susy_scale_constraint.hpp \
 		$(DIR)/MSSMNoFVatMGUT_utilities.hpp \
@@ -233,13 +234,13 @@ $(LIBMSSMNoFVatMGUT): $(LIBMSSMNoFVatMGUT_OBJ)
 		$(MAKELIB) $@ $^
 
 $(RUN_MSSMNoFVatMGUT_EXE): $(RUN_MSSMNoFVatMGUT_OBJ) $(LIBMSSMNoFVatMGUT) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
 
 $(RUN_CMD_LINE_MSSMNoFVatMGUT_EXE): $(RUN_CMD_LINE_MSSMNoFVatMGUT_OBJ) $(LIBMSSMNoFVatMGUT) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
 
 $(SCAN_MSSMNoFVatMGUT_EXE): $(SCAN_MSSMNoFVatMGUT_OBJ) $(LIBMSSMNoFVatMGUT) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBMSSMNoFVatMGUT_DEP) $(EXEMSSMNoFVatMGUT_DEP)
 ALLSRC += $(LIBMSSMNoFVatMGUT_SRC) $(EXEMSSMNoFVatMGUT_SRC)

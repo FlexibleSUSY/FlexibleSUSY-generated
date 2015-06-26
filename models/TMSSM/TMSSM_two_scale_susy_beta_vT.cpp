@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:42:23
+// File generated at Fri 26 Jun 2015 18:57:52
 
 #include "TMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -60,6 +60,25 @@ double TMSSM_susy_parameters::calc_beta_vT_two_loop(const Susy_traces& susy_trac
    beta_vT = Re(twoLoop*(-12.666666666666666*Power(g2,4)*vT + 0.2*vT*
       AbsSqr(Lambdax)*(15*traceYdAdjYd + 5*traceYeAdjYe - 3*(-5*traceYuAdjYu +
       Sqr(g1) + 5*Sqr(g2))) + 3*vT*Sqr(Conj(Lambdax))*Sqr(Lambdax)));
+
+
+   return beta_vT;
+}
+
+/**
+ * Calculates the three-loop beta function of vT.
+ *
+ * @return three-loop beta function
+ */
+double TMSSM_susy_parameters::calc_beta_vT_three_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_vT;
+
+   beta_vT = 0;
 
 
    return beta_vT;

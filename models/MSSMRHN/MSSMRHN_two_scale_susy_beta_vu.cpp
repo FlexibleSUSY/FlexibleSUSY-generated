@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 18:00:21
+// File generated at Fri 26 Jun 2015 19:14:23
 
 #include "MSSMRHN_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -68,6 +68,25 @@ double MSSMRHN_susy_parameters::calc_beta_vu_two_loop(const Susy_traces& susy_tr
       traceYuAdjYuYuAdjYu - 600*traceYvAdjYvYvAdjYv + 90*Sqr(g1)*Sqr(g2) + 60*
       traceYvAdjYv*(Sqr(g1) + 5*Sqr(g2)) + 20*traceYuAdjYu*(17*Sqr(g1) + 45*Sqr
       (g2) + 160*Sqr(g3))));
+
+
+   return beta_vu;
+}
+
+/**
+ * Calculates the three-loop beta function of vu.
+ *
+ * @return three-loop beta function
+ */
+double MSSMRHN_susy_parameters::calc_beta_vu_three_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_vu;
+
+   beta_vu = 0;
 
 
    return beta_vu;

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:48:25
+// File generated at Fri 26 Jun 2015 19:02:59
 
 #include "E6SSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -108,6 +108,9 @@ E6SSM_susy_parameters E6SSM_susy_parameters::calc_beta() const
       beta_vu += calc_beta_vu_two_loop(TRACE_STRUCT);
       beta_vs += calc_beta_vs_two_loop(TRACE_STRUCT);
 
+      if (get_loops() > 2) {
+
+      }
    }
 
 

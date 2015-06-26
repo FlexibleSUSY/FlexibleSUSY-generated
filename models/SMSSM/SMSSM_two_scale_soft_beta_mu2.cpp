@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:56:02
+// File generated at Fri 26 Jun 2015 19:10:13
 
 #include "SMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -106,6 +106,25 @@ Eigen::Matrix<double,3,3> SMSSM_soft_parameters::calc_beta_mu2_two_loop(const So
       *MassG*Sqr(g3))*UNITMATRIX(3) + 0.017777777777777778*Conj(MassB)*Sqr(g1)*
       (45*(-2*MassB*(Yu*Yu.adjoint()) + TYu*Yu.adjoint()) + 8*(321*MassB*Sqr(g1
       ) + 40*(2*MassB + MassG)*Sqr(g3))*UNITMATRIX(3)))).real();
+
+
+   return beta_mu2;
+}
+
+/**
+ * Calculates the three-loop beta function of mu2.
+ *
+ * @return three-loop beta function
+ */
+Eigen::Matrix<double,3,3> SMSSM_soft_parameters::calc_beta_mu2_three_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_mu2;
+
+   beta_mu2 = ZEROMATRIX(3,3);
 
 
    return beta_mu2;

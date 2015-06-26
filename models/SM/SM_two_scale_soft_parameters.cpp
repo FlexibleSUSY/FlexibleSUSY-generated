@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:41:18
+// File generated at Fri 26 Jun 2015 18:57:00
 
 #include "SM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -66,6 +66,10 @@ SM_soft_parameters SM_soft_parameters::calc_beta() const
       beta_mu2 += calc_beta_mu2_two_loop(TRACE_STRUCT);
       beta_v += calc_beta_v_two_loop(TRACE_STRUCT);
 
+      if (get_loops() > 2) {
+         beta_mu2 += calc_beta_mu2_three_loop(TRACE_STRUCT);
+
+      }
    }
 
 

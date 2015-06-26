@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:58:22
+// File generated at Fri 26 Jun 2015 19:14:15
 
 #include "NMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -60,6 +60,25 @@ double NMSSM_susy_parameters::calc_beta_g2_two_loop(const Susy_traces& susy_trac
    beta_g2 = Re(0.2*Power(g2,3)*twoLoop*(-30*traceYdAdjYd - 10*
       traceYeAdjYe - 30*traceYuAdjYu - 10*AbsSqr(Lambdax) + 9*Sqr(g1) + 125*Sqr
       (g2) + 120*Sqr(g3)));
+
+
+   return beta_g2;
+}
+
+/**
+ * Calculates the three-loop beta function of g2.
+ *
+ * @return three-loop beta function
+ */
+double NMSSM_susy_parameters::calc_beta_g2_three_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_g2;
+
+   beta_g2 = 0;
 
 
    return beta_g2;

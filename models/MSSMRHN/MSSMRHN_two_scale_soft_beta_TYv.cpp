@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 18:00:29
+// File generated at Fri 26 Jun 2015 19:14:30
 
 #include "MSSMRHN_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -106,6 +106,25 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_TYv_two_loop(const 
       Yv.adjoint()*TYv*Yv.adjoint()*Yv) - 2*(TYv*Ye.adjoint()*Ye*Ye.adjoint()*
       Ye) - 4*(TYv*Ye.adjoint()*Ye*Yv.adjoint()*Yv) - 6*(TYv*Yv.adjoint()*Yv*
       Yv.adjoint()*Yv))).real();
+
+
+   return beta_TYv;
+}
+
+/**
+ * Calculates the three-loop beta function of TYv.
+ *
+ * @return three-loop beta function
+ */
+Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_TYv_three_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_TYv;
+
+   beta_TYv = ZEROMATRIX(3,3);
 
 
    return beta_TYv;

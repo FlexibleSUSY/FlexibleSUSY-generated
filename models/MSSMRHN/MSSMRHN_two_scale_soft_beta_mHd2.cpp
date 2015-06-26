@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 18:00:34
+// File generated at Fri 26 Jun 2015 19:14:35
 
 #include "MSSMRHN_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -161,6 +161,25 @@ double MSSMRHN_soft_parameters::calc_beta_mHd2_two_loop(const Soft_traces& soft_
       tracemd2YdAdjYd*Sqr(g3) + 80*tracemq2AdjYdYd*Sqr(g3) - 80*traceAdjYdTYd*
       Conj(MassG)*Sqr(g3) + traceYdAdjYd*(-2*mHd2*Sqr(g1) + 80*mHd2*Sqr(g3) +
       160*AbsSqr(MassG)*Sqr(g3)))));
+
+
+   return beta_mHd2;
+}
+
+/**
+ * Calculates the three-loop beta function of mHd2.
+ *
+ * @return three-loop beta function
+ */
+double MSSMRHN_soft_parameters::calc_beta_mHd2_three_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_mHd2;
+
+   beta_mHd2 = 0;
 
 
    return beta_mHd2;

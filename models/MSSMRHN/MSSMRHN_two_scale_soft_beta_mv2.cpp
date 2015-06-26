@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 18:00:38
+// File generated at Fri 26 Jun 2015 19:14:39
 
 #include "MSSMRHN_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -98,6 +98,25 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_mv2_two_loop(const 
       ()) + 5*(Yv*Ye.adjoint()*Ye*Yv.adjoint()*mv2) + 10*(Yv*Yv.adjoint()*mv2*
       Yv*Yv.adjoint()) + 10*(Yv*Yv.adjoint()*Yv*ml2*Yv.adjoint()) + 5*(Yv*
       Yv.adjoint()*Yv*Yv.adjoint()*mv2)))).real();
+
+
+   return beta_mv2;
+}
+
+/**
+ * Calculates the three-loop beta function of mv2.
+ *
+ * @return three-loop beta function
+ */
+Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_mv2_three_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_mv2;
+
+   beta_mv2 = ZEROMATRIX(3,3);
 
 
    return beta_mv2;

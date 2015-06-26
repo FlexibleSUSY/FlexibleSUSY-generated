@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:56:12
+// File generated at Fri 26 Jun 2015 19:09:58
 
 #include "lowNMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -61,6 +61,25 @@ double lowNMSSM_susy_parameters::calc_beta_vS_two_loop(const Susy_traces& susy_t
       AbsSqr(Lambdax)*(15*traceYdAdjYd + 5*traceYeAdjYe + 15*traceYuAdjYu + 10*
       AbsSqr(Lambdax) - 3*Sqr(g1) - 15*Sqr(g2)) + 8*vS*Sqr(Conj(Kappa))*Sqr(
       Kappa)));
+
+
+   return beta_vS;
+}
+
+/**
+ * Calculates the three-loop beta function of vS.
+ *
+ * @return three-loop beta function
+ */
+double lowNMSSM_susy_parameters::calc_beta_vS_three_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_vS;
+
+   beta_vS = 0;
 
 
    return beta_vS;

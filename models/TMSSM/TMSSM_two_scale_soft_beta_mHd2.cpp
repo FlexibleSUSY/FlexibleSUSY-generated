@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:42:34
+// File generated at Fri 26 Jun 2015 18:58:02
 
 #include "TMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -157,6 +157,25 @@ double TMSSM_soft_parameters::calc_beta_mHd2_two_loop(const Soft_traces& soft_tr
       Lambdax))*Sqr(Lambdax) + 0.6*Conj(MassWB)*Sqr(g2)*(3*(MassB + 2*MassWB)*
       Sqr(g1) + 115*MassWB*Sqr(g2) + 20*Conj(Lambdax)*(2*MassWB*Lambdax -
       TLambdax)) - 9*traceconjTYuTpYu*Conj(Lambdax)*TLambdax));
+
+
+   return beta_mHd2;
+}
+
+/**
+ * Calculates the three-loop beta function of mHd2.
+ *
+ * @return three-loop beta function
+ */
+double TMSSM_soft_parameters::calc_beta_mHd2_three_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_mHd2;
+
+   beta_mHd2 = 0;
 
 
    return beta_mHd2;

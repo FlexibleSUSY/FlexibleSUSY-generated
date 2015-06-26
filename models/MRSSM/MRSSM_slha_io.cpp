@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:44:00
+// File generated at Fri 26 Jun 2015 18:59:19
 
 #include "MRSSM_slha_io.hpp"
 #include "MRSSM_input_parameters.hpp"
@@ -139,6 +139,8 @@ void MRSSM_slha_io::set_mass(const MRSSM_physical& physical,
 
    mass << "Block MASS\n"
       << FORMAT_MASS(24, LOCALPHYSICAL(MVWm), "VWm")
+      << FORMAT_MASS(404, LOCALPHYSICAL(MSRdp), "SRdp")
+      << FORMAT_MASS(403, LOCALPHYSICAL(MSRum), "SRum")
       << FORMAT_MASS(1000021, LOCALPHYSICAL(MGlu), "Glu")
       << FORMAT_MASS(3000022, LOCALPHYSICAL(MsigmaO), "sigmaO")
       << FORMAT_MASS(3000021, LOCALPHYSICAL(MphiO), "phiO")
@@ -148,8 +150,6 @@ void MRSSM_slha_io::set_mass(const MRSSM_physical& physical,
       << FORMAT_MASS(1000037, LOCALPHYSICAL(MCha1(1)), "Cha1(2)")
       << FORMAT_MASS(401, LOCALPHYSICAL(MRh(0)), "Rh(1)")
       << FORMAT_MASS(402, LOCALPHYSICAL(MRh(1)), "Rh(2)")
-      << FORMAT_MASS(403, LOCALPHYSICAL(MRpm(0)), "Rpm(1)")
-      << FORMAT_MASS(404, LOCALPHYSICAL(MRpm(1)), "Rpm(2)")
       << FORMAT_MASS(1000012, LOCALPHYSICAL(MSv(0)), "Sv(1)")
       << FORMAT_MASS(1000014, LOCALPHYSICAL(MSv(1)), "Sv(2)")
       << FORMAT_MASS(1000016, LOCALPHYSICAL(MSv(2)), "Sv(3)")
@@ -234,7 +234,6 @@ void MRSSM_slha_io::set_mixing_matrices(const MRSSM_physical& physical,
    slha_io.set_block("N1MIX", LOCALPHYSICAL(ZN1), "ZN1");
    slha_io.set_block("N2MIX", LOCALPHYSICAL(ZN2), "ZN2");
    slha_io.set_block("CHARGEMIX", LOCALPHYSICAL(ZP), "ZP");
-   slha_io.set_block("RPMIX", LOCALPHYSICAL(ZRP), "ZRP");
    slha_io.set_block("USQMIX", LOCALPHYSICAL(ZU), "ZU");
    slha_io.set_block("SNUMIX", LOCALPHYSICAL(ZV), "ZV");
 
@@ -292,6 +291,28 @@ void MRSSM_slha_io::read_from_file(const std::string& file_name)
 {
    slha_io.read_from_file(file_name);
    slha_io.read_modsel();
+}
+
+/**
+ * Read SLHA object from source
+ *
+ * calls SLHA_io::read_from_source()
+ *
+ * @param source source name
+ */
+void MRSSM_slha_io::read_from_source(const std::string& source)
+{
+   slha_io.read_from_source(source);
+}
+
+/**
+ * Read SLHA object from stream
+ *
+ * @param istr stream name
+ */
+void MRSSM_slha_io::read_from_stream(std::istream& istr)
+{
+   slha_io.read_from_stream(istr);
 }
 
 /**
@@ -546,11 +567,6 @@ void MRSSM_slha_io::fill_physical(MRSSM_physical& physical) const
       LOCALPHYSICAL(ZHR) = ZHR;
    }
    {
-      DEFINE_PHYSICAL_PARAMETER(ZRP);
-      slha_io.read_block("RPMIX", ZRP);
-      LOCALPHYSICAL(ZRP) = ZRP;
-   }
-   {
       DEFINE_PHYSICAL_PARAMETER(ZN1);
       slha_io.read_block("N1MIX", ZN1);
       LOCALPHYSICAL(ZN1) = ZN1;
@@ -586,6 +602,8 @@ void MRSSM_slha_io::fill_physical(MRSSM_physical& physical) const
    LOCALPHYSICAL(MFv)(0) = slha_io.read_entry("MASS", 12);
    LOCALPHYSICAL(MFv)(1) = slha_io.read_entry("MASS", 14);
    LOCALPHYSICAL(MFv)(2) = slha_io.read_entry("MASS", 16);
+   LOCALPHYSICAL(MSRdp) = slha_io.read_entry("MASS", 404);
+   LOCALPHYSICAL(MSRum) = slha_io.read_entry("MASS", 403);
    LOCALPHYSICAL(MsigmaO) = slha_io.read_entry("MASS", 3000022);
    LOCALPHYSICAL(MphiO) = slha_io.read_entry("MASS", 3000021);
    LOCALPHYSICAL(MVP) = slha_io.read_entry("MASS", 22);
@@ -623,8 +641,6 @@ void MRSSM_slha_io::fill_physical(MRSSM_physical& physical) const
    LOCALPHYSICAL(MHpm)(1) = slha_io.read_entry("MASS", 37);
    LOCALPHYSICAL(MHpm)(2) = slha_io.read_entry("MASS", 47);
    LOCALPHYSICAL(MHpm)(3) = slha_io.read_entry("MASS", 57);
-   LOCALPHYSICAL(MRpm)(0) = slha_io.read_entry("MASS", 403);
-   LOCALPHYSICAL(MRpm)(1) = slha_io.read_entry("MASS", 404);
    LOCALPHYSICAL(MChi)(0) = slha_io.read_entry("MASS", 1000022);
    LOCALPHYSICAL(MChi)(1) = slha_io.read_entry("MASS", 1000023);
    LOCALPHYSICAL(MChi)(2) = slha_io.read_entry("MASS", 1000025);

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 18:07:06
+// File generated at Fri 26 Jun 2015 19:20:49
 
 #include "MSSMatMGUT_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -64,6 +64,25 @@ double MSSMatMGUT_soft_parameters::calc_beta_MassB_two_loop(const Soft_traces& s
       traceAdjYeTYe + 130*traceAdjYuTYu - 70*MassB*traceYdAdjYd - 90*MassB*
       traceYeAdjYe - 130*MassB*traceYuAdjYu + 398*MassB*Sqr(g1) + 135*MassB*Sqr
       (g2) + 135*MassWB*Sqr(g2) + 440*MassB*Sqr(g3) + 440*MassG*Sqr(g3)));
+
+
+   return beta_MassB;
+}
+
+/**
+ * Calculates the three-loop beta function of MassB.
+ *
+ * @return three-loop beta function
+ */
+double MSSMatMGUT_soft_parameters::calc_beta_MassB_three_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MassB;
+
+   beta_MassB = 0;
 
 
    return beta_MassB;

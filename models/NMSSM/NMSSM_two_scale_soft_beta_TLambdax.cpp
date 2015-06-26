@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:58:29
+// File generated at Fri 26 Jun 2015 19:14:21
 
 #include "NMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -101,6 +101,25 @@ double NMSSM_soft_parameters::calc_beta_TLambdax_two_loop(const Soft_traces& sof
       *MassWB*Sqr(g2)) + (45*traceYdAdjYd + 15*traceYeAdjYe + 45*traceYuAdjYu -
       6*Sqr(g1) - 30*Sqr(g2))*TLambdax + 20*Conj(Kappa)*(2*Lambdax*TKappa + 3*
       Kappa*TLambdax))));
+
+
+   return beta_TLambdax;
+}
+
+/**
+ * Calculates the three-loop beta function of TLambdax.
+ *
+ * @return three-loop beta function
+ */
+double NMSSM_soft_parameters::calc_beta_TLambdax_three_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_TLambdax;
+
+   beta_TLambdax = 0;
 
 
    return beta_TLambdax;

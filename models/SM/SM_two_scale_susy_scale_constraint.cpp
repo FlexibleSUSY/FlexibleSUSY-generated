@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:41:21
+// File generated at Fri 26 Jun 2015 18:57:02
 
 #include "SM_two_scale_susy_scale_constraint.hpp"
 #include "SM_two_scale_model.hpp"
@@ -123,7 +123,9 @@ void SM_susy_scale_constraint<Two_scale>::initialize()
    assert(model && "SM_susy_scale_constraint<Two_scale>::"
           "initialize(): model pointer is zero.");
 
-   initial_scale_guess = 1000;
+   const auto Qin = INPUTPARAMETER(Qin);
+
+   initial_scale_guess = Qin;
 
    scale = initial_scale_guess;
 }
@@ -133,9 +135,9 @@ void SM_susy_scale_constraint<Two_scale>::update_scale()
    assert(model && "SM_susy_scale_constraint<Two_scale>::"
           "update_scale(): model pointer is zero.");
 
-   const auto v = MODELPARAMETER(v);
+   const auto Qin = INPUTPARAMETER(Qin);
 
-   scale = v;
+   scale = Qin;
 
 
 }

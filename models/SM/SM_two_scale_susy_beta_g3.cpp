@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 17:41:15
+// File generated at Fri 26 Jun 2015 18:56:58
 
 #include "SM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -58,6 +58,28 @@ double SM_susy_parameters::calc_beta_g3_two_loop(const Susy_traces& susy_traces)
 
    beta_g3 = Re(-0.1*Power(g3,3)*twoLoop*(20*traceYdAdjYd + 20*
       traceYuAdjYu - 11*Sqr(g1) - 45*Sqr(g2) + 260*Sqr(g3)));
+
+
+   return beta_g3;
+}
+
+/**
+ * Calculates the three-loop beta function of g3.
+ *
+ * @return three-loop beta function
+ */
+double SM_susy_parameters::calc_beta_g3_three_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_g3;
+
+   beta_g3 = Re(0.008333333333333333*Power(g3,3)*threeLoop*(-523*Power(g1
+      ,4) + Sqr(g1)*(-9*Sqr(g2) + 616*Sqr(g3) - 303*Sqr(Yu(2,2))) + 15*(109*
+      Power(g2,4) + 3*Sqr(g2)*(56*Sqr(g3) - 31*Sqr(Yu(2,2))) + 20*(13*Power(g3,
+      4) - 16*Sqr(g3)*Sqr(Yu(2,2)) + 6*Power(Yu(2,2),4)))));
 
 
    return beta_g3;

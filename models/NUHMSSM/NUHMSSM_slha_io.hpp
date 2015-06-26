@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 8 Jun 2015 18:02:27
+// File generated at Fri 26 Jun 2015 19:16:48
 
 #ifndef NUHMSSM_SLHA_IO_H
 #define NUHMSSM_SLHA_IO_H
@@ -65,6 +65,8 @@ public:
    double get_parameter_output_scale() const;
    const SLHA_io& get_slha_io() const { return slha_io; }
    void read_from_file(const std::string&);
+   void read_from_source(const std::string&);
+   void read_from_stream(std::istream&);
    void set_extpar(const NUHMSSM_input_parameters&);
    template <class T> void set_extra(const NUHMSSM_slha<T>&, const NUHMSSM_scales&);
    void set_minpar(const NUHMSSM_input_parameters&);
