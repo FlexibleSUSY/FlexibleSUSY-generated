@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 26 Jun 2015 19:01:50
+// File generated at Tue 7 Jul 2015 12:34:45
 
 #ifndef MRSSM_SPECTRUM_GENERATOR_INTERFACE_H
 #define MRSSM_SPECTRUM_GENERATOR_INTERFACE_H

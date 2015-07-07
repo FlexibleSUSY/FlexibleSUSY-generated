@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 26 Jun 2015 19:18:11
+// File generated at Tue 7 Jul 2015 13:54:18
 
 #include "CMSSMNoFV_two_scale_low_scale_constraint.hpp"
 #include "CMSSMNoFV_two_scale_model.hpp"
@@ -388,24 +388,24 @@ double CMSSMNoFV_low_scale_constraint<Two_scale>::calculate_delta_alpha_em(doubl
    const auto MSu = MODELPARAMETER(MSu);
    const auto MFt = MODELPARAMETER(MFt);
 
-   const double delta_alpha_em_SM = 0.15915494309189535*alphaEm*(
-      0.3333333333333333 - 1.7777777777777777*FiniteLog(Abs(MFt/currentScale)));
+   const double delta_alpha_em_SM = -0.28294212105225836*alphaEm*FiniteLog(Abs(
+      MFt/currentScale));
 
    const double delta_alpha_em = 0.15915494309189535*alphaEm*(
-      -1.3333333333333333*FiniteLog(Abs(MCha(0)/currentScale)) -
-      1.3333333333333333*FiniteLog(Abs(MCha(1)/currentScale)) - 0.3333333333333333
-      *FiniteLog(Abs(MHpm(1)/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSb
-      (0)/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSb(1)/currentScale))
-      - 0.4444444444444444*FiniteLog(Abs(MSc(0)/currentScale)) -
-      0.4444444444444444*FiniteLog(Abs(MSc(1)/currentScale)) - 0.1111111111111111*
-      FiniteLog(Abs(MSd(0)/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(1
-      )/currentScale)) - 0.3333333333333333*FiniteLog(Abs(MSe(0)/currentScale)) -
-      0.3333333333333333*FiniteLog(Abs(MSe(1)/currentScale)) - 0.3333333333333333*
-      FiniteLog(Abs(MSm(0)/currentScale)) - 0.3333333333333333*FiniteLog(Abs(MSm(1
-      )/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSs(0)/currentScale)) -
-      0.1111111111111111*FiniteLog(Abs(MSs(1)/currentScale)) - 0.4444444444444444*
-      FiniteLog(Abs(MSt(0)/currentScale)) - 0.4444444444444444*FiniteLog(Abs(MSt(1
-      )/currentScale)) - 0.3333333333333333*FiniteLog(Abs(MStau(0)/currentScale))
+      0.3333333333333333 - 1.3333333333333333*FiniteLog(Abs(MCha(0)/currentScale))
+      - 1.3333333333333333*FiniteLog(Abs(MCha(1)/currentScale)) -
+      0.3333333333333333*FiniteLog(Abs(MHpm(1)/currentScale)) - 0.1111111111111111
+      *FiniteLog(Abs(MSb(0)/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSb(
+      1)/currentScale)) - 0.4444444444444444*FiniteLog(Abs(MSc(0)/currentScale)) -
+      0.4444444444444444*FiniteLog(Abs(MSc(1)/currentScale)) - 0.1111111111111111
+      *FiniteLog(Abs(MSd(0)/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(
+      1)/currentScale)) - 0.3333333333333333*FiniteLog(Abs(MSe(0)/currentScale)) -
+      0.3333333333333333*FiniteLog(Abs(MSe(1)/currentScale)) - 0.3333333333333333
+      *FiniteLog(Abs(MSm(0)/currentScale)) - 0.3333333333333333*FiniteLog(Abs(MSm(
+      1)/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSs(0)/currentScale)) -
+      0.1111111111111111*FiniteLog(Abs(MSs(1)/currentScale)) - 0.4444444444444444
+      *FiniteLog(Abs(MSt(0)/currentScale)) - 0.4444444444444444*FiniteLog(Abs(MSt(
+      1)/currentScale)) - 0.3333333333333333*FiniteLog(Abs(MStau(0)/currentScale))
       - 0.3333333333333333*FiniteLog(Abs(MStau(1)/currentScale)) -
       0.4444444444444444*FiniteLog(Abs(MSu(0)/currentScale)) - 0.4444444444444444*
       FiniteLog(Abs(MSu(1)/currentScale)));

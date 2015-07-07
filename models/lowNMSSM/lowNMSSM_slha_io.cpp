@@ -16,10 +16,11 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 26 Jun 2015 19:10:22
+// File generated at Tue 7 Jul 2015 13:13:32
 
 #include "lowNMSSM_slha_io.hpp"
 #include "lowNMSSM_input_parameters.hpp"
+#include "lowNMSSM_info.hpp"
 #include "logger.hpp"
 #include "wrappers.hpp"
 #include "numerics2.hpp"
@@ -148,6 +149,9 @@ void lowNMSSM_slha_io::set_spinfo(const Problems<lowNMSSM_info::NUMBER_OF_PARTIC
       spinfo << FORMAT_SPINFO(4, problems_str.str());
    }
 
+   spinfo << FORMAT_SPINFO(5, lowNMSSM_info::model_name)
+          << FORMAT_SPINFO(9, SARAH_VERSION);
+
    slha_io.set_block(spinfo, SLHA_io::front);
 }
 
@@ -205,11 +209,9 @@ void lowNMSSM_slha_io::set_mass(const lowNMSSM_physical& physical,
 
    if (write_sm_masses) {
       mass
-         << FORMAT_MASS(21, LOCALPHYSICAL(MVG), "VG")
          << FORMAT_MASS(12, LOCALPHYSICAL(MFv(0)), "Fv(1)")
          << FORMAT_MASS(14, LOCALPHYSICAL(MFv(1)), "Fv(2)")
          << FORMAT_MASS(16, LOCALPHYSICAL(MFv(2)), "Fv(3)")
-         << FORMAT_MASS(22, LOCALPHYSICAL(MVP), "VP")
          << FORMAT_MASS(23, LOCALPHYSICAL(MVZ), "VZ")
          << FORMAT_MASS(11, LOCALPHYSICAL(MFe(0)), "Fe(1)")
          << FORMAT_MASS(13, LOCALPHYSICAL(MFe(1)), "Fe(2)")
@@ -220,6 +222,8 @@ void lowNMSSM_slha_io::set_mass(const lowNMSSM_physical& physical,
          << FORMAT_MASS(2, LOCALPHYSICAL(MFu(0)), "Fu(1)")
          << FORMAT_MASS(4, LOCALPHYSICAL(MFu(1)), "Fu(2)")
          << FORMAT_MASS(6, LOCALPHYSICAL(MFu(2)), "Fu(3)")
+         << FORMAT_MASS(21, LOCALPHYSICAL(MVG), "VG")
+         << FORMAT_MASS(22, LOCALPHYSICAL(MVP), "VP")
       ;
    }
 
@@ -315,6 +319,7 @@ void lowNMSSM_slha_io::read_from_file(const std::string& file_name)
 void lowNMSSM_slha_io::read_from_source(const std::string& source)
 {
    slha_io.read_from_source(source);
+   slha_io.read_modsel();
 }
 
 /**
@@ -459,7 +464,7 @@ void lowNMSSM_slha_io::fill_minpar_tuple(lowNMSSM_input_parameters& input,
                                                 int key, double value)
 {
    switch (key) {
-   default: WARNING("Unrecognized key: " << key); break;
+   default: WARNING("Unrecognized entry in block MINPAR: " << key); break;
    }
 
 }
@@ -496,7 +501,7 @@ void lowNMSSM_slha_io::fill_extpar_tuple(lowNMSSM_input_parameters& input,
    case 63: input.ALambdaInput = value; break;
    case 64: input.AKappaInput = value; break;
    case 65: input.MuEffInput = value; break;
-   default: WARNING("Unrecognized key: " << key); break;
+   default: WARNING("Unrecognized entry in block EXTPAR: " << key); break;
    }
 
 }
@@ -507,7 +512,7 @@ void lowNMSSM_slha_io::fill_flexiblesusy_tuple(Spectrum_generator_settings& sett
    if (0 <= key && key < static_cast<int>(Spectrum_generator_settings::NUMBER_OF_OPTIONS)) {
       settings.set((Spectrum_generator_settings::Settings)key, value);
    } else {
-      WARNING("Unrecognized key in block FlexibleSUSY: " << key);
+      WARNING("Unrecognized entry in block FlexibleSUSY: " << key);
    }
 }
 
@@ -597,12 +602,10 @@ void lowNMSSM_slha_io::fill_physical(lowNMSSM_physical& physical) const
       LOCALPHYSICAL(ZUR) = ZUR;
    }
 
-   LOCALPHYSICAL(MVG) = slha_io.read_entry("MASS", 21);
    LOCALPHYSICAL(MGlu) = slha_io.read_entry("MASS", 1000021);
    LOCALPHYSICAL(MFv)(0) = slha_io.read_entry("MASS", 12);
    LOCALPHYSICAL(MFv)(1) = slha_io.read_entry("MASS", 14);
    LOCALPHYSICAL(MFv)(2) = slha_io.read_entry("MASS", 16);
-   LOCALPHYSICAL(MVP) = slha_io.read_entry("MASS", 22);
    LOCALPHYSICAL(MVZ) = slha_io.read_entry("MASS", 23);
    LOCALPHYSICAL(MSd)(0) = slha_io.read_entry("MASS", 1000001);
    LOCALPHYSICAL(MSd)(1) = slha_io.read_entry("MASS", 1000003);
@@ -647,6 +650,8 @@ void lowNMSSM_slha_io::fill_physical(lowNMSSM_physical& physical) const
    LOCALPHYSICAL(MFu)(0) = slha_io.read_entry("MASS", 2);
    LOCALPHYSICAL(MFu)(1) = slha_io.read_entry("MASS", 4);
    LOCALPHYSICAL(MFu)(2) = slha_io.read_entry("MASS", 6);
+   LOCALPHYSICAL(MVG) = slha_io.read_entry("MASS", 21);
+   LOCALPHYSICAL(MVP) = slha_io.read_entry("MASS", 22);
    LOCALPHYSICAL(MVWm) = slha_io.read_entry("MASS", 24);
 
 }

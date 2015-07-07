@@ -16,16 +16,17 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 26 Jun 2015 19:08:46
+// File generated at Tue 7 Jul 2015 12:58:21
 
 /**
  * @file UMSSM_mass_eigenstates.hpp
+ *
  * @brief contains class for model with routines needed to solve boundary
- *        value problem using the two_scale solver by solvingt EWSB
+ *        value problem using the two_scale solver by solving EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Fri 26 Jun 2015 19:08:46 with FlexibleSUSY
- * 1.2.0 (git commit: v1.2.0) and SARAH 4.5.8 .
+ * This file was generated at Tue 7 Jul 2015 12:58:21 with FlexibleSUSY
+ * 1.2.1 (git commit: v1.2.1) and SARAH 4.5.8 .
  */
 
 #ifndef UMSSM_IMODEL_H
@@ -101,11 +102,9 @@ public:
 
    double get_lsp(UMSSM_info::Particles&) const;
 
-   double get_MVG() const { return MVG; }
    double get_MGlu() const { return MGlu; }
    const Eigen::Array<double,3,1>& get_MFv() const { return MFv; }
    double get_MFv(int i) const { return MFv(i); }
-   double get_MVP() const { return MVP; }
    double get_MVZ() const { return MVZ; }
    double get_MVZp() const { return MVZp; }
    const Eigen::Array<double,6,1>& get_MSd() const { return MSd; }
@@ -132,6 +131,8 @@ public:
    double get_MFd(int i) const { return MFd(i); }
    const Eigen::Array<double,3,1>& get_MFu() const { return MFu; }
    double get_MFu(int i) const { return MFu(i); }
+   double get_MVG() const { return MVG; }
+   double get_MVP() const { return MVP; }
    double get_MVWm() const { return MVWm; }
 
    
@@ -175,14 +176,10 @@ public:
    void set_PhaseGlu(std::complex<double> PhaseGlu_) { PhaseGlu = PhaseGlu_; }
    std::complex<double> get_PhaseGlu() const { return PhaseGlu; }
 
-   double get_mass_matrix_VG() const;
-   void calculate_MVG();
    double get_mass_matrix_Glu() const;
    void calculate_MGlu();
    Eigen::Matrix<double,3,3> get_mass_matrix_Fv() const;
    void calculate_MFv();
-   double get_mass_matrix_VP() const;
-   void calculate_MVP();
    double get_mass_matrix_VZ() const;
    void calculate_MVZ();
    double get_mass_matrix_VZp() const;
@@ -211,6 +208,10 @@ public:
    void calculate_MFd();
    Eigen::Matrix<double,3,3> get_mass_matrix_Fu() const;
    void calculate_MFu();
+   double get_mass_matrix_VG() const;
+   void calculate_MVG();
+   double get_mass_matrix_VP() const;
+   void calculate_MVP();
    double get_mass_matrix_VWm() const;
    void calculate_MVWm();
 
@@ -748,10 +749,8 @@ public:
 
    void tadpole_hh_2loop(double result[3]) const;
 
-   void calculate_MVG_pole();
    void calculate_MGlu_pole();
    void calculate_MFv_pole();
-   void calculate_MVP_pole();
    void calculate_MVZ_pole();
    void calculate_MVZp_pole();
    void calculate_MSd_pole();
@@ -766,6 +765,8 @@ public:
    void calculate_MFe_pole();
    void calculate_MFd_pole();
    void calculate_MFu_pole();
+   void calculate_MVG_pole();
+   void calculate_MVP_pole();
    void calculate_MVWm_pole();
    double calculate_MVWm_pole(double);
    double calculate_MVZ_pole(double);
@@ -844,10 +845,8 @@ private:
    double G0(double, double, double) const;
 
    // DR-bar masses
-   double MVG;
    double MGlu;
    Eigen::Array<double,3,1> MFv;
-   double MVP;
    double MVZ;
    double MVZp;
    Eigen::Array<double,6,1> MSd;
@@ -862,6 +861,8 @@ private:
    Eigen::Array<double,3,1> MFe;
    Eigen::Array<double,3,1> MFd;
    Eigen::Array<double,3,1> MFu;
+   double MVG;
+   double MVP;
    double MVWm;
 
    // DR-bar mixing matrices

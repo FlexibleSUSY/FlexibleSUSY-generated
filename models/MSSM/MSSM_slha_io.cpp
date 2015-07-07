@@ -16,10 +16,11 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 26 Jun 2015 19:22:17
+// File generated at Tue 7 Jul 2015 14:06:48
 
 #include "MSSM_slha_io.hpp"
 #include "MSSM_input_parameters.hpp"
+#include "MSSM_info.hpp"
 #include "logger.hpp"
 #include "wrappers.hpp"
 #include "numerics2.hpp"
@@ -128,6 +129,9 @@ void MSSM_slha_io::set_spinfo(const Problems<MSSM_info::NUMBER_OF_PARTICLES>& pr
       problems.print_problems(problems_str);
       spinfo << FORMAT_SPINFO(4, problems_str.str());
    }
+
+   spinfo << FORMAT_SPINFO(5, MSSM_info::model_name)
+          << FORMAT_SPINFO(9, SARAH_VERSION);
 
    slha_io.set_block(spinfo, SLHA_io::front);
 }
@@ -293,6 +297,7 @@ void MSSM_slha_io::read_from_file(const std::string& file_name)
 void MSSM_slha_io::read_from_source(const std::string& source)
 {
    slha_io.read_from_source(source);
+   slha_io.read_modsel();
 }
 
 /**
@@ -446,7 +451,7 @@ void MSSM_slha_io::fill_minpar_tuple(MSSM_input_parameters& input,
    switch (key) {
    case 3: input.TanBeta = value; break;
    case 4: input.SignMu = value; break;
-   default: WARNING("Unrecognized key: " << key); break;
+   default: WARNING("Unrecognized entry in block MINPAR: " << key); break;
    }
 
 }
@@ -458,7 +463,7 @@ void MSSM_slha_io::fill_extpar_tuple(MSSM_input_parameters& input,
    case 0: input.Qin = value; break;
    case 21: input.mHd2IN = value; break;
    case 22: input.mHu2IN = value; break;
-   default: WARNING("Unrecognized key: " << key); break;
+   default: WARNING("Unrecognized entry in block EXTPAR: " << key); break;
    }
 
 }
@@ -469,7 +474,7 @@ void MSSM_slha_io::fill_flexiblesusy_tuple(Spectrum_generator_settings& settings
    if (0 <= key && key < static_cast<int>(Spectrum_generator_settings::NUMBER_OF_OPTIONS)) {
       settings.set((Spectrum_generator_settings::Settings)key, value);
    } else {
-      WARNING("Unrecognized key in block FlexibleSUSY: " << key);
+      WARNING("Unrecognized entry in block FlexibleSUSY: " << key);
    }
 }
 

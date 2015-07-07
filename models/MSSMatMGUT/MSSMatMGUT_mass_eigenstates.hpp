@@ -16,16 +16,17 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 26 Jun 2015 19:21:26
+// File generated at Tue 7 Jul 2015 14:05:57
 
 /**
  * @file MSSMatMGUT_mass_eigenstates.hpp
+ *
  * @brief contains class for model with routines needed to solve boundary
- *        value problem using the two_scale solver by solvingt EWSB
+ *        value problem using the two_scale solver by solving EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Fri 26 Jun 2015 19:21:26 with FlexibleSUSY
- * 1.2.0 (git commit: v1.2.0) and SARAH 4.5.8 .
+ * This file was generated at Tue 7 Jul 2015 14:05:57 with FlexibleSUSY
+ * 1.2.1 (git commit: v1.2.1) and SARAH 4.5.8 .
  */
 
 #ifndef MSSMatMGUT_IMODEL_H

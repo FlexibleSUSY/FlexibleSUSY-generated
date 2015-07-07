@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 26 Jun 2015 18:57:11
+// File generated at Tue 7 Jul 2015 12:07:16
 
 #ifndef SM_PHYSICAL_H
 #define SM_PHYSICAL_H
@@ -36,16 +36,16 @@ struct SM_physical {
    void convert_to_slha(); ///< converts pole masses to SLHA convention
    void print(std::ostream&) const;
 
-   double MVG;
    double MHp;
    Eigen::Array<double,3,1> MFv;
    double MAh;
    double Mhh;
-   double MVP;
    double MVZ;
    Eigen::Array<double,3,1> MFd;
    Eigen::Array<double,3,1> MFu;
    Eigen::Array<double,3,1> MFe;
+   double MVG;
+   double MVP;
    double MVWp;
 
    Eigen::Matrix<std::complex<double>,3,3> Vd;

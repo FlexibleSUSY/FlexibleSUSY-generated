@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 26 Jun 2015 19:03:31
+// File generated at Tue 7 Jul 2015 12:43:54
 
 #include "E6SSM_info.hpp"
 
@@ -30,22 +30,22 @@ namespace E6SSM_info {
    const double normalization_g3 = 1;
    const double normalization_gN = 1;
 
-   const unsigned particle_multiplicities[NUMBER_OF_PARTICLES] = {1, 1, 3, 1, 1
-      , 1, 1, 6, 3, 6, 6, 6, 3, 3, 2, 6, 2, 3, 3, 3, 3, 4, 4, 2, 4, 2, 2, 2, 2, 2,
+   const unsigned particle_multiplicities[NUMBER_OF_PARTICLES] = {1, 3, 1, 1, 1
+      , 6, 3, 6, 6, 6, 3, 3, 2, 6, 2, 3, 3, 3, 3, 4, 4, 2, 4, 2, 2, 2, 2, 2, 1, 1,
       1};
 
-   const char* particle_names[NUMBER_OF_PARTICLES] = {"VG", "Glu", "Fv", "ChaP"
-      , "VP", "VZ", "VZp", "Sd", "Sv", "Su", "Se", "SDX", "hh", "Ah", "Hpm", "Chi"
-      , "Cha", "Fe", "Fd", "Fu", "FDX", "SHI0", "SHIp", "ChaI", "ChiI", "SSI0",
-      "FSI", "SHp0", "SHpp", "ChiP", "VWm"};
+   const char* particle_names[NUMBER_OF_PARTICLES] = {"Glu", "Fv", "ChaP", "VZ"
+      , "VZp", "Sd", "Sv", "Su", "Se", "SDX", "hh", "Ah", "Hpm", "Chi", "Cha",
+      "Fe", "Fd", "Fu", "FDX", "SHI0", "SHIp", "ChaI", "ChiI", "SSI0", "FSI",
+      "SHp0", "SHpp", "ChiP", "VG", "VP", "VWm"};
 
-   const char* particle_latex_names[NUMBER_OF_PARTICLES] = {   "g",
-      "\\tilde{g}", "\\nu", "\\tilde{\\chi}^{'-}", "\\gamma", "Z", "{Z'}",
-      "\\tilde{d}", "\\tilde{\\nu}", "\\tilde{u}", "\\tilde{e}", "\\tilde{x}", "h"
-      , "A^0", "H^-", "\\tilde{\\chi}^0", "\\tilde{\\chi}^-", "e", "d", "u", "x",
-      "h^{0,Inert}", "h^{-,Inert}", "\\tilde{\\chi}^{-,Inert}",
-      "\\tilde{\\chi}^{0,Inert}", "s^{Inert}", "\\tilde{S}^{Inert}", "H^{'0}",
-      "H^{'-}", "\\tilde{\\chi}^{'0}", "W^-"};
+   const char* particle_latex_names[NUMBER_OF_PARTICLES] = {   "\\tilde{g}",
+      "\\nu", "\\tilde{\\chi}^{'-}", "Z", "{Z'}", "\\tilde{d}", "\\tilde{\\nu}",
+      "\\tilde{u}", "\\tilde{e}", "\\tilde{x}", "h", "A^0", "H^-",
+      "\\tilde{\\chi}^0", "\\tilde{\\chi}^-", "e", "d", "u", "x", "h^{0,Inert}",
+      "h^{-,Inert}", "\\tilde{\\chi}^{-,Inert}", "\\tilde{\\chi}^{0,Inert}",
+      "s^{Inert}", "\\tilde{S}^{Inert}", "H^{'0}", "H^{'-}", "\\tilde{\\chi}^{'0}"
+      , "g", "\\gamma", "W^-"};
 
    const char* parameter_names[NUMBER_OF_PARAMETERS] = {"Yd(0,0)", "Yd(0,1)",
       "Yd(0,2)", "Yd(1,0)", "Yd(1,1)", "Yd(1,2)", "Yd(2,0)", "Yd(2,1)", "Yd(2,2)",

@@ -16,10 +16,11 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 26 Jun 2015 19:15:09
+// File generated at Tue 7 Jul 2015 13:19:16
 
 #include "NMSSM_slha_io.hpp"
 #include "NMSSM_input_parameters.hpp"
+#include "NMSSM_info.hpp"
 #include "logger.hpp"
 #include "wrappers.hpp"
 #include "numerics2.hpp"
@@ -129,6 +130,9 @@ void NMSSM_slha_io::set_spinfo(const Problems<NMSSM_info::NUMBER_OF_PARTICLES>& 
       problems.print_problems(problems_str);
       spinfo << FORMAT_SPINFO(4, problems_str.str());
    }
+
+   spinfo << FORMAT_SPINFO(5, NMSSM_info::model_name)
+          << FORMAT_SPINFO(9, SARAH_VERSION);
 
    slha_io.set_block(spinfo, SLHA_io::front);
 }
@@ -297,6 +301,7 @@ void NMSSM_slha_io::read_from_file(const std::string& file_name)
 void NMSSM_slha_io::read_from_source(const std::string& source)
 {
    slha_io.read_from_source(source);
+   slha_io.read_modsel();
 }
 
 /**
@@ -446,7 +451,7 @@ void NMSSM_slha_io::fill_minpar_tuple(NMSSM_input_parameters& input,
    case 3: input.TanBeta = value; break;
    case 4: input.SignvS = value; break;
    case 5: input.Azero = value; break;
-   default: WARNING("Unrecognized key: " << key); break;
+   default: WARNING("Unrecognized entry in block MINPAR: " << key); break;
    }
 
 }
@@ -456,7 +461,7 @@ void NMSSM_slha_io::fill_extpar_tuple(NMSSM_input_parameters& input,
 {
    switch (key) {
    case 61: input.LambdaInput = value; break;
-   default: WARNING("Unrecognized key: " << key); break;
+   default: WARNING("Unrecognized entry in block EXTPAR: " << key); break;
    }
 
 }
@@ -467,7 +472,7 @@ void NMSSM_slha_io::fill_flexiblesusy_tuple(Spectrum_generator_settings& setting
    if (0 <= key && key < static_cast<int>(Spectrum_generator_settings::NUMBER_OF_OPTIONS)) {
       settings.set((Spectrum_generator_settings::Settings)key, value);
    } else {
-      WARNING("Unrecognized key in block FlexibleSUSY: " << key);
+      WARNING("Unrecognized entry in block FlexibleSUSY: " << key);
    }
 }
 

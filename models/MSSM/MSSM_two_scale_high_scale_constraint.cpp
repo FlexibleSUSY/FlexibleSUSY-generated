@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 26 Jun 2015 19:22:18
+// File generated at Tue 7 Jul 2015 14:06:49
 
 #include "MSSM_two_scale_high_scale_constraint.hpp"
 #include "MSSM_two_scale_model.hpp"
@@ -109,10 +109,12 @@ void MSSM_high_scale_constraint<Two_scale>::apply()
    const auto MassWBInput = INPUTPARAMETER(MassWBInput);
    const auto MassGInput = INPUTPARAMETER(MassGInput);
    const auto Ye = MODELPARAMETER(Ye);
+   const auto Yd = MODELPARAMETER(Yd);
+   const auto Yu = MODELPARAMETER(Yu);
 
    MODEL->set_TYe((Aeij*Ye).real());
-   MODEL->set_TYd((Adij*Ye).real());
-   MODEL->set_TYu((Auij*Ye).real());
+   MODEL->set_TYd((Adij*Yd).real());
+   MODEL->set_TYu((Auij*Yu).real());
    MODEL->set_mHd2(Re(mHd2IN));
    MODEL->set_mHu2(Re(mHu2IN));
    MODEL->set_mq2((mq2Input).real());

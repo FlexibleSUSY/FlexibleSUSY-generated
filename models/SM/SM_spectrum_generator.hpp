@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 26 Jun 2015 18:57:11
+// File generated at Tue 7 Jul 2015 12:07:16
 
 #ifndef SM_SPECTRUM_GENERATOR_H
 #define SM_SPECTRUM_GENERATOR_H

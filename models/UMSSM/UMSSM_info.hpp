@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 26 Jun 2015 19:03:52
+// File generated at Tue 7 Jul 2015 12:46:56
 
 #ifndef UMSSM_INFO_H
 #define UMSSM_INFO_H
@@ -26,8 +26,8 @@
 namespace flexiblesusy {
 
 namespace UMSSM_info {
-   enum Particles : unsigned {VG, Glu, Fv, VP, VZ, VZp, Sd, Sv, Su, Se, hh, Ah,
-      Hpm, Chi, Cha, Fe, Fd, Fu, VWm, NUMBER_OF_PARTICLES};
+   enum Particles : unsigned {Glu, Fv, VZ, VZp, Sd, Sv, Su, Se, hh, Ah, Hpm,
+      Chi, Cha, Fe, Fd, Fu, VG, VP, VWm, NUMBER_OF_PARTICLES};
 
    enum Parameters : unsigned {Yd00, Yd01, Yd02, Yd10, Yd11, Yd12, Yd20, Yd21,
       Yd22, Ye00, Ye01, Ye02, Ye10, Ye11, Ye12, Ye20, Ye21, Ye22, Lambdax, Yu00,

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 26 Jun 2015 19:15:20
+// File generated at Tue 7 Jul 2015 13:27:28
 
 #include "MSSMRHN_physical.hpp"
 #include "slha_io.hpp"
@@ -29,14 +29,14 @@ namespace flexiblesusy {
 
 MSSMRHN_physical::MSSMRHN_physical()
    :
-    MVG(0), MGlu(0), MVP(0), MVZ(0), MSd(Eigen::Array<double,6,1>::Zero()),
-       MSu(Eigen::Array<double,6,1>::Zero()), MSe(Eigen::Array<double,6,1>::Zero()
-       ), MSv(Eigen::Array<double,6,1>::Zero()), Mhh(Eigen::Array<double,2,1>
-       ::Zero()), MAh(Eigen::Array<double,2,1>::Zero()), MHpm(Eigen::Array<double,
-       2,1>::Zero()), MChi(Eigen::Array<double,4,1>::Zero()), MFv(Eigen::Array<
-       double,6,1>::Zero()), MCha(Eigen::Array<double,2,1>::Zero()), MFe(
-       Eigen::Array<double,3,1>::Zero()), MFd(Eigen::Array<double,3,1>::Zero()),
-       MFu(Eigen::Array<double,3,1>::Zero()), MVWm(0)
+    MGlu(0), MVZ(0), MSd(Eigen::Array<double,6,1>::Zero()), MSu(Eigen::Array<
+       double,6,1>::Zero()), MSe(Eigen::Array<double,6,1>::Zero()), MSv(
+       Eigen::Array<double,6,1>::Zero()), Mhh(Eigen::Array<double,2,1>::Zero()),
+       MAh(Eigen::Array<double,2,1>::Zero()), MHpm(Eigen::Array<double,2,1>::Zero(
+       )), MChi(Eigen::Array<double,4,1>::Zero()), MFv(Eigen::Array<double,6,1>
+       ::Zero()), MCha(Eigen::Array<double,2,1>::Zero()), MFe(Eigen::Array<double,
+       3,1>::Zero()), MFd(Eigen::Array<double,3,1>::Zero()), MFu(Eigen::Array<
+       double,3,1>::Zero()), MVG(0), MVP(0), MVWm(0)
 
    , ZD(Eigen::Matrix<double,6,6>::Zero()), ZU(Eigen::Matrix<double,6,6>::Zero(
       )), ZE(Eigen::Matrix<double,6,6>::Zero()), ZV(Eigen::Matrix<double,6,6>
@@ -56,9 +56,7 @@ MSSMRHN_physical::MSSMRHN_physical()
 
 void MSSMRHN_physical::clear()
 {
-   MVG = 0.;
    MGlu = 0.;
-   MVP = 0.;
    MVZ = 0.;
    MSd = Eigen::Matrix<double,6,1>::Zero();
    ZD = Eigen::Matrix<double,6,6>::Zero();
@@ -90,6 +88,8 @@ void MSSMRHN_physical::clear()
    MFu = Eigen::Matrix<double,3,1>::Zero();
    ZUL = Eigen::Matrix<std::complex<double>,3,3>::Zero();
    ZUR = Eigen::Matrix<std::complex<double>,3,3>::Zero();
+   MVG = 0.;
+   MVP = 0.;
    MVWm = 0.;
 
 }
@@ -123,9 +123,7 @@ void MSSMRHN_physical::print(std::ostream& ostr) const
    ostr << "----------------------------------------\n"
            "pole masses:\n"
            "----------------------------------------\n";
-   ostr << "MVG = " << MVG << '\n';
    ostr << "MGlu = " << MGlu << '\n';
-   ostr << "MVP = " << MVP << '\n';
    ostr << "MVZ = " << MVZ << '\n';
    ostr << "MSd = " << MSd.transpose() << '\n';
    ostr << "MSu = " << MSu.transpose() << '\n';
@@ -140,6 +138,8 @@ void MSSMRHN_physical::print(std::ostream& ostr) const
    ostr << "MFe = " << MFe.transpose() << '\n';
    ostr << "MFd = " << MFd.transpose() << '\n';
    ostr << "MFu = " << MFu.transpose() << '\n';
+   ostr << "MVG = " << MVG << '\n';
+   ostr << "MVP = " << MVP << '\n';
    ostr << "MVWm = " << MVWm << '\n';
 
    ostr << "----------------------------------------\n"

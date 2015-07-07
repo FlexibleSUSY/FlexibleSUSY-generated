@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 26 Jun 2015 19:08:46
+// File generated at Tue 7 Jul 2015 12:58:21
 
 #include "UMSSM_physical.hpp"
 #include "slha_io.hpp"
@@ -29,14 +29,14 @@ namespace flexiblesusy {
 
 UMSSM_physical::UMSSM_physical()
    :
-    MVG(0), MGlu(0), MFv(Eigen::Array<double,3,1>::Zero()), MVP(0), MVZ(0),
-       MVZp(0), MSd(Eigen::Array<double,6,1>::Zero()), MSv(Eigen::Array<double,3,1
-       >::Zero()), MSu(Eigen::Array<double,6,1>::Zero()), MSe(Eigen::Array<double,
-       6,1>::Zero()), Mhh(Eigen::Array<double,3,1>::Zero()), MAh(Eigen::Array<
-       double,3,1>::Zero()), MHpm(Eigen::Array<double,2,1>::Zero()), MChi(
-       Eigen::Array<double,6,1>::Zero()), MCha(Eigen::Array<double,2,1>::Zero()),
-       MFe(Eigen::Array<double,3,1>::Zero()), MFd(Eigen::Array<double,3,1>::Zero()
-       ), MFu(Eigen::Array<double,3,1>::Zero()), MVWm(0)
+    MGlu(0), MFv(Eigen::Array<double,3,1>::Zero()), MVZ(0), MVZp(0), MSd(
+       Eigen::Array<double,6,1>::Zero()), MSv(Eigen::Array<double,3,1>::Zero()),
+       MSu(Eigen::Array<double,6,1>::Zero()), MSe(Eigen::Array<double,6,1>::Zero()
+       ), Mhh(Eigen::Array<double,3,1>::Zero()), MAh(Eigen::Array<double,3,1>
+       ::Zero()), MHpm(Eigen::Array<double,2,1>::Zero()), MChi(Eigen::Array<double
+       ,6,1>::Zero()), MCha(Eigen::Array<double,2,1>::Zero()), MFe(Eigen::Array<
+       double,3,1>::Zero()), MFd(Eigen::Array<double,3,1>::Zero()), MFu(
+       Eigen::Array<double,3,1>::Zero()), MVG(0), MVP(0), MVWm(0)
 
    , ZD(Eigen::Matrix<double,6,6>::Zero()), ZV(Eigen::Matrix<double,3,3>::Zero(
       )), ZU(Eigen::Matrix<double,6,6>::Zero()), ZE(Eigen::Matrix<double,6,6>
@@ -55,10 +55,8 @@ UMSSM_physical::UMSSM_physical()
 
 void UMSSM_physical::clear()
 {
-   MVG = 0.;
    MGlu = 0.;
    MFv = Eigen::Matrix<double,3,1>::Zero();
-   MVP = 0.;
    MVZ = 0.;
    MVZp = 0.;
    MSd = Eigen::Matrix<double,6,1>::Zero();
@@ -89,6 +87,8 @@ void UMSSM_physical::clear()
    MFu = Eigen::Matrix<double,3,1>::Zero();
    ZUL = Eigen::Matrix<std::complex<double>,3,3>::Zero();
    ZUR = Eigen::Matrix<std::complex<double>,3,3>::Zero();
+   MVG = 0.;
+   MVP = 0.;
    MVWm = 0.;
 
 }
@@ -120,10 +120,8 @@ void UMSSM_physical::print(std::ostream& ostr) const
    ostr << "----------------------------------------\n"
            "pole masses:\n"
            "----------------------------------------\n";
-   ostr << "MVG = " << MVG << '\n';
    ostr << "MGlu = " << MGlu << '\n';
    ostr << "MFv = " << MFv.transpose() << '\n';
-   ostr << "MVP = " << MVP << '\n';
    ostr << "MVZ = " << MVZ << '\n';
    ostr << "MVZp = " << MVZp << '\n';
    ostr << "MSd = " << MSd.transpose() << '\n';
@@ -138,6 +136,8 @@ void UMSSM_physical::print(std::ostream& ostr) const
    ostr << "MFe = " << MFe.transpose() << '\n';
    ostr << "MFd = " << MFd.transpose() << '\n';
    ostr << "MFu = " << MFu.transpose() << '\n';
+   ostr << "MVG = " << MVG << '\n';
+   ostr << "MVP = " << MVP << '\n';
    ostr << "MVWm = " << MVWm << '\n';
 
    ostr << "----------------------------------------\n"

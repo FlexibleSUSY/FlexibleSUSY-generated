@@ -16,10 +16,11 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 26 Jun 2015 19:20:51
+// File generated at Tue 7 Jul 2015 14:05:22
 
 #include "MSSMatMGUT_slha_io.hpp"
 #include "MSSMatMGUT_input_parameters.hpp"
+#include "MSSMatMGUT_info.hpp"
 #include "logger.hpp"
 #include "wrappers.hpp"
 #include "numerics2.hpp"
@@ -127,6 +128,9 @@ void MSSMatMGUT_slha_io::set_spinfo(const Problems<MSSMatMGUT_info::NUMBER_OF_PA
       problems.print_problems(problems_str);
       spinfo << FORMAT_SPINFO(4, problems_str.str());
    }
+
+   spinfo << FORMAT_SPINFO(5, MSSMatMGUT_info::model_name)
+          << FORMAT_SPINFO(9, SARAH_VERSION);
 
    slha_io.set_block(spinfo, SLHA_io::front);
 }
@@ -292,6 +296,7 @@ void MSSMatMGUT_slha_io::read_from_file(const std::string& file_name)
 void MSSMatMGUT_slha_io::read_from_source(const std::string& source)
 {
    slha_io.read_from_source(source);
+   slha_io.read_modsel();
 }
 
 /**
@@ -445,7 +450,7 @@ void MSSMatMGUT_slha_io::fill_minpar_tuple(MSSMatMGUT_input_parameters& input,
    switch (key) {
    case 3: input.TanBeta = value; break;
    case 4: input.SignMu = value; break;
-   default: WARNING("Unrecognized key: " << key); break;
+   default: WARNING("Unrecognized entry in block MINPAR: " << key); break;
    }
 
 }
@@ -456,7 +461,7 @@ void MSSMatMGUT_slha_io::fill_extpar_tuple(MSSMatMGUT_input_parameters& input,
    switch (key) {
    case 21: input.mHd2IN = value; break;
    case 22: input.mHu2IN = value; break;
-   default: WARNING("Unrecognized key: " << key); break;
+   default: WARNING("Unrecognized entry in block EXTPAR: " << key); break;
    }
 
 }
@@ -467,7 +472,7 @@ void MSSMatMGUT_slha_io::fill_flexiblesusy_tuple(Spectrum_generator_settings& se
    if (0 <= key && key < static_cast<int>(Spectrum_generator_settings::NUMBER_OF_OPTIONS)) {
       settings.set((Spectrum_generator_settings::Settings)key, value);
    } else {
-      WARNING("Unrecognized key in block FlexibleSUSY: " << key);
+      WARNING("Unrecognized entry in block FlexibleSUSY: " << key);
    }
 }
 

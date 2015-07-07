@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 26 Jun 2015 18:59:21
+// File generated at Tue 7 Jul 2015 12:20:54
 
 #include "MRSSM_two_scale_low_scale_constraint.hpp"
 #include "MRSSM_two_scale_model.hpp"
@@ -292,32 +292,32 @@ double MRSSM_low_scale_constraint<Two_scale>::calculate_delta_alpha_em(double al
    const auto MSRdp = MODELPARAMETER(MSRdp);
    const auto MSRum = MODELPARAMETER(MSRum);
 
-   const double delta_alpha_em_SM = 0.15915494309189535*alphaEm*(
-      0.3333333333333333 - 1.7777777777777777*FiniteLog(Abs(MFu(2)/currentScale)))
-      ;
+   const double delta_alpha_em_SM = -0.28294212105225836*alphaEm*FiniteLog(Abs(
+      MFu(2)/currentScale));
 
    const double delta_alpha_em = 0.15915494309189535*alphaEm*(
-      -0.3333333333333333*FiniteLog(Abs(MSRdp/currentScale)) - 0.3333333333333333*
-      FiniteLog(Abs(MSRum/currentScale)) - 1.3333333333333333*FiniteLog(Abs(MCha1(
-      0)/currentScale)) - 1.3333333333333333*FiniteLog(Abs(MCha1(1)/currentScale))
-      - 1.3333333333333333*FiniteLog(Abs(MCha2(0)/currentScale)) -
-      1.3333333333333333*FiniteLog(Abs(MCha2(1)/currentScale)) -
-      0.3333333333333333*FiniteLog(Abs(MHpm(1)/currentScale)) - 0.3333333333333333
-      *FiniteLog(Abs(MHpm(2)/currentScale)) - 0.3333333333333333*FiniteLog(Abs(
-      MHpm(3)/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(0)
-      /currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(1)/currentScale)) -
-      0.1111111111111111*FiniteLog(Abs(MSd(2)/currentScale)) - 0.1111111111111111*
-      FiniteLog(Abs(MSd(3)/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(4
-      )/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(5)/currentScale)) -
-      0.3333333333333333*FiniteLog(Abs(MSe(0)/currentScale)) - 0.3333333333333333*
-      FiniteLog(Abs(MSe(1)/currentScale)) - 0.3333333333333333*FiniteLog(Abs(MSe(2
-      )/currentScale)) - 0.3333333333333333*FiniteLog(Abs(MSe(3)/currentScale)) -
-      0.3333333333333333*FiniteLog(Abs(MSe(4)/currentScale)) - 0.3333333333333333*
-      FiniteLog(Abs(MSe(5)/currentScale)) - 0.4444444444444444*FiniteLog(Abs(MSu(0
-      )/currentScale)) - 0.4444444444444444*FiniteLog(Abs(MSu(1)/currentScale)) -
-      0.4444444444444444*FiniteLog(Abs(MSu(2)/currentScale)) - 0.4444444444444444*
-      FiniteLog(Abs(MSu(3)/currentScale)) - 0.4444444444444444*FiniteLog(Abs(MSu(4
-      )/currentScale)) - 0.4444444444444444*FiniteLog(Abs(MSu(5)/currentScale)));
+      0.3333333333333333 - 0.3333333333333333*FiniteLog(Abs(MSRdp/currentScale)) -
+      0.3333333333333333*FiniteLog(Abs(MSRum/currentScale)) - 1.3333333333333333*
+      FiniteLog(Abs(MCha1(0)/currentScale)) - 1.3333333333333333*FiniteLog(Abs(
+      MCha1(1)/currentScale)) - 1.3333333333333333*FiniteLog(Abs(MCha2(0)
+      /currentScale)) - 1.3333333333333333*FiniteLog(Abs(MCha2(1)/currentScale)) -
+      0.3333333333333333*FiniteLog(Abs(MHpm(1)/currentScale)) -
+      0.3333333333333333*FiniteLog(Abs(MHpm(2)/currentScale)) - 0.3333333333333333
+      *FiniteLog(Abs(MHpm(3)/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd
+      (0)/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(1)/currentScale))
+      - 0.1111111111111111*FiniteLog(Abs(MSd(2)/currentScale)) -
+      0.1111111111111111*FiniteLog(Abs(MSd(3)/currentScale)) - 0.1111111111111111*
+      FiniteLog(Abs(MSd(4)/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(5
+      )/currentScale)) - 0.3333333333333333*FiniteLog(Abs(MSe(0)/currentScale)) -
+      0.3333333333333333*FiniteLog(Abs(MSe(1)/currentScale)) - 0.3333333333333333*
+      FiniteLog(Abs(MSe(2)/currentScale)) - 0.3333333333333333*FiniteLog(Abs(MSe(3
+      )/currentScale)) - 0.3333333333333333*FiniteLog(Abs(MSe(4)/currentScale)) -
+      0.3333333333333333*FiniteLog(Abs(MSe(5)/currentScale)) - 0.4444444444444444*
+      FiniteLog(Abs(MSu(0)/currentScale)) - 0.4444444444444444*FiniteLog(Abs(MSu(1
+      )/currentScale)) - 0.4444444444444444*FiniteLog(Abs(MSu(2)/currentScale)) -
+      0.4444444444444444*FiniteLog(Abs(MSu(3)/currentScale)) - 0.4444444444444444*
+      FiniteLog(Abs(MSu(4)/currentScale)) - 0.4444444444444444*FiniteLog(Abs(MSu(5
+      )/currentScale)));
 
    return delta_alpha_em + delta_alpha_em_SM;
 

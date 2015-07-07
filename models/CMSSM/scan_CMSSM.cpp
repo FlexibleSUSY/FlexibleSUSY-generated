@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 26 Jun 2015 19:23:16
+// File generated at Tue 7 Jul 2015 14:07:42
 
 #include "CMSSM_input_parameters.hpp"
 #include "CMSSM_spectrum_generator.hpp"

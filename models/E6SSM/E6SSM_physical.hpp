@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 26 Jun 2015 19:08:55
+// File generated at Tue 7 Jul 2015 13:11:52
 
 #ifndef E6SSM_PHYSICAL_H
 #define E6SSM_PHYSICAL_H
@@ -36,11 +36,9 @@ struct E6SSM_physical {
    void convert_to_slha(); ///< converts pole masses to SLHA convention
    void print(std::ostream&) const;
 
-   double MVG;
    double MGlu;
    Eigen::Array<double,3,1> MFv;
    double MChaP;
-   double MVP;
    double MVZ;
    double MVZp;
    Eigen::Array<double,6,1> MSd;
@@ -66,6 +64,8 @@ struct E6SSM_physical {
    Eigen::Array<double,2,1> MSHp0;
    Eigen::Array<double,2,1> MSHpp;
    Eigen::Array<double,2,1> MChiP;
+   double MVG;
+   double MVP;
    double MVWm;
 
    Eigen::Matrix<double,6,6> ZD;

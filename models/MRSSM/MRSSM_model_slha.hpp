@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 26 Jun 2015 18:59:21
+// File generated at Tue 7 Jul 2015 12:32:12
 
 #ifndef MRSSM_SLHA_H
 #define MRSSM_SLHA_H

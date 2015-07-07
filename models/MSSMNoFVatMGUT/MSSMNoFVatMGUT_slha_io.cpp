@@ -16,10 +16,11 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 26 Jun 2015 19:18:48
+// File generated at Tue 7 Jul 2015 13:55:01
 
 #include "MSSMNoFVatMGUT_slha_io.hpp"
 #include "MSSMNoFVatMGUT_input_parameters.hpp"
+#include "MSSMNoFVatMGUT_info.hpp"
 #include "logger.hpp"
 #include "wrappers.hpp"
 #include "numerics2.hpp"
@@ -155,6 +156,9 @@ void MSSMNoFVatMGUT_slha_io::set_spinfo(const Problems<MSSMNoFVatMGUT_info::NUMB
       spinfo << FORMAT_SPINFO(4, problems_str.str());
    }
 
+   spinfo << FORMAT_SPINFO(5, MSSMNoFVatMGUT_info::model_name)
+          << FORMAT_SPINFO(9, SARAH_VERSION);
+
    slha_io.set_block(spinfo, SLHA_io::front);
 }
 
@@ -209,8 +213,6 @@ void MSSMNoFVatMGUT_slha_io::set_mass(const MSSMNoFVatMGUT_physical& physical,
 
    if (write_sm_masses) {
       mass
-         << FORMAT_MASS(21, LOCALPHYSICAL(MVG), "VG")
-         << FORMAT_MASS(22, LOCALPHYSICAL(MVP), "VP")
          << FORMAT_MASS(23, LOCALPHYSICAL(MVZ), "VZ")
          << FORMAT_MASS(1, LOCALPHYSICAL(MFd), "Fd")
          << FORMAT_MASS(3, LOCALPHYSICAL(MFs), "Fs")
@@ -224,6 +226,8 @@ void MSSMNoFVatMGUT_slha_io::set_mass(const MSSMNoFVatMGUT_physical& physical,
          << FORMAT_MASS(11, LOCALPHYSICAL(MFe), "Fe")
          << FORMAT_MASS(13, LOCALPHYSICAL(MFm), "Fm")
          << FORMAT_MASS(15, LOCALPHYSICAL(MFtau), "Ftau")
+         << FORMAT_MASS(21, LOCALPHYSICAL(MVG), "VG")
+         << FORMAT_MASS(22, LOCALPHYSICAL(MVP), "VP")
       ;
    }
 
@@ -318,6 +322,7 @@ void MSSMNoFVatMGUT_slha_io::read_from_file(const std::string& file_name)
 void MSSMNoFVatMGUT_slha_io::read_from_source(const std::string& source)
 {
    slha_io.read_from_source(source);
+   slha_io.read_modsel();
 }
 
 /**
@@ -460,7 +465,7 @@ void MSSMNoFVatMGUT_slha_io::fill_minpar_tuple(MSSMNoFVatMGUT_input_parameters& 
    switch (key) {
    case 3: input.TanBeta = value; break;
    case 4: input.SignMu = value; break;
-   default: WARNING("Unrecognized key: " << key); break;
+   default: WARNING("Unrecognized entry in block MINPAR: " << key); break;
    }
 
 }
@@ -498,7 +503,7 @@ void MSSMNoFVatMGUT_slha_io::fill_extpar_tuple(MSSMNoFVatMGUT_input_parameters& 
    case 47: input.md11IN = value; break;
    case 48: input.md22IN = value; break;
    case 49: input.md33IN = value; break;
-   default: WARNING("Unrecognized key: " << key); break;
+   default: WARNING("Unrecognized entry in block EXTPAR: " << key); break;
    }
 
 }
@@ -509,7 +514,7 @@ void MSSMNoFVatMGUT_slha_io::fill_flexiblesusy_tuple(Spectrum_generator_settings
    if (0 <= key && key < static_cast<int>(Spectrum_generator_settings::NUMBER_OF_OPTIONS)) {
       settings.set((Spectrum_generator_settings::Settings)key, value);
    } else {
-      WARNING("Unrecognized key in block FlexibleSUSY: " << key);
+      WARNING("Unrecognized entry in block FlexibleSUSY: " << key);
    }
 }
 
@@ -594,9 +599,7 @@ void MSSMNoFVatMGUT_slha_io::fill_physical(MSSMNoFVatMGUT_physical& physical) co
       LOCALPHYSICAL(ZTau) = ZTau;
    }
 
-   LOCALPHYSICAL(MVG) = slha_io.read_entry("MASS", 21);
    LOCALPHYSICAL(MGlu) = slha_io.read_entry("MASS", 1000021);
-   LOCALPHYSICAL(MVP) = slha_io.read_entry("MASS", 22);
    LOCALPHYSICAL(MVZ) = slha_io.read_entry("MASS", 23);
    LOCALPHYSICAL(MFd) = slha_io.read_entry("MASS", 1);
    LOCALPHYSICAL(MFs) = slha_io.read_entry("MASS", 3);
@@ -641,6 +644,8 @@ void MSSMNoFVatMGUT_slha_io::fill_physical(MSSMNoFVatMGUT_physical& physical) co
    LOCALPHYSICAL(MChi)(3) = slha_io.read_entry("MASS", 1000035);
    LOCALPHYSICAL(MCha)(0) = slha_io.read_entry("MASS", 1000024);
    LOCALPHYSICAL(MCha)(1) = slha_io.read_entry("MASS", 1000037);
+   LOCALPHYSICAL(MVG) = slha_io.read_entry("MASS", 21);
+   LOCALPHYSICAL(MVP) = slha_io.read_entry("MASS", 22);
    LOCALPHYSICAL(MVWm) = slha_io.read_entry("MASS", 24);
 
 }

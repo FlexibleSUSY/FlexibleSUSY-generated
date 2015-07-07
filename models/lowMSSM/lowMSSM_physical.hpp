@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 26 Jun 2015 19:16:46
+// File generated at Tue 7 Jul 2015 13:27:09
 
 #ifndef lowMSSM_PHYSICAL_H
 #define lowMSSM_PHYSICAL_H
@@ -36,10 +36,8 @@ struct lowMSSM_physical {
    void convert_to_slha(); ///< converts pole masses to SLHA convention
    void print(std::ostream&) const;
 
-   double MVG;
    double MGlu;
    Eigen::Array<double,3,1> MFv;
-   double MVP;
    double MVZ;
    Eigen::Array<double,6,1> MSd;
    Eigen::Array<double,3,1> MSv;
@@ -53,6 +51,8 @@ struct lowMSSM_physical {
    Eigen::Array<double,3,1> MFe;
    Eigen::Array<double,3,1> MFd;
    Eigen::Array<double,3,1> MFu;
+   double MVG;
+   double MVP;
    double MVWm;
 
    Eigen::Matrix<double,6,6> ZD;
