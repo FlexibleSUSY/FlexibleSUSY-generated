@@ -121,6 +121,10 @@ EXEE6SSM_OBJ := \
 		$(patsubst %.cpp, %.o, $(filter %.cpp, $(EXEE6SSM_SRC))) \
 		$(patsubst %.f, %.o, $(filter %.f, $(EXEE6SSM_SRC)))
 
+EXEE6SSM_EXE := \
+		$(patsubst %.cpp, %.x, $(filter %.cpp, $(EXEE6SSM_SRC))) \
+		$(patsubst %.f, %.x, $(filter %.f, $(EXEE6SSM_SRC)))
+
 LIBE6SSM_DEP := \
 		$(LIBE6SSM_OBJ:.o=.d)
 
@@ -128,15 +132,6 @@ EXEE6SSM_DEP := \
 		$(EXEE6SSM_OBJ:.o=.d)
 
 LIBE6SSM     := $(DIR)/lib$(MODNAME)$(LIBEXT)
-
-RUN_E6SSM_OBJ := $(DIR)/run_E6SSM.o
-RUN_E6SSM_EXE := $(DIR)/run_E6SSM.x
-
-RUN_CMD_LINE_E6SSM_OBJ := $(DIR)/run_cmd_line_E6SSM.o
-RUN_CMD_LINE_E6SSM_EXE := $(DIR)/run_cmd_line_E6SSM.x
-
-SCAN_E6SSM_OBJ := $(DIR)/scan_E6SSM.o
-SCAN_E6SSM_EXE := $(DIR)/scan_E6SSM.x
 
 METACODE_STAMP_E6SSM := $(DIR)/00_DELETE_ME_TO_RERUN_METACODE
 
@@ -188,9 +183,7 @@ clean-$(MODNAME): clean-$(MODNAME)-src
 
 clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-obj
 		-rm -f $(LIBE6SSM)
-		-rm -f $(RUN_E6SSM_EXE)
-		-rm -f $(RUN_CMD_LINE_E6SSM_EXE)
-		-rm -f $(SCAN_E6SSM_EXE)
+		-rm -f $(EXEE6SSM_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
 
@@ -234,16 +227,10 @@ endif
 $(LIBE6SSM): $(LIBE6SSM_OBJ)
 		$(MAKELIB) $@ $^
 
-$(RUN_E6SSM_EXE): $(RUN_E6SSM_OBJ) $(LIBE6SSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
-
-$(RUN_CMD_LINE_E6SSM_EXE): $(RUN_CMD_LINE_E6SSM_OBJ) $(LIBE6SSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
-
-$(SCAN_E6SSM_EXE): $(SCAN_E6SSM_OBJ) $(LIBE6SSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
+$(DIR)/%.x: $(DIR)/%.o $(LIBE6SSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
 		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBE6SSM_DEP) $(EXEE6SSM_DEP)
 ALLSRC += $(LIBE6SSM_SRC) $(EXEE6SSM_SRC)
 ALLLIB += $(LIBE6SSM)
-ALLEXE += $(RUN_E6SSM_EXE) $(RUN_CMD_LINE_E6SSM_EXE) $(SCAN_E6SSM_EXE)
+ALLEXE += $(EXEE6SSM_EXE)

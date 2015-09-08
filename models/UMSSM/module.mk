@@ -120,6 +120,10 @@ EXEUMSSM_OBJ := \
 		$(patsubst %.cpp, %.o, $(filter %.cpp, $(EXEUMSSM_SRC))) \
 		$(patsubst %.f, %.o, $(filter %.f, $(EXEUMSSM_SRC)))
 
+EXEUMSSM_EXE := \
+		$(patsubst %.cpp, %.x, $(filter %.cpp, $(EXEUMSSM_SRC))) \
+		$(patsubst %.f, %.x, $(filter %.f, $(EXEUMSSM_SRC)))
+
 LIBUMSSM_DEP := \
 		$(LIBUMSSM_OBJ:.o=.d)
 
@@ -127,15 +131,6 @@ EXEUMSSM_DEP := \
 		$(EXEUMSSM_OBJ:.o=.d)
 
 LIBUMSSM     := $(DIR)/lib$(MODNAME)$(LIBEXT)
-
-RUN_UMSSM_OBJ := $(DIR)/run_UMSSM.o
-RUN_UMSSM_EXE := $(DIR)/run_UMSSM.x
-
-RUN_CMD_LINE_UMSSM_OBJ := $(DIR)/run_cmd_line_UMSSM.o
-RUN_CMD_LINE_UMSSM_EXE := $(DIR)/run_cmd_line_UMSSM.x
-
-SCAN_UMSSM_OBJ := $(DIR)/scan_UMSSM.o
-SCAN_UMSSM_EXE := $(DIR)/scan_UMSSM.x
 
 METACODE_STAMP_UMSSM := $(DIR)/00_DELETE_ME_TO_RERUN_METACODE
 
@@ -187,9 +182,7 @@ clean-$(MODNAME): clean-$(MODNAME)-src
 
 clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-obj
 		-rm -f $(LIBUMSSM)
-		-rm -f $(RUN_UMSSM_EXE)
-		-rm -f $(RUN_CMD_LINE_UMSSM_EXE)
-		-rm -f $(SCAN_UMSSM_EXE)
+		-rm -f $(EXEUMSSM_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
 
@@ -233,16 +226,10 @@ endif
 $(LIBUMSSM): $(LIBUMSSM_OBJ)
 		$(MAKELIB) $@ $^
 
-$(RUN_UMSSM_EXE): $(RUN_UMSSM_OBJ) $(LIBUMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
-
-$(RUN_CMD_LINE_UMSSM_EXE): $(RUN_CMD_LINE_UMSSM_OBJ) $(LIBUMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
-
-$(SCAN_UMSSM_EXE): $(SCAN_UMSSM_OBJ) $(LIBUMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
+$(DIR)/%.x: $(DIR)/%.o $(LIBUMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
 		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBUMSSM_DEP) $(EXEUMSSM_DEP)
 ALLSRC += $(LIBUMSSM_SRC) $(EXEUMSSM_SRC)
 ALLLIB += $(LIBUMSSM)
-ALLEXE += $(RUN_UMSSM_EXE) $(RUN_CMD_LINE_UMSSM_EXE) $(SCAN_UMSSM_EXE)
+ALLEXE += $(EXEUMSSM_EXE)

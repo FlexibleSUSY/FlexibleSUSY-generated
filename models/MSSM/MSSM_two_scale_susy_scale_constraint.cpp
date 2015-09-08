@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 14:06:49
+// File generated at Tue 8 Sep 2015 14:01:14
 
 #include "MSSM_two_scale_susy_scale_constraint.hpp"
 #include "MSSM_two_scale_model.hpp"
@@ -38,6 +38,7 @@ namespace flexiblesusy {
 #define BETAPARAMETER(p) beta_functions.get_##p()
 #define BETA(p) beta_##p
 #define LowEnergyConstant(p) Electroweak_constants::p
+#define MZPole Electroweak_constants::MZ
 #define STANDARDDEVIATION(p) Electroweak_constants::Error_##p
 #define Pole(p) model->get_physical().p
 #define MODEL model
@@ -72,12 +73,8 @@ void MSSM_susy_scale_constraint<Two_scale>::apply()
    update_scale();
 
    // apply user-defined susy scale constraints
+   MODEL->solve_ewsb();
 
-
-   // the parameters, which are fixed by the EWSB eqs., will now be
-   // defined at this scale (at the EWSB loop level defined in the
-   // model)
-   model->solve_ewsb();
 }
 
 double MSSM_susy_scale_constraint<Two_scale>::get_scale() const
@@ -120,7 +117,7 @@ void MSSM_susy_scale_constraint<Two_scale>::initialize()
    assert(model && "MSSM_susy_scale_constraint<Two_scale>::"
           "initialize(): model pointer is zero.");
 
-   initial_scale_guess = LowEnergyConstant(MZ);
+   initial_scale_guess = MZPole;
 
    scale = initial_scale_guess;
 }

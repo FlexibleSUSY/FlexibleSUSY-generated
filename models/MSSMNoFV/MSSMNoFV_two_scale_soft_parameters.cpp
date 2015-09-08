@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 14:04:59
+// File generated at Tue 8 Sep 2015 13:58:40
 
 #include "MSSMNoFV_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -134,7 +134,7 @@ void MSSMNoFV_soft_parameters::clear()
 
 }
 
-const Eigen::ArrayXd MSSMNoFV_soft_parameters::get() const
+Eigen::ArrayXd MSSMNoFV_soft_parameters::get() const
 {
    Eigen::ArrayXd pars(MSSMNoFV_susy_parameters::get());
    pars.conservativeResize(numberOfParameters);

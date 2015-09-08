@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 13:28:00
+// File generated at Tue 8 Sep 2015 13:21:20
 
 #ifndef NUHMSSM_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
 #define NUHMSSM_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
@@ -51,6 +51,7 @@ public:
 
 protected:
    void update_scale();
+   bool check_non_perturbative();
 
 private:
    double scale;

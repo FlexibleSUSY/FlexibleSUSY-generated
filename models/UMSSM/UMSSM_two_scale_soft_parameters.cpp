@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 12:46:30
+// File generated at Tue 8 Sep 2015 12:39:21
 
 #include "UMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -140,7 +140,7 @@ void UMSSM_soft_parameters::clear()
 
 }
 
-const Eigen::ArrayXd UMSSM_soft_parameters::get() const
+Eigen::ArrayXd UMSSM_soft_parameters::get() const
 {
    Eigen::ArrayXd pars(UMSSM_susy_parameters::get());
    pars.conservativeResize(numberOfParameters);

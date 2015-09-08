@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 12:20:53
+// File generated at Tue 8 Sep 2015 12:13:37
 
 #include "MRSSM_two_scale_susy_scale_constraint.hpp"
 #include "MRSSM_two_scale_model.hpp"
@@ -38,6 +38,7 @@ namespace flexiblesusy {
 #define BETAPARAMETER(p) beta_functions.get_##p()
 #define BETA(p) beta_##p
 #define LowEnergyConstant(p) Electroweak_constants::p
+#define MZPole Electroweak_constants::MZ
 #define STANDARDDEVIATION(p) Electroweak_constants::Error_##p
 #define Pole(p) model->get_physical().p
 #define MODEL model
@@ -96,6 +97,7 @@ void MRSSM_susy_scale_constraint<Two_scale>::apply()
    const auto MDWBTInput = INPUTPARAMETER(MDWBTInput);
    const auto MDGocInput = INPUTPARAMETER(MDGocInput);
 
+   MODEL->solve_ewsb();
    MODEL->set_LamTD(Re(LamTDInput));
    MODEL->set_LamTU(Re(LamTUInput));
    MODEL->set_LamSD(Re(LamSDInput));
@@ -120,11 +122,6 @@ void MRSSM_susy_scale_constraint<Two_scale>::apply()
    MODEL->set_MDWBT(Re(MDWBTInput));
    MODEL->set_MDGoc(Re(MDGocInput));
 
-
-   // the parameters, which are fixed by the EWSB eqs., will now be
-   // defined at this scale (at the EWSB loop level defined in the
-   // model)
-   model->solve_ewsb();
 }
 
 double MRSSM_susy_scale_constraint<Two_scale>::get_scale() const

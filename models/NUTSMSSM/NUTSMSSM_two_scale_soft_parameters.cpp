@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 13:12:47
+// File generated at Tue 8 Sep 2015 13:05:49
 
 #include "NUTSMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -151,7 +151,7 @@ void NUTSMSSM_soft_parameters::clear()
 
 }
 
-const Eigen::ArrayXd NUTSMSSM_soft_parameters::get() const
+Eigen::ArrayXd NUTSMSSM_soft_parameters::get() const
 {
    Eigen::ArrayXd pars(NUTSMSSM_susy_parameters::get());
    pars.conservativeResize(numberOfParameters);

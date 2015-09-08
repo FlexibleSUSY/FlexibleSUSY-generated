@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 13:12:42
+// File generated at Tue 8 Sep 2015 13:05:44
 
 #ifndef NUTSMSSM_TWO_SCALE_susy_parameters_H
 #define NUTSMSSM_TWO_SCALE_susy_parameters_H
@@ -46,7 +46,7 @@ public:
 );
    virtual ~NUTSMSSM_susy_parameters() {}
    virtual Eigen::ArrayXd beta() const;
-   virtual const Eigen::ArrayXd get() const;
+   virtual Eigen::ArrayXd get() const;
    virtual void print(std::ostream&) const;
    virtual void set(const Eigen::ArrayXd&);
    const NUTSMSSM_input_parameters& get_input() const;

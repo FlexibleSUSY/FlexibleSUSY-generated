@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 13:14:04
+// File generated at Tue 8 Sep 2015 13:07:08
 
 /**
  * @file NUTSMSSM_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Tue 7 Jul 2015 13:14:04 with FlexibleSUSY
- * 1.2.1 (git commit: v1.2.1) and SARAH 4.5.8 .
+ * This file was generated at Tue 8 Sep 2015 13:07:08 with FlexibleSUSY
+ * 1.2.2 (git commit: v1.2.2) and SARAH 4.5.8 .
  */
 
 #include "NUTSMSSM_mass_eigenstates.hpp"
@@ -340,7 +340,7 @@ int CLASSNAME::solve_ewsb_iteratively()
 #endif
    }
 
-   for_each(solvers, solvers + number_of_solvers, Delete_object());
+   std::for_each(solvers, solvers + number_of_solvers, Delete_object());
 
    return status;
 }

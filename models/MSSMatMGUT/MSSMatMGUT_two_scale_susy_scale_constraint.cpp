@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 14:05:24
+// File generated at Tue 8 Sep 2015 13:59:34
 
 #include "MSSMatMGUT_two_scale_susy_scale_constraint.hpp"
 #include "MSSMatMGUT_two_scale_model.hpp"
@@ -38,6 +38,7 @@ namespace flexiblesusy {
 #define BETAPARAMETER(p) beta_functions.get_##p()
 #define BETA(p) beta_##p
 #define LowEnergyConstant(p) Electroweak_constants::p
+#define MZPole Electroweak_constants::MZ
 #define STANDARDDEVIATION(p) Electroweak_constants::Error_##p
 #define Pole(p) model->get_physical().p
 #define MODEL model
@@ -72,12 +73,8 @@ void MSSMatMGUT_susy_scale_constraint<Two_scale>::apply()
    update_scale();
 
    // apply user-defined susy scale constraints
+   MODEL->solve_ewsb();
 
-
-   // the parameters, which are fixed by the EWSB eqs., will now be
-   // defined at this scale (at the EWSB loop level defined in the
-   // model)
-   model->solve_ewsb();
 }
 
 double MSSMatMGUT_susy_scale_constraint<Two_scale>::get_scale() const

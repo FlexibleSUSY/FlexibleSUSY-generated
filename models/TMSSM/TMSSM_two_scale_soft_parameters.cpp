@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 12:08:40
+// File generated at Tue 8 Sep 2015 12:01:28
 
 #include "TMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -143,7 +143,7 @@ void TMSSM_soft_parameters::clear()
 
 }
 
-const Eigen::ArrayXd TMSSM_soft_parameters::get() const
+Eigen::ArrayXd TMSSM_soft_parameters::get() const
 {
    Eigen::ArrayXd pars(TMSSM_susy_parameters::get());
    pars.conservativeResize(numberOfParameters);

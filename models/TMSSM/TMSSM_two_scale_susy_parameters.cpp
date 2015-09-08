@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 12:08:35
+// File generated at Tue 8 Sep 2015 12:01:23
 
 #include "TMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -278,7 +278,7 @@ double CLASSNAME::get_STST() const
 }
 
 
-const Eigen::ArrayXd TMSSM_susy_parameters::get() const
+Eigen::ArrayXd TMSSM_susy_parameters::get() const
 {
    Eigen::ArrayXd pars(numberOfParameters);
 

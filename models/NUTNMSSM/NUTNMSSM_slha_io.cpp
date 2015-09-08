@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 13:15:09
+// File generated at Tue 8 Sep 2015 13:08:12
 
 #include "NUTNMSSM_slha_io.hpp"
 #include "NUTNMSSM_input_parameters.hpp"
@@ -24,8 +24,6 @@
 #include "logger.hpp"
 #include "wrappers.hpp"
 #include "numerics2.hpp"
-#include "spectrum_generator_settings.hpp"
-#include "lowe.h"
 #include "config.h"
 
 #include <fstream>
@@ -439,10 +437,7 @@ void NUTNMSSM_slha_io::fill(NUTNMSSM_mass_eigenstates& model) const
  */
 void NUTNMSSM_slha_io::fill(Spectrum_generator_settings& settings) const
 {
-   SLHA_io::Tuple_processor flexiblesusy_processor
-      = boost::bind(&NUTNMSSM_slha_io::fill_flexiblesusy_tuple, boost::ref(settings), _1, _2);
-
-   slha_io.read_block("FlexibleSUSY", flexiblesusy_processor);
+   slha_io.fill(settings);
 }
 
 void NUTNMSSM_slha_io::fill_minpar_tuple(NUTNMSSM_input_parameters& input,
@@ -470,16 +465,6 @@ void NUTNMSSM_slha_io::fill_extpar_tuple(NUTNMSSM_input_parameters& input,
    default: WARNING("Unrecognized entry in block EXTPAR: " << key); break;
    }
 
-}
-
-void NUTNMSSM_slha_io::fill_flexiblesusy_tuple(Spectrum_generator_settings& settings,
-                                                  int key, double value)
-{
-   if (0 <= key && key < static_cast<int>(Spectrum_generator_settings::NUMBER_OF_OPTIONS)) {
-      settings.set((Spectrum_generator_settings::Settings)key, value);
-   } else {
-      WARNING("Unrecognized entry in block FlexibleSUSY: " << key);
-   }
 }
 
 /**

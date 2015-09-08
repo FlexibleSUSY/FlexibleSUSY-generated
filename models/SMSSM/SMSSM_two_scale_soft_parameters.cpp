@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 13:03:39
+// File generated at Tue 8 Sep 2015 12:56:38
 
 #include "SMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -151,7 +151,7 @@ void SMSSM_soft_parameters::clear()
 
 }
 
-const Eigen::ArrayXd SMSSM_soft_parameters::get() const
+Eigen::ArrayXd SMSSM_soft_parameters::get() const
 {
    Eigen::ArrayXd pars(SMSSM_susy_parameters::get());
    pars.conservativeResize(numberOfParameters);

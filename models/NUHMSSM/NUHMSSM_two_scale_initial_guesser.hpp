@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 13:28:01
+// File generated at Tue 8 Sep 2015 13:21:22
 
 #ifndef NUHMSSM_TWO_SCALE_INITIAL_GUESSER_H
 #define NUHMSSM_TWO_SCALE_INITIAL_GUESSER_H
@@ -45,7 +45,7 @@ template<>
 class NUHMSSM_initial_guesser<Two_scale> : public Initial_guesser<Two_scale> {
 public:
    NUHMSSM_initial_guesser(NUHMSSM<Two_scale>*,
-                               const QedQcd&,
+                               const softsusy::QedQcd&,
                                const NUHMSSM_low_scale_constraint<Two_scale>&,
                                const NUHMSSM_susy_scale_constraint<Two_scale>&,
                                const NUHMSSM_high_scale_constraint<Two_scale>&);
@@ -56,7 +56,7 @@ public:
 
 private:
    NUHMSSM<Two_scale>* model; ///< pointer to model class
-   QedQcd oneset;   ///< Standard Model low-energy data
+   softsusy::QedQcd oneset;       ///< Standard Model low-energy data
    double mu_guess; ///< guessed DR-bar mass of up-quark
    double mc_guess; ///< guessed DR-bar mass of charm-quark
    double mt_guess; ///< guessed DR-bar mass of top-quark

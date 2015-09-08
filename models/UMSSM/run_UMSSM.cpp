@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 12:58:21
+// File generated at Tue 8 Sep 2015 12:51:19
 
 #include "UMSSM_input_parameters.hpp"
 #include "UMSSM_slha_io.hpp"
@@ -32,7 +32,6 @@
 int main(int argc, const char* argv[])
 {
    using namespace flexiblesusy;
-   using namespace softsusy;
    typedef Two_scale algorithm_type;
 
    Command_line_options options(argc, argv);
@@ -47,7 +46,7 @@ int main(int argc, const char* argv[])
    const std::string spectrum_file(options.get_spectrum_file());
    UMSSM_slha_io slha_io;
    Spectrum_generator_settings spectrum_generator_settings;
-   QedQcd oneset;
+   softsusy::QedQcd oneset;
    UMSSM_input_parameters input;
 
    if (slha_input_source.empty()) {

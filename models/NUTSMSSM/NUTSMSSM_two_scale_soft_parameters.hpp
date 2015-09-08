@@ -16,12 +16,11 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 13:12:47
+// File generated at Tue 8 Sep 2015 13:05:49
 
 #ifndef NUTSMSSM_TWO_SCALE_soft_parameters_H
 #define NUTSMSSM_TWO_SCALE_soft_parameters_H
 
-#include "rge.h"
 #include "NUTSMSSM_two_scale_susy_parameters.hpp"
 
 #include <iosfwd>
@@ -46,7 +45,7 @@ public:
 );
    virtual ~NUTSMSSM_soft_parameters() {}
    virtual Eigen::ArrayXd beta() const;
-   virtual const Eigen::ArrayXd get() const;
+   virtual Eigen::ArrayXd get() const;
    virtual void print(std::ostream&) const;
    virtual void set(const Eigen::ArrayXd&);
 

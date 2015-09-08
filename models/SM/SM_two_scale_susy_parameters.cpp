@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 12:06:43
+// File generated at Tue 8 Sep 2015 11:59:33
 
 #include "SM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -118,7 +118,7 @@ void SM_susy_parameters::clear()
 
 
 
-const Eigen::ArrayXd SM_susy_parameters::get() const
+Eigen::ArrayXd SM_susy_parameters::get() const
 {
    Eigen::ArrayXd pars(numberOfParameters);
 

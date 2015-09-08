@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 13:13:34
+// File generated at Tue 8 Sep 2015 13:06:42
 
 #include "lowNMSSM_two_scale_susy_scale_constraint.hpp"
 #include "lowNMSSM_two_scale_model.hpp"
@@ -38,6 +38,7 @@ namespace flexiblesusy {
 #define BETAPARAMETER(p) beta_functions.get_##p()
 #define BETA(p) beta_##p
 #define LowEnergyConstant(p) Electroweak_constants::p
+#define MZPole Electroweak_constants::MZ
 #define STANDARDDEVIATION(p) Electroweak_constants::Error_##p
 #define Pole(p) model->get_physical().p
 #define MODEL model
@@ -135,12 +136,8 @@ void lowNMSSM_susy_scale_constraint<Two_scale>::apply()
    MODEL->set_TYu(2,2,Re(AtInput*Yu(2,2)));
    MODEL->set_TYd(2,2,Re(AbInput*Yd(2,2)));
    MODEL->set_TYe(2,2,Re(ATauInput*Ye(2,2)));
+   MODEL->solve_ewsb();
 
-
-   // the parameters, which are fixed by the EWSB eqs., will now be
-   // defined at this scale (at the EWSB loop level defined in the
-   // model)
-   model->solve_ewsb();
 }
 
 double lowNMSSM_susy_scale_constraint<Two_scale>::get_scale() const

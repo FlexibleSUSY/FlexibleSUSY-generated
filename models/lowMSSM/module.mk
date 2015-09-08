@@ -120,6 +120,10 @@ EXElowMSSM_OBJ := \
 		$(patsubst %.cpp, %.o, $(filter %.cpp, $(EXElowMSSM_SRC))) \
 		$(patsubst %.f, %.o, $(filter %.f, $(EXElowMSSM_SRC)))
 
+EXElowMSSM_EXE := \
+		$(patsubst %.cpp, %.x, $(filter %.cpp, $(EXElowMSSM_SRC))) \
+		$(patsubst %.f, %.x, $(filter %.f, $(EXElowMSSM_SRC)))
+
 LIBlowMSSM_DEP := \
 		$(LIBlowMSSM_OBJ:.o=.d)
 
@@ -127,15 +131,6 @@ EXElowMSSM_DEP := \
 		$(EXElowMSSM_OBJ:.o=.d)
 
 LIBlowMSSM     := $(DIR)/lib$(MODNAME)$(LIBEXT)
-
-RUN_lowMSSM_OBJ := $(DIR)/run_lowMSSM.o
-RUN_lowMSSM_EXE := $(DIR)/run_lowMSSM.x
-
-RUN_CMD_LINE_lowMSSM_OBJ := $(DIR)/run_cmd_line_lowMSSM.o
-RUN_CMD_LINE_lowMSSM_EXE := $(DIR)/run_cmd_line_lowMSSM.x
-
-SCAN_lowMSSM_OBJ := $(DIR)/scan_lowMSSM.o
-SCAN_lowMSSM_EXE := $(DIR)/scan_lowMSSM.x
 
 METACODE_STAMP_lowMSSM := $(DIR)/00_DELETE_ME_TO_RERUN_METACODE
 
@@ -187,9 +182,7 @@ clean-$(MODNAME): clean-$(MODNAME)-src
 
 clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-obj
 		-rm -f $(LIBlowMSSM)
-		-rm -f $(RUN_lowMSSM_EXE)
-		-rm -f $(RUN_CMD_LINE_lowMSSM_EXE)
-		-rm -f $(SCAN_lowMSSM_EXE)
+		-rm -f $(EXElowMSSM_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
 
@@ -233,16 +226,10 @@ endif
 $(LIBlowMSSM): $(LIBlowMSSM_OBJ)
 		$(MAKELIB) $@ $^
 
-$(RUN_lowMSSM_EXE): $(RUN_lowMSSM_OBJ) $(LIBlowMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
-
-$(RUN_CMD_LINE_lowMSSM_EXE): $(RUN_CMD_LINE_lowMSSM_OBJ) $(LIBlowMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
-
-$(SCAN_lowMSSM_EXE): $(SCAN_lowMSSM_OBJ) $(LIBlowMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
+$(DIR)/%.x: $(DIR)/%.o $(LIBlowMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
 		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBlowMSSM_DEP) $(EXElowMSSM_DEP)
 ALLSRC += $(LIBlowMSSM_SRC) $(EXElowMSSM_SRC)
 ALLLIB += $(LIBlowMSSM)
-ALLEXE += $(RUN_lowMSSM_EXE) $(RUN_CMD_LINE_lowMSSM_EXE) $(SCAN_lowMSSM_EXE)
+ALLEXE += $(EXElowMSSM_EXE)

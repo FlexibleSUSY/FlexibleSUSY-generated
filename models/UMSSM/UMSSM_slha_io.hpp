@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 12:46:56
+// File generated at Tue 8 Sep 2015 12:39:48
 
 #ifndef UMSSM_SLHA_IO_H
 #define UMSSM_SLHA_IO_H
@@ -27,6 +27,7 @@
 #include "slha_io.hpp"
 #include "ckm.hpp"
 #include "ew_input.hpp"
+#include "lowe.h"
 
 #include <Eigen/Core>
 #include <string>
@@ -57,7 +58,7 @@ public:
 
    void clear();
 
-   void fill(QedQcd& qedqcd) const { slha_io.fill(qedqcd); }
+   void fill(softsusy::QedQcd& qedqcd) const { slha_io.fill(qedqcd); }
    void fill(UMSSM_input_parameters&) const;
    void fill(UMSSM_mass_eigenstates&) const;
    template <class T> void fill(UMSSM_slha<T>&) const;
@@ -79,16 +80,15 @@ public:
 
    static void fill_minpar_tuple(UMSSM_input_parameters&, int, double);
    static void fill_extpar_tuple(UMSSM_input_parameters&, int, double);
-   static void fill_flexiblesusy_tuple(Spectrum_generator_settings&, int, double);
 
    template <class T>
-   static void fill_slhaea(SLHAea::Coll&, const UMSSM_slha<T>&, const QedQcd&, const UMSSM_scales&);
+   static void fill_slhaea(SLHAea::Coll&, const UMSSM_slha<T>&, const softsusy::QedQcd&, const UMSSM_scales&);
 
    template <class T>
-   static SLHAea::Coll fill_slhaea(const UMSSM_slha<T>&, const QedQcd&);
+   static SLHAea::Coll fill_slhaea(const UMSSM_slha<T>&, const softsusy::QedQcd&);
 
    template <class T>
-   static SLHAea::Coll fill_slhaea(const UMSSM_slha<T>&, const QedQcd&, const UMSSM_scales&);
+   static SLHAea::Coll fill_slhaea(const UMSSM_slha<T>&, const softsusy::QedQcd&, const UMSSM_scales&);
 
 private:
    SLHA_io slha_io; ///< SLHA io class
@@ -119,7 +119,7 @@ void UMSSM_slha_io::fill(UMSSM_slha<T>& model) const
 template <class T>
 void UMSSM_slha_io::fill_slhaea(
    SLHAea::Coll& slhaea, const UMSSM_slha<T>& model,
-   const QedQcd& qedqcd, const UMSSM_scales& scales)
+   const softsusy::QedQcd& qedqcd, const UMSSM_scales& scales)
 {
    UMSSM_slha_io slha_io;
    const UMSSM_input_parameters& input = model.get_input();
@@ -141,7 +141,7 @@ void UMSSM_slha_io::fill_slhaea(
 
 template <class T>
 SLHAea::Coll UMSSM_slha_io::fill_slhaea(
-   const UMSSM_slha<T>& model, const QedQcd& qedqcd)
+   const UMSSM_slha<T>& model, const softsusy::QedQcd& qedqcd)
 {
    UMSSM_scales scales;
 
@@ -150,7 +150,7 @@ SLHAea::Coll UMSSM_slha_io::fill_slhaea(
 
 template <class T>
 SLHAea::Coll UMSSM_slha_io::fill_slhaea(
-   const UMSSM_slha<T>& model, const QedQcd& qedqcd,
+   const UMSSM_slha<T>& model, const softsusy::QedQcd& qedqcd,
    const UMSSM_scales& scales)
 {
    SLHAea::Coll slhaea;

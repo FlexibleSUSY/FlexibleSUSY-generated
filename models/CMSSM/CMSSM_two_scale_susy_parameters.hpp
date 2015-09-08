@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 14:06:55
+// File generated at Tue 8 Sep 2015 14:01:03
 
 #ifndef CMSSM_TWO_SCALE_susy_parameters_H
 #define CMSSM_TWO_SCALE_susy_parameters_H
@@ -45,7 +45,7 @@ public:
 );
    virtual ~CMSSM_susy_parameters() {}
    virtual Eigen::ArrayXd beta() const;
-   virtual const Eigen::ArrayXd get() const;
+   virtual Eigen::ArrayXd get() const;
    virtual void print(std::ostream&) const;
    virtual void set(const Eigen::ArrayXd&);
    const CMSSM_input_parameters& get_input() const;

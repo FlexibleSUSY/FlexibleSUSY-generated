@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 13:08:24
+// File generated at Tue 8 Sep 2015 13:01:30
 
 #include "SMSSM_input_parameters.hpp"
 #include "SMSSM_spectrum_generator.hpp"
@@ -109,13 +109,12 @@ void set_command_line_parameters(int argc, char* argv[],
 int main(int argc, char* argv[])
 {
    using namespace flexiblesusy;
-   using namespace softsusy;
    typedef Two_scale algorithm_type;
 
    SMSSM_input_parameters input;
    set_command_line_parameters(argc, argv, input);
 
-   QedQcd oneset;
+   softsusy::QedQcd oneset;
    oneset.toMz();
 
    SMSSM_spectrum_generator<algorithm_type> spectrum_generator;

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 12:43:21
+// File generated at Tue 8 Sep 2015 12:36:08
 
 #include "E6SSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -433,7 +433,7 @@ double CLASSNAME::get_SHpbarSHpbar() const
 }
 
 
-const Eigen::ArrayXd E6SSM_susy_parameters::get() const
+Eigen::ArrayXd E6SSM_susy_parameters::get() const
 {
    Eigen::ArrayXd pars(numberOfParameters);
 

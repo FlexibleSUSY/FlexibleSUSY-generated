@@ -120,6 +120,10 @@ EXEMSSMRHN_OBJ := \
 		$(patsubst %.cpp, %.o, $(filter %.cpp, $(EXEMSSMRHN_SRC))) \
 		$(patsubst %.f, %.o, $(filter %.f, $(EXEMSSMRHN_SRC)))
 
+EXEMSSMRHN_EXE := \
+		$(patsubst %.cpp, %.x, $(filter %.cpp, $(EXEMSSMRHN_SRC))) \
+		$(patsubst %.f, %.x, $(filter %.f, $(EXEMSSMRHN_SRC)))
+
 LIBMSSMRHN_DEP := \
 		$(LIBMSSMRHN_OBJ:.o=.d)
 
@@ -127,15 +131,6 @@ EXEMSSMRHN_DEP := \
 		$(EXEMSSMRHN_OBJ:.o=.d)
 
 LIBMSSMRHN     := $(DIR)/lib$(MODNAME)$(LIBEXT)
-
-RUN_MSSMRHN_OBJ := $(DIR)/run_MSSMRHN.o
-RUN_MSSMRHN_EXE := $(DIR)/run_MSSMRHN.x
-
-RUN_CMD_LINE_MSSMRHN_OBJ := $(DIR)/run_cmd_line_MSSMRHN.o
-RUN_CMD_LINE_MSSMRHN_EXE := $(DIR)/run_cmd_line_MSSMRHN.x
-
-SCAN_MSSMRHN_OBJ := $(DIR)/scan_MSSMRHN.o
-SCAN_MSSMRHN_EXE := $(DIR)/scan_MSSMRHN.x
 
 METACODE_STAMP_MSSMRHN := $(DIR)/00_DELETE_ME_TO_RERUN_METACODE
 
@@ -187,9 +182,7 @@ clean-$(MODNAME): clean-$(MODNAME)-src
 
 clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-obj
 		-rm -f $(LIBMSSMRHN)
-		-rm -f $(RUN_MSSMRHN_EXE)
-		-rm -f $(RUN_CMD_LINE_MSSMRHN_EXE)
-		-rm -f $(SCAN_MSSMRHN_EXE)
+		-rm -f $(EXEMSSMRHN_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
 
@@ -233,16 +226,10 @@ endif
 $(LIBMSSMRHN): $(LIBMSSMRHN_OBJ)
 		$(MAKELIB) $@ $^
 
-$(RUN_MSSMRHN_EXE): $(RUN_MSSMRHN_OBJ) $(LIBMSSMRHN) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
-
-$(RUN_CMD_LINE_MSSMRHN_EXE): $(RUN_CMD_LINE_MSSMRHN_OBJ) $(LIBMSSMRHN) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
-
-$(SCAN_MSSMRHN_EXE): $(SCAN_MSSMRHN_OBJ) $(LIBMSSMRHN) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
+$(DIR)/%.x: $(DIR)/%.o $(LIBMSSMRHN) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
 		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBMSSMRHN_DEP) $(EXEMSSMRHN_DEP)
 ALLSRC += $(LIBMSSMRHN_SRC) $(EXEMSSMRHN_SRC)
 ALLLIB += $(LIBMSSMRHN)
-ALLEXE += $(RUN_MSSMRHN_EXE) $(RUN_CMD_LINE_MSSMRHN_EXE) $(SCAN_MSSMRHN_EXE)
+ALLEXE += $(EXEMSSMRHN_EXE)

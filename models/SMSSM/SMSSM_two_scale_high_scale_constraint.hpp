@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 13:03:56
+// File generated at Tue 8 Sep 2015 12:56:56
 
 #ifndef SMSSM_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
 #define SMSSM_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
@@ -51,6 +51,7 @@ public:
 
 protected:
    void update_scale();
+   bool check_non_perturbative();
 
 private:
    double scale;

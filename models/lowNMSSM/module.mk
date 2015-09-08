@@ -128,6 +128,10 @@ EXElowNMSSM_OBJ := \
 		$(patsubst %.cpp, %.o, $(filter %.cpp, $(EXElowNMSSM_SRC))) \
 		$(patsubst %.f, %.o, $(filter %.f, $(EXElowNMSSM_SRC)))
 
+EXElowNMSSM_EXE := \
+		$(patsubst %.cpp, %.x, $(filter %.cpp, $(EXElowNMSSM_SRC))) \
+		$(patsubst %.f, %.x, $(filter %.f, $(EXElowNMSSM_SRC)))
+
 LIBlowNMSSM_DEP := \
 		$(LIBlowNMSSM_OBJ:.o=.d)
 
@@ -135,15 +139,6 @@ EXElowNMSSM_DEP := \
 		$(EXElowNMSSM_OBJ:.o=.d)
 
 LIBlowNMSSM     := $(DIR)/lib$(MODNAME)$(LIBEXT)
-
-RUN_lowNMSSM_OBJ := $(DIR)/run_lowNMSSM.o
-RUN_lowNMSSM_EXE := $(DIR)/run_lowNMSSM.x
-
-RUN_CMD_LINE_lowNMSSM_OBJ := $(DIR)/run_cmd_line_lowNMSSM.o
-RUN_CMD_LINE_lowNMSSM_EXE := $(DIR)/run_cmd_line_lowNMSSM.x
-
-SCAN_lowNMSSM_OBJ := $(DIR)/scan_lowNMSSM.o
-SCAN_lowNMSSM_EXE := $(DIR)/scan_lowNMSSM.x
 
 METACODE_STAMP_lowNMSSM := $(DIR)/00_DELETE_ME_TO_RERUN_METACODE
 
@@ -195,9 +190,7 @@ clean-$(MODNAME): clean-$(MODNAME)-src
 
 clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-obj
 		-rm -f $(LIBlowNMSSM)
-		-rm -f $(RUN_lowNMSSM_EXE)
-		-rm -f $(RUN_CMD_LINE_lowNMSSM_EXE)
-		-rm -f $(SCAN_lowNMSSM_EXE)
+		-rm -f $(EXElowNMSSM_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
 
@@ -241,16 +234,10 @@ endif
 $(LIBlowNMSSM): $(LIBlowNMSSM_OBJ)
 		$(MAKELIB) $@ $^
 
-$(RUN_lowNMSSM_EXE): $(RUN_lowNMSSM_OBJ) $(LIBlowNMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
-
-$(RUN_CMD_LINE_lowNMSSM_EXE): $(RUN_CMD_LINE_lowNMSSM_OBJ) $(LIBlowNMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
-
-$(SCAN_lowNMSSM_EXE): $(SCAN_lowNMSSM_OBJ) $(LIBlowNMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
+$(DIR)/%.x: $(DIR)/%.o $(LIBlowNMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
 		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBlowNMSSM_DEP) $(EXElowNMSSM_DEP)
 ALLSRC += $(LIBlowNMSSM_SRC) $(EXElowNMSSM_SRC)
 ALLLIB += $(LIBlowNMSSM)
-ALLEXE += $(RUN_lowNMSSM_EXE) $(RUN_CMD_LINE_lowNMSSM_EXE) $(SCAN_lowNMSSM_EXE)
+ALLEXE += $(EXElowNMSSM_EXE)

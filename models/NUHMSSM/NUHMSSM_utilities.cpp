@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 13:27:59
+// File generated at Tue 8 Sep 2015 13:21:19
 
 #include "NUHMSSM_utilities.hpp"
 #include "NUHMSSM_input_parameters.hpp"
@@ -30,8 +30,6 @@
 
 #define PHYSICAL(p) model.get_physical().p
 #define MODELPARAMETER(p) model.get_##p()
-
-using namespace softsusy;
 
 namespace flexiblesusy {
 

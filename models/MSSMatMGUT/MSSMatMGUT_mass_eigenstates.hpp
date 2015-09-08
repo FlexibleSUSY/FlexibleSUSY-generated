@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 14:05:57
+// File generated at Tue 8 Sep 2015 14:00:14
 
 /**
  * @file MSSMatMGUT_mass_eigenstates.hpp
@@ -25,12 +25,12 @@
  *        value problem using the two_scale solver by solving EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Tue 7 Jul 2015 14:05:57 with FlexibleSUSY
- * 1.2.1 (git commit: v1.2.1) and SARAH 4.5.8 .
+ * This file was generated at Tue 8 Sep 2015 14:00:14 with FlexibleSUSY
+ * 1.2.2 (git commit: v1.2.2) and SARAH 4.5.8 .
  */
 
-#ifndef MSSMatMGUT_IMODEL_H
-#define MSSMatMGUT_IMODEL_H
+#ifndef MSSMatMGUT_MASS_EIGENSTATES_H
+#define MSSMatMGUT_MASS_EIGENSTATES_H
 
 #include "MSSMatMGUT_two_scale_soft_parameters.hpp"
 #include "MSSMatMGUT_physical.hpp"

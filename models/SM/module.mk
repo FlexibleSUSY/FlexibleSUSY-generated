@@ -120,6 +120,10 @@ EXESM_OBJ := \
 		$(patsubst %.cpp, %.o, $(filter %.cpp, $(EXESM_SRC))) \
 		$(patsubst %.f, %.o, $(filter %.f, $(EXESM_SRC)))
 
+EXESM_EXE := \
+		$(patsubst %.cpp, %.x, $(filter %.cpp, $(EXESM_SRC))) \
+		$(patsubst %.f, %.x, $(filter %.f, $(EXESM_SRC)))
+
 LIBSM_DEP := \
 		$(LIBSM_OBJ:.o=.d)
 
@@ -127,15 +131,6 @@ EXESM_DEP := \
 		$(EXESM_OBJ:.o=.d)
 
 LIBSM     := $(DIR)/lib$(MODNAME)$(LIBEXT)
-
-RUN_SM_OBJ := $(DIR)/run_SM.o
-RUN_SM_EXE := $(DIR)/run_SM.x
-
-RUN_CMD_LINE_SM_OBJ := $(DIR)/run_cmd_line_SM.o
-RUN_CMD_LINE_SM_EXE := $(DIR)/run_cmd_line_SM.x
-
-SCAN_SM_OBJ := $(DIR)/scan_SM.o
-SCAN_SM_EXE := $(DIR)/scan_SM.x
 
 METACODE_STAMP_SM := $(DIR)/00_DELETE_ME_TO_RERUN_METACODE
 
@@ -187,9 +182,7 @@ clean-$(MODNAME): clean-$(MODNAME)-src
 
 clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-obj
 		-rm -f $(LIBSM)
-		-rm -f $(RUN_SM_EXE)
-		-rm -f $(RUN_CMD_LINE_SM_EXE)
-		-rm -f $(SCAN_SM_EXE)
+		-rm -f $(EXESM_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
 
@@ -233,16 +226,10 @@ endif
 $(LIBSM): $(LIBSM_OBJ)
 		$(MAKELIB) $@ $^
 
-$(RUN_SM_EXE): $(RUN_SM_OBJ) $(LIBSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
-
-$(RUN_CMD_LINE_SM_EXE): $(RUN_CMD_LINE_SM_OBJ) $(LIBSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
-
-$(SCAN_SM_EXE): $(SCAN_SM_OBJ) $(LIBSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
+$(DIR)/%.x: $(DIR)/%.o $(LIBSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
 		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBSM_DEP) $(EXESM_DEP)
 ALLSRC += $(LIBSM_SRC) $(EXESM_SRC)
 ALLLIB += $(LIBSM)
-ALLEXE += $(RUN_SM_EXE) $(RUN_CMD_LINE_SM_EXE) $(SCAN_SM_EXE)
+ALLEXE += $(EXESM_EXE)

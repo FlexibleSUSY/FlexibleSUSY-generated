@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 13:07:24
+// File generated at Tue 8 Sep 2015 13:00:27
 
 #ifndef SMSSM_SLHA_H
 #define SMSSM_SLHA_H

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 13:54:17
+// File generated at Tue 8 Sep 2015 13:47:21
 
 #include "CMSSMNoFV_two_scale_high_scale_constraint.hpp"
 #include "CMSSMNoFV_two_scale_model.hpp"
@@ -41,6 +41,7 @@ namespace flexiblesusy {
 #define BETAPARAMETER(p) beta_functions.get_##p()
 #define BETA(p) beta_##p
 #define LowEnergyConstant(p) Electroweak_constants::p
+#define MZPole Electroweak_constants::MZ
 #define STANDARDDEVIATION(p) Electroweak_constants::Error_##p
 #define Pole(p) model->get_physical().p
 #define MODEL model
@@ -116,40 +117,60 @@ void CMSSMNoFV_high_scale_constraint<Two_scale>::apply()
    MODEL->set_MassWB(Re(m12));
    MODEL->set_MassG(Re(m12));
 
-   {
-      const auto g1 = MODELPARAMETER(g1);
-      const auto g2 = MODELPARAMETER(g2);
-      const auto g3 = MODELPARAMETER(g3);
-      const auto Yd = MODELPARAMETER(Yd);
-      const auto Ye = MODELPARAMETER(Ye);
-      const auto Yu = MODELPARAMETER(Yu);
 
-      if (MaxAbsValue(g1) > 3.5449077018110318)
-         model->get_problems().flag_non_perturbative_parameter("g1", MaxAbsValue(g1), model->get_scale(), 3.5449077018110318);
-      else
-         model->get_problems().unflag_non_perturbative_parameter("g1");
-      if (MaxAbsValue(g2) > 3.5449077018110318)
-         model->get_problems().flag_non_perturbative_parameter("g2", MaxAbsValue(g2), model->get_scale(), 3.5449077018110318);
-      else
-         model->get_problems().unflag_non_perturbative_parameter("g2");
-      if (MaxAbsValue(g3) > 3.5449077018110318)
-         model->get_problems().flag_non_perturbative_parameter("g3", MaxAbsValue(g3), model->get_scale(), 3.5449077018110318);
-      else
-         model->get_problems().unflag_non_perturbative_parameter("g3");
-      if (MaxAbsValue(Yd) > 3.5449077018110318)
-         model->get_problems().flag_non_perturbative_parameter("Yd", MaxAbsValue(Yd), model->get_scale(), 3.5449077018110318);
-      else
-         model->get_problems().unflag_non_perturbative_parameter("Yd");
-      if (MaxAbsValue(Ye) > 3.5449077018110318)
-         model->get_problems().flag_non_perturbative_parameter("Ye", MaxAbsValue(Ye), model->get_scale(), 3.5449077018110318);
-      else
-         model->get_problems().unflag_non_perturbative_parameter("Ye");
-      if (MaxAbsValue(Yu) > 3.5449077018110318)
-         model->get_problems().flag_non_perturbative_parameter("Yu", MaxAbsValue(Yu), model->get_scale(), 3.5449077018110318);
-      else
-         model->get_problems().unflag_non_perturbative_parameter("Yu");
+   check_non_perturbative();
+}
 
+bool CMSSMNoFV_high_scale_constraint<Two_scale>::check_non_perturbative()
+{
+   bool problem = false;
+
+   const auto g1 = MODELPARAMETER(g1);
+   const auto g2 = MODELPARAMETER(g2);
+   const auto g3 = MODELPARAMETER(g3);
+   const auto Yd = MODELPARAMETER(Yd);
+   const auto Ye = MODELPARAMETER(Ye);
+   const auto Yu = MODELPARAMETER(Yu);
+
+   if (MaxAbsValue(g1) > 3.5449077018110318) {
+      problem = true;
+      model->get_problems().flag_non_perturbative_parameter("g1", MaxAbsValue(g1), model->get_scale(), 3.5449077018110318);
+   } else {
+      model->get_problems().unflag_non_perturbative_parameter("g1");
    }
+   if (MaxAbsValue(g2) > 3.5449077018110318) {
+      problem = true;
+      model->get_problems().flag_non_perturbative_parameter("g2", MaxAbsValue(g2), model->get_scale(), 3.5449077018110318);
+   } else {
+      model->get_problems().unflag_non_perturbative_parameter("g2");
+   }
+   if (MaxAbsValue(g3) > 3.5449077018110318) {
+      problem = true;
+      model->get_problems().flag_non_perturbative_parameter("g3", MaxAbsValue(g3), model->get_scale(), 3.5449077018110318);
+   } else {
+      model->get_problems().unflag_non_perturbative_parameter("g3");
+   }
+   if (MaxAbsValue(Yd) > 3.5449077018110318) {
+      problem = true;
+      model->get_problems().flag_non_perturbative_parameter("Yd", MaxAbsValue(Yd), model->get_scale(), 3.5449077018110318);
+   } else {
+      model->get_problems().unflag_non_perturbative_parameter("Yd");
+   }
+   if (MaxAbsValue(Ye) > 3.5449077018110318) {
+      problem = true;
+      model->get_problems().flag_non_perturbative_parameter("Ye", MaxAbsValue(Ye), model->get_scale(), 3.5449077018110318);
+   } else {
+      model->get_problems().unflag_non_perturbative_parameter("Ye");
+   }
+   if (MaxAbsValue(Yu) > 3.5449077018110318) {
+      problem = true;
+      model->get_problems().flag_non_perturbative_parameter("Yu", MaxAbsValue(Yu), model->get_scale(), 3.5449077018110318);
+   } else {
+      model->get_problems().unflag_non_perturbative_parameter("Yu");
+   }
+
+
+   return problem;
 }
 
 double CMSSMNoFV_high_scale_constraint<Two_scale>::get_scale() const

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 12:08:53
+// File generated at Tue 8 Sep 2015 12:01:42
 
 #include "TMSSM_utilities.hpp"
 #include "TMSSM_input_parameters.hpp"
@@ -30,8 +30,6 @@
 
 #define PHYSICAL(p) model.get_physical().p
 #define MODELPARAMETER(p) model.get_##p()
-
-using namespace softsusy;
 
 namespace flexiblesusy {
 

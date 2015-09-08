@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 13:54:46
+// File generated at Tue 8 Sep 2015 13:48:14
 
 #ifndef MSSMNoFVatMGUT_TWO_SCALE_susy_parameters_H
 #define MSSMNoFVatMGUT_TWO_SCALE_susy_parameters_H
@@ -45,7 +45,7 @@ public:
 );
    virtual ~MSSMNoFVatMGUT_susy_parameters() {}
    virtual Eigen::ArrayXd beta() const;
-   virtual const Eigen::ArrayXd get() const;
+   virtual Eigen::ArrayXd get() const;
    virtual void print(std::ostream&) const;
    virtual void set(const Eigen::ArrayXd&);
    const MSSMNoFVatMGUT_input_parameters& get_input() const;

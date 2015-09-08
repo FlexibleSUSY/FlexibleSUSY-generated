@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 14:05:10
+// File generated at Tue 8 Sep 2015 13:58:53
 
 #include "MSSMNoFV_slha_io.hpp"
 #include "MSSMNoFV_input_parameters.hpp"
@@ -24,8 +24,6 @@
 #include "logger.hpp"
 #include "wrappers.hpp"
 #include "numerics2.hpp"
-#include "spectrum_generator_settings.hpp"
-#include "lowe.h"
 #include "config.h"
 
 #include <fstream>
@@ -189,7 +187,7 @@ void MSSMNoFV_slha_io::set_mass(const MSSMNoFV_physical& physical,
       << FORMAT_MASS(37, LOCALPHYSICAL(MHpm(1)), "Hpm(2)")
       << FORMAT_MASS(36, LOCALPHYSICAL(MAh(1)), "Ah(2)")
       << FORMAT_MASS(1000001, LOCALPHYSICAL(MSd(0)), "Sd(1)")
-      << FORMAT_MASS(20000015, LOCALPHYSICAL(MSd(1)), "Sd(2)")
+      << FORMAT_MASS(2000001, LOCALPHYSICAL(MSd(1)), "Sd(2)")
       << FORMAT_MASS(1000003, LOCALPHYSICAL(MSs(0)), "Ss(1)")
       << FORMAT_MASS(2000003, LOCALPHYSICAL(MSs(1)), "Ss(2)")
       << FORMAT_MASS(1000005, LOCALPHYSICAL(MSb(0)), "Sb(1)")
@@ -454,10 +452,7 @@ void MSSMNoFV_slha_io::fill(MSSMNoFV_mass_eigenstates& model) const
  */
 void MSSMNoFV_slha_io::fill(Spectrum_generator_settings& settings) const
 {
-   SLHA_io::Tuple_processor flexiblesusy_processor
-      = boost::bind(&MSSMNoFV_slha_io::fill_flexiblesusy_tuple, boost::ref(settings), _1, _2);
-
-   slha_io.read_block("FlexibleSUSY", flexiblesusy_processor);
+   slha_io.fill(settings);
 }
 
 void MSSMNoFV_slha_io::fill_minpar_tuple(MSSMNoFV_input_parameters& input,
@@ -508,16 +503,6 @@ void MSSMNoFV_slha_io::fill_extpar_tuple(MSSMNoFV_input_parameters& input,
    default: WARNING("Unrecognized entry in block EXTPAR: " << key); break;
    }
 
-}
-
-void MSSMNoFV_slha_io::fill_flexiblesusy_tuple(Spectrum_generator_settings& settings,
-                                                  int key, double value)
-{
-   if (0 <= key && key < static_cast<int>(Spectrum_generator_settings::NUMBER_OF_OPTIONS)) {
-      settings.set((Spectrum_generator_settings::Settings)key, value);
-   } else {
-      WARNING("Unrecognized entry in block FlexibleSUSY: " << key);
-   }
 }
 
 /**
@@ -621,7 +606,7 @@ void MSSMNoFV_slha_io::fill_physical(MSSMNoFV_physical& physical) const
    LOCALPHYSICAL(MSvmL) = slha_io.read_entry("MASS", 1000014);
    LOCALPHYSICAL(MSvtL) = slha_io.read_entry("MASS", 1000016);
    LOCALPHYSICAL(MSd)(0) = slha_io.read_entry("MASS", 1000001);
-   LOCALPHYSICAL(MSd)(1) = slha_io.read_entry("MASS", 20000015);
+   LOCALPHYSICAL(MSd)(1) = slha_io.read_entry("MASS", 2000001);
    LOCALPHYSICAL(MSu)(0) = slha_io.read_entry("MASS", 1000002);
    LOCALPHYSICAL(MSu)(1) = slha_io.read_entry("MASS", 2000002);
    LOCALPHYSICAL(MSe)(0) = slha_io.read_entry("MASS", 1000011);

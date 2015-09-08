@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 13:27:45
+// File generated at Tue 8 Sep 2015 13:21:04
 
 #include "NUHMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -247,7 +247,7 @@ Eigen::Matrix<double,3,3> CLASSNAME::get_SeRSeR() const
 }
 
 
-const Eigen::ArrayXd NUHMSSM_susy_parameters::get() const
+Eigen::ArrayXd NUHMSSM_susy_parameters::get() const
 {
    Eigen::ArrayXd pars(numberOfParameters);
 

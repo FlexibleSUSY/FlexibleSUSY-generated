@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 13:23:46
+// File generated at Tue 8 Sep 2015 13:16:49
 
 #include "MSSMRHN_two_scale_low_scale_constraint.hpp"
 #include "MSSMRHN_two_scale_model.hpp"
@@ -40,6 +40,7 @@ namespace flexiblesusy {
 #define BETAPARAMETER(p) beta_functions.get_##p()
 #define BETA(p) beta_##p
 #define LowEnergyConstant(p) Electroweak_constants::p
+#define MZPole oneset.displayPoleMZ()
 #define STANDARDDEVIATION(p) Electroweak_constants::Error_##p
 #define Pole(p) model->get_physical().p
 #define MODEL model
@@ -79,7 +80,7 @@ MSSMRHN_low_scale_constraint<Two_scale>::MSSMRHN_low_scale_constraint()
 }
 
 MSSMRHN_low_scale_constraint<Two_scale>::MSSMRHN_low_scale_constraint(
-   MSSMRHN<Two_scale>* model_, const QedQcd& oneset_)
+   MSSMRHN<Two_scale>* model_, const softsusy::QedQcd& oneset_)
    : Constraint<Two_scale>()
    , model(model_)
    , oneset(oneset_)
@@ -149,12 +150,13 @@ void MSSMRHN_low_scale_constraint<Two_scale>::set_model(Two_scale_model* model_)
    model = cast_model<MSSMRHN<Two_scale>*>(model_);
 }
 
-void MSSMRHN_low_scale_constraint<Two_scale>::set_sm_parameters(const QedQcd& oneset_)
+void MSSMRHN_low_scale_constraint<Two_scale>::set_sm_parameters(
+   const softsusy::QedQcd& oneset_)
 {
    oneset = oneset_;
 }
 
-const QedQcd& MSSMRHN_low_scale_constraint<Two_scale>::get_sm_parameters() const
+const softsusy::QedQcd& MSSMRHN_low_scale_constraint<Two_scale>::get_sm_parameters() const
 {
    return oneset;
 }
@@ -164,7 +166,7 @@ void MSSMRHN_low_scale_constraint<Two_scale>::clear()
    scale = 0.;
    initial_scale_guess = 0.;
    model = NULL;
-   oneset = QedQcd();
+   oneset = softsusy::QedQcd();
    MWDRbar = 0.;
    MZDRbar = 0.;
    AlphaS = 0.;
@@ -181,7 +183,7 @@ void MSSMRHN_low_scale_constraint<Two_scale>::initialize()
    assert(model && "MSSMRHN_low_scale_constraint<Two_scale>::"
           "initialize(): model pointer is zero.");
 
-   initial_scale_guess = LowEnergyConstant(MZ);
+   initial_scale_guess = MZPole;
 
    scale = initial_scale_guess;
 
@@ -203,7 +205,7 @@ void MSSMRHN_low_scale_constraint<Two_scale>::update_scale()
    assert(model && "MSSMRHN_low_scale_constraint<Two_scale>::"
           "update_scale(): model pointer is zero.");
 
-   scale = LowEnergyConstant(MZ);
+   scale = MZPole;
 
 
 }
@@ -217,8 +219,8 @@ void MSSMRHN_low_scale_constraint<Two_scale>::calculate_threshold_corrections()
    assert(model && "MSSMRHN_low_scale_constraint<Two_scale>::"
           "calculate_threshold_corrections(): model pointer is zero");
 
-   const double alpha_em = oneset.displayAlpha(ALPHA);
-   const double alpha_s  = oneset.displayAlpha(ALPHAS);
+   const double alpha_em = oneset.displayAlpha(softsusy::ALPHA);
+   const double alpha_s  = oneset.displayAlpha(softsusy::ALPHAS);
    const double mw_pole  = oneset.displayPoleMW();
    const double mz_pole  = oneset.displayPoleMZ();
 
@@ -457,9 +459,9 @@ void MSSMRHN_low_scale_constraint<Two_scale>::calculate_Yu_DRbar()
           "calculate_Yu_DRbar(): model pointer is zero");
 
    Eigen::Matrix<std::complex<double>,3,3> topDRbar(ZEROMATRIXCOMPLEX(3,3));
-   topDRbar(0,0)      = oneset.displayMass(mUp);
-   topDRbar(1,1)      = oneset.displayMass(mCharm);
-   topDRbar(2,2)      = oneset.displayMass(mTop);
+   topDRbar(0,0)      = oneset.displayMass(softsusy::mUp);
+   topDRbar(1,1)      = oneset.displayMass(softsusy::mCharm);
+   topDRbar(2,2)      = oneset.displayMass(softsusy::mTop);
 
    if (model->get_thresholds())
       topDRbar(2,2) = model->calculate_MFu_DRbar(oneset.displayPoleMt(), 2);
@@ -475,12 +477,13 @@ void MSSMRHN_low_scale_constraint<Two_scale>::calculate_Yd_DRbar()
           "calculate_Yd_DRbar(): model pointer is zero");
 
    Eigen::Matrix<std::complex<double>,3,3> bottomDRbar(ZEROMATRIXCOMPLEX(3,3));
-   bottomDRbar(0,0)   = oneset.displayMass(mDown);
-   bottomDRbar(1,1)   = oneset.displayMass(mStrange);
-   bottomDRbar(2,2)   = oneset.displayMass(mBottom);
+   bottomDRbar(0,0)   = oneset.displayMass(softsusy::mDown);
+   bottomDRbar(1,1)   = oneset.displayMass(softsusy::mStrange);
+   bottomDRbar(2,2)   = oneset.displayMass(softsusy::mBottom);
 
    if (model->get_thresholds())
-      bottomDRbar(2,2) = model->calculate_MFd_DRbar(oneset.displayMass(mBottom), 2);
+      bottomDRbar(2,2) = model->calculate_MFd_DRbar(
+         oneset.displayMass(softsusy::mBottom), 2);
 
    const auto vd = MODELPARAMETER(vd);
    MODEL->set_Yd((((1.4142135623730951*bottomDRbar)/vd).transpose()).real());
@@ -493,14 +496,14 @@ void MSSMRHN_low_scale_constraint<Two_scale>::calculate_Ye_DRbar()
           "calculate_Ye_DRbar(): model pointer is zero");
 
    Eigen::Matrix<std::complex<double>,3,3> electronDRbar(ZEROMATRIXCOMPLEX(3,3));
-   electronDRbar(0,0) = oneset.displayMass(mElectron);
-   electronDRbar(1,1) = oneset.displayMass(mMuon);
-   electronDRbar(2,2) = oneset.displayMass(mTau);
+   electronDRbar(0,0) = oneset.displayMass(softsusy::mElectron);
+   electronDRbar(1,1) = oneset.displayMass(softsusy::mMuon);
+   electronDRbar(2,2) = oneset.displayMass(softsusy::mTau);
 
    if (model->get_thresholds()) {
-      electronDRbar(0,0) = model->calculate_MFe_DRbar(oneset.displayMass(mElectron), 0);
-      electronDRbar(1,1) = model->calculate_MFe_DRbar(oneset.displayMass(mMuon), 1);
-      electronDRbar(2,2) = model->calculate_MFe_DRbar(oneset.displayMass(mTau), 2);
+      electronDRbar(0,0) = model->calculate_MFe_DRbar(oneset.displayMass(softsusy::mElectron), 0);
+      electronDRbar(1,1) = model->calculate_MFe_DRbar(oneset.displayMass(softsusy::mMuon), 1);
+      electronDRbar(2,2) = model->calculate_MFe_DRbar(oneset.displayMass(softsusy::mTau), 2);
    }
 
    const auto vd = MODELPARAMETER(vd);

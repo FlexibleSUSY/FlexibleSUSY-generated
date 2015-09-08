@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 13:23:44
+// File generated at Tue 8 Sep 2015 13:16:47
 
 #ifndef MSSMRHN_SLHA_IO_H
 #define MSSMRHN_SLHA_IO_H
@@ -27,6 +27,7 @@
 #include "slha_io.hpp"
 #include "ckm.hpp"
 #include "ew_input.hpp"
+#include "lowe.h"
 
 #include <Eigen/Core>
 #include <string>
@@ -57,7 +58,7 @@ public:
 
    void clear();
 
-   void fill(QedQcd& qedqcd) const { slha_io.fill(qedqcd); }
+   void fill(softsusy::QedQcd& qedqcd) const { slha_io.fill(qedqcd); }
    void fill(MSSMRHN_input_parameters&) const;
    void fill(MSSMRHN_mass_eigenstates&) const;
    template <class T> void fill(MSSMRHN_slha<T>&) const;
@@ -79,16 +80,15 @@ public:
 
    static void fill_minpar_tuple(MSSMRHN_input_parameters&, int, double);
    static void fill_extpar_tuple(MSSMRHN_input_parameters&, int, double);
-   static void fill_flexiblesusy_tuple(Spectrum_generator_settings&, int, double);
 
    template <class T>
-   static void fill_slhaea(SLHAea::Coll&, const MSSMRHN_slha<T>&, const QedQcd&, const MSSMRHN_scales&);
+   static void fill_slhaea(SLHAea::Coll&, const MSSMRHN_slha<T>&, const softsusy::QedQcd&, const MSSMRHN_scales&);
 
    template <class T>
-   static SLHAea::Coll fill_slhaea(const MSSMRHN_slha<T>&, const QedQcd&);
+   static SLHAea::Coll fill_slhaea(const MSSMRHN_slha<T>&, const softsusy::QedQcd&);
 
    template <class T>
-   static SLHAea::Coll fill_slhaea(const MSSMRHN_slha<T>&, const QedQcd&, const MSSMRHN_scales&);
+   static SLHAea::Coll fill_slhaea(const MSSMRHN_slha<T>&, const softsusy::QedQcd&, const MSSMRHN_scales&);
 
 private:
    SLHA_io slha_io; ///< SLHA io class
@@ -119,7 +119,7 @@ void MSSMRHN_slha_io::fill(MSSMRHN_slha<T>& model) const
 template <class T>
 void MSSMRHN_slha_io::fill_slhaea(
    SLHAea::Coll& slhaea, const MSSMRHN_slha<T>& model,
-   const QedQcd& qedqcd, const MSSMRHN_scales& scales)
+   const softsusy::QedQcd& qedqcd, const MSSMRHN_scales& scales)
 {
    MSSMRHN_slha_io slha_io;
    const MSSMRHN_input_parameters& input = model.get_input();
@@ -141,7 +141,7 @@ void MSSMRHN_slha_io::fill_slhaea(
 
 template <class T>
 SLHAea::Coll MSSMRHN_slha_io::fill_slhaea(
-   const MSSMRHN_slha<T>& model, const QedQcd& qedqcd)
+   const MSSMRHN_slha<T>& model, const softsusy::QedQcd& qedqcd)
 {
    MSSMRHN_scales scales;
 
@@ -150,7 +150,7 @@ SLHAea::Coll MSSMRHN_slha_io::fill_slhaea(
 
 template <class T>
 SLHAea::Coll MSSMRHN_slha_io::fill_slhaea(
-   const MSSMRHN_slha<T>& model, const QedQcd& qedqcd,
+   const MSSMRHN_slha<T>& model, const softsusy::QedQcd& qedqcd,
    const MSSMRHN_scales& scales)
 {
    SLHAea::Coll slhaea;

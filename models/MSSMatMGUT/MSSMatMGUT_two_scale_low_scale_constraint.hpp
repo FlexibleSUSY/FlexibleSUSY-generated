@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 14:05:24
+// File generated at Tue 8 Sep 2015 13:59:35
 
 #ifndef MSSMatMGUT_TWO_SCALE_LOW_SCALE_CONSTRAINT_H
 #define MSSMatMGUT_TWO_SCALE_LOW_SCALE_CONSTRAINT_H
@@ -38,7 +38,7 @@ template<>
 class MSSMatMGUT_low_scale_constraint<Two_scale> : public Constraint<Two_scale> {
 public:
    MSSMatMGUT_low_scale_constraint();
-   MSSMatMGUT_low_scale_constraint(MSSMatMGUT<Two_scale>*, const QedQcd&);
+   MSSMatMGUT_low_scale_constraint(MSSMatMGUT<Two_scale>*, const softsusy::QedQcd&);
    virtual ~MSSMatMGUT_low_scale_constraint();
    virtual void apply();
    virtual double get_scale() const;
@@ -49,15 +49,15 @@ public:
    const Eigen::Matrix<std::complex<double>,3,3>& get_pmns();
    double get_initial_scale_guess() const;
    void initialize();
-   const QedQcd& get_sm_parameters() const;
-   void set_sm_parameters(const QedQcd&);
+   const softsusy::QedQcd& get_sm_parameters() const;
+   void set_sm_parameters(const softsusy::QedQcd&);
    void set_threshold_corrections_loop_order(unsigned); ///< threshold corrections loop order
 
 private:
    double scale;
    double initial_scale_guess;
    MSSMatMGUT<Two_scale>* model;
-   QedQcd oneset;
+   softsusy::QedQcd oneset;
    Eigen::Matrix<std::complex<double>,3,3> ckm;
    Eigen::Matrix<std::complex<double>,3,3> pmns;
    Eigen::Matrix<double,3,3> neutrinoDRbar;

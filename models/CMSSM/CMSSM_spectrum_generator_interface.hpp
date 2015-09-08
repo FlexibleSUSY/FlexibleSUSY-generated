@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 14:07:42
+// File generated at Tue 8 Sep 2015 14:02:02
 
 #ifndef CMSSM_SPECTRUM_GENERATOR_INTERFACE_H
 #define CMSSM_SPECTRUM_GENERATOR_INTERFACE_H

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 13:03:34
+// File generated at Tue 8 Sep 2015 12:56:33
 
 #ifndef SMSSM_TWO_SCALE_susy_parameters_H
 #define SMSSM_TWO_SCALE_susy_parameters_H
@@ -46,7 +46,7 @@ public:
 );
    virtual ~SMSSM_susy_parameters() {}
    virtual Eigen::ArrayXd beta() const;
-   virtual const Eigen::ArrayXd get() const;
+   virtual Eigen::ArrayXd get() const;
    virtual void print(std::ostream&) const;
    virtual void set(const Eigen::ArrayXd&);
    const SMSSM_input_parameters& get_input() const;

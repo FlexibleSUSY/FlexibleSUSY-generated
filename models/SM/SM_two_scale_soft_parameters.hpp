@@ -16,12 +16,11 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 12:06:45
+// File generated at Tue 8 Sep 2015 11:59:35
 
 #ifndef SM_TWO_SCALE_soft_parameters_H
 #define SM_TWO_SCALE_soft_parameters_H
 
-#include "rge.h"
 #include "SM_two_scale_susy_parameters.hpp"
 
 #include <iosfwd>
@@ -40,7 +39,7 @@ public:
 );
    virtual ~SM_soft_parameters() {}
    virtual Eigen::ArrayXd beta() const;
-   virtual const Eigen::ArrayXd get() const;
+   virtual Eigen::ArrayXd get() const;
    virtual void print(std::ostream&) const;
    virtual void set(const Eigen::ArrayXd&);
 

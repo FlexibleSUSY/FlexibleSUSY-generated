@@ -16,12 +16,11 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 12:46:30
+// File generated at Tue 8 Sep 2015 12:39:21
 
 #ifndef UMSSM_TWO_SCALE_soft_parameters_H
 #define UMSSM_TWO_SCALE_soft_parameters_H
 
-#include "rge.h"
 #include "UMSSM_two_scale_susy_parameters.hpp"
 
 #include <iosfwd>
@@ -45,7 +44,7 @@ public:
 );
    virtual ~UMSSM_soft_parameters() {}
    virtual Eigen::ArrayXd beta() const;
-   virtual const Eigen::ArrayXd get() const;
+   virtual Eigen::ArrayXd get() const;
    virtual void print(std::ostream&) const;
    virtual void set(const Eigen::ArrayXd&);
 

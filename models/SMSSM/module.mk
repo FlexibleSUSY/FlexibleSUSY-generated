@@ -120,6 +120,10 @@ EXESMSSM_OBJ := \
 		$(patsubst %.cpp, %.o, $(filter %.cpp, $(EXESMSSM_SRC))) \
 		$(patsubst %.f, %.o, $(filter %.f, $(EXESMSSM_SRC)))
 
+EXESMSSM_EXE := \
+		$(patsubst %.cpp, %.x, $(filter %.cpp, $(EXESMSSM_SRC))) \
+		$(patsubst %.f, %.x, $(filter %.f, $(EXESMSSM_SRC)))
+
 LIBSMSSM_DEP := \
 		$(LIBSMSSM_OBJ:.o=.d)
 
@@ -127,15 +131,6 @@ EXESMSSM_DEP := \
 		$(EXESMSSM_OBJ:.o=.d)
 
 LIBSMSSM     := $(DIR)/lib$(MODNAME)$(LIBEXT)
-
-RUN_SMSSM_OBJ := $(DIR)/run_SMSSM.o
-RUN_SMSSM_EXE := $(DIR)/run_SMSSM.x
-
-RUN_CMD_LINE_SMSSM_OBJ := $(DIR)/run_cmd_line_SMSSM.o
-RUN_CMD_LINE_SMSSM_EXE := $(DIR)/run_cmd_line_SMSSM.x
-
-SCAN_SMSSM_OBJ := $(DIR)/scan_SMSSM.o
-SCAN_SMSSM_EXE := $(DIR)/scan_SMSSM.x
 
 METACODE_STAMP_SMSSM := $(DIR)/00_DELETE_ME_TO_RERUN_METACODE
 
@@ -187,9 +182,7 @@ clean-$(MODNAME): clean-$(MODNAME)-src
 
 clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-obj
 		-rm -f $(LIBSMSSM)
-		-rm -f $(RUN_SMSSM_EXE)
-		-rm -f $(RUN_CMD_LINE_SMSSM_EXE)
-		-rm -f $(SCAN_SMSSM_EXE)
+		-rm -f $(EXESMSSM_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
 
@@ -233,16 +226,10 @@ endif
 $(LIBSMSSM): $(LIBSMSSM_OBJ)
 		$(MAKELIB) $@ $^
 
-$(RUN_SMSSM_EXE): $(RUN_SMSSM_OBJ) $(LIBSMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
-
-$(RUN_CMD_LINE_SMSSM_EXE): $(RUN_CMD_LINE_SMSSM_OBJ) $(LIBSMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
-
-$(SCAN_SMSSM_EXE): $(SCAN_SMSSM_OBJ) $(LIBSMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
+$(DIR)/%.x: $(DIR)/%.o $(LIBSMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
 		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBSMSSM_DEP) $(EXESMSSM_DEP)
 ALLSRC += $(LIBSMSSM_SRC) $(EXESMSSM_SRC)
 ALLLIB += $(LIBSMSSM)
-ALLEXE += $(RUN_SMSSM_EXE) $(RUN_CMD_LINE_SMSSM_EXE) $(SCAN_SMSSM_EXE)
+ALLEXE += $(EXESMSSM_EXE)

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 12:46:24
+// File generated at Tue 8 Sep 2015 12:39:15
 
 #include "UMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -384,7 +384,7 @@ double CLASSNAME::get_SsRSsR() const
 }
 
 
-const Eigen::ArrayXd UMSSM_susy_parameters::get() const
+Eigen::ArrayXd UMSSM_susy_parameters::get() const
 {
    Eigen::ArrayXd pars(numberOfParameters);
 

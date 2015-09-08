@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 14:05:22
+// File generated at Tue 8 Sep 2015 13:59:32
 
 #include "MSSMatMGUT_utilities.hpp"
 #include "MSSMatMGUT_input_parameters.hpp"
@@ -30,8 +30,6 @@
 
 #define PHYSICAL(p) model.get_physical().p
 #define MODELPARAMETER(p) model.get_##p()
-
-using namespace softsusy;
 
 namespace flexiblesusy {
 

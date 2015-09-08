@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 13:54:50
+// File generated at Tue 8 Sep 2015 13:48:18
 
 #include "MSSMNoFVatMGUT_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -134,7 +134,7 @@ void MSSMNoFVatMGUT_soft_parameters::clear()
 
 }
 
-const Eigen::ArrayXd MSSMNoFVatMGUT_soft_parameters::get() const
+Eigen::ArrayXd MSSMNoFVatMGUT_soft_parameters::get() const
 {
    Eigen::ArrayXd pars(MSSMNoFVatMGUT_susy_parameters::get());
    pars.conservativeResize(numberOfParameters);

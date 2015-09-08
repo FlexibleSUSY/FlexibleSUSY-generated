@@ -16,12 +16,11 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 13:23:46
+// File generated at Tue 8 Sep 2015 13:17:05
 
 #ifndef lowMSSM_TWO_SCALE_soft_parameters_H
 #define lowMSSM_TWO_SCALE_soft_parameters_H
 
-#include "rge.h"
 #include "lowMSSM_two_scale_susy_parameters.hpp"
 
 #include <iosfwd>
@@ -45,7 +44,7 @@ public:
 );
    virtual ~lowMSSM_soft_parameters() {}
    virtual Eigen::ArrayXd beta() const;
-   virtual const Eigen::ArrayXd get() const;
+   virtual Eigen::ArrayXd get() const;
    virtual void print(std::ostream&) const;
    virtual void set(const Eigen::ArrayXd&);
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 13:13:04
+// File generated at Tue 8 Sep 2015 13:06:06
 
 #ifndef NUTSMSSM_SLHA_IO_H
 #define NUTSMSSM_SLHA_IO_H
@@ -27,6 +27,7 @@
 #include "slha_io.hpp"
 #include "ckm.hpp"
 #include "ew_input.hpp"
+#include "lowe.h"
 
 #include <Eigen/Core>
 #include <string>
@@ -57,7 +58,7 @@ public:
 
    void clear();
 
-   void fill(QedQcd& qedqcd) const { slha_io.fill(qedqcd); }
+   void fill(softsusy::QedQcd& qedqcd) const { slha_io.fill(qedqcd); }
    void fill(NUTSMSSM_input_parameters&) const;
    void fill(NUTSMSSM_mass_eigenstates&) const;
    template <class T> void fill(NUTSMSSM_slha<T>&) const;
@@ -79,16 +80,15 @@ public:
 
    static void fill_minpar_tuple(NUTSMSSM_input_parameters&, int, double);
    static void fill_extpar_tuple(NUTSMSSM_input_parameters&, int, double);
-   static void fill_flexiblesusy_tuple(Spectrum_generator_settings&, int, double);
 
    template <class T>
-   static void fill_slhaea(SLHAea::Coll&, const NUTSMSSM_slha<T>&, const QedQcd&, const NUTSMSSM_scales&);
+   static void fill_slhaea(SLHAea::Coll&, const NUTSMSSM_slha<T>&, const softsusy::QedQcd&, const NUTSMSSM_scales&);
 
    template <class T>
-   static SLHAea::Coll fill_slhaea(const NUTSMSSM_slha<T>&, const QedQcd&);
+   static SLHAea::Coll fill_slhaea(const NUTSMSSM_slha<T>&, const softsusy::QedQcd&);
 
    template <class T>
-   static SLHAea::Coll fill_slhaea(const NUTSMSSM_slha<T>&, const QedQcd&, const NUTSMSSM_scales&);
+   static SLHAea::Coll fill_slhaea(const NUTSMSSM_slha<T>&, const softsusy::QedQcd&, const NUTSMSSM_scales&);
 
 private:
    SLHA_io slha_io; ///< SLHA io class
@@ -119,7 +119,7 @@ void NUTSMSSM_slha_io::fill(NUTSMSSM_slha<T>& model) const
 template <class T>
 void NUTSMSSM_slha_io::fill_slhaea(
    SLHAea::Coll& slhaea, const NUTSMSSM_slha<T>& model,
-   const QedQcd& qedqcd, const NUTSMSSM_scales& scales)
+   const softsusy::QedQcd& qedqcd, const NUTSMSSM_scales& scales)
 {
    NUTSMSSM_slha_io slha_io;
    const NUTSMSSM_input_parameters& input = model.get_input();
@@ -141,7 +141,7 @@ void NUTSMSSM_slha_io::fill_slhaea(
 
 template <class T>
 SLHAea::Coll NUTSMSSM_slha_io::fill_slhaea(
-   const NUTSMSSM_slha<T>& model, const QedQcd& qedqcd)
+   const NUTSMSSM_slha<T>& model, const softsusy::QedQcd& qedqcd)
 {
    NUTSMSSM_scales scales;
 
@@ -150,7 +150,7 @@ SLHAea::Coll NUTSMSSM_slha_io::fill_slhaea(
 
 template <class T>
 SLHAea::Coll NUTSMSSM_slha_io::fill_slhaea(
-   const NUTSMSSM_slha<T>& model, const QedQcd& qedqcd,
+   const NUTSMSSM_slha<T>& model, const softsusy::QedQcd& qedqcd,
    const NUTSMSSM_scales& scales)
 {
    SLHAea::Coll slhaea;

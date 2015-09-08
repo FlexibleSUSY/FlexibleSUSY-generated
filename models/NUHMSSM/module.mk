@@ -120,6 +120,10 @@ EXENUHMSSM_OBJ := \
 		$(patsubst %.cpp, %.o, $(filter %.cpp, $(EXENUHMSSM_SRC))) \
 		$(patsubst %.f, %.o, $(filter %.f, $(EXENUHMSSM_SRC)))
 
+EXENUHMSSM_EXE := \
+		$(patsubst %.cpp, %.x, $(filter %.cpp, $(EXENUHMSSM_SRC))) \
+		$(patsubst %.f, %.x, $(filter %.f, $(EXENUHMSSM_SRC)))
+
 LIBNUHMSSM_DEP := \
 		$(LIBNUHMSSM_OBJ:.o=.d)
 
@@ -127,15 +131,6 @@ EXENUHMSSM_DEP := \
 		$(EXENUHMSSM_OBJ:.o=.d)
 
 LIBNUHMSSM     := $(DIR)/lib$(MODNAME)$(LIBEXT)
-
-RUN_NUHMSSM_OBJ := $(DIR)/run_NUHMSSM.o
-RUN_NUHMSSM_EXE := $(DIR)/run_NUHMSSM.x
-
-RUN_CMD_LINE_NUHMSSM_OBJ := $(DIR)/run_cmd_line_NUHMSSM.o
-RUN_CMD_LINE_NUHMSSM_EXE := $(DIR)/run_cmd_line_NUHMSSM.x
-
-SCAN_NUHMSSM_OBJ := $(DIR)/scan_NUHMSSM.o
-SCAN_NUHMSSM_EXE := $(DIR)/scan_NUHMSSM.x
 
 METACODE_STAMP_NUHMSSM := $(DIR)/00_DELETE_ME_TO_RERUN_METACODE
 
@@ -187,9 +182,7 @@ clean-$(MODNAME): clean-$(MODNAME)-src
 
 clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-obj
 		-rm -f $(LIBNUHMSSM)
-		-rm -f $(RUN_NUHMSSM_EXE)
-		-rm -f $(RUN_CMD_LINE_NUHMSSM_EXE)
-		-rm -f $(SCAN_NUHMSSM_EXE)
+		-rm -f $(EXENUHMSSM_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
 
@@ -233,16 +226,10 @@ endif
 $(LIBNUHMSSM): $(LIBNUHMSSM_OBJ)
 		$(MAKELIB) $@ $^
 
-$(RUN_NUHMSSM_EXE): $(RUN_NUHMSSM_OBJ) $(LIBNUHMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
-
-$(RUN_CMD_LINE_NUHMSSM_EXE): $(RUN_CMD_LINE_NUHMSSM_OBJ) $(LIBNUHMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
-
-$(SCAN_NUHMSSM_EXE): $(SCAN_NUHMSSM_OBJ) $(LIBNUHMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
+$(DIR)/%.x: $(DIR)/%.o $(LIBNUHMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
 		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBNUHMSSM_DEP) $(EXENUHMSSM_DEP)
 ALLSRC += $(LIBNUHMSSM_SRC) $(EXENUHMSSM_SRC)
 ALLLIB += $(LIBNUHMSSM)
-ALLEXE += $(RUN_NUHMSSM_EXE) $(RUN_CMD_LINE_NUHMSSM_EXE) $(SCAN_NUHMSSM_EXE)
+ALLEXE += $(EXENUHMSSM_EXE)

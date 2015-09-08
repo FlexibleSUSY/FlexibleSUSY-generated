@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 7 Jul 2015 13:20:04
+// File generated at Tue 8 Sep 2015 13:13:22
 
 /**
  * @file NMSSM_mass_eigenstates.hpp
@@ -25,12 +25,12 @@
  *        value problem using the two_scale solver by solving EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Tue 7 Jul 2015 13:20:04 with FlexibleSUSY
- * 1.2.1 (git commit: v1.2.1) and SARAH 4.5.8 .
+ * This file was generated at Tue 8 Sep 2015 13:13:22 with FlexibleSUSY
+ * 1.2.2 (git commit: v1.2.2) and SARAH 4.5.8 .
  */
 
-#ifndef NMSSM_IMODEL_H
-#define NMSSM_IMODEL_H
+#ifndef NMSSM_MASS_EIGENSTATES_H
+#define NMSSM_MASS_EIGENSTATES_H
 
 #include "NMSSM_two_scale_soft_parameters.hpp"
 #include "NMSSM_physical.hpp"
