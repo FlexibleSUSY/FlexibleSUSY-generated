@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Sep 2015 12:27:35
+// File generated at Sun 18 Oct 2015 12:05:45
 
 #ifndef MRSSM_SPECTRUM_GENERATOR_INTERFACE_H
 #define MRSSM_SPECTRUM_GENERATOR_INTERFACE_H
@@ -27,6 +27,8 @@
 #include "spectrum_generator_settings.hpp"
 #include "coupling_monitor.hpp"
 #include "two_loop_corrections.hpp"
+#include "error.hpp"
+#include "logger.hpp"
 
 namespace softsusy {
    class QedQcd;
@@ -134,7 +136,13 @@ void MRSSM_spectrum_generator_interface<T>::write_running_couplings(
    double start, double stop) const
 {
    MRSSM_mass_eigenstates tmp_model(model);
-   tmp_model.run_to(start);
+   try {
+      tmp_model.run_to(start);
+   } catch (const Error& error) {
+      ERROR("write_running_couplings: running to scale "
+            << start << " failed: " << error.what());
+      return;
+   }
 
    MRSSM_parameter_getter parameter_getter;
    Coupling_monitor<MRSSM_mass_eigenstates, MRSSM_parameter_getter>

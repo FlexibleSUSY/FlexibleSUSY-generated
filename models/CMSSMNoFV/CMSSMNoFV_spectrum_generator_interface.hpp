@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Sep 2015 13:57:18
+// File generated at Sun 18 Oct 2015 13:46:34
 
 #ifndef CMSSMNoFV_SPECTRUM_GENERATOR_INTERFACE_H
 #define CMSSMNoFV_SPECTRUM_GENERATOR_INTERFACE_H
@@ -27,6 +27,8 @@
 #include "spectrum_generator_settings.hpp"
 #include "coupling_monitor.hpp"
 #include "two_loop_corrections.hpp"
+#include "error.hpp"
+#include "logger.hpp"
 
 namespace softsusy {
    class QedQcd;
@@ -134,7 +136,13 @@ void CMSSMNoFV_spectrum_generator_interface<T>::write_running_couplings(
    double start, double stop) const
 {
    CMSSMNoFV_mass_eigenstates tmp_model(model);
-   tmp_model.run_to(start);
+   try {
+      tmp_model.run_to(start);
+   } catch (const Error& error) {
+      ERROR("write_running_couplings: running to scale "
+            << start << " failed: " << error.what());
+      return;
+   }
 
    CMSSMNoFV_parameter_getter parameter_getter;
    Coupling_monitor<CMSSMNoFV_mass_eigenstates, CMSSMNoFV_parameter_getter>

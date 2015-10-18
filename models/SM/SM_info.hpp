@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Sep 2015 11:59:37
+// File generated at Sun 18 Oct 2015 11:25:06
 
 #ifndef SM_INFO_H
 #define SM_INFO_H
@@ -26,7 +26,7 @@
 namespace flexiblesusy {
 
 namespace SM_info {
-   enum Particles : unsigned {Hp, Fv, Ah, hh, VZ, Fd, Fu, Fe, VG, VP, VWp,
+   enum Particles : unsigned {VG, Hp, Fv, Ah, hh, VP, VZ, Fd, Fu, Fe, VWp,
       NUMBER_OF_PARTICLES};
 
    enum Parameters : unsigned {g1, g2, g3, Lambdax, Yu00, Yu01, Yu02, Yu10,

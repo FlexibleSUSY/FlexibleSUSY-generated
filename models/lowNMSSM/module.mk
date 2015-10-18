@@ -19,13 +19,11 @@ lowNMSSM_TWO_SCALE_MK := \
 
 lowNMSSM_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.TP3 \
-		$(DIR)/LesHouches.in.lowNMSSM_goldstone_tachyon \
 		$(DIR)/LesHouches.in.TP6 \
 		$(DIR)/LesHouches.in.TP1 \
 		$(DIR)/LesHouches.in.TP4 \
 		$(DIR)/LesHouches.in.TP5 \
 		$(DIR)/LesHouches.in.TP2 \
-		$(DIR)/LesHouches.in.lowNMSSM.pseudoscalar \
 		$(DIR)/LesHouches.in.lowNMSSM
 
 lowNMSSM_GNUPLOT := \

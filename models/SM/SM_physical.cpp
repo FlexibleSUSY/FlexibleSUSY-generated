@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Sep 2015 12:00:06
+// File generated at Sun 18 Oct 2015 11:25:18
 
 #include "SM_physical.hpp"
 #include "slha_io.hpp"
@@ -29,9 +29,9 @@ namespace flexiblesusy {
 
 SM_physical::SM_physical()
    :
-    MHp(0), MFv(Eigen::Array<double,3,1>::Zero()), MAh(0), Mhh(0), MVZ(0), MFd
-       (Eigen::Array<double,3,1>::Zero()), MFu(Eigen::Array<double,3,1>::Zero()),
-       MFe(Eigen::Array<double,3,1>::Zero()), MVG(0), MVP(0), MVWp(0)
+    MVG(0), MHp(0), MFv(Eigen::Array<double,3,1>::Zero()), MAh(0), Mhh(0), MVP
+       (0), MVZ(0), MFd(Eigen::Array<double,3,1>::Zero()), MFu(Eigen::Array<double
+       ,3,1>::Zero()), MFe(Eigen::Array<double,3,1>::Zero()), MVWp(0)
 
    , Vd(Eigen::Matrix<std::complex<double>,3,3>::Zero()), Ud(Eigen::Matrix<
       std::complex<double>,3,3>::Zero()), Vu(Eigen::Matrix<std::complex<double>,3,
@@ -44,10 +44,12 @@ SM_physical::SM_physical()
 
 void SM_physical::clear()
 {
+   MVG = 0.;
    MHp = 0.;
    MFv = Eigen::Matrix<double,3,1>::Zero();
    MAh = 0.;
    Mhh = 0.;
+   MVP = 0.;
    MVZ = 0.;
    MFd = Eigen::Matrix<double,3,1>::Zero();
    Vd = Eigen::Matrix<std::complex<double>,3,3>::Zero();
@@ -58,8 +60,6 @@ void SM_physical::clear()
    MFe = Eigen::Matrix<double,3,1>::Zero();
    Ve = Eigen::Matrix<std::complex<double>,3,3>::Zero();
    Ue = Eigen::Matrix<std::complex<double>,3,3>::Zero();
-   MVG = 0.;
-   MVP = 0.;
    MVWp = 0.;
 
 }
@@ -89,16 +89,16 @@ void SM_physical::print(std::ostream& ostr) const
    ostr << "----------------------------------------\n"
            "pole masses:\n"
            "----------------------------------------\n";
+   ostr << "MVG = " << MVG << '\n';
    ostr << "MHp = " << MHp << '\n';
    ostr << "MFv = " << MFv.transpose() << '\n';
    ostr << "MAh = " << MAh << '\n';
    ostr << "Mhh = " << Mhh << '\n';
+   ostr << "MVP = " << MVP << '\n';
    ostr << "MVZ = " << MVZ << '\n';
    ostr << "MFd = " << MFd.transpose() << '\n';
    ostr << "MFu = " << MFu.transpose() << '\n';
    ostr << "MFe = " << MFe.transpose() << '\n';
-   ostr << "MVG = " << MVG << '\n';
-   ostr << "MVP = " << MVP << '\n';
    ostr << "MVWp = " << MVWp << '\n';
 
    ostr << "----------------------------------------\n"

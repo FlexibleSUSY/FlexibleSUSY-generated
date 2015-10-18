@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Sep 2015 12:27:35
+// File generated at Sun 18 Oct 2015 12:05:45
 
 /**
  * @file MRSSM_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Tue 8 Sep 2015 12:27:35 with FlexibleSUSY
- * 1.2.2 (git commit: v1.2.2) and SARAH 4.5.8 .
+ * This file was generated at Sun 18 Oct 2015 12:05:45 with FlexibleSUSY
+ * 1.2.3 (git commit: v1.2.3-2-g5f1c55e) and SARAH 4.5.8 .
  */
 
 #include "MRSSM_mass_eigenstates.hpp"
@@ -43,6 +43,7 @@
 #include "config.h"
 #include "pv.hpp"
 #include "functors.hpp"
+
 
 
 
@@ -72,6 +73,7 @@ using namespace MRSSM_info;
 #define HIGGS_2LOOP_CORRECTION_AT_AT     two_loop_corrections.higgs_at_at
 #define HIGGS_2LOOP_CORRECTION_ATAU_ATAU two_loop_corrections.higgs_atau_atau
 #define TOP_2LOOP_CORRECTION_QCD         two_loop_corrections.top_qcd
+#define HIGGS_3LOOP_CORRECTION_AT_AS_AS  1
 
 #ifdef ENABLE_THREADS
    std::mutex CLASSNAME::mtx_fortran;
@@ -162,14 +164,29 @@ void CLASSNAME::set_two_loop_corrections(const Two_loop_corrections& two_loop_co
    two_loop_corrections = two_loop_corrections_;
 }
 
+const Two_loop_corrections& CLASSNAME::get_two_loop_corrections() const
+{
+   return two_loop_corrections;
+}
+
 void CLASSNAME::set_number_of_ewsb_iterations(std::size_t iterations)
 {
    number_of_ewsb_iterations = iterations;
 }
 
+std::size_t CLASSNAME::get_number_of_ewsb_iterations() const
+{
+   return number_of_ewsb_iterations;
+}
+
 void CLASSNAME::set_number_of_mass_iterations(std::size_t iterations)
 {
    number_of_mass_iterations = iterations;
+}
+
+std::size_t CLASSNAME::get_number_of_mass_iterations() const
+{
+   return number_of_mass_iterations;
 }
 
 void CLASSNAME::set_precision(double precision_)
@@ -183,6 +200,11 @@ void CLASSNAME::set_pole_mass_loop_order(unsigned loop_order)
    pole_mass_loop_order = loop_order;
 }
 
+unsigned CLASSNAME::get_pole_mass_loop_order() const
+{
+   return pole_mass_loop_order;
+}
+
 void CLASSNAME::set_ewsb_iteration_precision(double precision)
 {
    ewsb_iteration_precision = precision;
@@ -191,6 +213,11 @@ void CLASSNAME::set_ewsb_iteration_precision(double precision)
 double CLASSNAME::get_ewsb_iteration_precision() const
 {
    return ewsb_iteration_precision;
+}
+
+double CLASSNAME::get_precision() const
+{
+   return precision;
 }
 
 double CLASSNAME::get_ewsb_loop_order() const
@@ -25475,6 +25502,8 @@ std::complex<double> CLASSNAME::tadpole_phiO() const
 
 
 
+
+
 void CLASSNAME::calculate_MGlu_pole()
 {
    // diagonalization with medium precision
@@ -25502,7 +25531,7 @@ void CLASSNAME::calculate_MSRdp_pole()
    // diagonalization with medium precision
    const double M_tree(get_mass_matrix_SRdp());
    const double p = MSRdp;
-   const double self_energy = Re(self_energy_SRdp(p));
+   double self_energy = Re(self_energy_SRdp(p));
    const double mass_sqr = M_tree - self_energy;
 
    PHYSICAL(MSRdp) = SignedAbsSqrt(mass_sqr);
@@ -25516,7 +25545,7 @@ void CLASSNAME::calculate_MSRum_pole()
    // diagonalization with medium precision
    const double M_tree(get_mass_matrix_SRum());
    const double p = MSRum;
-   const double self_energy = Re(self_energy_SRum(p));
+   double self_energy = Re(self_energy_SRum(p));
    const double mass_sqr = M_tree - self_energy;
 
    PHYSICAL(MSRum) = SignedAbsSqrt(mass_sqr);
@@ -25530,7 +25559,7 @@ void CLASSNAME::calculate_MsigmaO_pole()
    // diagonalization with medium precision
    const double M_tree(get_mass_matrix_sigmaO());
    const double p = MsigmaO;
-   const double self_energy = Re(self_energy_sigmaO(p));
+   double self_energy = Re(self_energy_sigmaO(p));
    const double mass_sqr = M_tree - self_energy;
 
    PHYSICAL(MsigmaO) = SignedAbsSqrt(mass_sqr);
@@ -25544,7 +25573,7 @@ void CLASSNAME::calculate_MphiO_pole()
    // diagonalization with medium precision
    const double M_tree(get_mass_matrix_phiO());
    const double p = MphiO;
-   const double self_energy = Re(self_energy_phiO(p));
+   double self_energy = Re(self_energy_phiO(p));
    const double mass_sqr = M_tree - self_energy;
 
    PHYSICAL(MphiO) = SignedAbsSqrt(mass_sqr);
@@ -26259,6 +26288,30 @@ double CLASSNAME::calculate_MVZ_pole(double p)
 }
 
 
+double CLASSNAME::calculate_MFv_DRbar(double, int) const
+{
+   return 0.0;
+}
+
+double CLASSNAME::calculate_MFe_DRbar(double m_sm_msbar, int idx) const
+{
+   const double p = m_sm_msbar;
+   const double self_energy_1  = Re(self_energy_Fe_1_heavy_rotated(p, idx
+      , idx));
+   const double self_energy_PL = Re(self_energy_Fe_PL_heavy_rotated(p,
+      idx, idx));
+   const double self_energy_PR = Re(self_energy_Fe_PR_heavy_rotated(p,
+      idx, idx));
+   const double drbar_conversion = 1 - 0.0023747152416172916*(0.6*Sqr(g1)
+      - Sqr(g2));
+   const double m_sm_drbar = m_sm_msbar * drbar_conversion;
+
+   const double m_susy_drbar = m_sm_drbar + self_energy_1 + m_sm_drbar *
+      (self_energy_PL + self_energy_PR);
+
+   return m_susy_drbar;
+}
+
 double CLASSNAME::calculate_MFu_DRbar(double m_pole, int idx) const
 {
    const double p = m_pole;
@@ -26302,30 +26355,6 @@ double CLASSNAME::calculate_MFd_DRbar(double m_sm_msbar, int idx) const
       self_energy_PL - self_energy_PR);
 
    return m_susy_drbar;
-}
-
-double CLASSNAME::calculate_MFe_DRbar(double m_sm_msbar, int idx) const
-{
-   const double p = m_sm_msbar;
-   const double self_energy_1  = Re(self_energy_Fe_1_heavy_rotated(p, idx
-      , idx));
-   const double self_energy_PL = Re(self_energy_Fe_PL_heavy_rotated(p,
-      idx, idx));
-   const double self_energy_PR = Re(self_energy_Fe_PR_heavy_rotated(p,
-      idx, idx));
-   const double drbar_conversion = 1 - 0.0023747152416172916*(0.6*Sqr(g1)
-      - Sqr(g2));
-   const double m_sm_drbar = m_sm_msbar * drbar_conversion;
-
-   const double m_susy_drbar = m_sm_drbar + self_energy_1 + m_sm_drbar *
-      (self_energy_PL + self_energy_PR);
-
-   return m_susy_drbar;
-}
-
-double CLASSNAME::calculate_MFv_DRbar(double, int) const
-{
-   return 0.0;
 }
 
 double CLASSNAME::calculate_MVP_DRbar(double)

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Sep 2015 13:12:13
+// File generated at Sun 18 Oct 2015 12:56:22
 
 #ifndef NUTNMSSM_SPECTRUM_GENERATOR_INTERFACE_H
 #define NUTNMSSM_SPECTRUM_GENERATOR_INTERFACE_H
@@ -27,6 +27,8 @@
 #include "spectrum_generator_settings.hpp"
 #include "coupling_monitor.hpp"
 #include "two_loop_corrections.hpp"
+#include "error.hpp"
+#include "logger.hpp"
 
 namespace softsusy {
    class QedQcd;
@@ -134,7 +136,13 @@ void NUTNMSSM_spectrum_generator_interface<T>::write_running_couplings(
    double start, double stop) const
 {
    NUTNMSSM_mass_eigenstates tmp_model(model);
-   tmp_model.run_to(start);
+   try {
+      tmp_model.run_to(start);
+   } catch (const Error& error) {
+      ERROR("write_running_couplings: running to scale "
+            << start << " failed: " << error.what());
+      return;
+   }
 
    NUTNMSSM_parameter_getter parameter_getter;
    Coupling_monitor<NUTNMSSM_mass_eigenstates, NUTNMSSM_parameter_getter>

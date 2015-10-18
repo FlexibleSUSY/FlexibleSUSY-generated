@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Sep 2015 11:59:37
+// File generated at Sun 18 Oct 2015 11:25:06
 
 #include "SM_info.hpp"
 
@@ -29,14 +29,14 @@ namespace SM_info {
    const double normalization_g2 = 1;
    const double normalization_g3 = 1;
 
-   const unsigned particle_multiplicities[NUMBER_OF_PARTICLES] = {1, 3, 1, 1, 1
-      , 3, 3, 3, 1, 1, 1};
+   const unsigned particle_multiplicities[NUMBER_OF_PARTICLES] = {1, 1, 3, 1, 1
+      , 1, 1, 3, 3, 3, 1};
 
-   const char* particle_names[NUMBER_OF_PARTICLES] = {"Hp", "Fv", "Ah", "hh",
-      "VZ", "Fd", "Fu", "Fe", "VG", "VP", "VWp"};
+   const char* particle_names[NUMBER_OF_PARTICLES] = {"VG", "Hp", "Fv", "Ah",
+      "hh", "VP", "VZ", "Fd", "Fu", "Fe", "VWp"};
 
-   const char* particle_latex_names[NUMBER_OF_PARTICLES] = {   "H^+", "\\nu",
-      "A^0", "h", "Z", "d", "u", "e", "g", "\\gamma", "W^+"};
+   const char* particle_latex_names[NUMBER_OF_PARTICLES] = {   "g", "H^+",
+      "\\nu", "A^0", "h", "\\gamma", "Z", "d", "u", "e", "W^+"};
 
    const char* parameter_names[NUMBER_OF_PARAMETERS] = {"g1", "g2", "g3",
       "Lambdax", "Yu(0,0)", "Yu(0,1)", "Yu(0,2)", "Yu(1,0)", "Yu(1,1)", "Yu(1,2)",

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Sep 2015 14:01:12
+// File generated at Sun 18 Oct 2015 13:49:06
 
 #include "MSSM_slha_io.hpp"
 #include "MSSM_input_parameters.hpp"

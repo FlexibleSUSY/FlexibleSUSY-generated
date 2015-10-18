@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Sep 2015 12:00:06
+// File generated at Sun 18 Oct 2015 11:25:18
 
 /**
  * @file SM_mass_eigenstates.hpp
@@ -25,8 +25,8 @@
  *        value problem using the two_scale solver by solving EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Tue 8 Sep 2015 12:00:06 with FlexibleSUSY
- * 1.2.2 (git commit: v1.2.2) and SARAH 4.5.8 .
+ * This file was generated at Sun 18 Oct 2015 11:25:18 with FlexibleSUSY
+ * 1.2.3 (git commit: v1.2.3-2-g5f1c55e) and SARAH 4.5.8 .
  */
 
 #ifndef SM_MASS_EIGENSTATES_H
@@ -79,9 +79,13 @@ public:
    void set_ewsb_iteration_precision(double);
    void set_ewsb_loop_order(unsigned);
    void set_two_loop_corrections(const Two_loop_corrections&);
+   const Two_loop_corrections& get_two_loop_corrections() const;
    void set_number_of_ewsb_iterations(std::size_t);
    void set_number_of_mass_iterations(std::size_t);
+   std::size_t get_number_of_ewsb_iterations() const;
+   std::size_t get_number_of_mass_iterations() const;
    void set_pole_mass_loop_order(unsigned);
+   unsigned get_pole_mass_loop_order() const;
    void set_physical(const SM_physical&);
    double get_ewsb_iteration_precision() const;
    double get_ewsb_loop_order() const;
@@ -99,13 +103,16 @@ public:
    void run_to(double scale, double eps = -1.0);
    void print(std::ostream&) const;
    void set_precision(double);
+   double get_precision() const;
 
 
+   double get_MVG() const { return MVG; }
    double get_MHp() const { return MHp; }
    const Eigen::Array<double,3,1>& get_MFv() const { return MFv; }
    double get_MFv(int i) const { return MFv(i); }
    double get_MAh() const { return MAh; }
    double get_Mhh() const { return Mhh; }
+   double get_MVP() const { return MVP; }
    double get_MVZ() const { return MVZ; }
    const Eigen::Array<double,3,1>& get_MFd() const { return MFd; }
    double get_MFd(int i) const { return MFd(i); }
@@ -113,8 +120,6 @@ public:
    double get_MFu(int i) const { return MFu(i); }
    const Eigen::Array<double,3,1>& get_MFe() const { return MFe; }
    double get_MFe(int i) const { return MFe(i); }
-   double get_MVG() const { return MVG; }
-   double get_MVP() const { return MVP; }
    double get_MVWp() const { return MVWp; }
 
    
@@ -134,6 +139,8 @@ public:
    const std::complex<double>& get_Ue(int i, int k) const { return Ue(i,k); }
 
 
+   double get_mass_matrix_VG() const;
+   void calculate_MVG();
    double get_mass_matrix_Hp() const;
    void calculate_MHp();
    Eigen::Matrix<double,3,3> get_mass_matrix_Fv() const;
@@ -142,6 +149,8 @@ public:
    void calculate_MAh();
    double get_mass_matrix_hh() const;
    void calculate_Mhh();
+   double get_mass_matrix_VP() const;
+   void calculate_MVP();
    double get_mass_matrix_VZ() const;
    void calculate_MVZ();
    Eigen::Matrix<double,3,3> get_mass_matrix_Fd() const;
@@ -150,10 +159,6 @@ public:
    void calculate_MFu();
    Eigen::Matrix<double,3,3> get_mass_matrix_Fe() const;
    void calculate_MFe();
-   double get_mass_matrix_VG() const;
-   void calculate_MVG();
-   double get_mass_matrix_VP() const;
-   void calculate_MVP();
    double get_mass_matrix_VWp() const;
    void calculate_MVWp();
 
@@ -374,22 +379,23 @@ public:
    void self_energy_hh_2loop(double result[1]) const;
 
 
+
+   void calculate_MVG_pole();
    void calculate_MFv_pole();
    void calculate_Mhh_pole();
+   void calculate_MVP_pole();
    void calculate_MVZ_pole();
    void calculate_MFd_pole();
    void calculate_MFu_pole();
    void calculate_MFe_pole();
-   void calculate_MVG_pole();
-   void calculate_MVP_pole();
    void calculate_MVWp_pole();
    double calculate_MVWp_pole(double);
    double calculate_MVZ_pole(double);
 
+   double calculate_MFv_DRbar(double, int) const;
+   double calculate_MFe_DRbar(double, int) const;
    double calculate_MFu_DRbar(double, int) const;
    double calculate_MFd_DRbar(double, int) const;
-   double calculate_MFe_DRbar(double, int) const;
-   double calculate_MFv_DRbar(double, int) const;
    double calculate_MVP_DRbar(double);
    double calculate_MVZ_DRbar(double);
    double calculate_MVWp_DRbar(double);
@@ -458,16 +464,16 @@ private:
    double G0(double, double, double) const;
 
    // DR-bar masses
+   double MVG;
    double MHp;
    Eigen::Array<double,3,1> MFv;
    double MAh;
    double Mhh;
+   double MVP;
    double MVZ;
    Eigen::Array<double,3,1> MFd;
    Eigen::Array<double,3,1> MFu;
    Eigen::Array<double,3,1> MFe;
-   double MVG;
-   double MVP;
    double MVWp;
 
    // DR-bar mixing matrices

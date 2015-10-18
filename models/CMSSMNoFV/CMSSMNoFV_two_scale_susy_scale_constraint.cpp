@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Sep 2015 13:47:22
+// File generated at Sun 18 Oct 2015 13:35:28
 
 #include "CMSSMNoFV_two_scale_susy_scale_constraint.hpp"
 #include "CMSSMNoFV_two_scale_model.hpp"
@@ -26,6 +26,7 @@
 #include "gsl_utils.hpp"
 #include "minimizer.hpp"
 #include "root_finder.hpp"
+#include "threshold_loop_functions.hpp"
 
 #include <cassert>
 #include <cmath>
@@ -41,6 +42,8 @@ namespace flexiblesusy {
 #define MZPole Electroweak_constants::MZ
 #define STANDARDDEVIATION(p) Electroweak_constants::Error_##p
 #define Pole(p) model->get_physical().p
+#define SCALE model->get_scale()
+#define THRESHOLD static_cast<int>(model->get_thresholds())
 #define MODEL model
 #define MODELCLASSNAME CMSSMNoFV<Two_scale>
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Sep 2015 14:00:14
+// File generated at Sun 18 Oct 2015 13:48:13
 
 /**
  * @file MSSMatMGUT_mass_eigenstates.hpp
@@ -25,8 +25,8 @@
  *        value problem using the two_scale solver by solving EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Tue 8 Sep 2015 14:00:14 with FlexibleSUSY
- * 1.2.2 (git commit: v1.2.2) and SARAH 4.5.8 .
+ * This file was generated at Sun 18 Oct 2015 13:48:13 with FlexibleSUSY
+ * 1.2.3 (git commit: v1.2.3-2-g5f1c55e) and SARAH 4.5.8 .
  */
 
 #ifndef MSSMatMGUT_MASS_EIGENSTATES_H
@@ -79,9 +79,13 @@ public:
    void set_ewsb_iteration_precision(double);
    void set_ewsb_loop_order(unsigned);
    void set_two_loop_corrections(const Two_loop_corrections&);
+   const Two_loop_corrections& get_two_loop_corrections() const;
    void set_number_of_ewsb_iterations(std::size_t);
    void set_number_of_mass_iterations(std::size_t);
+   std::size_t get_number_of_ewsb_iterations() const;
+   std::size_t get_number_of_mass_iterations() const;
    void set_pole_mass_loop_order(unsigned);
+   unsigned get_pole_mass_loop_order() const;
    void set_physical(const MSSMatMGUT_physical&);
    double get_ewsb_iteration_precision() const;
    double get_ewsb_loop_order() const;
@@ -99,6 +103,7 @@ public:
    void run_to(double scale, double eps = -1.0);
    void print(std::ostream&) const;
    void set_precision(double);
+   double get_precision() const;
 
    double get_lsp(MSSMatMGUT_info::Particles&) const;
 
@@ -658,6 +663,7 @@ public:
 
    void tadpole_hh_2loop(double result[2]) const;
 
+
    void calculate_MVG_pole();
    void calculate_MGlu_pole();
    void calculate_MFv_pole();
@@ -679,10 +685,10 @@ public:
    double calculate_MVWm_pole(double);
    double calculate_MVZ_pole(double);
 
+   double calculate_MFv_DRbar(double, int) const;
+   double calculate_MFe_DRbar(double, int) const;
    double calculate_MFu_DRbar(double, int) const;
    double calculate_MFd_DRbar(double, int) const;
-   double calculate_MFe_DRbar(double, int) const;
-   double calculate_MFv_DRbar(double, int) const;
    double calculate_MVP_DRbar(double);
    double calculate_MVZ_DRbar(double);
    double calculate_MVWm_DRbar(double);

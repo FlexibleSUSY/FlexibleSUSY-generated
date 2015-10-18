@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Sep 2015 13:13:22
+// File generated at Sun 18 Oct 2015 12:57:25
 
 #ifndef NMSSM_SPECTRUM_GENERATOR_H
 #define NMSSM_SPECTRUM_GENERATOR_H
