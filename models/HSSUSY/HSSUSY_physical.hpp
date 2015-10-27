@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 18 Oct 2015 11:24:55
+// File generated at Tue 27 Oct 2015 15:07:56
 
 #ifndef HSSUSY_PHYSICAL_H
 #define HSSUSY_PHYSICAL_H
@@ -36,16 +36,16 @@ struct HSSUSY_physical {
    void convert_to_slha(); ///< converts pole masses to SLHA convention
    void print(std::ostream&) const;
 
+   double MVG;
    double MHp;
    Eigen::Array<double,3,1> MFv;
    double MAh;
    double Mhh;
+   double MVP;
    double MVZ;
    Eigen::Array<double,3,1> MFd;
    Eigen::Array<double,3,1> MFu;
    Eigen::Array<double,3,1> MFe;
-   double MVG;
-   double MVP;
    double MVWp;
 
    Eigen::Matrix<std::complex<double>,3,3> Vd;

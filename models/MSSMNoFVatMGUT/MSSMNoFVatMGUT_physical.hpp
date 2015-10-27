@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 18 Oct 2015 13:46:37
+// File generated at Tue 27 Oct 2015 15:31:21
 
 #ifndef MSSMNoFVatMGUT_PHYSICAL_H
 #define MSSMNoFVatMGUT_PHYSICAL_H
@@ -36,7 +36,9 @@ struct MSSMNoFVatMGUT_physical {
    void convert_to_slha(); ///< converts pole masses to SLHA convention
    void print(std::ostream&) const;
 
+   double MVG;
    double MGlu;
+   double MVP;
    double MVZ;
    double MFd;
    double MFs;
@@ -67,8 +69,6 @@ struct MSSMNoFVatMGUT_physical {
    Eigen::Array<double,2,1> MHpm;
    Eigen::Array<double,4,1> MChi;
    Eigen::Array<double,2,1> MCha;
-   double MVG;
-   double MVP;
    double MVWm;
 
    Eigen::Matrix<double,2,2> ZD;

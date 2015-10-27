@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 18 Oct 2015 12:11:38
+// File generated at Tue 27 Oct 2015 15:15:07
 
 #include "E6SSM_slha_io.hpp"
 #include "E6SSM_input_parameters.hpp"
@@ -230,9 +230,11 @@ void E6SSM_slha_io::set_mass(const E6SSM_physical& physical,
 
    if (write_sm_masses) {
       mass
+         << FORMAT_MASS(21, LOCALPHYSICAL(MVG), "VG")
          << FORMAT_MASS(12, LOCALPHYSICAL(MFv(0)), "Fv(1)")
          << FORMAT_MASS(14, LOCALPHYSICAL(MFv(1)), "Fv(2)")
          << FORMAT_MASS(16, LOCALPHYSICAL(MFv(2)), "Fv(3)")
+         << FORMAT_MASS(22, LOCALPHYSICAL(MVP), "VP")
          << FORMAT_MASS(23, LOCALPHYSICAL(MVZ), "VZ")
          << FORMAT_MASS(11, LOCALPHYSICAL(MFe(0)), "Fe(1)")
          << FORMAT_MASS(13, LOCALPHYSICAL(MFe(1)), "Fe(2)")
@@ -243,8 +245,6 @@ void E6SSM_slha_io::set_mass(const E6SSM_physical& physical,
          << FORMAT_MASS(2, LOCALPHYSICAL(MFu(0)), "Fu(1)")
          << FORMAT_MASS(4, LOCALPHYSICAL(MFu(1)), "Fu(2)")
          << FORMAT_MASS(6, LOCALPHYSICAL(MFu(2)), "Fu(3)")
-         << FORMAT_MASS(21, LOCALPHYSICAL(MVG), "VG")
-         << FORMAT_MASS(22, LOCALPHYSICAL(MVP), "VP")
       ;
    }
 
@@ -719,11 +719,13 @@ void E6SSM_slha_io::fill_physical(E6SSM_physical& physical) const
       LOCALPHYSICAL(UHpp) = UHpp;
    }
 
+   LOCALPHYSICAL(MVG) = slha_io.read_entry("MASS", 21);
    LOCALPHYSICAL(MGlu) = slha_io.read_entry("MASS", 1000021);
    LOCALPHYSICAL(MFv)(0) = slha_io.read_entry("MASS", 12);
    LOCALPHYSICAL(MFv)(1) = slha_io.read_entry("MASS", 14);
    LOCALPHYSICAL(MFv)(2) = slha_io.read_entry("MASS", 16);
    LOCALPHYSICAL(MChaP) = slha_io.read_entry("MASS", 1000091);
+   LOCALPHYSICAL(MVP) = slha_io.read_entry("MASS", 22);
    LOCALPHYSICAL(MVZ) = slha_io.read_entry("MASS", 23);
    LOCALPHYSICAL(MVZp) = slha_io.read_entry("MASS", 31);
    LOCALPHYSICAL(MSd)(0) = slha_io.read_entry("MASS", 1000001);
@@ -802,8 +804,6 @@ void E6SSM_slha_io::fill_physical(E6SSM_physical& physical) const
    LOCALPHYSICAL(MSHpp)(1) = slha_io.read_entry("MASS", 93);
    LOCALPHYSICAL(MChiP)(0) = slha_io.read_entry("MASS", 1000092);
    LOCALPHYSICAL(MChiP)(1) = slha_io.read_entry("MASS", 1000094);
-   LOCALPHYSICAL(MVG) = slha_io.read_entry("MASS", 21);
-   LOCALPHYSICAL(MVP) = slha_io.read_entry("MASS", 22);
    LOCALPHYSICAL(MVWm) = slha_io.read_entry("MASS", 24);
 
 }

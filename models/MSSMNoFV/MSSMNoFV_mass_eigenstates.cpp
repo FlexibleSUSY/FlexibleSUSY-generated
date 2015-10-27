@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 18 Oct 2015 13:49:15
+// File generated at Tue 27 Oct 2015 15:33:28
 
 /**
  * @file MSSMNoFV_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Sun 18 Oct 2015 13:49:15 with FlexibleSUSY
- * 1.2.3 (git commit: v1.2.3-2-g5f1c55e) and SARAH 4.5.8 .
+ * This file was generated at Tue 27 Oct 2015 15:33:28 with FlexibleSUSY
+ * 1.2.4 (git commit: v1.2.4) and SARAH 4.5.8 .
  */
 
 #include "MSSMNoFV_mass_eigenstates.hpp"
@@ -19924,7 +19924,7 @@ void CLASSNAME::calculate_MVG_pole()
 void CLASSNAME::calculate_MGlu_pole()
 {
    // diagonalization with medium precision
-   const double M_tree(get_mass_matrix_Glu());
+   const double M_tree(MGlu);
    const double p = MGlu;
    const double self_energy_1  = Re(self_energy_Glu_1(p));
    const double self_energy_PL = Re(self_energy_Glu_PL(p));
@@ -19960,7 +19960,7 @@ void CLASSNAME::calculate_MVZ_pole()
 void CLASSNAME::calculate_MFd_pole()
 {
    // diagonalization with medium precision
-   const double M_tree(get_mass_matrix_Fd());
+   const double M_tree(MFd);
    const double p = MFd;
    const double self_energy_1  = Re(self_energy_Fd_1(p));
    const double self_energy_PL = Re(self_energy_Fd_PL(p));
@@ -19973,7 +19973,7 @@ void CLASSNAME::calculate_MFd_pole()
 void CLASSNAME::calculate_MFs_pole()
 {
    // diagonalization with medium precision
-   const double M_tree(get_mass_matrix_Fs());
+   const double M_tree(MFs);
    const double p = MFs;
    const double self_energy_1  = Re(self_energy_Fs_1(p));
    const double self_energy_PL = Re(self_energy_Fs_PL(p));
@@ -19986,7 +19986,7 @@ void CLASSNAME::calculate_MFs_pole()
 void CLASSNAME::calculate_MFb_pole()
 {
    // diagonalization with medium precision
-   const double M_tree(get_mass_matrix_Fb());
+   const double M_tree(MFb);
    const double p = MFb;
    const double self_energy_1  = Re(self_energy_Fb_1(p));
    const double self_energy_PL = Re(self_energy_Fb_PL(p));
@@ -19999,7 +19999,7 @@ void CLASSNAME::calculate_MFb_pole()
 void CLASSNAME::calculate_MFu_pole()
 {
    // diagonalization with medium precision
-   const double M_tree(get_mass_matrix_Fu());
+   const double M_tree(MFu);
    const double p = MFu;
    const double self_energy_1  = Re(self_energy_Fu_1(p));
    const double self_energy_PL = Re(self_energy_Fu_PL(p));
@@ -20012,7 +20012,7 @@ void CLASSNAME::calculate_MFu_pole()
 void CLASSNAME::calculate_MFc_pole()
 {
    // diagonalization with medium precision
-   const double M_tree(get_mass_matrix_Fc());
+   const double M_tree(MFc);
    const double p = MFc;
    const double self_energy_1  = Re(self_energy_Fc_1(p));
    const double self_energy_PL = Re(self_energy_Fc_PL(p));
@@ -20025,7 +20025,7 @@ void CLASSNAME::calculate_MFc_pole()
 void CLASSNAME::calculate_MFt_pole()
 {
    // diagonalization with medium precision
-   const double M_tree(get_mass_matrix_Ft());
+   const double M_tree(MFt);
    const bool add_2loop_corrections = pole_mass_loop_order > 1 &&
       TOP_2LOOP_CORRECTION_QCD;
    const double currentScale = get_scale();
@@ -20073,7 +20073,7 @@ void CLASSNAME::calculate_MFvt_pole()
 void CLASSNAME::calculate_MFe_pole()
 {
    // diagonalization with medium precision
-   const double M_tree(get_mass_matrix_Fe());
+   const double M_tree(MFe);
    const double p = MFe;
    const double self_energy_1  = Re(self_energy_Fe_1(p));
    const double self_energy_PL = Re(self_energy_Fe_PL(p));
@@ -20086,7 +20086,7 @@ void CLASSNAME::calculate_MFe_pole()
 void CLASSNAME::calculate_MFm_pole()
 {
    // diagonalization with medium precision
-   const double M_tree(get_mass_matrix_Fm());
+   const double M_tree(MFm);
    const double p = MFm;
    const double self_energy_1  = Re(self_energy_Fm_1(p));
    const double self_energy_PL = Re(self_energy_Fm_PL(p));
@@ -20099,7 +20099,7 @@ void CLASSNAME::calculate_MFm_pole()
 void CLASSNAME::calculate_MFtau_pole()
 {
    // diagonalization with medium precision
-   const double M_tree(get_mass_matrix_Ftau());
+   const double M_tree(MFtau);
    const double p = MFtau;
    const double self_energy_1  = Re(self_energy_Ftau_1(p));
    const double self_energy_PL = Re(self_energy_Ftau_PL(p));

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 18 Oct 2015 11:39:49
+// File generated at Tue 27 Oct 2015 15:07:16
 
 #include "SplitMSSM_slha_io.hpp"
 #include "SplitMSSM_input_parameters.hpp"
@@ -159,10 +159,12 @@ void SplitMSSM_slha_io::set_mass(const SplitMSSM_physical& physical,
 
    if (write_sm_masses) {
       mass
+         << FORMAT_MASS(21, LOCALPHYSICAL(MVG), "VG")
          << FORMAT_MASS(12, LOCALPHYSICAL(MFv(0)), "Fv(1)")
          << FORMAT_MASS(14, LOCALPHYSICAL(MFv(1)), "Fv(2)")
          << FORMAT_MASS(16, LOCALPHYSICAL(MFv(2)), "Fv(3)")
          << FORMAT_MASS(25, LOCALPHYSICAL(Mhh), "hh")
+         << FORMAT_MASS(22, LOCALPHYSICAL(MVP), "VP")
          << FORMAT_MASS(23, LOCALPHYSICAL(MVZ), "VZ")
          << FORMAT_MASS(1, LOCALPHYSICAL(MFd(0)), "Fd(1)")
          << FORMAT_MASS(3, LOCALPHYSICAL(MFd(1)), "Fd(2)")
@@ -173,8 +175,6 @@ void SplitMSSM_slha_io::set_mass(const SplitMSSM_physical& physical,
          << FORMAT_MASS(11, LOCALPHYSICAL(MFe(0)), "Fe(1)")
          << FORMAT_MASS(13, LOCALPHYSICAL(MFe(1)), "Fe(2)")
          << FORMAT_MASS(15, LOCALPHYSICAL(MFe(2)), "Fe(3)")
-         << FORMAT_MASS(21, LOCALPHYSICAL(MVG), "VG")
-         << FORMAT_MASS(22, LOCALPHYSICAL(MVP), "VP")
       ;
    }
 
@@ -442,11 +442,13 @@ void SplitMSSM_slha_io::fill_physical(SplitMSSM_physical& physical) const
       LOCALPHYSICAL(UM) = UM;
    }
 
+   LOCALPHYSICAL(MVG) = slha_io.read_entry("MASS", 21);
    LOCALPHYSICAL(MFv)(0) = slha_io.read_entry("MASS", 12);
    LOCALPHYSICAL(MFv)(1) = slha_io.read_entry("MASS", 14);
    LOCALPHYSICAL(MFv)(2) = slha_io.read_entry("MASS", 16);
    LOCALPHYSICAL(MGlu) = slha_io.read_entry("MASS", 1000021);
    LOCALPHYSICAL(Mhh) = slha_io.read_entry("MASS", 25);
+   LOCALPHYSICAL(MVP) = slha_io.read_entry("MASS", 22);
    LOCALPHYSICAL(MVZ) = slha_io.read_entry("MASS", 23);
    LOCALPHYSICAL(MFd)(0) = slha_io.read_entry("MASS", 1);
    LOCALPHYSICAL(MFd)(1) = slha_io.read_entry("MASS", 3);
@@ -463,8 +465,6 @@ void SplitMSSM_slha_io::fill_physical(SplitMSSM_physical& physical) const
    LOCALPHYSICAL(MChi)(3) = slha_io.read_entry("MASS", 1000035);
    LOCALPHYSICAL(MCha)(0) = slha_io.read_entry("MASS", 1000024);
    LOCALPHYSICAL(MCha)(1) = slha_io.read_entry("MASS", 1000037);
-   LOCALPHYSICAL(MVG) = slha_io.read_entry("MASS", 21);
-   LOCALPHYSICAL(MVP) = slha_io.read_entry("MASS", 22);
    LOCALPHYSICAL(MVWp) = slha_io.read_entry("MASS", 24);
 
 }

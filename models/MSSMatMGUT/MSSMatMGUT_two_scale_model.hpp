@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 18 Oct 2015 13:48:13
+// File generated at Tue 27 Oct 2015 15:32:49
 
 /**
  * @file MSSMatMGUT_two_scale_model.hpp
@@ -24,8 +24,8 @@
  *        value problem using the two_scale solver by solvingt EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Sun 18 Oct 2015 13:48:13 with FlexibleSUSY
- * 1.2.3 (git commit: v1.2.3-2-g5f1c55e) and SARAH 4.5.8 .
+ * This file was generated at Tue 27 Oct 2015 15:32:49 with FlexibleSUSY
+ * 1.2.4 (git commit: v1.2.4) and SARAH 4.5.8 .
  */
 
 #ifndef MSSMatMGUT_TWO_SCALE_H

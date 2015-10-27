@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 18 Oct 2015 13:48:13
+// File generated at Tue 27 Oct 2015 15:32:49
 
 #include "MSSMatMGUT_input_parameters.hpp"
 #include "MSSMatMGUT_slha_io.hpp"
@@ -85,7 +85,6 @@ int main(int argc, const char* argv[])
 
    // output
    slha_io.set_spinfo(problems);
-   slha_io.set_sminputs(oneset);
    slha_io.set_minpar(input);
    slha_io.set_extpar(input);
    if (!problems.have_problem() ||

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 18 Oct 2015 11:51:19
+// File generated at Tue 27 Oct 2015 15:10:13
 
 #include "MRSSM_info.hpp"
 
@@ -29,18 +29,18 @@ namespace MRSSM_info {
    const double normalization_g2 = 1;
    const double normalization_g3 = 1;
 
-   const unsigned particle_multiplicities[NUMBER_OF_PARTICLES] = {1, 3, 1, 1, 1
-      , 1, 1, 6, 3, 6, 6, 4, 4, 2, 4, 4, 2, 2, 3, 3, 3, 1, 1, 1};
+   const unsigned particle_multiplicities[NUMBER_OF_PARTICLES] = {1, 1, 3, 1, 1
+      , 1, 1, 1, 1, 6, 3, 6, 6, 4, 4, 2, 4, 4, 2, 2, 3, 3, 3, 1};
 
-   const char* particle_names[NUMBER_OF_PARTICLES] = {"Glu", "Fv", "SRdp",
-      "SRum", "sigmaO", "phiO", "VZ", "Sd", "Sv", "Su", "Se", "hh", "Ah", "Rh",
-      "Hpm", "Chi", "Cha1", "Cha2", "Fe", "Fd", "Fu", "VG", "VP", "VWm"};
+   const char* particle_names[NUMBER_OF_PARTICLES] = {"VG", "Glu", "Fv", "SRdp"
+      , "SRum", "sigmaO", "phiO", "VP", "VZ", "Sd", "Sv", "Su", "Se", "hh", "Ah",
+      "Rh", "Hpm", "Chi", "Cha1", "Cha2", "Fe", "Fd", "Fu", "VWm"};
 
-   const char* particle_latex_names[NUMBER_OF_PARTICLES] = {   "\\tilde{g}",
-      "\\nu", "R_d^+", "R_u^-", "\\sigma_o", "\\phi_o", "Z", "\\tilde{d}",
-      "\\tilde{\\nu}", "\\tilde{u}", "\\tilde{e}", "h", "A^0", "R^h", "H^-",
-      "\\tilde{\\chi}^0", "\\tilde{\\chi}^+", "\\tilde{\\rho}^-", "e", "d", "u",
-      "g", "\\gamma", "W^-"};
+   const char* particle_latex_names[NUMBER_OF_PARTICLES] = {   "g",
+      "\\tilde{g}", "\\nu", "R_d^+", "R_u^-", "\\sigma_o", "\\phi_o", "\\gamma",
+      "Z", "\\tilde{d}", "\\tilde{\\nu}", "\\tilde{u}", "\\tilde{e}", "h", "A^0",
+      "R^h", "H^-", "\\tilde{\\chi}^0", "\\tilde{\\chi}^+", "\\tilde{\\rho}^-",
+      "e", "d", "u", "W^-"};
 
    const char* parameter_names[NUMBER_OF_PARAMETERS] = {"Yd(0,0)", "Yd(0,1)",
       "Yd(0,2)", "Yd(1,0)", "Yd(1,1)", "Yd(1,2)", "Yd(2,0)", "Yd(2,1)", "Yd(2,2)",

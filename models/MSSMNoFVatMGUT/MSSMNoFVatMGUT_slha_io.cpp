@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 18 Oct 2015 13:35:36
+// File generated at Tue 27 Oct 2015 15:30:07
 
 #include "MSSMNoFVatMGUT_slha_io.hpp"
 #include "MSSMNoFVatMGUT_input_parameters.hpp"
@@ -211,6 +211,8 @@ void MSSMNoFVatMGUT_slha_io::set_mass(const MSSMNoFVatMGUT_physical& physical,
 
    if (write_sm_masses) {
       mass
+         << FORMAT_MASS(21, LOCALPHYSICAL(MVG), "VG")
+         << FORMAT_MASS(22, LOCALPHYSICAL(MVP), "VP")
          << FORMAT_MASS(23, LOCALPHYSICAL(MVZ), "VZ")
          << FORMAT_MASS(1, LOCALPHYSICAL(MFd), "Fd")
          << FORMAT_MASS(3, LOCALPHYSICAL(MFs), "Fs")
@@ -224,8 +226,6 @@ void MSSMNoFVatMGUT_slha_io::set_mass(const MSSMNoFVatMGUT_physical& physical,
          << FORMAT_MASS(11, LOCALPHYSICAL(MFe), "Fe")
          << FORMAT_MASS(13, LOCALPHYSICAL(MFm), "Fm")
          << FORMAT_MASS(15, LOCALPHYSICAL(MFtau), "Ftau")
-         << FORMAT_MASS(21, LOCALPHYSICAL(MVG), "VG")
-         << FORMAT_MASS(22, LOCALPHYSICAL(MVP), "VP")
       ;
    }
 
@@ -584,7 +584,9 @@ void MSSMNoFVatMGUT_slha_io::fill_physical(MSSMNoFVatMGUT_physical& physical) co
       LOCALPHYSICAL(ZTau) = ZTau;
    }
 
+   LOCALPHYSICAL(MVG) = slha_io.read_entry("MASS", 21);
    LOCALPHYSICAL(MGlu) = slha_io.read_entry("MASS", 1000021);
+   LOCALPHYSICAL(MVP) = slha_io.read_entry("MASS", 22);
    LOCALPHYSICAL(MVZ) = slha_io.read_entry("MASS", 23);
    LOCALPHYSICAL(MFd) = slha_io.read_entry("MASS", 1);
    LOCALPHYSICAL(MFs) = slha_io.read_entry("MASS", 3);
@@ -629,8 +631,6 @@ void MSSMNoFVatMGUT_slha_io::fill_physical(MSSMNoFVatMGUT_physical& physical) co
    LOCALPHYSICAL(MChi)(3) = slha_io.read_entry("MASS", 1000035);
    LOCALPHYSICAL(MCha)(0) = slha_io.read_entry("MASS", 1000024);
    LOCALPHYSICAL(MCha)(1) = slha_io.read_entry("MASS", 1000037);
-   LOCALPHYSICAL(MVG) = slha_io.read_entry("MASS", 21);
-   LOCALPHYSICAL(MVP) = slha_io.read_entry("MASS", 22);
    LOCALPHYSICAL(MVWm) = slha_io.read_entry("MASS", 24);
 
 }

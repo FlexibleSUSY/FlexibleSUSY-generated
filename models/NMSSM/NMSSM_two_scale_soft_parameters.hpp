@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 18 Oct 2015 12:54:45
+// File generated at Tue 27 Oct 2015 15:25:36
 
 #ifndef NMSSM_TWO_SCALE_soft_parameters_H
 #define NMSSM_TWO_SCALE_soft_parameters_H

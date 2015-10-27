@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 18 Oct 2015 11:24:55
+// File generated at Tue 27 Oct 2015 15:07:56
 
 /**
  * @file HSSUSY_two_scale_model.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Sun 18 Oct 2015 11:24:55 with FlexibleSUSY
- * 1.2.3 (git commit: v1.2.3-2-g5f1c55e) and SARAH 4.5.8 .
+ * This file was generated at Tue 27 Oct 2015 15:07:56 with FlexibleSUSY
+ * 1.2.4 (git commit: v1.2.4) and SARAH 4.5.8 .
  */
 
 #include "HSSUSY_two_scale_model.hpp"

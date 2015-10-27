@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 18 Oct 2015 11:40:36
+// File generated at Tue 27 Oct 2015 15:07:32
 
 #include "SplitMSSM_physical.hpp"
 #include "slha_io.hpp"
@@ -29,11 +29,11 @@ namespace flexiblesusy {
 
 SplitMSSM_physical::SplitMSSM_physical()
    :
-    MHp(0), MFv(Eigen::Array<double,3,1>::Zero()), MGlu(0), MAh(0), Mhh(0),
-       MVZ(0), MFd(Eigen::Array<double,3,1>::Zero()), MFu(Eigen::Array<double,3,1>
-       ::Zero()), MFe(Eigen::Array<double,3,1>::Zero()), MChi(Eigen::Array<double,
-       4,1>::Zero()), MCha(Eigen::Array<double,2,1>::Zero()), MVG(0), MVP(0), MVWp
-       (0)
+    MVG(0), MHp(0), MFv(Eigen::Array<double,3,1>::Zero()), MGlu(0), MAh(0),
+       Mhh(0), MVP(0), MVZ(0), MFd(Eigen::Array<double,3,1>::Zero()), MFu(
+       Eigen::Array<double,3,1>::Zero()), MFe(Eigen::Array<double,3,1>::Zero()),
+       MChi(Eigen::Array<double,4,1>::Zero()), MCha(Eigen::Array<double,2,1>::Zero
+       ()), MVWp(0)
 
    , Vd(Eigen::Matrix<std::complex<double>,3,3>::Zero()), Ud(Eigen::Matrix<
       std::complex<double>,3,3>::Zero()), Vu(Eigen::Matrix<std::complex<double>,3,
@@ -48,11 +48,13 @@ SplitMSSM_physical::SplitMSSM_physical()
 
 void SplitMSSM_physical::clear()
 {
+   MVG = 0.;
    MHp = 0.;
    MFv = Eigen::Matrix<double,3,1>::Zero();
    MGlu = 0.;
    MAh = 0.;
    Mhh = 0.;
+   MVP = 0.;
    MVZ = 0.;
    MFd = Eigen::Matrix<double,3,1>::Zero();
    Vd = Eigen::Matrix<std::complex<double>,3,3>::Zero();
@@ -68,8 +70,6 @@ void SplitMSSM_physical::clear()
    MCha = Eigen::Matrix<double,2,1>::Zero();
    UM = Eigen::Matrix<std::complex<double>,2,2>::Zero();
    UP = Eigen::Matrix<std::complex<double>,2,2>::Zero();
-   MVG = 0.;
-   MVP = 0.;
    MVWp = 0.;
 
 }
@@ -101,19 +101,19 @@ void SplitMSSM_physical::print(std::ostream& ostr) const
    ostr << "----------------------------------------\n"
            "pole masses:\n"
            "----------------------------------------\n";
+   ostr << "MVG = " << MVG << '\n';
    ostr << "MHp = " << MHp << '\n';
    ostr << "MFv = " << MFv.transpose() << '\n';
    ostr << "MGlu = " << MGlu << '\n';
    ostr << "MAh = " << MAh << '\n';
    ostr << "Mhh = " << Mhh << '\n';
+   ostr << "MVP = " << MVP << '\n';
    ostr << "MVZ = " << MVZ << '\n';
    ostr << "MFd = " << MFd.transpose() << '\n';
    ostr << "MFu = " << MFu.transpose() << '\n';
    ostr << "MFe = " << MFe.transpose() << '\n';
    ostr << "MChi = " << MChi.transpose() << '\n';
    ostr << "MCha = " << MCha.transpose() << '\n';
-   ostr << "MVG = " << MVG << '\n';
-   ostr << "MVP = " << MVP << '\n';
    ostr << "MVWp = " << MVWp << '\n';
 
    ostr << "----------------------------------------\n"

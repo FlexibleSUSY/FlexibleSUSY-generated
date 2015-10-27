@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 18 Oct 2015 11:39:49
+// File generated at Tue 27 Oct 2015 15:07:16
 
 #ifndef SplitMSSM_INFO_H
 #define SplitMSSM_INFO_H
@@ -26,8 +26,8 @@
 namespace flexiblesusy {
 
 namespace SplitMSSM_info {
-   enum Particles : unsigned {Hp, Fv, Glu, Ah, hh, VZ, Fd, Fu, Fe, Chi, Cha, VG
-      , VP, VWp, NUMBER_OF_PARTICLES};
+   enum Particles : unsigned {VG, Hp, Fv, Glu, Ah, hh, VP, VZ, Fd, Fu, Fe, Chi,
+      Cha, VWp, NUMBER_OF_PARTICLES};
 
    enum Parameters : unsigned {g1, g2, g3, Lambdax, Yu00, Yu01, Yu02, Yu10,
       Yu11, Yu12, Yu20, Yu21, Yu22, Yd00, Yd01, Yd02, Yd10, Yd11, Yd12, Yd20, Yd21

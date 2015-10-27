@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 18 Oct 2015 12:05:45
+// File generated at Tue 27 Oct 2015 15:12:54
 
 #ifndef MRSSM_PHYSICAL_H
 #define MRSSM_PHYSICAL_H
@@ -36,12 +36,14 @@ struct MRSSM_physical {
    void convert_to_slha(); ///< converts pole masses to SLHA convention
    void print(std::ostream&) const;
 
+   double MVG;
    double MGlu;
    Eigen::Array<double,3,1> MFv;
    double MSRdp;
    double MSRum;
    double MsigmaO;
    double MphiO;
+   double MVP;
    double MVZ;
    Eigen::Array<double,6,1> MSd;
    Eigen::Array<double,3,1> MSv;
@@ -57,8 +59,6 @@ struct MRSSM_physical {
    Eigen::Array<double,3,1> MFe;
    Eigen::Array<double,3,1> MFd;
    Eigen::Array<double,3,1> MFu;
-   double MVG;
-   double MVP;
    double MVWm;
 
    Eigen::Matrix<double,6,6> ZD;

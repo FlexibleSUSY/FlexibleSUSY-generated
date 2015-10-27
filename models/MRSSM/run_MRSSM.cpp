@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 18 Oct 2015 12:05:45
+// File generated at Tue 27 Oct 2015 15:12:55
 
 #include "MRSSM_input_parameters.hpp"
 #include "MRSSM_slha_io.hpp"
@@ -85,7 +85,6 @@ int main(int argc, const char* argv[])
 
    // output
    slha_io.set_spinfo(problems);
-   slha_io.set_sminputs(oneset);
    slha_io.set_minpar(input);
    slha_io.set_extpar(input);
    if (!problems.have_problem() ||

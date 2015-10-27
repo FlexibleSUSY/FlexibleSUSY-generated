@@ -21,7 +21,7 @@
  * @brief contains wrapper class for model class in SLHA convention
  */
 
-// File generated at Sun 18 Oct 2015 11:40:22
+// File generated at Tue 27 Oct 2015 15:07:19
 
 #ifndef SplitMSSM_TWO_SCALE_SLHA_H
 #define SplitMSSM_TWO_SCALE_SLHA_H
@@ -61,12 +61,14 @@ public:
    virtual void calculate_spectrum();
    virtual void print(std::ostream&) const;
 
+   double get_MVG_pole_slha() const { return PHYSICAL_SLHA(MVG); }
    double get_MHp_pole_slha() const { return PHYSICAL_SLHA(MHp); }
    const Eigen::Array<double,3,1>& get_MFv_pole_slha() const { return PHYSICAL_SLHA(MFv); }
    double get_MFv_pole_slha(int i) const { return PHYSICAL_SLHA(MFv(i)); }
    double get_MGlu_pole_slha() const { return PHYSICAL_SLHA(MGlu); }
    double get_MAh_pole_slha() const { return PHYSICAL_SLHA(MAh); }
    double get_Mhh_pole_slha() const { return PHYSICAL_SLHA(Mhh); }
+   double get_MVP_pole_slha() const { return PHYSICAL_SLHA(MVP); }
    double get_MVZ_pole_slha() const { return PHYSICAL_SLHA(MVZ); }
    const Eigen::Array<double,3,1>& get_MFd_pole_slha() const { return PHYSICAL_SLHA(MFd); }
    double get_MFd_pole_slha(int i) const { return PHYSICAL_SLHA(MFd(i)); }
@@ -78,8 +80,6 @@ public:
    double get_MChi_pole_slha(int i) const { return PHYSICAL_SLHA(MChi(i)); }
    const Eigen::Array<double,2,1>& get_MCha_pole_slha() const { return PHYSICAL_SLHA(MCha); }
    double get_MCha_pole_slha(int i) const { return PHYSICAL_SLHA(MCha(i)); }
-   double get_MVG_pole_slha() const { return PHYSICAL_SLHA(MVG); }
-   double get_MVP_pole_slha() const { return PHYSICAL_SLHA(MVP); }
    double get_MVWp_pole_slha() const { return PHYSICAL_SLHA(MVWp); }
 
    const Eigen::Matrix<std::complex<double>,3,3>& get_Vd_pole_slha() const { return PHYSICAL_SLHA(Vd); }

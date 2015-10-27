@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 18 Oct 2015 11:39:49
+// File generated at Tue 27 Oct 2015 15:07:16
 
 #include "SplitMSSM_info.hpp"
 
@@ -29,15 +29,15 @@ namespace SplitMSSM_info {
    const double normalization_g2 = 1;
    const double normalization_g3 = 1;
 
-   const unsigned particle_multiplicities[NUMBER_OF_PARTICLES] = {1, 3, 1, 1, 1
-      , 1, 3, 3, 3, 4, 2, 1, 1, 1};
+   const unsigned particle_multiplicities[NUMBER_OF_PARTICLES] = {1, 1, 3, 1, 1
+      , 1, 1, 1, 3, 3, 3, 4, 2, 1};
 
-   const char* particle_names[NUMBER_OF_PARTICLES] = {"Hp", "Fv", "Glu", "Ah",
-      "hh", "VZ", "Fd", "Fu", "Fe", "Chi", "Cha", "VG", "VP", "VWp"};
+   const char* particle_names[NUMBER_OF_PARTICLES] = {"VG", "Hp", "Fv", "Glu",
+      "Ah", "hh", "VP", "VZ", "Fd", "Fu", "Fe", "Chi", "Cha", "VWp"};
 
-   const char* particle_latex_names[NUMBER_OF_PARTICLES] = {   "H^+", "\\nu",
-      "\\tilde{g}", "A^0", "h", "Z", "d", "u", "e", "\\tilde{\\chi}^0",
-      "\\tilde{\\chi}^-", "g", "\\gamma", "W^+"};
+   const char* particle_latex_names[NUMBER_OF_PARTICLES] = {   "g", "H^+",
+      "\\nu", "\\tilde{g}", "A^0", "h", "\\gamma", "Z", "d", "u", "e",
+      "\\tilde{\\chi}^0", "\\tilde{\\chi}^-", "W^+"};
 
    const char* parameter_names[NUMBER_OF_PARAMETERS] = {"g1", "g2", "g3",
       "Lambdax", "Yu(0,0)", "Yu(0,1)", "Yu(0,2)", "Yu(1,0)", "Yu(1,1)", "Yu(1,2)",

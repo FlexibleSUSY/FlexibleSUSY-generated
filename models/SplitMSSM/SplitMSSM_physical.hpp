@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 18 Oct 2015 11:40:36
+// File generated at Tue 27 Oct 2015 15:07:32
 
 #ifndef SplitMSSM_PHYSICAL_H
 #define SplitMSSM_PHYSICAL_H
@@ -36,19 +36,19 @@ struct SplitMSSM_physical {
    void convert_to_slha(); ///< converts pole masses to SLHA convention
    void print(std::ostream&) const;
 
+   double MVG;
    double MHp;
    Eigen::Array<double,3,1> MFv;
    double MGlu;
    double MAh;
    double Mhh;
+   double MVP;
    double MVZ;
    Eigen::Array<double,3,1> MFd;
    Eigen::Array<double,3,1> MFu;
    Eigen::Array<double,3,1> MFe;
    Eigen::Array<double,4,1> MChi;
    Eigen::Array<double,2,1> MCha;
-   double MVG;
-   double MVP;
    double MVWp;
 
    Eigen::Matrix<std::complex<double>,3,3> Vd;

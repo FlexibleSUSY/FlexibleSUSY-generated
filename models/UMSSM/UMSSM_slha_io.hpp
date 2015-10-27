@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 18 Oct 2015 12:19:01
+// File generated at Tue 27 Oct 2015 15:15:11
 
 #ifndef UMSSM_SLHA_IO_H
 #define UMSSM_SLHA_IO_H

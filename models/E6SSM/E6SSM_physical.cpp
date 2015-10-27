@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 18 Oct 2015 12:41:19
+// File generated at Tue 27 Oct 2015 15:20:55
 
 #include "E6SSM_physical.hpp"
 #include "slha_io.hpp"
@@ -29,20 +29,21 @@ namespace flexiblesusy {
 
 E6SSM_physical::E6SSM_physical()
    :
-    MGlu(0), MFv(Eigen::Array<double,3,1>::Zero()), MChaP(0), MVZ(0), MVZp(0),
-       MSd(Eigen::Array<double,6,1>::Zero()), MSv(Eigen::Array<double,3,1>::Zero(
-       )), MSu(Eigen::Array<double,6,1>::Zero()), MSe(Eigen::Array<double,6,1>
-       ::Zero()), MSDX(Eigen::Array<double,6,1>::Zero()), Mhh(Eigen::Array<double,
-       3,1>::Zero()), MAh(Eigen::Array<double,3,1>::Zero()), MHpm(Eigen::Array<
-       double,2,1>::Zero()), MChi(Eigen::Array<double,6,1>::Zero()), MCha(
-       Eigen::Array<double,2,1>::Zero()), MFe(Eigen::Array<double,3,1>::Zero()),
-       MFd(Eigen::Array<double,3,1>::Zero()), MFu(Eigen::Array<double,3,1>::Zero()
-       ), MFDX(Eigen::Array<double,3,1>::Zero()), MSHI0(Eigen::Array<double,4,1>
-       ::Zero()), MSHIp(Eigen::Array<double,4,1>::Zero()), MChaI(Eigen::Array<
-       double,2,1>::Zero()), MChiI(Eigen::Array<double,4,1>::Zero()), MSSI0(
-       Eigen::Array<double,2,1>::Zero()), MFSI(Eigen::Array<double,2,1>::Zero()),
-       MSHp0(Eigen::Array<double,2,1>::Zero()), MSHpp(Eigen::Array<double,2,1>
-       ::Zero()), MChiP(Eigen::Array<double,2,1>::Zero()), MVG(0), MVP(0), MVWm(0)
+    MVG(0), MGlu(0), MFv(Eigen::Array<double,3,1>::Zero()), MChaP(0), MVP(0),
+       MVZ(0), MVZp(0), MSd(Eigen::Array<double,6,1>::Zero()), MSv(Eigen::Array<
+       double,3,1>::Zero()), MSu(Eigen::Array<double,6,1>::Zero()), MSe(
+       Eigen::Array<double,6,1>::Zero()), MSDX(Eigen::Array<double,6,1>::Zero()),
+       Mhh(Eigen::Array<double,3,1>::Zero()), MAh(Eigen::Array<double,3,1>::Zero()
+       ), MHpm(Eigen::Array<double,2,1>::Zero()), MChi(Eigen::Array<double,6,1>
+       ::Zero()), MCha(Eigen::Array<double,2,1>::Zero()), MFe(Eigen::Array<double,
+       3,1>::Zero()), MFd(Eigen::Array<double,3,1>::Zero()), MFu(Eigen::Array<
+       double,3,1>::Zero()), MFDX(Eigen::Array<double,3,1>::Zero()), MSHI0(
+       Eigen::Array<double,4,1>::Zero()), MSHIp(Eigen::Array<double,4,1>::Zero()),
+       MChaI(Eigen::Array<double,2,1>::Zero()), MChiI(Eigen::Array<double,4,1>
+       ::Zero()), MSSI0(Eigen::Array<double,2,1>::Zero()), MFSI(Eigen::Array<
+       double,2,1>::Zero()), MSHp0(Eigen::Array<double,2,1>::Zero()), MSHpp(
+       Eigen::Array<double,2,1>::Zero()), MChiP(Eigen::Array<double,2,1>::Zero()),
+       MVWm(0)
 
    , ZD(Eigen::Matrix<double,6,6>::Zero()), ZV(Eigen::Matrix<double,3,3>::Zero(
       )), ZU(Eigen::Matrix<double,6,6>::Zero()), ZE(Eigen::Matrix<double,6,6>
@@ -69,9 +70,11 @@ E6SSM_physical::E6SSM_physical()
 
 void E6SSM_physical::clear()
 {
+   MVG = 0.;
    MGlu = 0.;
    MFv = Eigen::Matrix<double,3,1>::Zero();
    MChaP = 0.;
+   MVP = 0.;
    MVZ = 0.;
    MVZp = 0.;
    MSd = Eigen::Matrix<double,6,1>::Zero();
@@ -126,8 +129,6 @@ void E6SSM_physical::clear()
    UHpp = Eigen::Matrix<double,2,2>::Zero();
    MChiP = Eigen::Matrix<double,2,1>::Zero();
    ZNp = Eigen::Matrix<std::complex<double>,2,2>::Zero();
-   MVG = 0.;
-   MVP = 0.;
    MVWm = 0.;
 
 }
@@ -165,9 +166,11 @@ void E6SSM_physical::print(std::ostream& ostr) const
    ostr << "----------------------------------------\n"
            "pole masses:\n"
            "----------------------------------------\n";
+   ostr << "MVG = " << MVG << '\n';
    ostr << "MGlu = " << MGlu << '\n';
    ostr << "MFv = " << MFv.transpose() << '\n';
    ostr << "MChaP = " << MChaP << '\n';
+   ostr << "MVP = " << MVP << '\n';
    ostr << "MVZ = " << MVZ << '\n';
    ostr << "MVZp = " << MVZp << '\n';
    ostr << "MSd = " << MSd.transpose() << '\n';
@@ -193,8 +196,6 @@ void E6SSM_physical::print(std::ostream& ostr) const
    ostr << "MSHp0 = " << MSHp0.transpose() << '\n';
    ostr << "MSHpp = " << MSHpp.transpose() << '\n';
    ostr << "MChiP = " << MChiP.transpose() << '\n';
-   ostr << "MVG = " << MVG << '\n';
-   ostr << "MVP = " << MVP << '\n';
    ostr << "MVWm = " << MVWm << '\n';
 
    ostr << "----------------------------------------\n"
