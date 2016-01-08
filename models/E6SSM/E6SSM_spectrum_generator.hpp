@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 8 Jan 2016 12:50:02
+// File generated at Fri 8 Jan 2016 15:20:25
 
 #ifndef E6SSM_SPECTRUM_GENERATOR_H
 #define E6SSM_SPECTRUM_GENERATOR_H

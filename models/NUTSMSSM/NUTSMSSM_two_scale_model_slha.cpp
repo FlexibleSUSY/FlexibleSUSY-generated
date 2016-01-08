@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 8 Jan 2016 12:51:05
+// File generated at Fri 8 Jan 2016 15:15:59
 
 /**
  * @file NUTSMSSM_two_scale_model_slha.cpp

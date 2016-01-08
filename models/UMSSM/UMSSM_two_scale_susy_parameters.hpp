@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 8 Jan 2016 12:29:20
+// File generated at Fri 8 Jan 2016 15:11:05
 
 #ifndef UMSSM_TWO_SCALE_susy_parameters_H
 #define UMSSM_TWO_SCALE_susy_parameters_H

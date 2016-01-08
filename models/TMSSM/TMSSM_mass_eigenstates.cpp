@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 8 Jan 2016 11:54:01
+// File generated at Fri 8 Jan 2016 15:10:22
 
 /**
  * @file TMSSM_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Fri 8 Jan 2016 11:54:01 with FlexibleSUSY
- * 1.3.0 (git commit: v1.3.0) and SARAH 4.6.0 .
+ * This file was generated at Fri 8 Jan 2016 15:10:22 with FlexibleSUSY
+ * 1.3.1 (git commit: v1.3.1) and SARAH 4.6.0 .
  */
 
 #include "TMSSM_mass_eigenstates.hpp"

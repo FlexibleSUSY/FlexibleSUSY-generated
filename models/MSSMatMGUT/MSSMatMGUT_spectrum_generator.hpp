@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 8 Jan 2016 13:28:26
+// File generated at Fri 8 Jan 2016 15:30:30
 
 #ifndef MSSMatMGUT_SPECTRUM_GENERATOR_H
 #define MSSMatMGUT_SPECTRUM_GENERATOR_H

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 8 Jan 2016 13:00:16
+// File generated at Fri 8 Jan 2016 15:20:10
 
 #ifndef MSSMRHN_SLHA_IO_H
 #define MSSMRHN_SLHA_IO_H

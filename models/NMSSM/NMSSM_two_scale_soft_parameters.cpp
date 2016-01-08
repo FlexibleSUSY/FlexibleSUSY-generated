@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 8 Jan 2016 12:56:10
+// File generated at Fri 8 Jan 2016 15:18:50
 
 #include "NMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"

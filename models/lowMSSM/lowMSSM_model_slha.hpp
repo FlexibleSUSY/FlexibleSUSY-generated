@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 8 Jan 2016 13:04:27
+// File generated at Fri 8 Jan 2016 15:24:06
 
 #ifndef lowMSSM_SLHA_H
 #define lowMSSM_SLHA_H
