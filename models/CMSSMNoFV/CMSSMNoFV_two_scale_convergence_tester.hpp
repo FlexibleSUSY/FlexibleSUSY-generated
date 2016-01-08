@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:29:31
+// File generated at Fri 8 Jan 2016 13:19:32
 
 #ifndef CMSSMNoFV_TWO_SCALE_CONVERGENCE_TESTER_H
 #define CMSSMNoFV_TWO_SCALE_CONVERGENCE_TESTER_H

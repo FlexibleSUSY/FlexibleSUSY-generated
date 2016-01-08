@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:23:56
+// File generated at Fri 8 Jan 2016 12:53:13
 
 #include "NUTNMSSM_two_scale_susy_scale_constraint.hpp"
 #include "NUTNMSSM_two_scale_model.hpp"

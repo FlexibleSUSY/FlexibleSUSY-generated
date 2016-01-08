@@ -16,13 +16,135 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:07:07
+// File generated at Fri 8 Jan 2016 11:43:35
 
 #include "HSSUSY_input_parameters.hpp"
+#include "wrappers.hpp"
 
 #define INPUT(p) input.p
 
 namespace flexiblesusy {
+
+Eigen::ArrayXd HSSUSY_input_parameters::get() const
+{
+   Eigen::ArrayXd pars(54);
+
+   pars(0) = MSUSY;
+   pars(1) = M1Input;
+   pars(2) = M2Input;
+   pars(3) = M3Input;
+   pars(4) = MuInput;
+   pars(5) = mAInput;
+   pars(6) = MEWSB;
+   pars(7) = AtInput;
+   pars(8) = TanBeta;
+   pars(9) = msq2(0,0);
+   pars(10) = msq2(0,1);
+   pars(11) = msq2(0,2);
+   pars(12) = msq2(1,0);
+   pars(13) = msq2(1,1);
+   pars(14) = msq2(1,2);
+   pars(15) = msq2(2,0);
+   pars(16) = msq2(2,1);
+   pars(17) = msq2(2,2);
+   pars(18) = msu2(0,0);
+   pars(19) = msu2(0,1);
+   pars(20) = msu2(0,2);
+   pars(21) = msu2(1,0);
+   pars(22) = msu2(1,1);
+   pars(23) = msu2(1,2);
+   pars(24) = msu2(2,0);
+   pars(25) = msu2(2,1);
+   pars(26) = msu2(2,2);
+   pars(27) = msd2(0,0);
+   pars(28) = msd2(0,1);
+   pars(29) = msd2(0,2);
+   pars(30) = msd2(1,0);
+   pars(31) = msd2(1,1);
+   pars(32) = msd2(1,2);
+   pars(33) = msd2(2,0);
+   pars(34) = msd2(2,1);
+   pars(35) = msd2(2,2);
+   pars(36) = msl2(0,0);
+   pars(37) = msl2(0,1);
+   pars(38) = msl2(0,2);
+   pars(39) = msl2(1,0);
+   pars(40) = msl2(1,1);
+   pars(41) = msl2(1,2);
+   pars(42) = msl2(2,0);
+   pars(43) = msl2(2,1);
+   pars(44) = msl2(2,2);
+   pars(45) = mse2(0,0);
+   pars(46) = mse2(0,1);
+   pars(47) = mse2(0,2);
+   pars(48) = mse2(1,0);
+   pars(49) = mse2(1,1);
+   pars(50) = mse2(1,2);
+   pars(51) = mse2(2,0);
+   pars(52) = mse2(2,1);
+   pars(53) = mse2(2,2);
+
+   return pars;
+}
+
+void HSSUSY_input_parameters::set(const Eigen::ArrayXd& pars)
+{
+   MSUSY = pars(0);
+   M1Input = pars(1);
+   M2Input = pars(2);
+   M3Input = pars(3);
+   MuInput = pars(4);
+   mAInput = pars(5);
+   MEWSB = pars(6);
+   AtInput = pars(7);
+   TanBeta = pars(8);
+   msq2(0,0) = pars(9);
+   msq2(0,1) = pars(10);
+   msq2(0,2) = pars(11);
+   msq2(1,0) = pars(12);
+   msq2(1,1) = pars(13);
+   msq2(1,2) = pars(14);
+   msq2(2,0) = pars(15);
+   msq2(2,1) = pars(16);
+   msq2(2,2) = pars(17);
+   msu2(0,0) = pars(18);
+   msu2(0,1) = pars(19);
+   msu2(0,2) = pars(20);
+   msu2(1,0) = pars(21);
+   msu2(1,1) = pars(22);
+   msu2(1,2) = pars(23);
+   msu2(2,0) = pars(24);
+   msu2(2,1) = pars(25);
+   msu2(2,2) = pars(26);
+   msd2(0,0) = pars(27);
+   msd2(0,1) = pars(28);
+   msd2(0,2) = pars(29);
+   msd2(1,0) = pars(30);
+   msd2(1,1) = pars(31);
+   msd2(1,2) = pars(32);
+   msd2(2,0) = pars(33);
+   msd2(2,1) = pars(34);
+   msd2(2,2) = pars(35);
+   msl2(0,0) = pars(36);
+   msl2(0,1) = pars(37);
+   msl2(0,2) = pars(38);
+   msl2(1,0) = pars(39);
+   msl2(1,1) = pars(40);
+   msl2(1,2) = pars(41);
+   msl2(2,0) = pars(42);
+   msl2(2,1) = pars(43);
+   msl2(2,2) = pars(44);
+   mse2(0,0) = pars(45);
+   mse2(0,1) = pars(46);
+   mse2(0,2) = pars(47);
+   mse2(1,0) = pars(48);
+   mse2(1,1) = pars(49);
+   mse2(1,2) = pars(50);
+   mse2(2,0) = pars(51);
+   mse2(2,1) = pars(52);
+   mse2(2,2) = pars(53);
+
+}
 
 std::ostream& operator<<(std::ostream& ostr, const HSSUSY_input_parameters& input)
 {

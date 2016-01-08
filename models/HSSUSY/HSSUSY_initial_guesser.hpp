@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:07:46
+// File generated at Fri 8 Jan 2016 11:43:43
 
 #ifndef HSSUSY_INITIAL_GUESSER_H
 #define HSSUSY_INITIAL_GUESSER_H

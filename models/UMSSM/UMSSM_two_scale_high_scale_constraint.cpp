@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:15:12
+// File generated at Fri 8 Jan 2016 12:30:22
 
 #include "UMSSM_two_scale_high_scale_constraint.hpp"
 #include "UMSSM_two_scale_model.hpp"
@@ -141,6 +141,7 @@ bool UMSSM_high_scale_constraint<Two_scale>::check_non_perturbative()
    const auto Yd = MODELPARAMETER(Yd);
    const auto Ye = MODELPARAMETER(Ye);
    const auto Lambdax = MODELPARAMETER(Lambdax);
+   const auto Yv = MODELPARAMETER(Yv);
    const auto Yu = MODELPARAMETER(Yu);
 
    if (MaxAbsValue(g1) > 3.5449077018110318) {
@@ -184,6 +185,12 @@ bool UMSSM_high_scale_constraint<Two_scale>::check_non_perturbative()
       model->get_problems().flag_non_perturbative_parameter("Lambdax", MaxAbsValue(Lambdax), model->get_scale(), 3.5449077018110318);
    } else {
       model->get_problems().unflag_non_perturbative_parameter("Lambdax");
+   }
+   if (MaxAbsValue(Yv) > 3.5449077018110318) {
+      problem = true;
+      model->get_problems().flag_non_perturbative_parameter("Yv", MaxAbsValue(Yv), model->get_scale(), 3.5449077018110318);
+   } else {
+      model->get_problems().unflag_non_perturbative_parameter("Yv");
    }
    if (MaxAbsValue(Yu) > 3.5449077018110318) {
       problem = true;

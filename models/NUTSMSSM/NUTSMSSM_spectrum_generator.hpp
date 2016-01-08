@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:24:54
+// File generated at Fri 8 Jan 2016 12:52:18
 
 #ifndef NUTSMSSM_SPECTRUM_GENERATOR_H
 #define NUTSMSSM_SPECTRUM_GENERATOR_H
@@ -28,6 +28,7 @@
 #include "NUTSMSSM_two_scale_convergence_tester.hpp"
 #include "NUTSMSSM_two_scale_initial_guesser.hpp"
 #include "NUTSMSSM_input_parameters.hpp"
+#include "NUTSMSSM_info.hpp"
 
 #include "lowe.h"
 #include "error.hpp"
@@ -78,11 +79,11 @@ private:
  * convergence is reached or an error occours.  Finally the particle
  * spectrum (pole masses) is calculated.
  *
- * @param oneset Standard Model input parameters
+ * @param qedqcd Standard Model input parameters
  * @param input model input parameters
  */
 template <class T>
-void NUTSMSSM_spectrum_generator<T>::run(const softsusy::QedQcd& oneset,
+void NUTSMSSM_spectrum_generator<T>::run(const softsusy::QedQcd& qedqcd,
                                 const NUTSMSSM_input_parameters& input)
 {
    NUTSMSSM<T>& model = this->model;
@@ -103,7 +104,7 @@ void NUTSMSSM_spectrum_generator<T>::run(const softsusy::QedQcd& oneset,
    susy_scale_constraint.set_model(&model);
    low_scale_constraint .set_model(&model);
 
-   low_scale_constraint .set_sm_parameters(oneset);
+   low_scale_constraint .set_sm_parameters(qedqcd);
 
    high_scale_constraint.initialize();
    susy_scale_constraint.initialize();
@@ -122,7 +123,7 @@ void NUTSMSSM_spectrum_generator<T>::run(const softsusy::QedQcd& oneset,
    if (this->max_iterations > 0)
       convergence_tester.set_max_iterations(this->max_iterations);
 
-   NUTSMSSM_initial_guesser<T> initial_guesser(&model, oneset,
+   NUTSMSSM_initial_guesser<T> initial_guesser(&model, qedqcd,
                                                   low_scale_constraint,
                                                   susy_scale_constraint,
                                                   high_scale_constraint);
@@ -159,8 +160,14 @@ void NUTSMSSM_spectrum_generator<T>::run(const softsusy::QedQcd& oneset,
       }
    } catch (const NoConvergenceError&) {
       model.get_problems().flag_no_convergence();
-   } catch (const NonPerturbativeRunningError&) {
+   } catch (const NonPerturbativeRunningError& error) {
       model.get_problems().flag_no_perturbative();
+      const int parameter_index = error.get_parameter_index();
+      const std::string parameter_name =
+         parameter_index < 0 ? "Q" : NUTSMSSM_info::parameter_names[parameter_index];
+      const double parameter_value = error.get_parameter_value();
+      const double scale = error.get_scale();
+      model.get_problems().flag_non_perturbative_parameter(parameter_name, parameter_value, scale, -1);
    } catch (const NoRhoConvergenceError&) {
       model.get_problems().flag_no_rho_convergence();
    } catch (const Error& error) {

@@ -16,13 +16,45 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:23:53
+// File generated at Fri 8 Jan 2016 12:53:10
 
 #include "NUTNMSSM_input_parameters.hpp"
+#include "wrappers.hpp"
 
 #define INPUT(p) input.p
 
 namespace flexiblesusy {
+
+Eigen::ArrayXd NUTNMSSM_input_parameters::get() const
+{
+   Eigen::ArrayXd pars(9);
+
+   pars(0) = m0;
+   pars(1) = m12;
+   pars(2) = TanBeta;
+   pars(3) = Azero;
+   pars(4) = LambdaInput;
+   pars(5) = KappaInput;
+   pars(6) = ALambdaInput;
+   pars(7) = AKappaInput;
+   pars(8) = MuEff;
+
+   return pars;
+}
+
+void NUTNMSSM_input_parameters::set(const Eigen::ArrayXd& pars)
+{
+   m0 = pars(0);
+   m12 = pars(1);
+   TanBeta = pars(2);
+   Azero = pars(3);
+   LambdaInput = pars(4);
+   KappaInput = pars(5);
+   ALambdaInput = pars(6);
+   AKappaInput = pars(7);
+   MuEff = pars(8);
+
+}
 
 std::ostream& operator<<(std::ostream& ostr, const NUTNMSSM_input_parameters& input)
 {

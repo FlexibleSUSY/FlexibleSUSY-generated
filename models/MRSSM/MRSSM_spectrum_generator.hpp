@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:12:55
+// File generated at Fri 8 Jan 2016 12:13:56
 
 #ifndef MRSSM_SPECTRUM_GENERATOR_H
 #define MRSSM_SPECTRUM_GENERATOR_H
@@ -27,6 +27,7 @@
 #include "MRSSM_two_scale_convergence_tester.hpp"
 #include "MRSSM_two_scale_initial_guesser.hpp"
 #include "MRSSM_input_parameters.hpp"
+#include "MRSSM_info.hpp"
 
 #include "lowe.h"
 #include "error.hpp"
@@ -74,11 +75,11 @@ private:
  * convergence is reached or an error occours.  Finally the particle
  * spectrum (pole masses) is calculated.
  *
- * @param oneset Standard Model input parameters
+ * @param qedqcd Standard Model input parameters
  * @param input model input parameters
  */
 template <class T>
-void MRSSM_spectrum_generator<T>::run(const softsusy::QedQcd& oneset,
+void MRSSM_spectrum_generator<T>::run(const softsusy::QedQcd& qedqcd,
                                 const MRSSM_input_parameters& input)
 {
    MRSSM<T>& model = this->model;
@@ -97,7 +98,7 @@ void MRSSM_spectrum_generator<T>::run(const softsusy::QedQcd& oneset,
    susy_scale_constraint.set_model(&model);
    low_scale_constraint .set_model(&model);
 
-   low_scale_constraint .set_sm_parameters(oneset);
+   low_scale_constraint .set_sm_parameters(qedqcd);
 
    susy_scale_constraint.initialize();
    low_scale_constraint .initialize();
@@ -114,7 +115,7 @@ void MRSSM_spectrum_generator<T>::run(const softsusy::QedQcd& oneset,
    if (this->max_iterations > 0)
       convergence_tester.set_max_iterations(this->max_iterations);
 
-   MRSSM_initial_guesser<T> initial_guesser(&model, oneset,
+   MRSSM_initial_guesser<T> initial_guesser(&model, qedqcd,
                                                   low_scale_constraint,
                                                   susy_scale_constraint);
    Two_scale_increasing_precision precision(10.0, this->precision_goal);
@@ -148,8 +149,14 @@ void MRSSM_spectrum_generator<T>::run(const softsusy::QedQcd& oneset,
       }
    } catch (const NoConvergenceError&) {
       model.get_problems().flag_no_convergence();
-   } catch (const NonPerturbativeRunningError&) {
+   } catch (const NonPerturbativeRunningError& error) {
       model.get_problems().flag_no_perturbative();
+      const int parameter_index = error.get_parameter_index();
+      const std::string parameter_name =
+         parameter_index < 0 ? "Q" : MRSSM_info::parameter_names[parameter_index];
+      const double parameter_value = error.get_parameter_value();
+      const double scale = error.get_scale();
+      model.get_problems().flag_non_perturbative_parameter(parameter_name, parameter_value, scale, -1);
    } catch (const NoRhoConvergenceError&) {
       model.get_problems().flag_no_rho_convergence();
    } catch (const Error& error) {

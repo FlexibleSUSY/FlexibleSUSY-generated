@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:07:13
+// File generated at Fri 8 Jan 2016 11:56:21
 
 #include "SplitMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -143,18 +143,28 @@ void SplitMSSM_soft_parameters::set(const Eigen::ArrayXd& pars)
 
 void SplitMSSM_soft_parameters::calc_soft_traces(Soft_traces& soft_traces) const
 {
-   TRACE_STRUCT.traceYdAdjYd = Re((Yd*Yd.adjoint()).trace());
-   TRACE_STRUCT.traceYeAdjYe = Re((Ye*Ye.adjoint()).trace());
-   TRACE_STRUCT.traceYuAdjYu = Re((Yu*Yu.adjoint()).trace());
-   TRACE_STRUCT.traceYdAdjYdYdAdjYd = Re((Yd*Yd.adjoint()*Yd*Yd.adjoint())
-      .trace());
-   TRACE_STRUCT.traceYdAdjYuYuAdjYd = Re((Yd*Yu.adjoint()*Yu*Yd.adjoint())
-      .trace());
-   TRACE_STRUCT.traceYeAdjYeYeAdjYe = Re((Ye*Ye.adjoint()*Ye*Ye.adjoint())
-      .trace());
-   TRACE_STRUCT.traceYuAdjYuYuAdjYu = Re((Yu*Yu.adjoint()*Yu*Yu.adjoint())
-      .trace());
+   if (get_loops() > 0) {
+      TRACE_STRUCT.traceYdAdjYd = Re((Yd*Yd.adjoint()).trace());
+      TRACE_STRUCT.traceYeAdjYe = Re((Ye*Ye.adjoint()).trace());
+      TRACE_STRUCT.traceYuAdjYu = Re((Yu*Yu.adjoint()).trace());
 
+   }
+
+   if (get_loops() > 1) {
+      TRACE_STRUCT.traceYdAdjYdYdAdjYd = Re((Yd*Yd.adjoint()*Yd*Yd.adjoint())
+         .trace());
+      TRACE_STRUCT.traceYdAdjYuYuAdjYd = Re((Yd*Yu.adjoint()*Yu*Yd.adjoint())
+         .trace());
+      TRACE_STRUCT.traceYeAdjYeYeAdjYe = Re((Ye*Ye.adjoint()*Ye*Ye.adjoint())
+         .trace());
+      TRACE_STRUCT.traceYuAdjYuYuAdjYu = Re((Yu*Yu.adjoint()*Yu*Yu.adjoint())
+         .trace());
+
+   }
+
+   if (get_loops() > 2) {
+
+   }
 }
 
 std::ostream& operator<<(std::ostream& ostr, const SplitMSSM_soft_parameters& soft_pars)

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:26:02
+// File generated at Fri 8 Jan 2016 13:00:19
 
 #ifndef MSSMRHN_LOW_SCALE_CONSTRAINT_H
 #define MSSMRHN_LOW_SCALE_CONSTRAINT_H

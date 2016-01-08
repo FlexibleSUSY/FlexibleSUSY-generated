@@ -37,6 +37,7 @@ LIBMSSMRHN_SRC += \
 		$(DIR)/MSSMRHN_mass_eigenstates.cpp \
 		$(DIR)/MSSMRHN_info.cpp \
 		$(DIR)/MSSMRHN_input_parameters.cpp \
+		$(DIR)/MSSMRHN_observables.cpp \
 		$(DIR)/MSSMRHN_slha_io.cpp \
 		$(DIR)/MSSMRHN_physical.cpp \
 		$(DIR)/MSSMRHN_utilities.cpp \
@@ -63,6 +64,7 @@ LIBMSSMRHN_HDR += \
 		$(DIR)/MSSMRHN_low_scale_constraint.hpp \
 		$(DIR)/MSSMRHN_model.hpp \
 		$(DIR)/MSSMRHN_model_slha.hpp \
+		$(DIR)/MSSMRHN_observables.hpp \
 		$(DIR)/MSSMRHN_physical.hpp \
 		$(DIR)/MSSMRHN_slha_io.hpp \
 		$(DIR)/MSSMRHN_spectrum_generator_interface.hpp \
@@ -227,7 +229,7 @@ $(LIBMSSMRHN): $(LIBMSSMRHN_OBJ)
 		$(MAKELIB) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBMSSMRHN) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(LDLIBS)
 
 ALLDEP += $(LIBMSSMRHN_DEP) $(EXEMSSMRHN_DEP)
 ALLSRC += $(LIBMSSMRHN_SRC) $(EXEMSSMRHN_SRC)

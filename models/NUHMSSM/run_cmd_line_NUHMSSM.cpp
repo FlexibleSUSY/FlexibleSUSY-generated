@@ -16,9 +16,10 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:28:43
+// File generated at Fri 8 Jan 2016 13:05:55
 
 #include "NUHMSSM_input_parameters.hpp"
+#include "NUHMSSM_observables.hpp"
 #include "NUHMSSM_spectrum_generator.hpp"
 #include "NUHMSSM_slha_io.hpp"
 
@@ -97,8 +98,8 @@ int main(int argc, char* argv[])
    NUHMSSM_input_parameters input;
    set_command_line_parameters(argc, argv, input);
 
-   softsusy::QedQcd oneset;
-   oneset.toMz();
+   softsusy::QedQcd qedqcd;
+   qedqcd.toMz();
 
    NUHMSSM_spectrum_generator<algorithm_type> spectrum_generator;
    spectrum_generator.set_precision_goal(1.0e-4);
@@ -111,7 +112,7 @@ int main(int argc, char* argv[])
    spectrum_generator.set_beta_loop_order(2);        // 2-loop
    spectrum_generator.set_threshold_corrections_loop_order(1); // 1-loop
 
-   spectrum_generator.run(oneset, input);
+   spectrum_generator.run(qedqcd, input);
 
    const int exit_code = spectrum_generator.get_exit_code();
    const NUHMSSM_slha<algorithm_type> model(spectrum_generator.get_model());
@@ -121,8 +122,10 @@ int main(int argc, char* argv[])
    scales.SUSYScale = spectrum_generator.get_susy_scale();
    scales.LowScale  = spectrum_generator.get_low_scale();
 
+   const Observables observables(calculate_observables(model, qedqcd));
+
    // SLHA output
-   SLHAea::Coll slhaea(NUHMSSM_slha_io::fill_slhaea(model, oneset, scales));
+   SLHAea::Coll slhaea(NUHMSSM_slha_io::fill_slhaea(model, qedqcd, scales, observables));
 
    std::cout << slhaea;
 

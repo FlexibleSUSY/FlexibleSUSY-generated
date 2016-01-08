@@ -37,6 +37,7 @@ LIBUMSSM_SRC += \
 		$(DIR)/UMSSM_mass_eigenstates.cpp \
 		$(DIR)/UMSSM_info.cpp \
 		$(DIR)/UMSSM_input_parameters.cpp \
+		$(DIR)/UMSSM_observables.cpp \
 		$(DIR)/UMSSM_slha_io.cpp \
 		$(DIR)/UMSSM_physical.cpp \
 		$(DIR)/UMSSM_utilities.cpp \
@@ -63,6 +64,7 @@ LIBUMSSM_HDR += \
 		$(DIR)/UMSSM_low_scale_constraint.hpp \
 		$(DIR)/UMSSM_model.hpp \
 		$(DIR)/UMSSM_model_slha.hpp \
+		$(DIR)/UMSSM_observables.hpp \
 		$(DIR)/UMSSM_physical.hpp \
 		$(DIR)/UMSSM_slha_io.hpp \
 		$(DIR)/UMSSM_spectrum_generator_interface.hpp \
@@ -227,7 +229,7 @@ $(LIBUMSSM): $(LIBUMSSM_OBJ)
 		$(MAKELIB) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBUMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(LDLIBS)
 
 ALLDEP += $(LIBUMSSM_DEP) $(EXEUMSSM_DEP)
 ALLSRC += $(LIBUMSSM_SRC) $(EXEUMSSM_SRC)

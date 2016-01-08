@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:10:11
+// File generated at Fri 8 Jan 2016 12:05:12
 
 #ifndef MRSSM_INPUT_PARAMETERS_H
 #define MRSSM_INPUT_PARAMETERS_H
@@ -62,6 +62,9 @@ struct MRSSM_input_parameters {
    , MDBSInput(0), MDWBTInput(0), MDGocInput(0)
 
    {}
+
+   Eigen::ArrayXd get() const;
+   void set(const Eigen::ArrayXd&);
 };
 
 std::ostream& operator<<(std::ostream&, const MRSSM_input_parameters&);

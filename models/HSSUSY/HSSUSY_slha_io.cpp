@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:07:08
+// File generated at Fri 8 Jan 2016 11:43:37
 
 #include "HSSUSY_slha_io.hpp"
 #include "HSSUSY_input_parameters.hpp"

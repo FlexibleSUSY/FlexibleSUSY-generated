@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:25:59
+// File generated at Fri 8 Jan 2016 13:00:16
 
 #ifndef MSSMRHN_SLHA_IO_H
 #define MSSMRHN_SLHA_IO_H
@@ -28,6 +28,7 @@
 #include "ckm.hpp"
 #include "ew_input.hpp"
 #include "lowe.h"
+#include "observables.hpp"
 
 #include <Eigen/Core>
 #include <string>
@@ -37,7 +38,9 @@
 #define PHYSICAL(p) model.get_physical().p
 #define PHYSICAL_SLHA(p) model.get_physical_slha().p
 #define LOCALPHYSICAL(p) physical.p
+#define MODEL model
 #define MODELPARAMETER(p) model.get_##p()
+#define OBSERVABLES observables
 #define LowEnergyConstant(p) Electroweak_constants::p
 #define SCALES(p) scales.p
 
@@ -45,6 +48,7 @@ namespace flexiblesusy {
 
 struct MSSMRHN_input_parameters;
 class Spectrum_generator_settings;
+struct Observables;
 
 struct MSSMRHN_scales {
    MSSMRHN_scales() : HighScale(0.), SUSYScale(0.), LowScale(0.) {}
@@ -69,7 +73,7 @@ public:
    void read_from_source(const std::string&);
    void read_from_stream(std::istream&);
    void set_extpar(const MSSMRHN_input_parameters&);
-   template <class T> void set_extra(const MSSMRHN_slha<T>&, const MSSMRHN_scales&);
+   template <class T> void set_extra(const MSSMRHN_slha<T>&, const MSSMRHN_scales&, const Observables&);
    void set_minpar(const MSSMRHN_input_parameters&);
    void set_sminputs(const softsusy::QedQcd&);
    template <class T> void set_spectrum(const MSSMRHN_slha<T>&);
@@ -82,13 +86,10 @@ public:
    static void fill_extpar_tuple(MSSMRHN_input_parameters&, int, double);
 
    template <class T>
-   static void fill_slhaea(SLHAea::Coll&, const MSSMRHN_slha<T>&, const softsusy::QedQcd&, const MSSMRHN_scales&);
+   static void fill_slhaea(SLHAea::Coll&, const MSSMRHN_slha<T>&, const softsusy::QedQcd&, const MSSMRHN_scales&, const Observables&);
 
    template <class T>
-   static SLHAea::Coll fill_slhaea(const MSSMRHN_slha<T>&, const softsusy::QedQcd&);
-
-   template <class T>
-   static SLHAea::Coll fill_slhaea(const MSSMRHN_slha<T>&, const softsusy::QedQcd&, const MSSMRHN_scales&);
+   static SLHAea::Coll fill_slhaea(const MSSMRHN_slha<T>&, const softsusy::QedQcd&, const MSSMRHN_scales&, const Observables&);
 
 private:
    SLHA_io slha_io; ///< SLHA io class
@@ -119,7 +120,8 @@ void MSSMRHN_slha_io::fill(MSSMRHN_slha<T>& model) const
 template <class T>
 void MSSMRHN_slha_io::fill_slhaea(
    SLHAea::Coll& slhaea, const MSSMRHN_slha<T>& model,
-   const softsusy::QedQcd& qedqcd, const MSSMRHN_scales& scales)
+   const softsusy::QedQcd& qedqcd, const MSSMRHN_scales& scales,
+   const Observables& observables)
 {
    MSSMRHN_slha_io slha_io;
    const MSSMRHN_input_parameters& input = model.get_input();
@@ -133,7 +135,7 @@ void MSSMRHN_slha_io::fill_slhaea(
    slha_io.set_extpar(input);
    if (!error) {
       slha_io.set_spectrum(model);
-      slha_io.set_extra(model, scales);
+      slha_io.set_extra(model, scales, observables);
    }
 
    slhaea = slha_io.get_slha_io().get_data();
@@ -141,20 +143,11 @@ void MSSMRHN_slha_io::fill_slhaea(
 
 template <class T>
 SLHAea::Coll MSSMRHN_slha_io::fill_slhaea(
-   const MSSMRHN_slha<T>& model, const softsusy::QedQcd& qedqcd)
-{
-   MSSMRHN_scales scales;
-
-   return fill_slhaea(model, qedqcd, scales);
-}
-
-template <class T>
-SLHAea::Coll MSSMRHN_slha_io::fill_slhaea(
    const MSSMRHN_slha<T>& model, const softsusy::QedQcd& qedqcd,
-   const MSSMRHN_scales& scales)
+   const MSSMRHN_scales& scales, const Observables& observables)
 {
    SLHAea::Coll slhaea;
-   MSSMRHN_slha_io::fill_slhaea(slhaea, model, qedqcd, scales);
+   MSSMRHN_slha_io::fill_slhaea(slhaea, model, qedqcd, scales, observables);
 
    return slhaea;
 }
@@ -223,7 +216,8 @@ void MSSMRHN_slha_io::set_model_parameters(const MSSMRHN_slha<T>& model)
  */
 template <class T>
 void MSSMRHN_slha_io::set_extra(
-   const MSSMRHN_slha<T>& model, const MSSMRHN_scales& scales)
+   const MSSMRHN_slha<T>& model, const MSSMRHN_scales& scales,
+   const Observables& observables)
 {
    const MSSMRHN_physical physical(model.get_physical_slha());
 
@@ -272,7 +266,9 @@ void MSSMRHN_slha_io::set_spectrum(const MSSMRHN_slha<T>& model)
 #undef PHYSICAL
 #undef PHYSICAL_SLHA
 #undef LOCALPHYSICAL
+#undef MODEL
 #undef MODELPARAMETER
+#undef OBSERVABLES
 #undef LowEnergyConstant
 #undef SCALES
 

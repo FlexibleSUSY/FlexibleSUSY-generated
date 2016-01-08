@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:30:04
+// File generated at Fri 8 Jan 2016 13:20:00
 
 #ifndef MSSMNoFVatMGUT_INPUT_PARAMETERS_H
 #define MSSMNoFVatMGUT_INPUT_PARAMETERS_H
@@ -67,6 +67,9 @@ struct MSSMNoFVatMGUT_input_parameters {
    (0), md33IN(0)
 
    {}
+
+   Eigen::ArrayXd get() const;
+   void set(const Eigen::ArrayXd&);
 };
 
 std::ostream& operator<<(std::ostream&, const MSSMNoFVatMGUT_input_parameters&);

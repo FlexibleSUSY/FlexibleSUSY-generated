@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:08:55
+// File generated at Fri 8 Jan 2016 11:50:02
 
 #include "TMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -399,18 +399,28 @@ void TMSSM_susy_parameters::set_input_parameters(const TMSSM_input_parameters& i
 
 void TMSSM_susy_parameters::calc_susy_traces(Susy_traces& susy_traces) const
 {
-   TRACE_STRUCT.traceYdAdjYd = Re((Yd*Yd.adjoint()).trace());
-   TRACE_STRUCT.traceYeAdjYe = Re((Ye*Ye.adjoint()).trace());
-   TRACE_STRUCT.traceYuAdjYu = Re((Yu*Yu.adjoint()).trace());
-   TRACE_STRUCT.traceYdAdjYdYdAdjYd = Re((Yd*Yd.adjoint()*Yd*Yd.adjoint())
-      .trace());
-   TRACE_STRUCT.traceYdAdjYuYuAdjYd = Re((Yd*Yu.adjoint()*Yu*Yd.adjoint())
-      .trace());
-   TRACE_STRUCT.traceYeAdjYeYeAdjYe = Re((Ye*Ye.adjoint()*Ye*Ye.adjoint())
-      .trace());
-   TRACE_STRUCT.traceYuAdjYuYuAdjYu = Re((Yu*Yu.adjoint()*Yu*Yu.adjoint())
-      .trace());
+   if (get_loops() > 0) {
+      TRACE_STRUCT.traceYdAdjYd = Re((Yd*Yd.adjoint()).trace());
+      TRACE_STRUCT.traceYeAdjYe = Re((Ye*Ye.adjoint()).trace());
+      TRACE_STRUCT.traceYuAdjYu = Re((Yu*Yu.adjoint()).trace());
 
+   }
+
+   if (get_loops() > 1) {
+      TRACE_STRUCT.traceYdAdjYdYdAdjYd = Re((Yd*Yd.adjoint()*Yd*Yd.adjoint())
+         .trace());
+      TRACE_STRUCT.traceYdAdjYuYuAdjYd = Re((Yd*Yu.adjoint()*Yu*Yd.adjoint())
+         .trace());
+      TRACE_STRUCT.traceYeAdjYeYeAdjYe = Re((Ye*Ye.adjoint()*Ye*Ye.adjoint())
+         .trace());
+      TRACE_STRUCT.traceYuAdjYuYuAdjYu = Re((Yu*Yu.adjoint()*Yu*Yu.adjoint())
+         .trace());
+
+   }
+
+   if (get_loops() > 2) {
+
+   }
 }
 
 std::ostream& operator<<(std::ostream& ostr, const TMSSM_susy_parameters& susy_pars)

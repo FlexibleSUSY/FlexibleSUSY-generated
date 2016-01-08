@@ -37,6 +37,7 @@ LIBE6SSM_SRC += \
 		$(DIR)/E6SSM_mass_eigenstates.cpp \
 		$(DIR)/E6SSM_info.cpp \
 		$(DIR)/E6SSM_input_parameters.cpp \
+		$(DIR)/E6SSM_observables.cpp \
 		$(DIR)/E6SSM_slha_io.cpp \
 		$(DIR)/E6SSM_physical.cpp \
 		$(DIR)/E6SSM_utilities.cpp \
@@ -63,6 +64,7 @@ LIBE6SSM_HDR += \
 		$(DIR)/E6SSM_low_scale_constraint.hpp \
 		$(DIR)/E6SSM_model.hpp \
 		$(DIR)/E6SSM_model_slha.hpp \
+		$(DIR)/E6SSM_observables.hpp \
 		$(DIR)/E6SSM_physical.hpp \
 		$(DIR)/E6SSM_slha_io.hpp \
 		$(DIR)/E6SSM_spectrum_generator_interface.hpp \
@@ -227,7 +229,7 @@ $(LIBE6SSM): $(LIBE6SSM_OBJ)
 		$(MAKELIB) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBE6SSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(LDLIBS)
 
 ALLDEP += $(LIBE6SSM_DEP) $(EXEE6SSM_DEP)
 ALLSRC += $(LIBE6SSM_SRC) $(EXEE6SSM_SRC)

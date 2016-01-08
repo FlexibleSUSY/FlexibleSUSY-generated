@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:26:26
+// File generated at Fri 8 Jan 2016 12:56:34
 
 #ifndef NMSSM_SLHA_IO_H
 #define NMSSM_SLHA_IO_H
@@ -28,6 +28,7 @@
 #include "ckm.hpp"
 #include "ew_input.hpp"
 #include "lowe.h"
+#include "observables.hpp"
 
 #include <Eigen/Core>
 #include <string>
@@ -37,7 +38,9 @@
 #define PHYSICAL(p) model.get_physical().p
 #define PHYSICAL_SLHA(p) model.get_physical_slha().p
 #define LOCALPHYSICAL(p) physical.p
+#define MODEL model
 #define MODELPARAMETER(p) model.get_##p()
+#define OBSERVABLES observables
 #define LowEnergyConstant(p) Electroweak_constants::p
 #define SCALES(p) scales.p
 
@@ -45,6 +48,7 @@ namespace flexiblesusy {
 
 struct NMSSM_input_parameters;
 class Spectrum_generator_settings;
+struct Observables;
 
 struct NMSSM_scales {
    NMSSM_scales() : HighScale(0.), SUSYScale(0.), LowScale(0.) {}
@@ -69,7 +73,7 @@ public:
    void read_from_source(const std::string&);
    void read_from_stream(std::istream&);
    void set_extpar(const NMSSM_input_parameters&);
-   template <class T> void set_extra(const NMSSM_slha<T>&, const NMSSM_scales&);
+   template <class T> void set_extra(const NMSSM_slha<T>&, const NMSSM_scales&, const Observables&);
    void set_minpar(const NMSSM_input_parameters&);
    void set_sminputs(const softsusy::QedQcd&);
    template <class T> void set_spectrum(const NMSSM_slha<T>&);
@@ -82,13 +86,10 @@ public:
    static void fill_extpar_tuple(NMSSM_input_parameters&, int, double);
 
    template <class T>
-   static void fill_slhaea(SLHAea::Coll&, const NMSSM_slha<T>&, const softsusy::QedQcd&, const NMSSM_scales&);
+   static void fill_slhaea(SLHAea::Coll&, const NMSSM_slha<T>&, const softsusy::QedQcd&, const NMSSM_scales&, const Observables&);
 
    template <class T>
-   static SLHAea::Coll fill_slhaea(const NMSSM_slha<T>&, const softsusy::QedQcd&);
-
-   template <class T>
-   static SLHAea::Coll fill_slhaea(const NMSSM_slha<T>&, const softsusy::QedQcd&, const NMSSM_scales&);
+   static SLHAea::Coll fill_slhaea(const NMSSM_slha<T>&, const softsusy::QedQcd&, const NMSSM_scales&, const Observables&);
 
 private:
    SLHA_io slha_io; ///< SLHA io class
@@ -119,7 +120,8 @@ void NMSSM_slha_io::fill(NMSSM_slha<T>& model) const
 template <class T>
 void NMSSM_slha_io::fill_slhaea(
    SLHAea::Coll& slhaea, const NMSSM_slha<T>& model,
-   const softsusy::QedQcd& qedqcd, const NMSSM_scales& scales)
+   const softsusy::QedQcd& qedqcd, const NMSSM_scales& scales,
+   const Observables& observables)
 {
    NMSSM_slha_io slha_io;
    const NMSSM_input_parameters& input = model.get_input();
@@ -133,7 +135,7 @@ void NMSSM_slha_io::fill_slhaea(
    slha_io.set_extpar(input);
    if (!error) {
       slha_io.set_spectrum(model);
-      slha_io.set_extra(model, scales);
+      slha_io.set_extra(model, scales, observables);
    }
 
    slhaea = slha_io.get_slha_io().get_data();
@@ -141,20 +143,11 @@ void NMSSM_slha_io::fill_slhaea(
 
 template <class T>
 SLHAea::Coll NMSSM_slha_io::fill_slhaea(
-   const NMSSM_slha<T>& model, const softsusy::QedQcd& qedqcd)
-{
-   NMSSM_scales scales;
-
-   return fill_slhaea(model, qedqcd, scales);
-}
-
-template <class T>
-SLHAea::Coll NMSSM_slha_io::fill_slhaea(
    const NMSSM_slha<T>& model, const softsusy::QedQcd& qedqcd,
-   const NMSSM_scales& scales)
+   const NMSSM_scales& scales, const Observables& observables)
 {
    SLHAea::Coll slhaea;
-   NMSSM_slha_io::fill_slhaea(slhaea, model, qedqcd, scales);
+   NMSSM_slha_io::fill_slhaea(slhaea, model, qedqcd, scales, observables);
 
    return slhaea;
 }
@@ -228,7 +221,8 @@ void NMSSM_slha_io::set_model_parameters(const NMSSM_slha<T>& model)
  */
 template <class T>
 void NMSSM_slha_io::set_extra(
-   const NMSSM_slha<T>& model, const NMSSM_scales& scales)
+   const NMSSM_slha<T>& model, const NMSSM_scales& scales,
+   const Observables& observables)
 {
    const NMSSM_physical physical(model.get_physical_slha());
 
@@ -238,6 +232,18 @@ void NMSSM_slha_io::set_extra(
             << FORMAT_ELEMENT(0, (SCALES(HighScale)), "HighScale")
             << FORMAT_ELEMENT(1, (SCALES(SUSYScale)), "SUSYScale")
             << FORMAT_ELEMENT(2, (SCALES(LowScale)), "LowScale")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block NMSSMRUN Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(1, (MODELPARAMETER(Lambdax)), "Lambdax")
+            << FORMAT_ELEMENT(2, (MODELPARAMETER(Kappa)), "Kappa")
+            << FORMAT_ELEMENT(3, (MODELPARAMETER(TLambdax)/MODELPARAMETER(Lambdax)), "TLambdax/Lambdax")
+            << FORMAT_ELEMENT(4, (MODELPARAMETER(TKappa)/MODELPARAMETER(Kappa)), "TKappa/Kappa")
+            << FORMAT_ELEMENT(5, (0.7071067811865475*MODELPARAMETER(vS)*MODELPARAMETER(Lambdax)), "0.7071067811865475*vS*Lambdax")
+            << FORMAT_ELEMENT(10, (MODELPARAMETER(ms2)), "ms2")
       ;
       slha_io.set_block(block);
    }
@@ -286,7 +292,9 @@ void NMSSM_slha_io::set_spectrum(const NMSSM_slha<T>& model)
 #undef PHYSICAL
 #undef PHYSICAL_SLHA
 #undef LOCALPHYSICAL
+#undef MODEL
 #undef MODELPARAMETER
+#undef OBSERVABLES
 #undef LowEnergyConstant
 #undef SCALES
 

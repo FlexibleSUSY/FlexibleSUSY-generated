@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:09:15
+// File generated at Fri 8 Jan 2016 11:50:19
 
 #include "TMSSM_slha_io.hpp"
 #include "TMSSM_input_parameters.hpp"

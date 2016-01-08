@@ -37,6 +37,7 @@ LIBSMSSM_SRC += \
 		$(DIR)/SMSSM_mass_eigenstates.cpp \
 		$(DIR)/SMSSM_info.cpp \
 		$(DIR)/SMSSM_input_parameters.cpp \
+		$(DIR)/SMSSM_observables.cpp \
 		$(DIR)/SMSSM_slha_io.cpp \
 		$(DIR)/SMSSM_physical.cpp \
 		$(DIR)/SMSSM_utilities.cpp \
@@ -63,6 +64,7 @@ LIBSMSSM_HDR += \
 		$(DIR)/SMSSM_low_scale_constraint.hpp \
 		$(DIR)/SMSSM_model.hpp \
 		$(DIR)/SMSSM_model_slha.hpp \
+		$(DIR)/SMSSM_observables.hpp \
 		$(DIR)/SMSSM_physical.hpp \
 		$(DIR)/SMSSM_slha_io.hpp \
 		$(DIR)/SMSSM_spectrum_generator_interface.hpp \
@@ -227,7 +229,7 @@ $(LIBSMSSM): $(LIBSMSSM_OBJ)
 		$(MAKELIB) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBSMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(LDLIBS)
 
 ALLDEP += $(LIBSMSSM_DEP) $(EXESMSSM_DEP)
 ALLSRC += $(LIBSMSSM_SRC) $(EXESMSSM_SRC)

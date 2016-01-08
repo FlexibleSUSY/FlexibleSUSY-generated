@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:26:24
+// File generated at Fri 8 Jan 2016 12:56:32
 
 #ifndef NMSSM_INPUT_PARAMETERS_H
 #define NMSSM_INPUT_PARAMETERS_H
@@ -38,6 +38,9 @@ struct NMSSM_input_parameters {
       : m0(0), m12(0), TanBeta(0), SignvS(1), Azero(0), LambdaInput(0)
 
    {}
+
+   Eigen::ArrayXd get() const;
+   void set(const Eigen::ArrayXd&);
 };
 
 std::ostream& operator<<(std::ostream&, const NMSSM_input_parameters&);

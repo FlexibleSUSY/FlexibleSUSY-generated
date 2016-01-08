@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:07:44
+// File generated at Fri 8 Jan 2016 11:44:14
 
 #ifndef SM_TWO_SCALE_INITIAL_GUESSER_H
 #define SM_TWO_SCALE_INITIAL_GUESSER_H
@@ -24,9 +24,8 @@
 #include "SM_initial_guesser.hpp"
 #include "SM_two_scale_low_scale_constraint.hpp"
 #include "SM_two_scale_susy_scale_constraint.hpp"
+#include "SM_two_scale_high_scale_constraint.hpp"
 #include "two_scale_initial_guesser.hpp"
-#include "error.hpp"
-#include "lowe.h"
 
 #include <sstream>
 
@@ -48,7 +47,8 @@ public:
    SM_initial_guesser(SM<Two_scale>*,
                                const softsusy::QedQcd&,
                                const SM_low_scale_constraint<Two_scale>&,
-                               const SM_susy_scale_constraint<Two_scale>&);
+                               const SM_susy_scale_constraint<Two_scale>&,
+                               const SM_high_scale_constraint<Two_scale>&);
    virtual ~SM_initial_guesser();
    virtual void guess(); ///< initial guess
 
@@ -56,7 +56,7 @@ public:
 
 private:
    SM<Two_scale>* model; ///< pointer to model class
-   softsusy::QedQcd oneset;       ///< Standard Model low-energy data
+   softsusy::QedQcd qedqcd;       ///< Standard Model low-energy data
    double mu_guess; ///< guessed DR-bar mass of up-quark
    double mc_guess; ///< guessed DR-bar mass of charm-quark
    double mt_guess; ///< guessed DR-bar mass of top-quark
@@ -69,6 +69,7 @@ private:
    double running_precision; ///< Runge-Kutta RG running precision
    SM_low_scale_constraint<Two_scale> low_constraint;
    SM_susy_scale_constraint<Two_scale> susy_constraint;
+   SM_high_scale_constraint<Two_scale> high_constraint;
 
    void guess_susy_parameters();
    void guess_soft_parameters();

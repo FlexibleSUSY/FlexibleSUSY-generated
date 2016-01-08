@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:07:45
+// File generated at Fri 8 Jan 2016 11:44:14
 
 /**
  * @file SM_two_scale_model_slha.cpp

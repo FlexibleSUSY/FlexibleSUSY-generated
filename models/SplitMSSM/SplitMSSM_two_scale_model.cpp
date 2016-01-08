@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:07:32
+// File generated at Fri 8 Jan 2016 11:56:56
 
 /**
  * @file SplitMSSM_two_scale_model.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Tue 27 Oct 2015 15:07:32 with FlexibleSUSY
- * 1.2.4 (git commit: v1.2.4) and SARAH 4.5.8 .
+ * This file was generated at Fri 8 Jan 2016 11:56:56 with FlexibleSUSY
+ * 1.3.0 (git commit: v1.3.0) and SARAH 4.6.0 .
  */
 
 #include "SplitMSSM_two_scale_model.hpp"

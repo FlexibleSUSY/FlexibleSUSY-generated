@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:23:50
+// File generated at Fri 8 Jan 2016 12:50:59
 
 #ifndef NUTSMSSM_INPUT_PARAMETERS_H
 #define NUTSMSSM_INPUT_PARAMETERS_H
@@ -45,6 +45,9 @@ struct NUTSMSSM_input_parameters {
    LambdaSInput(0), L1Input(0), MSInput(0), BInput(0), MuInput(0), LInput(0)
 
    {}
+
+   Eigen::ArrayXd get() const;
+   void set(const Eigen::ArrayXd&);
 };
 
 std::ostream& operator<<(std::ostream&, const NUTSMSSM_input_parameters&);

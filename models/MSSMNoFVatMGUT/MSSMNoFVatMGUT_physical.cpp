@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:31:21
+// File generated at Fri 8 Jan 2016 13:25:49
 
 #include "MSSMNoFVatMGUT_physical.hpp"
 #include "slha_io.hpp"
@@ -126,6 +126,305 @@ void MSSMNoFVatMGUT_physical::convert_to_hk()
 void MSSMNoFVatMGUT_physical::convert_to_slha()
 {
    SLHA_io::convert_symmetric_fermion_mixings_to_slha(LOCALPHYSICAL(MChi), LOCALPHYSICAL(ZN));
+
+}
+
+Eigen::ArrayXd MSSMNoFVatMGUT_physical::get() const
+{
+   Eigen::ArrayXd pars(get_masses());
+
+   pars.conservativeResize(146);
+
+   pars(50) = ZD(0,0);
+   pars(51) = ZD(0,1);
+   pars(52) = ZD(1,0);
+   pars(53) = ZD(1,1);
+   pars(54) = ZU(0,0);
+   pars(55) = ZU(0,1);
+   pars(56) = ZU(1,0);
+   pars(57) = ZU(1,1);
+   pars(58) = ZE(0,0);
+   pars(59) = ZE(0,1);
+   pars(60) = ZE(1,0);
+   pars(61) = ZE(1,1);
+   pars(62) = ZM(0,0);
+   pars(63) = ZM(0,1);
+   pars(64) = ZM(1,0);
+   pars(65) = ZM(1,1);
+   pars(66) = ZTau(0,0);
+   pars(67) = ZTau(0,1);
+   pars(68) = ZTau(1,0);
+   pars(69) = ZTau(1,1);
+   pars(70) = ZS(0,0);
+   pars(71) = ZS(0,1);
+   pars(72) = ZS(1,0);
+   pars(73) = ZS(1,1);
+   pars(74) = ZC(0,0);
+   pars(75) = ZC(0,1);
+   pars(76) = ZC(1,0);
+   pars(77) = ZC(1,1);
+   pars(78) = ZB(0,0);
+   pars(79) = ZB(0,1);
+   pars(80) = ZB(1,0);
+   pars(81) = ZB(1,1);
+   pars(82) = ZT(0,0);
+   pars(83) = ZT(0,1);
+   pars(84) = ZT(1,0);
+   pars(85) = ZT(1,1);
+   pars(86) = ZH(0,0);
+   pars(87) = ZH(0,1);
+   pars(88) = ZH(1,0);
+   pars(89) = ZH(1,1);
+   pars(90) = ZA(0,0);
+   pars(91) = ZA(0,1);
+   pars(92) = ZA(1,0);
+   pars(93) = ZA(1,1);
+   pars(94) = ZP(0,0);
+   pars(95) = ZP(0,1);
+   pars(96) = ZP(1,0);
+   pars(97) = ZP(1,1);
+   pars(98) = Re(ZN(0,0));
+   pars(99) = Im(ZN(0,0));
+   pars(100) = Re(ZN(0,1));
+   pars(101) = Im(ZN(0,1));
+   pars(102) = Re(ZN(0,2));
+   pars(103) = Im(ZN(0,2));
+   pars(104) = Re(ZN(0,3));
+   pars(105) = Im(ZN(0,3));
+   pars(106) = Re(ZN(1,0));
+   pars(107) = Im(ZN(1,0));
+   pars(108) = Re(ZN(1,1));
+   pars(109) = Im(ZN(1,1));
+   pars(110) = Re(ZN(1,2));
+   pars(111) = Im(ZN(1,2));
+   pars(112) = Re(ZN(1,3));
+   pars(113) = Im(ZN(1,3));
+   pars(114) = Re(ZN(2,0));
+   pars(115) = Im(ZN(2,0));
+   pars(116) = Re(ZN(2,1));
+   pars(117) = Im(ZN(2,1));
+   pars(118) = Re(ZN(2,2));
+   pars(119) = Im(ZN(2,2));
+   pars(120) = Re(ZN(2,3));
+   pars(121) = Im(ZN(2,3));
+   pars(122) = Re(ZN(3,0));
+   pars(123) = Im(ZN(3,0));
+   pars(124) = Re(ZN(3,1));
+   pars(125) = Im(ZN(3,1));
+   pars(126) = Re(ZN(3,2));
+   pars(127) = Im(ZN(3,2));
+   pars(128) = Re(ZN(3,3));
+   pars(129) = Im(ZN(3,3));
+   pars(130) = Re(UM(0,0));
+   pars(131) = Im(UM(0,0));
+   pars(132) = Re(UM(0,1));
+   pars(133) = Im(UM(0,1));
+   pars(134) = Re(UM(1,0));
+   pars(135) = Im(UM(1,0));
+   pars(136) = Re(UM(1,1));
+   pars(137) = Im(UM(1,1));
+   pars(138) = Re(UP(0,0));
+   pars(139) = Im(UP(0,0));
+   pars(140) = Re(UP(0,1));
+   pars(141) = Im(UP(0,1));
+   pars(142) = Re(UP(1,0));
+   pars(143) = Im(UP(1,0));
+   pars(144) = Re(UP(1,1));
+   pars(145) = Im(UP(1,1));
+
+
+   return pars;
+}
+
+void MSSMNoFVatMGUT_physical::set(const Eigen::ArrayXd& pars)
+{
+   set_masses(pars);
+
+   ZD(0,0) = pars(50);
+   ZD(0,1) = pars(51);
+   ZD(1,0) = pars(52);
+   ZD(1,1) = pars(53);
+   ZU(0,0) = pars(54);
+   ZU(0,1) = pars(55);
+   ZU(1,0) = pars(56);
+   ZU(1,1) = pars(57);
+   ZE(0,0) = pars(58);
+   ZE(0,1) = pars(59);
+   ZE(1,0) = pars(60);
+   ZE(1,1) = pars(61);
+   ZM(0,0) = pars(62);
+   ZM(0,1) = pars(63);
+   ZM(1,0) = pars(64);
+   ZM(1,1) = pars(65);
+   ZTau(0,0) = pars(66);
+   ZTau(0,1) = pars(67);
+   ZTau(1,0) = pars(68);
+   ZTau(1,1) = pars(69);
+   ZS(0,0) = pars(70);
+   ZS(0,1) = pars(71);
+   ZS(1,0) = pars(72);
+   ZS(1,1) = pars(73);
+   ZC(0,0) = pars(74);
+   ZC(0,1) = pars(75);
+   ZC(1,0) = pars(76);
+   ZC(1,1) = pars(77);
+   ZB(0,0) = pars(78);
+   ZB(0,1) = pars(79);
+   ZB(1,0) = pars(80);
+   ZB(1,1) = pars(81);
+   ZT(0,0) = pars(82);
+   ZT(0,1) = pars(83);
+   ZT(1,0) = pars(84);
+   ZT(1,1) = pars(85);
+   ZH(0,0) = pars(86);
+   ZH(0,1) = pars(87);
+   ZH(1,0) = pars(88);
+   ZH(1,1) = pars(89);
+   ZA(0,0) = pars(90);
+   ZA(0,1) = pars(91);
+   ZA(1,0) = pars(92);
+   ZA(1,1) = pars(93);
+   ZP(0,0) = pars(94);
+   ZP(0,1) = pars(95);
+   ZP(1,0) = pars(96);
+   ZP(1,1) = pars(97);
+   ZN(0,0) = std::complex<double>(pars(98), pars(99));
+   ZN(0,1) = std::complex<double>(pars(100), pars(101));
+   ZN(0,2) = std::complex<double>(pars(102), pars(103));
+   ZN(0,3) = std::complex<double>(pars(104), pars(105));
+   ZN(1,0) = std::complex<double>(pars(106), pars(107));
+   ZN(1,1) = std::complex<double>(pars(108), pars(109));
+   ZN(1,2) = std::complex<double>(pars(110), pars(111));
+   ZN(1,3) = std::complex<double>(pars(112), pars(113));
+   ZN(2,0) = std::complex<double>(pars(114), pars(115));
+   ZN(2,1) = std::complex<double>(pars(116), pars(117));
+   ZN(2,2) = std::complex<double>(pars(118), pars(119));
+   ZN(2,3) = std::complex<double>(pars(120), pars(121));
+   ZN(3,0) = std::complex<double>(pars(122), pars(123));
+   ZN(3,1) = std::complex<double>(pars(124), pars(125));
+   ZN(3,2) = std::complex<double>(pars(126), pars(127));
+   ZN(3,3) = std::complex<double>(pars(128), pars(129));
+   UM(0,0) = std::complex<double>(pars(130), pars(131));
+   UM(0,1) = std::complex<double>(pars(132), pars(133));
+   UM(1,0) = std::complex<double>(pars(134), pars(135));
+   UM(1,1) = std::complex<double>(pars(136), pars(137));
+   UP(0,0) = std::complex<double>(pars(138), pars(139));
+   UP(0,1) = std::complex<double>(pars(140), pars(141));
+   UP(1,0) = std::complex<double>(pars(142), pars(143));
+   UP(1,1) = std::complex<double>(pars(144), pars(145));
+
+}
+
+Eigen::ArrayXd MSSMNoFVatMGUT_physical::get_masses() const
+{
+   Eigen::ArrayXd pars(50);
+
+   pars(0) = MVG;
+   pars(1) = MGlu;
+   pars(2) = MVP;
+   pars(3) = MVZ;
+   pars(4) = MFd;
+   pars(5) = MFs;
+   pars(6) = MFb;
+   pars(7) = MFu;
+   pars(8) = MFc;
+   pars(9) = MFt;
+   pars(10) = MFve;
+   pars(11) = MFvm;
+   pars(12) = MFvt;
+   pars(13) = MFe;
+   pars(14) = MFm;
+   pars(15) = MFtau;
+   pars(16) = MSveL;
+   pars(17) = MSvmL;
+   pars(18) = MSvtL;
+   pars(19) = MSd(0);
+   pars(20) = MSd(1);
+   pars(21) = MSu(0);
+   pars(22) = MSu(1);
+   pars(23) = MSe(0);
+   pars(24) = MSe(1);
+   pars(25) = MSm(0);
+   pars(26) = MSm(1);
+   pars(27) = MStau(0);
+   pars(28) = MStau(1);
+   pars(29) = MSs(0);
+   pars(30) = MSs(1);
+   pars(31) = MSc(0);
+   pars(32) = MSc(1);
+   pars(33) = MSb(0);
+   pars(34) = MSb(1);
+   pars(35) = MSt(0);
+   pars(36) = MSt(1);
+   pars(37) = Mhh(0);
+   pars(38) = Mhh(1);
+   pars(39) = MAh(0);
+   pars(40) = MAh(1);
+   pars(41) = MHpm(0);
+   pars(42) = MHpm(1);
+   pars(43) = MChi(0);
+   pars(44) = MChi(1);
+   pars(45) = MChi(2);
+   pars(46) = MChi(3);
+   pars(47) = MCha(0);
+   pars(48) = MCha(1);
+   pars(49) = MVWm;
+
+   return pars;
+}
+
+void MSSMNoFVatMGUT_physical::set_masses(const Eigen::ArrayXd& pars)
+{
+   MVG = pars(0);
+   MGlu = pars(1);
+   MVP = pars(2);
+   MVZ = pars(3);
+   MFd = pars(4);
+   MFs = pars(5);
+   MFb = pars(6);
+   MFu = pars(7);
+   MFc = pars(8);
+   MFt = pars(9);
+   MFve = pars(10);
+   MFvm = pars(11);
+   MFvt = pars(12);
+   MFe = pars(13);
+   MFm = pars(14);
+   MFtau = pars(15);
+   MSveL = pars(16);
+   MSvmL = pars(17);
+   MSvtL = pars(18);
+   MSd(0) = pars(19);
+   MSd(1) = pars(20);
+   MSu(0) = pars(21);
+   MSu(1) = pars(22);
+   MSe(0) = pars(23);
+   MSe(1) = pars(24);
+   MSm(0) = pars(25);
+   MSm(1) = pars(26);
+   MStau(0) = pars(27);
+   MStau(1) = pars(28);
+   MSs(0) = pars(29);
+   MSs(1) = pars(30);
+   MSc(0) = pars(31);
+   MSc(1) = pars(32);
+   MSb(0) = pars(33);
+   MSb(1) = pars(34);
+   MSt(0) = pars(35);
+   MSt(1) = pars(36);
+   Mhh(0) = pars(37);
+   Mhh(1) = pars(38);
+   MAh(0) = pars(39);
+   MAh(1) = pars(40);
+   MHpm(0) = pars(41);
+   MHpm(1) = pars(42);
+   MChi(0) = pars(43);
+   MChi(1) = pars(44);
+   MChi(2) = pars(45);
+   MChi(3) = pars(46);
+   MCha(0) = pars(47);
+   MCha(1) = pars(48);
+   MVWm = pars(49);
 
 }
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:34:19
+// File generated at Fri 8 Jan 2016 13:31:08
 
 #ifndef CMSSM_SLHA_IO_H
 #define CMSSM_SLHA_IO_H
@@ -28,6 +28,7 @@
 #include "ckm.hpp"
 #include "ew_input.hpp"
 #include "lowe.h"
+#include "observables.hpp"
 
 #include <Eigen/Core>
 #include <string>
@@ -37,7 +38,9 @@
 #define PHYSICAL(p) model.get_physical().p
 #define PHYSICAL_SLHA(p) model.get_physical_slha().p
 #define LOCALPHYSICAL(p) physical.p
+#define MODEL model
 #define MODELPARAMETER(p) model.get_##p()
+#define OBSERVABLES observables
 #define LowEnergyConstant(p) Electroweak_constants::p
 #define SCALES(p) scales.p
 
@@ -45,6 +48,7 @@ namespace flexiblesusy {
 
 struct CMSSM_input_parameters;
 class Spectrum_generator_settings;
+struct Observables;
 
 struct CMSSM_scales {
    CMSSM_scales() : HighScale(0.), SUSYScale(0.), LowScale(0.) {}
@@ -69,7 +73,7 @@ public:
    void read_from_source(const std::string&);
    void read_from_stream(std::istream&);
    void set_extpar(const CMSSM_input_parameters&);
-   template <class T> void set_extra(const CMSSM_slha<T>&, const CMSSM_scales&);
+   template <class T> void set_extra(const CMSSM_slha<T>&, const CMSSM_scales&, const Observables&);
    void set_minpar(const CMSSM_input_parameters&);
    void set_sminputs(const softsusy::QedQcd&);
    template <class T> void set_spectrum(const CMSSM_slha<T>&);
@@ -82,13 +86,10 @@ public:
    static void fill_extpar_tuple(CMSSM_input_parameters&, int, double);
 
    template <class T>
-   static void fill_slhaea(SLHAea::Coll&, const CMSSM_slha<T>&, const softsusy::QedQcd&, const CMSSM_scales&);
+   static void fill_slhaea(SLHAea::Coll&, const CMSSM_slha<T>&, const softsusy::QedQcd&, const CMSSM_scales&, const Observables&);
 
    template <class T>
-   static SLHAea::Coll fill_slhaea(const CMSSM_slha<T>&, const softsusy::QedQcd&);
-
-   template <class T>
-   static SLHAea::Coll fill_slhaea(const CMSSM_slha<T>&, const softsusy::QedQcd&, const CMSSM_scales&);
+   static SLHAea::Coll fill_slhaea(const CMSSM_slha<T>&, const softsusy::QedQcd&, const CMSSM_scales&, const Observables&);
 
 private:
    SLHA_io slha_io; ///< SLHA io class
@@ -119,7 +120,8 @@ void CMSSM_slha_io::fill(CMSSM_slha<T>& model) const
 template <class T>
 void CMSSM_slha_io::fill_slhaea(
    SLHAea::Coll& slhaea, const CMSSM_slha<T>& model,
-   const softsusy::QedQcd& qedqcd, const CMSSM_scales& scales)
+   const softsusy::QedQcd& qedqcd, const CMSSM_scales& scales,
+   const Observables& observables)
 {
    CMSSM_slha_io slha_io;
    const CMSSM_input_parameters& input = model.get_input();
@@ -133,7 +135,7 @@ void CMSSM_slha_io::fill_slhaea(
    slha_io.set_extpar(input);
    if (!error) {
       slha_io.set_spectrum(model);
-      slha_io.set_extra(model, scales);
+      slha_io.set_extra(model, scales, observables);
    }
 
    slhaea = slha_io.get_slha_io().get_data();
@@ -141,20 +143,11 @@ void CMSSM_slha_io::fill_slhaea(
 
 template <class T>
 SLHAea::Coll CMSSM_slha_io::fill_slhaea(
-   const CMSSM_slha<T>& model, const softsusy::QedQcd& qedqcd)
-{
-   CMSSM_scales scales;
-
-   return fill_slhaea(model, qedqcd, scales);
-}
-
-template <class T>
-SLHAea::Coll CMSSM_slha_io::fill_slhaea(
    const CMSSM_slha<T>& model, const softsusy::QedQcd& qedqcd,
-   const CMSSM_scales& scales)
+   const CMSSM_scales& scales, const Observables& observables)
 {
    SLHAea::Coll slhaea;
-   CMSSM_slha_io::fill_slhaea(slhaea, model, qedqcd, scales);
+   CMSSM_slha_io::fill_slhaea(slhaea, model, qedqcd, scales, observables);
 
    return slhaea;
 }
@@ -218,7 +211,8 @@ void CMSSM_slha_io::set_model_parameters(const CMSSM_slha<T>& model)
  */
 template <class T>
 void CMSSM_slha_io::set_extra(
-   const CMSSM_slha<T>& model, const CMSSM_scales& scales)
+   const CMSSM_slha<T>& model, const CMSSM_scales& scales,
+   const Observables& observables)
 {
    const CMSSM_physical physical(model.get_physical_slha());
 
@@ -349,7 +343,9 @@ void CMSSM_slha_io::set_spectrum(const CMSSM_slha<T>& model)
 #undef PHYSICAL
 #undef PHYSICAL_SLHA
 #undef LOCALPHYSICAL
+#undef MODEL
 #undef MODELPARAMETER
+#undef OBSERVABLES
 #undef LowEnergyConstant
 #undef SCALES
 

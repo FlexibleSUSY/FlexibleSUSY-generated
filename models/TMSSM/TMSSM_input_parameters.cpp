@@ -16,13 +16,45 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:09:14
+// File generated at Fri 8 Jan 2016 11:50:16
 
 #include "TMSSM_input_parameters.hpp"
+#include "wrappers.hpp"
 
 #define INPUT(p) input.p
 
 namespace flexiblesusy {
+
+Eigen::ArrayXd TMSSM_input_parameters::get() const
+{
+   Eigen::ArrayXd pars(9);
+
+   pars(0) = m0;
+   pars(1) = m12;
+   pars(2) = TanBeta;
+   pars(3) = SignMu;
+   pars(4) = Azero;
+   pars(5) = MTinput;
+   pars(6) = Qin;
+   pars(7) = LambdaInput;
+   pars(8) = vTInput;
+
+   return pars;
+}
+
+void TMSSM_input_parameters::set(const Eigen::ArrayXd& pars)
+{
+   m0 = pars(0);
+   m12 = pars(1);
+   TanBeta = pars(2);
+   SignMu = pars(3);
+   Azero = pars(4);
+   MTinput = pars(5);
+   Qin = pars(6);
+   LambdaInput = pars(7);
+   vTInput = pars(8);
+
+}
 
 std::ostream& operator<<(std::ostream& ostr, const TMSSM_input_parameters& input)
 {

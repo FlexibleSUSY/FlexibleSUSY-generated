@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:23:53
+// File generated at Fri 8 Jan 2016 12:53:10
 
 #ifndef NUTNMSSM_INPUT_PARAMETERS_H
 #define NUTNMSSM_INPUT_PARAMETERS_H
@@ -42,6 +42,9 @@ struct NUTNMSSM_input_parameters {
    ALambdaInput(0), AKappaInput(0), MuEff(0)
 
    {}
+
+   Eigen::ArrayXd get() const;
+   void set(const Eigen::ArrayXd&);
 };
 
 std::ostream& operator<<(std::ostream&, const NUTNMSSM_input_parameters&);

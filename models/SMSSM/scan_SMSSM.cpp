@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:22:39
+// File generated at Fri 8 Jan 2016 12:46:44
 
 #include "SMSSM_input_parameters.hpp"
 #include "SMSSM_spectrum_generator.hpp"
@@ -114,8 +114,8 @@ int main(int argc, char* argv[])
    SMSSM_input_parameters input;
    set_command_line_parameters(argc, argv, input);
 
-   softsusy::QedQcd oneset;
-   oneset.toMz();
+   softsusy::QedQcd qedqcd;
+   qedqcd.toMz();
 
    SMSSM_spectrum_generator<algorithm_type> spectrum_generator;
    spectrum_generator.set_precision_goal(1.0e-4);
@@ -135,7 +135,7 @@ int main(int argc, char* argv[])
            end = range.end(); it != end; ++it) {
       input.m0 = *it;
 
-      spectrum_generator.run(oneset, input);
+      spectrum_generator.run(qedqcd, input);
 
       const SMSSM_slha<algorithm_type> model(spectrum_generator.get_model());
       const SMSSM_physical& pole_masses = model.get_physical_slha();

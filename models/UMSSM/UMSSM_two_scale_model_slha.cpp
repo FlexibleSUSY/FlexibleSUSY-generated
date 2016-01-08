@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:15:15
+// File generated at Fri 8 Jan 2016 12:35:24
 
 /**
  * @file UMSSM_two_scale_model_slha.cpp
@@ -90,7 +90,7 @@ void CLASSNAME::calculate_ckm_matrix()
 
 void CLASSNAME::calculate_pmns_matrix()
 {
-   pmns << 1, 0, 0, 0, 1, 0, 0, 0, 1;
+   pmns = ZEL_slha * ZVL_slha.adjoint();
 
 }
 

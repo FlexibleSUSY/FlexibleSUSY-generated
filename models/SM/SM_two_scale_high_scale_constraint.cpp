@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:07:44
+// File generated at Fri 8 Jan 2016 11:44:13
 
 #include "SM_two_scale_high_scale_constraint.hpp"
 #include "SM_two_scale_model.hpp"
@@ -99,6 +99,9 @@ void SM_high_scale_constraint<Two_scale>::apply()
 
    update_scale();
 
+   const auto LambdaIN = INPUTPARAMETER(LambdaIN);
+
+   MODEL->set_Lambdax(Re(LambdaIN));
 
 
    check_non_perturbative();
@@ -205,7 +208,9 @@ void SM_high_scale_constraint<Two_scale>::initialize()
    assert(model && "SM_high_scale_constraint<Two_scale>::"
           "initialize(): model pointer is zero.");
 
-   initial_scale_guess = 2.e16;
+   const auto Qin = INPUTPARAMETER(Qin);
+
+   initial_scale_guess = Qin;
 
    scale = initial_scale_guess;
 }
@@ -218,12 +223,9 @@ void SM_high_scale_constraint<Two_scale>::update_scale()
    const double currentScale = model->get_scale();
    const SM_soft_parameters beta_functions(model->calc_beta());
 
-   const auto g1 = MODELPARAMETER(g1);
-   const auto g2 = MODELPARAMETER(g2);
-   const auto beta_g1 = BETAPARAMETER(g1);
-   const auto beta_g2 = BETAPARAMETER(g2);
+   const auto Qin = INPUTPARAMETER(Qin);
 
-   scale = currentScale*Exp((-g1 + g2)/(BETA(g1) - BETA(g2)));
+   scale = Qin;
 
 
    if (errno == ERANGE) {

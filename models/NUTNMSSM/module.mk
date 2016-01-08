@@ -18,12 +18,12 @@ NUTNMSSM_TWO_SCALE_MK := \
 		$(NUTNMSSM_TWO_SCALE_SOFT_MK)
 
 NUTNMSSM_SLHA_INPUT := \
-		$(DIR)/LesHouches.in.NUTNMSSM \
 		$(DIR)/LesHouches.in.NUTNMSSM_GTP2 \
-		$(DIR)/LesHouches.in.NUTNMSSM_1308.1333_BP2 \
 		$(DIR)/LesHouches.in.NUTNMSSM_1308.1333_BP1 \
-		$(DIR)/LesHouches.in.NUTNMSSM_GTP1 \
-		$(DIR)/LesHouches.in.NUTNMSSM_1308.1333_BP3
+		$(DIR)/LesHouches.in.NUTNMSSM \
+		$(DIR)/LesHouches.in.NUTNMSSM_1308.1333_BP3 \
+		$(DIR)/LesHouches.in.NUTNMSSM_1308.1333_BP2 \
+		$(DIR)/LesHouches.in.NUTNMSSM_GTP1
 
 NUTNMSSM_GNUPLOT := \
 		$(DIR)/NUTNMSSM_plot_rgflow.gnuplot \
@@ -42,6 +42,7 @@ LIBNUTNMSSM_SRC += \
 		$(DIR)/NUTNMSSM_mass_eigenstates.cpp \
 		$(DIR)/NUTNMSSM_info.cpp \
 		$(DIR)/NUTNMSSM_input_parameters.cpp \
+		$(DIR)/NUTNMSSM_observables.cpp \
 		$(DIR)/NUTNMSSM_slha_io.cpp \
 		$(DIR)/NUTNMSSM_physical.cpp \
 		$(DIR)/NUTNMSSM_utilities.cpp \
@@ -68,6 +69,7 @@ LIBNUTNMSSM_HDR += \
 		$(DIR)/NUTNMSSM_low_scale_constraint.hpp \
 		$(DIR)/NUTNMSSM_model.hpp \
 		$(DIR)/NUTNMSSM_model_slha.hpp \
+		$(DIR)/NUTNMSSM_observables.hpp \
 		$(DIR)/NUTNMSSM_physical.hpp \
 		$(DIR)/NUTNMSSM_slha_io.hpp \
 		$(DIR)/NUTNMSSM_spectrum_generator_interface.hpp \
@@ -232,7 +234,7 @@ $(LIBNUTNMSSM): $(LIBNUTNMSSM_OBJ)
 		$(MAKELIB) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBNUTNMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(LDLIBS)
 
 ALLDEP += $(LIBNUTNMSSM_DEP) $(EXENUTNMSSM_DEP)
 ALLSRC += $(LIBNUTNMSSM_SRC) $(EXENUTNMSSM_SRC)

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:32:10
+// File generated at Fri 8 Jan 2016 13:27:59
 
 #ifndef MSSMatMGUT_INPUT_PARAMETERS_H
 #define MSSMatMGUT_INPUT_PARAMETERS_H
@@ -52,6 +52,9 @@ struct MSSMatMGUT_input_parameters {
    double,3,3>::Zero()), MassBInput(0), MassWBInput(0), MassGInput(0)
 
    {}
+
+   Eigen::ArrayXd get() const;
+   void set(const Eigen::ArrayXd&);
 };
 
 std::ostream& operator<<(std::ostream&, const MSSMatMGUT_input_parameters&);

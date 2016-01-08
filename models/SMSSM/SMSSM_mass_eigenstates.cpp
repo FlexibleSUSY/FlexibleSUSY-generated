@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:22:39
+// File generated at Fri 8 Jan 2016 12:46:44
 
 /**
  * @file SMSSM_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Tue 27 Oct 2015 15:22:39 with FlexibleSUSY
- * 1.2.4 (git commit: v1.2.4) and SARAH 4.5.8 .
+ * This file was generated at Fri 8 Jan 2016 12:46:44 with FlexibleSUSY
+ * 1.3.0 (git commit: v1.3.0) and SARAH 4.6.0 .
  */
 
 #include "SMSSM_mass_eigenstates.hpp"
@@ -1293,6 +1293,7 @@ void CLASSNAME::calculate_MSd()
 {
    const auto mass_matrix_Sd(get_mass_matrix_Sd());
 
+
 #ifdef CHECK_EIGENVALUE_ERROR
    double eigenvalue_error;
    fs_diagonalize_hermitian(mass_matrix_Sd, MSd, ZD, eigenvalue_error);
@@ -1301,6 +1302,7 @@ void CLASSNAME::calculate_MSd()
 #else
    fs_diagonalize_hermitian(mass_matrix_Sd, MSd, ZD);
 #endif
+
 
    if (MSd.minCoeff() < 0.)
       problems.flag_tachyon(SMSSM_info::Sd);
@@ -1331,6 +1333,7 @@ void CLASSNAME::calculate_MSv()
 {
    const auto mass_matrix_Sv(get_mass_matrix_Sv());
 
+
 #ifdef CHECK_EIGENVALUE_ERROR
    double eigenvalue_error;
    fs_diagonalize_hermitian(mass_matrix_Sv, MSv, ZV, eigenvalue_error);
@@ -1339,6 +1342,7 @@ void CLASSNAME::calculate_MSv()
 #else
    fs_diagonalize_hermitian(mass_matrix_Sv, MSv, ZV);
 #endif
+
 
    if (MSv.minCoeff() < 0.)
       problems.flag_tachyon(SMSSM_info::Sv);
@@ -1405,6 +1409,7 @@ void CLASSNAME::calculate_MSu()
 {
    const auto mass_matrix_Su(get_mass_matrix_Su());
 
+
 #ifdef CHECK_EIGENVALUE_ERROR
    double eigenvalue_error;
    fs_diagonalize_hermitian(mass_matrix_Su, MSu, ZU, eigenvalue_error);
@@ -1413,6 +1418,7 @@ void CLASSNAME::calculate_MSu()
 #else
    fs_diagonalize_hermitian(mass_matrix_Su, MSu, ZU);
 #endif
+
 
    if (MSu.minCoeff() < 0.)
       problems.flag_tachyon(SMSSM_info::Su);
@@ -1482,6 +1488,7 @@ void CLASSNAME::calculate_MSe()
 {
    const auto mass_matrix_Se(get_mass_matrix_Se());
 
+
 #ifdef CHECK_EIGENVALUE_ERROR
    double eigenvalue_error;
    fs_diagonalize_hermitian(mass_matrix_Se, MSe, ZE, eigenvalue_error);
@@ -1490,6 +1497,7 @@ void CLASSNAME::calculate_MSe()
 #else
    fs_diagonalize_hermitian(mass_matrix_Se, MSe, ZE);
 #endif
+
 
    if (MSe.minCoeff() < 0.)
       problems.flag_tachyon(SMSSM_info::Se);
@@ -1541,6 +1549,7 @@ void CLASSNAME::calculate_Mhh()
 {
    const auto mass_matrix_hh(get_mass_matrix_hh());
 
+
 #ifdef CHECK_EIGENVALUE_ERROR
    double eigenvalue_error;
    fs_diagonalize_hermitian(mass_matrix_hh, Mhh, ZH, eigenvalue_error);
@@ -1549,6 +1558,7 @@ void CLASSNAME::calculate_Mhh()
 #else
    fs_diagonalize_hermitian(mass_matrix_hh, Mhh, ZH);
 #endif
+
 
    if (Mhh.minCoeff() < 0.)
       problems.flag_tachyon(SMSSM_info::hh);
@@ -1603,6 +1613,7 @@ void CLASSNAME::calculate_MAh()
 {
    const auto mass_matrix_Ah(get_mass_matrix_Ah());
 
+
 #ifdef CHECK_EIGENVALUE_ERROR
    double eigenvalue_error;
    fs_diagonalize_hermitian(mass_matrix_Ah, MAh, ZA, eigenvalue_error);
@@ -1611,6 +1622,7 @@ void CLASSNAME::calculate_MAh()
 #else
    fs_diagonalize_hermitian(mass_matrix_Ah, MAh, ZA);
 #endif
+
 
    if (MAh.minCoeff() < 0.)
       problems.flag_tachyon(SMSSM_info::Ah);
@@ -1643,6 +1655,7 @@ void CLASSNAME::calculate_MHpm()
 {
    const auto mass_matrix_Hpm(get_mass_matrix_Hpm());
 
+
 #ifdef CHECK_EIGENVALUE_ERROR
    double eigenvalue_error;
    fs_diagonalize_hermitian(mass_matrix_Hpm, MHpm, ZP, eigenvalue_error);
@@ -1651,6 +1664,7 @@ void CLASSNAME::calculate_MHpm()
 #else
    fs_diagonalize_hermitian(mass_matrix_Hpm, MHpm, ZP);
 #endif
+
 
    if (MHpm.minCoeff() < 0.)
       problems.flag_tachyon(SMSSM_info::Hpm);
@@ -1687,6 +1701,7 @@ void CLASSNAME::calculate_MChi()
 {
    const auto mass_matrix_Chi(get_mass_matrix_Chi());
 
+
 #ifdef CHECK_EIGENVALUE_ERROR
    double eigenvalue_error;
    fs_diagonalize_symmetric(mass_matrix_Chi, MChi, ZN, eigenvalue_error);
@@ -1695,6 +1710,7 @@ void CLASSNAME::calculate_MChi()
 #else
    fs_diagonalize_symmetric(mass_matrix_Chi, MChi, ZN);
 #endif
+
 }
 
 Eigen::Matrix<double,2,2> CLASSNAME::get_mass_matrix_Cha() const
@@ -1713,6 +1729,7 @@ void CLASSNAME::calculate_MCha()
 {
    const auto mass_matrix_Cha(get_mass_matrix_Cha());
 
+
 #ifdef CHECK_EIGENVALUE_ERROR
    double eigenvalue_error;
    fs_svd(mass_matrix_Cha, MCha, UM, UP, eigenvalue_error);
@@ -1721,6 +1738,7 @@ void CLASSNAME::calculate_MCha()
 #else
    fs_svd(mass_matrix_Cha, MCha, UM, UP);
 #endif
+
 }
 
 Eigen::Matrix<double,3,3> CLASSNAME::get_mass_matrix_Fe() const
@@ -1744,6 +1762,7 @@ void CLASSNAME::calculate_MFe()
 {
    const auto mass_matrix_Fe(get_mass_matrix_Fe());
 
+
 #ifdef CHECK_EIGENVALUE_ERROR
    double eigenvalue_error;
    fs_svd(mass_matrix_Fe, MFe, ZEL, ZER, eigenvalue_error);
@@ -1752,6 +1771,7 @@ void CLASSNAME::calculate_MFe()
 #else
    fs_svd(mass_matrix_Fe, MFe, ZEL, ZER);
 #endif
+
 }
 
 Eigen::Matrix<double,3,3> CLASSNAME::get_mass_matrix_Fd() const
@@ -1775,6 +1795,7 @@ void CLASSNAME::calculate_MFd()
 {
    const auto mass_matrix_Fd(get_mass_matrix_Fd());
 
+
 #ifdef CHECK_EIGENVALUE_ERROR
    double eigenvalue_error;
    fs_svd(mass_matrix_Fd, MFd, ZDL, ZDR, eigenvalue_error);
@@ -1783,6 +1804,7 @@ void CLASSNAME::calculate_MFd()
 #else
    fs_svd(mass_matrix_Fd, MFd, ZDL, ZDR);
 #endif
+
 }
 
 Eigen::Matrix<double,3,3> CLASSNAME::get_mass_matrix_Fu() const
@@ -1806,6 +1828,7 @@ void CLASSNAME::calculate_MFu()
 {
    const auto mass_matrix_Fu(get_mass_matrix_Fu());
 
+
 #ifdef CHECK_EIGENVALUE_ERROR
    double eigenvalue_error;
    fs_svd(mass_matrix_Fu, MFu, ZUL, ZUR, eigenvalue_error);
@@ -1814,6 +1837,7 @@ void CLASSNAME::calculate_MFu()
 #else
    fs_svd(mass_matrix_Fu, MFu, ZUL, ZUR);
 #endif
+
 }
 
 double CLASSNAME::get_mass_matrix_VWm() const
@@ -3128,8 +3152,8 @@ std::complex<double> CLASSNAME::CpconjUSdSdAh(unsigned gO2, unsigned gI1, unsign
       tmp_277 += (Conj(ZD(gI1,j2))) * tmp_278;
    }
    tmp_276 += tmp_277;
-   result += (std::complex<double>(0,-0.7071067811865475)*Conj(Mu)*Conj(ZA(gI2,
-      1))) * tmp_276;
+   result += (std::complex<double>(0.,-0.7071067811865475)*Conj(Mu)*Conj(ZA(gI2
+      ,1))) * tmp_276;
    std::complex<double> tmp_280;
    std::complex<double> tmp_281;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
@@ -3156,7 +3180,7 @@ std::complex<double> CLASSNAME::CpconjUSdSdAh(unsigned gO2, unsigned gI1, unsign
       tmp_285 += (Conj(ZD(gI1,j2))) * tmp_286;
    }
    tmp_284 += tmp_285;
-   result += (std::complex<double>(0,-0.7071067811865475)*Conj(ZA(gI2,0))) *
+   result += (std::complex<double>(0.,-0.7071067811865475)*Conj(ZA(gI2,0))) *
       tmp_284;
    if (gO2 < 3) {
       std::complex<double> tmp_288;
@@ -3175,8 +3199,8 @@ std::complex<double> CLASSNAME::CpconjUSdSdAh(unsigned gO2, unsigned gI1, unsign
          tmp_291 += Conj(Yd(j1,gO2))*Conj(ZD(gI1,3 + j1));
       }
       tmp_290 += tmp_291;
-      result += (std::complex<double>(0,0.7071067811865475)*Conj(ZA(gI2,1))*
-         Mu) * tmp_290;
+      result += (std::complex<double>(0.,0.7071067811865475)*Conj(ZA(gI2,1))
+         *Mu) * tmp_290;
    }
    if (gO2 < 3) {
       std::complex<double> tmp_292;
@@ -3195,8 +3219,8 @@ std::complex<double> CLASSNAME::CpconjUSdSdAh(unsigned gO2, unsigned gI1, unsign
          tmp_295 += Conj(ZD(gI1,3 + j1))*Conj(TYd(j1,gO2));
       }
       tmp_294 += tmp_295;
-      result += (std::complex<double>(0,0.7071067811865475)*Conj(ZA(gI2,0)))
-         * tmp_294;
+      result += (std::complex<double>(0.,0.7071067811865475)*Conj(ZA(gI2,0))
+         ) * tmp_294;
    }
 
    return result;
@@ -4993,8 +5017,8 @@ std::complex<double> CLASSNAME::CpconjUSuSuAh(unsigned gO2, unsigned gI1, unsign
       tmp_643 += (Conj(ZU(gI1,j2))) * tmp_644;
    }
    tmp_642 += tmp_643;
-   result += (std::complex<double>(0,-0.7071067811865475)*Conj(Mu)*Conj(ZA(gI2,
-      0))) * tmp_642;
+   result += (std::complex<double>(0.,-0.7071067811865475)*Conj(Mu)*Conj(ZA(gI2
+      ,0))) * tmp_642;
    std::complex<double> tmp_646;
    std::complex<double> tmp_647;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
@@ -5021,7 +5045,7 @@ std::complex<double> CLASSNAME::CpconjUSuSuAh(unsigned gO2, unsigned gI1, unsign
       tmp_651 += (Conj(ZU(gI1,j2))) * tmp_652;
    }
    tmp_650 += tmp_651;
-   result += (std::complex<double>(0,-0.7071067811865475)*Conj(ZA(gI2,1))) *
+   result += (std::complex<double>(0.,-0.7071067811865475)*Conj(ZA(gI2,1))) *
       tmp_650;
    if (gO2 < 3) {
       std::complex<double> tmp_654;
@@ -5040,8 +5064,8 @@ std::complex<double> CLASSNAME::CpconjUSuSuAh(unsigned gO2, unsigned gI1, unsign
          tmp_657 += Conj(Yu(j1,gO2))*Conj(ZU(gI1,3 + j1));
       }
       tmp_656 += tmp_657;
-      result += (std::complex<double>(0,0.7071067811865475)*Conj(ZA(gI2,0))*
-         Mu) * tmp_656;
+      result += (std::complex<double>(0.,0.7071067811865475)*Conj(ZA(gI2,0))
+         *Mu) * tmp_656;
    }
    if (gO2 < 3) {
       std::complex<double> tmp_658;
@@ -5060,8 +5084,8 @@ std::complex<double> CLASSNAME::CpconjUSuSuAh(unsigned gO2, unsigned gI1, unsign
          tmp_661 += Conj(ZU(gI1,3 + j1))*Conj(TYu(j1,gO2));
       }
       tmp_660 += tmp_661;
-      result += (std::complex<double>(0,0.7071067811865475)*Conj(ZA(gI2,1)))
-         * tmp_660;
+      result += (std::complex<double>(0.,0.7071067811865475)*Conj(ZA(gI2,1))
+         ) * tmp_660;
    }
 
    return result;
@@ -6371,8 +6395,8 @@ std::complex<double> CLASSNAME::CpconjUSeSeAh(unsigned gO2, unsigned gI1, unsign
       tmp_935 += (Conj(ZE(gI1,j2))) * tmp_936;
    }
    tmp_934 += tmp_935;
-   result += (std::complex<double>(0,-0.7071067811865475)*Conj(Mu)*Conj(ZA(gI2,
-      1))) * tmp_934;
+   result += (std::complex<double>(0.,-0.7071067811865475)*Conj(Mu)*Conj(ZA(gI2
+      ,1))) * tmp_934;
    std::complex<double> tmp_938;
    std::complex<double> tmp_939;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
@@ -6399,7 +6423,7 @@ std::complex<double> CLASSNAME::CpconjUSeSeAh(unsigned gO2, unsigned gI1, unsign
       tmp_943 += (Conj(ZE(gI1,j2))) * tmp_944;
    }
    tmp_942 += tmp_943;
-   result += (std::complex<double>(0,-0.7071067811865475)*Conj(ZA(gI2,0))) *
+   result += (std::complex<double>(0.,-0.7071067811865475)*Conj(ZA(gI2,0))) *
       tmp_942;
    if (gO2 < 3) {
       std::complex<double> tmp_946;
@@ -6418,8 +6442,8 @@ std::complex<double> CLASSNAME::CpconjUSeSeAh(unsigned gO2, unsigned gI1, unsign
          tmp_949 += Conj(Ye(j1,gO2))*Conj(ZE(gI1,3 + j1));
       }
       tmp_948 += tmp_949;
-      result += (std::complex<double>(0,0.7071067811865475)*Conj(ZA(gI2,1))*
-         Mu) * tmp_948;
+      result += (std::complex<double>(0.,0.7071067811865475)*Conj(ZA(gI2,1))
+         *Mu) * tmp_948;
    }
    if (gO2 < 3) {
       std::complex<double> tmp_950;
@@ -6438,8 +6462,8 @@ std::complex<double> CLASSNAME::CpconjUSeSeAh(unsigned gO2, unsigned gI1, unsign
          tmp_953 += Conj(ZE(gI1,3 + j1))*Conj(TYe(j1,gO2));
       }
       tmp_952 += tmp_953;
-      result += (std::complex<double>(0,0.7071067811865475)*Conj(ZA(gI2,0)))
-         * tmp_952;
+      result += (std::complex<double>(0.,0.7071067811865475)*Conj(ZA(gI2,0))
+         ) * tmp_952;
    }
 
    return result;
@@ -7794,7 +7818,7 @@ std::complex<double> CLASSNAME::CpUhhconjSdSd(unsigned gO2, unsigned gI1, unsign
       tmp_1161 += (Conj(ZD(gI2,j2))) * tmp_1162;
    }
    tmp_1160 += tmp_1161;
-   tmp_1143 += (std::complex<double>(0,0.7071067811865475)*Conj(Mu)*
+   tmp_1143 += (std::complex<double>(0.,0.7071067811865475)*Conj(Mu)*
       KroneckerDelta(1,gO2)) * tmp_1160;
    std::complex<double> tmp_1164;
    std::complex<double> tmp_1165;
@@ -7822,7 +7846,7 @@ std::complex<double> CLASSNAME::CpUhhconjSdSd(unsigned gO2, unsigned gI1, unsign
       tmp_1169 += (Conj(ZD(gI2,j2))) * tmp_1170;
    }
    tmp_1168 += tmp_1169;
-   tmp_1143 += (std::complex<double>(0,-0.7071067811865475)*KroneckerDelta(0,
+   tmp_1143 += (std::complex<double>(0.,-0.7071067811865475)*KroneckerDelta(0,
       gO2)) * tmp_1168;
    std::complex<double> tmp_1172;
    std::complex<double> tmp_1173;
@@ -7850,8 +7874,8 @@ std::complex<double> CLASSNAME::CpUhhconjSdSd(unsigned gO2, unsigned gI1, unsign
       tmp_1177 += (ZD(gI1,j2)) * tmp_1178;
    }
    tmp_1176 += tmp_1177;
-   tmp_1143 += (std::complex<double>(0,0.7071067811865475)*KroneckerDelta(1,gO2
-      )*Mu) * tmp_1176;
+   tmp_1143 += (std::complex<double>(0.,0.7071067811865475)*KroneckerDelta(1,
+      gO2)*Mu) * tmp_1176;
    std::complex<double> tmp_1180;
    std::complex<double> tmp_1181;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
@@ -7878,7 +7902,7 @@ std::complex<double> CLASSNAME::CpUhhconjSdSd(unsigned gO2, unsigned gI1, unsign
       tmp_1185 += (ZD(gI1,j2)) * tmp_1186;
    }
    tmp_1184 += tmp_1185;
-   tmp_1143 += (std::complex<double>(0,-0.7071067811865475)*KroneckerDelta(0,
+   tmp_1143 += (std::complex<double>(0.,-0.7071067811865475)*KroneckerDelta(0,
       gO2)) * tmp_1184;
    std::complex<double> tmp_1188;
    std::complex<double> tmp_1189;
@@ -8004,7 +8028,7 @@ std::complex<double> CLASSNAME::CpUhhconjSeSe(unsigned gO2, unsigned gI1, unsign
       tmp_1218 += (Conj(ZE(gI2,j2))) * tmp_1219;
    }
    tmp_1217 += tmp_1218;
-   tmp_1200 += (std::complex<double>(0,0.7071067811865475)*Conj(Mu)*
+   tmp_1200 += (std::complex<double>(0.,0.7071067811865475)*Conj(Mu)*
       KroneckerDelta(1,gO2)) * tmp_1217;
    std::complex<double> tmp_1221;
    std::complex<double> tmp_1222;
@@ -8032,7 +8056,7 @@ std::complex<double> CLASSNAME::CpUhhconjSeSe(unsigned gO2, unsigned gI1, unsign
       tmp_1226 += (Conj(ZE(gI2,j2))) * tmp_1227;
    }
    tmp_1225 += tmp_1226;
-   tmp_1200 += (std::complex<double>(0,-0.7071067811865475)*KroneckerDelta(0,
+   tmp_1200 += (std::complex<double>(0.,-0.7071067811865475)*KroneckerDelta(0,
       gO2)) * tmp_1225;
    std::complex<double> tmp_1229;
    std::complex<double> tmp_1230;
@@ -8060,8 +8084,8 @@ std::complex<double> CLASSNAME::CpUhhconjSeSe(unsigned gO2, unsigned gI1, unsign
       tmp_1234 += (ZE(gI1,j2)) * tmp_1235;
    }
    tmp_1233 += tmp_1234;
-   tmp_1200 += (std::complex<double>(0,0.7071067811865475)*KroneckerDelta(1,gO2
-      )*Mu) * tmp_1233;
+   tmp_1200 += (std::complex<double>(0.,0.7071067811865475)*KroneckerDelta(1,
+      gO2)*Mu) * tmp_1233;
    std::complex<double> tmp_1237;
    std::complex<double> tmp_1238;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
@@ -8088,7 +8112,7 @@ std::complex<double> CLASSNAME::CpUhhconjSeSe(unsigned gO2, unsigned gI1, unsign
       tmp_1242 += (ZE(gI1,j2)) * tmp_1243;
    }
    tmp_1241 += tmp_1242;
-   tmp_1200 += (std::complex<double>(0,-0.7071067811865475)*KroneckerDelta(0,
+   tmp_1200 += (std::complex<double>(0.,-0.7071067811865475)*KroneckerDelta(0,
       gO2)) * tmp_1241;
    std::complex<double> tmp_1245;
    std::complex<double> tmp_1246;
@@ -8214,7 +8238,7 @@ std::complex<double> CLASSNAME::CpUhhconjSuSu(unsigned gO2, unsigned gI1, unsign
       tmp_1275 += (Conj(ZU(gI2,j2))) * tmp_1276;
    }
    tmp_1274 += tmp_1275;
-   tmp_1257 += (std::complex<double>(0,0.7071067811865475)*Conj(Mu)*
+   tmp_1257 += (std::complex<double>(0.,0.7071067811865475)*Conj(Mu)*
       KroneckerDelta(0,gO2)) * tmp_1274;
    std::complex<double> tmp_1278;
    std::complex<double> tmp_1279;
@@ -8242,7 +8266,7 @@ std::complex<double> CLASSNAME::CpUhhconjSuSu(unsigned gO2, unsigned gI1, unsign
       tmp_1283 += (Conj(ZU(gI2,j2))) * tmp_1284;
    }
    tmp_1282 += tmp_1283;
-   tmp_1257 += (std::complex<double>(0,-0.7071067811865475)*KroneckerDelta(1,
+   tmp_1257 += (std::complex<double>(0.,-0.7071067811865475)*KroneckerDelta(1,
       gO2)) * tmp_1282;
    std::complex<double> tmp_1286;
    std::complex<double> tmp_1287;
@@ -8270,8 +8294,8 @@ std::complex<double> CLASSNAME::CpUhhconjSuSu(unsigned gO2, unsigned gI1, unsign
       tmp_1291 += (ZU(gI1,j2)) * tmp_1292;
    }
    tmp_1290 += tmp_1291;
-   tmp_1257 += (std::complex<double>(0,0.7071067811865475)*KroneckerDelta(0,gO2
-      )*Mu) * tmp_1290;
+   tmp_1257 += (std::complex<double>(0.,0.7071067811865475)*KroneckerDelta(0,
+      gO2)*Mu) * tmp_1290;
    std::complex<double> tmp_1294;
    std::complex<double> tmp_1295;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
@@ -8298,7 +8322,7 @@ std::complex<double> CLASSNAME::CpUhhconjSuSu(unsigned gO2, unsigned gI1, unsign
       tmp_1299 += (ZU(gI1,j2)) * tmp_1300;
    }
    tmp_1298 += tmp_1299;
-   tmp_1257 += (std::complex<double>(0,-0.7071067811865475)*KroneckerDelta(1,
+   tmp_1257 += (std::complex<double>(0.,-0.7071067811865475)*KroneckerDelta(1,
       gO2)) * tmp_1298;
    std::complex<double> tmp_1302;
    std::complex<double> tmp_1303;
@@ -8450,7 +8474,7 @@ std::complex<double> CLASSNAME::CpUAhbarChaChaPR(unsigned gO2, unsigned gI1, uns
 {
    std::complex<double> result;
 
-   result = std::complex<double>(0,-0.7071067811865475)*(g2*KroneckerDelta(0,
+   result = std::complex<double>(0.,-0.7071067811865475)*(g2*KroneckerDelta(0,
       gO2)*UM(gI1,1)*UP(gI2,0) + (g2*KroneckerDelta(1,gO2)*UM(gI1,0) - Conj(
       Lambdax)*KroneckerDelta(2,gO2)*UM(gI1,1))*UP(gI2,1));
 
@@ -8461,8 +8485,8 @@ std::complex<double> CLASSNAME::CpUAhbarChaChaPL(unsigned gO1, unsigned gI1, uns
 {
    std::complex<double> result;
 
-   result = std::complex<double>(0,0.7071067811865475)*(g2*Conj(UM(gI2,0))*Conj
-      (UP(gI1,1))*KroneckerDelta(1,gO1) + Conj(UM(gI2,1))*(g2*Conj(UP(gI1,0))*
+   result = std::complex<double>(0.,0.7071067811865475)*(g2*Conj(UM(gI2,0))*
+      Conj(UP(gI1,1))*KroneckerDelta(1,gO1) + Conj(UM(gI2,1))*(g2*Conj(UP(gI1,0))*
       KroneckerDelta(0,gO1) - Conj(UP(gI1,1))*KroneckerDelta(2,gO1)*Lambdax));
 
    return result;
@@ -8787,8 +8811,8 @@ std::complex<double> CLASSNAME::CpUAhbarFdFdPR(unsigned gO2, unsigned gI1, unsig
       tmp_1315 += (ZDL(gI1,j2)) * tmp_1316;
    }
    tmp_1314 += tmp_1315;
-   result += (std::complex<double>(0,0.7071067811865475)*KroneckerDelta(0,gO2))
-      * tmp_1314;
+   result += (std::complex<double>(0.,0.7071067811865475)*KroneckerDelta(0,gO2)
+      ) * tmp_1314;
 
    return result;
 }
@@ -8809,8 +8833,8 @@ std::complex<double> CLASSNAME::CpUAhbarFdFdPL(unsigned gO1, unsigned gI1, unsig
       tmp_1319 += (Conj(ZDL(gI2,j2))) * tmp_1320;
    }
    tmp_1318 += tmp_1319;
-   result += (std::complex<double>(0,-0.7071067811865475)*KroneckerDelta(0,gO1)
-      ) * tmp_1318;
+   result += (std::complex<double>(0.,-0.7071067811865475)*KroneckerDelta(0,gO1
+      )) * tmp_1318;
 
    return result;
 }
@@ -8831,8 +8855,8 @@ std::complex<double> CLASSNAME::CpUAhbarFeFePR(unsigned gO2, unsigned gI1, unsig
       tmp_1323 += (ZEL(gI1,j2)) * tmp_1324;
    }
    tmp_1322 += tmp_1323;
-   result += (std::complex<double>(0,0.7071067811865475)*KroneckerDelta(0,gO2))
-      * tmp_1322;
+   result += (std::complex<double>(0.,0.7071067811865475)*KroneckerDelta(0,gO2)
+      ) * tmp_1322;
 
    return result;
 }
@@ -8853,8 +8877,8 @@ std::complex<double> CLASSNAME::CpUAhbarFeFePL(unsigned gO1, unsigned gI1, unsig
       tmp_1327 += (Conj(ZEL(gI2,j2))) * tmp_1328;
    }
    tmp_1326 += tmp_1327;
-   result += (std::complex<double>(0,-0.7071067811865475)*KroneckerDelta(0,gO1)
-      ) * tmp_1326;
+   result += (std::complex<double>(0.,-0.7071067811865475)*KroneckerDelta(0,gO1
+      )) * tmp_1326;
 
    return result;
 }
@@ -8875,8 +8899,8 @@ std::complex<double> CLASSNAME::CpUAhbarFuFuPR(unsigned gO2, unsigned gI1, unsig
       tmp_1331 += (ZUL(gI1,j2)) * tmp_1332;
    }
    tmp_1330 += tmp_1331;
-   result += (std::complex<double>(0,0.7071067811865475)*KroneckerDelta(1,gO2))
-      * tmp_1330;
+   result += (std::complex<double>(0.,0.7071067811865475)*KroneckerDelta(1,gO2)
+      ) * tmp_1330;
 
    return result;
 }
@@ -8897,8 +8921,8 @@ std::complex<double> CLASSNAME::CpUAhbarFuFuPL(unsigned gO1, unsigned gI1, unsig
       tmp_1335 += (Conj(ZUL(gI2,j2))) * tmp_1336;
    }
    tmp_1334 += tmp_1335;
-   result += (std::complex<double>(0,-0.7071067811865475)*KroneckerDelta(1,gO1)
-      ) * tmp_1334;
+   result += (std::complex<double>(0.,-0.7071067811865475)*KroneckerDelta(1,gO1
+      )) * tmp_1334;
 
    return result;
 }
@@ -10068,16 +10092,16 @@ std::complex<double> CLASSNAME::CpconjUHpmconjSvSe(unsigned gO2, unsigned gI1, u
       tmp_1579 += Conj(ZE(gI2,j1))*ZV(gI1,j1);
    }
    tmp_1578 += tmp_1579;
-   tmp_1577 += (std::complex<double>(0,-0.35355339059327373)*vd*KroneckerDelta(
-      0,gO2)*Sqr(g2)) * tmp_1578;
+   tmp_1577 += (std::complex<double>(0.,-0.35355339059327373)*vd*KroneckerDelta
+      (0,gO2)*Sqr(g2)) * tmp_1578;
    std::complex<double> tmp_1580;
    std::complex<double> tmp_1581;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
       tmp_1581 += Conj(ZE(gI2,j1))*ZV(gI1,j1);
    }
    tmp_1580 += tmp_1581;
-   tmp_1577 += (std::complex<double>(0,-0.35355339059327373)*vu*KroneckerDelta(
-      1,gO2)*Sqr(g2)) * tmp_1580;
+   tmp_1577 += (std::complex<double>(0.,-0.35355339059327373)*vu*KroneckerDelta
+      (1,gO2)*Sqr(g2)) * tmp_1580;
    std::complex<double> tmp_1582;
    std::complex<double> tmp_1583;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
@@ -10090,8 +10114,8 @@ std::complex<double> CLASSNAME::CpconjUHpmconjSvSe(unsigned gO2, unsigned gI1, u
       tmp_1583 += (ZV(gI1,j2)) * tmp_1584;
    }
    tmp_1582 += tmp_1583;
-   tmp_1577 += (std::complex<double>(0,0.7071067811865475)*vS*KroneckerDelta(1,
-      gO2)*Lambdax) * tmp_1582;
+   tmp_1577 += (std::complex<double>(0.,0.7071067811865475)*vS*KroneckerDelta(1
+      ,gO2)*Lambdax) * tmp_1582;
    std::complex<double> tmp_1586;
    std::complex<double> tmp_1587;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
@@ -10136,8 +10160,8 @@ std::complex<double> CLASSNAME::CpconjUHpmconjSvSe(unsigned gO2, unsigned gI1, u
       tmp_1595 += (ZV(gI1,j3)) * tmp_1596;
    }
    tmp_1594 += tmp_1595;
-   tmp_1577 += (std::complex<double>(0,0.7071067811865475)*vd*KroneckerDelta(0,
-      gO2)) * tmp_1594;
+   tmp_1577 += (std::complex<double>(0.,0.7071067811865475)*vd*KroneckerDelta(0
+      ,gO2)) * tmp_1594;
    result += (std::complex<double>(0,-1)) * tmp_1577;
 
    return result;
@@ -10451,16 +10475,16 @@ std::complex<double> CLASSNAME::CpconjUHpmconjSuSd(unsigned gO2, unsigned gI1, u
       tmp_1671 += Conj(ZD(gI2,j1))*ZU(gI1,j1);
    }
    tmp_1670 += tmp_1671;
-   tmp_1669 += (std::complex<double>(0,-0.35355339059327373)*vd*KroneckerDelta(
-      0,gO2)*Sqr(g2)) * tmp_1670;
+   tmp_1669 += (std::complex<double>(0.,-0.35355339059327373)*vd*KroneckerDelta
+      (0,gO2)*Sqr(g2)) * tmp_1670;
    std::complex<double> tmp_1672;
    std::complex<double> tmp_1673;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
       tmp_1673 += Conj(ZD(gI2,j1))*ZU(gI1,j1);
    }
    tmp_1672 += tmp_1673;
-   tmp_1669 += (std::complex<double>(0,-0.35355339059327373)*vu*KroneckerDelta(
-      1,gO2)*Sqr(g2)) * tmp_1672;
+   tmp_1669 += (std::complex<double>(0.,-0.35355339059327373)*vu*KroneckerDelta
+      (1,gO2)*Sqr(g2)) * tmp_1672;
    std::complex<double> tmp_1674;
    std::complex<double> tmp_1675;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
@@ -10473,7 +10497,7 @@ std::complex<double> CLASSNAME::CpconjUHpmconjSuSd(unsigned gO2, unsigned gI1, u
       tmp_1675 += (Conj(ZD(gI2,j2))) * tmp_1676;
    }
    tmp_1674 += tmp_1675;
-   tmp_1669 += (std::complex<double>(0,0.7071067811865475)*vS*Conj(Lambdax)*
+   tmp_1669 += (std::complex<double>(0.,0.7071067811865475)*vS*Conj(Lambdax)*
       KroneckerDelta(0,gO2)) * tmp_1674;
    std::complex<double> tmp_1678;
    std::complex<double> tmp_1679;
@@ -10514,8 +10538,8 @@ std::complex<double> CLASSNAME::CpconjUHpmconjSuSd(unsigned gO2, unsigned gI1, u
       tmp_1687 += (ZU(gI1,j2)) * tmp_1688;
    }
    tmp_1686 += tmp_1687;
-   tmp_1669 += (std::complex<double>(0,0.7071067811865475)*vS*KroneckerDelta(1,
-      gO2)*Lambdax) * tmp_1686;
+   tmp_1669 += (std::complex<double>(0.,0.7071067811865475)*vS*KroneckerDelta(1
+      ,gO2)*Lambdax) * tmp_1686;
    std::complex<double> tmp_1690;
    std::complex<double> tmp_1691;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
@@ -10560,8 +10584,8 @@ std::complex<double> CLASSNAME::CpconjUHpmconjSuSd(unsigned gO2, unsigned gI1, u
       tmp_1699 += (Conj(ZD(gI2,3 + j3))) * tmp_1700;
    }
    tmp_1698 += tmp_1699;
-   tmp_1669 += (std::complex<double>(0,0.7071067811865475)*vu*KroneckerDelta(0,
-      gO2)) * tmp_1698;
+   tmp_1669 += (std::complex<double>(0.,0.7071067811865475)*vu*KroneckerDelta(0
+      ,gO2)) * tmp_1698;
    std::complex<double> tmp_1704;
    std::complex<double> tmp_1705;
    for (unsigned j3 = 0; j3 < 3; ++j3) {
@@ -10580,8 +10604,8 @@ std::complex<double> CLASSNAME::CpconjUHpmconjSuSd(unsigned gO2, unsigned gI1, u
       tmp_1705 += (Conj(ZD(gI2,3 + j3))) * tmp_1706;
    }
    tmp_1704 += tmp_1705;
-   tmp_1669 += (std::complex<double>(0,0.7071067811865475)*vd*KroneckerDelta(1,
-      gO2)) * tmp_1704;
+   tmp_1669 += (std::complex<double>(0.,0.7071067811865475)*vd*KroneckerDelta(1
+      ,gO2)) * tmp_1704;
    std::complex<double> tmp_1710;
    std::complex<double> tmp_1711;
    for (unsigned j3 = 0; j3 < 3; ++j3) {
@@ -10600,8 +10624,8 @@ std::complex<double> CLASSNAME::CpconjUHpmconjSuSd(unsigned gO2, unsigned gI1, u
       tmp_1711 += (ZU(gI1,j3)) * tmp_1712;
    }
    tmp_1710 += tmp_1711;
-   tmp_1669 += (std::complex<double>(0,0.7071067811865475)*vd*KroneckerDelta(0,
-      gO2)) * tmp_1710;
+   tmp_1669 += (std::complex<double>(0.,0.7071067811865475)*vd*KroneckerDelta(0
+      ,gO2)) * tmp_1710;
    std::complex<double> tmp_1716;
    std::complex<double> tmp_1717;
    for (unsigned j3 = 0; j3 < 3; ++j3) {
@@ -10620,8 +10644,8 @@ std::complex<double> CLASSNAME::CpconjUHpmconjSuSd(unsigned gO2, unsigned gI1, u
       tmp_1717 += (ZU(gI1,j3)) * tmp_1718;
    }
    tmp_1716 += tmp_1717;
-   tmp_1669 += (std::complex<double>(0,0.7071067811865475)*vu*KroneckerDelta(1,
-      gO2)) * tmp_1716;
+   tmp_1669 += (std::complex<double>(0.,0.7071067811865475)*vu*KroneckerDelta(1
+      ,gO2)) * tmp_1716;
    result += (std::complex<double>(0,-1)) * tmp_1669;
 
    return result;
@@ -10911,8 +10935,8 @@ std::complex<double> CLASSNAME::CpVZVZconjSdSd(unsigned gI1, unsigned gI2) const
       tmp_1726 += Conj(ZD(gI2,j1))*ZD(gI1,j1);
    }
    tmp_1725 += tmp_1726;
-   tmp_1722 += (std::complex<double>(0,0.2581988897471611)*g1*g2*Cos(ThetaW())*
-      Sin(ThetaW())) * tmp_1725;
+   tmp_1722 += (std::complex<double>(0.,0.2581988897471611)*g1*g2*Cos(ThetaW())
+      *Sin(ThetaW())) * tmp_1725;
    std::complex<double> tmp_1727;
    std::complex<double> tmp_1728;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
@@ -10953,8 +10977,8 @@ std::complex<double> CLASSNAME::CpVZVZconjSeSe(unsigned gI1, unsigned gI2) const
       tmp_1735 += Conj(ZE(gI2,j1))*ZE(gI1,j1);
    }
    tmp_1734 += tmp_1735;
-   tmp_1731 += (std::complex<double>(0,-0.7745966692414834)*g1*g2*Cos(ThetaW())
-      *Sin(ThetaW())) * tmp_1734;
+   tmp_1731 += (std::complex<double>(0.,-0.7745966692414834)*g1*g2*Cos(ThetaW()
+      )*Sin(ThetaW())) * tmp_1734;
    std::complex<double> tmp_1736;
    std::complex<double> tmp_1737;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
@@ -10995,8 +11019,8 @@ std::complex<double> CLASSNAME::CpVZVZconjSuSu(unsigned gI1, unsigned gI2) const
       tmp_1744 += Conj(ZU(gI2,j1))*ZU(gI1,j1);
    }
    tmp_1743 += tmp_1744;
-   tmp_1740 += (std::complex<double>(0,-0.2581988897471611)*g1*g2*Cos(ThetaW())
-      *Sin(ThetaW())) * tmp_1743;
+   tmp_1740 += (std::complex<double>(0.,-0.2581988897471611)*g1*g2*Cos(ThetaW()
+      )*Sin(ThetaW())) * tmp_1743;
    std::complex<double> tmp_1745;
    std::complex<double> tmp_1746;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
@@ -11638,16 +11662,16 @@ std::complex<double> CLASSNAME::CpUChiconjSdFdPL(unsigned gO2, unsigned gI1, uns
       tmp_1778 += Conj(ZDL(gI2,j1))*ZD(gI1,j1);
    }
    tmp_1777 += tmp_1778;
-   tmp_1776 += (std::complex<double>(0,-0.18257418583505536)*g1*KroneckerDelta(
-      0,gO2)) * tmp_1777;
+   tmp_1776 += (std::complex<double>(0.,-0.18257418583505536)*g1*KroneckerDelta
+      (0,gO2)) * tmp_1777;
    std::complex<double> tmp_1779;
    std::complex<double> tmp_1780;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
       tmp_1780 += Conj(ZDL(gI2,j1))*ZD(gI1,j1);
    }
    tmp_1779 += tmp_1780;
-   tmp_1776 += (std::complex<double>(0,0.7071067811865475)*g2*KroneckerDelta(1,
-      gO2)) * tmp_1779;
+   tmp_1776 += (std::complex<double>(0.,0.7071067811865475)*g2*KroneckerDelta(1
+      ,gO2)) * tmp_1779;
    std::complex<double> tmp_1781;
    std::complex<double> tmp_1782;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
@@ -11677,8 +11701,8 @@ std::complex<double> CLASSNAME::CpUChiconjSdFdPR(unsigned gO1, unsigned gI1, uns
       tmp_1787 += ZD(gI1,3 + j1)*ZDR(gI2,j1);
    }
    tmp_1786 += tmp_1787;
-   tmp_1785 += (std::complex<double>(0,-0.3651483716701107)*g1*KroneckerDelta(0
-      ,gO1)) * tmp_1786;
+   tmp_1785 += (std::complex<double>(0.,-0.3651483716701107)*g1*KroneckerDelta(
+      0,gO1)) * tmp_1786;
    std::complex<double> tmp_1788;
    std::complex<double> tmp_1789;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
@@ -11708,16 +11732,16 @@ std::complex<double> CLASSNAME::CpUChiconjSeFePL(unsigned gO2, unsigned gI1, uns
       tmp_1794 += Conj(ZEL(gI2,j1))*ZE(gI1,j1);
    }
    tmp_1793 += tmp_1794;
-   tmp_1792 += (std::complex<double>(0,0.5477225575051661)*g1*KroneckerDelta(0,
-      gO2)) * tmp_1793;
+   tmp_1792 += (std::complex<double>(0.,0.5477225575051661)*g1*KroneckerDelta(0
+      ,gO2)) * tmp_1793;
    std::complex<double> tmp_1795;
    std::complex<double> tmp_1796;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
       tmp_1796 += Conj(ZEL(gI2,j1))*ZE(gI1,j1);
    }
    tmp_1795 += tmp_1796;
-   tmp_1792 += (std::complex<double>(0,0.7071067811865475)*g2*KroneckerDelta(1,
-      gO2)) * tmp_1795;
+   tmp_1792 += (std::complex<double>(0.,0.7071067811865475)*g2*KroneckerDelta(1
+      ,gO2)) * tmp_1795;
    std::complex<double> tmp_1797;
    std::complex<double> tmp_1798;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
@@ -11747,8 +11771,8 @@ std::complex<double> CLASSNAME::CpUChiconjSeFePR(unsigned gO1, unsigned gI1, uns
       tmp_1803 += ZE(gI1,3 + j1)*ZER(gI2,j1);
    }
    tmp_1802 += tmp_1803;
-   tmp_1801 += (std::complex<double>(0,-1.0954451150103321)*g1*KroneckerDelta(0
-      ,gO1)) * tmp_1802;
+   tmp_1801 += (std::complex<double>(0.,-1.0954451150103321)*g1*KroneckerDelta(
+      0,gO1)) * tmp_1802;
    std::complex<double> tmp_1804;
    std::complex<double> tmp_1805;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
@@ -11778,16 +11802,16 @@ std::complex<double> CLASSNAME::CpUChiconjSuFuPL(unsigned gO2, unsigned gI1, uns
       tmp_1810 += Conj(ZUL(gI2,j1))*ZU(gI1,j1);
    }
    tmp_1809 += tmp_1810;
-   tmp_1808 += (std::complex<double>(0,-0.18257418583505536)*g1*KroneckerDelta(
-      0,gO2)) * tmp_1809;
+   tmp_1808 += (std::complex<double>(0.,-0.18257418583505536)*g1*KroneckerDelta
+      (0,gO2)) * tmp_1809;
    std::complex<double> tmp_1811;
    std::complex<double> tmp_1812;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
       tmp_1812 += Conj(ZUL(gI2,j1))*ZU(gI1,j1);
    }
    tmp_1811 += tmp_1812;
-   tmp_1808 += (std::complex<double>(0,-0.7071067811865475)*g2*KroneckerDelta(1
-      ,gO2)) * tmp_1811;
+   tmp_1808 += (std::complex<double>(0.,-0.7071067811865475)*g2*KroneckerDelta(
+      1,gO2)) * tmp_1811;
    std::complex<double> tmp_1813;
    std::complex<double> tmp_1814;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
@@ -11817,8 +11841,8 @@ std::complex<double> CLASSNAME::CpUChiconjSuFuPR(unsigned gO1, unsigned gI1, uns
       tmp_1819 += ZU(gI1,3 + j1)*ZUR(gI2,j1);
    }
    tmp_1818 += tmp_1819;
-   tmp_1817 += (std::complex<double>(0,0.7302967433402214)*g1*KroneckerDelta(0,
-      gO1)) * tmp_1818;
+   tmp_1817 += (std::complex<double>(0.,0.7302967433402214)*g1*KroneckerDelta(0
+      ,gO1)) * tmp_1818;
    std::complex<double> tmp_1820;
    std::complex<double> tmp_1821;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
@@ -11882,8 +11906,8 @@ std::complex<double> CLASSNAME::CpbarUChaChaAhPL(unsigned gO2, unsigned gI1, uns
 {
    std::complex<double> result;
 
-   result = std::complex<double>(0,0.7071067811865475)*(g2*Conj(UM(gI1,0))*Conj
-      (ZA(gI2,1))*KroneckerDelta(1,gO2) + Conj(UM(gI1,1))*(g2*Conj(ZA(gI2,0))*
+   result = std::complex<double>(0.,0.7071067811865475)*(g2*Conj(UM(gI1,0))*
+      Conj(ZA(gI2,1))*KroneckerDelta(1,gO2) + Conj(UM(gI1,1))*(g2*Conj(ZA(gI2,0))*
       KroneckerDelta(0,gO2) - Conj(ZA(gI2,2))*KroneckerDelta(1,gO2)*Lambdax));
 
    return result;
@@ -11893,7 +11917,7 @@ std::complex<double> CLASSNAME::CpbarUChaChaAhPR(unsigned gO1, unsigned gI1, uns
 {
    std::complex<double> result;
 
-   result = std::complex<double>(0,-0.7071067811865475)*(g2*Conj(ZA(gI2,0))*
+   result = std::complex<double>(0.,-0.7071067811865475)*(g2*Conj(ZA(gI2,0))*
       KroneckerDelta(1,gO1)*UP(gI1,0) + (g2*Conj(ZA(gI2,1))*KroneckerDelta(0,gO1)
       - Conj(Lambdax)*Conj(ZA(gI2,2))*KroneckerDelta(1,gO1))*UP(gI1,1));
 
@@ -12235,8 +12259,8 @@ std::complex<double> CLASSNAME::CpbarUFeFeAhPL(unsigned gO2, unsigned gI1, unsig
          tmp_1857 += Conj(ZEL(gI1,j2))*Ye(gO2,j2);
       }
       tmp_1856 += tmp_1857;
-      result += (std::complex<double>(0,-0.7071067811865475)*Conj(ZA(gI2,0))
-         ) * tmp_1856;
+      result += (std::complex<double>(0.,-0.7071067811865475)*Conj(ZA(gI2,0)
+         )) * tmp_1856;
    }
 
    return result;
@@ -12253,8 +12277,8 @@ std::complex<double> CLASSNAME::CpbarUFeFeAhPR(unsigned gO1, unsigned gI1, unsig
          tmp_1859 += Conj(Ye(j1,gO1))*ZER(gI1,j1);
       }
       tmp_1858 += tmp_1859;
-      result += (std::complex<double>(0,0.7071067811865475)*Conj(ZA(gI2,0)))
-         * tmp_1858;
+      result += (std::complex<double>(0.,0.7071067811865475)*Conj(ZA(gI2,0))
+         ) * tmp_1858;
    }
 
    return result;
@@ -12453,8 +12477,8 @@ std::complex<double> CLASSNAME::CpbarUFdFdAhPL(unsigned gO2, unsigned gI1, unsig
          tmp_1873 += Conj(ZDL(gI1,j2))*Yd(gO2,j2);
       }
       tmp_1872 += tmp_1873;
-      result += (std::complex<double>(0,-0.7071067811865475)*Conj(ZA(gI2,0))
-         ) * tmp_1872;
+      result += (std::complex<double>(0.,-0.7071067811865475)*Conj(ZA(gI2,0)
+         )) * tmp_1872;
    }
 
    return result;
@@ -12471,8 +12495,8 @@ std::complex<double> CLASSNAME::CpbarUFdFdAhPR(unsigned gO1, unsigned gI1, unsig
          tmp_1875 += Conj(Yd(j1,gO1))*ZDR(gI1,j1);
       }
       tmp_1874 += tmp_1875;
-      result += (std::complex<double>(0,0.7071067811865475)*Conj(ZA(gI2,0)))
-         * tmp_1874;
+      result += (std::complex<double>(0.,0.7071067811865475)*Conj(ZA(gI2,0))
+         ) * tmp_1874;
    }
 
    return result;
@@ -12789,8 +12813,8 @@ std::complex<double> CLASSNAME::CpbarUFuFuAhPL(unsigned gO2, unsigned gI1, unsig
          tmp_1897 += Conj(ZUL(gI1,j2))*Yu(gO2,j2);
       }
       tmp_1896 += tmp_1897;
-      result += (std::complex<double>(0,-0.7071067811865475)*Conj(ZA(gI2,1))
-         ) * tmp_1896;
+      result += (std::complex<double>(0.,-0.7071067811865475)*Conj(ZA(gI2,1)
+         )) * tmp_1896;
    }
 
    return result;
@@ -12807,8 +12831,8 @@ std::complex<double> CLASSNAME::CpbarUFuFuAhPR(unsigned gO1, unsigned gI1, unsig
          tmp_1899 += Conj(Yu(j1,gO1))*ZUR(gI1,j1);
       }
       tmp_1898 += tmp_1899;
-      result += (std::complex<double>(0,0.7071067811865475)*Conj(ZA(gI2,1)))
-         * tmp_1898;
+      result += (std::complex<double>(0.,0.7071067811865475)*Conj(ZA(gI2,1))
+         ) * tmp_1898;
    }
 
    return result;
@@ -13159,7 +13183,7 @@ std::complex<double> CLASSNAME::CpbarFeFeAhPL(unsigned gO2, unsigned gI1, unsign
       tmp_1925 += (Conj(ZEL(gI1,j2))) * tmp_1926;
    }
    tmp_1924 += tmp_1925;
-   result += (std::complex<double>(0,-0.7071067811865475)*Conj(ZA(gI2,0))) *
+   result += (std::complex<double>(0.,-0.7071067811865475)*Conj(ZA(gI2,0))) *
       tmp_1924;
 
    return result;
@@ -13181,7 +13205,7 @@ std::complex<double> CLASSNAME::CpbarFeFeAhPR(unsigned gO1, unsigned gI1, unsign
       tmp_1929 += (ZEL(gO1,j2)) * tmp_1930;
    }
    tmp_1928 += tmp_1929;
-   result += (std::complex<double>(0,0.7071067811865475)*Conj(ZA(gI2,0))) *
+   result += (std::complex<double>(0.,0.7071067811865475)*Conj(ZA(gI2,0))) *
       tmp_1928;
 
    return result;
@@ -13383,7 +13407,7 @@ std::complex<double> CLASSNAME::CpbarFdFdAhPL(unsigned gO2, unsigned gI1, unsign
       tmp_1961 += (Conj(ZDL(gI1,j2))) * tmp_1962;
    }
    tmp_1960 += tmp_1961;
-   result += (std::complex<double>(0,-0.7071067811865475)*Conj(ZA(gI2,0))) *
+   result += (std::complex<double>(0.,-0.7071067811865475)*Conj(ZA(gI2,0))) *
       tmp_1960;
 
    return result;
@@ -13405,7 +13429,7 @@ std::complex<double> CLASSNAME::CpbarFdFdAhPR(unsigned gO1, unsigned gI1, unsign
       tmp_1965 += (ZDL(gO1,j2)) * tmp_1966;
    }
    tmp_1964 += tmp_1965;
-   result += (std::complex<double>(0,0.7071067811865475)*Conj(ZA(gI2,0))) *
+   result += (std::complex<double>(0.,0.7071067811865475)*Conj(ZA(gI2,0))) *
       tmp_1964;
 
    return result;
@@ -13743,7 +13767,7 @@ std::complex<double> CLASSNAME::CpbarFuFuAhPL(unsigned gO2, unsigned gI1, unsign
       tmp_2025 += (Conj(ZUL(gI1,j2))) * tmp_2026;
    }
    tmp_2024 += tmp_2025;
-   result += (std::complex<double>(0,-0.7071067811865475)*Conj(ZA(gI2,1))) *
+   result += (std::complex<double>(0.,-0.7071067811865475)*Conj(ZA(gI2,1))) *
       tmp_2024;
 
    return result;
@@ -13765,7 +13789,7 @@ std::complex<double> CLASSNAME::CpbarFuFuAhPR(unsigned gO1, unsigned gI1, unsign
       tmp_2029 += (ZUL(gO1,j2)) * tmp_2030;
    }
    tmp_2028 += tmp_2029;
-   result += (std::complex<double>(0,0.7071067811865475)*Conj(ZA(gI2,1))) *
+   result += (std::complex<double>(0.,0.7071067811865475)*Conj(ZA(gI2,1))) *
       tmp_2028;
 
    return result;
@@ -19946,8 +19970,8 @@ void CLASSNAME::calculate_MFu_pole()
       TOP_2LOOP_CORRECTION_QCD;
    const double currentScale = get_scale();
 
-   const double qcd_1l = -0.008443431970194815*(5. - 3.*Log(Sqr(MFu(2))
-      /Sqr(currentScale)))*Sqr(g3);
+   const double qcd_1l = 0.025330295910584444*(-1.6666666666666667 + 1.*
+      Log(Sqr(MFu(2))/Sqr(currentScale)))*Sqr(g3);
 
    double qcd_2l = 0.;
 
@@ -20088,11 +20112,11 @@ double CLASSNAME::calculate_MFu_DRbar(double m_pole, int idx) const
       idx, idx));
 
    const double currentScale = get_scale();
-   const double qcd_1l = -0.008443431970194815*(5. - 3.*Log(Sqr(MFu(2))
-      /Sqr(currentScale)))*Sqr(g3);
+   const double qcd_1l = 0.025330295910584444*(-1.6666666666666667 + 1.*
+      Log(Sqr(MFu(idx))/Sqr(currentScale)))*Sqr(g3);
    const double qcd_2l = -0.003408916029785599*Power(g3,4) +
-      0.0011495761378943394*Power(g3,4)*Log(Sqr(MFu(2))/Sqr(currentScale)) -
-      0.00024060895909416413*Power(g3,4)*Sqr(Log(Power(MFu(2),2)/Sqr(
+      0.0011495761378943394*Power(g3,4)*Log(Sqr(MFu(idx))/Sqr(currentScale)) -
+      0.00024060895909416413*Power(g3,4)*Sqr(Log(Power(MFu(idx),2)/Sqr(
       currentScale)));
 
    const double m_susy_drbar = m_pole + self_energy_1 + m_pole * (
@@ -20110,7 +20134,7 @@ double CLASSNAME::calculate_MFd_DRbar(double m_sm_msbar, int idx) const
       idx, idx));
    const double self_energy_PR = Re(self_energy_Fd_PR_heavy_rotated(p,
       idx, idx));
-   const double m_tree = MFd(2);
+   const double m_tree = MFd(idx);
    const double drbar_conversion = 1 - 0.00020496318737651018*Power(g3,4)
       + 0.0006860288475783287*Sqr(g1) + 0.0023747152416172916*Sqr(g2) -
       0.008443431970194815*Sqr(g3);

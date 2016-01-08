@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:29:51
+// File generated at Fri 8 Jan 2016 13:19:03
 
 #include "MSSMNoFVatMGUT_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -93,6 +93,13 @@ MSSMNoFVatMGUT_susy_parameters MSSMNoFVatMGUT_susy_parameters::calc_beta() const
       beta_vu += calc_beta_vu_two_loop(TRACE_STRUCT);
 
       if (get_loops() > 2) {
+         beta_Yd += calc_beta_Yd_three_loop(TRACE_STRUCT);
+         beta_Ye += calc_beta_Ye_three_loop(TRACE_STRUCT);
+         beta_Yu += calc_beta_Yu_three_loop(TRACE_STRUCT);
+         beta_Mu += calc_beta_Mu_three_loop(TRACE_STRUCT);
+         beta_g1 += calc_beta_g1_three_loop(TRACE_STRUCT);
+         beta_g2 += calc_beta_g2_three_loop(TRACE_STRUCT);
+         beta_g3 += calc_beta_g3_three_loop(TRACE_STRUCT);
 
       }
    }
@@ -359,18 +366,49 @@ void MSSMNoFVatMGUT_susy_parameters::set_input_parameters(const MSSMNoFVatMGUT_i
 
 void MSSMNoFVatMGUT_susy_parameters::calc_susy_traces(Susy_traces& susy_traces) const
 {
-   TRACE_STRUCT.traceYdAdjYd = Re((Yd*Yd.adjoint()).trace());
-   TRACE_STRUCT.traceYeAdjYe = Re((Ye*Ye.adjoint()).trace());
-   TRACE_STRUCT.traceYdAdjYdYdAdjYd = Re((Yd*Yd.adjoint()*Yd*Yd.adjoint())
-      .trace());
-   TRACE_STRUCT.traceYdAdjYuYuAdjYd = Re((Yd*Yu.adjoint()*Yu*Yd.adjoint())
-      .trace());
-   TRACE_STRUCT.traceYeAdjYeYeAdjYe = Re((Ye*Ye.adjoint()*Ye*Ye.adjoint())
-      .trace());
-   TRACE_STRUCT.traceYuAdjYu = Re((Yu*Yu.adjoint()).trace());
-   TRACE_STRUCT.traceYuAdjYuYuAdjYu = Re((Yu*Yu.adjoint()*Yu*Yu.adjoint())
-      .trace());
+   if (get_loops() > 0) {
+      TRACE_STRUCT.traceYdAdjYd = Re((Yd*Yd.adjoint()).trace());
+      TRACE_STRUCT.traceYeAdjYe = Re((Ye*Ye.adjoint()).trace());
+      TRACE_STRUCT.traceYuAdjYu = Re((Yu*Yu.adjoint()).trace());
 
+   }
+
+   if (get_loops() > 1) {
+      TRACE_STRUCT.traceYdAdjYdYdAdjYd = Re((Yd*Yd.adjoint()*Yd*Yd.adjoint())
+         .trace());
+      TRACE_STRUCT.traceYdAdjYuYuAdjYd = Re((Yd*Yu.adjoint()*Yu*Yd.adjoint())
+         .trace());
+      TRACE_STRUCT.traceYeAdjYeYeAdjYe = Re((Ye*Ye.adjoint()*Ye*Ye.adjoint())
+         .trace());
+      TRACE_STRUCT.traceYuAdjYuYuAdjYu = Re((Yu*Yu.adjoint()*Yu*Yu.adjoint())
+         .trace());
+
+   }
+
+   if (get_loops() > 2) {
+      TRACE_STRUCT.traceAdjYdYd = Re((Yd.adjoint()*Yd).trace());
+      TRACE_STRUCT.traceAdjYeYe = Re((Ye.adjoint()*Ye).trace());
+      TRACE_STRUCT.traceAdjYuYu = Re((Yu.adjoint()*Yu).trace());
+      TRACE_STRUCT.traceAdjYdYdAdjYdYd = Re((Yd.adjoint()*Yd*Yd.adjoint()*Yd)
+         .trace());
+      TRACE_STRUCT.traceAdjYeYeAdjYeYe = Re((Ye.adjoint()*Ye*Ye.adjoint()*Ye)
+         .trace());
+      TRACE_STRUCT.traceAdjYuYuAdjYdYd = Re((Yu.adjoint()*Yu*Yd.adjoint()*Yd)
+         .trace());
+      TRACE_STRUCT.traceAdjYuYuAdjYuYu = Re((Yu.adjoint()*Yu*Yu.adjoint()*Yu)
+         .trace());
+      TRACE_STRUCT.traceAdjYdYdAdjYdYdAdjYdYd = Re((Yd.adjoint()*Yd*Yd.adjoint()*
+         Yd*Yd.adjoint()*Yd).trace());
+      TRACE_STRUCT.traceAdjYdYdAdjYuYuAdjYdYd = Re((Yd.adjoint()*Yd*Yu.adjoint()*
+         Yu*Yd.adjoint()*Yd).trace());
+      TRACE_STRUCT.traceAdjYeYeAdjYeYeAdjYeYe = Re((Ye.adjoint()*Ye*Ye.adjoint()*
+         Ye*Ye.adjoint()*Ye).trace());
+      TRACE_STRUCT.traceAdjYuYuAdjYuYuAdjYdYd = Re((Yu.adjoint()*Yu*Yu.adjoint()*
+         Yu*Yd.adjoint()*Yd).trace());
+      TRACE_STRUCT.traceAdjYuYuAdjYuYuAdjYuYu = Re((Yu.adjoint()*Yu*Yu.adjoint()*
+         Yu*Yu.adjoint()*Yu).trace());
+
+   }
 }
 
 std::ostream& operator<<(std::ostream& ostr, const MSSMNoFVatMGUT_susy_parameters& susy_pars)

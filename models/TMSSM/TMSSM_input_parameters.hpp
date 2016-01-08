@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:09:14
+// File generated at Fri 8 Jan 2016 11:50:16
 
 #ifndef TMSSM_INPUT_PARAMETERS_H
 #define TMSSM_INPUT_PARAMETERS_H
@@ -42,6 +42,9 @@ struct TMSSM_input_parameters {
    LambdaInput(0), vTInput(0)
 
    {}
+
+   Eigen::ArrayXd get() const;
+   void set(const Eigen::ArrayXd&);
 };
 
 std::ostream& operator<<(std::ostream&, const TMSSM_input_parameters&);

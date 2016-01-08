@@ -16,9 +16,10 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:20:23
+// File generated at Fri 8 Jan 2016 12:38:38
 
 #include "UMSSM_input_parameters.hpp"
+#include "UMSSM_observables.hpp"
 #include "UMSSM_spectrum_generator.hpp"
 #include "UMSSM_slha_io.hpp"
 
@@ -51,6 +52,7 @@ void print_usage()
       "  --Qu=<value>\n"
       "  --Qe=<value>\n"
       "  --Qs=<value>\n"
+      "  --Qv=<value>\n"
 
       "  --help,-h                         print this help message"
              << std::endl;
@@ -107,6 +109,9 @@ void set_command_line_parameters(int argc, char* argv[],
       if(Command_line_options::get_parameter_value(option, "--Qs=", input.Qs))
          continue;
 
+      if(Command_line_options::get_parameter_value(option, "--Qv=", input.Qv))
+         continue;
+
       
       if (strcmp(option,"--help") == 0 || strcmp(option,"-h") == 0) {
          print_usage();
@@ -129,8 +134,8 @@ int main(int argc, char* argv[])
    UMSSM_input_parameters input;
    set_command_line_parameters(argc, argv, input);
 
-   softsusy::QedQcd oneset;
-   oneset.toMz();
+   softsusy::QedQcd qedqcd;
+   qedqcd.toMz();
 
    UMSSM_spectrum_generator<algorithm_type> spectrum_generator;
    spectrum_generator.set_precision_goal(1.0e-4);
@@ -143,7 +148,7 @@ int main(int argc, char* argv[])
    spectrum_generator.set_beta_loop_order(2);        // 2-loop
    spectrum_generator.set_threshold_corrections_loop_order(1); // 1-loop
 
-   spectrum_generator.run(oneset, input);
+   spectrum_generator.run(qedqcd, input);
 
    const int exit_code = spectrum_generator.get_exit_code();
    const UMSSM_slha<algorithm_type> model(spectrum_generator.get_model());
@@ -153,8 +158,10 @@ int main(int argc, char* argv[])
    scales.SUSYScale = spectrum_generator.get_susy_scale();
    scales.LowScale  = spectrum_generator.get_low_scale();
 
+   const Observables observables(calculate_observables(model, qedqcd));
+
    // SLHA output
-   SLHAea::Coll slhaea(UMSSM_slha_io::fill_slhaea(model, oneset, scales));
+   SLHAea::Coll slhaea(UMSSM_slha_io::fill_slhaea(model, qedqcd, scales, observables));
 
    std::cout << slhaea;
 

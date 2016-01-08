@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:20:23
+// File generated at Fri 8 Jan 2016 12:38:38
 
 #include "UMSSM_input_parameters.hpp"
 #include "UMSSM_spectrum_generator.hpp"
@@ -52,6 +52,7 @@ void print_usage()
       "  --Qu=<value>\n"
       "  --Qe=<value>\n"
       "  --Qs=<value>\n"
+      "  --Qv=<value>\n"
 
       "  --help,-h                         print this help message"
              << std::endl;
@@ -108,6 +109,9 @@ void set_command_line_parameters(int argc, char* argv[],
       if(Command_line_options::get_parameter_value(option, "--Qs=", input.Qs))
          continue;
 
+      if(Command_line_options::get_parameter_value(option, "--Qv=", input.Qv))
+         continue;
+
       
       if (strcmp(option,"--help") == 0 || strcmp(option,"-h") == 0) {
          print_usage();
@@ -130,8 +134,8 @@ int main(int argc, char* argv[])
    UMSSM_input_parameters input;
    set_command_line_parameters(argc, argv, input);
 
-   softsusy::QedQcd oneset;
-   oneset.toMz();
+   softsusy::QedQcd qedqcd;
+   qedqcd.toMz();
 
    UMSSM_spectrum_generator<algorithm_type> spectrum_generator;
    spectrum_generator.set_precision_goal(1.0e-4);
@@ -151,7 +155,7 @@ int main(int argc, char* argv[])
            end = range.end(); it != end; ++it) {
       input.m0 = *it;
 
-      spectrum_generator.run(oneset, input);
+      spectrum_generator.run(qedqcd, input);
 
       const UMSSM_slha<algorithm_type> model(spectrum_generator.get_model());
       const UMSSM_physical& pole_masses = model.get_physical_slha();

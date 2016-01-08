@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:15:11
+// File generated at Fri 8 Jan 2016 12:30:21
 
 #include "UMSSM_slha_io.hpp"
 #include "UMSSM_input_parameters.hpp"
@@ -47,7 +47,7 @@ namespace flexiblesusy {
 
 char const * const UMSSM_slha_io::drbar_blocks[NUMBER_OF_DRBAR_BLOCKS] =
    { "gauge", "Yu", "Yd", "Ye", "Te", "Td", "Tu", "MSQ2", "MSE2", "MSL2",
-   "MSU2", "MSD2", "MSOFT", "HMIX", "NMSSMRUN", "GAUGE" }
+   "MSU2", "MSD2", "MSOFT", "HMIX", "Yv", "Tv", "mv2", "NMSSMRUN", "GAUGE" }
 ;
 
 UMSSM_slha_io::UMSSM_slha_io()
@@ -81,6 +81,7 @@ void UMSSM_slha_io::set_extpar(const UMSSM_input_parameters& input)
    extpar << FORMAT_ELEMENT(205, input.Qu, "Qu");
    extpar << FORMAT_ELEMENT(206, input.Qe, "Qe");
    extpar << FORMAT_ELEMENT(207, input.Qs, "Qs");
+   extpar << FORMAT_ELEMENT(208, input.Qv, "Qv");
    slha_io.set_block(extpar);
 
 }
@@ -167,9 +168,6 @@ void UMSSM_slha_io::set_mass(const UMSSM_physical& physical,
       << FORMAT_MASS(25, LOCALPHYSICAL(Mhh(0)), "hh(1)")
       << FORMAT_MASS(35, LOCALPHYSICAL(Mhh(1)), "hh(2)")
       << FORMAT_MASS(45, LOCALPHYSICAL(Mhh(2)), "hh(3)")
-      << FORMAT_MASS(1000012, LOCALPHYSICAL(MSv(0)), "Sv(1)")
-      << FORMAT_MASS(1000014, LOCALPHYSICAL(MSv(1)), "Sv(2)")
-      << FORMAT_MASS(1000016, LOCALPHYSICAL(MSv(2)), "Sv(3)")
       << FORMAT_MASS(36, LOCALPHYSICAL(MAh(2)), "Ah(3)")
       << FORMAT_MASS(1000022, LOCALPHYSICAL(MChi(0)), "Chi(1)")
       << FORMAT_MASS(1000023, LOCALPHYSICAL(MChi(1)), "Chi(2)")
@@ -195,16 +193,22 @@ void UMSSM_slha_io::set_mass(const UMSSM_physical& physical,
       << FORMAT_MASS(2000002, LOCALPHYSICAL(MSu(3)), "Su(4)")
       << FORMAT_MASS(2000004, LOCALPHYSICAL(MSu(4)), "Su(5)")
       << FORMAT_MASS(2000006, LOCALPHYSICAL(MSu(5)), "Su(6)")
+      << FORMAT_MASS(1000012, LOCALPHYSICAL(MSv(0)), "Sv(1)")
+      << FORMAT_MASS(1000014, LOCALPHYSICAL(MSv(1)), "Sv(2)")
+      << FORMAT_MASS(1000016, LOCALPHYSICAL(MSv(2)), "Sv(3)")
+      << FORMAT_MASS(2000012, LOCALPHYSICAL(MSv(3)), "Sv(4)")
+      << FORMAT_MASS(2000014, LOCALPHYSICAL(MSv(4)), "Sv(5)")
+      << FORMAT_MASS(2000016, LOCALPHYSICAL(MSv(5)), "Sv(6)")
    ;
 
    if (write_sm_masses) {
       mass
          << FORMAT_MASS(21, LOCALPHYSICAL(MVG), "VG")
+         << FORMAT_MASS(22, LOCALPHYSICAL(MVP), "VP")
+         << FORMAT_MASS(23, LOCALPHYSICAL(MVZ), "VZ")
          << FORMAT_MASS(12, LOCALPHYSICAL(MFv(0)), "Fv(1)")
          << FORMAT_MASS(14, LOCALPHYSICAL(MFv(1)), "Fv(2)")
          << FORMAT_MASS(16, LOCALPHYSICAL(MFv(2)), "Fv(3)")
-         << FORMAT_MASS(22, LOCALPHYSICAL(MVP), "VP")
-         << FORMAT_MASS(23, LOCALPHYSICAL(MVZ), "VZ")
          << FORMAT_MASS(11, LOCALPHYSICAL(MFe(0)), "Fe(1)")
          << FORMAT_MASS(13, LOCALPHYSICAL(MFe(1)), "Fe(2)")
          << FORMAT_MASS(15, LOCALPHYSICAL(MFe(2)), "Fe(3)")
@@ -250,6 +254,8 @@ void UMSSM_slha_io::set_mixing_matrices(const UMSSM_physical& physical,
       slha_io.set_block("UDRMIX", LOCALPHYSICAL(ZDR), "ZDR");
       slha_io.set_block("UULMIX", LOCALPHYSICAL(ZUL), "ZUL");
       slha_io.set_block("UURMIX", LOCALPHYSICAL(ZUR), "ZUR");
+      slha_io.set_block("SNUMIX", LOCALPHYSICAL(ZVL), "ZVL");
+      slha_io.set_block("SNURMIX", LOCALPHYSICAL(ZVR), "ZVR");
    }
 
 }
@@ -411,6 +417,21 @@ void UMSSM_slha_io::fill_drbar_parameters(UMSSM_mass_eigenstates& model) const
    model.set_MassG(slha_io.read_entry("MSOFT", 3));
    model.set_vd(slha_io.read_entry("HMIX", 102));
    model.set_vu(slha_io.read_entry("HMIX", 103));
+   {
+      DEFINE_PARAMETER(Yv);
+      slha_io.read_block("Yv", Yv);
+      model.set_Yv(Yv);
+   }
+   {
+      DEFINE_PARAMETER(TYv);
+      slha_io.read_block("Tv", TYv);
+      model.set_TYv(TYv);
+   }
+   {
+      DEFINE_PARAMETER(mvR2);
+      slha_io.read_block("mv2", mvR2);
+      model.set_mvR2(mvR2);
+   }
    model.set_Lambdax(slha_io.read_entry("NMSSMRUN", 1));
    model.set_TLambdax(slha_io.read_entry("NMSSMRUN", 3));
    model.set_ms2(slha_io.read_entry("NMSSMRUN", 10));
@@ -475,6 +496,7 @@ void UMSSM_slha_io::fill_extpar_tuple(UMSSM_input_parameters& input,
    case 205: input.Qu = value; break;
    case 206: input.Qe = value; break;
    case 207: input.Qs = value; break;
+   case 208: input.Qv = value; break;
    default: WARNING("Unrecognized entry in block EXTPAR: " << key); break;
    }
 
@@ -565,12 +587,19 @@ void UMSSM_slha_io::fill_physical(UMSSM_physical& physical) const
       slha_io.read_block("UURMIX", ZUR);
       LOCALPHYSICAL(ZUR) = ZUR;
    }
+   {
+      DEFINE_PHYSICAL_PARAMETER(ZVL);
+      slha_io.read_block("SNUMIX", ZVL);
+      LOCALPHYSICAL(ZVL) = ZVL;
+   }
+   {
+      DEFINE_PHYSICAL_PARAMETER(ZVR);
+      slha_io.read_block("SNURMIX", ZVR);
+      LOCALPHYSICAL(ZVR) = ZVR;
+   }
 
    LOCALPHYSICAL(MVG) = slha_io.read_entry("MASS", 21);
    LOCALPHYSICAL(MGlu) = slha_io.read_entry("MASS", 1000021);
-   LOCALPHYSICAL(MFv)(0) = slha_io.read_entry("MASS", 12);
-   LOCALPHYSICAL(MFv)(1) = slha_io.read_entry("MASS", 14);
-   LOCALPHYSICAL(MFv)(2) = slha_io.read_entry("MASS", 16);
    LOCALPHYSICAL(MVP) = slha_io.read_entry("MASS", 22);
    LOCALPHYSICAL(MVZ) = slha_io.read_entry("MASS", 23);
    LOCALPHYSICAL(MVZp) = slha_io.read_entry("MASS", 31);
@@ -583,6 +612,9 @@ void UMSSM_slha_io::fill_physical(UMSSM_physical& physical) const
    LOCALPHYSICAL(MSv)(0) = slha_io.read_entry("MASS", 1000012);
    LOCALPHYSICAL(MSv)(1) = slha_io.read_entry("MASS", 1000014);
    LOCALPHYSICAL(MSv)(2) = slha_io.read_entry("MASS", 1000016);
+   LOCALPHYSICAL(MSv)(3) = slha_io.read_entry("MASS", 2000012);
+   LOCALPHYSICAL(MSv)(4) = slha_io.read_entry("MASS", 2000014);
+   LOCALPHYSICAL(MSv)(5) = slha_io.read_entry("MASS", 2000016);
    LOCALPHYSICAL(MSu)(0) = slha_io.read_entry("MASS", 1000002);
    LOCALPHYSICAL(MSu)(1) = slha_io.read_entry("MASS", 1000004);
    LOCALPHYSICAL(MSu)(2) = slha_io.read_entry("MASS", 1000006);
@@ -606,6 +638,9 @@ void UMSSM_slha_io::fill_physical(UMSSM_physical& physical) const
    LOCALPHYSICAL(MChi)(3) = slha_io.read_entry("MASS", 1000035);
    LOCALPHYSICAL(MChi)(4) = slha_io.read_entry("MASS", 1000045);
    LOCALPHYSICAL(MChi)(5) = slha_io.read_entry("MASS", 1000055);
+   LOCALPHYSICAL(MFv)(0) = slha_io.read_entry("MASS", 12);
+   LOCALPHYSICAL(MFv)(1) = slha_io.read_entry("MASS", 14);
+   LOCALPHYSICAL(MFv)(2) = slha_io.read_entry("MASS", 16);
    LOCALPHYSICAL(MCha)(0) = slha_io.read_entry("MASS", 1000024);
    LOCALPHYSICAL(MCha)(1) = slha_io.read_entry("MASS", 1000037);
    LOCALPHYSICAL(MFe)(0) = slha_io.read_entry("MASS", 11);

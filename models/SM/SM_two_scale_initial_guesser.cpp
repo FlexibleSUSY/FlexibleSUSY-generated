@@ -16,11 +16,12 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:07:44
+// File generated at Fri 8 Jan 2016 11:44:14
 
 #include "SM_two_scale_initial_guesser.hpp"
 #include "SM_two_scale_model.hpp"
 #include "lowe.h"
+#include "error.hpp"
 #include "ew_input.hpp"
 #include "wrappers.hpp"
 
@@ -37,13 +38,14 @@ namespace flexiblesusy {
 
 SM_initial_guesser<Two_scale>::SM_initial_guesser(
    SM<Two_scale>* model_,
-   const softsusy::QedQcd& oneset_,
+   const softsusy::QedQcd& qedqcd_,
    const SM_low_scale_constraint<Two_scale>& low_constraint_,
-   const SM_susy_scale_constraint<Two_scale>& susy_constraint_
+   const SM_susy_scale_constraint<Two_scale>& susy_constraint_,
+   const SM_high_scale_constraint<Two_scale>& high_constraint_
 )
    : Initial_guesser<Two_scale>()
    , model(model_)
-   , oneset(oneset_)
+   , qedqcd(qedqcd_)
    , mu_guess(0.)
    , mc_guess(0.)
    , mt_guess(0.)
@@ -56,6 +58,7 @@ SM_initial_guesser<Two_scale>::SM_initial_guesser(
    , running_precision(1.0e-3)
    , low_constraint(low_constraint_)
    , susy_constraint(susy_constraint_)
+   , high_constraint(high_constraint_)
 {
    assert(model && "SM_initial_guesser: Error: pointer to model"
           " SM<Two_scale> must not be zero");
@@ -94,7 +97,7 @@ void SM_initial_guesser<Two_scale>::guess_susy_parameters()
 {
    using namespace softsusy;
 
-   softsusy::QedQcd leAtMt(oneset);
+   softsusy::QedQcd leAtMt(qedqcd);
    const double MZ = Electroweak_constants::MZ;
    const double MW = Electroweak_constants::MW;
    const double sinThetaW2 = 1.0 - Sqr(MW / MZ);
@@ -186,21 +189,30 @@ void SM_initial_guesser<Two_scale>::calculate_Ye_DRbar()
 
 /**
  * Guesses the soft-breaking parameters.  At first it runs to the
- * guess of the SUSY-scale (SUSYScaleFirstGuess) and imposes the
- * SUSY-scale constraint (SUSYScaleInput).  Afterwards, it runs to the
- * low-scale guess (LowScaleFirstGuess) and solves the EWSB conditions
- * at the tree-level.  Finally the DR-bar mass spectrum is calculated.
+ * guess of the high-scale (HighScaleFirstGuess) and imposes the
+ * high-scale constraint (HighScaleInput):
+ *
+ * \code{.cpp}
+
+ * \endcode
+ *
+ * Afterwards, it runs to the low-scale guess (LowScaleFirstGuess) and
+ * solves the EWSB conditions at the tree-level.  Finally the DR-bar
+ * mass spectrum is calculated.
  */
 void SM_initial_guesser<Two_scale>::guess_soft_parameters()
 {
    const double low_scale_guess = low_constraint.get_initial_scale_guess();
-   const double susy_scale_guess = susy_constraint.get_initial_scale_guess();
+   const double high_scale_guess = high_constraint.get_initial_scale_guess();
 
-   model->run_to(susy_scale_guess, running_precision);
+   model->run_to(high_scale_guess, running_precision);
 
-   // apply susy-scale constraint
-   susy_constraint.set_model(model);
-   susy_constraint.apply();
+   // apply high-scale constraint
+   high_constraint.set_model(model);
+   high_constraint.apply();
+
+   // apply user-defined initial guess at the high scale
+
 
    model->run_to(low_scale_guess, running_precision);
 

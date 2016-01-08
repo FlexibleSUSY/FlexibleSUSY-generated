@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:29:31
+// File generated at Fri 8 Jan 2016 13:19:31
 
 #ifndef CMSSMNoFV_INPUT_PARAMETERS_H
 #define CMSSMNoFV_INPUT_PARAMETERS_H
@@ -37,6 +37,9 @@ struct CMSSMNoFV_input_parameters {
       : m0(0), m12(0), TanBeta(0), SignMu(1), Azero(0)
 
    {}
+
+   Eigen::ArrayXd get() const;
+   void set(const Eigen::ArrayXd&);
 };
 
 std::ostream& operator<<(std::ostream&, const CMSSMNoFV_input_parameters&);

@@ -21,7 +21,7 @@
  * @brief contains wrapper class for model class in SLHA convention
  */
 
-// File generated at Tue 27 Oct 2015 15:15:15
+// File generated at Fri 8 Jan 2016 12:35:24
 
 #ifndef UMSSM_TWO_SCALE_SLHA_H
 #define UMSSM_TWO_SCALE_SLHA_H
@@ -63,14 +63,12 @@ public:
 
    double get_MVG_pole_slha() const { return PHYSICAL_SLHA(MVG); }
    double get_MGlu_pole_slha() const { return PHYSICAL_SLHA(MGlu); }
-   const Eigen::Array<double,3,1>& get_MFv_pole_slha() const { return PHYSICAL_SLHA(MFv); }
-   double get_MFv_pole_slha(int i) const { return PHYSICAL_SLHA(MFv(i)); }
    double get_MVP_pole_slha() const { return PHYSICAL_SLHA(MVP); }
    double get_MVZ_pole_slha() const { return PHYSICAL_SLHA(MVZ); }
    double get_MVZp_pole_slha() const { return PHYSICAL_SLHA(MVZp); }
    const Eigen::Array<double,6,1>& get_MSd_pole_slha() const { return PHYSICAL_SLHA(MSd); }
    double get_MSd_pole_slha(int i) const { return PHYSICAL_SLHA(MSd(i)); }
-   const Eigen::Array<double,3,1>& get_MSv_pole_slha() const { return PHYSICAL_SLHA(MSv); }
+   const Eigen::Array<double,6,1>& get_MSv_pole_slha() const { return PHYSICAL_SLHA(MSv); }
    double get_MSv_pole_slha(int i) const { return PHYSICAL_SLHA(MSv(i)); }
    const Eigen::Array<double,6,1>& get_MSu_pole_slha() const { return PHYSICAL_SLHA(MSu); }
    double get_MSu_pole_slha(int i) const { return PHYSICAL_SLHA(MSu(i)); }
@@ -84,6 +82,8 @@ public:
    double get_MHpm_pole_slha(int i) const { return PHYSICAL_SLHA(MHpm(i)); }
    const Eigen::Array<double,6,1>& get_MChi_pole_slha() const { return PHYSICAL_SLHA(MChi); }
    double get_MChi_pole_slha(int i) const { return PHYSICAL_SLHA(MChi(i)); }
+   const Eigen::Array<double,3,1>& get_MFv_pole_slha() const { return PHYSICAL_SLHA(MFv); }
+   double get_MFv_pole_slha(int i) const { return PHYSICAL_SLHA(MFv(i)); }
    const Eigen::Array<double,2,1>& get_MCha_pole_slha() const { return PHYSICAL_SLHA(MCha); }
    double get_MCha_pole_slha(int i) const { return PHYSICAL_SLHA(MCha(i)); }
    const Eigen::Array<double,3,1>& get_MFe_pole_slha() const { return PHYSICAL_SLHA(MFe); }
@@ -96,7 +96,7 @@ public:
 
    const Eigen::Matrix<double,6,6>& get_ZD_pole_slha() const { return PHYSICAL_SLHA(ZD); }
    double get_ZD_pole_slha(int i, int k) const { return PHYSICAL_SLHA(ZD(i,k)); }
-   const Eigen::Matrix<double,3,3>& get_ZV_pole_slha() const { return PHYSICAL_SLHA(ZV); }
+   const Eigen::Matrix<double,6,6>& get_ZV_pole_slha() const { return PHYSICAL_SLHA(ZV); }
    double get_ZV_pole_slha(int i, int k) const { return PHYSICAL_SLHA(ZV(i,k)); }
    const Eigen::Matrix<double,6,6>& get_ZU_pole_slha() const { return PHYSICAL_SLHA(ZU); }
    double get_ZU_pole_slha(int i, int k) const { return PHYSICAL_SLHA(ZU(i,k)); }
@@ -110,6 +110,10 @@ public:
    double get_ZP_pole_slha(int i, int k) const { return PHYSICAL_SLHA(ZP(i,k)); }
    const Eigen::Matrix<std::complex<double>,6,6>& get_ZN_pole_slha() const { return PHYSICAL_SLHA(ZN); }
    double get_ZN_pole_slha(int i, int k) const { return PHYSICAL_SLHA_REAL(ZN(i,k)); }
+   const Eigen::Matrix<std::complex<double>,3,3>& get_ZVL_pole_slha() const { return PHYSICAL_SLHA(ZVL); }
+   const std::complex<double>& get_ZVL_pole_slha(int i, int k) const { return PHYSICAL_SLHA(ZVL(i,k)); }
+   const Eigen::Matrix<std::complex<double>,3,3>& get_ZVR_pole_slha() const { return PHYSICAL_SLHA(ZVR); }
+   const std::complex<double>& get_ZVR_pole_slha(int i, int k) const { return PHYSICAL_SLHA(ZVR(i,k)); }
    const Eigen::Matrix<std::complex<double>,2,2>& get_UM_pole_slha() const { return PHYSICAL_SLHA(UM); }
    double get_UM_pole_slha(int i, int k) const { return PHYSICAL_SLHA_REAL(UM(i,k)); }
    const Eigen::Matrix<std::complex<double>,2,2>& get_UP_pole_slha() const { return PHYSICAL_SLHA(UP); }
@@ -164,6 +168,8 @@ public:
    const std::complex<double>& get_ZEL_slha(int i, int k) const { return ZEL_slha(i,k); }
    const Eigen::Matrix<std::complex<double>,3,3>& get_ZER_slha() const { return ZER_slha; }
    const std::complex<double>& get_ZER_slha(int i, int k) const { return ZER_slha(i,k); }
+   const Eigen::Matrix<std::complex<double>,3,3>& get_ZVL_slha() const { return ZVL_slha; }
+   const std::complex<double>& get_ZVL_slha(int i, int k) const { return ZVL_slha(i,k); }
 
 
 private:
@@ -180,6 +186,7 @@ private:
    Eigen::Matrix<std::complex<double>,3,3> ZUR_slha;
    Eigen::Matrix<std::complex<double>,3,3> ZEL_slha;
    Eigen::Matrix<std::complex<double>,3,3> ZER_slha;
+   Eigen::Matrix<std::complex<double>,3,3> ZVL_slha;
 
    Eigen::Matrix<double,3,3> TYu_slha;
    Eigen::Matrix<double,3,3> TYd_slha;

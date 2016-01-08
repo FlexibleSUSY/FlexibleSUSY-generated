@@ -37,6 +37,7 @@ LIBHSSUSY_SRC += \
 		$(DIR)/HSSUSY_mass_eigenstates.cpp \
 		$(DIR)/HSSUSY_info.cpp \
 		$(DIR)/HSSUSY_input_parameters.cpp \
+		$(DIR)/HSSUSY_observables.cpp \
 		$(DIR)/HSSUSY_slha_io.cpp \
 		$(DIR)/HSSUSY_physical.cpp \
 		$(DIR)/HSSUSY_utilities.cpp \
@@ -63,6 +64,7 @@ LIBHSSUSY_HDR += \
 		$(DIR)/HSSUSY_low_scale_constraint.hpp \
 		$(DIR)/HSSUSY_model.hpp \
 		$(DIR)/HSSUSY_model_slha.hpp \
+		$(DIR)/HSSUSY_observables.hpp \
 		$(DIR)/HSSUSY_physical.hpp \
 		$(DIR)/HSSUSY_slha_io.hpp \
 		$(DIR)/HSSUSY_spectrum_generator_interface.hpp \
@@ -227,7 +229,7 @@ $(LIBHSSUSY): $(LIBHSSUSY_OBJ)
 		$(MAKELIB) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBHSSUSY) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(LDLIBS)
 
 ALLDEP += $(LIBHSSUSY_DEP) $(EXEHSSUSY_DEP)
 ALLSRC += $(LIBHSSUSY_SRC) $(EXEHSSUSY_SRC)

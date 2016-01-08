@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:23:51
+// File generated at Fri 8 Jan 2016 12:51:01
 
 #ifndef NUTSMSSM_SLHA_IO_H
 #define NUTSMSSM_SLHA_IO_H
@@ -28,6 +28,7 @@
 #include "ckm.hpp"
 #include "ew_input.hpp"
 #include "lowe.h"
+#include "observables.hpp"
 
 #include <Eigen/Core>
 #include <string>
@@ -37,7 +38,9 @@
 #define PHYSICAL(p) model.get_physical().p
 #define PHYSICAL_SLHA(p) model.get_physical_slha().p
 #define LOCALPHYSICAL(p) physical.p
+#define MODEL model
 #define MODELPARAMETER(p) model.get_##p()
+#define OBSERVABLES observables
 #define LowEnergyConstant(p) Electroweak_constants::p
 #define SCALES(p) scales.p
 
@@ -45,6 +48,7 @@ namespace flexiblesusy {
 
 struct NUTSMSSM_input_parameters;
 class Spectrum_generator_settings;
+struct Observables;
 
 struct NUTSMSSM_scales {
    NUTSMSSM_scales() : HighScale(0.), SUSYScale(0.), LowScale(0.) {}
@@ -69,7 +73,7 @@ public:
    void read_from_source(const std::string&);
    void read_from_stream(std::istream&);
    void set_extpar(const NUTSMSSM_input_parameters&);
-   template <class T> void set_extra(const NUTSMSSM_slha<T>&, const NUTSMSSM_scales&);
+   template <class T> void set_extra(const NUTSMSSM_slha<T>&, const NUTSMSSM_scales&, const Observables&);
    void set_minpar(const NUTSMSSM_input_parameters&);
    void set_sminputs(const softsusy::QedQcd&);
    template <class T> void set_spectrum(const NUTSMSSM_slha<T>&);
@@ -82,13 +86,10 @@ public:
    static void fill_extpar_tuple(NUTSMSSM_input_parameters&, int, double);
 
    template <class T>
-   static void fill_slhaea(SLHAea::Coll&, const NUTSMSSM_slha<T>&, const softsusy::QedQcd&, const NUTSMSSM_scales&);
+   static void fill_slhaea(SLHAea::Coll&, const NUTSMSSM_slha<T>&, const softsusy::QedQcd&, const NUTSMSSM_scales&, const Observables&);
 
    template <class T>
-   static SLHAea::Coll fill_slhaea(const NUTSMSSM_slha<T>&, const softsusy::QedQcd&);
-
-   template <class T>
-   static SLHAea::Coll fill_slhaea(const NUTSMSSM_slha<T>&, const softsusy::QedQcd&, const NUTSMSSM_scales&);
+   static SLHAea::Coll fill_slhaea(const NUTSMSSM_slha<T>&, const softsusy::QedQcd&, const NUTSMSSM_scales&, const Observables&);
 
 private:
    SLHA_io slha_io; ///< SLHA io class
@@ -119,7 +120,8 @@ void NUTSMSSM_slha_io::fill(NUTSMSSM_slha<T>& model) const
 template <class T>
 void NUTSMSSM_slha_io::fill_slhaea(
    SLHAea::Coll& slhaea, const NUTSMSSM_slha<T>& model,
-   const softsusy::QedQcd& qedqcd, const NUTSMSSM_scales& scales)
+   const softsusy::QedQcd& qedqcd, const NUTSMSSM_scales& scales,
+   const Observables& observables)
 {
    NUTSMSSM_slha_io slha_io;
    const NUTSMSSM_input_parameters& input = model.get_input();
@@ -133,7 +135,7 @@ void NUTSMSSM_slha_io::fill_slhaea(
    slha_io.set_extpar(input);
    if (!error) {
       slha_io.set_spectrum(model);
-      slha_io.set_extra(model, scales);
+      slha_io.set_extra(model, scales, observables);
    }
 
    slhaea = slha_io.get_slha_io().get_data();
@@ -141,20 +143,11 @@ void NUTSMSSM_slha_io::fill_slhaea(
 
 template <class T>
 SLHAea::Coll NUTSMSSM_slha_io::fill_slhaea(
-   const NUTSMSSM_slha<T>& model, const softsusy::QedQcd& qedqcd)
-{
-   NUTSMSSM_scales scales;
-
-   return fill_slhaea(model, qedqcd, scales);
-}
-
-template <class T>
-SLHAea::Coll NUTSMSSM_slha_io::fill_slhaea(
    const NUTSMSSM_slha<T>& model, const softsusy::QedQcd& qedqcd,
-   const NUTSMSSM_scales& scales)
+   const NUTSMSSM_scales& scales, const Observables& observables)
 {
    SLHAea::Coll slhaea;
-   NUTSMSSM_slha_io::fill_slhaea(slhaea, model, qedqcd, scales);
+   NUTSMSSM_slha_io::fill_slhaea(slhaea, model, qedqcd, scales, observables);
 
    return slhaea;
 }
@@ -234,10 +227,36 @@ void NUTSMSSM_slha_io::set_model_parameters(const NUTSMSSM_slha<T>& model)
  */
 template <class T>
 void NUTSMSSM_slha_io::set_extra(
-   const NUTSMSSM_slha<T>& model, const NUTSMSSM_scales& scales)
+   const NUTSMSSM_slha<T>& model, const NUTSMSSM_scales& scales,
+   const Observables& observables)
 {
    const NUTSMSSM_physical physical(model.get_physical_slha());
 
+   {
+      std::ostringstream block;
+      block << "Block FlexibleSUSYOutput Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(0, (SCALES(HighScale)), "HighScale")
+            << FORMAT_ELEMENT(1, (SCALES(SUSYScale)), "SUSYScale")
+            << FORMAT_ELEMENT(2, (SCALES(LowScale)), "LowScale")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block NMSSMRUN Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(1, (MODELPARAMETER(Lambdax)), "Lambdax")
+            << FORMAT_ELEMENT(2, (MODELPARAMETER(Kappa)), "Kappa")
+            << FORMAT_ELEMENT(3, (MODELPARAMETER(TLambdax)/MODELPARAMETER(Lambdax)), "TLambdax/Lambdax")
+            << FORMAT_ELEMENT(4, (MODELPARAMETER(TKappa)/MODELPARAMETER(Kappa)), "TKappa/Kappa")
+            << FORMAT_ELEMENT(5, (0.7071067811865475*MODELPARAMETER(vS)*MODELPARAMETER(Lambdax)), "0.7071067811865475*vS*Lambdax")
+            << FORMAT_ELEMENT(6, (MODELPARAMETER(L1)), "L1")
+            << FORMAT_ELEMENT(7, (MODELPARAMETER(LL1)), "LL1")
+            << FORMAT_ELEMENT(8, (MODELPARAMETER(MS)), "MS")
+            << FORMAT_ELEMENT(9, (MODELPARAMETER(BMS)), "BMS")
+            << FORMAT_ELEMENT(10, (MODELPARAMETER(ms2)), "ms2")
+      ;
+      slha_io.set_block(block);
+   }
 
 }
 
@@ -283,7 +302,9 @@ void NUTSMSSM_slha_io::set_spectrum(const NUTSMSSM_slha<T>& model)
 #undef PHYSICAL
 #undef PHYSICAL_SLHA
 #undef LOCALPHYSICAL
+#undef MODEL
 #undef MODELPARAMETER
+#undef OBSERVABLES
 #undef LowEnergyConstant
 #undef SCALES
 

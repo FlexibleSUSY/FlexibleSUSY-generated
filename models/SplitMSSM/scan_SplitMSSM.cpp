@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:07:32
+// File generated at Fri 8 Jan 2016 11:56:56
 
 #include "SplitMSSM_input_parameters.hpp"
 #include "SplitMSSM_spectrum_generator.hpp"
@@ -106,8 +106,8 @@ int main(int argc, char* argv[])
    SplitMSSM_input_parameters input;
    set_command_line_parameters(argc, argv, input);
 
-   softsusy::QedQcd oneset;
-   oneset.toMz();
+   softsusy::QedQcd qedqcd;
+   qedqcd.toMz();
 
    SplitMSSM_spectrum_generator<algorithm_type> spectrum_generator;
    spectrum_generator.set_precision_goal(1.0e-4);
@@ -127,7 +127,7 @@ int main(int argc, char* argv[])
            end = range.end(); it != end; ++it) {
       input.MSUSY = *it;
 
-      spectrum_generator.run(oneset, input);
+      spectrum_generator.run(qedqcd, input);
 
       const SplitMSSM_slha<algorithm_type> model(spectrum_generator.get_model());
       const SplitMSSM_physical& pole_masses = model.get_physical_slha();

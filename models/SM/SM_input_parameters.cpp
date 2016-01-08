@@ -16,18 +16,39 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:07:42
+// File generated at Fri 8 Jan 2016 11:44:12
 
 #include "SM_input_parameters.hpp"
+#include "wrappers.hpp"
 
 #define INPUT(p) input.p
 
 namespace flexiblesusy {
 
+Eigen::ArrayXd SM_input_parameters::get() const
+{
+   Eigen::ArrayXd pars(3);
+
+   pars(0) = LambdaIN;
+   pars(1) = Qin;
+   pars(2) = QEWSB;
+
+   return pars;
+}
+
+void SM_input_parameters::set(const Eigen::ArrayXd& pars)
+{
+   LambdaIN = pars(0);
+   Qin = pars(1);
+   QEWSB = pars(2);
+
+}
+
 std::ostream& operator<<(std::ostream& ostr, const SM_input_parameters& input)
 {
    ostr << "LambdaIN = " << INPUT(LambdaIN) << ", ";
    ostr << "Qin = " << INPUT(Qin) << ", ";
+   ostr << "QEWSB = " << INPUT(QEWSB) << ", ";
 
    return ostr;
 }

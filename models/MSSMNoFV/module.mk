@@ -37,6 +37,7 @@ LIBMSSMNoFV_SRC += \
 		$(DIR)/MSSMNoFV_mass_eigenstates.cpp \
 		$(DIR)/MSSMNoFV_info.cpp \
 		$(DIR)/MSSMNoFV_input_parameters.cpp \
+		$(DIR)/MSSMNoFV_observables.cpp \
 		$(DIR)/MSSMNoFV_slha_io.cpp \
 		$(DIR)/MSSMNoFV_physical.cpp \
 		$(DIR)/MSSMNoFV_utilities.cpp \
@@ -63,6 +64,7 @@ LIBMSSMNoFV_HDR += \
 		$(DIR)/MSSMNoFV_low_scale_constraint.hpp \
 		$(DIR)/MSSMNoFV_model.hpp \
 		$(DIR)/MSSMNoFV_model_slha.hpp \
+		$(DIR)/MSSMNoFV_observables.hpp \
 		$(DIR)/MSSMNoFV_physical.hpp \
 		$(DIR)/MSSMNoFV_slha_io.hpp \
 		$(DIR)/MSSMNoFV_spectrum_generator_interface.hpp \
@@ -227,7 +229,7 @@ $(LIBMSSMNoFV): $(LIBMSSMNoFV_OBJ)
 		$(MAKELIB) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBMSSMNoFV) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(LDLIBS)
 
 ALLDEP += $(LIBMSSMNoFV_DEP) $(EXEMSSMNoFV_DEP)
 ALLSRC += $(LIBMSSMNoFV_SRC) $(EXEMSSMNoFV_SRC)

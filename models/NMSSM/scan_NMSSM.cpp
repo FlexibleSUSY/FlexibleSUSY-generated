@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:27:16
+// File generated at Fri 8 Jan 2016 12:57:13
 
 #include "NMSSM_input_parameters.hpp"
 #include "NMSSM_spectrum_generator.hpp"
@@ -94,8 +94,8 @@ int main(int argc, char* argv[])
    NMSSM_input_parameters input;
    set_command_line_parameters(argc, argv, input);
 
-   softsusy::QedQcd oneset;
-   oneset.toMz();
+   softsusy::QedQcd qedqcd;
+   qedqcd.toMz();
 
    NMSSM_spectrum_generator<algorithm_type> spectrum_generator;
    spectrum_generator.set_precision_goal(1.0e-4);
@@ -115,7 +115,7 @@ int main(int argc, char* argv[])
            end = range.end(); it != end; ++it) {
       input.m0 = *it;
 
-      spectrum_generator.run(oneset, input);
+      spectrum_generator.run(qedqcd, input);
 
       const NMSSM_slha<algorithm_type> model(spectrum_generator.get_model());
       const NMSSM_physical& pole_masses = model.get_physical_slha();

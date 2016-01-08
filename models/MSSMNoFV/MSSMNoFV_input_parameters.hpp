@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:32:10
+// File generated at Fri 8 Jan 2016 13:27:51
 
 #ifndef MSSMNoFV_INPUT_PARAMETERS_H
 #define MSSMNoFV_INPUT_PARAMETERS_H
@@ -68,6 +68,9 @@ struct MSSMNoFV_input_parameters {
    (0), md22IN(0), md33IN(0)
 
    {}
+
+   Eigen::ArrayXd get() const;
+   void set(const Eigen::ArrayXd&);
 };
 
 std::ostream& operator<<(std::ostream&, const MSSMNoFV_input_parameters&);

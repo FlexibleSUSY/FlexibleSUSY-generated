@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:25:59
+// File generated at Fri 8 Jan 2016 13:00:16
 
 #ifndef MSSMRHN_INFO_H
 #define MSSMRHN_INFO_H
@@ -45,6 +45,51 @@ namespace MSSMRHN_info {
       , mv202, mv210, mv211, mv212, mv220, mv221, mv222, MassB, MassWB, MassG,
       NUMBER_OF_PARAMETERS};
 
+   enum Mixings : unsigned {ZD00, ZD01, ZD02, ZD03, ZD04, ZD05, ZD10, ZD11,
+      ZD12, ZD13, ZD14, ZD15, ZD20, ZD21, ZD22, ZD23, ZD24, ZD25, ZD30, ZD31, ZD32
+      , ZD33, ZD34, ZD35, ZD40, ZD41, ZD42, ZD43, ZD44, ZD45, ZD50, ZD51, ZD52,
+      ZD53, ZD54, ZD55, ZU00, ZU01, ZU02, ZU03, ZU04, ZU05, ZU10, ZU11, ZU12, ZU13
+      , ZU14, ZU15, ZU20, ZU21, ZU22, ZU23, ZU24, ZU25, ZU30, ZU31, ZU32, ZU33,
+      ZU34, ZU35, ZU40, ZU41, ZU42, ZU43, ZU44, ZU45, ZU50, ZU51, ZU52, ZU53, ZU54
+      , ZU55, ZE00, ZE01, ZE02, ZE03, ZE04, ZE05, ZE10, ZE11, ZE12, ZE13, ZE14,
+      ZE15, ZE20, ZE21, ZE22, ZE23, ZE24, ZE25, ZE30, ZE31, ZE32, ZE33, ZE34, ZE35
+      , ZE40, ZE41, ZE42, ZE43, ZE44, ZE45, ZE50, ZE51, ZE52, ZE53, ZE54, ZE55,
+      ZV00, ZV01, ZV02, ZV03, ZV04, ZV05, ZV10, ZV11, ZV12, ZV13, ZV14, ZV15, ZV20
+      , ZV21, ZV22, ZV23, ZV24, ZV25, ZV30, ZV31, ZV32, ZV33, ZV34, ZV35, ZV40,
+      ZV41, ZV42, ZV43, ZV44, ZV45, ZV50, ZV51, ZV52, ZV53, ZV54, ZV55, ZH00, ZH01
+      , ZH10, ZH11, ZA00, ZA01, ZA10, ZA11, ZP00, ZP01, ZP10, ZP11, ReZN00, ImZN00
+      , ReZN01, ImZN01, ReZN02, ImZN02, ReZN03, ImZN03, ReZN10, ImZN10, ReZN11,
+      ImZN11, ReZN12, ImZN12, ReZN13, ImZN13, ReZN20, ImZN20, ReZN21, ImZN21,
+      ReZN22, ImZN22, ReZN23, ImZN23, ReZN30, ImZN30, ReZN31, ImZN31, ReZN32,
+      ImZN32, ReZN33, ImZN33, ReUV00, ImUV00, ReUV01, ImUV01, ReUV02, ImUV02,
+      ReUV03, ImUV03, ReUV04, ImUV04, ReUV05, ImUV05, ReUV10, ImUV10, ReUV11,
+      ImUV11, ReUV12, ImUV12, ReUV13, ImUV13, ReUV14, ImUV14, ReUV15, ImUV15,
+      ReUV20, ImUV20, ReUV21, ImUV21, ReUV22, ImUV22, ReUV23, ImUV23, ReUV24,
+      ImUV24, ReUV25, ImUV25, ReUV30, ImUV30, ReUV31, ImUV31, ReUV32, ImUV32,
+      ReUV33, ImUV33, ReUV34, ImUV34, ReUV35, ImUV35, ReUV40, ImUV40, ReUV41,
+      ImUV41, ReUV42, ImUV42, ReUV43, ImUV43, ReUV44, ImUV44, ReUV45, ImUV45,
+      ReUV50, ImUV50, ReUV51, ImUV51, ReUV52, ImUV52, ReUV53, ImUV53, ReUV54,
+      ImUV54, ReUV55, ImUV55, ReUM00, ImUM00, ReUM01, ImUM01, ReUM10, ImUM10,
+      ReUM11, ImUM11, ReUP00, ImUP00, ReUP01, ImUP01, ReUP10, ImUP10, ReUP11,
+      ImUP11, ReZEL00, ImZEL00, ReZEL01, ImZEL01, ReZEL02, ImZEL02, ReZEL10,
+      ImZEL10, ReZEL11, ImZEL11, ReZEL12, ImZEL12, ReZEL20, ImZEL20, ReZEL21,
+      ImZEL21, ReZEL22, ImZEL22, ReZER00, ImZER00, ReZER01, ImZER01, ReZER02,
+      ImZER02, ReZER10, ImZER10, ReZER11, ImZER11, ReZER12, ImZER12, ReZER20,
+      ImZER20, ReZER21, ImZER21, ReZER22, ImZER22, ReZDL00, ImZDL00, ReZDL01,
+      ImZDL01, ReZDL02, ImZDL02, ReZDL10, ImZDL10, ReZDL11, ImZDL11, ReZDL12,
+      ImZDL12, ReZDL20, ImZDL20, ReZDL21, ImZDL21, ReZDL22, ImZDL22, ReZDR00,
+      ImZDR00, ReZDR01, ImZDR01, ReZDR02, ImZDR02, ReZDR10, ImZDR10, ReZDR11,
+      ImZDR11, ReZDR12, ImZDR12, ReZDR20, ImZDR20, ReZDR21, ImZDR21, ReZDR22,
+      ImZDR22, ReZUL00, ImZUL00, ReZUL01, ImZUL01, ReZUL02, ImZUL02, ReZUL10,
+      ImZUL10, ReZUL11, ImZUL11, ReZUL12, ImZUL12, ReZUL20, ImZUL20, ReZUL21,
+      ImZUL21, ReZUL22, ImZUL22, ReZUR00, ImZUR00, ReZUR01, ImZUR01, ReZUR02,
+      ImZUR02, ReZUR10, ImZUR10, ReZUR11, ImZUR11, ReZUR12, ImZUR12, ReZUR20,
+      ImZUR20, ReZUR21, ImZUR21, ReZUR22, ImZUR22, NUMBER_OF_MIXINGS};
+
+   enum Input_parameters : unsigned {m0, m12, TanBeta, SignMu, Azero,
+      BMvInput00, BMvInput01, BMvInput02, BMvInput10, BMvInput11, BMvInput12,
+      BMvInput20, BMvInput21, BMvInput22, NUMBER_OF_INPUT_PARAMETERS};
+
    extern const double normalization_g1;
    extern const double normalization_g2;
    extern const double normalization_g3;
@@ -53,6 +98,8 @@ namespace MSSMRHN_info {
    extern const char* particle_names[NUMBER_OF_PARTICLES];
    extern const char* particle_latex_names[NUMBER_OF_PARTICLES];
    extern const char* parameter_names[NUMBER_OF_PARAMETERS];
+   extern const char* particle_mixing_names[NUMBER_OF_MIXINGS];
+   extern const char* input_parameter_names[NUMBER_OF_INPUT_PARAMETERS];
    extern const char* model_name;
    extern const bool is_low_energy_model;
    extern const bool is_supersymmetric_model;

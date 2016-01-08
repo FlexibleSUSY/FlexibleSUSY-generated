@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:21:39
+// File generated at Fri 8 Jan 2016 12:43:41
 
 #include "SMSSM_two_scale_initial_guesser.hpp"
 #include "SMSSM_two_scale_model.hpp"
@@ -38,14 +38,14 @@ namespace flexiblesusy {
 
 SMSSM_initial_guesser<Two_scale>::SMSSM_initial_guesser(
    SMSSM<Two_scale>* model_,
-   const softsusy::QedQcd& oneset_,
+   const softsusy::QedQcd& qedqcd_,
    const SMSSM_low_scale_constraint<Two_scale>& low_constraint_,
    const SMSSM_susy_scale_constraint<Two_scale>& susy_constraint_,
    const SMSSM_high_scale_constraint<Two_scale>& high_constraint_
 )
    : Initial_guesser<Two_scale>()
    , model(model_)
-   , oneset(oneset_)
+   , qedqcd(qedqcd_)
    , mu_guess(0.)
    , mc_guess(0.)
    , mt_guess(0.)
@@ -105,7 +105,7 @@ void SMSSM_initial_guesser<Two_scale>::guess_susy_parameters()
 {
    using namespace softsusy;
 
-   softsusy::QedQcd leAtMt(oneset);
+   softsusy::QedQcd leAtMt(qedqcd);
    const double MZ = Electroweak_constants::MZ;
    const double MW = Electroweak_constants::MW;
    const double sinThetaW2 = 1.0 - Sqr(MW / MZ);

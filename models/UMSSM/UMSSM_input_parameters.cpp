@@ -16,13 +16,59 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:15:10
+// File generated at Fri 8 Jan 2016 12:30:18
 
 #include "UMSSM_input_parameters.hpp"
+#include "wrappers.hpp"
 
 #define INPUT(p) input.p
 
 namespace flexiblesusy {
+
+Eigen::ArrayXd UMSSM_input_parameters::get() const
+{
+   Eigen::ArrayXd pars(16);
+
+   pars(0) = m0;
+   pars(1) = m12;
+   pars(2) = TanBeta;
+   pars(3) = Azero;
+   pars(4) = LambdaInput;
+   pars(5) = ALambdaInput;
+   pars(6) = vSInput;
+   pars(7) = Qq;
+   pars(8) = Ql;
+   pars(9) = QHd;
+   pars(10) = QHu;
+   pars(11) = Qd;
+   pars(12) = Qu;
+   pars(13) = Qe;
+   pars(14) = Qs;
+   pars(15) = Qv;
+
+   return pars;
+}
+
+void UMSSM_input_parameters::set(const Eigen::ArrayXd& pars)
+{
+   m0 = pars(0);
+   m12 = pars(1);
+   TanBeta = pars(2);
+   Azero = pars(3);
+   LambdaInput = pars(4);
+   ALambdaInput = pars(5);
+   vSInput = pars(6);
+   Qq = pars(7);
+   Ql = pars(8);
+   QHd = pars(9);
+   QHu = pars(10);
+   Qd = pars(11);
+   Qu = pars(12);
+   Qe = pars(13);
+   Qs = pars(14);
+   Qv = pars(15);
+
+}
 
 std::ostream& operator<<(std::ostream& ostr, const UMSSM_input_parameters& input)
 {
@@ -41,6 +87,7 @@ std::ostream& operator<<(std::ostream& ostr, const UMSSM_input_parameters& input
    ostr << "Qu = " << INPUT(Qu) << ", ";
    ostr << "Qe = " << INPUT(Qe) << ", ";
    ostr << "Qs = " << INPUT(Qs) << ", ";
+   ostr << "Qv = " << INPUT(Qv) << ", ";
 
    return ostr;
 }

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:20:23
+// File generated at Fri 8 Jan 2016 12:38:38
 
 #ifndef UMSSM_PHYSICAL_H
 #define UMSSM_PHYSICAL_H
@@ -34,22 +34,26 @@ struct UMSSM_physical {
    void clear();
    void convert_to_hk();   ///< converts pole masses to HK convention
    void convert_to_slha(); ///< converts pole masses to SLHA convention
+   Eigen::ArrayXd get() const; ///< returns array with all masses and mixings
+   void set(const Eigen::ArrayXd&); ///< set all masses and mixings
+   Eigen::ArrayXd get_masses() const; ///< returns array with all masses
+   void set_masses(const Eigen::ArrayXd&); ///< set all masses
    void print(std::ostream&) const;
 
    double MVG;
    double MGlu;
-   Eigen::Array<double,3,1> MFv;
    double MVP;
    double MVZ;
    double MVZp;
    Eigen::Array<double,6,1> MSd;
-   Eigen::Array<double,3,1> MSv;
+   Eigen::Array<double,6,1> MSv;
    Eigen::Array<double,6,1> MSu;
    Eigen::Array<double,6,1> MSe;
    Eigen::Array<double,3,1> Mhh;
    Eigen::Array<double,3,1> MAh;
    Eigen::Array<double,2,1> MHpm;
    Eigen::Array<double,6,1> MChi;
+   Eigen::Array<double,3,1> MFv;
    Eigen::Array<double,2,1> MCha;
    Eigen::Array<double,3,1> MFe;
    Eigen::Array<double,3,1> MFd;
@@ -57,13 +61,15 @@ struct UMSSM_physical {
    double MVWm;
 
    Eigen::Matrix<double,6,6> ZD;
-   Eigen::Matrix<double,3,3> ZV;
+   Eigen::Matrix<double,6,6> ZV;
    Eigen::Matrix<double,6,6> ZU;
    Eigen::Matrix<double,6,6> ZE;
    Eigen::Matrix<double,3,3> ZH;
    Eigen::Matrix<double,3,3> ZA;
    Eigen::Matrix<double,2,2> ZP;
    Eigen::Matrix<std::complex<double>,6,6> ZN;
+   Eigen::Matrix<std::complex<double>,3,3> ZVL;
+   Eigen::Matrix<std::complex<double>,3,3> ZVR;
    Eigen::Matrix<std::complex<double>,2,2> UM;
    Eigen::Matrix<std::complex<double>,2,2> UP;
    Eigen::Matrix<std::complex<double>,3,3> ZEL;

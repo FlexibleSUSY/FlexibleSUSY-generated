@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:15:08
+// File generated at Fri 8 Jan 2016 12:30:17
 
 #include "UMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -25,6 +25,42 @@ namespace flexiblesusy {
 
 #define INPUT(parameter) input.parameter
 #define TRACE_STRUCT soft_traces
+
+namespace {
+
+template <typename Derived>
+typename Eigen::MatrixBase<Derived>::PlainObject operator+(const Eigen::MatrixBase<Derived>& m, double n)
+{
+   return m + Eigen::Matrix<double,
+                            Eigen::MatrixBase<Derived>::RowsAtCompileTime,
+                            Eigen::MatrixBase<Derived>::ColsAtCompileTime>::Identity() * n;
+}
+
+template <typename Derived>
+typename Eigen::MatrixBase<Derived>::PlainObject operator+(double n, const Eigen::MatrixBase<Derived>& m)
+{
+   return m + Eigen::Matrix<double,
+                            Eigen::MatrixBase<Derived>::RowsAtCompileTime,
+                            Eigen::MatrixBase<Derived>::ColsAtCompileTime>::Identity() * n;
+}
+
+template <typename Derived>
+typename Eigen::MatrixBase<Derived>::PlainObject operator-(const Eigen::MatrixBase<Derived>& m, double n)
+{
+   return m - Eigen::Matrix<double,
+                            Eigen::MatrixBase<Derived>::RowsAtCompileTime,
+                            Eigen::MatrixBase<Derived>::ColsAtCompileTime>::Identity() * n;
+}
+
+template <typename Derived>
+typename Eigen::MatrixBase<Derived>::PlainObject operator-(double n, const Eigen::MatrixBase<Derived>& m)
+{
+   return - m + Eigen::Matrix<double,
+                            Eigen::MatrixBase<Derived>::RowsAtCompileTime,
+                            Eigen::MatrixBase<Derived>::ColsAtCompileTime>::Identity() * n;
+}
+
+} // anonymous namespace
 
 /**
  * Calculates the one-loop beta function of MassWB.
@@ -57,21 +93,24 @@ double UMSSM_soft_parameters::calc_beta_MassWB_two_loop(const Soft_traces& soft_
    const double traceYdAdjYd = TRACE_STRUCT.traceYdAdjYd;
    const double traceYeAdjYe = TRACE_STRUCT.traceYeAdjYe;
    const double traceYuAdjYu = TRACE_STRUCT.traceYuAdjYu;
+   const double traceYvAdjYv = TRACE_STRUCT.traceYvAdjYv;
    const double traceAdjYdTYd = TRACE_STRUCT.traceAdjYdTYd;
    const double traceAdjYeTYe = TRACE_STRUCT.traceAdjYeTYe;
    const double traceAdjYuTYu = TRACE_STRUCT.traceAdjYuTYu;
+   const double traceAdjYvTYv = TRACE_STRUCT.traceAdjYvTYv;
 
 
    double beta_MassWB;
 
    beta_MassWB = Re(0.4*twoLoop*Sqr(g2)*(30*traceAdjYdTYd + 10*
-      traceAdjYeTYe + 30*traceAdjYuTYu - 30*MassWB*traceYdAdjYd - 10*MassWB*
-      traceYeAdjYe - 30*MassWB*traceYuAdjYu + 9*MassB*Sqr(g1) + 9*MassWB*Sqr(g1
-      ) + 250*MassWB*Sqr(g2) + 120*MassG*Sqr(g3) + 120*MassWB*Sqr(g3) + 10*
-      MassU*Sqr(gp)*Sqr(QHd) + 10*MassWB*Sqr(gp)*Sqr(QHd) + 10*MassU*Sqr(gp)*
-      Sqr(QHu) + 10*MassWB*Sqr(gp)*Sqr(QHu) + 30*MassU*Sqr(gp)*Sqr(Ql) + 30*
-      MassWB*Sqr(gp)*Sqr(Ql) + 90*MassU*Sqr(gp)*Sqr(Qq) + 90*MassWB*Sqr(gp)*Sqr
-      (Qq) - 10*Conj(Lambdax)*(MassWB*Lambdax - TLambdax)));
+      traceAdjYeTYe + 30*traceAdjYuTYu + 10*traceAdjYvTYv - 30*MassWB*
+      traceYdAdjYd - 10*MassWB*traceYeAdjYe - 30*MassWB*traceYuAdjYu - 10*
+      MassWB*traceYvAdjYv + 9*MassB*Sqr(g1) + 9*MassWB*Sqr(g1) + 250*MassWB*Sqr
+      (g2) + 120*MassG*Sqr(g3) + 120*MassWB*Sqr(g3) + 10*MassU*Sqr(gp)*Sqr(QHd)
+      + 10*MassWB*Sqr(gp)*Sqr(QHd) + 10*MassU*Sqr(gp)*Sqr(QHu) + 10*MassWB*Sqr
+      (gp)*Sqr(QHu) + 30*MassU*Sqr(gp)*Sqr(Ql) + 30*MassWB*Sqr(gp)*Sqr(Ql) + 90
+      *MassU*Sqr(gp)*Sqr(Qq) + 90*MassWB*Sqr(gp)*Sqr(Qq) - 10*Conj(Lambdax)*(
+      MassWB*Lambdax - TLambdax)));
 
 
    return beta_MassWB;

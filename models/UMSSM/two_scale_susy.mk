@@ -21,6 +21,7 @@ LIBUMSSM_SRC += \
 	models/UMSSM/UMSSM_two_scale_susy_beta_Yd.cpp \
 	models/UMSSM/UMSSM_two_scale_susy_beta_Ye.cpp \
 	models/UMSSM/UMSSM_two_scale_susy_beta_Lambdax.cpp \
+	models/UMSSM/UMSSM_two_scale_susy_beta_Yv.cpp \
 	models/UMSSM/UMSSM_two_scale_susy_beta_Yu.cpp \
 	models/UMSSM/UMSSM_two_scale_susy_beta_g1.cpp \
 	models/UMSSM/UMSSM_two_scale_susy_beta_g2.cpp \

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:07:44
+// File generated at Fri 8 Jan 2016 11:44:14
 
 #include "SM_two_scale_susy_scale_constraint.hpp"
 #include "SM_two_scale_model.hpp"
@@ -76,9 +76,6 @@ void SM_susy_scale_constraint<Two_scale>::apply()
    update_scale();
 
    // apply user-defined susy scale constraints
-   const auto LambdaIN = INPUTPARAMETER(LambdaIN);
-
-   MODEL->set_Lambdax(Re(LambdaIN));
    MODEL->solve_ewsb();
 
 }
@@ -123,9 +120,9 @@ void SM_susy_scale_constraint<Two_scale>::initialize()
    assert(model && "SM_susy_scale_constraint<Two_scale>::"
           "initialize(): model pointer is zero.");
 
-   const auto Qin = INPUTPARAMETER(Qin);
+   const auto QEWSB = INPUTPARAMETER(QEWSB);
 
-   initial_scale_guess = Qin;
+   initial_scale_guess = QEWSB;
 
    scale = initial_scale_guess;
 }
@@ -135,9 +132,9 @@ void SM_susy_scale_constraint<Two_scale>::update_scale()
    assert(model && "SM_susy_scale_constraint<Two_scale>::"
           "update_scale(): model pointer is zero.");
 
-   const auto Qin = INPUTPARAMETER(Qin);
+   const auto QEWSB = INPUTPARAMETER(QEWSB);
 
-   scale = Qin;
+   scale = QEWSB;
 
 
 }

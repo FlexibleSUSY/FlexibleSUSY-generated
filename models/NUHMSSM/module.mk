@@ -37,6 +37,7 @@ LIBNUHMSSM_SRC += \
 		$(DIR)/NUHMSSM_mass_eigenstates.cpp \
 		$(DIR)/NUHMSSM_info.cpp \
 		$(DIR)/NUHMSSM_input_parameters.cpp \
+		$(DIR)/NUHMSSM_observables.cpp \
 		$(DIR)/NUHMSSM_slha_io.cpp \
 		$(DIR)/NUHMSSM_physical.cpp \
 		$(DIR)/NUHMSSM_utilities.cpp \
@@ -63,6 +64,7 @@ LIBNUHMSSM_HDR += \
 		$(DIR)/NUHMSSM_low_scale_constraint.hpp \
 		$(DIR)/NUHMSSM_model.hpp \
 		$(DIR)/NUHMSSM_model_slha.hpp \
+		$(DIR)/NUHMSSM_observables.hpp \
 		$(DIR)/NUHMSSM_physical.hpp \
 		$(DIR)/NUHMSSM_slha_io.hpp \
 		$(DIR)/NUHMSSM_spectrum_generator_interface.hpp \
@@ -227,7 +229,7 @@ $(LIBNUHMSSM): $(LIBNUHMSSM_OBJ)
 		$(MAKELIB) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBNUHMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(LDLIBS)
 
 ALLDEP += $(LIBNUHMSSM_DEP) $(EXENUHMSSM_DEP)
 ALLSRC += $(LIBNUHMSSM_SRC) $(EXENUHMSSM_SRC)

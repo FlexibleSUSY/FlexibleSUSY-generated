@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:25:43
+// File generated at Fri 8 Jan 2016 13:00:04
 
 #ifndef MSSMRHN_TWO_SCALE_soft_parameters_H
 #define MSSMRHN_TWO_SCALE_soft_parameters_H

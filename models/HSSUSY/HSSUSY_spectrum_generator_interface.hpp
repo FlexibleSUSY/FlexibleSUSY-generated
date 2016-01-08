@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:07:56
+// File generated at Fri 8 Jan 2016 11:44:05
 
 #ifndef HSSUSY_SPECTRUM_GENERATOR_INTERFACE_H
 #define HSSUSY_SPECTRUM_GENERATOR_INTERFACE_H

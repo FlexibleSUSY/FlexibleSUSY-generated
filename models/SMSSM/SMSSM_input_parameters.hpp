@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:21:34
+// File generated at Fri 8 Jan 2016 12:43:37
 
 #ifndef SMSSM_INPUT_PARAMETERS_H
 #define SMSSM_INPUT_PARAMETERS_H
@@ -44,6 +44,9 @@ struct SMSSM_input_parameters {
    (0), LambdaSInput(0), L1Input(0), MSInput(0), BMSInput(0)
 
    {}
+
+   Eigen::ArrayXd get() const;
+   void set(const Eigen::ArrayXd&);
 };
 
 std::ostream& operator<<(std::ostream&, const SMSSM_input_parameters&);

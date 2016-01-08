@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:10:31
+// File generated at Fri 8 Jan 2016 11:54:01
 
 #ifndef TMSSM_SPECTRUM_GENERATOR_INTERFACE_H
 #define TMSSM_SPECTRUM_GENERATOR_INTERFACE_H

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:29:34
+// File generated at Fri 8 Jan 2016 13:19:33
 
 #ifndef CMSSMNoFV_SLHA_IO_H
 #define CMSSMNoFV_SLHA_IO_H
@@ -28,6 +28,7 @@
 #include "ckm.hpp"
 #include "ew_input.hpp"
 #include "lowe.h"
+#include "observables.hpp"
 
 #include <Eigen/Core>
 #include <string>
@@ -37,7 +38,9 @@
 #define PHYSICAL(p) model.get_physical().p
 #define PHYSICAL_SLHA(p) model.get_physical_slha().p
 #define LOCALPHYSICAL(p) physical.p
+#define MODEL model
 #define MODELPARAMETER(p) model.get_##p()
+#define OBSERVABLES observables
 #define LowEnergyConstant(p) Electroweak_constants::p
 #define SCALES(p) scales.p
 
@@ -45,6 +48,7 @@ namespace flexiblesusy {
 
 struct CMSSMNoFV_input_parameters;
 class Spectrum_generator_settings;
+struct Observables;
 
 struct CMSSMNoFV_scales {
    CMSSMNoFV_scales() : HighScale(0.), SUSYScale(0.), LowScale(0.) {}
@@ -69,7 +73,7 @@ public:
    void read_from_source(const std::string&);
    void read_from_stream(std::istream&);
    void set_extpar(const CMSSMNoFV_input_parameters&);
-   template <class T> void set_extra(const CMSSMNoFV_slha<T>&, const CMSSMNoFV_scales&);
+   template <class T> void set_extra(const CMSSMNoFV_slha<T>&, const CMSSMNoFV_scales&, const Observables&);
    void set_minpar(const CMSSMNoFV_input_parameters&);
    void set_sminputs(const softsusy::QedQcd&);
    template <class T> void set_spectrum(const CMSSMNoFV_slha<T>&);
@@ -82,13 +86,10 @@ public:
    static void fill_extpar_tuple(CMSSMNoFV_input_parameters&, int, double);
 
    template <class T>
-   static void fill_slhaea(SLHAea::Coll&, const CMSSMNoFV_slha<T>&, const softsusy::QedQcd&, const CMSSMNoFV_scales&);
+   static void fill_slhaea(SLHAea::Coll&, const CMSSMNoFV_slha<T>&, const softsusy::QedQcd&, const CMSSMNoFV_scales&, const Observables&);
 
    template <class T>
-   static SLHAea::Coll fill_slhaea(const CMSSMNoFV_slha<T>&, const softsusy::QedQcd&);
-
-   template <class T>
-   static SLHAea::Coll fill_slhaea(const CMSSMNoFV_slha<T>&, const softsusy::QedQcd&, const CMSSMNoFV_scales&);
+   static SLHAea::Coll fill_slhaea(const CMSSMNoFV_slha<T>&, const softsusy::QedQcd&, const CMSSMNoFV_scales&, const Observables&);
 
 private:
    SLHA_io slha_io; ///< SLHA io class
@@ -119,7 +120,8 @@ void CMSSMNoFV_slha_io::fill(CMSSMNoFV_slha<T>& model) const
 template <class T>
 void CMSSMNoFV_slha_io::fill_slhaea(
    SLHAea::Coll& slhaea, const CMSSMNoFV_slha<T>& model,
-   const softsusy::QedQcd& qedqcd, const CMSSMNoFV_scales& scales)
+   const softsusy::QedQcd& qedqcd, const CMSSMNoFV_scales& scales,
+   const Observables& observables)
 {
    CMSSMNoFV_slha_io slha_io;
    const CMSSMNoFV_input_parameters& input = model.get_input();
@@ -133,7 +135,7 @@ void CMSSMNoFV_slha_io::fill_slhaea(
    slha_io.set_extpar(input);
    if (!error) {
       slha_io.set_spectrum(model);
-      slha_io.set_extra(model, scales);
+      slha_io.set_extra(model, scales, observables);
    }
 
    slhaea = slha_io.get_slha_io().get_data();
@@ -141,20 +143,11 @@ void CMSSMNoFV_slha_io::fill_slhaea(
 
 template <class T>
 SLHAea::Coll CMSSMNoFV_slha_io::fill_slhaea(
-   const CMSSMNoFV_slha<T>& model, const softsusy::QedQcd& qedqcd)
-{
-   CMSSMNoFV_scales scales;
-
-   return fill_slhaea(model, qedqcd, scales);
-}
-
-template <class T>
-SLHAea::Coll CMSSMNoFV_slha_io::fill_slhaea(
    const CMSSMNoFV_slha<T>& model, const softsusy::QedQcd& qedqcd,
-   const CMSSMNoFV_scales& scales)
+   const CMSSMNoFV_scales& scales, const Observables& observables)
 {
    SLHAea::Coll slhaea;
-   CMSSMNoFV_slha_io::fill_slhaea(slhaea, model, qedqcd, scales);
+   CMSSMNoFV_slha_io::fill_slhaea(slhaea, model, qedqcd, scales, observables);
 
    return slhaea;
 }
@@ -218,7 +211,8 @@ void CMSSMNoFV_slha_io::set_model_parameters(const CMSSMNoFV_slha<T>& model)
  */
 template <class T>
 void CMSSMNoFV_slha_io::set_extra(
-   const CMSSMNoFV_slha<T>& model, const CMSSMNoFV_scales& scales)
+   const CMSSMNoFV_slha<T>& model, const CMSSMNoFV_scales& scales,
+   const Observables& observables)
 {
    const CMSSMNoFV_physical physical(model.get_physical_slha());
 
@@ -228,6 +222,14 @@ void CMSSMNoFV_slha_io::set_extra(
             << FORMAT_ELEMENT(0, (SCALES(HighScale)), "HighScale")
             << FORMAT_ELEMENT(1, (SCALES(SUSYScale)), "SUSYScale")
             << FORMAT_ELEMENT(2, (SCALES(LowScale)), "LowScale")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block FlexibleSUSYLowEnergy Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(1, (OBSERVABLES.a_muon_gm2calc), "Delta(g-2)_muon/2 GM2Calc")
+            << FORMAT_ELEMENT(2, (OBSERVABLES.a_muon_gm2calc_uncertainty), "Delta(g-2)_muon/2 GM2Calc uncertainty")
       ;
       slha_io.set_block(block);
    }
@@ -304,57 +306,6 @@ void CMSSMNoFV_slha_io::set_extra(
       ;
       slha_io.set_block(block);
    }
-   {
-      std::ostringstream block;
-      block << "Block MASS Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
-            << FORMAT_ELEMENT(6, (Pole(MFt)), "Pole(MFt)")
-            << FORMAT_ELEMENT(24, (Pole(MVWm)), "Pole(MVWm)")
-            << FORMAT_ELEMENT(1000021, (Pole(MGlu)), "Pole(MGlu)")
-            << FORMAT_ELEMENT(1000012, (Pole(MSveL)), "Pole(MSveL)")
-            << FORMAT_ELEMENT(1000014, (Pole(MSvmL)), "Pole(MSvmL)")
-            << FORMAT_ELEMENT(1000016, (Pole(MSvtL)), "Pole(MSvtL)")
-            << FORMAT_ELEMENT(1000024, (Pole(MCha(0))), "Pole(MCha(1))")
-            << FORMAT_ELEMENT(1000037, (Pole(MCha(1))), "Pole(MCha(2))")
-            << FORMAT_ELEMENT(25, (Pole(Mhh(0))), "Pole(Mhh(1))")
-            << FORMAT_ELEMENT(35, (Pole(Mhh(1))), "Pole(Mhh(2))")
-            << FORMAT_ELEMENT(37, (Pole(MHpm(1))), "Pole(MHpm(2))")
-            << FORMAT_ELEMENT(36, (Pole(MAh(1))), "Pole(MAh(2))")
-            << FORMAT_ELEMENT(1000001, (AbsSqr(Pole(ZD(0,0)))*Pole(MSd(0)) + AbsSqr(Pole(ZD(1,0)))*Pole(MSd(1))), "AbsSqr(Pole(ZD(1,1)))*Pole(MSd(1)) + AbsSqr(Pole(ZD(2,1)))*Pole(MSd(2))")
-            << FORMAT_ELEMENT(2000001, (AbsSqr(Pole(ZD(0,1)))*Pole(MSd(0)) + AbsSqr(Pole(ZD(1,1)))*Pole(MSd(1))), "AbsSqr(Pole(ZD(1,2)))*Pole(MSd(1)) + AbsSqr(Pole(ZD(2,2)))*Pole(MSd(2))")
-            << FORMAT_ELEMENT(1000003, (AbsSqr(Pole(ZS(0,0)))*Pole(MSs(0)) + AbsSqr(Pole(ZS(1,0)))*Pole(MSs(1))), "AbsSqr(Pole(ZS(1,1)))*Pole(MSs(1)) + AbsSqr(Pole(ZS(2,1)))*Pole(MSs(2))")
-            << FORMAT_ELEMENT(2000003, (AbsSqr(Pole(ZS(0,1)))*Pole(MSs(0)) + AbsSqr(Pole(ZS(1,1)))*Pole(MSs(1))), "AbsSqr(Pole(ZS(1,2)))*Pole(MSs(1)) + AbsSqr(Pole(ZS(2,2)))*Pole(MSs(2))")
-            << FORMAT_ELEMENT(1000005, (Pole(MSb(0))), "Pole(MSb(1))")
-            << FORMAT_ELEMENT(2000005, (Pole(MSb(1))), "Pole(MSb(2))")
-            << FORMAT_ELEMENT(1000011, (AbsSqr(Pole(ZE(0,0)))*Pole(MSe(0)) + AbsSqr(Pole(ZE(1,0)))*Pole(MSe(1))), "AbsSqr(Pole(ZE(1,1)))*Pole(MSe(1)) + AbsSqr(Pole(ZE(2,1)))*Pole(MSe(2))")
-            << FORMAT_ELEMENT(2000011, (AbsSqr(Pole(ZE(0,1)))*Pole(MSe(0)) + AbsSqr(Pole(ZE(1,1)))*Pole(MSe(1))), "AbsSqr(Pole(ZE(1,2)))*Pole(MSe(1)) + AbsSqr(Pole(ZE(2,2)))*Pole(MSe(2))")
-            << FORMAT_ELEMENT(1000013, (AbsSqr(Pole(ZM(0,0)))*Pole(MSm(0)) + AbsSqr(Pole(ZM(1,0)))*Pole(MSm(1))), "AbsSqr(Pole(ZM(1,1)))*Pole(MSm(1)) + AbsSqr(Pole(ZM(2,1)))*Pole(MSm(2))")
-            << FORMAT_ELEMENT(2000013, (AbsSqr(Pole(ZM(0,1)))*Pole(MSm(0)) + AbsSqr(Pole(ZM(1,1)))*Pole(MSm(1))), "AbsSqr(Pole(ZM(1,2)))*Pole(MSm(1)) + AbsSqr(Pole(ZM(2,2)))*Pole(MSm(2))")
-            << FORMAT_ELEMENT(1000015, (Pole(MStau(0))), "Pole(MStau(1))")
-            << FORMAT_ELEMENT(2000015, (Pole(MStau(1))), "Pole(MStau(2))")
-            << FORMAT_ELEMENT(1000002, (AbsSqr(Pole(ZU(0,0)))*Pole(MSu(0)) + AbsSqr(Pole(ZU(1,0)))*Pole(MSu(1))), "AbsSqr(Pole(ZU(1,1)))*Pole(MSu(1)) + AbsSqr(Pole(ZU(2,1)))*Pole(MSu(2))")
-            << FORMAT_ELEMENT(2000002, (AbsSqr(Pole(ZU(0,1)))*Pole(MSu(0)) + AbsSqr(Pole(ZU(1,1)))*Pole(MSu(1))), "AbsSqr(Pole(ZU(1,2)))*Pole(MSu(1)) + AbsSqr(Pole(ZU(2,2)))*Pole(MSu(2))")
-            << FORMAT_ELEMENT(1000004, (AbsSqr(Pole(ZC(0,0)))*Pole(MSc(0)) + AbsSqr(Pole(ZC(1,0)))*Pole(MSc(1))), "AbsSqr(Pole(ZC(1,1)))*Pole(MSc(1)) + AbsSqr(Pole(ZC(2,1)))*Pole(MSc(2))")
-            << FORMAT_ELEMENT(2000004, (AbsSqr(Pole(ZC(0,1)))*Pole(MSc(0)) + AbsSqr(Pole(ZC(1,1)))*Pole(MSc(1))), "AbsSqr(Pole(ZC(1,2)))*Pole(MSc(1)) + AbsSqr(Pole(ZC(2,2)))*Pole(MSc(2))")
-            << FORMAT_ELEMENT(1000006, (Pole(MSt(0))), "Pole(MSt(1))")
-            << FORMAT_ELEMENT(2000006, (Pole(MSt(1))), "Pole(MSt(2))")
-            << FORMAT_ELEMENT(1000022, (Pole(MChi(0))), "Pole(MChi(1))")
-            << FORMAT_ELEMENT(1000023, (Pole(MChi(1))), "Pole(MChi(2))")
-            << FORMAT_ELEMENT(1000025, (Pole(MChi(2))), "Pole(MChi(3))")
-            << FORMAT_ELEMENT(1000035, (Pole(MChi(3))), "Pole(MChi(4))")
-            << FORMAT_ELEMENT(24, (Pole(MVWm)), "Pole(MVWm)")
-            << FORMAT_ELEMENT(23, (Pole(MVZ)), "Pole(MVZ)")
-            << FORMAT_ELEMENT(1, (Pole(MFd)), "Pole(MFd)")
-            << FORMAT_ELEMENT(2, (Pole(MFu)), "Pole(MFu)")
-            << FORMAT_ELEMENT(3, (Pole(MFs)), "Pole(MFs)")
-            << FORMAT_ELEMENT(4, (Pole(MFc)), "Pole(MFc)")
-            << FORMAT_ELEMENT(5, (Pole(MFb)), "Pole(MFb)")
-            << FORMAT_ELEMENT(6, (Pole(MFt)), "Pole(MFt)")
-            << FORMAT_ELEMENT(11, (Pole(MFe)), "Pole(MFe)")
-            << FORMAT_ELEMENT(13, (Pole(MFm)), "Pole(MFm)")
-            << FORMAT_ELEMENT(15, (Pole(MFtau)), "Pole(MFtau)")
-      ;
-      slha_io.set_block(block);
-   }
 
 }
 
@@ -400,7 +351,9 @@ void CMSSMNoFV_slha_io::set_spectrum(const CMSSMNoFV_slha<T>& model)
 #undef PHYSICAL
 #undef PHYSICAL_SLHA
 #undef LOCALPHYSICAL
+#undef MODEL
 #undef MODELPARAMETER
+#undef OBSERVABLES
 #undef LowEnergyConstant
 #undef SCALES
 

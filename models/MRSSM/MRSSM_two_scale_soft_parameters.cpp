@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:10:04
+// File generated at Fri 8 Jan 2016 12:05:07
 
 #include "MRSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -305,70 +305,79 @@ void MRSSM_soft_parameters::set(const Eigen::ArrayXd& pars)
 
 void MRSSM_soft_parameters::calc_soft_traces(Soft_traces& soft_traces) const
 {
-   TRACE_STRUCT.traceYdAdjYd = Re((Yd*Yd.adjoint()).trace());
-   TRACE_STRUCT.traceYeAdjYe = Re((Ye*Ye.adjoint()).trace());
-   TRACE_STRUCT.traceYuAdjYu = Re((Yu*Yu.adjoint()).trace());
-   TRACE_STRUCT.traceYdAdjYdYdAdjYd = Re((Yd*Yd.adjoint()*Yd*Yd.adjoint())
-      .trace());
-   TRACE_STRUCT.traceYdAdjYuYuAdjYd = Re((Yd*Yu.adjoint()*Yu*Yd.adjoint())
-      .trace());
-   TRACE_STRUCT.traceYeAdjYeYeAdjYe = Re((Ye*Ye.adjoint()*Ye*Ye.adjoint())
-      .trace());
-   TRACE_STRUCT.traceYuAdjYuYuAdjYu = Re((Yu*Yu.adjoint()*Yu*Yu.adjoint())
-      .trace());
-   TRACE_STRUCT.tracemd2YdAdjYd = Re((md2*Yd*Yd.adjoint()).trace());
-   TRACE_STRUCT.traceme2YeAdjYe = Re((me2*Ye*Ye.adjoint()).trace());
-   TRACE_STRUCT.traceml2AdjYeYe = Re((ml2*Ye.adjoint()*Ye).trace());
-   TRACE_STRUCT.tracemq2AdjYdYd = Re((mq2*Yd.adjoint()*Yd).trace());
-   TRACE_STRUCT.tracemq2AdjYuYu = Re((mq2*Yu.adjoint()*Yu).trace());
-   TRACE_STRUCT.tracemu2YuAdjYu = Re((mu2*Yu*Yu.adjoint()).trace());
-   TRACE_STRUCT.tracemd2YdAdjYdYdAdjYd = Re((md2*Yd*Yd.adjoint()*Yd*Yd.adjoint(
-      )).trace());
-   TRACE_STRUCT.tracemd2YdAdjYuYuAdjYd = Re((md2*Yd*Yu.adjoint()*Yu*Yd.adjoint(
-      )).trace());
-   TRACE_STRUCT.traceme2YeAdjYeYeAdjYe = Re((me2*Ye*Ye.adjoint()*Ye*Ye.adjoint(
-      )).trace());
-   TRACE_STRUCT.traceml2AdjYeYeAdjYeYe = Re((ml2*Ye.adjoint()*Ye*Ye.adjoint()*
-      Ye).trace());
-   TRACE_STRUCT.tracemq2AdjYdYdAdjYdYd = Re((mq2*Yd.adjoint()*Yd*Yd.adjoint()*
-      Yd).trace());
-   TRACE_STRUCT.tracemq2AdjYdYdAdjYuYu = Re((mq2*Yd.adjoint()*Yd*Yu.adjoint()*
-      Yu).trace());
-   TRACE_STRUCT.tracemq2AdjYuYuAdjYdYd = Re((mq2*Yu.adjoint()*Yu*Yd.adjoint()*
-      Yd).trace());
-   TRACE_STRUCT.tracemu2YuAdjYdYdAdjYu = Re((mu2*Yu*Yd.adjoint()*Yd*Yu.adjoint(
-      )).trace());
-   TRACE_STRUCT.tracemq2AdjYuYuAdjYuYu = Re((mq2*Yu.adjoint()*Yu*Yu.adjoint()*
-      Yu).trace());
-   TRACE_STRUCT.tracemu2YuAdjYuYuAdjYu = Re((mu2*Yu*Yu.adjoint()*Yu*Yu.adjoint(
-      )).trace());
+   if (get_loops() > 0) {
+      TRACE_STRUCT.Tr11 = Re(0.7745966692414834*g1*(-mHd2 + mHu2 + mRd2 - mRu2 + (
+         md2).trace() + (me2).trace() - (ml2).trace() + (mq2).trace() - 2*(mu2).trace
+         ()));
+      TRACE_STRUCT.Tr2U111 = Re(0.1*Sqr(g1)*(3*mHd2 + 3*mHu2 + 3*mRd2 + 3*mRu2 + 2
+         *(md2).trace() + 6*(me2).trace() + 3*(ml2).trace() + (mq2).trace() + 8*(mu2)
+         .trace()));
+      TRACE_STRUCT.Tr31 = Re(0.012909944487358056*g1*(30*(mHd2 - mRd2)*AbsSqr(
+         LamSD) - 30*(mHu2 - mRu2)*AbsSqr(LamSU) + 45*mHd2*AbsSqr(LamTD) - 45*mRd2*
+         AbsSqr(LamTD) - 45*mHu2*AbsSqr(LamTU) + 45*mRu2*AbsSqr(LamTU) - 9*mHd2*Sqr(
+         g1) + 9*mHu2*Sqr(g1) + 9*mRd2*Sqr(g1) - 9*mRu2*Sqr(g1) - 45*mHd2*Sqr(g2) +
+         45*mHu2*Sqr(g2) + 45*mRd2*Sqr(g2) - 45*mRu2*Sqr(g2) + 4*Sqr(g1)*(md2).trace(
+         ) + 80*Sqr(g3)*(md2).trace() + 36*Sqr(g1)*(me2).trace() - 9*Sqr(g1)*(ml2)
+         .trace() - 45*Sqr(g2)*(ml2).trace() + Sqr(g1)*(mq2).trace() + 45*Sqr(g2)*(
+         mq2).trace() + 80*Sqr(g3)*(mq2).trace() - 32*Sqr(g1)*(mu2).trace() - 160*Sqr
+         (g3)*(mu2).trace() + 90*mHd2*(Yd*Yd.adjoint()).trace() + 30*mHd2*(Ye*
+         Ye.adjoint()).trace() - 90*mHu2*(Yu*Yu.adjoint()).trace() - 60*(Yd*
+         Yd.adjoint()*md2.conjugate()).trace() - 30*(Yd*mq2.conjugate()*Yd.adjoint())
+         .trace() - 60*(Ye*Ye.adjoint()*me2.conjugate()).trace() + 30*(Ye*
+         ml2.conjugate()*Ye.adjoint()).trace() + 120*(Yu*Yu.adjoint()*mu2.conjugate()
+         ).trace() - 30*(Yu*mq2.conjugate()*Yu.adjoint()).trace()));
+      TRACE_STRUCT.Tr22 = Re(0.5*(mHd2 + mHu2 + mRd2 + mRu2 + 4*mT2 + (ml2).trace(
+         ) + 3*(mq2).trace()));
+      TRACE_STRUCT.Tr23 = Re(0.5*(6*moc2 + (md2).trace() + 2*(mq2).trace() + (mu2)
+         .trace()));
 
+      TRACE_STRUCT.traceYdAdjYd = Re((Yd*Yd.adjoint()).trace());
+      TRACE_STRUCT.traceYeAdjYe = Re((Ye*Ye.adjoint()).trace());
+      TRACE_STRUCT.traceYuAdjYu = Re((Yu*Yu.adjoint()).trace());
+      TRACE_STRUCT.tracemd2YdAdjYd = Re((md2*Yd*Yd.adjoint()).trace());
+      TRACE_STRUCT.traceme2YeAdjYe = Re((me2*Ye*Ye.adjoint()).trace());
+      TRACE_STRUCT.traceml2AdjYeYe = Re((ml2*Ye.adjoint()*Ye).trace());
+      TRACE_STRUCT.tracemq2AdjYdYd = Re((mq2*Yd.adjoint()*Yd).trace());
+      TRACE_STRUCT.tracemq2AdjYuYu = Re((mq2*Yu.adjoint()*Yu).trace());
+      TRACE_STRUCT.tracemu2YuAdjYu = Re((mu2*Yu*Yu.adjoint()).trace());
 
-   TRACE_STRUCT.Tr11 = Re(0.7745966692414834*g1*(-mHd2 + mHu2 + mRd2 - mRu2 + (
-      md2).trace() + (me2).trace() - (ml2).trace() + (mq2).trace() - 2*(mu2).trace
-      ()));
-   TRACE_STRUCT.Tr2U111 = Re(0.1*Sqr(g1)*(3*mHd2 + 3*mHu2 + 3*mRd2 + 3*mRu2 + 2
-      *(md2).trace() + 6*(me2).trace() + 3*(ml2).trace() + (mq2).trace() + 8*(mu2)
-      .trace()));
-   TRACE_STRUCT.Tr31 = Re(0.012909944487358056*g1*(30*(mHd2 - mRd2)*AbsSqr(
-      LamSD) - 30*(mHu2 - mRu2)*AbsSqr(LamSU) + 45*mHd2*AbsSqr(LamTD) - 45*mRd2*
-      AbsSqr(LamTD) - 45*mHu2*AbsSqr(LamTU) + 45*mRu2*AbsSqr(LamTU) - 9*mHd2*Sqr(
-      g1) + 9*mHu2*Sqr(g1) + 9*mRd2*Sqr(g1) - 9*mRu2*Sqr(g1) - 45*mHd2*Sqr(g2) +
-      45*mHu2*Sqr(g2) + 45*mRd2*Sqr(g2) - 45*mRu2*Sqr(g2) + 4*Sqr(g1)*(md2).trace(
-      ) + 80*Sqr(g3)*(md2).trace() + 36*Sqr(g1)*(me2).trace() - 9*Sqr(g1)*(ml2)
-      .trace() - 45*Sqr(g2)*(ml2).trace() + Sqr(g1)*(mq2).trace() + 45*Sqr(g2)*(
-      mq2).trace() + 80*Sqr(g3)*(mq2).trace() - 32*Sqr(g1)*(mu2).trace() - 160*Sqr
-      (g3)*(mu2).trace() + 90*mHd2*(Yd*Yd.adjoint()).trace() + 30*mHd2*(Ye*
-      Ye.adjoint()).trace() - 90*mHu2*(Yu*Yu.adjoint()).trace() - 60*(Yd*
-      Yd.adjoint()*md2.conjugate()).trace() - 30*(Yd*mq2.conjugate()*Yd.adjoint())
-      .trace() - 60*(Ye*Ye.adjoint()*me2.conjugate()).trace() + 30*(Ye*
-      ml2.conjugate()*Ye.adjoint()).trace() + 120*(Yu*Yu.adjoint()*mu2.conjugate()
-      ).trace() - 30*(Yu*mq2.conjugate()*Yu.adjoint()).trace()));
-   TRACE_STRUCT.Tr22 = Re(0.5*(mHd2 + mHu2 + mRd2 + mRu2 + 4*mT2 + (ml2).trace(
-      ) + 3*(mq2).trace()));
-   TRACE_STRUCT.Tr23 = Re(0.5*(6*moc2 + (md2).trace() + 2*(mq2).trace() + (mu2)
-      .trace()));
+   }
 
+   if (get_loops() > 1) {
+      TRACE_STRUCT.traceYdAdjYdYdAdjYd = Re((Yd*Yd.adjoint()*Yd*Yd.adjoint())
+         .trace());
+      TRACE_STRUCT.traceYdAdjYuYuAdjYd = Re((Yd*Yu.adjoint()*Yu*Yd.adjoint())
+         .trace());
+      TRACE_STRUCT.traceYeAdjYeYeAdjYe = Re((Ye*Ye.adjoint()*Ye*Ye.adjoint())
+         .trace());
+      TRACE_STRUCT.traceYuAdjYuYuAdjYu = Re((Yu*Yu.adjoint()*Yu*Yu.adjoint())
+         .trace());
+      TRACE_STRUCT.tracemd2YdAdjYdYdAdjYd = Re((md2*Yd*Yd.adjoint()*Yd*Yd.adjoint(
+         )).trace());
+      TRACE_STRUCT.tracemd2YdAdjYuYuAdjYd = Re((md2*Yd*Yu.adjoint()*Yu*Yd.adjoint(
+         )).trace());
+      TRACE_STRUCT.traceme2YeAdjYeYeAdjYe = Re((me2*Ye*Ye.adjoint()*Ye*Ye.adjoint(
+         )).trace());
+      TRACE_STRUCT.traceml2AdjYeYeAdjYeYe = Re((ml2*Ye.adjoint()*Ye*Ye.adjoint()*
+         Ye).trace());
+      TRACE_STRUCT.tracemq2AdjYdYdAdjYdYd = Re((mq2*Yd.adjoint()*Yd*Yd.adjoint()*
+         Yd).trace());
+      TRACE_STRUCT.tracemq2AdjYdYdAdjYuYu = Re((mq2*Yd.adjoint()*Yd*Yu.adjoint()*
+         Yu).trace());
+      TRACE_STRUCT.tracemq2AdjYuYuAdjYdYd = Re((mq2*Yu.adjoint()*Yu*Yd.adjoint()*
+         Yd).trace());
+      TRACE_STRUCT.tracemq2AdjYuYuAdjYuYu = Re((mq2*Yu.adjoint()*Yu*Yu.adjoint()*
+         Yu).trace());
+      TRACE_STRUCT.tracemu2YuAdjYdYdAdjYu = Re((mu2*Yu*Yd.adjoint()*Yd*Yu.adjoint(
+         )).trace());
+      TRACE_STRUCT.tracemu2YuAdjYuYuAdjYu = Re((mu2*Yu*Yu.adjoint()*Yu*Yu.adjoint(
+         )).trace());
+
+   }
+
+   if (get_loops() > 2) {
+
+   }
 }
 
 std::ostream& operator<<(std::ostream& ostr, const MRSSM_soft_parameters& soft_pars)

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:07:16
+// File generated at Fri 8 Jan 2016 11:56:24
 
 #include "SplitMSSM_info.hpp"
 
@@ -46,6 +46,51 @@ namespace SplitMSSM_info {
       "Ye(0,1)", "Ye(0,2)", "Ye(1,0)", "Ye(1,1)", "Ye(1,2)", "Ye(2,0)", "Ye(2,1)",
       "Ye(2,2)", "gYd", "g2d", "gYu", "g2u", "MassB", "MassG", "MassWB", "Mu",
       "mu2", "v"};
+
+   const char* particle_mixing_names[NUMBER_OF_MIXINGS] = {   "Re(Vd(0,0))",
+      "Im(Vd(0,0))", "Re(Vd(0,1))", "Im(Vd(0,1))", "Re(Vd(0,2))", "Im(Vd(0,2))",
+      "Re(Vd(1,0))", "Im(Vd(1,0))", "Re(Vd(1,1))", "Im(Vd(1,1))", "Re(Vd(1,2))",
+      "Im(Vd(1,2))", "Re(Vd(2,0))", "Im(Vd(2,0))", "Re(Vd(2,1))", "Im(Vd(2,1))",
+      "Re(Vd(2,2))", "Im(Vd(2,2))", "Re(Ud(0,0))", "Im(Ud(0,0))", "Re(Ud(0,1))",
+      "Im(Ud(0,1))", "Re(Ud(0,2))", "Im(Ud(0,2))", "Re(Ud(1,0))", "Im(Ud(1,0))",
+      "Re(Ud(1,1))", "Im(Ud(1,1))", "Re(Ud(1,2))", "Im(Ud(1,2))", "Re(Ud(2,0))",
+      "Im(Ud(2,0))", "Re(Ud(2,1))", "Im(Ud(2,1))", "Re(Ud(2,2))", "Im(Ud(2,2))",
+      "Re(Vu(0,0))", "Im(Vu(0,0))", "Re(Vu(0,1))", "Im(Vu(0,1))", "Re(Vu(0,2))",
+      "Im(Vu(0,2))", "Re(Vu(1,0))", "Im(Vu(1,0))", "Re(Vu(1,1))", "Im(Vu(1,1))",
+      "Re(Vu(1,2))", "Im(Vu(1,2))", "Re(Vu(2,0))", "Im(Vu(2,0))", "Re(Vu(2,1))",
+      "Im(Vu(2,1))", "Re(Vu(2,2))", "Im(Vu(2,2))", "Re(Uu(0,0))", "Im(Uu(0,0))",
+      "Re(Uu(0,1))", "Im(Uu(0,1))", "Re(Uu(0,2))", "Im(Uu(0,2))", "Re(Uu(1,0))",
+      "Im(Uu(1,0))", "Re(Uu(1,1))", "Im(Uu(1,1))", "Re(Uu(1,2))", "Im(Uu(1,2))",
+      "Re(Uu(2,0))", "Im(Uu(2,0))", "Re(Uu(2,1))", "Im(Uu(2,1))", "Re(Uu(2,2))",
+      "Im(Uu(2,2))", "Re(Ve(0,0))", "Im(Ve(0,0))", "Re(Ve(0,1))", "Im(Ve(0,1))",
+      "Re(Ve(0,2))", "Im(Ve(0,2))", "Re(Ve(1,0))", "Im(Ve(1,0))", "Re(Ve(1,1))",
+      "Im(Ve(1,1))", "Re(Ve(1,2))", "Im(Ve(1,2))", "Re(Ve(2,0))", "Im(Ve(2,0))",
+      "Re(Ve(2,1))", "Im(Ve(2,1))", "Re(Ve(2,2))", "Im(Ve(2,2))", "Re(Ue(0,0))",
+      "Im(Ue(0,0))", "Re(Ue(0,1))", "Im(Ue(0,1))", "Re(Ue(0,2))", "Im(Ue(0,2))",
+      "Re(Ue(1,0))", "Im(Ue(1,0))", "Re(Ue(1,1))", "Im(Ue(1,1))", "Re(Ue(1,2))",
+      "Im(Ue(1,2))", "Re(Ue(2,0))", "Im(Ue(2,0))", "Re(Ue(2,1))", "Im(Ue(2,1))",
+      "Re(Ue(2,2))", "Im(Ue(2,2))", "Re(ZN(0,0))", "Im(ZN(0,0))", "Re(ZN(0,1))",
+      "Im(ZN(0,1))", "Re(ZN(0,2))", "Im(ZN(0,2))", "Re(ZN(0,3))", "Im(ZN(0,3))",
+      "Re(ZN(1,0))", "Im(ZN(1,0))", "Re(ZN(1,1))", "Im(ZN(1,1))", "Re(ZN(1,2))",
+      "Im(ZN(1,2))", "Re(ZN(1,3))", "Im(ZN(1,3))", "Re(ZN(2,0))", "Im(ZN(2,0))",
+      "Re(ZN(2,1))", "Im(ZN(2,1))", "Re(ZN(2,2))", "Im(ZN(2,2))", "Re(ZN(2,3))",
+      "Im(ZN(2,3))", "Re(ZN(3,0))", "Im(ZN(3,0))", "Re(ZN(3,1))", "Im(ZN(3,1))",
+      "Re(ZN(3,2))", "Im(ZN(3,2))", "Re(ZN(3,3))", "Im(ZN(3,3))", "Re(UM(0,0))",
+      "Im(UM(0,0))", "Re(UM(0,1))", "Im(UM(0,1))", "Re(UM(1,0))", "Im(UM(1,0))",
+      "Re(UM(1,1))", "Im(UM(1,1))", "Re(UP(0,0))", "Im(UP(0,0))", "Re(UP(0,1))",
+      "Im(UP(0,1))", "Re(UP(1,0))", "Im(UP(1,0))", "Re(UP(1,1))", "Im(UP(1,1))"};
+
+   const char* input_parameter_names[NUMBER_OF_INPUT_PARAMETERS] = {"MSUSY",
+      "M1Input", "M2Input", "M3Input", "MuInput", "mAInput", "MEWSB", "AtInput",
+      "TanBeta", "msq2(0,0)", "msq2(0,1)", "msq2(0,2)", "msq2(1,0)", "msq2(1,1)",
+      "msq2(1,2)", "msq2(2,0)", "msq2(2,1)", "msq2(2,2)", "msu2(0,0)", "msu2(0,1)"
+      , "msu2(0,2)", "msu2(1,0)", "msu2(1,1)", "msu2(1,2)", "msu2(2,0)",
+      "msu2(2,1)", "msu2(2,2)", "msd2(0,0)", "msd2(0,1)", "msd2(0,2)", "msd2(1,0)"
+      , "msd2(1,1)", "msd2(1,2)", "msd2(2,0)", "msd2(2,1)", "msd2(2,2)",
+      "msl2(0,0)", "msl2(0,1)", "msl2(0,2)", "msl2(1,0)", "msl2(1,1)", "msl2(1,2)"
+      , "msl2(2,0)", "msl2(2,1)", "msl2(2,2)", "mse2(0,0)", "mse2(0,1)",
+      "mse2(0,2)", "mse2(1,0)", "mse2(1,1)", "mse2(1,2)", "mse2(2,0)", "mse2(2,1)"
+      , "mse2(2,2)"};
 
    const char* model_name = "SplitMSSM";
    const bool is_low_energy_model = false;

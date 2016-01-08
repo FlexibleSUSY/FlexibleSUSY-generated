@@ -16,13 +16,83 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:21:58
+// File generated at Fri 8 Jan 2016 12:52:14
 
 #include "lowNMSSM_input_parameters.hpp"
+#include "wrappers.hpp"
 
 #define INPUT(p) input.p
 
 namespace flexiblesusy {
+
+Eigen::ArrayXd lowNMSSM_input_parameters::get() const
+{
+   Eigen::ArrayXd pars(28);
+
+   pars(0) = Qin;
+   pars(1) = M1Input;
+   pars(2) = M2Input;
+   pars(3) = M3Input;
+   pars(4) = AtInput;
+   pars(5) = AbInput;
+   pars(6) = ATauInput;
+   pars(7) = TanBeta;
+   pars(8) = ml1Input;
+   pars(9) = ml2Input;
+   pars(10) = ml3Input;
+   pars(11) = me1Input;
+   pars(12) = me2Input;
+   pars(13) = me3Input;
+   pars(14) = mq1Input;
+   pars(15) = mq2Input;
+   pars(16) = mq3Input;
+   pars(17) = md1Input;
+   pars(18) = md2Input;
+   pars(19) = md3Input;
+   pars(20) = mu1Input;
+   pars(21) = mu2Input;
+   pars(22) = mu3Input;
+   pars(23) = LambdaInput;
+   pars(24) = KappaInput;
+   pars(25) = ALambdaInput;
+   pars(26) = AKappaInput;
+   pars(27) = MuEffInput;
+
+   return pars;
+}
+
+void lowNMSSM_input_parameters::set(const Eigen::ArrayXd& pars)
+{
+   Qin = pars(0);
+   M1Input = pars(1);
+   M2Input = pars(2);
+   M3Input = pars(3);
+   AtInput = pars(4);
+   AbInput = pars(5);
+   ATauInput = pars(6);
+   TanBeta = pars(7);
+   ml1Input = pars(8);
+   ml2Input = pars(9);
+   ml3Input = pars(10);
+   me1Input = pars(11);
+   me2Input = pars(12);
+   me3Input = pars(13);
+   mq1Input = pars(14);
+   mq2Input = pars(15);
+   mq3Input = pars(16);
+   md1Input = pars(17);
+   md2Input = pars(18);
+   md3Input = pars(19);
+   mu1Input = pars(20);
+   mu2Input = pars(21);
+   mu3Input = pars(22);
+   LambdaInput = pars(23);
+   KappaInput = pars(24);
+   ALambdaInput = pars(25);
+   AKappaInput = pars(26);
+   MuEffInput = pars(27);
+
+}
 
 std::ostream& operator<<(std::ostream& ostr, const lowNMSSM_input_parameters& input)
 {

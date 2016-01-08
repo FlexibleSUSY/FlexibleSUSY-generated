@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:15:10
+// File generated at Fri 8 Jan 2016 12:30:18
 
 #include "UMSSM_two_scale_convergence_tester.hpp"
 #include <cmath>
@@ -54,39 +54,39 @@ double UMSSM_convergence_tester<Two_scale>::max_rel_diff() const
    const UMSSM<Two_scale>& ol = get_last_iteration_model();
    const UMSSM<Two_scale>& ne = get_model();
 
-   double diff[39] = { 0 };
+   double diff[42] = { 0 };
 
    diff[0] = MaxRelDiff(OLD(MGlu),NEW(MGlu));
    diff[1] = MaxRelDiff(OLD(MVZp),NEW(MVZp));
    for (unsigned i = 0; i < 6; i++) {
       diff[i + 2] = MaxRelDiff(OLD1(MSd,i),NEW1(MSd,i));
    }
-   for (unsigned i = 0; i < 3; i++) {
+   for (unsigned i = 0; i < 6; i++) {
       diff[i + 8] = MaxRelDiff(OLD1(MSv,i),NEW1(MSv,i));
    }
    for (unsigned i = 0; i < 6; i++) {
-      diff[i + 11] = MaxRelDiff(OLD1(MSu,i),NEW1(MSu,i));
+      diff[i + 14] = MaxRelDiff(OLD1(MSu,i),NEW1(MSu,i));
    }
    for (unsigned i = 0; i < 6; i++) {
-      diff[i + 17] = MaxRelDiff(OLD1(MSe,i),NEW1(MSe,i));
+      diff[i + 20] = MaxRelDiff(OLD1(MSe,i),NEW1(MSe,i));
    }
    for (unsigned i = 0; i < 3; i++) {
-      diff[i + 23] = MaxRelDiff(OLD1(Mhh,i),NEW1(Mhh,i));
+      diff[i + 26] = MaxRelDiff(OLD1(Mhh,i),NEW1(Mhh,i));
    }
    for (unsigned i = 2; i < 3; i++) {
-      diff[i + 26] = MaxRelDiff(OLD1(MAh,i),NEW1(MAh,i));
+      diff[i + 29] = MaxRelDiff(OLD1(MAh,i),NEW1(MAh,i));
    }
    for (unsigned i = 1; i < 2; i++) {
-      diff[i + 29] = MaxRelDiff(OLD1(MHpm,i),NEW1(MHpm,i));
+      diff[i + 32] = MaxRelDiff(OLD1(MHpm,i),NEW1(MHpm,i));
    }
    for (unsigned i = 0; i < 6; i++) {
-      diff[i + 31] = MaxRelDiff(OLD1(MChi,i),NEW1(MChi,i));
+      diff[i + 34] = MaxRelDiff(OLD1(MChi,i),NEW1(MChi,i));
    }
    for (unsigned i = 0; i < 2; i++) {
-      diff[i + 37] = MaxRelDiff(OLD1(MCha,i),NEW1(MCha,i));
+      diff[i + 40] = MaxRelDiff(OLD1(MCha,i),NEW1(MCha,i));
    }
 
-   return *std::max_element(diff, diff + 39);
+   return *std::max_element(diff, diff + 42);
 
 }
 

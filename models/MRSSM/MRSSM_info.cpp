@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:10:13
+// File generated at Fri 8 Jan 2016 12:05:14
 
 #include "MRSSM_info.hpp"
 
@@ -57,6 +57,101 @@ namespace MRSSM_info {
       "mu2(2,0)", "mu2(2,1)", "mu2(2,2)", "me2(0,0)", "me2(0,1)", "me2(0,2)",
       "me2(1,0)", "me2(1,1)", "me2(1,2)", "me2(2,0)", "me2(2,1)", "me2(2,2)",
       "mS2", "mT2", "moc2", "mRd2", "mRu2", "MDBS", "MDWBT", "MDGoc"};
+
+   const char* particle_mixing_names[NUMBER_OF_MIXINGS] = {   "ZD(0,0)",
+      "ZD(0,1)", "ZD(0,2)", "ZD(0,3)", "ZD(0,4)", "ZD(0,5)", "ZD(1,0)", "ZD(1,1)",
+      "ZD(1,2)", "ZD(1,3)", "ZD(1,4)", "ZD(1,5)", "ZD(2,0)", "ZD(2,1)", "ZD(2,2)"
+      , "ZD(2,3)", "ZD(2,4)", "ZD(2,5)", "ZD(3,0)", "ZD(3,1)", "ZD(3,2)",
+      "ZD(3,3)", "ZD(3,4)", "ZD(3,5)", "ZD(4,0)", "ZD(4,1)", "ZD(4,2)", "ZD(4,3)",
+      "ZD(4,4)", "ZD(4,5)", "ZD(5,0)", "ZD(5,1)", "ZD(5,2)", "ZD(5,3)", "ZD(5,4)"
+      , "ZD(5,5)", "ZV(0,0)", "ZV(0,1)", "ZV(0,2)", "ZV(1,0)", "ZV(1,1)",
+      "ZV(1,2)", "ZV(2,0)", "ZV(2,1)", "ZV(2,2)", "ZU(0,0)", "ZU(0,1)", "ZU(0,2)",
+      "ZU(0,3)", "ZU(0,4)", "ZU(0,5)", "ZU(1,0)", "ZU(1,1)", "ZU(1,2)", "ZU(1,3)"
+      , "ZU(1,4)", "ZU(1,5)", "ZU(2,0)", "ZU(2,1)", "ZU(2,2)", "ZU(2,3)",
+      "ZU(2,4)", "ZU(2,5)", "ZU(3,0)", "ZU(3,1)", "ZU(3,2)", "ZU(3,3)", "ZU(3,4)",
+      "ZU(3,5)", "ZU(4,0)", "ZU(4,1)", "ZU(4,2)", "ZU(4,3)", "ZU(4,4)", "ZU(4,5)"
+      , "ZU(5,0)", "ZU(5,1)", "ZU(5,2)", "ZU(5,3)", "ZU(5,4)", "ZU(5,5)",
+      "ZE(0,0)", "ZE(0,1)", "ZE(0,2)", "ZE(0,3)", "ZE(0,4)", "ZE(0,5)", "ZE(1,0)",
+      "ZE(1,1)", "ZE(1,2)", "ZE(1,3)", "ZE(1,4)", "ZE(1,5)", "ZE(2,0)", "ZE(2,1)"
+      , "ZE(2,2)", "ZE(2,3)", "ZE(2,4)", "ZE(2,5)", "ZE(3,0)", "ZE(3,1)",
+      "ZE(3,2)", "ZE(3,3)", "ZE(3,4)", "ZE(3,5)", "ZE(4,0)", "ZE(4,1)", "ZE(4,2)",
+      "ZE(4,3)", "ZE(4,4)", "ZE(4,5)", "ZE(5,0)", "ZE(5,1)", "ZE(5,2)", "ZE(5,3)"
+      , "ZE(5,4)", "ZE(5,5)", "ZH(0,0)", "ZH(0,1)", "ZH(0,2)", "ZH(0,3)",
+      "ZH(1,0)", "ZH(1,1)", "ZH(1,2)", "ZH(1,3)", "ZH(2,0)", "ZH(2,1)", "ZH(2,2)",
+      "ZH(2,3)", "ZH(3,0)", "ZH(3,1)", "ZH(3,2)", "ZH(3,3)", "ZA(0,0)", "ZA(0,1)"
+      , "ZA(0,2)", "ZA(0,3)", "ZA(1,0)", "ZA(1,1)", "ZA(1,2)", "ZA(1,3)",
+      "ZA(2,0)", "ZA(2,1)", "ZA(2,2)", "ZA(2,3)", "ZA(3,0)", "ZA(3,1)", "ZA(3,2)",
+      "ZA(3,3)", "ZHR(0,0)", "ZHR(0,1)", "ZHR(1,0)", "ZHR(1,1)", "ZP(0,0)",
+      "ZP(0,1)", "ZP(0,2)", "ZP(0,3)", "ZP(1,0)", "ZP(1,1)", "ZP(1,2)", "ZP(1,3)",
+      "ZP(2,0)", "ZP(2,1)", "ZP(2,2)", "ZP(2,3)", "ZP(3,0)", "ZP(3,1)", "ZP(3,2)"
+      , "ZP(3,3)", "Re(ZN1(0,0))", "Im(ZN1(0,0))", "Re(ZN1(0,1))", "Im(ZN1(0,1))",
+      "Re(ZN1(0,2))", "Im(ZN1(0,2))", "Re(ZN1(0,3))", "Im(ZN1(0,3))",
+      "Re(ZN1(1,0))", "Im(ZN1(1,0))", "Re(ZN1(1,1))", "Im(ZN1(1,1))",
+      "Re(ZN1(1,2))", "Im(ZN1(1,2))", "Re(ZN1(1,3))", "Im(ZN1(1,3))",
+      "Re(ZN1(2,0))", "Im(ZN1(2,0))", "Re(ZN1(2,1))", "Im(ZN1(2,1))",
+      "Re(ZN1(2,2))", "Im(ZN1(2,2))", "Re(ZN1(2,3))", "Im(ZN1(2,3))",
+      "Re(ZN1(3,0))", "Im(ZN1(3,0))", "Re(ZN1(3,1))", "Im(ZN1(3,1))",
+      "Re(ZN1(3,2))", "Im(ZN1(3,2))", "Re(ZN1(3,3))", "Im(ZN1(3,3))",
+      "Re(ZN2(0,0))", "Im(ZN2(0,0))", "Re(ZN2(0,1))", "Im(ZN2(0,1))",
+      "Re(ZN2(0,2))", "Im(ZN2(0,2))", "Re(ZN2(0,3))", "Im(ZN2(0,3))",
+      "Re(ZN2(1,0))", "Im(ZN2(1,0))", "Re(ZN2(1,1))", "Im(ZN2(1,1))",
+      "Re(ZN2(1,2))", "Im(ZN2(1,2))", "Re(ZN2(1,3))", "Im(ZN2(1,3))",
+      "Re(ZN2(2,0))", "Im(ZN2(2,0))", "Re(ZN2(2,1))", "Im(ZN2(2,1))",
+      "Re(ZN2(2,2))", "Im(ZN2(2,2))", "Re(ZN2(2,3))", "Im(ZN2(2,3))",
+      "Re(ZN2(3,0))", "Im(ZN2(3,0))", "Re(ZN2(3,1))", "Im(ZN2(3,1))",
+      "Re(ZN2(3,2))", "Im(ZN2(3,2))", "Re(ZN2(3,3))", "Im(ZN2(3,3))",
+      "Re(UM1(0,0))", "Im(UM1(0,0))", "Re(UM1(0,1))", "Im(UM1(0,1))",
+      "Re(UM1(1,0))", "Im(UM1(1,0))", "Re(UM1(1,1))", "Im(UM1(1,1))",
+      "Re(UP1(0,0))", "Im(UP1(0,0))", "Re(UP1(0,1))", "Im(UP1(0,1))",
+      "Re(UP1(1,0))", "Im(UP1(1,0))", "Re(UP1(1,1))", "Im(UP1(1,1))",
+      "Re(UM2(0,0))", "Im(UM2(0,0))", "Re(UM2(0,1))", "Im(UM2(0,1))",
+      "Re(UM2(1,0))", "Im(UM2(1,0))", "Re(UM2(1,1))", "Im(UM2(1,1))",
+      "Re(UP2(0,0))", "Im(UP2(0,0))", "Re(UP2(0,1))", "Im(UP2(0,1))",
+      "Re(UP2(1,0))", "Im(UP2(1,0))", "Re(UP2(1,1))", "Im(UP2(1,1))",
+      "Re(ZEL(0,0))", "Im(ZEL(0,0))", "Re(ZEL(0,1))", "Im(ZEL(0,1))",
+      "Re(ZEL(0,2))", "Im(ZEL(0,2))", "Re(ZEL(1,0))", "Im(ZEL(1,0))",
+      "Re(ZEL(1,1))", "Im(ZEL(1,1))", "Re(ZEL(1,2))", "Im(ZEL(1,2))",
+      "Re(ZEL(2,0))", "Im(ZEL(2,0))", "Re(ZEL(2,1))", "Im(ZEL(2,1))",
+      "Re(ZEL(2,2))", "Im(ZEL(2,2))", "Re(ZER(0,0))", "Im(ZER(0,0))",
+      "Re(ZER(0,1))", "Im(ZER(0,1))", "Re(ZER(0,2))", "Im(ZER(0,2))",
+      "Re(ZER(1,0))", "Im(ZER(1,0))", "Re(ZER(1,1))", "Im(ZER(1,1))",
+      "Re(ZER(1,2))", "Im(ZER(1,2))", "Re(ZER(2,0))", "Im(ZER(2,0))",
+      "Re(ZER(2,1))", "Im(ZER(2,1))", "Re(ZER(2,2))", "Im(ZER(2,2))",
+      "Re(ZDL(0,0))", "Im(ZDL(0,0))", "Re(ZDL(0,1))", "Im(ZDL(0,1))",
+      "Re(ZDL(0,2))", "Im(ZDL(0,2))", "Re(ZDL(1,0))", "Im(ZDL(1,0))",
+      "Re(ZDL(1,1))", "Im(ZDL(1,1))", "Re(ZDL(1,2))", "Im(ZDL(1,2))",
+      "Re(ZDL(2,0))", "Im(ZDL(2,0))", "Re(ZDL(2,1))", "Im(ZDL(2,1))",
+      "Re(ZDL(2,2))", "Im(ZDL(2,2))", "Re(ZDR(0,0))", "Im(ZDR(0,0))",
+      "Re(ZDR(0,1))", "Im(ZDR(0,1))", "Re(ZDR(0,2))", "Im(ZDR(0,2))",
+      "Re(ZDR(1,0))", "Im(ZDR(1,0))", "Re(ZDR(1,1))", "Im(ZDR(1,1))",
+      "Re(ZDR(1,2))", "Im(ZDR(1,2))", "Re(ZDR(2,0))", "Im(ZDR(2,0))",
+      "Re(ZDR(2,1))", "Im(ZDR(2,1))", "Re(ZDR(2,2))", "Im(ZDR(2,2))",
+      "Re(ZUL(0,0))", "Im(ZUL(0,0))", "Re(ZUL(0,1))", "Im(ZUL(0,1))",
+      "Re(ZUL(0,2))", "Im(ZUL(0,2))", "Re(ZUL(1,0))", "Im(ZUL(1,0))",
+      "Re(ZUL(1,1))", "Im(ZUL(1,1))", "Re(ZUL(1,2))", "Im(ZUL(1,2))",
+      "Re(ZUL(2,0))", "Im(ZUL(2,0))", "Re(ZUL(2,1))", "Im(ZUL(2,1))",
+      "Re(ZUL(2,2))", "Im(ZUL(2,2))", "Re(ZUR(0,0))", "Im(ZUR(0,0))",
+      "Re(ZUR(0,1))", "Im(ZUR(0,1))", "Re(ZUR(0,2))", "Im(ZUR(0,2))",
+      "Re(ZUR(1,0))", "Im(ZUR(1,0))", "Re(ZUR(1,1))", "Im(ZUR(1,1))",
+      "Re(ZUR(1,2))", "Im(ZUR(1,2))", "Re(ZUR(2,0))", "Im(ZUR(2,0))",
+      "Re(ZUR(2,1))", "Im(ZUR(2,1))", "Re(ZUR(2,2))", "Im(ZUR(2,2))"};
+
+   const char* input_parameter_names[NUMBER_OF_INPUT_PARAMETERS] = {"TanBeta",
+      "LamTDInput", "LamTUInput", "LamSDInput", "LamSUInput", "MuInput",
+      "MuDInput", "MuUInput", "vTInput", "vSInput", "BMuInput", "BMuDInput",
+      "BMuUInput", "mq2Input(0,0)", "mq2Input(0,1)", "mq2Input(0,2)",
+      "mq2Input(1,0)", "mq2Input(1,1)", "mq2Input(1,2)", "mq2Input(2,0)",
+      "mq2Input(2,1)", "mq2Input(2,2)", "ml2Input(0,0)", "ml2Input(0,1)",
+      "ml2Input(0,2)", "ml2Input(1,0)", "ml2Input(1,1)", "ml2Input(1,2)",
+      "ml2Input(2,0)", "ml2Input(2,1)", "ml2Input(2,2)", "md2Input(0,0)",
+      "md2Input(0,1)", "md2Input(0,2)", "md2Input(1,0)", "md2Input(1,1)",
+      "md2Input(1,2)", "md2Input(2,0)", "md2Input(2,1)", "md2Input(2,2)",
+      "mu2Input(0,0)", "mu2Input(0,1)", "mu2Input(0,2)", "mu2Input(1,0)",
+      "mu2Input(1,1)", "mu2Input(1,2)", "mu2Input(2,0)", "mu2Input(2,1)",
+      "mu2Input(2,2)", "me2Input(0,0)", "me2Input(0,1)", "me2Input(0,2)",
+      "me2Input(1,0)", "me2Input(1,1)", "me2Input(1,2)", "me2Input(2,0)",
+      "me2Input(2,1)", "me2Input(2,2)", "moc2Input", "mRd2Input", "mRu2Input",
+      "MDBSInput", "MDWBTInput", "MDGocInput"};
 
    const char* model_name = "MRSSM";
    const bool is_low_energy_model = true;

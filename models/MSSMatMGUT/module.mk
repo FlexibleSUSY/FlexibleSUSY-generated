@@ -37,6 +37,7 @@ LIBMSSMatMGUT_SRC += \
 		$(DIR)/MSSMatMGUT_mass_eigenstates.cpp \
 		$(DIR)/MSSMatMGUT_info.cpp \
 		$(DIR)/MSSMatMGUT_input_parameters.cpp \
+		$(DIR)/MSSMatMGUT_observables.cpp \
 		$(DIR)/MSSMatMGUT_slha_io.cpp \
 		$(DIR)/MSSMatMGUT_physical.cpp \
 		$(DIR)/MSSMatMGUT_utilities.cpp \
@@ -63,6 +64,7 @@ LIBMSSMatMGUT_HDR += \
 		$(DIR)/MSSMatMGUT_low_scale_constraint.hpp \
 		$(DIR)/MSSMatMGUT_model.hpp \
 		$(DIR)/MSSMatMGUT_model_slha.hpp \
+		$(DIR)/MSSMatMGUT_observables.hpp \
 		$(DIR)/MSSMatMGUT_physical.hpp \
 		$(DIR)/MSSMatMGUT_slha_io.hpp \
 		$(DIR)/MSSMatMGUT_spectrum_generator_interface.hpp \
@@ -227,7 +229,7 @@ $(LIBMSSMatMGUT): $(LIBMSSMatMGUT_OBJ)
 		$(MAKELIB) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBMSSMatMGUT) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(LDLIBS)
 
 ALLDEP += $(LIBMSSMatMGUT_DEP) $(EXEMSSMatMGUT_DEP)
 ALLSRC += $(LIBMSSMatMGUT_SRC) $(EXEMSSMatMGUT_SRC)

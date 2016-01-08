@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:30:07
+// File generated at Fri 8 Jan 2016 13:20:02
 
 #ifndef MSSMNoFVatMGUT_INFO_H
 #define MSSMNoFVatMGUT_INFO_H
@@ -42,6 +42,22 @@ namespace MSSMNoFVatMGUT_info {
       , me202, me210, me211, me212, me220, me221, me222, MassB, MassWB, MassG,
       NUMBER_OF_PARAMETERS};
 
+   enum Mixings : unsigned {ZD00, ZD01, ZD10, ZD11, ZU00, ZU01, ZU10, ZU11,
+      ZE00, ZE01, ZE10, ZE11, ZM00, ZM01, ZM10, ZM11, ZTau00, ZTau01, ZTau10,
+      ZTau11, ZS00, ZS01, ZS10, ZS11, ZC00, ZC01, ZC10, ZC11, ZB00, ZB01, ZB10,
+      ZB11, ZT00, ZT01, ZT10, ZT11, ZH00, ZH01, ZH10, ZH11, ZA00, ZA01, ZA10, ZA11
+      , ZP00, ZP01, ZP10, ZP11, ReZN00, ImZN00, ReZN01, ImZN01, ReZN02, ImZN02,
+      ReZN03, ImZN03, ReZN10, ImZN10, ReZN11, ImZN11, ReZN12, ImZN12, ReZN13,
+      ImZN13, ReZN20, ImZN20, ReZN21, ImZN21, ReZN22, ImZN22, ReZN23, ImZN23,
+      ReZN30, ImZN30, ReZN31, ImZN31, ReZN32, ImZN32, ReZN33, ImZN33, ReUM00,
+      ImUM00, ReUM01, ImUM01, ReUM10, ImUM10, ReUM11, ImUM11, ReUP00, ImUP00,
+      ReUP01, ImUP01, ReUP10, ImUP10, ReUP11, ImUP11, NUMBER_OF_MIXINGS};
+
+   enum Input_parameters : unsigned {TanBeta, SignMu, M1, M2, M3, AtIN, AbIN,
+      AtauIN, AcIN, AsIN, AmuonIN, AuIN, AdIN, AeIN, mHd2IN, mHu2IN, ml11IN,
+      ml22IN, ml33IN, me11IN, me22IN, me33IN, mq11IN, mq22IN, mq33IN, mu11IN,
+      mu22IN, mu33IN, md11IN, md22IN, md33IN, NUMBER_OF_INPUT_PARAMETERS};
+
    extern const double normalization_g1;
    extern const double normalization_g2;
    extern const double normalization_g3;
@@ -50,6 +66,8 @@ namespace MSSMNoFVatMGUT_info {
    extern const char* particle_names[NUMBER_OF_PARTICLES];
    extern const char* particle_latex_names[NUMBER_OF_PARTICLES];
    extern const char* parameter_names[NUMBER_OF_PARAMETERS];
+   extern const char* particle_mixing_names[NUMBER_OF_MIXINGS];
+   extern const char* input_parameter_names[NUMBER_OF_INPUT_PARAMETERS];
    extern const char* model_name;
    extern const bool is_low_energy_model;
    extern const bool is_supersymmetric_model;

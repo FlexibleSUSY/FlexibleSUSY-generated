@@ -16,13 +16,47 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:15:04
+// File generated at Fri 8 Jan 2016 12:30:58
 
 #include "E6SSM_input_parameters.hpp"
+#include "wrappers.hpp"
 
 #define INPUT(p) input.p
 
 namespace flexiblesusy {
+
+Eigen::ArrayXd E6SSM_input_parameters::get() const
+{
+   Eigen::ArrayXd pars(10);
+
+   pars(0) = m0;
+   pars(1) = m12;
+   pars(2) = TanBeta;
+   pars(3) = Azero;
+   pars(4) = LambdaInput;
+   pars(5) = KappaInput;
+   pars(6) = muPrimeInput;
+   pars(7) = BmuPrimeInput;
+   pars(8) = vSInput;
+   pars(9) = Lambda12Input;
+
+   return pars;
+}
+
+void E6SSM_input_parameters::set(const Eigen::ArrayXd& pars)
+{
+   m0 = pars(0);
+   m12 = pars(1);
+   TanBeta = pars(2);
+   Azero = pars(3);
+   LambdaInput = pars(4);
+   KappaInput = pars(5);
+   muPrimeInput = pars(6);
+   BmuPrimeInput = pars(7);
+   vSInput = pars(8);
+   Lambda12Input = pars(9);
+
+}
 
 std::ostream& operator<<(std::ostream& ostr, const E6SSM_input_parameters& input)
 {

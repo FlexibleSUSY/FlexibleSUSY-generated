@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:07:54
+// File generated at Fri 8 Jan 2016 11:44:21
 
 #include "SM_input_parameters.hpp"
 #include "SM_spectrum_generator.hpp"
@@ -39,6 +39,7 @@ void print_usage()
       "Options:\n"
       "  --LambdaIN=<value>\n"
       "  --Qin=<value>\n"
+      "  --QEWSB=<value>\n"
 
       "  --help,-h                         print this help message"
              << std::endl;
@@ -54,6 +55,9 @@ void set_command_line_parameters(int argc, char* argv[],
          continue;
 
       if(Command_line_options::get_parameter_value(option, "--Qin=", input.Qin))
+         continue;
+
+      if(Command_line_options::get_parameter_value(option, "--QEWSB=", input.QEWSB))
          continue;
 
       
@@ -78,8 +82,8 @@ int main(int argc, char* argv[])
    SM_input_parameters input;
    set_command_line_parameters(argc, argv, input);
 
-   softsusy::QedQcd oneset;
-   oneset.toMz();
+   softsusy::QedQcd qedqcd;
+   qedqcd.toMz();
 
    SM_spectrum_generator<algorithm_type> spectrum_generator;
    spectrum_generator.set_precision_goal(1.0e-4);
@@ -99,7 +103,7 @@ int main(int argc, char* argv[])
            end = range.end(); it != end; ++it) {
       input.LambdaIN = *it;
 
-      spectrum_generator.run(oneset, input);
+      spectrum_generator.run(qedqcd, input);
 
       const SM_slha<algorithm_type> model(spectrum_generator.get_model());
       const SM_physical& pole_masses = model.get_physical_slha();

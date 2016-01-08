@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:07:14
+// File generated at Fri 8 Jan 2016 11:56:23
 
 #include "SplitMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -25,6 +25,42 @@ namespace flexiblesusy {
 
 #define INPUT(parameter) input.parameter
 #define TRACE_STRUCT soft_traces
+
+namespace {
+
+template <typename Derived>
+typename Eigen::MatrixBase<Derived>::PlainObject operator+(const Eigen::MatrixBase<Derived>& m, double n)
+{
+   return m + Eigen::Matrix<double,
+                            Eigen::MatrixBase<Derived>::RowsAtCompileTime,
+                            Eigen::MatrixBase<Derived>::ColsAtCompileTime>::Identity() * n;
+}
+
+template <typename Derived>
+typename Eigen::MatrixBase<Derived>::PlainObject operator+(double n, const Eigen::MatrixBase<Derived>& m)
+{
+   return m + Eigen::Matrix<double,
+                            Eigen::MatrixBase<Derived>::RowsAtCompileTime,
+                            Eigen::MatrixBase<Derived>::ColsAtCompileTime>::Identity() * n;
+}
+
+template <typename Derived>
+typename Eigen::MatrixBase<Derived>::PlainObject operator-(const Eigen::MatrixBase<Derived>& m, double n)
+{
+   return m - Eigen::Matrix<double,
+                            Eigen::MatrixBase<Derived>::RowsAtCompileTime,
+                            Eigen::MatrixBase<Derived>::ColsAtCompileTime>::Identity() * n;
+}
+
+template <typename Derived>
+typename Eigen::MatrixBase<Derived>::PlainObject operator-(double n, const Eigen::MatrixBase<Derived>& m)
+{
+   return - m + Eigen::Matrix<double,
+                            Eigen::MatrixBase<Derived>::RowsAtCompileTime,
+                            Eigen::MatrixBase<Derived>::ColsAtCompileTime>::Identity() * n;
+}
+
+} // anonymous namespace
 
 /**
  * Calculates the one-loop beta function of mu2.
@@ -70,10 +106,10 @@ double SplitMSSM_soft_parameters::calc_beta_mu2_two_loop(const Soft_traces& soft
 
    double beta_mu2;
 
-   beta_mu2 = Re(twoLoop*(4.4775*Power(g1,4)*mu2 - 1.5625*Power(g2,4)*mu2
-      - 5.625*Power(g2d,4)*mu2 - 5.625*Power(g2u,4)*mu2 - 1.125*Power(gYd,4)*
-      mu2 + 6*g2d*g2u*gYd*gYu*mu2 - 1.125*Power(gYu,4)*mu2 - 13.5*mu2*
-      traceYdAdjYdYdAdjYd - 21*mu2*traceYdAdjYuYuAdjYd - 4.5*mu2*
+   const double beta_mu2_1 = Re(twoLoop*(4.4775*Power(g1,4)*mu2 - 1.5625*
+      Power(g2,4)*mu2 - 5.625*Power(g2d,4)*mu2 - 5.625*Power(g2u,4)*mu2 - 1.125
+      *Power(gYd,4)*mu2 + 6*g2d*g2u*gYd*gYu*mu2 - 1.125*Power(gYu,4)*mu2 - 13.5
+      *mu2*traceYdAdjYdYdAdjYd - 21*mu2*traceYdAdjYuYuAdjYd - 4.5*mu2*
       traceYeAdjYeYeAdjYe - 13.5*mu2*traceYuAdjYuYuAdjYu - 36*mu2*traceYdAdjYd*
       Lambdax - 12*mu2*traceYeAdjYe*Lambdax - 36*mu2*traceYuAdjYu*Lambdax - 9.5
       *Power(gYd,3)*gYu*MassB*Mu - 9.5*gYd*Power(gYu,3)*MassB*Mu - 25.5*Power(
@@ -91,30 +127,34 @@ double SplitMSSM_soft_parameters::calc_beta_mu2_two_loop(const Soft_traces& soft
       Sqr(g2)*Sqr(g2u) - 7.5*mu2*Sqr(g2d)*Sqr(g2u) + 40*mu2*traceYdAdjYd*Sqr(g3
       ) + 40*mu2*traceYuAdjYu*Sqr(g3) - 6*mu2*Lambdax*Sqr(gYd) - 6*g2d*g2u*
       MassB*Mu*Sqr(gYd) - 4.5*g2d*g2u*MassWB*Mu*Sqr(gYd) + 0.375*mu2*Sqr(g1)*
-      Sqr(gYd) + 1.875*mu2*Sqr(g2)*Sqr(gYd) - 2.25*mu2*Sqr(g2d)*Sqr(gYd) - 6*
-      mu2*Lambdax*Sqr(gYu) - 6*g2d*g2u*MassB*Mu*Sqr(gYu) - 4.5*g2d*g2u*MassWB*
-      Mu*Sqr(gYu) + 0.375*mu2*Sqr(g1)*Sqr(gYu) + 1.875*mu2*Sqr(g2)*Sqr(gYu) -
-      2.25*mu2*Sqr(g2u)*Sqr(gYu) - 0.5*mu2*Sqr(gYd)*Sqr(gYu) - 0.1*Conj(MassB)*
-      (55*Power(gYd,4)*MassB + 95*Power(gYd,3)*gYu*Mu + 15*gYd*(3*gYd*MassB + 2
-      *gYd*MassWB + 3*gYu*Mu)*Sqr(g2d) + 120*MassB*Sqr(gYd)*Sqr(gYu) + gYd*gYu*
-      Mu*(60*Lambdax - 3*Sqr(g1) - 15*Sqr(g2) + 45*Sqr(g2u) + 95*Sqr(gYu)) + 5*
-      Sqr(gYu)*((9*MassB + 6*MassWB)*Sqr(g2u) + 11*MassB*Sqr(gYu)) + 60*g2d*g2u
-      *(gYd*gYu*(2*MassB + MassWB) + Mu*Sqr(gYd) + Mu*Sqr(gYu))) - 0.3*Conj(
-      MassWB)*(65*Power(g2d,4)*MassWB + 85*Power(g2d,3)*g2u*Mu + 5*Sqr(g2d)*(4*
-      gYd*gYu*Mu + 8*MassWB*(-3*Sqr(g2) + 2*Sqr(g2u)) + (2*MassB + 3*MassWB)*
-      Sqr(gYd)) + g2d*g2u*(20*gYd*gYu*(MassB + 2*MassWB) + 15*Mu*Sqr(gYd) + Mu*
-      (60*Lambdax - 3*Sqr(g1) - 95*Sqr(g2) + 85*Sqr(g2u) + 15*Sqr(gYu))) + 5*(
-      -24*Power(g2,4)*MassWB + 13*Power(g2u,4)*MassWB + Sqr(g2u)*(4*gYd*gYu*Mu
-      - 24*MassWB*Sqr(g2) + (2*MassB + 3*MassWB)*Sqr(gYu)))) - 15*mu2*Sqr(
-      Lambdax) + 2.16*Power(g1,4)*Sqr(Mu) + 18*Power(g2,4)*Sqr(Mu) - 18*Power(
-      g2d,4)*Sqr(Mu) - 18*Power(g2u,4)*Sqr(Mu) - 4*Power(gYd,4)*Sqr(Mu) - 36*
-      g2d*g2u*gYd*gYu*Sqr(Mu) - 4*Power(gYu,4)*Sqr(Mu) + 1.8*Sqr(g1)*Sqr(g2d)*
-      Sqr(Mu) + 21*Sqr(g2)*Sqr(g2d)*Sqr(Mu) + 1.8*Sqr(g1)*Sqr(g2u)*Sqr(Mu) + 21
-      *Sqr(g2)*Sqr(g2u)*Sqr(Mu) - 33*Sqr(g2d)*Sqr(g2u)*Sqr(Mu) + 0.6*Sqr(g1)*
-      Sqr(gYd)*Sqr(Mu) + 3*Sqr(g2)*Sqr(gYd)*Sqr(Mu) - 6*Sqr(g2d)*Sqr(gYd)*Sqr(
-      Mu) - 3*Sqr(g2u)*Sqr(gYd)*Sqr(Mu) + 0.6*Sqr(g1)*Sqr(gYu)*Sqr(Mu) + 3*Sqr(
-      g2)*Sqr(gYu)*Sqr(Mu) - 3*Sqr(g2d)*Sqr(gYu)*Sqr(Mu) - 6*Sqr(g2u)*Sqr(gYu)*
-      Sqr(Mu) - 21*Sqr(gYd)*Sqr(gYu)*Sqr(Mu)));
+      Sqr(gYd) + 1.875*mu2*Sqr(g2)*Sqr(gYd) - 2.25*mu2*Sqr(g2d)*Sqr(gYd) - 3*
+      MassB*Conj(MassWB)*Sqr(g2d)*Sqr(gYd) - 6*mu2*Lambdax*Sqr(gYu) - 6*g2d*g2u
+      *MassB*Mu*Sqr(gYu) - 4.5*g2d*g2u*MassWB*Mu*Sqr(gYu) + 0.375*mu2*Sqr(g1)*
+      Sqr(gYu) + 1.875*mu2*Sqr(g2)*Sqr(gYu) - 2.25*mu2*Sqr(g2u)*Sqr(gYu) - 0.5*
+      mu2*Sqr(gYd)*Sqr(gYu) - 0.1*Conj(MassB)*(55*Power(gYd,4)*MassB + 95*Power
+      (gYd,3)*gYu*Mu + 15*gYd*(3*gYd*MassB + 2*gYd*MassWB + 3*gYu*Mu)*Sqr(g2d)
+      + 120*MassB*Sqr(gYd)*Sqr(gYu) + gYd*gYu*Mu*(60*Lambdax - 3*Sqr(g1) - 15*
+      Sqr(g2) + 45*Sqr(g2u) + 95*Sqr(gYu)) + 5*Sqr(gYu)*((9*MassB + 6*MassWB)*
+      Sqr(g2u) + 11*MassB*Sqr(gYu)) + 60*g2d*g2u*(gYd*gYu*(2*MassB + MassWB) +
+      Mu*Sqr(gYd) + Mu*Sqr(gYu))) - 15*mu2*Sqr(Lambdax) + 2.16*Power(g1,4)*Sqr(
+      Mu) + 18*Power(g2,4)*Sqr(Mu) - 18*Power(g2d,4)*Sqr(Mu) - 18*Power(g2u,4)*
+      Sqr(Mu) - 4*Power(gYd,4)*Sqr(Mu) - 36*g2d*g2u*gYd*gYu*Sqr(Mu) - 4*Power(
+      gYu,4)*Sqr(Mu) + 1.8*Sqr(g1)*Sqr(g2d)*Sqr(Mu) + 21*Sqr(g2)*Sqr(g2d)*Sqr(
+      Mu) + 1.8*Sqr(g1)*Sqr(g2u)*Sqr(Mu) + 21*Sqr(g2)*Sqr(g2u)*Sqr(Mu) - 33*Sqr
+      (g2d)*Sqr(g2u)*Sqr(Mu) + 0.6*Sqr(g1)*Sqr(gYd)*Sqr(Mu) + 3*Sqr(g2)*Sqr(gYd
+      )*Sqr(Mu) - 6*Sqr(g2d)*Sqr(gYd)*Sqr(Mu) - 3*Sqr(g2u)*Sqr(gYd)*Sqr(Mu) +
+      0.6*Sqr(g1)*Sqr(gYu)*Sqr(Mu) + 3*Sqr(g2)*Sqr(gYu)*Sqr(Mu) - 3*Sqr(g2d)*
+      Sqr(gYu)*Sqr(Mu) - 6*Sqr(g2u)*Sqr(gYu)*Sqr(Mu) - 21*Sqr(gYd)*Sqr(gYu)*Sqr
+      (Mu)));
+   const double beta_mu2_2 = Re(-0.3*twoLoop*Conj(MassWB)*(65*Power(g2d,4
+      )*MassWB + 85*Power(g2d,3)*g2u*Mu + 5*Sqr(g2d)*(4*gYd*gYu*Mu - 24*MassWB*
+      Sqr(g2) + 16*MassWB*Sqr(g2u) + 3*MassWB*Sqr(gYd)) + g2d*g2u*(20*gYd*gYu*(
+      MassB + 2*MassWB) + 15*Mu*Sqr(gYd) + Mu*(60*Lambdax - 3*Sqr(g1) - 95*Sqr(
+      g2) + 85*Sqr(g2u) + 15*Sqr(gYu))) + 5*(-24*Power(g2,4)*MassWB + 13*Power(
+      g2u,4)*MassWB + Sqr(g2u)*(4*gYd*gYu*Mu - 24*MassWB*Sqr(g2) + (2*MassB + 3
+      *MassWB)*Sqr(gYu)))));
+
+   beta_mu2 = beta_mu2_1 + beta_mu2_2;
 
 
    return beta_mu2;

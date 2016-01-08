@@ -37,6 +37,7 @@ LIBSplitMSSM_SRC += \
 		$(DIR)/SplitMSSM_mass_eigenstates.cpp \
 		$(DIR)/SplitMSSM_info.cpp \
 		$(DIR)/SplitMSSM_input_parameters.cpp \
+		$(DIR)/SplitMSSM_observables.cpp \
 		$(DIR)/SplitMSSM_slha_io.cpp \
 		$(DIR)/SplitMSSM_physical.cpp \
 		$(DIR)/SplitMSSM_utilities.cpp \
@@ -63,6 +64,7 @@ LIBSplitMSSM_HDR += \
 		$(DIR)/SplitMSSM_low_scale_constraint.hpp \
 		$(DIR)/SplitMSSM_model.hpp \
 		$(DIR)/SplitMSSM_model_slha.hpp \
+		$(DIR)/SplitMSSM_observables.hpp \
 		$(DIR)/SplitMSSM_physical.hpp \
 		$(DIR)/SplitMSSM_slha_io.hpp \
 		$(DIR)/SplitMSSM_spectrum_generator_interface.hpp \
@@ -227,7 +229,7 @@ $(LIBSplitMSSM): $(LIBSplitMSSM_OBJ)
 		$(MAKELIB) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBSplitMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(LDLIBS)
 
 ALLDEP += $(LIBSplitMSSM_DEP) $(EXESplitMSSM_DEP)
 ALLSRC += $(LIBSplitMSSM_SRC) $(EXESplitMSSM_SRC)

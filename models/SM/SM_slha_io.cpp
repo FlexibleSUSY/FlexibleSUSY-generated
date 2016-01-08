@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:07:43
+// File generated at Fri 8 Jan 2016 11:44:13
 
 #include "SM_slha_io.hpp"
 #include "SM_input_parameters.hpp"
@@ -70,6 +70,7 @@ void SM_slha_io::set_extpar(const SM_input_parameters& input)
 
    extpar << "Block EXTPAR\n";
    extpar << FORMAT_ELEMENT(0, input.Qin, "Qin");
+   extpar << FORMAT_ELEMENT(1, input.QEWSB, "QEWSB");
    slha_io.set_block(extpar);
 
 }
@@ -353,6 +354,7 @@ void SM_slha_io::fill_extpar_tuple(SM_input_parameters& input,
 {
    switch (key) {
    case 0: input.Qin = value; break;
+   case 1: input.QEWSB = value; break;
    default: WARNING("Unrecognized entry in block EXTPAR: " << key); break;
    }
 

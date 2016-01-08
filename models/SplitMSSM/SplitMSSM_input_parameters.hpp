@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:07:15
+// File generated at Fri 8 Jan 2016 11:56:23
 
 #ifndef SplitMSSM_INPUT_PARAMETERS_H
 #define SplitMSSM_INPUT_PARAMETERS_H
@@ -50,6 +50,9 @@ struct SplitMSSM_input_parameters {
    double,3,3>::Zero())
 
    {}
+
+   Eigen::ArrayXd get() const;
+   void set(const Eigen::ArrayXd&);
 };
 
 std::ostream& operator<<(std::ostream&, const SplitMSSM_input_parameters&);

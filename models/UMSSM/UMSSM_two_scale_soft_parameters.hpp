@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:14:43
+// File generated at Fri 8 Jan 2016 12:29:26
 
 #ifndef UMSSM_TWO_SCALE_soft_parameters_H
 #define UMSSM_TWO_SCALE_soft_parameters_H
@@ -36,11 +36,13 @@ class UMSSM_soft_parameters : public UMSSM_susy_parameters {
 public:
    explicit UMSSM_soft_parameters(const UMSSM_input_parameters& input_ = UMSSM_input_parameters());
    UMSSM_soft_parameters(const UMSSM_susy_parameters& , const Eigen::Matrix<double,3,3>& TYd_, const Eigen::Matrix<double,3,3>&
-   TYe_, double TLambdax_, const Eigen::Matrix<double,3,3>& TYu_, const
-   Eigen::Matrix<double,3,3>& mq2_, const Eigen::Matrix<double,3,3>& ml2_,
-   double mHd2_, double mHu2_, const Eigen::Matrix<double,3,3>& md2_, const
-   Eigen::Matrix<double,3,3>& mu2_, const Eigen::Matrix<double,3,3>& me2_,
-   double ms2_, double MassB_, double MassWB_, double MassG_, double MassU_
+   TYe_, double TLambdax_, const Eigen::Matrix<double,3,3>& TYv_, const
+   Eigen::Matrix<double,3,3>& TYu_, const Eigen::Matrix<double,3,3>& mq2_,
+   const Eigen::Matrix<double,3,3>& ml2_, double mHd2_, double mHu2_, const
+   Eigen::Matrix<double,3,3>& md2_, const Eigen::Matrix<double,3,3>& mu2_,
+   const Eigen::Matrix<double,3,3>& me2_, const Eigen::Matrix<double,3,3>&
+   mvR2_, double ms2_, double MassB_, double MassWB_, double MassG_, double
+   MassU_
 );
    virtual ~UMSSM_soft_parameters() {}
    virtual Eigen::ArrayXd beta() const;
@@ -56,6 +58,8 @@ public:
    void set_TYe(const Eigen::Matrix<double,3,3>& TYe_) { TYe = TYe_; }
    void set_TYe(int i, int k, double value) { TYe(i,k) = value; }
    void set_TLambdax(double TLambdax_) { TLambdax = TLambdax_; }
+   void set_TYv(const Eigen::Matrix<double,3,3>& TYv_) { TYv = TYv_; }
+   void set_TYv(int i, int k, double value) { TYv(i,k) = value; }
    void set_TYu(const Eigen::Matrix<double,3,3>& TYu_) { TYu = TYu_; }
    void set_TYu(int i, int k, double value) { TYu(i,k) = value; }
    void set_mq2(const Eigen::Matrix<double,3,3>& mq2_) { mq2 = mq2_; }
@@ -70,6 +74,8 @@ public:
    void set_mu2(int i, int k, double value) { mu2(i,k) = value; }
    void set_me2(const Eigen::Matrix<double,3,3>& me2_) { me2 = me2_; }
    void set_me2(int i, int k, double value) { me2(i,k) = value; }
+   void set_mvR2(const Eigen::Matrix<double,3,3>& mvR2_) { mvR2 = mvR2_; }
+   void set_mvR2(int i, int k, double value) { mvR2(i,k) = value; }
    void set_ms2(double ms2_) { ms2 = ms2_; }
    void set_MassB(double MassB_) { MassB = MassB_; }
    void set_MassWB(double MassWB_) { MassWB = MassWB_; }
@@ -81,6 +87,8 @@ public:
    const Eigen::Matrix<double,3,3>& get_TYe() const { return TYe; }
    double get_TYe(int i, int k) const { return TYe(i,k); }
    double get_TLambdax() const { return TLambdax; }
+   const Eigen::Matrix<double,3,3>& get_TYv() const { return TYv; }
+   double get_TYv(int i, int k) const { return TYv(i,k); }
    const Eigen::Matrix<double,3,3>& get_TYu() const { return TYu; }
    double get_TYu(int i, int k) const { return TYu(i,k); }
    const Eigen::Matrix<double,3,3>& get_mq2() const { return mq2; }
@@ -95,6 +103,8 @@ public:
    double get_mu2(int i, int k) const { return mu2(i,k); }
    const Eigen::Matrix<double,3,3>& get_me2() const { return me2; }
    double get_me2(int i, int k) const { return me2(i,k); }
+   const Eigen::Matrix<double,3,3>& get_mvR2() const { return mvR2; }
+   double get_mvR2(int i, int k) const { return mvR2(i,k); }
    double get_ms2() const { return ms2; }
    double get_MassB() const { return MassB; }
    double get_MassWB() const { return MassWB; }
@@ -106,6 +116,7 @@ protected:
    Eigen::Matrix<double,3,3> TYd;
    Eigen::Matrix<double,3,3> TYe;
    double TLambdax;
+   Eigen::Matrix<double,3,3> TYv;
    Eigen::Matrix<double,3,3> TYu;
    Eigen::Matrix<double,3,3> mq2;
    Eigen::Matrix<double,3,3> ml2;
@@ -114,6 +125,7 @@ protected:
    Eigen::Matrix<double,3,3> md2;
    Eigen::Matrix<double,3,3> mu2;
    Eigen::Matrix<double,3,3> me2;
+   Eigen::Matrix<double,3,3> mvR2;
    double ms2;
    double MassB;
    double MassWB;
@@ -122,7 +134,7 @@ protected:
 
 
 private:
-   static const int numberOfParameters = 115;
+   static const int numberOfParameters = 142;
 
    struct Soft_traces {
       double traceAdjYdTYd;
@@ -130,16 +142,23 @@ private:
       double traceYdAdjYd;
       double traceYeAdjYe;
       double traceYuAdjYu;
+      double traceYvAdjYv;
       double traceAdjYuTYu;
+      double traceAdjYvTYv;
       double traceYdAdjYdTYdAdjYd;
       double traceYdAdjYuTYuAdjYd;
       double traceYeAdjYeTYeAdjYe;
       double traceYuAdjYdTYdAdjYu;
+      double traceAdjYeTYeconjYvTpYv;
+      double traceAdjYvTpYeconjYeTYv;
       double traceYdAdjYdYdAdjYd;
       double traceYdAdjYuYuAdjYd;
       double traceYeAdjYeYeAdjYe;
+      double traceYvAdjYvTpYeconjYe;
       double traceYuAdjYuYuAdjYu;
+      double traceYvAdjYvYvAdjYv;
       double traceYuAdjYuTYuAdjYu;
+      double traceYvAdjYvTYvAdjYv;
       double traceconjTYdTpTYd;
       double traceconjTYeTpTYe;
       double tracemd2YdAdjYd;
@@ -149,17 +168,25 @@ private:
       double traceconjTYdTpYd;
       double traceconjTYeTpYe;
       double traceconjTYuTpTYu;
+      double traceconjTYvTpTYv;
       double tracemq2AdjYuYu;
       double tracemu2YuAdjYu;
+      double traceYvAdjYvconjml2;
+      double traceYvconjmvR2AdjYv;
       double traceconjTYuTpYu;
+      double traceconjTYvTpYv;
       double traceYdAdjYdTYdAdjTYd;
       double traceYdAdjYuTYuAdjTYd;
       double traceYdAdjTYdTYdAdjYd;
       double traceYdAdjTYuTYuAdjYd;
       double traceYeAdjYeTYeAdjTYe;
       double traceYeAdjTYeTYeAdjYe;
+      double traceYeconjTYvTpTYvAdjYe;
       double traceYuAdjYdTYdAdjTYu;
       double traceYuAdjTYdTYdAdjYu;
+      double traceYvAdjYvTpTYeconjTYe;
+      double traceAdjYeTYeconjTYvTpYv;
+      double traceAdjYvTpYeconjTYeTYv;
       double tracemd2YdAdjYdYdAdjYd;
       double tracemd2YdAdjYuYuAdjYd;
       double traceme2YeAdjYeYeAdjYe;
@@ -168,10 +195,20 @@ private:
       double tracemq2AdjYdYdAdjYuYu;
       double tracemq2AdjYuYuAdjYdYd;
       double tracemu2YuAdjYdYdAdjYu;
+      double traceYvAdjYvconjml2TpYeconjYe;
+      double traceYvAdjYvTpYeconjme2conjYe;
+      double traceYvAdjYvTpYeconjYeconjml2;
+      double traceYvconjmvR2AdjYvTpYeconjYe;
       double traceYuAdjYuTYuAdjTYu;
       double traceYuAdjTYuTYuAdjYu;
+      double traceYvAdjYvTYvAdjTYv;
+      double traceYvAdjTYvTYvAdjYv;
       double tracemq2AdjYuYuAdjYuYu;
       double tracemu2YuAdjYuYuAdjYu;
+      double traceYvAdjYvYvAdjYvconjml2;
+      double traceYvAdjYvYvconjmvR2AdjYv;
+      double traceYvAdjYvconjml2YvAdjYv;
+      double traceYvconjmvR2AdjYvYvAdjYv;
       double Tr11;
       double Tr14;
       double Tr2U111;
@@ -195,6 +232,9 @@ private:
    double calc_beta_TLambdax_one_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_TLambdax_two_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_TLambdax_three_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_TYv_one_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_TYv_two_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_TYv_three_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_TYu_one_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_TYu_two_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_TYu_three_loop(const TRACE_STRUCT_TYPE&) const;
@@ -219,6 +259,9 @@ private:
    Eigen::Matrix<double,3,3> calc_beta_me2_one_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_me2_two_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_me2_three_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_mvR2_one_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_mvR2_two_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_mvR2_three_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_ms2_one_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_ms2_two_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_ms2_three_loop(const TRACE_STRUCT_TYPE&) const;

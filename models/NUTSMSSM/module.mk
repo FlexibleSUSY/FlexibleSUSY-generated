@@ -37,6 +37,7 @@ LIBNUTSMSSM_SRC += \
 		$(DIR)/NUTSMSSM_mass_eigenstates.cpp \
 		$(DIR)/NUTSMSSM_info.cpp \
 		$(DIR)/NUTSMSSM_input_parameters.cpp \
+		$(DIR)/NUTSMSSM_observables.cpp \
 		$(DIR)/NUTSMSSM_slha_io.cpp \
 		$(DIR)/NUTSMSSM_physical.cpp \
 		$(DIR)/NUTSMSSM_utilities.cpp \
@@ -63,6 +64,7 @@ LIBNUTSMSSM_HDR += \
 		$(DIR)/NUTSMSSM_low_scale_constraint.hpp \
 		$(DIR)/NUTSMSSM_model.hpp \
 		$(DIR)/NUTSMSSM_model_slha.hpp \
+		$(DIR)/NUTSMSSM_observables.hpp \
 		$(DIR)/NUTSMSSM_physical.hpp \
 		$(DIR)/NUTSMSSM_slha_io.hpp \
 		$(DIR)/NUTSMSSM_spectrum_generator_interface.hpp \
@@ -227,7 +229,7 @@ $(LIBNUTSMSSM): $(LIBNUTSMSSM_OBJ)
 		$(MAKELIB) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBNUTSMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(LDLIBS)
 
 ALLDEP += $(LIBNUTSMSSM_DEP) $(EXENUTSMSSM_DEP)
 ALLSRC += $(LIBNUTSMSSM_SRC) $(EXENUTSMSSM_SRC)

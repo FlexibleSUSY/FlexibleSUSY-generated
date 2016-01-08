@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:07:06
+// File generated at Fri 8 Jan 2016 11:43:33
 
 #include "HSSUSY_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -42,7 +42,7 @@ Eigen::Matrix<double,3,3> HSSUSY_susy_parameters::calc_beta_Yd_one_loop(const Su
 
    beta_Yd = (0.25*oneOver16PiSqr*(-(Yd*(-12*traceYdAdjYd - 4*
       traceYeAdjYe - 12*traceYuAdjYu + Sqr(g1) + 9*Sqr(g2) + 32*Sqr(g3))) + 6*(
-      Yd*Yd.adjoint()*Yd) - 6*(Yd*Yu.adjoint()*Yu))).real();
+      Yd*Yd.adjoint()*Yd - Yd*Yu.adjoint()*Yu))).real();
 
 
    return beta_Yd;

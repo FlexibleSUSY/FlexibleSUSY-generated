@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:10:13
+// File generated at Fri 8 Jan 2016 12:05:15
 
 #ifndef MRSSM_HIGH_SCALE_CONSTRAINT_H
 #define MRSSM_HIGH_SCALE_CONSTRAINT_H

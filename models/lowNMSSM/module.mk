@@ -18,13 +18,13 @@ lowNMSSM_TWO_SCALE_MK := \
 		$(lowNMSSM_TWO_SCALE_SOFT_MK)
 
 lowNMSSM_SLHA_INPUT := \
-		$(DIR)/LesHouches.in.TP3 \
-		$(DIR)/LesHouches.in.TP6 \
-		$(DIR)/LesHouches.in.TP1 \
 		$(DIR)/LesHouches.in.TP4 \
+		$(DIR)/LesHouches.in.TP3 \
 		$(DIR)/LesHouches.in.TP5 \
 		$(DIR)/LesHouches.in.TP2 \
-		$(DIR)/LesHouches.in.lowNMSSM
+		$(DIR)/LesHouches.in.TP6 \
+		$(DIR)/LesHouches.in.lowNMSSM \
+		$(DIR)/LesHouches.in.TP1
 
 lowNMSSM_GNUPLOT := \
 		$(DIR)/lowNMSSM_plot_rgflow.gnuplot \
@@ -43,6 +43,7 @@ LIBlowNMSSM_SRC += \
 		$(DIR)/lowNMSSM_mass_eigenstates.cpp \
 		$(DIR)/lowNMSSM_info.cpp \
 		$(DIR)/lowNMSSM_input_parameters.cpp \
+		$(DIR)/lowNMSSM_observables.cpp \
 		$(DIR)/lowNMSSM_slha_io.cpp \
 		$(DIR)/lowNMSSM_physical.cpp \
 		$(DIR)/lowNMSSM_utilities.cpp \
@@ -69,6 +70,7 @@ LIBlowNMSSM_HDR += \
 		$(DIR)/lowNMSSM_low_scale_constraint.hpp \
 		$(DIR)/lowNMSSM_model.hpp \
 		$(DIR)/lowNMSSM_model_slha.hpp \
+		$(DIR)/lowNMSSM_observables.hpp \
 		$(DIR)/lowNMSSM_physical.hpp \
 		$(DIR)/lowNMSSM_slha_io.hpp \
 		$(DIR)/lowNMSSM_spectrum_generator_interface.hpp \
@@ -233,7 +235,7 @@ $(LIBlowNMSSM): $(LIBlowNMSSM_OBJ)
 		$(MAKELIB) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBlowNMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(LDLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(LDLIBS)
 
 ALLDEP += $(LIBlowNMSSM_DEP) $(EXElowNMSSM_DEP)
 ALLSRC += $(LIBlowNMSSM_SRC) $(EXElowNMSSM_SRC)

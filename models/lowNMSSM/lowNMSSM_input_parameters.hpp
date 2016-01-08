@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:21:58
+// File generated at Fri 8 Jan 2016 12:52:14
 
 #ifndef lowNMSSM_INPUT_PARAMETERS_H
 #define lowNMSSM_INPUT_PARAMETERS_H
@@ -65,6 +65,9 @@ struct lowNMSSM_input_parameters {
    )
 
    {}
+
+   Eigen::ArrayXd get() const;
+   void set(const Eigen::ArrayXd&);
 };
 
 std::ostream& operator<<(std::ostream&, const lowNMSSM_input_parameters&);

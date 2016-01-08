@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:22:39
+// File generated at Fri 8 Jan 2016 12:46:44
 
 #ifndef SMSSM_SPECTRUM_GENERATOR_INTERFACE_H
 #define SMSSM_SPECTRUM_GENERATOR_INTERFACE_H

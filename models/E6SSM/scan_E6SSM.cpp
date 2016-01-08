@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:20:55
+// File generated at Fri 8 Jan 2016 12:50:02
 
 #include "E6SSM_input_parameters.hpp"
 #include "E6SSM_spectrum_generator.hpp"
@@ -110,8 +110,8 @@ int main(int argc, char* argv[])
    E6SSM_input_parameters input;
    set_command_line_parameters(argc, argv, input);
 
-   softsusy::QedQcd oneset;
-   oneset.toMz();
+   softsusy::QedQcd qedqcd;
+   qedqcd.toMz();
 
    E6SSM_spectrum_generator<algorithm_type> spectrum_generator;
    spectrum_generator.set_precision_goal(1.0e-4);
@@ -131,7 +131,7 @@ int main(int argc, char* argv[])
            end = range.end(); it != end; ++it) {
       input.m0 = *it;
 
-      spectrum_generator.run(oneset, input);
+      spectrum_generator.run(qedqcd, input);
 
       const E6SSM_slha<algorithm_type> model(spectrum_generator.get_model());
       const E6SSM_physical& pole_masses = model.get_physical_slha();

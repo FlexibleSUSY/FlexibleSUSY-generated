@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:15:04
+// File generated at Fri 8 Jan 2016 12:30:58
 
 #ifndef E6SSM_INPUT_PARAMETERS_H
 #define E6SSM_INPUT_PARAMETERS_H
@@ -43,6 +43,9 @@ struct E6SSM_input_parameters {
    muPrimeInput(0), BmuPrimeInput(0), vSInput(0), Lambda12Input(0)
 
    {}
+
+   Eigen::ArrayXd get() const;
+   void set(const Eigen::ArrayXd&);
 };
 
 std::ostream& operator<<(std::ostream&, const E6SSM_input_parameters&);

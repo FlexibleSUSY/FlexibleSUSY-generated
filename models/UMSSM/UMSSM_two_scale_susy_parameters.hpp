@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:14:36
+// File generated at Fri 8 Jan 2016 12:29:20
 
 #ifndef UMSSM_TWO_SCALE_susy_parameters_H
 #define UMSSM_TWO_SCALE_susy_parameters_H
@@ -40,8 +40,9 @@ class UMSSM_susy_parameters : public Beta_function {
 public:
    explicit UMSSM_susy_parameters(const UMSSM_input_parameters& input_ = UMSSM_input_parameters());
    UMSSM_susy_parameters(double scale_, double loops_, double thresholds_, const UMSSM_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
-   , double Lambdax_, const Eigen::Matrix<double,3,3>& Yu_, double g1_, double
-   g2_, double g3_, double gp_, double vd_, double vu_, double vS_
+   , double Lambdax_, const Eigen::Matrix<double,3,3>& Yv_, const Eigen::Matrix
+   <double,3,3>& Yu_, double g1_, double g2_, double g3_, double gp_, double
+   vd_, double vu_, double vS_
 );
    virtual ~UMSSM_susy_parameters() {}
    virtual Eigen::ArrayXd beta() const;
@@ -60,6 +61,8 @@ public:
    void set_Ye(const Eigen::Matrix<double,3,3>& Ye_) { Ye = Ye_; }
    void set_Ye(int i, int k, double value) { Ye(i,k) = value; }
    void set_Lambdax(double Lambdax_) { Lambdax = Lambdax_; }
+   void set_Yv(const Eigen::Matrix<double,3,3>& Yv_) { Yv = Yv_; }
+   void set_Yv(int i, int k, double value) { Yv(i,k) = value; }
    void set_Yu(const Eigen::Matrix<double,3,3>& Yu_) { Yu = Yu_; }
    void set_Yu(int i, int k, double value) { Yu(i,k) = value; }
    void set_g1(double g1_) { g1 = g1_; }
@@ -75,6 +78,8 @@ public:
    const Eigen::Matrix<double,3,3>& get_Ye() const { return Ye; }
    double get_Ye(int i, int k) const { return Ye(i,k); }
    double get_Lambdax() const { return Lambdax; }
+   const Eigen::Matrix<double,3,3>& get_Yv() const { return Yv; }
+   double get_Yv(int i, int k) const { return Yv(i,k); }
    const Eigen::Matrix<double,3,3>& get_Yu() const { return Yu; }
    double get_Yu(int i, int k) const { return Yu(i,k); }
    double get_g1() const { return g1; }
@@ -92,6 +97,7 @@ public:
    Eigen::Matrix<double,3,3> get_SdRSdR() const;
    Eigen::Matrix<double,3,3> get_SuRSuR() const;
    Eigen::Matrix<double,3,3> get_SeRSeR() const;
+   Eigen::Matrix<double,3,3> get_SvRSvR() const;
    double get_SsRSsR() const;
 
 
@@ -99,6 +105,7 @@ protected:
    Eigen::Matrix<double,3,3> Yd;
    Eigen::Matrix<double,3,3> Ye;
    double Lambdax;
+   Eigen::Matrix<double,3,3> Yv;
    Eigen::Matrix<double,3,3> Yu;
    double g1;
    double g2;
@@ -111,16 +118,19 @@ protected:
    UMSSM_input_parameters input;
 
 private:
-   static const int numberOfParameters = 35;
+   static const int numberOfParameters = 44;
 
    struct Susy_traces {
       double traceYdAdjYd;
       double traceYeAdjYe;
       double traceYuAdjYu;
+      double traceYvAdjYv;
       double traceYdAdjYdYdAdjYd;
       double traceYdAdjYuYuAdjYd;
       double traceYeAdjYeYeAdjYe;
+      double traceYvAdjYvTpYeconjYe;
       double traceYuAdjYuYuAdjYu;
+      double traceYvAdjYvYvAdjYv;
 
    };
    void calc_susy_traces(Susy_traces&) const;
@@ -134,6 +144,9 @@ private:
    double calc_beta_Lambdax_one_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Lambdax_two_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Lambdax_three_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_Yv_one_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_Yv_two_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_Yv_three_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_Yu_one_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_Yu_two_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_Yu_three_loop(const TRACE_STRUCT_TYPE&) const;

@@ -21,6 +21,7 @@ LIBUMSSM_SRC += \
 	models/UMSSM/UMSSM_two_scale_soft_beta_TYd.cpp \
 	models/UMSSM/UMSSM_two_scale_soft_beta_TYe.cpp \
 	models/UMSSM/UMSSM_two_scale_soft_beta_TLambdax.cpp \
+	models/UMSSM/UMSSM_two_scale_soft_beta_TYv.cpp \
 	models/UMSSM/UMSSM_two_scale_soft_beta_TYu.cpp \
 	models/UMSSM/UMSSM_two_scale_soft_beta_mq2.cpp \
 	models/UMSSM/UMSSM_two_scale_soft_beta_ml2.cpp \
@@ -29,6 +30,7 @@ LIBUMSSM_SRC += \
 	models/UMSSM/UMSSM_two_scale_soft_beta_md2.cpp \
 	models/UMSSM/UMSSM_two_scale_soft_beta_mu2.cpp \
 	models/UMSSM/UMSSM_two_scale_soft_beta_me2.cpp \
+	models/UMSSM/UMSSM_two_scale_soft_beta_mvR2.cpp \
 	models/UMSSM/UMSSM_two_scale_soft_beta_ms2.cpp \
 	models/UMSSM/UMSSM_two_scale_soft_beta_MassB.cpp \
 	models/UMSSM/UMSSM_two_scale_soft_beta_MassWB.cpp \

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:15:10
+// File generated at Fri 8 Jan 2016 12:30:18
 
 #ifndef UMSSM_INPUT_PARAMETERS_H
 #define UMSSM_INPUT_PARAMETERS_H
@@ -42,12 +42,16 @@ struct UMSSM_input_parameters {
    double Qu;
    double Qe;
    double Qs;
+   double Qv;
 
    UMSSM_input_parameters()
       : m0(0), m12(0), TanBeta(0), Azero(0), LambdaInput(0), ALambdaInput(0),
-   vSInput(0), Qq(0), Ql(0), QHd(0), QHu(0), Qd(0), Qu(0), Qe(0), Qs(0)
+   vSInput(0), Qq(0), Ql(0), QHd(0), QHu(0), Qd(0), Qu(0), Qe(0), Qs(0), Qv(0)
 
    {}
+
+   Eigen::ArrayXd get() const;
+   void set(const Eigen::ArrayXd&);
 };
 
 std::ostream& operator<<(std::ostream&, const UMSSM_input_parameters&);

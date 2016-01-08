@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:29:34
+// File generated at Fri 8 Jan 2016 13:19:33
 
 #include "CMSSMNoFV_info.hpp"
 
@@ -64,6 +64,28 @@ namespace CMSSMNoFV_info {
       "mu2(1,0)", "mu2(1,1)", "mu2(1,2)", "mu2(2,0)", "mu2(2,1)", "mu2(2,2)",
       "me2(0,0)", "me2(0,1)", "me2(0,2)", "me2(1,0)", "me2(1,1)", "me2(1,2)",
       "me2(2,0)", "me2(2,1)", "me2(2,2)", "MassB", "MassWB", "MassG"};
+
+   const char* particle_mixing_names[NUMBER_OF_MIXINGS] = {   "ZD(0,0)",
+      "ZD(0,1)", "ZD(1,0)", "ZD(1,1)", "ZU(0,0)", "ZU(0,1)", "ZU(1,0)", "ZU(1,1)",
+      "ZE(0,0)", "ZE(0,1)", "ZE(1,0)", "ZE(1,1)", "ZM(0,0)", "ZM(0,1)", "ZM(1,0)"
+      , "ZM(1,1)", "ZTau(0,0)", "ZTau(0,1)", "ZTau(1,0)", "ZTau(1,1)", "ZS(0,0)",
+      "ZS(0,1)", "ZS(1,0)", "ZS(1,1)", "ZC(0,0)", "ZC(0,1)", "ZC(1,0)", "ZC(1,1)",
+      "ZB(0,0)", "ZB(0,1)", "ZB(1,0)", "ZB(1,1)", "ZT(0,0)", "ZT(0,1)", "ZT(1,0)"
+      , "ZT(1,1)", "ZH(0,0)", "ZH(0,1)", "ZH(1,0)", "ZH(1,1)", "ZA(0,0)",
+      "ZA(0,1)", "ZA(1,0)", "ZA(1,1)", "ZP(0,0)", "ZP(0,1)", "ZP(1,0)", "ZP(1,1)",
+      "Re(ZN(0,0))", "Im(ZN(0,0))", "Re(ZN(0,1))", "Im(ZN(0,1))", "Re(ZN(0,2))",
+      "Im(ZN(0,2))", "Re(ZN(0,3))", "Im(ZN(0,3))", "Re(ZN(1,0))", "Im(ZN(1,0))",
+      "Re(ZN(1,1))", "Im(ZN(1,1))", "Re(ZN(1,2))", "Im(ZN(1,2))", "Re(ZN(1,3))",
+      "Im(ZN(1,3))", "Re(ZN(2,0))", "Im(ZN(2,0))", "Re(ZN(2,1))", "Im(ZN(2,1))",
+      "Re(ZN(2,2))", "Im(ZN(2,2))", "Re(ZN(2,3))", "Im(ZN(2,3))", "Re(ZN(3,0))",
+      "Im(ZN(3,0))", "Re(ZN(3,1))", "Im(ZN(3,1))", "Re(ZN(3,2))", "Im(ZN(3,2))",
+      "Re(ZN(3,3))", "Im(ZN(3,3))", "Re(UM(0,0))", "Im(UM(0,0))", "Re(UM(0,1))",
+      "Im(UM(0,1))", "Re(UM(1,0))", "Im(UM(1,0))", "Re(UM(1,1))", "Im(UM(1,1))",
+      "Re(UP(0,0))", "Im(UP(0,0))", "Re(UP(0,1))", "Im(UP(0,1))", "Re(UP(1,0))",
+      "Im(UP(1,0))", "Re(UP(1,1))", "Im(UP(1,1))"};
+
+   const char* input_parameter_names[NUMBER_OF_INPUT_PARAMETERS] = {"m0", "m12"
+      , "TanBeta", "SignMu", "Azero"};
 
    const char* model_name = "CMSSMNoFV";
    const bool is_low_energy_model = false;

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 27 Oct 2015 15:27:52
+// File generated at Fri 8 Jan 2016 13:04:24
 
 #ifndef NUHMSSM_TWO_SCALE_susy_parameters_H
 #define NUHMSSM_TWO_SCALE_susy_parameters_H
@@ -113,7 +113,19 @@ private:
       double traceYdAdjYuYuAdjYd;
       double traceYeAdjYeYeAdjYe;
       double traceYuAdjYu;
+      double traceAdjYdYd;
+      double traceAdjYeYe;
+      double traceAdjYuYu;
+      double traceAdjYdYdAdjYdYd;
+      double traceAdjYeYeAdjYeYe;
+      double traceAdjYuYuAdjYdYd;
+      double traceAdjYuYuAdjYuYu;
+      double traceAdjYdYdAdjYdYdAdjYdYd;
+      double traceAdjYeYeAdjYeYeAdjYeYe;
+      double traceAdjYuYuAdjYuYuAdjYdYd;
       double traceYuAdjYuYuAdjYu;
+      double traceAdjYdYdAdjYuYuAdjYdYd;
+      double traceAdjYuYuAdjYuYuAdjYuYu;
 
    };
    void calc_susy_traces(Susy_traces&) const;
