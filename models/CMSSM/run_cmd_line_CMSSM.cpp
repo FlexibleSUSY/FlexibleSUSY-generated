@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 8 Jan 2016 15:32:19
+// File generated at Sun 10 Jan 2016 15:54:26
 
 #include "CMSSM_input_parameters.hpp"
 #include "CMSSM_observables.hpp"

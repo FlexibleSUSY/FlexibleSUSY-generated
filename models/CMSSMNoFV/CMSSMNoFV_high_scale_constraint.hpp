@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 8 Jan 2016 15:25:38
+// File generated at Sun 10 Jan 2016 15:48:17
 
 #ifndef CMSSMNoFV_HIGH_SCALE_CONSTRAINT_H
 #define CMSSMNoFV_HIGH_SCALE_CONSTRAINT_H

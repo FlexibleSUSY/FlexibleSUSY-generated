@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 8 Jan 2016 15:20:15
+// File generated at Sun 10 Jan 2016 15:42:41
 
 /**
  * @file MSSMRHN_two_scale_model_slha.cpp

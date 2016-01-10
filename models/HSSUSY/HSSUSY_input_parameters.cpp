@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 8 Jan 2016 15:06:51
+// File generated at Sun 10 Jan 2016 15:29:35
 
 #include "HSSUSY_input_parameters.hpp"
 #include "wrappers.hpp"

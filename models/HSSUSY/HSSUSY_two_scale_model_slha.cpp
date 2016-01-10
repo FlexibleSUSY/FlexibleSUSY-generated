@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 8 Jan 2016 15:07:04
+// File generated at Sun 10 Jan 2016 15:29:49
 
 /**
  * @file HSSUSY_two_scale_model_slha.cpp

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 8 Jan 2016 15:15:57
+// File generated at Sun 10 Jan 2016 15:38:35
 
 #ifndef NUTSMSSM_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
 #define NUTSMSSM_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H

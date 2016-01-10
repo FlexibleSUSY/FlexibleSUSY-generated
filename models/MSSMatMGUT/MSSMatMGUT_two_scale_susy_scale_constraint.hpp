@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 8 Jan 2016 15:29:43
+// File generated at Sun 10 Jan 2016 15:52:09
 
 #ifndef MSSMatMGUT_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
 #define MSSMatMGUT_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
