@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:33:44
+// File generated at Tue 8 Mar 2016 17:59:40
 
 #include "UMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -76,23 +76,23 @@ double UMSSM_susy_parameters::calc_beta_vu_two_loop(const Susy_traces& susy_trac
 
    double beta_vu;
 
-   beta_vu = Re(-0.005*twoLoop*vu*(261*Power(g1,4) + 275*Power(g2,4) +
+   beta_vu = Re(-0.005*twoLoop*vu*(207*Power(g1,4) + 275*Power(g2,4) +
       800*Power(gp,4)*Power(QHu,4) - 600*traceYdAdjYuYuAdjYd - 1800*
       traceYuAdjYuYuAdjYu - 200*traceYvAdjYvTpYeconjYe - 600*
-      traceYvAdjYvYvAdjYv + 300*traceYvAdjYv*Sqr(g1) + 300*traceYvAdjYv*Sqr(g2)
+      traceYvAdjYvYvAdjYv + 60*traceYvAdjYv*Sqr(g1) + 300*traceYvAdjYv*Sqr(g2)
       + 90*Sqr(g1)*Sqr(g2) + 360*Qd*QHu*Sqr(g1)*Sqr(gp) + 360*Qe*QHu*Sqr(g1)*
       Sqr(gp) - 120*QHd*QHu*Sqr(g1)*Sqr(gp) - 360*QHu*Ql*Sqr(g1)*Sqr(gp) + 360*
-      QHu*Qq*Sqr(g1)*Sqr(gp) - 720*QHu*Qu*Sqr(g1)*Sqr(gp) + 360*QHu*Qv*Sqr(g1)*
-      Sqr(gp) + 240*Sqr(g1)*Sqr(gp)*Sqr(QHu) + 600*Sqr(g2)*Sqr(gp)*Sqr(QHu) +
-      1800*Power(gp,4)*Sqr(Qd)*Sqr(QHu) + 600*Power(gp,4)*Sqr(Qe)*Sqr(QHu) +
-      400*Power(gp,4)*Sqr(QHd)*Sqr(QHu) + 400*traceYvAdjYv*Sqr(gp)*Sqr(Ql) +
-      1200*Power(gp,4)*Sqr(QHu)*Sqr(Ql) + 3600*Power(gp,4)*Sqr(QHu)*Sqr(Qq) +
-      200*Power(gp,4)*Sqr(QHu)*Sqr(Qs) + 20*AbsSqr(Lambdax)*(-30*traceYdAdjYd -
-      10*traceYeAdjYe + 3*Sqr(g1) + 15*Sqr(g2) + 20*Sqr(gp)*Sqr(QHd) + 20*Sqr(
-      gp)*Sqr(Qs)) + 1800*Power(gp,4)*Sqr(QHu)*Sqr(Qu) + 20*traceYuAdjYu*(17*
-      Sqr(g1) + 45*Sqr(g2) + 160*Sqr(g3) + 60*Sqr(gp)*Sqr(Qq) + 60*Sqr(gp)*Sqr(
-      Qu)) + 400*traceYvAdjYv*Sqr(gp)*Sqr(Qv) + 600*Power(gp,4)*Sqr(QHu)*Sqr(Qv
-      ) - 600*Sqr(Conj(Lambdax))*Sqr(Lambdax)));
+      QHu*Qq*Sqr(g1)*Sqr(gp) - 720*QHu*Qu*Sqr(g1)*Sqr(gp) + 240*Sqr(g1)*Sqr(gp)
+      *Sqr(QHu) + 600*Sqr(g2)*Sqr(gp)*Sqr(QHu) + 1800*Power(gp,4)*Sqr(Qd)*Sqr(
+      QHu) + 600*Power(gp,4)*Sqr(Qe)*Sqr(QHu) + 400*Power(gp,4)*Sqr(QHd)*Sqr(
+      QHu) + 400*traceYvAdjYv*Sqr(gp)*Sqr(Ql) + 1200*Power(gp,4)*Sqr(QHu)*Sqr(
+      Ql) + 3600*Power(gp,4)*Sqr(QHu)*Sqr(Qq) + 200*Power(gp,4)*Sqr(QHu)*Sqr(Qs
+      ) + 20*AbsSqr(Lambdax)*(-30*traceYdAdjYd - 10*traceYeAdjYe + 3*Sqr(g1) +
+      15*Sqr(g2) + 20*Sqr(gp)*Sqr(QHd) + 20*Sqr(gp)*Sqr(Qs)) + 1800*Power(gp,4)
+      *Sqr(QHu)*Sqr(Qu) + 20*traceYuAdjYu*(17*Sqr(g1) + 45*Sqr(g2) + 160*Sqr(g3
+      ) + 60*Sqr(gp)*Sqr(Qq) + 60*Sqr(gp)*Sqr(Qu)) + 400*traceYvAdjYv*Sqr(gp)*
+      Sqr(Qv) + 600*Power(gp,4)*Sqr(QHu)*Sqr(Qv) - 600*Sqr(Conj(Lambdax))*Sqr(
+      Lambdax)));
 
 
    return beta_vu;

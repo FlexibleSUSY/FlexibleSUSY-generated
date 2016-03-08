@@ -34,6 +34,7 @@ LIBHSSUSY_HDR :=
 
 ifneq ($(findstring two_scale,$(ALGORITHMS)),)
 LIBHSSUSY_SRC += \
+		$(DIR)/HSSUSY_effective_couplings.cpp \
 		$(DIR)/HSSUSY_mass_eigenstates.cpp \
 		$(DIR)/HSSUSY_info.cpp \
 		$(DIR)/HSSUSY_input_parameters.cpp \
@@ -56,6 +57,7 @@ EXEHSSUSY_SRC += \
 		$(DIR)/scan_HSSUSY.cpp
 LIBHSSUSY_HDR += \
 		$(DIR)/HSSUSY_convergence_tester.hpp \
+		$(DIR)/HSSUSY_effective_couplings.hpp \
 		$(DIR)/HSSUSY_high_scale_constraint.hpp \
 		$(DIR)/HSSUSY_mass_eigenstates.hpp \
 		$(DIR)/HSSUSY_info.hpp \
@@ -187,6 +189,9 @@ clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-obj
 		-rm -f $(EXEHSSUSY_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
+		@true
+
+clean-obj::     clean-$(MODNAME)-obj
 
 clean::         clean-$(MODNAME)
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:29:43
+// File generated at Tue 8 Mar 2016 16:04:14
 
 #include "SplitMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -28,6 +28,10 @@ namespace flexiblesusy {
 
 #define INPUT(parameter) input.parameter
 #define TRACE_STRUCT soft_traces
+#define TRACE_STRUCT_TYPE Soft_traces
+#define CALCULATE_TRACES() calc_soft_traces(TRACE_STRUCT);
+
+const int SplitMSSM_soft_parameters::numberOfParameters;
 
 SplitMSSM_soft_parameters::SplitMSSM_soft_parameters(const SplitMSSM_input_parameters& input_)
    : SplitMSSM_susy_parameters(input_)
@@ -57,26 +61,35 @@ Eigen::ArrayXd SplitMSSM_soft_parameters::beta() const
 
 SplitMSSM_soft_parameters SplitMSSM_soft_parameters::calc_beta() const
 {
-   Soft_traces soft_traces;
-   calc_soft_traces(soft_traces);
+   double beta_MassB = 0.;
+   double beta_MassG = 0.;
+   double beta_MassWB = 0.;
+   double beta_Mu = 0.;
+   double beta_mu2 = 0.;
+   double beta_v = 0.;
 
-   double beta_MassB(calc_beta_MassB_one_loop(TRACE_STRUCT));
-   double beta_MassG(calc_beta_MassG_one_loop(TRACE_STRUCT));
-   double beta_MassWB(calc_beta_MassWB_one_loop(TRACE_STRUCT));
-   double beta_Mu(calc_beta_Mu_one_loop(TRACE_STRUCT));
-   double beta_mu2(calc_beta_mu2_one_loop(TRACE_STRUCT));
-   double beta_v(calc_beta_v_one_loop(TRACE_STRUCT));
+   if (get_loops() > 0) {
+      TRACE_STRUCT_TYPE TRACE_STRUCT;
+      CALCULATE_TRACES();
 
-   if (get_loops() > 1) {
-      beta_MassB += calc_beta_MassB_two_loop(TRACE_STRUCT);
-      beta_MassG += calc_beta_MassG_two_loop(TRACE_STRUCT);
-      beta_MassWB += calc_beta_MassWB_two_loop(TRACE_STRUCT);
-      beta_Mu += calc_beta_Mu_two_loop(TRACE_STRUCT);
-      beta_mu2 += calc_beta_mu2_two_loop(TRACE_STRUCT);
-      beta_v += calc_beta_v_two_loop(TRACE_STRUCT);
+      beta_MassB += calc_beta_MassB_one_loop(TRACE_STRUCT);
+      beta_MassG += calc_beta_MassG_one_loop(TRACE_STRUCT);
+      beta_MassWB += calc_beta_MassWB_one_loop(TRACE_STRUCT);
+      beta_Mu += calc_beta_Mu_one_loop(TRACE_STRUCT);
+      beta_mu2 += calc_beta_mu2_one_loop(TRACE_STRUCT);
+      beta_v += calc_beta_v_one_loop(TRACE_STRUCT);
 
-      if (get_loops() > 2) {
+      if (get_loops() > 1) {
+         beta_MassB += calc_beta_MassB_two_loop(TRACE_STRUCT);
+         beta_MassG += calc_beta_MassG_two_loop(TRACE_STRUCT);
+         beta_MassWB += calc_beta_MassWB_two_loop(TRACE_STRUCT);
+         beta_Mu += calc_beta_Mu_two_loop(TRACE_STRUCT);
+         beta_mu2 += calc_beta_mu2_two_loop(TRACE_STRUCT);
+         beta_v += calc_beta_v_two_loop(TRACE_STRUCT);
 
+         if (get_loops() > 2) {
+
+         }
       }
    }
 

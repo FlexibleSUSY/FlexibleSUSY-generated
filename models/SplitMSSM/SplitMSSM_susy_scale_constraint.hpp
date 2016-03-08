@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:29:50
+// File generated at Tue 8 Mar 2016 16:04:23
 
 #ifndef SplitMSSM_SUSY_SCALE_CONSTRAINT_H
 #define SplitMSSM_SUSY_SCALE_CONSTRAINT_H

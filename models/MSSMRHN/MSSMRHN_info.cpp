@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:42:37
+// File generated at Tue 8 Mar 2016 18:27:15
 
 #include "MSSMRHN_info.hpp"
 
@@ -29,17 +29,17 @@ namespace MSSMRHN_info {
    const double normalization_g2 = 1;
    const double normalization_g3 = 1;
 
-   const unsigned particle_multiplicities[NUMBER_OF_PARTICLES] = {1, 1, 1, 1, 6
-      , 6, 6, 6, 2, 2, 2, 4, 6, 2, 3, 3, 3, 1};
+   const unsigned particle_multiplicities[NUMBER_OF_PARTICLES] = {1, 1, 6, 6, 6
+      , 6, 2, 2, 2, 4, 6, 2, 3, 3, 3, 1, 1, 1};
 
-   const char* particle_names[NUMBER_OF_PARTICLES] = {"VG", "Glu", "VP", "VZ",
-      "Sd", "Su", "Se", "Sv", "hh", "Ah", "Hpm", "Chi", "Fv", "Cha", "Fe", "Fd",
-      "Fu", "VWm"};
+   const char* particle_names[NUMBER_OF_PARTICLES] = {"VG", "Glu", "Sd", "Su",
+      "Se", "Sv", "hh", "Ah", "Hpm", "Chi", "Fv", "Cha", "Fe", "Fd", "Fu", "VWm",
+      "VP", "VZ"};
 
    const char* particle_latex_names[NUMBER_OF_PARTICLES] = {   "g",
-      "\\tilde{g}", "\\gamma", "Z", "\\tilde{d}", "\\tilde{u}", "\\tilde{e}",
-      "\\tilde{\\nu}", "h", "A^0", "H^-", "\\tilde{\\chi}^0", "\\nu",
-      "\\tilde{\\chi}^-", "e", "d", "u", "W^-"};
+      "\\tilde{g}", "\\tilde{d}", "\\tilde{u}", "\\tilde{e}", "\\tilde{\\nu}", "h"
+      , "A^0", "H^-", "\\tilde{\\chi}^0", "\\nu", "\\tilde{\\chi}^-", "e", "d",
+      "u", "W^-", "\\gamma", "Z"};
 
    const char* parameter_names[NUMBER_OF_PARAMETERS] = {"Yd(0,0)", "Yd(0,1)",
       "Yd(0,2)", "Yd(1,0)", "Yd(1,1)", "Yd(1,2)", "Yd(2,0)", "Yd(2,1)", "Yd(2,2)",
@@ -142,7 +142,7 @@ namespace MSSMRHN_info {
       "Im(ZUR(0,2))", "Re(ZUR(1,0))", "Im(ZUR(1,0))", "Re(ZUR(1,1))",
       "Im(ZUR(1,1))", "Re(ZUR(1,2))", "Im(ZUR(1,2))", "Re(ZUR(2,0))",
       "Im(ZUR(2,0))", "Re(ZUR(2,1))", "Im(ZUR(2,1))", "Re(ZUR(2,2))",
-      "Im(ZUR(2,2))"};
+      "Im(ZUR(2,2))", "ZZ(0,0)", "ZZ(0,1)", "ZZ(1,0)", "ZZ(1,1)"};
 
    const char* input_parameter_names[NUMBER_OF_INPUT_PARAMETERS] = {"m0", "m12"
       , "TanBeta", "SignMu", "Azero", "BMvInput(0,0)", "BMvInput(0,1)",

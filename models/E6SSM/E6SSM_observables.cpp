@@ -16,18 +16,25 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:42:58
+// File generated at Tue 8 Mar 2016 18:08:40
 
 #include "E6SSM_observables.hpp"
 #include "E6SSM_mass_eigenstates.hpp"
+#include "E6SSM_effective_couplings.hpp"
 #include "gm2calc_interface.hpp"
 #include "eigen_utils.hpp"
 #include "numerics2.hpp"
+#include "wrappers.hpp"
 #include "lowe.h"
+#include "physical_input.hpp"
 
 #define MODEL model
 #define AMUGM2CALC a_muon_gm2calc
 #define AMUGM2CALCUNCERTAINTY a_muon_gm2calc_uncertainty
+#define EFFCPHIGGSPHOTONPHOTON eff_cp_higgs_photon_photon
+#define EFFCPHIGGSGLUONGLUON eff_cp_higgs_gluon_gluon
+#define EFFCPPSEUDOSCALARPHOTONPHOTON eff_cp_pseudoscalar_photon_photon
+#define EFFCPPSEUDOSCALARGLUONGLUON eff_cp_pseudoscalar_gluon_gluon
 
 #define ALPHA_S_MZ qedqcd.displayAlpha(softsusy::ALPHAS)
 #define MWPole qedqcd.displayPoleMW()
@@ -39,10 +46,46 @@
 
 namespace flexiblesusy {
 
-Observables calculate_observables(const E6SSM_mass_eigenstates& model,
-                                  const softsusy::QedQcd& qedqcd)
+const unsigned E6SSM_observables::NUMBER_OF_OBSERVABLES;
+
+E6SSM_observables::E6SSM_observables()
+
 {
-   Observables observables;
+}
+
+Eigen::ArrayXd E6SSM_observables::get() const
+{
+   Eigen::ArrayXd vec(1);
+
+   vec(0) = 0.;
+
+   return vec;
+}
+
+std::vector<std::string> E6SSM_observables::get_names()
+{
+   std::vector<std::string> names(1);
+
+   names[0] = "no observables defined";
+
+   return names;
+}
+
+void E6SSM_observables::clear()
+{
+
+}
+
+void E6SSM_observables::set(const Eigen::ArrayXd& vec)
+{
+
+}
+
+E6SSM_observables calculate_observables(const E6SSM_mass_eigenstates& model,
+                                              const softsusy::QedQcd& qedqcd,
+                                              const Physical_input& physical_input)
+{
+   E6SSM_observables observables;
 
    
 

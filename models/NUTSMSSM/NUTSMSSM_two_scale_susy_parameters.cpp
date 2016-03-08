@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:38:00
+// File generated at Tue 8 Mar 2016 18:13:14
 
 #include "NUTSMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -29,6 +29,10 @@ namespace flexiblesusy {
 #define CLASSNAME NUTSMSSM_susy_parameters
 #define INPUT(parameter) input.parameter
 #define TRACE_STRUCT susy_traces
+#define TRACE_STRUCT_TYPE Susy_traces
+#define CALCULATE_TRACES() calc_susy_traces(TRACE_STRUCT);
+
+const int NUTSMSSM_susy_parameters::numberOfParameters;
 
 NUTSMSSM_susy_parameters::NUTSMSSM_susy_parameters(const NUTSMSSM_input_parameters& input_)
    : Beta_function()
@@ -69,42 +73,59 @@ Eigen::ArrayXd NUTSMSSM_susy_parameters::beta() const
 
 NUTSMSSM_susy_parameters NUTSMSSM_susy_parameters::calc_beta() const
 {
-   Susy_traces susy_traces;
-   calc_susy_traces(susy_traces);
+   Eigen::Matrix<double,3,3> beta_Yd = Eigen::Matrix<double,3,3>::Zero();
+   Eigen::Matrix<double,3,3> beta_Ye = Eigen::Matrix<double,3,3>::Zero();
+   double beta_Lambdax = 0.;
+   double beta_Kappa = 0.;
+   Eigen::Matrix<double,3,3> beta_Yu = Eigen::Matrix<double,3,3>::Zero();
+   double beta_Mu = 0.;
+   double beta_MS = 0.;
+   double beta_L1 = 0.;
+   double beta_g1 = 0.;
+   double beta_g2 = 0.;
+   double beta_g3 = 0.;
+   double beta_vd = 0.;
+   double beta_vu = 0.;
+   double beta_vS = 0.;
 
-   Eigen::Matrix<double,3,3> beta_Yd(calc_beta_Yd_one_loop(TRACE_STRUCT));
-   Eigen::Matrix<double,3,3> beta_Ye(calc_beta_Ye_one_loop(TRACE_STRUCT));
-   double beta_Lambdax(calc_beta_Lambdax_one_loop(TRACE_STRUCT));
-   double beta_Kappa(calc_beta_Kappa_one_loop(TRACE_STRUCT));
-   Eigen::Matrix<double,3,3> beta_Yu(calc_beta_Yu_one_loop(TRACE_STRUCT));
-   double beta_Mu(calc_beta_Mu_one_loop(TRACE_STRUCT));
-   double beta_MS(calc_beta_MS_one_loop(TRACE_STRUCT));
-   double beta_L1(calc_beta_L1_one_loop(TRACE_STRUCT));
-   double beta_g1(calc_beta_g1_one_loop(TRACE_STRUCT));
-   double beta_g2(calc_beta_g2_one_loop(TRACE_STRUCT));
-   double beta_g3(calc_beta_g3_one_loop(TRACE_STRUCT));
-   double beta_vd(calc_beta_vd_one_loop(TRACE_STRUCT));
-   double beta_vu(calc_beta_vu_one_loop(TRACE_STRUCT));
-   double beta_vS(calc_beta_vS_one_loop(TRACE_STRUCT));
+   if (get_loops() > 0) {
+      TRACE_STRUCT_TYPE TRACE_STRUCT;
+      CALCULATE_TRACES();
 
-   if (get_loops() > 1) {
-      beta_Yd += calc_beta_Yd_two_loop(TRACE_STRUCT);
-      beta_Ye += calc_beta_Ye_two_loop(TRACE_STRUCT);
-      beta_Lambdax += calc_beta_Lambdax_two_loop(TRACE_STRUCT);
-      beta_Kappa += calc_beta_Kappa_two_loop(TRACE_STRUCT);
-      beta_Yu += calc_beta_Yu_two_loop(TRACE_STRUCT);
-      beta_Mu += calc_beta_Mu_two_loop(TRACE_STRUCT);
-      beta_MS += calc_beta_MS_two_loop(TRACE_STRUCT);
-      beta_L1 += calc_beta_L1_two_loop(TRACE_STRUCT);
-      beta_g1 += calc_beta_g1_two_loop(TRACE_STRUCT);
-      beta_g2 += calc_beta_g2_two_loop(TRACE_STRUCT);
-      beta_g3 += calc_beta_g3_two_loop(TRACE_STRUCT);
-      beta_vd += calc_beta_vd_two_loop(TRACE_STRUCT);
-      beta_vu += calc_beta_vu_two_loop(TRACE_STRUCT);
-      beta_vS += calc_beta_vS_two_loop(TRACE_STRUCT);
+      beta_Yd += calc_beta_Yd_one_loop(TRACE_STRUCT);
+      beta_Ye += calc_beta_Ye_one_loop(TRACE_STRUCT);
+      beta_Lambdax += calc_beta_Lambdax_one_loop(TRACE_STRUCT);
+      beta_Kappa += calc_beta_Kappa_one_loop(TRACE_STRUCT);
+      beta_Yu += calc_beta_Yu_one_loop(TRACE_STRUCT);
+      beta_Mu += calc_beta_Mu_one_loop(TRACE_STRUCT);
+      beta_MS += calc_beta_MS_one_loop(TRACE_STRUCT);
+      beta_L1 += calc_beta_L1_one_loop(TRACE_STRUCT);
+      beta_g1 += calc_beta_g1_one_loop(TRACE_STRUCT);
+      beta_g2 += calc_beta_g2_one_loop(TRACE_STRUCT);
+      beta_g3 += calc_beta_g3_one_loop(TRACE_STRUCT);
+      beta_vd += calc_beta_vd_one_loop(TRACE_STRUCT);
+      beta_vu += calc_beta_vu_one_loop(TRACE_STRUCT);
+      beta_vS += calc_beta_vS_one_loop(TRACE_STRUCT);
 
-      if (get_loops() > 2) {
+      if (get_loops() > 1) {
+         beta_Yd += calc_beta_Yd_two_loop(TRACE_STRUCT);
+         beta_Ye += calc_beta_Ye_two_loop(TRACE_STRUCT);
+         beta_Lambdax += calc_beta_Lambdax_two_loop(TRACE_STRUCT);
+         beta_Kappa += calc_beta_Kappa_two_loop(TRACE_STRUCT);
+         beta_Yu += calc_beta_Yu_two_loop(TRACE_STRUCT);
+         beta_Mu += calc_beta_Mu_two_loop(TRACE_STRUCT);
+         beta_MS += calc_beta_MS_two_loop(TRACE_STRUCT);
+         beta_L1 += calc_beta_L1_two_loop(TRACE_STRUCT);
+         beta_g1 += calc_beta_g1_two_loop(TRACE_STRUCT);
+         beta_g2 += calc_beta_g2_two_loop(TRACE_STRUCT);
+         beta_g3 += calc_beta_g3_two_loop(TRACE_STRUCT);
+         beta_vd += calc_beta_vd_two_loop(TRACE_STRUCT);
+         beta_vu += calc_beta_vu_two_loop(TRACE_STRUCT);
+         beta_vS += calc_beta_vS_two_loop(TRACE_STRUCT);
 
+         if (get_loops() > 2) {
+
+         }
       }
    }
 

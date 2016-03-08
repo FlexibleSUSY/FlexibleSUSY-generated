@@ -34,6 +34,7 @@ LIBTMSSM_HDR :=
 
 ifneq ($(findstring two_scale,$(ALGORITHMS)),)
 LIBTMSSM_SRC += \
+		$(DIR)/TMSSM_effective_couplings.cpp \
 		$(DIR)/TMSSM_mass_eigenstates.cpp \
 		$(DIR)/TMSSM_info.cpp \
 		$(DIR)/TMSSM_input_parameters.cpp \
@@ -56,6 +57,7 @@ EXETMSSM_SRC += \
 		$(DIR)/scan_TMSSM.cpp
 LIBTMSSM_HDR += \
 		$(DIR)/TMSSM_convergence_tester.hpp \
+		$(DIR)/TMSSM_effective_couplings.hpp \
 		$(DIR)/TMSSM_high_scale_constraint.hpp \
 		$(DIR)/TMSSM_mass_eigenstates.hpp \
 		$(DIR)/TMSSM_info.hpp \
@@ -187,6 +189,9 @@ clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-obj
 		-rm -f $(EXETMSSM_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
+		@true
+
+clean-obj::     clean-$(MODNAME)-obj
 
 clean::         clean-$(MODNAME)
 

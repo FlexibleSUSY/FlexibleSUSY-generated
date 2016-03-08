@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:33:43
+// File generated at Tue 8 Mar 2016 17:59:39
 
 #include "UMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -90,7 +90,7 @@ double UMSSM_susy_parameters::calc_beta_gp_two_loop(const Susy_traces& susy_trac
       (g1)*Sqr(Qq) + 135*Sqr(g2)*Sqr(Qq) + 240*Sqr(g3)*Sqr(Qq) - 30*
       traceYdAdjYd*(Sqr(Qd) + Sqr(QHd) + Sqr(Qq)) - 10*AbsSqr(Lambdax)*(Sqr(QHd
       ) + Sqr(QHu) + Sqr(Qs)) - 30*traceYuAdjYu*Sqr(Qu) + 24*Sqr(g1)*Sqr(Qu) +
-      120*Sqr(g3)*Sqr(Qu) - 10*traceYvAdjYv*Sqr(Qv) + 18*Sqr(g1)*Sqr(Qv)));
+      120*Sqr(g3)*Sqr(Qu) - 10*traceYvAdjYv*Sqr(Qv)));
 
 
    return beta_gp;

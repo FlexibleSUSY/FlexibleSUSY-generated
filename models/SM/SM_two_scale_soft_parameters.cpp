@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:29:35
+// File generated at Tue 8 Mar 2016 16:06:32
 
 #include "SM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -28,6 +28,10 @@ namespace flexiblesusy {
 
 #define INPUT(parameter) input.parameter
 #define TRACE_STRUCT soft_traces
+#define TRACE_STRUCT_TYPE Soft_traces
+#define CALCULATE_TRACES() calc_soft_traces(TRACE_STRUCT);
+
+const int SM_soft_parameters::numberOfParameters;
 
 SM_soft_parameters::SM_soft_parameters(const SM_input_parameters& input_)
    : SM_susy_parameters(input_)
@@ -56,19 +60,24 @@ Eigen::ArrayXd SM_soft_parameters::beta() const
 
 SM_soft_parameters SM_soft_parameters::calc_beta() const
 {
-   Soft_traces soft_traces;
-   calc_soft_traces(soft_traces);
+   double beta_mu2 = 0.;
+   double beta_v = 0.;
 
-   double beta_mu2(calc_beta_mu2_one_loop(TRACE_STRUCT));
-   double beta_v(calc_beta_v_one_loop(TRACE_STRUCT));
+   if (get_loops() > 0) {
+      TRACE_STRUCT_TYPE TRACE_STRUCT;
+      CALCULATE_TRACES();
 
-   if (get_loops() > 1) {
-      beta_mu2 += calc_beta_mu2_two_loop(TRACE_STRUCT);
-      beta_v += calc_beta_v_two_loop(TRACE_STRUCT);
+      beta_mu2 += calc_beta_mu2_one_loop(TRACE_STRUCT);
+      beta_v += calc_beta_v_one_loop(TRACE_STRUCT);
 
-      if (get_loops() > 2) {
-         beta_mu2 += calc_beta_mu2_three_loop(TRACE_STRUCT);
+      if (get_loops() > 1) {
+         beta_mu2 += calc_beta_mu2_two_loop(TRACE_STRUCT);
+         beta_v += calc_beta_v_two_loop(TRACE_STRUCT);
 
+         if (get_loops() > 2) {
+            beta_mu2 += calc_beta_mu2_three_loop(TRACE_STRUCT);
+
+         }
       }
    }
 

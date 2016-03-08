@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:30:02
+// File generated at Tue 8 Mar 2016 16:06:16
 
 #include "HSSUSY_input_parameters.hpp"
 #include "HSSUSY_spectrum_generator.hpp"
@@ -46,6 +46,7 @@ void print_usage()
       "  --MEWSB=<value>\n"
       "  --AtInput=<value>\n"
       "  --TanBeta=<value>\n"
+      "  --LambdaLoopOrder=<value>\n"
 
       "  --help,-h                         print this help message"
              << std::endl;
@@ -82,6 +83,9 @@ void set_command_line_parameters(int argc, char* argv[],
          continue;
 
       if(Command_line_options::get_parameter_value(option, "--TanBeta=", input.TanBeta))
+         continue;
+
+      if(Command_line_options::get_parameter_value(option, "--LambdaLoopOrder=", input.LambdaLoopOrder))
          continue;
 
       

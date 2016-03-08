@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:36:39
+// File generated at Tue 8 Mar 2016 16:17:40
 
 #ifndef MRSSM_PHYSICAL_H
 #define MRSSM_PHYSICAL_H
@@ -47,8 +47,6 @@ struct MRSSM_physical {
    double MSRum;
    double MsigmaO;
    double MphiO;
-   double MVP;
-   double MVZ;
    Eigen::Array<double,6,1> MSd;
    Eigen::Array<double,3,1> MSv;
    Eigen::Array<double,6,1> MSu;
@@ -64,6 +62,8 @@ struct MRSSM_physical {
    Eigen::Array<double,3,1> MFd;
    Eigen::Array<double,3,1> MFu;
    double MVWm;
+   double MVP;
+   double MVZ;
 
    Eigen::Matrix<double,6,6> ZD;
    Eigen::Matrix<double,3,3> ZV;
@@ -85,6 +85,7 @@ struct MRSSM_physical {
    Eigen::Matrix<std::complex<double>,3,3> ZDR;
    Eigen::Matrix<std::complex<double>,3,3> ZUL;
    Eigen::Matrix<std::complex<double>,3,3> ZUR;
+   Eigen::Matrix<double,2,2> ZZ;
 
 };
 

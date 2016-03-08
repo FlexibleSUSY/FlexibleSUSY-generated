@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:29:48
+// File generated at Tue 8 Mar 2016 16:04:21
 
 #include "SplitMSSM_info.hpp"
 
@@ -30,14 +30,14 @@ namespace SplitMSSM_info {
    const double normalization_g3 = 1;
 
    const unsigned particle_multiplicities[NUMBER_OF_PARTICLES] = {1, 1, 3, 1, 1
-      , 1, 1, 1, 3, 3, 3, 4, 2, 1};
+      , 1, 3, 3, 3, 4, 2, 1, 1, 1};
 
    const char* particle_names[NUMBER_OF_PARTICLES] = {"VG", "Hp", "Fv", "Glu",
-      "Ah", "hh", "VP", "VZ", "Fd", "Fu", "Fe", "Chi", "Cha", "VWp"};
+      "Ah", "hh", "Fd", "Fu", "Fe", "Chi", "Cha", "VWp", "VP", "VZ"};
 
    const char* particle_latex_names[NUMBER_OF_PARTICLES] = {   "g", "H^+",
-      "\\nu", "\\tilde{g}", "A^0", "h", "\\gamma", "Z", "d", "u", "e",
-      "\\tilde{\\chi}^0", "\\tilde{\\chi}^-", "W^+"};
+      "\\nu", "\\tilde{g}", "A^0", "h", "d", "u", "e", "\\tilde{\\chi}^0",
+      "\\tilde{\\chi}^-", "W^+", "\\gamma", "Z"};
 
    const char* parameter_names[NUMBER_OF_PARAMETERS] = {"g1", "g2", "g3",
       "Lambdax", "Yu(0,0)", "Yu(0,1)", "Yu(0,2)", "Yu(1,0)", "Yu(1,1)", "Yu(1,2)",
@@ -78,7 +78,8 @@ namespace SplitMSSM_info {
       "Re(ZN(3,2))", "Im(ZN(3,2))", "Re(ZN(3,3))", "Im(ZN(3,3))", "Re(UM(0,0))",
       "Im(UM(0,0))", "Re(UM(0,1))", "Im(UM(0,1))", "Re(UM(1,0))", "Im(UM(1,0))",
       "Re(UM(1,1))", "Im(UM(1,1))", "Re(UP(0,0))", "Im(UP(0,0))", "Re(UP(0,1))",
-      "Im(UP(0,1))", "Re(UP(1,0))", "Im(UP(1,0))", "Re(UP(1,1))", "Im(UP(1,1))"};
+      "Im(UP(0,1))", "Re(UP(1,0))", "Im(UP(1,0))", "Re(UP(1,1))", "Im(UP(1,1))",
+      "ZZ(0,0)", "ZZ(0,1)", "ZZ(1,0)", "ZZ(1,1)"};
 
    const char* input_parameter_names[NUMBER_OF_INPUT_PARAMETERS] = {"MSUSY",
       "M1Input", "M2Input", "M3Input", "MuInput", "mAInput", "MEWSB", "AtInput",

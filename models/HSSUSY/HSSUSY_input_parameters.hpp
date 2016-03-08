@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:29:35
+// File generated at Tue 8 Mar 2016 16:05:49
 
 #ifndef HSSUSY_INPUT_PARAMETERS_H
 #define HSSUSY_INPUT_PARAMETERS_H
@@ -36,6 +36,7 @@ struct HSSUSY_input_parameters {
    double MEWSB;
    double AtInput;
    double TanBeta;
+   double LambdaLoopOrder;
    Eigen::Matrix<double,3,3> msq2;
    Eigen::Matrix<double,3,3> msu2;
    Eigen::Matrix<double,3,3> msd2;
@@ -44,10 +45,10 @@ struct HSSUSY_input_parameters {
 
    HSSUSY_input_parameters()
       : MSUSY(0), M1Input(0), M2Input(0), M3Input(0), MuInput(0), mAInput(0),
-   MEWSB(0), AtInput(0), TanBeta(0), msq2(Eigen::Matrix<double,3,3>::Zero()),
-   msu2(Eigen::Matrix<double,3,3>::Zero()), msd2(Eigen::Matrix<double,3,3>
-   ::Zero()), msl2(Eigen::Matrix<double,3,3>::Zero()), mse2(Eigen::Matrix<
-   double,3,3>::Zero())
+   MEWSB(0), AtInput(0), TanBeta(0), LambdaLoopOrder(0), msq2(Eigen::Matrix<
+   double,3,3>::Zero()), msu2(Eigen::Matrix<double,3,3>::Zero()), msd2(
+   Eigen::Matrix<double,3,3>::Zero()), msl2(Eigen::Matrix<double,3,3>::Zero()),
+   mse2(Eigen::Matrix<double,3,3>::Zero())
 
    {}
 

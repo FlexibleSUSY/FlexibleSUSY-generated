@@ -16,12 +16,14 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:39:26
+// File generated at Tue 8 Mar 2016 18:11:51
 
 #ifndef lowNMSSM_OBSERVABLES_H
 #define lowNMSSM_OBSERVABLES_H
 
-#include "observables.hpp"
+#include <string>
+#include <vector>
+#include <Eigen/Core>
 
 namespace softsusy {
 class QedQcd;
@@ -30,8 +32,21 @@ class QedQcd;
 namespace flexiblesusy {
 
 class lowNMSSM_mass_eigenstates;
+class Physical_input;
 
-Observables calculate_observables(const lowNMSSM_mass_eigenstates&, const softsusy::QedQcd&);
+struct lowNMSSM_observables {
+   static const unsigned NUMBER_OF_OBSERVABLES = 0;
+
+   lowNMSSM_observables();
+   Eigen::ArrayXd get() const; ///< returns vector of all observables
+   static std::vector<std::string> get_names(); ///< returns vector of all observable names
+   void clear(); ///< sets all observables to zero
+   void set(const Eigen::ArrayXd&); ///< sets all observables from given vector
+
+
+};
+
+lowNMSSM_observables calculate_observables(const lowNMSSM_mass_eigenstates&, const softsusy::QedQcd&, const Physical_input&);
 
 } // namespace flexiblesusy
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:54:25
+// File generated at Tue 8 Mar 2016 18:45:00
 
 #include "CMSSM_physical.hpp"
 #include "slha_io.hpp"
@@ -29,14 +29,14 @@ namespace flexiblesusy {
 
 CMSSM_physical::CMSSM_physical()
    :
-    MVG(0), MGlu(0), MFv(Eigen::Array<double,3,1>::Zero()), MVP(0), MVZ(0),
-       MSd(Eigen::Array<double,6,1>::Zero()), MSv(Eigen::Array<double,3,1>::Zero()
-       ), MSu(Eigen::Array<double,6,1>::Zero()), MSe(Eigen::Array<double,6,1>
-       ::Zero()), Mhh(Eigen::Array<double,2,1>::Zero()), MAh(Eigen::Array<double,2
-       ,1>::Zero()), MHpm(Eigen::Array<double,2,1>::Zero()), MChi(Eigen::Array<
-       double,4,1>::Zero()), MCha(Eigen::Array<double,2,1>::Zero()), MFe(
-       Eigen::Array<double,3,1>::Zero()), MFd(Eigen::Array<double,3,1>::Zero()),
-       MFu(Eigen::Array<double,3,1>::Zero()), MVWm(0)
+    MVG(0), MGlu(0), MFv(Eigen::Array<double,3,1>::Zero()), MSd(Eigen::Array<
+       double,6,1>::Zero()), MSv(Eigen::Array<double,3,1>::Zero()), MSu(
+       Eigen::Array<double,6,1>::Zero()), MSe(Eigen::Array<double,6,1>::Zero()),
+       Mhh(Eigen::Array<double,2,1>::Zero()), MAh(Eigen::Array<double,2,1>::Zero()
+       ), MHpm(Eigen::Array<double,2,1>::Zero()), MChi(Eigen::Array<double,4,1>
+       ::Zero()), MCha(Eigen::Array<double,2,1>::Zero()), MFe(Eigen::Array<double,
+       3,1>::Zero()), MFd(Eigen::Array<double,3,1>::Zero()), MFu(Eigen::Array<
+       double,3,1>::Zero()), MVWm(0), MVP(0), MVZ(0)
 
    , ZD(Eigen::Matrix<double,6,6>::Zero()), ZV(Eigen::Matrix<double,3,3>::Zero(
       )), ZU(Eigen::Matrix<double,6,6>::Zero()), ZE(Eigen::Matrix<double,6,6>
@@ -48,7 +48,7 @@ CMSSM_physical::CMSSM_physical()
       std::complex<double>,3,3>::Zero()), ZDL(Eigen::Matrix<std::complex<double>,3
       ,3>::Zero()), ZDR(Eigen::Matrix<std::complex<double>,3,3>::Zero()), ZUL(
       Eigen::Matrix<std::complex<double>,3,3>::Zero()), ZUR(Eigen::Matrix<
-      std::complex<double>,3,3>::Zero())
+      std::complex<double>,3,3>::Zero()), ZZ(Eigen::Matrix<double,2,2>::Zero())
 
 {
 }
@@ -58,8 +58,6 @@ void CMSSM_physical::clear()
    MVG = 0.;
    MGlu = 0.;
    MFv = Eigen::Matrix<double,3,1>::Zero();
-   MVP = 0.;
-   MVZ = 0.;
    MSd = Eigen::Matrix<double,6,1>::Zero();
    ZD = Eigen::Matrix<double,6,6>::Zero();
    MSv = Eigen::Matrix<double,3,1>::Zero();
@@ -89,6 +87,8 @@ void CMSSM_physical::clear()
    ZUL = Eigen::Matrix<std::complex<double>,3,3>::Zero();
    ZUR = Eigen::Matrix<std::complex<double>,3,3>::Zero();
    MVWm = 0.;
+   MVP = 0.;
+   MVZ = 0.;
 
 }
 
@@ -118,7 +118,7 @@ Eigen::ArrayXd CMSSM_physical::get() const
 {
    Eigen::ArrayXd pars(get_masses());
 
-   pars.conservativeResize(335);
+   pars.conservativeResize(339);
 
    pars(50) = ZD(0,0);
    pars(51) = ZD(0,1);
@@ -405,6 +405,10 @@ Eigen::ArrayXd CMSSM_physical::get() const
    pars(332) = Im(ZUR(2,1));
    pars(333) = Re(ZUR(2,2));
    pars(334) = Im(ZUR(2,2));
+   pars(335) = ZZ(0,0);
+   pars(336) = ZZ(0,1);
+   pars(337) = ZZ(1,0);
+   pars(338) = ZZ(1,1);
 
 
    return pars;
@@ -621,6 +625,10 @@ void CMSSM_physical::set(const Eigen::ArrayXd& pars)
    ZUR(2,0) = std::complex<double>(pars(329), pars(330));
    ZUR(2,1) = std::complex<double>(pars(331), pars(332));
    ZUR(2,2) = std::complex<double>(pars(333), pars(334));
+   ZZ(0,0) = pars(335);
+   ZZ(0,1) = pars(336);
+   ZZ(1,0) = pars(337);
+   ZZ(1,1) = pars(338);
 
 }
 
@@ -633,51 +641,51 @@ Eigen::ArrayXd CMSSM_physical::get_masses() const
    pars(2) = MFv(0);
    pars(3) = MFv(1);
    pars(4) = MFv(2);
-   pars(5) = MVP;
-   pars(6) = MVZ;
-   pars(7) = MSd(0);
-   pars(8) = MSd(1);
-   pars(9) = MSd(2);
-   pars(10) = MSd(3);
-   pars(11) = MSd(4);
-   pars(12) = MSd(5);
-   pars(13) = MSv(0);
-   pars(14) = MSv(1);
-   pars(15) = MSv(2);
-   pars(16) = MSu(0);
-   pars(17) = MSu(1);
-   pars(18) = MSu(2);
-   pars(19) = MSu(3);
-   pars(20) = MSu(4);
-   pars(21) = MSu(5);
-   pars(22) = MSe(0);
-   pars(23) = MSe(1);
-   pars(24) = MSe(2);
-   pars(25) = MSe(3);
-   pars(26) = MSe(4);
-   pars(27) = MSe(5);
-   pars(28) = Mhh(0);
-   pars(29) = Mhh(1);
-   pars(30) = MAh(0);
-   pars(31) = MAh(1);
-   pars(32) = MHpm(0);
-   pars(33) = MHpm(1);
-   pars(34) = MChi(0);
-   pars(35) = MChi(1);
-   pars(36) = MChi(2);
-   pars(37) = MChi(3);
-   pars(38) = MCha(0);
-   pars(39) = MCha(1);
-   pars(40) = MFe(0);
-   pars(41) = MFe(1);
-   pars(42) = MFe(2);
-   pars(43) = MFd(0);
-   pars(44) = MFd(1);
-   pars(45) = MFd(2);
-   pars(46) = MFu(0);
-   pars(47) = MFu(1);
-   pars(48) = MFu(2);
-   pars(49) = MVWm;
+   pars(5) = MSd(0);
+   pars(6) = MSd(1);
+   pars(7) = MSd(2);
+   pars(8) = MSd(3);
+   pars(9) = MSd(4);
+   pars(10) = MSd(5);
+   pars(11) = MSv(0);
+   pars(12) = MSv(1);
+   pars(13) = MSv(2);
+   pars(14) = MSu(0);
+   pars(15) = MSu(1);
+   pars(16) = MSu(2);
+   pars(17) = MSu(3);
+   pars(18) = MSu(4);
+   pars(19) = MSu(5);
+   pars(20) = MSe(0);
+   pars(21) = MSe(1);
+   pars(22) = MSe(2);
+   pars(23) = MSe(3);
+   pars(24) = MSe(4);
+   pars(25) = MSe(5);
+   pars(26) = Mhh(0);
+   pars(27) = Mhh(1);
+   pars(28) = MAh(0);
+   pars(29) = MAh(1);
+   pars(30) = MHpm(0);
+   pars(31) = MHpm(1);
+   pars(32) = MChi(0);
+   pars(33) = MChi(1);
+   pars(34) = MChi(2);
+   pars(35) = MChi(3);
+   pars(36) = MCha(0);
+   pars(37) = MCha(1);
+   pars(38) = MFe(0);
+   pars(39) = MFe(1);
+   pars(40) = MFe(2);
+   pars(41) = MFd(0);
+   pars(42) = MFd(1);
+   pars(43) = MFd(2);
+   pars(44) = MFu(0);
+   pars(45) = MFu(1);
+   pars(46) = MFu(2);
+   pars(47) = MVWm;
+   pars(48) = MVP;
+   pars(49) = MVZ;
 
    return pars;
 }
@@ -689,51 +697,51 @@ void CMSSM_physical::set_masses(const Eigen::ArrayXd& pars)
    MFv(0) = pars(2);
    MFv(1) = pars(3);
    MFv(2) = pars(4);
-   MVP = pars(5);
-   MVZ = pars(6);
-   MSd(0) = pars(7);
-   MSd(1) = pars(8);
-   MSd(2) = pars(9);
-   MSd(3) = pars(10);
-   MSd(4) = pars(11);
-   MSd(5) = pars(12);
-   MSv(0) = pars(13);
-   MSv(1) = pars(14);
-   MSv(2) = pars(15);
-   MSu(0) = pars(16);
-   MSu(1) = pars(17);
-   MSu(2) = pars(18);
-   MSu(3) = pars(19);
-   MSu(4) = pars(20);
-   MSu(5) = pars(21);
-   MSe(0) = pars(22);
-   MSe(1) = pars(23);
-   MSe(2) = pars(24);
-   MSe(3) = pars(25);
-   MSe(4) = pars(26);
-   MSe(5) = pars(27);
-   Mhh(0) = pars(28);
-   Mhh(1) = pars(29);
-   MAh(0) = pars(30);
-   MAh(1) = pars(31);
-   MHpm(0) = pars(32);
-   MHpm(1) = pars(33);
-   MChi(0) = pars(34);
-   MChi(1) = pars(35);
-   MChi(2) = pars(36);
-   MChi(3) = pars(37);
-   MCha(0) = pars(38);
-   MCha(1) = pars(39);
-   MFe(0) = pars(40);
-   MFe(1) = pars(41);
-   MFe(2) = pars(42);
-   MFd(0) = pars(43);
-   MFd(1) = pars(44);
-   MFd(2) = pars(45);
-   MFu(0) = pars(46);
-   MFu(1) = pars(47);
-   MFu(2) = pars(48);
-   MVWm = pars(49);
+   MSd(0) = pars(5);
+   MSd(1) = pars(6);
+   MSd(2) = pars(7);
+   MSd(3) = pars(8);
+   MSd(4) = pars(9);
+   MSd(5) = pars(10);
+   MSv(0) = pars(11);
+   MSv(1) = pars(12);
+   MSv(2) = pars(13);
+   MSu(0) = pars(14);
+   MSu(1) = pars(15);
+   MSu(2) = pars(16);
+   MSu(3) = pars(17);
+   MSu(4) = pars(18);
+   MSu(5) = pars(19);
+   MSe(0) = pars(20);
+   MSe(1) = pars(21);
+   MSe(2) = pars(22);
+   MSe(3) = pars(23);
+   MSe(4) = pars(24);
+   MSe(5) = pars(25);
+   Mhh(0) = pars(26);
+   Mhh(1) = pars(27);
+   MAh(0) = pars(28);
+   MAh(1) = pars(29);
+   MHpm(0) = pars(30);
+   MHpm(1) = pars(31);
+   MChi(0) = pars(32);
+   MChi(1) = pars(33);
+   MChi(2) = pars(34);
+   MChi(3) = pars(35);
+   MCha(0) = pars(36);
+   MCha(1) = pars(37);
+   MFe(0) = pars(38);
+   MFe(1) = pars(39);
+   MFe(2) = pars(40);
+   MFd(0) = pars(41);
+   MFd(1) = pars(42);
+   MFd(2) = pars(43);
+   MFu(0) = pars(44);
+   MFu(1) = pars(45);
+   MFu(2) = pars(46);
+   MVWm = pars(47);
+   MVP = pars(48);
+   MVZ = pars(49);
 
 }
 
@@ -745,8 +753,6 @@ void CMSSM_physical::print(std::ostream& ostr) const
    ostr << "MVG = " << MVG << '\n';
    ostr << "MGlu = " << MGlu << '\n';
    ostr << "MFv = " << MFv.transpose() << '\n';
-   ostr << "MVP = " << MVP << '\n';
-   ostr << "MVZ = " << MVZ << '\n';
    ostr << "MSd = " << MSd.transpose() << '\n';
    ostr << "MSv = " << MSv.transpose() << '\n';
    ostr << "MSu = " << MSu.transpose() << '\n';
@@ -780,6 +786,7 @@ void CMSSM_physical::print(std::ostream& ostr) const
    ostr << "ZDR = " << ZDR << '\n';
    ostr << "ZUL = " << ZUL << '\n';
    ostr << "ZUR = " << ZUR << '\n';
+   ostr << "ZZ = " << ZZ << '\n';
 
 }
 

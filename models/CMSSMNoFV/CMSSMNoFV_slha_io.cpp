@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:48:16
+// File generated at Tue 8 Mar 2016 18:35:34
 
 #include "CMSSMNoFV_slha_io.hpp"
 #include "CMSSMNoFV_input_parameters.hpp"
@@ -52,12 +52,18 @@ char const * const CMSSMNoFV_slha_io::drbar_blocks[NUMBER_OF_DRBAR_BLOCKS] =
 
 CMSSMNoFV_slha_io::CMSSMNoFV_slha_io()
    : slha_io()
+   , print_imaginary_parts_of_majorana_mixings(false)
 {
 }
 
 void CMSSMNoFV_slha_io::clear()
 {
    slha_io.clear();
+}
+
+void CMSSMNoFV_slha_io::set_print_imaginary_parts_of_majorana_mixings(bool flag)
+{
+   print_imaginary_parts_of_majorana_mixings = flag;
 }
 
 /**
@@ -182,8 +188,6 @@ void CMSSMNoFV_slha_io::set_mass(const CMSSMNoFV_physical& physical,
    if (write_sm_masses) {
       mass
          << FORMAT_MASS(21, LOCALPHYSICAL(MVG), "VG")
-         << FORMAT_MASS(22, LOCALPHYSICAL(MVP), "VP")
-         << FORMAT_MASS(23, LOCALPHYSICAL(MVZ), "VZ")
          << FORMAT_MASS(1, LOCALPHYSICAL(MFd), "Fd")
          << FORMAT_MASS(3, LOCALPHYSICAL(MFs), "Fs")
          << FORMAT_MASS(5, LOCALPHYSICAL(MFb), "Fb")
@@ -196,6 +200,8 @@ void CMSSMNoFV_slha_io::set_mass(const CMSSMNoFV_physical& physical,
          << FORMAT_MASS(11, LOCALPHYSICAL(MFe), "Fe")
          << FORMAT_MASS(13, LOCALPHYSICAL(MFm), "Fm")
          << FORMAT_MASS(15, LOCALPHYSICAL(MFtau), "Ftau")
+         << FORMAT_MASS(22, LOCALPHYSICAL(MVP), "VP")
+         << FORMAT_MASS(23, LOCALPHYSICAL(MVZ), "VZ")
       ;
    }
 
@@ -231,6 +237,10 @@ void CMSSMNoFV_slha_io::set_mixing_matrices(const CMSSMNoFV_physical& physical,
    slha_io.set_block("supmix", LOCALPHYSICAL(ZU), "ZU");
 
    if (write_sm_mixing_matrics) {
+   }
+
+   if (print_imaginary_parts_of_majorana_mixings) {
+      slha_io.set_block_imag("IMNMIX", LOCALPHYSICAL(ZN), "ZN");
    }
 
 }
@@ -411,6 +421,17 @@ void CMSSMNoFV_slha_io::fill(CMSSMNoFV_mass_eigenstates& model) const
    fill_physical(physical_hk);
    physical_hk.convert_to_hk();
    model.get_physical() = physical_hk;
+}
+
+/**
+ * Fill struct of extra physical input parameters from SLHA object
+ * (FlexibleSUSYInput block)
+ *
+ * @param settings struct of physical input parameters
+ */
+void CMSSMNoFV_slha_io::fill(Physical_input& input) const
+{
+   slha_io.fill(input);
 }
 
 /**

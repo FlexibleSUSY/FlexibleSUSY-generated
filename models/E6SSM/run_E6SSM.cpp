@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:42:58
+// File generated at Tue 8 Mar 2016 18:08:40
 
 #include "E6SSM_input_parameters.hpp"
 #include "E6SSM_observables.hpp"
@@ -24,6 +24,7 @@
 #include "E6SSM_spectrum_generator.hpp"
 #include "E6SSM_utilities.hpp"
 
+#include "physical_input.hpp"
 #include "spectrum_generator_settings.hpp"
 #include "lowe.h"
 #include "command_line_options.hpp"
@@ -48,6 +49,7 @@ int main(int argc, const char* argv[])
    const std::string slha_output_file(options.get_slha_output_file());
    const std::string spectrum_file(options.get_spectrum_file());
    E6SSM_slha_io slha_io;
+   Physical_input physical_input; // extra non-SLHA physical input
    Spectrum_generator_settings spectrum_generator_settings;
    softsusy::QedQcd qedqcd;
    E6SSM_input_parameters input;
@@ -62,6 +64,7 @@ int main(int argc, const char* argv[])
       slha_io.read_from_source(slha_input_source);
       slha_io.fill(qedqcd);
       slha_io.fill(input);
+      slha_io.fill(physical_input);
       slha_io.fill(spectrum_generator_settings);
    } catch (const Error& error) {
       ERROR(error.what());
@@ -77,7 +80,9 @@ int main(int argc, const char* argv[])
 
    spectrum_generator.run(qedqcd, input);
 
-   const E6SSM_slha<algorithm_type> model(spectrum_generator.get_model());
+   const E6SSM_slha<algorithm_type> model(
+      spectrum_generator.get_model(),
+      spectrum_generator_settings.get(Spectrum_generator_settings::force_positive_masses) == 0.);
    const Problems<E6SSM_info::NUMBER_OF_PARTICLES>& problems
       = spectrum_generator.get_problems();
 
@@ -86,9 +91,9 @@ int main(int argc, const char* argv[])
    scales.SUSYScale = spectrum_generator.get_susy_scale();
    scales.LowScale  = spectrum_generator.get_low_scale();
 
-   Observables observables;
+   E6SSM_observables observables;
    if (spectrum_generator_settings.get(Spectrum_generator_settings::calculate_observables))
-      observables = calculate_observables(model, qedqcd);
+      observables = calculate_observables(model, qedqcd, physical_input);
 
    // SLHA output
    if (!slha_output_file.empty()) {
@@ -97,6 +102,8 @@ int main(int argc, const char* argv[])
       slha_io.set_extpar(input);
       if (!problems.have_problem() ||
           spectrum_generator_settings.get(Spectrum_generator_settings::force_output)) {
+         slha_io.set_print_imaginary_parts_of_majorana_mixings(
+            spectrum_generator_settings.get(Spectrum_generator_settings::force_positive_masses));
          slha_io.set_spectrum(model);
          slha_io.set_extra(model, scales, observables);
       }
@@ -111,7 +118,8 @@ int main(int argc, const char* argv[])
    if (!database_output_file.empty() &&
        (!problems.have_problem() ||
         spectrum_generator_settings.get(Spectrum_generator_settings::force_output))) {
-      E6SSM_database::to_database(database_output_file, model, &qedqcd, &observables);
+      E6SSM_database::to_database(database_output_file, model, &qedqcd,
+                                        &physical_input, &observables);
    }
 
    if (!spectrum_file.empty())

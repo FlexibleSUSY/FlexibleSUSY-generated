@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:35:43
+// File generated at Tue 8 Mar 2016 17:13:43
 
 #include "E6SSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -28,6 +28,10 @@ namespace flexiblesusy {
 
 #define INPUT(parameter) input.parameter
 #define TRACE_STRUCT soft_traces
+#define TRACE_STRUCT_TYPE Soft_traces
+#define CALCULATE_TRACES() calc_soft_traces(TRACE_STRUCT);
+
+const int E6SSM_soft_parameters::numberOfParameters;
 
 E6SSM_soft_parameters::E6SSM_soft_parameters(const E6SSM_input_parameters& input_)
    : E6SSM_susy_parameters(input_)
@@ -81,71 +85,96 @@ Eigen::ArrayXd E6SSM_soft_parameters::beta() const
 
 E6SSM_soft_parameters E6SSM_soft_parameters::calc_beta() const
 {
-   Soft_traces soft_traces;
-   calc_soft_traces(soft_traces);
-
-   Eigen::Matrix<double,3,3> beta_TYd(calc_beta_TYd_one_loop(TRACE_STRUCT));
-   Eigen::Matrix<double,3,3> beta_TYe(calc_beta_TYe_one_loop(TRACE_STRUCT));
-   Eigen::Matrix<double,3,3> beta_TKappa(calc_beta_TKappa_one_loop(TRACE_STRUCT
-      ));
-   Eigen::Matrix<double,2,2> beta_TLambda12(calc_beta_TLambda12_one_loop(
-      TRACE_STRUCT));
-   double beta_TLambdax(calc_beta_TLambdax_one_loop(TRACE_STRUCT));
-   Eigen::Matrix<double,3,3> beta_TYu(calc_beta_TYu_one_loop(TRACE_STRUCT));
-   double beta_BMuPr(calc_beta_BMuPr_one_loop(TRACE_STRUCT));
-   Eigen::Matrix<double,3,3> beta_mq2(calc_beta_mq2_one_loop(TRACE_STRUCT));
-   Eigen::Matrix<double,3,3> beta_ml2(calc_beta_ml2_one_loop(TRACE_STRUCT));
-   double beta_mHd2(calc_beta_mHd2_one_loop(TRACE_STRUCT));
-   double beta_mHu2(calc_beta_mHu2_one_loop(TRACE_STRUCT));
-   Eigen::Matrix<double,3,3> beta_md2(calc_beta_md2_one_loop(TRACE_STRUCT));
-   Eigen::Matrix<double,3,3> beta_mu2(calc_beta_mu2_one_loop(TRACE_STRUCT));
-   Eigen::Matrix<double,3,3> beta_me2(calc_beta_me2_one_loop(TRACE_STRUCT));
-   double beta_ms2(calc_beta_ms2_one_loop(TRACE_STRUCT));
-   Eigen::Matrix<double,2,2> beta_mH1I2(calc_beta_mH1I2_one_loop(TRACE_STRUCT))
+   Eigen::Matrix<double,3,3> beta_TYd = Eigen::Matrix<double,3,3>::Zero();
+   Eigen::Matrix<double,3,3> beta_TYe = Eigen::Matrix<double,3,3>::Zero();
+   Eigen::Matrix<double,3,3> beta_TKappa = Eigen::Matrix<double,3,3>::Zero();
+   Eigen::Matrix<double,2,2> beta_TLambda12 = Eigen::Matrix<double,2,2>::Zero()
       ;
-   Eigen::Matrix<double,2,2> beta_mH2I2(calc_beta_mH2I2_one_loop(TRACE_STRUCT))
-      ;
-   Eigen::Matrix<double,2,2> beta_msI2(calc_beta_msI2_one_loop(TRACE_STRUCT));
-   Eigen::Matrix<double,3,3> beta_mDx2(calc_beta_mDx2_one_loop(TRACE_STRUCT));
-   Eigen::Matrix<double,3,3> beta_mDxbar2(calc_beta_mDxbar2_one_loop(
-      TRACE_STRUCT));
-   double beta_mHp2(calc_beta_mHp2_one_loop(TRACE_STRUCT));
-   double beta_mHpbar2(calc_beta_mHpbar2_one_loop(TRACE_STRUCT));
-   double beta_MassB(calc_beta_MassB_one_loop(TRACE_STRUCT));
-   double beta_MassWB(calc_beta_MassWB_one_loop(TRACE_STRUCT));
-   double beta_MassG(calc_beta_MassG_one_loop(TRACE_STRUCT));
-   double beta_MassBp(calc_beta_MassBp_one_loop(TRACE_STRUCT));
+   double beta_TLambdax = 0.;
+   Eigen::Matrix<double,3,3> beta_TYu = Eigen::Matrix<double,3,3>::Zero();
+   double beta_BMuPr = 0.;
+   Eigen::Matrix<double,3,3> beta_mq2 = Eigen::Matrix<double,3,3>::Zero();
+   Eigen::Matrix<double,3,3> beta_ml2 = Eigen::Matrix<double,3,3>::Zero();
+   double beta_mHd2 = 0.;
+   double beta_mHu2 = 0.;
+   Eigen::Matrix<double,3,3> beta_md2 = Eigen::Matrix<double,3,3>::Zero();
+   Eigen::Matrix<double,3,3> beta_mu2 = Eigen::Matrix<double,3,3>::Zero();
+   Eigen::Matrix<double,3,3> beta_me2 = Eigen::Matrix<double,3,3>::Zero();
+   double beta_ms2 = 0.;
+   Eigen::Matrix<double,2,2> beta_mH1I2 = Eigen::Matrix<double,2,2>::Zero();
+   Eigen::Matrix<double,2,2> beta_mH2I2 = Eigen::Matrix<double,2,2>::Zero();
+   Eigen::Matrix<double,2,2> beta_msI2 = Eigen::Matrix<double,2,2>::Zero();
+   Eigen::Matrix<double,3,3> beta_mDx2 = Eigen::Matrix<double,3,3>::Zero();
+   Eigen::Matrix<double,3,3> beta_mDxbar2 = Eigen::Matrix<double,3,3>::Zero();
+   double beta_mHp2 = 0.;
+   double beta_mHpbar2 = 0.;
+   double beta_MassB = 0.;
+   double beta_MassWB = 0.;
+   double beta_MassG = 0.;
+   double beta_MassBp = 0.;
 
-   if (get_loops() > 1) {
-      beta_TYd += calc_beta_TYd_two_loop(TRACE_STRUCT);
-      beta_TYe += calc_beta_TYe_two_loop(TRACE_STRUCT);
-      beta_TKappa += calc_beta_TKappa_two_loop(TRACE_STRUCT);
-      beta_TLambda12 += calc_beta_TLambda12_two_loop(TRACE_STRUCT);
-      beta_TLambdax += calc_beta_TLambdax_two_loop(TRACE_STRUCT);
-      beta_TYu += calc_beta_TYu_two_loop(TRACE_STRUCT);
-      beta_BMuPr += calc_beta_BMuPr_two_loop(TRACE_STRUCT);
-      beta_mq2 += calc_beta_mq2_two_loop(TRACE_STRUCT);
-      beta_ml2 += calc_beta_ml2_two_loop(TRACE_STRUCT);
-      beta_mHd2 += calc_beta_mHd2_two_loop(TRACE_STRUCT);
-      beta_mHu2 += calc_beta_mHu2_two_loop(TRACE_STRUCT);
-      beta_md2 += calc_beta_md2_two_loop(TRACE_STRUCT);
-      beta_mu2 += calc_beta_mu2_two_loop(TRACE_STRUCT);
-      beta_me2 += calc_beta_me2_two_loop(TRACE_STRUCT);
-      beta_ms2 += calc_beta_ms2_two_loop(TRACE_STRUCT);
-      beta_mH1I2 += calc_beta_mH1I2_two_loop(TRACE_STRUCT);
-      beta_mH2I2 += calc_beta_mH2I2_two_loop(TRACE_STRUCT);
-      beta_msI2 += calc_beta_msI2_two_loop(TRACE_STRUCT);
-      beta_mDx2 += calc_beta_mDx2_two_loop(TRACE_STRUCT);
-      beta_mDxbar2 += calc_beta_mDxbar2_two_loop(TRACE_STRUCT);
-      beta_mHp2 += calc_beta_mHp2_two_loop(TRACE_STRUCT);
-      beta_mHpbar2 += calc_beta_mHpbar2_two_loop(TRACE_STRUCT);
-      beta_MassB += calc_beta_MassB_two_loop(TRACE_STRUCT);
-      beta_MassWB += calc_beta_MassWB_two_loop(TRACE_STRUCT);
-      beta_MassG += calc_beta_MassG_two_loop(TRACE_STRUCT);
-      beta_MassBp += calc_beta_MassBp_two_loop(TRACE_STRUCT);
+   if (get_loops() > 0) {
+      TRACE_STRUCT_TYPE TRACE_STRUCT;
+      CALCULATE_TRACES();
 
-      if (get_loops() > 2) {
+      beta_TYd += calc_beta_TYd_one_loop(TRACE_STRUCT);
+      beta_TYe += calc_beta_TYe_one_loop(TRACE_STRUCT);
+      beta_TKappa += calc_beta_TKappa_one_loop(TRACE_STRUCT);
+      beta_TLambda12 += calc_beta_TLambda12_one_loop(TRACE_STRUCT);
+      beta_TLambdax += calc_beta_TLambdax_one_loop(TRACE_STRUCT);
+      beta_TYu += calc_beta_TYu_one_loop(TRACE_STRUCT);
+      beta_BMuPr += calc_beta_BMuPr_one_loop(TRACE_STRUCT);
+      beta_mq2 += calc_beta_mq2_one_loop(TRACE_STRUCT);
+      beta_ml2 += calc_beta_ml2_one_loop(TRACE_STRUCT);
+      beta_mHd2 += calc_beta_mHd2_one_loop(TRACE_STRUCT);
+      beta_mHu2 += calc_beta_mHu2_one_loop(TRACE_STRUCT);
+      beta_md2 += calc_beta_md2_one_loop(TRACE_STRUCT);
+      beta_mu2 += calc_beta_mu2_one_loop(TRACE_STRUCT);
+      beta_me2 += calc_beta_me2_one_loop(TRACE_STRUCT);
+      beta_ms2 += calc_beta_ms2_one_loop(TRACE_STRUCT);
+      beta_mH1I2 += calc_beta_mH1I2_one_loop(TRACE_STRUCT);
+      beta_mH2I2 += calc_beta_mH2I2_one_loop(TRACE_STRUCT);
+      beta_msI2 += calc_beta_msI2_one_loop(TRACE_STRUCT);
+      beta_mDx2 += calc_beta_mDx2_one_loop(TRACE_STRUCT);
+      beta_mDxbar2 += calc_beta_mDxbar2_one_loop(TRACE_STRUCT);
+      beta_mHp2 += calc_beta_mHp2_one_loop(TRACE_STRUCT);
+      beta_mHpbar2 += calc_beta_mHpbar2_one_loop(TRACE_STRUCT);
+      beta_MassB += calc_beta_MassB_one_loop(TRACE_STRUCT);
+      beta_MassWB += calc_beta_MassWB_one_loop(TRACE_STRUCT);
+      beta_MassG += calc_beta_MassG_one_loop(TRACE_STRUCT);
+      beta_MassBp += calc_beta_MassBp_one_loop(TRACE_STRUCT);
 
+      if (get_loops() > 1) {
+         beta_TYd += calc_beta_TYd_two_loop(TRACE_STRUCT);
+         beta_TYe += calc_beta_TYe_two_loop(TRACE_STRUCT);
+         beta_TKappa += calc_beta_TKappa_two_loop(TRACE_STRUCT);
+         beta_TLambda12 += calc_beta_TLambda12_two_loop(TRACE_STRUCT);
+         beta_TLambdax += calc_beta_TLambdax_two_loop(TRACE_STRUCT);
+         beta_TYu += calc_beta_TYu_two_loop(TRACE_STRUCT);
+         beta_BMuPr += calc_beta_BMuPr_two_loop(TRACE_STRUCT);
+         beta_mq2 += calc_beta_mq2_two_loop(TRACE_STRUCT);
+         beta_ml2 += calc_beta_ml2_two_loop(TRACE_STRUCT);
+         beta_mHd2 += calc_beta_mHd2_two_loop(TRACE_STRUCT);
+         beta_mHu2 += calc_beta_mHu2_two_loop(TRACE_STRUCT);
+         beta_md2 += calc_beta_md2_two_loop(TRACE_STRUCT);
+         beta_mu2 += calc_beta_mu2_two_loop(TRACE_STRUCT);
+         beta_me2 += calc_beta_me2_two_loop(TRACE_STRUCT);
+         beta_ms2 += calc_beta_ms2_two_loop(TRACE_STRUCT);
+         beta_mH1I2 += calc_beta_mH1I2_two_loop(TRACE_STRUCT);
+         beta_mH2I2 += calc_beta_mH2I2_two_loop(TRACE_STRUCT);
+         beta_msI2 += calc_beta_msI2_two_loop(TRACE_STRUCT);
+         beta_mDx2 += calc_beta_mDx2_two_loop(TRACE_STRUCT);
+         beta_mDxbar2 += calc_beta_mDxbar2_two_loop(TRACE_STRUCT);
+         beta_mHp2 += calc_beta_mHp2_two_loop(TRACE_STRUCT);
+         beta_mHpbar2 += calc_beta_mHpbar2_two_loop(TRACE_STRUCT);
+         beta_MassB += calc_beta_MassB_two_loop(TRACE_STRUCT);
+         beta_MassWB += calc_beta_MassWB_two_loop(TRACE_STRUCT);
+         beta_MassG += calc_beta_MassG_two_loop(TRACE_STRUCT);
+         beta_MassBp += calc_beta_MassBp_two_loop(TRACE_STRUCT);
+
+         if (get_loops() > 2) {
+
+         }
       }
    }
 

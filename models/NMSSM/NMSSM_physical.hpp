@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:43:20
+// File generated at Tue 8 Mar 2016 18:27:27
 
 #ifndef NMSSM_PHYSICAL_H
 #define NMSSM_PHYSICAL_H
@@ -43,8 +43,6 @@ struct NMSSM_physical {
    double MVG;
    double MGlu;
    Eigen::Array<double,3,1> MFv;
-   double MVP;
-   double MVZ;
    Eigen::Array<double,6,1> MSd;
    Eigen::Array<double,3,1> MSv;
    Eigen::Array<double,6,1> MSu;
@@ -58,6 +56,8 @@ struct NMSSM_physical {
    Eigen::Array<double,3,1> MFd;
    Eigen::Array<double,3,1> MFu;
    double MVWm;
+   double MVP;
+   double MVZ;
 
    Eigen::Matrix<double,6,6> ZD;
    Eigen::Matrix<double,3,3> ZV;
@@ -75,6 +75,7 @@ struct NMSSM_physical {
    Eigen::Matrix<std::complex<double>,3,3> ZDR;
    Eigen::Matrix<std::complex<double>,3,3> ZUL;
    Eigen::Matrix<std::complex<double>,3,3> ZUR;
+   Eigen::Matrix<double,2,2> ZZ;
 
 };
 

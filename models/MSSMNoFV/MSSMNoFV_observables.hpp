@@ -16,12 +16,14 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:53:56
+// File generated at Tue 8 Mar 2016 18:41:12
 
 #ifndef MSSMNoFV_OBSERVABLES_H
 #define MSSMNoFV_OBSERVABLES_H
 
-#include "observables.hpp"
+#include <string>
+#include <vector>
+#include <Eigen/Core>
 
 namespace softsusy {
 class QedQcd;
@@ -30,8 +32,23 @@ class QedQcd;
 namespace flexiblesusy {
 
 class MSSMNoFV_mass_eigenstates;
+class Physical_input;
 
-Observables calculate_observables(const MSSMNoFV_mass_eigenstates&, const softsusy::QedQcd&);
+struct MSSMNoFV_observables {
+   static const unsigned NUMBER_OF_OBSERVABLES = 2;
+
+   MSSMNoFV_observables();
+   Eigen::ArrayXd get() const; ///< returns vector of all observables
+   static std::vector<std::string> get_names(); ///< returns vector of all observable names
+   void clear(); ///< sets all observables to zero
+   void set(const Eigen::ArrayXd&); ///< sets all observables from given vector
+
+   double a_muon_gm2calc; ///< a_muon = (g-2)/2 of the muon (calculated with GM2Calc)
+   double a_muon_gm2calc_uncertainty; ///< uncertainty of (g-2)/2 of the muon (calculated with GM2Calc)
+
+};
+
+MSSMNoFV_observables calculate_observables(const MSSMNoFV_mass_eigenstates&, const softsusy::QedQcd&, const Physical_input&);
 
 } // namespace flexiblesusy
 

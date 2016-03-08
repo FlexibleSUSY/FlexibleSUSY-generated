@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:30:01
+// File generated at Tue 8 Mar 2016 16:06:15
 
 #include "HSSUSY_physical.hpp"
 #include "slha_io.hpp"
@@ -29,15 +29,15 @@ namespace flexiblesusy {
 
 HSSUSY_physical::HSSUSY_physical()
    :
-    MVG(0), MHp(0), MFv(Eigen::Array<double,3,1>::Zero()), MAh(0), Mhh(0), MVP
-       (0), MVZ(0), MFd(Eigen::Array<double,3,1>::Zero()), MFu(Eigen::Array<double
-       ,3,1>::Zero()), MFe(Eigen::Array<double,3,1>::Zero()), MVWp(0)
+    MVG(0), MHp(0), MFv(Eigen::Array<double,3,1>::Zero()), MAh(0), Mhh(0), MFd
+       (Eigen::Array<double,3,1>::Zero()), MFu(Eigen::Array<double,3,1>::Zero()),
+       MFe(Eigen::Array<double,3,1>::Zero()), MVWp(0), MVP(0), MVZ(0)
 
    , Vd(Eigen::Matrix<std::complex<double>,3,3>::Zero()), Ud(Eigen::Matrix<
       std::complex<double>,3,3>::Zero()), Vu(Eigen::Matrix<std::complex<double>,3,
       3>::Zero()), Uu(Eigen::Matrix<std::complex<double>,3,3>::Zero()), Ve(
       Eigen::Matrix<std::complex<double>,3,3>::Zero()), Ue(Eigen::Matrix<
-      std::complex<double>,3,3>::Zero())
+      std::complex<double>,3,3>::Zero()), ZZ(Eigen::Matrix<double,2,2>::Zero())
 
 {
 }
@@ -49,8 +49,6 @@ void HSSUSY_physical::clear()
    MFv = Eigen::Matrix<double,3,1>::Zero();
    MAh = 0.;
    Mhh = 0.;
-   MVP = 0.;
-   MVZ = 0.;
    MFd = Eigen::Matrix<double,3,1>::Zero();
    Vd = Eigen::Matrix<std::complex<double>,3,3>::Zero();
    Ud = Eigen::Matrix<std::complex<double>,3,3>::Zero();
@@ -61,6 +59,8 @@ void HSSUSY_physical::clear()
    Ve = Eigen::Matrix<std::complex<double>,3,3>::Zero();
    Ue = Eigen::Matrix<std::complex<double>,3,3>::Zero();
    MVWp = 0.;
+   MVP = 0.;
+   MVZ = 0.;
 
 }
 
@@ -88,7 +88,7 @@ Eigen::ArrayXd HSSUSY_physical::get() const
 {
    Eigen::ArrayXd pars(get_masses());
 
-   pars.conservativeResize(127);
+   pars.conservativeResize(131);
 
    pars(19) = Re(Vd(0,0));
    pars(20) = Im(Vd(0,0));
@@ -198,6 +198,10 @@ Eigen::ArrayXd HSSUSY_physical::get() const
    pars(124) = Im(Ue(2,1));
    pars(125) = Re(Ue(2,2));
    pars(126) = Im(Ue(2,2));
+   pars(127) = ZZ(0,0);
+   pars(128) = ZZ(0,1);
+   pars(129) = ZZ(1,0);
+   pars(130) = ZZ(1,1);
 
 
    return pars;
@@ -261,6 +265,10 @@ void HSSUSY_physical::set(const Eigen::ArrayXd& pars)
    Ue(2,0) = std::complex<double>(pars(121), pars(122));
    Ue(2,1) = std::complex<double>(pars(123), pars(124));
    Ue(2,2) = std::complex<double>(pars(125), pars(126));
+   ZZ(0,0) = pars(127);
+   ZZ(0,1) = pars(128);
+   ZZ(1,0) = pars(129);
+   ZZ(1,1) = pars(130);
 
 }
 
@@ -275,18 +283,18 @@ Eigen::ArrayXd HSSUSY_physical::get_masses() const
    pars(4) = MFv(2);
    pars(5) = MAh;
    pars(6) = Mhh;
-   pars(7) = MVP;
-   pars(8) = MVZ;
-   pars(9) = MFd(0);
-   pars(10) = MFd(1);
-   pars(11) = MFd(2);
-   pars(12) = MFu(0);
-   pars(13) = MFu(1);
-   pars(14) = MFu(2);
-   pars(15) = MFe(0);
-   pars(16) = MFe(1);
-   pars(17) = MFe(2);
-   pars(18) = MVWp;
+   pars(7) = MFd(0);
+   pars(8) = MFd(1);
+   pars(9) = MFd(2);
+   pars(10) = MFu(0);
+   pars(11) = MFu(1);
+   pars(12) = MFu(2);
+   pars(13) = MFe(0);
+   pars(14) = MFe(1);
+   pars(15) = MFe(2);
+   pars(16) = MVWp;
+   pars(17) = MVP;
+   pars(18) = MVZ;
 
    return pars;
 }
@@ -300,18 +308,18 @@ void HSSUSY_physical::set_masses(const Eigen::ArrayXd& pars)
    MFv(2) = pars(4);
    MAh = pars(5);
    Mhh = pars(6);
-   MVP = pars(7);
-   MVZ = pars(8);
-   MFd(0) = pars(9);
-   MFd(1) = pars(10);
-   MFd(2) = pars(11);
-   MFu(0) = pars(12);
-   MFu(1) = pars(13);
-   MFu(2) = pars(14);
-   MFe(0) = pars(15);
-   MFe(1) = pars(16);
-   MFe(2) = pars(17);
-   MVWp = pars(18);
+   MFd(0) = pars(7);
+   MFd(1) = pars(8);
+   MFd(2) = pars(9);
+   MFu(0) = pars(10);
+   MFu(1) = pars(11);
+   MFu(2) = pars(12);
+   MFe(0) = pars(13);
+   MFe(1) = pars(14);
+   MFe(2) = pars(15);
+   MVWp = pars(16);
+   MVP = pars(17);
+   MVZ = pars(18);
 
 }
 
@@ -325,8 +333,6 @@ void HSSUSY_physical::print(std::ostream& ostr) const
    ostr << "MFv = " << MFv.transpose() << '\n';
    ostr << "MAh = " << MAh << '\n';
    ostr << "Mhh = " << Mhh << '\n';
-   ostr << "MVP = " << MVP << '\n';
-   ostr << "MVZ = " << MVZ << '\n';
    ostr << "MFd = " << MFd.transpose() << '\n';
    ostr << "MFu = " << MFu.transpose() << '\n';
    ostr << "MFe = " << MFe.transpose() << '\n';
@@ -341,6 +347,7 @@ void HSSUSY_physical::print(std::ostream& ostr) const
    ostr << "Uu = " << Uu << '\n';
    ostr << "Ve = " << Ve << '\n';
    ostr << "Ue = " << Ue << '\n';
+   ostr << "ZZ = " << ZZ << '\n';
 
 }
 

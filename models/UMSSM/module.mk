@@ -34,6 +34,7 @@ LIBUMSSM_HDR :=
 
 ifneq ($(findstring two_scale,$(ALGORITHMS)),)
 LIBUMSSM_SRC += \
+		$(DIR)/UMSSM_effective_couplings.cpp \
 		$(DIR)/UMSSM_mass_eigenstates.cpp \
 		$(DIR)/UMSSM_info.cpp \
 		$(DIR)/UMSSM_input_parameters.cpp \
@@ -56,6 +57,7 @@ EXEUMSSM_SRC += \
 		$(DIR)/scan_UMSSM.cpp
 LIBUMSSM_HDR += \
 		$(DIR)/UMSSM_convergence_tester.hpp \
+		$(DIR)/UMSSM_effective_couplings.hpp \
 		$(DIR)/UMSSM_high_scale_constraint.hpp \
 		$(DIR)/UMSSM_mass_eigenstates.hpp \
 		$(DIR)/UMSSM_info.hpp \
@@ -187,6 +189,9 @@ clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-obj
 		-rm -f $(EXEUMSSM_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
+		@true
+
+clean-obj::     clean-$(MODNAME)-obj
 
 clean::         clean-$(MODNAME)
 

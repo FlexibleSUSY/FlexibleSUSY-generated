@@ -34,6 +34,7 @@ LIBSM_HDR :=
 
 ifneq ($(findstring two_scale,$(ALGORITHMS)),)
 LIBSM_SRC += \
+		$(DIR)/SM_effective_couplings.cpp \
 		$(DIR)/SM_mass_eigenstates.cpp \
 		$(DIR)/SM_info.cpp \
 		$(DIR)/SM_input_parameters.cpp \
@@ -56,6 +57,7 @@ EXESM_SRC += \
 		$(DIR)/scan_SM.cpp
 LIBSM_HDR += \
 		$(DIR)/SM_convergence_tester.hpp \
+		$(DIR)/SM_effective_couplings.hpp \
 		$(DIR)/SM_high_scale_constraint.hpp \
 		$(DIR)/SM_mass_eigenstates.hpp \
 		$(DIR)/SM_info.hpp \
@@ -187,6 +189,9 @@ clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-obj
 		-rm -f $(EXESM_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
+		@true
+
+clean-obj::     clean-$(MODNAME)-obj
 
 clean::         clean-$(MODNAME)
 

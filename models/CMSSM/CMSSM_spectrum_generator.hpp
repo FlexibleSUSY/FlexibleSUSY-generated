@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:54:26
+// File generated at Tue 8 Mar 2016 18:45:02
 
 #ifndef CMSSM_SPECTRUM_GENERATOR_H
 #define CMSSM_SPECTRUM_GENERATOR_H
@@ -104,6 +104,7 @@ void CMSSM_spectrum_generator<T>::run(const softsusy::QedQcd& qedqcd,
    susy_scale_constraint.set_model(&model);
    low_scale_constraint .set_model(&model);
 
+   susy_scale_constraint.set_sm_parameters(qedqcd);
    low_scale_constraint .set_sm_parameters(qedqcd);
 
    high_scale_constraint.initialize();

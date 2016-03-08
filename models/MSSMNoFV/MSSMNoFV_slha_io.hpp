@@ -16,19 +16,19 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:52:20
+// File generated at Tue 8 Mar 2016 18:39:12
 
 #ifndef MSSMNoFV_SLHA_IO_H
 #define MSSMNoFV_SLHA_IO_H
 
 #include "MSSMNoFV_two_scale_model_slha.hpp"
 #include "MSSMNoFV_info.hpp"
+#include "MSSMNoFV_observables.hpp"
 #include "MSSMNoFV_physical.hpp"
 #include "slha_io.hpp"
 #include "ckm.hpp"
 #include "ew_input.hpp"
 #include "lowe.h"
-#include "observables.hpp"
 
 #include <Eigen/Core>
 #include <string>
@@ -48,7 +48,6 @@ namespace flexiblesusy {
 
 struct MSSMNoFV_input_parameters;
 class Spectrum_generator_settings;
-struct Observables;
 
 struct MSSMNoFV_scales {
    MSSMNoFV_scales() : HighScale(0.), SUSYScale(0.), LowScale(0.) {}
@@ -66,6 +65,7 @@ public:
    void fill(MSSMNoFV_input_parameters&) const;
    void fill(MSSMNoFV_mass_eigenstates&) const;
    template <class T> void fill(MSSMNoFV_slha<T>&) const;
+   void fill(Physical_input&) const;
    void fill(Spectrum_generator_settings&) const;
    double get_parameter_output_scale() const;
    const SLHA_io& get_slha_io() const { return slha_io; }
@@ -73,12 +73,13 @@ public:
    void read_from_source(const std::string&);
    void read_from_stream(std::istream&);
    void set_extpar(const MSSMNoFV_input_parameters&);
-   template <class T> void set_extra(const MSSMNoFV_slha<T>&, const MSSMNoFV_scales&, const Observables&);
+   template <class T> void set_extra(const MSSMNoFV_slha<T>&, const MSSMNoFV_scales&, const MSSMNoFV_observables&);
    void set_minpar(const MSSMNoFV_input_parameters&);
    void set_sminputs(const softsusy::QedQcd&);
    template <class T> void set_spectrum(const MSSMNoFV_slha<T>&);
    template <class T> void set_spectrum(const MSSMNoFV<T>&);
    void set_spinfo(const Problems<MSSMNoFV_info::NUMBER_OF_PARTICLES>&);
+   void set_print_imaginary_parts_of_majorana_mixings(bool);
    void write_to_file(const std::string&);
    void write_to_stream(std::ostream& ostr = std::cout) { slha_io.write_to_stream(ostr); }
 
@@ -86,13 +87,14 @@ public:
    static void fill_extpar_tuple(MSSMNoFV_input_parameters&, int, double);
 
    template <class T>
-   static void fill_slhaea(SLHAea::Coll&, const MSSMNoFV_slha<T>&, const softsusy::QedQcd&, const MSSMNoFV_scales&, const Observables&);
+   static void fill_slhaea(SLHAea::Coll&, const MSSMNoFV_slha<T>&, const softsusy::QedQcd&, const MSSMNoFV_scales&, const MSSMNoFV_observables&);
 
    template <class T>
-   static SLHAea::Coll fill_slhaea(const MSSMNoFV_slha<T>&, const softsusy::QedQcd&, const MSSMNoFV_scales&, const Observables&);
+   static SLHAea::Coll fill_slhaea(const MSSMNoFV_slha<T>&, const softsusy::QedQcd&, const MSSMNoFV_scales&, const MSSMNoFV_observables&);
 
 private:
    SLHA_io slha_io; ///< SLHA io class
+   bool print_imaginary_parts_of_majorana_mixings;
    static unsigned const NUMBER_OF_DRBAR_BLOCKS = 14;
    static char const * const drbar_blocks[NUMBER_OF_DRBAR_BLOCKS];
 
@@ -121,7 +123,7 @@ template <class T>
 void MSSMNoFV_slha_io::fill_slhaea(
    SLHAea::Coll& slhaea, const MSSMNoFV_slha<T>& model,
    const softsusy::QedQcd& qedqcd, const MSSMNoFV_scales& scales,
-   const Observables& observables)
+   const MSSMNoFV_observables& observables)
 {
    MSSMNoFV_slha_io slha_io;
    const MSSMNoFV_input_parameters& input = model.get_input();
@@ -144,7 +146,7 @@ void MSSMNoFV_slha_io::fill_slhaea(
 template <class T>
 SLHAea::Coll MSSMNoFV_slha_io::fill_slhaea(
    const MSSMNoFV_slha<T>& model, const softsusy::QedQcd& qedqcd,
-   const MSSMNoFV_scales& scales, const Observables& observables)
+   const MSSMNoFV_scales& scales, const MSSMNoFV_observables& observables)
 {
    SLHAea::Coll slhaea;
    MSSMNoFV_slha_io::fill_slhaea(slhaea, model, qedqcd, scales, observables);
@@ -212,13 +214,13 @@ void MSSMNoFV_slha_io::set_model_parameters(const MSSMNoFV_slha<T>& model)
 template <class T>
 void MSSMNoFV_slha_io::set_extra(
    const MSSMNoFV_slha<T>& model, const MSSMNoFV_scales& scales,
-   const Observables& observables)
+   const MSSMNoFV_observables& observables)
 {
    const MSSMNoFV_physical physical(model.get_physical_slha());
 
    {
       std::ostringstream block;
-      block << "Block FlexibleSUSYOutput Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+      block << "Block FlexibleSUSYOutput" << '\n'
             << FORMAT_ELEMENT(0, (SCALES(HighScale)), "HighScale")
             << FORMAT_ELEMENT(1, (SCALES(SUSYScale)), "SUSYScale")
             << FORMAT_ELEMENT(2, (SCALES(LowScale)), "LowScale")
@@ -227,7 +229,7 @@ void MSSMNoFV_slha_io::set_extra(
    }
    {
       std::ostringstream block;
-      block << "Block FlexibleSUSYLowEnergy Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+      block << "Block FlexibleSUSYLowEnergy" << '\n'
             << FORMAT_ELEMENT(1, (OBSERVABLES.a_muon_gm2calc), "Delta(g-2)_muon/2 GM2Calc")
             << FORMAT_ELEMENT(2, (OBSERVABLES.a_muon_gm2calc_uncertainty), "Delta(g-2)_muon/2 GM2Calc uncertainty")
       ;
@@ -235,7 +237,7 @@ void MSSMNoFV_slha_io::set_extra(
    }
    {
       std::ostringstream block;
-      block << "Block ALPHA Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+      block << "Block ALPHA" << '\n'
             << FORMAT_NUMBER((ArcSin(Pole(ZH(1,1)))), "ArcSin(Pole(ZH(2,2)))")
       ;
       slha_io.set_block(block);

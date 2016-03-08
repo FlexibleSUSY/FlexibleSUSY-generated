@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:31:20
+// File generated at Tue 8 Mar 2016 16:08:57
 
 #ifndef TMSSM_UTILITIES_H
 #define TMSSM_UTILITIES_H
@@ -36,7 +36,9 @@ class QedQcd;
 }
 
 namespace flexiblesusy {
-class Observables;
+
+class TMSSM_observables;
+class Physical_input;
 
 class TMSSM_parameter_getter {
 public:
@@ -124,10 +126,20 @@ std::valarray<double> TMSSM_spectrum_plotter::to_valarray(const Eigen::Array<Sca
 namespace TMSSM_database {
 
 /// append parameter point to database
-void to_database(const std::string&, const TMSSM_mass_eigenstates&, const softsusy::QedQcd* qedqcd = 0, const Observables* observables = 0);
+void to_database(
+   const std::string&,
+   const TMSSM_mass_eigenstates&,
+   const softsusy::QedQcd* qedqcd = 0,
+   const Physical_input* physical_input = 0,
+   const TMSSM_observables* observables = 0);
 
 /// fill model from an entry of the database
-TMSSM_mass_eigenstates from_database(const std::string&, std::size_t, softsusy::QedQcd* qedqcd = 0, Observables* observables = 0);
+TMSSM_mass_eigenstates from_database(
+   const std::string&,
+   std::size_t,
+   softsusy::QedQcd* qedqcd = 0,
+   Physical_input* physical_input = 0,
+   TMSSM_observables* observables = 0);
 
 } // namespace TMSSM_database
 

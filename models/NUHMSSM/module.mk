@@ -34,6 +34,7 @@ LIBNUHMSSM_HDR :=
 
 ifneq ($(findstring two_scale,$(ALGORITHMS)),)
 LIBNUHMSSM_SRC += \
+		$(DIR)/NUHMSSM_effective_couplings.cpp \
 		$(DIR)/NUHMSSM_mass_eigenstates.cpp \
 		$(DIR)/NUHMSSM_info.cpp \
 		$(DIR)/NUHMSSM_input_parameters.cpp \
@@ -56,6 +57,7 @@ EXENUHMSSM_SRC += \
 		$(DIR)/scan_NUHMSSM.cpp
 LIBNUHMSSM_HDR += \
 		$(DIR)/NUHMSSM_convergence_tester.hpp \
+		$(DIR)/NUHMSSM_effective_couplings.hpp \
 		$(DIR)/NUHMSSM_high_scale_constraint.hpp \
 		$(DIR)/NUHMSSM_mass_eigenstates.hpp \
 		$(DIR)/NUHMSSM_info.hpp \
@@ -187,6 +189,9 @@ clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-obj
 		-rm -f $(EXENUHMSSM_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
+		@true
+
+clean-obj::     clean-$(MODNAME)-obj
 
 clean::         clean-$(MODNAME)
 

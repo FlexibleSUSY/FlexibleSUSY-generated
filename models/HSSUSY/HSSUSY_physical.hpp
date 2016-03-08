@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:30:01
+// File generated at Tue 8 Mar 2016 16:06:15
 
 #ifndef HSSUSY_PHYSICAL_H
 #define HSSUSY_PHYSICAL_H
@@ -45,12 +45,12 @@ struct HSSUSY_physical {
    Eigen::Array<double,3,1> MFv;
    double MAh;
    double Mhh;
-   double MVP;
-   double MVZ;
    Eigen::Array<double,3,1> MFd;
    Eigen::Array<double,3,1> MFu;
    Eigen::Array<double,3,1> MFe;
    double MVWp;
+   double MVP;
+   double MVZ;
 
    Eigen::Matrix<std::complex<double>,3,3> Vd;
    Eigen::Matrix<std::complex<double>,3,3> Ud;
@@ -58,6 +58,7 @@ struct HSSUSY_physical {
    Eigen::Matrix<std::complex<double>,3,3> Uu;
    Eigen::Matrix<std::complex<double>,3,3> Ve;
    Eigen::Matrix<std::complex<double>,3,3> Ue;
+   Eigen::Matrix<double,2,2> ZZ;
 
 };
 

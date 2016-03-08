@@ -34,6 +34,7 @@ LIBSplitMSSM_HDR :=
 
 ifneq ($(findstring two_scale,$(ALGORITHMS)),)
 LIBSplitMSSM_SRC += \
+		$(DIR)/SplitMSSM_effective_couplings.cpp \
 		$(DIR)/SplitMSSM_mass_eigenstates.cpp \
 		$(DIR)/SplitMSSM_info.cpp \
 		$(DIR)/SplitMSSM_input_parameters.cpp \
@@ -56,6 +57,7 @@ EXESplitMSSM_SRC += \
 		$(DIR)/scan_SplitMSSM.cpp
 LIBSplitMSSM_HDR += \
 		$(DIR)/SplitMSSM_convergence_tester.hpp \
+		$(DIR)/SplitMSSM_effective_couplings.hpp \
 		$(DIR)/SplitMSSM_high_scale_constraint.hpp \
 		$(DIR)/SplitMSSM_mass_eigenstates.hpp \
 		$(DIR)/SplitMSSM_info.hpp \
@@ -187,6 +189,9 @@ clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-obj
 		-rm -f $(EXESplitMSSM_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
+		@true
+
+clean-obj::     clean-$(MODNAME)-obj
 
 clean::         clean-$(MODNAME)
 

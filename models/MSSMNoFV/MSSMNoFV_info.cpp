@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:52:20
+// File generated at Tue 8 Mar 2016 18:39:12
 
 #include "MSSMNoFV_info.hpp"
 
@@ -30,21 +30,21 @@ namespace MSSMNoFV_info {
    const double normalization_g3 = 1;
 
    const unsigned particle_multiplicities[NUMBER_OF_PARTICLES] = {1, 1, 1, 1, 1
-      , 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-      2, 4, 2, 1};
+      , 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4,
+      2, 1, 1, 1};
 
-   const char* particle_names[NUMBER_OF_PARTICLES] = {"VG", "Glu", "VP", "VZ",
-      "Fd", "Fs", "Fb", "Fu", "Fc", "Ft", "Fve", "Fvm", "Fvt", "Fe", "Fm", "Ftau",
-      "SveL", "SvmL", "SvtL", "Sd", "Su", "Se", "Sm", "Stau", "Ss", "Sc", "Sb",
-      "St", "hh", "Ah", "Hpm", "Chi", "Cha", "VWm"};
+   const char* particle_names[NUMBER_OF_PARTICLES] = {"VG", "Glu", "Fd", "Fs",
+      "Fb", "Fu", "Fc", "Ft", "Fve", "Fvm", "Fvt", "Fe", "Fm", "Ftau", "SveL",
+      "SvmL", "SvtL", "Sd", "Su", "Se", "Sm", "Stau", "Ss", "Sc", "Sb", "St", "hh"
+      , "Ah", "Hpm", "Chi", "Cha", "VWm", "VP", "VZ"};
 
    const char* particle_latex_names[NUMBER_OF_PARTICLES] = {   "g",
-      "\\tilde{g}", "\\gamma", "Z", "d", "s", "b", "u", "c", "t", "\\nu_e",
-      "\\nu_{\\mu}", "\\nu_{\\tau}", "e", "m", "\\tau", "\\tilde{\\nu}_e",
-      "\\tilde{\\nu}_{\\mu}", "\\tilde{\\nu}_{\\tau}", "\\tilde{d}", "\\tilde{u}",
-      "\\tilde{e}", "\\tilde{\\mu}", "\\tilde{\\tau}", "\\tilde{s}", "\\tilde{c}"
-      , "\\tilde{b}", "\\tilde{t}", "h", "A^0", "H^-", "\\tilde{\\chi}^0",
-      "\\tilde{\\chi}^-", "W^-"};
+      "\\tilde{g}", "d", "s", "b", "u", "c", "t", "\\nu_e", "\\nu_{\\mu}",
+      "\\nu_{\\tau}", "e", "m", "\\tau", "\\tilde{\\nu}_e", "\\tilde{\\nu}_{\\mu}"
+      , "\\tilde{\\nu}_{\\tau}", "\\tilde{d}", "\\tilde{u}", "\\tilde{e}",
+      "\\tilde{\\mu}", "\\tilde{\\tau}", "\\tilde{s}", "\\tilde{c}", "\\tilde{b}",
+      "\\tilde{t}", "h", "A^0", "H^-", "\\tilde{\\chi}^0", "\\tilde{\\chi}^-",
+      "W^-", "\\gamma", "Z"};
 
    const char* parameter_names[NUMBER_OF_PARAMETERS] = {"Yd(0,0)", "Yd(0,1)",
       "Yd(0,2)", "Yd(1,0)", "Yd(1,1)", "Yd(1,2)", "Yd(2,0)", "Yd(2,1)", "Yd(2,2)",
@@ -82,7 +82,8 @@ namespace MSSMNoFV_info {
       "Re(ZN(3,3))", "Im(ZN(3,3))", "Re(UM(0,0))", "Im(UM(0,0))", "Re(UM(0,1))",
       "Im(UM(0,1))", "Re(UM(1,0))", "Im(UM(1,0))", "Re(UM(1,1))", "Im(UM(1,1))",
       "Re(UP(0,0))", "Im(UP(0,0))", "Re(UP(0,1))", "Im(UP(0,1))", "Re(UP(1,0))",
-      "Im(UP(1,0))", "Re(UP(1,1))", "Im(UP(1,1))"};
+      "Im(UP(1,0))", "Re(UP(1,1))", "Im(UP(1,1))", "ZZ(0,0)", "ZZ(0,1)", "ZZ(1,0)"
+      , "ZZ(1,1)"};
 
    const char* input_parameter_names[NUMBER_OF_INPUT_PARAMETERS] = {"TanBeta",
       "SignMu", "Qin", "M1", "M2", "M3", "AtIN", "AbIN", "AtauIN", "AcIN", "AsIN",

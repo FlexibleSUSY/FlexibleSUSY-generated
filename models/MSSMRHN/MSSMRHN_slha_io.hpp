@@ -16,19 +16,19 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:42:37
+// File generated at Tue 8 Mar 2016 18:27:15
 
 #ifndef MSSMRHN_SLHA_IO_H
 #define MSSMRHN_SLHA_IO_H
 
 #include "MSSMRHN_two_scale_model_slha.hpp"
 #include "MSSMRHN_info.hpp"
+#include "MSSMRHN_observables.hpp"
 #include "MSSMRHN_physical.hpp"
 #include "slha_io.hpp"
 #include "ckm.hpp"
 #include "ew_input.hpp"
 #include "lowe.h"
-#include "observables.hpp"
 
 #include <Eigen/Core>
 #include <string>
@@ -48,7 +48,6 @@ namespace flexiblesusy {
 
 struct MSSMRHN_input_parameters;
 class Spectrum_generator_settings;
-struct Observables;
 
 struct MSSMRHN_scales {
    MSSMRHN_scales() : HighScale(0.), SUSYScale(0.), LowScale(0.) {}
@@ -66,6 +65,7 @@ public:
    void fill(MSSMRHN_input_parameters&) const;
    void fill(MSSMRHN_mass_eigenstates&) const;
    template <class T> void fill(MSSMRHN_slha<T>&) const;
+   void fill(Physical_input&) const;
    void fill(Spectrum_generator_settings&) const;
    double get_parameter_output_scale() const;
    const SLHA_io& get_slha_io() const { return slha_io; }
@@ -73,12 +73,13 @@ public:
    void read_from_source(const std::string&);
    void read_from_stream(std::istream&);
    void set_extpar(const MSSMRHN_input_parameters&);
-   template <class T> void set_extra(const MSSMRHN_slha<T>&, const MSSMRHN_scales&, const Observables&);
+   template <class T> void set_extra(const MSSMRHN_slha<T>&, const MSSMRHN_scales&, const MSSMRHN_observables&);
    void set_minpar(const MSSMRHN_input_parameters&);
    void set_sminputs(const softsusy::QedQcd&);
    template <class T> void set_spectrum(const MSSMRHN_slha<T>&);
    template <class T> void set_spectrum(const MSSMRHN<T>&);
    void set_spinfo(const Problems<MSSMRHN_info::NUMBER_OF_PARTICLES>&);
+   void set_print_imaginary_parts_of_majorana_mixings(bool);
    void write_to_file(const std::string&);
    void write_to_stream(std::ostream& ostr = std::cout) { slha_io.write_to_stream(ostr); }
 
@@ -86,13 +87,14 @@ public:
    static void fill_extpar_tuple(MSSMRHN_input_parameters&, int, double);
 
    template <class T>
-   static void fill_slhaea(SLHAea::Coll&, const MSSMRHN_slha<T>&, const softsusy::QedQcd&, const MSSMRHN_scales&, const Observables&);
+   static void fill_slhaea(SLHAea::Coll&, const MSSMRHN_slha<T>&, const softsusy::QedQcd&, const MSSMRHN_scales&, const MSSMRHN_observables&);
 
    template <class T>
-   static SLHAea::Coll fill_slhaea(const MSSMRHN_slha<T>&, const softsusy::QedQcd&, const MSSMRHN_scales&, const Observables&);
+   static SLHAea::Coll fill_slhaea(const MSSMRHN_slha<T>&, const softsusy::QedQcd&, const MSSMRHN_scales&, const MSSMRHN_observables&);
 
 private:
    SLHA_io slha_io; ///< SLHA io class
+   bool print_imaginary_parts_of_majorana_mixings;
    static unsigned const NUMBER_OF_DRBAR_BLOCKS = 19;
    static char const * const drbar_blocks[NUMBER_OF_DRBAR_BLOCKS];
 
@@ -121,7 +123,7 @@ template <class T>
 void MSSMRHN_slha_io::fill_slhaea(
    SLHAea::Coll& slhaea, const MSSMRHN_slha<T>& model,
    const softsusy::QedQcd& qedqcd, const MSSMRHN_scales& scales,
-   const Observables& observables)
+   const MSSMRHN_observables& observables)
 {
    MSSMRHN_slha_io slha_io;
    const MSSMRHN_input_parameters& input = model.get_input();
@@ -144,7 +146,7 @@ void MSSMRHN_slha_io::fill_slhaea(
 template <class T>
 SLHAea::Coll MSSMRHN_slha_io::fill_slhaea(
    const MSSMRHN_slha<T>& model, const softsusy::QedQcd& qedqcd,
-   const MSSMRHN_scales& scales, const Observables& observables)
+   const MSSMRHN_scales& scales, const MSSMRHN_observables& observables)
 {
    SLHAea::Coll slhaea;
    MSSMRHN_slha_io::fill_slhaea(slhaea, model, qedqcd, scales, observables);
@@ -217,7 +219,7 @@ void MSSMRHN_slha_io::set_model_parameters(const MSSMRHN_slha<T>& model)
 template <class T>
 void MSSMRHN_slha_io::set_extra(
    const MSSMRHN_slha<T>& model, const MSSMRHN_scales& scales,
-   const Observables& observables)
+   const MSSMRHN_observables& observables)
 {
    const MSSMRHN_physical physical(model.get_physical_slha());
 

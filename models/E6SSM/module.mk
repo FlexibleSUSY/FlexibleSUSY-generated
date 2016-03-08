@@ -34,6 +34,7 @@ LIBE6SSM_HDR :=
 
 ifneq ($(findstring two_scale,$(ALGORITHMS)),)
 LIBE6SSM_SRC += \
+		$(DIR)/E6SSM_effective_couplings.cpp \
 		$(DIR)/E6SSM_mass_eigenstates.cpp \
 		$(DIR)/E6SSM_info.cpp \
 		$(DIR)/E6SSM_input_parameters.cpp \
@@ -56,6 +57,7 @@ EXEE6SSM_SRC += \
 		$(DIR)/scan_E6SSM.cpp
 LIBE6SSM_HDR += \
 		$(DIR)/E6SSM_convergence_tester.hpp \
+		$(DIR)/E6SSM_effective_couplings.hpp \
 		$(DIR)/E6SSM_high_scale_constraint.hpp \
 		$(DIR)/E6SSM_mass_eigenstates.hpp \
 		$(DIR)/E6SSM_info.hpp \
@@ -187,6 +189,9 @@ clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-obj
 		-rm -f $(EXEE6SSM_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
+		@true
+
+clean-obj::     clean-$(MODNAME)-obj
 
 clean::         clean-$(MODNAME)
 

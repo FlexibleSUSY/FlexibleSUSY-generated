@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:35:29
+// File generated at Tue 8 Mar 2016 18:01:32
 
 #ifndef UMSSM_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
 #define UMSSM_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
@@ -24,6 +24,7 @@
 #include "UMSSM_susy_scale_constraint.hpp"
 #include "UMSSM_input_parameters.hpp"
 #include "two_scale_constraint.hpp"
+#include "lowe.h"
 
 namespace flexiblesusy {
 
@@ -36,7 +37,7 @@ template<>
 class UMSSM_susy_scale_constraint<Two_scale> : public Constraint<Two_scale> {
 public:
    UMSSM_susy_scale_constraint();
-   UMSSM_susy_scale_constraint(UMSSM<Two_scale>*);
+   UMSSM_susy_scale_constraint(UMSSM<Two_scale>*, const softsusy::QedQcd&);
    virtual ~UMSSM_susy_scale_constraint();
    virtual void apply();
    virtual double get_scale() const;
@@ -47,6 +48,8 @@ public:
    const UMSSM_input_parameters& get_input_parameters() const;
    UMSSM<Two_scale>* get_model() const;
    void initialize();
+   const softsusy::QedQcd& get_sm_parameters() const;
+   void set_sm_parameters(const softsusy::QedQcd&);
 
 protected:
    void update_scale();
@@ -55,6 +58,7 @@ private:
    double scale;
    double initial_scale_guess;
    UMSSM<Two_scale>* model;
+   softsusy::QedQcd qedqcd;
 };
 
 } // namespace flexiblesusy

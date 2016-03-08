@@ -16,12 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:36:37
+// File generated at Tue 8 Mar 2016 17:14:41
 
 #include "E6SSM_utilities.hpp"
 #include "E6SSM_input_parameters.hpp"
+#include "E6SSM_observables.hpp"
 #include "logger.hpp"
-#include "observables.hpp"
+#include "physical_input.hpp"
 #include "database.hpp"
 #include "wrappers.hpp"
 #include "lowe.h"
@@ -68,7 +69,6 @@ void E6SSM_spectrum_plotter::extract_spectrum(const E6SSM_mass_eigenstates& mode
 
    spectrum.push_back(TParticle("Glu", "\\tilde{g}", to_valarray(PHYSICAL(MGlu))));
    spectrum.push_back(TParticle("ChaP", "\\tilde{\\chi}^{'-}", to_valarray(PHYSICAL(MChaP))));
-   spectrum.push_back(TParticle("VZp", "{Z'}", to_valarray(PHYSICAL(MVZp))));
    spectrum.push_back(TParticle("Sd", "\\tilde{d}", to_valarray(PHYSICAL(MSd))));
    spectrum.push_back(TParticle("Sv", "\\tilde{\\nu}", to_valarray(PHYSICAL(MSv))));
    spectrum.push_back(TParticle("Su", "\\tilde{u}", to_valarray(PHYSICAL(MSu))));
@@ -89,6 +89,7 @@ void E6SSM_spectrum_plotter::extract_spectrum(const E6SSM_mass_eigenstates& mode
    spectrum.push_back(TParticle("SHp0", "H^{'0}", to_valarray(PHYSICAL(MSHp0))));
    spectrum.push_back(TParticle("SHpp", "H^{'-}", to_valarray(PHYSICAL(MSHpp))));
    spectrum.push_back(TParticle("ChiP", "\\tilde{\\chi}^{'0}", to_valarray(PHYSICAL(MChiP))));
+   spectrum.push_back(TParticle("VZp", "{Z'}", to_valarray(PHYSICAL(MVZp))));
 
    if (model.do_calculate_sm_pole_masses()) {
       spectrum.push_back(TParticle("Fd", "d", to_valarray(PHYSICAL(MFd))));
@@ -178,7 +179,8 @@ namespace E6SSM_database {
  */
 void to_database(
    const std::string& file_name, const E6SSM_mass_eigenstates& model,
-   const softsusy::QedQcd* qedqcd, const Observables* observables)
+   const softsusy::QedQcd* qedqcd, const Physical_input* physical_input,
+   const E6SSM_observables* observables)
 {
    using utilities::append;
 
@@ -224,9 +226,15 @@ void to_database(
       append(values, qedqcd->display_input());
    }
 
+   // fill extra physical input (optional)
+   if (physical_input) {
+      append(names, Physical_input::get_names());
+      append(values, physical_input->get());
+   }
+
    // fill observables (optional)
-   if (observables) {
-      append(names, Observables::get_names());
+   if (E6SSM_observables::NUMBER_OF_OBSERVABLES > 0 && observables) {
+      append(names, E6SSM_observables::get_names());
       append(values, observables->get());
    }
 
@@ -240,15 +248,15 @@ void to_database(
  * @param file_name database file name
  * @param entry entry number (0 = first entry)
  * @param qedqcd pointer to low-energy data.  If zero, the low-energy
- *    data structur will not be filled
+ *    data structure will not be filled
  * @param observables pointer to observables.  If zero, the observables
- *    data structur will not be filled
+ *    data structure will not be filled
  *
  * @return mass eigenstates
  */
 E6SSM_mass_eigenstates from_database(
    const std::string& file_name, std::size_t entry, softsusy::QedQcd* qedqcd,
-   Observables* observables)
+   Physical_input* physical_input, E6SSM_observables* observables)
 {
    using utilities::append;
 
@@ -259,11 +267,14 @@ E6SSM_mass_eigenstates from_database(
    const std::size_t number_of_input_parameters = E6SSM_info::NUMBER_OF_INPUT_PARAMETERS;
    const std::size_t number_of_low_energy_input_parameters =
       (qedqcd ? softsusy::NUMBER_OF_LOW_ENERGY_INPUT_PARAMETERS : 0);
+   const std::size_t number_of_extra_physical_input_parameters =
+      (physical_input ? Physical_input::NUMBER_OF_INPUT_PARAMETERS : 0);
    const std::size_t number_of_observables =
-      (observables ? Observables::NUMBER_OF_OBSERVABLES : 0);
+      (observables ? E6SSM_observables::NUMBER_OF_OBSERVABLES : 0);
    const std::size_t total_entries = 9 + number_of_input_parameters
       + number_of_parameters + number_of_masses + number_of_mixings
-      + number_of_low_energy_input_parameters + number_of_observables;
+      + number_of_low_energy_input_parameters
+      + number_of_extra_physical_input_parameters + number_of_observables;
 
    database::Database db(file_name);
    const Eigen::ArrayXd values(db.extract("Point", entry));
@@ -306,8 +317,14 @@ E6SSM_mass_eigenstates from_database(
       offset += number_of_low_energy_input_parameters;
    }
 
+   // fill extra physical input parameters (optional)
+   if (physical_input) {
+      physical_input->set(values.block(offset, 0, number_of_extra_physical_input_parameters, 1));
+      offset += number_of_extra_physical_input_parameters;
+   }
+
    // fill observables (optional)
-   if (observables) {
+   if (number_of_observables > 0 && observables) {
       observables->set(values.block(offset, 0, number_of_observables, 1));
       offset += number_of_observables;
    }

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:33:05
+// File generated at Tue 8 Mar 2016 16:10:42
 
 /**
  * @file TMSSM_two_scale_model.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Sun 10 Jan 2016 15:33:05 with FlexibleSUSY
- * 1.3.2 (git commit: v1.3.2) and SARAH 4.6.0 .
+ * This file was generated at Tue 8 Mar 2016 16:10:42 with FlexibleSUSY
+ * 1.4.0 (git commit: v1.4.0) and SARAH 4.7.0 .
  */
 
 #include "TMSSM_two_scale_model.hpp"

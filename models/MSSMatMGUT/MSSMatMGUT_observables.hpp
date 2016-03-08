@@ -16,12 +16,14 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:52:57
+// File generated at Tue 8 Mar 2016 18:42:43
 
 #ifndef MSSMatMGUT_OBSERVABLES_H
 #define MSSMatMGUT_OBSERVABLES_H
 
-#include "observables.hpp"
+#include <string>
+#include <vector>
+#include <Eigen/Core>
 
 namespace softsusy {
 class QedQcd;
@@ -30,8 +32,21 @@ class QedQcd;
 namespace flexiblesusy {
 
 class MSSMatMGUT_mass_eigenstates;
+class Physical_input;
 
-Observables calculate_observables(const MSSMatMGUT_mass_eigenstates&, const softsusy::QedQcd&);
+struct MSSMatMGUT_observables {
+   static const unsigned NUMBER_OF_OBSERVABLES = 0;
+
+   MSSMatMGUT_observables();
+   Eigen::ArrayXd get() const; ///< returns vector of all observables
+   static std::vector<std::string> get_names(); ///< returns vector of all observable names
+   void clear(); ///< sets all observables to zero
+   void set(const Eigen::ArrayXd&); ///< sets all observables from given vector
+
+
+};
+
+MSSMatMGUT_observables calculate_observables(const MSSMatMGUT_mass_eigenstates&, const softsusy::QedQcd&, const Physical_input&);
 
 } // namespace flexiblesusy
 

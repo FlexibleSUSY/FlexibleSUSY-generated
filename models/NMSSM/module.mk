@@ -34,6 +34,7 @@ LIBNMSSM_HDR :=
 
 ifneq ($(findstring two_scale,$(ALGORITHMS)),)
 LIBNMSSM_SRC += \
+		$(DIR)/NMSSM_effective_couplings.cpp \
 		$(DIR)/NMSSM_mass_eigenstates.cpp \
 		$(DIR)/NMSSM_info.cpp \
 		$(DIR)/NMSSM_input_parameters.cpp \
@@ -56,6 +57,7 @@ EXENMSSM_SRC += \
 		$(DIR)/scan_NMSSM.cpp
 LIBNMSSM_HDR += \
 		$(DIR)/NMSSM_convergence_tester.hpp \
+		$(DIR)/NMSSM_effective_couplings.hpp \
 		$(DIR)/NMSSM_high_scale_constraint.hpp \
 		$(DIR)/NMSSM_mass_eigenstates.hpp \
 		$(DIR)/NMSSM_info.hpp \
@@ -187,6 +189,9 @@ clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-obj
 		-rm -f $(EXENMSSM_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
+		@true
+
+clean-obj::     clean-$(MODNAME)-obj
 
 clean::         clean-$(MODNAME)
 

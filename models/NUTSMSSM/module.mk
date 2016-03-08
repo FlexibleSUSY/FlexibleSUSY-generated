@@ -34,6 +34,7 @@ LIBNUTSMSSM_HDR :=
 
 ifneq ($(findstring two_scale,$(ALGORITHMS)),)
 LIBNUTSMSSM_SRC += \
+		$(DIR)/NUTSMSSM_effective_couplings.cpp \
 		$(DIR)/NUTSMSSM_mass_eigenstates.cpp \
 		$(DIR)/NUTSMSSM_info.cpp \
 		$(DIR)/NUTSMSSM_input_parameters.cpp \
@@ -56,6 +57,7 @@ EXENUTSMSSM_SRC += \
 		$(DIR)/scan_NUTSMSSM.cpp
 LIBNUTSMSSM_HDR += \
 		$(DIR)/NUTSMSSM_convergence_tester.hpp \
+		$(DIR)/NUTSMSSM_effective_couplings.hpp \
 		$(DIR)/NUTSMSSM_high_scale_constraint.hpp \
 		$(DIR)/NUTSMSSM_mass_eigenstates.hpp \
 		$(DIR)/NUTSMSSM_info.hpp \
@@ -187,6 +189,9 @@ clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-obj
 		-rm -f $(EXENUTSMSSM_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
+		@true
+
+clean-obj::     clean-$(MODNAME)-obj
 
 clean::         clean-$(MODNAME)
 

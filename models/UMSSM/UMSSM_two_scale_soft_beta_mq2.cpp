@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:34:30
+// File generated at Tue 8 Mar 2016 18:00:32
 
 #include "UMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -222,41 +222,40 @@ Eigen::Matrix<double,3,3> UMSSM_soft_parameters::calc_beta_mq2_two_loop(const So
       *mq2) + 6*Power(g2,4)*Tr22*UNITMATRIX(3) + 10.666666666666666*Power(g3,4)
       *Tr23*UNITMATRIX(3) + 1.0327955589886444*g1*gp*Qq*Tr2U114*UNITMATRIX(3) +
       1.0327955589886444*g1*gp*Qq*Tr2U141*UNITMATRIX(3) + 1.0327955589886444*
-      g1*Tr31*UNITMATRIX(3) + 8*gp*Qq*Tr34*UNITMATRIX(3) + 3.3733333333333335*
+      g1*Tr31*UNITMATRIX(3) + 8*gp*Qq*Tr34*UNITMATRIX(3) + 2.6533333333333333*
       Power(g1,4)*AbsSqr(MassB)*UNITMATRIX(3) - 42.666666666666664*Power(g3,4)*
-      AbsSqr(MassG)*UNITMATRIX(3) + 0.13333333333333333*Tr2U111*Sqr(g1)*
-      UNITMATRIX(3) + 0.4*AbsSqr(MassB)*Sqr(g1)*Sqr(g2)*UNITMATRIX(3) + 0.2*
-      MassWB*Conj(MassB)*Sqr(g1)*Sqr(g2)*UNITMATRIX(3) + 0.7111111111111111*
-      AbsSqr(MassB)*Sqr(g1)*Sqr(g3)*UNITMATRIX(3) + 0.7111111111111111*AbsSqr(
-      MassG)*Sqr(g1)*Sqr(g3)*UNITMATRIX(3) + 0.35555555555555557*MassG*Conj(
-      MassB)*Sqr(g1)*Sqr(g3)*UNITMATRIX(3) + 0.35555555555555557*MassB*Conj(
-      MassG)*Sqr(g1)*Sqr(g3)*UNITMATRIX(3) + 32*AbsSqr(MassG)*Sqr(g2)*Sqr(g3)*
-      UNITMATRIX(3) + 16*MassWB*Conj(MassG)*Sqr(g2)*Sqr(g3)*UNITMATRIX(3) + 4.8
-      *Qd*Qq*AbsSqr(MassB)*Sqr(g1)*Sqr(gp)*UNITMATRIX(3) + 4.8*Qe*Qq*AbsSqr(
-      MassB)*Sqr(g1)*Sqr(gp)*UNITMATRIX(3) - 1.6*QHd*Qq*AbsSqr(MassB)*Sqr(g1)*
-      Sqr(gp)*UNITMATRIX(3) + 1.6*QHu*Qq*AbsSqr(MassB)*Sqr(g1)*Sqr(gp)*
-      UNITMATRIX(3) - 4.8*Ql*Qq*AbsSqr(MassB)*Sqr(g1)*Sqr(gp)*UNITMATRIX(3) -
-      9.6*Qq*Qu*AbsSqr(MassB)*Sqr(g1)*Sqr(gp)*UNITMATRIX(3) + 4.8*Qq*Qv*AbsSqr(
-      MassB)*Sqr(g1)*Sqr(gp)*UNITMATRIX(3) + 4.8*Qd*Qq*AbsSqr(MassU)*Sqr(g1)*
-      Sqr(gp)*UNITMATRIX(3) + 4.8*Qe*Qq*AbsSqr(MassU)*Sqr(g1)*Sqr(gp)*
-      UNITMATRIX(3) - 1.6*QHd*Qq*AbsSqr(MassU)*Sqr(g1)*Sqr(gp)*UNITMATRIX(3) +
-      1.6*QHu*Qq*AbsSqr(MassU)*Sqr(g1)*Sqr(gp)*UNITMATRIX(3) - 4.8*Ql*Qq*AbsSqr
-      (MassU)*Sqr(g1)*Sqr(gp)*UNITMATRIX(3) + 2.4*MassU*Qd*Qq*Conj(MassB)*Sqr(
-      g1)*Sqr(gp)*UNITMATRIX(3) + 2.4*MassU*Qe*Qq*Conj(MassB)*Sqr(g1)*Sqr(gp)*
-      UNITMATRIX(3) - 0.8*MassU*QHd*Qq*Conj(MassB)*Sqr(g1)*Sqr(gp)*UNITMATRIX(3
-      ) + 0.8*MassU*QHu*Qq*Conj(MassB)*Sqr(g1)*Sqr(gp)*UNITMATRIX(3) - 2.4*
-      MassU*Ql*Qq*Conj(MassB)*Sqr(g1)*Sqr(gp)*UNITMATRIX(3) - 4.8*MassU*Qq*Qu*
-      Conj(MassB)*Sqr(g1)*Sqr(gp)*UNITMATRIX(3) + 2.4*MassU*Qq*Qv*Conj(MassB)*
-      Sqr(g1)*Sqr(gp)*UNITMATRIX(3) + 2.4*MassB*Qd*Qq*Conj(MassU)*Sqr(g1)*Sqr(
-      gp)*UNITMATRIX(3) + 2.4*MassB*Qe*Qq*Conj(MassU)*Sqr(g1)*Sqr(gp)*
-      UNITMATRIX(3) - 0.8*MassB*QHd*Qq*Conj(MassU)*Sqr(g1)*Sqr(gp)*UNITMATRIX(3
-      ) + 0.8*MassB*QHu*Qq*Conj(MassU)*Sqr(g1)*Sqr(gp)*UNITMATRIX(3) - 2.4*
-      MassB*Ql*Qq*Conj(MassU)*Sqr(g1)*Sqr(gp)*UNITMATRIX(3) + 8*Tr2U144*Sqr(gp)
-      *Sqr(Qq)*UNITMATRIX(3) + 5.333333333333333*AbsSqr(MassB)*Sqr(g1)*Sqr(gp)*
-      Sqr(Qq)*UNITMATRIX(3) + 5.333333333333333*AbsSqr(MassU)*Sqr(g1)*Sqr(gp)*
-      Sqr(Qq)*UNITMATRIX(3) + 2.6666666666666665*MassU*Conj(MassB)*Sqr(g1)*Sqr(
-      gp)*Sqr(Qq)*UNITMATRIX(3) + 2.6666666666666665*MassB*Conj(MassU)*Sqr(g1)*
-      Sqr(gp)*Sqr(Qq)*UNITMATRIX(3) + 24*AbsSqr(MassU)*Sqr(g2)*Sqr(gp)*Sqr(Qq)*
+      AbsSqr(MassG)*UNITMATRIX(3) + 480*Power(gp,4)*Power(Qq,4)*AbsSqr(MassU)*
+      UNITMATRIX(3) + 0.13333333333333333*Tr2U111*Sqr(g1)*UNITMATRIX(3) + 0.4*
+      AbsSqr(MassB)*Sqr(g1)*Sqr(g2)*UNITMATRIX(3) + 0.2*MassWB*Conj(MassB)*Sqr(
+      g1)*Sqr(g2)*UNITMATRIX(3) + 0.7111111111111111*AbsSqr(MassB)*Sqr(g1)*Sqr(
+      g3)*UNITMATRIX(3) + 0.7111111111111111*AbsSqr(MassG)*Sqr(g1)*Sqr(g3)*
+      UNITMATRIX(3) + 0.35555555555555557*MassG*Conj(MassB)*Sqr(g1)*Sqr(g3)*
+      UNITMATRIX(3) + 0.35555555555555557*MassB*Conj(MassG)*Sqr(g1)*Sqr(g3)*
+      UNITMATRIX(3) + 32*AbsSqr(MassG)*Sqr(g2)*Sqr(g3)*UNITMATRIX(3) + 16*
+      MassWB*Conj(MassG)*Sqr(g2)*Sqr(g3)*UNITMATRIX(3) + 4.8*Qd*Qq*AbsSqr(MassB
+      )*Sqr(g1)*Sqr(gp)*UNITMATRIX(3) + 4.8*Qe*Qq*AbsSqr(MassB)*Sqr(g1)*Sqr(gp)
+      *UNITMATRIX(3) - 1.6*QHd*Qq*AbsSqr(MassB)*Sqr(g1)*Sqr(gp)*UNITMATRIX(3) +
+      1.6*QHu*Qq*AbsSqr(MassB)*Sqr(g1)*Sqr(gp)*UNITMATRIX(3) - 4.8*Ql*Qq*
+      AbsSqr(MassB)*Sqr(g1)*Sqr(gp)*UNITMATRIX(3) - 9.6*Qq*Qu*AbsSqr(MassB)*Sqr
+      (g1)*Sqr(gp)*UNITMATRIX(3) + 4.8*Qd*Qq*AbsSqr(MassU)*Sqr(g1)*Sqr(gp)*
+      UNITMATRIX(3) + 4.8*Qe*Qq*AbsSqr(MassU)*Sqr(g1)*Sqr(gp)*UNITMATRIX(3) -
+      1.6*QHd*Qq*AbsSqr(MassU)*Sqr(g1)*Sqr(gp)*UNITMATRIX(3) + 1.6*QHu*Qq*
+      AbsSqr(MassU)*Sqr(g1)*Sqr(gp)*UNITMATRIX(3) - 4.8*Ql*Qq*AbsSqr(MassU)*Sqr
+      (g1)*Sqr(gp)*UNITMATRIX(3) + 2.4*MassU*Qd*Qq*Conj(MassB)*Sqr(g1)*Sqr(gp)*
+      UNITMATRIX(3) + 2.4*MassU*Qe*Qq*Conj(MassB)*Sqr(g1)*Sqr(gp)*UNITMATRIX(3)
+      - 0.8*MassU*QHd*Qq*Conj(MassB)*Sqr(g1)*Sqr(gp)*UNITMATRIX(3) + 0.8*MassU
+      *QHu*Qq*Conj(MassB)*Sqr(g1)*Sqr(gp)*UNITMATRIX(3) - 2.4*MassU*Ql*Qq*Conj(
+      MassB)*Sqr(g1)*Sqr(gp)*UNITMATRIX(3) - 4.8*MassU*Qq*Qu*Conj(MassB)*Sqr(g1
+      )*Sqr(gp)*UNITMATRIX(3) + 2.4*MassB*Qd*Qq*Conj(MassU)*Sqr(g1)*Sqr(gp)*
+      UNITMATRIX(3) + 2.4*MassB*Qe*Qq*Conj(MassU)*Sqr(g1)*Sqr(gp)*UNITMATRIX(3)
+      - 0.8*MassB*QHd*Qq*Conj(MassU)*Sqr(g1)*Sqr(gp)*UNITMATRIX(3) + 0.8*MassB
+      *QHu*Qq*Conj(MassU)*Sqr(g1)*Sqr(gp)*UNITMATRIX(3) - 2.4*MassB*Ql*Qq*Conj(
+      MassU)*Sqr(g1)*Sqr(gp)*UNITMATRIX(3) + 8*Tr2U144*Sqr(gp)*Sqr(Qq)*
+      UNITMATRIX(3) + 5.333333333333333*AbsSqr(MassB)*Sqr(g1)*Sqr(gp)*Sqr(Qq)*
+      UNITMATRIX(3) + 5.333333333333333*AbsSqr(MassU)*Sqr(g1)*Sqr(gp)*Sqr(Qq)*
+      UNITMATRIX(3) + 2.6666666666666665*MassU*Conj(MassB)*Sqr(g1)*Sqr(gp)*Sqr(
+      Qq)*UNITMATRIX(3) + 2.6666666666666665*MassB*Conj(MassU)*Sqr(g1)*Sqr(gp)*
+      Sqr(Qq)*UNITMATRIX(3) + 24*AbsSqr(MassU)*Sqr(g2)*Sqr(gp)*Sqr(Qq)*
       UNITMATRIX(3) + 12*MassWB*Conj(MassU)*Sqr(g2)*Sqr(gp)*Sqr(Qq)*UNITMATRIX(
       3) + 42.666666666666664*AbsSqr(MassG)*Sqr(g3)*Sqr(gp)*Sqr(Qq)*UNITMATRIX(
       3) + 42.666666666666664*AbsSqr(MassU)*Sqr(g3)*Sqr(gp)*Sqr(Qq)*UNITMATRIX(
@@ -265,13 +264,13 @@ Eigen::Matrix<double,3,3> UMSSM_soft_parameters::calc_beta_mq2_two_loop(const So
       Qq)*UNITMATRIX(3) + 216*Power(gp,4)*AbsSqr(MassU)*Sqr(Qd)*Sqr(Qq)*
       UNITMATRIX(3) + 72*Power(gp,4)*AbsSqr(MassU)*Sqr(Qe)*Sqr(Qq)*UNITMATRIX(3
       ) + 48*Power(gp,4)*AbsSqr(MassU)*Sqr(QHd)*Sqr(Qq)*UNITMATRIX(3) + 48*
-      Power(gp,4)*AbsSqr(MassU)*Sqr(QHu)*Sqr(Qq)*UNITMATRIX(3))).real();
+      Power(gp,4)*AbsSqr(MassU)*Sqr(QHu)*Sqr(Qq)*UNITMATRIX(3) + 144*Power(gp,4
+      )*AbsSqr(MassU)*Sqr(Ql)*Sqr(Qq)*UNITMATRIX(3))).real();
    const Eigen::Matrix<double,3,3> beta_mq2_3 = (0.2*twoLoop*(Conj(MassWB
       )*Sqr(g2)*((MassB + 2*MassWB)*Sqr(g1) + 5*(16*(MassG + 2*MassWB)*Sqr(g3)
-      + 3*(11*MassWB*Sqr(g2) + 4*(MassU + 2*MassWB)*Sqr(gp)*Sqr(Qq)))) + 12*Qq*
-      Conj(MassU)*Sqr(gp)*(-((MassB + 2*MassU)*(2*Qu - Qv)*Sqr(g1)) + 10*MassU*
-      Qq*Sqr(gp)*(6*Sqr(Ql) + 20*Sqr(Qq) + Sqr(Qs) + 9*Sqr(Qu) + 3*Sqr(Qv))))*
-      UNITMATRIX(3)).real();
+      + 3*(11*MassWB*Sqr(g2) + 4*(MassU + 2*MassWB)*Sqr(gp)*Sqr(Qq)))) + 24*Qq*
+      Conj(MassU)*Sqr(gp)*(-((MassB + 2*MassU)*Qu*Sqr(g1)) + 5*MassU*Qq*Sqr(gp)
+      *(Sqr(Qs) + 9*Sqr(Qu) + 3*Sqr(Qv))))*UNITMATRIX(3)).real();
 
    beta_mq2 = beta_mq2_1 + beta_mq2_2 + beta_mq2_3;
 

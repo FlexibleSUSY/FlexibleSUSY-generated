@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:35:27
+// File generated at Tue 8 Mar 2016 18:01:30
 
 #include "UMSSM_info.hpp"
 
@@ -30,17 +30,17 @@ namespace UMSSM_info {
    const double normalization_g3 = 1;
    const double normalization_gp = 1;
 
-   const unsigned particle_multiplicities[NUMBER_OF_PARTICLES] = {1, 1, 1, 1, 1
-      , 6, 6, 6, 6, 3, 3, 2, 6, 3, 2, 3, 3, 3, 1};
+   const unsigned particle_multiplicities[NUMBER_OF_PARTICLES] = {1, 1, 6, 6, 6
+      , 6, 3, 3, 2, 6, 3, 2, 3, 3, 3, 1, 1, 1, 1};
 
-   const char* particle_names[NUMBER_OF_PARTICLES] = {"VG", "Glu", "VP", "VZ",
-      "VZp", "Sd", "Sv", "Su", "Se", "hh", "Ah", "Hpm", "Chi", "Fv", "Cha", "Fe",
-      "Fd", "Fu", "VWm"};
+   const char* particle_names[NUMBER_OF_PARTICLES] = {"VG", "Glu", "Sd", "Sv",
+      "Su", "Se", "hh", "Ah", "Hpm", "Chi", "Fv", "Cha", "Fe", "Fd", "Fu", "VWm",
+      "VP", "VZ", "VZp"};
 
    const char* particle_latex_names[NUMBER_OF_PARTICLES] = {   "g",
-      "\\tilde{g}", "\\gamma", "Z", "{Z'}", "\\tilde{d}", "\\tilde{\\nu}",
-      "\\tilde{u}", "\\tilde{e}", "h", "A^0", "H^-", "\\tilde{\\chi}^0", "\\nu",
-      "\\tilde{\\chi}^-", "e", "d", "u", "W^-"};
+      "\\tilde{g}", "\\tilde{d}", "\\tilde{\\nu}", "\\tilde{u}", "\\tilde{e}", "h"
+      , "A^0", "H^-", "\\tilde{\\chi}^0", "\\nu", "\\tilde{\\chi}^-", "e", "d",
+      "u", "W^-", "\\gamma", "Z", "{Z'}"};
 
    const char* parameter_names[NUMBER_OF_PARAMETERS] = {"Yd(0,0)", "Yd(0,1)",
       "Yd(0,2)", "Yd(1,0)", "Yd(1,1)", "Yd(1,2)", "Yd(2,0)", "Yd(2,1)", "Yd(2,2)",
@@ -145,7 +145,8 @@ namespace UMSSM_info {
       "Im(ZUR(0,2))", "Re(ZUR(1,0))", "Im(ZUR(1,0))", "Re(ZUR(1,1))",
       "Im(ZUR(1,1))", "Re(ZUR(1,2))", "Im(ZUR(1,2))", "Re(ZUR(2,0))",
       "Im(ZUR(2,0))", "Re(ZUR(2,1))", "Im(ZUR(2,1))", "Re(ZUR(2,2))",
-      "Im(ZUR(2,2))"};
+      "Im(ZUR(2,2))", "ZZ(0,0)", "ZZ(0,1)", "ZZ(0,2)", "ZZ(1,0)", "ZZ(1,1)",
+      "ZZ(1,2)", "ZZ(2,0)", "ZZ(2,1)", "ZZ(2,2)"};
 
    const char* input_parameter_names[NUMBER_OF_INPUT_PARAMETERS] = {"m0", "m12"
       , "TanBeta", "Azero", "LambdaInput", "ALambdaInput", "vSInput", "Qq", "Ql",

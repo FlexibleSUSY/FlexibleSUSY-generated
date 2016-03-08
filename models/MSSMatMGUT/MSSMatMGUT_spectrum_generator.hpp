@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:52:57
+// File generated at Tue 8 Mar 2016 18:42:43
 
 #ifndef MSSMatMGUT_SPECTRUM_GENERATOR_H
 #define MSSMatMGUT_SPECTRUM_GENERATOR_H
@@ -104,6 +104,7 @@ void MSSMatMGUT_spectrum_generator<T>::run(const softsusy::QedQcd& qedqcd,
    susy_scale_constraint.set_model(&model);
    low_scale_constraint .set_model(&model);
 
+   susy_scale_constraint.set_sm_parameters(qedqcd);
    low_scale_constraint .set_sm_parameters(qedqcd);
 
    high_scale_constraint.initialize();

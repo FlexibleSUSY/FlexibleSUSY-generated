@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:40:57
+// File generated at Tue 8 Mar 2016 18:24:03
 
 #ifndef UMSSM_PHYSICAL_H
 #define UMSSM_PHYSICAL_H
@@ -42,9 +42,6 @@ struct UMSSM_physical {
 
    double MVG;
    double MGlu;
-   double MVP;
-   double MVZ;
-   double MVZp;
    Eigen::Array<double,6,1> MSd;
    Eigen::Array<double,6,1> MSv;
    Eigen::Array<double,6,1> MSu;
@@ -59,6 +56,9 @@ struct UMSSM_physical {
    Eigen::Array<double,3,1> MFd;
    Eigen::Array<double,3,1> MFu;
    double MVWm;
+   double MVP;
+   double MVZ;
+   double MVZp;
 
    Eigen::Matrix<double,6,6> ZD;
    Eigen::Matrix<double,6,6> ZV;
@@ -78,6 +78,7 @@ struct UMSSM_physical {
    Eigen::Matrix<std::complex<double>,3,3> ZDR;
    Eigen::Matrix<std::complex<double>,3,3> ZUL;
    Eigen::Matrix<std::complex<double>,3,3> ZUR;
+   Eigen::Matrix<double,3,3> ZZ;
 
 };
 

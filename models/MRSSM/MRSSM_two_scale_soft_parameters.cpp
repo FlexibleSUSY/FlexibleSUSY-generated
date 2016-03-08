@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:32:31
+// File generated at Tue 8 Mar 2016 16:13:39
 
 #include "MRSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -28,6 +28,10 @@ namespace flexiblesusy {
 
 #define INPUT(parameter) input.parameter
 #define TRACE_STRUCT soft_traces
+#define TRACE_STRUCT_TYPE Soft_traces
+#define CALCULATE_TRACES() calc_soft_traces(TRACE_STRUCT);
+
+const int MRSSM_soft_parameters::numberOfParameters;
 
 MRSSM_soft_parameters::MRSSM_soft_parameters(const MRSSM_input_parameters& input_)
    : MRSSM_susy_parameters(input_)
@@ -67,50 +71,71 @@ Eigen::ArrayXd MRSSM_soft_parameters::beta() const
 
 MRSSM_soft_parameters MRSSM_soft_parameters::calc_beta() const
 {
-   Soft_traces soft_traces;
-   calc_soft_traces(soft_traces);
+   double beta_BMu = 0.;
+   double beta_BMuD = 0.;
+   double beta_BMuU = 0.;
+   Eigen::Matrix<double,3,3> beta_mq2 = Eigen::Matrix<double,3,3>::Zero();
+   Eigen::Matrix<double,3,3> beta_ml2 = Eigen::Matrix<double,3,3>::Zero();
+   double beta_mHd2 = 0.;
+   double beta_mHu2 = 0.;
+   Eigen::Matrix<double,3,3> beta_md2 = Eigen::Matrix<double,3,3>::Zero();
+   Eigen::Matrix<double,3,3> beta_mu2 = Eigen::Matrix<double,3,3>::Zero();
+   Eigen::Matrix<double,3,3> beta_me2 = Eigen::Matrix<double,3,3>::Zero();
+   double beta_mS2 = 0.;
+   double beta_mT2 = 0.;
+   double beta_moc2 = 0.;
+   double beta_mRd2 = 0.;
+   double beta_mRu2 = 0.;
+   double beta_MDBS = 0.;
+   double beta_MDWBT = 0.;
+   double beta_MDGoc = 0.;
 
-   double beta_BMu(calc_beta_BMu_one_loop(TRACE_STRUCT));
-   double beta_BMuD(calc_beta_BMuD_one_loop(TRACE_STRUCT));
-   double beta_BMuU(calc_beta_BMuU_one_loop(TRACE_STRUCT));
-   Eigen::Matrix<double,3,3> beta_mq2(calc_beta_mq2_one_loop(TRACE_STRUCT));
-   Eigen::Matrix<double,3,3> beta_ml2(calc_beta_ml2_one_loop(TRACE_STRUCT));
-   double beta_mHd2(calc_beta_mHd2_one_loop(TRACE_STRUCT));
-   double beta_mHu2(calc_beta_mHu2_one_loop(TRACE_STRUCT));
-   Eigen::Matrix<double,3,3> beta_md2(calc_beta_md2_one_loop(TRACE_STRUCT));
-   Eigen::Matrix<double,3,3> beta_mu2(calc_beta_mu2_one_loop(TRACE_STRUCT));
-   Eigen::Matrix<double,3,3> beta_me2(calc_beta_me2_one_loop(TRACE_STRUCT));
-   double beta_mS2(calc_beta_mS2_one_loop(TRACE_STRUCT));
-   double beta_mT2(calc_beta_mT2_one_loop(TRACE_STRUCT));
-   double beta_moc2(calc_beta_moc2_one_loop(TRACE_STRUCT));
-   double beta_mRd2(calc_beta_mRd2_one_loop(TRACE_STRUCT));
-   double beta_mRu2(calc_beta_mRu2_one_loop(TRACE_STRUCT));
-   double beta_MDBS(calc_beta_MDBS_one_loop(TRACE_STRUCT));
-   double beta_MDWBT(calc_beta_MDWBT_one_loop(TRACE_STRUCT));
-   double beta_MDGoc(calc_beta_MDGoc_one_loop(TRACE_STRUCT));
+   if (get_loops() > 0) {
+      TRACE_STRUCT_TYPE TRACE_STRUCT;
+      CALCULATE_TRACES();
 
-   if (get_loops() > 1) {
-      beta_BMu += calc_beta_BMu_two_loop(TRACE_STRUCT);
-      beta_BMuD += calc_beta_BMuD_two_loop(TRACE_STRUCT);
-      beta_BMuU += calc_beta_BMuU_two_loop(TRACE_STRUCT);
-      beta_mq2 += calc_beta_mq2_two_loop(TRACE_STRUCT);
-      beta_ml2 += calc_beta_ml2_two_loop(TRACE_STRUCT);
-      beta_mHd2 += calc_beta_mHd2_two_loop(TRACE_STRUCT);
-      beta_mHu2 += calc_beta_mHu2_two_loop(TRACE_STRUCT);
-      beta_md2 += calc_beta_md2_two_loop(TRACE_STRUCT);
-      beta_mu2 += calc_beta_mu2_two_loop(TRACE_STRUCT);
-      beta_me2 += calc_beta_me2_two_loop(TRACE_STRUCT);
-      beta_mS2 += calc_beta_mS2_two_loop(TRACE_STRUCT);
-      beta_mT2 += calc_beta_mT2_two_loop(TRACE_STRUCT);
-      beta_moc2 += calc_beta_moc2_two_loop(TRACE_STRUCT);
-      beta_mRd2 += calc_beta_mRd2_two_loop(TRACE_STRUCT);
-      beta_mRu2 += calc_beta_mRu2_two_loop(TRACE_STRUCT);
-      beta_MDBS += calc_beta_MDBS_two_loop(TRACE_STRUCT);
-      beta_MDWBT += calc_beta_MDWBT_two_loop(TRACE_STRUCT);
-      beta_MDGoc += calc_beta_MDGoc_two_loop(TRACE_STRUCT);
+      beta_BMu += calc_beta_BMu_one_loop(TRACE_STRUCT);
+      beta_BMuD += calc_beta_BMuD_one_loop(TRACE_STRUCT);
+      beta_BMuU += calc_beta_BMuU_one_loop(TRACE_STRUCT);
+      beta_mq2 += calc_beta_mq2_one_loop(TRACE_STRUCT);
+      beta_ml2 += calc_beta_ml2_one_loop(TRACE_STRUCT);
+      beta_mHd2 += calc_beta_mHd2_one_loop(TRACE_STRUCT);
+      beta_mHu2 += calc_beta_mHu2_one_loop(TRACE_STRUCT);
+      beta_md2 += calc_beta_md2_one_loop(TRACE_STRUCT);
+      beta_mu2 += calc_beta_mu2_one_loop(TRACE_STRUCT);
+      beta_me2 += calc_beta_me2_one_loop(TRACE_STRUCT);
+      beta_mS2 += calc_beta_mS2_one_loop(TRACE_STRUCT);
+      beta_mT2 += calc_beta_mT2_one_loop(TRACE_STRUCT);
+      beta_moc2 += calc_beta_moc2_one_loop(TRACE_STRUCT);
+      beta_mRd2 += calc_beta_mRd2_one_loop(TRACE_STRUCT);
+      beta_mRu2 += calc_beta_mRu2_one_loop(TRACE_STRUCT);
+      beta_MDBS += calc_beta_MDBS_one_loop(TRACE_STRUCT);
+      beta_MDWBT += calc_beta_MDWBT_one_loop(TRACE_STRUCT);
+      beta_MDGoc += calc_beta_MDGoc_one_loop(TRACE_STRUCT);
 
-      if (get_loops() > 2) {
+      if (get_loops() > 1) {
+         beta_BMu += calc_beta_BMu_two_loop(TRACE_STRUCT);
+         beta_BMuD += calc_beta_BMuD_two_loop(TRACE_STRUCT);
+         beta_BMuU += calc_beta_BMuU_two_loop(TRACE_STRUCT);
+         beta_mq2 += calc_beta_mq2_two_loop(TRACE_STRUCT);
+         beta_ml2 += calc_beta_ml2_two_loop(TRACE_STRUCT);
+         beta_mHd2 += calc_beta_mHd2_two_loop(TRACE_STRUCT);
+         beta_mHu2 += calc_beta_mHu2_two_loop(TRACE_STRUCT);
+         beta_md2 += calc_beta_md2_two_loop(TRACE_STRUCT);
+         beta_mu2 += calc_beta_mu2_two_loop(TRACE_STRUCT);
+         beta_me2 += calc_beta_me2_two_loop(TRACE_STRUCT);
+         beta_mS2 += calc_beta_mS2_two_loop(TRACE_STRUCT);
+         beta_mT2 += calc_beta_mT2_two_loop(TRACE_STRUCT);
+         beta_moc2 += calc_beta_moc2_two_loop(TRACE_STRUCT);
+         beta_mRd2 += calc_beta_mRd2_two_loop(TRACE_STRUCT);
+         beta_mRu2 += calc_beta_mRu2_two_loop(TRACE_STRUCT);
+         beta_MDBS += calc_beta_MDBS_two_loop(TRACE_STRUCT);
+         beta_MDWBT += calc_beta_MDWBT_two_loop(TRACE_STRUCT);
+         beta_MDGoc += calc_beta_MDGoc_two_loop(TRACE_STRUCT);
 
+         if (get_loops() > 2) {
+
+         }
       }
    }
 

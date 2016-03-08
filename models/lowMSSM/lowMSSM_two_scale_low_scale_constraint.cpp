@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:46:41
+// File generated at Tue 8 Mar 2016 18:29:41
 
 #include "lowMSSM_two_scale_low_scale_constraint.hpp"
 #include "lowMSSM_two_scale_model.hpp"
@@ -35,11 +35,13 @@
 
 namespace flexiblesusy {
 
+#define DERIVEDPARAMETER(p) model->p()
 #define INPUTPARAMETER(p) model->get_input().p
 #define MODELPARAMETER(p) model->get_##p()
 #define PHASE(p) model->get_##p()
 #define BETAPARAMETER(p) beta_functions.get_##p()
 #define BETA(p) beta_##p
+#define LowEnergyGaugeCoupling(i) new_g##i
 #define LowEnergyConstant(p) Electroweak_constants::p
 #define MZPole qedqcd.displayPoleMZ()
 #define STANDARDDEVIATION(p) Electroweak_constants::Error_##p
@@ -104,6 +106,8 @@ void lowMSSM_low_scale_constraint<Two_scale>::apply()
    assert(model && "Error: lowMSSM_low_scale_constraint::apply():"
           " model pointer must not be zero");
 
+
+
    model->calculate_DRbar_masses();
    update_scale();
    qedqcd.runto(scale, 1.0e-5);
@@ -120,13 +124,14 @@ void lowMSSM_low_scale_constraint<Two_scale>::apply()
       TanBeta)))));
    MODEL->set_vu(Re((2*MZDRbar*TanBeta)/(Sqrt(0.6*Sqr(g1) + Sqr(g2))*Sqrt(1 +
       Sqr(TanBeta)))));
+   MODEL->set_g1(new_g1);
+   MODEL->set_g2(new_g2);
+   MODEL->set_g3(new_g3);
 
-
-   model->set_g1(new_g1);
-   model->set_g2(new_g2);
-   model->set_g3(new_g3);
 
    recalculate_mw_pole();
+
+
 }
 
 const Eigen::Matrix<std::complex<double>,3,3>& lowMSSM_low_scale_constraint<Two_scale>::get_ckm()
@@ -187,7 +192,7 @@ void lowMSSM_low_scale_constraint<Two_scale>::initialize()
    assert(model && "lowMSSM_low_scale_constraint<Two_scale>::"
           "initialize(): model pointer is zero.");
 
-   initial_scale_guess = MZPole;
+   initial_scale_guess = qedqcd.displayPoleMZ();
 
    scale = initial_scale_guess;
 
@@ -209,7 +214,7 @@ void lowMSSM_low_scale_constraint<Two_scale>::update_scale()
    assert(model && "lowMSSM_low_scale_constraint<Two_scale>::"
           "update_scale(): model pointer is zero.");
 
-   scale = MZPole;
+   scale = qedqcd.displayPoleMZ();
 
 
 }
@@ -252,6 +257,15 @@ void lowMSSM_low_scale_constraint<Two_scale>::calculate_threshold_corrections()
    AlphaS = alpha_s_drbar;
    EDRbar = e_drbar;
    ThetaWDRbar = calculate_theta_w(alpha_em_drbar);
+
+   if (IsFinite(ThetaWDRbar)) {
+      model->get_problems().unflag_non_perturbative_parameter(
+         "sin(theta_W)");
+   } else {
+      model->get_problems().flag_non_perturbative_parameter(
+         "sin(theta_W)", ThetaWDRbar, model->get_scale(), 0);
+      ThetaWDRbar = ArcSin(Electroweak_constants::sinThetaW);
+   }
 }
 
 double lowMSSM_low_scale_constraint<Two_scale>::calculate_theta_w(double alpha_em_drbar)
@@ -463,7 +477,7 @@ void lowMSSM_low_scale_constraint<Two_scale>::calculate_Yu_DRbar()
    Eigen::Matrix<std::complex<double>,3,3> topDRbar(ZEROMATRIXCOMPLEX(3,3));
    topDRbar(0,0)      = qedqcd.displayMass(softsusy::mUp);
    topDRbar(1,1)      = qedqcd.displayMass(softsusy::mCharm);
-   topDRbar(2,2)      = qedqcd.displayMass(softsusy::mTop);
+   topDRbar(2,2)      = qedqcd.displayPoleMt();
 
    if (model->get_thresholds()) {
       topDRbar(2,2) = MODEL->calculate_MFu_DRbar(qedqcd.displayPoleMt(), 2);
@@ -499,9 +513,9 @@ void lowMSSM_low_scale_constraint<Two_scale>::calculate_Ye_DRbar()
           "calculate_Ye_DRbar(): model pointer is zero");
 
    Eigen::Matrix<std::complex<double>,3,3> electronDRbar(ZEROMATRIXCOMPLEX(3,3));
-   electronDRbar(0,0) = qedqcd.displayMass(softsusy::mElectron);
-   electronDRbar(1,1) = qedqcd.displayMass(softsusy::mMuon);
-   electronDRbar(2,2) = qedqcd.displayMass(softsusy::mTau);
+   electronDRbar(0,0) = qedqcd.displayPoleMel();
+   electronDRbar(1,1) = qedqcd.displayPoleMmuon();
+   electronDRbar(2,2) = qedqcd.displayPoleMtau();
 
    if (model->get_thresholds()) {
       electronDRbar(0,0) = MODEL->calculate_MFe_DRbar(qedqcd.displayMass(softsusy::mElectron), 0);

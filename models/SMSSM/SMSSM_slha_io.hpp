@@ -16,19 +16,19 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:34:55
+// File generated at Tue 8 Mar 2016 18:10:11
 
 #ifndef SMSSM_SLHA_IO_H
 #define SMSSM_SLHA_IO_H
 
 #include "SMSSM_two_scale_model_slha.hpp"
 #include "SMSSM_info.hpp"
+#include "SMSSM_observables.hpp"
 #include "SMSSM_physical.hpp"
 #include "slha_io.hpp"
 #include "ckm.hpp"
 #include "ew_input.hpp"
 #include "lowe.h"
-#include "observables.hpp"
 
 #include <Eigen/Core>
 #include <string>
@@ -48,7 +48,6 @@ namespace flexiblesusy {
 
 struct SMSSM_input_parameters;
 class Spectrum_generator_settings;
-struct Observables;
 
 struct SMSSM_scales {
    SMSSM_scales() : HighScale(0.), SUSYScale(0.), LowScale(0.) {}
@@ -66,6 +65,7 @@ public:
    void fill(SMSSM_input_parameters&) const;
    void fill(SMSSM_mass_eigenstates&) const;
    template <class T> void fill(SMSSM_slha<T>&) const;
+   void fill(Physical_input&) const;
    void fill(Spectrum_generator_settings&) const;
    double get_parameter_output_scale() const;
    const SLHA_io& get_slha_io() const { return slha_io; }
@@ -73,12 +73,13 @@ public:
    void read_from_source(const std::string&);
    void read_from_stream(std::istream&);
    void set_extpar(const SMSSM_input_parameters&);
-   template <class T> void set_extra(const SMSSM_slha<T>&, const SMSSM_scales&, const Observables&);
+   template <class T> void set_extra(const SMSSM_slha<T>&, const SMSSM_scales&, const SMSSM_observables&);
    void set_minpar(const SMSSM_input_parameters&);
    void set_sminputs(const softsusy::QedQcd&);
    template <class T> void set_spectrum(const SMSSM_slha<T>&);
    template <class T> void set_spectrum(const SMSSM<T>&);
    void set_spinfo(const Problems<SMSSM_info::NUMBER_OF_PARTICLES>&);
+   void set_print_imaginary_parts_of_majorana_mixings(bool);
    void write_to_file(const std::string&);
    void write_to_stream(std::ostream& ostr = std::cout) { slha_io.write_to_stream(ostr); }
 
@@ -86,13 +87,14 @@ public:
    static void fill_extpar_tuple(SMSSM_input_parameters&, int, double);
 
    template <class T>
-   static void fill_slhaea(SLHAea::Coll&, const SMSSM_slha<T>&, const softsusy::QedQcd&, const SMSSM_scales&, const Observables&);
+   static void fill_slhaea(SLHAea::Coll&, const SMSSM_slha<T>&, const softsusy::QedQcd&, const SMSSM_scales&, const SMSSM_observables&);
 
    template <class T>
-   static SLHAea::Coll fill_slhaea(const SMSSM_slha<T>&, const softsusy::QedQcd&, const SMSSM_scales&, const Observables&);
+   static SLHAea::Coll fill_slhaea(const SMSSM_slha<T>&, const softsusy::QedQcd&, const SMSSM_scales&, const SMSSM_observables&);
 
 private:
    SLHA_io slha_io; ///< SLHA io class
+   bool print_imaginary_parts_of_majorana_mixings;
    static unsigned const NUMBER_OF_DRBAR_BLOCKS = 15;
    static char const * const drbar_blocks[NUMBER_OF_DRBAR_BLOCKS];
 
@@ -121,7 +123,7 @@ template <class T>
 void SMSSM_slha_io::fill_slhaea(
    SLHAea::Coll& slhaea, const SMSSM_slha<T>& model,
    const softsusy::QedQcd& qedqcd, const SMSSM_scales& scales,
-   const Observables& observables)
+   const SMSSM_observables& observables)
 {
    SMSSM_slha_io slha_io;
    const SMSSM_input_parameters& input = model.get_input();
@@ -144,7 +146,7 @@ void SMSSM_slha_io::fill_slhaea(
 template <class T>
 SLHAea::Coll SMSSM_slha_io::fill_slhaea(
    const SMSSM_slha<T>& model, const softsusy::QedQcd& qedqcd,
-   const SMSSM_scales& scales, const Observables& observables)
+   const SMSSM_scales& scales, const SMSSM_observables& observables)
 {
    SLHAea::Coll slhaea;
    SMSSM_slha_io::fill_slhaea(slhaea, model, qedqcd, scales, observables);
@@ -228,7 +230,7 @@ void SMSSM_slha_io::set_model_parameters(const SMSSM_slha<T>& model)
 template <class T>
 void SMSSM_slha_io::set_extra(
    const SMSSM_slha<T>& model, const SMSSM_scales& scales,
-   const Observables& observables)
+   const SMSSM_observables& observables)
 {
    const SMSSM_physical physical(model.get_physical_slha());
 
@@ -238,6 +240,22 @@ void SMSSM_slha_io::set_extra(
             << FORMAT_ELEMENT(0, (SCALES(HighScale)), "HighScale")
             << FORMAT_ELEMENT(1, (SCALES(SUSYScale)), "SUSYScale")
             << FORMAT_ELEMENT(2, (SCALES(LowScale)), "LowScale")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block EFFHIGGSCOUPLINGS Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_RANK_THREE_TENSOR(25, 22, 22, (Abs(OBSERVABLES.eff_cp_higgs_photon_photon(0))), "Abs(effective H-Photon-Photon coupling)")
+            << FORMAT_RANK_THREE_TENSOR(35, 22, 22, (Abs(OBSERVABLES.eff_cp_higgs_photon_photon(1))), "Abs(effective H-Photon-Photon coupling)")
+            << FORMAT_RANK_THREE_TENSOR(45, 22, 22, (Abs(OBSERVABLES.eff_cp_higgs_photon_photon(2))), "Abs(effective H-Photon-Photon coupling)")
+            << FORMAT_RANK_THREE_TENSOR(25, 21, 21, (Abs(OBSERVABLES.eff_cp_higgs_gluon_gluon(0))), "Abs(effective H-Gluon-Gluon coupling)")
+            << FORMAT_RANK_THREE_TENSOR(35, 21, 21, (Abs(OBSERVABLES.eff_cp_higgs_gluon_gluon(1))), "Abs(effective H-Gluon-Gluon coupling)")
+            << FORMAT_RANK_THREE_TENSOR(45, 21, 21, (Abs(OBSERVABLES.eff_cp_higgs_gluon_gluon(2))), "Abs(effective H-Gluon-Gluon coupling)")
+            << FORMAT_RANK_THREE_TENSOR(36, 22, 22, (Abs(OBSERVABLES.eff_cp_pseudoscalar_photon_photon(0))), "Abs(effective A-Photon-Photon coupling)")
+            << FORMAT_RANK_THREE_TENSOR(46, 22, 22, (Abs(OBSERVABLES.eff_cp_pseudoscalar_photon_photon(1))), "Abs(effective A-Photon-Photon coupling)")
+            << FORMAT_RANK_THREE_TENSOR(36, 21, 21, (Abs(OBSERVABLES.eff_cp_pseudoscalar_gluon_gluon(0))), "Abs(effective A-Gluon-Gluon coupling)")
+            << FORMAT_RANK_THREE_TENSOR(46, 21, 21, (Abs(OBSERVABLES.eff_cp_pseudoscalar_gluon_gluon(1))), "Abs(effective A-Gluon-Gluon coupling)")
       ;
       slha_io.set_block(block);
    }

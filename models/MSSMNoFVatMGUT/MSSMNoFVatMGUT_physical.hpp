@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:50:09
+// File generated at Tue 8 Mar 2016 18:39:44
 
 #ifndef MSSMNoFVatMGUT_PHYSICAL_H
 #define MSSMNoFVatMGUT_PHYSICAL_H
@@ -42,8 +42,6 @@ struct MSSMNoFVatMGUT_physical {
 
    double MVG;
    double MGlu;
-   double MVP;
-   double MVZ;
    double MFd;
    double MFs;
    double MFb;
@@ -74,6 +72,8 @@ struct MSSMNoFVatMGUT_physical {
    Eigen::Array<double,4,1> MChi;
    Eigen::Array<double,2,1> MCha;
    double MVWm;
+   double MVP;
+   double MVZ;
 
    Eigen::Matrix<double,2,2> ZD;
    Eigen::Matrix<double,2,2> ZU;
@@ -90,6 +90,7 @@ struct MSSMNoFVatMGUT_physical {
    Eigen::Matrix<std::complex<double>,4,4> ZN;
    Eigen::Matrix<std::complex<double>,2,2> UM;
    Eigen::Matrix<std::complex<double>,2,2> UP;
+   Eigen::Matrix<double,2,2> ZZ;
 
 };
 

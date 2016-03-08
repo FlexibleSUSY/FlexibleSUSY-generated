@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:42:58
+// File generated at Tue 8 Mar 2016 18:08:32
 
 #include "E6SSM_physical.hpp"
 #include "slha_io.hpp"
@@ -29,21 +29,21 @@ namespace flexiblesusy {
 
 E6SSM_physical::E6SSM_physical()
    :
-    MVG(0), MGlu(0), MFv(Eigen::Array<double,3,1>::Zero()), MChaP(0), MVP(0),
-       MVZ(0), MVZp(0), MSd(Eigen::Array<double,6,1>::Zero()), MSv(Eigen::Array<
-       double,3,1>::Zero()), MSu(Eigen::Array<double,6,1>::Zero()), MSe(
-       Eigen::Array<double,6,1>::Zero()), MSDX(Eigen::Array<double,6,1>::Zero()),
-       Mhh(Eigen::Array<double,3,1>::Zero()), MAh(Eigen::Array<double,3,1>::Zero()
-       ), MHpm(Eigen::Array<double,2,1>::Zero()), MChi(Eigen::Array<double,6,1>
-       ::Zero()), MCha(Eigen::Array<double,2,1>::Zero()), MFe(Eigen::Array<double,
-       3,1>::Zero()), MFd(Eigen::Array<double,3,1>::Zero()), MFu(Eigen::Array<
-       double,3,1>::Zero()), MFDX(Eigen::Array<double,3,1>::Zero()), MSHI0(
-       Eigen::Array<double,4,1>::Zero()), MSHIp(Eigen::Array<double,4,1>::Zero()),
-       MChaI(Eigen::Array<double,2,1>::Zero()), MChiI(Eigen::Array<double,4,1>
-       ::Zero()), MSSI0(Eigen::Array<double,2,1>::Zero()), MFSI(Eigen::Array<
-       double,2,1>::Zero()), MSHp0(Eigen::Array<double,2,1>::Zero()), MSHpp(
-       Eigen::Array<double,2,1>::Zero()), MChiP(Eigen::Array<double,2,1>::Zero()),
-       MVWm(0)
+    MVG(0), MGlu(0), MFv(Eigen::Array<double,3,1>::Zero()), MChaP(0), MSd(
+       Eigen::Array<double,6,1>::Zero()), MSv(Eigen::Array<double,3,1>::Zero()),
+       MSu(Eigen::Array<double,6,1>::Zero()), MSe(Eigen::Array<double,6,1>::Zero()
+       ), MSDX(Eigen::Array<double,6,1>::Zero()), Mhh(Eigen::Array<double,3,1>
+       ::Zero()), MAh(Eigen::Array<double,3,1>::Zero()), MHpm(Eigen::Array<double,
+       2,1>::Zero()), MChi(Eigen::Array<double,6,1>::Zero()), MCha(Eigen::Array<
+       double,2,1>::Zero()), MFe(Eigen::Array<double,3,1>::Zero()), MFd(
+       Eigen::Array<double,3,1>::Zero()), MFu(Eigen::Array<double,3,1>::Zero()),
+       MFDX(Eigen::Array<double,3,1>::Zero()), MSHI0(Eigen::Array<double,4,1>
+       ::Zero()), MSHIp(Eigen::Array<double,4,1>::Zero()), MChaI(Eigen::Array<
+       double,2,1>::Zero()), MChiI(Eigen::Array<double,4,1>::Zero()), MSSI0(
+       Eigen::Array<double,2,1>::Zero()), MFSI(Eigen::Array<double,2,1>::Zero()),
+       MSHp0(Eigen::Array<double,2,1>::Zero()), MSHpp(Eigen::Array<double,2,1>
+       ::Zero()), MChiP(Eigen::Array<double,2,1>::Zero()), MVWm(0), MVP(0), MVZ(0)
+       , MVZp(0)
 
    , ZD(Eigen::Matrix<double,6,6>::Zero()), ZV(Eigen::Matrix<double,3,3>::Zero(
       )), ZU(Eigen::Matrix<double,6,6>::Zero()), ZE(Eigen::Matrix<double,6,6>
@@ -63,7 +63,8 @@ E6SSM_physical::E6SSM_physical()
       ZNI(Eigen::Matrix<std::complex<double>,4,4>::Zero()), ZSSI(Eigen::Matrix<
       double,2,2>::Zero()), ZFSI(Eigen::Matrix<std::complex<double>,2,2>::Zero()),
       UHp0(Eigen::Matrix<double,2,2>::Zero()), UHpp(Eigen::Matrix<double,2,2>
-      ::Zero()), ZNp(Eigen::Matrix<std::complex<double>,2,2>::Zero())
+      ::Zero()), ZNp(Eigen::Matrix<std::complex<double>,2,2>::Zero()), ZZ(
+      Eigen::Matrix<double,3,3>::Zero())
 
 {
 }
@@ -74,9 +75,6 @@ void E6SSM_physical::clear()
    MGlu = 0.;
    MFv = Eigen::Matrix<double,3,1>::Zero();
    MChaP = 0.;
-   MVP = 0.;
-   MVZ = 0.;
-   MVZp = 0.;
    MSd = Eigen::Matrix<double,6,1>::Zero();
    ZD = Eigen::Matrix<double,6,6>::Zero();
    MSv = Eigen::Matrix<double,3,1>::Zero();
@@ -130,6 +128,9 @@ void E6SSM_physical::clear()
    MChiP = Eigen::Matrix<double,2,1>::Zero();
    ZNp = Eigen::Matrix<std::complex<double>,2,2>::Zero();
    MVWm = 0.;
+   MVP = 0.;
+   MVZ = 0.;
+   MVZp = 0.;
 
 }
 
@@ -165,7 +166,7 @@ Eigen::ArrayXd E6SSM_physical::get() const
 {
    Eigen::ArrayXd pars(get_masses());
 
-   pars.conservativeResize(604);
+   pars.conservativeResize(613);
 
    pars(89) = ZD(0,0);
    pars(90) = ZD(0,1);
@@ -682,6 +683,15 @@ Eigen::ArrayXd E6SSM_physical::get() const
    pars(601) = Im(ZNp(1,0));
    pars(602) = Re(ZNp(1,1));
    pars(603) = Im(ZNp(1,1));
+   pars(604) = ZZ(0,0);
+   pars(605) = ZZ(0,1);
+   pars(606) = ZZ(0,2);
+   pars(607) = ZZ(1,0);
+   pars(608) = ZZ(1,1);
+   pars(609) = ZZ(1,2);
+   pars(610) = ZZ(2,0);
+   pars(611) = ZZ(2,1);
+   pars(612) = ZZ(2,2);
 
 
    return pars;
@@ -1058,6 +1068,15 @@ void E6SSM_physical::set(const Eigen::ArrayXd& pars)
    ZNp(0,1) = std::complex<double>(pars(598), pars(599));
    ZNp(1,0) = std::complex<double>(pars(600), pars(601));
    ZNp(1,1) = std::complex<double>(pars(602), pars(603));
+   ZZ(0,0) = pars(604);
+   ZZ(0,1) = pars(605);
+   ZZ(0,2) = pars(606);
+   ZZ(1,0) = pars(607);
+   ZZ(1,1) = pars(608);
+   ZZ(1,2) = pars(609);
+   ZZ(2,0) = pars(610);
+   ZZ(2,1) = pars(611);
+   ZZ(2,2) = pars(612);
 
 }
 
@@ -1071,89 +1090,89 @@ Eigen::ArrayXd E6SSM_physical::get_masses() const
    pars(3) = MFv(1);
    pars(4) = MFv(2);
    pars(5) = MChaP;
-   pars(6) = MVP;
-   pars(7) = MVZ;
-   pars(8) = MVZp;
-   pars(9) = MSd(0);
-   pars(10) = MSd(1);
-   pars(11) = MSd(2);
-   pars(12) = MSd(3);
-   pars(13) = MSd(4);
-   pars(14) = MSd(5);
-   pars(15) = MSv(0);
-   pars(16) = MSv(1);
-   pars(17) = MSv(2);
-   pars(18) = MSu(0);
-   pars(19) = MSu(1);
-   pars(20) = MSu(2);
-   pars(21) = MSu(3);
-   pars(22) = MSu(4);
-   pars(23) = MSu(5);
-   pars(24) = MSe(0);
-   pars(25) = MSe(1);
-   pars(26) = MSe(2);
-   pars(27) = MSe(3);
-   pars(28) = MSe(4);
-   pars(29) = MSe(5);
-   pars(30) = MSDX(0);
-   pars(31) = MSDX(1);
-   pars(32) = MSDX(2);
-   pars(33) = MSDX(3);
-   pars(34) = MSDX(4);
-   pars(35) = MSDX(5);
-   pars(36) = Mhh(0);
-   pars(37) = Mhh(1);
-   pars(38) = Mhh(2);
-   pars(39) = MAh(0);
-   pars(40) = MAh(1);
-   pars(41) = MAh(2);
-   pars(42) = MHpm(0);
-   pars(43) = MHpm(1);
-   pars(44) = MChi(0);
-   pars(45) = MChi(1);
-   pars(46) = MChi(2);
-   pars(47) = MChi(3);
-   pars(48) = MChi(4);
-   pars(49) = MChi(5);
-   pars(50) = MCha(0);
-   pars(51) = MCha(1);
-   pars(52) = MFe(0);
-   pars(53) = MFe(1);
-   pars(54) = MFe(2);
-   pars(55) = MFd(0);
-   pars(56) = MFd(1);
-   pars(57) = MFd(2);
-   pars(58) = MFu(0);
-   pars(59) = MFu(1);
-   pars(60) = MFu(2);
-   pars(61) = MFDX(0);
-   pars(62) = MFDX(1);
-   pars(63) = MFDX(2);
-   pars(64) = MSHI0(0);
-   pars(65) = MSHI0(1);
-   pars(66) = MSHI0(2);
-   pars(67) = MSHI0(3);
-   pars(68) = MSHIp(0);
-   pars(69) = MSHIp(1);
-   pars(70) = MSHIp(2);
-   pars(71) = MSHIp(3);
-   pars(72) = MChaI(0);
-   pars(73) = MChaI(1);
-   pars(74) = MChiI(0);
-   pars(75) = MChiI(1);
-   pars(76) = MChiI(2);
-   pars(77) = MChiI(3);
-   pars(78) = MSSI0(0);
-   pars(79) = MSSI0(1);
-   pars(80) = MFSI(0);
-   pars(81) = MFSI(1);
-   pars(82) = MSHp0(0);
-   pars(83) = MSHp0(1);
-   pars(84) = MSHpp(0);
-   pars(85) = MSHpp(1);
-   pars(86) = MChiP(0);
-   pars(87) = MChiP(1);
-   pars(88) = MVWm;
+   pars(6) = MSd(0);
+   pars(7) = MSd(1);
+   pars(8) = MSd(2);
+   pars(9) = MSd(3);
+   pars(10) = MSd(4);
+   pars(11) = MSd(5);
+   pars(12) = MSv(0);
+   pars(13) = MSv(1);
+   pars(14) = MSv(2);
+   pars(15) = MSu(0);
+   pars(16) = MSu(1);
+   pars(17) = MSu(2);
+   pars(18) = MSu(3);
+   pars(19) = MSu(4);
+   pars(20) = MSu(5);
+   pars(21) = MSe(0);
+   pars(22) = MSe(1);
+   pars(23) = MSe(2);
+   pars(24) = MSe(3);
+   pars(25) = MSe(4);
+   pars(26) = MSe(5);
+   pars(27) = MSDX(0);
+   pars(28) = MSDX(1);
+   pars(29) = MSDX(2);
+   pars(30) = MSDX(3);
+   pars(31) = MSDX(4);
+   pars(32) = MSDX(5);
+   pars(33) = Mhh(0);
+   pars(34) = Mhh(1);
+   pars(35) = Mhh(2);
+   pars(36) = MAh(0);
+   pars(37) = MAh(1);
+   pars(38) = MAh(2);
+   pars(39) = MHpm(0);
+   pars(40) = MHpm(1);
+   pars(41) = MChi(0);
+   pars(42) = MChi(1);
+   pars(43) = MChi(2);
+   pars(44) = MChi(3);
+   pars(45) = MChi(4);
+   pars(46) = MChi(5);
+   pars(47) = MCha(0);
+   pars(48) = MCha(1);
+   pars(49) = MFe(0);
+   pars(50) = MFe(1);
+   pars(51) = MFe(2);
+   pars(52) = MFd(0);
+   pars(53) = MFd(1);
+   pars(54) = MFd(2);
+   pars(55) = MFu(0);
+   pars(56) = MFu(1);
+   pars(57) = MFu(2);
+   pars(58) = MFDX(0);
+   pars(59) = MFDX(1);
+   pars(60) = MFDX(2);
+   pars(61) = MSHI0(0);
+   pars(62) = MSHI0(1);
+   pars(63) = MSHI0(2);
+   pars(64) = MSHI0(3);
+   pars(65) = MSHIp(0);
+   pars(66) = MSHIp(1);
+   pars(67) = MSHIp(2);
+   pars(68) = MSHIp(3);
+   pars(69) = MChaI(0);
+   pars(70) = MChaI(1);
+   pars(71) = MChiI(0);
+   pars(72) = MChiI(1);
+   pars(73) = MChiI(2);
+   pars(74) = MChiI(3);
+   pars(75) = MSSI0(0);
+   pars(76) = MSSI0(1);
+   pars(77) = MFSI(0);
+   pars(78) = MFSI(1);
+   pars(79) = MSHp0(0);
+   pars(80) = MSHp0(1);
+   pars(81) = MSHpp(0);
+   pars(82) = MSHpp(1);
+   pars(83) = MChiP(0);
+   pars(84) = MChiP(1);
+   pars(85) = MVWm;
+   pars(86) = MVP;
+   pars(87) = MVZ;
+   pars(88) = MVZp;
 
    return pars;
 }
@@ -1166,89 +1185,89 @@ void E6SSM_physical::set_masses(const Eigen::ArrayXd& pars)
    MFv(1) = pars(3);
    MFv(2) = pars(4);
    MChaP = pars(5);
-   MVP = pars(6);
-   MVZ = pars(7);
-   MVZp = pars(8);
-   MSd(0) = pars(9);
-   MSd(1) = pars(10);
-   MSd(2) = pars(11);
-   MSd(3) = pars(12);
-   MSd(4) = pars(13);
-   MSd(5) = pars(14);
-   MSv(0) = pars(15);
-   MSv(1) = pars(16);
-   MSv(2) = pars(17);
-   MSu(0) = pars(18);
-   MSu(1) = pars(19);
-   MSu(2) = pars(20);
-   MSu(3) = pars(21);
-   MSu(4) = pars(22);
-   MSu(5) = pars(23);
-   MSe(0) = pars(24);
-   MSe(1) = pars(25);
-   MSe(2) = pars(26);
-   MSe(3) = pars(27);
-   MSe(4) = pars(28);
-   MSe(5) = pars(29);
-   MSDX(0) = pars(30);
-   MSDX(1) = pars(31);
-   MSDX(2) = pars(32);
-   MSDX(3) = pars(33);
-   MSDX(4) = pars(34);
-   MSDX(5) = pars(35);
-   Mhh(0) = pars(36);
-   Mhh(1) = pars(37);
-   Mhh(2) = pars(38);
-   MAh(0) = pars(39);
-   MAh(1) = pars(40);
-   MAh(2) = pars(41);
-   MHpm(0) = pars(42);
-   MHpm(1) = pars(43);
-   MChi(0) = pars(44);
-   MChi(1) = pars(45);
-   MChi(2) = pars(46);
-   MChi(3) = pars(47);
-   MChi(4) = pars(48);
-   MChi(5) = pars(49);
-   MCha(0) = pars(50);
-   MCha(1) = pars(51);
-   MFe(0) = pars(52);
-   MFe(1) = pars(53);
-   MFe(2) = pars(54);
-   MFd(0) = pars(55);
-   MFd(1) = pars(56);
-   MFd(2) = pars(57);
-   MFu(0) = pars(58);
-   MFu(1) = pars(59);
-   MFu(2) = pars(60);
-   MFDX(0) = pars(61);
-   MFDX(1) = pars(62);
-   MFDX(2) = pars(63);
-   MSHI0(0) = pars(64);
-   MSHI0(1) = pars(65);
-   MSHI0(2) = pars(66);
-   MSHI0(3) = pars(67);
-   MSHIp(0) = pars(68);
-   MSHIp(1) = pars(69);
-   MSHIp(2) = pars(70);
-   MSHIp(3) = pars(71);
-   MChaI(0) = pars(72);
-   MChaI(1) = pars(73);
-   MChiI(0) = pars(74);
-   MChiI(1) = pars(75);
-   MChiI(2) = pars(76);
-   MChiI(3) = pars(77);
-   MSSI0(0) = pars(78);
-   MSSI0(1) = pars(79);
-   MFSI(0) = pars(80);
-   MFSI(1) = pars(81);
-   MSHp0(0) = pars(82);
-   MSHp0(1) = pars(83);
-   MSHpp(0) = pars(84);
-   MSHpp(1) = pars(85);
-   MChiP(0) = pars(86);
-   MChiP(1) = pars(87);
-   MVWm = pars(88);
+   MSd(0) = pars(6);
+   MSd(1) = pars(7);
+   MSd(2) = pars(8);
+   MSd(3) = pars(9);
+   MSd(4) = pars(10);
+   MSd(5) = pars(11);
+   MSv(0) = pars(12);
+   MSv(1) = pars(13);
+   MSv(2) = pars(14);
+   MSu(0) = pars(15);
+   MSu(1) = pars(16);
+   MSu(2) = pars(17);
+   MSu(3) = pars(18);
+   MSu(4) = pars(19);
+   MSu(5) = pars(20);
+   MSe(0) = pars(21);
+   MSe(1) = pars(22);
+   MSe(2) = pars(23);
+   MSe(3) = pars(24);
+   MSe(4) = pars(25);
+   MSe(5) = pars(26);
+   MSDX(0) = pars(27);
+   MSDX(1) = pars(28);
+   MSDX(2) = pars(29);
+   MSDX(3) = pars(30);
+   MSDX(4) = pars(31);
+   MSDX(5) = pars(32);
+   Mhh(0) = pars(33);
+   Mhh(1) = pars(34);
+   Mhh(2) = pars(35);
+   MAh(0) = pars(36);
+   MAh(1) = pars(37);
+   MAh(2) = pars(38);
+   MHpm(0) = pars(39);
+   MHpm(1) = pars(40);
+   MChi(0) = pars(41);
+   MChi(1) = pars(42);
+   MChi(2) = pars(43);
+   MChi(3) = pars(44);
+   MChi(4) = pars(45);
+   MChi(5) = pars(46);
+   MCha(0) = pars(47);
+   MCha(1) = pars(48);
+   MFe(0) = pars(49);
+   MFe(1) = pars(50);
+   MFe(2) = pars(51);
+   MFd(0) = pars(52);
+   MFd(1) = pars(53);
+   MFd(2) = pars(54);
+   MFu(0) = pars(55);
+   MFu(1) = pars(56);
+   MFu(2) = pars(57);
+   MFDX(0) = pars(58);
+   MFDX(1) = pars(59);
+   MFDX(2) = pars(60);
+   MSHI0(0) = pars(61);
+   MSHI0(1) = pars(62);
+   MSHI0(2) = pars(63);
+   MSHI0(3) = pars(64);
+   MSHIp(0) = pars(65);
+   MSHIp(1) = pars(66);
+   MSHIp(2) = pars(67);
+   MSHIp(3) = pars(68);
+   MChaI(0) = pars(69);
+   MChaI(1) = pars(70);
+   MChiI(0) = pars(71);
+   MChiI(1) = pars(72);
+   MChiI(2) = pars(73);
+   MChiI(3) = pars(74);
+   MSSI0(0) = pars(75);
+   MSSI0(1) = pars(76);
+   MFSI(0) = pars(77);
+   MFSI(1) = pars(78);
+   MSHp0(0) = pars(79);
+   MSHp0(1) = pars(80);
+   MSHpp(0) = pars(81);
+   MSHpp(1) = pars(82);
+   MChiP(0) = pars(83);
+   MChiP(1) = pars(84);
+   MVWm = pars(85);
+   MVP = pars(86);
+   MVZ = pars(87);
+   MVZp = pars(88);
 
 }
 
@@ -1261,9 +1280,6 @@ void E6SSM_physical::print(std::ostream& ostr) const
    ostr << "MGlu = " << MGlu << '\n';
    ostr << "MFv = " << MFv.transpose() << '\n';
    ostr << "MChaP = " << MChaP << '\n';
-   ostr << "MVP = " << MVP << '\n';
-   ostr << "MVZ = " << MVZ << '\n';
-   ostr << "MVZp = " << MVZp << '\n';
    ostr << "MSd = " << MSd.transpose() << '\n';
    ostr << "MSv = " << MSv.transpose() << '\n';
    ostr << "MSu = " << MSu.transpose() << '\n';
@@ -1321,6 +1337,7 @@ void E6SSM_physical::print(std::ostream& ostr) const
    ostr << "UHp0 = " << UHp0 << '\n';
    ostr << "UHpp = " << UHpp << '\n';
    ostr << "ZNp = " << ZNp << '\n';
+   ostr << "ZZ = " << ZZ << '\n';
 
 }
 

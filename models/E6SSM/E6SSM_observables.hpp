@@ -16,12 +16,14 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:42:58
+// File generated at Tue 8 Mar 2016 18:08:40
 
 #ifndef E6SSM_OBSERVABLES_H
 #define E6SSM_OBSERVABLES_H
 
-#include "observables.hpp"
+#include <string>
+#include <vector>
+#include <Eigen/Core>
 
 namespace softsusy {
 class QedQcd;
@@ -30,8 +32,21 @@ class QedQcd;
 namespace flexiblesusy {
 
 class E6SSM_mass_eigenstates;
+class Physical_input;
 
-Observables calculate_observables(const E6SSM_mass_eigenstates&, const softsusy::QedQcd&);
+struct E6SSM_observables {
+   static const unsigned NUMBER_OF_OBSERVABLES = 0;
+
+   E6SSM_observables();
+   Eigen::ArrayXd get() const; ///< returns vector of all observables
+   static std::vector<std::string> get_names(); ///< returns vector of all observable names
+   void clear(); ///< sets all observables to zero
+   void set(const Eigen::ArrayXd&); ///< sets all observables from given vector
+
+
+};
+
+E6SSM_observables calculate_observables(const E6SSM_mass_eigenstates&, const softsusy::QedQcd&, const Physical_input&);
 
 } // namespace flexiblesusy
 

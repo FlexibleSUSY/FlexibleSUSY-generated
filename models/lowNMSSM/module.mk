@@ -40,6 +40,7 @@ LIBlowNMSSM_HDR :=
 
 ifneq ($(findstring two_scale,$(ALGORITHMS)),)
 LIBlowNMSSM_SRC += \
+		$(DIR)/lowNMSSM_effective_couplings.cpp \
 		$(DIR)/lowNMSSM_mass_eigenstates.cpp \
 		$(DIR)/lowNMSSM_info.cpp \
 		$(DIR)/lowNMSSM_input_parameters.cpp \
@@ -62,6 +63,7 @@ EXElowNMSSM_SRC += \
 		$(DIR)/scan_lowNMSSM.cpp
 LIBlowNMSSM_HDR += \
 		$(DIR)/lowNMSSM_convergence_tester.hpp \
+		$(DIR)/lowNMSSM_effective_couplings.hpp \
 		$(DIR)/lowNMSSM_high_scale_constraint.hpp \
 		$(DIR)/lowNMSSM_mass_eigenstates.hpp \
 		$(DIR)/lowNMSSM_info.hpp \
@@ -193,6 +195,9 @@ clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-obj
 		-rm -f $(EXElowNMSSM_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
+		@true
+
+clean-obj::     clean-$(MODNAME)-obj
 
 clean::         clean-$(MODNAME)
 

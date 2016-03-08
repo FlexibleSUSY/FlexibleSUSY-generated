@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:32:45
+// File generated at Tue 8 Mar 2016 16:13:54
 
 #ifndef MRSSM_INFO_H
 #define MRSSM_INFO_H
@@ -26,73 +26,81 @@
 namespace flexiblesusy {
 
 namespace MRSSM_info {
-   enum Particles : unsigned {VG, Glu, Fv, SRdp, SRum, sigmaO, phiO, VP, VZ, Sd
-      , Sv, Su, Se, hh, Ah, Rh, Hpm, Chi, Cha1, Cha2, Fe, Fd, Fu, VWm,
+   enum Particles : unsigned {VG, Glu, Fv, SRdp, SRum, sigmaO, phiO, Sd, Sv, Su
+      , Se, hh, Ah, Rh, Hpm, Chi, Cha1, Cha2, Fe, Fd, Fu, VWm, VP, VZ,
       NUMBER_OF_PARTICLES};
 
-   enum Parameters : unsigned {Yd00, Yd01, Yd02, Yd10, Yd11, Yd12, Yd20, Yd21,
-      Yd22, Ye00, Ye01, Ye02, Ye10, Ye11, Ye12, Ye20, Ye21, Ye22, LamTD, LamTU,
-      LamSD, LamSU, Yu00, Yu01, Yu02, Yu10, Yu11, Yu12, Yu20, Yu21, Yu22, Mu, MuD,
-      MuU, g1, g2, g3, vd, vu, vT, vS, BMu, BMuD, BMuU, mq200, mq201, mq202,
-      mq210, mq211, mq212, mq220, mq221, mq222, ml200, ml201, ml202, ml210, ml211,
-      ml212, ml220, ml221, ml222, mHd2, mHu2, md200, md201, md202, md210, md211,
-      md212, md220, md221, md222, mu200, mu201, mu202, mu210, mu211, mu212, mu220,
-      mu221, mu222, me200, me201, me202, me210, me211, me212, me220, me221, me222
-      , mS2, mT2, moc2, mRd2, mRu2, MDBS, MDWBT, MDGoc, NUMBER_OF_PARAMETERS};
+   enum Parameters : unsigned {Yd0_0, Yd0_1, Yd0_2, Yd1_0, Yd1_1, Yd1_2, Yd2_0,
+      Yd2_1, Yd2_2, Ye0_0, Ye0_1, Ye0_2, Ye1_0, Ye1_1, Ye1_2, Ye2_0, Ye2_1, Ye2_2
+      , LamTD, LamTU, LamSD, LamSU, Yu0_0, Yu0_1, Yu0_2, Yu1_0, Yu1_1, Yu1_2,
+      Yu2_0, Yu2_1, Yu2_2, Mu, MuD, MuU, g1, g2, g3, vd, vu, vT, vS, BMu, BMuD,
+      BMuU, mq20_0, mq20_1, mq20_2, mq21_0, mq21_1, mq21_2, mq22_0, mq22_1, mq22_2
+      , ml20_0, ml20_1, ml20_2, ml21_0, ml21_1, ml21_2, ml22_0, ml22_1, ml22_2,
+      mHd2, mHu2, md20_0, md20_1, md20_2, md21_0, md21_1, md21_2, md22_0, md22_1,
+      md22_2, mu20_0, mu20_1, mu20_2, mu21_0, mu21_1, mu21_2, mu22_0, mu22_1,
+      mu22_2, me20_0, me20_1, me20_2, me21_0, me21_1, me21_2, me22_0, me22_1,
+      me22_2, mS2, mT2, moc2, mRd2, mRu2, MDBS, MDWBT, MDGoc, NUMBER_OF_PARAMETERS
+      };
 
-   enum Mixings : unsigned {ZD00, ZD01, ZD02, ZD03, ZD04, ZD05, ZD10, ZD11,
-      ZD12, ZD13, ZD14, ZD15, ZD20, ZD21, ZD22, ZD23, ZD24, ZD25, ZD30, ZD31, ZD32
-      , ZD33, ZD34, ZD35, ZD40, ZD41, ZD42, ZD43, ZD44, ZD45, ZD50, ZD51, ZD52,
-      ZD53, ZD54, ZD55, ZV00, ZV01, ZV02, ZV10, ZV11, ZV12, ZV20, ZV21, ZV22, ZU00
-      , ZU01, ZU02, ZU03, ZU04, ZU05, ZU10, ZU11, ZU12, ZU13, ZU14, ZU15, ZU20,
-      ZU21, ZU22, ZU23, ZU24, ZU25, ZU30, ZU31, ZU32, ZU33, ZU34, ZU35, ZU40, ZU41
-      , ZU42, ZU43, ZU44, ZU45, ZU50, ZU51, ZU52, ZU53, ZU54, ZU55, ZE00, ZE01,
-      ZE02, ZE03, ZE04, ZE05, ZE10, ZE11, ZE12, ZE13, ZE14, ZE15, ZE20, ZE21, ZE22
-      , ZE23, ZE24, ZE25, ZE30, ZE31, ZE32, ZE33, ZE34, ZE35, ZE40, ZE41, ZE42,
-      ZE43, ZE44, ZE45, ZE50, ZE51, ZE52, ZE53, ZE54, ZE55, ZH00, ZH01, ZH02, ZH03
-      , ZH10, ZH11, ZH12, ZH13, ZH20, ZH21, ZH22, ZH23, ZH30, ZH31, ZH32, ZH33,
-      ZA00, ZA01, ZA02, ZA03, ZA10, ZA11, ZA12, ZA13, ZA20, ZA21, ZA22, ZA23, ZA30
-      , ZA31, ZA32, ZA33, ZHR00, ZHR01, ZHR10, ZHR11, ZP00, ZP01, ZP02, ZP03, ZP10
-      , ZP11, ZP12, ZP13, ZP20, ZP21, ZP22, ZP23, ZP30, ZP31, ZP32, ZP33, ReZN100,
-      ImZN100, ReZN101, ImZN101, ReZN102, ImZN102, ReZN103, ImZN103, ReZN110,
-      ImZN110, ReZN111, ImZN111, ReZN112, ImZN112, ReZN113, ImZN113, ReZN120,
-      ImZN120, ReZN121, ImZN121, ReZN122, ImZN122, ReZN123, ImZN123, ReZN130,
-      ImZN130, ReZN131, ImZN131, ReZN132, ImZN132, ReZN133, ImZN133, ReZN200,
-      ImZN200, ReZN201, ImZN201, ReZN202, ImZN202, ReZN203, ImZN203, ReZN210,
-      ImZN210, ReZN211, ImZN211, ReZN212, ImZN212, ReZN213, ImZN213, ReZN220,
-      ImZN220, ReZN221, ImZN221, ReZN222, ImZN222, ReZN223, ImZN223, ReZN230,
-      ImZN230, ReZN231, ImZN231, ReZN232, ImZN232, ReZN233, ImZN233, ReUM100,
-      ImUM100, ReUM101, ImUM101, ReUM110, ImUM110, ReUM111, ImUM111, ReUP100,
-      ImUP100, ReUP101, ImUP101, ReUP110, ImUP110, ReUP111, ImUP111, ReUM200,
-      ImUM200, ReUM201, ImUM201, ReUM210, ImUM210, ReUM211, ImUM211, ReUP200,
-      ImUP200, ReUP201, ImUP201, ReUP210, ImUP210, ReUP211, ImUP211, ReZEL00,
-      ImZEL00, ReZEL01, ImZEL01, ReZEL02, ImZEL02, ReZEL10, ImZEL10, ReZEL11,
-      ImZEL11, ReZEL12, ImZEL12, ReZEL20, ImZEL20, ReZEL21, ImZEL21, ReZEL22,
-      ImZEL22, ReZER00, ImZER00, ReZER01, ImZER01, ReZER02, ImZER02, ReZER10,
-      ImZER10, ReZER11, ImZER11, ReZER12, ImZER12, ReZER20, ImZER20, ReZER21,
-      ImZER21, ReZER22, ImZER22, ReZDL00, ImZDL00, ReZDL01, ImZDL01, ReZDL02,
-      ImZDL02, ReZDL10, ImZDL10, ReZDL11, ImZDL11, ReZDL12, ImZDL12, ReZDL20,
-      ImZDL20, ReZDL21, ImZDL21, ReZDL22, ImZDL22, ReZDR00, ImZDR00, ReZDR01,
-      ImZDR01, ReZDR02, ImZDR02, ReZDR10, ImZDR10, ReZDR11, ImZDR11, ReZDR12,
-      ImZDR12, ReZDR20, ImZDR20, ReZDR21, ImZDR21, ReZDR22, ImZDR22, ReZUL00,
-      ImZUL00, ReZUL01, ImZUL01, ReZUL02, ImZUL02, ReZUL10, ImZUL10, ReZUL11,
-      ImZUL11, ReZUL12, ImZUL12, ReZUL20, ImZUL20, ReZUL21, ImZUL21, ReZUL22,
-      ImZUL22, ReZUR00, ImZUR00, ReZUR01, ImZUR01, ReZUR02, ImZUR02, ReZUR10,
-      ImZUR10, ReZUR11, ImZUR11, ReZUR12, ImZUR12, ReZUR20, ImZUR20, ReZUR21,
-      ImZUR21, ReZUR22, ImZUR22, NUMBER_OF_MIXINGS};
+   enum Mixings : unsigned {ZD0_0, ZD0_1, ZD0_2, ZD0_3, ZD0_4, ZD0_5, ZD1_0,
+      ZD1_1, ZD1_2, ZD1_3, ZD1_4, ZD1_5, ZD2_0, ZD2_1, ZD2_2, ZD2_3, ZD2_4, ZD2_5,
+      ZD3_0, ZD3_1, ZD3_2, ZD3_3, ZD3_4, ZD3_5, ZD4_0, ZD4_1, ZD4_2, ZD4_3, ZD4_4
+      , ZD4_5, ZD5_0, ZD5_1, ZD5_2, ZD5_3, ZD5_4, ZD5_5, ZV0_0, ZV0_1, ZV0_2,
+      ZV1_0, ZV1_1, ZV1_2, ZV2_0, ZV2_1, ZV2_2, ZU0_0, ZU0_1, ZU0_2, ZU0_3, ZU0_4,
+      ZU0_5, ZU1_0, ZU1_1, ZU1_2, ZU1_3, ZU1_4, ZU1_5, ZU2_0, ZU2_1, ZU2_2, ZU2_3
+      , ZU2_4, ZU2_5, ZU3_0, ZU3_1, ZU3_2, ZU3_3, ZU3_4, ZU3_5, ZU4_0, ZU4_1,
+      ZU4_2, ZU4_3, ZU4_4, ZU4_5, ZU5_0, ZU5_1, ZU5_2, ZU5_3, ZU5_4, ZU5_5, ZE0_0,
+      ZE0_1, ZE0_2, ZE0_3, ZE0_4, ZE0_5, ZE1_0, ZE1_1, ZE1_2, ZE1_3, ZE1_4, ZE1_5
+      , ZE2_0, ZE2_1, ZE2_2, ZE2_3, ZE2_4, ZE2_5, ZE3_0, ZE3_1, ZE3_2, ZE3_3,
+      ZE3_4, ZE3_5, ZE4_0, ZE4_1, ZE4_2, ZE4_3, ZE4_4, ZE4_5, ZE5_0, ZE5_1, ZE5_2,
+      ZE5_3, ZE5_4, ZE5_5, ZH0_0, ZH0_1, ZH0_2, ZH0_3, ZH1_0, ZH1_1, ZH1_2, ZH1_3
+      , ZH2_0, ZH2_1, ZH2_2, ZH2_3, ZH3_0, ZH3_1, ZH3_2, ZH3_3, ZA0_0, ZA0_1,
+      ZA0_2, ZA0_3, ZA1_0, ZA1_1, ZA1_2, ZA1_3, ZA2_0, ZA2_1, ZA2_2, ZA2_3, ZA3_0,
+      ZA3_1, ZA3_2, ZA3_3, ZHR0_0, ZHR0_1, ZHR1_0, ZHR1_1, ZP0_0, ZP0_1, ZP0_2,
+      ZP0_3, ZP1_0, ZP1_1, ZP1_2, ZP1_3, ZP2_0, ZP2_1, ZP2_2, ZP2_3, ZP3_0, ZP3_1,
+      ZP3_2, ZP3_3, ReZN10_0, ImZN10_0, ReZN10_1, ImZN10_1, ReZN10_2, ImZN10_2,
+      ReZN10_3, ImZN10_3, ReZN11_0, ImZN11_0, ReZN11_1, ImZN11_1, ReZN11_2,
+      ImZN11_2, ReZN11_3, ImZN11_3, ReZN12_0, ImZN12_0, ReZN12_1, ImZN12_1,
+      ReZN12_2, ImZN12_2, ReZN12_3, ImZN12_3, ReZN13_0, ImZN13_0, ReZN13_1,
+      ImZN13_1, ReZN13_2, ImZN13_2, ReZN13_3, ImZN13_3, ReZN20_0, ImZN20_0,
+      ReZN20_1, ImZN20_1, ReZN20_2, ImZN20_2, ReZN20_3, ImZN20_3, ReZN21_0,
+      ImZN21_0, ReZN21_1, ImZN21_1, ReZN21_2, ImZN21_2, ReZN21_3, ImZN21_3,
+      ReZN22_0, ImZN22_0, ReZN22_1, ImZN22_1, ReZN22_2, ImZN22_2, ReZN22_3,
+      ImZN22_3, ReZN23_0, ImZN23_0, ReZN23_1, ImZN23_1, ReZN23_2, ImZN23_2,
+      ReZN23_3, ImZN23_3, ReUM10_0, ImUM10_0, ReUM10_1, ImUM10_1, ReUM11_0,
+      ImUM11_0, ReUM11_1, ImUM11_1, ReUP10_0, ImUP10_0, ReUP10_1, ImUP10_1,
+      ReUP11_0, ImUP11_0, ReUP11_1, ImUP11_1, ReUM20_0, ImUM20_0, ReUM20_1,
+      ImUM20_1, ReUM21_0, ImUM21_0, ReUM21_1, ImUM21_1, ReUP20_0, ImUP20_0,
+      ReUP20_1, ImUP20_1, ReUP21_0, ImUP21_0, ReUP21_1, ImUP21_1, ReZEL0_0,
+      ImZEL0_0, ReZEL0_1, ImZEL0_1, ReZEL0_2, ImZEL0_2, ReZEL1_0, ImZEL1_0,
+      ReZEL1_1, ImZEL1_1, ReZEL1_2, ImZEL1_2, ReZEL2_0, ImZEL2_0, ReZEL2_1,
+      ImZEL2_1, ReZEL2_2, ImZEL2_2, ReZER0_0, ImZER0_0, ReZER0_1, ImZER0_1,
+      ReZER0_2, ImZER0_2, ReZER1_0, ImZER1_0, ReZER1_1, ImZER1_1, ReZER1_2,
+      ImZER1_2, ReZER2_0, ImZER2_0, ReZER2_1, ImZER2_1, ReZER2_2, ImZER2_2,
+      ReZDL0_0, ImZDL0_0, ReZDL0_1, ImZDL0_1, ReZDL0_2, ImZDL0_2, ReZDL1_0,
+      ImZDL1_0, ReZDL1_1, ImZDL1_1, ReZDL1_2, ImZDL1_2, ReZDL2_0, ImZDL2_0,
+      ReZDL2_1, ImZDL2_1, ReZDL2_2, ImZDL2_2, ReZDR0_0, ImZDR0_0, ReZDR0_1,
+      ImZDR0_1, ReZDR0_2, ImZDR0_2, ReZDR1_0, ImZDR1_0, ReZDR1_1, ImZDR1_1,
+      ReZDR1_2, ImZDR1_2, ReZDR2_0, ImZDR2_0, ReZDR2_1, ImZDR2_1, ReZDR2_2,
+      ImZDR2_2, ReZUL0_0, ImZUL0_0, ReZUL0_1, ImZUL0_1, ReZUL0_2, ImZUL0_2,
+      ReZUL1_0, ImZUL1_0, ReZUL1_1, ImZUL1_1, ReZUL1_2, ImZUL1_2, ReZUL2_0,
+      ImZUL2_0, ReZUL2_1, ImZUL2_1, ReZUL2_2, ImZUL2_2, ReZUR0_0, ImZUR0_0,
+      ReZUR0_1, ImZUR0_1, ReZUR0_2, ImZUR0_2, ReZUR1_0, ImZUR1_0, ReZUR1_1,
+      ImZUR1_1, ReZUR1_2, ImZUR1_2, ReZUR2_0, ImZUR2_0, ReZUR2_1, ImZUR2_1,
+      ReZUR2_2, ImZUR2_2, ZZ0_0, ZZ0_1, ZZ1_0, ZZ1_1, NUMBER_OF_MIXINGS};
 
    enum Input_parameters : unsigned {TanBeta, LamTDInput, LamTUInput,
       LamSDInput, LamSUInput, MuInput, MuDInput, MuUInput, vTInput, vSInput,
-      BMuInput, BMuDInput, BMuUInput, mq2Input00, mq2Input01, mq2Input02,
-      mq2Input10, mq2Input11, mq2Input12, mq2Input20, mq2Input21, mq2Input22,
-      ml2Input00, ml2Input01, ml2Input02, ml2Input10, ml2Input11, ml2Input12,
-      ml2Input20, ml2Input21, ml2Input22, md2Input00, md2Input01, md2Input02,
-      md2Input10, md2Input11, md2Input12, md2Input20, md2Input21, md2Input22,
-      mu2Input00, mu2Input01, mu2Input02, mu2Input10, mu2Input11, mu2Input12,
-      mu2Input20, mu2Input21, mu2Input22, me2Input00, me2Input01, me2Input02,
-      me2Input10, me2Input11, me2Input12, me2Input20, me2Input21, me2Input22,
-      moc2Input, mRd2Input, mRu2Input, MDBSInput, MDWBTInput, MDGocInput,
-      NUMBER_OF_INPUT_PARAMETERS};
+      BMuInput, BMuDInput, BMuUInput, mq2Input0_0, mq2Input0_1, mq2Input0_2,
+      mq2Input1_0, mq2Input1_1, mq2Input1_2, mq2Input2_0, mq2Input2_1, mq2Input2_2
+      , ml2Input0_0, ml2Input0_1, ml2Input0_2, ml2Input1_0, ml2Input1_1,
+      ml2Input1_2, ml2Input2_0, ml2Input2_1, ml2Input2_2, md2Input0_0, md2Input0_1
+      , md2Input0_2, md2Input1_0, md2Input1_1, md2Input1_2, md2Input2_0,
+      md2Input2_1, md2Input2_2, mu2Input0_0, mu2Input0_1, mu2Input0_2, mu2Input1_0
+      , mu2Input1_1, mu2Input1_2, mu2Input2_0, mu2Input2_1, mu2Input2_2,
+      me2Input0_0, me2Input0_1, me2Input0_2, me2Input1_0, me2Input1_1, me2Input1_2
+      , me2Input2_0, me2Input2_1, me2Input2_2, moc2Input, mRd2Input, mRu2Input,
+      MDBSInput, MDWBTInput, MDGocInput, NUMBER_OF_INPUT_PARAMETERS};
 
    extern const double normalization_g1;
    extern const double normalization_g2;

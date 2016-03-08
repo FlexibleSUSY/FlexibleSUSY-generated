@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:36:42
+// File generated at Tue 8 Mar 2016 17:14:46
 
 #include "E6SSM_two_scale_initial_guesser.hpp"
 #include "E6SSM_two_scale_model.hpp"
@@ -30,6 +30,7 @@
 
 namespace flexiblesusy {
 
+#define DERIVEDPARAMETER(p) model->p()
 #define INPUTPARAMETER(p) model->get_input().p
 #define MODELPARAMETER(p) model->get_##p()
 #define PHASE(p) model->get_##p()
@@ -115,20 +116,28 @@ void E6SSM_initial_guesser<Two_scale>::guess_susy_parameters()
 
    mu_guess = leAtMt.displayMass(mUp);
    mc_guess = leAtMt.displayMass(mCharm);
-   mt_guess = leAtMt.displayMass(mTop) - 30.0;
+   mt_guess = model->get_thresholds() > 0 ?
+      leAtMt.displayMass(mTop) - 30.0 :
+      leAtMt.displayPoleMt();
    md_guess = leAtMt.displayMass(mDown);
    ms_guess = leAtMt.displayMass(mStrange);
    mb_guess = leAtMt.displayMass(mBottom);
-   me_guess = leAtMt.displayMass(mElectron);
-   mm_guess = leAtMt.displayMass(mMuon);
+   me_guess = model->get_thresholds() > 0 ?
+      leAtMt.displayMass(mElectron) :
+      leAtMt.displayPoleMel();
+   mm_guess = model->get_thresholds() > 0 ?
+      leAtMt.displayMass(mMuon) :
+      leAtMt.displayPoleMmuon();
    mtau_guess = leAtMt.displayMass(mTau);
 
    // guess gauge couplings at mt
    const DoubleVector alpha_sm(leAtMt.getGaugeMu(mtpole, sinThetaW2));
 
-   model->set_g1(sqrt(4.0 * M_PI * alpha_sm(1)));
-   model->set_g2(sqrt(4.0 * M_PI * alpha_sm(2)));
-   model->set_g3(sqrt(4.0 * M_PI * alpha_sm(3)));
+   MODEL->set_g1(Sqrt(4. * Pi * alpha_sm(1)));
+   MODEL->set_g2(Sqrt(4. * Pi * alpha_sm(2)));
+   MODEL->set_g3(Sqrt(4. * Pi * alpha_sm(3)));
+
+
    model->set_scale(mtpole);
 
    // apply user-defined initial guess at the low scale

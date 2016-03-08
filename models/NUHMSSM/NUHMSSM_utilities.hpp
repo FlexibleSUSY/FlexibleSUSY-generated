@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:47:10
+// File generated at Tue 8 Mar 2016 18:31:48
 
 #ifndef NUHMSSM_UTILITIES_H
 #define NUHMSSM_UTILITIES_H
@@ -36,7 +36,9 @@ class QedQcd;
 }
 
 namespace flexiblesusy {
-class Observables;
+
+class NUHMSSM_observables;
+class Physical_input;
 
 class NUHMSSM_parameter_getter {
 public:
@@ -124,10 +126,20 @@ std::valarray<double> NUHMSSM_spectrum_plotter::to_valarray(const Eigen::Array<S
 namespace NUHMSSM_database {
 
 /// append parameter point to database
-void to_database(const std::string&, const NUHMSSM_mass_eigenstates&, const softsusy::QedQcd* qedqcd = 0, const Observables* observables = 0);
+void to_database(
+   const std::string&,
+   const NUHMSSM_mass_eigenstates&,
+   const softsusy::QedQcd* qedqcd = 0,
+   const Physical_input* physical_input = 0,
+   const NUHMSSM_observables* observables = 0);
 
 /// fill model from an entry of the database
-NUHMSSM_mass_eigenstates from_database(const std::string&, std::size_t, softsusy::QedQcd* qedqcd = 0, Observables* observables = 0);
+NUHMSSM_mass_eigenstates from_database(
+   const std::string&,
+   std::size_t,
+   softsusy::QedQcd* qedqcd = 0,
+   Physical_input* physical_input = 0,
+   NUHMSSM_observables* observables = 0);
 
 } // namespace NUHMSSM_database
 

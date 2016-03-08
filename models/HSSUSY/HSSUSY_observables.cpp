@@ -16,18 +16,25 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:30:01
+// File generated at Tue 8 Mar 2016 16:06:16
 
 #include "HSSUSY_observables.hpp"
 #include "HSSUSY_mass_eigenstates.hpp"
+#include "HSSUSY_effective_couplings.hpp"
 #include "gm2calc_interface.hpp"
 #include "eigen_utils.hpp"
 #include "numerics2.hpp"
+#include "wrappers.hpp"
 #include "lowe.h"
+#include "physical_input.hpp"
 
 #define MODEL model
 #define AMUGM2CALC a_muon_gm2calc
 #define AMUGM2CALCUNCERTAINTY a_muon_gm2calc_uncertainty
+#define EFFCPHIGGSPHOTONPHOTON eff_cp_higgs_photon_photon
+#define EFFCPHIGGSGLUONGLUON eff_cp_higgs_gluon_gluon
+#define EFFCPPSEUDOSCALARPHOTONPHOTON eff_cp_pseudoscalar_photon_photon
+#define EFFCPPSEUDOSCALARGLUONGLUON eff_cp_pseudoscalar_gluon_gluon
 
 #define ALPHA_S_MZ qedqcd.displayAlpha(softsusy::ALPHAS)
 #define MWPole qedqcd.displayPoleMW()
@@ -39,13 +46,66 @@
 
 namespace flexiblesusy {
 
-Observables calculate_observables(const HSSUSY_mass_eigenstates& model,
-                                  const softsusy::QedQcd& qedqcd)
+const unsigned HSSUSY_observables::NUMBER_OF_OBSERVABLES;
+
+HSSUSY_observables::HSSUSY_observables()
+   : eff_cp_higgs_photon_photon(0)
+   , eff_cp_higgs_gluon_gluon(0)
+
 {
-   Observables observables;
+}
 
-   
+Eigen::ArrayXd HSSUSY_observables::get() const
+{
+   Eigen::ArrayXd vec(HSSUSY_observables::NUMBER_OF_OBSERVABLES);
 
+   vec(0) = Re(eff_cp_higgs_photon_photon);
+   vec(1) = Im(eff_cp_higgs_photon_photon);
+   vec(2) = Re(eff_cp_higgs_gluon_gluon);
+   vec(3) = Im(eff_cp_higgs_gluon_gluon);
+
+   return vec;
+}
+
+std::vector<std::string> HSSUSY_observables::get_names()
+{
+   std::vector<std::string> names(HSSUSY_observables::NUMBER_OF_OBSERVABLES);
+
+   names[0] = "Re(eff_cp_higgs_photon_photon)";
+   names[1] = "Im(eff_cp_higgs_photon_photon)";
+   names[2] = "Re(eff_cp_higgs_gluon_gluon)";
+   names[3] = "Im(eff_cp_higgs_gluon_gluon)";
+
+   return names;
+}
+
+void HSSUSY_observables::clear()
+{
+   eff_cp_higgs_photon_photon = std::complex<double>(0.,0.);
+   eff_cp_higgs_gluon_gluon = std::complex<double>(0.,0.);
+
+}
+
+void HSSUSY_observables::set(const Eigen::ArrayXd& vec)
+{
+   assert(vec.rows() == HSSUSY_observables::NUMBER_OF_OBSERVABLES);
+
+   eff_cp_higgs_photon_photon = std::complex<double>(vec(0), vec(1));
+   eff_cp_higgs_gluon_gluon = std::complex<double>(vec(2), vec(3));
+
+}
+
+HSSUSY_observables calculate_observables(const HSSUSY_mass_eigenstates& model,
+                                              const softsusy::QedQcd& qedqcd,
+                                              const Physical_input& physical_input)
+{
+   HSSUSY_observables observables;
+
+   HSSUSY_effective_couplings effective_couplings(model, qedqcd, physical_input);
+   effective_couplings.calculate_effective_couplings();
+
+   observables.EFFCPHIGGSPHOTONPHOTON = effective_couplings.get_eff_CphhVPVP();
+   observables.EFFCPHIGGSGLUONGLUON = effective_couplings.get_eff_CphhVGVG();
 
    return observables;
 }

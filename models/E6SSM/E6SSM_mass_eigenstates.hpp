@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:42:58
+// File generated at Tue 8 Mar 2016 18:08:32
 
 /**
  * @file E6SSM_mass_eigenstates.hpp
@@ -25,8 +25,8 @@
  *        value problem using the two_scale solver by solving EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Sun 10 Jan 2016 15:42:58 with FlexibleSUSY
- * 1.3.2 (git commit: v1.3.2) and SARAH 4.6.0 .
+ * This file was generated at Tue 8 Mar 2016 18:08:32 with FlexibleSUSY
+ * 1.4.0 (git commit: v1.4.0) and SARAH 4.7.0 .
  */
 
 #ifndef E6SSM_MASS_EIGENSTATES_H
@@ -101,7 +101,7 @@ public:
    void clear_problems();
    std::string name() const;
    void run_to(double scale, double eps = -1.0);
-   void print(std::ostream&) const;
+   void print(std::ostream& out = std::cout) const;
    void set_precision(double);
    double get_precision() const;
 
@@ -112,9 +112,6 @@ public:
    const Eigen::Array<double,3,1>& get_MFv() const { return MFv; }
    double get_MFv(int i) const { return MFv(i); }
    double get_MChaP() const { return MChaP; }
-   double get_MVP() const { return MVP; }
-   double get_MVZ() const { return MVZ; }
-   double get_MVZp() const { return MVZp; }
    const Eigen::Array<double,6,1>& get_MSd() const { return MSd; }
    double get_MSd(int i) const { return MSd(i); }
    const Eigen::Array<double,3,1>& get_MSv() const { return MSv; }
@@ -162,6 +159,9 @@ public:
    const Eigen::Array<double,2,1>& get_MChiP() const { return MChiP; }
    double get_MChiP(int i) const { return MChiP(i); }
    double get_MVWm() const { return MVWm; }
+   double get_MVP() const { return MVP; }
+   double get_MVZ() const { return MVZ; }
+   double get_MVZp() const { return MVZp; }
 
    
    Eigen::Array<double,1,1> get_MChargedHiggs() const;
@@ -226,6 +226,8 @@ public:
    double get_UHpp(int i, int k) const { return UHpp(i,k); }
    const Eigen::Matrix<std::complex<double>,2,2>& get_ZNp() const { return ZNp; }
    const std::complex<double>& get_ZNp(int i, int k) const { return ZNp(i,k); }
+   const Eigen::Matrix<double,3,3>& get_ZZ() const { return ZZ; }
+   double get_ZZ(int i, int k) const { return ZZ(i,k); }
 
    void set_PhaseGlu(std::complex<double> PhaseGlu_) { PhaseGlu = PhaseGlu_; }
    std::complex<double> get_PhaseGlu() const { return PhaseGlu; }
@@ -240,12 +242,6 @@ public:
    void calculate_MFv();
    double get_mass_matrix_ChaP() const;
    void calculate_MChaP();
-   double get_mass_matrix_VP() const;
-   void calculate_MVP();
-   double get_mass_matrix_VZ() const;
-   void calculate_MVZ();
-   double get_mass_matrix_VZp() const;
-   void calculate_MVZp();
    Eigen::Matrix<double,6,6> get_mass_matrix_Sd() const;
    void calculate_MSd();
    Eigen::Matrix<double,3,3> get_mass_matrix_Sv() const;
@@ -294,6 +290,8 @@ public:
    void calculate_MChiP();
    double get_mass_matrix_VWm() const;
    void calculate_MVWm();
+   Eigen::Matrix<double,3,3> get_mass_matrix_VPVZVZp() const;
+   void calculate_MVPVZVZp();
 
    double get_ewsb_eq_hh_1() const;
    double get_ewsb_eq_hh_2() const;
@@ -1266,8 +1264,9 @@ public:
    double calculate_MVZ_DRbar(double);
    double calculate_MVWm_DRbar(double);
 
-   double ThetaW() const;
    double v() const;
+   double Betax() const;
+   double ThetaW() const;
    double ThetaWp() const;
 
 
@@ -1336,9 +1335,6 @@ private:
    double MGlu;
    Eigen::Array<double,3,1> MFv;
    double MChaP;
-   double MVP;
-   double MVZ;
-   double MVZp;
    Eigen::Array<double,6,1> MSd;
    Eigen::Array<double,3,1> MSv;
    Eigen::Array<double,6,1> MSu;
@@ -1363,6 +1359,9 @@ private:
    Eigen::Array<double,2,1> MSHpp;
    Eigen::Array<double,2,1> MChiP;
    double MVWm;
+   double MVP;
+   double MVZ;
+   double MVZp;
 
    // DR-bar mixing matrices
    Eigen::Matrix<double,6,6> ZD;
@@ -1394,6 +1393,7 @@ private:
    Eigen::Matrix<double,2,2> UHp0;
    Eigen::Matrix<double,2,2> UHpp;
    Eigen::Matrix<std::complex<double>,2,2> ZNp;
+   Eigen::Matrix<double,3,3> ZZ;
 
    // phases
    std::complex<double> PhaseGlu;

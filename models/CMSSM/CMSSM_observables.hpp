@@ -16,12 +16,14 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:54:25
+// File generated at Tue 8 Mar 2016 18:45:02
 
 #ifndef CMSSM_OBSERVABLES_H
 #define CMSSM_OBSERVABLES_H
 
-#include "observables.hpp"
+#include <string>
+#include <vector>
+#include <Eigen/Core>
 
 namespace softsusy {
 class QedQcd;
@@ -30,8 +32,25 @@ class QedQcd;
 namespace flexiblesusy {
 
 class CMSSM_mass_eigenstates;
+class Physical_input;
 
-Observables calculate_observables(const CMSSM_mass_eigenstates&, const softsusy::QedQcd&);
+struct CMSSM_observables {
+   static const unsigned NUMBER_OF_OBSERVABLES = 12;
+
+   CMSSM_observables();
+   Eigen::ArrayXd get() const; ///< returns vector of all observables
+   static std::vector<std::string> get_names(); ///< returns vector of all observable names
+   void clear(); ///< sets all observables to zero
+   void set(const Eigen::ArrayXd&); ///< sets all observables from given vector
+
+   Eigen::Array<std::complex<double>,2,1> eff_cp_higgs_photon_photon; ///< effective H-Photon-Photon coupling
+   Eigen::Array<std::complex<double>,2,1> eff_cp_higgs_gluon_gluon; ///< effective H-Gluon-Gluon coupling
+   std::complex<double> eff_cp_pseudoscalar_photon_photon; ///< effective A-Photon-Photon coupling
+   std::complex<double> eff_cp_pseudoscalar_gluon_gluon; ///< effective A-Gluon-Gluon coupling
+
+};
+
+CMSSM_observables calculate_observables(const CMSSM_mass_eigenstates&, const softsusy::QedQcd&, const Physical_input&);
 
 } // namespace flexiblesusy
 

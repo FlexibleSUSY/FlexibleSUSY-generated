@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:29:50
+// File generated at Tue 8 Mar 2016 16:04:23
 
 #ifndef SplitMSSM_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
 #define SplitMSSM_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
@@ -24,6 +24,7 @@
 #include "SplitMSSM_susy_scale_constraint.hpp"
 #include "SplitMSSM_input_parameters.hpp"
 #include "two_scale_constraint.hpp"
+#include "lowe.h"
 
 namespace flexiblesusy {
 
@@ -36,7 +37,7 @@ template<>
 class SplitMSSM_susy_scale_constraint<Two_scale> : public Constraint<Two_scale> {
 public:
    SplitMSSM_susy_scale_constraint();
-   SplitMSSM_susy_scale_constraint(SplitMSSM<Two_scale>*);
+   SplitMSSM_susy_scale_constraint(SplitMSSM<Two_scale>*, const softsusy::QedQcd&);
    virtual ~SplitMSSM_susy_scale_constraint();
    virtual void apply();
    virtual double get_scale() const;
@@ -47,6 +48,8 @@ public:
    const SplitMSSM_input_parameters& get_input_parameters() const;
    SplitMSSM<Two_scale>* get_model() const;
    void initialize();
+   const softsusy::QedQcd& get_sm_parameters() const;
+   void set_sm_parameters(const softsusy::QedQcd&);
 
 protected:
    void update_scale();
@@ -55,6 +58,7 @@ private:
    double scale;
    double initial_scale_guess;
    SplitMSSM<Two_scale>* model;
+   softsusy::QedQcd qedqcd;
 };
 
 } // namespace flexiblesusy

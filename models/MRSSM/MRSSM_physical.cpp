@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:36:39
+// File generated at Tue 8 Mar 2016 16:17:40
 
 #include "MRSSM_physical.hpp"
 #include "slha_io.hpp"
@@ -30,15 +30,15 @@ namespace flexiblesusy {
 MRSSM_physical::MRSSM_physical()
    :
     MVG(0), MGlu(0), MFv(Eigen::Array<double,3,1>::Zero()), MSRdp(0), MSRum(0)
-       , MsigmaO(0), MphiO(0), MVP(0), MVZ(0), MSd(Eigen::Array<double,6,1>::Zero(
-       )), MSv(Eigen::Array<double,3,1>::Zero()), MSu(Eigen::Array<double,6,1>
-       ::Zero()), MSe(Eigen::Array<double,6,1>::Zero()), Mhh(Eigen::Array<double,4
-       ,1>::Zero()), MAh(Eigen::Array<double,4,1>::Zero()), MRh(Eigen::Array<
-       double,2,1>::Zero()), MHpm(Eigen::Array<double,4,1>::Zero()), MChi(
-       Eigen::Array<double,4,1>::Zero()), MCha1(Eigen::Array<double,2,1>::Zero()),
-       MCha2(Eigen::Array<double,2,1>::Zero()), MFe(Eigen::Array<double,3,1>
-       ::Zero()), MFd(Eigen::Array<double,3,1>::Zero()), MFu(Eigen::Array<double,3
-       ,1>::Zero()), MVWm(0)
+       , MsigmaO(0), MphiO(0), MSd(Eigen::Array<double,6,1>::Zero()), MSv(
+       Eigen::Array<double,3,1>::Zero()), MSu(Eigen::Array<double,6,1>::Zero()),
+       MSe(Eigen::Array<double,6,1>::Zero()), Mhh(Eigen::Array<double,4,1>::Zero()
+       ), MAh(Eigen::Array<double,4,1>::Zero()), MRh(Eigen::Array<double,2,1>
+       ::Zero()), MHpm(Eigen::Array<double,4,1>::Zero()), MChi(Eigen::Array<double
+       ,4,1>::Zero()), MCha1(Eigen::Array<double,2,1>::Zero()), MCha2(Eigen::Array
+       <double,2,1>::Zero()), MFe(Eigen::Array<double,3,1>::Zero()), MFd(
+       Eigen::Array<double,3,1>::Zero()), MFu(Eigen::Array<double,3,1>::Zero()),
+       MVWm(0), MVP(0), MVZ(0)
 
    , ZD(Eigen::Matrix<double,6,6>::Zero()), ZV(Eigen::Matrix<double,3,3>::Zero(
       )), ZU(Eigen::Matrix<double,6,6>::Zero()), ZE(Eigen::Matrix<double,6,6>
@@ -53,7 +53,7 @@ MRSSM_physical::MRSSM_physical()
       ,3>::Zero()), ZDL(Eigen::Matrix<std::complex<double>,3,3>::Zero()), ZDR(
       Eigen::Matrix<std::complex<double>,3,3>::Zero()), ZUL(Eigen::Matrix<
       std::complex<double>,3,3>::Zero()), ZUR(Eigen::Matrix<std::complex<double>,3
-      ,3>::Zero())
+      ,3>::Zero()), ZZ(Eigen::Matrix<double,2,2>::Zero())
 
 {
 }
@@ -67,8 +67,6 @@ void MRSSM_physical::clear()
    MSRum = 0.;
    MsigmaO = 0.;
    MphiO = 0.;
-   MVP = 0.;
-   MVZ = 0.;
    MSd = Eigen::Matrix<double,6,1>::Zero();
    ZD = Eigen::Matrix<double,6,6>::Zero();
    MSv = Eigen::Matrix<double,3,1>::Zero();
@@ -104,6 +102,8 @@ void MRSSM_physical::clear()
    ZUL = Eigen::Matrix<std::complex<double>,3,3>::Zero();
    ZUR = Eigen::Matrix<std::complex<double>,3,3>::Zero();
    MVWm = 0.;
+   MVP = 0.;
+   MVZ = 0.;
 
 }
 
@@ -131,7 +131,7 @@ Eigen::ArrayXd MRSSM_physical::get() const
 {
    Eigen::ArrayXd pars(get_masses());
 
-   pars.conservativeResize(437);
+   pars.conservativeResize(441);
 
    pars(64) = ZD(0,0);
    pars(65) = ZD(0,1);
@@ -506,6 +506,10 @@ Eigen::ArrayXd MRSSM_physical::get() const
    pars(434) = Im(ZUR(2,1));
    pars(435) = Re(ZUR(2,2));
    pars(436) = Im(ZUR(2,2));
+   pars(437) = ZZ(0,0);
+   pars(438) = ZZ(0,1);
+   pars(439) = ZZ(1,0);
+   pars(440) = ZZ(1,1);
 
 
    return pars;
@@ -786,6 +790,10 @@ void MRSSM_physical::set(const Eigen::ArrayXd& pars)
    ZUR(2,0) = std::complex<double>(pars(431), pars(432));
    ZUR(2,1) = std::complex<double>(pars(433), pars(434));
    ZUR(2,2) = std::complex<double>(pars(435), pars(436));
+   ZZ(0,0) = pars(437);
+   ZZ(0,1) = pars(438);
+   ZZ(1,0) = pars(439);
+   ZZ(1,1) = pars(440);
 
 }
 
@@ -802,61 +810,61 @@ Eigen::ArrayXd MRSSM_physical::get_masses() const
    pars(6) = MSRum;
    pars(7) = MsigmaO;
    pars(8) = MphiO;
-   pars(9) = MVP;
-   pars(10) = MVZ;
-   pars(11) = MSd(0);
-   pars(12) = MSd(1);
-   pars(13) = MSd(2);
-   pars(14) = MSd(3);
-   pars(15) = MSd(4);
-   pars(16) = MSd(5);
-   pars(17) = MSv(0);
-   pars(18) = MSv(1);
-   pars(19) = MSv(2);
-   pars(20) = MSu(0);
-   pars(21) = MSu(1);
-   pars(22) = MSu(2);
-   pars(23) = MSu(3);
-   pars(24) = MSu(4);
-   pars(25) = MSu(5);
-   pars(26) = MSe(0);
-   pars(27) = MSe(1);
-   pars(28) = MSe(2);
-   pars(29) = MSe(3);
-   pars(30) = MSe(4);
-   pars(31) = MSe(5);
-   pars(32) = Mhh(0);
-   pars(33) = Mhh(1);
-   pars(34) = Mhh(2);
-   pars(35) = Mhh(3);
-   pars(36) = MAh(0);
-   pars(37) = MAh(1);
-   pars(38) = MAh(2);
-   pars(39) = MAh(3);
-   pars(40) = MRh(0);
-   pars(41) = MRh(1);
-   pars(42) = MHpm(0);
-   pars(43) = MHpm(1);
-   pars(44) = MHpm(2);
-   pars(45) = MHpm(3);
-   pars(46) = MChi(0);
-   pars(47) = MChi(1);
-   pars(48) = MChi(2);
-   pars(49) = MChi(3);
-   pars(50) = MCha1(0);
-   pars(51) = MCha1(1);
-   pars(52) = MCha2(0);
-   pars(53) = MCha2(1);
-   pars(54) = MFe(0);
-   pars(55) = MFe(1);
-   pars(56) = MFe(2);
-   pars(57) = MFd(0);
-   pars(58) = MFd(1);
-   pars(59) = MFd(2);
-   pars(60) = MFu(0);
-   pars(61) = MFu(1);
-   pars(62) = MFu(2);
-   pars(63) = MVWm;
+   pars(9) = MSd(0);
+   pars(10) = MSd(1);
+   pars(11) = MSd(2);
+   pars(12) = MSd(3);
+   pars(13) = MSd(4);
+   pars(14) = MSd(5);
+   pars(15) = MSv(0);
+   pars(16) = MSv(1);
+   pars(17) = MSv(2);
+   pars(18) = MSu(0);
+   pars(19) = MSu(1);
+   pars(20) = MSu(2);
+   pars(21) = MSu(3);
+   pars(22) = MSu(4);
+   pars(23) = MSu(5);
+   pars(24) = MSe(0);
+   pars(25) = MSe(1);
+   pars(26) = MSe(2);
+   pars(27) = MSe(3);
+   pars(28) = MSe(4);
+   pars(29) = MSe(5);
+   pars(30) = Mhh(0);
+   pars(31) = Mhh(1);
+   pars(32) = Mhh(2);
+   pars(33) = Mhh(3);
+   pars(34) = MAh(0);
+   pars(35) = MAh(1);
+   pars(36) = MAh(2);
+   pars(37) = MAh(3);
+   pars(38) = MRh(0);
+   pars(39) = MRh(1);
+   pars(40) = MHpm(0);
+   pars(41) = MHpm(1);
+   pars(42) = MHpm(2);
+   pars(43) = MHpm(3);
+   pars(44) = MChi(0);
+   pars(45) = MChi(1);
+   pars(46) = MChi(2);
+   pars(47) = MChi(3);
+   pars(48) = MCha1(0);
+   pars(49) = MCha1(1);
+   pars(50) = MCha2(0);
+   pars(51) = MCha2(1);
+   pars(52) = MFe(0);
+   pars(53) = MFe(1);
+   pars(54) = MFe(2);
+   pars(55) = MFd(0);
+   pars(56) = MFd(1);
+   pars(57) = MFd(2);
+   pars(58) = MFu(0);
+   pars(59) = MFu(1);
+   pars(60) = MFu(2);
+   pars(61) = MVWm;
+   pars(62) = MVP;
+   pars(63) = MVZ;
 
    return pars;
 }
@@ -872,61 +880,61 @@ void MRSSM_physical::set_masses(const Eigen::ArrayXd& pars)
    MSRum = pars(6);
    MsigmaO = pars(7);
    MphiO = pars(8);
-   MVP = pars(9);
-   MVZ = pars(10);
-   MSd(0) = pars(11);
-   MSd(1) = pars(12);
-   MSd(2) = pars(13);
-   MSd(3) = pars(14);
-   MSd(4) = pars(15);
-   MSd(5) = pars(16);
-   MSv(0) = pars(17);
-   MSv(1) = pars(18);
-   MSv(2) = pars(19);
-   MSu(0) = pars(20);
-   MSu(1) = pars(21);
-   MSu(2) = pars(22);
-   MSu(3) = pars(23);
-   MSu(4) = pars(24);
-   MSu(5) = pars(25);
-   MSe(0) = pars(26);
-   MSe(1) = pars(27);
-   MSe(2) = pars(28);
-   MSe(3) = pars(29);
-   MSe(4) = pars(30);
-   MSe(5) = pars(31);
-   Mhh(0) = pars(32);
-   Mhh(1) = pars(33);
-   Mhh(2) = pars(34);
-   Mhh(3) = pars(35);
-   MAh(0) = pars(36);
-   MAh(1) = pars(37);
-   MAh(2) = pars(38);
-   MAh(3) = pars(39);
-   MRh(0) = pars(40);
-   MRh(1) = pars(41);
-   MHpm(0) = pars(42);
-   MHpm(1) = pars(43);
-   MHpm(2) = pars(44);
-   MHpm(3) = pars(45);
-   MChi(0) = pars(46);
-   MChi(1) = pars(47);
-   MChi(2) = pars(48);
-   MChi(3) = pars(49);
-   MCha1(0) = pars(50);
-   MCha1(1) = pars(51);
-   MCha2(0) = pars(52);
-   MCha2(1) = pars(53);
-   MFe(0) = pars(54);
-   MFe(1) = pars(55);
-   MFe(2) = pars(56);
-   MFd(0) = pars(57);
-   MFd(1) = pars(58);
-   MFd(2) = pars(59);
-   MFu(0) = pars(60);
-   MFu(1) = pars(61);
-   MFu(2) = pars(62);
-   MVWm = pars(63);
+   MSd(0) = pars(9);
+   MSd(1) = pars(10);
+   MSd(2) = pars(11);
+   MSd(3) = pars(12);
+   MSd(4) = pars(13);
+   MSd(5) = pars(14);
+   MSv(0) = pars(15);
+   MSv(1) = pars(16);
+   MSv(2) = pars(17);
+   MSu(0) = pars(18);
+   MSu(1) = pars(19);
+   MSu(2) = pars(20);
+   MSu(3) = pars(21);
+   MSu(4) = pars(22);
+   MSu(5) = pars(23);
+   MSe(0) = pars(24);
+   MSe(1) = pars(25);
+   MSe(2) = pars(26);
+   MSe(3) = pars(27);
+   MSe(4) = pars(28);
+   MSe(5) = pars(29);
+   Mhh(0) = pars(30);
+   Mhh(1) = pars(31);
+   Mhh(2) = pars(32);
+   Mhh(3) = pars(33);
+   MAh(0) = pars(34);
+   MAh(1) = pars(35);
+   MAh(2) = pars(36);
+   MAh(3) = pars(37);
+   MRh(0) = pars(38);
+   MRh(1) = pars(39);
+   MHpm(0) = pars(40);
+   MHpm(1) = pars(41);
+   MHpm(2) = pars(42);
+   MHpm(3) = pars(43);
+   MChi(0) = pars(44);
+   MChi(1) = pars(45);
+   MChi(2) = pars(46);
+   MChi(3) = pars(47);
+   MCha1(0) = pars(48);
+   MCha1(1) = pars(49);
+   MCha2(0) = pars(50);
+   MCha2(1) = pars(51);
+   MFe(0) = pars(52);
+   MFe(1) = pars(53);
+   MFe(2) = pars(54);
+   MFd(0) = pars(55);
+   MFd(1) = pars(56);
+   MFd(2) = pars(57);
+   MFu(0) = pars(58);
+   MFu(1) = pars(59);
+   MFu(2) = pars(60);
+   MVWm = pars(61);
+   MVP = pars(62);
+   MVZ = pars(63);
 
 }
 
@@ -942,8 +950,6 @@ void MRSSM_physical::print(std::ostream& ostr) const
    ostr << "MSRum = " << MSRum << '\n';
    ostr << "MsigmaO = " << MsigmaO << '\n';
    ostr << "MphiO = " << MphiO << '\n';
-   ostr << "MVP = " << MVP << '\n';
-   ostr << "MVZ = " << MVZ << '\n';
    ostr << "MSd = " << MSd.transpose() << '\n';
    ostr << "MSv = " << MSv.transpose() << '\n';
    ostr << "MSu = " << MSu.transpose() << '\n';
@@ -983,6 +989,7 @@ void MRSSM_physical::print(std::ostream& ostr) const
    ostr << "ZDR = " << ZDR << '\n';
    ostr << "ZUL = " << ZUL << '\n';
    ostr << "ZUR = " << ZUR << '\n';
+   ostr << "ZZ = " << ZZ << '\n';
 
 }
 

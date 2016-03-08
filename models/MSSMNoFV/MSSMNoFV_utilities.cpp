@@ -16,12 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:52:20
+// File generated at Tue 8 Mar 2016 18:39:12
 
 #include "MSSMNoFV_utilities.hpp"
 #include "MSSMNoFV_input_parameters.hpp"
+#include "MSSMNoFV_observables.hpp"
 #include "logger.hpp"
-#include "observables.hpp"
+#include "physical_input.hpp"
 #include "database.hpp"
 #include "wrappers.hpp"
 #include "lowe.h"
@@ -181,7 +182,8 @@ namespace MSSMNoFV_database {
  */
 void to_database(
    const std::string& file_name, const MSSMNoFV_mass_eigenstates& model,
-   const softsusy::QedQcd* qedqcd, const Observables* observables)
+   const softsusy::QedQcd* qedqcd, const Physical_input* physical_input,
+   const MSSMNoFV_observables* observables)
 {
    using utilities::append;
 
@@ -227,9 +229,15 @@ void to_database(
       append(values, qedqcd->display_input());
    }
 
+   // fill extra physical input (optional)
+   if (physical_input) {
+      append(names, Physical_input::get_names());
+      append(values, physical_input->get());
+   }
+
    // fill observables (optional)
-   if (observables) {
-      append(names, Observables::get_names());
+   if (MSSMNoFV_observables::NUMBER_OF_OBSERVABLES > 0 && observables) {
+      append(names, MSSMNoFV_observables::get_names());
       append(values, observables->get());
    }
 
@@ -243,15 +251,15 @@ void to_database(
  * @param file_name database file name
  * @param entry entry number (0 = first entry)
  * @param qedqcd pointer to low-energy data.  If zero, the low-energy
- *    data structur will not be filled
+ *    data structure will not be filled
  * @param observables pointer to observables.  If zero, the observables
- *    data structur will not be filled
+ *    data structure will not be filled
  *
  * @return mass eigenstates
  */
 MSSMNoFV_mass_eigenstates from_database(
    const std::string& file_name, std::size_t entry, softsusy::QedQcd* qedqcd,
-   Observables* observables)
+   Physical_input* physical_input, MSSMNoFV_observables* observables)
 {
    using utilities::append;
 
@@ -262,11 +270,14 @@ MSSMNoFV_mass_eigenstates from_database(
    const std::size_t number_of_input_parameters = MSSMNoFV_info::NUMBER_OF_INPUT_PARAMETERS;
    const std::size_t number_of_low_energy_input_parameters =
       (qedqcd ? softsusy::NUMBER_OF_LOW_ENERGY_INPUT_PARAMETERS : 0);
+   const std::size_t number_of_extra_physical_input_parameters =
+      (physical_input ? Physical_input::NUMBER_OF_INPUT_PARAMETERS : 0);
    const std::size_t number_of_observables =
-      (observables ? Observables::NUMBER_OF_OBSERVABLES : 0);
+      (observables ? MSSMNoFV_observables::NUMBER_OF_OBSERVABLES : 0);
    const std::size_t total_entries = 9 + number_of_input_parameters
       + number_of_parameters + number_of_masses + number_of_mixings
-      + number_of_low_energy_input_parameters + number_of_observables;
+      + number_of_low_energy_input_parameters
+      + number_of_extra_physical_input_parameters + number_of_observables;
 
    database::Database db(file_name);
    const Eigen::ArrayXd values(db.extract("Point", entry));
@@ -309,8 +320,14 @@ MSSMNoFV_mass_eigenstates from_database(
       offset += number_of_low_energy_input_parameters;
    }
 
+   // fill extra physical input parameters (optional)
+   if (physical_input) {
+      physical_input->set(values.block(offset, 0, number_of_extra_physical_input_parameters, 1));
+      offset += number_of_extra_physical_input_parameters;
+   }
+
    // fill observables (optional)
-   if (observables) {
+   if (number_of_observables > 0 && observables) {
       observables->set(values.block(offset, 0, number_of_observables, 1));
       offset += number_of_observables;
    }

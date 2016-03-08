@@ -16,19 +16,19 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:32:45
+// File generated at Tue 8 Mar 2016 16:13:54
 
 #ifndef MRSSM_SLHA_IO_H
 #define MRSSM_SLHA_IO_H
 
 #include "MRSSM_two_scale_model_slha.hpp"
 #include "MRSSM_info.hpp"
+#include "MRSSM_observables.hpp"
 #include "MRSSM_physical.hpp"
 #include "slha_io.hpp"
 #include "ckm.hpp"
 #include "ew_input.hpp"
 #include "lowe.h"
-#include "observables.hpp"
 
 #include <Eigen/Core>
 #include <string>
@@ -48,7 +48,6 @@ namespace flexiblesusy {
 
 struct MRSSM_input_parameters;
 class Spectrum_generator_settings;
-struct Observables;
 
 struct MRSSM_scales {
    MRSSM_scales() : HighScale(0.), SUSYScale(0.), LowScale(0.) {}
@@ -66,6 +65,7 @@ public:
    void fill(MRSSM_input_parameters&) const;
    void fill(MRSSM_mass_eigenstates&) const;
    template <class T> void fill(MRSSM_slha<T>&) const;
+   void fill(Physical_input&) const;
    void fill(Spectrum_generator_settings&) const;
    double get_parameter_output_scale() const;
    const SLHA_io& get_slha_io() const { return slha_io; }
@@ -73,12 +73,13 @@ public:
    void read_from_source(const std::string&);
    void read_from_stream(std::istream&);
    void set_extpar(const MRSSM_input_parameters&);
-   template <class T> void set_extra(const MRSSM_slha<T>&, const MRSSM_scales&, const Observables&);
+   template <class T> void set_extra(const MRSSM_slha<T>&, const MRSSM_scales&, const MRSSM_observables&);
    void set_minpar(const MRSSM_input_parameters&);
    void set_sminputs(const softsusy::QedQcd&);
    template <class T> void set_spectrum(const MRSSM_slha<T>&);
    template <class T> void set_spectrum(const MRSSM<T>&);
    void set_spinfo(const Problems<MRSSM_info::NUMBER_OF_PARTICLES>&);
+   void set_print_imaginary_parts_of_majorana_mixings(bool);
    void write_to_file(const std::string&);
    void write_to_stream(std::ostream& ostr = std::cout) { slha_io.write_to_stream(ostr); }
 
@@ -86,13 +87,14 @@ public:
    static void fill_extpar_tuple(MRSSM_input_parameters&, int, double);
 
    template <class T>
-   static void fill_slhaea(SLHAea::Coll&, const MRSSM_slha<T>&, const softsusy::QedQcd&, const MRSSM_scales&, const Observables&);
+   static void fill_slhaea(SLHAea::Coll&, const MRSSM_slha<T>&, const softsusy::QedQcd&, const MRSSM_scales&, const MRSSM_observables&);
 
    template <class T>
-   static SLHAea::Coll fill_slhaea(const MRSSM_slha<T>&, const softsusy::QedQcd&, const MRSSM_scales&, const Observables&);
+   static SLHAea::Coll fill_slhaea(const MRSSM_slha<T>&, const softsusy::QedQcd&, const MRSSM_scales&, const MRSSM_observables&);
 
 private:
    SLHA_io slha_io; ///< SLHA io class
+   bool print_imaginary_parts_of_majorana_mixings;
    static unsigned const NUMBER_OF_DRBAR_BLOCKS = 12;
    static char const * const drbar_blocks[NUMBER_OF_DRBAR_BLOCKS];
 
@@ -121,7 +123,7 @@ template <class T>
 void MRSSM_slha_io::fill_slhaea(
    SLHAea::Coll& slhaea, const MRSSM_slha<T>& model,
    const softsusy::QedQcd& qedqcd, const MRSSM_scales& scales,
-   const Observables& observables)
+   const MRSSM_observables& observables)
 {
    MRSSM_slha_io slha_io;
    const MRSSM_input_parameters& input = model.get_input();
@@ -144,7 +146,7 @@ void MRSSM_slha_io::fill_slhaea(
 template <class T>
 SLHAea::Coll MRSSM_slha_io::fill_slhaea(
    const MRSSM_slha<T>& model, const softsusy::QedQcd& qedqcd,
-   const MRSSM_scales& scales, const Observables& observables)
+   const MRSSM_scales& scales, const MRSSM_observables& observables)
 {
    SLHAea::Coll slhaea;
    MRSSM_slha_io::fill_slhaea(slhaea, model, qedqcd, scales, observables);
@@ -230,7 +232,7 @@ void MRSSM_slha_io::set_model_parameters(const MRSSM_slha<T>& model)
 template <class T>
 void MRSSM_slha_io::set_extra(
    const MRSSM_slha<T>& model, const MRSSM_scales& scales,
-   const Observables& observables)
+   const MRSSM_observables& observables)
 {
    const MRSSM_physical physical(model.get_physical_slha());
 

@@ -34,6 +34,7 @@ LIBMSSMatMGUT_HDR :=
 
 ifneq ($(findstring two_scale,$(ALGORITHMS)),)
 LIBMSSMatMGUT_SRC += \
+		$(DIR)/MSSMatMGUT_effective_couplings.cpp \
 		$(DIR)/MSSMatMGUT_mass_eigenstates.cpp \
 		$(DIR)/MSSMatMGUT_info.cpp \
 		$(DIR)/MSSMatMGUT_input_parameters.cpp \
@@ -56,6 +57,7 @@ EXEMSSMatMGUT_SRC += \
 		$(DIR)/scan_MSSMatMGUT.cpp
 LIBMSSMatMGUT_HDR += \
 		$(DIR)/MSSMatMGUT_convergence_tester.hpp \
+		$(DIR)/MSSMatMGUT_effective_couplings.hpp \
 		$(DIR)/MSSMatMGUT_high_scale_constraint.hpp \
 		$(DIR)/MSSMatMGUT_mass_eigenstates.hpp \
 		$(DIR)/MSSMatMGUT_info.hpp \
@@ -187,6 +189,9 @@ clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-obj
 		-rm -f $(EXEMSSMatMGUT_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
+		@true
+
+clean-obj::     clean-$(MODNAME)-obj
 
 clean::         clean-$(MODNAME)
 

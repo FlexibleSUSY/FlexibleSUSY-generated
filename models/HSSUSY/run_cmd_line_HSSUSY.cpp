@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:30:02
+// File generated at Tue 8 Mar 2016 16:06:16
 
 #include "HSSUSY_input_parameters.hpp"
 #include "HSSUSY_observables.hpp"
@@ -26,6 +26,7 @@
 #include "command_line_options.hpp"
 #include "lowe.h"
 #include "logger.hpp"
+#include "physical_input.hpp"
 
 #include <iostream>
 #include <cstring>
@@ -46,6 +47,7 @@ void print_usage()
       "  --MEWSB=<value>\n"
       "  --AtInput=<value>\n"
       "  --TanBeta=<value>\n"
+      "  --LambdaLoopOrder=<value>\n"
 
       "  --help,-h                         print this help message"
              << std::endl;
@@ -84,6 +86,9 @@ void set_command_line_parameters(int argc, char* argv[],
       if(Command_line_options::get_parameter_value(option, "--TanBeta=", input.TanBeta))
          continue;
 
+      if(Command_line_options::get_parameter_value(option, "--LambdaLoopOrder=", input.LambdaLoopOrder))
+         continue;
+
       
       if (strcmp(option,"--help") == 0 || strcmp(option,"-h") == 0) {
          print_usage();
@@ -106,6 +111,7 @@ int main(int argc, char* argv[])
    HSSUSY_input_parameters input;
    set_command_line_parameters(argc, argv, input);
 
+   Physical_input physical_input;
    softsusy::QedQcd qedqcd;
    qedqcd.toMz();
 
@@ -130,7 +136,7 @@ int main(int argc, char* argv[])
    scales.SUSYScale = spectrum_generator.get_susy_scale();
    scales.LowScale  = spectrum_generator.get_low_scale();
 
-   const Observables observables(calculate_observables(model, qedqcd));
+   const HSSUSY_observables observables(calculate_observables(model, qedqcd, physical_input));
 
    // SLHA output
    SLHAea::Coll slhaea(HSSUSY_slha_io::fill_slhaea(model, qedqcd, scales, observables));

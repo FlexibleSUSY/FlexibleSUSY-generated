@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:29:48
+// File generated at Tue 8 Mar 2016 16:04:21
 
 #include "SplitMSSM_slha_io.hpp"
 #include "SplitMSSM_input_parameters.hpp"
@@ -51,12 +51,18 @@ char const * const SplitMSSM_slha_io::drbar_blocks[NUMBER_OF_DRBAR_BLOCKS] =
 
 SplitMSSM_slha_io::SplitMSSM_slha_io()
    : slha_io()
+   , print_imaginary_parts_of_majorana_mixings(false)
 {
 }
 
 void SplitMSSM_slha_io::clear()
 {
    slha_io.clear();
+}
+
+void SplitMSSM_slha_io::set_print_imaginary_parts_of_majorana_mixings(bool flag)
+{
+   print_imaginary_parts_of_majorana_mixings = flag;
 }
 
 /**
@@ -164,8 +170,6 @@ void SplitMSSM_slha_io::set_mass(const SplitMSSM_physical& physical,
          << FORMAT_MASS(14, LOCALPHYSICAL(MFv(1)), "Fv(2)")
          << FORMAT_MASS(16, LOCALPHYSICAL(MFv(2)), "Fv(3)")
          << FORMAT_MASS(25, LOCALPHYSICAL(Mhh), "hh")
-         << FORMAT_MASS(22, LOCALPHYSICAL(MVP), "VP")
-         << FORMAT_MASS(23, LOCALPHYSICAL(MVZ), "VZ")
          << FORMAT_MASS(1, LOCALPHYSICAL(MFd(0)), "Fd(1)")
          << FORMAT_MASS(3, LOCALPHYSICAL(MFd(1)), "Fd(2)")
          << FORMAT_MASS(5, LOCALPHYSICAL(MFd(2)), "Fd(3)")
@@ -175,6 +179,8 @@ void SplitMSSM_slha_io::set_mass(const SplitMSSM_physical& physical,
          << FORMAT_MASS(11, LOCALPHYSICAL(MFe(0)), "Fe(1)")
          << FORMAT_MASS(13, LOCALPHYSICAL(MFe(1)), "Fe(2)")
          << FORMAT_MASS(15, LOCALPHYSICAL(MFe(2)), "Fe(3)")
+         << FORMAT_MASS(22, LOCALPHYSICAL(MVP), "VP")
+         << FORMAT_MASS(23, LOCALPHYSICAL(MVZ), "VZ")
       ;
    }
 
@@ -204,6 +210,10 @@ void SplitMSSM_slha_io::set_mixing_matrices(const SplitMSSM_physical& physical,
       slha_io.set_block("UDRMIX", LOCALPHYSICAL(Ud), "Ud");
       slha_io.set_block("UELMIX", LOCALPHYSICAL(Ve), "Ve");
       slha_io.set_block("UERMIX", LOCALPHYSICAL(Ue), "Ue");
+   }
+
+   if (print_imaginary_parts_of_majorana_mixings) {
+      slha_io.set_block_imag("IMNMIX", LOCALPHYSICAL(ZN), "ZN");
    }
 
 }
@@ -351,6 +361,17 @@ void SplitMSSM_slha_io::fill(SplitMSSM_mass_eigenstates& model) const
    fill_physical(physical_hk);
    physical_hk.convert_to_hk();
    model.get_physical() = physical_hk;
+}
+
+/**
+ * Fill struct of extra physical input parameters from SLHA object
+ * (FlexibleSUSYInput block)
+ *
+ * @param settings struct of physical input parameters
+ */
+void SplitMSSM_slha_io::fill(Physical_input& input) const
+{
+   slha_io.fill(input);
 }
 
 /**

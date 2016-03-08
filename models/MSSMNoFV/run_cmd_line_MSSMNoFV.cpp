@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:53:56
+// File generated at Tue 8 Mar 2016 18:41:12
 
 #include "MSSMNoFV_input_parameters.hpp"
 #include "MSSMNoFV_observables.hpp"
@@ -26,6 +26,7 @@
 #include "command_line_options.hpp"
 #include "lowe.h"
 #include "logger.hpp"
+#include "physical_input.hpp"
 
 #include <iostream>
 #include <cstring>
@@ -198,6 +199,7 @@ int main(int argc, char* argv[])
    MSSMNoFV_input_parameters input;
    set_command_line_parameters(argc, argv, input);
 
+   Physical_input physical_input;
    softsusy::QedQcd qedqcd;
    qedqcd.toMz();
 
@@ -222,7 +224,7 @@ int main(int argc, char* argv[])
    scales.SUSYScale = spectrum_generator.get_susy_scale();
    scales.LowScale  = spectrum_generator.get_low_scale();
 
-   const Observables observables(calculate_observables(model, qedqcd));
+   const MSSMNoFV_observables observables(calculate_observables(model, qedqcd, physical_input));
 
    // SLHA output
    SLHAea::Coll slhaea(MSSMNoFV_slha_io::fill_slhaea(model, qedqcd, scales, observables));

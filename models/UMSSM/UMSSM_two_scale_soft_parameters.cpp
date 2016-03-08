@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:33:48
+// File generated at Tue 8 Mar 2016 17:59:50
 
 #include "UMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -28,6 +28,10 @@ namespace flexiblesusy {
 
 #define INPUT(parameter) input.parameter
 #define TRACE_STRUCT soft_traces
+#define TRACE_STRUCT_TYPE Soft_traces
+#define CALCULATE_TRACES() calc_soft_traces(TRACE_STRUCT);
+
+const int UMSSM_soft_parameters::numberOfParameters;
 
 UMSSM_soft_parameters::UMSSM_soft_parameters(const UMSSM_input_parameters& input_)
    : UMSSM_susy_parameters(input_)
@@ -72,50 +76,71 @@ Eigen::ArrayXd UMSSM_soft_parameters::beta() const
 
 UMSSM_soft_parameters UMSSM_soft_parameters::calc_beta() const
 {
-   Soft_traces soft_traces;
-   calc_soft_traces(soft_traces);
+   Eigen::Matrix<double,3,3> beta_TYd = Eigen::Matrix<double,3,3>::Zero();
+   Eigen::Matrix<double,3,3> beta_TYe = Eigen::Matrix<double,3,3>::Zero();
+   double beta_TLambdax = 0.;
+   Eigen::Matrix<double,3,3> beta_TYv = Eigen::Matrix<double,3,3>::Zero();
+   Eigen::Matrix<double,3,3> beta_TYu = Eigen::Matrix<double,3,3>::Zero();
+   Eigen::Matrix<double,3,3> beta_mq2 = Eigen::Matrix<double,3,3>::Zero();
+   Eigen::Matrix<double,3,3> beta_ml2 = Eigen::Matrix<double,3,3>::Zero();
+   double beta_mHd2 = 0.;
+   double beta_mHu2 = 0.;
+   Eigen::Matrix<double,3,3> beta_md2 = Eigen::Matrix<double,3,3>::Zero();
+   Eigen::Matrix<double,3,3> beta_mu2 = Eigen::Matrix<double,3,3>::Zero();
+   Eigen::Matrix<double,3,3> beta_me2 = Eigen::Matrix<double,3,3>::Zero();
+   Eigen::Matrix<double,3,3> beta_mvR2 = Eigen::Matrix<double,3,3>::Zero();
+   double beta_ms2 = 0.;
+   double beta_MassB = 0.;
+   double beta_MassWB = 0.;
+   double beta_MassG = 0.;
+   double beta_MassU = 0.;
 
-   Eigen::Matrix<double,3,3> beta_TYd(calc_beta_TYd_one_loop(TRACE_STRUCT));
-   Eigen::Matrix<double,3,3> beta_TYe(calc_beta_TYe_one_loop(TRACE_STRUCT));
-   double beta_TLambdax(calc_beta_TLambdax_one_loop(TRACE_STRUCT));
-   Eigen::Matrix<double,3,3> beta_TYv(calc_beta_TYv_one_loop(TRACE_STRUCT));
-   Eigen::Matrix<double,3,3> beta_TYu(calc_beta_TYu_one_loop(TRACE_STRUCT));
-   Eigen::Matrix<double,3,3> beta_mq2(calc_beta_mq2_one_loop(TRACE_STRUCT));
-   Eigen::Matrix<double,3,3> beta_ml2(calc_beta_ml2_one_loop(TRACE_STRUCT));
-   double beta_mHd2(calc_beta_mHd2_one_loop(TRACE_STRUCT));
-   double beta_mHu2(calc_beta_mHu2_one_loop(TRACE_STRUCT));
-   Eigen::Matrix<double,3,3> beta_md2(calc_beta_md2_one_loop(TRACE_STRUCT));
-   Eigen::Matrix<double,3,3> beta_mu2(calc_beta_mu2_one_loop(TRACE_STRUCT));
-   Eigen::Matrix<double,3,3> beta_me2(calc_beta_me2_one_loop(TRACE_STRUCT));
-   Eigen::Matrix<double,3,3> beta_mvR2(calc_beta_mvR2_one_loop(TRACE_STRUCT));
-   double beta_ms2(calc_beta_ms2_one_loop(TRACE_STRUCT));
-   double beta_MassB(calc_beta_MassB_one_loop(TRACE_STRUCT));
-   double beta_MassWB(calc_beta_MassWB_one_loop(TRACE_STRUCT));
-   double beta_MassG(calc_beta_MassG_one_loop(TRACE_STRUCT));
-   double beta_MassU(calc_beta_MassU_one_loop(TRACE_STRUCT));
+   if (get_loops() > 0) {
+      TRACE_STRUCT_TYPE TRACE_STRUCT;
+      CALCULATE_TRACES();
 
-   if (get_loops() > 1) {
-      beta_TYd += calc_beta_TYd_two_loop(TRACE_STRUCT);
-      beta_TYe += calc_beta_TYe_two_loop(TRACE_STRUCT);
-      beta_TLambdax += calc_beta_TLambdax_two_loop(TRACE_STRUCT);
-      beta_TYv += calc_beta_TYv_two_loop(TRACE_STRUCT);
-      beta_TYu += calc_beta_TYu_two_loop(TRACE_STRUCT);
-      beta_mq2 += calc_beta_mq2_two_loop(TRACE_STRUCT);
-      beta_ml2 += calc_beta_ml2_two_loop(TRACE_STRUCT);
-      beta_mHd2 += calc_beta_mHd2_two_loop(TRACE_STRUCT);
-      beta_mHu2 += calc_beta_mHu2_two_loop(TRACE_STRUCT);
-      beta_md2 += calc_beta_md2_two_loop(TRACE_STRUCT);
-      beta_mu2 += calc_beta_mu2_two_loop(TRACE_STRUCT);
-      beta_me2 += calc_beta_me2_two_loop(TRACE_STRUCT);
-      beta_mvR2 += calc_beta_mvR2_two_loop(TRACE_STRUCT);
-      beta_ms2 += calc_beta_ms2_two_loop(TRACE_STRUCT);
-      beta_MassB += calc_beta_MassB_two_loop(TRACE_STRUCT);
-      beta_MassWB += calc_beta_MassWB_two_loop(TRACE_STRUCT);
-      beta_MassG += calc_beta_MassG_two_loop(TRACE_STRUCT);
-      beta_MassU += calc_beta_MassU_two_loop(TRACE_STRUCT);
+      beta_TYd += calc_beta_TYd_one_loop(TRACE_STRUCT);
+      beta_TYe += calc_beta_TYe_one_loop(TRACE_STRUCT);
+      beta_TLambdax += calc_beta_TLambdax_one_loop(TRACE_STRUCT);
+      beta_TYv += calc_beta_TYv_one_loop(TRACE_STRUCT);
+      beta_TYu += calc_beta_TYu_one_loop(TRACE_STRUCT);
+      beta_mq2 += calc_beta_mq2_one_loop(TRACE_STRUCT);
+      beta_ml2 += calc_beta_ml2_one_loop(TRACE_STRUCT);
+      beta_mHd2 += calc_beta_mHd2_one_loop(TRACE_STRUCT);
+      beta_mHu2 += calc_beta_mHu2_one_loop(TRACE_STRUCT);
+      beta_md2 += calc_beta_md2_one_loop(TRACE_STRUCT);
+      beta_mu2 += calc_beta_mu2_one_loop(TRACE_STRUCT);
+      beta_me2 += calc_beta_me2_one_loop(TRACE_STRUCT);
+      beta_mvR2 += calc_beta_mvR2_one_loop(TRACE_STRUCT);
+      beta_ms2 += calc_beta_ms2_one_loop(TRACE_STRUCT);
+      beta_MassB += calc_beta_MassB_one_loop(TRACE_STRUCT);
+      beta_MassWB += calc_beta_MassWB_one_loop(TRACE_STRUCT);
+      beta_MassG += calc_beta_MassG_one_loop(TRACE_STRUCT);
+      beta_MassU += calc_beta_MassU_one_loop(TRACE_STRUCT);
 
-      if (get_loops() > 2) {
+      if (get_loops() > 1) {
+         beta_TYd += calc_beta_TYd_two_loop(TRACE_STRUCT);
+         beta_TYe += calc_beta_TYe_two_loop(TRACE_STRUCT);
+         beta_TLambdax += calc_beta_TLambdax_two_loop(TRACE_STRUCT);
+         beta_TYv += calc_beta_TYv_two_loop(TRACE_STRUCT);
+         beta_TYu += calc_beta_TYu_two_loop(TRACE_STRUCT);
+         beta_mq2 += calc_beta_mq2_two_loop(TRACE_STRUCT);
+         beta_ml2 += calc_beta_ml2_two_loop(TRACE_STRUCT);
+         beta_mHd2 += calc_beta_mHd2_two_loop(TRACE_STRUCT);
+         beta_mHu2 += calc_beta_mHu2_two_loop(TRACE_STRUCT);
+         beta_md2 += calc_beta_md2_two_loop(TRACE_STRUCT);
+         beta_mu2 += calc_beta_mu2_two_loop(TRACE_STRUCT);
+         beta_me2 += calc_beta_me2_two_loop(TRACE_STRUCT);
+         beta_mvR2 += calc_beta_mvR2_two_loop(TRACE_STRUCT);
+         beta_ms2 += calc_beta_ms2_two_loop(TRACE_STRUCT);
+         beta_MassB += calc_beta_MassB_two_loop(TRACE_STRUCT);
+         beta_MassWB += calc_beta_MassWB_two_loop(TRACE_STRUCT);
+         beta_MassG += calc_beta_MassG_two_loop(TRACE_STRUCT);
+         beta_MassU += calc_beta_MassU_two_loop(TRACE_STRUCT);
 
+         if (get_loops() > 2) {
+
+         }
       }
    }
 
@@ -402,17 +427,15 @@ void UMSSM_soft_parameters::calc_soft_traces(Soft_traces& soft_traces) const
       const auto Qv = INPUT(Qv);
 
       TRACE_STRUCT.Tr11 = Re(0.7745966692414834*g1*(-mHd2 + mHu2 + (md2).trace() +
-         (me2).trace() - (ml2).trace() + (mq2).trace() - 2*(mu2).trace() + (mvR2)
-         .trace()));
+         (me2).trace() - (ml2).trace() + (mq2).trace() - 2*(mu2).trace()));
       TRACE_STRUCT.Tr14 = Re(gp*(2*mHd2*QHd + 2*mHu2*QHu + ms2*Qs + 3*Qd*(md2)
          .trace() + Qe*(me2).trace() + 2*Ql*(ml2).trace() + 6*Qq*(mq2).trace() + 3*Qu
          *(mu2).trace() + Qv*(mvR2).trace()));
       TRACE_STRUCT.Tr2U111 = Re(0.1*Sqr(g1)*(3*mHd2 + 3*mHu2 + 2*(md2).trace() + 6
-         *(me2).trace() + 3*(ml2).trace() + (mq2).trace() + 8*(mu2).trace() + 6*(mvR2
-         ).trace()));
+         *(me2).trace() + 3*(ml2).trace() + (mq2).trace() + 8*(mu2).trace()));
       TRACE_STRUCT.Tr2U114 = Re(0.7745966692414834*g1*gp*(-(mHd2*QHd) + mHu2*QHu +
          Qd*(md2).trace() + Qe*(me2).trace() - Ql*(ml2).trace() + Qq*(mq2).trace() -
-         2*Qu*(mu2).trace() + Qv*(mvR2).trace()));
+         2*Qu*(mu2).trace()));
       TRACE_STRUCT.Tr31 = Re(0.012909944487358056*g1*(30*(mHd2 - mHu2)*AbsSqr(
          Lambdax) - 9*mHd2*Sqr(g1) + 9*mHu2*Sqr(g1) - 45*mHd2*Sqr(g2) + 45*mHu2*Sqr(
          g2) - 60*mHd2*Sqr(gp)*Sqr(QHd) + 60*mHu2*Sqr(gp)*Sqr(QHu) + 4*(Sqr(g1) + 20*
@@ -421,21 +444,19 @@ void UMSSM_soft_parameters::calc_soft_traces(Soft_traces& soft_traces) const
          .trace() - 60*Sqr(gp)*Sqr(Ql)*(ml2).trace() + Sqr(g1)*(mq2).trace() + 45*Sqr
          (g2)*(mq2).trace() + 80*Sqr(g3)*(mq2).trace() + 60*Sqr(gp)*Sqr(Qq)*(mq2)
          .trace() - 32*Sqr(g1)*(mu2).trace() - 160*Sqr(g3)*(mu2).trace() - 120*Sqr(gp
-         )*Sqr(Qu)*(mu2).trace() + 36*Sqr(g1)*(mvR2).trace() + 60*Sqr(gp)*Sqr(Qv)*(
-         mvR2).trace() + 90*mHd2*(Yd*Yd.adjoint()).trace() + 30*mHd2*(Ye*Ye.adjoint()
-         ).trace() - 90*mHu2*(Yu*Yu.adjoint()).trace() - 30*mHu2*(Yv*Yv.adjoint())
-         .trace() + 30*(ml2*Yv*Yv.adjoint()).trace() - 60*(mvR2*Yv.adjoint()*Yv)
-         .trace() - 60*(Yd*Yd.adjoint()*md2.conjugate()).trace() - 30*(Yd*
-         mq2.conjugate()*Yd.adjoint()).trace() - 60*(Ye*Ye.adjoint()*me2.conjugate())
-         .trace() + 30*(Ye*ml2.conjugate()*Ye.adjoint()).trace() + 120*(Yu*Yu.adjoint
-         ()*mu2.conjugate()).trace() - 30*(Yu*mq2.conjugate()*Yu.adjoint()).trace()))
-         ;
+         )*Sqr(Qu)*(mu2).trace() + 90*mHd2*(Yd*Yd.adjoint()).trace() + 30*mHd2*(Ye*
+         Ye.adjoint()).trace() - 90*mHu2*(Yu*Yu.adjoint()).trace() - 30*mHu2*(Yv*
+         Yv.adjoint()).trace() + 30*(ml2*Yv*Yv.adjoint()).trace() - 60*(Yd*Yd.adjoint
+         ()*md2.conjugate()).trace() - 30*(Yd*mq2.conjugate()*Yd.adjoint()).trace() -
+         60*(Ye*Ye.adjoint()*me2.conjugate()).trace() + 30*(Ye*ml2.conjugate()*
+         Ye.adjoint()).trace() + 120*(Yu*Yu.adjoint()*mu2.conjugate()).trace() - 30*(
+         Yu*mq2.conjugate()*Yu.adjoint()).trace()));
       TRACE_STRUCT.Tr22 = Re(0.5*(mHd2 + mHu2 + (ml2).trace() + 3*(mq2).trace()));
       TRACE_STRUCT.Tr23 = Re(0.5*((md2).trace() + 2*(mq2).trace() + (mu2).trace())
          );
       TRACE_STRUCT.Tr2U141 = Re(0.7745966692414834*g1*gp*(-(mHd2*QHd) + mHu2*QHu +
          Qd*(md2).trace() + Qe*(me2).trace() - Ql*(ml2).trace() + Qq*(mq2).trace() -
-         2*Qu*(mu2).trace() + Qv*(mvR2).trace()));
+         2*Qu*(mu2).trace()));
       TRACE_STRUCT.Tr2U144 = Re(Sqr(gp)*(2*mHd2*Sqr(QHd) + 2*mHu2*Sqr(QHu) + ms2*
          Sqr(Qs) + 3*Sqr(Qd)*(md2).trace() + Sqr(Qe)*(me2).trace() + 2*Sqr(Ql)*(ml2)
          .trace() + 6*Sqr(Qq)*(mq2).trace() + 3*Sqr(Qu)*(mu2).trace() + Sqr(Qv)*(mvR2
@@ -449,15 +470,15 @@ void UMSSM_soft_parameters::calc_soft_traces(Soft_traces& soft_traces) const
          ) + 20*Power(Ql,3)*Sqr(gp)*(ml2).trace() + Qq*Sqr(g1)*(mq2).trace() + 45*Qq*
          Sqr(g2)*(mq2).trace() + 80*Qq*Sqr(g3)*(mq2).trace() + 60*Power(Qq,3)*Sqr(gp)
          *(mq2).trace() + 8*Qu*Sqr(g1)*(mu2).trace() + 40*Qu*Sqr(g3)*(mu2).trace() +
-         30*Power(Qu,3)*Sqr(gp)*(mu2).trace() + 6*Qv*Sqr(g1)*(mvR2).trace() + 10*
-         Power(Qv,3)*Sqr(gp)*(mvR2).trace() - 30*mHd2*QHd*(Yd*Yd.adjoint()).trace() -
-         10*mHd2*QHd*(Ye*Ye.adjoint()).trace() - 30*mHu2*QHu*(Yu*Yu.adjoint()).trace
-         () - 10*mHu2*QHu*(Yv*Yv.adjoint()).trace() - 10*Ql*(ml2*Yv*Yv.adjoint())
-         .trace() - 10*Qv*(mvR2*Yv.adjoint()*Yv).trace() - 30*Qd*(Yd*Yd.adjoint()*
-         md2.conjugate()).trace() - 30*Qq*(Yd*mq2.conjugate()*Yd.adjoint()).trace() -
-         10*Qe*(Ye*Ye.adjoint()*me2.conjugate()).trace() - 10*Ql*(Ye*ml2.conjugate()
-         *Ye.adjoint()).trace() - 30*Qu*(Yu*Yu.adjoint()*mu2.conjugate()).trace() -
-         30*Qq*(Yu*mq2.conjugate()*Yu.adjoint()).trace()));
+         30*Power(Qu,3)*Sqr(gp)*(mu2).trace() + 10*Power(Qv,3)*Sqr(gp)*(mvR2).trace()
+         - 30*mHd2*QHd*(Yd*Yd.adjoint()).trace() - 10*mHd2*QHd*(Ye*Ye.adjoint())
+         .trace() - 30*mHu2*QHu*(Yu*Yu.adjoint()).trace() - 10*mHu2*QHu*(Yv*
+         Yv.adjoint()).trace() - 10*Ql*(ml2*Yv*Yv.adjoint()).trace() - 10*Qv*(mvR2*
+         Yv.adjoint()*Yv).trace() - 30*Qd*(Yd*Yd.adjoint()*md2.conjugate()).trace() -
+         30*Qq*(Yd*mq2.conjugate()*Yd.adjoint()).trace() - 10*Qe*(Ye*Ye.adjoint()*
+         me2.conjugate()).trace() - 10*Ql*(Ye*ml2.conjugate()*Ye.adjoint()).trace() -
+         30*Qu*(Yu*Yu.adjoint()*mu2.conjugate()).trace() - 30*Qq*(Yu*mq2.conjugate()
+         *Yu.adjoint()).trace()));
 
       TRACE_STRUCT.traceYdAdjYd = Re((Yd*Yd.adjoint()).trace());
       TRACE_STRUCT.traceYeAdjYe = Re((Ye*Ye.adjoint()).trace());

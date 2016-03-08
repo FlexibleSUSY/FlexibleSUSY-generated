@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:53:56
+// File generated at Tue 8 Mar 2016 18:41:12
 
 #ifndef MSSMNoFV_SPECTRUM_GENERATOR_H
 #define MSSMNoFV_SPECTRUM_GENERATOR_H
@@ -104,6 +104,7 @@ void MSSMNoFV_spectrum_generator<T>::run(const softsusy::QedQcd& qedqcd,
    susy_scale_constraint.set_model(&model);
    low_scale_constraint .set_model(&model);
 
+   susy_scale_constraint.set_sm_parameters(qedqcd);
    low_scale_constraint .set_sm_parameters(qedqcd);
 
    high_scale_constraint.initialize();

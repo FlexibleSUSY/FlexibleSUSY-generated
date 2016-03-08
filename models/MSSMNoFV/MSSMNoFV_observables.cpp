@@ -16,18 +16,25 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:53:56
+// File generated at Tue 8 Mar 2016 18:41:12
 
 #include "MSSMNoFV_observables.hpp"
 #include "MSSMNoFV_mass_eigenstates.hpp"
+#include "MSSMNoFV_effective_couplings.hpp"
 #include "gm2calc_interface.hpp"
 #include "eigen_utils.hpp"
 #include "numerics2.hpp"
+#include "wrappers.hpp"
 #include "lowe.h"
+#include "physical_input.hpp"
 
 #define MODEL model
 #define AMUGM2CALC a_muon_gm2calc
 #define AMUGM2CALCUNCERTAINTY a_muon_gm2calc_uncertainty
+#define EFFCPHIGGSPHOTONPHOTON eff_cp_higgs_photon_photon
+#define EFFCPHIGGSGLUONGLUON eff_cp_higgs_gluon_gluon
+#define EFFCPPSEUDOSCALARPHOTONPHOTON eff_cp_pseudoscalar_photon_photon
+#define EFFCPPSEUDOSCALARGLUONGLUON eff_cp_pseudoscalar_gluon_gluon
 
 #define ALPHA_S_MZ qedqcd.displayAlpha(softsusy::ALPHAS)
 #define MWPole qedqcd.displayPoleMW()
@@ -39,10 +46,56 @@
 
 namespace flexiblesusy {
 
-Observables calculate_observables(const MSSMNoFV_mass_eigenstates& model,
-                                  const softsusy::QedQcd& qedqcd)
+const unsigned MSSMNoFV_observables::NUMBER_OF_OBSERVABLES;
+
+MSSMNoFV_observables::MSSMNoFV_observables()
+   : a_muon_gm2calc(0)
+   , a_muon_gm2calc_uncertainty(0)
+
 {
-   Observables observables;
+}
+
+Eigen::ArrayXd MSSMNoFV_observables::get() const
+{
+   Eigen::ArrayXd vec(MSSMNoFV_observables::NUMBER_OF_OBSERVABLES);
+
+   vec(0) = a_muon_gm2calc;
+   vec(1) = a_muon_gm2calc_uncertainty;
+
+   return vec;
+}
+
+std::vector<std::string> MSSMNoFV_observables::get_names()
+{
+   std::vector<std::string> names(MSSMNoFV_observables::NUMBER_OF_OBSERVABLES);
+
+   names[0] = "a_muon_gm2calc";
+   names[1] = "a_muon_gm2calc_uncertainty";
+
+   return names;
+}
+
+void MSSMNoFV_observables::clear()
+{
+   a_muon_gm2calc = 0.;
+   a_muon_gm2calc_uncertainty = 0.;
+
+}
+
+void MSSMNoFV_observables::set(const Eigen::ArrayXd& vec)
+{
+   assert(vec.rows() == MSSMNoFV_observables::NUMBER_OF_OBSERVABLES);
+
+   a_muon_gm2calc = vec(0);
+   a_muon_gm2calc_uncertainty = vec(1);
+
+}
+
+MSSMNoFV_observables calculate_observables(const MSSMNoFV_mass_eigenstates& model,
+                                              const softsusy::QedQcd& qedqcd,
+                                              const Physical_input& physical_input)
+{
+   MSSMNoFV_observables observables;
 
    GM2Calc_data gm2calc_data;
    gm2calc_data.alpha_s_MZ = ALPHA_S_MZ;

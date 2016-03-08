@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:30:09
+// File generated at Tue 8 Mar 2016 16:05:32
 
 #include "SplitMSSM_physical.hpp"
 #include "slha_io.hpp"
@@ -30,10 +30,10 @@ namespace flexiblesusy {
 SplitMSSM_physical::SplitMSSM_physical()
    :
     MVG(0), MHp(0), MFv(Eigen::Array<double,3,1>::Zero()), MGlu(0), MAh(0),
-       Mhh(0), MVP(0), MVZ(0), MFd(Eigen::Array<double,3,1>::Zero()), MFu(
-       Eigen::Array<double,3,1>::Zero()), MFe(Eigen::Array<double,3,1>::Zero()),
-       MChi(Eigen::Array<double,4,1>::Zero()), MCha(Eigen::Array<double,2,1>::Zero
-       ()), MVWp(0)
+       Mhh(0), MFd(Eigen::Array<double,3,1>::Zero()), MFu(Eigen::Array<double,3,1>
+       ::Zero()), MFe(Eigen::Array<double,3,1>::Zero()), MChi(Eigen::Array<double,
+       4,1>::Zero()), MCha(Eigen::Array<double,2,1>::Zero()), MVWp(0), MVP(0), MVZ
+       (0)
 
    , Vd(Eigen::Matrix<std::complex<double>,3,3>::Zero()), Ud(Eigen::Matrix<
       std::complex<double>,3,3>::Zero()), Vu(Eigen::Matrix<std::complex<double>,3,
@@ -41,7 +41,8 @@ SplitMSSM_physical::SplitMSSM_physical()
       Eigen::Matrix<std::complex<double>,3,3>::Zero()), Ue(Eigen::Matrix<
       std::complex<double>,3,3>::Zero()), ZN(Eigen::Matrix<std::complex<double>,4,
       4>::Zero()), UM(Eigen::Matrix<std::complex<double>,2,2>::Zero()), UP(
-      Eigen::Matrix<std::complex<double>,2,2>::Zero())
+      Eigen::Matrix<std::complex<double>,2,2>::Zero()), ZZ(Eigen::Matrix<double,2,
+      2>::Zero())
 
 {
 }
@@ -54,8 +55,6 @@ void SplitMSSM_physical::clear()
    MGlu = 0.;
    MAh = 0.;
    Mhh = 0.;
-   MVP = 0.;
-   MVZ = 0.;
    MFd = Eigen::Matrix<double,3,1>::Zero();
    Vd = Eigen::Matrix<std::complex<double>,3,3>::Zero();
    Ud = Eigen::Matrix<std::complex<double>,3,3>::Zero();
@@ -71,6 +70,8 @@ void SplitMSSM_physical::clear()
    UM = Eigen::Matrix<std::complex<double>,2,2>::Zero();
    UP = Eigen::Matrix<std::complex<double>,2,2>::Zero();
    MVWp = 0.;
+   MVP = 0.;
+   MVZ = 0.;
 
 }
 
@@ -100,7 +101,7 @@ Eigen::ArrayXd SplitMSSM_physical::get() const
 {
    Eigen::ArrayXd pars(get_masses());
 
-   pars.conservativeResize(182);
+   pars.conservativeResize(186);
 
    pars(26) = Re(Vd(0,0));
    pars(27) = Im(Vd(0,0));
@@ -258,6 +259,10 @@ Eigen::ArrayXd SplitMSSM_physical::get() const
    pars(179) = Im(UP(1,0));
    pars(180) = Re(UP(1,1));
    pars(181) = Im(UP(1,1));
+   pars(182) = ZZ(0,0);
+   pars(183) = ZZ(0,1);
+   pars(184) = ZZ(1,0);
+   pars(185) = ZZ(1,1);
 
 
    return pars;
@@ -345,6 +350,10 @@ void SplitMSSM_physical::set(const Eigen::ArrayXd& pars)
    UP(0,1) = std::complex<double>(pars(176), pars(177));
    UP(1,0) = std::complex<double>(pars(178), pars(179));
    UP(1,1) = std::complex<double>(pars(180), pars(181));
+   ZZ(0,0) = pars(182);
+   ZZ(0,1) = pars(183);
+   ZZ(1,0) = pars(184);
+   ZZ(1,1) = pars(185);
 
 }
 
@@ -360,24 +369,24 @@ Eigen::ArrayXd SplitMSSM_physical::get_masses() const
    pars(5) = MGlu;
    pars(6) = MAh;
    pars(7) = Mhh;
-   pars(8) = MVP;
-   pars(9) = MVZ;
-   pars(10) = MFd(0);
-   pars(11) = MFd(1);
-   pars(12) = MFd(2);
-   pars(13) = MFu(0);
-   pars(14) = MFu(1);
-   pars(15) = MFu(2);
-   pars(16) = MFe(0);
-   pars(17) = MFe(1);
-   pars(18) = MFe(2);
-   pars(19) = MChi(0);
-   pars(20) = MChi(1);
-   pars(21) = MChi(2);
-   pars(22) = MChi(3);
-   pars(23) = MCha(0);
-   pars(24) = MCha(1);
-   pars(25) = MVWp;
+   pars(8) = MFd(0);
+   pars(9) = MFd(1);
+   pars(10) = MFd(2);
+   pars(11) = MFu(0);
+   pars(12) = MFu(1);
+   pars(13) = MFu(2);
+   pars(14) = MFe(0);
+   pars(15) = MFe(1);
+   pars(16) = MFe(2);
+   pars(17) = MChi(0);
+   pars(18) = MChi(1);
+   pars(19) = MChi(2);
+   pars(20) = MChi(3);
+   pars(21) = MCha(0);
+   pars(22) = MCha(1);
+   pars(23) = MVWp;
+   pars(24) = MVP;
+   pars(25) = MVZ;
 
    return pars;
 }
@@ -392,24 +401,24 @@ void SplitMSSM_physical::set_masses(const Eigen::ArrayXd& pars)
    MGlu = pars(5);
    MAh = pars(6);
    Mhh = pars(7);
-   MVP = pars(8);
-   MVZ = pars(9);
-   MFd(0) = pars(10);
-   MFd(1) = pars(11);
-   MFd(2) = pars(12);
-   MFu(0) = pars(13);
-   MFu(1) = pars(14);
-   MFu(2) = pars(15);
-   MFe(0) = pars(16);
-   MFe(1) = pars(17);
-   MFe(2) = pars(18);
-   MChi(0) = pars(19);
-   MChi(1) = pars(20);
-   MChi(2) = pars(21);
-   MChi(3) = pars(22);
-   MCha(0) = pars(23);
-   MCha(1) = pars(24);
-   MVWp = pars(25);
+   MFd(0) = pars(8);
+   MFd(1) = pars(9);
+   MFd(2) = pars(10);
+   MFu(0) = pars(11);
+   MFu(1) = pars(12);
+   MFu(2) = pars(13);
+   MFe(0) = pars(14);
+   MFe(1) = pars(15);
+   MFe(2) = pars(16);
+   MChi(0) = pars(17);
+   MChi(1) = pars(18);
+   MChi(2) = pars(19);
+   MChi(3) = pars(20);
+   MCha(0) = pars(21);
+   MCha(1) = pars(22);
+   MVWp = pars(23);
+   MVP = pars(24);
+   MVZ = pars(25);
 
 }
 
@@ -424,8 +433,6 @@ void SplitMSSM_physical::print(std::ostream& ostr) const
    ostr << "MGlu = " << MGlu << '\n';
    ostr << "MAh = " << MAh << '\n';
    ostr << "Mhh = " << Mhh << '\n';
-   ostr << "MVP = " << MVP << '\n';
-   ostr << "MVZ = " << MVZ << '\n';
    ostr << "MFd = " << MFd.transpose() << '\n';
    ostr << "MFu = " << MFu.transpose() << '\n';
    ostr << "MFe = " << MFe.transpose() << '\n';
@@ -445,6 +452,7 @@ void SplitMSSM_physical::print(std::ostream& ostr) const
    ostr << "ZN = " << ZN << '\n';
    ostr << "UM = " << UM << '\n';
    ostr << "UP = " << UP << '\n';
+   ostr << "ZZ = " << ZZ << '\n';
 
 }
 

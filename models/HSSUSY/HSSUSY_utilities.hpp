@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:29:37
+// File generated at Tue 8 Mar 2016 16:05:51
 
 #ifndef HSSUSY_UTILITIES_H
 #define HSSUSY_UTILITIES_H
@@ -36,7 +36,9 @@ class QedQcd;
 }
 
 namespace flexiblesusy {
-class Observables;
+
+class HSSUSY_observables;
+class Physical_input;
 
 class HSSUSY_parameter_getter {
 public:
@@ -124,10 +126,20 @@ std::valarray<double> HSSUSY_spectrum_plotter::to_valarray(const Eigen::Array<Sc
 namespace HSSUSY_database {
 
 /// append parameter point to database
-void to_database(const std::string&, const HSSUSY_mass_eigenstates&, const softsusy::QedQcd* qedqcd = 0, const Observables* observables = 0);
+void to_database(
+   const std::string&,
+   const HSSUSY_mass_eigenstates&,
+   const softsusy::QedQcd* qedqcd = 0,
+   const Physical_input* physical_input = 0,
+   const HSSUSY_observables* observables = 0);
 
 /// fill model from an entry of the database
-HSSUSY_mass_eigenstates from_database(const std::string&, std::size_t, softsusy::QedQcd* qedqcd = 0, Observables* observables = 0);
+HSSUSY_mass_eigenstates from_database(
+   const std::string&,
+   std::size_t,
+   softsusy::QedQcd* qedqcd = 0,
+   Physical_input* physical_input = 0,
+   HSSUSY_observables* observables = 0);
 
 } // namespace HSSUSY_database
 

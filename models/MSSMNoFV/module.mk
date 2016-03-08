@@ -34,6 +34,7 @@ LIBMSSMNoFV_HDR :=
 
 ifneq ($(findstring two_scale,$(ALGORITHMS)),)
 LIBMSSMNoFV_SRC += \
+		$(DIR)/MSSMNoFV_effective_couplings.cpp \
 		$(DIR)/MSSMNoFV_mass_eigenstates.cpp \
 		$(DIR)/MSSMNoFV_info.cpp \
 		$(DIR)/MSSMNoFV_input_parameters.cpp \
@@ -56,6 +57,7 @@ EXEMSSMNoFV_SRC += \
 		$(DIR)/scan_MSSMNoFV.cpp
 LIBMSSMNoFV_HDR += \
 		$(DIR)/MSSMNoFV_convergence_tester.hpp \
+		$(DIR)/MSSMNoFV_effective_couplings.hpp \
 		$(DIR)/MSSMNoFV_high_scale_constraint.hpp \
 		$(DIR)/MSSMNoFV_mass_eigenstates.hpp \
 		$(DIR)/MSSMNoFV_info.hpp \
@@ -187,6 +189,9 @@ clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-obj
 		-rm -f $(EXEMSSMNoFV_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
+		@true
+
+clean-obj::     clean-$(MODNAME)-obj
 
 clean::         clean-$(MODNAME)
 

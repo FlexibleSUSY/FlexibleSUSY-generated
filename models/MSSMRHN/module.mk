@@ -34,6 +34,7 @@ LIBMSSMRHN_HDR :=
 
 ifneq ($(findstring two_scale,$(ALGORITHMS)),)
 LIBMSSMRHN_SRC += \
+		$(DIR)/MSSMRHN_effective_couplings.cpp \
 		$(DIR)/MSSMRHN_mass_eigenstates.cpp \
 		$(DIR)/MSSMRHN_info.cpp \
 		$(DIR)/MSSMRHN_input_parameters.cpp \
@@ -56,6 +57,7 @@ EXEMSSMRHN_SRC += \
 		$(DIR)/scan_MSSMRHN.cpp
 LIBMSSMRHN_HDR += \
 		$(DIR)/MSSMRHN_convergence_tester.hpp \
+		$(DIR)/MSSMRHN_effective_couplings.hpp \
 		$(DIR)/MSSMRHN_high_scale_constraint.hpp \
 		$(DIR)/MSSMRHN_mass_eigenstates.hpp \
 		$(DIR)/MSSMRHN_info.hpp \
@@ -187,6 +189,9 @@ clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-obj
 		-rm -f $(EXEMSSMRHN_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
+		@true
+
+clean-obj::     clean-$(MODNAME)-obj
 
 clean::         clean-$(MODNAME)
 

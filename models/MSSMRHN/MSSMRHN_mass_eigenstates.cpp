@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:43:28
+// File generated at Tue 8 Mar 2016 18:34:08
 
 /**
  * @file MSSMRHN_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Sun 10 Jan 2016 15:43:28 with FlexibleSUSY
- * 1.3.2 (git commit: v1.3.2) and SARAH 4.6.0 .
+ * This file was generated at Tue 8 Mar 2016 18:34:08 with FlexibleSUSY
+ * 1.4.0 (git commit: v1.4.0) and SARAH 4.7.0 .
  */
 
 #include "MSSMRHN_mass_eigenstates.hpp"
@@ -100,14 +100,14 @@ CLASSNAME::MSSMRHN_mass_eigenstates(const MSSMRHN_input_parameters& input_)
 #ifdef ENABLE_THREADS
    , thread_exception()
 #endif
-   , MVG(0), MGlu(0), MVP(0), MVZ(0), MSd(Eigen::Array<double,6,1>::Zero()),
-      MSu(Eigen::Array<double,6,1>::Zero()), MSe(Eigen::Array<double,6,1>::Zero())
-      , MSv(Eigen::Array<double,6,1>::Zero()), Mhh(Eigen::Array<double,2,1>::Zero(
-      )), MAh(Eigen::Array<double,2,1>::Zero()), MHpm(Eigen::Array<double,2,1>
-      ::Zero()), MChi(Eigen::Array<double,4,1>::Zero()), MFv(Eigen::Array<double,6
-      ,1>::Zero()), MCha(Eigen::Array<double,2,1>::Zero()), MFe(Eigen::Array<
-      double,3,1>::Zero()), MFd(Eigen::Array<double,3,1>::Zero()), MFu(
-      Eigen::Array<double,3,1>::Zero()), MVWm(0)
+   , MVG(0), MGlu(0), MSd(Eigen::Array<double,6,1>::Zero()), MSu(Eigen::Array<
+      double,6,1>::Zero()), MSe(Eigen::Array<double,6,1>::Zero()), MSv(
+      Eigen::Array<double,6,1>::Zero()), Mhh(Eigen::Array<double,2,1>::Zero()),
+      MAh(Eigen::Array<double,2,1>::Zero()), MHpm(Eigen::Array<double,2,1>::Zero()
+      ), MChi(Eigen::Array<double,4,1>::Zero()), MFv(Eigen::Array<double,6,1>
+      ::Zero()), MCha(Eigen::Array<double,2,1>::Zero()), MFe(Eigen::Array<double,3
+      ,1>::Zero()), MFd(Eigen::Array<double,3,1>::Zero()), MFu(Eigen::Array<double
+      ,3,1>::Zero()), MVWm(0), MVP(0), MVZ(0)
 
    , ZD(Eigen::Matrix<double,6,6>::Zero()), ZU(Eigen::Matrix<double,6,6>::Zero(
       )), ZE(Eigen::Matrix<double,6,6>::Zero()), ZV(Eigen::Matrix<double,6,6>
@@ -120,7 +120,7 @@ CLASSNAME::MSSMRHN_mass_eigenstates(const MSSMRHN_input_parameters& input_)
       ,3>::Zero()), ZDL(Eigen::Matrix<std::complex<double>,3,3>::Zero()), ZDR(
       Eigen::Matrix<std::complex<double>,3,3>::Zero()), ZUL(Eigen::Matrix<
       std::complex<double>,3,3>::Zero()), ZUR(Eigen::Matrix<std::complex<double>,3
-      ,3>::Zero())
+      ,3>::Zero()), ZZ(Eigen::Matrix<double,2,2>::Zero())
 
    , PhaseGlu(1,0)
 
@@ -571,8 +571,6 @@ void CLASSNAME::print(std::ostream& ostr) const
            "----------------------------------------\n";
    ostr << "MVG = " << MVG << '\n';
    ostr << "MGlu = " << MGlu << '\n';
-   ostr << "MVP = " << MVP << '\n';
-   ostr << "MVZ = " << MVZ << '\n';
    ostr << "MSd = " << MSd.transpose() << '\n';
    ostr << "MSu = " << MSu.transpose() << '\n';
    ostr << "MSe = " << MSe.transpose() << '\n';
@@ -608,6 +606,7 @@ void CLASSNAME::print(std::ostream& ostr) const
    ostr << "ZDR = " << ZDR << '\n';
    ostr << "ZUL = " << ZUL << '\n';
    ostr << "ZUR = " << ZUR << '\n';
+   ostr << "ZZ = " << ZZ << '\n';
 
    physical.print(ostr);
 }
@@ -666,24 +665,23 @@ void CLASSNAME::calculate_DRbar_masses()
 
    solve_ewsb_tree_level_via_soft_higgs_masses();
 
-   calculate_MVG();
-   calculate_MVP();
-   calculate_MVZ();
+   calculate_MVPVZ();
    calculate_MVWm();
-   calculate_MGlu();
-   calculate_MSd();
-   calculate_MSu();
-   calculate_MSe();
-   calculate_MSv();
-   calculate_Mhh();
-   calculate_MAh();
-   calculate_MHpm();
-   calculate_MChi();
-   calculate_MFv();
-   calculate_MCha();
-   calculate_MFe();
-   calculate_MFd();
    calculate_MFu();
+   calculate_MFd();
+   calculate_MFe();
+   calculate_MCha();
+   calculate_MFv();
+   calculate_MChi();
+   calculate_MHpm();
+   calculate_MAh();
+   calculate_Mhh();
+   calculate_MSv();
+   calculate_MSe();
+   calculate_MSu();
+   calculate_MSd();
+   calculate_MGlu();
+   calculate_MVG();
 
    mHd2 = old_mHd2;
    mHu2 = old_mHu2;
@@ -781,8 +779,6 @@ void CLASSNAME::copy_DRbar_masses_to_pole_masses()
 {
    PHYSICAL(MVG) = MVG;
    PHYSICAL(MGlu) = MGlu;
-   PHYSICAL(MVP) = MVP;
-   PHYSICAL(MVZ) = MVZ;
    PHYSICAL(MSd) = MSd;
    PHYSICAL(ZD) = ZD;
    PHYSICAL(MSu) = MSu;
@@ -814,6 +810,8 @@ void CLASSNAME::copy_DRbar_masses_to_pole_masses()
    PHYSICAL(ZUL) = ZUL;
    PHYSICAL(ZUR) = ZUR;
    PHYSICAL(MVWm) = MVWm;
+   PHYSICAL(MVP) = MVP;
+   PHYSICAL(MVZ) = MVZ;
 
 }
 
@@ -887,8 +885,6 @@ void CLASSNAME::clear_DRbar_parameters()
 {
    MVG = 0.;
    MGlu = 0.;
-   MVP = 0.;
-   MVZ = 0.;
    MSd = Eigen::Matrix<double,6,1>::Zero();
    ZD = Eigen::Matrix<double,6,6>::Zero();
    MSu = Eigen::Matrix<double,6,1>::Zero();
@@ -920,6 +916,8 @@ void CLASSNAME::clear_DRbar_parameters()
    ZUL = Eigen::Matrix<std::complex<double>,3,3>::Zero();
    ZUR = Eigen::Matrix<std::complex<double>,3,3>::Zero();
    MVWm = 0.;
+   MVP = 0.;
+   MVZ = 0.;
 
    PhaseGlu = std::complex<double>(1.,0.);
 
@@ -1001,39 +999,7 @@ double CLASSNAME::get_mass_matrix_Glu() const
 void CLASSNAME::calculate_MGlu()
 {
    const auto mass_matrix_Glu = get_mass_matrix_Glu();
-   MGlu = calculate_singlet_mass(mass_matrix_Glu, PhaseGlu);
-}
-
-double CLASSNAME::get_mass_matrix_VP() const
-{
-   const double mass_matrix_VP = Re(0);
-
-   return mass_matrix_VP;
-}
-
-void CLASSNAME::calculate_MVP()
-{
-   const auto mass_matrix_VP = get_mass_matrix_VP();
-   MVP = calculate_singlet_mass(mass_matrix_VP);
-}
-
-double CLASSNAME::get_mass_matrix_VZ() const
-{
-   const double mass_matrix_VZ = Re(0.25*(Sqr(vd) + Sqr(vu))*Sqr(g2*Cos(
-      ThetaW()) + 0.7745966692414834*g1*Sin(ThetaW())));
-
-   return mass_matrix_VZ;
-}
-
-void CLASSNAME::calculate_MVZ()
-{
-   const auto mass_matrix_VZ = get_mass_matrix_VZ();
-   MVZ = calculate_singlet_mass(mass_matrix_VZ);
-
-   if (MVZ < 0.)
-      problems.flag_tachyon(MSSMRHN_info::VZ);
-
-   MVZ = AbsSqrt(MVZ);
+   MGlu = calculate_majorana_singlet_mass(mass_matrix_Glu, PhaseGlu);
 }
 
 Eigen::Matrix<double,6,6> CLASSNAME::get_mass_matrix_Sd() const
@@ -1109,8 +1075,9 @@ void CLASSNAME::calculate_MSd()
 #endif
 
 
-   if (MSd.minCoeff() < 0.)
+   if (MSd.minCoeff() < 0.) {
       problems.flag_tachyon(MSSMRHN_info::Sd);
+   }
 
    MSd = AbsSqrt(MSd);
 }
@@ -1185,8 +1152,9 @@ void CLASSNAME::calculate_MSu()
 #endif
 
 
-   if (MSu.minCoeff() < 0.)
+   if (MSu.minCoeff() < 0.) {
       problems.flag_tachyon(MSSMRHN_info::Su);
+   }
 
    MSu = AbsSqrt(MSu);
 }
@@ -1264,8 +1232,9 @@ void CLASSNAME::calculate_MSe()
 #endif
 
 
-   if (MSe.minCoeff() < 0.)
+   if (MSe.minCoeff() < 0.) {
       problems.flag_tachyon(MSSMRHN_info::Se);
+   }
 
    MSe = AbsSqrt(MSe);
 }
@@ -1364,8 +1333,9 @@ void CLASSNAME::calculate_MSv()
 #endif
 
 
-   if (MSv.minCoeff() < 0.)
+   if (MSv.minCoeff() < 0.) {
       problems.flag_tachyon(MSSMRHN_info::Sv);
+   }
 
    MSv = AbsSqrt(MSv);
 }
@@ -1401,8 +1371,9 @@ void CLASSNAME::calculate_Mhh()
 #endif
 
 
-   if (Mhh.minCoeff() < 0.)
+   if (Mhh.minCoeff() < 0.) {
       problems.flag_tachyon(MSSMRHN_info::hh);
+   }
 
    Mhh = AbsSqrt(Mhh);
 }
@@ -1443,8 +1414,9 @@ void CLASSNAME::calculate_MAh()
 #endif
 
 
-   if (MAh.minCoeff() < 0.)
+   if (MAh.minCoeff() < 0.) {
       problems.flag_tachyon(MSSMRHN_info::Ah);
+   }
 
    MAh = AbsSqrt(MAh);
 }
@@ -1479,8 +1451,9 @@ void CLASSNAME::calculate_MHpm()
 #endif
 
 
-   if (MHpm.minCoeff() < 0.)
+   if (MHpm.minCoeff() < 0.) {
       problems.flag_tachyon(MSSMRHN_info::Hpm);
+   }
 
    MHpm = AbsSqrt(MHpm);
 }
@@ -1707,10 +1680,48 @@ void CLASSNAME::calculate_MVWm()
    const auto mass_matrix_VWm = get_mass_matrix_VWm();
    MVWm = calculate_singlet_mass(mass_matrix_VWm);
 
-   if (MVWm < 0.)
+   if (MVWm < 0.) {
       problems.flag_tachyon(MSSMRHN_info::VWm);
+   }
 
    MVWm = AbsSqrt(MVWm);
+}
+
+Eigen::Matrix<double,2,2> CLASSNAME::get_mass_matrix_VPVZ() const
+{
+   Eigen::Matrix<double,2,2> mass_matrix_VPVZ;
+
+   mass_matrix_VPVZ(0,0) = 0.15*Sqr(g1)*Sqr(vd) + 0.15*Sqr(g1)*Sqr(vu);
+   mass_matrix_VPVZ(0,1) = -0.19364916731037085*g1*g2*Sqr(vd) -
+      0.19364916731037085*g1*g2*Sqr(vu);
+   mass_matrix_VPVZ(1,1) = 0.25*Sqr(g2)*Sqr(vd) + 0.25*Sqr(g2)*Sqr(vu);
+
+   Symmetrize(mass_matrix_VPVZ);
+
+   return mass_matrix_VPVZ;
+}
+
+void CLASSNAME::calculate_MVPVZ()
+{
+   const auto mass_matrix_VPVZ(get_mass_matrix_VPVZ());
+   Eigen::Array<double,2,1> MVPVZ;
+
+
+#ifdef CHECK_EIGENVALUE_ERROR
+   double eigenvalue_error;
+   fs_diagonalize_hermitian(mass_matrix_VPVZ, MVPVZ, ZZ, eigenvalue_error
+      );
+   ZZ.transposeInPlace();
+#else
+   fs_diagonalize_hermitian(mass_matrix_VPVZ, MVPVZ, ZZ);
+   ZZ.transposeInPlace();
+#endif
+
+
+   MVPVZ = AbsSqrt(MVPVZ);
+
+   MVP = 0.;
+   MVZ = MVPVZ(1);
 }
 
 
@@ -19764,7 +19775,7 @@ void CLASSNAME::calculate_MVZ_pole()
       return;
 
    // diagonalization with medium precision
-   const double M_tree(get_mass_matrix_VZ());
+   const double M_tree(Sqr(MVZ));
    const double p = MVZ;
    const double self_energy = Re(self_energy_VZ(p));
    const double mass_sqr = M_tree - self_energy;
@@ -20306,16 +20317,16 @@ void CLASSNAME::calculate_MFu_pole()
       TOP_2LOOP_CORRECTION_QCD;
    const double currentScale = get_scale();
 
-   const double qcd_1l = 0.025330295910584444*(-1.6666666666666667 + 1.*
-      Log(Sqr(MFu(2))/Sqr(currentScale)))*Sqr(g3);
+   const double qcd_1l = -0.008443431970194815*(5. - 3.*Log(Sqr(MFu(2))
+      /Sqr(currentScale)))*Sqr(g3);
 
    double qcd_2l = 0.;
 
    if (add_2loop_corrections) {
-      qcd_2l = -0.005191204615668296*Power(g3,4) +
-         0.0032883224409535764*Power(g3,4)*Log(Sqr(MFu(2))/Sqr(currentScale)) -
-         0.0008822328500119351*Power(g3,4)*Sqr(Log(Power(MFu(2),2)/Sqr(
-         currentScale)));
+      qcd_2l = -0.005191204615668296*Power(g3,4) -
+         0.0032883224409535764*Power(g3,4)*Log(Sqr(currentScale)/Sqr(MFu(2))) -
+         0.0008822328500119351*Power(g3,4)*Sqr(Log(Power(currentScale,2)/Sqr(
+         MFu(2))));
    }
 
    Eigen::Matrix<double,3,3> self_energy_1;
@@ -20373,7 +20384,7 @@ void CLASSNAME::calculate_MVWm_pole()
       return;
 
    // diagonalization with medium precision
-   const double M_tree(get_mass_matrix_VWm());
+   const double M_tree(Sqr(MVWm));
    const double p = MVWm;
    const double self_energy = Re(self_energy_VWm(p));
    const double mass_sqr = M_tree - self_energy;
@@ -20390,7 +20401,7 @@ double CLASSNAME::calculate_MVWm_pole(double p)
       return 0.;
 
    const double self_energy = Re(self_energy_VWm(p));
-   const double mass_sqr = get_mass_matrix_VWm() - self_energy;
+   const double mass_sqr = Sqr(MVWm) - self_energy;
 
    if (mass_sqr < 0.)
       problems.flag_tachyon(VWm);
@@ -20404,7 +20415,7 @@ double CLASSNAME::calculate_MVZ_pole(double p)
       return 0.;
 
    const double self_energy = Re(self_energy_VZ(p));
-   const double mass_sqr = get_mass_matrix_VZ() - self_energy;
+   const double mass_sqr = Sqr(MVZ) - self_energy;
 
    if (mass_sqr < 0.)
       problems.flag_tachyon(VZ);
@@ -20456,15 +20467,19 @@ double CLASSNAME::calculate_MFu_DRbar(double m_pole, int idx) const
       idx, idx));
 
    const double currentScale = get_scale();
-   const double qcd_1l = 0.025330295910584444*(-1.6666666666666667 + 1.*
-      Log(Sqr(MFu(idx))/Sqr(currentScale)))*Sqr(g3);
-   const double qcd_2l = -0.003408916029785599*Power(g3,4) +
-      0.0011495761378943394*Power(g3,4)*Log(Sqr(MFu(idx))/Sqr(currentScale)) -
-      0.00024060895909416413*Power(g3,4)*Sqr(Log(Power(MFu(idx),2)/Sqr(
-      currentScale)));
+   const double qcd_1l = -0.008443431970194815*(5. - 3.*Log(Sqr(MFu(idx))
+      /Sqr(currentScale)))*Sqr(g3);
+   double qcd_2l = 0., qcd_3l = 0.;
+
+   if (get_thresholds() > 1) {
+      qcd_2l = -0.003408916029785599*Power(g3,4) -
+         0.0011495761378943394*Power(g3,4)*Log(Sqr(currentScale)/Sqr(MFu(idx)))
+         - 0.00024060895909416413*Power(g3,4)*Sqr(Log(Power(currentScale,2)
+         /Sqr(MFu(idx))));
+   }
 
    const double m_susy_drbar = m_pole + self_energy_1 + m_pole * (
-      self_energy_PL + self_energy_PR + qcd_1l + qcd_2l);
+      self_energy_PL + self_energy_PR + qcd_1l + qcd_2l + qcd_3l);
 
    return m_susy_drbar;
 }
@@ -20524,14 +20539,24 @@ double CLASSNAME::calculate_MVWm_DRbar(double m_pole)
 }
 
 
-double CLASSNAME::ThetaW() const
-{
-   return ArcTan((0.7745966692414834*g1)/g2);
-}
-
 double CLASSNAME::v() const
 {
-   return 2*Sqrt(Sqr(MVWm)/Sqr(g2));
+   return Sqrt(Sqr(vd) + Sqr(vu));
+}
+
+double CLASSNAME::Betax() const
+{
+   return ArcSin(Abs(ZP(0,1)));
+}
+
+double CLASSNAME::Alpha() const
+{
+   return ArcCos(ZH(0,1));
+}
+
+double CLASSNAME::ThetaW() const
+{
+   return ArcCos(Abs(ZZ(0,0)));
 }
 
 

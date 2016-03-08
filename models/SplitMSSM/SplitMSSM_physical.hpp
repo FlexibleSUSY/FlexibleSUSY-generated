@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:30:09
+// File generated at Tue 8 Mar 2016 16:05:32
 
 #ifndef SplitMSSM_PHYSICAL_H
 #define SplitMSSM_PHYSICAL_H
@@ -46,14 +46,14 @@ struct SplitMSSM_physical {
    double MGlu;
    double MAh;
    double Mhh;
-   double MVP;
-   double MVZ;
    Eigen::Array<double,3,1> MFd;
    Eigen::Array<double,3,1> MFu;
    Eigen::Array<double,3,1> MFe;
    Eigen::Array<double,4,1> MChi;
    Eigen::Array<double,2,1> MCha;
    double MVWp;
+   double MVP;
+   double MVZ;
 
    Eigen::Matrix<std::complex<double>,3,3> Vd;
    Eigen::Matrix<std::complex<double>,3,3> Ud;
@@ -64,6 +64,7 @@ struct SplitMSSM_physical {
    Eigen::Matrix<std::complex<double>,4,4> ZN;
    Eigen::Matrix<std::complex<double>,2,2> UM;
    Eigen::Matrix<std::complex<double>,2,2> UP;
+   Eigen::Matrix<double,2,2> ZZ;
 
 };
 

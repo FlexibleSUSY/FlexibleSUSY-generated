@@ -16,18 +16,25 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 10 Jan 2016 15:54:28
+// File generated at Tue 8 Mar 2016 18:44:43
 
 #include "MSSM_observables.hpp"
 #include "MSSM_mass_eigenstates.hpp"
+#include "MSSM_effective_couplings.hpp"
 #include "gm2calc_interface.hpp"
 #include "eigen_utils.hpp"
 #include "numerics2.hpp"
+#include "wrappers.hpp"
 #include "lowe.h"
+#include "physical_input.hpp"
 
 #define MODEL model
 #define AMUGM2CALC a_muon_gm2calc
 #define AMUGM2CALCUNCERTAINTY a_muon_gm2calc_uncertainty
+#define EFFCPHIGGSPHOTONPHOTON eff_cp_higgs_photon_photon
+#define EFFCPHIGGSGLUONGLUON eff_cp_higgs_gluon_gluon
+#define EFFCPPSEUDOSCALARPHOTONPHOTON eff_cp_pseudoscalar_photon_photon
+#define EFFCPPSEUDOSCALARGLUONGLUON eff_cp_pseudoscalar_gluon_gluon
 
 #define ALPHA_S_MZ qedqcd.displayAlpha(softsusy::ALPHAS)
 #define MWPole qedqcd.displayPoleMW()
@@ -39,10 +46,46 @@
 
 namespace flexiblesusy {
 
-Observables calculate_observables(const MSSM_mass_eigenstates& model,
-                                  const softsusy::QedQcd& qedqcd)
+const unsigned MSSM_observables::NUMBER_OF_OBSERVABLES;
+
+MSSM_observables::MSSM_observables()
+
 {
-   Observables observables;
+}
+
+Eigen::ArrayXd MSSM_observables::get() const
+{
+   Eigen::ArrayXd vec(1);
+
+   vec(0) = 0.;
+
+   return vec;
+}
+
+std::vector<std::string> MSSM_observables::get_names()
+{
+   std::vector<std::string> names(1);
+
+   names[0] = "no observables defined";
+
+   return names;
+}
+
+void MSSM_observables::clear()
+{
+
+}
+
+void MSSM_observables::set(const Eigen::ArrayXd& vec)
+{
+
+}
+
+MSSM_observables calculate_observables(const MSSM_mass_eigenstates& model,
+                                              const softsusy::QedQcd& qedqcd,
+                                              const Physical_input& physical_input)
+{
+   MSSM_observables observables;
 
    
 
