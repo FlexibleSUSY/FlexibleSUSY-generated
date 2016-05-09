@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 16:08:33
+// File generated at Mon 9 May 2016 12:11:22
 
 #include "TMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -261,7 +261,7 @@ Eigen::ArrayXd TMSSM_soft_parameters::get() const
 void TMSSM_soft_parameters::print(std::ostream& ostr) const
 {
    TMSSM_susy_parameters::print(ostr);
-   ostr << "soft parameters:\n";
+   ostr << "soft parameters at Q = " << get_scale() << ":\n";
    ostr << "TYd = " << TYd << '\n';
    ostr << "TYe = " << TYe << '\n';
    ostr << "TLambdax = " << TLambdax << '\n';
@@ -489,7 +489,7 @@ void TMSSM_soft_parameters::calc_soft_traces(Soft_traces& soft_traces) const
 
 std::ostream& operator<<(std::ostream& ostr, const TMSSM_soft_parameters& soft_pars)
 {
-   soft_pars.print(std::cout);
+   soft_pars.print(ostr);
    return ostr;
 }
 

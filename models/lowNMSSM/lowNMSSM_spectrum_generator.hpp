@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 18:11:51
+// File generated at Mon 9 May 2016 13:13:54
 
 #ifndef lowNMSSM_SPECTRUM_GENERATOR_H
 #define lowNMSSM_SPECTRUM_GENERATOR_H
@@ -45,7 +45,6 @@ class lowNMSSM_spectrum_generator
 public:
    lowNMSSM_spectrum_generator()
       : lowNMSSM_spectrum_generator_interface<T>()
-      , solver()
       , susy_scale_constraint()
       , low_scale_constraint()
       , susy_scale(0.)
@@ -61,7 +60,6 @@ public:
    void write_running_couplings(const std::string& filename = "lowNMSSM_rgflow.dat") const;
 
 private:
-   RGFlow<T> solver;
    lowNMSSM_susy_scale_constraint<T> susy_scale_constraint;
    lowNMSSM_low_scale_constraint<T>  low_scale_constraint;
    double susy_scale, low_scale;
@@ -121,6 +119,7 @@ void lowNMSSM_spectrum_generator<T>::run(const softsusy::QedQcd& qedqcd,
                                                   susy_scale_constraint);
    Two_scale_increasing_precision precision(10.0, this->precision_goal);
 
+   RGFlow<T> solver;
    solver.reset();
    solver.set_convergence_tester(&convergence_tester);
    solver.set_running_precision(&precision);

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 18:42:38
+// File generated at Mon 9 May 2016 14:07:20
 
 /**
  * @file MSSMatMGUT_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Tue 8 Mar 2016 18:42:38 with FlexibleSUSY
- * 1.4.0 (git commit: v1.4.0) and SARAH 4.7.0 .
+ * This file was generated at Mon 9 May 2016 14:07:20 with FlexibleSUSY
+ * 1.4.2 (git commit: ba53b7080ae303fc6b5ef4b4ce12d05fef5b6211) and SARAH 4.8.5 .
  */
 
 #include "MSSMatMGUT_mass_eigenstates.hpp"
@@ -428,26 +428,27 @@ int CLASSNAME::solve_ewsb_tree_level()
    return error;
 }
 
-int CLASSNAME::solve_ewsb_tree_level_via_soft_higgs_masses()
+int CLASSNAME::solve_ewsb_tree_level_custom()
 {
    int error = 0;
 
-   const double new_mHd2 = Re((0.025*(-40*vd*AbsSqr(Mu) + 20*vu*BMu + 20*vu*
-      Conj(BMu) - 3*Power(vd,3)*Sqr(g1) - 5*Power(vd,3)*Sqr(g2) + 3*vd*Sqr(g1)*Sqr
-      (vu) + 5*vd*Sqr(g2)*Sqr(vu)))/vd);
-   const double new_mHu2 = Re((0.025*(-40*vu*AbsSqr(Mu) + 20*vd*BMu + 20*vd*
-      Conj(BMu) - 3*Power(vu,3)*Sqr(g1) - 5*Power(vu,3)*Sqr(g2) + 3*vu*Sqr(g1)*Sqr
-      (vd) + 5*vu*Sqr(g2)*Sqr(vd)))/vu);
+   const double old_mHd2 = mHd2;
+   const double old_mHu2 = mHu2;
 
-   if (IsFinite(new_mHd2))
-      mHd2 = new_mHd2;
-   else
-      error = 1;
+   mHd2 = Re((0.025*(-40*vd*AbsSqr(Mu) + 20*vu*BMu + 20*vu*Conj(BMu) - 3*Power(
+      vd,3)*Sqr(g1) - 5*Power(vd,3)*Sqr(g2) + 3*vd*Sqr(g1)*Sqr(vu) + 5*vd*Sqr(g2)*
+      Sqr(vu)))/vd);
+   mHu2 = Re((0.025*(-40*vu*AbsSqr(Mu) + 20*vd*BMu + 20*vd*Conj(BMu) - 3*Power(
+      vu,3)*Sqr(g1) - 5*Power(vu,3)*Sqr(g2) + 3*vu*Sqr(g1)*Sqr(vd) + 5*vu*Sqr(g2)*
+      Sqr(vd)))/vu);
 
-   if (IsFinite(new_mHu2))
-      mHu2 = new_mHu2;
-   else
+   const bool is_finite = IsFinite(mHd2) && IsFinite(mHu2);
+
+   if (!is_finite) {
+      mHd2 = old_mHd2;
+      mHu2 = old_mHu2;
       error = 1;
+   }
 
 
    return error;
@@ -671,7 +672,7 @@ void CLASSNAME::calculate_DRbar_masses()
    const auto old_mHd2 = mHd2;
    const auto old_mHu2 = mHu2;
 
-   solve_ewsb_tree_level_via_soft_higgs_masses();
+   solve_ewsb_tree_level_custom();
 
    calculate_MVPVZ();
    calculate_MVWm();

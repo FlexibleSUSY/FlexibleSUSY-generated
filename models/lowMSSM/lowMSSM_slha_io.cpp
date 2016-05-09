@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 18:29:38
+// File generated at Mon 9 May 2016 13:20:39
 
 #include "lowMSSM_slha_io.hpp"
 #include "lowMSSM_input_parameters.hpp"
@@ -326,19 +326,19 @@ void lowMSSM_slha_io::fill(lowMSSM_input_parameters& input) const
    slha_io.read_block("MINPAR", minpar_processor);
    slha_io.read_block("EXTPAR", extpar_processor);
 
-   slha_io.read_block("TeIN", input.TYeInput);
-   slha_io.read_block("TdIN", input.TYdInput);
-   slha_io.read_block("TuIN", input.TYuInput);
-   input.MuInput = slha_io.read_entry("HMIXIN", 1);
    input.BMuInput = slha_io.read_entry("HMIXIN", 101);
-   slha_io.read_block("MSQ2IN", input.mq2Input);
+   input.MassBInput = slha_io.read_entry("MSOFTIN", 1);
+   input.MassGInput = slha_io.read_entry("MSOFTIN", 3);
+   input.MassWBInput = slha_io.read_entry("MSOFTIN", 2);
+   slha_io.read_block("MSD2IN", input.md2Input);
    slha_io.read_block("MSE2IN", input.me2Input);
    slha_io.read_block("MSL2IN", input.ml2Input);
+   slha_io.read_block("MSQ2IN", input.mq2Input);
    slha_io.read_block("MSU2IN", input.mu2Input);
-   slha_io.read_block("MSD2IN", input.md2Input);
-   input.MassBInput = slha_io.read_entry("MSOFTIN", 1);
-   input.MassWBInput = slha_io.read_entry("MSOFTIN", 2);
-   input.MassGInput = slha_io.read_entry("MSOFTIN", 3);
+   input.MuInput = slha_io.read_entry("HMIXIN", 1);
+   slha_io.read_block("TdIN", input.TYdInput);
+   slha_io.read_block("TeIN", input.TYeInput);
+   slha_io.read_block("TuIN", input.TYuInput);
 
 }
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 19:13:18
+// File generated at Mon 9 May 2016 12:04:14
 
 #include "HGTHDMIIMSSMBC_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -115,8 +115,8 @@ double HGTHDMIIMSSMBC_susy_parameters::calc_beta_Lambda3_two_loop(const Susy_tra
    const double beta_Lambda3_2 = Re(-0.01*twoLoop*(1200*Power(Lambda4,3)
       + 8800*Lambda1*Lambda6*Lambda7 + 8800*Lambda2*Lambda6*Lambda7 + 7200*
       Lambda5*Lambda6*Lambda7 - 45*Power(g1,4)*traceYdAdjYd + 225*Power(g2,4)*
-      traceYdAdjYd + 4800*Lambda6*Lambda7*traceYdAdjYd - 1800*
-      traceYdAdjYdYdAdjYuYuAdjYd - 1800*traceYdAdjYuYuAdjYdYdAdjYd - 3600*
+      traceYdAdjYd + 4800*Lambda6*Lambda7*traceYdAdjYd - 1200*
+      traceYdAdjYdYdAdjYuYuAdjYd - 2400*traceYdAdjYuYuAdjYdYdAdjYd - 3600*
       traceYdAdjYuYuAdjYuYuAdjYd + 225*Power(g1,4)*traceYeAdjYe + 75*Power(g2,4
       )*traceYeAdjYe + 1600*Lambda6*Lambda7*traceYeAdjYe + 171*Power(g1,4)*
       traceYuAdjYu + 225*Power(g2,4)*traceYuAdjYu + 4800*Lambda6*Lambda7*

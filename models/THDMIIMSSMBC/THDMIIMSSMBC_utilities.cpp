@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 17:34:20
+// File generated at Mon 9 May 2016 11:57:18
 
 #include "THDMIIMSSMBC_utilities.hpp"
 #include "THDMIIMSSMBC_input_parameters.hpp"
@@ -246,11 +246,11 @@ THDMIIMSSMBC_mass_eigenstates from_database(
    const std::size_t number_of_mixings = THDMIIMSSMBC_info::NUMBER_OF_MIXINGS;
    const std::size_t number_of_input_parameters = THDMIIMSSMBC_info::NUMBER_OF_INPUT_PARAMETERS;
    const std::size_t number_of_low_energy_input_parameters =
-      (qedqcd ? softsusy::NUMBER_OF_LOW_ENERGY_INPUT_PARAMETERS : 0);
+      (qedqcd ? softsusy::NUMBER_OF_LOW_ENERGY_INPUT_PARAMETERS : 0u);
    const std::size_t number_of_extra_physical_input_parameters =
-      (physical_input ? Physical_input::NUMBER_OF_INPUT_PARAMETERS : 0);
+      (physical_input ? Physical_input::NUMBER_OF_INPUT_PARAMETERS : 0u);
    const std::size_t number_of_observables =
-      (observables ? THDMIIMSSMBC_observables::NUMBER_OF_OBSERVABLES : 0);
+      (observables ? THDMIIMSSMBC_observables::NUMBER_OF_OBSERVABLES : 0u);
    const std::size_t total_entries = 9 + number_of_input_parameters
       + number_of_parameters + number_of_masses + number_of_mixings
       + number_of_low_energy_input_parameters
@@ -259,7 +259,7 @@ THDMIIMSSMBC_mass_eigenstates from_database(
    database::Database db(file_name);
    const Eigen::ArrayXd values(db.extract("Point", entry));
 
-   if (values.rows() < total_entries) {
+   if (static_cast<std::size_t>(values.rows()) < total_entries) {
       ERROR("data set " << entry << " extracted from " << file_name
             << " contains " << values.rows() << " entries."
             " Expected number of entries at least: " << total_entries);

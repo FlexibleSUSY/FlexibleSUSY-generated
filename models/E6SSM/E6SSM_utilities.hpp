@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 17:14:41
+// File generated at Mon 9 May 2016 12:52:31
 
 #ifndef E6SSM_UTILITIES_H
 #define E6SSM_UTILITIES_H
@@ -37,7 +37,7 @@ class QedQcd;
 
 namespace flexiblesusy {
 
-class E6SSM_observables;
+struct E6SSM_observables;
 class Physical_input;
 
 class E6SSM_parameter_getter {

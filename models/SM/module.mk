@@ -18,6 +18,7 @@ SM_TWO_SCALE_MK := \
 		$(SM_TWO_SCALE_SOFT_MK)
 
 SM_SLHA_INPUT := \
+		$(DIR)/LesHouches.in.SM_generated \
 		$(DIR)/LesHouches.in.SM
 
 SM_GNUPLOT := \
@@ -179,6 +180,7 @@ clean-$(MODNAME)-src:
 		-rm -f $(EXESM_SRC)
 		-rm -f $(METACODE_STAMP_SM)
 		-rm -f $(SM_TWO_SCALE_MK)
+		-rm -f $(SM_SLHA_INPUT)
 		-rm -f $(SM_GNUPLOT)
 
 clean-$(MODNAME): clean-$(MODNAME)-src
@@ -224,7 +226,7 @@ $(METACODE_STAMP_SM):
 		@true
 endif
 
-$(LIBSM_DEP) $(EXESM_DEP) $(LIBSM_OBJ) $(EXESM_OBJ): CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS)
+$(LIBSM_DEP) $(EXESM_DEP) $(LIBSM_OBJ) $(EXESM_OBJ): CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBSM_DEP) $(EXESM_DEP) $(LIBSM_OBJ) $(EXESM_OBJ): CPPFLAGS += $(LOOPFUNCFLAGS)
@@ -234,7 +236,7 @@ $(LIBSM): $(LIBSM_OBJ)
 		$(MAKELIB) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(LDLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBSM_DEP) $(EXESM_DEP)
 ALLSRC += $(LIBSM_SRC) $(EXESM_SRC)

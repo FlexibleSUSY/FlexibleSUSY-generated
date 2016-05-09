@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 16:04:21
+// File generated at Mon 9 May 2016 12:04:14
 
 #ifndef SplitMSSM_UTILITIES_H
 #define SplitMSSM_UTILITIES_H
@@ -37,7 +37,7 @@ class QedQcd;
 
 namespace flexiblesusy {
 
-class SplitMSSM_observables;
+struct SplitMSSM_observables;
 class Physical_input;
 
 class SplitMSSM_parameter_getter {

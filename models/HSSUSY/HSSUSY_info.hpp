@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 16:05:51
+// File generated at Mon 9 May 2016 12:02:46
 
 #ifndef HSSUSY_INFO_H
 #define HSSUSY_INFO_H

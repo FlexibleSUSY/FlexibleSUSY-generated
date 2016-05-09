@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 18:27:15
+// File generated at Mon 9 May 2016 13:21:15
 
 #ifndef MSSMRHN_UTILITIES_H
 #define MSSMRHN_UTILITIES_H
@@ -37,7 +37,7 @@ class QedQcd;
 
 namespace flexiblesusy {
 
-class MSSMRHN_observables;
+struct MSSMRHN_observables;
 class Physical_input;
 
 class MSSMRHN_parameter_getter {

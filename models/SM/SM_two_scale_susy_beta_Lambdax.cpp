@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 16:06:30
+// File generated at Mon 9 May 2016 12:03:47
 
 #include "SM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -84,7 +84,7 @@ double SM_susy_parameters::calc_beta_Lambdax_two_loop(const Susy_traces& susy_tr
    double beta_Lambdax;
 
    beta_Lambdax = Re(twoLoop*(-3.411*Power(g1,6) + 38.125*Power(g2,6) +
-      60*traceYdAdjYdYdAdjYdYdAdjYd + 12*traceYdAdjYdYdAdjYuYuAdjYd - 24*
+      60*traceYdAdjYdYdAdjYdYdAdjYd - 24*traceYdAdjYdYdAdjYuYuAdjYd + 12*
       traceYdAdjYuYuAdjYdYdAdjYd - 12*traceYdAdjYuYuAdjYuYuAdjYd + 20*
       traceYeAdjYeYeAdjYeYeAdjYe - 3.42*Power(g1,4)*traceYuAdjYu - 4.5*Power(g2
       ,4)*traceYuAdjYu + 60*traceYuAdjYuYuAdjYuYuAdjYu + 9.435*Power(g1,4)*

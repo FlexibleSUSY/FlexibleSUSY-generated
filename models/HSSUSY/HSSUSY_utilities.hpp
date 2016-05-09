@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 16:05:51
+// File generated at Mon 9 May 2016 12:02:46
 
 #ifndef HSSUSY_UTILITIES_H
 #define HSSUSY_UTILITIES_H
@@ -37,7 +37,7 @@ class QedQcd;
 
 namespace flexiblesusy {
 
-class HSSUSY_observables;
+struct HSSUSY_observables;
 class Physical_input;
 
 class HSSUSY_parameter_getter {

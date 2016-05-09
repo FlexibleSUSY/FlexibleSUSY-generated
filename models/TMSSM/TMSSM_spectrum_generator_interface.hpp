@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 16:10:57
+// File generated at Mon 9 May 2016 12:23:04
 
 #ifndef TMSSM_SPECTRUM_GENERATOR_INTERFACE_H
 #define TMSSM_SPECTRUM_GENERATOR_INTERFACE_H
@@ -56,6 +56,7 @@ public:
    virtual ~TMSSM_spectrum_generator_interface() {}
 
    const TMSSM<T>& get_model() const { return model; }
+   TMSSM<T>& get_model() { return model; }
    const Problems<TMSSM_info::NUMBER_OF_PARTICLES>& get_problems() const {
       return model.get_problems();
    }

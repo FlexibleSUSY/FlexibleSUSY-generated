@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 18:42:43
+// File generated at Mon 9 May 2016 14:07:25
 
 #include "MSSMatMGUT_input_parameters.hpp"
 #include "MSSMatMGUT_spectrum_generator.hpp"
@@ -29,6 +29,8 @@
 
 #include <iostream>
 #include <cstring>
+
+#define INPUTPARAMETER(p) input.p
 
 namespace flexiblesusy {
 
@@ -99,7 +101,13 @@ int main(int argc, char* argv[])
    set_command_line_parameters(argc, argv, input);
 
    softsusy::QedQcd qedqcd;
-   qedqcd.toMz();
+
+   try {
+      qedqcd.to(qedqcd.displayPoleMZ()); // run SM fermion masses to MZ
+   } catch (const std::string& s) {
+      ERROR(s);
+      return EXIT_FAILURE;
+   }
 
    MSSMatMGUT_spectrum_generator<algorithm_type> spectrum_generator;
    spectrum_generator.set_precision_goal(1.0e-4);
@@ -117,7 +125,8 @@ int main(int argc, char* argv[])
 
    for (std::vector<double>::const_iterator it = range.begin(),
            end = range.end(); it != end; ++it) {
-      input.TanBeta = *it;
+      INPUTPARAMETER(TanBeta) = *it;
+
 
       spectrum_generator.run(qedqcd, input);
 
@@ -129,7 +138,7 @@ int main(int argc, char* argv[])
       const bool error = problems.have_problem();
 
       cout << "  "
-           << std::setw(12) << std::left << input.TanBeta << ' '
+           << std::setw(12) << std::left << *it << ' '
            << std::setw(12) << std::left << higgs << ' '
            << std::setw(12) << std::left << error;
       if (error) {

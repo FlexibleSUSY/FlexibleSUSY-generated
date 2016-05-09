@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 16:08:57
+// File generated at Mon 9 May 2016 12:11:47
 
 #ifndef TMSSM_UTILITIES_H
 #define TMSSM_UTILITIES_H
@@ -37,7 +37,7 @@ class QedQcd;
 
 namespace flexiblesusy {
 
-class TMSSM_observables;
+struct TMSSM_observables;
 class Physical_input;
 
 class TMSSM_parameter_getter {

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 18:11:51
+// File generated at Mon 9 May 2016 13:13:54
 
 #ifndef lowNMSSM_SPECTRUM_GENERATOR_INTERFACE_H
 #define lowNMSSM_SPECTRUM_GENERATOR_INTERFACE_H
@@ -56,6 +56,7 @@ public:
    virtual ~lowNMSSM_spectrum_generator_interface() {}
 
    const lowNMSSM<T>& get_model() const { return model; }
+   lowNMSSM<T>& get_model() { return model; }
    const Problems<lowNMSSM_info::NUMBER_OF_PARTICLES>& get_problems() const {
       return model.get_problems();
    }

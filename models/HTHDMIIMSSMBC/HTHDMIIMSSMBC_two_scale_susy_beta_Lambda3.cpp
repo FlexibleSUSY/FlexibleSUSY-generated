@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 18:05:17
+// File generated at Mon 9 May 2016 11:59:06
 
 #include "HTHDMIIMSSMBC_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -92,8 +92,8 @@ double HTHDMIIMSSMBC_susy_parameters::calc_beta_Lambda3_two_loop(const Susy_trac
       traceYdAdjYd + 5*Lambda3*traceYeAdjYe + 8*Sqr(Lambda3) + 8*Sqr(Lambda4))
       - 4*(24*Power(Lambda3,3) + 24*Power(Lambda4,3) + 352*Lambda3*Lambda6*
       Lambda7 + 176*Lambda4*Lambda6*Lambda7 + 144*Lambda5*Lambda6*Lambda7 + 96*
-      Lambda6*Lambda7*traceYdAdjYd + 27*Lambda3*traceYdAdjYdYdAdjYd - 36*
-      traceYdAdjYdYdAdjYuYuAdjYd - 30*Lambda3*traceYdAdjYuYuAdjYd - 36*
+      Lambda6*Lambda7*traceYdAdjYd + 27*Lambda3*traceYdAdjYdYdAdjYd - 24*
+      traceYdAdjYdYdAdjYuYuAdjYd - 30*Lambda3*traceYdAdjYuYuAdjYd - 48*
       traceYdAdjYuYuAdjYdYdAdjYd - 72*traceYdAdjYuYuAdjYuYuAdjYd + 32*Lambda6*
       Lambda7*traceYeAdjYe + 9*Lambda3*traceYeAdjYeYeAdjYe - 80*Lambda3*
       traceYdAdjYd*Sqr(g3) + 128*traceYdAdjYuYuAdjYd*Sqr(g3) + 8*(15*Lambda3 +

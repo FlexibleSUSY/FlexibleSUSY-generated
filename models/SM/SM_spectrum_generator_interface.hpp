@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 16:06:50
+// File generated at Mon 9 May 2016 12:04:07
 
 #ifndef SM_SPECTRUM_GENERATOR_INTERFACE_H
 #define SM_SPECTRUM_GENERATOR_INTERFACE_H
@@ -56,6 +56,7 @@ public:
    virtual ~SM_spectrum_generator_interface() {}
 
    const SM<T>& get_model() const { return model; }
+   SM<T>& get_model() { return model; }
    const Problems<SM_info::NUMBER_OF_PARTICLES>& get_problems() const {
       return model.get_problems();
    }

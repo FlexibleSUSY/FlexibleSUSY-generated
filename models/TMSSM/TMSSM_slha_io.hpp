@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 16:08:57
+// File generated at Mon 9 May 2016 12:11:47
 
 #ifndef TMSSM_SLHA_IO_H
 #define TMSSM_SLHA_IO_H
@@ -72,6 +72,8 @@ public:
    void read_from_file(const std::string&);
    void read_from_source(const std::string&);
    void read_from_stream(std::istream&);
+   void set_block(const std::string& str, SLHA_io::Position position = SLHA_io::back) { slha_io.set_block(str, position); }
+   void set_blocks(const std::vector<std::string>& vec, SLHA_io::Position position = SLHA_io::back) { slha_io.set_blocks(vec, position); }
    void set_extpar(const TMSSM_input_parameters&);
    template <class T> void set_extra(const TMSSM_slha<T>&, const TMSSM_scales&, const TMSSM_observables&);
    void set_minpar(const TMSSM_input_parameters&);

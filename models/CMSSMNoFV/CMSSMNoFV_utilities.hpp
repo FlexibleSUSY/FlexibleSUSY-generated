@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 18:35:34
+// File generated at Mon 9 May 2016 13:45:17
 
 #ifndef CMSSMNoFV_UTILITIES_H
 #define CMSSMNoFV_UTILITIES_H
@@ -37,7 +37,7 @@ class QedQcd;
 
 namespace flexiblesusy {
 
-class CMSSMNoFV_observables;
+struct CMSSMNoFV_observables;
 class Physical_input;
 
 class CMSSMNoFV_parameter_getter {

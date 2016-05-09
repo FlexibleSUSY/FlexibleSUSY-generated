@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 18:24:10
+// File generated at Mon 9 May 2016 13:00:22
 
 #ifndef UMSSM_SPECTRUM_GENERATOR_H
 #define UMSSM_SPECTRUM_GENERATOR_H
@@ -46,7 +46,6 @@ class UMSSM_spectrum_generator
 public:
    UMSSM_spectrum_generator()
       : UMSSM_spectrum_generator_interface<T>()
-      , solver()
       , high_scale_constraint()
       , susy_scale_constraint()
       , low_scale_constraint()
@@ -64,7 +63,6 @@ public:
    void write_running_couplings(const std::string& filename = "UMSSM_rgflow.dat") const;
 
 private:
-   RGFlow<T> solver;
    UMSSM_high_scale_constraint<T> high_scale_constraint;
    UMSSM_susy_scale_constraint<T> susy_scale_constraint;
    UMSSM_low_scale_constraint<T>  low_scale_constraint;
@@ -131,7 +129,7 @@ void UMSSM_spectrum_generator<T>::run(const softsusy::QedQcd& qedqcd,
 
    Two_scale_increasing_precision precision(10.0, this->precision_goal);
 
-   solver.reset();
+   RGFlow<T> solver;
    solver.set_convergence_tester(&convergence_tester);
    solver.set_running_precision(&precision);
    solver.set_initial_guesser(&initial_guesser);

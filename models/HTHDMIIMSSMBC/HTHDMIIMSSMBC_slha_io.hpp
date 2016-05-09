@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 18:05:26
+// File generated at Mon 9 May 2016 11:59:12
 
 #ifndef HTHDMIIMSSMBC_SLHA_IO_H
 #define HTHDMIIMSSMBC_SLHA_IO_H
@@ -72,6 +72,8 @@ public:
    void read_from_file(const std::string&);
    void read_from_source(const std::string&);
    void read_from_stream(std::istream&);
+   void set_block(const std::string& str, SLHA_io::Position position = SLHA_io::back) { slha_io.set_block(str, position); }
+   void set_blocks(const std::vector<std::string>& vec, SLHA_io::Position position = SLHA_io::back) { slha_io.set_blocks(vec, position); }
    void set_extpar(const HTHDMIIMSSMBC_input_parameters&);
    template <class T> void set_extra(const HTHDMIIMSSMBC_slha<T>&, const HTHDMIIMSSMBC_scales&, const HTHDMIIMSSMBC_observables&);
    void set_minpar(const HTHDMIIMSSMBC_input_parameters&);

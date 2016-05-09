@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 16:13:39
+// File generated at Mon 9 May 2016 12:19:27
 
 #include "MRSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -241,7 +241,7 @@ Eigen::ArrayXd MRSSM_soft_parameters::get() const
 void MRSSM_soft_parameters::print(std::ostream& ostr) const
 {
    MRSSM_susy_parameters::print(ostr);
-   ostr << "soft parameters:\n";
+   ostr << "soft parameters at Q = " << get_scale() << ":\n";
    ostr << "BMu = " << BMu << '\n';
    ostr << "BMuD = " << BMuD << '\n';
    ostr << "BMuU = " << BMuU << '\n';
@@ -407,7 +407,7 @@ void MRSSM_soft_parameters::calc_soft_traces(Soft_traces& soft_traces) const
 
 std::ostream& operator<<(std::ostream& ostr, const MRSSM_soft_parameters& soft_pars)
 {
-   soft_pars.print(std::cout);
+   soft_pars.print(ostr);
    return ostr;
 }
 

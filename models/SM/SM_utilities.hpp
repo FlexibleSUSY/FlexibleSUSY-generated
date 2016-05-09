@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 16:06:35
+// File generated at Mon 9 May 2016 12:03:53
 
 #ifndef SM_UTILITIES_H
 #define SM_UTILITIES_H
@@ -37,7 +37,7 @@ class QedQcd;
 
 namespace flexiblesusy {
 
-class SM_observables;
+struct SM_observables;
 class Physical_input;
 
 class SM_parameter_getter {

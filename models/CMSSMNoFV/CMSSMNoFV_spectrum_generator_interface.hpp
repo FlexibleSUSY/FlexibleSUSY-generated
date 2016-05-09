@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 18:37:34
+// File generated at Mon 9 May 2016 14:02:43
 
 #ifndef CMSSMNoFV_SPECTRUM_GENERATOR_INTERFACE_H
 #define CMSSMNoFV_SPECTRUM_GENERATOR_INTERFACE_H
@@ -56,6 +56,7 @@ public:
    virtual ~CMSSMNoFV_spectrum_generator_interface() {}
 
    const CMSSMNoFV<T>& get_model() const { return model; }
+   CMSSMNoFV<T>& get_model() { return model; }
    const Problems<CMSSMNoFV_info::NUMBER_OF_PARTICLES>& get_problems() const {
       return model.get_problems();
    }

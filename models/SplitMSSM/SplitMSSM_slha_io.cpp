@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 16:04:21
+// File generated at Mon 9 May 2016 12:04:14
 
 #include "SplitMSSM_slha_io.hpp"
 #include "SplitMSSM_input_parameters.hpp"
@@ -302,11 +302,11 @@ void SplitMSSM_slha_io::fill(SplitMSSM_input_parameters& input) const
    slha_io.read_block("MINPAR", minpar_processor);
    slha_io.read_block("EXTPAR", extpar_processor);
 
+   slha_io.read_block("MSD2IN", input.msd2);
+   slha_io.read_block("MSE2IN", input.mse2);
+   slha_io.read_block("MSL2IN", input.msl2);
    slha_io.read_block("MSQ2IN", input.msq2);
    slha_io.read_block("MSU2IN", input.msu2);
-   slha_io.read_block("MSD2IN", input.msd2);
-   slha_io.read_block("MSL2IN", input.msl2);
-   slha_io.read_block("MSE2IN", input.mse2);
 
 }
 

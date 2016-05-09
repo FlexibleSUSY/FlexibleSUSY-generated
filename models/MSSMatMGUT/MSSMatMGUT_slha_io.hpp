@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 18:41:50
+// File generated at Mon 9 May 2016 14:06:33
 
 #ifndef MSSMatMGUT_SLHA_IO_H
 #define MSSMatMGUT_SLHA_IO_H
@@ -72,6 +72,8 @@ public:
    void read_from_file(const std::string&);
    void read_from_source(const std::string&);
    void read_from_stream(std::istream&);
+   void set_block(const std::string& str, SLHA_io::Position position = SLHA_io::back) { slha_io.set_block(str, position); }
+   void set_blocks(const std::vector<std::string>& vec, SLHA_io::Position position = SLHA_io::back) { slha_io.set_blocks(vec, position); }
    void set_extpar(const MSSMatMGUT_input_parameters&);
    template <class T> void set_extra(const MSSMatMGUT_slha<T>&, const MSSMatMGUT_scales&, const MSSMatMGUT_observables&);
    void set_minpar(const MSSMatMGUT_input_parameters&);

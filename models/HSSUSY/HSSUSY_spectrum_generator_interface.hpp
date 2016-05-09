@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 16:06:16
+// File generated at Mon 9 May 2016 12:03:34
 
 #ifndef HSSUSY_SPECTRUM_GENERATOR_INTERFACE_H
 #define HSSUSY_SPECTRUM_GENERATOR_INTERFACE_H
@@ -56,6 +56,7 @@ public:
    virtual ~HSSUSY_spectrum_generator_interface() {}
 
    const HSSUSY<T>& get_model() const { return model; }
+   HSSUSY<T>& get_model() { return model; }
    const Problems<HSSUSY_info::NUMBER_OF_PARTICLES>& get_problems() const {
       return model.get_problems();
    }

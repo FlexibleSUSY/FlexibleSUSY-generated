@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 18:05:26
+// File generated at Mon 9 May 2016 11:59:12
 
 #ifndef HTHDMIIMSSMBC_UTILITIES_H
 #define HTHDMIIMSSMBC_UTILITIES_H
@@ -37,7 +37,7 @@ class QedQcd;
 
 namespace flexiblesusy {
 
-class HTHDMIIMSSMBC_observables;
+struct HTHDMIIMSSMBC_observables;
 class Physical_input;
 
 class HTHDMIIMSSMBC_parameter_getter {

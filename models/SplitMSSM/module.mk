@@ -18,6 +18,7 @@ SplitMSSM_TWO_SCALE_MK := \
 		$(SplitMSSM_TWO_SCALE_SOFT_MK)
 
 SplitMSSM_SLHA_INPUT := \
+		$(DIR)/LesHouches.in.SplitMSSM_generated \
 		$(DIR)/LesHouches.in.SplitMSSM
 
 SplitMSSM_GNUPLOT := \
@@ -179,6 +180,7 @@ clean-$(MODNAME)-src:
 		-rm -f $(EXESplitMSSM_SRC)
 		-rm -f $(METACODE_STAMP_SplitMSSM)
 		-rm -f $(SplitMSSM_TWO_SCALE_MK)
+		-rm -f $(SplitMSSM_SLHA_INPUT)
 		-rm -f $(SplitMSSM_GNUPLOT)
 
 clean-$(MODNAME): clean-$(MODNAME)-src
@@ -224,7 +226,7 @@ $(METACODE_STAMP_SplitMSSM):
 		@true
 endif
 
-$(LIBSplitMSSM_DEP) $(EXESplitMSSM_DEP) $(LIBSplitMSSM_OBJ) $(EXESplitMSSM_OBJ): CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS)
+$(LIBSplitMSSM_DEP) $(EXESplitMSSM_DEP) $(LIBSplitMSSM_OBJ) $(EXESplitMSSM_OBJ): CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBSplitMSSM_DEP) $(EXESplitMSSM_DEP) $(LIBSplitMSSM_OBJ) $(EXESplitMSSM_OBJ): CPPFLAGS += $(LOOPFUNCFLAGS)
@@ -234,7 +236,7 @@ $(LIBSplitMSSM): $(LIBSplitMSSM_OBJ)
 		$(MAKELIB) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBSplitMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(LDLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBSplitMSSM_DEP) $(EXESplitMSSM_DEP)
 ALLSRC += $(LIBSplitMSSM_SRC) $(EXESplitMSSM_SRC)

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 16:10:42
+// File generated at Mon 9 May 2016 12:22:50
 
 /**
  * @file TMSSM_mass_eigenstates.hpp
@@ -25,8 +25,8 @@
  *        value problem using the two_scale solver by solving EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Tue 8 Mar 2016 16:10:42 with FlexibleSUSY
- * 1.4.0 (git commit: v1.4.0) and SARAH 4.7.0 .
+ * This file was generated at Mon 9 May 2016 12:22:50 with FlexibleSUSY
+ * 1.4.2 (git commit: ba53b7080ae303fc6b5ef4b4ce12d05fef5b6211) and SARAH 4.8.5 .
  */
 
 #ifndef TMSSM_MASS_EIGENSTATES_H
@@ -738,7 +738,7 @@ private:
    int solve_ewsb_iteratively();
    int solve_ewsb_iteratively(unsigned);
    int solve_ewsb_iteratively_with(EWSB_solver*, const double[number_of_ewsb_equations]);
-   int solve_ewsb_tree_level_via_soft_higgs_masses();
+   int solve_ewsb_tree_level_custom();
    void ewsb_initial_guess(double[number_of_ewsb_equations]);
    int ewsb_step(double[number_of_ewsb_equations]) const;
    static int ewsb_step(const gsl_vector*, void*, gsl_vector*);

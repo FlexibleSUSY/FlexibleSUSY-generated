@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 18:42:43
+// File generated at Mon 9 May 2016 14:07:25
 
 #include "MSSMatMGUT_input_parameters.hpp"
 #include "MSSMatMGUT_observables.hpp"
@@ -101,7 +101,13 @@ int main(int argc, char* argv[])
 
    Physical_input physical_input;
    softsusy::QedQcd qedqcd;
-   qedqcd.toMz();
+
+   try {
+      qedqcd.to(qedqcd.displayPoleMZ()); // run SM fermion masses to MZ
+   } catch (const std::string& s) {
+      ERROR(s);
+      return EXIT_FAILURE;
+   }
 
    MSSMatMGUT_spectrum_generator<algorithm_type> spectrum_generator;
    spectrum_generator.set_precision_goal(1.0e-4);

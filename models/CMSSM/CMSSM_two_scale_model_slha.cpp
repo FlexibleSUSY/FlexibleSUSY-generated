@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 18:44:34
+// File generated at Mon 9 May 2016 14:10:11
 
 /**
  * @file CMSSM_two_scale_model_slha.cpp

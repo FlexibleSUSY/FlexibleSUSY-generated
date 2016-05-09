@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 18:22:11
+// File generated at Mon 9 May 2016 13:03:57
 
 #ifndef SMSSM_SPECTRUM_GENERATOR_INTERFACE_H
 #define SMSSM_SPECTRUM_GENERATOR_INTERFACE_H
@@ -56,6 +56,7 @@ public:
    virtual ~SMSSM_spectrum_generator_interface() {}
 
    const SMSSM<T>& get_model() const { return model; }
+   SMSSM<T>& get_model() { return model; }
    const Problems<SMSSM_info::NUMBER_OF_PARTICLES>& get_problems() const {
       return model.get_problems();
    }

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 18:13:53
+// File generated at Mon 9 May 2016 13:05:37
 
 #ifndef NUTSMSSM_UTILITIES_H
 #define NUTSMSSM_UTILITIES_H
@@ -37,7 +37,7 @@ class QedQcd;
 
 namespace flexiblesusy {
 
-class NUTSMSSM_observables;
+struct NUTSMSSM_observables;
 class Physical_input;
 
 class NUTSMSSM_parameter_getter {

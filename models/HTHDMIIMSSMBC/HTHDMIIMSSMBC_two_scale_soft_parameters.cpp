@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 18:05:20
+// File generated at Mon 9 May 2016 11:59:08
 
 #include "HTHDMIIMSSMBC_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -131,7 +131,7 @@ Eigen::ArrayXd HTHDMIIMSSMBC_soft_parameters::get() const
 void HTHDMIIMSSMBC_soft_parameters::print(std::ostream& ostr) const
 {
    HTHDMIIMSSMBC_susy_parameters::print(ostr);
-   ostr << "soft parameters:\n";
+   ostr << "soft parameters at Q = " << get_scale() << ":\n";
    ostr << "Mu = " << Mu << '\n';
    ostr << "M122 = " << M122 << '\n';
    ostr << "M112 = " << M112 << '\n';
@@ -182,7 +182,7 @@ void HTHDMIIMSSMBC_soft_parameters::calc_soft_traces(Soft_traces& soft_traces) c
 
 std::ostream& operator<<(std::ostream& ostr, const HTHDMIIMSSMBC_soft_parameters& soft_pars)
 {
-   soft_pars.print(std::cout);
+   soft_pars.print(ostr);
    return ostr;
 }
 

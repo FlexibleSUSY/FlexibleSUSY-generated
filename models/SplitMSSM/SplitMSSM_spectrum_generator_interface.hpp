@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 16:05:34
+// File generated at Mon 9 May 2016 12:05:13
 
 #ifndef SplitMSSM_SPECTRUM_GENERATOR_INTERFACE_H
 #define SplitMSSM_SPECTRUM_GENERATOR_INTERFACE_H
@@ -56,6 +56,7 @@ public:
    virtual ~SplitMSSM_spectrum_generator_interface() {}
 
    const SplitMSSM<T>& get_model() const { return model; }
+   SplitMSSM<T>& get_model() { return model; }
    const Problems<SplitMSSM_info::NUMBER_OF_PARTICLES>& get_problems() const {
       return model.get_problems();
    }

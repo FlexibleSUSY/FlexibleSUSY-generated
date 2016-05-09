@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 16:18:11
+// File generated at Mon 9 May 2016 12:47:42
 
 #ifndef MRSSM_SPECTRUM_GENERATOR_H
 #define MRSSM_SPECTRUM_GENERATOR_H
@@ -45,7 +45,6 @@ class MRSSM_spectrum_generator
 public:
    MRSSM_spectrum_generator()
       : MRSSM_spectrum_generator_interface<T>()
-      , solver()
       , susy_scale_constraint()
       , low_scale_constraint()
       , susy_scale(0.)
@@ -61,7 +60,6 @@ public:
    void write_running_couplings(const std::string& filename = "MRSSM_rgflow.dat") const;
 
 private:
-   RGFlow<T> solver;
    MRSSM_susy_scale_constraint<T> susy_scale_constraint;
    MRSSM_low_scale_constraint<T>  low_scale_constraint;
    double susy_scale, low_scale;
@@ -121,6 +119,7 @@ void MRSSM_spectrum_generator<T>::run(const softsusy::QedQcd& qedqcd,
                                                   susy_scale_constraint);
    Two_scale_increasing_precision precision(10.0, this->precision_goal);
 
+   RGFlow<T> solver;
    solver.reset();
    solver.set_convergence_tester(&convergence_tester);
    solver.set_running_precision(&precision);

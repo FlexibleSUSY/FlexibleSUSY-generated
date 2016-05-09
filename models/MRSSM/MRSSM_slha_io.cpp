@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 16:13:54
+// File generated at Mon 9 May 2016 12:19:37
 
 #include "MRSSM_slha_io.hpp"
 #include "MRSSM_input_parameters.hpp"
@@ -343,29 +343,29 @@ void MRSSM_slha_io::fill(MRSSM_input_parameters& input) const
    slha_io.read_block("MINPAR", minpar_processor);
    slha_io.read_block("EXTPAR", extpar_processor);
 
-   input.MuInput = slha_io.read_entry("HMIXIN", 1);
-   input.BMuInput = slha_io.read_entry("HMIXIN", 101);
-   slha_io.read_block("MSQ2IN", input.mq2Input);
-   slha_io.read_block("MSE2IN", input.me2Input);
-   slha_io.read_block("MSL2IN", input.ml2Input);
-   slha_io.read_block("MSU2IN", input.mu2Input);
-   slha_io.read_block("MSD2IN", input.md2Input);
-   input.moc2Input = slha_io.read_entry("MSOFTIN", 111);
-   input.vSInput = slha_io.read_entry("NMSSMRUNIN", 5);
-   input.vTInput = slha_io.read_entry("HMIXIN", 310);
-   input.MDBSInput = slha_io.read_entry("MSOFTIN", 300);
-   input.MDWBTInput = slha_io.read_entry("MSOFTIN", 301);
-   input.MDGocInput = slha_io.read_entry("MSOFTIN", 302);
-   input.MuDInput = slha_io.read_entry("HMIXIN", 201);
-   input.MuUInput = slha_io.read_entry("HMIXIN", 202);
    input.BMuDInput = slha_io.read_entry("HMIXIN", 203);
+   input.BMuInput = slha_io.read_entry("HMIXIN", 101);
    input.BMuUInput = slha_io.read_entry("HMIXIN", 204);
    input.LamSDInput = slha_io.read_entry("HMIXIN", 301);
    input.LamSUInput = slha_io.read_entry("HMIXIN", 302);
    input.LamTDInput = slha_io.read_entry("HMIXIN", 303);
    input.LamTUInput = slha_io.read_entry("HMIXIN", 304);
+   slha_io.read_block("MSD2IN", input.md2Input);
+   input.MDBSInput = slha_io.read_entry("MSOFTIN", 300);
+   input.MDGocInput = slha_io.read_entry("MSOFTIN", 302);
+   input.MDWBTInput = slha_io.read_entry("MSOFTIN", 301);
+   slha_io.read_block("MSE2IN", input.me2Input);
+   slha_io.read_block("MSL2IN", input.ml2Input);
+   input.moc2Input = slha_io.read_entry("MSOFTIN", 111);
+   slha_io.read_block("MSQ2IN", input.mq2Input);
    input.mRd2Input = slha_io.read_entry("MSOFTIN", 50);
    input.mRu2Input = slha_io.read_entry("MSOFTIN", 51);
+   slha_io.read_block("MSU2IN", input.mu2Input);
+   input.MuDInput = slha_io.read_entry("HMIXIN", 201);
+   input.MuInput = slha_io.read_entry("HMIXIN", 1);
+   input.MuUInput = slha_io.read_entry("HMIXIN", 202);
+   input.vSInput = slha_io.read_entry("NMSSMRUNIN", 5);
+   input.vTInput = slha_io.read_entry("HMIXIN", 310);
 
 }
 

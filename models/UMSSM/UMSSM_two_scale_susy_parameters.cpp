@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 17:59:34
+// File generated at Mon 9 May 2016 12:42:17
 
 #include "UMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -516,7 +516,7 @@ Eigen::ArrayXd UMSSM_susy_parameters::get() const
 
 void UMSSM_susy_parameters::print(std::ostream& ostr) const
 {
-   ostr << "susy parameters:\n";
+   ostr << "susy parameters at Q = " << get_scale() << ":\n";
    ostr << "Yd = " << Yd << '\n';
    ostr << "Ye = " << Ye << '\n';
    ostr << "Lambdax = " << Lambdax << '\n';
@@ -629,7 +629,7 @@ void UMSSM_susy_parameters::calc_susy_traces(Susy_traces& susy_traces) const
 
 std::ostream& operator<<(std::ostream& ostr, const UMSSM_susy_parameters& susy_pars)
 {
-   susy_pars.print(std::cout);
+   susy_pars.print(ostr);
    return ostr;
 }
 

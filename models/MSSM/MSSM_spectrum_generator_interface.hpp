@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 18:44:43
+// File generated at Mon 9 May 2016 14:08:22
 
 #ifndef MSSM_SPECTRUM_GENERATOR_INTERFACE_H
 #define MSSM_SPECTRUM_GENERATOR_INTERFACE_H
@@ -56,6 +56,7 @@ public:
    virtual ~MSSM_spectrum_generator_interface() {}
 
    const MSSM<T>& get_model() const { return model; }
+   MSSM<T>& get_model() { return model; }
    const Problems<MSSM_info::NUMBER_OF_PARTICLES>& get_problems() const {
       return model.get_problems();
    }

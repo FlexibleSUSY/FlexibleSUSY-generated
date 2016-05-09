@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 18:01:30
+// File generated at Mon 9 May 2016 12:43:45
 
 #ifndef UMSSM_UTILITIES_H
 #define UMSSM_UTILITIES_H
@@ -37,7 +37,7 @@ class QedQcd;
 
 namespace flexiblesusy {
 
-class UMSSM_observables;
+struct UMSSM_observables;
 class Physical_input;
 
 class UMSSM_parameter_getter {

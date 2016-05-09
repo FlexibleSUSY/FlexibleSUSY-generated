@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 19:15:01
+// File generated at Mon 9 May 2016 12:07:08
 
 #ifndef HGTHDMIIMSSMBC_SPECTRUM_GENERATOR_INTERFACE_H
 #define HGTHDMIIMSSMBC_SPECTRUM_GENERATOR_INTERFACE_H
@@ -56,6 +56,7 @@ public:
    virtual ~HGTHDMIIMSSMBC_spectrum_generator_interface() {}
 
    const HGTHDMIIMSSMBC<T>& get_model() const { return model; }
+   HGTHDMIIMSSMBC<T>& get_model() { return model; }
    const Problems<HGTHDMIIMSSMBC_info::NUMBER_OF_PARTICLES>& get_problems() const {
       return model.get_problems();
    }

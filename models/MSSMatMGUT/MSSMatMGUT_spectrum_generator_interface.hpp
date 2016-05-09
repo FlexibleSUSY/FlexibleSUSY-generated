@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 18:42:43
+// File generated at Mon 9 May 2016 14:07:25
 
 #ifndef MSSMatMGUT_SPECTRUM_GENERATOR_INTERFACE_H
 #define MSSMatMGUT_SPECTRUM_GENERATOR_INTERFACE_H
@@ -56,6 +56,7 @@ public:
    virtual ~MSSMatMGUT_spectrum_generator_interface() {}
 
    const MSSMatMGUT<T>& get_model() const { return model; }
+   MSSMatMGUT<T>& get_model() { return model; }
    const Problems<MSSMatMGUT_info::NUMBER_OF_PARTICLES>& get_problems() const {
       return model.get_problems();
    }

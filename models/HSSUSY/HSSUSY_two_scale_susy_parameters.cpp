@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 16:05:45
+// File generated at Mon 9 May 2016 12:02:42
 
 #include "HSSUSY_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -167,7 +167,7 @@ Eigen::ArrayXd HSSUSY_susy_parameters::get() const
 
 void HSSUSY_susy_parameters::print(std::ostream& ostr) const
 {
-   ostr << "susy parameters:\n";
+   ostr << "susy parameters at Q = " << get_scale() << ":\n";
    ostr << "g1 = " << g1 << '\n';
    ostr << "g2 = " << g2 << '\n';
    ostr << "g3 = " << g3 << '\n';
@@ -269,7 +269,7 @@ void HSSUSY_susy_parameters::calc_susy_traces(Susy_traces& susy_traces) const
 
 std::ostream& operator<<(std::ostream& ostr, const HSSUSY_susy_parameters& susy_pars)
 {
-   susy_pars.print(std::cout);
+   susy_pars.print(ostr);
    return ostr;
 }
 

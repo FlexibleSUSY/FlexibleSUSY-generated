@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 16:10:42
+// File generated at Mon 9 May 2016 12:22:50
 
 /**
  * @file TMSSM_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Tue 8 Mar 2016 16:10:42 with FlexibleSUSY
- * 1.4.0 (git commit: v1.4.0) and SARAH 4.7.0 .
+ * This file was generated at Mon 9 May 2016 12:22:50 with FlexibleSUSY
+ * 1.4.2 (git commit: ba53b7080ae303fc6b5ef4b4ce12d05fef5b6211) and SARAH 4.8.5 .
  */
 
 #include "TMSSM_mass_eigenstates.hpp"
@@ -440,42 +440,40 @@ int CLASSNAME::solve_ewsb_tree_level()
    return error;
 }
 
-int CLASSNAME::solve_ewsb_tree_level_via_soft_higgs_masses()
+int CLASSNAME::solve_ewsb_tree_level_custom()
 {
    int error = 0;
 
-   const double new_mHd2 = Re((0.025*(-40*vd*AbsSqr(Mu) + 20*vu*BMu + 20*vu*
-      Conj(BMu) + 20*MT*vT*vu*Conj(Lambdax) + 10*vT*vu*Conj(TLambdax) + 20*vT*vu*
-      Conj(MT)*Lambdax - 20*vd*vT*Conj(Mu)*Lambdax - 20*vd*vT*Conj(Lambdax)*Mu - 3
-      *Power(vd,3)*Sqr(g1) - 5*Power(vd,3)*Sqr(g2) - 10*vd*AbsSqr(Lambdax)*Sqr(vT)
-      - 10*vd*AbsSqr(Lambdax)*Sqr(vu) + 3*vd*Sqr(g1)*Sqr(vu) + 5*vd*Sqr(g2)*Sqr(
-      vu) + 10*vT*vu*TLambdax))/vd);
-   const double new_mHu2 = Re((0.025*(-40*vu*AbsSqr(Mu) + 20*vd*BMu + 20*vd*
-      Conj(BMu) + 20*MT*vd*vT*Conj(Lambdax) + 10*vd*vT*Conj(TLambdax) + 20*vd*vT*
-      Conj(MT)*Lambdax - 20*vT*vu*Conj(Mu)*Lambdax - 20*vT*vu*Conj(Lambdax)*Mu - 3
-      *Power(vu,3)*Sqr(g1) - 5*Power(vu,3)*Sqr(g2) - 10*vu*AbsSqr(Lambdax)*Sqr(vd)
-      + 3*vu*Sqr(g1)*Sqr(vd) + 5*vu*Sqr(g2)*Sqr(vd) - 10*vu*AbsSqr(Lambdax)*Sqr(
-      vT) + 10*vd*vT*TLambdax))/vu);
-   const double new_mT2 = Re((0.25*(-16*vT*AbsSqr(MT) - 4*vT*BMT - 4*vT*Conj(
-      BMT) + 2*MT*vd*vu*Conj(Lambdax) + vd*vu*Conj(TLambdax) + 2*vd*vu*Conj(MT)*
-      Lambdax - vT*AbsSqr(Lambdax)*Sqr(vd) - Conj(Mu)*Lambdax*Sqr(vd) - Conj(
-      Lambdax)*Mu*Sqr(vd) - vT*AbsSqr(Lambdax)*Sqr(vu) - Conj(Mu)*Lambdax*Sqr(vu)
-      - Conj(Lambdax)*Mu*Sqr(vu) + vd*vu*TLambdax))/vT);
+   const double old_mHd2 = mHd2;
+   const double old_mHu2 = mHu2;
+   const double old_mT2 = mT2;
 
-   if (IsFinite(new_mHd2))
-      mHd2 = new_mHd2;
-   else
-      error = 1;
+   mHd2 = Re((0.025*(-40*vd*AbsSqr(Mu) + 20*vu*BMu + 20*vu*Conj(BMu) + 20*MT*vT
+      *vu*Conj(Lambdax) + 10*vT*vu*Conj(TLambdax) + 20*vT*vu*Conj(MT)*Lambdax - 20
+      *vd*vT*Conj(Mu)*Lambdax - 20*vd*vT*Conj(Lambdax)*Mu - 3*Power(vd,3)*Sqr(g1)
+      - 5*Power(vd,3)*Sqr(g2) - 10*vd*AbsSqr(Lambdax)*Sqr(vT) - 10*vd*AbsSqr(
+      Lambdax)*Sqr(vu) + 3*vd*Sqr(g1)*Sqr(vu) + 5*vd*Sqr(g2)*Sqr(vu) + 10*vT*vu*
+      TLambdax))/vd);
+   mHu2 = Re((0.025*(-40*vu*AbsSqr(Mu) + 20*vd*BMu + 20*vd*Conj(BMu) + 20*MT*vd
+      *vT*Conj(Lambdax) + 10*vd*vT*Conj(TLambdax) + 20*vd*vT*Conj(MT)*Lambdax - 20
+      *vT*vu*Conj(Mu)*Lambdax - 20*vT*vu*Conj(Lambdax)*Mu - 3*Power(vu,3)*Sqr(g1)
+      - 5*Power(vu,3)*Sqr(g2) - 10*vu*AbsSqr(Lambdax)*Sqr(vd) + 3*vu*Sqr(g1)*Sqr(
+      vd) + 5*vu*Sqr(g2)*Sqr(vd) - 10*vu*AbsSqr(Lambdax)*Sqr(vT) + 10*vd*vT*
+      TLambdax))/vu);
+   mT2 = Re((0.25*(-16*vT*AbsSqr(MT) - 4*vT*BMT - 4*vT*Conj(BMT) + 2*MT*vd*vu*
+      Conj(Lambdax) + vd*vu*Conj(TLambdax) + 2*vd*vu*Conj(MT)*Lambdax - vT*AbsSqr(
+      Lambdax)*Sqr(vd) - Conj(Mu)*Lambdax*Sqr(vd) - Conj(Lambdax)*Mu*Sqr(vd) - vT*
+      AbsSqr(Lambdax)*Sqr(vu) - Conj(Mu)*Lambdax*Sqr(vu) - Conj(Lambdax)*Mu*Sqr(vu
+      ) + vd*vu*TLambdax))/vT);
 
-   if (IsFinite(new_mHu2))
-      mHu2 = new_mHu2;
-   else
-      error = 1;
+   const bool is_finite = IsFinite(mHd2) && IsFinite(mHu2) && IsFinite(mT2);
 
-   if (IsFinite(new_mT2))
-      mT2 = new_mT2;
-   else
+   if (!is_finite) {
+      mHd2 = old_mHd2;
+      mHu2 = old_mHu2;
+      mT2 = old_mT2;
       error = 1;
+   }
 
 
    return error;
@@ -715,7 +713,7 @@ void CLASSNAME::calculate_DRbar_masses()
    const auto old_mHu2 = mHu2;
    const auto old_mT2 = mT2;
 
-   solve_ewsb_tree_level_via_soft_higgs_masses();
+   solve_ewsb_tree_level_custom();
 
    calculate_MVPVZ();
    calculate_MVWm();

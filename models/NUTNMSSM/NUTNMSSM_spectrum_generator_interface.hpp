@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 18:25:20
+// File generated at Mon 9 May 2016 13:15:51
 
 #ifndef NUTNMSSM_SPECTRUM_GENERATOR_INTERFACE_H
 #define NUTNMSSM_SPECTRUM_GENERATOR_INTERFACE_H
@@ -56,6 +56,7 @@ public:
    virtual ~NUTNMSSM_spectrum_generator_interface() {}
 
    const NUTNMSSM<T>& get_model() const { return model; }
+   NUTNMSSM<T>& get_model() { return model; }
    const Problems<NUTNMSSM_info::NUMBER_OF_PARTICLES>& get_problems() const {
       return model.get_problems();
    }

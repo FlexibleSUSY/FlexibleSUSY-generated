@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 18:26:11
+// File generated at Mon 9 May 2016 13:15:30
 
 #ifndef NMSSM_SLHA_IO_H
 #define NMSSM_SLHA_IO_H
@@ -72,6 +72,8 @@ public:
    void read_from_file(const std::string&);
    void read_from_source(const std::string&);
    void read_from_stream(std::istream&);
+   void set_block(const std::string& str, SLHA_io::Position position = SLHA_io::back) { slha_io.set_block(str, position); }
+   void set_blocks(const std::vector<std::string>& vec, SLHA_io::Position position = SLHA_io::back) { slha_io.set_blocks(vec, position); }
    void set_extpar(const NMSSM_input_parameters&);
    template <class T> void set_extra(const NMSSM_slha<T>&, const NMSSM_scales&, const NMSSM_observables&);
    void set_minpar(const NMSSM_input_parameters&);

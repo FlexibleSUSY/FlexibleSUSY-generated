@@ -18,6 +18,7 @@ lowMSSM_TWO_SCALE_MK := \
 		$(lowMSSM_TWO_SCALE_SOFT_MK)
 
 lowMSSM_SLHA_INPUT := \
+		$(DIR)/LesHouches.in.lowMSSM_generated \
 		$(DIR)/LesHouches.in.lowMSSM
 
 lowMSSM_GNUPLOT := \
@@ -179,6 +180,7 @@ clean-$(MODNAME)-src:
 		-rm -f $(EXElowMSSM_SRC)
 		-rm -f $(METACODE_STAMP_lowMSSM)
 		-rm -f $(lowMSSM_TWO_SCALE_MK)
+		-rm -f $(lowMSSM_SLHA_INPUT)
 		-rm -f $(lowMSSM_GNUPLOT)
 
 clean-$(MODNAME): clean-$(MODNAME)-src
@@ -224,7 +226,7 @@ $(METACODE_STAMP_lowMSSM):
 		@true
 endif
 
-$(LIBlowMSSM_DEP) $(EXElowMSSM_DEP) $(LIBlowMSSM_OBJ) $(EXElowMSSM_OBJ): CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS)
+$(LIBlowMSSM_DEP) $(EXElowMSSM_DEP) $(LIBlowMSSM_OBJ) $(EXElowMSSM_OBJ): CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBlowMSSM_DEP) $(EXElowMSSM_DEP) $(LIBlowMSSM_OBJ) $(EXElowMSSM_OBJ): CPPFLAGS += $(LOOPFUNCFLAGS)
@@ -234,7 +236,7 @@ $(LIBlowMSSM): $(LIBlowMSSM_OBJ)
 		$(MAKELIB) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBlowMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(LDLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBlowMSSM_DEP) $(EXElowMSSM_DEP)
 ALLSRC += $(LIBlowMSSM_SRC) $(EXElowMSSM_SRC)

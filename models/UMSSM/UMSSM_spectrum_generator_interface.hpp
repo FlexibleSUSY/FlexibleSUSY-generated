@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 18:24:10
+// File generated at Mon 9 May 2016 13:00:22
 
 #ifndef UMSSM_SPECTRUM_GENERATOR_INTERFACE_H
 #define UMSSM_SPECTRUM_GENERATOR_INTERFACE_H
@@ -56,6 +56,7 @@ public:
    virtual ~UMSSM_spectrum_generator_interface() {}
 
    const UMSSM<T>& get_model() const { return model; }
+   UMSSM<T>& get_model() { return model; }
    const Problems<UMSSM_info::NUMBER_OF_PARTICLES>& get_problems() const {
       return model.get_problems();
    }

@@ -18,6 +18,7 @@ lowNMSSM_TWO_SCALE_MK := \
 		$(lowNMSSM_TWO_SCALE_SOFT_MK)
 
 lowNMSSM_SLHA_INPUT := \
+		$(DIR)/LesHouches.in.lowNMSSM_generated \
 		$(DIR)/LesHouches.in.TP4 \
 		$(DIR)/LesHouches.in.TP3 \
 		$(DIR)/LesHouches.in.TP5 \
@@ -185,6 +186,7 @@ clean-$(MODNAME)-src:
 		-rm -f $(EXElowNMSSM_SRC)
 		-rm -f $(METACODE_STAMP_lowNMSSM)
 		-rm -f $(lowNMSSM_TWO_SCALE_MK)
+		-rm -f $(lowNMSSM_SLHA_INPUT)
 		-rm -f $(lowNMSSM_GNUPLOT)
 
 clean-$(MODNAME): clean-$(MODNAME)-src
@@ -230,7 +232,7 @@ $(METACODE_STAMP_lowNMSSM):
 		@true
 endif
 
-$(LIBlowNMSSM_DEP) $(EXElowNMSSM_DEP) $(LIBlowNMSSM_OBJ) $(EXElowNMSSM_OBJ): CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS)
+$(LIBlowNMSSM_DEP) $(EXElowNMSSM_DEP) $(LIBlowNMSSM_OBJ) $(EXElowNMSSM_OBJ): CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBlowNMSSM_DEP) $(EXElowNMSSM_DEP) $(LIBlowNMSSM_OBJ) $(EXElowNMSSM_OBJ): CPPFLAGS += $(LOOPFUNCFLAGS)
@@ -240,7 +242,7 @@ $(LIBlowNMSSM): $(LIBlowNMSSM_OBJ)
 		$(MAKELIB) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBlowNMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(LDLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBlowNMSSM_DEP) $(EXElowNMSSM_DEP)
 ALLSRC += $(LIBlowNMSSM_SRC) $(EXElowNMSSM_SRC)

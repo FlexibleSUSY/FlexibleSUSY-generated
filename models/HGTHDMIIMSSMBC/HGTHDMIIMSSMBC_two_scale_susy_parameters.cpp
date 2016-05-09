@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 19:13:12
+// File generated at Mon 9 May 2016 12:04:04
 
 #include "HGTHDMIIMSSMBC_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -224,7 +224,7 @@ Eigen::ArrayXd HGTHDMIIMSSMBC_susy_parameters::get() const
 
 void HGTHDMIIMSSMBC_susy_parameters::print(std::ostream& ostr) const
 {
-   ostr << "susy parameters:\n";
+   ostr << "susy parameters at Q = " << get_scale() << ":\n";
    ostr << "g1 = " << g1 << '\n';
    ostr << "g2 = " << g2 << '\n';
    ostr << "g3 = " << g3 << '\n';
@@ -346,7 +346,7 @@ void HGTHDMIIMSSMBC_susy_parameters::calc_susy_traces(Susy_traces& susy_traces) 
 
 std::ostream& operator<<(std::ostream& ostr, const HGTHDMIIMSSMBC_susy_parameters& susy_pars)
 {
-   susy_pars.print(std::cout);
+   susy_pars.print(ostr);
    return ostr;
 }
 

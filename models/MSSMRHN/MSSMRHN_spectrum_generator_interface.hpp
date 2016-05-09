@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 18:34:13
+// File generated at Mon 9 May 2016 13:26:57
 
 #ifndef MSSMRHN_SPECTRUM_GENERATOR_INTERFACE_H
 #define MSSMRHN_SPECTRUM_GENERATOR_INTERFACE_H
@@ -56,6 +56,7 @@ public:
    virtual ~MSSMRHN_spectrum_generator_interface() {}
 
    const MSSMRHN<T>& get_model() const { return model; }
+   MSSMRHN<T>& get_model() { return model; }
    const Problems<MSSMRHN_info::NUMBER_OF_PARTICLES>& get_problems() const {
       return model.get_problems();
    }

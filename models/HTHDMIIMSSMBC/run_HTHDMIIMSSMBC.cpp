@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 18:08:05
+// File generated at Mon 9 May 2016 12:01:25
 
 #include "HTHDMIIMSSMBC_input_parameters.hpp"
 #include "HTHDMIIMSSMBC_observables.hpp"
@@ -71,7 +71,12 @@ int main(int argc, const char* argv[])
       return EXIT_FAILURE;
    }
 
-   qedqcd.toMz(); // run SM fermion masses to MZ
+   try {
+      qedqcd.to(qedqcd.displayPoleMZ()); // run SM fermion masses to MZ
+   } catch (const std::string& s) {
+      ERROR(s);
+      return EXIT_FAILURE;
+   }
 
    HTHDMIIMSSMBC_spectrum_generator<algorithm_type> spectrum_generator;
    spectrum_generator.set_settings(spectrum_generator_settings);

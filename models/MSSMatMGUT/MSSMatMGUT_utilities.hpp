@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 18:41:50
+// File generated at Mon 9 May 2016 14:06:33
 
 #ifndef MSSMatMGUT_UTILITIES_H
 #define MSSMatMGUT_UTILITIES_H
@@ -37,7 +37,7 @@ class QedQcd;
 
 namespace flexiblesusy {
 
-class MSSMatMGUT_observables;
+struct MSSMatMGUT_observables;
 class Physical_input;
 
 class MSSMatMGUT_parameter_getter {

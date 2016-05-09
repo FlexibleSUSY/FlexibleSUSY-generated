@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 18:26:37
+// File generated at Mon 9 May 2016 13:20:47
 
 #include "MSSMRHN_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -357,7 +357,7 @@ Eigen::ArrayXd MSSMRHN_susy_parameters::get() const
 
 void MSSMRHN_susy_parameters::print(std::ostream& ostr) const
 {
-   ostr << "susy parameters:\n";
+   ostr << "susy parameters at Q = " << get_scale() << ":\n";
    ostr << "Yd = " << Yd << '\n';
    ostr << "Ye = " << Ye << '\n';
    ostr << "Yu = " << Yu << '\n';
@@ -476,7 +476,7 @@ void MSSMRHN_susy_parameters::calc_susy_traces(Susy_traces& susy_traces) const
 
 std::ostream& operator<<(std::ostream& ostr, const MSSMRHN_susy_parameters& susy_pars)
 {
-   susy_pars.print(std::cout);
+   susy_pars.print(ostr);
    return ostr;
 }
 

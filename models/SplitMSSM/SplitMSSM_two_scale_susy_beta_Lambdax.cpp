@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 16:04:09
+// File generated at Mon 9 May 2016 12:04:04
 
 #include "SplitMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -103,7 +103,7 @@ double SplitMSSM_susy_parameters::calc_beta_Lambdax_two_loop(const Susy_traces& 
       72*Lambdax + 5*Sqr(gYd) + 5*Sqr(gYu)) + Sqr(g2u)*(-165*Lambdax + 16*Sqr(
       gYu))) + 2*(94*Power(g2d,6) + 94*Power(g2u,6) + 10*Power(gYd,6) + 76*
       Power(g2d,3)*g2u*gYd*gYu + 10*Power(gYu,6) + 240*
-      traceYdAdjYdYdAdjYdYdAdjYd + 48*traceYdAdjYdYdAdjYuYuAdjYd - 96*
+      traceYdAdjYdYdAdjYdYdAdjYd - 96*traceYdAdjYdYdAdjYuYuAdjYd + 48*
       traceYdAdjYuYuAdjYdYdAdjYd - 48*traceYdAdjYuYuAdjYuYuAdjYd + 80*
       traceYeAdjYeYeAdjYeYeAdjYe + 240*traceYuAdjYuYuAdjYuYuAdjYu - Power(gYd,4
       )*Lambdax - Power(gYu,4)*Lambdax - 12*traceYdAdjYdYdAdjYd*Lambdax - 168*

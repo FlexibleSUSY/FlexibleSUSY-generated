@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 18:41:12
+// File generated at Mon 9 May 2016 14:11:21
 
 #ifndef MSSMNoFV_SPECTRUM_GENERATOR_H
 #define MSSMNoFV_SPECTRUM_GENERATOR_H
@@ -46,7 +46,6 @@ class MSSMNoFV_spectrum_generator
 public:
    MSSMNoFV_spectrum_generator()
       : MSSMNoFV_spectrum_generator_interface<T>()
-      , solver()
       , high_scale_constraint()
       , susy_scale_constraint()
       , low_scale_constraint()
@@ -64,7 +63,6 @@ public:
    void write_running_couplings(const std::string& filename = "MSSMNoFV_rgflow.dat") const;
 
 private:
-   RGFlow<T> solver;
    MSSMNoFV_high_scale_constraint<T> high_scale_constraint;
    MSSMNoFV_susy_scale_constraint<T> susy_scale_constraint;
    MSSMNoFV_low_scale_constraint<T>  low_scale_constraint;
@@ -131,7 +129,7 @@ void MSSMNoFV_spectrum_generator<T>::run(const softsusy::QedQcd& qedqcd,
 
    Two_scale_increasing_precision precision(10.0, this->precision_goal);
 
-   solver.reset();
+   RGFlow<T> solver;
    solver.set_convergence_tester(&convergence_tester);
    solver.set_running_precision(&precision);
    solver.set_initial_guesser(&initial_guesser);

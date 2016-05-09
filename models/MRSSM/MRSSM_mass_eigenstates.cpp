@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 16:17:40
+// File generated at Mon 9 May 2016 12:47:16
 
 /**
  * @file MRSSM_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Tue 8 Mar 2016 16:17:40 with FlexibleSUSY
- * 1.4.0 (git commit: v1.4.0) and SARAH 4.7.0 .
+ * This file was generated at Mon 9 May 2016 12:47:16 with FlexibleSUSY
+ * 1.4.2 (git commit: ba53b7080ae303fc6b5ef4b4ce12d05fef5b6211) and SARAH 4.8.5 .
  */
 
 #include "MRSSM_mass_eigenstates.hpp"
@@ -467,65 +467,60 @@ int CLASSNAME::solve_ewsb_tree_level()
    return error;
 }
 
-int CLASSNAME::solve_ewsb_tree_level_via_soft_higgs_masses()
+int CLASSNAME::solve_ewsb_tree_level_custom()
 {
    int error = 0;
 
-   const double new_mHd2 = Re((0.025*(15.491933384829668*g1*MDBS*vd*vS - 20*g2*
-      MDWBT*vd*vT - 40*vd*AbsSqr(MuD) - 40*vd*AbsSqr(Mu) + 20*vu*BMu -
-      28.284271247461902*MuD*vd*vS*Conj(LamSD) - 14.142135623730951*LamTD*vd*vS*vT
-      *Conj(LamSD) - 20*MuD*vd*vT*Conj(LamTD) - 14.142135623730951*LamSD*vd*vS*vT*
-      Conj(LamTD) + 15.491933384829668*g1*vd*vS*Conj(MDBS) - 20*g2*vd*vT*Conj(
-      MDWBT) - 28.284271247461902*LamSD*vd*vS*Conj(MuD) - 20*LamTD*vd*vT*Conj(MuD)
-      + 20*vu*Conj(BMu) - 3*Power(vd,3)*Sqr(g1) - 5*Power(vd,3)*Sqr(g2) - 20*vd*
-      AbsSqr(LamSD)*Sqr(vS) - 10*vd*AbsSqr(LamTD)*Sqr(vT) + 3*vd*Sqr(g1)*Sqr(vu) +
-      5*vd*Sqr(g2)*Sqr(vu)))/vd);
-   const double new_mHu2 = Re((0.025*(-15.491933384829668*g1*MDBS*vS*vu + 20*g2
-      *MDWBT*vT*vu - 40*vu*AbsSqr(MuU) - 40*vu*AbsSqr(Mu) + 20*vd*BMu -
-      28.284271247461902*MuU*vS*vu*Conj(LamSU) + 14.142135623730951*LamTU*vS*vT*vu
-      *Conj(LamSU) + 20*MuU*vT*vu*Conj(LamTU) + 14.142135623730951*LamSU*vS*vT*vu*
-      Conj(LamTU) - 15.491933384829668*g1*vS*vu*Conj(MDBS) + 20*g2*vT*vu*Conj(
-      MDWBT) - 28.284271247461902*LamSU*vS*vu*Conj(MuU) + 20*LamTU*vT*vu*Conj(MuU)
-      + 20*vd*Conj(BMu) - 3*Power(vu,3)*Sqr(g1) - 5*Power(vu,3)*Sqr(g2) + 3*vu*
-      Sqr(g1)*Sqr(vd) + 5*vu*Sqr(g2)*Sqr(vd) - 20*vu*AbsSqr(LamSU)*Sqr(vS) - 10*vu
-      *AbsSqr(LamTU)*Sqr(vT)))/vu);
-   const double new_mS2 = Re((0.025*(-160*vS*Sqr(MDBS) + 7.745966692414834*g1*
-      MDBS*Sqr(vd) - 20*vS*AbsSqr(LamSD)*Sqr(vd) - 14.142135623730951*MuD*Conj(
-      LamSD)*Sqr(vd) - 7.0710678118654755*LamTD*vT*Conj(LamSD)*Sqr(vd) -
-      7.0710678118654755*LamSD*vT*Conj(LamTD)*Sqr(vd) + 7.745966692414834*g1*Conj(
-      MDBS)*Sqr(vd) - 14.142135623730951*LamSD*Conj(MuD)*Sqr(vd) -
-      7.745966692414834*g1*MDBS*Sqr(vu) - 20*vS*AbsSqr(LamSU)*Sqr(vu) -
-      14.142135623730951*MuU*Conj(LamSU)*Sqr(vu) + 7.0710678118654755*LamTU*vT*
-      Conj(LamSU)*Sqr(vu) + 7.0710678118654755*LamSU*vT*Conj(LamTU)*Sqr(vu) -
-      7.745966692414834*g1*Conj(MDBS)*Sqr(vu) - 14.142135623730951*LamSU*Conj(MuU)
-      *Sqr(vu)))/vS);
-   const double new_mT2 = Re((0.125*(-32*vT*Sqr(MDWBT) - 2*g2*MDWBT*Sqr(vd) - 2
-      *vT*AbsSqr(LamTD)*Sqr(vd) - 1.4142135623730951*LamTD*vS*Conj(LamSD)*Sqr(vd)
-      - 2*MuD*Conj(LamTD)*Sqr(vd) - 1.4142135623730951*LamSD*vS*Conj(LamTD)*Sqr(vd
-      ) - 2*g2*Conj(MDWBT)*Sqr(vd) - 2*LamTD*Conj(MuD)*Sqr(vd) + 2*g2*MDWBT*Sqr(vu
-      ) - 2*vT*AbsSqr(LamTU)*Sqr(vu) + 1.4142135623730951*LamTU*vS*Conj(LamSU)*Sqr
-      (vu) + 2*MuU*Conj(LamTU)*Sqr(vu) + 1.4142135623730951*LamSU*vS*Conj(LamTU)*
-      Sqr(vu) + 2*g2*Conj(MDWBT)*Sqr(vu) + 2*LamTU*Conj(MuU)*Sqr(vu)))/vT);
+   const double old_mHd2 = mHd2;
+   const double old_mHu2 = mHu2;
+   const double old_mT2 = mT2;
+   const double old_mS2 = mS2;
 
-   if (IsFinite(new_mHd2))
-      mHd2 = new_mHd2;
-   else
-      error = 1;
+   mHd2 = Re((0.025*(15.491933384829668*g1*MDBS*vd*vS - 20*g2*MDWBT*vd*vT - 40*
+      vd*AbsSqr(MuD) - 40*vd*AbsSqr(Mu) + 20*vu*BMu - 28.284271247461902*MuD*vd*vS
+      *Conj(LamSD) - 14.142135623730951*LamTD*vd*vS*vT*Conj(LamSD) - 20*MuD*vd*vT*
+      Conj(LamTD) - 14.142135623730951*LamSD*vd*vS*vT*Conj(LamTD) +
+      15.491933384829668*g1*vd*vS*Conj(MDBS) - 20*g2*vd*vT*Conj(MDWBT) -
+      28.284271247461902*LamSD*vd*vS*Conj(MuD) - 20*LamTD*vd*vT*Conj(MuD) + 20*vu*
+      Conj(BMu) - 3*Power(vd,3)*Sqr(g1) - 5*Power(vd,3)*Sqr(g2) - 20*vd*AbsSqr(
+      LamSD)*Sqr(vS) - 10*vd*AbsSqr(LamTD)*Sqr(vT) + 3*vd*Sqr(g1)*Sqr(vu) + 5*vd*
+      Sqr(g2)*Sqr(vu)))/vd);
+   mHu2 = Re((0.025*(-15.491933384829668*g1*MDBS*vS*vu + 20*g2*MDWBT*vT*vu - 40
+      *vu*AbsSqr(MuU) - 40*vu*AbsSqr(Mu) + 20*vd*BMu - 28.284271247461902*MuU*vS*
+      vu*Conj(LamSU) + 14.142135623730951*LamTU*vS*vT*vu*Conj(LamSU) + 20*MuU*vT*
+      vu*Conj(LamTU) + 14.142135623730951*LamSU*vS*vT*vu*Conj(LamTU) -
+      15.491933384829668*g1*vS*vu*Conj(MDBS) + 20*g2*vT*vu*Conj(MDWBT) -
+      28.284271247461902*LamSU*vS*vu*Conj(MuU) + 20*LamTU*vT*vu*Conj(MuU) + 20*vd*
+      Conj(BMu) - 3*Power(vu,3)*Sqr(g1) - 5*Power(vu,3)*Sqr(g2) + 3*vu*Sqr(g1)*Sqr
+      (vd) + 5*vu*Sqr(g2)*Sqr(vd) - 20*vu*AbsSqr(LamSU)*Sqr(vS) - 10*vu*AbsSqr(
+      LamTU)*Sqr(vT)))/vu);
+   mT2 = Re((0.125*(-32*vT*Sqr(MDWBT) - 2*g2*MDWBT*Sqr(vd) - 2*vT*AbsSqr(LamTD)
+      *Sqr(vd) - 1.4142135623730951*LamTD*vS*Conj(LamSD)*Sqr(vd) - 2*MuD*Conj(
+      LamTD)*Sqr(vd) - 1.4142135623730951*LamSD*vS*Conj(LamTD)*Sqr(vd) - 2*g2*Conj
+      (MDWBT)*Sqr(vd) - 2*LamTD*Conj(MuD)*Sqr(vd) + 2*g2*MDWBT*Sqr(vu) - 2*vT*
+      AbsSqr(LamTU)*Sqr(vu) + 1.4142135623730951*LamTU*vS*Conj(LamSU)*Sqr(vu) + 2*
+      MuU*Conj(LamTU)*Sqr(vu) + 1.4142135623730951*LamSU*vS*Conj(LamTU)*Sqr(vu) +
+      2*g2*Conj(MDWBT)*Sqr(vu) + 2*LamTU*Conj(MuU)*Sqr(vu)))/vT);
+   mS2 = Re((0.025*(-160*vS*Sqr(MDBS) + 7.745966692414834*g1*MDBS*Sqr(vd) - 20*
+      vS*AbsSqr(LamSD)*Sqr(vd) - 14.142135623730951*MuD*Conj(LamSD)*Sqr(vd) -
+      7.0710678118654755*LamTD*vT*Conj(LamSD)*Sqr(vd) - 7.0710678118654755*LamSD*
+      vT*Conj(LamTD)*Sqr(vd) + 7.745966692414834*g1*Conj(MDBS)*Sqr(vd) -
+      14.142135623730951*LamSD*Conj(MuD)*Sqr(vd) - 7.745966692414834*g1*MDBS*Sqr(
+      vu) - 20*vS*AbsSqr(LamSU)*Sqr(vu) - 14.142135623730951*MuU*Conj(LamSU)*Sqr(
+      vu) + 7.0710678118654755*LamTU*vT*Conj(LamSU)*Sqr(vu) + 7.0710678118654755*
+      LamSU*vT*Conj(LamTU)*Sqr(vu) - 7.745966692414834*g1*Conj(MDBS)*Sqr(vu) -
+      14.142135623730951*LamSU*Conj(MuU)*Sqr(vu)))/vS);
 
-   if (IsFinite(new_mHu2))
-      mHu2 = new_mHu2;
-   else
-      error = 1;
+   const bool is_finite = IsFinite(mHd2) && IsFinite(mHu2) && IsFinite(mT2) &&
+      IsFinite(mS2);
 
-   if (IsFinite(new_mS2))
-      mS2 = new_mS2;
-   else
+   if (!is_finite) {
+      mHd2 = old_mHd2;
+      mHu2 = old_mHu2;
+      mT2 = old_mT2;
+      mS2 = old_mS2;
       error = 1;
-
-   if (IsFinite(new_mT2))
-      mT2 = new_mT2;
-   else
-      error = 1;
+   }
 
 
    return error;
@@ -799,7 +794,7 @@ void CLASSNAME::calculate_DRbar_masses()
    const auto old_mS2 = mS2;
    const auto old_mT2 = mT2;
 
-   solve_ewsb_tree_level_via_soft_higgs_masses();
+   solve_ewsb_tree_level_custom();
 
    calculate_MVPVZ();
    calculate_MVWm();

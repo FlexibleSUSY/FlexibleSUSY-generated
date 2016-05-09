@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 8 Mar 2016 17:14:41
+// File generated at Mon 9 May 2016 12:52:31
 
 #ifndef E6SSM_SLHA_IO_H
 #define E6SSM_SLHA_IO_H
@@ -72,6 +72,8 @@ public:
    void read_from_file(const std::string&);
    void read_from_source(const std::string&);
    void read_from_stream(std::istream&);
+   void set_block(const std::string& str, SLHA_io::Position position = SLHA_io::back) { slha_io.set_block(str, position); }
+   void set_blocks(const std::vector<std::string>& vec, SLHA_io::Position position = SLHA_io::back) { slha_io.set_blocks(vec, position); }
    void set_extpar(const E6SSM_input_parameters&);
    template <class T> void set_extra(const E6SSM_slha<T>&, const E6SSM_scales&, const E6SSM_observables&);
    void set_minpar(const E6SSM_input_parameters&);
