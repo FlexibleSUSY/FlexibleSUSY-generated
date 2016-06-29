@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 13:35:33
+// File generated at Wed 29 Jun 2016 12:56:37
 
 /**
  * @file E6SSM_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Mon 9 May 2016 13:35:33 with FlexibleSUSY
- * 1.4.2 (git commit: ba53b7080ae303fc6b5ef4b4ce12d05fef5b6211) and SARAH 4.8.5 .
+ * This file was generated at Wed 29 Jun 2016 12:56:37 with FlexibleSUSY
+ * 1.5.0 (git commit: 41797ffc98415b60cbfd71b7925b6bd5318e68bb) and SARAH 4.8.6 .
  */
 
 #include "E6SSM_mass_eigenstates.hpp"
@@ -1135,6 +1135,197 @@ void CLASSNAME::clear()
    clear_DRbar_parameters();
    physical.clear();
    problems.clear();
+}
+
+void CLASSNAME::set_DRbar_masses(const Eigen::ArrayXd& pars)
+{
+   MVG = pars(0);
+   MGlu = pars(1);
+   MFv(0) = pars(2);
+   MFv(1) = pars(3);
+   MFv(2) = pars(4);
+   MChaP = pars(5);
+   MSd(0) = pars(6);
+   MSd(1) = pars(7);
+   MSd(2) = pars(8);
+   MSd(3) = pars(9);
+   MSd(4) = pars(10);
+   MSd(5) = pars(11);
+   MSv(0) = pars(12);
+   MSv(1) = pars(13);
+   MSv(2) = pars(14);
+   MSu(0) = pars(15);
+   MSu(1) = pars(16);
+   MSu(2) = pars(17);
+   MSu(3) = pars(18);
+   MSu(4) = pars(19);
+   MSu(5) = pars(20);
+   MSe(0) = pars(21);
+   MSe(1) = pars(22);
+   MSe(2) = pars(23);
+   MSe(3) = pars(24);
+   MSe(4) = pars(25);
+   MSe(5) = pars(26);
+   MSDX(0) = pars(27);
+   MSDX(1) = pars(28);
+   MSDX(2) = pars(29);
+   MSDX(3) = pars(30);
+   MSDX(4) = pars(31);
+   MSDX(5) = pars(32);
+   Mhh(0) = pars(33);
+   Mhh(1) = pars(34);
+   Mhh(2) = pars(35);
+   MAh(0) = pars(36);
+   MAh(1) = pars(37);
+   MAh(2) = pars(38);
+   MHpm(0) = pars(39);
+   MHpm(1) = pars(40);
+   MChi(0) = pars(41);
+   MChi(1) = pars(42);
+   MChi(2) = pars(43);
+   MChi(3) = pars(44);
+   MChi(4) = pars(45);
+   MChi(5) = pars(46);
+   MCha(0) = pars(47);
+   MCha(1) = pars(48);
+   MFe(0) = pars(49);
+   MFe(1) = pars(50);
+   MFe(2) = pars(51);
+   MFd(0) = pars(52);
+   MFd(1) = pars(53);
+   MFd(2) = pars(54);
+   MFu(0) = pars(55);
+   MFu(1) = pars(56);
+   MFu(2) = pars(57);
+   MFDX(0) = pars(58);
+   MFDX(1) = pars(59);
+   MFDX(2) = pars(60);
+   MSHI0(0) = pars(61);
+   MSHI0(1) = pars(62);
+   MSHI0(2) = pars(63);
+   MSHI0(3) = pars(64);
+   MSHIp(0) = pars(65);
+   MSHIp(1) = pars(66);
+   MSHIp(2) = pars(67);
+   MSHIp(3) = pars(68);
+   MChaI(0) = pars(69);
+   MChaI(1) = pars(70);
+   MChiI(0) = pars(71);
+   MChiI(1) = pars(72);
+   MChiI(2) = pars(73);
+   MChiI(3) = pars(74);
+   MSSI0(0) = pars(75);
+   MSSI0(1) = pars(76);
+   MFSI(0) = pars(77);
+   MFSI(1) = pars(78);
+   MSHp0(0) = pars(79);
+   MSHp0(1) = pars(80);
+   MSHpp(0) = pars(81);
+   MSHpp(1) = pars(82);
+   MChiP(0) = pars(83);
+   MChiP(1) = pars(84);
+   MVWm = pars(85);
+   MVP = pars(86);
+   MVZ = pars(87);
+   MVZp = pars(88);
+
+}
+
+Eigen::ArrayXd CLASSNAME::get_DRbar_masses() const
+{
+   Eigen::ArrayXd pars(89);
+
+   pars(0) = MVG;
+   pars(1) = MGlu;
+   pars(2) = MFv(0);
+   pars(3) = MFv(1);
+   pars(4) = MFv(2);
+   pars(5) = MChaP;
+   pars(6) = MSd(0);
+   pars(7) = MSd(1);
+   pars(8) = MSd(2);
+   pars(9) = MSd(3);
+   pars(10) = MSd(4);
+   pars(11) = MSd(5);
+   pars(12) = MSv(0);
+   pars(13) = MSv(1);
+   pars(14) = MSv(2);
+   pars(15) = MSu(0);
+   pars(16) = MSu(1);
+   pars(17) = MSu(2);
+   pars(18) = MSu(3);
+   pars(19) = MSu(4);
+   pars(20) = MSu(5);
+   pars(21) = MSe(0);
+   pars(22) = MSe(1);
+   pars(23) = MSe(2);
+   pars(24) = MSe(3);
+   pars(25) = MSe(4);
+   pars(26) = MSe(5);
+   pars(27) = MSDX(0);
+   pars(28) = MSDX(1);
+   pars(29) = MSDX(2);
+   pars(30) = MSDX(3);
+   pars(31) = MSDX(4);
+   pars(32) = MSDX(5);
+   pars(33) = Mhh(0);
+   pars(34) = Mhh(1);
+   pars(35) = Mhh(2);
+   pars(36) = MAh(0);
+   pars(37) = MAh(1);
+   pars(38) = MAh(2);
+   pars(39) = MHpm(0);
+   pars(40) = MHpm(1);
+   pars(41) = MChi(0);
+   pars(42) = MChi(1);
+   pars(43) = MChi(2);
+   pars(44) = MChi(3);
+   pars(45) = MChi(4);
+   pars(46) = MChi(5);
+   pars(47) = MCha(0);
+   pars(48) = MCha(1);
+   pars(49) = MFe(0);
+   pars(50) = MFe(1);
+   pars(51) = MFe(2);
+   pars(52) = MFd(0);
+   pars(53) = MFd(1);
+   pars(54) = MFd(2);
+   pars(55) = MFu(0);
+   pars(56) = MFu(1);
+   pars(57) = MFu(2);
+   pars(58) = MFDX(0);
+   pars(59) = MFDX(1);
+   pars(60) = MFDX(2);
+   pars(61) = MSHI0(0);
+   pars(62) = MSHI0(1);
+   pars(63) = MSHI0(2);
+   pars(64) = MSHI0(3);
+   pars(65) = MSHIp(0);
+   pars(66) = MSHIp(1);
+   pars(67) = MSHIp(2);
+   pars(68) = MSHIp(3);
+   pars(69) = MChaI(0);
+   pars(70) = MChaI(1);
+   pars(71) = MChiI(0);
+   pars(72) = MChiI(1);
+   pars(73) = MChiI(2);
+   pars(74) = MChiI(3);
+   pars(75) = MSSI0(0);
+   pars(76) = MSSI0(1);
+   pars(77) = MFSI(0);
+   pars(78) = MFSI(1);
+   pars(79) = MSHp0(0);
+   pars(80) = MSHp0(1);
+   pars(81) = MSHpp(0);
+   pars(82) = MSHpp(1);
+   pars(83) = MChiP(0);
+   pars(84) = MChiP(1);
+   pars(85) = MVWm;
+   pars(86) = MVP;
+   pars(87) = MVZ;
+   pars(88) = MVZp;
+
+   return pars;
 }
 
 std::string CLASSNAME::name() const

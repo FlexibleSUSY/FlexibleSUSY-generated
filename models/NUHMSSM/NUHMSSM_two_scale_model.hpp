@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 13:24:53
+// File generated at Wed 29 Jun 2016 12:53:15
 
 /**
  * @file NUHMSSM_two_scale_model.hpp
@@ -24,8 +24,8 @@
  *        value problem using the two_scale solver by solvingt EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Mon 9 May 2016 13:24:53 with FlexibleSUSY
- * 1.4.2 (git commit: ba53b7080ae303fc6b5ef4b4ce12d05fef5b6211) and SARAH 4.8.5 .
+ * This file was generated at Wed 29 Jun 2016 12:53:15 with FlexibleSUSY
+ * 1.5.0 (git commit: 41797ffc98415b60cbfd71b7925b6bd5318e68bb) and SARAH 4.8.6 .
  */
 
 #ifndef NUHMSSM_TWO_SCALE_H
@@ -56,6 +56,8 @@ public:
    virtual void print(std::ostream& out = std::cout) const;
    virtual void set_precision(double);
 };
+
+std::ostream& operator<<(std::ostream&, const NUHMSSM<Two_scale>&);
 
 } // namespace flexiblesusy
 

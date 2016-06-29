@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 13:21:15
+// File generated at Wed 29 Jun 2016 12:43:21
 
 #ifndef MSSMRHN_INFO_H
 #define MSSMRHN_INFO_H
@@ -28,6 +28,13 @@ namespace flexiblesusy {
 namespace MSSMRHN_info {
    enum Particles : unsigned {VG, Glu, Sd, Su, Se, Sv, hh, Ah, Hpm, Chi, Fv,
       Cha, Fe, Fd, Fu, VWm, VP, VZ, NUMBER_OF_PARTICLES};
+
+   enum Masses : unsigned {MVG, MGlu, MSd_1, MSd_2, MSd_3, MSd_4, MSd_5, MSd_6,
+      MSu_1, MSu_2, MSu_3, MSu_4, MSu_5, MSu_6, MSe_1, MSe_2, MSe_3, MSe_4, MSe_5
+      , MSe_6, MSv_1, MSv_2, MSv_3, MSv_4, MSv_5, MSv_6, Mhh_1, Mhh_2, MAh_1,
+      MAh_2, MHpm_1, MHpm_2, MChi_1, MChi_2, MChi_3, MChi_4, MFv_1, MFv_2, MFv_3,
+      MFv_4, MFv_5, MFv_6, MCha_1, MCha_2, MFe_1, MFe_2, MFe_3, MFd_1, MFd_2,
+      MFd_3, MFu_1, MFu_2, MFu_3, MVWm, MVP, MVZ, NUMBER_OF_MASSES};
 
    enum Parameters : unsigned {Yd0_0, Yd0_1, Yd0_2, Yd1_0, Yd1_1, Yd1_2, Yd2_0,
       Yd2_1, Yd2_2, Ye0_0, Ye0_1, Ye0_2, Ye1_0, Ye1_1, Ye1_2, Ye2_0, Ye2_1, Ye2_2

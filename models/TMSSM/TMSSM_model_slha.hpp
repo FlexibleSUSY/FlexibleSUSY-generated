@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 12:21:14
+// File generated at Wed 29 Jun 2016 11:43:56
 
 #ifndef TMSSM_SLHA_H
 #define TMSSM_SLHA_H

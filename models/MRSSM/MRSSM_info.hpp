@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 12:19:37
+// File generated at Wed 29 Jun 2016 11:44:08
 
 #ifndef MRSSM_INFO_H
 #define MRSSM_INFO_H
@@ -29,6 +29,14 @@ namespace MRSSM_info {
    enum Particles : unsigned {VG, Glu, Fv, SRdp, SRum, sigmaO, phiO, Sd, Sv, Su
       , Se, hh, Ah, Rh, Hpm, Chi, Cha1, Cha2, Fe, Fd, Fu, VWm, VP, VZ,
       NUMBER_OF_PARTICLES};
+
+   enum Masses : unsigned {MVG, MGlu, MFv_1, MFv_2, MFv_3, MSRdp, MSRum,
+      MsigmaO, MphiO, MSd_1, MSd_2, MSd_3, MSd_4, MSd_5, MSd_6, MSv_1, MSv_2,
+      MSv_3, MSu_1, MSu_2, MSu_3, MSu_4, MSu_5, MSu_6, MSe_1, MSe_2, MSe_3, MSe_4,
+      MSe_5, MSe_6, Mhh_1, Mhh_2, Mhh_3, Mhh_4, MAh_1, MAh_2, MAh_3, MAh_4, MRh_1
+      , MRh_2, MHpm_1, MHpm_2, MHpm_3, MHpm_4, MChi_1, MChi_2, MChi_3, MChi_4,
+      MCha1_1, MCha1_2, MCha2_1, MCha2_2, MFe_1, MFe_2, MFe_3, MFd_1, MFd_2, MFd_3
+      , MFu_1, MFu_2, MFu_3, MVWm, MVP, MVZ, NUMBER_OF_MASSES};
 
    enum Parameters : unsigned {Yd0_0, Yd0_1, Yd0_2, Yd1_0, Yd1_1, Yd1_2, Yd2_0,
       Yd2_1, Yd2_2, Ye0_0, Ye0_1, Ye0_2, Ye1_0, Ye1_1, Ye1_2, Ye2_0, Ye2_1, Ye2_2

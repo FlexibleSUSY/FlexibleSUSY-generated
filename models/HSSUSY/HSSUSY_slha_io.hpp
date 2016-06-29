@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 12:02:46
+// File generated at Wed 29 Jun 2016 11:26:09
 
 #ifndef HSSUSY_SLHA_IO_H
 #define HSSUSY_SLHA_IO_H
@@ -191,6 +191,7 @@ void HSSUSY_slha_io::set_model_parameters(const HSSUSY_slha<T>& model)
       ;
       slha_io.set_block(block);
    }
+
 
 }
 

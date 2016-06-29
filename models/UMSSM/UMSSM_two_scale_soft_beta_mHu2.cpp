@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 12:43:25
+// File generated at Wed 29 Jun 2016 12:03:38
 
 #include "UMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -103,8 +103,8 @@ double UMSSM_soft_parameters::calc_beta_mHu2_one_loop(const Soft_traces& soft_tr
  */
 double UMSSM_soft_parameters::calc_beta_mHu2_two_loop(const Soft_traces& soft_traces) const
 {
-   const auto QHu = INPUT(QHu);
    const auto QHd = INPUT(QHd);
+   const auto QHu = INPUT(QHu);
    const auto Qs = INPUT(Qs);
    const auto Qq = INPUT(Qq);
    const auto Qu = INPUT(Qu);

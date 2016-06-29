@@ -21,7 +21,7 @@
  * @brief contains wrapper class for model class in SLHA convention
  */
 
-// File generated at Mon 9 May 2016 12:01:04
+// File generated at Wed 29 Jun 2016 11:24:25
 
 #ifndef HTHDMIIMSSMBC_TWO_SCALE_SLHA_H
 #define HTHDMIIMSSMBC_TWO_SCALE_SLHA_H
@@ -155,6 +155,8 @@ private:
    void convert_trilinear_couplings_to_slha();
    void convert_soft_squared_masses_to_slha();
 };
+
+std::ostream& operator<<(std::ostream& ostr, const HTHDMIIMSSMBC_slha<Two_scale>& model);
 
 } // namespace flexiblesusy
 

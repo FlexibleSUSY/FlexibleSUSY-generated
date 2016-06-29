@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 14:11:16
+// File generated at Wed 29 Jun 2016 13:29:54
 
 /**
  * @file MSSMNoFV_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Mon 9 May 2016 14:11:16 with FlexibleSUSY
- * 1.4.2 (git commit: ba53b7080ae303fc6b5ef4b4ce12d05fef5b6211) and SARAH 4.8.5 .
+ * This file was generated at Wed 29 Jun 2016 13:29:54 with FlexibleSUSY
+ * 1.5.0 (git commit: 41797ffc98415b60cbfd71b7925b6bd5318e68bb) and SARAH 4.8.6 .
  */
 
 #include "MSSMNoFV_mass_eigenstates.hpp"
@@ -1059,6 +1059,119 @@ void CLASSNAME::clear()
    clear_DRbar_parameters();
    physical.clear();
    problems.clear();
+}
+
+void CLASSNAME::set_DRbar_masses(const Eigen::ArrayXd& pars)
+{
+   MVG = pars(0);
+   MGlu = pars(1);
+   MFd = pars(2);
+   MFs = pars(3);
+   MFb = pars(4);
+   MFu = pars(5);
+   MFc = pars(6);
+   MFt = pars(7);
+   MFve = pars(8);
+   MFvm = pars(9);
+   MFvt = pars(10);
+   MFe = pars(11);
+   MFm = pars(12);
+   MFtau = pars(13);
+   MSveL = pars(14);
+   MSvmL = pars(15);
+   MSvtL = pars(16);
+   MSd(0) = pars(17);
+   MSd(1) = pars(18);
+   MSu(0) = pars(19);
+   MSu(1) = pars(20);
+   MSe(0) = pars(21);
+   MSe(1) = pars(22);
+   MSm(0) = pars(23);
+   MSm(1) = pars(24);
+   MStau(0) = pars(25);
+   MStau(1) = pars(26);
+   MSs(0) = pars(27);
+   MSs(1) = pars(28);
+   MSc(0) = pars(29);
+   MSc(1) = pars(30);
+   MSb(0) = pars(31);
+   MSb(1) = pars(32);
+   MSt(0) = pars(33);
+   MSt(1) = pars(34);
+   Mhh(0) = pars(35);
+   Mhh(1) = pars(36);
+   MAh(0) = pars(37);
+   MAh(1) = pars(38);
+   MHpm(0) = pars(39);
+   MHpm(1) = pars(40);
+   MChi(0) = pars(41);
+   MChi(1) = pars(42);
+   MChi(2) = pars(43);
+   MChi(3) = pars(44);
+   MCha(0) = pars(45);
+   MCha(1) = pars(46);
+   MVWm = pars(47);
+   MVP = pars(48);
+   MVZ = pars(49);
+
+}
+
+Eigen::ArrayXd CLASSNAME::get_DRbar_masses() const
+{
+   Eigen::ArrayXd pars(50);
+
+   pars(0) = MVG;
+   pars(1) = MGlu;
+   pars(2) = MFd;
+   pars(3) = MFs;
+   pars(4) = MFb;
+   pars(5) = MFu;
+   pars(6) = MFc;
+   pars(7) = MFt;
+   pars(8) = MFve;
+   pars(9) = MFvm;
+   pars(10) = MFvt;
+   pars(11) = MFe;
+   pars(12) = MFm;
+   pars(13) = MFtau;
+   pars(14) = MSveL;
+   pars(15) = MSvmL;
+   pars(16) = MSvtL;
+   pars(17) = MSd(0);
+   pars(18) = MSd(1);
+   pars(19) = MSu(0);
+   pars(20) = MSu(1);
+   pars(21) = MSe(0);
+   pars(22) = MSe(1);
+   pars(23) = MSm(0);
+   pars(24) = MSm(1);
+   pars(25) = MStau(0);
+   pars(26) = MStau(1);
+   pars(27) = MSs(0);
+   pars(28) = MSs(1);
+   pars(29) = MSc(0);
+   pars(30) = MSc(1);
+   pars(31) = MSb(0);
+   pars(32) = MSb(1);
+   pars(33) = MSt(0);
+   pars(34) = MSt(1);
+   pars(35) = Mhh(0);
+   pars(36) = Mhh(1);
+   pars(37) = MAh(0);
+   pars(38) = MAh(1);
+   pars(39) = MHpm(0);
+   pars(40) = MHpm(1);
+   pars(41) = MChi(0);
+   pars(42) = MChi(1);
+   pars(43) = MChi(2);
+   pars(44) = MChi(3);
+   pars(45) = MCha(0);
+   pars(46) = MCha(1);
+   pars(47) = MVWm;
+   pars(48) = MVP;
+   pars(49) = MVZ;
+
+   return pars;
 }
 
 std::string CLASSNAME::name() const

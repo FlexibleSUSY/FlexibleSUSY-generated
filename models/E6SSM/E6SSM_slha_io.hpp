@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 12:52:31
+// File generated at Wed 29 Jun 2016 12:15:17
 
 #ifndef E6SSM_SLHA_IO_H
 #define E6SSM_SLHA_IO_H
@@ -228,6 +228,21 @@ void E6SSM_slha_io::set_model_parameters(const E6SSM_slha<T>& model)
    slha_io.set_block("ESIXTKAPPA", MODELPARAMETER(TKappa), "TKappa", model.get_scale());
    slha_io.set_block("ESIXLAMBDA", MODELPARAMETER(Lambda12), "Lambda12", model.get_scale());
    slha_io.set_block("ESIXTLAMBDA", MODELPARAMETER(TLambda12), "TLambda12", model.get_scale());
+
+   {
+      std::ostringstream block;
+      block << "Block Phases Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(1, (Re(MODELPARAMETER(PhaseGlu))), "Re(PhaseGlu)")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block IMPhases Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(1, (Im(MODELPARAMETER(PhaseGlu))), "Im(PhaseGlu)")
+      ;
+      slha_io.set_block(block);
+   }
 
 }
 

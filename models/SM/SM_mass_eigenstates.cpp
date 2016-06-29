@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 12:04:06
+// File generated at Wed 29 Jun 2016 11:27:24
 
 /**
  * @file SM_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Mon 9 May 2016 12:04:06 with FlexibleSUSY
- * 1.4.2 (git commit: ba53b7080ae303fc6b5ef4b4ce12d05fef5b6211) and SARAH 4.8.5 .
+ * This file was generated at Wed 29 Jun 2016 11:27:24 with FlexibleSUSY
+ * 1.5.0 (git commit: 41797ffc98415b60cbfd71b7925b6bd5318e68bb) and SARAH 4.8.6 .
  */
 
 #include "SM_mass_eigenstates.hpp"
@@ -783,6 +783,57 @@ void CLASSNAME::clear()
    clear_DRbar_parameters();
    physical.clear();
    problems.clear();
+}
+
+void CLASSNAME::set_DRbar_masses(const Eigen::ArrayXd& pars)
+{
+   MVG = pars(0);
+   MHp = pars(1);
+   MFv(0) = pars(2);
+   MFv(1) = pars(3);
+   MFv(2) = pars(4);
+   MAh = pars(5);
+   Mhh = pars(6);
+   MFd(0) = pars(7);
+   MFd(1) = pars(8);
+   MFd(2) = pars(9);
+   MFu(0) = pars(10);
+   MFu(1) = pars(11);
+   MFu(2) = pars(12);
+   MFe(0) = pars(13);
+   MFe(1) = pars(14);
+   MFe(2) = pars(15);
+   MVWp = pars(16);
+   MVP = pars(17);
+   MVZ = pars(18);
+
+}
+
+Eigen::ArrayXd CLASSNAME::get_DRbar_masses() const
+{
+   Eigen::ArrayXd pars(19);
+
+   pars(0) = MVG;
+   pars(1) = MHp;
+   pars(2) = MFv(0);
+   pars(3) = MFv(1);
+   pars(4) = MFv(2);
+   pars(5) = MAh;
+   pars(6) = Mhh;
+   pars(7) = MFd(0);
+   pars(8) = MFd(1);
+   pars(9) = MFd(2);
+   pars(10) = MFu(0);
+   pars(11) = MFu(1);
+   pars(12) = MFu(2);
+   pars(13) = MFe(0);
+   pars(14) = MFe(1);
+   pars(15) = MFe(2);
+   pars(16) = MVWp;
+   pars(17) = MVP;
+   pars(18) = MVZ;
+
+   return pars;
 }
 
 std::string CLASSNAME::name() const

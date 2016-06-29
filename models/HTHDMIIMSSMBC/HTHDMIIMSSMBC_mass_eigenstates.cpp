@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 12:01:23
+// File generated at Wed 29 Jun 2016 11:24:44
 
 /**
  * @file HTHDMIIMSSMBC_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Mon 9 May 2016 12:01:23 with FlexibleSUSY
- * 1.4.2 (git commit: ba53b7080ae303fc6b5ef4b4ce12d05fef5b6211) and SARAH 4.8.5 .
+ * This file was generated at Wed 29 Jun 2016 11:24:44 with FlexibleSUSY
+ * 1.5.0 (git commit: 41797ffc98415b60cbfd71b7925b6bd5318e68bb) and SARAH 4.8.6 .
  */
 
 #include "HTHDMIIMSSMBC_mass_eigenstates.hpp"
@@ -853,6 +853,69 @@ void CLASSNAME::clear()
    clear_DRbar_parameters();
    physical.clear();
    problems.clear();
+}
+
+void CLASSNAME::set_DRbar_masses(const Eigen::ArrayXd& pars)
+{
+   MVG = pars(0);
+   MFv(0) = pars(1);
+   MFv(1) = pars(2);
+   MFv(2) = pars(3);
+   MCha = pars(4);
+   Mhh(0) = pars(5);
+   Mhh(1) = pars(6);
+   MAh(0) = pars(7);
+   MAh(1) = pars(8);
+   MHm(0) = pars(9);
+   MHm(1) = pars(10);
+   MFd(0) = pars(11);
+   MFd(1) = pars(12);
+   MFd(2) = pars(13);
+   MFu(0) = pars(14);
+   MFu(1) = pars(15);
+   MFu(2) = pars(16);
+   MFe(0) = pars(17);
+   MFe(1) = pars(18);
+   MFe(2) = pars(19);
+   MChi(0) = pars(20);
+   MChi(1) = pars(21);
+   MVWm = pars(22);
+   MVP = pars(23);
+   MVZ = pars(24);
+
+}
+
+Eigen::ArrayXd CLASSNAME::get_DRbar_masses() const
+{
+   Eigen::ArrayXd pars(25);
+
+   pars(0) = MVG;
+   pars(1) = MFv(0);
+   pars(2) = MFv(1);
+   pars(3) = MFv(2);
+   pars(4) = MCha;
+   pars(5) = Mhh(0);
+   pars(6) = Mhh(1);
+   pars(7) = MAh(0);
+   pars(8) = MAh(1);
+   pars(9) = MHm(0);
+   pars(10) = MHm(1);
+   pars(11) = MFd(0);
+   pars(12) = MFd(1);
+   pars(13) = MFd(2);
+   pars(14) = MFu(0);
+   pars(15) = MFu(1);
+   pars(16) = MFu(2);
+   pars(17) = MFe(0);
+   pars(18) = MFe(1);
+   pars(19) = MFe(2);
+   pars(20) = MChi(0);
+   pars(21) = MChi(1);
+   pars(22) = MVWm;
+   pars(23) = MVP;
+   pars(24) = MVZ;
+
+   return pars;
 }
 
 std::string CLASSNAME::name() const

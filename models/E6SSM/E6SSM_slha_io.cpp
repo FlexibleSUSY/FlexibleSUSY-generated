@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 12:52:31
+// File generated at Wed 29 Jun 2016 12:15:17
 
 #include "E6SSM_slha_io.hpp"
 #include "E6SSM_input_parameters.hpp"
@@ -36,8 +36,6 @@
 #define PHYSICAL_SLHA(p) model.get_physical_slha().p
 #define LOCALPHYSICAL(p) physical.p
 #define MODELPARAMETER(p) model.get_##p()
-#define DEFINE_PARAMETER(p)                                            \
-   typename std::remove_const<typename std::remove_reference<decltype(MODELPARAMETER(p))>::type>::type p;
 #define DEFINE_PHYSICAL_PARAMETER(p) decltype(LOCALPHYSICAL(p)) p;
 #define LowEnergyConstant(p) Electroweak_constants::p
 
@@ -408,85 +406,85 @@ void E6SSM_slha_io::fill_drbar_parameters(E6SSM_mass_eigenstates& model) const
    model.set_g3(slha_io.read_entry("gauge", 3));
    model.set_gN(slha_io.read_entry("gauge", 4));
    {
-      DEFINE_PARAMETER(Yu);
+      Eigen::Matrix<double,3,3> Yu;
       slha_io.read_block("Yu", Yu);
       model.set_Yu(Yu);
    }
    {
-      DEFINE_PARAMETER(Yd);
+      Eigen::Matrix<double,3,3> Yd;
       slha_io.read_block("Yd", Yd);
       model.set_Yd(Yd);
    }
    {
-      DEFINE_PARAMETER(Ye);
+      Eigen::Matrix<double,3,3> Ye;
       slha_io.read_block("Ye", Ye);
       model.set_Ye(Ye);
    }
    {
-      DEFINE_PARAMETER(TYe);
+      Eigen::Matrix<double,3,3> TYe;
       slha_io.read_block("Te", TYe);
       model.set_TYe(TYe);
    }
    {
-      DEFINE_PARAMETER(TYd);
+      Eigen::Matrix<double,3,3> TYd;
       slha_io.read_block("Td", TYd);
       model.set_TYd(TYd);
    }
    {
-      DEFINE_PARAMETER(TYu);
+      Eigen::Matrix<double,3,3> TYu;
       slha_io.read_block("Tu", TYu);
       model.set_TYu(TYu);
    }
    {
-      DEFINE_PARAMETER(mq2);
+      Eigen::Matrix<double,3,3> mq2;
       slha_io.read_block("MSQ2", mq2);
       model.set_mq2(mq2);
    }
    {
-      DEFINE_PARAMETER(me2);
+      Eigen::Matrix<double,3,3> me2;
       slha_io.read_block("MSE2", me2);
       model.set_me2(me2);
    }
    {
-      DEFINE_PARAMETER(ml2);
+      Eigen::Matrix<double,3,3> ml2;
       slha_io.read_block("MSL2", ml2);
       model.set_ml2(ml2);
    }
    {
-      DEFINE_PARAMETER(mu2);
+      Eigen::Matrix<double,3,3> mu2;
       slha_io.read_block("MSU2", mu2);
       model.set_mu2(mu2);
    }
    {
-      DEFINE_PARAMETER(md2);
+      Eigen::Matrix<double,3,3> md2;
       slha_io.read_block("MSD2", md2);
       model.set_md2(md2);
    }
    model.set_mHd2(slha_io.read_entry("MSOFT", 21));
    model.set_mHu2(slha_io.read_entry("MSOFT", 22));
    {
-      DEFINE_PARAMETER(mH1I2);
+      Eigen::Matrix<double,2,2> mH1I2;
       slha_io.read_block("mHdInert2", mH1I2);
       model.set_mH1I2(mH1I2);
    }
    {
-      DEFINE_PARAMETER(mH2I2);
+      Eigen::Matrix<double,2,2> mH2I2;
       slha_io.read_block("mHuInert2", mH2I2);
       model.set_mH2I2(mH2I2);
    }
    {
-      DEFINE_PARAMETER(mDx2);
+      Eigen::Matrix<double,3,3> mDx2;
       slha_io.read_block("mX2", mDx2);
       model.set_mDx2(mDx2);
    }
    {
-      DEFINE_PARAMETER(mDxbar2);
+      Eigen::Matrix<double,3,3> mDxbar2;
       slha_io.read_block("mXBar2", mDxbar2);
       model.set_mDxbar2(mDxbar2);
    }
    model.set_ms2(slha_io.read_entry("MSOFT", 23));
    {
-      DEFINE_PARAMETER(msI2);
+      Eigen::Matrix<double,2,2> msI2;
       slha_io.read_block("msInert2", msI2);
       model.set_msI2(msI2);
    }
@@ -500,24 +498,24 @@ void E6SSM_slha_io::fill_drbar_parameters(E6SSM_mass_eigenstates& model) const
    model.set_vu(slha_io.read_entry("HMIX", 103));
    model.set_vs(slha_io.read_entry("ESIXRUN", 11));
    {
-      DEFINE_PARAMETER(Kappa);
+      Eigen::Matrix<double,3,3> Kappa;
       slha_io.read_block("ESIXKAPPA", Kappa);
       model.set_Kappa(Kappa);
    }
    {
-      DEFINE_PARAMETER(TKappa);
+      Eigen::Matrix<double,3,3> TKappa;
       slha_io.read_block("ESIXTKAPPA", TKappa);
       model.set_TKappa(TKappa);
    }
    model.set_Lambdax(slha_io.read_entry("ESIXRUN", 1));
    model.set_TLambdax(slha_io.read_entry("ESIXRUN", 2));
    {
-      DEFINE_PARAMETER(Lambda12);
+      Eigen::Matrix<double,2,2> Lambda12;
       slha_io.read_block("ESIXLAMBDA", Lambda12);
       model.set_Lambda12(Lambda12);
    }
    {
-      DEFINE_PARAMETER(TLambda12);
+      Eigen::Matrix<double,2,2> TLambda12;
       slha_io.read_block("ESIXTLAMBDA", TLambda12);
       model.set_TLambda12(TLambda12);
    }

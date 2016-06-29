@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 13:07:54
+// File generated at Wed 29 Jun 2016 12:31:30
 
 #ifndef NUTNMSSM_TWO_SCALE_susy_parameters_H
 #define NUTNMSSM_TWO_SCALE_susy_parameters_H

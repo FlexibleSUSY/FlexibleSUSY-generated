@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 13:08:12
+// File generated at Wed 29 Jun 2016 12:31:56
 
 #ifndef NUTNMSSM_UTILITIES_H
 #define NUTNMSSM_UTILITIES_H
@@ -62,7 +62,8 @@ public:
          for (unsigned m = 0; m < particle_multiplicities[i]; m++) {
             masses.push_back(
                std::string("M") + particle_names[i] +
-               (particle_multiplicities[i] == 1 ? "" : "(" + std::to_string(m) + ")"));
+               (particle_multiplicities[i] == 1 ? "" : "("
+                + std::to_string(static_cast<unsigned long long>(m)) + ")"));
          }
       }
       return masses;
@@ -79,10 +80,7 @@ public:
    }
    std::size_t get_number_of_masses() const {
       using namespace NUTNMSSM_info;
-      std::size_t number_of_masses = 0;
-      for (unsigned i = 0; i < NUMBER_OF_PARTICLES; i++)
-         number_of_masses += particle_multiplicities[i];
-      return number_of_masses;
+      return NUMBER_OF_MASSES;
    }
 };
 

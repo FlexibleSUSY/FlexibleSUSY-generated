@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 13:00:17
+// File generated at Wed 29 Jun 2016 12:21:23
 
 /**
  * @file UMSSM_two_scale_model.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Mon 9 May 2016 13:00:17 with FlexibleSUSY
- * 1.4.2 (git commit: ba53b7080ae303fc6b5ef4b4ce12d05fef5b6211) and SARAH 4.8.5 .
+ * This file was generated at Wed 29 Jun 2016 12:21:23 with FlexibleSUSY
+ * 1.5.0 (git commit: 41797ffc98415b60cbfd71b7925b6bd5318e68bb) and SARAH 4.8.6 .
  */
 
 #include "UMSSM_two_scale_model.hpp"
@@ -76,6 +76,12 @@ void CLASSNAME::print(std::ostream& out) const
 void CLASSNAME::set_precision(double p)
 {
    UMSSM_mass_eigenstates::set_precision(p);
+}
+
+std::ostream& operator<<(std::ostream& ostr, const UMSSM<Two_scale>& model)
+{
+   model.print(ostr);
+   return ostr;
 }
 
 } // namespace flexiblesusy

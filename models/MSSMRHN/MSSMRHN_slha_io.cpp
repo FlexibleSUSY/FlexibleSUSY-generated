@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 13:21:15
+// File generated at Wed 29 Jun 2016 12:43:21
 
 #include "MSSMRHN_slha_io.hpp"
 #include "MSSMRHN_input_parameters.hpp"
@@ -36,8 +36,6 @@
 #define PHYSICAL_SLHA(p) model.get_physical_slha().p
 #define LOCALPHYSICAL(p) physical.p
 #define MODELPARAMETER(p) model.get_##p()
-#define DEFINE_PARAMETER(p)                                            \
-   typename std::remove_const<typename std::remove_reference<decltype(MODELPARAMETER(p))>::type>::type p;
 #define DEFINE_PHYSICAL_PARAMETER(p) decltype(LOCALPHYSICAL(p)) p;
 #define LowEnergyConstant(p) Electroweak_constants::p
 
@@ -351,59 +349,59 @@ void MSSMRHN_slha_io::fill_drbar_parameters(MSSMRHN_mass_eigenstates& model) con
    model.set_g2(slha_io.read_entry("gauge", 2));
    model.set_g3(slha_io.read_entry("gauge", 3));
    {
-      DEFINE_PARAMETER(Yu);
+      Eigen::Matrix<double,3,3> Yu;
       slha_io.read_block("Yu", Yu);
       model.set_Yu(Yu);
    }
    {
-      DEFINE_PARAMETER(Yd);
+      Eigen::Matrix<double,3,3> Yd;
       slha_io.read_block("Yd", Yd);
       model.set_Yd(Yd);
    }
    {
-      DEFINE_PARAMETER(Ye);
+      Eigen::Matrix<double,3,3> Ye;
       slha_io.read_block("Ye", Ye);
       model.set_Ye(Ye);
    }
    {
-      DEFINE_PARAMETER(TYe);
+      Eigen::Matrix<double,3,3> TYe;
       slha_io.read_block("Te", TYe);
       model.set_TYe(TYe);
    }
    {
-      DEFINE_PARAMETER(TYd);
+      Eigen::Matrix<double,3,3> TYd;
       slha_io.read_block("Td", TYd);
       model.set_TYd(TYd);
    }
    {
-      DEFINE_PARAMETER(TYu);
+      Eigen::Matrix<double,3,3> TYu;
       slha_io.read_block("Tu", TYu);
       model.set_TYu(TYu);
    }
    model.set_Mu(slha_io.read_entry("HMIX", 1));
    model.set_BMu(slha_io.read_entry("HMIX", 101));
    {
-      DEFINE_PARAMETER(mq2);
+      Eigen::Matrix<double,3,3> mq2;
       slha_io.read_block("MSQ2", mq2);
       model.set_mq2(mq2);
    }
    {
-      DEFINE_PARAMETER(me2);
+      Eigen::Matrix<double,3,3> me2;
       slha_io.read_block("MSE2", me2);
       model.set_me2(me2);
    }
    {
-      DEFINE_PARAMETER(ml2);
+      Eigen::Matrix<double,3,3> ml2;
       slha_io.read_block("MSL2", ml2);
       model.set_ml2(ml2);
    }
    {
-      DEFINE_PARAMETER(mu2);
+      Eigen::Matrix<double,3,3> mu2;
       slha_io.read_block("MSU2", mu2);
       model.set_mu2(mu2);
    }
    {
-      DEFINE_PARAMETER(md2);
+      Eigen::Matrix<double,3,3> md2;
       slha_io.read_block("MSD2", md2);
       model.set_md2(md2);
    }
@@ -415,27 +413,27 @@ void MSSMRHN_slha_io::fill_drbar_parameters(MSSMRHN_mass_eigenstates& model) con
    model.set_vd(slha_io.read_entry("HMIX", 102));
    model.set_vu(slha_io.read_entry("HMIX", 103));
    {
-      DEFINE_PARAMETER(Yv);
+      Eigen::Matrix<double,3,3> Yv;
       slha_io.read_block("Yv", Yv);
       model.set_Yv(Yv);
    }
    {
-      DEFINE_PARAMETER(TYv);
+      Eigen::Matrix<double,3,3> TYv;
       slha_io.read_block("Tv", TYv);
       model.set_TYv(TYv);
    }
    {
-      DEFINE_PARAMETER(mv2);
+      Eigen::Matrix<double,3,3> mv2;
       slha_io.read_block("mv2", mv2);
       model.set_mv2(mv2);
    }
    {
-      DEFINE_PARAMETER(Mv);
+      Eigen::Matrix<double,3,3> Mv;
       slha_io.read_block("Mv", Mv);
       model.set_Mv(Mv);
    }
    {
-      DEFINE_PARAMETER(BMv);
+      Eigen::Matrix<double,3,3> BMv;
       slha_io.read_block("BMv", BMv);
       model.set_BMv(BMv);
    }

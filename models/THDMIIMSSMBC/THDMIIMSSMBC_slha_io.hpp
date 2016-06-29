@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 11:57:18
+// File generated at Wed 29 Jun 2016 11:21:21
 
 #ifndef THDMIIMSSMBC_SLHA_IO_H
 #define THDMIIMSSMBC_SLHA_IO_H
@@ -194,6 +194,7 @@ void THDMIIMSSMBC_slha_io::set_model_parameters(const THDMIIMSSMBC_slha<T>& mode
       ;
       slha_io.set_block(block);
    }
+
 
 }
 

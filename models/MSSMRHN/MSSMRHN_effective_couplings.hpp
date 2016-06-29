@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 13:26:56
+// File generated at Wed 29 Jun 2016 12:48:52
 
 #ifndef MSSMRHN_EFFECTIVE_COUPLINGS_H
 #define MSSMRHN_EFFECTIVE_COUPLINGS_H

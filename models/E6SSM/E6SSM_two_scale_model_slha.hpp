@@ -21,7 +21,7 @@
  * @brief contains wrapper class for model class in SLHA convention
  */
 
-// File generated at Mon 9 May 2016 13:29:50
+// File generated at Wed 29 Jun 2016 12:51:42
 
 #ifndef E6SSM_TWO_SCALE_SLHA_H
 #define E6SSM_TWO_SCALE_SLHA_H
@@ -251,6 +251,8 @@ private:
    void convert_trilinear_couplings_to_slha();
    void convert_soft_squared_masses_to_slha();
 };
+
+std::ostream& operator<<(std::ostream& ostr, const E6SSM_slha<Two_scale>& model);
 
 } // namespace flexiblesusy
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 14:10:08
+// File generated at Wed 29 Jun 2016 13:32:24
 
 #ifndef CMSSM_SLHA_IO_H
 #define CMSSM_SLHA_IO_H
@@ -202,6 +202,21 @@ void CMSSM_slha_io::set_model_parameters(const CMSSM_slha<T>& model)
             << FORMAT_ELEMENT(1, (MODELPARAMETER(MassB)), "MassB")
             << FORMAT_ELEMENT(2, (MODELPARAMETER(MassWB)), "MassWB")
             << FORMAT_ELEMENT(3, (MODELPARAMETER(MassG)), "MassG")
+      ;
+      slha_io.set_block(block);
+   }
+
+   {
+      std::ostringstream block;
+      block << "Block Phases Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(1, (Re(MODELPARAMETER(PhaseGlu))), "Re(PhaseGlu)")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block IMPhases Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(1, (Im(MODELPARAMETER(PhaseGlu))), "Im(PhaseGlu)")
       ;
       slha_io.set_block(block);
    }

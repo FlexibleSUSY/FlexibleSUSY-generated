@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 12:52:31
+// File generated at Wed 29 Jun 2016 12:15:17
 
 #ifndef E6SSM_INFO_H
 #define E6SSM_INFO_H
@@ -29,6 +29,17 @@ namespace E6SSM_info {
    enum Particles : unsigned {VG, Glu, Fv, ChaP, Sd, Sv, Su, Se, SDX, hh, Ah,
       Hpm, Chi, Cha, Fe, Fd, Fu, FDX, SHI0, SHIp, ChaI, ChiI, SSI0, FSI, SHp0,
       SHpp, ChiP, VWm, VP, VZ, VZp, NUMBER_OF_PARTICLES};
+
+   enum Masses : unsigned {MVG, MGlu, MFv_1, MFv_2, MFv_3, MChaP, MSd_1, MSd_2,
+      MSd_3, MSd_4, MSd_5, MSd_6, MSv_1, MSv_2, MSv_3, MSu_1, MSu_2, MSu_3, MSu_4
+      , MSu_5, MSu_6, MSe_1, MSe_2, MSe_3, MSe_4, MSe_5, MSe_6, MSDX_1, MSDX_2,
+      MSDX_3, MSDX_4, MSDX_5, MSDX_6, Mhh_1, Mhh_2, Mhh_3, MAh_1, MAh_2, MAh_3,
+      MHpm_1, MHpm_2, MChi_1, MChi_2, MChi_3, MChi_4, MChi_5, MChi_6, MCha_1,
+      MCha_2, MFe_1, MFe_2, MFe_3, MFd_1, MFd_2, MFd_3, MFu_1, MFu_2, MFu_3,
+      MFDX_1, MFDX_2, MFDX_3, MSHI0_1, MSHI0_2, MSHI0_3, MSHI0_4, MSHIp_1, MSHIp_2
+      , MSHIp_3, MSHIp_4, MChaI_1, MChaI_2, MChiI_1, MChiI_2, MChiI_3, MChiI_4,
+      MSSI0_1, MSSI0_2, MFSI_1, MFSI_2, MSHp0_1, MSHp0_2, MSHpp_1, MSHpp_2,
+      MChiP_1, MChiP_2, MVWm, MVP, MVZ, MVZp, NUMBER_OF_MASSES};
 
    enum Parameters : unsigned {Yd0_0, Yd0_1, Yd0_2, Yd1_0, Yd1_1, Yd1_2, Yd2_0,
       Yd2_1, Yd2_2, Ye0_0, Ye0_1, Ye0_2, Ye1_0, Ye1_1, Ye1_2, Ye2_0, Ye2_1, Ye2_2

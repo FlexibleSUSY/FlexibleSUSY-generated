@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 12:02:46
+// File generated at Wed 29 Jun 2016 11:26:09
 
 #ifndef HSSUSY_INFO_H
 #define HSSUSY_INFO_H
@@ -28,6 +28,10 @@ namespace flexiblesusy {
 namespace HSSUSY_info {
    enum Particles : unsigned {VG, Hp, Fv, Ah, hh, Fd, Fu, Fe, VWp, VP, VZ,
       NUMBER_OF_PARTICLES};
+
+   enum Masses : unsigned {MVG, MHp, MFv_1, MFv_2, MFv_3, MAh, Mhh, MFd_1,
+      MFd_2, MFd_3, MFu_1, MFu_2, MFu_3, MFe_1, MFe_2, MFe_3, MVWp, MVP, MVZ,
+      NUMBER_OF_MASSES};
 
    enum Parameters : unsigned {g1, g2, g3, Lambdax, Yu0_0, Yu0_1, Yu0_2, Yu1_0,
       Yu1_1, Yu1_2, Yu2_0, Yu2_1, Yu2_2, Yd0_0, Yd0_1, Yd0_2, Yd1_0, Yd1_1, Yd1_2

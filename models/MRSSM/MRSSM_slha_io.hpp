@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 12:19:37
+// File generated at Wed 29 Jun 2016 11:44:08
 
 #ifndef MRSSM_SLHA_IO_H
 #define MRSSM_SLHA_IO_H
@@ -223,6 +223,7 @@ void MRSSM_slha_io::set_model_parameters(const MRSSM_slha<T>& model)
       ;
       slha_io.set_block(block);
    }
+
 
 }
 

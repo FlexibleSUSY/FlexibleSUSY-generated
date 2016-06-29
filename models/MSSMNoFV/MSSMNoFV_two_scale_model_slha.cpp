@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 14:10:26
+// File generated at Wed 29 Jun 2016 13:28:39
 
 /**
  * @file MSSMNoFV_two_scale_model_slha.cpp
@@ -157,6 +157,12 @@ void CLASSNAME::print(std::ostream& ostr) const
 void CLASSNAME::set_convert_masses_to_slha(bool flag)
 {
    convert_masses_to_slha = flag;
+}
+
+std::ostream& operator<<(std::ostream& ostr, const MSSMNoFV_slha<Two_scale>& model)
+{
+   model.print(ostr);
+   return ostr;
 }
 
 } // namespace flexiblesusy

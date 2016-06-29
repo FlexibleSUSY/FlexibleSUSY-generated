@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 13:35:40
+// File generated at Wed 29 Jun 2016 12:56:45
 
 #ifndef E6SSM_EFFECTIVE_COUPLINGS_H
 #define E6SSM_EFFECTIVE_COUPLINGS_H

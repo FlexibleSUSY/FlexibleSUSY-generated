@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 12:02:44
+// File generated at Wed 29 Jun 2016 11:26:06
 
 #include "HSSUSY_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"

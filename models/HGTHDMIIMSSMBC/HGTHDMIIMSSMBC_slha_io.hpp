@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 12:04:26
+// File generated at Wed 29 Jun 2016 11:28:11
 
 #ifndef HGTHDMIIMSSMBC_SLHA_IO_H
 #define HGTHDMIIMSSMBC_SLHA_IO_H
@@ -211,6 +211,21 @@ void HGTHDMIIMSSMBC_slha_io::set_model_parameters(const HGTHDMIIMSSMBC_slha<T>& 
             << FORMAT_ELEMENT(2, (MODELPARAMETER(g2u)), "g2u")
             << FORMAT_ELEMENT(3, (MODELPARAMETER(g1dp)), "g1dp")
             << FORMAT_ELEMENT(4, (MODELPARAMETER(g1d)), "g1d")
+      ;
+      slha_io.set_block(block);
+   }
+
+   {
+      std::ostringstream block;
+      block << "Block Phases Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(1, (Re(MODELPARAMETER(PhaseGlu))), "Re(PhaseGlu)")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block IMPhases Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(1, (Im(MODELPARAMETER(PhaseGlu))), "Im(PhaseGlu)")
       ;
       slha_io.set_block(block);
    }

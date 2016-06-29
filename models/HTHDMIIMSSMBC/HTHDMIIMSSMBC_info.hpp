@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 11:59:12
+// File generated at Wed 29 Jun 2016 11:22:45
 
 #ifndef HTHDMIIMSSMBC_INFO_H
 #define HTHDMIIMSSMBC_INFO_H
@@ -28,6 +28,10 @@ namespace flexiblesusy {
 namespace HTHDMIIMSSMBC_info {
    enum Particles : unsigned {VG, Fv, Cha, hh, Ah, Hm, Fd, Fu, Fe, Chi, VWm, VP
       , VZ, NUMBER_OF_PARTICLES};
+
+   enum Masses : unsigned {MVG, MFv_1, MFv_2, MFv_3, MCha, Mhh_1, Mhh_2, MAh_1,
+      MAh_2, MHm_1, MHm_2, MFd_1, MFd_2, MFd_3, MFu_1, MFu_2, MFu_3, MFe_1, MFe_2
+      , MFe_3, MChi_1, MChi_2, MVWm, MVP, MVZ, NUMBER_OF_MASSES};
 
    enum Parameters : unsigned {g1, g2, g3, Lambda6, Lambda5, Lambda7, Lambda1,
       Lambda4, Lambda3, Lambda2, Yu0_0, Yu0_1, Yu0_2, Yu1_0, Yu1_1, Yu1_2, Yu2_0,

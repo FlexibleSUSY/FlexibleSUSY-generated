@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 11:59:12
+// File generated at Wed 29 Jun 2016 11:22:45
 
 #include "HTHDMIIMSSMBC_slha_io.hpp"
 #include "HTHDMIIMSSMBC_input_parameters.hpp"
@@ -36,8 +36,6 @@
 #define PHYSICAL_SLHA(p) model.get_physical_slha().p
 #define LOCALPHYSICAL(p) physical.p
 #define MODELPARAMETER(p) model.get_##p()
-#define DEFINE_PARAMETER(p)                                            \
-   typename std::remove_const<typename std::remove_reference<decltype(MODELPARAMETER(p))>::type>::type p;
 #define DEFINE_PHYSICAL_PARAMETER(p) decltype(LOCALPHYSICAL(p)) p;
 #define LowEnergyConstant(p) Electroweak_constants::p
 
@@ -318,17 +316,17 @@ void HTHDMIIMSSMBC_slha_io::fill_drbar_parameters(HTHDMIIMSSMBC_mass_eigenstates
    model.set_g2(slha_io.read_entry("gauge", 2));
    model.set_g3(slha_io.read_entry("gauge", 3));
    {
-      DEFINE_PARAMETER(Yu);
+      Eigen::Matrix<double,3,3> Yu;
       slha_io.read_block("Yu", Yu);
       model.set_Yu(Yu);
    }
    {
-      DEFINE_PARAMETER(Yd);
+      Eigen::Matrix<double,3,3> Yd;
       slha_io.read_block("Yd", Yd);
       model.set_Yd(Yd);
    }
    {
-      DEFINE_PARAMETER(Ye);
+      Eigen::Matrix<double,3,3> Ye;
       slha_io.read_block("Ye", Ye);
       model.set_Ye(Ye);
    }

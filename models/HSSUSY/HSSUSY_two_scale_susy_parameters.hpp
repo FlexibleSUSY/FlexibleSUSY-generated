@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 12:02:42
+// File generated at Wed 29 Jun 2016 11:26:01
 
 #ifndef HSSUSY_TWO_SCALE_susy_parameters_H
 #define HSSUSY_TWO_SCALE_susy_parameters_H

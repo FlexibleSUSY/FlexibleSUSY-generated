@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 12:43:45
+// File generated at Wed 29 Jun 2016 12:04:03
 
 #ifndef UMSSM_SLHA_IO_H
 #define UMSSM_SLHA_IO_H
@@ -221,6 +221,21 @@ void UMSSM_slha_io::set_model_parameters(const UMSSM_slha<T>& model)
       std::ostringstream block;
       block << "Block GAUGE Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
             << FORMAT_ELEMENT(5, (MODELPARAMETER(gp)), "gp")
+      ;
+      slha_io.set_block(block);
+   }
+
+   {
+      std::ostringstream block;
+      block << "Block Phases Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(1, (Re(MODELPARAMETER(PhaseGlu))), "Re(PhaseGlu)")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block IMPhases Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(1, (Im(MODELPARAMETER(PhaseGlu))), "Im(PhaseGlu)")
       ;
       slha_io.set_block(block);
    }

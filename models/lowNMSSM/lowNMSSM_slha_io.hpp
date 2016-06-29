@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 13:05:56
+// File generated at Wed 29 Jun 2016 12:27:27
 
 #ifndef lowNMSSM_SLHA_IO_H
 #define lowNMSSM_SLHA_IO_H
@@ -212,6 +212,21 @@ void lowNMSSM_slha_io::set_model_parameters(const lowNMSSM_slha<T>& model)
             << FORMAT_ELEMENT(3, (MODELPARAMETER(TLambdax)), "TLambdax")
             << FORMAT_ELEMENT(10, (MODELPARAMETER(ms2)), "ms2")
             << FORMAT_ELEMENT(5, (MODELPARAMETER(vS)), "vS")
+      ;
+      slha_io.set_block(block);
+   }
+
+   {
+      std::ostringstream block;
+      block << "Block Phases Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(1, (Re(MODELPARAMETER(PhaseGlu))), "Re(PhaseGlu)")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block IMPhases Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(1, (Im(MODELPARAMETER(PhaseGlu))), "Im(PhaseGlu)")
       ;
       slha_io.set_block(block);
    }

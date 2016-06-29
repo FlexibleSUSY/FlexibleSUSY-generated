@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 13:44:27
+// File generated at Wed 29 Jun 2016 13:09:19
 
 #include "CMSSMNoFV_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"

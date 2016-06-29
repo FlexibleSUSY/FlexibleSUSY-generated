@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 14:09:17
+// File generated at Wed 29 Jun 2016 13:31:30
 
 #ifndef CMSSM_TWO_SCALE_soft_parameters_H
 #define CMSSM_TWO_SCALE_soft_parameters_H

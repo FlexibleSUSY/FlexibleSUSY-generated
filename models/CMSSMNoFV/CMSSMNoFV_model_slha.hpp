@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 14:01:16
+// File generated at Wed 29 Jun 2016 13:24:21
 
 #ifndef CMSSMNoFV_SLHA_H
 #define CMSSMNoFV_SLHA_H

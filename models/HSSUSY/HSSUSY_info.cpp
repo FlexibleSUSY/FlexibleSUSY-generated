@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 12:02:46
+// File generated at Wed 29 Jun 2016 11:26:09
 
 #include "HSSUSY_info.hpp"
 

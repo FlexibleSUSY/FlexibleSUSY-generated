@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 13:21:15
+// File generated at Wed 29 Jun 2016 12:43:21
 
 #ifndef MSSMRHN_SLHA_IO_H
 #define MSSMRHN_SLHA_IO_H
@@ -210,6 +210,21 @@ void MSSMRHN_slha_io::set_model_parameters(const MSSMRHN_slha<T>& model)
    slha_io.set_block("mv2", MODELPARAMETER(mv2), "mv2", model.get_scale());
    slha_io.set_block("Mv", MODELPARAMETER(Mv), "Mv", model.get_scale());
    slha_io.set_block("BMv", MODELPARAMETER(BMv), "BMv", model.get_scale());
+
+   {
+      std::ostringstream block;
+      block << "Block Phases Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(1, (Re(MODELPARAMETER(PhaseGlu))), "Re(PhaseGlu)")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block IMPhases Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(1, (Im(MODELPARAMETER(PhaseGlu))), "Im(PhaseGlu)")
+      ;
+      slha_io.set_block(block);
+   }
 
 }
 

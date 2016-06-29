@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 13:43:36
+// File generated at Wed 29 Jun 2016 13:08:31
 
 #ifndef CMSSMNoFV_TWO_SCALE_susy_parameters_H
 #define CMSSMNoFV_TWO_SCALE_susy_parameters_H

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 12:11:47
+// File generated at Wed 29 Jun 2016 11:35:02
 
 #ifndef TMSSM_SLHA_IO_H
 #define TMSSM_SLHA_IO_H
@@ -208,6 +208,21 @@ void TMSSM_slha_io::set_model_parameters(const TMSSM_slha<T>& model)
             << FORMAT_ELEMENT(2, (MODELPARAMETER(MassWB)), "MassWB")
             << FORMAT_ELEMENT(3, (MODELPARAMETER(MassG)), "MassG")
             << FORMAT_ELEMENT(110, (MODELPARAMETER(mT2)), "mT2")
+      ;
+      slha_io.set_block(block);
+   }
+
+   {
+      std::ostringstream block;
+      block << "Block Phases Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(1, (Re(MODELPARAMETER(PhaseGlu))), "Re(PhaseGlu)")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block IMPhases Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(1, (Im(MODELPARAMETER(PhaseGlu))), "Im(PhaseGlu)")
       ;
       slha_io.set_block(block);
    }

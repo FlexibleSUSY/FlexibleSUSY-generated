@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 9 May 2016 13:46:29
+// File generated at Wed 29 Jun 2016 13:11:39
 
 #ifndef MSSMNoFVatMGUT_INFO_H
 #define MSSMNoFVatMGUT_INFO_H
@@ -29,6 +29,13 @@ namespace MSSMNoFVatMGUT_info {
    enum Particles : unsigned {VG, Glu, Fd, Fs, Fb, Fu, Fc, Ft, Fve, Fvm, Fvt,
       Fe, Fm, Ftau, SveL, SvmL, SvtL, Sd, Su, Se, Sm, Stau, Ss, Sc, Sb, St, hh, Ah
       , Hpm, Chi, Cha, VWm, VP, VZ, NUMBER_OF_PARTICLES};
+
+   enum Masses : unsigned {MVG, MGlu, MFd, MFs, MFb, MFu, MFc, MFt, MFve, MFvm,
+      MFvt, MFe, MFm, MFtau, MSveL, MSvmL, MSvtL, MSd_1, MSd_2, MSu_1, MSu_2,
+      MSe_1, MSe_2, MSm_1, MSm_2, MStau_1, MStau_2, MSs_1, MSs_2, MSc_1, MSc_2,
+      MSb_1, MSb_2, MSt_1, MSt_2, Mhh_1, Mhh_2, MAh_1, MAh_2, MHpm_1, MHpm_2,
+      MChi_1, MChi_2, MChi_3, MChi_4, MCha_1, MCha_2, MVWm, MVP, MVZ,
+      NUMBER_OF_MASSES};
 
    enum Parameters : unsigned {Yd0_0, Yd0_1, Yd0_2, Yd1_0, Yd1_1, Yd1_2, Yd2_0,
       Yd2_1, Yd2_2, Ye0_0, Ye0_1, Ye0_2, Ye1_0, Ye1_1, Ye1_2, Ye2_0, Ye2_1, Ye2_2
