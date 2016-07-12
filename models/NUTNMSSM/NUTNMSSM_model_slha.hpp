@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 29 Jun 2016 12:38:52
+// File generated at Tue 12 Jul 2016 11:55:38
 
 #ifndef NUTNMSSM_SLHA_H
 #define NUTNMSSM_SLHA_H

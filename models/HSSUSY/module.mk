@@ -145,11 +145,12 @@ SARAH_MODEL_FILES_HSSUSY := \
 endif
 
 .PHONY:         all-$(MODNAME) clean-$(MODNAME) clean-$(MODNAME)-src \
-		clean-$(MODNAME)-dep clean-$(MODNAME)-obj \
-		distclean-$(MODNAME) run-metacode-$(MODNAME) \
-		pack-$(MODNAME)-src
+		clean-$(MODNAME)-dep clean-$(MODNAME)-lib \
+		clean-$(MODNAME)-obj distclean-$(MODNAME) \
+		run-metacode-$(MODNAME) pack-$(MODNAME)-src
 
-all-$(MODNAME): $(LIBHSSUSY)
+all-$(MODNAME): $(LIBHSSUSY) $(EXEHSSUSY_EXE)
+		@true
 
 ifneq ($(INSTALL_DIR),)
 install-src::
@@ -169,6 +170,9 @@ clean-$(MODNAME)-dep:
 		-rm -f $(LIBHSSUSY_DEP)
 		-rm -f $(EXEHSSUSY_DEP)
 
+clean-$(MODNAME)-lib:
+		-rm -f $(LIBHSSUSY)
+
 clean-$(MODNAME)-obj:
 		-rm -f $(LIBHSSUSY_OBJ)
 		-rm -f $(EXEHSSUSY_OBJ)
@@ -186,8 +190,7 @@ clean-$(MODNAME)-src:
 clean-$(MODNAME): clean-$(MODNAME)-src
 # END:   NOT EXPORTED ##########################################
 
-clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-obj
-		-rm -f $(LIBHSSUSY)
+clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-lib clean-$(MODNAME)-obj
 		-rm -f $(EXEHSSUSY_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
@@ -236,7 +239,7 @@ $(LIBHSSUSY): $(LIBHSSUSY_OBJ)
 		$(MAKELIB) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBHSSUSY) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(LDLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^ $(ADDONLIBS)) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBHSSUSY_DEP) $(EXEHSSUSY_DEP)
 ALLSRC += $(LIBHSSUSY_SRC) $(EXEHSSUSY_SRC)

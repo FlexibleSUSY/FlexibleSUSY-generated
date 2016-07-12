@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 29 Jun 2016 11:29:08
+// File generated at Tue 12 Jul 2016 10:38:42
 
 #ifndef SplitMSSM_SLHA_H
 #define SplitMSSM_SLHA_H

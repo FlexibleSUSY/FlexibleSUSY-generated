@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 29 Jun 2016 12:56:45
+// File generated at Tue 12 Jul 2016 12:13:53
 
 #include "E6SSM_input_parameters.hpp"
 #include "E6SSM_spectrum_generator.hpp"

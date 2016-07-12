@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 29 Jun 2016 11:29:23
+// File generated at Tue 12 Jul 2016 10:38:54
 
 /**
  * @file SplitMSSM_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Wed 29 Jun 2016 11:29:23 with FlexibleSUSY
- * 1.5.0 (git commit: 41797ffc98415b60cbfd71b7925b6bd5318e68bb) and SARAH 4.8.6 .
+ * This file was generated at Tue 12 Jul 2016 10:38:54 with FlexibleSUSY
+ * 1.5.1 (git commit: 8356bacd26e8aecc6635607a32835d534ea3cf01) and SARAH 4.8.6 .
  */
 
 #include "SplitMSSM_mass_eigenstates.hpp"
@@ -6100,9 +6100,9 @@ void CLASSNAME::calculate_MGlu_pole()
    const double self_energy_1  = Re(self_energy_Glu_1(p));
    const double self_energy_PL = Re(self_energy_Glu_PL(p));
    const double self_energy_PR = Re(self_energy_Glu_PR(p));
-   const auto M_1loop = M_tree - self_energy_1 - M_tree * (self_energy_PL
+   const auto M_loop = M_tree - self_energy_1 - M_tree * (self_energy_PL
       + self_energy_PR);
-   PHYSICAL(MGlu) = calculate_singlet_mass(M_1loop);
+   PHYSICAL(MGlu) = calculate_singlet_mass(M_loop);
 }
 
 void CLASSNAME::calculate_Mhh_pole()
@@ -6190,17 +6190,17 @@ void CLASSNAME::calculate_MFd_pole()
       }
       const Eigen::Matrix<double,3,3> delta_M(- self_energy_PR *
          M_tree - M_tree * self_energy_PL - self_energy_1);
-      const Eigen::Matrix<double,3,3> M_1loop(M_tree + delta_M);
+      const Eigen::Matrix<double,3,3> M_loop(M_tree + delta_M);
       Eigen::Array<double,3,1> eigen_values;
       decltype(Vd) mix_Vd;
       decltype(Ud) mix_Ud;
    #ifdef CHECK_EIGENVALUE_ERROR
       double eigenvalue_error;
-      fs_svd(M_1loop, eigen_values, mix_Vd, mix_Ud, eigenvalue_error);
+      fs_svd(M_loop, eigen_values, mix_Vd, mix_Ud, eigenvalue_error);
       problems.flag_bad_mass(SplitMSSM_info::Fd, eigenvalue_error >
          precision * Abs(eigen_values(0)));
    #else
-      fs_svd(M_1loop, eigen_values, mix_Vd, mix_Ud);
+      fs_svd(M_loop, eigen_values, mix_Vd, mix_Ud);
    #endif
       if (es == 0) {
          PHYSICAL(Vd) = mix_Vd;
@@ -6257,17 +6257,17 @@ void CLASSNAME::calculate_MFu_pole()
       Eigen::Matrix<double,3,3> delta_M(- self_energy_PR * M_tree -
          M_tree * self_energy_PL - self_energy_1);
       delta_M(2,2) -= M_tree(2,2) * (qcd_1l + qcd_2l);
-      const Eigen::Matrix<double,3,3> M_1loop(M_tree + delta_M);
+      const Eigen::Matrix<double,3,3> M_loop(M_tree + delta_M);
       Eigen::Array<double,3,1> eigen_values;
       decltype(Vu) mix_Vu;
       decltype(Uu) mix_Uu;
    #ifdef CHECK_EIGENVALUE_ERROR
       double eigenvalue_error;
-      fs_svd(M_1loop, eigen_values, mix_Vu, mix_Uu, eigenvalue_error);
+      fs_svd(M_loop, eigen_values, mix_Vu, mix_Uu, eigenvalue_error);
       problems.flag_bad_mass(SplitMSSM_info::Fu, eigenvalue_error >
          precision * Abs(eigen_values(0)));
    #else
-      fs_svd(M_1loop, eigen_values, mix_Vu, mix_Uu);
+      fs_svd(M_loop, eigen_values, mix_Vu, mix_Uu);
    #endif
       if (es == 0) {
          PHYSICAL(Vu) = mix_Vu;
@@ -6298,17 +6298,17 @@ void CLASSNAME::calculate_MFe_pole()
       }
       const Eigen::Matrix<double,3,3> delta_M(- self_energy_PR *
          M_tree - M_tree * self_energy_PL - self_energy_1);
-      const Eigen::Matrix<double,3,3> M_1loop(M_tree + delta_M);
+      const Eigen::Matrix<double,3,3> M_loop(M_tree + delta_M);
       Eigen::Array<double,3,1> eigen_values;
       decltype(Ve) mix_Ve;
       decltype(Ue) mix_Ue;
    #ifdef CHECK_EIGENVALUE_ERROR
       double eigenvalue_error;
-      fs_svd(M_1loop, eigen_values, mix_Ve, mix_Ue, eigenvalue_error);
+      fs_svd(M_loop, eigen_values, mix_Ve, mix_Ue, eigenvalue_error);
       problems.flag_bad_mass(SplitMSSM_info::Fe, eigenvalue_error >
          precision * Abs(eigen_values(0)));
    #else
-      fs_svd(M_1loop, eigen_values, mix_Ve, mix_Ue);
+      fs_svd(M_loop, eigen_values, mix_Ve, mix_Ue);
    #endif
       if (es == 0) {
          PHYSICAL(Ve) = mix_Ve;
@@ -6339,18 +6339,18 @@ void CLASSNAME::calculate_MChi_pole()
       }
       const Eigen::Matrix<double,4,4> delta_M(- self_energy_PR *
          M_tree - M_tree * self_energy_PL - self_energy_1);
-      const Eigen::Matrix<double,4,4> M_1loop(M_tree + 0.5 * (delta_M
-         + delta_M.transpose()));
+      const Eigen::Matrix<double,4,4> M_loop(M_tree + 0.5 * (delta_M +
+         delta_M.transpose()));
       Eigen::Array<double,4,1> eigen_values;
       decltype(ZN) mix_ZN;
       #ifdef CHECK_EIGENVALUE_ERROR
          double eigenvalue_error;
-         fs_diagonalize_symmetric(M_1loop, eigen_values, mix_ZN,
+         fs_diagonalize_symmetric(M_loop, eigen_values, mix_ZN,
             eigenvalue_error);
          problems.flag_bad_mass(SplitMSSM_info::Chi,
             eigenvalue_error > precision * Abs(eigen_values(0)));
       #else
-         fs_diagonalize_symmetric(M_1loop, eigen_values, mix_ZN);
+         fs_diagonalize_symmetric(M_loop, eigen_values, mix_ZN);
       #endif
       if (es == 0)
          PHYSICAL(ZN) = mix_ZN;
@@ -6379,17 +6379,17 @@ void CLASSNAME::calculate_MCha_pole()
       }
       const Eigen::Matrix<double,2,2> delta_M(- self_energy_PR *
          M_tree - M_tree * self_energy_PL - self_energy_1);
-      const Eigen::Matrix<double,2,2> M_1loop(M_tree + delta_M);
+      const Eigen::Matrix<double,2,2> M_loop(M_tree + delta_M);
       Eigen::Array<double,2,1> eigen_values;
       decltype(UM) mix_UM;
       decltype(UP) mix_UP;
    #ifdef CHECK_EIGENVALUE_ERROR
       double eigenvalue_error;
-      fs_svd(M_1loop, eigen_values, mix_UM, mix_UP, eigenvalue_error);
+      fs_svd(M_loop, eigen_values, mix_UM, mix_UP, eigenvalue_error);
       problems.flag_bad_mass(SplitMSSM_info::Cha, eigenvalue_error >
          precision * Abs(eigen_values(0)));
    #else
-      fs_svd(M_1loop, eigen_values, mix_UM, mix_UP);
+      fs_svd(M_loop, eigen_values, mix_UM, mix_UP);
    #endif
       if (es == 0) {
          PHYSICAL(UM) = mix_UM;

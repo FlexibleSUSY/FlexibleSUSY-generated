@@ -151,11 +151,12 @@ SARAH_MODEL_FILES_lowNMSSM := \
 endif
 
 .PHONY:         all-$(MODNAME) clean-$(MODNAME) clean-$(MODNAME)-src \
-		clean-$(MODNAME)-dep clean-$(MODNAME)-obj \
-		distclean-$(MODNAME) run-metacode-$(MODNAME) \
-		pack-$(MODNAME)-src
+		clean-$(MODNAME)-dep clean-$(MODNAME)-lib \
+		clean-$(MODNAME)-obj distclean-$(MODNAME) \
+		run-metacode-$(MODNAME) pack-$(MODNAME)-src
 
-all-$(MODNAME): $(LIBlowNMSSM)
+all-$(MODNAME): $(LIBlowNMSSM) $(EXElowNMSSM_EXE)
+		@true
 
 ifneq ($(INSTALL_DIR),)
 install-src::
@@ -175,6 +176,9 @@ clean-$(MODNAME)-dep:
 		-rm -f $(LIBlowNMSSM_DEP)
 		-rm -f $(EXElowNMSSM_DEP)
 
+clean-$(MODNAME)-lib:
+		-rm -f $(LIBlowNMSSM)
+
 clean-$(MODNAME)-obj:
 		-rm -f $(LIBlowNMSSM_OBJ)
 		-rm -f $(EXElowNMSSM_OBJ)
@@ -192,8 +196,7 @@ clean-$(MODNAME)-src:
 clean-$(MODNAME): clean-$(MODNAME)-src
 # END:   NOT EXPORTED ##########################################
 
-clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-obj
-		-rm -f $(LIBlowNMSSM)
+clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-lib clean-$(MODNAME)-obj
 		-rm -f $(EXElowNMSSM_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
@@ -242,7 +245,7 @@ $(LIBlowNMSSM): $(LIBlowNMSSM_OBJ)
 		$(MAKELIB) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBlowNMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(LDLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^ $(ADDONLIBS)) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBlowNMSSM_DEP) $(EXElowNMSSM_DEP)
 ALLSRC += $(LIBlowNMSSM_SRC) $(EXElowNMSSM_SRC)

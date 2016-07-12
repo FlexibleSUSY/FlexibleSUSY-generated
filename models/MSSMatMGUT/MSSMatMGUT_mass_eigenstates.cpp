@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 29 Jun 2016 13:30:06
+// File generated at Tue 12 Jul 2016 12:47:11
 
 /**
  * @file MSSMatMGUT_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Wed 29 Jun 2016 13:30:06 with FlexibleSUSY
- * 1.5.0 (git commit: 41797ffc98415b60cbfd71b7925b6bd5318e68bb) and SARAH 4.8.6 .
+ * This file was generated at Tue 12 Jul 2016 12:47:11 with FlexibleSUSY
+ * 1.5.1 (git commit: 8356bacd26e8aecc6635607a32835d534ea3cf01) and SARAH 4.8.6 .
  */
 
 #include "MSSMatMGUT_mass_eigenstates.hpp"
@@ -17319,9 +17319,9 @@ void CLASSNAME::calculate_MGlu_pole()
    const double self_energy_1  = Re(self_energy_Glu_1(p));
    const double self_energy_PL = Re(self_energy_Glu_PL(p));
    const double self_energy_PR = Re(self_energy_Glu_PR(p));
-   const auto M_1loop = M_tree - self_energy_1 - M_tree * (self_energy_PL
+   const auto M_loop = M_tree - self_energy_1 - M_tree * (self_energy_PL
       + self_energy_PR);
-   PHYSICAL(MGlu) = calculate_singlet_mass(M_1loop);
+   PHYSICAL(MGlu) = calculate_singlet_mass(M_loop);
 }
 
 void CLASSNAME::calculate_MFv_pole()
@@ -17371,17 +17371,17 @@ void CLASSNAME::calculate_MSd_pole()
       }
 
       Symmetrize(self_energy);
-      const Eigen::Matrix<double,6,6> M_1loop(M_tree - self_energy);
+      const Eigen::Matrix<double,6,6> M_loop(M_tree - self_energy);
       Eigen::Array<double,6,1> eigen_values;
       Eigen::Matrix<double,6,6> mix_ZD;
       #ifdef CHECK_EIGENVALUE_ERROR
          double eigenvalue_error;
-         fs_diagonalize_hermitian(M_1loop, eigen_values, mix_ZD,
+         fs_diagonalize_hermitian(M_loop, eigen_values, mix_ZD,
             eigenvalue_error);
          problems.flag_bad_mass(MSSMatMGUT_info::Sd,
             eigenvalue_error > precision * Abs(eigen_values(0)));
       #else
-         fs_diagonalize_hermitian(M_1loop, eigen_values, mix_ZD);
+         fs_diagonalize_hermitian(M_loop, eigen_values, mix_ZD);
       #endif
 
       PHYSICAL(MSd(es)) = SignedAbsSqrt(eigen_values(es));
@@ -17408,17 +17408,17 @@ void CLASSNAME::calculate_MSv_pole()
       }
 
       Symmetrize(self_energy);
-      const Eigen::Matrix<double,3,3> M_1loop(M_tree - self_energy);
+      const Eigen::Matrix<double,3,3> M_loop(M_tree - self_energy);
       Eigen::Array<double,3,1> eigen_values;
       Eigen::Matrix<double,3,3> mix_ZV;
       #ifdef CHECK_EIGENVALUE_ERROR
          double eigenvalue_error;
-         fs_diagonalize_hermitian(M_1loop, eigen_values, mix_ZV,
+         fs_diagonalize_hermitian(M_loop, eigen_values, mix_ZV,
             eigenvalue_error);
          problems.flag_bad_mass(MSSMatMGUT_info::Sv,
             eigenvalue_error > precision * Abs(eigen_values(0)));
       #else
-         fs_diagonalize_hermitian(M_1loop, eigen_values, mix_ZV);
+         fs_diagonalize_hermitian(M_loop, eigen_values, mix_ZV);
       #endif
 
       PHYSICAL(MSv(es)) = SignedAbsSqrt(eigen_values(es));
@@ -17445,17 +17445,17 @@ void CLASSNAME::calculate_MSu_pole()
       }
 
       Symmetrize(self_energy);
-      const Eigen::Matrix<double,6,6> M_1loop(M_tree - self_energy);
+      const Eigen::Matrix<double,6,6> M_loop(M_tree - self_energy);
       Eigen::Array<double,6,1> eigen_values;
       Eigen::Matrix<double,6,6> mix_ZU;
       #ifdef CHECK_EIGENVALUE_ERROR
          double eigenvalue_error;
-         fs_diagonalize_hermitian(M_1loop, eigen_values, mix_ZU,
+         fs_diagonalize_hermitian(M_loop, eigen_values, mix_ZU,
             eigenvalue_error);
          problems.flag_bad_mass(MSSMatMGUT_info::Su,
             eigenvalue_error > precision * Abs(eigen_values(0)));
       #else
-         fs_diagonalize_hermitian(M_1loop, eigen_values, mix_ZU);
+         fs_diagonalize_hermitian(M_loop, eigen_values, mix_ZU);
       #endif
 
       PHYSICAL(MSu(es)) = SignedAbsSqrt(eigen_values(es));
@@ -17482,17 +17482,17 @@ void CLASSNAME::calculate_MSe_pole()
       }
 
       Symmetrize(self_energy);
-      const Eigen::Matrix<double,6,6> M_1loop(M_tree - self_energy);
+      const Eigen::Matrix<double,6,6> M_loop(M_tree - self_energy);
       Eigen::Array<double,6,1> eigen_values;
       Eigen::Matrix<double,6,6> mix_ZE;
       #ifdef CHECK_EIGENVALUE_ERROR
          double eigenvalue_error;
-         fs_diagonalize_hermitian(M_1loop, eigen_values, mix_ZE,
+         fs_diagonalize_hermitian(M_loop, eigen_values, mix_ZE,
             eigenvalue_error);
          problems.flag_bad_mass(MSSMatMGUT_info::Se,
             eigenvalue_error > precision * Abs(eigen_values(0)));
       #else
-         fs_diagonalize_hermitian(M_1loop, eigen_values, mix_ZE);
+         fs_diagonalize_hermitian(M_loop, eigen_values, mix_ZE);
       #endif
 
       PHYSICAL(MSe(es)) = SignedAbsSqrt(eigen_values(es));
@@ -17517,7 +17517,7 @@ void CLASSNAME::calculate_Mhh_pole()
 
       // two-loop Higgs self-energy contributions
       double two_loop[3] = { 0. };
-      if (pole_mass_loop_order > 1)
+      if (pole_mass_loop_order > 1) {
          self_energy_hh_2loop(two_loop);
          for (unsigned i = 0; i < 3; i++) {
             if (!std::isfinite(two_loop[i])) {
@@ -17525,6 +17525,7 @@ void CLASSNAME::calculate_Mhh_pole()
                problems.flag_bad_mass(MSSMatMGUT_info::hh);
             }
          }
+      }
 
       for (unsigned es = 0; es < 2; ++es) {
          const double p = Abs(old_Mhh(es));
@@ -17540,18 +17541,18 @@ void CLASSNAME::calculate_Mhh_pole()
          self_energy(1, 1) += two_loop[2];
 
          Symmetrize(self_energy);
-         const Eigen::Matrix<double,2,2> M_1loop(M_tree -
+         const Eigen::Matrix<double,2,2> M_loop(M_tree -
             self_energy);
          Eigen::Array<double,2,1> eigen_values;
          Eigen::Matrix<double,2,2> mix_ZH;
          #ifdef CHECK_EIGENVALUE_ERROR
             double eigenvalue_error;
-            fs_diagonalize_hermitian(M_1loop, eigen_values,
+            fs_diagonalize_hermitian(M_loop, eigen_values,
                mix_ZH, eigenvalue_error);
             problems.flag_bad_mass(MSSMatMGUT_info::hh,
                eigenvalue_error > precision * Abs(eigen_values(0)));
          #else
-            fs_diagonalize_hermitian(M_1loop, eigen_values,
+            fs_diagonalize_hermitian(M_loop, eigen_values,
                mix_ZH);
          #endif
 
@@ -17589,7 +17590,7 @@ void CLASSNAME::calculate_MAh_pole()
 
       // two-loop Higgs self-energy contributions
       double two_loop[3] = { 0. };
-      if (pole_mass_loop_order > 1)
+      if (pole_mass_loop_order > 1) {
          self_energy_Ah_2loop(two_loop);
          for (unsigned i = 0; i < 3; i++) {
             if (!std::isfinite(two_loop[i])) {
@@ -17597,6 +17598,7 @@ void CLASSNAME::calculate_MAh_pole()
                problems.flag_bad_mass(MSSMatMGUT_info::Ah);
             }
          }
+      }
 
       for (unsigned es = 0; es < 2; ++es) {
          const double p = Abs(old_MAh(es));
@@ -17612,18 +17614,18 @@ void CLASSNAME::calculate_MAh_pole()
          self_energy(1, 1) += two_loop[2];
 
          Symmetrize(self_energy);
-         const Eigen::Matrix<double,2,2> M_1loop(M_tree -
+         const Eigen::Matrix<double,2,2> M_loop(M_tree -
             self_energy);
          Eigen::Array<double,2,1> eigen_values;
          Eigen::Matrix<double,2,2> mix_ZA;
          #ifdef CHECK_EIGENVALUE_ERROR
             double eigenvalue_error;
-            fs_diagonalize_hermitian(M_1loop, eigen_values,
+            fs_diagonalize_hermitian(M_loop, eigen_values,
                mix_ZA, eigenvalue_error);
             problems.flag_bad_mass(MSSMatMGUT_info::Ah,
                eigenvalue_error > precision * Abs(eigen_values(0)));
          #else
-            fs_diagonalize_hermitian(M_1loop, eigen_values,
+            fs_diagonalize_hermitian(M_loop, eigen_values,
                mix_ZA);
          #endif
 
@@ -17669,18 +17671,18 @@ void CLASSNAME::calculate_MHpm_pole()
          }
 
          Symmetrize(self_energy);
-         const Eigen::Matrix<double,2,2> M_1loop(M_tree -
+         const Eigen::Matrix<double,2,2> M_loop(M_tree -
             self_energy);
          Eigen::Array<double,2,1> eigen_values;
          Eigen::Matrix<double,2,2> mix_ZP;
          #ifdef CHECK_EIGENVALUE_ERROR
             double eigenvalue_error;
-            fs_diagonalize_hermitian(M_1loop, eigen_values,
+            fs_diagonalize_hermitian(M_loop, eigen_values,
                mix_ZP, eigenvalue_error);
             problems.flag_bad_mass(MSSMatMGUT_info::Hpm,
                eigenvalue_error > precision * Abs(eigen_values(0)));
          #else
-            fs_diagonalize_hermitian(M_1loop, eigen_values,
+            fs_diagonalize_hermitian(M_loop, eigen_values,
                mix_ZP);
          #endif
 
@@ -17723,18 +17725,18 @@ void CLASSNAME::calculate_MChi_pole()
       }
       const Eigen::Matrix<double,4,4> delta_M(- self_energy_PR *
          M_tree - M_tree * self_energy_PL - self_energy_1);
-      const Eigen::Matrix<double,4,4> M_1loop(M_tree + 0.5 * (delta_M
-         + delta_M.transpose()));
+      const Eigen::Matrix<double,4,4> M_loop(M_tree + 0.5 * (delta_M +
+         delta_M.transpose()));
       Eigen::Array<double,4,1> eigen_values;
       decltype(ZN) mix_ZN;
       #ifdef CHECK_EIGENVALUE_ERROR
          double eigenvalue_error;
-         fs_diagonalize_symmetric(M_1loop, eigen_values, mix_ZN,
+         fs_diagonalize_symmetric(M_loop, eigen_values, mix_ZN,
             eigenvalue_error);
          problems.flag_bad_mass(MSSMatMGUT_info::Chi,
             eigenvalue_error > precision * Abs(eigen_values(0)));
       #else
-         fs_diagonalize_symmetric(M_1loop, eigen_values, mix_ZN);
+         fs_diagonalize_symmetric(M_loop, eigen_values, mix_ZN);
       #endif
       if (es == 0)
          PHYSICAL(ZN) = mix_ZN;
@@ -17763,17 +17765,17 @@ void CLASSNAME::calculate_MCha_pole()
       }
       const Eigen::Matrix<double,2,2> delta_M(- self_energy_PR *
          M_tree - M_tree * self_energy_PL - self_energy_1);
-      const Eigen::Matrix<double,2,2> M_1loop(M_tree + delta_M);
+      const Eigen::Matrix<double,2,2> M_loop(M_tree + delta_M);
       Eigen::Array<double,2,1> eigen_values;
       decltype(UM) mix_UM;
       decltype(UP) mix_UP;
    #ifdef CHECK_EIGENVALUE_ERROR
       double eigenvalue_error;
-      fs_svd(M_1loop, eigen_values, mix_UM, mix_UP, eigenvalue_error);
+      fs_svd(M_loop, eigen_values, mix_UM, mix_UP, eigenvalue_error);
       problems.flag_bad_mass(MSSMatMGUT_info::Cha, eigenvalue_error >
          precision * Abs(eigen_values(0)));
    #else
-      fs_svd(M_1loop, eigen_values, mix_UM, mix_UP);
+      fs_svd(M_loop, eigen_values, mix_UM, mix_UP);
    #endif
       if (es == 0) {
          PHYSICAL(UM) = mix_UM;
@@ -17804,18 +17806,18 @@ void CLASSNAME::calculate_MFe_pole()
       }
       const Eigen::Matrix<double,3,3> delta_M(- self_energy_PR *
          M_tree - M_tree * self_energy_PL - self_energy_1);
-      const Eigen::Matrix<double,3,3> M_1loop(M_tree + delta_M);
+      const Eigen::Matrix<double,3,3> M_loop(M_tree + delta_M);
       Eigen::Array<double,3,1> eigen_values;
       decltype(ZEL) mix_ZEL;
       decltype(ZER) mix_ZER;
    #ifdef CHECK_EIGENVALUE_ERROR
       double eigenvalue_error;
-      fs_svd(M_1loop, eigen_values, mix_ZEL, mix_ZER, eigenvalue_error
-         );
+      fs_svd(M_loop, eigen_values, mix_ZEL, mix_ZER, eigenvalue_error)
+         ;
       problems.flag_bad_mass(MSSMatMGUT_info::Fe, eigenvalue_error >
          precision * Abs(eigen_values(0)));
    #else
-      fs_svd(M_1loop, eigen_values, mix_ZEL, mix_ZER);
+      fs_svd(M_loop, eigen_values, mix_ZEL, mix_ZER);
    #endif
       if (es == 0) {
          PHYSICAL(ZEL) = mix_ZEL;
@@ -17846,18 +17848,18 @@ void CLASSNAME::calculate_MFd_pole()
       }
       const Eigen::Matrix<double,3,3> delta_M(- self_energy_PR *
          M_tree - M_tree * self_energy_PL - self_energy_1);
-      const Eigen::Matrix<double,3,3> M_1loop(M_tree + delta_M);
+      const Eigen::Matrix<double,3,3> M_loop(M_tree + delta_M);
       Eigen::Array<double,3,1> eigen_values;
       decltype(ZDL) mix_ZDL;
       decltype(ZDR) mix_ZDR;
    #ifdef CHECK_EIGENVALUE_ERROR
       double eigenvalue_error;
-      fs_svd(M_1loop, eigen_values, mix_ZDL, mix_ZDR, eigenvalue_error
-         );
+      fs_svd(M_loop, eigen_values, mix_ZDL, mix_ZDR, eigenvalue_error)
+         ;
       problems.flag_bad_mass(MSSMatMGUT_info::Fd, eigenvalue_error >
          precision * Abs(eigen_values(0)));
    #else
-      fs_svd(M_1loop, eigen_values, mix_ZDL, mix_ZDR);
+      fs_svd(M_loop, eigen_values, mix_ZDL, mix_ZDR);
    #endif
       if (es == 0) {
          PHYSICAL(ZDL) = mix_ZDL;
@@ -17914,18 +17916,18 @@ void CLASSNAME::calculate_MFu_pole()
       Eigen::Matrix<double,3,3> delta_M(- self_energy_PR * M_tree -
          M_tree * self_energy_PL - self_energy_1);
       delta_M(2,2) -= M_tree(2,2) * (qcd_1l + qcd_2l);
-      const Eigen::Matrix<double,3,3> M_1loop(M_tree + delta_M);
+      const Eigen::Matrix<double,3,3> M_loop(M_tree + delta_M);
       Eigen::Array<double,3,1> eigen_values;
       decltype(ZUL) mix_ZUL;
       decltype(ZUR) mix_ZUR;
    #ifdef CHECK_EIGENVALUE_ERROR
       double eigenvalue_error;
-      fs_svd(M_1loop, eigen_values, mix_ZUL, mix_ZUR, eigenvalue_error
-         );
+      fs_svd(M_loop, eigen_values, mix_ZUL, mix_ZUR, eigenvalue_error)
+         ;
       problems.flag_bad_mass(MSSMatMGUT_info::Fu, eigenvalue_error >
          precision * Abs(eigen_values(0)));
    #else
-      fs_svd(M_1loop, eigen_values, mix_ZUL, mix_ZUR);
+      fs_svd(M_loop, eigen_values, mix_ZUL, mix_ZUR);
    #endif
       if (es == 0) {
          PHYSICAL(ZUL) = mix_ZUL;

@@ -21,7 +21,7 @@
  * @brief contains wrapper class for model class in SLHA convention
  */
 
-// File generated at Wed 29 Jun 2016 12:51:42
+// File generated at Tue 12 Jul 2016 12:09:04
 
 #ifndef E6SSM_TWO_SCALE_SLHA_H
 #define E6SSM_TWO_SCALE_SLHA_H

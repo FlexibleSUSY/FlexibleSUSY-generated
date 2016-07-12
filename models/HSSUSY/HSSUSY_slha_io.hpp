@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 29 Jun 2016 11:26:09
+// File generated at Tue 12 Jul 2016 10:36:26
 
 #ifndef HSSUSY_SLHA_IO_H
 #define HSSUSY_SLHA_IO_H

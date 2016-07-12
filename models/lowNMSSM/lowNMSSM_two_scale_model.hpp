@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 29 Jun 2016 12:35:20
+// File generated at Tue 12 Jul 2016 11:51:59
 
 /**
  * @file lowNMSSM_two_scale_model.hpp
@@ -24,8 +24,8 @@
  *        value problem using the two_scale solver by solvingt EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Wed 29 Jun 2016 12:35:20 with FlexibleSUSY
- * 1.5.0 (git commit: 41797ffc98415b60cbfd71b7925b6bd5318e68bb) and SARAH 4.8.6 .
+ * This file was generated at Tue 12 Jul 2016 11:51:59 with FlexibleSUSY
+ * 1.5.1 (git commit: 8356bacd26e8aecc6635607a32835d534ea3cf01) and SARAH 4.8.6 .
  */
 
 #ifndef lowNMSSM_TWO_SCALE_H

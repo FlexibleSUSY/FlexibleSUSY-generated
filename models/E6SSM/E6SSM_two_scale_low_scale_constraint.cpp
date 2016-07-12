@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 29 Jun 2016 12:15:19
+// File generated at Tue 12 Jul 2016 11:27:41
 
 #include "E6SSM_two_scale_low_scale_constraint.hpp"
 #include "E6SSM_two_scale_model.hpp"
@@ -507,17 +507,17 @@ void E6SSM_low_scale_constraint<Two_scale>::calculate_Yu_DRbar()
    assert(model && "E6SSM_low_scale_constraint<Two_scale>::"
           "calculate_Yu_DRbar(): model pointer is zero");
 
-   Eigen::Matrix<std::complex<double>,3,3> topDRbar(ZEROMATRIXCOMPLEX(3,3));
-   topDRbar(0,0)      = qedqcd.displayMass(softsusy::mUp);
-   topDRbar(1,1)      = qedqcd.displayMass(softsusy::mCharm);
-   topDRbar(2,2)      = qedqcd.displayPoleMt();
+   Eigen::Matrix<std::complex<double>,3,3> upQuarksDRbar(ZEROMATRIXCOMPLEX(3,3));
+   upQuarksDRbar(0,0)      = qedqcd.displayMass(softsusy::mUp);
+   upQuarksDRbar(1,1)      = qedqcd.displayMass(softsusy::mCharm);
+   upQuarksDRbar(2,2)      = qedqcd.displayPoleMt();
 
    if (model->get_thresholds()) {
-      topDRbar(2,2) = MODEL->calculate_MFu_DRbar(qedqcd.displayPoleMt(), 2);
+      upQuarksDRbar(2,2) = MODEL->calculate_MFu_DRbar(qedqcd.displayPoleMt(), 2);
    }
 
    const auto vu = MODELPARAMETER(vu);
-   MODEL->set_Yu((Diag((1.4142135623730951*topDRbar)/vu)).real());
+   MODEL->set_Yu((Diag((1.4142135623730951*upQuarksDRbar)/vu)).real());
 
 }
 
@@ -526,17 +526,17 @@ void E6SSM_low_scale_constraint<Two_scale>::calculate_Yd_DRbar()
    assert(model && "E6SSM_low_scale_constraint<Two_scale>::"
           "calculate_Yd_DRbar(): model pointer is zero");
 
-   Eigen::Matrix<std::complex<double>,3,3> bottomDRbar(ZEROMATRIXCOMPLEX(3,3));
-   bottomDRbar(0,0)   = qedqcd.displayMass(softsusy::mDown);
-   bottomDRbar(1,1)   = qedqcd.displayMass(softsusy::mStrange);
-   bottomDRbar(2,2)   = qedqcd.displayMass(softsusy::mBottom);
+   Eigen::Matrix<std::complex<double>,3,3> downQuarksDRbar(ZEROMATRIXCOMPLEX(3,3));
+   downQuarksDRbar(0,0)   = qedqcd.displayMass(softsusy::mDown);
+   downQuarksDRbar(1,1)   = qedqcd.displayMass(softsusy::mStrange);
+   downQuarksDRbar(2,2)   = qedqcd.displayMass(softsusy::mBottom);
 
    if (model->get_thresholds()) {
-      bottomDRbar(2,2) = MODEL->calculate_MFd_DRbar(qedqcd.displayMass(softsusy::mBottom), 2);
+      downQuarksDRbar(2,2) = MODEL->calculate_MFd_DRbar(qedqcd.displayMass(softsusy::mBottom), 2);
    }
 
    const auto vd = MODELPARAMETER(vd);
-   MODEL->set_Yd((Diag((1.4142135623730951*bottomDRbar)/vd)).real());
+   MODEL->set_Yd((Diag((1.4142135623730951*downQuarksDRbar)/vd)).real());
 
 }
 
@@ -545,19 +545,19 @@ void E6SSM_low_scale_constraint<Two_scale>::calculate_Ye_DRbar()
    assert(model && "E6SSM_low_scale_constraint<Two_scale>::"
           "calculate_Ye_DRbar(): model pointer is zero");
 
-   Eigen::Matrix<std::complex<double>,3,3> electronDRbar(ZEROMATRIXCOMPLEX(3,3));
-   electronDRbar(0,0) = qedqcd.displayPoleMel();
-   electronDRbar(1,1) = qedqcd.displayPoleMmuon();
-   electronDRbar(2,2) = qedqcd.displayPoleMtau();
+   Eigen::Matrix<std::complex<double>,3,3> downLeptonsDRbar(ZEROMATRIXCOMPLEX(3,3));
+   downLeptonsDRbar(0,0) = qedqcd.displayPoleMel();
+   downLeptonsDRbar(1,1) = qedqcd.displayPoleMmuon();
+   downLeptonsDRbar(2,2) = qedqcd.displayPoleMtau();
 
    if (model->get_thresholds()) {
-      electronDRbar(0,0) = MODEL->calculate_MFe_DRbar(qedqcd.displayMass(softsusy::mElectron), 0);
-      electronDRbar(1,1) = MODEL->calculate_MFe_DRbar(qedqcd.displayMass(softsusy::mMuon), 1);
-      electronDRbar(2,2) = MODEL->calculate_MFe_DRbar(qedqcd.displayMass(softsusy::mTau), 2);
+      downLeptonsDRbar(0,0) = MODEL->calculate_MFe_DRbar(qedqcd.displayMass(softsusy::mElectron), 0);
+      downLeptonsDRbar(1,1) = MODEL->calculate_MFe_DRbar(qedqcd.displayMass(softsusy::mMuon), 1);
+      downLeptonsDRbar(2,2) = MODEL->calculate_MFe_DRbar(qedqcd.displayMass(softsusy::mTau), 2);
    }
 
    const auto vd = MODELPARAMETER(vd);
-   MODEL->set_Ye((Diag((1.4142135623730951*electronDRbar)/vd)).real());
+   MODEL->set_Ye((Diag((1.4142135623730951*downLeptonsDRbar)/vd)).real());
 
 }
 

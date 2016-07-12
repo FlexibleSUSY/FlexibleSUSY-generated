@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 29 Jun 2016 11:28:05
+// File generated at Tue 12 Jul 2016 10:37:43
 
 #ifndef HGTHDMIIMSSMBC_TWO_SCALE_soft_parameters_H
 #define HGTHDMIIMSSMBC_TWO_SCALE_soft_parameters_H

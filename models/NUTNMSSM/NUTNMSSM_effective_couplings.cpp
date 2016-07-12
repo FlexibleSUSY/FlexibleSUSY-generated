@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 29 Jun 2016 12:39:53
+// File generated at Tue 12 Jul 2016 11:56:48
 
 #include "NUTNMSSM_effective_couplings.hpp"
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 29 Jun 2016 11:35:04
+// File generated at Tue 12 Jul 2016 10:45:16
 
 #include "TMSSM_two_scale_initial_guesser.hpp"
 #include "TMSSM_two_scale_model.hpp"
@@ -158,13 +158,13 @@ void TMSSM_initial_guesser<Two_scale>::calculate_DRbar_yukawa_couplings()
  */
 void TMSSM_initial_guesser<Two_scale>::calculate_Yu_DRbar()
 {
-   Eigen::Matrix<std::complex<double>,3,3> topDRbar(ZEROMATRIXCOMPLEX(3,3));
-   topDRbar(0,0) = mu_guess;
-   topDRbar(1,1) = mc_guess;
-   topDRbar(2,2) = mt_guess;
+   Eigen::Matrix<std::complex<double>,3,3> upQuarksDRbar(ZEROMATRIXCOMPLEX(3,3));
+   upQuarksDRbar(0,0) = mu_guess;
+   upQuarksDRbar(1,1) = mc_guess;
+   upQuarksDRbar(2,2) = mt_guess;
 
    const auto vu = MODELPARAMETER(vu);
-   MODEL->set_Yu((((1.4142135623730951*topDRbar)/vu).transpose()).real());
+   MODEL->set_Yu((((1.4142135623730951*upQuarksDRbar)/vu).transpose()).real());
 
 }
 
@@ -175,13 +175,14 @@ void TMSSM_initial_guesser<Two_scale>::calculate_Yu_DRbar()
  */
 void TMSSM_initial_guesser<Two_scale>::calculate_Yd_DRbar()
 {
-   Eigen::Matrix<std::complex<double>,3,3> bottomDRbar(ZEROMATRIXCOMPLEX(3,3));
-   bottomDRbar(0,0) = md_guess;
-   bottomDRbar(1,1) = ms_guess;
-   bottomDRbar(2,2) = mb_guess;
+   Eigen::Matrix<std::complex<double>,3,3> downQuarksDRbar(ZEROMATRIXCOMPLEX(3,3));
+   downQuarksDRbar(0,0) = md_guess;
+   downQuarksDRbar(1,1) = ms_guess;
+   downQuarksDRbar(2,2) = mb_guess;
 
    const auto vd = MODELPARAMETER(vd);
-   MODEL->set_Yd((((1.4142135623730951*bottomDRbar)/vd).transpose()).real());
+   MODEL->set_Yd((((1.4142135623730951*downQuarksDRbar)/vd).transpose()).real()
+      );
 
 }
 
@@ -192,13 +193,14 @@ void TMSSM_initial_guesser<Two_scale>::calculate_Yd_DRbar()
  */
 void TMSSM_initial_guesser<Two_scale>::calculate_Ye_DRbar()
 {
-   Eigen::Matrix<std::complex<double>,3,3> electronDRbar(ZEROMATRIXCOMPLEX(3,3));
-   electronDRbar(0,0) = me_guess;
-   electronDRbar(1,1) = mm_guess;
-   electronDRbar(2,2) = mtau_guess;
+   Eigen::Matrix<std::complex<double>,3,3> downLeptonsDRbar(ZEROMATRIXCOMPLEX(3,3));
+   downLeptonsDRbar(0,0) = me_guess;
+   downLeptonsDRbar(1,1) = mm_guess;
+   downLeptonsDRbar(2,2) = mtau_guess;
 
    const auto vd = MODELPARAMETER(vd);
-   MODEL->set_Ye((((1.4142135623730951*electronDRbar)/vd).transpose()).real());
+   MODEL->set_Ye((((1.4142135623730951*downLeptonsDRbar)/vd).transpose()).real(
+      ));
 
 }
 

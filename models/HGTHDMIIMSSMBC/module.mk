@@ -145,11 +145,12 @@ SARAH_MODEL_FILES_HGTHDMIIMSSMBC := \
 endif
 
 .PHONY:         all-$(MODNAME) clean-$(MODNAME) clean-$(MODNAME)-src \
-		clean-$(MODNAME)-dep clean-$(MODNAME)-obj \
-		distclean-$(MODNAME) run-metacode-$(MODNAME) \
-		pack-$(MODNAME)-src
+		clean-$(MODNAME)-dep clean-$(MODNAME)-lib \
+		clean-$(MODNAME)-obj distclean-$(MODNAME) \
+		run-metacode-$(MODNAME) pack-$(MODNAME)-src
 
-all-$(MODNAME): $(LIBHGTHDMIIMSSMBC)
+all-$(MODNAME): $(LIBHGTHDMIIMSSMBC) $(EXEHGTHDMIIMSSMBC_EXE)
+		@true
 
 ifneq ($(INSTALL_DIR),)
 install-src::
@@ -169,6 +170,9 @@ clean-$(MODNAME)-dep:
 		-rm -f $(LIBHGTHDMIIMSSMBC_DEP)
 		-rm -f $(EXEHGTHDMIIMSSMBC_DEP)
 
+clean-$(MODNAME)-lib:
+		-rm -f $(LIBHGTHDMIIMSSMBC)
+
 clean-$(MODNAME)-obj:
 		-rm -f $(LIBHGTHDMIIMSSMBC_OBJ)
 		-rm -f $(EXEHGTHDMIIMSSMBC_OBJ)
@@ -186,8 +190,7 @@ clean-$(MODNAME)-src:
 clean-$(MODNAME): clean-$(MODNAME)-src
 # END:   NOT EXPORTED ##########################################
 
-clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-obj
-		-rm -f $(LIBHGTHDMIIMSSMBC)
+clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-lib clean-$(MODNAME)-obj
 		-rm -f $(EXEHGTHDMIIMSSMBC_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
@@ -236,7 +239,7 @@ $(LIBHGTHDMIIMSSMBC): $(LIBHGTHDMIIMSSMBC_OBJ)
 		$(MAKELIB) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBHGTHDMIIMSSMBC) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(LDLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^ $(ADDONLIBS)) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBHGTHDMIIMSSMBC_DEP) $(EXEHGTHDMIIMSSMBC_DEP)
 ALLSRC += $(LIBHGTHDMIIMSSMBC_SRC) $(EXEHGTHDMIIMSSMBC_SRC)
