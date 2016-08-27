@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 12:47:14
+// File generated at Sat 27 Aug 2016 13:46:34
 
 #include "MSSMatMGUT_effective_couplings.hpp"
 
@@ -52,10 +52,6 @@ MSSMatMGUT_effective_couplings::MSSMatMGUT_effective_couplings(
       std::complex<double>,2,1>::Zero()), eff_CpAhVGVG(Eigen::Array<std::complex<
       double>,2,1>::Zero())
 
-{
-}
-
-MSSMatMGUT_effective_couplings::~MSSMatMGUT_effective_couplings()
 {
 }
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:37:39
+// File generated at Sat 27 Aug 2016 11:39:37
 
 #ifndef SplitMSSM_TWO_SCALE_susy_parameters_H
 #define SplitMSSM_TWO_SCALE_susy_parameters_H
@@ -39,7 +39,7 @@ namespace flexiblesusy {
 class SplitMSSM_susy_parameters : public Beta_function {
 public:
    explicit SplitMSSM_susy_parameters(const SplitMSSM_input_parameters& input_ = SplitMSSM_input_parameters());
-   SplitMSSM_susy_parameters(double scale_, double loops_, double thresholds_, const SplitMSSM_input_parameters& input_, double g1_, double g2_, double g3_, double Lambdax_, const Eigen::Matrix<
+   SplitMSSM_susy_parameters(double scale_, unsigned loops_, unsigned thresholds_, const SplitMSSM_input_parameters& input_, double g1_, double g2_, double g3_, double Lambdax_, const Eigen::Matrix<
    double,3,3>& Yu_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<
    double,3,3>& Ye_, double gYd_, double g2d_, double gYu_, double g2u_
 );
@@ -53,6 +53,7 @@ public:
    void set_input_parameters(const SplitMSSM_input_parameters&);
 
    SplitMSSM_susy_parameters calc_beta() const;
+   SplitMSSM_susy_parameters calc_beta(unsigned) const;
    virtual void clear();
 
    void set_g1(double g1_) { g1 = g1_; }

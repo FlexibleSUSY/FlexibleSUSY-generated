@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 12:46:34
+// File generated at Sat 27 Aug 2016 13:45:39
 
 #ifndef MSSMatMGUT_UTILITIES_H
 #define MSSMatMGUT_UTILITIES_H
@@ -87,7 +87,6 @@ public:
 class MSSMatMGUT_spectrum_plotter {
 public:
    MSSMatMGUT_spectrum_plotter();
-   ~MSSMatMGUT_spectrum_plotter() {}
 
    void extract_spectrum(const MSSMatMGUT_mass_eigenstates&);
    void write_to_file(const std::string&) const;

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 12:00:08
+// File generated at Sat 27 Aug 2016 12:55:20
 
 #ifndef MSSMRHN_TWO_SCALE_soft_parameters_H
 #define MSSMRHN_TWO_SCALE_soft_parameters_H
@@ -51,6 +51,7 @@ public:
    virtual void set(const Eigen::ArrayXd&);
 
    MSSMRHN_soft_parameters calc_beta() const;
+   MSSMRHN_soft_parameters calc_beta(unsigned) const;
    virtual void clear();
 
    void set_TYd(const Eigen::Matrix<double,3,3>& TYd_) { TYd = TYd_; }

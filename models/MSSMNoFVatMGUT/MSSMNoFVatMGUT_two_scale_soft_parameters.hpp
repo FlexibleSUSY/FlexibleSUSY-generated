@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 12:26:10
+// File generated at Sat 27 Aug 2016 13:31:49
 
 #ifndef MSSMNoFVatMGUT_TWO_SCALE_soft_parameters_H
 #define MSSMNoFVatMGUT_TWO_SCALE_soft_parameters_H
@@ -49,6 +49,7 @@ public:
    virtual void set(const Eigen::ArrayXd&);
 
    MSSMNoFVatMGUT_soft_parameters calc_beta() const;
+   MSSMNoFVatMGUT_soft_parameters calc_beta(unsigned) const;
    virtual void clear();
 
    void set_TYd(const Eigen::Matrix<double,3,3>& TYd_) { TYd = TYd_; }

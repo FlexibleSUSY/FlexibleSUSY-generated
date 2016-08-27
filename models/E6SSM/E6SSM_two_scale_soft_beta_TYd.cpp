@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 11:26:50
+// File generated at Sat 27 Aug 2016 12:44:15
 
 #include "E6SSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -119,11 +119,13 @@ Eigen::Matrix<double,3,3> E6SSM_soft_parameters::calc_beta_TYd_two_loop(const So
 
    Eigen::Matrix<double,3,3> beta_TYd;
 
-   const Eigen::Matrix<double,3,3> beta_TYd_1 = (-0.002777777777777778*
+   const Eigen::Matrix<double,3,3> beta_TYd_1 = ((-0.002777777777777778*
       twoLoop*(6608*Power(g1,4)*MassB*Yd + 9828*Power(gN,4)*MassBp*Yd + 20480*
       Power(g3,4)*MassG*Yd + 23760*Power(g2,4)*MassWB*Yd + 12960*
       traceYdAdjYdTYdAdjYd*Yd + 2160*traceYdAdjYuTYuAdjYd*Yd + 4320*
-      traceYeAdjYeTYeAdjYe*Yd + 2160*traceYuAdjYdTYdAdjYu*Yd + 288*
+      traceYeAdjYeTYeAdjYe*Yd + 2160*traceYuAdjYdTYdAdjYu*Yd + 2160*
+      traceAdjKappaTKappa*Yd*AbsSqr(Lambdax) + 1440*traceAdjLambda12TLambda12*
+      Yd*AbsSqr(Lambdax) + 2160*traceAdjYuTYu*Yd*AbsSqr(Lambdax) + 288*
       traceAdjYdTYd*Yd*Sqr(g1) - 864*traceAdjYeTYe*Yd*Sqr(g1) - 288*MassB*
       traceYdAdjYd*Yd*Sqr(g1) + 864*MassB*traceYeAdjYe*Yd*Sqr(g1) + 720*MassB*
       Yd*Sqr(g1)*Sqr(g2) + 720*MassWB*Yd*Sqr(g1)*Sqr(g2) - 11520*traceAdjYdTYd*
@@ -131,44 +133,42 @@ Eigen::Matrix<double,3,3> E6SSM_soft_parameters::calc_beta_TYd_two_loop(const So
       Sqr(g3) + 640*MassG*Yd*Sqr(g1)*Sqr(g3) + 5760*MassG*Yd*Sqr(g2)*Sqr(g3) +
       5760*MassWB*Yd*Sqr(g2)*Sqr(g3) + 432*traceAdjYdTYd*Yd*Sqr(gN) + 144*
       traceAdjYeTYe*Yd*Sqr(gN) - 432*MassBp*traceYdAdjYd*Yd*Sqr(gN) - 144*
-      MassBp*traceYeAdjYe*Yd*Sqr(gN) - 168*MassB*Yd*Sqr(g1)*Sqr(gN) - 168*
-      MassBp*Yd*Sqr(g1)*Sqr(gN) + 1080*MassBp*Yd*Sqr(g2)*Sqr(gN) + 1080*MassWB*
-      Yd*Sqr(g2)*Sqr(gN) + 960*MassBp*Yd*Sqr(g3)*Sqr(gN) + 960*MassG*Yd*Sqr(g3)
-      *Sqr(gN) - 1652*Power(g1,4)*TYd - 5940*Power(g2,4)*TYd - 5120*Power(g3,4)
-      *TYd - 2457*Power(gN,4)*TYd + 3240*traceYdAdjYdYdAdjYd*TYd + 1080*
-      traceYdAdjYuYuAdjYd*TYd + 1080*traceYeAdjYeYeAdjYe*TYd + 144*traceYdAdjYd
-      *Sqr(g1)*TYd - 432*traceYeAdjYe*Sqr(g1)*TYd - 360*Sqr(g1)*Sqr(g2)*TYd -
-      5760*traceYdAdjYd*Sqr(g3)*TYd - 320*Sqr(g1)*Sqr(g3)*TYd - 2880*Sqr(g2)*
-      Sqr(g3)*TYd + 216*traceYdAdjYd*Sqr(gN)*TYd + 72*traceYeAdjYe*Sqr(gN)*TYd
-      + 84*Sqr(g1)*Sqr(gN)*TYd - 540*Sqr(g2)*Sqr(gN)*TYd - 480*Sqr(g3)*Sqr(gN)*
-      TYd + 1080*Lambdax*Sqr(Conj(Lambdax))*(Lambdax*TYd + 4*Yd*TLambdax) + 144
-      *(4*MassB*Sqr(g1) + 15*(3*traceAdjYdTYd + traceAdjYeTYe + 2*MassWB*Sqr(g2
-      )) + 6*MassBp*Sqr(gN))*(Yd*Yd.adjoint()*Yd) + 4320*traceYdAdjYd*(Yd*
-      Yd.adjoint()*TYd) + 1440*traceYeAdjYe*(Yd*Yd.adjoint()*TYd) - 432*Sqr(g1)
-      *(Yd*Yd.adjoint()*TYd) - 2160*Sqr(g2)*(Yd*Yd.adjoint()*TYd) - 648*Sqr(gN)
-      *(Yd*Yd.adjoint()*TYd) + 2160*traceAdjYuTYu*(Yd*Yu.adjoint()*Yu) + 576*
-      MassB*Sqr(g1)*(Yd*Yu.adjoint()*Yu) + 144*MassBp*Sqr(gN)*(Yd*Yu.adjoint()*
-      Yu) + 2160*traceYuAdjYu*(Yd*Yu.adjoint()*TYu) - 576*Sqr(g1)*(Yd*
-      Yu.adjoint()*TYu) - 144*Sqr(gN)*(Yd*Yu.adjoint()*TYu) + 5400*traceYdAdjYd
-      *(TYd*Yd.adjoint()*Yd) + 1800*traceYeAdjYe*(TYd*Yd.adjoint()*Yd) - 432*
-      Sqr(g1)*(TYd*Yd.adjoint()*Yd) - 4320*Sqr(g2)*(TYd*Yd.adjoint()*Yd) - 648*
-      Sqr(gN)*(TYd*Yd.adjoint()*Yd) + 1080*traceYuAdjYu*(TYd*Yu.adjoint()*Yu) -
-      288*Sqr(g1)*(TYd*Yu.adjoint()*Yu) - 72*Sqr(gN)*(TYd*Yu.adjoint()*Yu) +
-      360*Conj(Lambdax)*(6*traceAdjKappaTKappa*Yd*Lambdax + 4*
-      traceAdjLambda12TLambda12*Yd*Lambdax + 6*traceAdjYuTYu*Yd*Lambdax + 2*
-      MassBp*Yd*Lambdax*Sqr(gN) + 3*traceKappaAdjKappa*Lambdax*TYd + 2*
-      traceLambda12AdjLambda12*Lambdax*TYd + 3*traceYuAdjYu*Lambdax*TYd -
-      Lambdax*Sqr(gN)*TYd + 6*traceKappaAdjKappa*Yd*TLambdax + 4*
-      traceLambda12AdjLambda12*Yd*TLambdax + 6*traceYuAdjYu*Yd*TLambdax - 2*Yd*
-      Sqr(gN)*TLambdax + 6*TLambdax*(Yd*Yd.adjoint()*Yd) + 4*Lambdax*(Yd*
-      Yd.adjoint()*TYd) + 2*Lambdax*(Yd*Yu.adjoint()*TYu) + 5*Lambdax*(TYd*
-      Yd.adjoint()*Yd) + Lambdax*(TYd*Yu.adjoint()*Yu)) + 2160*(Yd*Yd.adjoint()
-      *Yd*Yd.adjoint()*TYd) + 2880*(Yd*Yd.adjoint()*TYd*Yd.adjoint()*Yd) + 720*
-      (Yd*Yu.adjoint()*Yu*Yd.adjoint()*TYd) + 1440*(Yd*Yu.adjoint()*Yu*
-      Yu.adjoint()*TYu) + 1440*(Yd*Yu.adjoint()*TYu*Yd.adjoint()*Yd) + 1440*(Yd
-      *Yu.adjoint()*TYu*Yu.adjoint()*Yu) + 2160*(TYd*Yd.adjoint()*Yd*Yd.adjoint
-      ()*Yd) + 1440*(TYd*Yu.adjoint()*Yu*Yd.adjoint()*Yd) + 720*(TYd*Yu.adjoint
-      ()*Yu*Yu.adjoint()*Yu))*UNITMATRIX(3)).real();
+      MassBp*traceYeAdjYe*Yd*Sqr(gN) + 720*MassBp*Yd*AbsSqr(Lambdax)*Sqr(gN) -
+      168*MassB*Yd*Sqr(g1)*Sqr(gN) - 168*MassBp*Yd*Sqr(g1)*Sqr(gN) + 1080*
+      MassBp*Yd*Sqr(g2)*Sqr(gN) + 1080*MassWB*Yd*Sqr(g2)*Sqr(gN) + 960*MassBp*
+      Yd*Sqr(g3)*Sqr(gN) + 960*MassG*Yd*Sqr(g3)*Sqr(gN) - 1652*Power(g1,4)*TYd
+      - 5940*Power(g2,4)*TYd - 5120*Power(g3,4)*TYd - 2457*Power(gN,4)*TYd +
+      3240*traceYdAdjYdYdAdjYd*TYd + 1080*traceYdAdjYuYuAdjYd*TYd + 1080*
+      traceYeAdjYeYeAdjYe*TYd + 1080*traceKappaAdjKappa*AbsSqr(Lambdax)*TYd +
+      720*traceLambda12AdjLambda12*AbsSqr(Lambdax)*TYd + 1080*traceYuAdjYu*
+      AbsSqr(Lambdax)*TYd + 144*traceYdAdjYd*Sqr(g1)*TYd - 432*traceYeAdjYe*Sqr
+      (g1)*TYd - 360*Sqr(g1)*Sqr(g2)*TYd - 5760*traceYdAdjYd*Sqr(g3)*TYd - 320*
+      Sqr(g1)*Sqr(g3)*TYd - 2880*Sqr(g2)*Sqr(g3)*TYd + 216*traceYdAdjYd*Sqr(gN)
+      *TYd + 72*traceYeAdjYe*Sqr(gN)*TYd - 360*AbsSqr(Lambdax)*Sqr(gN)*TYd + 84
+      *Sqr(g1)*Sqr(gN)*TYd - 540*Sqr(g2)*Sqr(gN)*TYd - 480*Sqr(g3)*Sqr(gN)*TYd
+      + 2160*traceKappaAdjKappa*Yd*Conj(Lambdax)*TLambdax + 1440*
+      traceLambda12AdjLambda12*Yd*Conj(Lambdax)*TLambdax + 2160*traceYuAdjYu*Yd
+      *Conj(Lambdax)*TLambdax - 720*Yd*Conj(Lambdax)*Sqr(gN)*TLambdax + 1080*
+      Lambdax*Sqr(Conj(Lambdax))*(Lambdax*TYd + 4*Yd*TLambdax)) -
+      0.002777777777777778*twoLoop*(144*(4*MassB*Sqr(g1) + 15*(3*traceAdjYdTYd
+      + traceAdjYeTYe + 2*MassWB*Sqr(g2)) + 6*MassBp*Sqr(gN)) + 2160*Conj(
+      Lambdax)*TLambdax)*(Yd*Yd.adjoint()*Yd) - 0.002777777777777778*twoLoop*(
+      4320*traceYdAdjYd + 1440*traceYeAdjYe + 1440*AbsSqr(Lambdax) - 432*Sqr(g1
+      ) - 2160*Sqr(g2) - 648*Sqr(gN))*(Yd*Yd.adjoint()*TYd) -
+      0.002777777777777778*twoLoop*(2160*traceAdjYuTYu + 576*MassB*Sqr(g1) +
+      144*MassBp*Sqr(gN))*(Yd*Yu.adjoint()*Yu) - 0.002777777777777778*twoLoop*(
+      2160*traceYuAdjYu + 720*AbsSqr(Lambdax) - 576*Sqr(g1) - 144*Sqr(gN))*(Yd*
+      Yu.adjoint()*TYu) - 0.002777777777777778*twoLoop*(5400*traceYdAdjYd +
+      1800*traceYeAdjYe + 1800*AbsSqr(Lambdax) - 432*Sqr(g1) - 4320*Sqr(g2) -
+      648*Sqr(gN))*(TYd*Yd.adjoint()*Yd) - 0.002777777777777778*twoLoop*(1080*
+      traceYuAdjYu + 360*AbsSqr(Lambdax) - 288*Sqr(g1) - 72*Sqr(gN))*(TYd*
+      Yu.adjoint()*Yu) - 6*twoLoop*(Yd*Yd.adjoint()*Yd*Yd.adjoint()*TYd) - 8*
+      twoLoop*(Yd*Yd.adjoint()*TYd*Yd.adjoint()*Yd) - 2*twoLoop*(Yd*Yu.adjoint(
+      )*Yu*Yd.adjoint()*TYd) - 4*twoLoop*(Yd*Yu.adjoint()*Yu*Yu.adjoint()*TYu)
+      - 4*twoLoop*(Yd*Yu.adjoint()*TYu*Yd.adjoint()*Yd) - 4*twoLoop*(Yd*
+      Yu.adjoint()*TYu*Yu.adjoint()*Yu) - 6*twoLoop*(TYd*Yd.adjoint()*Yd*
+      Yd.adjoint()*Yd) - 4*twoLoop*(TYd*Yu.adjoint()*Yu*Yd.adjoint()*Yd) - 2*
+      twoLoop*(TYd*Yu.adjoint()*Yu*Yu.adjoint()*Yu))*UNITMATRIX(3)).real();
    const Eigen::Matrix<double,3,3> beta_TYd_2 = (-2*twoLoop*Conj(Lambdax)
       *TLambdax*(Yd*Yu.adjoint()*Yu)*UNITMATRIX(3)).real();
 

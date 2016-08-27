@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:55:30
+// File generated at Sat 27 Aug 2016 12:04:18
 
 #include "MRSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -47,7 +47,7 @@ MRSSM_susy_parameters::MRSSM_susy_parameters(const MRSSM_input_parameters& input
 }
 
 MRSSM_susy_parameters::MRSSM_susy_parameters(
-   double scale_, double loops_, double thresholds_,
+   double scale_, unsigned loops_, unsigned thresholds_,
    const MRSSM_input_parameters& input_
    , const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
    , double LamTD_, double LamTU_, double LamSD_, double LamSU_, const
@@ -143,6 +143,14 @@ MRSSM_susy_parameters MRSSM_susy_parameters::calc_beta() const
 
    return MRSSM_susy_parameters(get_scale(), get_loops(), get_thresholds(), input,
                     beta_Yd, beta_Ye, beta_LamTD, beta_LamTU, beta_LamSD, beta_LamSU, beta_Yu, beta_Mu, beta_MuD, beta_MuU, beta_g1, beta_g2, beta_g3, beta_vd, beta_vu, beta_vT, beta_vS);
+}
+
+MRSSM_susy_parameters MRSSM_susy_parameters::calc_beta(unsigned loops) const
+{
+   MRSSM_susy_parameters p(*this);
+   p.set_loops(loops);
+
+   return p.calc_beta();
 }
 
 void MRSSM_susy_parameters::clear()

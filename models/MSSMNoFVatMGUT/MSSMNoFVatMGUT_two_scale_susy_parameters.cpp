@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 12:25:52
+// File generated at Sat 27 Aug 2016 13:31:27
 
 #include "MSSMNoFVatMGUT_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -46,7 +46,7 @@ MSSMNoFVatMGUT_susy_parameters::MSSMNoFVatMGUT_susy_parameters(const MSSMNoFVatM
 }
 
 MSSMNoFVatMGUT_susy_parameters::MSSMNoFVatMGUT_susy_parameters(
-   double scale_, double loops_, double thresholds_,
+   double scale_, unsigned loops_, unsigned thresholds_,
    const MSSMNoFVatMGUT_input_parameters& input_
    , const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
    , const Eigen::Matrix<double,3,3>& Yu_, double Mu_, double g1_, double g2_,
@@ -123,6 +123,14 @@ MSSMNoFVatMGUT_susy_parameters MSSMNoFVatMGUT_susy_parameters::calc_beta() const
 
    return MSSMNoFVatMGUT_susy_parameters(get_scale(), get_loops(), get_thresholds(), input,
                     beta_Yd, beta_Ye, beta_Yu, beta_Mu, beta_g1, beta_g2, beta_g3, beta_vd, beta_vu);
+}
+
+MSSMNoFVatMGUT_susy_parameters MSSMNoFVatMGUT_susy_parameters::calc_beta(unsigned loops) const
+{
+   MSSMNoFVatMGUT_susy_parameters p(*this);
+   p.set_loops(loops);
+
+   return p.calc_beta();
 }
 
 void MSSMNoFVatMGUT_susy_parameters::clear()

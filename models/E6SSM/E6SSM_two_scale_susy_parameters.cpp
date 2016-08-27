@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 11:26:33
+// File generated at Sat 27 Aug 2016 12:43:54
 
 #include "E6SSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -47,7 +47,7 @@ E6SSM_susy_parameters::E6SSM_susy_parameters(const E6SSM_input_parameters& input
 }
 
 E6SSM_susy_parameters::E6SSM_susy_parameters(
-   double scale_, double loops_, double thresholds_,
+   double scale_, unsigned loops_, unsigned thresholds_,
    const E6SSM_input_parameters& input_
    , const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
    , const Eigen::Matrix<double,3,3>& Kappa_, const Eigen::Matrix<double,2,2>&
@@ -135,6 +135,14 @@ E6SSM_susy_parameters E6SSM_susy_parameters::calc_beta() const
 
    return E6SSM_susy_parameters(get_scale(), get_loops(), get_thresholds(), input,
                     beta_Yd, beta_Ye, beta_Kappa, beta_Lambda12, beta_Lambdax, beta_Yu, beta_MuPr, beta_g1, beta_g2, beta_g3, beta_gN, beta_vd, beta_vu, beta_vs);
+}
+
+E6SSM_susy_parameters E6SSM_susy_parameters::calc_beta(unsigned loops) const
+{
+   E6SSM_susy_parameters p(*this);
+   p.set_loops(loops);
+
+   return p.calc_beta();
 }
 
 void E6SSM_susy_parameters::clear()

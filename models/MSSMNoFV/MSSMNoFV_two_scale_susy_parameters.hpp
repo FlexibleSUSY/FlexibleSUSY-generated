@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 12:29:35
+// File generated at Sat 27 Aug 2016 13:33:09
 
 #ifndef MSSMNoFV_TWO_SCALE_susy_parameters_H
 #define MSSMNoFV_TWO_SCALE_susy_parameters_H
@@ -39,7 +39,7 @@ namespace flexiblesusy {
 class MSSMNoFV_susy_parameters : public Beta_function {
 public:
    explicit MSSMNoFV_susy_parameters(const MSSMNoFV_input_parameters& input_ = MSSMNoFV_input_parameters());
-   MSSMNoFV_susy_parameters(double scale_, double loops_, double thresholds_, const MSSMNoFV_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
+   MSSMNoFV_susy_parameters(double scale_, unsigned loops_, unsigned thresholds_, const MSSMNoFV_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
    , const Eigen::Matrix<double,3,3>& Yu_, double Mu_, double g1_, double g2_,
    double g3_, double vd_, double vu_
 );
@@ -53,6 +53,7 @@ public:
    void set_input_parameters(const MSSMNoFV_input_parameters&);
 
    MSSMNoFV_susy_parameters calc_beta() const;
+   MSSMNoFV_susy_parameters calc_beta(unsigned) const;
    virtual void clear();
 
    void set_Yd(const Eigen::Matrix<double,3,3>& Yd_) { Yd = Yd_; }

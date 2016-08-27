@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:36:22
+// File generated at Sat 27 Aug 2016 11:43:49
 
 #include "HSSUSY_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -40,9 +40,9 @@ Eigen::Matrix<double,3,3> HSSUSY_susy_parameters::calc_beta_Yd_one_loop(const Su
 
    Eigen::Matrix<double,3,3> beta_Yd;
 
-   beta_Yd = (0.25*oneOver16PiSqr*(-(Yd*(-12*traceYdAdjYd - 4*
-      traceYeAdjYe - 12*traceYuAdjYu + Sqr(g1) + 9*Sqr(g2) + 32*Sqr(g3))) + 6*(
-      Yd*Yd.adjoint()*Yd - Yd*Yu.adjoint()*Yu))).real();
+   beta_Yd = (oneOver16PiSqr*(-0.25*Yd*(-12*traceYdAdjYd - 4*traceYeAdjYe
+      - 12*traceYuAdjYu + Sqr(g1) + 9*Sqr(g2) + 32*Sqr(g3)) + 1.5*(Yd*
+      Yd.adjoint()*Yd) - 1.5*(Yd*Yu.adjoint()*Yu))).real();
 
 
    return beta_Yd;
@@ -73,13 +73,13 @@ Eigen::Matrix<double,3,3> HSSUSY_susy_parameters::calc_beta_Yd_two_loop(const Su
       *Sqr(g2) + 1.875*traceYeAdjYe*(Sqr(g1) + Sqr(g2)) + 20*traceYuAdjYu*Sqr(
       g3) + 2.066666666666667*Sqr(g1)*Sqr(g3) + 9*Sqr(g2)*Sqr(g3) + 0.625*
       traceYdAdjYd*(Sqr(g1) + 9*Sqr(g2) + 32*Sqr(g3)) + 1.5*Sqr(Lambdax)) +
-      0.0125*((-540*traceYdAdjYd - 180*traceYeAdjYe - 540*traceYuAdjYu - 480*
+      0.0125*(-540*traceYdAdjYd - 180*traceYeAdjYe - 540*traceYuAdjYu - 480*
       Lambdax + 187*Sqr(g1) + 675*Sqr(g2) + 1280*Sqr(g3))*(Yd*Yd.adjoint()*Yd)
-      + (300*traceYdAdjYd + 100*traceYeAdjYe + 300*traceYuAdjYu - 79*Sqr(g1) +
-      45*Sqr(g2) - 1280*Sqr(g3))*(Yd*Yu.adjoint()*Yu) + 20*(6*(Yd*Yd.adjoint()*
-      Yd*Yd.adjoint()*Yd) - 4*(Yd*Yd.adjoint()*Yd*Yu.adjoint()*Yu) - Yd*
-      Yu.adjoint()*Yu*Yd.adjoint()*Yd + 11*(Yd*Yu.adjoint()*Yu*Yu.adjoint()*Yu)
-      )))).real();
+      + 0.0125*(300*traceYdAdjYd + 100*traceYeAdjYe + 300*traceYuAdjYu - 79*Sqr
+      (g1) + 45*Sqr(g2) - 1280*Sqr(g3))*(Yd*Yu.adjoint()*Yu) + 1.5*(Yd*
+      Yd.adjoint()*Yd*Yd.adjoint()*Yd) - Yd*Yd.adjoint()*Yd*Yu.adjoint()*Yu -
+      0.25*(Yd*Yu.adjoint()*Yu*Yd.adjoint()*Yd) + 2.75*(Yd*Yu.adjoint()*Yu*
+      Yu.adjoint()*Yu))).real();
 
 
    return beta_Yd;

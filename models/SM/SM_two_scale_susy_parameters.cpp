@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:37:21
+// File generated at Sat 27 Aug 2016 11:45:05
 
 #include "SM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -45,7 +45,7 @@ SM_susy_parameters::SM_susy_parameters(const SM_input_parameters& input_)
 }
 
 SM_susy_parameters::SM_susy_parameters(
-   double scale_, double loops_, double thresholds_,
+   double scale_, unsigned loops_, unsigned thresholds_,
    const SM_input_parameters& input_
    , double g1_, double g2_, double g3_, double Lambdax_, const Eigen::Matrix<
    double,3,3>& Yu_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<
@@ -116,6 +116,14 @@ SM_susy_parameters SM_susy_parameters::calc_beta() const
 
    return SM_susy_parameters(get_scale(), get_loops(), get_thresholds(), input,
                     beta_g1, beta_g2, beta_g3, beta_Lambdax, beta_Yu, beta_Yd, beta_Ye);
+}
+
+SM_susy_parameters SM_susy_parameters::calc_beta(unsigned loops) const
+{
+   SM_susy_parameters p(*this);
+   p.set_loops(loops);
+
+   return p.calc_beta();
 }
 
 void SM_susy_parameters::clear()

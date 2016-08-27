@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:36:19
+// File generated at Sat 27 Aug 2016 11:43:45
 
 #ifndef HSSUSY_TWO_SCALE_susy_parameters_H
 #define HSSUSY_TWO_SCALE_susy_parameters_H
@@ -39,7 +39,7 @@ namespace flexiblesusy {
 class HSSUSY_susy_parameters : public Beta_function {
 public:
    explicit HSSUSY_susy_parameters(const HSSUSY_input_parameters& input_ = HSSUSY_input_parameters());
-   HSSUSY_susy_parameters(double scale_, double loops_, double thresholds_, const HSSUSY_input_parameters& input_, double g1_, double g2_, double g3_, double Lambdax_, const Eigen::Matrix<
+   HSSUSY_susy_parameters(double scale_, unsigned loops_, unsigned thresholds_, const HSSUSY_input_parameters& input_, double g1_, double g2_, double g3_, double Lambdax_, const Eigen::Matrix<
    double,3,3>& Yu_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<
    double,3,3>& Ye_
 );
@@ -53,6 +53,7 @@ public:
    void set_input_parameters(const HSSUSY_input_parameters&);
 
    HSSUSY_susy_parameters calc_beta() const;
+   HSSUSY_susy_parameters calc_beta(unsigned) const;
    virtual void clear();
 
    void set_g1(double g1_) { g1 = g1_; }

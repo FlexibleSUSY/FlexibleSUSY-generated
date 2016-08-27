@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 11:44:16
+// File generated at Sat 27 Aug 2016 12:43:48
 
 #ifndef NUTSMSSM_UTILITIES_H
 #define NUTSMSSM_UTILITIES_H
@@ -87,7 +87,6 @@ public:
 class NUTSMSSM_spectrum_plotter {
 public:
    NUTSMSSM_spectrum_plotter();
-   ~NUTSMSSM_spectrum_plotter() {}
 
    void extract_spectrum(const NUTSMSSM_mass_eigenstates&);
    void write_to_file(const std::string&) const;

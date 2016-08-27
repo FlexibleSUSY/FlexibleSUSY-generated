@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:37:39
+// File generated at Sat 27 Aug 2016 11:45:35
 
 #ifndef SM_EFFECTIVE_COUPLINGS_H
 #define SM_EFFECTIVE_COUPLINGS_H
@@ -39,7 +39,6 @@ public:
    SM_effective_couplings(const SM_mass_eigenstates&,
                                    const softsusy::QedQcd&,
                                    const Physical_input&);
-   ~SM_effective_couplings();
 
    void do_run_couplings(bool flag) { rg_improve = flag; }
    bool do_run_couplings() const { return rg_improve; }

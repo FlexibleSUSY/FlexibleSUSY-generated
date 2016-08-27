@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 12:05:21
+// File generated at Sat 27 Aug 2016 13:02:24
 
 #ifndef MSSMRHN_SPECTRUM_GENERATOR_H
 #define MSSMRHN_SPECTRUM_GENERATOR_H
@@ -164,26 +164,8 @@ void MSSMRHN_spectrum_generator<T>::run(const softsusy::QedQcd& qedqcd,
       if (!is_zero(this->parameter_output_scale)) {
          model.run_to(this->parameter_output_scale);
       }
-   } catch (const NoConvergenceError&) {
-      model.get_problems().flag_no_convergence();
-   } catch (const NonPerturbativeRunningError& error) {
-      model.get_problems().flag_no_perturbative();
-      const int parameter_index = error.get_parameter_index();
-      const std::string parameter_name =
-         parameter_index < 0 ? "Q" : MSSMRHN_info::parameter_names[parameter_index];
-      const double parameter_value = error.get_parameter_value();
-      const double scale = error.get_scale();
-      model.get_problems().flag_non_perturbative_parameter(parameter_name, parameter_value, scale, -1);
-   } catch (const NoRhoConvergenceError&) {
-      model.get_problems().flag_no_rho_convergence();
-   } catch (const Error& error) {
-      model.get_problems().flag_thrown(error.what());
-   } catch (const std::string& str) {
-      model.get_problems().flag_thrown(str);
-   } catch (const char* str) {
-      model.get_problems().flag_thrown(str);
-   } catch (const std::exception& error) {
-      model.get_problems().flag_thrown(error.what());
+   } catch (...) {
+      this->translate_exception_to_problem(model);
    }
 }
 

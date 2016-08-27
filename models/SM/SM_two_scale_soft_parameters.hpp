@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:37:25
+// File generated at Sat 27 Aug 2016 11:45:10
 
 #ifndef SM_TWO_SCALE_soft_parameters_H
 #define SM_TWO_SCALE_soft_parameters_H
@@ -44,6 +44,7 @@ public:
    virtual void set(const Eigen::ArrayXd&);
 
    SM_soft_parameters calc_beta() const;
+   SM_soft_parameters calc_beta(unsigned) const;
    virtual void clear();
 
    void set_mu2(double mu2_) { mu2 = mu2_; }

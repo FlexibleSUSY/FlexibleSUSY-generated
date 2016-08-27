@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:37:43
+// File generated at Sat 27 Aug 2016 11:39:42
 
 #include "SplitMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -42,8 +42,8 @@ Eigen::Matrix<double,3,3> SplitMSSM_susy_parameters::calc_beta_Yu_one_loop(const
 
    beta_Yu = (oneOver16PiSqr*(Yu*(3*traceYdAdjYd + traceYeAdjYe + 3*
       traceYuAdjYu - 0.85*Sqr(g1) - 2.25*Sqr(g2) + 1.5*Sqr(g2d) + 1.5*Sqr(g2u)
-      - 8*Sqr(g3) + 0.5*Sqr(gYd) + 0.5*Sqr(gYu)) - 1.5*(Yu*Yd.adjoint()*Yd - Yu
-      *Yu.adjoint()*Yu))).real();
+      - 8*Sqr(g3) + 0.5*Sqr(gYd) + 0.5*Sqr(gYu)) - 1.5*(Yu*Yd.adjoint()*Yd) +
+      1.5*(Yu*Yu.adjoint()*Yu))).real();
 
 
    return beta_Yu;
@@ -67,7 +67,7 @@ Eigen::Matrix<double,3,3> SplitMSSM_susy_parameters::calc_beta_Yu_two_loop(const
 
    Eigen::Matrix<double,3,3> beta_Yu;
 
-   beta_Yu = (0.0008333333333333334*twoLoop*(Yu*(2606*Power(g1,4) - 5100*
+   beta_Yu = (twoLoop*(0.0008333333333333334*Yu*(2606*Power(g1,4) - 5100*
       Power(g2,4) - 3375*Power(g2d,4) - 3375*Power(g2u,4) - 113600*Power(g3,4)
       - 675*Power(gYd,4) - 3600*g2d*g2u*gYd*gYu - 675*Power(gYu,4) - 8100*
       traceYdAdjYdYdAdjYd + 1800*traceYdAdjYuYuAdjYd - 2700*traceYeAdjYeYeAdjYe
@@ -79,15 +79,15 @@ Eigen::Matrix<double,3,3> SplitMSSM_susy_parameters::calc_beta_Yu_two_loop(const
       *traceYdAdjYd*(Sqr(g1) + 9*Sqr(g2) + 32*Sqr(g3)) + 225*Sqr(g1)*Sqr(gYd) +
       1125*Sqr(g2)*Sqr(gYd) - 1350*Sqr(g2d)*Sqr(gYd) + 225*Sqr(g1)*Sqr(gYu) +
       1125*Sqr(g2)*Sqr(gYu) - 1350*Sqr(g2u)*Sqr(gYu) - 1500*Sqr(gYd)*Sqr(gYu) +
-      1800*Sqr(Lambdax)) - 15*((-300*traceYdAdjYd - 100*traceYeAdjYe - 300*
+      1800*Sqr(Lambdax)) - 0.0125*(-300*traceYdAdjYd - 100*traceYeAdjYe - 300*
       traceYuAdjYu + 43*Sqr(g1) - 45*Sqr(g2) - 150*Sqr(g2d) - 150*Sqr(g2u) +
-      1280*Sqr(g3) - 50*Sqr(gYd) - 50*Sqr(gYu))*(Yu*Yd.adjoint()*Yd) + (540*
-      traceYdAdjYd + 180*traceYeAdjYe + 540*traceYuAdjYu + 480*Lambdax - 223*
-      Sqr(g1) - 675*Sqr(g2) + 270*Sqr(g2d) + 270*Sqr(g2u) - 1280*Sqr(g3) + 90*
-      Sqr(gYd) + 90*Sqr(gYu))*(Yu*Yu.adjoint()*Yu) - 20*(11*(Yu*Yd.adjoint()*Yd
-      *Yd.adjoint()*Yd) - Yu*Yd.adjoint()*Yd*Yu.adjoint()*Yu - 4*(Yu*Yu.adjoint
-      ()*Yu*Yd.adjoint()*Yd) + 6*(Yu*Yu.adjoint()*Yu*Yu.adjoint()*Yu))))).real(
-      );
+      1280*Sqr(g3) - 50*Sqr(gYd) - 50*Sqr(gYu))*(Yu*Yd.adjoint()*Yd) - 0.0125*(
+      540*traceYdAdjYd + 180*traceYeAdjYe + 540*traceYuAdjYu + 480*Lambdax -
+      223*Sqr(g1) - 675*Sqr(g2) + 270*Sqr(g2d) + 270*Sqr(g2u) - 1280*Sqr(g3) +
+      90*Sqr(gYd) + 90*Sqr(gYu))*(Yu*Yu.adjoint()*Yu) + 2.75*(Yu*Yd.adjoint()*
+      Yd*Yd.adjoint()*Yd) - 0.25*(Yu*Yd.adjoint()*Yd*Yu.adjoint()*Yu) - Yu*
+      Yu.adjoint()*Yu*Yd.adjoint()*Yd + 1.5*(Yu*Yu.adjoint()*Yu*Yu.adjoint()*Yu
+      ))).real();
 
 
    return beta_Yu;

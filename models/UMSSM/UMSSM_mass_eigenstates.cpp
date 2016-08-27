@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 11:36:25
+// File generated at Sat 27 Aug 2016 12:42:43
 
 /**
  * @file UMSSM_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Tue 12 Jul 2016 11:36:25 with FlexibleSUSY
- * 1.5.1 (git commit: 8356bacd26e8aecc6635607a32835d534ea3cf01) and SARAH 4.8.6 .
+ * This file was generated at Sat 27 Aug 2016 12:42:43 with FlexibleSUSY
+ * 1.6.0 (git commit: b48da3168d7e9ce639e93a4ea0b216e3468d6dc3) and SARAH 4.9.1 .
  */
 
 #include "UMSSM_mass_eigenstates.hpp"
@@ -41,21 +41,20 @@
 #include "fixed_point_iterator.hpp"
 #include "gsl_utils.hpp"
 #include "config.h"
+#include "parallel.hpp"
 #include "pv.hpp"
 #include "functors.hpp"
 
 #include "sfermions.hpp"
-#include "nmssm_twoloophiggs.h"
+#include "mssm_twoloophiggs.hpp"
+#include "nmssm_twoloophiggs.hpp"
 
 
 
 #include <cmath>
 #include <iostream>
+#include <memory>
 #include <algorithm>
-
-#ifdef ENABLE_THREADS
-#include <thread>
-#endif
 
 #include <gsl/gsl_multiroots.h>
 
@@ -74,17 +73,8 @@ using namespace UMSSM_info;
 #define HIGGS_2LOOP_CORRECTION_AB_AS     two_loop_corrections.higgs_ab_as
 #define HIGGS_2LOOP_CORRECTION_AT_AT     two_loop_corrections.higgs_at_at
 #define HIGGS_2LOOP_CORRECTION_ATAU_ATAU two_loop_corrections.higgs_atau_atau
-#define TOP_2LOOP_CORRECTION_QCD         two_loop_corrections.top_qcd
+#define TOP_POLE_QCD_CORRECTION          two_loop_corrections.top_qcd
 #define HIGGS_3LOOP_CORRECTION_AT_AS_AS  1
-
-#ifdef ENABLE_THREADS
-   std::mutex CLASSNAME::mtx_fortran;
-   #define LOCK_MUTEX() mtx_fortran.lock()
-   #define UNLOCK_MUTEX() mtx_fortran.unlock()
-#else
-   #define LOCK_MUTEX()
-   #define UNLOCK_MUTEX()
-#endif
 
 CLASSNAME::UMSSM_mass_eigenstates(const UMSSM_input_parameters& input_)
    : UMSSM_soft_parameters(input_)
@@ -99,9 +89,6 @@ CLASSNAME::UMSSM_mass_eigenstates(const UMSSM_input_parameters& input_)
    , physical()
    , problems(UMSSM_info::particle_names)
    , two_loop_corrections()
-#ifdef ENABLE_THREADS
-   , thread_exception()
-#endif
    , MVG(0), MGlu(0), MSd(Eigen::Array<double,6,1>::Zero()), MSv(Eigen::Array<
       double,6,1>::Zero()), MSu(Eigen::Array<double,6,1>::Zero()), MSe(
       Eigen::Array<double,6,1>::Zero()), Mhh(Eigen::Array<double,3,1>::Zero()),
@@ -253,10 +240,12 @@ Problems<UMSSM_info::NUMBER_OF_PARTICLES>& CLASSNAME::get_problems()
 /**
  * Method which calculates the tadpoles at the current loop order.
  *
- * @param tadpole array of tadpole
+ * @return array of tadpoles
  */
-void CLASSNAME::tadpole_equations(double tadpole[number_of_ewsb_equations]) const
+Eigen::Matrix<double, CLASSNAME::number_of_ewsb_equations, 1> CLASSNAME::tadpole_equations() const
 {
+   Eigen::Matrix<double, number_of_ewsb_equations, 1> tadpole(Eigen::Matrix<double, number_of_ewsb_equations, 1>::Zero());
+
    tadpole[0] = get_ewsb_eq_hh_1();
    tadpole[1] = get_ewsb_eq_hh_2();
    tadpole[2] = get_ewsb_eq_hh_3();
@@ -267,14 +256,26 @@ void CLASSNAME::tadpole_equations(double tadpole[number_of_ewsb_equations]) cons
       tadpole[2] -= Re(tadpole_hh(2));
 
       if (ewsb_loop_order > 1) {
-         double two_loop_tadpole[3];
-         tadpole_hh_2loop(two_loop_tadpole);
-         tadpole[0] -= two_loop_tadpole[0];
-         tadpole[1] -= two_loop_tadpole[1];
-         tadpole[2] -= two_loop_tadpole[2];
+         const auto tadpole_2l(tadpole_hh_2loop());
+         tadpole[0] -= tadpole_2l(0);
+         tadpole[1] -= tadpole_2l(1);
+         tadpole[2] -= tadpole_2l(2);
 
       }
    }
+
+   return tadpole;
+}
+
+/**
+ * Method which calculates the tadpoles at the current loop order.
+ *
+ * @param tadpole array of tadpole
+ */
+void CLASSNAME::tadpole_equations(double tadpole[number_of_ewsb_equations]) const
+{
+   const auto tadpole_(tadpole_equations());
+   std::copy(tadpole_.data(), tadpole_.data() + number_of_ewsb_equations, tadpole);
 }
 
 /**
@@ -307,14 +308,12 @@ int CLASSNAME::tadpole_equations(const gsl_vector* x, void* params, gsl_vector* 
    if (ewsb_loop_order > 0)
       model->calculate_DRbar_masses();
 
-   double tadpole[number_of_ewsb_equations] = { 0. };
-
-   model->tadpole_equations(tadpole);
+   const auto tadpole(model->tadpole_equations());
 
    for (std::size_t i = 0; i < number_of_ewsb_equations; ++i)
       gsl_vector_set(f, i, tadpole[i]);
 
-   return is_finite<number_of_ewsb_equations>(tadpole) ? GSL_SUCCESS : GSL_EDOM;
+   return IsFinite(tadpole) ? GSL_SUCCESS : GSL_EDOM;
 }
 
 /**
@@ -325,28 +324,22 @@ int CLASSNAME::solve_ewsb_iteratively()
 {
    EWSB_args params = {this, ewsb_loop_order};
 
-   EWSB_solver* solvers[] = {
-      new Fixed_point_iterator<number_of_ewsb_equations, fixed_point_iterator::Convergence_tester_relative>(CLASSNAME::ewsb_step, &params, number_of_ewsb_iterations, ewsb_iteration_precision),
-      new Root_finder<number_of_ewsb_equations>(CLASSNAME::tadpole_equations, &params, number_of_ewsb_iterations, ewsb_iteration_precision, gsl_multiroot_fsolver_hybrids),
-      new Root_finder<number_of_ewsb_equations>(CLASSNAME::tadpole_equations, &params, number_of_ewsb_iterations, ewsb_iteration_precision, gsl_multiroot_fsolver_broyden)
+   std::unique_ptr<EWSB_solver> solvers[] = {
+      std::unique_ptr<EWSB_solver>(new Fixed_point_iterator<number_of_ewsb_equations, fixed_point_iterator::Convergence_tester_relative>(CLASSNAME::ewsb_step, &params, number_of_ewsb_iterations, ewsb_iteration_precision)),
+      std::unique_ptr<EWSB_solver>(new Root_finder<number_of_ewsb_equations>(CLASSNAME::tadpole_equations, &params, number_of_ewsb_iterations, ewsb_iteration_precision, gsl_multiroot_fsolver_hybrids)),
+      std::unique_ptr<EWSB_solver>(new Root_finder<number_of_ewsb_equations>(CLASSNAME::tadpole_equations, &params, number_of_ewsb_iterations, ewsb_iteration_precision, gsl_multiroot_fsolver_broyden))
    };
 
    const std::size_t number_of_solvers = sizeof(solvers)/sizeof(*solvers);
-   double x_init[number_of_ewsb_equations] = { 0. };
-   ewsb_initial_guess(x_init);
+   const auto x_init(ewsb_initial_guess());
 
-#ifdef ENABLE_VERBOSE
-   std::cout << "Solving EWSB equations ...\n"
-      "\tInitial guess: x_init =";
-   for (std::size_t i = 0; i < number_of_ewsb_equations; ++i)
-      std::cout << ' ' << x_init[i];
-   std::cout << '\n';
-#endif
+   VERBOSE_MSG("Solving EWSB equations ...");
+   VERBOSE_MSG("\tInitial guess: x_init = " << x_init.transpose());
 
    int status;
    for (std::size_t i = 0; i < number_of_solvers; ++i) {
       VERBOSE_MSG("\tStarting EWSB iteration using solver " << i);
-      status = solve_ewsb_iteratively_with(solvers[i], x_init);
+      status = solve_ewsb_iteratively_with(solvers[i].get(), x_init);
       if (status == EWSB_solver::SUCCESS) {
          VERBOSE_MSG("\tSolver " << i << " finished successfully!");
          break;
@@ -369,8 +362,6 @@ int CLASSNAME::solve_ewsb_iteratively()
 #endif
    }
 
-   std::for_each(solvers, solvers + number_of_solvers, Delete_object());
-
    return status;
 }
 
@@ -384,10 +375,10 @@ int CLASSNAME::solve_ewsb_iteratively()
  */
 int CLASSNAME::solve_ewsb_iteratively_with(
    EWSB_solver* solver,
-   const double x_init[number_of_ewsb_equations]
+   const Eigen::Matrix<double, number_of_ewsb_equations, 1>& x_init
 )
 {
-   const int status = solver->solve(x_init);
+   const int status = solver->solve(&x_init[0]);
 
    mHd2 = solver->get_solution(0);
    mHu2 = solver->get_solution(1);
@@ -504,27 +495,30 @@ int CLASSNAME::solve_ewsb()
    return solve_ewsb_iteratively(ewsb_loop_order);
 }
 
-void CLASSNAME::ewsb_initial_guess(double x_init[number_of_ewsb_equations])
+Eigen::Matrix<double, CLASSNAME::number_of_ewsb_equations, 1> CLASSNAME::ewsb_initial_guess()
 {
+   Eigen::Matrix<double, number_of_ewsb_equations, 1> x_init(Eigen::Matrix<double, number_of_ewsb_equations, 1>::Zero());
+
    x_init[0] = mHd2;
    x_init[1] = mHu2;
    x_init[2] = ms2;
 
+
+   return x_init;
 }
 
 /**
  * Calculates EWSB output parameters including loop-corrections.
  *
- * @param ewsb_parameters new EWSB output parameters.  \a
- * ewsb_parameters is only modified if all new parameters are finite.
+ * Throws exception of type EEWSBStepFailed if new EWSB parameters are
+ * inf or nan.
  *
- * @return GSL_SUCCESS if new EWSB output parameters are finite,
- * GSL_EDOM otherwise.
+ * @return new set of EWSB output parameters
  */
-int CLASSNAME::ewsb_step(double ewsb_parameters[number_of_ewsb_equations]) const
+Eigen::Matrix<double, CLASSNAME::number_of_ewsb_equations, 1> CLASSNAME::ewsb_step() const
 {
-   int error;
    double tadpole[number_of_ewsb_equations] = { 0. };
+   Eigen::Matrix<double, number_of_ewsb_equations, 1> ewsb_parameters(Eigen::Matrix<double, number_of_ewsb_equations, 1>::Zero());
 
    if (ewsb_loop_order > 0) {
       tadpole[0] += Re(tadpole_hh(0));
@@ -532,11 +526,10 @@ int CLASSNAME::ewsb_step(double ewsb_parameters[number_of_ewsb_equations]) const
       tadpole[2] += Re(tadpole_hh(2));
 
       if (ewsb_loop_order > 1) {
-         double two_loop_tadpole[3];
-         tadpole_hh_2loop(two_loop_tadpole);
-         tadpole[0] += two_loop_tadpole[0];
-         tadpole[1] += two_loop_tadpole[1];
-         tadpole[2] += two_loop_tadpole[2];
+         const auto tadpole_2l(tadpole_hh_2loop());
+         tadpole[0] += tadpole_2l(0);
+         tadpole[1] += tadpole_2l(1);
+         tadpole[2] += tadpole_2l(2);
 
       }
    }
@@ -566,17 +559,15 @@ int CLASSNAME::ewsb_step(double ewsb_parameters[number_of_ewsb_equations]) const
    const bool is_finite = IsFinite(mHd2) && IsFinite(mHu2) && IsFinite(ms2);
 
 
-   if (is_finite) {
-      error = GSL_SUCCESS;
-      ewsb_parameters[0] = mHd2;
-      ewsb_parameters[1] = mHu2;
-      ewsb_parameters[2] = ms2;
+   if (!is_finite)
+      throw EEWSBStepFailed();
 
-   } else {
-      error = GSL_EDOM;
-   }
+   ewsb_parameters[0] = mHd2;
+   ewsb_parameters[1] = mHu2;
+   ewsb_parameters[2] = ms2;
 
-   return error;
+
+   return ewsb_parameters;
 }
 
 /**
@@ -612,10 +603,20 @@ int CLASSNAME::ewsb_step(const gsl_vector* x, void* params, gsl_vector* f)
    if (ewsb_loop_order > 0)
       model->calculate_DRbar_masses();
 
-   double ewsb_parameters[number_of_ewsb_equations] =
-      { mHd2, mHu2, ms2 };
+   Eigen::Matrix<double, number_of_ewsb_equations, 1> ewsb_parameters;
+   ewsb_parameters[0] = mHd2;
+   ewsb_parameters[1] = mHu2;
+   ewsb_parameters[2] = ms2;
 
-   const int status = model->ewsb_step(ewsb_parameters);
+
+   int status = GSL_SUCCESS;
+
+   try {
+      ewsb_parameters = model->ewsb_step();
+      status = GSL_SUCCESS;
+   } catch (...) {
+      status = GSL_EDOM;
+   }
 
    for (std::size_t i = 0; i < number_of_ewsb_equations; ++i)
       gsl_vector_set(f, i, ewsb_parameters[i]);
@@ -769,54 +770,52 @@ void CLASSNAME::calculate_DRbar_parameters()
 void CLASSNAME::calculate_pole_masses()
 {
 #ifdef ENABLE_THREADS
-   thread_exception = 0;
+   typedef void (CLASSNAME::*Mem_fun_t)();
+   typedef CLASSNAME* Obj_ptr_t;
 
-   std::thread thread_MAh(Thread(this, &CLASSNAME::calculate_MAh_pole));
-   std::thread thread_MCha(Thread(this, &CLASSNAME::calculate_MCha_pole));
-   std::thread thread_MChi(Thread(this, &CLASSNAME::calculate_MChi_pole));
-   std::thread thread_MGlu(Thread(this, &CLASSNAME::calculate_MGlu_pole));
-   std::thread thread_Mhh(Thread(this, &CLASSNAME::calculate_Mhh_pole));
-   std::thread thread_MHpm(Thread(this, &CLASSNAME::calculate_MHpm_pole));
-   std::thread thread_MSd(Thread(this, &CLASSNAME::calculate_MSd_pole));
-   std::thread thread_MSe(Thread(this, &CLASSNAME::calculate_MSe_pole));
-   std::thread thread_MSu(Thread(this, &CLASSNAME::calculate_MSu_pole));
-   std::thread thread_MSv(Thread(this, &CLASSNAME::calculate_MSv_pole));
-   std::thread thread_MVZp(Thread(this, &CLASSNAME::calculate_MVZp_pole));
+   auto fut_MAh = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MAh_pole, this);
+   auto fut_MCha = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MCha_pole, this);
+   auto fut_MChi = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MChi_pole, this);
+   auto fut_MGlu = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MGlu_pole, this);
+   auto fut_Mhh = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_Mhh_pole, this);
+   auto fut_MHpm = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MHpm_pole, this);
+   auto fut_MSd = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MSd_pole, this);
+   auto fut_MSe = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MSe_pole, this);
+   auto fut_MSu = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MSu_pole, this);
+   auto fut_MSv = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MSv_pole, this);
+   auto fut_MVZp = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MVZp_pole, this);
 
    if (calculate_sm_pole_masses) {
-      std::thread thread_MVG(Thread(this, &CLASSNAME::calculate_MVG_pole));
-      std::thread thread_MVP(Thread(this, &CLASSNAME::calculate_MVP_pole));
-      std::thread thread_MVZ(Thread(this, &CLASSNAME::calculate_MVZ_pole));
-      std::thread thread_MFv(Thread(this, &CLASSNAME::calculate_MFv_pole));
-      std::thread thread_MFe(Thread(this, &CLASSNAME::calculate_MFe_pole));
-      std::thread thread_MFd(Thread(this, &CLASSNAME::calculate_MFd_pole));
-      std::thread thread_MFu(Thread(this, &CLASSNAME::calculate_MFu_pole));
-      std::thread thread_MVWm(Thread(this, &CLASSNAME::calculate_MVWm_pole));
-      thread_MVG.join();
-      thread_MVP.join();
-      thread_MVZ.join();
-      thread_MFv.join();
-      thread_MFe.join();
-      thread_MFd.join();
-      thread_MFu.join();
-      thread_MVWm.join();
+      auto fut_MVG = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MVG_pole, this);
+      auto fut_MVP = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MVP_pole, this);
+      auto fut_MVZ = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MVZ_pole, this);
+      auto fut_MFv = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MFv_pole, this);
+      auto fut_MFe = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MFe_pole, this);
+      auto fut_MFd = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MFd_pole, this);
+      auto fut_MFu = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MFu_pole, this);
+      auto fut_MVWm = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MVWm_pole, this);
+      fut_MVG.get();
+      fut_MVP.get();
+      fut_MVZ.get();
+      fut_MFv.get();
+      fut_MFe.get();
+      fut_MFd.get();
+      fut_MFu.get();
+      fut_MVWm.get();
    }
 
-   thread_MAh.join();
-   thread_MCha.join();
-   thread_MChi.join();
-   thread_MGlu.join();
-   thread_Mhh.join();
-   thread_MHpm.join();
-   thread_MSd.join();
-   thread_MSe.join();
-   thread_MSu.join();
-   thread_MSv.join();
-   thread_MVZp.join();
+   fut_MAh.get();
+   fut_MCha.get();
+   fut_MChi.get();
+   fut_MGlu.get();
+   fut_Mhh.get();
+   fut_MHpm.get();
+   fut_MSd.get();
+   fut_MSe.get();
+   fut_MSu.get();
+   fut_MSv.get();
+   fut_MVZp.get();
 
-
-   if (thread_exception != 0)
-      std::rethrow_exception(thread_exception);
 #else
    calculate_MAh_pole();
    calculate_MCha_pole();
@@ -27567,8 +27566,11 @@ void CLASSNAME::calculate_MSe_3rd_generation(double& msf1, double& msf2, double&
 }
 
 
-void CLASSNAME::self_energy_hh_2loop(double result[6]) const
+Eigen::Matrix<double,3,3> CLASSNAME::self_energy_hh_2loop() const
 {
+   using namespace flexiblesusy::mssm_twoloophiggs;
+   using namespace flexiblesusy::nmssm_twoloophiggs;
+
    // calculate 3rd generation sfermion masses and mixing angles
    double mst_1, mst_2, theta_t;
    double msb_1, msb_2, theta_b;
@@ -27580,119 +27582,67 @@ void CLASSNAME::self_energy_hh_2loop(double result[6]) const
    calculate_MSe_3rd_generation(mstau_1, mstau_2, theta_tau);
    calculate_MSv_3rd_generation(msnu_1, msnu_2, theta_nu);
 
-   double mst1sq = Sqr(mst_1), mst2sq = Sqr(mst_2);
-   double msb1sq = Sqr(msb_1), msb2sq = Sqr(msb_2);
-   double mstau1sq = Sqr(mstau_1), mstau2sq = Sqr(mstau_2);
-   double msnusq = Sqr(msnu_2);
-   double sxt = Sin(theta_t), cxt = Cos(theta_t);
-   double sxb = Sin(theta_b), cxb = Cos(theta_b);
-   double sintau = Sin(theta_tau), costau = Cos(theta_tau);
+   const double mst1sq = Sqr(mst_1), mst2sq = Sqr(mst_2);
+   const double msb1sq = Sqr(msb_1), msb2sq = Sqr(msb_2);
+   const double mstau1sq = Sqr(mstau_1), mstau2sq = Sqr(mstau_2);
+   const double msnusq = Sqr(msnu_2);
+   const double sxt = Sin(theta_t), cxt = Cos(theta_t);
+   const double sxb = Sin(theta_b), cxb = Cos(theta_b);
+   const double sintau = Sin(theta_tau), costau = Cos(theta_tau);
+   const double gs = g3;
+   const double as = Sqr(gs) / (4.0 * Pi);
+   const double rmt = MFu(2);
+   const double rmtsq = Sqr(rmt);
+   const double scalesq = Sqr(get_scale());
+   const double vev2 = Sqr(vd) + Sqr(vu);
+   const double tanb = vu/vd;
+   const double amu = Re(-0.7071067811865475*vS*Lambdax);
+   const double mg = MGlu;
+   const double mAsq = (0.7071067811865475*vS*(Sqr(vd) + Sqr(vu))*TLambdax)/(vd*vu);
+   const double cotb = 1.0 / tanb;
+   const double rmb = MFd(2);
+   const double rmbsq = Sqr(rmb);
+   const double rmtausq = Sqr(MFe(2));
+   const double lam = Re(Lambdax);
+   const double svev = Abs(amu / lam);
 
-   double gs = g3;
-   double as = Sqr(gs) / (4.0 * Pi);
-   double rmt = MFu(2);
-   double rmtsq = Sqr(rmt);
-   double scalesq = Sqr(get_scale());
-   double vev2 = Sqr(vd) + Sqr(vu);
-   double vev = Sqrt(Sqr(vd) + Sqr(vu));
-   double tanb = vu/vd;
-   const double tanb2 = Sqr(tanb);
-   const double sinb = tanb / Sqrt(1. + tanb2);
-   const double cosb = 1. / Sqrt(1. + tanb2);
-   double amu = Re(-0.7071067811865475*vS*Lambdax);
-   double mg = MGlu;
-   double mAsq = (0.7071067811865475*vS*(Sqr(vd) + Sqr(vu))*TLambdax)/(vd*vu);
-   double cotb = 1.0 / tanb;
-   double rmb = MFd(2);
-   double rmbsq = Sqr(rmb);
-   double rmtausq = Sqr(MFe(2));
-   double fmasq = Abs(mAsq);
-   double lamS = Re(Lambdax);
-   static const double root2 = Sqrt(2.0);
-   double vevS =  vev / root2;
-   double svevS = vS / root2;
-   int loop = 2;
-   int scheme = 0; // selects DR-bar scheme
-
-   double s11w = 0., s12w = 0., s22w = 0.;
-   double s11tau = 0., s12tau = 0., s22tau = 0.;
-   double p2w = 0., p2tau = 0.;
-
-   double DMS[3][3] = {{ 0. }}, DMP[3][3] = {{ 0. }};
-   double DMSB[3][3] = {{ 0. }}, DMPB[3][3] = {{ 0. }};
-
-   LOCK_MUTEX();
+   Eigen::Matrix<double,3,3> self_energy_2l(Eigen::Matrix<double,3,3>::Zero());
 
    if (HIGGS_2LOOP_CORRECTION_AT_AS) {
-      self_energy_higgs_2loop_at_as_nmssm(
-         &loop, &rmt, &mg, &mst1sq, &mst2sq, &sxt, &cxt,
-         &scalesq, &tanb, &vevS, &lamS, &svevS, &as, &DMS, &DMP);
+      self_energy_2l += self_energy_higgs_2loop_at_as_nmssm(
+         rmt, mg, mst1sq, mst2sq, sxt, cxt,
+         scalesq, tanb, vev2, lam, svev, as, amu);
    }
 
    if (HIGGS_2LOOP_CORRECTION_AB_AS) {
-      self_energy_higgs_2loop_ab_as_nmssm(
-         &loop, &rmb, &mg, &msb1sq, &msb2sq, &sxb, &cxb,
-         &scalesq, &cotb, &vevS, &lamS, &svevS, &as, &DMSB, &DMPB);
+      self_energy_2l += self_energy_higgs_2loop_ab_as_nmssm(
+         rmb, mg, msb1sq, msb2sq, sxb, cxb,
+         scalesq, cotb, vev2, lam, svev, as, amu);
    }
 
    // Corrections as in MSSM, not corrected for NMSSM,
    // should be OK for MSSM states when S state is close to decoupled
 
    if (HIGGS_2LOOP_CORRECTION_AT_AT) {
-      self_energy_higgs_2loop_at_at_mssm(
-         &rmtsq, &rmbsq, &fmasq, &mst1sq, &mst2sq, &msb1sq,
-         &msb2sq, &sxt, &cxt, &sxb, &cxb, &scalesq, &amu, &tanb,
-         &vev2, &s11w, &s12w, &s22w);
-      self_energy_pseudoscalar_2loop_at_at_mssm(
-         &rmtsq, &rmbsq, &fmasq, &mst1sq, &mst2sq, &msb1sq, &msb2sq,
-         &sxt, &cxt, &sxb, &cxb, &scalesq, &amu, &tanb, &vev2, &p2w);
+      self_energy_2l.topLeftCorner<2,2>() += self_energy_higgs_2loop_at_at_mssm(
+         rmtsq, rmbsq, mAsq, mst1sq, mst2sq, msb1sq,
+         msb2sq, sxt, cxt, sxb, cxb, scalesq, amu, tanb, vev2);
    }
 
    if (HIGGS_2LOOP_CORRECTION_ATAU_ATAU) {
-      self_energy_higgs_2loop_atau_atau_mssm(
-         &rmtausq, &fmasq, &msnusq, &mstau1sq, &mstau2sq, &sintau,
-         &costau, &scalesq, &amu, &tanb, &vev2, &scheme, &s11tau,
-         &s22tau, &s12tau);
-      self_energy_pseudoscalar_2loop_atau_atau_mssm(
-         &rmtausq, &fmasq, &msnusq, &mstau1sq, &mstau2sq, &sintau,
-         &costau, &scalesq, &amu, &tanb, &vev2, &p2tau);
+      self_energy_2l.topLeftCorner<2,2>() += self_energy_higgs_2loop_atau_atau_mssm(
+         rmtausq, mAsq, msnusq, mstau1sq, mstau2sq, sintau,
+         costau, scalesq, amu, tanb, vev2);
    }
 
-   UNLOCK_MUTEX();
-
-   // Make appropriate substitutions for elements following 0907.4682
-   // bottom of page 9
-   std::swap(DMSB[0][0], DMSB[1][1]);
-   std::swap(DMSB[0][2], DMSB[1][2]);
-
-   for (int i = 0; i < 3; i++) {
-      for (int j = 0; j < 3; j++) {
-         DMS[i][j] += DMSB[i][j];
-      }
-   }
-
-   const double dMA = p2w + p2tau;
-
-   // subtract two-loop tadpoles
-   double tadpole[3];
-   tadpole_hh_2loop(tadpole);
-
-   DMS[0][0] += s11w + s11tau + dMA * Sqr(sinb) - tadpole[0] / vd;
-   DMS[0][1] += s12w + s12tau - dMA * sinb * cosb;
-   DMS[1][1] += s22w + s22tau + dMA * Sqr(cosb) - tadpole[1] / vu;
-   DMS[2][2] += - tadpole[2] / vS;
-
-   result[0] = - DMS[0][0]; // 1,1 element
-   result[1] = - DMS[0][1]; // 1,2 element
-   result[2] = - DMS[0][2]; // 1,3 element
-   result[3] = - DMS[1][1]; // 2,2 element
-   result[4] = - DMS[1][2]; // 2,3 element
-   result[5] = - DMS[2][2]; // 3,3 element
-
+   return self_energy_2l;
 }
 
-void CLASSNAME::self_energy_Ah_2loop(double result[6]) const
+Eigen::Matrix<double,3,3> CLASSNAME::self_energy_Ah_2loop() const
 {
+   using namespace flexiblesusy::mssm_twoloophiggs;
+   using namespace flexiblesusy::nmssm_twoloophiggs;
+
    // calculate 3rd generation sfermion masses and mixing angles
    double mst_1, mst_2, theta_t;
    double msb_1, msb_2, theta_b;
@@ -27704,115 +27654,69 @@ void CLASSNAME::self_energy_Ah_2loop(double result[6]) const
    calculate_MSe_3rd_generation(mstau_1, mstau_2, theta_tau);
    calculate_MSv_3rd_generation(msnu_1, msnu_2, theta_nu);
 
-   double mst1sq = Sqr(mst_1), mst2sq = Sqr(mst_2);
-   double msb1sq = Sqr(msb_1), msb2sq = Sqr(msb_2);
-   double mstau1sq = Sqr(mstau_1), mstau2sq = Sqr(mstau_2);
-   double msnusq = Sqr(msnu_2);
-   double sxt = Sin(theta_t), cxt = Cos(theta_t);
-   double sxb = Sin(theta_b), cxb = Cos(theta_b);
-   double sintau = Sin(theta_tau), costau = Cos(theta_tau);
+   const double mst1sq = Sqr(mst_1), mst2sq = Sqr(mst_2);
+   const double msb1sq = Sqr(msb_1), msb2sq = Sqr(msb_2);
+   const double mstau1sq = Sqr(mstau_1), mstau2sq = Sqr(mstau_2);
+   const double msnusq = Sqr(msnu_2);
+   const double sxt = Sin(theta_t), cxt = Cos(theta_t);
+   const double sxb = Sin(theta_b), cxb = Cos(theta_b);
+   const double sintau = Sin(theta_tau), costau = Cos(theta_tau);
+   const double gs = g3;
+   const double as = Sqr(gs) / (4.0 * Pi);
+   const double rmt = MFu(2);
+   const double rmtsq = Sqr(rmt);
+   const double scalesq = Sqr(get_scale());
+   const double vev2 = Sqr(vd) + Sqr(vu);
+   const double tanb = vu/vd;
+   const double amu = Re(-0.7071067811865475*vS*Lambdax);
+   const double mg = MGlu;
+   const double mAsq = (0.7071067811865475*vS*(Sqr(vd) + Sqr(vu))*TLambdax)/(vd*vu);
+   const double cotb = 1.0 / tanb;
+   const double rmb = MFd(2);
+   const double rmbsq = Sqr(rmb);
+   const double rmtausq = Sqr(MFe(2));
+   const double lam = Re(Lambdax);
+   const double svev = Abs(amu / lam);
 
-   double gs = g3;
-   double as = Sqr(gs) / (4.0 * Pi);
-   double rmt = MFu(2);
-   double rmtsq = Sqr(rmt);
-   double scalesq = Sqr(get_scale());
-   double vev2 = Sqr(vd) + Sqr(vu);
-   double vev = Sqrt(Sqr(vd) + Sqr(vu));
-   double tanb = vu/vd;
-   const double tanb2 = Sqr(tanb);
-   const double sinb = tanb / Sqrt(1. + tanb2);
-   const double cosb = 1. / Sqrt(1. + tanb2);
-   const double sinb2 = Sqr(sinb);
-   const double cosb2 = Sqr(cosb);
-   double amu = Re(-0.7071067811865475*vS*Lambdax);
-   double mg = MGlu;
-   double mAsq = (0.7071067811865475*vS*(Sqr(vd) + Sqr(vu))*TLambdax)/(vd*vu);
-   double cotb = 1.0 / tanb;
-   double rmb = MFd(2);
-   double rmbsq = Sqr(rmb);
-   double rmtausq = Sqr(MFe(2));
-   double fmasq = Abs(mAsq);
-   double lamS = Re(Lambdax);
-   static const double root2 = Sqrt(2.0);
-   double vevS =  vev / root2;
-   double svevS = vS / root2;
-   int loop = 2;
-
-   double p2w = 0., p2tau = 0.;
-
-   double DMS[3][3] = {{ 0. }}, DMP[3][3] = {{ 0. }};
-   double DMSB[3][3] = {{ 0. }}, DMPB[3][3] = {{ 0. }};
-
-   LOCK_MUTEX();
+   Eigen::Matrix<double,3,3> self_energy_2l(Eigen::Matrix<double,3,3>::Zero());
 
    if (HIGGS_2LOOP_CORRECTION_AT_AS) {
-      self_energy_higgs_2loop_at_as_nmssm(
-         &loop, &rmt, &mg, &mst1sq, &mst2sq, &sxt, &cxt,
-         &scalesq, &tanb, &vevS, &lamS, &svevS, &as, &DMS, &DMP);
+      self_energy_2l += self_energy_pseudoscalar_2loop_at_as_nmssm(
+         rmt, mg, mst1sq, mst2sq, sxt, cxt,
+         scalesq, tanb, vev2, lam, svev, as, amu);
    }
 
    if (HIGGS_2LOOP_CORRECTION_AB_AS) {
-      self_energy_higgs_2loop_ab_as_nmssm(
-         &loop, &rmb, &mg, &msb1sq, &msb2sq, &sxb, &cxb,
-         &scalesq, &cotb, &vevS, &lamS, &svevS, &as, &DMSB, &DMPB);
+      self_energy_2l += self_energy_pseudoscalar_2loop_ab_as_nmssm(
+         rmb, mg, msb1sq, msb2sq, sxb, cxb,
+         scalesq, cotb, vev2, lam, svev, as, amu);
    }
 
    // Corrections as in MSSM, not corrected for NMSSM,
    // should be OK for MSSM states when S state is close to decoupled
 
    if (HIGGS_2LOOP_CORRECTION_AT_AT) {
-      self_energy_pseudoscalar_2loop_at_at_mssm(
-         &rmtsq, &rmbsq, &fmasq, &mst1sq, &mst2sq, &msb1sq, &msb2sq,
-         &sxt, &cxt, &sxb, &cxb, &scalesq, &amu, &tanb, &vev2, &p2w);
+      self_energy_2l.topLeftCorner<2,2>() += self_energy_pseudoscalar_2loop_at_at_mssm(
+         rmtsq, rmbsq, mAsq, mst1sq, mst2sq, msb1sq, msb2sq,
+         sxt, cxt, sxb, cxb, scalesq, amu, tanb, vev2);
    }
 
    if (HIGGS_2LOOP_CORRECTION_ATAU_ATAU) {
-      self_energy_pseudoscalar_2loop_atau_atau_mssm(
-         &rmtausq, &fmasq, &msnusq, &mstau1sq, &mstau2sq, &sintau,
-         &costau, &scalesq, &amu, &tanb, &vev2, &p2tau);
+      self_energy_2l.topLeftCorner<2,2>() += self_energy_pseudoscalar_2loop_atau_atau_mssm(
+         rmtausq, mAsq, msnusq, mstau1sq, mstau2sq, sintau,
+         costau, scalesq, amu, tanb, vev2);
    }
 
-   UNLOCK_MUTEX();
-
-   // Make appropriate substitutions for elements following 0907.4682
-   // bottom of page 9
-   std::swap(DMPB[0][0], DMPB[1][1]);
-   std::swap(DMPB[0][2], DMPB[1][2]);
-
-   for (int i = 0; i < 3; i++) {
-      for (int j = 0; j < 3; j++) {
-         DMP[i][j] += DMPB[i][j];
-      }
-   }
-
-   const double dMA = p2w + p2tau;
-
-   DMP[0][0] += dMA * sinb2;
-   DMP[0][1] += dMA * sinb * cosb;
-   DMP[1][1] += dMA * cosb2;
-
-   // subtract two-loop tadpoles
-   double tadpole[3];
-   tadpole_hh_2loop(tadpole);
-
-   DMP[0][0] += - tadpole[0] / vd;
-   DMP[1][1] += - tadpole[1] / vu;
-   DMP[2][2] += - tadpole[2] / vS;
-
-   result[0] = - DMP[0][0]; // 1,1 element
-   result[1] = - DMP[0][1]; // 1,2 element
-   result[2] = - DMP[0][2]; // 1,3 element
-   result[3] = - DMP[1][1]; // 2,2 element
-   result[4] = - DMP[1][2]; // 2,3 element
-   result[5] = - DMP[2][2]; // 3,3 element
-
+   return self_energy_2l;
 }
 
 
 
-void CLASSNAME::tadpole_hh_2loop(double result[3]) const
+Eigen::Matrix<double,3,1> CLASSNAME::tadpole_hh_2loop() const
 {
+   using namespace flexiblesusy::mssm_twoloophiggs;
+   using namespace flexiblesusy::nmssm_twoloophiggs;
+
    // calculate 3rd generation sfermion masses and mixing angles
    double mst_1, mst_2, theta_t;
    double msb_1, msb_2, theta_b;
@@ -27824,76 +27728,61 @@ void CLASSNAME::tadpole_hh_2loop(double result[3]) const
    calculate_MSe_3rd_generation(mstau_1, mstau_2, theta_tau);
    calculate_MSv_3rd_generation(msnu_1, msnu_2, theta_nu);
 
-   double mst1sq = Sqr(mst_1), mst2sq = Sqr(mst_2);
-   double msb1sq = Sqr(msb_1), msb2sq = Sqr(msb_2);
-   double mstau1sq = Sqr(mstau_1), mstau2sq = Sqr(mstau_2);
-   double msnusq = Sqr(msnu_2);
-   double sxt = Sin(theta_t), cxt = Cos(theta_t);
-   double sxb = Sin(theta_b), cxb = Cos(theta_b);
-   double sintau = Sin(theta_tau), costau = Cos(theta_tau);
+   const double mst1sq = Sqr(mst_1), mst2sq = Sqr(mst_2);
+   const double msb1sq = Sqr(msb_1), msb2sq = Sqr(msb_2);
+   const double mstau1sq = Sqr(mstau_1), mstau2sq = Sqr(mstau_2);
+   const double msnusq = Sqr(msnu_2);
+   const double sxt = Sin(theta_t), cxt = Cos(theta_t);
+   const double sxb = Sin(theta_b), cxb = Cos(theta_b);
+   const double sintau = Sin(theta_tau), costau = Cos(theta_tau);
+   const double gs = g3;
+   const double rmtsq = Sqr(MFu(2));
+   const double scalesq = Sqr(get_scale());
+   const double vev2 = Sqr(vd) + Sqr(vu);
+   const double tanb = vu/vd;
+   const double amu = Re(-0.7071067811865475*vS*Lambdax);
+   const double mg = MGlu;
+   const double mAsq = (0.7071067811865475*vS*(Sqr(vd) + Sqr(vu))*TLambdax)/(vd*vu);
+   const double cotbeta = 1.0 / tanb;
+   const double rmbsq = Sqr(MFd(2));
+   const double rmtausq = Sqr(MFe(2));
+   const double lam = Re(Lambdax);
+   const double svev = Abs(amu / lam);
 
-   double gs = g3;
-   double rmtsq = Sqr(MFu(2));
-   double scalesq = Sqr(get_scale());
-   double vev2 = Sqr(vd) + Sqr(vu);
-   const double vev = Sqrt(vev2);
-   double tanb = vu/vd;
-   const double tanb2 = Sqr(tanb);
-   const double sinb = tanb / Sqrt(1. + tanb2);
-   const double cosb = 1. / Sqrt(1. + tanb2);
-   double amu = Re(-0.7071067811865475*vS*Lambdax);
-   double mg = MGlu;
-   double mAsq = (0.7071067811865475*vS*(Sqr(vd) + Sqr(vu))*TLambdax)/(vd*vu);
-   double cotbeta = 1.0 / tanb;
-   double rmbsq = Sqr(MFd(2));
-   double rmtausq = Sqr(MFe(2));
-
-   double s1s = 0., s2s = 0., s1t = 0., s2t = 0.;
-   double s1b = 0., s2b = 0., s1tau = 0., s2tau = 0.;
-
-   LOCK_MUTEX();
+   Eigen::Matrix<double,3,1> tadpole_2l(Eigen::Matrix<double,3,1>::Zero());
 
    if (HIGGS_2LOOP_CORRECTION_AT_AS) {
-      tadpole_higgs_2loop_at_as_mssm(
-         &rmtsq, &mg, &mst1sq, &mst2sq, &sxt, &cxt, &scalesq,
-         &amu, &tanb, &vev2, &gs, &s1s, &s2s);
+      tadpole_2l += tadpole_higgs_2loop_at_as_nmssm(
+         rmtsq, mg, mst1sq, mst2sq, sxt, cxt, scalesq,
+         amu, tanb, vev2, gs, svev);
    }
 
    if (HIGGS_2LOOP_CORRECTION_AT_AT) {
-      tadpole_higgs_2loop_at_at_mssm(
-         &rmtsq, &rmbsq, &mAsq, &mst1sq, &mst2sq, &msb1sq, &msb2sq,
-         &sxt, &cxt, &sxb, &cxb, &scalesq, &amu, &tanb, &vev2, &s1t, &s2t);
+      tadpole_2l.head<2>() += tadpole_higgs_2loop_at_at_mssm(
+         rmtsq, rmbsq, mAsq, mst1sq, mst2sq, msb1sq, msb2sq,
+         sxt, cxt, sxb, cxb, scalesq, amu, tanb, vev2);
    }
 
    if (HIGGS_2LOOP_CORRECTION_AB_AS) {
-      tadpole_higgs_2loop_ab_as_mssm(
-         &rmbsq, &mg, &msb1sq, &msb2sq, &sxb, &cxb, &scalesq,
-         &amu, &cotbeta, &vev2, &gs, &s2b, &s1b);
+      tadpole_2l += tadpole_higgs_2loop_ab_as_nmssm(
+         rmbsq, mg, msb1sq, msb2sq, sxb, cxb, scalesq,
+         amu, cotbeta, vev2, gs, svev);
    }
 
    if (HIGGS_2LOOP_CORRECTION_ATAU_ATAU) {
-      tadpole_higgs_2loop_atau_atau_mssm(
-         &rmtausq, &mAsq, &msnusq, &mstau1sq, &mstau2sq, &sintau,
-         &costau, &scalesq, &amu, &tanb, &vev2, &s1tau, &s2tau);
+      tadpole_2l.head<2>() += tadpole_higgs_2loop_atau_atau_mssm(
+         rmtausq, mAsq, msnusq, mstau1sq, mstau2sq, sintau,
+         costau, scalesq, amu, tanb, vev2);
    }
 
-   UNLOCK_MUTEX();
+   tadpole_2l(0) *= vd;
+   tadpole_2l(1) *= vu;
+   tadpole_2l(2) *= vS;
 
-   // rescale T1 to get TS
-   const double sss = s1s * vev * cosb / vS;
-   const double ssb = s1b * vev * sinb / vS;
+   if (!IsFinite(tadpole_2l))
+      tadpole_2l.setZero();
 
-   if (!std::isnan(s1s * s1t * s1b * s1tau * s2s * s2t * s2b * s2tau
-                   * sss * ssb)) {
-      result[0] = (- s1s - s1t - s1b - s1tau) * vd;
-      result[1] = (- s2s - s2t - s2b - s2tau) * vu;
-      result[2] = (- sss - ssb) * vS;
-   } else {
-      result[0] = 0.;
-      result[1] = 0.;
-      result[2] = 0.;
-   }
-
+   return tadpole_2l;
 }
 
 
@@ -28121,13 +28010,16 @@ void CLASSNAME::calculate_Mhh_pole()
       const Eigen::Matrix<double,3,3> M_tree(get_mass_matrix_hh());
 
       // two-loop Higgs self-energy contributions
-      double two_loop[6] = { 0. };
+      Eigen::Matrix<double,3,3> self_energy_2l(Eigen::Matrix<double,3,
+         3>::Zero());
       if (pole_mass_loop_order > 1) {
-         self_energy_hh_2loop(two_loop);
-         for (unsigned i = 0; i < 6; i++) {
-            if (!std::isfinite(two_loop[i])) {
-               two_loop[i] = 0.;
-               problems.flag_bad_mass(UMSSM_info::hh);
+         self_energy_2l = self_energy_hh_2loop();
+         for (unsigned i = 0; i < 3; i++) {
+            for (unsigned k = 0; k < 3; k++) {
+               if (!std::isfinite(self_energy_2l(i,k))) {
+                  self_energy_2l(i,k) = 0.;
+                  problems.flag_bad_mass(UMSSM_info::hh);
+               }
             }
          }
       }
@@ -28141,12 +28033,7 @@ void CLASSNAME::calculate_Mhh_pole()
             }
          }
 
-         self_energy(0, 0) += two_loop[0];
-         self_energy(0, 1) += two_loop[1];
-         self_energy(0, 2) += two_loop[2];
-         self_energy(1, 1) += two_loop[3];
-         self_energy(1, 2) += two_loop[4];
-         self_energy(2, 2) += two_loop[5];
+         self_energy += self_energy_2l;
 
          Symmetrize(self_energy);
          const Eigen::Matrix<double,3,3> M_loop(M_tree -
@@ -28197,13 +28084,16 @@ void CLASSNAME::calculate_MAh_pole()
       const Eigen::Matrix<double,3,3> M_tree(get_mass_matrix_Ah());
 
       // two-loop Higgs self-energy contributions
-      double two_loop[6] = { 0. };
+      Eigen::Matrix<double,3,3> self_energy_2l(Eigen::Matrix<double,3,
+         3>::Zero());
       if (pole_mass_loop_order > 1) {
-         self_energy_Ah_2loop(two_loop);
-         for (unsigned i = 0; i < 6; i++) {
-            if (!std::isfinite(two_loop[i])) {
-               two_loop[i] = 0.;
-               problems.flag_bad_mass(UMSSM_info::Ah);
+         self_energy_2l = self_energy_Ah_2loop();
+         for (unsigned i = 0; i < 3; i++) {
+            for (unsigned k = 0; k < 3; k++) {
+               if (!std::isfinite(self_energy_2l(i,k))) {
+                  self_energy_2l(i,k) = 0.;
+                  problems.flag_bad_mass(UMSSM_info::Ah);
+               }
             }
          }
       }
@@ -28217,12 +28107,7 @@ void CLASSNAME::calculate_MAh_pole()
             }
          }
 
-         self_energy(0, 0) += two_loop[0];
-         self_energy(0, 1) += two_loop[1];
-         self_energy(0, 2) += two_loop[2];
-         self_energy(1, 1) += two_loop[3];
-         self_energy(1, 2) += two_loop[4];
-         self_energy(2, 2) += two_loop[5];
+         self_energy += self_energy_2l;
 
          Symmetrize(self_energy);
          const Eigen::Matrix<double,3,3> M_loop(M_tree -
@@ -28525,20 +28410,29 @@ void CLASSNAME::calculate_MFd_pole()
 void CLASSNAME::calculate_MFu_pole()
 {
    // diagonalization with medium precision
-   const bool add_2loop_corrections = pole_mass_loop_order > 1 &&
-      TOP_2LOOP_CORRECTION_QCD;
-   const double currentScale = get_scale();
+   double qcd_1l = 0.;
 
-   const double qcd_1l = -0.008443431970194815*(5. - 3.*Log(Sqr(MFu(2))
-      /Sqr(currentScale)))*Sqr(g3);
+   {
+      const double currentScale = get_scale();
+      qcd_1l = -0.008443431970194815*(5. - 3.*Log(Sqr(MFu(2))/Sqr(
+         currentScale)))*Sqr(g3);
+   }
 
    double qcd_2l = 0.;
 
-   if (add_2loop_corrections) {
+   if (pole_mass_loop_order > 1 && TOP_POLE_QCD_CORRECTION > 0) {
+      const double currentScale = get_scale();
       qcd_2l = -0.005191204615668296*Power(g3,4) -
          0.0032883224409535764*Power(g3,4)*Log(Sqr(currentScale)/Sqr(MFu(2))) -
          0.0008822328500119351*Power(g3,4)*Sqr(Log(Power(currentScale,2)/Sqr(
          MFu(2))));
+   }
+
+   double qcd_3l = 0.;
+
+   if (pole_mass_loop_order > 2 && TOP_POLE_QCD_CORRECTION > 1) {
+      const double currentScale = get_scale();
+      qcd_3l = 0;
    }
 
    Eigen::Matrix<double,3,3> self_energy_1;
@@ -28568,7 +28462,7 @@ void CLASSNAME::calculate_MFu_pole()
       }
       Eigen::Matrix<double,3,3> delta_M(- self_energy_PR * M_tree -
          M_tree * self_energy_PL - self_energy_1);
-      delta_M(2,2) -= M_tree(2,2) * (qcd_1l + qcd_2l);
+      delta_M(2,2) -= M_tree(2,2) * (qcd_1l + qcd_2l + qcd_3l);
       const Eigen::Matrix<double,3,3> M_loop(M_tree + delta_M);
       Eigen::Array<double,3,1> eigen_values;
       decltype(ZUL) mix_ZUL;

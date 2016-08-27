@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:37:48
+// File generated at Sat 27 Aug 2016 11:39:48
 
 #include "SplitMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -97,6 +97,14 @@ SplitMSSM_soft_parameters SplitMSSM_soft_parameters::calc_beta() const
    const SplitMSSM_susy_parameters susy_betas(SplitMSSM_susy_parameters::calc_beta());
 
    return SplitMSSM_soft_parameters(susy_betas, beta_MassB, beta_MassG, beta_MassWB, beta_Mu, beta_mu2, beta_v);
+}
+
+SplitMSSM_soft_parameters SplitMSSM_soft_parameters::calc_beta(unsigned loops) const
+{
+   SplitMSSM_soft_parameters p(*this);
+   p.set_loops(loops);
+
+   return p.calc_beta();
 }
 
 void SplitMSSM_soft_parameters::clear()

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 11:16:17
+// File generated at Sat 27 Aug 2016 12:17:26
 
 #include "UMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -106,15 +106,12 @@ Eigen::Matrix<double,3,3> UMSSM_susy_parameters::calc_beta_Yv_two_loop(const Sus
       Sqr(Qv) + 18*Power(gp,4)*Sqr(Qu)*Sqr(Qv) - 3*Sqr(Conj(Lambdax))*Sqr(
       Lambdax)) + (-9*traceYuAdjYu - 3*traceYvAdjYv - 3*AbsSqr(Lambdax) + 1.2*
       Sqr(g1) + 6*Sqr(g2) + 6*Sqr(gp)*Sqr(QHu) + 2*Sqr(gp)*Sqr(Ql) - 2*Sqr(gp)*
-      Sqr(Qv))*(Yv*Yv.adjoint()*Yv) - 3*traceYdAdjYd*(Ye.transpose()*
-      Ye.conjugate()*Yv) - traceYeAdjYe*(Ye.transpose()*Ye.conjugate()*Yv) -
-      AbsSqr(Lambdax)*(Ye.transpose()*Ye.conjugate()*Yv) + 1.2*Sqr(g1)*(
-      Ye.transpose()*Ye.conjugate()*Yv) + 2*Sqr(gp)*Sqr(Qe)*(Ye.transpose()*
-      Ye.conjugate()*Yv) + 2*Sqr(gp)*Sqr(QHd)*(Ye.transpose()*Ye.conjugate()*Yv
-      ) - 2*Sqr(gp)*Sqr(Ql)*(Ye.transpose()*Ye.conjugate()*Yv) - 4*(Yv*
-      Yv.adjoint()*Yv*Yv.adjoint()*Yv) - 2*(Yv*Yv.adjoint()*Ye.transpose()*
-      Ye.conjugate()*Yv) - 2*(Ye.transpose()*Ye.conjugate()*Ye.transpose()*
-      Ye.conjugate()*Yv))).real();
+      Sqr(Qv))*(Yv*Yv.adjoint()*Yv) + (-3*traceYdAdjYd - traceYeAdjYe - AbsSqr(
+      Lambdax) + 1.2*Sqr(g1) + 2*Sqr(gp)*Sqr(Qe) + 2*Sqr(gp)*Sqr(QHd) - 2*Sqr(
+      gp)*Sqr(Ql))*(Ye.transpose()*Ye.conjugate()*Yv) - 4*(Yv*Yv.adjoint()*Yv*
+      Yv.adjoint()*Yv) - 2*(Yv*Yv.adjoint()*Ye.transpose()*Ye.conjugate()*Yv) -
+      2*(Ye.transpose()*Ye.conjugate()*Ye.transpose()*Ye.conjugate()*Yv)))
+      .real();
 
 
    return beta_Yv;

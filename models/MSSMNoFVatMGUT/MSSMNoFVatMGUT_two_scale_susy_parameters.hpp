@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 12:25:52
+// File generated at Sat 27 Aug 2016 13:31:27
 
 #ifndef MSSMNoFVatMGUT_TWO_SCALE_susy_parameters_H
 #define MSSMNoFVatMGUT_TWO_SCALE_susy_parameters_H
@@ -39,7 +39,7 @@ namespace flexiblesusy {
 class MSSMNoFVatMGUT_susy_parameters : public Beta_function {
 public:
    explicit MSSMNoFVatMGUT_susy_parameters(const MSSMNoFVatMGUT_input_parameters& input_ = MSSMNoFVatMGUT_input_parameters());
-   MSSMNoFVatMGUT_susy_parameters(double scale_, double loops_, double thresholds_, const MSSMNoFVatMGUT_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
+   MSSMNoFVatMGUT_susy_parameters(double scale_, unsigned loops_, unsigned thresholds_, const MSSMNoFVatMGUT_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
    , const Eigen::Matrix<double,3,3>& Yu_, double Mu_, double g1_, double g2_,
    double g3_, double vd_, double vu_
 );
@@ -53,6 +53,7 @@ public:
    void set_input_parameters(const MSSMNoFVatMGUT_input_parameters&);
 
    MSSMNoFVatMGUT_susy_parameters calc_beta() const;
+   MSSMNoFVatMGUT_susy_parameters calc_beta(unsigned) const;
    virtual void clear();
 
    void set_Yd(const Eigen::Matrix<double,3,3>& Yd_) { Yd = Yd_; }

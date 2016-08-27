@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 12:27:37
+// File generated at Sat 27 Aug 2016 13:33:41
 
 #include "MSSMNoFVatMGUT_slha_io.hpp"
 #include "MSSMNoFVatMGUT_input_parameters.hpp"
@@ -362,6 +362,8 @@ void MSSMNoFVatMGUT_slha_io::fill(MSSMNoFVatMGUT_input_parameters& input) const
 
 /**
  * Reads DR-bar parameters from a SLHA output file.
+ *
+ * @param model model class to be filled
  */
 void MSSMNoFVatMGUT_slha_io::fill_drbar_parameters(MSSMNoFVatMGUT_mass_eigenstates& model) const
 {
@@ -440,6 +442,8 @@ void MSSMNoFVatMGUT_slha_io::fill_drbar_parameters(MSSMNoFVatMGUT_mass_eigenstat
 /**
  * Reads DR-bar parameters, pole masses and mixing matrices (in
  * Haber-Kane convention) from a SLHA output file.
+ *
+ * @param model model class to be filled
  */
 void MSSMNoFVatMGUT_slha_io::fill(MSSMNoFVatMGUT_mass_eigenstates& model) const
 {
@@ -455,7 +459,7 @@ void MSSMNoFVatMGUT_slha_io::fill(MSSMNoFVatMGUT_mass_eigenstates& model) const
  * Fill struct of extra physical input parameters from SLHA object
  * (FlexibleSUSYInput block)
  *
- * @param settings struct of physical input parameters
+ * @param input struct of physical non-SLHA input parameters
  */
 void MSSMNoFVatMGUT_slha_io::fill(Physical_input& input) const
 {
@@ -466,7 +470,7 @@ void MSSMNoFVatMGUT_slha_io::fill(Physical_input& input) const
  * Fill struct of spectrum generator settings from SLHA object
  * (FlexibleSUSY block)
  *
- * @param settings struct of spectrum generator settings
+ * @param settings struct of spectrum generator settings to be filled
  */
 void MSSMNoFVatMGUT_slha_io::fill(Spectrum_generator_settings& settings) const
 {
@@ -523,7 +527,7 @@ void MSSMNoFVatMGUT_slha_io::fill_extpar_tuple(MSSMNoFVatMGUT_input_parameters& 
 }
 
 /**
- * Reads pole masses and mixing matrices from a SLHA output file.
+ * Reads pole masses and mixing matrices from a SLHA output file to be filled.
  */
 void MSSMNoFVatMGUT_slha_io::fill_physical(MSSMNoFVatMGUT_physical& physical) const
 {

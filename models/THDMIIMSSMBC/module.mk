@@ -1,6 +1,7 @@
 DIR          := models/THDMIIMSSMBC
 MODNAME      := THDMIIMSSMBC
 SARAH_MODEL  := THDM-II
+WITH_$(MODNAME) := yes
 
 THDMIIMSSMBC_INSTALL_DIR := $(INSTALL_DIR)/$(DIR)
 
@@ -187,7 +188,7 @@ clean-$(MODNAME)-src:
 		-rm -f $(THDMIIMSSMBC_SLHA_INPUT)
 		-rm -f $(THDMIIMSSMBC_GNUPLOT)
 
-clean-$(MODNAME): clean-$(MODNAME)-src
+distclean-$(MODNAME): clean-$(MODNAME)-src
 # END:   NOT EXPORTED ##########################################
 
 clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-lib clean-$(MODNAME)-obj
@@ -195,6 +196,8 @@ clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-lib clean-$(MODNAME)-obj
 
 distclean-$(MODNAME): clean-$(MODNAME)
 		@true
+
+clean-generated:: clean-$(MODNAME)-src
 
 clean-obj::     clean-$(MODNAME)-obj
 

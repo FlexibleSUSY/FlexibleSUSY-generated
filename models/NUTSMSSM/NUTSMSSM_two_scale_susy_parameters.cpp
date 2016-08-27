@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 11:43:33
+// File generated at Sat 27 Aug 2016 12:43:06
 
 #include "NUTSMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -46,7 +46,7 @@ NUTSMSSM_susy_parameters::NUTSMSSM_susy_parameters(const NUTSMSSM_input_paramete
 }
 
 NUTSMSSM_susy_parameters::NUTSMSSM_susy_parameters(
-   double scale_, double loops_, double thresholds_,
+   double scale_, unsigned loops_, unsigned thresholds_,
    const NUTSMSSM_input_parameters& input_
    , const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
    , double Lambdax_, double Kappa_, const Eigen::Matrix<double,3,3>& Yu_,
@@ -132,6 +132,14 @@ NUTSMSSM_susy_parameters NUTSMSSM_susy_parameters::calc_beta() const
 
    return NUTSMSSM_susy_parameters(get_scale(), get_loops(), get_thresholds(), input,
                     beta_Yd, beta_Ye, beta_Lambdax, beta_Kappa, beta_Yu, beta_Mu, beta_MS, beta_L1, beta_g1, beta_g2, beta_g3, beta_vd, beta_vu, beta_vS);
+}
+
+NUTSMSSM_susy_parameters NUTSMSSM_susy_parameters::calc_beta(unsigned loops) const
+{
+   NUTSMSSM_susy_parameters p(*this);
+   p.set_loops(loops);
+
+   return p.calc_beta();
 }
 
 void NUTSMSSM_susy_parameters::clear()

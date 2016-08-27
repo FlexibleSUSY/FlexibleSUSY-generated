@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:32:51
+// File generated at Sat 27 Aug 2016 11:44:46
 
 #ifndef THDMIIMSSMBC_EFFECTIVE_COUPLINGS_H
 #define THDMIIMSSMBC_EFFECTIVE_COUPLINGS_H
@@ -39,7 +39,6 @@ public:
    THDMIIMSSMBC_effective_couplings(const THDMIIMSSMBC_mass_eigenstates&,
                                    const softsusy::QedQcd&,
                                    const Physical_input&);
-   ~THDMIIMSSMBC_effective_couplings();
 
    void do_run_couplings(bool flag) { rg_improve = flag; }
    bool do_run_couplings() const { return rg_improve; }

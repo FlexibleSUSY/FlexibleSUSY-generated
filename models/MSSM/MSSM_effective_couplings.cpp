@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 12:47:32
+// File generated at Sat 27 Aug 2016 13:52:11
 
 #include "MSSM_effective_couplings.hpp"
 
@@ -52,10 +52,6 @@ MSSM_effective_couplings::MSSM_effective_couplings(
       std::complex<double>,2,1>::Zero()), eff_CpAhVGVG(Eigen::Array<std::complex<
       double>,2,1>::Zero())
 
-{
-}
-
-MSSM_effective_couplings::~MSSM_effective_couplings()
 {
 }
 

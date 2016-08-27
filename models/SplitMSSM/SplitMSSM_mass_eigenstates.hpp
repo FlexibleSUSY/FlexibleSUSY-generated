@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:38:54
+// File generated at Sat 27 Aug 2016 11:41:32
 
 /**
  * @file SplitMSSM_mass_eigenstates.hpp
@@ -25,8 +25,8 @@
  *        value problem using the two_scale solver by solving EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Tue 12 Jul 2016 10:38:54 with FlexibleSUSY
- * 1.5.1 (git commit: 8356bacd26e8aecc6635607a32835d534ea3cf01) and SARAH 4.8.6 .
+ * This file was generated at Sat 27 Aug 2016 11:41:32 with FlexibleSUSY
+ * 1.6.0 (git commit: b48da3168d7e9ce639e93a4ea0b216e3468d6dc3) and SARAH 4.9.1 .
  */
 
 #ifndef SplitMSSM_MASS_EIGENSTATES_H
@@ -36,15 +36,12 @@
 #include "SplitMSSM_physical.hpp"
 #include "SplitMSSM_info.hpp"
 #include "two_loop_corrections.hpp"
+#include "error.hpp"
 #include "problems.hpp"
 #include "config.h"
 
 #include <iosfwd>
 #include <string>
-
-#ifdef ENABLE_THREADS
-#include <mutex>
-#endif
 
 #include <gsl/gsl_vector.h>
 #include <Eigen/Core>
@@ -444,12 +441,14 @@ public:
 
    /// calculates the tadpoles at current loop order
    void tadpole_equations(double[number_of_ewsb_equations]) const;
+   /// calculates the tadpoles at current loop order
+   Eigen::Matrix<double, number_of_ewsb_equations, 1> tadpole_equations() const;
 
 
-   void self_energy_hh_2loop(double result[1]) const;
+   double self_energy_hh_2loop() const;
 
 
-   void self_energy_hh_3loop(double result[1]) const;
+   double self_energy_hh_3loop() const;
 
    void calculate_MVG_pole();
    void calculate_MFv_pole();
@@ -483,23 +482,11 @@ private:
       unsigned ewsb_loop_order;
    };
 
-#ifdef ENABLE_THREADS
-   struct Thread {
-      typedef void(SplitMSSM_mass_eigenstates::*Memfun_t)();
-      SplitMSSM_mass_eigenstates* model;
-      Memfun_t fun;
-
-      Thread(SplitMSSM_mass_eigenstates* model_, Memfun_t fun_)
-         : model(model_), fun(fun_) {}
-      void operator()() {
-         try {
-            (model->*fun)();
-         } catch (...) {
-            model->thread_exception = std::current_exception();
-         }
-      }
+   class EEWSBStepFailed : public Error {
+   public:
+      virtual ~EEWSBStepFailed() {}
+      virtual std::string what() const { return "Could not perform EWSB step."; }
    };
-#endif
 
    std::size_t number_of_ewsb_iterations;
    std::size_t number_of_mass_iterations;
@@ -512,17 +499,13 @@ private:
    SplitMSSM_physical physical; ///< contains the pole masses and mixings
    Problems<SplitMSSM_info::NUMBER_OF_PARTICLES> problems;
    Two_loop_corrections two_loop_corrections; ///< used 2-loop corrections
-#ifdef ENABLE_THREADS
-   std::exception_ptr thread_exception;
-   static std::mutex mtx_fortran; /// locks fortran functions
-#endif
 
    int solve_ewsb_iteratively();
    int solve_ewsb_iteratively(unsigned);
-   int solve_ewsb_iteratively_with(EWSB_solver*, const double[number_of_ewsb_equations]);
+   int solve_ewsb_iteratively_with(EWSB_solver*, const Eigen::Matrix<double, number_of_ewsb_equations, 1>&);
    int solve_ewsb_tree_level_custom();
-   void ewsb_initial_guess(double[number_of_ewsb_equations]);
-   int ewsb_step(double[number_of_ewsb_equations]) const;
+   Eigen::Matrix<double, number_of_ewsb_equations, 1> ewsb_initial_guess();
+   Eigen::Matrix<double, number_of_ewsb_equations, 1> ewsb_step() const;
    static int ewsb_step(const gsl_vector*, void*, gsl_vector*);
    static int tadpole_equations(const gsl_vector*, void*, gsl_vector*);
    void copy_DRbar_masses_to_pole_masses();

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 11:36:31
+// File generated at Sat 27 Aug 2016 12:42:49
 
 #include "UMSSM_input_parameters.hpp"
 #include "UMSSM_observables.hpp"
@@ -140,8 +140,8 @@ int main(int argc, char* argv[])
 
    try {
       qedqcd.to(qedqcd.displayPoleMZ()); // run SM fermion masses to MZ
-   } catch (const std::string& s) {
-      ERROR(s);
+   } catch (const Error& e) {
+      ERROR(e.what());
       return EXIT_FAILURE;
    }
 

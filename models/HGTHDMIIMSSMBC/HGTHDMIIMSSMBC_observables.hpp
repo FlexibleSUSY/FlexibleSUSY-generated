@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:40:44
+// File generated at Sat 27 Aug 2016 11:55:06
 
 #ifndef HGTHDMIIMSSMBC_OBSERVABLES_H
 #define HGTHDMIIMSSMBC_OBSERVABLES_H

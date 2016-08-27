@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:32:47
+// File generated at Sat 27 Aug 2016 11:44:47
 
 #ifndef HTHDMIIMSSMBC_UTILITIES_H
 #define HTHDMIIMSSMBC_UTILITIES_H
@@ -87,7 +87,6 @@ public:
 class HTHDMIIMSSMBC_spectrum_plotter {
 public:
    HTHDMIIMSSMBC_spectrum_plotter();
-   ~HTHDMIIMSSMBC_spectrum_plotter() {}
 
    void extract_spectrum(const HTHDMIIMSSMBC_mass_eigenstates&);
    void write_to_file(const std::string&) const;

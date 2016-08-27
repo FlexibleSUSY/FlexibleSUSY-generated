@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 11:16:50
+// File generated at Sat 27 Aug 2016 12:18:12
 
 #include "UMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -159,16 +159,18 @@ Eigen::Matrix<double,3,3> UMSSM_soft_parameters::calc_beta_TYu_two_loop(const So
       + 27*Sqr(Qq)*Sqr(Qu) + Sqr(Qs)*Sqr(Qu) + 9*Sqr(Qd)*(Sqr(QHu) + Sqr(Qq) +
       Sqr(Qu)) + 3*Sqr(Qe)*(Sqr(QHu) + Sqr(Qq) + Sqr(Qu)) + 3*Sqr(QHu)*Sqr(Qv)
       + 3*Sqr(Qq)*Sqr(Qv) + 3*Sqr(Qu)*Sqr(Qv)))))*UNITMATRIX(3)).real();
-   const Eigen::Matrix<double,3,3> beta_TYu_2 = (twoLoop*(
-      6.095555555555555*Power(g1,4)*TYu + 7.5*Power(g2,4)*TYu -
-      1.7777777777777777*Power(g3,4)*TYu + 8*Power(gp,4)*Power(QHu,4)*TYu + 40*
-      Power(gp,4)*Power(Qq,4)*TYu + Sqr(g1)*Sqr(g2)*TYu + 3.022222222222222*Sqr
-      (g1)*Sqr(g3)*TYu + 8*Sqr(g2)*Sqr(g3)*TYu + 3.6*Qd*QHu*Sqr(g1)*Sqr(gp)*TYu
-      + 3.6*Qe*QHu*Sqr(g1)*Sqr(gp)*TYu - 1.2*QHd*QHu*Sqr(g1)*Sqr(gp)*TYu - 3.6
-      *QHu*Ql*Sqr(g1)*Sqr(gp)*TYu + 1.2*Qd*Qq*Sqr(g1)*Sqr(gp)*TYu + 1.2*Qe*Qq*
-      Sqr(g1)*Sqr(gp)*TYu - 0.4*QHd*Qq*Sqr(g1)*Sqr(gp)*TYu + 4*QHu*Qq*Sqr(g1)*
-      Sqr(gp)*TYu - 1.2*Ql*Qq*Sqr(g1)*Sqr(gp)*TYu - 4.8*Qd*Qu*Sqr(g1)*Sqr(gp)*
-      TYu - 4.8*Qe*Qu*Sqr(g1)*Sqr(gp)*TYu + 1.6*QHd*Qu*Sqr(g1)*Sqr(gp)*TYu -
+   const Eigen::Matrix<double,3,3> beta_TYu_2 = ((twoLoop*(-6*
+      traceAdjYdTYd*Yu*AbsSqr(Lambdax) - 2*traceAdjYeTYe*Yu*AbsSqr(Lambdax) + 4
+      *MassU*Yu*AbsSqr(Lambdax)*Sqr(gp)*Sqr(QHu) - 4*MassU*Yu*AbsSqr(Lambdax)*
+      Sqr(gp)*Sqr(Qs) + 6.095555555555555*Power(g1,4)*TYu + 7.5*Power(g2,4)*TYu
+      - 1.7777777777777777*Power(g3,4)*TYu + 8*Power(gp,4)*Power(QHu,4)*TYu +
+      40*Power(gp,4)*Power(Qq,4)*TYu + Sqr(g1)*Sqr(g2)*TYu + 3.022222222222222*
+      Sqr(g1)*Sqr(g3)*TYu + 8*Sqr(g2)*Sqr(g3)*TYu + 3.6*Qd*QHu*Sqr(g1)*Sqr(gp)*
+      TYu + 3.6*Qe*QHu*Sqr(g1)*Sqr(gp)*TYu - 1.2*QHd*QHu*Sqr(g1)*Sqr(gp)*TYu -
+      3.6*QHu*Ql*Sqr(g1)*Sqr(gp)*TYu + 1.2*Qd*Qq*Sqr(g1)*Sqr(gp)*TYu + 1.2*Qe*
+      Qq*Sqr(g1)*Sqr(gp)*TYu - 0.4*QHd*Qq*Sqr(g1)*Sqr(gp)*TYu + 4*QHu*Qq*Sqr(g1
+      )*Sqr(gp)*TYu - 1.2*Ql*Qq*Sqr(g1)*Sqr(gp)*TYu - 4.8*Qd*Qu*Sqr(g1)*Sqr(gp)
+      *TYu - 4.8*Qe*Qu*Sqr(g1)*Sqr(gp)*TYu + 1.6*QHd*Qu*Sqr(g1)*Sqr(gp)*TYu -
       8.8*QHu*Qu*Sqr(g1)*Sqr(gp)*TYu + 4.8*Ql*Qu*Sqr(g1)*Sqr(gp)*TYu - 7.2*Qq*
       Qu*Sqr(g1)*Sqr(gp)*TYu + 2.4*Sqr(g1)*Sqr(gp)*Sqr(QHu)*TYu + 6*Sqr(g2)*Sqr
       (gp)*Sqr(QHu)*TYu + 18*Power(gp,4)*Sqr(Qd)*Sqr(QHu)*TYu + 6*Power(gp,4)*
@@ -183,35 +185,27 @@ Eigen::Matrix<double,3,3> UMSSM_soft_parameters::calc_beta_TYu_two_loop(const So
       + 18*Power(gp,4)*Sqr(Qd)*Sqr(Qu)*TYu + 6*Power(gp,4)*Sqr(Qe)*Sqr(Qu)*TYu
       + 4*Power(gp,4)*Sqr(QHd)*Sqr(Qu)*TYu + 22*Power(gp,4)*Sqr(QHu)*Sqr(Qu)*
       TYu + 12*Power(gp,4)*Sqr(Ql)*Sqr(Qu)*TYu + 54*Power(gp,4)*Sqr(Qq)*Sqr(Qu)
-      *TYu - 0.4*(2*MassB*Sqr(g1) + 5*(3*traceAdjYdTYd + traceAdjYeTYe + 2*
-      MassU*Sqr(gp)*(Sqr(Qd) + Sqr(QHd) - Sqr(Qq))))*(Yu*Yd.adjoint()*Yd) - 6*
-      traceYdAdjYd*(Yu*Yd.adjoint()*TYd) - 2*traceYeAdjYe*(Yu*Yd.adjoint()*TYd)
-      + 0.8*Sqr(g1)*(Yu*Yd.adjoint()*TYd) + 4*Sqr(gp)*Sqr(Qd)*(Yu*Yd.adjoint()
-      *TYd) + 4*Sqr(gp)*Sqr(QHd)*(Yu*Yd.adjoint()*TYd) - 4*Sqr(gp)*Sqr(Qq)*(Yu*
-      Yd.adjoint()*TYd) - 18*traceAdjYuTYu*(Yu*Yu.adjoint()*Yu) - 6*
-      traceAdjYvTYv*(Yu*Yu.adjoint()*Yu) - 0.8*MassB*Sqr(g1)*(Yu*Yu.adjoint()*
-      Yu) - 12*MassWB*Sqr(g2)*(Yu*Yu.adjoint()*Yu) - 12*MassU*Sqr(gp)*Sqr(QHu)*
-      (Yu*Yu.adjoint()*Yu) - 4*MassU*Sqr(gp)*Sqr(Qq)*(Yu*Yu.adjoint()*Yu) + 4*
-      MassU*Sqr(gp)*Sqr(Qu)*(Yu*Yu.adjoint()*Yu) - 12*traceYuAdjYu*(Yu*
-      Yu.adjoint()*TYu) - 4*traceYvAdjYv*(Yu*Yu.adjoint()*TYu) + 1.2*Sqr(g1)*(
-      Yu*Yu.adjoint()*TYu) + 6*Sqr(g2)*(Yu*Yu.adjoint()*TYu) + 8*Sqr(gp)*Sqr(
-      QHu)*(Yu*Yu.adjoint()*TYu) - 3*traceYdAdjYd*(TYu*Yd.adjoint()*Yd) -
-      traceYeAdjYe*(TYu*Yd.adjoint()*Yd) + 0.4*Sqr(g1)*(TYu*Yd.adjoint()*Yd) +
-      2*Sqr(gp)*Sqr(Qd)*(TYu*Yd.adjoint()*Yd) + 2*Sqr(gp)*Sqr(QHd)*(TYu*
-      Yd.adjoint()*Yd) - 2*Sqr(gp)*Sqr(Qq)*(TYu*Yd.adjoint()*Yd) + AbsSqr(
-      Lambdax)*(-6*traceAdjYdTYd*Yu - 2*traceAdjYeTYe*Yu + 4*MassU*Yu*Sqr(gp)*
-      Sqr(QHu) - 4*MassU*Yu*Sqr(gp)*Sqr(Qs) - 2*(Yu*Yd.adjoint()*TYd) - 4*(Yu*
-      Yu.adjoint()*TYu) - TYu*Yd.adjoint()*Yd - 5*(TYu*Yu.adjoint()*Yu)) - 15*
-      traceYuAdjYu*(TYu*Yu.adjoint()*Yu) - 5*traceYvAdjYv*(TYu*Yu.adjoint()*Yu)
-      + 12*Sqr(g2)*(TYu*Yu.adjoint()*Yu) + 10*Sqr(gp)*Sqr(QHu)*(TYu*Yu.adjoint
-      ()*Yu) + 6*Sqr(gp)*Sqr(Qq)*(TYu*Yu.adjoint()*Yu) - 6*Sqr(gp)*Sqr(Qu)*(TYu
-      *Yu.adjoint()*Yu) - 4*(Yu*Yd.adjoint()*Yd*Yd.adjoint()*TYd) - 2*(Yu*
-      Yd.adjoint()*Yd*Yu.adjoint()*TYu) - 4*(Yu*Yd.adjoint()*TYd*Yd.adjoint()*
-      Yd) - 4*(Yu*Yd.adjoint()*TYd*Yu.adjoint()*Yu) - 6*(Yu*Yu.adjoint()*Yu*
-      Yu.adjoint()*TYu) - 8*(Yu*Yu.adjoint()*TYu*Yu.adjoint()*Yu) - 2*(TYu*
-      Yd.adjoint()*Yd*Yd.adjoint()*Yd) - 4*(TYu*Yd.adjoint()*Yd*Yu.adjoint()*Yu
-      ) - 6*(TYu*Yu.adjoint()*Yu*Yu.adjoint()*Yu))*UNITMATRIX(3)).real();
-   const Eigen::Matrix<double,3,3> beta_TYu_3 = (0.2*twoLoop*((-15*
+      *TYu) - 0.4*twoLoop*(2*MassB*Sqr(g1) + 5*(3*traceAdjYdTYd + traceAdjYeTYe
+      + 2*MassU*Sqr(gp)*(Sqr(Qd) + Sqr(QHd) - Sqr(Qq))))*(Yu*Yd.adjoint()*Yd)
+      + twoLoop*(-6*traceYdAdjYd - 2*traceYeAdjYe - 2*AbsSqr(Lambdax) + 0.8*Sqr
+      (g1) + 4*Sqr(gp)*Sqr(Qd) + 4*Sqr(gp)*Sqr(QHd) - 4*Sqr(gp)*Sqr(Qq))*(Yu*
+      Yd.adjoint()*TYd) + twoLoop*(-18*traceAdjYuTYu - 6*traceAdjYvTYv - 0.8*
+      MassB*Sqr(g1) - 12*MassWB*Sqr(g2) - 12*MassU*Sqr(gp)*Sqr(QHu) - 4*MassU*
+      Sqr(gp)*Sqr(Qq) + 4*MassU*Sqr(gp)*Sqr(Qu))*(Yu*Yu.adjoint()*Yu) + twoLoop
+      *(-12*traceYuAdjYu - 4*traceYvAdjYv - 4*AbsSqr(Lambdax) + 1.2*Sqr(g1) + 6
+      *Sqr(g2) + 8*Sqr(gp)*Sqr(QHu))*(Yu*Yu.adjoint()*TYu) + twoLoop*(-3*
+      traceYdAdjYd - traceYeAdjYe - AbsSqr(Lambdax) + 0.4*Sqr(g1) + 2*Sqr(gp)*
+      Sqr(Qd) + 2*Sqr(gp)*Sqr(QHd) - 2*Sqr(gp)*Sqr(Qq))*(TYu*Yd.adjoint()*Yd) +
+      twoLoop*(-15*traceYuAdjYu - 5*traceYvAdjYv - 5*AbsSqr(Lambdax) + 12*Sqr(
+      g2) + 10*Sqr(gp)*Sqr(QHu) + 6*Sqr(gp)*Sqr(Qq) - 6*Sqr(gp)*Sqr(Qu))*(TYu*
+      Yu.adjoint()*Yu) - 4*twoLoop*(Yu*Yd.adjoint()*Yd*Yd.adjoint()*TYd) - 2*
+      twoLoop*(Yu*Yd.adjoint()*Yd*Yu.adjoint()*TYu) - 4*twoLoop*(Yu*Yd.adjoint(
+      )*TYd*Yd.adjoint()*Yd) - 4*twoLoop*(Yu*Yd.adjoint()*TYd*Yu.adjoint()*Yu)
+      - 6*twoLoop*(Yu*Yu.adjoint()*Yu*Yu.adjoint()*TYu) - 8*twoLoop*(Yu*
+      Yu.adjoint()*TYu*Yu.adjoint()*Yu) - 2*twoLoop*(TYu*Yd.adjoint()*Yd*
+      Yd.adjoint()*Yd) - 4*twoLoop*(TYu*Yd.adjoint()*Yd*Yu.adjoint()*Yu) - 6*
+      twoLoop*(TYu*Yu.adjoint()*Yu*Yu.adjoint()*Yu))*UNITMATRIX(3)).real();
+   const Eigen::Matrix<double,3,3> beta_TYu_3 = ((0.2*twoLoop*((-15*
       traceYdAdjYuYuAdjYd - 45*traceYuAdjYuYuAdjYu - 5*traceYvAdjYvTpYeconjYe -
       15*traceYvAdjYvYvAdjYv + 4*traceYuAdjYu*Sqr(g1) + 80*traceYuAdjYu*Sqr(g3
       ) + 5*AbsSqr(Lambdax)*(-3*traceYdAdjYd - traceYeAdjYe + 2*Sqr(gp)*(Sqr(
@@ -219,10 +213,13 @@ Eigen::Matrix<double,3,3> UMSSM_soft_parameters::calc_beta_TYu_two_loop(const So
       traceYvAdjYv)*Sqr(QHu)) + traceYvAdjYv*Sqr(Ql) + 3*traceYuAdjYu*Sqr(Qq) +
       3*traceYuAdjYu*Sqr(Qu) + traceYvAdjYv*Sqr(Qv)) + 10*Power(gp,4)*(11*
       Power(Qu,4) + Sqr(Qs)*Sqr(Qu) + 3*(Sqr(QHu) + Sqr(Qq))*Sqr(Qv) + 3*Sqr(Qu
-      )*Sqr(Qv)) - 15*Sqr(Conj(Lambdax))*Sqr(Lambdax))*TYu - 10*Conj(Lambdax)*
-      TLambdax*(3*traceYdAdjYd*Yu + traceYeAdjYe*Yu + 6*Yu*AbsSqr(Lambdax) - 2*
-      Yu*Sqr(gp)*Sqr(QHd) + 2*Yu*Sqr(gp)*Sqr(QHu) - 2*Yu*Sqr(gp)*Sqr(Qs) + Yu*
-      Yd.adjoint()*Yd + 3*(Yu*Yu.adjoint()*Yu)))*UNITMATRIX(3)).real();
+      )*Sqr(Qv)) - 15*Sqr(Conj(Lambdax))*Sqr(Lambdax))*TYu - 30*traceYdAdjYd*Yu
+      *Conj(Lambdax)*TLambdax - 10*traceYeAdjYe*Yu*Conj(Lambdax)*TLambdax + 20*
+      Yu*Conj(Lambdax)*Sqr(gp)*Sqr(QHd)*TLambdax - 20*Yu*Conj(Lambdax)*Sqr(gp)*
+      Sqr(QHu)*TLambdax + 20*Yu*Conj(Lambdax)*Sqr(gp)*Sqr(Qs)*TLambdax - 60*Yu*
+      Lambdax*Sqr(Conj(Lambdax))*TLambdax) - 2*twoLoop*Conj(Lambdax)*TLambdax*(
+      Yu*Yd.adjoint()*Yd) - 6*twoLoop*Conj(Lambdax)*TLambdax*(Yu*Yu.adjoint()*
+      Yu))*UNITMATRIX(3)).real();
 
    beta_TYu = beta_TYu_1 + beta_TYu_2 + beta_TYu_3;
 

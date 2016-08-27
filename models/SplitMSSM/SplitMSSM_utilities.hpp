@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:37:54
+// File generated at Sat 27 Aug 2016 11:39:58
 
 #ifndef SplitMSSM_UTILITIES_H
 #define SplitMSSM_UTILITIES_H
@@ -87,7 +87,6 @@ public:
 class SplitMSSM_spectrum_plotter {
 public:
    SplitMSSM_spectrum_plotter();
-   ~SplitMSSM_spectrum_plotter() {}
 
    void extract_spectrum(const SplitMSSM_mass_eigenstates&);
    void write_to_file(const std::string&) const;

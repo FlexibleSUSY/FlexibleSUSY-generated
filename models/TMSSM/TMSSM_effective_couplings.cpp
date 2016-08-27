@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:58:04
+// File generated at Sat 27 Aug 2016 12:09:15
 
 #include "TMSSM_effective_couplings.hpp"
 
@@ -52,10 +52,6 @@ TMSSM_effective_couplings::TMSSM_effective_couplings(
       std::complex<double>,3,1>::Zero()), eff_CpAhVGVG(Eigen::Array<std::complex<
       double>,3,1>::Zero())
 
-{
-}
-
-TMSSM_effective_couplings::~TMSSM_effective_couplings()
 {
 }
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 11:46:02
+// File generated at Sat 27 Aug 2016 12:45:36
 
 #include "NUTSMSSM_effective_couplings.hpp"
 
@@ -52,10 +52,6 @@ NUTSMSSM_effective_couplings::NUTSMSSM_effective_couplings(
       std::complex<double>,3,1>::Zero()), eff_CpAhVGVG(Eigen::Array<std::complex<
       double>,3,1>::Zero())
 
-{
-}
-
-NUTSMSSM_effective_couplings::~NUTSMSSM_effective_couplings()
 {
 }
 

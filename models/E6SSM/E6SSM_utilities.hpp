@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 11:27:37
+// File generated at Sat 27 Aug 2016 12:45:14
 
 #ifndef E6SSM_UTILITIES_H
 #define E6SSM_UTILITIES_H
@@ -87,7 +87,6 @@ public:
 class E6SSM_spectrum_plotter {
 public:
    E6SSM_spectrum_plotter();
-   ~E6SSM_spectrum_plotter() {}
 
    void extract_spectrum(const E6SSM_mass_eigenstates&);
    void write_to_file(const std::string&) const;

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 12:08:49
+// File generated at Sat 27 Aug 2016 13:06:01
 
 #ifndef NUHMSSM_SLHA_IO_H
 #define NUHMSSM_SLHA_IO_H
@@ -227,6 +227,8 @@ void NUHMSSM_slha_io::set_model_parameters(const NUHMSSM_slha<T>& model)
  * Writes extra SLHA blocks
  *
  * @param model model class
+ * @param scales struct of boundary condition scales
+ * @param observables struct of observables
  */
 template <class T>
 void NUHMSSM_slha_io::set_extra(

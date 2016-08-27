@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 11:30:59
+// File generated at Sat 27 Aug 2016 12:37:16
 
 #ifndef UMSSM_SLHA_H
 #define UMSSM_SLHA_H

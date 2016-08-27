@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 11:16:16
+// File generated at Sat 27 Aug 2016 12:17:22
 
 #include "UMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -46,7 +46,7 @@ UMSSM_susy_parameters::UMSSM_susy_parameters(const UMSSM_input_parameters& input
 }
 
 UMSSM_susy_parameters::UMSSM_susy_parameters(
-   double scale_, double loops_, double thresholds_,
+   double scale_, unsigned loops_, unsigned thresholds_,
    const UMSSM_input_parameters& input_
    , const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
    , double Lambdax_, const Eigen::Matrix<double,3,3>& Yv_, const Eigen::Matrix
@@ -126,6 +126,14 @@ UMSSM_susy_parameters UMSSM_susy_parameters::calc_beta() const
 
    return UMSSM_susy_parameters(get_scale(), get_loops(), get_thresholds(), input,
                     beta_Yd, beta_Ye, beta_Lambdax, beta_Yv, beta_Yu, beta_g1, beta_g2, beta_g3, beta_gp, beta_vd, beta_vu, beta_vS);
+}
+
+UMSSM_susy_parameters UMSSM_susy_parameters::calc_beta(unsigned loops) const
+{
+   UMSSM_susy_parameters p(*this);
+   p.set_loops(loops);
+
+   return p.calc_beta();
 }
 
 void UMSSM_susy_parameters::clear()

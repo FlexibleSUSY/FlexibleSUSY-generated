@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 11:24:26
+// File generated at Sat 27 Aug 2016 12:41:37
 
 #include "MRSSM_effective_couplings.hpp"
 
@@ -54,10 +54,6 @@ MRSSM_effective_couplings::MRSSM_effective_couplings(
       std::complex<double>,4,1>::Zero()), eff_CpAhVGVG(Eigen::Array<std::complex<
       double>,4,1>::Zero())
 
-{
-}
-
-MRSSM_effective_couplings::~MRSSM_effective_couplings()
 {
 }
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 12:00:26
+// File generated at Sat 27 Aug 2016 12:55:45
 
 #ifndef MSSMRHN_SLHA_IO_H
 #define MSSMRHN_SLHA_IO_H
@@ -232,6 +232,8 @@ void MSSMRHN_slha_io::set_model_parameters(const MSSMRHN_slha<T>& model)
  * Writes extra SLHA blocks
  *
  * @param model model class
+ * @param scales struct of boundary condition scales
+ * @param observables struct of observables
  */
 template <class T>
 void MSSMRHN_slha_io::set_extra(

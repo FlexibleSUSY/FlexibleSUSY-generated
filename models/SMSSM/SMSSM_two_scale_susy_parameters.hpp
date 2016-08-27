@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 11:30:57
+// File generated at Sat 27 Aug 2016 12:17:23
 
 #ifndef SMSSM_TWO_SCALE_susy_parameters_H
 #define SMSSM_TWO_SCALE_susy_parameters_H
@@ -39,7 +39,7 @@ namespace flexiblesusy {
 class SMSSM_susy_parameters : public Beta_function {
 public:
    explicit SMSSM_susy_parameters(const SMSSM_input_parameters& input_ = SMSSM_input_parameters());
-   SMSSM_susy_parameters(double scale_, double loops_, double thresholds_, const SMSSM_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
+   SMSSM_susy_parameters(double scale_, unsigned loops_, unsigned thresholds_, const SMSSM_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
    , double Lambdax_, double Kappa_, const Eigen::Matrix<double,3,3>& Yu_,
    double Mu_, double MS_, double L1_, double g1_, double g2_, double g3_,
    double vd_, double vu_, double vS_
@@ -54,6 +54,7 @@ public:
    void set_input_parameters(const SMSSM_input_parameters&);
 
    SMSSM_susy_parameters calc_beta() const;
+   SMSSM_susy_parameters calc_beta(unsigned) const;
    virtual void clear();
 
    void set_Yd(const Eigen::Matrix<double,3,3>& Yd_) { Yd = Yd_; }

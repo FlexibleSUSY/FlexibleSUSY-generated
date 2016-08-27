@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:36:19
+// File generated at Sat 27 Aug 2016 11:43:45
 
 #include "HSSUSY_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -45,7 +45,7 @@ HSSUSY_susy_parameters::HSSUSY_susy_parameters(const HSSUSY_input_parameters& in
 }
 
 HSSUSY_susy_parameters::HSSUSY_susy_parameters(
-   double scale_, double loops_, double thresholds_,
+   double scale_, unsigned loops_, unsigned thresholds_,
    const HSSUSY_input_parameters& input_
    , double g1_, double g2_, double g3_, double Lambdax_, const Eigen::Matrix<
    double,3,3>& Yu_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<
@@ -108,6 +108,14 @@ HSSUSY_susy_parameters HSSUSY_susy_parameters::calc_beta() const
 
    return HSSUSY_susy_parameters(get_scale(), get_loops(), get_thresholds(), input,
                     beta_g1, beta_g2, beta_g3, beta_Lambdax, beta_Yu, beta_Yd, beta_Ye);
+}
+
+HSSUSY_susy_parameters HSSUSY_susy_parameters::calc_beta(unsigned loops) const
+{
+   HSSUSY_susy_parameters p(*this);
+   p.set_loops(loops);
+
+   return p.calc_beta();
 }
 
 void HSSUSY_susy_parameters::clear()

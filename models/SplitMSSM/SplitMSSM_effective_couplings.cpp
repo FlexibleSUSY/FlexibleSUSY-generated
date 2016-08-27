@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:38:55
+// File generated at Sat 27 Aug 2016 11:41:34
 
 #include "SplitMSSM_effective_couplings.hpp"
 
@@ -46,10 +46,6 @@ SplitMSSM_effective_couplings::SplitMSSM_effective_couplings(
 
    , eff_CphhVPVP(0), eff_CphhVGVG(0), eff_CpAhVPVP(0), eff_CpAhVGVG(0)
 
-{
-}
-
-SplitMSSM_effective_couplings::~SplitMSSM_effective_couplings()
 {
 }
 

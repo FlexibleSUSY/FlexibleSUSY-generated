@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 12:46:57
+// File generated at Sat 27 Aug 2016 13:51:14
 
 #include "MSSM_slha_io.hpp"
 #include "MSSM_input_parameters.hpp"
@@ -348,6 +348,8 @@ void MSSM_slha_io::fill(MSSM_input_parameters& input) const
 
 /**
  * Reads DR-bar parameters from a SLHA output file.
+ *
+ * @param model model class to be filled
  */
 void MSSM_slha_io::fill_drbar_parameters(MSSM_mass_eigenstates& model) const
 {
@@ -426,6 +428,8 @@ void MSSM_slha_io::fill_drbar_parameters(MSSM_mass_eigenstates& model) const
 /**
  * Reads DR-bar parameters, pole masses and mixing matrices (in
  * Haber-Kane convention) from a SLHA output file.
+ *
+ * @param model model class to be filled
  */
 void MSSM_slha_io::fill(MSSM_mass_eigenstates& model) const
 {
@@ -441,7 +445,7 @@ void MSSM_slha_io::fill(MSSM_mass_eigenstates& model) const
  * Fill struct of extra physical input parameters from SLHA object
  * (FlexibleSUSYInput block)
  *
- * @param settings struct of physical input parameters
+ * @param input struct of physical non-SLHA input parameters
  */
 void MSSM_slha_io::fill(Physical_input& input) const
 {
@@ -452,7 +456,7 @@ void MSSM_slha_io::fill(Physical_input& input) const
  * Fill struct of spectrum generator settings from SLHA object
  * (FlexibleSUSY block)
  *
- * @param settings struct of spectrum generator settings
+ * @param settings struct of spectrum generator settings to be filled
  */
 void MSSM_slha_io::fill(Spectrum_generator_settings& settings) const
 {
@@ -483,7 +487,7 @@ void MSSM_slha_io::fill_extpar_tuple(MSSM_input_parameters& input,
 }
 
 /**
- * Reads pole masses and mixing matrices from a SLHA output file.
+ * Reads pole masses and mixing matrices from a SLHA output file to be filled.
  */
 void MSSM_slha_io::fill_physical(MSSM_physical& physical) const
 {

@@ -1,6 +1,7 @@
 DIR          := models/SM
 MODNAME      := SM
 SARAH_MODEL  := SM
+WITH_$(MODNAME) := yes
 
 SM_INSTALL_DIR := $(INSTALL_DIR)/$(DIR)
 
@@ -187,7 +188,7 @@ clean-$(MODNAME)-src:
 		-rm -f $(SM_SLHA_INPUT)
 		-rm -f $(SM_GNUPLOT)
 
-clean-$(MODNAME): clean-$(MODNAME)-src
+distclean-$(MODNAME): clean-$(MODNAME)-src
 # END:   NOT EXPORTED ##########################################
 
 clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-lib clean-$(MODNAME)-obj
@@ -195,6 +196,8 @@ clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-lib clean-$(MODNAME)-obj
 
 distclean-$(MODNAME): clean-$(MODNAME)
 		@true
+
+clean-generated:: clean-$(MODNAME)-src
 
 clean-obj::     clean-$(MODNAME)-obj
 

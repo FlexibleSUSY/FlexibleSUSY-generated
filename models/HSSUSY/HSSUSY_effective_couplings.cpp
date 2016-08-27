@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:37:14
+// File generated at Sat 27 Aug 2016 11:45:11
 
 #include "HSSUSY_effective_couplings.hpp"
 
@@ -45,10 +45,6 @@ HSSUSY_effective_couplings::HSSUSY_effective_couplings(
 
    , eff_CphhVPVP(0), eff_CphhVGVG(0), eff_CpAhVPVP(0), eff_CpAhVGVG(0)
 
-{
-}
-
-HSSUSY_effective_couplings::~HSSUSY_effective_couplings()
 {
 }
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:37:43
+// File generated at Sat 27 Aug 2016 11:51:33
 
 #ifndef HGTHDMIIMSSMBC_TWO_SCALE_soft_parameters_H
 #define HGTHDMIIMSSMBC_TWO_SCALE_soft_parameters_H
@@ -45,6 +45,7 @@ public:
    virtual void set(const Eigen::ArrayXd&);
 
    HGTHDMIIMSSMBC_soft_parameters calc_beta() const;
+   HGTHDMIIMSSMBC_soft_parameters calc_beta(unsigned) const;
    virtual void clear();
 
    void set_MassB(double MassB_) { MassB = MassB_; }

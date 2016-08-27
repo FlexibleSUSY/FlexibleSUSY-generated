@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 11:45:55
+// File generated at Sat 27 Aug 2016 12:45:29
 
 /**
  * @file NUTSMSSM_two_scale_model.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Tue 12 Jul 2016 11:45:55 with FlexibleSUSY
- * 1.5.1 (git commit: 8356bacd26e8aecc6635607a32835d534ea3cf01) and SARAH 4.8.6 .
+ * This file was generated at Sat 27 Aug 2016 12:45:29 with FlexibleSUSY
+ * 1.6.0 (git commit: b48da3168d7e9ce639e93a4ea0b216e3468d6dc3) and SARAH 4.9.1 .
  */
 
 #include "NUTSMSSM_two_scale_model.hpp"

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 12:00:26
+// File generated at Sat 27 Aug 2016 12:55:45
 
 #ifndef MSSMRHN_UTILITIES_H
 #define MSSMRHN_UTILITIES_H
@@ -87,7 +87,6 @@ public:
 class MSSMRHN_spectrum_plotter {
 public:
    MSSMRHN_spectrum_plotter();
-   ~MSSMRHN_spectrum_plotter() {}
 
    void extract_spectrum(const MSSMRHN_mass_eigenstates&);
    void write_to_file(const std::string&) const;

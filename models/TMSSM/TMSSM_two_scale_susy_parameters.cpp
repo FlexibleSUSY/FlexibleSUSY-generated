@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:44:46
+// File generated at Sat 27 Aug 2016 11:54:49
 
 #include "TMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -46,7 +46,7 @@ TMSSM_susy_parameters::TMSSM_susy_parameters(const TMSSM_input_parameters& input
 }
 
 TMSSM_susy_parameters::TMSSM_susy_parameters(
-   double scale_, double loops_, double thresholds_,
+   double scale_, unsigned loops_, unsigned thresholds_,
    const TMSSM_input_parameters& input_
    , const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
    , double Lambdax_, const Eigen::Matrix<double,3,3>& Yu_, double Mu_, double
@@ -125,6 +125,14 @@ TMSSM_susy_parameters TMSSM_susy_parameters::calc_beta() const
 
    return TMSSM_susy_parameters(get_scale(), get_loops(), get_thresholds(), input,
                     beta_Yd, beta_Ye, beta_Lambdax, beta_Yu, beta_Mu, beta_MT, beta_g1, beta_g2, beta_g3, beta_vd, beta_vu, beta_vT);
+}
+
+TMSSM_susy_parameters TMSSM_susy_parameters::calc_beta(unsigned loops) const
+{
+   TMSSM_susy_parameters p(*this);
+   p.set_loops(loops);
+
+   return p.calc_beta();
 }
 
 void TMSSM_susy_parameters::clear()

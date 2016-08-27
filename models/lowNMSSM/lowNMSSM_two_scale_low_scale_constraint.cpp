@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 11:42:59
+// File generated at Sat 27 Aug 2016 12:38:46
 
 #include "lowNMSSM_two_scale_low_scale_constraint.hpp"
 #include "lowNMSSM_two_scale_model.hpp"
@@ -40,7 +40,9 @@ namespace flexiblesusy {
 #define MODELPARAMETER(p) model->get_##p()
 #define PHASE(p) model->get_##p()
 #define BETAPARAMETER(p) beta_functions.get_##p()
+#define BETAPARAMETER1(l,p) beta_functions_##l##L.get_##p()
 #define BETA(p) beta_##p
+#define BETA1(l,p) beta_##l##L_##p
 #define LowEnergyGaugeCoupling(i) new_g##i
 #define LowEnergyConstant(p) Electroweak_constants::p
 #define MZPole qedqcd.displayPoleMZ()

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:32:47
+// File generated at Sat 27 Aug 2016 11:44:47
 
 #ifndef HTHDMIIMSSMBC_SLHA_IO_H
 #define HTHDMIIMSSMBC_SLHA_IO_H
@@ -203,6 +203,8 @@ void HTHDMIIMSSMBC_slha_io::set_model_parameters(const HTHDMIIMSSMBC_slha<T>& mo
  * Writes extra SLHA blocks
  *
  * @param model model class
+ * @param scales struct of boundary condition scales
+ * @param observables struct of observables
  */
 template <class T>
 void HTHDMIIMSSMBC_slha_io::set_extra(

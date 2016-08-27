@@ -1,6 +1,7 @@
 DIR          := models/MSSMRHN
 MODNAME      := MSSMRHN
 SARAH_MODEL  := MSSMRHN
+WITH_$(MODNAME) := yes
 
 MSSMRHN_INSTALL_DIR := $(INSTALL_DIR)/$(DIR)
 
@@ -187,7 +188,7 @@ clean-$(MODNAME)-src:
 		-rm -f $(MSSMRHN_SLHA_INPUT)
 		-rm -f $(MSSMRHN_GNUPLOT)
 
-clean-$(MODNAME): clean-$(MODNAME)-src
+distclean-$(MODNAME): clean-$(MODNAME)-src
 # END:   NOT EXPORTED ##########################################
 
 clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-lib clean-$(MODNAME)-obj
@@ -195,6 +196,8 @@ clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-lib clean-$(MODNAME)-obj
 
 distclean-$(MODNAME): clean-$(MODNAME)
 		@true
+
+clean-generated:: clean-$(MODNAME)-src
 
 clean-obj::     clean-$(MODNAME)-obj
 

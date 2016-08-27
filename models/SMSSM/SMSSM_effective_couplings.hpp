@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 11:42:05
+// File generated at Sat 27 Aug 2016 12:29:46
 
 #ifndef SMSSM_EFFECTIVE_COUPLINGS_H
 #define SMSSM_EFFECTIVE_COUPLINGS_H
@@ -39,7 +39,6 @@ public:
    SMSSM_effective_couplings(const SMSSM_mass_eigenstates&,
                                    const softsusy::QedQcd&,
                                    const Physical_input&);
-   ~SMSSM_effective_couplings();
 
    void do_run_couplings(bool flag) { rg_improve = flag; }
    bool do_run_couplings() const { return rg_improve; }

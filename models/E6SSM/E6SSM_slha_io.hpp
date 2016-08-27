@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 11:27:37
+// File generated at Sat 27 Aug 2016 12:45:14
 
 #ifndef E6SSM_SLHA_IO_H
 #define E6SSM_SLHA_IO_H
@@ -250,6 +250,8 @@ void E6SSM_slha_io::set_model_parameters(const E6SSM_slha<T>& model)
  * Writes extra SLHA blocks
  *
  * @param model model class
+ * @param scales struct of boundary condition scales
+ * @param observables struct of observables
  */
 template <class T>
 void E6SSM_slha_io::set_extra(

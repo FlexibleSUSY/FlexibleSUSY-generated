@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 12:00:08
+// File generated at Sat 27 Aug 2016 12:55:20
 
 #include "MSSMRHN_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -144,6 +144,14 @@ MSSMRHN_soft_parameters MSSMRHN_soft_parameters::calc_beta() const
    const MSSMRHN_susy_parameters susy_betas(MSSMRHN_susy_parameters::calc_beta());
 
    return MSSMRHN_soft_parameters(susy_betas, beta_TYd, beta_TYe, beta_TYu, beta_TYv, beta_BMu, beta_BMv, beta_mq2, beta_ml2, beta_mHd2, beta_mHu2, beta_md2, beta_mu2, beta_me2, beta_mv2, beta_MassB, beta_MassWB, beta_MassG);
+}
+
+MSSMRHN_soft_parameters MSSMRHN_soft_parameters::calc_beta(unsigned loops) const
+{
+   MSSMRHN_soft_parameters p(*this);
+   p.set_loops(loops);
+
+   return p.calc_beta();
 }
 
 void MSSMRHN_soft_parameters::clear()

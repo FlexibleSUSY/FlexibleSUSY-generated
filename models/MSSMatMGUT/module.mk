@@ -1,6 +1,7 @@
 DIR          := models/MSSMatMGUT
 MODNAME      := MSSMatMGUT
 SARAH_MODEL  := MSSM
+WITH_$(MODNAME) := yes
 
 MSSMatMGUT_INSTALL_DIR := $(INSTALL_DIR)/$(DIR)
 
@@ -187,7 +188,7 @@ clean-$(MODNAME)-src:
 		-rm -f $(MSSMatMGUT_SLHA_INPUT)
 		-rm -f $(MSSMatMGUT_GNUPLOT)
 
-clean-$(MODNAME): clean-$(MODNAME)-src
+distclean-$(MODNAME): clean-$(MODNAME)-src
 # END:   NOT EXPORTED ##########################################
 
 clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-lib clean-$(MODNAME)-obj
@@ -195,6 +196,8 @@ clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-lib clean-$(MODNAME)-obj
 
 distclean-$(MODNAME): clean-$(MODNAME)
 		@true
+
+clean-generated:: clean-$(MODNAME)-src
 
 clean-obj::     clean-$(MODNAME)-obj
 

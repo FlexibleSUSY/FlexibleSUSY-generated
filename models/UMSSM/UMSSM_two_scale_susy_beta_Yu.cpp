@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 11:16:18
+// File generated at Sat 27 Aug 2016 12:17:26
 
 #include "UMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -111,13 +111,11 @@ Eigen::Matrix<double,3,3> UMSSM_susy_parameters::calc_beta_Yu_two_loop(const Sus
       Qv) + 6*Power(gp,4)*Sqr(Qu)*Sqr(Qv) - 3*Sqr(Conj(Lambdax))*Sqr(Lambdax))
       + (-3*traceYdAdjYd - traceYeAdjYe - AbsSqr(Lambdax) + 0.4*Sqr(g1) + 2*Sqr
       (gp)*Sqr(Qd) + 2*Sqr(gp)*Sqr(QHd) - 2*Sqr(gp)*Sqr(Qq))*(Yu*Yd.adjoint()*
-      Yd) - 9*traceYuAdjYu*(Yu*Yu.adjoint()*Yu) - 3*traceYvAdjYv*(Yu*Yu.adjoint
-      ()*Yu) - 3*AbsSqr(Lambdax)*(Yu*Yu.adjoint()*Yu) + 0.4*Sqr(g1)*(Yu*
-      Yu.adjoint()*Yu) + 6*Sqr(g2)*(Yu*Yu.adjoint()*Yu) + 6*Sqr(gp)*Sqr(QHu)*(
-      Yu*Yu.adjoint()*Yu) + 2*Sqr(gp)*Sqr(Qq)*(Yu*Yu.adjoint()*Yu) - 2*Sqr(gp)*
-      Sqr(Qu)*(Yu*Yu.adjoint()*Yu) - 2*(Yu*Yd.adjoint()*Yd*Yd.adjoint()*Yd) - 2
-      *(Yu*Yd.adjoint()*Yd*Yu.adjoint()*Yu) - 4*(Yu*Yu.adjoint()*Yu*Yu.adjoint(
-      )*Yu))).real();
+      Yd) + (-9*traceYuAdjYu - 3*traceYvAdjYv - 3*AbsSqr(Lambdax) + 0.4*Sqr(g1)
+      + 6*Sqr(g2) + 6*Sqr(gp)*Sqr(QHu) + 2*Sqr(gp)*Sqr(Qq) - 2*Sqr(gp)*Sqr(Qu)
+      )*(Yu*Yu.adjoint()*Yu) - 2*(Yu*Yd.adjoint()*Yd*Yd.adjoint()*Yd) - 2*(Yu*
+      Yd.adjoint()*Yd*Yu.adjoint()*Yu) - 4*(Yu*Yu.adjoint()*Yu*Yu.adjoint()*Yu)
+      )).real();
 
 
    return beta_Yu;

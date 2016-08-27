@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:55:57
+// File generated at Sat 27 Aug 2016 12:04:46
 
 #ifndef MRSSM_SLHA_IO_H
 #define MRSSM_SLHA_IO_H
@@ -231,6 +231,8 @@ void MRSSM_slha_io::set_model_parameters(const MRSSM_slha<T>& model)
  * Writes extra SLHA blocks
  *
  * @param model model class
+ * @param scales struct of boundary condition scales
+ * @param observables struct of observables
  */
 template <class T>
 void MRSSM_slha_io::set_extra(

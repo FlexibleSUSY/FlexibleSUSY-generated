@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 12:08:48
+// File generated at Sat 27 Aug 2016 13:09:47
 
 #ifndef lowMSSM_EFFECTIVE_COUPLINGS_H
 #define lowMSSM_EFFECTIVE_COUPLINGS_H
@@ -39,7 +39,6 @@ public:
    lowMSSM_effective_couplings(const lowMSSM_mass_eigenstates&,
                                    const softsusy::QedQcd&,
                                    const Physical_input&);
-   ~lowMSSM_effective_couplings();
 
    void do_run_couplings(bool flag) { rg_improve = flag; }
    bool do_run_couplings() const { return rg_improve; }

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:37:48
+// File generated at Sat 27 Aug 2016 11:39:48
 
 #ifndef SplitMSSM_TWO_SCALE_soft_parameters_H
 #define SplitMSSM_TWO_SCALE_soft_parameters_H
@@ -45,6 +45,7 @@ public:
    virtual void set(const Eigen::ArrayXd&);
 
    SplitMSSM_soft_parameters calc_beta() const;
+   SplitMSSM_soft_parameters calc_beta(unsigned) const;
    virtual void clear();
 
    void set_MassB(double MassB_) { MassB = MassB_; }

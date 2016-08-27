@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:55:57
+// File generated at Sat 27 Aug 2016 12:04:46
 
 #ifndef MRSSM_UTILITIES_H
 #define MRSSM_UTILITIES_H
@@ -87,7 +87,6 @@ public:
 class MRSSM_spectrum_plotter {
 public:
    MRSSM_spectrum_plotter();
-   ~MRSSM_spectrum_plotter() {}
 
    void extract_spectrum(const MRSSM_mass_eigenstates&);
    void write_to_file(const std::string&) const;

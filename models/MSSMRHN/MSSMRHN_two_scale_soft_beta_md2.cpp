@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 12:00:19
+// File generated at Sat 27 Aug 2016 12:55:36
 
 #include "MSSMRHN_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -110,27 +110,20 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_md2_two_loop(const 
 
    Eigen::Matrix<double,3,3> beta_md2;
 
-   beta_md2 = (twoLoop*(-12*traceconjTYdTpTYd*(Yd*Yd.adjoint()) - 4*
-      traceconjTYeTpTYe*(Yd*Yd.adjoint()) - 12*tracemd2YdAdjYd*(Yd*Yd.adjoint()
-      ) - 4*traceme2YeAdjYe*(Yd*Yd.adjoint()) - 4*traceml2AdjYeYe*(Yd*
-      Yd.adjoint()) - 12*tracemq2AdjYdYd*(Yd*Yd.adjoint()) - 24*mHd2*
-      traceYdAdjYd*(Yd*Yd.adjoint()) - 8*mHd2*traceYeAdjYe*(Yd*Yd.adjoint()) +
-      0.8*mHd2*Sqr(g1)*(Yd*Yd.adjoint()) + 12*mHd2*Sqr(g2)*(Yd*Yd.adjoint()) +
-      24*AbsSqr(MassWB)*Sqr(g2)*(Yd*Yd.adjoint()) - 12*traceAdjYdTYd*(Yd*(TYd)
-      .adjoint()) - 4*traceAdjYeTYe*(Yd*(TYd).adjoint()) - 0.8*MassB*Sqr(g1)*(
-      Yd*(TYd).adjoint()) - 12*MassWB*Sqr(g2)*(Yd*(TYd).adjoint()) - 12*
-      traceconjTYdTpYd*(TYd*Yd.adjoint()) - 4*traceconjTYeTpYe*(TYd*Yd.adjoint(
-      )) - 12*Conj(MassWB)*Sqr(g2)*(TYd*Yd.adjoint()) - 12*traceYdAdjYd*(TYd*(
-      TYd).adjoint()) - 4*traceYeAdjYe*(TYd*(TYd).adjoint()) + 0.8*Sqr(g1)*(TYd
-      *(TYd).adjoint()) + 12*Sqr(g2)*(TYd*(TYd).adjoint()) - 6*traceYdAdjYd*(
-      md2*Yd*Yd.adjoint()) - 2*traceYeAdjYe*(md2*Yd*Yd.adjoint()) + 0.4*Sqr(g1)
-      *(md2*Yd*Yd.adjoint()) + 6*Sqr(g2)*(md2*Yd*Yd.adjoint()) - 12*
-      traceYdAdjYd*(Yd*mq2*Yd.adjoint()) - 4*traceYeAdjYe*(Yd*mq2*Yd.adjoint())
-      + 0.8*Sqr(g1)*(Yd*mq2*Yd.adjoint()) + 12*Sqr(g2)*(Yd*mq2*Yd.adjoint()) -
-      6*traceYdAdjYd*(Yd*Yd.adjoint()*md2) - 2*traceYeAdjYe*(Yd*Yd.adjoint()*
-      md2) + 0.4*Sqr(g1)*(Yd*Yd.adjoint()*md2) + 6*Sqr(g2)*(Yd*Yd.adjoint()*md2
-      ) - 8*mHd2*(Yd*Yd.adjoint()*Yd*Yd.adjoint()) - 4*(Yd*Yd.adjoint()*TYd*(
-      TYd).adjoint()) - 4*mHd2*(Yd*Yu.adjoint()*Yu*Yd.adjoint()) - 4*mHu2*(Yd*
+   beta_md2 = (twoLoop*((-12*traceconjTYdTpTYd - 4*traceconjTYeTpTYe - 12
+      *tracemd2YdAdjYd - 4*traceme2YeAdjYe - 4*traceml2AdjYeYe - 12*
+      tracemq2AdjYdYd - 24*mHd2*traceYdAdjYd - 8*mHd2*traceYeAdjYe + 0.8*mHd2*
+      Sqr(g1) + 1.6*AbsSqr(MassB)*Sqr(g1) + 12*mHd2*Sqr(g2) + 24*AbsSqr(MassWB)
+      *Sqr(g2))*(Yd*Yd.adjoint()) + (-12*traceAdjYdTYd - 4*traceAdjYeTYe - 0.8*
+      MassB*Sqr(g1) - 12*MassWB*Sqr(g2))*(Yd*(TYd).adjoint()) + (-12*
+      traceconjTYdTpYd - 4*traceconjTYeTpYe - 0.8*Conj(MassB)*Sqr(g1) - 12*Conj
+      (MassWB)*Sqr(g2))*(TYd*Yd.adjoint()) + (-12*traceYdAdjYd - 4*traceYeAdjYe
+      + 0.8*Sqr(g1) + 12*Sqr(g2))*(TYd*(TYd).adjoint()) + (-6*traceYdAdjYd - 2
+      *traceYeAdjYe + 0.4*Sqr(g1) + 6*Sqr(g2))*(md2*Yd*Yd.adjoint()) + (-12*
+      traceYdAdjYd - 4*traceYeAdjYe + 0.8*Sqr(g1) + 12*Sqr(g2))*(Yd*mq2*
+      Yd.adjoint()) + (-6*traceYdAdjYd - 2*traceYeAdjYe + 0.4*Sqr(g1) + 6*Sqr(
+      g2))*(Yd*Yd.adjoint()*md2) - 8*mHd2*(Yd*Yd.adjoint()*Yd*Yd.adjoint()) - 4
+      *(Yd*Yd.adjoint()*TYd*(TYd).adjoint()) + (-4*mHd2 - 4*mHu2)*(Yd*
       Yu.adjoint()*Yu*Yd.adjoint()) - 4*(Yd*Yu.adjoint()*TYu*(TYd).adjoint()) -
       4*(Yd*(TYd).adjoint()*TYd*Yd.adjoint()) - 4*(Yd*(TYu).adjoint()*TYu*
       Yd.adjoint()) - 4*(TYd*Yd.adjoint()*Yd*(TYd).adjoint()) - 4*(TYd*
@@ -145,9 +138,8 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_md2_two_loop(const 
       g3,4)*Tr23*UNITMATRIX(3) + 2.065591117977289*g1*Tr31*UNITMATRIX(3) +
       0.5333333333333333*Tr2U111*Sqr(g1)*UNITMATRIX(3) + 1.4222222222222223*
       Conj(MassG)*Sqr(g3)*((MassB + 2*MassG)*Sqr(g1) - 30*MassG*Sqr(g3))*
-      UNITMATRIX(3) + 0.017777777777777778*Conj(MassB)*Sqr(g1)*(90*MassB*(Yd*
-      Yd.adjoint()) - 45*(TYd*Yd.adjoint()) + 2*(303*MassB*Sqr(g1) + 40*(2*
-      MassB + MassG)*Sqr(g3))*UNITMATRIX(3)))).real();
+      UNITMATRIX(3) + 0.035555555555555556*Conj(MassB)*Sqr(g1)*(303*MassB*Sqr(
+      g1) + 40*(2*MassB + MassG)*Sqr(g3))*UNITMATRIX(3))).real();
 
 
    return beta_md2;

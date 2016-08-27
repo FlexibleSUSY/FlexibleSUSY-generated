@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:32:34
+// File generated at Sat 27 Aug 2016 11:44:27
 
 #include "HTHDMIIMSSMBC_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -46,7 +46,7 @@ HTHDMIIMSSMBC_susy_parameters::HTHDMIIMSSMBC_susy_parameters(const HTHDMIIMSSMBC
 }
 
 HTHDMIIMSSMBC_susy_parameters::HTHDMIIMSSMBC_susy_parameters(
-   double scale_, double loops_, double thresholds_,
+   double scale_, unsigned loops_, unsigned thresholds_,
    const HTHDMIIMSSMBC_input_parameters& input_
    , double g1_, double g2_, double g3_, double Lambda6_, double Lambda5_,
    double Lambda7_, double Lambda1_, double Lambda4_, double Lambda3_, double
@@ -130,6 +130,14 @@ HTHDMIIMSSMBC_susy_parameters HTHDMIIMSSMBC_susy_parameters::calc_beta() const
 
    return HTHDMIIMSSMBC_susy_parameters(get_scale(), get_loops(), get_thresholds(), input,
                     beta_g1, beta_g2, beta_g3, beta_Lambda6, beta_Lambda5, beta_Lambda7, beta_Lambda1, beta_Lambda4, beta_Lambda3, beta_Lambda2, beta_Yu, beta_Yd, beta_Ye);
+}
+
+HTHDMIIMSSMBC_susy_parameters HTHDMIIMSSMBC_susy_parameters::calc_beta(unsigned loops) const
+{
+   HTHDMIIMSSMBC_susy_parameters p(*this);
+   p.set_loops(loops);
+
+   return p.calc_beta();
 }
 
 void HTHDMIIMSSMBC_susy_parameters::clear()

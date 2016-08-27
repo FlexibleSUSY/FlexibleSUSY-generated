@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 11:46:03
+// File generated at Sat 27 Aug 2016 12:45:36
 
 #include "NUTSMSSM_input_parameters.hpp"
 #include "NUTSMSSM_observables.hpp"
@@ -73,8 +73,8 @@ int main(int argc, const char* argv[])
 
    try {
       qedqcd.to(qedqcd.displayPoleMZ()); // run SM fermion masses to MZ
-   } catch (const std::string& s) {
-      ERROR(s);
+   } catch (const Error& e) {
+      ERROR(e.what());
       return EXIT_FAILURE;
    }
 

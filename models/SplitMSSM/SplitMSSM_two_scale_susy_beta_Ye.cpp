@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:37:44
+// File generated at Sat 27 Aug 2016 11:39:43
 
 #include "SplitMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -40,9 +40,9 @@ Eigen::Matrix<double,3,3> SplitMSSM_susy_parameters::calc_beta_Ye_one_loop(const
 
    Eigen::Matrix<double,3,3> beta_Ye;
 
-   beta_Ye = (0.25*oneOver16PiSqr*(Ye*(12*traceYdAdjYd + 4*traceYeAdjYe +
+   beta_Ye = (oneOver16PiSqr*(0.25*Ye*(12*traceYdAdjYd + 4*traceYeAdjYe +
       12*traceYuAdjYu - 9*Sqr(g1) - 9*Sqr(g2) + 6*Sqr(g2d) + 6*Sqr(g2u) + 2*
-      Sqr(gYd) + 2*Sqr(gYu)) + 6*(Ye*Ye.adjoint()*Ye))).real();
+      Sqr(gYd) + 2*Sqr(gYu)) + 1.5*(Ye*Ye.adjoint()*Ye))).real();
 
 
    return beta_Ye;
@@ -66,7 +66,7 @@ Eigen::Matrix<double,3,3> SplitMSSM_susy_parameters::calc_beta_Ye_two_loop(const
 
    Eigen::Matrix<double,3,3> beta_Ye;
 
-   beta_Ye = (0.0025*twoLoop*(Ye*(3006*Power(g1,4) - 1700*Power(g2,4) -
+   beta_Ye = (twoLoop*(0.0025*Ye*(3006*Power(g1,4) - 1700*Power(g2,4) -
       1125*Power(g2d,4) - 1125*Power(g2u,4) - 225*Power(gYd,4) - 1200*g2d*g2u*
       gYd*gYu - 225*Power(gYu,4) - 2700*traceYdAdjYdYdAdjYd + 600*
       traceYdAdjYuYuAdjYd - 900*traceYeAdjYeYeAdjYe - 2700*traceYuAdjYuYuAdjYu
@@ -76,11 +76,11 @@ Eigen::Matrix<double,3,3> SplitMSSM_susy_parameters::calc_beta_Ye_two_loop(const
       (g2d)*Sqr(g2u) + 8000*traceYuAdjYu*Sqr(g3) + 250*traceYdAdjYd*(Sqr(g1) +
       9*Sqr(g2) + 32*Sqr(g3)) + 75*Sqr(g1)*Sqr(gYd) + 375*Sqr(g2)*Sqr(gYd) -
       450*Sqr(g2d)*Sqr(gYd) + 75*Sqr(g1)*Sqr(gYu) + 375*Sqr(g2)*Sqr(gYu) - 450*
-      Sqr(g2u)*Sqr(gYu) - 500*Sqr(gYd)*Sqr(gYu) + 600*Sqr(Lambdax)) + 15*((-180
-      *traceYdAdjYd - 60*traceYeAdjYe - 180*traceYuAdjYu - 160*Lambdax + 129*
-      Sqr(g1) + 225*Sqr(g2) - 90*Sqr(g2d) - 90*Sqr(g2u) - 30*Sqr(gYd) - 30*Sqr(
-      gYu))*(Ye*Ye.adjoint()*Ye) + 40*(Ye*Ye.adjoint()*Ye*Ye.adjoint()*Ye))))
-      .real();
+      Sqr(g2u)*Sqr(gYu) - 500*Sqr(gYd)*Sqr(gYu) + 600*Sqr(Lambdax)) + 0.0375*(
+      -180*traceYdAdjYd - 60*traceYeAdjYe - 180*traceYuAdjYu - 160*Lambdax +
+      129*Sqr(g1) + 225*Sqr(g2) - 90*Sqr(g2d) - 90*Sqr(g2u) - 30*Sqr(gYd) - 30*
+      Sqr(gYu))*(Ye*Ye.adjoint()*Ye) + 1.5*(Ye*Ye.adjoint()*Ye*Ye.adjoint()*Ye)
+      )).real();
 
 
    return beta_Ye;

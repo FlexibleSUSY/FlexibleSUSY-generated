@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 12:00:12
+// File generated at Sat 27 Aug 2016 12:55:25
 
 #include "MSSMRHN_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -126,16 +126,12 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_TYv_two_loop(const 
       traceYuAdjYuYuAdjYu*TYv - 3*traceYvAdjYvYvAdjYv*TYv + 0.8*traceYuAdjYu*
       Sqr(g1)*TYv + 1.8*Sqr(g1)*Sqr(g2)*TYv + 16*traceYuAdjYu*Sqr(g3)*TYv - 0.4
       *(15*traceAdjYdTYd + 5*traceAdjYeTYe + 6*MassB*Sqr(g1))*(Yv*Ye.adjoint()*
-      Ye) - 6*traceYdAdjYd*(Yv*Ye.adjoint()*TYe) - 2*traceYeAdjYe*(Yv*
-      Ye.adjoint()*TYe) + 2.4*Sqr(g1)*(Yv*Ye.adjoint()*TYe) - 18*traceAdjYuTYu*
-      (Yv*Yv.adjoint()*Yv) - 6*traceAdjYvTYv*(Yv*Yv.adjoint()*Yv) - 2.4*MassB*
-      Sqr(g1)*(Yv*Yv.adjoint()*Yv) - 12*MassWB*Sqr(g2)*(Yv*Yv.adjoint()*Yv) -
-      12*traceYuAdjYu*(Yv*Yv.adjoint()*TYv) - 4*traceYvAdjYv*(Yv*Yv.adjoint()*
-      TYv) + 1.2*Sqr(g1)*(Yv*Yv.adjoint()*TYv) + 6*Sqr(g2)*(Yv*Yv.adjoint()*TYv
-      ) - 3*traceYdAdjYd*(TYv*Ye.adjoint()*Ye) - traceYeAdjYe*(TYv*Ye.adjoint()
-      *Ye) + 1.2*Sqr(g1)*(TYv*Ye.adjoint()*Ye) - 15*traceYuAdjYu*(TYv*
-      Yv.adjoint()*Yv) - 5*traceYvAdjYv*(TYv*Yv.adjoint()*Yv) + 2.4*Sqr(g1)*(
-      TYv*Yv.adjoint()*Yv) + 12*Sqr(g2)*(TYv*Yv.adjoint()*Yv) - 4*(Yv*
+      Ye) + (-6*traceYdAdjYd - 2*traceYeAdjYe + 2.4*Sqr(g1))*(Yv*Ye.adjoint()*
+      TYe) + (-18*traceAdjYuTYu - 6*traceAdjYvTYv - 2.4*MassB*Sqr(g1) - 12*
+      MassWB*Sqr(g2))*(Yv*Yv.adjoint()*Yv) + (-12*traceYuAdjYu - 4*traceYvAdjYv
+      + 1.2*Sqr(g1) + 6*Sqr(g2))*(Yv*Yv.adjoint()*TYv) + (-3*traceYdAdjYd -
+      traceYeAdjYe + 1.2*Sqr(g1))*(TYv*Ye.adjoint()*Ye) + (-15*traceYuAdjYu - 5
+      *traceYvAdjYv + 2.4*Sqr(g1) + 12*Sqr(g2))*(TYv*Yv.adjoint()*Yv) - 4*(Yv*
       Ye.adjoint()*Ye*Ye.adjoint()*TYe) - 2*(Yv*Ye.adjoint()*Ye*Yv.adjoint()*
       TYv) - 4*(Yv*Ye.adjoint()*TYe*Ye.adjoint()*Ye) - 4*(Yv*Ye.adjoint()*TYe*
       Yv.adjoint()*Yv) - 6*(Yv*Yv.adjoint()*Yv*Yv.adjoint()*TYv) - 8*(Yv*

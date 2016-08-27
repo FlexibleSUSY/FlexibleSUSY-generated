@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 11:26:54
+// File generated at Sat 27 Aug 2016 12:44:19
 
 #include "E6SSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -150,20 +150,17 @@ Eigen::Matrix<double,2,2> E6SSM_soft_parameters::calc_beta_TLambda12_two_loop(co
       16*traceKappaAdjKappa*Sqr(g3)*TLambda12 - 1.8*traceKappaAdjKappa*Sqr(gN)*
       TLambda12 - 1.2*traceLambda12AdjLambda12*Sqr(gN)*TLambda12 - 1.2*AbsSqr(
       Lambdax)*Sqr(gN)*TLambda12 + 0.27*Sqr(g1)*Sqr(gN)*TLambda12 + 1.95*Sqr(g2
-      )*Sqr(gN)*TLambda12 - 4*Sqr(Conj(Lambdax))*Sqr(Lambdax)*TLambda12 - (12*
-      traceAdjKappaTKappa + 8*traceAdjLambda12TLambda12 + 5*MassBp*Sqr(gN) + 8*
-      Conj(Lambdax)*TLambdax)*(Lambda12*(Lambda12).adjoint()*Lambda12) - 9*
-      traceKappaAdjKappa*(Lambda12*(Lambda12).adjoint()*TLambda12) - 6*
-      traceLambda12AdjLambda12*(Lambda12*(Lambda12).adjoint()*TLambda12) - 6*
-      AbsSqr(Lambdax)*(Lambda12*(Lambda12).adjoint()*TLambda12) + 3.5*Sqr(gN)*(
-      Lambda12*(Lambda12).adjoint()*TLambda12) - 9*traceKappaAdjKappa*(
-      TLambda12*(Lambda12).adjoint()*Lambda12) - 6*traceLambda12AdjLambda12*(
-      TLambda12*(Lambda12).adjoint()*Lambda12) - 6*AbsSqr(Lambdax)*(TLambda12*(
-      Lambda12).adjoint()*Lambda12) + 4*Sqr(gN)*(TLambda12*(Lambda12).adjoint()
-      *Lambda12) - 3*(Lambda12*(Lambda12).adjoint()*Lambda12*(Lambda12).adjoint
-      ()*TLambda12) - 4*(Lambda12*(Lambda12).adjoint()*TLambda12*(Lambda12)
-      .adjoint()*Lambda12) - 3*(TLambda12*(Lambda12).adjoint()*Lambda12*(
-      Lambda12).adjoint()*Lambda12))).real();
+      )*Sqr(gN)*TLambda12 - 4*Sqr(Conj(Lambdax))*Sqr(Lambdax)*TLambda12 + (-12*
+      traceAdjKappaTKappa - 8*traceAdjLambda12TLambda12 - 5*MassBp*Sqr(gN) - 8*
+      Conj(Lambdax)*TLambdax)*(Lambda12*(Lambda12).adjoint()*Lambda12) + (-9*
+      traceKappaAdjKappa - 6*traceLambda12AdjLambda12 - 6*AbsSqr(Lambdax) + 3.5
+      *Sqr(gN))*(Lambda12*(Lambda12).adjoint()*TLambda12) + (-9*
+      traceKappaAdjKappa - 6*traceLambda12AdjLambda12 - 6*AbsSqr(Lambdax) + 4*
+      Sqr(gN))*(TLambda12*(Lambda12).adjoint()*Lambda12) - 3*(Lambda12*(
+      Lambda12).adjoint()*Lambda12*(Lambda12).adjoint()*TLambda12) - 4*(
+      Lambda12*(Lambda12).adjoint()*TLambda12*(Lambda12).adjoint()*Lambda12) -
+      3*(TLambda12*(Lambda12).adjoint()*Lambda12*(Lambda12).adjoint()*Lambda12)
+      )).real();
 
 
    return beta_TLambda12;

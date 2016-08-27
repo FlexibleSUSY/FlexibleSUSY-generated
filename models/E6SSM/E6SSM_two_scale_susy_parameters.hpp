@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 11:26:33
+// File generated at Sat 27 Aug 2016 12:43:54
 
 #ifndef E6SSM_TWO_SCALE_susy_parameters_H
 #define E6SSM_TWO_SCALE_susy_parameters_H
@@ -39,7 +39,7 @@ namespace flexiblesusy {
 class E6SSM_susy_parameters : public Beta_function {
 public:
    explicit E6SSM_susy_parameters(const E6SSM_input_parameters& input_ = E6SSM_input_parameters());
-   E6SSM_susy_parameters(double scale_, double loops_, double thresholds_, const E6SSM_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
+   E6SSM_susy_parameters(double scale_, unsigned loops_, unsigned thresholds_, const E6SSM_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
    , const Eigen::Matrix<double,3,3>& Kappa_, const Eigen::Matrix<double,2,2>&
    Lambda12_, double Lambdax_, const Eigen::Matrix<double,3,3>& Yu_, double
    MuPr_, double g1_, double g2_, double g3_, double gN_, double vd_, double
@@ -55,6 +55,7 @@ public:
    void set_input_parameters(const E6SSM_input_parameters&);
 
    E6SSM_susy_parameters calc_beta() const;
+   E6SSM_susy_parameters calc_beta(unsigned) const;
    virtual void clear();
 
    void set_Yd(const Eigen::Matrix<double,3,3>& Yd_) { Yd = Yd_; }

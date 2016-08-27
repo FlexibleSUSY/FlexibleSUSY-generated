@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 11:26:53
+// File generated at Sat 27 Aug 2016 12:44:18
 
 #include "E6SSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -153,18 +153,15 @@ Eigen::Matrix<double,3,3> E6SSM_soft_parameters::calc_beta_TKappa_two_loop(const
       *(15*traceAdjYdTYd + 5*traceAdjYeTYe + 15*traceAdjYuTYu + 3*MassB*Sqr(g1)
       + 15*MassWB*Sqr(g2) - 3*MassBp*Sqr(gN)) + (15*traceYdAdjYd + 5*
       traceYeAdjYe + 15*traceYuAdjYu - 3*Sqr(g1) - 15*Sqr(g2) + 3*Sqr(gN))*
-      TLambdax)) - (12*traceAdjKappaTKappa + 8*traceAdjLambda12TLambda12 + 5*
-      MassBp*Sqr(gN) + 8*Conj(Lambdax)*TLambdax)*(Kappa*(Kappa).adjoint()*Kappa
-      ) - 9*traceKappaAdjKappa*(Kappa*(Kappa).adjoint()*TKappa) - 6*
-      traceLambda12AdjLambda12*(Kappa*(Kappa).adjoint()*TKappa) - 6*AbsSqr(
-      Lambdax)*(Kappa*(Kappa).adjoint()*TKappa) + 3.5*Sqr(gN)*(Kappa*(Kappa)
-      .adjoint()*TKappa) - 9*traceKappaAdjKappa*(TKappa*(Kappa).adjoint()*Kappa
-      ) - 6*traceLambda12AdjLambda12*(TKappa*(Kappa).adjoint()*Kappa) - 6*
-      AbsSqr(Lambdax)*(TKappa*(Kappa).adjoint()*Kappa) + 4*Sqr(gN)*(TKappa*(
-      Kappa).adjoint()*Kappa) - 3*(Kappa*(Kappa).adjoint()*Kappa*(Kappa)
-      .adjoint()*TKappa) - 4*(Kappa*(Kappa).adjoint()*TKappa*(Kappa).adjoint()*
-      Kappa) - 3*(TKappa*(Kappa).adjoint()*Kappa*(Kappa).adjoint()*Kappa)))
-      .real();
+      TLambdax)) + (-12*traceAdjKappaTKappa - 8*traceAdjLambda12TLambda12 - 5*
+      MassBp*Sqr(gN) - 8*Conj(Lambdax)*TLambdax)*(Kappa*(Kappa).adjoint()*Kappa
+      ) + (-9*traceKappaAdjKappa - 6*traceLambda12AdjLambda12 - 6*AbsSqr(
+      Lambdax) + 3.5*Sqr(gN))*(Kappa*(Kappa).adjoint()*TKappa) + (-9*
+      traceKappaAdjKappa - 6*traceLambda12AdjLambda12 - 6*AbsSqr(Lambdax) + 4*
+      Sqr(gN))*(TKappa*(Kappa).adjoint()*Kappa) - 3*(Kappa*(Kappa).adjoint()*
+      Kappa*(Kappa).adjoint()*TKappa) - 4*(Kappa*(Kappa).adjoint()*TKappa*(
+      Kappa).adjoint()*Kappa) - 3*(TKappa*(Kappa).adjoint()*Kappa*(Kappa)
+      .adjoint()*Kappa))).real();
 
 
    return beta_TKappa;

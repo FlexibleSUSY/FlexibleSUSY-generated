@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 11:24:26
+// File generated at Sat 27 Aug 2016 12:41:37
 
 #ifndef MRSSM_EFFECTIVE_COUPLINGS_H
 #define MRSSM_EFFECTIVE_COUPLINGS_H
@@ -39,7 +39,6 @@ public:
    MRSSM_effective_couplings(const MRSSM_mass_eigenstates&,
                                    const softsusy::QedQcd&,
                                    const Physical_input&);
-   ~MRSSM_effective_couplings();
 
    void do_run_couplings(bool flag) { rg_improve = flag; }
    bool do_run_couplings() const { return rg_improve; }

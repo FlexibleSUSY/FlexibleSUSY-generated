@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 12:05:21
+// File generated at Sat 27 Aug 2016 13:02:24
 
 #ifndef MSSMRHN_EFFECTIVE_COUPLINGS_H
 #define MSSMRHN_EFFECTIVE_COUPLINGS_H
@@ -39,7 +39,6 @@ public:
    MSSMRHN_effective_couplings(const MSSMRHN_mass_eigenstates&,
                                    const softsusy::QedQcd&,
                                    const Physical_input&);
-   ~MSSMRHN_effective_couplings();
 
    void do_run_couplings(bool flag) { rg_improve = flag; }
    bool do_run_couplings() const { return rg_improve; }

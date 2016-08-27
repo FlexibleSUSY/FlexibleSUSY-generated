@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:55:30
+// File generated at Sat 27 Aug 2016 12:04:18
 
 #ifndef MRSSM_TWO_SCALE_susy_parameters_H
 #define MRSSM_TWO_SCALE_susy_parameters_H
@@ -39,7 +39,7 @@ namespace flexiblesusy {
 class MRSSM_susy_parameters : public Beta_function {
 public:
    explicit MRSSM_susy_parameters(const MRSSM_input_parameters& input_ = MRSSM_input_parameters());
-   MRSSM_susy_parameters(double scale_, double loops_, double thresholds_, const MRSSM_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
+   MRSSM_susy_parameters(double scale_, unsigned loops_, unsigned thresholds_, const MRSSM_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
    , double LamTD_, double LamTU_, double LamSD_, double LamSU_, const
    Eigen::Matrix<double,3,3>& Yu_, double Mu_, double MuD_, double MuU_, double
    g1_, double g2_, double g3_, double vd_, double vu_, double vT_, double vS_
@@ -54,6 +54,7 @@ public:
    void set_input_parameters(const MRSSM_input_parameters&);
 
    MRSSM_susy_parameters calc_beta() const;
+   MRSSM_susy_parameters calc_beta(unsigned) const;
    virtual void clear();
 
    void set_Yd(const Eigen::Matrix<double,3,3>& Yd_) { Yd = Yd_; }

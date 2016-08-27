@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:37:43
+// File generated at Sat 27 Aug 2016 11:51:33
 
 #include "HGTHDMIIMSSMBC_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -108,6 +108,14 @@ HGTHDMIIMSSMBC_soft_parameters HGTHDMIIMSSMBC_soft_parameters::calc_beta() const
    const HGTHDMIIMSSMBC_susy_parameters susy_betas(HGTHDMIIMSSMBC_susy_parameters::calc_beta());
 
    return HGTHDMIIMSSMBC_soft_parameters(susy_betas, beta_MassB, beta_MassG, beta_MassWB, beta_Mu, beta_M122, beta_M112, beta_M222, beta_v1, beta_v2);
+}
+
+HGTHDMIIMSSMBC_soft_parameters HGTHDMIIMSSMBC_soft_parameters::calc_beta(unsigned loops) const
+{
+   HGTHDMIIMSSMBC_soft_parameters p(*this);
+   p.set_loops(loops);
+
+   return p.calc_beta();
 }
 
 void HGTHDMIIMSSMBC_soft_parameters::clear()

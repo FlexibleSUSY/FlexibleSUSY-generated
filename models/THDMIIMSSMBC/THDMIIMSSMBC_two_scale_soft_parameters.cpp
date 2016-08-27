@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:31:03
+// File generated at Sat 27 Aug 2016 11:41:44
 
 #include "THDMIIMSSMBC_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -93,6 +93,14 @@ THDMIIMSSMBC_soft_parameters THDMIIMSSMBC_soft_parameters::calc_beta() const
    const THDMIIMSSMBC_susy_parameters susy_betas(THDMIIMSSMBC_susy_parameters::calc_beta());
 
    return THDMIIMSSMBC_soft_parameters(susy_betas, beta_M122, beta_M112, beta_M222, beta_v1, beta_v2);
+}
+
+THDMIIMSSMBC_soft_parameters THDMIIMSSMBC_soft_parameters::calc_beta(unsigned loops) const
+{
+   THDMIIMSSMBC_soft_parameters p(*this);
+   p.set_loops(loops);
+
+   return p.calc_beta();
 }
 
 void THDMIIMSSMBC_soft_parameters::clear()

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 12:00:00
+// File generated at Sat 27 Aug 2016 12:55:08
 
 #include "MSSMRHN_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -72,10 +72,9 @@ Eigen::Matrix<double,3,3> MSSMRHN_susy_parameters::calc_beta_Yd_two_loop(const S
       traceYeAdjYe*Sqr(g1) + Sqr(g1)*Sqr(g2) - 0.4*traceYdAdjYd*(Sqr(g1) - 40*
       Sqr(g3)) + 0.8888888888888888*Sqr(g1)*Sqr(g3) + 8*Sqr(g2)*Sqr(g3)) + (-9*
       traceYdAdjYd - 3*traceYeAdjYe + 0.8*Sqr(g1) + 6*Sqr(g2))*(Yd*Yd.adjoint()
-      *Yd) - 3*traceYuAdjYu*(Yd*Yu.adjoint()*Yu) - traceYvAdjYv*(Yd*Yu.adjoint(
-      )*Yu) + 0.8*Sqr(g1)*(Yd*Yu.adjoint()*Yu) - 4*(Yd*Yd.adjoint()*Yd*
-      Yd.adjoint()*Yd) - 2*(Yd*Yu.adjoint()*Yu*Yd.adjoint()*Yd) - 2*(Yd*
-      Yu.adjoint()*Yu*Yu.adjoint()*Yu))).real();
+      *Yd) + (-3*traceYuAdjYu - traceYvAdjYv + 0.8*Sqr(g1))*(Yd*Yu.adjoint()*Yu
+      ) - 4*(Yd*Yd.adjoint()*Yd*Yd.adjoint()*Yd) - 2*(Yd*Yu.adjoint()*Yu*
+      Yd.adjoint()*Yd) - 2*(Yd*Yu.adjoint()*Yu*Yu.adjoint()*Yu))).real();
 
 
    return beta_Yd;

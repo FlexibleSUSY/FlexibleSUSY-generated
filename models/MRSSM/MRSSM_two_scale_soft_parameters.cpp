@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:55:41
+// File generated at Sat 27 Aug 2016 12:04:30
 
 #include "MRSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -143,6 +143,14 @@ MRSSM_soft_parameters MRSSM_soft_parameters::calc_beta() const
    const MRSSM_susy_parameters susy_betas(MRSSM_susy_parameters::calc_beta());
 
    return MRSSM_soft_parameters(susy_betas, beta_BMu, beta_BMuD, beta_BMuU, beta_mq2, beta_ml2, beta_mHd2, beta_mHu2, beta_md2, beta_mu2, beta_me2, beta_mS2, beta_mT2, beta_moc2, beta_mRd2, beta_mRu2, beta_MDBS, beta_MDWBT, beta_MDGoc);
+}
+
+MRSSM_soft_parameters MRSSM_soft_parameters::calc_beta(unsigned loops) const
+{
+   MRSSM_soft_parameters p(*this);
+   p.set_loops(loops);
+
+   return p.calc_beta();
 }
 
 void MRSSM_soft_parameters::clear()

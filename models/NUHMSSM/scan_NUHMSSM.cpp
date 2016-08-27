@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 12:09:30
+// File generated at Sat 27 Aug 2016 13:12:03
 
 #include "NUHMSSM_input_parameters.hpp"
 #include "NUHMSSM_spectrum_generator.hpp"
@@ -104,8 +104,8 @@ int main(int argc, char* argv[])
 
    try {
       qedqcd.to(qedqcd.displayPoleMZ()); // run SM fermion masses to MZ
-   } catch (const std::string& s) {
-      ERROR(s);
+   } catch (const Error& e) {
+      ERROR(e.what());
       return EXIT_FAILURE;
    }
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 12:25:48
+// File generated at Sat 27 Aug 2016 13:24:29
 
 #include "CMSSMNoFV_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -46,7 +46,7 @@ CMSSMNoFV_susy_parameters::CMSSMNoFV_susy_parameters(const CMSSMNoFV_input_param
 }
 
 CMSSMNoFV_susy_parameters::CMSSMNoFV_susy_parameters(
-   double scale_, double loops_, double thresholds_,
+   double scale_, unsigned loops_, unsigned thresholds_,
    const CMSSMNoFV_input_parameters& input_
    , const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
    , const Eigen::Matrix<double,3,3>& Yu_, double Mu_, double g1_, double g2_,
@@ -123,6 +123,14 @@ CMSSMNoFV_susy_parameters CMSSMNoFV_susy_parameters::calc_beta() const
 
    return CMSSMNoFV_susy_parameters(get_scale(), get_loops(), get_thresholds(), input,
                     beta_Yd, beta_Ye, beta_Yu, beta_Mu, beta_g1, beta_g2, beta_g3, beta_vd, beta_vu);
+}
+
+CMSSMNoFV_susy_parameters CMSSMNoFV_susy_parameters::calc_beta(unsigned loops) const
+{
+   CMSSMNoFV_susy_parameters p(*this);
+   p.set_loops(loops);
+
+   return p.calc_beta();
 }
 
 void CMSSMNoFV_susy_parameters::clear()

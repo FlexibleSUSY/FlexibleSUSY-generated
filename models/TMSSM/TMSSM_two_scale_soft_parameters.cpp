@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:44:53
+// File generated at Sat 27 Aug 2016 11:55:00
 
 #include "TMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -141,6 +141,14 @@ TMSSM_soft_parameters TMSSM_soft_parameters::calc_beta() const
    const TMSSM_susy_parameters susy_betas(TMSSM_susy_parameters::calc_beta());
 
    return TMSSM_soft_parameters(susy_betas, beta_TYd, beta_TYe, beta_TLambdax, beta_TYu, beta_BMu, beta_BMT, beta_mq2, beta_ml2, beta_mHd2, beta_mHu2, beta_md2, beta_mu2, beta_me2, beta_mT2, beta_MassB, beta_MassWB, beta_MassG);
+}
+
+TMSSM_soft_parameters TMSSM_soft_parameters::calc_beta(unsigned loops) const
+{
+   TMSSM_soft_parameters p(*this);
+   p.set_loops(loops);
+
+   return p.calc_beta();
 }
 
 void TMSSM_soft_parameters::clear()

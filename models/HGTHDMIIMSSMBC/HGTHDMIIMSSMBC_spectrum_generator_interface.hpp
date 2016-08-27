@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:40:45
+// File generated at Sat 27 Aug 2016 11:55:06
 
 #ifndef HGTHDMIIMSSMBC_SPECTRUM_GENERATOR_INTERFACE_H
 #define HGTHDMIIMSSMBC_SPECTRUM_GENERATOR_INTERFACE_H
@@ -105,12 +105,14 @@ protected:
    Spectrum_generator_settings settings;
    double parameter_output_scale; ///< output scale for running parameters
    double reached_precision; ///< the precision that was reached
+
+   void translate_exception_to_problem(HGTHDMIIMSSMBC<T>& model);
 };
 
 /**
  * Setup spectrum generator from a Spectrum_generator_settings object.
  *
- * @param settings spectrum generator settings
+ * @param settings_ spectrum generator settings
  */
 template <class T>
 void HGTHDMIIMSSMBC_spectrum_generator_interface<T>::set_settings(
@@ -163,6 +165,41 @@ void HGTHDMIIMSSMBC_spectrum_generator_interface<T>::write_spectrum(const std::s
    HGTHDMIIMSSMBC_spectrum_plotter plotter;
    plotter.extract_spectrum(model);
    plotter.write_to_file(filename);
+}
+
+/**
+ * Flags problems in the given model class from the current pending
+ * exception.
+ *
+ * This function assumes that there is an active exception.
+ *
+ * @param model model class
+ */
+template <class T>
+void HGTHDMIIMSSMBC_spectrum_generator_interface<T>::translate_exception_to_problem(HGTHDMIIMSSMBC<T>& model)
+{
+   try {
+      throw;
+   } catch (const NoConvergenceError&) {
+      model.get_problems().flag_no_convergence();
+   } catch (const NonPerturbativeRunningError& error) {
+      model.get_problems().flag_no_perturbative();
+      const int parameter_index = error.get_parameter_index();
+      const std::string parameter_name =
+         parameter_index < 0 ? "Q" : HGTHDMIIMSSMBC_info::parameter_names[parameter_index];
+      const double parameter_value = error.get_parameter_value();
+      const double scale = error.get_scale();
+      model.get_problems().flag_non_perturbative_parameter(parameter_name, parameter_value, scale, -1);
+   } catch (const NonPerturbativeRunningQedQcdError& error) {
+      model.get_problems().flag_no_perturbative();
+      model.get_problems().flag_thrown(error.what());
+   } catch (const NoRhoConvergenceError&) {
+      model.get_problems().flag_no_rho_convergence();
+   } catch (const Error& error) {
+      model.get_problems().flag_thrown(error.what());
+   } catch (const std::exception& error) {
+      model.get_problems().flag_thrown(error.what());
+   }
 }
 
 } // namespace flexiblesusy

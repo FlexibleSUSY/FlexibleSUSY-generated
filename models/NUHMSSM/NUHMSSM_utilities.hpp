@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 12:08:49
+// File generated at Sat 27 Aug 2016 13:06:01
 
 #ifndef NUHMSSM_UTILITIES_H
 #define NUHMSSM_UTILITIES_H
@@ -87,7 +87,6 @@ public:
 class NUHMSSM_spectrum_plotter {
 public:
    NUHMSSM_spectrum_plotter();
-   ~NUHMSSM_spectrum_plotter() {}
 
    void extract_spectrum(const NUHMSSM_mass_eigenstates&);
    void write_to_file(const std::string&) const;

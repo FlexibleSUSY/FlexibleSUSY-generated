@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 11:27:27
+// File generated at Sat 27 Aug 2016 12:45:02
 
 #include "E6SSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -128,45 +128,28 @@ Eigen::Matrix<double,3,3> E6SSM_soft_parameters::calc_beta_mDx2_two_loop(const S
 
    Eigen::Matrix<double,3,3> beta_mDx2;
 
-   beta_mDx2 = (twoLoop*(-6*traceconjTKappaTpTKappa*(Kappa.conjugate()*(
-      Kappa).transpose()) - 4*traceconjTLambda12TpTLambda12*(Kappa.conjugate()*
-      (Kappa).transpose()) - 12*ms2*traceKappaAdjKappa*(Kappa.conjugate()*(
-      Kappa).transpose()) - 6*traceKappaAdjKappaconjmDx2*(Kappa.conjugate()*(
-      Kappa).transpose()) - 6*traceKappaconjmDxbar2AdjKappa*(Kappa.conjugate()*
-      (Kappa).transpose()) - 8*ms2*traceLambda12AdjLambda12*(Kappa.conjugate()*
-      (Kappa).transpose()) - 4*traceLambda12AdjLambda12conjmH2I2*(
-      Kappa.conjugate()*(Kappa).transpose()) - 4*tracemH1I2AdjLambda12Lambda12*
-      (Kappa.conjugate()*(Kappa).transpose()) - 4*mHd2*AbsSqr(Lambdax)*(
-      Kappa.conjugate()*(Kappa).transpose()) - 4*mHu2*AbsSqr(Lambdax)*(
-      Kappa.conjugate()*(Kappa).transpose()) - 8*ms2*AbsSqr(Lambdax)*(
-      Kappa.conjugate()*(Kappa).transpose()) - 4*AbsSqr(TLambdax)*(
-      Kappa.conjugate()*(Kappa).transpose()) + 3*ms2*Sqr(gN)*(Kappa.conjugate()
-      *(Kappa).transpose()) - 6*traceconjTKappaTpKappa*(Kappa.conjugate()*(
-      TKappa).transpose()) - 4*traceconjTLambda12TpLambda12*(Kappa.conjugate()*
-      (TKappa).transpose()) - 4*Conj(TLambdax)*Lambdax*(Kappa.conjugate()*(
-      TKappa).transpose()) - 6*traceAdjKappaTKappa*(TKappa.conjugate()*(Kappa)
-      .transpose()) - 4*traceAdjLambda12TLambda12*(TKappa.conjugate()*(Kappa)
-      .transpose()) - 3*MassBp*Sqr(gN)*(TKappa.conjugate()*(Kappa).transpose())
-      - 4*Conj(Lambdax)*TLambdax*(TKappa.conjugate()*(Kappa).transpose()) - 6*
-      traceKappaAdjKappa*(TKappa.conjugate()*(TKappa).transpose()) - 4*
-      traceLambda12AdjLambda12*(TKappa.conjugate()*(TKappa).transpose()) - 4*
-      AbsSqr(Lambdax)*(TKappa.conjugate()*(TKappa).transpose()) + 3*Sqr(gN)*(
-      TKappa.conjugate()*(TKappa).transpose()) - 3*traceKappaAdjKappa*(mDx2*
-      Kappa.conjugate()*(Kappa).transpose()) - 2*traceLambda12AdjLambda12*(mDx2
-      *Kappa.conjugate()*(Kappa).transpose()) - 2*AbsSqr(Lambdax)*(mDx2*
-      Kappa.conjugate()*(Kappa).transpose()) + 1.5*Sqr(gN)*(mDx2*
-      Kappa.conjugate()*(Kappa).transpose()) - 6*traceKappaAdjKappa*(
-      Kappa.conjugate()*mDxbar2*(Kappa).transpose()) - 4*
-      traceLambda12AdjLambda12*(Kappa.conjugate()*mDxbar2*(Kappa).transpose())
-      - 4*AbsSqr(Lambdax)*(Kappa.conjugate()*mDxbar2*(Kappa).transpose()) + 3*
-      Sqr(gN)*(Kappa.conjugate()*mDxbar2*(Kappa).transpose()) - 3*
-      traceKappaAdjKappa*(Kappa.conjugate()*(Kappa).transpose()*mDx2) - 2*
-      traceLambda12AdjLambda12*(Kappa.conjugate()*(Kappa).transpose()*mDx2) - 2
-      *AbsSqr(Lambdax)*(Kappa.conjugate()*(Kappa).transpose()*mDx2) + 1.5*Sqr(
-      gN)*(Kappa.conjugate()*(Kappa).transpose()*mDx2) - 4*ms2*(Kappa.conjugate
-      ()*(Kappa).transpose()*Kappa.conjugate()*(Kappa).transpose()) - 2*(
-      Kappa.conjugate()*(Kappa).transpose()*TKappa.conjugate()*(TKappa)
-      .transpose()) - 2*(Kappa.conjugate()*(TKappa).transpose()*
+   beta_mDx2 = (twoLoop*((-6*traceconjTKappaTpTKappa - 4*
+      traceconjTLambda12TpTLambda12 - 12*ms2*traceKappaAdjKappa - 6*
+      traceKappaAdjKappaconjmDx2 - 6*traceKappaconjmDxbar2AdjKappa - 8*ms2*
+      traceLambda12AdjLambda12 - 4*traceLambda12AdjLambda12conjmH2I2 - 4*
+      tracemH1I2AdjLambda12Lambda12 - 4*mHd2*AbsSqr(Lambdax) - 4*mHu2*AbsSqr(
+      Lambdax) - 8*ms2*AbsSqr(Lambdax) - 4*AbsSqr(TLambdax) + 3*ms2*Sqr(gN) + 6
+      *AbsSqr(MassBp)*Sqr(gN))*(Kappa.conjugate()*(Kappa).transpose()) + (-6*
+      traceconjTKappaTpKappa - 4*traceconjTLambda12TpLambda12 - 4*Conj(TLambdax
+      )*Lambdax - 3*Conj(MassBp)*Sqr(gN))*(Kappa.conjugate()*(TKappa).transpose
+      ()) + (-6*traceAdjKappaTKappa - 4*traceAdjLambda12TLambda12 - 3*MassBp*
+      Sqr(gN) - 4*Conj(Lambdax)*TLambdax)*(TKappa.conjugate()*(Kappa).transpose
+      ()) + (-6*traceKappaAdjKappa - 4*traceLambda12AdjLambda12 - 4*AbsSqr(
+      Lambdax) + 3*Sqr(gN))*(TKappa.conjugate()*(TKappa).transpose()) + (-3*
+      traceKappaAdjKappa - 2*traceLambda12AdjLambda12 - 2*AbsSqr(Lambdax) + 1.5
+      *Sqr(gN))*(mDx2*Kappa.conjugate()*(Kappa).transpose()) + (-6*
+      traceKappaAdjKappa - 4*traceLambda12AdjLambda12 - 4*AbsSqr(Lambdax) + 3*
+      Sqr(gN))*(Kappa.conjugate()*mDxbar2*(Kappa).transpose()) + (-3*
+      traceKappaAdjKappa - 2*traceLambda12AdjLambda12 - 2*AbsSqr(Lambdax) + 1.5
+      *Sqr(gN))*(Kappa.conjugate()*(Kappa).transpose()*mDx2) - 4*ms2*(
+      Kappa.conjugate()*(Kappa).transpose()*Kappa.conjugate()*(Kappa).transpose
+      ()) - 2*(Kappa.conjugate()*(Kappa).transpose()*TKappa.conjugate()*(TKappa
+      ).transpose()) - 2*(Kappa.conjugate()*(TKappa).transpose()*
       TKappa.conjugate()*(Kappa).transpose()) - 2*(TKappa.conjugate()*(Kappa)
       .transpose()*Kappa.conjugate()*(TKappa).transpose()) - 2*(
       TKappa.conjugate()*(TKappa).transpose()*Kappa.conjugate()*(Kappa)
@@ -188,10 +171,9 @@ Eigen::Matrix<double,3,3> E6SSM_soft_parameters::calc_beta_mDx2_two_loop(const S
       UNITMATRIX(3) + 2.1333333333333333*MassBp*Conj(MassG)*Sqr(g3)*Sqr(gN)*
       UNITMATRIX(3) + 0.07111111111111111*Conj(MassB)*Sqr(g1)*(219*MassB*Sqr(g1
       ) + 20*(2*MassB + MassG)*Sqr(g3) - 3*(2*MassB + MassBp)*Sqr(gN))*
-      UNITMATRIX(3) + 0.013333333333333334*Conj(MassBp)*Sqr(gN)*(225*(2*MassBp*
-      (Kappa.conjugate()*(Kappa).transpose()) - Kappa.conjugate()*(TKappa)
-      .transpose()) - 16*((MassB + 2*MassBp)*Sqr(g1) - 2*(5*(2*MassBp + MassG)*
-      Sqr(g3) + 54*MassBp*Sqr(gN)))*UNITMATRIX(3)))).real();
+      UNITMATRIX(3) - 0.21333333333333335*Conj(MassBp)*Sqr(gN)*((MassB + 2*
+      MassBp)*Sqr(g1) - 2*(5*(2*MassBp + MassG)*Sqr(g3) + 54*MassBp*Sqr(gN)))*
+      UNITMATRIX(3))).real();
 
 
    return beta_mDx2;

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:45:14
+// File generated at Sat 27 Aug 2016 11:55:27
 
 #ifndef TMSSM_UTILITIES_H
 #define TMSSM_UTILITIES_H
@@ -87,7 +87,6 @@ public:
 class TMSSM_spectrum_plotter {
 public:
    TMSSM_spectrum_plotter();
-   ~TMSSM_spectrum_plotter() {}
 
    void extract_spectrum(const TMSSM_mass_eigenstates&);
    void write_to_file(const std::string&) const;

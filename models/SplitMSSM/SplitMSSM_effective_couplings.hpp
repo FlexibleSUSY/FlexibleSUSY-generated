@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:38:55
+// File generated at Sat 27 Aug 2016 11:41:34
 
 #ifndef SplitMSSM_EFFECTIVE_COUPLINGS_H
 #define SplitMSSM_EFFECTIVE_COUPLINGS_H
@@ -39,7 +39,6 @@ public:
    SplitMSSM_effective_couplings(const SplitMSSM_mass_eigenstates&,
                                    const softsusy::QedQcd&,
                                    const Physical_input&);
-   ~SplitMSSM_effective_couplings();
 
    void do_run_couplings(bool flag) { rg_improve = flag; }
    bool do_run_couplings() const { return rg_improve; }

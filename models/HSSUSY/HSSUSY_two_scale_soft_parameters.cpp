@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:36:23
+// File generated at Sat 27 Aug 2016 11:43:50
 
 #include "HSSUSY_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -84,6 +84,14 @@ HSSUSY_soft_parameters HSSUSY_soft_parameters::calc_beta() const
    const HSSUSY_susy_parameters susy_betas(HSSUSY_susy_parameters::calc_beta());
 
    return HSSUSY_soft_parameters(susy_betas, beta_mu2, beta_v);
+}
+
+HSSUSY_soft_parameters HSSUSY_soft_parameters::calc_beta(unsigned loops) const
+{
+   HSSUSY_soft_parameters p(*this);
+   p.set_loops(loops);
+
+   return p.calc_beta();
 }
 
 void HSSUSY_soft_parameters::clear()

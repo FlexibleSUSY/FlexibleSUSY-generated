@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:44:48
+// File generated at Sat 27 Aug 2016 11:54:50
 
 #include "TMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -68,11 +68,10 @@ Eigen::Matrix<double,3,3> TMSSM_susy_parameters::calc_beta_Yu_two_loop(const Sus
       traceYdAdjYd - traceYeAdjYe + 4*Sqr(g2)) + 3.022222222222222*Sqr(g1)*Sqr(
       g3) + 8*Sqr(g2)*Sqr(g3) + 0.8*traceYuAdjYu*(Sqr(g1) + 20*Sqr(g3)) - 3.75*
       Sqr(Conj(Lambdax))*Sqr(Lambdax)) + (-3*traceYdAdjYd - traceYeAdjYe - 1.5*
-      AbsSqr(Lambdax) + 0.4*Sqr(g1))*(Yu*Yd.adjoint()*Yd) - 9*traceYuAdjYu*(Yu*
-      Yu.adjoint()*Yu) - 4.5*AbsSqr(Lambdax)*(Yu*Yu.adjoint()*Yu) + 0.4*Sqr(g1)
-      *(Yu*Yu.adjoint()*Yu) + 6*Sqr(g2)*(Yu*Yu.adjoint()*Yu) - 2*(Yu*Yd.adjoint
-      ()*Yd*Yd.adjoint()*Yd) - 2*(Yu*Yd.adjoint()*Yd*Yu.adjoint()*Yu) - 4*(Yu*
-      Yu.adjoint()*Yu*Yu.adjoint()*Yu))).real();
+      AbsSqr(Lambdax) + 0.4*Sqr(g1))*(Yu*Yd.adjoint()*Yd) + (-9*traceYuAdjYu -
+      4.5*AbsSqr(Lambdax) + 0.4*Sqr(g1) + 6*Sqr(g2))*(Yu*Yu.adjoint()*Yu) - 2*(
+      Yu*Yd.adjoint()*Yd*Yd.adjoint()*Yd) - 2*(Yu*Yd.adjoint()*Yd*Yu.adjoint()*
+      Yu) - 4*(Yu*Yu.adjoint()*Yu*Yu.adjoint()*Yu))).real();
 
 
    return beta_Yu;

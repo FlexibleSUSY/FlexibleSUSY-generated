@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:31:02
+// File generated at Sat 27 Aug 2016 11:41:42
 
 #include "THDMIIMSSMBC_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -39,8 +39,8 @@ Eigen::Matrix<double,3,3> THDMIIMSSMBC_susy_parameters::calc_beta_Ye_one_loop(co
 
    Eigen::Matrix<double,3,3> beta_Ye;
 
-   beta_Ye = (0.25*oneOver16PiSqr*(Ye*(12*traceYdAdjYd + 4*traceYeAdjYe -
-      9*(Sqr(g1) + Sqr(g2))) + 6*(Ye*Ye.adjoint()*Ye))).real();
+   beta_Ye = (oneOver16PiSqr*(0.25*Ye*(12*traceYdAdjYd + 4*traceYeAdjYe -
+      9*(Sqr(g1) + Sqr(g2))) + 1.5*(Ye*Ye.adjoint()*Ye))).real();
 
 
    return beta_Ye;
@@ -67,9 +67,9 @@ Eigen::Matrix<double,3,3> THDMIIMSSMBC_susy_parameters::calc_beta_Ye_two_loop(co
       traceYeAdjYeYeAdjYe + 1.35*Sqr(g1)*Sqr(g2) + 1.875*traceYeAdjYe*(Sqr(g1)
       + Sqr(g2)) + 0.625*traceYdAdjYd*(Sqr(g1) + 9*Sqr(g2) + 32*Sqr(g3)) + 6*
       Sqr(Lambda1) + Sqr(Lambda3) + Sqr(Lambda4) + 1.5*Sqr(Lambda5) + 4.5*Sqr(
-      Lambda6) + 1.5*Sqr(Lambda7)) + 0.0375*((-320*Lambda1 - 180*traceYdAdjYd -
-      60*traceYeAdjYe + 129*Sqr(g1) + 225*Sqr(g2))*(Ye*Ye.adjoint()*Ye) + 40*(
-      Ye*Ye.adjoint()*Ye*Ye.adjoint()*Ye)))).real();
+      Lambda6) + 1.5*Sqr(Lambda7)) + 0.0375*(-320*Lambda1 - 180*traceYdAdjYd -
+      60*traceYeAdjYe + 129*Sqr(g1) + 225*Sqr(g2))*(Ye*Ye.adjoint()*Ye) + 1.5*(
+      Ye*Ye.adjoint()*Ye*Ye.adjoint()*Ye))).real();
 
 
    return beta_Ye;

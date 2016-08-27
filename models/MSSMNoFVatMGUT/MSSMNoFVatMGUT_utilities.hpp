@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 12:27:37
+// File generated at Sat 27 Aug 2016 13:33:41
 
 #ifndef MSSMNoFVatMGUT_UTILITIES_H
 #define MSSMNoFVatMGUT_UTILITIES_H
@@ -87,7 +87,6 @@ public:
 class MSSMNoFVatMGUT_spectrum_plotter {
 public:
    MSSMNoFVatMGUT_spectrum_plotter();
-   ~MSSMNoFVatMGUT_spectrum_plotter() {}
 
    void extract_spectrum(const MSSMNoFVatMGUT_mass_eigenstates&);
    void write_to_file(const std::string&) const;

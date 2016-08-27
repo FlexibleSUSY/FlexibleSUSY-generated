@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:44:54
+// File generated at Sat 27 Aug 2016 11:55:02
 
 #include "TMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -125,15 +125,12 @@ Eigen::Matrix<double,3,3> TMSSM_soft_parameters::calc_beta_TYe_two_loop(const So
       Sqr(g3))) + 75*Lambdax*Sqr(Conj(Lambdax))*TLambdax + 15*Conj(Lambdax)*(3*
       traceAdjYuTYu*Lambdax + 4*MassWB*Lambdax*Sqr(g2) + 3*traceYuAdjYu*
       TLambdax - 4*Sqr(g2)*TLambdax)) - 3*(6*traceAdjYdTYd + 2*traceAdjYeTYe +
-      4*MassWB*Sqr(g2) + 3*Conj(Lambdax)*TLambdax)*(Ye*Ye.adjoint()*Ye) - 12*
-      traceYdAdjYd*(Ye*Ye.adjoint()*TYe) - 4*traceYeAdjYe*(Ye*Ye.adjoint()*TYe)
-      - 6*AbsSqr(Lambdax)*(Ye*Ye.adjoint()*TYe) + 1.2*Sqr(g1)*(Ye*Ye.adjoint()
-      *TYe) + 6*Sqr(g2)*(Ye*Ye.adjoint()*TYe) - 15*traceYdAdjYd*(TYe*Ye.adjoint
-      ()*Ye) - 5*traceYeAdjYe*(TYe*Ye.adjoint()*Ye) - 7.5*AbsSqr(Lambdax)*(TYe*
-      Ye.adjoint()*Ye) - 1.2*Sqr(g1)*(TYe*Ye.adjoint()*Ye) + 12*Sqr(g2)*(TYe*
-      Ye.adjoint()*Ye) - 6*(Ye*Ye.adjoint()*Ye*Ye.adjoint()*TYe) - 8*(Ye*
-      Ye.adjoint()*TYe*Ye.adjoint()*Ye) - 6*(TYe*Ye.adjoint()*Ye*Ye.adjoint()*
-      Ye))).real();
+      4*MassWB*Sqr(g2) + 3*Conj(Lambdax)*TLambdax)*(Ye*Ye.adjoint()*Ye) + (-12*
+      traceYdAdjYd - 4*traceYeAdjYe - 6*AbsSqr(Lambdax) + 1.2*Sqr(g1) + 6*Sqr(
+      g2))*(Ye*Ye.adjoint()*TYe) + (-15*traceYdAdjYd - 5*traceYeAdjYe - 7.5*
+      AbsSqr(Lambdax) - 1.2*Sqr(g1) + 12*Sqr(g2))*(TYe*Ye.adjoint()*Ye) - 6*(Ye
+      *Ye.adjoint()*Ye*Ye.adjoint()*TYe) - 8*(Ye*Ye.adjoint()*TYe*Ye.adjoint()*
+      Ye) - 6*(TYe*Ye.adjoint()*Ye*Ye.adjoint()*Ye))).real();
 
 
    return beta_TYe;

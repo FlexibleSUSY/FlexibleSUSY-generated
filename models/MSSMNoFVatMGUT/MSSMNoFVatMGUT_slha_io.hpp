@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 12:27:37
+// File generated at Sat 27 Aug 2016 13:33:41
 
 #ifndef MSSMNoFVatMGUT_SLHA_IO_H
 #define MSSMNoFVatMGUT_SLHA_IO_H
@@ -227,6 +227,8 @@ void MSSMNoFVatMGUT_slha_io::set_model_parameters(const MSSMNoFVatMGUT_slha<T>& 
  * Writes extra SLHA blocks
  *
  * @param model model class
+ * @param scales struct of boundary condition scales
+ * @param observables struct of observables
  */
 template <class T>
 void MSSMNoFVatMGUT_slha_io::set_extra(

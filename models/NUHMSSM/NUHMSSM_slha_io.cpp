@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 12:08:49
+// File generated at Sat 27 Aug 2016 13:06:01
 
 #include "NUHMSSM_slha_io.hpp"
 #include "NUHMSSM_input_parameters.hpp"
@@ -339,6 +339,8 @@ void NUHMSSM_slha_io::fill(NUHMSSM_input_parameters& input) const
 
 /**
  * Reads DR-bar parameters from a SLHA output file.
+ *
+ * @param model model class to be filled
  */
 void NUHMSSM_slha_io::fill_drbar_parameters(NUHMSSM_mass_eigenstates& model) const
 {
@@ -417,6 +419,8 @@ void NUHMSSM_slha_io::fill_drbar_parameters(NUHMSSM_mass_eigenstates& model) con
 /**
  * Reads DR-bar parameters, pole masses and mixing matrices (in
  * Haber-Kane convention) from a SLHA output file.
+ *
+ * @param model model class to be filled
  */
 void NUHMSSM_slha_io::fill(NUHMSSM_mass_eigenstates& model) const
 {
@@ -432,7 +436,7 @@ void NUHMSSM_slha_io::fill(NUHMSSM_mass_eigenstates& model) const
  * Fill struct of extra physical input parameters from SLHA object
  * (FlexibleSUSYInput block)
  *
- * @param settings struct of physical input parameters
+ * @param input struct of physical non-SLHA input parameters
  */
 void NUHMSSM_slha_io::fill(Physical_input& input) const
 {
@@ -443,7 +447,7 @@ void NUHMSSM_slha_io::fill(Physical_input& input) const
  * Fill struct of spectrum generator settings from SLHA object
  * (FlexibleSUSY block)
  *
- * @param settings struct of spectrum generator settings
+ * @param settings struct of spectrum generator settings to be filled
  */
 void NUHMSSM_slha_io::fill(Spectrum_generator_settings& settings) const
 {
@@ -476,7 +480,7 @@ void NUHMSSM_slha_io::fill_extpar_tuple(NUHMSSM_input_parameters& input,
 }
 
 /**
- * Reads pole masses and mixing matrices from a SLHA output file.
+ * Reads pole masses and mixing matrices from a SLHA output file to be filled.
  */
 void NUHMSSM_slha_io::fill_physical(NUHMSSM_physical& physical) const
 {

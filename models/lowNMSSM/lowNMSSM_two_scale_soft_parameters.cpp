@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 11:42:29
+// File generated at Sat 27 Aug 2016 12:38:16
 
 #include "lowNMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -138,6 +138,14 @@ lowNMSSM_soft_parameters lowNMSSM_soft_parameters::calc_beta() const
    const lowNMSSM_susy_parameters susy_betas(lowNMSSM_susy_parameters::calc_beta());
 
    return lowNMSSM_soft_parameters(susy_betas, beta_TYd, beta_TYe, beta_TLambdax, beta_TKappa, beta_TYu, beta_mq2, beta_ml2, beta_mHd2, beta_mHu2, beta_md2, beta_mu2, beta_me2, beta_ms2, beta_MassB, beta_MassWB, beta_MassG);
+}
+
+lowNMSSM_soft_parameters lowNMSSM_soft_parameters::calc_beta(unsigned loops) const
+{
+   lowNMSSM_soft_parameters p(*this);
+   p.set_loops(loops);
+
+   return p.calc_beta();
 }
 
 void lowNMSSM_soft_parameters::clear()

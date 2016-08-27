@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:32:51
+// File generated at Sat 27 Aug 2016 11:44:46
 
 #include "THDMIIMSSMBC_effective_couplings.hpp"
 
@@ -49,10 +49,6 @@ THDMIIMSSMBC_effective_couplings::THDMIIMSSMBC_effective_couplings(
       std::complex<double>,2,1>::Zero()), eff_CpAhVGVG(Eigen::Array<std::complex<
       double>,2,1>::Zero())
 
-{
-}
-
-THDMIIMSSMBC_effective_couplings::~THDMIIMSSMBC_effective_couplings()
 {
 }
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 12:13:52
+// File generated at Sat 27 Aug 2016 13:41:10
 
 #ifndef E6SSM_EFFECTIVE_COUPLINGS_H
 #define E6SSM_EFFECTIVE_COUPLINGS_H
@@ -39,7 +39,6 @@ public:
    E6SSM_effective_couplings(const E6SSM_mass_eigenstates&,
                                    const softsusy::QedQcd&,
                                    const Physical_input&);
-   ~E6SSM_effective_couplings();
 
    void do_run_couplings(bool flag) { rg_improve = flag; }
    bool do_run_couplings() const { return rg_improve; }

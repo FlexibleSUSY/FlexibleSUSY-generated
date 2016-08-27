@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 11:26:37
+// File generated at Sat 27 Aug 2016 12:43:59
 
 #include "E6SSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"

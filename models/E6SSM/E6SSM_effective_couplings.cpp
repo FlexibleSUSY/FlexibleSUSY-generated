@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 12:13:52
+// File generated at Sat 27 Aug 2016 13:41:10
 
 #include "E6SSM_effective_couplings.hpp"
 
@@ -57,10 +57,6 @@ E6SSM_effective_couplings::E6SSM_effective_couplings(
       std::complex<double>,3,1>::Zero()), eff_CpAhVGVG(Eigen::Array<std::complex<
       double>,3,1>::Zero())
 
-{
-}
-
-E6SSM_effective_couplings::~E6SSM_effective_couplings()
 {
 }
 

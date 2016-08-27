@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:37:12
+// File generated at Sat 27 Aug 2016 11:45:10
 
 #include "HSSUSY_physical.hpp"
 #include "slha_io.hpp"

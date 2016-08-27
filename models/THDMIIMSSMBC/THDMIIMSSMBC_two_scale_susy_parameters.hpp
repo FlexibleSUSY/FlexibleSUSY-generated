@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:30:58
+// File generated at Sat 27 Aug 2016 11:41:32
 
 #ifndef THDMIIMSSMBC_TWO_SCALE_susy_parameters_H
 #define THDMIIMSSMBC_TWO_SCALE_susy_parameters_H
@@ -39,7 +39,7 @@ namespace flexiblesusy {
 class THDMIIMSSMBC_susy_parameters : public Beta_function {
 public:
    explicit THDMIIMSSMBC_susy_parameters(const THDMIIMSSMBC_input_parameters& input_ = THDMIIMSSMBC_input_parameters());
-   THDMIIMSSMBC_susy_parameters(double scale_, double loops_, double thresholds_, const THDMIIMSSMBC_input_parameters& input_, double g1_, double g2_, double g3_, double Lambda6_, double Lambda5_,
+   THDMIIMSSMBC_susy_parameters(double scale_, unsigned loops_, unsigned thresholds_, const THDMIIMSSMBC_input_parameters& input_, double g1_, double g2_, double g3_, double Lambda6_, double Lambda5_,
    double Lambda7_, double Lambda1_, double Lambda4_, double Lambda3_, double
    Lambda2_, const Eigen::Matrix<double,3,3>& Yu_, const Eigen::Matrix<double,3
    ,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
@@ -54,6 +54,7 @@ public:
    void set_input_parameters(const THDMIIMSSMBC_input_parameters&);
 
    THDMIIMSSMBC_susy_parameters calc_beta() const;
+   THDMIIMSSMBC_susy_parameters calc_beta(unsigned) const;
    virtual void clear();
 
    void set_g1(double g1_) { g1 = g1_; }

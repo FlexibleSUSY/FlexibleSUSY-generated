@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 11:26:47
+// File generated at Sat 27 Aug 2016 12:44:12
 
 #include "E6SSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -182,6 +182,14 @@ E6SSM_soft_parameters E6SSM_soft_parameters::calc_beta() const
    const E6SSM_susy_parameters susy_betas(E6SSM_susy_parameters::calc_beta());
 
    return E6SSM_soft_parameters(susy_betas, beta_TYd, beta_TYe, beta_TKappa, beta_TLambda12, beta_TLambdax, beta_TYu, beta_BMuPr, beta_mq2, beta_ml2, beta_mHd2, beta_mHu2, beta_md2, beta_mu2, beta_me2, beta_ms2, beta_mH1I2, beta_mH2I2, beta_msI2, beta_mDx2, beta_mDxbar2, beta_mHp2, beta_mHpbar2, beta_MassB, beta_MassWB, beta_MassG, beta_MassBp);
+}
+
+E6SSM_soft_parameters E6SSM_soft_parameters::calc_beta(unsigned loops) const
+{
+   E6SSM_soft_parameters p(*this);
+   p.set_loops(loops);
+
+   return p.calc_beta();
 }
 
 void E6SSM_soft_parameters::clear()

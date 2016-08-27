@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:36:26
+// File generated at Sat 27 Aug 2016 11:43:55
 
 #ifndef HSSUSY_SLHA_IO_H
 #define HSSUSY_SLHA_IO_H
@@ -199,6 +199,8 @@ void HSSUSY_slha_io::set_model_parameters(const HSSUSY_slha<T>& model)
  * Writes extra SLHA blocks
  *
  * @param model model class
+ * @param scales struct of boundary condition scales
+ * @param observables struct of observables
  */
 template <class T>
 void HSSUSY_slha_io::set_extra(

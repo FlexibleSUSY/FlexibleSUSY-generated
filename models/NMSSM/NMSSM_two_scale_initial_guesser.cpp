@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 11:53:53
+// File generated at Sat 27 Aug 2016 12:47:45
 
 #include "NMSSM_two_scale_initial_guesser.hpp"
 #include "NMSSM_two_scale_model.hpp"

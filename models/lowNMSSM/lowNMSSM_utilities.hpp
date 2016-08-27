@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 11:42:55
+// File generated at Sat 27 Aug 2016 12:38:42
 
 #ifndef lowNMSSM_UTILITIES_H
 #define lowNMSSM_UTILITIES_H
@@ -87,7 +87,6 @@ public:
 class lowNMSSM_spectrum_plotter {
 public:
    lowNMSSM_spectrum_plotter();
-   ~lowNMSSM_spectrum_plotter() {}
 
    void extract_spectrum(const lowNMSSM_mass_eigenstates&);
    void write_to_file(const std::string&) const;

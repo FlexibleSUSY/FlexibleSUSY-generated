@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:36:22
+// File generated at Sat 27 Aug 2016 11:43:49
 
 #include "HSSUSY_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -66,15 +66,15 @@ Eigen::Matrix<double,3,3> HSSUSY_susy_parameters::calc_beta_Ye_two_loop(const Su
 
    Eigen::Matrix<double,3,3> beta_Ye;
 
-   beta_Ye = (0.0025*twoLoop*(Ye*(2742*Power(g1,4) - 2300*Power(g2,4) -
+   beta_Ye = (twoLoop*(0.0025*Ye*(2742*Power(g1,4) - 2300*Power(g2,4) -
       2700*traceYdAdjYdYdAdjYd + 600*traceYdAdjYuYuAdjYd - 900*
       traceYeAdjYeYeAdjYe - 2700*traceYuAdjYuYuAdjYu + 850*traceYuAdjYu*Sqr(g1)
       + 2250*traceYuAdjYu*Sqr(g2) + 540*Sqr(g1)*Sqr(g2) + 750*traceYeAdjYe*(
       Sqr(g1) + Sqr(g2)) + 8000*traceYuAdjYu*Sqr(g3) + 250*traceYdAdjYd*(Sqr(g1
-      ) + 9*Sqr(g2) + 32*Sqr(g3)) + 600*Sqr(Lambdax)) + 15*((-180*traceYdAdjYd
-      - 60*traceYeAdjYe - 180*traceYuAdjYu - 160*Lambdax + 129*Sqr(g1) + 225*
-      Sqr(g2))*(Ye*Ye.adjoint()*Ye) + 40*(Ye*Ye.adjoint()*Ye*Ye.adjoint()*Ye)))
-      ).real();
+      ) + 9*Sqr(g2) + 32*Sqr(g3)) + 600*Sqr(Lambdax)) + 0.0375*(-180*
+      traceYdAdjYd - 60*traceYeAdjYe - 180*traceYuAdjYu - 160*Lambdax + 129*Sqr
+      (g1) + 225*Sqr(g2))*(Ye*Ye.adjoint()*Ye) + 1.5*(Ye*Ye.adjoint()*Ye*
+      Ye.adjoint()*Ye))).real();
 
 
    return beta_Ye;

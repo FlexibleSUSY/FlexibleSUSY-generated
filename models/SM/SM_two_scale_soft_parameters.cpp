@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:37:25
+// File generated at Sat 27 Aug 2016 11:45:10
 
 #include "SM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -85,6 +85,14 @@ SM_soft_parameters SM_soft_parameters::calc_beta() const
    const SM_susy_parameters susy_betas(SM_susy_parameters::calc_beta());
 
    return SM_soft_parameters(susy_betas, beta_mu2, beta_v);
+}
+
+SM_soft_parameters SM_soft_parameters::calc_beta(unsigned loops) const
+{
+   SM_soft_parameters p(*this);
+   p.set_loops(loops);
+
+   return p.calc_beta();
 }
 
 void SM_soft_parameters::clear()

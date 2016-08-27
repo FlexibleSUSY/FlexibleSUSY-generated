@@ -1,6 +1,7 @@
 DIR          := models/lowNMSSM
 MODNAME      := lowNMSSM
 SARAH_MODEL  := NMSSM
+WITH_$(MODNAME) := yes
 
 lowNMSSM_INSTALL_DIR := $(INSTALL_DIR)/$(DIR)
 
@@ -193,7 +194,7 @@ clean-$(MODNAME)-src:
 		-rm -f $(lowNMSSM_SLHA_INPUT)
 		-rm -f $(lowNMSSM_GNUPLOT)
 
-clean-$(MODNAME): clean-$(MODNAME)-src
+distclean-$(MODNAME): clean-$(MODNAME)-src
 # END:   NOT EXPORTED ##########################################
 
 clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-lib clean-$(MODNAME)-obj
@@ -201,6 +202,8 @@ clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-lib clean-$(MODNAME)-obj
 
 distclean-$(MODNAME): clean-$(MODNAME)
 		@true
+
+clean-generated:: clean-$(MODNAME)-src
 
 clean-obj::     clean-$(MODNAME)-obj
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 12:26:10
+// File generated at Sat 27 Aug 2016 13:31:49
 
 #include "MSSMNoFVatMGUT_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -146,6 +146,14 @@ MSSMNoFVatMGUT_soft_parameters MSSMNoFVatMGUT_soft_parameters::calc_beta() const
    const MSSMNoFVatMGUT_susy_parameters susy_betas(MSSMNoFVatMGUT_susy_parameters::calc_beta());
 
    return MSSMNoFVatMGUT_soft_parameters(susy_betas, beta_TYd, beta_TYe, beta_TYu, beta_BMu, beta_mq2, beta_ml2, beta_mHd2, beta_mHu2, beta_md2, beta_mu2, beta_me2, beta_MassB, beta_MassWB, beta_MassG);
+}
+
+MSSMNoFVatMGUT_soft_parameters MSSMNoFVatMGUT_soft_parameters::calc_beta(unsigned loops) const
+{
+   MSSMNoFVatMGUT_soft_parameters p(*this);
+   p.set_loops(loops);
+
+   return p.calc_beta();
 }
 
 void MSSMNoFVatMGUT_soft_parameters::clear()

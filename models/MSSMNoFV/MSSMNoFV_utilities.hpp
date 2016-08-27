@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 12:31:18
+// File generated at Sat 27 Aug 2016 13:35:16
 
 #ifndef MSSMNoFV_UTILITIES_H
 #define MSSMNoFV_UTILITIES_H
@@ -87,7 +87,6 @@ public:
 class MSSMNoFV_spectrum_plotter {
 public:
    MSSMNoFV_spectrum_plotter();
-   ~MSSMNoFV_spectrum_plotter() {}
 
    void extract_spectrum(const MSSMNoFV_mass_eigenstates&);
    void write_to_file(const std::string&) const;

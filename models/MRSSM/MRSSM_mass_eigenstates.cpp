@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 11:24:03
+// File generated at Sat 27 Aug 2016 12:41:05
 
 /**
  * @file MRSSM_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Tue 12 Jul 2016 11:24:03 with FlexibleSUSY
- * 1.5.1 (git commit: 8356bacd26e8aecc6635607a32835d534ea3cf01) and SARAH 4.8.6 .
+ * This file was generated at Sat 27 Aug 2016 12:41:05 with FlexibleSUSY
+ * 1.6.0 (git commit: b48da3168d7e9ce639e93a4ea0b216e3468d6dc3) and SARAH 4.9.1 .
  */
 
 #include "MRSSM_mass_eigenstates.hpp"
@@ -41,6 +41,7 @@
 #include "fixed_point_iterator.hpp"
 #include "gsl_utils.hpp"
 #include "config.h"
+#include "parallel.hpp"
 #include "pv.hpp"
 #include "functors.hpp"
 
@@ -49,11 +50,8 @@
 
 #include <cmath>
 #include <iostream>
+#include <memory>
 #include <algorithm>
-
-#ifdef ENABLE_THREADS
-#include <thread>
-#endif
 
 #include <gsl/gsl_multiroots.h>
 
@@ -72,17 +70,8 @@ using namespace MRSSM_info;
 #define HIGGS_2LOOP_CORRECTION_AB_AS     two_loop_corrections.higgs_ab_as
 #define HIGGS_2LOOP_CORRECTION_AT_AT     two_loop_corrections.higgs_at_at
 #define HIGGS_2LOOP_CORRECTION_ATAU_ATAU two_loop_corrections.higgs_atau_atau
-#define TOP_2LOOP_CORRECTION_QCD         two_loop_corrections.top_qcd
+#define TOP_POLE_QCD_CORRECTION          two_loop_corrections.top_qcd
 #define HIGGS_3LOOP_CORRECTION_AT_AS_AS  1
-
-#ifdef ENABLE_THREADS
-   std::mutex CLASSNAME::mtx_fortran;
-   #define LOCK_MUTEX() mtx_fortran.lock()
-   #define UNLOCK_MUTEX() mtx_fortran.unlock()
-#else
-   #define LOCK_MUTEX()
-   #define UNLOCK_MUTEX()
-#endif
 
 CLASSNAME::MRSSM_mass_eigenstates(const MRSSM_input_parameters& input_)
    : MRSSM_soft_parameters(input_)
@@ -97,9 +86,6 @@ CLASSNAME::MRSSM_mass_eigenstates(const MRSSM_input_parameters& input_)
    , physical()
    , problems(MRSSM_info::particle_names)
    , two_loop_corrections()
-#ifdef ENABLE_THREADS
-   , thread_exception()
-#endif
    , MVG(0), MGlu(0), MFv(Eigen::Array<double,3,1>::Zero()), MSRdp(0), MSRum(0)
       , MsigmaO(0), MphiO(0), MSd(Eigen::Array<double,6,1>::Zero()), MSv(
       Eigen::Array<double,3,1>::Zero()), MSu(Eigen::Array<double,6,1>::Zero()),
@@ -253,10 +239,12 @@ Problems<MRSSM_info::NUMBER_OF_PARTICLES>& CLASSNAME::get_problems()
 /**
  * Method which calculates the tadpoles at the current loop order.
  *
- * @param tadpole array of tadpole
+ * @return array of tadpoles
  */
-void CLASSNAME::tadpole_equations(double tadpole[number_of_ewsb_equations]) const
+Eigen::Matrix<double, CLASSNAME::number_of_ewsb_equations, 1> CLASSNAME::tadpole_equations() const
 {
+   Eigen::Matrix<double, number_of_ewsb_equations, 1> tadpole(Eigen::Matrix<double, number_of_ewsb_equations, 1>::Zero());
+
    tadpole[0] = get_ewsb_eq_hh_1();
    tadpole[1] = get_ewsb_eq_hh_2();
    tadpole[2] = get_ewsb_eq_hh_3();
@@ -272,6 +260,19 @@ void CLASSNAME::tadpole_equations(double tadpole[number_of_ewsb_equations]) cons
 
       }
    }
+
+   return tadpole;
+}
+
+/**
+ * Method which calculates the tadpoles at the current loop order.
+ *
+ * @param tadpole array of tadpole
+ */
+void CLASSNAME::tadpole_equations(double tadpole[number_of_ewsb_equations]) const
+{
+   const auto tadpole_(tadpole_equations());
+   std::copy(tadpole_.data(), tadpole_.data() + number_of_ewsb_equations, tadpole);
 }
 
 /**
@@ -305,14 +306,12 @@ int CLASSNAME::tadpole_equations(const gsl_vector* x, void* params, gsl_vector* 
    if (ewsb_loop_order > 0)
       model->calculate_DRbar_masses();
 
-   double tadpole[number_of_ewsb_equations] = { 0. };
-
-   model->tadpole_equations(tadpole);
+   const auto tadpole(model->tadpole_equations());
 
    for (std::size_t i = 0; i < number_of_ewsb_equations; ++i)
       gsl_vector_set(f, i, tadpole[i]);
 
-   return is_finite<number_of_ewsb_equations>(tadpole) ? GSL_SUCCESS : GSL_EDOM;
+   return IsFinite(tadpole) ? GSL_SUCCESS : GSL_EDOM;
 }
 
 /**
@@ -323,28 +322,22 @@ int CLASSNAME::solve_ewsb_iteratively()
 {
    EWSB_args params = {this, ewsb_loop_order};
 
-   EWSB_solver* solvers[] = {
-      new Fixed_point_iterator<number_of_ewsb_equations, fixed_point_iterator::Convergence_tester_relative>(CLASSNAME::ewsb_step, &params, number_of_ewsb_iterations, ewsb_iteration_precision),
-      new Root_finder<number_of_ewsb_equations>(CLASSNAME::tadpole_equations, &params, number_of_ewsb_iterations, ewsb_iteration_precision, gsl_multiroot_fsolver_hybrids),
-      new Root_finder<number_of_ewsb_equations>(CLASSNAME::tadpole_equations, &params, number_of_ewsb_iterations, ewsb_iteration_precision, gsl_multiroot_fsolver_broyden)
+   std::unique_ptr<EWSB_solver> solvers[] = {
+      std::unique_ptr<EWSB_solver>(new Fixed_point_iterator<number_of_ewsb_equations, fixed_point_iterator::Convergence_tester_relative>(CLASSNAME::ewsb_step, &params, number_of_ewsb_iterations, ewsb_iteration_precision)),
+      std::unique_ptr<EWSB_solver>(new Root_finder<number_of_ewsb_equations>(CLASSNAME::tadpole_equations, &params, number_of_ewsb_iterations, ewsb_iteration_precision, gsl_multiroot_fsolver_hybrids)),
+      std::unique_ptr<EWSB_solver>(new Root_finder<number_of_ewsb_equations>(CLASSNAME::tadpole_equations, &params, number_of_ewsb_iterations, ewsb_iteration_precision, gsl_multiroot_fsolver_broyden))
    };
 
    const std::size_t number_of_solvers = sizeof(solvers)/sizeof(*solvers);
-   double x_init[number_of_ewsb_equations] = { 0. };
-   ewsb_initial_guess(x_init);
+   const auto x_init(ewsb_initial_guess());
 
-#ifdef ENABLE_VERBOSE
-   std::cout << "Solving EWSB equations ...\n"
-      "\tInitial guess: x_init =";
-   for (std::size_t i = 0; i < number_of_ewsb_equations; ++i)
-      std::cout << ' ' << x_init[i];
-   std::cout << '\n';
-#endif
+   VERBOSE_MSG("Solving EWSB equations ...");
+   VERBOSE_MSG("\tInitial guess: x_init = " << x_init.transpose());
 
    int status;
    for (std::size_t i = 0; i < number_of_solvers; ++i) {
       VERBOSE_MSG("\tStarting EWSB iteration using solver " << i);
-      status = solve_ewsb_iteratively_with(solvers[i], x_init);
+      status = solve_ewsb_iteratively_with(solvers[i].get(), x_init);
       if (status == EWSB_solver::SUCCESS) {
          VERBOSE_MSG("\tSolver " << i << " finished successfully!");
          break;
@@ -367,8 +360,6 @@ int CLASSNAME::solve_ewsb_iteratively()
 #endif
    }
 
-   std::for_each(solvers, solvers + number_of_solvers, Delete_object());
-
    return status;
 }
 
@@ -382,10 +373,10 @@ int CLASSNAME::solve_ewsb_iteratively()
  */
 int CLASSNAME::solve_ewsb_iteratively_with(
    EWSB_solver* solver,
-   const double x_init[number_of_ewsb_equations]
+   const Eigen::Matrix<double, number_of_ewsb_equations, 1>& x_init
 )
 {
-   const int status = solver->solve(x_init);
+   const int status = solver->solve(&x_init[0]);
 
    mHd2 = solver->get_solution(0);
    mHu2 = solver->get_solution(1);
@@ -541,28 +532,31 @@ int CLASSNAME::solve_ewsb()
    return solve_ewsb_iteratively(ewsb_loop_order);
 }
 
-void CLASSNAME::ewsb_initial_guess(double x_init[number_of_ewsb_equations])
+Eigen::Matrix<double, CLASSNAME::number_of_ewsb_equations, 1> CLASSNAME::ewsb_initial_guess()
 {
+   Eigen::Matrix<double, number_of_ewsb_equations, 1> x_init(Eigen::Matrix<double, number_of_ewsb_equations, 1>::Zero());
+
    x_init[0] = mHd2;
    x_init[1] = mHu2;
    x_init[2] = mS2;
    x_init[3] = mT2;
 
+
+   return x_init;
 }
 
 /**
  * Calculates EWSB output parameters including loop-corrections.
  *
- * @param ewsb_parameters new EWSB output parameters.  \a
- * ewsb_parameters is only modified if all new parameters are finite.
+ * Throws exception of type EEWSBStepFailed if new EWSB parameters are
+ * inf or nan.
  *
- * @return GSL_SUCCESS if new EWSB output parameters are finite,
- * GSL_EDOM otherwise.
+ * @return new set of EWSB output parameters
  */
-int CLASSNAME::ewsb_step(double ewsb_parameters[number_of_ewsb_equations]) const
+Eigen::Matrix<double, CLASSNAME::number_of_ewsb_equations, 1> CLASSNAME::ewsb_step() const
 {
-   int error;
    double tadpole[number_of_ewsb_equations] = { 0. };
+   Eigen::Matrix<double, number_of_ewsb_equations, 1> ewsb_parameters(Eigen::Matrix<double, number_of_ewsb_equations, 1>::Zero());
 
    if (ewsb_loop_order > 0) {
       tadpole[0] += Re(tadpole_hh(0));
@@ -620,18 +614,16 @@ int CLASSNAME::ewsb_step(double ewsb_parameters[number_of_ewsb_equations]) const
       IsFinite(mS2);
 
 
-   if (is_finite) {
-      error = GSL_SUCCESS;
-      ewsb_parameters[0] = mHd2;
-      ewsb_parameters[1] = mHu2;
-      ewsb_parameters[2] = mS2;
-      ewsb_parameters[3] = mT2;
+   if (!is_finite)
+      throw EEWSBStepFailed();
 
-   } else {
-      error = GSL_EDOM;
-   }
+   ewsb_parameters[0] = mHd2;
+   ewsb_parameters[1] = mHu2;
+   ewsb_parameters[2] = mS2;
+   ewsb_parameters[3] = mT2;
 
-   return error;
+
+   return ewsb_parameters;
 }
 
 /**
@@ -669,10 +661,21 @@ int CLASSNAME::ewsb_step(const gsl_vector* x, void* params, gsl_vector* f)
    if (ewsb_loop_order > 0)
       model->calculate_DRbar_masses();
 
-   double ewsb_parameters[number_of_ewsb_equations] =
-      { mHd2, mHu2, mS2, mT2 };
+   Eigen::Matrix<double, number_of_ewsb_equations, 1> ewsb_parameters;
+   ewsb_parameters[0] = mHd2;
+   ewsb_parameters[1] = mHu2;
+   ewsb_parameters[2] = mS2;
+   ewsb_parameters[3] = mT2;
 
-   const int status = model->ewsb_step(ewsb_parameters);
+
+   int status = GSL_SUCCESS;
+
+   try {
+      ewsb_parameters = model->ewsb_step();
+      status = GSL_SUCCESS;
+   } catch (...) {
+      status = GSL_EDOM;
+   }
 
    for (std::size_t i = 0; i < number_of_ewsb_equations; ++i)
       gsl_vector_set(f, i, ewsb_parameters[i]);
@@ -842,64 +845,62 @@ void CLASSNAME::calculate_DRbar_parameters()
 void CLASSNAME::calculate_pole_masses()
 {
 #ifdef ENABLE_THREADS
-   thread_exception = 0;
+   typedef void (CLASSNAME::*Mem_fun_t)();
+   typedef CLASSNAME* Obj_ptr_t;
 
-   std::thread thread_MAh(Thread(this, &CLASSNAME::calculate_MAh_pole));
-   std::thread thread_MCha1(Thread(this, &CLASSNAME::calculate_MCha1_pole));
-   std::thread thread_MCha2(Thread(this, &CLASSNAME::calculate_MCha2_pole));
-   std::thread thread_MChi(Thread(this, &CLASSNAME::calculate_MChi_pole));
-   std::thread thread_MGlu(Thread(this, &CLASSNAME::calculate_MGlu_pole));
-   std::thread thread_Mhh(Thread(this, &CLASSNAME::calculate_Mhh_pole));
-   std::thread thread_MHpm(Thread(this, &CLASSNAME::calculate_MHpm_pole));
-   std::thread thread_MphiO(Thread(this, &CLASSNAME::calculate_MphiO_pole));
-   std::thread thread_MRh(Thread(this, &CLASSNAME::calculate_MRh_pole));
-   std::thread thread_MSd(Thread(this, &CLASSNAME::calculate_MSd_pole));
-   std::thread thread_MSe(Thread(this, &CLASSNAME::calculate_MSe_pole));
-   std::thread thread_MsigmaO(Thread(this, &CLASSNAME::calculate_MsigmaO_pole));
-   std::thread thread_MSRdp(Thread(this, &CLASSNAME::calculate_MSRdp_pole));
-   std::thread thread_MSRum(Thread(this, &CLASSNAME::calculate_MSRum_pole));
-   std::thread thread_MSu(Thread(this, &CLASSNAME::calculate_MSu_pole));
-   std::thread thread_MSv(Thread(this, &CLASSNAME::calculate_MSv_pole));
+   auto fut_MAh = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MAh_pole, this);
+   auto fut_MCha1 = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MCha1_pole, this);
+   auto fut_MCha2 = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MCha2_pole, this);
+   auto fut_MChi = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MChi_pole, this);
+   auto fut_MGlu = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MGlu_pole, this);
+   auto fut_Mhh = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_Mhh_pole, this);
+   auto fut_MHpm = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MHpm_pole, this);
+   auto fut_MphiO = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MphiO_pole, this);
+   auto fut_MRh = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MRh_pole, this);
+   auto fut_MSd = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MSd_pole, this);
+   auto fut_MSe = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MSe_pole, this);
+   auto fut_MsigmaO = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MsigmaO_pole, this);
+   auto fut_MSRdp = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MSRdp_pole, this);
+   auto fut_MSRum = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MSRum_pole, this);
+   auto fut_MSu = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MSu_pole, this);
+   auto fut_MSv = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MSv_pole, this);
 
    if (calculate_sm_pole_masses) {
-      std::thread thread_MVG(Thread(this, &CLASSNAME::calculate_MVG_pole));
-      std::thread thread_MFv(Thread(this, &CLASSNAME::calculate_MFv_pole));
-      std::thread thread_MVP(Thread(this, &CLASSNAME::calculate_MVP_pole));
-      std::thread thread_MVZ(Thread(this, &CLASSNAME::calculate_MVZ_pole));
-      std::thread thread_MFe(Thread(this, &CLASSNAME::calculate_MFe_pole));
-      std::thread thread_MFd(Thread(this, &CLASSNAME::calculate_MFd_pole));
-      std::thread thread_MFu(Thread(this, &CLASSNAME::calculate_MFu_pole));
-      std::thread thread_MVWm(Thread(this, &CLASSNAME::calculate_MVWm_pole));
-      thread_MVG.join();
-      thread_MFv.join();
-      thread_MVP.join();
-      thread_MVZ.join();
-      thread_MFe.join();
-      thread_MFd.join();
-      thread_MFu.join();
-      thread_MVWm.join();
+      auto fut_MVG = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MVG_pole, this);
+      auto fut_MFv = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MFv_pole, this);
+      auto fut_MVP = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MVP_pole, this);
+      auto fut_MVZ = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MVZ_pole, this);
+      auto fut_MFe = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MFe_pole, this);
+      auto fut_MFd = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MFd_pole, this);
+      auto fut_MFu = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MFu_pole, this);
+      auto fut_MVWm = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MVWm_pole, this);
+      fut_MVG.get();
+      fut_MFv.get();
+      fut_MVP.get();
+      fut_MVZ.get();
+      fut_MFe.get();
+      fut_MFd.get();
+      fut_MFu.get();
+      fut_MVWm.get();
    }
 
-   thread_MAh.join();
-   thread_MCha1.join();
-   thread_MCha2.join();
-   thread_MChi.join();
-   thread_MGlu.join();
-   thread_Mhh.join();
-   thread_MHpm.join();
-   thread_MphiO.join();
-   thread_MRh.join();
-   thread_MSd.join();
-   thread_MSe.join();
-   thread_MsigmaO.join();
-   thread_MSRdp.join();
-   thread_MSRum.join();
-   thread_MSu.join();
-   thread_MSv.join();
+   fut_MAh.get();
+   fut_MCha1.get();
+   fut_MCha2.get();
+   fut_MChi.get();
+   fut_MGlu.get();
+   fut_Mhh.get();
+   fut_MHpm.get();
+   fut_MphiO.get();
+   fut_MRh.get();
+   fut_MSd.get();
+   fut_MSe.get();
+   fut_MsigmaO.get();
+   fut_MSRdp.get();
+   fut_MSRum.get();
+   fut_MSu.get();
+   fut_MSv.get();
 
-
-   if (thread_exception != 0)
-      std::rethrow_exception(thread_exception);
 #else
    calculate_MAh_pole();
    calculate_MCha1_pole();
@@ -26360,20 +26361,29 @@ void CLASSNAME::calculate_MFd_pole()
 void CLASSNAME::calculate_MFu_pole()
 {
    // diagonalization with medium precision
-   const bool add_2loop_corrections = pole_mass_loop_order > 1 &&
-      TOP_2LOOP_CORRECTION_QCD;
-   const double currentScale = get_scale();
+   double qcd_1l = 0.;
 
-   const double qcd_1l = -0.008443431970194815*(5. - 3.*Log(Sqr(MFu(2))
-      /Sqr(currentScale)))*Sqr(g3);
+   {
+      const double currentScale = get_scale();
+      qcd_1l = -0.008443431970194815*(5. - 3.*Log(Sqr(MFu(2))/Sqr(
+         currentScale)))*Sqr(g3);
+   }
 
    double qcd_2l = 0.;
 
-   if (add_2loop_corrections) {
+   if (pole_mass_loop_order > 1 && TOP_POLE_QCD_CORRECTION > 0) {
+      const double currentScale = get_scale();
       qcd_2l = -0.005191204615668296*Power(g3,4) -
          0.0032883224409535764*Power(g3,4)*Log(Sqr(currentScale)/Sqr(MFu(2))) -
          0.0008822328500119351*Power(g3,4)*Sqr(Log(Power(currentScale,2)/Sqr(
          MFu(2))));
+   }
+
+   double qcd_3l = 0.;
+
+   if (pole_mass_loop_order > 2 && TOP_POLE_QCD_CORRECTION > 1) {
+      const double currentScale = get_scale();
+      qcd_3l = 0;
    }
 
    Eigen::Matrix<double,3,3> self_energy_1;
@@ -26403,7 +26413,7 @@ void CLASSNAME::calculate_MFu_pole()
       }
       Eigen::Matrix<double,3,3> delta_M(- self_energy_PR * M_tree -
          M_tree * self_energy_PL - self_energy_1);
-      delta_M(2,2) -= M_tree(2,2) * (qcd_1l + qcd_2l);
+      delta_M(2,2) -= M_tree(2,2) * (qcd_1l + qcd_2l + qcd_3l);
       const Eigen::Matrix<double,3,3> M_loop(M_tree + delta_M);
       Eigen::Array<double,3,1> eigen_values;
       decltype(ZUL) mix_ZUL;

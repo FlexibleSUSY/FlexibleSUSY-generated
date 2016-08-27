@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:34:50
+// File generated at Sat 27 Aug 2016 11:47:49
 
 #include "HTHDMIIMSSMBC_effective_couplings.hpp"
 
@@ -49,10 +49,6 @@ HTHDMIIMSSMBC_effective_couplings::HTHDMIIMSSMBC_effective_couplings(
       std::complex<double>,2,1>::Zero()), eff_CpAhVGVG(Eigen::Array<std::complex<
       double>,2,1>::Zero())
 
-{
-}
-
-HTHDMIIMSSMBC_effective_couplings::~HTHDMIIMSSMBC_effective_couplings()
 {
 }
 

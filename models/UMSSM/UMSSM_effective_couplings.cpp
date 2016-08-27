@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 11:36:31
+// File generated at Sat 27 Aug 2016 12:42:49
 
 #include "UMSSM_effective_couplings.hpp"
 
@@ -53,10 +53,6 @@ UMSSM_effective_couplings::UMSSM_effective_couplings(
       std::complex<double>,3,1>::Zero()), eff_CpAhVGVG(Eigen::Array<std::complex<
       double>,3,1>::Zero())
 
-{
-}
-
-UMSSM_effective_couplings::~UMSSM_effective_couplings()
 {
 }
 

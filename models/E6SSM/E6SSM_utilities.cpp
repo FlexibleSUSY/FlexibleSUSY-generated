@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 11:27:37
+// File generated at Sat 27 Aug 2016 12:45:14
 
 #include "E6SSM_utilities.hpp"
 #include "E6SSM_input_parameters.hpp"
@@ -174,6 +174,7 @@ namespace E6SSM_database {
  * @param model mass eigenstates
  * @param qedqcd pointer to low-enregy data. If zero, the low-enregy
  *    data will not be written.
+ * @param physical_input pointer to physical non-SLHA input parameters
  * @param observables pointer to observables struct. If zero, the
  *    observables will not be written.
  */
@@ -249,6 +250,8 @@ void to_database(
  * @param entry entry number (0 = first entry)
  * @param qedqcd pointer to low-energy data.  If zero, the low-energy
  *    data structure will not be filled
+ * @param physical_input pointer to physical non-SLHA input.  If zero,
+ *    the physical_input data structure will not be filled.
  * @param observables pointer to observables.  If zero, the observables
  *    data structure will not be filled
  *

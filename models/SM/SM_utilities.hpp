@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:37:27
+// File generated at Sat 27 Aug 2016 11:45:14
 
 #ifndef SM_UTILITIES_H
 #define SM_UTILITIES_H
@@ -87,7 +87,6 @@ public:
 class SM_spectrum_plotter {
 public:
    SM_spectrum_plotter();
-   ~SM_spectrum_plotter() {}
 
    void extract_spectrum(const SM_mass_eigenstates&);
    void write_to_file(const std::string&) const;

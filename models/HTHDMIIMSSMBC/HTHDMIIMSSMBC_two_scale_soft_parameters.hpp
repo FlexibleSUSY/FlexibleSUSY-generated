@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:32:43
+// File generated at Sat 27 Aug 2016 11:44:39
 
 #ifndef HTHDMIIMSSMBC_TWO_SCALE_soft_parameters_H
 #define HTHDMIIMSSMBC_TWO_SCALE_soft_parameters_H
@@ -45,6 +45,7 @@ public:
    virtual void set(const Eigen::ArrayXd&);
 
    HTHDMIIMSSMBC_soft_parameters calc_beta() const;
+   HTHDMIIMSSMBC_soft_parameters calc_beta(unsigned) const;
    virtual void clear();
 
    void set_Mu(double Mu_) { Mu = Mu_; }

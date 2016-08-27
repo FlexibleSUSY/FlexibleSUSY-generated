@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:37:39
+// File generated at Sat 27 Aug 2016 11:45:35
 
 #include "SM_input_parameters.hpp"
 #include "SM_observables.hpp"
@@ -88,8 +88,8 @@ int main(int argc, char* argv[])
 
    try {
       qedqcd.to(qedqcd.displayPoleMZ()); // run SM fermion masses to MZ
-   } catch (const std::string& s) {
-      ERROR(s);
+   } catch (const Error& e) {
+      ERROR(e.what());
       return EXIT_FAILURE;
    }
 

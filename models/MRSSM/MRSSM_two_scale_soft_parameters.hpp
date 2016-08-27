@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 12 Jul 2016 10:55:41
+// File generated at Sat 27 Aug 2016 12:04:30
 
 #ifndef MRSSM_TWO_SCALE_soft_parameters_H
 #define MRSSM_TWO_SCALE_soft_parameters_H
@@ -49,6 +49,7 @@ public:
    virtual void set(const Eigen::ArrayXd&);
 
    MRSSM_soft_parameters calc_beta() const;
+   MRSSM_soft_parameters calc_beta(unsigned) const;
    virtual void clear();
 
    void set_BMu(double BMu_) { BMu = BMu_; }
