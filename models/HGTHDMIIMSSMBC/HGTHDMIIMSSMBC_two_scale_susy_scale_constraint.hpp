@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 27 Aug 2016 11:51:44
+// File generated at Sun 28 Aug 2016 15:02:53
 
 #ifndef HGTHDMIIMSSMBC_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
 #define HGTHDMIIMSSMBC_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H

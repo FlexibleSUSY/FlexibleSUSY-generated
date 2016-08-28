@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 27 Aug 2016 11:51:36
+// File generated at Sun 28 Aug 2016 15:02:45
 
 #include "HGTHDMIIMSSMBC_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"

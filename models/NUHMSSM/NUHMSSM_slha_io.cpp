@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 27 Aug 2016 13:06:01
+// File generated at Sun 28 Aug 2016 15:22:23
 
 #include "NUHMSSM_slha_io.hpp"
 #include "NUHMSSM_input_parameters.hpp"

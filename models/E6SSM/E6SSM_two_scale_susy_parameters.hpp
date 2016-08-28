@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 27 Aug 2016 12:43:54
+// File generated at Sun 28 Aug 2016 15:09:21
 
 #ifndef E6SSM_TWO_SCALE_susy_parameters_H
 #define E6SSM_TWO_SCALE_susy_parameters_H

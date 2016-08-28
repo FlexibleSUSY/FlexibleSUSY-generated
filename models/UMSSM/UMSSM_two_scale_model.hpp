@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 27 Aug 2016 12:42:43
+// File generated at Sun 28 Aug 2016 15:14:52
 
 /**
  * @file UMSSM_two_scale_model.hpp
@@ -24,8 +24,8 @@
  *        value problem using the two_scale solver by solvingt EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Sat 27 Aug 2016 12:42:43 with FlexibleSUSY
- * 1.6.0 (git commit: b48da3168d7e9ce639e93a4ea0b216e3468d6dc3) and SARAH 4.9.1 .
+ * This file was generated at Sun 28 Aug 2016 15:14:52 with FlexibleSUSY
+ * 1.6.1 (git commit: de78c399bea838d002fe54cbc91eb6f88fa62626) and SARAH 4.9.1 .
  */
 
 #ifndef UMSSM_TWO_SCALE_H
