@@ -31,6 +31,10 @@ SplitMSSM_TARBALL := \
 
 LIBSplitMSSM_SRC :=
 EXESplitMSSM_SRC :=
+LLSplitMSSM_LIB  :=
+LLSplitMSSM_OBJ  :=
+LLSplitMSSM_SRC  :=
+LLSplitMSSM_MMA  :=
 
 LIBSplitMSSM_HDR :=
 
@@ -44,6 +48,8 @@ LIBSplitMSSM_SRC += \
 		$(DIR)/SplitMSSM_slha_io.cpp \
 		$(DIR)/SplitMSSM_physical.cpp \
 		$(DIR)/SplitMSSM_utilities.cpp \
+		$(DIR)/SplitMSSM_standard_model_matching.cpp \
+		$(DIR)/SplitMSSM_standard_model_two_scale_matching.cpp \
 		$(DIR)/SplitMSSM_two_scale_convergence_tester.cpp \
 		$(DIR)/SplitMSSM_two_scale_high_scale_constraint.cpp \
 		$(DIR)/SplitMSSM_two_scale_initial_guesser.cpp \
@@ -73,6 +79,8 @@ LIBSplitMSSM_HDR += \
 		$(DIR)/SplitMSSM_slha_io.hpp \
 		$(DIR)/SplitMSSM_spectrum_generator_interface.hpp \
 		$(DIR)/SplitMSSM_spectrum_generator.hpp \
+		$(DIR)/SplitMSSM_standard_model_matching.hpp \
+		$(DIR)/SplitMSSM_standard_model_two_scale_matching.hpp \
 		$(DIR)/SplitMSSM_susy_scale_constraint.hpp \
 		$(DIR)/SplitMSSM_utilities.hpp \
 		$(DIR)/SplitMSSM_two_scale_convergence_tester.hpp \
@@ -84,6 +92,12 @@ LIBSplitMSSM_HDR += \
 		$(DIR)/SplitMSSM_two_scale_soft_parameters.hpp \
 		$(DIR)/SplitMSSM_two_scale_susy_parameters.hpp \
 		$(DIR)/SplitMSSM_two_scale_susy_scale_constraint.hpp
+LLSplitMSSM_SRC  += \
+		$(DIR)/SplitMSSM_librarylink.cpp
+
+LLSplitMSSM_MMA  += \
+		$(DIR)/SplitMSSM_librarylink.m \
+		$(DIR)/run_SplitMSSM.m
 
 ifneq ($(MAKECMDGOALS),showbuild)
 ifneq ($(MAKECMDGOALS),tag)
@@ -136,7 +150,13 @@ LIBSplitMSSM_DEP := \
 EXESplitMSSM_DEP := \
 		$(EXESplitMSSM_OBJ:.o=.d)
 
-LIBSplitMSSM     := $(DIR)/lib$(MODNAME)$(LIBEXT)
+LLSplitMSSM_DEP  := \
+		$(patsubst %.cpp, %.d, $(filter %.cpp, $(LLSplitMSSM_SRC)))
+
+LLSplitMSSM_OBJ  := $(LLSplitMSSM_SRC:.cpp=.o)
+LLSplitMSSM_LIB  := $(LLSplitMSSM_SRC:.cpp=$(LIBLNK_LIBEXT))
+
+LIBSplitMSSM     := $(DIR)/lib$(MODNAME)$(MODULE_LIBEXT)
 
 METACODE_STAMP_SplitMSSM := $(DIR)/00_DELETE_ME_TO_RERUN_METACODE
 
@@ -159,6 +179,8 @@ install-src::
 		install -m u=rw,g=r,o=r $(LIBSplitMSSM_SRC) $(SplitMSSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LIBSplitMSSM_HDR) $(SplitMSSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(EXESplitMSSM_SRC) $(SplitMSSM_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(LLSplitMSSM_SRC) $(SplitMSSM_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(LLSplitMSSM_MMA) $(SplitMSSM_INSTALL_DIR)
 		$(INSTALL_STRIPPED) $(SplitMSSM_MK) $(SplitMSSM_INSTALL_DIR) -m u=rw,g=r,o=r
 		install -m u=rw,g=r,o=r $(SplitMSSM_TWO_SCALE_MK) $(SplitMSSM_INSTALL_DIR)
 ifneq ($(SplitMSSM_SLHA_INPUT),)
@@ -170,19 +192,24 @@ endif
 clean-$(MODNAME)-dep:
 		-rm -f $(LIBSplitMSSM_DEP)
 		-rm -f $(EXESplitMSSM_DEP)
+		-rm -f $(LLSplitMSSM_DEP)
 
 clean-$(MODNAME)-lib:
 		-rm -f $(LIBSplitMSSM)
+		-rm -f $(LLSplitMSSM_LIB)
 
 clean-$(MODNAME)-obj:
 		-rm -f $(LIBSplitMSSM_OBJ)
 		-rm -f $(EXESplitMSSM_OBJ)
+		-rm -f $(LLSplitMSSM_OBJ)
 
 # BEGIN: NOT EXPORTED ##########################################
 clean-$(MODNAME)-src:
 		-rm -f $(LIBSplitMSSM_SRC)
 		-rm -f $(LIBSplitMSSM_HDR)
 		-rm -f $(EXESplitMSSM_SRC)
+		-rm -f $(LLSplitMSSM_SRC)
+		-rm -f $(LLSplitMSSM_MMA)
 		-rm -f $(METACODE_STAMP_SplitMSSM)
 		-rm -f $(SplitMSSM_TWO_SCALE_MK)
 		-rm -f $(SplitMSSM_SLHA_INPUT)
@@ -212,7 +239,7 @@ pack-$(MODNAME)-src:
 		$(SplitMSSM_MK) $(SplitMSSM_TWO_SCALE_MK) \
 		$(SplitMSSM_SLHA_INPUT) $(SplitMSSM_GNUPLOT)
 
-$(LIBSplitMSSM_SRC) $(LIBSplitMSSM_HDR) $(EXESplitMSSM_SRC) \
+$(LIBSplitMSSM_SRC) $(LIBSplitMSSM_HDR) $(EXESplitMSSM_SRC) $(LLSplitMSSM_SRC) $(LLSplitMSSM_MMA) \
 : run-metacode-$(MODNAME)
 		@true
 
@@ -232,19 +259,33 @@ $(METACODE_STAMP_SplitMSSM):
 		@true
 endif
 
-$(LIBSplitMSSM_DEP) $(EXESplitMSSM_DEP) $(LIBSplitMSSM_OBJ) $(EXESplitMSSM_OBJ): CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS)
+$(LIBSplitMSSM_DEP) $(EXESplitMSSM_DEP) $(LLSplitMSSM_DEP) $(LIBSplitMSSM_OBJ) $(EXESplitMSSM_OBJ) $(LLSplitMSSM_OBJ) $(LLSplitMSSM_LIB): \
+	CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
-$(LIBSplitMSSM_DEP) $(EXESplitMSSM_DEP) $(LIBSplitMSSM_OBJ) $(EXESplitMSSM_OBJ): CPPFLAGS += $(LOOPFUNCFLAGS)
+$(LIBSplitMSSM_DEP) $(EXESplitMSSM_DEP) $(LLSplitMSSM_DEP) $(LIBSplitMSSM_OBJ) $(EXESplitMSSM_OBJ) $(LLSplitMSSM_OBJ) $(LLSplitMSSM_LIB): \
+	CPPFLAGS += $(LOOPFUNCFLAGS)
 endif
 
+$(LLSplitMSSM_OBJ) $(LLSplitMSSM_LIB): \
+	CPPFLAGS += $(shell $(MATH_INC_PATHS) --math-cmd="$(MATH)" -I --librarylink --mathlink)
+
 $(LIBSplitMSSM): $(LIBSplitMSSM_OBJ)
-		$(MAKELIB) $@ $^
+		$(MODULE_MAKE_LIB_CMD) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBSplitMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^ $(ADDONLIBS)) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(LDLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^ $(ADDONLIBS)) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+
+$(LLSplitMSSM_LIB): $(LLSplitMSSM_OBJ) $(LIBSplitMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
+		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBSplitMSSM_DEP) $(EXESplitMSSM_DEP)
 ALLSRC += $(LIBSplitMSSM_SRC) $(EXESplitMSSM_SRC)
 ALLLIB += $(LIBSplitMSSM)
 ALLEXE += $(EXESplitMSSM_EXE)
+
+ifeq ($(ENABLE_LIBRARYLINK),yes)
+ALLDEP += $(LLSplitMSSM_DEP)
+ALLSRC += $(LLSplitMSSM_SRC)
+ALLLL  += $(LLSplitMSSM_LIB)
+endif

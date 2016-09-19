@@ -31,6 +31,10 @@ CMSSMNoFV_TARBALL := \
 
 LIBCMSSMNoFV_SRC :=
 EXECMSSMNoFV_SRC :=
+LLCMSSMNoFV_LIB  :=
+LLCMSSMNoFV_OBJ  :=
+LLCMSSMNoFV_SRC  :=
+LLCMSSMNoFV_MMA  :=
 
 LIBCMSSMNoFV_HDR :=
 
@@ -44,6 +48,8 @@ LIBCMSSMNoFV_SRC += \
 		$(DIR)/CMSSMNoFV_slha_io.cpp \
 		$(DIR)/CMSSMNoFV_physical.cpp \
 		$(DIR)/CMSSMNoFV_utilities.cpp \
+		$(DIR)/CMSSMNoFV_standard_model_matching.cpp \
+		$(DIR)/CMSSMNoFV_standard_model_two_scale_matching.cpp \
 		$(DIR)/CMSSMNoFV_two_scale_convergence_tester.cpp \
 		$(DIR)/CMSSMNoFV_two_scale_high_scale_constraint.cpp \
 		$(DIR)/CMSSMNoFV_two_scale_initial_guesser.cpp \
@@ -73,6 +79,8 @@ LIBCMSSMNoFV_HDR += \
 		$(DIR)/CMSSMNoFV_slha_io.hpp \
 		$(DIR)/CMSSMNoFV_spectrum_generator_interface.hpp \
 		$(DIR)/CMSSMNoFV_spectrum_generator.hpp \
+		$(DIR)/CMSSMNoFV_standard_model_matching.hpp \
+		$(DIR)/CMSSMNoFV_standard_model_two_scale_matching.hpp \
 		$(DIR)/CMSSMNoFV_susy_scale_constraint.hpp \
 		$(DIR)/CMSSMNoFV_utilities.hpp \
 		$(DIR)/CMSSMNoFV_two_scale_convergence_tester.hpp \
@@ -84,6 +92,12 @@ LIBCMSSMNoFV_HDR += \
 		$(DIR)/CMSSMNoFV_two_scale_soft_parameters.hpp \
 		$(DIR)/CMSSMNoFV_two_scale_susy_parameters.hpp \
 		$(DIR)/CMSSMNoFV_two_scale_susy_scale_constraint.hpp
+LLCMSSMNoFV_SRC  += \
+		$(DIR)/CMSSMNoFV_librarylink.cpp
+
+LLCMSSMNoFV_MMA  += \
+		$(DIR)/CMSSMNoFV_librarylink.m \
+		$(DIR)/run_CMSSMNoFV.m
 
 ifneq ($(MAKECMDGOALS),showbuild)
 ifneq ($(MAKECMDGOALS),tag)
@@ -136,7 +150,13 @@ LIBCMSSMNoFV_DEP := \
 EXECMSSMNoFV_DEP := \
 		$(EXECMSSMNoFV_OBJ:.o=.d)
 
-LIBCMSSMNoFV     := $(DIR)/lib$(MODNAME)$(LIBEXT)
+LLCMSSMNoFV_DEP  := \
+		$(patsubst %.cpp, %.d, $(filter %.cpp, $(LLCMSSMNoFV_SRC)))
+
+LLCMSSMNoFV_OBJ  := $(LLCMSSMNoFV_SRC:.cpp=.o)
+LLCMSSMNoFV_LIB  := $(LLCMSSMNoFV_SRC:.cpp=$(LIBLNK_LIBEXT))
+
+LIBCMSSMNoFV     := $(DIR)/lib$(MODNAME)$(MODULE_LIBEXT)
 
 METACODE_STAMP_CMSSMNoFV := $(DIR)/00_DELETE_ME_TO_RERUN_METACODE
 
@@ -159,6 +179,8 @@ install-src::
 		install -m u=rw,g=r,o=r $(LIBCMSSMNoFV_SRC) $(CMSSMNoFV_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LIBCMSSMNoFV_HDR) $(CMSSMNoFV_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(EXECMSSMNoFV_SRC) $(CMSSMNoFV_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(LLCMSSMNoFV_SRC) $(CMSSMNoFV_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(LLCMSSMNoFV_MMA) $(CMSSMNoFV_INSTALL_DIR)
 		$(INSTALL_STRIPPED) $(CMSSMNoFV_MK) $(CMSSMNoFV_INSTALL_DIR) -m u=rw,g=r,o=r
 		install -m u=rw,g=r,o=r $(CMSSMNoFV_TWO_SCALE_MK) $(CMSSMNoFV_INSTALL_DIR)
 ifneq ($(CMSSMNoFV_SLHA_INPUT),)
@@ -170,19 +192,24 @@ endif
 clean-$(MODNAME)-dep:
 		-rm -f $(LIBCMSSMNoFV_DEP)
 		-rm -f $(EXECMSSMNoFV_DEP)
+		-rm -f $(LLCMSSMNoFV_DEP)
 
 clean-$(MODNAME)-lib:
 		-rm -f $(LIBCMSSMNoFV)
+		-rm -f $(LLCMSSMNoFV_LIB)
 
 clean-$(MODNAME)-obj:
 		-rm -f $(LIBCMSSMNoFV_OBJ)
 		-rm -f $(EXECMSSMNoFV_OBJ)
+		-rm -f $(LLCMSSMNoFV_OBJ)
 
 # BEGIN: NOT EXPORTED ##########################################
 clean-$(MODNAME)-src:
 		-rm -f $(LIBCMSSMNoFV_SRC)
 		-rm -f $(LIBCMSSMNoFV_HDR)
 		-rm -f $(EXECMSSMNoFV_SRC)
+		-rm -f $(LLCMSSMNoFV_SRC)
+		-rm -f $(LLCMSSMNoFV_MMA)
 		-rm -f $(METACODE_STAMP_CMSSMNoFV)
 		-rm -f $(CMSSMNoFV_TWO_SCALE_MK)
 		-rm -f $(CMSSMNoFV_SLHA_INPUT)
@@ -212,7 +239,7 @@ pack-$(MODNAME)-src:
 		$(CMSSMNoFV_MK) $(CMSSMNoFV_TWO_SCALE_MK) \
 		$(CMSSMNoFV_SLHA_INPUT) $(CMSSMNoFV_GNUPLOT)
 
-$(LIBCMSSMNoFV_SRC) $(LIBCMSSMNoFV_HDR) $(EXECMSSMNoFV_SRC) \
+$(LIBCMSSMNoFV_SRC) $(LIBCMSSMNoFV_HDR) $(EXECMSSMNoFV_SRC) $(LLCMSSMNoFV_SRC) $(LLCMSSMNoFV_MMA) \
 : run-metacode-$(MODNAME)
 		@true
 
@@ -232,19 +259,33 @@ $(METACODE_STAMP_CMSSMNoFV):
 		@true
 endif
 
-$(LIBCMSSMNoFV_DEP) $(EXECMSSMNoFV_DEP) $(LIBCMSSMNoFV_OBJ) $(EXECMSSMNoFV_OBJ): CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS)
+$(LIBCMSSMNoFV_DEP) $(EXECMSSMNoFV_DEP) $(LLCMSSMNoFV_DEP) $(LIBCMSSMNoFV_OBJ) $(EXECMSSMNoFV_OBJ) $(LLCMSSMNoFV_OBJ) $(LLCMSSMNoFV_LIB): \
+	CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
-$(LIBCMSSMNoFV_DEP) $(EXECMSSMNoFV_DEP) $(LIBCMSSMNoFV_OBJ) $(EXECMSSMNoFV_OBJ): CPPFLAGS += $(LOOPFUNCFLAGS)
+$(LIBCMSSMNoFV_DEP) $(EXECMSSMNoFV_DEP) $(LLCMSSMNoFV_DEP) $(LIBCMSSMNoFV_OBJ) $(EXECMSSMNoFV_OBJ) $(LLCMSSMNoFV_OBJ) $(LLCMSSMNoFV_LIB): \
+	CPPFLAGS += $(LOOPFUNCFLAGS)
 endif
 
+$(LLCMSSMNoFV_OBJ) $(LLCMSSMNoFV_LIB): \
+	CPPFLAGS += $(shell $(MATH_INC_PATHS) --math-cmd="$(MATH)" -I --librarylink --mathlink)
+
 $(LIBCMSSMNoFV): $(LIBCMSSMNoFV_OBJ)
-		$(MAKELIB) $@ $^
+		$(MODULE_MAKE_LIB_CMD) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBCMSSMNoFV) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^ $(ADDONLIBS)) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(LDLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^ $(ADDONLIBS)) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+
+$(LLCMSSMNoFV_LIB): $(LLCMSSMNoFV_OBJ) $(LIBCMSSMNoFV) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
+		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBCMSSMNoFV_DEP) $(EXECMSSMNoFV_DEP)
 ALLSRC += $(LIBCMSSMNoFV_SRC) $(EXECMSSMNoFV_SRC)
 ALLLIB += $(LIBCMSSMNoFV)
 ALLEXE += $(EXECMSSMNoFV_EXE)
+
+ifeq ($(ENABLE_LIBRARYLINK),yes)
+ALLDEP += $(LLCMSSMNoFV_DEP)
+ALLSRC += $(LLCMSSMNoFV_SRC)
+ALLLL  += $(LLCMSSMNoFV_LIB)
+endif

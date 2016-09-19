@@ -31,6 +31,10 @@ E6SSM_TARBALL := \
 
 LIBE6SSM_SRC :=
 EXEE6SSM_SRC :=
+LLE6SSM_LIB  :=
+LLE6SSM_OBJ  :=
+LLE6SSM_SRC  :=
+LLE6SSM_MMA  :=
 
 LIBE6SSM_HDR :=
 
@@ -44,6 +48,8 @@ LIBE6SSM_SRC += \
 		$(DIR)/E6SSM_slha_io.cpp \
 		$(DIR)/E6SSM_physical.cpp \
 		$(DIR)/E6SSM_utilities.cpp \
+		$(DIR)/E6SSM_standard_model_matching.cpp \
+		$(DIR)/E6SSM_standard_model_two_scale_matching.cpp \
 		$(DIR)/E6SSM_two_scale_convergence_tester.cpp \
 		$(DIR)/E6SSM_two_scale_high_scale_constraint.cpp \
 		$(DIR)/E6SSM_two_scale_initial_guesser.cpp \
@@ -73,6 +79,8 @@ LIBE6SSM_HDR += \
 		$(DIR)/E6SSM_slha_io.hpp \
 		$(DIR)/E6SSM_spectrum_generator_interface.hpp \
 		$(DIR)/E6SSM_spectrum_generator.hpp \
+		$(DIR)/E6SSM_standard_model_matching.hpp \
+		$(DIR)/E6SSM_standard_model_two_scale_matching.hpp \
 		$(DIR)/E6SSM_susy_scale_constraint.hpp \
 		$(DIR)/E6SSM_utilities.hpp \
 		$(DIR)/E6SSM_two_scale_convergence_tester.hpp \
@@ -84,6 +92,12 @@ LIBE6SSM_HDR += \
 		$(DIR)/E6SSM_two_scale_soft_parameters.hpp \
 		$(DIR)/E6SSM_two_scale_susy_parameters.hpp \
 		$(DIR)/E6SSM_two_scale_susy_scale_constraint.hpp
+LLE6SSM_SRC  += \
+		$(DIR)/E6SSM_librarylink.cpp
+
+LLE6SSM_MMA  += \
+		$(DIR)/E6SSM_librarylink.m \
+		$(DIR)/run_E6SSM.m
 
 ifneq ($(MAKECMDGOALS),showbuild)
 ifneq ($(MAKECMDGOALS),tag)
@@ -136,7 +150,13 @@ LIBE6SSM_DEP := \
 EXEE6SSM_DEP := \
 		$(EXEE6SSM_OBJ:.o=.d)
 
-LIBE6SSM     := $(DIR)/lib$(MODNAME)$(LIBEXT)
+LLE6SSM_DEP  := \
+		$(patsubst %.cpp, %.d, $(filter %.cpp, $(LLE6SSM_SRC)))
+
+LLE6SSM_OBJ  := $(LLE6SSM_SRC:.cpp=.o)
+LLE6SSM_LIB  := $(LLE6SSM_SRC:.cpp=$(LIBLNK_LIBEXT))
+
+LIBE6SSM     := $(DIR)/lib$(MODNAME)$(MODULE_LIBEXT)
 
 METACODE_STAMP_E6SSM := $(DIR)/00_DELETE_ME_TO_RERUN_METACODE
 
@@ -159,6 +179,8 @@ install-src::
 		install -m u=rw,g=r,o=r $(LIBE6SSM_SRC) $(E6SSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LIBE6SSM_HDR) $(E6SSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(EXEE6SSM_SRC) $(E6SSM_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(LLE6SSM_SRC) $(E6SSM_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(LLE6SSM_MMA) $(E6SSM_INSTALL_DIR)
 		$(INSTALL_STRIPPED) $(E6SSM_MK) $(E6SSM_INSTALL_DIR) -m u=rw,g=r,o=r
 		install -m u=rw,g=r,o=r $(E6SSM_TWO_SCALE_MK) $(E6SSM_INSTALL_DIR)
 ifneq ($(E6SSM_SLHA_INPUT),)
@@ -170,19 +192,24 @@ endif
 clean-$(MODNAME)-dep:
 		-rm -f $(LIBE6SSM_DEP)
 		-rm -f $(EXEE6SSM_DEP)
+		-rm -f $(LLE6SSM_DEP)
 
 clean-$(MODNAME)-lib:
 		-rm -f $(LIBE6SSM)
+		-rm -f $(LLE6SSM_LIB)
 
 clean-$(MODNAME)-obj:
 		-rm -f $(LIBE6SSM_OBJ)
 		-rm -f $(EXEE6SSM_OBJ)
+		-rm -f $(LLE6SSM_OBJ)
 
 # BEGIN: NOT EXPORTED ##########################################
 clean-$(MODNAME)-src:
 		-rm -f $(LIBE6SSM_SRC)
 		-rm -f $(LIBE6SSM_HDR)
 		-rm -f $(EXEE6SSM_SRC)
+		-rm -f $(LLE6SSM_SRC)
+		-rm -f $(LLE6SSM_MMA)
 		-rm -f $(METACODE_STAMP_E6SSM)
 		-rm -f $(E6SSM_TWO_SCALE_MK)
 		-rm -f $(E6SSM_SLHA_INPUT)
@@ -212,7 +239,7 @@ pack-$(MODNAME)-src:
 		$(E6SSM_MK) $(E6SSM_TWO_SCALE_MK) \
 		$(E6SSM_SLHA_INPUT) $(E6SSM_GNUPLOT)
 
-$(LIBE6SSM_SRC) $(LIBE6SSM_HDR) $(EXEE6SSM_SRC) \
+$(LIBE6SSM_SRC) $(LIBE6SSM_HDR) $(EXEE6SSM_SRC) $(LLE6SSM_SRC) $(LLE6SSM_MMA) \
 : run-metacode-$(MODNAME)
 		@true
 
@@ -232,19 +259,33 @@ $(METACODE_STAMP_E6SSM):
 		@true
 endif
 
-$(LIBE6SSM_DEP) $(EXEE6SSM_DEP) $(LIBE6SSM_OBJ) $(EXEE6SSM_OBJ): CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS)
+$(LIBE6SSM_DEP) $(EXEE6SSM_DEP) $(LLE6SSM_DEP) $(LIBE6SSM_OBJ) $(EXEE6SSM_OBJ) $(LLE6SSM_OBJ) $(LLE6SSM_LIB): \
+	CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
-$(LIBE6SSM_DEP) $(EXEE6SSM_DEP) $(LIBE6SSM_OBJ) $(EXEE6SSM_OBJ): CPPFLAGS += $(LOOPFUNCFLAGS)
+$(LIBE6SSM_DEP) $(EXEE6SSM_DEP) $(LLE6SSM_DEP) $(LIBE6SSM_OBJ) $(EXEE6SSM_OBJ) $(LLE6SSM_OBJ) $(LLE6SSM_LIB): \
+	CPPFLAGS += $(LOOPFUNCFLAGS)
 endif
 
+$(LLE6SSM_OBJ) $(LLE6SSM_LIB): \
+	CPPFLAGS += $(shell $(MATH_INC_PATHS) --math-cmd="$(MATH)" -I --librarylink --mathlink)
+
 $(LIBE6SSM): $(LIBE6SSM_OBJ)
-		$(MAKELIB) $@ $^
+		$(MODULE_MAKE_LIB_CMD) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBE6SSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^ $(ADDONLIBS)) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(LDLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^ $(ADDONLIBS)) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+
+$(LLE6SSM_LIB): $(LLE6SSM_OBJ) $(LIBE6SSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
+		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBE6SSM_DEP) $(EXEE6SSM_DEP)
 ALLSRC += $(LIBE6SSM_SRC) $(EXEE6SSM_SRC)
 ALLLIB += $(LIBE6SSM)
 ALLEXE += $(EXEE6SSM_EXE)
+
+ifeq ($(ENABLE_LIBRARYLINK),yes)
+ALLDEP += $(LLE6SSM_DEP)
+ALLSRC += $(LLE6SSM_SRC)
+ALLLL  += $(LLE6SSM_LIB)
+endif

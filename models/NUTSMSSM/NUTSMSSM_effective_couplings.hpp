@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 28 Aug 2016 15:15:44
+// File generated at Mon 19 Sep 2016 10:05:11
 
 #ifndef NUTSMSSM_EFFECTIVE_COUPLINGS_H
 #define NUTSMSSM_EFFECTIVE_COUPLINGS_H

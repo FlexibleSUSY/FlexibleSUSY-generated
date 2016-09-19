@@ -31,6 +31,10 @@ MSSMNoFVatMGUT_TARBALL := \
 
 LIBMSSMNoFVatMGUT_SRC :=
 EXEMSSMNoFVatMGUT_SRC :=
+LLMSSMNoFVatMGUT_LIB  :=
+LLMSSMNoFVatMGUT_OBJ  :=
+LLMSSMNoFVatMGUT_SRC  :=
+LLMSSMNoFVatMGUT_MMA  :=
 
 LIBMSSMNoFVatMGUT_HDR :=
 
@@ -44,6 +48,8 @@ LIBMSSMNoFVatMGUT_SRC += \
 		$(DIR)/MSSMNoFVatMGUT_slha_io.cpp \
 		$(DIR)/MSSMNoFVatMGUT_physical.cpp \
 		$(DIR)/MSSMNoFVatMGUT_utilities.cpp \
+		$(DIR)/MSSMNoFVatMGUT_standard_model_matching.cpp \
+		$(DIR)/MSSMNoFVatMGUT_standard_model_two_scale_matching.cpp \
 		$(DIR)/MSSMNoFVatMGUT_two_scale_convergence_tester.cpp \
 		$(DIR)/MSSMNoFVatMGUT_two_scale_high_scale_constraint.cpp \
 		$(DIR)/MSSMNoFVatMGUT_two_scale_initial_guesser.cpp \
@@ -73,6 +79,8 @@ LIBMSSMNoFVatMGUT_HDR += \
 		$(DIR)/MSSMNoFVatMGUT_slha_io.hpp \
 		$(DIR)/MSSMNoFVatMGUT_spectrum_generator_interface.hpp \
 		$(DIR)/MSSMNoFVatMGUT_spectrum_generator.hpp \
+		$(DIR)/MSSMNoFVatMGUT_standard_model_matching.hpp \
+		$(DIR)/MSSMNoFVatMGUT_standard_model_two_scale_matching.hpp \
 		$(DIR)/MSSMNoFVatMGUT_susy_scale_constraint.hpp \
 		$(DIR)/MSSMNoFVatMGUT_utilities.hpp \
 		$(DIR)/MSSMNoFVatMGUT_two_scale_convergence_tester.hpp \
@@ -84,6 +92,12 @@ LIBMSSMNoFVatMGUT_HDR += \
 		$(DIR)/MSSMNoFVatMGUT_two_scale_soft_parameters.hpp \
 		$(DIR)/MSSMNoFVatMGUT_two_scale_susy_parameters.hpp \
 		$(DIR)/MSSMNoFVatMGUT_two_scale_susy_scale_constraint.hpp
+LLMSSMNoFVatMGUT_SRC  += \
+		$(DIR)/MSSMNoFVatMGUT_librarylink.cpp
+
+LLMSSMNoFVatMGUT_MMA  += \
+		$(DIR)/MSSMNoFVatMGUT_librarylink.m \
+		$(DIR)/run_MSSMNoFVatMGUT.m
 
 ifneq ($(MAKECMDGOALS),showbuild)
 ifneq ($(MAKECMDGOALS),tag)
@@ -136,7 +150,13 @@ LIBMSSMNoFVatMGUT_DEP := \
 EXEMSSMNoFVatMGUT_DEP := \
 		$(EXEMSSMNoFVatMGUT_OBJ:.o=.d)
 
-LIBMSSMNoFVatMGUT     := $(DIR)/lib$(MODNAME)$(LIBEXT)
+LLMSSMNoFVatMGUT_DEP  := \
+		$(patsubst %.cpp, %.d, $(filter %.cpp, $(LLMSSMNoFVatMGUT_SRC)))
+
+LLMSSMNoFVatMGUT_OBJ  := $(LLMSSMNoFVatMGUT_SRC:.cpp=.o)
+LLMSSMNoFVatMGUT_LIB  := $(LLMSSMNoFVatMGUT_SRC:.cpp=$(LIBLNK_LIBEXT))
+
+LIBMSSMNoFVatMGUT     := $(DIR)/lib$(MODNAME)$(MODULE_LIBEXT)
 
 METACODE_STAMP_MSSMNoFVatMGUT := $(DIR)/00_DELETE_ME_TO_RERUN_METACODE
 
@@ -159,6 +179,8 @@ install-src::
 		install -m u=rw,g=r,o=r $(LIBMSSMNoFVatMGUT_SRC) $(MSSMNoFVatMGUT_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LIBMSSMNoFVatMGUT_HDR) $(MSSMNoFVatMGUT_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(EXEMSSMNoFVatMGUT_SRC) $(MSSMNoFVatMGUT_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(LLMSSMNoFVatMGUT_SRC) $(MSSMNoFVatMGUT_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(LLMSSMNoFVatMGUT_MMA) $(MSSMNoFVatMGUT_INSTALL_DIR)
 		$(INSTALL_STRIPPED) $(MSSMNoFVatMGUT_MK) $(MSSMNoFVatMGUT_INSTALL_DIR) -m u=rw,g=r,o=r
 		install -m u=rw,g=r,o=r $(MSSMNoFVatMGUT_TWO_SCALE_MK) $(MSSMNoFVatMGUT_INSTALL_DIR)
 ifneq ($(MSSMNoFVatMGUT_SLHA_INPUT),)
@@ -170,19 +192,24 @@ endif
 clean-$(MODNAME)-dep:
 		-rm -f $(LIBMSSMNoFVatMGUT_DEP)
 		-rm -f $(EXEMSSMNoFVatMGUT_DEP)
+		-rm -f $(LLMSSMNoFVatMGUT_DEP)
 
 clean-$(MODNAME)-lib:
 		-rm -f $(LIBMSSMNoFVatMGUT)
+		-rm -f $(LLMSSMNoFVatMGUT_LIB)
 
 clean-$(MODNAME)-obj:
 		-rm -f $(LIBMSSMNoFVatMGUT_OBJ)
 		-rm -f $(EXEMSSMNoFVatMGUT_OBJ)
+		-rm -f $(LLMSSMNoFVatMGUT_OBJ)
 
 # BEGIN: NOT EXPORTED ##########################################
 clean-$(MODNAME)-src:
 		-rm -f $(LIBMSSMNoFVatMGUT_SRC)
 		-rm -f $(LIBMSSMNoFVatMGUT_HDR)
 		-rm -f $(EXEMSSMNoFVatMGUT_SRC)
+		-rm -f $(LLMSSMNoFVatMGUT_SRC)
+		-rm -f $(LLMSSMNoFVatMGUT_MMA)
 		-rm -f $(METACODE_STAMP_MSSMNoFVatMGUT)
 		-rm -f $(MSSMNoFVatMGUT_TWO_SCALE_MK)
 		-rm -f $(MSSMNoFVatMGUT_SLHA_INPUT)
@@ -212,7 +239,7 @@ pack-$(MODNAME)-src:
 		$(MSSMNoFVatMGUT_MK) $(MSSMNoFVatMGUT_TWO_SCALE_MK) \
 		$(MSSMNoFVatMGUT_SLHA_INPUT) $(MSSMNoFVatMGUT_GNUPLOT)
 
-$(LIBMSSMNoFVatMGUT_SRC) $(LIBMSSMNoFVatMGUT_HDR) $(EXEMSSMNoFVatMGUT_SRC) \
+$(LIBMSSMNoFVatMGUT_SRC) $(LIBMSSMNoFVatMGUT_HDR) $(EXEMSSMNoFVatMGUT_SRC) $(LLMSSMNoFVatMGUT_SRC) $(LLMSSMNoFVatMGUT_MMA) \
 : run-metacode-$(MODNAME)
 		@true
 
@@ -232,19 +259,33 @@ $(METACODE_STAMP_MSSMNoFVatMGUT):
 		@true
 endif
 
-$(LIBMSSMNoFVatMGUT_DEP) $(EXEMSSMNoFVatMGUT_DEP) $(LIBMSSMNoFVatMGUT_OBJ) $(EXEMSSMNoFVatMGUT_OBJ): CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS)
+$(LIBMSSMNoFVatMGUT_DEP) $(EXEMSSMNoFVatMGUT_DEP) $(LLMSSMNoFVatMGUT_DEP) $(LIBMSSMNoFVatMGUT_OBJ) $(EXEMSSMNoFVatMGUT_OBJ) $(LLMSSMNoFVatMGUT_OBJ) $(LLMSSMNoFVatMGUT_LIB): \
+	CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
-$(LIBMSSMNoFVatMGUT_DEP) $(EXEMSSMNoFVatMGUT_DEP) $(LIBMSSMNoFVatMGUT_OBJ) $(EXEMSSMNoFVatMGUT_OBJ): CPPFLAGS += $(LOOPFUNCFLAGS)
+$(LIBMSSMNoFVatMGUT_DEP) $(EXEMSSMNoFVatMGUT_DEP) $(LLMSSMNoFVatMGUT_DEP) $(LIBMSSMNoFVatMGUT_OBJ) $(EXEMSSMNoFVatMGUT_OBJ) $(LLMSSMNoFVatMGUT_OBJ) $(LLMSSMNoFVatMGUT_LIB): \
+	CPPFLAGS += $(LOOPFUNCFLAGS)
 endif
 
+$(LLMSSMNoFVatMGUT_OBJ) $(LLMSSMNoFVatMGUT_LIB): \
+	CPPFLAGS += $(shell $(MATH_INC_PATHS) --math-cmd="$(MATH)" -I --librarylink --mathlink)
+
 $(LIBMSSMNoFVatMGUT): $(LIBMSSMNoFVatMGUT_OBJ)
-		$(MAKELIB) $@ $^
+		$(MODULE_MAKE_LIB_CMD) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBMSSMNoFVatMGUT) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^ $(ADDONLIBS)) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(LDLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^ $(ADDONLIBS)) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+
+$(LLMSSMNoFVatMGUT_LIB): $(LLMSSMNoFVatMGUT_OBJ) $(LIBMSSMNoFVatMGUT) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
+		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBMSSMNoFVatMGUT_DEP) $(EXEMSSMNoFVatMGUT_DEP)
 ALLSRC += $(LIBMSSMNoFVatMGUT_SRC) $(EXEMSSMNoFVatMGUT_SRC)
 ALLLIB += $(LIBMSSMNoFVatMGUT)
 ALLEXE += $(EXEMSSMNoFVatMGUT_EXE)
+
+ifeq ($(ENABLE_LIBRARYLINK),yes)
+ALLDEP += $(LLMSSMNoFVatMGUT_DEP)
+ALLSRC += $(LLMSSMNoFVatMGUT_SRC)
+ALLLL  += $(LLMSSMNoFVatMGUT_LIB)
+endif

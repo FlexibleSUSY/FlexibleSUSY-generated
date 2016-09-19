@@ -31,6 +31,10 @@ UMSSM_TARBALL := \
 
 LIBUMSSM_SRC :=
 EXEUMSSM_SRC :=
+LLUMSSM_LIB  :=
+LLUMSSM_OBJ  :=
+LLUMSSM_SRC  :=
+LLUMSSM_MMA  :=
 
 LIBUMSSM_HDR :=
 
@@ -44,6 +48,8 @@ LIBUMSSM_SRC += \
 		$(DIR)/UMSSM_slha_io.cpp \
 		$(DIR)/UMSSM_physical.cpp \
 		$(DIR)/UMSSM_utilities.cpp \
+		$(DIR)/UMSSM_standard_model_matching.cpp \
+		$(DIR)/UMSSM_standard_model_two_scale_matching.cpp \
 		$(DIR)/UMSSM_two_scale_convergence_tester.cpp \
 		$(DIR)/UMSSM_two_scale_high_scale_constraint.cpp \
 		$(DIR)/UMSSM_two_scale_initial_guesser.cpp \
@@ -73,6 +79,8 @@ LIBUMSSM_HDR += \
 		$(DIR)/UMSSM_slha_io.hpp \
 		$(DIR)/UMSSM_spectrum_generator_interface.hpp \
 		$(DIR)/UMSSM_spectrum_generator.hpp \
+		$(DIR)/UMSSM_standard_model_matching.hpp \
+		$(DIR)/UMSSM_standard_model_two_scale_matching.hpp \
 		$(DIR)/UMSSM_susy_scale_constraint.hpp \
 		$(DIR)/UMSSM_utilities.hpp \
 		$(DIR)/UMSSM_two_scale_convergence_tester.hpp \
@@ -84,6 +92,12 @@ LIBUMSSM_HDR += \
 		$(DIR)/UMSSM_two_scale_soft_parameters.hpp \
 		$(DIR)/UMSSM_two_scale_susy_parameters.hpp \
 		$(DIR)/UMSSM_two_scale_susy_scale_constraint.hpp
+LLUMSSM_SRC  += \
+		$(DIR)/UMSSM_librarylink.cpp
+
+LLUMSSM_MMA  += \
+		$(DIR)/UMSSM_librarylink.m \
+		$(DIR)/run_UMSSM.m
 
 ifneq ($(MAKECMDGOALS),showbuild)
 ifneq ($(MAKECMDGOALS),tag)
@@ -136,7 +150,13 @@ LIBUMSSM_DEP := \
 EXEUMSSM_DEP := \
 		$(EXEUMSSM_OBJ:.o=.d)
 
-LIBUMSSM     := $(DIR)/lib$(MODNAME)$(LIBEXT)
+LLUMSSM_DEP  := \
+		$(patsubst %.cpp, %.d, $(filter %.cpp, $(LLUMSSM_SRC)))
+
+LLUMSSM_OBJ  := $(LLUMSSM_SRC:.cpp=.o)
+LLUMSSM_LIB  := $(LLUMSSM_SRC:.cpp=$(LIBLNK_LIBEXT))
+
+LIBUMSSM     := $(DIR)/lib$(MODNAME)$(MODULE_LIBEXT)
 
 METACODE_STAMP_UMSSM := $(DIR)/00_DELETE_ME_TO_RERUN_METACODE
 
@@ -159,6 +179,8 @@ install-src::
 		install -m u=rw,g=r,o=r $(LIBUMSSM_SRC) $(UMSSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LIBUMSSM_HDR) $(UMSSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(EXEUMSSM_SRC) $(UMSSM_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(LLUMSSM_SRC) $(UMSSM_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(LLUMSSM_MMA) $(UMSSM_INSTALL_DIR)
 		$(INSTALL_STRIPPED) $(UMSSM_MK) $(UMSSM_INSTALL_DIR) -m u=rw,g=r,o=r
 		install -m u=rw,g=r,o=r $(UMSSM_TWO_SCALE_MK) $(UMSSM_INSTALL_DIR)
 ifneq ($(UMSSM_SLHA_INPUT),)
@@ -170,19 +192,24 @@ endif
 clean-$(MODNAME)-dep:
 		-rm -f $(LIBUMSSM_DEP)
 		-rm -f $(EXEUMSSM_DEP)
+		-rm -f $(LLUMSSM_DEP)
 
 clean-$(MODNAME)-lib:
 		-rm -f $(LIBUMSSM)
+		-rm -f $(LLUMSSM_LIB)
 
 clean-$(MODNAME)-obj:
 		-rm -f $(LIBUMSSM_OBJ)
 		-rm -f $(EXEUMSSM_OBJ)
+		-rm -f $(LLUMSSM_OBJ)
 
 # BEGIN: NOT EXPORTED ##########################################
 clean-$(MODNAME)-src:
 		-rm -f $(LIBUMSSM_SRC)
 		-rm -f $(LIBUMSSM_HDR)
 		-rm -f $(EXEUMSSM_SRC)
+		-rm -f $(LLUMSSM_SRC)
+		-rm -f $(LLUMSSM_MMA)
 		-rm -f $(METACODE_STAMP_UMSSM)
 		-rm -f $(UMSSM_TWO_SCALE_MK)
 		-rm -f $(UMSSM_SLHA_INPUT)
@@ -212,7 +239,7 @@ pack-$(MODNAME)-src:
 		$(UMSSM_MK) $(UMSSM_TWO_SCALE_MK) \
 		$(UMSSM_SLHA_INPUT) $(UMSSM_GNUPLOT)
 
-$(LIBUMSSM_SRC) $(LIBUMSSM_HDR) $(EXEUMSSM_SRC) \
+$(LIBUMSSM_SRC) $(LIBUMSSM_HDR) $(EXEUMSSM_SRC) $(LLUMSSM_SRC) $(LLUMSSM_MMA) \
 : run-metacode-$(MODNAME)
 		@true
 
@@ -232,19 +259,33 @@ $(METACODE_STAMP_UMSSM):
 		@true
 endif
 
-$(LIBUMSSM_DEP) $(EXEUMSSM_DEP) $(LIBUMSSM_OBJ) $(EXEUMSSM_OBJ): CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS)
+$(LIBUMSSM_DEP) $(EXEUMSSM_DEP) $(LLUMSSM_DEP) $(LIBUMSSM_OBJ) $(EXEUMSSM_OBJ) $(LLUMSSM_OBJ) $(LLUMSSM_LIB): \
+	CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
-$(LIBUMSSM_DEP) $(EXEUMSSM_DEP) $(LIBUMSSM_OBJ) $(EXEUMSSM_OBJ): CPPFLAGS += $(LOOPFUNCFLAGS)
+$(LIBUMSSM_DEP) $(EXEUMSSM_DEP) $(LLUMSSM_DEP) $(LIBUMSSM_OBJ) $(EXEUMSSM_OBJ) $(LLUMSSM_OBJ) $(LLUMSSM_LIB): \
+	CPPFLAGS += $(LOOPFUNCFLAGS)
 endif
 
+$(LLUMSSM_OBJ) $(LLUMSSM_LIB): \
+	CPPFLAGS += $(shell $(MATH_INC_PATHS) --math-cmd="$(MATH)" -I --librarylink --mathlink)
+
 $(LIBUMSSM): $(LIBUMSSM_OBJ)
-		$(MAKELIB) $@ $^
+		$(MODULE_MAKE_LIB_CMD) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBUMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^ $(ADDONLIBS)) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(LDLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^ $(ADDONLIBS)) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+
+$(LLUMSSM_LIB): $(LLUMSSM_OBJ) $(LIBUMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
+		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBUMSSM_DEP) $(EXEUMSSM_DEP)
 ALLSRC += $(LIBUMSSM_SRC) $(EXEUMSSM_SRC)
 ALLLIB += $(LIBUMSSM)
 ALLEXE += $(EXEUMSSM_EXE)
+
+ifeq ($(ENABLE_LIBRARYLINK),yes)
+ALLDEP += $(LLUMSSM_DEP)
+ALLSRC += $(LLUMSSM_SRC)
+ALLLL  += $(LLUMSSM_LIB)
+endif

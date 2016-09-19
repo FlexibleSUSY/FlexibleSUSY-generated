@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 28 Aug 2016 15:16:32
+// File generated at Mon 19 Sep 2016 10:04:03
 
 #include "NUTNMSSM_slha_io.hpp"
 #include "NUTNMSSM_input_parameters.hpp"

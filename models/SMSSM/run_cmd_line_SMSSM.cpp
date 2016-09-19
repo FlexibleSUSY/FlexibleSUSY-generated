@@ -16,11 +16,11 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 28 Aug 2016 15:11:43
+// File generated at Mon 19 Sep 2016 10:01:14
 
 #include "SMSSM_input_parameters.hpp"
-#include "SMSSM_observables.hpp"
 #include "SMSSM_spectrum_generator.hpp"
+#include "SMSSM_observables.hpp"
 #include "SMSSM_slha_io.hpp"
 
 #include "command_line_options.hpp"

@@ -31,6 +31,10 @@ HSSUSY_TARBALL := \
 
 LIBHSSUSY_SRC :=
 EXEHSSUSY_SRC :=
+LLHSSUSY_LIB  :=
+LLHSSUSY_OBJ  :=
+LLHSSUSY_SRC  :=
+LLHSSUSY_MMA  :=
 
 LIBHSSUSY_HDR :=
 
@@ -44,6 +48,8 @@ LIBHSSUSY_SRC += \
 		$(DIR)/HSSUSY_slha_io.cpp \
 		$(DIR)/HSSUSY_physical.cpp \
 		$(DIR)/HSSUSY_utilities.cpp \
+		$(DIR)/HSSUSY_standard_model_matching.cpp \
+		$(DIR)/HSSUSY_standard_model_two_scale_matching.cpp \
 		$(DIR)/HSSUSY_two_scale_convergence_tester.cpp \
 		$(DIR)/HSSUSY_two_scale_high_scale_constraint.cpp \
 		$(DIR)/HSSUSY_two_scale_initial_guesser.cpp \
@@ -73,6 +79,8 @@ LIBHSSUSY_HDR += \
 		$(DIR)/HSSUSY_slha_io.hpp \
 		$(DIR)/HSSUSY_spectrum_generator_interface.hpp \
 		$(DIR)/HSSUSY_spectrum_generator.hpp \
+		$(DIR)/HSSUSY_standard_model_matching.hpp \
+		$(DIR)/HSSUSY_standard_model_two_scale_matching.hpp \
 		$(DIR)/HSSUSY_susy_scale_constraint.hpp \
 		$(DIR)/HSSUSY_utilities.hpp \
 		$(DIR)/HSSUSY_two_scale_convergence_tester.hpp \
@@ -84,6 +92,12 @@ LIBHSSUSY_HDR += \
 		$(DIR)/HSSUSY_two_scale_soft_parameters.hpp \
 		$(DIR)/HSSUSY_two_scale_susy_parameters.hpp \
 		$(DIR)/HSSUSY_two_scale_susy_scale_constraint.hpp
+LLHSSUSY_SRC  += \
+		$(DIR)/HSSUSY_librarylink.cpp
+
+LLHSSUSY_MMA  += \
+		$(DIR)/HSSUSY_librarylink.m \
+		$(DIR)/run_HSSUSY.m
 
 ifneq ($(MAKECMDGOALS),showbuild)
 ifneq ($(MAKECMDGOALS),tag)
@@ -136,7 +150,13 @@ LIBHSSUSY_DEP := \
 EXEHSSUSY_DEP := \
 		$(EXEHSSUSY_OBJ:.o=.d)
 
-LIBHSSUSY     := $(DIR)/lib$(MODNAME)$(LIBEXT)
+LLHSSUSY_DEP  := \
+		$(patsubst %.cpp, %.d, $(filter %.cpp, $(LLHSSUSY_SRC)))
+
+LLHSSUSY_OBJ  := $(LLHSSUSY_SRC:.cpp=.o)
+LLHSSUSY_LIB  := $(LLHSSUSY_SRC:.cpp=$(LIBLNK_LIBEXT))
+
+LIBHSSUSY     := $(DIR)/lib$(MODNAME)$(MODULE_LIBEXT)
 
 METACODE_STAMP_HSSUSY := $(DIR)/00_DELETE_ME_TO_RERUN_METACODE
 
@@ -159,6 +179,8 @@ install-src::
 		install -m u=rw,g=r,o=r $(LIBHSSUSY_SRC) $(HSSUSY_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LIBHSSUSY_HDR) $(HSSUSY_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(EXEHSSUSY_SRC) $(HSSUSY_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(LLHSSUSY_SRC) $(HSSUSY_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(LLHSSUSY_MMA) $(HSSUSY_INSTALL_DIR)
 		$(INSTALL_STRIPPED) $(HSSUSY_MK) $(HSSUSY_INSTALL_DIR) -m u=rw,g=r,o=r
 		install -m u=rw,g=r,o=r $(HSSUSY_TWO_SCALE_MK) $(HSSUSY_INSTALL_DIR)
 ifneq ($(HSSUSY_SLHA_INPUT),)
@@ -170,19 +192,24 @@ endif
 clean-$(MODNAME)-dep:
 		-rm -f $(LIBHSSUSY_DEP)
 		-rm -f $(EXEHSSUSY_DEP)
+		-rm -f $(LLHSSUSY_DEP)
 
 clean-$(MODNAME)-lib:
 		-rm -f $(LIBHSSUSY)
+		-rm -f $(LLHSSUSY_LIB)
 
 clean-$(MODNAME)-obj:
 		-rm -f $(LIBHSSUSY_OBJ)
 		-rm -f $(EXEHSSUSY_OBJ)
+		-rm -f $(LLHSSUSY_OBJ)
 
 # BEGIN: NOT EXPORTED ##########################################
 clean-$(MODNAME)-src:
 		-rm -f $(LIBHSSUSY_SRC)
 		-rm -f $(LIBHSSUSY_HDR)
 		-rm -f $(EXEHSSUSY_SRC)
+		-rm -f $(LLHSSUSY_SRC)
+		-rm -f $(LLHSSUSY_MMA)
 		-rm -f $(METACODE_STAMP_HSSUSY)
 		-rm -f $(HSSUSY_TWO_SCALE_MK)
 		-rm -f $(HSSUSY_SLHA_INPUT)
@@ -212,7 +239,7 @@ pack-$(MODNAME)-src:
 		$(HSSUSY_MK) $(HSSUSY_TWO_SCALE_MK) \
 		$(HSSUSY_SLHA_INPUT) $(HSSUSY_GNUPLOT)
 
-$(LIBHSSUSY_SRC) $(LIBHSSUSY_HDR) $(EXEHSSUSY_SRC) \
+$(LIBHSSUSY_SRC) $(LIBHSSUSY_HDR) $(EXEHSSUSY_SRC) $(LLHSSUSY_SRC) $(LLHSSUSY_MMA) \
 : run-metacode-$(MODNAME)
 		@true
 
@@ -232,19 +259,33 @@ $(METACODE_STAMP_HSSUSY):
 		@true
 endif
 
-$(LIBHSSUSY_DEP) $(EXEHSSUSY_DEP) $(LIBHSSUSY_OBJ) $(EXEHSSUSY_OBJ): CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS)
+$(LIBHSSUSY_DEP) $(EXEHSSUSY_DEP) $(LLHSSUSY_DEP) $(LIBHSSUSY_OBJ) $(EXEHSSUSY_OBJ) $(LLHSSUSY_OBJ) $(LLHSSUSY_LIB): \
+	CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
-$(LIBHSSUSY_DEP) $(EXEHSSUSY_DEP) $(LIBHSSUSY_OBJ) $(EXEHSSUSY_OBJ): CPPFLAGS += $(LOOPFUNCFLAGS)
+$(LIBHSSUSY_DEP) $(EXEHSSUSY_DEP) $(LLHSSUSY_DEP) $(LIBHSSUSY_OBJ) $(EXEHSSUSY_OBJ) $(LLHSSUSY_OBJ) $(LLHSSUSY_LIB): \
+	CPPFLAGS += $(LOOPFUNCFLAGS)
 endif
 
+$(LLHSSUSY_OBJ) $(LLHSSUSY_LIB): \
+	CPPFLAGS += $(shell $(MATH_INC_PATHS) --math-cmd="$(MATH)" -I --librarylink --mathlink)
+
 $(LIBHSSUSY): $(LIBHSSUSY_OBJ)
-		$(MAKELIB) $@ $^
+		$(MODULE_MAKE_LIB_CMD) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBHSSUSY) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^ $(ADDONLIBS)) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(LDLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^ $(ADDONLIBS)) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+
+$(LLHSSUSY_LIB): $(LLHSSUSY_OBJ) $(LIBHSSUSY) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
+		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBHSSUSY_DEP) $(EXEHSSUSY_DEP)
 ALLSRC += $(LIBHSSUSY_SRC) $(EXEHSSUSY_SRC)
 ALLLIB += $(LIBHSSUSY)
 ALLEXE += $(EXEHSSUSY_EXE)
+
+ifeq ($(ENABLE_LIBRARYLINK),yes)
+ALLDEP += $(LLHSSUSY_DEP)
+ALLSRC += $(LLHSSUSY_SRC)
+ALLLL  += $(LLHSSUSY_LIB)
+endif

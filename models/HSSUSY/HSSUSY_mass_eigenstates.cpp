@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 28 Aug 2016 15:03:34
+// File generated at Mon 19 Sep 2016 09:49:40
 
 /**
  * @file HSSUSY_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Sun 28 Aug 2016 15:03:34 with FlexibleSUSY
- * 1.6.1 (git commit: de78c399bea838d002fe54cbc91eb6f88fa62626) and SARAH 4.9.1 .
+ * This file was generated at Mon 19 Sep 2016 09:49:40 with FlexibleSUSY
+ * 1.7.0 (git commit: 5938cc5e9320fd7a22b1a853dc2285c56e40a49f) and SARAH 4.9.1 .
  */
 
 #include "HSSUSY_mass_eigenstates.hpp"
@@ -4959,14 +4959,48 @@ double CLASSNAME::self_energy_hh_2loop() const
 
 void CLASSNAME::calculate_MVG_pole()
 {
-   // diagonalization with medium precision
-   PHYSICAL(MVG) = 0.;
+   // diagonalization with high precision
+   unsigned iteration = 0;
+   double diff = 0.0;
+   decltype(MVG) old_MVG(MVG), new_MVG(MVG);
+
+   do {
+      PHYSICAL(MVG) = 0.;
+
+      new_MVG = PHYSICAL(MVG);
+      diff = MaxRelDiff(new_MVG, old_MVG);
+      old_MVG = new_MVG;
+      iteration++;
+   } while (diff > precision
+            && iteration < number_of_mass_iterations);
+
+   if (diff > precision)
+      problems.flag_no_pole_mass_convergence(HSSUSY_info::VG);
+   else
+      problems.unflag_no_pole_mass_convergence(HSSUSY_info::VG);
 }
 
 void CLASSNAME::calculate_MFv_pole()
 {
-   // diagonalization with medium precision
-   PHYSICAL(MFv).setConstant(0.);
+   // diagonalization with high precision
+   unsigned iteration = 0;
+   double diff = 0.0;
+   decltype(MFv) old_MFv(MFv), new_MFv(MFv);
+
+   do {
+      PHYSICAL(MFv).setConstant(0.);
+
+      new_MFv = PHYSICAL(MFv);
+      diff = MaxRelDiff(new_MFv, old_MFv);
+      old_MFv = new_MFv;
+      iteration++;
+   } while (diff > precision
+            && iteration < number_of_mass_iterations);
+
+   if (diff > precision)
+      problems.flag_no_pole_mass_convergence(HSSUSY_info::Fv);
+   else
+      problems.unflag_no_pole_mass_convergence(HSSUSY_info::Fv);
 }
 
 void CLASSNAME::calculate_Mhh_pole()
@@ -5004,8 +5038,25 @@ void CLASSNAME::calculate_Mhh_pole()
 
 void CLASSNAME::calculate_MVP_pole()
 {
-   // diagonalization with medium precision
-   PHYSICAL(MVP) = 0.;
+   // diagonalization with high precision
+   unsigned iteration = 0;
+   double diff = 0.0;
+   decltype(MVP) old_MVP(MVP), new_MVP(MVP);
+
+   do {
+      PHYSICAL(MVP) = 0.;
+
+      new_MVP = PHYSICAL(MVP);
+      diff = MaxRelDiff(new_MVP, old_MVP);
+      old_MVP = new_MVP;
+      iteration++;
+   } while (diff > precision
+            && iteration < number_of_mass_iterations);
+
+   if (diff > precision)
+      problems.flag_no_pole_mass_convergence(HSSUSY_info::VP);
+   else
+      problems.unflag_no_pole_mass_convergence(HSSUSY_info::VP);
 }
 
 void CLASSNAME::calculate_MVZ_pole()
@@ -5013,177 +5064,249 @@ void CLASSNAME::calculate_MVZ_pole()
    if (!force_output && problems.is_tachyon(VZ))
       return;
 
-   // diagonalization with medium precision
-   const double M_tree(Sqr(MVZ));
-   const double p = MVZ;
-   const double self_energy = Re(self_energy_VZ(p));
-   const double mass_sqr = M_tree - self_energy;
+   // diagonalization with high precision
+   unsigned iteration = 0;
+   double diff = 0.0;
+   decltype(MVZ) old_MVZ(MVZ), new_MVZ(MVZ);
 
-   if (mass_sqr < 0.)
-      problems.flag_tachyon(VZ);
+   do {
+      const double M_tree(Sqr(MVZ));
+      const double p = old_MVZ;
+      const double self_energy = Re(self_energy_VZ(p));
+      const double mass_sqr = M_tree - self_energy;
 
-   PHYSICAL(MVZ) = AbsSqrt(mass_sqr);
+      if (mass_sqr < 0.)
+         problems.flag_tachyon(VZ);
+
+      PHYSICAL(MVZ) = AbsSqrt(mass_sqr);
+
+      new_MVZ = PHYSICAL(MVZ);
+      diff = MaxRelDiff(new_MVZ, old_MVZ);
+      old_MVZ = new_MVZ;
+      iteration++;
+   } while (diff > precision
+            && iteration < number_of_mass_iterations);
+
+   if (diff > precision)
+      problems.flag_no_pole_mass_convergence(HSSUSY_info::VZ);
+   else
+      problems.unflag_no_pole_mass_convergence(HSSUSY_info::VZ);
 }
 
 void CLASSNAME::calculate_MFd_pole()
 {
-   // diagonalization with medium precision
-   Eigen::Matrix<double,3,3> self_energy_1;
-   Eigen::Matrix<double,3,3> self_energy_PL;
-   Eigen::Matrix<double,3,3> self_energy_PR;
-   const Eigen::Matrix<double,3,3> M_tree(get_mass_matrix_Fd());
-   for (unsigned es = 0; es < 3; ++es) {
-      const double p = Abs(MFd(es));
-      for (unsigned i1 = 0; i1 < 3; ++i1) {
-         for (unsigned i2 = 0; i2 < 3; ++i2) {
-            self_energy_1(i1,i2)  = Re(self_energy_Fd_1(p,i1,i2)
-               );
-            self_energy_PL(i1,i2) = Re(self_energy_Fd_PL(p,i1,i2
-               ));
-            self_energy_PR(i1,i2) = Re(self_energy_Fd_PR(p,i1,i2
-               ));
+   // diagonalization with high precision
+   unsigned iteration = 0;
+   double diff = 0.0;
+   decltype(MFd) old_MFd(MFd), new_MFd(MFd);
+
+   do {
+      Eigen::Matrix<double,3,3> self_energy_1;
+      Eigen::Matrix<double,3,3> self_energy_PL;
+      Eigen::Matrix<double,3,3> self_energy_PR;
+      const Eigen::Matrix<double,3,3> M_tree(get_mass_matrix_Fd());
+      for (unsigned es = 0; es < 3; ++es) {
+         const double p = Abs(old_MFd(es));
+         for (unsigned i1 = 0; i1 < 3; ++i1) {
+            for (unsigned i2 = 0; i2 < 3; ++i2) {
+               self_energy_1(i1,i2)  = Re(self_energy_Fd_1(p,
+                  i1,i2));
+               self_energy_PL(i1,i2) = Re(self_energy_Fd_PL(p
+                  ,i1,i2));
+               self_energy_PR(i1,i2) = Re(self_energy_Fd_PR(p
+                  ,i1,i2));
+            }
          }
+         const Eigen::Matrix<double,3,3> delta_M(- self_energy_PR *
+            M_tree - M_tree * self_energy_PL - self_energy_1);
+         const Eigen::Matrix<double,3,3> M_loop(M_tree + delta_M);
+         Eigen::Array<double,3,1> eigen_values;
+         decltype(Vd) mix_Vd;
+         decltype(Ud) mix_Ud;
+      #ifdef CHECK_EIGENVALUE_ERROR
+         double eigenvalue_error;
+         fs_svd(M_loop, eigen_values, mix_Vd, mix_Ud,
+            eigenvalue_error);
+         problems.flag_bad_mass(HSSUSY_info::Fd, eigenvalue_error >
+            precision * Abs(eigen_values(0)));
+      #else
+         fs_svd(M_loop, eigen_values, mix_Vd, mix_Ud);
+      #endif
+         if (es == 0) {
+            PHYSICAL(Vd) = mix_Vd;
+            PHYSICAL(Ud) = mix_Ud;
+         }
+         PHYSICAL(MFd(es)) = Abs(eigen_values(es));
       }
-      const Eigen::Matrix<double,3,3> delta_M(- self_energy_PR *
-         M_tree - M_tree * self_energy_PL - self_energy_1);
-      const Eigen::Matrix<double,3,3> M_loop(M_tree + delta_M);
-      Eigen::Array<double,3,1> eigen_values;
-      decltype(Vd) mix_Vd;
-      decltype(Ud) mix_Ud;
-   #ifdef CHECK_EIGENVALUE_ERROR
-      double eigenvalue_error;
-      fs_svd(M_loop, eigen_values, mix_Vd, mix_Ud, eigenvalue_error);
-      problems.flag_bad_mass(HSSUSY_info::Fd, eigenvalue_error >
-         precision * Abs(eigen_values(0)));
-   #else
-      fs_svd(M_loop, eigen_values, mix_Vd, mix_Ud);
-   #endif
-      if (es == 0) {
-         PHYSICAL(Vd) = mix_Vd;
-         PHYSICAL(Ud) = mix_Ud;
-      }
-      PHYSICAL(MFd(es)) = Abs(eigen_values(es));
-   }
+
+      new_MFd = PHYSICAL(MFd);
+      diff = MaxRelDiff(new_MFd, old_MFd);
+      old_MFd = new_MFd;
+      iteration++;
+   } while (diff > precision
+            && iteration < number_of_mass_iterations);
+
+   if (diff > precision)
+      problems.flag_no_pole_mass_convergence(HSSUSY_info::Fd);
+   else
+      problems.unflag_no_pole_mass_convergence(HSSUSY_info::Fd);
 }
 
 void CLASSNAME::calculate_MFu_pole()
 {
-   // diagonalization with medium precision
-   double qcd_1l = 0.;
+   // diagonalization with high precision
+   unsigned iteration = 0;
+   double diff = 0.0;
+   decltype(MFu) old_MFu(MFu), new_MFu(MFu);
 
-   {
-      const double currentScale = get_scale();
-      qcd_1l = -0.008443431970194815*(4. - 3.*Log(Sqr(MFu(2))/Sqr(
-         currentScale)))*Sqr(g3);
-   }
+   do {
+      double qcd_1l = 0.;
 
-   double qcd_2l = 0.;
+      {
+         const double currentScale = get_scale();
+         qcd_1l = -0.008443431970194815*(4. - 3.*Log(Sqr(MFu(2))
+            /Sqr(currentScale)))*Sqr(g3);
+      }
 
-   if (pole_mass_loop_order > 1 && TOP_POLE_QCD_CORRECTION > 0) {
-      const double currentScale = get_scale();
-      qcd_2l = -0.006995771808874528*Power(g3,4) -
-         0.004518101565212638*Power(g3,4)*Log(Sqr(currentScale)/Sqr(MFu(2))) -
-         0.0008822328500119351*Power(g3,4)*Sqr(Log(Power(currentScale,2)/Sqr(
-         MFu(2))));
-   }
+      double qcd_2l = 0.;
 
-   double qcd_3l = 0.;
+      if (pole_mass_loop_order > 1 && TOP_POLE_QCD_CORRECTION > 0) {
+         const double currentScale = get_scale();
+         qcd_2l = -0.006995771808874528*Power(g3,4) -
+            0.004518101565212638*Power(g3,4)*Log(Sqr(currentScale)/Sqr(MFu(2)))
+            - 0.0008822328500119351*Power(g3,4)*Sqr(Log(Power(currentScale,2)
+            /Sqr(MFu(2))));
+      }
 
-   if (pole_mass_loop_order > 2 && TOP_POLE_QCD_CORRECTION > 1) {
-      const double currentScale = get_scale();
-      qcd_3l = Power(g3,6)*(-0.0017408026847411467 -
-         0.000984413176263005*Log(Sqr(currentScale)/Sqr(MFu(2))) -
-         0.00003352082872926087*Power(Log(Sqr(currentScale)/Sqr(MFu(2))),3) -
-         0.00029813221915266867*Sqr(Log(Power(currentScale,2)/Sqr(MFu(2)))));
-   }
+      double qcd_3l = 0.;
 
-   Eigen::Matrix<double,3,3> self_energy_1;
-   Eigen::Matrix<double,3,3> self_energy_PL;
-   Eigen::Matrix<double,3,3> self_energy_PR;
-   const Eigen::Matrix<double,3,3> M_tree(get_mass_matrix_Fu());
-   for (unsigned es = 0; es < 3; ++es) {
-      const double p = Abs(MFu(es));
-      for (unsigned i1 = 0; i1 < 3; ++i1) {
-         for (unsigned i2 = 0; i2 < 3; ++i2) {
-            if (i1 == 2 && i2 == 2) {
-               self_energy_1(i1,i2)  = Re(
-                  self_energy_Fu_1_heavy(p,i1,i2));
-               self_energy_PL(i1,i2) = Re(
-                  self_energy_Fu_PL_heavy(p,i1,i2));
-               self_energy_PR(i1,i2) = Re(
-                  self_energy_Fu_PR_heavy(p,i1,i2));
-            } else {
-               self_energy_1(i1,i2)  = Re(self_energy_Fu_1(p,
-                  i1,i2));
-               self_energy_PL(i1,i2) = Re(self_energy_Fu_PL(p
-                  ,i1,i2));
-               self_energy_PR(i1,i2) = Re(self_energy_Fu_PR(p
-                  ,i1,i2));
+      if (pole_mass_loop_order > 2 && TOP_POLE_QCD_CORRECTION > 1) {
+         const double currentScale = get_scale();
+         qcd_3l = Power(g3,6)*(-0.0017408026847411467 -
+            0.000984413176263005*Log(Sqr(currentScale)/Sqr(MFu(2))) -
+            0.00003352082872926087*Power(Log(Sqr(currentScale)/Sqr(MFu(2))),3)
+            - 0.00029813221915266867*Sqr(Log(Power(currentScale,2)/Sqr(MFu(2)))
+            ));
+      }
+
+      Eigen::Matrix<double,3,3> self_energy_1;
+      Eigen::Matrix<double,3,3> self_energy_PL;
+      Eigen::Matrix<double,3,3> self_energy_PR;
+      const Eigen::Matrix<double,3,3> M_tree(get_mass_matrix_Fu());
+      for (unsigned es = 0; es < 3; ++es) {
+         const double p = Abs(old_MFu(es));
+         for (unsigned i1 = 0; i1 < 3; ++i1) {
+            for (unsigned i2 = 0; i2 < 3; ++i2) {
+               if (i1 == 2 && i2 == 2) {
+                  self_energy_1(i1,i2)  = Re(
+                     self_energy_Fu_1_heavy(p,i1,i2));
+                  self_energy_PL(i1,i2) = Re(
+                     self_energy_Fu_PL_heavy(p,i1,i2));
+                  self_energy_PR(i1,i2) = Re(
+                     self_energy_Fu_PR_heavy(p,i1,i2));
+               } else {
+                  self_energy_1(i1,i2)  = Re(
+                     self_energy_Fu_1(p,i1,i2));
+                  self_energy_PL(i1,i2) = Re(
+                     self_energy_Fu_PL(p,i1,i2));
+                  self_energy_PR(i1,i2) = Re(
+                     self_energy_Fu_PR(p,i1,i2));
+               }
             }
          }
+         Eigen::Matrix<double,3,3> delta_M(- self_energy_PR *
+            M_tree - M_tree * self_energy_PL - self_energy_1);
+         delta_M(2,2) -= M_tree(2,2) * (qcd_1l + qcd_2l + qcd_3l);
+         const Eigen::Matrix<double,3,3> M_loop(M_tree + delta_M);
+         Eigen::Array<double,3,1> eigen_values;
+         decltype(Vu) mix_Vu;
+         decltype(Uu) mix_Uu;
+      #ifdef CHECK_EIGENVALUE_ERROR
+         double eigenvalue_error;
+         fs_svd(M_loop, eigen_values, mix_Vu, mix_Uu,
+            eigenvalue_error);
+         problems.flag_bad_mass(HSSUSY_info::Fu, eigenvalue_error >
+            precision * Abs(eigen_values(0)));
+      #else
+         fs_svd(M_loop, eigen_values, mix_Vu, mix_Uu);
+      #endif
+         if (es == 0) {
+            PHYSICAL(Vu) = mix_Vu;
+            PHYSICAL(Uu) = mix_Uu;
+         }
+         PHYSICAL(MFu(es)) = Abs(eigen_values(es));
       }
-      Eigen::Matrix<double,3,3> delta_M(- self_energy_PR * M_tree -
-         M_tree * self_energy_PL - self_energy_1);
-      delta_M(2,2) -= M_tree(2,2) * (qcd_1l + qcd_2l + qcd_3l);
-      const Eigen::Matrix<double,3,3> M_loop(M_tree + delta_M);
-      Eigen::Array<double,3,1> eigen_values;
-      decltype(Vu) mix_Vu;
-      decltype(Uu) mix_Uu;
-   #ifdef CHECK_EIGENVALUE_ERROR
-      double eigenvalue_error;
-      fs_svd(M_loop, eigen_values, mix_Vu, mix_Uu, eigenvalue_error);
-      problems.flag_bad_mass(HSSUSY_info::Fu, eigenvalue_error >
-         precision * Abs(eigen_values(0)));
-   #else
-      fs_svd(M_loop, eigen_values, mix_Vu, mix_Uu);
-   #endif
-      if (es == 0) {
-         PHYSICAL(Vu) = mix_Vu;
-         PHYSICAL(Uu) = mix_Uu;
-      }
-      PHYSICAL(MFu(es)) = Abs(eigen_values(es));
-   }
+
+      new_MFu = PHYSICAL(MFu);
+      diff = MaxRelDiff(new_MFu, old_MFu);
+      old_MFu = new_MFu;
+      iteration++;
+   } while (diff > precision
+            && iteration < number_of_mass_iterations);
+
+   if (diff > precision)
+      problems.flag_no_pole_mass_convergence(HSSUSY_info::Fu);
+   else
+      problems.unflag_no_pole_mass_convergence(HSSUSY_info::Fu);
 }
 
 void CLASSNAME::calculate_MFe_pole()
 {
-   // diagonalization with medium precision
-   Eigen::Matrix<double,3,3> self_energy_1;
-   Eigen::Matrix<double,3,3> self_energy_PL;
-   Eigen::Matrix<double,3,3> self_energy_PR;
-   const Eigen::Matrix<double,3,3> M_tree(get_mass_matrix_Fe());
-   for (unsigned es = 0; es < 3; ++es) {
-      const double p = Abs(MFe(es));
-      for (unsigned i1 = 0; i1 < 3; ++i1) {
-         for (unsigned i2 = 0; i2 < 3; ++i2) {
-            self_energy_1(i1,i2)  = Re(self_energy_Fe_1(p,i1,i2)
-               );
-            self_energy_PL(i1,i2) = Re(self_energy_Fe_PL(p,i1,i2
-               ));
-            self_energy_PR(i1,i2) = Re(self_energy_Fe_PR(p,i1,i2
-               ));
+   // diagonalization with high precision
+   unsigned iteration = 0;
+   double diff = 0.0;
+   decltype(MFe) old_MFe(MFe), new_MFe(MFe);
+
+   do {
+      Eigen::Matrix<double,3,3> self_energy_1;
+      Eigen::Matrix<double,3,3> self_energy_PL;
+      Eigen::Matrix<double,3,3> self_energy_PR;
+      const Eigen::Matrix<double,3,3> M_tree(get_mass_matrix_Fe());
+      for (unsigned es = 0; es < 3; ++es) {
+         const double p = Abs(old_MFe(es));
+         for (unsigned i1 = 0; i1 < 3; ++i1) {
+            for (unsigned i2 = 0; i2 < 3; ++i2) {
+               self_energy_1(i1,i2)  = Re(self_energy_Fe_1(p,
+                  i1,i2));
+               self_energy_PL(i1,i2) = Re(self_energy_Fe_PL(p
+                  ,i1,i2));
+               self_energy_PR(i1,i2) = Re(self_energy_Fe_PR(p
+                  ,i1,i2));
+            }
          }
+         const Eigen::Matrix<double,3,3> delta_M(- self_energy_PR *
+            M_tree - M_tree * self_energy_PL - self_energy_1);
+         const Eigen::Matrix<double,3,3> M_loop(M_tree + delta_M);
+         Eigen::Array<double,3,1> eigen_values;
+         decltype(Ve) mix_Ve;
+         decltype(Ue) mix_Ue;
+      #ifdef CHECK_EIGENVALUE_ERROR
+         double eigenvalue_error;
+         fs_svd(M_loop, eigen_values, mix_Ve, mix_Ue,
+            eigenvalue_error);
+         problems.flag_bad_mass(HSSUSY_info::Fe, eigenvalue_error >
+            precision * Abs(eigen_values(0)));
+      #else
+         fs_svd(M_loop, eigen_values, mix_Ve, mix_Ue);
+      #endif
+         if (es == 0) {
+            PHYSICAL(Ve) = mix_Ve;
+            PHYSICAL(Ue) = mix_Ue;
+         }
+         PHYSICAL(MFe(es)) = Abs(eigen_values(es));
       }
-      const Eigen::Matrix<double,3,3> delta_M(- self_energy_PR *
-         M_tree - M_tree * self_energy_PL - self_energy_1);
-      const Eigen::Matrix<double,3,3> M_loop(M_tree + delta_M);
-      Eigen::Array<double,3,1> eigen_values;
-      decltype(Ve) mix_Ve;
-      decltype(Ue) mix_Ue;
-   #ifdef CHECK_EIGENVALUE_ERROR
-      double eigenvalue_error;
-      fs_svd(M_loop, eigen_values, mix_Ve, mix_Ue, eigenvalue_error);
-      problems.flag_bad_mass(HSSUSY_info::Fe, eigenvalue_error >
-         precision * Abs(eigen_values(0)));
-   #else
-      fs_svd(M_loop, eigen_values, mix_Ve, mix_Ue);
-   #endif
-      if (es == 0) {
-         PHYSICAL(Ve) = mix_Ve;
-         PHYSICAL(Ue) = mix_Ue;
-      }
-      PHYSICAL(MFe(es)) = Abs(eigen_values(es));
-   }
+
+      new_MFe = PHYSICAL(MFe);
+      diff = MaxRelDiff(new_MFe, old_MFe);
+      old_MFe = new_MFe;
+      iteration++;
+   } while (diff > precision
+            && iteration < number_of_mass_iterations);
+
+   if (diff > precision)
+      problems.flag_no_pole_mass_convergence(HSSUSY_info::Fe);
+   else
+      problems.unflag_no_pole_mass_convergence(HSSUSY_info::Fe);
 }
 
 void CLASSNAME::calculate_MVWp_pole()
@@ -5191,16 +5314,33 @@ void CLASSNAME::calculate_MVWp_pole()
    if (!force_output && problems.is_tachyon(VWp))
       return;
 
-   // diagonalization with medium precision
-   const double M_tree(Sqr(MVWp));
-   const double p = MVWp;
-   const double self_energy = Re(self_energy_VWp(p));
-   const double mass_sqr = M_tree - self_energy;
+   // diagonalization with high precision
+   unsigned iteration = 0;
+   double diff = 0.0;
+   decltype(MVWp) old_MVWp(MVWp), new_MVWp(MVWp);
 
-   if (mass_sqr < 0.)
-      problems.flag_tachyon(VWp);
+   do {
+      const double M_tree(Sqr(MVWp));
+      const double p = old_MVWp;
+      const double self_energy = Re(self_energy_VWp(p));
+      const double mass_sqr = M_tree - self_energy;
 
-   PHYSICAL(MVWp) = AbsSqrt(mass_sqr);
+      if (mass_sqr < 0.)
+         problems.flag_tachyon(VWp);
+
+      PHYSICAL(MVWp) = AbsSqrt(mass_sqr);
+
+      new_MVWp = PHYSICAL(MVWp);
+      diff = MaxRelDiff(new_MVWp, old_MVWp);
+      old_MVWp = new_MVWp;
+      iteration++;
+   } while (diff > precision
+            && iteration < number_of_mass_iterations);
+
+   if (diff > precision)
+      problems.flag_no_pole_mass_convergence(HSSUSY_info::VWp);
+   else
+      problems.unflag_no_pole_mass_convergence(HSSUSY_info::VWp);
 }
 
 double CLASSNAME::calculate_MVWp_pole(double p)

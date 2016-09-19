@@ -36,6 +36,10 @@ NUTNMSSM_TARBALL := \
 
 LIBNUTNMSSM_SRC :=
 EXENUTNMSSM_SRC :=
+LLNUTNMSSM_LIB  :=
+LLNUTNMSSM_OBJ  :=
+LLNUTNMSSM_SRC  :=
+LLNUTNMSSM_MMA  :=
 
 LIBNUTNMSSM_HDR :=
 
@@ -49,6 +53,8 @@ LIBNUTNMSSM_SRC += \
 		$(DIR)/NUTNMSSM_slha_io.cpp \
 		$(DIR)/NUTNMSSM_physical.cpp \
 		$(DIR)/NUTNMSSM_utilities.cpp \
+		$(DIR)/NUTNMSSM_standard_model_matching.cpp \
+		$(DIR)/NUTNMSSM_standard_model_two_scale_matching.cpp \
 		$(DIR)/NUTNMSSM_two_scale_convergence_tester.cpp \
 		$(DIR)/NUTNMSSM_two_scale_high_scale_constraint.cpp \
 		$(DIR)/NUTNMSSM_two_scale_initial_guesser.cpp \
@@ -78,6 +84,8 @@ LIBNUTNMSSM_HDR += \
 		$(DIR)/NUTNMSSM_slha_io.hpp \
 		$(DIR)/NUTNMSSM_spectrum_generator_interface.hpp \
 		$(DIR)/NUTNMSSM_spectrum_generator.hpp \
+		$(DIR)/NUTNMSSM_standard_model_matching.hpp \
+		$(DIR)/NUTNMSSM_standard_model_two_scale_matching.hpp \
 		$(DIR)/NUTNMSSM_susy_scale_constraint.hpp \
 		$(DIR)/NUTNMSSM_utilities.hpp \
 		$(DIR)/NUTNMSSM_two_scale_convergence_tester.hpp \
@@ -89,6 +97,12 @@ LIBNUTNMSSM_HDR += \
 		$(DIR)/NUTNMSSM_two_scale_soft_parameters.hpp \
 		$(DIR)/NUTNMSSM_two_scale_susy_parameters.hpp \
 		$(DIR)/NUTNMSSM_two_scale_susy_scale_constraint.hpp
+LLNUTNMSSM_SRC  += \
+		$(DIR)/NUTNMSSM_librarylink.cpp
+
+LLNUTNMSSM_MMA  += \
+		$(DIR)/NUTNMSSM_librarylink.m \
+		$(DIR)/run_NUTNMSSM.m
 
 ifneq ($(MAKECMDGOALS),showbuild)
 ifneq ($(MAKECMDGOALS),tag)
@@ -141,7 +155,13 @@ LIBNUTNMSSM_DEP := \
 EXENUTNMSSM_DEP := \
 		$(EXENUTNMSSM_OBJ:.o=.d)
 
-LIBNUTNMSSM     := $(DIR)/lib$(MODNAME)$(LIBEXT)
+LLNUTNMSSM_DEP  := \
+		$(patsubst %.cpp, %.d, $(filter %.cpp, $(LLNUTNMSSM_SRC)))
+
+LLNUTNMSSM_OBJ  := $(LLNUTNMSSM_SRC:.cpp=.o)
+LLNUTNMSSM_LIB  := $(LLNUTNMSSM_SRC:.cpp=$(LIBLNK_LIBEXT))
+
+LIBNUTNMSSM     := $(DIR)/lib$(MODNAME)$(MODULE_LIBEXT)
 
 METACODE_STAMP_NUTNMSSM := $(DIR)/00_DELETE_ME_TO_RERUN_METACODE
 
@@ -164,6 +184,8 @@ install-src::
 		install -m u=rw,g=r,o=r $(LIBNUTNMSSM_SRC) $(NUTNMSSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LIBNUTNMSSM_HDR) $(NUTNMSSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(EXENUTNMSSM_SRC) $(NUTNMSSM_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(LLNUTNMSSM_SRC) $(NUTNMSSM_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(LLNUTNMSSM_MMA) $(NUTNMSSM_INSTALL_DIR)
 		$(INSTALL_STRIPPED) $(NUTNMSSM_MK) $(NUTNMSSM_INSTALL_DIR) -m u=rw,g=r,o=r
 		install -m u=rw,g=r,o=r $(NUTNMSSM_TWO_SCALE_MK) $(NUTNMSSM_INSTALL_DIR)
 ifneq ($(NUTNMSSM_SLHA_INPUT),)
@@ -175,19 +197,24 @@ endif
 clean-$(MODNAME)-dep:
 		-rm -f $(LIBNUTNMSSM_DEP)
 		-rm -f $(EXENUTNMSSM_DEP)
+		-rm -f $(LLNUTNMSSM_DEP)
 
 clean-$(MODNAME)-lib:
 		-rm -f $(LIBNUTNMSSM)
+		-rm -f $(LLNUTNMSSM_LIB)
 
 clean-$(MODNAME)-obj:
 		-rm -f $(LIBNUTNMSSM_OBJ)
 		-rm -f $(EXENUTNMSSM_OBJ)
+		-rm -f $(LLNUTNMSSM_OBJ)
 
 # BEGIN: NOT EXPORTED ##########################################
 clean-$(MODNAME)-src:
 		-rm -f $(LIBNUTNMSSM_SRC)
 		-rm -f $(LIBNUTNMSSM_HDR)
 		-rm -f $(EXENUTNMSSM_SRC)
+		-rm -f $(LLNUTNMSSM_SRC)
+		-rm -f $(LLNUTNMSSM_MMA)
 		-rm -f $(METACODE_STAMP_NUTNMSSM)
 		-rm -f $(NUTNMSSM_TWO_SCALE_MK)
 		-rm -f $(NUTNMSSM_SLHA_INPUT)
@@ -217,7 +244,7 @@ pack-$(MODNAME)-src:
 		$(NUTNMSSM_MK) $(NUTNMSSM_TWO_SCALE_MK) \
 		$(NUTNMSSM_SLHA_INPUT) $(NUTNMSSM_GNUPLOT)
 
-$(LIBNUTNMSSM_SRC) $(LIBNUTNMSSM_HDR) $(EXENUTNMSSM_SRC) \
+$(LIBNUTNMSSM_SRC) $(LIBNUTNMSSM_HDR) $(EXENUTNMSSM_SRC) $(LLNUTNMSSM_SRC) $(LLNUTNMSSM_MMA) \
 : run-metacode-$(MODNAME)
 		@true
 
@@ -237,19 +264,33 @@ $(METACODE_STAMP_NUTNMSSM):
 		@true
 endif
 
-$(LIBNUTNMSSM_DEP) $(EXENUTNMSSM_DEP) $(LIBNUTNMSSM_OBJ) $(EXENUTNMSSM_OBJ): CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS)
+$(LIBNUTNMSSM_DEP) $(EXENUTNMSSM_DEP) $(LLNUTNMSSM_DEP) $(LIBNUTNMSSM_OBJ) $(EXENUTNMSSM_OBJ) $(LLNUTNMSSM_OBJ) $(LLNUTNMSSM_LIB): \
+	CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
-$(LIBNUTNMSSM_DEP) $(EXENUTNMSSM_DEP) $(LIBNUTNMSSM_OBJ) $(EXENUTNMSSM_OBJ): CPPFLAGS += $(LOOPFUNCFLAGS)
+$(LIBNUTNMSSM_DEP) $(EXENUTNMSSM_DEP) $(LLNUTNMSSM_DEP) $(LIBNUTNMSSM_OBJ) $(EXENUTNMSSM_OBJ) $(LLNUTNMSSM_OBJ) $(LLNUTNMSSM_LIB): \
+	CPPFLAGS += $(LOOPFUNCFLAGS)
 endif
 
+$(LLNUTNMSSM_OBJ) $(LLNUTNMSSM_LIB): \
+	CPPFLAGS += $(shell $(MATH_INC_PATHS) --math-cmd="$(MATH)" -I --librarylink --mathlink)
+
 $(LIBNUTNMSSM): $(LIBNUTNMSSM_OBJ)
-		$(MAKELIB) $@ $^
+		$(MODULE_MAKE_LIB_CMD) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBNUTNMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^ $(ADDONLIBS)) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(THREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(LDLIBS)
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^ $(ADDONLIBS)) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+
+$(LLNUTNMSSM_LIB): $(LLNUTNMSSM_OBJ) $(LIBNUTNMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
+		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBNUTNMSSM_DEP) $(EXENUTNMSSM_DEP)
 ALLSRC += $(LIBNUTNMSSM_SRC) $(EXENUTNMSSM_SRC)
 ALLLIB += $(LIBNUTNMSSM)
 ALLEXE += $(EXENUTNMSSM_EXE)
+
+ifeq ($(ENABLE_LIBRARYLINK),yes)
+ALLDEP += $(LLNUTNMSSM_DEP)
+ALLSRC += $(LLNUTNMSSM_SRC)
+ALLLL  += $(LLNUTNMSSM_LIB)
+endif

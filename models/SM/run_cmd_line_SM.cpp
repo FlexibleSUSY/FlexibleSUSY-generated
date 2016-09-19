@@ -16,11 +16,11 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 28 Aug 2016 15:03:30
+// File generated at Mon 19 Sep 2016 09:50:19
 
 #include "SM_input_parameters.hpp"
-#include "SM_observables.hpp"
 #include "SM_spectrum_generator.hpp"
+#include "SM_observables.hpp"
 #include "SM_slha_io.hpp"
 
 #include "command_line_options.hpp"

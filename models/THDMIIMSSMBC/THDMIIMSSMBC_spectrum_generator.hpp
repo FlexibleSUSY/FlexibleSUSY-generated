@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 28 Aug 2016 15:02:54
+// File generated at Mon 19 Sep 2016 09:53:04
 
 #ifndef THDMIIMSSMBC_SPECTRUM_GENERATOR_H
 #define THDMIIMSSMBC_SPECTRUM_GENERATOR_H

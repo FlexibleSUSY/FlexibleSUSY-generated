@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 28 Aug 2016 15:16:53
+// File generated at Mon 19 Sep 2016 10:06:23
 
 /**
  * @file E6SSM_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Sun 28 Aug 2016 15:16:53 with FlexibleSUSY
- * 1.6.1 (git commit: de78c399bea838d002fe54cbc91eb6f88fa62626) and SARAH 4.9.1 .
+ * This file was generated at Mon 19 Sep 2016 10:06:23 with FlexibleSUSY
+ * 1.7.0 (git commit: 5938cc5e9320fd7a22b1a853dc2285c56e40a49f) and SARAH 4.9.1 .
  */
 
 #include "E6SSM_mass_eigenstates.hpp"
@@ -42659,9 +42659,6 @@ Eigen::Matrix<double,3,1> CLASSNAME::tadpole_hh_2loop() const
    tadpole_2l(0) *= vd;
    tadpole_2l(1) *= vu;
    tadpole_2l(2) *= vs;
-
-   if (!IsFinite(tadpole_2l))
-      tadpole_2l.setZero();
 
    return tadpole_2l;
 }

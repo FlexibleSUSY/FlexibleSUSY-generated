@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 28 Aug 2016 15:16:58
+// File generated at Mon 19 Sep 2016 10:06:41
 
 #ifndef MSSMRHN_TWO_SCALE_susy_parameters_H
 #define MSSMRHN_TWO_SCALE_susy_parameters_H
