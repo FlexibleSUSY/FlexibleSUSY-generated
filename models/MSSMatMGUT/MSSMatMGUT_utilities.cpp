@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 19 Sep 2016 10:16:23
+// File generated at Sat 15 Oct 2016 16:03:34
 
 #include "MSSMatMGUT_utilities.hpp"
 #include "MSSMatMGUT_input_parameters.hpp"
@@ -96,9 +96,9 @@ void MSSMatMGUT_spectrum_plotter::write_to_file(const std::string& file_name) co
    if (spectrum.empty())
       return;
 
-   std::ofstream filestr(file_name.c_str(), std::ios::out);
+   std::ofstream filestr(file_name, std::ios::out);
    VERBOSE_MSG("MSSMatMGUT_spectrum_plotter::write_to_file: opening file: "
-               << file_name.c_str());
+               << file_name);
    if (filestr.fail()) {
       ERROR("MSSMatMGUT_spectrum_plotter::write_to_file: can't open file "
             << file_name);
@@ -110,7 +110,7 @@ void MSSMatMGUT_spectrum_plotter::write_to_file(const std::string& file_name) co
 
    filestr.close();
    VERBOSE_MSG("MSSMatMGUT_spectrum_plotter::write_to_file: file written: "
-               << file_name.c_str());
+               << file_name);
 }
 
 void MSSMatMGUT_spectrum_plotter::write_spectrum(const TSpectrum& spectrum, std::ofstream& filestr) const

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 19 Sep 2016 10:10:09
+// File generated at Sat 15 Oct 2016 15:50:57
 
 #include "lowMSSM_utilities.hpp"
 #include "lowMSSM_input_parameters.hpp"
@@ -96,9 +96,9 @@ void lowMSSM_spectrum_plotter::write_to_file(const std::string& file_name) const
    if (spectrum.empty())
       return;
 
-   std::ofstream filestr(file_name.c_str(), std::ios::out);
+   std::ofstream filestr(file_name, std::ios::out);
    VERBOSE_MSG("lowMSSM_spectrum_plotter::write_to_file: opening file: "
-               << file_name.c_str());
+               << file_name);
    if (filestr.fail()) {
       ERROR("lowMSSM_spectrum_plotter::write_to_file: can't open file "
             << file_name);
@@ -110,7 +110,7 @@ void lowMSSM_spectrum_plotter::write_to_file(const std::string& file_name) const
 
    filestr.close();
    VERBOSE_MSG("lowMSSM_spectrum_plotter::write_to_file: file written: "
-               << file_name.c_str());
+               << file_name);
 }
 
 void lowMSSM_spectrum_plotter::write_spectrum(const TSpectrum& spectrum, std::ofstream& filestr) const

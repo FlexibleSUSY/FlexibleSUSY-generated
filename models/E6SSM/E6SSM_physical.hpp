@@ -16,16 +16,14 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 19 Sep 2016 10:06:23
+// File generated at Sat 15 Oct 2016 16:20:16
 
 #ifndef E6SSM_PHYSICAL_H
 #define E6SSM_PHYSICAL_H
 
-#include "linalg2.hpp"
 #include <Eigen/Core>
 
 #include <iosfwd>
-#include <string>
 
 namespace flexiblesusy {
 

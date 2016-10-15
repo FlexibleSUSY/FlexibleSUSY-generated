@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 19 Sep 2016 09:49:12
+// File generated at Sat 15 Oct 2016 15:23:51
 
 #ifndef HSSUSY_SLHA_IO_H
 #define HSSUSY_SLHA_IO_H
@@ -81,8 +81,10 @@ public:
    template <class T> void set_spectrum(const HSSUSY_slha<T>&);
    template <class T> void set_spectrum(const HSSUSY<T>&);
    void set_spinfo(const Problems<HSSUSY_info::NUMBER_OF_PARTICLES>&);
+   void set_spinfo(const std::vector<std::string>&, const std::vector<std::string>&);
    void set_print_imaginary_parts_of_majorana_mixings(bool);
-   void write_to_file(const std::string&);
+   void write_to(const std::string&);
+   void write_to_file(const std::string& file_name) { slha_io.write_to_file(file_name); }
    void write_to_stream(std::ostream& ostr = std::cout) { slha_io.write_to_stream(ostr); }
 
    static void fill_minpar_tuple(HSSUSY_input_parameters&, int, double);

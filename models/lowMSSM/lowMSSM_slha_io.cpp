@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 19 Sep 2016 10:10:09
+// File generated at Sat 15 Oct 2016 15:50:57
 
 #include "lowMSSM_slha_io.hpp"
 #include "lowMSSM_input_parameters.hpp"
@@ -107,22 +107,44 @@ void lowMSSM_slha_io::set_sminputs(const softsusy::QedQcd& qedqcd)
  */
 void lowMSSM_slha_io::set_spinfo(const Problems<lowMSSM_info::NUMBER_OF_PARTICLES>& problems)
 {
+   std::vector<std::string> warnings_vec, problems_vec;
+
+   if (problems.have_warning()) {
+      std::ostringstream ss;
+      problems.print_warnings(ss);
+      warnings_vec = { ss.str() };
+   }
+
+   if (problems.have_problem()) {
+      std::ostringstream ss;
+      problems.print_problems(ss);
+      problems_vec = { ss.str() };
+   }
+
+   set_spinfo(problems_vec, warnings_vec);
+}
+
+/**
+ * Stores the given problems and warnings in the SPINFO block in the
+ * SLHA object.
+ *
+ * @param problems vector of problem strings
+ * @param warnings vector of warning strings
+ */
+void lowMSSM_slha_io::set_spinfo(
+   const std::vector<std::string>& problems,
+   const std::vector<std::string>& warnings)
+{
    std::ostringstream spinfo;
    spinfo << "Block SPINFO\n"
           << FORMAT_SPINFO(1, PKGNAME)
           << FORMAT_SPINFO(2, FLEXIBLESUSY_VERSION);
 
-   if (problems.have_warning()) {
-      std::ostringstream warnings;
-      problems.print_warnings(warnings);
-      spinfo << FORMAT_SPINFO(3, warnings.str());
-   }
+   for (const auto& s: warnings)
+      spinfo << FORMAT_SPINFO(3, s);
 
-   if (problems.have_problem()) {
-      std::ostringstream problems_str;
-      problems.print_problems(problems_str);
-      spinfo << FORMAT_SPINFO(4, problems_str.str());
-   }
+   for (const auto& s: problems)
+      spinfo << FORMAT_SPINFO(4, s);
 
    spinfo << FORMAT_SPINFO(5, lowMSSM_info::model_name)
           << FORMAT_SPINFO(9, SARAH_VERSION);
@@ -257,13 +279,18 @@ void lowMSSM_slha_io::set_pmns(
 }
 
 /**
- * Write SLHA object to file.
+ * Write SLHA object to given output.  If output == "-", then the SLHA
+ * object is written to std::cout.  Otherwise, output is interpreted
+ * as a file name
  *
- * @param file_name file name
+ * @param output "-" for cout, or file name
  */
-void lowMSSM_slha_io::write_to_file(const std::string& file_name)
+void lowMSSM_slha_io::write_to(const std::string& output)
 {
-   slha_io.write_to_file(file_name);
+   if (output == "-")
+      write_to_stream(std::cout);
+   else
+      write_to_file(output);
 }
 
 /**

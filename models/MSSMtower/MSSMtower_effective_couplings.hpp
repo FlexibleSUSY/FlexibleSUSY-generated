@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 19 Sep 2016 09:36:45
+// File generated at Sat 15 Oct 2016 15:08:21
 
 #ifndef MSSMtower_EFFECTIVE_COUPLINGS_H
 #define MSSMtower_EFFECTIVE_COUPLINGS_H
@@ -24,6 +24,7 @@
 #include "MSSMtower_mass_eigenstates.hpp"
 #include "lowe.h"
 #include "physical_input.hpp"
+#include "standard_model.hpp"
 
 #include <complex>
 #include <Eigen/Core>
@@ -59,12 +60,13 @@ public:
 
    void calculate_effective_couplings();
 
+   std::complex<double> CpAhFebarFePL(unsigned gt1, unsigned gt2, unsigned gt3) const;
+   std::complex<double> CpFehhbarFePL(unsigned gt1, unsigned gt2, unsigned gt3) const;
    std::complex<double> CphhSdconjSd(unsigned gt1, unsigned gt2, unsigned gt3) const;
    std::complex<double> CphhSuconjSu(unsigned gt1, unsigned gt2, unsigned gt3) const;
    std::complex<double> CphhSeconjSe(unsigned gt1, unsigned gt2, unsigned gt3) const;
    std::complex<double> CphhHpmconjHpm(unsigned gt1, unsigned gt2, unsigned gt3) const;
    std::complex<double> CpChahhbarChaPL(unsigned gt1, unsigned gt2, unsigned gt3) const;
-   std::complex<double> CpFehhbarFePL(unsigned gt1, unsigned gt2, unsigned gt3) const;
    std::complex<double> CpFdhhbarFdPL(unsigned gt1, unsigned gt2, unsigned gt3) const;
    std::complex<double> CpFuhhbarFuPL(unsigned gt1, unsigned gt2, unsigned gt3) const;
    std::complex<double> CphhVWmconjVWm(unsigned gt1) const;
@@ -73,7 +75,6 @@ public:
    std::complex<double> CpAhSeconjSe(unsigned gt1, unsigned gt2, unsigned gt3) const;
    std::complex<double> CpAhHpmconjHpm(unsigned gt1, unsigned gt2, unsigned gt3) const;
    std::complex<double> CpAhChabarChaPL(unsigned gt1, unsigned gt2, unsigned gt3) const;
-   std::complex<double> CpAhFebarFePL(unsigned gt1, unsigned gt2, unsigned gt3) const;
    std::complex<double> CpAhFdbarFdPL(unsigned gt1, unsigned gt2, unsigned gt3) const;
    std::complex<double> CpAhFubarFuPL(unsigned gt1, unsigned gt2, unsigned gt3) const;
    void calculate_eff_CphhVPVP(unsigned gO1);
@@ -90,7 +91,8 @@ private:
 
    void copy_mixing_matrices_from_model();
 
-   void run_SM_strong_coupling_to(double m);
+   standard_model::Standard_model initialise_SM() const;
+   void run_SM_strong_coupling_to(standard_model::Standard_model, double m);
 
    // higher order corrections to the amplitudes for
    // effective coupling to photons

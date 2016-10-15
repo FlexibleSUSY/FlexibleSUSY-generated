@@ -16,12 +16,11 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 19 Sep 2016 09:49:42
+// File generated at Sat 15 Oct 2016 15:24:22
 
 #include "HSSUSY_effective_couplings.hpp"
 
 #include "effective_couplings.hpp"
-#include "standard_model.hpp"
 #include "wrappers.hpp"
 
 namespace flexiblesusy {
@@ -50,6 +49,8 @@ HSSUSY_effective_couplings::HSSUSY_effective_couplings(
 
 void HSSUSY_effective_couplings::calculate_effective_couplings()
 {
+   const standard_model::Standard_model sm(initialise_SM());
+
    const double scale = model.get_scale();
    const Eigen::ArrayXd saved_parameters(model.get());
 
@@ -57,9 +58,9 @@ void HSSUSY_effective_couplings::calculate_effective_couplings()
    PHYSICAL(MFu(2)) = qedqcd.displayPoleMt();
 
    const auto Mhh = PHYSICAL(Mhh);
-   run_SM_strong_coupling_to(0.5 * Mhh);
+   run_SM_strong_coupling_to(sm, 0.5 * Mhh);
    calculate_eff_CphhVPVP();
-   run_SM_strong_coupling_to(Mhh);
+   run_SM_strong_coupling_to(sm, Mhh);
    calculate_eff_CphhVGVG();
 
    PHYSICAL(MFu(2)) = saved_mt;
@@ -86,11 +87,9 @@ void HSSUSY_effective_couplings::copy_mixing_matrices_from_model()
 
 }
 
-void HSSUSY_effective_couplings::run_SM_strong_coupling_to(double m)
+standard_model::Standard_model HSSUSY_effective_couplings::initialise_SM() const
 {
-   using namespace standard_model;
-
-   Standard_model sm;
+   standard_model::Standard_model sm;
 
    sm.set_loops(2);
    sm.set_thresholds(2);
@@ -98,6 +97,12 @@ void HSSUSY_effective_couplings::run_SM_strong_coupling_to(double m)
    sm.set_physical_input(physical_input);
 
    sm.initialise_from_input();
+
+   return sm;
+}
+
+void HSSUSY_effective_couplings::run_SM_strong_coupling_to(standard_model::Standard_model sm, double m)
+{
    sm.run_to(m);
 
    model.set_g3(sm.get_g3());
@@ -218,9 +223,9 @@ double HSSUSY_effective_couplings::get_AhVGVG_partial_width() const
    return 0.039788735772973836 * Power(mass, 3.0) * AbsSqr(eff_CpAhVGVG);
 }
 
-std::complex<double> HSSUSY_effective_couplings::CpFdhhbarFdPL(unsigned gt1, unsigned gt3) const
+std::complex<double> HSSUSY_effective_couplings::CpAhFebarFePL(unsigned gt2, unsigned gt3) const
 {
-   const auto Yd = MODELPARAMETER(Yd);
+   const auto Ye = MODELPARAMETER(Ye);
 
    std::complex<double> result;
 
@@ -230,36 +235,13 @@ std::complex<double> HSSUSY_effective_couplings::CpFdhhbarFdPL(unsigned gt1, uns
       std::complex<double> tmp_469;
       std::complex<double> tmp_470;
       for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_470 += Conj(Ud(gt3,j1))*Yd(j1,j2);
+         tmp_470 += Conj(Ue(gt3,j1))*Ye(j1,j2);
       }
       tmp_469 += tmp_470;
-      tmp_468 += (Conj(Vd(gt1,j2))) * tmp_469;
+      tmp_468 += (Conj(Ve(gt2,j2))) * tmp_469;
    }
    tmp_467 += tmp_468;
-   result += (-0.7071067811865475) * tmp_467;
-
-   return result;
-}
-
-std::complex<double> HSSUSY_effective_couplings::CpFuhhbarFuPL(unsigned gt1, unsigned gt3) const
-{
-   const auto Yu = MODELPARAMETER(Yu);
-
-   std::complex<double> result;
-
-   std::complex<double> tmp_471;
-   std::complex<double> tmp_472;
-   for (unsigned j2 = 0; j2 < 3; ++j2) {
-      std::complex<double> tmp_473;
-      std::complex<double> tmp_474;
-      for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_474 += Conj(Uu(gt3,j1))*Yu(j1,j2);
-      }
-      tmp_473 += tmp_474;
-      tmp_472 += (Conj(Vu(gt1,j2))) * tmp_473;
-   }
-   tmp_471 += tmp_472;
-   result += (0.7071067811865475) * tmp_471;
+   result += (std::complex<double>(0.,0.7071067811865475)) * tmp_467;
 
    return result;
 }
@@ -270,19 +252,65 @@ std::complex<double> HSSUSY_effective_couplings::CpFehhbarFePL(unsigned gt1, uns
 
    std::complex<double> result;
 
+   std::complex<double> tmp_471;
+   std::complex<double> tmp_472;
+   for (unsigned j2 = 0; j2 < 3; ++j2) {
+      std::complex<double> tmp_473;
+      std::complex<double> tmp_474;
+      for (unsigned j1 = 0; j1 < 3; ++j1) {
+         tmp_474 += Conj(Ue(gt3,j1))*Ye(j1,j2);
+      }
+      tmp_473 += tmp_474;
+      tmp_472 += (Conj(Ve(gt1,j2))) * tmp_473;
+   }
+   tmp_471 += tmp_472;
+   result += (-0.7071067811865475) * tmp_471;
+
+   return result;
+}
+
+std::complex<double> HSSUSY_effective_couplings::CpFdhhbarFdPL(unsigned gt1, unsigned gt3) const
+{
+   const auto Yd = MODELPARAMETER(Yd);
+
+   std::complex<double> result;
+
    std::complex<double> tmp_475;
    std::complex<double> tmp_476;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
       std::complex<double> tmp_477;
       std::complex<double> tmp_478;
       for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_478 += Conj(Ue(gt3,j1))*Ye(j1,j2);
+         tmp_478 += Conj(Ud(gt3,j1))*Yd(j1,j2);
       }
       tmp_477 += tmp_478;
-      tmp_476 += (Conj(Ve(gt1,j2))) * tmp_477;
+      tmp_476 += (Conj(Vd(gt1,j2))) * tmp_477;
    }
    tmp_475 += tmp_476;
    result += (-0.7071067811865475) * tmp_475;
+
+   return result;
+}
+
+std::complex<double> HSSUSY_effective_couplings::CpFuhhbarFuPL(unsigned gt1, unsigned gt3) const
+{
+   const auto Yu = MODELPARAMETER(Yu);
+
+   std::complex<double> result;
+
+   std::complex<double> tmp_479;
+   std::complex<double> tmp_480;
+   for (unsigned j2 = 0; j2 < 3; ++j2) {
+      std::complex<double> tmp_481;
+      std::complex<double> tmp_482;
+      for (unsigned j1 = 0; j1 < 3; ++j1) {
+         tmp_482 += Conj(Uu(gt3,j1))*Yu(j1,j2);
+      }
+      tmp_481 += tmp_482;
+      tmp_480 += (Conj(Vu(gt1,j2))) * tmp_481;
+   }
+   tmp_479 += tmp_480;
+   result += (0.7071067811865475) * tmp_479;
 
    return result;
 }
@@ -305,19 +333,19 @@ std::complex<double> HSSUSY_effective_couplings::CpAhFdbarFdPL(unsigned gt2, uns
 
    std::complex<double> result;
 
-   std::complex<double> tmp_479;
-   std::complex<double> tmp_480;
+   std::complex<double> tmp_483;
+   std::complex<double> tmp_484;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
-      std::complex<double> tmp_481;
-      std::complex<double> tmp_482;
+      std::complex<double> tmp_485;
+      std::complex<double> tmp_486;
       for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_482 += Conj(Ud(gt3,j1))*Yd(j1,j2);
+         tmp_486 += Conj(Ud(gt3,j1))*Yd(j1,j2);
       }
-      tmp_481 += tmp_482;
-      tmp_480 += (Conj(Vd(gt2,j2))) * tmp_481;
+      tmp_485 += tmp_486;
+      tmp_484 += (Conj(Vd(gt2,j2))) * tmp_485;
    }
-   tmp_479 += tmp_480;
-   result += (std::complex<double>(0.,0.7071067811865475)) * tmp_479;
+   tmp_483 += tmp_484;
+   result += (std::complex<double>(0.,0.7071067811865475)) * tmp_483;
 
    return result;
 }
@@ -328,39 +356,16 @@ std::complex<double> HSSUSY_effective_couplings::CpAhFubarFuPL(unsigned gt2, uns
 
    std::complex<double> result;
 
-   std::complex<double> tmp_483;
-   std::complex<double> tmp_484;
-   for (unsigned j2 = 0; j2 < 3; ++j2) {
-      std::complex<double> tmp_485;
-      std::complex<double> tmp_486;
-      for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_486 += Conj(Uu(gt3,j1))*Yu(j1,j2);
-      }
-      tmp_485 += tmp_486;
-      tmp_484 += (Conj(Vu(gt2,j2))) * tmp_485;
-   }
-   tmp_483 += tmp_484;
-   result += (std::complex<double>(0.,0.7071067811865475)) * tmp_483;
-
-   return result;
-}
-
-std::complex<double> HSSUSY_effective_couplings::CpAhFebarFePL(unsigned gt2, unsigned gt3) const
-{
-   const auto Ye = MODELPARAMETER(Ye);
-
-   std::complex<double> result;
-
    std::complex<double> tmp_487;
    std::complex<double> tmp_488;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
       std::complex<double> tmp_489;
       std::complex<double> tmp_490;
       for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_490 += Conj(Ue(gt3,j1))*Ye(j1,j2);
+         tmp_490 += Conj(Uu(gt3,j1))*Yu(j1,j2);
       }
       tmp_489 += tmp_490;
-      tmp_488 += (Conj(Ve(gt2,j2))) * tmp_489;
+      tmp_488 += (Conj(Vu(gt2,j2))) * tmp_489;
    }
    tmp_487 += tmp_488;
    result += (std::complex<double>(0.,0.7071067811865475)) * tmp_487;

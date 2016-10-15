@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 19 Sep 2016 10:16:19
+// File generated at Sat 15 Oct 2016 16:04:09
 
 #include "MSSMNoFV_utilities.hpp"
 #include "MSSMNoFV_input_parameters.hpp"
@@ -112,9 +112,9 @@ void MSSMNoFV_spectrum_plotter::write_to_file(const std::string& file_name) cons
    if (spectrum.empty())
       return;
 
-   std::ofstream filestr(file_name.c_str(), std::ios::out);
+   std::ofstream filestr(file_name, std::ios::out);
    VERBOSE_MSG("MSSMNoFV_spectrum_plotter::write_to_file: opening file: "
-               << file_name.c_str());
+               << file_name);
    if (filestr.fail()) {
       ERROR("MSSMNoFV_spectrum_plotter::write_to_file: can't open file "
             << file_name);
@@ -126,7 +126,7 @@ void MSSMNoFV_spectrum_plotter::write_to_file(const std::string& file_name) cons
 
    filestr.close();
    VERBOSE_MSG("MSSMNoFV_spectrum_plotter::write_to_file: file written: "
-               << file_name.c_str());
+               << file_name);
 }
 
 void MSSMNoFV_spectrum_plotter::write_spectrum(const TSpectrum& spectrum, std::ofstream& filestr) const

@@ -16,12 +16,11 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 19 Sep 2016 10:06:31
+// File generated at Sat 15 Oct 2016 16:20:20
 
 #include "E6SSM_effective_couplings.hpp"
 
 #include "effective_couplings.hpp"
-#include "standard_model.hpp"
 #include "wrappers.hpp"
 
 namespace flexiblesusy {
@@ -62,6 +61,8 @@ E6SSM_effective_couplings::E6SSM_effective_couplings(
 
 void E6SSM_effective_couplings::calculate_effective_couplings()
 {
+   const standard_model::Standard_model sm(initialise_SM());
+
    const double scale = model.get_scale();
    const Eigen::ArrayXd saved_parameters(model.get());
 
@@ -75,9 +76,9 @@ void E6SSM_effective_couplings::calculate_effective_couplings()
       }
       model.calculate_DRbar_masses();
       copy_mixing_matrices_from_model();
-      run_SM_strong_coupling_to(0.5 * Mhh(gO1));
+      run_SM_strong_coupling_to(sm, 0.5 * Mhh(gO1));
       calculate_eff_CphhVPVP(gO1);
-      run_SM_strong_coupling_to(Mhh(gO1));
+      run_SM_strong_coupling_to(sm, Mhh(gO1));
       calculate_eff_CphhVGVG(gO1);
    }
 
@@ -88,9 +89,9 @@ void E6SSM_effective_couplings::calculate_effective_couplings()
       }
       model.calculate_DRbar_masses();
       copy_mixing_matrices_from_model();
-      run_SM_strong_coupling_to(0.5 * MAh(gO1));
+      run_SM_strong_coupling_to(sm, 0.5 * MAh(gO1));
       calculate_eff_CpAhVPVP(gO1);
-      run_SM_strong_coupling_to(MAh(gO1));
+      run_SM_strong_coupling_to(sm, MAh(gO1));
       calculate_eff_CpAhVGVG(gO1);
    }
 
@@ -141,11 +142,9 @@ void E6SSM_effective_couplings::copy_mixing_matrices_from_model()
 
 }
 
-void E6SSM_effective_couplings::run_SM_strong_coupling_to(double m)
+standard_model::Standard_model E6SSM_effective_couplings::initialise_SM() const
 {
-   using namespace standard_model;
-
-   Standard_model sm;
+   standard_model::Standard_model sm;
 
    sm.set_loops(2);
    sm.set_thresholds(2);
@@ -153,6 +152,12 @@ void E6SSM_effective_couplings::run_SM_strong_coupling_to(double m)
    sm.set_physical_input(physical_input);
 
    sm.initialise_from_input();
+
+   return sm;
+}
+
+void E6SSM_effective_couplings::run_SM_strong_coupling_to(standard_model::Standard_model sm, double m)
+{
    sm.run_to(m);
 
    model.set_g3(sm.get_g3());

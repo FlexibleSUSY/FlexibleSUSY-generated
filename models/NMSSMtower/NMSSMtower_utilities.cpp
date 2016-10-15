@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 19 Sep 2016 09:36:19
+// File generated at Sat 15 Oct 2016 15:07:50
 
 #include "NMSSMtower_utilities.hpp"
 #include "NMSSMtower_input_parameters.hpp"
@@ -96,9 +96,9 @@ void NMSSMtower_spectrum_plotter::write_to_file(const std::string& file_name) co
    if (spectrum.empty())
       return;
 
-   std::ofstream filestr(file_name.c_str(), std::ios::out);
+   std::ofstream filestr(file_name, std::ios::out);
    VERBOSE_MSG("NMSSMtower_spectrum_plotter::write_to_file: opening file: "
-               << file_name.c_str());
+               << file_name);
    if (filestr.fail()) {
       ERROR("NMSSMtower_spectrum_plotter::write_to_file: can't open file "
             << file_name);
@@ -110,7 +110,7 @@ void NMSSMtower_spectrum_plotter::write_to_file(const std::string& file_name) co
 
    filestr.close();
    VERBOSE_MSG("NMSSMtower_spectrum_plotter::write_to_file: file written: "
-               << file_name.c_str());
+               << file_name);
 }
 
 void NMSSMtower_spectrum_plotter::write_spectrum(const TSpectrum& spectrum, std::ofstream& filestr) const

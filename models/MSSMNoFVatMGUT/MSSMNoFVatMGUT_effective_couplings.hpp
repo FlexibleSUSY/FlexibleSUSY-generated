@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 19 Sep 2016 10:15:54
+// File generated at Sat 15 Oct 2016 15:59:08
 
 #ifndef MSSMNoFVatMGUT_EFFECTIVE_COUPLINGS_H
 #define MSSMNoFVatMGUT_EFFECTIVE_COUPLINGS_H
@@ -24,6 +24,7 @@
 #include "MSSMNoFVatMGUT_mass_eigenstates.hpp"
 #include "lowe.h"
 #include "physical_input.hpp"
+#include "standard_model.hpp"
 
 #include <complex>
 #include <Eigen/Core>
@@ -59,6 +60,8 @@ public:
 
    void calculate_effective_couplings();
 
+   std::complex<double> CpAhFmbarFmPL(unsigned gt1) const;
+   std::complex<double> CpFmhhbarFmPL(unsigned gt2) const;
    std::complex<double> CpFdhhbarFdPL(unsigned gt2) const;
    std::complex<double> CpFshhbarFsPL(unsigned gt2) const;
    std::complex<double> CpFbhhbarFbPL(unsigned gt2) const;
@@ -66,7 +69,6 @@ public:
    std::complex<double> CpFchhbarFcPL(unsigned gt2) const;
    std::complex<double> CpFthhbarFtPL(unsigned gt2) const;
    std::complex<double> CpFehhbarFePL(unsigned gt2) const;
-   std::complex<double> CpFmhhbarFmPL(unsigned gt2) const;
    std::complex<double> CpFtauhhbarFtauPL(unsigned gt2) const;
    std::complex<double> CphhSdconjSd(unsigned gt1, unsigned gt2, unsigned gt3) const;
    std::complex<double> CphhSuconjSu(unsigned gt1, unsigned gt2, unsigned gt3) const;
@@ -87,7 +89,6 @@ public:
    std::complex<double> CpAhFcbarFcPL(unsigned gt1) const;
    std::complex<double> CpAhFtbarFtPL(unsigned gt1) const;
    std::complex<double> CpAhFebarFePL(unsigned gt1) const;
-   std::complex<double> CpAhFmbarFmPL(unsigned gt1) const;
    std::complex<double> CpAhFtaubarFtauPL(unsigned gt1) const;
    std::complex<double> CpAhSdconjSd(unsigned gt1, unsigned gt2, unsigned gt3) const;
    std::complex<double> CpAhSuconjSu(unsigned gt1, unsigned gt2, unsigned gt3) const;
@@ -114,7 +115,8 @@ private:
 
    void copy_mixing_matrices_from_model();
 
-   void run_SM_strong_coupling_to(double m);
+   standard_model::Standard_model initialise_SM() const;
+   void run_SM_strong_coupling_to(standard_model::Standard_model, double m);
 
    // higher order corrections to the amplitudes for
    // effective coupling to photons

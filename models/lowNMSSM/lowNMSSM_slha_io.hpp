@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 19 Sep 2016 10:00:42
+// File generated at Sat 15 Oct 2016 15:38:28
 
 #ifndef lowNMSSM_SLHA_IO_H
 #define lowNMSSM_SLHA_IO_H
@@ -81,8 +81,10 @@ public:
    template <class T> void set_spectrum(const lowNMSSM_slha<T>&);
    template <class T> void set_spectrum(const lowNMSSM<T>&);
    void set_spinfo(const Problems<lowNMSSM_info::NUMBER_OF_PARTICLES>&);
+   void set_spinfo(const std::vector<std::string>&, const std::vector<std::string>&);
    void set_print_imaginary_parts_of_majorana_mixings(bool);
-   void write_to_file(const std::string&);
+   void write_to(const std::string&);
+   void write_to_file(const std::string& file_name) { slha_io.write_to_file(file_name); }
    void write_to_stream(std::ostream& ostr = std::cout) { slha_io.write_to_stream(ostr); }
 
    static void fill_minpar_tuple(lowNMSSM_input_parameters&, int, double);

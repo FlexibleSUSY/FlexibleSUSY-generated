@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 19 Sep 2016 10:15:15
+// File generated at Sat 15 Oct 2016 15:58:48
 
 /**
  * @file CMSSMNoFV_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Mon 19 Sep 2016 10:15:15 with FlexibleSUSY
- * 1.7.0 (git commit: 5938cc5e9320fd7a22b1a853dc2285c56e40a49f) and SARAH 4.9.1 .
+ * This file was generated at Sat 15 Oct 2016 15:58:48 with FlexibleSUSY
+ * 1.7.1 (git commit: 1c1e3234ccd2a3935de013cbdabfb338bedc9204) and SARAH 4.9.1 .
  */
 
 #include "CMSSMNoFV_mass_eigenstates.hpp"
@@ -319,7 +319,7 @@ int CLASSNAME::solve_ewsb_iteratively()
    EWSB_args params = {this, ewsb_loop_order};
 
    std::unique_ptr<EWSB_solver> solvers[] = {
-      std::unique_ptr<EWSB_solver>(new Fixed_point_iterator<number_of_ewsb_equations, fixed_point_iterator::Convergence_tester_relative>(CLASSNAME::ewsb_step, &params, number_of_ewsb_iterations, ewsb_iteration_precision)),
+      std::unique_ptr<EWSB_solver>(new Fixed_point_iterator<number_of_ewsb_equations, fixed_point_iterator::Convergence_tester_relative>(CLASSNAME::ewsb_step, &params, number_of_ewsb_iterations, fixed_point_iterator::Convergence_tester_relative(ewsb_iteration_precision))),
       std::unique_ptr<EWSB_solver>(new Root_finder<number_of_ewsb_equations>(CLASSNAME::tadpole_equations, &params, number_of_ewsb_iterations, ewsb_iteration_precision, gsl_multiroot_fsolver_hybrids)),
       std::unique_ptr<EWSB_solver>(new Root_finder<number_of_ewsb_equations>(CLASSNAME::tadpole_equations, &params, number_of_ewsb_iterations, ewsb_iteration_precision, gsl_multiroot_fsolver_broyden))
    };
@@ -743,45 +743,44 @@ void CLASSNAME::calculate_DRbar_parameters()
 void CLASSNAME::calculate_pole_masses()
 {
 #ifdef ENABLE_THREADS
-   typedef void (CLASSNAME::*Mem_fun_t)();
-   typedef CLASSNAME* Obj_ptr_t;
+   CLASSNAME* obj_ptr = this;
 
-   auto fut_MAh = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MAh_pole, this);
-   auto fut_MCha = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MCha_pole, this);
-   auto fut_MChi = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MChi_pole, this);
-   auto fut_MGlu = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MGlu_pole, this);
-   auto fut_Mhh = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_Mhh_pole, this);
-   auto fut_MHpm = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MHpm_pole, this);
-   auto fut_MSb = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MSb_pole, this);
-   auto fut_MSc = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MSc_pole, this);
-   auto fut_MSd = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MSd_pole, this);
-   auto fut_MSe = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MSe_pole, this);
-   auto fut_MSm = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MSm_pole, this);
-   auto fut_MSs = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MSs_pole, this);
-   auto fut_MSt = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MSt_pole, this);
-   auto fut_MStau = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MStau_pole, this);
-   auto fut_MSu = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MSu_pole, this);
-   auto fut_MSveL = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MSveL_pole, this);
-   auto fut_MSvmL = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MSvmL_pole, this);
-   auto fut_MSvtL = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MSvtL_pole, this);
+   auto fut_MAh = run_async([obj_ptr] () { obj_ptr->calculate_MAh_pole(); });
+   auto fut_MCha = run_async([obj_ptr] () { obj_ptr->calculate_MCha_pole(); });
+   auto fut_MChi = run_async([obj_ptr] () { obj_ptr->calculate_MChi_pole(); });
+   auto fut_MGlu = run_async([obj_ptr] () { obj_ptr->calculate_MGlu_pole(); });
+   auto fut_Mhh = run_async([obj_ptr] () { obj_ptr->calculate_Mhh_pole(); });
+   auto fut_MHpm = run_async([obj_ptr] () { obj_ptr->calculate_MHpm_pole(); });
+   auto fut_MSb = run_async([obj_ptr] () { obj_ptr->calculate_MSb_pole(); });
+   auto fut_MSc = run_async([obj_ptr] () { obj_ptr->calculate_MSc_pole(); });
+   auto fut_MSd = run_async([obj_ptr] () { obj_ptr->calculate_MSd_pole(); });
+   auto fut_MSe = run_async([obj_ptr] () { obj_ptr->calculate_MSe_pole(); });
+   auto fut_MSm = run_async([obj_ptr] () { obj_ptr->calculate_MSm_pole(); });
+   auto fut_MSs = run_async([obj_ptr] () { obj_ptr->calculate_MSs_pole(); });
+   auto fut_MSt = run_async([obj_ptr] () { obj_ptr->calculate_MSt_pole(); });
+   auto fut_MStau = run_async([obj_ptr] () { obj_ptr->calculate_MStau_pole(); });
+   auto fut_MSu = run_async([obj_ptr] () { obj_ptr->calculate_MSu_pole(); });
+   auto fut_MSveL = run_async([obj_ptr] () { obj_ptr->calculate_MSveL_pole(); });
+   auto fut_MSvmL = run_async([obj_ptr] () { obj_ptr->calculate_MSvmL_pole(); });
+   auto fut_MSvtL = run_async([obj_ptr] () { obj_ptr->calculate_MSvtL_pole(); });
 
    if (calculate_sm_pole_masses) {
-      auto fut_MVG = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MVG_pole, this);
-      auto fut_MVP = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MVP_pole, this);
-      auto fut_MVZ = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MVZ_pole, this);
-      auto fut_MFd = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MFd_pole, this);
-      auto fut_MFs = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MFs_pole, this);
-      auto fut_MFb = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MFb_pole, this);
-      auto fut_MFu = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MFu_pole, this);
-      auto fut_MFc = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MFc_pole, this);
-      auto fut_MFt = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MFt_pole, this);
-      auto fut_MFve = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MFve_pole, this);
-      auto fut_MFvm = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MFvm_pole, this);
-      auto fut_MFvt = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MFvt_pole, this);
-      auto fut_MFe = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MFe_pole, this);
-      auto fut_MFm = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MFm_pole, this);
-      auto fut_MFtau = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MFtau_pole, this);
-      auto fut_MVWm = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MVWm_pole, this);
+      auto fut_MVG = run_async([obj_ptr] () { obj_ptr->calculate_MVG_pole(); });
+      auto fut_MVP = run_async([obj_ptr] () { obj_ptr->calculate_MVP_pole(); });
+      auto fut_MVZ = run_async([obj_ptr] () { obj_ptr->calculate_MVZ_pole(); });
+      auto fut_MFd = run_async([obj_ptr] () { obj_ptr->calculate_MFd_pole(); });
+      auto fut_MFs = run_async([obj_ptr] () { obj_ptr->calculate_MFs_pole(); });
+      auto fut_MFb = run_async([obj_ptr] () { obj_ptr->calculate_MFb_pole(); });
+      auto fut_MFu = run_async([obj_ptr] () { obj_ptr->calculate_MFu_pole(); });
+      auto fut_MFc = run_async([obj_ptr] () { obj_ptr->calculate_MFc_pole(); });
+      auto fut_MFt = run_async([obj_ptr] () { obj_ptr->calculate_MFt_pole(); });
+      auto fut_MFve = run_async([obj_ptr] () { obj_ptr->calculate_MFve_pole(); });
+      auto fut_MFvm = run_async([obj_ptr] () { obj_ptr->calculate_MFvm_pole(); });
+      auto fut_MFvt = run_async([obj_ptr] () { obj_ptr->calculate_MFvt_pole(); });
+      auto fut_MFe = run_async([obj_ptr] () { obj_ptr->calculate_MFe_pole(); });
+      auto fut_MFm = run_async([obj_ptr] () { obj_ptr->calculate_MFm_pole(); });
+      auto fut_MFtau = run_async([obj_ptr] () { obj_ptr->calculate_MFtau_pole(); });
+      auto fut_MVWm = run_async([obj_ptr] () { obj_ptr->calculate_MVWm_pole(); });
       fut_MVG.get();
       fut_MVP.get();
       fut_MVZ.get();

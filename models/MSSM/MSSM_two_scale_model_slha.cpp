@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 19 Sep 2016 10:19:03
+// File generated at Sat 15 Oct 2016 16:08:59
 
 /**
  * @file MSSM_two_scale_model_slha.cpp
@@ -24,6 +24,7 @@
  */
 
 #include "MSSM_two_scale_model_slha.hpp"
+#include "linalg2.hpp"
 #include "slha_io.hpp"
 #include "ckm.hpp"
 #include "pmns.hpp"

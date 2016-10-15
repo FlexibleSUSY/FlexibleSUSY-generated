@@ -16,11 +16,12 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 19 Sep 2016 09:47:45
+// File generated at Sat 15 Oct 2016 16:33:08
 
 #include "E6SSMtower_standard_model_matching.hpp"
 #include "wrappers.hpp"
 #include "two_scale_matching.hpp"
+#include "two_loop_corrections.hpp"
 #include "standard_model.hpp"
 #include "E6SSMtower_mass_eigenstates.hpp"
 #include "E6SSMtower_info.hpp"
@@ -46,18 +47,27 @@ public:
    {
       model_pole_mass_order = model.get_pole_mass_loop_order();
       model_ewsb_order = model.get_ewsb_loop_order();
+      tlc = model.get_two_loop_corrections();
+
+      // set top quark QCD corrections to given loop order
+      Two_loop_corrections tlc_new = tlc;
+      tlc_new.top_qcd = loop_order_ ? loop_order_ - 1 : 0;
+
       model.set_pole_mass_loop_order(loop_order);
       model.set_ewsb_loop_order(loop_order);
+      model.set_two_loop_corrections(tlc_new);
    }
 
    ~Loop_order_setter() {
       model.set_pole_mass_loop_order(model_pole_mass_order);
       model.set_ewsb_loop_order(model_ewsb_order);
+      model.set_two_loop_corrections(tlc);
       model.calculate_DRbar_masses();
       model.solve_ewsb();
    }
 private:
    T& model;
+   Two_loop_corrections tlc;       ///< 2-loop corrections
    unsigned loop_order;            ///< temporary loop order
    unsigned model_pole_mass_order; ///< old model pole mass loop order
    unsigned model_ewsb_order;      ///< old model EWSB loop order
@@ -182,22 +192,18 @@ void E6SSMtower_standard_model_matching::match_low_to_high_scale_model_tree_leve
 static void calculate_SM_pole_masses(E6SSMtower_mass_eigenstates& model, Standard_model& sm)
 {
 #ifdef ENABLE_THREADS
-#define CLASSNAME E6SSMtower_mass_eigenstates
-   typedef void (Standard_model::*SMMem_fun_t)();
-   typedef Standard_model* SMObj_ptr_t;
-   typedef void (CLASSNAME::*Mem_fun_t)();
-   typedef CLASSNAME* Obj_ptr_t;
+   E6SSMtower_mass_eigenstates* obj_ptr = &model;
 
-   auto fut_Standard_model_MFu = run_async<SMMem_fun_t, SMObj_ptr_t>(&Standard_model::calculate_MFu_pole, &sm);
-   auto fut_Standard_model_MFd = run_async<SMMem_fun_t, SMObj_ptr_t>(&Standard_model::calculate_MFd_pole, &sm);
-   auto fut_Standard_model_MFe = run_async<SMMem_fun_t, SMObj_ptr_t>(&Standard_model::calculate_MFe_pole, &sm);
-   auto fut_Standard_model_MVW = run_async<SMMem_fun_t, SMObj_ptr_t>(&Standard_model::calculate_MVWp_pole, &sm);
-   auto fut_Standard_model_MVZ = run_async<SMMem_fun_t, SMObj_ptr_t>(&Standard_model::calculate_MVZ_pole, &sm);
-   auto fut_MVZ = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MVZ_pole, &model);
-   auto fut_MFe = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MFe_pole, &model);
-   auto fut_MFd = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MFd_pole, &model);
-   auto fut_MFu = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MFu_pole, &model);
-   auto fut_MVWm = run_async<Mem_fun_t, Obj_ptr_t>(&CLASSNAME::calculate_MVWm_pole, &model);
+   auto fut_Standard_model_MFu = run_async([&sm] () { sm.calculate_MFu_pole(); });
+   auto fut_Standard_model_MFd = run_async([&sm] () { sm.calculate_MFd_pole(); });
+   auto fut_Standard_model_MFe = run_async([&sm] () { sm.calculate_MFe_pole(); });
+   auto fut_Standard_model_MVW = run_async([&sm] () { sm.calculate_MVWp_pole(); });
+   auto fut_Standard_model_MVZ = run_async([&sm] () { sm.calculate_MVZ_pole(); });
+   auto fut_MVZ = run_async([obj_ptr] () { obj_ptr->calculate_MVZ_pole(); });
+   auto fut_MFe = run_async([obj_ptr] () { obj_ptr->calculate_MFe_pole(); });
+   auto fut_MFd = run_async([obj_ptr] () { obj_ptr->calculate_MFd_pole(); });
+   auto fut_MFu = run_async([obj_ptr] () { obj_ptr->calculate_MFu_pole(); });
+   auto fut_MVWm = run_async([obj_ptr] () { obj_ptr->calculate_MVWm_pole(); });
 
    fut_MVZ.get();
    fut_MFe.get();
@@ -210,8 +216,6 @@ static void calculate_SM_pole_masses(E6SSMtower_mass_eigenstates& model, Standar
    fut_Standard_model_MFe.get();
    fut_Standard_model_MVW.get();
    fut_Standard_model_MVZ.get();
-
-#undef CLASSNAME
 #else
    model.calculate_MVZ_pole();
    model.calculate_MFe_pole();

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 19 Sep 2016 09:36:40
+// File generated at Sat 15 Oct 2016 15:08:16
 
 /**
  * @file MSSMtower_two_scale_model.hpp
@@ -24,8 +24,8 @@
  *        value problem using the two_scale solver by solvingt EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Mon 19 Sep 2016 09:36:40 with FlexibleSUSY
- * 1.7.0 (git commit: 5938cc5e9320fd7a22b1a853dc2285c56e40a49f) and SARAH 4.9.1 .
+ * This file was generated at Sat 15 Oct 2016 15:08:16 with FlexibleSUSY
+ * 1.7.1 (git commit: 1c1e3234ccd2a3935de013cbdabfb338bedc9204) and SARAH 4.9.1 .
  */
 
 #ifndef MSSMtower_TWO_SCALE_H
