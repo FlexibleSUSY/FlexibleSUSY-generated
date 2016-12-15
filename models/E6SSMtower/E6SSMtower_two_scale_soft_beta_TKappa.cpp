@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 16:00:59
+// File generated at Thu 15 Dec 2016 12:42:49
 
 #include "E6SSMtower_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -79,12 +79,11 @@ Eigen::Matrix<double,3,3> E6SSMtower_soft_parameters::calc_beta_TKappa_one_loop(
 
    Eigen::Matrix<double,3,3> beta_TKappa;
 
-   beta_TKappa = (oneOver16PiSqr*(3*traceKappaAdjKappa*TKappa + 2*
-      traceLambda12AdjLambda12*TKappa + 2*AbsSqr(Lambdax)*TKappa -
-      0.26666666666666666*Sqr(g1)*TKappa - 5.333333333333333*Sqr(g3)*TKappa -
-      1.9*Sqr(gN)*TKappa + Kappa*(6*traceAdjKappaTKappa + 4*
-      traceAdjLambda12TLambda12 + 0.5333333333333333*MassB*Sqr(g1) +
-      10.666666666666666*MassG*Sqr(g3) + 3.8*MassBp*Sqr(gN) + 4*Conj(Lambdax)*
+   beta_TKappa = (oneOver16PiSqr*((3*traceKappaAdjKappa + 2*
+      traceLambda12AdjLambda12 + 2*AbsSqr(Lambdax) - 0.26666666666666666*Sqr(g1
+      ) - 5.333333333333333*Sqr(g3) - 1.9*Sqr(gN))*TKappa + 0.06666666666666667
+      *Kappa*(90*traceAdjKappaTKappa + 60*traceAdjLambda12TLambda12 + 8*MassB*
+      Sqr(g1) + 160*MassG*Sqr(g3) + 57*MassBp*Sqr(gN) + 60*Conj(Lambdax)*
       TLambdax) + 3*(Kappa*(Kappa).adjoint()*TKappa) + 3*(TKappa*(Kappa)
       .adjoint()*Kappa))).real();
 
@@ -123,36 +122,29 @@ Eigen::Matrix<double,3,3> E6SSMtower_soft_parameters::calc_beta_TKappa_two_loop(
 
    Eigen::Matrix<double,3,3> beta_TKappa;
 
-   beta_TKappa = (twoLoop*(2.5955555555555554*Power(g1,4)*TKappa +
-      14.222222222222221*Power(g3,4)*TKappa + 19.665*Power(gN,4)*TKappa - 6*
-      traceKappaAdjKappaKappaAdjKappa*TKappa - 4*
-      traceLambda12AdjLambda12Lambda12AdjLambda12*TKappa - 6*traceYdAdjYd*
-      AbsSqr(Lambdax)*TKappa - 2*traceYeAdjYe*AbsSqr(Lambdax)*TKappa - 6*
-      traceYuAdjYu*AbsSqr(Lambdax)*TKappa + 0.8*traceKappaAdjKappa*Sqr(g1)*
-      TKappa + 1.2*traceLambda12AdjLambda12*Sqr(g1)*TKappa + 1.2*AbsSqr(Lambdax
-      )*Sqr(g1)*TKappa + 6*traceLambda12AdjLambda12*Sqr(g2)*TKappa + 6*AbsSqr(
-      Lambdax)*Sqr(g2)*TKappa + 16*traceKappaAdjKappa*Sqr(g3)*TKappa +
-      1.4222222222222223*Sqr(g1)*Sqr(g3)*TKappa - 1.8*traceKappaAdjKappa*Sqr(gN
-      )*TKappa - 1.2*traceLambda12AdjLambda12*Sqr(gN)*TKappa - 1.2*AbsSqr(
-      Lambdax)*Sqr(gN)*TKappa + 0.25333333333333335*Sqr(g1)*Sqr(gN)*TKappa +
-      3.466666666666667*Sqr(g3)*Sqr(gN)*TKappa - 4*Sqr(Conj(Lambdax))*Sqr(
-      Lambdax)*TKappa - 0.0022222222222222222*Kappa*(4672*Power(g1,4)*MassB +
-      35397*Power(gN,4)*MassBp + 25600*Power(g3,4)*MassG + 10800*
-      traceKappaAdjKappaTKappaAdjKappa + 7200*
-      traceLambda12AdjLambda12TLambda12AdjLambda12 - 720*traceAdjKappaTKappa*
-      Sqr(g1) - 1080*traceAdjLambda12TLambda12*Sqr(g1) + 1080*MassB*
-      traceLambda12AdjLambda12*Sqr(g1) - 5400*traceAdjLambda12TLambda12*Sqr(g2)
-      + 5400*MassWB*traceLambda12AdjLambda12*Sqr(g2) - 14400*
-      traceAdjKappaTKappa*Sqr(g3) + 1280*MassB*Sqr(g1)*Sqr(g3) + 1280*MassG*Sqr
-      (g1)*Sqr(g3) + 1620*traceAdjKappaTKappa*Sqr(gN) + 1080*
-      traceAdjLambda12TLambda12*Sqr(gN) - 1080*MassBp*traceLambda12AdjLambda12*
-      Sqr(gN) + 228*MassB*Sqr(g1)*Sqr(gN) + 228*MassBp*Sqr(g1)*Sqr(gN) + 3120*
-      MassBp*Sqr(g3)*Sqr(gN) + 3120*MassG*Sqr(g3)*Sqr(gN) + 180*
-      traceKappaAdjKappa*(4*MassB*Sqr(g1) + 80*MassG*Sqr(g3) - 9*MassBp*Sqr(gN)
-      ) + 7200*Lambdax*Sqr(Conj(Lambdax))*TLambdax + 360*Conj(Lambdax)*(Lambdax
-      *(15*traceAdjYdTYd + 5*traceAdjYeTYe + 15*traceAdjYuTYu + 3*MassB*Sqr(g1)
-      + 15*MassWB*Sqr(g2) - 3*MassBp*Sqr(gN)) + (15*traceYdAdjYd + 5*
-      traceYeAdjYe + 15*traceYuAdjYu - 3*Sqr(g1) - 15*Sqr(g2) + 3*Sqr(gN))*
+   beta_TKappa = (twoLoop*(-0.0022222222222222222*Kappa*(4672*Power(g1,4)
+      *MassB + 25600*Power(g3,4)*MassG + 240*Sqr(g3)*(60*(-traceAdjKappaTKappa
+      + MassG*traceKappaAdjKappa) + 13*(MassBp + MassG)*Sqr(gN)) + 9*(3933*
+      Power(gN,4)*MassBp + 200*(6*traceKappaAdjKappaTKappaAdjKappa + 4*
+      traceLambda12AdjLambda12TLambda12AdjLambda12 - 3*(
+      traceAdjLambda12TLambda12 - MassWB*traceLambda12AdjLambda12)*Sqr(g2)) +
+      60*(3*traceAdjKappaTKappa + 2*traceAdjLambda12TLambda12 - 3*MassBp*
+      traceKappaAdjKappa - 2*MassBp*traceLambda12AdjLambda12)*Sqr(gN)) + 4*Sqr(
+      g1)*(320*(MassB + MassG)*Sqr(g3) + 3*(30*(-2*traceAdjKappaTKappa - 3*
+      traceAdjLambda12TLambda12 + 2*MassB*traceKappaAdjKappa + 3*MassB*
+      traceLambda12AdjLambda12) + 19*(MassB + MassBp)*Sqr(gN)))) +
+      0.0005555555555555556*(4672*Power(g1,4) + 25600*Power(g3,4) + 480*Sqr(g3)
+      *(60*traceKappaAdjKappa + 13*Sqr(gN)) + 8*Sqr(g1)*(180*traceKappaAdjKappa
+      + 270*traceLambda12AdjLambda12 + 320*Sqr(g3) + 57*Sqr(gN)) + 9*(3933*
+      Power(gN,4) + 400*(-3*traceKappaAdjKappaKappaAdjKappa - 2*
+      traceLambda12AdjLambda12Lambda12AdjLambda12 + 3*traceLambda12AdjLambda12*
+      Sqr(g2)) - 120*(3*traceKappaAdjKappa + 2*traceLambda12AdjLambda12)*Sqr(gN
+      )))*TKappa - 4*Lambdax*Sqr(Conj(Lambdax))*(Lambdax*TKappa + 4*Kappa*
+      TLambdax) - 0.4*Conj(Lambdax)*(Lambdax*(15*traceYdAdjYd + 5*traceYeAdjYe
+      + 15*traceYuAdjYu - 3*Sqr(g1) - 15*Sqr(g2) + 3*Sqr(gN))*TKappa + 2*Kappa*
+      (Lambdax*(3*MassB*Sqr(g1) + 5*(3*traceAdjYdTYd + traceAdjYeTYe + 3*
+      traceAdjYuTYu + 3*MassWB*Sqr(g2)) - 3*MassBp*Sqr(gN)) + (15*traceYdAdjYd
+      + 5*traceYeAdjYe + 15*traceYuAdjYu - 3*Sqr(g1) - 15*Sqr(g2) + 3*Sqr(gN))*
       TLambdax)) + (-12*traceAdjKappaTKappa - 8*traceAdjLambda12TLambda12 - 5*
       MassBp*Sqr(gN) - 8*Conj(Lambdax)*TLambdax)*(Kappa*(Kappa).adjoint()*Kappa
       ) + (-9*traceKappaAdjKappa - 6*traceLambda12AdjLambda12 - 6*AbsSqr(

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:25:03
+// File generated at Thu 15 Dec 2016 12:39:49
 
 #include "HGTHDMIIMSSMBC_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -44,10 +44,10 @@ double HGTHDMIIMSSMBC_susy_parameters::calc_beta_Lambda1_one_loop(const Susy_tra
    beta_Lambda1 = Re(oneOver16PiSqr*(0.135*Power(g1,4) - 2.5*Power(g1d,4)
       - 0.5*Power(g1dp,4) + 1.125*Power(g2,4) + 2*Lambda3*Lambda4 + 12*Lambda1
       *traceYdAdjYd - 6*traceYdAdjYdYdAdjYd + 4*Lambda1*traceYeAdjYe - 2*
-      traceYeAdjYeYeAdjYe - 1.8*Lambda1*Sqr(g1) + 6*Lambda1*Sqr(g1d) + 2*
-      Lambda1*Sqr(g1dp) - Sqr(g1d)*Sqr(g1dp) - 9*Lambda1*Sqr(g2) + 0.45*Sqr(g1)
-      *Sqr(g2) + 24*Sqr(Lambda1) + 2*Sqr(Lambda3) + Sqr(Lambda4) + Sqr(Lambda5)
-      + 12*Sqr(Lambda6)));
+      traceYeAdjYeYeAdjYe + 2*Lambda1*Sqr(g1dp) - Sqr(g1d)*(-6*Lambda1 + Sqr(
+      g1dp)) - 9*Lambda1*Sqr(g2) + 0.45*Sqr(g1)*(-4*Lambda1 + Sqr(g2)) + 24*Sqr
+      (Lambda1) + 2*Sqr(Lambda3) + Sqr(Lambda4) + Sqr(Lambda5) + 12*Sqr(Lambda6
+      )));
 
 
    return beta_Lambda1;

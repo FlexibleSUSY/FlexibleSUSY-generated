@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 16:10:28
+// File generated at Thu 15 Dec 2016 13:13:22
 
 #include "CMSSM_utilities.hpp"
 #include "CMSSM_input_parameters.hpp"
@@ -53,13 +53,6 @@ void append(Eigen::ArrayXd& a, const Eigen::ArrayXd& b)
 }
 
 } // namespace utilities
-
-CMSSM_spectrum_plotter::CMSSM_spectrum_plotter()
-   : spectrum()
-   , scale(0.0)
-   , width(16)
-{
-}
 
 
 void CMSSM_spectrum_plotter::extract_spectrum(const CMSSM_mass_eigenstates& model)
@@ -115,13 +108,13 @@ void CMSSM_spectrum_plotter::write_to_file(const std::string& file_name) const
 
 void CMSSM_spectrum_plotter::write_spectrum(const TSpectrum& spectrum, std::ofstream& filestr) const
 {
-   for (std::size_t s = 0; s < spectrum.size(); ++s) {
-      if (!filestr.good()) {
-         ERROR("CMSSM_spectrum_plotter::write_spectrum: "
-               "file stream is corrupted");
-         break;
-      }
+   if (!filestr.good()) {
+      ERROR("CMSSM_spectrum_plotter::write_spectrum: "
+            "file stream is corrupted");
+      return;
+   }
 
+   for (std::size_t s = 0; s < spectrum.size(); ++s) {
       const std::string& name = spectrum[s].name;
       const std::string& latex_name = spectrum[s].latex_name;
       const std::valarray<double>& masses = spectrum[s].masses;
@@ -130,7 +123,7 @@ void CMSSM_spectrum_plotter::write_spectrum(const TSpectrum& spectrum, std::ofst
       filestr << std::left << "# " << name << '\n';
 
       for (std::size_t i = 0; i < multiplicity; ++i) {
-         std::string lname("$" + latex_name + "$");
+         const std::string lname("$" + latex_name + "$");
          std::stringstream lname_with_index;
          lname_with_index << "$" << latex_name;
          if (multiplicity > 1)

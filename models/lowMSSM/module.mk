@@ -236,6 +236,7 @@ pack-$(MODNAME)-src:
 		tar -czf $(lowMSSM_TARBALL) \
 		$(LIBlowMSSM_SRC) $(LIBlowMSSM_HDR) \
 		$(EXElowMSSM_SRC) \
+		$(LLlowMSSM_SRC) $(LLlowMSSM_MMA) \
 		$(lowMSSM_MK) $(lowMSSM_TWO_SCALE_MK) \
 		$(lowMSSM_SLHA_INPUT) $(lowMSSM_GNUPLOT)
 

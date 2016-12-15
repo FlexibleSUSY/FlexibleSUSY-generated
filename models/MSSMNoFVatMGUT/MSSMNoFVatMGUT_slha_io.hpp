@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:57:07
+// File generated at Thu 15 Dec 2016 13:07:41
 
 #ifndef MSSMNoFVatMGUT_SLHA_IO_H
 #define MSSMNoFVatMGUT_SLHA_IO_H
@@ -57,7 +57,6 @@ struct MSSMNoFVatMGUT_scales {
 class MSSMNoFVatMGUT_slha_io {
 public:
    MSSMNoFVatMGUT_slha_io();
-   ~MSSMNoFVatMGUT_slha_io() {}
 
    void clear();
 

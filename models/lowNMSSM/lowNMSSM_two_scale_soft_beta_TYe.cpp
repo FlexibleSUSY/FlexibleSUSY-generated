@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:38:05
+// File generated at Thu 15 Dec 2016 12:52:38
 
 #include "lowNMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -77,11 +77,10 @@ Eigen::Matrix<double,3,3> lowNMSSM_soft_parameters::calc_beta_TYe_one_loop(const
 
    Eigen::Matrix<double,3,3> beta_TYe;
 
-   beta_TYe = (oneOver16PiSqr*(3*traceYdAdjYd*TYe + traceYeAdjYe*TYe +
-      AbsSqr(Lambdax)*TYe - 1.8*Sqr(g1)*TYe - 3*Sqr(g2)*TYe + Ye*(6*
-      traceAdjYdTYd + 2*traceAdjYeTYe + 3.6*MassB*Sqr(g1) + 6*MassWB*Sqr(g2) +
-      2*Conj(Lambdax)*TLambdax) + 4*(Ye*Ye.adjoint()*TYe) + 5*(TYe*Ye.adjoint()
-      *Ye))).real();
+   beta_TYe = (oneOver16PiSqr*((3*traceYdAdjYd + traceYeAdjYe + AbsSqr(
+      Lambdax) - 1.8*Sqr(g1) - 3*Sqr(g2))*TYe + 0.4*Ye*(9*MassB*Sqr(g1) + 5*(3*
+      traceAdjYdTYd + traceAdjYeTYe + 3*MassWB*Sqr(g2)) + 5*Conj(Lambdax)*
+      TLambdax) + 4*(Ye*Ye.adjoint()*TYe) + 5*(TYe*Ye.adjoint()*Ye))).real();
 
 
    return beta_TYe;
@@ -111,27 +110,24 @@ Eigen::Matrix<double,3,3> lowNMSSM_soft_parameters::calc_beta_TYe_two_loop(const
 
    Eigen::Matrix<double,3,3> beta_TYe;
 
-   beta_TYe = (twoLoop*(13.5*Power(g1,4)*TYe + 7.5*Power(g2,4)*TYe - 9*
-      traceYdAdjYdYdAdjYd*TYe - 3*traceYdAdjYuYuAdjYd*TYe - 3*
-      traceYeAdjYeYeAdjYe*TYe - 3*traceYuAdjYu*AbsSqr(Lambdax)*TYe - 2*AbsSqr(
-      Kappa)*AbsSqr(Lambdax)*TYe - 0.4*traceYdAdjYd*Sqr(g1)*TYe + 1.2*
-      traceYeAdjYe*Sqr(g1)*TYe + 1.8*Sqr(g1)*Sqr(g2)*TYe + 16*traceYdAdjYd*Sqr(
-      g3)*TYe - 3*Sqr(Conj(Lambdax))*Sqr(Lambdax)*TYe - 0.4*Ye*(135*Power(g1,4)
-      *MassB + 75*Power(g2,4)*MassWB + 90*traceYdAdjYdTYdAdjYd + 15*
-      traceYdAdjYuTYuAdjYd + 30*traceYeAdjYeTYeAdjYe + 15*traceYuAdjYdTYdAdjYu
-      + 2*traceAdjYdTYd*Sqr(g1) - 6*traceAdjYeTYe*Sqr(g1) - 2*MassB*
-      traceYdAdjYd*Sqr(g1) + 6*MassB*traceYeAdjYe*Sqr(g1) + 9*MassB*Sqr(g1)*Sqr
-      (g2) + 9*MassWB*Sqr(g1)*Sqr(g2) - 80*traceAdjYdTYd*Sqr(g3) + 80*MassG*
-      traceYdAdjYd*Sqr(g3) + 30*Lambdax*Sqr(Conj(Lambdax))*TLambdax + 15*Conj(
-      Lambdax)*(traceAdjYuTYu*Lambdax + traceYuAdjYu*TLambdax) + 10*Conj(Kappa)
-      *Conj(Lambdax)*(Lambdax*TKappa + Kappa*TLambdax)) - 6*(3*traceAdjYdTYd +
-      traceAdjYeTYe + 2*MassWB*Sqr(g2) + Conj(Lambdax)*TLambdax)*(Ye*Ye.adjoint
-      ()*Ye) + (-12*traceYdAdjYd - 4*traceYeAdjYe - 4*AbsSqr(Lambdax) + 1.2*Sqr
-      (g1) + 6*Sqr(g2))*(Ye*Ye.adjoint()*TYe) + (-15*traceYdAdjYd - 5*
-      traceYeAdjYe - 5*AbsSqr(Lambdax) - 1.2*Sqr(g1) + 12*Sqr(g2))*(TYe*
-      Ye.adjoint()*Ye) - 6*(Ye*Ye.adjoint()*Ye*Ye.adjoint()*TYe) - 8*(Ye*
-      Ye.adjoint()*TYe*Ye.adjoint()*Ye) - 6*(TYe*Ye.adjoint()*Ye*Ye.adjoint()*
-      Ye))).real();
+   beta_TYe = (twoLoop*(0.1*(-4*Ye*(135*Power(g1,4)*MassB + Sqr(g1)*(2*(
+      traceAdjYdTYd - 3*traceAdjYeTYe - MassB*traceYdAdjYd + 3*MassB*
+      traceYeAdjYe) + 9*(MassB + MassWB)*Sqr(g2)) + 5*(15*Power(g2,4)*MassWB +
+      3*(6*traceYdAdjYdTYdAdjYd + traceYdAdjYuTYuAdjYd + 2*traceYeAdjYeTYeAdjYe
+      + traceYuAdjYdTYdAdjYu) - 16*(traceAdjYdTYd - MassG*traceYdAdjYd)*Sqr(g3
+      ))) + (135*Power(g1,4) + 2*Sqr(g1)*(-2*traceYdAdjYd + 6*traceYeAdjYe + 9*
+      Sqr(g2)) + 5*(15*Power(g2,4) - 6*(3*traceYdAdjYdYdAdjYd +
+      traceYdAdjYuYuAdjYd + traceYeAdjYeYeAdjYe) + 32*traceYdAdjYd*Sqr(g3)))*
+      TYe) - 3*Lambdax*Sqr(Conj(Lambdax))*(Lambdax*TYe + 4*Ye*TLambdax) - Conj(
+      Lambdax)*((3*traceYuAdjYu + 2*AbsSqr(Kappa))*Lambdax*TYe + 2*Ye*(3*(
+      traceAdjYuTYu*Lambdax + traceYuAdjYu*TLambdax) + 2*Conj(Kappa)*(Lambdax*
+      TKappa + Kappa*TLambdax))) - 6*(3*traceAdjYdTYd + traceAdjYeTYe + 2*
+      MassWB*Sqr(g2) + Conj(Lambdax)*TLambdax)*(Ye*Ye.adjoint()*Ye) + (-12*
+      traceYdAdjYd - 4*traceYeAdjYe - 4*AbsSqr(Lambdax) + 1.2*Sqr(g1) + 6*Sqr(
+      g2))*(Ye*Ye.adjoint()*TYe) + (-15*traceYdAdjYd - 5*traceYeAdjYe - 5*
+      AbsSqr(Lambdax) - 1.2*Sqr(g1) + 12*Sqr(g2))*(TYe*Ye.adjoint()*Ye) - 6*(Ye
+      *Ye.adjoint()*Ye*Ye.adjoint()*TYe) - 8*(Ye*Ye.adjoint()*TYe*Ye.adjoint()*
+      Ye) - 6*(TYe*Ye.adjoint()*Ye*Ye.adjoint()*Ye))).real();
 
 
    return beta_TYe;

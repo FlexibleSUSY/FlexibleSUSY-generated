@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 16:16:17
+// File generated at Thu 15 Dec 2016 12:50:31
 
 #include "E6SSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -81,17 +81,16 @@ double E6SSM_susy_parameters::calc_beta_Lambdax_two_loop(const Susy_traces& susy
       Power(g2,4) - 3933*Power(gN,4) + 1200*traceKappaAdjKappaKappaAdjKappa +
       800*traceLambda12AdjLambda12Lambda12AdjLambda12 + 1800*
       traceYdAdjYdYdAdjYd + 1200*traceYdAdjYuYuAdjYd + 600*traceYeAdjYeYeAdjYe
-      + 1800*traceYuAdjYuYuAdjYu - 160*traceKappaAdjKappa*Sqr(g1) - 240*
-      traceLambda12AdjLambda12*Sqr(g1) - 240*traceYeAdjYe*Sqr(g1) - 160*
-      traceYuAdjYu*Sqr(g1) - 1200*traceLambda12AdjLambda12*Sqr(g2) - 360*Sqr(g1
-      )*Sqr(g2) - 3200*traceKappaAdjKappa*Sqr(g3) - 3200*traceYuAdjYu*Sqr(g3) +
-      360*traceKappaAdjKappa*Sqr(gN) + 240*traceLambda12AdjLambda12*Sqr(gN) +
-      40*traceYeAdjYe*Sqr(gN) + 60*traceYuAdjYu*Sqr(gN) - 54*Sqr(g1)*Sqr(gN) -
-      390*Sqr(g2)*Sqr(gN) + 40*traceYdAdjYd*(2*Sqr(g1) - 80*Sqr(g3) + 3*Sqr(gN)
-      ) - 20*AbsSqr(Lambdax)*(-60*traceKappaAdjKappa - 40*
-      traceLambda12AdjLambda12 - 90*traceYdAdjYd - 30*traceYeAdjYe - 90*
-      traceYuAdjYu + 12*Sqr(g1) + 60*Sqr(g2) + 13*Sqr(gN)) + 2000*Sqr(Conj(
-      Lambdax))*Sqr(Lambdax)));
+      + 1800*traceYuAdjYuYuAdjYu - 1200*traceLambda12AdjLambda12*Sqr(g2) - 3200
+      *traceKappaAdjKappa*Sqr(g3) - 3200*traceYdAdjYd*Sqr(g3) - 3200*
+      traceYuAdjYu*Sqr(g3) + 360*traceKappaAdjKappa*Sqr(gN) + 240*
+      traceLambda12AdjLambda12*Sqr(gN) + 120*traceYdAdjYd*Sqr(gN) + 40*
+      traceYeAdjYe*Sqr(gN) + 60*traceYuAdjYu*Sqr(gN) - 390*Sqr(g2)*Sqr(gN) - 20
+      *AbsSqr(Lambdax)*(-60*traceKappaAdjKappa - 40*traceLambda12AdjLambda12 -
+      90*traceYdAdjYd - 30*traceYeAdjYe - 90*traceYuAdjYu + 12*Sqr(g1) + 60*Sqr
+      (g2) + 13*Sqr(gN)) - 2*Sqr(g1)*(40*(2*traceKappaAdjKappa + 3*
+      traceLambda12AdjLambda12 - traceYdAdjYd + 3*traceYeAdjYe + 2*traceYuAdjYu
+      ) + 180*Sqr(g2) + 27*Sqr(gN)) + 2000*Sqr(Conj(Lambdax))*Sqr(Lambdax)));
 
 
    return beta_Lambdax;

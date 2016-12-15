@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:32:44
+// File generated at Thu 15 Dec 2016 12:51:26
 
 #include "UMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -78,19 +78,17 @@ double UMSSM_susy_parameters::calc_beta_gp_two_loop(const Susy_traces& susy_trac
 
    double beta_gp;
 
-   beta_gp = Re(0.4*Power(gp,3)*twoLoop*(90*Power(Qd,4)*Sqr(gp) + 30*
-      Power(Qe,4)*Sqr(gp) + 20*Power(QHd,4)*Sqr(gp) + 20*Power(QHu,4)*Sqr(gp) +
-      60*Power(Ql,4)*Sqr(gp) + 180*Power(Qq,4)*Sqr(gp) + 10*Power(Qs,4)*Sqr(gp
-      ) + 90*Power(Qu,4)*Sqr(gp) + 30*Power(Qv,4)*Sqr(gp) + 6*Sqr(g1)*Sqr(Qd) +
-      120*Sqr(g3)*Sqr(Qd) - 10*traceYeAdjYe*Sqr(Qe) + 18*Sqr(g1)*Sqr(Qe) - 10*
-      traceYeAdjYe*Sqr(QHd) + 3*Sqr(g1)*Sqr(QHd) + 15*Sqr(g2)*Sqr(QHd) - 30*
-      traceYuAdjYu*Sqr(QHu) - 10*traceYvAdjYv*Sqr(QHu) + 3*Sqr(g1)*Sqr(QHu) +
-      15*Sqr(g2)*Sqr(QHu) - 10*traceYeAdjYe*Sqr(Ql) - 10*traceYvAdjYv*Sqr(Ql) +
-      9*Sqr(g1)*Sqr(Ql) + 45*Sqr(g2)*Sqr(Ql) - 30*traceYuAdjYu*Sqr(Qq) + 3*Sqr
-      (g1)*Sqr(Qq) + 135*Sqr(g2)*Sqr(Qq) + 240*Sqr(g3)*Sqr(Qq) - 30*
-      traceYdAdjYd*(Sqr(Qd) + Sqr(QHd) + Sqr(Qq)) - 10*AbsSqr(Lambdax)*(Sqr(QHd
-      ) + Sqr(QHu) + Sqr(Qs)) - 30*traceYuAdjYu*Sqr(Qu) + 24*Sqr(g1)*Sqr(Qu) +
-      120*Sqr(g3)*Sqr(Qu) - 10*traceYvAdjYv*Sqr(Qv)));
+   beta_gp = Re(0.4*Power(gp,3)*twoLoop*(-10*AbsSqr(Lambdax)*(Sqr(QHd) +
+      Sqr(QHu) + Sqr(Qs)) + 3*Sqr(g1)*(2*Sqr(Qd) + 6*Sqr(Qe) + Sqr(QHd) + Sqr(
+      QHu) + 3*Sqr(Ql) + Sqr(Qq) + 8*Sqr(Qu)) + 5*(2*(9*Power(Qd,4) + 3*Power(
+      Qe,4) + 2*Power(QHd,4) + 2*Power(QHu,4) + 6*Power(Ql,4) + 18*Power(Qq,4)
+      + Power(Qs,4) + 9*Power(Qu,4) + 3*Power(Qv,4))*Sqr(gp) - 6*traceYdAdjYd*
+      Sqr(Qd) - 2*traceYeAdjYe*Sqr(Qe) - 6*traceYdAdjYd*Sqr(QHd) - 2*
+      traceYeAdjYe*Sqr(QHd) + 3*Sqr(g2)*Sqr(QHd) - 6*traceYuAdjYu*Sqr(QHu) - 2*
+      traceYvAdjYv*Sqr(QHu) + 3*Sqr(g2)*Sqr(QHu) - 2*traceYeAdjYe*Sqr(Ql) - 2*
+      traceYvAdjYv*Sqr(Ql) + 9*Sqr(g2)*Sqr(Ql) - 6*traceYdAdjYd*Sqr(Qq) - 6*
+      traceYuAdjYu*Sqr(Qq) + 27*Sqr(g2)*Sqr(Qq) - 6*traceYuAdjYu*Sqr(Qu) + 24*
+      Sqr(g3)*(Sqr(Qd) + 2*Sqr(Qq) + Sqr(Qu)) - 2*traceYvAdjYv*Sqr(Qv))));
 
 
    return beta_gp;

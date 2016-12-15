@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 16:03:28
+// File generated at Thu 15 Dec 2016 13:10:24
 
 #include "MSSMatMGUT_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -96,10 +96,10 @@ double MSSMatMGUT_soft_parameters::calc_beta_MassWB_two_loop(const Soft_traces& 
 
    double beta_MassWB;
 
-   beta_MassWB = Re(0.4*twoLoop*Sqr(g2)*(30*traceAdjYdTYd + 10*
-      traceAdjYeTYe + 30*traceAdjYuTYu - 30*MassWB*traceYdAdjYd - 10*MassWB*
-      traceYeAdjYe - 30*MassWB*traceYuAdjYu + 9*MassB*Sqr(g1) + 9*MassWB*Sqr(g1
-      ) + 250*MassWB*Sqr(g2) + 120*MassG*Sqr(g3) + 120*MassWB*Sqr(g3)));
+   beta_MassWB = Re(0.4*twoLoop*Sqr(g2)*(9*(MassB + MassWB)*Sqr(g1) + 10*
+      (3*traceAdjYdTYd + traceAdjYeTYe + 3*traceAdjYuTYu - 3*MassWB*
+      traceYdAdjYd - MassWB*traceYeAdjYe - 3*MassWB*traceYuAdjYu + 25*MassWB*
+      Sqr(g2) + 12*(MassG + MassWB)*Sqr(g3))));
 
 
    return beta_MassWB;
@@ -133,28 +133,24 @@ double MSSMatMGUT_soft_parameters::calc_beta_MassWB_three_loop(const Soft_traces
 
    double beta_MassWB;
 
-   beta_MassWB = Re(0.08*threeLoop*Sqr(g2)*(-914*Power(g1,4)*MassB + 2200
-      *Power(g3,4)*MassG - 457*Power(g1,4)*MassWB + 2625*Power(g2,4)*MassWB +
-      1100*Power(g3,4)*MassWB - 1200*traceAdjYdTYdAdjYdYd + 600*MassWB*
-      traceAdjYdYdAdjYdYd - 400*traceAdjYeTYeAdjYeYe + 200*MassWB*
-      traceAdjYeYeAdjYeYe - 300*traceAdjYuTYuAdjYdYd - 1200*
-      traceAdjYuTYuAdjYuYu + 300*MassWB*traceAdjYuYuAdjYdYd + 600*MassWB*
-      traceAdjYuYuAdjYuYu - 300*traceTYdAdjYuYuAdjYd - 900*traceAdjYuYu*
-      traceTYuAdjYu - 145*MassB*traceAdjYuYu*Sqr(g1) - 145*MassWB*traceAdjYuYu*
-      Sqr(g1) + 55*traceTYdAdjYd*Sqr(g1) + 105*traceTYeAdjYe*Sqr(g1) + 145*
-      traceTYuAdjYu*Sqr(g1) - 1650*MassWB*traceAdjYuYu*Sqr(g2) + 825*
-      traceTYdAdjYd*Sqr(g2) + 275*traceTYeAdjYe*Sqr(g2) + 825*traceTYuAdjYu*Sqr
-      (g2) + 45*MassB*Sqr(g1)*Sqr(g2) + 90*MassWB*Sqr(g1)*Sqr(g2) - 5*
-      traceAdjYeYe*(60*traceTYdAdjYd + 20*traceTYeAdjYe + 21*MassB*Sqr(g1) + 21
-      *MassWB*Sqr(g1) + 110*MassWB*Sqr(g2)) - 800*MassG*traceAdjYuYu*Sqr(g3) -
-      800*MassWB*traceAdjYuYu*Sqr(g3) + 800*traceTYdAdjYd*Sqr(g3) + 800*
-      traceTYuAdjYu*Sqr(g3) - 40*MassB*Sqr(g1)*Sqr(g3) - 40*MassG*Sqr(g1)*Sqr(
-      g3) - 40*MassWB*Sqr(g1)*Sqr(g3) + 600*MassG*Sqr(g2)*Sqr(g3) + 1200*MassWB
-      *Sqr(g2)*Sqr(g3) - 5*traceAdjYdYd*(-60*MassWB*traceAdjYeYe + 180*
-      traceTYdAdjYd + 60*traceTYeAdjYe + 11*MassB*Sqr(g1) + 11*MassWB*Sqr(g1) +
-      330*MassWB*Sqr(g2) + 160*MassG*Sqr(g3) + 160*MassWB*Sqr(g3)) + 450*
-      MassWB*Sqr(traceAdjYdYd) + 50*MassWB*Sqr(traceAdjYeYe) + 450*MassWB*Sqr(
-      traceAdjYuYu)));
+   beta_MassWB = Re(0.08*threeLoop*Sqr(g2)*(-457*Power(g1,4)*(2*MassB +
+      MassWB) - 5*Sqr(g1)*(11*MassB*traceAdjYdYd + 11*MassWB*traceAdjYdYd + 21*
+      MassB*traceAdjYeYe + 21*MassWB*traceAdjYeYe + 29*MassB*traceAdjYuYu + 29*
+      MassWB*traceAdjYuYu - 11*traceTYdAdjYd - 21*traceTYeAdjYe - 29*
+      traceTYuAdjYu - 9*(MassB + 2*MassWB)*Sqr(g2) + 8*(MassB + MassG + MassWB)
+      *Sqr(g3)) + 25*(105*Power(g2,4)*MassWB + Sqr(g2)*(-11*(2*MassWB*(3*
+      traceAdjYdYd + traceAdjYeYe + 3*traceAdjYuYu) - 3*traceTYdAdjYd -
+      traceTYeAdjYe - 3*traceTYuAdjYu) + 24*(MassG + 2*MassWB)*Sqr(g3)) + 2*(22
+      *Power(g3,4)*(2*MassG + MassWB) - 24*traceAdjYdTYdAdjYdYd + 12*MassWB*
+      traceAdjYdYdAdjYdYd - 8*traceAdjYeTYeAdjYeYe + 6*MassWB*traceAdjYdYd*
+      traceAdjYeYe + 4*MassWB*traceAdjYeYeAdjYeYe - 6*traceAdjYuTYuAdjYdYd - 24
+      *traceAdjYuTYuAdjYuYu + 6*MassWB*traceAdjYuYuAdjYdYd + 12*MassWB*
+      traceAdjYuYuAdjYuYu - 18*traceAdjYdYd*traceTYdAdjYd - 6*traceAdjYeYe*
+      traceTYdAdjYd - 6*traceTYdAdjYuYuAdjYd - 6*traceAdjYdYd*traceTYeAdjYe - 2
+      *traceAdjYeYe*traceTYeAdjYe - 18*traceAdjYuYu*traceTYuAdjYu - 16*(MassG*(
+      traceAdjYdYd + traceAdjYuYu) + MassWB*(traceAdjYdYd + traceAdjYuYu) -
+      traceTYdAdjYd - traceTYuAdjYu)*Sqr(g3) + 9*MassWB*Sqr(traceAdjYdYd) +
+      MassWB*Sqr(traceAdjYeYe) + 9*MassWB*Sqr(traceAdjYuYu)))));
 
 
    return beta_MassWB;

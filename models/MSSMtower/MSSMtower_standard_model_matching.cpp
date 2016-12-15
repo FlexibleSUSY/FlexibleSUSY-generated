@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:08:17
+// File generated at Thu 15 Dec 2016 12:38:57
 
 #include "MSSMtower_standard_model_matching.hpp"
 #include "wrappers.hpp"
@@ -162,10 +162,11 @@ void MSSMtower_standard_model_matching::match_low_to_high_scale_model_tree_level
       MSSMtower_mass_eigenstates* MODEL = &model;
       const double VEV = sm.get_v();
 
-      const auto TanBeta = INPUTPARAMETER(TanBeta);
+      const auto vd = MODELPARAMETER(vd);
+      const auto vu = MODELPARAMETER(vu);
 
-      MODEL->set_vu(Re((TanBeta*VEV)/Sqrt(1 + Sqr(TanBeta))));
-      MODEL->set_vd(Re(VEV/Sqrt(1 + Sqr(TanBeta))));
+      MODEL->set_vu(Re((VEV*vu)/(vd*Sqrt(1 + Sqr(vu)/Sqr(vd)))));
+      MODEL->set_vd(Re(VEV/Sqrt(1 + Sqr(vu)/Sqr(vd))));
 
    }
 
@@ -358,10 +359,11 @@ void MSSMtower_standard_model_matching::match_low_to_high_scale_model(
       MSSMtower_mass_eigenstates* MODEL = &model;
       const double VEV = 2. * AbsSqrt(mZ2_1L/(Sqr(g1_1L*MSSMtower_info::normalization_g1) + Sqr(g2_1L*MSSMtower_info::normalization_g2)));
 
-      const auto TanBeta = INPUTPARAMETER(TanBeta);
+      const auto vd = MODELPARAMETER(vd);
+      const auto vu = MODELPARAMETER(vu);
 
-      MODEL->set_vu(Re((TanBeta*VEV)/Sqrt(1 + Sqr(TanBeta))));
-      MODEL->set_vd(Re(VEV/Sqrt(1 + Sqr(TanBeta))));
+      MODEL->set_vu(Re((VEV*vu)/(vd*Sqrt(1 + Sqr(vu)/Sqr(vd)))));
+      MODEL->set_vd(Re(VEV/Sqrt(1 + Sqr(vu)/Sqr(vd))));
 
    }
 

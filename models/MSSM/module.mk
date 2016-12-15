@@ -236,6 +236,7 @@ pack-$(MODNAME)-src:
 		tar -czf $(MSSM_TARBALL) \
 		$(LIBMSSM_SRC) $(LIBMSSM_HDR) \
 		$(EXEMSSM_SRC) \
+		$(LLMSSM_SRC) $(LLMSSM_MMA) \
 		$(MSSM_MK) $(MSSM_TWO_SCALE_MK) \
 		$(MSSM_SLHA_INPUT) $(MSSM_GNUPLOT)
 

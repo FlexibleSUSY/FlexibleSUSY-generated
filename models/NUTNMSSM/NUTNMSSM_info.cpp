@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:41:52
+// File generated at Thu 15 Dec 2016 12:56:53
 
 #include "NUTNMSSM_info.hpp"
 
@@ -130,8 +130,6 @@ namespace NUTNMSSM_info {
       "AKappaInput", "MuEff"};
 
    const char* model_name = "NUTNMSSM";
-   const bool is_low_energy_model = false;
-   const bool is_supersymmetric_model = true;
 
 void print(std::ostream& ostr)
 {

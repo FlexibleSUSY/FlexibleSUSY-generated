@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 16:06:57
+// File generated at Thu 15 Dec 2016 13:11:24
 
 #include "MSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -57,8 +57,9 @@ double MSSM_susy_parameters::calc_beta_g2_two_loop(const Susy_traces& susy_trace
 
    double beta_g2;
 
-   beta_g2 = Re(0.2*Power(g2,3)*twoLoop*(-30*traceYdAdjYd - 10*
-      traceYeAdjYe - 30*traceYuAdjYu + 9*Sqr(g1) + 125*Sqr(g2) + 120*Sqr(g3)));
+   beta_g2 = Re(0.2*Power(g2,3)*twoLoop*(9*Sqr(g1) + 5*(-2*(3*
+      traceYdAdjYd + traceYeAdjYe + 3*traceYuAdjYu) + 25*Sqr(g2) + 24*Sqr(g3)))
+      );
 
 
    return beta_g2;
@@ -84,14 +85,14 @@ double MSSM_susy_parameters::calc_beta_g2_three_loop(const Susy_traces& susy_tra
 
    double beta_g2;
 
-   beta_g2 = Re(0.04*Power(g2,3)*threeLoop*(-457*Power(g1,4) + 875*Power(
-      g2,4) + 1100*Power(g3,4) + 600*traceAdjYdYdAdjYdYd + 200*
-      traceAdjYeYeAdjYeYe + 300*traceAdjYuYuAdjYdYd + 600*traceAdjYuYuAdjYuYu -
-      145*traceAdjYuYu*Sqr(g1) - 825*traceAdjYuYu*Sqr(g2) + 45*Sqr(g1)*Sqr(g2)
-      - 5*traceAdjYeYe*(21*Sqr(g1) + 55*Sqr(g2)) - 800*traceAdjYuYu*Sqr(g3) -
-      40*Sqr(g1)*Sqr(g3) + 600*Sqr(g2)*Sqr(g3) - 5*traceAdjYdYd*(-60*
-      traceAdjYeYe + 11*Sqr(g1) + 165*Sqr(g2) + 160*Sqr(g3)) + 450*Sqr(
-      traceAdjYdYd) + 50*Sqr(traceAdjYeYe) + 450*Sqr(traceAdjYuYu)));
+   beta_g2 = Re(0.04*Power(g2,3)*threeLoop*(-457*Power(g1,4) + 5*Sqr(g1)*
+      (-11*traceAdjYdYd - 21*traceAdjYeYe - 29*traceAdjYuYu + 9*Sqr(g2) - 8*Sqr
+      (g3)) + 25*(35*Power(g2,4) + Sqr(g2)*(-11*(3*traceAdjYdYd + traceAdjYeYe
+      + 3*traceAdjYuYu) + 24*Sqr(g3)) + 2*(22*Power(g3,4) + 12*
+      traceAdjYdYdAdjYdYd + 6*traceAdjYdYd*traceAdjYeYe + 4*traceAdjYeYeAdjYeYe
+      + 6*traceAdjYuYuAdjYdYd + 12*traceAdjYuYuAdjYuYu - 16*(traceAdjYdYd +
+      traceAdjYuYu)*Sqr(g3) + 9*Sqr(traceAdjYdYd) + Sqr(traceAdjYeYe) + 9*Sqr(
+      traceAdjYuYu)))));
 
 
    return beta_g2;

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:08:40
+// File generated at Thu 15 Dec 2016 12:39:17
 
 #include "MRSSMtower_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -63,13 +63,12 @@ double MRSSMtower_susy_parameters::calc_beta_LamTU_two_loop(const Susy_traces& s
    double beta_LamTU;
 
    beta_LamTU = Re(-0.1*LamTU*twoLoop*(-45*Power(g1,4) - 485*Power(g2,4)
-      + 30*traceYdAdjYuYuAdjYd + 90*traceYuAdjYuYuAdjYu + 30*traceYdAdjYd*
-      AbsSqr(LamTD) + 10*traceYeAdjYe*AbsSqr(LamTD) + 20*AbsSqr(LamSD)*(2*
-      AbsSqr(LamSU) + AbsSqr(LamTD)) + 75*traceYuAdjYu*AbsSqr(LamTU) + 30*
-      AbsSqr(LamTD)*AbsSqr(LamTU) + 10*AbsSqr(LamSU)*(3*traceYuAdjYu + 8*AbsSqr
-      (LamTU)) - 8*traceYuAdjYu*Sqr(g1) - 6*AbsSqr(LamTD)*Sqr(g1) - 6*AbsSqr(
-      LamTU)*Sqr(g1) + 10*AbsSqr(LamTD)*Sqr(g2) - 110*AbsSqr(LamTU)*Sqr(g2) -
-      18*Sqr(g1)*Sqr(g2) - 160*traceYuAdjYu*Sqr(g3) + 60*Sqr(LamSU)*Sqr(Conj(
+      + 30*traceYdAdjYuYuAdjYd + 90*traceYuAdjYuYuAdjYu + 75*traceYuAdjYu*
+      AbsSqr(LamTU) + 10*AbsSqr(LamSU)*(3*traceYuAdjYu + 4*AbsSqr(LamSD) + 8*
+      AbsSqr(LamTU)) - 8*traceYuAdjYu*Sqr(g1) - 6*AbsSqr(LamTU)*Sqr(g1) - 110*
+      AbsSqr(LamTU)*Sqr(g2) - 18*Sqr(g1)*Sqr(g2) + 2*AbsSqr(LamTD)*(15*
+      traceYdAdjYd + 5*traceYeAdjYe + 10*AbsSqr(LamSD) + 15*AbsSqr(LamTU) - 3*
+      Sqr(g1) + 5*Sqr(g2)) - 160*traceYuAdjYu*Sqr(g3) + 60*Sqr(LamSU)*Sqr(Conj(
       LamSU)) + 30*Sqr(LamTD)*Sqr(Conj(LamTD)) + 105*Sqr(LamTU)*Sqr(Conj(LamTU)
       )));
 

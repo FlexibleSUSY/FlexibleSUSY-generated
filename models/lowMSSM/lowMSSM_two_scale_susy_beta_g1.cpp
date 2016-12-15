@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:48:59
+// File generated at Thu 15 Dec 2016 13:01:16
 
 #include "lowMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -57,9 +57,9 @@ double lowMSSM_susy_parameters::calc_beta_g1_two_loop(const Susy_traces& susy_tr
 
    double beta_g1;
 
-   beta_g1 = Re(0.04*Power(g1,3)*twoLoop*(-70*traceYdAdjYd - 90*
-      traceYeAdjYe - 130*traceYuAdjYu + 199*Sqr(g1) + 135*Sqr(g2) + 440*Sqr(g3)
-      ));
+   beta_g1 = Re(0.04*Power(g1,3)*twoLoop*(199*Sqr(g1) + 5*(-14*
+      traceYdAdjYd - 18*traceYeAdjYe - 26*traceYuAdjYu + 27*Sqr(g2) + 88*Sqr(g3
+      ))));
 
 
    return beta_g1;
@@ -86,14 +86,13 @@ double lowMSSM_susy_parameters::calc_beta_g1_three_loop(const Susy_traces& susy_
    double beta_g1;
 
    beta_g1 = Re(-0.0026666666666666666*Power(g1,3)*threeLoop*(32117*Power
-      (g1,4) + 6075*Power(g2,4) - 12100*Power(g3,4) - 4050*traceAdjYdYdAdjYdYd
-      - 4050*traceAdjYeYeAdjYeYe - 4350*traceAdjYuYuAdjYdYd - 6300*
-      traceAdjYuYuAdjYuYu + 845*traceAdjYuYu*Sqr(g1) + 6525*traceAdjYuYu*Sqr(g2
-      ) + 1035*Sqr(g1)*Sqr(g2) + 135*traceAdjYeYe*(9*Sqr(g1) + 35*Sqr(g2)) +
-      8800*traceAdjYuYu*Sqr(g3) + 5480*Sqr(g1)*Sqr(g3) + 1800*Sqr(g2)*Sqr(g3) +
-      5*traceAdjYdYd*(-1260*traceAdjYeYe + 49*Sqr(g1) + 495*Sqr(g2) + 1280*Sqr
-      (g3)) - 2700*Sqr(traceAdjYdYd) - 1800*Sqr(traceAdjYeYe) - 6750*Sqr(
-      traceAdjYuYu)));
+      (g1,4) + 5*Sqr(g1)*(49*traceAdjYdYd + 243*traceAdjYeYe + 169*traceAdjYuYu
+      + 207*Sqr(g2) + 1096*Sqr(g3)) + 25*(243*Power(g2,4) + 9*Sqr(g2)*(11*
+      traceAdjYdYd + 21*traceAdjYeYe + 29*traceAdjYuYu + 8*Sqr(g3)) - 2*(242*
+      Power(g3,4) - 16*(8*traceAdjYdYd + 11*traceAdjYuYu)*Sqr(g3) + 3*(27*
+      traceAdjYdYdAdjYdYd + 42*traceAdjYdYd*traceAdjYeYe + 27*
+      traceAdjYeYeAdjYeYe + 29*traceAdjYuYuAdjYdYd + 42*traceAdjYuYuAdjYuYu +
+      18*Sqr(traceAdjYdYd) + 12*Sqr(traceAdjYeYe) + 45*Sqr(traceAdjYuYu))))));
 
 
    return beta_g1;

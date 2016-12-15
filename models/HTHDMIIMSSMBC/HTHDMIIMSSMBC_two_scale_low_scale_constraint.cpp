@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:19:48
+// File generated at Thu 15 Dec 2016 12:40:56
 
 #include "HTHDMIIMSSMBC_two_scale_low_scale_constraint.hpp"
 #include "HTHDMIIMSSMBC_two_scale_model.hpp"
@@ -131,7 +131,8 @@ void HTHDMIIMSSMBC_low_scale_constraint<Two_scale>::apply()
    MODEL->set_g3(new_g3);
 
 
-   recalculate_mw_pole();
+   if (model->get_thresholds())
+      qedqcd.setPoleMW(recalculate_mw_pole(qedqcd.displayPoleMW()));
 
 
 }
@@ -485,14 +486,14 @@ void HTHDMIIMSSMBC_low_scale_constraint<Two_scale>::calculate_MNeutrino_DRbar()
 
 /**
  * Recalculates the W boson pole mass using the new gauge couplings.
+ *
+ * @param mw_pole current W pole mass
+ * @param new W pole mass
  */
-void HTHDMIIMSSMBC_low_scale_constraint<Two_scale>::recalculate_mw_pole()
+double HTHDMIIMSSMBC_low_scale_constraint<Two_scale>::recalculate_mw_pole(double mw_pole)
 {
    assert(model && "HTHDMIIMSSMBC_low_scale_constraint<Two_scale>::"
           "recalculate_mw_pole(): model pointer is zero");
-
-   if (!model->get_thresholds())
-      return;
 
    MODEL->calculate_MVWm();
 
@@ -502,9 +503,7 @@ void HTHDMIIMSSMBC_low_scale_constraint<Two_scale>::recalculate_mw_pole()
    if (mw_pole_sqr < 0.)
       MODEL->get_problems().flag_tachyon(HTHDMIIMSSMBC_info::VWm);
 
-   const double mw_pole = AbsSqrt(mw_pole_sqr);
-
-   qedqcd.setPoleMW(mw_pole);
+   return AbsSqrt(mw_pole_sqr);
 
 }
 

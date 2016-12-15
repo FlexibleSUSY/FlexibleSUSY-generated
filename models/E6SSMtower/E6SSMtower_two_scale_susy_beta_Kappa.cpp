@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 16:00:36
+// File generated at Thu 15 Dec 2016 12:42:22
 
 #include "E6SSMtower_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,16 +73,16 @@ Eigen::Matrix<double,3,3> E6SSMtower_susy_parameters::calc_beta_Kappa_two_loop(c
    beta_Kappa = (twoLoop*(Kappa*(2.5955555555555554*Power(g1,4) +
       14.222222222222221*Power(g3,4) + 19.665*Power(gN,4) - 6*
       traceKappaAdjKappaKappaAdjKappa - 4*
-      traceLambda12AdjLambda12Lambda12AdjLambda12 + 1.2*
-      traceLambda12AdjLambda12*Sqr(g1) + 6*traceLambda12AdjLambda12*Sqr(g2) +
-      1.4222222222222223*Sqr(g1)*Sqr(g3) - 0.4*AbsSqr(Lambdax)*(15*traceYdAdjYd
-      + 5*traceYeAdjYe - 3*(-5*traceYuAdjYu + Sqr(g1) + 5*Sqr(g2) - Sqr(gN)))
-      + 0.2*traceKappaAdjKappa*(4*Sqr(g1) + 80*Sqr(g3) - 9*Sqr(gN)) - 1.2*
-      traceLambda12AdjLambda12*Sqr(gN) + 0.25333333333333335*Sqr(g1)*Sqr(gN) +
-      3.466666666666667*Sqr(g3)*Sqr(gN) - 4*Sqr(Conj(Lambdax))*Sqr(Lambdax)) +
-      (-6*traceKappaAdjKappa - 4*traceLambda12AdjLambda12 - 4*AbsSqr(Lambdax) +
-      2.5*Sqr(gN))*(Kappa*(Kappa).adjoint()*Kappa) - 2*(Kappa*(Kappa).adjoint(
-      )*Kappa*(Kappa).adjoint()*Kappa))).real();
+      traceLambda12AdjLambda12Lambda12AdjLambda12 + 6*traceLambda12AdjLambda12*
+      Sqr(g2) + 16*traceKappaAdjKappa*Sqr(g3) + 0.4*AbsSqr(Lambdax)*(-15*
+      traceYdAdjYd - 5*traceYeAdjYe - 15*traceYuAdjYu + 3*Sqr(g1) + 15*Sqr(g2)
+      - 3*Sqr(gN)) - 1.8*traceKappaAdjKappa*Sqr(gN) - 1.2*
+      traceLambda12AdjLambda12*Sqr(gN) + 3.466666666666667*Sqr(g3)*Sqr(gN) +
+      0.0044444444444444444*Sqr(g1)*(180*traceKappaAdjKappa + 270*
+      traceLambda12AdjLambda12 + 320*Sqr(g3) + 57*Sqr(gN)) - 4*Sqr(Conj(Lambdax
+      ))*Sqr(Lambdax)) + (-6*traceKappaAdjKappa - 4*traceLambda12AdjLambda12 -
+      4*AbsSqr(Lambdax) + 2.5*Sqr(gN))*(Kappa*(Kappa).adjoint()*Kappa) - 2*(
+      Kappa*(Kappa).adjoint()*Kappa*(Kappa).adjoint()*Kappa))).real();
 
 
    return beta_Kappa;

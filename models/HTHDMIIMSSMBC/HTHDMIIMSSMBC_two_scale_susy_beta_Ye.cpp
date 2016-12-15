@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:19:37
+// File generated at Thu 15 Dec 2016 12:40:45
 
 #include "HTHDMIIMSSMBC_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -62,14 +62,15 @@ Eigen::Matrix<double,3,3> HTHDMIIMSSMBC_susy_parameters::calc_beta_Ye_two_loop(c
 
    Eigen::Matrix<double,3,3> beta_Ye;
 
-   beta_Ye = (twoLoop*(Ye*(7.905*Power(g1,4) - 4.75*Power(g2,4) + Lambda3
-      *Lambda4 - 6.75*traceYdAdjYdYdAdjYd - 2.25*traceYdAdjYuYuAdjYd - 2.25*
-      traceYeAdjYeYeAdjYe + 1.35*Sqr(g1)*Sqr(g2) + 1.875*traceYeAdjYe*(Sqr(g1)
-      + Sqr(g2)) + 0.625*traceYdAdjYd*(Sqr(g1) + 9*Sqr(g2) + 32*Sqr(g3)) + 6*
-      Sqr(Lambda1) + Sqr(Lambda3) + Sqr(Lambda4) + 1.5*Sqr(Lambda5) + 4.5*Sqr(
-      Lambda6) + 1.5*Sqr(Lambda7)) + 0.0375*(-320*Lambda1 - 180*traceYdAdjYd -
-      60*traceYeAdjYe + 129*Sqr(g1) + 225*Sqr(g2))*(Ye*Ye.adjoint()*Ye) + 1.5*(
-      Ye*Ye.adjoint()*Ye*Ye.adjoint()*Ye))).real();
+   beta_Ye = (twoLoop*(0.005*Ye*(1581*Power(g1,4) + 5*Sqr(g1)*(25*(
+      traceYdAdjYd + 3*traceYeAdjYe) + 54*Sqr(g2)) - 25*(38*Power(g2,4) - 15*(3
+      *traceYdAdjYd + traceYeAdjYe)*Sqr(g2) - 2*(4*Lambda3*Lambda4 - 27*
+      traceYdAdjYdYdAdjYd - 9*traceYdAdjYuYuAdjYd - 9*traceYeAdjYeYeAdjYe + 80*
+      traceYdAdjYd*Sqr(g3) + 24*Sqr(Lambda1) + 4*Sqr(Lambda3) + 4*Sqr(Lambda4)
+      + 6*Sqr(Lambda5) + 18*Sqr(Lambda6) + 6*Sqr(Lambda7)))) + 0.0375*(129*Sqr(
+      g1) + 5*(-4*(16*Lambda1 + 9*traceYdAdjYd + 3*traceYeAdjYe) + 45*Sqr(g2)))
+      *(Ye*Ye.adjoint()*Ye) + 1.5*(Ye*Ye.adjoint()*Ye*Ye.adjoint()*Ye))).real()
+      ;
 
 
    return beta_Ye;

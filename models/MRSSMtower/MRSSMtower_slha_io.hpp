@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:09:07
+// File generated at Thu 15 Dec 2016 12:39:50
 
 #ifndef MRSSMtower_SLHA_IO_H
 #define MRSSMtower_SLHA_IO_H
@@ -57,7 +57,6 @@ struct MRSSMtower_scales {
 class MRSSMtower_slha_io {
 public:
    MRSSMtower_slha_io();
-   ~MRSSMtower_slha_io() {}
 
    void clear();
 

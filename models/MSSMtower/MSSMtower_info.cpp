@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:07:27
+// File generated at Thu 15 Dec 2016 12:38:05
 
 #include "MSSMtower_info.hpp"
 
@@ -141,8 +141,6 @@ namespace MSSMtower_info {
       "AeInput(1,2)", "AeInput(2,0)", "AeInput(2,1)", "AeInput(2,2)"};
 
    const char* model_name = "MSSMtower";
-   const bool is_low_energy_model = true;
-   const bool is_supersymmetric_model = true;
 
 void print(std::ostream& ostr)
 {

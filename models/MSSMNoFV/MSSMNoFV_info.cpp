@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 16:04:09
+// File generated at Thu 15 Dec 2016 13:10:16
 
 #include "MSSMNoFV_info.hpp"
 
@@ -92,8 +92,6 @@ namespace MSSMNoFV_info {
       "mu11IN", "mu22IN", "mu33IN", "md11IN", "md22IN", "md33IN"};
 
    const char* model_name = "MSSMNoFV";
-   const bool is_low_energy_model = false;
-   const bool is_supersymmetric_model = true;
 
 void print(std::ostream& ostr)
 {

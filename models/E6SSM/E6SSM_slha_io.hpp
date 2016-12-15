@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 16:16:56
+// File generated at Thu 15 Dec 2016 12:52:05
 
 #ifndef E6SSM_SLHA_IO_H
 #define E6SSM_SLHA_IO_H
@@ -57,7 +57,6 @@ struct E6SSM_scales {
 class E6SSM_slha_io {
 public:
    E6SSM_slha_io();
-   ~E6SSM_slha_io() {}
 
    void clear();
 

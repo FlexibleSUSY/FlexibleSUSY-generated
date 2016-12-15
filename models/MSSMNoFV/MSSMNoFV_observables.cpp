@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 16:06:08
+// File generated at Thu 15 Dec 2016 13:12:04
 
 #include "MSSMNoFV_observables.hpp"
 #include "MSSMNoFV_mass_eigenstates.hpp"
@@ -124,9 +124,9 @@ MSSMNoFV_observables calculate_observables(const MSSMNoFV_mass_eigenstates& mode
    gm2calc_data.md2   = MODEL.get_md2();
    gm2calc_data.ml2   = MODEL.get_ml2();
    gm2calc_data.me2   = MODEL.get_me2();
-   gm2calc_data.Au    = div_save(MODEL.get_TYu(), MODEL.get_Yu());
-   gm2calc_data.Ad    = div_save(MODEL.get_TYd(), MODEL.get_Yd());
-   gm2calc_data.Ae    = div_save(MODEL.get_TYe(), MODEL.get_Ye());
+   gm2calc_data.Au    = div_safe(MODEL.get_TYu(), MODEL.get_Yu());
+   gm2calc_data.Ad    = div_safe(MODEL.get_TYd(), MODEL.get_Yd());
+   gm2calc_data.Ae    = div_safe(MODEL.get_TYe(), MODEL.get_Ye());
 
    observables.AMUGM2CALC = gm2calc_calculate_amu(gm2calc_data);
    observables.AMUGM2CALCUNCERTAINTY = gm2calc_calculate_amu_uncertainty(gm2calc_data);

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:27:00
+// File generated at Thu 15 Dec 2016 12:45:28
 
 #include "TMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -96,11 +96,11 @@ double TMSSM_soft_parameters::calc_beta_MassB_two_loop(const Soft_traces& soft_t
 
    double beta_MassB;
 
-   beta_MassB = Re(0.08*twoLoop*Sqr(g1)*(70*traceAdjYdTYd + 90*
-      traceAdjYeTYe + 130*traceAdjYuTYu - 70*MassB*traceYdAdjYd - 90*MassB*
-      traceYeAdjYe - 130*MassB*traceYuAdjYu + 398*MassB*Sqr(g1) + 135*MassB*Sqr
-      (g2) + 135*MassWB*Sqr(g2) + 440*MassB*Sqr(g3) + 440*MassG*Sqr(g3) - 45*
-      Conj(Lambdax)*(MassB*Lambdax - TLambdax)));
+   beta_MassB = Re(0.08*twoLoop*Sqr(g1)*(398*MassB*Sqr(g1) + 5*(27*(MassB
+      + MassWB)*Sqr(g2) + 2*(7*traceAdjYdTYd + 9*traceAdjYeTYe + 13*
+      traceAdjYuTYu - 7*MassB*traceYdAdjYd - 9*MassB*traceYeAdjYe - 13*MassB*
+      traceYuAdjYu + 44*(MassB + MassG)*Sqr(g3))) - 45*Conj(Lambdax)*(MassB*
+      Lambdax - TLambdax)));
 
 
    return beta_MassB;

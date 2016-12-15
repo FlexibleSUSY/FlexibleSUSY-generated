@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:43:46
+// File generated at Thu 15 Dec 2016 12:58:47
 
 #ifndef NUTSMSSM_SPECTRUM_GENERATOR_INTERFACE_H
 #define NUTSMSSM_SPECTRUM_GENERATOR_INTERFACE_H

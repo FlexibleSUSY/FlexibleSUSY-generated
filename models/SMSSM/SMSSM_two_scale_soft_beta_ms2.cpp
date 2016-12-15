@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:34:38
+// File generated at Thu 15 Dec 2016 12:52:50
 
 #include "SMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -111,10 +111,10 @@ double SMSSM_soft_parameters::calc_beta_ms2_two_loop(const Soft_traces& soft_tra
 
    beta_ms2 = Re(-0.8*twoLoop*(120*ms2*Sqr(Conj(Kappa))*Sqr(Kappa) + 20*(
       mHd2 + mHu2 + ms2)*Sqr(Conj(Lambdax))*Sqr(Lambdax) + Conj(TLambdax)*(
-      Lambdax*(15*traceAdjYdTYd + 5*traceAdjYeTYe + 3*(5*traceAdjYuTYu + MassB*
-      Sqr(g1) + 5*MassWB*Sqr(g2))) + (15*traceYdAdjYd + 5*traceYeAdjYe - 3*(-5*
-      traceYuAdjYu + Sqr(g1) + 5*Sqr(g2)))*TLambdax) + Conj(Lambdax)*(15*
-      traceconjTYdTpTYd*Lambdax + 5*traceconjTYeTpTYe*Lambdax + 15*
+      Lambdax*(3*MassB*Sqr(g1) + 5*(3*traceAdjYdTYd + traceAdjYeTYe + 3*
+      traceAdjYuTYu + 3*MassWB*Sqr(g2))) + (-3*Sqr(g1) + 5*(3*traceYdAdjYd +
+      traceYeAdjYe + 3*traceYuAdjYu - 3*Sqr(g2)))*TLambdax) + Conj(Lambdax)*(15
+      *traceconjTYdTpTYd*Lambdax + 5*traceconjTYeTpTYe*Lambdax + 15*
       traceconjTYuTpTYu*Lambdax + 15*tracemd2YdAdjYd*Lambdax + 5*
       traceme2YeAdjYe*Lambdax + 5*traceml2AdjYeYe*Lambdax + 15*tracemq2AdjYdYd*
       Lambdax + 15*tracemq2AdjYuYu*Lambdax + 15*tracemu2YuAdjYu*Lambdax + 30*

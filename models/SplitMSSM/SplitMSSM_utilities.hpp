@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:23:09
+// File generated at Thu 15 Dec 2016 12:42:11
 
 #ifndef SplitMSSM_UTILITIES_H
 #define SplitMSSM_UTILITIES_H
@@ -86,8 +86,6 @@ public:
 
 class SplitMSSM_spectrum_plotter {
 public:
-   SplitMSSM_spectrum_plotter();
-
    void extract_spectrum(const SplitMSSM_mass_eigenstates&);
    void write_to_file(const std::string&) const;
 
@@ -104,9 +102,9 @@ private:
          {}
    };
    typedef std::vector<TParticle> TSpectrum;
-   TSpectrum spectrum;
-   double scale;
-   unsigned width;
+   TSpectrum spectrum{};
+   double scale{0.};
+   unsigned width{16};
 
    void write_spectrum(const TSpectrum&, std::ofstream&) const;
    static std::valarray<double> to_valarray(double);

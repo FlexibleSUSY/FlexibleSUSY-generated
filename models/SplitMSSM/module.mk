@@ -236,6 +236,7 @@ pack-$(MODNAME)-src:
 		tar -czf $(SplitMSSM_TARBALL) \
 		$(LIBSplitMSSM_SRC) $(LIBSplitMSSM_HDR) \
 		$(EXESplitMSSM_SRC) \
+		$(LLSplitMSSM_SRC) $(LLSplitMSSM_MMA) \
 		$(SplitMSSM_MK) $(SplitMSSM_TWO_SCALE_MK) \
 		$(SplitMSSM_SLHA_INPUT) $(SplitMSSM_GNUPLOT)
 

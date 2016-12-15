@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:34:45
+// File generated at Thu 15 Dec 2016 12:52:57
 
 #include "SMSSM_info.hpp"
 
@@ -130,8 +130,6 @@ namespace SMSSM_info {
       "L1Input", "MSInput", "BMSInput"};
 
    const char* model_name = "SMSSM";
-   const bool is_low_energy_model = false;
-   const bool is_supersymmetric_model = true;
 
 void print(std::ostream& ostr)
 {

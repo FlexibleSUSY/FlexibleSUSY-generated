@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:07:30
+// File generated at Thu 15 Dec 2016 12:38:08
 
 #include "MSSMtower_two_scale_susy_scale_constraint.hpp"
 #include "MSSMtower_two_scale_model.hpp"
@@ -83,6 +83,7 @@ void MSSMtower_susy_scale_constraint<Two_scale>::apply()
    update_scale();
 
    // apply user-defined susy scale constraints
+   const auto TanBeta = INPUTPARAMETER(TanBeta);
    const auto M1Input = INPUTPARAMETER(M1Input);
    const auto M2Input = INPUTPARAMETER(M2Input);
    const auto M3Input = INPUTPARAMETER(M3Input);
@@ -93,14 +94,17 @@ void MSSMtower_susy_scale_constraint<Two_scale>::apply()
    const auto me2Input = INPUTPARAMETER(me2Input);
    const auto MuInput = INPUTPARAMETER(MuInput);
    const auto mAInput = INPUTPARAMETER(mAInput);
-   const auto TanBeta = INPUTPARAMETER(TanBeta);
    const auto AuInput = INPUTPARAMETER(AuInput);
    const auto AdInput = INPUTPARAMETER(AdInput);
    const auto AeInput = INPUTPARAMETER(AeInput);
+   const auto vd = MODELPARAMETER(vd);
+   const auto vu = MODELPARAMETER(vu);
    const auto Yu = MODELPARAMETER(Yu);
    const auto Yd = MODELPARAMETER(Yd);
    const auto Ye = MODELPARAMETER(Ye);
 
+   MODEL->set_vu(Re(TanBeta*Sqrt((Sqr(vd) + Sqr(vu))/(1 + Sqr(TanBeta)))));
+   MODEL->set_vd(Re(Sqrt((Sqr(vd) + Sqr(vu))/(1 + Sqr(TanBeta)))));
    MODEL->set_MassB(Re(M1Input));
    MODEL->set_MassWB(Re(M2Input));
    MODEL->set_MassG(Re(M3Input));

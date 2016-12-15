@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:51:11
+// File generated at Thu 15 Dec 2016 13:04:44
 
 /**
  * @file NUHMSSM_two_scale_model_slha.cpp

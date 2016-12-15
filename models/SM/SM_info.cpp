@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:24:43
+// File generated at Thu 15 Dec 2016 12:42:56
 
 #include "SM_info.hpp"
 
@@ -73,8 +73,6 @@ namespace SM_info {
       "Qin", "QEWSB"};
 
    const char* model_name = "SM";
-   const bool is_low_energy_model = false;
-   const bool is_supersymmetric_model = false;
 
 void print(std::ostream& ostr)
 {

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:45:17
+// File generated at Thu 15 Dec 2016 13:00:01
 
 #include "MSSMRHN_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -96,15 +96,15 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_BMv_two_loop(const 
 
    Eigen::Matrix<double,3,3> beta_BMv;
 
-   beta_BMv = (twoLoop*(-0.8*(15*traceAdjYuTYu + 5*traceAdjYvTYv + 3*
-      MassB*Sqr(g1) + 15*MassWB*Sqr(g2))*(Mv*Yv.conjugate()*Yv.transpose()) -
-      0.4*(30*traceYuAdjYu + 10*traceYvAdjYv - 6*(Sqr(g1) + 5*Sqr(g2)))*(Mv*
-      Yv.conjugate()*(TYv).transpose()) - 0.4*(30*traceAdjYuTYu + 10*
-      traceAdjYvTYv + 6*MassB*Sqr(g1) + 30*MassWB*Sqr(g2))*(Yv*Yv.adjoint()*Mv)
-      - 0.4*(15*traceYuAdjYu + 5*traceYvAdjYv - 3*Sqr(g1) - 15*Sqr(g2))*(Yv*
-      Yv.adjoint()*BMv) - 0.4*(15*traceYuAdjYu + 5*traceYvAdjYv - 3*Sqr(g1) -
-      15*Sqr(g2))*(BMv*Yv.conjugate()*Yv.transpose()) - 0.4*(30*traceYuAdjYu +
-      10*traceYvAdjYv - 6*Sqr(g1) - 30*Sqr(g2))*(TYv*Yv.adjoint()*Mv) - 4*(Mv*
+   beta_BMv = (twoLoop*(-0.8*(3*MassB*Sqr(g1) + 5*(3*traceAdjYuTYu +
+      traceAdjYvTYv + 3*MassWB*Sqr(g2)))*(Mv*Yv.conjugate()*Yv.transpose()) + (
+      -12*traceYuAdjYu - 4*traceYvAdjYv + 2.4*Sqr(g1) + 12*Sqr(g2))*(Mv*
+      Yv.conjugate()*(TYv).transpose()) - 0.8*(3*MassB*Sqr(g1) + 5*(3*
+      traceAdjYuTYu + traceAdjYvTYv + 3*MassWB*Sqr(g2)))*(Yv*Yv.adjoint()*Mv) +
+      (-2*(3*traceYuAdjYu + traceYvAdjYv) + 1.2*Sqr(g1) + 6*Sqr(g2))*(Yv*
+      Yv.adjoint()*BMv) + (-2*(3*traceYuAdjYu + traceYvAdjYv) + 1.2*Sqr(g1) + 6
+      *Sqr(g2))*(BMv*Yv.conjugate()*Yv.transpose()) + (-12*traceYuAdjYu - 4*
+      traceYvAdjYv + 2.4*Sqr(g1) + 12*Sqr(g2))*(TYv*Yv.adjoint()*Mv) - 4*(Mv*
       Yv.conjugate()*Ye.transpose()*Ye.conjugate()*(TYv).transpose()) - 4*(Mv*
       Yv.conjugate()*Yv.transpose()*Yv.conjugate()*(TYv).transpose()) - 4*(Mv*
       Yv.conjugate()*(TYe).transpose()*Ye.conjugate()*Yv.transpose()) - 4*(Mv*

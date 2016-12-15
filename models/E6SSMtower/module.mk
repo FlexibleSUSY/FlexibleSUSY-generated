@@ -236,6 +236,7 @@ pack-$(MODNAME)-src:
 		tar -czf $(E6SSMtower_TARBALL) \
 		$(LIBE6SSMtower_SRC) $(LIBE6SSMtower_HDR) \
 		$(EXEE6SSMtower_SRC) \
+		$(LLE6SSMtower_SRC) $(LLE6SSMtower_MMA) \
 		$(E6SSMtower_MK) $(E6SSMtower_TWO_SCALE_MK) \
 		$(E6SSMtower_SLHA_INPUT) $(E6SSMtower_GNUPLOT)
 

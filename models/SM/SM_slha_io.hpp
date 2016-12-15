@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:24:43
+// File generated at Thu 15 Dec 2016 12:42:56
 
 #ifndef SM_SLHA_IO_H
 #define SM_SLHA_IO_H
@@ -57,7 +57,6 @@ struct SM_scales {
 class SM_slha_io {
 public:
    SM_slha_io();
-   ~SM_slha_io() {}
 
    void clear();
 

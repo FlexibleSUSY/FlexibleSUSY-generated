@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:23:51
+// File generated at Thu 15 Dec 2016 12:42:34
 
 #include "HSSUSY_info.hpp"
 
@@ -82,8 +82,6 @@ namespace HSSUSY_info {
       , "mse2(2,0)", "mse2(2,1)", "mse2(2,2)"};
 
    const char* model_name = "HSSUSY";
-   const bool is_low_energy_model = false;
-   const bool is_supersymmetric_model = false;
 
 void print(std::ostream& ostr)
 {

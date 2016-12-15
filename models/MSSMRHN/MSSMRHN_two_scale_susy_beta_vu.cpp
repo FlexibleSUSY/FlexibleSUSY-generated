@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:45:02
+// File generated at Thu 15 Dec 2016 12:59:44
 
 #include "MSSMRHN_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -39,8 +39,8 @@ double MSSMRHN_susy_parameters::calc_beta_vu_one_loop(const Susy_traces& susy_tr
 
    double beta_vu;
 
-   beta_vu = Re(0.1*oneOver16PiSqr*vu*(-30*traceYuAdjYu - 10*traceYvAdjYv
-      + 3*(Sqr(g1) + 5*Sqr(g2))));
+   beta_vu = Re(0.1*oneOver16PiSqr*vu*(3*Sqr(g1) + 5*(-2*(3*traceYuAdjYu
+      + traceYvAdjYv) + 3*Sqr(g2))));
 
 
    return beta_vu;
@@ -63,11 +63,11 @@ double MSSMRHN_susy_parameters::calc_beta_vu_two_loop(const Susy_traces& susy_tr
 
    double beta_vu;
 
-   beta_vu = Re(-0.005*twoLoop*vu*(207*Power(g1,4) + 275*Power(g2,4) -
-      600*traceYdAdjYuYuAdjYd - 200*traceYeAdjYvYvAdjYe - 1800*
-      traceYuAdjYuYuAdjYu - 600*traceYvAdjYvYvAdjYv + 90*Sqr(g1)*Sqr(g2) + 60*
-      traceYvAdjYv*(Sqr(g1) + 5*Sqr(g2)) + 20*traceYuAdjYu*(17*Sqr(g1) + 45*Sqr
-      (g2) + 160*Sqr(g3))));
+   beta_vu = Re(-0.005*twoLoop*vu*(207*Power(g1,4) + 10*Sqr(g1)*(34*
+      traceYuAdjYu + 6*traceYvAdjYv + 9*Sqr(g2)) + 25*(11*Power(g2,4) + 12*(3*
+      traceYuAdjYu + traceYvAdjYv)*Sqr(g2) - 8*(3*traceYdAdjYuYuAdjYd +
+      traceYeAdjYvYvAdjYe + 9*traceYuAdjYuYuAdjYu + 3*traceYvAdjYvYvAdjYv - 16*
+      traceYuAdjYu*Sqr(g3)))));
 
 
    return beta_vu;

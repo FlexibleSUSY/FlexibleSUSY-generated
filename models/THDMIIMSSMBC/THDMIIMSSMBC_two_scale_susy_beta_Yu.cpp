@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:22:20
+// File generated at Thu 15 Dec 2016 12:41:33
 
 #include "THDMIIMSSMBC_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -62,17 +62,17 @@ Eigen::Matrix<double,3,3> THDMIIMSSMBC_susy_parameters::calc_beta_Yu_two_loop(co
 
    Eigen::Matrix<double,3,3> beta_Yu;
 
-   beta_Yu = (twoLoop*(Yu*(2.111666666666667*Power(g1,4) - 5.25*Power(g2,
-      4) - 108*Power(g3,4) + Lambda3*Lambda4 - 2.25*traceYdAdjYuYuAdjYd - 6.75*
-      traceYuAdjYuYuAdjYu - 0.45*Sqr(g1)*Sqr(g2) + 1.2666666666666666*Sqr(g1)*
-      Sqr(g3) + 9*Sqr(g2)*Sqr(g3) + 0.125*traceYuAdjYu*(17*Sqr(g1) + 45*Sqr(g2)
-      + 160*Sqr(g3)) + 6*Sqr(Lambda2) + Sqr(Lambda3) + Sqr(Lambda4) + 1.5*Sqr(
-      Lambda5) + 1.5*Sqr(Lambda6) + 4.5*Sqr(Lambda7)) + (-2*Lambda3 + 2*Lambda4
-      - 2.25*traceYdAdjYd - 0.75*traceYeAdjYe - 0.17083333333333334*Sqr(g1) +
-      2.0625*Sqr(g2) + 5.333333333333333*Sqr(g3))*(Yu*Yd.adjoint()*Yd) + 0.0125
-      *(-960*Lambda2 - 540*traceYuAdjYu + 223*Sqr(g1) + 675*Sqr(g2) + 1280*Sqr(
-      g3))*(Yu*Yu.adjoint()*Yu) - 0.25*(Yu*Yd.adjoint()*Yd*Yd.adjoint()*Yd) -
-      0.25*(Yu*Yd.adjoint()*Yd*Yu.adjoint()*Yu) + 1.5*(Yu*Yu.adjoint()*Yu*
+   beta_Yu = (twoLoop*(0.0016666666666666668*Yu*(1267*Power(g1,4) + Sqr(
+      g1)*(1275*traceYuAdjYu - 270*Sqr(g2) + 760*Sqr(g3)) - 75*(42*Power(g2,4)
+      - 9*Sqr(g2)*(5*traceYuAdjYu + 8*Sqr(g3)) + 2*(432*Power(g3,4) - 4*Lambda3
+      *Lambda4 + 9*traceYdAdjYuYuAdjYd + 27*traceYuAdjYuYuAdjYu - 80*
+      traceYuAdjYu*Sqr(g3) - 24*Sqr(Lambda2) - 4*Sqr(Lambda3) - 4*Sqr(Lambda4)
+      - 6*Sqr(Lambda5) - 6*Sqr(Lambda6) - 18*Sqr(Lambda7)))) + (-2*Lambda3 + 2*
+      Lambda4 - 2.25*traceYdAdjYd - 0.75*traceYeAdjYe - 0.17083333333333334*Sqr
+      (g1) + 2.0625*Sqr(g2) + 5.333333333333333*Sqr(g3))*(Yu*Yd.adjoint()*Yd) +
+      (-12*Lambda2 - 6.75*traceYuAdjYu + 2.7875*Sqr(g1) + 8.4375*Sqr(g2) + 16*
+      Sqr(g3))*(Yu*Yu.adjoint()*Yu) - 0.25*(Yu*Yd.adjoint()*Yd*Yd.adjoint()*Yd)
+      - 0.25*(Yu*Yd.adjoint()*Yd*Yu.adjoint()*Yu) + 1.5*(Yu*Yu.adjoint()*Yu*
       Yu.adjoint()*Yu))).real();
 
 

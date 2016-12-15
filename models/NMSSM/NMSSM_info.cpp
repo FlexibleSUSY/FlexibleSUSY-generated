@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:45:21
+// File generated at Thu 15 Dec 2016 13:00:35
 
 #include "NMSSM_info.hpp"
 
@@ -129,8 +129,6 @@ namespace NMSSM_info {
       , "TanBeta", "SignvS", "Azero", "LambdaInput"};
 
    const char* model_name = "NMSSM";
-   const bool is_low_energy_model = false;
-   const bool is_supersymmetric_model = true;
 
 void print(std::ostream& ostr)
 {

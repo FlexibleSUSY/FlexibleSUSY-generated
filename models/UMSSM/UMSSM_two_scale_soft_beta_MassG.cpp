@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:34:27
+// File generated at Thu 15 Dec 2016 12:54:05
 
 #include "UMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -97,12 +97,10 @@ double UMSSM_soft_parameters::calc_beta_MassG_two_loop(const Soft_traces& soft_t
 
    double beta_MassG;
 
-   beta_MassG = Re(0.4*twoLoop*Sqr(g3)*(20*traceAdjYdTYd + 20*
-      traceAdjYuTYu - 20*MassG*traceYdAdjYd - 20*MassG*traceYuAdjYu + 11*MassB*
-      Sqr(g1) + 11*MassG*Sqr(g1) + 45*MassG*Sqr(g2) + 45*MassWB*Sqr(g2) + 140*
-      MassG*Sqr(g3) + 30*MassG*Sqr(gp)*Sqr(Qd) + 30*MassU*Sqr(gp)*Sqr(Qd) + 60*
-      MassG*Sqr(gp)*Sqr(Qq) + 60*MassU*Sqr(gp)*Sqr(Qq) + 30*MassG*Sqr(gp)*Sqr(
-      Qu) + 30*MassU*Sqr(gp)*Sqr(Qu)));
+   beta_MassG = Re(0.4*twoLoop*Sqr(g3)*(11*(MassB + MassG)*Sqr(g1) + 5*(9
+      *(MassG + MassWB)*Sqr(g2) + 2*(2*(traceAdjYdTYd + traceAdjYuTYu - MassG*(
+      traceYdAdjYd + traceYuAdjYu)) + 14*MassG*Sqr(g3) + 3*(MassG + MassU)*Sqr(
+      gp)*(Sqr(Qd) + 2*Sqr(Qq) + Sqr(Qu))))));
 
 
    return beta_MassG;

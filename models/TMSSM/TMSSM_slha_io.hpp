@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:27:05
+// File generated at Thu 15 Dec 2016 12:45:34
 
 #ifndef TMSSM_SLHA_IO_H
 #define TMSSM_SLHA_IO_H
@@ -57,7 +57,6 @@ struct TMSSM_scales {
 class TMSSM_slha_io {
 public:
    TMSSM_slha_io();
-   ~TMSSM_slha_io() {}
 
    void clear();
 

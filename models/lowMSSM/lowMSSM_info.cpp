@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:50:57
+// File generated at Thu 15 Dec 2016 13:03:41
 
 #include "lowMSSM_info.hpp"
 
@@ -142,8 +142,6 @@ namespace lowMSSM_info {
       ;
 
    const char* model_name = "lowMSSM";
-   const bool is_low_energy_model = true;
-   const bool is_supersymmetric_model = true;
 
 void print(std::ostream& ostr)
 {

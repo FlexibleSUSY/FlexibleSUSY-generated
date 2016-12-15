@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:26:30
+// File generated at Thu 15 Dec 2016 12:44:46
 
 #include "TMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -57,9 +57,9 @@ double TMSSM_susy_parameters::calc_beta_MT_two_loop(const Susy_traces& susy_trac
 
    double beta_MT;
 
-   beta_MT = Re(0.4*MT*twoLoop*(140*Power(g2,4) + AbsSqr(Lambdax)*(-15*
-      traceYdAdjYd - 5*traceYeAdjYe - 15*traceYuAdjYu + 3*Sqr(g1) - 5*Sqr(g2))
-      - 15*Sqr(Conj(Lambdax))*Sqr(Lambdax)));
+   beta_MT = Re(0.4*MT*twoLoop*(140*Power(g2,4) + AbsSqr(Lambdax)*(3*Sqr(
+      g1) - 5*(3*traceYdAdjYd + traceYeAdjYe + 3*traceYuAdjYu + Sqr(g2))) - 15*
+      Sqr(Conj(Lambdax))*Sqr(Lambdax)));
 
 
    return beta_MT;

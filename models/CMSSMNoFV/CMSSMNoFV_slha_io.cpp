@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:56:58
+// File generated at Thu 15 Dec 2016 13:06:55
 
 #include "CMSSMNoFV_slha_io.hpp"
 #include "CMSSMNoFV_input_parameters.hpp"

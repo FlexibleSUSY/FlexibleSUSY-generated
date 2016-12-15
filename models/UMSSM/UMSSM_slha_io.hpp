@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:34:34
+// File generated at Thu 15 Dec 2016 12:54:13
 
 #ifndef UMSSM_SLHA_IO_H
 #define UMSSM_SLHA_IO_H
@@ -57,7 +57,6 @@ struct UMSSM_scales {
 class UMSSM_slha_io {
 public:
    UMSSM_slha_io();
-   ~UMSSM_slha_io() {}
 
    void clear();
 

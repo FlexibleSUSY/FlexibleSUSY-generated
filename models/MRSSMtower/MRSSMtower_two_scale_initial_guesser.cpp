@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:09:10
+// File generated at Thu 15 Dec 2016 12:39:53
 
 #include "MRSSMtower_two_scale_initial_guesser.hpp"
 #include "MRSSMtower_two_scale_model.hpp"
@@ -41,14 +41,14 @@ namespace flexiblesusy {
 MRSSMtower_standard_model_initial_guesser<Two_scale>::MRSSMtower_standard_model_initial_guesser(
    MRSSMtower<Two_scale>* model_,
    standard_model::StandardModel<Two_scale>* eft_,
-   const softsusy::QedQcd& oneset_,
+   const softsusy::QedQcd& qedqcd_,
    const standard_model::Standard_model_low_scale_constraint<Two_scale>& low_constraint_,
    const MRSSMtower_susy_scale_constraint<Two_scale>& susy_constraint_
 )
    : Initial_guesser<Two_scale>()
    , model(model_)
    , eft(eft_)
-   , oneset(oneset_)
+   , qedqcd(qedqcd_)
    , mu_guess(0.)
    , mc_guess(0.)
    , mt_guess(0.)
@@ -91,7 +91,7 @@ void MRSSMtower_standard_model_initial_guesser<Two_scale>::guess_eft_parameters(
 {
    using namespace softsusy;
 
-   softsusy::QedQcd leAtMt(oneset);
+   softsusy::QedQcd leAtMt(qedqcd);
    const double MZ = Electroweak_constants::MZ;
    const double MW = Electroweak_constants::MW;
    const double sinThetaW2 = 1.0 - Sqr(MW / MZ);
@@ -208,18 +208,9 @@ void MRSSMtower_standard_model_initial_guesser<Two_scale>::guess_model_parameter
    const double susy_scale_guess = susy_constraint.get_initial_scale_guess();
 
    model->set_scale(susy_scale_guess);
-   eft->run_to(susy_scale_guess, running_precision);
-   eft->calculate_DRbar_masses();
-
-   //get gauge and Yukawa couplings from effective theory
-   MRSSMtower_standard_model_Matching<Two_scale> matching;
-   matching.set_models(eft, model);
-   matching.set_constraint(&susy_constraint);
-   matching.match_low_to_high_scale_model_tree_level();
-
-   model->run_to(susy_scale_guess, running_precision);
 
    // apply susy-scale first guess
+   const auto TanBeta = INPUTPARAMETER(TanBeta);
    const auto mq2Input = INPUTPARAMETER(mq2Input);
    const auto mu2Input = INPUTPARAMETER(mu2Input);
    const auto md2Input = INPUTPARAMETER(md2Input);
@@ -241,6 +232,8 @@ void MRSSMtower_standard_model_initial_guesser<Two_scale>::guess_model_parameter
    const auto MuDInput = INPUTPARAMETER(MuDInput);
    const auto MuUInput = INPUTPARAMETER(MuUInput);
 
+   MODEL->set_vu(Re((TanBeta*LowEnergyConstant(vev))/Sqrt(1 + Sqr(TanBeta))));
+   MODEL->set_vd(Re(LowEnergyConstant(vev)/Sqrt(1 + Sqr(TanBeta))));
    MODEL->set_mq2((mq2Input).real());
    MODEL->set_mu2((mu2Input).real());
    MODEL->set_md2((md2Input).real());
@@ -265,6 +258,17 @@ void MRSSMtower_standard_model_initial_guesser<Two_scale>::guess_model_parameter
    MODEL->set_BMuD(Re(0));
    MODEL->set_BMuU(Re(0));
 
+
+   eft->run_to(susy_scale_guess, running_precision);
+   eft->calculate_DRbar_masses();
+
+   //get gauge and Yukawa couplings from effective theory
+   MRSSMtower_standard_model_Matching<Two_scale> matching;
+   matching.set_models(eft, model);
+   matching.set_constraint(&susy_constraint);
+   matching.match_low_to_high_scale_model_tree_level();
+
+   model->run_to(susy_scale_guess, running_precision);
 
    // apply susy-scale constraint
    susy_constraint.set_model(model);

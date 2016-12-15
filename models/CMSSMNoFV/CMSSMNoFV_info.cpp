@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:56:58
+// File generated at Thu 15 Dec 2016 13:06:55
 
 #include "CMSSMNoFV_info.hpp"
 
@@ -89,8 +89,6 @@ namespace CMSSMNoFV_info {
       , "TanBeta", "SignMu", "Azero"};
 
    const char* model_name = "CMSSMNoFV";
-   const bool is_low_energy_model = false;
-   const bool is_supersymmetric_model = true;
 
 void print(std::ostream& ostr)
 {

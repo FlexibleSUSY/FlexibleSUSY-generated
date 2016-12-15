@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 16:01:42
+// File generated at Thu 15 Dec 2016 12:43:50
 
 #include "E6SSMtower_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -79,10 +79,9 @@ Eigen::Matrix<double,3,3> E6SSMtower_soft_parameters::calc_beta_mDx2_one_loop(co
       .transpose()) + 2*(TKappa.conjugate()*(TKappa).transpose()) + mDx2*
       Kappa.conjugate()*(Kappa).transpose() + 2*(Kappa.conjugate()*mDxbar2*(
       Kappa).transpose()) + Kappa.conjugate()*(Kappa).transpose()*mDx2 -
-      0.5163977794943222*g1*Tr11*UNITMATRIX(3) - 0.6324555320336759*gN*Tr14*
-      UNITMATRIX(3) - 0.5333333333333333*AbsSqr(MassB)*Sqr(g1)*UNITMATRIX(3) -
-      10.666666666666666*AbsSqr(MassG)*Sqr(g3)*UNITMATRIX(3) - 0.8*AbsSqr(
-      MassBp)*Sqr(gN)*UNITMATRIX(3))).real();
+      0.06666666666666667*(7.745966692414834*g1*Tr11 + 9.486832980505138*gN*
+      Tr14 + 8*AbsSqr(MassB)*Sqr(g1) + 160*AbsSqr(MassG)*Sqr(g3) + 12*AbsSqr(
+      MassBp)*Sqr(gN))*UNITMATRIX(3))).real();
 
 
    return beta_mDx2;
@@ -132,15 +131,15 @@ Eigen::Matrix<double,3,3> E6SSMtower_soft_parameters::calc_beta_mDx2_two_loop(co
       traceconjTLambda12TpTLambda12 - 12*ms2*traceKappaAdjKappa - 6*
       traceKappaAdjKappaconjmDx2 - 6*traceKappaconjmDxbar2AdjKappa - 8*ms2*
       traceLambda12AdjLambda12 - 4*traceLambda12AdjLambda12conjmH2I2 - 4*
-      tracemH1I2AdjLambda12Lambda12 - 4*mHd2*AbsSqr(Lambdax) - 4*mHu2*AbsSqr(
-      Lambdax) - 8*ms2*AbsSqr(Lambdax) - 4*AbsSqr(TLambdax) + 3*ms2*Sqr(gN) + 6
-      *AbsSqr(MassBp)*Sqr(gN))*(Kappa.conjugate()*(Kappa).transpose()) + (-6*
-      traceconjTKappaTpKappa - 4*traceconjTLambda12TpLambda12 - 4*Conj(TLambdax
-      )*Lambdax - 3*Conj(MassBp)*Sqr(gN))*(Kappa.conjugate()*(TKappa).transpose
-      ()) + (-6*traceAdjKappaTKappa - 4*traceAdjLambda12TLambda12 - 3*MassBp*
-      Sqr(gN) - 4*Conj(Lambdax)*TLambdax)*(TKappa.conjugate()*(Kappa).transpose
-      ()) + (-6*traceKappaAdjKappa - 4*traceLambda12AdjLambda12 - 4*AbsSqr(
-      Lambdax) + 3*Sqr(gN))*(TKappa.conjugate()*(TKappa).transpose()) + (-3*
+      tracemH1I2AdjLambda12Lambda12 - 4*(mHd2 + mHu2 + 2*ms2)*AbsSqr(Lambdax) -
+      4*AbsSqr(TLambdax) + 3*ms2*Sqr(gN) + 6*AbsSqr(MassBp)*Sqr(gN))*(
+      Kappa.conjugate()*(Kappa).transpose()) + (-6*traceconjTKappaTpKappa - 4*
+      traceconjTLambda12TpLambda12 - 4*Conj(TLambdax)*Lambdax - 3*Conj(MassBp)*
+      Sqr(gN))*(Kappa.conjugate()*(TKappa).transpose()) + (-6*
+      traceAdjKappaTKappa - 4*traceAdjLambda12TLambda12 - 3*MassBp*Sqr(gN) - 4*
+      Conj(Lambdax)*TLambdax)*(TKappa.conjugate()*(Kappa).transpose()) + (-6*
+      traceKappaAdjKappa - 4*traceLambda12AdjLambda12 - 4*AbsSqr(Lambdax) + 3*
+      Sqr(gN))*(TKappa.conjugate()*(TKappa).transpose()) + (-3*
       traceKappaAdjKappa - 2*traceLambda12AdjLambda12 - 2*AbsSqr(Lambdax) + 1.5
       *Sqr(gN))*(mDx2*Kappa.conjugate()*(Kappa).transpose()) + (-6*
       traceKappaAdjKappa - 4*traceLambda12AdjLambda12 - 4*AbsSqr(Lambdax) + 3*
@@ -159,21 +158,15 @@ Eigen::Matrix<double,3,3> E6SSMtower_soft_parameters::calc_beta_mDx2_two_loop(co
       Kappa.conjugate()*(Kappa).transpose()*mDx2*Kappa.conjugate()*(Kappa)
       .transpose()) - 2*(Kappa.conjugate()*(Kappa).transpose()*Kappa.conjugate(
       )*mDxbar2*(Kappa).transpose()) - Kappa.conjugate()*(Kappa).transpose()*
-      Kappa.conjugate()*(Kappa).transpose()*mDx2 + 10.666666666666666*Power(g3,
-      4)*Tr23*UNITMATRIX(3) + 0.6531972647421809*g1*gN*Tr2U114*UNITMATRIX(3) +
-      0.6531972647421809*g1*gN*Tr2U141*UNITMATRIX(3) - 2.065591117977289*g1*
-      Tr31*UNITMATRIX(3) - 2.5298221281347035*gN*Tr34*UNITMATRIX(3) +
-      53.333333333333336*Power(g3,4)*AbsSqr(MassG)*UNITMATRIX(3) +
-      0.5333333333333333*Tr2U111*Sqr(g1)*UNITMATRIX(3) + 2.8444444444444446*
-      AbsSqr(MassG)*Sqr(g1)*Sqr(g3)*UNITMATRIX(3) + 1.4222222222222223*MassB*
-      Conj(MassG)*Sqr(g1)*Sqr(g3)*UNITMATRIX(3) + 0.8*Tr2U144*Sqr(gN)*
-      UNITMATRIX(3) + 4.266666666666667*AbsSqr(MassG)*Sqr(g3)*Sqr(gN)*
-      UNITMATRIX(3) + 2.1333333333333333*MassBp*Conj(MassG)*Sqr(g3)*Sqr(gN)*
-      UNITMATRIX(3) + 0.07111111111111111*Conj(MassB)*Sqr(g1)*(219*MassB*Sqr(g1
-      ) + 20*(2*MassB + MassG)*Sqr(g3) - 3*(2*MassB + MassBp)*Sqr(gN))*
-      UNITMATRIX(3) - 0.21333333333333335*Conj(MassBp)*Sqr(gN)*((MassB + 2*
-      MassBp)*Sqr(g1) - 2*(5*(2*MassBp + MassG)*Sqr(g3) + 54*MassBp*Sqr(gN)))*
-      UNITMATRIX(3))).real();
+      Kappa.conjugate()*(Kappa).transpose()*mDx2 + 0.017777777777777778*(4*Conj
+      (MassB)*Sqr(g1)*(219*MassB*Sqr(g1) + 20*(2*MassB + MassG)*Sqr(g3) - 3*(2*
+      MassB + MassBp)*Sqr(gN)) + 12*Conj(MassBp)*Sqr(gN)*(-((MassB + 2*MassBp)*
+      Sqr(g1)) + 2*(5*(2*MassBp + MassG)*Sqr(g3) + 54*MassBp*Sqr(gN))) + 5*(3*(
+      40*Power(g3,4)*Tr23 + g1*(2.449489742783178*gN*Tr2U114 +
+      2.449489742783178*gN*Tr2U141 - 7.745966692414834*Tr31) + 3*gN*(gN*Tr2U144
+      - 3.1622776601683795*Tr34) + 2*Tr2U111*Sqr(g1)) + 8*Conj(MassG)*Sqr(g3)*
+      (2*(MassB + 2*MassG)*Sqr(g1) + 75*MassG*Sqr(g3) + 3*(MassBp + 2*MassG)*
+      Sqr(gN))))*UNITMATRIX(3))).real();
 
 
    return beta_mDx2;

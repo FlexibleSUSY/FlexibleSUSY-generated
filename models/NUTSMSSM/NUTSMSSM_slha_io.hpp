@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:42:00
+// File generated at Thu 15 Dec 2016 12:57:00
 
 #ifndef NUTSMSSM_SLHA_IO_H
 #define NUTSMSSM_SLHA_IO_H
@@ -57,7 +57,6 @@ struct NUTSMSSM_scales {
 class NUTSMSSM_slha_io {
 public:
    NUTSMSSM_slha_io();
-   ~NUTSMSSM_slha_io() {}
 
    void clear();
 

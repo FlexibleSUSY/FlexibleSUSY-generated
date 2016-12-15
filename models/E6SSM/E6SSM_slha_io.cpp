@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 16:16:56
+// File generated at Thu 15 Dec 2016 12:52:05
 
 #include "E6SSM_slha_io.hpp"
 #include "E6SSM_input_parameters.hpp"

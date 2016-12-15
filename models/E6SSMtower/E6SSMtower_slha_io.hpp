@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 16:01:55
+// File generated at Thu 15 Dec 2016 12:44:04
 
 #ifndef E6SSMtower_SLHA_IO_H
 #define E6SSMtower_SLHA_IO_H
@@ -57,7 +57,6 @@ struct E6SSMtower_scales {
 class E6SSMtower_slha_io {
 public:
    E6SSMtower_slha_io();
-   ~E6SSMtower_slha_io() {}
 
    void clear();
 

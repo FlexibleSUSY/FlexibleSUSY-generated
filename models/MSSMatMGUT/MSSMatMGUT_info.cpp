@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 16:03:34
+// File generated at Thu 15 Dec 2016 13:10:30
 
 #include "MSSMatMGUT_info.hpp"
 
@@ -140,8 +140,6 @@ namespace MSSMatMGUT_info {
       ;
 
    const char* model_name = "MSSMatMGUT";
-   const bool is_low_energy_model = false;
-   const bool is_supersymmetric_model = true;
 
 void print(std::ostream& ostr)
 {

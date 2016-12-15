@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:45:35
+// File generated at Thu 15 Dec 2016 13:00:22
 
 #include "MSSMRHN_slha_io.hpp"
 #include "MSSMRHN_input_parameters.hpp"

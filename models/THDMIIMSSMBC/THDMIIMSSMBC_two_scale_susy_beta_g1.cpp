@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:22:13
+// File generated at Thu 15 Dec 2016 12:41:22
 
 #include "THDMIIMSSMBC_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -57,9 +57,9 @@ double THDMIIMSSMBC_susy_parameters::calc_beta_g1_two_loop(const Susy_traces& su
 
    double beta_g1;
 
-   beta_g1 = Re(0.02*Power(g1,3)*twoLoop*(-25*traceYdAdjYd - 75*
-      traceYeAdjYe - 85*traceYuAdjYu + 208*Sqr(g1) + 180*Sqr(g2) + 440*Sqr(g3))
-      );
+   beta_g1 = Re(0.02*Power(g1,3)*twoLoop*(208*Sqr(g1) + 5*(-5*
+      traceYdAdjYd - 15*traceYeAdjYe - 17*traceYuAdjYu + 36*Sqr(g2) + 88*Sqr(g3
+      ))));
 
 
    return beta_g1;

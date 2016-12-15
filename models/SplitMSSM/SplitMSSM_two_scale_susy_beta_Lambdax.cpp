@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:22:56
+// File generated at Thu 15 Dec 2016 12:41:52
 
 #include "SplitMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -47,10 +47,10 @@ double SplitMSSM_susy_parameters::calc_beta_Lambdax_one_loop(const Susy_traces& 
       - 5*Power(g2d,4) - 5*Power(g2u,4) - Power(gYd,4) - 4*g2d*g2u*gYd*gYu -
       Power(gYu,4) - 12*traceYdAdjYdYdAdjYd - 4*traceYeAdjYeYeAdjYe - 12*
       traceYuAdjYuYuAdjYu + 12*traceYdAdjYd*Lambdax + 4*traceYeAdjYe*Lambdax +
-      12*traceYuAdjYu*Lambdax - 1.8*Lambdax*Sqr(g1) - 9*Lambdax*Sqr(g2) + 0.9*
-      Sqr(g1)*Sqr(g2) + 6*Lambdax*Sqr(g2d) + 6*Lambdax*Sqr(g2u) - 2*Sqr(g2d)*
-      Sqr(g2u) + 2*Lambdax*Sqr(gYd) - 2*Sqr(g2d)*Sqr(gYd) + 2*Lambdax*Sqr(gYu)
-      - 2*Sqr(g2u)*Sqr(gYu) - 2*Sqr(gYd)*Sqr(gYu) + 12*Sqr(Lambdax)));
+      12*traceYuAdjYu*Lambdax - 9*Lambdax*Sqr(g2) + 0.9*Sqr(g1)*(-2*Lambdax +
+      Sqr(g2)) + 6*Lambdax*Sqr(g2d) + 6*Lambdax*Sqr(g2u) - 2*Sqr(g2d)*Sqr(g2u)
+      + 2*Lambdax*Sqr(gYd) - 2*Sqr(g2d)*Sqr(gYd) + 2*Lambdax*Sqr(gYu) - 2*Sqr(
+      g2u)*Sqr(gYu) - 2*Sqr(gYd)*Sqr(gYu) + 12*Sqr(Lambdax)));
 
 
    return beta_Lambdax;

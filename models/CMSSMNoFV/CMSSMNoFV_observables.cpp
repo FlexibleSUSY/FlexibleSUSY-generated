@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:58:59
+// File generated at Thu 15 Dec 2016 13:08:54
 
 #include "CMSSMNoFV_observables.hpp"
 #include "CMSSMNoFV_mass_eigenstates.hpp"
@@ -162,9 +162,9 @@ CMSSMNoFV_observables calculate_observables(const CMSSMNoFV_mass_eigenstates& mo
    gm2calc_data.md2   = MODEL.get_md2();
    gm2calc_data.ml2   = MODEL.get_ml2();
    gm2calc_data.me2   = MODEL.get_me2();
-   gm2calc_data.Au    = div_save(MODEL.get_TYu(), MODEL.get_Yu());
-   gm2calc_data.Ad    = div_save(MODEL.get_TYd(), MODEL.get_Yd());
-   gm2calc_data.Ae    = div_save(MODEL.get_TYe(), MODEL.get_Ye());
+   gm2calc_data.Au    = div_safe(MODEL.get_TYu(), MODEL.get_Yu());
+   gm2calc_data.Ad    = div_safe(MODEL.get_TYd(), MODEL.get_Yd());
+   gm2calc_data.Ae    = div_safe(MODEL.get_TYe(), MODEL.get_Ye());
    CMSSMNoFV_effective_couplings effective_couplings(model, qedqcd, physical_input);
    effective_couplings.calculate_effective_couplings();
 

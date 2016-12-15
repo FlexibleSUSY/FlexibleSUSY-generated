@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:34:34
+// File generated at Thu 15 Dec 2016 12:54:13
 
 #include "UMSSM_info.hpp"
 
@@ -153,8 +153,6 @@ namespace UMSSM_info {
       "QHd", "QHu", "Qd", "Qu", "Qe", "Qs", "Qv"};
 
    const char* model_name = "UMSSM";
-   const bool is_low_energy_model = false;
-   const bool is_supersymmetric_model = true;
 
 void print(std::ostream& ostr)
 {

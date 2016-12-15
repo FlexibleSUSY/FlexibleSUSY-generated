@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 16:01:45
+// File generated at Thu 15 Dec 2016 12:43:54
 
 #include "E6SSMtower_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -103,10 +103,9 @@ double E6SSMtower_soft_parameters::calc_beta_MassWB_two_loop(const Soft_traces& 
    beta_MassWB = Re(0.4*twoLoop*Sqr(g2)*(10*traceAdjLambda12TLambda12 +
       30*traceAdjYdTYd + 10*traceAdjYeTYe + 30*traceAdjYuTYu - 10*MassWB*
       traceLambda12AdjLambda12 - 30*MassWB*traceYdAdjYd - 10*MassWB*
-      traceYeAdjYe - 30*MassWB*traceYuAdjYu + 18*MassB*Sqr(g1) + 18*MassWB*Sqr(
-      g1) + 460*MassWB*Sqr(g2) + 120*MassG*Sqr(g3) + 120*MassWB*Sqr(g3) + 17*
-      MassBp*Sqr(gN) + 17*MassWB*Sqr(gN) - 10*Conj(Lambdax)*(MassWB*Lambdax -
-      TLambdax)));
+      traceYeAdjYe - 30*MassWB*traceYuAdjYu + 18*(MassB + MassWB)*Sqr(g1) + 460
+      *MassWB*Sqr(g2) + 120*MassG*Sqr(g3) + 120*MassWB*Sqr(g3) + 17*MassBp*Sqr(
+      gN) + 17*MassWB*Sqr(gN) - 10*Conj(Lambdax)*(MassWB*Lambdax - TLambdax)));
 
 
    return beta_MassWB;

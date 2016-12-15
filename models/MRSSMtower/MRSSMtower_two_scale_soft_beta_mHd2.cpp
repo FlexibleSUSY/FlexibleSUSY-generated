@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:08:54
+// File generated at Thu 15 Dec 2016 12:39:33
 
 #include "MRSSMtower_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -132,18 +132,17 @@ double MRSSMtower_soft_parameters::calc_beta_mHd2_two_loop(const Soft_traces& so
       + 2*mS2)*AbsSqr(LamSU) + 3*(2*mHd2 + 2*mRd2 + mS2 + mT2)*AbsSqr(LamTD))
       + 3*AbsSqr(LamTD)*(-((mHd2 + mHu2 + mRd2 + mRu2 + 2*mT2)*AbsSqr(LamTU)) +
       4*(mHd2 + mRd2 + mT2)*Sqr(g2)) + 0.4*(15*Power(g2,4)*Tr22 -
-      7.745966692414834*g1*Tr31 - 90*tracemd2YdAdjYdYdAdjYd - 15*
-      tracemd2YdAdjYuYuAdjYd - 30*traceme2YeAdjYeYeAdjYe - 30*
-      traceml2AdjYeYeAdjYeYe - 90*tracemq2AdjYdYdAdjYdYd - 15*
-      tracemq2AdjYdYdAdjYuYu - 15*tracemq2AdjYuYuAdjYdYd - 15*
-      tracemu2YuAdjYdYdAdjYu - 90*mHd2*traceYdAdjYdYdAdjYd - 15*mHd2*
-      traceYdAdjYuYuAdjYd - 15*mHu2*traceYdAdjYuYuAdjYd - 30*mHd2*
-      traceYeAdjYeYeAdjYe + 3*Tr2U111*Sqr(g1) - 2*tracemd2YdAdjYd*Sqr(g1) + 6*
-      traceme2YeAdjYe*Sqr(g1) + 6*traceml2AdjYeYe*Sqr(g1) - 2*tracemq2AdjYdYd*
-      Sqr(g1) + 6*mHd2*traceYeAdjYe*Sqr(g1) - 2*mHd2*traceYdAdjYd*(Sqr(g1) - 40
-      *Sqr(g3)) + 80*tracemd2YdAdjYd*Sqr(g3) + 80*tracemq2AdjYdYd*Sqr(g3)) - 12
-      *(mHd2 + mRd2 + mS2)*Sqr(LamSD)*Sqr(Conj(LamSD)) - 15*(mHd2 + mRd2 + mT2)
-      *Sqr(LamTD)*Sqr(Conj(LamTD))));
+      7.745966692414834*g1*Tr31 + (3*Tr2U111 - 2*(tracemd2YdAdjYd - 3*
+      traceme2YeAdjYe - 3*traceml2AdjYeYe + tracemq2AdjYdYd + mHd2*traceYdAdjYd
+      - 3*mHd2*traceYeAdjYe))*Sqr(g1) + 5*(-3*(6*tracemd2YdAdjYdYdAdjYd +
+      tracemd2YdAdjYuYuAdjYd + 2*traceme2YeAdjYeYeAdjYe + 2*
+      traceml2AdjYeYeAdjYeYe + 6*tracemq2AdjYdYdAdjYdYd +
+      tracemq2AdjYdYdAdjYuYu + tracemq2AdjYuYuAdjYdYd + tracemu2YuAdjYdYdAdjYu
+      + 6*mHd2*traceYdAdjYdYdAdjYd + mHd2*traceYdAdjYuYuAdjYd + mHu2*
+      traceYdAdjYuYuAdjYd + 2*mHd2*traceYeAdjYeYeAdjYe) + 16*(tracemd2YdAdjYd +
+      tracemq2AdjYdYd + mHd2*traceYdAdjYd)*Sqr(g3))) - 12*(mHd2 + mRd2 + mS2)*
+      Sqr(LamSD)*Sqr(Conj(LamSD)) - 15*(mHd2 + mRd2 + mT2)*Sqr(LamTD)*Sqr(Conj(
+      LamTD))));
 
 
    return beta_mHd2;

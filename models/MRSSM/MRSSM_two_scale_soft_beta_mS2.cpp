@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:27:57
+// File generated at Thu 15 Dec 2016 12:46:19
 
 #include "MRSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -100,16 +100,16 @@ double MRSSM_soft_parameters::calc_beta_mS2_two_loop(const Soft_traces& soft_tra
 
    double beta_mS2;
 
-   beta_mS2 = Re(-0.8*twoLoop*(AbsSqr(LamSD)*(15*tracemd2YdAdjYd + 5*
-      traceme2YeAdjYe + 5*traceml2AdjYeYe + 15*tracemq2AdjYdYd + 15*(2*mHd2 +
-      mRd2 + mS2)*traceYdAdjYd + 10*mHd2*traceYeAdjYe + 5*mRd2*traceYeAdjYe + 5
-      *mS2*traceYeAdjYe + 15*(2*mHd2 + 2*mRd2 + mS2 + mT2)*AbsSqr(LamTD) - 3*
-      mHd2*Sqr(g1) - 3*mRd2*Sqr(g1) - 3*mS2*Sqr(g1) - 15*mHd2*Sqr(g2) - 15*mRd2
-      *Sqr(g2) - 15*mS2*Sqr(g2)) + AbsSqr(LamSU)*(20*(mHu2 + mRu2 + mS2)*AbsSqr
-      (LamSU) - 3*(-5*tracemq2AdjYuYu - 5*tracemu2YuAdjYu - 5*(2*mHu2 + mRu2 +
-      mS2)*traceYuAdjYu - 5*(2*mHu2 + 2*mRu2 + mS2 + mT2)*AbsSqr(LamTU) + mHu2*
-      Sqr(g1) + mRu2*Sqr(g1) + mS2*Sqr(g1) + 5*mHu2*Sqr(g2) + 5*mRu2*Sqr(g2) +
-      5*mS2*Sqr(g2))) + 20*(mHd2 + mRd2 + mS2)*Sqr(LamSD)*Sqr(Conj(LamSD))));
+   beta_mS2 = Re(-0.8*twoLoop*(AbsSqr(LamSD)*(15*(2*mHd2 + 2*mRd2 + mS2 +
+      mT2)*AbsSqr(LamTD) - 3*(mHd2 + mRd2 + mS2)*Sqr(g1) + 5*(3*
+      tracemd2YdAdjYd + traceme2YeAdjYe + traceml2AdjYeYe + 3*tracemq2AdjYdYd +
+      6*mHd2*traceYdAdjYd + 3*mRd2*traceYdAdjYd + 3*mS2*traceYdAdjYd + 2*mHd2*
+      traceYeAdjYe + mRd2*traceYeAdjYe + mS2*traceYeAdjYe - 3*(mHd2 + mRd2 +
+      mS2)*Sqr(g2))) + AbsSqr(LamSU)*(20*(mHu2 + mRu2 + mS2)*AbsSqr(LamSU) - 3*
+      (-5*(2*mHu2 + 2*mRu2 + mS2 + mT2)*AbsSqr(LamTU) + (mHu2 + mRu2 + mS2)*Sqr
+      (g1) + 5*(-tracemq2AdjYuYu - tracemu2YuAdjYu - 2*mHu2*traceYuAdjYu - mRu2
+      *traceYuAdjYu - mS2*traceYuAdjYu + (mHu2 + mRu2 + mS2)*Sqr(g2)))) + 20*(
+      mHd2 + mRd2 + mS2)*Sqr(LamSD)*Sqr(Conj(LamSD))));
 
 
    return beta_mS2;

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:25:24
+// File generated at Thu 15 Dec 2016 12:40:19
 
 #include "HGTHDMIIMSSMBC_info.hpp"
 
@@ -89,8 +89,6 @@ namespace HGTHDMIIMSSMBC_info {
       "AtInput", "AbInput", "AtauInput", "LambdaLoopOrder"};
 
    const char* model_name = "HGTHDMIIMSSMBC";
-   const bool is_low_energy_model = false;
-   const bool is_supersymmetric_model = false;
 
 void print(std::ostream& ostr)
 {

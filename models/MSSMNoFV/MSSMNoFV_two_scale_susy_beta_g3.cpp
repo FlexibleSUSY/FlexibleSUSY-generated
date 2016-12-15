@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 16:02:10
+// File generated at Thu 15 Dec 2016 13:07:51
 
 #include "MSSMNoFV_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -56,8 +56,8 @@ double MSSMNoFV_susy_parameters::calc_beta_g3_two_loop(const Susy_traces& susy_t
 
    double beta_g3;
 
-   beta_g3 = Re(0.2*Power(g3,3)*twoLoop*(-20*traceYdAdjYd - 20*
-      traceYuAdjYu + 11*Sqr(g1) + 45*Sqr(g2) + 70*Sqr(g3)));
+   beta_g3 = Re(0.2*Power(g3,3)*twoLoop*(11*Sqr(g1) + 5*(-4*traceYdAdjYd
+      - 4*traceYuAdjYu + 9*Sqr(g2) + 14*Sqr(g3))));
 
 
    return beta_g3;
@@ -83,12 +83,12 @@ double MSSMNoFV_susy_parameters::calc_beta_g3_three_loop(const Susy_traces& susy
    double beta_g3;
 
    beta_g3 = Re(0.013333333333333334*Power(g3,3)*threeLoop*(-1702*Power(
-      g1,4) - 2025*Power(g2,4) + 8675*Power(g3,4) + 900*traceAdjYdYdAdjYdYd +
-      600*traceAdjYuYuAdjYdYd + 900*traceAdjYuYuAdjYuYu - 45*Sqr(g1)*Sqr(g2) +
-      110*Sqr(g1)*Sqr(g3) + 450*Sqr(g2)*Sqr(g3) - 20*traceAdjYuYu*(11*Sqr(g1) +
-      45*Sqr(g2) + 130*Sqr(g3)) - 10*traceAdjYdYd*(-45*traceAdjYeYe + 16*Sqr(
-      g1) + 90*Sqr(g2) + 260*Sqr(g3)) + 1350*Sqr(traceAdjYdYd) + 1350*Sqr(
-      traceAdjYuYu)));
+      g1,4) - 5*Sqr(g1)*(32*traceAdjYdYd + 44*traceAdjYuYu + 9*Sqr(g2) - 22*Sqr
+      (g3)) - 25*(81*Power(g2,4) - 347*Power(g3,4) + 104*(traceAdjYdYd +
+      traceAdjYuYu)*Sqr(g3) - 18*Sqr(g2)*(-2*(traceAdjYdYd + traceAdjYuYu) +
+      Sqr(g3)) - 6*(6*traceAdjYdYdAdjYdYd + 3*traceAdjYdYd*traceAdjYeYe + 4*
+      traceAdjYuYuAdjYdYd + 6*traceAdjYuYuAdjYuYu + 9*Sqr(traceAdjYdYd) + 9*Sqr
+      (traceAdjYuYu)))));
 
 
    return beta_g3;

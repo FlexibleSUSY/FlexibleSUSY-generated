@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:23:09
+// File generated at Thu 15 Dec 2016 12:42:11
 
 #include "SplitMSSM_info.hpp"
 
@@ -94,8 +94,6 @@ namespace SplitMSSM_info {
       , "mse2(2,2)"};
 
    const char* model_name = "SplitMSSM";
-   const bool is_low_energy_model = false;
-   const bool is_supersymmetric_model = false;
 
 void print(std::ostream& ostr)
 {

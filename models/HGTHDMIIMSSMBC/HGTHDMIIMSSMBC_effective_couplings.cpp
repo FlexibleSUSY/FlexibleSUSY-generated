@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:28:46
+// File generated at Thu 15 Dec 2016 12:40:58
 
 #include "HGTHDMIIMSSMBC_effective_couplings.hpp"
 
@@ -114,10 +114,9 @@ standard_model::Standard_model HGTHDMIIMSSMBC_effective_couplings::initialise_SM
 
    sm.set_loops(2);
    sm.set_thresholds(2);
-   sm.set_low_energy_data(qedqcd);
    sm.set_physical_input(physical_input);
 
-   sm.initialise_from_input();
+   sm.initialise_from_input(qedqcd);
 
    return sm;
 }

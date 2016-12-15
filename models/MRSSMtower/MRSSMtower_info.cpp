@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:09:07
+// File generated at Thu 15 Dec 2016 12:39:50
 
 #include "MRSSMtower_info.hpp"
 
@@ -154,8 +154,6 @@ namespace MRSSMtower_info {
       "mRd2Input", "mRu2Input", "MDBSInput", "MDWBTInput", "MDGocInput"};
 
    const char* model_name = "MRSSMtower";
-   const bool is_low_energy_model = true;
-   const bool is_supersymmetric_model = true;
 
 void print(std::ostream& ostr)
 {

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:23:09
+// File generated at Thu 15 Dec 2016 12:42:11
 
 #include "SplitMSSM_slha_io.hpp"
 #include "SplitMSSM_input_parameters.hpp"

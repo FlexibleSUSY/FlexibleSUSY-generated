@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:27:59
+// File generated at Thu 15 Dec 2016 12:46:21
 
 #include "MRSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -99,18 +99,14 @@ double MRSSM_soft_parameters::calc_beta_mRu2_two_loop(const Soft_traces& soft_tr
    double beta_mRu2;
 
    beta_mRu2 = Re(twoLoop*(6*Power(g2,4)*Tr22 - 3.0983866769659336*g1*
-      Tr31 - 4*(mHd2 + mHu2 + mRd2 + mRu2 + 2*mS2)*AbsSqr(LamSD)*AbsSqr(LamSU)
-      - 9*tracemq2AdjYuYu*AbsSqr(LamTU) - 9*tracemu2YuAdjYu*AbsSqr(LamTU) - 18*
-      mHu2*traceYuAdjYu*AbsSqr(LamTU) - 9*mRu2*traceYuAdjYu*AbsSqr(LamTU) - 9*
-      mT2*traceYuAdjYu*AbsSqr(LamTU) - 3*mHd2*AbsSqr(LamTD)*AbsSqr(LamTU) - 3*
-      mHu2*AbsSqr(LamTD)*AbsSqr(LamTU) - 3*mRd2*AbsSqr(LamTD)*AbsSqr(LamTU) - 3
-      *mRu2*AbsSqr(LamTD)*AbsSqr(LamTU) - 6*mT2*AbsSqr(LamTD)*AbsSqr(LamTU) - 6
-      *AbsSqr(LamSU)*(tracemq2AdjYuYu + tracemu2YuAdjYu + (2*mHu2 + mRu2 + mS2)
-      *traceYuAdjYu + (2*mHu2 + 2*mRu2 + mS2 + mT2)*AbsSqr(LamTU)) + 1.2*
-      Tr2U111*Sqr(g1) + 12*mHu2*AbsSqr(LamTU)*Sqr(g2) + 12*mRu2*AbsSqr(LamTU)*
-      Sqr(g2) + 12*mT2*AbsSqr(LamTU)*Sqr(g2) - 12*(mHu2 + mRu2 + mS2)*Sqr(LamSU
-      )*Sqr(Conj(LamSU)) - 15*mHu2*Sqr(LamTU)*Sqr(Conj(LamTU)) - 15*mRu2*Sqr(
-      LamTU)*Sqr(Conj(LamTU)) - 15*mT2*Sqr(LamTU)*Sqr(Conj(LamTU))));
+      Tr31 - 2*AbsSqr(LamSU)*(2*(mHd2 + mHu2 + mRd2 + mRu2 + 2*mS2)*AbsSqr(
+      LamSD) + 3*(tracemq2AdjYuYu + tracemu2YuAdjYu + 2*mHu2*traceYuAdjYu +
+      mRu2*traceYuAdjYu + mS2*traceYuAdjYu + (2*mHu2 + 2*mRu2 + mS2 + mT2)*
+      AbsSqr(LamTU))) + 1.2*Tr2U111*Sqr(g1) + 3*AbsSqr(LamTU)*(-3*(
+      tracemq2AdjYuYu + tracemu2YuAdjYu + (2*mHu2 + mRu2 + mT2)*traceYuAdjYu) -
+      (mHd2 + mHu2 + mRd2 + mRu2 + 2*mT2)*AbsSqr(LamTD) + 4*(mHu2 + mRu2 + mT2
+      )*Sqr(g2)) - 12*(mHu2 + mRu2 + mS2)*Sqr(LamSU)*Sqr(Conj(LamSU)) - 15*(
+      mHu2 + mRu2 + mT2)*Sqr(LamTU)*Sqr(Conj(LamTU))));
 
 
    return beta_mRu2;

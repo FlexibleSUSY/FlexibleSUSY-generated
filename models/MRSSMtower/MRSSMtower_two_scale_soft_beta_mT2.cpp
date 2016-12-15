@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:08:57
+// File generated at Thu 15 Dec 2016 12:39:38
 
 #include "MRSSMtower_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -101,17 +101,16 @@ double MRSSMtower_soft_parameters::calc_beta_mT2_two_loop(const Soft_traces& sof
 
    double beta_mT2;
 
-   beta_mT2 = Re(-0.4*twoLoop*(-40*Power(g2,4)*Tr22 + AbsSqr(LamTD)*(15*
-      tracemd2YdAdjYd + 5*traceme2YeAdjYe + 5*traceml2AdjYeYe + 15*
-      tracemq2AdjYdYd + 15*(2*mHd2 + mRd2 + mT2)*traceYdAdjYd + 10*mHd2*
-      traceYeAdjYe + 5*mRd2*traceYeAdjYe + 5*mT2*traceYeAdjYe + 10*(2*mHd2 + 2*
-      mRd2 + mS2 + mT2)*AbsSqr(LamSD) - 3*mHd2*Sqr(g1) - 3*mRd2*Sqr(g1) - 3*mT2
-      *Sqr(g1) + 5*mHd2*Sqr(g2) + 5*mRd2*Sqr(g2) + 5*mT2*Sqr(g2)) + AbsSqr(
-      LamTU)*(15*tracemq2AdjYuYu + 15*tracemu2YuAdjYu + 15*(2*mHu2 + mRu2 + mT2
-      )*traceYuAdjYu + 10*(2*mHu2 + 2*mRu2 + mS2 + mT2)*AbsSqr(LamSU) - 3*mHu2*
-      Sqr(g1) - 3*mRu2*Sqr(g1) - 3*mT2*Sqr(g1) + 5*mHu2*Sqr(g2) + 5*mRu2*Sqr(g2
-      ) + 5*mT2*Sqr(g2)) + 30*(mHd2 + mRd2 + mT2)*Sqr(LamTD)*Sqr(Conj(LamTD)) +
-      30*(mHu2 + mRu2 + mT2)*Sqr(LamTU)*Sqr(Conj(LamTU))));
+   beta_mT2 = Re(0.4*twoLoop*(40*Power(g2,4)*Tr22 + AbsSqr(LamTD)*(-10*(2
+      *mHd2 + 2*mRd2 + mS2 + mT2)*AbsSqr(LamSD) + 3*(mHd2 + mRd2 + mT2)*Sqr(g1)
+      - 5*(3*tracemd2YdAdjYd + traceme2YeAdjYe + traceml2AdjYeYe + 3*
+      tracemq2AdjYdYd + 6*mHd2*traceYdAdjYd + 3*mRd2*traceYdAdjYd + 3*mT2*
+      traceYdAdjYd + 2*mHd2*traceYeAdjYe + mRd2*traceYeAdjYe + mT2*traceYeAdjYe
+      + (mHd2 + mRd2 + mT2)*Sqr(g2))) + AbsSqr(LamTU)*(-10*(2*mHu2 + 2*mRu2 +
+      mS2 + mT2)*AbsSqr(LamSU) + 3*(mHu2 + mRu2 + mT2)*Sqr(g1) - 5*(3*(
+      tracemq2AdjYuYu + tracemu2YuAdjYu + (2*mHu2 + mRu2 + mT2)*traceYuAdjYu) +
+      (mHu2 + mRu2 + mT2)*Sqr(g2))) - 30*(mHd2 + mRd2 + mT2)*Sqr(LamTD)*Sqr(
+      Conj(LamTD)) - 30*(mHu2 + mRu2 + mT2)*Sqr(LamTU)*Sqr(Conj(LamTU))));
 
 
    return beta_mT2;

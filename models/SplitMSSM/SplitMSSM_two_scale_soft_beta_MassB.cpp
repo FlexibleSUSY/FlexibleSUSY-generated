@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:23:02
+// File generated at Thu 15 Dec 2016 12:42:02
 
 #include "SplitMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -94,17 +94,17 @@ double SplitMSSM_soft_parameters::calc_beta_MassB_two_loop(const Soft_traces& so
 
    double beta_MassB;
 
-   beta_MassB = Re(0.025*twoLoop*(5*Power(gYd,4)*MassB + 5*Power(gYu,4)*
-      MassB - 240*g2d*g2u*gYd*gYu*MassWB - 40*Power(gYd,3)*gYu*Mu - 40*gYd*
-      Power(gYu,3)*Mu + 192*gYd*gYu*Mu*Sqr(g1) + 960*gYd*gYu*Mu*Sqr(g2) - 120*
-      gYd*gYu*Mu*Sqr(g2d) - 120*gYd*gYu*Mu*Sqr(g2u) - 180*MassB*traceYuAdjYu*
-      Sqr(gYd) + 51*MassB*Sqr(g1)*Sqr(gYd) + 255*MassB*Sqr(g2)*Sqr(gYd) - 105*
-      MassB*Sqr(g2d)*Sqr(gYd) + 120*MassWB*Sqr(g2d)*Sqr(gYd) - 90*MassB*Sqr(g2u
-      )*Sqr(gYd) - 180*MassB*traceYuAdjYu*Sqr(gYu) + 51*MassB*Sqr(g1)*Sqr(gYu)
-      + 255*MassB*Sqr(g2)*Sqr(gYu) - 90*MassB*Sqr(g2d)*Sqr(gYu) - 105*MassB*Sqr
-      (g2u)*Sqr(gYu) + 120*MassWB*Sqr(g2u)*Sqr(gYu) - 140*MassB*Sqr(gYd)*Sqr(
-      gYu) - 180*MassB*traceYdAdjYd*(Sqr(gYd) + Sqr(gYu)) - 60*MassB*
-      traceYeAdjYe*(Sqr(gYd) + Sqr(gYu))));
+   beta_MassB = Re(0.025*twoLoop*(3*Sqr(g1)*(64*gYd*gYu*Mu + 17*MassB*Sqr
+      (gYd) + 17*MassB*Sqr(gYu)) - 5*(-(Power(gYd,4)*MassB) - Power(gYu,4)*
+      MassB + 48*g2d*g2u*gYd*gYu*MassWB + 8*Power(gYd,3)*gYu*Mu + 8*gYd*Power(
+      gYu,3)*Mu + 24*gYd*gYu*Mu*Sqr(g2u) + 36*MassB*traceYdAdjYd*Sqr(gYd) + 12*
+      MassB*traceYeAdjYe*Sqr(gYd) + 36*MassB*traceYuAdjYu*Sqr(gYd) + 18*MassB*
+      Sqr(g2u)*Sqr(gYd) + 36*MassB*traceYdAdjYd*Sqr(gYu) + 12*MassB*
+      traceYeAdjYe*Sqr(gYu) + 36*MassB*traceYuAdjYu*Sqr(gYu) + 21*MassB*Sqr(g2u
+      )*Sqr(gYu) - 24*MassWB*Sqr(g2u)*Sqr(gYu) + 28*MassB*Sqr(gYd)*Sqr(gYu) + 3
+      *Sqr(g2d)*(8*gYd*gYu*Mu + (7*MassB - 8*MassWB)*Sqr(gYd) + 6*MassB*Sqr(gYu
+      )) - 3*Sqr(g2)*(64*gYd*gYu*Mu + 17*MassB*Sqr(gYd) + 17*MassB*Sqr(gYu)))))
+      ;
 
 
    return beta_MassB;

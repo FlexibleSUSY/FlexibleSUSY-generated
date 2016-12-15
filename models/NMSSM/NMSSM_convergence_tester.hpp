@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:45:17
+// File generated at Thu 15 Dec 2016 13:00:31
 
 #ifndef NMSSM_CONVERGENCE_TESTER_H
 #define NMSSM_CONVERGENCE_TESTER_H

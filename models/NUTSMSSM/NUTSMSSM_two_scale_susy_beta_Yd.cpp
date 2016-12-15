@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:41:18
+// File generated at Thu 15 Dec 2016 12:56:03
 
 #include "NUTSMSSM_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -66,15 +66,15 @@ Eigen::Matrix<double,3,3> NUTSMSSM_susy_parameters::calc_beta_Yd_two_loop(const 
 
    beta_Yd = (twoLoop*(Yd*(3.188888888888889*Power(g1,4) + 7.5*Power(g2,4
       ) - 1.7777777777777777*Power(g3,4) - 9*traceYdAdjYdYdAdjYd - 3*
-      traceYdAdjYuYuAdjYd - 3*traceYeAdjYeYeAdjYe - 3*traceYuAdjYu*AbsSqr(
-      Lambdax) - 2*AbsSqr(Kappa)*AbsSqr(Lambdax) - 0.4*traceYdAdjYd*Sqr(g1) +
-      1.2*traceYeAdjYe*Sqr(g1) + Sqr(g1)*Sqr(g2) + 16*traceYdAdjYd*Sqr(g3) +
-      0.8888888888888888*Sqr(g1)*Sqr(g3) + 8*Sqr(g2)*Sqr(g3) - 3*Sqr(Conj(
-      Lambdax))*Sqr(Lambdax)) + (-9*traceYdAdjYd - 3*traceYeAdjYe - 3*AbsSqr(
-      Lambdax) + 0.8*Sqr(g1) + 6*Sqr(g2))*(Yd*Yd.adjoint()*Yd) + (-3*
-      traceYuAdjYu - AbsSqr(Lambdax) + 0.8*Sqr(g1))*(Yd*Yu.adjoint()*Yu) - 4*(
-      Yd*Yd.adjoint()*Yd*Yd.adjoint()*Yd) - 2*(Yd*Yu.adjoint()*Yu*Yd.adjoint()*
-      Yd) - 2*(Yd*Yu.adjoint()*Yu*Yu.adjoint()*Yu))).real();
+      traceYdAdjYuYuAdjYd - 3*traceYeAdjYeYeAdjYe - (3*traceYuAdjYu + 2*AbsSqr(
+      Kappa))*AbsSqr(Lambdax) + Sqr(g1)*(-0.4*traceYdAdjYd + 1.2*traceYeAdjYe +
+      Sqr(g2) + 0.8888888888888888*Sqr(g3)) + 16*traceYdAdjYd*Sqr(g3) + 8*Sqr(
+      g2)*Sqr(g3) - 3*Sqr(Conj(Lambdax))*Sqr(Lambdax)) + (-9*traceYdAdjYd - 3*
+      traceYeAdjYe - 3*AbsSqr(Lambdax) + 0.8*Sqr(g1) + 6*Sqr(g2))*(Yd*
+      Yd.adjoint()*Yd) + (-3*traceYuAdjYu - AbsSqr(Lambdax) + 0.8*Sqr(g1))*(Yd*
+      Yu.adjoint()*Yu) - 4*(Yd*Yd.adjoint()*Yd*Yd.adjoint()*Yd) - 2*(Yd*
+      Yu.adjoint()*Yu*Yd.adjoint()*Yd) - 2*(Yd*Yu.adjoint()*Yu*Yu.adjoint()*Yu)
+      )).real();
 
 
    return beta_Yd;

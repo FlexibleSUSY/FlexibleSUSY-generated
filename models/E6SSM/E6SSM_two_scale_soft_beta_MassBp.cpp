@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 16:16:52
+// File generated at Thu 15 Dec 2016 12:51:57
 
 #include "E6SSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -106,10 +106,10 @@ double E6SSM_soft_parameters::calc_beta_MassBp_two_loop(const Soft_traces& soft_
       traceAdjLambda12TLambda12 + 210*traceAdjYdTYd + 70*traceAdjYeTYe + 90*
       traceAdjYuTYu - 285*MassBp*traceKappaAdjKappa - 190*MassBp*
       traceLambda12AdjLambda12 - 210*MassBp*traceYdAdjYd - 70*MassBp*
-      traceYeAdjYe - 90*MassBp*traceYuAdjYu + 162*MassB*Sqr(g1) + 162*MassBp*
-      Sqr(g1) + 510*MassBp*Sqr(g2) + 510*MassWB*Sqr(g2) + 1200*MassBp*Sqr(g3) +
-      1200*MassG*Sqr(g3) + 916*MassBp*Sqr(gN) - 190*Conj(Lambdax)*(MassBp*
-      Lambdax - TLambdax)));
+      traceYeAdjYe - 90*MassBp*traceYuAdjYu + 162*(MassB + MassBp)*Sqr(g1) +
+      510*MassBp*Sqr(g2) + 510*MassWB*Sqr(g2) + 1200*MassBp*Sqr(g3) + 1200*
+      MassG*Sqr(g3) + 916*MassBp*Sqr(gN) - 190*Conj(Lambdax)*(MassBp*Lambdax -
+      TLambdax)));
 
 
    return beta_MassBp;

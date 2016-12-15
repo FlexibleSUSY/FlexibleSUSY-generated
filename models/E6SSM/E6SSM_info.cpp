@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 16:16:56
+// File generated at Thu 15 Dec 2016 12:52:05
 
 #include "E6SSM_info.hpp"
 
@@ -192,8 +192,6 @@ namespace E6SSM_info {
       "BmuPrimeInput", "vSInput", "Lambda12Input"};
 
    const char* model_name = "E6SSM";
-   const bool is_low_energy_model = false;
-   const bool is_supersymmetric_model = true;
 
 void print(std::ostream& ostr)
 {

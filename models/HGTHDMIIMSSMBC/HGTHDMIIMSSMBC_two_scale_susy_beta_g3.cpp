@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:24:57
+// File generated at Thu 15 Dec 2016 12:39:40
 
 #include "HGTHDMIIMSSMBC_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -56,8 +56,8 @@ double HGTHDMIIMSSMBC_susy_parameters::calc_beta_g3_two_loop(const Susy_traces& 
 
    double beta_g3;
 
-   beta_g3 = Re(0.1*Power(g3,3)*twoLoop*(-20*traceYdAdjYd - 20*
-      traceYuAdjYu + 11*Sqr(g1) + 45*Sqr(g2) + 220*Sqr(g3)));
+   beta_g3 = Re(0.1*Power(g3,3)*twoLoop*(11*Sqr(g1) + 5*(-4*(traceYdAdjYd
+      + traceYuAdjYu) + 9*Sqr(g2) + 44*Sqr(g3))));
 
 
    return beta_g3;

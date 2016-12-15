@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:46:39
+// File generated at Thu 15 Dec 2016 13:01:54
 
 #include "NMSSM_standard_model_two_scale_matching.hpp"
 #include "NMSSM_standard_model_matching.hpp"
@@ -30,7 +30,7 @@
 namespace flexiblesusy {
 
 CLASSNAME::NMSSM_standard_model_Matching()
-   : model(0), eft(0), constraint(0), scale(0.)
+   : model(0), eft(0), constraint(nullptr), scale(0.)
    , loop_order_up(0), loop_order_down(0)
    , higgs_idx(0)
 {}
@@ -75,8 +75,6 @@ void CLASSNAME::match_high_to_low_scale_model()
 {
    if (!model || !eft)
       throw SetupError("Model pointer in matching class is NULL!");
-   if (!constraint)
-      throw SetupError("Constraint pointer in matching class is NULL!");
 
    eft->run_to(get_scale());
    model->run_to(get_scale());
@@ -91,8 +89,6 @@ void CLASSNAME::match_low_to_high_scale_model()
 {
    if (!model || !eft)
       throw SetupError("Model pointer in matching class is NULL!");
-   if (!constraint)
-      throw SetupError("Constraint pointer in matching class is NULL!");
 
    eft->run_to(get_scale());
    model->run_to(get_scale());
@@ -107,8 +103,6 @@ void CLASSNAME::match_high_to_low_scale_model_tree_level()
 {
    if (!model || !eft)
       throw SetupError("Model pointer in matching class is NULL!");
-   if (!constraint)
-      throw SetupError("Constraint pointer in matching class is NULL!");
 
    eft->run_to(get_scale());
    model->run_to(get_scale());
@@ -120,8 +114,6 @@ void CLASSNAME::match_low_to_high_scale_model_tree_level()
 {
    if (!model || !eft)
       throw SetupError("Model pointer in matching class is NULL!");
-   if (!constraint)
-      throw SetupError("Constraint pointer in matching class is NULL!");
 
    eft->run_to(get_scale());
    model->run_to(get_scale());
@@ -160,7 +152,7 @@ void CLASSNAME::set_loop_order_down(unsigned loop_order_down_)
       WARNING("Matching loop order " << loop_order_down_
               << " for downwards matching currently not"
               " supported!  I'm using 1-loop matching.");
-      loop_order_down = 1;
+      loop_order_down_ = 1;
    }
 
    loop_order_down = loop_order_down_;

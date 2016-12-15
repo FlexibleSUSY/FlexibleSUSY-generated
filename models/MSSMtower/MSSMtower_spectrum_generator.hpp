@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:08:22
+// File generated at Thu 15 Dec 2016 12:39:01
 
 #ifndef MSSMtower_STANDARD_MODEL_SPECTRUM_GENERATOR_H
 #define MSSMtower_STANDARD_MODEL_SPECTRUM_GENERATOR_H
@@ -30,6 +30,8 @@
 #include "MSSMtower_standard_model_two_scale_matching.hpp"
 #include "standard_model_two_scale_model.hpp"
 #include "standard_model_two_scale_low_scale_constraint.hpp"
+#include "standard_model_two_scale_convergence_tester.hpp"
+#include "two_scale_composite_convergence_tester.hpp"
 
 #include "lowe.h"
 #include "error.hpp"
@@ -37,6 +39,7 @@
 #include "two_scale_running_precision.hpp"
 #include "two_scale_solver.hpp"
 
+#include <algorithm>
 #include <limits>
 
 namespace flexiblesusy {
@@ -82,17 +85,18 @@ private:
  * convergence is reached or an error occours.  Finally the particle
  * spectrum (pole masses) is calculated.
  *
- * @param oneset Standard Model input parameters
+ * @param qedqcd Standard Model input parameters
  * @param input model input parameters
  */
 template <class T>
-void MSSMtower_spectrum_generator<T>::run(const softsusy::QedQcd& oneset,
+void MSSMtower_spectrum_generator<T>::run(const softsusy::QedQcd& qedqcd,
                                 const MSSMtower_input_parameters& input)
 {
    MSSMtower<T>& model = this->model;
    model.clear();
    model.set_input_parameters(input);
    model.do_calculate_sm_pole_masses(this->settings.get(Spectrum_generator_settings::calculate_sm_masses));
+   model.do_calculate_bsm_pole_masses(this->settings.get(Spectrum_generator_settings::calculate_bsm_masses));
    model.do_force_output(this->settings.get(Spectrum_generator_settings::force_output));
    model.set_loops(this->settings.get(Spectrum_generator_settings::beta_loop_order));
    model.set_thresholds(this->settings.get(Spectrum_generator_settings::threshold_corrections_loop_order));
@@ -117,7 +121,7 @@ void MSSMtower_spectrum_generator<T>::run(const softsusy::QedQcd& oneset,
    susy_scale_constraint.set_model(&model);
    low_scale_constraint .set_model(&eft);
 
-   low_scale_constraint .set_sm_parameters(oneset);
+   low_scale_constraint .set_sm_parameters(qedqcd);
 
    const unsigned index = this->settings.get(Spectrum_generator_settings::eft_higgs_index);
 
@@ -138,20 +142,33 @@ void MSSMtower_spectrum_generator<T>::run(const softsusy::QedQcd& oneset,
    std::vector<Constraint<T>*> eft_constraints(1);
    eft_constraints[0] = &low_scale_constraint;
 
-   MSSMtower_convergence_tester<T> convergence_tester(
+   // convergence tester for MSSMtower
+   MSSMtower_convergence_tester<T> model_ct(
       &model, this->settings.get(Spectrum_generator_settings::precision));
-   if (this->settings.get(Spectrum_generator_settings::max_iterations) > 0)
-      convergence_tester.set_max_iterations(
-         this->settings.get(Spectrum_generator_settings::max_iterations));
 
-   MSSMtower_standard_model_initial_guesser<T> initial_guesser(&model, &eft, oneset,
+   // convergence tester for Standard Model
+   standard_model::Standard_model_convergence_tester<T> eft_ct(
+      &eft, this->settings.get(Spectrum_generator_settings::precision));
+
+   if (this->settings.get(Spectrum_generator_settings::max_iterations) > 0) {
+      model_ct.set_max_iterations(
+         this->settings.get(Spectrum_generator_settings::max_iterations));
+      eft_ct.set_max_iterations(
+         this->settings.get(Spectrum_generator_settings::max_iterations));
+   }
+
+   Composite_convergence_tester<Two_scale> cct;
+   cct.add_convergence_tester(&model_ct);
+   cct.add_convergence_tester(&eft_ct);
+
+   MSSMtower_standard_model_initial_guesser<T> initial_guesser(&model, &eft, qedqcd,
                                                   low_scale_constraint,
                                                   susy_scale_constraint);
    Two_scale_increasing_precision precision(
       10.0, this->settings.get(Spectrum_generator_settings::precision));
 
    solver.reset();
-   solver.set_convergence_tester(&convergence_tester);
+   solver.set_convergence_tester(&cct);
    solver.set_running_precision(&precision);
    solver.set_initial_guesser(&initial_guesser);
    solver.add_model(&eft, &matching, eft_constraints);
@@ -164,7 +181,8 @@ void MSSMtower_spectrum_generator<T>::run(const softsusy::QedQcd& oneset,
       solver.solve();
       susy_scale = susy_scale_constraint.get_scale();
       low_scale  = low_scale_constraint.get_scale();
-      this->reached_precision = convergence_tester.get_current_accuracy();
+      this->reached_precision = std::max(model_ct.get_current_accuracy(),
+                                         eft_ct.get_current_accuracy());
 
       const double mass_scale =
          this->settings.get(Spectrum_generator_settings::pole_mass_scale) != 0. ?
@@ -220,6 +238,12 @@ void MSSMtower_spectrum_generator<T>::run(const softsusy::QedQcd& oneset,
          this->model.get_physical().MFe(1) = eft.get_physical().MFe(1);
          this->model.get_physical().MFe(2) = eft.get_physical().MFe(2);
 
+         if (eft.get_problems().is_tachyon(standard_model_info::hh))
+            this->model.get_problems().flag_tachyon(MSSMtower_info::hh);
+         if (eft.get_problems().is_tachyon(standard_model_info::VZ))
+            this->model.get_problems().flag_tachyon(MSSMtower_info::VZ);
+         if (eft.get_problems().is_tachyon(standard_model_info::VWp))
+            this->model.get_problems().flag_tachyon(MSSMtower_info::VWm);
       }
 
       // copy calculated W pole mass

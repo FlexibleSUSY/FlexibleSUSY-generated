@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:25:08
+// File generated at Thu 15 Dec 2016 12:39:55
 
 #include "HGTHDMIIMSSMBC_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -45,11 +45,10 @@ double HGTHDMIIMSSMBC_susy_parameters::calc_beta_Lambda3_one_loop(const Susy_tra
       + 2*g1d*g1dp*g2u*g2up + 12*Lambda1*Lambda3 + 12*Lambda2*Lambda3 + 4*
       Lambda1*Lambda4 + 4*Lambda2*Lambda4 + 16*Lambda6*Lambda7 + 6*Lambda3*
       traceYdAdjYd - 12*traceYdAdjYuYuAdjYd + 2*Lambda3*traceYeAdjYe + 6*
-      Lambda3*traceYuAdjYu - 1.8*Lambda3*Sqr(g1) + 3*Lambda3*Sqr(g1d) + Lambda3
-      *Sqr(g1dp) - 9*Lambda3*Sqr(g2) - 0.9*Sqr(g1)*Sqr(g2) + 3*Lambda3*Sqr(g2u)
-      - 5*Sqr(g1d)*Sqr(g2u) + Lambda3*Sqr(g2up) - Sqr(g1dp)*Sqr(g2up) + 4*Sqr(
-      Lambda3) + 2*Sqr(Lambda4) + 2*Sqr(Lambda5) + 4*Sqr(Lambda6) + 4*Sqr(
-      Lambda7)));
+      Lambda3*traceYuAdjYu + 3*Lambda3*Sqr(g1d) + Lambda3*Sqr(g1dp) - 9*Lambda3
+      *Sqr(g2) - 0.9*Sqr(g1)*(2*Lambda3 + Sqr(g2)) + 3*Lambda3*Sqr(g2u) - 5*Sqr
+      (g1d)*Sqr(g2u) + Lambda3*Sqr(g2up) - Sqr(g1dp)*Sqr(g2up) + 4*Sqr(Lambda3)
+      + 2*Sqr(Lambda4) + 2*Sqr(Lambda5) + 4*Sqr(Lambda6) + 4*Sqr(Lambda7)));
 
 
    return beta_Lambda3;

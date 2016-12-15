@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:51:07
+// File generated at Thu 15 Dec 2016 13:04:39
 
 #ifndef NUHMSSM_SLHA_IO_H
 #define NUHMSSM_SLHA_IO_H
@@ -57,7 +57,6 @@ struct NUHMSSM_scales {
 class NUHMSSM_slha_io {
 public:
    NUHMSSM_slha_io();
-   ~NUHMSSM_slha_io() {}
 
    void clear();
 

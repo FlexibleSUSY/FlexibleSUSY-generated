@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:08:52
+// File generated at Thu 15 Dec 2016 12:39:31
 
 #include "MRSSMtower_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -111,12 +111,11 @@ Eigen::Matrix<double,3,3> MRSSMtower_soft_parameters::calc_beta_mq2_two_loop(con
       traceml2AdjYeYe - 6*tracemq2AdjYdYd - 12*mHd2*traceYdAdjYd - 4*mHd2*
       traceYeAdjYe - 2*(2*mHd2 + mRd2 + mS2)*AbsSqr(LamSD) - 3*(2*mHd2 + mRd2 +
       mT2)*AbsSqr(LamTD) + 0.8*mHd2*Sqr(g1))*(Yd.adjoint()*Yd) + (-6*
-      tracemq2AdjYuYu - 6*tracemu2YuAdjYu - 12*mHu2*traceYuAdjYu - 4*mHu2*
-      AbsSqr(LamSU) - 2*mRu2*AbsSqr(LamSU) - 2*mS2*AbsSqr(LamSU) - 6*mHu2*
-      AbsSqr(LamTU) - 3*mRu2*AbsSqr(LamTU) - 3*mT2*AbsSqr(LamTU) + 1.6*mHu2*Sqr
-      (g1))*(Yu.adjoint()*Yu) + (-3*traceYdAdjYd - traceYeAdjYe - AbsSqr(LamSD)
-      - 1.5*AbsSqr(LamTD) + 0.4*Sqr(g1))*(mq2*Yd.adjoint()*Yd) + (-3*
-      traceYuAdjYu - AbsSqr(LamSU) - 1.5*AbsSqr(LamTU) + 0.8*Sqr(g1))*(mq2*
+      tracemq2AdjYuYu - 6*tracemu2YuAdjYu - 12*mHu2*traceYuAdjYu - 2*(2*mHu2 +
+      mRu2 + mS2)*AbsSqr(LamSU) - 3*(2*mHu2 + mRu2 + mT2)*AbsSqr(LamTU) + 1.6*
+      mHu2*Sqr(g1))*(Yu.adjoint()*Yu) + (-3*traceYdAdjYd - traceYeAdjYe -
+      AbsSqr(LamSD) - 1.5*AbsSqr(LamTD) + 0.4*Sqr(g1))*(mq2*Yd.adjoint()*Yd) +
+      (-3*traceYuAdjYu - AbsSqr(LamSU) - 1.5*AbsSqr(LamTU) + 0.8*Sqr(g1))*(mq2*
       Yu.adjoint()*Yu) + (-6*traceYdAdjYd - 2*traceYeAdjYe - 2*AbsSqr(LamSD) -
       3*AbsSqr(LamTD) + 0.8*Sqr(g1))*(Yd.adjoint()*md2*Yd) + (-3*traceYdAdjYd -
       traceYeAdjYe - AbsSqr(LamSD) - 1.5*AbsSqr(LamTD) + 0.4*Sqr(g1))*(

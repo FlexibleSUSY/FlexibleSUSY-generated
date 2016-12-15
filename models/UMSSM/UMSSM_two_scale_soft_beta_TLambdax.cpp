@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:33:13
+// File generated at Thu 15 Dec 2016 12:52:18
 
 #include "UMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -84,13 +84,12 @@ double UMSSM_soft_parameters::calc_beta_TLambdax_one_loop(const Soft_traces& sof
 
    double beta_TLambdax;
 
-   beta_TLambdax = Re(oneOver16PiSqr*(0.4*Lambdax*(15*traceAdjYdTYd + 5*
-      traceAdjYeTYe + 15*traceAdjYuTYu + 5*traceAdjYvTYv + 3*MassB*Sqr(g1) + 15
-      *MassWB*Sqr(g2) + 10*MassU*Sqr(gp)*Sqr(QHd) + 10*MassU*Sqr(gp)*Sqr(QHu) +
-      10*MassU*Sqr(gp)*Sqr(Qs)) + (3*traceYdAdjYd + traceYeAdjYe + 3*
-      traceYuAdjYu + traceYvAdjYv + 12*AbsSqr(Lambdax) - 0.6*Sqr(g1) - 3*Sqr(g2
-      ) - 2*Sqr(gp)*Sqr(QHd) - 2*Sqr(gp)*Sqr(QHu) - 2*Sqr(gp)*Sqr(Qs))*TLambdax
-      ));
+   beta_TLambdax = Re(oneOver16PiSqr*(0.4*Lambdax*(3*MassB*Sqr(g1) + 5*(3
+      *traceAdjYdTYd + traceAdjYeTYe + 3*traceAdjYuTYu + traceAdjYvTYv + 3*
+      MassWB*Sqr(g2) + 2*MassU*Sqr(gp)*(Sqr(QHd) + Sqr(QHu) + Sqr(Qs)))) + (3*
+      traceYdAdjYd + traceYeAdjYe + 3*traceYuAdjYu + traceYvAdjYv + 12*AbsSqr(
+      Lambdax) - 0.6*Sqr(g1) - 3*Sqr(g2) - 2*Sqr(gp)*Sqr(QHd) - 2*Sqr(gp)*Sqr(
+      QHu) - 2*Sqr(gp)*Sqr(Qs))*TLambdax));
 
 
    return beta_TLambdax;

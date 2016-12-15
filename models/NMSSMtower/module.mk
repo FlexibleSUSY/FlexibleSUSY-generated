@@ -237,6 +237,7 @@ pack-$(MODNAME)-src:
 		tar -czf $(NMSSMtower_TARBALL) \
 		$(LIBNMSSMtower_SRC) $(LIBNMSSMtower_HDR) \
 		$(EXENMSSMtower_SRC) \
+		$(LLNMSSMtower_SRC) $(LLNMSSMtower_MMA) \
 		$(NMSSMtower_MK) $(NMSSMtower_TWO_SCALE_MK) \
 		$(NMSSMtower_SLHA_INPUT) $(NMSSMtower_GNUPLOT)
 

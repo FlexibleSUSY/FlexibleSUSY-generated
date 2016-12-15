@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 16:09:58
+// File generated at Thu 15 Dec 2016 13:13:01
 
 #include "CMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -142,12 +142,12 @@ double CMSSM_soft_parameters::calc_beta_mHu2_two_loop(const Soft_traces& soft_tr
       traceYuAdjYdTYdAdjTYu - 36*traceYuAdjYuTYuAdjTYu - 36*mHu2*
       traceYuAdjYuYuAdjYu + 1.2*Tr2U111*Sqr(g1) + 1.6*traceconjTYuTpTYu*Sqr(g1)
       - 1.6*MassB*traceconjTYuTpYu*Sqr(g1) + 1.6*tracemq2AdjYuYu*Sqr(g1) + 1.6
-      *tracemu2YuAdjYu*Sqr(g1) + 1.6*mHu2*traceYuAdjYu*Sqr(g1) + 0.04*Conj(
-      MassB)*Sqr(g1)*(-40*traceAdjYuTYu + 80*MassB*traceYuAdjYu + 621*MassB*Sqr
-      (g1) + 90*MassB*Sqr(g2) + 45*MassWB*Sqr(g2)) + 0.6*Conj(MassWB)*Sqr(g2)*(
-      3*(MassB + 2*MassWB)*Sqr(g1) + 55*MassWB*Sqr(g2)) + 32*traceconjTYuTpTYu*
-      Sqr(g3) - 32*MassG*traceconjTYuTpYu*Sqr(g3) + 32*tracemq2AdjYuYu*Sqr(g3)
-      + 32*tracemu2YuAdjYu*Sqr(g3) + 32*mHu2*traceYuAdjYu*Sqr(g3) + 64*
+      *tracemu2YuAdjYu*Sqr(g1) + 1.6*mHu2*traceYuAdjYu*Sqr(g1) + 0.6*Conj(
+      MassWB)*Sqr(g2)*(3*(MassB + 2*MassWB)*Sqr(g1) + 55*MassWB*Sqr(g2)) + 0.04
+      *Conj(MassB)*Sqr(g1)*(621*MassB*Sqr(g1) + 5*(-8*(traceAdjYuTYu - 2*MassB*
+      traceYuAdjYu) + 9*(2*MassB + MassWB)*Sqr(g2))) + 32*traceconjTYuTpTYu*Sqr
+      (g3) - 32*MassG*traceconjTYuTpYu*Sqr(g3) + 32*tracemq2AdjYuYu*Sqr(g3) +
+      32*tracemu2YuAdjYu*Sqr(g3) + 32*mHu2*traceYuAdjYu*Sqr(g3) + 64*
       traceYuAdjYu*AbsSqr(MassG)*Sqr(g3) - 32*traceAdjYuTYu*Conj(MassG)*Sqr(g3)
       ));
 

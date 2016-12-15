@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:45:22
+// File generated at Thu 15 Dec 2016 13:00:09
 
 #include "MSSMRHN_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -170,33 +170,30 @@ double MSSMRHN_soft_parameters::calc_beta_mHd2_two_loop(const Soft_traces& soft_
 
    double beta_mHd2;
 
-   beta_mHd2 = Re(0.04*twoLoop*(Conj(MassB)*Sqr(g1)*(20*traceAdjYdTYd -
-      60*traceAdjYeTYe - 40*MassB*traceYdAdjYd + 120*MassB*traceYeAdjYe + 621*
-      MassB*Sqr(g1) + 90*MassB*Sqr(g2) + 45*MassWB*Sqr(g2)) + 15*Conj(MassWB)*
-      Sqr(g2)*(3*(MassB + 2*MassWB)*Sqr(g1) + 55*MassWB*Sqr(g2)) + 10*(15*Power
-      (g2,4)*Tr22 - 7.745966692414834*g1*Tr31 - 90*tracemd2YdAdjYdYdAdjYd - 15*
-      tracemd2YdAdjYuYuAdjYd - 30*traceme2YeAdjYeYeAdjYe - 5*
-      traceme2YeAdjYvYvAdjYe - 30*traceml2AdjYeYeAdjYeYe - 5*
-      traceml2AdjYeYeAdjYvYv - 5*traceml2AdjYvYvAdjYeYe - 90*
-      tracemq2AdjYdYdAdjYdYd - 15*tracemq2AdjYdYdAdjYuYu - 15*
-      tracemq2AdjYuYuAdjYdYd - 15*tracemu2YuAdjYdYdAdjYu - 5*
-      tracemv2YvAdjYeYeAdjYv - 90*traceYdAdjTYdTYdAdjYd - 15*
-      traceYdAdjTYuTYuAdjYd - 90*traceYdAdjYdTYdAdjTYd - 90*mHd2*
-      traceYdAdjYdYdAdjYd - 15*traceYdAdjYuTYuAdjTYd - 15*mHd2*
-      traceYdAdjYuYuAdjYd - 15*mHu2*traceYdAdjYuYuAdjYd - 30*
-      traceYeAdjTYeTYeAdjYe - 5*traceYeAdjTYvTYvAdjYe - 30*
-      traceYeAdjYeTYeAdjTYe - 30*mHd2*traceYeAdjYeYeAdjYe - 5*
-      traceYeAdjYvTYvAdjTYe - 5*mHd2*traceYeAdjYvYvAdjYe - 5*mHu2*
-      traceYeAdjYvYvAdjYe - 15*traceYuAdjTYdTYdAdjYu - 15*traceYuAdjYdTYdAdjTYu
-      - 5*traceYvAdjTYeTYeAdjYv - 5*traceYvAdjYeTYeAdjTYv + 3*Tr2U111*Sqr(g1)
-      - 2*traceconjTYdTpTYd*Sqr(g1) + 2*MassB*traceconjTYdTpYd*Sqr(g1) + 6*
-      traceconjTYeTpTYe*Sqr(g1) - 6*MassB*traceconjTYeTpYe*Sqr(g1) - 2*
-      tracemd2YdAdjYd*Sqr(g1) + 6*traceme2YeAdjYe*Sqr(g1) + 6*traceml2AdjYeYe*
-      Sqr(g1) - 2*tracemq2AdjYdYd*Sqr(g1) + 6*mHd2*traceYeAdjYe*Sqr(g1) + 80*
-      traceconjTYdTpTYd*Sqr(g3) - 80*MassG*traceconjTYdTpYd*Sqr(g3) + 80*
-      tracemd2YdAdjYd*Sqr(g3) + 80*tracemq2AdjYdYd*Sqr(g3) - 80*traceAdjYdTYd*
-      Conj(MassG)*Sqr(g3) + traceYdAdjYd*(-2*mHd2*Sqr(g1) + 80*mHd2*Sqr(g3) +
-      160*AbsSqr(MassG)*Sqr(g3)))));
+   beta_mHd2 = Re(0.04*twoLoop*(Conj(MassB)*Sqr(g1)*(621*MassB*Sqr(g1) +
+      5*(4*(traceAdjYdTYd - 3*traceAdjYeTYe - 2*MassB*traceYdAdjYd + 6*MassB*
+      traceYeAdjYe) + 9*(2*MassB + MassWB)*Sqr(g2))) + 5*(3*Conj(MassWB)*Sqr(g2
+      )*(3*(MassB + 2*MassWB)*Sqr(g1) + 55*MassWB*Sqr(g2)) - 160*(traceAdjYdTYd
+      - 2*MassG*traceYdAdjYd)*Conj(MassG)*Sqr(g3) + 2*(15*Power(g2,4)*Tr22 -
+      7.745966692414834*g1*Tr31 + (3*Tr2U111 - 2*(traceconjTYdTpTYd - MassB*
+      traceconjTYdTpYd - 3*traceconjTYeTpTYe + 3*MassB*traceconjTYeTpYe +
+      tracemd2YdAdjYd - 3*traceme2YeAdjYe - 3*traceml2AdjYeYe + tracemq2AdjYdYd
+      + mHd2*traceYdAdjYd - 3*mHd2*traceYeAdjYe))*Sqr(g1) - 5*(18*
+      tracemd2YdAdjYdYdAdjYd + 3*tracemd2YdAdjYuYuAdjYd + 6*
+      traceme2YeAdjYeYeAdjYe + traceme2YeAdjYvYvAdjYe + 6*
+      traceml2AdjYeYeAdjYeYe + traceml2AdjYeYeAdjYvYv + traceml2AdjYvYvAdjYeYe
+      + 18*tracemq2AdjYdYdAdjYdYd + 3*tracemq2AdjYdYdAdjYuYu + 3*
+      tracemq2AdjYuYuAdjYdYd + 3*tracemu2YuAdjYdYdAdjYu +
+      tracemv2YvAdjYeYeAdjYv + 18*traceYdAdjTYdTYdAdjYd + 3*
+      traceYdAdjTYuTYuAdjYd + 18*traceYdAdjYdTYdAdjTYd + 18*mHd2*
+      traceYdAdjYdYdAdjYd + 3*traceYdAdjYuTYuAdjTYd + 3*mHd2*
+      traceYdAdjYuYuAdjYd + 3*mHu2*traceYdAdjYuYuAdjYd + 6*
+      traceYeAdjTYeTYeAdjYe + traceYeAdjTYvTYvAdjYe + 6*traceYeAdjYeTYeAdjTYe +
+      6*mHd2*traceYeAdjYeYeAdjYe + traceYeAdjYvTYvAdjTYe + mHd2*
+      traceYeAdjYvYvAdjYe + mHu2*traceYeAdjYvYvAdjYe + 3*traceYuAdjTYdTYdAdjYu
+      + 3*traceYuAdjYdTYdAdjTYu + traceYvAdjTYeTYeAdjYv + traceYvAdjYeTYeAdjTYv
+      - 16*(traceconjTYdTpTYd - MassG*traceconjTYdTpYd + tracemd2YdAdjYd +
+      tracemq2AdjYdYd + mHd2*traceYdAdjYd)*Sqr(g3))))));
 
 
    return beta_mHd2;

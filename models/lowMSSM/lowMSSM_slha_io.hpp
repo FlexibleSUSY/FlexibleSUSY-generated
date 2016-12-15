@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:50:57
+// File generated at Thu 15 Dec 2016 13:03:41
 
 #ifndef lowMSSM_SLHA_IO_H
 #define lowMSSM_SLHA_IO_H
@@ -57,7 +57,6 @@ struct lowMSSM_scales {
 class lowMSSM_slha_io {
 public:
    lowMSSM_slha_io();
-   ~lowMSSM_slha_io() {}
 
    void clear();
 

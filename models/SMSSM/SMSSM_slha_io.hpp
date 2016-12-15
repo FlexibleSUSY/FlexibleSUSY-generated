@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:34:45
+// File generated at Thu 15 Dec 2016 12:52:57
 
 #ifndef SMSSM_SLHA_IO_H
 #define SMSSM_SLHA_IO_H
@@ -57,7 +57,6 @@ struct SMSSM_scales {
 class SMSSM_slha_io {
 public:
    SMSSM_slha_io();
-   ~SMSSM_slha_io() {}
 
    void clear();
 

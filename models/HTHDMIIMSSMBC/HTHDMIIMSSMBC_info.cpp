@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:19:45
+// File generated at Thu 15 Dec 2016 12:40:54
 
 #include "HTHDMIIMSSMBC_info.hpp"
 
@@ -80,8 +80,6 @@ namespace HTHDMIIMSSMBC_info {
       "LambdaLoopOrder"};
 
    const char* model_name = "HTHDMIIMSSMBC";
-   const bool is_low_energy_model = false;
-   const bool is_supersymmetric_model = false;
 
 void print(std::ostream& ostr)
 {

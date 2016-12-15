@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 16:20:16
+// File generated at Thu 15 Dec 2016 12:58:18
 
 /**
  * @file E6SSM_mass_eigenstates.hpp
@@ -25,8 +25,8 @@
  *        value problem using the two_scale solver by solving EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Sat 15 Oct 2016 16:20:16 with FlexibleSUSY
- * 1.7.1 (git commit: 1c1e3234ccd2a3935de013cbdabfb338bedc9204) and SARAH 4.9.1 .
+ * This file was generated at Thu 15 Dec 2016 12:58:18 with FlexibleSUSY
+ * 1.7.2 (git commit: 0d19299fef514160cb7541a03abb9b2c3365f927) and SARAH 4.9.1 .
  */
 
 #ifndef E6SSM_MASS_EIGENSTATES_H
@@ -70,6 +70,8 @@ public:
    Eigen::ArrayXd get_DRbar_masses() const;
    void do_calculate_sm_pole_masses(bool);
    bool do_calculate_sm_pole_masses() const;
+   void do_calculate_bsm_pole_masses(bool);
+   bool do_calculate_bsm_pole_masses() const;
    void do_force_output(bool);
    bool do_force_output() const;
    void reorder_DRbar_masses();
@@ -1286,6 +1288,7 @@ private:
    unsigned ewsb_loop_order;
    unsigned pole_mass_loop_order;
    bool calculate_sm_pole_masses; ///< switch to calculate the pole masses of the Standard Model particles
+   bool calculate_bsm_pole_masses;///< switch to calculate the pole masses of the BSM particles
    bool force_output;             ///< switch to force output of pole masses
    double precision;              ///< RG running precision
    double ewsb_iteration_precision;

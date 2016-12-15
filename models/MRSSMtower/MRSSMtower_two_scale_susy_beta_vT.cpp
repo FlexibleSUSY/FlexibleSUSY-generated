@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:08:44
+// File generated at Thu 15 Dec 2016 12:39:21
 
 #include "MRSSMtower_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -59,8 +59,8 @@ double MRSSMtower_susy_parameters::calc_beta_vT_two_loop(const Susy_traces& susy
    double beta_vT;
 
    beta_vT = Re(0.06666666666666667*twoLoop*vT*(-220*Power(g2,4) + 3*
-      AbsSqr(LamTD)*(15*traceYdAdjYd + 5*traceYeAdjYe + 10*AbsSqr(LamSD) - 3*
-      Sqr(g1) - 15*Sqr(g2)) + 3*AbsSqr(LamTU)*(10*AbsSqr(LamSU) - 3*(-5*
+      AbsSqr(LamTD)*(10*AbsSqr(LamSD) - 3*Sqr(g1) + 5*(3*traceYdAdjYd +
+      traceYeAdjYe - 3*Sqr(g2))) + 3*AbsSqr(LamTU)*(10*AbsSqr(LamSU) - 3*(-5*
       traceYuAdjYu + Sqr(g1) + 5*Sqr(g2))) + 45*Sqr(LamTD)*Sqr(Conj(LamTD)) +
       45*Sqr(LamTU)*Sqr(Conj(LamTU))));
 

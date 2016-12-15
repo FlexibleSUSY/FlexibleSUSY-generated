@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:41:32
+// File generated at Thu 15 Dec 2016 12:56:22
 
 #include "NUTNMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -99,12 +99,11 @@ double NUTNMSSM_soft_parameters::calc_beta_TKappa_two_loop(const Soft_traces& so
 
    beta_TKappa = Re(-1.2*twoLoop*(100*Sqr(Conj(Kappa))*Sqr(Kappa)*TKappa
       + 10*Lambdax*Sqr(Conj(Lambdax))*(Lambdax*TKappa + 4*Kappa*TLambdax) +
-      Conj(Lambdax)*(Lambdax*(15*traceYdAdjYd + 5*traceYeAdjYe + 15*
-      traceYuAdjYu + 60*AbsSqr(Kappa) - 3*Sqr(g1) - 15*Sqr(g2))*TKappa + 2*
-      Kappa*(Lambdax*(15*traceAdjYdTYd + 5*traceAdjYeTYe + 15*traceAdjYuTYu + 3
-      *MassB*Sqr(g1) + 15*MassWB*Sqr(g2)) + (15*traceYdAdjYd + 5*traceYeAdjYe +
-      15*traceYuAdjYu + 20*AbsSqr(Kappa) - 3*Sqr(g1) - 15*Sqr(g2))*TLambdax)))
-      );
+      Conj(Lambdax)*(Lambdax*(60*AbsSqr(Kappa) - 3*Sqr(g1) + 5*(3*traceYdAdjYd
+      + traceYeAdjYe + 3*traceYuAdjYu - 3*Sqr(g2)))*TKappa + 2*Kappa*(Lambdax*(
+      3*MassB*Sqr(g1) + 5*(3*traceAdjYdTYd + traceAdjYeTYe + 3*traceAdjYuTYu +
+      3*MassWB*Sqr(g2))) + (20*AbsSqr(Kappa) - 3*Sqr(g1) + 5*(3*traceYdAdjYd +
+      traceYeAdjYe + 3*traceYuAdjYu - 3*Sqr(g2)))*TLambdax))));
 
 
    return beta_TKappa;

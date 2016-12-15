@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:59:08
+// File generated at Thu 15 Dec 2016 13:09:42
 
 #include "MSSMNoFVatMGUT_effective_couplings.hpp"
 
@@ -129,10 +129,9 @@ standard_model::Standard_model MSSMNoFVatMGUT_effective_couplings::initialise_SM
 
    sm.set_loops(2);
    sm.set_thresholds(2);
-   sm.set_low_energy_data(qedqcd);
    sm.set_physical_input(physical_input);
 
-   sm.initialise_from_input();
+   sm.initialise_from_input(qedqcd);
 
    return sm;
 }

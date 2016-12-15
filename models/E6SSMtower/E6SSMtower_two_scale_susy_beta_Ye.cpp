@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 16:00:36
+// File generated at Thu 15 Dec 2016 12:42:21
 
 #include "E6SSMtower_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -69,11 +69,11 @@ Eigen::Matrix<double,3,3> E6SSMtower_susy_parameters::calc_beta_Ye_two_loop(cons
 
    beta_Ye = (twoLoop*(0.025*Ye*(756*Power(g1,4) + 660*Power(g2,4) + 273*
       Power(gN,4) - 360*traceYdAdjYdYdAdjYd - 120*traceYdAdjYuYuAdjYd - 120*
-      traceYeAdjYeYeAdjYe + 48*traceYeAdjYe*Sqr(g1) + 72*Sqr(g1)*Sqr(g2) - 8*
-      traceYeAdjYe*Sqr(gN) + 6*Sqr(g1)*Sqr(gN) + 78*Sqr(g2)*Sqr(gN) + 40*AbsSqr
-      (Lambdax)*(-3*traceKappaAdjKappa - 2*traceLambda12AdjLambda12 - 3*
-      traceYuAdjYu + Sqr(gN)) - 8*traceYdAdjYd*(2*Sqr(g1) - 80*Sqr(g3) + 3*Sqr(
-      gN)) - 120*Sqr(Conj(Lambdax))*Sqr(Lambdax)) + 1.5*(-6*traceYdAdjYd - 2*
+      traceYeAdjYeYeAdjYe + 640*traceYdAdjYd*Sqr(g3) - 24*traceYdAdjYd*Sqr(gN)
+      - 8*traceYeAdjYe*Sqr(gN) + 78*Sqr(g2)*Sqr(gN) + 40*AbsSqr(Lambdax)*(-3*
+      traceKappaAdjKappa - 2*traceLambda12AdjLambda12 - 3*traceYuAdjYu + Sqr(gN
+      )) + 2*Sqr(g1)*(-8*traceYdAdjYd + 24*traceYeAdjYe + 36*Sqr(g2) + 3*Sqr(gN
+      )) - 120*Sqr(Conj(Lambdax))*Sqr(Lambdax)) + 1.5*(-6*traceYdAdjYd - 2*
       traceYeAdjYe - 2*AbsSqr(Lambdax) + 4*Sqr(g2) + Sqr(gN))*(Ye*Ye.adjoint()*
       Ye) - 4*(Ye*Ye.adjoint()*Ye*Ye.adjoint()*Ye))).real();
 

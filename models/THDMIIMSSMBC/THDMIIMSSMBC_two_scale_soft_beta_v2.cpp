@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:22:25
+// File generated at Thu 15 Dec 2016 12:41:39
 
 #include "THDMIIMSSMBC_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -95,14 +95,15 @@ double THDMIIMSSMBC_soft_parameters::calc_beta_v2_two_loop(const Soft_traces& so
 
    double beta_v2;
 
-   beta_v2 = Re(twoLoop*(-3*Lambda1*Lambda6*v1 - 1.5*Lambda3*Lambda6*v1 -
-      1.5*Lambda4*Lambda6*v1 - 1.5*Lambda5*Lambda6*v1 - 3*Lambda2*Lambda7*v1 -
-      1.5*Lambda3*Lambda7*v1 - 1.5*Lambda4*Lambda7*v1 - 1.5*Lambda5*Lambda7*v1
-      - 1.65375*Power(g1,4)*v2 + 10.03125*Power(g2,4)*v2 - Lambda3*Lambda4*v2
-      + 2.25*traceYdAdjYuYuAdjYd*v2 + 6.75*traceYuAdjYuYuAdjYu*v2 + 0.1125*v2*
-      Sqr(g1)*Sqr(g2) - 0.025*traceYuAdjYu*v2*(103*Sqr(g1) + 315*Sqr(g2) + 800*
-      Sqr(g3)) - 6*v2*Sqr(Lambda2) - v2*Sqr(Lambda3) - v2*Sqr(Lambda4) - 1.5*v2
-      *Sqr(Lambda5) - 1.5*v2*Sqr(Lambda6) - 4.5*v2*Sqr(Lambda7)));
+   beta_v2 = Re(twoLoop*(-3*Lambda1*Lambda6*v1 - 1.5*Lambda4*Lambda6*v1 -
+      1.5*Lambda5*Lambda6*v1 - 3*Lambda2*Lambda7*v1 - 1.5*Lambda4*Lambda7*v1 -
+      1.5*Lambda5*Lambda7*v1 - 1.65375*Power(g1,4)*v2 + 10.03125*Power(g2,4)*
+      v2 + 2.25*traceYdAdjYuYuAdjYd*v2 + 6.75*traceYuAdjYuYuAdjYu*v2 - 0.5*
+      Lambda3*(3*Lambda6*v1 + 3*Lambda7*v1 + 2*Lambda4*v2) - 2.575*traceYuAdjYu
+      *v2*Sqr(g1) - 7.875*traceYuAdjYu*v2*Sqr(g2) + 0.1125*v2*Sqr(g1)*Sqr(g2) -
+      20*traceYuAdjYu*v2*Sqr(g3) - 6*v2*Sqr(Lambda2) - v2*Sqr(Lambda3) - v2*
+      Sqr(Lambda4) - 1.5*v2*Sqr(Lambda5) - 1.5*v2*Sqr(Lambda6) - 4.5*v2*Sqr(
+      Lambda7)));
 
 
    return beta_v2;

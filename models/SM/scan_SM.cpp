@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:24:59
+// File generated at Thu 15 Dec 2016 12:43:14
 
 #include "SM_input_parameters.hpp"
 #include "SM_spectrum_generator.hpp"
@@ -107,9 +107,8 @@ int main(int argc, char* argv[])
         << std::setw(12) << std::left << "error"
         << '\n';
 
-   for (std::vector<double>::const_iterator it = range.begin(),
-           end = range.end(); it != end; ++it) {
-      INPUTPARAMETER(LambdaIN) = *it;
+   for (const auto p: range) {
+      INPUTPARAMETER(LambdaIN) = p;
 
 
       spectrum_generator.run(qedqcd, input);
@@ -122,7 +121,7 @@ int main(int argc, char* argv[])
       const bool error = problems.have_problem();
 
       cout << "  "
-           << std::setw(12) << std::left << *it << ' '
+           << std::setw(12) << std::left << p << ' '
            << std::setw(12) << std::left << higgs << ' '
            << std::setw(12) << std::left << error;
       if (error) {

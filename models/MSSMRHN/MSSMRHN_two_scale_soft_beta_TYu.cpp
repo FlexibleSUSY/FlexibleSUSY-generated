@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:45:14
+// File generated at Thu 15 Dec 2016 12:59:57
 
 #include "MSSMRHN_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -77,12 +77,12 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_TYu_one_loop(const 
 
    Eigen::Matrix<double,3,3> beta_TYu;
 
-   beta_TYu = (oneOver16PiSqr*(Yu*(6*traceAdjYuTYu + 2*traceAdjYvTYv +
-      1.7333333333333334*MassB*Sqr(g1) + 6*MassWB*Sqr(g2) + 10.666666666666666*
-      MassG*Sqr(g3)) + 3*traceYuAdjYu*TYu + traceYvAdjYv*TYu -
-      0.8666666666666667*Sqr(g1)*TYu - 3*Sqr(g2)*TYu - 5.333333333333333*Sqr(g3
-      )*TYu + 2*(Yu*Yd.adjoint()*TYd) + 4*(Yu*Yu.adjoint()*TYu) + TYu*
-      Yd.adjoint()*Yd + 5*(TYu*Yu.adjoint()*Yu))).real();
+   beta_TYu = (oneOver16PiSqr*(0.13333333333333333*Yu*(13*MassB*Sqr(g1) +
+      5*(9*traceAdjYuTYu + 3*traceAdjYvTYv + 9*MassWB*Sqr(g2) + 16*MassG*Sqr(
+      g3))) + (3*traceYuAdjYu + traceYvAdjYv - 0.8666666666666667*Sqr(g1) - 3*
+      Sqr(g2) - 5.333333333333333*Sqr(g3))*TYu + 2*(Yu*Yd.adjoint()*TYd) + 4*(
+      Yu*Yu.adjoint()*TYu) + TYu*Yd.adjoint()*Yd + 5*(TYu*Yu.adjoint()*Yu)))
+      .real();
 
 
    return beta_TYu;
@@ -117,27 +117,25 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_TYu_two_loop(const 
 
    Eigen::Matrix<double,3,3> beta_TYu;
 
-   beta_TYu = (twoLoop*(Yu*(-24.38222222222222*Power(g1,4)*MassB +
-      7.111111111111111*Power(g3,4)*MassG - 30*Power(g2,4)*MassWB - 6*
-      traceYdAdjYuTYuAdjYd - 2*traceYeAdjYvTYvAdjYe - 6*traceYuAdjYdTYdAdjYu -
-      36*traceYuAdjYuTYuAdjYu - 2*traceYvAdjYeTYeAdjYv - 12*
-      traceYvAdjYvTYvAdjYv - 2*MassB*Sqr(g1)*Sqr(g2) - 2*MassWB*Sqr(g1)*Sqr(g2)
-      - 6.044444444444444*MassB*Sqr(g1)*Sqr(g3) - 6.044444444444444*MassG*Sqr(
-      g1)*Sqr(g3) - 16*MassG*Sqr(g2)*Sqr(g3) - 16*MassWB*Sqr(g2)*Sqr(g3) + 1.6*
-      traceAdjYuTYu*(Sqr(g1) + 20*Sqr(g3)) - 1.6*traceYuAdjYu*(MassB*Sqr(g1) +
-      20*MassG*Sqr(g3))) + 6.095555555555555*Power(g1,4)*TYu + 7.5*Power(g2,4)*
-      TYu - 1.7777777777777777*Power(g3,4)*TYu - 3*traceYdAdjYuYuAdjYd*TYu -
-      traceYeAdjYvYvAdjYe*TYu - 9*traceYuAdjYuYuAdjYu*TYu - 3*
-      traceYvAdjYvYvAdjYv*TYu + 0.8*traceYuAdjYu*Sqr(g1)*TYu + Sqr(g1)*Sqr(g2)*
-      TYu + 16*traceYuAdjYu*Sqr(g3)*TYu + 3.022222222222222*Sqr(g1)*Sqr(g3)*TYu
-      + 8*Sqr(g2)*Sqr(g3)*TYu - 0.4*(15*traceAdjYdTYd + 5*traceAdjYeTYe + 2*
-      MassB*Sqr(g1))*(Yu*Yd.adjoint()*Yd) + (-6*traceYdAdjYd - 2*traceYeAdjYe +
-      0.8*Sqr(g1))*(Yu*Yd.adjoint()*TYd) + (-18*traceAdjYuTYu - 6*
-      traceAdjYvTYv - 0.8*MassB*Sqr(g1) - 12*MassWB*Sqr(g2))*(Yu*Yu.adjoint()*
-      Yu) + (-12*traceYuAdjYu - 4*traceYvAdjYv + 1.2*Sqr(g1) + 6*Sqr(g2))*(Yu*
+   beta_TYu = (twoLoop*(-0.008888888888888889*Yu*(2743*Power(g1,4)*MassB
+      + 25*(-32*Power(g3,4)*MassG + 135*Power(g2,4)*MassWB + 9*(3*
+      traceYdAdjYuTYuAdjYd + traceYeAdjYvTYvAdjYe + 3*traceYuAdjYdTYdAdjYu + 18
+      *traceYuAdjYuTYuAdjYu + traceYvAdjYeTYeAdjYv + 6*traceYvAdjYvTYvAdjYv) -
+      144*(traceAdjYuTYu - MassG*traceYuAdjYu)*Sqr(g3) + 72*(MassG + MassWB)*
+      Sqr(g2)*Sqr(g3)) + 5*Sqr(g1)*(45*(MassB + MassWB)*Sqr(g2) + 4*(-9*
+      traceAdjYuTYu + 9*MassB*traceYuAdjYu + 34*(MassB + MassG)*Sqr(g3)))) + (
+      6.095555555555555*Power(g1,4) + 7.5*Power(g2,4) - 1.7777777777777777*
+      Power(g3,4) - 3*traceYdAdjYuYuAdjYd - traceYeAdjYvYvAdjYe - 9*
+      traceYuAdjYuYuAdjYu - 3*traceYvAdjYvYvAdjYv + 16*traceYuAdjYu*Sqr(g3) + 8
+      *Sqr(g2)*Sqr(g3) + Sqr(g1)*(Sqr(g2) + 0.08888888888888889*(9*traceYuAdjYu
+      + 34*Sqr(g3))))*TYu + (-2*(3*traceAdjYdTYd + traceAdjYeTYe) - 0.8*MassB*
+      Sqr(g1))*(Yu*Yd.adjoint()*Yd) + (-2*(3*traceYdAdjYd + traceYeAdjYe) + 0.8
+      *Sqr(g1))*(Yu*Yd.adjoint()*TYd) - 0.4*(2*MassB*Sqr(g1) + 15*(3*
+      traceAdjYuTYu + traceAdjYvTYv + 2*MassWB*Sqr(g2)))*(Yu*Yu.adjoint()*Yu) +
+      (-4*(3*traceYuAdjYu + traceYvAdjYv) + 1.2*Sqr(g1) + 6*Sqr(g2))*(Yu*
       Yu.adjoint()*TYu) + (-3*traceYdAdjYd - traceYeAdjYe + 0.4*Sqr(g1))*(TYu*
-      Yd.adjoint()*Yd) + (-15*traceYuAdjYu - 5*traceYvAdjYv + 12*Sqr(g2))*(TYu*
-      Yu.adjoint()*Yu) - 4*(Yu*Yd.adjoint()*Yd*Yd.adjoint()*TYd) - 2*(Yu*
+      Yd.adjoint()*Yd) + (-5*(3*traceYuAdjYu + traceYvAdjYv) + 12*Sqr(g2))*(TYu
+      *Yu.adjoint()*Yu) - 4*(Yu*Yd.adjoint()*Yd*Yd.adjoint()*TYd) - 2*(Yu*
       Yd.adjoint()*Yd*Yu.adjoint()*TYu) - 4*(Yu*Yd.adjoint()*TYd*Yd.adjoint()*
       Yd) - 4*(Yu*Yd.adjoint()*TYd*Yu.adjoint()*Yu) - 6*(Yu*Yu.adjoint()*Yu*
       Yu.adjoint()*TYu) - 8*(Yu*Yu.adjoint()*TYu*Yu.adjoint()*Yu) - 2*(TYu*

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:09:10
+// File generated at Thu 15 Dec 2016 12:39:53
 
 #ifndef MRSSMtower_STANDARD_MODEL_TWO_SCALE_INITIAL_GUESSER_H
 #define MRSSMtower_STANDARD_MODEL_TWO_SCALE_INITIAL_GUESSER_H
@@ -63,7 +63,7 @@ public:
 private:
    MRSSMtower<Two_scale>* model; ///< pointer to model class
    standard_model::StandardModel<Two_scale>* eft; ///< pointer to effective model class
-   softsusy::QedQcd oneset; ///< Standard Model low-energy data
+   softsusy::QedQcd qedqcd; ///< Standard Model low-energy data
    double mu_guess; ///< guessed DR-bar mass of up-quark
    double mc_guess; ///< guessed DR-bar mass of charm-quark
    double mt_guess; ///< guessed DR-bar mass of top-quark

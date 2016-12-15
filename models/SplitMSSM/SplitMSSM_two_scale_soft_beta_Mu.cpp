@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:23:03
+// File generated at Thu 15 Dec 2016 12:42:04
 
 #include "SplitMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -96,19 +96,17 @@ double SplitMSSM_soft_parameters::calc_beta_Mu_two_loop(const Soft_traces& soft_
    double beta_Mu;
 
    beta_Mu = Re(0.00125*twoLoop*(240*g2d*g2u*Conj(MassWB)*(9*Sqr(g1) + 5*
-      (29*Sqr(g2) - 2*(Sqr(g2d) + Sqr(g2u)))) + Mu*(2718*Power(g1,4) - 21050*
-      Power(g2,4) - 1500*Power(g2d,4) - 1500*Power(g2u,4) - 200*Power(gYd,4) +
-      2400*g2d*g2u*gYd*gYu - 200*Power(gYu,4) - 540*Sqr(g1)*Sqr(g2) - 2700*
-      traceYuAdjYu*Sqr(g2d) + 495*Sqr(g1)*Sqr(g2d) + 9075*Sqr(g2)*Sqr(g2d) -
-      2700*traceYuAdjYu*Sqr(g2u) + 495*Sqr(g1)*Sqr(g2u) + 9075*Sqr(g2)*Sqr(g2u)
-      - 9000*Sqr(g2d)*Sqr(g2u) - 900*traceYuAdjYu*Sqr(gYd) + 165*Sqr(g1)*Sqr(
-      gYd) + 825*Sqr(g2)*Sqr(gYd) - 900*Sqr(g2d)*Sqr(gYd) - 900*Sqr(g2u)*Sqr(
-      gYd) - 900*traceYuAdjYu*Sqr(gYu) + 165*Sqr(g1)*Sqr(gYu) + 825*Sqr(g2)*Sqr
-      (gYu) - 900*Sqr(g2d)*Sqr(gYu) - 900*Sqr(g2u)*Sqr(gYu) - 1600*Sqr(gYd)*Sqr
-      (gYu) - 900*traceYdAdjYd*(3*Sqr(g2d) + 3*Sqr(g2u) + Sqr(gYd) + Sqr(gYu))
-      - 300*traceYeAdjYe*(3*Sqr(g2d) + 3*Sqr(g2u) + Sqr(gYd) + Sqr(gYu))) + 80*
-      gYd*gYu*Conj(MassB)*(9*Sqr(g1) + 5*(9*Sqr(g2) - 2*(Sqr(gYd) + Sqr(gYu))))
-      ));
+      (29*Sqr(g2) - 2*(Sqr(g2d) + Sqr(g2u)))) + 80*gYd*gYu*Conj(MassB)*(9*Sqr(
+      g1) + 5*(9*Sqr(g2) - 2*(Sqr(gYd) + Sqr(gYu)))) + Mu*(2718*Power(g1,4) +
+      15*Sqr(g1)*(-36*Sqr(g2) + 11*(3*Sqr(g2d) + 3*Sqr(g2u) + Sqr(gYd) + Sqr(
+      gYu))) - 25*(842*Power(g2,4) - 33*Sqr(g2)*(11*Sqr(g2d) + 11*Sqr(g2u) +
+      Sqr(gYd) + Sqr(gYu)) + 4*(15*Power(g2d,4) + 15*Power(g2u,4) + 2*Power(gYd
+      ,4) - 24*g2d*g2u*gYd*gYu + 2*Power(gYu,4) + 9*traceYdAdjYd*Sqr(gYd) + 3*
+      traceYeAdjYe*Sqr(gYd) + 9*traceYuAdjYu*Sqr(gYd) + 9*traceYdAdjYd*Sqr(gYu)
+      + 3*traceYeAdjYe*Sqr(gYu) + 9*traceYuAdjYu*Sqr(gYu) + 16*Sqr(gYd)*Sqr(
+      gYu) + 9*Sqr(g2u)*(3*traceYdAdjYd + traceYeAdjYe + 3*traceYuAdjYu + Sqr(
+      gYd) + Sqr(gYu)) + 9*Sqr(g2d)*(3*traceYdAdjYd + traceYeAdjYe + 3*
+      traceYuAdjYu + 10*Sqr(g2u) + Sqr(gYd) + Sqr(gYu)))))));
 
 
    return beta_Mu;

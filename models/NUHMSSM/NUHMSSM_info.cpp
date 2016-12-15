@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:51:07
+// File generated at Thu 15 Dec 2016 13:04:39
 
 #include "NUHMSSM_info.hpp"
 
@@ -123,8 +123,6 @@ namespace NUHMSSM_info {
       , "TanBeta", "SignMu", "Azero", "mHd2In", "mHu2In"};
 
    const char* model_name = "NUHMSSM";
-   const bool is_low_energy_model = false;
-   const bool is_supersymmetric_model = true;
 
 void print(std::ostream& ostr)
 {

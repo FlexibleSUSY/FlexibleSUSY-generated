@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:27:56
+// File generated at Thu 15 Dec 2016 12:46:17
 
 #include "MRSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -111,9 +111,9 @@ Eigen::Matrix<double,3,3> MRSSM_soft_parameters::calc_beta_md2_two_loop(const So
       4*traceYeAdjYe - 4*AbsSqr(LamSD) - 6*AbsSqr(LamTD) + 0.8*Sqr(g1) + 12*Sqr
       (g2))*(Yd*mq2*Yd.adjoint()) + (-6*traceYdAdjYd - 2*traceYeAdjYe - 2*
       AbsSqr(LamSD) - 3*AbsSqr(LamTD) + 0.4*Sqr(g1) + 6*Sqr(g2))*(Yd*Yd.adjoint
-      ()*md2) - 8*mHd2*(Yd*Yd.adjoint()*Yd*Yd.adjoint()) + (-4*mHd2 - 4*mHu2)*(
-      Yd*Yu.adjoint()*Yu*Yd.adjoint()) - 2*(md2*Yd*Yd.adjoint()*Yd*Yd.adjoint()
-      ) - 2*(md2*Yd*Yu.adjoint()*Yu*Yd.adjoint()) - 4*(Yd*mq2*Yd.adjoint()*Yd*
+      ()*md2) - 8*mHd2*(Yd*Yd.adjoint()*Yd*Yd.adjoint()) - 4*(mHd2 + mHu2)*(Yd*
+      Yu.adjoint()*Yu*Yd.adjoint()) - 2*(md2*Yd*Yd.adjoint()*Yd*Yd.adjoint()) -
+      2*(md2*Yd*Yu.adjoint()*Yu*Yd.adjoint()) - 4*(Yd*mq2*Yd.adjoint()*Yd*
       Yd.adjoint()) - 4*(Yd*mq2*Yu.adjoint()*Yu*Yd.adjoint()) - 4*(Yd*
       Yd.adjoint()*md2*Yd*Yd.adjoint()) - 4*(Yd*Yd.adjoint()*Yd*mq2*Yd.adjoint(
       )) - 2*(Yd*Yd.adjoint()*Yd*Yd.adjoint()*md2) - 4*(Yd*Yu.adjoint()*mu2*Yu*

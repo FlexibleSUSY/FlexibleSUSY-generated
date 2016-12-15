@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 16:01:58
+// File generated at Thu 15 Dec 2016 12:44:07
 
 #include "E6SSMtower_two_scale_susy_scale_constraint.hpp"
 #include "E6SSMtower_two_scale_model.hpp"
@@ -83,6 +83,7 @@ void E6SSMtower_susy_scale_constraint<Two_scale>::apply()
    update_scale();
 
    // apply user-defined susy scale constraints
+   const auto TanBeta = INPUTPARAMETER(TanBeta);
    const auto gNInput = INPUTPARAMETER(gNInput);
    const auto M1Input = INPUTPARAMETER(M1Input);
    const auto M2Input = INPUTPARAMETER(M2Input);
@@ -109,15 +110,18 @@ void E6SSMtower_susy_scale_constraint<Two_scale>::apply()
    const auto ALambda12Input = INPUTPARAMETER(ALambda12Input);
    const auto MuInput = INPUTPARAMETER(MuInput);
    const auto mAInput = INPUTPARAMETER(mAInput);
-   const auto TanBeta = INPUTPARAMETER(TanBeta);
    const auto AuInput = INPUTPARAMETER(AuInput);
    const auto AdInput = INPUTPARAMETER(AdInput);
    const auto AeInput = INPUTPARAMETER(AeInput);
+   const auto vd = MODELPARAMETER(vd);
+   const auto vu = MODELPARAMETER(vu);
    const auto vs = MODELPARAMETER(vs);
    const auto Yu = MODELPARAMETER(Yu);
    const auto Yd = MODELPARAMETER(Yd);
    const auto Ye = MODELPARAMETER(Ye);
 
+   MODEL->set_vu(Re(TanBeta*Sqrt((Sqr(vd) + Sqr(vu))/(1 + Sqr(TanBeta)))));
+   MODEL->set_vd(Re(Sqrt((Sqr(vd) + Sqr(vu))/(1 + Sqr(TanBeta)))));
    MODEL->set_gN(Re(gNInput));
    MODEL->set_MassB(Re(M1Input));
    MODEL->set_MassWB(Re(M2Input));

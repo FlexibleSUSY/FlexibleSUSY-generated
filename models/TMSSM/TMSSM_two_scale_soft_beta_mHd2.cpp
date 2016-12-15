@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:26:54
+// File generated at Thu 15 Dec 2016 12:45:16
 
 #include "TMSSM_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -183,10 +183,10 @@ double TMSSM_soft_parameters::calc_beta_mHd2_two_loop(const Soft_traces& soft_tr
       traceYeAdjYe*Sqr(g1) + 12*mHd2*AbsSqr(Lambdax)*Sqr(g2) + 12*mHu2*AbsSqr(
       Lambdax)*Sqr(g2) + 12*mT2*AbsSqr(Lambdax)*Sqr(g2) + 12*AbsSqr(TLambdax)*
       Sqr(g2) - 12*MassWB*Conj(TLambdax)*Lambdax*Sqr(g2) + 0.04*Conj(MassB)*Sqr
-      (g1)*(20*traceAdjYdTYd - 60*traceAdjYeTYe - 40*MassB*traceYdAdjYd + 120*
-      MassB*traceYeAdjYe + 621*MassB*Sqr(g1) + 90*MassB*Sqr(g2) + 45*MassWB*Sqr
-      (g2)) + 32*traceconjTYdTpTYd*Sqr(g3) - 32*MassG*traceconjTYdTpYd*Sqr(g3)
-      + 32*tracemd2YdAdjYd*Sqr(g3) + 32*tracemq2AdjYdYd*Sqr(g3) + 32*mHd2*
+      (g1)*(621*MassB*Sqr(g1) + 5*(4*(traceAdjYdTYd - 3*traceAdjYeTYe - 2*MassB
+      *traceYdAdjYd + 6*MassB*traceYeAdjYe) + 9*(2*MassB + MassWB)*Sqr(g2))) +
+      32*traceconjTYdTpTYd*Sqr(g3) - 32*MassG*traceconjTYdTpYd*Sqr(g3) + 32*
+      tracemd2YdAdjYd*Sqr(g3) + 32*tracemq2AdjYdYd*Sqr(g3) + 32*mHd2*
       traceYdAdjYd*Sqr(g3) + 64*traceYdAdjYd*AbsSqr(MassG)*Sqr(g3) - 32*
       traceAdjYdTYd*Conj(MassG)*Sqr(g3) - 15*mHd2*Sqr(Conj(Lambdax))*Sqr(
       Lambdax) - 15*mHu2*Sqr(Conj(Lambdax))*Sqr(Lambdax) - 15*mT2*Sqr(Conj(

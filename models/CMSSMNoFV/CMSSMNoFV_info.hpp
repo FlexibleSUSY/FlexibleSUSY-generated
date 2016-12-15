@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:56:58
+// File generated at Thu 15 Dec 2016 13:06:55
 
 #ifndef CMSSMNoFV_INFO_H
 #define CMSSMNoFV_INFO_H
@@ -77,8 +77,9 @@ namespace CMSSMNoFV_info {
    extern const char* particle_mixing_names[NUMBER_OF_MIXINGS];
    extern const char* input_parameter_names[NUMBER_OF_INPUT_PARAMETERS];
    extern const char* model_name;
-   extern const bool is_low_energy_model;
-   extern const bool is_supersymmetric_model;
+   constexpr bool is_low_energy_model = false;
+   constexpr bool is_supersymmetric_model = true;
+   constexpr bool is_FlexibleEFTHiggs = false;
 
    void print(std::ostream&);
 }

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:24:48
+// File generated at Thu 15 Dec 2016 12:42:11
 
 /**
  * @file THDMIIMSSMBC_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Sat 15 Oct 2016 15:24:48 with FlexibleSUSY
- * 1.7.1 (git commit: 1c1e3234ccd2a3935de013cbdabfb338bedc9204) and SARAH 4.9.1 .
+ * This file was generated at Thu 15 Dec 2016 12:42:11 with FlexibleSUSY
+ * 1.7.2 (git commit: 0d19299fef514160cb7541a03abb9b2c3365f927) and SARAH 4.9.1 .
  */
 
 #include "THDMIIMSSMBC_mass_eigenstates.hpp"
@@ -80,6 +80,7 @@ CLASSNAME::THDMIIMSSMBC_mass_eigenstates(const THDMIIMSSMBC_input_parameters& in
    , ewsb_loop_order(2)
    , pole_mass_loop_order(2)
    , calculate_sm_pole_masses(false)
+   , calculate_bsm_pole_masses(true)
    , force_output(false)
    , precision(1.0e-3)
    , ewsb_iteration_precision(1.0e-5)
@@ -116,6 +117,16 @@ void CLASSNAME::do_calculate_sm_pole_masses(bool flag)
 bool CLASSNAME::do_calculate_sm_pole_masses() const
 {
    return calculate_sm_pole_masses;
+}
+
+void CLASSNAME::do_calculate_bsm_pole_masses(bool flag)
+{
+   calculate_bsm_pole_masses = flag;
+}
+
+bool CLASSNAME::do_calculate_bsm_pole_masses() const
+{
+   return calculate_bsm_pole_masses;
 }
 
 void CLASSNAME::do_force_output(bool flag)
@@ -661,39 +672,55 @@ void CLASSNAME::calculate_DRbar_parameters()
 void CLASSNAME::calculate_pole_masses()
 {
 #ifdef ENABLE_THREADS
-   CLASSNAME* obj_ptr = this;
+   auto obj_ptr = this;
 
-   auto fut_MAh = run_async([obj_ptr] () { obj_ptr->calculate_MAh_pole(); });
-   auto fut_Mhh = run_async([obj_ptr] () { obj_ptr->calculate_Mhh_pole(); });
-   auto fut_MHm = run_async([obj_ptr] () { obj_ptr->calculate_MHm_pole(); });
+   std::future<void> fut_MVG;
+   std::future<void> fut_MFv;
+   std::future<void> fut_MVP;
+   std::future<void> fut_MVZ;
+   std::future<void> fut_Mhh;
+   std::future<void> fut_MAh;
+   std::future<void> fut_MHm;
+   std::future<void> fut_MFd;
+   std::future<void> fut_MFu;
+   std::future<void> fut_MFe;
+   std::future<void> fut_MVWm;
 
-   if (calculate_sm_pole_masses) {
-      auto fut_MVG = run_async([obj_ptr] () { obj_ptr->calculate_MVG_pole(); });
-      auto fut_MFv = run_async([obj_ptr] () { obj_ptr->calculate_MFv_pole(); });
-      auto fut_MVP = run_async([obj_ptr] () { obj_ptr->calculate_MVP_pole(); });
-      auto fut_MVZ = run_async([obj_ptr] () { obj_ptr->calculate_MVZ_pole(); });
-      auto fut_MFd = run_async([obj_ptr] () { obj_ptr->calculate_MFd_pole(); });
-      auto fut_MFu = run_async([obj_ptr] () { obj_ptr->calculate_MFu_pole(); });
-      auto fut_MFe = run_async([obj_ptr] () { obj_ptr->calculate_MFe_pole(); });
-      auto fut_MVWm = run_async([obj_ptr] () { obj_ptr->calculate_MVWm_pole(); });
-      fut_MVG.get();
-      fut_MFv.get();
-      fut_MVP.get();
-      fut_MVZ.get();
-      fut_MFd.get();
-      fut_MFu.get();
-      fut_MFe.get();
-      fut_MVWm.get();
+   if (calculate_bsm_pole_masses) {
+      fut_MAh = run_async([obj_ptr] () { obj_ptr->calculate_MAh_pole(); });
+      fut_Mhh = run_async([obj_ptr] () { obj_ptr->calculate_Mhh_pole(); });
+      fut_MHm = run_async([obj_ptr] () { obj_ptr->calculate_MHm_pole(); });
    }
 
-   fut_MAh.get();
-   fut_Mhh.get();
-   fut_MHm.get();
+   if (calculate_sm_pole_masses) {
+      fut_MVG = run_async([obj_ptr] () { obj_ptr->calculate_MVG_pole(); });
+      fut_MFv = run_async([obj_ptr] () { obj_ptr->calculate_MFv_pole(); });
+      fut_MVP = run_async([obj_ptr] () { obj_ptr->calculate_MVP_pole(); });
+      fut_MVZ = run_async([obj_ptr] () { obj_ptr->calculate_MVZ_pole(); });
+      fut_MFd = run_async([obj_ptr] () { obj_ptr->calculate_MFd_pole(); });
+      fut_MFu = run_async([obj_ptr] () { obj_ptr->calculate_MFu_pole(); });
+      fut_MFe = run_async([obj_ptr] () { obj_ptr->calculate_MFe_pole(); });
+      fut_MVWm = run_async([obj_ptr] () { obj_ptr->calculate_MVWm_pole(); });
+   }
+
+   if (fut_MAh.valid()) fut_MAh.get();
+   if (fut_Mhh.valid()) fut_Mhh.get();
+   if (fut_MHm.valid()) fut_MHm.get();
+   if (fut_MVG.valid()) fut_MVG.get();
+   if (fut_MFv.valid()) fut_MFv.get();
+   if (fut_MVP.valid()) fut_MVP.get();
+   if (fut_MVZ.valid()) fut_MVZ.get();
+   if (fut_MFd.valid()) fut_MFd.get();
+   if (fut_MFu.valid()) fut_MFu.get();
+   if (fut_MFe.valid()) fut_MFe.get();
+   if (fut_MVWm.valid()) fut_MVWm.get();
 
 #else
-   calculate_MAh_pole();
-   calculate_Mhh_pole();
-   calculate_MHm_pole();
+   if (calculate_bsm_pole_masses) {
+      calculate_MAh_pole();
+      calculate_Mhh_pole();
+      calculate_MHm_pole();
+   }
 
    if (calculate_sm_pole_masses) {
       calculate_MVG_pole();
@@ -942,7 +969,7 @@ double CLASSNAME::get_mass_matrix_VG() const
 void CLASSNAME::calculate_MVG()
 {
    const auto mass_matrix_VG = get_mass_matrix_VG();
-   MVG = calculate_singlet_mass(mass_matrix_VG);
+   MVG = mass_matrix_VG;
 }
 
 Eigen::Matrix<double,3,3> CLASSNAME::get_mass_matrix_Fv() const
@@ -1204,7 +1231,7 @@ double CLASSNAME::get_mass_matrix_VWm() const
 void CLASSNAME::calculate_MVWm()
 {
    const auto mass_matrix_VWm = get_mass_matrix_VWm();
-   MVWm = calculate_singlet_mass(mass_matrix_VWm);
+   MVWm = mass_matrix_VWm;
 
    if (MVWm < 0.) {
       problems.flag_tachyon(THDMIIMSSMBC_info::VWm);
@@ -6228,8 +6255,8 @@ void CLASSNAME::calculate_MFu_pole()
 
    if (pole_mass_loop_order > 1 && TOP_POLE_QCD_CORRECTION > 0) {
       const double currentScale = get_scale();
-      qcd_2l = -0.006995771808874528*Power(g3,4) -
-         0.004518101565212638*Power(g3,4)*Log(Sqr(currentScale)/Sqr(MFu(2))) -
+      qcd_2l = -0.005284774766427138*Power(g3,4) -
+         0.0032348537833770956*Power(g3,4)*Log(Sqr(currentScale)/Sqr(MFu(2))) -
          0.0008822328500119351*Power(g3,4)*Sqr(Log(Power(currentScale,2)/Sqr(
          MFu(2))));
    }
@@ -6238,10 +6265,10 @@ void CLASSNAME::calculate_MFu_pole()
 
    if (pole_mass_loop_order > 2 && TOP_POLE_QCD_CORRECTION > 1) {
       const double currentScale = get_scale();
-      qcd_3l = Power(g3,6)*(-0.0017408026847411467 -
-         0.000984413176263005*Log(Sqr(currentScale)/Sqr(MFu(2))) -
-         0.00003352082872926087*Power(Log(Sqr(currentScale)/Sqr(MFu(2))),3) -
-         0.00029813221915266867*Sqr(Log(Power(currentScale,2)/Sqr(MFu(2)))));
+      qcd_3l = -0.00003352082872926087*Power(g3,6)*(35.702577217116016
+         + 15.387410814884797*Log(Sqr(currentScale)/Sqr(MFu(2))) + 1.*Power(
+         Log(Sqr(currentScale)/Sqr(MFu(2))),3) + 5.378787878787879*Sqr(Log(
+         Power(currentScale,2)/Sqr(MFu(2)))));
    }
 
    Eigen::Matrix<double,3,3> self_energy_1;
@@ -6418,18 +6445,20 @@ double CLASSNAME::calculate_MFu_DRbar(double m_pole, int idx) const
    double qcd_2l = 0., qcd_3l = 0.;
 
    if (get_thresholds() > 1) {
-      qcd_2l = -0.005855107113909601*Power(g3,4) -
-         0.0028071045227652486*Power(g3,4)*Log(Sqr(currentScale)/Sqr(MFu(idx)))
+      qcd_2l = -0.0041441100714622115*Power(g3,4) -
+         0.0015238567409297061*Power(g3,4)*Log(Sqr(currentScale)/Sqr(MFu(idx)))
          - 0.00024060895909416413*Power(g3,4)*Sqr(Log(Power(currentScale,2)
          /Sqr(MFu(idx))));
    }
 
    if (get_thresholds() > 2) {
-      qcd_3l = -0.0013067805969741943*Power(g3,6) -
+      qcd_3l = -0.0008783313853540776*Power(g3,6) -
          0.0004114970933517977*Power(g3,6)*Log(Sqr(currentScale)/Sqr(MFu(idx)))
          - 5.078913443827405e-6*Power(g3,6)*Power(Log(Sqr(currentScale)/Sqr(
-         MFu(idx))),3) - 0.00007466002762426286*Power(g3,6)*Sqr(Log(Power(
-         currentScale,2)/Sqr(MFu(idx))));
+         MFu(idx))),3) - 0.0002952541682011665*Power(g3,6)*Log(Sqr(MFu(idx))
+         /Sqr(currentScale)) + 0.00005282069981580501*Power(g3,6)*Sqr(Log(Power
+         (MFu(idx),2)/Sqr(currentScale))) - 0.00007466002762426286*Power(g3,6)*
+         Sqr(Log(Power(currentScale,2)/Sqr(MFu(idx))));
    }
 
    const double m_susy_drbar = m_pole + self_energy_1 + m_pole * (

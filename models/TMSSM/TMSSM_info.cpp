@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:27:05
+// File generated at Thu 15 Dec 2016 12:45:34
 
 #include "TMSSM_info.hpp"
 
@@ -135,8 +135,6 @@ namespace TMSSM_info {
       , "TanBeta", "SignMu", "Azero", "MTinput", "Qin", "LambdaInput", "vTInput"};
 
    const char* model_name = "TMSSM";
-   const bool is_low_energy_model = false;
-   const bool is_supersymmetric_model = true;
 
 void print(std::ostream& ostr)
 {

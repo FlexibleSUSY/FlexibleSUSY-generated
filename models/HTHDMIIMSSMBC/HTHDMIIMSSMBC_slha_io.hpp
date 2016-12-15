@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:19:45
+// File generated at Thu 15 Dec 2016 12:40:54
 
 #ifndef HTHDMIIMSSMBC_SLHA_IO_H
 #define HTHDMIIMSSMBC_SLHA_IO_H
@@ -57,7 +57,6 @@ struct HTHDMIIMSSMBC_scales {
 class HTHDMIIMSSMBC_slha_io {
 public:
    HTHDMIIMSSMBC_slha_io();
-   ~HTHDMIIMSSMBC_slha_io() {}
 
    void clear();
 

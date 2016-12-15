@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 16:10:28
+// File generated at Thu 15 Dec 2016 13:13:22
 
 #include "CMSSM_info.hpp"
 
@@ -123,8 +123,6 @@ namespace CMSSM_info {
       , "TanBeta", "SignMu", "Azero"};
 
    const char* model_name = "CMSSM";
-   const bool is_low_energy_model = false;
-   const bool is_supersymmetric_model = true;
 
 void print(std::ostream& ostr)
 {

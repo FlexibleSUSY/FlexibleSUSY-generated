@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:24:43
+// File generated at Thu 15 Dec 2016 12:42:56
 
 #include "SM_utilities.hpp"
 #include "SM_input_parameters.hpp"
@@ -53,13 +53,6 @@ void append(Eigen::ArrayXd& a, const Eigen::ArrayXd& b)
 }
 
 } // namespace utilities
-
-SM_spectrum_plotter::SM_spectrum_plotter()
-   : spectrum()
-   , scale(0.0)
-   , width(16)
-{
-}
 
 
 void SM_spectrum_plotter::extract_spectrum(const SM_mass_eigenstates& model)
@@ -108,13 +101,13 @@ void SM_spectrum_plotter::write_to_file(const std::string& file_name) const
 
 void SM_spectrum_plotter::write_spectrum(const TSpectrum& spectrum, std::ofstream& filestr) const
 {
-   for (std::size_t s = 0; s < spectrum.size(); ++s) {
-      if (!filestr.good()) {
-         ERROR("SM_spectrum_plotter::write_spectrum: "
-               "file stream is corrupted");
-         break;
-      }
+   if (!filestr.good()) {
+      ERROR("SM_spectrum_plotter::write_spectrum: "
+            "file stream is corrupted");
+      return;
+   }
 
+   for (std::size_t s = 0; s < spectrum.size(); ++s) {
       const std::string& name = spectrum[s].name;
       const std::string& latex_name = spectrum[s].latex_name;
       const std::valarray<double>& masses = spectrum[s].masses;
@@ -123,7 +116,7 @@ void SM_spectrum_plotter::write_spectrum(const TSpectrum& spectrum, std::ofstrea
       filestr << std::left << "# " << name << '\n';
 
       for (std::size_t i = 0; i < multiplicity; ++i) {
-         std::string lname("$" + latex_name + "$");
+         const std::string lname("$" + latex_name + "$");
          std::stringstream lname_with_index;
          lname_with_index << "$" << latex_name;
          if (multiplicity > 1)

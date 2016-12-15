@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 16:01:55
+// File generated at Thu 15 Dec 2016 12:44:04
 
 #include "E6SSMtower_info.hpp"
 
@@ -227,8 +227,6 @@ namespace E6SSMtower_info {
       "msI2Input(1,1)"};
 
    const char* model_name = "E6SSMtower";
-   const bool is_low_energy_model = true;
-   const bool is_supersymmetric_model = true;
 
 void print(std::ostream& ostr)
 {

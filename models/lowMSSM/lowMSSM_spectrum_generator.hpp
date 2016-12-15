@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:51:52
+// File generated at Thu 15 Dec 2016 13:04:35
 
 #ifndef lowMSSM_SPECTRUM_GENERATOR_H
 #define lowMSSM_SPECTRUM_GENERATOR_H
@@ -84,6 +84,7 @@ void lowMSSM_spectrum_generator<T>::run(const softsusy::QedQcd& qedqcd,
    model.clear();
    model.set_input_parameters(input);
    model.do_calculate_sm_pole_masses(this->settings.get(Spectrum_generator_settings::calculate_sm_masses));
+   model.do_calculate_bsm_pole_masses(this->settings.get(Spectrum_generator_settings::calculate_bsm_masses));
    model.do_force_output(this->settings.get(Spectrum_generator_settings::force_output));
    model.set_loops(this->settings.get(Spectrum_generator_settings::beta_loop_order));
    model.set_thresholds(this->settings.get(Spectrum_generator_settings::threshold_corrections_loop_order));

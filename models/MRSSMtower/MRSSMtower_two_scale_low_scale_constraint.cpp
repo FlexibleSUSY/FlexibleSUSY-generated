@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:09:10
+// File generated at Thu 15 Dec 2016 12:39:53
 
 #include "MRSSMtower_two_scale_low_scale_constraint.hpp"
 #include "MRSSMtower_two_scale_model.hpp"
@@ -120,7 +120,8 @@ void MRSSMtower_low_scale_constraint<Two_scale>::apply()
    MODEL->set_g3(new_g3);
 
 
-   recalculate_mw_pole();
+   if (model->get_thresholds())
+      qedqcd.setPoleMW(recalculate_mw_pole(qedqcd.displayPoleMW()));
 
 
 }
@@ -442,14 +443,14 @@ void MRSSMtower_low_scale_constraint<Two_scale>::calculate_MNeutrino_DRbar()
 
 /**
  * Recalculates the W boson pole mass using the new gauge couplings.
+ *
+ * @param mw_pole current W pole mass
+ * @param new W pole mass
  */
-void MRSSMtower_low_scale_constraint<Two_scale>::recalculate_mw_pole()
+double MRSSMtower_low_scale_constraint<Two_scale>::recalculate_mw_pole(double mw_pole)
 {
    assert(model && "MRSSMtower_low_scale_constraint<Two_scale>::"
           "recalculate_mw_pole(): model pointer is zero");
-
-   if (!model->get_thresholds())
-      return;
 
 
 }

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:34:34
+// File generated at Thu 15 Dec 2016 12:54:13
 
 #include "UMSSM_slha_io.hpp"
 #include "UMSSM_input_parameters.hpp"

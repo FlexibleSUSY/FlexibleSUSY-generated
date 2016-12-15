@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:25:11
+// File generated at Thu 15 Dec 2016 12:39:59
 
 #include "HGTHDMIIMSSMBC_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -63,18 +63,17 @@ Eigen::Matrix<double,3,3> HGTHDMIIMSSMBC_susy_parameters::calc_beta_Ye_two_loop(
 
    Eigen::Matrix<double,3,3> beta_Ye;
 
-   beta_Ye = (twoLoop*(0.0025*Ye*(3162*Power(g1,4) - 1125*Power(g1d,4) -
-      225*Power(g1dp,4) - 1500*Power(g2,4) + 400*Lambda3*Lambda4 - 2700*
-      traceYdAdjYdYdAdjYd - 900*traceYdAdjYuYuAdjYd - 900*traceYeAdjYeYeAdjYe +
-      225*Sqr(g1)*Sqr(g1d) + 75*Sqr(g1)*Sqr(g1dp) - 450*Sqr(g1d)*Sqr(g1dp) +
-      540*Sqr(g1)*Sqr(g2) + 4125*Sqr(g1d)*Sqr(g2) + 375*Sqr(g1dp)*Sqr(g2) + 750
-      *traceYeAdjYe*(Sqr(g1) + Sqr(g2)) - 450*Sqr(g1d)*Sqr(g2u) - 150*Sqr(g1dp)
-      *Sqr(g2up) + 250*traceYdAdjYd*(Sqr(g1) + 9*Sqr(g2) + 32*Sqr(g3)) + 2400*
-      Sqr(Lambda1) + 400*Sqr(Lambda3) + 400*Sqr(Lambda4) + 600*Sqr(Lambda5) +
-      1800*Sqr(Lambda6) + 600*Sqr(Lambda7)) + 0.0375*(-320*Lambda1 - 180*
-      traceYdAdjYd - 60*traceYeAdjYe + 129*Sqr(g1) - 90*Sqr(g1d) - 30*Sqr(g1dp)
-      + 225*Sqr(g2))*(Ye*Ye.adjoint()*Ye) + 1.5*(Ye*Ye.adjoint()*Ye*Ye.adjoint
-      ()*Ye))).real();
+   beta_Ye = (twoLoop*(0.0025*Ye*(3162*Power(g1,4) + 5*Sqr(g1)*(50*
+      traceYdAdjYd + 150*traceYeAdjYe + 45*Sqr(g1d) + 15*Sqr(g1dp) + 108*Sqr(g2
+      )) - 25*(45*Power(g1d,4) + 9*Power(g1dp,4) + 3*Sqr(g1d)*(6*Sqr(g1dp) - 55
+      *Sqr(g2) + 6*Sqr(g2u)) + Sqr(g1dp)*(-15*Sqr(g2) + 6*Sqr(g2up)) + 2*(30*
+      Power(g2,4) - 15*(3*traceYdAdjYd + traceYeAdjYe)*Sqr(g2) - 2*(4*Lambda3*
+      Lambda4 - 27*traceYdAdjYdYdAdjYd - 9*traceYdAdjYuYuAdjYd - 9*
+      traceYeAdjYeYeAdjYe + 80*traceYdAdjYd*Sqr(g3) + 24*Sqr(Lambda1) + 4*Sqr(
+      Lambda3) + 4*Sqr(Lambda4) + 6*Sqr(Lambda5) + 18*Sqr(Lambda6) + 6*Sqr(
+      Lambda7))))) + 0.0375*(129*Sqr(g1) - 5*(64*Lambda1 + 36*traceYdAdjYd + 12
+      *traceYeAdjYe + 18*Sqr(g1d) + 6*Sqr(g1dp) - 45*Sqr(g2)))*(Ye*Ye.adjoint()
+      *Ye) + 1.5*(Ye*Ye.adjoint()*Ye*Ye.adjoint()*Ye))).real();
 
 
    return beta_Ye;

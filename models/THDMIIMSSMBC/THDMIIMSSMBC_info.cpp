@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:22:28
+// File generated at Thu 15 Dec 2016 12:41:42
 
 #include "THDMIIMSSMBC_info.hpp"
 
@@ -77,8 +77,6 @@ namespace THDMIIMSSMBC_info {
       "LambdaLoopOrder"};
 
    const char* model_name = "THDMIIMSSMBC";
-   const bool is_low_energy_model = false;
-   const bool is_supersymmetric_model = false;
 
 void print(std::ostream& ostr)
 {

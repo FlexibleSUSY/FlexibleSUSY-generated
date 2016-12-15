@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:38:28
+// File generated at Thu 15 Dec 2016 12:53:12
 
 #include "lowNMSSM_info.hpp"
 
@@ -133,8 +133,6 @@ namespace lowNMSSM_info {
       "ALambdaInput", "AKappaInput", "MuEffInput"};
 
    const char* model_name = "lowNMSSM";
-   const bool is_low_energy_model = true;
-   const bool is_supersymmetric_model = true;
 
 void print(std::ostream& ostr)
 {

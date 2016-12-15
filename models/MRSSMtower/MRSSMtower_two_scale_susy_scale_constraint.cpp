@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:09:09
+// File generated at Thu 15 Dec 2016 12:39:52
 
 #include "MRSSMtower_two_scale_susy_scale_constraint.hpp"
 #include "MRSSMtower_two_scale_model.hpp"
@@ -83,6 +83,7 @@ void MRSSMtower_susy_scale_constraint<Two_scale>::apply()
    update_scale();
 
    // apply user-defined susy scale constraints
+   const auto TanBeta = INPUTPARAMETER(TanBeta);
    const auto mq2Input = INPUTPARAMETER(mq2Input);
    const auto mu2Input = INPUTPARAMETER(mu2Input);
    const auto md2Input = INPUTPARAMETER(md2Input);
@@ -103,7 +104,11 @@ void MRSSMtower_susy_scale_constraint<Two_scale>::apply()
    const auto MDWBTInput = INPUTPARAMETER(MDWBTInput);
    const auto MuDInput = INPUTPARAMETER(MuDInput);
    const auto MuUInput = INPUTPARAMETER(MuUInput);
+   const auto vd = MODELPARAMETER(vd);
+   const auto vu = MODELPARAMETER(vu);
 
+   MODEL->set_vu(Re(TanBeta*Sqrt((Sqr(vd) + Sqr(vu))/(1 + Sqr(TanBeta)))));
+   MODEL->set_vd(Re(Sqrt((Sqr(vd) + Sqr(vu))/(1 + Sqr(TanBeta)))));
    MODEL->set_mq2((mq2Input).real());
    MODEL->set_mu2((mu2Input).real());
    MODEL->set_md2((md2Input).real());

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 15:28:08
+// File generated at Thu 15 Dec 2016 12:46:31
 
 #include "MRSSM_info.hpp"
 
@@ -155,8 +155,6 @@ namespace MRSSM_info {
       "MDBSInput", "MDWBTInput", "MDGocInput"};
 
    const char* model_name = "MRSSM";
-   const bool is_low_energy_model = true;
-   const bool is_supersymmetric_model = true;
 
 void print(std::ostream& ostr)
 {

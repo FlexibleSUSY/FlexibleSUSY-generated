@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sat 15 Oct 2016 16:10:28
+// File generated at Thu 15 Dec 2016 13:13:22
 
 #ifndef CMSSM_SLHA_IO_H
 #define CMSSM_SLHA_IO_H
@@ -57,7 +57,6 @@ struct CMSSM_scales {
 class CMSSM_slha_io {
 public:
    CMSSM_slha_io();
-   ~CMSSM_slha_io() {}
 
    void clear();
 
