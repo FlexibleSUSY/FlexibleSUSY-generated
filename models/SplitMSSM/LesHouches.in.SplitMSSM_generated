@@ -55,6 +55,7 @@ Block EXTPAR
    6   0   # MEWSB
    7   0   # AtInput
    25   0   # TanBeta
+   100   0   # LambdaLoopOrder
 Block MSQ2IN
    1   1   0   # msq2(1,1)
    1   2   0   # msq2(1,2)

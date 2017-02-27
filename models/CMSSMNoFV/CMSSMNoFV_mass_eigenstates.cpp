@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Thu 15 Dec 2016 13:08:44
+// File generated at Mon 27 Feb 2017 13:52:27
 
 /**
  * @file CMSSMNoFV_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Thu 15 Dec 2016 13:08:44 with FlexibleSUSY
- * 1.7.2 (git commit: 0d19299fef514160cb7541a03abb9b2c3365f927) and SARAH 4.9.1 .
+ * This file was generated at Mon 27 Feb 2017 13:52:27 with FlexibleSUSY
+ * 1.7.3 (git commit: 622a80d5da461a0a259a094325cd734ff8e79c61) and SARAH 4.9.3 .
  */
 
 #include "CMSSMNoFV_mass_eigenstates.hpp"
@@ -58,8 +58,6 @@
 #include <gsl/gsl_multiroots.h>
 
 namespace flexiblesusy {
-
-using namespace CMSSMNoFV_info;
 
 #define CLASSNAME CMSSMNoFV_mass_eigenstates
 
@@ -995,21 +993,21 @@ void CLASSNAME::reorder_pole_masses()
  */
 void CLASSNAME::check_pole_masses_for_tachyons()
 {
-   if (PHYSICAL(MSveL) < 0.) problems.flag_tachyon(SveL);
-   if (PHYSICAL(MSvmL) < 0.) problems.flag_tachyon(SvmL);
-   if (PHYSICAL(MSvtL) < 0.) problems.flag_tachyon(SvtL);
-   if (PHYSICAL(MSd).tail<2>().minCoeff() < 0.) problems.flag_tachyon(Sd);
-   if (PHYSICAL(MSu).tail<2>().minCoeff() < 0.) problems.flag_tachyon(Su);
-   if (PHYSICAL(MSe).tail<2>().minCoeff() < 0.) problems.flag_tachyon(Se);
-   if (PHYSICAL(MSm).tail<2>().minCoeff() < 0.) problems.flag_tachyon(Sm);
-   if (PHYSICAL(MStau).tail<2>().minCoeff() < 0.) problems.flag_tachyon(Stau);
-   if (PHYSICAL(MSs).tail<2>().minCoeff() < 0.) problems.flag_tachyon(Ss);
-   if (PHYSICAL(MSc).tail<2>().minCoeff() < 0.) problems.flag_tachyon(Sc);
-   if (PHYSICAL(MSb).tail<2>().minCoeff() < 0.) problems.flag_tachyon(Sb);
-   if (PHYSICAL(MSt).tail<2>().minCoeff() < 0.) problems.flag_tachyon(St);
-   if (PHYSICAL(Mhh).tail<2>().minCoeff() < 0.) problems.flag_tachyon(hh);
-   if (PHYSICAL(MAh).tail<1>().minCoeff() < 0.) problems.flag_tachyon(Ah);
-   if (PHYSICAL(MHpm).tail<1>().minCoeff() < 0.) problems.flag_tachyon(Hpm);
+   if (PHYSICAL(MSveL) < 0.) problems.flag_tachyon(CMSSMNoFV_info::SveL);
+   if (PHYSICAL(MSvmL) < 0.) problems.flag_tachyon(CMSSMNoFV_info::SvmL);
+   if (PHYSICAL(MSvtL) < 0.) problems.flag_tachyon(CMSSMNoFV_info::SvtL);
+   if (PHYSICAL(MSd).tail<2>().minCoeff() < 0.) problems.flag_tachyon(CMSSMNoFV_info::Sd);
+   if (PHYSICAL(MSu).tail<2>().minCoeff() < 0.) problems.flag_tachyon(CMSSMNoFV_info::Su);
+   if (PHYSICAL(MSe).tail<2>().minCoeff() < 0.) problems.flag_tachyon(CMSSMNoFV_info::Se);
+   if (PHYSICAL(MSm).tail<2>().minCoeff() < 0.) problems.flag_tachyon(CMSSMNoFV_info::Sm);
+   if (PHYSICAL(MStau).tail<2>().minCoeff() < 0.) problems.flag_tachyon(CMSSMNoFV_info::Stau);
+   if (PHYSICAL(MSs).tail<2>().minCoeff() < 0.) problems.flag_tachyon(CMSSMNoFV_info::Ss);
+   if (PHYSICAL(MSc).tail<2>().minCoeff() < 0.) problems.flag_tachyon(CMSSMNoFV_info::Sc);
+   if (PHYSICAL(MSb).tail<2>().minCoeff() < 0.) problems.flag_tachyon(CMSSMNoFV_info::Sb);
+   if (PHYSICAL(MSt).tail<2>().minCoeff() < 0.) problems.flag_tachyon(CMSSMNoFV_info::St);
+   if (PHYSICAL(Mhh).tail<2>().minCoeff() < 0.) problems.flag_tachyon(CMSSMNoFV_info::hh);
+   if (PHYSICAL(MAh).tail<1>().minCoeff() < 0.) problems.flag_tachyon(CMSSMNoFV_info::Ah);
+   if (PHYSICAL(MHpm).tail<1>().minCoeff() < 0.) problems.flag_tachyon(CMSSMNoFV_info::Hpm);
 
 }
 
@@ -1235,26 +1233,18 @@ void CLASSNAME::run_to(double scale, double eps)
 
 Eigen::Array<double,1,1> CLASSNAME::get_MChargedHiggs() const
 {
-   Eigen::Array<double,1,1> MHpm_ChargedHiggs;
    Eigen::Array<double,1,1> MHpm_goldstone;
-
    MHpm_goldstone(0) = MVWm;
 
-   remove_if_equal(MHpm, MHpm_goldstone, MHpm_ChargedHiggs);
-
-   return MHpm_ChargedHiggs;
+   return remove_if_equal(MHpm, MHpm_goldstone);
 }
 
 Eigen::Array<double,1,1> CLASSNAME::get_MPseudoscalarHiggs() const
 {
-   Eigen::Array<double,1,1> MAh_PseudoscalarHiggs;
    Eigen::Array<double,1,1> MAh_goldstone;
-
    MAh_goldstone(0) = MVZ;
 
-   remove_if_equal(MAh, MAh_goldstone, MAh_PseudoscalarHiggs);
-
-   return MAh_PseudoscalarHiggs;
+   return remove_if_equal(MAh, MAh_goldstone);
 }
 
 
@@ -11753,9 +11743,9 @@ std::complex<double> CLASSNAME::self_energy_Sd(double p , unsigned gO1, unsigned
    result += -(A0(MSvtL)*CpUSdconjUSdconjSvtLSvtL(gO1,gO2));
    result += 4*A0(MVWm)*CpUSdconjUSdconjVWmVWm(gO1,gO2);
    result += 2*A0(MVZ)*CpUSdconjUSdVZVZ(gO1,gO2);
-   result += 1.3333333333333333*(Conj(CpconjUSdGluFdPL(gO2,1,1))*
-      CpconjUSdGluFdPL(gO1,1,1) + Conj(CpconjUSdGluFdPR(gO2,1,1))*CpconjUSdGluFdPR
-      (gO1,1,1))*G0(p,MGlu,MFd);
+   result += 1.3333333333333333*(Conj(CpconjUSdGluFdPL(gO2,0,0))*
+      CpconjUSdGluFdPL(gO1,0,0) + Conj(CpconjUSdGluFdPR(gO2,0,0))*CpconjUSdGluFdPR
+      (gO1,0,0))*G0(p,MGlu,MFd);
    std::complex<double> tmp_0;
    std::complex<double> tmp_1;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
@@ -11898,39 +11888,39 @@ std::complex<double> CLASSNAME::self_energy_Sd(double p , unsigned gO1, unsigned
    result += tmp_34;
    std::complex<double> tmp_35;
    for (unsigned gI2 = 0; gI2 < 2; ++gI2) {
-      tmp_35 += (Conj(CpconjUSdFuChaPL(gO2,1,gI2))*CpconjUSdFuChaPL(gO1,1,
-         gI2) + Conj(CpconjUSdFuChaPR(gO2,1,gI2))*CpconjUSdFuChaPR(gO1,1,gI2))*G0(
+      tmp_35 += (Conj(CpconjUSdFuChaPL(gO2,0,gI2))*CpconjUSdFuChaPL(gO1,0,
+         gI2) + Conj(CpconjUSdFuChaPR(gO2,0,gI2))*CpconjUSdFuChaPR(gO1,0,gI2))*G0(
          p,MFu,MCha(gI2));
    }
    result += tmp_35;
    std::complex<double> tmp_36;
    for (unsigned gI2 = 0; gI2 < 4; ++gI2) {
-      tmp_36 += (Conj(CpconjUSdFdChiPL(gO2,1,gI2))*CpconjUSdFdChiPL(gO1,1,
-         gI2) + Conj(CpconjUSdFdChiPR(gO2,1,gI2))*CpconjUSdFdChiPR(gO1,1,gI2))*G0(
+      tmp_36 += (Conj(CpconjUSdFdChiPL(gO2,0,gI2))*CpconjUSdFdChiPL(gO1,0,
+         gI2) + Conj(CpconjUSdFdChiPR(gO2,0,gI2))*CpconjUSdFdChiPR(gO1,0,gI2))*G0(
          p,MFd,MChi(gI2));
    }
    result += tmp_36;
    std::complex<double> tmp_37;
    std::complex<double> tmp_38;
    for (unsigned gI2 = 0; gI2 < 4; ++gI2) {
-      tmp_38 += B0(p,MFd,MChi(gI2))*(Conj(CpconjUSdFdChiPR(gO2,1,gI2))*
-         CpconjUSdFdChiPL(gO1,1,gI2) + Conj(CpconjUSdFdChiPL(gO2,1,gI2))*
-         CpconjUSdFdChiPR(gO1,1,gI2))*MChi(gI2);
+      tmp_38 += B0(p,MFd,MChi(gI2))*(Conj(CpconjUSdFdChiPR(gO2,0,gI2))*
+         CpconjUSdFdChiPL(gO1,0,gI2) + Conj(CpconjUSdFdChiPL(gO2,0,gI2))*
+         CpconjUSdFdChiPR(gO1,0,gI2))*MChi(gI2);
    }
    tmp_37 += tmp_38;
    result += (-2*MFd) * tmp_37;
    std::complex<double> tmp_39;
    std::complex<double> tmp_40;
    for (unsigned gI2 = 0; gI2 < 2; ++gI2) {
-      tmp_40 += B0(p,MFu,MCha(gI2))*(Conj(CpconjUSdFuChaPR(gO2,1,gI2))*
-         CpconjUSdFuChaPL(gO1,1,gI2) + Conj(CpconjUSdFuChaPL(gO2,1,gI2))*
-         CpconjUSdFuChaPR(gO1,1,gI2))*MCha(gI2);
+      tmp_40 += B0(p,MFu,MCha(gI2))*(Conj(CpconjUSdFuChaPR(gO2,0,gI2))*
+         CpconjUSdFuChaPL(gO1,0,gI2) + Conj(CpconjUSdFuChaPL(gO2,0,gI2))*
+         CpconjUSdFuChaPR(gO1,0,gI2))*MCha(gI2);
    }
    tmp_39 += tmp_40;
    result += (-2*MFu) * tmp_39;
    result += -2.6666666666666665*MFd*MGlu*B0(p,MGlu,MFd)*(Conj(CpconjUSdGluFdPR
-      (gO2,1,1))*CpconjUSdGluFdPL(gO1,1,1) + Conj(CpconjUSdGluFdPL(gO2,1,1))*
-      CpconjUSdGluFdPR(gO1,1,1));
+      (gO2,0,0))*CpconjUSdGluFdPL(gO1,0,0) + Conj(CpconjUSdGluFdPL(gO2,0,0))*
+      CpconjUSdGluFdPR(gO1,0,0));
 
    return result * oneOver16PiSqr;
 
@@ -11945,9 +11935,9 @@ std::complex<double> CLASSNAME::self_energy_Su(double p , unsigned gO1, unsigned
    result += -(A0(MSvtL)*CpUSuconjUSuconjSvtLSvtL(gO1,gO2));
    result += 4*A0(MVWm)*CpUSuconjUSuconjVWmVWm(gO1,gO2);
    result += 2*A0(MVZ)*CpUSuconjUSuVZVZ(gO1,gO2);
-   result += 1.3333333333333333*(Conj(CpconjUSuGluFuPL(gO2,1,1))*
-      CpconjUSuGluFuPL(gO1,1,1) + Conj(CpconjUSuGluFuPR(gO2,1,1))*CpconjUSuGluFuPR
-      (gO1,1,1))*G0(p,MGlu,MFu);
+   result += 1.3333333333333333*(Conj(CpconjUSuGluFuPL(gO2,0,0))*
+      CpconjUSuGluFuPL(gO1,0,0) + Conj(CpconjUSuGluFuPR(gO2,0,0))*CpconjUSuGluFuPR
+      (gO1,0,0))*G0(p,MGlu,MFu);
    std::complex<double> tmp_41;
    std::complex<double> tmp_42;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
@@ -12034,9 +12024,9 @@ std::complex<double> CLASSNAME::self_energy_Su(double p , unsigned gO1, unsigned
    result += (-0.5) * tmp_63;
    std::complex<double> tmp_65;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_65 += (Conj(CpconjUSubarChaFdPL(gO2,gI1,1))*CpconjUSubarChaFdPL(
-         gO1,gI1,1) + Conj(CpconjUSubarChaFdPR(gO2,gI1,1))*CpconjUSubarChaFdPR(gO1
-         ,gI1,1))*G0(p,MCha(gI1),MFd);
+      tmp_65 += (Conj(CpconjUSubarChaFdPL(gO2,gI1,0))*CpconjUSubarChaFdPL(
+         gO1,gI1,0) + Conj(CpconjUSubarChaFdPR(gO2,gI1,0))*CpconjUSubarChaFdPR(gO1
+         ,gI1,0))*G0(p,MCha(gI1),MFd);
    }
    result += tmp_65;
    std::complex<double> tmp_66;
@@ -12097,32 +12087,32 @@ std::complex<double> CLASSNAME::self_energy_Su(double p , unsigned gO1, unsigned
    result += tmp_76;
    std::complex<double> tmp_77;
    for (unsigned gI2 = 0; gI2 < 4; ++gI2) {
-      tmp_77 += (Conj(CpconjUSuFuChiPL(gO2,1,gI2))*CpconjUSuFuChiPL(gO1,1,
-         gI2) + Conj(CpconjUSuFuChiPR(gO2,1,gI2))*CpconjUSuFuChiPR(gO1,1,gI2))*G0(
+      tmp_77 += (Conj(CpconjUSuFuChiPL(gO2,0,gI2))*CpconjUSuFuChiPL(gO1,0,
+         gI2) + Conj(CpconjUSuFuChiPR(gO2,0,gI2))*CpconjUSuFuChiPR(gO1,0,gI2))*G0(
          p,MFu,MChi(gI2));
    }
    result += tmp_77;
    std::complex<double> tmp_78;
    std::complex<double> tmp_79;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_79 += B0(p,MCha(gI1),MFd)*(Conj(CpconjUSubarChaFdPR(gO2,gI1,1))*
-         CpconjUSubarChaFdPL(gO1,gI1,1) + Conj(CpconjUSubarChaFdPL(gO2,gI1,1))*
-         CpconjUSubarChaFdPR(gO1,gI1,1))*MCha(gI1);
+      tmp_79 += B0(p,MCha(gI1),MFd)*(Conj(CpconjUSubarChaFdPR(gO2,gI1,0))*
+         CpconjUSubarChaFdPL(gO1,gI1,0) + Conj(CpconjUSubarChaFdPL(gO2,gI1,0))*
+         CpconjUSubarChaFdPR(gO1,gI1,0))*MCha(gI1);
    }
    tmp_78 += tmp_79;
    result += (-2*MFd) * tmp_78;
    std::complex<double> tmp_80;
    std::complex<double> tmp_81;
    for (unsigned gI2 = 0; gI2 < 4; ++gI2) {
-      tmp_81 += B0(p,MFu,MChi(gI2))*(Conj(CpconjUSuFuChiPR(gO2,1,gI2))*
-         CpconjUSuFuChiPL(gO1,1,gI2) + Conj(CpconjUSuFuChiPL(gO2,1,gI2))*
-         CpconjUSuFuChiPR(gO1,1,gI2))*MChi(gI2);
+      tmp_81 += B0(p,MFu,MChi(gI2))*(Conj(CpconjUSuFuChiPR(gO2,0,gI2))*
+         CpconjUSuFuChiPL(gO1,0,gI2) + Conj(CpconjUSuFuChiPL(gO2,0,gI2))*
+         CpconjUSuFuChiPR(gO1,0,gI2))*MChi(gI2);
    }
    tmp_80 += tmp_81;
    result += (-2*MFu) * tmp_80;
    result += -2.6666666666666665*MFu*MGlu*B0(p,MGlu,MFu)*(Conj(CpconjUSuGluFuPR
-      (gO2,1,1))*CpconjUSuGluFuPL(gO1,1,1) + Conj(CpconjUSuGluFuPL(gO2,1,1))*
-      CpconjUSuGluFuPR(gO1,1,1));
+      (gO2,0,0))*CpconjUSuGluFuPL(gO1,0,0) + Conj(CpconjUSuGluFuPL(gO2,0,0))*
+      CpconjUSuGluFuPR(gO1,0,0));
 
    return result * oneOver16PiSqr;
 
@@ -12648,9 +12638,9 @@ std::complex<double> CLASSNAME::self_energy_Ss(double p , unsigned gO1, unsigned
    result += -(A0(MSvtL)*CpUSsconjUSsconjSvtLSvtL(gO1,gO2));
    result += 4*A0(MVWm)*CpUSsconjUSsconjVWmVWm(gO1,gO2);
    result += 2*A0(MVZ)*CpUSsconjUSsVZVZ(gO1,gO2);
-   result += 1.3333333333333333*(Conj(CpconjUSsGluFsPL(gO2,1,1))*
-      CpconjUSsGluFsPL(gO1,1,1) + Conj(CpconjUSsGluFsPR(gO2,1,1))*CpconjUSsGluFsPR
-      (gO1,1,1))*G0(p,MGlu,MFs);
+   result += 1.3333333333333333*(Conj(CpconjUSsGluFsPL(gO2,0,0))*
+      CpconjUSsGluFsPL(gO1,0,0) + Conj(CpconjUSsGluFsPR(gO2,0,0))*CpconjUSsGluFsPR
+      (gO1,0,0))*G0(p,MGlu,MFs);
    std::complex<double> tmp_193;
    std::complex<double> tmp_194;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
@@ -12793,39 +12783,39 @@ std::complex<double> CLASSNAME::self_energy_Ss(double p , unsigned gO1, unsigned
    result += tmp_227;
    std::complex<double> tmp_228;
    for (unsigned gI2 = 0; gI2 < 2; ++gI2) {
-      tmp_228 += (Conj(CpconjUSsFcChaPL(gO2,1,gI2))*CpconjUSsFcChaPL(gO1,1,
-         gI2) + Conj(CpconjUSsFcChaPR(gO2,1,gI2))*CpconjUSsFcChaPR(gO1,1,gI2))*G0(
+      tmp_228 += (Conj(CpconjUSsFcChaPL(gO2,0,gI2))*CpconjUSsFcChaPL(gO1,0,
+         gI2) + Conj(CpconjUSsFcChaPR(gO2,0,gI2))*CpconjUSsFcChaPR(gO1,0,gI2))*G0(
          p,MFc,MCha(gI2));
    }
    result += tmp_228;
    std::complex<double> tmp_229;
    for (unsigned gI2 = 0; gI2 < 4; ++gI2) {
-      tmp_229 += (Conj(CpconjUSsFsChiPL(gO2,1,gI2))*CpconjUSsFsChiPL(gO1,1,
-         gI2) + Conj(CpconjUSsFsChiPR(gO2,1,gI2))*CpconjUSsFsChiPR(gO1,1,gI2))*G0(
+      tmp_229 += (Conj(CpconjUSsFsChiPL(gO2,0,gI2))*CpconjUSsFsChiPL(gO1,0,
+         gI2) + Conj(CpconjUSsFsChiPR(gO2,0,gI2))*CpconjUSsFsChiPR(gO1,0,gI2))*G0(
          p,MFs,MChi(gI2));
    }
    result += tmp_229;
    std::complex<double> tmp_230;
    std::complex<double> tmp_231;
    for (unsigned gI2 = 0; gI2 < 2; ++gI2) {
-      tmp_231 += B0(p,MFc,MCha(gI2))*(Conj(CpconjUSsFcChaPR(gO2,1,gI2))*
-         CpconjUSsFcChaPL(gO1,1,gI2) + Conj(CpconjUSsFcChaPL(gO2,1,gI2))*
-         CpconjUSsFcChaPR(gO1,1,gI2))*MCha(gI2);
+      tmp_231 += B0(p,MFc,MCha(gI2))*(Conj(CpconjUSsFcChaPR(gO2,0,gI2))*
+         CpconjUSsFcChaPL(gO1,0,gI2) + Conj(CpconjUSsFcChaPL(gO2,0,gI2))*
+         CpconjUSsFcChaPR(gO1,0,gI2))*MCha(gI2);
    }
    tmp_230 += tmp_231;
    result += (-2*MFc) * tmp_230;
    std::complex<double> tmp_232;
    std::complex<double> tmp_233;
    for (unsigned gI2 = 0; gI2 < 4; ++gI2) {
-      tmp_233 += B0(p,MFs,MChi(gI2))*(Conj(CpconjUSsFsChiPR(gO2,1,gI2))*
-         CpconjUSsFsChiPL(gO1,1,gI2) + Conj(CpconjUSsFsChiPL(gO2,1,gI2))*
-         CpconjUSsFsChiPR(gO1,1,gI2))*MChi(gI2);
+      tmp_233 += B0(p,MFs,MChi(gI2))*(Conj(CpconjUSsFsChiPR(gO2,0,gI2))*
+         CpconjUSsFsChiPL(gO1,0,gI2) + Conj(CpconjUSsFsChiPL(gO2,0,gI2))*
+         CpconjUSsFsChiPR(gO1,0,gI2))*MChi(gI2);
    }
    tmp_232 += tmp_233;
    result += (-2*MFs) * tmp_232;
    result += -2.6666666666666665*MFs*MGlu*B0(p,MGlu,MFs)*(Conj(CpconjUSsGluFsPR
-      (gO2,1,1))*CpconjUSsGluFsPL(gO1,1,1) + Conj(CpconjUSsGluFsPL(gO2,1,1))*
-      CpconjUSsGluFsPR(gO1,1,1));
+      (gO2,0,0))*CpconjUSsGluFsPL(gO1,0,0) + Conj(CpconjUSsGluFsPL(gO2,0,0))*
+      CpconjUSsGluFsPR(gO1,0,0));
 
    return result * oneOver16PiSqr;
 
@@ -12840,9 +12830,9 @@ std::complex<double> CLASSNAME::self_energy_Sc(double p , unsigned gO1, unsigned
    result += -(A0(MSvtL)*CpUScconjUScconjSvtLSvtL(gO1,gO2));
    result += 4*A0(MVWm)*CpUScconjUScconjVWmVWm(gO1,gO2);
    result += 2*A0(MVZ)*CpUScconjUScVZVZ(gO1,gO2);
-   result += 1.3333333333333333*(Conj(CpconjUScGluFcPL(gO2,1,1))*
-      CpconjUScGluFcPL(gO1,1,1) + Conj(CpconjUScGluFcPR(gO2,1,1))*CpconjUScGluFcPR
-      (gO1,1,1))*G0(p,MGlu,MFc);
+   result += 1.3333333333333333*(Conj(CpconjUScGluFcPL(gO2,0,0))*
+      CpconjUScGluFcPL(gO1,0,0) + Conj(CpconjUScGluFcPR(gO2,0,0))*CpconjUScGluFcPR
+      (gO1,0,0))*G0(p,MGlu,MFc);
    std::complex<double> tmp_234;
    std::complex<double> tmp_235;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
@@ -12929,9 +12919,9 @@ std::complex<double> CLASSNAME::self_energy_Sc(double p , unsigned gO1, unsigned
    result += (-0.5) * tmp_256;
    std::complex<double> tmp_258;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_258 += (Conj(CpconjUScbarChaFsPL(gO2,gI1,1))*CpconjUScbarChaFsPL(
-         gO1,gI1,1) + Conj(CpconjUScbarChaFsPR(gO2,gI1,1))*CpconjUScbarChaFsPR(gO1
-         ,gI1,1))*G0(p,MCha(gI1),MFs);
+      tmp_258 += (Conj(CpconjUScbarChaFsPL(gO2,gI1,0))*CpconjUScbarChaFsPL(
+         gO1,gI1,0) + Conj(CpconjUScbarChaFsPR(gO2,gI1,0))*CpconjUScbarChaFsPR(gO1
+         ,gI1,0))*G0(p,MCha(gI1),MFs);
    }
    result += tmp_258;
    std::complex<double> tmp_259;
@@ -12992,32 +12982,32 @@ std::complex<double> CLASSNAME::self_energy_Sc(double p , unsigned gO1, unsigned
    result += tmp_269;
    std::complex<double> tmp_270;
    for (unsigned gI2 = 0; gI2 < 4; ++gI2) {
-      tmp_270 += (Conj(CpconjUScFcChiPL(gO2,1,gI2))*CpconjUScFcChiPL(gO1,1,
-         gI2) + Conj(CpconjUScFcChiPR(gO2,1,gI2))*CpconjUScFcChiPR(gO1,1,gI2))*G0(
+      tmp_270 += (Conj(CpconjUScFcChiPL(gO2,0,gI2))*CpconjUScFcChiPL(gO1,0,
+         gI2) + Conj(CpconjUScFcChiPR(gO2,0,gI2))*CpconjUScFcChiPR(gO1,0,gI2))*G0(
          p,MFc,MChi(gI2));
    }
    result += tmp_270;
    std::complex<double> tmp_271;
    std::complex<double> tmp_272;
    for (unsigned gI2 = 0; gI2 < 4; ++gI2) {
-      tmp_272 += B0(p,MFc,MChi(gI2))*(Conj(CpconjUScFcChiPR(gO2,1,gI2))*
-         CpconjUScFcChiPL(gO1,1,gI2) + Conj(CpconjUScFcChiPL(gO2,1,gI2))*
-         CpconjUScFcChiPR(gO1,1,gI2))*MChi(gI2);
+      tmp_272 += B0(p,MFc,MChi(gI2))*(Conj(CpconjUScFcChiPR(gO2,0,gI2))*
+         CpconjUScFcChiPL(gO1,0,gI2) + Conj(CpconjUScFcChiPL(gO2,0,gI2))*
+         CpconjUScFcChiPR(gO1,0,gI2))*MChi(gI2);
    }
    tmp_271 += tmp_272;
    result += (-2*MFc) * tmp_271;
    std::complex<double> tmp_273;
    std::complex<double> tmp_274;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_274 += B0(p,MCha(gI1),MFs)*(Conj(CpconjUScbarChaFsPR(gO2,gI1,1))*
-         CpconjUScbarChaFsPL(gO1,gI1,1) + Conj(CpconjUScbarChaFsPL(gO2,gI1,1))*
-         CpconjUScbarChaFsPR(gO1,gI1,1))*MCha(gI1);
+      tmp_274 += B0(p,MCha(gI1),MFs)*(Conj(CpconjUScbarChaFsPR(gO2,gI1,0))*
+         CpconjUScbarChaFsPL(gO1,gI1,0) + Conj(CpconjUScbarChaFsPL(gO2,gI1,0))*
+         CpconjUScbarChaFsPR(gO1,gI1,0))*MCha(gI1);
    }
    tmp_273 += tmp_274;
    result += (-2*MFs) * tmp_273;
    result += -2.6666666666666665*MFc*MGlu*B0(p,MGlu,MFc)*(Conj(CpconjUScGluFcPR
-      (gO2,1,1))*CpconjUScGluFcPL(gO1,1,1) + Conj(CpconjUScGluFcPL(gO2,1,1))*
-      CpconjUScGluFcPR(gO1,1,1));
+      (gO2,0,0))*CpconjUScGluFcPL(gO1,0,0) + Conj(CpconjUScGluFcPL(gO2,0,0))*
+      CpconjUScGluFcPR(gO1,0,0));
 
    return result * oneOver16PiSqr;
 
@@ -13032,9 +13022,9 @@ std::complex<double> CLASSNAME::self_energy_Sb(double p , unsigned gO1, unsigned
    result += -(A0(MSvtL)*CpUSbconjUSbconjSvtLSvtL(gO1,gO2));
    result += 4*A0(MVWm)*CpUSbconjUSbconjVWmVWm(gO1,gO2);
    result += 2*A0(MVZ)*CpUSbconjUSbVZVZ(gO1,gO2);
-   result += 1.3333333333333333*(Conj(CpconjUSbGluFbPL(gO2,1,1))*
-      CpconjUSbGluFbPL(gO1,1,1) + Conj(CpconjUSbGluFbPR(gO2,1,1))*CpconjUSbGluFbPR
-      (gO1,1,1))*G0(p,MGlu,MFb);
+   result += 1.3333333333333333*(Conj(CpconjUSbGluFbPL(gO2,0,0))*
+      CpconjUSbGluFbPL(gO1,0,0) + Conj(CpconjUSbGluFbPR(gO2,0,0))*CpconjUSbGluFbPR
+      (gO1,0,0))*G0(p,MGlu,MFb);
    std::complex<double> tmp_275;
    std::complex<double> tmp_276;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
@@ -13177,39 +13167,39 @@ std::complex<double> CLASSNAME::self_energy_Sb(double p , unsigned gO1, unsigned
    result += tmp_309;
    std::complex<double> tmp_310;
    for (unsigned gI2 = 0; gI2 < 2; ++gI2) {
-      tmp_310 += (Conj(CpconjUSbFtChaPL(gO2,1,gI2))*CpconjUSbFtChaPL(gO1,1,
-         gI2) + Conj(CpconjUSbFtChaPR(gO2,1,gI2))*CpconjUSbFtChaPR(gO1,1,gI2))*G0(
+      tmp_310 += (Conj(CpconjUSbFtChaPL(gO2,0,gI2))*CpconjUSbFtChaPL(gO1,0,
+         gI2) + Conj(CpconjUSbFtChaPR(gO2,0,gI2))*CpconjUSbFtChaPR(gO1,0,gI2))*G0(
          p,MFt,MCha(gI2));
    }
    result += tmp_310;
    std::complex<double> tmp_311;
    for (unsigned gI2 = 0; gI2 < 4; ++gI2) {
-      tmp_311 += (Conj(CpconjUSbFbChiPL(gO2,1,gI2))*CpconjUSbFbChiPL(gO1,1,
-         gI2) + Conj(CpconjUSbFbChiPR(gO2,1,gI2))*CpconjUSbFbChiPR(gO1,1,gI2))*G0(
+      tmp_311 += (Conj(CpconjUSbFbChiPL(gO2,0,gI2))*CpconjUSbFbChiPL(gO1,0,
+         gI2) + Conj(CpconjUSbFbChiPR(gO2,0,gI2))*CpconjUSbFbChiPR(gO1,0,gI2))*G0(
          p,MFb,MChi(gI2));
    }
    result += tmp_311;
    std::complex<double> tmp_312;
    std::complex<double> tmp_313;
    for (unsigned gI2 = 0; gI2 < 4; ++gI2) {
-      tmp_313 += B0(p,MFb,MChi(gI2))*(Conj(CpconjUSbFbChiPR(gO2,1,gI2))*
-         CpconjUSbFbChiPL(gO1,1,gI2) + Conj(CpconjUSbFbChiPL(gO2,1,gI2))*
-         CpconjUSbFbChiPR(gO1,1,gI2))*MChi(gI2);
+      tmp_313 += B0(p,MFb,MChi(gI2))*(Conj(CpconjUSbFbChiPR(gO2,0,gI2))*
+         CpconjUSbFbChiPL(gO1,0,gI2) + Conj(CpconjUSbFbChiPL(gO2,0,gI2))*
+         CpconjUSbFbChiPR(gO1,0,gI2))*MChi(gI2);
    }
    tmp_312 += tmp_313;
    result += (-2*MFb) * tmp_312;
    std::complex<double> tmp_314;
    std::complex<double> tmp_315;
    for (unsigned gI2 = 0; gI2 < 2; ++gI2) {
-      tmp_315 += B0(p,MFt,MCha(gI2))*(Conj(CpconjUSbFtChaPR(gO2,1,gI2))*
-         CpconjUSbFtChaPL(gO1,1,gI2) + Conj(CpconjUSbFtChaPL(gO2,1,gI2))*
-         CpconjUSbFtChaPR(gO1,1,gI2))*MCha(gI2);
+      tmp_315 += B0(p,MFt,MCha(gI2))*(Conj(CpconjUSbFtChaPR(gO2,0,gI2))*
+         CpconjUSbFtChaPL(gO1,0,gI2) + Conj(CpconjUSbFtChaPL(gO2,0,gI2))*
+         CpconjUSbFtChaPR(gO1,0,gI2))*MCha(gI2);
    }
    tmp_314 += tmp_315;
    result += (-2*MFt) * tmp_314;
    result += -2.6666666666666665*MFb*MGlu*B0(p,MGlu,MFb)*(Conj(CpconjUSbGluFbPR
-      (gO2,1,1))*CpconjUSbGluFbPL(gO1,1,1) + Conj(CpconjUSbGluFbPL(gO2,1,1))*
-      CpconjUSbGluFbPR(gO1,1,1));
+      (gO2,0,0))*CpconjUSbGluFbPL(gO1,0,0) + Conj(CpconjUSbGluFbPL(gO2,0,0))*
+      CpconjUSbGluFbPR(gO1,0,0));
 
    return result * oneOver16PiSqr;
 
@@ -13224,9 +13214,9 @@ std::complex<double> CLASSNAME::self_energy_St(double p , unsigned gO1, unsigned
    result += -(A0(MSvtL)*CpUStconjUStconjSvtLSvtL(gO1,gO2));
    result += 4*A0(MVWm)*CpUStconjUStconjVWmVWm(gO1,gO2);
    result += 2*A0(MVZ)*CpUStconjUStVZVZ(gO1,gO2);
-   result += 1.3333333333333333*(Conj(CpconjUStGluFtPL(gO2,1,1))*
-      CpconjUStGluFtPL(gO1,1,1) + Conj(CpconjUStGluFtPR(gO2,1,1))*CpconjUStGluFtPR
-      (gO1,1,1))*G0(p,MGlu,MFt);
+   result += 1.3333333333333333*(Conj(CpconjUStGluFtPL(gO2,0,0))*
+      CpconjUStGluFtPL(gO1,0,0) + Conj(CpconjUStGluFtPR(gO2,0,0))*CpconjUStGluFtPR
+      (gO1,0,0))*G0(p,MGlu,MFt);
    std::complex<double> tmp_316;
    std::complex<double> tmp_317;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
@@ -13313,9 +13303,9 @@ std::complex<double> CLASSNAME::self_energy_St(double p , unsigned gO1, unsigned
    result += (-0.5) * tmp_338;
    std::complex<double> tmp_340;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_340 += (Conj(CpconjUStbarChaFbPL(gO2,gI1,1))*CpconjUStbarChaFbPL(
-         gO1,gI1,1) + Conj(CpconjUStbarChaFbPR(gO2,gI1,1))*CpconjUStbarChaFbPR(gO1
-         ,gI1,1))*G0(p,MCha(gI1),MFb);
+      tmp_340 += (Conj(CpconjUStbarChaFbPL(gO2,gI1,0))*CpconjUStbarChaFbPL(
+         gO1,gI1,0) + Conj(CpconjUStbarChaFbPR(gO2,gI1,0))*CpconjUStbarChaFbPR(gO1
+         ,gI1,0))*G0(p,MCha(gI1),MFb);
    }
    result += tmp_340;
    std::complex<double> tmp_341;
@@ -13376,32 +13366,32 @@ std::complex<double> CLASSNAME::self_energy_St(double p , unsigned gO1, unsigned
    result += tmp_351;
    std::complex<double> tmp_352;
    for (unsigned gI2 = 0; gI2 < 4; ++gI2) {
-      tmp_352 += (Conj(CpconjUStFtChiPL(gO2,1,gI2))*CpconjUStFtChiPL(gO1,1,
-         gI2) + Conj(CpconjUStFtChiPR(gO2,1,gI2))*CpconjUStFtChiPR(gO1,1,gI2))*G0(
+      tmp_352 += (Conj(CpconjUStFtChiPL(gO2,0,gI2))*CpconjUStFtChiPL(gO1,0,
+         gI2) + Conj(CpconjUStFtChiPR(gO2,0,gI2))*CpconjUStFtChiPR(gO1,0,gI2))*G0(
          p,MFt,MChi(gI2));
    }
    result += tmp_352;
    std::complex<double> tmp_353;
    std::complex<double> tmp_354;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_354 += B0(p,MCha(gI1),MFb)*(Conj(CpconjUStbarChaFbPR(gO2,gI1,1))*
-         CpconjUStbarChaFbPL(gO1,gI1,1) + Conj(CpconjUStbarChaFbPL(gO2,gI1,1))*
-         CpconjUStbarChaFbPR(gO1,gI1,1))*MCha(gI1);
+      tmp_354 += B0(p,MCha(gI1),MFb)*(Conj(CpconjUStbarChaFbPR(gO2,gI1,0))*
+         CpconjUStbarChaFbPL(gO1,gI1,0) + Conj(CpconjUStbarChaFbPL(gO2,gI1,0))*
+         CpconjUStbarChaFbPR(gO1,gI1,0))*MCha(gI1);
    }
    tmp_353 += tmp_354;
    result += (-2*MFb) * tmp_353;
    std::complex<double> tmp_355;
    std::complex<double> tmp_356;
    for (unsigned gI2 = 0; gI2 < 4; ++gI2) {
-      tmp_356 += B0(p,MFt,MChi(gI2))*(Conj(CpconjUStFtChiPR(gO2,1,gI2))*
-         CpconjUStFtChiPL(gO1,1,gI2) + Conj(CpconjUStFtChiPL(gO2,1,gI2))*
-         CpconjUStFtChiPR(gO1,1,gI2))*MChi(gI2);
+      tmp_356 += B0(p,MFt,MChi(gI2))*(Conj(CpconjUStFtChiPR(gO2,0,gI2))*
+         CpconjUStFtChiPL(gO1,0,gI2) + Conj(CpconjUStFtChiPL(gO2,0,gI2))*
+         CpconjUStFtChiPR(gO1,0,gI2))*MChi(gI2);
    }
    tmp_355 += tmp_356;
    result += (-2*MFt) * tmp_355;
    result += -2.6666666666666665*MFt*MGlu*B0(p,MGlu,MFt)*(Conj(CpconjUStGluFtPR
-      (gO2,1,1))*CpconjUStGluFtPL(gO1,1,1) + Conj(CpconjUStGluFtPL(gO2,1,1))*
-      CpconjUStGluFtPR(gO1,1,1));
+      (gO2,0,0))*CpconjUStGluFtPL(gO1,0,0) + Conj(CpconjUStGluFtPL(gO2,0,0))*
+      CpconjUStGluFtPR(gO1,0,0));
 
    return result * oneOver16PiSqr;
 
@@ -13427,24 +13417,24 @@ std::complex<double> CLASSNAME::self_energy_hh(double p , unsigned gO1, unsigned
    result += 4*A0(MVWm)*CpUhhUhhconjVWmVWm(gO1,gO2);
    result += 2*A0(MVZ)*CpUhhUhhVZVZ(gO1,gO2);
    result += 2*B0(p,MVZ,MVZ)*Conj(CpUhhVZVZ(gO2))*CpUhhVZVZ(gO1);
-   result += 3*(Conj(CpUhhbarFbFbPL(gO2,1,1))*CpUhhbarFbFbPL(gO1,1,1) + Conj(
-      CpUhhbarFbFbPR(gO2,1,1))*CpUhhbarFbFbPR(gO1,1,1))*G0(p,MFb,MFb);
-   result += 3*(Conj(CpUhhbarFcFcPL(gO2,1,1))*CpUhhbarFcFcPL(gO1,1,1) + Conj(
-      CpUhhbarFcFcPR(gO2,1,1))*CpUhhbarFcFcPR(gO1,1,1))*G0(p,MFc,MFc);
-   result += 3*(Conj(CpUhhbarFdFdPL(gO2,1,1))*CpUhhbarFdFdPL(gO1,1,1) + Conj(
-      CpUhhbarFdFdPR(gO2,1,1))*CpUhhbarFdFdPR(gO1,1,1))*G0(p,MFd,MFd);
+   result += 3*(Conj(CpUhhbarFbFbPL(gO2,0,0))*CpUhhbarFbFbPL(gO1,0,0) + Conj(
+      CpUhhbarFbFbPR(gO2,0,0))*CpUhhbarFbFbPR(gO1,0,0))*G0(p,MFb,MFb);
+   result += 3*(Conj(CpUhhbarFcFcPL(gO2,0,0))*CpUhhbarFcFcPL(gO1,0,0) + Conj(
+      CpUhhbarFcFcPR(gO2,0,0))*CpUhhbarFcFcPR(gO1,0,0))*G0(p,MFc,MFc);
+   result += 3*(Conj(CpUhhbarFdFdPL(gO2,0,0))*CpUhhbarFdFdPL(gO1,0,0) + Conj(
+      CpUhhbarFdFdPR(gO2,0,0))*CpUhhbarFdFdPR(gO1,0,0))*G0(p,MFd,MFd);
    result += (Conj(CpUhhbarFeFePL(gO2))*CpUhhbarFeFePL(gO1) + Conj(
       CpUhhbarFeFePR(gO2))*CpUhhbarFeFePR(gO1))*G0(p,MFe,MFe);
    result += (Conj(CpUhhbarFmFmPL(gO2))*CpUhhbarFmFmPL(gO1) + Conj(
       CpUhhbarFmFmPR(gO2))*CpUhhbarFmFmPR(gO1))*G0(p,MFm,MFm);
-   result += 3*(Conj(CpUhhbarFsFsPL(gO2,1,1))*CpUhhbarFsFsPL(gO1,1,1) + Conj(
-      CpUhhbarFsFsPR(gO2,1,1))*CpUhhbarFsFsPR(gO1,1,1))*G0(p,MFs,MFs);
-   result += 3*(Conj(CpUhhbarFtFtPL(gO2,1,1))*CpUhhbarFtFtPL(gO1,1,1) + Conj(
-      CpUhhbarFtFtPR(gO2,1,1))*CpUhhbarFtFtPR(gO1,1,1))*G0(p,MFt,MFt);
+   result += 3*(Conj(CpUhhbarFsFsPL(gO2,0,0))*CpUhhbarFsFsPL(gO1,0,0) + Conj(
+      CpUhhbarFsFsPR(gO2,0,0))*CpUhhbarFsFsPR(gO1,0,0))*G0(p,MFs,MFs);
+   result += 3*(Conj(CpUhhbarFtFtPL(gO2,0,0))*CpUhhbarFtFtPL(gO1,0,0) + Conj(
+      CpUhhbarFtFtPR(gO2,0,0))*CpUhhbarFtFtPR(gO1,0,0))*G0(p,MFt,MFt);
    result += (Conj(CpUhhbarFtauFtauPL(gO2))*CpUhhbarFtauFtauPL(gO1) + Conj(
       CpUhhbarFtauFtauPR(gO2))*CpUhhbarFtauFtauPR(gO1))*G0(p,MFtau,MFtau);
-   result += 3*(Conj(CpUhhbarFuFuPL(gO2,1,1))*CpUhhbarFuFuPL(gO1,1,1) + Conj(
-      CpUhhbarFuFuPR(gO2,1,1))*CpUhhbarFuFuPR(gO1,1,1))*G0(p,MFu,MFu);
+   result += 3*(Conj(CpUhhbarFuFuPL(gO2,0,0))*CpUhhbarFuFuPL(gO1,0,0) + Conj(
+      CpUhhbarFuFuPR(gO2,0,0))*CpUhhbarFuFuPR(gO1,0,0))*G0(p,MFu,MFu);
    std::complex<double> tmp_357;
    std::complex<double> tmp_358;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
@@ -13733,25 +13723,25 @@ std::complex<double> CLASSNAME::self_energy_hh(double p , unsigned gO1, unsigned
    }
    tmp_427 += tmp_428;
    result += (2) * tmp_427;
-   result += -6*B0(p,MFb,MFb)*(Conj(CpUhhbarFbFbPR(gO2,1,1))*CpUhhbarFbFbPL(gO1
-      ,1,1) + Conj(CpUhhbarFbFbPL(gO2,1,1))*CpUhhbarFbFbPR(gO1,1,1))*Sqr(MFb);
-   result += -6*B0(p,MFc,MFc)*(Conj(CpUhhbarFcFcPR(gO2,1,1))*CpUhhbarFcFcPL(gO1
-      ,1,1) + Conj(CpUhhbarFcFcPL(gO2,1,1))*CpUhhbarFcFcPR(gO1,1,1))*Sqr(MFc);
-   result += -6*B0(p,MFd,MFd)*(Conj(CpUhhbarFdFdPR(gO2,1,1))*CpUhhbarFdFdPL(gO1
-      ,1,1) + Conj(CpUhhbarFdFdPL(gO2,1,1))*CpUhhbarFdFdPR(gO1,1,1))*Sqr(MFd);
+   result += -6*B0(p,MFb,MFb)*(Conj(CpUhhbarFbFbPR(gO2,0,0))*CpUhhbarFbFbPL(gO1
+      ,0,0) + Conj(CpUhhbarFbFbPL(gO2,0,0))*CpUhhbarFbFbPR(gO1,0,0))*Sqr(MFb);
+   result += -6*B0(p,MFc,MFc)*(Conj(CpUhhbarFcFcPR(gO2,0,0))*CpUhhbarFcFcPL(gO1
+      ,0,0) + Conj(CpUhhbarFcFcPL(gO2,0,0))*CpUhhbarFcFcPR(gO1,0,0))*Sqr(MFc);
+   result += -6*B0(p,MFd,MFd)*(Conj(CpUhhbarFdFdPR(gO2,0,0))*CpUhhbarFdFdPL(gO1
+      ,0,0) + Conj(CpUhhbarFdFdPL(gO2,0,0))*CpUhhbarFdFdPR(gO1,0,0))*Sqr(MFd);
    result += -2*B0(p,MFe,MFe)*(Conj(CpUhhbarFeFePR(gO2))*CpUhhbarFeFePL(gO1) +
       Conj(CpUhhbarFeFePL(gO2))*CpUhhbarFeFePR(gO1))*Sqr(MFe);
    result += -2*B0(p,MFm,MFm)*(Conj(CpUhhbarFmFmPR(gO2))*CpUhhbarFmFmPL(gO1) +
       Conj(CpUhhbarFmFmPL(gO2))*CpUhhbarFmFmPR(gO1))*Sqr(MFm);
-   result += -6*B0(p,MFs,MFs)*(Conj(CpUhhbarFsFsPR(gO2,1,1))*CpUhhbarFsFsPL(gO1
-      ,1,1) + Conj(CpUhhbarFsFsPL(gO2,1,1))*CpUhhbarFsFsPR(gO1,1,1))*Sqr(MFs);
-   result += -6*B0(p,MFt,MFt)*(Conj(CpUhhbarFtFtPR(gO2,1,1))*CpUhhbarFtFtPL(gO1
-      ,1,1) + Conj(CpUhhbarFtFtPL(gO2,1,1))*CpUhhbarFtFtPR(gO1,1,1))*Sqr(MFt);
+   result += -6*B0(p,MFs,MFs)*(Conj(CpUhhbarFsFsPR(gO2,0,0))*CpUhhbarFsFsPL(gO1
+      ,0,0) + Conj(CpUhhbarFsFsPL(gO2,0,0))*CpUhhbarFsFsPR(gO1,0,0))*Sqr(MFs);
+   result += -6*B0(p,MFt,MFt)*(Conj(CpUhhbarFtFtPR(gO2,0,0))*CpUhhbarFtFtPL(gO1
+      ,0,0) + Conj(CpUhhbarFtFtPL(gO2,0,0))*CpUhhbarFtFtPR(gO1,0,0))*Sqr(MFt);
    result += -2*B0(p,MFtau,MFtau)*(Conj(CpUhhbarFtauFtauPR(gO2))*
       CpUhhbarFtauFtauPL(gO1) + Conj(CpUhhbarFtauFtauPL(gO2))*CpUhhbarFtauFtauPR(
       gO1))*Sqr(MFtau);
-   result += -6*B0(p,MFu,MFu)*(Conj(CpUhhbarFuFuPR(gO2,1,1))*CpUhhbarFuFuPL(gO1
-      ,1,1) + Conj(CpUhhbarFuFuPL(gO2,1,1))*CpUhhbarFuFuPR(gO1,1,1))*Sqr(MFu);
+   result += -6*B0(p,MFu,MFu)*(Conj(CpUhhbarFuFuPR(gO2,0,0))*CpUhhbarFuFuPL(gO1
+      ,0,0) + Conj(CpUhhbarFuFuPL(gO2,0,0))*CpUhhbarFuFuPR(gO1,0,0))*Sqr(MFu);
 
    return result * oneOver16PiSqr;
 
@@ -13768,24 +13758,24 @@ std::complex<double> CLASSNAME::self_energy_Ah(double p , unsigned gO1, unsigned
    result += -(A0(MSvtL)*CpUAhUAhconjSvtLSvtL(gO1,gO2));
    result += 4*A0(MVWm)*CpUAhUAhconjVWmVWm(gO1,gO2);
    result += 2*A0(MVZ)*CpUAhUAhVZVZ(gO1,gO2);
-   result += 3*(Conj(CpUAhbarFbFbPL(gO2,1,1))*CpUAhbarFbFbPL(gO1,1,1) + Conj(
-      CpUAhbarFbFbPR(gO2,1,1))*CpUAhbarFbFbPR(gO1,1,1))*G0(p,MFb,MFb);
-   result += 3*(Conj(CpUAhbarFcFcPL(gO2,1,1))*CpUAhbarFcFcPL(gO1,1,1) + Conj(
-      CpUAhbarFcFcPR(gO2,1,1))*CpUAhbarFcFcPR(gO1,1,1))*G0(p,MFc,MFc);
-   result += 3*(Conj(CpUAhbarFdFdPL(gO2,1,1))*CpUAhbarFdFdPL(gO1,1,1) + Conj(
-      CpUAhbarFdFdPR(gO2,1,1))*CpUAhbarFdFdPR(gO1,1,1))*G0(p,MFd,MFd);
+   result += 3*(Conj(CpUAhbarFbFbPL(gO2,0,0))*CpUAhbarFbFbPL(gO1,0,0) + Conj(
+      CpUAhbarFbFbPR(gO2,0,0))*CpUAhbarFbFbPR(gO1,0,0))*G0(p,MFb,MFb);
+   result += 3*(Conj(CpUAhbarFcFcPL(gO2,0,0))*CpUAhbarFcFcPL(gO1,0,0) + Conj(
+      CpUAhbarFcFcPR(gO2,0,0))*CpUAhbarFcFcPR(gO1,0,0))*G0(p,MFc,MFc);
+   result += 3*(Conj(CpUAhbarFdFdPL(gO2,0,0))*CpUAhbarFdFdPL(gO1,0,0) + Conj(
+      CpUAhbarFdFdPR(gO2,0,0))*CpUAhbarFdFdPR(gO1,0,0))*G0(p,MFd,MFd);
    result += (Conj(CpUAhbarFeFePL(gO2))*CpUAhbarFeFePL(gO1) + Conj(
       CpUAhbarFeFePR(gO2))*CpUAhbarFeFePR(gO1))*G0(p,MFe,MFe);
    result += (Conj(CpUAhbarFmFmPL(gO2))*CpUAhbarFmFmPL(gO1) + Conj(
       CpUAhbarFmFmPR(gO2))*CpUAhbarFmFmPR(gO1))*G0(p,MFm,MFm);
-   result += 3*(Conj(CpUAhbarFsFsPL(gO2,1,1))*CpUAhbarFsFsPL(gO1,1,1) + Conj(
-      CpUAhbarFsFsPR(gO2,1,1))*CpUAhbarFsFsPR(gO1,1,1))*G0(p,MFs,MFs);
-   result += 3*(Conj(CpUAhbarFtFtPL(gO2,1,1))*CpUAhbarFtFtPL(gO1,1,1) + Conj(
-      CpUAhbarFtFtPR(gO2,1,1))*CpUAhbarFtFtPR(gO1,1,1))*G0(p,MFt,MFt);
+   result += 3*(Conj(CpUAhbarFsFsPL(gO2,0,0))*CpUAhbarFsFsPL(gO1,0,0) + Conj(
+      CpUAhbarFsFsPR(gO2,0,0))*CpUAhbarFsFsPR(gO1,0,0))*G0(p,MFs,MFs);
+   result += 3*(Conj(CpUAhbarFtFtPL(gO2,0,0))*CpUAhbarFtFtPL(gO1,0,0) + Conj(
+      CpUAhbarFtFtPR(gO2,0,0))*CpUAhbarFtFtPR(gO1,0,0))*G0(p,MFt,MFt);
    result += (Conj(CpUAhbarFtauFtauPL(gO2))*CpUAhbarFtauFtauPL(gO1) + Conj(
       CpUAhbarFtauFtauPR(gO2))*CpUAhbarFtauFtauPR(gO1))*G0(p,MFtau,MFtau);
-   result += 3*(Conj(CpUAhbarFuFuPL(gO2,1,1))*CpUAhbarFuFuPL(gO1,1,1) + Conj(
-      CpUAhbarFuFuPR(gO2,1,1))*CpUAhbarFuFuPR(gO1,1,1))*G0(p,MFu,MFu);
+   result += 3*(Conj(CpUAhbarFuFuPL(gO2,0,0))*CpUAhbarFuFuPL(gO1,0,0) + Conj(
+      CpUAhbarFuFuPR(gO2,0,0))*CpUAhbarFuFuPR(gO1,0,0))*G0(p,MFu,MFu);
    std::complex<double> tmp_429;
    std::complex<double> tmp_430;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
@@ -14060,25 +14050,25 @@ std::complex<double> CLASSNAME::self_energy_Ah(double p , unsigned gO1, unsigned
    }
    tmp_495 += tmp_496;
    result += (2) * tmp_495;
-   result += -6*B0(p,MFb,MFb)*(Conj(CpUAhbarFbFbPR(gO2,1,1))*CpUAhbarFbFbPL(gO1
-      ,1,1) + Conj(CpUAhbarFbFbPL(gO2,1,1))*CpUAhbarFbFbPR(gO1,1,1))*Sqr(MFb);
-   result += -6*B0(p,MFc,MFc)*(Conj(CpUAhbarFcFcPR(gO2,1,1))*CpUAhbarFcFcPL(gO1
-      ,1,1) + Conj(CpUAhbarFcFcPL(gO2,1,1))*CpUAhbarFcFcPR(gO1,1,1))*Sqr(MFc);
-   result += -6*B0(p,MFd,MFd)*(Conj(CpUAhbarFdFdPR(gO2,1,1))*CpUAhbarFdFdPL(gO1
-      ,1,1) + Conj(CpUAhbarFdFdPL(gO2,1,1))*CpUAhbarFdFdPR(gO1,1,1))*Sqr(MFd);
+   result += -6*B0(p,MFb,MFb)*(Conj(CpUAhbarFbFbPR(gO2,0,0))*CpUAhbarFbFbPL(gO1
+      ,0,0) + Conj(CpUAhbarFbFbPL(gO2,0,0))*CpUAhbarFbFbPR(gO1,0,0))*Sqr(MFb);
+   result += -6*B0(p,MFc,MFc)*(Conj(CpUAhbarFcFcPR(gO2,0,0))*CpUAhbarFcFcPL(gO1
+      ,0,0) + Conj(CpUAhbarFcFcPL(gO2,0,0))*CpUAhbarFcFcPR(gO1,0,0))*Sqr(MFc);
+   result += -6*B0(p,MFd,MFd)*(Conj(CpUAhbarFdFdPR(gO2,0,0))*CpUAhbarFdFdPL(gO1
+      ,0,0) + Conj(CpUAhbarFdFdPL(gO2,0,0))*CpUAhbarFdFdPR(gO1,0,0))*Sqr(MFd);
    result += -2*B0(p,MFe,MFe)*(Conj(CpUAhbarFeFePR(gO2))*CpUAhbarFeFePL(gO1) +
       Conj(CpUAhbarFeFePL(gO2))*CpUAhbarFeFePR(gO1))*Sqr(MFe);
    result += -2*B0(p,MFm,MFm)*(Conj(CpUAhbarFmFmPR(gO2))*CpUAhbarFmFmPL(gO1) +
       Conj(CpUAhbarFmFmPL(gO2))*CpUAhbarFmFmPR(gO1))*Sqr(MFm);
-   result += -6*B0(p,MFs,MFs)*(Conj(CpUAhbarFsFsPR(gO2,1,1))*CpUAhbarFsFsPL(gO1
-      ,1,1) + Conj(CpUAhbarFsFsPL(gO2,1,1))*CpUAhbarFsFsPR(gO1,1,1))*Sqr(MFs);
-   result += -6*B0(p,MFt,MFt)*(Conj(CpUAhbarFtFtPR(gO2,1,1))*CpUAhbarFtFtPL(gO1
-      ,1,1) + Conj(CpUAhbarFtFtPL(gO2,1,1))*CpUAhbarFtFtPR(gO1,1,1))*Sqr(MFt);
+   result += -6*B0(p,MFs,MFs)*(Conj(CpUAhbarFsFsPR(gO2,0,0))*CpUAhbarFsFsPL(gO1
+      ,0,0) + Conj(CpUAhbarFsFsPL(gO2,0,0))*CpUAhbarFsFsPR(gO1,0,0))*Sqr(MFs);
+   result += -6*B0(p,MFt,MFt)*(Conj(CpUAhbarFtFtPR(gO2,0,0))*CpUAhbarFtFtPL(gO1
+      ,0,0) + Conj(CpUAhbarFtFtPL(gO2,0,0))*CpUAhbarFtFtPR(gO1,0,0))*Sqr(MFt);
    result += -2*B0(p,MFtau,MFtau)*(Conj(CpUAhbarFtauFtauPR(gO2))*
       CpUAhbarFtauFtauPL(gO1) + Conj(CpUAhbarFtauFtauPL(gO2))*CpUAhbarFtauFtauPR(
       gO1))*Sqr(MFtau);
-   result += -6*B0(p,MFu,MFu)*(Conj(CpUAhbarFuFuPR(gO2,1,1))*CpUAhbarFuFuPL(gO1
-      ,1,1) + Conj(CpUAhbarFuFuPL(gO2,1,1))*CpUAhbarFuFuPR(gO1,1,1))*Sqr(MFu);
+   result += -6*B0(p,MFu,MFu)*(Conj(CpUAhbarFuFuPR(gO2,0,0))*CpUAhbarFuFuPL(gO1
+      ,0,0) + Conj(CpUAhbarFuFuPL(gO2,0,0))*CpUAhbarFuFuPR(gO1,0,0))*Sqr(MFu);
 
    return result * oneOver16PiSqr;
 
@@ -14097,14 +14087,14 @@ std::complex<double> CLASSNAME::self_energy_Hpm(double p , unsigned gO1, unsigne
    result += 2*A0(MVZ)*CpUHpmconjUHpmVZVZ(gO1,gO2);
    result += -(B0(p,MVZ,MVWm)*CpconjUHpmbargWmCgZ(gO1)*CpUHpmgWmCbargZ(gO2));
    result += -(B0(p,MVWm,MVZ)*CpconjUHpmbargZgWm(gO1)*CpUHpmgZbargWm(gO2));
-   result += 3*(Conj(CpconjUHpmbarFcFsPL(gO2,1,1))*CpconjUHpmbarFcFsPL(gO1,1,1)
-      + Conj(CpconjUHpmbarFcFsPR(gO2,1,1))*CpconjUHpmbarFcFsPR(gO1,1,1))*G0(p,MFc
+   result += 3*(Conj(CpconjUHpmbarFcFsPL(gO2,0,0))*CpconjUHpmbarFcFsPL(gO1,0,0)
+      + Conj(CpconjUHpmbarFcFsPR(gO2,0,0))*CpconjUHpmbarFcFsPR(gO1,0,0))*G0(p,MFc
       ,MFs);
-   result += 3*(Conj(CpconjUHpmbarFtFbPL(gO2,1,1))*CpconjUHpmbarFtFbPL(gO1,1,1)
-      + Conj(CpconjUHpmbarFtFbPR(gO2,1,1))*CpconjUHpmbarFtFbPR(gO1,1,1))*G0(p,MFt
+   result += 3*(Conj(CpconjUHpmbarFtFbPL(gO2,0,0))*CpconjUHpmbarFtFbPL(gO1,0,0)
+      + Conj(CpconjUHpmbarFtFbPR(gO2,0,0))*CpconjUHpmbarFtFbPR(gO1,0,0))*G0(p,MFt
       ,MFb);
-   result += 3*(Conj(CpconjUHpmbarFuFdPL(gO2,1,1))*CpconjUHpmbarFuFdPL(gO1,1,1)
-      + Conj(CpconjUHpmbarFuFdPR(gO2,1,1))*CpconjUHpmbarFuFdPR(gO1,1,1))*G0(p,MFu
+   result += 3*(Conj(CpconjUHpmbarFuFdPL(gO2,0,0))*CpconjUHpmbarFuFdPL(gO1,0,0)
+      + Conj(CpconjUHpmbarFuFdPR(gO2,0,0))*CpconjUHpmbarFuFdPR(gO1,0,0))*G0(p,MFu
       ,MFd);
    result += (Conj(CpconjUHpmbarFveFePL(gO2))*CpconjUHpmbarFveFePL(gO1) + Conj(
       CpconjUHpmbarFveFePR(gO2))*CpconjUHpmbarFveFePR(gO1))*G0(p,MFve,MFe);
@@ -14322,15 +14312,15 @@ std::complex<double> CLASSNAME::self_energy_Hpm(double p , unsigned gO1, unsigne
          p,MHpm(gI2),MVZ);
    }
    result += tmp_546;
-   result += -6*MFc*MFs*B0(p,MFc,MFs)*(Conj(CpconjUHpmbarFcFsPR(gO2,1,1))*
-      CpconjUHpmbarFcFsPL(gO1,1,1) + Conj(CpconjUHpmbarFcFsPL(gO2,1,1))*
-      CpconjUHpmbarFcFsPR(gO1,1,1));
-   result += -6*MFb*MFt*B0(p,MFt,MFb)*(Conj(CpconjUHpmbarFtFbPR(gO2,1,1))*
-      CpconjUHpmbarFtFbPL(gO1,1,1) + Conj(CpconjUHpmbarFtFbPL(gO2,1,1))*
-      CpconjUHpmbarFtFbPR(gO1,1,1));
-   result += -6*MFd*MFu*B0(p,MFu,MFd)*(Conj(CpconjUHpmbarFuFdPR(gO2,1,1))*
-      CpconjUHpmbarFuFdPL(gO1,1,1) + Conj(CpconjUHpmbarFuFdPL(gO2,1,1))*
-      CpconjUHpmbarFuFdPR(gO1,1,1));
+   result += -6*MFc*MFs*B0(p,MFc,MFs)*(Conj(CpconjUHpmbarFcFsPR(gO2,0,0))*
+      CpconjUHpmbarFcFsPL(gO1,0,0) + Conj(CpconjUHpmbarFcFsPL(gO2,0,0))*
+      CpconjUHpmbarFcFsPR(gO1,0,0));
+   result += -6*MFb*MFt*B0(p,MFt,MFb)*(Conj(CpconjUHpmbarFtFbPR(gO2,0,0))*
+      CpconjUHpmbarFtFbPL(gO1,0,0) + Conj(CpconjUHpmbarFtFbPL(gO2,0,0))*
+      CpconjUHpmbarFtFbPR(gO1,0,0));
+   result += -6*MFd*MFu*B0(p,MFu,MFd)*(Conj(CpconjUHpmbarFuFdPR(gO2,0,0))*
+      CpconjUHpmbarFuFdPL(gO1,0,0) + Conj(CpconjUHpmbarFuFdPL(gO2,0,0))*
+      CpconjUHpmbarFuFdPR(gO1,0,0));
    result += -2*MFe*MFve*B0(p,MFve,MFe)*(Conj(CpconjUHpmbarFveFePR(gO2))*
       CpconjUHpmbarFveFePL(gO1) + Conj(CpconjUHpmbarFveFePL(gO2))*
       CpconjUHpmbarFveFePR(gO1));
@@ -15063,29 +15053,29 @@ std::complex<double> CLASSNAME::self_energy_VZ(double p ) const
    result += tmp_709;
    result += -(AbsSqr(CpVZconjVWmVWm())*(2*A0(MVWm) + 10*B00(p,MVWm,MVWm) + B0(
       p,MVWm,MVWm)*(2*Sqr(MVWm) + 4*Sqr(p))));
-   result += 3*((AbsSqr(CpVZbarFbFbPL(1,1)) + AbsSqr(CpVZbarFbFbPR(1,1)))*H0(p,
-      MFb,MFb) + 4*B0(p,MFb,MFb)*Re(Conj(CpVZbarFbFbPL(1,1))*CpVZbarFbFbPR(1,1))*
+   result += 3*((AbsSqr(CpVZbarFbFbPL(0,0)) + AbsSqr(CpVZbarFbFbPR(0,0)))*H0(p,
+      MFb,MFb) + 4*B0(p,MFb,MFb)*Re(Conj(CpVZbarFbFbPL(0,0))*CpVZbarFbFbPR(0,0))*
       Sqr(MFb));
-   result += 3*((AbsSqr(CpVZbarFcFcPL(1,1)) + AbsSqr(CpVZbarFcFcPR(1,1)))*H0(p,
-      MFc,MFc) + 4*B0(p,MFc,MFc)*Re(Conj(CpVZbarFcFcPL(1,1))*CpVZbarFcFcPR(1,1))*
+   result += 3*((AbsSqr(CpVZbarFcFcPL(0,0)) + AbsSqr(CpVZbarFcFcPR(0,0)))*H0(p,
+      MFc,MFc) + 4*B0(p,MFc,MFc)*Re(Conj(CpVZbarFcFcPL(0,0))*CpVZbarFcFcPR(0,0))*
       Sqr(MFc));
-   result += 3*((AbsSqr(CpVZbarFdFdPL(1,1)) + AbsSqr(CpVZbarFdFdPR(1,1)))*H0(p,
-      MFd,MFd) + 4*B0(p,MFd,MFd)*Re(Conj(CpVZbarFdFdPL(1,1))*CpVZbarFdFdPR(1,1))*
+   result += 3*((AbsSqr(CpVZbarFdFdPL(0,0)) + AbsSqr(CpVZbarFdFdPR(0,0)))*H0(p,
+      MFd,MFd) + 4*B0(p,MFd,MFd)*Re(Conj(CpVZbarFdFdPL(0,0))*CpVZbarFdFdPR(0,0))*
       Sqr(MFd));
    result += 4*B0(p,MFe,MFe)*Re(Conj(CpVZbarFeFePL())*CpVZbarFeFePR())*Sqr(MFe)
       ;
    result += 4*B0(p,MFm,MFm)*Re(Conj(CpVZbarFmFmPL())*CpVZbarFmFmPR())*Sqr(MFm)
       ;
-   result += 3*((AbsSqr(CpVZbarFsFsPL(1,1)) + AbsSqr(CpVZbarFsFsPR(1,1)))*H0(p,
-      MFs,MFs) + 4*B0(p,MFs,MFs)*Re(Conj(CpVZbarFsFsPL(1,1))*CpVZbarFsFsPR(1,1))*
+   result += 3*((AbsSqr(CpVZbarFsFsPL(0,0)) + AbsSqr(CpVZbarFsFsPR(0,0)))*H0(p,
+      MFs,MFs) + 4*B0(p,MFs,MFs)*Re(Conj(CpVZbarFsFsPL(0,0))*CpVZbarFsFsPR(0,0))*
       Sqr(MFs));
    result += 4*B0(p,MFtau,MFtau)*Re(Conj(CpVZbarFtauFtauPL())*CpVZbarFtauFtauPR
       ())*Sqr(MFtau);
-   result += 3*((AbsSqr(CpVZbarFtFtPL(1,1)) + AbsSqr(CpVZbarFtFtPR(1,1)))*H0(p,
-      MFt,MFt) + 4*B0(p,MFt,MFt)*Re(Conj(CpVZbarFtFtPL(1,1))*CpVZbarFtFtPR(1,1))*
+   result += 3*((AbsSqr(CpVZbarFtFtPL(0,0)) + AbsSqr(CpVZbarFtFtPR(0,0)))*H0(p,
+      MFt,MFt) + 4*B0(p,MFt,MFt)*Re(Conj(CpVZbarFtFtPL(0,0))*CpVZbarFtFtPR(0,0))*
       Sqr(MFt));
-   result += 3*((AbsSqr(CpVZbarFuFuPL(1,1)) + AbsSqr(CpVZbarFuFuPR(1,1)))*H0(p,
-      MFu,MFu) + 4*B0(p,MFu,MFu)*Re(Conj(CpVZbarFuFuPL(1,1))*CpVZbarFuFuPR(1,1))*
+   result += 3*((AbsSqr(CpVZbarFuFuPL(0,0)) + AbsSqr(CpVZbarFuFuPR(0,0)))*H0(p,
+      MFu,MFu) + 4*B0(p,MFu,MFu)*Re(Conj(CpVZbarFuFuPL(0,0))*CpVZbarFuFuPR(0,0))*
       Sqr(MFu));
    result += 4*B0(p,MFve,MFve)*Re(Conj(CpVZbarFveFvePL())*CpVZbarFveFvePR())*
       Sqr(MFve);
@@ -15308,15 +15298,15 @@ std::complex<double> CLASSNAME::self_energy_VWm(double p ) const
       MVWm,0)*(Sqr(MVWm) + 4*Sqr(p))));
    result += -(AbsSqr(CpconjVWmVZVWm())*(A0(MVWm) + A0(MVZ) + 10*B00(p,MVZ,MVWm
       ) + B0(p,MVZ,MVWm)*(Sqr(MVWm) + Sqr(MVZ) + 4*Sqr(p))));
-   result += 3*((AbsSqr(CpconjVWmbarFcFsPL(1,1)) + AbsSqr(CpconjVWmbarFcFsPR(1,
-      1)))*H0(p,MFc,MFs) + 4*MFc*MFs*B0(p,MFc,MFs)*Re(Conj(CpconjVWmbarFcFsPL(1,1)
-      )*CpconjVWmbarFcFsPR(1,1)));
-   result += 3*((AbsSqr(CpconjVWmbarFtFbPL(1,1)) + AbsSqr(CpconjVWmbarFtFbPR(1,
-      1)))*H0(p,MFt,MFb) + 4*MFb*MFt*B0(p,MFt,MFb)*Re(Conj(CpconjVWmbarFtFbPL(1,1)
-      )*CpconjVWmbarFtFbPR(1,1)));
-   result += 3*((AbsSqr(CpconjVWmbarFuFdPL(1,1)) + AbsSqr(CpconjVWmbarFuFdPR(1,
-      1)))*H0(p,MFu,MFd) + 4*MFd*MFu*B0(p,MFu,MFd)*Re(Conj(CpconjVWmbarFuFdPL(1,1)
-      )*CpconjVWmbarFuFdPR(1,1)));
+   result += 3*((AbsSqr(CpconjVWmbarFcFsPL(0,0)) + AbsSqr(CpconjVWmbarFcFsPR(0,
+      0)))*H0(p,MFc,MFs) + 4*MFc*MFs*B0(p,MFc,MFs)*Re(Conj(CpconjVWmbarFcFsPL(0,0)
+      )*CpconjVWmbarFcFsPR(0,0)));
+   result += 3*((AbsSqr(CpconjVWmbarFtFbPL(0,0)) + AbsSqr(CpconjVWmbarFtFbPR(0,
+      0)))*H0(p,MFt,MFb) + 4*MFb*MFt*B0(p,MFt,MFb)*Re(Conj(CpconjVWmbarFtFbPL(0,0)
+      )*CpconjVWmbarFtFbPR(0,0)));
+   result += 3*((AbsSqr(CpconjVWmbarFuFdPL(0,0)) + AbsSqr(CpconjVWmbarFuFdPR(0,
+      0)))*H0(p,MFu,MFd) + 4*MFd*MFu*B0(p,MFu,MFd)*Re(Conj(CpconjVWmbarFuFdPL(0,0)
+      )*CpconjVWmbarFuFdPR(0,0)));
    result += 4*MFe*MFve*B0(p,MFve,MFe)*Re(Conj(CpconjVWmbarFveFePL())*
       CpconjVWmbarFveFePR());
    result += 4*MFm*MFvm*B0(p,MFvm,MFm)*Re(Conj(CpconjVWmbarFvmFmPL())*
@@ -15385,24 +15375,24 @@ std::complex<double> CLASSNAME::self_energy_Chi_1(double p , unsigned gO1, unsig
    std::complex<double> tmp_768;
    std::complex<double> tmp_769;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_769 += B0(p,MFb,MSb(gI1))*Conj(CpUChiconjSbFbPL(gO2,gI1,1))*
-         CpUChiconjSbFbPR(gO1,gI1,1);
+      tmp_769 += B0(p,MFb,MSb(gI1))*Conj(CpUChiconjSbFbPL(gO2,gI1,0))*
+         CpUChiconjSbFbPR(gO1,gI1,0);
    }
    tmp_768 += tmp_769;
    result += (6*MFb) * tmp_768;
    std::complex<double> tmp_770;
    std::complex<double> tmp_771;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_771 += B0(p,MFc,MSc(gI1))*Conj(CpUChiconjScFcPL(gO2,gI1,1))*
-         CpUChiconjScFcPR(gO1,gI1,1);
+      tmp_771 += B0(p,MFc,MSc(gI1))*Conj(CpUChiconjScFcPL(gO2,gI1,0))*
+         CpUChiconjScFcPR(gO1,gI1,0);
    }
    tmp_770 += tmp_771;
    result += (6*MFc) * tmp_770;
    std::complex<double> tmp_772;
    std::complex<double> tmp_773;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_773 += B0(p,MFd,MSd(gI1))*Conj(CpUChiconjSdFdPL(gO2,gI1,1))*
-         CpUChiconjSdFdPR(gO1,gI1,1);
+      tmp_773 += B0(p,MFd,MSd(gI1))*Conj(CpUChiconjSdFdPL(gO2,gI1,0))*
+         CpUChiconjSdFdPR(gO1,gI1,0);
    }
    tmp_772 += tmp_773;
    result += (6*MFd) * tmp_772;
@@ -15425,16 +15415,16 @@ std::complex<double> CLASSNAME::self_energy_Chi_1(double p , unsigned gO1, unsig
    std::complex<double> tmp_778;
    std::complex<double> tmp_779;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_779 += B0(p,MFs,MSs(gI1))*Conj(CpUChiconjSsFsPL(gO2,gI1,1))*
-         CpUChiconjSsFsPR(gO1,gI1,1);
+      tmp_779 += B0(p,MFs,MSs(gI1))*Conj(CpUChiconjSsFsPL(gO2,gI1,0))*
+         CpUChiconjSsFsPR(gO1,gI1,0);
    }
    tmp_778 += tmp_779;
    result += (6*MFs) * tmp_778;
    std::complex<double> tmp_780;
    std::complex<double> tmp_781;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_781 += B0(p,MFt,MSt(gI1))*Conj(CpUChiconjStFtPL(gO2,gI1,1))*
-         CpUChiconjStFtPR(gO1,gI1,1);
+      tmp_781 += B0(p,MFt,MSt(gI1))*Conj(CpUChiconjStFtPL(gO2,gI1,0))*
+         CpUChiconjStFtPR(gO1,gI1,0);
    }
    tmp_780 += tmp_781;
    result += (6*MFt) * tmp_780;
@@ -15449,8 +15439,8 @@ std::complex<double> CLASSNAME::self_energy_Chi_1(double p , unsigned gO1, unsig
    std::complex<double> tmp_784;
    std::complex<double> tmp_785;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_785 += B0(p,MFu,MSu(gI1))*Conj(CpUChiconjSuFuPL(gO2,gI1,1))*
-         CpUChiconjSuFuPR(gO1,gI1,1);
+      tmp_785 += B0(p,MFu,MSu(gI1))*Conj(CpUChiconjSuFuPL(gO2,gI1,0))*
+         CpUChiconjSuFuPR(gO1,gI1,0);
    }
    tmp_784 += tmp_785;
    result += (6*MFu) * tmp_784;
@@ -15478,24 +15468,24 @@ std::complex<double> CLASSNAME::self_energy_Chi_PR(double p , unsigned gO1, unsi
    std::complex<double> tmp_786;
    std::complex<double> tmp_787;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_787 += B1(p,MFb,MSb(gI1))*Conj(CpUChiconjSbFbPR(gO2,gI1,1))*
-         CpUChiconjSbFbPR(gO1,gI1,1);
+      tmp_787 += B1(p,MFb,MSb(gI1))*Conj(CpUChiconjSbFbPR(gO2,gI1,0))*
+         CpUChiconjSbFbPR(gO1,gI1,0);
    }
    tmp_786 += tmp_787;
    result += (-3) * tmp_786;
    std::complex<double> tmp_788;
    std::complex<double> tmp_789;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_789 += B1(p,MFc,MSc(gI1))*Conj(CpUChiconjScFcPR(gO2,gI1,1))*
-         CpUChiconjScFcPR(gO1,gI1,1);
+      tmp_789 += B1(p,MFc,MSc(gI1))*Conj(CpUChiconjScFcPR(gO2,gI1,0))*
+         CpUChiconjScFcPR(gO1,gI1,0);
    }
    tmp_788 += tmp_789;
    result += (-3) * tmp_788;
    std::complex<double> tmp_790;
    std::complex<double> tmp_791;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_791 += B1(p,MFd,MSd(gI1))*Conj(CpUChiconjSdFdPR(gO2,gI1,1))*
-         CpUChiconjSdFdPR(gO1,gI1,1);
+      tmp_791 += B1(p,MFd,MSd(gI1))*Conj(CpUChiconjSdFdPR(gO2,gI1,0))*
+         CpUChiconjSdFdPR(gO1,gI1,0);
    }
    tmp_790 += tmp_791;
    result += (-3) * tmp_790;
@@ -15518,8 +15508,8 @@ std::complex<double> CLASSNAME::self_energy_Chi_PR(double p , unsigned gO1, unsi
    std::complex<double> tmp_796;
    std::complex<double> tmp_797;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_797 += B1(p,MFs,MSs(gI1))*Conj(CpUChiconjSsFsPR(gO2,gI1,1))*
-         CpUChiconjSsFsPR(gO1,gI1,1);
+      tmp_797 += B1(p,MFs,MSs(gI1))*Conj(CpUChiconjSsFsPR(gO2,gI1,0))*
+         CpUChiconjSsFsPR(gO1,gI1,0);
    }
    tmp_796 += tmp_797;
    result += (-3) * tmp_796;
@@ -15534,16 +15524,16 @@ std::complex<double> CLASSNAME::self_energy_Chi_PR(double p , unsigned gO1, unsi
    std::complex<double> tmp_800;
    std::complex<double> tmp_801;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_801 += B1(p,MFt,MSt(gI1))*Conj(CpUChiconjStFtPR(gO2,gI1,1))*
-         CpUChiconjStFtPR(gO1,gI1,1);
+      tmp_801 += B1(p,MFt,MSt(gI1))*Conj(CpUChiconjStFtPR(gO2,gI1,0))*
+         CpUChiconjStFtPR(gO1,gI1,0);
    }
    tmp_800 += tmp_801;
    result += (-3) * tmp_800;
    std::complex<double> tmp_802;
    std::complex<double> tmp_803;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_803 += B1(p,MFu,MSu(gI1))*Conj(CpUChiconjSuFuPR(gO2,gI1,1))*
-         CpUChiconjSuFuPR(gO1,gI1,1);
+      tmp_803 += B1(p,MFu,MSu(gI1))*Conj(CpUChiconjSuFuPR(gO2,gI1,0))*
+         CpUChiconjSuFuPR(gO1,gI1,0);
    }
    tmp_802 += tmp_803;
    result += (-3) * tmp_802;
@@ -15617,24 +15607,24 @@ std::complex<double> CLASSNAME::self_energy_Chi_PL(double p , unsigned gO1, unsi
    std::complex<double> tmp_817;
    std::complex<double> tmp_818;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_818 += B1(p,MFb,MSb(gI1))*Conj(CpUChiconjSbFbPL(gO2,gI1,1))*
-         CpUChiconjSbFbPL(gO1,gI1,1);
+      tmp_818 += B1(p,MFb,MSb(gI1))*Conj(CpUChiconjSbFbPL(gO2,gI1,0))*
+         CpUChiconjSbFbPL(gO1,gI1,0);
    }
    tmp_817 += tmp_818;
    result += (-3) * tmp_817;
    std::complex<double> tmp_819;
    std::complex<double> tmp_820;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_820 += B1(p,MFc,MSc(gI1))*Conj(CpUChiconjScFcPL(gO2,gI1,1))*
-         CpUChiconjScFcPL(gO1,gI1,1);
+      tmp_820 += B1(p,MFc,MSc(gI1))*Conj(CpUChiconjScFcPL(gO2,gI1,0))*
+         CpUChiconjScFcPL(gO1,gI1,0);
    }
    tmp_819 += tmp_820;
    result += (-3) * tmp_819;
    std::complex<double> tmp_821;
    std::complex<double> tmp_822;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_822 += B1(p,MFd,MSd(gI1))*Conj(CpUChiconjSdFdPL(gO2,gI1,1))*
-         CpUChiconjSdFdPL(gO1,gI1,1);
+      tmp_822 += B1(p,MFd,MSd(gI1))*Conj(CpUChiconjSdFdPL(gO2,gI1,0))*
+         CpUChiconjSdFdPL(gO1,gI1,0);
    }
    tmp_821 += tmp_822;
    result += (-3) * tmp_821;
@@ -15657,8 +15647,8 @@ std::complex<double> CLASSNAME::self_energy_Chi_PL(double p , unsigned gO1, unsi
    std::complex<double> tmp_827;
    std::complex<double> tmp_828;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_828 += B1(p,MFs,MSs(gI1))*Conj(CpUChiconjSsFsPL(gO2,gI1,1))*
-         CpUChiconjSsFsPL(gO1,gI1,1);
+      tmp_828 += B1(p,MFs,MSs(gI1))*Conj(CpUChiconjSsFsPL(gO2,gI1,0))*
+         CpUChiconjSsFsPL(gO1,gI1,0);
    }
    tmp_827 += tmp_828;
    result += (-3) * tmp_827;
@@ -15673,16 +15663,16 @@ std::complex<double> CLASSNAME::self_energy_Chi_PL(double p , unsigned gO1, unsi
    std::complex<double> tmp_831;
    std::complex<double> tmp_832;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_832 += B1(p,MFt,MSt(gI1))*Conj(CpUChiconjStFtPL(gO2,gI1,1))*
-         CpUChiconjStFtPL(gO1,gI1,1);
+      tmp_832 += B1(p,MFt,MSt(gI1))*Conj(CpUChiconjStFtPL(gO2,gI1,0))*
+         CpUChiconjStFtPL(gO1,gI1,0);
    }
    tmp_831 += tmp_832;
    result += (-3) * tmp_831;
    std::complex<double> tmp_833;
    std::complex<double> tmp_834;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_834 += B1(p,MFu,MSu(gI1))*Conj(CpUChiconjSuFuPL(gO2,gI1,1))*
-         CpUChiconjSuFuPL(gO1,gI1,1);
+      tmp_834 += B1(p,MFu,MSu(gI1))*Conj(CpUChiconjSuFuPL(gO2,gI1,0))*
+         CpUChiconjSuFuPL(gO1,gI1,0);
    }
    tmp_833 += tmp_834;
    result += (-3) * tmp_833;
@@ -15806,24 +15796,24 @@ std::complex<double> CLASSNAME::self_energy_Cha_1(double p , unsigned gO1, unsig
    std::complex<double> tmp_861;
    std::complex<double> tmp_862;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_862 += B0(p,MFb,MSt(gI1))*Conj(CpbarUChaconjStFbPL(gO2,gI1,1))*
-         CpbarUChaconjStFbPR(gO1,gI1,1);
+      tmp_862 += B0(p,MFb,MSt(gI1))*Conj(CpbarUChaconjStFbPL(gO2,gI1,0))*
+         CpbarUChaconjStFbPR(gO1,gI1,0);
    }
    tmp_861 += tmp_862;
    result += (3*MFb) * tmp_861;
    std::complex<double> tmp_863;
    std::complex<double> tmp_864;
    for (unsigned gI2 = 0; gI2 < 2; ++gI2) {
-      tmp_864 += B0(p,MFc,MSs(gI2))*Conj(CpbarUChabarFcSsPL(gO2,1,gI2))*
-         CpbarUChabarFcSsPR(gO1,1,gI2);
+      tmp_864 += B0(p,MFc,MSs(gI2))*Conj(CpbarUChabarFcSsPL(gO2,0,gI2))*
+         CpbarUChabarFcSsPR(gO1,0,gI2);
    }
    tmp_863 += tmp_864;
    result += (3*MFc) * tmp_863;
    std::complex<double> tmp_865;
    std::complex<double> tmp_866;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_866 += B0(p,MFd,MSu(gI1))*Conj(CpbarUChaconjSuFdPL(gO2,gI1,1))*
-         CpbarUChaconjSuFdPR(gO1,gI1,1);
+      tmp_866 += B0(p,MFd,MSu(gI1))*Conj(CpbarUChaconjSuFdPL(gO2,gI1,0))*
+         CpbarUChaconjSuFdPR(gO1,gI1,0);
    }
    tmp_865 += tmp_866;
    result += (3*MFd) * tmp_865;
@@ -15834,16 +15824,16 @@ std::complex<double> CLASSNAME::self_energy_Cha_1(double p , unsigned gO1, unsig
    std::complex<double> tmp_867;
    std::complex<double> tmp_868;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_868 += B0(p,MFs,MSc(gI1))*Conj(CpbarUChaconjScFsPL(gO2,gI1,1))*
-         CpbarUChaconjScFsPR(gO1,gI1,1);
+      tmp_868 += B0(p,MFs,MSc(gI1))*Conj(CpbarUChaconjScFsPL(gO2,gI1,0))*
+         CpbarUChaconjScFsPR(gO1,gI1,0);
    }
    tmp_867 += tmp_868;
    result += (3*MFs) * tmp_867;
    std::complex<double> tmp_869;
    std::complex<double> tmp_870;
    for (unsigned gI2 = 0; gI2 < 2; ++gI2) {
-      tmp_870 += B0(p,MFt,MSb(gI2))*Conj(CpbarUChabarFtSbPL(gO2,1,gI2))*
-         CpbarUChabarFtSbPR(gO1,1,gI2);
+      tmp_870 += B0(p,MFt,MSb(gI2))*Conj(CpbarUChabarFtSbPL(gO2,0,gI2))*
+         CpbarUChabarFtSbPR(gO1,0,gI2);
    }
    tmp_869 += tmp_870;
    result += (3*MFt) * tmp_869;
@@ -15852,8 +15842,8 @@ std::complex<double> CLASSNAME::self_energy_Cha_1(double p , unsigned gO1, unsig
    std::complex<double> tmp_871;
    std::complex<double> tmp_872;
    for (unsigned gI2 = 0; gI2 < 2; ++gI2) {
-      tmp_872 += B0(p,MFu,MSd(gI2))*Conj(CpbarUChabarFuSdPL(gO2,1,gI2))*
-         CpbarUChabarFuSdPR(gO1,1,gI2);
+      tmp_872 += B0(p,MFu,MSd(gI2))*Conj(CpbarUChabarFuSdPL(gO2,0,gI2))*
+         CpbarUChabarFuSdPR(gO1,0,gI2);
    }
    tmp_871 += tmp_872;
    result += (3*MFu) * tmp_871;
@@ -15899,24 +15889,24 @@ std::complex<double> CLASSNAME::self_energy_Cha_PR(double p , unsigned gO1, unsi
    std::complex<double> tmp_879;
    std::complex<double> tmp_880;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_880 += B1(p,MFs,MSc(gI1))*Conj(CpbarUChaconjScFsPR(gO2,gI1,1))*
-         CpbarUChaconjScFsPR(gO1,gI1,1);
+      tmp_880 += B1(p,MFs,MSc(gI1))*Conj(CpbarUChaconjScFsPR(gO2,gI1,0))*
+         CpbarUChaconjScFsPR(gO1,gI1,0);
    }
    tmp_879 += tmp_880;
    result += (-1.5) * tmp_879;
    std::complex<double> tmp_881;
    std::complex<double> tmp_882;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_882 += B1(p,MFb,MSt(gI1))*Conj(CpbarUChaconjStFbPR(gO2,gI1,1))*
-         CpbarUChaconjStFbPR(gO1,gI1,1);
+      tmp_882 += B1(p,MFb,MSt(gI1))*Conj(CpbarUChaconjStFbPR(gO2,gI1,0))*
+         CpbarUChaconjStFbPR(gO1,gI1,0);
    }
    tmp_881 += tmp_882;
    result += (-1.5) * tmp_881;
    std::complex<double> tmp_883;
    std::complex<double> tmp_884;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_884 += B1(p,MFd,MSu(gI1))*Conj(CpbarUChaconjSuFdPR(gO2,gI1,1))*
-         CpbarUChaconjSuFdPR(gO1,gI1,1);
+      tmp_884 += B1(p,MFd,MSu(gI1))*Conj(CpbarUChaconjSuFdPR(gO2,gI1,0))*
+         CpbarUChaconjSuFdPR(gO1,gI1,0);
    }
    tmp_883 += tmp_884;
    result += (-1.5) * tmp_883;
@@ -15959,24 +15949,24 @@ std::complex<double> CLASSNAME::self_energy_Cha_PR(double p , unsigned gO1, unsi
    std::complex<double> tmp_894;
    std::complex<double> tmp_895;
    for (unsigned gI2 = 0; gI2 < 2; ++gI2) {
-      tmp_895 += B1(p,MFc,MSs(gI2))*Conj(CpbarUChabarFcSsPR(gO2,1,gI2))*
-         CpbarUChabarFcSsPR(gO1,1,gI2);
+      tmp_895 += B1(p,MFc,MSs(gI2))*Conj(CpbarUChabarFcSsPR(gO2,0,gI2))*
+         CpbarUChabarFcSsPR(gO1,0,gI2);
    }
    tmp_894 += tmp_895;
    result += (-1.5) * tmp_894;
    std::complex<double> tmp_896;
    std::complex<double> tmp_897;
    for (unsigned gI2 = 0; gI2 < 2; ++gI2) {
-      tmp_897 += B1(p,MFt,MSb(gI2))*Conj(CpbarUChabarFtSbPR(gO2,1,gI2))*
-         CpbarUChabarFtSbPR(gO1,1,gI2);
+      tmp_897 += B1(p,MFt,MSb(gI2))*Conj(CpbarUChabarFtSbPR(gO2,0,gI2))*
+         CpbarUChabarFtSbPR(gO1,0,gI2);
    }
    tmp_896 += tmp_897;
    result += (-1.5) * tmp_896;
    std::complex<double> tmp_898;
    std::complex<double> tmp_899;
    for (unsigned gI2 = 0; gI2 < 2; ++gI2) {
-      tmp_899 += B1(p,MFu,MSd(gI2))*Conj(CpbarUChabarFuSdPR(gO2,1,gI2))*
-         CpbarUChabarFuSdPR(gO1,1,gI2);
+      tmp_899 += B1(p,MFu,MSd(gI2))*Conj(CpbarUChabarFuSdPR(gO2,0,gI2))*
+         CpbarUChabarFuSdPR(gO1,0,gI2);
    }
    tmp_898 += tmp_899;
    result += (-1.5) * tmp_898;
@@ -16046,24 +16036,24 @@ std::complex<double> CLASSNAME::self_energy_Cha_PL(double p , unsigned gO1, unsi
    std::complex<double> tmp_912;
    std::complex<double> tmp_913;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_913 += B1(p,MFs,MSc(gI1))*Conj(CpbarUChaconjScFsPL(gO2,gI1,1))*
-         CpbarUChaconjScFsPL(gO1,gI1,1);
+      tmp_913 += B1(p,MFs,MSc(gI1))*Conj(CpbarUChaconjScFsPL(gO2,gI1,0))*
+         CpbarUChaconjScFsPL(gO1,gI1,0);
    }
    tmp_912 += tmp_913;
    result += (-1.5) * tmp_912;
    std::complex<double> tmp_914;
    std::complex<double> tmp_915;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_915 += B1(p,MFb,MSt(gI1))*Conj(CpbarUChaconjStFbPL(gO2,gI1,1))*
-         CpbarUChaconjStFbPL(gO1,gI1,1);
+      tmp_915 += B1(p,MFb,MSt(gI1))*Conj(CpbarUChaconjStFbPL(gO2,gI1,0))*
+         CpbarUChaconjStFbPL(gO1,gI1,0);
    }
    tmp_914 += tmp_915;
    result += (-1.5) * tmp_914;
    std::complex<double> tmp_916;
    std::complex<double> tmp_917;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_917 += B1(p,MFd,MSu(gI1))*Conj(CpbarUChaconjSuFdPL(gO2,gI1,1))*
-         CpbarUChaconjSuFdPL(gO1,gI1,1);
+      tmp_917 += B1(p,MFd,MSu(gI1))*Conj(CpbarUChaconjSuFdPL(gO2,gI1,0))*
+         CpbarUChaconjSuFdPL(gO1,gI1,0);
    }
    tmp_916 += tmp_917;
    result += (-1.5) * tmp_916;
@@ -16106,24 +16096,24 @@ std::complex<double> CLASSNAME::self_energy_Cha_PL(double p , unsigned gO1, unsi
    std::complex<double> tmp_927;
    std::complex<double> tmp_928;
    for (unsigned gI2 = 0; gI2 < 2; ++gI2) {
-      tmp_928 += B1(p,MFc,MSs(gI2))*Conj(CpbarUChabarFcSsPL(gO2,1,gI2))*
-         CpbarUChabarFcSsPL(gO1,1,gI2);
+      tmp_928 += B1(p,MFc,MSs(gI2))*Conj(CpbarUChabarFcSsPL(gO2,0,gI2))*
+         CpbarUChabarFcSsPL(gO1,0,gI2);
    }
    tmp_927 += tmp_928;
    result += (-1.5) * tmp_927;
    std::complex<double> tmp_929;
    std::complex<double> tmp_930;
    for (unsigned gI2 = 0; gI2 < 2; ++gI2) {
-      tmp_930 += B1(p,MFt,MSb(gI2))*Conj(CpbarUChabarFtSbPL(gO2,1,gI2))*
-         CpbarUChabarFtSbPL(gO1,1,gI2);
+      tmp_930 += B1(p,MFt,MSb(gI2))*Conj(CpbarUChabarFtSbPL(gO2,0,gI2))*
+         CpbarUChabarFtSbPL(gO1,0,gI2);
    }
    tmp_929 += tmp_930;
    result += (-1.5) * tmp_929;
    std::complex<double> tmp_931;
    std::complex<double> tmp_932;
    for (unsigned gI2 = 0; gI2 < 2; ++gI2) {
-      tmp_932 += B1(p,MFu,MSd(gI2))*Conj(CpbarUChabarFuSdPL(gO2,1,gI2))*
-         CpbarUChabarFuSdPL(gO1,1,gI2);
+      tmp_932 += B1(p,MFu,MSd(gI2))*Conj(CpbarUChabarFuSdPL(gO2,0,gI2))*
+         CpbarUChabarFuSdPL(gO1,0,gI2);
    }
    tmp_931 += tmp_932;
    result += (-1.5) * tmp_931;
@@ -16187,48 +16177,48 @@ std::complex<double> CLASSNAME::self_energy_Glu_1(double p ) const
    std::complex<double> tmp_945;
    std::complex<double> tmp_946;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_946 += B0(p,MFb,MSb(gI1))*Conj(CpGluconjSbFbPL(gI1,1))*
-         CpGluconjSbFbPR(gI1,1);
+      tmp_946 += B0(p,MFb,MSb(gI1))*Conj(CpGluconjSbFbPL(gI1,0))*
+         CpGluconjSbFbPR(gI1,0);
    }
    tmp_945 += tmp_946;
    result += (MFb) * tmp_945;
    std::complex<double> tmp_947;
    std::complex<double> tmp_948;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_948 += B0(p,MFc,MSc(gI1))*Conj(CpGluconjScFcPL(gI1,1))*
-         CpGluconjScFcPR(gI1,1);
+      tmp_948 += B0(p,MFc,MSc(gI1))*Conj(CpGluconjScFcPL(gI1,0))*
+         CpGluconjScFcPR(gI1,0);
    }
    tmp_947 += tmp_948;
    result += (MFc) * tmp_947;
    std::complex<double> tmp_949;
    std::complex<double> tmp_950;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_950 += B0(p,MFd,MSd(gI1))*Conj(CpGluconjSdFdPL(gI1,1))*
-         CpGluconjSdFdPR(gI1,1);
+      tmp_950 += B0(p,MFd,MSd(gI1))*Conj(CpGluconjSdFdPL(gI1,0))*
+         CpGluconjSdFdPR(gI1,0);
    }
    tmp_949 += tmp_950;
    result += (MFd) * tmp_949;
    std::complex<double> tmp_951;
    std::complex<double> tmp_952;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_952 += B0(p,MFs,MSs(gI1))*Conj(CpGluconjSsFsPL(gI1,1))*
-         CpGluconjSsFsPR(gI1,1);
+      tmp_952 += B0(p,MFs,MSs(gI1))*Conj(CpGluconjSsFsPL(gI1,0))*
+         CpGluconjSsFsPR(gI1,0);
    }
    tmp_951 += tmp_952;
    result += (MFs) * tmp_951;
    std::complex<double> tmp_953;
    std::complex<double> tmp_954;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_954 += B0(p,MFt,MSt(gI1))*Conj(CpGluconjStFtPL(gI1,1))*
-         CpGluconjStFtPR(gI1,1);
+      tmp_954 += B0(p,MFt,MSt(gI1))*Conj(CpGluconjStFtPL(gI1,0))*
+         CpGluconjStFtPR(gI1,0);
    }
    tmp_953 += tmp_954;
    result += (MFt) * tmp_953;
    std::complex<double> tmp_955;
    std::complex<double> tmp_956;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_956 += B0(p,MFu,MSu(gI1))*Conj(CpGluconjSuFuPL(gI1,1))*
-         CpGluconjSuFuPR(gI1,1);
+      tmp_956 += B0(p,MFu,MSu(gI1))*Conj(CpGluconjSuFuPL(gI1,0))*
+         CpGluconjSuFuPR(gI1,0);
    }
    tmp_955 += tmp_956;
    result += (MFu) * tmp_955;
@@ -16246,42 +16236,42 @@ std::complex<double> CLASSNAME::self_energy_Glu_PR(double p ) const
    std::complex<double> tmp_957;
    std::complex<double> tmp_958;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_958 += AbsSqr(CpGluconjSbFbPR(gI1,1))*B1(p,MFb,MSb(gI1));
+      tmp_958 += AbsSqr(CpGluconjSbFbPR(gI1,0))*B1(p,MFb,MSb(gI1));
    }
    tmp_957 += tmp_958;
    result += (-0.5) * tmp_957;
    std::complex<double> tmp_959;
    std::complex<double> tmp_960;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_960 += AbsSqr(CpGluconjScFcPR(gI1,1))*B1(p,MFc,MSc(gI1));
+      tmp_960 += AbsSqr(CpGluconjScFcPR(gI1,0))*B1(p,MFc,MSc(gI1));
    }
    tmp_959 += tmp_960;
    result += (-0.5) * tmp_959;
    std::complex<double> tmp_961;
    std::complex<double> tmp_962;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_962 += AbsSqr(CpGluconjSdFdPR(gI1,1))*B1(p,MFd,MSd(gI1));
+      tmp_962 += AbsSqr(CpGluconjSdFdPR(gI1,0))*B1(p,MFd,MSd(gI1));
    }
    tmp_961 += tmp_962;
    result += (-0.5) * tmp_961;
    std::complex<double> tmp_963;
    std::complex<double> tmp_964;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_964 += AbsSqr(CpGluconjSsFsPR(gI1,1))*B1(p,MFs,MSs(gI1));
+      tmp_964 += AbsSqr(CpGluconjSsFsPR(gI1,0))*B1(p,MFs,MSs(gI1));
    }
    tmp_963 += tmp_964;
    result += (-0.5) * tmp_963;
    std::complex<double> tmp_965;
    std::complex<double> tmp_966;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_966 += AbsSqr(CpGluconjStFtPR(gI1,1))*B1(p,MFt,MSt(gI1));
+      tmp_966 += AbsSqr(CpGluconjStFtPR(gI1,0))*B1(p,MFt,MSt(gI1));
    }
    tmp_965 += tmp_966;
    result += (-0.5) * tmp_965;
    std::complex<double> tmp_967;
    std::complex<double> tmp_968;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_968 += AbsSqr(CpGluconjSuFuPR(gI1,1))*B1(p,MFu,MSu(gI1));
+      tmp_968 += AbsSqr(CpGluconjSuFuPR(gI1,0))*B1(p,MFu,MSu(gI1));
    }
    tmp_967 += tmp_968;
    result += (-0.5) * tmp_967;
@@ -16298,42 +16288,42 @@ std::complex<double> CLASSNAME::self_energy_Glu_PL(double p ) const
    std::complex<double> tmp_969;
    std::complex<double> tmp_970;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_970 += AbsSqr(CpGluconjSbFbPL(gI1,1))*B1(p,MFb,MSb(gI1));
+      tmp_970 += AbsSqr(CpGluconjSbFbPL(gI1,0))*B1(p,MFb,MSb(gI1));
    }
    tmp_969 += tmp_970;
    result += (-0.5) * tmp_969;
    std::complex<double> tmp_971;
    std::complex<double> tmp_972;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_972 += AbsSqr(CpGluconjScFcPL(gI1,1))*B1(p,MFc,MSc(gI1));
+      tmp_972 += AbsSqr(CpGluconjScFcPL(gI1,0))*B1(p,MFc,MSc(gI1));
    }
    tmp_971 += tmp_972;
    result += (-0.5) * tmp_971;
    std::complex<double> tmp_973;
    std::complex<double> tmp_974;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_974 += AbsSqr(CpGluconjSdFdPL(gI1,1))*B1(p,MFd,MSd(gI1));
+      tmp_974 += AbsSqr(CpGluconjSdFdPL(gI1,0))*B1(p,MFd,MSd(gI1));
    }
    tmp_973 += tmp_974;
    result += (-0.5) * tmp_973;
    std::complex<double> tmp_975;
    std::complex<double> tmp_976;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_976 += AbsSqr(CpGluconjSsFsPL(gI1,1))*B1(p,MFs,MSs(gI1));
+      tmp_976 += AbsSqr(CpGluconjSsFsPL(gI1,0))*B1(p,MFs,MSs(gI1));
    }
    tmp_975 += tmp_976;
    result += (-0.5) * tmp_975;
    std::complex<double> tmp_977;
    std::complex<double> tmp_978;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_978 += AbsSqr(CpGluconjStFtPL(gI1,1))*B1(p,MFt,MSt(gI1));
+      tmp_978 += AbsSqr(CpGluconjStFtPL(gI1,0))*B1(p,MFt,MSt(gI1));
    }
    tmp_977 += tmp_978;
    result += (-0.5) * tmp_977;
    std::complex<double> tmp_979;
    std::complex<double> tmp_980;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_980 += AbsSqr(CpGluconjSuFuPL(gI1,1))*B1(p,MFu,MSu(gI1));
+      tmp_980 += AbsSqr(CpGluconjSuFuPL(gI1,0))*B1(p,MFu,MSu(gI1));
    }
    tmp_979 += tmp_980;
    result += (-0.5) * tmp_979;
@@ -16386,20 +16376,20 @@ std::complex<double> CLASSNAME::self_energy_Fd_1(double p ) const
    }
    tmp_987 += tmp_988;
    result += (MFd) * tmp_987;
-   result += -4*MFu*B0(p,MFu,MVWm)*Conj(CpbarFdVWmFuPR(1))*CpbarFdVWmFuPL(1);
+   result += -4*MFu*B0(p,MFu,MVWm)*Conj(CpbarFdVWmFuPR(0))*CpbarFdVWmFuPL(0);
    std::complex<double> tmp_989;
    std::complex<double> tmp_990;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_990 += B0(p,MFu,MHpm(gI1))*Conj(CpbarFdHpmFuPL(gI1,1))*
-         CpbarFdHpmFuPR(gI1,1);
+      tmp_990 += B0(p,MFu,MHpm(gI1))*Conj(CpbarFdHpmFuPL(gI1,0))*
+         CpbarFdHpmFuPR(gI1,0);
    }
    tmp_989 += tmp_990;
    result += (MFu) * tmp_989;
    std::complex<double> tmp_991;
    std::complex<double> tmp_992;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_992 += B0(p,MGlu,MSd(gI1))*Conj(CpbarFdSdGluPL(gI1,1))*
-         CpbarFdSdGluPR(gI1,1);
+      tmp_992 += B0(p,MGlu,MSd(gI1))*Conj(CpbarFdSdGluPL(gI1,0))*
+         CpbarFdSdGluPR(gI1,0);
    }
    tmp_991 += tmp_992;
    result += (1.3333333333333333*MGlu) * tmp_991;
@@ -16414,7 +16404,7 @@ std::complex<double> CLASSNAME::self_energy_Fd_PR(double p ) const
 
    result += -1.3333333333333333*AbsSqr(CpbarFdVGFdPL())*B1(p,MFd,0);
    result += -(AbsSqr(CpbarFdVPFdPL())*B1(p,MFd,0));
-   result += -(AbsSqr(CpbarFdVWmFuPL(1))*B1(p,MFu,MVWm));
+   result += -(AbsSqr(CpbarFdVWmFuPL(0))*B1(p,MFu,MVWm));
    result += -(AbsSqr(CpbarFdVZFdPL())*B1(p,MFd,MVZ));
    std::complex<double> tmp_993;
    std::complex<double> tmp_994;
@@ -16426,14 +16416,14 @@ std::complex<double> CLASSNAME::self_energy_Fd_PR(double p ) const
    std::complex<double> tmp_995;
    std::complex<double> tmp_996;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_996 += AbsSqr(CpbarFdHpmFuPR(gI1,1))*B1(p,MFu,MHpm(gI1));
+      tmp_996 += AbsSqr(CpbarFdHpmFuPR(gI1,0))*B1(p,MFu,MHpm(gI1));
    }
    tmp_995 += tmp_996;
    result += (-0.5) * tmp_995;
    std::complex<double> tmp_997;
    std::complex<double> tmp_998;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_998 += AbsSqr(CpbarFdSdGluPR(gI1,1))*B1(p,MGlu,MSd(gI1));
+      tmp_998 += AbsSqr(CpbarFdSdGluPR(gI1,0))*B1(p,MGlu,MSd(gI1));
    }
    tmp_997 += tmp_998;
    result += (-0.6666666666666666) * tmp_997;
@@ -16479,7 +16469,7 @@ std::complex<double> CLASSNAME::self_energy_Fd_PL(double p ) const
 
    result += -1.3333333333333333*AbsSqr(CpbarFdVGFdPR())*B1(p,MFd,0);
    result += -(AbsSqr(CpbarFdVPFdPR())*B1(p,MFd,0));
-   result += -(AbsSqr(CpbarFdVWmFuPR(1))*B1(p,MFu,MVWm));
+   result += -(AbsSqr(CpbarFdVWmFuPR(0))*B1(p,MFu,MVWm));
    result += -(AbsSqr(CpbarFdVZFdPR())*B1(p,MFd,MVZ));
    std::complex<double> tmp_1007;
    std::complex<double> tmp_1008;
@@ -16491,14 +16481,14 @@ std::complex<double> CLASSNAME::self_energy_Fd_PL(double p ) const
    std::complex<double> tmp_1009;
    std::complex<double> tmp_1010;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1010 += AbsSqr(CpbarFdHpmFuPL(gI1,1))*B1(p,MFu,MHpm(gI1));
+      tmp_1010 += AbsSqr(CpbarFdHpmFuPL(gI1,0))*B1(p,MFu,MHpm(gI1));
    }
    tmp_1009 += tmp_1010;
    result += (-0.5) * tmp_1009;
    std::complex<double> tmp_1011;
    std::complex<double> tmp_1012;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1012 += AbsSqr(CpbarFdSdGluPL(gI1,1))*B1(p,MGlu,MSd(gI1));
+      tmp_1012 += AbsSqr(CpbarFdSdGluPL(gI1,0))*B1(p,MGlu,MSd(gI1));
    }
    tmp_1011 += tmp_1012;
    result += (-0.6666666666666666) * tmp_1011;
@@ -16562,12 +16552,12 @@ std::complex<double> CLASSNAME::self_energy_Fs_1(double p ) const
       tmp_1023 += tmp_1024;
    }
    result += tmp_1023;
-   result += -4*MFc*B0(p,MFc,MVWm)*Conj(CpbarFsVWmFcPR(1))*CpbarFsVWmFcPL(1);
+   result += -4*MFc*B0(p,MFc,MVWm)*Conj(CpbarFsVWmFcPR(0))*CpbarFsVWmFcPL(0);
    std::complex<double> tmp_1025;
    std::complex<double> tmp_1026;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1026 += B0(p,MFc,MHpm(gI1))*Conj(CpbarFsHpmFcPL(gI1,1))*
-         CpbarFsHpmFcPR(gI1,1);
+      tmp_1026 += B0(p,MFc,MHpm(gI1))*Conj(CpbarFsHpmFcPL(gI1,0))*
+         CpbarFsHpmFcPR(gI1,0);
    }
    tmp_1025 += tmp_1026;
    result += (MFc) * tmp_1025;
@@ -16594,8 +16584,8 @@ std::complex<double> CLASSNAME::self_energy_Fs_1(double p ) const
    std::complex<double> tmp_1031;
    std::complex<double> tmp_1032;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1032 += B0(p,MGlu,MSs(gI1))*Conj(CpbarFsSsGluPL(gI1,1))*
-         CpbarFsSsGluPR(gI1,1);
+      tmp_1032 += B0(p,MGlu,MSs(gI1))*Conj(CpbarFsSsGluPL(gI1,0))*
+         CpbarFsSsGluPR(gI1,0);
    }
    tmp_1031 += tmp_1032;
    result += (1.3333333333333333*MGlu) * tmp_1031;
@@ -16610,7 +16600,7 @@ std::complex<double> CLASSNAME::self_energy_Fs_PR(double p ) const
 
    result += -1.3333333333333333*AbsSqr(CpbarFsVGFsPL())*B1(p,MFs,0);
    result += -(AbsSqr(CpbarFsVPFsPL())*B1(p,MFs,0));
-   result += -(AbsSqr(CpbarFsVWmFcPL(1))*B1(p,MFc,MVWm));
+   result += -(AbsSqr(CpbarFsVWmFcPL(0))*B1(p,MFc,MVWm));
    result += -(AbsSqr(CpbarFsVZFsPL())*B1(p,MFs,MVZ));
    std::complex<double> tmp_1033;
    std::complex<double> tmp_1034;
@@ -16622,14 +16612,14 @@ std::complex<double> CLASSNAME::self_energy_Fs_PR(double p ) const
    std::complex<double> tmp_1035;
    std::complex<double> tmp_1036;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1036 += AbsSqr(CpbarFsHpmFcPR(gI1,1))*B1(p,MFc,MHpm(gI1));
+      tmp_1036 += AbsSqr(CpbarFsHpmFcPR(gI1,0))*B1(p,MFc,MHpm(gI1));
    }
    tmp_1035 += tmp_1036;
    result += (-0.5) * tmp_1035;
    std::complex<double> tmp_1037;
    std::complex<double> tmp_1038;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1038 += AbsSqr(CpbarFsSsGluPR(gI1,1))*B1(p,MGlu,MSs(gI1));
+      tmp_1038 += AbsSqr(CpbarFsSsGluPR(gI1,0))*B1(p,MGlu,MSs(gI1));
    }
    tmp_1037 += tmp_1038;
    result += (-0.6666666666666666) * tmp_1037;
@@ -16675,7 +16665,7 @@ std::complex<double> CLASSNAME::self_energy_Fs_PL(double p ) const
 
    result += -1.3333333333333333*AbsSqr(CpbarFsVGFsPR())*B1(p,MFs,0);
    result += -(AbsSqr(CpbarFsVPFsPR())*B1(p,MFs,0));
-   result += -(AbsSqr(CpbarFsVWmFcPR(1))*B1(p,MFc,MVWm));
+   result += -(AbsSqr(CpbarFsVWmFcPR(0))*B1(p,MFc,MVWm));
    result += -(AbsSqr(CpbarFsVZFsPR())*B1(p,MFs,MVZ));
    std::complex<double> tmp_1047;
    std::complex<double> tmp_1048;
@@ -16687,14 +16677,14 @@ std::complex<double> CLASSNAME::self_energy_Fs_PL(double p ) const
    std::complex<double> tmp_1049;
    std::complex<double> tmp_1050;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1050 += AbsSqr(CpbarFsHpmFcPL(gI1,1))*B1(p,MFc,MHpm(gI1));
+      tmp_1050 += AbsSqr(CpbarFsHpmFcPL(gI1,0))*B1(p,MFc,MHpm(gI1));
    }
    tmp_1049 += tmp_1050;
    result += (-0.5) * tmp_1049;
    std::complex<double> tmp_1051;
    std::complex<double> tmp_1052;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1052 += AbsSqr(CpbarFsSsGluPL(gI1,1))*B1(p,MGlu,MSs(gI1));
+      tmp_1052 += AbsSqr(CpbarFsSsGluPL(gI1,0))*B1(p,MGlu,MSs(gI1));
    }
    tmp_1051 += tmp_1052;
    result += (-0.6666666666666666) * tmp_1051;
@@ -16778,20 +16768,20 @@ std::complex<double> CLASSNAME::self_energy_Fb_1(double p ) const
    }
    tmp_1067 += tmp_1068;
    result += (MFb) * tmp_1067;
-   result += -4*MFt*B0(p,MFt,MVWm)*Conj(CpbarFbVWmFtPR(1))*CpbarFbVWmFtPL(1);
+   result += -4*MFt*B0(p,MFt,MVWm)*Conj(CpbarFbVWmFtPR(0))*CpbarFbVWmFtPL(0);
    std::complex<double> tmp_1069;
    std::complex<double> tmp_1070;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1070 += B0(p,MFt,MHpm(gI1))*Conj(CpbarFbHpmFtPL(gI1,1))*
-         CpbarFbHpmFtPR(gI1,1);
+      tmp_1070 += B0(p,MFt,MHpm(gI1))*Conj(CpbarFbHpmFtPL(gI1,0))*
+         CpbarFbHpmFtPR(gI1,0);
    }
    tmp_1069 += tmp_1070;
    result += (MFt) * tmp_1069;
    std::complex<double> tmp_1071;
    std::complex<double> tmp_1072;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1072 += B0(p,MGlu,MSb(gI1))*Conj(CpbarFbSbGluPL(gI1,1))*
-         CpbarFbSbGluPR(gI1,1);
+      tmp_1072 += B0(p,MGlu,MSb(gI1))*Conj(CpbarFbSbGluPL(gI1,0))*
+         CpbarFbSbGluPR(gI1,0);
    }
    tmp_1071 += tmp_1072;
    result += (1.3333333333333333*MGlu) * tmp_1071;
@@ -16806,7 +16796,7 @@ std::complex<double> CLASSNAME::self_energy_Fb_PR(double p ) const
 
    result += -1.3333333333333333*AbsSqr(CpbarFbVGFbPL())*B1(p,MFb,0);
    result += -(AbsSqr(CpbarFbVPFbPL())*B1(p,MFb,0));
-   result += -(AbsSqr(CpbarFbVWmFtPL(1))*B1(p,MFt,MVWm));
+   result += -(AbsSqr(CpbarFbVWmFtPL(0))*B1(p,MFt,MVWm));
    result += -(AbsSqr(CpbarFbVZFbPL())*B1(p,MFb,MVZ));
    std::complex<double> tmp_1073;
    std::complex<double> tmp_1074;
@@ -16818,14 +16808,14 @@ std::complex<double> CLASSNAME::self_energy_Fb_PR(double p ) const
    std::complex<double> tmp_1075;
    std::complex<double> tmp_1076;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1076 += AbsSqr(CpbarFbHpmFtPR(gI1,1))*B1(p,MFt,MHpm(gI1));
+      tmp_1076 += AbsSqr(CpbarFbHpmFtPR(gI1,0))*B1(p,MFt,MHpm(gI1));
    }
    tmp_1075 += tmp_1076;
    result += (-0.5) * tmp_1075;
    std::complex<double> tmp_1077;
    std::complex<double> tmp_1078;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1078 += AbsSqr(CpbarFbSbGluPR(gI1,1))*B1(p,MGlu,MSb(gI1));
+      tmp_1078 += AbsSqr(CpbarFbSbGluPR(gI1,0))*B1(p,MGlu,MSb(gI1));
    }
    tmp_1077 += tmp_1078;
    result += (-0.6666666666666666) * tmp_1077;
@@ -16871,7 +16861,7 @@ std::complex<double> CLASSNAME::self_energy_Fb_PL(double p ) const
 
    result += -1.3333333333333333*AbsSqr(CpbarFbVGFbPR())*B1(p,MFb,0);
    result += -(AbsSqr(CpbarFbVPFbPR())*B1(p,MFb,0));
-   result += -(AbsSqr(CpbarFbVWmFtPR(1))*B1(p,MFt,MVWm));
+   result += -(AbsSqr(CpbarFbVWmFtPR(0))*B1(p,MFt,MVWm));
    result += -(AbsSqr(CpbarFbVZFbPR())*B1(p,MFb,MVZ));
    std::complex<double> tmp_1087;
    std::complex<double> tmp_1088;
@@ -16883,14 +16873,14 @@ std::complex<double> CLASSNAME::self_energy_Fb_PL(double p ) const
    std::complex<double> tmp_1089;
    std::complex<double> tmp_1090;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1090 += AbsSqr(CpbarFbHpmFtPL(gI1,1))*B1(p,MFt,MHpm(gI1));
+      tmp_1090 += AbsSqr(CpbarFbHpmFtPL(gI1,0))*B1(p,MFt,MHpm(gI1));
    }
    tmp_1089 += tmp_1090;
    result += (-0.5) * tmp_1089;
    std::complex<double> tmp_1091;
    std::complex<double> tmp_1092;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1092 += AbsSqr(CpbarFbSbGluPL(gI1,1))*B1(p,MGlu,MSb(gI1));
+      tmp_1092 += AbsSqr(CpbarFbSbGluPL(gI1,0))*B1(p,MGlu,MSb(gI1));
    }
    tmp_1091 += tmp_1092;
    result += (-0.6666666666666666) * tmp_1091;
@@ -16956,13 +16946,13 @@ std::complex<double> CLASSNAME::self_energy_Fu_1(double p ) const
       tmp_1103 += (MCha(gI1)) * tmp_1104;
    }
    result += tmp_1103;
-   result += -4*MFd*B0(p,MFd,MVWm)*Conj(CpbarFuconjVWmFdPR(1))*
-      CpbarFuconjVWmFdPL(1);
+   result += -4*MFd*B0(p,MFd,MVWm)*Conj(CpbarFuconjVWmFdPR(0))*
+      CpbarFuconjVWmFdPL(0);
    std::complex<double> tmp_1106;
    std::complex<double> tmp_1107;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1107 += B0(p,MFd,MHpm(gI1))*Conj(CpbarFuconjHpmFdPL(gI1,1))*
-         CpbarFuconjHpmFdPR(gI1,1);
+      tmp_1107 += B0(p,MFd,MHpm(gI1))*Conj(CpbarFuconjHpmFdPL(gI1,0))*
+         CpbarFuconjHpmFdPR(gI1,0);
    }
    tmp_1106 += tmp_1107;
    result += (MFd) * tmp_1106;
@@ -16989,8 +16979,8 @@ std::complex<double> CLASSNAME::self_energy_Fu_1(double p ) const
    std::complex<double> tmp_1112;
    std::complex<double> tmp_1113;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1113 += B0(p,MGlu,MSu(gI1))*Conj(CpbarFuSuGluPL(gI1,1))*
-         CpbarFuSuGluPR(gI1,1);
+      tmp_1113 += B0(p,MGlu,MSu(gI1))*Conj(CpbarFuSuGluPL(gI1,0))*
+         CpbarFuSuGluPR(gI1,0);
    }
    tmp_1112 += tmp_1113;
    result += (1.3333333333333333*MGlu) * tmp_1112;
@@ -17003,14 +16993,14 @@ std::complex<double> CLASSNAME::self_energy_Fu_PR(double p ) const
 {
    std::complex<double> result;
 
-   result += -(AbsSqr(CpbarFuconjVWmFdPL(1))*B1(p,MFd,MVWm));
+   result += -(AbsSqr(CpbarFuconjVWmFdPL(0))*B1(p,MFd,MVWm));
    result += -1.3333333333333333*AbsSqr(CpbarFuVGFuPL())*B1(p,MFu,0);
    result += -(AbsSqr(CpbarFuVPFuPL())*B1(p,MFu,0));
    result += -(AbsSqr(CpbarFuVZFuPL())*B1(p,MFu,MVZ));
    std::complex<double> tmp_1114;
    std::complex<double> tmp_1115;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1115 += AbsSqr(CpbarFuconjHpmFdPR(gI1,1))*B1(p,MFd,MHpm(gI1));
+      tmp_1115 += AbsSqr(CpbarFuconjHpmFdPR(gI1,0))*B1(p,MFd,MHpm(gI1));
    }
    tmp_1114 += tmp_1115;
    result += (-0.5) * tmp_1114;
@@ -17024,7 +17014,7 @@ std::complex<double> CLASSNAME::self_energy_Fu_PR(double p ) const
    std::complex<double> tmp_1118;
    std::complex<double> tmp_1119;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1119 += AbsSqr(CpbarFuSuGluPR(gI1,1))*B1(p,MGlu,MSu(gI1));
+      tmp_1119 += AbsSqr(CpbarFuSuGluPR(gI1,0))*B1(p,MGlu,MSu(gI1));
    }
    tmp_1118 += tmp_1119;
    result += (-0.6666666666666666) * tmp_1118;
@@ -17068,14 +17058,14 @@ std::complex<double> CLASSNAME::self_energy_Fu_PL(double p ) const
 {
    std::complex<double> result;
 
-   result += -(AbsSqr(CpbarFuconjVWmFdPR(1))*B1(p,MFd,MVWm));
+   result += -(AbsSqr(CpbarFuconjVWmFdPR(0))*B1(p,MFd,MVWm));
    result += -1.3333333333333333*AbsSqr(CpbarFuVGFuPR())*B1(p,MFu,0);
    result += -(AbsSqr(CpbarFuVPFuPR())*B1(p,MFu,0));
    result += -(AbsSqr(CpbarFuVZFuPR())*B1(p,MFu,MVZ));
    std::complex<double> tmp_1128;
    std::complex<double> tmp_1129;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1129 += AbsSqr(CpbarFuconjHpmFdPL(gI1,1))*B1(p,MFd,MHpm(gI1));
+      tmp_1129 += AbsSqr(CpbarFuconjHpmFdPL(gI1,0))*B1(p,MFd,MHpm(gI1));
    }
    tmp_1128 += tmp_1129;
    result += (-0.5) * tmp_1128;
@@ -17089,7 +17079,7 @@ std::complex<double> CLASSNAME::self_energy_Fu_PL(double p ) const
    std::complex<double> tmp_1132;
    std::complex<double> tmp_1133;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1133 += AbsSqr(CpbarFuSuGluPL(gI1,1))*B1(p,MGlu,MSu(gI1));
+      tmp_1133 += AbsSqr(CpbarFuSuGluPL(gI1,0))*B1(p,MGlu,MSu(gI1));
    }
    tmp_1132 += tmp_1133;
    result += (-0.6666666666666666) * tmp_1132;
@@ -17175,21 +17165,21 @@ std::complex<double> CLASSNAME::self_energy_Fc_1(double p ) const
    }
    tmp_1149 += tmp_1150;
    result += (MFc) * tmp_1149;
-   result += -4*MFs*B0(p,MFs,MVWm)*Conj(CpbarFcconjVWmFsPR(1))*
-      CpbarFcconjVWmFsPL(1);
+   result += -4*MFs*B0(p,MFs,MVWm)*Conj(CpbarFcconjVWmFsPR(0))*
+      CpbarFcconjVWmFsPL(0);
    std::complex<double> tmp_1151;
    std::complex<double> tmp_1152;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1152 += B0(p,MFs,MHpm(gI1))*Conj(CpbarFcconjHpmFsPL(gI1,1))*
-         CpbarFcconjHpmFsPR(gI1,1);
+      tmp_1152 += B0(p,MFs,MHpm(gI1))*Conj(CpbarFcconjHpmFsPL(gI1,0))*
+         CpbarFcconjHpmFsPR(gI1,0);
    }
    tmp_1151 += tmp_1152;
    result += (MFs) * tmp_1151;
    std::complex<double> tmp_1153;
    std::complex<double> tmp_1154;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1154 += B0(p,MGlu,MSc(gI1))*Conj(CpbarFcScGluPL(gI1,1))*
-         CpbarFcScGluPR(gI1,1);
+      tmp_1154 += B0(p,MGlu,MSc(gI1))*Conj(CpbarFcScGluPL(gI1,0))*
+         CpbarFcScGluPR(gI1,0);
    }
    tmp_1153 += tmp_1154;
    result += (1.3333333333333333*MGlu) * tmp_1153;
@@ -17202,14 +17192,14 @@ std::complex<double> CLASSNAME::self_energy_Fc_PR(double p ) const
 {
    std::complex<double> result;
 
-   result += -(AbsSqr(CpbarFcconjVWmFsPL(1))*B1(p,MFs,MVWm));
+   result += -(AbsSqr(CpbarFcconjVWmFsPL(0))*B1(p,MFs,MVWm));
    result += -1.3333333333333333*AbsSqr(CpbarFcVGFcPL())*B1(p,MFc,0);
    result += -(AbsSqr(CpbarFcVPFcPL())*B1(p,MFc,0));
    result += -(AbsSqr(CpbarFcVZFcPL())*B1(p,MFc,MVZ));
    std::complex<double> tmp_1155;
    std::complex<double> tmp_1156;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1156 += AbsSqr(CpbarFcconjHpmFsPR(gI1,1))*B1(p,MFs,MHpm(gI1));
+      tmp_1156 += AbsSqr(CpbarFcconjHpmFsPR(gI1,0))*B1(p,MFs,MHpm(gI1));
    }
    tmp_1155 += tmp_1156;
    result += (-0.5) * tmp_1155;
@@ -17223,7 +17213,7 @@ std::complex<double> CLASSNAME::self_energy_Fc_PR(double p ) const
    std::complex<double> tmp_1159;
    std::complex<double> tmp_1160;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1160 += AbsSqr(CpbarFcScGluPR(gI1,1))*B1(p,MGlu,MSc(gI1));
+      tmp_1160 += AbsSqr(CpbarFcScGluPR(gI1,0))*B1(p,MGlu,MSc(gI1));
    }
    tmp_1159 += tmp_1160;
    result += (-0.6666666666666666) * tmp_1159;
@@ -17267,14 +17257,14 @@ std::complex<double> CLASSNAME::self_energy_Fc_PL(double p ) const
 {
    std::complex<double> result;
 
-   result += -(AbsSqr(CpbarFcconjVWmFsPR(1))*B1(p,MFs,MVWm));
+   result += -(AbsSqr(CpbarFcconjVWmFsPR(0))*B1(p,MFs,MVWm));
    result += -1.3333333333333333*AbsSqr(CpbarFcVGFcPR())*B1(p,MFc,0);
    result += -(AbsSqr(CpbarFcVPFcPR())*B1(p,MFc,0));
    result += -(AbsSqr(CpbarFcVZFcPR())*B1(p,MFc,MVZ));
    std::complex<double> tmp_1169;
    std::complex<double> tmp_1170;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1170 += AbsSqr(CpbarFcconjHpmFsPL(gI1,1))*B1(p,MFs,MHpm(gI1));
+      tmp_1170 += AbsSqr(CpbarFcconjHpmFsPL(gI1,0))*B1(p,MFs,MHpm(gI1));
    }
    tmp_1169 += tmp_1170;
    result += (-0.5) * tmp_1169;
@@ -17288,7 +17278,7 @@ std::complex<double> CLASSNAME::self_energy_Fc_PL(double p ) const
    std::complex<double> tmp_1173;
    std::complex<double> tmp_1174;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1174 += AbsSqr(CpbarFcScGluPL(gI1,1))*B1(p,MGlu,MSc(gI1));
+      tmp_1174 += AbsSqr(CpbarFcScGluPL(gI1,0))*B1(p,MGlu,MSc(gI1));
    }
    tmp_1173 += tmp_1174;
    result += (-0.6666666666666666) * tmp_1173;
@@ -17354,13 +17344,13 @@ std::complex<double> CLASSNAME::self_energy_Ft_1(double p ) const
       tmp_1185 += (MCha(gI1)) * tmp_1186;
    }
    result += tmp_1185;
-   result += -4*MFb*B0(p,MFb,MVWm)*Conj(CpbarFtconjVWmFbPR(1))*
-      CpbarFtconjVWmFbPL(1);
+   result += -4*MFb*B0(p,MFb,MVWm)*Conj(CpbarFtconjVWmFbPR(0))*
+      CpbarFtconjVWmFbPL(0);
    std::complex<double> tmp_1188;
    std::complex<double> tmp_1189;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1189 += B0(p,MFb,MHpm(gI1))*Conj(CpbarFtconjHpmFbPL(gI1,1))*
-         CpbarFtconjHpmFbPR(gI1,1);
+      tmp_1189 += B0(p,MFb,MHpm(gI1))*Conj(CpbarFtconjHpmFbPL(gI1,0))*
+         CpbarFtconjHpmFbPR(gI1,0);
    }
    tmp_1188 += tmp_1189;
    result += (MFb) * tmp_1188;
@@ -17387,8 +17377,8 @@ std::complex<double> CLASSNAME::self_energy_Ft_1(double p ) const
    std::complex<double> tmp_1194;
    std::complex<double> tmp_1195;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1195 += B0(p,MGlu,MSt(gI1))*Conj(CpbarFtStGluPL(gI1,1))*
-         CpbarFtStGluPR(gI1,1);
+      tmp_1195 += B0(p,MGlu,MSt(gI1))*Conj(CpbarFtStGluPL(gI1,0))*
+         CpbarFtStGluPR(gI1,0);
    }
    tmp_1194 += tmp_1195;
    result += (1.3333333333333333*MGlu) * tmp_1194;
@@ -17401,14 +17391,14 @@ std::complex<double> CLASSNAME::self_energy_Ft_PR(double p ) const
 {
    std::complex<double> result;
 
-   result += -(AbsSqr(CpbarFtconjVWmFbPL(1))*B1(p,MFb,MVWm));
+   result += -(AbsSqr(CpbarFtconjVWmFbPL(0))*B1(p,MFb,MVWm));
    result += -1.3333333333333333*AbsSqr(CpbarFtVGFtPL())*B1(p,MFt,0);
    result += -(AbsSqr(CpbarFtVPFtPL())*B1(p,MFt,0));
    result += -(AbsSqr(CpbarFtVZFtPL())*B1(p,MFt,MVZ));
    std::complex<double> tmp_1196;
    std::complex<double> tmp_1197;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1197 += AbsSqr(CpbarFtconjHpmFbPR(gI1,1))*B1(p,MFb,MHpm(gI1));
+      tmp_1197 += AbsSqr(CpbarFtconjHpmFbPR(gI1,0))*B1(p,MFb,MHpm(gI1));
    }
    tmp_1196 += tmp_1197;
    result += (-0.5) * tmp_1196;
@@ -17422,7 +17412,7 @@ std::complex<double> CLASSNAME::self_energy_Ft_PR(double p ) const
    std::complex<double> tmp_1200;
    std::complex<double> tmp_1201;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1201 += AbsSqr(CpbarFtStGluPR(gI1,1))*B1(p,MGlu,MSt(gI1));
+      tmp_1201 += AbsSqr(CpbarFtStGluPR(gI1,0))*B1(p,MGlu,MSt(gI1));
    }
    tmp_1200 += tmp_1201;
    result += (-0.6666666666666666) * tmp_1200;
@@ -17466,14 +17456,14 @@ std::complex<double> CLASSNAME::self_energy_Ft_PL(double p ) const
 {
    std::complex<double> result;
 
-   result += -(AbsSqr(CpbarFtconjVWmFbPR(1))*B1(p,MFb,MVWm));
+   result += -(AbsSqr(CpbarFtconjVWmFbPR(0))*B1(p,MFb,MVWm));
    result += -1.3333333333333333*AbsSqr(CpbarFtVGFtPR())*B1(p,MFt,0);
    result += -(AbsSqr(CpbarFtVPFtPR())*B1(p,MFt,0));
    result += -(AbsSqr(CpbarFtVZFtPR())*B1(p,MFt,MVZ));
    std::complex<double> tmp_1210;
    std::complex<double> tmp_1211;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1211 += AbsSqr(CpbarFtconjHpmFbPL(gI1,1))*B1(p,MFb,MHpm(gI1));
+      tmp_1211 += AbsSqr(CpbarFtconjHpmFbPL(gI1,0))*B1(p,MFb,MHpm(gI1));
    }
    tmp_1210 += tmp_1211;
    result += (-0.5) * tmp_1210;
@@ -17487,7 +17477,7 @@ std::complex<double> CLASSNAME::self_energy_Ft_PL(double p ) const
    std::complex<double> tmp_1214;
    std::complex<double> tmp_1215;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1215 += AbsSqr(CpbarFtStGluPL(gI1,1))*B1(p,MGlu,MSt(gI1));
+      tmp_1215 += AbsSqr(CpbarFtStGluPL(gI1,0))*B1(p,MGlu,MSt(gI1));
    }
    tmp_1214 += tmp_1215;
    result += (-0.6666666666666666) * tmp_1214;
@@ -18758,20 +18748,20 @@ std::complex<double> CLASSNAME::self_energy_Fb_1_heavy_rotated(double p ) const
    }
    tmp_1472 += tmp_1473;
    result += (MFb) * tmp_1472;
-   result += -4*MFt*B0(p,MFt,MVWm)*Conj(CpbarFbVWmFtPR(1))*CpbarFbVWmFtPL(1);
+   result += -4*MFt*B0(p,MFt,MVWm)*Conj(CpbarFbVWmFtPR(0))*CpbarFbVWmFtPL(0);
    std::complex<double> tmp_1474;
    std::complex<double> tmp_1475;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1475 += B0(p,MFt,MHpm(gI1))*Conj(CpbarFbHpmFtPL(gI1,1))*
-         CpbarFbHpmFtPR(gI1,1);
+      tmp_1475 += B0(p,MFt,MHpm(gI1))*Conj(CpbarFbHpmFtPL(gI1,0))*
+         CpbarFbHpmFtPR(gI1,0);
    }
    tmp_1474 += tmp_1475;
    result += (MFt) * tmp_1474;
    std::complex<double> tmp_1476;
    std::complex<double> tmp_1477;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1477 += B0(p,MGlu,MSb(gI1))*Conj(CpbarFbSbGluPL(gI1,1))*
-         CpbarFbSbGluPR(gI1,1);
+      tmp_1477 += B0(p,MGlu,MSb(gI1))*Conj(CpbarFbSbGluPL(gI1,0))*
+         CpbarFbSbGluPR(gI1,0);
    }
    tmp_1476 += tmp_1477;
    result += (1.3333333333333333*MGlu) * tmp_1476;
@@ -18784,7 +18774,7 @@ std::complex<double> CLASSNAME::self_energy_Fb_PR_heavy_rotated(double p ) const
 {
    std::complex<double> result;
 
-   result += -(AbsSqr(CpbarFbVWmFtPL(1))*B1(p,MFt,MVWm));
+   result += -(AbsSqr(CpbarFbVWmFtPL(0))*B1(p,MFt,MVWm));
    result += -(AbsSqr(CpbarFbVZFbPL())*B1(p,MFb,MVZ));
    std::complex<double> tmp_1478;
    std::complex<double> tmp_1479;
@@ -18796,14 +18786,14 @@ std::complex<double> CLASSNAME::self_energy_Fb_PR_heavy_rotated(double p ) const
    std::complex<double> tmp_1480;
    std::complex<double> tmp_1481;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1481 += AbsSqr(CpbarFbHpmFtPR(gI1,1))*B1(p,MFt,MHpm(gI1));
+      tmp_1481 += AbsSqr(CpbarFbHpmFtPR(gI1,0))*B1(p,MFt,MHpm(gI1));
    }
    tmp_1480 += tmp_1481;
    result += (-0.5) * tmp_1480;
    std::complex<double> tmp_1482;
    std::complex<double> tmp_1483;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1483 += AbsSqr(CpbarFbSbGluPR(gI1,1))*B1(p,MGlu,MSb(gI1));
+      tmp_1483 += AbsSqr(CpbarFbSbGluPR(gI1,0))*B1(p,MGlu,MSb(gI1));
    }
    tmp_1482 += tmp_1483;
    result += (-0.6666666666666666) * tmp_1482;
@@ -18847,7 +18837,7 @@ std::complex<double> CLASSNAME::self_energy_Fb_PL_heavy_rotated(double p ) const
 {
    std::complex<double> result;
 
-   result += -(AbsSqr(CpbarFbVWmFtPR(1))*B1(p,MFt,MVWm));
+   result += -(AbsSqr(CpbarFbVWmFtPR(0))*B1(p,MFt,MVWm));
    result += -(AbsSqr(CpbarFbVZFbPR())*B1(p,MFb,MVZ));
    std::complex<double> tmp_1492;
    std::complex<double> tmp_1493;
@@ -18859,14 +18849,14 @@ std::complex<double> CLASSNAME::self_energy_Fb_PL_heavy_rotated(double p ) const
    std::complex<double> tmp_1494;
    std::complex<double> tmp_1495;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1495 += AbsSqr(CpbarFbHpmFtPL(gI1,1))*B1(p,MFt,MHpm(gI1));
+      tmp_1495 += AbsSqr(CpbarFbHpmFtPL(gI1,0))*B1(p,MFt,MHpm(gI1));
    }
    tmp_1494 += tmp_1495;
    result += (-0.5) * tmp_1494;
    std::complex<double> tmp_1496;
    std::complex<double> tmp_1497;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1497 += AbsSqr(CpbarFbSbGluPL(gI1,1))*B1(p,MGlu,MSb(gI1));
+      tmp_1497 += AbsSqr(CpbarFbSbGluPL(gI1,0))*B1(p,MGlu,MSb(gI1));
    }
    tmp_1496 += tmp_1497;
    result += (-0.6666666666666666) * tmp_1496;
@@ -19393,13 +19383,13 @@ std::complex<double> CLASSNAME::self_energy_Ft_1_heavy_rotated(double p ) const
       tmp_1601 += (MCha(gI1)) * tmp_1602;
    }
    result += tmp_1601;
-   result += -4*MFb*B0(p,MFb,MVWm)*Conj(CpbarFtconjVWmFbPR(1))*
-      CpbarFtconjVWmFbPL(1);
+   result += -4*MFb*B0(p,MFb,MVWm)*Conj(CpbarFtconjVWmFbPR(0))*
+      CpbarFtconjVWmFbPL(0);
    std::complex<double> tmp_1604;
    std::complex<double> tmp_1605;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1605 += B0(p,MFb,MHpm(gI1))*Conj(CpbarFtconjHpmFbPL(gI1,1))*
-         CpbarFtconjHpmFbPR(gI1,1);
+      tmp_1605 += B0(p,MFb,MHpm(gI1))*Conj(CpbarFtconjHpmFbPL(gI1,0))*
+         CpbarFtconjHpmFbPR(gI1,0);
    }
    tmp_1604 += tmp_1605;
    result += (MFb) * tmp_1604;
@@ -19424,8 +19414,8 @@ std::complex<double> CLASSNAME::self_energy_Ft_1_heavy_rotated(double p ) const
    std::complex<double> tmp_1610;
    std::complex<double> tmp_1611;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1611 += B0(p,MGlu,MSt(gI1))*Conj(CpbarFtStGluPL(gI1,1))*
-         CpbarFtStGluPR(gI1,1);
+      tmp_1611 += B0(p,MGlu,MSt(gI1))*Conj(CpbarFtStGluPL(gI1,0))*
+         CpbarFtStGluPR(gI1,0);
    }
    tmp_1610 += tmp_1611;
    result += (1.3333333333333333*MGlu) * tmp_1610;
@@ -19438,13 +19428,13 @@ std::complex<double> CLASSNAME::self_energy_Ft_PR_heavy_rotated(double p ) const
 {
    std::complex<double> result;
 
-   result += -(AbsSqr(CpbarFtconjVWmFbPL(1))*B1(p,MFb,MVWm));
+   result += -(AbsSqr(CpbarFtconjVWmFbPL(0))*B1(p,MFb,MVWm));
    result += -(AbsSqr(CpbarFtVPFtPL())*B1(p,MFt,0));
    result += -(AbsSqr(CpbarFtVZFtPL())*B1(p,MFt,MVZ));
    std::complex<double> tmp_1612;
    std::complex<double> tmp_1613;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1613 += AbsSqr(CpbarFtconjHpmFbPR(gI1,1))*B1(p,MFb,MHpm(gI1));
+      tmp_1613 += AbsSqr(CpbarFtconjHpmFbPR(gI1,0))*B1(p,MFb,MHpm(gI1));
    }
    tmp_1612 += tmp_1613;
    result += (-0.5) * tmp_1612;
@@ -19458,7 +19448,7 @@ std::complex<double> CLASSNAME::self_energy_Ft_PR_heavy_rotated(double p ) const
    std::complex<double> tmp_1616;
    std::complex<double> tmp_1617;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1617 += AbsSqr(CpbarFtStGluPR(gI1,1))*B1(p,MGlu,MSt(gI1));
+      tmp_1617 += AbsSqr(CpbarFtStGluPR(gI1,0))*B1(p,MGlu,MSt(gI1));
    }
    tmp_1616 += tmp_1617;
    result += (-0.6666666666666666) * tmp_1616;
@@ -19502,13 +19492,13 @@ std::complex<double> CLASSNAME::self_energy_Ft_PL_heavy_rotated(double p ) const
 {
    std::complex<double> result;
 
-   result += -(AbsSqr(CpbarFtconjVWmFbPR(1))*B1(p,MFb,MVWm));
+   result += -(AbsSqr(CpbarFtconjVWmFbPR(0))*B1(p,MFb,MVWm));
    result += -(AbsSqr(CpbarFtVPFtPR())*B1(p,MFt,0));
    result += -(AbsSqr(CpbarFtVZFtPR())*B1(p,MFt,MVZ));
    std::complex<double> tmp_1626;
    std::complex<double> tmp_1627;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1627 += AbsSqr(CpbarFtconjHpmFbPL(gI1,1))*B1(p,MFb,MHpm(gI1));
+      tmp_1627 += AbsSqr(CpbarFtconjHpmFbPL(gI1,0))*B1(p,MFb,MHpm(gI1));
    }
    tmp_1626 += tmp_1627;
    result += (-0.5) * tmp_1626;
@@ -19522,7 +19512,7 @@ std::complex<double> CLASSNAME::self_energy_Ft_PL_heavy_rotated(double p ) const
    std::complex<double> tmp_1630;
    std::complex<double> tmp_1631;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1631 += AbsSqr(CpbarFtStGluPL(gI1,1))*B1(p,MGlu,MSt(gI1));
+      tmp_1631 += AbsSqr(CpbarFtStGluPL(gI1,0))*B1(p,MGlu,MSt(gI1));
    }
    tmp_1630 += tmp_1631;
    result += (-0.6666666666666666) * tmp_1630;
@@ -19588,13 +19578,13 @@ std::complex<double> CLASSNAME::self_energy_Ft_1_heavy(double p ) const
       tmp_1642 += (MCha(gI1)) * tmp_1643;
    }
    result += tmp_1642;
-   result += -4*MFb*B0(p,MFb,MVWm)*Conj(CpbarFtconjVWmFbPR(1))*
-      CpbarFtconjVWmFbPL(1);
+   result += -4*MFb*B0(p,MFb,MVWm)*Conj(CpbarFtconjVWmFbPR(0))*
+      CpbarFtconjVWmFbPL(0);
    std::complex<double> tmp_1645;
    std::complex<double> tmp_1646;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1646 += B0(p,MFb,MHpm(gI1))*Conj(CpbarFtconjHpmFbPL(gI1,1))*
-         CpbarFtconjHpmFbPR(gI1,1);
+      tmp_1646 += B0(p,MFb,MHpm(gI1))*Conj(CpbarFtconjHpmFbPL(gI1,0))*
+         CpbarFtconjHpmFbPR(gI1,0);
    }
    tmp_1645 += tmp_1646;
    result += (MFb) * tmp_1645;
@@ -19619,8 +19609,8 @@ std::complex<double> CLASSNAME::self_energy_Ft_1_heavy(double p ) const
    std::complex<double> tmp_1651;
    std::complex<double> tmp_1652;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1652 += B0(p,MGlu,MSt(gI1))*Conj(CpbarFtStGluPL(gI1,1))*
-         CpbarFtStGluPR(gI1,1);
+      tmp_1652 += B0(p,MGlu,MSt(gI1))*Conj(CpbarFtStGluPL(gI1,0))*
+         CpbarFtStGluPR(gI1,0);
    }
    tmp_1651 += tmp_1652;
    result += (1.3333333333333333*MGlu) * tmp_1651;
@@ -19633,13 +19623,13 @@ std::complex<double> CLASSNAME::self_energy_Ft_PR_heavy(double p ) const
 {
    std::complex<double> result;
 
-   result += -(AbsSqr(CpbarFtconjVWmFbPL(1))*B1(p,MFb,MVWm));
+   result += -(AbsSqr(CpbarFtconjVWmFbPL(0))*B1(p,MFb,MVWm));
    result += -(AbsSqr(CpbarFtVPFtPL())*B1(p,MFt,0));
    result += -(AbsSqr(CpbarFtVZFtPL())*B1(p,MFt,MVZ));
    std::complex<double> tmp_1653;
    std::complex<double> tmp_1654;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1654 += AbsSqr(CpbarFtconjHpmFbPR(gI1,1))*B1(p,MFb,MHpm(gI1));
+      tmp_1654 += AbsSqr(CpbarFtconjHpmFbPR(gI1,0))*B1(p,MFb,MHpm(gI1));
    }
    tmp_1653 += tmp_1654;
    result += (-0.5) * tmp_1653;
@@ -19653,7 +19643,7 @@ std::complex<double> CLASSNAME::self_energy_Ft_PR_heavy(double p ) const
    std::complex<double> tmp_1657;
    std::complex<double> tmp_1658;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1658 += AbsSqr(CpbarFtStGluPR(gI1,1))*B1(p,MGlu,MSt(gI1));
+      tmp_1658 += AbsSqr(CpbarFtStGluPR(gI1,0))*B1(p,MGlu,MSt(gI1));
    }
    tmp_1657 += tmp_1658;
    result += (-0.6666666666666666) * tmp_1657;
@@ -19697,13 +19687,13 @@ std::complex<double> CLASSNAME::self_energy_Ft_PL_heavy(double p ) const
 {
    std::complex<double> result;
 
-   result += -(AbsSqr(CpbarFtconjVWmFbPR(1))*B1(p,MFb,MVWm));
+   result += -(AbsSqr(CpbarFtconjVWmFbPR(0))*B1(p,MFb,MVWm));
    result += -(AbsSqr(CpbarFtVPFtPR())*B1(p,MFt,0));
    result += -(AbsSqr(CpbarFtVZFtPR())*B1(p,MFt,MVZ));
    std::complex<double> tmp_1667;
    std::complex<double> tmp_1668;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1668 += AbsSqr(CpbarFtconjHpmFbPL(gI1,1))*B1(p,MFb,MHpm(gI1));
+      tmp_1668 += AbsSqr(CpbarFtconjHpmFbPL(gI1,0))*B1(p,MFb,MHpm(gI1));
    }
    tmp_1667 += tmp_1668;
    result += (-0.5) * tmp_1667;
@@ -19717,7 +19707,7 @@ std::complex<double> CLASSNAME::self_energy_Ft_PL_heavy(double p ) const
    std::complex<double> tmp_1671;
    std::complex<double> tmp_1672;
    for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      tmp_1672 += AbsSqr(CpbarFtStGluPL(gI1,1))*B1(p,MGlu,MSt(gI1));
+      tmp_1672 += AbsSqr(CpbarFtStGluPL(gI1,0))*B1(p,MGlu,MSt(gI1));
    }
    tmp_1671 += tmp_1672;
    result += (-0.6666666666666666) * tmp_1671;
@@ -19867,16 +19857,16 @@ std::complex<double> CLASSNAME::tadpole_hh(unsigned gO1) const
          gO1,gI1,gI1))*MChi(gI1);
    }
    result += tmp_1707;
-   result += 6*MFb*A0(MFb)*(CpUhhbarFbFbPL(gO1,1,1) + CpUhhbarFbFbPR(gO1,1,1));
-   result += 6*MFc*A0(MFc)*(CpUhhbarFcFcPL(gO1,1,1) + CpUhhbarFcFcPR(gO1,1,1));
-   result += 6*MFd*A0(MFd)*(CpUhhbarFdFdPL(gO1,1,1) + CpUhhbarFdFdPR(gO1,1,1));
+   result += 6*MFb*A0(MFb)*(CpUhhbarFbFbPL(gO1,0,0) + CpUhhbarFbFbPR(gO1,0,0));
+   result += 6*MFc*A0(MFc)*(CpUhhbarFcFcPL(gO1,0,0) + CpUhhbarFcFcPR(gO1,0,0));
+   result += 6*MFd*A0(MFd)*(CpUhhbarFdFdPL(gO1,0,0) + CpUhhbarFdFdPR(gO1,0,0));
    result += 2*MFe*A0(MFe)*(CpUhhbarFeFePL(gO1) + CpUhhbarFeFePR(gO1));
    result += 2*MFm*A0(MFm)*(CpUhhbarFmFmPL(gO1) + CpUhhbarFmFmPR(gO1));
-   result += 6*MFs*A0(MFs)*(CpUhhbarFsFsPL(gO1,1,1) + CpUhhbarFsFsPR(gO1,1,1));
-   result += 6*MFt*A0(MFt)*(CpUhhbarFtFtPL(gO1,1,1) + CpUhhbarFtFtPR(gO1,1,1));
+   result += 6*MFs*A0(MFs)*(CpUhhbarFsFsPL(gO1,0,0) + CpUhhbarFsFsPR(gO1,0,0));
+   result += 6*MFt*A0(MFt)*(CpUhhbarFtFtPL(gO1,0,0) + CpUhhbarFtFtPR(gO1,0,0));
    result += 2*MFtau*A0(MFtau)*(CpUhhbarFtauFtauPL(gO1) + CpUhhbarFtauFtauPR(
       gO1));
-   result += 6*MFu*A0(MFu)*(CpUhhbarFuFuPL(gO1,1,1) + CpUhhbarFuFuPR(gO1,1,1));
+   result += 6*MFu*A0(MFu)*(CpUhhbarFuFuPL(gO1,0,0) + CpUhhbarFuFuPR(gO1,0,0));
 
    return result * oneOver16PiSqr;
 
@@ -20196,7 +20186,7 @@ void CLASSNAME::calculate_MVP_pole()
 
 void CLASSNAME::calculate_MVZ_pole()
 {
-   if (!force_output && problems.is_tachyon(VZ))
+   if (!force_output && problems.is_tachyon(CMSSMNoFV_info::VZ))
       return;
 
    // diagonalization with medium precision
@@ -20206,7 +20196,7 @@ void CLASSNAME::calculate_MVZ_pole()
    const double mass_sqr = M_tree - self_energy;
 
    if (mass_sqr < 0.)
-      problems.flag_tachyon(VZ);
+      problems.flag_tachyon(CMSSMNoFV_info::VZ);
 
    PHYSICAL(MVZ) = AbsSqrt(mass_sqr);
 }
@@ -20374,7 +20364,7 @@ void CLASSNAME::calculate_MFtau_pole()
 
 void CLASSNAME::calculate_MSveL_pole()
 {
-   if (!force_output && problems.is_tachyon(SveL))
+   if (!force_output && problems.is_tachyon(CMSSMNoFV_info::SveL))
       return;
 
    // diagonalization with medium precision
@@ -20388,7 +20378,7 @@ void CLASSNAME::calculate_MSveL_pole()
 
 void CLASSNAME::calculate_MSvmL_pole()
 {
-   if (!force_output && problems.is_tachyon(SvmL))
+   if (!force_output && problems.is_tachyon(CMSSMNoFV_info::SvmL))
       return;
 
    // diagonalization with medium precision
@@ -20402,7 +20392,7 @@ void CLASSNAME::calculate_MSvmL_pole()
 
 void CLASSNAME::calculate_MSvtL_pole()
 {
-   if (!force_output && problems.is_tachyon(SvtL))
+   if (!force_output && problems.is_tachyon(CMSSMNoFV_info::SvtL))
       return;
 
    // diagonalization with medium precision
@@ -20416,7 +20406,7 @@ void CLASSNAME::calculate_MSvtL_pole()
 
 void CLASSNAME::calculate_MSd_pole()
 {
-   if (!force_output && problems.is_tachyon(Sd))
+   if (!force_output && problems.is_tachyon(CMSSMNoFV_info::Sd))
       return;
 
    // diagonalization with medium precision
@@ -20453,7 +20443,7 @@ void CLASSNAME::calculate_MSd_pole()
 
 void CLASSNAME::calculate_MSu_pole()
 {
-   if (!force_output && problems.is_tachyon(Su))
+   if (!force_output && problems.is_tachyon(CMSSMNoFV_info::Su))
       return;
 
    // diagonalization with medium precision
@@ -20490,7 +20480,7 @@ void CLASSNAME::calculate_MSu_pole()
 
 void CLASSNAME::calculate_MSe_pole()
 {
-   if (!force_output && problems.is_tachyon(Se))
+   if (!force_output && problems.is_tachyon(CMSSMNoFV_info::Se))
       return;
 
    // diagonalization with medium precision
@@ -20527,7 +20517,7 @@ void CLASSNAME::calculate_MSe_pole()
 
 void CLASSNAME::calculate_MSm_pole()
 {
-   if (!force_output && problems.is_tachyon(Sm))
+   if (!force_output && problems.is_tachyon(CMSSMNoFV_info::Sm))
       return;
 
    // diagonalization with medium precision
@@ -20564,7 +20554,7 @@ void CLASSNAME::calculate_MSm_pole()
 
 void CLASSNAME::calculate_MStau_pole()
 {
-   if (!force_output && problems.is_tachyon(Stau))
+   if (!force_output && problems.is_tachyon(CMSSMNoFV_info::Stau))
       return;
 
    // diagonalization with medium precision
@@ -20601,7 +20591,7 @@ void CLASSNAME::calculate_MStau_pole()
 
 void CLASSNAME::calculate_MSs_pole()
 {
-   if (!force_output && problems.is_tachyon(Ss))
+   if (!force_output && problems.is_tachyon(CMSSMNoFV_info::Ss))
       return;
 
    // diagonalization with medium precision
@@ -20638,7 +20628,7 @@ void CLASSNAME::calculate_MSs_pole()
 
 void CLASSNAME::calculate_MSc_pole()
 {
-   if (!force_output && problems.is_tachyon(Sc))
+   if (!force_output && problems.is_tachyon(CMSSMNoFV_info::Sc))
       return;
 
    // diagonalization with medium precision
@@ -20675,7 +20665,7 @@ void CLASSNAME::calculate_MSc_pole()
 
 void CLASSNAME::calculate_MSb_pole()
 {
-   if (!force_output && problems.is_tachyon(Sb))
+   if (!force_output && problems.is_tachyon(CMSSMNoFV_info::Sb))
       return;
 
    // diagonalization with medium precision
@@ -20712,7 +20702,7 @@ void CLASSNAME::calculate_MSb_pole()
 
 void CLASSNAME::calculate_MSt_pole()
 {
-   if (!force_output && problems.is_tachyon(St))
+   if (!force_output && problems.is_tachyon(CMSSMNoFV_info::St))
       return;
 
    // diagonalization with medium precision
@@ -20749,7 +20739,7 @@ void CLASSNAME::calculate_MSt_pole()
 
 void CLASSNAME::calculate_Mhh_pole()
 {
-   if (!force_output && problems.is_tachyon(hh))
+   if (!force_output && problems.is_tachyon(CMSSMNoFV_info::hh))
       return;
 
    // diagonalization with high precision
@@ -20824,7 +20814,7 @@ void CLASSNAME::calculate_Mhh_pole()
 
 void CLASSNAME::calculate_MAh_pole()
 {
-   if (!force_output && problems.is_tachyon(Ah))
+   if (!force_output && problems.is_tachyon(CMSSMNoFV_info::Ah))
       return;
 
    // diagonalization with high precision
@@ -20899,7 +20889,7 @@ void CLASSNAME::calculate_MAh_pole()
 
 void CLASSNAME::calculate_MHpm_pole()
 {
-   if (!force_output && problems.is_tachyon(Hpm))
+   if (!force_output && problems.is_tachyon(CMSSMNoFV_info::Hpm))
       return;
 
    // diagonalization with high precision
@@ -21037,7 +21027,7 @@ void CLASSNAME::calculate_MCha_pole()
 
 void CLASSNAME::calculate_MVWm_pole()
 {
-   if (!force_output && problems.is_tachyon(VWm))
+   if (!force_output && problems.is_tachyon(CMSSMNoFV_info::VWm))
       return;
 
    // diagonalization with medium precision
@@ -21047,35 +21037,35 @@ void CLASSNAME::calculate_MVWm_pole()
    const double mass_sqr = M_tree - self_energy;
 
    if (mass_sqr < 0.)
-      problems.flag_tachyon(VWm);
+      problems.flag_tachyon(CMSSMNoFV_info::VWm);
 
    PHYSICAL(MVWm) = AbsSqrt(mass_sqr);
 }
 
 double CLASSNAME::calculate_MVWm_pole(double p)
 {
-   if (!force_output && problems.is_tachyon(VWm))
+   if (!force_output && problems.is_tachyon(CMSSMNoFV_info::VWm))
       return 0.;
 
    const double self_energy = Re(self_energy_VWm(p));
    const double mass_sqr = Sqr(MVWm) - self_energy;
 
    if (mass_sqr < 0.)
-      problems.flag_tachyon(VWm);
+      problems.flag_tachyon(CMSSMNoFV_info::VWm);
 
    return AbsSqrt(mass_sqr);
 }
 
 double CLASSNAME::calculate_MVZ_pole(double p)
 {
-   if (!force_output && problems.is_tachyon(VZ))
+   if (!force_output && problems.is_tachyon(CMSSMNoFV_info::VZ))
       return 0.;
 
    const double self_energy = Re(self_energy_VZ(p));
    const double mass_sqr = Sqr(MVZ) - self_energy;
 
    if (mass_sqr < 0.)
-      problems.flag_tachyon(VZ);
+      problems.flag_tachyon(CMSSMNoFV_info::VZ);
 
    return AbsSqrt(mass_sqr);
 }
@@ -21277,7 +21267,7 @@ double CLASSNAME::calculate_MVZ_DRbar(double m_pole)
    const double mass_sqr = Sqr(m_pole) + self_energy;
 
    if (mass_sqr < 0.) {
-      problems.flag_tachyon(VZ);
+      problems.flag_tachyon(CMSSMNoFV_info::VZ);
       return m_pole;
    }
 
@@ -21291,7 +21281,7 @@ double CLASSNAME::calculate_MVWm_DRbar(double m_pole)
    const double mass_sqr = Sqr(m_pole) + self_energy;
 
    if (mass_sqr < 0.) {
-      problems.flag_tachyon(VWm);
+      problems.flag_tachyon(CMSSMNoFV_info::VWm);
       return m_pole;
    }
 

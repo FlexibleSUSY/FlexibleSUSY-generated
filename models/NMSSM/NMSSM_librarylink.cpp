@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Thu 15 Dec 2016 13:02:01
+// File generated at Mon 27 Feb 2017 13:44:54
 
 #include "NMSSM_info.hpp"
 #include "NMSSM_input_parameters.hpp"
@@ -47,6 +47,8 @@
 #define MODELPARAMETER(p) model.get_##p()
 #define PHYSICALPARAMETER(p) model.get_physical().p
 #define OBSERVABLE(o) observables.o
+
+namespace NMSSM_librarylink {
 
 using namespace flexiblesusy;
 
@@ -84,7 +86,6 @@ private:
    }
 };
 
-namespace flexiblesusy {
 class EUnknownHandle : public Error {
 public:
    explicit EUnknownHandle(Handle_id hid_) : hid(hid_) {}
@@ -126,10 +127,8 @@ public:
    virtual std::string what() const { return "Invalid spectrum"; }
 };
 
-} // namespace flexiblesusy
-
-struct NMSSM_data {
-   NMSSM_data()
+struct Model_data {
+   Model_data()
       : input()
       , physical_input()
       , qedqcd()
@@ -147,22 +146,22 @@ struct NMSSM_data {
 };
 
 /// current handles
-typedef std::map<Handle_id, NMSSM_data> Handle_map;
-Handle_map handles_NMSSM;
+typedef std::map<Handle_id, Model_data> Handle_map;
+Handle_map handles;
 
 /******************************************************************/
 
-Handle_id get_new_NMSSM_handle()
+Handle_id get_new_handle()
 {
    static const std::size_t max_handles =
       static_cast<std::size_t>(std::exp2(8*sizeof(Handle_id)) - 1);
 
-   if (handles_NMSSM.size() >= max_handles)
-      throw ENotEnoughFreeHandles(handles_NMSSM.size());
+   if (handles.size() >= max_handles)
+      throw ENotEnoughFreeHandles(handles.size());
 
    Handle_id hid = 0;
 
-   while (handles_NMSSM.find(hid) != handles_NMSSM.end())
+   while (handles.find(hid) != handles.end())
       hid++;
 
    return hid;
@@ -170,11 +169,11 @@ Handle_id get_new_NMSSM_handle()
 
 /******************************************************************/
 
-NMSSM_data find_NMSSM_data(Handle_id hid)
+Model_data find_data(Handle_id hid)
 {
-   const Handle_map::iterator handle = handles_NMSSM.find(hid);
+   const Handle_map::iterator handle = handles.find(hid);
 
-   if (handle == handles_NMSSM.end())
+   if (handle == handles.end())
       throw EUnknownHandle(hid);
 
    return handle->second;
@@ -243,9 +242,9 @@ void put_message(MLINK link,
 
 /******************************************************************/
 
-void put_settings(const NMSSM_data& data, MLINK link)
+void put_settings(const Model_data& data, MLINK link)
 {
-   MLPutFunction(link, "List", 23);
+   MLPutFunction(link, "List", Spectrum_generator_settings::NUMBER_OF_OPTIONS - 1);
 
    MLPutRuleTo(link, data.settings.get(Spectrum_generator_settings::precision), "precisionGoal");
    MLPutRuleTo(link, (int)data.settings.get(Spectrum_generator_settings::max_iterations), "maxIterations");
@@ -276,9 +275,10 @@ void put_settings(const NMSSM_data& data, MLINK link)
 
 /******************************************************************/
 
-void put_sm_input_parameters(const NMSSM_data& data, MLINK link)
+void put_sm_input_parameters(const Model_data& data, MLINK link)
 {
-   MLPutFunction(link, "List", 29);
+   MLPutFunction(link, "List",softsusy::NUMBER_OF_LOW_ENERGY_INPUT_PARAMETERS
+                              + Physical_input::NUMBER_OF_INPUT_PARAMETERS);
 
    MLPutRuleTo(link, data.qedqcd.displayAlphaEmInput(), "alphaEmMZ");
    MLPutRuleTo(link, data.qedqcd.displayFermiConstant(), "GF");
@@ -320,7 +320,7 @@ void put_sm_input_parameters(const NMSSM_data& data, MLINK link)
 
 /******************************************************************/
 
-void put_input_parameters(const NMSSM_data& data, MLINK link)
+void put_input_parameters(const Model_data& data, MLINK link)
 {
    MLPutFunction(link, "List", 6);
 
@@ -461,7 +461,7 @@ void put_observables(const NMSSM_observables& observables, MLINK link)
 
 /******************************************************************/
 
-void check_spectrum(const NMSSM_data& data, MLINK link)
+void check_spectrum(const Model_data& data, MLINK link)
 {
    const Problems<NMSSM_info::NUMBER_OF_PARTICLES>& problems
       = data.model.get_problems();
@@ -485,7 +485,7 @@ void check_spectrum(const NMSSM_data& data, MLINK link)
 
 /******************************************************************/
 
-void calculate_spectrum(NMSSM_data& data, MLINK link)
+void calculate_spectrum(Model_data& data, MLINK link)
 {
    softsusy::QedQcd qedqcd(data.qedqcd);
 
@@ -508,11 +508,14 @@ void calculate_spectrum(NMSSM_data& data, MLINK link)
 
 /******************************************************************/
 
-NMSSM_data make_NMSSM_data(double* pars, mint npars)
+Model_data make_data(double* pars, mint npars)
 {
-   NMSSM_data data;
+   Model_data data;
 
-   const mint n_settings = 23, n_sm_parameters = 29, n_input_pars = 6;
+   const mint n_settings = Spectrum_generator_settings::NUMBER_OF_OPTIONS - 1,
+      n_sm_parameters = softsusy::NUMBER_OF_LOW_ENERGY_INPUT_PARAMETERS
+                        + Physical_input::NUMBER_OF_INPUT_PARAMETERS,
+      n_input_pars = 6;
    const mint n_total = n_settings + n_sm_parameters + n_input_pars;
 
    if (npars != n_total)
@@ -610,6 +613,8 @@ NMSSM_data make_NMSSM_data(double* pars, mint npars)
    return data;
 }
 
+} // namespace NMSSM_librarylink
+
 extern "C" {
 
 /******************************************************************/
@@ -630,13 +635,15 @@ DLLEXPORT int WolframLibrary_initialize(WolframLibraryData /* libData */)
 
 DLLEXPORT int FSNMSSMGetSettings(WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace NMSSM_librarylink;
+
    if (!check_number_of_args(link, 1, "FSNMSSMGetSettings"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      const NMSSM_data data = find_NMSSM_data(hid);
+      const Model_data data = find_data(hid);
       put_settings(data, link);
    } catch (const flexiblesusy::Error& e) {
       std::cerr << e.what() << std::endl;
@@ -650,13 +657,15 @@ DLLEXPORT int FSNMSSMGetSettings(WolframLibraryData /* libData */, MLINK link)
 
 DLLEXPORT int FSNMSSMGetSMInputParameters(WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace NMSSM_librarylink;
+
    if (!check_number_of_args(link, 1, "FSNMSSMGetSMInputParameters"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      const NMSSM_data data = find_NMSSM_data(hid);
+      const Model_data data = find_data(hid);
       put_sm_input_parameters(data, link);
    } catch (const flexiblesusy::Error& e) {
       std::cerr << e.what() << std::endl;
@@ -670,13 +679,15 @@ DLLEXPORT int FSNMSSMGetSMInputParameters(WolframLibraryData /* libData */, MLIN
 
 DLLEXPORT int FSNMSSMGetInputParameters(WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace NMSSM_librarylink;
+
    if (!check_number_of_args(link, 1, "FSNMSSMGetInputParameters"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      const NMSSM_data data = find_NMSSM_data(hid);
+      const Model_data data = find_data(hid);
       put_input_parameters(data, link);
    } catch (const flexiblesusy::Error& e) {
       std::cerr << e.what() << std::endl;
@@ -691,6 +702,8 @@ DLLEXPORT int FSNMSSMGetInputParameters(WolframLibraryData /* libData */, MLINK 
 DLLEXPORT int FSNMSSMOpenHandle(
    WolframLibraryData libData, mint Argc, MArgument* Args, MArgument Res)
 {
+   using namespace NMSSM_librarylink;
+
    if (Argc != 1)
       return LIBRARY_TYPE_ERROR;
 
@@ -701,13 +714,13 @@ DLLEXPORT int FSNMSSMOpenHandle(
       return LIBRARY_TYPE_ERROR;
 
    try {
-      NMSSM_data data = make_NMSSM_data(
+      Model_data data = make_data(
          libData->MTensor_getRealData(pars),
          libData->MTensor_getDimensions(pars)[0]);
 
-      const Handle_id hid = get_new_NMSSM_handle();
+      const Handle_id hid = get_new_handle();
 
-      handles_NMSSM.insert(std::make_pair(hid, std::move(data)));
+      handles.insert(std::make_pair(hid, std::move(data)));
 
       MArgument_setInteger(Res, hid);
    } catch (const flexiblesusy::Error& e) {
@@ -723,15 +736,17 @@ DLLEXPORT int FSNMSSMOpenHandle(
 DLLEXPORT int FSNMSSMCloseHandle(
    WolframLibraryData /* libData */, mint Argc, MArgument* Args, MArgument /* Res */)
 {
+   using namespace NMSSM_librarylink;
+
    if (Argc != 1)
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = MArgument_getInteger(Args[0]);
 
-   const Handle_map::iterator handle = handles_NMSSM.find(hid);
+   const Handle_map::iterator handle = handles.find(hid);
 
-   if (handle != handles_NMSSM.end())
-      handles_NMSSM.erase(handle);
+   if (handle != handles.end())
+      handles.erase(handle);
 
    return LIBRARY_NO_ERROR;
 }
@@ -741,6 +756,8 @@ DLLEXPORT int FSNMSSMCloseHandle(
 DLLEXPORT int FSNMSSMSet(
    WolframLibraryData libData, mint Argc, MArgument* Args, MArgument /* Res */)
 {
+   using namespace NMSSM_librarylink;
+
    if (Argc != 2)
       return LIBRARY_TYPE_ERROR;
 
@@ -751,16 +768,16 @@ DLLEXPORT int FSNMSSMSet(
        libData->MTensor_getRank(pars) != 1)
       return LIBRARY_TYPE_ERROR;
 
-   const Handle_map::iterator handle = handles_NMSSM.find(hid);
+   const Handle_map::iterator handle = handles.find(hid);
 
-   if (handle == handles_NMSSM.end()) {
+   if (handle == handles.end()) {
       std::cerr << "Error: FSNMSSMSet: Unknown handle: "
                 << hid << std::endl;
       return LIBRARY_FUNCTION_ERROR;
    }
 
    try {
-      handle->second = make_NMSSM_data(
+      handle->second = make_data(
          libData->MTensor_getRealData(pars),
          libData->MTensor_getDimensions(pars)[0]);
    } catch (const flexiblesusy::Error& e) {
@@ -776,13 +793,15 @@ DLLEXPORT int FSNMSSMSet(
 DLLEXPORT int FSNMSSMCalculateSpectrum(
    WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace NMSSM_librarylink;
+
    if (!check_number_of_args(link, 1, "FSNMSSMCalculateSpectrum"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      NMSSM_data data = find_NMSSM_data(hid);
+      Model_data data = find_data(hid);
 
       {
          Redirect_output crd(link);
@@ -792,7 +811,7 @@ DLLEXPORT int FSNMSSMCalculateSpectrum(
       check_spectrum(data, link);
       put_spectrum(data.model, link);
 
-      handles_NMSSM[hid] = std::move(data);
+      handles[hid] = std::move(data);
    } catch (const flexiblesusy::Error&) {
       put_error_output(link);
    }
@@ -805,13 +824,15 @@ DLLEXPORT int FSNMSSMCalculateSpectrum(
 DLLEXPORT int FSNMSSMCalculateObservables(
    WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace NMSSM_librarylink;
+
    if (!check_number_of_args(link, 1, "FSNMSSMCalculateObservables"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      NMSSM_data data = find_NMSSM_data(hid);
+      Model_data data = find_data(hid);
 
       if (data.model.get_scale() == 0.) {
          put_message(link,

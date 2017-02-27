@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Thu 15 Dec 2016 13:09:42
+// File generated at Mon 27 Feb 2017 13:53:19
 
 #ifndef MSSMNoFVatMGUT_EFFECTIVE_COUPLINGS_H
 #define MSSMNoFVatMGUT_EFFECTIVE_COUPLINGS_H

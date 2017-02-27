@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Thu 15 Dec 2016 12:50:32
+// File generated at Mon 27 Feb 2017 13:33:00
 
 #ifndef E6SSMtower_STANDARD_MODEL_SPECTRUM_GENERATOR_H
 #define E6SSMtower_STANDARD_MODEL_SPECTRUM_GENERATOR_H
@@ -50,10 +50,6 @@ class E6SSMtower_spectrum_generator
 public:
    E6SSMtower_spectrum_generator()
       : E6SSMtower_spectrum_generator_interface<T>()
-      , solver()
-      , susy_scale_constraint()
-      , low_scale_constraint()
-      , matching()
       , eft()
       , susy_scale(0.)
       , low_scale(0.)
@@ -61,6 +57,7 @@ public:
    virtual ~E6SSMtower_spectrum_generator() {}
 
    const standard_model::StandardModel<T>& get_eft() const { return eft; }
+   standard_model::StandardModel<T>& get_eft() { return eft; }
    double get_high_scale() const { return 0.; }
    double get_susy_scale() const { return susy_scale; }
    double get_low_scale()  const { return low_scale;  }
@@ -69,10 +66,6 @@ public:
    void write_running_couplings(const std::string& filename = "E6SSMtower_rgflow.dat") const;
 
 private:
-   RGFlow<T> solver;
-   E6SSMtower_susy_scale_constraint<T> susy_scale_constraint;
-   standard_model::Standard_model_low_scale_constraint<T>  low_scale_constraint;
-   E6SSMtower_standard_model_Matching<T> matching;
    standard_model::StandardModel<T> eft;
    double susy_scale, low_scale;
 };
@@ -114,17 +107,12 @@ void E6SSMtower_spectrum_generator<T>::run(const softsusy::QedQcd& qedqcd,
    eft.set_number_of_mass_iterations(this->model.get_number_of_mass_iterations());
    eft.set_two_loop_corrections(this->model.get_two_loop_corrections());
 
-   susy_scale_constraint.clear();
-   low_scale_constraint .clear();
-
-   // needed for constraint::initialize()
-   susy_scale_constraint.set_model(&model);
-   low_scale_constraint .set_model(&eft);
-
-   low_scale_constraint .set_sm_parameters(qedqcd);
+   E6SSMtower_susy_scale_constraint<T> susy_scale_constraint(&model, qedqcd);
+   standard_model::Standard_model_low_scale_constraint<T>  low_scale_constraint(&eft, qedqcd);
 
    const unsigned index = this->settings.get(Spectrum_generator_settings::eft_higgs_index);
 
+   E6SSMtower_standard_model_Matching<T> matching;
    matching.set_models(&eft, &model);
    matching.set_constraint(&susy_scale_constraint);
    matching.set_scale(this->settings.get(Spectrum_generator_settings::eft_matching_scale));
@@ -167,7 +155,7 @@ void E6SSMtower_spectrum_generator<T>::run(const softsusy::QedQcd& qedqcd,
    Two_scale_increasing_precision precision(
       10.0, this->settings.get(Spectrum_generator_settings::precision));
 
-   solver.reset();
+   RGFlow<T> solver;
    solver.set_convergence_tester(&cct);
    solver.set_running_precision(&precision);
    solver.set_initial_guesser(&initial_guesser);

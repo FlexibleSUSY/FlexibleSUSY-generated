@@ -19,7 +19,11 @@ FSNMSSMCalculateObservables::error = "`1`";
 FSNMSSMCalculateObservables::warning = "`1`";
 
 FSNMSSM::info = "`1`";
+FSNMSSM::nonum = "Error: `1` is not a numeric input value!";
 FSNMSSMMessage[s_] := Message[FSNMSSM::info, s];
+
+FSNMSSMCheckIsNumeric[a_?NumericQ] := a;
+FSNMSSMCheckIsNumeric[a_] := (Message[FSNMSSM::nonum, a]; Abort[]);
 
 fsDefaultSettings = {
       precisionGoal -> 1.*^-4,           (* FlexibleSUSY[0] *)
@@ -99,7 +103,7 @@ FSNMSSMOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters) -> s_L
 
 FSNMSSMOpenHandle[OptionsPattern[]] :=
     FSNMSSMOpenHandleLib[
-        {
+        FSNMSSMCheckIsNumeric /@ {
             (* spectrum generator settings *)
             OptionValue[precisionGoal],
             OptionValue[maxIterations],
@@ -240,7 +244,7 @@ FSNMSSMSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[SignvS],
             OptionValue[Azero],
             OptionValue[LambdaInput]
-        }] /. HoldPattern[OptionValue[param_]] :> param /.
+        }] /. HoldPattern[OptionValue[param_]] :> FSNMSSMCheckIsNumeric[param] /.
         { p } /.
         FSNMSSMGetSettings[handle] /.
         FSNMSSMGetSMInputParameters[handle] /.

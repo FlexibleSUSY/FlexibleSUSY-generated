@@ -19,7 +19,11 @@ FSlowMSSMCalculateObservables::error = "`1`";
 FSlowMSSMCalculateObservables::warning = "`1`";
 
 FSlowMSSM::info = "`1`";
+FSlowMSSM::nonum = "Error: `1` is not a numeric input value!";
 FSlowMSSMMessage[s_] := Message[FSlowMSSM::info, s];
+
+FSlowMSSMCheckIsNumeric[a_?NumericQ] := a;
+FSlowMSSMCheckIsNumeric[a_] := (Message[FSlowMSSM::nonum, a]; Abort[]);
 
 fsDefaultSettings = {
       precisionGoal -> 1.*^-4,           (* FlexibleSUSY[0] *)
@@ -107,7 +111,7 @@ FSlowMSSMOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters) -> s
 
 FSlowMSSMOpenHandle[OptionsPattern[]] :=
     FSlowMSSMOpenHandleLib[
-        {
+        FSlowMSSMCheckIsNumeric /@ {
             (* spectrum generator settings *)
             OptionValue[precisionGoal],
             OptionValue[maxIterations],
@@ -392,7 +396,7 @@ FSlowMSSMSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[MassBInput],
             OptionValue[MassWBInput],
             OptionValue[MassGInput]
-        }] /. HoldPattern[OptionValue[param_]] :> param /.
+        }] /. HoldPattern[OptionValue[param_]] :> FSlowMSSMCheckIsNumeric[param] /.
         { p } /.
         FSlowMSSMGetSettings[handle] /.
         FSlowMSSMGetSMInputParameters[handle] /.

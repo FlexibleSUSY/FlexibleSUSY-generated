@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Thu 15 Dec 2016 12:38:05
+// File generated at Mon 27 Feb 2017 13:20:46
 
 #include "MSSMtower_info.hpp"
 
@@ -119,8 +119,8 @@ namespace MSSMtower_info {
       "Im(ZUR(2,1))", "Re(ZUR(2,2))", "Im(ZUR(2,2))", "ZZ(0,0)", "ZZ(0,1)",
       "ZZ(1,0)", "ZZ(1,1)"};
 
-   const char* input_parameter_names[NUMBER_OF_INPUT_PARAMETERS] = {"SignMu",
-      "MSUSY", "M1Input", "M2Input", "M3Input", "MuInput", "mAInput", "TanBeta",
+   const char* input_parameter_names[NUMBER_OF_INPUT_PARAMETERS] = {"MSUSY",
+      "M1Input", "M2Input", "M3Input", "MuInput", "mAInput", "TanBeta",
       "mq2Input(0,0)", "mq2Input(0,1)", "mq2Input(0,2)", "mq2Input(1,0)",
       "mq2Input(1,1)", "mq2Input(1,2)", "mq2Input(2,0)", "mq2Input(2,1)",
       "mq2Input(2,2)", "mu2Input(0,0)", "mu2Input(0,1)", "mu2Input(0,2)",

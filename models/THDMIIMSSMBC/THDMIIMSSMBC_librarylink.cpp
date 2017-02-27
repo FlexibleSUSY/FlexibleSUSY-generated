@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Thu 15 Dec 2016 12:42:14
+// File generated at Mon 27 Feb 2017 13:24:49
 
 #include "THDMIIMSSMBC_info.hpp"
 #include "THDMIIMSSMBC_input_parameters.hpp"
@@ -47,6 +47,8 @@
 #define MODELPARAMETER(p) model.get_##p()
 #define PHYSICALPARAMETER(p) model.get_physical().p
 #define OBSERVABLE(o) observables.o
+
+namespace THDMIIMSSMBC_librarylink {
 
 using namespace flexiblesusy;
 
@@ -84,7 +86,6 @@ private:
    }
 };
 
-namespace flexiblesusy {
 class EUnknownHandle : public Error {
 public:
    explicit EUnknownHandle(Handle_id hid_) : hid(hid_) {}
@@ -126,10 +127,8 @@ public:
    virtual std::string what() const { return "Invalid spectrum"; }
 };
 
-} // namespace flexiblesusy
-
-struct THDMIIMSSMBC_data {
-   THDMIIMSSMBC_data()
+struct Model_data {
+   Model_data()
       : input()
       , physical_input()
       , qedqcd()
@@ -147,22 +146,22 @@ struct THDMIIMSSMBC_data {
 };
 
 /// current handles
-typedef std::map<Handle_id, THDMIIMSSMBC_data> Handle_map;
-Handle_map handles_THDMIIMSSMBC;
+typedef std::map<Handle_id, Model_data> Handle_map;
+Handle_map handles;
 
 /******************************************************************/
 
-Handle_id get_new_THDMIIMSSMBC_handle()
+Handle_id get_new_handle()
 {
    static const std::size_t max_handles =
       static_cast<std::size_t>(std::exp2(8*sizeof(Handle_id)) - 1);
 
-   if (handles_THDMIIMSSMBC.size() >= max_handles)
-      throw ENotEnoughFreeHandles(handles_THDMIIMSSMBC.size());
+   if (handles.size() >= max_handles)
+      throw ENotEnoughFreeHandles(handles.size());
 
    Handle_id hid = 0;
 
-   while (handles_THDMIIMSSMBC.find(hid) != handles_THDMIIMSSMBC.end())
+   while (handles.find(hid) != handles.end())
       hid++;
 
    return hid;
@@ -170,11 +169,11 @@ Handle_id get_new_THDMIIMSSMBC_handle()
 
 /******************************************************************/
 
-THDMIIMSSMBC_data find_THDMIIMSSMBC_data(Handle_id hid)
+Model_data find_data(Handle_id hid)
 {
-   const Handle_map::iterator handle = handles_THDMIIMSSMBC.find(hid);
+   const Handle_map::iterator handle = handles.find(hid);
 
-   if (handle == handles_THDMIIMSSMBC.end())
+   if (handle == handles.end())
       throw EUnknownHandle(hid);
 
    return handle->second;
@@ -243,9 +242,9 @@ void put_message(MLINK link,
 
 /******************************************************************/
 
-void put_settings(const THDMIIMSSMBC_data& data, MLINK link)
+void put_settings(const Model_data& data, MLINK link)
 {
-   MLPutFunction(link, "List", 23);
+   MLPutFunction(link, "List", Spectrum_generator_settings::NUMBER_OF_OPTIONS - 1);
 
    MLPutRuleTo(link, data.settings.get(Spectrum_generator_settings::precision), "precisionGoal");
    MLPutRuleTo(link, (int)data.settings.get(Spectrum_generator_settings::max_iterations), "maxIterations");
@@ -276,9 +275,10 @@ void put_settings(const THDMIIMSSMBC_data& data, MLINK link)
 
 /******************************************************************/
 
-void put_sm_input_parameters(const THDMIIMSSMBC_data& data, MLINK link)
+void put_sm_input_parameters(const Model_data& data, MLINK link)
 {
-   MLPutFunction(link, "List", 29);
+   MLPutFunction(link, "List",softsusy::NUMBER_OF_LOW_ENERGY_INPUT_PARAMETERS
+                              + Physical_input::NUMBER_OF_INPUT_PARAMETERS);
 
    MLPutRuleTo(link, data.qedqcd.displayAlphaEmInput(), "alphaEmMZ");
    MLPutRuleTo(link, data.qedqcd.displayFermiConstant(), "GF");
@@ -320,7 +320,7 @@ void put_sm_input_parameters(const THDMIIMSSMBC_data& data, MLINK link)
 
 /******************************************************************/
 
-void put_input_parameters(const THDMIIMSSMBC_data& data, MLINK link)
+void put_input_parameters(const Model_data& data, MLINK link)
 {
    MLPutFunction(link, "List", 9);
 
@@ -423,7 +423,7 @@ void put_observables(const THDMIIMSSMBC_observables& observables, MLINK link)
 
 /******************************************************************/
 
-void check_spectrum(const THDMIIMSSMBC_data& data, MLINK link)
+void check_spectrum(const Model_data& data, MLINK link)
 {
    const Problems<THDMIIMSSMBC_info::NUMBER_OF_PARTICLES>& problems
       = data.model.get_problems();
@@ -447,7 +447,7 @@ void check_spectrum(const THDMIIMSSMBC_data& data, MLINK link)
 
 /******************************************************************/
 
-void calculate_spectrum(THDMIIMSSMBC_data& data, MLINK link)
+void calculate_spectrum(Model_data& data, MLINK link)
 {
    softsusy::QedQcd qedqcd(data.qedqcd);
 
@@ -470,11 +470,14 @@ void calculate_spectrum(THDMIIMSSMBC_data& data, MLINK link)
 
 /******************************************************************/
 
-THDMIIMSSMBC_data make_THDMIIMSSMBC_data(double* pars, mint npars)
+Model_data make_data(double* pars, mint npars)
 {
-   THDMIIMSSMBC_data data;
+   Model_data data;
 
-   const mint n_settings = 23, n_sm_parameters = 29, n_input_pars = 9;
+   const mint n_settings = Spectrum_generator_settings::NUMBER_OF_OPTIONS - 1,
+      n_sm_parameters = softsusy::NUMBER_OF_LOW_ENERGY_INPUT_PARAMETERS
+                        + Physical_input::NUMBER_OF_INPUT_PARAMETERS,
+      n_input_pars = 9;
    const mint n_total = n_settings + n_sm_parameters + n_input_pars;
 
    if (npars != n_total)
@@ -575,6 +578,8 @@ THDMIIMSSMBC_data make_THDMIIMSSMBC_data(double* pars, mint npars)
    return data;
 }
 
+} // namespace THDMIIMSSMBC_librarylink
+
 extern "C" {
 
 /******************************************************************/
@@ -595,13 +600,15 @@ DLLEXPORT int WolframLibrary_initialize(WolframLibraryData /* libData */)
 
 DLLEXPORT int FSTHDMIIMSSMBCGetSettings(WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace THDMIIMSSMBC_librarylink;
+
    if (!check_number_of_args(link, 1, "FSTHDMIIMSSMBCGetSettings"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      const THDMIIMSSMBC_data data = find_THDMIIMSSMBC_data(hid);
+      const Model_data data = find_data(hid);
       put_settings(data, link);
    } catch (const flexiblesusy::Error& e) {
       std::cerr << e.what() << std::endl;
@@ -615,13 +622,15 @@ DLLEXPORT int FSTHDMIIMSSMBCGetSettings(WolframLibraryData /* libData */, MLINK 
 
 DLLEXPORT int FSTHDMIIMSSMBCGetSMInputParameters(WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace THDMIIMSSMBC_librarylink;
+
    if (!check_number_of_args(link, 1, "FSTHDMIIMSSMBCGetSMInputParameters"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      const THDMIIMSSMBC_data data = find_THDMIIMSSMBC_data(hid);
+      const Model_data data = find_data(hid);
       put_sm_input_parameters(data, link);
    } catch (const flexiblesusy::Error& e) {
       std::cerr << e.what() << std::endl;
@@ -635,13 +644,15 @@ DLLEXPORT int FSTHDMIIMSSMBCGetSMInputParameters(WolframLibraryData /* libData *
 
 DLLEXPORT int FSTHDMIIMSSMBCGetInputParameters(WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace THDMIIMSSMBC_librarylink;
+
    if (!check_number_of_args(link, 1, "FSTHDMIIMSSMBCGetInputParameters"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      const THDMIIMSSMBC_data data = find_THDMIIMSSMBC_data(hid);
+      const Model_data data = find_data(hid);
       put_input_parameters(data, link);
    } catch (const flexiblesusy::Error& e) {
       std::cerr << e.what() << std::endl;
@@ -656,6 +667,8 @@ DLLEXPORT int FSTHDMIIMSSMBCGetInputParameters(WolframLibraryData /* libData */,
 DLLEXPORT int FSTHDMIIMSSMBCOpenHandle(
    WolframLibraryData libData, mint Argc, MArgument* Args, MArgument Res)
 {
+   using namespace THDMIIMSSMBC_librarylink;
+
    if (Argc != 1)
       return LIBRARY_TYPE_ERROR;
 
@@ -666,13 +679,13 @@ DLLEXPORT int FSTHDMIIMSSMBCOpenHandle(
       return LIBRARY_TYPE_ERROR;
 
    try {
-      THDMIIMSSMBC_data data = make_THDMIIMSSMBC_data(
+      Model_data data = make_data(
          libData->MTensor_getRealData(pars),
          libData->MTensor_getDimensions(pars)[0]);
 
-      const Handle_id hid = get_new_THDMIIMSSMBC_handle();
+      const Handle_id hid = get_new_handle();
 
-      handles_THDMIIMSSMBC.insert(std::make_pair(hid, std::move(data)));
+      handles.insert(std::make_pair(hid, std::move(data)));
 
       MArgument_setInteger(Res, hid);
    } catch (const flexiblesusy::Error& e) {
@@ -688,15 +701,17 @@ DLLEXPORT int FSTHDMIIMSSMBCOpenHandle(
 DLLEXPORT int FSTHDMIIMSSMBCCloseHandle(
    WolframLibraryData /* libData */, mint Argc, MArgument* Args, MArgument /* Res */)
 {
+   using namespace THDMIIMSSMBC_librarylink;
+
    if (Argc != 1)
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = MArgument_getInteger(Args[0]);
 
-   const Handle_map::iterator handle = handles_THDMIIMSSMBC.find(hid);
+   const Handle_map::iterator handle = handles.find(hid);
 
-   if (handle != handles_THDMIIMSSMBC.end())
-      handles_THDMIIMSSMBC.erase(handle);
+   if (handle != handles.end())
+      handles.erase(handle);
 
    return LIBRARY_NO_ERROR;
 }
@@ -706,6 +721,8 @@ DLLEXPORT int FSTHDMIIMSSMBCCloseHandle(
 DLLEXPORT int FSTHDMIIMSSMBCSet(
    WolframLibraryData libData, mint Argc, MArgument* Args, MArgument /* Res */)
 {
+   using namespace THDMIIMSSMBC_librarylink;
+
    if (Argc != 2)
       return LIBRARY_TYPE_ERROR;
 
@@ -716,16 +733,16 @@ DLLEXPORT int FSTHDMIIMSSMBCSet(
        libData->MTensor_getRank(pars) != 1)
       return LIBRARY_TYPE_ERROR;
 
-   const Handle_map::iterator handle = handles_THDMIIMSSMBC.find(hid);
+   const Handle_map::iterator handle = handles.find(hid);
 
-   if (handle == handles_THDMIIMSSMBC.end()) {
+   if (handle == handles.end()) {
       std::cerr << "Error: FSTHDMIIMSSMBCSet: Unknown handle: "
                 << hid << std::endl;
       return LIBRARY_FUNCTION_ERROR;
    }
 
    try {
-      handle->second = make_THDMIIMSSMBC_data(
+      handle->second = make_data(
          libData->MTensor_getRealData(pars),
          libData->MTensor_getDimensions(pars)[0]);
    } catch (const flexiblesusy::Error& e) {
@@ -741,13 +758,15 @@ DLLEXPORT int FSTHDMIIMSSMBCSet(
 DLLEXPORT int FSTHDMIIMSSMBCCalculateSpectrum(
    WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace THDMIIMSSMBC_librarylink;
+
    if (!check_number_of_args(link, 1, "FSTHDMIIMSSMBCCalculateSpectrum"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      THDMIIMSSMBC_data data = find_THDMIIMSSMBC_data(hid);
+      Model_data data = find_data(hid);
 
       {
          Redirect_output crd(link);
@@ -757,7 +776,7 @@ DLLEXPORT int FSTHDMIIMSSMBCCalculateSpectrum(
       check_spectrum(data, link);
       put_spectrum(data.model, link);
 
-      handles_THDMIIMSSMBC[hid] = std::move(data);
+      handles[hid] = std::move(data);
    } catch (const flexiblesusy::Error&) {
       put_error_output(link);
    }
@@ -770,13 +789,15 @@ DLLEXPORT int FSTHDMIIMSSMBCCalculateSpectrum(
 DLLEXPORT int FSTHDMIIMSSMBCCalculateObservables(
    WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace THDMIIMSSMBC_librarylink;
+
    if (!check_number_of_args(link, 1, "FSTHDMIIMSSMBCCalculateObservables"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      THDMIIMSSMBC_data data = find_THDMIIMSSMBC_data(hid);
+      Model_data data = find_data(hid);
 
       if (data.model.get_scale() == 0.) {
          put_message(link,

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Thu 15 Dec 2016 13:01:20
+// File generated at Mon 27 Feb 2017 13:44:25
 
 #ifndef MSSMRHN_SPECTRUM_GENERATOR_INTERFACE_H
 #define MSSMRHN_SPECTRUM_GENERATOR_INTERFACE_H

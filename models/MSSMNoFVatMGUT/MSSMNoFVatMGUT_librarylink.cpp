@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Thu 15 Dec 2016 13:09:43
+// File generated at Mon 27 Feb 2017 13:53:21
 
 #include "MSSMNoFVatMGUT_info.hpp"
 #include "MSSMNoFVatMGUT_input_parameters.hpp"
@@ -47,6 +47,8 @@
 #define MODELPARAMETER(p) model.get_##p()
 #define PHYSICALPARAMETER(p) model.get_physical().p
 #define OBSERVABLE(o) observables.o
+
+namespace MSSMNoFVatMGUT_librarylink {
 
 using namespace flexiblesusy;
 
@@ -84,7 +86,6 @@ private:
    }
 };
 
-namespace flexiblesusy {
 class EUnknownHandle : public Error {
 public:
    explicit EUnknownHandle(Handle_id hid_) : hid(hid_) {}
@@ -126,10 +127,8 @@ public:
    virtual std::string what() const { return "Invalid spectrum"; }
 };
 
-} // namespace flexiblesusy
-
-struct MSSMNoFVatMGUT_data {
-   MSSMNoFVatMGUT_data()
+struct Model_data {
+   Model_data()
       : input()
       , physical_input()
       , qedqcd()
@@ -147,22 +146,22 @@ struct MSSMNoFVatMGUT_data {
 };
 
 /// current handles
-typedef std::map<Handle_id, MSSMNoFVatMGUT_data> Handle_map;
-Handle_map handles_MSSMNoFVatMGUT;
+typedef std::map<Handle_id, Model_data> Handle_map;
+Handle_map handles;
 
 /******************************************************************/
 
-Handle_id get_new_MSSMNoFVatMGUT_handle()
+Handle_id get_new_handle()
 {
    static const std::size_t max_handles =
       static_cast<std::size_t>(std::exp2(8*sizeof(Handle_id)) - 1);
 
-   if (handles_MSSMNoFVatMGUT.size() >= max_handles)
-      throw ENotEnoughFreeHandles(handles_MSSMNoFVatMGUT.size());
+   if (handles.size() >= max_handles)
+      throw ENotEnoughFreeHandles(handles.size());
 
    Handle_id hid = 0;
 
-   while (handles_MSSMNoFVatMGUT.find(hid) != handles_MSSMNoFVatMGUT.end())
+   while (handles.find(hid) != handles.end())
       hid++;
 
    return hid;
@@ -170,11 +169,11 @@ Handle_id get_new_MSSMNoFVatMGUT_handle()
 
 /******************************************************************/
 
-MSSMNoFVatMGUT_data find_MSSMNoFVatMGUT_data(Handle_id hid)
+Model_data find_data(Handle_id hid)
 {
-   const Handle_map::iterator handle = handles_MSSMNoFVatMGUT.find(hid);
+   const Handle_map::iterator handle = handles.find(hid);
 
-   if (handle == handles_MSSMNoFVatMGUT.end())
+   if (handle == handles.end())
       throw EUnknownHandle(hid);
 
    return handle->second;
@@ -243,9 +242,9 @@ void put_message(MLINK link,
 
 /******************************************************************/
 
-void put_settings(const MSSMNoFVatMGUT_data& data, MLINK link)
+void put_settings(const Model_data& data, MLINK link)
 {
-   MLPutFunction(link, "List", 23);
+   MLPutFunction(link, "List", Spectrum_generator_settings::NUMBER_OF_OPTIONS - 1);
 
    MLPutRuleTo(link, data.settings.get(Spectrum_generator_settings::precision), "precisionGoal");
    MLPutRuleTo(link, (int)data.settings.get(Spectrum_generator_settings::max_iterations), "maxIterations");
@@ -276,9 +275,10 @@ void put_settings(const MSSMNoFVatMGUT_data& data, MLINK link)
 
 /******************************************************************/
 
-void put_sm_input_parameters(const MSSMNoFVatMGUT_data& data, MLINK link)
+void put_sm_input_parameters(const Model_data& data, MLINK link)
 {
-   MLPutFunction(link, "List", 29);
+   MLPutFunction(link, "List",softsusy::NUMBER_OF_LOW_ENERGY_INPUT_PARAMETERS
+                              + Physical_input::NUMBER_OF_INPUT_PARAMETERS);
 
    MLPutRuleTo(link, data.qedqcd.displayAlphaEmInput(), "alphaEmMZ");
    MLPutRuleTo(link, data.qedqcd.displayFermiConstant(), "GF");
@@ -320,7 +320,7 @@ void put_sm_input_parameters(const MSSMNoFVatMGUT_data& data, MLINK link)
 
 /******************************************************************/
 
-void put_input_parameters(const MSSMNoFVatMGUT_data& data, MLINK link)
+void put_input_parameters(const Model_data& data, MLINK link)
 {
    MLPutFunction(link, "List", 31);
 
@@ -508,7 +508,7 @@ void put_observables(const MSSMNoFVatMGUT_observables& observables, MLINK link)
 
 /******************************************************************/
 
-void check_spectrum(const MSSMNoFVatMGUT_data& data, MLINK link)
+void check_spectrum(const Model_data& data, MLINK link)
 {
    const Problems<MSSMNoFVatMGUT_info::NUMBER_OF_PARTICLES>& problems
       = data.model.get_problems();
@@ -532,7 +532,7 @@ void check_spectrum(const MSSMNoFVatMGUT_data& data, MLINK link)
 
 /******************************************************************/
 
-void calculate_spectrum(MSSMNoFVatMGUT_data& data, MLINK link)
+void calculate_spectrum(Model_data& data, MLINK link)
 {
    softsusy::QedQcd qedqcd(data.qedqcd);
 
@@ -555,11 +555,14 @@ void calculate_spectrum(MSSMNoFVatMGUT_data& data, MLINK link)
 
 /******************************************************************/
 
-MSSMNoFVatMGUT_data make_MSSMNoFVatMGUT_data(double* pars, mint npars)
+Model_data make_data(double* pars, mint npars)
 {
-   MSSMNoFVatMGUT_data data;
+   Model_data data;
 
-   const mint n_settings = 23, n_sm_parameters = 29, n_input_pars = 31;
+   const mint n_settings = Spectrum_generator_settings::NUMBER_OF_OPTIONS - 1,
+      n_sm_parameters = softsusy::NUMBER_OF_LOW_ENERGY_INPUT_PARAMETERS
+                        + Physical_input::NUMBER_OF_INPUT_PARAMETERS,
+      n_input_pars = 31;
    const mint n_total = n_settings + n_sm_parameters + n_input_pars;
 
    if (npars != n_total)
@@ -682,6 +685,8 @@ MSSMNoFVatMGUT_data make_MSSMNoFVatMGUT_data(double* pars, mint npars)
    return data;
 }
 
+} // namespace MSSMNoFVatMGUT_librarylink
+
 extern "C" {
 
 /******************************************************************/
@@ -702,13 +707,15 @@ DLLEXPORT int WolframLibrary_initialize(WolframLibraryData /* libData */)
 
 DLLEXPORT int FSMSSMNoFVatMGUTGetSettings(WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace MSSMNoFVatMGUT_librarylink;
+
    if (!check_number_of_args(link, 1, "FSMSSMNoFVatMGUTGetSettings"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      const MSSMNoFVatMGUT_data data = find_MSSMNoFVatMGUT_data(hid);
+      const Model_data data = find_data(hid);
       put_settings(data, link);
    } catch (const flexiblesusy::Error& e) {
       std::cerr << e.what() << std::endl;
@@ -722,13 +729,15 @@ DLLEXPORT int FSMSSMNoFVatMGUTGetSettings(WolframLibraryData /* libData */, MLIN
 
 DLLEXPORT int FSMSSMNoFVatMGUTGetSMInputParameters(WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace MSSMNoFVatMGUT_librarylink;
+
    if (!check_number_of_args(link, 1, "FSMSSMNoFVatMGUTGetSMInputParameters"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      const MSSMNoFVatMGUT_data data = find_MSSMNoFVatMGUT_data(hid);
+      const Model_data data = find_data(hid);
       put_sm_input_parameters(data, link);
    } catch (const flexiblesusy::Error& e) {
       std::cerr << e.what() << std::endl;
@@ -742,13 +751,15 @@ DLLEXPORT int FSMSSMNoFVatMGUTGetSMInputParameters(WolframLibraryData /* libData
 
 DLLEXPORT int FSMSSMNoFVatMGUTGetInputParameters(WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace MSSMNoFVatMGUT_librarylink;
+
    if (!check_number_of_args(link, 1, "FSMSSMNoFVatMGUTGetInputParameters"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      const MSSMNoFVatMGUT_data data = find_MSSMNoFVatMGUT_data(hid);
+      const Model_data data = find_data(hid);
       put_input_parameters(data, link);
    } catch (const flexiblesusy::Error& e) {
       std::cerr << e.what() << std::endl;
@@ -763,6 +774,8 @@ DLLEXPORT int FSMSSMNoFVatMGUTGetInputParameters(WolframLibraryData /* libData *
 DLLEXPORT int FSMSSMNoFVatMGUTOpenHandle(
    WolframLibraryData libData, mint Argc, MArgument* Args, MArgument Res)
 {
+   using namespace MSSMNoFVatMGUT_librarylink;
+
    if (Argc != 1)
       return LIBRARY_TYPE_ERROR;
 
@@ -773,13 +786,13 @@ DLLEXPORT int FSMSSMNoFVatMGUTOpenHandle(
       return LIBRARY_TYPE_ERROR;
 
    try {
-      MSSMNoFVatMGUT_data data = make_MSSMNoFVatMGUT_data(
+      Model_data data = make_data(
          libData->MTensor_getRealData(pars),
          libData->MTensor_getDimensions(pars)[0]);
 
-      const Handle_id hid = get_new_MSSMNoFVatMGUT_handle();
+      const Handle_id hid = get_new_handle();
 
-      handles_MSSMNoFVatMGUT.insert(std::make_pair(hid, std::move(data)));
+      handles.insert(std::make_pair(hid, std::move(data)));
 
       MArgument_setInteger(Res, hid);
    } catch (const flexiblesusy::Error& e) {
@@ -795,15 +808,17 @@ DLLEXPORT int FSMSSMNoFVatMGUTOpenHandle(
 DLLEXPORT int FSMSSMNoFVatMGUTCloseHandle(
    WolframLibraryData /* libData */, mint Argc, MArgument* Args, MArgument /* Res */)
 {
+   using namespace MSSMNoFVatMGUT_librarylink;
+
    if (Argc != 1)
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = MArgument_getInteger(Args[0]);
 
-   const Handle_map::iterator handle = handles_MSSMNoFVatMGUT.find(hid);
+   const Handle_map::iterator handle = handles.find(hid);
 
-   if (handle != handles_MSSMNoFVatMGUT.end())
-      handles_MSSMNoFVatMGUT.erase(handle);
+   if (handle != handles.end())
+      handles.erase(handle);
 
    return LIBRARY_NO_ERROR;
 }
@@ -813,6 +828,8 @@ DLLEXPORT int FSMSSMNoFVatMGUTCloseHandle(
 DLLEXPORT int FSMSSMNoFVatMGUTSet(
    WolframLibraryData libData, mint Argc, MArgument* Args, MArgument /* Res */)
 {
+   using namespace MSSMNoFVatMGUT_librarylink;
+
    if (Argc != 2)
       return LIBRARY_TYPE_ERROR;
 
@@ -823,16 +840,16 @@ DLLEXPORT int FSMSSMNoFVatMGUTSet(
        libData->MTensor_getRank(pars) != 1)
       return LIBRARY_TYPE_ERROR;
 
-   const Handle_map::iterator handle = handles_MSSMNoFVatMGUT.find(hid);
+   const Handle_map::iterator handle = handles.find(hid);
 
-   if (handle == handles_MSSMNoFVatMGUT.end()) {
+   if (handle == handles.end()) {
       std::cerr << "Error: FSMSSMNoFVatMGUTSet: Unknown handle: "
                 << hid << std::endl;
       return LIBRARY_FUNCTION_ERROR;
    }
 
    try {
-      handle->second = make_MSSMNoFVatMGUT_data(
+      handle->second = make_data(
          libData->MTensor_getRealData(pars),
          libData->MTensor_getDimensions(pars)[0]);
    } catch (const flexiblesusy::Error& e) {
@@ -848,13 +865,15 @@ DLLEXPORT int FSMSSMNoFVatMGUTSet(
 DLLEXPORT int FSMSSMNoFVatMGUTCalculateSpectrum(
    WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace MSSMNoFVatMGUT_librarylink;
+
    if (!check_number_of_args(link, 1, "FSMSSMNoFVatMGUTCalculateSpectrum"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      MSSMNoFVatMGUT_data data = find_MSSMNoFVatMGUT_data(hid);
+      Model_data data = find_data(hid);
 
       {
          Redirect_output crd(link);
@@ -864,7 +883,7 @@ DLLEXPORT int FSMSSMNoFVatMGUTCalculateSpectrum(
       check_spectrum(data, link);
       put_spectrum(data.model, link);
 
-      handles_MSSMNoFVatMGUT[hid] = std::move(data);
+      handles[hid] = std::move(data);
    } catch (const flexiblesusy::Error&) {
       put_error_output(link);
    }
@@ -877,13 +896,15 @@ DLLEXPORT int FSMSSMNoFVatMGUTCalculateSpectrum(
 DLLEXPORT int FSMSSMNoFVatMGUTCalculateObservables(
    WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace MSSMNoFVatMGUT_librarylink;
+
    if (!check_number_of_args(link, 1, "FSMSSMNoFVatMGUTCalculateObservables"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      MSSMNoFVatMGUT_data data = find_MSSMNoFVatMGUT_data(hid);
+      Model_data data = find_data(hid);
 
       if (data.model.get_scale() == 0.) {
          put_message(link,

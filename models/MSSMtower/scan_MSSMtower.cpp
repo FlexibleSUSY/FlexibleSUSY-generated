@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Thu 15 Dec 2016 12:39:01
+// File generated at Mon 27 Feb 2017 13:21:41
 
 #include "MSSMtower_input_parameters.hpp"
 #include "MSSMtower_spectrum_generator.hpp"
@@ -39,7 +39,6 @@ void print_usage()
    std::cout <<
       "Usage: scan_MSSMtower.x [options]\n"
       "Options:\n"
-      "  --SignMu=<value>\n"
       "  --MSUSY=<value>\n"
       "  --M1Input=<value>\n"
       "  --M2Input=<value>\n"
@@ -57,9 +56,6 @@ void set_command_line_parameters(int argc, char* argv[],
 {
    for (int i = 1; i < argc; ++i) {
       const char* option = argv[i];
-
-      if(Command_line_options::get_parameter_value(option, "--SignMu=", input.SignMu))
-         continue;
 
       if(Command_line_options::get_parameter_value(option, "--MSUSY=", input.MSUSY))
          continue;
@@ -122,13 +118,13 @@ int main(int argc, char* argv[])
    const std::vector<double> range(float_range(0., 100., 10));
 
    cout << "# "
-        << std::setw(12) << std::left << "SignMu" << ' '
+        << std::setw(12) << std::left << "MSUSY" << ' '
         << std::setw(12) << std::left << "Mhh(0)/GeV" << ' '
         << std::setw(12) << std::left << "error"
         << '\n';
 
    for (const auto p: range) {
-      INPUTPARAMETER(SignMu) = p;
+      INPUTPARAMETER(MSUSY) = p;
 
 
       spectrum_generator.run(qedqcd, input);

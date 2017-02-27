@@ -19,7 +19,11 @@ FSSplitMSSMCalculateObservables::error = "`1`";
 FSSplitMSSMCalculateObservables::warning = "`1`";
 
 FSSplitMSSM::info = "`1`";
+FSSplitMSSM::nonum = "Error: `1` is not a numeric input value!";
 FSSplitMSSMMessage[s_] := Message[FSSplitMSSM::info, s];
+
+FSSplitMSSMCheckIsNumeric[a_?NumericQ] := a;
+FSSplitMSSMCheckIsNumeric[a_] := (Message[FSSplitMSSM::nonum, a]; Abort[]);
 
 fsDefaultSettings = {
       precisionGoal -> 1.*^-4,           (* FlexibleSUSY[0] *)
@@ -89,6 +93,7 @@ fsSplitMSSMDefaultInputParameters = {
    MEWSB -> 0,
    AtInput -> 0,
    TanBeta -> 0,
+   LambdaLoopOrder -> 0,
    msq2 -> {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
    msu2 -> {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
    msd2 -> {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
@@ -107,7 +112,7 @@ FSSplitMSSMOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters) ->
 
 FSSplitMSSMOpenHandle[OptionsPattern[]] :=
     FSSplitMSSMOpenHandleLib[
-        {
+        FSSplitMSSMCheckIsNumeric /@ {
             (* spectrum generator settings *)
             OptionValue[precisionGoal],
             OptionValue[maxIterations],
@@ -175,6 +180,7 @@ FSSplitMSSMOpenHandle[OptionsPattern[]] :=
             OptionValue[MEWSB],
             OptionValue[AtInput],
             OptionValue[TanBeta],
+            OptionValue[LambdaLoopOrder],
             OptionValue[msq2][[1,1]],
             OptionValue[msq2][[1,2]],
             OptionValue[msq2][[1,3]],
@@ -299,6 +305,7 @@ FSSplitMSSMSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[MEWSB],
             OptionValue[AtInput],
             OptionValue[TanBeta],
+            OptionValue[LambdaLoopOrder],
             OptionValue[msq2][[1,1]],
             OptionValue[msq2][[1,2]],
             OptionValue[msq2][[1,3]],
@@ -344,7 +351,7 @@ FSSplitMSSMSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[mse2][[3,1]],
             OptionValue[mse2][[3,2]],
             OptionValue[mse2][[3,3]]
-        }] /. HoldPattern[OptionValue[param_]] :> param /.
+        }] /. HoldPattern[OptionValue[param_]] :> FSSplitMSSMCheckIsNumeric[param] /.
         { p } /.
         FSSplitMSSMGetSettings[handle] /.
         FSSplitMSSMGetSMInputParameters[handle] /.

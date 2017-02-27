@@ -19,7 +19,11 @@ FSE6SSMCalculateObservables::error = "`1`";
 FSE6SSMCalculateObservables::warning = "`1`";
 
 FSE6SSM::info = "`1`";
+FSE6SSM::nonum = "Error: `1` is not a numeric input value!";
 FSE6SSMMessage[s_] := Message[FSE6SSM::info, s];
+
+FSE6SSMCheckIsNumeric[a_?NumericQ] := a;
+FSE6SSMCheckIsNumeric[a_] := (Message[FSE6SSM::nonum, a]; Abort[]);
 
 fsDefaultSettings = {
       precisionGoal -> 1.*^-4,           (* FlexibleSUSY[0] *)
@@ -103,7 +107,7 @@ FSE6SSMOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters) -> s_L
 
 FSE6SSMOpenHandle[OptionsPattern[]] :=
     FSE6SSMOpenHandleLib[
-        {
+        FSE6SSMCheckIsNumeric /@ {
             (* spectrum generator settings *)
             OptionValue[precisionGoal],
             OptionValue[maxIterations],
@@ -252,7 +256,7 @@ FSE6SSMSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[BmuPrimeInput],
             OptionValue[vSInput],
             OptionValue[Lambda12Input]
-        }] /. HoldPattern[OptionValue[param_]] :> param /.
+        }] /. HoldPattern[OptionValue[param_]] :> FSE6SSMCheckIsNumeric[param] /.
         { p } /.
         FSE6SSMGetSettings[handle] /.
         FSE6SSMGetSMInputParameters[handle] /.

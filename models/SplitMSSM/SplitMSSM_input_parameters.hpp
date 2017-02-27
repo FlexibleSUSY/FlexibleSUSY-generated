@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Thu 15 Dec 2016 12:42:08
+// File generated at Mon 27 Feb 2017 13:24:48
 
 #ifndef SplitMSSM_INPUT_PARAMETERS_H
 #define SplitMSSM_INPUT_PARAMETERS_H
@@ -36,6 +36,7 @@ struct SplitMSSM_input_parameters {
    double MEWSB;
    double AtInput;
    double TanBeta;
+   double LambdaLoopOrder;
    Eigen::Matrix<double,3,3> msq2;
    Eigen::Matrix<double,3,3> msu2;
    Eigen::Matrix<double,3,3> msd2;
@@ -44,10 +45,10 @@ struct SplitMSSM_input_parameters {
 
    SplitMSSM_input_parameters()
       : MSUSY(0), M1Input(0), M2Input(0), M3Input(0), MuInput(0), mAInput(0),
-   MEWSB(0), AtInput(0), TanBeta(0), msq2(Eigen::Matrix<double,3,3>::Zero()),
-   msu2(Eigen::Matrix<double,3,3>::Zero()), msd2(Eigen::Matrix<double,3,3>
-   ::Zero()), msl2(Eigen::Matrix<double,3,3>::Zero()), mse2(Eigen::Matrix<
-   double,3,3>::Zero())
+   MEWSB(0), AtInput(0), TanBeta(0), LambdaLoopOrder(0), msq2(Eigen::Matrix<
+   double,3,3>::Zero()), msu2(Eigen::Matrix<double,3,3>::Zero()), msd2(
+   Eigen::Matrix<double,3,3>::Zero()), msl2(Eigen::Matrix<double,3,3>::Zero()),
+   mse2(Eigen::Matrix<double,3,3>::Zero())
 
    {}
 

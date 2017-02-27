@@ -19,7 +19,11 @@ FSE6SSMtowerCalculateObservables::error = "`1`";
 FSE6SSMtowerCalculateObservables::warning = "`1`";
 
 FSE6SSMtower::info = "`1`";
+FSE6SSMtower::nonum = "Error: `1` is not a numeric input value!";
 FSE6SSMtowerMessage[s_] := Message[FSE6SSMtower::info, s];
+
+FSE6SSMtowerCheckIsNumeric[a_?NumericQ] := a;
+FSE6SSMtowerCheckIsNumeric[a_] := (Message[FSE6SSMtower::nonum, a]; Abort[]);
 
 fsDefaultSettings = {
       precisionGoal -> 1.*^-4,           (* FlexibleSUSY[0] *)
@@ -124,7 +128,7 @@ FSE6SSMtowerOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters) -
 
 FSE6SSMtowerOpenHandle[OptionsPattern[]] :=
     FSE6SSMtowerOpenHandleLib[
-        {
+        FSE6SSMtowerCheckIsNumeric /@ {
             (* spectrum generator settings *)
             OptionValue[precisionGoal],
             OptionValue[maxIterations],
@@ -537,7 +541,7 @@ FSE6SSMtowerSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[msI2Input][[1,2]],
             OptionValue[msI2Input][[2,1]],
             OptionValue[msI2Input][[2,2]]
-        }] /. HoldPattern[OptionValue[param_]] :> param /.
+        }] /. HoldPattern[OptionValue[param_]] :> FSE6SSMtowerCheckIsNumeric[param] /.
         { p } /.
         FSE6SSMtowerGetSettings[handle] /.
         FSE6SSMtowerGetSMInputParameters[handle] /.

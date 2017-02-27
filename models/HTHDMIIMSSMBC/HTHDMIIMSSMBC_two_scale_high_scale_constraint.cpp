@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Thu 15 Dec 2016 12:40:55
+// File generated at Mon 27 Feb 2017 13:23:37
 
 #include "HTHDMIIMSSMBC_two_scale_high_scale_constraint.hpp"
 #include "HTHDMIIMSSMBC_two_scale_model.hpp"
@@ -97,86 +97,83 @@ void HTHDMIIMSSMBC_high_scale_constraint<Two_scale>::apply()
 
    MODEL->set_Lambda1(Re(0.5*(0.25*(0.6*Sqr(g1) + Sqr(g2)) - (
       0.000053468657576480914*Power(Mu,4)*Sqr(g3)*UnitStep(-2 + LambdaLoopOrder)*
-      UnitStep(-2 + THRESHOLD)*Power(Yu(2,2),4))/Power(MSUSY,4) + UnitStep(-1 +
-      LambdaLoopOrder)*UnitStep(-1 + THRESHOLD)*(0.0015831434944115277*(0.6*Sqr(g1
-      ) + Sqr(g2))*((-3*Sqr(AbInput)*Sqr(Yd(2,2)))/Sqr(MSUSY) - (Sqr(AtauInput)*
-      Sqr(Ye(2,2)))/Sqr(MSUSY) + (3*Sqr(Mu)*Sqr(Yu(2,2)))/Sqr(MSUSY)) -
-      0.0005277144981371759*(0.6*Sqr(g1) + Sqr(g2))*((3*Sqr(AbInput)*Sqr(Yd(2,2)))
-      /Sqr(MSUSY) + (Sqr(AtauInput)*Sqr(Ye(2,2)))/Sqr(MSUSY) + (3*Sqr(Mu)*Sqr(Yu(2
-      ,2)))/Sqr(MSUSY)) + (0.037995443865876666*Sqr(AbInput)*(1 - (
-      0.08333333333333333*Sqr(AbInput))/Sqr(MSUSY))*Power(Yd(2,2),4))/Sqr(MSUSY) +
-      (0.012665147955292222*Sqr(AtauInput)*(1 - (0.08333333333333333*Sqr(
+      Power(Yu(2,2),4))/Power(MSUSY,4) + UnitStep(-1 + LambdaLoopOrder)*(
+      0.0015831434944115277*(0.6*Sqr(g1) + Sqr(g2))*((-3*Sqr(AbInput)*Sqr(Yd(2,2))
+      )/Sqr(MSUSY) - (Sqr(AtauInput)*Sqr(Ye(2,2)))/Sqr(MSUSY) + (3*Sqr(Mu)*Sqr(Yu(
+      2,2)))/Sqr(MSUSY)) - 0.0005277144981371759*(0.6*Sqr(g1) + Sqr(g2))*((3*Sqr(
+      AbInput)*Sqr(Yd(2,2)))/Sqr(MSUSY) + (Sqr(AtauInput)*Sqr(Ye(2,2)))/Sqr(MSUSY)
+      + (3*Sqr(Mu)*Sqr(Yu(2,2)))/Sqr(MSUSY)) + (0.037995443865876666*Sqr(AbInput)
+      *(1 - (0.08333333333333333*Sqr(AbInput))/Sqr(MSUSY))*Power(Yd(2,2),4))/Sqr(
+      MSUSY) + (0.012665147955292222*Sqr(AtauInput)*(1 - (0.08333333333333333*Sqr(
       AtauInput))/Sqr(MSUSY))*Power(Ye(2,2),4))/Sqr(MSUSY) - (
       0.0031662869888230555*Power(Mu,4)*Power(Yu(2,2),4))/Power(MSUSY,4)))));
    MODEL->set_Lambda2(Re(0.5*(0.25*(0.6*Sqr(g1) + Sqr(g2)) +
       0.000641623890917771*((-0.08333333333333333*Power(AtInput,4))/Power(MSUSY,4)
       + (0.3333333333333333*Power(AtInput,3))/Power(MSUSY,3) - (2*AtInput)/MSUSY)
-      *Sqr(g3)*UnitStep(-2 + LambdaLoopOrder)*UnitStep(-2 + THRESHOLD)*Power(Yu(2,
-      2),4) + UnitStep(-1 + LambdaLoopOrder)*UnitStep(-1 + THRESHOLD)*(
-      -0.0015831434944115277*(0.6*Sqr(g1) + Sqr(g2))*((-3*Sqr(Mu)*Sqr(Yd(2,2)))
-      /Sqr(MSUSY) - (Sqr(Mu)*Sqr(Ye(2,2)))/Sqr(MSUSY) + (3*Sqr(AtInput)*Sqr(Yu(2,2
-      )))/Sqr(MSUSY)) - 0.0005277144981371759*(0.6*Sqr(g1) + Sqr(g2))*((3*Sqr(Mu)*
-      Sqr(Yd(2,2)))/Sqr(MSUSY) + (Sqr(Mu)*Sqr(Ye(2,2)))/Sqr(MSUSY) + (3*Sqr(
-      AtInput)*Sqr(Yu(2,2)))/Sqr(MSUSY)) - (0.0031662869888230555*Power(Mu,4)*
-      Power(Yd(2,2),4))/Power(MSUSY,4) - (0.0010554289962743518*Power(Mu,4)*Power(
-      Ye(2,2),4))/Power(MSUSY,4) + (0.037995443865876666*Sqr(AtInput)*(1 - (
-      0.08333333333333333*Sqr(AtInput))/Sqr(MSUSY))*Power(Yu(2,2),4))/Sqr(MSUSY)))
-      ));
+      *Sqr(g3)*UnitStep(-2 + LambdaLoopOrder)*Power(Yu(2,2),4) + UnitStep(-1 +
+      LambdaLoopOrder)*(-0.0015831434944115277*(0.6*Sqr(g1) + Sqr(g2))*((-3*Sqr(Mu
+      )*Sqr(Yd(2,2)))/Sqr(MSUSY) - (Sqr(Mu)*Sqr(Ye(2,2)))/Sqr(MSUSY) + (3*Sqr(
+      AtInput)*Sqr(Yu(2,2)))/Sqr(MSUSY)) - 0.0005277144981371759*(0.6*Sqr(g1) +
+      Sqr(g2))*((3*Sqr(Mu)*Sqr(Yd(2,2)))/Sqr(MSUSY) + (Sqr(Mu)*Sqr(Ye(2,2)))/Sqr(
+      MSUSY) + (3*Sqr(AtInput)*Sqr(Yu(2,2)))/Sqr(MSUSY)) - (0.0031662869888230555*
+      Power(Mu,4)*Power(Yd(2,2),4))/Power(MSUSY,4) - (0.0010554289962743518*Power(
+      Mu,4)*Power(Ye(2,2),4))/Power(MSUSY,4) + (0.037995443865876666*Sqr(AtInput)*
+      (1 - (0.08333333333333333*Sqr(AtInput))/Sqr(MSUSY))*Power(Yu(2,2),4))/Sqr(
+      MSUSY)))));
    MODEL->set_Lambda3(Re(0.25*(-0.6*Sqr(g1) + Sqr(g2)) + (
       0.00016040597272944275*AtInput*(1 - (0.5*AtInput)/MSUSY)*Sqr(g3)*Sqr(Mu)*
-      UnitStep(-2 + LambdaLoopOrder)*UnitStep(-2 + THRESHOLD)*Power(Yu(2,2),4))
-      /Power(MSUSY,3) + UnitStep(-1 + LambdaLoopOrder)*UnitStep(-1 + THRESHOLD)*(
-      0.0031662869888230555*(3*Sqr(AbInput/MSUSY + AtInput/MSUSY) - (6*Sqr(Mu))
-      /Sqr(MSUSY) - Sqr(-((AbInput*AtInput)/Sqr(MSUSY)) + Power(Mu,2)/Sqr(MSUSY)))
-      *Sqr(Yd(2,2))*Sqr(Yu(2,2)) - 0.0007915717472057639*(-0.6*Sqr(g1) + Sqr(g2))*
-      (3*(Sqr(AbInput)/Sqr(MSUSY) - Sqr(Mu)/Sqr(MSUSY))*Sqr(Yd(2,2)) + (Sqr(
-      AtauInput)/Sqr(MSUSY) - Sqr(Mu)/Sqr(MSUSY))*Sqr(Ye(2,2)) + 3*(Sqr(AtInput)
-      /Sqr(MSUSY) - Sqr(Mu)/Sqr(MSUSY))*Sqr(Yu(2,2))) - 0.00026385724906858796*(
-      -0.6*Sqr(g1) + Sqr(g2))*(3*(Sqr(AbInput)/Sqr(MSUSY) + Sqr(Mu)/Sqr(MSUSY))*
-      Sqr(Yd(2,2)) + (Sqr(AtauInput)/Sqr(MSUSY) + Sqr(Mu)/Sqr(MSUSY))*Sqr(Ye(2,2))
-      + 3*(Sqr(AtInput)/Sqr(MSUSY) + Sqr(Mu)/Sqr(MSUSY))*Sqr(Yu(2,2))) + (
-      0.0010554289962743518*Sqr(Mu)*(3*(3 - Sqr(AbInput)/Sqr(MSUSY))*Power(Yd(2,2)
-      ,4) + (3 - Sqr(AtauInput)/Sqr(MSUSY))*Power(Ye(2,2),4) + 3*(3 - Sqr(AtInput)
-      /Sqr(MSUSY))*Power(Yu(2,2),4)))/Sqr(MSUSY))));
+      UnitStep(-2 + LambdaLoopOrder)*Power(Yu(2,2),4))/Power(MSUSY,3) + UnitStep(
+      -1 + LambdaLoopOrder)*(0.0031662869888230555*(3*Sqr(AbInput/MSUSY +
+      AtInput/MSUSY) - (6*Sqr(Mu))/Sqr(MSUSY) - Sqr(-((AbInput*AtInput)/Sqr(MSUSY)
+      ) + Power(Mu,2)/Sqr(MSUSY)))*Sqr(Yd(2,2))*Sqr(Yu(2,2)) -
+      0.0007915717472057639*(-0.6*Sqr(g1) + Sqr(g2))*(3*(Sqr(AbInput)/Sqr(MSUSY) -
+      Sqr(Mu)/Sqr(MSUSY))*Sqr(Yd(2,2)) + (Sqr(AtauInput)/Sqr(MSUSY) - Sqr(Mu)/Sqr
+      (MSUSY))*Sqr(Ye(2,2)) + 3*(Sqr(AtInput)/Sqr(MSUSY) - Sqr(Mu)/Sqr(MSUSY))*Sqr
+      (Yu(2,2))) - 0.00026385724906858796*(-0.6*Sqr(g1) + Sqr(g2))*(3*(Sqr(AbInput
+      )/Sqr(MSUSY) + Sqr(Mu)/Sqr(MSUSY))*Sqr(Yd(2,2)) + (Sqr(AtauInput)/Sqr(MSUSY)
+      + Sqr(Mu)/Sqr(MSUSY))*Sqr(Ye(2,2)) + 3*(Sqr(AtInput)/Sqr(MSUSY) + Sqr(Mu)
+      /Sqr(MSUSY))*Sqr(Yu(2,2))) + (0.0010554289962743518*Sqr(Mu)*(3*(3 - Sqr(
+      AbInput)/Sqr(MSUSY))*Power(Yd(2,2),4) + (3 - Sqr(AtauInput)/Sqr(MSUSY))*
+      Power(Ye(2,2),4) + 3*(3 - Sqr(AtInput)/Sqr(MSUSY))*Power(Yu(2,2),4)))/Sqr(
+      MSUSY))));
    MODEL->set_Lambda4(Re(-0.5*Sqr(g2) + (0.00016040597272944275*AtInput*(1 - (
-      0.5*AtInput)/MSUSY)*Sqr(g3)*Sqr(Mu)*UnitStep(-2 + LambdaLoopOrder)*UnitStep(
-      -2 + THRESHOLD)*Power(Yu(2,2),4))/Power(MSUSY,3) + UnitStep(-1 +
-      LambdaLoopOrder)*UnitStep(-1 + THRESHOLD)*(-0.0031662869888230555*(3*Sqr(
-      AbInput/MSUSY + AtInput/MSUSY) - (6*Sqr(Mu))/Sqr(MSUSY) - Sqr(-((AbInput*
-      AtInput)/Sqr(MSUSY)) + Power(Mu,2)/Sqr(MSUSY)))*Sqr(Yd(2,2))*Sqr(Yu(2,2)) +
-      0.0015831434944115277*Sqr(g2)*(3*(Sqr(AbInput)/Sqr(MSUSY) - Sqr(Mu)/Sqr(
-      MSUSY))*Sqr(Yd(2,2)) + (Sqr(AtauInput)/Sqr(MSUSY) - Sqr(Mu)/Sqr(MSUSY))*Sqr(
-      Ye(2,2)) + 3*(Sqr(AtInput)/Sqr(MSUSY) - Sqr(Mu)/Sqr(MSUSY))*Sqr(Yu(2,2))) +
-      0.0005277144981371759*Sqr(g2)*(3*(Sqr(AbInput)/Sqr(MSUSY) + Sqr(Mu)/Sqr(
-      MSUSY))*Sqr(Yd(2,2)) + (Sqr(AtauInput)/Sqr(MSUSY) + Sqr(Mu)/Sqr(MSUSY))*Sqr(
-      Ye(2,2)) + 3*(Sqr(AtInput)/Sqr(MSUSY) + Sqr(Mu)/Sqr(MSUSY))*Sqr(Yu(2,2))) +
-      (0.0010554289962743518*Sqr(Mu)*(3*(3 - Sqr(AbInput)/Sqr(MSUSY))*Power(Yd(2,2
-      ),4) + (3 - Sqr(AtauInput)/Sqr(MSUSY))*Power(Ye(2,2),4) + 3*(3 - Sqr(AtInput
-      )/Sqr(MSUSY))*Power(Yu(2,2),4)))/Sqr(MSUSY))));
+      0.5*AtInput)/MSUSY)*Sqr(g3)*Sqr(Mu)*UnitStep(-2 + LambdaLoopOrder)*Power(Yu(
+      2,2),4))/Power(MSUSY,3) + UnitStep(-1 + LambdaLoopOrder)*(
+      -0.0031662869888230555*(3*Sqr(AbInput/MSUSY + AtInput/MSUSY) - (6*Sqr(Mu))
+      /Sqr(MSUSY) - Sqr(-((AbInput*AtInput)/Sqr(MSUSY)) + Power(Mu,2)/Sqr(MSUSY)))
+      *Sqr(Yd(2,2))*Sqr(Yu(2,2)) + 0.0015831434944115277*Sqr(g2)*(3*(Sqr(AbInput)
+      /Sqr(MSUSY) - Sqr(Mu)/Sqr(MSUSY))*Sqr(Yd(2,2)) + (Sqr(AtauInput)/Sqr(MSUSY)
+      - Sqr(Mu)/Sqr(MSUSY))*Sqr(Ye(2,2)) + 3*(Sqr(AtInput)/Sqr(MSUSY) - Sqr(Mu)
+      /Sqr(MSUSY))*Sqr(Yu(2,2))) + 0.0005277144981371759*Sqr(g2)*(3*(Sqr(AbInput)
+      /Sqr(MSUSY) + Sqr(Mu)/Sqr(MSUSY))*Sqr(Yd(2,2)) + (Sqr(AtauInput)/Sqr(MSUSY)
+      + Sqr(Mu)/Sqr(MSUSY))*Sqr(Ye(2,2)) + 3*(Sqr(AtInput)/Sqr(MSUSY) + Sqr(Mu)
+      /Sqr(MSUSY))*Sqr(Yu(2,2))) + (0.0010554289962743518*Sqr(Mu)*(3*(3 - Sqr(
+      AbInput)/Sqr(MSUSY))*Power(Yd(2,2),4) + (3 - Sqr(AtauInput)/Sqr(MSUSY))*
+      Power(Ye(2,2),4) + 3*(3 - Sqr(AtInput)/Sqr(MSUSY))*Power(Yu(2,2),4)))/Sqr(
+      MSUSY))));
    MODEL->set_Lambda5(Re((0.00016040597272944275*AtInput*(1 - (0.5*AtInput)
-      /MSUSY)*Sqr(g3)*Sqr(Mu)*UnitStep(-2 + LambdaLoopOrder)*UnitStep(-2 +
-      THRESHOLD)*Power(Yu(2,2),4))/Power(MSUSY,3) - (0.0010554289962743518*Sqr(Mu)
-      *UnitStep(-1 + LambdaLoopOrder)*UnitStep(-1 + THRESHOLD)*((3*Sqr(AbInput)*
-      Power(Yd(2,2),4))/Sqr(MSUSY) + (Sqr(AtauInput)*Power(Ye(2,2),4))/Sqr(MSUSY)
-      + (3*Sqr(AtInput)*Power(Yu(2,2),4))/Sqr(MSUSY)))/Sqr(MSUSY)));
+      /MSUSY)*Sqr(g3)*Sqr(Mu)*UnitStep(-2 + LambdaLoopOrder)*Power(Yu(2,2),4))
+      /Power(MSUSY,3) - (0.0010554289962743518*Sqr(Mu)*UnitStep(-1 +
+      LambdaLoopOrder)*((3*Sqr(AbInput)*Power(Yd(2,2),4))/Sqr(MSUSY) + (Sqr(
+      AtauInput)*Power(Ye(2,2),4))/Sqr(MSUSY) + (3*Sqr(AtInput)*Power(Yu(2,2),4))
+      /Sqr(MSUSY)))/Sqr(MSUSY)));
    MODEL->set_Lambda6(Re((0.000053468657576480914*(-1 + AtInput/MSUSY)*Power(Mu
-      ,3)*Sqr(g3)*UnitStep(-2 + LambdaLoopOrder)*UnitStep(-2 + THRESHOLD)*Power(Yu
-      (2,2),4))/Power(MSUSY,3) + UnitStep(-1 + LambdaLoopOrder)*UnitStep(-1 +
-      THRESHOLD)*((0.0007915717472057639*Mu*(0.6*Sqr(g1) + Sqr(g2))*((3*AbInput*
-      Sqr(Yd(2,2)))/MSUSY + (AtauInput*Sqr(Ye(2,2)))/MSUSY - (3*AtInput*Sqr(Yu(2,2
-      )))/MSUSY))/MSUSY + (0.0010554289962743518*Mu*((3*AbInput*(-6 + Sqr(AbInput)
-      /Sqr(MSUSY))*Power(Yd(2,2),4))/MSUSY + (AtauInput*(-6 + Sqr(AtauInput)/Sqr(
-      MSUSY))*Power(Ye(2,2),4))/MSUSY + (3*AtInput*Sqr(Mu)*Power(Yu(2,2),4))/Power
-      (MSUSY,3)))/MSUSY)));
+      ,3)*Sqr(g3)*UnitStep(-2 + LambdaLoopOrder)*Power(Yu(2,2),4))/Power(MSUSY,3)
+      + UnitStep(-1 + LambdaLoopOrder)*((0.0007915717472057639*Mu*(0.6*Sqr(g1) +
+      Sqr(g2))*((3*AbInput*Sqr(Yd(2,2)))/MSUSY + (AtauInput*Sqr(Ye(2,2)))/MSUSY -
+      (3*AtInput*Sqr(Yu(2,2)))/MSUSY))/MSUSY + (0.0010554289962743518*Mu*((3*
+      AbInput*(-6 + Sqr(AbInput)/Sqr(MSUSY))*Power(Yd(2,2),4))/MSUSY + (AtauInput*
+      (-6 + Sqr(AtauInput)/Sqr(MSUSY))*Power(Ye(2,2),4))/MSUSY + (3*AtInput*Sqr(Mu
+      )*Power(Yu(2,2),4))/Power(MSUSY,3)))/MSUSY)));
    MODEL->set_Lambda7(Re((0.00016040597272944275*Mu*Sqr(g3)*(2 + (
       0.3333333333333333*Power(AtInput,3))/Power(MSUSY,3) - Sqr(AtInput)/Sqr(MSUSY
-      ))*UnitStep(-2 + LambdaLoopOrder)*UnitStep(-2 + THRESHOLD)*Power(Yu(2,2),4))
-      /MSUSY + UnitStep(-1 + LambdaLoopOrder)*UnitStep(-1 + THRESHOLD)*((
-      -0.0007915717472057639*Mu*(0.6*Sqr(g1) + Sqr(g2))*((3*AbInput*Sqr(Yd(2,2)))
-      /MSUSY + (AtauInput*Sqr(Ye(2,2)))/MSUSY - (3*AtInput*Sqr(Yu(2,2)))/MSUSY))
-      /MSUSY + (0.0010554289962743518*Mu*((3*AbInput*Sqr(Mu)*Power(Yd(2,2),4))
-      /Power(MSUSY,3) + (AtauInput*Sqr(Mu)*Power(Ye(2,2),4))/Power(MSUSY,3) + (3*
-      AtInput*(-6 + Sqr(AtInput)/Sqr(MSUSY))*Power(Yu(2,2),4))/MSUSY))/MSUSY)));
+      ))*UnitStep(-2 + LambdaLoopOrder)*Power(Yu(2,2),4))/MSUSY + UnitStep(-1 +
+      LambdaLoopOrder)*((-0.0007915717472057639*Mu*(0.6*Sqr(g1) + Sqr(g2))*((3*
+      AbInput*Sqr(Yd(2,2)))/MSUSY + (AtauInput*Sqr(Ye(2,2)))/MSUSY - (3*AtInput*
+      Sqr(Yu(2,2)))/MSUSY))/MSUSY + (0.0010554289962743518*Mu*((3*AbInput*Sqr(Mu)*
+      Power(Yd(2,2),4))/Power(MSUSY,3) + (AtauInput*Sqr(Mu)*Power(Ye(2,2),4))
+      /Power(MSUSY,3) + (3*AtInput*(-6 + Sqr(AtInput)/Sqr(MSUSY))*Power(Yu(2,2),4)
+      )/MSUSY))/MSUSY)));
 
 
    check_non_perturbative();

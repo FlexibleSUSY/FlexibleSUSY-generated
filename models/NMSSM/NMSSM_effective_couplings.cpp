@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Thu 15 Dec 2016 13:01:59
+// File generated at Mon 27 Feb 2017 13:44:53
 
 #include "NMSSM_effective_couplings.hpp"
 

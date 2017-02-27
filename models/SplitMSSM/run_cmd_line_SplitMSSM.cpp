@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Thu 15 Dec 2016 12:42:34
+// File generated at Mon 27 Feb 2017 13:25:14
 
 #include "SplitMSSM_input_parameters.hpp"
 #include "SplitMSSM_spectrum_generator.hpp"
@@ -47,6 +47,7 @@ void print_usage()
       "  --MEWSB=<value>\n"
       "  --AtInput=<value>\n"
       "  --TanBeta=<value>\n"
+      "  --LambdaLoopOrder=<value>\n"
 
       "  --help,-h                         print this help message"
              << std::endl;
@@ -83,6 +84,9 @@ void set_command_line_parameters(int argc, char* argv[],
          continue;
 
       if(Command_line_options::get_parameter_value(option, "--TanBeta=", input.TanBeta))
+         continue;
+
+      if(Command_line_options::get_parameter_value(option, "--LambdaLoopOrder=", input.LambdaLoopOrder))
          continue;
 
       

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Thu 15 Dec 2016 12:42:11
+// File generated at Mon 27 Feb 2017 13:24:51
 
 #include "SplitMSSM_info.hpp"
 
@@ -83,15 +83,15 @@ namespace SplitMSSM_info {
 
    const char* input_parameter_names[NUMBER_OF_INPUT_PARAMETERS] = {"MSUSY",
       "M1Input", "M2Input", "M3Input", "MuInput", "mAInput", "MEWSB", "AtInput",
-      "TanBeta", "msq2(0,0)", "msq2(0,1)", "msq2(0,2)", "msq2(1,0)", "msq2(1,1)",
-      "msq2(1,2)", "msq2(2,0)", "msq2(2,1)", "msq2(2,2)", "msu2(0,0)", "msu2(0,1)"
-      , "msu2(0,2)", "msu2(1,0)", "msu2(1,1)", "msu2(1,2)", "msu2(2,0)",
-      "msu2(2,1)", "msu2(2,2)", "msd2(0,0)", "msd2(0,1)", "msd2(0,2)", "msd2(1,0)"
-      , "msd2(1,1)", "msd2(1,2)", "msd2(2,0)", "msd2(2,1)", "msd2(2,2)",
-      "msl2(0,0)", "msl2(0,1)", "msl2(0,2)", "msl2(1,0)", "msl2(1,1)", "msl2(1,2)"
-      , "msl2(2,0)", "msl2(2,1)", "msl2(2,2)", "mse2(0,0)", "mse2(0,1)",
-      "mse2(0,2)", "mse2(1,0)", "mse2(1,1)", "mse2(1,2)", "mse2(2,0)", "mse2(2,1)"
-      , "mse2(2,2)"};
+      "TanBeta", "LambdaLoopOrder", "msq2(0,0)", "msq2(0,1)", "msq2(0,2)",
+      "msq2(1,0)", "msq2(1,1)", "msq2(1,2)", "msq2(2,0)", "msq2(2,1)", "msq2(2,2)"
+      , "msu2(0,0)", "msu2(0,1)", "msu2(0,2)", "msu2(1,0)", "msu2(1,1)",
+      "msu2(1,2)", "msu2(2,0)", "msu2(2,1)", "msu2(2,2)", "msd2(0,0)", "msd2(0,1)"
+      , "msd2(0,2)", "msd2(1,0)", "msd2(1,1)", "msd2(1,2)", "msd2(2,0)",
+      "msd2(2,1)", "msd2(2,2)", "msl2(0,0)", "msl2(0,1)", "msl2(0,2)", "msl2(1,0)"
+      , "msl2(1,1)", "msl2(1,2)", "msl2(2,0)", "msl2(2,1)", "msl2(2,2)",
+      "mse2(0,0)", "mse2(0,1)", "mse2(0,2)", "mse2(1,0)", "mse2(1,1)", "mse2(1,2)"
+      , "mse2(2,0)", "mse2(2,1)", "mse2(2,2)"};
 
    const char* model_name = "SplitMSSM";
 

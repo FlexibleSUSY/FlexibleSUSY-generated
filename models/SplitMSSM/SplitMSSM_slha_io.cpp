@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Thu 15 Dec 2016 12:42:11
+// File generated at Mon 27 Feb 2017 13:24:51
 
 #include "SplitMSSM_slha_io.hpp"
 #include "SplitMSSM_input_parameters.hpp"
@@ -82,6 +82,7 @@ void SplitMSSM_slha_io::set_extpar(const SplitMSSM_input_parameters& input)
    extpar << FORMAT_ELEMENT(6, input.MEWSB, "MEWSB");
    extpar << FORMAT_ELEMENT(7, input.AtInput, "AtInput");
    extpar << FORMAT_ELEMENT(25, input.TanBeta, "TanBeta");
+   extpar << FORMAT_ELEMENT(100, input.LambdaLoopOrder, "LambdaLoopOrder");
    slha_io.set_block(extpar);
 
 }
@@ -436,6 +437,7 @@ void SplitMSSM_slha_io::fill_extpar_tuple(SplitMSSM_input_parameters& input,
    case 6: input.MEWSB = value; break;
    case 7: input.AtInput = value; break;
    case 25: input.TanBeta = value; break;
+   case 100: input.LambdaLoopOrder = value; break;
    default: WARNING("Unrecognized entry in block EXTPAR: " << key); break;
    }
 

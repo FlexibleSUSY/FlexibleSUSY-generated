@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Thu 15 Dec 2016 12:43:06
+// File generated at Mon 27 Feb 2017 13:25:43
 
 #include "HSSUSY_info.hpp"
 #include "HSSUSY_input_parameters.hpp"
@@ -47,6 +47,8 @@
 #define MODELPARAMETER(p) model.get_##p()
 #define PHYSICALPARAMETER(p) model.get_physical().p
 #define OBSERVABLE(o) observables.o
+
+namespace HSSUSY_librarylink {
 
 using namespace flexiblesusy;
 
@@ -84,7 +86,6 @@ private:
    }
 };
 
-namespace flexiblesusy {
 class EUnknownHandle : public Error {
 public:
    explicit EUnknownHandle(Handle_id hid_) : hid(hid_) {}
@@ -126,10 +127,8 @@ public:
    virtual std::string what() const { return "Invalid spectrum"; }
 };
 
-} // namespace flexiblesusy
-
-struct HSSUSY_data {
-   HSSUSY_data()
+struct Model_data {
+   Model_data()
       : input()
       , physical_input()
       , qedqcd()
@@ -147,22 +146,22 @@ struct HSSUSY_data {
 };
 
 /// current handles
-typedef std::map<Handle_id, HSSUSY_data> Handle_map;
-Handle_map handles_HSSUSY;
+typedef std::map<Handle_id, Model_data> Handle_map;
+Handle_map handles;
 
 /******************************************************************/
 
-Handle_id get_new_HSSUSY_handle()
+Handle_id get_new_handle()
 {
    static const std::size_t max_handles =
       static_cast<std::size_t>(std::exp2(8*sizeof(Handle_id)) - 1);
 
-   if (handles_HSSUSY.size() >= max_handles)
-      throw ENotEnoughFreeHandles(handles_HSSUSY.size());
+   if (handles.size() >= max_handles)
+      throw ENotEnoughFreeHandles(handles.size());
 
    Handle_id hid = 0;
 
-   while (handles_HSSUSY.find(hid) != handles_HSSUSY.end())
+   while (handles.find(hid) != handles.end())
       hid++;
 
    return hid;
@@ -170,11 +169,11 @@ Handle_id get_new_HSSUSY_handle()
 
 /******************************************************************/
 
-HSSUSY_data find_HSSUSY_data(Handle_id hid)
+Model_data find_data(Handle_id hid)
 {
-   const Handle_map::iterator handle = handles_HSSUSY.find(hid);
+   const Handle_map::iterator handle = handles.find(hid);
 
-   if (handle == handles_HSSUSY.end())
+   if (handle == handles.end())
       throw EUnknownHandle(hid);
 
    return handle->second;
@@ -243,9 +242,9 @@ void put_message(MLINK link,
 
 /******************************************************************/
 
-void put_settings(const HSSUSY_data& data, MLINK link)
+void put_settings(const Model_data& data, MLINK link)
 {
-   MLPutFunction(link, "List", 23);
+   MLPutFunction(link, "List", Spectrum_generator_settings::NUMBER_OF_OPTIONS - 1);
 
    MLPutRuleTo(link, data.settings.get(Spectrum_generator_settings::precision), "precisionGoal");
    MLPutRuleTo(link, (int)data.settings.get(Spectrum_generator_settings::max_iterations), "maxIterations");
@@ -276,9 +275,10 @@ void put_settings(const HSSUSY_data& data, MLINK link)
 
 /******************************************************************/
 
-void put_sm_input_parameters(const HSSUSY_data& data, MLINK link)
+void put_sm_input_parameters(const Model_data& data, MLINK link)
 {
-   MLPutFunction(link, "List", 29);
+   MLPutFunction(link, "List",softsusy::NUMBER_OF_LOW_ENERGY_INPUT_PARAMETERS
+                              + Physical_input::NUMBER_OF_INPUT_PARAMETERS);
 
    MLPutRuleTo(link, data.qedqcd.displayAlphaEmInput(), "alphaEmMZ");
    MLPutRuleTo(link, data.qedqcd.displayFermiConstant(), "GF");
@@ -320,7 +320,7 @@ void put_sm_input_parameters(const HSSUSY_data& data, MLINK link)
 
 /******************************************************************/
 
-void put_input_parameters(const HSSUSY_data& data, MLINK link)
+void put_input_parameters(const Model_data& data, MLINK link)
 {
    MLPutFunction(link, "List", 15);
 
@@ -416,7 +416,7 @@ void put_observables(const HSSUSY_observables& observables, MLINK link)
 
 /******************************************************************/
 
-void check_spectrum(const HSSUSY_data& data, MLINK link)
+void check_spectrum(const Model_data& data, MLINK link)
 {
    const Problems<HSSUSY_info::NUMBER_OF_PARTICLES>& problems
       = data.model.get_problems();
@@ -440,7 +440,7 @@ void check_spectrum(const HSSUSY_data& data, MLINK link)
 
 /******************************************************************/
 
-void calculate_spectrum(HSSUSY_data& data, MLINK link)
+void calculate_spectrum(Model_data& data, MLINK link)
 {
    softsusy::QedQcd qedqcd(data.qedqcd);
 
@@ -463,11 +463,14 @@ void calculate_spectrum(HSSUSY_data& data, MLINK link)
 
 /******************************************************************/
 
-HSSUSY_data make_HSSUSY_data(double* pars, mint npars)
+Model_data make_data(double* pars, mint npars)
 {
-   HSSUSY_data data;
+   Model_data data;
 
-   const mint n_settings = 23, n_sm_parameters = 29, n_input_pars = 55;
+   const mint n_settings = Spectrum_generator_settings::NUMBER_OF_OPTIONS - 1,
+      n_sm_parameters = softsusy::NUMBER_OF_LOW_ENERGY_INPUT_PARAMETERS
+                        + Physical_input::NUMBER_OF_INPUT_PARAMETERS,
+      n_input_pars = 55;
    const mint n_total = n_settings + n_sm_parameters + n_input_pars;
 
    if (npars != n_total)
@@ -614,6 +617,8 @@ HSSUSY_data make_HSSUSY_data(double* pars, mint npars)
    return data;
 }
 
+} // namespace HSSUSY_librarylink
+
 extern "C" {
 
 /******************************************************************/
@@ -634,13 +639,15 @@ DLLEXPORT int WolframLibrary_initialize(WolframLibraryData /* libData */)
 
 DLLEXPORT int FSHSSUSYGetSettings(WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace HSSUSY_librarylink;
+
    if (!check_number_of_args(link, 1, "FSHSSUSYGetSettings"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      const HSSUSY_data data = find_HSSUSY_data(hid);
+      const Model_data data = find_data(hid);
       put_settings(data, link);
    } catch (const flexiblesusy::Error& e) {
       std::cerr << e.what() << std::endl;
@@ -654,13 +661,15 @@ DLLEXPORT int FSHSSUSYGetSettings(WolframLibraryData /* libData */, MLINK link)
 
 DLLEXPORT int FSHSSUSYGetSMInputParameters(WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace HSSUSY_librarylink;
+
    if (!check_number_of_args(link, 1, "FSHSSUSYGetSMInputParameters"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      const HSSUSY_data data = find_HSSUSY_data(hid);
+      const Model_data data = find_data(hid);
       put_sm_input_parameters(data, link);
    } catch (const flexiblesusy::Error& e) {
       std::cerr << e.what() << std::endl;
@@ -674,13 +683,15 @@ DLLEXPORT int FSHSSUSYGetSMInputParameters(WolframLibraryData /* libData */, MLI
 
 DLLEXPORT int FSHSSUSYGetInputParameters(WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace HSSUSY_librarylink;
+
    if (!check_number_of_args(link, 1, "FSHSSUSYGetInputParameters"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      const HSSUSY_data data = find_HSSUSY_data(hid);
+      const Model_data data = find_data(hid);
       put_input_parameters(data, link);
    } catch (const flexiblesusy::Error& e) {
       std::cerr << e.what() << std::endl;
@@ -695,6 +706,8 @@ DLLEXPORT int FSHSSUSYGetInputParameters(WolframLibraryData /* libData */, MLINK
 DLLEXPORT int FSHSSUSYOpenHandle(
    WolframLibraryData libData, mint Argc, MArgument* Args, MArgument Res)
 {
+   using namespace HSSUSY_librarylink;
+
    if (Argc != 1)
       return LIBRARY_TYPE_ERROR;
 
@@ -705,13 +718,13 @@ DLLEXPORT int FSHSSUSYOpenHandle(
       return LIBRARY_TYPE_ERROR;
 
    try {
-      HSSUSY_data data = make_HSSUSY_data(
+      Model_data data = make_data(
          libData->MTensor_getRealData(pars),
          libData->MTensor_getDimensions(pars)[0]);
 
-      const Handle_id hid = get_new_HSSUSY_handle();
+      const Handle_id hid = get_new_handle();
 
-      handles_HSSUSY.insert(std::make_pair(hid, std::move(data)));
+      handles.insert(std::make_pair(hid, std::move(data)));
 
       MArgument_setInteger(Res, hid);
    } catch (const flexiblesusy::Error& e) {
@@ -727,15 +740,17 @@ DLLEXPORT int FSHSSUSYOpenHandle(
 DLLEXPORT int FSHSSUSYCloseHandle(
    WolframLibraryData /* libData */, mint Argc, MArgument* Args, MArgument /* Res */)
 {
+   using namespace HSSUSY_librarylink;
+
    if (Argc != 1)
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = MArgument_getInteger(Args[0]);
 
-   const Handle_map::iterator handle = handles_HSSUSY.find(hid);
+   const Handle_map::iterator handle = handles.find(hid);
 
-   if (handle != handles_HSSUSY.end())
-      handles_HSSUSY.erase(handle);
+   if (handle != handles.end())
+      handles.erase(handle);
 
    return LIBRARY_NO_ERROR;
 }
@@ -745,6 +760,8 @@ DLLEXPORT int FSHSSUSYCloseHandle(
 DLLEXPORT int FSHSSUSYSet(
    WolframLibraryData libData, mint Argc, MArgument* Args, MArgument /* Res */)
 {
+   using namespace HSSUSY_librarylink;
+
    if (Argc != 2)
       return LIBRARY_TYPE_ERROR;
 
@@ -755,16 +772,16 @@ DLLEXPORT int FSHSSUSYSet(
        libData->MTensor_getRank(pars) != 1)
       return LIBRARY_TYPE_ERROR;
 
-   const Handle_map::iterator handle = handles_HSSUSY.find(hid);
+   const Handle_map::iterator handle = handles.find(hid);
 
-   if (handle == handles_HSSUSY.end()) {
+   if (handle == handles.end()) {
       std::cerr << "Error: FSHSSUSYSet: Unknown handle: "
                 << hid << std::endl;
       return LIBRARY_FUNCTION_ERROR;
    }
 
    try {
-      handle->second = make_HSSUSY_data(
+      handle->second = make_data(
          libData->MTensor_getRealData(pars),
          libData->MTensor_getDimensions(pars)[0]);
    } catch (const flexiblesusy::Error& e) {
@@ -780,13 +797,15 @@ DLLEXPORT int FSHSSUSYSet(
 DLLEXPORT int FSHSSUSYCalculateSpectrum(
    WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace HSSUSY_librarylink;
+
    if (!check_number_of_args(link, 1, "FSHSSUSYCalculateSpectrum"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      HSSUSY_data data = find_HSSUSY_data(hid);
+      Model_data data = find_data(hid);
 
       {
          Redirect_output crd(link);
@@ -796,7 +815,7 @@ DLLEXPORT int FSHSSUSYCalculateSpectrum(
       check_spectrum(data, link);
       put_spectrum(data.model, link);
 
-      handles_HSSUSY[hid] = std::move(data);
+      handles[hid] = std::move(data);
    } catch (const flexiblesusy::Error&) {
       put_error_output(link);
    }
@@ -809,13 +828,15 @@ DLLEXPORT int FSHSSUSYCalculateSpectrum(
 DLLEXPORT int FSHSSUSYCalculateObservables(
    WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace HSSUSY_librarylink;
+
    if (!check_number_of_args(link, 1, "FSHSSUSYCalculateObservables"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      HSSUSY_data data = find_HSSUSY_data(hid);
+      Model_data data = find_data(hid);
 
       if (data.model.get_scale() == 0.) {
          put_message(link,

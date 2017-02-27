@@ -67,6 +67,7 @@ handle = FSSplitMSSMOpenHandle[
         MEWSB -> 0,
         AtInput -> 0,
         TanBeta -> 0,
+        LambdaLoopOrder -> 0,
         msq2 -> {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
         msu2 -> {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
         msd2 -> {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},

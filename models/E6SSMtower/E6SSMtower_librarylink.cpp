@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Thu 15 Dec 2016 12:50:33
+// File generated at Mon 27 Feb 2017 13:33:01
 
 #include "E6SSMtower_info.hpp"
 #include "E6SSMtower_input_parameters.hpp"
@@ -47,6 +47,8 @@
 #define MODELPARAMETER(p) model.get_##p()
 #define PHYSICALPARAMETER(p) model.get_physical().p
 #define OBSERVABLE(o) observables.o
+
+namespace E6SSMtower_librarylink {
 
 using namespace flexiblesusy;
 
@@ -84,7 +86,6 @@ private:
    }
 };
 
-namespace flexiblesusy {
 class EUnknownHandle : public Error {
 public:
    explicit EUnknownHandle(Handle_id hid_) : hid(hid_) {}
@@ -126,10 +127,8 @@ public:
    virtual std::string what() const { return "Invalid spectrum"; }
 };
 
-} // namespace flexiblesusy
-
-struct E6SSMtower_data {
-   E6SSMtower_data()
+struct Model_data {
+   Model_data()
       : input()
       , physical_input()
       , qedqcd()
@@ -147,22 +146,22 @@ struct E6SSMtower_data {
 };
 
 /// current handles
-typedef std::map<Handle_id, E6SSMtower_data> Handle_map;
-Handle_map handles_E6SSMtower;
+typedef std::map<Handle_id, Model_data> Handle_map;
+Handle_map handles;
 
 /******************************************************************/
 
-Handle_id get_new_E6SSMtower_handle()
+Handle_id get_new_handle()
 {
    static const std::size_t max_handles =
       static_cast<std::size_t>(std::exp2(8*sizeof(Handle_id)) - 1);
 
-   if (handles_E6SSMtower.size() >= max_handles)
-      throw ENotEnoughFreeHandles(handles_E6SSMtower.size());
+   if (handles.size() >= max_handles)
+      throw ENotEnoughFreeHandles(handles.size());
 
    Handle_id hid = 0;
 
-   while (handles_E6SSMtower.find(hid) != handles_E6SSMtower.end())
+   while (handles.find(hid) != handles.end())
       hid++;
 
    return hid;
@@ -170,11 +169,11 @@ Handle_id get_new_E6SSMtower_handle()
 
 /******************************************************************/
 
-E6SSMtower_data find_E6SSMtower_data(Handle_id hid)
+Model_data find_data(Handle_id hid)
 {
-   const Handle_map::iterator handle = handles_E6SSMtower.find(hid);
+   const Handle_map::iterator handle = handles.find(hid);
 
-   if (handle == handles_E6SSMtower.end())
+   if (handle == handles.end())
       throw EUnknownHandle(hid);
 
    return handle->second;
@@ -243,9 +242,9 @@ void put_message(MLINK link,
 
 /******************************************************************/
 
-void put_settings(const E6SSMtower_data& data, MLINK link)
+void put_settings(const Model_data& data, MLINK link)
 {
-   MLPutFunction(link, "List", 23);
+   MLPutFunction(link, "List", Spectrum_generator_settings::NUMBER_OF_OPTIONS - 1);
 
    MLPutRuleTo(link, data.settings.get(Spectrum_generator_settings::precision), "precisionGoal");
    MLPutRuleTo(link, (int)data.settings.get(Spectrum_generator_settings::max_iterations), "maxIterations");
@@ -276,9 +275,10 @@ void put_settings(const E6SSMtower_data& data, MLINK link)
 
 /******************************************************************/
 
-void put_sm_input_parameters(const E6SSMtower_data& data, MLINK link)
+void put_sm_input_parameters(const Model_data& data, MLINK link)
 {
-   MLPutFunction(link, "List", 29);
+   MLPutFunction(link, "List",softsusy::NUMBER_OF_LOW_ENERGY_INPUT_PARAMETERS
+                              + Physical_input::NUMBER_OF_INPUT_PARAMETERS);
 
    MLPutRuleTo(link, data.qedqcd.displayAlphaEmInput(), "alphaEmMZ");
    MLPutRuleTo(link, data.qedqcd.displayFermiConstant(), "GF");
@@ -320,7 +320,7 @@ void put_sm_input_parameters(const E6SSMtower_data& data, MLINK link)
 
 /******************************************************************/
 
-void put_input_parameters(const E6SSMtower_data& data, MLINK link)
+void put_input_parameters(const Model_data& data, MLINK link)
 {
    MLPutFunction(link, "List", 31);
 
@@ -547,7 +547,7 @@ void put_observables(const E6SSMtower_observables& observables, MLINK link)
 
 /******************************************************************/
 
-void check_spectrum(const E6SSMtower_data& data, MLINK link)
+void check_spectrum(const Model_data& data, MLINK link)
 {
    const Problems<E6SSMtower_info::NUMBER_OF_PARTICLES>& problems
       = data.model.get_problems();
@@ -571,7 +571,7 @@ void check_spectrum(const E6SSMtower_data& data, MLINK link)
 
 /******************************************************************/
 
-void calculate_spectrum(E6SSMtower_data& data, MLINK link)
+void calculate_spectrum(Model_data& data, MLINK link)
 {
    softsusy::QedQcd qedqcd(data.qedqcd);
 
@@ -594,11 +594,14 @@ void calculate_spectrum(E6SSMtower_data& data, MLINK link)
 
 /******************************************************************/
 
-E6SSMtower_data make_E6SSMtower_data(double* pars, mint npars)
+Model_data make_data(double* pars, mint npars)
 {
-   E6SSMtower_data data;
+   Model_data data;
 
-   const mint n_settings = 23, n_sm_parameters = 29, n_input_pars = 142;
+   const mint n_settings = Spectrum_generator_settings::NUMBER_OF_OPTIONS - 1,
+      n_sm_parameters = softsusy::NUMBER_OF_LOW_ENERGY_INPUT_PARAMETERS
+                        + Physical_input::NUMBER_OF_INPUT_PARAMETERS,
+      n_input_pars = 142;
    const mint n_total = n_settings + n_sm_parameters + n_input_pars;
 
    if (npars != n_total)
@@ -832,6 +835,8 @@ E6SSMtower_data make_E6SSMtower_data(double* pars, mint npars)
    return data;
 }
 
+} // namespace E6SSMtower_librarylink
+
 extern "C" {
 
 /******************************************************************/
@@ -852,13 +857,15 @@ DLLEXPORT int WolframLibrary_initialize(WolframLibraryData /* libData */)
 
 DLLEXPORT int FSE6SSMtowerGetSettings(WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace E6SSMtower_librarylink;
+
    if (!check_number_of_args(link, 1, "FSE6SSMtowerGetSettings"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      const E6SSMtower_data data = find_E6SSMtower_data(hid);
+      const Model_data data = find_data(hid);
       put_settings(data, link);
    } catch (const flexiblesusy::Error& e) {
       std::cerr << e.what() << std::endl;
@@ -872,13 +879,15 @@ DLLEXPORT int FSE6SSMtowerGetSettings(WolframLibraryData /* libData */, MLINK li
 
 DLLEXPORT int FSE6SSMtowerGetSMInputParameters(WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace E6SSMtower_librarylink;
+
    if (!check_number_of_args(link, 1, "FSE6SSMtowerGetSMInputParameters"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      const E6SSMtower_data data = find_E6SSMtower_data(hid);
+      const Model_data data = find_data(hid);
       put_sm_input_parameters(data, link);
    } catch (const flexiblesusy::Error& e) {
       std::cerr << e.what() << std::endl;
@@ -892,13 +901,15 @@ DLLEXPORT int FSE6SSMtowerGetSMInputParameters(WolframLibraryData /* libData */,
 
 DLLEXPORT int FSE6SSMtowerGetInputParameters(WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace E6SSMtower_librarylink;
+
    if (!check_number_of_args(link, 1, "FSE6SSMtowerGetInputParameters"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      const E6SSMtower_data data = find_E6SSMtower_data(hid);
+      const Model_data data = find_data(hid);
       put_input_parameters(data, link);
    } catch (const flexiblesusy::Error& e) {
       std::cerr << e.what() << std::endl;
@@ -913,6 +924,8 @@ DLLEXPORT int FSE6SSMtowerGetInputParameters(WolframLibraryData /* libData */, M
 DLLEXPORT int FSE6SSMtowerOpenHandle(
    WolframLibraryData libData, mint Argc, MArgument* Args, MArgument Res)
 {
+   using namespace E6SSMtower_librarylink;
+
    if (Argc != 1)
       return LIBRARY_TYPE_ERROR;
 
@@ -923,13 +936,13 @@ DLLEXPORT int FSE6SSMtowerOpenHandle(
       return LIBRARY_TYPE_ERROR;
 
    try {
-      E6SSMtower_data data = make_E6SSMtower_data(
+      Model_data data = make_data(
          libData->MTensor_getRealData(pars),
          libData->MTensor_getDimensions(pars)[0]);
 
-      const Handle_id hid = get_new_E6SSMtower_handle();
+      const Handle_id hid = get_new_handle();
 
-      handles_E6SSMtower.insert(std::make_pair(hid, std::move(data)));
+      handles.insert(std::make_pair(hid, std::move(data)));
 
       MArgument_setInteger(Res, hid);
    } catch (const flexiblesusy::Error& e) {
@@ -945,15 +958,17 @@ DLLEXPORT int FSE6SSMtowerOpenHandle(
 DLLEXPORT int FSE6SSMtowerCloseHandle(
    WolframLibraryData /* libData */, mint Argc, MArgument* Args, MArgument /* Res */)
 {
+   using namespace E6SSMtower_librarylink;
+
    if (Argc != 1)
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = MArgument_getInteger(Args[0]);
 
-   const Handle_map::iterator handle = handles_E6SSMtower.find(hid);
+   const Handle_map::iterator handle = handles.find(hid);
 
-   if (handle != handles_E6SSMtower.end())
-      handles_E6SSMtower.erase(handle);
+   if (handle != handles.end())
+      handles.erase(handle);
 
    return LIBRARY_NO_ERROR;
 }
@@ -963,6 +978,8 @@ DLLEXPORT int FSE6SSMtowerCloseHandle(
 DLLEXPORT int FSE6SSMtowerSet(
    WolframLibraryData libData, mint Argc, MArgument* Args, MArgument /* Res */)
 {
+   using namespace E6SSMtower_librarylink;
+
    if (Argc != 2)
       return LIBRARY_TYPE_ERROR;
 
@@ -973,16 +990,16 @@ DLLEXPORT int FSE6SSMtowerSet(
        libData->MTensor_getRank(pars) != 1)
       return LIBRARY_TYPE_ERROR;
 
-   const Handle_map::iterator handle = handles_E6SSMtower.find(hid);
+   const Handle_map::iterator handle = handles.find(hid);
 
-   if (handle == handles_E6SSMtower.end()) {
+   if (handle == handles.end()) {
       std::cerr << "Error: FSE6SSMtowerSet: Unknown handle: "
                 << hid << std::endl;
       return LIBRARY_FUNCTION_ERROR;
    }
 
    try {
-      handle->second = make_E6SSMtower_data(
+      handle->second = make_data(
          libData->MTensor_getRealData(pars),
          libData->MTensor_getDimensions(pars)[0]);
    } catch (const flexiblesusy::Error& e) {
@@ -998,13 +1015,15 @@ DLLEXPORT int FSE6SSMtowerSet(
 DLLEXPORT int FSE6SSMtowerCalculateSpectrum(
    WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace E6SSMtower_librarylink;
+
    if (!check_number_of_args(link, 1, "FSE6SSMtowerCalculateSpectrum"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      E6SSMtower_data data = find_E6SSMtower_data(hid);
+      Model_data data = find_data(hid);
 
       {
          Redirect_output crd(link);
@@ -1014,7 +1033,7 @@ DLLEXPORT int FSE6SSMtowerCalculateSpectrum(
       check_spectrum(data, link);
       put_spectrum(data.model, link);
 
-      handles_E6SSMtower[hid] = std::move(data);
+      handles[hid] = std::move(data);
    } catch (const flexiblesusy::Error&) {
       put_error_output(link);
    }
@@ -1027,13 +1046,15 @@ DLLEXPORT int FSE6SSMtowerCalculateSpectrum(
 DLLEXPORT int FSE6SSMtowerCalculateObservables(
    WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace E6SSMtower_librarylink;
+
    if (!check_number_of_args(link, 1, "FSE6SSMtowerCalculateObservables"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      E6SSMtower_data data = find_E6SSMtower_data(hid);
+      Model_data data = find_data(hid);
 
       if (data.model.get_scale() == 0.) {
          put_message(link,

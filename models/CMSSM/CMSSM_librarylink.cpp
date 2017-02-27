@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Thu 15 Dec 2016 13:13:48
+// File generated at Mon 27 Feb 2017 13:57:38
 
 #include "CMSSM_info.hpp"
 #include "CMSSM_input_parameters.hpp"
@@ -47,6 +47,8 @@
 #define MODELPARAMETER(p) model.get_##p()
 #define PHYSICALPARAMETER(p) model.get_physical().p
 #define OBSERVABLE(o) observables.o
+
+namespace CMSSM_librarylink {
 
 using namespace flexiblesusy;
 
@@ -84,7 +86,6 @@ private:
    }
 };
 
-namespace flexiblesusy {
 class EUnknownHandle : public Error {
 public:
    explicit EUnknownHandle(Handle_id hid_) : hid(hid_) {}
@@ -126,10 +127,8 @@ public:
    virtual std::string what() const { return "Invalid spectrum"; }
 };
 
-} // namespace flexiblesusy
-
-struct CMSSM_data {
-   CMSSM_data()
+struct Model_data {
+   Model_data()
       : input()
       , physical_input()
       , qedqcd()
@@ -147,22 +146,22 @@ struct CMSSM_data {
 };
 
 /// current handles
-typedef std::map<Handle_id, CMSSM_data> Handle_map;
-Handle_map handles_CMSSM;
+typedef std::map<Handle_id, Model_data> Handle_map;
+Handle_map handles;
 
 /******************************************************************/
 
-Handle_id get_new_CMSSM_handle()
+Handle_id get_new_handle()
 {
    static const std::size_t max_handles =
       static_cast<std::size_t>(std::exp2(8*sizeof(Handle_id)) - 1);
 
-   if (handles_CMSSM.size() >= max_handles)
-      throw ENotEnoughFreeHandles(handles_CMSSM.size());
+   if (handles.size() >= max_handles)
+      throw ENotEnoughFreeHandles(handles.size());
 
    Handle_id hid = 0;
 
-   while (handles_CMSSM.find(hid) != handles_CMSSM.end())
+   while (handles.find(hid) != handles.end())
       hid++;
 
    return hid;
@@ -170,11 +169,11 @@ Handle_id get_new_CMSSM_handle()
 
 /******************************************************************/
 
-CMSSM_data find_CMSSM_data(Handle_id hid)
+Model_data find_data(Handle_id hid)
 {
-   const Handle_map::iterator handle = handles_CMSSM.find(hid);
+   const Handle_map::iterator handle = handles.find(hid);
 
-   if (handle == handles_CMSSM.end())
+   if (handle == handles.end())
       throw EUnknownHandle(hid);
 
    return handle->second;
@@ -243,9 +242,9 @@ void put_message(MLINK link,
 
 /******************************************************************/
 
-void put_settings(const CMSSM_data& data, MLINK link)
+void put_settings(const Model_data& data, MLINK link)
 {
-   MLPutFunction(link, "List", 23);
+   MLPutFunction(link, "List", Spectrum_generator_settings::NUMBER_OF_OPTIONS - 1);
 
    MLPutRuleTo(link, data.settings.get(Spectrum_generator_settings::precision), "precisionGoal");
    MLPutRuleTo(link, (int)data.settings.get(Spectrum_generator_settings::max_iterations), "maxIterations");
@@ -276,9 +275,10 @@ void put_settings(const CMSSM_data& data, MLINK link)
 
 /******************************************************************/
 
-void put_sm_input_parameters(const CMSSM_data& data, MLINK link)
+void put_sm_input_parameters(const Model_data& data, MLINK link)
 {
-   MLPutFunction(link, "List", 29);
+   MLPutFunction(link, "List",softsusy::NUMBER_OF_LOW_ENERGY_INPUT_PARAMETERS
+                              + Physical_input::NUMBER_OF_INPUT_PARAMETERS);
 
    MLPutRuleTo(link, data.qedqcd.displayAlphaEmInput(), "alphaEmMZ");
    MLPutRuleTo(link, data.qedqcd.displayFermiConstant(), "GF");
@@ -320,7 +320,7 @@ void put_sm_input_parameters(const CMSSM_data& data, MLINK link)
 
 /******************************************************************/
 
-void put_input_parameters(const CMSSM_data& data, MLINK link)
+void put_input_parameters(const Model_data& data, MLINK link)
 {
    MLPutFunction(link, "List", 5);
 
@@ -456,7 +456,7 @@ void put_observables(const CMSSM_observables& observables, MLINK link)
 
 /******************************************************************/
 
-void check_spectrum(const CMSSM_data& data, MLINK link)
+void check_spectrum(const Model_data& data, MLINK link)
 {
    const Problems<CMSSM_info::NUMBER_OF_PARTICLES>& problems
       = data.model.get_problems();
@@ -480,7 +480,7 @@ void check_spectrum(const CMSSM_data& data, MLINK link)
 
 /******************************************************************/
 
-void calculate_spectrum(CMSSM_data& data, MLINK link)
+void calculate_spectrum(Model_data& data, MLINK link)
 {
    softsusy::QedQcd qedqcd(data.qedqcd);
 
@@ -503,11 +503,14 @@ void calculate_spectrum(CMSSM_data& data, MLINK link)
 
 /******************************************************************/
 
-CMSSM_data make_CMSSM_data(double* pars, mint npars)
+Model_data make_data(double* pars, mint npars)
 {
-   CMSSM_data data;
+   Model_data data;
 
-   const mint n_settings = 23, n_sm_parameters = 29, n_input_pars = 5;
+   const mint n_settings = Spectrum_generator_settings::NUMBER_OF_OPTIONS - 1,
+      n_sm_parameters = softsusy::NUMBER_OF_LOW_ENERGY_INPUT_PARAMETERS
+                        + Physical_input::NUMBER_OF_INPUT_PARAMETERS,
+      n_input_pars = 5;
    const mint n_total = n_settings + n_sm_parameters + n_input_pars;
 
    if (npars != n_total)
@@ -604,6 +607,8 @@ CMSSM_data make_CMSSM_data(double* pars, mint npars)
    return data;
 }
 
+} // namespace CMSSM_librarylink
+
 extern "C" {
 
 /******************************************************************/
@@ -624,13 +629,15 @@ DLLEXPORT int WolframLibrary_initialize(WolframLibraryData /* libData */)
 
 DLLEXPORT int FSCMSSMGetSettings(WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace CMSSM_librarylink;
+
    if (!check_number_of_args(link, 1, "FSCMSSMGetSettings"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      const CMSSM_data data = find_CMSSM_data(hid);
+      const Model_data data = find_data(hid);
       put_settings(data, link);
    } catch (const flexiblesusy::Error& e) {
       std::cerr << e.what() << std::endl;
@@ -644,13 +651,15 @@ DLLEXPORT int FSCMSSMGetSettings(WolframLibraryData /* libData */, MLINK link)
 
 DLLEXPORT int FSCMSSMGetSMInputParameters(WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace CMSSM_librarylink;
+
    if (!check_number_of_args(link, 1, "FSCMSSMGetSMInputParameters"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      const CMSSM_data data = find_CMSSM_data(hid);
+      const Model_data data = find_data(hid);
       put_sm_input_parameters(data, link);
    } catch (const flexiblesusy::Error& e) {
       std::cerr << e.what() << std::endl;
@@ -664,13 +673,15 @@ DLLEXPORT int FSCMSSMGetSMInputParameters(WolframLibraryData /* libData */, MLIN
 
 DLLEXPORT int FSCMSSMGetInputParameters(WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace CMSSM_librarylink;
+
    if (!check_number_of_args(link, 1, "FSCMSSMGetInputParameters"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      const CMSSM_data data = find_CMSSM_data(hid);
+      const Model_data data = find_data(hid);
       put_input_parameters(data, link);
    } catch (const flexiblesusy::Error& e) {
       std::cerr << e.what() << std::endl;
@@ -685,6 +696,8 @@ DLLEXPORT int FSCMSSMGetInputParameters(WolframLibraryData /* libData */, MLINK 
 DLLEXPORT int FSCMSSMOpenHandle(
    WolframLibraryData libData, mint Argc, MArgument* Args, MArgument Res)
 {
+   using namespace CMSSM_librarylink;
+
    if (Argc != 1)
       return LIBRARY_TYPE_ERROR;
 
@@ -695,13 +708,13 @@ DLLEXPORT int FSCMSSMOpenHandle(
       return LIBRARY_TYPE_ERROR;
 
    try {
-      CMSSM_data data = make_CMSSM_data(
+      Model_data data = make_data(
          libData->MTensor_getRealData(pars),
          libData->MTensor_getDimensions(pars)[0]);
 
-      const Handle_id hid = get_new_CMSSM_handle();
+      const Handle_id hid = get_new_handle();
 
-      handles_CMSSM.insert(std::make_pair(hid, std::move(data)));
+      handles.insert(std::make_pair(hid, std::move(data)));
 
       MArgument_setInteger(Res, hid);
    } catch (const flexiblesusy::Error& e) {
@@ -717,15 +730,17 @@ DLLEXPORT int FSCMSSMOpenHandle(
 DLLEXPORT int FSCMSSMCloseHandle(
    WolframLibraryData /* libData */, mint Argc, MArgument* Args, MArgument /* Res */)
 {
+   using namespace CMSSM_librarylink;
+
    if (Argc != 1)
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = MArgument_getInteger(Args[0]);
 
-   const Handle_map::iterator handle = handles_CMSSM.find(hid);
+   const Handle_map::iterator handle = handles.find(hid);
 
-   if (handle != handles_CMSSM.end())
-      handles_CMSSM.erase(handle);
+   if (handle != handles.end())
+      handles.erase(handle);
 
    return LIBRARY_NO_ERROR;
 }
@@ -735,6 +750,8 @@ DLLEXPORT int FSCMSSMCloseHandle(
 DLLEXPORT int FSCMSSMSet(
    WolframLibraryData libData, mint Argc, MArgument* Args, MArgument /* Res */)
 {
+   using namespace CMSSM_librarylink;
+
    if (Argc != 2)
       return LIBRARY_TYPE_ERROR;
 
@@ -745,16 +762,16 @@ DLLEXPORT int FSCMSSMSet(
        libData->MTensor_getRank(pars) != 1)
       return LIBRARY_TYPE_ERROR;
 
-   const Handle_map::iterator handle = handles_CMSSM.find(hid);
+   const Handle_map::iterator handle = handles.find(hid);
 
-   if (handle == handles_CMSSM.end()) {
+   if (handle == handles.end()) {
       std::cerr << "Error: FSCMSSMSet: Unknown handle: "
                 << hid << std::endl;
       return LIBRARY_FUNCTION_ERROR;
    }
 
    try {
-      handle->second = make_CMSSM_data(
+      handle->second = make_data(
          libData->MTensor_getRealData(pars),
          libData->MTensor_getDimensions(pars)[0]);
    } catch (const flexiblesusy::Error& e) {
@@ -770,13 +787,15 @@ DLLEXPORT int FSCMSSMSet(
 DLLEXPORT int FSCMSSMCalculateSpectrum(
    WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace CMSSM_librarylink;
+
    if (!check_number_of_args(link, 1, "FSCMSSMCalculateSpectrum"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      CMSSM_data data = find_CMSSM_data(hid);
+      Model_data data = find_data(hid);
 
       {
          Redirect_output crd(link);
@@ -786,7 +805,7 @@ DLLEXPORT int FSCMSSMCalculateSpectrum(
       check_spectrum(data, link);
       put_spectrum(data.model, link);
 
-      handles_CMSSM[hid] = std::move(data);
+      handles[hid] = std::move(data);
    } catch (const flexiblesusy::Error&) {
       put_error_output(link);
    }
@@ -799,13 +818,15 @@ DLLEXPORT int FSCMSSMCalculateSpectrum(
 DLLEXPORT int FSCMSSMCalculateObservables(
    WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace CMSSM_librarylink;
+
    if (!check_number_of_args(link, 1, "FSCMSSMCalculateObservables"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      CMSSM_data data = find_CMSSM_data(hid);
+      Model_data data = find_data(hid);
 
       if (data.model.get_scale() == 0.) {
          put_message(link,

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Thu 15 Dec 2016 12:39:53
+// File generated at Mon 27 Feb 2017 13:22:32
 
 #include "MRSSMtower_two_scale_low_scale_constraint.hpp"
 #include "MRSSMtower_two_scale_model.hpp"
@@ -452,6 +452,7 @@ double MRSSMtower_low_scale_constraint<Two_scale>::recalculate_mw_pole(double mw
    assert(model && "MRSSMtower_low_scale_constraint<Two_scale>::"
           "recalculate_mw_pole(): model pointer is zero");
 
+   return mw_pole;
 
 }
 

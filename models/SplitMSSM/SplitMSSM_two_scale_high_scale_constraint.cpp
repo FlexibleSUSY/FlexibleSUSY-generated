@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Thu 15 Dec 2016 12:42:12
+// File generated at Mon 27 Feb 2017 13:24:53
 
 #include "SplitMSSM_two_scale_high_scale_constraint.hpp"
 #include "SplitMSSM_two_scale_model.hpp"
@@ -84,6 +84,7 @@ void SplitMSSM_high_scale_constraint<Two_scale>::apply()
 
    const auto TanBeta = INPUTPARAMETER(TanBeta);
    const auto AtInput = INPUTPARAMETER(AtInput);
+   const auto LambdaLoopOrder = INPUTPARAMETER(LambdaLoopOrder);
    const auto mAInput = INPUTPARAMETER(mAInput);
    const auto msq2 = INPUTPARAMETER(msq2);
    const auto msu2 = INPUTPARAMETER(msu2);
@@ -119,33 +120,34 @@ void SplitMSSM_high_scale_constraint<Two_scale>::apply()
       ,2)/msu2(2,2))) + (4*Abs(msq2(2,2)/msu2(2,2))*(-5 - 4*Abs(msq2(2,2)/msu2(2,2
       )) + Sqr(Abs(msq2(2,2)/msu2(2,2))))*Sqr(Log(Power(Abs(msq2(2,2)/msu2(2,2)),
       0.5))))/Power(-1 + Abs(msq2(2,2)/msu2(2,2)),4)))/Abs(msq2(2,2)*msu2(2,2)) +
-      6*Sqr(Log(msq2(2,2)/Sqr(SCALE))))*Power(Yu(2,2),4))*UnitStep(-2 + THRESHOLD)
-      + UnitStep(-1 + THRESHOLD)*(0.006332573977646111*(-0.09*Power(g1,4) - 0.3*
-      Sqr(g1)*Sqr(g2) - Power(g2,4)*(0.75 - 0.16666666666666666*Sqr(Cos(2*ArcTan(
-      TanBeta))))) + 0.006332573977646111*(0.00020833333333333335*Log(Sqr(mAInput)
-      /Sqr(SCALE))*(261*Power(g1,4) + 1325*Power(g2,4) + 630*Sqr(g1)*Sqr(g2) - 4*
-      Cos(4*ArcTan(TanBeta))*(9*Power(g1,4) + 175*Power(g2,4) + 90*Sqr(g1)*Sqr(g2)
-      ) - 9*Cos(8*ArcTan(TanBeta))*Sqr(3*Power(g1,2) + 5*Power(g2,2))) +
-      0.0033333333333333335*(6*Power(g1,4)*(Log(msd2(0,0)/Sqr(SCALE)) + Log(msd2(1
-      ,1)/Sqr(SCALE)) + Log(msd2(2,2)/Sqr(SCALE))) + 18*Power(g1,4)*(Log(mse2(0,0)
-      /Sqr(SCALE)) + Log(mse2(1,1)/Sqr(SCALE)) + Log(mse2(2,2)/Sqr(SCALE))) + (9*
-      Power(g1,4) + 25*Power(g2,4))*(Log(msl2(0,0)/Sqr(SCALE)) + Log(msl2(1,1)/Sqr
-      (SCALE)) + Log(msl2(2,2)/Sqr(SCALE))) + 3*(Power(g1,4) + 25*Power(g2,4))*(
-      Log(msq2(0,0)/Sqr(SCALE)) + Log(msq2(1,1)/Sqr(SCALE)) + Log(msq2(2,2)/Sqr(
-      SCALE))) + 24*Power(g1,4)*(Log(msu2(0,0)/Sqr(SCALE)) + Log(msu2(1,1)/Sqr(
-      SCALE)) + Log(msu2(2,2)/Sqr(SCALE))))*Sqr(Cos(2*ArcTan(TanBeta))) - 0.1875*
-      Sqr(0.6*Power(g1,2) + Power(g2,2))*Sqr(Sin(4*ArcTan(TanBeta))) + 3*Log(msu2(
-      2,2)/Sqr(SCALE))*Sqr(Yu(2,2))*(0.4*Cos(2*ArcTan(TanBeta))*Sqr(g1) + Sqr(Yu(2
-      ,2))) + 3*Log(msq2(2,2)/Sqr(SCALE))*Sqr(Yu(2,2))*(0.5*Cos(2*ArcTan(TanBeta))
-      *(-0.2*Sqr(g1) + Sqr(g2)) + Sqr(Yu(2,2))) + (6*Sqr(AtInput - Mu/TanBeta)*
-      Power(Yu(2,2),4)*(TCF(1)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))) - (
-      0.08333333333333333*Sqr(AtInput - Mu/TanBeta)*TCF(2)(Sqrt(Abs(msq2(2,2)/msu2
-      (2,2)))))/Sqrt(Abs(msq2(2,2)*msu2(2,2)))))/Sqrt(Abs(msq2(2,2)*msu2(2,2))) +
-      (0.75*Cos(2*ArcTan(TanBeta))*Sqr(AtInput - Mu/TanBeta)*Sqr(Yu(2,2))*(0.6*Sqr
-      (g1)*TCF(3)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))) + Sqr(g2)*TCF(4)(Sqrt(Abs(msq2(2
-      ,2)/msu2(2,2))))))/Sqrt(Abs(msq2(2,2)*msu2(2,2))) - (0.25*(0.6*Sqr(g1) + Sqr
-      (g2))*Sqr(Cos(2*ArcTan(TanBeta)))*Sqr(AtInput - Mu/TanBeta)*Sqr(Yu(2,2))*TCF
-      (5)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/Sqrt(Abs(msq2(2,2)*msu2(2,2)))))));
+      6*Sqr(Log(msq2(2,2)/Sqr(SCALE))))*Power(Yu(2,2),4))*UnitStep(-2 +
+      LambdaLoopOrder) + UnitStep(-1 + LambdaLoopOrder)*(0.006332573977646111*(
+      -0.09*Power(g1,4) - 0.3*Sqr(g1)*Sqr(g2) - Power(g2,4)*(0.75 -
+      0.16666666666666666*Sqr(Cos(2*ArcTan(TanBeta))))) + 0.006332573977646111*(
+      0.00020833333333333335*Log(Sqr(mAInput)/Sqr(SCALE))*(261*Power(g1,4) + 1325*
+      Power(g2,4) + 630*Sqr(g1)*Sqr(g2) - 4*Cos(4*ArcTan(TanBeta))*(9*Power(g1,4)
+      + 175*Power(g2,4) + 90*Sqr(g1)*Sqr(g2)) - 9*Cos(8*ArcTan(TanBeta))*Sqr(3*
+      Power(g1,2) + 5*Power(g2,2))) + 0.0033333333333333335*(6*Power(g1,4)*(Log(
+      msd2(0,0)/Sqr(SCALE)) + Log(msd2(1,1)/Sqr(SCALE)) + Log(msd2(2,2)/Sqr(SCALE)
+      )) + 18*Power(g1,4)*(Log(mse2(0,0)/Sqr(SCALE)) + Log(mse2(1,1)/Sqr(SCALE)) +
+      Log(mse2(2,2)/Sqr(SCALE))) + (9*Power(g1,4) + 25*Power(g2,4))*(Log(msl2(0,0
+      )/Sqr(SCALE)) + Log(msl2(1,1)/Sqr(SCALE)) + Log(msl2(2,2)/Sqr(SCALE))) + 3*(
+      Power(g1,4) + 25*Power(g2,4))*(Log(msq2(0,0)/Sqr(SCALE)) + Log(msq2(1,1)/Sqr
+      (SCALE)) + Log(msq2(2,2)/Sqr(SCALE))) + 24*Power(g1,4)*(Log(msu2(0,0)/Sqr(
+      SCALE)) + Log(msu2(1,1)/Sqr(SCALE)) + Log(msu2(2,2)/Sqr(SCALE))))*Sqr(Cos(2*
+      ArcTan(TanBeta))) - 0.1875*Sqr(0.6*Power(g1,2) + Power(g2,2))*Sqr(Sin(4*
+      ArcTan(TanBeta))) + 3*Log(msu2(2,2)/Sqr(SCALE))*Sqr(Yu(2,2))*(0.4*Cos(2*
+      ArcTan(TanBeta))*Sqr(g1) + Sqr(Yu(2,2))) + 3*Log(msq2(2,2)/Sqr(SCALE))*Sqr(
+      Yu(2,2))*(0.5*Cos(2*ArcTan(TanBeta))*(-0.2*Sqr(g1) + Sqr(g2)) + Sqr(Yu(2,2))
+      ) + (6*Sqr(AtInput - Mu/TanBeta)*Power(Yu(2,2),4)*(TCF(1)(Sqrt(Abs(msq2(2,2)
+      /msu2(2,2)))) - (0.08333333333333333*Sqr(AtInput - Mu/TanBeta)*TCF(2)(Sqrt(
+      Abs(msq2(2,2)/msu2(2,2)))))/Sqrt(Abs(msq2(2,2)*msu2(2,2)))))/Sqrt(Abs(msq2(2
+      ,2)*msu2(2,2))) + (0.75*Cos(2*ArcTan(TanBeta))*Sqr(AtInput - Mu/TanBeta)*Sqr
+      (Yu(2,2))*(0.6*Sqr(g1)*TCF(3)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))) + Sqr(g2)*TCF(
+      4)(Sqrt(Abs(msq2(2,2)/msu2(2,2))))))/Sqrt(Abs(msq2(2,2)*msu2(2,2))) - (0.25*
+      (0.6*Sqr(g1) + Sqr(g2))*Sqr(Cos(2*ArcTan(TanBeta)))*Sqr(AtInput - Mu/TanBeta
+      )*Sqr(Yu(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/Sqrt(Abs(msq2(2,2)*
+      msu2(2,2)))))));
    MODEL->set_gYu(Re((0.7745966692414834*g1*TanBeta)/Sqrt(1 + Sqr(TanBeta)) + (
       0.004905190710809969*g1*TanBeta*(0.1*(2*Log(mse2(0,0)/Sqr(SCALE)) + 2*Log(
       mse2(1,1)/Sqr(SCALE)) + 2*Log(mse2(2,2)/Sqr(SCALE)) + Log(msl2(0,0)/Sqr(
@@ -158,8 +160,8 @@ void SplitMSSM_high_scale_constraint<Two_scale>::apply()
       TanBeta))) + 0.025*Log(Sqr(mAInput)/Sqr(SCALE))*(4*Sqr(g1) - (9*(Sqr(g1) + 5
       *Sqr(g2)))/(1 + Sqr(TanBeta))) + (2.25*(1 + Sqr(TanBeta))*Sqr(Yu(2,2)))/Sqr(
       TanBeta) + (0.25*(7*Log(msq2(2,2)/Sqr(SCALE)) - 13*Log(msu2(2,2)/Sqr(SCALE))
-      )*(1 + Sqr(TanBeta))*Sqr(Yu(2,2)))/Sqr(TanBeta))*UnitStep(-1 + THRESHOLD))
-      /Sqrt(1 + Sqr(TanBeta))));
+      )*(1 + Sqr(TanBeta))*Sqr(Yu(2,2)))/Sqr(TanBeta))*UnitStep(-1 +
+      LambdaLoopOrder))/Sqrt(1 + Sqr(TanBeta))));
    MODEL->set_gYd(Re((0.7745966692414834*g1)/Sqrt(1 + Sqr(TanBeta)) + (
       0.004905190710809969*g1*(0.1*(2*Log(mse2(0,0)/Sqr(SCALE)) + 2*Log(mse2(1,1)
       /Sqr(SCALE)) + 2*Log(mse2(2,2)/Sqr(SCALE)) + Log(msl2(0,0)/Sqr(SCALE)) + Log
@@ -171,7 +173,7 @@ void SplitMSSM_high_scale_constraint<Two_scale>::apply()
       Sqr(g1)*(-44 + (7*Sqr(TanBeta))/(1 + Sqr(TanBeta))) + 0.1875*Sqr(g2)*(-2 + (
       7*Sqr(TanBeta))/(1 + Sqr(TanBeta))) + 0.025*Log(Sqr(mAInput)/Sqr(SCALE))*(4*
       Sqr(g1) - (9*(Sqr(g1) + 5*Sqr(g2))*Sqr(TanBeta))/(1 + Sqr(TanBeta))))*
-      UnitStep(-1 + THRESHOLD))/Sqrt(1 + Sqr(TanBeta))));
+      UnitStep(-1 + LambdaLoopOrder))/Sqrt(1 + Sqr(TanBeta))));
    MODEL->set_g2u(Re((g2*TanBeta)/Sqrt(1 + Sqr(TanBeta)) + (
       0.006332573977646111*g2*TanBeta*(0.16666666666666666*(Log(msl2(0,0)/Sqr(
       SCALE)) + Log(msl2(1,1)/Sqr(SCALE)) + Log(msl2(2,2)/Sqr(SCALE)))*Sqr(g2) +
@@ -182,7 +184,7 @@ void SplitMSSM_high_scale_constraint<Two_scale>::apply()
       g1) + 35*Sqr(g2)))/(1 + Sqr(TanBeta))) + (2.25*(1 + Sqr(TanBeta))*Sqr(Yu(2,2
       )))/Sqr(TanBeta) - (0.75*(3*Log(msq2(2,2)/Sqr(SCALE)) - Log(msu2(2,2)/Sqr(
       SCALE)))*(1 + Sqr(TanBeta))*Sqr(Yu(2,2)))/Sqr(TanBeta))*UnitStep(-1 +
-      THRESHOLD))/Sqrt(1 + Sqr(TanBeta))));
+      LambdaLoopOrder))/Sqrt(1 + Sqr(TanBeta))));
    MODEL->set_g2d(Re(g2/Sqrt(1 + Sqr(TanBeta)) + (0.006332573977646111*g2*(
       0.16666666666666666*Log(msl2(0,0)/Sqr(SCALE))*Sqr(g2) + 0.16666666666666666*
       Log(msl2(1,1)/Sqr(SCALE))*Sqr(g2) + 0.16666666666666666*Log(msl2(2,2)/Sqr(
@@ -191,7 +193,7 @@ void SplitMSSM_high_scale_constraint<Two_scale>::apply()
       0.6666666666666666 + (0.6875*Sqr(TanBeta))/(1 + Sqr(TanBeta))) + 0.0375*Sqr(
       g1)*(-2 + (7*Sqr(TanBeta))/(1 + Sqr(TanBeta))) + 0.008333333333333333*Log(
       Sqr(mAInput)/Sqr(SCALE))*(20*Sqr(g2) + (3*(-9*Sqr(g1) + 35*Sqr(g2))*Sqr(
-      TanBeta))/(1 + Sqr(TanBeta))))*UnitStep(-1 + THRESHOLD))/Sqrt(1 + Sqr(
+      TanBeta))/(1 + Sqr(TanBeta))))*UnitStep(-1 + LambdaLoopOrder))/Sqrt(1 + Sqr(
       TanBeta))));
 
 

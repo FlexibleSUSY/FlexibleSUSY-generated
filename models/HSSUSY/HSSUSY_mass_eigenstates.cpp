@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Thu 15 Dec 2016 12:43:03
+// File generated at Mon 27 Feb 2017 13:25:40
 
 /**
  * @file HSSUSY_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Thu 15 Dec 2016 12:43:03 with FlexibleSUSY
- * 1.7.2 (git commit: 0d19299fef514160cb7541a03abb9b2c3365f927) and SARAH 4.9.1 .
+ * This file was generated at Mon 27 Feb 2017 13:25:40 with FlexibleSUSY
+ * 1.7.3 (git commit: 622a80d5da461a0a259a094325cd734ff8e79c61) and SARAH 4.9.3 .
  */
 
 #include "HSSUSY_mass_eigenstates.hpp"
@@ -57,8 +57,6 @@
 #include <gsl/gsl_multiroots.h>
 
 namespace flexiblesusy {
-
-using namespace HSSUSY_info;
 
 #define CLASSNAME HSSUSY_mass_eigenstates
 
@@ -742,7 +740,7 @@ void CLASSNAME::reorder_pole_masses()
  */
 void CLASSNAME::check_pole_masses_for_tachyons()
 {
-   if (PHYSICAL(Mhh) < 0.) problems.flag_tachyon(hh);
+   if (PHYSICAL(Mhh) < 0.) problems.flag_tachyon(HSSUSY_info::hh);
 
 }
 
@@ -5029,7 +5027,7 @@ void CLASSNAME::calculate_MFv_pole()
 
 void CLASSNAME::calculate_Mhh_pole()
 {
-   if (!force_output && problems.is_tachyon(hh))
+   if (!force_output && problems.is_tachyon(HSSUSY_info::hh))
       return;
 
    // diagonalization with high precision
@@ -5085,7 +5083,7 @@ void CLASSNAME::calculate_MVP_pole()
 
 void CLASSNAME::calculate_MVZ_pole()
 {
-   if (!force_output && problems.is_tachyon(VZ))
+   if (!force_output && problems.is_tachyon(HSSUSY_info::VZ))
       return;
 
    // diagonalization with high precision
@@ -5100,7 +5098,7 @@ void CLASSNAME::calculate_MVZ_pole()
       const double mass_sqr = M_tree - self_energy;
 
       if (mass_sqr < 0.)
-         problems.flag_tachyon(VZ);
+         problems.flag_tachyon(HSSUSY_info::VZ);
 
       PHYSICAL(MVZ) = AbsSqrt(mass_sqr);
 
@@ -5334,7 +5332,7 @@ void CLASSNAME::calculate_MFe_pole()
 
 void CLASSNAME::calculate_MVWp_pole()
 {
-   if (!force_output && problems.is_tachyon(VWp))
+   if (!force_output && problems.is_tachyon(HSSUSY_info::VWp))
       return;
 
    // diagonalization with high precision
@@ -5349,7 +5347,7 @@ void CLASSNAME::calculate_MVWp_pole()
       const double mass_sqr = M_tree - self_energy;
 
       if (mass_sqr < 0.)
-         problems.flag_tachyon(VWp);
+         problems.flag_tachyon(HSSUSY_info::VWp);
 
       PHYSICAL(MVWp) = AbsSqrt(mass_sqr);
 
@@ -5368,28 +5366,28 @@ void CLASSNAME::calculate_MVWp_pole()
 
 double CLASSNAME::calculate_MVWp_pole(double p)
 {
-   if (!force_output && problems.is_tachyon(VWp))
+   if (!force_output && problems.is_tachyon(HSSUSY_info::VWp))
       return 0.;
 
    const double self_energy = Re(self_energy_VWp(p));
    const double mass_sqr = Sqr(MVWp) - self_energy;
 
    if (mass_sqr < 0.)
-      problems.flag_tachyon(VWp);
+      problems.flag_tachyon(HSSUSY_info::VWp);
 
    return AbsSqrt(mass_sqr);
 }
 
 double CLASSNAME::calculate_MVZ_pole(double p)
 {
-   if (!force_output && problems.is_tachyon(VZ))
+   if (!force_output && problems.is_tachyon(HSSUSY_info::VZ))
       return 0.;
 
    const double self_energy = Re(self_energy_VZ(p));
    const double mass_sqr = Sqr(MVZ) - self_energy;
 
    if (mass_sqr < 0.)
-      problems.flag_tachyon(VZ);
+      problems.flag_tachyon(HSSUSY_info::VZ);
 
    return AbsSqrt(mass_sqr);
 }
@@ -5487,7 +5485,7 @@ double CLASSNAME::calculate_MVZ_DRbar(double m_pole)
    const double mass_sqr = Sqr(m_pole) + self_energy;
 
    if (mass_sqr < 0.) {
-      problems.flag_tachyon(VZ);
+      problems.flag_tachyon(HSSUSY_info::VZ);
       return m_pole;
    }
 
@@ -5501,7 +5499,7 @@ double CLASSNAME::calculate_MVWp_DRbar(double m_pole)
    const double mass_sqr = Sqr(m_pole) + self_energy;
 
    if (mass_sqr < 0.) {
-      problems.flag_tachyon(VWp);
+      problems.flag_tachyon(HSSUSY_info::VWp);
       return m_pole;
    }
 

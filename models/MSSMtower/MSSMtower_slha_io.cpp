@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Thu 15 Dec 2016 12:38:05
+// File generated at Mon 27 Feb 2017 13:20:46
 
 #include "MSSMtower_slha_io.hpp"
 #include "MSSMtower_input_parameters.hpp"
@@ -92,11 +92,6 @@ void MSSMtower_slha_io::set_extpar(const MSSMtower_input_parameters& input)
  */
 void MSSMtower_slha_io::set_minpar(const MSSMtower_input_parameters& input)
 {
-   std::ostringstream minpar;
-
-   minpar << "Block MINPAR\n";
-   minpar << FORMAT_ELEMENT(4, input.SignMu, "SignMu");
-   slha_io.set_block(minpar);
 
 }
 
@@ -494,7 +489,6 @@ void MSSMtower_slha_io::fill_minpar_tuple(MSSMtower_input_parameters& input,
                                                 int key, double value)
 {
    switch (key) {
-   case 4: input.SignMu = value; break;
    default: WARNING("Unrecognized entry in block MINPAR: " << key); break;
    }
 

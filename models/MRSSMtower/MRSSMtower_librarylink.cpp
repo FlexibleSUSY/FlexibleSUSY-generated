@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Thu 15 Dec 2016 12:44:46
+// File generated at Mon 27 Feb 2017 13:27:21
 
 #include "MRSSMtower_info.hpp"
 #include "MRSSMtower_input_parameters.hpp"
@@ -47,6 +47,8 @@
 #define MODELPARAMETER(p) model.get_##p()
 #define PHYSICALPARAMETER(p) model.get_physical().p
 #define OBSERVABLE(o) observables.o
+
+namespace MRSSMtower_librarylink {
 
 using namespace flexiblesusy;
 
@@ -84,7 +86,6 @@ private:
    }
 };
 
-namespace flexiblesusy {
 class EUnknownHandle : public Error {
 public:
    explicit EUnknownHandle(Handle_id hid_) : hid(hid_) {}
@@ -126,10 +127,8 @@ public:
    virtual std::string what() const { return "Invalid spectrum"; }
 };
 
-} // namespace flexiblesusy
-
-struct MRSSMtower_data {
-   MRSSMtower_data()
+struct Model_data {
+   Model_data()
       : input()
       , physical_input()
       , qedqcd()
@@ -147,22 +146,22 @@ struct MRSSMtower_data {
 };
 
 /// current handles
-typedef std::map<Handle_id, MRSSMtower_data> Handle_map;
-Handle_map handles_MRSSMtower;
+typedef std::map<Handle_id, Model_data> Handle_map;
+Handle_map handles;
 
 /******************************************************************/
 
-Handle_id get_new_MRSSMtower_handle()
+Handle_id get_new_handle()
 {
    static const std::size_t max_handles =
       static_cast<std::size_t>(std::exp2(8*sizeof(Handle_id)) - 1);
 
-   if (handles_MRSSMtower.size() >= max_handles)
-      throw ENotEnoughFreeHandles(handles_MRSSMtower.size());
+   if (handles.size() >= max_handles)
+      throw ENotEnoughFreeHandles(handles.size());
 
    Handle_id hid = 0;
 
-   while (handles_MRSSMtower.find(hid) != handles_MRSSMtower.end())
+   while (handles.find(hid) != handles.end())
       hid++;
 
    return hid;
@@ -170,11 +169,11 @@ Handle_id get_new_MRSSMtower_handle()
 
 /******************************************************************/
 
-MRSSMtower_data find_MRSSMtower_data(Handle_id hid)
+Model_data find_data(Handle_id hid)
 {
-   const Handle_map::iterator handle = handles_MRSSMtower.find(hid);
+   const Handle_map::iterator handle = handles.find(hid);
 
-   if (handle == handles_MRSSMtower.end())
+   if (handle == handles.end())
       throw EUnknownHandle(hid);
 
    return handle->second;
@@ -243,9 +242,9 @@ void put_message(MLINK link,
 
 /******************************************************************/
 
-void put_settings(const MRSSMtower_data& data, MLINK link)
+void put_settings(const Model_data& data, MLINK link)
 {
-   MLPutFunction(link, "List", 23);
+   MLPutFunction(link, "List", Spectrum_generator_settings::NUMBER_OF_OPTIONS - 1);
 
    MLPutRuleTo(link, data.settings.get(Spectrum_generator_settings::precision), "precisionGoal");
    MLPutRuleTo(link, (int)data.settings.get(Spectrum_generator_settings::max_iterations), "maxIterations");
@@ -276,9 +275,10 @@ void put_settings(const MRSSMtower_data& data, MLINK link)
 
 /******************************************************************/
 
-void put_sm_input_parameters(const MRSSMtower_data& data, MLINK link)
+void put_sm_input_parameters(const Model_data& data, MLINK link)
 {
-   MLPutFunction(link, "List", 29);
+   MLPutFunction(link, "List",softsusy::NUMBER_OF_LOW_ENERGY_INPUT_PARAMETERS
+                              + Physical_input::NUMBER_OF_INPUT_PARAMETERS);
 
    MLPutRuleTo(link, data.qedqcd.displayAlphaEmInput(), "alphaEmMZ");
    MLPutRuleTo(link, data.qedqcd.displayFermiConstant(), "GF");
@@ -320,7 +320,7 @@ void put_sm_input_parameters(const MRSSMtower_data& data, MLINK link)
 
 /******************************************************************/
 
-void put_input_parameters(const MRSSMtower_data& data, MLINK link)
+void put_input_parameters(const Model_data& data, MLINK link)
 {
    MLPutFunction(link, "List", 22);
 
@@ -501,7 +501,7 @@ void put_observables(const MRSSMtower_observables& observables, MLINK link)
 
 /******************************************************************/
 
-void check_spectrum(const MRSSMtower_data& data, MLINK link)
+void check_spectrum(const Model_data& data, MLINK link)
 {
    const Problems<MRSSMtower_info::NUMBER_OF_PARTICLES>& problems
       = data.model.get_problems();
@@ -525,7 +525,7 @@ void check_spectrum(const MRSSMtower_data& data, MLINK link)
 
 /******************************************************************/
 
-void calculate_spectrum(MRSSMtower_data& data, MLINK link)
+void calculate_spectrum(Model_data& data, MLINK link)
 {
    softsusy::QedQcd qedqcd(data.qedqcd);
 
@@ -548,11 +548,14 @@ void calculate_spectrum(MRSSMtower_data& data, MLINK link)
 
 /******************************************************************/
 
-MRSSMtower_data make_MRSSMtower_data(double* pars, mint npars)
+Model_data make_data(double* pars, mint npars)
 {
-   MRSSMtower_data data;
+   Model_data data;
 
-   const mint n_settings = 23, n_sm_parameters = 29, n_input_pars = 62;
+   const mint n_settings = Spectrum_generator_settings::NUMBER_OF_OPTIONS - 1,
+      n_sm_parameters = softsusy::NUMBER_OF_LOW_ENERGY_INPUT_PARAMETERS
+                        + Physical_input::NUMBER_OF_INPUT_PARAMETERS,
+      n_input_pars = 62;
    const mint n_total = n_settings + n_sm_parameters + n_input_pars;
 
    if (npars != n_total)
@@ -706,6 +709,8 @@ MRSSMtower_data make_MRSSMtower_data(double* pars, mint npars)
    return data;
 }
 
+} // namespace MRSSMtower_librarylink
+
 extern "C" {
 
 /******************************************************************/
@@ -726,13 +731,15 @@ DLLEXPORT int WolframLibrary_initialize(WolframLibraryData /* libData */)
 
 DLLEXPORT int FSMRSSMtowerGetSettings(WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace MRSSMtower_librarylink;
+
    if (!check_number_of_args(link, 1, "FSMRSSMtowerGetSettings"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      const MRSSMtower_data data = find_MRSSMtower_data(hid);
+      const Model_data data = find_data(hid);
       put_settings(data, link);
    } catch (const flexiblesusy::Error& e) {
       std::cerr << e.what() << std::endl;
@@ -746,13 +753,15 @@ DLLEXPORT int FSMRSSMtowerGetSettings(WolframLibraryData /* libData */, MLINK li
 
 DLLEXPORT int FSMRSSMtowerGetSMInputParameters(WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace MRSSMtower_librarylink;
+
    if (!check_number_of_args(link, 1, "FSMRSSMtowerGetSMInputParameters"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      const MRSSMtower_data data = find_MRSSMtower_data(hid);
+      const Model_data data = find_data(hid);
       put_sm_input_parameters(data, link);
    } catch (const flexiblesusy::Error& e) {
       std::cerr << e.what() << std::endl;
@@ -766,13 +775,15 @@ DLLEXPORT int FSMRSSMtowerGetSMInputParameters(WolframLibraryData /* libData */,
 
 DLLEXPORT int FSMRSSMtowerGetInputParameters(WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace MRSSMtower_librarylink;
+
    if (!check_number_of_args(link, 1, "FSMRSSMtowerGetInputParameters"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      const MRSSMtower_data data = find_MRSSMtower_data(hid);
+      const Model_data data = find_data(hid);
       put_input_parameters(data, link);
    } catch (const flexiblesusy::Error& e) {
       std::cerr << e.what() << std::endl;
@@ -787,6 +798,8 @@ DLLEXPORT int FSMRSSMtowerGetInputParameters(WolframLibraryData /* libData */, M
 DLLEXPORT int FSMRSSMtowerOpenHandle(
    WolframLibraryData libData, mint Argc, MArgument* Args, MArgument Res)
 {
+   using namespace MRSSMtower_librarylink;
+
    if (Argc != 1)
       return LIBRARY_TYPE_ERROR;
 
@@ -797,13 +810,13 @@ DLLEXPORT int FSMRSSMtowerOpenHandle(
       return LIBRARY_TYPE_ERROR;
 
    try {
-      MRSSMtower_data data = make_MRSSMtower_data(
+      Model_data data = make_data(
          libData->MTensor_getRealData(pars),
          libData->MTensor_getDimensions(pars)[0]);
 
-      const Handle_id hid = get_new_MRSSMtower_handle();
+      const Handle_id hid = get_new_handle();
 
-      handles_MRSSMtower.insert(std::make_pair(hid, std::move(data)));
+      handles.insert(std::make_pair(hid, std::move(data)));
 
       MArgument_setInteger(Res, hid);
    } catch (const flexiblesusy::Error& e) {
@@ -819,15 +832,17 @@ DLLEXPORT int FSMRSSMtowerOpenHandle(
 DLLEXPORT int FSMRSSMtowerCloseHandle(
    WolframLibraryData /* libData */, mint Argc, MArgument* Args, MArgument /* Res */)
 {
+   using namespace MRSSMtower_librarylink;
+
    if (Argc != 1)
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = MArgument_getInteger(Args[0]);
 
-   const Handle_map::iterator handle = handles_MRSSMtower.find(hid);
+   const Handle_map::iterator handle = handles.find(hid);
 
-   if (handle != handles_MRSSMtower.end())
-      handles_MRSSMtower.erase(handle);
+   if (handle != handles.end())
+      handles.erase(handle);
 
    return LIBRARY_NO_ERROR;
 }
@@ -837,6 +852,8 @@ DLLEXPORT int FSMRSSMtowerCloseHandle(
 DLLEXPORT int FSMRSSMtowerSet(
    WolframLibraryData libData, mint Argc, MArgument* Args, MArgument /* Res */)
 {
+   using namespace MRSSMtower_librarylink;
+
    if (Argc != 2)
       return LIBRARY_TYPE_ERROR;
 
@@ -847,16 +864,16 @@ DLLEXPORT int FSMRSSMtowerSet(
        libData->MTensor_getRank(pars) != 1)
       return LIBRARY_TYPE_ERROR;
 
-   const Handle_map::iterator handle = handles_MRSSMtower.find(hid);
+   const Handle_map::iterator handle = handles.find(hid);
 
-   if (handle == handles_MRSSMtower.end()) {
+   if (handle == handles.end()) {
       std::cerr << "Error: FSMRSSMtowerSet: Unknown handle: "
                 << hid << std::endl;
       return LIBRARY_FUNCTION_ERROR;
    }
 
    try {
-      handle->second = make_MRSSMtower_data(
+      handle->second = make_data(
          libData->MTensor_getRealData(pars),
          libData->MTensor_getDimensions(pars)[0]);
    } catch (const flexiblesusy::Error& e) {
@@ -872,13 +889,15 @@ DLLEXPORT int FSMRSSMtowerSet(
 DLLEXPORT int FSMRSSMtowerCalculateSpectrum(
    WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace MRSSMtower_librarylink;
+
    if (!check_number_of_args(link, 1, "FSMRSSMtowerCalculateSpectrum"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      MRSSMtower_data data = find_MRSSMtower_data(hid);
+      Model_data data = find_data(hid);
 
       {
          Redirect_output crd(link);
@@ -888,7 +907,7 @@ DLLEXPORT int FSMRSSMtowerCalculateSpectrum(
       check_spectrum(data, link);
       put_spectrum(data.model, link);
 
-      handles_MRSSMtower[hid] = std::move(data);
+      handles[hid] = std::move(data);
    } catch (const flexiblesusy::Error&) {
       put_error_output(link);
    }
@@ -901,13 +920,15 @@ DLLEXPORT int FSMRSSMtowerCalculateSpectrum(
 DLLEXPORT int FSMRSSMtowerCalculateObservables(
    WolframLibraryData /* libData */, MLINK link)
 {
+   using namespace MRSSMtower_librarylink;
+
    if (!check_number_of_args(link, 1, "FSMRSSMtowerCalculateObservables"))
       return LIBRARY_TYPE_ERROR;
 
    const Handle_id hid = get_handle_from(link);
 
    try {
-      MRSSMtower_data data = find_MRSSMtower_data(hid);
+      Model_data data = find_data(hid);
 
       if (data.model.get_scale() == 0.) {
          put_message(link,

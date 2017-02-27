@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Thu 15 Dec 2016 12:58:47
+// File generated at Mon 27 Feb 2017 13:41:49
 
 #ifndef NUTSMSSM_SPECTRUM_GENERATOR_H
 #define NUTSMSSM_SPECTRUM_GENERATOR_H
@@ -46,9 +46,6 @@ class NUTSMSSM_spectrum_generator
 public:
    NUTSMSSM_spectrum_generator()
       : NUTSMSSM_spectrum_generator_interface<T>()
-      , high_scale_constraint()
-      , susy_scale_constraint()
-      , low_scale_constraint()
       , high_scale(0.)
       , susy_scale(0.)
       , low_scale(0.)
@@ -63,9 +60,6 @@ public:
    void write_running_couplings(const std::string& filename = "NUTSMSSM_rgflow.dat") const;
 
 private:
-   NUTSMSSM_high_scale_constraint<T> high_scale_constraint;
-   NUTSMSSM_susy_scale_constraint<T> susy_scale_constraint;
-   NUTSMSSM_low_scale_constraint<T>  low_scale_constraint;
    double high_scale, susy_scale, low_scale;
 };
 
@@ -94,17 +88,9 @@ void NUTSMSSM_spectrum_generator<T>::run(const softsusy::QedQcd& qedqcd,
    model.set_thresholds(this->settings.get(Spectrum_generator_settings::threshold_corrections_loop_order));
    model.set_zero_threshold(this->settings.get(Spectrum_generator_settings::beta_zero_threshold));
 
-   high_scale_constraint.clear();
-   susy_scale_constraint.clear();
-   low_scale_constraint .clear();
-
-   // needed for constraint::initialize()
-   high_scale_constraint.set_model(&model);
-   susy_scale_constraint.set_model(&model);
-   low_scale_constraint .set_model(&model);
-
-   susy_scale_constraint.set_sm_parameters(qedqcd);
-   low_scale_constraint .set_sm_parameters(qedqcd);
+   NUTSMSSM_high_scale_constraint<T> high_scale_constraint(&model);
+   NUTSMSSM_susy_scale_constraint<T> susy_scale_constraint(&model, qedqcd);
+   NUTSMSSM_low_scale_constraint<T>  low_scale_constraint(&model, qedqcd);
 
    high_scale_constraint.initialize();
    susy_scale_constraint.initialize();

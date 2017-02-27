@@ -58,7 +58,6 @@ handle = FSMSSMtowerOpenHandle[
         Mh -> 125.09
     },
     fsModelParameters -> {
-        SignMu -> 0,
         MSUSY -> 0,
         M1Input -> 0,
         M2Input -> 0,

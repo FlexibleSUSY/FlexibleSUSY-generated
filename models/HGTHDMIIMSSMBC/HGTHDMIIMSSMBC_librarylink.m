@@ -19,7 +19,11 @@ FSHGTHDMIIMSSMBCCalculateObservables::error = "`1`";
 FSHGTHDMIIMSSMBCCalculateObservables::warning = "`1`";
 
 FSHGTHDMIIMSSMBC::info = "`1`";
+FSHGTHDMIIMSSMBC::nonum = "Error: `1` is not a numeric input value!";
 FSHGTHDMIIMSSMBCMessage[s_] := Message[FSHGTHDMIIMSSMBC::info, s];
+
+FSHGTHDMIIMSSMBCCheckIsNumeric[a_?NumericQ] := a;
+FSHGTHDMIIMSSMBCCheckIsNumeric[a_] := (Message[FSHGTHDMIIMSSMBC::nonum, a]; Abort[]);
 
 fsDefaultSettings = {
       precisionGoal -> 1.*^-4,           (* FlexibleSUSY[0] *)
@@ -105,7 +109,7 @@ FSHGTHDMIIMSSMBCOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameter
 
 FSHGTHDMIIMSSMBCOpenHandle[OptionsPattern[]] :=
     FSHGTHDMIIMSSMBCOpenHandleLib[
-        {
+        FSHGTHDMIIMSSMBCCheckIsNumeric /@ {
             (* spectrum generator settings *)
             OptionValue[precisionGoal],
             OptionValue[maxIterations],
@@ -258,7 +262,7 @@ FSHGTHDMIIMSSMBCSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[AbInput],
             OptionValue[AtauInput],
             OptionValue[LambdaLoopOrder]
-        }] /. HoldPattern[OptionValue[param_]] :> param /.
+        }] /. HoldPattern[OptionValue[param_]] :> FSHGTHDMIIMSSMBCCheckIsNumeric[param] /.
         { p } /.
         FSHGTHDMIIMSSMBCGetSettings[handle] /.
         FSHGTHDMIIMSSMBCGetSMInputParameters[handle] /.

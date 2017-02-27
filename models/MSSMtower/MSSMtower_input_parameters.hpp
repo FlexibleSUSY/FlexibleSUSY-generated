@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Thu 15 Dec 2016 12:38:00
+// File generated at Mon 27 Feb 2017 13:20:41
 
 #ifndef MSSMtower_INPUT_PARAMETERS_H
 #define MSSMtower_INPUT_PARAMETERS_H
@@ -27,7 +27,6 @@
 namespace flexiblesusy {
 
 struct MSSMtower_input_parameters {
-   int SignMu;
    double MSUSY;
    double M1Input;
    double M2Input;
@@ -45,13 +44,13 @@ struct MSSMtower_input_parameters {
    Eigen::Matrix<double,3,3> AeInput;
 
    MSSMtower_input_parameters()
-      : SignMu(1), MSUSY(0), M1Input(0), M2Input(0), M3Input(0), MuInput(0),
-   mAInput(0), TanBeta(0), mq2Input(Eigen::Matrix<double,3,3>::Zero()),
-   mu2Input(Eigen::Matrix<double,3,3>::Zero()), md2Input(Eigen::Matrix<double,3
-   ,3>::Zero()), ml2Input(Eigen::Matrix<double,3,3>::Zero()), me2Input(
-   Eigen::Matrix<double,3,3>::Zero()), AuInput(Eigen::Matrix<double,3,3>::Zero(
-   )), AdInput(Eigen::Matrix<double,3,3>::Zero()), AeInput(Eigen::Matrix<double
-   ,3,3>::Zero())
+      : MSUSY(0), M1Input(0), M2Input(0), M3Input(0), MuInput(0), mAInput(0),
+   TanBeta(0), mq2Input(Eigen::Matrix<double,3,3>::Zero()), mu2Input(
+   Eigen::Matrix<double,3,3>::Zero()), md2Input(Eigen::Matrix<double,3,3>::Zero
+   ()), ml2Input(Eigen::Matrix<double,3,3>::Zero()), me2Input(Eigen::Matrix<
+   double,3,3>::Zero()), AuInput(Eigen::Matrix<double,3,3>::Zero()), AdInput(
+   Eigen::Matrix<double,3,3>::Zero()), AeInput(Eigen::Matrix<double,3,3>::Zero(
+   ))
 
    {}
 

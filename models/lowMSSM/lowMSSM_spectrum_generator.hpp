@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Thu 15 Dec 2016 13:04:35
+// File generated at Mon 27 Feb 2017 13:47:58
 
 #ifndef lowMSSM_SPECTRUM_GENERATOR_H
 #define lowMSSM_SPECTRUM_GENERATOR_H
@@ -45,8 +45,6 @@ class lowMSSM_spectrum_generator
 public:
    lowMSSM_spectrum_generator()
       : lowMSSM_spectrum_generator_interface<T>()
-      , susy_scale_constraint()
-      , low_scale_constraint()
       , susy_scale(0.)
       , low_scale(0.)
    {}
@@ -60,8 +58,6 @@ public:
    void write_running_couplings(const std::string& filename = "lowMSSM_rgflow.dat") const;
 
 private:
-   lowMSSM_susy_scale_constraint<T> susy_scale_constraint;
-   lowMSSM_low_scale_constraint<T>  low_scale_constraint;
    double susy_scale, low_scale;
 };
 
@@ -90,15 +86,8 @@ void lowMSSM_spectrum_generator<T>::run(const softsusy::QedQcd& qedqcd,
    model.set_thresholds(this->settings.get(Spectrum_generator_settings::threshold_corrections_loop_order));
    model.set_zero_threshold(this->settings.get(Spectrum_generator_settings::beta_zero_threshold));
 
-   susy_scale_constraint.clear();
-   low_scale_constraint .clear();
-
-   // needed for constraint::initialize()
-   susy_scale_constraint.set_model(&model);
-   low_scale_constraint .set_model(&model);
-
-   susy_scale_constraint.set_sm_parameters(qedqcd);
-   low_scale_constraint .set_sm_parameters(qedqcd);
+   lowMSSM_susy_scale_constraint<T> susy_scale_constraint(&model, qedqcd);
+   lowMSSM_low_scale_constraint<T>  low_scale_constraint(&model, qedqcd);
 
    susy_scale_constraint.initialize();
    low_scale_constraint .initialize();
