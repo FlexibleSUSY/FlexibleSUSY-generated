@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 27 Feb 2017 13:43:30
+// File generated at Wed 12 Apr 2017 12:56:47
 
 #ifndef NMSSM_SUSY_SCALE_CONSTRAINT_H
 #define NMSSM_SUSY_SCALE_CONSTRAINT_H

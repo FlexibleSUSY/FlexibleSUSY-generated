@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 27 Feb 2017 13:56:01
+// File generated at Wed 12 Apr 2017 14:13:07
 
 #include "MSSMNoFV_effective_couplings.hpp"
 
@@ -258,28 +258,6 @@ double MSSMNoFV_effective_couplings::get_AhVGVG_partial_width(unsigned gO1) cons
    return 0.039788735772973836 * Power(mass, 3.0) * AbsSqr(eff_CpAhVGVG(gO1));
 }
 
-std::complex<double> MSSMNoFV_effective_couplings::CpAhFmbarFmPL(unsigned gt1) const
-{
-   const auto Ye = MODELPARAMETER(Ye);
-
-   std::complex<double> result;
-
-   result = std::complex<double>(0.,-0.7071067811865475)*Ye(1,1)*ZA(gt1,0);
-
-   return result;
-}
-
-std::complex<double> MSSMNoFV_effective_couplings::CpFmhhbarFmPL(unsigned gt2) const
-{
-   const auto Ye = MODELPARAMETER(Ye);
-
-   std::complex<double> result;
-
-   result = -0.7071067811865475*Ye(1,1)*ZH(gt2,0);
-
-   return result;
-}
-
 std::complex<double> MSSMNoFV_effective_couplings::CpFdhhbarFdPL(unsigned gt2) const
 {
    const auto Yd = MODELPARAMETER(Yd);
@@ -353,6 +331,17 @@ std::complex<double> MSSMNoFV_effective_couplings::CpFehhbarFePL(unsigned gt2) c
    std::complex<double> result;
 
    result = -0.7071067811865475*Ye(0,0)*ZH(gt2,0);
+
+   return result;
+}
+
+std::complex<double> MSSMNoFV_effective_couplings::CpFmhhbarFmPL(unsigned gt2) const
+{
+   const auto Ye = MODELPARAMETER(Ye);
+
+   std::complex<double> result;
+
+   result = -0.7071067811865475*Ye(1,1)*ZH(gt2,0);
 
    return result;
 }
@@ -689,6 +678,17 @@ std::complex<double> MSSMNoFV_effective_couplings::CpAhFebarFePL(unsigned gt1) c
    std::complex<double> result;
 
    result = std::complex<double>(0.,-0.7071067811865475)*Ye(0,0)*ZA(gt1,0);
+
+   return result;
+}
+
+std::complex<double> MSSMNoFV_effective_couplings::CpAhFmbarFmPL(unsigned gt1) const
+{
+   const auto Ye = MODELPARAMETER(Ye);
+
+   std::complex<double> result;
+
+   result = std::complex<double>(0.,-0.7071067811865475)*Ye(1,1)*ZA(gt1,0);
 
    return result;
 }

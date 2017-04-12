@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 27 Feb 2017 13:57:20
+// File generated at Wed 12 Apr 2017 13:32:16
 
 #ifndef MSSM_EFFECTIVE_COUPLINGS_H
 #define MSSM_EFFECTIVE_COUPLINGS_H
@@ -60,13 +60,12 @@ public:
 
    void calculate_effective_couplings();
 
-   std::complex<double> CpAhFebarFePL(unsigned gt1, unsigned gt2, unsigned gt3) const;
-   std::complex<double> CpFehhbarFePL(unsigned gt1, unsigned gt2, unsigned gt3) const;
    std::complex<double> CphhSdconjSd(unsigned gt1, unsigned gt2, unsigned gt3) const;
    std::complex<double> CphhSuconjSu(unsigned gt1, unsigned gt2, unsigned gt3) const;
    std::complex<double> CphhSeconjSe(unsigned gt1, unsigned gt2, unsigned gt3) const;
    std::complex<double> CphhHpmconjHpm(unsigned gt1, unsigned gt2, unsigned gt3) const;
    std::complex<double> CpChahhbarChaPL(unsigned gt1, unsigned gt2, unsigned gt3) const;
+   std::complex<double> CpFehhbarFePL(unsigned gt1, unsigned gt2, unsigned gt3) const;
    std::complex<double> CpFdhhbarFdPL(unsigned gt1, unsigned gt2, unsigned gt3) const;
    std::complex<double> CpFuhhbarFuPL(unsigned gt1, unsigned gt2, unsigned gt3) const;
    std::complex<double> CphhVWmconjVWm(unsigned gt1) const;
@@ -75,6 +74,7 @@ public:
    std::complex<double> CpAhSeconjSe(unsigned gt1, unsigned gt2, unsigned gt3) const;
    std::complex<double> CpAhHpmconjHpm(unsigned gt1, unsigned gt2, unsigned gt3) const;
    std::complex<double> CpAhChabarChaPL(unsigned gt1, unsigned gt2, unsigned gt3) const;
+   std::complex<double> CpAhFebarFePL(unsigned gt1, unsigned gt2, unsigned gt3) const;
    std::complex<double> CpAhFdbarFdPL(unsigned gt1, unsigned gt2, unsigned gt3) const;
    std::complex<double> CpAhFubarFuPL(unsigned gt1, unsigned gt2, unsigned gt3) const;
    void calculate_eff_CphhVPVP(unsigned gO1);

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 27 Feb 2017 13:25:53
+// File generated at Wed 12 Apr 2017 11:24:14
 
 #ifndef SM_EFFECTIVE_COUPLINGS_H
 #define SM_EFFECTIVE_COUPLINGS_H
@@ -60,13 +60,13 @@ public:
 
    void calculate_effective_couplings();
 
-   std::complex<double> CpAhFebarFePL(unsigned gt2, unsigned gt3) const;
-   std::complex<double> CpFehhbarFePL(unsigned gt1, unsigned gt3) const;
    std::complex<double> CpFdhhbarFdPL(unsigned gt1, unsigned gt3) const;
    std::complex<double> CpFuhhbarFuPL(unsigned gt1, unsigned gt3) const;
+   std::complex<double> CpFehhbarFePL(unsigned gt1, unsigned gt3) const;
    double CphhVWpconjVWp() const;
    std::complex<double> CpAhFdbarFdPL(unsigned gt2, unsigned gt3) const;
    std::complex<double> CpAhFubarFuPL(unsigned gt2, unsigned gt3) const;
+   std::complex<double> CpAhFebarFePL(unsigned gt2, unsigned gt3) const;
    void calculate_eff_CphhVPVP();
    void calculate_eff_CphhVGVG();
    void calculate_eff_CpAhVPVP();

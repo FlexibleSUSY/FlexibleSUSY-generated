@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 27 Feb 2017 13:32:52
+// File generated at Wed 12 Apr 2017 12:36:10
 
 #include "E6SSMtower_standard_model_matching.hpp"
 #include "wrappers.hpp"
@@ -297,27 +297,26 @@ void E6SSMtower_standard_model_matching::match_low_to_high_scale_model(
       )/currentScale)) - 1.3333333333333333*FiniteLog(Abs(MCha(1)/currentScale)) -
       1.3333333333333333*FiniteLog(Abs(MChaI(0)/currentScale)) -
       1.3333333333333333*FiniteLog(Abs(MChaI(1)/currentScale)) -
-      0.14814814814814814*FiniteLog(Abs(MFDX(0)/currentScale)) -
-      0.14814814814814814*FiniteLog(Abs(MFDX(1)/currentScale)) -
-      0.14814814814814814*FiniteLog(Abs(MFDX(2)/currentScale)) -
-      0.3333333333333333*FiniteLog(Abs(MHpm(1)/currentScale)) - 0.1111111111111111
-      *FiniteLog(Abs(MSd(0)/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(
-      1)/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(2)/currentScale)) -
-      0.1111111111111111*FiniteLog(Abs(MSd(3)/currentScale)) - 0.1111111111111111
-      *FiniteLog(Abs(MSd(4)/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(
-      5)/currentScale)) - 0.037037037037037035*FiniteLog(Abs(MSDX(0)/currentScale)
-      ) - 0.037037037037037035*FiniteLog(Abs(MSDX(1)/currentScale)) -
-      0.037037037037037035*FiniteLog(Abs(MSDX(2)/currentScale)) -
-      0.037037037037037035*FiniteLog(Abs(MSDX(3)/currentScale)) -
-      0.037037037037037035*FiniteLog(Abs(MSDX(4)/currentScale)) -
-      0.037037037037037035*FiniteLog(Abs(MSDX(5)/currentScale)) -
-      0.3333333333333333*FiniteLog(Abs(MSe(0)/currentScale)) - 0.3333333333333333*
-      FiniteLog(Abs(MSe(1)/currentScale)) - 0.3333333333333333*FiniteLog(Abs(MSe(2
-      )/currentScale)) - 0.3333333333333333*FiniteLog(Abs(MSe(3)/currentScale)) -
-      0.3333333333333333*FiniteLog(Abs(MSe(4)/currentScale)) - 0.3333333333333333*
-      FiniteLog(Abs(MSe(5)/currentScale)) - 0.3333333333333333*FiniteLog(Abs(MSHIp
-      (0)/currentScale)) - 0.3333333333333333*FiniteLog(Abs(MSHIp(1)/currentScale)
-      ) - 0.3333333333333333*FiniteLog(Abs(MSHIp(2)/currentScale)) -
+      0.4444444444444444*FiniteLog(Abs(MFDX(0)/currentScale)) - 0.4444444444444444
+      *FiniteLog(Abs(MFDX(1)/currentScale)) - 0.4444444444444444*FiniteLog(Abs(
+      MFDX(2)/currentScale)) - 0.3333333333333333*FiniteLog(Abs(MHpm(1)
+      /currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(0)/currentScale)) -
+      0.1111111111111111*FiniteLog(Abs(MSd(1)/currentScale)) - 0.1111111111111111*
+      FiniteLog(Abs(MSd(2)/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(3
+      )/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(4)/currentScale)) -
+      0.1111111111111111*FiniteLog(Abs(MSd(5)/currentScale)) - 0.1111111111111111*
+      FiniteLog(Abs(MSDX(0)/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSDX
+      (1)/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSDX(2)/currentScale))
+      - 0.1111111111111111*FiniteLog(Abs(MSDX(3)/currentScale)) -
+      0.1111111111111111*FiniteLog(Abs(MSDX(4)/currentScale)) - 0.1111111111111111
+      *FiniteLog(Abs(MSDX(5)/currentScale)) - 0.3333333333333333*FiniteLog(Abs(MSe
+      (0)/currentScale)) - 0.3333333333333333*FiniteLog(Abs(MSe(1)/currentScale))
+      - 0.3333333333333333*FiniteLog(Abs(MSe(2)/currentScale)) -
+      0.3333333333333333*FiniteLog(Abs(MSe(3)/currentScale)) - 0.3333333333333333*
+      FiniteLog(Abs(MSe(4)/currentScale)) - 0.3333333333333333*FiniteLog(Abs(MSe(5
+      )/currentScale)) - 0.3333333333333333*FiniteLog(Abs(MSHIp(0)/currentScale))
+      - 0.3333333333333333*FiniteLog(Abs(MSHIp(1)/currentScale)) -
+      0.3333333333333333*FiniteLog(Abs(MSHIp(2)/currentScale)) -
       0.3333333333333333*FiniteLog(Abs(MSHIp(3)/currentScale)) -
       0.3333333333333333*FiniteLog(Abs(MSHpp(0)/currentScale)) -
       0.3333333333333333*FiniteLog(Abs(MSHpp(1)/currentScale)) -

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 27 Feb 2017 13:52:42
+// File generated at Wed 12 Apr 2017 14:10:24
 
 #ifndef CMSSMNoFV_EFFECTIVE_COUPLINGS_H
 #define CMSSMNoFV_EFFECTIVE_COUPLINGS_H
@@ -60,8 +60,6 @@ public:
 
    void calculate_effective_couplings();
 
-   std::complex<double> CpAhFmbarFmPL(unsigned gt1) const;
-   std::complex<double> CpFmhhbarFmPL(unsigned gt2) const;
    std::complex<double> CpFdhhbarFdPL(unsigned gt2) const;
    std::complex<double> CpFshhbarFsPL(unsigned gt2) const;
    std::complex<double> CpFbhhbarFbPL(unsigned gt2) const;
@@ -69,6 +67,7 @@ public:
    std::complex<double> CpFchhbarFcPL(unsigned gt2) const;
    std::complex<double> CpFthhbarFtPL(unsigned gt2) const;
    std::complex<double> CpFehhbarFePL(unsigned gt2) const;
+   std::complex<double> CpFmhhbarFmPL(unsigned gt2) const;
    std::complex<double> CpFtauhhbarFtauPL(unsigned gt2) const;
    std::complex<double> CphhSdconjSd(unsigned gt1, unsigned gt2, unsigned gt3) const;
    std::complex<double> CphhSuconjSu(unsigned gt1, unsigned gt2, unsigned gt3) const;
@@ -89,6 +88,7 @@ public:
    std::complex<double> CpAhFcbarFcPL(unsigned gt1) const;
    std::complex<double> CpAhFtbarFtPL(unsigned gt1) const;
    std::complex<double> CpAhFebarFePL(unsigned gt1) const;
+   std::complex<double> CpAhFmbarFmPL(unsigned gt1) const;
    std::complex<double> CpAhFtaubarFtauPL(unsigned gt1) const;
    std::complex<double> CpAhSdconjSd(unsigned gt1, unsigned gt2, unsigned gt3) const;
    std::complex<double> CpAhSuconjSu(unsigned gt1, unsigned gt2, unsigned gt3) const;

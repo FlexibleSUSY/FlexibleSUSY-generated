@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 27 Feb 2017 13:53:07
+// File generated at Wed 12 Apr 2017 14:12:48
 
 /**
  * @file MSSMNoFVatMGUT_mass_eigenstates.hpp
@@ -25,8 +25,8 @@
  *        value problem using the two_scale solver by solving EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Mon 27 Feb 2017 13:53:07 with FlexibleSUSY
- * 1.7.3 (git commit: 622a80d5da461a0a259a094325cd734ff8e79c61) and SARAH 4.9.3 .
+ * This file was generated at Wed 12 Apr 2017 14:12:48 with FlexibleSUSY
+ * 1.7.4 (git commit: bf9e92a2ddb43c203483621f6150a96a16f51536) and SARAH 4.11.0 .
  */
 
 #ifndef MSSMNoFVatMGUT_MASS_EIGENSTATES_H
@@ -767,6 +767,84 @@ public:
    std::complex<double> CpconjSvtLconjVWmStau(unsigned gI2) const;
    double CpconjSvtLFvtChiPR(unsigned ) const;
    std::complex<double> CpconjSvtLFvtChiPL(unsigned gI2) const;
+   std::complex<double> CpVGVGVG() const;
+   std::complex<double> CpVGbargGgG() const;
+   std::complex<double> CpVGVGconjSbSb(unsigned gI1, unsigned gI2) const;
+   std::complex<double> CpVGVGconjScSc(unsigned gI1, unsigned gI2) const;
+   std::complex<double> CpVGVGconjSdSd(unsigned gI1, unsigned gI2) const;
+   std::complex<double> CpVGVGconjSsSs(unsigned gI1, unsigned gI2) const;
+   std::complex<double> CpVGVGconjStSt(unsigned gI1, unsigned gI2) const;
+   std::complex<double> CpVGVGconjSuSu(unsigned gI1, unsigned gI2) const;
+   double CpVGconjSbSb(unsigned gI1, unsigned gI2) const;
+   double CpVGconjScSc(unsigned gI1, unsigned gI2) const;
+   double CpVGconjSdSd(unsigned gI1, unsigned gI2) const;
+   double CpVGconjSsSs(unsigned gI1, unsigned gI2) const;
+   double CpVGconjStSt(unsigned gI1, unsigned gI2) const;
+   double CpVGconjSuSu(unsigned gI1, unsigned gI2) const;
+   double CpVGbarFbFbPL(unsigned , unsigned ) const;
+   double CpVGbarFbFbPR(unsigned , unsigned ) const;
+   double CpVGbarFcFcPL(unsigned , unsigned ) const;
+   double CpVGbarFcFcPR(unsigned , unsigned ) const;
+   double CpVGbarFdFdPL(unsigned , unsigned ) const;
+   double CpVGbarFdFdPR(unsigned , unsigned ) const;
+   double CpVGbarFsFsPL(unsigned , unsigned ) const;
+   double CpVGbarFsFsPR(unsigned , unsigned ) const;
+   double CpVGbarFtFtPL(unsigned , unsigned ) const;
+   double CpVGbarFtFtPR(unsigned , unsigned ) const;
+   double CpVGbarFuFuPL(unsigned , unsigned ) const;
+   double CpVGbarFuFuPR(unsigned , unsigned ) const;
+   double CpVGGluGluPL(unsigned , unsigned ) const;
+   double CpVGGluGluPR(unsigned , unsigned ) const;
+   double CpVGVGVGVG1() const;
+   double CpVGVGVGVG2() const;
+   double CpVGVGVGVG3() const;
+   double CpVPbargWmgWm() const;
+   double CpVPbargWmCgWmC() const;
+   double CpVPconjVWmVWm() const;
+   double CpVPbarFeFePL() const;
+   double CpVPbarFeFePR() const;
+   double CpVPbarFmFmPL() const;
+   double CpVPbarFmFmPR() const;
+   double CpVPbarFtauFtauPL() const;
+   double CpVPbarFtauFtauPR() const;
+   std::complex<double> CpVPVPconjHpmHpm(unsigned gI1, unsigned gI2) const;
+   std::complex<double> CpVPVPconjSbSb(unsigned gI1, unsigned gI2) const;
+   std::complex<double> CpVPVPconjScSc(unsigned gI1, unsigned gI2) const;
+   std::complex<double> CpVPVPconjSdSd(unsigned gI1, unsigned gI2) const;
+   std::complex<double> CpVPVPconjSeSe(unsigned gI1, unsigned gI2) const;
+   std::complex<double> CpVPVPconjSmSm(unsigned gI1, unsigned gI2) const;
+   std::complex<double> CpVPVPconjSsSs(unsigned gI1, unsigned gI2) const;
+   std::complex<double> CpVPVPconjStSt(unsigned gI1, unsigned gI2) const;
+   std::complex<double> CpVPVPconjStauStau(unsigned gI1, unsigned gI2) const;
+   std::complex<double> CpVPVPconjSuSu(unsigned gI1, unsigned gI2) const;
+   double CpVPconjHpmHpm(unsigned gI1, unsigned gI2) const;
+   std::complex<double> CpVPconjSbSb(unsigned gI1, unsigned gI2) const;
+   std::complex<double> CpVPconjScSc(unsigned gI1, unsigned gI2) const;
+   std::complex<double> CpVPconjSdSd(unsigned gI1, unsigned gI2) const;
+   std::complex<double> CpVPconjSeSe(unsigned gI1, unsigned gI2) const;
+   std::complex<double> CpVPconjSmSm(unsigned gI1, unsigned gI2) const;
+   std::complex<double> CpVPconjSsSs(unsigned gI1, unsigned gI2) const;
+   std::complex<double> CpVPconjStSt(unsigned gI1, unsigned gI2) const;
+   std::complex<double> CpVPconjStauStau(unsigned gI1, unsigned gI2) const;
+   std::complex<double> CpVPconjSuSu(unsigned gI1, unsigned gI2) const;
+   std::complex<double> CpVPbarChaChaPL(unsigned gI1, unsigned gI2) const;
+   std::complex<double> CpVPbarChaChaPR(unsigned gI1, unsigned gI2) const;
+   std::complex<double> CpVPconjVWmHpm(unsigned gI2) const;
+   double CpVPbarFbFbPL(unsigned , unsigned ) const;
+   double CpVPbarFbFbPR(unsigned , unsigned ) const;
+   double CpVPbarFcFcPL(unsigned , unsigned ) const;
+   double CpVPbarFcFcPR(unsigned , unsigned ) const;
+   double CpVPbarFdFdPL(unsigned , unsigned ) const;
+   double CpVPbarFdFdPR(unsigned , unsigned ) const;
+   double CpVPbarFsFsPL(unsigned , unsigned ) const;
+   double CpVPbarFsFsPR(unsigned , unsigned ) const;
+   double CpVPbarFtFtPL(unsigned , unsigned ) const;
+   double CpVPbarFtFtPR(unsigned , unsigned ) const;
+   double CpVPbarFuFuPL(unsigned , unsigned ) const;
+   double CpVPbarFuFuPR(unsigned , unsigned ) const;
+   double CpVPVPconjVWmVWm1() const;
+   double CpVPVPconjVWmVWm2() const;
+   double CpVPVPconjVWmVWm3() const;
    double CpVZbargWmgWm() const;
    double CpVZbargWmCgWmC() const;
    double CpVZconjSveLSveL() const;
@@ -887,10 +965,14 @@ public:
    double CpVWmconjVWmconjVWmVWm1() const;
    double CpVWmconjVWmconjVWmVWm2() const;
    double CpVWmconjVWmconjVWmVWm3() const;
+   std::complex<double> CpUChibarChaHpmPL(unsigned gO2, unsigned gI1, unsigned gI2) const;
+   std::complex<double> CpUChibarChaHpmPR(unsigned gO1, unsigned gI1, unsigned gI2) const;
    std::complex<double> CpUChiconjHpmChaPL(unsigned gO2, unsigned gI1, unsigned gI2) const;
    std::complex<double> CpUChiconjHpmChaPR(unsigned gO1, unsigned gI1, unsigned gI2) const;
    std::complex<double> CpUChihhChiPL(unsigned gO2, unsigned gI1, unsigned gI2) const;
    std::complex<double> CpUChihhChiPR(unsigned gO1, unsigned gI1, unsigned gI2) const;
+   std::complex<double> CpUChibarChaVWmPR(unsigned gO2, unsigned gI1) const;
+   std::complex<double> CpUChibarChaVWmPL(unsigned gO1, unsigned gI1) const;
    std::complex<double> CpUChiconjSbFbPL(unsigned gO2, unsigned gI1, unsigned ) const;
    std::complex<double> CpUChiconjSbFbPR(unsigned gO1, unsigned gI1, unsigned ) const;
    std::complex<double> CpUChiconjScFcPL(unsigned gO2, unsigned gI1, unsigned ) const;
@@ -911,10 +993,34 @@ public:
    std::complex<double> CpUChiconjSuFuPR(unsigned gO1, unsigned gI1, unsigned ) const;
    std::complex<double> CpUChiChiAhPL(unsigned gO2, unsigned gI1, unsigned gI2) const;
    std::complex<double> CpUChiChiAhPR(unsigned gO1, unsigned gI1, unsigned gI2) const;
+   std::complex<double> CpUChibarFeSePL(unsigned gO2, unsigned gI2) const;
+   std::complex<double> CpUChibarFeSePR(unsigned gO1, unsigned gI2) const;
+   std::complex<double> CpUChibarFmSmPL(unsigned gO2, unsigned gI2) const;
+   std::complex<double> CpUChibarFmSmPR(unsigned gO1, unsigned gI2) const;
+   std::complex<double> CpUChibarFtauStauPL(unsigned gO2, unsigned gI2) const;
+   std::complex<double> CpUChibarFtauStauPR(unsigned gO1, unsigned gI2) const;
+   std::complex<double> CpUChibarFbSbPL(unsigned gO2, unsigned , unsigned gI2) const;
+   std::complex<double> CpUChibarFbSbPR(unsigned gO1, unsigned , unsigned gI2) const;
+   std::complex<double> CpUChibarFcScPL(unsigned gO2, unsigned , unsigned gI2) const;
+   std::complex<double> CpUChibarFcScPR(unsigned gO1, unsigned , unsigned gI2) const;
+   std::complex<double> CpUChibarFdSdPL(unsigned gO2, unsigned , unsigned gI2) const;
+   std::complex<double> CpUChibarFdSdPR(unsigned gO1, unsigned , unsigned gI2) const;
+   std::complex<double> CpUChibarFsSsPL(unsigned gO2, unsigned , unsigned gI2) const;
+   std::complex<double> CpUChibarFsSsPR(unsigned gO1, unsigned , unsigned gI2) const;
+   std::complex<double> CpUChibarFtStPL(unsigned gO2, unsigned , unsigned gI2) const;
+   std::complex<double> CpUChibarFtStPR(unsigned gO1, unsigned , unsigned gI2) const;
+   std::complex<double> CpUChibarFuSuPL(unsigned gO2, unsigned , unsigned gI2) const;
+   std::complex<double> CpUChibarFuSuPR(unsigned gO1, unsigned , unsigned gI2) const;
    std::complex<double> CpUChiconjVWmChaPR(unsigned gO2, unsigned gI2) const;
    std::complex<double> CpUChiconjVWmChaPL(unsigned gO1, unsigned gI2) const;
    std::complex<double> CpUChiVZChiPR(unsigned gO2, unsigned gI2) const;
    std::complex<double> CpUChiVZChiPL(unsigned gO1, unsigned gI2) const;
+   double CpUChibarFveSveLPL(unsigned ) const;
+   std::complex<double> CpUChibarFveSveLPR(unsigned gO1) const;
+   double CpUChibarFvmSvmLPL(unsigned ) const;
+   std::complex<double> CpUChibarFvmSvmLPR(unsigned gO1) const;
+   double CpUChibarFvtSvtLPL(unsigned ) const;
+   std::complex<double> CpUChibarFvtSvtLPR(unsigned gO1) const;
    std::complex<double> CpUChiconjSveLFvePL(unsigned gO2) const;
    double CpUChiconjSveLFvePR(unsigned ) const;
    std::complex<double> CpUChiconjSvmLFvmPL(unsigned gO2) const;
@@ -969,6 +1075,18 @@ public:
    std::complex<double> CpGluconjStFtPR(unsigned gI1, unsigned ) const;
    std::complex<double> CpGluconjSuFuPL(unsigned gI1, unsigned ) const;
    std::complex<double> CpGluconjSuFuPR(unsigned gI1, unsigned ) const;
+   std::complex<double> CpGlubarFbSbPL(unsigned , unsigned gI2) const;
+   std::complex<double> CpGlubarFbSbPR(unsigned , unsigned gI2) const;
+   std::complex<double> CpGlubarFcScPL(unsigned , unsigned gI2) const;
+   std::complex<double> CpGlubarFcScPR(unsigned , unsigned gI2) const;
+   std::complex<double> CpGlubarFdSdPL(unsigned , unsigned gI2) const;
+   std::complex<double> CpGlubarFdSdPR(unsigned , unsigned gI2) const;
+   std::complex<double> CpGlubarFsSsPL(unsigned , unsigned gI2) const;
+   std::complex<double> CpGlubarFsSsPR(unsigned , unsigned gI2) const;
+   std::complex<double> CpGlubarFtStPL(unsigned , unsigned gI2) const;
+   std::complex<double> CpGlubarFtStPR(unsigned , unsigned gI2) const;
+   std::complex<double> CpGlubarFuSuPL(unsigned , unsigned gI2) const;
+   std::complex<double> CpGlubarFuSuPR(unsigned , unsigned gI2) const;
    std::complex<double> CpGluVGGluPR() const;
    std::complex<double> CpGluVGGluPL() const;
    std::complex<double> CpbarFdSuChaPL(unsigned gI1, unsigned gI2) const;
@@ -1184,6 +1302,8 @@ public:
    std::complex<double> self_energy_SveL(double p ) const;
    std::complex<double> self_energy_SvmL(double p ) const;
    std::complex<double> self_energy_SvtL(double p ) const;
+   std::complex<double> self_energy_VG(double p ) const;
+   std::complex<double> self_energy_VP(double p ) const;
    std::complex<double> self_energy_VZ(double p ) const;
    std::complex<double> self_energy_VWm(double p ) const;
    std::complex<double> self_energy_Chi_1(double p , unsigned gO1, unsigned gO2) const;

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 27 Feb 2017 13:22:50
+// File generated at Wed 12 Apr 2017 11:00:15
 
 #include "HGTHDMIIMSSMBC_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -97,14 +97,14 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_v2_two_loop(const Soft_traces& 
 
    beta_v2 = Re(twoLoop*(-3*Lambda1*Lambda6*v1 - 1.5*Lambda4*Lambda6*v1 -
       1.5*Lambda5*Lambda6*v1 - 3*Lambda2*Lambda7*v1 - 1.5*Lambda4*Lambda7*v1 -
-      1.5*Lambda5*Lambda7*v1 - 1.80375*Power(g1,4)*v2 + 6.28125*Power(g2,4)*v2
+      1.5*Lambda5*Lambda7*v1 - 1.75875*Power(g1,4)*v2 + 7.40625*Power(g2,4)*v2
       + 2.8125*Power(g2u,4)*v2 + 0.5625*Power(g2up,4)*v2 + 2.25*
       traceYdAdjYuYuAdjYd*v2 + 6.75*traceYuAdjYuYuAdjYu*v2 - 0.5*Lambda3*(3*
-      Lambda6*v1 + 3*Lambda7*v1 + 2*Lambda4*v2) - 2.575*traceYuAdjYu*v2*Sqr(g1)
-      - 7.875*traceYuAdjYu*v2*Sqr(g2) + 0.1125*v2*Sqr(g1)*Sqr(g2) - 0.7875*v2*
-      Sqr(g1)*Sqr(g2u) + 1.125*v2*Sqr(g1d)*Sqr(g2u) - 11.4375*v2*Sqr(g2)*Sqr(
-      g2u) - 0.2625*v2*Sqr(g1)*Sqr(g2up) + 0.375*v2*Sqr(g1dp)*Sqr(g2up) -
-      1.3125*v2*Sqr(g2)*Sqr(g2up) + 1.125*v2*Sqr(g2u)*Sqr(g2up) - 20*
+      Lambda6*v1 + 3*Lambda7*v1 + 2*Lambda4*v2) - 3.025*traceYuAdjYu*v2*Sqr(g1)
+      - 10.125*traceYuAdjYu*v2*Sqr(g2) + 0.5625*v2*Sqr(g1)*Sqr(g2) - 1.0125*v2
+      *Sqr(g1)*Sqr(g2u) + 1.125*v2*Sqr(g1d)*Sqr(g2u) - 12.5625*v2*Sqr(g2)*Sqr(
+      g2u) - 0.3375*v2*Sqr(g1)*Sqr(g2up) + 0.375*v2*Sqr(g1dp)*Sqr(g2up) -
+      1.6875*v2*Sqr(g2)*Sqr(g2up) + 1.125*v2*Sqr(g2u)*Sqr(g2up) - 20*
       traceYuAdjYu*v2*Sqr(g3) - 6*v2*Sqr(Lambda2) - v2*Sqr(Lambda3) - v2*Sqr(
       Lambda4) - 1.5*v2*Sqr(Lambda5) - 1.5*v2*Sqr(Lambda6) - 4.5*v2*Sqr(Lambda7
       )));

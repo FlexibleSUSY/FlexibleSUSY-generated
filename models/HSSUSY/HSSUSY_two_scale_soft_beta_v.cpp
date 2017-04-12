@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 27 Feb 2017 13:25:07
+// File generated at Wed 12 Apr 2017 11:20:51
 
 #include "HSSUSY_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -101,10 +101,10 @@ double HSSUSY_soft_parameters::calc_beta_v_two_loop(const Soft_traces& soft_trac
 
    double beta_v;
 
-   beta_v = Re(-0.00125*twoLoop*v*(1257*Power(g1,4) + 10*Sqr(g1)*(86*
-      traceYdAdjYd + 162*traceYeAdjYe + 206*traceYuAdjYu - 9*Sqr(g2)) - 25*(343
-      *Power(g2,4) - 84*(3*traceYdAdjYd + traceYeAdjYe + 3*traceYuAdjYu)*Sqr(g2
-      ) - 8*(80*(traceYdAdjYd + traceYuAdjYu)*Sqr(g3) - 3*(9*
+   beta_v = Re(-0.00125*twoLoop*v*(1221*Power(g1,4) + 10*Sqr(g1)*(122*
+      traceYdAdjYd + 174*traceYeAdjYe + 242*traceYuAdjYu - 45*Sqr(g2)) - 25*(
+      379*Power(g2,4) - 108*(3*traceYdAdjYd + traceYeAdjYe + 3*traceYuAdjYu)*
+      Sqr(g2) - 8*(80*(traceYdAdjYd + traceYuAdjYu)*Sqr(g3) - 3*(9*
       traceYdAdjYdYdAdjYd - 2*traceYdAdjYuYuAdjYd + 3*traceYeAdjYeYeAdjYe + 9*
       traceYuAdjYuYuAdjYu - 2*Sqr(Lambdax))))));
 

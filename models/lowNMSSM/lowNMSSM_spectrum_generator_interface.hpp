@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 27 Feb 2017 13:37:24
+// File generated at Wed 12 Apr 2017 12:41:02
 
 #ifndef lowNMSSM_SPECTRUM_GENERATOR_INTERFACE_H
 #define lowNMSSM_SPECTRUM_GENERATOR_INTERFACE_H

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 27 Feb 2017 13:34:39
+// File generated at Wed 12 Apr 2017 11:51:28
 
 #ifndef E6SSM_SLHA_IO_H
 #define E6SSM_SLHA_IO_H

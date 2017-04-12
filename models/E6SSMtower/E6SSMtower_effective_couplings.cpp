@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 27 Feb 2017 13:33:00
+// File generated at Wed 12 Apr 2017 12:36:22
 
 #include "E6SSMtower_effective_couplings.hpp"
 
@@ -291,85 +291,85 @@ std::complex<double> E6SSMtower_effective_couplings::CphhSdconjSd(unsigned gt1, 
 
    std::complex<double> result;
 
-   std::complex<double> tmp_7238;
-   std::complex<double> tmp_7239;
-   std::complex<double> tmp_7240;
+   std::complex<double> tmp_7690;
+   std::complex<double> tmp_7691;
+   std::complex<double> tmp_7692;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7240 += Conj(ZD(gt2,j1))*ZD(gt3,j1);
+      tmp_7692 += Conj(ZD(gt2,j1))*ZD(gt3,j1);
    }
-   tmp_7239 += tmp_7240;
-   tmp_7238 += (vd*(6*Sqr(g1) + 30*Sqr(g2) + 9*Sqr(gN))*ZH(gt1,0) - 2*vu*(3*Sqr
+   tmp_7691 += tmp_7692;
+   tmp_7690 += (vd*(6*Sqr(g1) + 30*Sqr(g2) + 9*Sqr(gN))*ZH(gt1,0) - 2*vu*(3*Sqr
       (g1) + 15*Sqr(g2) - 3*Sqr(gN))*ZH(gt1,1) - 15*vs*Sqr(gN)*ZH(gt1,2)) *
-      tmp_7239;
-   std::complex<double> tmp_7241;
-   std::complex<double> tmp_7242;
-   std::complex<double> tmp_7243;
+      tmp_7691;
+   std::complex<double> tmp_7693;
+   std::complex<double> tmp_7694;
+   std::complex<double> tmp_7695;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7243 += Conj(ZD(gt2,3 + j1))*Conj(TYd(j1,j1))*ZD(gt3,j1);
+      tmp_7695 += Conj(ZD(gt2,3 + j1))*Conj(TYd(j1,j1))*ZD(gt3,j1);
    }
-   tmp_7242 += tmp_7243;
-   tmp_7241 += (-42.42640687119285*ZH(gt1,0)) * tmp_7242;
-   std::complex<double> tmp_7244;
-   std::complex<double> tmp_7245;
+   tmp_7694 += tmp_7695;
+   tmp_7693 += (-42.42640687119285*ZH(gt1,0)) * tmp_7694;
+   std::complex<double> tmp_7696;
+   std::complex<double> tmp_7697;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7245 += Conj(ZD(gt2,3 + j1))*ZD(gt3,3 + j1);
+      tmp_7697 += Conj(ZD(gt2,3 + j1))*ZD(gt3,3 + j1);
    }
-   tmp_7244 += tmp_7245;
-   tmp_7241 += (vd*(6*Sqr(g1) + 9*Sqr(gN))*ZH(gt1,0) + (-6*vu*Sqr(g1) + 6*vu*
-      Sqr(gN))*ZH(gt1,1) - 15*vs*Sqr(gN)*ZH(gt1,2)) * tmp_7244;
-   std::complex<double> tmp_7246;
-   std::complex<double> tmp_7247;
-   std::complex<double> tmp_7248;
+   tmp_7696 += tmp_7697;
+   tmp_7693 += (vd*(6*Sqr(g1) + 9*Sqr(gN))*ZH(gt1,0) + (-6*vu*Sqr(g1) + 6*vu*
+      Sqr(gN))*ZH(gt1,1) - 15*vs*Sqr(gN)*ZH(gt1,2)) * tmp_7696;
+   std::complex<double> tmp_7698;
+   std::complex<double> tmp_7699;
+   std::complex<double> tmp_7700;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7248 += Conj(ZD(gt2,j1))*ZD(gt3,3 + j1)*TYd(j1,j1);
+      tmp_7700 += Conj(ZD(gt2,j1))*ZD(gt3,3 + j1)*TYd(j1,j1);
    }
-   tmp_7247 += tmp_7248;
-   tmp_7246 += (1.4142135623730951*ZH(gt1,0)) * tmp_7247;
-   std::complex<double> tmp_7249;
-   std::complex<double> tmp_7250;
+   tmp_7699 += tmp_7700;
+   tmp_7698 += (1.4142135623730951*ZH(gt1,0)) * tmp_7699;
+   std::complex<double> tmp_7701;
+   std::complex<double> tmp_7702;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
-      tmp_7250 += AbsSqr(Yd(j2,j2))*Conj(ZD(gt2,j2))*ZD(gt3,j2);
+      tmp_7702 += AbsSqr(Yd(j2,j2))*Conj(ZD(gt2,j2))*ZD(gt3,j2);
    }
-   tmp_7249 += tmp_7250;
-   tmp_7246 += (2*vd*ZH(gt1,0)) * tmp_7249;
-   std::complex<double> tmp_7251;
-   std::complex<double> tmp_7252;
+   tmp_7701 += tmp_7702;
+   tmp_7698 += (2*vd*ZH(gt1,0)) * tmp_7701;
+   std::complex<double> tmp_7703;
+   std::complex<double> tmp_7704;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
-      tmp_7252 += AbsSqr(Yd(j2,j2))*Conj(ZD(gt2,3 + j2))*ZD(gt3,3 + j2);
+      tmp_7704 += AbsSqr(Yd(j2,j2))*Conj(ZD(gt2,3 + j2))*ZD(gt3,3 + j2);
    }
-   tmp_7251 += tmp_7252;
-   tmp_7246 += (2*vd*ZH(gt1,0)) * tmp_7251;
-   std::complex<double> tmp_7253;
-   std::complex<double> tmp_7254;
+   tmp_7703 += tmp_7704;
+   tmp_7698 += (2*vd*ZH(gt1,0)) * tmp_7703;
+   std::complex<double> tmp_7705;
+   std::complex<double> tmp_7706;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7254 += Conj(Yd(j1,j1))*Conj(ZD(gt2,3 + j1))*ZD(gt3,j1);
+      tmp_7706 += Conj(Yd(j1,j1))*Conj(ZD(gt2,3 + j1))*ZD(gt3,j1);
    }
-   tmp_7253 += tmp_7254;
-   tmp_7246 += (-(vs*Lambdax*ZH(gt1,1))) * tmp_7253;
-   std::complex<double> tmp_7255;
-   std::complex<double> tmp_7256;
+   tmp_7705 += tmp_7706;
+   tmp_7698 += (-(vs*Lambdax*ZH(gt1,1))) * tmp_7705;
+   std::complex<double> tmp_7707;
+   std::complex<double> tmp_7708;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7256 += Conj(ZD(gt2,j1))*Yd(j1,j1)*ZD(gt3,3 + j1);
+      tmp_7708 += Conj(ZD(gt2,j1))*Yd(j1,j1)*ZD(gt3,3 + j1);
    }
-   tmp_7255 += tmp_7256;
-   tmp_7246 += (-(vs*Conj(Lambdax)*ZH(gt1,1))) * tmp_7255;
-   std::complex<double> tmp_7257;
-   std::complex<double> tmp_7258;
+   tmp_7707 += tmp_7708;
+   tmp_7698 += (-(vs*Conj(Lambdax)*ZH(gt1,1))) * tmp_7707;
+   std::complex<double> tmp_7709;
+   std::complex<double> tmp_7710;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7258 += Conj(Yd(j1,j1))*Conj(ZD(gt2,3 + j1))*ZD(gt3,j1);
+      tmp_7710 += Conj(Yd(j1,j1))*Conj(ZD(gt2,3 + j1))*ZD(gt3,j1);
    }
-   tmp_7257 += tmp_7258;
-   tmp_7246 += (-(vu*Lambdax*ZH(gt1,2))) * tmp_7257;
-   std::complex<double> tmp_7259;
-   std::complex<double> tmp_7260;
+   tmp_7709 += tmp_7710;
+   tmp_7698 += (-(vu*Lambdax*ZH(gt1,2))) * tmp_7709;
+   std::complex<double> tmp_7711;
+   std::complex<double> tmp_7712;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7260 += Conj(ZD(gt2,j1))*Yd(j1,j1)*ZD(gt3,3 + j1);
+      tmp_7712 += Conj(ZD(gt2,j1))*Yd(j1,j1)*ZD(gt3,3 + j1);
    }
-   tmp_7259 += tmp_7260;
-   tmp_7246 += (-(vu*Conj(Lambdax)*ZH(gt1,2))) * tmp_7259;
-   tmp_7241 += (-30) * tmp_7246;
-   tmp_7238 += (2) * tmp_7241;
-   result += (0.008333333333333333) * tmp_7238;
+   tmp_7711 += tmp_7712;
+   tmp_7698 += (-(vu*Conj(Lambdax)*ZH(gt1,2))) * tmp_7711;
+   tmp_7693 += (-30) * tmp_7698;
+   tmp_7690 += (2) * tmp_7693;
+   result += (0.008333333333333333) * tmp_7690;
 
    return result;
 }
@@ -388,101 +388,101 @@ std::complex<double> E6SSMtower_effective_couplings::CphhSuconjSu(unsigned gt1, 
 
    std::complex<double> result;
 
-   std::complex<double> tmp_7261;
-   std::complex<double> tmp_7262;
-   std::complex<double> tmp_7263;
+   std::complex<double> tmp_7713;
+   std::complex<double> tmp_7714;
+   std::complex<double> tmp_7715;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7263 += Conj(ZU(gt2,3 + j1))*ZU(gt3,3 + j1);
+      tmp_7715 += Conj(ZU(gt2,3 + j1))*ZU(gt3,3 + j1);
    }
-   tmp_7262 += tmp_7263;
-   tmp_7261 += (-24*vd*Sqr(g1)*ZH(gt1,0)) * tmp_7262;
-   std::complex<double> tmp_7264;
-   std::complex<double> tmp_7265;
+   tmp_7714 += tmp_7715;
+   tmp_7713 += (-24*vd*Sqr(g1)*ZH(gt1,0)) * tmp_7714;
+   std::complex<double> tmp_7716;
+   std::complex<double> tmp_7717;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7265 += Conj(ZU(gt2,3 + j1))*ZU(gt3,3 + j1);
+      tmp_7717 += Conj(ZU(gt2,3 + j1))*ZU(gt3,3 + j1);
    }
-   tmp_7264 += tmp_7265;
-   tmp_7261 += (9*vd*Sqr(gN)*ZH(gt1,0)) * tmp_7264;
-   std::complex<double> tmp_7266;
-   std::complex<double> tmp_7267;
+   tmp_7716 += tmp_7717;
+   tmp_7713 += (9*vd*Sqr(gN)*ZH(gt1,0)) * tmp_7716;
+   std::complex<double> tmp_7718;
+   std::complex<double> tmp_7719;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7267 += Conj(ZU(gt2,j1))*Yu(j1,j1)*ZU(gt3,3 + j1);
+      tmp_7719 += Conj(ZU(gt2,j1))*Yu(j1,j1)*ZU(gt3,3 + j1);
    }
-   tmp_7266 += tmp_7267;
-   tmp_7261 += (60*vs*Conj(Lambdax)*ZH(gt1,0)) * tmp_7266;
-   std::complex<double> tmp_7268;
-   std::complex<double> tmp_7269;
+   tmp_7718 += tmp_7719;
+   tmp_7713 += (60*vs*Conj(Lambdax)*ZH(gt1,0)) * tmp_7718;
+   std::complex<double> tmp_7720;
+   std::complex<double> tmp_7721;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7269 += Conj(ZU(gt2,3 + j1))*Conj(TYu(j1,j1))*ZU(gt3,j1);
+      tmp_7721 += Conj(ZU(gt2,3 + j1))*Conj(TYu(j1,j1))*ZU(gt3,j1);
    }
-   tmp_7268 += tmp_7269;
-   tmp_7261 += (-84.8528137423857*ZH(gt1,1)) * tmp_7268;
-   std::complex<double> tmp_7270;
-   std::complex<double> tmp_7271;
+   tmp_7720 += tmp_7721;
+   tmp_7713 += (-84.8528137423857*ZH(gt1,1)) * tmp_7720;
+   std::complex<double> tmp_7722;
+   std::complex<double> tmp_7723;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7271 += Conj(ZU(gt2,3 + j1))*ZU(gt3,3 + j1);
+      tmp_7723 += Conj(ZU(gt2,3 + j1))*ZU(gt3,3 + j1);
    }
-   tmp_7270 += tmp_7271;
-   tmp_7261 += (24*vu*Sqr(g1)*ZH(gt1,1)) * tmp_7270;
-   std::complex<double> tmp_7272;
-   std::complex<double> tmp_7273;
+   tmp_7722 += tmp_7723;
+   tmp_7713 += (24*vu*Sqr(g1)*ZH(gt1,1)) * tmp_7722;
+   std::complex<double> tmp_7724;
+   std::complex<double> tmp_7725;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7273 += Conj(ZU(gt2,3 + j1))*ZU(gt3,3 + j1);
+      tmp_7725 += Conj(ZU(gt2,3 + j1))*ZU(gt3,3 + j1);
    }
-   tmp_7272 += tmp_7273;
-   tmp_7261 += (6*vu*Sqr(gN)*ZH(gt1,1)) * tmp_7272;
-   std::complex<double> tmp_7274;
-   std::complex<double> tmp_7275;
+   tmp_7724 += tmp_7725;
+   tmp_7713 += (6*vu*Sqr(gN)*ZH(gt1,1)) * tmp_7724;
+   std::complex<double> tmp_7726;
+   std::complex<double> tmp_7727;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7275 += Conj(ZU(gt2,j1))*ZU(gt3,3 + j1)*TYu(j1,j1);
+      tmp_7727 += Conj(ZU(gt2,j1))*ZU(gt3,3 + j1)*TYu(j1,j1);
    }
-   tmp_7274 += tmp_7275;
-   tmp_7261 += (-84.8528137423857*ZH(gt1,1)) * tmp_7274;
-   std::complex<double> tmp_7276;
-   std::complex<double> tmp_7277;
+   tmp_7726 += tmp_7727;
+   tmp_7713 += (-84.8528137423857*ZH(gt1,1)) * tmp_7726;
+   std::complex<double> tmp_7728;
+   std::complex<double> tmp_7729;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
-      tmp_7277 += AbsSqr(Yu(j2,j2))*Conj(ZU(gt2,j2))*ZU(gt3,j2);
+      tmp_7729 += AbsSqr(Yu(j2,j2))*Conj(ZU(gt2,j2))*ZU(gt3,j2);
    }
-   tmp_7276 += tmp_7277;
-   tmp_7261 += (-120*vu*ZH(gt1,1)) * tmp_7276;
-   std::complex<double> tmp_7278;
-   std::complex<double> tmp_7279;
+   tmp_7728 += tmp_7729;
+   tmp_7713 += (-120*vu*ZH(gt1,1)) * tmp_7728;
+   std::complex<double> tmp_7730;
+   std::complex<double> tmp_7731;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
-      tmp_7279 += AbsSqr(Yu(j2,j2))*Conj(ZU(gt2,3 + j2))*ZU(gt3,3 + j2);
+      tmp_7731 += AbsSqr(Yu(j2,j2))*Conj(ZU(gt2,3 + j2))*ZU(gt3,3 + j2);
    }
-   tmp_7278 += tmp_7279;
-   tmp_7261 += (-120*vu*ZH(gt1,1)) * tmp_7278;
-   std::complex<double> tmp_7280;
-   std::complex<double> tmp_7281;
+   tmp_7730 += tmp_7731;
+   tmp_7713 += (-120*vu*ZH(gt1,1)) * tmp_7730;
+   std::complex<double> tmp_7732;
+   std::complex<double> tmp_7733;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7281 += Conj(ZU(gt2,3 + j1))*ZU(gt3,3 + j1);
+      tmp_7733 += Conj(ZU(gt2,3 + j1))*ZU(gt3,3 + j1);
    }
-   tmp_7280 += tmp_7281;
-   tmp_7261 += (-15*vs*Sqr(gN)*ZH(gt1,2)) * tmp_7280;
-   std::complex<double> tmp_7282;
-   std::complex<double> tmp_7283;
+   tmp_7732 += tmp_7733;
+   tmp_7713 += (-15*vs*Sqr(gN)*ZH(gt1,2)) * tmp_7732;
+   std::complex<double> tmp_7734;
+   std::complex<double> tmp_7735;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7283 += Conj(ZU(gt2,j1))*Yu(j1,j1)*ZU(gt3,3 + j1);
+      tmp_7735 += Conj(ZU(gt2,j1))*Yu(j1,j1)*ZU(gt3,3 + j1);
    }
-   tmp_7282 += tmp_7283;
-   tmp_7261 += (60*vd*Conj(Lambdax)*ZH(gt1,2)) * tmp_7282;
-   std::complex<double> tmp_7284;
-   std::complex<double> tmp_7285;
+   tmp_7734 += tmp_7735;
+   tmp_7713 += (60*vd*Conj(Lambdax)*ZH(gt1,2)) * tmp_7734;
+   std::complex<double> tmp_7736;
+   std::complex<double> tmp_7737;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7285 += Conj(Yu(j1,j1))*Conj(ZU(gt2,3 + j1))*ZU(gt3,j1);
+      tmp_7737 += Conj(Yu(j1,j1))*Conj(ZU(gt2,3 + j1))*ZU(gt3,j1);
    }
-   tmp_7284 += tmp_7285;
-   tmp_7261 += (60*Lambdax*(vs*ZH(gt1,0) + vd*ZH(gt1,2))) * tmp_7284;
-   std::complex<double> tmp_7286;
-   std::complex<double> tmp_7287;
+   tmp_7736 += tmp_7737;
+   tmp_7713 += (60*Lambdax*(vs*ZH(gt1,0) + vd*ZH(gt1,2))) * tmp_7736;
+   std::complex<double> tmp_7738;
+   std::complex<double> tmp_7739;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7287 += Conj(ZU(gt2,j1))*ZU(gt3,j1);
+      tmp_7739 += Conj(ZU(gt2,j1))*ZU(gt3,j1);
    }
-   tmp_7286 += tmp_7287;
-   tmp_7261 += (vd*(6*Sqr(g1) - 30*Sqr(g2) + 9*Sqr(gN))*ZH(gt1,0) + 2*vu*(-3*
+   tmp_7738 += tmp_7739;
+   tmp_7713 += (vd*(6*Sqr(g1) - 30*Sqr(g2) + 9*Sqr(gN))*ZH(gt1,0) + 2*vu*(-3*
       Sqr(g1) + 15*Sqr(g2) + 3*Sqr(gN))*ZH(gt1,1) - 15*vs*Sqr(gN)*ZH(gt1,2)) *
-      tmp_7286;
-   result += (0.008333333333333333) * tmp_7261;
+      tmp_7738;
+   result += (0.008333333333333333) * tmp_7713;
 
    return result;
 }
@@ -501,108 +501,108 @@ std::complex<double> E6SSMtower_effective_couplings::CphhSeconjSe(unsigned gt1, 
 
    std::complex<double> result;
 
-   std::complex<double> tmp_7288;
-   std::complex<double> tmp_7289;
-   std::complex<double> tmp_7290;
+   std::complex<double> tmp_7740;
+   std::complex<double> tmp_7741;
+   std::complex<double> tmp_7742;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7290 += Conj(ZE(gt2,3 + j1))*Conj(TYe(j1,j1))*ZE(gt3,j1);
+      tmp_7742 += Conj(ZE(gt2,3 + j1))*Conj(TYe(j1,j1))*ZE(gt3,j1);
    }
-   tmp_7289 += tmp_7290;
-   tmp_7288 += (-28.284271247461902*ZH(gt1,0)) * tmp_7289;
-   std::complex<double> tmp_7291;
-   std::complex<double> tmp_7292;
+   tmp_7741 += tmp_7742;
+   tmp_7740 += (-28.284271247461902*ZH(gt1,0)) * tmp_7741;
+   std::complex<double> tmp_7743;
+   std::complex<double> tmp_7744;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7292 += Conj(ZE(gt2,3 + j1))*ZE(gt3,3 + j1);
+      tmp_7744 += Conj(ZE(gt2,3 + j1))*ZE(gt3,3 + j1);
    }
-   tmp_7291 += tmp_7292;
-   tmp_7288 += (12*vd*Sqr(g1)*ZH(gt1,0)) * tmp_7291;
-   std::complex<double> tmp_7293;
-   std::complex<double> tmp_7294;
+   tmp_7743 += tmp_7744;
+   tmp_7740 += (12*vd*Sqr(g1)*ZH(gt1,0)) * tmp_7743;
+   std::complex<double> tmp_7745;
+   std::complex<double> tmp_7746;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7294 += Conj(ZE(gt2,3 + j1))*ZE(gt3,3 + j1);
+      tmp_7746 += Conj(ZE(gt2,3 + j1))*ZE(gt3,3 + j1);
    }
-   tmp_7293 += tmp_7294;
-   tmp_7288 += (3*vd*Sqr(gN)*ZH(gt1,0)) * tmp_7293;
-   std::complex<double> tmp_7295;
-   std::complex<double> tmp_7296;
+   tmp_7745 += tmp_7746;
+   tmp_7740 += (3*vd*Sqr(gN)*ZH(gt1,0)) * tmp_7745;
+   std::complex<double> tmp_7747;
+   std::complex<double> tmp_7748;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7296 += Conj(ZE(gt2,j1))*ZE(gt3,3 + j1)*TYe(j1,j1);
+      tmp_7748 += Conj(ZE(gt2,j1))*ZE(gt3,3 + j1)*TYe(j1,j1);
    }
-   tmp_7295 += tmp_7296;
-   tmp_7288 += (-28.284271247461902*ZH(gt1,0)) * tmp_7295;
-   std::complex<double> tmp_7297;
-   std::complex<double> tmp_7298;
+   tmp_7747 += tmp_7748;
+   tmp_7740 += (-28.284271247461902*ZH(gt1,0)) * tmp_7747;
+   std::complex<double> tmp_7749;
+   std::complex<double> tmp_7750;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
-      tmp_7298 += AbsSqr(Ye(j2,j2))*Conj(ZE(gt2,j2))*ZE(gt3,j2);
+      tmp_7750 += AbsSqr(Ye(j2,j2))*Conj(ZE(gt2,j2))*ZE(gt3,j2);
    }
-   tmp_7297 += tmp_7298;
-   tmp_7288 += (-40*vd*ZH(gt1,0)) * tmp_7297;
-   std::complex<double> tmp_7299;
-   std::complex<double> tmp_7300;
+   tmp_7749 += tmp_7750;
+   tmp_7740 += (-40*vd*ZH(gt1,0)) * tmp_7749;
+   std::complex<double> tmp_7751;
+   std::complex<double> tmp_7752;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
-      tmp_7300 += AbsSqr(Ye(j2,j2))*Conj(ZE(gt2,3 + j2))*ZE(gt3,3 + j2);
+      tmp_7752 += AbsSqr(Ye(j2,j2))*Conj(ZE(gt2,3 + j2))*ZE(gt3,3 + j2);
    }
-   tmp_7299 += tmp_7300;
-   tmp_7288 += (-40*vd*ZH(gt1,0)) * tmp_7299;
-   std::complex<double> tmp_7301;
-   std::complex<double> tmp_7302;
+   tmp_7751 += tmp_7752;
+   tmp_7740 += (-40*vd*ZH(gt1,0)) * tmp_7751;
+   std::complex<double> tmp_7753;
+   std::complex<double> tmp_7754;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7302 += Conj(Ye(j1,j1))*Conj(ZE(gt2,3 + j1))*ZE(gt3,j1);
+      tmp_7754 += Conj(Ye(j1,j1))*Conj(ZE(gt2,3 + j1))*ZE(gt3,j1);
    }
-   tmp_7301 += tmp_7302;
-   tmp_7288 += (20*vs*Lambdax*ZH(gt1,1)) * tmp_7301;
-   std::complex<double> tmp_7303;
-   std::complex<double> tmp_7304;
+   tmp_7753 += tmp_7754;
+   tmp_7740 += (20*vs*Lambdax*ZH(gt1,1)) * tmp_7753;
+   std::complex<double> tmp_7755;
+   std::complex<double> tmp_7756;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7304 += Conj(ZE(gt2,3 + j1))*ZE(gt3,3 + j1);
+      tmp_7756 += Conj(ZE(gt2,3 + j1))*ZE(gt3,3 + j1);
    }
-   tmp_7303 += tmp_7304;
-   tmp_7288 += (-12*vu*Sqr(g1)*ZH(gt1,1)) * tmp_7303;
-   std::complex<double> tmp_7305;
-   std::complex<double> tmp_7306;
+   tmp_7755 += tmp_7756;
+   tmp_7740 += (-12*vu*Sqr(g1)*ZH(gt1,1)) * tmp_7755;
+   std::complex<double> tmp_7757;
+   std::complex<double> tmp_7758;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7306 += Conj(ZE(gt2,3 + j1))*ZE(gt3,3 + j1);
+      tmp_7758 += Conj(ZE(gt2,3 + j1))*ZE(gt3,3 + j1);
    }
-   tmp_7305 += tmp_7306;
-   tmp_7288 += (2*vu*Sqr(gN)*ZH(gt1,1)) * tmp_7305;
-   std::complex<double> tmp_7307;
-   std::complex<double> tmp_7308;
+   tmp_7757 += tmp_7758;
+   tmp_7740 += (2*vu*Sqr(gN)*ZH(gt1,1)) * tmp_7757;
+   std::complex<double> tmp_7759;
+   std::complex<double> tmp_7760;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7308 += Conj(ZE(gt2,j1))*Ye(j1,j1)*ZE(gt3,3 + j1);
+      tmp_7760 += Conj(ZE(gt2,j1))*Ye(j1,j1)*ZE(gt3,3 + j1);
    }
-   tmp_7307 += tmp_7308;
-   tmp_7288 += (20*vs*Conj(Lambdax)*ZH(gt1,1)) * tmp_7307;
-   std::complex<double> tmp_7309;
-   std::complex<double> tmp_7310;
+   tmp_7759 += tmp_7760;
+   tmp_7740 += (20*vs*Conj(Lambdax)*ZH(gt1,1)) * tmp_7759;
+   std::complex<double> tmp_7761;
+   std::complex<double> tmp_7762;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7310 += Conj(Ye(j1,j1))*Conj(ZE(gt2,3 + j1))*ZE(gt3,j1);
+      tmp_7762 += Conj(Ye(j1,j1))*Conj(ZE(gt2,3 + j1))*ZE(gt3,j1);
    }
-   tmp_7309 += tmp_7310;
-   tmp_7288 += (20*vu*Lambdax*ZH(gt1,2)) * tmp_7309;
-   std::complex<double> tmp_7311;
-   std::complex<double> tmp_7312;
+   tmp_7761 += tmp_7762;
+   tmp_7740 += (20*vu*Lambdax*ZH(gt1,2)) * tmp_7761;
+   std::complex<double> tmp_7763;
+   std::complex<double> tmp_7764;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7312 += Conj(ZE(gt2,3 + j1))*ZE(gt3,3 + j1);
+      tmp_7764 += Conj(ZE(gt2,3 + j1))*ZE(gt3,3 + j1);
    }
-   tmp_7311 += tmp_7312;
-   tmp_7288 += (-5*vs*Sqr(gN)*ZH(gt1,2)) * tmp_7311;
-   std::complex<double> tmp_7313;
-   std::complex<double> tmp_7314;
+   tmp_7763 += tmp_7764;
+   tmp_7740 += (-5*vs*Sqr(gN)*ZH(gt1,2)) * tmp_7763;
+   std::complex<double> tmp_7765;
+   std::complex<double> tmp_7766;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7314 += Conj(ZE(gt2,j1))*Ye(j1,j1)*ZE(gt3,3 + j1);
+      tmp_7766 += Conj(ZE(gt2,j1))*Ye(j1,j1)*ZE(gt3,3 + j1);
    }
-   tmp_7313 += tmp_7314;
-   tmp_7288 += (20*vu*Conj(Lambdax)*ZH(gt1,2)) * tmp_7313;
-   std::complex<double> tmp_7315;
-   std::complex<double> tmp_7316;
+   tmp_7765 += tmp_7766;
+   tmp_7740 += (20*vu*Conj(Lambdax)*ZH(gt1,2)) * tmp_7765;
+   std::complex<double> tmp_7767;
+   std::complex<double> tmp_7768;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7316 += Conj(ZE(gt2,j1))*ZE(gt3,j1);
+      tmp_7768 += Conj(ZE(gt2,j1))*ZE(gt3,j1);
    }
-   tmp_7315 += tmp_7316;
-   tmp_7288 += (-2*(vd*(3*Sqr(g1) - 5*Sqr(g2) - 3*Sqr(gN))*ZH(gt1,0) + vu*(-3*
+   tmp_7767 += tmp_7768;
+   tmp_7740 += (-2*(vd*(3*Sqr(g1) - 5*Sqr(g2) - 3*Sqr(gN))*ZH(gt1,0) + vu*(-3*
       Sqr(g1) + 5*Sqr(g2) - 2*Sqr(gN))*ZH(gt1,1) + 5*vs*Sqr(gN)*ZH(gt1,2))) *
-      tmp_7315;
-   result += (0.025) * tmp_7288;
+      tmp_7767;
+   result += (0.025) * tmp_7740;
 
    return result;
 }
@@ -620,101 +620,101 @@ std::complex<double> E6SSMtower_effective_couplings::CphhSDXconjSDX(unsigned gt1
 
    std::complex<double> result;
 
-   std::complex<double> tmp_7317;
-   std::complex<double> tmp_7318;
-   std::complex<double> tmp_7319;
+   std::complex<double> tmp_7769;
+   std::complex<double> tmp_7770;
+   std::complex<double> tmp_7771;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7319 += Conj(ZDX(gt2,3 + j1))*ZDX(gt3,3 + j1);
+      tmp_7771 += Conj(ZDX(gt2,3 + j1))*ZDX(gt3,3 + j1);
    }
-   tmp_7318 += tmp_7319;
-   tmp_7317 += (12*vd*Sqr(g1)*ZH(gt1,0)) * tmp_7318;
-   std::complex<double> tmp_7320;
-   std::complex<double> tmp_7321;
+   tmp_7770 += tmp_7771;
+   tmp_7769 += (12*vd*Sqr(g1)*ZH(gt1,0)) * tmp_7770;
+   std::complex<double> tmp_7772;
+   std::complex<double> tmp_7773;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7321 += Conj(ZDX(gt2,3 + j1))*ZDX(gt3,3 + j1);
+      tmp_7773 += Conj(ZDX(gt2,3 + j1))*ZDX(gt3,3 + j1);
    }
-   tmp_7320 += tmp_7321;
-   tmp_7317 += (-27*vd*Sqr(gN)*ZH(gt1,0)) * tmp_7320;
-   std::complex<double> tmp_7322;
-   std::complex<double> tmp_7323;
+   tmp_7772 += tmp_7773;
+   tmp_7769 += (-27*vd*Sqr(gN)*ZH(gt1,0)) * tmp_7772;
+   std::complex<double> tmp_7774;
+   std::complex<double> tmp_7775;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7323 += Conj(ZDX(gt2,j1))*ZDX(gt3,3 + j1)*Kappa(j1,j1);
+      tmp_7775 += Conj(ZDX(gt2,j1))*ZDX(gt3,3 + j1)*Kappa(j1,j1);
    }
-   tmp_7322 += tmp_7323;
-   tmp_7317 += (60*vu*Conj(Lambdax)*ZH(gt1,0)) * tmp_7322;
-   std::complex<double> tmp_7324;
-   std::complex<double> tmp_7325;
+   tmp_7774 += tmp_7775;
+   tmp_7769 += (60*vu*Conj(Lambdax)*ZH(gt1,0)) * tmp_7774;
+   std::complex<double> tmp_7776;
+   std::complex<double> tmp_7777;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7325 += Conj(ZDX(gt2,3 + j1))*ZDX(gt3,3 + j1);
+      tmp_7777 += Conj(ZDX(gt2,3 + j1))*ZDX(gt3,3 + j1);
    }
-   tmp_7324 += tmp_7325;
-   tmp_7317 += (-12*vu*Sqr(g1)*ZH(gt1,1)) * tmp_7324;
-   std::complex<double> tmp_7326;
-   std::complex<double> tmp_7327;
+   tmp_7776 += tmp_7777;
+   tmp_7769 += (-12*vu*Sqr(g1)*ZH(gt1,1)) * tmp_7776;
+   std::complex<double> tmp_7778;
+   std::complex<double> tmp_7779;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7327 += Conj(ZDX(gt2,3 + j1))*ZDX(gt3,3 + j1);
+      tmp_7779 += Conj(ZDX(gt2,3 + j1))*ZDX(gt3,3 + j1);
    }
-   tmp_7326 += tmp_7327;
-   tmp_7317 += (-18*vu*Sqr(gN)*ZH(gt1,1)) * tmp_7326;
-   std::complex<double> tmp_7328;
-   std::complex<double> tmp_7329;
+   tmp_7778 += tmp_7779;
+   tmp_7769 += (-18*vu*Sqr(gN)*ZH(gt1,1)) * tmp_7778;
+   std::complex<double> tmp_7780;
+   std::complex<double> tmp_7781;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7329 += Conj(ZDX(gt2,j1))*ZDX(gt3,3 + j1)*Kappa(j1,j1);
+      tmp_7781 += Conj(ZDX(gt2,j1))*ZDX(gt3,3 + j1)*Kappa(j1,j1);
    }
-   tmp_7328 += tmp_7329;
-   tmp_7317 += (60*vd*Conj(Lambdax)*ZH(gt1,1)) * tmp_7328;
-   std::complex<double> tmp_7330;
-   std::complex<double> tmp_7331;
+   tmp_7780 += tmp_7781;
+   tmp_7769 += (60*vd*Conj(Lambdax)*ZH(gt1,1)) * tmp_7780;
+   std::complex<double> tmp_7782;
+   std::complex<double> tmp_7783;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7331 += Conj(ZDX(gt2,3 + j1))*Conj(Kappa(j1,j1))*ZDX(gt3,j1);
+      tmp_7783 += Conj(ZDX(gt2,3 + j1))*Conj(Kappa(j1,j1))*ZDX(gt3,j1);
    }
-   tmp_7330 += tmp_7331;
-   tmp_7317 += (60*Lambdax*(vu*ZH(gt1,0) + vd*ZH(gt1,1))) * tmp_7330;
-   std::complex<double> tmp_7332;
-   std::complex<double> tmp_7333;
+   tmp_7782 += tmp_7783;
+   tmp_7769 += (60*Lambdax*(vu*ZH(gt1,0) + vd*ZH(gt1,1))) * tmp_7782;
+   std::complex<double> tmp_7784;
+   std::complex<double> tmp_7785;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7333 += Conj(ZDX(gt2,3 + j1))*Conj(TKappa(j1,j1))*ZDX(gt3,j1);
+      tmp_7785 += Conj(ZDX(gt2,3 + j1))*Conj(TKappa(j1,j1))*ZDX(gt3,j1);
    }
-   tmp_7332 += tmp_7333;
-   tmp_7317 += (-84.8528137423857*ZH(gt1,2)) * tmp_7332;
-   std::complex<double> tmp_7334;
-   std::complex<double> tmp_7335;
+   tmp_7784 += tmp_7785;
+   tmp_7769 += (-84.8528137423857*ZH(gt1,2)) * tmp_7784;
+   std::complex<double> tmp_7786;
+   std::complex<double> tmp_7787;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7335 += Conj(ZDX(gt2,3 + j1))*ZDX(gt3,3 + j1);
+      tmp_7787 += Conj(ZDX(gt2,3 + j1))*ZDX(gt3,3 + j1);
    }
-   tmp_7334 += tmp_7335;
-   tmp_7317 += (45*vs*Sqr(gN)*ZH(gt1,2)) * tmp_7334;
-   std::complex<double> tmp_7336;
-   std::complex<double> tmp_7337;
+   tmp_7786 += tmp_7787;
+   tmp_7769 += (45*vs*Sqr(gN)*ZH(gt1,2)) * tmp_7786;
+   std::complex<double> tmp_7788;
+   std::complex<double> tmp_7789;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7337 += Conj(ZDX(gt2,j1))*ZDX(gt3,3 + j1)*TKappa(j1,j1);
+      tmp_7789 += Conj(ZDX(gt2,j1))*ZDX(gt3,3 + j1)*TKappa(j1,j1);
    }
-   tmp_7336 += tmp_7337;
-   tmp_7317 += (-84.8528137423857*ZH(gt1,2)) * tmp_7336;
-   std::complex<double> tmp_7338;
-   std::complex<double> tmp_7339;
+   tmp_7788 += tmp_7789;
+   tmp_7769 += (-84.8528137423857*ZH(gt1,2)) * tmp_7788;
+   std::complex<double> tmp_7790;
+   std::complex<double> tmp_7791;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
-      tmp_7339 += AbsSqr(Kappa(j2,j2))*Conj(ZDX(gt2,j2))*ZDX(gt3,j2);
+      tmp_7791 += AbsSqr(Kappa(j2,j2))*Conj(ZDX(gt2,j2))*ZDX(gt3,j2);
    }
-   tmp_7338 += tmp_7339;
-   tmp_7317 += (-120*vs*ZH(gt1,2)) * tmp_7338;
-   std::complex<double> tmp_7340;
-   std::complex<double> tmp_7341;
+   tmp_7790 += tmp_7791;
+   tmp_7769 += (-120*vs*ZH(gt1,2)) * tmp_7790;
+   std::complex<double> tmp_7792;
+   std::complex<double> tmp_7793;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
-      tmp_7341 += AbsSqr(Kappa(j2,j2))*Conj(ZDX(gt2,3 + j2))*ZDX(gt3,3 + j2)
+      tmp_7793 += AbsSqr(Kappa(j2,j2))*Conj(ZDX(gt2,3 + j2))*ZDX(gt3,3 + j2)
          ;
    }
-   tmp_7340 += tmp_7341;
-   tmp_7317 += (-120*vs*ZH(gt1,2)) * tmp_7340;
-   std::complex<double> tmp_7342;
-   std::complex<double> tmp_7343;
+   tmp_7792 += tmp_7793;
+   tmp_7769 += (-120*vs*ZH(gt1,2)) * tmp_7792;
+   std::complex<double> tmp_7794;
+   std::complex<double> tmp_7795;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7343 += Conj(ZDX(gt2,j1))*ZDX(gt3,j1);
+      tmp_7795 += Conj(ZDX(gt2,j1))*ZDX(gt3,j1);
    }
-   tmp_7342 += tmp_7343;
-   tmp_7317 += (-2*(vd*(6*Sqr(g1) + 9*Sqr(gN))*ZH(gt1,0) + (-6*vu*Sqr(g1) + 6*
-      vu*Sqr(gN))*ZH(gt1,1) - 15*vs*Sqr(gN)*ZH(gt1,2))) * tmp_7342;
-   result += (0.008333333333333333) * tmp_7317;
+   tmp_7794 += tmp_7795;
+   tmp_7769 += (-2*(vd*(6*Sqr(g1) + 9*Sqr(gN))*ZH(gt1,0) + (-6*vu*Sqr(g1) + 6*
+      vu*Sqr(gN))*ZH(gt1,1) - 15*vs*Sqr(gN)*ZH(gt1,2))) * tmp_7794;
+   result += (0.008333333333333333) * tmp_7769;
 
    return result;
 }
@@ -766,13 +766,13 @@ std::complex<double> E6SSMtower_effective_couplings::CpFehhbarFePL(unsigned gt1,
 
    std::complex<double> result;
 
-   std::complex<double> tmp_7344;
-   std::complex<double> tmp_7345;
+   std::complex<double> tmp_7796;
+   std::complex<double> tmp_7797;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7345 += Conj(ZEL(gt1,j1))*Conj(ZER(gt3,j1))*Ye(j1,j1);
+      tmp_7797 += Conj(ZEL(gt1,j1))*Conj(ZER(gt3,j1))*Ye(j1,j1);
    }
-   tmp_7344 += tmp_7345;
-   result += (-0.7071067811865475*ZH(gt2,0)) * tmp_7344;
+   tmp_7796 += tmp_7797;
+   result += (-0.7071067811865475*ZH(gt2,0)) * tmp_7796;
 
    return result;
 }
@@ -783,13 +783,13 @@ std::complex<double> E6SSMtower_effective_couplings::CpFdhhbarFdPL(unsigned gt1,
 
    std::complex<double> result;
 
-   std::complex<double> tmp_7346;
-   std::complex<double> tmp_7347;
+   std::complex<double> tmp_7798;
+   std::complex<double> tmp_7799;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7347 += Conj(ZDL(gt1,j1))*Conj(ZDR(gt3,j1))*Yd(j1,j1);
+      tmp_7799 += Conj(ZDL(gt1,j1))*Conj(ZDR(gt3,j1))*Yd(j1,j1);
    }
-   tmp_7346 += tmp_7347;
-   result += (-0.7071067811865475*ZH(gt2,0)) * tmp_7346;
+   tmp_7798 += tmp_7799;
+   result += (-0.7071067811865475*ZH(gt2,0)) * tmp_7798;
 
    return result;
 }
@@ -800,13 +800,13 @@ std::complex<double> E6SSMtower_effective_couplings::CpFuhhbarFuPL(unsigned gt1,
 
    std::complex<double> result;
 
-   std::complex<double> tmp_7348;
-   std::complex<double> tmp_7349;
+   std::complex<double> tmp_7800;
+   std::complex<double> tmp_7801;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7349 += Conj(ZUL(gt1,j1))*Conj(ZUR(gt3,j1))*Yu(j1,j1);
+      tmp_7801 += Conj(ZUL(gt1,j1))*Conj(ZUR(gt3,j1))*Yu(j1,j1);
    }
-   tmp_7348 += tmp_7349;
-   result += (-0.7071067811865475*ZH(gt2,1)) * tmp_7348;
+   tmp_7800 += tmp_7801;
+   result += (-0.7071067811865475*ZH(gt2,1)) * tmp_7800;
 
    return result;
 }
@@ -817,13 +817,13 @@ std::complex<double> E6SSMtower_effective_couplings::CpFDXhhbarFDXPL(unsigned gt
 
    std::complex<double> result;
 
-   std::complex<double> tmp_7350;
-   std::complex<double> tmp_7351;
+   std::complex<double> tmp_7802;
+   std::complex<double> tmp_7803;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7351 += Conj(ZDXL(gt1,j1))*Conj(ZDXR(gt3,j1))*Kappa(j1,j1);
+      tmp_7803 += Conj(ZDXL(gt1,j1))*Conj(ZDXR(gt3,j1))*Kappa(j1,j1);
    }
-   tmp_7350 += tmp_7351;
-   result += (-0.7071067811865475*ZH(gt2,2)) * tmp_7350;
+   tmp_7802 += tmp_7803;
+   result += (-0.7071067811865475*ZH(gt2,2)) * tmp_7802;
 
    return result;
 }
@@ -842,73 +842,73 @@ std::complex<double> E6SSMtower_effective_couplings::CphhSHIpconjSHIp(unsigned g
 
    std::complex<double> result;
 
-   std::complex<double> tmp_7352;
-   std::complex<double> tmp_7353;
-   std::complex<double> tmp_7354;
+   std::complex<double> tmp_7804;
+   std::complex<double> tmp_7805;
+   std::complex<double> tmp_7806;
    for (unsigned j1 = 0; j1 < 2; ++j1) {
-      tmp_7354 += Conj(UHIp(gt2,j1))*UHIp(gt3,j1);
+      tmp_7806 += Conj(UHIp(gt2,j1))*UHIp(gt3,j1);
    }
-   tmp_7353 += tmp_7354;
-   tmp_7352 += (vd*(-6*Sqr(g1) + 10*Sqr(g2) - 9*Sqr(gN))*ZH(gt1,0) + 2*vu*(3*
+   tmp_7805 += tmp_7806;
+   tmp_7804 += (vd*(-6*Sqr(g1) + 10*Sqr(g2) - 9*Sqr(gN))*ZH(gt1,0) + 2*vu*(3*
       Sqr(g1) - 5*Sqr(g2) - 3*Sqr(gN))*ZH(gt1,1) + 15*vs*Sqr(gN)*ZH(gt1,2)) *
-      tmp_7353;
-   std::complex<double> tmp_7355;
-   std::complex<double> tmp_7356;
-   std::complex<double> tmp_7357;
+      tmp_7805;
+   std::complex<double> tmp_7807;
+   std::complex<double> tmp_7808;
+   std::complex<double> tmp_7809;
    for (unsigned j1 = 0; j1 < 2; ++j1) {
-      tmp_7357 += Conj(UHIp(gt2,2 + j1))*Conj(Lambda12(j1,j1))*UHIp(gt3,j1);
+      tmp_7809 += Conj(UHIp(gt2,2 + j1))*Conj(Lambda12(j1,j1))*UHIp(gt3,j1);
    }
-   tmp_7356 += tmp_7357;
-   tmp_7355 += (10*Lambdax*(vu*ZH(gt1,0) + vd*ZH(gt1,1))) * tmp_7356;
-   std::complex<double> tmp_7358;
-   std::complex<double> tmp_7359;
+   tmp_7808 += tmp_7809;
+   tmp_7807 += (10*Lambdax*(vu*ZH(gt1,0) + vd*ZH(gt1,1))) * tmp_7808;
+   std::complex<double> tmp_7810;
+   std::complex<double> tmp_7811;
    for (unsigned j1 = 0; j1 < 2; ++j1) {
-      tmp_7359 += Conj(UHIp(gt2,2 + j1))*UHIp(gt3,2 + j1);
+      tmp_7811 += Conj(UHIp(gt2,2 + j1))*UHIp(gt3,2 + j1);
    }
-   tmp_7358 += tmp_7359;
-   tmp_7355 += (vd*(3*Sqr(g1) - 5*Sqr(g2) - 3*Sqr(gN))*ZH(gt1,0) + vu*(-3*Sqr(
-      g1) + 5*Sqr(g2) - 2*Sqr(gN))*ZH(gt1,1) + 5*vs*Sqr(gN)*ZH(gt1,2)) * tmp_7358;
-   std::complex<double> tmp_7360;
-   std::complex<double> tmp_7361;
-   std::complex<double> tmp_7362;
+   tmp_7810 += tmp_7811;
+   tmp_7807 += (vd*(3*Sqr(g1) - 5*Sqr(g2) - 3*Sqr(gN))*ZH(gt1,0) + vu*(-3*Sqr(
+      g1) + 5*Sqr(g2) - 2*Sqr(gN))*ZH(gt1,1) + 5*vs*Sqr(gN)*ZH(gt1,2)) * tmp_7810;
+   std::complex<double> tmp_7812;
+   std::complex<double> tmp_7813;
+   std::complex<double> tmp_7814;
    for (unsigned j1 = 0; j1 < 2; ++j1) {
-      tmp_7362 += Conj(UHIp(gt2,j1))*UHIp(gt3,2 + j1)*Lambda12(j1,j1);
+      tmp_7814 += Conj(UHIp(gt2,j1))*UHIp(gt3,2 + j1)*Lambda12(j1,j1);
    }
-   tmp_7361 += tmp_7362;
-   tmp_7360 += (Conj(Lambdax)*(vu*ZH(gt1,0) + vd*ZH(gt1,1))) * tmp_7361;
-   std::complex<double> tmp_7363;
-   std::complex<double> tmp_7364;
-   std::complex<double> tmp_7365;
+   tmp_7813 += tmp_7814;
+   tmp_7812 += (Conj(Lambdax)*(vu*ZH(gt1,0) + vd*ZH(gt1,1))) * tmp_7813;
+   std::complex<double> tmp_7815;
+   std::complex<double> tmp_7816;
+   std::complex<double> tmp_7817;
    for (unsigned j1 = 0; j1 < 2; ++j1) {
-      tmp_7365 += Conj(UHIp(gt2,2 + j1))*Conj(TLambda12(j1,j1))*UHIp(gt3,j1)
+      tmp_7817 += Conj(UHIp(gt2,2 + j1))*Conj(TLambda12(j1,j1))*UHIp(gt3,j1)
          ;
    }
-   tmp_7364 += tmp_7365;
-   tmp_7363 += (1.4142135623730951) * tmp_7364;
-   std::complex<double> tmp_7366;
-   std::complex<double> tmp_7367;
+   tmp_7816 += tmp_7817;
+   tmp_7815 += (1.4142135623730951) * tmp_7816;
+   std::complex<double> tmp_7818;
+   std::complex<double> tmp_7819;
    for (unsigned j1 = 0; j1 < 2; ++j1) {
-      tmp_7367 += Conj(UHIp(gt2,j1))*UHIp(gt3,2 + j1)*TLambda12(j1,j1);
+      tmp_7819 += Conj(UHIp(gt2,j1))*UHIp(gt3,2 + j1)*TLambda12(j1,j1);
    }
-   tmp_7366 += tmp_7367;
-   tmp_7363 += (1.4142135623730951) * tmp_7366;
-   std::complex<double> tmp_7368;
-   std::complex<double> tmp_7369;
+   tmp_7818 += tmp_7819;
+   tmp_7815 += (1.4142135623730951) * tmp_7818;
+   std::complex<double> tmp_7820;
+   std::complex<double> tmp_7821;
    for (unsigned j2 = 0; j2 < 2; ++j2) {
-      tmp_7369 += AbsSqr(Lambda12(j2,j2))*Conj(UHIp(gt2,j2))*UHIp(gt3,j2);
+      tmp_7821 += AbsSqr(Lambda12(j2,j2))*Conj(UHIp(gt2,j2))*UHIp(gt3,j2);
    }
-   tmp_7368 += tmp_7369;
-   std::complex<double> tmp_7370;
+   tmp_7820 += tmp_7821;
+   std::complex<double> tmp_7822;
    for (unsigned j2 = 0; j2 < 2; ++j2) {
-      tmp_7370 += AbsSqr(Lambda12(j2,j2))*Conj(UHIp(gt2,2 + j2))*UHIp(gt3,2
+      tmp_7822 += AbsSqr(Lambda12(j2,j2))*Conj(UHIp(gt2,2 + j2))*UHIp(gt3,2
          + j2);
    }
-   tmp_7368 += tmp_7370;
-   tmp_7363 += (2*vs) * tmp_7368;
-   tmp_7360 += (-ZH(gt1,2)) * tmp_7363;
-   tmp_7355 += (10) * tmp_7360;
-   tmp_7352 += (2) * tmp_7355;
-   result += (0.025) * tmp_7352;
+   tmp_7820 += tmp_7822;
+   tmp_7815 += (2*vs) * tmp_7820;
+   tmp_7812 += (-ZH(gt1,2)) * tmp_7815;
+   tmp_7807 += (10) * tmp_7812;
+   tmp_7804 += (2) * tmp_7807;
+   result += (0.025) * tmp_7804;
 
    return result;
 }
@@ -919,13 +919,13 @@ std::complex<double> E6SSMtower_effective_couplings::CpChaIhhbarChaIPL(unsigned 
 
    std::complex<double> result;
 
-   std::complex<double> tmp_7371;
-   std::complex<double> tmp_7372;
+   std::complex<double> tmp_7823;
+   std::complex<double> tmp_7824;
    for (unsigned j1 = 0; j1 < 2; ++j1) {
-      tmp_7372 += Conj(ZMI(gt1,j1))*Conj(ZPI(gt3,j1))*Lambda12(j1,j1);
+      tmp_7824 += Conj(ZMI(gt1,j1))*Conj(ZPI(gt3,j1))*Lambda12(j1,j1);
    }
-   tmp_7371 += tmp_7372;
-   result += (-0.7071067811865475*ZH(gt2,2)) * tmp_7371;
+   tmp_7823 += tmp_7824;
+   result += (-0.7071067811865475*ZH(gt2,2)) * tmp_7823;
 
    return result;
 }
@@ -971,38 +971,38 @@ std::complex<double> E6SSMtower_effective_couplings::CpAhSdconjSd(unsigned gt1, 
 
    std::complex<double> result;
 
-   std::complex<double> tmp_7373;
-   std::complex<double> tmp_7374;
-   std::complex<double> tmp_7375;
+   std::complex<double> tmp_7825;
+   std::complex<double> tmp_7826;
+   std::complex<double> tmp_7827;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7375 += Conj(ZD(gt2,3 + j1))*Conj(TYd(j1,j1))*ZD(gt3,j1);
+      tmp_7827 += Conj(ZD(gt2,3 + j1))*Conj(TYd(j1,j1))*ZD(gt3,j1);
    }
-   tmp_7374 += tmp_7375;
-   tmp_7373 += (-1.4142135623730951*ZA(gt1,0)) * tmp_7374;
-   std::complex<double> tmp_7376;
-   std::complex<double> tmp_7377;
+   tmp_7826 += tmp_7827;
+   tmp_7825 += (-1.4142135623730951*ZA(gt1,0)) * tmp_7826;
+   std::complex<double> tmp_7828;
+   std::complex<double> tmp_7829;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7377 += Conj(ZD(gt2,j1))*ZD(gt3,3 + j1)*TYd(j1,j1);
+      tmp_7829 += Conj(ZD(gt2,j1))*ZD(gt3,3 + j1)*TYd(j1,j1);
    }
-   tmp_7376 += tmp_7377;
-   tmp_7373 += (1.4142135623730951*ZA(gt1,0)) * tmp_7376;
-   std::complex<double> tmp_7378;
-   std::complex<double> tmp_7379;
-   std::complex<double> tmp_7380;
+   tmp_7828 += tmp_7829;
+   tmp_7825 += (1.4142135623730951*ZA(gt1,0)) * tmp_7828;
+   std::complex<double> tmp_7830;
+   std::complex<double> tmp_7831;
+   std::complex<double> tmp_7832;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7380 += Conj(Yd(j1,j1))*Conj(ZD(gt2,3 + j1))*ZD(gt3,j1);
+      tmp_7832 += Conj(Yd(j1,j1))*Conj(ZD(gt2,3 + j1))*ZD(gt3,j1);
    }
-   tmp_7379 += tmp_7380;
-   tmp_7378 += (Lambdax) * tmp_7379;
-   std::complex<double> tmp_7381;
-   std::complex<double> tmp_7382;
+   tmp_7831 += tmp_7832;
+   tmp_7830 += (Lambdax) * tmp_7831;
+   std::complex<double> tmp_7833;
+   std::complex<double> tmp_7834;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7382 += Conj(ZD(gt2,j1))*Yd(j1,j1)*ZD(gt3,3 + j1);
+      tmp_7834 += Conj(ZD(gt2,j1))*Yd(j1,j1)*ZD(gt3,3 + j1);
    }
-   tmp_7381 += tmp_7382;
-   tmp_7378 += (-Conj(Lambdax)) * tmp_7381;
-   tmp_7373 += (-(vs*ZA(gt1,1)) - vu*ZA(gt1,2)) * tmp_7378;
-   result += (std::complex<double>(0,-0.5)) * tmp_7373;
+   tmp_7833 += tmp_7834;
+   tmp_7830 += (-Conj(Lambdax)) * tmp_7833;
+   tmp_7825 += (-(vs*ZA(gt1,1)) - vu*ZA(gt1,2)) * tmp_7830;
+   result += (std::complex<double>(0,-0.5)) * tmp_7825;
 
    return result;
 }
@@ -1017,36 +1017,36 @@ std::complex<double> E6SSMtower_effective_couplings::CpAhSuconjSu(unsigned gt1, 
 
    std::complex<double> result;
 
-   std::complex<double> tmp_7383;
-   std::complex<double> tmp_7384;
-   std::complex<double> tmp_7385;
+   std::complex<double> tmp_7835;
+   std::complex<double> tmp_7836;
+   std::complex<double> tmp_7837;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7385 += Conj(ZU(gt2,3 + j1))*Conj(TYu(j1,j1))*ZU(gt3,j1);
+      tmp_7837 += Conj(ZU(gt2,3 + j1))*Conj(TYu(j1,j1))*ZU(gt3,j1);
    }
-   tmp_7384 += tmp_7385;
-   std::complex<double> tmp_7386;
-   std::complex<double> tmp_7387;
+   tmp_7836 += tmp_7837;
+   std::complex<double> tmp_7838;
+   std::complex<double> tmp_7839;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7387 += Conj(ZU(gt2,j1))*ZU(gt3,3 + j1)*TYu(j1,j1);
+      tmp_7839 += Conj(ZU(gt2,j1))*ZU(gt3,3 + j1)*TYu(j1,j1);
    }
-   tmp_7386 += tmp_7387;
-   tmp_7384 += (-1) * tmp_7386;
-   tmp_7383 += (-1.4142135623730951*ZA(gt1,1)) * tmp_7384;
-   std::complex<double> tmp_7388;
-   std::complex<double> tmp_7389;
+   tmp_7838 += tmp_7839;
+   tmp_7836 += (-1) * tmp_7838;
+   tmp_7835 += (-1.4142135623730951*ZA(gt1,1)) * tmp_7836;
+   std::complex<double> tmp_7840;
+   std::complex<double> tmp_7841;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7389 += Conj(Yu(j1,j1))*Conj(ZU(gt2,3 + j1))*ZU(gt3,j1);
+      tmp_7841 += Conj(Yu(j1,j1))*Conj(ZU(gt2,3 + j1))*ZU(gt3,j1);
    }
-   tmp_7388 += tmp_7389;
-   tmp_7383 += (-(Lambdax*(vs*ZA(gt1,0) + vd*ZA(gt1,2)))) * tmp_7388;
-   std::complex<double> tmp_7390;
-   std::complex<double> tmp_7391;
+   tmp_7840 += tmp_7841;
+   tmp_7835 += (-(Lambdax*(vs*ZA(gt1,0) + vd*ZA(gt1,2)))) * tmp_7840;
+   std::complex<double> tmp_7842;
+   std::complex<double> tmp_7843;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7391 += Conj(ZU(gt2,j1))*Yu(j1,j1)*ZU(gt3,3 + j1);
+      tmp_7843 += Conj(ZU(gt2,j1))*Yu(j1,j1)*ZU(gt3,3 + j1);
    }
-   tmp_7390 += tmp_7391;
-   tmp_7383 += (Conj(Lambdax)*(vs*ZA(gt1,0) + vd*ZA(gt1,2))) * tmp_7390;
-   result += (std::complex<double>(0,-0.5)) * tmp_7383;
+   tmp_7842 += tmp_7843;
+   tmp_7835 += (Conj(Lambdax)*(vs*ZA(gt1,0) + vd*ZA(gt1,2))) * tmp_7842;
+   result += (std::complex<double>(0,-0.5)) * tmp_7835;
 
    return result;
 }
@@ -1061,38 +1061,38 @@ std::complex<double> E6SSMtower_effective_couplings::CpAhSeconjSe(unsigned gt1, 
 
    std::complex<double> result;
 
-   std::complex<double> tmp_7392;
-   std::complex<double> tmp_7393;
-   std::complex<double> tmp_7394;
+   std::complex<double> tmp_7844;
+   std::complex<double> tmp_7845;
+   std::complex<double> tmp_7846;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7394 += Conj(ZE(gt2,3 + j1))*Conj(TYe(j1,j1))*ZE(gt3,j1);
+      tmp_7846 += Conj(ZE(gt2,3 + j1))*Conj(TYe(j1,j1))*ZE(gt3,j1);
    }
-   tmp_7393 += tmp_7394;
-   tmp_7392 += (-1.4142135623730951*ZA(gt1,0)) * tmp_7393;
-   std::complex<double> tmp_7395;
-   std::complex<double> tmp_7396;
+   tmp_7845 += tmp_7846;
+   tmp_7844 += (-1.4142135623730951*ZA(gt1,0)) * tmp_7845;
+   std::complex<double> tmp_7847;
+   std::complex<double> tmp_7848;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7396 += Conj(ZE(gt2,j1))*ZE(gt3,3 + j1)*TYe(j1,j1);
+      tmp_7848 += Conj(ZE(gt2,j1))*ZE(gt3,3 + j1)*TYe(j1,j1);
    }
-   tmp_7395 += tmp_7396;
-   tmp_7392 += (1.4142135623730951*ZA(gt1,0)) * tmp_7395;
-   std::complex<double> tmp_7397;
-   std::complex<double> tmp_7398;
-   std::complex<double> tmp_7399;
+   tmp_7847 += tmp_7848;
+   tmp_7844 += (1.4142135623730951*ZA(gt1,0)) * tmp_7847;
+   std::complex<double> tmp_7849;
+   std::complex<double> tmp_7850;
+   std::complex<double> tmp_7851;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7399 += Conj(Ye(j1,j1))*Conj(ZE(gt2,3 + j1))*ZE(gt3,j1);
+      tmp_7851 += Conj(Ye(j1,j1))*Conj(ZE(gt2,3 + j1))*ZE(gt3,j1);
    }
-   tmp_7398 += tmp_7399;
-   tmp_7397 += (Lambdax) * tmp_7398;
-   std::complex<double> tmp_7400;
-   std::complex<double> tmp_7401;
+   tmp_7850 += tmp_7851;
+   tmp_7849 += (Lambdax) * tmp_7850;
+   std::complex<double> tmp_7852;
+   std::complex<double> tmp_7853;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7401 += Conj(ZE(gt2,j1))*Ye(j1,j1)*ZE(gt3,3 + j1);
+      tmp_7853 += Conj(ZE(gt2,j1))*Ye(j1,j1)*ZE(gt3,3 + j1);
    }
-   tmp_7400 += tmp_7401;
-   tmp_7397 += (-Conj(Lambdax)) * tmp_7400;
-   tmp_7392 += (-(vs*ZA(gt1,1)) - vu*ZA(gt1,2)) * tmp_7397;
-   result += (std::complex<double>(0,-0.5)) * tmp_7392;
+   tmp_7852 += tmp_7853;
+   tmp_7849 += (-Conj(Lambdax)) * tmp_7852;
+   tmp_7844 += (-(vs*ZA(gt1,1)) - vu*ZA(gt1,2)) * tmp_7849;
+   result += (std::complex<double>(0,-0.5)) * tmp_7844;
 
    return result;
 }
@@ -1107,36 +1107,36 @@ std::complex<double> E6SSMtower_effective_couplings::CpAhSDXconjSDX(unsigned gt1
 
    std::complex<double> result;
 
-   std::complex<double> tmp_7402;
-   std::complex<double> tmp_7403;
-   std::complex<double> tmp_7404;
+   std::complex<double> tmp_7854;
+   std::complex<double> tmp_7855;
+   std::complex<double> tmp_7856;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7404 += Conj(ZDX(gt2,3 + j1))*Conj(Kappa(j1,j1))*ZDX(gt3,j1);
+      tmp_7856 += Conj(ZDX(gt2,3 + j1))*Conj(Kappa(j1,j1))*ZDX(gt3,j1);
    }
-   tmp_7403 += tmp_7404;
-   tmp_7402 += (-(Lambdax*(vu*ZA(gt1,0) + vd*ZA(gt1,1)))) * tmp_7403;
-   std::complex<double> tmp_7405;
-   std::complex<double> tmp_7406;
+   tmp_7855 += tmp_7856;
+   tmp_7854 += (-(Lambdax*(vu*ZA(gt1,0) + vd*ZA(gt1,1)))) * tmp_7855;
+   std::complex<double> tmp_7857;
+   std::complex<double> tmp_7858;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7406 += Conj(ZDX(gt2,j1))*ZDX(gt3,3 + j1)*Kappa(j1,j1);
+      tmp_7858 += Conj(ZDX(gt2,j1))*ZDX(gt3,3 + j1)*Kappa(j1,j1);
    }
-   tmp_7405 += tmp_7406;
-   tmp_7402 += (Conj(Lambdax)*(vu*ZA(gt1,0) + vd*ZA(gt1,1))) * tmp_7405;
-   std::complex<double> tmp_7407;
-   std::complex<double> tmp_7408;
+   tmp_7857 += tmp_7858;
+   tmp_7854 += (Conj(Lambdax)*(vu*ZA(gt1,0) + vd*ZA(gt1,1))) * tmp_7857;
+   std::complex<double> tmp_7859;
+   std::complex<double> tmp_7860;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7408 += Conj(ZDX(gt2,3 + j1))*Conj(TKappa(j1,j1))*ZDX(gt3,j1);
+      tmp_7860 += Conj(ZDX(gt2,3 + j1))*Conj(TKappa(j1,j1))*ZDX(gt3,j1);
    }
-   tmp_7407 += tmp_7408;
-   std::complex<double> tmp_7409;
-   std::complex<double> tmp_7410;
+   tmp_7859 += tmp_7860;
+   std::complex<double> tmp_7861;
+   std::complex<double> tmp_7862;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7410 += Conj(ZDX(gt2,j1))*ZDX(gt3,3 + j1)*TKappa(j1,j1);
+      tmp_7862 += Conj(ZDX(gt2,j1))*ZDX(gt3,3 + j1)*TKappa(j1,j1);
    }
-   tmp_7409 += tmp_7410;
-   tmp_7407 += (-1) * tmp_7409;
-   tmp_7402 += (-1.4142135623730951*ZA(gt1,2)) * tmp_7407;
-   result += (std::complex<double>(0,-0.5)) * tmp_7402;
+   tmp_7861 += tmp_7862;
+   tmp_7859 += (-1) * tmp_7861;
+   tmp_7854 += (-1.4142135623730951*ZA(gt1,2)) * tmp_7859;
+   result += (std::complex<double>(0,-0.5)) * tmp_7854;
 
    return result;
 }
@@ -1180,14 +1180,14 @@ std::complex<double> E6SSMtower_effective_couplings::CpAhFebarFePL(unsigned gt1,
 
    std::complex<double> result;
 
-   std::complex<double> tmp_7411;
-   std::complex<double> tmp_7412;
+   std::complex<double> tmp_7863;
+   std::complex<double> tmp_7864;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7412 += Conj(ZEL(gt2,j1))*Conj(ZER(gt3,j1))*Ye(j1,j1);
+      tmp_7864 += Conj(ZEL(gt2,j1))*Conj(ZER(gt3,j1))*Ye(j1,j1);
    }
-   tmp_7411 += tmp_7412;
+   tmp_7863 += tmp_7864;
    result += (std::complex<double>(0.,-0.7071067811865475)*ZA(gt1,0)) *
-      tmp_7411;
+      tmp_7863;
 
    return result;
 }
@@ -1198,14 +1198,14 @@ std::complex<double> E6SSMtower_effective_couplings::CpAhFdbarFdPL(unsigned gt1,
 
    std::complex<double> result;
 
-   std::complex<double> tmp_7413;
-   std::complex<double> tmp_7414;
+   std::complex<double> tmp_7865;
+   std::complex<double> tmp_7866;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7414 += Conj(ZDL(gt2,j1))*Conj(ZDR(gt3,j1))*Yd(j1,j1);
+      tmp_7866 += Conj(ZDL(gt2,j1))*Conj(ZDR(gt3,j1))*Yd(j1,j1);
    }
-   tmp_7413 += tmp_7414;
+   tmp_7865 += tmp_7866;
    result += (std::complex<double>(0.,-0.7071067811865475)*ZA(gt1,0)) *
-      tmp_7413;
+      tmp_7865;
 
    return result;
 }
@@ -1216,14 +1216,14 @@ std::complex<double> E6SSMtower_effective_couplings::CpAhFubarFuPL(unsigned gt1,
 
    std::complex<double> result;
 
-   std::complex<double> tmp_7415;
-   std::complex<double> tmp_7416;
+   std::complex<double> tmp_7867;
+   std::complex<double> tmp_7868;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7416 += Conj(ZUL(gt2,j1))*Conj(ZUR(gt3,j1))*Yu(j1,j1);
+      tmp_7868 += Conj(ZUL(gt2,j1))*Conj(ZUR(gt3,j1))*Yu(j1,j1);
    }
-   tmp_7415 += tmp_7416;
+   tmp_7867 += tmp_7868;
    result += (std::complex<double>(0.,-0.7071067811865475)*ZA(gt1,1)) *
-      tmp_7415;
+      tmp_7867;
 
    return result;
 }
@@ -1234,14 +1234,14 @@ std::complex<double> E6SSMtower_effective_couplings::CpAhFDXbarFDXPL(unsigned gt
 
    std::complex<double> result;
 
-   std::complex<double> tmp_7417;
-   std::complex<double> tmp_7418;
+   std::complex<double> tmp_7869;
+   std::complex<double> tmp_7870;
    for (unsigned j1 = 0; j1 < 3; ++j1) {
-      tmp_7418 += Conj(ZDXL(gt2,j1))*Conj(ZDXR(gt3,j1))*Kappa(j1,j1);
+      tmp_7870 += Conj(ZDXL(gt2,j1))*Conj(ZDXR(gt3,j1))*Kappa(j1,j1);
    }
-   tmp_7417 += tmp_7418;
+   tmp_7869 += tmp_7870;
    result += (std::complex<double>(0.,-0.7071067811865475)*ZA(gt1,2)) *
-      tmp_7417;
+      tmp_7869;
 
    return result;
 }
@@ -1256,37 +1256,37 @@ std::complex<double> E6SSMtower_effective_couplings::CpAhSHIpconjSHIp(unsigned g
 
    std::complex<double> result;
 
-   std::complex<double> tmp_7419;
-   std::complex<double> tmp_7420;
-   std::complex<double> tmp_7421;
+   std::complex<double> tmp_7871;
+   std::complex<double> tmp_7872;
+   std::complex<double> tmp_7873;
    for (unsigned j1 = 0; j1 < 2; ++j1) {
-      tmp_7421 += Conj(UHIp(gt2,2 + j1))*Conj(Lambda12(j1,j1))*UHIp(gt3,j1);
+      tmp_7873 += Conj(UHIp(gt2,2 + j1))*Conj(Lambda12(j1,j1))*UHIp(gt3,j1);
    }
-   tmp_7420 += tmp_7421;
-   tmp_7419 += (-(Lambdax*(vu*ZA(gt1,0) + vd*ZA(gt1,1)))) * tmp_7420;
-   std::complex<double> tmp_7422;
-   std::complex<double> tmp_7423;
+   tmp_7872 += tmp_7873;
+   tmp_7871 += (-(Lambdax*(vu*ZA(gt1,0) + vd*ZA(gt1,1)))) * tmp_7872;
+   std::complex<double> tmp_7874;
+   std::complex<double> tmp_7875;
    for (unsigned j1 = 0; j1 < 2; ++j1) {
-      tmp_7423 += Conj(UHIp(gt2,j1))*UHIp(gt3,2 + j1)*Lambda12(j1,j1);
+      tmp_7875 += Conj(UHIp(gt2,j1))*UHIp(gt3,2 + j1)*Lambda12(j1,j1);
    }
-   tmp_7422 += tmp_7423;
-   tmp_7419 += (Conj(Lambdax)*(vu*ZA(gt1,0) + vd*ZA(gt1,1))) * tmp_7422;
-   std::complex<double> tmp_7424;
-   std::complex<double> tmp_7425;
+   tmp_7874 += tmp_7875;
+   tmp_7871 += (Conj(Lambdax)*(vu*ZA(gt1,0) + vd*ZA(gt1,1))) * tmp_7874;
+   std::complex<double> tmp_7876;
+   std::complex<double> tmp_7877;
    for (unsigned j1 = 0; j1 < 2; ++j1) {
-      tmp_7425 += Conj(UHIp(gt2,2 + j1))*Conj(TLambda12(j1,j1))*UHIp(gt3,j1)
+      tmp_7877 += Conj(UHIp(gt2,2 + j1))*Conj(TLambda12(j1,j1))*UHIp(gt3,j1)
          ;
    }
-   tmp_7424 += tmp_7425;
-   std::complex<double> tmp_7426;
-   std::complex<double> tmp_7427;
+   tmp_7876 += tmp_7877;
+   std::complex<double> tmp_7878;
+   std::complex<double> tmp_7879;
    for (unsigned j1 = 0; j1 < 2; ++j1) {
-      tmp_7427 += Conj(UHIp(gt2,j1))*UHIp(gt3,2 + j1)*TLambda12(j1,j1);
+      tmp_7879 += Conj(UHIp(gt2,j1))*UHIp(gt3,2 + j1)*TLambda12(j1,j1);
    }
-   tmp_7426 += tmp_7427;
-   tmp_7424 += (-1) * tmp_7426;
-   tmp_7419 += (-1.4142135623730951*ZA(gt1,2)) * tmp_7424;
-   result += (std::complex<double>(0,-0.5)) * tmp_7419;
+   tmp_7878 += tmp_7879;
+   tmp_7876 += (-1) * tmp_7878;
+   tmp_7871 += (-1.4142135623730951*ZA(gt1,2)) * tmp_7876;
+   result += (std::complex<double>(0,-0.5)) * tmp_7871;
 
    return result;
 }
@@ -1297,14 +1297,14 @@ std::complex<double> E6SSMtower_effective_couplings::CpAhChaIbarChaIPL(unsigned 
 
    std::complex<double> result;
 
-   std::complex<double> tmp_7428;
-   std::complex<double> tmp_7429;
+   std::complex<double> tmp_7880;
+   std::complex<double> tmp_7881;
    for (unsigned j1 = 0; j1 < 2; ++j1) {
-      tmp_7429 += Conj(ZMI(gt2,j1))*Conj(ZPI(gt3,j1))*Lambda12(j1,j1);
+      tmp_7881 += Conj(ZMI(gt2,j1))*Conj(ZPI(gt3,j1))*Lambda12(j1,j1);
    }
-   tmp_7428 += tmp_7429;
+   tmp_7880 += tmp_7881;
    result += (std::complex<double>(0.,-0.7071067811865475)*ZA(gt1,2)) *
-      tmp_7428;
+      tmp_7880;
 
    return result;
 }

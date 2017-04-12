@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 27 Feb 2017 13:24:48
+// File generated at Wed 12 Apr 2017 11:20:08
 
 #include "THDMIIMSSMBC_effective_couplings.hpp"
 
@@ -271,19 +271,19 @@ std::complex<double> THDMIIMSSMBC_effective_couplings::CpFdhhbarFdPL(unsigned gt
 
    std::complex<double> result;
 
-   std::complex<double> tmp_633;
-   std::complex<double> tmp_634;
+   std::complex<double> tmp_675;
+   std::complex<double> tmp_676;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
-      std::complex<double> tmp_635;
-      std::complex<double> tmp_636;
+      std::complex<double> tmp_677;
+      std::complex<double> tmp_678;
       for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_636 += Conj(Ud(gt3,j1))*Yd(j1,j2);
+         tmp_678 += Conj(Ud(gt3,j1))*Yd(j1,j2);
       }
-      tmp_635 += tmp_636;
-      tmp_634 += (Conj(Vd(gt1,j2))) * tmp_635;
+      tmp_677 += tmp_678;
+      tmp_676 += (Conj(Vd(gt1,j2))) * tmp_677;
    }
-   tmp_633 += tmp_634;
-   result += (-0.7071067811865475*ZH(gt2,0)) * tmp_633;
+   tmp_675 += tmp_676;
+   result += (-0.7071067811865475*ZH(gt2,0)) * tmp_675;
 
    return result;
 }
@@ -294,19 +294,19 @@ std::complex<double> THDMIIMSSMBC_effective_couplings::CpFuhhbarFuPL(unsigned gt
 
    std::complex<double> result;
 
-   std::complex<double> tmp_637;
-   std::complex<double> tmp_638;
+   std::complex<double> tmp_679;
+   std::complex<double> tmp_680;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
-      std::complex<double> tmp_639;
-      std::complex<double> tmp_640;
+      std::complex<double> tmp_681;
+      std::complex<double> tmp_682;
       for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_640 += Conj(Uu(gt3,j1))*Yu(j1,j2);
+         tmp_682 += Conj(Uu(gt3,j1))*Yu(j1,j2);
       }
-      tmp_639 += tmp_640;
-      tmp_638 += (Conj(Vu(gt1,j2))) * tmp_639;
+      tmp_681 += tmp_682;
+      tmp_680 += (Conj(Vu(gt1,j2))) * tmp_681;
    }
-   tmp_637 += tmp_638;
-   result += (0.7071067811865475*ZH(gt2,1)) * tmp_637;
+   tmp_679 += tmp_680;
+   result += (0.7071067811865475*ZH(gt2,1)) * tmp_679;
 
    return result;
 }
@@ -317,19 +317,19 @@ std::complex<double> THDMIIMSSMBC_effective_couplings::CpFehhbarFePL(unsigned gt
 
    std::complex<double> result;
 
-   std::complex<double> tmp_641;
-   std::complex<double> tmp_642;
+   std::complex<double> tmp_683;
+   std::complex<double> tmp_684;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
-      std::complex<double> tmp_643;
-      std::complex<double> tmp_644;
+      std::complex<double> tmp_685;
+      std::complex<double> tmp_686;
       for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_644 += Conj(Ue(gt3,j1))*Ye(j1,j2);
+         tmp_686 += Conj(Ue(gt3,j1))*Ye(j1,j2);
       }
-      tmp_643 += tmp_644;
-      tmp_642 += (Conj(Ve(gt1,j2))) * tmp_643;
+      tmp_685 += tmp_686;
+      tmp_684 += (Conj(Ve(gt1,j2))) * tmp_685;
    }
-   tmp_641 += tmp_642;
-   result += (-0.7071067811865475*ZH(gt2,0)) * tmp_641;
+   tmp_683 += tmp_684;
+   result += (-0.7071067811865475*ZH(gt2,0)) * tmp_683;
 
    return result;
 }
@@ -372,19 +372,19 @@ std::complex<double> THDMIIMSSMBC_effective_couplings::CpAhFdbarFdPL(unsigned gt
 
    std::complex<double> result;
 
-   std::complex<double> tmp_645;
-   std::complex<double> tmp_646;
+   std::complex<double> tmp_687;
+   std::complex<double> tmp_688;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
-      std::complex<double> tmp_647;
-      std::complex<double> tmp_648;
+      std::complex<double> tmp_689;
+      std::complex<double> tmp_690;
       for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_648 += Conj(Ud(gt3,j1))*Yd(j1,j2);
+         tmp_690 += Conj(Ud(gt3,j1))*Yd(j1,j2);
       }
-      tmp_647 += tmp_648;
-      tmp_646 += (Conj(Vd(gt2,j2))) * tmp_647;
+      tmp_689 += tmp_690;
+      tmp_688 += (Conj(Vd(gt2,j2))) * tmp_689;
    }
-   tmp_645 += tmp_646;
-   result += (std::complex<double>(0.,0.7071067811865475)*ZA(gt1,0)) * tmp_645;
+   tmp_687 += tmp_688;
+   result += (std::complex<double>(0.,0.7071067811865475)*ZA(gt1,0)) * tmp_687;
 
    return result;
 }
@@ -395,19 +395,19 @@ std::complex<double> THDMIIMSSMBC_effective_couplings::CpAhFubarFuPL(unsigned gt
 
    std::complex<double> result;
 
-   std::complex<double> tmp_649;
-   std::complex<double> tmp_650;
+   std::complex<double> tmp_691;
+   std::complex<double> tmp_692;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
-      std::complex<double> tmp_651;
-      std::complex<double> tmp_652;
+      std::complex<double> tmp_693;
+      std::complex<double> tmp_694;
       for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_652 += Conj(Uu(gt3,j1))*Yu(j1,j2);
+         tmp_694 += Conj(Uu(gt3,j1))*Yu(j1,j2);
       }
-      tmp_651 += tmp_652;
-      tmp_650 += (Conj(Vu(gt2,j2))) * tmp_651;
+      tmp_693 += tmp_694;
+      tmp_692 += (Conj(Vu(gt2,j2))) * tmp_693;
    }
-   tmp_649 += tmp_650;
-   result += (std::complex<double>(0.,0.7071067811865475)*ZA(gt1,1)) * tmp_649;
+   tmp_691 += tmp_692;
+   result += (std::complex<double>(0.,0.7071067811865475)*ZA(gt1,1)) * tmp_691;
 
    return result;
 }
@@ -418,19 +418,19 @@ std::complex<double> THDMIIMSSMBC_effective_couplings::CpAhFebarFePL(unsigned gt
 
    std::complex<double> result;
 
-   std::complex<double> tmp_653;
-   std::complex<double> tmp_654;
+   std::complex<double> tmp_695;
+   std::complex<double> tmp_696;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
-      std::complex<double> tmp_655;
-      std::complex<double> tmp_656;
+      std::complex<double> tmp_697;
+      std::complex<double> tmp_698;
       for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_656 += Conj(Ue(gt3,j1))*Ye(j1,j2);
+         tmp_698 += Conj(Ue(gt3,j1))*Ye(j1,j2);
       }
-      tmp_655 += tmp_656;
-      tmp_654 += (Conj(Ve(gt2,j2))) * tmp_655;
+      tmp_697 += tmp_698;
+      tmp_696 += (Conj(Ve(gt2,j2))) * tmp_697;
    }
-   tmp_653 += tmp_654;
-   result += (std::complex<double>(0.,0.7071067811865475)*ZA(gt1,0)) * tmp_653;
+   tmp_695 += tmp_696;
+   result += (std::complex<double>(0.,0.7071067811865475)*ZA(gt1,0)) * tmp_695;
 
    return result;
 }
