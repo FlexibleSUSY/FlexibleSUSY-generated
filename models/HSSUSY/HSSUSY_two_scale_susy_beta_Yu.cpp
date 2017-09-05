@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 12 Apr 2017 11:20:48
+// File generated at Tue 5 Sep 2017 10:38:57
 
 #include "HSSUSY_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -97,7 +97,18 @@ Eigen::Matrix<double,3,3> HSSUSY_susy_parameters::calc_beta_Yu_three_loop(const 
 
    Eigen::Matrix<double,3,3> beta_Yu;
 
-   beta_Yu = ZEROMATRIX(3,3);
+   beta_Yu = (0.00005*PROJECTOR*threeLoop*Yu(2,2)*(321980*Power(g1,6) +
+      3396580*Power(g2,6) - 5*Power(g2,4)*(21375*Lambdax + 84288*Sqr(g3) -
+      67960*Sqr(Yu(2,2))) - 5*Power(g1,4)*(5445*Lambdax + 17768*Sqr(g2) + 89276
+      *Sqr(g3) + 97688*Sqr(Yu(2,2))) - 10*Sqr(g1)*(9486*Power(g2,4) + 30192*
+      Power(g3,4) - 4500*Sqr(Lambdax) + Sqr(g2)*(-2925*Lambdax + 32100*Sqr(g3)
+      - 69658*Sqr(Yu(2,2))) + 12700*Lambdax*Sqr(Yu(2,2)) - 36148*Sqr(g3)*Sqr(Yu
+      (2,2)) + 60925*Power(Yu(2,2),4)) + 10*Sqr(g2)*(147308*Power(g3,4) + 96740
+      *Sqr(g3)*Sqr(Yu(2,2)) + 1125*(20*Sqr(Lambdax) - 60*Lambdax*Sqr(Yu(2,2)) -
+      177*Power(Yu(2,2),4))) + 2*(-6193500*Power(g3,6) - 45000*Power(Lambdax,3
+      ) + 3637640*Power(g3,4)*Sqr(Yu(2,2)) + 9375*Sqr(Lambdax)*Sqr(Yu(2,2)) +
+      990000*Lambdax*Power(Yu(2,2),4) + 586028*Power(Yu(2,2),6) + 10000*Sqr(g3)
+      *(8*Lambdax*Sqr(Yu(2,2)) - 157*Power(Yu(2,2),4))))).real();
 
 
    return beta_Yu;

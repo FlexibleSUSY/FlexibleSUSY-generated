@@ -177,7 +177,7 @@ FSCMSSMNoFVSet[handle_Integer, a___, (fsSettings | fsSMParameters | fsModelParam
 FSCMSSMNoFVSet[handle_Integer, p:OptionsPattern[]] :=
     FSCMSSMNoFVSetLib[
         handle,
-        ReleaseHold[Hold[{
+        ReleaseHold[Hold[FSCMSSMNoFVCheckIsNumeric /@ {
             (* spectrum generator settings *)
             OptionValue[precisionGoal],
             OptionValue[maxIterations],
@@ -241,7 +241,7 @@ FSCMSSMNoFVSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[TanBeta],
             OptionValue[SignMu],
             OptionValue[Azero]
-        }] /. HoldPattern[OptionValue[param_]] :> FSCMSSMNoFVCheckIsNumeric[param] /.
+        }] /. HoldPattern[OptionValue[param_]] :> param /.
         { p } /.
         FSCMSSMNoFVGetSettings[handle] /.
         FSCMSSMNoFVGetSMInputParameters[handle] /.

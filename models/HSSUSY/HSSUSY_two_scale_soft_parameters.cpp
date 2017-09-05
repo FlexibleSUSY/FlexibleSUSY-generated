@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 12 Apr 2017 11:20:50
+// File generated at Tue 5 Sep 2017 10:38:59
 
 #include "HSSUSY_two_scale_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -75,6 +75,7 @@ HSSUSY_soft_parameters HSSUSY_soft_parameters::calc_beta() const
          beta_v += calc_beta_v_two_loop(TRACE_STRUCT);
 
          if (get_loops() > 2) {
+            beta_mu2 += calc_beta_mu2_three_loop(TRACE_STRUCT);
 
          }
       }

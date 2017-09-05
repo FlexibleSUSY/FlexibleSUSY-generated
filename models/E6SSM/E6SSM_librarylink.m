@@ -187,7 +187,7 @@ FSE6SSMSet[handle_Integer, a___, (fsSettings | fsSMParameters | fsModelParameter
 FSE6SSMSet[handle_Integer, p:OptionsPattern[]] :=
     FSE6SSMSetLib[
         handle,
-        ReleaseHold[Hold[{
+        ReleaseHold[Hold[FSE6SSMCheckIsNumeric /@ {
             (* spectrum generator settings *)
             OptionValue[precisionGoal],
             OptionValue[maxIterations],
@@ -256,7 +256,7 @@ FSE6SSMSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[BmuPrimeInput],
             OptionValue[vSInput],
             OptionValue[Lambda12Input]
-        }] /. HoldPattern[OptionValue[param_]] :> FSE6SSMCheckIsNumeric[param] /.
+        }] /. HoldPattern[OptionValue[param_]] :> param /.
         { p } /.
         FSE6SSMGetSettings[handle] /.
         FSE6SSMGetSMInputParameters[handle] /.

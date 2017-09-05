@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 12 Apr 2017 11:20:46
+// File generated at Tue 5 Sep 2017 10:38:54
 
 #include "HSSUSY_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -76,7 +76,10 @@ double HSSUSY_susy_parameters::calc_beta_g3_three_loop(const Susy_traces& susy_t
 
    double beta_g3;
 
-   beta_g3 = 0;
+   beta_g3 = Re(0.008333333333333333*Power(g3,3)*threeLoop*(-523*Power(g1
+      ,4) + Sqr(g1)*(-9*Sqr(g2) + 616*Sqr(g3) - 303*Sqr(Yu(2,2))) + 15*(109*
+      Power(g2,4) + 3*Sqr(g2)*(56*Sqr(g3) - 31*Sqr(Yu(2,2))) + 20*(13*Power(g3,
+      4) - 16*Sqr(g3)*Sqr(Yu(2,2)) + 6*Power(Yu(2,2),4)))));
 
 
    return beta_g3;

@@ -340,7 +340,7 @@ FSE6SSMtowerSet[handle_Integer, a___, (fsSettings | fsSMParameters | fsModelPara
 FSE6SSMtowerSet[handle_Integer, p:OptionsPattern[]] :=
     FSE6SSMtowerSetLib[
         handle,
-        ReleaseHold[Hold[{
+        ReleaseHold[Hold[FSE6SSMtowerCheckIsNumeric /@ {
             (* spectrum generator settings *)
             OptionValue[precisionGoal],
             OptionValue[maxIterations],
@@ -541,7 +541,7 @@ FSE6SSMtowerSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[msI2Input][[1,2]],
             OptionValue[msI2Input][[2,1]],
             OptionValue[msI2Input][[2,2]]
-        }] /. HoldPattern[OptionValue[param_]] :> FSE6SSMtowerCheckIsNumeric[param] /.
+        }] /. HoldPattern[OptionValue[param_]] :> param /.
         { p } /.
         FSE6SSMtowerGetSettings[handle] /.
         FSE6SSMtowerGetSMInputParameters[handle] /.

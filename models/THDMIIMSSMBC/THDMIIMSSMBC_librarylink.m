@@ -185,7 +185,7 @@ FSTHDMIIMSSMBCSet[handle_Integer, a___, (fsSettings | fsSMParameters | fsModelPa
 FSTHDMIIMSSMBCSet[handle_Integer, p:OptionsPattern[]] :=
     FSTHDMIIMSSMBCSetLib[
         handle,
-        ReleaseHold[Hold[{
+        ReleaseHold[Hold[FSTHDMIIMSSMBCCheckIsNumeric /@ {
             (* spectrum generator settings *)
             OptionValue[precisionGoal],
             OptionValue[maxIterations],
@@ -253,7 +253,7 @@ FSTHDMIIMSSMBCSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[AbInput],
             OptionValue[AtauInput],
             OptionValue[LambdaLoopOrder]
-        }] /. HoldPattern[OptionValue[param_]] :> FSTHDMIIMSSMBCCheckIsNumeric[param] /.
+        }] /. HoldPattern[OptionValue[param_]] :> param /.
         { p } /.
         FSTHDMIIMSSMBCGetSettings[handle] /.
         FSTHDMIIMSSMBCGetSMInputParameters[handle] /.

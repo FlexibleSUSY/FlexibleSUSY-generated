@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 12 Apr 2017 11:24:14
+// File generated at Tue 5 Sep 2017 10:42:15
 
 #include "SM_effective_couplings.hpp"
 
@@ -228,19 +228,19 @@ std::complex<double> SM_effective_couplings::CpFdhhbarFdPL(unsigned gt1, unsigne
 
    std::complex<double> result;
 
-   std::complex<double> tmp_500;
-   std::complex<double> tmp_501;
+   std::complex<double> tmp_495;
+   std::complex<double> tmp_496;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
-      std::complex<double> tmp_502;
-      std::complex<double> tmp_503;
+      std::complex<double> tmp_497;
+      std::complex<double> tmp_498;
       for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_503 += Conj(Ud(gt3,j1))*Yd(j1,j2);
+         tmp_498 += Conj(Ud(gt3,j1))*Yd(j1,j2);
       }
-      tmp_502 += tmp_503;
-      tmp_501 += (Conj(Vd(gt1,j2))) * tmp_502;
+      tmp_497 += tmp_498;
+      tmp_496 += (Conj(Vd(gt1,j2))) * tmp_497;
    }
-   tmp_500 += tmp_501;
-   result += (-0.7071067811865475) * tmp_500;
+   tmp_495 += tmp_496;
+   result += (-0.7071067811865475) * tmp_495;
 
    return result;
 }
@@ -251,19 +251,19 @@ std::complex<double> SM_effective_couplings::CpFuhhbarFuPL(unsigned gt1, unsigne
 
    std::complex<double> result;
 
-   std::complex<double> tmp_504;
-   std::complex<double> tmp_505;
+   std::complex<double> tmp_499;
+   std::complex<double> tmp_500;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
-      std::complex<double> tmp_506;
-      std::complex<double> tmp_507;
+      std::complex<double> tmp_501;
+      std::complex<double> tmp_502;
       for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_507 += Conj(Uu(gt3,j1))*Yu(j1,j2);
+         tmp_502 += Conj(Uu(gt3,j1))*Yu(j1,j2);
       }
-      tmp_506 += tmp_507;
-      tmp_505 += (Conj(Vu(gt1,j2))) * tmp_506;
+      tmp_501 += tmp_502;
+      tmp_500 += (Conj(Vu(gt1,j2))) * tmp_501;
    }
-   tmp_504 += tmp_505;
-   result += (0.7071067811865475) * tmp_504;
+   tmp_499 += tmp_500;
+   result += (-0.7071067811865475) * tmp_499;
 
    return result;
 }
@@ -274,19 +274,19 @@ std::complex<double> SM_effective_couplings::CpFehhbarFePL(unsigned gt1, unsigne
 
    std::complex<double> result;
 
-   std::complex<double> tmp_508;
-   std::complex<double> tmp_509;
+   std::complex<double> tmp_503;
+   std::complex<double> tmp_504;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
-      std::complex<double> tmp_510;
-      std::complex<double> tmp_511;
+      std::complex<double> tmp_505;
+      std::complex<double> tmp_506;
       for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_511 += Conj(Ue(gt3,j1))*Ye(j1,j2);
+         tmp_506 += Conj(Ue(gt3,j1))*Ye(j1,j2);
       }
-      tmp_510 += tmp_511;
-      tmp_509 += (Conj(Ve(gt1,j2))) * tmp_510;
+      tmp_505 += tmp_506;
+      tmp_504 += (Conj(Ve(gt1,j2))) * tmp_505;
    }
-   tmp_508 += tmp_509;
-   result += (-0.7071067811865475) * tmp_508;
+   tmp_503 += tmp_504;
+   result += (-0.7071067811865475) * tmp_503;
 
    return result;
 }
@@ -309,19 +309,19 @@ std::complex<double> SM_effective_couplings::CpAhFdbarFdPL(unsigned gt2, unsigne
 
    std::complex<double> result;
 
-   std::complex<double> tmp_512;
-   std::complex<double> tmp_513;
+   std::complex<double> tmp_507;
+   std::complex<double> tmp_508;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
-      std::complex<double> tmp_514;
-      std::complex<double> tmp_515;
+      std::complex<double> tmp_509;
+      std::complex<double> tmp_510;
       for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_515 += Conj(Ud(gt3,j1))*Yd(j1,j2);
+         tmp_510 += Conj(Ud(gt3,j1))*Yd(j1,j2);
       }
-      tmp_514 += tmp_515;
-      tmp_513 += (Conj(Vd(gt2,j2))) * tmp_514;
+      tmp_509 += tmp_510;
+      tmp_508 += (Conj(Vd(gt2,j2))) * tmp_509;
    }
-   tmp_512 += tmp_513;
-   result += (std::complex<double>(0.,0.7071067811865475)) * tmp_512;
+   tmp_507 += tmp_508;
+   result += (std::complex<double>(0.,0.7071067811865475)) * tmp_507;
 
    return result;
 }
@@ -332,19 +332,19 @@ std::complex<double> SM_effective_couplings::CpAhFubarFuPL(unsigned gt2, unsigne
 
    std::complex<double> result;
 
-   std::complex<double> tmp_516;
-   std::complex<double> tmp_517;
+   std::complex<double> tmp_511;
+   std::complex<double> tmp_512;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
-      std::complex<double> tmp_518;
-      std::complex<double> tmp_519;
+      std::complex<double> tmp_513;
+      std::complex<double> tmp_514;
       for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_519 += Conj(Uu(gt3,j1))*Yu(j1,j2);
+         tmp_514 += Conj(Uu(gt3,j1))*Yu(j1,j2);
       }
-      tmp_518 += tmp_519;
-      tmp_517 += (Conj(Vu(gt2,j2))) * tmp_518;
+      tmp_513 += tmp_514;
+      tmp_512 += (Conj(Vu(gt2,j2))) * tmp_513;
    }
-   tmp_516 += tmp_517;
-   result += (std::complex<double>(0.,0.7071067811865475)) * tmp_516;
+   tmp_511 += tmp_512;
+   result += (std::complex<double>(0.,-0.7071067811865475)) * tmp_511;
 
    return result;
 }
@@ -355,19 +355,19 @@ std::complex<double> SM_effective_couplings::CpAhFebarFePL(unsigned gt2, unsigne
 
    std::complex<double> result;
 
-   std::complex<double> tmp_520;
-   std::complex<double> tmp_521;
+   std::complex<double> tmp_515;
+   std::complex<double> tmp_516;
    for (unsigned j2 = 0; j2 < 3; ++j2) {
-      std::complex<double> tmp_522;
-      std::complex<double> tmp_523;
+      std::complex<double> tmp_517;
+      std::complex<double> tmp_518;
       for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_523 += Conj(Ue(gt3,j1))*Ye(j1,j2);
+         tmp_518 += Conj(Ue(gt3,j1))*Ye(j1,j2);
       }
-      tmp_522 += tmp_523;
-      tmp_521 += (Conj(Ve(gt2,j2))) * tmp_522;
+      tmp_517 += tmp_518;
+      tmp_516 += (Conj(Ve(gt2,j2))) * tmp_517;
    }
-   tmp_520 += tmp_521;
-   result += (std::complex<double>(0.,0.7071067811865475)) * tmp_520;
+   tmp_515 += tmp_516;
+   result += (std::complex<double>(0.,0.7071067811865475)) * tmp_515;
 
    return result;
 }

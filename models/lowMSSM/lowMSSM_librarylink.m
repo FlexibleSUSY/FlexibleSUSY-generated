@@ -259,7 +259,7 @@ FSlowMSSMSet[handle_Integer, a___, (fsSettings | fsSMParameters | fsModelParamet
 FSlowMSSMSet[handle_Integer, p:OptionsPattern[]] :=
     FSlowMSSMSetLib[
         handle,
-        ReleaseHold[Hold[{
+        ReleaseHold[Hold[FSlowMSSMCheckIsNumeric /@ {
             (* spectrum generator settings *)
             OptionValue[precisionGoal],
             OptionValue[maxIterations],
@@ -396,7 +396,7 @@ FSlowMSSMSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[MassBInput],
             OptionValue[MassWBInput],
             OptionValue[MassGInput]
-        }] /. HoldPattern[OptionValue[param_]] :> FSlowMSSMCheckIsNumeric[param] /.
+        }] /. HoldPattern[OptionValue[param_]] :> param /.
         { p } /.
         FSlowMSSMGetSettings[handle] /.
         FSlowMSSMGetSMInputParameters[handle] /.

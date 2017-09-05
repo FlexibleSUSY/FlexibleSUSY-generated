@@ -179,7 +179,7 @@ FSNMSSMSet[handle_Integer, a___, (fsSettings | fsSMParameters | fsModelParameter
 FSNMSSMSet[handle_Integer, p:OptionsPattern[]] :=
     FSNMSSMSetLib[
         handle,
-        ReleaseHold[Hold[{
+        ReleaseHold[Hold[FSNMSSMCheckIsNumeric /@ {
             (* spectrum generator settings *)
             OptionValue[precisionGoal],
             OptionValue[maxIterations],
@@ -244,7 +244,7 @@ FSNMSSMSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[SignvS],
             OptionValue[Azero],
             OptionValue[LambdaInput]
-        }] /. HoldPattern[OptionValue[param_]] :> FSNMSSMCheckIsNumeric[param] /.
+        }] /. HoldPattern[OptionValue[param_]] :> param /.
         { p } /.
         FSNMSSMGetSettings[handle] /.
         FSNMSSMGetSMInputParameters[handle] /.

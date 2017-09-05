@@ -223,7 +223,7 @@ FSlowNMSSMSet[handle_Integer, a___, (fsSettings | fsSMParameters | fsModelParame
 FSlowNMSSMSet[handle_Integer, p:OptionsPattern[]] :=
     FSlowNMSSMSetLib[
         handle,
-        ReleaseHold[Hold[{
+        ReleaseHold[Hold[FSlowNMSSMCheckIsNumeric /@ {
             (* spectrum generator settings *)
             OptionValue[precisionGoal],
             OptionValue[maxIterations],
@@ -310,7 +310,7 @@ FSlowNMSSMSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[ALambdaInput],
             OptionValue[AKappaInput],
             OptionValue[MuEffInput]
-        }] /. HoldPattern[OptionValue[param_]] :> FSlowNMSSMCheckIsNumeric[param] /.
+        }] /. HoldPattern[OptionValue[param_]] :> param /.
         { p } /.
         FSlowNMSSMGetSettings[handle] /.
         FSlowNMSSMGetSMInputParameters[handle] /.

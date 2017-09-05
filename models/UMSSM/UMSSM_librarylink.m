@@ -199,7 +199,7 @@ FSUMSSMSet[handle_Integer, a___, (fsSettings | fsSMParameters | fsModelParameter
 FSUMSSMSet[handle_Integer, p:OptionsPattern[]] :=
     FSUMSSMSetLib[
         handle,
-        ReleaseHold[Hold[{
+        ReleaseHold[Hold[FSUMSSMCheckIsNumeric /@ {
             (* spectrum generator settings *)
             OptionValue[precisionGoal],
             OptionValue[maxIterations],
@@ -274,7 +274,7 @@ FSUMSSMSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[Qe],
             OptionValue[Qs],
             OptionValue[Qv]
-        }] /. HoldPattern[OptionValue[param_]] :> FSUMSSMCheckIsNumeric[param] /.
+        }] /. HoldPattern[OptionValue[param_]] :> param /.
         { p } /.
         FSUMSSMGetSettings[handle] /.
         FSUMSSMGetSMInputParameters[handle] /.

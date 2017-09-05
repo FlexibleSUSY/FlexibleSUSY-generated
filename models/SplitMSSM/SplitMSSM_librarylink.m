@@ -237,7 +237,7 @@ FSSplitMSSMSet[handle_Integer, a___, (fsSettings | fsSMParameters | fsModelParam
 FSSplitMSSMSet[handle_Integer, p:OptionsPattern[]] :=
     FSSplitMSSMSetLib[
         handle,
-        ReleaseHold[Hold[{
+        ReleaseHold[Hold[FSSplitMSSMCheckIsNumeric /@ {
             (* spectrum generator settings *)
             OptionValue[precisionGoal],
             OptionValue[maxIterations],
@@ -351,7 +351,7 @@ FSSplitMSSMSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[mse2][[3,1]],
             OptionValue[mse2][[3,2]],
             OptionValue[mse2][[3,3]]
-        }] /. HoldPattern[OptionValue[param_]] :> FSSplitMSSMCheckIsNumeric[param] /.
+        }] /. HoldPattern[OptionValue[param_]] :> param /.
         { p } /.
         FSSplitMSSMGetSettings[handle] /.
         FSSplitMSSMGetSMInputParameters[handle] /.

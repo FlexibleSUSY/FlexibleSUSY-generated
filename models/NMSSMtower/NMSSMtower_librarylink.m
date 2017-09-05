@@ -267,7 +267,7 @@ FSNMSSMtowerSet[handle_Integer, a___, (fsSettings | fsSMParameters | fsModelPara
 FSNMSSMtowerSet[handle_Integer, p:OptionsPattern[]] :=
     FSNMSSMtowerSetLib[
         handle,
-        ReleaseHold[Hold[{
+        ReleaseHold[Hold[FSNMSSMtowerCheckIsNumeric /@ {
             (* spectrum generator settings *)
             OptionValue[precisionGoal],
             OptionValue[maxIterations],
@@ -408,7 +408,7 @@ FSNMSSMtowerSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[AeInput][[3,1]],
             OptionValue[AeInput][[3,2]],
             OptionValue[AeInput][[3,3]]
-        }] /. HoldPattern[OptionValue[param_]] :> FSNMSSMtowerCheckIsNumeric[param] /.
+        }] /. HoldPattern[OptionValue[param_]] :> param /.
         { p } /.
         FSNMSSMtowerGetSettings[handle] /.
         FSNMSSMtowerGetSMInputParameters[handle] /.

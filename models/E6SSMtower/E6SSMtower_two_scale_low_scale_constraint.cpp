@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 12 Apr 2017 11:27:30
+// File generated at Tue 5 Sep 2017 10:45:18
 
 #include "E6SSMtower_two_scale_low_scale_constraint.hpp"
 #include "E6SSMtower_two_scale_model.hpp"
@@ -284,7 +284,6 @@ double E6SSMtower_low_scale_constraint<Two_scale>::calculate_theta_w(double alph
    const double gY            = MODEL->get_g1() * 0.7745966692414834;
    const double g2            = MODEL->get_g2();
    const double g3            = MODEL->get_g3();
-   const double ymu           = Re(MODEL->get_Ye(1,1));
    const double hmix_12       = MODEL->get_ZH(0,1);
    const double tanBeta       = MODEL->get_vu() / MODEL->get_vd();
    const double mselL         = AbsSqr(ZE(0,0))*MSe(0) + AbsSqr(ZE(1,0))*MSe(1)
@@ -350,7 +349,6 @@ double E6SSMtower_low_scale_constraint<Two_scale>::calculate_theta_w(double alph
    data.g2                  = g2;
    data.g3                  = g3;
    data.tan_beta            = tanBeta;
-   data.ymu                 = ymu;
 
    Weinberg_angle weinberg;
    weinberg.enable_susy_contributions();

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 12 Apr 2017 11:20:49
+// File generated at Tue 5 Sep 2017 10:38:58
 
 #include "HSSUSY_two_scale_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -92,7 +92,7 @@ Eigen::Matrix<double,3,3> HSSUSY_susy_parameters::calc_beta_Ye_three_loop(const 
 
    Eigen::Matrix<double,3,3> beta_Ye;
 
-   beta_Ye = ZEROMATRIX(3,3);
+   beta_Ye = (ZEROMATRIX(3,3)).real();
 
 
    return beta_Ye;

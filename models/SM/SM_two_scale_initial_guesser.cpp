@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 12 Apr 2017 11:22:05
+// File generated at Tue 5 Sep 2017 10:40:07
 
 #include "SM_two_scale_initial_guesser.hpp"
 #include "SM_two_scale_model.hpp"
@@ -158,7 +158,7 @@ void SM_initial_guesser<Two_scale>::calculate_Yu_DRbar()
    upQuarksDRbar(2,2) = mt_guess;
 
    const auto v = MODELPARAMETER(v);
-   MODEL->set_Yu((-((1.4142135623730951*upQuarksDRbar)/v).transpose()).real());
+   MODEL->set_Yu((((1.4142135623730951*upQuarksDRbar)/v).transpose()).real());
 
 }
 

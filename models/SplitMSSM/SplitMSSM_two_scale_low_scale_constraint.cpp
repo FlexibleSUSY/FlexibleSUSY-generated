@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 12 Apr 2017 11:14:36
+// File generated at Tue 5 Sep 2017 10:32:39
 
 #include "SplitMSSM_two_scale_low_scale_constraint.hpp"
 #include "SplitMSSM_two_scale_model.hpp"
@@ -294,7 +294,6 @@ double SplitMSSM_low_scale_constraint<Two_scale>::calculate_theta_w(double alpha
    const double gY            = MODEL->get_g1() * 0.7745966692414834;
    const double g2            = MODEL->get_g2();
    const double g3            = MODEL->get_g3();
-   const double ymu           = Re(MODEL->get_Ye(1,1));
    const double pizztMZ       = Re(MODEL->self_energy_VZ(mz_pole));
    const double piwwt0        = Re(MODEL->self_energy_VWp(0.));
    self_energy_w_at_mw        = Re(MODEL->self_energy_VWp(mw_pole));
@@ -337,7 +336,6 @@ double SplitMSSM_low_scale_constraint<Two_scale>::calculate_theta_w(double alpha
    data.gY                  = gY;
    data.g2                  = g2;
    data.g3                  = g3;
-   data.ymu                 = ymu;
 
    Weinberg_angle weinberg;
    weinberg.disable_susy_contributions();

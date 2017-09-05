@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 12 Apr 2017 10:47:13
+// File generated at Tue 5 Sep 2017 10:05:23
 
 #ifndef NMSSMtower_EFFECTIVE_COUPLINGS_H
 #define NMSSMtower_EFFECTIVE_COUPLINGS_H

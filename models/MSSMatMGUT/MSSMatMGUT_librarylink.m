@@ -261,7 +261,7 @@ FSMSSMatMGUTSet[handle_Integer, a___, (fsSettings | fsSMParameters | fsModelPara
 FSMSSMatMGUTSet[handle_Integer, p:OptionsPattern[]] :=
     FSMSSMatMGUTSetLib[
         handle,
-        ReleaseHold[Hold[{
+        ReleaseHold[Hold[FSMSSMatMGUTCheckIsNumeric /@ {
             (* spectrum generator settings *)
             OptionValue[precisionGoal],
             OptionValue[maxIterations],
@@ -399,7 +399,7 @@ FSMSSMatMGUTSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[MassBInput],
             OptionValue[MassWBInput],
             OptionValue[MassGInput]
-        }] /. HoldPattern[OptionValue[param_]] :> FSMSSMatMGUTCheckIsNumeric[param] /.
+        }] /. HoldPattern[OptionValue[param_]] :> param /.
         { p } /.
         FSMSSMatMGUTGetSettings[handle] /.
         FSMSSMatMGUTGetSMInputParameters[handle] /.
