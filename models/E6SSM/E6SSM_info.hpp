@@ -16,34 +16,38 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 11:09:15
+// File generated at Tue 10 Oct 2017 22:58:56
 
 #ifndef E6SSM_INFO_H
 #define E6SSM_INFO_H
 
+#include "problems.hpp"
+
+#include <array>
 #include <iosfwd>
+#include <string>
 
 namespace flexiblesusy {
 
 namespace E6SSM_info {
-   enum Particles : unsigned {VG, Glu, Fv, ChaP, Sd, Sv, Su, Se, SDX, hh, Ah,
-      Hpm, Chi, Cha, Fe, Fd, Fu, FDX, SHI0, SHIp, ChaI, ChiI, SSI0, FSI, SHp0,
-      SHpp, ChiP, VWm, VP, VZ, VZp, NUMBER_OF_PARTICLES};
+   enum Particles : int { VG, Glu, Fv, ChaP, Sd, Sv, Su, Se, SDX, hh, Ah, Hpm,
+      Chi, Cha, Fe, Fd, Fu, FDX, SHI0, SHIp, ChaI, ChiI, SSI0, FSI, SHp0, SHpp,
+      ChiP, VWm, VP, VZ, VZp, NUMBER_OF_PARTICLES };
 
-   enum Masses : unsigned {MVG, MGlu, MFv_1, MFv_2, MFv_3, MChaP, MSd_1, MSd_2,
-      MSd_3, MSd_4, MSd_5, MSd_6, MSv_1, MSv_2, MSv_3, MSu_1, MSu_2, MSu_3, MSu_4
-      , MSu_5, MSu_6, MSe_1, MSe_2, MSe_3, MSe_4, MSe_5, MSe_6, MSDX_1, MSDX_2,
+   enum Masses : int { MVG, MGlu, MFv_1, MFv_2, MFv_3, MChaP, MSd_1, MSd_2,
+      MSd_3, MSd_4, MSd_5, MSd_6, MSv_1, MSv_2, MSv_3, MSu_1, MSu_2, MSu_3, MSu_4,
+      MSu_5, MSu_6, MSe_1, MSe_2, MSe_3, MSe_4, MSe_5, MSe_6, MSDX_1, MSDX_2,
       MSDX_3, MSDX_4, MSDX_5, MSDX_6, Mhh_1, Mhh_2, Mhh_3, MAh_1, MAh_2, MAh_3,
       MHpm_1, MHpm_2, MChi_1, MChi_2, MChi_3, MChi_4, MChi_5, MChi_6, MCha_1,
       MCha_2, MFe_1, MFe_2, MFe_3, MFd_1, MFd_2, MFd_3, MFu_1, MFu_2, MFu_3,
       MFDX_1, MFDX_2, MFDX_3, MSHI0_1, MSHI0_2, MSHI0_3, MSHI0_4, MSHIp_1, MSHIp_2
       , MSHIp_3, MSHIp_4, MChaI_1, MChaI_2, MChiI_1, MChiI_2, MChiI_3, MChiI_4,
       MSSI0_1, MSSI0_2, MFSI_1, MFSI_2, MSHp0_1, MSHp0_2, MSHpp_1, MSHpp_2,
-      MChiP_1, MChiP_2, MVWm, MVP, MVZ, MVZp, NUMBER_OF_MASSES};
+      MChiP_1, MChiP_2, MVWm, MVP, MVZ, MVZp, NUMBER_OF_MASSES };
 
-   enum Parameters : unsigned {Yd0_0, Yd0_1, Yd0_2, Yd1_0, Yd1_1, Yd1_2, Yd2_0,
-      Yd2_1, Yd2_2, Ye0_0, Ye0_1, Ye0_2, Ye1_0, Ye1_1, Ye1_2, Ye2_0, Ye2_1, Ye2_2
-      , Kappa0_0, Kappa0_1, Kappa0_2, Kappa1_0, Kappa1_1, Kappa1_2, Kappa2_0,
+   enum Parameters : int { Yd0_0, Yd0_1, Yd0_2, Yd1_0, Yd1_1, Yd1_2, Yd2_0,
+      Yd2_1, Yd2_2, Ye0_0, Ye0_1, Ye0_2, Ye1_0, Ye1_1, Ye1_2, Ye2_0, Ye2_1, Ye2_2,
+      Kappa0_0, Kappa0_1, Kappa0_2, Kappa1_0, Kappa1_1, Kappa1_2, Kappa2_0,
       Kappa2_1, Kappa2_2, Lambda120_0, Lambda120_1, Lambda121_0, Lambda121_1,
       Lambdax, Yu0_0, Yu0_1, Yu0_2, Yu1_0, Yu1_1, Yu1_2, Yu2_0, Yu2_1, Yu2_2, MuPr
       , g1, g2, g3, gN, vd, vu, vs, TYd0_0, TYd0_1, TYd0_2, TYd1_0, TYd1_1, TYd1_2
@@ -62,21 +66,21 @@ namespace E6SSM_info {
       mDx21_0, mDx21_1, mDx21_2, mDx22_0, mDx22_1, mDx22_2, mDxbar20_0, mDxbar20_1
       , mDxbar20_2, mDxbar21_0, mDxbar21_1, mDxbar21_2, mDxbar22_0, mDxbar22_1,
       mDxbar22_2, mHp2, mHpbar2, MassB, MassWB, MassG, MassBp,
-      NUMBER_OF_PARAMETERS};
+      NUMBER_OF_PARAMETERS };
 
-   enum Mixings : unsigned {ZD0_0, ZD0_1, ZD0_2, ZD0_3, ZD0_4, ZD0_5, ZD1_0,
-      ZD1_1, ZD1_2, ZD1_3, ZD1_4, ZD1_5, ZD2_0, ZD2_1, ZD2_2, ZD2_3, ZD2_4, ZD2_5,
-      ZD3_0, ZD3_1, ZD3_2, ZD3_3, ZD3_4, ZD3_5, ZD4_0, ZD4_1, ZD4_2, ZD4_3, ZD4_4
-      , ZD4_5, ZD5_0, ZD5_1, ZD5_2, ZD5_3, ZD5_4, ZD5_5, ZV0_0, ZV0_1, ZV0_2,
-      ZV1_0, ZV1_1, ZV1_2, ZV2_0, ZV2_1, ZV2_2, ZU0_0, ZU0_1, ZU0_2, ZU0_3, ZU0_4,
-      ZU0_5, ZU1_0, ZU1_1, ZU1_2, ZU1_3, ZU1_4, ZU1_5, ZU2_0, ZU2_1, ZU2_2, ZU2_3
-      , ZU2_4, ZU2_5, ZU3_0, ZU3_1, ZU3_2, ZU3_3, ZU3_4, ZU3_5, ZU4_0, ZU4_1,
-      ZU4_2, ZU4_3, ZU4_4, ZU4_5, ZU5_0, ZU5_1, ZU5_2, ZU5_3, ZU5_4, ZU5_5, ZE0_0,
-      ZE0_1, ZE0_2, ZE0_3, ZE0_4, ZE0_5, ZE1_0, ZE1_1, ZE1_2, ZE1_3, ZE1_4, ZE1_5
-      , ZE2_0, ZE2_1, ZE2_2, ZE2_3, ZE2_4, ZE2_5, ZE3_0, ZE3_1, ZE3_2, ZE3_3,
-      ZE3_4, ZE3_5, ZE4_0, ZE4_1, ZE4_2, ZE4_3, ZE4_4, ZE4_5, ZE5_0, ZE5_1, ZE5_2,
-      ZE5_3, ZE5_4, ZE5_5, ZDX0_0, ZDX0_1, ZDX0_2, ZDX0_3, ZDX0_4, ZDX0_5, ZDX1_0
-      , ZDX1_1, ZDX1_2, ZDX1_3, ZDX1_4, ZDX1_5, ZDX2_0, ZDX2_1, ZDX2_2, ZDX2_3,
+   enum Mixings : int { ZD0_0, ZD0_1, ZD0_2, ZD0_3, ZD0_4, ZD0_5, ZD1_0, ZD1_1,
+      ZD1_2, ZD1_3, ZD1_4, ZD1_5, ZD2_0, ZD2_1, ZD2_2, ZD2_3, ZD2_4, ZD2_5, ZD3_0
+      , ZD3_1, ZD3_2, ZD3_3, ZD3_4, ZD3_5, ZD4_0, ZD4_1, ZD4_2, ZD4_3, ZD4_4,
+      ZD4_5, ZD5_0, ZD5_1, ZD5_2, ZD5_3, ZD5_4, ZD5_5, ZV0_0, ZV0_1, ZV0_2, ZV1_0,
+      ZV1_1, ZV1_2, ZV2_0, ZV2_1, ZV2_2, ZU0_0, ZU0_1, ZU0_2, ZU0_3, ZU0_4, ZU0_5
+      , ZU1_0, ZU1_1, ZU1_2, ZU1_3, ZU1_4, ZU1_5, ZU2_0, ZU2_1, ZU2_2, ZU2_3,
+      ZU2_4, ZU2_5, ZU3_0, ZU3_1, ZU3_2, ZU3_3, ZU3_4, ZU3_5, ZU4_0, ZU4_1, ZU4_2,
+      ZU4_3, ZU4_4, ZU4_5, ZU5_0, ZU5_1, ZU5_2, ZU5_3, ZU5_4, ZU5_5, ZE0_0, ZE0_1
+      , ZE0_2, ZE0_3, ZE0_4, ZE0_5, ZE1_0, ZE1_1, ZE1_2, ZE1_3, ZE1_4, ZE1_5,
+      ZE2_0, ZE2_1, ZE2_2, ZE2_3, ZE2_4, ZE2_5, ZE3_0, ZE3_1, ZE3_2, ZE3_3, ZE3_4,
+      ZE3_5, ZE4_0, ZE4_1, ZE4_2, ZE4_3, ZE4_4, ZE4_5, ZE5_0, ZE5_1, ZE5_2, ZE5_3
+      , ZE5_4, ZE5_5, ZDX0_0, ZDX0_1, ZDX0_2, ZDX0_3, ZDX0_4, ZDX0_5, ZDX1_0,
+      ZDX1_1, ZDX1_2, ZDX1_3, ZDX1_4, ZDX1_5, ZDX2_0, ZDX2_1, ZDX2_2, ZDX2_3,
       ZDX2_4, ZDX2_5, ZDX3_0, ZDX3_1, ZDX3_2, ZDX3_3, ZDX3_4, ZDX3_5, ZDX4_0,
       ZDX4_1, ZDX4_2, ZDX4_3, ZDX4_4, ZDX4_5, ZDX5_0, ZDX5_1, ZDX5_2, ZDX5_3,
       ZDX5_4, ZDX5_5, ZH0_0, ZH0_1, ZH0_2, ZH1_0, ZH1_1, ZH1_2, ZH2_0, ZH2_1,
@@ -128,30 +132,59 @@ namespace E6SSM_info {
       ReZFSI1_1, ImZFSI1_1, UHp00_0, UHp00_1, UHp01_0, UHp01_1, UHpp0_0, UHpp0_1,
       UHpp1_0, UHpp1_1, ReZNp0_0, ImZNp0_0, ReZNp0_1, ImZNp0_1, ReZNp1_0, ImZNp1_0
       , ReZNp1_1, ImZNp1_1, ZZ0_0, ZZ0_1, ZZ0_2, ZZ1_0, ZZ1_1, ZZ1_2, ZZ2_0, ZZ2_1
-      , ZZ2_2, NUMBER_OF_MIXINGS};
+      , ZZ2_2, NUMBER_OF_MIXINGS };
 
-   enum Input_parameters : unsigned {m0, m12, TanBeta, Azero, LambdaInput,
+   enum Input_parameters : int { m0, m12, TanBeta, Azero, LambdaInput,
       KappaInput, muPrimeInput, BmuPrimeInput, vSInput, Lambda12Input,
-      NUMBER_OF_INPUT_PARAMETERS};
+      NUMBER_OF_INPUT_PARAMETERS };
+
+   enum Extra_parameters : int { NUMBER_OF_EXTRA_PARAMETERS };
 
    extern const double normalization_g1;
    extern const double normalization_g2;
    extern const double normalization_g3;
    extern const double normalization_gN;
 
-   extern const unsigned particle_multiplicities[NUMBER_OF_PARTICLES];
-   extern const char* particle_names[NUMBER_OF_PARTICLES];
-   extern const char* particle_latex_names[NUMBER_OF_PARTICLES];
-   extern const char* parameter_names[NUMBER_OF_PARAMETERS];
-   extern const char* particle_mixing_names[NUMBER_OF_MIXINGS];
-   extern const char* input_parameter_names[NUMBER_OF_INPUT_PARAMETERS];
-   extern const char* model_name;
+   extern const std::array<int, NUMBER_OF_PARTICLES> particle_multiplicities;
+   extern const std::array<std::string, NUMBER_OF_PARTICLES> particle_names;
+   extern const std::array<std::string, NUMBER_OF_PARTICLES> particle_latex_names;
+   extern const std::array<std::string, NUMBER_OF_PARAMETERS> parameter_names;
+   extern const std::array<std::string, NUMBER_OF_MIXINGS> particle_mixing_names;
+   extern const std::array<std::string, NUMBER_OF_INPUT_PARAMETERS> input_parameter_names;
+   extern const std::array<std::string, NUMBER_OF_EXTRA_PARAMETERS> extra_parameter_names;
+   extern const std::string model_name;
    constexpr bool is_low_energy_model = false;
    constexpr bool is_supersymmetric_model = true;
    constexpr bool is_FlexibleEFTHiggs = false;
 
    void print(std::ostream&);
-}
+
+   class E6SSM_particle_names : public Names {
+   public:
+      virtual ~E6SSM_particle_names() = default;
+      virtual const std::string& get(int index) const override {
+         return particle_names[index];
+      }
+      virtual int size() const override {
+         return NUMBER_OF_PARTICLES;
+      }
+   };
+
+   class E6SSM_parameter_names : public Names {
+   public:
+      virtual ~E6SSM_parameter_names() = default;
+      virtual const std::string& get(int index) const override {
+         return parameter_names[index];
+      }
+      virtual int size() const override {
+         return NUMBER_OF_PARAMETERS;
+      }
+   };
+
+   const E6SSM_particle_names  particle_names_getter{};
+   const E6SSM_parameter_names parameter_names_getter{};
+
+} // namespace E6SSM_info
 
 } // namespace flexiblesusy
 

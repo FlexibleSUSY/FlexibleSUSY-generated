@@ -16,14 +16,14 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 10:40:06
+// File generated at Tue 10 Oct 2017 21:19:51
 
 #ifndef SM_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
 #define SM_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
 
 #include "SM_susy_scale_constraint.hpp"
 #include "SM_input_parameters.hpp"
-#include "two_scale_constraint.hpp"
+#include "single_scale_constraint.hpp"
 #include "lowe.h"
 
 namespace flexiblesusy {
@@ -34,14 +34,15 @@ class SM;
 class Two_scale;
 
 template<>
-class SM_susy_scale_constraint<Two_scale> : public Constraint<Two_scale> {
+class SM_susy_scale_constraint<Two_scale> : public Single_scale_constraint {
 public:
-   SM_susy_scale_constraint();
+   SM_susy_scale_constraint() = default;
    SM_susy_scale_constraint(SM<Two_scale>*, const softsusy::QedQcd&);
-   virtual ~SM_susy_scale_constraint();
-   virtual void apply();
-   virtual double get_scale() const;
-   virtual void set_model(Two_scale_model*);
+   virtual ~SM_susy_scale_constraint() = default;
+   virtual void apply() override;
+   virtual double get_scale() const override;
+   virtual std::string name() const override { return "SM SUSY-scale constraint"; }
+   virtual void set_model(Model*) override;
 
    void clear();
    double get_initial_scale_guess() const;
@@ -55,10 +56,12 @@ protected:
    void update_scale();
 
 private:
-   double scale;
-   double initial_scale_guess;
-   SM<Two_scale>* model;
-   softsusy::QedQcd qedqcd;
+   double scale{0.};
+   double initial_scale_guess{0.};
+   SM<Two_scale>* model{nullptr};
+   softsusy::QedQcd qedqcd{};
+
+   void check_model_ptr() const;
 };
 
 } // namespace flexiblesusy

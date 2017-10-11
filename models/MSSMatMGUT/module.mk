@@ -8,15 +8,18 @@ MSSMatMGUT_INSTALL_DIR := $(INSTALL_DIR)/$(DIR)
 MSSMatMGUT_MK     := \
 		$(DIR)/module.mk
 
-MSSMatMGUT_TWO_SCALE_SUSY_MK := \
-		$(DIR)/two_scale_susy.mk
+MSSMatMGUT_SUSY_BETAS_MK := \
+		$(DIR)/susy_betas.mk
 
-MSSMatMGUT_TWO_SCALE_SOFT_MK := \
-		$(DIR)/two_scale_soft.mk
+MSSMatMGUT_SOFT_BETAS_MK := \
+		$(DIR)/soft_betas.mk
 
-MSSMatMGUT_TWO_SCALE_MK := \
-		$(MSSMatMGUT_TWO_SCALE_SUSY_MK) \
-		$(MSSMatMGUT_TWO_SCALE_SOFT_MK)
+MSSMatMGUT_FlexibleEFTHiggs_MK := \
+		$(DIR)/FlexibleEFTHiggs.mk
+
+MSSMatMGUT_INCLUDE_MK := \
+		$(MSSMatMGUT_SUSY_BETAS_MK) \
+		$(MSSMatMGUT_SOFT_BETAS_MK)
 
 MSSMatMGUT_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.MSSMatMGUT_generated \
@@ -29,91 +32,89 @@ MSSMatMGUT_GNUPLOT := \
 MSSMatMGUT_TARBALL := \
 		$(MODNAME).tar.gz
 
-LIBMSSMatMGUT_SRC :=
-EXEMSSMatMGUT_SRC :=
-LLMSSMatMGUT_LIB  :=
-LLMSSMatMGUT_OBJ  :=
-LLMSSMatMGUT_SRC  :=
-LLMSSMatMGUT_MMA  :=
-
-LIBMSSMatMGUT_HDR :=
-
-ifneq ($(findstring two_scale,$(ALGORITHMS)),)
-LIBMSSMatMGUT_SRC += \
+LIBMSSMatMGUT_SRC := \
+		$(DIR)/MSSMatMGUT_a_muon.cpp \
+		$(DIR)/MSSMatMGUT_edm.cpp \
 		$(DIR)/MSSMatMGUT_effective_couplings.cpp \
-		$(DIR)/MSSMatMGUT_mass_eigenstates.cpp \
 		$(DIR)/MSSMatMGUT_info.cpp \
 		$(DIR)/MSSMatMGUT_input_parameters.cpp \
+		$(DIR)/MSSMatMGUT_mass_eigenstates.cpp \
 		$(DIR)/MSSMatMGUT_observables.cpp \
-		$(DIR)/MSSMatMGUT_slha_io.cpp \
 		$(DIR)/MSSMatMGUT_physical.cpp \
+		$(DIR)/MSSMatMGUT_slha_io.cpp \
+		$(DIR)/MSSMatMGUT_soft_parameters.cpp \
+		$(DIR)/MSSMatMGUT_susy_parameters.cpp \
 		$(DIR)/MSSMatMGUT_utilities.cpp \
-		$(DIR)/MSSMatMGUT_standard_model_matching.cpp \
-		$(DIR)/MSSMatMGUT_standard_model_two_scale_matching.cpp \
-		$(DIR)/MSSMatMGUT_two_scale_convergence_tester.cpp \
-		$(DIR)/MSSMatMGUT_two_scale_high_scale_constraint.cpp \
-		$(DIR)/MSSMatMGUT_two_scale_initial_guesser.cpp \
-		$(DIR)/MSSMatMGUT_two_scale_low_scale_constraint.cpp \
-		$(DIR)/MSSMatMGUT_two_scale_model.cpp \
-		$(DIR)/MSSMatMGUT_two_scale_model_slha.cpp \
-		$(DIR)/MSSMatMGUT_two_scale_susy_parameters.cpp \
-		$(DIR)/MSSMatMGUT_two_scale_soft_parameters.cpp \
-		$(DIR)/MSSMatMGUT_two_scale_susy_scale_constraint.cpp
-EXEMSSMatMGUT_SRC += \
+		$(DIR)/MSSMatMGUT_weinberg_angle.cpp
+
+EXEMSSMatMGUT_SRC := \
 		$(DIR)/run_MSSMatMGUT.cpp \
 		$(DIR)/run_cmd_line_MSSMatMGUT.cpp \
 		$(DIR)/scan_MSSMatMGUT.cpp
-LIBMSSMatMGUT_HDR += \
+LLMSSMatMGUT_LIB  :=
+LLMSSMatMGUT_OBJ  :=
+LLMSSMatMGUT_SRC  := \
+		$(DIR)/MSSMatMGUT_librarylink.cpp
+
+LLMSSMatMGUT_MMA  := \
+		$(DIR)/MSSMatMGUT_librarylink.m \
+		$(DIR)/run_MSSMatMGUT.m
+
+LIBMSSMatMGUT_HDR := \
+		$(DIR)/MSSMatMGUT_cxx_diagrams.hpp \
+		$(DIR)/MSSMatMGUT_a_muon.hpp \
 		$(DIR)/MSSMatMGUT_convergence_tester.hpp \
+		$(DIR)/MSSMatMGUT_edm.hpp \
 		$(DIR)/MSSMatMGUT_effective_couplings.hpp \
+		$(DIR)/MSSMatMGUT_ewsb_solver.hpp \
+		$(DIR)/MSSMatMGUT_ewsb_solver_interface.hpp \
 		$(DIR)/MSSMatMGUT_high_scale_constraint.hpp \
-		$(DIR)/MSSMatMGUT_mass_eigenstates.hpp \
 		$(DIR)/MSSMatMGUT_info.hpp \
 		$(DIR)/MSSMatMGUT_initial_guesser.hpp \
 		$(DIR)/MSSMatMGUT_input_parameters.hpp \
 		$(DIR)/MSSMatMGUT_low_scale_constraint.hpp \
+		$(DIR)/MSSMatMGUT_mass_eigenstates.hpp \
 		$(DIR)/MSSMatMGUT_model.hpp \
 		$(DIR)/MSSMatMGUT_model_slha.hpp \
 		$(DIR)/MSSMatMGUT_observables.hpp \
 		$(DIR)/MSSMatMGUT_physical.hpp \
 		$(DIR)/MSSMatMGUT_slha_io.hpp \
-		$(DIR)/MSSMatMGUT_spectrum_generator_interface.hpp \
 		$(DIR)/MSSMatMGUT_spectrum_generator.hpp \
-		$(DIR)/MSSMatMGUT_standard_model_matching.hpp \
-		$(DIR)/MSSMatMGUT_standard_model_two_scale_matching.hpp \
+		$(DIR)/MSSMatMGUT_spectrum_generator_interface.hpp \
+		$(DIR)/MSSMatMGUT_soft_parameters.hpp \
+		$(DIR)/MSSMatMGUT_susy_parameters.hpp \
 		$(DIR)/MSSMatMGUT_susy_scale_constraint.hpp \
 		$(DIR)/MSSMatMGUT_utilities.hpp \
-		$(DIR)/MSSMatMGUT_two_scale_convergence_tester.hpp \
-		$(DIR)/MSSMatMGUT_two_scale_high_scale_constraint.hpp \
-		$(DIR)/MSSMatMGUT_two_scale_initial_guesser.hpp \
-		$(DIR)/MSSMatMGUT_two_scale_low_scale_constraint.hpp \
-		$(DIR)/MSSMatMGUT_two_scale_model.hpp \
-		$(DIR)/MSSMatMGUT_two_scale_model_slha.hpp \
-		$(DIR)/MSSMatMGUT_two_scale_soft_parameters.hpp \
-		$(DIR)/MSSMatMGUT_two_scale_susy_parameters.hpp \
-		$(DIR)/MSSMatMGUT_two_scale_susy_scale_constraint.hpp
-LLMSSMatMGUT_SRC  += \
-		$(DIR)/MSSMatMGUT_librarylink.cpp
+		$(DIR)/MSSMatMGUT_weinberg_angle.hpp
 
-LLMSSMatMGUT_MMA  += \
-		$(DIR)/MSSMatMGUT_librarylink.m \
-		$(DIR)/run_MSSMatMGUT.m
+ifneq ($(findstring two_scale,$(SOLVERS)),)
+-include $(DIR)/two_scale.mk
+endif
+ifneq ($(findstring lattice,$(SOLVERS)),)
+-include $(DIR)/lattice.mk
+endif
+ifneq ($(findstring semi_analytic,$(SOLVERS)),)
+-include $(DIR)/semi_analytic.mk
+endif
 
 ifneq ($(MAKECMDGOALS),showbuild)
 ifneq ($(MAKECMDGOALS),tag)
 ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
--include $(MSSMatMGUT_TWO_SCALE_SUSY_MK)
--include $(MSSMatMGUT_TWO_SCALE_SOFT_MK)
+-include $(MSSMatMGUT_SUSY_BETAS_MK)
+-include $(MSSMatMGUT_SOFT_BETAS_MK)
+-include $(MSSMatMGUT_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
 ifneq ($(MAKECMDGOALS),pack-$(MODNAME)-src)
 ifeq ($(findstring clean-,$(MAKECMDGOALS)),)
 ifeq ($(findstring distclean-,$(MAKECMDGOALS)),)
 ifeq ($(findstring doc-,$(MAKECMDGOALS)),)
-$(MSSMatMGUT_TWO_SCALE_SUSY_MK): run-metacode-$(MODNAME)
+$(MSSMatMGUT_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
-$(MSSMatMGUT_TWO_SCALE_SOFT_MK): run-metacode-$(MODNAME)
+$(MSSMatMGUT_SOFT_BETAS_MK): run-metacode-$(MODNAME)
+		@$(CONVERT_DOS_PATHS) $@
+$(MSSMatMGUT_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 endif
 endif
@@ -126,9 +127,7 @@ endif
 endif
 endif
 
-endif
-
-# remove duplicates in case all algorithms are used
+# remove duplicates in case all solvers are used
 LIBMSSMatMGUT_SRC := $(sort $(LIBMSSMatMGUT_SRC))
 EXEMSSMatMGUT_SRC := $(sort $(EXEMSSMatMGUT_SRC))
 
@@ -182,7 +181,7 @@ install-src::
 		install -m u=rw,g=r,o=r $(LLMSSMatMGUT_SRC) $(MSSMatMGUT_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLMSSMatMGUT_MMA) $(MSSMatMGUT_INSTALL_DIR)
 		$(INSTALL_STRIPPED) $(MSSMatMGUT_MK) $(MSSMatMGUT_INSTALL_DIR) -m u=rw,g=r,o=r
-		install -m u=rw,g=r,o=r $(MSSMatMGUT_TWO_SCALE_MK) $(MSSMatMGUT_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(MSSMatMGUT_INCLUDE_MK) $(MSSMatMGUT_INSTALL_DIR)
 ifneq ($(MSSMatMGUT_SLHA_INPUT),)
 		install -m u=rw,g=r,o=r $(MSSMatMGUT_SLHA_INPUT) $(MSSMatMGUT_INSTALL_DIR)
 endif
@@ -211,7 +210,7 @@ clean-$(MODNAME)-src:
 		-rm -f $(LLMSSMatMGUT_SRC)
 		-rm -f $(LLMSSMatMGUT_MMA)
 		-rm -f $(METACODE_STAMP_MSSMatMGUT)
-		-rm -f $(MSSMatMGUT_TWO_SCALE_MK)
+		-rm -f $(MSSMatMGUT_INCLUDE_MK)
 		-rm -f $(MSSMatMGUT_SLHA_INPUT)
 		-rm -f $(MSSMatMGUT_GNUPLOT)
 
@@ -237,7 +236,7 @@ pack-$(MODNAME)-src:
 		$(LIBMSSMatMGUT_SRC) $(LIBMSSMatMGUT_HDR) \
 		$(EXEMSSMatMGUT_SRC) \
 		$(LLMSSMatMGUT_SRC) $(LLMSSMatMGUT_MMA) \
-		$(MSSMatMGUT_MK) $(MSSMatMGUT_TWO_SCALE_MK) \
+		$(MSSMatMGUT_MK) $(MSSMatMGUT_INCLUDE_MK) \
 		$(MSSMatMGUT_SLHA_INPUT) $(MSSMatMGUT_GNUPLOT)
 
 $(LIBMSSMatMGUT_SRC) $(LIBMSSMatMGUT_HDR) $(EXEMSSMatMGUT_SRC) $(LLMSSMatMGUT_SRC) $(LLMSSMatMGUT_MMA) \
@@ -261,7 +260,7 @@ $(METACODE_STAMP_MSSMatMGUT):
 endif
 
 $(LIBMSSMatMGUT_DEP) $(EXEMSSMatMGUT_DEP) $(LLMSSMatMGUT_DEP) $(LIBMSSMatMGUT_OBJ) $(EXEMSSMatMGUT_OBJ) $(LLMSSMatMGUT_OBJ) $(LLMSSMatMGUT_LIB): \
-	CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS)
+	CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBMSSMatMGUT_DEP) $(EXEMSSMatMGUT_DEP) $(LLMSSMatMGUT_DEP) $(LIBMSSMatMGUT_OBJ) $(EXEMSSMatMGUT_OBJ) $(LLMSSMatMGUT_OBJ) $(LLMSSMatMGUT_LIB): \
@@ -274,11 +273,11 @@ $(LLMSSMatMGUT_OBJ) $(LLMSSMatMGUT_LIB): \
 $(LIBMSSMatMGUT): $(LIBMSSMatMGUT_OBJ)
 		$(MODULE_MAKE_LIB_CMD) $@ $^
 
-$(DIR)/%.x: $(DIR)/%.o $(LIBMSSMatMGUT) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^ $(ADDONLIBS)) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+$(DIR)/%.x: $(DIR)/%.o $(LIBMSSMatMGUT) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
-$(LLMSSMatMGUT_LIB): $(LLMSSMatMGUT_OBJ) $(LIBMSSMatMGUT) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+$(LLMSSMatMGUT_LIB): $(LLMSSMatMGUT_OBJ) $(LIBMSSMatMGUT) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBMSSMatMGUT_DEP) $(EXEMSSMatMGUT_DEP)
 ALLSRC += $(LIBMSSMatMGUT_SRC) $(EXEMSSMatMGUT_SRC)

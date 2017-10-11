@@ -16,26 +16,31 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 10:45:19
+// File generated at Tue 10 Oct 2017 21:40:22
 
 #include "MRSSM_two_scale_low_scale_constraint.hpp"
 #include "MRSSM_two_scale_model.hpp"
+#include "MRSSM_info.hpp"
+#include "MRSSM_weinberg_angle.hpp"
 #include "wrappers.hpp"
 #include "logger.hpp"
+#include "error.hpp"
 #include "ew_input.hpp"
 #include "gsl_utils.hpp"
 #include "minimizer.hpp"
+#include "raii.hpp"
 #include "root_finder.hpp"
 #include "threshold_loop_functions.hpp"
-#include "weinberg_angle.hpp"
 
-#include <cassert>
+
+#include <algorithm>
 #include <cmath>
 #include <limits>
 
 namespace flexiblesusy {
 
 #define DERIVEDPARAMETER(p) model->p()
+#define EXTRAPARAMETER(p) model->get_##p()
 #define INPUTPARAMETER(p) model->get_input().p
 #define MODELPARAMETER(p) model->get_##p()
 #define PHASE(p) model->get_##p()
@@ -51,6 +56,12 @@ namespace flexiblesusy {
 #define SCALE model->get_scale()
 #define MODEL model
 #define MODELCLASSNAME MRSSM<Two_scale>
+#define MWMSbar mW_run
+#define MWDRbar mW_run
+#define MZMSbar mZ_run
+#define MZDRbar mZ_run
+#define EDRbar e_run
+#define EMSbar e_run
 #define CKM ckm
 #define PMNS pmns
 #define THETAW theta_w
@@ -58,61 +69,23 @@ namespace flexiblesusy {
 #define ALPHA_EM_DRBAR alpha_em_drbar
 #define CALCULATE_DRBAR_MASSES() model->calculate_DRbar_masses()
 
-MRSSM_low_scale_constraint<Two_scale>::MRSSM_low_scale_constraint()
-   : Constraint<Two_scale>()
-   , scale(0.)
-   , initial_scale_guess(0.)
-   , model(0)
-   , qedqcd()
-   , ckm()
-   , pmns()
-   , MWDRbar(0.)
-   , MZDRbar(0.)
-   , AlphaS(0.)
-   , EDRbar(0.)
-   , ThetaWDRbar(0.)
-   , new_g1(0.)
-   , new_g2(0.)
-   , new_g3(0.)
-   , self_energy_w_at_mw(0.)
-   , threshold_corrections_loop_order(1)
-{
-   ckm << 1., 0., 0.,
-          0., 1., 0.,
-          0., 0., 1.;
-
-   pmns << 1., 0., 0.,
-           0., 1., 0.,
-           0., 0., 1.;
-}
-
 MRSSM_low_scale_constraint<Two_scale>::MRSSM_low_scale_constraint(
    MRSSM<Two_scale>* model_, const softsusy::QedQcd& qedqcd_)
-   : Constraint<Two_scale>()
-   , model(model_)
+   : model(model_)
    , qedqcd(qedqcd_)
-   , new_g1(0.)
-   , new_g2(0.)
-   , new_g3(0.)
-   , self_energy_w_at_mw(0.)
 {
    initialize();
 }
 
-MRSSM_low_scale_constraint<Two_scale>::~MRSSM_low_scale_constraint()
-{
-}
-
 void MRSSM_low_scale_constraint<Two_scale>::apply()
 {
-   assert(model && "Error: MRSSM_low_scale_constraint::apply():"
-          " model pointer must not be zero");
+   check_model_ptr();
 
 
 
    model->calculate_DRbar_masses();
    update_scale();
-   qedqcd.runto(scale, 1.0e-5);
+   qedqcd.run_to(scale, 1.0e-5);
    calculate_DRbar_gauge_couplings();
 
    const auto TanBeta = INPUTPARAMETER(TanBeta);
@@ -129,11 +102,6 @@ void MRSSM_low_scale_constraint<Two_scale>::apply()
    MODEL->set_g1(new_g1);
    MODEL->set_g2(new_g2);
    MODEL->set_g3(new_g3);
-
-
-   if (model->get_thresholds())
-      qedqcd.setPoleMW(recalculate_mw_pole(qedqcd.displayPoleMW()));
-
 
 }
 
@@ -157,7 +125,7 @@ double MRSSM_low_scale_constraint<Two_scale>::get_initial_scale_guess() const
    return initial_scale_guess;
 }
 
-void MRSSM_low_scale_constraint<Two_scale>::set_model(Two_scale_model* model_)
+void MRSSM_low_scale_constraint<Two_scale>::set_model(Model* model_)
 {
    model = cast_model<MRSSM<Two_scale>*>(model_);
 }
@@ -177,45 +145,45 @@ void MRSSM_low_scale_constraint<Two_scale>::clear()
 {
    scale = 0.;
    initial_scale_guess = 0.;
-   model = NULL;
+   model = nullptr;
    qedqcd = softsusy::QedQcd();
-   MWDRbar = 0.;
-   MZDRbar = 0.;
+   ckm.setIdentity();
+   pmns.setIdentity();
+   neutrinoDRbar.setZero();
+   mW_run = 0.;
+   mZ_run = 0.;
    AlphaS = 0.;
-   EDRbar = 0.;
+   e_run = 0.;
    ThetaWDRbar = 0.;
    new_g1 = 0.;
    new_g2 = 0.;
    new_g3 = 0.;
-   self_energy_w_at_mw = 0.;
 }
 
 void MRSSM_low_scale_constraint<Two_scale>::initialize()
 {
-   assert(model && "MRSSM_low_scale_constraint<Two_scale>::"
-          "initialize(): model pointer is zero.");
+   check_model_ptr();
 
    initial_scale_guess = qedqcd.displayPoleMZ();
 
    scale = initial_scale_guess;
 
-   MWDRbar = 0.;
-   MZDRbar = 0.;
+   ckm = qedqcd.get_complex_ckm();
+   pmns = qedqcd.get_complex_pmns();
+   neutrinoDRbar = Eigen::Matrix<double,3,3>::Zero();
+   mW_run = 0.;
+   mZ_run = 0.;
    AlphaS = 0.;
-   EDRbar = 0.;
+   e_run = 0.;
    ThetaWDRbar = 0.;
    new_g1 = 0.;
    new_g2 = 0.;
    new_g3 = 0.;
-   ckm = qedqcd.get_complex_ckm();
-   pmns = qedqcd.get_complex_pmns();
-   self_energy_w_at_mw = 0.;
 }
 
 void MRSSM_low_scale_constraint<Two_scale>::update_scale()
 {
-   assert(model && "MRSSM_low_scale_constraint<Two_scale>::"
-          "update_scale(): model pointer is zero.");
+   check_model_ptr();
 
    scale = qedqcd.displayPoleMZ();
 
@@ -224,12 +192,13 @@ void MRSSM_low_scale_constraint<Two_scale>::update_scale()
 
 void MRSSM_low_scale_constraint<Two_scale>::calculate_threshold_corrections()
 {
-   assert(qedqcd.displayMu() == get_scale() && "Error: low-energy data"
+   check_model_ptr();
+
+   if (qedqcd.get_scale() != get_scale())
+      throw SetupError("Error: low-energy data"
           " set is not defined at the same scale as the low-energy"
           " constraint.  You need to run the low-energy data set to this"
           " scale!");
-   assert(model && "MRSSM_low_scale_constraint<Two_scale>::"
-          "calculate_threshold_corrections(): model pointer is zero");
 
    const double alpha_em = qedqcd.displayAlpha(softsusy::ALPHA);
    const double alpha_s  = qedqcd.displayAlpha(softsusy::ALPHAS);
@@ -239,48 +208,66 @@ void MRSSM_low_scale_constraint<Two_scale>::calculate_threshold_corrections()
    double delta_alpha_em = 0.;
    double delta_alpha_s  = 0.;
 
-   if (model->get_thresholds()) {
+   if (model->get_thresholds() && model->get_threshold_corrections().alpha_em > 0)
       delta_alpha_em = calculate_delta_alpha_em(alpha_em);
+
+   if (model->get_thresholds() && model->get_threshold_corrections().alpha_s > 0)
       delta_alpha_s  = calculate_delta_alpha_s(alpha_s);
-   }
 
    const double alpha_em_drbar = alpha_em / (1.0 - delta_alpha_em);
    const double alpha_s_drbar  = alpha_s  / (1.0 - delta_alpha_s);
    const double e_drbar        = Sqrt(4.0 * Pi * alpha_em_drbar);
 
    // interface variables
-   MZDRbar = mz_pole;
-   MWDRbar = mw_pole;
+   mZ_run = mz_pole;
+   mW_run = mw_pole;
 
-   if (model->get_thresholds()) {
-      MZDRbar = model->calculate_MVZ_DRbar(mz_pole);
-      MWDRbar = model->calculate_MVWm_DRbar(mw_pole);
-   }
+   if (model->get_thresholds() && model->get_threshold_corrections().mz > 0)
+      mZ_run = model->calculate_MVZ_DRbar(mz_pole);
+
+   if (model->get_thresholds() && model->get_threshold_corrections().mw > 0)
+      mW_run = model->calculate_MVWm_DRbar(mw_pole);
 
    AlphaS = alpha_s_drbar;
-   EDRbar = e_drbar;
-   ThetaWDRbar = calculate_theta_w(alpha_em_drbar);
-
-   if (IsFinite(ThetaWDRbar)) {
-      model->get_problems().unflag_non_perturbative_parameter(
-         "sin(theta_W)");
-   } else {
-      model->get_problems().flag_non_perturbative_parameter(
-         "sin(theta_W)", ThetaWDRbar, model->get_scale(), 0);
-      ThetaWDRbar = ArcSin(Electroweak_constants::sinThetaW);
-   }
+   e_run = e_drbar;
+   ThetaWDRbar = calculate_theta_w();
 }
 
-double MRSSM_low_scale_constraint<Two_scale>::calculate_theta_w(double alpha_em_drbar)
+double MRSSM_low_scale_constraint<Two_scale>::calculate_theta_w()
 {
-   assert(model && "MRSSM_low_scale_constraint<Two_scale>::"
-          "calculate_theta_w(): model pointer is zero");
+   check_model_ptr();
 
-   double theta_w = 0.;
+   double theta_w = std::asin(Electroweak_constants::sinThetaW);
 
-   const auto g2 = MODELPARAMETER(g2);
-   const auto vT = MODELPARAMETER(vT);
-   THETAW = ArcSin(Sqrt(1 - (Sqr(MWDRbar) - Sqr(g2)*Sqr(vT))/Sqr(MZDRbar)));
+   MRSSM_weinberg_angle::Sm_parameters sm_pars;
+   sm_pars.fermi_constant = qedqcd.displayFermiConstant();
+   sm_pars.mw_pole = qedqcd.displayPoleMW();
+   sm_pars.mz_pole = qedqcd.displayPoleMZ();
+   sm_pars.mt_pole = qedqcd.displayPoleMt();
+   sm_pars.alpha_s = calculate_alpha_s_SM5_at(qedqcd, qedqcd.displayPoleMt());
+
+   const int number_of_iterations =
+       std::max(20, static_cast<int>(std::abs(-log10(MODEL->get_precision()
+          ) * 10)));
+
+   MRSSM_weinberg_angle weinberg(MODEL, sm_pars);
+   weinberg.set_number_of_loops(MODEL->get_threshold_corrections().sin_theta_w)
+      ;
+   weinberg.set_number_of_iterations(number_of_iterations);
+
+   try {
+      const auto result = weinberg.calculate();
+      THETAW = ArcSin(result.first);
+
+      if (MODEL->get_thresholds() && MODEL->get_threshold_corrections()
+         .sin_theta_w > 0)
+         qedqcd.setPoleMW(result.second);
+
+      MODEL->get_problems().unflag_no_sinThetaW_convergence();
+   } catch (const Error& e) {
+      VERBOSE_MSG(e.what());
+      MODEL->get_problems().flag_no_sinThetaW_convergence();
+   }
 
 
    return theta_w;
@@ -288,21 +275,36 @@ double MRSSM_low_scale_constraint<Two_scale>::calculate_theta_w(double alpha_em_
 
 void MRSSM_low_scale_constraint<Two_scale>::calculate_DRbar_gauge_couplings()
 {
-   assert(model && "MRSSM_low_scale_constraint<Two_scale>::"
-          "calculate_DRbar_gauge_couplings(): model pointer is zero");
-
+   check_model_ptr();
    calculate_threshold_corrections();
 
    new_g1 = 1.2909944487358056*EDRbar*Sec(ThetaWDRbar);
    new_g2 = EDRbar*Csc(ThetaWDRbar);
    new_g3 = 3.5449077018110318*Sqrt(AlphaS);
 
+   if (IsFinite(new_g1)) {
+      model->get_problems().unflag_non_perturbative_parameter(MRSSM_info::g1
+         );
+   } else {
+      model->get_problems().flag_non_perturbative_parameter(
+         MRSSM_info::g1, new_g1, get_scale());
+      new_g1 = Electroweak_constants::g1;
+   }
+
+   if (IsFinite(new_g2)) {
+      model->get_problems().unflag_non_perturbative_parameter(MRSSM_info::g2
+         );
+   } else {
+      model->get_problems().flag_non_perturbative_parameter(
+         MRSSM_info::g2, new_g2, get_scale());
+      new_g2 = Electroweak_constants::g2;
+   }
+
 }
 
 double MRSSM_low_scale_constraint<Two_scale>::calculate_delta_alpha_em(double alphaEm) const
 {
-   assert(model && "MRSSM_low_scale_constraint<Two_scale>::"
-          "calculate_delta_alpha_em(): model pointer is zero");
+   check_model_ptr();
 
    const double currentScale = model->get_scale();
    const auto MCha1 = MODELPARAMETER(MCha1);
@@ -348,8 +350,7 @@ double MRSSM_low_scale_constraint<Two_scale>::calculate_delta_alpha_em(double al
 
 double MRSSM_low_scale_constraint<Two_scale>::calculate_delta_alpha_s(double alphaS) const
 {
-   assert(model && "MRSSM_low_scale_constraint<Two_scale>::"
-          "calculate_delta_alpha_s(): model pointer is zero");
+   check_model_ptr();
 
    const double currentScale = model->get_scale();
    const auto MFu = MODELPARAMETER(MFu);
@@ -377,8 +378,19 @@ double MRSSM_low_scale_constraint<Two_scale>::calculate_delta_alpha_s(double alp
       0.16666666666666666*FiniteLog(Abs(MSu(4)/currentScale)) -
       0.16666666666666666*FiniteLog(Abs(MSu(5)/currentScale)));
 
-   return delta_alpha_s + delta_alpha_s_SM;
+   const double delta_alpha_s_1loop = delta_alpha_s + delta_alpha_s_SM;
+   double delta_alpha_s_2loop = 0.;
+   double delta_alpha_s_3loop = 0.;
 
+   return delta_alpha_s_1loop + delta_alpha_s_2loop + delta_alpha_s_3loop;
+
+}
+
+double MRSSM_low_scale_constraint<Two_scale>::calculate_alpha_s_SM5_at(
+   softsusy::QedQcd qedqcd_tmp, double scale) const
+{
+   qedqcd_tmp.run_to(scale); // running in SM(5)
+   return qedqcd_tmp.displayAlpha(softsusy::ALPHAS);
 }
 
 void MRSSM_low_scale_constraint<Two_scale>::calculate_DRbar_yukawa_couplings()
@@ -390,15 +402,14 @@ void MRSSM_low_scale_constraint<Two_scale>::calculate_DRbar_yukawa_couplings()
 
 void MRSSM_low_scale_constraint<Two_scale>::calculate_Yu_DRbar()
 {
-   assert(model && "MRSSM_low_scale_constraint<Two_scale>::"
-          "calculate_Yu_DRbar(): model pointer is zero");
+   check_model_ptr();
 
    Eigen::Matrix<std::complex<double>,3,3> upQuarksDRbar(ZEROMATRIXCOMPLEX(3,3));
    upQuarksDRbar(0,0)      = qedqcd.displayMass(softsusy::mUp);
    upQuarksDRbar(1,1)      = qedqcd.displayMass(softsusy::mCharm);
    upQuarksDRbar(2,2)      = qedqcd.displayPoleMt();
 
-   if (model->get_thresholds()) {
+   if (model->get_thresholds() && model->get_threshold_corrections().mt > 0) {
       upQuarksDRbar(2,2) = MODEL->calculate_MFu_DRbar(qedqcd.displayPoleMt(), 2);
    }
 
@@ -409,15 +420,14 @@ void MRSSM_low_scale_constraint<Two_scale>::calculate_Yu_DRbar()
 
 void MRSSM_low_scale_constraint<Two_scale>::calculate_Yd_DRbar()
 {
-   assert(model && "MRSSM_low_scale_constraint<Two_scale>::"
-          "calculate_Yd_DRbar(): model pointer is zero");
+   check_model_ptr();
 
    Eigen::Matrix<std::complex<double>,3,3> downQuarksDRbar(ZEROMATRIXCOMPLEX(3,3));
    downQuarksDRbar(0,0)   = qedqcd.displayMass(softsusy::mDown);
    downQuarksDRbar(1,1)   = qedqcd.displayMass(softsusy::mStrange);
    downQuarksDRbar(2,2)   = qedqcd.displayMass(softsusy::mBottom);
 
-   if (model->get_thresholds()) {
+   if (model->get_thresholds() && model->get_threshold_corrections().mb > 0) {
       downQuarksDRbar(2,2) = MODEL->calculate_MFd_DRbar(qedqcd.displayMass(softsusy::mBottom), 2);
    }
 
@@ -429,8 +439,7 @@ void MRSSM_low_scale_constraint<Two_scale>::calculate_Yd_DRbar()
 
 void MRSSM_low_scale_constraint<Two_scale>::calculate_Ye_DRbar()
 {
-   assert(model && "MRSSM_low_scale_constraint<Two_scale>::"
-          "calculate_Ye_DRbar(): model pointer is zero");
+   check_model_ptr();
 
    Eigen::Matrix<std::complex<double>,3,3> downLeptonsDRbar(ZEROMATRIXCOMPLEX(3,3));
    downLeptonsDRbar(0,0) = qedqcd.displayPoleMel();
@@ -440,6 +449,9 @@ void MRSSM_low_scale_constraint<Two_scale>::calculate_Ye_DRbar()
    if (model->get_thresholds()) {
       downLeptonsDRbar(0,0) = MODEL->calculate_MFe_DRbar(qedqcd.displayMass(softsusy::mElectron), 0);
       downLeptonsDRbar(1,1) = MODEL->calculate_MFe_DRbar(qedqcd.displayMass(softsusy::mMuon), 1);
+   }
+
+   if (model->get_thresholds() && model->get_threshold_corrections().mtau > 0) {
       downLeptonsDRbar(2,2) = MODEL->calculate_MFe_DRbar(qedqcd.displayMass(softsusy::mTau), 2);
    }
 
@@ -451,28 +463,17 @@ void MRSSM_low_scale_constraint<Two_scale>::calculate_Ye_DRbar()
 
 void MRSSM_low_scale_constraint<Two_scale>::calculate_MNeutrino_DRbar()
 {
-   assert(model && "MRSSM_low_scale_constraint<Two_scale>::"
-          "calculate_MNeutrino_DRbar(): model pointer is zero");
-
    neutrinoDRbar.setZero();
    neutrinoDRbar(0,0) = qedqcd.displayNeutrinoPoleMass(1);
    neutrinoDRbar(1,1) = qedqcd.displayNeutrinoPoleMass(2);
    neutrinoDRbar(2,2) = qedqcd.displayNeutrinoPoleMass(3);
 }
 
-/**
- * Recalculates the W boson pole mass using the new gauge couplings.
- *
- * @param mw_pole current W pole mass
- * @param new W pole mass
- */
-double MRSSM_low_scale_constraint<Two_scale>::recalculate_mw_pole(double mw_pole)
+void MRSSM_low_scale_constraint<Two_scale>::check_model_ptr() const
 {
-   assert(model && "MRSSM_low_scale_constraint<Two_scale>::"
-          "recalculate_mw_pole(): model pointer is zero");
-
-   return mw_pole;
-
+   if (!model)
+      throw SetupError("MRSSM_low_scale_constraint<Two_scale>: "
+                       "model pointer is zero!");
 }
 
 } // namespace flexiblesusy

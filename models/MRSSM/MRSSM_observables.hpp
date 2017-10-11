@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 11:37:09
+// File generated at Tue 10 Oct 2017 21:41:01
 
 #ifndef MRSSM_OBSERVABLES_H
 #define MRSSM_OBSERVABLES_H
@@ -35,7 +35,7 @@ class MRSSM_mass_eigenstates;
 class Physical_input;
 
 struct MRSSM_observables {
-   static const unsigned NUMBER_OF_OBSERVABLES = 0;
+   static const int NUMBER_OF_OBSERVABLES = 29;
 
    MRSSM_observables();
    Eigen::ArrayXd get() const; ///< returns vector of all observables
@@ -43,10 +43,21 @@ struct MRSSM_observables {
    void clear(); ///< sets all observables to zero
    void set(const Eigen::ArrayXd&); ///< sets all observables from given vector
 
+   double a_muon; ///< a_muon = (g-2)/2 of the muon (calculated with FlexibleSUSY)
+   Eigen::Array<std::complex<double>,4,1> eff_cp_higgs_photon_photon; ///< effective H-Photon-Photon coupling
+   Eigen::Array<std::complex<double>,4,1> eff_cp_higgs_gluon_gluon; ///< effective H-Gluon-Gluon coupling
+   Eigen::Array<std::complex<double>,3,1> eff_cp_pseudoscalar_photon_photon; ///< effective A-Photon-Photon coupling
+   Eigen::Array<std::complex<double>,3,1> eff_cp_pseudoscalar_gluon_gluon; ///< effective A-Gluon-Gluon coupling
 
 };
 
-MRSSM_observables calculate_observables(const MRSSM_mass_eigenstates&, const softsusy::QedQcd&, const Physical_input&);
+MRSSM_observables calculate_observables(
+   const MRSSM_mass_eigenstates&, const softsusy::QedQcd&,
+   const Physical_input&);
+
+MRSSM_observables calculate_observables(
+   const MRSSM_mass_eigenstates&, const softsusy::QedQcd&,
+   const Physical_input&, double scale);
 
 } // namespace flexiblesusy
 

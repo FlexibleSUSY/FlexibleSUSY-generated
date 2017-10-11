@@ -16,24 +16,26 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 10:18:27
+// File generated at Tue 10 Oct 2017 21:00:24
 
 #include "HGTHDMIIMSSMBC_two_scale_susy_scale_constraint.hpp"
 #include "HGTHDMIIMSSMBC_two_scale_model.hpp"
 #include "wrappers.hpp"
 #include "logger.hpp"
+#include "error.hpp"
 #include "ew_input.hpp"
 #include "gsl_utils.hpp"
 #include "minimizer.hpp"
+#include "raii.hpp"
 #include "root_finder.hpp"
 #include "threshold_loop_functions.hpp"
 
-#include <cassert>
 #include <cmath>
 
 namespace flexiblesusy {
 
 #define DERIVEDPARAMETER(p) model->p()
+#define EXTRAPARAMETER(p) model->get_##p()
 #define INPUTPARAMETER(p) model->get_input().p
 #define MODELPARAMETER(p) model->get_##p()
 #define PHASE(p) model->get_##p()
@@ -50,32 +52,17 @@ namespace flexiblesusy {
 #define MODEL model
 #define MODELCLASSNAME HGTHDMIIMSSMBC<Two_scale>
 
-HGTHDMIIMSSMBC_susy_scale_constraint<Two_scale>::HGTHDMIIMSSMBC_susy_scale_constraint()
-   : Constraint<Two_scale>()
-   , scale(0.)
-   , initial_scale_guess(0.)
-   , model(0)
-   , qedqcd()
-{
-}
-
 HGTHDMIIMSSMBC_susy_scale_constraint<Two_scale>::HGTHDMIIMSSMBC_susy_scale_constraint(
    HGTHDMIIMSSMBC<Two_scale>* model_, const softsusy::QedQcd& qedqcd_)
-   : Constraint<Two_scale>()
-   , model(model_)
+   : model(model_)
    , qedqcd(qedqcd_)
 {
    initialize();
 }
 
-HGTHDMIIMSSMBC_susy_scale_constraint<Two_scale>::~HGTHDMIIMSSMBC_susy_scale_constraint()
-{
-}
-
 void HGTHDMIIMSSMBC_susy_scale_constraint<Two_scale>::apply()
 {
-   assert(model && "Error: HGTHDMIIMSSMBC_susy_scale_constraint::apply():"
-          " model pointer must not be zero");
+   check_model_ptr();
 
 
 
@@ -98,7 +85,6 @@ void HGTHDMIIMSSMBC_susy_scale_constraint<Two_scale>::apply()
    MODEL->set_M122(Re((v2*Sqr(MAInput))/(v1*(1 + Sqr(v2)/Sqr(v1)))));
    MODEL->solve_ewsb();
 
-
 }
 
 double HGTHDMIIMSSMBC_susy_scale_constraint<Two_scale>::get_scale() const
@@ -113,8 +99,7 @@ double HGTHDMIIMSSMBC_susy_scale_constraint<Two_scale>::get_initial_scale_guess(
 
 const HGTHDMIIMSSMBC_input_parameters& HGTHDMIIMSSMBC_susy_scale_constraint<Two_scale>::get_input_parameters() const
 {
-   assert(model && "Error: HGTHDMIIMSSMBC_susy_scale_constraint::"
-          "get_input_parameters(): model pointer is zero.");
+   check_model_ptr();
 
    return model->get_input();
 }
@@ -124,7 +109,7 @@ HGTHDMIIMSSMBC<Two_scale>* HGTHDMIIMSSMBC_susy_scale_constraint<Two_scale>::get_
    return model;
 }
 
-void HGTHDMIIMSSMBC_susy_scale_constraint<Two_scale>::set_model(Two_scale_model* model_)
+void HGTHDMIIMSSMBC_susy_scale_constraint<Two_scale>::set_model(Model* model_)
 {
    model = cast_model<HGTHDMIIMSSMBC<Two_scale>*>(model_);
 }
@@ -144,14 +129,13 @@ void HGTHDMIIMSSMBC_susy_scale_constraint<Two_scale>::clear()
 {
    scale = 0.;
    initial_scale_guess = 0.;
-   model = NULL;
+   model = nullptr;
    qedqcd = softsusy::QedQcd();
 }
 
 void HGTHDMIIMSSMBC_susy_scale_constraint<Two_scale>::initialize()
 {
-   assert(model && "HGTHDMIIMSSMBC_susy_scale_constraint<Two_scale>::"
-          "initialize(): model pointer is zero.");
+   check_model_ptr();
 
    const auto MEWSB = INPUTPARAMETER(MEWSB);
 
@@ -162,14 +146,20 @@ void HGTHDMIIMSSMBC_susy_scale_constraint<Two_scale>::initialize()
 
 void HGTHDMIIMSSMBC_susy_scale_constraint<Two_scale>::update_scale()
 {
-   assert(model && "HGTHDMIIMSSMBC_susy_scale_constraint<Two_scale>::"
-          "update_scale(): model pointer is zero.");
+   check_model_ptr();
 
    const auto MEWSB = INPUTPARAMETER(MEWSB);
 
    scale = MEWSB;
 
 
+}
+
+void HGTHDMIIMSSMBC_susy_scale_constraint<Two_scale>::check_model_ptr() const
+{
+   if (!model)
+      throw SetupError("HGTHDMIIMSSMBC_susy_scale_constraint<Two_scale>: "
+                       "model pointer is zero!");
 }
 
 } // namespace flexiblesusy

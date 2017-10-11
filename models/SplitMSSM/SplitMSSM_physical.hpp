@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 10:36:00
+// File generated at Tue 10 Oct 2017 21:13:17
 
 #ifndef SplitMSSM_PHYSICAL_H
 #define SplitMSSM_PHYSICAL_H
@@ -28,7 +28,6 @@
 namespace flexiblesusy {
 
 struct SplitMSSM_physical {
-   SplitMSSM_physical();
    void clear();
    void convert_to_hk();   ///< converts pole masses to HK convention
    void convert_to_slha(); ///< converts pole masses to SLHA convention
@@ -38,31 +37,31 @@ struct SplitMSSM_physical {
    void set_masses(const Eigen::ArrayXd&); ///< set all masses
    void print(std::ostream&) const;
 
-   double MVG;
-   double MHp;
-   Eigen::Array<double,3,1> MFv;
-   double MGlu;
-   double MAh;
-   double Mhh;
-   Eigen::Array<double,3,1> MFd;
-   Eigen::Array<double,3,1> MFu;
-   Eigen::Array<double,3,1> MFe;
-   Eigen::Array<double,4,1> MChi;
-   Eigen::Array<double,2,1> MCha;
-   double MVWp;
-   double MVP;
-   double MVZ;
+   double MVG{};
+   double MHp{};
+   Eigen::Array<double,3,1> MFv{Eigen::Array<double,3,1>::Zero()};
+   double MGlu{};
+   double MAh{};
+   double Mhh{};
+   Eigen::Array<double,3,1> MFd{Eigen::Array<double,3,1>::Zero()};
+   Eigen::Array<double,3,1> MFu{Eigen::Array<double,3,1>::Zero()};
+   Eigen::Array<double,3,1> MFe{Eigen::Array<double,3,1>::Zero()};
+   Eigen::Array<double,4,1> MChi{Eigen::Array<double,4,1>::Zero()};
+   Eigen::Array<double,2,1> MCha{Eigen::Array<double,2,1>::Zero()};
+   double MVWp{};
+   double MVP{};
+   double MVZ{};
 
-   Eigen::Matrix<std::complex<double>,3,3> Vd;
-   Eigen::Matrix<std::complex<double>,3,3> Ud;
-   Eigen::Matrix<std::complex<double>,3,3> Vu;
-   Eigen::Matrix<std::complex<double>,3,3> Uu;
-   Eigen::Matrix<std::complex<double>,3,3> Ve;
-   Eigen::Matrix<std::complex<double>,3,3> Ue;
-   Eigen::Matrix<std::complex<double>,4,4> ZN;
-   Eigen::Matrix<std::complex<double>,2,2> UM;
-   Eigen::Matrix<std::complex<double>,2,2> UP;
-   Eigen::Matrix<double,2,2> ZZ;
+   Eigen::Matrix<std::complex<double>,3,3> Vd{Eigen::Matrix<std::complex<double>,3,3>::Zero()};
+   Eigen::Matrix<std::complex<double>,3,3> Ud{Eigen::Matrix<std::complex<double>,3,3>::Zero()};
+   Eigen::Matrix<std::complex<double>,3,3> Vu{Eigen::Matrix<std::complex<double>,3,3>::Zero()};
+   Eigen::Matrix<std::complex<double>,3,3> Uu{Eigen::Matrix<std::complex<double>,3,3>::Zero()};
+   Eigen::Matrix<std::complex<double>,3,3> Ve{Eigen::Matrix<std::complex<double>,3,3>::Zero()};
+   Eigen::Matrix<std::complex<double>,3,3> Ue{Eigen::Matrix<std::complex<double>,3,3>::Zero()};
+   Eigen::Matrix<std::complex<double>,4,4> ZN{Eigen::Matrix<std::complex<double>,4,4>::Zero()};
+   Eigen::Matrix<std::complex<double>,2,2> UM{Eigen::Matrix<std::complex<double>,2,2>::Zero()};
+   Eigen::Matrix<std::complex<double>,2,2> UP{Eigen::Matrix<std::complex<double>,2,2>::Zero()};
+   Eigen::Matrix<double,2,2> ZZ{Eigen::Matrix<double,2,2>::Zero()};
 
 };
 

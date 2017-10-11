@@ -8,15 +8,18 @@ HSSUSY_INSTALL_DIR := $(INSTALL_DIR)/$(DIR)
 HSSUSY_MK     := \
 		$(DIR)/module.mk
 
-HSSUSY_TWO_SCALE_SUSY_MK := \
-		$(DIR)/two_scale_susy.mk
+HSSUSY_SUSY_BETAS_MK := \
+		$(DIR)/susy_betas.mk
 
-HSSUSY_TWO_SCALE_SOFT_MK := \
-		$(DIR)/two_scale_soft.mk
+HSSUSY_SOFT_BETAS_MK := \
+		$(DIR)/soft_betas.mk
 
-HSSUSY_TWO_SCALE_MK := \
-		$(HSSUSY_TWO_SCALE_SUSY_MK) \
-		$(HSSUSY_TWO_SCALE_SOFT_MK)
+HSSUSY_FlexibleEFTHiggs_MK := \
+		$(DIR)/FlexibleEFTHiggs.mk
+
+HSSUSY_INCLUDE_MK := \
+		$(HSSUSY_SUSY_BETAS_MK) \
+		$(HSSUSY_SOFT_BETAS_MK)
 
 HSSUSY_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.HSSUSY_generated \
@@ -29,91 +32,89 @@ HSSUSY_GNUPLOT := \
 HSSUSY_TARBALL := \
 		$(MODNAME).tar.gz
 
-LIBHSSUSY_SRC :=
-EXEHSSUSY_SRC :=
-LLHSSUSY_LIB  :=
-LLHSSUSY_OBJ  :=
-LLHSSUSY_SRC  :=
-LLHSSUSY_MMA  :=
-
-LIBHSSUSY_HDR :=
-
-ifneq ($(findstring two_scale,$(ALGORITHMS)),)
-LIBHSSUSY_SRC += \
+LIBHSSUSY_SRC := \
+		$(DIR)/HSSUSY_a_muon.cpp \
+		$(DIR)/HSSUSY_edm.cpp \
 		$(DIR)/HSSUSY_effective_couplings.cpp \
-		$(DIR)/HSSUSY_mass_eigenstates.cpp \
 		$(DIR)/HSSUSY_info.cpp \
 		$(DIR)/HSSUSY_input_parameters.cpp \
+		$(DIR)/HSSUSY_mass_eigenstates.cpp \
 		$(DIR)/HSSUSY_observables.cpp \
-		$(DIR)/HSSUSY_slha_io.cpp \
 		$(DIR)/HSSUSY_physical.cpp \
+		$(DIR)/HSSUSY_slha_io.cpp \
+		$(DIR)/HSSUSY_soft_parameters.cpp \
+		$(DIR)/HSSUSY_susy_parameters.cpp \
 		$(DIR)/HSSUSY_utilities.cpp \
-		$(DIR)/HSSUSY_standard_model_matching.cpp \
-		$(DIR)/HSSUSY_standard_model_two_scale_matching.cpp \
-		$(DIR)/HSSUSY_two_scale_convergence_tester.cpp \
-		$(DIR)/HSSUSY_two_scale_high_scale_constraint.cpp \
-		$(DIR)/HSSUSY_two_scale_initial_guesser.cpp \
-		$(DIR)/HSSUSY_two_scale_low_scale_constraint.cpp \
-		$(DIR)/HSSUSY_two_scale_model.cpp \
-		$(DIR)/HSSUSY_two_scale_model_slha.cpp \
-		$(DIR)/HSSUSY_two_scale_susy_parameters.cpp \
-		$(DIR)/HSSUSY_two_scale_soft_parameters.cpp \
-		$(DIR)/HSSUSY_two_scale_susy_scale_constraint.cpp
-EXEHSSUSY_SRC += \
+		$(DIR)/HSSUSY_weinberg_angle.cpp
+
+EXEHSSUSY_SRC := \
 		$(DIR)/run_HSSUSY.cpp \
 		$(DIR)/run_cmd_line_HSSUSY.cpp \
 		$(DIR)/scan_HSSUSY.cpp
-LIBHSSUSY_HDR += \
+LLHSSUSY_LIB  :=
+LLHSSUSY_OBJ  :=
+LLHSSUSY_SRC  := \
+		$(DIR)/HSSUSY_librarylink.cpp
+
+LLHSSUSY_MMA  := \
+		$(DIR)/HSSUSY_librarylink.m \
+		$(DIR)/run_HSSUSY.m
+
+LIBHSSUSY_HDR := \
+		$(DIR)/HSSUSY_cxx_diagrams.hpp \
+		$(DIR)/HSSUSY_a_muon.hpp \
 		$(DIR)/HSSUSY_convergence_tester.hpp \
+		$(DIR)/HSSUSY_edm.hpp \
 		$(DIR)/HSSUSY_effective_couplings.hpp \
+		$(DIR)/HSSUSY_ewsb_solver.hpp \
+		$(DIR)/HSSUSY_ewsb_solver_interface.hpp \
 		$(DIR)/HSSUSY_high_scale_constraint.hpp \
-		$(DIR)/HSSUSY_mass_eigenstates.hpp \
 		$(DIR)/HSSUSY_info.hpp \
 		$(DIR)/HSSUSY_initial_guesser.hpp \
 		$(DIR)/HSSUSY_input_parameters.hpp \
 		$(DIR)/HSSUSY_low_scale_constraint.hpp \
+		$(DIR)/HSSUSY_mass_eigenstates.hpp \
 		$(DIR)/HSSUSY_model.hpp \
 		$(DIR)/HSSUSY_model_slha.hpp \
 		$(DIR)/HSSUSY_observables.hpp \
 		$(DIR)/HSSUSY_physical.hpp \
 		$(DIR)/HSSUSY_slha_io.hpp \
-		$(DIR)/HSSUSY_spectrum_generator_interface.hpp \
 		$(DIR)/HSSUSY_spectrum_generator.hpp \
-		$(DIR)/HSSUSY_standard_model_matching.hpp \
-		$(DIR)/HSSUSY_standard_model_two_scale_matching.hpp \
+		$(DIR)/HSSUSY_spectrum_generator_interface.hpp \
+		$(DIR)/HSSUSY_soft_parameters.hpp \
+		$(DIR)/HSSUSY_susy_parameters.hpp \
 		$(DIR)/HSSUSY_susy_scale_constraint.hpp \
 		$(DIR)/HSSUSY_utilities.hpp \
-		$(DIR)/HSSUSY_two_scale_convergence_tester.hpp \
-		$(DIR)/HSSUSY_two_scale_high_scale_constraint.hpp \
-		$(DIR)/HSSUSY_two_scale_initial_guesser.hpp \
-		$(DIR)/HSSUSY_two_scale_low_scale_constraint.hpp \
-		$(DIR)/HSSUSY_two_scale_model.hpp \
-		$(DIR)/HSSUSY_two_scale_model_slha.hpp \
-		$(DIR)/HSSUSY_two_scale_soft_parameters.hpp \
-		$(DIR)/HSSUSY_two_scale_susy_parameters.hpp \
-		$(DIR)/HSSUSY_two_scale_susy_scale_constraint.hpp
-LLHSSUSY_SRC  += \
-		$(DIR)/HSSUSY_librarylink.cpp
+		$(DIR)/HSSUSY_weinberg_angle.hpp
 
-LLHSSUSY_MMA  += \
-		$(DIR)/HSSUSY_librarylink.m \
-		$(DIR)/run_HSSUSY.m
+ifneq ($(findstring two_scale,$(SOLVERS)),)
+-include $(DIR)/two_scale.mk
+endif
+ifneq ($(findstring lattice,$(SOLVERS)),)
+-include $(DIR)/lattice.mk
+endif
+ifneq ($(findstring semi_analytic,$(SOLVERS)),)
+-include $(DIR)/semi_analytic.mk
+endif
 
 ifneq ($(MAKECMDGOALS),showbuild)
 ifneq ($(MAKECMDGOALS),tag)
 ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
--include $(HSSUSY_TWO_SCALE_SUSY_MK)
--include $(HSSUSY_TWO_SCALE_SOFT_MK)
+-include $(HSSUSY_SUSY_BETAS_MK)
+-include $(HSSUSY_SOFT_BETAS_MK)
+-include $(HSSUSY_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
 ifneq ($(MAKECMDGOALS),pack-$(MODNAME)-src)
 ifeq ($(findstring clean-,$(MAKECMDGOALS)),)
 ifeq ($(findstring distclean-,$(MAKECMDGOALS)),)
 ifeq ($(findstring doc-,$(MAKECMDGOALS)),)
-$(HSSUSY_TWO_SCALE_SUSY_MK): run-metacode-$(MODNAME)
+$(HSSUSY_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
-$(HSSUSY_TWO_SCALE_SOFT_MK): run-metacode-$(MODNAME)
+$(HSSUSY_SOFT_BETAS_MK): run-metacode-$(MODNAME)
+		@$(CONVERT_DOS_PATHS) $@
+$(HSSUSY_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 endif
 endif
@@ -126,9 +127,7 @@ endif
 endif
 endif
 
-endif
-
-# remove duplicates in case all algorithms are used
+# remove duplicates in case all solvers are used
 LIBHSSUSY_SRC := $(sort $(LIBHSSUSY_SRC))
 EXEHSSUSY_SRC := $(sort $(EXEHSSUSY_SRC))
 
@@ -182,7 +181,7 @@ install-src::
 		install -m u=rw,g=r,o=r $(LLHSSUSY_SRC) $(HSSUSY_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLHSSUSY_MMA) $(HSSUSY_INSTALL_DIR)
 		$(INSTALL_STRIPPED) $(HSSUSY_MK) $(HSSUSY_INSTALL_DIR) -m u=rw,g=r,o=r
-		install -m u=rw,g=r,o=r $(HSSUSY_TWO_SCALE_MK) $(HSSUSY_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(HSSUSY_INCLUDE_MK) $(HSSUSY_INSTALL_DIR)
 ifneq ($(HSSUSY_SLHA_INPUT),)
 		install -m u=rw,g=r,o=r $(HSSUSY_SLHA_INPUT) $(HSSUSY_INSTALL_DIR)
 endif
@@ -211,7 +210,7 @@ clean-$(MODNAME)-src:
 		-rm -f $(LLHSSUSY_SRC)
 		-rm -f $(LLHSSUSY_MMA)
 		-rm -f $(METACODE_STAMP_HSSUSY)
-		-rm -f $(HSSUSY_TWO_SCALE_MK)
+		-rm -f $(HSSUSY_INCLUDE_MK)
 		-rm -f $(HSSUSY_SLHA_INPUT)
 		-rm -f $(HSSUSY_GNUPLOT)
 
@@ -237,7 +236,7 @@ pack-$(MODNAME)-src:
 		$(LIBHSSUSY_SRC) $(LIBHSSUSY_HDR) \
 		$(EXEHSSUSY_SRC) \
 		$(LLHSSUSY_SRC) $(LLHSSUSY_MMA) \
-		$(HSSUSY_MK) $(HSSUSY_TWO_SCALE_MK) \
+		$(HSSUSY_MK) $(HSSUSY_INCLUDE_MK) \
 		$(HSSUSY_SLHA_INPUT) $(HSSUSY_GNUPLOT)
 
 $(LIBHSSUSY_SRC) $(LIBHSSUSY_HDR) $(EXEHSSUSY_SRC) $(LLHSSUSY_SRC) $(LLHSSUSY_MMA) \
@@ -261,7 +260,7 @@ $(METACODE_STAMP_HSSUSY):
 endif
 
 $(LIBHSSUSY_DEP) $(EXEHSSUSY_DEP) $(LLHSSUSY_DEP) $(LIBHSSUSY_OBJ) $(EXEHSSUSY_OBJ) $(LLHSSUSY_OBJ) $(LLHSSUSY_LIB): \
-	CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS)
+	CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBHSSUSY_DEP) $(EXEHSSUSY_DEP) $(LLHSSUSY_DEP) $(LIBHSSUSY_OBJ) $(EXEHSSUSY_OBJ) $(LLHSSUSY_OBJ) $(LLHSSUSY_LIB): \
@@ -274,11 +273,11 @@ $(LLHSSUSY_OBJ) $(LLHSSUSY_LIB): \
 $(LIBHSSUSY): $(LIBHSSUSY_OBJ)
 		$(MODULE_MAKE_LIB_CMD) $@ $^
 
-$(DIR)/%.x: $(DIR)/%.o $(LIBHSSUSY) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^ $(ADDONLIBS)) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+$(DIR)/%.x: $(DIR)/%.o $(LIBHSSUSY) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
-$(LLHSSUSY_LIB): $(LLHSSUSY_OBJ) $(LIBHSSUSY) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+$(LLHSSUSY_LIB): $(LLHSSUSY_OBJ) $(LIBHSSUSY) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBHSSUSY_DEP) $(EXEHSSUSY_DEP)
 ALLSRC += $(LIBHSSUSY_SRC) $(EXEHSSUSY_SRC)

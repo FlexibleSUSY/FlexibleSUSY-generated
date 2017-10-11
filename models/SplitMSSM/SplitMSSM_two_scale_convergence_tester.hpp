@@ -16,14 +16,15 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 10:32:34
+// File generated at Tue 10 Oct 2017 21:13:24
 
 #ifndef SplitMSSM_TWO_SCALE_CONVERGENCE_TESTER_H
 #define SplitMSSM_TWO_SCALE_CONVERGENCE_TESTER_H
 
 #include "SplitMSSM_convergence_tester.hpp"
 #include "SplitMSSM_two_scale_model.hpp"
-#include "two_scale_convergence_tester_drbar.hpp"
+
+#include "convergence_tester_drbar.hpp"
 
 namespace flexiblesusy {
 
@@ -32,8 +33,10 @@ class Two_scale;
 template<>
 class SplitMSSM_convergence_tester<Two_scale> : public Convergence_tester_DRbar<SplitMSSM<Two_scale> > {
 public:
-   SplitMSSM_convergence_tester(SplitMSSM<Two_scale>*, double);
-   virtual ~SplitMSSM_convergence_tester();
+   using Scale_getter = Convergence_tester_DRbar<SplitMSSM<Two_scale>>::Scale_getter;
+
+   SplitMSSM_convergence_tester(SplitMSSM<Two_scale>*, double, const Scale_getter& sg = Scale_getter());
+   virtual ~SplitMSSM_convergence_tester() = default;
 
 protected:
    virtual double max_rel_diff() const;

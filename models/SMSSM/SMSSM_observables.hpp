@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 12:10:32
+// File generated at Tue 10 Oct 2017 22:23:08
 
 #ifndef SMSSM_OBSERVABLES_H
 #define SMSSM_OBSERVABLES_H
@@ -35,7 +35,7 @@ class SMSSM_mass_eigenstates;
 class Physical_input;
 
 struct SMSSM_observables {
-   static const unsigned NUMBER_OF_OBSERVABLES = 20;
+   static const int NUMBER_OF_OBSERVABLES = 20;
 
    SMSSM_observables();
    Eigen::ArrayXd get() const; ///< returns vector of all observables
@@ -50,7 +50,13 @@ struct SMSSM_observables {
 
 };
 
-SMSSM_observables calculate_observables(const SMSSM_mass_eigenstates&, const softsusy::QedQcd&, const Physical_input&);
+SMSSM_observables calculate_observables(
+   const SMSSM_mass_eigenstates&, const softsusy::QedQcd&,
+   const Physical_input&);
+
+SMSSM_observables calculate_observables(
+   const SMSSM_mass_eigenstates&, const softsusy::QedQcd&,
+   const Physical_input&, double scale);
 
 } // namespace flexiblesusy
 

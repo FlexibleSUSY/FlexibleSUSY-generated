@@ -16,24 +16,26 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 10:40:06
+// File generated at Tue 10 Oct 2017 21:19:51
 
 #include "SM_two_scale_susy_scale_constraint.hpp"
 #include "SM_two_scale_model.hpp"
 #include "wrappers.hpp"
 #include "logger.hpp"
+#include "error.hpp"
 #include "ew_input.hpp"
 #include "gsl_utils.hpp"
 #include "minimizer.hpp"
+#include "raii.hpp"
 #include "root_finder.hpp"
 #include "threshold_loop_functions.hpp"
 
-#include <cassert>
 #include <cmath>
 
 namespace flexiblesusy {
 
 #define DERIVEDPARAMETER(p) model->p()
+#define EXTRAPARAMETER(p) model->get_##p()
 #define INPUTPARAMETER(p) model->get_input().p
 #define MODELPARAMETER(p) model->get_##p()
 #define PHASE(p) model->get_##p()
@@ -50,32 +52,17 @@ namespace flexiblesusy {
 #define MODEL model
 #define MODELCLASSNAME SM<Two_scale>
 
-SM_susy_scale_constraint<Two_scale>::SM_susy_scale_constraint()
-   : Constraint<Two_scale>()
-   , scale(0.)
-   , initial_scale_guess(0.)
-   , model(0)
-   , qedqcd()
-{
-}
-
 SM_susy_scale_constraint<Two_scale>::SM_susy_scale_constraint(
    SM<Two_scale>* model_, const softsusy::QedQcd& qedqcd_)
-   : Constraint<Two_scale>()
-   , model(model_)
+   : model(model_)
    , qedqcd(qedqcd_)
 {
    initialize();
 }
 
-SM_susy_scale_constraint<Two_scale>::~SM_susy_scale_constraint()
-{
-}
-
 void SM_susy_scale_constraint<Two_scale>::apply()
 {
-   assert(model && "Error: SM_susy_scale_constraint::apply():"
-          " model pointer must not be zero");
+   check_model_ptr();
 
 
 
@@ -84,7 +71,6 @@ void SM_susy_scale_constraint<Two_scale>::apply()
 
    // apply user-defined susy scale constraints
    MODEL->solve_ewsb();
-
 
 }
 
@@ -100,8 +86,7 @@ double SM_susy_scale_constraint<Two_scale>::get_initial_scale_guess() const
 
 const SM_input_parameters& SM_susy_scale_constraint<Two_scale>::get_input_parameters() const
 {
-   assert(model && "Error: SM_susy_scale_constraint::"
-          "get_input_parameters(): model pointer is zero.");
+   check_model_ptr();
 
    return model->get_input();
 }
@@ -111,7 +96,7 @@ SM<Two_scale>* SM_susy_scale_constraint<Two_scale>::get_model() const
    return model;
 }
 
-void SM_susy_scale_constraint<Two_scale>::set_model(Two_scale_model* model_)
+void SM_susy_scale_constraint<Two_scale>::set_model(Model* model_)
 {
    model = cast_model<SM<Two_scale>*>(model_);
 }
@@ -131,14 +116,13 @@ void SM_susy_scale_constraint<Two_scale>::clear()
 {
    scale = 0.;
    initial_scale_guess = 0.;
-   model = NULL;
+   model = nullptr;
    qedqcd = softsusy::QedQcd();
 }
 
 void SM_susy_scale_constraint<Two_scale>::initialize()
 {
-   assert(model && "SM_susy_scale_constraint<Two_scale>::"
-          "initialize(): model pointer is zero.");
+   check_model_ptr();
 
    const auto QEWSB = INPUTPARAMETER(QEWSB);
 
@@ -149,14 +133,20 @@ void SM_susy_scale_constraint<Two_scale>::initialize()
 
 void SM_susy_scale_constraint<Two_scale>::update_scale()
 {
-   assert(model && "SM_susy_scale_constraint<Two_scale>::"
-          "update_scale(): model pointer is zero.");
+   check_model_ptr();
 
    const auto QEWSB = INPUTPARAMETER(QEWSB);
 
    scale = QEWSB;
 
 
+}
+
+void SM_susy_scale_constraint<Two_scale>::check_model_ptr() const
+{
+   if (!model)
+      throw SetupError("SM_susy_scale_constraint<Two_scale>: "
+                       "model pointer is zero!");
 }
 
 } // namespace flexiblesusy

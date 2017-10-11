@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 10:32:33
+// File generated at Tue 10 Oct 2017 21:10:05
 
 #ifndef SplitMSSM_INPUT_PARAMETERS_H
 #define SplitMSSM_INPUT_PARAMETERS_H
@@ -27,30 +27,22 @@
 namespace flexiblesusy {
 
 struct SplitMSSM_input_parameters {
-   double MSUSY;
-   double M1Input;
-   double M2Input;
-   double M3Input;
-   double MuInput;
-   double mAInput;
-   double MEWSB;
-   double AtInput;
-   double TanBeta;
-   double LambdaLoopOrder;
-   Eigen::Matrix<double,3,3> msq2;
-   Eigen::Matrix<double,3,3> msu2;
-   Eigen::Matrix<double,3,3> msd2;
-   Eigen::Matrix<double,3,3> msl2;
-   Eigen::Matrix<double,3,3> mse2;
+   double MSUSY{};
+   double M1Input{};
+   double M2Input{};
+   double M3Input{};
+   double MuInput{};
+   double mAInput{};
+   double MEWSB{};
+   double AtInput{};
+   double TanBeta{};
+   double LambdaLoopOrder{};
+   Eigen::Matrix<double,3,3> msq2{Eigen::Matrix<double,3,3>::Zero()};
+   Eigen::Matrix<double,3,3> msu2{Eigen::Matrix<double,3,3>::Zero()};
+   Eigen::Matrix<double,3,3> msd2{Eigen::Matrix<double,3,3>::Zero()};
+   Eigen::Matrix<double,3,3> msl2{Eigen::Matrix<double,3,3>::Zero()};
+   Eigen::Matrix<double,3,3> mse2{Eigen::Matrix<double,3,3>::Zero()};
 
-   SplitMSSM_input_parameters()
-      : MSUSY(0), M1Input(0), M2Input(0), M3Input(0), MuInput(0), mAInput(0),
-   MEWSB(0), AtInput(0), TanBeta(0), LambdaLoopOrder(0), msq2(Eigen::Matrix<
-   double,3,3>::Zero()), msu2(Eigen::Matrix<double,3,3>::Zero()), msd2(
-   Eigen::Matrix<double,3,3>::Zero()), msl2(Eigen::Matrix<double,3,3>::Zero()),
-   mse2(Eigen::Matrix<double,3,3>::Zero())
-
-   {}
 
    Eigen::ArrayXd get() const;
    void set(const Eigen::ArrayXd&);

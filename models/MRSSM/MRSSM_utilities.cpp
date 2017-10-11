@@ -16,22 +16,23 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 10:45:16
+// File generated at Tue 10 Oct 2017 21:39:44
 
 #include "MRSSM_utilities.hpp"
 #include "MRSSM_input_parameters.hpp"
 #include "MRSSM_observables.hpp"
+#include "error.hpp"
 #include "logger.hpp"
 #include "physical_input.hpp"
 #include "database.hpp"
 #include "wrappers.hpp"
 #include "lowe.h"
 
-#include <cassert>
 #include <fstream>
 #include <sstream>
 #include <iostream>
 #include <iomanip>
+#include <iterator>
 
 #define PHYSICAL(p) model.get_physical().p
 #define MODELPARAMETER(p) model.get_##p()
@@ -40,52 +41,72 @@ namespace flexiblesusy {
 
 namespace utilities {
 
-void append(std::vector<std::string>& a, const std::vector<std::string>& b)
+template <typename Iterable>
+void append(std::vector<std::string>& a, const Iterable& b)
 {
-   a.insert(a.end(), b.begin(), b.end());
+   a.insert(a.end(), begin(b), end(b));
 }
 
 void append(Eigen::ArrayXd& a, const Eigen::ArrayXd& b)
 {
-   const unsigned a_rows = a.rows();
+   const auto a_rows = a.rows();
    a.conservativeResize(a_rows + b.rows());
    a.block(a_rows, 0, b.rows(), 1) = b;
 }
 
 } // namespace utilities
 
+namespace {
+
+std::valarray<double> to_valarray(double v)
+{
+   return std::valarray<double>(&v, 1);
+}
+
+template <class Scalar, int M, int N>
+std::valarray<double> to_valarray(const Eigen::Array<Scalar, M, N>& v)
+{
+   return std::valarray<double>(v.data(), v.size());
+}
+
+} // anonymous namespace
+
+MRSSM_spectrum_plotter::MRSSM_spectrum_plotter(const MRSSM_mass_eigenstates& model)
+{
+   extract_spectrum(model);
+}
 
 void MRSSM_spectrum_plotter::extract_spectrum(const MRSSM_mass_eigenstates& model)
 {
    spectrum.clear();
    scale = model.get_scale();
 
-   spectrum.push_back(TParticle("Glu", "\\tilde{g}", to_valarray(PHYSICAL(MGlu))));
-   spectrum.push_back(TParticle("SRdp", "R_d^+", to_valarray(PHYSICAL(MSRdp))));
-   spectrum.push_back(TParticle("SRum", "R_u^-", to_valarray(PHYSICAL(MSRum))));
-   spectrum.push_back(TParticle("sigmaO", "\\sigma_o", to_valarray(PHYSICAL(MsigmaO))));
-   spectrum.push_back(TParticle("phiO", "\\phi_o", to_valarray(PHYSICAL(MphiO))));
-   spectrum.push_back(TParticle("Sd", "\\tilde{d}", to_valarray(PHYSICAL(MSd))));
-   spectrum.push_back(TParticle("Sv", "\\tilde{\\nu}", to_valarray(PHYSICAL(MSv))));
-   spectrum.push_back(TParticle("Su", "\\tilde{u}", to_valarray(PHYSICAL(MSu))));
-   spectrum.push_back(TParticle("Se", "\\tilde{e}", to_valarray(PHYSICAL(MSe))));
-   spectrum.push_back(TParticle("hh", "h", to_valarray(PHYSICAL(Mhh))));
-   spectrum.push_back(TParticle("Ah", "A^0", to_valarray(PHYSICAL(MAh))));
-   spectrum.push_back(TParticle("Rh", "R^h", to_valarray(PHYSICAL(MRh))));
-   spectrum.push_back(TParticle("Hpm", "H^-", to_valarray(PHYSICAL(MHpm))));
-   spectrum.push_back(TParticle("Chi", "\\tilde{\\chi}^0", to_valarray(PHYSICAL(MChi))));
-   spectrum.push_back(TParticle("Cha1", "\\tilde{\\chi}^+", to_valarray(PHYSICAL(MCha1))));
-   spectrum.push_back(TParticle("Cha2", "\\tilde{\\rho}^-", to_valarray(PHYSICAL(MCha2))));
+   spectrum.emplace_back(TParticle("Glu", "\\tilde{g}", to_valarray(PHYSICAL(MGlu))));
+   spectrum.emplace_back(TParticle("SRdp", "R_d^+", to_valarray(PHYSICAL(MSRdp))));
+   spectrum.emplace_back(TParticle("SRum", "R_u^-", to_valarray(PHYSICAL(MSRum))));
+   spectrum.emplace_back(TParticle("sigmaO", "\\sigma_o", to_valarray(PHYSICAL(MsigmaO))));
+   spectrum.emplace_back(TParticle("phiO", "\\phi_o", to_valarray(PHYSICAL(MphiO))));
+   spectrum.emplace_back(TParticle("Sd", "\\tilde{d}", to_valarray(PHYSICAL(MSd))));
+   spectrum.emplace_back(TParticle("Sv", "\\tilde{\\nu}", to_valarray(PHYSICAL(MSv))));
+   spectrum.emplace_back(TParticle("Su", "\\tilde{u}", to_valarray(PHYSICAL(MSu))));
+   spectrum.emplace_back(TParticle("Se", "\\tilde{e}", to_valarray(PHYSICAL(MSe))));
+   spectrum.emplace_back(TParticle("hh", "h", to_valarray(PHYSICAL(Mhh))));
+   spectrum.emplace_back(TParticle("Ah", "A^0", to_valarray(PHYSICAL(MAh))));
+   spectrum.emplace_back(TParticle("Rh", "R^h", to_valarray(PHYSICAL(MRh))));
+   spectrum.emplace_back(TParticle("Hpm", "H^-", to_valarray(PHYSICAL(MHpm))));
+   spectrum.emplace_back(TParticle("Chi", "\\tilde{\\chi}^0", to_valarray(PHYSICAL(MChi))));
+   spectrum.emplace_back(TParticle("Cha1", "\\tilde{\\chi}^+", to_valarray(PHYSICAL(MCha1))));
+   spectrum.emplace_back(TParticle("Cha2", "\\tilde{\\rho}^-", to_valarray(PHYSICAL(MCha2))));
 
    if (model.do_calculate_sm_pole_masses()) {
-      spectrum.push_back(TParticle("Fd", "d", to_valarray(PHYSICAL(MFd))));
-      spectrum.push_back(TParticle("Fe", "e", to_valarray(PHYSICAL(MFe))));
-      spectrum.push_back(TParticle("Fu", "u", to_valarray(PHYSICAL(MFu))));
-      spectrum.push_back(TParticle("Fv", "\\nu", to_valarray(PHYSICAL(MFv))));
-      spectrum.push_back(TParticle("VG", "g", to_valarray(PHYSICAL(MVG))));
-      spectrum.push_back(TParticle("VP", "\\gamma", to_valarray(PHYSICAL(MVP))));
-      spectrum.push_back(TParticle("VWm", "W^-", to_valarray(PHYSICAL(MVWm))));
-      spectrum.push_back(TParticle("VZ", "Z", to_valarray(PHYSICAL(MVZ))));
+      spectrum.emplace_back(TParticle("Fd", "d", to_valarray(PHYSICAL(MFd))));
+      spectrum.emplace_back(TParticle("Fe", "e", to_valarray(PHYSICAL(MFe))));
+      spectrum.emplace_back(TParticle("Fu", "u", to_valarray(PHYSICAL(MFu))));
+      spectrum.emplace_back(TParticle("Fv", "\\nu", to_valarray(PHYSICAL(MFv))));
+      spectrum.emplace_back(TParticle("VG", "g", to_valarray(PHYSICAL(MVG))));
+      spectrum.emplace_back(TParticle("VP", "\\gamma", to_valarray(PHYSICAL(MVP))));
+      spectrum.emplace_back(TParticle("VWm", "W^-", to_valarray(PHYSICAL(MVWm))));
+      spectrum.emplace_back(TParticle("VZ", "Z", to_valarray(PHYSICAL(MVZ))));
 
    }
 }
@@ -140,15 +161,10 @@ void MRSSM_spectrum_plotter::write_spectrum(const TSpectrum& spectrum, std::ofst
                  << std::left << std::setw(width) << masses[i]
                  << std::left << std::setw(width) << name
                  << std::left << std::setw(2*width) << lname
-                 << std::left << std::setw(2*width) << lname_with_index.str()
+                 << std::left << lname_with_index.str()
                  << '\n';
       }
    }
-}
-
-std::valarray<double> MRSSM_spectrum_plotter::to_valarray(double v)
-{
-   return std::valarray<double>(&v, 1);
 }
 
 namespace MRSSM_database {
@@ -202,9 +218,18 @@ void to_database(
    append(names, MRSSM_parameter_getter().get_parameter_names());
    append(values, model.get());
 
+   // fill extra parameters
+   append(names, MRSSM_parameter_getter().get_extra_parameter_names());
+   append(values, model.get_extra_parameters());
+
+   // fill DR-bar masses and mixings
+   append(names, MRSSM_parameter_getter().get_DRbar_mass_names());
+   append(names, MRSSM_parameter_getter().get_DRbar_mixing_names());
+   append(values, model.get_DRbar_masses_and_mixings());
+
    // fill pole masses and mixings
-   append(names, MRSSM_parameter_getter().get_mass_names());
-   append(names, MRSSM_parameter_getter().get_mixing_names());
+   append(names, MRSSM_parameter_getter().get_pole_mass_names());
+   append(names, MRSSM_parameter_getter().get_pole_mixing_names());
    append(values, model.get_physical().get());
 
    // fill low-energy data (optional)
@@ -225,9 +250,29 @@ void to_database(
       append(values, observables->get());
    }
 
-   database::Database db(file_name);
-   db.insert("Point", names, values);
+   try {
+      database::Database db(file_name);
+      db.insert("Point", names, values);
+   } catch(const flexiblesusy::Error& e) {
+      ERROR(e.what());
+   }
 }
+
+namespace {
+Eigen::ArrayXd extract_entry(const std::string& file_name, long long entry)
+{
+   database::Database db(file_name);
+   Eigen::ArrayXd values;
+
+   try {
+      values = db.extract("Point", entry);
+   } catch (const flexiblesusy::Error& e) {
+      ERROR(e.what());
+   }
+
+   return values;
+}
+} // anonymous namespace
 
 /**
  * read mass eigenstates from database
@@ -244,38 +289,38 @@ void to_database(
  * @return mass eigenstates
  */
 MRSSM_mass_eigenstates from_database(
-   const std::string& file_name, std::size_t entry, softsusy::QedQcd* qedqcd,
+   const std::string& file_name, long long entry, softsusy::QedQcd* qedqcd,
    Physical_input* physical_input, MRSSM_observables* observables)
 {
    using utilities::append;
 
    MRSSM_mass_eigenstates model;
-   const std::size_t number_of_parameters = model.get_number_of_parameters();
-   const std::size_t number_of_masses = MRSSM_parameter_getter().get_number_of_masses();
-   const std::size_t number_of_mixings = MRSSM_info::NUMBER_OF_MIXINGS;
-   const std::size_t number_of_input_parameters = MRSSM_info::NUMBER_OF_INPUT_PARAMETERS;
-   const std::size_t number_of_low_energy_input_parameters =
-      (qedqcd ? softsusy::NUMBER_OF_LOW_ENERGY_INPUT_PARAMETERS : 0u);
-   const std::size_t number_of_extra_physical_input_parameters =
-      (physical_input ? Physical_input::NUMBER_OF_INPUT_PARAMETERS : 0u);
-   const std::size_t number_of_observables =
-      (observables ? MRSSM_observables::NUMBER_OF_OBSERVABLES : 0u);
-   const std::size_t total_entries = 9 + number_of_input_parameters
-      + number_of_parameters + number_of_masses + number_of_mixings
+   const auto number_of_parameters = model.get_number_of_parameters();
+   const auto number_of_masses = MRSSM_parameter_getter().get_number_of_masses();
+   const auto number_of_mixings = MRSSM_info::NUMBER_OF_MIXINGS;
+   const auto number_of_input_parameters = MRSSM_info::NUMBER_OF_INPUT_PARAMETERS;
+   const auto number_of_extra_parameters = MRSSM_info::NUMBER_OF_EXTRA_PARAMETERS;
+   const auto number_of_low_energy_input_parameters =
+      (qedqcd ? softsusy::NUMBER_OF_LOW_ENERGY_INPUT_PARAMETERS : 0);
+   const auto number_of_extra_physical_input_parameters =
+      (physical_input ? Physical_input::NUMBER_OF_INPUT_PARAMETERS : 0);
+   const auto number_of_observables =
+      (observables ? MRSSM_observables::NUMBER_OF_OBSERVABLES : 0);
+   const auto total_entries = 9 + number_of_input_parameters + number_of_extra_parameters
+      + number_of_parameters + 2*(number_of_masses + number_of_mixings)
       + number_of_low_energy_input_parameters
       + number_of_extra_physical_input_parameters + number_of_observables;
 
-   database::Database db(file_name);
-   const Eigen::ArrayXd values(db.extract("Point", entry));
+   const Eigen::ArrayXd values(extract_entry(file_name, entry));
 
-   if (static_cast<std::size_t>(values.rows()) < total_entries) {
+   if (values.rows() < total_entries) {
       ERROR("data set " << entry << " extracted from " << file_name
             << " contains " << values.rows() << " entries."
             " Expected number of entries at least: " << total_entries);
       return model;
    }
 
-   unsigned offset = 0;
+   int offset = 0;
 
    // restore settings
    model.set_loops(values(offset++));
@@ -295,6 +340,14 @@ MRSSM_mass_eigenstates from_database(
    // restore DR-bar parameters
    model.set(values.block(offset, 0, number_of_parameters, 1));
    offset += number_of_parameters;
+
+   // restore extra parameters
+   model.set_extra_parameters(values.block(offset, 0, number_of_extra_parameters, 1));
+   offset += number_of_extra_parameters;
+
+   // restore DR-bar masses and mixings
+   model.set_DRbar_masses_and_mixings(values.block(offset, 0, number_of_masses + number_of_mixings, 1));
+   offset += number_of_masses + number_of_mixings;
 
    // restore pole masses and mixings
    model.get_physical().set(values.block(offset, 0, number_of_masses + number_of_mixings, 1));
@@ -318,7 +371,9 @@ MRSSM_mass_eigenstates from_database(
       offset += number_of_observables;
    }
 
-   assert(offset == total_entries);
+   if (offset != total_entries)
+      throw SetupError("from_database: offset (" + ToString(offset) +
+                       ") != total_entries (" + ToString(total_entries) + ").");
 
    return model;
 }

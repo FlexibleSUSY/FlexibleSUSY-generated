@@ -16,9 +16,10 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 10:40:04
+// File generated at Tue 10 Oct 2017 21:19:50
 
 #include "SM_two_scale_convergence_tester.hpp"
+#include <array>
 #include <cmath>
 #include <algorithm>
 #include "wrappers.hpp"
@@ -40,36 +41,33 @@ namespace flexiblesusy {
 #define OLD4(p,i,j,k,l) ol.get_##p(i,j,k,l)
 #define NEW4(p,i,j,k,l) ne.get_##p(i,j,k,l)
 
-SM_convergence_tester<Two_scale>::SM_convergence_tester(SM<Two_scale>* model, double accuracy_goal)
-   : Convergence_tester_DRbar<SM<Two_scale> >(model, accuracy_goal)
-{
-}
-
-SM_convergence_tester<Two_scale>::~SM_convergence_tester()
+SM_convergence_tester<Two_scale>::SM_convergence_tester(
+   SM<Two_scale>* model, double accuracy_goal, const Scale_getter& sg)
+   : Convergence_tester_DRbar<SM<Two_scale> >(model, accuracy_goal, sg)
 {
 }
 
 double SM_convergence_tester<Two_scale>::max_rel_diff() const
 {
    const SM<Two_scale>& ol = get_last_iteration_model();
-   const SM<Two_scale>& ne = get_model();
+   const SM<Two_scale>& ne = get_current_iteration_model();
 
-   double diff[12] = { 0 };
+   std::array<double, 12> diff{};
 
    diff[0] = MaxRelDiff(OLD(Mhh),NEW(Mhh));
    diff[1] = MaxRelDiff(OLD(MVZ),NEW(MVZ));
-   for (unsigned i = 0; i < 3; i++) {
+   for (int i = 0; i < 3; ++i) {
       diff[i + 2] = MaxRelDiff(OLD1(MFd,i),NEW1(MFd,i));
    }
-   for (unsigned i = 0; i < 3; i++) {
+   for (int i = 0; i < 3; ++i) {
       diff[i + 5] = MaxRelDiff(OLD1(MFu,i),NEW1(MFu,i));
    }
-   for (unsigned i = 0; i < 3; i++) {
+   for (int i = 0; i < 3; ++i) {
       diff[i + 8] = MaxRelDiff(OLD1(MFe,i),NEW1(MFe,i));
    }
    diff[11] = MaxRelDiff(OLD(MVWp),NEW(MVWp));
 
-   return *std::max_element(diff, diff + 12);
+   return *std::max_element(diff.cbegin(), diff.cend());
 
 }
 

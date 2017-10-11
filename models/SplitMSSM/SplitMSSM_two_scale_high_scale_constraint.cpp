@@ -16,20 +16,21 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 10:32:38
+// File generated at Tue 10 Oct 2017 21:13:26
 
 #include "SplitMSSM_two_scale_high_scale_constraint.hpp"
 #include "SplitMSSM_two_scale_model.hpp"
+#include "SplitMSSM_info.hpp"
 #include "wrappers.hpp"
 #include "logger.hpp"
 #include "ew_input.hpp"
 #include "gsl_utils.hpp"
 #include "minimizer.hpp"
+#include "raii.hpp"
 #include "root_finder.hpp"
 #include "threshold_loop_functions.hpp"
 #include "numerics2.hpp"
 
-#include <cassert>
 #include <cmath>
 #include <cerrno>
 #include <cstring>
@@ -37,6 +38,7 @@
 namespace flexiblesusy {
 
 #define DERIVEDPARAMETER(p) model->p()
+#define EXTRAPARAMETER(p) model->get_##p()
 #define INPUTPARAMETER(p) model->get_input().p
 #define MODELPARAMETER(p) model->get_##p()
 #define PHASE(p) model->get_##p()
@@ -53,30 +55,16 @@ namespace flexiblesusy {
 #define MODEL model
 #define MODELCLASSNAME SplitMSSM<Two_scale>
 
-SplitMSSM_high_scale_constraint<Two_scale>::SplitMSSM_high_scale_constraint()
-   : Constraint<Two_scale>()
-   , scale(0.)
-   , initial_scale_guess(0.)
-   , model(0)
-{
-}
-
 SplitMSSM_high_scale_constraint<Two_scale>::SplitMSSM_high_scale_constraint(
    SplitMSSM<Two_scale>* model_)
-   : Constraint<Two_scale>()
-   , model(model_)
+   : model(model_)
 {
    initialize();
 }
 
-SplitMSSM_high_scale_constraint<Two_scale>::~SplitMSSM_high_scale_constraint()
-{
-}
-
 void SplitMSSM_high_scale_constraint<Two_scale>::apply()
 {
-   assert(model && "Error: SplitMSSM_high_scale_constraint::apply():"
-          " model pointer must not be zero");
+   check_model_ptr();
 
 
 
@@ -98,56 +86,54 @@ void SplitMSSM_high_scale_constraint<Two_scale>::apply()
    const auto Yu = MODELPARAMETER(Yu);
 
    MODEL->set_Lambdax(Re(0.25*(0.6*Sqr(g1) + Sqr(g2))*Sqr(Cos(2*ArcTan(TanBeta)
-      )) + If(IsCloseRel(msq2(2,2),msu2(2,2),0.01), 0.000053468657576480914*Sqr(g3
-      )*(-18 - Power(AtInput - Mu/TanBeta,4)/Abs(msq2(2,2)*msu2(2,2)) + (12*Sqr(
-      AtInput - Mu/TanBeta))/Power(Abs(msq2(2,2)*msu2(2,2)),0.5) + 6*Log(msq2(2,2)
-      /Sqr(SCALE))*(4 + Power(AtInput - Mu/TanBeta,4)/Abs(msq2(2,2)*msu2(2,2)) - (
-      12*Sqr(AtInput - Mu/TanBeta))/Power(Abs(msq2(2,2)*msu2(2,2)),0.5)) - 36*Sqr(
-      Log(msq2(2,2)/Sqr(SCALE))))*Power(Yu(2,2),4), -0.0003208119454588855*Sqr(g3)
-      *(3 + 4*Log(Power(Abs(msq2(2,2)/msu2(2,2)),0.5)) - 4*(1 + 3*Log(Power(Abs(
-      msq2(2,2)/msu2(2,2)),0.5)))*Log(msq2(2,2)/Sqr(SCALE)) + 8*Sqr(Log(Power(Abs(
-      msq2(2,2)/msu2(2,2)),0.5))) + (Sqr(AtInput - Mu/TanBeta)*((12*Power(Abs(msq2
-      (2,2)/msu2(2,2)),0.5)*Log(Power(Abs(msq2(2,2)/msu2(2,2)),0.5))*(-1 + 2*Log(
-      msq2(2,2)/Sqr(SCALE))))/(-1 + Abs(msq2(2,2)/msu2(2,2))) - (16*(-2 + Abs(msq2
-      (2,2)/msu2(2,2)))*Power(Abs(msq2(2,2)/msu2(2,2)),0.5)*Sqr(Log(Power(Abs(msq2
-      (2,2)/msu2(2,2)),0.5))))/Sqr(-1 + Abs(msq2(2,2)/msu2(2,2)))))/Power(Abs(msq2
-      (2,2)*msu2(2,2)),0.5) + (Power(AtInput - Mu/TanBeta,4)*((6*Abs(msq2(2,2)
-      /msu2(2,2))*(5 + Abs(msq2(2,2)/msu2(2,2)))*Log(Power(Abs(msq2(2,2)/msu2(2,2)
-      ),0.5)))/Power(-1 + Abs(msq2(2,2)/msu2(2,2)),3) - (10*Abs(msq2(2,2)/msu2(2,2
-      )))/Sqr(-1 + Abs(msq2(2,2)/msu2(2,2))) + (12*Abs(msq2(2,2)/msu2(2,2))*(1 - (
-      (1 + Abs(msq2(2,2)/msu2(2,2)))*Log(Power(Abs(msq2(2,2)/msu2(2,2)),0.5)))/(-1
-      + Abs(msq2(2,2)/msu2(2,2))))*Log(msq2(2,2)/Sqr(SCALE)))/Sqr(-1 + Abs(msq2(2
-      ,2)/msu2(2,2))) + (4*Abs(msq2(2,2)/msu2(2,2))*(-5 - 4*Abs(msq2(2,2)/msu2(2,2
-      )) + Sqr(Abs(msq2(2,2)/msu2(2,2))))*Sqr(Log(Power(Abs(msq2(2,2)/msu2(2,2)),
-      0.5))))/Power(-1 + Abs(msq2(2,2)/msu2(2,2)),4)))/Abs(msq2(2,2)*msu2(2,2)) +
-      6*Sqr(Log(msq2(2,2)/Sqr(SCALE))))*Power(Yu(2,2),4))*UnitStep(-2 +
-      LambdaLoopOrder) + UnitStep(-1 + LambdaLoopOrder)*(0.006332573977646111*(
-      -0.09*Power(g1,4) - 0.3*Sqr(g1)*Sqr(g2) - Power(g2,4)*(0.75 -
-      0.16666666666666666*Sqr(Cos(2*ArcTan(TanBeta))))) + 0.006332573977646111*(
-      0.00020833333333333335*Log(Sqr(mAInput)/Sqr(SCALE))*(261*Power(g1,4) + 1325*
-      Power(g2,4) + 630*Sqr(g1)*Sqr(g2) - 4*Cos(4*ArcTan(TanBeta))*(9*Power(g1,4)
-      + 175*Power(g2,4) + 90*Sqr(g1)*Sqr(g2)) - 9*Cos(8*ArcTan(TanBeta))*Sqr(3*
-      Power(g1,2) + 5*Power(g2,2))) + 0.0033333333333333335*(6*Power(g1,4)*(Log(
-      msd2(0,0)/Sqr(SCALE)) + Log(msd2(1,1)/Sqr(SCALE)) + Log(msd2(2,2)/Sqr(SCALE)
-      )) + 18*Power(g1,4)*(Log(mse2(0,0)/Sqr(SCALE)) + Log(mse2(1,1)/Sqr(SCALE)) +
-      Log(mse2(2,2)/Sqr(SCALE))) + (9*Power(g1,4) + 25*Power(g2,4))*(Log(msl2(0,0
-      )/Sqr(SCALE)) + Log(msl2(1,1)/Sqr(SCALE)) + Log(msl2(2,2)/Sqr(SCALE))) + 3*(
-      Power(g1,4) + 25*Power(g2,4))*(Log(msq2(0,0)/Sqr(SCALE)) + Log(msq2(1,1)/Sqr
-      (SCALE)) + Log(msq2(2,2)/Sqr(SCALE))) + 24*Power(g1,4)*(Log(msu2(0,0)/Sqr(
-      SCALE)) + Log(msu2(1,1)/Sqr(SCALE)) + Log(msu2(2,2)/Sqr(SCALE))))*Sqr(Cos(2*
-      ArcTan(TanBeta))) - 0.1875*Sqr(0.6*Power(g1,2) + Power(g2,2))*Sqr(Sin(4*
-      ArcTan(TanBeta))) + 3*Log(msu2(2,2)/Sqr(SCALE))*Sqr(Yu(2,2))*(0.4*Cos(2*
-      ArcTan(TanBeta))*Sqr(g1) + Sqr(Yu(2,2))) + 3*Log(msq2(2,2)/Sqr(SCALE))*Sqr(
-      Yu(2,2))*(0.5*Cos(2*ArcTan(TanBeta))*(-0.2*Sqr(g1) + Sqr(g2)) + Sqr(Yu(2,2))
-      ) + (6*Sqr(AtInput - Mu/TanBeta)*Power(Yu(2,2),4)*(TCF(1)(Sqrt(Abs(msq2(2,2)
-      /msu2(2,2)))) - (0.08333333333333333*Sqr(AtInput - Mu/TanBeta)*TCF(2)(Sqrt(
-      Abs(msq2(2,2)/msu2(2,2)))))/Sqrt(Abs(msq2(2,2)*msu2(2,2)))))/Sqrt(Abs(msq2(2
-      ,2)*msu2(2,2))) + (0.75*Cos(2*ArcTan(TanBeta))*Sqr(AtInput - Mu/TanBeta)*Sqr
-      (Yu(2,2))*(0.6*Sqr(g1)*TCF(3)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))) + Sqr(g2)*TCF(
-      4)(Sqrt(Abs(msq2(2,2)/msu2(2,2))))))/Sqrt(Abs(msq2(2,2)*msu2(2,2))) - (0.25*
-      (0.6*Sqr(g1) + Sqr(g2))*Sqr(Cos(2*ArcTan(TanBeta)))*Sqr(AtInput - Mu/TanBeta
-      )*Sqr(Yu(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/Sqrt(Abs(msq2(2,2)*
-      msu2(2,2)))))));
+      )) + IF(IsCloseRel(msq2(2,2),msu2(2,2),0.01), (0.005208333333333333*Quad(Yu(
+      2,2))*Sqr(g3)*(-18 - Quad(AtInput - Mu/TanBeta)/Abs(msq2(2,2)*msu2(2,2)) + (
+      12*Sqr(AtInput - Mu/TanBeta))/Sqrt(Abs(msq2(2,2)*msu2(2,2))) + 6*Log(msq2(2,
+      2)/Sqr(SCALE))*(4 + Quad(AtInput - Mu/TanBeta)/Abs(msq2(2,2)*msu2(2,2)) - (
+      12*Sqr(AtInput - Mu/TanBeta))/Sqrt(Abs(msq2(2,2)*msu2(2,2)))) - 36*Sqr(Log(
+      msq2(2,2)/Sqr(SCALE)))))/Quad(3.141592653589793), (-0.03125*Quad(Yu(2,2))*
+      Sqr(g3)*(3 + 4*Log(Sqrt(Abs(msq2(2,2)/msu2(2,2)))) - 4*(1 + 3*Log(Sqrt(Abs(
+      msq2(2,2)/msu2(2,2)))))*Log(msq2(2,2)/Sqr(SCALE)) + 8*Sqr(Log(Sqrt(Abs(msq2(
+      2,2)/msu2(2,2))))) + (Sqr(AtInput - Mu/TanBeta)*((12*Sqrt(Abs(msq2(2,2)/msu2
+      (2,2)))*Log(Sqrt(Abs(msq2(2,2)/msu2(2,2))))*(-1 + 2*Log(msq2(2,2)/Sqr(SCALE)
+      )))/(-1 + Abs(msq2(2,2)/msu2(2,2))) - (16*(-2 + Abs(msq2(2,2)/msu2(2,2)))*
+      Sqrt(Abs(msq2(2,2)/msu2(2,2)))*Sqr(Log(Sqrt(Abs(msq2(2,2)/msu2(2,2))))))/Sqr
+      (-1 + Abs(msq2(2,2)/msu2(2,2)))))/Sqrt(Abs(msq2(2,2)*msu2(2,2))) + (Quad(
+      AtInput - Mu/TanBeta)*((6*Abs(msq2(2,2)/msu2(2,2))*(5 + Abs(msq2(2,2)/msu2(2
+      ,2)))*Log(Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/Cube(-1 + Abs(msq2(2,2)/msu2(2,2)
+      )) - (10*Abs(msq2(2,2)/msu2(2,2)))/Sqr(-1 + Abs(msq2(2,2)/msu2(2,2))) + (12*
+      Abs(msq2(2,2)/msu2(2,2))*(1 - ((1 + Abs(msq2(2,2)/msu2(2,2)))*Log(Sqrt(Abs(
+      msq2(2,2)/msu2(2,2)))))/(-1 + Abs(msq2(2,2)/msu2(2,2))))*Log(msq2(2,2)/Sqr(
+      SCALE)))/Sqr(-1 + Abs(msq2(2,2)/msu2(2,2))) + (4*Abs(msq2(2,2)/msu2(2,2))*(
+      -5 - 4*Abs(msq2(2,2)/msu2(2,2)) + Sqr(Abs(msq2(2,2)/msu2(2,2))))*Sqr(Log(
+      Sqrt(Abs(msq2(2,2)/msu2(2,2))))))/Quad(-1 + Abs(msq2(2,2)/msu2(2,2)))))/Abs(
+      msq2(2,2)*msu2(2,2)) + 6*Sqr(Log(msq2(2,2)/Sqr(SCALE)))))/Quad(
+      3.141592653589793))*UnitStep(-2 + LambdaLoopOrder) + UnitStep(-1 +
+      LambdaLoopOrder)*(0.006332573977646111*(-0.09*Quad(g1) - 0.3*Sqr(g1)*Sqr(g2)
+      - Quad(g2)*(0.75 - 0.16666666666666666*Sqr(Cos(2*ArcTan(TanBeta))))) +
+      0.006332573977646111*(0.00020833333333333335*Log(Sqr(mAInput)/Sqr(SCALE))*(
+      261*Quad(g1) + 1325*Quad(g2) + 630*Sqr(g1)*Sqr(g2) - 4*Cos(4*ArcTan(TanBeta)
+      )*(9*Quad(g1) + 175*Quad(g2) + 90*Sqr(g1)*Sqr(g2)) - 9*Cos(8*ArcTan(TanBeta)
+      )*Sqr(3*Sqr(g1) + 5*Sqr(g2))) + 0.0033333333333333335*(6*(Log(msd2(0,0)/Sqr(
+      SCALE)) + Log(msd2(1,1)/Sqr(SCALE)) + Log(msd2(2,2)/Sqr(SCALE)))*Quad(g1) +
+      18*(Log(mse2(0,0)/Sqr(SCALE)) + Log(mse2(1,1)/Sqr(SCALE)) + Log(mse2(2,2)
+      /Sqr(SCALE)))*Quad(g1) + 24*(Log(msu2(0,0)/Sqr(SCALE)) + Log(msu2(1,1)/Sqr(
+      SCALE)) + Log(msu2(2,2)/Sqr(SCALE)))*Quad(g1) + 3*(Log(msq2(0,0)/Sqr(SCALE))
+      + Log(msq2(1,1)/Sqr(SCALE)) + Log(msq2(2,2)/Sqr(SCALE)))*(Quad(g1) + 25*
+      Quad(g2)) + (Log(msl2(0,0)/Sqr(SCALE)) + Log(msl2(1,1)/Sqr(SCALE)) + Log(
+      msl2(2,2)/Sqr(SCALE)))*(9*Quad(g1) + 25*Quad(g2)))*Sqr(Cos(2*ArcTan(TanBeta)
+      )) - 0.1875*Sqr(0.6*Sqr(g1) + Sqr(g2))*Sqr(Sin(4*ArcTan(TanBeta))) + 3*Log(
+      msu2(2,2)/Sqr(SCALE))*Sqr(Yu(2,2))*(0.4*Cos(2*ArcTan(TanBeta))*Sqr(g1) + Sqr
+      (Yu(2,2))) + 3*Log(msq2(2,2)/Sqr(SCALE))*Sqr(Yu(2,2))*(0.5*Cos(2*ArcTan(
+      TanBeta))*(-0.2*Sqr(g1) + Sqr(g2)) + Sqr(Yu(2,2))) + (6*Quad(Yu(2,2))*Sqr(
+      AtInput - Mu/TanBeta)*(TCF(1)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))) - (
+      0.08333333333333333*Sqr(AtInput - Mu/TanBeta)*TCF(2)(Sqrt(Abs(msq2(2,2)/msu2
+      (2,2)))))/Sqrt(Abs(msq2(2,2)*msu2(2,2)))))/Sqrt(Abs(msq2(2,2)*msu2(2,2))) +
+      (0.75*Cos(2*ArcTan(TanBeta))*Sqr(AtInput - Mu/TanBeta)*Sqr(Yu(2,2))*(0.6*Sqr
+      (g1)*TCF(3)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))) + Sqr(g2)*TCF(4)(Sqrt(Abs(msq2(2
+      ,2)/msu2(2,2))))))/Sqrt(Abs(msq2(2,2)*msu2(2,2))) - (0.25*(0.6*Sqr(g1) + Sqr
+      (g2))*Sqr(Cos(2*ArcTan(TanBeta)))*Sqr(AtInput - Mu/TanBeta)*Sqr(Yu(2,2))*TCF
+      (5)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/Sqrt(Abs(msq2(2,2)*msu2(2,2)))))));
    MODEL->set_gYu(Re((0.7745966692414834*g1*TanBeta)/Sqrt(1 + Sqr(TanBeta)) + (
       0.004905190710809969*g1*TanBeta*(0.1*(2*Log(mse2(0,0)/Sqr(SCALE)) + 2*Log(
       mse2(1,1)/Sqr(SCALE)) + 2*Log(mse2(2,2)/Sqr(SCALE)) + Log(msl2(0,0)/Sqr(
@@ -198,8 +184,6 @@ void SplitMSSM_high_scale_constraint<Two_scale>::apply()
 
 
    check_non_perturbative();
-
-
 }
 
 bool SplitMSSM_high_scale_constraint<Two_scale>::check_non_perturbative()
@@ -220,69 +204,237 @@ bool SplitMSSM_high_scale_constraint<Two_scale>::check_non_perturbative()
 
    if (MaxAbsValue(g1) > 3.5449077018110318) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter("g1", MaxAbsValue(g1), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::g1, MaxAbsValue(g1), model->get_scale(), 3.5449077018110318);
    } else {
-      model->get_problems().unflag_non_perturbative_parameter("g1");
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::g1);
    }
    if (MaxAbsValue(g2) > 3.5449077018110318) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter("g2", MaxAbsValue(g2), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::g2, MaxAbsValue(g2), model->get_scale(), 3.5449077018110318);
    } else {
-      model->get_problems().unflag_non_perturbative_parameter("g2");
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::g2);
    }
    if (MaxAbsValue(g3) > 3.5449077018110318) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter("g3", MaxAbsValue(g3), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::g3, MaxAbsValue(g3), model->get_scale(), 3.5449077018110318);
    } else {
-      model->get_problems().unflag_non_perturbative_parameter("g3");
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::g3);
    }
    if (MaxAbsValue(Lambdax) > 3.5449077018110318) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter("Lambdax", MaxAbsValue(Lambdax), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::Lambdax, MaxAbsValue(Lambdax), model->get_scale(), 3.5449077018110318);
    } else {
-      model->get_problems().unflag_non_perturbative_parameter("Lambdax");
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::Lambdax);
    }
-   if (MaxAbsValue(Yu) > 3.5449077018110318) {
+   if (MaxAbsValue(Yu(0,0)) > 3.5449077018110318) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter("Yu", MaxAbsValue(Yu), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::Yu0_0, MaxAbsValue(Yu(0,0)), model->get_scale(), 3.5449077018110318);
    } else {
-      model->get_problems().unflag_non_perturbative_parameter("Yu");
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::Yu0_0);
    }
-   if (MaxAbsValue(Yd) > 3.5449077018110318) {
+
+   if (MaxAbsValue(Yu(0,1)) > 3.5449077018110318) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter("Yd", MaxAbsValue(Yd), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::Yu0_1, MaxAbsValue(Yu(0,1)), model->get_scale(), 3.5449077018110318);
    } else {
-      model->get_problems().unflag_non_perturbative_parameter("Yd");
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::Yu0_1);
    }
-   if (MaxAbsValue(Ye) > 3.5449077018110318) {
+
+   if (MaxAbsValue(Yu(0,2)) > 3.5449077018110318) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter("Ye", MaxAbsValue(Ye), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::Yu0_2, MaxAbsValue(Yu(0,2)), model->get_scale(), 3.5449077018110318);
    } else {
-      model->get_problems().unflag_non_perturbative_parameter("Ye");
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::Yu0_2);
+   }
+
+   if (MaxAbsValue(Yu(1,0)) > 3.5449077018110318) {
+      problem = true;
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::Yu1_0, MaxAbsValue(Yu(1,0)), model->get_scale(), 3.5449077018110318);
+   } else {
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::Yu1_0);
+   }
+
+   if (MaxAbsValue(Yu(1,1)) > 3.5449077018110318) {
+      problem = true;
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::Yu1_1, MaxAbsValue(Yu(1,1)), model->get_scale(), 3.5449077018110318);
+   } else {
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::Yu1_1);
+   }
+
+   if (MaxAbsValue(Yu(1,2)) > 3.5449077018110318) {
+      problem = true;
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::Yu1_2, MaxAbsValue(Yu(1,2)), model->get_scale(), 3.5449077018110318);
+   } else {
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::Yu1_2);
+   }
+
+   if (MaxAbsValue(Yu(2,0)) > 3.5449077018110318) {
+      problem = true;
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::Yu2_0, MaxAbsValue(Yu(2,0)), model->get_scale(), 3.5449077018110318);
+   } else {
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::Yu2_0);
+   }
+
+   if (MaxAbsValue(Yu(2,1)) > 3.5449077018110318) {
+      problem = true;
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::Yu2_1, MaxAbsValue(Yu(2,1)), model->get_scale(), 3.5449077018110318);
+   } else {
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::Yu2_1);
+   }
+
+   if (MaxAbsValue(Yu(2,2)) > 3.5449077018110318) {
+      problem = true;
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::Yu2_2, MaxAbsValue(Yu(2,2)), model->get_scale(), 3.5449077018110318);
+   } else {
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::Yu2_2);
+   }
+   if (MaxAbsValue(Yd(0,0)) > 3.5449077018110318) {
+      problem = true;
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::Yd0_0, MaxAbsValue(Yd(0,0)), model->get_scale(), 3.5449077018110318);
+   } else {
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::Yd0_0);
+   }
+
+   if (MaxAbsValue(Yd(0,1)) > 3.5449077018110318) {
+      problem = true;
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::Yd0_1, MaxAbsValue(Yd(0,1)), model->get_scale(), 3.5449077018110318);
+   } else {
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::Yd0_1);
+   }
+
+   if (MaxAbsValue(Yd(0,2)) > 3.5449077018110318) {
+      problem = true;
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::Yd0_2, MaxAbsValue(Yd(0,2)), model->get_scale(), 3.5449077018110318);
+   } else {
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::Yd0_2);
+   }
+
+   if (MaxAbsValue(Yd(1,0)) > 3.5449077018110318) {
+      problem = true;
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::Yd1_0, MaxAbsValue(Yd(1,0)), model->get_scale(), 3.5449077018110318);
+   } else {
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::Yd1_0);
+   }
+
+   if (MaxAbsValue(Yd(1,1)) > 3.5449077018110318) {
+      problem = true;
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::Yd1_1, MaxAbsValue(Yd(1,1)), model->get_scale(), 3.5449077018110318);
+   } else {
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::Yd1_1);
+   }
+
+   if (MaxAbsValue(Yd(1,2)) > 3.5449077018110318) {
+      problem = true;
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::Yd1_2, MaxAbsValue(Yd(1,2)), model->get_scale(), 3.5449077018110318);
+   } else {
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::Yd1_2);
+   }
+
+   if (MaxAbsValue(Yd(2,0)) > 3.5449077018110318) {
+      problem = true;
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::Yd2_0, MaxAbsValue(Yd(2,0)), model->get_scale(), 3.5449077018110318);
+   } else {
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::Yd2_0);
+   }
+
+   if (MaxAbsValue(Yd(2,1)) > 3.5449077018110318) {
+      problem = true;
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::Yd2_1, MaxAbsValue(Yd(2,1)), model->get_scale(), 3.5449077018110318);
+   } else {
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::Yd2_1);
+   }
+
+   if (MaxAbsValue(Yd(2,2)) > 3.5449077018110318) {
+      problem = true;
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::Yd2_2, MaxAbsValue(Yd(2,2)), model->get_scale(), 3.5449077018110318);
+   } else {
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::Yd2_2);
+   }
+   if (MaxAbsValue(Ye(0,0)) > 3.5449077018110318) {
+      problem = true;
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::Ye0_0, MaxAbsValue(Ye(0,0)), model->get_scale(), 3.5449077018110318);
+   } else {
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::Ye0_0);
+   }
+
+   if (MaxAbsValue(Ye(0,1)) > 3.5449077018110318) {
+      problem = true;
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::Ye0_1, MaxAbsValue(Ye(0,1)), model->get_scale(), 3.5449077018110318);
+   } else {
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::Ye0_1);
+   }
+
+   if (MaxAbsValue(Ye(0,2)) > 3.5449077018110318) {
+      problem = true;
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::Ye0_2, MaxAbsValue(Ye(0,2)), model->get_scale(), 3.5449077018110318);
+   } else {
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::Ye0_2);
+   }
+
+   if (MaxAbsValue(Ye(1,0)) > 3.5449077018110318) {
+      problem = true;
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::Ye1_0, MaxAbsValue(Ye(1,0)), model->get_scale(), 3.5449077018110318);
+   } else {
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::Ye1_0);
+   }
+
+   if (MaxAbsValue(Ye(1,1)) > 3.5449077018110318) {
+      problem = true;
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::Ye1_1, MaxAbsValue(Ye(1,1)), model->get_scale(), 3.5449077018110318);
+   } else {
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::Ye1_1);
+   }
+
+   if (MaxAbsValue(Ye(1,2)) > 3.5449077018110318) {
+      problem = true;
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::Ye1_2, MaxAbsValue(Ye(1,2)), model->get_scale(), 3.5449077018110318);
+   } else {
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::Ye1_2);
+   }
+
+   if (MaxAbsValue(Ye(2,0)) > 3.5449077018110318) {
+      problem = true;
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::Ye2_0, MaxAbsValue(Ye(2,0)), model->get_scale(), 3.5449077018110318);
+   } else {
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::Ye2_0);
+   }
+
+   if (MaxAbsValue(Ye(2,1)) > 3.5449077018110318) {
+      problem = true;
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::Ye2_1, MaxAbsValue(Ye(2,1)), model->get_scale(), 3.5449077018110318);
+   } else {
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::Ye2_1);
+   }
+
+   if (MaxAbsValue(Ye(2,2)) > 3.5449077018110318) {
+      problem = true;
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::Ye2_2, MaxAbsValue(Ye(2,2)), model->get_scale(), 3.5449077018110318);
+   } else {
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::Ye2_2);
    }
    if (MaxAbsValue(gYd) > 3.5449077018110318) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter("gYd", MaxAbsValue(gYd), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::gYd, MaxAbsValue(gYd), model->get_scale(), 3.5449077018110318);
    } else {
-      model->get_problems().unflag_non_perturbative_parameter("gYd");
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::gYd);
    }
    if (MaxAbsValue(g2d) > 3.5449077018110318) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter("g2d", MaxAbsValue(g2d), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::g2d, MaxAbsValue(g2d), model->get_scale(), 3.5449077018110318);
    } else {
-      model->get_problems().unflag_non_perturbative_parameter("g2d");
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::g2d);
    }
    if (MaxAbsValue(gYu) > 3.5449077018110318) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter("gYu", MaxAbsValue(gYu), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::gYu, MaxAbsValue(gYu), model->get_scale(), 3.5449077018110318);
    } else {
-      model->get_problems().unflag_non_perturbative_parameter("gYu");
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::gYu);
    }
    if (MaxAbsValue(g2u) > 3.5449077018110318) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter("g2u", MaxAbsValue(g2u), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(SplitMSSM_info::g2u, MaxAbsValue(g2u), model->get_scale(), 3.5449077018110318);
    } else {
-      model->get_problems().unflag_non_perturbative_parameter("g2u");
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::g2u);
    }
 
 
@@ -309,7 +461,7 @@ SplitMSSM<Two_scale>* SplitMSSM_high_scale_constraint<Two_scale>::get_model() co
    return model;
 }
 
-void SplitMSSM_high_scale_constraint<Two_scale>::set_model(Two_scale_model* model_)
+void SplitMSSM_high_scale_constraint<Two_scale>::set_model(Model* model_)
 {
    model = cast_model<SplitMSSM<Two_scale>*>(model_);
 }
@@ -323,13 +475,12 @@ void SplitMSSM_high_scale_constraint<Two_scale>::clear()
 {
    scale = 0.;
    initial_scale_guess = 0.;
-   model = NULL;
+   model = nullptr;
 }
 
 void SplitMSSM_high_scale_constraint<Two_scale>::initialize()
 {
-   assert(model && "SplitMSSM_high_scale_constraint<Two_scale>::"
-          "initialize(): model pointer is zero.");
+   check_model_ptr();
 
    const auto MSUSY = INPUTPARAMETER(MSUSY);
 
@@ -340,30 +491,20 @@ void SplitMSSM_high_scale_constraint<Two_scale>::initialize()
 
 void SplitMSSM_high_scale_constraint<Two_scale>::update_scale()
 {
-   assert(model && "SplitMSSM_high_scale_constraint<Two_scale>::"
-          "update_scale(): model pointer is zero.");
-
-   const double currentScale = model->get_scale();
-   const SplitMSSM_soft_parameters beta_functions(model->calc_beta());
+   check_model_ptr();
 
    const auto MSUSY = INPUTPARAMETER(MSUSY);
 
    scale = MSUSY;
 
 
-   if (errno == ERANGE) {
-#ifdef ENABLE_VERBOSE
-      ERROR("SplitMSSM_high_scale_constraint<Two_scale>: Overflow error"
-            " during calculation of high scale: " << strerror(errno) << '\n'
-            << "   current scale = " << currentScale << '\n'
-            << "   new scale = " << scale << '\n'
-            << "   resetting scale to " << get_initial_scale_guess());
-#endif
-      scale = get_initial_scale_guess();
-      errno = 0;
-   }
+}
 
-
+void SplitMSSM_high_scale_constraint<Two_scale>::check_model_ptr() const
+{
+   if (!model)
+      throw SetupError("SplitMSSM_high_scale_constraint<Two_scale>: "
+                       "model pointer is zero!");
 }
 
 } // namespace flexiblesusy

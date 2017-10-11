@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 10:55:00
+// File generated at Tue 10 Oct 2017 21:35:26
 
 #ifndef TMSSM_INPUT_PARAMETERS_H
 #define TMSSM_INPUT_PARAMETERS_H
@@ -27,21 +27,16 @@
 namespace flexiblesusy {
 
 struct TMSSM_input_parameters {
-   double m0;
-   double m12;
-   double TanBeta;
-   int SignMu;
-   double Azero;
-   double MTinput;
-   double Qin;
-   double LambdaInput;
-   double vTInput;
+   double m0{};
+   double m12{};
+   double TanBeta{};
+   int SignMu{1};
+   double Azero{};
+   double MTinput{};
+   double Qin{};
+   double LambdaInput{};
+   double vTInput{};
 
-   TMSSM_input_parameters()
-      : m0(0), m12(0), TanBeta(0), SignMu(1), Azero(0), MTinput(0), Qin(0),
-   LambdaInput(0), vTInput(0)
-
-   {}
 
    Eigen::ArrayXd get() const;
    void set(const Eigen::ArrayXd&);

@@ -16,16 +16,16 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 12:24:36
+// File generated at Tue 10 Oct 2017 22:48:01
 
 /**
  * @file UMSSM_two_scale_model.hpp
  * @brief contains class for model with routines needed to solve boundary
- *        value problem using the two_scale solver by solvingt EWSB
+ *        value problem using the two_scale solver by solving EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Tue 5 Sep 2017 12:24:36 with FlexibleSUSY
- * 1.7.5 (git commit: c98e024e1e74ea3309b68f7006d5f91f8df6c678) and SARAH 4.12.0 .
+ * This file was generated at Tue 10 Oct 2017 22:48:01 with FlexibleSUSY
+ * 2.0.0 (git commit: e7cd01524dc37f9ba34ce6090bb584b8c724259f) and SARAH 4.12.0 .
  */
 
 #ifndef UMSSM_TWO_SCALE_H
@@ -33,28 +33,33 @@
 
 #include "UMSSM_model.hpp"
 #include "UMSSM_mass_eigenstates.hpp"
-#include "two_scale_model.hpp"
+
+#include "model.hpp"
 
 namespace flexiblesusy {
 
 class Two_scale;
 /**
  * @class UMSSM<Two_scale>
- * @brief model class with routines for determing masses and mixinga and EWSB
+ * @brief model class with routines for determining masses and mixings and EWSB
  */
 template<>
-class UMSSM<Two_scale> : public Two_scale_model, public UMSSM_mass_eigenstates {
+class UMSSM<Two_scale> : public Model, public UMSSM_mass_eigenstates {
 public:
    explicit UMSSM(const UMSSM_input_parameters& input_ = UMSSM_input_parameters());
-   virtual ~UMSSM();
+   UMSSM(const UMSSM&) = default;
+   UMSSM(UMSSM&&) = default;
+   virtual ~UMSSM() = default;
+   UMSSM& operator=(const UMSSM&) = default;
+   UMSSM& operator=(UMSSM&&) = default;
 
    // interface functions
-   virtual void calculate_spectrum();
-   virtual void clear_problems();
-   virtual std::string name() const;
-   virtual void run_to(double scale, double eps = -1.0);
-   virtual void print(std::ostream& out = std::cout) const;
-   virtual void set_precision(double);
+   virtual void calculate_spectrum() override;
+   virtual void clear_problems() override;
+   virtual std::string name() const override;
+   virtual void run_to(double scale, double eps = -1.0) override;
+   virtual void print(std::ostream& out = std::cerr) const override;
+   virtual void set_precision(double) override;
 };
 
 std::ostream& operator<<(std::ostream&, const UMSSM<Two_scale>&);

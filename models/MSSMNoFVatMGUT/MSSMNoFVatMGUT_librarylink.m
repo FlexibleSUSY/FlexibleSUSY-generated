@@ -1,8 +1,17 @@
+Print["================================"];
+Print["FlexibleSUSY 2.0.0"];
+Print["MSSMNoFVatMGUT"];
+Print["http://flexiblesusy.hepforge.org"];
+Print["================================"];
+
 libMSSMNoFVatMGUT = FileNameJoin[{Directory[], "models", "MSSMNoFVatMGUT", "MSSMNoFVatMGUT_librarylink.so"}];
 
 FSMSSMNoFVatMGUTGetSettings = LibraryFunctionLoad[libMSSMNoFVatMGUT, "FSMSSMNoFVatMGUTGetSettings", LinkObject, LinkObject];
 FSMSSMNoFVatMGUTGetSMInputParameters = LibraryFunctionLoad[libMSSMNoFVatMGUT, "FSMSSMNoFVatMGUTGetSMInputParameters", LinkObject, LinkObject];
 FSMSSMNoFVatMGUTGetInputParameters = LibraryFunctionLoad[libMSSMNoFVatMGUT, "FSMSSMNoFVatMGUTGetInputParameters", LinkObject, LinkObject];
+FSMSSMNoFVatMGUTGetProblems = LibraryFunctionLoad[libMSSMNoFVatMGUT, "FSMSSMNoFVatMGUTGetProblems", LinkObject, LinkObject];
+FSMSSMNoFVatMGUTGetWarnings = LibraryFunctionLoad[libMSSMNoFVatMGUT, "FSMSSMNoFVatMGUTGetWarnings", LinkObject, LinkObject];
+FSMSSMNoFVatMGUTToSLHA = LibraryFunctionLoad[libMSSMNoFVatMGUT, "FSMSSMNoFVatMGUTToSLHA", LinkObject, LinkObject];
 
 FSMSSMNoFVatMGUTOpenHandleLib = LibraryFunctionLoad[libMSSMNoFVatMGUT, "FSMSSMNoFVatMGUTOpenHandle", {{Real,1}}, Integer];
 FSMSSMNoFVatMGUTCloseHandle = LibraryFunctionLoad[libMSSMNoFVatMGUT, "FSMSSMNoFVatMGUTCloseHandle", {Integer}, Void];
@@ -28,6 +37,7 @@ FSMSSMNoFVatMGUTCheckIsNumeric[a_] := (Message[FSMSSMNoFVatMGUT::nonum, a]; Abor
 fsDefaultSettings = {
       precisionGoal -> 1.*^-4,           (* FlexibleSUSY[0] *)
       maxIterations -> 0,                (* FlexibleSUSY[1] *)
+      solver -> 1,     (* FlexibleSUSY[2] *)
       calculateStandardModelMasses -> 0, (* FlexibleSUSY[3] *)
       poleMassLoopOrder -> 2,            (* FlexibleSUSY[4] *)
       ewsbLoopOrder -> 2,                (* FlexibleSUSY[5] *)
@@ -48,12 +58,18 @@ fsDefaultSettings = {
       eftMatchingLoopOrderDown -> 1,     (* FlexibleSUSY[21] *)
       eftHiggsIndex -> 0,                (* FlexibleSUSY[22] *)
       calculateBSMMasses -> 1,           (* FlexibleSUSY[23] *)
+      thresholdCorrections -> 123111321, (* FlexibleSUSY[24] *)
+      higgs3loopCorrectionRenScheme -> 0,(* FlexibleSUSY[25] *)
+      higgs3loopCorrectionAtAsAs -> 1,   (* FlexibleSUSY[26] *)
+      higgs3loopCorrectionAbAsAs -> 1,   (* FlexibleSUSY[27] *)
+      higgs3loopCorrectionAtAtAs -> 1,   (* FlexibleSUSY[28] *)
+      higgs3loopCorrectionAtAtAt -> 1,   (* FlexibleSUSY[29] *)
       parameterOutputScale -> 0          (* MODSEL[12] *)
 };
 
 fsDefaultSMParameters = {
     alphaEmMZ -> 1/127.916, (* SMINPUTS[1] *)
-    GF -> 1.16637*^-5,      (* SMINPUTS[2] *)
+    GF -> 1.1663787*^-5,    (* SMINPUTS[2] *)
     alphaSMZ -> 0.1184,     (* SMINPUTS[3] *)
     MZ -> 91.1876,          (* SMINPUTS[4] *)
     mbmb -> 4.18,           (* SMINPUTS[5] *)
@@ -132,6 +148,7 @@ FSMSSMNoFVatMGUTOpenHandle[OptionsPattern[]] :=
             (* spectrum generator settings *)
             OptionValue[precisionGoal],
             OptionValue[maxIterations],
+            OptionValue[solver],
             OptionValue[calculateStandardModelMasses],
             OptionValue[poleMassLoopOrder],
             OptionValue[ewsbLoopOrder],
@@ -152,6 +169,12 @@ FSMSSMNoFVatMGUTOpenHandle[OptionsPattern[]] :=
             OptionValue[eftMatchingLoopOrderDown],
             OptionValue[eftHiggsIndex],
             OptionValue[calculateBSMMasses],
+            OptionValue[thresholdCorrections],
+            OptionValue[higgs3loopCorrectionRenScheme],
+            OptionValue[higgs3loopCorrectionAtAsAs],
+            OptionValue[higgs3loopCorrectionAbAsAs],
+            OptionValue[higgs3loopCorrectionAtAtAs],
+            OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)
@@ -233,6 +256,7 @@ FSMSSMNoFVatMGUTSet[handle_Integer, p:OptionsPattern[]] :=
             (* spectrum generator settings *)
             OptionValue[precisionGoal],
             OptionValue[maxIterations],
+            OptionValue[solver],
             OptionValue[calculateStandardModelMasses],
             OptionValue[poleMassLoopOrder],
             OptionValue[ewsbLoopOrder],
@@ -253,6 +277,12 @@ FSMSSMNoFVatMGUTSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[eftMatchingLoopOrderDown],
             OptionValue[eftHiggsIndex],
             OptionValue[calculateBSMMasses],
+            OptionValue[thresholdCorrections],
+            OptionValue[higgs3loopCorrectionRenScheme],
+            OptionValue[higgs3loopCorrectionAtAsAs],
+            OptionValue[higgs3loopCorrectionAbAsAs],
+            OptionValue[higgs3loopCorrectionAtAtAs],
+            OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)

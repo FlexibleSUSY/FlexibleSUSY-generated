@@ -16,10 +16,12 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 12:10:32
+// File generated at Tue 10 Oct 2017 22:23:08
 
 #include "SMSSM_observables.hpp"
 #include "SMSSM_mass_eigenstates.hpp"
+#include "SMSSM_a_muon.hpp"
+#include "SMSSM_edm.hpp"
 #include "SMSSM_effective_couplings.hpp"
 #include "gm2calc_interface.hpp"
 #include "eigen_utils.hpp"
@@ -29,8 +31,12 @@
 #include "physical_input.hpp"
 
 #define MODEL model
+#define AMU a_muon
+#define AMUUNCERTAINTY a_muon_uncertainty
 #define AMUGM2CALC a_muon_gm2calc
 #define AMUGM2CALCUNCERTAINTY a_muon_gm2calc_uncertainty
+#define EDM0(p) edm_ ## p
+#define EDM1(p,idx) edm_ ## p ## _ ## idx
 #define EFFCPHIGGSPHOTONPHOTON eff_cp_higgs_photon_photon
 #define EFFCPHIGGSGLUONGLUON eff_cp_higgs_gluon_gluon
 #define EFFCPPSEUDOSCALARPHOTONPHOTON eff_cp_pseudoscalar_photon_photon
@@ -46,7 +52,7 @@
 
 namespace flexiblesusy {
 
-const unsigned SMSSM_observables::NUMBER_OF_OBSERVABLES;
+const int SMSSM_observables::NUMBER_OF_OBSERVABLES;
 
 SMSSM_observables::SMSSM_observables()
    : eff_cp_higgs_photon_photon(Eigen::Array<std::complex<double>,3,1>::Zero())
@@ -139,6 +145,19 @@ void SMSSM_observables::set(const Eigen::ArrayXd& vec)
    eff_cp_pseudoscalar_gluon_gluon(0) = std::complex<double>(vec(16), vec(17));
    eff_cp_pseudoscalar_gluon_gluon(1) = std::complex<double>(vec(18), vec(19));
 
+}
+
+SMSSM_observables calculate_observables(const SMSSM_mass_eigenstates& model,
+                                              const softsusy::QedQcd& qedqcd,
+                                              const Physical_input& physical_input,
+                                              double scale)
+{
+   auto model_at_scale = model;
+
+   if (scale > 0.)
+      model_at_scale.run_to(scale);
+
+   return calculate_observables(model_at_scale, qedqcd, physical_input);
 }
 
 SMSSM_observables calculate_observables(const SMSSM_mass_eigenstates& model,

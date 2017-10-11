@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 10:18:15
+// File generated at Tue 10 Oct 2017 20:54:11
 
 #ifndef HTHDMIIMSSMBC_INPUT_PARAMETERS_H
 #define HTHDMIIMSSMBC_INPUT_PARAMETERS_H
@@ -27,21 +27,16 @@
 namespace flexiblesusy {
 
 struct HTHDMIIMSSMBC_input_parameters {
-   double TanBeta;
-   double MSUSY;
-   double MEWSB;
-   double MuInput;
-   double MAInput;
-   double AtInput;
-   double AbInput;
-   double AtauInput;
-   double LambdaLoopOrder;
+   double TanBeta{};
+   double MSUSY{};
+   double MEWSB{};
+   double MuInput{};
+   double MAInput{};
+   double AtInput{};
+   double AbInput{};
+   double AtauInput{};
+   double LambdaLoopOrder{};
 
-   HTHDMIIMSSMBC_input_parameters()
-      : TanBeta(0), MSUSY(0), MEWSB(0), MuInput(0), MAInput(0), AtInput(0),
-   AbInput(0), AtauInput(0), LambdaLoopOrder(0)
-
-   {}
 
    Eigen::ArrayXd get() const;
    void set(const Eigen::ArrayXd&);

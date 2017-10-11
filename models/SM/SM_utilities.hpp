@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 10:40:05
+// File generated at Tue 10 Oct 2017 21:19:45
 
 #ifndef SM_UTILITIES_H
 #define SM_UTILITIES_H
@@ -26,6 +26,7 @@
 #include "wrappers.hpp"
 
 #include <Eigen/Core>
+#include <array>
 #include <string>
 #include <vector>
 #include <valarray>
@@ -41,51 +42,80 @@ struct SM_observables;
 class Physical_input;
 
 class SM_parameter_getter {
-public:
-   Eigen::ArrayXd get_parameters(const SM_mass_eigenstates& model) {
-      return model.get();
-   }
-   std::vector<std::string> get_parameter_names() const {
-      using namespace SM_info;
-      return std::vector<std::string>(parameter_names,
-                                      parameter_names + NUMBER_OF_PARAMETERS);
-   }
-   std::vector<std::string> get_particle_names() const {
-      using namespace SM_info;
-      return std::vector<std::string>(particle_names,
-                                      particle_names + NUMBER_OF_PARTICLES);
-   }
-   std::vector<std::string> get_mass_names() const {
+private:
+   std::vector<std::string> get_mass_names(const std::string& head = "") const {
       using namespace SM_info;
       std::vector<std::string> masses;
-      for (unsigned i = 0; i < NUMBER_OF_PARTICLES; i++) {
-         for (unsigned m = 0; m < particle_multiplicities[i]; m++) {
+      for (int i = 0; i < NUMBER_OF_PARTICLES; i++) {
+         for (int m = 0; m < particle_multiplicities[i]; m++) {
             masses.push_back(
-               std::string("M") + particle_names[i] +
+               head + "M" + particle_names[i] +
                (particle_multiplicities[i] == 1 ? "" : "("
-                + std::to_string(static_cast<unsigned long long>(m)) + ")"));
+                + std::to_string(static_cast<long long>(m)) + ")"));
          }
       }
       return masses;
    }
-   std::vector<std::string> get_mixing_names() const {
-      using namespace SM_info;
-      return std::vector<std::string>(particle_mixing_names,
-                                      particle_mixing_names + NUMBER_OF_MIXINGS);
+
+   std::array<std::string, SM_info::NUMBER_OF_MIXINGS> get_mixing_names() const {
+      return SM_info::particle_mixing_names;
    }
-   std::vector<std::string> get_input_parameter_names() const {
-      using namespace SM_info;
-      return std::vector<std::string>(input_parameter_names,
-                                      input_parameter_names + NUMBER_OF_INPUT_PARAMETERS);
+
+public:
+   /// returns DR-bar parameters
+   Eigen::ArrayXd get_parameters(const SM_mass_eigenstates& model) {
+      return model.get();
    }
-   std::size_t get_number_of_masses() const {
-      using namespace SM_info;
-      return NUMBER_OF_MASSES;
+
+   /// returns names of DR-bar parameters
+   std::array<std::string, SM_info::NUMBER_OF_PARAMETERS> get_parameter_names() const {
+      return SM_info::parameter_names;
+   }
+
+   /// returns names of particles
+   std::array<std::string, SM_info::NUMBER_OF_PARTICLES> get_particle_names() const {
+      return SM_info::particle_names;
+   }
+
+   /// returns names of DR-bar masses
+   std::vector<std::string> get_DRbar_mass_names() const { return get_mass_names(); }
+
+   /// returns names of pole masses
+   std::vector<std::string> get_pole_mass_names() const { return get_mass_names("Pole"); }
+
+   /// returns names of DR-bar mixing matrices
+   std::array<std::string, SM_info::NUMBER_OF_MIXINGS> get_DRbar_mixing_names() const {
+      return get_mixing_names();
+   }
+
+   /// returns names of pole mixing matrices
+   std::array<std::string, SM_info::NUMBER_OF_MIXINGS> get_pole_mixing_names() const {
+      auto mixing_names = get_mixing_names();
+      for (auto& n: mixing_names)
+         n = std::string("Pole") + n;
+      return mixing_names;
+   }
+
+   /// returns names of input parameters
+   std::array<std::string, SM_info::NUMBER_OF_INPUT_PARAMETERS> get_input_parameter_names() const {
+      return SM_info::input_parameter_names;
+   }
+
+   /// returns names of input parameters
+   std::array<std::string, SM_info::NUMBER_OF_EXTRA_PARAMETERS> get_extra_parameter_names() const {
+      return SM_info::extra_parameter_names;
+   }
+
+   /// returns number of particle masses
+   decltype(SM_info::NUMBER_OF_MASSES) get_number_of_masses() const {
+      return SM_info::NUMBER_OF_MASSES;
    }
 };
 
 class SM_spectrum_plotter {
 public:
+   SM_spectrum_plotter() = default;
+   explicit SM_spectrum_plotter(const SM_mass_eigenstates&);
    void extract_spectrum(const SM_mass_eigenstates&);
    void write_to_file(const std::string&) const;
 
@@ -101,22 +131,13 @@ private:
          , masses(masses_)
          {}
    };
-   typedef std::vector<TParticle> TSpectrum;
+   using TSpectrum = std::vector<TParticle>;
    TSpectrum spectrum{};
    double scale{0.};
-   unsigned width{16};
+   int width{16};
 
    void write_spectrum(const TSpectrum&, std::ofstream&) const;
-   static std::valarray<double> to_valarray(double);
-   template <class Scalar, int M, int N>
-   static std::valarray<double> to_valarray(const Eigen::Array<Scalar, M, N>&);
 };
-
-template <class Scalar, int M, int N>
-std::valarray<double> SM_spectrum_plotter::to_valarray(const Eigen::Array<Scalar, M, N>& v)
-{
-   return std::valarray<double>(v.data(), v.size());
-}
 
 namespace SM_database {
 
@@ -124,17 +145,17 @@ namespace SM_database {
 void to_database(
    const std::string&,
    const SM_mass_eigenstates&,
-   const softsusy::QedQcd* qedqcd = 0,
-   const Physical_input* physical_input = 0,
-   const SM_observables* observables = 0);
+   const softsusy::QedQcd* qedqcd = nullptr,
+   const Physical_input* physical_input = nullptr,
+   const SM_observables* observables = nullptr);
 
 /// fill model from an entry of the database
 SM_mass_eigenstates from_database(
    const std::string&,
-   std::size_t,
-   softsusy::QedQcd* qedqcd = 0,
-   Physical_input* physical_input = 0,
-   SM_observables* observables = 0);
+   long long,
+   softsusy::QedQcd* qedqcd = nullptr,
+   Physical_input* physical_input = nullptr,
+   SM_observables* observables = nullptr);
 
 } // namespace SM_database
 

@@ -16,10 +16,12 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 12:15:22
+// File generated at Tue 10 Oct 2017 22:37:44
 
 #include "NUTNMSSM_observables.hpp"
 #include "NUTNMSSM_mass_eigenstates.hpp"
+#include "NUTNMSSM_a_muon.hpp"
+#include "NUTNMSSM_edm.hpp"
 #include "NUTNMSSM_effective_couplings.hpp"
 #include "gm2calc_interface.hpp"
 #include "eigen_utils.hpp"
@@ -29,8 +31,12 @@
 #include "physical_input.hpp"
 
 #define MODEL model
+#define AMU a_muon
+#define AMUUNCERTAINTY a_muon_uncertainty
 #define AMUGM2CALC a_muon_gm2calc
 #define AMUGM2CALCUNCERTAINTY a_muon_gm2calc_uncertainty
+#define EDM0(p) edm_ ## p
+#define EDM1(p,idx) edm_ ## p ## _ ## idx
 #define EFFCPHIGGSPHOTONPHOTON eff_cp_higgs_photon_photon
 #define EFFCPHIGGSGLUONGLUON eff_cp_higgs_gluon_gluon
 #define EFFCPPSEUDOSCALARPHOTONPHOTON eff_cp_pseudoscalar_photon_photon
@@ -46,39 +52,57 @@
 
 namespace flexiblesusy {
 
-const unsigned NUTNMSSM_observables::NUMBER_OF_OBSERVABLES;
+const int NUTNMSSM_observables::NUMBER_OF_OBSERVABLES;
 
 NUTNMSSM_observables::NUTNMSSM_observables()
+   : a_muon(0)
 
 {
 }
 
 Eigen::ArrayXd NUTNMSSM_observables::get() const
 {
-   Eigen::ArrayXd vec(1);
+   Eigen::ArrayXd vec(NUTNMSSM_observables::NUMBER_OF_OBSERVABLES);
 
-   vec(0) = 0.;
+   vec(0) = a_muon;
 
    return vec;
 }
 
 std::vector<std::string> NUTNMSSM_observables::get_names()
 {
-   std::vector<std::string> names(1);
+   std::vector<std::string> names(NUTNMSSM_observables::NUMBER_OF_OBSERVABLES);
 
-   names[0] = "no observables defined";
+   names[0] = "a_muon";
 
    return names;
 }
 
 void NUTNMSSM_observables::clear()
 {
+   a_muon = 0.;
 
 }
 
 void NUTNMSSM_observables::set(const Eigen::ArrayXd& vec)
 {
+   assert(vec.rows() == NUTNMSSM_observables::NUMBER_OF_OBSERVABLES);
 
+   a_muon = vec(0);
+
+}
+
+NUTNMSSM_observables calculate_observables(const NUTNMSSM_mass_eigenstates& model,
+                                              const softsusy::QedQcd& qedqcd,
+                                              const Physical_input& physical_input,
+                                              double scale)
+{
+   auto model_at_scale = model;
+
+   if (scale > 0.)
+      model_at_scale.run_to(scale);
+
+   return calculate_observables(model_at_scale, qedqcd, physical_input);
 }
 
 NUTNMSSM_observables calculate_observables(const NUTNMSSM_mass_eigenstates& model,
@@ -88,7 +112,7 @@ NUTNMSSM_observables calculate_observables(const NUTNMSSM_mass_eigenstates& mode
    NUTNMSSM_observables observables;
 
    
-
+   observables.AMU = NUTNMSSM_a_muon::calculate_a_muon(MODEL);
 
    return observables;
 }

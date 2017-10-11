@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 10:18:25
+// File generated at Tue 10 Oct 2017 21:00:13
 
 #include "HGTHDMIIMSSMBC_info.hpp"
 
@@ -29,84 +29,91 @@ namespace HGTHDMIIMSSMBC_info {
    const double normalization_g2 = 1;
    const double normalization_g3 = 1;
 
-   const unsigned particle_multiplicities[NUMBER_OF_PARTICLES] = {1, 3, 1, 2, 2
-      , 2, 3, 3, 3, 4, 2, 1, 1, 1};
+   const std::array<int, NUMBER_OF_PARTICLES> particle_multiplicities = {1, 3,
+      1, 2, 2, 2, 3, 3, 3, 4, 2, 1, 1, 1};
 
-   const char* particle_names[NUMBER_OF_PARTICLES] = {"VG", "Fv", "Glu", "hh",
-      "Ah", "Hm", "Fd", "Fu", "Fe", "Chi", "Cha", "VWm", "VP", "VZ"};
+   const std::array<std::string, NUMBER_OF_PARTICLES> particle_names = {"VG",
+      "Fv", "Glu", "hh", "Ah", "Hm", "Fd", "Fu", "Fe", "Chi", "Cha", "VWm", "VP",
+      "VZ"};
 
-   const char* particle_latex_names[NUMBER_OF_PARTICLES] = {   "g", "\\nu",
-      "\\tilde{g}", "h", "A^0", "H^-", "d", "u", "e", "\\tilde{\\chi}^0",
-      "\\tilde{\\chi}^-", "W^-", "\\gamma", "Z"};
+   const std::array<std::string, NUMBER_OF_PARTICLES> particle_latex_names = {
+      "g", "\\nu", "\\tilde{g}", "h", "A^0", "H^-", "d", "u", "e",
+      "\\tilde{\\chi}^0", "\\tilde{\\chi}^-", "W^-", "\\gamma", "Z"};
 
-   const char* parameter_names[NUMBER_OF_PARAMETERS] = {"g1", "g2", "g3",
-      "Lambda6", "Lambda5", "Lambda7", "Lambda1", "Lambda4", "Lambda3", "Lambda2",
-      "Yu(0,0)", "Yu(0,1)", "Yu(0,2)", "Yu(1,0)", "Yu(1,1)", "Yu(1,2)", "Yu(2,0)"
-      , "Yu(2,1)", "Yu(2,2)", "Yd(0,0)", "Yd(0,1)", "Yd(0,2)", "Yd(1,0)",
-      "Yd(1,1)", "Yd(1,2)", "Yd(2,0)", "Yd(2,1)", "Yd(2,2)", "Ye(0,0)", "Ye(0,1)",
-      "Ye(0,2)", "Ye(1,0)", "Ye(1,1)", "Ye(1,2)", "Ye(2,0)", "Ye(2,1)", "Ye(2,2)"
-      , "g1dp", "g1d", "g2up", "g2u", "MassB", "MassG", "MassWB", "Mu", "M122",
-      "M112", "M222", "v1", "v2"};
+   const std::array<std::string, NUMBER_OF_PARAMETERS> parameter_names = {"g1",
+      "g2", "g3", "Lambda6", "Lambda5", "Lambda7", "Lambda1", "Lambda4",
+      "Lambda3", "Lambda2", "Yu(0,0)", "Yu(0,1)", "Yu(0,2)", "Yu(1,0)", "Yu(1,1)",
+      "Yu(1,2)", "Yu(2,0)", "Yu(2,1)", "Yu(2,2)", "Yd(0,0)", "Yd(0,1)", "Yd(0,2)"
+      , "Yd(1,0)", "Yd(1,1)", "Yd(1,2)", "Yd(2,0)", "Yd(2,1)", "Yd(2,2)",
+      "Ye(0,0)", "Ye(0,1)", "Ye(0,2)", "Ye(1,0)", "Ye(1,1)", "Ye(1,2)", "Ye(2,0)",
+      "Ye(2,1)", "Ye(2,2)", "g1dp", "g1d", "g2up", "g2u", "MassB", "MassG",
+      "MassWB", "Mu", "M122", "M112", "M222", "v1", "v2"};
 
-   const char* particle_mixing_names[NUMBER_OF_MIXINGS] = {   "ZH(0,0)",
-      "ZH(0,1)", "ZH(1,0)", "ZH(1,1)", "ZA(0,0)", "ZA(0,1)", "ZA(1,0)", "ZA(1,1)",
-      "ZP(0,0)", "ZP(0,1)", "ZP(1,0)", "ZP(1,1)", "Re(Vd(0,0))", "Im(Vd(0,0))",
-      "Re(Vd(0,1))", "Im(Vd(0,1))", "Re(Vd(0,2))", "Im(Vd(0,2))", "Re(Vd(1,0))",
-      "Im(Vd(1,0))", "Re(Vd(1,1))", "Im(Vd(1,1))", "Re(Vd(1,2))", "Im(Vd(1,2))",
-      "Re(Vd(2,0))", "Im(Vd(2,0))", "Re(Vd(2,1))", "Im(Vd(2,1))", "Re(Vd(2,2))",
-      "Im(Vd(2,2))", "Re(Ud(0,0))", "Im(Ud(0,0))", "Re(Ud(0,1))", "Im(Ud(0,1))",
-      "Re(Ud(0,2))", "Im(Ud(0,2))", "Re(Ud(1,0))", "Im(Ud(1,0))", "Re(Ud(1,1))",
-      "Im(Ud(1,1))", "Re(Ud(1,2))", "Im(Ud(1,2))", "Re(Ud(2,0))", "Im(Ud(2,0))",
-      "Re(Ud(2,1))", "Im(Ud(2,1))", "Re(Ud(2,2))", "Im(Ud(2,2))", "Re(Vu(0,0))",
-      "Im(Vu(0,0))", "Re(Vu(0,1))", "Im(Vu(0,1))", "Re(Vu(0,2))", "Im(Vu(0,2))",
-      "Re(Vu(1,0))", "Im(Vu(1,0))", "Re(Vu(1,1))", "Im(Vu(1,1))", "Re(Vu(1,2))",
-      "Im(Vu(1,2))", "Re(Vu(2,0))", "Im(Vu(2,0))", "Re(Vu(2,1))", "Im(Vu(2,1))",
-      "Re(Vu(2,2))", "Im(Vu(2,2))", "Re(Uu(0,0))", "Im(Uu(0,0))", "Re(Uu(0,1))",
-      "Im(Uu(0,1))", "Re(Uu(0,2))", "Im(Uu(0,2))", "Re(Uu(1,0))", "Im(Uu(1,0))",
-      "Re(Uu(1,1))", "Im(Uu(1,1))", "Re(Uu(1,2))", "Im(Uu(1,2))", "Re(Uu(2,0))",
-      "Im(Uu(2,0))", "Re(Uu(2,1))", "Im(Uu(2,1))", "Re(Uu(2,2))", "Im(Uu(2,2))",
-      "Re(Ve(0,0))", "Im(Ve(0,0))", "Re(Ve(0,1))", "Im(Ve(0,1))", "Re(Ve(0,2))",
-      "Im(Ve(0,2))", "Re(Ve(1,0))", "Im(Ve(1,0))", "Re(Ve(1,1))", "Im(Ve(1,1))",
-      "Re(Ve(1,2))", "Im(Ve(1,2))", "Re(Ve(2,0))", "Im(Ve(2,0))", "Re(Ve(2,1))",
-      "Im(Ve(2,1))", "Re(Ve(2,2))", "Im(Ve(2,2))", "Re(Ue(0,0))", "Im(Ue(0,0))",
-      "Re(Ue(0,1))", "Im(Ue(0,1))", "Re(Ue(0,2))", "Im(Ue(0,2))", "Re(Ue(1,0))",
-      "Im(Ue(1,0))", "Re(Ue(1,1))", "Im(Ue(1,1))", "Re(Ue(1,2))", "Im(Ue(1,2))",
-      "Re(Ue(2,0))", "Im(Ue(2,0))", "Re(Ue(2,1))", "Im(Ue(2,1))", "Re(Ue(2,2))",
-      "Im(Ue(2,2))", "Re(ZN(0,0))", "Im(ZN(0,0))", "Re(ZN(0,1))", "Im(ZN(0,1))",
-      "Re(ZN(0,2))", "Im(ZN(0,2))", "Re(ZN(0,3))", "Im(ZN(0,3))", "Re(ZN(1,0))",
-      "Im(ZN(1,0))", "Re(ZN(1,1))", "Im(ZN(1,1))", "Re(ZN(1,2))", "Im(ZN(1,2))",
-      "Re(ZN(1,3))", "Im(ZN(1,3))", "Re(ZN(2,0))", "Im(ZN(2,0))", "Re(ZN(2,1))",
-      "Im(ZN(2,1))", "Re(ZN(2,2))", "Im(ZN(2,2))", "Re(ZN(2,3))", "Im(ZN(2,3))",
-      "Re(ZN(3,0))", "Im(ZN(3,0))", "Re(ZN(3,1))", "Im(ZN(3,1))", "Re(ZN(3,2))",
-      "Im(ZN(3,2))", "Re(ZN(3,3))", "Im(ZN(3,3))", "Re(UM(0,0))", "Im(UM(0,0))",
-      "Re(UM(0,1))", "Im(UM(0,1))", "Re(UM(1,0))", "Im(UM(1,0))", "Re(UM(1,1))",
-      "Im(UM(1,1))", "Re(UP(0,0))", "Im(UP(0,0))", "Re(UP(0,1))", "Im(UP(0,1))",
-      "Re(UP(1,0))", "Im(UP(1,0))", "Re(UP(1,1))", "Im(UP(1,1))", "ZZ(0,0)",
-      "ZZ(0,1)", "ZZ(1,0)", "ZZ(1,1)"};
+   const std::array<std::string, NUMBER_OF_MIXINGS> particle_mixing_names = {
+      "ZH(0,0)", "ZH(0,1)", "ZH(1,0)", "ZH(1,1)", "ZA(0,0)", "ZA(0,1)", "ZA(1,0)"
+      , "ZA(1,1)", "ZP(0,0)", "ZP(0,1)", "ZP(1,0)", "ZP(1,1)", "Re(Vd(0,0))",
+      "Im(Vd(0,0))", "Re(Vd(0,1))", "Im(Vd(0,1))", "Re(Vd(0,2))", "Im(Vd(0,2))",
+      "Re(Vd(1,0))", "Im(Vd(1,0))", "Re(Vd(1,1))", "Im(Vd(1,1))", "Re(Vd(1,2))",
+      "Im(Vd(1,2))", "Re(Vd(2,0))", "Im(Vd(2,0))", "Re(Vd(2,1))", "Im(Vd(2,1))",
+      "Re(Vd(2,2))", "Im(Vd(2,2))", "Re(Ud(0,0))", "Im(Ud(0,0))", "Re(Ud(0,1))",
+      "Im(Ud(0,1))", "Re(Ud(0,2))", "Im(Ud(0,2))", "Re(Ud(1,0))", "Im(Ud(1,0))",
+      "Re(Ud(1,1))", "Im(Ud(1,1))", "Re(Ud(1,2))", "Im(Ud(1,2))", "Re(Ud(2,0))",
+      "Im(Ud(2,0))", "Re(Ud(2,1))", "Im(Ud(2,1))", "Re(Ud(2,2))", "Im(Ud(2,2))",
+      "Re(Vu(0,0))", "Im(Vu(0,0))", "Re(Vu(0,1))", "Im(Vu(0,1))", "Re(Vu(0,2))",
+      "Im(Vu(0,2))", "Re(Vu(1,0))", "Im(Vu(1,0))", "Re(Vu(1,1))", "Im(Vu(1,1))",
+      "Re(Vu(1,2))", "Im(Vu(1,2))", "Re(Vu(2,0))", "Im(Vu(2,0))", "Re(Vu(2,1))",
+      "Im(Vu(2,1))", "Re(Vu(2,2))", "Im(Vu(2,2))", "Re(Uu(0,0))", "Im(Uu(0,0))",
+      "Re(Uu(0,1))", "Im(Uu(0,1))", "Re(Uu(0,2))", "Im(Uu(0,2))", "Re(Uu(1,0))",
+      "Im(Uu(1,0))", "Re(Uu(1,1))", "Im(Uu(1,1))", "Re(Uu(1,2))", "Im(Uu(1,2))",
+      "Re(Uu(2,0))", "Im(Uu(2,0))", "Re(Uu(2,1))", "Im(Uu(2,1))", "Re(Uu(2,2))",
+      "Im(Uu(2,2))", "Re(Ve(0,0))", "Im(Ve(0,0))", "Re(Ve(0,1))", "Im(Ve(0,1))",
+      "Re(Ve(0,2))", "Im(Ve(0,2))", "Re(Ve(1,0))", "Im(Ve(1,0))", "Re(Ve(1,1))",
+      "Im(Ve(1,1))", "Re(Ve(1,2))", "Im(Ve(1,2))", "Re(Ve(2,0))", "Im(Ve(2,0))",
+      "Re(Ve(2,1))", "Im(Ve(2,1))", "Re(Ve(2,2))", "Im(Ve(2,2))", "Re(Ue(0,0))",
+      "Im(Ue(0,0))", "Re(Ue(0,1))", "Im(Ue(0,1))", "Re(Ue(0,2))", "Im(Ue(0,2))",
+      "Re(Ue(1,0))", "Im(Ue(1,0))", "Re(Ue(1,1))", "Im(Ue(1,1))", "Re(Ue(1,2))",
+      "Im(Ue(1,2))", "Re(Ue(2,0))", "Im(Ue(2,0))", "Re(Ue(2,1))", "Im(Ue(2,1))",
+      "Re(Ue(2,2))", "Im(Ue(2,2))", "Re(ZN(0,0))", "Im(ZN(0,0))", "Re(ZN(0,1))",
+      "Im(ZN(0,1))", "Re(ZN(0,2))", "Im(ZN(0,2))", "Re(ZN(0,3))", "Im(ZN(0,3))",
+      "Re(ZN(1,0))", "Im(ZN(1,0))", "Re(ZN(1,1))", "Im(ZN(1,1))", "Re(ZN(1,2))",
+      "Im(ZN(1,2))", "Re(ZN(1,3))", "Im(ZN(1,3))", "Re(ZN(2,0))", "Im(ZN(2,0))",
+      "Re(ZN(2,1))", "Im(ZN(2,1))", "Re(ZN(2,2))", "Im(ZN(2,2))", "Re(ZN(2,3))",
+      "Im(ZN(2,3))", "Re(ZN(3,0))", "Im(ZN(3,0))", "Re(ZN(3,1))", "Im(ZN(3,1))",
+      "Re(ZN(3,2))", "Im(ZN(3,2))", "Re(ZN(3,3))", "Im(ZN(3,3))", "Re(UM(0,0))",
+      "Im(UM(0,0))", "Re(UM(0,1))", "Im(UM(0,1))", "Re(UM(1,0))", "Im(UM(1,0))",
+      "Re(UM(1,1))", "Im(UM(1,1))", "Re(UP(0,0))", "Im(UP(0,0))", "Re(UP(0,1))",
+      "Im(UP(0,1))", "Re(UP(1,0))", "Im(UP(1,0))", "Re(UP(1,1))", "Im(UP(1,1))",
+      "ZZ(0,0)", "ZZ(0,1)", "ZZ(1,0)", "ZZ(1,1)"};
 
-   const char* input_parameter_names[NUMBER_OF_INPUT_PARAMETERS] = {"TanBeta",
-      "MSUSY", "MEWSB", "MuInput", "M1Input", "M2Input", "M3Input", "MAInput",
-      "AtInput", "AbInput", "AtauInput", "LambdaLoopOrder"};
+   const std::array<std::string, NUMBER_OF_INPUT_PARAMETERS>
+      input_parameter_names = {"TanBeta", "MSUSY", "MEWSB", "MuInput", "M1Input",
+      "M2Input", "M3Input", "MAInput", "AtInput", "AbInput", "AtauInput",
+      "LambdaLoopOrder"};
 
-   const char* model_name = "HGTHDMIIMSSMBC";
+   const std::array<std::string, NUMBER_OF_EXTRA_PARAMETERS>
+      extra_parameter_names = {};
+
+   const std::string model_name = "HGTHDMIIMSSMBC";
 
 void print(std::ostream& ostr)
 {
    ostr
       << "Model information\n"
       << "=================\n"
-      << "Model name:                " << model_name << '\n'
-      << "Is a low-energy model:     "
+      << "Model name:                  " << model_name << '\n'
+      << "Is a low-energy model:       "
       << (is_low_energy_model ? "yes" : "no") << '\n'
-      << "Is a supersymmetric model: "
+      << "Is a supersymmetric model:   "
       << (is_supersymmetric_model ? "yes" : "no") << '\n'
-      << "Number of multiplets:      " << NUMBER_OF_PARTICLES << '\n'
-      << "Number of parameters:      " << NUMBER_OF_PARAMETERS << '\n'
+      << "Is a FlexibleEFTHiggs model: "
+      << (is_FlexibleEFTHiggs ? "yes" : "no") << '\n'
+      << "Number of multiplets:        " << NUMBER_OF_PARTICLES << '\n'
+      << "Number of parameters:        " << NUMBER_OF_PARAMETERS << '\n'
       ;
 
    ostr << "\n"
-      "Multiplets:                ";
-   for (unsigned i = 0; i < NUMBER_OF_PARTICLES; i++) {
+      "Multiplets:                  ";
+   for (int i = 0; i < NUMBER_OF_PARTICLES; i++) {
       ostr << particle_names[i]
            << '[' << particle_multiplicities[i] << ']';
       if (i + 1 < NUMBER_OF_PARTICLES)
@@ -114,12 +121,21 @@ void print(std::ostream& ostr)
    }
 
    ostr << "\n\n"
-      "Parameters:                ";
-   for (unsigned i = 0; i < NUMBER_OF_PARAMETERS; i++) {
+      "Parameters:                  ";
+   for (int i = 0; i < NUMBER_OF_PARAMETERS; i++) {
       ostr << parameter_names[i];
       if (i + 1 < NUMBER_OF_PARAMETERS)
          ostr << ", ";
    }
+
+   ostr << "\n\n"
+      "Input parameters:            ";
+   for (int i = 0; i < NUMBER_OF_INPUT_PARAMETERS; i++) {
+      ostr << input_parameter_names[i];
+      if (i + 1 < NUMBER_OF_INPUT_PARAMETERS)
+         ostr << ", ";
+   }
+
    ostr << '\n';
 }
 

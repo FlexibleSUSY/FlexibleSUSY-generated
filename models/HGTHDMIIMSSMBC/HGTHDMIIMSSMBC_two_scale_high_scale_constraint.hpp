@@ -16,14 +16,14 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 10:18:26
+// File generated at Tue 10 Oct 2017 21:00:24
 
 #ifndef HGTHDMIIMSSMBC_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
 #define HGTHDMIIMSSMBC_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
 
 #include "HGTHDMIIMSSMBC_high_scale_constraint.hpp"
 #include "HGTHDMIIMSSMBC_input_parameters.hpp"
-#include "two_scale_constraint.hpp"
+#include "single_scale_constraint.hpp"
 
 namespace flexiblesusy {
 
@@ -33,14 +33,15 @@ class HGTHDMIIMSSMBC;
 class Two_scale;
 
 template<>
-class HGTHDMIIMSSMBC_high_scale_constraint<Two_scale> : public Constraint<Two_scale> {
+class HGTHDMIIMSSMBC_high_scale_constraint<Two_scale> : public Single_scale_constraint {
 public:
-   HGTHDMIIMSSMBC_high_scale_constraint();
+   HGTHDMIIMSSMBC_high_scale_constraint() = default;
    HGTHDMIIMSSMBC_high_scale_constraint(HGTHDMIIMSSMBC<Two_scale>*);
-   virtual ~HGTHDMIIMSSMBC_high_scale_constraint();
-   virtual void apply();
-   virtual double get_scale() const;
-   virtual void set_model(Two_scale_model*);
+   virtual ~HGTHDMIIMSSMBC_high_scale_constraint() = default;
+   virtual void apply() override;
+   virtual double get_scale() const override;
+   virtual std::string name() const override { return "HGTHDMIIMSSMBC high-scale constraint"; }
+   virtual void set_model(Model*) override;
 
    void clear();
    double get_initial_scale_guess() const;
@@ -54,9 +55,11 @@ protected:
    bool check_non_perturbative();
 
 private:
-   double scale;
-   double initial_scale_guess;
-   HGTHDMIIMSSMBC<Two_scale>* model;
+   double scale{0.};
+   double initial_scale_guess{0.};
+   HGTHDMIIMSSMBC<Two_scale>* model{nullptr};
+
+   void check_model_ptr() const;
 };
 
 } // namespace flexiblesusy

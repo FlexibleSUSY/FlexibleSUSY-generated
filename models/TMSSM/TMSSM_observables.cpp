@@ -16,10 +16,12 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 11:13:17
+// File generated at Tue 10 Oct 2017 21:53:36
 
 #include "TMSSM_observables.hpp"
 #include "TMSSM_mass_eigenstates.hpp"
+#include "TMSSM_a_muon.hpp"
+#include "TMSSM_edm.hpp"
 #include "TMSSM_effective_couplings.hpp"
 #include "gm2calc_interface.hpp"
 #include "eigen_utils.hpp"
@@ -29,8 +31,12 @@
 #include "physical_input.hpp"
 
 #define MODEL model
+#define AMU a_muon
+#define AMUUNCERTAINTY a_muon_uncertainty
 #define AMUGM2CALC a_muon_gm2calc
 #define AMUGM2CALCUNCERTAINTY a_muon_gm2calc_uncertainty
+#define EDM0(p) edm_ ## p
+#define EDM1(p,idx) edm_ ## p ## _ ## idx
 #define EFFCPHIGGSPHOTONPHOTON eff_cp_higgs_photon_photon
 #define EFFCPHIGGSGLUONGLUON eff_cp_higgs_gluon_gluon
 #define EFFCPPSEUDOSCALARPHOTONPHOTON eff_cp_pseudoscalar_photon_photon
@@ -46,39 +52,117 @@
 
 namespace flexiblesusy {
 
-const unsigned TMSSM_observables::NUMBER_OF_OBSERVABLES;
+const int TMSSM_observables::NUMBER_OF_OBSERVABLES;
 
 TMSSM_observables::TMSSM_observables()
+   : a_muon(0)
+   , eff_cp_higgs_photon_photon(Eigen::Array<std::complex<double>,3,1>::Zero())
+   , eff_cp_higgs_gluon_gluon(Eigen::Array<std::complex<double>,3,1>::Zero())
+   , eff_cp_pseudoscalar_photon_photon(Eigen::Array<std::complex<double>,2,1>
+      ::Zero())
+   , eff_cp_pseudoscalar_gluon_gluon(Eigen::Array<std::complex<double>,2,1>
+      ::Zero())
 
 {
 }
 
 Eigen::ArrayXd TMSSM_observables::get() const
 {
-   Eigen::ArrayXd vec(1);
+   Eigen::ArrayXd vec(TMSSM_observables::NUMBER_OF_OBSERVABLES);
 
-   vec(0) = 0.;
+   vec(0) = a_muon;
+   vec(1) = Re(eff_cp_higgs_photon_photon(0));
+   vec(2) = Im(eff_cp_higgs_photon_photon(0));
+   vec(3) = Re(eff_cp_higgs_photon_photon(1));
+   vec(4) = Im(eff_cp_higgs_photon_photon(1));
+   vec(5) = Re(eff_cp_higgs_photon_photon(2));
+   vec(6) = Im(eff_cp_higgs_photon_photon(2));
+   vec(7) = Re(eff_cp_higgs_gluon_gluon(0));
+   vec(8) = Im(eff_cp_higgs_gluon_gluon(0));
+   vec(9) = Re(eff_cp_higgs_gluon_gluon(1));
+   vec(10) = Im(eff_cp_higgs_gluon_gluon(1));
+   vec(11) = Re(eff_cp_higgs_gluon_gluon(2));
+   vec(12) = Im(eff_cp_higgs_gluon_gluon(2));
+   vec(13) = Re(eff_cp_pseudoscalar_photon_photon(0));
+   vec(14) = Im(eff_cp_pseudoscalar_photon_photon(0));
+   vec(15) = Re(eff_cp_pseudoscalar_photon_photon(1));
+   vec(16) = Im(eff_cp_pseudoscalar_photon_photon(1));
+   vec(17) = Re(eff_cp_pseudoscalar_gluon_gluon(0));
+   vec(18) = Im(eff_cp_pseudoscalar_gluon_gluon(0));
+   vec(19) = Re(eff_cp_pseudoscalar_gluon_gluon(1));
+   vec(20) = Im(eff_cp_pseudoscalar_gluon_gluon(1));
 
    return vec;
 }
 
 std::vector<std::string> TMSSM_observables::get_names()
 {
-   std::vector<std::string> names(1);
+   std::vector<std::string> names(TMSSM_observables::NUMBER_OF_OBSERVABLES);
 
-   names[0] = "no observables defined";
+   names[0] = "a_muon";
+   names[1] = "Re(eff_cp_higgs_photon_photon(0))";
+   names[2] = "Im(eff_cp_higgs_photon_photon(0))";
+   names[3] = "Re(eff_cp_higgs_photon_photon(1))";
+   names[4] = "Im(eff_cp_higgs_photon_photon(1))";
+   names[5] = "Re(eff_cp_higgs_photon_photon(2))";
+   names[6] = "Im(eff_cp_higgs_photon_photon(2))";
+   names[7] = "Re(eff_cp_higgs_gluon_gluon(0))";
+   names[8] = "Im(eff_cp_higgs_gluon_gluon(0))";
+   names[9] = "Re(eff_cp_higgs_gluon_gluon(1))";
+   names[10] = "Im(eff_cp_higgs_gluon_gluon(1))";
+   names[11] = "Re(eff_cp_higgs_gluon_gluon(2))";
+   names[12] = "Im(eff_cp_higgs_gluon_gluon(2))";
+   names[13] = "Re(eff_cp_pseudoscalar_photon_photon(0))";
+   names[14] = "Im(eff_cp_pseudoscalar_photon_photon(0))";
+   names[15] = "Re(eff_cp_pseudoscalar_photon_photon(1))";
+   names[16] = "Im(eff_cp_pseudoscalar_photon_photon(1))";
+   names[17] = "Re(eff_cp_pseudoscalar_gluon_gluon(0))";
+   names[18] = "Im(eff_cp_pseudoscalar_gluon_gluon(0))";
+   names[19] = "Re(eff_cp_pseudoscalar_gluon_gluon(1))";
+   names[20] = "Im(eff_cp_pseudoscalar_gluon_gluon(1))";
 
    return names;
 }
 
 void TMSSM_observables::clear()
 {
+   a_muon = 0.;
+   eff_cp_higgs_photon_photon = Eigen::Array<std::complex<double>,3,1>::Zero();
+   eff_cp_higgs_gluon_gluon = Eigen::Array<std::complex<double>,3,1>::Zero();
+   eff_cp_pseudoscalar_photon_photon = Eigen::Array<std::complex<double>,2,1>::Zero();
+   eff_cp_pseudoscalar_gluon_gluon = Eigen::Array<std::complex<double>,2,1>::Zero();
 
 }
 
 void TMSSM_observables::set(const Eigen::ArrayXd& vec)
 {
+   assert(vec.rows() == TMSSM_observables::NUMBER_OF_OBSERVABLES);
 
+   a_muon = vec(0);
+   eff_cp_higgs_photon_photon(0) = std::complex<double>(vec(1), vec(2));
+   eff_cp_higgs_photon_photon(1) = std::complex<double>(vec(3), vec(4));
+   eff_cp_higgs_photon_photon(2) = std::complex<double>(vec(5), vec(6));
+   eff_cp_higgs_gluon_gluon(0) = std::complex<double>(vec(7), vec(8));
+   eff_cp_higgs_gluon_gluon(1) = std::complex<double>(vec(9), vec(10));
+   eff_cp_higgs_gluon_gluon(2) = std::complex<double>(vec(11), vec(12));
+   eff_cp_pseudoscalar_photon_photon(0) = std::complex<double>(vec(13), vec(14));
+   eff_cp_pseudoscalar_photon_photon(1) = std::complex<double>(vec(15), vec(16));
+   eff_cp_pseudoscalar_gluon_gluon(0) = std::complex<double>(vec(17), vec(18));
+   eff_cp_pseudoscalar_gluon_gluon(1) = std::complex<double>(vec(19), vec(20));
+
+}
+
+TMSSM_observables calculate_observables(const TMSSM_mass_eigenstates& model,
+                                              const softsusy::QedQcd& qedqcd,
+                                              const Physical_input& physical_input,
+                                              double scale)
+{
+   auto model_at_scale = model;
+
+   if (scale > 0.)
+      model_at_scale.run_to(scale);
+
+   return calculate_observables(model_at_scale, qedqcd, physical_input);
 }
 
 TMSSM_observables calculate_observables(const TMSSM_mass_eigenstates& model,
@@ -87,8 +171,20 @@ TMSSM_observables calculate_observables(const TMSSM_mass_eigenstates& model,
 {
    TMSSM_observables observables;
 
-   
+   TMSSM_effective_couplings effective_couplings(model, qedqcd, physical_input);
+   effective_couplings.calculate_effective_couplings();
 
+   observables.AMU = TMSSM_a_muon::calculate_a_muon(MODEL);
+   observables.EFFCPHIGGSPHOTONPHOTON(0) = effective_couplings.get_eff_CphhVPVP(0);
+   observables.EFFCPHIGGSPHOTONPHOTON(1) = effective_couplings.get_eff_CphhVPVP(1);
+   observables.EFFCPHIGGSPHOTONPHOTON(2) = effective_couplings.get_eff_CphhVPVP(2);
+   observables.EFFCPHIGGSGLUONGLUON(0) = effective_couplings.get_eff_CphhVGVG(0);
+   observables.EFFCPHIGGSGLUONGLUON(1) = effective_couplings.get_eff_CphhVGVG(1);
+   observables.EFFCPHIGGSGLUONGLUON(2) = effective_couplings.get_eff_CphhVGVG(2);
+   observables.EFFCPPSEUDOSCALARPHOTONPHOTON(0) = effective_couplings.get_eff_CpAhVPVP(1);
+   observables.EFFCPPSEUDOSCALARPHOTONPHOTON(1) = effective_couplings.get_eff_CpAhVPVP(2);
+   observables.EFFCPPSEUDOSCALARGLUONGLUON(0) = effective_couplings.get_eff_CpAhVGVG(1);
+   observables.EFFCPPSEUDOSCALARGLUONGLUON(1) = effective_couplings.get_eff_CpAhVGVG(2);
 
    return observables;
 }

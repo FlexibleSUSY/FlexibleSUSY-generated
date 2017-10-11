@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 10:36:02
+// File generated at Tue 10 Oct 2017 21:13:30
 
 #ifndef SplitMSSM_OBSERVABLES_H
 #define SplitMSSM_OBSERVABLES_H
@@ -35,7 +35,7 @@ class SplitMSSM_mass_eigenstates;
 class Physical_input;
 
 struct SplitMSSM_observables {
-   static const unsigned NUMBER_OF_OBSERVABLES = 0;
+   static const int NUMBER_OF_OBSERVABLES = 5;
 
    SplitMSSM_observables();
    Eigen::ArrayXd get() const; ///< returns vector of all observables
@@ -43,10 +43,19 @@ struct SplitMSSM_observables {
    void clear(); ///< sets all observables to zero
    void set(const Eigen::ArrayXd&); ///< sets all observables from given vector
 
+   double a_muon; ///< a_muon = (g-2)/2 of the muon (calculated with FlexibleSUSY)
+   std::complex<double> eff_cp_higgs_photon_photon; ///< effective H-Photon-Photon coupling
+   std::complex<double> eff_cp_higgs_gluon_gluon; ///< effective H-Gluon-Gluon coupling
 
 };
 
-SplitMSSM_observables calculate_observables(const SplitMSSM_mass_eigenstates&, const softsusy::QedQcd&, const Physical_input&);
+SplitMSSM_observables calculate_observables(
+   const SplitMSSM_mass_eigenstates&, const softsusy::QedQcd&,
+   const Physical_input&);
+
+SplitMSSM_observables calculate_observables(
+   const SplitMSSM_mass_eigenstates&, const softsusy::QedQcd&,
+   const Physical_input&, double scale);
 
 } // namespace flexiblesusy
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 11:57:28
+// File generated at Tue 10 Oct 2017 22:25:46
 
 #ifndef lowNMSSM_INPUT_PARAMETERS_H
 #define lowNMSSM_INPUT_PARAMETERS_H
@@ -27,44 +27,35 @@
 namespace flexiblesusy {
 
 struct lowNMSSM_input_parameters {
-   double Qin;
-   double M1Input;
-   double M2Input;
-   double M3Input;
-   double AtInput;
-   double AbInput;
-   double ATauInput;
-   double TanBeta;
-   double ml1Input;
-   double ml2Input;
-   double ml3Input;
-   double me1Input;
-   double me2Input;
-   double me3Input;
-   double mq1Input;
-   double mq2Input;
-   double mq3Input;
-   double md1Input;
-   double md2Input;
-   double md3Input;
-   double mu1Input;
-   double mu2Input;
-   double mu3Input;
-   double LambdaInput;
-   double KappaInput;
-   double ALambdaInput;
-   double AKappaInput;
-   double MuEffInput;
+   double Qin{};
+   double M1Input{};
+   double M2Input{};
+   double M3Input{};
+   double AtInput{};
+   double AbInput{};
+   double ATauInput{};
+   double TanBeta{};
+   double ml1Input{};
+   double ml2Input{};
+   double ml3Input{};
+   double me1Input{};
+   double me2Input{};
+   double me3Input{};
+   double mq1Input{};
+   double mq2Input{};
+   double mq3Input{};
+   double md1Input{};
+   double md2Input{};
+   double md3Input{};
+   double mu1Input{};
+   double mu2Input{};
+   double mu3Input{};
+   double LambdaInput{};
+   double KappaInput{};
+   double ALambdaInput{};
+   double AKappaInput{};
+   double MuEffInput{};
 
-   lowNMSSM_input_parameters()
-      : Qin(0), M1Input(0), M2Input(0), M3Input(0), AtInput(0), AbInput(0),
-   ATauInput(0), TanBeta(0), ml1Input(0), ml2Input(0), ml3Input(0), me1Input(0)
-   , me2Input(0), me3Input(0), mq1Input(0), mq2Input(0), mq3Input(0), md1Input(
-   0), md2Input(0), md3Input(0), mu1Input(0), mu2Input(0), mu3Input(0),
-   LambdaInput(0), KappaInput(0), ALambdaInput(0), AKappaInput(0), MuEffInput(0
-   )
-
-   {}
 
    Eigen::ArrayXd get() const;
    void set(const Eigen::ArrayXd&);

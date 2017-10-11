@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 10:36:02
+// File generated at Tue 10 Oct 2017 21:13:29
 
 #include "SplitMSSM_effective_couplings.hpp"
 
@@ -176,11 +176,11 @@ double SplitMSSM_effective_couplings::scalar_scaling_factor(double m) const
 
    const double nlo_qcd = 0.025330295910584444*(23.75 - 1.1666666666666667*Nf)*
       Sqr(g3);
-   const double nnlo_qcd = 0.000641623890917771*Power(g3,4)*(370.1956513893174
-      + 2.375*l + (-47.18640261449638 + 0.6666666666666666*l)*Nf +
+   const double nnlo_qcd = 0.000641623890917771*Quad(g3)*(370.1956513893174 +
+      2.375*l + (-47.18640261449638 + 0.6666666666666666*l)*Nf +
       0.9017702481178881*Sqr(Nf));
-   const double nnnlo_qcd = 0.000016252523020247696*Power(g3,6)*(467.683620788
-      + 122.440972222*l + 10.9409722222*Sqr(l));
+   const double nnnlo_qcd = 0.000016252523020247696*Power6(g3)*(467.683620788 +
+      122.440972222*l + 10.9409722222*Sqr(l));
 
    return Sqrt(1.0 + nlo_qcd + nnlo_qcd + nnnlo_qcd);
 }
@@ -195,8 +195,8 @@ double SplitMSSM_effective_couplings::pseudoscalar_scaling_factor(double m) cons
 
    const double nlo_qcd = 0.025330295910584444*(24.25 - 1.1666666666666667*Nf)*
       Sqr(g3);
-   const double nnlo_qcd = 0.000641623890917771*Power(g3,4)*(171.54400563089382
-      + 5*l);
+   const double nnlo_qcd = 0.000641623890917771*(171.54400563089382 + 5*l)*Quad
+      (g3);
    const double nnnlo_qcd = 0;
 
    return Sqrt(1.0 + nlo_qcd + nnlo_qcd + nnnlo_qcd);
@@ -226,178 +226,98 @@ double SplitMSSM_effective_couplings::get_AhVGVG_partial_width() const
    return 0.039788735772973836 * Power(mass, 3.0) * AbsSqr(eff_CpAhVGVG);
 }
 
-std::complex<double> SplitMSSM_effective_couplings::CpFdhhbarFdPL(unsigned gt1, unsigned gt3) const
-{
-   const auto Yd = MODELPARAMETER(Yd);
-
-   std::complex<double> result;
-
-   std::complex<double> tmp_617;
-   std::complex<double> tmp_618;
-   for (unsigned j2 = 0; j2 < 3; ++j2) {
-      std::complex<double> tmp_619;
-      std::complex<double> tmp_620;
-      for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_620 += Conj(Ud(gt3,j1))*Yd(j1,j2);
-      }
-      tmp_619 += tmp_620;
-      tmp_618 += (Conj(Vd(gt1,j2))) * tmp_619;
-   }
-   tmp_617 += tmp_618;
-   result += (-0.7071067811865475) * tmp_617;
-
-   return result;
-}
-
-std::complex<double> SplitMSSM_effective_couplings::CpFuhhbarFuPL(unsigned gt1, unsigned gt3) const
-{
-   const auto Yu = MODELPARAMETER(Yu);
-
-   std::complex<double> result;
-
-   std::complex<double> tmp_621;
-   std::complex<double> tmp_622;
-   for (unsigned j2 = 0; j2 < 3; ++j2) {
-      std::complex<double> tmp_623;
-      std::complex<double> tmp_624;
-      for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_624 += Conj(Uu(gt3,j1))*Yu(j1,j2);
-      }
-      tmp_623 += tmp_624;
-      tmp_622 += (Conj(Vu(gt1,j2))) * tmp_623;
-   }
-   tmp_621 += tmp_622;
-   result += (-0.7071067811865475) * tmp_621;
-
-   return result;
-}
-
-std::complex<double> SplitMSSM_effective_couplings::CpFehhbarFePL(unsigned gt1, unsigned gt3) const
-{
-   const auto Ye = MODELPARAMETER(Ye);
-
-   std::complex<double> result;
-
-   std::complex<double> tmp_625;
-   std::complex<double> tmp_626;
-   for (unsigned j2 = 0; j2 < 3; ++j2) {
-      std::complex<double> tmp_627;
-      std::complex<double> tmp_628;
-      for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_628 += Conj(Ue(gt3,j1))*Ye(j1,j2);
-      }
-      tmp_627 += tmp_628;
-      tmp_626 += (Conj(Ve(gt1,j2))) * tmp_627;
-   }
-   tmp_625 += tmp_626;
-   result += (-0.7071067811865475) * tmp_625;
-
-   return result;
-}
-
-std::complex<double> SplitMSSM_effective_couplings::CpChahhbarChaPL(unsigned gt1, unsigned gt3) const
+std::complex<double> SplitMSSM_effective_couplings::CpbarChaChaAhPL(int gI1, int gI2) const
 {
    const auto g2d = MODELPARAMETER(g2d);
    const auto g2u = MODELPARAMETER(g2u);
 
-   std::complex<double> result;
-
-   result = -0.7071067811865475*(g2d*Conj(UM(gt1,1))*Conj(UP(gt3,0)) + g2u*Conj
-      (UM(gt1,0))*Conj(UP(gt3,1)));
+   const std::complex<double> result = std::complex<double>(0.,
+      -0.7071067811865475)*(g2d*Conj(UM(gI2,1))*Conj(UP(gI1,0)) - g2u*Conj(UM(gI2,
+      0))*Conj(UP(gI1,1)));
 
    return result;
 }
 
-double SplitMSSM_effective_couplings::CphhVWpconjVWp() const
+std::complex<double> SplitMSSM_effective_couplings::CpbarFdFdAhPL(int gI1, int gI2) const
+{
+   const auto Yd = MODELPARAMETER(Yd);
+
+   const std::complex<double> result = std::complex<double>(0.,
+      0.7071067811865475)*SUM(j2,0,2,Conj(Vd(gI2,j2))*SUM(j1,0,2,Conj(Ud(gI1,j1))*
+      Yd(j1,j2)));
+
+   return result;
+}
+
+std::complex<double> SplitMSSM_effective_couplings::CpbarFeFeAhPL(int gI1, int gI2) const
+{
+   const auto Ye = MODELPARAMETER(Ye);
+
+   const std::complex<double> result = std::complex<double>(0.,
+      0.7071067811865475)*SUM(j2,0,2,Conj(Ve(gI2,j2))*SUM(j1,0,2,Conj(Ue(gI1,j1))*
+      Ye(j1,j2)));
+
+   return result;
+}
+
+std::complex<double> SplitMSSM_effective_couplings::CpbarFuFuAhPL(int gI1, int gI2) const
+{
+   const auto Yu = MODELPARAMETER(Yu);
+
+   const std::complex<double> result = std::complex<double>(0.,
+      -0.7071067811865475)*SUM(j2,0,2,Conj(Vu(gI2,j2))*SUM(j1,0,2,Conj(Uu(gI1,j1))
+      *Yu(j1,j2)));
+
+   return result;
+}
+
+double SplitMSSM_effective_couplings::CphhconjVWpVWp() const
 {
    const auto g2 = MODELPARAMETER(g2);
    const auto v = MODELPARAMETER(v);
 
-   double result = 0.0;
-
-   result = 0.7071067811865475*v*Sqr(g2);
+   const double result = 0.7071067811865475*v*Sqr(g2);
 
    return result;
 }
 
-std::complex<double> SplitMSSM_effective_couplings::CpAhFdbarFdPL(unsigned gt2, unsigned gt3) const
-{
-   const auto Yd = MODELPARAMETER(Yd);
-
-   std::complex<double> result;
-
-   std::complex<double> tmp_629;
-   std::complex<double> tmp_630;
-   for (unsigned j2 = 0; j2 < 3; ++j2) {
-      std::complex<double> tmp_631;
-      std::complex<double> tmp_632;
-      for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_632 += Conj(Ud(gt3,j1))*Yd(j1,j2);
-      }
-      tmp_631 += tmp_632;
-      tmp_630 += (Conj(Vd(gt2,j2))) * tmp_631;
-   }
-   tmp_629 += tmp_630;
-   result += (std::complex<double>(0.,0.7071067811865475)) * tmp_629;
-
-   return result;
-}
-
-std::complex<double> SplitMSSM_effective_couplings::CpAhFubarFuPL(unsigned gt2, unsigned gt3) const
-{
-   const auto Yu = MODELPARAMETER(Yu);
-
-   std::complex<double> result;
-
-   std::complex<double> tmp_633;
-   std::complex<double> tmp_634;
-   for (unsigned j2 = 0; j2 < 3; ++j2) {
-      std::complex<double> tmp_635;
-      std::complex<double> tmp_636;
-      for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_636 += Conj(Uu(gt3,j1))*Yu(j1,j2);
-      }
-      tmp_635 += tmp_636;
-      tmp_634 += (Conj(Vu(gt2,j2))) * tmp_635;
-   }
-   tmp_633 += tmp_634;
-   result += (std::complex<double>(0.,-0.7071067811865475)) * tmp_633;
-
-   return result;
-}
-
-std::complex<double> SplitMSSM_effective_couplings::CpAhFebarFePL(unsigned gt2, unsigned gt3) const
-{
-   const auto Ye = MODELPARAMETER(Ye);
-
-   std::complex<double> result;
-
-   std::complex<double> tmp_637;
-   std::complex<double> tmp_638;
-   for (unsigned j2 = 0; j2 < 3; ++j2) {
-      std::complex<double> tmp_639;
-      std::complex<double> tmp_640;
-      for (unsigned j1 = 0; j1 < 3; ++j1) {
-         tmp_640 += Conj(Ue(gt3,j1))*Ye(j1,j2);
-      }
-      tmp_639 += tmp_640;
-      tmp_638 += (Conj(Ve(gt2,j2))) * tmp_639;
-   }
-   tmp_637 += tmp_638;
-   result += (std::complex<double>(0.,0.7071067811865475)) * tmp_637;
-
-   return result;
-}
-
-std::complex<double> SplitMSSM_effective_couplings::CpAhChabarChaPL(unsigned gt2, unsigned gt3) const
+std::complex<double> SplitMSSM_effective_couplings::CpbarChaChahhPL(int gI1, int gI2) const
 {
    const auto g2d = MODELPARAMETER(g2d);
    const auto g2u = MODELPARAMETER(g2u);
 
-   std::complex<double> result;
+   const std::complex<double> result = -0.7071067811865475*(g2d*Conj(UM(gI2,1))
+      *Conj(UP(gI1,0)) + g2u*Conj(UM(gI2,0))*Conj(UP(gI1,1)));
 
-   result = std::complex<double>(0.,-0.7071067811865475)*(g2d*Conj(UM(gt2,1))*
-      Conj(UP(gt3,0)) - g2u*Conj(UM(gt2,0))*Conj(UP(gt3,1)));
+   return result;
+}
+
+std::complex<double> SplitMSSM_effective_couplings::CpbarFdFdhhPL(int gI1, int gI2) const
+{
+   const auto Yd = MODELPARAMETER(Yd);
+
+   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,Conj(Vd(
+      gI2,j2))*SUM(j1,0,2,Conj(Ud(gI1,j1))*Yd(j1,j2)));
+
+   return result;
+}
+
+std::complex<double> SplitMSSM_effective_couplings::CpbarFeFehhPL(int gI1, int gI2) const
+{
+   const auto Ye = MODELPARAMETER(Ye);
+
+   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,Conj(Ve(
+      gI2,j2))*SUM(j1,0,2,Conj(Ue(gI1,j1))*Ye(j1,j2)));
+
+   return result;
+}
+
+std::complex<double> SplitMSSM_effective_couplings::CpbarFuFuhhPL(int gI1, int gI2) const
+{
+   const auto Yu = MODELPARAMETER(Yu);
+
+   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,Conj(Vu(
+      gI2,j2))*SUM(j1,0,2,Conj(Uu(gI1,j1))*Yu(j1,j2)));
 
    return result;
 }
@@ -415,25 +335,25 @@ void SplitMSSM_effective_couplings::calculate_eff_CphhVPVP()
    const auto vev = 1.0 / Sqrt(qedqcd.displayFermiConstant() * Sqrt(2.0));
 
    std::complex<double> result = 0;
-   for (unsigned gI1 = 0; gI1 < 3; ++gI1) {
+   for (int gI1 = 0; gI1 < 3; ++gI1) {
       result += 0.3333333333333333 * scalar_fermion_qcd_factor(decay_mass,
-         MFd(gI1)) * CpFdhhbarFdPL(gI1, gI1) * vev * AS12(decay_scale / Sqr(MFd(
+         MFd(gI1)) * CpbarFdFdhhPL(gI1, gI1) * vev * AS12(decay_scale / Sqr(MFd(
          gI1))) / MFd(gI1);
    }
-   for (unsigned gI1 = 0; gI1 < 3; ++gI1) {
+   for (int gI1 = 0; gI1 < 3; ++gI1) {
       result += 1.3333333333333333 * scalar_fermion_qcd_factor(decay_mass,
-         MFu(gI1)) * CpFuhhbarFuPL(gI1, gI1) * vev * AS12(decay_scale / Sqr(MFu(
+         MFu(gI1)) * CpbarFuFuhhPL(gI1, gI1) * vev * AS12(decay_scale / Sqr(MFu(
          gI1))) / MFu(gI1);
    }
-   for (unsigned gI1 = 0; gI1 < 3; ++gI1) {
-      result += CpFehhbarFePL(gI1, gI1) * vev * AS12(decay_scale / Sqr(MFe(
+   for (int gI1 = 0; gI1 < 3; ++gI1) {
+      result += CpbarFeFehhPL(gI1, gI1) * vev * AS12(decay_scale / Sqr(MFe(
          gI1))) / MFe(gI1);
    }
-   for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      result += CpChahhbarChaPL(gI1, gI1) * vev * AS12(decay_scale / Sqr(
+   for (int gI1 = 0; gI1 < 2; ++gI1) {
+      result += CpbarChaChahhPL(gI1, gI1) * vev * AS12(decay_scale / Sqr(
          MCha(gI1))) / MCha(gI1);
    }
-   result += -0.5 * CphhVWpconjVWp() * vev * AS1(decay_scale / Sqr(MVWp)) / Sqr
+   result += -0.5 * CphhconjVWpVWp() * vev * AS1(decay_scale / Sqr(MVWp)) / Sqr
       (MVWp);
 
 
@@ -456,15 +376,15 @@ void SplitMSSM_effective_couplings::calculate_eff_CphhVGVG()
    const auto vev = 1.0 / Sqrt(qedqcd.displayFermiConstant() * Sqrt(2.0));
 
    std::complex<double> result = 0;
-   for (unsigned gI1 = 0; gI1 < 3; ++gI1) {
-      result += CpFdhhbarFdPL(gI1, gI1) * vev * AS12(decay_scale / Sqr(MFd(
+   for (int gI1 = 0; gI1 < 3; ++gI1) {
+      result += CpbarFdFdhhPL(gI1, gI1) * vev * AS12(decay_scale / Sqr(MFd(
          gI1))) / MFd(gI1);
    }
-   for (unsigned gI1 = 0; gI1 < 3; ++gI1) {
-      result += CpFuhhbarFuPL(gI1, gI1) * vev * AS12(decay_scale / Sqr(MFu(
+   for (int gI1 = 0; gI1 < 3; ++gI1) {
+      result += CpbarFuFuhhPL(gI1, gI1) * vev * AS12(decay_scale / Sqr(MFu(
          gI1))) / MFu(gI1);
    }
-   result *= std::complex<double>(0.75,0.);
+   result *= 0.75;
 
    if (include_qcd_corrections) {
       result *= scalar_scaling_factor(decay_mass);
@@ -490,25 +410,25 @@ void SplitMSSM_effective_couplings::calculate_eff_CpAhVPVP()
    const auto vev = 1.0 / Sqrt(qedqcd.displayFermiConstant() * Sqrt(2.0));
 
    std::complex<double> result = 0;
-   for (unsigned gI1 = 0; gI1 < 3; ++gI1) {
+   for (int gI1 = 0; gI1 < 3; ++gI1) {
       result += 0.3333333333333333 * pseudoscalar_fermion_qcd_factor(
-         decay_mass, MFd(gI1)) * CpAhFdbarFdPL(gI1, gI1) * vev * AP12(decay_scale
+         decay_mass, MFd(gI1)) * CpbarFdFdAhPL(gI1, gI1) * vev * AP12(decay_scale
          / Sqr(MFd(gI1))) / MFd(gI1);
    }
-   for (unsigned gI1 = 0; gI1 < 3; ++gI1) {
+   for (int gI1 = 0; gI1 < 3; ++gI1) {
       result += 1.3333333333333333 * pseudoscalar_fermion_qcd_factor(
-         decay_mass, MFu(gI1)) * CpAhFubarFuPL(gI1, gI1) * vev * AP12(decay_scale
+         decay_mass, MFu(gI1)) * CpbarFuFuAhPL(gI1, gI1) * vev * AP12(decay_scale
          / Sqr(MFu(gI1))) / MFu(gI1);
    }
-   for (unsigned gI1 = 0; gI1 < 3; ++gI1) {
-      result += CpAhFebarFePL(gI1, gI1) * vev * AP12(decay_scale / Sqr(MFe(
+   for (int gI1 = 0; gI1 < 3; ++gI1) {
+      result += CpbarFeFeAhPL(gI1, gI1) * vev * AP12(decay_scale / Sqr(MFe(
          gI1))) / MFe(gI1);
    }
-   for (unsigned gI1 = 0; gI1 < 2; ++gI1) {
-      result += CpAhChabarChaPL(gI1, gI1) * vev * AP12(decay_scale / Sqr(
+   for (int gI1 = 0; gI1 < 2; ++gI1) {
+      result += CpbarChaChaAhPL(gI1, gI1) * vev * AP12(decay_scale / Sqr(
          MCha(gI1))) / MCha(gI1);
    }
-   result *= std::complex<double>(2.0,0.);
+   result *= 2.0;
 
 
    result *= 0.1892681907127351 * physical_input.get(Physical_input::alpha_em_0
@@ -530,15 +450,15 @@ void SplitMSSM_effective_couplings::calculate_eff_CpAhVGVG()
    const auto vev = 1.0 / Sqrt(qedqcd.displayFermiConstant() * Sqrt(2.0));
 
    std::complex<double> result = 0;
-   for (unsigned gI1 = 0; gI1 < 3; ++gI1) {
-      result += CpAhFdbarFdPL(gI1, gI1) * vev * AP12(decay_scale / Sqr(MFd(
+   for (int gI1 = 0; gI1 < 3; ++gI1) {
+      result += CpbarFdFdAhPL(gI1, gI1) * vev * AP12(decay_scale / Sqr(MFd(
          gI1))) / MFd(gI1);
    }
-   for (unsigned gI1 = 0; gI1 < 3; ++gI1) {
-      result += CpAhFubarFuPL(gI1, gI1) * vev * AP12(decay_scale / Sqr(MFu(
+   for (int gI1 = 0; gI1 < 3; ++gI1) {
+      result += CpbarFuFuAhPL(gI1, gI1) * vev * AP12(decay_scale / Sqr(MFu(
          gI1))) / MFu(gI1);
    }
-   result *= std::complex<double>(1.5,0.);
+   result *= 1.5;
 
    if (include_qcd_corrections) {
       result *= pseudoscalar_scaling_factor(decay_mass);

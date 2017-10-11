@@ -16,10 +16,12 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 10:42:15
+// File generated at Tue 10 Oct 2017 21:19:55
 
 #include "SM_observables.hpp"
 #include "SM_mass_eigenstates.hpp"
+#include "SM_a_muon.hpp"
+#include "SM_edm.hpp"
 #include "SM_effective_couplings.hpp"
 #include "gm2calc_interface.hpp"
 #include "eigen_utils.hpp"
@@ -29,8 +31,12 @@
 #include "physical_input.hpp"
 
 #define MODEL model
+#define AMU a_muon
+#define AMUUNCERTAINTY a_muon_uncertainty
 #define AMUGM2CALC a_muon_gm2calc
 #define AMUGM2CALCUNCERTAINTY a_muon_gm2calc_uncertainty
+#define EDM0(p) edm_ ## p
+#define EDM1(p,idx) edm_ ## p ## _ ## idx
 #define EFFCPHIGGSPHOTONPHOTON eff_cp_higgs_photon_photon
 #define EFFCPHIGGSGLUONGLUON eff_cp_higgs_gluon_gluon
 #define EFFCPPSEUDOSCALARPHOTONPHOTON eff_cp_pseudoscalar_photon_photon
@@ -46,10 +52,11 @@
 
 namespace flexiblesusy {
 
-const unsigned SM_observables::NUMBER_OF_OBSERVABLES;
+const int SM_observables::NUMBER_OF_OBSERVABLES;
 
 SM_observables::SM_observables()
-   : eff_cp_higgs_photon_photon(0)
+   : a_muon(0)
+   , eff_cp_higgs_photon_photon(0)
    , eff_cp_higgs_gluon_gluon(0)
 
 {
@@ -59,10 +66,11 @@ Eigen::ArrayXd SM_observables::get() const
 {
    Eigen::ArrayXd vec(SM_observables::NUMBER_OF_OBSERVABLES);
 
-   vec(0) = Re(eff_cp_higgs_photon_photon);
-   vec(1) = Im(eff_cp_higgs_photon_photon);
-   vec(2) = Re(eff_cp_higgs_gluon_gluon);
-   vec(3) = Im(eff_cp_higgs_gluon_gluon);
+   vec(0) = a_muon;
+   vec(1) = Re(eff_cp_higgs_photon_photon);
+   vec(2) = Im(eff_cp_higgs_photon_photon);
+   vec(3) = Re(eff_cp_higgs_gluon_gluon);
+   vec(4) = Im(eff_cp_higgs_gluon_gluon);
 
    return vec;
 }
@@ -71,16 +79,18 @@ std::vector<std::string> SM_observables::get_names()
 {
    std::vector<std::string> names(SM_observables::NUMBER_OF_OBSERVABLES);
 
-   names[0] = "Re(eff_cp_higgs_photon_photon)";
-   names[1] = "Im(eff_cp_higgs_photon_photon)";
-   names[2] = "Re(eff_cp_higgs_gluon_gluon)";
-   names[3] = "Im(eff_cp_higgs_gluon_gluon)";
+   names[0] = "a_muon";
+   names[1] = "Re(eff_cp_higgs_photon_photon)";
+   names[2] = "Im(eff_cp_higgs_photon_photon)";
+   names[3] = "Re(eff_cp_higgs_gluon_gluon)";
+   names[4] = "Im(eff_cp_higgs_gluon_gluon)";
 
    return names;
 }
 
 void SM_observables::clear()
 {
+   a_muon = 0.;
    eff_cp_higgs_photon_photon = std::complex<double>(0.,0.);
    eff_cp_higgs_gluon_gluon = std::complex<double>(0.,0.);
 
@@ -90,9 +100,23 @@ void SM_observables::set(const Eigen::ArrayXd& vec)
 {
    assert(vec.rows() == SM_observables::NUMBER_OF_OBSERVABLES);
 
-   eff_cp_higgs_photon_photon = std::complex<double>(vec(0), vec(1));
-   eff_cp_higgs_gluon_gluon = std::complex<double>(vec(2), vec(3));
+   a_muon = vec(0);
+   eff_cp_higgs_photon_photon = std::complex<double>(vec(1), vec(2));
+   eff_cp_higgs_gluon_gluon = std::complex<double>(vec(3), vec(4));
 
+}
+
+SM_observables calculate_observables(const SM_mass_eigenstates& model,
+                                              const softsusy::QedQcd& qedqcd,
+                                              const Physical_input& physical_input,
+                                              double scale)
+{
+   auto model_at_scale = model;
+
+   if (scale > 0.)
+      model_at_scale.run_to(scale);
+
+   return calculate_observables(model_at_scale, qedqcd, physical_input);
 }
 
 SM_observables calculate_observables(const SM_mass_eigenstates& model,
@@ -104,6 +128,7 @@ SM_observables calculate_observables(const SM_mass_eigenstates& model,
    SM_effective_couplings effective_couplings(model, qedqcd, physical_input);
    effective_couplings.calculate_effective_couplings();
 
+   observables.AMU = SM_a_muon::calculate_a_muon(MODEL);
    observables.EFFCPHIGGSPHOTONPHOTON = effective_couplings.get_eff_CphhVPVP();
    observables.EFFCPHIGGSGLUONGLUON = effective_couplings.get_eff_CphhVGVG();
 

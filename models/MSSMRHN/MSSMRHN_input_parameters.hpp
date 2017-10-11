@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 12:34:35
+// File generated at Tue 10 Oct 2017 22:49:15
 
 #ifndef MSSMRHN_INPUT_PARAMETERS_H
 #define MSSMRHN_INPUT_PARAMETERS_H
@@ -27,18 +27,13 @@
 namespace flexiblesusy {
 
 struct MSSMRHN_input_parameters {
-   double m0;
-   double m12;
-   double TanBeta;
-   int SignMu;
-   double Azero;
-   Eigen::Matrix<double,3,3> BMvInput;
+   double m0{};
+   double m12{};
+   double TanBeta{};
+   int SignMu{1};
+   double Azero{};
+   Eigen::Matrix<double,3,3> BMvInput{Eigen::Matrix<double,3,3>::Zero()};
 
-   MSSMRHN_input_parameters()
-      : m0(0), m12(0), TanBeta(0), SignMu(1), Azero(0), BMvInput(Eigen::Matrix<
-   double,3,3>::Zero())
-
-   {}
 
    Eigen::ArrayXd get() const;
    void set(const Eigen::ArrayXd&);

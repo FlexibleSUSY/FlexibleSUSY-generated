@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 10:18:21
+// File generated at Tue 10 Oct 2017 20:54:07
 
 #ifndef HGTHDMIIMSSMBC_INPUT_PARAMETERS_H
 #define HGTHDMIIMSSMBC_INPUT_PARAMETERS_H
@@ -27,25 +27,19 @@
 namespace flexiblesusy {
 
 struct HGTHDMIIMSSMBC_input_parameters {
-   double TanBeta;
-   double MSUSY;
-   double MEWSB;
-   double MuInput;
-   double M1Input;
-   double M2Input;
-   double M3Input;
-   double MAInput;
-   double AtInput;
-   double AbInput;
-   double AtauInput;
-   double LambdaLoopOrder;
+   double TanBeta{};
+   double MSUSY{};
+   double MEWSB{};
+   double MuInput{};
+   double M1Input{};
+   double M2Input{};
+   double M3Input{};
+   double MAInput{};
+   double AtInput{};
+   double AbInput{};
+   double AtauInput{};
+   double LambdaLoopOrder{};
 
-   HGTHDMIIMSSMBC_input_parameters()
-      : TanBeta(0), MSUSY(0), MEWSB(0), MuInput(0), M1Input(0), M2Input(0),
-   M3Input(0), MAInput(0), AtInput(0), AbInput(0), AtauInput(0),
-   LambdaLoopOrder(0)
-
-   {}
 
    Eigen::ArrayXd get() const;
    void set(const Eigen::ArrayXd&);

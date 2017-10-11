@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 11:09:08
+// File generated at Tue 10 Oct 2017 21:49:12
 
 #ifndef E6SSM_INPUT_PARAMETERS_H
 #define E6SSM_INPUT_PARAMETERS_H
@@ -27,22 +27,17 @@
 namespace flexiblesusy {
 
 struct E6SSM_input_parameters {
-   double m0;
-   double m12;
-   double TanBeta;
-   double Azero;
-   double LambdaInput;
-   double KappaInput;
-   double muPrimeInput;
-   double BmuPrimeInput;
-   double vSInput;
-   double Lambda12Input;
+   double m0{};
+   double m12{};
+   double TanBeta{};
+   double Azero{};
+   double LambdaInput{};
+   double KappaInput{};
+   double muPrimeInput{};
+   double BmuPrimeInput{};
+   double vSInput{};
+   double Lambda12Input{};
 
-   E6SSM_input_parameters()
-      : m0(0), m12(0), TanBeta(0), Azero(0), LambdaInput(0), KappaInput(0),
-   muPrimeInput(0), BmuPrimeInput(0), vSInput(0), Lambda12Input(0)
-
-   {}
 
    Eigen::ArrayXd get() const;
    void set(const Eigen::ArrayXd&);

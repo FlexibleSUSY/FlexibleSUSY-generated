@@ -16,14 +16,14 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 12:18:39
+// File generated at Tue 10 Oct 2017 22:39:42
 
 #ifndef NMSSM_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
 #define NMSSM_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
 
 #include "NMSSM_susy_scale_constraint.hpp"
 #include "NMSSM_input_parameters.hpp"
-#include "two_scale_constraint.hpp"
+#include "single_scale_constraint.hpp"
 #include "lowe.h"
 
 namespace flexiblesusy {
@@ -34,14 +34,15 @@ class NMSSM;
 class Two_scale;
 
 template<>
-class NMSSM_susy_scale_constraint<Two_scale> : public Constraint<Two_scale> {
+class NMSSM_susy_scale_constraint<Two_scale> : public Single_scale_constraint {
 public:
-   NMSSM_susy_scale_constraint();
+   NMSSM_susy_scale_constraint() = default;
    NMSSM_susy_scale_constraint(NMSSM<Two_scale>*, const softsusy::QedQcd&);
-   virtual ~NMSSM_susy_scale_constraint();
-   virtual void apply();
-   virtual double get_scale() const;
-   virtual void set_model(Two_scale_model*);
+   virtual ~NMSSM_susy_scale_constraint() = default;
+   virtual void apply() override;
+   virtual double get_scale() const override;
+   virtual std::string name() const override { return "NMSSM SUSY-scale constraint"; }
+   virtual void set_model(Model*) override;
 
    void clear();
    double get_initial_scale_guess() const;
@@ -55,10 +56,12 @@ protected:
    void update_scale();
 
 private:
-   double scale;
-   double initial_scale_guess;
-   NMSSM<Two_scale>* model;
-   softsusy::QedQcd qedqcd;
+   double scale{0.};
+   double initial_scale_guess{0.};
+   NMSSM<Two_scale>* model{nullptr};
+   softsusy::QedQcd qedqcd{};
+
+   void check_model_ptr() const;
 };
 
 } // namespace flexiblesusy

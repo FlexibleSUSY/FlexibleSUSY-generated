@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 12:23:51
+// File generated at Tue 10 Oct 2017 22:33:11
 
 #ifndef NUTSMSSM_OBSERVABLES_H
 #define NUTSMSSM_OBSERVABLES_H
@@ -35,7 +35,7 @@ class NUTSMSSM_mass_eigenstates;
 class Physical_input;
 
 struct NUTSMSSM_observables {
-   static const unsigned NUMBER_OF_OBSERVABLES = 0;
+   static const int NUMBER_OF_OBSERVABLES = 0;
 
    NUTSMSSM_observables();
    Eigen::ArrayXd get() const; ///< returns vector of all observables
@@ -46,7 +46,13 @@ struct NUTSMSSM_observables {
 
 };
 
-NUTSMSSM_observables calculate_observables(const NUTSMSSM_mass_eigenstates&, const softsusy::QedQcd&, const Physical_input&);
+NUTSMSSM_observables calculate_observables(
+   const NUTSMSSM_mass_eigenstates&, const softsusy::QedQcd&,
+   const Physical_input&);
+
+NUTSMSSM_observables calculate_observables(
+   const NUTSMSSM_mass_eigenstates&, const softsusy::QedQcd&,
+   const Physical_input&, double scale);
 
 } // namespace flexiblesusy
 

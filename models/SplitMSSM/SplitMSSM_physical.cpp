@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 10:36:00
+// File generated at Tue 10 Oct 2017 21:13:17
 
 #include "SplitMSSM_physical.hpp"
 #include "slha_io.hpp"
@@ -26,26 +26,6 @@
 #define LOCALPHYSICAL(p) p
 
 namespace flexiblesusy {
-
-SplitMSSM_physical::SplitMSSM_physical()
-   :
-    MVG(0), MHp(0), MFv(Eigen::Array<double,3,1>::Zero()), MGlu(0), MAh(0),
-       Mhh(0), MFd(Eigen::Array<double,3,1>::Zero()), MFu(Eigen::Array<double,3,1>
-       ::Zero()), MFe(Eigen::Array<double,3,1>::Zero()), MChi(Eigen::Array<double,
-       4,1>::Zero()), MCha(Eigen::Array<double,2,1>::Zero()), MVWp(0), MVP(0), MVZ
-       (0)
-
-   , Vd(Eigen::Matrix<std::complex<double>,3,3>::Zero()), Ud(Eigen::Matrix<
-      std::complex<double>,3,3>::Zero()), Vu(Eigen::Matrix<std::complex<double>,3,
-      3>::Zero()), Uu(Eigen::Matrix<std::complex<double>,3,3>::Zero()), Ve(
-      Eigen::Matrix<std::complex<double>,3,3>::Zero()), Ue(Eigen::Matrix<
-      std::complex<double>,3,3>::Zero()), ZN(Eigen::Matrix<std::complex<double>,4,
-      4>::Zero()), UM(Eigen::Matrix<std::complex<double>,2,2>::Zero()), UP(
-      Eigen::Matrix<std::complex<double>,2,2>::Zero()), ZZ(Eigen::Matrix<double,2,
-      2>::Zero())
-
-{
-}
 
 void SplitMSSM_physical::clear()
 {
@@ -439,6 +419,8 @@ void SplitMSSM_physical::print(std::ostream& ostr) const
    ostr << "MChi = " << MChi.transpose() << '\n';
    ostr << "MCha = " << MCha.transpose() << '\n';
    ostr << "MVWp = " << MVWp << '\n';
+   ostr << "MVP = " << MVP << '\n';
+   ostr << "MVZ = " << MVZ << '\n';
 
    ostr << "----------------------------------------\n"
            "pole mass mixing matrices:\n"

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 11:37:09
+// File generated at Tue 10 Oct 2017 21:41:01
 
 #ifndef MRSSM_EFFECTIVE_COUPLINGS_H
 #define MRSSM_EFFECTIVE_COUPLINGS_H
@@ -49,44 +49,44 @@ public:
    void set_low_energy_data(const softsusy::QedQcd& qedqcd_) { qedqcd = qedqcd_; }
    void set_model(const MRSSM_mass_eigenstates& model_);
 
-   double get_hhVPVP_partial_width(unsigned gO1) const;
-   double get_hhVGVG_partial_width(unsigned gO1) const;
-   double get_AhVPVP_partial_width(unsigned gO1) const;
-   double get_AhVGVG_partial_width(unsigned gO1) const;
-   std::complex<double> get_eff_CphhVPVP(unsigned gO1) const { return eff_CphhVPVP(gO1); }
-   std::complex<double> get_eff_CphhVGVG(unsigned gO1) const { return eff_CphhVGVG(gO1); }
-   std::complex<double> get_eff_CpAhVPVP(unsigned gO1) const { return eff_CpAhVPVP(gO1); }
-   std::complex<double> get_eff_CpAhVGVG(unsigned gO1) const { return eff_CpAhVGVG(gO1); }
+   double get_hhVPVP_partial_width(int gO1) const;
+   double get_hhVGVG_partial_width(int gO1) const;
+   double get_AhVPVP_partial_width(int gO1) const;
+   double get_AhVGVG_partial_width(int gO1) const;
+   std::complex<double> get_eff_CphhVPVP(int gO1) const { return eff_CphhVPVP(gO1); }
+   std::complex<double> get_eff_CphhVGVG(int gO1) const { return eff_CphhVGVG(gO1); }
+   std::complex<double> get_eff_CpAhVPVP(int gO1) const { return eff_CpAhVPVP(gO1); }
+   std::complex<double> get_eff_CpAhVGVG(int gO1) const { return eff_CpAhVGVG(gO1); }
 
    void calculate_effective_couplings();
 
-   std::complex<double> CphhSRdpconjSRdp(unsigned gt1) const;
-   std::complex<double> CphhSRumconjSRum(unsigned gt1) const;
-   std::complex<double> CphhSdconjSd(unsigned gt1, unsigned gt2, unsigned gt3) const;
-   std::complex<double> CphhSuconjSu(unsigned gt1, unsigned gt2, unsigned gt3) const;
-   std::complex<double> CphhSeconjSe(unsigned gt1, unsigned gt2, unsigned gt3) const;
-   std::complex<double> CphhHpmconjHpm(unsigned gt1, unsigned gt2, unsigned gt3) const;
-   std::complex<double> CpCha1hhbarCha1PL(unsigned gt1, unsigned gt2, unsigned gt3) const;
-   std::complex<double> CpCha2hhbarCha2PL(unsigned gt1, unsigned gt2, unsigned gt3) const;
-   std::complex<double> CpFehhbarFePL(unsigned gt1, unsigned gt2, unsigned gt3) const;
-   std::complex<double> CpFdhhbarFdPL(unsigned gt1, unsigned gt2, unsigned gt3) const;
-   std::complex<double> CpFuhhbarFuPL(unsigned gt1, unsigned gt2, unsigned gt3) const;
-   std::complex<double> CphhVWmconjVWm(unsigned gt1) const;
-   std::complex<double> CpAhSRdpconjSRdp(unsigned gt1) const;
-   std::complex<double> CpAhSRumconjSRum(unsigned gt1) const;
-   std::complex<double> CpAhSdconjSd(unsigned gt1, unsigned gt2, unsigned gt3) const;
-   std::complex<double> CpAhSuconjSu(unsigned gt1, unsigned gt2, unsigned gt3) const;
-   std::complex<double> CpAhSeconjSe(unsigned gt1, unsigned gt2, unsigned gt3) const;
-   std::complex<double> CpAhHpmconjHpm(unsigned gt1, unsigned gt2, unsigned gt3) const;
-   std::complex<double> CpAhCha1barCha1PL(unsigned gt1, unsigned gt2, unsigned gt3) const;
-   std::complex<double> CpAhCha2barCha2PL(unsigned gt1, unsigned gt2, unsigned gt3) const;
-   std::complex<double> CpAhFebarFePL(unsigned gt1, unsigned gt2, unsigned gt3) const;
-   std::complex<double> CpAhFdbarFdPL(unsigned gt1, unsigned gt2, unsigned gt3) const;
-   std::complex<double> CpAhFubarFuPL(unsigned gt1, unsigned gt2, unsigned gt3) const;
-   void calculate_eff_CphhVPVP(unsigned gO1);
-   void calculate_eff_CphhVGVG(unsigned gO1);
-   void calculate_eff_CpAhVPVP(unsigned gO1);
-   void calculate_eff_CpAhVGVG(unsigned gO1);
+   std::complex<double> CpSRdpAhconjSRdp(int gI2) const;
+   std::complex<double> CpSRdphhconjSRdp(int gI2) const;
+   std::complex<double> CpSRumAhconjSRum(int gI2) const;
+   std::complex<double> CpSRumhhconjSRum(int gI2) const;
+   std::complex<double> CphhconjVWmVWm(int gI2) const;
+   std::complex<double> CpbarFeFeAhPL(int gO2, int gI1, int gI2) const;
+   std::complex<double> CpbarFeFehhPL(int gO2, int gI2, int gI1) const;
+   std::complex<double> CpbarFdFdAhPL(int gO2, int gI1, int gI2) const;
+   std::complex<double> CpbarFdFdhhPL(int gO2, int gI2, int gI1) const;
+   std::complex<double> CpbarFuFuAhPL(int gO2, int gI1, int gI2) const;
+   std::complex<double> CpbarFuFuhhPL(int gO2, int gI2, int gI1) const;
+   std::complex<double> CphhSdconjSd(int gt1, int gt2, int gt3) const;
+   std::complex<double> CphhSuconjSu(int gt1, int gt2, int gt3) const;
+   std::complex<double> CphhSeconjSe(int gt1, int gt2, int gt3) const;
+   std::complex<double> CphhHpmconjHpm(int gt1, int gt2, int gt3) const;
+   std::complex<double> CpbarCha1Cha1hhPL(int gt3, int gt1, int gt2) const;
+   std::complex<double> CpbarCha2Cha2hhPL(int gt3, int gt1, int gt2) const;
+   std::complex<double> CpAhSdconjSd(int gt1, int gt2, int gt3) const;
+   std::complex<double> CpAhSuconjSu(int gt1, int gt2, int gt3) const;
+   std::complex<double> CpAhSeconjSe(int gt1, int gt2, int gt3) const;
+   std::complex<double> CpAhHpmconjHpm(int gt1, int gt2, int gt3) const;
+   std::complex<double> CpbarCha1Cha1AhPL(int gt3, int gt2, int gt1) const;
+   std::complex<double> CpbarCha2Cha2AhPL(int gt3, int gt2, int gt1) const;
+   void calculate_eff_CphhVPVP(int gO1);
+   void calculate_eff_CphhVGVG(int gO1);
+   void calculate_eff_CpAhVPVP(int gO1);
+   void calculate_eff_CpAhVGVG(int gO1);
 
 private:
    MRSSM_mass_eigenstates model;
@@ -112,27 +112,27 @@ private:
    double scalar_scaling_factor(double) const;
    double pseudoscalar_scaling_factor(double) const;
 
-   Eigen::Matrix<double,6,6> ZD;
-   Eigen::Matrix<double,3,3> ZV;
-   Eigen::Matrix<double,6,6> ZU;
-   Eigen::Matrix<double,6,6> ZE;
-   Eigen::Matrix<double,4,4> ZH;
-   Eigen::Matrix<double,4,4> ZA;
-   Eigen::Matrix<double,2,2> ZHR;
-   Eigen::Matrix<double,4,4> ZP;
-   Eigen::Matrix<std::complex<double>,4,4> ZN1;
-   Eigen::Matrix<std::complex<double>,4,4> ZN2;
-   Eigen::Matrix<std::complex<double>,2,2> UM1;
-   Eigen::Matrix<std::complex<double>,2,2> UP1;
-   Eigen::Matrix<std::complex<double>,2,2> UM2;
-   Eigen::Matrix<std::complex<double>,2,2> UP2;
-   Eigen::Matrix<std::complex<double>,3,3> ZEL;
-   Eigen::Matrix<std::complex<double>,3,3> ZER;
-   Eigen::Matrix<std::complex<double>,3,3> ZDL;
-   Eigen::Matrix<std::complex<double>,3,3> ZDR;
-   Eigen::Matrix<std::complex<double>,3,3> ZUL;
-   Eigen::Matrix<std::complex<double>,3,3> ZUR;
-   Eigen::Matrix<double,2,2> ZZ;
+   Eigen::Matrix<double,6,6> ZD{Eigen::Matrix<double,6,6>::Zero()};
+   Eigen::Matrix<double,3,3> ZV{Eigen::Matrix<double,3,3>::Zero()};
+   Eigen::Matrix<double,6,6> ZU{Eigen::Matrix<double,6,6>::Zero()};
+   Eigen::Matrix<double,6,6> ZE{Eigen::Matrix<double,6,6>::Zero()};
+   Eigen::Matrix<double,4,4> ZH{Eigen::Matrix<double,4,4>::Zero()};
+   Eigen::Matrix<double,4,4> ZA{Eigen::Matrix<double,4,4>::Zero()};
+   Eigen::Matrix<double,2,2> ZHR{Eigen::Matrix<double,2,2>::Zero()};
+   Eigen::Matrix<double,4,4> ZP{Eigen::Matrix<double,4,4>::Zero()};
+   Eigen::Matrix<std::complex<double>,4,4> ZN1{Eigen::Matrix<std::complex<double>,4,4>::Zero()};
+   Eigen::Matrix<std::complex<double>,4,4> ZN2{Eigen::Matrix<std::complex<double>,4,4>::Zero()};
+   Eigen::Matrix<std::complex<double>,2,2> UM1{Eigen::Matrix<std::complex<double>,2,2>::Zero()};
+   Eigen::Matrix<std::complex<double>,2,2> UP1{Eigen::Matrix<std::complex<double>,2,2>::Zero()};
+   Eigen::Matrix<std::complex<double>,2,2> UM2{Eigen::Matrix<std::complex<double>,2,2>::Zero()};
+   Eigen::Matrix<std::complex<double>,2,2> UP2{Eigen::Matrix<std::complex<double>,2,2>::Zero()};
+   Eigen::Matrix<std::complex<double>,3,3> ZEL{Eigen::Matrix<std::complex<double>,3,3>::Zero()};
+   Eigen::Matrix<std::complex<double>,3,3> ZER{Eigen::Matrix<std::complex<double>,3,3>::Zero()};
+   Eigen::Matrix<std::complex<double>,3,3> ZDL{Eigen::Matrix<std::complex<double>,3,3>::Zero()};
+   Eigen::Matrix<std::complex<double>,3,3> ZDR{Eigen::Matrix<std::complex<double>,3,3>::Zero()};
+   Eigen::Matrix<std::complex<double>,3,3> ZUL{Eigen::Matrix<std::complex<double>,3,3>::Zero()};
+   Eigen::Matrix<std::complex<double>,3,3> ZUR{Eigen::Matrix<std::complex<double>,3,3>::Zero()};
+   Eigen::Matrix<double,2,2> ZZ{Eigen::Matrix<double,2,2>::Zero()};
 
    Eigen::Array<std::complex<double>,4,1> eff_CphhVPVP;
    Eigen::Array<std::complex<double>,4,1> eff_CphhVGVG;

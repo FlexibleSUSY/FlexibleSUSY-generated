@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 11:46:34
+// File generated at Tue 10 Oct 2017 22:16:13
 
 #ifndef UMSSM_INPUT_PARAMETERS_H
 #define UMSSM_INPUT_PARAMETERS_H
@@ -27,28 +27,23 @@
 namespace flexiblesusy {
 
 struct UMSSM_input_parameters {
-   double m0;
-   double m12;
-   double TanBeta;
-   double Azero;
-   double LambdaInput;
-   double ALambdaInput;
-   double vSInput;
-   double Qq;
-   double Ql;
-   double QHd;
-   double QHu;
-   double Qd;
-   double Qu;
-   double Qe;
-   double Qs;
-   double Qv;
+   double m0{};
+   double m12{};
+   double TanBeta{};
+   double Azero{};
+   double LambdaInput{};
+   double ALambdaInput{};
+   double vSInput{};
+   double Qq{};
+   double Ql{};
+   double QHd{};
+   double QHu{};
+   double Qd{};
+   double Qu{};
+   double Qe{};
+   double Qs{};
+   double Qv{};
 
-   UMSSM_input_parameters()
-      : m0(0), m12(0), TanBeta(0), Azero(0), LambdaInput(0), ALambdaInput(0),
-   vSInput(0), Qq(0), Ql(0), QHd(0), QHu(0), Qd(0), Qu(0), Qe(0), Qs(0), Qv(0)
-
-   {}
 
    Eigen::ArrayXd get() const;
    void set(const Eigen::ArrayXd&);

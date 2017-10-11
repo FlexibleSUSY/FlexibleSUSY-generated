@@ -16,9 +16,10 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 11:46:34
+// File generated at Tue 10 Oct 2017 22:47:55
 
 #include "UMSSM_two_scale_convergence_tester.hpp"
+#include <array>
 #include <cmath>
 #include <algorithm>
 #include "wrappers.hpp"
@@ -40,53 +41,50 @@ namespace flexiblesusy {
 #define OLD4(p,i,j,k,l) ol.get_##p(i,j,k,l)
 #define NEW4(p,i,j,k,l) ne.get_##p(i,j,k,l)
 
-UMSSM_convergence_tester<Two_scale>::UMSSM_convergence_tester(UMSSM<Two_scale>* model, double accuracy_goal)
-   : Convergence_tester_DRbar<UMSSM<Two_scale> >(model, accuracy_goal)
-{
-}
-
-UMSSM_convergence_tester<Two_scale>::~UMSSM_convergence_tester()
+UMSSM_convergence_tester<Two_scale>::UMSSM_convergence_tester(
+   UMSSM<Two_scale>* model, double accuracy_goal, const Scale_getter& sg)
+   : Convergence_tester_DRbar<UMSSM<Two_scale> >(model, accuracy_goal, sg)
 {
 }
 
 double UMSSM_convergence_tester<Two_scale>::max_rel_diff() const
 {
    const UMSSM<Two_scale>& ol = get_last_iteration_model();
-   const UMSSM<Two_scale>& ne = get_model();
+   const UMSSM<Two_scale>& ne = get_current_iteration_model();
 
-   double diff[42] = { 0 };
+   std::array<double, 42> diff{};
 
    diff[0] = MaxRelDiff(OLD(MGlu),NEW(MGlu));
    diff[1] = MaxRelDiff(OLD(MVZp),NEW(MVZp));
-   for (unsigned i = 0; i < 6; i++) {
+   for (int i = 0; i < 6; ++i) {
       diff[i + 2] = MaxRelDiff(OLD1(MSd,i),NEW1(MSd,i));
    }
-   for (unsigned i = 0; i < 6; i++) {
+   for (int i = 0; i < 6; ++i) {
       diff[i + 8] = MaxRelDiff(OLD1(MSv,i),NEW1(MSv,i));
    }
-   for (unsigned i = 0; i < 6; i++) {
+   for (int i = 0; i < 6; ++i) {
       diff[i + 14] = MaxRelDiff(OLD1(MSu,i),NEW1(MSu,i));
    }
-   for (unsigned i = 0; i < 6; i++) {
+   for (int i = 0; i < 6; ++i) {
       diff[i + 20] = MaxRelDiff(OLD1(MSe,i),NEW1(MSe,i));
    }
-   for (unsigned i = 0; i < 3; i++) {
+   for (int i = 0; i < 3; ++i) {
       diff[i + 26] = MaxRelDiff(OLD1(Mhh,i),NEW1(Mhh,i));
    }
-   for (unsigned i = 2; i < 3; i++) {
+   for (int i = 2; i < 3; ++i) {
       diff[i + 29] = MaxRelDiff(OLD1(MAh,i),NEW1(MAh,i));
    }
-   for (unsigned i = 1; i < 2; i++) {
+   for (int i = 1; i < 2; ++i) {
       diff[i + 32] = MaxRelDiff(OLD1(MHpm,i),NEW1(MHpm,i));
    }
-   for (unsigned i = 0; i < 6; i++) {
+   for (int i = 0; i < 6; ++i) {
       diff[i + 34] = MaxRelDiff(OLD1(MChi,i),NEW1(MChi,i));
    }
-   for (unsigned i = 0; i < 2; i++) {
+   for (int i = 0; i < 2; ++i) {
       diff[i + 40] = MaxRelDiff(OLD1(MCha,i),NEW1(MCha,i));
    }
 
-   return *std::max_element(diff, diff + 42);
+   return *std::max_element(diff.cbegin(), diff.cend());
 
 }
 

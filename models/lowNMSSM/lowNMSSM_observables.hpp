@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 11:59:33
+// File generated at Tue 10 Oct 2017 22:27:45
 
 #ifndef lowNMSSM_OBSERVABLES_H
 #define lowNMSSM_OBSERVABLES_H
@@ -35,7 +35,7 @@ class lowNMSSM_mass_eigenstates;
 class Physical_input;
 
 struct lowNMSSM_observables {
-   static const unsigned NUMBER_OF_OBSERVABLES = 0;
+   static const int NUMBER_OF_OBSERVABLES = 0;
 
    lowNMSSM_observables();
    Eigen::ArrayXd get() const; ///< returns vector of all observables
@@ -46,7 +46,13 @@ struct lowNMSSM_observables {
 
 };
 
-lowNMSSM_observables calculate_observables(const lowNMSSM_mass_eigenstates&, const softsusy::QedQcd&, const Physical_input&);
+lowNMSSM_observables calculate_observables(
+   const lowNMSSM_mass_eigenstates&, const softsusy::QedQcd&,
+   const Physical_input&);
+
+lowNMSSM_observables calculate_observables(
+   const lowNMSSM_mass_eigenstates&, const softsusy::QedQcd&,
+   const Physical_input&, double scale);
 
 } // namespace flexiblesusy
 

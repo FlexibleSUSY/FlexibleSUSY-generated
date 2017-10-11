@@ -16,14 +16,15 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 12:32:00
+// File generated at Tue 10 Oct 2017 22:54:13
 
 #ifndef NUHMSSM_TWO_SCALE_CONVERGENCE_TESTER_H
 #define NUHMSSM_TWO_SCALE_CONVERGENCE_TESTER_H
 
 #include "NUHMSSM_convergence_tester.hpp"
 #include "NUHMSSM_two_scale_model.hpp"
-#include "two_scale_convergence_tester_drbar.hpp"
+
+#include "convergence_tester_drbar.hpp"
 
 namespace flexiblesusy {
 
@@ -32,8 +33,10 @@ class Two_scale;
 template<>
 class NUHMSSM_convergence_tester<Two_scale> : public Convergence_tester_DRbar<NUHMSSM<Two_scale> > {
 public:
-   NUHMSSM_convergence_tester(NUHMSSM<Two_scale>*, double);
-   virtual ~NUHMSSM_convergence_tester();
+   using Scale_getter = Convergence_tester_DRbar<NUHMSSM<Two_scale>>::Scale_getter;
+
+   NUHMSSM_convergence_tester(NUHMSSM<Two_scale>*, double, const Scale_getter& sg = Scale_getter());
+   virtual ~NUHMSSM_convergence_tester() = default;
 
 protected:
    virtual double max_rel_diff() const;

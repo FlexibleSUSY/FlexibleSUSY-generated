@@ -16,36 +16,34 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 10:40:05
+// File generated at Tue 10 Oct 2017 21:19:45
 
 #include "SM_slha_io.hpp"
 #include "SM_input_parameters.hpp"
-#include "SM_info.hpp"
 #include "logger.hpp"
 #include "wrappers.hpp"
 #include "numerics2.hpp"
 #include "config.h"
 
+#include <array>
 #include <fstream>
 #include <sstream>
 #include <iostream>
-#include <boost/bind.hpp>
+#include <string>
 
 #define Pole(p) physical.p
 #define PHYSICAL(p) model.get_physical().p
 #define PHYSICAL_SLHA(p) model.get_physical_slha().p
 #define LOCALPHYSICAL(p) physical.p
 #define MODELPARAMETER(p) model.get_##p()
+#define INPUTPARAMETER(p) input.p
+#define EXTRAPARAMETER(p) model.get_##p()
 #define DEFINE_PHYSICAL_PARAMETER(p) decltype(LOCALPHYSICAL(p)) p;
 #define LowEnergyConstant(p) Electroweak_constants::p
 
 using namespace softsusy;
 
 namespace flexiblesusy {
-
-char const * const SM_slha_io::drbar_blocks[NUMBER_OF_DRBAR_BLOCKS] =
-   { "gauge", "Yu", "Yd", "Ye", "SM", "HMIX" }
-;
 
 SM_slha_io::SM_slha_io()
    : slha_io()
@@ -80,6 +78,36 @@ void SM_slha_io::set_extpar(const SM_input_parameters& input)
 }
 
 /**
+ * Stores the IMMINPAR input parameters in the SLHA object.
+ *
+ * @param input struct of input parameters
+ */
+void SM_slha_io::set_imminpar(const SM_input_parameters& input)
+{
+
+}
+
+/**
+ * Stores the IMEXTPAR input parameters in the SLHA object.
+ *
+ * @param input struct of input parameters
+ */
+void SM_slha_io::set_imextpar(const SM_input_parameters& input)
+{
+
+}
+
+/**
+ * Stores the MODSEL input parameters in the SLHA object.
+ *
+ * @param modsel struct of MODSEL parameters
+ */
+void SM_slha_io::set_modsel(const SLHA_io::Modsel& modsel)
+{
+   slha_io.set_modsel(modsel);
+}
+
+/**
  * Stores the MINPAR input parameters in the SLHA object.
  *
  * @param input struct of input parameters
@@ -92,6 +120,42 @@ void SM_slha_io::set_minpar(const SM_input_parameters& input)
    minpar << FORMAT_ELEMENT(1, input.LambdaIN, "LambdaIN");
    slha_io.set_block(minpar);
 
+}
+
+/**
+ * Stores all input parameters in the SLHA object.
+ *
+ * @param input struct of input parameters
+ */
+void SM_slha_io::set_input(const SM_input_parameters& input)
+{
+   set_minpar(input);
+   set_extpar(input);
+   set_imminpar(input);
+   set_imextpar(input);
+
+
+}
+
+/**
+ * Stores the additional physical input (FlexibleSUSYInput block) in
+ * the SLHA object.
+ *
+ * @param input class of input
+ */
+void SM_slha_io::set_physical_input(const Physical_input& input)
+{
+   slha_io.set_physical_input(input);
+}
+
+/**
+ * Stores the settings (FlexibleSUSY block) in the SLHA object.
+ *
+ * @param settings class of settings
+ */
+void SM_slha_io::set_settings(const Spectrum_generator_settings& settings)
+{
+   slha_io.set_settings(settings);
 }
 
 /**
@@ -110,23 +174,20 @@ void SM_slha_io::set_sminputs(const softsusy::QedQcd& qedqcd)
  *
  * @param problems struct with parameter point problems
  */
-void SM_slha_io::set_spinfo(const Problems<SM_info::NUMBER_OF_PARTICLES>& problems)
+void SM_slha_io::set_spinfo(const Spectrum_generator_problems& problems)
 {
-   std::vector<std::string> warnings_vec, problems_vec;
+   set_spinfo(problems.get_problem_strings(), problems.get_warning_strings());
+}
 
-   if (problems.have_warning()) {
-      std::ostringstream ss;
-      problems.print_warnings(ss);
-      warnings_vec = { ss.str() };
-   }
-
-   if (problems.have_problem()) {
-      std::ostringstream ss;
-      problems.print_problems(ss);
-      problems_vec = { ss.str() };
-   }
-
-   set_spinfo(problems_vec, warnings_vec);
+/**
+ * Stores the spectrum generator information in the SPINFO block in
+ * the SLHA object.
+ *
+ * @param problems struct with parameter point problems
+ */
+void SM_slha_io::set_spinfo(const Problems& problems)
+{
+   set_spinfo(problems.get_problem_strings(), problems.get_warning_strings());
 }
 
 /**
@@ -248,7 +309,7 @@ void SM_slha_io::set_pmns(
  *
  * @param output "-" for cout, or file name
  */
-void SM_slha_io::write_to(const std::string& output)
+void SM_slha_io::write_to(const std::string& output) const
 {
    if (output == "-")
       write_to_stream(std::cout);
@@ -272,7 +333,6 @@ double SM_slha_io::get_parameter_output_scale() const
 void SM_slha_io::read_from_file(const std::string& file_name)
 {
    slha_io.read_from_file(file_name);
-   slha_io.read_modsel();
 }
 
 /**
@@ -285,7 +345,6 @@ void SM_slha_io::read_from_file(const std::string& file_name)
 void SM_slha_io::read_from_source(const std::string& source)
 {
    slha_io.read_from_source(source);
-   slha_io.read_modsel();
 }
 
 /**
@@ -299,20 +358,33 @@ void SM_slha_io::read_from_stream(std::istream& istr)
 }
 
 /**
- * Fill struct of model input parameters from SLHA object (MINPAR and
- * EXTPAR blocks)
+ * Fill struct of model input parameters from SLHA object (MINPAR,
+ * EXTPAR and IMEXTPAR blocks)
  *
  * @param input struct of model input parameters
  */
 void SM_slha_io::fill(SM_input_parameters& input) const
 {
-   SLHA_io::Tuple_processor minpar_processor
-      = boost::bind(&SM_slha_io::fill_minpar_tuple, boost::ref(input), _1, _2);
-   SLHA_io::Tuple_processor extpar_processor
-      = boost::bind(&SM_slha_io::fill_extpar_tuple, boost::ref(input), _1, _2);
+   SLHA_io::Tuple_processor minpar_processor = [&input, this] (int key, double value) {
+      return fill_minpar_tuple(input, key, value);
+   };
+
+   SLHA_io::Tuple_processor extpar_processor = [&input, this] (int key, double value) {
+      return fill_extpar_tuple(input, key, value);
+   };
+
+   SLHA_io::Tuple_processor imminpar_processor = [&input, this] (int key, double value) {
+      return fill_imminpar_tuple(input, key, value);
+   };
+
+   SLHA_io::Tuple_processor imextpar_processor = [&input, this] (int key, double value) {
+      return fill_imextpar_tuple(input, key, value);
+   };
 
    slha_io.read_block("MINPAR", minpar_processor);
    slha_io.read_block("EXTPAR", extpar_processor);
+   slha_io.read_block("IMMINPAR", imminpar_processor);
+   slha_io.read_block("IMEXTPAR", imextpar_processor);
 
 
 }
@@ -409,6 +481,24 @@ void SM_slha_io::fill_extpar_tuple(SM_input_parameters& input,
 
 }
 
+void SM_slha_io::fill_imminpar_tuple(SM_input_parameters& input,
+                                                int key, double value)
+{
+   switch (key) {
+   default: WARNING("Unrecognized entry in block IMMINPAR: " << key); break;
+   }
+
+}
+
+void SM_slha_io::fill_imextpar_tuple(SM_input_parameters& input,
+                                                int key, double value)
+{
+   switch (key) {
+   default: WARNING("Unrecognized entry in block IMEXTPAR: " << key); break;
+   }
+
+}
+
 /**
  * Reads pole masses and mixing matrices from a SLHA output file to be filled.
  */
@@ -474,10 +564,14 @@ void SM_slha_io::fill_physical(SM_physical& physical) const
  */
 double SM_slha_io::read_scale() const
 {
+   static const std::array<std::string, 6> drbar_blocks =
+      { "gauge", "Yu", "Yd", "Ye", "SM", "HMIX" }
+;
+
    double scale = 0.;
 
-   for (unsigned i = 0; i < NUMBER_OF_DRBAR_BLOCKS; i++) {
-      const double block_scale = slha_io.read_scale(drbar_blocks[i]);
+   for (const auto& block: drbar_blocks) {
+      const double block_scale = slha_io.read_scale(block);
       if (!is_zero(block_scale)) {
          if (!is_zero(scale) && !is_equal(scale, block_scale))
             WARNING("DR-bar parameters defined at different scales");

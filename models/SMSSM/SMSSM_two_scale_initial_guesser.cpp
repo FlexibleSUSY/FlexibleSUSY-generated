@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 11:50:02
+// File generated at Tue 10 Oct 2017 22:22:56
 
 #include "SMSSM_two_scale_initial_guesser.hpp"
 #include "SMSSM_two_scale_model.hpp"
@@ -26,7 +26,6 @@
 #include "wrappers.hpp"
 
 #include <Eigen/Core>
-#include <cassert>
 
 namespace flexiblesusy {
 
@@ -44,29 +43,15 @@ SMSSM_initial_guesser<Two_scale>::SMSSM_initial_guesser(
    const SMSSM_susy_scale_constraint<Two_scale>& susy_constraint_,
    const SMSSM_high_scale_constraint<Two_scale>& high_constraint_
 )
-   : Initial_guesser<Two_scale>()
-   , model(model_)
+   : model(model_)
    , qedqcd(qedqcd_)
-   , mu_guess(0.)
-   , mc_guess(0.)
-   , mt_guess(0.)
-   , md_guess(0.)
-   , ms_guess(0.)
-   , mb_guess(0.)
-   , me_guess(0.)
-   , mm_guess(0.)
-   , mtau_guess(0.)
-   , running_precision(1.0e-3)
    , low_constraint(low_constraint_)
    , susy_constraint(susy_constraint_)
    , high_constraint(high_constraint_)
 {
-   assert(model && "SMSSM_initial_guesser: Error: pointer to model"
-          " SMSSM<Two_scale> must not be zero");
-}
-
-SMSSM_initial_guesser<Two_scale>::~SMSSM_initial_guesser()
-{
+   if (!model)
+      throw SetupError("SMSSM_initial_guesser: Error: pointer to model"
+                       " SMSSM<Two_scale> must not be zero");
 }
 
 /**
@@ -95,7 +80,7 @@ void SMSSM_initial_guesser<Two_scale>::guess()
    MODEL->set_Lambdax(Re(LambdaInput));
    MODEL->set_Mu(Re(LowEnergyConstant(MZ)));
    MODEL->set_BMu(Re(Sqr(LowEnergyConstant(MZ))));
-   MODEL->set_LL1(Re(Power(LowEnergyConstant(MZ),3)));
+   MODEL->set_LL1(Re(Cube(LowEnergyConstant(MZ))));
    calculate_Yu_DRbar();
    calculate_Yd_DRbar();
    calculate_Ye_DRbar();
@@ -104,36 +89,31 @@ void SMSSM_initial_guesser<Two_scale>::guess()
  */
 void SMSSM_initial_guesser<Two_scale>::guess_susy_parameters()
 {
-   using namespace softsusy;
-
    softsusy::QedQcd leAtMt(qedqcd);
-   const double MZ = Electroweak_constants::MZ;
-   const double MW = Electroweak_constants::MW;
-   const double sinThetaW2 = 1.0 - Sqr(MW / MZ);
    const double mtpole = leAtMt.displayPoleMt();
 
-   mu_guess = leAtMt.displayMass(mUp);
-   mc_guess = leAtMt.displayMass(mCharm);
-   mt_guess = model->get_thresholds() > 0 ?
-      leAtMt.displayMass(mTop) - 30.0 :
+   mu_guess = leAtMt.displayMass(softsusy::mUp);
+   mc_guess = leAtMt.displayMass(softsusy::mCharm);
+   mt_guess = model->get_thresholds() > 0 && model->get_threshold_corrections().mt > 0 ?
+      leAtMt.displayMass(softsusy::mTop) - 30.0 :
       leAtMt.displayPoleMt();
-   md_guess = leAtMt.displayMass(mDown);
-   ms_guess = leAtMt.displayMass(mStrange);
-   mb_guess = leAtMt.displayMass(mBottom);
+   md_guess = leAtMt.displayMass(softsusy::mDown);
+   ms_guess = leAtMt.displayMass(softsusy::mStrange);
+   mb_guess = leAtMt.displayMass(softsusy::mBottom);
    me_guess = model->get_thresholds() > 0 ?
-      leAtMt.displayMass(mElectron) :
+      leAtMt.displayMass(softsusy::mElectron) :
       leAtMt.displayPoleMel();
    mm_guess = model->get_thresholds() > 0 ?
-      leAtMt.displayMass(mMuon) :
+      leAtMt.displayMass(softsusy::mMuon) :
       leAtMt.displayPoleMmuon();
-   mtau_guess = leAtMt.displayMass(mTau);
+   mtau_guess = leAtMt.displayMass(softsusy::mTau);
 
    // guess gauge couplings at mt
-   const DoubleVector alpha_sm(leAtMt.getGaugeMu(mtpole, sinThetaW2));
+   const auto alpha_sm(leAtMt.guess_alpha_SM5(mtpole));
 
-   MODEL->set_g1(Sqrt(4. * Pi * alpha_sm(1)));
-   MODEL->set_g2(Sqrt(4. * Pi * alpha_sm(2)));
-   MODEL->set_g3(Sqrt(4. * Pi * alpha_sm(3)));
+   MODEL->set_g1(Sqrt(4. * Pi * alpha_sm(0)));
+   MODEL->set_g2(Sqrt(4. * Pi * alpha_sm(1)));
+   MODEL->set_g3(Sqrt(4. * Pi * alpha_sm(2)));
 
 
    model->set_scale(mtpole);
@@ -147,7 +127,7 @@ void SMSSM_initial_guesser<Two_scale>::guess_susy_parameters()
    MODEL->set_Lambdax(Re(LambdaInput));
    MODEL->set_Mu(Re(LowEnergyConstant(MZ)));
    MODEL->set_BMu(Re(Sqr(LowEnergyConstant(MZ))));
-   MODEL->set_LL1(Re(Power(LowEnergyConstant(MZ),3)));
+   MODEL->set_LL1(Re(Cube(LowEnergyConstant(MZ))));
    calculate_Yu_DRbar();
    calculate_Yd_DRbar();
    calculate_Ye_DRbar();

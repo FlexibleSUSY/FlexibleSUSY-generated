@@ -8,15 +8,18 @@ NUTSMSSM_INSTALL_DIR := $(INSTALL_DIR)/$(DIR)
 NUTSMSSM_MK     := \
 		$(DIR)/module.mk
 
-NUTSMSSM_TWO_SCALE_SUSY_MK := \
-		$(DIR)/two_scale_susy.mk
+NUTSMSSM_SUSY_BETAS_MK := \
+		$(DIR)/susy_betas.mk
 
-NUTSMSSM_TWO_SCALE_SOFT_MK := \
-		$(DIR)/two_scale_soft.mk
+NUTSMSSM_SOFT_BETAS_MK := \
+		$(DIR)/soft_betas.mk
 
-NUTSMSSM_TWO_SCALE_MK := \
-		$(NUTSMSSM_TWO_SCALE_SUSY_MK) \
-		$(NUTSMSSM_TWO_SCALE_SOFT_MK)
+NUTSMSSM_FlexibleEFTHiggs_MK := \
+		$(DIR)/FlexibleEFTHiggs.mk
+
+NUTSMSSM_INCLUDE_MK := \
+		$(NUTSMSSM_SUSY_BETAS_MK) \
+		$(NUTSMSSM_SOFT_BETAS_MK)
 
 NUTSMSSM_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.NUTSMSSM_generated \
@@ -29,91 +32,89 @@ NUTSMSSM_GNUPLOT := \
 NUTSMSSM_TARBALL := \
 		$(MODNAME).tar.gz
 
-LIBNUTSMSSM_SRC :=
-EXENUTSMSSM_SRC :=
-LLNUTSMSSM_LIB  :=
-LLNUTSMSSM_OBJ  :=
-LLNUTSMSSM_SRC  :=
-LLNUTSMSSM_MMA  :=
-
-LIBNUTSMSSM_HDR :=
-
-ifneq ($(findstring two_scale,$(ALGORITHMS)),)
-LIBNUTSMSSM_SRC += \
+LIBNUTSMSSM_SRC := \
+		$(DIR)/NUTSMSSM_a_muon.cpp \
+		$(DIR)/NUTSMSSM_edm.cpp \
 		$(DIR)/NUTSMSSM_effective_couplings.cpp \
-		$(DIR)/NUTSMSSM_mass_eigenstates.cpp \
 		$(DIR)/NUTSMSSM_info.cpp \
 		$(DIR)/NUTSMSSM_input_parameters.cpp \
+		$(DIR)/NUTSMSSM_mass_eigenstates.cpp \
 		$(DIR)/NUTSMSSM_observables.cpp \
-		$(DIR)/NUTSMSSM_slha_io.cpp \
 		$(DIR)/NUTSMSSM_physical.cpp \
+		$(DIR)/NUTSMSSM_slha_io.cpp \
+		$(DIR)/NUTSMSSM_soft_parameters.cpp \
+		$(DIR)/NUTSMSSM_susy_parameters.cpp \
 		$(DIR)/NUTSMSSM_utilities.cpp \
-		$(DIR)/NUTSMSSM_standard_model_matching.cpp \
-		$(DIR)/NUTSMSSM_standard_model_two_scale_matching.cpp \
-		$(DIR)/NUTSMSSM_two_scale_convergence_tester.cpp \
-		$(DIR)/NUTSMSSM_two_scale_high_scale_constraint.cpp \
-		$(DIR)/NUTSMSSM_two_scale_initial_guesser.cpp \
-		$(DIR)/NUTSMSSM_two_scale_low_scale_constraint.cpp \
-		$(DIR)/NUTSMSSM_two_scale_model.cpp \
-		$(DIR)/NUTSMSSM_two_scale_model_slha.cpp \
-		$(DIR)/NUTSMSSM_two_scale_susy_parameters.cpp \
-		$(DIR)/NUTSMSSM_two_scale_soft_parameters.cpp \
-		$(DIR)/NUTSMSSM_two_scale_susy_scale_constraint.cpp
-EXENUTSMSSM_SRC += \
+		$(DIR)/NUTSMSSM_weinberg_angle.cpp
+
+EXENUTSMSSM_SRC := \
 		$(DIR)/run_NUTSMSSM.cpp \
 		$(DIR)/run_cmd_line_NUTSMSSM.cpp \
 		$(DIR)/scan_NUTSMSSM.cpp
-LIBNUTSMSSM_HDR += \
+LLNUTSMSSM_LIB  :=
+LLNUTSMSSM_OBJ  :=
+LLNUTSMSSM_SRC  := \
+		$(DIR)/NUTSMSSM_librarylink.cpp
+
+LLNUTSMSSM_MMA  := \
+		$(DIR)/NUTSMSSM_librarylink.m \
+		$(DIR)/run_NUTSMSSM.m
+
+LIBNUTSMSSM_HDR := \
+		$(DIR)/NUTSMSSM_cxx_diagrams.hpp \
+		$(DIR)/NUTSMSSM_a_muon.hpp \
 		$(DIR)/NUTSMSSM_convergence_tester.hpp \
+		$(DIR)/NUTSMSSM_edm.hpp \
 		$(DIR)/NUTSMSSM_effective_couplings.hpp \
+		$(DIR)/NUTSMSSM_ewsb_solver.hpp \
+		$(DIR)/NUTSMSSM_ewsb_solver_interface.hpp \
 		$(DIR)/NUTSMSSM_high_scale_constraint.hpp \
-		$(DIR)/NUTSMSSM_mass_eigenstates.hpp \
 		$(DIR)/NUTSMSSM_info.hpp \
 		$(DIR)/NUTSMSSM_initial_guesser.hpp \
 		$(DIR)/NUTSMSSM_input_parameters.hpp \
 		$(DIR)/NUTSMSSM_low_scale_constraint.hpp \
+		$(DIR)/NUTSMSSM_mass_eigenstates.hpp \
 		$(DIR)/NUTSMSSM_model.hpp \
 		$(DIR)/NUTSMSSM_model_slha.hpp \
 		$(DIR)/NUTSMSSM_observables.hpp \
 		$(DIR)/NUTSMSSM_physical.hpp \
 		$(DIR)/NUTSMSSM_slha_io.hpp \
-		$(DIR)/NUTSMSSM_spectrum_generator_interface.hpp \
 		$(DIR)/NUTSMSSM_spectrum_generator.hpp \
-		$(DIR)/NUTSMSSM_standard_model_matching.hpp \
-		$(DIR)/NUTSMSSM_standard_model_two_scale_matching.hpp \
+		$(DIR)/NUTSMSSM_spectrum_generator_interface.hpp \
+		$(DIR)/NUTSMSSM_soft_parameters.hpp \
+		$(DIR)/NUTSMSSM_susy_parameters.hpp \
 		$(DIR)/NUTSMSSM_susy_scale_constraint.hpp \
 		$(DIR)/NUTSMSSM_utilities.hpp \
-		$(DIR)/NUTSMSSM_two_scale_convergence_tester.hpp \
-		$(DIR)/NUTSMSSM_two_scale_high_scale_constraint.hpp \
-		$(DIR)/NUTSMSSM_two_scale_initial_guesser.hpp \
-		$(DIR)/NUTSMSSM_two_scale_low_scale_constraint.hpp \
-		$(DIR)/NUTSMSSM_two_scale_model.hpp \
-		$(DIR)/NUTSMSSM_two_scale_model_slha.hpp \
-		$(DIR)/NUTSMSSM_two_scale_soft_parameters.hpp \
-		$(DIR)/NUTSMSSM_two_scale_susy_parameters.hpp \
-		$(DIR)/NUTSMSSM_two_scale_susy_scale_constraint.hpp
-LLNUTSMSSM_SRC  += \
-		$(DIR)/NUTSMSSM_librarylink.cpp
+		$(DIR)/NUTSMSSM_weinberg_angle.hpp
 
-LLNUTSMSSM_MMA  += \
-		$(DIR)/NUTSMSSM_librarylink.m \
-		$(DIR)/run_NUTSMSSM.m
+ifneq ($(findstring two_scale,$(SOLVERS)),)
+-include $(DIR)/two_scale.mk
+endif
+ifneq ($(findstring lattice,$(SOLVERS)),)
+-include $(DIR)/lattice.mk
+endif
+ifneq ($(findstring semi_analytic,$(SOLVERS)),)
+-include $(DIR)/semi_analytic.mk
+endif
 
 ifneq ($(MAKECMDGOALS),showbuild)
 ifneq ($(MAKECMDGOALS),tag)
 ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
--include $(NUTSMSSM_TWO_SCALE_SUSY_MK)
--include $(NUTSMSSM_TWO_SCALE_SOFT_MK)
+-include $(NUTSMSSM_SUSY_BETAS_MK)
+-include $(NUTSMSSM_SOFT_BETAS_MK)
+-include $(NUTSMSSM_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
 ifneq ($(MAKECMDGOALS),pack-$(MODNAME)-src)
 ifeq ($(findstring clean-,$(MAKECMDGOALS)),)
 ifeq ($(findstring distclean-,$(MAKECMDGOALS)),)
 ifeq ($(findstring doc-,$(MAKECMDGOALS)),)
-$(NUTSMSSM_TWO_SCALE_SUSY_MK): run-metacode-$(MODNAME)
+$(NUTSMSSM_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
-$(NUTSMSSM_TWO_SCALE_SOFT_MK): run-metacode-$(MODNAME)
+$(NUTSMSSM_SOFT_BETAS_MK): run-metacode-$(MODNAME)
+		@$(CONVERT_DOS_PATHS) $@
+$(NUTSMSSM_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 endif
 endif
@@ -126,9 +127,7 @@ endif
 endif
 endif
 
-endif
-
-# remove duplicates in case all algorithms are used
+# remove duplicates in case all solvers are used
 LIBNUTSMSSM_SRC := $(sort $(LIBNUTSMSSM_SRC))
 EXENUTSMSSM_SRC := $(sort $(EXENUTSMSSM_SRC))
 
@@ -182,7 +181,7 @@ install-src::
 		install -m u=rw,g=r,o=r $(LLNUTSMSSM_SRC) $(NUTSMSSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLNUTSMSSM_MMA) $(NUTSMSSM_INSTALL_DIR)
 		$(INSTALL_STRIPPED) $(NUTSMSSM_MK) $(NUTSMSSM_INSTALL_DIR) -m u=rw,g=r,o=r
-		install -m u=rw,g=r,o=r $(NUTSMSSM_TWO_SCALE_MK) $(NUTSMSSM_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(NUTSMSSM_INCLUDE_MK) $(NUTSMSSM_INSTALL_DIR)
 ifneq ($(NUTSMSSM_SLHA_INPUT),)
 		install -m u=rw,g=r,o=r $(NUTSMSSM_SLHA_INPUT) $(NUTSMSSM_INSTALL_DIR)
 endif
@@ -211,7 +210,7 @@ clean-$(MODNAME)-src:
 		-rm -f $(LLNUTSMSSM_SRC)
 		-rm -f $(LLNUTSMSSM_MMA)
 		-rm -f $(METACODE_STAMP_NUTSMSSM)
-		-rm -f $(NUTSMSSM_TWO_SCALE_MK)
+		-rm -f $(NUTSMSSM_INCLUDE_MK)
 		-rm -f $(NUTSMSSM_SLHA_INPUT)
 		-rm -f $(NUTSMSSM_GNUPLOT)
 
@@ -237,7 +236,7 @@ pack-$(MODNAME)-src:
 		$(LIBNUTSMSSM_SRC) $(LIBNUTSMSSM_HDR) \
 		$(EXENUTSMSSM_SRC) \
 		$(LLNUTSMSSM_SRC) $(LLNUTSMSSM_MMA) \
-		$(NUTSMSSM_MK) $(NUTSMSSM_TWO_SCALE_MK) \
+		$(NUTSMSSM_MK) $(NUTSMSSM_INCLUDE_MK) \
 		$(NUTSMSSM_SLHA_INPUT) $(NUTSMSSM_GNUPLOT)
 
 $(LIBNUTSMSSM_SRC) $(LIBNUTSMSSM_HDR) $(EXENUTSMSSM_SRC) $(LLNUTSMSSM_SRC) $(LLNUTSMSSM_MMA) \
@@ -261,7 +260,7 @@ $(METACODE_STAMP_NUTSMSSM):
 endif
 
 $(LIBNUTSMSSM_DEP) $(EXENUTSMSSM_DEP) $(LLNUTSMSSM_DEP) $(LIBNUTSMSSM_OBJ) $(EXENUTSMSSM_OBJ) $(LLNUTSMSSM_OBJ) $(LLNUTSMSSM_LIB): \
-	CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS)
+	CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBNUTSMSSM_DEP) $(EXENUTSMSSM_DEP) $(LLNUTSMSSM_DEP) $(LIBNUTSMSSM_OBJ) $(EXENUTSMSSM_OBJ) $(LLNUTSMSSM_OBJ) $(LLNUTSMSSM_LIB): \
@@ -274,11 +273,11 @@ $(LLNUTSMSSM_OBJ) $(LLNUTSMSSM_LIB): \
 $(LIBNUTSMSSM): $(LIBNUTSMSSM_OBJ)
 		$(MODULE_MAKE_LIB_CMD) $@ $^
 
-$(DIR)/%.x: $(DIR)/%.o $(LIBNUTSMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^ $(ADDONLIBS)) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+$(DIR)/%.x: $(DIR)/%.o $(LIBNUTSMSSM) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
-$(LLNUTSMSSM_LIB): $(LLNUTSMSSM_OBJ) $(LIBNUTSMSSM) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+$(LLNUTSMSSM_LIB): $(LLNUTSMSSM_OBJ) $(LIBNUTSMSSM) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBNUTSMSSM_DEP) $(EXENUTSMSSM_DEP)
 ALLSRC += $(LIBNUTSMSSM_SRC) $(EXENUTSMSSM_SRC)

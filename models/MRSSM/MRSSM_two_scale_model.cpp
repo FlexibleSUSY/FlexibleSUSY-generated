@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 11:36:34
+// File generated at Tue 10 Oct 2017 21:40:27
 
 /**
  * @file MRSSM_two_scale_model.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Tue 5 Sep 2017 11:36:34 with FlexibleSUSY
- * 1.7.5 (git commit: c98e024e1e74ea3309b68f7006d5f91f8df6c678) and SARAH 4.12.0 .
+ * This file was generated at Tue 10 Oct 2017 21:40:27 with FlexibleSUSY
+ * 2.0.0 (git commit: e7cd01524dc37f9ba34ce6090bb584b8c724259f) and SARAH 4.12.0 .
  */
 
 #include "MRSSM_two_scale_model.hpp"
@@ -37,12 +37,7 @@ namespace flexiblesusy {
 #define CLASSNAME MRSSM<Two_scale>
 
 CLASSNAME::MRSSM(const MRSSM_input_parameters& input_)
-   : Two_scale_model()
-   , MRSSM_mass_eigenstates(input_)
-{
-}
-
-CLASSNAME::~MRSSM()
+   : MRSSM_mass_eigenstates(input_)
 {
 }
 

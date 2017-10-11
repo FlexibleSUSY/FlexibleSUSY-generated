@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 12:02:31
+// File generated at Tue 10 Oct 2017 22:30:49
 
 #ifndef NUTSMSSM_INPUT_PARAMETERS_H
 #define NUTSMSSM_INPUT_PARAMETERS_H
@@ -27,24 +27,19 @@
 namespace flexiblesusy {
 
 struct NUTSMSSM_input_parameters {
-   double m0;
-   double m12;
-   double TanBeta;
-   double Azero;
-   double LambdaInput;
-   double KappaInput;
-   double LambdaSInput;
-   double L1Input;
-   double MSInput;
-   double BInput;
-   double MuInput;
-   double LInput;
+   double m0{};
+   double m12{};
+   double TanBeta{};
+   double Azero{};
+   double LambdaInput{};
+   double KappaInput{};
+   double LambdaSInput{};
+   double L1Input{};
+   double MSInput{};
+   double BInput{};
+   double MuInput{};
+   double LInput{};
 
-   NUTSMSSM_input_parameters()
-      : m0(0), m12(0), TanBeta(0), Azero(0), LambdaInput(0), KappaInput(0),
-   LambdaSInput(0), L1Input(0), MSInput(0), BInput(0), MuInput(0), LInput(0)
-
-   {}
 
    Eigen::ArrayXd get() const;
    void set(const Eigen::ArrayXd&);

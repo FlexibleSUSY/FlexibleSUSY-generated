@@ -8,15 +8,18 @@ MSSMRHN_INSTALL_DIR := $(INSTALL_DIR)/$(DIR)
 MSSMRHN_MK     := \
 		$(DIR)/module.mk
 
-MSSMRHN_TWO_SCALE_SUSY_MK := \
-		$(DIR)/two_scale_susy.mk
+MSSMRHN_SUSY_BETAS_MK := \
+		$(DIR)/susy_betas.mk
 
-MSSMRHN_TWO_SCALE_SOFT_MK := \
-		$(DIR)/two_scale_soft.mk
+MSSMRHN_SOFT_BETAS_MK := \
+		$(DIR)/soft_betas.mk
 
-MSSMRHN_TWO_SCALE_MK := \
-		$(MSSMRHN_TWO_SCALE_SUSY_MK) \
-		$(MSSMRHN_TWO_SCALE_SOFT_MK)
+MSSMRHN_FlexibleEFTHiggs_MK := \
+		$(DIR)/FlexibleEFTHiggs.mk
+
+MSSMRHN_INCLUDE_MK := \
+		$(MSSMRHN_SUSY_BETAS_MK) \
+		$(MSSMRHN_SOFT_BETAS_MK)
 
 MSSMRHN_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.MSSMRHN_generated \
@@ -29,91 +32,89 @@ MSSMRHN_GNUPLOT := \
 MSSMRHN_TARBALL := \
 		$(MODNAME).tar.gz
 
-LIBMSSMRHN_SRC :=
-EXEMSSMRHN_SRC :=
-LLMSSMRHN_LIB  :=
-LLMSSMRHN_OBJ  :=
-LLMSSMRHN_SRC  :=
-LLMSSMRHN_MMA  :=
-
-LIBMSSMRHN_HDR :=
-
-ifneq ($(findstring two_scale,$(ALGORITHMS)),)
-LIBMSSMRHN_SRC += \
+LIBMSSMRHN_SRC := \
+		$(DIR)/MSSMRHN_a_muon.cpp \
+		$(DIR)/MSSMRHN_edm.cpp \
 		$(DIR)/MSSMRHN_effective_couplings.cpp \
-		$(DIR)/MSSMRHN_mass_eigenstates.cpp \
 		$(DIR)/MSSMRHN_info.cpp \
 		$(DIR)/MSSMRHN_input_parameters.cpp \
+		$(DIR)/MSSMRHN_mass_eigenstates.cpp \
 		$(DIR)/MSSMRHN_observables.cpp \
-		$(DIR)/MSSMRHN_slha_io.cpp \
 		$(DIR)/MSSMRHN_physical.cpp \
+		$(DIR)/MSSMRHN_slha_io.cpp \
+		$(DIR)/MSSMRHN_soft_parameters.cpp \
+		$(DIR)/MSSMRHN_susy_parameters.cpp \
 		$(DIR)/MSSMRHN_utilities.cpp \
-		$(DIR)/MSSMRHN_standard_model_matching.cpp \
-		$(DIR)/MSSMRHN_standard_model_two_scale_matching.cpp \
-		$(DIR)/MSSMRHN_two_scale_convergence_tester.cpp \
-		$(DIR)/MSSMRHN_two_scale_high_scale_constraint.cpp \
-		$(DIR)/MSSMRHN_two_scale_initial_guesser.cpp \
-		$(DIR)/MSSMRHN_two_scale_low_scale_constraint.cpp \
-		$(DIR)/MSSMRHN_two_scale_model.cpp \
-		$(DIR)/MSSMRHN_two_scale_model_slha.cpp \
-		$(DIR)/MSSMRHN_two_scale_susy_parameters.cpp \
-		$(DIR)/MSSMRHN_two_scale_soft_parameters.cpp \
-		$(DIR)/MSSMRHN_two_scale_susy_scale_constraint.cpp
-EXEMSSMRHN_SRC += \
+		$(DIR)/MSSMRHN_weinberg_angle.cpp
+
+EXEMSSMRHN_SRC := \
 		$(DIR)/run_MSSMRHN.cpp \
 		$(DIR)/run_cmd_line_MSSMRHN.cpp \
 		$(DIR)/scan_MSSMRHN.cpp
-LIBMSSMRHN_HDR += \
+LLMSSMRHN_LIB  :=
+LLMSSMRHN_OBJ  :=
+LLMSSMRHN_SRC  := \
+		$(DIR)/MSSMRHN_librarylink.cpp
+
+LLMSSMRHN_MMA  := \
+		$(DIR)/MSSMRHN_librarylink.m \
+		$(DIR)/run_MSSMRHN.m
+
+LIBMSSMRHN_HDR := \
+		$(DIR)/MSSMRHN_cxx_diagrams.hpp \
+		$(DIR)/MSSMRHN_a_muon.hpp \
 		$(DIR)/MSSMRHN_convergence_tester.hpp \
+		$(DIR)/MSSMRHN_edm.hpp \
 		$(DIR)/MSSMRHN_effective_couplings.hpp \
+		$(DIR)/MSSMRHN_ewsb_solver.hpp \
+		$(DIR)/MSSMRHN_ewsb_solver_interface.hpp \
 		$(DIR)/MSSMRHN_high_scale_constraint.hpp \
-		$(DIR)/MSSMRHN_mass_eigenstates.hpp \
 		$(DIR)/MSSMRHN_info.hpp \
 		$(DIR)/MSSMRHN_initial_guesser.hpp \
 		$(DIR)/MSSMRHN_input_parameters.hpp \
 		$(DIR)/MSSMRHN_low_scale_constraint.hpp \
+		$(DIR)/MSSMRHN_mass_eigenstates.hpp \
 		$(DIR)/MSSMRHN_model.hpp \
 		$(DIR)/MSSMRHN_model_slha.hpp \
 		$(DIR)/MSSMRHN_observables.hpp \
 		$(DIR)/MSSMRHN_physical.hpp \
 		$(DIR)/MSSMRHN_slha_io.hpp \
-		$(DIR)/MSSMRHN_spectrum_generator_interface.hpp \
 		$(DIR)/MSSMRHN_spectrum_generator.hpp \
-		$(DIR)/MSSMRHN_standard_model_matching.hpp \
-		$(DIR)/MSSMRHN_standard_model_two_scale_matching.hpp \
+		$(DIR)/MSSMRHN_spectrum_generator_interface.hpp \
+		$(DIR)/MSSMRHN_soft_parameters.hpp \
+		$(DIR)/MSSMRHN_susy_parameters.hpp \
 		$(DIR)/MSSMRHN_susy_scale_constraint.hpp \
 		$(DIR)/MSSMRHN_utilities.hpp \
-		$(DIR)/MSSMRHN_two_scale_convergence_tester.hpp \
-		$(DIR)/MSSMRHN_two_scale_high_scale_constraint.hpp \
-		$(DIR)/MSSMRHN_two_scale_initial_guesser.hpp \
-		$(DIR)/MSSMRHN_two_scale_low_scale_constraint.hpp \
-		$(DIR)/MSSMRHN_two_scale_model.hpp \
-		$(DIR)/MSSMRHN_two_scale_model_slha.hpp \
-		$(DIR)/MSSMRHN_two_scale_soft_parameters.hpp \
-		$(DIR)/MSSMRHN_two_scale_susy_parameters.hpp \
-		$(DIR)/MSSMRHN_two_scale_susy_scale_constraint.hpp
-LLMSSMRHN_SRC  += \
-		$(DIR)/MSSMRHN_librarylink.cpp
+		$(DIR)/MSSMRHN_weinberg_angle.hpp
 
-LLMSSMRHN_MMA  += \
-		$(DIR)/MSSMRHN_librarylink.m \
-		$(DIR)/run_MSSMRHN.m
+ifneq ($(findstring two_scale,$(SOLVERS)),)
+-include $(DIR)/two_scale.mk
+endif
+ifneq ($(findstring lattice,$(SOLVERS)),)
+-include $(DIR)/lattice.mk
+endif
+ifneq ($(findstring semi_analytic,$(SOLVERS)),)
+-include $(DIR)/semi_analytic.mk
+endif
 
 ifneq ($(MAKECMDGOALS),showbuild)
 ifneq ($(MAKECMDGOALS),tag)
 ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
--include $(MSSMRHN_TWO_SCALE_SUSY_MK)
--include $(MSSMRHN_TWO_SCALE_SOFT_MK)
+-include $(MSSMRHN_SUSY_BETAS_MK)
+-include $(MSSMRHN_SOFT_BETAS_MK)
+-include $(MSSMRHN_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
 ifneq ($(MAKECMDGOALS),pack-$(MODNAME)-src)
 ifeq ($(findstring clean-,$(MAKECMDGOALS)),)
 ifeq ($(findstring distclean-,$(MAKECMDGOALS)),)
 ifeq ($(findstring doc-,$(MAKECMDGOALS)),)
-$(MSSMRHN_TWO_SCALE_SUSY_MK): run-metacode-$(MODNAME)
+$(MSSMRHN_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
-$(MSSMRHN_TWO_SCALE_SOFT_MK): run-metacode-$(MODNAME)
+$(MSSMRHN_SOFT_BETAS_MK): run-metacode-$(MODNAME)
+		@$(CONVERT_DOS_PATHS) $@
+$(MSSMRHN_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 endif
 endif
@@ -126,9 +127,7 @@ endif
 endif
 endif
 
-endif
-
-# remove duplicates in case all algorithms are used
+# remove duplicates in case all solvers are used
 LIBMSSMRHN_SRC := $(sort $(LIBMSSMRHN_SRC))
 EXEMSSMRHN_SRC := $(sort $(EXEMSSMRHN_SRC))
 
@@ -182,7 +181,7 @@ install-src::
 		install -m u=rw,g=r,o=r $(LLMSSMRHN_SRC) $(MSSMRHN_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLMSSMRHN_MMA) $(MSSMRHN_INSTALL_DIR)
 		$(INSTALL_STRIPPED) $(MSSMRHN_MK) $(MSSMRHN_INSTALL_DIR) -m u=rw,g=r,o=r
-		install -m u=rw,g=r,o=r $(MSSMRHN_TWO_SCALE_MK) $(MSSMRHN_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(MSSMRHN_INCLUDE_MK) $(MSSMRHN_INSTALL_DIR)
 ifneq ($(MSSMRHN_SLHA_INPUT),)
 		install -m u=rw,g=r,o=r $(MSSMRHN_SLHA_INPUT) $(MSSMRHN_INSTALL_DIR)
 endif
@@ -211,7 +210,7 @@ clean-$(MODNAME)-src:
 		-rm -f $(LLMSSMRHN_SRC)
 		-rm -f $(LLMSSMRHN_MMA)
 		-rm -f $(METACODE_STAMP_MSSMRHN)
-		-rm -f $(MSSMRHN_TWO_SCALE_MK)
+		-rm -f $(MSSMRHN_INCLUDE_MK)
 		-rm -f $(MSSMRHN_SLHA_INPUT)
 		-rm -f $(MSSMRHN_GNUPLOT)
 
@@ -237,7 +236,7 @@ pack-$(MODNAME)-src:
 		$(LIBMSSMRHN_SRC) $(LIBMSSMRHN_HDR) \
 		$(EXEMSSMRHN_SRC) \
 		$(LLMSSMRHN_SRC) $(LLMSSMRHN_MMA) \
-		$(MSSMRHN_MK) $(MSSMRHN_TWO_SCALE_MK) \
+		$(MSSMRHN_MK) $(MSSMRHN_INCLUDE_MK) \
 		$(MSSMRHN_SLHA_INPUT) $(MSSMRHN_GNUPLOT)
 
 $(LIBMSSMRHN_SRC) $(LIBMSSMRHN_HDR) $(EXEMSSMRHN_SRC) $(LLMSSMRHN_SRC) $(LLMSSMRHN_MMA) \
@@ -261,7 +260,7 @@ $(METACODE_STAMP_MSSMRHN):
 endif
 
 $(LIBMSSMRHN_DEP) $(EXEMSSMRHN_DEP) $(LLMSSMRHN_DEP) $(LIBMSSMRHN_OBJ) $(EXEMSSMRHN_OBJ) $(LLMSSMRHN_OBJ) $(LLMSSMRHN_LIB): \
-	CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS)
+	CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBMSSMRHN_DEP) $(EXEMSSMRHN_DEP) $(LLMSSMRHN_DEP) $(LIBMSSMRHN_OBJ) $(EXEMSSMRHN_OBJ) $(LLMSSMRHN_OBJ) $(LLMSSMRHN_LIB): \
@@ -274,11 +273,11 @@ $(LLMSSMRHN_OBJ) $(LLMSSMRHN_LIB): \
 $(LIBMSSMRHN): $(LIBMSSMRHN_OBJ)
 		$(MODULE_MAKE_LIB_CMD) $@ $^
 
-$(DIR)/%.x: $(DIR)/%.o $(LIBMSSMRHN) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^ $(ADDONLIBS)) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+$(DIR)/%.x: $(DIR)/%.o $(LIBMSSMRHN) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
-$(LLMSSMRHN_LIB): $(LLMSSMRHN_OBJ) $(LIBMSSMRHN) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+$(LLMSSMRHN_LIB): $(LLMSSMRHN_OBJ) $(LIBMSSMRHN) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBMSSMRHN_DEP) $(EXEMSSMRHN_DEP)
 ALLSRC += $(LIBMSSMRHN_SRC) $(EXEMSSMRHN_SRC)

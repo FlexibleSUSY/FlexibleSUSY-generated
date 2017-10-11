@@ -16,24 +16,26 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 11:57:39
+// File generated at Tue 10 Oct 2017 22:27:35
 
 #include "lowNMSSM_two_scale_susy_scale_constraint.hpp"
 #include "lowNMSSM_two_scale_model.hpp"
 #include "wrappers.hpp"
 #include "logger.hpp"
+#include "error.hpp"
 #include "ew_input.hpp"
 #include "gsl_utils.hpp"
 #include "minimizer.hpp"
+#include "raii.hpp"
 #include "root_finder.hpp"
 #include "threshold_loop_functions.hpp"
 
-#include <cassert>
 #include <cmath>
 
 namespace flexiblesusy {
 
 #define DERIVEDPARAMETER(p) model->p()
+#define EXTRAPARAMETER(p) model->get_##p()
 #define INPUTPARAMETER(p) model->get_input().p
 #define MODELPARAMETER(p) model->get_##p()
 #define PHASE(p) model->get_##p()
@@ -50,32 +52,17 @@ namespace flexiblesusy {
 #define MODEL model
 #define MODELCLASSNAME lowNMSSM<Two_scale>
 
-lowNMSSM_susy_scale_constraint<Two_scale>::lowNMSSM_susy_scale_constraint()
-   : Constraint<Two_scale>()
-   , scale(0.)
-   , initial_scale_guess(0.)
-   , model(0)
-   , qedqcd()
-{
-}
-
 lowNMSSM_susy_scale_constraint<Two_scale>::lowNMSSM_susy_scale_constraint(
    lowNMSSM<Two_scale>* model_, const softsusy::QedQcd& qedqcd_)
-   : Constraint<Two_scale>()
-   , model(model_)
+   : model(model_)
    , qedqcd(qedqcd_)
 {
    initialize();
 }
 
-lowNMSSM_susy_scale_constraint<Two_scale>::~lowNMSSM_susy_scale_constraint()
-{
-}
-
 void lowNMSSM_susy_scale_constraint<Two_scale>::apply()
 {
-   assert(model && "Error: lowNMSSM_susy_scale_constraint::apply():"
-          " model pointer must not be zero");
+   check_model_ptr();
 
 
 
@@ -148,7 +135,6 @@ void lowNMSSM_susy_scale_constraint<Two_scale>::apply()
    MODEL->set_TYe(2,2,Re(ATauInput*Ye(2,2)));
    MODEL->solve_ewsb();
 
-
 }
 
 double lowNMSSM_susy_scale_constraint<Two_scale>::get_scale() const
@@ -163,8 +149,7 @@ double lowNMSSM_susy_scale_constraint<Two_scale>::get_initial_scale_guess() cons
 
 const lowNMSSM_input_parameters& lowNMSSM_susy_scale_constraint<Two_scale>::get_input_parameters() const
 {
-   assert(model && "Error: lowNMSSM_susy_scale_constraint::"
-          "get_input_parameters(): model pointer is zero.");
+   check_model_ptr();
 
    return model->get_input();
 }
@@ -174,7 +159,7 @@ lowNMSSM<Two_scale>* lowNMSSM_susy_scale_constraint<Two_scale>::get_model() cons
    return model;
 }
 
-void lowNMSSM_susy_scale_constraint<Two_scale>::set_model(Two_scale_model* model_)
+void lowNMSSM_susy_scale_constraint<Two_scale>::set_model(Model* model_)
 {
    model = cast_model<lowNMSSM<Two_scale>*>(model_);
 }
@@ -194,14 +179,13 @@ void lowNMSSM_susy_scale_constraint<Two_scale>::clear()
 {
    scale = 0.;
    initial_scale_guess = 0.;
-   model = NULL;
+   model = nullptr;
    qedqcd = softsusy::QedQcd();
 }
 
 void lowNMSSM_susy_scale_constraint<Two_scale>::initialize()
 {
-   assert(model && "lowNMSSM_susy_scale_constraint<Two_scale>::"
-          "initialize(): model pointer is zero.");
+   check_model_ptr();
 
    const auto Qin = INPUTPARAMETER(Qin);
 
@@ -212,14 +196,20 @@ void lowNMSSM_susy_scale_constraint<Two_scale>::initialize()
 
 void lowNMSSM_susy_scale_constraint<Two_scale>::update_scale()
 {
-   assert(model && "lowNMSSM_susy_scale_constraint<Two_scale>::"
-          "update_scale(): model pointer is zero.");
+   check_model_ptr();
 
    const auto Qin = INPUTPARAMETER(Qin);
 
    scale = Qin;
 
 
+}
+
+void lowNMSSM_susy_scale_constraint<Two_scale>::check_model_ptr() const
+{
+   if (!model)
+      throw SetupError("lowNMSSM_susy_scale_constraint<Two_scale>: "
+                       "model pointer is zero!");
 }
 
 } // namespace flexiblesusy

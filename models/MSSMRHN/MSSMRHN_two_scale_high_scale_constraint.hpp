@@ -16,14 +16,14 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 12:34:43
+// File generated at Tue 10 Oct 2017 23:01:59
 
 #ifndef MSSMRHN_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
 #define MSSMRHN_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
 
 #include "MSSMRHN_high_scale_constraint.hpp"
 #include "MSSMRHN_input_parameters.hpp"
-#include "two_scale_constraint.hpp"
+#include "single_scale_constraint.hpp"
 
 namespace flexiblesusy {
 
@@ -33,14 +33,15 @@ class MSSMRHN;
 class Two_scale;
 
 template<>
-class MSSMRHN_high_scale_constraint<Two_scale> : public Constraint<Two_scale> {
+class MSSMRHN_high_scale_constraint<Two_scale> : public Single_scale_constraint {
 public:
-   MSSMRHN_high_scale_constraint();
+   MSSMRHN_high_scale_constraint() = default;
    MSSMRHN_high_scale_constraint(MSSMRHN<Two_scale>*);
-   virtual ~MSSMRHN_high_scale_constraint();
-   virtual void apply();
-   virtual double get_scale() const;
-   virtual void set_model(Two_scale_model*);
+   virtual ~MSSMRHN_high_scale_constraint() = default;
+   virtual void apply() override;
+   virtual double get_scale() const override;
+   virtual std::string name() const override { return "MSSMRHN high-scale constraint"; }
+   virtual void set_model(Model*) override;
 
    void clear();
    double get_initial_scale_guess() const;
@@ -54,9 +55,11 @@ protected:
    bool check_non_perturbative();
 
 private:
-   double scale;
-   double initial_scale_guess;
-   MSSMRHN<Two_scale>* model;
+   double scale{0.};
+   double initial_scale_guess{0.};
+   MSSMRHN<Two_scale>* model{nullptr};
+
+   void check_model_ptr() const;
 };
 
 } // namespace flexiblesusy

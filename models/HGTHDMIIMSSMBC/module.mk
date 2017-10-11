@@ -8,15 +8,18 @@ HGTHDMIIMSSMBC_INSTALL_DIR := $(INSTALL_DIR)/$(DIR)
 HGTHDMIIMSSMBC_MK     := \
 		$(DIR)/module.mk
 
-HGTHDMIIMSSMBC_TWO_SCALE_SUSY_MK := \
-		$(DIR)/two_scale_susy.mk
+HGTHDMIIMSSMBC_SUSY_BETAS_MK := \
+		$(DIR)/susy_betas.mk
 
-HGTHDMIIMSSMBC_TWO_SCALE_SOFT_MK := \
-		$(DIR)/two_scale_soft.mk
+HGTHDMIIMSSMBC_SOFT_BETAS_MK := \
+		$(DIR)/soft_betas.mk
 
-HGTHDMIIMSSMBC_TWO_SCALE_MK := \
-		$(HGTHDMIIMSSMBC_TWO_SCALE_SUSY_MK) \
-		$(HGTHDMIIMSSMBC_TWO_SCALE_SOFT_MK)
+HGTHDMIIMSSMBC_FlexibleEFTHiggs_MK := \
+		$(DIR)/FlexibleEFTHiggs.mk
+
+HGTHDMIIMSSMBC_INCLUDE_MK := \
+		$(HGTHDMIIMSSMBC_SUSY_BETAS_MK) \
+		$(HGTHDMIIMSSMBC_SOFT_BETAS_MK)
 
 HGTHDMIIMSSMBC_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.HGTHDMIIMSSMBC_generated \
@@ -29,91 +32,89 @@ HGTHDMIIMSSMBC_GNUPLOT := \
 HGTHDMIIMSSMBC_TARBALL := \
 		$(MODNAME).tar.gz
 
-LIBHGTHDMIIMSSMBC_SRC :=
-EXEHGTHDMIIMSSMBC_SRC :=
-LLHGTHDMIIMSSMBC_LIB  :=
-LLHGTHDMIIMSSMBC_OBJ  :=
-LLHGTHDMIIMSSMBC_SRC  :=
-LLHGTHDMIIMSSMBC_MMA  :=
-
-LIBHGTHDMIIMSSMBC_HDR :=
-
-ifneq ($(findstring two_scale,$(ALGORITHMS)),)
-LIBHGTHDMIIMSSMBC_SRC += \
+LIBHGTHDMIIMSSMBC_SRC := \
+		$(DIR)/HGTHDMIIMSSMBC_a_muon.cpp \
+		$(DIR)/HGTHDMIIMSSMBC_edm.cpp \
 		$(DIR)/HGTHDMIIMSSMBC_effective_couplings.cpp \
-		$(DIR)/HGTHDMIIMSSMBC_mass_eigenstates.cpp \
 		$(DIR)/HGTHDMIIMSSMBC_info.cpp \
 		$(DIR)/HGTHDMIIMSSMBC_input_parameters.cpp \
+		$(DIR)/HGTHDMIIMSSMBC_mass_eigenstates.cpp \
 		$(DIR)/HGTHDMIIMSSMBC_observables.cpp \
-		$(DIR)/HGTHDMIIMSSMBC_slha_io.cpp \
 		$(DIR)/HGTHDMIIMSSMBC_physical.cpp \
+		$(DIR)/HGTHDMIIMSSMBC_slha_io.cpp \
+		$(DIR)/HGTHDMIIMSSMBC_soft_parameters.cpp \
+		$(DIR)/HGTHDMIIMSSMBC_susy_parameters.cpp \
 		$(DIR)/HGTHDMIIMSSMBC_utilities.cpp \
-		$(DIR)/HGTHDMIIMSSMBC_standard_model_matching.cpp \
-		$(DIR)/HGTHDMIIMSSMBC_standard_model_two_scale_matching.cpp \
-		$(DIR)/HGTHDMIIMSSMBC_two_scale_convergence_tester.cpp \
-		$(DIR)/HGTHDMIIMSSMBC_two_scale_high_scale_constraint.cpp \
-		$(DIR)/HGTHDMIIMSSMBC_two_scale_initial_guesser.cpp \
-		$(DIR)/HGTHDMIIMSSMBC_two_scale_low_scale_constraint.cpp \
-		$(DIR)/HGTHDMIIMSSMBC_two_scale_model.cpp \
-		$(DIR)/HGTHDMIIMSSMBC_two_scale_model_slha.cpp \
-		$(DIR)/HGTHDMIIMSSMBC_two_scale_susy_parameters.cpp \
-		$(DIR)/HGTHDMIIMSSMBC_two_scale_soft_parameters.cpp \
-		$(DIR)/HGTHDMIIMSSMBC_two_scale_susy_scale_constraint.cpp
-EXEHGTHDMIIMSSMBC_SRC += \
+		$(DIR)/HGTHDMIIMSSMBC_weinberg_angle.cpp
+
+EXEHGTHDMIIMSSMBC_SRC := \
 		$(DIR)/run_HGTHDMIIMSSMBC.cpp \
 		$(DIR)/run_cmd_line_HGTHDMIIMSSMBC.cpp \
 		$(DIR)/scan_HGTHDMIIMSSMBC.cpp
-LIBHGTHDMIIMSSMBC_HDR += \
+LLHGTHDMIIMSSMBC_LIB  :=
+LLHGTHDMIIMSSMBC_OBJ  :=
+LLHGTHDMIIMSSMBC_SRC  := \
+		$(DIR)/HGTHDMIIMSSMBC_librarylink.cpp
+
+LLHGTHDMIIMSSMBC_MMA  := \
+		$(DIR)/HGTHDMIIMSSMBC_librarylink.m \
+		$(DIR)/run_HGTHDMIIMSSMBC.m
+
+LIBHGTHDMIIMSSMBC_HDR := \
+		$(DIR)/HGTHDMIIMSSMBC_cxx_diagrams.hpp \
+		$(DIR)/HGTHDMIIMSSMBC_a_muon.hpp \
 		$(DIR)/HGTHDMIIMSSMBC_convergence_tester.hpp \
+		$(DIR)/HGTHDMIIMSSMBC_edm.hpp \
 		$(DIR)/HGTHDMIIMSSMBC_effective_couplings.hpp \
+		$(DIR)/HGTHDMIIMSSMBC_ewsb_solver.hpp \
+		$(DIR)/HGTHDMIIMSSMBC_ewsb_solver_interface.hpp \
 		$(DIR)/HGTHDMIIMSSMBC_high_scale_constraint.hpp \
-		$(DIR)/HGTHDMIIMSSMBC_mass_eigenstates.hpp \
 		$(DIR)/HGTHDMIIMSSMBC_info.hpp \
 		$(DIR)/HGTHDMIIMSSMBC_initial_guesser.hpp \
 		$(DIR)/HGTHDMIIMSSMBC_input_parameters.hpp \
 		$(DIR)/HGTHDMIIMSSMBC_low_scale_constraint.hpp \
+		$(DIR)/HGTHDMIIMSSMBC_mass_eigenstates.hpp \
 		$(DIR)/HGTHDMIIMSSMBC_model.hpp \
 		$(DIR)/HGTHDMIIMSSMBC_model_slha.hpp \
 		$(DIR)/HGTHDMIIMSSMBC_observables.hpp \
 		$(DIR)/HGTHDMIIMSSMBC_physical.hpp \
 		$(DIR)/HGTHDMIIMSSMBC_slha_io.hpp \
-		$(DIR)/HGTHDMIIMSSMBC_spectrum_generator_interface.hpp \
 		$(DIR)/HGTHDMIIMSSMBC_spectrum_generator.hpp \
-		$(DIR)/HGTHDMIIMSSMBC_standard_model_matching.hpp \
-		$(DIR)/HGTHDMIIMSSMBC_standard_model_two_scale_matching.hpp \
+		$(DIR)/HGTHDMIIMSSMBC_spectrum_generator_interface.hpp \
+		$(DIR)/HGTHDMIIMSSMBC_soft_parameters.hpp \
+		$(DIR)/HGTHDMIIMSSMBC_susy_parameters.hpp \
 		$(DIR)/HGTHDMIIMSSMBC_susy_scale_constraint.hpp \
 		$(DIR)/HGTHDMIIMSSMBC_utilities.hpp \
-		$(DIR)/HGTHDMIIMSSMBC_two_scale_convergence_tester.hpp \
-		$(DIR)/HGTHDMIIMSSMBC_two_scale_high_scale_constraint.hpp \
-		$(DIR)/HGTHDMIIMSSMBC_two_scale_initial_guesser.hpp \
-		$(DIR)/HGTHDMIIMSSMBC_two_scale_low_scale_constraint.hpp \
-		$(DIR)/HGTHDMIIMSSMBC_two_scale_model.hpp \
-		$(DIR)/HGTHDMIIMSSMBC_two_scale_model_slha.hpp \
-		$(DIR)/HGTHDMIIMSSMBC_two_scale_soft_parameters.hpp \
-		$(DIR)/HGTHDMIIMSSMBC_two_scale_susy_parameters.hpp \
-		$(DIR)/HGTHDMIIMSSMBC_two_scale_susy_scale_constraint.hpp
-LLHGTHDMIIMSSMBC_SRC  += \
-		$(DIR)/HGTHDMIIMSSMBC_librarylink.cpp
+		$(DIR)/HGTHDMIIMSSMBC_weinberg_angle.hpp
 
-LLHGTHDMIIMSSMBC_MMA  += \
-		$(DIR)/HGTHDMIIMSSMBC_librarylink.m \
-		$(DIR)/run_HGTHDMIIMSSMBC.m
+ifneq ($(findstring two_scale,$(SOLVERS)),)
+-include $(DIR)/two_scale.mk
+endif
+ifneq ($(findstring lattice,$(SOLVERS)),)
+-include $(DIR)/lattice.mk
+endif
+ifneq ($(findstring semi_analytic,$(SOLVERS)),)
+-include $(DIR)/semi_analytic.mk
+endif
 
 ifneq ($(MAKECMDGOALS),showbuild)
 ifneq ($(MAKECMDGOALS),tag)
 ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
--include $(HGTHDMIIMSSMBC_TWO_SCALE_SUSY_MK)
--include $(HGTHDMIIMSSMBC_TWO_SCALE_SOFT_MK)
+-include $(HGTHDMIIMSSMBC_SUSY_BETAS_MK)
+-include $(HGTHDMIIMSSMBC_SOFT_BETAS_MK)
+-include $(HGTHDMIIMSSMBC_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
 ifneq ($(MAKECMDGOALS),pack-$(MODNAME)-src)
 ifeq ($(findstring clean-,$(MAKECMDGOALS)),)
 ifeq ($(findstring distclean-,$(MAKECMDGOALS)),)
 ifeq ($(findstring doc-,$(MAKECMDGOALS)),)
-$(HGTHDMIIMSSMBC_TWO_SCALE_SUSY_MK): run-metacode-$(MODNAME)
+$(HGTHDMIIMSSMBC_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
-$(HGTHDMIIMSSMBC_TWO_SCALE_SOFT_MK): run-metacode-$(MODNAME)
+$(HGTHDMIIMSSMBC_SOFT_BETAS_MK): run-metacode-$(MODNAME)
+		@$(CONVERT_DOS_PATHS) $@
+$(HGTHDMIIMSSMBC_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 endif
 endif
@@ -126,9 +127,7 @@ endif
 endif
 endif
 
-endif
-
-# remove duplicates in case all algorithms are used
+# remove duplicates in case all solvers are used
 LIBHGTHDMIIMSSMBC_SRC := $(sort $(LIBHGTHDMIIMSSMBC_SRC))
 EXEHGTHDMIIMSSMBC_SRC := $(sort $(EXEHGTHDMIIMSSMBC_SRC))
 
@@ -182,7 +181,7 @@ install-src::
 		install -m u=rw,g=r,o=r $(LLHGTHDMIIMSSMBC_SRC) $(HGTHDMIIMSSMBC_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLHGTHDMIIMSSMBC_MMA) $(HGTHDMIIMSSMBC_INSTALL_DIR)
 		$(INSTALL_STRIPPED) $(HGTHDMIIMSSMBC_MK) $(HGTHDMIIMSSMBC_INSTALL_DIR) -m u=rw,g=r,o=r
-		install -m u=rw,g=r,o=r $(HGTHDMIIMSSMBC_TWO_SCALE_MK) $(HGTHDMIIMSSMBC_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(HGTHDMIIMSSMBC_INCLUDE_MK) $(HGTHDMIIMSSMBC_INSTALL_DIR)
 ifneq ($(HGTHDMIIMSSMBC_SLHA_INPUT),)
 		install -m u=rw,g=r,o=r $(HGTHDMIIMSSMBC_SLHA_INPUT) $(HGTHDMIIMSSMBC_INSTALL_DIR)
 endif
@@ -211,7 +210,7 @@ clean-$(MODNAME)-src:
 		-rm -f $(LLHGTHDMIIMSSMBC_SRC)
 		-rm -f $(LLHGTHDMIIMSSMBC_MMA)
 		-rm -f $(METACODE_STAMP_HGTHDMIIMSSMBC)
-		-rm -f $(HGTHDMIIMSSMBC_TWO_SCALE_MK)
+		-rm -f $(HGTHDMIIMSSMBC_INCLUDE_MK)
 		-rm -f $(HGTHDMIIMSSMBC_SLHA_INPUT)
 		-rm -f $(HGTHDMIIMSSMBC_GNUPLOT)
 
@@ -237,7 +236,7 @@ pack-$(MODNAME)-src:
 		$(LIBHGTHDMIIMSSMBC_SRC) $(LIBHGTHDMIIMSSMBC_HDR) \
 		$(EXEHGTHDMIIMSSMBC_SRC) \
 		$(LLHGTHDMIIMSSMBC_SRC) $(LLHGTHDMIIMSSMBC_MMA) \
-		$(HGTHDMIIMSSMBC_MK) $(HGTHDMIIMSSMBC_TWO_SCALE_MK) \
+		$(HGTHDMIIMSSMBC_MK) $(HGTHDMIIMSSMBC_INCLUDE_MK) \
 		$(HGTHDMIIMSSMBC_SLHA_INPUT) $(HGTHDMIIMSSMBC_GNUPLOT)
 
 $(LIBHGTHDMIIMSSMBC_SRC) $(LIBHGTHDMIIMSSMBC_HDR) $(EXEHGTHDMIIMSSMBC_SRC) $(LLHGTHDMIIMSSMBC_SRC) $(LLHGTHDMIIMSSMBC_MMA) \
@@ -261,7 +260,7 @@ $(METACODE_STAMP_HGTHDMIIMSSMBC):
 endif
 
 $(LIBHGTHDMIIMSSMBC_DEP) $(EXEHGTHDMIIMSSMBC_DEP) $(LLHGTHDMIIMSSMBC_DEP) $(LIBHGTHDMIIMSSMBC_OBJ) $(EXEHGTHDMIIMSSMBC_OBJ) $(LLHGTHDMIIMSSMBC_OBJ) $(LLHGTHDMIIMSSMBC_LIB): \
-	CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS)
+	CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBHGTHDMIIMSSMBC_DEP) $(EXEHGTHDMIIMSSMBC_DEP) $(LLHGTHDMIIMSSMBC_DEP) $(LIBHGTHDMIIMSSMBC_OBJ) $(EXEHGTHDMIIMSSMBC_OBJ) $(LLHGTHDMIIMSSMBC_OBJ) $(LLHGTHDMIIMSSMBC_LIB): \
@@ -274,11 +273,11 @@ $(LLHGTHDMIIMSSMBC_OBJ) $(LLHGTHDMIIMSSMBC_LIB): \
 $(LIBHGTHDMIIMSSMBC): $(LIBHGTHDMIIMSSMBC_OBJ)
 		$(MODULE_MAKE_LIB_CMD) $@ $^
 
-$(DIR)/%.x: $(DIR)/%.o $(LIBHGTHDMIIMSSMBC) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^ $(ADDONLIBS)) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+$(DIR)/%.x: $(DIR)/%.o $(LIBHGTHDMIIMSSMBC) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
-$(LLHGTHDMIIMSSMBC_LIB): $(LLHGTHDMIIMSSMBC_OBJ) $(LIBHGTHDMIIMSSMBC) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+$(LLHGTHDMIIMSSMBC_LIB): $(LLHGTHDMIIMSSMBC_OBJ) $(LIBHGTHDMIIMSSMBC) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBHGTHDMIIMSSMBC_DEP) $(EXEHGTHDMIIMSSMBC_DEP)
 ALLSRC += $(LIBHGTHDMIIMSSMBC_SRC) $(EXEHGTHDMIIMSSMBC_SRC)

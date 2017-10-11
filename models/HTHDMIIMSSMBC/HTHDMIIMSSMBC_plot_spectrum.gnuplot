@@ -1,5 +1,3 @@
-set terminal x11
-
 set title "HTHDMIIMSSMBC particle spectrum"
 set ylabel "mass / GeV"
 unset key

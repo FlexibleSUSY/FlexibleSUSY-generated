@@ -8,15 +8,18 @@ THDMIIMSSMBC_INSTALL_DIR := $(INSTALL_DIR)/$(DIR)
 THDMIIMSSMBC_MK     := \
 		$(DIR)/module.mk
 
-THDMIIMSSMBC_TWO_SCALE_SUSY_MK := \
-		$(DIR)/two_scale_susy.mk
+THDMIIMSSMBC_SUSY_BETAS_MK := \
+		$(DIR)/susy_betas.mk
 
-THDMIIMSSMBC_TWO_SCALE_SOFT_MK := \
-		$(DIR)/two_scale_soft.mk
+THDMIIMSSMBC_SOFT_BETAS_MK := \
+		$(DIR)/soft_betas.mk
 
-THDMIIMSSMBC_TWO_SCALE_MK := \
-		$(THDMIIMSSMBC_TWO_SCALE_SUSY_MK) \
-		$(THDMIIMSSMBC_TWO_SCALE_SOFT_MK)
+THDMIIMSSMBC_FlexibleEFTHiggs_MK := \
+		$(DIR)/FlexibleEFTHiggs.mk
+
+THDMIIMSSMBC_INCLUDE_MK := \
+		$(THDMIIMSSMBC_SUSY_BETAS_MK) \
+		$(THDMIIMSSMBC_SOFT_BETAS_MK)
 
 THDMIIMSSMBC_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.THDMIIMSSMBC_generated \
@@ -29,91 +32,89 @@ THDMIIMSSMBC_GNUPLOT := \
 THDMIIMSSMBC_TARBALL := \
 		$(MODNAME).tar.gz
 
-LIBTHDMIIMSSMBC_SRC :=
-EXETHDMIIMSSMBC_SRC :=
-LLTHDMIIMSSMBC_LIB  :=
-LLTHDMIIMSSMBC_OBJ  :=
-LLTHDMIIMSSMBC_SRC  :=
-LLTHDMIIMSSMBC_MMA  :=
-
-LIBTHDMIIMSSMBC_HDR :=
-
-ifneq ($(findstring two_scale,$(ALGORITHMS)),)
-LIBTHDMIIMSSMBC_SRC += \
+LIBTHDMIIMSSMBC_SRC := \
+		$(DIR)/THDMIIMSSMBC_a_muon.cpp \
+		$(DIR)/THDMIIMSSMBC_edm.cpp \
 		$(DIR)/THDMIIMSSMBC_effective_couplings.cpp \
-		$(DIR)/THDMIIMSSMBC_mass_eigenstates.cpp \
 		$(DIR)/THDMIIMSSMBC_info.cpp \
 		$(DIR)/THDMIIMSSMBC_input_parameters.cpp \
+		$(DIR)/THDMIIMSSMBC_mass_eigenstates.cpp \
 		$(DIR)/THDMIIMSSMBC_observables.cpp \
-		$(DIR)/THDMIIMSSMBC_slha_io.cpp \
 		$(DIR)/THDMIIMSSMBC_physical.cpp \
+		$(DIR)/THDMIIMSSMBC_slha_io.cpp \
+		$(DIR)/THDMIIMSSMBC_soft_parameters.cpp \
+		$(DIR)/THDMIIMSSMBC_susy_parameters.cpp \
 		$(DIR)/THDMIIMSSMBC_utilities.cpp \
-		$(DIR)/THDMIIMSSMBC_standard_model_matching.cpp \
-		$(DIR)/THDMIIMSSMBC_standard_model_two_scale_matching.cpp \
-		$(DIR)/THDMIIMSSMBC_two_scale_convergence_tester.cpp \
-		$(DIR)/THDMIIMSSMBC_two_scale_high_scale_constraint.cpp \
-		$(DIR)/THDMIIMSSMBC_two_scale_initial_guesser.cpp \
-		$(DIR)/THDMIIMSSMBC_two_scale_low_scale_constraint.cpp \
-		$(DIR)/THDMIIMSSMBC_two_scale_model.cpp \
-		$(DIR)/THDMIIMSSMBC_two_scale_model_slha.cpp \
-		$(DIR)/THDMIIMSSMBC_two_scale_susy_parameters.cpp \
-		$(DIR)/THDMIIMSSMBC_two_scale_soft_parameters.cpp \
-		$(DIR)/THDMIIMSSMBC_two_scale_susy_scale_constraint.cpp
-EXETHDMIIMSSMBC_SRC += \
+		$(DIR)/THDMIIMSSMBC_weinberg_angle.cpp
+
+EXETHDMIIMSSMBC_SRC := \
 		$(DIR)/run_THDMIIMSSMBC.cpp \
 		$(DIR)/run_cmd_line_THDMIIMSSMBC.cpp \
 		$(DIR)/scan_THDMIIMSSMBC.cpp
-LIBTHDMIIMSSMBC_HDR += \
+LLTHDMIIMSSMBC_LIB  :=
+LLTHDMIIMSSMBC_OBJ  :=
+LLTHDMIIMSSMBC_SRC  := \
+		$(DIR)/THDMIIMSSMBC_librarylink.cpp
+
+LLTHDMIIMSSMBC_MMA  := \
+		$(DIR)/THDMIIMSSMBC_librarylink.m \
+		$(DIR)/run_THDMIIMSSMBC.m
+
+LIBTHDMIIMSSMBC_HDR := \
+		$(DIR)/THDMIIMSSMBC_cxx_diagrams.hpp \
+		$(DIR)/THDMIIMSSMBC_a_muon.hpp \
 		$(DIR)/THDMIIMSSMBC_convergence_tester.hpp \
+		$(DIR)/THDMIIMSSMBC_edm.hpp \
 		$(DIR)/THDMIIMSSMBC_effective_couplings.hpp \
+		$(DIR)/THDMIIMSSMBC_ewsb_solver.hpp \
+		$(DIR)/THDMIIMSSMBC_ewsb_solver_interface.hpp \
 		$(DIR)/THDMIIMSSMBC_high_scale_constraint.hpp \
-		$(DIR)/THDMIIMSSMBC_mass_eigenstates.hpp \
 		$(DIR)/THDMIIMSSMBC_info.hpp \
 		$(DIR)/THDMIIMSSMBC_initial_guesser.hpp \
 		$(DIR)/THDMIIMSSMBC_input_parameters.hpp \
 		$(DIR)/THDMIIMSSMBC_low_scale_constraint.hpp \
+		$(DIR)/THDMIIMSSMBC_mass_eigenstates.hpp \
 		$(DIR)/THDMIIMSSMBC_model.hpp \
 		$(DIR)/THDMIIMSSMBC_model_slha.hpp \
 		$(DIR)/THDMIIMSSMBC_observables.hpp \
 		$(DIR)/THDMIIMSSMBC_physical.hpp \
 		$(DIR)/THDMIIMSSMBC_slha_io.hpp \
-		$(DIR)/THDMIIMSSMBC_spectrum_generator_interface.hpp \
 		$(DIR)/THDMIIMSSMBC_spectrum_generator.hpp \
-		$(DIR)/THDMIIMSSMBC_standard_model_matching.hpp \
-		$(DIR)/THDMIIMSSMBC_standard_model_two_scale_matching.hpp \
+		$(DIR)/THDMIIMSSMBC_spectrum_generator_interface.hpp \
+		$(DIR)/THDMIIMSSMBC_soft_parameters.hpp \
+		$(DIR)/THDMIIMSSMBC_susy_parameters.hpp \
 		$(DIR)/THDMIIMSSMBC_susy_scale_constraint.hpp \
 		$(DIR)/THDMIIMSSMBC_utilities.hpp \
-		$(DIR)/THDMIIMSSMBC_two_scale_convergence_tester.hpp \
-		$(DIR)/THDMIIMSSMBC_two_scale_high_scale_constraint.hpp \
-		$(DIR)/THDMIIMSSMBC_two_scale_initial_guesser.hpp \
-		$(DIR)/THDMIIMSSMBC_two_scale_low_scale_constraint.hpp \
-		$(DIR)/THDMIIMSSMBC_two_scale_model.hpp \
-		$(DIR)/THDMIIMSSMBC_two_scale_model_slha.hpp \
-		$(DIR)/THDMIIMSSMBC_two_scale_soft_parameters.hpp \
-		$(DIR)/THDMIIMSSMBC_two_scale_susy_parameters.hpp \
-		$(DIR)/THDMIIMSSMBC_two_scale_susy_scale_constraint.hpp
-LLTHDMIIMSSMBC_SRC  += \
-		$(DIR)/THDMIIMSSMBC_librarylink.cpp
+		$(DIR)/THDMIIMSSMBC_weinberg_angle.hpp
 
-LLTHDMIIMSSMBC_MMA  += \
-		$(DIR)/THDMIIMSSMBC_librarylink.m \
-		$(DIR)/run_THDMIIMSSMBC.m
+ifneq ($(findstring two_scale,$(SOLVERS)),)
+-include $(DIR)/two_scale.mk
+endif
+ifneq ($(findstring lattice,$(SOLVERS)),)
+-include $(DIR)/lattice.mk
+endif
+ifneq ($(findstring semi_analytic,$(SOLVERS)),)
+-include $(DIR)/semi_analytic.mk
+endif
 
 ifneq ($(MAKECMDGOALS),showbuild)
 ifneq ($(MAKECMDGOALS),tag)
 ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
--include $(THDMIIMSSMBC_TWO_SCALE_SUSY_MK)
--include $(THDMIIMSSMBC_TWO_SCALE_SOFT_MK)
+-include $(THDMIIMSSMBC_SUSY_BETAS_MK)
+-include $(THDMIIMSSMBC_SOFT_BETAS_MK)
+-include $(THDMIIMSSMBC_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
 ifneq ($(MAKECMDGOALS),pack-$(MODNAME)-src)
 ifeq ($(findstring clean-,$(MAKECMDGOALS)),)
 ifeq ($(findstring distclean-,$(MAKECMDGOALS)),)
 ifeq ($(findstring doc-,$(MAKECMDGOALS)),)
-$(THDMIIMSSMBC_TWO_SCALE_SUSY_MK): run-metacode-$(MODNAME)
+$(THDMIIMSSMBC_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
-$(THDMIIMSSMBC_TWO_SCALE_SOFT_MK): run-metacode-$(MODNAME)
+$(THDMIIMSSMBC_SOFT_BETAS_MK): run-metacode-$(MODNAME)
+		@$(CONVERT_DOS_PATHS) $@
+$(THDMIIMSSMBC_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 endif
 endif
@@ -126,9 +127,7 @@ endif
 endif
 endif
 
-endif
-
-# remove duplicates in case all algorithms are used
+# remove duplicates in case all solvers are used
 LIBTHDMIIMSSMBC_SRC := $(sort $(LIBTHDMIIMSSMBC_SRC))
 EXETHDMIIMSSMBC_SRC := $(sort $(EXETHDMIIMSSMBC_SRC))
 
@@ -182,7 +181,7 @@ install-src::
 		install -m u=rw,g=r,o=r $(LLTHDMIIMSSMBC_SRC) $(THDMIIMSSMBC_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLTHDMIIMSSMBC_MMA) $(THDMIIMSSMBC_INSTALL_DIR)
 		$(INSTALL_STRIPPED) $(THDMIIMSSMBC_MK) $(THDMIIMSSMBC_INSTALL_DIR) -m u=rw,g=r,o=r
-		install -m u=rw,g=r,o=r $(THDMIIMSSMBC_TWO_SCALE_MK) $(THDMIIMSSMBC_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(THDMIIMSSMBC_INCLUDE_MK) $(THDMIIMSSMBC_INSTALL_DIR)
 ifneq ($(THDMIIMSSMBC_SLHA_INPUT),)
 		install -m u=rw,g=r,o=r $(THDMIIMSSMBC_SLHA_INPUT) $(THDMIIMSSMBC_INSTALL_DIR)
 endif
@@ -211,7 +210,7 @@ clean-$(MODNAME)-src:
 		-rm -f $(LLTHDMIIMSSMBC_SRC)
 		-rm -f $(LLTHDMIIMSSMBC_MMA)
 		-rm -f $(METACODE_STAMP_THDMIIMSSMBC)
-		-rm -f $(THDMIIMSSMBC_TWO_SCALE_MK)
+		-rm -f $(THDMIIMSSMBC_INCLUDE_MK)
 		-rm -f $(THDMIIMSSMBC_SLHA_INPUT)
 		-rm -f $(THDMIIMSSMBC_GNUPLOT)
 
@@ -237,7 +236,7 @@ pack-$(MODNAME)-src:
 		$(LIBTHDMIIMSSMBC_SRC) $(LIBTHDMIIMSSMBC_HDR) \
 		$(EXETHDMIIMSSMBC_SRC) \
 		$(LLTHDMIIMSSMBC_SRC) $(LLTHDMIIMSSMBC_MMA) \
-		$(THDMIIMSSMBC_MK) $(THDMIIMSSMBC_TWO_SCALE_MK) \
+		$(THDMIIMSSMBC_MK) $(THDMIIMSSMBC_INCLUDE_MK) \
 		$(THDMIIMSSMBC_SLHA_INPUT) $(THDMIIMSSMBC_GNUPLOT)
 
 $(LIBTHDMIIMSSMBC_SRC) $(LIBTHDMIIMSSMBC_HDR) $(EXETHDMIIMSSMBC_SRC) $(LLTHDMIIMSSMBC_SRC) $(LLTHDMIIMSSMBC_MMA) \
@@ -261,7 +260,7 @@ $(METACODE_STAMP_THDMIIMSSMBC):
 endif
 
 $(LIBTHDMIIMSSMBC_DEP) $(EXETHDMIIMSSMBC_DEP) $(LLTHDMIIMSSMBC_DEP) $(LIBTHDMIIMSSMBC_OBJ) $(EXETHDMIIMSSMBC_OBJ) $(LLTHDMIIMSSMBC_OBJ) $(LLTHDMIIMSSMBC_LIB): \
-	CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS)
+	CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBTHDMIIMSSMBC_DEP) $(EXETHDMIIMSSMBC_DEP) $(LLTHDMIIMSSMBC_DEP) $(LIBTHDMIIMSSMBC_OBJ) $(EXETHDMIIMSSMBC_OBJ) $(LLTHDMIIMSSMBC_OBJ) $(LLTHDMIIMSSMBC_LIB): \
@@ -274,11 +273,11 @@ $(LLTHDMIIMSSMBC_OBJ) $(LLTHDMIIMSSMBC_LIB): \
 $(LIBTHDMIIMSSMBC): $(LIBTHDMIIMSSMBC_OBJ)
 		$(MODULE_MAKE_LIB_CMD) $@ $^
 
-$(DIR)/%.x: $(DIR)/%.o $(LIBTHDMIIMSSMBC) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$^ $(ADDONLIBS)) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+$(DIR)/%.x: $(DIR)/%.o $(LIBTHDMIIMSSMBC) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
-$(LLTHDMIIMSSMBC_LIB): $(LLTHDMIIMSSMBC_OBJ) $(LIBTHDMIIMSSMBC) $(LIBFLEXI) $(LIBLEGACY) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$^) $(ADDONLIBS) $(filter -%,$(LOOPFUNCLIBS)) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+$(LLTHDMIIMSSMBC_LIB): $(LLTHDMIIMSSMBC_OBJ) $(LIBTHDMIIMSSMBC) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
 ALLDEP += $(LIBTHDMIIMSSMBC_DEP) $(EXETHDMIIMSSMBC_DEP)
 ALLSRC += $(LIBTHDMIIMSSMBC_SRC) $(EXETHDMIIMSSMBC_SRC)

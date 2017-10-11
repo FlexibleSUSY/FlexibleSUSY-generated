@@ -16,10 +16,12 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 11:59:33
+// File generated at Tue 10 Oct 2017 22:27:45
 
 #include "lowNMSSM_observables.hpp"
 #include "lowNMSSM_mass_eigenstates.hpp"
+#include "lowNMSSM_a_muon.hpp"
+#include "lowNMSSM_edm.hpp"
 #include "lowNMSSM_effective_couplings.hpp"
 #include "gm2calc_interface.hpp"
 #include "eigen_utils.hpp"
@@ -29,8 +31,12 @@
 #include "physical_input.hpp"
 
 #define MODEL model
+#define AMU a_muon
+#define AMUUNCERTAINTY a_muon_uncertainty
 #define AMUGM2CALC a_muon_gm2calc
 #define AMUGM2CALCUNCERTAINTY a_muon_gm2calc_uncertainty
+#define EDM0(p) edm_ ## p
+#define EDM1(p,idx) edm_ ## p ## _ ## idx
 #define EFFCPHIGGSPHOTONPHOTON eff_cp_higgs_photon_photon
 #define EFFCPHIGGSGLUONGLUON eff_cp_higgs_gluon_gluon
 #define EFFCPPSEUDOSCALARPHOTONPHOTON eff_cp_pseudoscalar_photon_photon
@@ -46,7 +52,7 @@
 
 namespace flexiblesusy {
 
-const unsigned lowNMSSM_observables::NUMBER_OF_OBSERVABLES;
+const int lowNMSSM_observables::NUMBER_OF_OBSERVABLES;
 
 lowNMSSM_observables::lowNMSSM_observables()
 
@@ -79,6 +85,19 @@ void lowNMSSM_observables::clear()
 void lowNMSSM_observables::set(const Eigen::ArrayXd& vec)
 {
 
+}
+
+lowNMSSM_observables calculate_observables(const lowNMSSM_mass_eigenstates& model,
+                                              const softsusy::QedQcd& qedqcd,
+                                              const Physical_input& physical_input,
+                                              double scale)
+{
+   auto model_at_scale = model;
+
+   if (scale > 0.)
+      model_at_scale.run_to(scale);
+
+   return calculate_observables(model_at_scale, qedqcd, physical_input);
 }
 
 lowNMSSM_observables calculate_observables(const lowNMSSM_mass_eigenstates& model,

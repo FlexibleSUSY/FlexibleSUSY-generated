@@ -1,8 +1,17 @@
+Print["================================"];
+Print["FlexibleSUSY 2.0.0"];
+Print["HSSUSY"];
+Print["http://flexiblesusy.hepforge.org"];
+Print["================================"];
+
 libHSSUSY = FileNameJoin[{Directory[], "models", "HSSUSY", "HSSUSY_librarylink.so"}];
 
 FSHSSUSYGetSettings = LibraryFunctionLoad[libHSSUSY, "FSHSSUSYGetSettings", LinkObject, LinkObject];
 FSHSSUSYGetSMInputParameters = LibraryFunctionLoad[libHSSUSY, "FSHSSUSYGetSMInputParameters", LinkObject, LinkObject];
 FSHSSUSYGetInputParameters = LibraryFunctionLoad[libHSSUSY, "FSHSSUSYGetInputParameters", LinkObject, LinkObject];
+FSHSSUSYGetProblems = LibraryFunctionLoad[libHSSUSY, "FSHSSUSYGetProblems", LinkObject, LinkObject];
+FSHSSUSYGetWarnings = LibraryFunctionLoad[libHSSUSY, "FSHSSUSYGetWarnings", LinkObject, LinkObject];
+FSHSSUSYToSLHA = LibraryFunctionLoad[libHSSUSY, "FSHSSUSYToSLHA", LinkObject, LinkObject];
 
 FSHSSUSYOpenHandleLib = LibraryFunctionLoad[libHSSUSY, "FSHSSUSYOpenHandle", {{Real,1}}, Integer];
 FSHSSUSYCloseHandle = LibraryFunctionLoad[libHSSUSY, "FSHSSUSYCloseHandle", {Integer}, Void];
@@ -28,6 +37,7 @@ FSHSSUSYCheckIsNumeric[a_] := (Message[FSHSSUSY::nonum, a]; Abort[]);
 fsDefaultSettings = {
       precisionGoal -> 1.*^-4,           (* FlexibleSUSY[0] *)
       maxIterations -> 0,                (* FlexibleSUSY[1] *)
+      solver -> 1,     (* FlexibleSUSY[2] *)
       calculateStandardModelMasses -> 0, (* FlexibleSUSY[3] *)
       poleMassLoopOrder -> 2,            (* FlexibleSUSY[4] *)
       ewsbLoopOrder -> 2,                (* FlexibleSUSY[5] *)
@@ -48,12 +58,18 @@ fsDefaultSettings = {
       eftMatchingLoopOrderDown -> 1,     (* FlexibleSUSY[21] *)
       eftHiggsIndex -> 0,                (* FlexibleSUSY[22] *)
       calculateBSMMasses -> 1,           (* FlexibleSUSY[23] *)
+      thresholdCorrections -> 123111321, (* FlexibleSUSY[24] *)
+      higgs3loopCorrectionRenScheme -> 0,(* FlexibleSUSY[25] *)
+      higgs3loopCorrectionAtAsAs -> 1,   (* FlexibleSUSY[26] *)
+      higgs3loopCorrectionAbAsAs -> 1,   (* FlexibleSUSY[27] *)
+      higgs3loopCorrectionAtAtAs -> 1,   (* FlexibleSUSY[28] *)
+      higgs3loopCorrectionAtAtAt -> 1,   (* FlexibleSUSY[29] *)
       parameterOutputScale -> 0          (* MODSEL[12] *)
 };
 
 fsDefaultSMParameters = {
     alphaEmMZ -> 1/127.916, (* SMINPUTS[1] *)
-    GF -> 1.16637*^-5,      (* SMINPUTS[2] *)
+    GF -> 1.1663787*^-5,    (* SMINPUTS[2] *)
     alphaSMZ -> 0.1184,     (* SMINPUTS[3] *)
     MZ -> 91.1876,          (* SMINPUTS[4] *)
     mbmb -> 4.18,           (* SMINPUTS[5] *)
@@ -92,8 +108,16 @@ fsHSSUSYDefaultInputParameters = {
    mAInput -> 0,
    MEWSB -> 0,
    AtInput -> 0,
+   AbInput -> 0,
+   AtauInput -> 0,
    TanBeta -> 0,
    LambdaLoopOrder -> 0,
+   TwoLoopAtAs -> 0,
+   TwoLoopAbAs -> 0,
+   TwoLoopAtAb -> 0,
+   TwoLoopAtauAtau -> 0,
+   TwoLoopAtAt -> 0,
+   DeltaEFT -> 0,
    msq2 -> {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
    msu2 -> {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
    msd2 -> {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
@@ -116,6 +140,7 @@ FSHSSUSYOpenHandle[OptionsPattern[]] :=
             (* spectrum generator settings *)
             OptionValue[precisionGoal],
             OptionValue[maxIterations],
+            OptionValue[solver],
             OptionValue[calculateStandardModelMasses],
             OptionValue[poleMassLoopOrder],
             OptionValue[ewsbLoopOrder],
@@ -136,6 +161,12 @@ FSHSSUSYOpenHandle[OptionsPattern[]] :=
             OptionValue[eftMatchingLoopOrderDown],
             OptionValue[eftHiggsIndex],
             OptionValue[calculateBSMMasses],
+            OptionValue[thresholdCorrections],
+            OptionValue[higgs3loopCorrectionRenScheme],
+            OptionValue[higgs3loopCorrectionAtAsAs],
+            OptionValue[higgs3loopCorrectionAbAsAs],
+            OptionValue[higgs3loopCorrectionAtAtAs],
+            OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)
@@ -179,8 +210,16 @@ FSHSSUSYOpenHandle[OptionsPattern[]] :=
             OptionValue[mAInput],
             OptionValue[MEWSB],
             OptionValue[AtInput],
+            OptionValue[AbInput],
+            OptionValue[AtauInput],
             OptionValue[TanBeta],
             OptionValue[LambdaLoopOrder],
+            OptionValue[TwoLoopAtAs],
+            OptionValue[TwoLoopAbAs],
+            OptionValue[TwoLoopAtAb],
+            OptionValue[TwoLoopAtauAtau],
+            OptionValue[TwoLoopAtAt],
+            OptionValue[DeltaEFT],
             OptionValue[msq2][[1,1]],
             OptionValue[msq2][[1,2]],
             OptionValue[msq2][[1,3]],
@@ -241,6 +280,7 @@ FSHSSUSYSet[handle_Integer, p:OptionsPattern[]] :=
             (* spectrum generator settings *)
             OptionValue[precisionGoal],
             OptionValue[maxIterations],
+            OptionValue[solver],
             OptionValue[calculateStandardModelMasses],
             OptionValue[poleMassLoopOrder],
             OptionValue[ewsbLoopOrder],
@@ -261,6 +301,12 @@ FSHSSUSYSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[eftMatchingLoopOrderDown],
             OptionValue[eftHiggsIndex],
             OptionValue[calculateBSMMasses],
+            OptionValue[thresholdCorrections],
+            OptionValue[higgs3loopCorrectionRenScheme],
+            OptionValue[higgs3loopCorrectionAtAsAs],
+            OptionValue[higgs3loopCorrectionAbAsAs],
+            OptionValue[higgs3loopCorrectionAtAtAs],
+            OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)
@@ -304,8 +350,16 @@ FSHSSUSYSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[mAInput],
             OptionValue[MEWSB],
             OptionValue[AtInput],
+            OptionValue[AbInput],
+            OptionValue[AtauInput],
             OptionValue[TanBeta],
             OptionValue[LambdaLoopOrder],
+            OptionValue[TwoLoopAtAs],
+            OptionValue[TwoLoopAbAs],
+            OptionValue[TwoLoopAtAb],
+            OptionValue[TwoLoopAtauAtau],
+            OptionValue[TwoLoopAtAt],
+            OptionValue[DeltaEFT],
             OptionValue[msq2][[1,1]],
             OptionValue[msq2][[1,2]],
             OptionValue[msq2][[1,3]],

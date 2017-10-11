@@ -16,14 +16,15 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 11:09:08
+// File generated at Tue 10 Oct 2017 22:59:25
 
 #ifndef E6SSM_TWO_SCALE_CONVERGENCE_TESTER_H
 #define E6SSM_TWO_SCALE_CONVERGENCE_TESTER_H
 
 #include "E6SSM_convergence_tester.hpp"
 #include "E6SSM_two_scale_model.hpp"
-#include "two_scale_convergence_tester_drbar.hpp"
+
+#include "convergence_tester_drbar.hpp"
 
 namespace flexiblesusy {
 
@@ -32,8 +33,10 @@ class Two_scale;
 template<>
 class E6SSM_convergence_tester<Two_scale> : public Convergence_tester_DRbar<E6SSM<Two_scale> > {
 public:
-   E6SSM_convergence_tester(E6SSM<Two_scale>*, double);
-   virtual ~E6SSM_convergence_tester();
+   using Scale_getter = Convergence_tester_DRbar<E6SSM<Two_scale>>::Scale_getter;
+
+   E6SSM_convergence_tester(E6SSM<Two_scale>*, double, const Scale_getter& sg = Scale_getter());
+   virtual ~E6SSM_convergence_tester() = default;
 
 protected:
    virtual double max_rel_diff() const;

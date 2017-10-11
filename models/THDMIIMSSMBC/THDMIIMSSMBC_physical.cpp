@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 10:38:09
+// File generated at Tue 10 Oct 2017 21:16:45
 
 #include "THDMIIMSSMBC_physical.hpp"
 #include "slha_io.hpp"
@@ -26,25 +26,6 @@
 #define LOCALPHYSICAL(p) p
 
 namespace flexiblesusy {
-
-THDMIIMSSMBC_physical::THDMIIMSSMBC_physical()
-   :
-    MVG(0), MFv(Eigen::Array<double,3,1>::Zero()), Mhh(Eigen::Array<double,2,1
-       >::Zero()), MAh(Eigen::Array<double,2,1>::Zero()), MHm(Eigen::Array<double,
-       2,1>::Zero()), MFd(Eigen::Array<double,3,1>::Zero()), MFu(Eigen::Array<
-       double,3,1>::Zero()), MFe(Eigen::Array<double,3,1>::Zero()), MVWm(0), MVP(0
-       ), MVZ(0)
-
-   , ZH(Eigen::Matrix<double,2,2>::Zero()), ZA(Eigen::Matrix<double,2,2>::Zero(
-      )), ZP(Eigen::Matrix<double,2,2>::Zero()), Vd(Eigen::Matrix<std::complex<
-      double>,3,3>::Zero()), Ud(Eigen::Matrix<std::complex<double>,3,3>::Zero()),
-      Vu(Eigen::Matrix<std::complex<double>,3,3>::Zero()), Uu(Eigen::Matrix<
-      std::complex<double>,3,3>::Zero()), Ve(Eigen::Matrix<std::complex<double>,3,
-      3>::Zero()), Ue(Eigen::Matrix<std::complex<double>,3,3>::Zero()), ZZ(
-      Eigen::Matrix<double,2,2>::Zero())
-
-{
-}
 
 void THDMIIMSSMBC_physical::clear()
 {
@@ -374,6 +355,8 @@ void THDMIIMSSMBC_physical::print(std::ostream& ostr) const
    ostr << "MFu = " << MFu.transpose() << '\n';
    ostr << "MFe = " << MFe.transpose() << '\n';
    ostr << "MVWm = " << MVWm << '\n';
+   ostr << "MVP = " << MVP << '\n';
+   ostr << "MVZ = " << MVZ << '\n';
 
    ostr << "----------------------------------------\n"
            "pole mass mixing matrices:\n"

@@ -16,15 +16,19 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 5 Sep 2017 11:09:15
+// File generated at Tue 10 Oct 2017 22:58:56
 
 #ifndef E6SSM_SLHA_IO_H
 #define E6SSM_SLHA_IO_H
 
-#include "E6SSM_two_scale_model_slha.hpp"
+#include "E6SSM_mass_eigenstates.hpp"
+#include "E6SSM_model_slha.hpp"
 #include "E6SSM_info.hpp"
 #include "E6SSM_observables.hpp"
 #include "E6SSM_physical.hpp"
+#include "problems.hpp"
+#include "spectrum_generator_problems.hpp"
+#include "standard_model_two_scale_model.hpp"
 #include "slha_io.hpp"
 #include "ckm.hpp"
 #include "ew_input.hpp"
@@ -32,7 +36,11 @@
 
 #include <Eigen/Core>
 #include <string>
+#include <tuple>
 #include <utility>
+
+#include <boost/fusion/include/for_each.hpp>
+#include <boost/fusion/adapted/std_tuple.hpp>
 
 #define Pole(p) physical.p
 #define PHYSICAL(p) model.get_physical().p
@@ -40,6 +48,7 @@
 #define LOCALPHYSICAL(p) physical.p
 #define MODEL model
 #define MODELPARAMETER(p) model.get_##p()
+#define EXTRAPARAMETER(p) model.get_##p()
 #define OBSERVABLES observables
 #define LowEnergyConstant(p) Electroweak_constants::p
 #define SCALES(p) scales.p
@@ -49,9 +58,12 @@ namespace flexiblesusy {
 struct E6SSM_input_parameters;
 class Spectrum_generator_settings;
 
+template <class T>
+class E6SSM;
+
 struct E6SSM_scales {
-   E6SSM_scales() : HighScale(0.), SUSYScale(0.), LowScale(0.) {}
-   double HighScale, SUSYScale, LowScale;
+   double HighScale{0.}, SUSYScale{0.}, LowScale{0.};
+   double pole_mass_scale{0.};
 };
 
 class E6SSM_slha_io {
@@ -63,7 +75,7 @@ public:
    void fill(softsusy::QedQcd& qedqcd) const { slha_io.fill(qedqcd); }
    void fill(E6SSM_input_parameters&) const;
    void fill(E6SSM_mass_eigenstates&) const;
-   template <class T> void fill(E6SSM_slha<T>&) const;
+   template <class Model> void fill(E6SSM_slha<Model>&) const;
    void fill(Physical_input&) const;
    void fill(Spectrum_generator_settings&) const;
    double get_parameter_output_scale() const;
@@ -73,37 +85,46 @@ public:
    void read_from_stream(std::istream&);
    void set_block(const std::string& str, SLHA_io::Position position = SLHA_io::back) { slha_io.set_block(str, position); }
    void set_blocks(const std::vector<std::string>& vec, SLHA_io::Position position = SLHA_io::back) { slha_io.set_blocks(vec, position); }
-   void set_extpar(const E6SSM_input_parameters&);
-   template <class T> void set_extra(const E6SSM_slha<T>&, const E6SSM_scales&, const E6SSM_observables&);
-   void set_minpar(const E6SSM_input_parameters&);
+   template <class Model> void set_extra(const E6SSM_slha<Model>&, const E6SSM_scales&, const E6SSM_observables&);
+   void set_input(const E6SSM_input_parameters&);
+   void set_modsel(const SLHA_io::Modsel&);
+   void set_physical_input(const Physical_input&);
+   void set_settings(const Spectrum_generator_settings&);
    void set_sminputs(const softsusy::QedQcd&);
-   template <class T> void set_spectrum(const E6SSM_slha<T>&);
+   template <class... Ts> void set_spectrum(const std::tuple<Ts...>&);
+   template <class Model> void set_spectrum(const E6SSM_slha<Model>&);
    template <class T> void set_spectrum(const E6SSM<T>&);
-   void set_spinfo(const Problems<E6SSM_info::NUMBER_OF_PARTICLES>&);
+   void set_spectrum(const standard_model::Standard_model& m) { slha_io.set_spectrum(m); }
+   void set_spinfo(const Spectrum_generator_problems&);
+   void set_spinfo(const Problems&);
    void set_spinfo(const std::vector<std::string>&, const std::vector<std::string>&);
    void set_print_imaginary_parts_of_majorana_mixings(bool);
-   void write_to(const std::string&);
-   void write_to_file(const std::string& file_name) { slha_io.write_to_file(file_name); }
-   void write_to_stream(std::ostream& ostr = std::cout) { slha_io.write_to_stream(ostr); }
+   void write_to(const std::string&) const;
+   void write_to_file(const std::string& file_name) const { slha_io.write_to_file(file_name); }
+   void write_to_stream(std::ostream& ostr = std::cout) const { slha_io.write_to_stream(ostr); }
 
    static void fill_minpar_tuple(E6SSM_input_parameters&, int, double);
    static void fill_extpar_tuple(E6SSM_input_parameters&, int, double);
+   static void fill_imminpar_tuple(E6SSM_input_parameters&, int, double);
+   static void fill_imextpar_tuple(E6SSM_input_parameters&, int, double);
 
-   template <class T>
-   static void fill_slhaea(SLHAea::Coll&, const E6SSM_slha<T>&, const softsusy::QedQcd&, const E6SSM_scales&, const E6SSM_observables&);
+   template <class Model>
+   static void fill_slhaea(SLHAea::Coll&, const E6SSM_slha<Model>&, const softsusy::QedQcd&, const E6SSM_scales&, const E6SSM_observables&);
 
-   template <class T>
-   static SLHAea::Coll fill_slhaea(const E6SSM_slha<T>&, const softsusy::QedQcd&, const E6SSM_scales&, const E6SSM_observables&);
+   template <class Model>
+   static SLHAea::Coll fill_slhaea(const E6SSM_slha<Model>&, const softsusy::QedQcd&, const E6SSM_scales&, const E6SSM_observables&);
 
 private:
    SLHA_io slha_io; ///< SLHA io class
    bool print_imaginary_parts_of_majorana_mixings;
-   static unsigned const NUMBER_OF_DRBAR_BLOCKS = 24;
-   static char const * const drbar_blocks[NUMBER_OF_DRBAR_BLOCKS];
 
+   void set_extpar(const E6SSM_input_parameters&);
+   void set_imminpar(const E6SSM_input_parameters&);
+   void set_imextpar(const E6SSM_input_parameters&);
+   void set_minpar(const E6SSM_input_parameters&);
    void set_mass(const E6SSM_physical&, bool);
    void set_mixing_matrices(const E6SSM_physical&, bool);
-   template <class T> void set_model_parameters(const E6SSM_slha<T>&);
+   template <class Model> void set_model_parameters(const E6SSM_slha<Model>&);
    void set_ckm(const Eigen::Matrix<std::complex<double>,3,3>&, double);
    void set_pmns(const Eigen::Matrix<std::complex<double>,3,3>&, double);
    double read_scale() const;
@@ -115,29 +136,27 @@ private:
  * Reads DR-bar parameters, pole masses and mixing matrices from a
  * SLHA output file.
  */
-template <class T>
-void E6SSM_slha_io::fill(E6SSM_slha<T>& model) const
+template <class Model>
+void E6SSM_slha_io::fill(E6SSM_slha<Model>& model) const
 {
    fill(static_cast<E6SSM_mass_eigenstates&>(model));
    fill_physical(model.get_physical_slha());
 }
 
-template <class T>
+template <class Model>
 void E6SSM_slha_io::fill_slhaea(
-   SLHAea::Coll& slhaea, const E6SSM_slha<T>& model,
+   SLHAea::Coll& slhaea, const E6SSM_slha<Model>& model,
    const softsusy::QedQcd& qedqcd, const E6SSM_scales& scales,
    const E6SSM_observables& observables)
 {
    E6SSM_slha_io slha_io;
    const E6SSM_input_parameters& input = model.get_input();
-   const Problems<E6SSM_info::NUMBER_OF_PARTICLES>& problems
-      = model.get_problems();
+   const auto& problems = model.get_problems();
    const bool error = problems.have_problem();
 
    slha_io.set_spinfo(problems);
    slha_io.set_sminputs(qedqcd);
-   slha_io.set_minpar(input);
-   slha_io.set_extpar(input);
+   slha_io.set_input(input);
    if (!error) {
       slha_io.set_spectrum(model);
       slha_io.set_extra(model, scales, observables);
@@ -146,9 +165,9 @@ void E6SSM_slha_io::fill_slhaea(
    slhaea = slha_io.get_slha_io().get_data();
 }
 
-template <class T>
+template <class Model>
 SLHAea::Coll E6SSM_slha_io::fill_slhaea(
-   const E6SSM_slha<T>& model, const softsusy::QedQcd& qedqcd,
+   const E6SSM_slha<Model>& model, const softsusy::QedQcd& qedqcd,
    const E6SSM_scales& scales, const E6SSM_observables& observables)
 {
    SLHAea::Coll slhaea;
@@ -162,13 +181,13 @@ SLHAea::Coll E6SSM_slha_io::fill_slhaea(
  *
  * @param model model class
  */
-template <class T>
-void E6SSM_slha_io::set_model_parameters(const E6SSM_slha<T>& model)
+template <class Model>
+void E6SSM_slha_io::set_model_parameters(const E6SSM_slha<Model>& model)
 {
    {
       std::ostringstream block;
       block << "Block gauge Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
-            << FORMAT_ELEMENT(1, (MODELPARAMETER(g1) * 0.7745966692414834), "gY")
+            << FORMAT_ELEMENT(1, (MODELPARAMETER(g1) * 0.7745966692414834), "g1 * 0.7745966692414834")
             << FORMAT_ELEMENT(2, (MODELPARAMETER(g2)), "g2")
             << FORMAT_ELEMENT(3, (MODELPARAMETER(g3)), "g3")
             << FORMAT_ELEMENT(4, (MODELPARAMETER(gN)), "gN")
@@ -254,14 +273,110 @@ void E6SSM_slha_io::set_model_parameters(const E6SSM_slha<T>& model)
  * @param scales struct of boundary condition scales
  * @param observables struct of observables
  */
-template <class T>
+template <class Model>
 void E6SSM_slha_io::set_extra(
-   const E6SSM_slha<T>& model, const E6SSM_scales& scales,
+   const E6SSM_slha<Model>& model, const E6SSM_scales& scales,
    const E6SSM_observables& observables)
 {
    const E6SSM_physical physical(model.get_physical_slha());
 
+   {
+      std::ostringstream block;
+      block << "Block FlexibleSUSYOutput" << '\n'
+            << FORMAT_ELEMENT(0, (SCALES(HighScale)), "HighScale")
+            << FORMAT_ELEMENT(1, (SCALES(SUSYScale)), "SUSYScale")
+            << FORMAT_ELEMENT(2, (SCALES(LowScale)), "LowScale")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block FlexibleSUSYLowEnergy Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(21, (OBSERVABLES.a_muon), "Delta(g-2)_muon/2 FlexibleSUSY")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block EFFHIGGSCOUPLINGS" << '\n'
+            << FORMAT_RANK_THREE_TENSOR(25, 22, 22, (Abs(OBSERVABLES.eff_cp_higgs_photon_photon(0))), "Abs(effective H-Photon-Photon coupling)")
+            << FORMAT_RANK_THREE_TENSOR(35, 22, 22, (Abs(OBSERVABLES.eff_cp_higgs_photon_photon(1))), "Abs(effective H-Photon-Photon coupling)")
+            << FORMAT_RANK_THREE_TENSOR(45, 22, 22, (Abs(OBSERVABLES.eff_cp_higgs_photon_photon(2))), "Abs(effective H-Photon-Photon coupling)")
+            << FORMAT_RANK_THREE_TENSOR(25, 21, 21, (Abs(OBSERVABLES.eff_cp_higgs_gluon_gluon(0))), "Abs(effective H-Gluon-Gluon coupling)")
+            << FORMAT_RANK_THREE_TENSOR(35, 21, 21, (Abs(OBSERVABLES.eff_cp_higgs_gluon_gluon(1))), "Abs(effective H-Gluon-Gluon coupling)")
+            << FORMAT_RANK_THREE_TENSOR(45, 21, 21, (Abs(OBSERVABLES.eff_cp_higgs_gluon_gluon(2))), "Abs(effective H-Gluon-Gluon coupling)")
+            << FORMAT_RANK_THREE_TENSOR(36, 22, 22, (Abs(OBSERVABLES.eff_cp_pseudoscalar_photon_photon)), "Abs(effective A-Photon-Photon coupling)")
+            << FORMAT_RANK_THREE_TENSOR(36, 21, 21, (Abs(OBSERVABLES.eff_cp_pseudoscalar_gluon_gluon)), "Abs(effective A-Gluon-Gluon coupling)")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block Au Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_MIXING_MATRIX(1, 1, (MODELPARAMETER(TYu)(0,0)/MODELPARAMETER(Yu)(0,0)), "TYu(1,1)/Yu(1,1)")
+            << FORMAT_MIXING_MATRIX(2, 2, (MODELPARAMETER(TYu)(1,1)/MODELPARAMETER(Yu)(1,1)), "TYu(2,2)/Yu(2,2)")
+            << FORMAT_MIXING_MATRIX(3, 3, (MODELPARAMETER(TYu)(2,2)/MODELPARAMETER(Yu)(2,2)), "TYu(3,3)/Yu(3,3)")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block Ad Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_MIXING_MATRIX(1, 1, (MODELPARAMETER(TYd)(0,0)/MODELPARAMETER(Yd)(0,0)), "TYd(1,1)/Yd(1,1)")
+            << FORMAT_MIXING_MATRIX(2, 2, (MODELPARAMETER(TYd)(1,1)/MODELPARAMETER(Yd)(1,1)), "TYd(2,2)/Yd(2,2)")
+            << FORMAT_MIXING_MATRIX(3, 3, (MODELPARAMETER(TYd)(2,2)/MODELPARAMETER(Yd)(2,2)), "TYd(3,3)/Yd(3,3)")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block Ae Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_MIXING_MATRIX(1, 1, (MODELPARAMETER(TYe)(0,0)/MODELPARAMETER(Ye)(0,0)), "TYe(1,1)/Ye(1,1)")
+            << FORMAT_MIXING_MATRIX(2, 2, (MODELPARAMETER(TYe)(1,1)/MODELPARAMETER(Ye)(1,1)), "TYe(2,2)/Ye(2,2)")
+            << FORMAT_MIXING_MATRIX(3, 3, (MODELPARAMETER(TYe)(2,2)/MODELPARAMETER(Ye)(2,2)), "TYe(3,3)/Ye(3,3)")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block AKappa Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_MIXING_MATRIX(1, 1, (MODELPARAMETER(TKappa)(0,0)/MODELPARAMETER(Kappa)(0,0)), "TKappa(1,1)/Kappa(1,1)")
+            << FORMAT_MIXING_MATRIX(2, 2, (MODELPARAMETER(TKappa)(1,1)/MODELPARAMETER(Kappa)(1,1)), "TKappa(2,2)/Kappa(2,2)")
+            << FORMAT_MIXING_MATRIX(3, 3, (MODELPARAMETER(TKappa)(2,2)/MODELPARAMETER(Kappa)(2,2)), "TKappa(3,3)/Kappa(3,3)")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block ALambda12 Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_MIXING_MATRIX(1, 1, (MODELPARAMETER(TLambda12)(0,0)/MODELPARAMETER(Lambda12)(0,0)), "TLambda12(1,1)/Lambda12(1,1)")
+            << FORMAT_MIXING_MATRIX(2, 2, (MODELPARAMETER(TLambda12)(1,1)/MODELPARAMETER(Lambda12)(1,1)), "TLambda12(2,2)/Lambda12(2,2)")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block ALambda Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(1, (MODELPARAMETER(TLambdax)/MODELPARAMETER(Lambdax)), "TLambdax/Lambdax")
+      ;
+      slha_io.set_block(block);
+   }
 
+}
+
+/**
+ * Stores the model (DR-bar) parameters, masses and mixing matrices of
+ * all given models in the SLHA object.
+ *
+ * @todo Use generic lambda instead of Set_spectrum in C++14
+ *
+ * @param models model classes
+ */
+template <class... Ts>
+void E6SSM_slha_io::set_spectrum(const std::tuple<Ts...>& models)
+{
+   Set_spectrum<E6SSM_slha_io> ss(this);
+   boost::fusion::for_each(models, ss);
 }
 
 /**
@@ -273,8 +388,7 @@ void E6SSM_slha_io::set_extra(
 template <class T>
 void E6SSM_slha_io::set_spectrum(const E6SSM<T>& model)
 {
-   const E6SSM_slha<T> model_slha(model);
-   set_spectrum(model_slha);
+   set_spectrum(E6SSM_slha<E6SSM<T> >(model));
 }
 
 /**
@@ -283,8 +397,8 @@ void E6SSM_slha_io::set_spectrum(const E6SSM<T>& model)
  *
  * @param model model class in SLHA convention
  */
-template <class T>
-void E6SSM_slha_io::set_spectrum(const E6SSM_slha<T>& model)
+template <class Model>
+void E6SSM_slha_io::set_spectrum(const E6SSM_slha<Model>& model)
 {
    const E6SSM_physical physical(model.get_physical_slha());
    const bool write_sm_masses = model.do_calculate_sm_pole_masses();
@@ -308,6 +422,7 @@ void E6SSM_slha_io::set_spectrum(const E6SSM_slha<T>& model)
 #undef LOCALPHYSICAL
 #undef MODEL
 #undef MODELPARAMETER
+#undef EXTRAPARAMETER
 #undef OBSERVABLES
 #undef LowEnergyConstant
 #undef SCALES
