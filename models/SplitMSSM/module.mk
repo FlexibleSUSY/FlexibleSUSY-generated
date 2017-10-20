@@ -25,6 +25,9 @@ SplitMSSM_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.SplitMSSM_generated \
 		$(DIR)/LesHouches.in.SplitMSSM
 
+SplitMSSM_REFERENCES := \
+		$(DIR)/SplitMSSM_references.tex
+
 SplitMSSM_GNUPLOT := \
 		$(DIR)/SplitMSSM_plot_rgflow.gnuplot \
 		$(DIR)/SplitMSSM_plot_spectrum.gnuplot
@@ -185,6 +188,7 @@ install-src::
 ifneq ($(SplitMSSM_SLHA_INPUT),)
 		install -m u=rw,g=r,o=r $(SplitMSSM_SLHA_INPUT) $(SplitMSSM_INSTALL_DIR)
 endif
+		install -m u=rw,g=r,o=r $(SplitMSSM_REFERENCES) $(SplitMSSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(SplitMSSM_GNUPLOT) $(SplitMSSM_INSTALL_DIR)
 endif
 
@@ -212,6 +216,7 @@ clean-$(MODNAME)-src:
 		-rm -f $(METACODE_STAMP_SplitMSSM)
 		-rm -f $(SplitMSSM_INCLUDE_MK)
 		-rm -f $(SplitMSSM_SLHA_INPUT)
+		-rm -f $(SplitMSSM_REFERENCES)
 		-rm -f $(SplitMSSM_GNUPLOT)
 
 distclean-$(MODNAME): clean-$(MODNAME)-src
@@ -237,7 +242,8 @@ pack-$(MODNAME)-src:
 		$(EXESplitMSSM_SRC) \
 		$(LLSplitMSSM_SRC) $(LLSplitMSSM_MMA) \
 		$(SplitMSSM_MK) $(SplitMSSM_INCLUDE_MK) \
-		$(SplitMSSM_SLHA_INPUT) $(SplitMSSM_GNUPLOT)
+		$(SplitMSSM_SLHA_INPUT) $(SplitMSSM_REFERENCES) \
+		$(SplitMSSM_GNUPLOT)
 
 $(LIBSplitMSSM_SRC) $(LIBSplitMSSM_HDR) $(EXESplitMSSM_SRC) $(LLSplitMSSM_SRC) $(LLSplitMSSM_MMA) \
 : run-metacode-$(MODNAME)

@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 10 Oct 2017 23:00:42
+// File generated at Fri 20 Oct 2017 09:02:15
 
 /**
  * @file E6SSM_cxx_diagrams.hpp
  *
- * This file was generated at Tue 10 Oct 2017 23:00:42 with FlexibleSUSY
- * 2.0.0 and SARAH 4.12.0 .
+ * This file was generated at Fri 20 Oct 2017 09:02:15 with FlexibleSUSY
+ * 2.0.1 and SARAH 4.12.0 .
  */
 
 #ifndef E6SSM_CXXDIAGRAMS_H

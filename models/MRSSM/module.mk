@@ -25,6 +25,9 @@ MRSSM_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.MRSSM_generated \
 		$(DIR)/LesHouches.in.MRSSM
 
+MRSSM_REFERENCES := \
+		$(DIR)/MRSSM_references.tex
+
 MRSSM_GNUPLOT := \
 		$(DIR)/MRSSM_plot_rgflow.gnuplot \
 		$(DIR)/MRSSM_plot_spectrum.gnuplot
@@ -185,6 +188,7 @@ install-src::
 ifneq ($(MRSSM_SLHA_INPUT),)
 		install -m u=rw,g=r,o=r $(MRSSM_SLHA_INPUT) $(MRSSM_INSTALL_DIR)
 endif
+		install -m u=rw,g=r,o=r $(MRSSM_REFERENCES) $(MRSSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(MRSSM_GNUPLOT) $(MRSSM_INSTALL_DIR)
 endif
 
@@ -212,6 +216,7 @@ clean-$(MODNAME)-src:
 		-rm -f $(METACODE_STAMP_MRSSM)
 		-rm -f $(MRSSM_INCLUDE_MK)
 		-rm -f $(MRSSM_SLHA_INPUT)
+		-rm -f $(MRSSM_REFERENCES)
 		-rm -f $(MRSSM_GNUPLOT)
 
 distclean-$(MODNAME): clean-$(MODNAME)-src
@@ -237,7 +242,8 @@ pack-$(MODNAME)-src:
 		$(EXEMRSSM_SRC) \
 		$(LLMRSSM_SRC) $(LLMRSSM_MMA) \
 		$(MRSSM_MK) $(MRSSM_INCLUDE_MK) \
-		$(MRSSM_SLHA_INPUT) $(MRSSM_GNUPLOT)
+		$(MRSSM_SLHA_INPUT) $(MRSSM_REFERENCES) \
+		$(MRSSM_GNUPLOT)
 
 $(LIBMRSSM_SRC) $(LIBMRSSM_HDR) $(EXEMRSSM_SRC) $(LLMRSSM_SRC) $(LLMRSSM_MMA) \
 : run-metacode-$(MODNAME)

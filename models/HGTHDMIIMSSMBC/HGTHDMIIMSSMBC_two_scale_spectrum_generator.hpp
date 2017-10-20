@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 10 Oct 2017 21:00:26
+// File generated at Fri 20 Oct 2017 08:36:36
 
 #ifndef HGTHDMIIMSSMBC_TWO_SCALE_SPECTRUM_GENERATOR_H
 #define HGTHDMIIMSSMBC_TWO_SCALE_SPECTRUM_GENERATOR_H

@@ -25,6 +25,9 @@ TMSSM_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.TMSSM_generated \
 		$(DIR)/LesHouches.in.TMSSM
 
+TMSSM_REFERENCES := \
+		$(DIR)/TMSSM_references.tex
+
 TMSSM_GNUPLOT := \
 		$(DIR)/TMSSM_plot_rgflow.gnuplot \
 		$(DIR)/TMSSM_plot_spectrum.gnuplot
@@ -185,6 +188,7 @@ install-src::
 ifneq ($(TMSSM_SLHA_INPUT),)
 		install -m u=rw,g=r,o=r $(TMSSM_SLHA_INPUT) $(TMSSM_INSTALL_DIR)
 endif
+		install -m u=rw,g=r,o=r $(TMSSM_REFERENCES) $(TMSSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(TMSSM_GNUPLOT) $(TMSSM_INSTALL_DIR)
 endif
 
@@ -212,6 +216,7 @@ clean-$(MODNAME)-src:
 		-rm -f $(METACODE_STAMP_TMSSM)
 		-rm -f $(TMSSM_INCLUDE_MK)
 		-rm -f $(TMSSM_SLHA_INPUT)
+		-rm -f $(TMSSM_REFERENCES)
 		-rm -f $(TMSSM_GNUPLOT)
 
 distclean-$(MODNAME): clean-$(MODNAME)-src
@@ -237,7 +242,8 @@ pack-$(MODNAME)-src:
 		$(EXETMSSM_SRC) \
 		$(LLTMSSM_SRC) $(LLTMSSM_MMA) \
 		$(TMSSM_MK) $(TMSSM_INCLUDE_MK) \
-		$(TMSSM_SLHA_INPUT) $(TMSSM_GNUPLOT)
+		$(TMSSM_SLHA_INPUT) $(TMSSM_REFERENCES) \
+		$(TMSSM_GNUPLOT)
 
 $(LIBTMSSM_SRC) $(LIBTMSSM_HDR) $(EXETMSSM_SRC) $(LLTMSSM_SRC) $(LLTMSSM_MMA) \
 : run-metacode-$(MODNAME)

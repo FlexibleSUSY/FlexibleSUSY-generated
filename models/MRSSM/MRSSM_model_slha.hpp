@@ -21,7 +21,7 @@
  * @brief contains wrapper class for model class in SLHA convention
  */
 
-// File generated at Tue 10 Oct 2017 21:39:39
+// File generated at Fri 20 Oct 2017 08:49:47
 
 #ifndef MRSSM_SLHA_H
 #define MRSSM_SLHA_H

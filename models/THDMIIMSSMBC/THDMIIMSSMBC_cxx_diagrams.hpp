@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 10 Oct 2017 21:17:16
+// File generated at Fri 20 Oct 2017 08:38:30
 
 /**
  * @file THDMIIMSSMBC_cxx_diagrams.hpp
  *
- * This file was generated at Tue 10 Oct 2017 21:17:16 with FlexibleSUSY
- * 2.0.0 and SARAH 4.12.0 .
+ * This file was generated at Fri 20 Oct 2017 08:38:30 with FlexibleSUSY
+ * 2.0.1 and SARAH 4.12.0 .
  */
 
 #ifndef THDMIIMSSMBC_CXXDIAGRAMS_H

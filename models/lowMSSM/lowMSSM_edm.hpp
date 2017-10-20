@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 10 Oct 2017 22:47:02
+// File generated at Fri 20 Oct 2017 09:08:43
 
 /**
  * @file lowMSSM_edm.hpp
  *
- * This file was generated at Tue 10 Oct 2017 22:47:02 with FlexibleSUSY
- * 2.0.0 and SARAH 4.12.0 .
+ * This file was generated at Fri 20 Oct 2017 09:08:43 with FlexibleSUSY
+ * 2.0.1 and SARAH 4.12.0 .
  */
 
 #ifndef lowMSSM_EDM_H

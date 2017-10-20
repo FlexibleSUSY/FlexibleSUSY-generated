@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 10 Oct 2017 22:37:47
+// File generated at Fri 20 Oct 2017 09:01:14
 
 /**
  * @file NUTNMSSM_a_muon.cpp
  *
- * This file was generated at Tue 10 Oct 2017 22:37:47 with FlexibleSUSY
- * 2.0.0 and SARAH 4.12.0 .
+ * This file was generated at Fri 20 Oct 2017 09:01:14 with FlexibleSUSY
+ * 2.0.1 and SARAH 4.12.0 .
  */
 
 #include "NUTNMSSM_a_muon.hpp"

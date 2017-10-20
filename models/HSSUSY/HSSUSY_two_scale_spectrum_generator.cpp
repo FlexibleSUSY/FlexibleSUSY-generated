@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 10 Oct 2017 21:31:37
+// File generated at Fri 20 Oct 2017 08:50:58
 
 #include "HSSUSY_two_scale_spectrum_generator.hpp"
 #include "HSSUSY_input_parameters.hpp"

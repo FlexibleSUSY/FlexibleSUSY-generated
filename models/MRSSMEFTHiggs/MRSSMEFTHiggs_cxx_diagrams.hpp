@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 10 Oct 2017 21:42:29
+// File generated at Fri 20 Oct 2017 08:41:46
 
 /**
  * @file MRSSMEFTHiggs_cxx_diagrams.hpp
  *
- * This file was generated at Tue 10 Oct 2017 21:42:29 with FlexibleSUSY
- * 2.0.0 and SARAH 4.12.0 .
+ * This file was generated at Fri 20 Oct 2017 08:41:46 with FlexibleSUSY
+ * 2.0.1 and SARAH 4.12.0 .
  */
 
 #ifndef MRSSMEFTHiggs_CXXDIAGRAMS_H

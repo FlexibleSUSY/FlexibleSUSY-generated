@@ -25,6 +25,9 @@ SM_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.SM_generated \
 		$(DIR)/LesHouches.in.SM
 
+SM_REFERENCES := \
+		$(DIR)/SM_references.tex
+
 SM_GNUPLOT := \
 		$(DIR)/SM_plot_rgflow.gnuplot \
 		$(DIR)/SM_plot_spectrum.gnuplot
@@ -185,6 +188,7 @@ install-src::
 ifneq ($(SM_SLHA_INPUT),)
 		install -m u=rw,g=r,o=r $(SM_SLHA_INPUT) $(SM_INSTALL_DIR)
 endif
+		install -m u=rw,g=r,o=r $(SM_REFERENCES) $(SM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(SM_GNUPLOT) $(SM_INSTALL_DIR)
 endif
 
@@ -212,6 +216,7 @@ clean-$(MODNAME)-src:
 		-rm -f $(METACODE_STAMP_SM)
 		-rm -f $(SM_INCLUDE_MK)
 		-rm -f $(SM_SLHA_INPUT)
+		-rm -f $(SM_REFERENCES)
 		-rm -f $(SM_GNUPLOT)
 
 distclean-$(MODNAME): clean-$(MODNAME)-src
@@ -237,7 +242,8 @@ pack-$(MODNAME)-src:
 		$(EXESM_SRC) \
 		$(LLSM_SRC) $(LLSM_MMA) \
 		$(SM_MK) $(SM_INCLUDE_MK) \
-		$(SM_SLHA_INPUT) $(SM_GNUPLOT)
+		$(SM_SLHA_INPUT) $(SM_REFERENCES) \
+		$(SM_GNUPLOT)
 
 $(LIBSM_SRC) $(LIBSM_HDR) $(EXESM_SRC) $(LLSM_SRC) $(LLSM_MMA) \
 : run-metacode-$(MODNAME)

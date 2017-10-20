@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 10 Oct 2017 23:22:03
+// File generated at Fri 20 Oct 2017 09:20:25
 
 /**
  * @file CMSSM_a_muon.cpp
  *
- * This file was generated at Tue 10 Oct 2017 23:22:03 with FlexibleSUSY
- * 2.0.0 and SARAH 4.12.0 .
+ * This file was generated at Fri 20 Oct 2017 09:20:25 with FlexibleSUSY
+ * 2.0.1 and SARAH 4.12.0 .
  */
 
 #include "CMSSM_a_muon.hpp"

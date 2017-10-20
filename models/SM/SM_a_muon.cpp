@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 10 Oct 2017 21:19:57
+// File generated at Fri 20 Oct 2017 08:39:41
 
 /**
  * @file SM_a_muon.cpp
  *
- * This file was generated at Tue 10 Oct 2017 21:19:57 with FlexibleSUSY
- * 2.0.0 and SARAH 4.12.0 .
+ * This file was generated at Fri 20 Oct 2017 08:39:41 with FlexibleSUSY
+ * 2.0.1 and SARAH 4.12.0 .
  */
 
 #include "SM_a_muon.hpp"

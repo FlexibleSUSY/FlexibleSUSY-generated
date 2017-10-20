@@ -25,6 +25,9 @@ MSSMNoFV_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.MSSMNoFV_generated \
 		$(DIR)/LesHouches.in.MSSMNoFV
 
+MSSMNoFV_REFERENCES := \
+		$(DIR)/MSSMNoFV_references.tex
+
 MSSMNoFV_GNUPLOT := \
 		$(DIR)/MSSMNoFV_plot_rgflow.gnuplot \
 		$(DIR)/MSSMNoFV_plot_spectrum.gnuplot
@@ -185,6 +188,7 @@ install-src::
 ifneq ($(MSSMNoFV_SLHA_INPUT),)
 		install -m u=rw,g=r,o=r $(MSSMNoFV_SLHA_INPUT) $(MSSMNoFV_INSTALL_DIR)
 endif
+		install -m u=rw,g=r,o=r $(MSSMNoFV_REFERENCES) $(MSSMNoFV_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(MSSMNoFV_GNUPLOT) $(MSSMNoFV_INSTALL_DIR)
 endif
 
@@ -212,6 +216,7 @@ clean-$(MODNAME)-src:
 		-rm -f $(METACODE_STAMP_MSSMNoFV)
 		-rm -f $(MSSMNoFV_INCLUDE_MK)
 		-rm -f $(MSSMNoFV_SLHA_INPUT)
+		-rm -f $(MSSMNoFV_REFERENCES)
 		-rm -f $(MSSMNoFV_GNUPLOT)
 
 distclean-$(MODNAME): clean-$(MODNAME)-src
@@ -237,7 +242,8 @@ pack-$(MODNAME)-src:
 		$(EXEMSSMNoFV_SRC) \
 		$(LLMSSMNoFV_SRC) $(LLMSSMNoFV_MMA) \
 		$(MSSMNoFV_MK) $(MSSMNoFV_INCLUDE_MK) \
-		$(MSSMNoFV_SLHA_INPUT) $(MSSMNoFV_GNUPLOT)
+		$(MSSMNoFV_SLHA_INPUT) $(MSSMNoFV_REFERENCES) \
+		$(MSSMNoFV_GNUPLOT)
 
 $(LIBMSSMNoFV_SRC) $(LIBMSSMNoFV_HDR) $(EXEMSSMNoFV_SRC) $(LLMSSMNoFV_SRC) $(LLMSSMNoFV_MMA) \
 : run-metacode-$(MODNAME)

@@ -25,6 +25,9 @@ SMSSM_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.SMSSM_generated \
 		$(DIR)/LesHouches.in.SMSSM
 
+SMSSM_REFERENCES := \
+		$(DIR)/SMSSM_references.tex
+
 SMSSM_GNUPLOT := \
 		$(DIR)/SMSSM_plot_rgflow.gnuplot \
 		$(DIR)/SMSSM_plot_spectrum.gnuplot
@@ -185,6 +188,7 @@ install-src::
 ifneq ($(SMSSM_SLHA_INPUT),)
 		install -m u=rw,g=r,o=r $(SMSSM_SLHA_INPUT) $(SMSSM_INSTALL_DIR)
 endif
+		install -m u=rw,g=r,o=r $(SMSSM_REFERENCES) $(SMSSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(SMSSM_GNUPLOT) $(SMSSM_INSTALL_DIR)
 endif
 
@@ -212,6 +216,7 @@ clean-$(MODNAME)-src:
 		-rm -f $(METACODE_STAMP_SMSSM)
 		-rm -f $(SMSSM_INCLUDE_MK)
 		-rm -f $(SMSSM_SLHA_INPUT)
+		-rm -f $(SMSSM_REFERENCES)
 		-rm -f $(SMSSM_GNUPLOT)
 
 distclean-$(MODNAME): clean-$(MODNAME)-src
@@ -237,7 +242,8 @@ pack-$(MODNAME)-src:
 		$(EXESMSSM_SRC) \
 		$(LLSMSSM_SRC) $(LLSMSSM_MMA) \
 		$(SMSSM_MK) $(SMSSM_INCLUDE_MK) \
-		$(SMSSM_SLHA_INPUT) $(SMSSM_GNUPLOT)
+		$(SMSSM_SLHA_INPUT) $(SMSSM_REFERENCES) \
+		$(SMSSM_GNUPLOT)
 
 $(LIBSMSSM_SRC) $(LIBSMSSM_HDR) $(EXESMSSM_SRC) $(LLSMSSM_SRC) $(LLSMSSM_MMA) \
 : run-metacode-$(MODNAME)

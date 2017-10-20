@@ -25,6 +25,9 @@ E6SSM_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.E6SSM_generated \
 		$(DIR)/LesHouches.in.E6SSM
 
+E6SSM_REFERENCES := \
+		$(DIR)/E6SSM_references.tex
+
 E6SSM_GNUPLOT := \
 		$(DIR)/E6SSM_plot_rgflow.gnuplot \
 		$(DIR)/E6SSM_plot_spectrum.gnuplot
@@ -185,6 +188,7 @@ install-src::
 ifneq ($(E6SSM_SLHA_INPUT),)
 		install -m u=rw,g=r,o=r $(E6SSM_SLHA_INPUT) $(E6SSM_INSTALL_DIR)
 endif
+		install -m u=rw,g=r,o=r $(E6SSM_REFERENCES) $(E6SSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(E6SSM_GNUPLOT) $(E6SSM_INSTALL_DIR)
 endif
 
@@ -212,6 +216,7 @@ clean-$(MODNAME)-src:
 		-rm -f $(METACODE_STAMP_E6SSM)
 		-rm -f $(E6SSM_INCLUDE_MK)
 		-rm -f $(E6SSM_SLHA_INPUT)
+		-rm -f $(E6SSM_REFERENCES)
 		-rm -f $(E6SSM_GNUPLOT)
 
 distclean-$(MODNAME): clean-$(MODNAME)-src
@@ -237,7 +242,8 @@ pack-$(MODNAME)-src:
 		$(EXEE6SSM_SRC) \
 		$(LLE6SSM_SRC) $(LLE6SSM_MMA) \
 		$(E6SSM_MK) $(E6SSM_INCLUDE_MK) \
-		$(E6SSM_SLHA_INPUT) $(E6SSM_GNUPLOT)
+		$(E6SSM_SLHA_INPUT) $(E6SSM_REFERENCES) \
+		$(E6SSM_GNUPLOT)
 
 $(LIBE6SSM_SRC) $(LIBE6SSM_HDR) $(EXEE6SSM_SRC) $(LLE6SSM_SRC) $(LLE6SSM_MMA) \
 : run-metacode-$(MODNAME)

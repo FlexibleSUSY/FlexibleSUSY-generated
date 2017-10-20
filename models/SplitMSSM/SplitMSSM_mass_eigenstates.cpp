@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 10 Oct 2017 21:13:17
+// File generated at Fri 20 Oct 2017 08:38:33
 
 /**
  * @file SplitMSSM_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from MSbar
  * parameters.
  *
- * This file was generated at Tue 10 Oct 2017 21:13:17 with FlexibleSUSY
- * 2.0.0 (git commit: e7cd01524dc37f9ba34ce6090bb584b8c724259f) and SARAH 4.12.0 .
+ * This file was generated at Fri 20 Oct 2017 08:38:33 with FlexibleSUSY
+ * 2.0.1 (git commit: 5296739235bd0ef7020eda218da9c069270c3f45) and SARAH 4.12.0 .
  */
 
 #include "SplitMSSM_mass_eigenstates.hpp"
@@ -4413,9 +4413,13 @@ void CLASSNAME::calculate_MFu_pole()
 
    if (pole_mass_loop_order > 1 && TOP_POLE_QCD_CORRECTION > 0) {
       const double currentScale = get_scale();
-      qcd_2l = -0.005284774766427138*Quad(g3) - 0.0032348537833770956*
-         Log(Sqr(currentScale)/Sqr(MFu(2)))*Quad(g3) - 0.0008822328500119351*
-         Quad(g3)*Sqr(Log(Sqr(currentScale)/Sqr(MFu(2))));
+      qcd_2l = -0.005681333976786038*Quad(g3) + 0.0006950925484942519*
+         Log(Sqr(currentScale)/Sqr(MGlu))*Quad(g3) - 0.0032348537833770956*Log(
+         Sqr(currentScale)/Sqr(MFu(2)))*Quad(g3) + 0.0003208119454588855*Log(
+         Sqr(currentScale)/Sqr(MGlu))*Log(Sqr(currentScale)/Sqr(MFu(2)))*Quad(
+         g3) - 0.00016040597272944275*Quad(g3)*Sqr(Log(Sqr(currentScale)/Sqr(
+         MGlu))) - 0.0008822328500119351*Quad(g3)*Sqr(Log(Sqr(currentScale)/Sqr
+         (MFu(2))));
    }
 
    double qcd_3l = 0.;
@@ -4665,10 +4669,13 @@ double CLASSNAME::calculate_MFu_DRbar(double m_pole, int idx) const
       currentScale)))*Sqr(g3);
 
    if (get_thresholds() > 1 && threshold_corrections.mt > 1) {
-      const double q_2l = 0.005284774766427138*Quad(g3) +
+      const double q_2l = 0.004888215556068238*Quad(g3) +
+         0.0006950925484942519*Log(Sqr(currentScale)/Sqr(MGlu))*Quad(g3) +
          0.0032348537833770956*Log(Sqr(currentScale)/Sqr(MFu(idx)))*Quad(g3) +
-         0.0008822328500119351*Quad(g3)*Sqr(Log(Sqr(currentScale)/Sqr(MFu(idx))
-         ));
+         0.0003208119454588855*Log(Sqr(currentScale)/Sqr(MGlu))*Log(Sqr(
+         currentScale)/Sqr(MFu(idx)))*Quad(g3) - 0.00016040597272944275*Quad(g3
+         )*Sqr(Log(Sqr(currentScale)/Sqr(MGlu))) + 0.0008822328500119351*Quad(
+         g3)*Sqr(Log(Sqr(currentScale)/Sqr(MFu(idx))));
 
       qcd_2l = -q_2l + qcd_1l * qcd_1l;
    }

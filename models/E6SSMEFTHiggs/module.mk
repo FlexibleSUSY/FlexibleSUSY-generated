@@ -25,6 +25,9 @@ E6SSMEFTHiggs_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.E6SSMEFTHiggs_generated \
 		$(DIR)/LesHouches.in.E6SSMEFTHiggs
 
+E6SSMEFTHiggs_REFERENCES := \
+		$(DIR)/E6SSMEFTHiggs_references.tex
+
 E6SSMEFTHiggs_GNUPLOT := \
 		$(DIR)/E6SSMEFTHiggs_plot_rgflow.gnuplot \
 		$(DIR)/E6SSMEFTHiggs_plot_spectrum.gnuplot
@@ -185,6 +188,7 @@ install-src::
 ifneq ($(E6SSMEFTHiggs_SLHA_INPUT),)
 		install -m u=rw,g=r,o=r $(E6SSMEFTHiggs_SLHA_INPUT) $(E6SSMEFTHiggs_INSTALL_DIR)
 endif
+		install -m u=rw,g=r,o=r $(E6SSMEFTHiggs_REFERENCES) $(E6SSMEFTHiggs_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(E6SSMEFTHiggs_GNUPLOT) $(E6SSMEFTHiggs_INSTALL_DIR)
 endif
 
@@ -212,6 +216,7 @@ clean-$(MODNAME)-src:
 		-rm -f $(METACODE_STAMP_E6SSMEFTHiggs)
 		-rm -f $(E6SSMEFTHiggs_INCLUDE_MK)
 		-rm -f $(E6SSMEFTHiggs_SLHA_INPUT)
+		-rm -f $(E6SSMEFTHiggs_REFERENCES)
 		-rm -f $(E6SSMEFTHiggs_GNUPLOT)
 
 distclean-$(MODNAME): clean-$(MODNAME)-src
@@ -237,7 +242,8 @@ pack-$(MODNAME)-src:
 		$(EXEE6SSMEFTHiggs_SRC) \
 		$(LLE6SSMEFTHiggs_SRC) $(LLE6SSMEFTHiggs_MMA) \
 		$(E6SSMEFTHiggs_MK) $(E6SSMEFTHiggs_INCLUDE_MK) \
-		$(E6SSMEFTHiggs_SLHA_INPUT) $(E6SSMEFTHiggs_GNUPLOT)
+		$(E6SSMEFTHiggs_SLHA_INPUT) $(E6SSMEFTHiggs_REFERENCES) \
+		$(E6SSMEFTHiggs_GNUPLOT)
 
 $(LIBE6SSMEFTHiggs_SRC) $(LIBE6SSMEFTHiggs_HDR) $(EXEE6SSMEFTHiggs_SRC) $(LLE6SSMEFTHiggs_SRC) $(LLE6SSMEFTHiggs_MMA) \
 : run-metacode-$(MODNAME)

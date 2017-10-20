@@ -25,6 +25,9 @@ CMSSM_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.CMSSM_generated \
 		$(DIR)/LesHouches.in.CMSSM
 
+CMSSM_REFERENCES := \
+		$(DIR)/CMSSM_references.tex
+
 CMSSM_GNUPLOT := \
 		$(DIR)/CMSSM_plot_rgflow.gnuplot \
 		$(DIR)/CMSSM_plot_spectrum.gnuplot
@@ -185,6 +188,7 @@ install-src::
 ifneq ($(CMSSM_SLHA_INPUT),)
 		install -m u=rw,g=r,o=r $(CMSSM_SLHA_INPUT) $(CMSSM_INSTALL_DIR)
 endif
+		install -m u=rw,g=r,o=r $(CMSSM_REFERENCES) $(CMSSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(CMSSM_GNUPLOT) $(CMSSM_INSTALL_DIR)
 endif
 
@@ -212,6 +216,7 @@ clean-$(MODNAME)-src:
 		-rm -f $(METACODE_STAMP_CMSSM)
 		-rm -f $(CMSSM_INCLUDE_MK)
 		-rm -f $(CMSSM_SLHA_INPUT)
+		-rm -f $(CMSSM_REFERENCES)
 		-rm -f $(CMSSM_GNUPLOT)
 
 distclean-$(MODNAME): clean-$(MODNAME)-src
@@ -237,7 +242,8 @@ pack-$(MODNAME)-src:
 		$(EXECMSSM_SRC) \
 		$(LLCMSSM_SRC) $(LLCMSSM_MMA) \
 		$(CMSSM_MK) $(CMSSM_INCLUDE_MK) \
-		$(CMSSM_SLHA_INPUT) $(CMSSM_GNUPLOT)
+		$(CMSSM_SLHA_INPUT) $(CMSSM_REFERENCES) \
+		$(CMSSM_GNUPLOT)
 
 $(LIBCMSSM_SRC) $(LIBCMSSM_HDR) $(EXECMSSM_SRC) $(LLCMSSM_SRC) $(LLCMSSM_MMA) \
 : run-metacode-$(MODNAME)

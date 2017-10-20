@@ -25,6 +25,9 @@ NUTSMSSM_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.NUTSMSSM_generated \
 		$(DIR)/LesHouches.in.NUTSMSSM
 
+NUTSMSSM_REFERENCES := \
+		$(DIR)/NUTSMSSM_references.tex
+
 NUTSMSSM_GNUPLOT := \
 		$(DIR)/NUTSMSSM_plot_rgflow.gnuplot \
 		$(DIR)/NUTSMSSM_plot_spectrum.gnuplot
@@ -185,6 +188,7 @@ install-src::
 ifneq ($(NUTSMSSM_SLHA_INPUT),)
 		install -m u=rw,g=r,o=r $(NUTSMSSM_SLHA_INPUT) $(NUTSMSSM_INSTALL_DIR)
 endif
+		install -m u=rw,g=r,o=r $(NUTSMSSM_REFERENCES) $(NUTSMSSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(NUTSMSSM_GNUPLOT) $(NUTSMSSM_INSTALL_DIR)
 endif
 
@@ -212,6 +216,7 @@ clean-$(MODNAME)-src:
 		-rm -f $(METACODE_STAMP_NUTSMSSM)
 		-rm -f $(NUTSMSSM_INCLUDE_MK)
 		-rm -f $(NUTSMSSM_SLHA_INPUT)
+		-rm -f $(NUTSMSSM_REFERENCES)
 		-rm -f $(NUTSMSSM_GNUPLOT)
 
 distclean-$(MODNAME): clean-$(MODNAME)-src
@@ -237,7 +242,8 @@ pack-$(MODNAME)-src:
 		$(EXENUTSMSSM_SRC) \
 		$(LLNUTSMSSM_SRC) $(LLNUTSMSSM_MMA) \
 		$(NUTSMSSM_MK) $(NUTSMSSM_INCLUDE_MK) \
-		$(NUTSMSSM_SLHA_INPUT) $(NUTSMSSM_GNUPLOT)
+		$(NUTSMSSM_SLHA_INPUT) $(NUTSMSSM_REFERENCES) \
+		$(NUTSMSSM_GNUPLOT)
 
 $(LIBNUTSMSSM_SRC) $(LIBNUTSMSSM_HDR) $(EXENUTSMSSM_SRC) $(LLNUTSMSSM_SRC) $(LLNUTSMSSM_MMA) \
 : run-metacode-$(MODNAME)

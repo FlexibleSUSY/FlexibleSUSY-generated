@@ -25,6 +25,9 @@ UMSSM_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.UMSSM_generated \
 		$(DIR)/LesHouches.in.UMSSM
 
+UMSSM_REFERENCES := \
+		$(DIR)/UMSSM_references.tex
+
 UMSSM_GNUPLOT := \
 		$(DIR)/UMSSM_plot_rgflow.gnuplot \
 		$(DIR)/UMSSM_plot_spectrum.gnuplot
@@ -185,6 +188,7 @@ install-src::
 ifneq ($(UMSSM_SLHA_INPUT),)
 		install -m u=rw,g=r,o=r $(UMSSM_SLHA_INPUT) $(UMSSM_INSTALL_DIR)
 endif
+		install -m u=rw,g=r,o=r $(UMSSM_REFERENCES) $(UMSSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(UMSSM_GNUPLOT) $(UMSSM_INSTALL_DIR)
 endif
 
@@ -212,6 +216,7 @@ clean-$(MODNAME)-src:
 		-rm -f $(METACODE_STAMP_UMSSM)
 		-rm -f $(UMSSM_INCLUDE_MK)
 		-rm -f $(UMSSM_SLHA_INPUT)
+		-rm -f $(UMSSM_REFERENCES)
 		-rm -f $(UMSSM_GNUPLOT)
 
 distclean-$(MODNAME): clean-$(MODNAME)-src
@@ -237,7 +242,8 @@ pack-$(MODNAME)-src:
 		$(EXEUMSSM_SRC) \
 		$(LLUMSSM_SRC) $(LLUMSSM_MMA) \
 		$(UMSSM_MK) $(UMSSM_INCLUDE_MK) \
-		$(UMSSM_SLHA_INPUT) $(UMSSM_GNUPLOT)
+		$(UMSSM_SLHA_INPUT) $(UMSSM_REFERENCES) \
+		$(UMSSM_GNUPLOT)
 
 $(LIBUMSSM_SRC) $(LIBUMSSM_HDR) $(EXEUMSSM_SRC) $(LLUMSSM_SRC) $(LLUMSSM_MMA) \
 : run-metacode-$(MODNAME)

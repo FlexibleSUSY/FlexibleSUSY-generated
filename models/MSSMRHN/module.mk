@@ -25,6 +25,9 @@ MSSMRHN_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.MSSMRHN_generated \
 
 
+MSSMRHN_REFERENCES := \
+		$(DIR)/MSSMRHN_references.tex
+
 MSSMRHN_GNUPLOT := \
 		$(DIR)/MSSMRHN_plot_rgflow.gnuplot \
 		$(DIR)/MSSMRHN_plot_spectrum.gnuplot
@@ -185,6 +188,7 @@ install-src::
 ifneq ($(MSSMRHN_SLHA_INPUT),)
 		install -m u=rw,g=r,o=r $(MSSMRHN_SLHA_INPUT) $(MSSMRHN_INSTALL_DIR)
 endif
+		install -m u=rw,g=r,o=r $(MSSMRHN_REFERENCES) $(MSSMRHN_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(MSSMRHN_GNUPLOT) $(MSSMRHN_INSTALL_DIR)
 endif
 
@@ -212,6 +216,7 @@ clean-$(MODNAME)-src:
 		-rm -f $(METACODE_STAMP_MSSMRHN)
 		-rm -f $(MSSMRHN_INCLUDE_MK)
 		-rm -f $(MSSMRHN_SLHA_INPUT)
+		-rm -f $(MSSMRHN_REFERENCES)
 		-rm -f $(MSSMRHN_GNUPLOT)
 
 distclean-$(MODNAME): clean-$(MODNAME)-src
@@ -237,7 +242,8 @@ pack-$(MODNAME)-src:
 		$(EXEMSSMRHN_SRC) \
 		$(LLMSSMRHN_SRC) $(LLMSSMRHN_MMA) \
 		$(MSSMRHN_MK) $(MSSMRHN_INCLUDE_MK) \
-		$(MSSMRHN_SLHA_INPUT) $(MSSMRHN_GNUPLOT)
+		$(MSSMRHN_SLHA_INPUT) $(MSSMRHN_REFERENCES) \
+		$(MSSMRHN_GNUPLOT)
 
 $(LIBMSSMRHN_SRC) $(LIBMSSMRHN_HDR) $(EXEMSSMRHN_SRC) $(LLMSSMRHN_SRC) $(LLMSSMRHN_MMA) \
 : run-metacode-$(MODNAME)

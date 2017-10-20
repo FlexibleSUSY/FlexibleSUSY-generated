@@ -25,6 +25,9 @@ MRSSMEFTHiggs_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.MRSSMEFTHiggs_generated \
 		$(DIR)/LesHouches.in.MRSSMEFTHiggs
 
+MRSSMEFTHiggs_REFERENCES := \
+		$(DIR)/MRSSMEFTHiggs_references.tex
+
 MRSSMEFTHiggs_GNUPLOT := \
 		$(DIR)/MRSSMEFTHiggs_plot_rgflow.gnuplot \
 		$(DIR)/MRSSMEFTHiggs_plot_spectrum.gnuplot
@@ -185,6 +188,7 @@ install-src::
 ifneq ($(MRSSMEFTHiggs_SLHA_INPUT),)
 		install -m u=rw,g=r,o=r $(MRSSMEFTHiggs_SLHA_INPUT) $(MRSSMEFTHiggs_INSTALL_DIR)
 endif
+		install -m u=rw,g=r,o=r $(MRSSMEFTHiggs_REFERENCES) $(MRSSMEFTHiggs_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(MRSSMEFTHiggs_GNUPLOT) $(MRSSMEFTHiggs_INSTALL_DIR)
 endif
 
@@ -212,6 +216,7 @@ clean-$(MODNAME)-src:
 		-rm -f $(METACODE_STAMP_MRSSMEFTHiggs)
 		-rm -f $(MRSSMEFTHiggs_INCLUDE_MK)
 		-rm -f $(MRSSMEFTHiggs_SLHA_INPUT)
+		-rm -f $(MRSSMEFTHiggs_REFERENCES)
 		-rm -f $(MRSSMEFTHiggs_GNUPLOT)
 
 distclean-$(MODNAME): clean-$(MODNAME)-src
@@ -237,7 +242,8 @@ pack-$(MODNAME)-src:
 		$(EXEMRSSMEFTHiggs_SRC) \
 		$(LLMRSSMEFTHiggs_SRC) $(LLMRSSMEFTHiggs_MMA) \
 		$(MRSSMEFTHiggs_MK) $(MRSSMEFTHiggs_INCLUDE_MK) \
-		$(MRSSMEFTHiggs_SLHA_INPUT) $(MRSSMEFTHiggs_GNUPLOT)
+		$(MRSSMEFTHiggs_SLHA_INPUT) $(MRSSMEFTHiggs_REFERENCES) \
+		$(MRSSMEFTHiggs_GNUPLOT)
 
 $(LIBMRSSMEFTHiggs_SRC) $(LIBMRSSMEFTHiggs_HDR) $(EXEMRSSMEFTHiggs_SRC) $(LLMRSSMEFTHiggs_SRC) $(LLMRSSMEFTHiggs_MMA) \
 : run-metacode-$(MODNAME)

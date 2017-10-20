@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 10 Oct 2017 21:41:28
+// File generated at Fri 20 Oct 2017 08:40:45
 
 /**
  * @file MRSSMEFTHiggs_edm.cpp
  *
- * This file was generated at Tue 10 Oct 2017 21:41:28 with FlexibleSUSY
- * 2.0.0 and SARAH 4.12.0 .
+ * This file was generated at Fri 20 Oct 2017 08:40:45 with FlexibleSUSY
+ * 2.0.1 and SARAH 4.12.0 .
  */
 
 #include "MRSSMEFTHiggs_edm.hpp"
