@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:03:24
+// File generated at Mon 5 Mar 2018 18:37:43
 
 #include "NMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -115,6 +115,25 @@ double NMSSM_soft_parameters::calc_beta_TKappa_2_loop(const Soft_traces& soft_tr
  * @return 3-loop beta function
  */
 double NMSSM_soft_parameters::calc_beta_TKappa_3_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_TKappa;
+
+   beta_TKappa = 0;
+
+
+   return beta_TKappa;
+}
+
+/**
+ * Calculates the 4-loop beta function of TKappa.
+ *
+ * @return 4-loop beta function
+ */
+double NMSSM_soft_parameters::calc_beta_TKappa_4_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

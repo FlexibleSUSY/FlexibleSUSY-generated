@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:06:11
+// File generated at Mon 5 Mar 2018 18:43:00
 
 #include "lowMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -306,6 +306,25 @@ double lowMSSM_soft_parameters::calc_beta_BMu_3_loop(const Soft_traces& soft_tra
       )));
 
    beta_BMu = beta_BMu_1 + beta_BMu_2;
+
+
+   return beta_BMu;
+}
+
+/**
+ * Calculates the 4-loop beta function of BMu.
+ *
+ * @return 4-loop beta function
+ */
+double lowMSSM_soft_parameters::calc_beta_BMu_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_BMu;
+
+   beta_BMu = 0;
 
 
    return beta_BMu;

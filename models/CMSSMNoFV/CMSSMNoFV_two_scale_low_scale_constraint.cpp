@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:14:39
+// File generated at Mon 5 Mar 2018 18:58:15
 
 #include "CMSSMNoFV_two_scale_low_scale_constraint.hpp"
 #include "CMSSMNoFV_two_scale_model.hpp"
@@ -164,7 +164,9 @@ void CMSSMNoFV_low_scale_constraint<Two_scale>::initialize()
 {
    check_model_ptr();
 
-   initial_scale_guess = qedqcd.displayPoleMZ();
+   const auto Mlow = INPUTPARAMETER(Mlow);
+
+   initial_scale_guess = IF(Mlow != 0, Mlow, LowEnergyConstant(MZ));
 
    scale = initial_scale_guess;
 
@@ -185,7 +187,9 @@ void CMSSMNoFV_low_scale_constraint<Two_scale>::update_scale()
 {
    check_model_ptr();
 
-   scale = qedqcd.displayPoleMZ();
+   const auto Mlow = INPUTPARAMETER(Mlow);
+
+   scale = IF(Mlow != 0, Mlow, LowEnergyConstant(MZ));
 
 
 }

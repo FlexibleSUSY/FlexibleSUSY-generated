@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:52:49
+// File generated at Mon 5 Mar 2018 18:30:51
 
 #include "UMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -214,6 +214,25 @@ Eigen::Matrix<double,3,3> UMSSM_soft_parameters::calc_beta_TYv_2_loop(const Soft
  * @return 3-loop beta function
  */
 Eigen::Matrix<double,3,3> UMSSM_soft_parameters::calc_beta_TYv_3_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_TYv;
+
+   beta_TYv = ZEROMATRIX(3,3);
+
+
+   return beta_TYv;
+}
+
+/**
+ * Calculates the 4-loop beta function of TYv.
+ *
+ * @return 4-loop beta function
+ */
+Eigen::Matrix<double,3,3> UMSSM_soft_parameters::calc_beta_TYv_4_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

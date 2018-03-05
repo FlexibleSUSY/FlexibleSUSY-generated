@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:45:32
+// File generated at Mon 5 Mar 2018 17:48:09
 
 #include "MRSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -112,6 +112,25 @@ double MRSSM_soft_parameters::calc_beta_MDWBT_2_loop(const Soft_traces& soft_tra
  * @return 3-loop beta function
  */
 double MRSSM_soft_parameters::calc_beta_MDWBT_3_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MDWBT;
+
+   beta_MDWBT = 0;
+
+
+   return beta_MDWBT;
+}
+
+/**
+ * Calculates the 4-loop beta function of MDWBT.
+ *
+ * @return 4-loop beta function
+ */
+double MRSSM_soft_parameters::calc_beta_MDWBT_4_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

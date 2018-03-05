@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:47:04
+// File generated at Mon 5 Mar 2018 17:44:01
 
 #include "E6SSMEFTHiggs_observables.hpp"
 #include "E6SSMEFTHiggs_mass_eigenstates.hpp"
@@ -56,10 +56,6 @@ const int E6SSMEFTHiggs_observables::NUMBER_OF_OBSERVABLES;
 
 E6SSMEFTHiggs_observables::E6SSMEFTHiggs_observables()
    : a_muon(0)
-   , eff_cp_higgs_photon_photon(Eigen::Array<std::complex<double>,3,1>::Zero())
-   , eff_cp_higgs_gluon_gluon(Eigen::Array<std::complex<double>,3,1>::Zero())
-   , eff_cp_pseudoscalar_photon_photon(0)
-   , eff_cp_pseudoscalar_gluon_gluon(0)
 
 {
 }
@@ -69,22 +65,6 @@ Eigen::ArrayXd E6SSMEFTHiggs_observables::get() const
    Eigen::ArrayXd vec(E6SSMEFTHiggs_observables::NUMBER_OF_OBSERVABLES);
 
    vec(0) = a_muon;
-   vec(1) = Re(eff_cp_higgs_photon_photon(0));
-   vec(2) = Im(eff_cp_higgs_photon_photon(0));
-   vec(3) = Re(eff_cp_higgs_photon_photon(1));
-   vec(4) = Im(eff_cp_higgs_photon_photon(1));
-   vec(5) = Re(eff_cp_higgs_photon_photon(2));
-   vec(6) = Im(eff_cp_higgs_photon_photon(2));
-   vec(7) = Re(eff_cp_higgs_gluon_gluon(0));
-   vec(8) = Im(eff_cp_higgs_gluon_gluon(0));
-   vec(9) = Re(eff_cp_higgs_gluon_gluon(1));
-   vec(10) = Im(eff_cp_higgs_gluon_gluon(1));
-   vec(11) = Re(eff_cp_higgs_gluon_gluon(2));
-   vec(12) = Im(eff_cp_higgs_gluon_gluon(2));
-   vec(13) = Re(eff_cp_pseudoscalar_photon_photon);
-   vec(14) = Im(eff_cp_pseudoscalar_photon_photon);
-   vec(15) = Re(eff_cp_pseudoscalar_gluon_gluon);
-   vec(16) = Im(eff_cp_pseudoscalar_gluon_gluon);
 
    return vec;
 }
@@ -94,22 +74,6 @@ std::vector<std::string> E6SSMEFTHiggs_observables::get_names()
    std::vector<std::string> names(E6SSMEFTHiggs_observables::NUMBER_OF_OBSERVABLES);
 
    names[0] = "a_muon";
-   names[1] = "Re(eff_cp_higgs_photon_photon(0))";
-   names[2] = "Im(eff_cp_higgs_photon_photon(0))";
-   names[3] = "Re(eff_cp_higgs_photon_photon(1))";
-   names[4] = "Im(eff_cp_higgs_photon_photon(1))";
-   names[5] = "Re(eff_cp_higgs_photon_photon(2))";
-   names[6] = "Im(eff_cp_higgs_photon_photon(2))";
-   names[7] = "Re(eff_cp_higgs_gluon_gluon(0))";
-   names[8] = "Im(eff_cp_higgs_gluon_gluon(0))";
-   names[9] = "Re(eff_cp_higgs_gluon_gluon(1))";
-   names[10] = "Im(eff_cp_higgs_gluon_gluon(1))";
-   names[11] = "Re(eff_cp_higgs_gluon_gluon(2))";
-   names[12] = "Im(eff_cp_higgs_gluon_gluon(2))";
-   names[13] = "Re(eff_cp_pseudoscalar_photon_photon)";
-   names[14] = "Im(eff_cp_pseudoscalar_photon_photon)";
-   names[15] = "Re(eff_cp_pseudoscalar_gluon_gluon)";
-   names[16] = "Im(eff_cp_pseudoscalar_gluon_gluon)";
 
    return names;
 }
@@ -117,10 +81,6 @@ std::vector<std::string> E6SSMEFTHiggs_observables::get_names()
 void E6SSMEFTHiggs_observables::clear()
 {
    a_muon = 0.;
-   eff_cp_higgs_photon_photon = Eigen::Array<std::complex<double>,3,1>::Zero();
-   eff_cp_higgs_gluon_gluon = Eigen::Array<std::complex<double>,3,1>::Zero();
-   eff_cp_pseudoscalar_photon_photon = std::complex<double>(0.,0.);
-   eff_cp_pseudoscalar_gluon_gluon = std::complex<double>(0.,0.);
 
 }
 
@@ -129,48 +89,40 @@ void E6SSMEFTHiggs_observables::set(const Eigen::ArrayXd& vec)
    assert(vec.rows() == E6SSMEFTHiggs_observables::NUMBER_OF_OBSERVABLES);
 
    a_muon = vec(0);
-   eff_cp_higgs_photon_photon(0) = std::complex<double>(vec(1), vec(2));
-   eff_cp_higgs_photon_photon(1) = std::complex<double>(vec(3), vec(4));
-   eff_cp_higgs_photon_photon(2) = std::complex<double>(vec(5), vec(6));
-   eff_cp_higgs_gluon_gluon(0) = std::complex<double>(vec(7), vec(8));
-   eff_cp_higgs_gluon_gluon(1) = std::complex<double>(vec(9), vec(10));
-   eff_cp_higgs_gluon_gluon(2) = std::complex<double>(vec(11), vec(12));
-   eff_cp_pseudoscalar_photon_photon = std::complex<double>(vec(13), vec(14));
-   eff_cp_pseudoscalar_gluon_gluon = std::complex<double>(vec(15), vec(16));
 
 }
 
-E6SSMEFTHiggs_observables calculate_observables(const E6SSMEFTHiggs_mass_eigenstates& model,
+E6SSMEFTHiggs_observables calculate_observables(E6SSMEFTHiggs_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input,
                                               double scale)
 {
    auto model_at_scale = model;
 
-   if (scale > 0.)
-      model_at_scale.run_to(scale);
+   if (scale > 0.) {
+      try {
+         model_at_scale.run_to(scale);
+      } catch (const Error& e) {
+         model.get_problems().flag_thrown(e.what());
+         return E6SSMEFTHiggs_observables();
+      }
+   }
 
    return calculate_observables(model_at_scale, qedqcd, physical_input);
 }
 
-E6SSMEFTHiggs_observables calculate_observables(const E6SSMEFTHiggs_mass_eigenstates& model,
+E6SSMEFTHiggs_observables calculate_observables(E6SSMEFTHiggs_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input)
 {
    E6SSMEFTHiggs_observables observables;
 
-   E6SSMEFTHiggs_effective_couplings effective_couplings(model, qedqcd, physical_input);
-   effective_couplings.calculate_effective_couplings();
-
-   observables.AMU = E6SSMEFTHiggs_a_muon::calculate_a_muon(MODEL);
-   observables.EFFCPHIGGSPHOTONPHOTON(0) = effective_couplings.get_eff_CphhVPVP(0);
-   observables.EFFCPHIGGSPHOTONPHOTON(1) = effective_couplings.get_eff_CphhVPVP(1);
-   observables.EFFCPHIGGSPHOTONPHOTON(2) = effective_couplings.get_eff_CphhVPVP(2);
-   observables.EFFCPHIGGSGLUONGLUON(0) = effective_couplings.get_eff_CphhVGVG(0);
-   observables.EFFCPHIGGSGLUONGLUON(1) = effective_couplings.get_eff_CphhVGVG(1);
-   observables.EFFCPHIGGSGLUONGLUON(2) = effective_couplings.get_eff_CphhVGVG(2);
-   observables.EFFCPPSEUDOSCALARPHOTONPHOTON = effective_couplings.get_eff_CpAhVPVP(2);
-   observables.EFFCPPSEUDOSCALARGLUONGLUON = effective_couplings.get_eff_CpAhVGVG(2);
+   try {
+      
+      observables.AMU = E6SSMEFTHiggs_a_muon::calculate_a_muon(MODEL);
+   } catch (const Error& e) {
+      model.get_problems().flag_thrown(e.what());
+   }
 
    return observables;
 }

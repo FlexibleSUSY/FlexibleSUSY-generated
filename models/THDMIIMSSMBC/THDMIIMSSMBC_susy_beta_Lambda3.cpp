@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:37:26
+// File generated at Mon 5 Mar 2018 17:30:37
 
 #include "THDMIIMSSMBC_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -130,6 +130,25 @@ double THDMIIMSSMBC_susy_parameters::calc_beta_Lambda3_2_loop(const Susy_traces&
  * @return 3-loop beta function
  */
 double THDMIIMSSMBC_susy_parameters::calc_beta_Lambda3_3_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_Lambda3;
+
+   beta_Lambda3 = 0;
+
+
+   return beta_Lambda3;
+}
+
+/**
+ * Calculates the 4-loop beta function of Lambda3.
+ *
+ * @return 4-loop beta function
+ */
+double THDMIIMSSMBC_susy_parameters::calc_beta_Lambda3_4_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

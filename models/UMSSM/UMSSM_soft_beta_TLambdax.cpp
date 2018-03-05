@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:52:35
+// File generated at Mon 5 Mar 2018 18:30:40
 
 #include "UMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -206,6 +206,25 @@ double UMSSM_soft_parameters::calc_beta_TLambdax_2_loop(const Soft_traces& soft_
  * @return 3-loop beta function
  */
 double UMSSM_soft_parameters::calc_beta_TLambdax_3_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_TLambdax;
+
+   beta_TLambdax = 0;
+
+
+   return beta_TLambdax;
+}
+
+/**
+ * Calculates the 4-loop beta function of TLambdax.
+ *
+ * @return 4-loop beta function
+ */
+double UMSSM_soft_parameters::calc_beta_TLambdax_4_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

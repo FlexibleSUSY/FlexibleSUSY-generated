@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:34:14
+// File generated at Mon 5 Mar 2018 15:31:53
 
 #include "MRSSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -120,6 +120,25 @@ double MRSSMEFTHiggs_soft_parameters::calc_beta_BMuD_2_loop(const Soft_traces& s
  * @return 3-loop beta function
  */
 double MRSSMEFTHiggs_soft_parameters::calc_beta_BMuD_3_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_BMuD;
+
+   beta_BMuD = 0;
+
+
+   return beta_BMuD;
+}
+
+/**
+ * Calculates the 4-loop beta function of BMuD.
+ *
+ * @return 4-loop beta function
+ */
+double MRSSMEFTHiggs_soft_parameters::calc_beta_BMuD_4_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

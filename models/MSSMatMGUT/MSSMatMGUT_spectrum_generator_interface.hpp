@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:15:24
+// File generated at Mon 5 Mar 2018 19:03:57
 
 #ifndef MSSMatMGUT_SPECTRUM_GENERATOR_INTERFACE_H
 #define MSSMatMGUT_SPECTRUM_GENERATOR_INTERFACE_H
@@ -51,7 +51,9 @@ public:
    std::tuple<MSSMatMGUT_slha<MSSMatMGUT<T>>> get_models_slha() const
    { return std::make_tuple(MSSMatMGUT_slha<MSSMatMGUT<T> >(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.)); }
 
-   MSSMatMGUT<T> get_model() const
+   const MSSMatMGUT<T>& get_model() const
+   { return model; }
+   MSSMatMGUT<T>& get_model()
    { return model; }
    MSSMatMGUT_slha<MSSMatMGUT<T>> get_model_slha() const
    { return MSSMatMGUT_slha<MSSMatMGUT<T>>(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.); }

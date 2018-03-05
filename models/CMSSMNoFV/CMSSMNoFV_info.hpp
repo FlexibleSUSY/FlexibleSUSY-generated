@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:14:24
+// File generated at Mon 5 Mar 2018 18:58:02
 
 #ifndef CMSSMNoFV_INFO_H
 #define CMSSMNoFV_INFO_H
@@ -67,7 +67,7 @@ namespace CMSSMNoFV_info {
       ImUP0_0, ReUP0_1, ImUP0_1, ReUP1_0, ImUP1_0, ReUP1_1, ImUP1_1, ZZ0_0, ZZ0_1,
       ZZ1_0, ZZ1_1, NUMBER_OF_MIXINGS };
 
-   enum Input_parameters : int { m0, m12, TanBeta, SignMu, Azero,
+   enum Input_parameters : int { m0, m12, TanBeta, SignMu, Azero, Mlow,
       NUMBER_OF_INPUT_PARAMETERS };
 
    enum Extra_parameters : int { NUMBER_OF_EXTRA_PARAMETERS };

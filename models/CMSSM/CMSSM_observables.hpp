@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:20:24
+// File generated at Mon 5 Mar 2018 19:11:09
 
 #ifndef CMSSM_OBSERVABLES_H
 #define CMSSM_OBSERVABLES_H
@@ -52,11 +52,11 @@ struct CMSSM_observables {
 };
 
 CMSSM_observables calculate_observables(
-   const CMSSM_mass_eigenstates&, const softsusy::QedQcd&,
+   CMSSM_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&);
 
 CMSSM_observables calculate_observables(
-   const CMSSM_mass_eigenstates&, const softsusy::QedQcd&,
+   CMSSM_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&, double scale);
 
 } // namespace flexiblesusy

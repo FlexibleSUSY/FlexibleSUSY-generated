@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:08:43
+// File generated at Mon 5 Mar 2018 18:50:30
 
 #include "NUHMSSM_observables.hpp"
 #include "NUHMSSM_mass_eigenstates.hpp"
@@ -130,35 +130,45 @@ void NUHMSSM_observables::set(const Eigen::ArrayXd& vec)
 
 }
 
-NUHMSSM_observables calculate_observables(const NUHMSSM_mass_eigenstates& model,
+NUHMSSM_observables calculate_observables(NUHMSSM_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input,
                                               double scale)
 {
    auto model_at_scale = model;
 
-   if (scale > 0.)
-      model_at_scale.run_to(scale);
+   if (scale > 0.) {
+      try {
+         model_at_scale.run_to(scale);
+      } catch (const Error& e) {
+         model.get_problems().flag_thrown(e.what());
+         return NUHMSSM_observables();
+      }
+   }
 
    return calculate_observables(model_at_scale, qedqcd, physical_input);
 }
 
-NUHMSSM_observables calculate_observables(const NUHMSSM_mass_eigenstates& model,
+NUHMSSM_observables calculate_observables(NUHMSSM_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input)
 {
    NUHMSSM_observables observables;
 
-   NUHMSSM_effective_couplings effective_couplings(model, qedqcd, physical_input);
-   effective_couplings.calculate_effective_couplings();
+   try {
+      NUHMSSM_effective_couplings effective_couplings(model, qedqcd, physical_input);
+      effective_couplings.calculate_effective_couplings();
 
-   observables.AMU = NUHMSSM_a_muon::calculate_a_muon(MODEL);
-   observables.EFFCPHIGGSPHOTONPHOTON(0) = effective_couplings.get_eff_CphhVPVP(0);
-   observables.EFFCPHIGGSPHOTONPHOTON(1) = effective_couplings.get_eff_CphhVPVP(1);
-   observables.EFFCPHIGGSGLUONGLUON(0) = effective_couplings.get_eff_CphhVGVG(0);
-   observables.EFFCPHIGGSGLUONGLUON(1) = effective_couplings.get_eff_CphhVGVG(1);
-   observables.EFFCPPSEUDOSCALARPHOTONPHOTON = effective_couplings.get_eff_CpAhVPVP(1);
-   observables.EFFCPPSEUDOSCALARGLUONGLUON = effective_couplings.get_eff_CpAhVGVG(1);
+      observables.AMU = NUHMSSM_a_muon::calculate_a_muon(MODEL);
+      observables.EFFCPHIGGSPHOTONPHOTON(0) = effective_couplings.get_eff_CphhVPVP(0);
+      observables.EFFCPHIGGSPHOTONPHOTON(1) = effective_couplings.get_eff_CphhVPVP(1);
+      observables.EFFCPHIGGSGLUONGLUON(0) = effective_couplings.get_eff_CphhVGVG(0);
+      observables.EFFCPHIGGSGLUONGLUON(1) = effective_couplings.get_eff_CphhVGVG(1);
+      observables.EFFCPPSEUDOSCALARPHOTONPHOTON = effective_couplings.get_eff_CpAhVPVP(1);
+      observables.EFFCPPSEUDOSCALARGLUONGLUON = effective_couplings.get_eff_CpAhVGVG(1);
+   } catch (const Error& e) {
+      model.get_problems().flag_thrown(e.what());
+   }
 
    return observables;
 }

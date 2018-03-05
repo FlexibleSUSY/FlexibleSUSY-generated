@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:00:45
+// File generated at Mon 5 Mar 2018 18:35:38
 
 #ifndef NUTNMSSM_SPECTRUM_GENERATOR_INTERFACE_H
 #define NUTNMSSM_SPECTRUM_GENERATOR_INTERFACE_H
@@ -51,7 +51,9 @@ public:
    std::tuple<NUTNMSSM_slha<NUTNMSSM<T>>> get_models_slha() const
    { return std::make_tuple(NUTNMSSM_slha<NUTNMSSM<T> >(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.)); }
 
-   NUTNMSSM<T> get_model() const
+   const NUTNMSSM<T>& get_model() const
+   { return model; }
+   NUTNMSSM<T>& get_model()
    { return model; }
    NUTNMSSM_slha<NUTNMSSM<T>> get_model_slha() const
    { return NUTNMSSM_slha<NUTNMSSM<T>>(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.); }

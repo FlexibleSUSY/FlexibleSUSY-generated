@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:56:25
+// File generated at Mon 5 Mar 2018 18:23:07
 
 #ifndef lowNMSSM_OBSERVABLES_H
 #define lowNMSSM_OBSERVABLES_H
@@ -47,11 +47,11 @@ struct lowNMSSM_observables {
 };
 
 lowNMSSM_observables calculate_observables(
-   const lowNMSSM_mass_eigenstates&, const softsusy::QedQcd&,
+   lowNMSSM_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&);
 
 lowNMSSM_observables calculate_observables(
-   const lowNMSSM_mass_eigenstates&, const softsusy::QedQcd&,
+   lowNMSSM_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&, double scale);
 
 } // namespace flexiblesusy

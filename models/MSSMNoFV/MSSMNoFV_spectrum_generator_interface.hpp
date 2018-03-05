@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:17:44
+// File generated at Mon 5 Mar 2018 19:05:15
 
 #ifndef MSSMNoFV_SPECTRUM_GENERATOR_INTERFACE_H
 #define MSSMNoFV_SPECTRUM_GENERATOR_INTERFACE_H
@@ -51,7 +51,9 @@ public:
    std::tuple<MSSMNoFV_slha<MSSMNoFV<T>>> get_models_slha() const
    { return std::make_tuple(MSSMNoFV_slha<MSSMNoFV<T> >(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.)); }
 
-   MSSMNoFV<T> get_model() const
+   const MSSMNoFV<T>& get_model() const
+   { return model; }
+   MSSMNoFV<T>& get_model()
    { return model; }
    MSSMNoFV_slha<MSSMNoFV<T>> get_model_slha() const
    { return MSSMNoFV_slha<MSSMNoFV<T>>(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.); }

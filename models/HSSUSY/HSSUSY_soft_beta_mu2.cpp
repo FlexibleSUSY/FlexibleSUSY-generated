@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:38:54
+// File generated at Mon 5 Mar 2018 17:38:29
 
 #include "HSSUSY_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -165,6 +165,25 @@ double HSSUSY_soft_parameters::calc_beta_mu2_3_loop(const Soft_traces& soft_trac
       -2.091983828751535*Sqr(Yd(2,2)) + 8.727254982244787*Sqr(Yu(2,2))) + Sqr(
       g2)*(-18.911535445876382*Lambdax - 8.109375*Sqr(Yd(2,2)) +
       10.602411385309043*Sqr(Ye(2,2)) + 11.470322300901756*Sqr(Yu(2,2))))));
+
+
+   return beta_mu2;
+}
+
+/**
+ * Calculates the 4-loop beta function of mu2.
+ *
+ * @return 4-loop beta function
+ */
+double HSSUSY_soft_parameters::calc_beta_mu2_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_mu2;
+
+   beta_mu2 = 0;
 
 
    return beta_mu2;

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:12:03
+// File generated at Mon 5 Mar 2018 19:01:03
 
 #include "MSSMatMGUT_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -132,6 +132,25 @@ double MSSMatMGUT_susy_parameters::calc_beta_Mu_3_loop(const Susy_traces& susy_t
       traceAdjYuYuAdjYdYd + 73.91107277061809*traceAdjYuYuAdjYuYu + (
       41.09619405498157*traceAdjYdYd + 41.09619405498157*traceAdjYuYu)*Sqr(g3))
       ));
+
+
+   return beta_Mu;
+}
+
+/**
+ * Calculates the 4-loop beta function of Mu.
+ *
+ * @return 4-loop beta function
+ */
+double MSSMatMGUT_susy_parameters::calc_beta_Mu_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_Mu;
+
+   beta_Mu = 0;
 
 
    return beta_Mu;

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:51:11
+// File generated at Mon 5 Mar 2018 17:52:28
 
 #ifndef MRSSM_OBSERVABLES_H
 #define MRSSM_OBSERVABLES_H
@@ -52,11 +52,11 @@ struct MRSSM_observables {
 };
 
 MRSSM_observables calculate_observables(
-   const MRSSM_mass_eigenstates&, const softsusy::QedQcd&,
+   MRSSM_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&);
 
 MRSSM_observables calculate_observables(
-   const MRSSM_mass_eigenstates&, const softsusy::QedQcd&,
+   MRSSM_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&, double scale);
 
 } // namespace flexiblesusy

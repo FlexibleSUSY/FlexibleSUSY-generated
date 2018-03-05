@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:51:00
+// File generated at Mon 5 Mar 2018 18:16:11
 
 #ifndef HSSUSY_OBSERVABLES_H
 #define HSSUSY_OBSERVABLES_H
@@ -49,11 +49,11 @@ struct HSSUSY_observables {
 };
 
 HSSUSY_observables calculate_observables(
-   const HSSUSY_mass_eigenstates&, const softsusy::QedQcd&,
+   HSSUSY_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&);
 
 HSSUSY_observables calculate_observables(
-   const HSSUSY_mass_eigenstates&, const softsusy::QedQcd&,
+   HSSUSY_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&, double scale);
 
 } // namespace flexiblesusy

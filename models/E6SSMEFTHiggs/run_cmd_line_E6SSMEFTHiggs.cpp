@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:47:50
+// File generated at Mon 5 Mar 2018 17:44:40
 
 #include "config.h"
 
@@ -142,7 +142,7 @@ int run_solver(const E6SSMEFTHiggs_input_parameters& input)
    spectrum_generator.set_settings(settings);
    spectrum_generator.run(qedqcd, input);
 
-   const auto model = std::get<0>(spectrum_generator.get_models_slha());
+   auto model = std::get<0>(spectrum_generator.get_models_slha());
 
    E6SSMEFTHiggs_scales scales;
    scales.HighScale = spectrum_generator.get_high_scale();

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:35:09
+// File generated at Mon 5 Mar 2018 16:28:03
 
 #ifndef NMSSMEFTHiggs_OBSERVABLES_H
 #define NMSSMEFTHiggs_OBSERVABLES_H
@@ -35,7 +35,7 @@ class NMSSMEFTHiggs_mass_eigenstates;
 class Physical_input;
 
 struct NMSSMEFTHiggs_observables {
-   static const int NUMBER_OF_OBSERVABLES = 0;
+   static const int NUMBER_OF_OBSERVABLES = 1;
 
    NMSSMEFTHiggs_observables();
    Eigen::ArrayXd get() const; ///< returns vector of all observables
@@ -43,15 +43,16 @@ struct NMSSMEFTHiggs_observables {
    void clear(); ///< sets all observables to zero
    void set(const Eigen::ArrayXd&); ///< sets all observables from given vector
 
+   double a_muon; ///< a_muon = (g-2)/2 of the muon (calculated with FlexibleSUSY)
 
 };
 
 NMSSMEFTHiggs_observables calculate_observables(
-   const NMSSMEFTHiggs_mass_eigenstates&, const softsusy::QedQcd&,
+   NMSSMEFTHiggs_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&);
 
 NMSSMEFTHiggs_observables calculate_observables(
-   const NMSSMEFTHiggs_mass_eigenstates&, const softsusy::QedQcd&,
+   NMSSMEFTHiggs_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&, double scale);
 
 } // namespace flexiblesusy

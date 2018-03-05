@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:39:13
+// File generated at Mon 5 Mar 2018 16:21:12
 
 #ifndef MRSSMEFTHiggs_SPECTRUM_GENERATOR_INTERFACE_H
 #define MRSSMEFTHiggs_SPECTRUM_GENERATOR_INTERFACE_H
@@ -32,6 +32,7 @@
 #include "lowe.h"
 #include "spectrum_generator_problems.hpp"
 #include "spectrum_generator_settings.hpp"
+#include "standard_model.hpp"
 #include "loop_corrections.hpp"
 
 #include <string>
@@ -51,10 +52,17 @@ public:
    std::tuple<MRSSMEFTHiggs_slha<MRSSMEFTHiggs<T>>, standard_model::StandardModel<T>> get_models_slha() const
    { return std::make_tuple(MRSSMEFTHiggs_slha<MRSSMEFTHiggs<T>>(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.), eft); }
 
-   MRSSMEFTHiggs<T> get_model() const
+   const MRSSMEFTHiggs<T>& get_model() const
+   { return model; }
+   MRSSMEFTHiggs<T>& get_model()
    { return model; }
    MRSSMEFTHiggs_slha<MRSSMEFTHiggs<T>> get_model_slha() const
    { return MRSSMEFTHiggs_slha<MRSSMEFTHiggs<T>>(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.); }
+
+   const standard_model::StandardModel<T>& get_sm() const
+   { return eft; }
+   standard_model::StandardModel<T>& get_sm()
+   { return eft; }
 
    Spectrum_generator_problems get_problems() const { return problems; }
    int get_exit_code() const { return problems.have_problem(); }

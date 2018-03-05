@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:39:31
+// File generated at Mon 5 Mar 2018 17:45:08
 
 /**
  * @file SM_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from MSbar
  * parameters.
  *
- * This file was generated at Fri 20 Oct 2017 08:39:31 with FlexibleSUSY
- * 2.0.1 (git commit: 5296739235bd0ef7020eda218da9c069270c3f45) and SARAH 4.12.0 .
+ * This file was generated at Mon 5 Mar 2018 17:45:08 with FlexibleSUSY
+ * 2.1.0 (git commit: 8f20f6c9c42c159c1588fbc0bb3e15ce5ab6ace3) and SARAH 4.12.3 .
  */
 
 #include "SM_mass_eigenstates.hpp"
@@ -54,6 +54,8 @@
 
 #include "sm_threeloophiggs.hpp"
 
+#include "sm_fourloophiggs.hpp"
+
 #include "sm_threeloop_as.hpp"
 
 
@@ -75,16 +77,17 @@ namespace flexiblesusy {
 #define MODELPARAMETER(parameter) model.get_##parameter()
 #define EXTRAPARAMETER(parameter) model.get_##parameter()
 
-#define HIGGS_2LOOP_CORRECTION_AT_AS     loop_corrections.higgs_at_as
-#define HIGGS_2LOOP_CORRECTION_AB_AS     loop_corrections.higgs_ab_as
-#define HIGGS_2LOOP_CORRECTION_AT_AT     loop_corrections.higgs_at_at
-#define HIGGS_2LOOP_CORRECTION_ATAU_ATAU loop_corrections.higgs_atau_atau
-#define TOP_POLE_QCD_CORRECTION          loop_corrections.top_qcd
-#define HIGGS_3LOOP_CORRECTION_AT_AS_AS  loop_corrections.higgs_at_as_as
-#define HIGGS_3LOOP_CORRECTION_AB_AS_AS  loop_corrections.higgs_ab_as_as
-#define HIGGS_3LOOP_MDR_SCHEME           loop_corrections.higgs_3L_mdr_scheme
-#define HIGGS_3LOOP_CORRECTION_AT_AT_AS  loop_corrections.higgs_at_at_as
-#define HIGGS_3LOOP_CORRECTION_AT_AT_AT  loop_corrections.higgs_at_at_at
+#define HIGGS_2LOOP_CORRECTION_AT_AS       loop_corrections.higgs_at_as
+#define HIGGS_2LOOP_CORRECTION_AB_AS       loop_corrections.higgs_ab_as
+#define HIGGS_2LOOP_CORRECTION_AT_AT       loop_corrections.higgs_at_at
+#define HIGGS_2LOOP_CORRECTION_ATAU_ATAU   loop_corrections.higgs_atau_atau
+#define TOP_POLE_QCD_CORRECTION            loop_corrections.top_qcd
+#define HIGGS_3LOOP_CORRECTION_AT_AS_AS    loop_corrections.higgs_at_as_as
+#define HIGGS_3LOOP_CORRECTION_AB_AS_AS    loop_corrections.higgs_ab_as_as
+#define HIGGS_3LOOP_MDR_SCHEME             loop_corrections.higgs_3L_mdr_scheme
+#define HIGGS_3LOOP_CORRECTION_AT_AT_AS    loop_corrections.higgs_at_at_as
+#define HIGGS_3LOOP_CORRECTION_AT_AT_AT    loop_corrections.higgs_at_at_at
+#define HIGGS_4LOOP_CORRECTION_AT_AS_AS_AS loop_corrections.higgs_at_as_as_as
 
 CLASSNAME::SM_mass_eigenstates(const SM_input_parameters& input_)
    : SM_soft_parameters(input_)
@@ -483,13 +486,13 @@ void CLASSNAME::calculate_DRbar_masses()
    const auto save_ewsb_flag = make_raii_guard(
       [this, has_no_ewsb_flag] () {
          if (has_no_ewsb_flag) {
-            this->problems.flag_no_ewsb();
+            this->problems.flag_no_ewsb_tree_level();
          } else {
-            this->problems.unflag_no_ewsb();
+            this->problems.unflag_no_ewsb_tree_level();
          }
       }
    );
-   problems.unflag_no_ewsb();
+   problems.unflag_no_ewsb_tree_level();
    solve_ewsb_tree_level();
 #ifdef ENABLE_VERBOSE
    if (problems.no_ewsb()) {
@@ -3351,18 +3354,30 @@ double CLASSNAME::self_energy_hh_2loop(double p) const
    using namespace flexiblesusy::sm_twoloophiggs;
 
    const double p2 = Sqr(p);
+   const double mb = MFd(2);
    const double mt = MFu(2);
+   const double mtau = MFe(2);
+   const double yb = Yd(2,2);
    const double yt = Yu(2,2);
+   const double ytau = Ye(2,2);
    const double gs = g3;
    const double scale = get_scale();
    double self_energy = 0.;
 
    if (HIGGS_2LOOP_CORRECTION_AT_AT) {
-      self_energy -= delta_mh_2loop_at_at_sm(p2, scale, mt, yt);
+      self_energy -= delta_mh_2loop_at_at_sm(p2, scale, mt, yt, mb);
    }
 
    if (HIGGS_2LOOP_CORRECTION_AT_AS) {
       self_energy -= delta_mh_2loop_at_as_sm(p2, scale, mt, yt, gs);
+   }
+
+   if (HIGGS_2LOOP_CORRECTION_AB_AS) {
+      self_energy -= delta_mh_2loop_ab_as_sm(p2, scale, mb, yb, gs);
+   }
+
+   if (HIGGS_2LOOP_CORRECTION_ATAU_ATAU) {
+      self_energy -= delta_mh_2loop_atau_atau_sm(p2, scale, mtau, ytau);
    }
 
    return self_energy;
@@ -3393,6 +3408,26 @@ double CLASSNAME::self_energy_hh_3loop() const
 
    if (HIGGS_3LOOP_CORRECTION_AT_AS_AS) {
       self_energy -= delta_mh_3loop_at_as_as_sm(scale, mt, yt, gs);
+   }
+
+   return self_energy;
+}
+
+
+
+double CLASSNAME::self_energy_hh_4loop() const
+{
+   using namespace flexiblesusy::sm_fourloophiggs;
+
+   const double mt = MFu(2);
+   const double yt = Yu(2,2);
+   const double gs = g3;
+   const double mh = Mhh;
+   const double scale = get_scale();
+   double self_energy = 0.;
+
+   if (HIGGS_4LOOP_CORRECTION_AT_AS_AS_AS) {
+      self_energy -= delta_mh_4loop_at_as_as_as_sm(scale, mt, yt, gs);
    }
 
    return self_energy;
@@ -3432,6 +3467,8 @@ void CLASSNAME::calculate_Mhh_pole()
          self_energy += self_energy_hh_2loop(p);
       if (pole_mass_loop_order > 2)
          self_energy += self_energy_hh_3loop();
+      if (pole_mass_loop_order > 3)
+         self_energy += self_energy_hh_4loop();
       const double mass_sqr = M_tree - self_energy;
 
       PHYSICAL(Mhh) = SignedAbsSqrt(mass_sqr);

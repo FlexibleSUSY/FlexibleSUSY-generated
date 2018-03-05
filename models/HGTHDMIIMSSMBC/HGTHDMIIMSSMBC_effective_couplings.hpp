@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:36:38
+// File generated at Mon 5 Mar 2018 17:14:41
 
 #ifndef HGTHDMIIMSSMBC_EFFECTIVE_COUPLINGS_H
 #define HGTHDMIIMSSMBC_EFFECTIVE_COUPLINGS_H

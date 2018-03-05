@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:32:11
+// File generated at Mon 5 Mar 2018 16:38:06
 
 #include "MSSMEFTHiggs_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -70,6 +70,25 @@ double MSSMEFTHiggs_susy_parameters::calc_beta_g2_2_loop(const Susy_traces& susy
  * @return 3-loop beta function
  */
 double MSSMEFTHiggs_susy_parameters::calc_beta_g2_3_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_g2;
+
+   beta_g2 = 0;
+
+
+   return beta_g2;
+}
+
+/**
+ * Calculates the 4-loop beta function of g2.
+ *
+ * @return 4-loop beta function
+ */
+double MSSMEFTHiggs_susy_parameters::calc_beta_g2_4_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

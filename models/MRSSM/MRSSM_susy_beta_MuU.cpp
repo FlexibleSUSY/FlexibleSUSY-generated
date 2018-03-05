@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:45:12
+// File generated at Mon 5 Mar 2018 17:47:52
 
 #include "MRSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -76,6 +76,25 @@ double MRSSM_susy_parameters::calc_beta_MuU_2_loop(const Susy_traces& susy_trace
  * @return 3-loop beta function
  */
 double MRSSM_susy_parameters::calc_beta_MuU_3_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MuU;
+
+   beta_MuU = 0;
+
+
+   return beta_MuU;
+}
+
+/**
+ * Calculates the 4-loop beta function of MuU.
+ *
+ * @return 4-loop beta function
+ */
+double MRSSM_susy_parameters::calc_beta_MuU_4_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:37:11
+// File generated at Mon 5 Mar 2018 16:35:07
 
 #include "E6SSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -165,6 +165,25 @@ Eigen::Matrix<double,3,3> E6SSMEFTHiggs_soft_parameters::calc_beta_TKappa_2_loop
  * @return 3-loop beta function
  */
 Eigen::Matrix<double,3,3> E6SSMEFTHiggs_soft_parameters::calc_beta_TKappa_3_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_TKappa;
+
+   beta_TKappa = ZEROMATRIX(3,3);
+
+
+   return beta_TKappa;
+}
+
+/**
+ * Calculates the 4-loop beta function of TKappa.
+ *
+ * @return 4-loop beta function
+ */
+Eigen::Matrix<double,3,3> E6SSMEFTHiggs_soft_parameters::calc_beta_TKappa_4_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

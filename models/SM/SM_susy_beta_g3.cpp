@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:39:11
+// File generated at Mon 5 Mar 2018 17:44:52
 
 #include "SM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -80,6 +80,29 @@ double SM_susy_parameters::calc_beta_g3_3_loop(const Susy_traces& susy_traces) c
       Sqr(g1)*(-9*Sqr(g2) + 616*Sqr(g3) - 303*Sqr(Yu(2,2))) + 15*(109*Quad(g2)
       + 3*Sqr(g2)*(56*Sqr(g3) - 31*Sqr(Yu(2,2))) + 20*(13*Quad(g3) + 6*Quad(Yu(
       2,2)) - 16*Sqr(g3)*Sqr(Yu(2,2))))));
+
+
+   return beta_g3;
+}
+
+/**
+ * Calculates the 4-loop beta function of g3.
+ *
+ * @return 4-loop beta function
+ */
+double SM_susy_parameters::calc_beta_g3_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_g3;
+
+   beta_g3 = Re(-2472.2837425797156*Cube(g3)*Quad(oneOver16PiSqr)*(1.*
+      Power6(g3) + 0.04569149546770327*Power6(Yu(2,2)) + 0.0060672647486441755*
+      Lambdax*Quad(Yu(2,2)) - 0.12603833934188147*Quad(Yu(2,2))*Sqr(g3) +
+      0.16927060578749137*Quad(g3)*Sqr(Yu(2,2)) - 0.003640358849186505*Sqr(
+      Lambdax)*Sqr(Yu(2,2))));
 
 
    return beta_g3;

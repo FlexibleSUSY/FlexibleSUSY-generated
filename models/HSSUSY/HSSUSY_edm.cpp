@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:51:01
+// File generated at Mon 5 Mar 2018 18:16:11
 
 /**
  * @file HSSUSY_edm.cpp
  *
- * This file was generated at Fri 20 Oct 2017 08:51:01 with FlexibleSUSY
- * 2.0.1 and SARAH 4.12.0 .
+ * This file was generated at Mon 5 Mar 2018 18:16:11 with FlexibleSUSY
+ * 2.1.0 and SARAH 4.12.3 .
  */
 
 #include "HSSUSY_edm.hpp"

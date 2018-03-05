@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:52:42
+// File generated at Mon 5 Mar 2018 17:58:51
 
 #include "E6SSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -121,6 +121,25 @@ double E6SSM_soft_parameters::calc_beta_MassBp_2_loop(const Soft_traces& soft_tr
  * @return 3-loop beta function
  */
 double E6SSM_soft_parameters::calc_beta_MassBp_3_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MassBp;
+
+   beta_MassBp = 0;
+
+
+   return beta_MassBp;
+}
+
+/**
+ * Calculates the 4-loop beta function of MassBp.
+ *
+ * @return 4-loop beta function
+ */
+double E6SSM_soft_parameters::calc_beta_MassBp_4_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

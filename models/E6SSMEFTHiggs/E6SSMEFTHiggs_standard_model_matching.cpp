@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:46:23
+// File generated at Mon 5 Mar 2018 17:43:28
 
 #include "E6SSMEFTHiggs_standard_model_matching.hpp"
 #include "wrappers.hpp"
@@ -216,6 +216,8 @@ void match_high_to_low_scale_model_1loop(
    const double Mh2_bsm = calculate_Mh2_pole(model_0l, model_1l, idx);
 
    sm.set_Lambdax((Mh2_bsm - Mh2_sm + mh2_sm)/Sqr(sm.get_v()));
+
+   sm.get_problems().add(sm_0l.get_problems());
 }
 
 double calculate_delta_alpha_em(double alpha_em, const E6SSMEFTHiggs_mass_eigenstates& model)
@@ -786,6 +788,9 @@ void match_low_to_high_scale_model_1loop(
    model.set_Ye(model_0l.get_Ye());
    model.set_Yu(model_0l.get_Yu());
 
+
+   model.get_problems().add(model_0l.get_problems());
+   model.get_problems().add(model_1l.get_problems());
 }
 
 } // anonymous namespace

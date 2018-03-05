@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:51:42
+// File generated at Mon 5 Mar 2018 17:58:01
 
 #include "E6SSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -165,6 +165,25 @@ Eigen::Matrix<double,2,2> E6SSM_soft_parameters::calc_beta_TLambda12_2_loop(cons
  * @return 3-loop beta function
  */
 Eigen::Matrix<double,2,2> E6SSM_soft_parameters::calc_beta_TLambda12_3_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,2,2> beta_TLambda12;
+
+   beta_TLambda12 = ZEROMATRIX(2,2);
+
+
+   return beta_TLambda12;
+}
+
+/**
+ * Calculates the 4-loop beta function of TLambda12.
+ *
+ * @return 4-loop beta function
+ */
+Eigen::Matrix<double,2,2> E6SSM_soft_parameters::calc_beta_TLambda12_4_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:56:25
+// File generated at Mon 5 Mar 2018 18:23:07
 
 #ifndef lowNMSSM_EFFECTIVE_COUPLINGS_H
 #define lowNMSSM_EFFECTIVE_COUPLINGS_H

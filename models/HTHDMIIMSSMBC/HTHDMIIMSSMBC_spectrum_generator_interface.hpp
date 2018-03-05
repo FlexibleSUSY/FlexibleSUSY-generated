@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:37:04
+// File generated at Mon 5 Mar 2018 17:33:14
 
 #ifndef HTHDMIIMSSMBC_SPECTRUM_GENERATOR_INTERFACE_H
 #define HTHDMIIMSSMBC_SPECTRUM_GENERATOR_INTERFACE_H
@@ -51,7 +51,9 @@ public:
    std::tuple<HTHDMIIMSSMBC_slha<HTHDMIIMSSMBC<T>>> get_models_slha() const
    { return std::make_tuple(HTHDMIIMSSMBC_slha<HTHDMIIMSSMBC<T> >(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.)); }
 
-   HTHDMIIMSSMBC<T> get_model() const
+   const HTHDMIIMSSMBC<T>& get_model() const
+   { return model; }
+   HTHDMIIMSSMBC<T>& get_model()
    { return model; }
    HTHDMIIMSSMBC_slha<HTHDMIIMSSMBC<T>> get_model_slha() const
    { return HTHDMIIMSSMBC_slha<HTHDMIIMSSMBC<T>>(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.); }

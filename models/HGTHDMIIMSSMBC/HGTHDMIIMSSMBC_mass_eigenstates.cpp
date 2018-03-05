@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:36:19
+// File generated at Mon 5 Mar 2018 17:14:19
 
 /**
  * @file HGTHDMIIMSSMBC_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from MSbar
  * parameters.
  *
- * This file was generated at Fri 20 Oct 2017 08:36:19 with FlexibleSUSY
- * 2.0.1 (git commit: 5296739235bd0ef7020eda218da9c069270c3f45) and SARAH 4.12.0 .
+ * This file was generated at Mon 5 Mar 2018 17:14:19 with FlexibleSUSY
+ * 2.1.0 (git commit: 8f20f6c9c42c159c1588fbc0bb3e15ce5ab6ace3) and SARAH 4.12.3 .
  */
 
 #include "HGTHDMIIMSSMBC_mass_eigenstates.hpp"
@@ -54,6 +54,7 @@
 
 
 
+
 #include <array>
 #include <cmath>
 #include <functional>
@@ -72,16 +73,17 @@ namespace flexiblesusy {
 #define MODELPARAMETER(parameter) model.get_##parameter()
 #define EXTRAPARAMETER(parameter) model.get_##parameter()
 
-#define HIGGS_2LOOP_CORRECTION_AT_AS     loop_corrections.higgs_at_as
-#define HIGGS_2LOOP_CORRECTION_AB_AS     loop_corrections.higgs_ab_as
-#define HIGGS_2LOOP_CORRECTION_AT_AT     loop_corrections.higgs_at_at
-#define HIGGS_2LOOP_CORRECTION_ATAU_ATAU loop_corrections.higgs_atau_atau
-#define TOP_POLE_QCD_CORRECTION          loop_corrections.top_qcd
-#define HIGGS_3LOOP_CORRECTION_AT_AS_AS  loop_corrections.higgs_at_as_as
-#define HIGGS_3LOOP_CORRECTION_AB_AS_AS  loop_corrections.higgs_ab_as_as
-#define HIGGS_3LOOP_MDR_SCHEME           loop_corrections.higgs_3L_mdr_scheme
-#define HIGGS_3LOOP_CORRECTION_AT_AT_AS  loop_corrections.higgs_at_at_as
-#define HIGGS_3LOOP_CORRECTION_AT_AT_AT  loop_corrections.higgs_at_at_at
+#define HIGGS_2LOOP_CORRECTION_AT_AS       loop_corrections.higgs_at_as
+#define HIGGS_2LOOP_CORRECTION_AB_AS       loop_corrections.higgs_ab_as
+#define HIGGS_2LOOP_CORRECTION_AT_AT       loop_corrections.higgs_at_at
+#define HIGGS_2LOOP_CORRECTION_ATAU_ATAU   loop_corrections.higgs_atau_atau
+#define TOP_POLE_QCD_CORRECTION            loop_corrections.top_qcd
+#define HIGGS_3LOOP_CORRECTION_AT_AS_AS    loop_corrections.higgs_at_as_as
+#define HIGGS_3LOOP_CORRECTION_AB_AS_AS    loop_corrections.higgs_ab_as_as
+#define HIGGS_3LOOP_MDR_SCHEME             loop_corrections.higgs_3L_mdr_scheme
+#define HIGGS_3LOOP_CORRECTION_AT_AT_AS    loop_corrections.higgs_at_at_as
+#define HIGGS_3LOOP_CORRECTION_AT_AT_AT    loop_corrections.higgs_at_at_at
+#define HIGGS_4LOOP_CORRECTION_AT_AS_AS_AS loop_corrections.higgs_at_as_as_as
 
 CLASSNAME::HGTHDMIIMSSMBC_mass_eigenstates(const HGTHDMIIMSSMBC_input_parameters& input_)
    : HGTHDMIIMSSMBC_soft_parameters(input_)
@@ -493,13 +495,13 @@ void CLASSNAME::calculate_DRbar_masses()
    const auto save_ewsb_flag = make_raii_guard(
       [this, has_no_ewsb_flag] () {
          if (has_no_ewsb_flag) {
-            this->problems.flag_no_ewsb();
+            this->problems.flag_no_ewsb_tree_level();
          } else {
-            this->problems.unflag_no_ewsb();
+            this->problems.unflag_no_ewsb_tree_level();
          }
       }
    );
-   problems.unflag_no_ewsb();
+   problems.unflag_no_ewsb_tree_level();
    solve_ewsb_tree_level();
 #ifdef ENABLE_VERBOSE
    if (problems.no_ewsb()) {
@@ -5037,6 +5039,8 @@ std::complex<double> CLASSNAME::tadpole_hh_1loop(int gO1) const
 
 
 
+
+
 void CLASSNAME::calculate_MVG_pole()
 {
    // diagonalization with medium precision
@@ -5603,7 +5607,7 @@ double CLASSNAME::Betax() const
 
 double CLASSNAME::Alpha() const
 {
-   return ArcCos(ZH(0,1));
+   return ArcTan(ZH(1,1)/ZH(0,1));
 }
 
 double CLASSNAME::ThetaW() const

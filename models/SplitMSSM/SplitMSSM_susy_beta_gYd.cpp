@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:38:01
+// File generated at Mon 5 Mar 2018 17:42:01
 
 #include "SplitMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -94,6 +94,25 @@ double SplitMSSM_susy_parameters::calc_beta_gYd_2_loop(const Susy_traces& susy_t
  * @return 3-loop beta function
  */
 double SplitMSSM_susy_parameters::calc_beta_gYd_3_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_gYd;
+
+   beta_gYd = 0;
+
+
+   return beta_gYd;
+}
+
+/**
+ * Calculates the 4-loop beta function of gYd.
+ *
+ * @return 4-loop beta function
+ */
+double SplitMSSM_susy_parameters::calc_beta_gYd_4_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

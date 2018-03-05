@@ -2,6 +2,10 @@ DIR          := models/lowMSSM
 MODNAME      := lowMSSM
 SARAH_MODEL  := MSSM
 WITH_$(MODNAME) := yes
+MODlowMSSM_MOD := SM MSSM_higgs
+MODlowMSSM_DEP := $(patsubst %,model_specific/%,$(MODlowMSSM_MOD))
+MODlowMSSM_INC := $(patsubst %,-Imodel_specific/%,$(MODlowMSSM_MOD))
+MODlowMSSM_LIB := $(foreach M,$(MODlowMSSM_MOD),model_specific/$M/libmodel_specific_$M$(MODULE_LIBEXT))
 
 lowMSSM_INSTALL_DIR := $(INSTALL_DIR)/$(DIR)
 
@@ -266,7 +270,7 @@ $(METACODE_STAMP_lowMSSM):
 endif
 
 $(LIBlowMSSM_DEP) $(EXElowMSSM_DEP) $(LLlowMSSM_DEP) $(LIBlowMSSM_OBJ) $(EXElowMSSM_OBJ) $(LLlowMSSM_OBJ) $(LLlowMSSM_LIB): \
-	CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODlowMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBlowMSSM_DEP) $(EXElowMSSM_DEP) $(LLlowMSSM_DEP) $(LIBlowMSSM_OBJ) $(EXElowMSSM_OBJ) $(LLlowMSSM_OBJ) $(LLlowMSSM_LIB): \
@@ -274,21 +278,22 @@ $(LIBlowMSSM_DEP) $(EXElowMSSM_DEP) $(LLlowMSSM_DEP) $(LIBlowMSSM_OBJ) $(EXElowM
 endif
 
 $(LLlowMSSM_OBJ) $(LLlowMSSM_LIB): \
-	CPPFLAGS += $(shell $(MATH_INC_PATHS) --math-cmd="$(MATH)" -I --librarylink --mathlink)
+	CPPFLAGS += $(LLFLAGS)
 
 $(LIBlowMSSM): $(LIBlowMSSM_OBJ)
 		$(MODULE_MAKE_LIB_CMD) $@ $^
 
-$(DIR)/%.x: $(DIR)/%.o $(LIBlowMSSM) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+$(DIR)/%.x: $(DIR)/%.o $(LIBlowMSSM) $(MODlowMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
 		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
-$(LLlowMSSM_LIB): $(LLlowMSSM_OBJ) $(LIBlowMSSM) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+$(LLlowMSSM_LIB): $(LLlowMSSM_OBJ) $(LIBlowMSSM) $(MODlowMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
 
 ALLDEP += $(LIBlowMSSM_DEP) $(EXElowMSSM_DEP)
 ALLSRC += $(LIBlowMSSM_SRC) $(EXElowMSSM_SRC)
 ALLLIB += $(LIBlowMSSM)
 ALLEXE += $(EXElowMSSM_EXE)
+ALLMODDEP += $(MODlowMSSM_DEP)
 
 ifeq ($(ENABLE_LIBRARYLINK),yes)
 ALLDEP += $(LLlowMSSM_DEP)

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:54:19
+// File generated at Mon 5 Mar 2018 18:32:09
 
 #include "UMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -149,6 +149,25 @@ double UMSSM_soft_parameters::calc_beta_MassU_2_loop(const Soft_traces& soft_tra
  * @return 3-loop beta function
  */
 double UMSSM_soft_parameters::calc_beta_MassU_3_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MassU;
+
+   beta_MassU = 0;
+
+
+   return beta_MassU;
+}
+
+/**
+ * Calculates the 4-loop beta function of MassU.
+ *
+ * @return 4-loop beta function
+ */
+double UMSSM_soft_parameters::calc_beta_MassU_4_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

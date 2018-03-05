@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:12:11
+// File generated at Mon 5 Mar 2018 18:56:12
 
 #include "CMSSMNoFV_input_parameters.hpp"
 #include "wrappers.hpp"
@@ -27,13 +27,14 @@ namespace flexiblesusy {
 
 Eigen::ArrayXd CMSSMNoFV_input_parameters::get() const
 {
-   Eigen::ArrayXd pars(5);
+   Eigen::ArrayXd pars(6);
 
    pars(0) = m0;
    pars(1) = m12;
    pars(2) = TanBeta;
    pars(3) = SignMu;
    pars(4) = Azero;
+   pars(5) = Mlow;
 
    return pars;
 }
@@ -45,6 +46,7 @@ void CMSSMNoFV_input_parameters::set(const Eigen::ArrayXd& pars)
    TanBeta = pars(2);
    SignMu = pars(3);
    Azero = pars(4);
+   Mlow = pars(5);
 
 }
 
@@ -55,6 +57,7 @@ std::ostream& operator<<(std::ostream& ostr, const CMSSMNoFV_input_parameters& i
    ostr << "TanBeta = " << INPUT(TanBeta) << ", ";
    ostr << "SignMu = " << INPUT(SignMu) << ", ";
    ostr << "Azero = " << INPUT(Azero) << ", ";
+   ostr << "Mlow = " << INPUT(Mlow) << ", ";
 
    return ostr;
 }

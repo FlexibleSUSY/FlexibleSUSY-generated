@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:51:47
+// File generated at Mon 5 Mar 2018 17:58:05
 
 #include "E6SSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -108,6 +108,25 @@ double E6SSM_soft_parameters::calc_beta_BMuPr_2_loop(const Soft_traces& soft_tra
  * @return 3-loop beta function
  */
 double E6SSM_soft_parameters::calc_beta_BMuPr_3_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_BMuPr;
+
+   beta_BMuPr = 0;
+
+
+   return beta_BMuPr;
+}
+
+/**
+ * Calculates the 4-loop beta function of BMuPr.
+ *
+ * @return 4-loop beta function
+ */
+double E6SSM_soft_parameters::calc_beta_BMuPr_4_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

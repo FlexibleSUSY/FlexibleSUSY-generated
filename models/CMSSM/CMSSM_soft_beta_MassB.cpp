@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:19:40
+// File generated at Mon 5 Mar 2018 19:10:16
 
 #include "CMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -151,6 +151,25 @@ double CMSSM_soft_parameters::calc_beta_MassB_3_loop(const Soft_traces& soft_tra
       27*traceAdjYdYdAdjYdYd + 42*traceAdjYdYd*traceAdjYeYe + 27*
       traceAdjYeYeAdjYeYe + 29*traceAdjYuYuAdjYdYd + 42*traceAdjYuYuAdjYuYu +
       18*Sqr(traceAdjYdYd) + 12*Sqr(traceAdjYeYe) + 45*Sqr(traceAdjYuYu)))))));
+
+
+   return beta_MassB;
+}
+
+/**
+ * Calculates the 4-loop beta function of MassB.
+ *
+ * @return 4-loop beta function
+ */
+double CMSSM_soft_parameters::calc_beta_MassB_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MassB;
+
+   beta_MassB = 0;
 
 
    return beta_MassB;

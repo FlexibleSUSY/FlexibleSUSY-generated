@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:05:05
+// File generated at Mon 5 Mar 2018 18:42:08
 
 #include "lowMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -91,6 +91,25 @@ double lowMSSM_susy_parameters::calc_beta_g2_3_loop(const Susy_traces& susy_trac
       traceAdjYeYe + 4*traceAdjYeYeAdjYeYe + 6*traceAdjYuYuAdjYdYd + 12*
       traceAdjYuYuAdjYuYu + 22*Quad(g3) - 16*(traceAdjYdYd + traceAdjYuYu)*Sqr(
       g3) + 9*Sqr(traceAdjYdYd) + Sqr(traceAdjYeYe) + 9*Sqr(traceAdjYuYu)))));
+
+
+   return beta_g2;
+}
+
+/**
+ * Calculates the 4-loop beta function of g2.
+ *
+ * @return 4-loop beta function
+ */
+double lowMSSM_susy_parameters::calc_beta_g2_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_g2;
+
+   beta_g2 = 0;
 
 
    return beta_g2;

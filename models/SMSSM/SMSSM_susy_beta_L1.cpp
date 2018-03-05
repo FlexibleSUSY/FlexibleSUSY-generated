@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:52:48
+// File generated at Mon 5 Mar 2018 18:19:14
 
 #include "SMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -72,6 +72,25 @@ double SMSSM_susy_parameters::calc_beta_L1_2_loop(const Susy_traces& susy_traces
  * @return 3-loop beta function
  */
 double SMSSM_susy_parameters::calc_beta_L1_3_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_L1;
+
+   beta_L1 = 0;
+
+
+   return beta_L1;
+}
+
+/**
+ * Calculates the 4-loop beta function of L1.
+ *
+ * @return 4-loop beta function
+ */
+double SMSSM_susy_parameters::calc_beta_L1_4_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

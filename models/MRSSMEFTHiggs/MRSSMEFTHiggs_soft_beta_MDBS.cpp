@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:34:24
+// File generated at Mon 5 Mar 2018 15:32:03
 
 #include "MRSSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -111,6 +111,25 @@ double MRSSMEFTHiggs_soft_parameters::calc_beta_MDBS_2_loop(const Soft_traces& s
  * @return 3-loop beta function
  */
 double MRSSMEFTHiggs_soft_parameters::calc_beta_MDBS_3_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MDBS;
+
+   beta_MDBS = 0;
+
+
+   return beta_MDBS;
+}
+
+/**
+ * Calculates the 4-loop beta function of MDBS.
+ *
+ * @return 4-loop beta function
+ */
+double MRSSMEFTHiggs_soft_parameters::calc_beta_MDBS_4_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

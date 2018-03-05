@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:38:50
+// File generated at Mon 5 Mar 2018 17:38:26
 
 #include "HSSUSY_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -140,6 +140,26 @@ double HSSUSY_susy_parameters::calc_beta_Lambdax_3_loop(const Susy_traces& susy_
       Cube(Lambdax)*Sqr(Yu(2,2)) + 8*Quad(g3)*(50201*Quad(Yu(2,2)) - 178484*
       Lambdax*Sqr(Yu(2,2))) - 4*Sqr(g3)*(500988*Power6(Yu(2,2)) - 662866*
       Lambdax*Quad(Yu(2,2)) + 80385*Sqr(Lambdax)*Sqr(Yu(2,2))))));
+
+
+   return beta_Lambdax;
+}
+
+/**
+ * Calculates the 4-loop beta function of Lambdax.
+ *
+ * @return 4-loop beta function
+ */
+double HSSUSY_susy_parameters::calc_beta_Lambdax_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_Lambdax;
+
+   beta_Lambdax = Re(16616.34*Power6(g3)*Quad(oneOver16PiSqr)*Quad(Yu(2,2
+      )));
 
 
    return beta_Lambdax;

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:58:35
+// File generated at Mon 5 Mar 2018 18:25:01
 
 #include "NUTSMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -147,6 +147,25 @@ double NUTSMSSM_soft_parameters::calc_beta_BMu_2_loop(const Soft_traces& soft_tr
  * @return 3-loop beta function
  */
 double NUTSMSSM_soft_parameters::calc_beta_BMu_3_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_BMu;
+
+   beta_BMu = 0;
+
+
+   return beta_BMu;
+}
+
+/**
+ * Calculates the 4-loop beta function of BMu.
+ *
+ * @return 4-loop beta function
+ */
+double NUTSMSSM_soft_parameters::calc_beta_BMu_4_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

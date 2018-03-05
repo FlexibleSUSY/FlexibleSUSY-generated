@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:39:12
+// File generated at Mon 5 Mar 2018 17:39:53
 
 #ifndef HSSUSY_SPECTRUM_GENERATOR_INTERFACE_H
 #define HSSUSY_SPECTRUM_GENERATOR_INTERFACE_H
@@ -51,7 +51,9 @@ public:
    std::tuple<HSSUSY_slha<HSSUSY<T>>> get_models_slha() const
    { return std::make_tuple(HSSUSY_slha<HSSUSY<T> >(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.)); }
 
-   HSSUSY<T> get_model() const
+   const HSSUSY<T>& get_model() const
+   { return model; }
+   HSSUSY<T>& get_model()
    { return model; }
    HSSUSY_slha<HSSUSY<T>> get_model_slha() const
    { return HSSUSY_slha<HSSUSY<T>>(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.); }

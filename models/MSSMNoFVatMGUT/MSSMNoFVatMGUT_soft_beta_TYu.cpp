@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:11:40
+// File generated at Mon 5 Mar 2018 19:00:55
 
 #include "MSSMNoFVatMGUT_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -382,6 +382,25 @@ Eigen::Matrix<double,3,3> MSSMNoFVatMGUT_soft_parameters::calc_beta_TYu_3_loop(c
 
    beta_TYu = beta_TYu_1 + beta_TYu_2 + beta_TYu_3 + beta_TYu_4 +
       beta_TYu_5;
+
+
+   return beta_TYu;
+}
+
+/**
+ * Calculates the 4-loop beta function of TYu.
+ *
+ * @return 4-loop beta function
+ */
+Eigen::Matrix<double,3,3> MSSMNoFVatMGUT_soft_parameters::calc_beta_TYu_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_TYu;
+
+   beta_TYu = ZEROMATRIX(3,3);
 
 
    return beta_TYu;

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:34:01
+// File generated at Mon 5 Mar 2018 15:31:41
 
 #include "MRSSMEFTHiggs_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -85,6 +85,25 @@ double MRSSMEFTHiggs_susy_parameters::calc_beta_LamTD_2_loop(const Susy_traces& 
  * @return 3-loop beta function
  */
 double MRSSMEFTHiggs_susy_parameters::calc_beta_LamTD_3_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_LamTD;
+
+   beta_LamTD = 0;
+
+
+   return beta_LamTD;
+}
+
+/**
+ * Calculates the 4-loop beta function of LamTD.
+ *
+ * @return 4-loop beta function
+ */
+double MRSSMEFTHiggs_susy_parameters::calc_beta_LamTD_4_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:51:40
+// File generated at Mon 5 Mar 2018 18:29:55
 
 #include "UMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -115,6 +115,25 @@ Eigen::Matrix<double,3,3> UMSSM_susy_parameters::calc_beta_Yv_2_loop(const Susy_
  * @return 3-loop beta function
  */
 Eigen::Matrix<double,3,3> UMSSM_susy_parameters::calc_beta_Yv_3_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_Yv;
+
+   beta_Yv = ZEROMATRIX(3,3);
+
+
+   return beta_Yv;
+}
+
+/**
+ * Calculates the 4-loop beta function of Yv.
+ *
+ * @return 4-loop beta function
+ */
+Eigen::Matrix<double,3,3> UMSSM_susy_parameters::calc_beta_Yv_4_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

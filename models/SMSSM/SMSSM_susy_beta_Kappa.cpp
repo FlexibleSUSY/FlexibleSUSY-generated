@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:52:47
+// File generated at Mon 5 Mar 2018 18:19:12
 
 #include "SMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,6 +73,25 @@ double SMSSM_susy_parameters::calc_beta_Kappa_2_loop(const Susy_traces& susy_tra
  * @return 3-loop beta function
  */
 double SMSSM_susy_parameters::calc_beta_Kappa_3_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_Kappa;
+
+   beta_Kappa = 0;
+
+
+   return beta_Kappa;
+}
+
+/**
+ * Calculates the 4-loop beta function of Kappa.
+ *
+ * @return 4-loop beta function
+ */
+double SMSSM_susy_parameters::calc_beta_Kappa_4_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

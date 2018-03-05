@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:38:37
+// File generated at Mon 5 Mar 2018 17:44:24
 
 #ifndef SplitMSSM_SPECTRUM_GENERATOR_INTERFACE_H
 #define SplitMSSM_SPECTRUM_GENERATOR_INTERFACE_H
@@ -51,7 +51,9 @@ public:
    std::tuple<SplitMSSM_slha<SplitMSSM<T>>> get_models_slha() const
    { return std::make_tuple(SplitMSSM_slha<SplitMSSM<T> >(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.)); }
 
-   SplitMSSM<T> get_model() const
+   const SplitMSSM<T>& get_model() const
+   { return model; }
+   SplitMSSM<T>& get_model()
    { return model; }
    SplitMSSM_slha<SplitMSSM<T>> get_model_slha() const
    { return SplitMSSM_slha<SplitMSSM<T>>(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.); }

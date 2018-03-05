@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:39:11
+// File generated at Mon 5 Mar 2018 17:39:53
 
 #include "HSSUSY_info.hpp"
 
@@ -74,15 +74,16 @@ namespace HSSUSY_info {
       input_parameter_names = {"MSUSY", "M1Input", "M2Input", "M3Input", "MuInput"
       , "mAInput", "MEWSB", "AtInput", "AbInput", "AtauInput", "TanBeta",
       "LambdaLoopOrder", "TwoLoopAtAs", "TwoLoopAbAs", "TwoLoopAtAb",
-      "TwoLoopAtauAtau", "TwoLoopAtAt", "DeltaEFT", "msq2(0,0)", "msq2(0,1)",
-      "msq2(0,2)", "msq2(1,0)", "msq2(1,1)", "msq2(1,2)", "msq2(2,0)", "msq2(2,1)"
-      , "msq2(2,2)", "msu2(0,0)", "msu2(0,1)", "msu2(0,2)", "msu2(1,0)",
-      "msu2(1,1)", "msu2(1,2)", "msu2(2,0)", "msu2(2,1)", "msu2(2,2)", "msd2(0,0)"
-      , "msd2(0,1)", "msd2(0,2)", "msd2(1,0)", "msd2(1,1)", "msd2(1,2)",
-      "msd2(2,0)", "msd2(2,1)", "msd2(2,2)", "msl2(0,0)", "msl2(0,1)", "msl2(0,2)"
-      , "msl2(1,0)", "msl2(1,1)", "msl2(1,2)", "msl2(2,0)", "msl2(2,1)",
-      "msl2(2,2)", "mse2(0,0)", "mse2(0,1)", "mse2(0,2)", "mse2(1,0)", "mse2(1,1)"
-      , "mse2(1,2)", "mse2(2,0)", "mse2(2,1)", "mse2(2,2)"};
+      "TwoLoopAtauAtau", "TwoLoopAtAt", "DeltaEFT", "DeltaYt", "DeltaOS", "Qmatch"
+      , "msq2(0,0)", "msq2(0,1)", "msq2(0,2)", "msq2(1,0)", "msq2(1,1)",
+      "msq2(1,2)", "msq2(2,0)", "msq2(2,1)", "msq2(2,2)", "msu2(0,0)", "msu2(0,1)"
+      , "msu2(0,2)", "msu2(1,0)", "msu2(1,1)", "msu2(1,2)", "msu2(2,0)",
+      "msu2(2,1)", "msu2(2,2)", "msd2(0,0)", "msd2(0,1)", "msd2(0,2)", "msd2(1,0)"
+      , "msd2(1,1)", "msd2(1,2)", "msd2(2,0)", "msd2(2,1)", "msd2(2,2)",
+      "msl2(0,0)", "msl2(0,1)", "msl2(0,2)", "msl2(1,0)", "msl2(1,1)", "msl2(1,2)"
+      , "msl2(2,0)", "msl2(2,1)", "msl2(2,2)", "mse2(0,0)", "mse2(0,1)",
+      "mse2(0,2)", "mse2(1,0)", "mse2(1,1)", "mse2(1,2)", "mse2(2,0)", "mse2(2,1)"
+      , "mse2(2,2)"};
 
    const std::array<std::string, NUMBER_OF_EXTRA_PARAMETERS>
       extra_parameter_names = {};

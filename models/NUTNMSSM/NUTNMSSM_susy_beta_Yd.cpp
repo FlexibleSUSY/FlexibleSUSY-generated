@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:58:31
+// File generated at Mon 5 Mar 2018 18:33:54
 
 #include "NUTNMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -85,6 +85,25 @@ Eigen::Matrix<double,3,3> NUTNMSSM_susy_parameters::calc_beta_Yd_2_loop(const Su
  * @return 3-loop beta function
  */
 Eigen::Matrix<double,3,3> NUTNMSSM_susy_parameters::calc_beta_Yd_3_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_Yd;
+
+   beta_Yd = ZEROMATRIX(3,3);
+
+
+   return beta_Yd;
+}
+
+/**
+ * Calculates the 4-loop beta function of Yd.
+ *
+ * @return 4-loop beta function
+ */
+Eigen::Matrix<double,3,3> NUTNMSSM_susy_parameters::calc_beta_Yd_4_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

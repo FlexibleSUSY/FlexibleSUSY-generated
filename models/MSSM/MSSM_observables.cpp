@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:20:04
+// File generated at Mon 5 Mar 2018 19:10:05
 
 #include "MSSM_observables.hpp"
 #include "MSSM_mass_eigenstates.hpp"
@@ -87,27 +87,37 @@ void MSSM_observables::set(const Eigen::ArrayXd& vec)
 
 }
 
-MSSM_observables calculate_observables(const MSSM_mass_eigenstates& model,
+MSSM_observables calculate_observables(MSSM_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input,
                                               double scale)
 {
    auto model_at_scale = model;
 
-   if (scale > 0.)
-      model_at_scale.run_to(scale);
+   if (scale > 0.) {
+      try {
+         model_at_scale.run_to(scale);
+      } catch (const Error& e) {
+         model.get_problems().flag_thrown(e.what());
+         return MSSM_observables();
+      }
+   }
 
    return calculate_observables(model_at_scale, qedqcd, physical_input);
 }
 
-MSSM_observables calculate_observables(const MSSM_mass_eigenstates& model,
+MSSM_observables calculate_observables(MSSM_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input)
 {
    MSSM_observables observables;
 
-   
+   try {
+      
 
+   } catch (const Error& e) {
+      model.get_problems().flag_thrown(e.what());
+   }
 
    return observables;
 }

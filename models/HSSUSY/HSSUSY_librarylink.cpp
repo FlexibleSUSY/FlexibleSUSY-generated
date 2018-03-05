@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:51:07
+// File generated at Mon 5 Mar 2018 18:16:17
 
 #include "config.h"
 
@@ -40,9 +40,9 @@
 #include "standard_model_two_scale_model.hpp"
 #include "lowe.h"
 
-#include "mathlink.h"
+#include <mathlink.h>
 #include "mathlink_utils.hpp"
-#include "WolframLibrary.h"
+#include <WolframLibrary.h>
 
 #include <cmath>
 #include <iostream>
@@ -380,6 +380,7 @@ void Model_data::put_settings(MLINK link) const
    MLPutRuleTo(link, static_cast<int>(settings.get(Spectrum_generator_settings::higgs_3loop_correction_ab_as2)), "higgs3loopCorrectionAbAsAs");
    MLPutRuleTo(link, static_cast<int>(settings.get(Spectrum_generator_settings::higgs_3loop_correction_at2_as)), "higgs3loopCorrectionAtAtAs");
    MLPutRuleTo(link, static_cast<int>(settings.get(Spectrum_generator_settings::higgs_3loop_correction_at3)), "higgs3loopCorrectionAtAtAt");
+   MLPutRuleTo(link, static_cast<int>(settings.get(Spectrum_generator_settings::higgs_4loop_correction_at_as3)), "higgs4loopCorrectionAtAsAsAs");
    MLPutRuleTo(link, modsel.parameter_output_scale, "parameterOutputScale");
 
    MLEndPacket(link);
@@ -434,7 +435,7 @@ void Model_data::put_sm_input_parameters(MLINK link) const
 
 void Model_data::put_input_parameters(MLINK link) const
 {
-   MLPutFunction(link, "List", 23);
+   MLPutFunction(link, "List", 26);
 
    MLPutRuleTo(link, INPUTPARAMETER(MSUSY), "MSUSY");
    MLPutRuleTo(link, INPUTPARAMETER(M1Input), "M1Input");
@@ -454,6 +455,9 @@ void Model_data::put_input_parameters(MLINK link) const
    MLPutRuleTo(link, INPUTPARAMETER(TwoLoopAtauAtau), "TwoLoopAtauAtau");
    MLPutRuleTo(link, INPUTPARAMETER(TwoLoopAtAt), "TwoLoopAtAt");
    MLPutRuleTo(link, INPUTPARAMETER(DeltaEFT), "DeltaEFT");
+   MLPutRuleTo(link, INPUTPARAMETER(DeltaYt), "DeltaYt");
+   MLPutRuleTo(link, INPUTPARAMETER(DeltaOS), "DeltaOS");
+   MLPutRuleTo(link, INPUTPARAMETER(Qmatch), "Qmatch");
    MLPutRuleTo(link, INPUTPARAMETER(msq2), "msq2");
    MLPutRuleTo(link, INPUTPARAMETER(msu2), "msu2");
    MLPutRuleTo(link, INPUTPARAMETER(msd2), "msd2");
@@ -951,7 +955,7 @@ Model_data make_data(const Dynamic_array_view<Element_t>& pars)
    const Index_t n_settings = Spectrum_generator_settings::NUMBER_OF_OPTIONS,
       n_sm_parameters = softsusy::NUMBER_OF_LOW_ENERGY_INPUT_PARAMETERS
                         + Physical_input::NUMBER_OF_INPUT_PARAMETERS,
-      n_input_pars = 63;
+      n_input_pars = 66;
    const Index_t n_total = n_settings + n_sm_parameters + n_input_pars;
 
    if (pars.size() != n_total)
@@ -989,6 +993,7 @@ Model_data make_data(const Dynamic_array_view<Element_t>& pars)
    settings.set(Spectrum_generator_settings::higgs_3loop_correction_ab_as2, pars[c++]);
    settings.set(Spectrum_generator_settings::higgs_3loop_correction_at2_as, pars[c++]);
    settings.set(Spectrum_generator_settings::higgs_3loop_correction_at3, pars[c++]);
+   settings.set(Spectrum_generator_settings::higgs_4loop_correction_at_as3, pars[c++]);
 
    SLHA_io::Modsel modsel;
    modsel.parameter_output_scale = pars[c++];
@@ -1066,6 +1071,9 @@ Model_data make_data(const Dynamic_array_view<Element_t>& pars)
    INPUTPARAMETER(TwoLoopAtauAtau) = pars[c++];
    INPUTPARAMETER(TwoLoopAtAt) = pars[c++];
    INPUTPARAMETER(DeltaEFT) = pars[c++];
+   INPUTPARAMETER(DeltaYt) = pars[c++];
+   INPUTPARAMETER(DeltaOS) = pars[c++];
+   INPUTPARAMETER(Qmatch) = pars[c++];
    INPUTPARAMETER(msq2(0,0)) = pars[c++];
    INPUTPARAMETER(msq2(0,1)) = pars[c++];
    INPUTPARAMETER(msq2(0,2)) = pars[c++];

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:03:45
+// File generated at Mon 5 Mar 2018 18:46:12
 
 #include "MSSMRHN_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -144,6 +144,25 @@ double MSSMRHN_soft_parameters::calc_beta_BMu_2_loop(const Soft_traces& soft_tra
  * @return 3-loop beta function
  */
 double MSSMRHN_soft_parameters::calc_beta_BMu_3_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_BMu;
+
+   beta_BMu = 0;
+
+
+   return beta_BMu;
+}
+
+/**
+ * Calculates the 4-loop beta function of BMu.
+ *
+ * @return 4-loop beta function
+ */
+double MSSMRHN_soft_parameters::calc_beta_BMu_4_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

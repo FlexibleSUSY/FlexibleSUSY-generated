@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:34:06
+// File generated at Mon 5 Mar 2018 15:31:46
 
 #include "MRSSMEFTHiggs_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -74,6 +74,25 @@ double MRSSMEFTHiggs_susy_parameters::calc_beta_vT_2_loop(const Susy_traces& sus
  * @return 3-loop beta function
  */
 double MRSSMEFTHiggs_susy_parameters::calc_beta_vT_3_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_vT;
+
+   beta_vT = 0;
+
+
+   return beta_vT;
+}
+
+/**
+ * Calculates the 4-loop beta function of vT.
+ *
+ * @return 4-loop beta function
+ */
+double MRSSMEFTHiggs_susy_parameters::calc_beta_vT_4_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

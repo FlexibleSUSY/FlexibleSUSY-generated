@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:15:45
+// File generated at Mon 5 Mar 2018 19:04:14
 
 #ifndef MSSMatMGUT_OBSERVABLES_H
 #define MSSMatMGUT_OBSERVABLES_H
@@ -47,11 +47,11 @@ struct MSSMatMGUT_observables {
 };
 
 MSSMatMGUT_observables calculate_observables(
-   const MSSMatMGUT_mass_eigenstates&, const softsusy::QedQcd&,
+   MSSMatMGUT_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&);
 
 MSSMatMGUT_observables calculate_observables(
-   const MSSMatMGUT_mass_eigenstates&, const softsusy::QedQcd&,
+   MSSMatMGUT_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&, double scale);
 
 } // namespace flexiblesusy

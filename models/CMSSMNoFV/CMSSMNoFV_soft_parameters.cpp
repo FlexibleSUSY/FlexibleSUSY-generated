@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:10:02
+// File generated at Mon 5 Mar 2018 18:54:29
 
 #include "CMSSMNoFV_soft_parameters.hpp"
 #include "config.h"
@@ -195,6 +195,9 @@ CMSSMNoFV_soft_parameters CMSSMNoFV_soft_parameters::calc_beta(int loops) const
             beta_MassG += calc_beta_MassG_3_loop(TRACE_STRUCT);
          #endif
 
+            if (loops > 3) {
+
+            }
          }
       }
    }

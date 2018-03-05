@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:18:29
+// File generated at Mon 5 Mar 2018 19:08:21
 
 #include "CMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -88,6 +88,25 @@ double CMSSM_susy_parameters::calc_beta_g3_3_loop(const Susy_traces& susy_traces
       g3) - 18*Sqr(g2)*(-2*(traceAdjYdYd + traceAdjYuYu) + Sqr(g3)) - 6*(6*
       traceAdjYdYdAdjYdYd + 3*traceAdjYdYd*traceAdjYeYe + 4*traceAdjYuYuAdjYdYd
       + 6*traceAdjYuYuAdjYuYu + 9*Sqr(traceAdjYdYd) + 9*Sqr(traceAdjYuYu)))));
+
+
+   return beta_g3;
+}
+
+/**
+ * Calculates the 4-loop beta function of g3.
+ *
+ * @return 4-loop beta function
+ */
+double CMSSM_susy_parameters::calc_beta_g3_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_g3;
+
+   beta_g3 = 0;
 
 
    return beta_g3;

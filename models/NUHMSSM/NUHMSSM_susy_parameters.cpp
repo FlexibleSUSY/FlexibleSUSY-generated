@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:05:01
+// File generated at Mon 5 Mar 2018 18:47:15
 
 #include "NUHMSSM_susy_parameters.hpp"
 #include "config.h"
@@ -147,6 +147,9 @@ NUHMSSM_susy_parameters NUHMSSM_susy_parameters::calc_beta(int loops) const
             beta_g3 += calc_beta_g3_3_loop(TRACE_STRUCT);
          #endif
 
+            if (loops > 3) {
+
+            }
          }
       }
    }

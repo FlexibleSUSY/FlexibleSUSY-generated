@@ -2,6 +2,10 @@ DIR          := models/SplitMSSM
 MODNAME      := SplitMSSM
 SARAH_MODEL  := SplitMSSM
 WITH_$(MODNAME) := yes
+MODSplitMSSM_MOD := SM SplitMSSM
+MODSplitMSSM_DEP := $(patsubst %,model_specific/%,$(MODSplitMSSM_MOD))
+MODSplitMSSM_INC := $(patsubst %,-Imodel_specific/%,$(MODSplitMSSM_MOD))
+MODSplitMSSM_LIB := $(foreach M,$(MODSplitMSSM_MOD),model_specific/$M/libmodel_specific_$M$(MODULE_LIBEXT))
 
 SplitMSSM_INSTALL_DIR := $(INSTALL_DIR)/$(DIR)
 
@@ -266,7 +270,7 @@ $(METACODE_STAMP_SplitMSSM):
 endif
 
 $(LIBSplitMSSM_DEP) $(EXESplitMSSM_DEP) $(LLSplitMSSM_DEP) $(LIBSplitMSSM_OBJ) $(EXESplitMSSM_OBJ) $(LLSplitMSSM_OBJ) $(LLSplitMSSM_LIB): \
-	CPPFLAGS += $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODSplitMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBSplitMSSM_DEP) $(EXESplitMSSM_DEP) $(LLSplitMSSM_DEP) $(LIBSplitMSSM_OBJ) $(EXESplitMSSM_OBJ) $(LLSplitMSSM_OBJ) $(LLSplitMSSM_LIB): \
@@ -274,21 +278,22 @@ $(LIBSplitMSSM_DEP) $(EXESplitMSSM_DEP) $(LLSplitMSSM_DEP) $(LIBSplitMSSM_OBJ) $
 endif
 
 $(LLSplitMSSM_OBJ) $(LLSplitMSSM_LIB): \
-	CPPFLAGS += $(shell $(MATH_INC_PATHS) --math-cmd="$(MATH)" -I --librarylink --mathlink)
+	CPPFLAGS += $(LLFLAGS)
 
 $(LIBSplitMSSM): $(LIBSplitMSSM_OBJ)
 		$(MODULE_MAKE_LIB_CMD) $@ $^
 
-$(DIR)/%.x: $(DIR)/%.o $(LIBSplitMSSM) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+$(DIR)/%.x: $(DIR)/%.o $(LIBSplitMSSM) $(MODSplitMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
 		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
-$(LLSplitMSSM_LIB): $(LLSplitMSSM_OBJ) $(LIBSplitMSSM) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+$(LLSplitMSSM_LIB): $(LLSplitMSSM_OBJ) $(LIBSplitMSSM) $(MODSplitMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
 
 ALLDEP += $(LIBSplitMSSM_DEP) $(EXESplitMSSM_DEP)
 ALLSRC += $(LIBSplitMSSM_SRC) $(EXESplitMSSM_SRC)
 ALLLIB += $(LIBSplitMSSM)
 ALLEXE += $(EXESplitMSSM_EXE)
+ALLMODDEP += $(MODSplitMSSM_DEP)
 
 ifeq ($(ENABLE_LIBRARYLINK),yes)
 ALLDEP += $(LLSplitMSSM_DEP)

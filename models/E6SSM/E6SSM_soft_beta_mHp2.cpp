@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:52:39
+// File generated at Mon 5 Mar 2018 17:58:49
 
 #include "E6SSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -120,6 +120,25 @@ double E6SSM_soft_parameters::calc_beta_mHp2_2_loop(const Soft_traces& soft_trac
  * @return 3-loop beta function
  */
 double E6SSM_soft_parameters::calc_beta_mHp2_3_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_mHp2;
+
+   beta_mHp2 = 0;
+
+
+   return beta_mHp2;
+}
+
+/**
+ * Calculates the 4-loop beta function of mHp2.
+ *
+ * @return 4-loop beta function
+ */
+double E6SSM_soft_parameters::calc_beta_mHp2_4_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

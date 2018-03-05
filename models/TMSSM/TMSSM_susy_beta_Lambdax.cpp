@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:41:30
+// File generated at Mon 5 Mar 2018 17:54:57
 
 #include "TMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -84,6 +84,25 @@ double TMSSM_susy_parameters::calc_beta_Lambdax_2_loop(const Susy_traces& susy_t
  * @return 3-loop beta function
  */
 double TMSSM_susy_parameters::calc_beta_Lambdax_3_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_Lambdax;
+
+   beta_Lambdax = 0;
+
+
+   return beta_Lambdax;
+}
+
+/**
+ * Calculates the 4-loop beta function of Lambdax.
+ *
+ * @return 4-loop beta function
+ */
+double TMSSM_susy_parameters::calc_beta_Lambdax_4_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

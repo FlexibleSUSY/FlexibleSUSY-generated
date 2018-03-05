@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:13:17
+// File generated at Mon 5 Mar 2018 19:01:25
 
 #include "MSSMNoFV_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -92,6 +92,25 @@ double MSSMNoFV_susy_parameters::calc_beta_g1_3_loop(const Susy_traces& susy_tra
       42*traceAdjYdYd*traceAdjYeYe + 27*traceAdjYeYeAdjYeYe + 29*
       traceAdjYuYuAdjYdYd + 42*traceAdjYuYuAdjYuYu + 18*Sqr(traceAdjYdYd) + 12*
       Sqr(traceAdjYeYe) + 45*Sqr(traceAdjYuYu))))));
+
+
+   return beta_g1;
+}
+
+/**
+ * Calculates the 4-loop beta function of g1.
+ *
+ * @return 4-loop beta function
+ */
+double MSSMNoFV_susy_parameters::calc_beta_g1_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_g1;
+
+   beta_g1 = 0;
 
 
    return beta_g1;

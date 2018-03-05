@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:45:07
+// File generated at Mon 5 Mar 2018 18:09:28
 
 #ifndef TMSSM_OBSERVABLES_H
 #define TMSSM_OBSERVABLES_H
@@ -52,11 +52,11 @@ struct TMSSM_observables {
 };
 
 TMSSM_observables calculate_observables(
-   const TMSSM_mass_eigenstates&, const softsusy::QedQcd&,
+   TMSSM_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&);
 
 TMSSM_observables calculate_observables(
-   const TMSSM_mass_eigenstates&, const softsusy::QedQcd&,
+   TMSSM_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&, double scale);
 
 } // namespace flexiblesusy

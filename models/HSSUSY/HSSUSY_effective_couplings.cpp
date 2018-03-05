@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:51:00
+// File generated at Mon 5 Mar 2018 18:16:11
 
 #include "HSSUSY_effective_couplings.hpp"
 

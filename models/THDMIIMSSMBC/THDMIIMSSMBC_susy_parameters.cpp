@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:37:17
+// File generated at Mon 5 Mar 2018 17:30:27
 
 #include "THDMIIMSSMBC_susy_parameters.hpp"
 #include "config.h"
@@ -125,6 +125,9 @@ THDMIIMSSMBC_susy_parameters THDMIIMSSMBC_susy_parameters::calc_beta(int loops) 
          #else
          #endif
 
+            if (loops > 3) {
+
+            }
          }
       }
    }

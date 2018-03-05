@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:53:25
+// File generated at Mon 5 Mar 2018 18:31:21
 
 #include "UMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -227,6 +227,25 @@ Eigen::Matrix<double,3,3> UMSSM_soft_parameters::calc_beta_ml2_2_loop(const Soft
  * @return 3-loop beta function
  */
 Eigen::Matrix<double,3,3> UMSSM_soft_parameters::calc_beta_ml2_3_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_ml2;
+
+   beta_ml2 = ZEROMATRIX(3,3);
+
+
+   return beta_ml2;
+}
+
+/**
+ * Calculates the 4-loop beta function of ml2.
+ *
+ * @return 4-loop beta function
+ */
+Eigen::Matrix<double,3,3> UMSSM_soft_parameters::calc_beta_ml2_4_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

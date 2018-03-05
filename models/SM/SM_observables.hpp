@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:39:40
+// File generated at Mon 5 Mar 2018 17:45:16
 
 #ifndef SM_OBSERVABLES_H
 #define SM_OBSERVABLES_H
@@ -50,11 +50,11 @@ struct SM_observables {
 };
 
 SM_observables calculate_observables(
-   const SM_mass_eigenstates&, const softsusy::QedQcd&,
+   SM_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&);
 
 SM_observables calculate_observables(
-   const SM_mass_eigenstates&, const softsusy::QedQcd&,
+   SM_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&, double scale);
 
 } // namespace flexiblesusy

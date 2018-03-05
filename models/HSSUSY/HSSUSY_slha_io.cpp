@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:39:11
+// File generated at Mon 5 Mar 2018 17:39:53
 
 #include "HSSUSY_slha_io.hpp"
 #include "HSSUSY_input_parameters.hpp"
@@ -40,8 +40,6 @@
 #define EXTRAPARAMETER(p) model.get_##p()
 #define DEFINE_PHYSICAL_PARAMETER(p) decltype(LOCALPHYSICAL(p)) p;
 #define LowEnergyConstant(p) Electroweak_constants::p
-
-using namespace softsusy;
 
 namespace flexiblesusy {
 
@@ -89,6 +87,9 @@ void HSSUSY_slha_io::set_extpar(const HSSUSY_input_parameters& input)
    extpar << FORMAT_ELEMENT(104, input.TwoLoopAtauAtau, "TwoLoopAtauAtau");
    extpar << FORMAT_ELEMENT(105, input.TwoLoopAtAt, "TwoLoopAtAt");
    extpar << FORMAT_ELEMENT(200, input.DeltaEFT, "DeltaEFT");
+   extpar << FORMAT_ELEMENT(201, input.DeltaYt, "DeltaYt");
+   extpar << FORMAT_ELEMENT(202, input.DeltaOS, "DeltaOS");
+   extpar << FORMAT_ELEMENT(203, input.Qmatch, "Qmatch");
    slha_io.set_block(extpar);
 
 }
@@ -318,6 +319,83 @@ void HSSUSY_slha_io::set_pmns(
    slha_io.set_block("IMVPMNS", pmns_matrix.imag(), "Im(PMNS)", scale);
 }
 
+void HSSUSY_slha_io::set_model_parameters(const standard_model::Standard_model& model)
+{
+   {
+      std::ostringstream block;
+      block << "Block SMGAUGE Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(1, (model.get_g1() * standard_model_info::normalization_g1), "gY")
+            << FORMAT_ELEMENT(2, (model.get_g2()), "g2")
+            << FORMAT_ELEMENT(3, (model.get_g3()), "g3")
+      ;
+      slha_io.set_block(block);
+   }
+   slha_io.set_block("SMYu", ToMatrix(model.get_Yu()), "Yu", model.get_scale());
+   slha_io.set_block("SMYd", ToMatrix(model.get_Yd()), "Yd", model.get_scale());
+   slha_io.set_block("SMYe", ToMatrix(model.get_Ye()), "Ye", model.get_scale());
+   {
+      std::ostringstream block;
+      block << "Block SMSM Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(1, (model.get_mu2()), "mu2")
+            << FORMAT_ELEMENT(2, (model.get_Lambdax()), "Lambdax")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block SMHMIX Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(3, (model.get_v()), "v")
+      ;
+      slha_io.set_block(block);
+   }
+}
+
+void HSSUSY_slha_io::set_mass(const standard_model::Standard_model_physical& physical)
+{
+   std::ostringstream mass;
+
+   mass << "Block SMMASS\n"
+      << FORMAT_MASS(24, physical.MVWp, "VWp")
+      << FORMAT_MASS(21, physical.MVG, "VG")
+      << FORMAT_MASS(12, physical.MFv(0), "Fv(1)")
+      << FORMAT_MASS(14, physical.MFv(1), "Fv(2)")
+      << FORMAT_MASS(16, physical.MFv(2), "Fv(3)")
+      << FORMAT_MASS(25, physical.Mhh, "hh")
+      << FORMAT_MASS(1, physical.MFd(0), "Fd(1)")
+      << FORMAT_MASS(3, physical.MFd(1), "Fd(2)")
+      << FORMAT_MASS(5, physical.MFd(2), "Fd(3)")
+      << FORMAT_MASS(2, physical.MFu(0), "Fu(1)")
+      << FORMAT_MASS(4, physical.MFu(1), "Fu(2)")
+      << FORMAT_MASS(6, physical.MFu(2), "Fu(3)")
+      << FORMAT_MASS(11, physical.MFe(0), "Fe(1)")
+      << FORMAT_MASS(13, physical.MFe(1), "Fe(2)")
+      << FORMAT_MASS(15, physical.MFe(2), "Fe(3)")
+      << FORMAT_MASS(22, physical.MVP, "VP")
+      << FORMAT_MASS(23, physical.MVZ, "VZ")
+      ;
+
+   slha_io.set_block(mass);
+}
+
+void HSSUSY_slha_io::set_mixing_matrices(const standard_model::Standard_model_physical& physical)
+{
+   slha_io.set_block("SMUULMIX", physical.Vu, "Vu");
+   slha_io.set_block("SMUDLMIX", physical.Vd, "Vd");
+   slha_io.set_block("SMUURMIX", physical.Uu, "Uu");
+   slha_io.set_block("SMUDRMIX", physical.Ud, "Ud");
+   slha_io.set_block("SMUELMIX", physical.Ve, "Ve");
+   slha_io.set_block("SMUERMIX", physical.Ue, "Ue");
+}
+
+void HSSUSY_slha_io::set_spectrum(const standard_model::Standard_model& model)
+{
+   const auto& physical = model.get_physical();
+
+   set_model_parameters(model);
+   set_mass(physical);
+   set_mixing_matrices(physical);
+}
+
 /**
  * Write SLHA object to given output.  If output == "-", then the SLHA
  * object is written to std::cout.  Otherwise, output is interpreted
@@ -512,6 +590,9 @@ void HSSUSY_slha_io::fill_extpar_tuple(HSSUSY_input_parameters& input,
    case 104: input.TwoLoopAtauAtau = value; break;
    case 105: input.TwoLoopAtAt = value; break;
    case 200: input.DeltaEFT = value; break;
+   case 201: input.DeltaYt = value; break;
+   case 202: input.DeltaOS = value; break;
+   case 203: input.Qmatch = value; break;
    default: WARNING("Unrecognized entry in block EXTPAR: " << key); break;
    }
 

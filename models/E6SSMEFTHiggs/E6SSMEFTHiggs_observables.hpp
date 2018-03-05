@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:47:04
+// File generated at Mon 5 Mar 2018 17:44:01
 
 #ifndef E6SSMEFTHiggs_OBSERVABLES_H
 #define E6SSMEFTHiggs_OBSERVABLES_H
@@ -35,7 +35,7 @@ class E6SSMEFTHiggs_mass_eigenstates;
 class Physical_input;
 
 struct E6SSMEFTHiggs_observables {
-   static const int NUMBER_OF_OBSERVABLES = 17;
+   static const int NUMBER_OF_OBSERVABLES = 1;
 
    E6SSMEFTHiggs_observables();
    Eigen::ArrayXd get() const; ///< returns vector of all observables
@@ -44,19 +44,15 @@ struct E6SSMEFTHiggs_observables {
    void set(const Eigen::ArrayXd&); ///< sets all observables from given vector
 
    double a_muon; ///< a_muon = (g-2)/2 of the muon (calculated with FlexibleSUSY)
-   Eigen::Array<std::complex<double>,3,1> eff_cp_higgs_photon_photon; ///< effective H-Photon-Photon coupling
-   Eigen::Array<std::complex<double>,3,1> eff_cp_higgs_gluon_gluon; ///< effective H-Gluon-Gluon coupling
-   std::complex<double> eff_cp_pseudoscalar_photon_photon; ///< effective A-Photon-Photon coupling
-   std::complex<double> eff_cp_pseudoscalar_gluon_gluon; ///< effective A-Gluon-Gluon coupling
 
 };
 
 E6SSMEFTHiggs_observables calculate_observables(
-   const E6SSMEFTHiggs_mass_eigenstates&, const softsusy::QedQcd&,
+   E6SSMEFTHiggs_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&);
 
 E6SSMEFTHiggs_observables calculate_observables(
-   const E6SSMEFTHiggs_mass_eigenstates&, const softsusy::QedQcd&,
+   E6SSMEFTHiggs_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&, double scale);
 
 } // namespace flexiblesusy

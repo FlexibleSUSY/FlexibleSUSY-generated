@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:03:37
+// File generated at Mon 5 Mar 2018 18:46:05
 
 #include "MSSMRHN_soft_parameters.hpp"
 #include "config.h"
@@ -135,6 +135,9 @@ MSSMRHN_soft_parameters MSSMRHN_soft_parameters::calc_beta(int loops) const
          #else
          #endif
 
+            if (loops > 3) {
+
+            }
          }
       }
    }

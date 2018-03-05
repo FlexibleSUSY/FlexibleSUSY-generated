@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:12:11
+// File generated at Mon 5 Mar 2018 18:56:12
 
 #ifndef CMSSMNoFV_INPUT_PARAMETERS_H
 #define CMSSMNoFV_INPUT_PARAMETERS_H
@@ -32,6 +32,7 @@ struct CMSSMNoFV_input_parameters {
    double TanBeta{};
    int SignMu{1};
    double Azero{};
+   double Mlow{};
 
 
    Eigen::ArrayXd get() const;

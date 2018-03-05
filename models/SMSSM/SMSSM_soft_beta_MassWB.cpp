@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:53:35
+// File generated at Mon 5 Mar 2018 18:19:53
 
 #include "SMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -112,6 +112,25 @@ double SMSSM_soft_parameters::calc_beta_MassWB_2_loop(const Soft_traces& soft_tr
  * @return 3-loop beta function
  */
 double SMSSM_soft_parameters::calc_beta_MassWB_3_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MassWB;
+
+   beta_MassWB = 0;
+
+
+   return beta_MassWB;
+}
+
+/**
+ * Calculates the 4-loop beta function of MassWB.
+ *
+ * @return 4-loop beta function
+ */
+double SMSSM_soft_parameters::calc_beta_MassWB_4_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

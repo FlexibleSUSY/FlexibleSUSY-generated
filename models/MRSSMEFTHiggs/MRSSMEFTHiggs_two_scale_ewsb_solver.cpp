@@ -16,15 +16,15 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:40:02
+// File generated at Mon 5 Mar 2018 16:22:02
 
 /**
  * @file MRSSMEFTHiggs_two_scale_ewsb_solver.cpp
  *
  * @brief implementation of EWSB solver for two-scale iteration
  *
- * This file was generated at Fri 20 Oct 2017 08:40:02 with FlexibleSUSY
- * 2.0.1 (git commit: 5296739235bd0ef7020eda218da9c069270c3f45) and SARAH 4.12.0 .
+ * This file was generated at Mon 5 Mar 2018 16:22:02 with FlexibleSUSY
+ * 2.1.0 (git commit: 8f20f6c9c42c159c1588fbc0bb3e15ce5ab6ace3) and SARAH 4.12.3 .
  */
 
 #include "MRSSMEFTHiggs_two_scale_ewsb_solver.hpp"
@@ -332,10 +332,10 @@ int CLASSNAME::solve_tree_level(MRSSMEFTHiggs_mass_eigenstates& model)
       model.set_vS(vS);
       model.set_mHd2(mHd2);
       model.set_mHu2(mHu2);
-      model.get_problems().unflag_no_ewsb();
+      model.get_problems().unflag_no_ewsb_tree_level();
    } else {
       error = EWSB_solver::FAIL;
-      model.get_problems().flag_no_ewsb();
+      model.get_problems().flag_no_ewsb_tree_level();
    }
 
    return error;

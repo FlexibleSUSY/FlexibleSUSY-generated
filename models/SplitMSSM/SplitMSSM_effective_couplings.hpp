@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:38:45
+// File generated at Mon 5 Mar 2018 17:44:31
 
 #ifndef SplitMSSM_EFFECTIVE_COUPLINGS_H
 #define SplitMSSM_EFFECTIVE_COUPLINGS_H

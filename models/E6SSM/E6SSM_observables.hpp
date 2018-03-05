@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:01:27
+// File generated at Mon 5 Mar 2018 18:05:26
 
 #ifndef E6SSM_OBSERVABLES_H
 #define E6SSM_OBSERVABLES_H
@@ -52,11 +52,11 @@ struct E6SSM_observables {
 };
 
 E6SSM_observables calculate_observables(
-   const E6SSM_mass_eigenstates&, const softsusy::QedQcd&,
+   E6SSM_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&);
 
 E6SSM_observables calculate_observables(
-   const E6SSM_mass_eigenstates&, const softsusy::QedQcd&,
+   E6SSM_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&, double scale);
 
 } // namespace flexiblesusy

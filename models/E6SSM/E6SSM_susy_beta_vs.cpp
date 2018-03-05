@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:51:19
+// File generated at Mon 5 Mar 2018 17:57:42
 
 #include "E6SSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -87,6 +87,25 @@ double E6SSM_susy_parameters::calc_beta_vs_2_loop(const Susy_traces& susy_traces
  * @return 3-loop beta function
  */
 double E6SSM_susy_parameters::calc_beta_vs_3_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_vs;
+
+   beta_vs = 0;
+
+
+   return beta_vs;
+}
+
+/**
+ * Calculates the 4-loop beta function of vs.
+ *
+ * @return 4-loop beta function
+ */
+double E6SSM_susy_parameters::calc_beta_vs_4_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

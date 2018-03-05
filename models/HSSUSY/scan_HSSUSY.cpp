@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:51:07
+// File generated at Mon 5 Mar 2018 18:16:17
 
 #include "config.h"
 
@@ -63,6 +63,9 @@ void print_usage()
       "  --TwoLoopAtauAtau=<value>\n"
       "  --TwoLoopAtAt=<value>\n"
       "  --DeltaEFT=<value>\n"
+      "  --DeltaYt=<value>\n"
+      "  --DeltaOS=<value>\n"
+      "  --Qmatch=<value>\n"
 
       "  --solver-type=<value>             an integer corresponding\n"
       "                                    to the solver type to use\n"
@@ -129,6 +132,15 @@ void set_command_line_parameters(const Dynamic_array_view<char*>& args,
          continue;
 
       if(Command_line_options::get_parameter_value(option, "--DeltaEFT=", input.DeltaEFT))
+         continue;
+
+      if(Command_line_options::get_parameter_value(option, "--DeltaYt=", input.DeltaYt))
+         continue;
+
+      if(Command_line_options::get_parameter_value(option, "--DeltaOS=", input.DeltaOS))
+         continue;
+
+      if(Command_line_options::get_parameter_value(option, "--Qmatch=", input.Qmatch))
          continue;
 
       

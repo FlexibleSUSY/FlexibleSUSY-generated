@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:52:15
+// File generated at Mon 5 Mar 2018 17:53:19
 
 /**
  * @file MRSSM_cxx_diagrams.hpp
  *
- * This file was generated at Fri 20 Oct 2017 08:52:15 with FlexibleSUSY
- * 2.0.1 and SARAH 4.12.0 .
+ * This file was generated at Mon 5 Mar 2018 17:53:19 with FlexibleSUSY
+ * 2.1.0 and SARAH 4.12.3 .
  */
 
 #ifndef MRSSM_CXXDIAGRAMS_H

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:38:20
+// File generated at Mon 5 Mar 2018 17:34:58
 
 #ifndef THDMIIMSSMBC_OBSERVABLES_H
 #define THDMIIMSSMBC_OBSERVABLES_H
@@ -52,11 +52,11 @@ struct THDMIIMSSMBC_observables {
 };
 
 THDMIIMSSMBC_observables calculate_observables(
-   const THDMIIMSSMBC_mass_eigenstates&, const softsusy::QedQcd&,
+   THDMIIMSSMBC_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&);
 
 THDMIIMSSMBC_observables calculate_observables(
-   const THDMIIMSSMBC_mass_eigenstates&, const softsusy::QedQcd&,
+   THDMIIMSSMBC_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&, double scale);
 
 } // namespace flexiblesusy

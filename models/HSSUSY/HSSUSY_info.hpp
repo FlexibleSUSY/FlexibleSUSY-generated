@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:39:11
+// File generated at Mon 5 Mar 2018 17:39:53
 
 #ifndef HSSUSY_INFO_H
 #define HSSUSY_INFO_H
@@ -61,13 +61,13 @@ namespace HSSUSY_info {
    enum Input_parameters : int { MSUSY, M1Input, M2Input, M3Input, MuInput,
       mAInput, MEWSB, AtInput, AbInput, AtauInput, TanBeta, LambdaLoopOrder,
       TwoLoopAtAs, TwoLoopAbAs, TwoLoopAtAb, TwoLoopAtauAtau, TwoLoopAtAt,
-      DeltaEFT, msq20_0, msq20_1, msq20_2, msq21_0, msq21_1, msq21_2, msq22_0,
-      msq22_1, msq22_2, msu20_0, msu20_1, msu20_2, msu21_0, msu21_1, msu21_2,
-      msu22_0, msu22_1, msu22_2, msd20_0, msd20_1, msd20_2, msd21_0, msd21_1,
-      msd21_2, msd22_0, msd22_1, msd22_2, msl20_0, msl20_1, msl20_2, msl21_0,
-      msl21_1, msl21_2, msl22_0, msl22_1, msl22_2, mse20_0, mse20_1, mse20_2,
-      mse21_0, mse21_1, mse21_2, mse22_0, mse22_1, mse22_2,
-      NUMBER_OF_INPUT_PARAMETERS };
+      DeltaEFT, DeltaYt, DeltaOS, Qmatch, msq20_0, msq20_1, msq20_2, msq21_0,
+      msq21_1, msq21_2, msq22_0, msq22_1, msq22_2, msu20_0, msu20_1, msu20_2,
+      msu21_0, msu21_1, msu21_2, msu22_0, msu22_1, msu22_2, msd20_0, msd20_1,
+      msd20_2, msd21_0, msd21_1, msd21_2, msd22_0, msd22_1, msd22_2, msl20_0,
+      msl20_1, msl20_2, msl21_0, msl21_1, msl21_2, msl22_0, msl22_1, msl22_2,
+      mse20_0, mse20_1, mse20_2, mse21_0, mse21_1, mse21_2, mse22_0, mse22_1,
+      mse22_2, NUMBER_OF_INPUT_PARAMETERS };
 
    enum Extra_parameters : int { NUMBER_OF_EXTRA_PARAMETERS };
 

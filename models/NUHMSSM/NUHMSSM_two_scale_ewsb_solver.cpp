@@ -16,15 +16,15 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:08:37
+// File generated at Mon 5 Mar 2018 18:50:24
 
 /**
  * @file NUHMSSM_two_scale_ewsb_solver.cpp
  *
  * @brief implementation of EWSB solver for two-scale iteration
  *
- * This file was generated at Fri 20 Oct 2017 09:08:37 with FlexibleSUSY
- * 2.0.1 (git commit: 5296739235bd0ef7020eda218da9c069270c3f45) and SARAH 4.12.0 .
+ * This file was generated at Mon 5 Mar 2018 18:50:24 with FlexibleSUSY
+ * 2.1.0 (git commit: 8f20f6c9c42c159c1588fbc0bb3e15ce5ab6ace3) and SARAH 4.12.3 .
  */
 
 #include "NUHMSSM_two_scale_ewsb_solver.hpp"
@@ -235,10 +235,10 @@ int CLASSNAME::solve_tree_level(NUHMSSM_mass_eigenstates& model)
    if (is_finite) {
       model.set_BMu(BMu);
       model.set_Mu(Mu);
-      model.get_problems().unflag_no_ewsb();
+      model.get_problems().unflag_no_ewsb_tree_level();
    } else {
       error = EWSB_solver::FAIL;
-      model.get_problems().flag_no_ewsb();
+      model.get_problems().flag_no_ewsb_tree_level();
    }
 
    return error;

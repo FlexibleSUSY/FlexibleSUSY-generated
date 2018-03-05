@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:38:53
+// File generated at Mon 5 Mar 2018 17:38:29
 
 #ifndef HSSUSY_soft_parameters_H
 #define HSSUSY_soft_parameters_H
@@ -82,9 +82,11 @@ private:
    double calc_beta_mu2_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_mu2_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_mu2_3_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_mu2_4_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_v_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_v_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_v_3_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_v_4_loop(const TRACE_STRUCT_TYPE&) const;
 
 };
 

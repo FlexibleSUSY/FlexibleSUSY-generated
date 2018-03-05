@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:20:17
+// File generated at Mon 5 Mar 2018 19:10:26
 
 #include "config.h"
 
@@ -40,9 +40,9 @@
 #include "standard_model_two_scale_model.hpp"
 #include "lowe.h"
 
-#include "mathlink.h"
+#include <mathlink.h>
 #include "mathlink_utils.hpp"
-#include "WolframLibrary.h"
+#include <WolframLibrary.h>
 
 #include <cmath>
 #include <iostream>
@@ -380,6 +380,7 @@ void Model_data::put_settings(MLINK link) const
    MLPutRuleTo(link, static_cast<int>(settings.get(Spectrum_generator_settings::higgs_3loop_correction_ab_as2)), "higgs3loopCorrectionAbAsAs");
    MLPutRuleTo(link, static_cast<int>(settings.get(Spectrum_generator_settings::higgs_3loop_correction_at2_as)), "higgs3loopCorrectionAtAtAs");
    MLPutRuleTo(link, static_cast<int>(settings.get(Spectrum_generator_settings::higgs_3loop_correction_at3)), "higgs3loopCorrectionAtAtAt");
+   MLPutRuleTo(link, static_cast<int>(settings.get(Spectrum_generator_settings::higgs_4loop_correction_at_as3)), "higgs4loopCorrectionAtAsAsAs");
    MLPutRuleTo(link, modsel.parameter_output_scale, "parameterOutputScale");
 
    MLEndPacket(link);
@@ -1028,6 +1029,7 @@ Model_data make_data(const Dynamic_array_view<Element_t>& pars)
    settings.set(Spectrum_generator_settings::higgs_3loop_correction_ab_as2, pars[c++]);
    settings.set(Spectrum_generator_settings::higgs_3loop_correction_at2_as, pars[c++]);
    settings.set(Spectrum_generator_settings::higgs_3loop_correction_at3, pars[c++]);
+   settings.set(Spectrum_generator_settings::higgs_4loop_correction_at_as3, pars[c++]);
 
    SLHA_io::Modsel modsel;
    modsel.parameter_output_scale = pars[c++];

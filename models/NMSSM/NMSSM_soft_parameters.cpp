@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:03:18
+// File generated at Mon 5 Mar 2018 18:37:38
 
 #include "NMSSM_soft_parameters.hpp"
 #include "config.h"
@@ -130,6 +130,9 @@ NMSSM_soft_parameters NMSSM_soft_parameters::calc_beta(int loops) const
          #else
          #endif
 
+            if (loops > 3) {
+
+            }
          }
       }
    }

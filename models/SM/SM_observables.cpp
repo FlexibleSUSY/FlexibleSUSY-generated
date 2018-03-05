@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:39:40
+// File generated at Mon 5 Mar 2018 17:45:16
 
 #include "SM_observables.hpp"
 #include "SM_mass_eigenstates.hpp"
@@ -106,31 +106,41 @@ void SM_observables::set(const Eigen::ArrayXd& vec)
 
 }
 
-SM_observables calculate_observables(const SM_mass_eigenstates& model,
+SM_observables calculate_observables(SM_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input,
                                               double scale)
 {
    auto model_at_scale = model;
 
-   if (scale > 0.)
-      model_at_scale.run_to(scale);
+   if (scale > 0.) {
+      try {
+         model_at_scale.run_to(scale);
+      } catch (const Error& e) {
+         model.get_problems().flag_thrown(e.what());
+         return SM_observables();
+      }
+   }
 
    return calculate_observables(model_at_scale, qedqcd, physical_input);
 }
 
-SM_observables calculate_observables(const SM_mass_eigenstates& model,
+SM_observables calculate_observables(SM_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input)
 {
    SM_observables observables;
 
-   SM_effective_couplings effective_couplings(model, qedqcd, physical_input);
-   effective_couplings.calculate_effective_couplings();
+   try {
+      SM_effective_couplings effective_couplings(model, qedqcd, physical_input);
+      effective_couplings.calculate_effective_couplings();
 
-   observables.AMU = SM_a_muon::calculate_a_muon(MODEL);
-   observables.EFFCPHIGGSPHOTONPHOTON = effective_couplings.get_eff_CphhVPVP();
-   observables.EFFCPHIGGSGLUONGLUON = effective_couplings.get_eff_CphhVGVG();
+      observables.AMU = SM_a_muon::calculate_a_muon(MODEL);
+      observables.EFFCPHIGGSPHOTONPHOTON = effective_couplings.get_eff_CphhVPVP();
+      observables.EFFCPHIGGSGLUONGLUON = effective_couplings.get_eff_CphhVGVG();
+   } catch (const Error& e) {
+      model.get_problems().flag_thrown(e.what());
+   }
 
    return observables;
 }

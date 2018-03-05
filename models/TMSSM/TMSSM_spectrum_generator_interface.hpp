@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:44:30
+// File generated at Mon 5 Mar 2018 18:09:00
 
 #ifndef TMSSM_SPECTRUM_GENERATOR_INTERFACE_H
 #define TMSSM_SPECTRUM_GENERATOR_INTERFACE_H
@@ -51,7 +51,9 @@ public:
    std::tuple<TMSSM_slha<TMSSM<T>>> get_models_slha() const
    { return std::make_tuple(TMSSM_slha<TMSSM<T> >(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.)); }
 
-   TMSSM<T> get_model() const
+   const TMSSM<T>& get_model() const
+   { return model; }
+   TMSSM<T>& get_model()
    { return model; }
    TMSSM_slha<TMSSM<T>> get_model_slha() const
    { return TMSSM_slha<TMSSM<T>>(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.); }

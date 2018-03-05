@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:14:24
+// File generated at Mon 5 Mar 2018 18:58:02
 
 #include "CMSSMNoFV_info.hpp"
 
@@ -87,7 +87,8 @@ namespace CMSSMNoFV_info {
       "ZZ(0,0)", "ZZ(0,1)", "ZZ(1,0)", "ZZ(1,1)"};
 
    const std::array<std::string, NUMBER_OF_INPUT_PARAMETERS>
-      input_parameter_names = {"m0", "m12", "TanBeta", "Sign(Mu)", "Azero"};
+      input_parameter_names = {"m0", "m12", "TanBeta", "Sign(Mu)", "Azero", "Mlow"
+      };
 
    const std::array<std::string, NUMBER_OF_EXTRA_PARAMETERS>
       extra_parameter_names = {};

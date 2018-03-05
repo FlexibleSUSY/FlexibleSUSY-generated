@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:01:06
+// File generated at Mon 5 Mar 2018 18:56:53
 
 #ifndef UMSSM_SPECTRUM_GENERATOR_INTERFACE_H
 #define UMSSM_SPECTRUM_GENERATOR_INTERFACE_H
@@ -51,7 +51,9 @@ public:
    std::tuple<UMSSM_slha<UMSSM<T>>> get_models_slha() const
    { return std::make_tuple(UMSSM_slha<UMSSM<T> >(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.)); }
 
-   UMSSM<T> get_model() const
+   const UMSSM<T>& get_model() const
+   { return model; }
+   UMSSM<T>& get_model()
    { return model; }
    UMSSM_slha<UMSSM<T>> get_model_slha() const
    { return UMSSM_slha<UMSSM<T>>(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.); }

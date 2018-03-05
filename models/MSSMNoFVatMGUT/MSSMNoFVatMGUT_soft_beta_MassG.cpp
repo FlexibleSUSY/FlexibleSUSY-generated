@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:12:52
+// File generated at Mon 5 Mar 2018 19:01:59
 
 #include "MSSMNoFVatMGUT_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -143,6 +143,25 @@ double MSSMNoFVatMGUT_soft_parameters::calc_beta_MassG_3_loop(const Soft_traces&
       traceTYuAdjYu - MassG*(6*traceAdjYdYdAdjYdYd + 3*traceAdjYdYd*
       traceAdjYeYe + 4*traceAdjYuYuAdjYdYd + 6*traceAdjYuYuAdjYuYu + 9*Sqr(
       traceAdjYdYd) + 9*Sqr(traceAdjYuYu))))));
+
+
+   return beta_MassG;
+}
+
+/**
+ * Calculates the 4-loop beta function of MassG.
+ *
+ * @return 4-loop beta function
+ */
+double MSSMNoFVatMGUT_soft_parameters::calc_beta_MassG_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MassG;
+
+   beta_MassG = 0;
 
 
    return beta_MassG;

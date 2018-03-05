@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:38:55
+// File generated at Mon 5 Mar 2018 17:38:30
 
 #ifndef HSSUSY_INPUT_PARAMETERS_H
 #define HSSUSY_INPUT_PARAMETERS_H
@@ -45,6 +45,9 @@ struct HSSUSY_input_parameters {
    double TwoLoopAtauAtau{};
    double TwoLoopAtAt{};
    double DeltaEFT{};
+   double DeltaYt{};
+   double DeltaOS{};
+   double Qmatch{};
    Eigen::Matrix<double,3,3> msq2{Eigen::Matrix<double,3,3>::Zero()};
    Eigen::Matrix<double,3,3> msu2{Eigen::Matrix<double,3,3>::Zero()};
    Eigen::Matrix<double,3,3> msd2{Eigen::Matrix<double,3,3>::Zero()};

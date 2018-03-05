@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:55:54
+// File generated at Mon 5 Mar 2018 18:22:42
 
 /**
  * @file lowNMSSM_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Fri 20 Oct 2017 08:55:54 with FlexibleSUSY
- * 2.0.1 (git commit: 5296739235bd0ef7020eda218da9c069270c3f45) and SARAH 4.12.0 .
+ * This file was generated at Mon 5 Mar 2018 18:22:42 with FlexibleSUSY
+ * 2.1.0 (git commit: 8f20f6c9c42c159c1588fbc0bb3e15ce5ab6ace3) and SARAH 4.12.3 .
  */
 
 #include "lowNMSSM_mass_eigenstates.hpp"
@@ -57,6 +57,7 @@
 
 
 
+
 #include <array>
 #include <cmath>
 #include <functional>
@@ -75,16 +76,17 @@ namespace flexiblesusy {
 #define MODELPARAMETER(parameter) model.get_##parameter()
 #define EXTRAPARAMETER(parameter) model.get_##parameter()
 
-#define HIGGS_2LOOP_CORRECTION_AT_AS     loop_corrections.higgs_at_as
-#define HIGGS_2LOOP_CORRECTION_AB_AS     loop_corrections.higgs_ab_as
-#define HIGGS_2LOOP_CORRECTION_AT_AT     loop_corrections.higgs_at_at
-#define HIGGS_2LOOP_CORRECTION_ATAU_ATAU loop_corrections.higgs_atau_atau
-#define TOP_POLE_QCD_CORRECTION          loop_corrections.top_qcd
-#define HIGGS_3LOOP_CORRECTION_AT_AS_AS  loop_corrections.higgs_at_as_as
-#define HIGGS_3LOOP_CORRECTION_AB_AS_AS  loop_corrections.higgs_ab_as_as
-#define HIGGS_3LOOP_MDR_SCHEME           loop_corrections.higgs_3L_mdr_scheme
-#define HIGGS_3LOOP_CORRECTION_AT_AT_AS  loop_corrections.higgs_at_at_as
-#define HIGGS_3LOOP_CORRECTION_AT_AT_AT  loop_corrections.higgs_at_at_at
+#define HIGGS_2LOOP_CORRECTION_AT_AS       loop_corrections.higgs_at_as
+#define HIGGS_2LOOP_CORRECTION_AB_AS       loop_corrections.higgs_ab_as
+#define HIGGS_2LOOP_CORRECTION_AT_AT       loop_corrections.higgs_at_at
+#define HIGGS_2LOOP_CORRECTION_ATAU_ATAU   loop_corrections.higgs_atau_atau
+#define TOP_POLE_QCD_CORRECTION            loop_corrections.top_qcd
+#define HIGGS_3LOOP_CORRECTION_AT_AS_AS    loop_corrections.higgs_at_as_as
+#define HIGGS_3LOOP_CORRECTION_AB_AS_AS    loop_corrections.higgs_ab_as_as
+#define HIGGS_3LOOP_MDR_SCHEME             loop_corrections.higgs_3L_mdr_scheme
+#define HIGGS_3LOOP_CORRECTION_AT_AT_AS    loop_corrections.higgs_at_at_as
+#define HIGGS_3LOOP_CORRECTION_AT_AT_AT    loop_corrections.higgs_at_at_at
+#define HIGGS_4LOOP_CORRECTION_AT_AS_AS_AS loop_corrections.higgs_at_as_as_as
 
 CLASSNAME::lowNMSSM_mass_eigenstates(const lowNMSSM_input_parameters& input_)
    : lowNMSSM_soft_parameters(input_)
@@ -9185,6 +9187,8 @@ Eigen::Matrix<double,3,1> CLASSNAME::tadpole_hh_2loop() const
 
    return tadpole_2l;
 }
+
+
 
 
 

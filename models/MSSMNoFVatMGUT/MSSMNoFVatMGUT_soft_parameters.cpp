@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:10:48
+// File generated at Mon 5 Mar 2018 19:00:15
 
 #include "MSSMNoFVatMGUT_soft_parameters.hpp"
 #include "config.h"
@@ -195,6 +195,9 @@ MSSMNoFVatMGUT_soft_parameters MSSMNoFVatMGUT_soft_parameters::calc_beta(int loo
             beta_MassG += calc_beta_MassG_3_loop(TRACE_STRUCT);
          #endif
 
+            if (loops > 3) {
+
+            }
          }
       }
    }

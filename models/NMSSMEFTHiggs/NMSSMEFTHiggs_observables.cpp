@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:35:09
+// File generated at Mon 5 Mar 2018 16:28:03
 
 #include "NMSSMEFTHiggs_observables.hpp"
 #include "NMSSMEFTHiggs_mass_eigenstates.hpp"
@@ -55,59 +55,74 @@ namespace flexiblesusy {
 const int NMSSMEFTHiggs_observables::NUMBER_OF_OBSERVABLES;
 
 NMSSMEFTHiggs_observables::NMSSMEFTHiggs_observables()
+   : a_muon(0)
 
 {
 }
 
 Eigen::ArrayXd NMSSMEFTHiggs_observables::get() const
 {
-   Eigen::ArrayXd vec(1);
+   Eigen::ArrayXd vec(NMSSMEFTHiggs_observables::NUMBER_OF_OBSERVABLES);
 
-   vec(0) = 0.;
+   vec(0) = a_muon;
 
    return vec;
 }
 
 std::vector<std::string> NMSSMEFTHiggs_observables::get_names()
 {
-   std::vector<std::string> names(1);
+   std::vector<std::string> names(NMSSMEFTHiggs_observables::NUMBER_OF_OBSERVABLES);
 
-   names[0] = "no observables defined";
+   names[0] = "a_muon";
 
    return names;
 }
 
 void NMSSMEFTHiggs_observables::clear()
 {
+   a_muon = 0.;
 
 }
 
 void NMSSMEFTHiggs_observables::set(const Eigen::ArrayXd& vec)
 {
+   assert(vec.rows() == NMSSMEFTHiggs_observables::NUMBER_OF_OBSERVABLES);
+
+   a_muon = vec(0);
 
 }
 
-NMSSMEFTHiggs_observables calculate_observables(const NMSSMEFTHiggs_mass_eigenstates& model,
+NMSSMEFTHiggs_observables calculate_observables(NMSSMEFTHiggs_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input,
                                               double scale)
 {
    auto model_at_scale = model;
 
-   if (scale > 0.)
-      model_at_scale.run_to(scale);
+   if (scale > 0.) {
+      try {
+         model_at_scale.run_to(scale);
+      } catch (const Error& e) {
+         model.get_problems().flag_thrown(e.what());
+         return NMSSMEFTHiggs_observables();
+      }
+   }
 
    return calculate_observables(model_at_scale, qedqcd, physical_input);
 }
 
-NMSSMEFTHiggs_observables calculate_observables(const NMSSMEFTHiggs_mass_eigenstates& model,
+NMSSMEFTHiggs_observables calculate_observables(NMSSMEFTHiggs_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input)
 {
    NMSSMEFTHiggs_observables observables;
 
-   
-
+   try {
+      
+      observables.AMU = NMSSMEFTHiggs_a_muon::calculate_a_muon(MODEL);
+   } catch (const Error& e) {
+      model.get_problems().flag_thrown(e.what());
+   }
 
    return observables;
 }

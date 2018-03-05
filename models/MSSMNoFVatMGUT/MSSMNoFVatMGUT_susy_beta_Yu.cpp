@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:10:24
+// File generated at Mon 5 Mar 2018 18:59:59
 
 #include "MSSMNoFVatMGUT_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -158,6 +158,25 @@ Eigen::Matrix<double,3,3> MSSMNoFVatMGUT_susy_parameters::calc_beta_Yu_3_loop(co
       Yu.adjoint()*Yu*1.2020569031595942))*UNITMATRIX(3)).real();
 
    beta_Yu = beta_Yu_1 + beta_Yu_2;
+
+
+   return beta_Yu;
+}
+
+/**
+ * Calculates the 4-loop beta function of Yu.
+ *
+ * @return 4-loop beta function
+ */
+Eigen::Matrix<double,3,3> MSSMNoFVatMGUT_susy_parameters::calc_beta_Yu_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_Yu;
+
+   beta_Yu = ZEROMATRIX(3,3);
 
 
    return beta_Yu;

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:35:32
+// File generated at Mon 5 Mar 2018 17:08:23
 
 #include "HGTHDMIIMSSMBC_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -102,6 +102,25 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_MassG_2_loop(const Soft_traces&
  * @return 3-loop beta function
  */
 double HGTHDMIIMSSMBC_soft_parameters::calc_beta_MassG_3_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MassG;
+
+   beta_MassG = 0;
+
+
+   return beta_MassG;
+}
+
+/**
+ * Calculates the 4-loop beta function of MassG.
+ *
+ * @return 4-loop beta function
+ */
+double HGTHDMIIMSSMBC_soft_parameters::calc_beta_MassG_4_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

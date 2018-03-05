@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:19:15
+// File generated at Mon 5 Mar 2018 19:09:31
 
 #include "CMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -742,6 +742,25 @@ Eigen::Matrix<double,3,3> CMSSM_soft_parameters::calc_beta_mq2_3_loop(const Soft
    beta_mq2 = beta_mq2_1 + beta_mq2_2 + beta_mq2_3 + beta_mq2_4 +
       beta_mq2_5 + beta_mq2_6 + beta_mq2_7 + beta_mq2_8 + beta_mq2_9 +
       beta_mq2_10;
+
+
+   return beta_mq2;
+}
+
+/**
+ * Calculates the 4-loop beta function of mq2.
+ *
+ * @return 4-loop beta function
+ */
+Eigen::Matrix<double,3,3> CMSSM_soft_parameters::calc_beta_mq2_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_mq2;
+
+   beta_mq2 = ZEROMATRIX(3,3);
 
 
    return beta_mq2;

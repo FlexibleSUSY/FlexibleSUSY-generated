@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:52:45
+// File generated at Mon 5 Mar 2018 18:19:11
 
 #include "SMSSM_susy_parameters.hpp"
 #include "config.h"
@@ -127,6 +127,9 @@ SMSSM_susy_parameters SMSSM_susy_parameters::calc_beta(int loops) const
          #else
          #endif
 
+            if (loops > 3) {
+
+            }
          }
       }
    }

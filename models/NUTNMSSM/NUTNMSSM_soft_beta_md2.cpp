@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:59:08
+// File generated at Mon 5 Mar 2018 18:34:24
 
 #include "NUTNMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -152,6 +152,25 @@ Eigen::Matrix<double,3,3> NUTNMSSM_soft_parameters::calc_beta_md2_2_loop(const S
  * @return 3-loop beta function
  */
 Eigen::Matrix<double,3,3> NUTNMSSM_soft_parameters::calc_beta_md2_3_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_md2;
+
+   beta_md2 = ZEROMATRIX(3,3);
+
+
+   return beta_md2;
+}
+
+/**
+ * Calculates the 4-loop beta function of md2.
+ *
+ * @return 4-loop beta function
+ */
+Eigen::Matrix<double,3,3> NUTNMSSM_soft_parameters::calc_beta_md2_4_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

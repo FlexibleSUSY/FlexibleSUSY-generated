@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:05:46
+// File generated at Mon 5 Mar 2018 18:56:37
 
 #include "config.h"
 
@@ -79,7 +79,7 @@ int run_solver(flexiblesusy::MSSMRHN_slha_io& slha_io,
 
    spectrum_generator.run(qedqcd, input);
 
-   const auto models = spectrum_generator.get_models_slha();
+   auto models = spectrum_generator.get_models_slha();
    const auto& problems = spectrum_generator.get_problems();
 
    MSSMRHN_scales scales;

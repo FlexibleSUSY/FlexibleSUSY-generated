@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:03:07
+// File generated at Mon 5 Mar 2018 18:37:29
 
 #include "NMSSM_susy_parameters.hpp"
 #include "config.h"
@@ -117,6 +117,9 @@ NMSSM_susy_parameters NMSSM_susy_parameters::calc_beta(int loops) const
          #else
          #endif
 
+            if (loops > 3) {
+
+            }
          }
       }
    }

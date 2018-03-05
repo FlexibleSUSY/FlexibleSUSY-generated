@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:39:34
+// File generated at Mon 5 Mar 2018 17:45:10
 
 #ifndef SM_SPECTRUM_GENERATOR_INTERFACE_H
 #define SM_SPECTRUM_GENERATOR_INTERFACE_H
@@ -51,7 +51,9 @@ public:
    std::tuple<SM_slha<SM<T>>> get_models_slha() const
    { return std::make_tuple(SM_slha<SM<T> >(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.)); }
 
-   SM<T> get_model() const
+   const SM<T>& get_model() const
+   { return model; }
+   SM<T>& get_model()
    { return model; }
    SM_slha<SM<T>> get_model_slha() const
    { return SM_slha<SM<T>>(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.); }

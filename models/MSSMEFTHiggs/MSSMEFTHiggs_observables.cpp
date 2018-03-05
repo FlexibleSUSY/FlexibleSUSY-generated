@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:33:57
+// File generated at Mon 5 Mar 2018 16:49:01
 
 #include "MSSMEFTHiggs_observables.hpp"
 #include "MSSMEFTHiggs_mass_eigenstates.hpp"
@@ -55,59 +55,74 @@ namespace flexiblesusy {
 const int MSSMEFTHiggs_observables::NUMBER_OF_OBSERVABLES;
 
 MSSMEFTHiggs_observables::MSSMEFTHiggs_observables()
+   : a_muon(0)
 
 {
 }
 
 Eigen::ArrayXd MSSMEFTHiggs_observables::get() const
 {
-   Eigen::ArrayXd vec(1);
+   Eigen::ArrayXd vec(MSSMEFTHiggs_observables::NUMBER_OF_OBSERVABLES);
 
-   vec(0) = 0.;
+   vec(0) = a_muon;
 
    return vec;
 }
 
 std::vector<std::string> MSSMEFTHiggs_observables::get_names()
 {
-   std::vector<std::string> names(1);
+   std::vector<std::string> names(MSSMEFTHiggs_observables::NUMBER_OF_OBSERVABLES);
 
-   names[0] = "no observables defined";
+   names[0] = "a_muon";
 
    return names;
 }
 
 void MSSMEFTHiggs_observables::clear()
 {
+   a_muon = 0.;
 
 }
 
 void MSSMEFTHiggs_observables::set(const Eigen::ArrayXd& vec)
 {
+   assert(vec.rows() == MSSMEFTHiggs_observables::NUMBER_OF_OBSERVABLES);
+
+   a_muon = vec(0);
 
 }
 
-MSSMEFTHiggs_observables calculate_observables(const MSSMEFTHiggs_mass_eigenstates& model,
+MSSMEFTHiggs_observables calculate_observables(MSSMEFTHiggs_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input,
                                               double scale)
 {
    auto model_at_scale = model;
 
-   if (scale > 0.)
-      model_at_scale.run_to(scale);
+   if (scale > 0.) {
+      try {
+         model_at_scale.run_to(scale);
+      } catch (const Error& e) {
+         model.get_problems().flag_thrown(e.what());
+         return MSSMEFTHiggs_observables();
+      }
+   }
 
    return calculate_observables(model_at_scale, qedqcd, physical_input);
 }
 
-MSSMEFTHiggs_observables calculate_observables(const MSSMEFTHiggs_mass_eigenstates& model,
+MSSMEFTHiggs_observables calculate_observables(MSSMEFTHiggs_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input)
 {
    MSSMEFTHiggs_observables observables;
 
-   
-
+   try {
+      
+      observables.AMU = MSSMEFTHiggs_a_muon::calculate_a_muon(MODEL);
+   } catch (const Error& e) {
+      model.get_problems().flag_thrown(e.what());
+   }
 
    return observables;
 }

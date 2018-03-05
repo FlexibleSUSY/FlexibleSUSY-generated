@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:36:12
+// File generated at Mon 5 Mar 2018 17:28:13
 
 #include "HTHDMIIMSSMBC_susy_parameters.hpp"
 #include "config.h"
@@ -125,6 +125,9 @@ HTHDMIIMSSMBC_susy_parameters HTHDMIIMSSMBC_susy_parameters::calc_beta(int loops
          #else
          #endif
 
+            if (loops > 3) {
+
+            }
          }
       }
    }

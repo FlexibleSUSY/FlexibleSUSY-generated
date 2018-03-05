@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:56:25
+// File generated at Mon 5 Mar 2018 18:23:07
 
 #include "lowNMSSM_observables.hpp"
 #include "lowNMSSM_mass_eigenstates.hpp"
@@ -87,27 +87,37 @@ void lowNMSSM_observables::set(const Eigen::ArrayXd& vec)
 
 }
 
-lowNMSSM_observables calculate_observables(const lowNMSSM_mass_eigenstates& model,
+lowNMSSM_observables calculate_observables(lowNMSSM_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input,
                                               double scale)
 {
    auto model_at_scale = model;
 
-   if (scale > 0.)
-      model_at_scale.run_to(scale);
+   if (scale > 0.) {
+      try {
+         model_at_scale.run_to(scale);
+      } catch (const Error& e) {
+         model.get_problems().flag_thrown(e.what());
+         return lowNMSSM_observables();
+      }
+   }
 
    return calculate_observables(model_at_scale, qedqcd, physical_input);
 }
 
-lowNMSSM_observables calculate_observables(const lowNMSSM_mass_eigenstates& model,
+lowNMSSM_observables calculate_observables(lowNMSSM_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input)
 {
    lowNMSSM_observables observables;
 
-   
+   try {
+      
 
+   } catch (const Error& e) {
+      model.get_problems().flag_thrown(e.what());
+   }
 
    return observables;
 }

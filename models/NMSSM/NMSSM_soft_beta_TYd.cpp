@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:03:20
+// File generated at Mon 5 Mar 2018 18:37:40
 
 #include "NMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -151,6 +151,25 @@ Eigen::Matrix<double,3,3> NMSSM_soft_parameters::calc_beta_TYd_2_loop(const Soft
  * @return 3-loop beta function
  */
 Eigen::Matrix<double,3,3> NMSSM_soft_parameters::calc_beta_TYd_3_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_TYd;
+
+   beta_TYd = ZEROMATRIX(3,3);
+
+
+   return beta_TYd;
+}
+
+/**
+ * Calculates the 4-loop beta function of TYd.
+ *
+ * @return 4-loop beta function
+ */
+Eigen::Matrix<double,3,3> NMSSM_soft_parameters::calc_beta_TYd_4_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

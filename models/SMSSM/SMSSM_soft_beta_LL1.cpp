@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:53:13
+// File generated at Mon 5 Mar 2018 18:19:34
 
 #include "SMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -171,6 +171,25 @@ double SMSSM_soft_parameters::calc_beta_LL1_2_loop(const Soft_traces& soft_trace
  * @return 3-loop beta function
  */
 double SMSSM_soft_parameters::calc_beta_LL1_3_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_LL1;
+
+   beta_LL1 = 0;
+
+
+   return beta_LL1;
+}
+
+/**
+ * Calculates the 4-loop beta function of LL1.
+ *
+ * @return 4-loop beta function
+ */
+double SMSSM_soft_parameters::calc_beta_LL1_4_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

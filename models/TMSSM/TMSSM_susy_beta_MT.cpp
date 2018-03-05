@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:41:31
+// File generated at Mon 5 Mar 2018 17:54:58
 
 #include "TMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -71,6 +71,25 @@ double TMSSM_susy_parameters::calc_beta_MT_2_loop(const Susy_traces& susy_traces
  * @return 3-loop beta function
  */
 double TMSSM_susy_parameters::calc_beta_MT_3_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MT;
+
+   beta_MT = 0;
+
+
+   return beta_MT;
+}
+
+/**
+ * Calculates the 4-loop beta function of MT.
+ *
+ * @return 4-loop beta function
+ */
+double TMSSM_susy_parameters::calc_beta_MT_4_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

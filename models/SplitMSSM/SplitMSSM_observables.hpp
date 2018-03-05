@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:38:45
+// File generated at Mon 5 Mar 2018 17:44:31
 
 #ifndef SplitMSSM_OBSERVABLES_H
 #define SplitMSSM_OBSERVABLES_H
@@ -50,11 +50,11 @@ struct SplitMSSM_observables {
 };
 
 SplitMSSM_observables calculate_observables(
-   const SplitMSSM_mass_eigenstates&, const softsusy::QedQcd&,
+   SplitMSSM_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&);
 
 SplitMSSM_observables calculate_observables(
-   const SplitMSSM_mass_eigenstates&, const softsusy::QedQcd&,
+   SplitMSSM_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&, double scale);
 
 } // namespace flexiblesusy

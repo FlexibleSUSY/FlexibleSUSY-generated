@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:38:47
+// File generated at Mon 5 Mar 2018 17:38:24
 
 #include "HSSUSY_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -82,6 +82,25 @@ double HSSUSY_susy_parameters::calc_beta_g1_3_loop(const Susy_traces& susy_trace
       (2,2))) - 75*(3945*Quad(g2) - 6*Sqr(g2)*(-24*Lambdax + 32*Sqr(g3) + 785*
       Sqr(Yu(2,2))) + 4*(4752*Quad(g3) + 945*Quad(Yu(2,2)) - 36*Sqr(Lambdax) -
       464*Sqr(g3)*Sqr(Yu(2,2))))));
+
+
+   return beta_g1;
+}
+
+/**
+ * Calculates the 4-loop beta function of g1.
+ *
+ * @return 4-loop beta function
+ */
+double HSSUSY_susy_parameters::calc_beta_g1_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_g1;
+
+   beta_g1 = 0;
 
 
    return beta_g1;

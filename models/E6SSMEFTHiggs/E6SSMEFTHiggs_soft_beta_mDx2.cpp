@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:38:08
+// File generated at Mon 5 Mar 2018 16:36:12
 
 #include "E6SSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -178,6 +178,25 @@ Eigen::Matrix<double,3,3> E6SSMEFTHiggs_soft_parameters::calc_beta_mDx2_2_loop(c
  * @return 3-loop beta function
  */
 Eigen::Matrix<double,3,3> E6SSMEFTHiggs_soft_parameters::calc_beta_mDx2_3_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_mDx2;
+
+   beta_mDx2 = ZEROMATRIX(3,3);
+
+
+   return beta_mDx2;
+}
+
+/**
+ * Calculates the 4-loop beta function of mDx2.
+ *
+ * @return 4-loop beta function
+ */
+Eigen::Matrix<double,3,3> E6SSMEFTHiggs_soft_parameters::calc_beta_mDx2_4_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

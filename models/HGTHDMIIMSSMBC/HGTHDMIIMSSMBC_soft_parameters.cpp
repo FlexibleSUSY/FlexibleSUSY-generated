@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:35:31
+// File generated at Mon 5 Mar 2018 17:08:23
 
 #include "HGTHDMIIMSSMBC_soft_parameters.hpp"
 #include "config.h"
@@ -104,6 +104,9 @@ HGTHDMIIMSSMBC_soft_parameters HGTHDMIIMSSMBC_soft_parameters::calc_beta(int loo
          #else
          #endif
 
+            if (loops > 3) {
+
+            }
          }
       }
    }

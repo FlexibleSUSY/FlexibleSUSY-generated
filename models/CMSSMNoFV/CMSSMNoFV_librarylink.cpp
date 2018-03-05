@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:15:20
+// File generated at Mon 5 Mar 2018 18:58:44
 
 #include "config.h"
 
@@ -40,9 +40,9 @@
 #include "standard_model_two_scale_model.hpp"
 #include "lowe.h"
 
-#include "mathlink.h"
+#include <mathlink.h>
 #include "mathlink_utils.hpp"
-#include "WolframLibrary.h"
+#include <WolframLibrary.h>
 
 #include <cmath>
 #include <iostream>
@@ -380,6 +380,7 @@ void Model_data::put_settings(MLINK link) const
    MLPutRuleTo(link, static_cast<int>(settings.get(Spectrum_generator_settings::higgs_3loop_correction_ab_as2)), "higgs3loopCorrectionAbAsAs");
    MLPutRuleTo(link, static_cast<int>(settings.get(Spectrum_generator_settings::higgs_3loop_correction_at2_as)), "higgs3loopCorrectionAtAtAs");
    MLPutRuleTo(link, static_cast<int>(settings.get(Spectrum_generator_settings::higgs_3loop_correction_at3)), "higgs3loopCorrectionAtAtAt");
+   MLPutRuleTo(link, static_cast<int>(settings.get(Spectrum_generator_settings::higgs_4loop_correction_at_as3)), "higgs4loopCorrectionAtAsAsAs");
    MLPutRuleTo(link, modsel.parameter_output_scale, "parameterOutputScale");
 
    MLEndPacket(link);
@@ -434,13 +435,14 @@ void Model_data::put_sm_input_parameters(MLINK link) const
 
 void Model_data::put_input_parameters(MLINK link) const
 {
-   MLPutFunction(link, "List", 5);
+   MLPutFunction(link, "List", 6);
 
    MLPutRuleTo(link, INPUTPARAMETER(m0), "m0");
    MLPutRuleTo(link, INPUTPARAMETER(m12), "m12");
    MLPutRuleTo(link, INPUTPARAMETER(TanBeta), "TanBeta");
    MLPutRuleTo(link, INPUTPARAMETER(SignMu), "SignMu");
    MLPutRuleTo(link, INPUTPARAMETER(Azero), "Azero");
+   MLPutRuleTo(link, INPUTPARAMETER(Mlow), "Mlow");
 
 
    MLEndPacket(link);
@@ -1017,7 +1019,7 @@ Model_data make_data(const Dynamic_array_view<Element_t>& pars)
    const Index_t n_settings = Spectrum_generator_settings::NUMBER_OF_OPTIONS,
       n_sm_parameters = softsusy::NUMBER_OF_LOW_ENERGY_INPUT_PARAMETERS
                         + Physical_input::NUMBER_OF_INPUT_PARAMETERS,
-      n_input_pars = 5;
+      n_input_pars = 6;
    const Index_t n_total = n_settings + n_sm_parameters + n_input_pars;
 
    if (pars.size() != n_total)
@@ -1055,6 +1057,7 @@ Model_data make_data(const Dynamic_array_view<Element_t>& pars)
    settings.set(Spectrum_generator_settings::higgs_3loop_correction_ab_as2, pars[c++]);
    settings.set(Spectrum_generator_settings::higgs_3loop_correction_at2_as, pars[c++]);
    settings.set(Spectrum_generator_settings::higgs_3loop_correction_at3, pars[c++]);
+   settings.set(Spectrum_generator_settings::higgs_4loop_correction_at_as3, pars[c++]);
 
    SLHA_io::Modsel modsel;
    modsel.parameter_output_scale = pars[c++];
@@ -1119,6 +1122,7 @@ Model_data make_data(const Dynamic_array_view<Element_t>& pars)
    INPUTPARAMETER(TanBeta) = pars[c++];
    INPUTPARAMETER(SignMu) = pars[c++];
    INPUTPARAMETER(Azero) = pars[c++];
+   INPUTPARAMETER(Mlow) = pars[c++];
 
 
    Model_data data;

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:03:25
+// File generated at Mon 5 Mar 2018 18:45:57
 
 #include "MSSMRHN_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -72,6 +72,25 @@ double MSSMRHN_susy_parameters::calc_beta_g1_2_loop(const Susy_traces& susy_trac
  * @return 3-loop beta function
  */
 double MSSMRHN_susy_parameters::calc_beta_g1_3_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_g1;
+
+   beta_g1 = 0;
+
+
+   return beta_g1;
+}
+
+/**
+ * Calculates the 4-loop beta function of g1.
+ *
+ * @return 4-loop beta function
+ */
+double MSSMRHN_susy_parameters::calc_beta_g1_4_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

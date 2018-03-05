@@ -21,7 +21,7 @@
  * @brief contains wrapper class for model class in SLHA convention
  */
 
-// File generated at Fri 20 Oct 2017 08:39:06
+// File generated at Mon 5 Mar 2018 16:21:05
 
 #ifndef MRSSMEFTHiggs_SLHA_H
 #define MRSSMEFTHiggs_SLHA_H

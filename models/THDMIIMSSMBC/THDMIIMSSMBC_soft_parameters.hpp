@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:37:30
+// File generated at Mon 5 Mar 2018 17:30:42
 
 #ifndef THDMIIMSSMBC_soft_parameters_H
 #define THDMIIMSSMBC_soft_parameters_H
@@ -91,18 +91,23 @@ private:
    double calc_beta_M122_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_M122_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_M122_3_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_M122_4_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_M112_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_M112_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_M112_3_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_M112_4_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_M222_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_M222_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_M222_3_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_M222_4_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_v1_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_v1_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_v1_3_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_v1_4_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_v2_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_v2_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_v2_3_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_v2_4_loop(const TRACE_STRUCT_TYPE&) const;
 
 };
 

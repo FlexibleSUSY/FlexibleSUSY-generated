@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:33:36
+// File generated at Mon 5 Mar 2018 16:48:40
 
 #ifndef MSSMEFTHiggs_SLHA_IO_H
 #define MSSMEFTHiggs_SLHA_IO_H
@@ -94,7 +94,7 @@ public:
    template <class... Ts> void set_spectrum(const std::tuple<Ts...>&);
    template <class Model> void set_spectrum(const MSSMEFTHiggs_slha<Model>&);
    template <class T> void set_spectrum(const MSSMEFTHiggs<T>&);
-   void set_spectrum(const standard_model::Standard_model& m) { slha_io.set_spectrum(m); }
+   void set_spectrum(const standard_model::Standard_model&);
    void set_spinfo(const Spectrum_generator_problems&);
    void set_spinfo(const Problems&);
    void set_spinfo(const std::vector<std::string>&, const std::vector<std::string>&);
@@ -123,8 +123,11 @@ private:
    void set_imextpar(const MSSMEFTHiggs_input_parameters&);
    void set_minpar(const MSSMEFTHiggs_input_parameters&);
    void set_mass(const MSSMEFTHiggs_physical&, bool);
+   void set_mass(const standard_model::Standard_model_physical&);
    void set_mixing_matrices(const MSSMEFTHiggs_physical&, bool);
+   void set_mixing_matrices(const standard_model::Standard_model_physical&);
    template <class Model> void set_model_parameters(const MSSMEFTHiggs_slha<Model>&);
+   void set_model_parameters(const standard_model::Standard_model&);
    void set_ckm(const Eigen::Matrix<std::complex<double>,3,3>&, double);
    void set_pmns(const Eigen::Matrix<std::complex<double>,3,3>&, double);
    double read_scale() const;
@@ -263,6 +266,13 @@ void MSSMEFTHiggs_slha_io::set_extra(
             << FORMAT_ELEMENT(0, (SCALES(HighScale)), "HighScale")
             << FORMAT_ELEMENT(1, (SCALES(SUSYScale)), "SUSYScale")
             << FORMAT_ELEMENT(2, (SCALES(LowScale)), "LowScale")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block FlexibleSUSYLowEnergy Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(21, (OBSERVABLES.a_muon), "Delta(g-2)_muon/2 FlexibleSUSY")
       ;
       slha_io.set_block(block);
    }

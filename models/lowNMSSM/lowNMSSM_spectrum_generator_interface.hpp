@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:56:00
+// File generated at Mon 5 Mar 2018 18:22:47
 
 #ifndef lowNMSSM_SPECTRUM_GENERATOR_INTERFACE_H
 #define lowNMSSM_SPECTRUM_GENERATOR_INTERFACE_H
@@ -51,7 +51,9 @@ public:
    std::tuple<lowNMSSM_slha<lowNMSSM<T>>> get_models_slha() const
    { return std::make_tuple(lowNMSSM_slha<lowNMSSM<T> >(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.)); }
 
-   lowNMSSM<T> get_model() const
+   const lowNMSSM<T>& get_model() const
+   { return model; }
+   lowNMSSM<T>& get_model()
    { return model; }
    lowNMSSM_slha<lowNMSSM<T>> get_model_slha() const
    { return lowNMSSM_slha<lowNMSSM<T>>(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.); }

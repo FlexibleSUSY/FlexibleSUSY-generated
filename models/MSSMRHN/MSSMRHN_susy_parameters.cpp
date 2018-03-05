@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:03:21
+// File generated at Mon 5 Mar 2018 18:45:54
 
 #include "MSSMRHN_susy_parameters.hpp"
 #include "config.h"
@@ -118,6 +118,9 @@ MSSMRHN_susy_parameters MSSMRHN_susy_parameters::calc_beta(int loops) const
          #else
          #endif
 
+            if (loops > 3) {
+
+            }
          }
       }
    }

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:01:11
+// File generated at Mon 5 Mar 2018 18:35:58
 
 #include "NUTNMSSM_observables.hpp"
 #include "NUTNMSSM_mass_eigenstates.hpp"
@@ -92,27 +92,37 @@ void NUTNMSSM_observables::set(const Eigen::ArrayXd& vec)
 
 }
 
-NUTNMSSM_observables calculate_observables(const NUTNMSSM_mass_eigenstates& model,
+NUTNMSSM_observables calculate_observables(NUTNMSSM_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input,
                                               double scale)
 {
    auto model_at_scale = model;
 
-   if (scale > 0.)
-      model_at_scale.run_to(scale);
+   if (scale > 0.) {
+      try {
+         model_at_scale.run_to(scale);
+      } catch (const Error& e) {
+         model.get_problems().flag_thrown(e.what());
+         return NUTNMSSM_observables();
+      }
+   }
 
    return calculate_observables(model_at_scale, qedqcd, physical_input);
 }
 
-NUTNMSSM_observables calculate_observables(const NUTNMSSM_mass_eigenstates& model,
+NUTNMSSM_observables calculate_observables(NUTNMSSM_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input)
 {
    NUTNMSSM_observables observables;
 
-   
-   observables.AMU = NUTNMSSM_a_muon::calculate_a_muon(MODEL);
+   try {
+      
+      observables.AMU = NUTNMSSM_a_muon::calculate_a_muon(MODEL);
+   } catch (const Error& e) {
+      model.get_problems().flag_thrown(e.what());
+   }
 
    return observables;
 }

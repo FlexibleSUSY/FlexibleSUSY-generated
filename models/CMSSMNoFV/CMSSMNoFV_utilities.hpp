@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:14:24
+// File generated at Mon 5 Mar 2018 18:58:02
 
 #ifndef CMSSMNoFV_UTILITIES_H
 #define CMSSMNoFV_UTILITIES_H
@@ -54,6 +54,9 @@ private:
                 + std::to_string(static_cast<long long>(m)) + ")"));
          }
       }
+
+      masses.shrink_to_fit();
+
       return masses;
    }
 

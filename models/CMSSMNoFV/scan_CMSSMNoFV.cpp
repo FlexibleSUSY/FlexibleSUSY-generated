@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:15:20
+// File generated at Mon 5 Mar 2018 18:58:44
 
 #include "config.h"
 
@@ -50,6 +50,7 @@ void print_usage()
       "  --TanBeta=<value>\n"
       "  --SignMu=<value>\n"
       "  --Azero=<value>\n"
+      "  --Mlow=<value>\n"
 
       "  --solver-type=<value>             an integer corresponding\n"
       "                                    to the solver type to use\n"
@@ -77,6 +78,9 @@ void set_command_line_parameters(const Dynamic_array_view<char*>& args,
          continue;
 
       if(Command_line_options::get_parameter_value(option, "--Azero=", input.Azero))
+         continue;
+
+      if(Command_line_options::get_parameter_value(option, "--Mlow=", input.Mlow))
          continue;
 
       

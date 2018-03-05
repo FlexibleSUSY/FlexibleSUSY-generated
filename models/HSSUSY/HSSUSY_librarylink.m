@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.0.1"];
+Print["FlexibleSUSY 2.1.0"];
 Print["HSSUSY"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -41,7 +41,7 @@ fsDefaultSettings = {
       calculateStandardModelMasses -> 0, (* FlexibleSUSY[3] *)
       poleMassLoopOrder -> 2,            (* FlexibleSUSY[4] *)
       ewsbLoopOrder -> 2,                (* FlexibleSUSY[5] *)
-      betaFunctionLoopOrder -> 3,        (* FlexibleSUSY[6] *)
+      betaFunctionLoopOrder -> 4,        (* FlexibleSUSY[6] *)
       thresholdCorrectionsLoopOrder -> 2,(* FlexibleSUSY[7] *)
       higgs2loopCorrectionAtAs -> 1,     (* FlexibleSUSY[8] *)
       higgs2loopCorrectionAbAs -> 1,     (* FlexibleSUSY[9] *)
@@ -64,6 +64,7 @@ fsDefaultSettings = {
       higgs3loopCorrectionAbAsAs -> 1,   (* FlexibleSUSY[27] *)
       higgs3loopCorrectionAtAtAs -> 1,   (* FlexibleSUSY[28] *)
       higgs3loopCorrectionAtAtAt -> 1,   (* FlexibleSUSY[29] *)
+      higgs4loopCorrectionAtAsAsAs -> 1, (* FlexibleSUSY[30] *)
       parameterOutputScale -> 0          (* MODSEL[12] *)
 };
 
@@ -118,6 +119,9 @@ fsHSSUSYDefaultInputParameters = {
    TwoLoopAtauAtau -> 0,
    TwoLoopAtAt -> 0,
    DeltaEFT -> 0,
+   DeltaYt -> 0,
+   DeltaOS -> 0,
+   Qmatch -> 0,
    msq2 -> {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
    msu2 -> {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
    msd2 -> {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
@@ -167,6 +171,7 @@ FSHSSUSYOpenHandle[OptionsPattern[]] :=
             OptionValue[higgs3loopCorrectionAbAsAs],
             OptionValue[higgs3loopCorrectionAtAtAs],
             OptionValue[higgs3loopCorrectionAtAtAt],
+            OptionValue[higgs4loopCorrectionAtAsAsAs],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)
@@ -220,6 +225,9 @@ FSHSSUSYOpenHandle[OptionsPattern[]] :=
             OptionValue[TwoLoopAtauAtau],
             OptionValue[TwoLoopAtAt],
             OptionValue[DeltaEFT],
+            OptionValue[DeltaYt],
+            OptionValue[DeltaOS],
+            OptionValue[Qmatch],
             OptionValue[msq2][[1,1]],
             OptionValue[msq2][[1,2]],
             OptionValue[msq2][[1,3]],
@@ -307,6 +315,7 @@ FSHSSUSYSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[higgs3loopCorrectionAbAsAs],
             OptionValue[higgs3loopCorrectionAtAtAs],
             OptionValue[higgs3loopCorrectionAtAtAt],
+            OptionValue[higgs4loopCorrectionAtAsAsAs],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)
@@ -360,6 +369,9 @@ FSHSSUSYSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[TwoLoopAtauAtau],
             OptionValue[TwoLoopAtAt],
             OptionValue[DeltaEFT],
+            OptionValue[DeltaYt],
+            OptionValue[DeltaOS],
+            OptionValue[Qmatch],
             OptionValue[msq2][[1,1]],
             OptionValue[msq2][[1,2]],
             OptionValue[msq2][[1,3]],

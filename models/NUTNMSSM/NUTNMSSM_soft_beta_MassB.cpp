@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:59:12
+// File generated at Mon 5 Mar 2018 18:34:28
 
 #include "NUTNMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -112,6 +112,25 @@ double NUTNMSSM_soft_parameters::calc_beta_MassB_2_loop(const Soft_traces& soft_
  * @return 3-loop beta function
  */
 double NUTNMSSM_soft_parameters::calc_beta_MassB_3_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MassB;
+
+   beta_MassB = 0;
+
+
+   return beta_MassB;
+}
+
+/**
+ * Calculates the 4-loop beta function of MassB.
+ *
+ * @return 4-loop beta function
+ */
+double NUTNMSSM_soft_parameters::calc_beta_MassB_4_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

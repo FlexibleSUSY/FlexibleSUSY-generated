@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:38:09
+// File generated at Mon 5 Mar 2018 17:42:08
 
 #include "SplitMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -118,6 +118,25 @@ double SplitMSSM_soft_parameters::calc_beta_Mu_2_loop(const Soft_traces& soft_tr
  * @return 3-loop beta function
  */
 double SplitMSSM_soft_parameters::calc_beta_Mu_3_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_Mu;
+
+   beta_Mu = 0;
+
+
+   return beta_Mu;
+}
+
+/**
+ * Calculates the 4-loop beta function of Mu.
+ *
+ * @return 4-loop beta function
+ */
+double SplitMSSM_soft_parameters::calc_beta_Mu_4_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

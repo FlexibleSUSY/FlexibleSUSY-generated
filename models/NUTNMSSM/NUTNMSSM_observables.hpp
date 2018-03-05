@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:01:11
+// File generated at Mon 5 Mar 2018 18:35:58
 
 #ifndef NUTNMSSM_OBSERVABLES_H
 #define NUTNMSSM_OBSERVABLES_H
@@ -48,11 +48,11 @@ struct NUTNMSSM_observables {
 };
 
 NUTNMSSM_observables calculate_observables(
-   const NUTNMSSM_mass_eigenstates&, const softsusy::QedQcd&,
+   NUTNMSSM_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&);
 
 NUTNMSSM_observables calculate_observables(
-   const NUTNMSSM_mass_eigenstates&, const softsusy::QedQcd&,
+   NUTNMSSM_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&, double scale);
 
 } // namespace flexiblesusy

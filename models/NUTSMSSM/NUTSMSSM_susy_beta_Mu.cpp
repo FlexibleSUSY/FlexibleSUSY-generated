@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:58:14
+// File generated at Mon 5 Mar 2018 18:24:44
 
 #include "NUTSMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -82,6 +82,25 @@ double NUTSMSSM_susy_parameters::calc_beta_Mu_2_loop(const Susy_traces& susy_tra
  * @return 3-loop beta function
  */
 double NUTSMSSM_susy_parameters::calc_beta_Mu_3_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_Mu;
+
+   beta_Mu = 0;
+
+
+   return beta_Mu;
+}
+
+/**
+ * Calculates the 4-loop beta function of Mu.
+ *
+ * @return 4-loop beta function
+ */
+double NUTSMSSM_susy_parameters::calc_beta_Mu_4_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

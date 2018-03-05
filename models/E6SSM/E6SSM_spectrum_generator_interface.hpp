@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:00:45
+// File generated at Mon 5 Mar 2018 18:04:53
 
 #ifndef E6SSM_SPECTRUM_GENERATOR_INTERFACE_H
 #define E6SSM_SPECTRUM_GENERATOR_INTERFACE_H
@@ -51,7 +51,9 @@ public:
    std::tuple<E6SSM_slha<E6SSM<T>>> get_models_slha() const
    { return std::make_tuple(E6SSM_slha<E6SSM<T> >(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.)); }
 
-   E6SSM<T> get_model() const
+   const E6SSM<T>& get_model() const
+   { return model; }
+   E6SSM<T>& get_model()
    { return model; }
    E6SSM_slha<E6SSM<T>> get_model_slha() const
    { return E6SSM_slha<E6SSM<T>>(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.); }

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 09:15:45
+// File generated at Mon 5 Mar 2018 19:04:14
 
 #include "MSSMatMGUT_observables.hpp"
 #include "MSSMatMGUT_mass_eigenstates.hpp"
@@ -87,27 +87,37 @@ void MSSMatMGUT_observables::set(const Eigen::ArrayXd& vec)
 
 }
 
-MSSMatMGUT_observables calculate_observables(const MSSMatMGUT_mass_eigenstates& model,
+MSSMatMGUT_observables calculate_observables(MSSMatMGUT_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input,
                                               double scale)
 {
    auto model_at_scale = model;
 
-   if (scale > 0.)
-      model_at_scale.run_to(scale);
+   if (scale > 0.) {
+      try {
+         model_at_scale.run_to(scale);
+      } catch (const Error& e) {
+         model.get_problems().flag_thrown(e.what());
+         return MSSMatMGUT_observables();
+      }
+   }
 
    return calculate_observables(model_at_scale, qedqcd, physical_input);
 }
 
-MSSMatMGUT_observables calculate_observables(const MSSMatMGUT_mass_eigenstates& model,
+MSSMatMGUT_observables calculate_observables(MSSMatMGUT_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input)
 {
    MSSMatMGUT_observables observables;
 
-   
+   try {
+      
 
+   } catch (const Error& e) {
+      model.get_problems().flag_thrown(e.what());
+   }
 
    return observables;
 }

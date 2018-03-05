@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:42:12
+// File generated at Mon 5 Mar 2018 17:55:32
 
 #include "TMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -108,6 +108,25 @@ double TMSSM_soft_parameters::calc_beta_MassG_2_loop(const Soft_traces& soft_tra
  * @return 3-loop beta function
  */
 double TMSSM_soft_parameters::calc_beta_MassG_3_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MassG;
+
+   beta_MassG = 0;
+
+
+   return beta_MassG;
+}
+
+/**
+ * Calculates the 4-loop beta function of MassG.
+ *
+ * @return 4-loop beta function
+ */
+double TMSSM_soft_parameters::calc_beta_MassG_4_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

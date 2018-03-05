@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 20 Oct 2017 08:35:10
+// File generated at Mon 5 Mar 2018 17:08:03
 
 #include "HGTHDMIIMSSMBC_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -130,6 +130,25 @@ double HGTHDMIIMSSMBC_susy_parameters::calc_beta_Lambda1_2_loop(const Susy_trace
  * @return 3-loop beta function
  */
 double HGTHDMIIMSSMBC_susy_parameters::calc_beta_Lambda1_3_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_Lambda1;
+
+   beta_Lambda1 = 0;
+
+
+   return beta_Lambda1;
+}
+
+/**
+ * Calculates the 4-loop beta function of Lambda1.
+ *
+ * @return 4-loop beta function
+ */
+double HGTHDMIIMSSMBC_susy_parameters::calc_beta_Lambda1_4_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 
