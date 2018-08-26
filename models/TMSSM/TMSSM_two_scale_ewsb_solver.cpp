@@ -16,15 +16,15 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:09:15
+// File generated at Sun 26 Aug 2018 14:15:53
 
 /**
  * @file TMSSM_two_scale_ewsb_solver.cpp
  *
  * @brief implementation of EWSB solver for two-scale iteration
  *
- * This file was generated at Mon 5 Mar 2018 18:09:15 with FlexibleSUSY
- * 2.1.0 (git commit: 8f20f6c9c42c159c1588fbc0bb3e15ce5ab6ace3) and SARAH 4.12.3 .
+ * This file was generated at Sun 26 Aug 2018 14:15:53 with FlexibleSUSY
+ * 2.2.0 (git commit: 8489097de2d6938a6da0149378457b5ad13d9425) and SARAH 4.13.0 .
  */
 
 #include "TMSSM_two_scale_ewsb_solver.hpp"
@@ -235,25 +235,26 @@ int CLASSNAME::solve_tree_level(TMSSM_mass_eigenstates& model)
    double Mu;
    double mT2;
 
-   BMu = Re((0.05*(-20*mHd2*vd*vu + 20*mHu2*vd*vu + 5*vu*AbsSqr(Lambdax)*Cube(
-      vd) - 5*vd*AbsSqr(Lambdax)*Cube(vu) - 3*vu*Cube(vd)*Sqr(g1) + 3*vd*Cube(vu)*
-      Sqr(g1) - 5*vu*Cube(vd)*Sqr(g2) + 5*vd*Cube(vu)*Sqr(g2) - 10*MT*vT*Conj(
-      Lambdax)*Sqr(vd) - 5*vT*Conj(TLambdax)*Sqr(vd) - 10*vT*Conj(MT)*Lambdax*Sqr(
-      vd) + 10*MT*vT*Conj(Lambdax)*Sqr(vu) + 5*vT*Conj(TLambdax)*Sqr(vu) + 10*vT*
-      Conj(MT)*Lambdax*Sqr(vu) - 5*vT*Sqr(vd)*TLambdax + 5*vT*Sqr(vu)*TLambdax))/(
-      Sqr(vd) - Sqr(vu)));
-   Mu = Re((0.0125*(-20*vd*vT*Conj(Lambdax) - 20*vd*vT*Lambdax + LOCALINPUT(
-      SignMu)*Sqrt(Sqr(20*vd*vT*Conj(Lambdax) + 20*vd*vT*Lambdax) - 160*vd*(40*
-      mHd2*vd - 40*BMu*vu - 20*MT*vT*vu*Conj(Lambdax) - 10*vT*vu*Conj(TLambdax) -
-      20*vT*vu*Conj(MT)*Lambdax + 3*Cube(vd)*Sqr(g1) + 5*Cube(vd)*Sqr(g2) + 10*vd*
-      AbsSqr(Lambdax)*Sqr(vT) + 10*vd*AbsSqr(Lambdax)*Sqr(vu) - 3*vd*Sqr(g1)*Sqr(
-      vu) - 5*vd*Sqr(g2)*Sqr(vu) - 10*vT*vu*TLambdax))))/vd);
-   mT2 = Re((0.25*(-16*vT*AbsSqr(MT) - 4*vT*BMT - 4*vT*Conj(BMT) + 2*MT*vd*vu*
-      Conj(Lambdax) + vd*vu*Conj(TLambdax) + 2*vd*vu*Conj(MT)*Lambdax - vT*AbsSqr(
+   BMu = Re((0.05*(-20*mHd2*vd*vu + 20*mHu2*vd*vu + 5*vu*AbsSqr(Lambdax)*Cube(vd)
+      - 5*vd*AbsSqr(Lambdax)*Cube(vu) - 3*vu*Cube(vd)*Sqr(g1) + 3*vd*Cube(vu)*Sqr(
+      g1) - 5*vu*Cube(vd)*Sqr(g2) + 5*vd*Cube(vu)*Sqr(g2) - 10*MT*vT*Conj(Lambdax)
+      *Sqr(vd) - 5*vT*Conj(TLambdax)*Sqr(vd) - 10*vT*Conj(MT)*Lambdax*Sqr(vd) + 10
+      *MT*vT*Conj(Lambdax)*Sqr(vu) + 5*vT*Conj(TLambdax)*Sqr(vu) + 10*vT*Conj(MT)*
+      Lambdax*Sqr(vu) - 5*vT*Sqr(vd)*TLambdax + 5*vT*Sqr(vu)*TLambdax))/(Sqr(vd) -
+      Sqr(vu)));
+   Mu = Re((0.0125*(-20*vd*vT*Conj(Lambdax) - 20*vd*vT*Lambdax + LOCALINPUT(SignMu
+      )*Sqrt(Sqr(20*vd*vT*Conj(Lambdax) + 20*vd*vT*Lambdax) - 160*vd*(40*mHd2*vd -
+      40*BMu*vu - 20*MT*vT*vu*Conj(Lambdax) - 10*vT*vu*Conj(TLambdax) - 20*vT*vu*
+      Conj(MT)*Lambdax + 3*Cube(vd)*Sqr(g1) + 5*Cube(vd)*Sqr(g2) + 10*vd*AbsSqr(
+      Lambdax)*Sqr(vT) + 10*vd*AbsSqr(Lambdax)*Sqr(vu) - 3*vd*Sqr(g1)*Sqr(vu) - 5*
+      vd*Sqr(g2)*Sqr(vu) - 10*vT*vu*TLambdax))))/vd);
+   mT2 = Re((0.25*(-16*vT*AbsSqr(MT) - 4*vT*BMT - 4*vT*Conj(BMT) + 2*MT*vd*vu*Conj
+      (Lambdax) + vd*vu*Conj(TLambdax) + 2*vd*vu*Conj(MT)*Lambdax - vT*AbsSqr(
       Lambdax)*Sqr(vd) - Mu*Conj(Lambdax)*Sqr(vd) - Mu*Lambdax*Sqr(vd) - vT*AbsSqr
       (Lambdax)*Sqr(vu) - Mu*Conj(Lambdax)*Sqr(vu) - Mu*Lambdax*Sqr(vu) + vd*vu*
       TLambdax))/vT);
 
+   
    const bool is_finite = IsFinite(BMu) && IsFinite(Mu) && IsFinite(mT2);
 
    if (is_finite) {
@@ -265,7 +266,6 @@ int CLASSNAME::solve_tree_level(TMSSM_mass_eigenstates& model)
       error = EWSB_solver::FAIL;
       model.get_problems().flag_no_ewsb_tree_level();
    }
-
    return error;
 }
 
@@ -329,24 +329,24 @@ CLASSNAME::EWSB_vector_t CLASSNAME::ewsb_step(const TMSSM_mass_eigenstates& mode
    double Mu;
    double mT2;
 
-   BMu = Re((0.05*(-20*mHd2*vd*vu + 20*mHu2*vd*vu + 5*vu*AbsSqr(Lambdax)*Cube(
-      vd) - 5*vd*AbsSqr(Lambdax)*Cube(vu) + 20*vu*tadpole[0] - 20*vd*tadpole[1] -
-      3*vu*Cube(vd)*Sqr(g1) + 3*vd*Cube(vu)*Sqr(g1) - 5*vu*Cube(vd)*Sqr(g2) + 5*vd
-      *Cube(vu)*Sqr(g2) - 10*MT*vT*Conj(Lambdax)*Sqr(vd) - 5*vT*Conj(TLambdax)*Sqr
-      (vd) - 10*vT*Conj(MT)*Lambdax*Sqr(vd) + 10*MT*vT*Conj(Lambdax)*Sqr(vu) + 5*
-      vT*Conj(TLambdax)*Sqr(vu) + 10*vT*Conj(MT)*Lambdax*Sqr(vu) - 5*vT*Sqr(vd)*
+   BMu = Re((0.05*(-20*mHd2*vd*vu + 20*mHu2*vd*vu + 5*vu*AbsSqr(Lambdax)*Cube(vd)
+      - 5*vd*AbsSqr(Lambdax)*Cube(vu) + 20*vu*tadpole[0] - 20*vd*tadpole[1] - 3*vu
+      *Cube(vd)*Sqr(g1) + 3*vd*Cube(vu)*Sqr(g1) - 5*vu*Cube(vd)*Sqr(g2) + 5*vd*
+      Cube(vu)*Sqr(g2) - 10*MT*vT*Conj(Lambdax)*Sqr(vd) - 5*vT*Conj(TLambdax)*Sqr(
+      vd) - 10*vT*Conj(MT)*Lambdax*Sqr(vd) + 10*MT*vT*Conj(Lambdax)*Sqr(vu) + 5*vT
+      *Conj(TLambdax)*Sqr(vu) + 10*vT*Conj(MT)*Lambdax*Sqr(vu) - 5*vT*Sqr(vd)*
       TLambdax + 5*vT*Sqr(vu)*TLambdax))/(Sqr(vd) - Sqr(vu)));
-   Mu = Re((0.0125*(-20*vd*vT*Conj(Lambdax) - 20*vd*vT*Lambdax + LOCALINPUT(
-      SignMu)*Sqrt(Sqr(20*vd*vT*Conj(Lambdax) + 20*vd*vT*Lambdax) - 160*vd*(40*
-      mHd2*vd - 40*BMu*vu - 20*MT*vT*vu*Conj(Lambdax) - 10*vT*vu*Conj(TLambdax) -
-      20*vT*vu*Conj(MT)*Lambdax - 40*tadpole[0] + 3*Cube(vd)*Sqr(g1) + 5*Cube(vd)*
-      Sqr(g2) + 10*vd*AbsSqr(Lambdax)*Sqr(vT) + 10*vd*AbsSqr(Lambdax)*Sqr(vu) - 3*
-      vd*Sqr(g1)*Sqr(vu) - 5*vd*Sqr(g2)*Sqr(vu) - 10*vT*vu*TLambdax))))/vd);
-   mT2 = Re((0.25*(-16*vT*AbsSqr(MT) - 4*vT*BMT - 4*vT*Conj(BMT) + 2*MT*vd*vu*
-      Conj(Lambdax) + vd*vu*Conj(TLambdax) + 2*vd*vu*Conj(MT)*Lambdax + 4*tadpole[
-      2] - vT*AbsSqr(Lambdax)*Sqr(vd) - Mu*Conj(Lambdax)*Sqr(vd) - Mu*Lambdax*Sqr(
-      vd) - vT*AbsSqr(Lambdax)*Sqr(vu) - Mu*Conj(Lambdax)*Sqr(vu) - Mu*Lambdax*Sqr
-      (vu) + vd*vu*TLambdax))/vT);
+   Mu = Re((0.0125*(-20*vd*vT*Conj(Lambdax) - 20*vd*vT*Lambdax + LOCALINPUT(SignMu
+      )*Sqrt(Sqr(20*vd*vT*Conj(Lambdax) + 20*vd*vT*Lambdax) - 160*vd*(40*mHd2*vd -
+      40*BMu*vu - 20*MT*vT*vu*Conj(Lambdax) - 10*vT*vu*Conj(TLambdax) - 20*vT*vu*
+      Conj(MT)*Lambdax - 40*tadpole[0] + 3*Cube(vd)*Sqr(g1) + 5*Cube(vd)*Sqr(g2) +
+      10*vd*AbsSqr(Lambdax)*Sqr(vT) + 10*vd*AbsSqr(Lambdax)*Sqr(vu) - 3*vd*Sqr(g1)
+      *Sqr(vu) - 5*vd*Sqr(g2)*Sqr(vu) - 10*vT*vu*TLambdax))))/vd);
+   mT2 = Re((0.25*(-16*vT*AbsSqr(MT) - 4*vT*BMT - 4*vT*Conj(BMT) + 2*MT*vd*vu*Conj
+      (Lambdax) + vd*vu*Conj(TLambdax) + 2*vd*vu*Conj(MT)*Lambdax + 4*tadpole[2] -
+      vT*AbsSqr(Lambdax)*Sqr(vd) - Mu*Conj(Lambdax)*Sqr(vd) - Mu*Lambdax*Sqr(vd) -
+      vT*AbsSqr(Lambdax)*Sqr(vu) - Mu*Conj(Lambdax)*Sqr(vu) - Mu*Lambdax*Sqr(vu) +
+      vd*vu*TLambdax))/vT);
 
    const bool is_finite = IsFinite(BMu) && IsFinite(Mu) && IsFinite(mT2);
 

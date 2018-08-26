@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 16:22:38
+// File generated at Sun 26 Aug 2018 15:19:29
 
 #include "MRSSMEFTHiggs_effective_couplings.hpp"
 
@@ -39,20 +39,18 @@ MRSSMEFTHiggs_effective_couplings::MRSSMEFTHiggs_effective_couplings(
    const Physical_input& input_)
    : model(model_), qedqcd(qedqcd_), physical_input(input_)
    , rg_improve(true), include_qcd_corrections(true)
-   , ZD(MODELPARAMETER(ZD)), ZV(MODELPARAMETER(ZV)), ZU(MODELPARAMETER(ZU)), ZE
-      (MODELPARAMETER(ZE)), ZH(MODELPARAMETER(ZH)), ZA(MODELPARAMETER(ZA)), ZHR(
+   , ZD(MODELPARAMETER(ZD)), ZV(MODELPARAMETER(ZV)), ZU(MODELPARAMETER(ZU)), ZE(
+      MODELPARAMETER(ZE)), ZH(MODELPARAMETER(ZH)), ZA(MODELPARAMETER(ZA)), ZHR(
       MODELPARAMETER(ZHR)), ZP(MODELPARAMETER(ZP)), ZN1(MODELPARAMETER(ZN1)), ZN2(
       MODELPARAMETER(ZN2)), UM1(MODELPARAMETER(UM1)), UP1(MODELPARAMETER(UP1)),
       UM2(MODELPARAMETER(UM2)), UP2(MODELPARAMETER(UP2)), ZEL(MODELPARAMETER(ZEL))
       , ZER(MODELPARAMETER(ZER)), ZDL(MODELPARAMETER(ZDL)), ZDR(MODELPARAMETER(ZDR
       )), ZUL(MODELPARAMETER(ZUL)), ZUR(MODELPARAMETER(ZUR)), ZZ(MODELPARAMETER(ZZ
       ))
-
-   , eff_CphhVPVP(Eigen::Array<std::complex<double>,4,1>::Zero()), eff_CphhVGVG
-      (Eigen::Array<std::complex<double>,4,1>::Zero()), eff_CpAhVPVP(Eigen::Array<
+   , eff_CphhVPVP(Eigen::Array<std::complex<double>,4,1>::Zero()), eff_CphhVGVG(
+      Eigen::Array<std::complex<double>,4,1>::Zero()), eff_CpAhVPVP(Eigen::Array<
       std::complex<double>,4,1>::Zero()), eff_CpAhVGVG(Eigen::Array<std::complex<
       double>,4,1>::Zero())
-
 {
 }
 
@@ -160,7 +158,6 @@ std::complex<double> MRSSMEFTHiggs_effective_couplings::scalar_scalar_qcd_factor
       if (m_loop > m_decay) {
          result = 1 + 0.06754745576155852*Sqr(g3);
       }
-
    }
 
    return result;
@@ -172,8 +169,8 @@ std::complex<double> MRSSMEFTHiggs_effective_couplings::scalar_fermion_qcd_facto
 
    if (include_qcd_corrections) {
       const auto g3 = MODELPARAMETER(g3);
-      result = 1.0 + 0.025330295910584444*Sqr(g3) *
-         scalar_diphoton_fermion_loop(m_decay, m_loop);
+      result = 1.0 + 0.025330295910584444*Sqr(g3) * scalar_diphoton_fermion_loop(
+         m_decay, m_loop);
 
    }
 
@@ -213,8 +210,8 @@ double MRSSMEFTHiggs_effective_couplings::scalar_scaling_factor(double m) const
 
    const auto g3 = MODELPARAMETER(g3);
 
-   const double nlo_qcd = 0.025330295910584444*(23.75 - 1.1666666666666667*Nf)*
-      Sqr(g3);
+   const double nlo_qcd = 0.025330295910584444*(23.75 - 1.1666666666666667*Nf)*Sqr
+      (g3);
    const double nnlo_qcd = 0.000641623890917771*Quad(g3)*(370.1956513893174 +
       2.375*l + (-47.18640261449638 + 0.6666666666666666*l)*Nf +
       0.9017702481178881*Sqr(Nf));
@@ -232,10 +229,10 @@ double MRSSMEFTHiggs_effective_couplings::pseudoscalar_scaling_factor(double m) 
 
    const auto g3 = MODELPARAMETER(g3);
 
-   const double nlo_qcd = 0.025330295910584444*(24.25 - 1.1666666666666667*Nf)*
-      Sqr(g3);
-   const double nnlo_qcd = 0.000641623890917771*(171.54400563089382 + 5*l)*Quad
+   const double nlo_qcd = 0.025330295910584444*(24.25 - 1.1666666666666667*Nf)*Sqr
       (g3);
+   const double nnlo_qcd = 0.000641623890917771*(171.54400563089382 + 5*l)*Quad(g3
+      );
    const double nnnlo_qcd = 0;
 
    return Sqrt(1.0 + nlo_qcd + nnlo_qcd + nnnlo_qcd);
@@ -301,8 +298,8 @@ std::complex<double> MRSSMEFTHiggs_effective_couplings::CpSRdphhconjSRdp(int gI2
    const auto vT = MODELPARAMETER(vT);
    const auto vu = MODELPARAMETER(vu);
 
-   const std::complex<double> result = 0.25*(vd*(-4*AbsSqr(LamTD) + 0.6*Sqr(g1)
-      - Sqr(g2))*ZH(gI2,0) + vu*(-0.6*Sqr(g1) + Sqr(g2))*ZH(gI2,1) -
+   const std::complex<double> result = 0.25*(vd*(-4*AbsSqr(LamTD) + 0.6*Sqr(g1) -
+      Sqr(g2))*ZH(gI2,0) + vu*(-0.6*Sqr(g1) + Sqr(g2))*ZH(gI2,1) -
       1.5491933384829668*g1*MDBS*ZH(gI2,2) - 4*vS*AbsSqr(LamSD)*ZH(gI2,2) -
       2.8284271247461903*MuD*Conj(LamSD)*ZH(gI2,2) + 1.4142135623730951*LamTD*vT*
       Conj(LamSD)*ZH(gI2,2) + 1.4142135623730951*LamSD*vT*Conj(LamTD)*ZH(gI2,2) -
@@ -352,8 +349,8 @@ std::complex<double> MRSSMEFTHiggs_effective_couplings::CpSRumhhconjSRum(int gI2
    const auto vT = MODELPARAMETER(vT);
    const auto vu = MODELPARAMETER(vu);
 
-   const std::complex<double> result = 0.25*(vd*(-0.6*Sqr(g1) + Sqr(g2))*ZH(gI2
-      ,0) + vu*(-4*AbsSqr(LamTU) + 0.6*Sqr(g1) - Sqr(g2))*ZH(gI2,1) +
+   const std::complex<double> result = 0.25*(vd*(-0.6*Sqr(g1) + Sqr(g2))*ZH(gI2,0)
+      + vu*(-4*AbsSqr(LamTU) + 0.6*Sqr(g1) - Sqr(g2))*ZH(gI2,1) +
       1.5491933384829668*g1*MDBS*ZH(gI2,2) - 4*vS*AbsSqr(LamSU)*ZH(gI2,2) -
       2.8284271247461903*MuU*Conj(LamSU)*ZH(gI2,2) - 1.4142135623730951*LamTU*vT*
       Conj(LamSU)*ZH(gI2,2) - 1.4142135623730951*LamSU*vT*Conj(LamTU)*ZH(gI2,2) +
@@ -373,8 +370,8 @@ std::complex<double> MRSSMEFTHiggs_effective_couplings::CphhconjVWmVWm(int gI2) 
    const auto vT = MODELPARAMETER(vT);
    const auto vu = MODELPARAMETER(vu);
 
-   const std::complex<double> result = 0.5*Sqr(g2)*(vd*ZH(gI2,0) + vu*ZH(gI2,1)
-      + 4*vT*ZH(gI2,3));
+   const std::complex<double> result = 0.5*Sqr(g2)*(vd*ZH(gI2,0) + vu*ZH(gI2,1) +
+      4*vT*ZH(gI2,3));
 
    return result;
 }
@@ -383,9 +380,9 @@ std::complex<double> MRSSMEFTHiggs_effective_couplings::CpbarFeFeAhPL(int gO2, i
 {
    const auto Ye = MODELPARAMETER(Ye);
 
-   const std::complex<double> result = std::complex<double>(0.,
-      -0.7071067811865475)*SUM(j2,0,2,Conj(ZEL(gI1,j2))*SUM(j1,0,2,Conj(ZER(gO2,j1
-      ))*Ye(j1,j2)))*ZA(gI2,0);
+   const std::complex<double> result = std::complex<double>(0.,-0.7071067811865475
+      )*SUM(j2,0,2,Conj(ZEL(gI1,j2))*SUM(j1,0,2,Conj(ZER(gO2,j1))*Ye(j1,j2)))*ZA(
+      gI2,0);
 
    return result;
 }
@@ -394,8 +391,8 @@ std::complex<double> MRSSMEFTHiggs_effective_couplings::CpbarFeFehhPL(int gO2, i
 {
    const auto Ye = MODELPARAMETER(Ye);
 
-   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,Conj(ZEL(
-      gI2,j2))*SUM(j1,0,2,Conj(ZER(gO2,j1))*Ye(j1,j2)))*ZH(gI1,0);
+   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,Conj(ZEL(gI2
+      ,j2))*SUM(j1,0,2,Conj(ZER(gO2,j1))*Ye(j1,j2)))*ZH(gI1,0);
 
    return result;
 }
@@ -404,9 +401,9 @@ std::complex<double> MRSSMEFTHiggs_effective_couplings::CpbarFdFdAhPL(int gO2, i
 {
    const auto Yd = MODELPARAMETER(Yd);
 
-   const std::complex<double> result = std::complex<double>(0.,
-      -0.7071067811865475)*SUM(j2,0,2,Conj(ZDL(gI1,j2))*SUM(j1,0,2,Conj(ZDR(gO2,j1
-      ))*Yd(j1,j2)))*ZA(gI2,0);
+   const std::complex<double> result = std::complex<double>(0.,-0.7071067811865475
+      )*SUM(j2,0,2,Conj(ZDL(gI1,j2))*SUM(j1,0,2,Conj(ZDR(gO2,j1))*Yd(j1,j2)))*ZA(
+      gI2,0);
 
    return result;
 }
@@ -415,8 +412,8 @@ std::complex<double> MRSSMEFTHiggs_effective_couplings::CpbarFdFdhhPL(int gO2, i
 {
    const auto Yd = MODELPARAMETER(Yd);
 
-   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,Conj(ZDL(
-      gI2,j2))*SUM(j1,0,2,Conj(ZDR(gO2,j1))*Yd(j1,j2)))*ZH(gI1,0);
+   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,Conj(ZDL(gI2
+      ,j2))*SUM(j1,0,2,Conj(ZDR(gO2,j1))*Yd(j1,j2)))*ZH(gI1,0);
 
    return result;
 }
@@ -425,9 +422,9 @@ std::complex<double> MRSSMEFTHiggs_effective_couplings::CpbarFuFuAhPL(int gO2, i
 {
    const auto Yu = MODELPARAMETER(Yu);
 
-   const std::complex<double> result = std::complex<double>(0.,
-      -0.7071067811865475)*SUM(j2,0,2,Conj(ZUL(gI1,j2))*SUM(j1,0,2,Conj(ZUR(gO2,j1
-      ))*Yu(j1,j2)))*ZA(gI2,1);
+   const std::complex<double> result = std::complex<double>(0.,-0.7071067811865475
+      )*SUM(j2,0,2,Conj(ZUL(gI1,j2))*SUM(j1,0,2,Conj(ZUR(gO2,j1))*Yu(j1,j2)))*ZA(
+      gI2,1);
 
    return result;
 }
@@ -436,8 +433,8 @@ std::complex<double> MRSSMEFTHiggs_effective_couplings::CpbarFuFuhhPL(int gO2, i
 {
    const auto Yu = MODELPARAMETER(Yu);
 
-   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,Conj(ZUL(
-      gI2,j2))*SUM(j1,0,2,Conj(ZUR(gO2,j1))*Yu(j1,j2)))*ZH(gI1,1);
+   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,Conj(ZUL(gI2
+      ,j2))*SUM(j1,0,2,Conj(ZUR(gO2,j1))*Yu(j1,j2)))*ZH(gI1,1);
 
    return result;
 }
@@ -453,18 +450,18 @@ std::complex<double> MRSSMEFTHiggs_effective_couplings::CphhSdconjSd(int gt1, in
    const auto Yd = MODELPARAMETER(Yd);
    const auto Mu = MODELPARAMETER(Mu);
 
-   const std::complex<double> result = 0.016666666666666666*(30*(-2*vd*SUM(j3,0
-      ,2,Conj(ZD(gt2,3 + j3))*SUM(j2,0,2,SUM(j1,0,2,Conj(Yd(j3,j1))*Yd(j2,j1))*ZD(
-      gt3,3 + j2)))*ZH(gt1,0) - 2*vd*SUM(j3,0,2,SUM(j2,0,2,Conj(ZD(gt2,j2))*SUM(j1
-      ,0,2,Conj(Yd(j1,j3))*Yd(j1,j2)))*ZD(gt3,j3))*ZH(gt1,0) + 1.4142135623730951*
-      (Conj(Mu)*SUM(j2,0,2,Conj(ZD(gt2,j2))*SUM(j1,0,2,Yd(j1,j2)*ZD(gt3,3 + j1)))
-      + Mu*SUM(j2,0,2,SUM(j1,0,2,Conj(Yd(j1,j2))*Conj(ZD(gt2,3 + j1)))*ZD(gt3,j2))
-      )*ZH(gt1,1)) + 2*g1*SUM(j1,0,2,Conj(ZD(gt2,3 + j1))*ZD(gt3,3 + j1))*(3*g1*vd
-      *ZH(gt1,0) - 3*g1*vu*ZH(gt1,1) - 7.745966692414834*(MDBS + Conj(MDBS))*ZH(
-      gt1,2)) + SUM(j1,0,2,Conj(ZD(gt2,j1))*ZD(gt3,j1))*(3*vd*(Sqr(g1) + 5*Sqr(g2)
-      )*ZH(gt1,0) - 3*vu*(Sqr(g1) + 5*Sqr(g2))*ZH(gt1,1) - 7.745966692414834*g1*
-      MDBS*ZH(gt1,2) - 7.745966692414834*g1*Conj(MDBS)*ZH(gt1,2) + 30*g2*MDWBT*ZH(
-      gt1,3) + 30*g2*Conj(MDWBT)*ZH(gt1,3)));
+   const std::complex<double> result = 0.016666666666666666*(30*(-2*vd*SUM(j3,0,2,
+      Conj(ZD(gt2,3 + j3))*SUM(j2,0,2,SUM(j1,0,2,Conj(Yd(j3,j1))*Yd(j2,j1))*ZD(gt3
+      ,3 + j2)))*ZH(gt1,0) - 2*vd*SUM(j3,0,2,SUM(j2,0,2,Conj(ZD(gt2,j2))*SUM(j1,0,
+      2,Conj(Yd(j1,j3))*Yd(j1,j2)))*ZD(gt3,j3))*ZH(gt1,0) + 1.4142135623730951*(
+      Conj(Mu)*SUM(j2,0,2,Conj(ZD(gt2,j2))*SUM(j1,0,2,Yd(j1,j2)*ZD(gt3,3 + j1))) +
+      Mu*SUM(j2,0,2,SUM(j1,0,2,Conj(Yd(j1,j2))*Conj(ZD(gt2,3 + j1)))*ZD(gt3,j2)))*
+      ZH(gt1,1)) + 2*g1*SUM(j1,0,2,Conj(ZD(gt2,3 + j1))*ZD(gt3,3 + j1))*(3*g1*vd*
+      ZH(gt1,0) - 3*g1*vu*ZH(gt1,1) - 7.745966692414834*(MDBS + Conj(MDBS))*ZH(gt1
+      ,2)) + SUM(j1,0,2,Conj(ZD(gt2,j1))*ZD(gt3,j1))*(3*vd*(Sqr(g1) + 5*Sqr(g2))*
+      ZH(gt1,0) - 3*vu*(Sqr(g1) + 5*Sqr(g2))*ZH(gt1,1) - 7.745966692414834*g1*MDBS
+      *ZH(gt1,2) - 7.745966692414834*g1*Conj(MDBS)*ZH(gt1,2) + 30*g2*MDWBT*ZH(gt1,
+      3) + 30*g2*Conj(MDWBT)*ZH(gt1,3)));
 
    return result;
 }
@@ -507,17 +504,17 @@ std::complex<double> MRSSMEFTHiggs_effective_couplings::CphhSeconjSe(int gt1, in
    const auto Ye = MODELPARAMETER(Ye);
    const auto Mu = MODELPARAMETER(Mu);
 
-   const std::complex<double> result = 0.05*(2*(5*(-2*vd*SUM(j3,0,2,Conj(ZE(gt2
-      ,3 + j3))*SUM(j2,0,2,SUM(j1,0,2,Conj(Ye(j3,j1))*Ye(j2,j1))*ZE(gt3,3 + j2)))*
-      ZH(gt1,0) - 2*vd*SUM(j3,0,2,SUM(j2,0,2,Conj(ZE(gt2,j2))*SUM(j1,0,2,Conj(Ye(
-      j1,j3))*Ye(j1,j2)))*ZE(gt3,j3))*ZH(gt1,0) + 1.4142135623730951*(Conj(Mu)*SUM
-      (j2,0,2,Conj(ZE(gt2,j2))*SUM(j1,0,2,Ye(j1,j2)*ZE(gt3,3 + j1))) + Mu*SUM(j2,0
-      ,2,SUM(j1,0,2,Conj(Ye(j1,j2))*Conj(ZE(gt2,3 + j1)))*ZE(gt3,j2)))*ZH(gt1,1))
-      + g1*SUM(j1,0,2,Conj(ZE(gt2,3 + j1))*ZE(gt3,3 + j1))*(3*g1*vd*ZH(gt1,0) - 3*
-      g1*vu*ZH(gt1,1) - 7.745966692414834*(MDBS + Conj(MDBS))*ZH(gt1,2))) + SUM(j1
-      ,0,2,Conj(ZE(gt2,j1))*ZE(gt3,j1))*((-3*vd*Sqr(g1) + 5*vd*Sqr(g2))*ZH(gt1,0)
-      + vu*(3*Sqr(g1) - 5*Sqr(g2))*ZH(gt1,1) + 2*(3.872983346207417*g1*(MDBS +
-      Conj(MDBS))*ZH(gt1,2) + 5*g2*(MDWBT + Conj(MDWBT))*ZH(gt1,3))));
+   const std::complex<double> result = 0.05*(2*(5*(-2*vd*SUM(j3,0,2,Conj(ZE(gt2,3
+      + j3))*SUM(j2,0,2,SUM(j1,0,2,Conj(Ye(j3,j1))*Ye(j2,j1))*ZE(gt3,3 + j2)))*ZH(
+      gt1,0) - 2*vd*SUM(j3,0,2,SUM(j2,0,2,Conj(ZE(gt2,j2))*SUM(j1,0,2,Conj(Ye(j1,
+      j3))*Ye(j1,j2)))*ZE(gt3,j3))*ZH(gt1,0) + 1.4142135623730951*(Conj(Mu)*SUM(j2
+      ,0,2,Conj(ZE(gt2,j2))*SUM(j1,0,2,Ye(j1,j2)*ZE(gt3,3 + j1))) + Mu*SUM(j2,0,2,
+      SUM(j1,0,2,Conj(Ye(j1,j2))*Conj(ZE(gt2,3 + j1)))*ZE(gt3,j2)))*ZH(gt1,1)) +
+      g1*SUM(j1,0,2,Conj(ZE(gt2,3 + j1))*ZE(gt3,3 + j1))*(3*g1*vd*ZH(gt1,0) - 3*g1
+      *vu*ZH(gt1,1) - 7.745966692414834*(MDBS + Conj(MDBS))*ZH(gt1,2))) + SUM(j1,0
+      ,2,Conj(ZE(gt2,j1))*ZE(gt3,j1))*((-3*vd*Sqr(g1) + 5*vd*Sqr(g2))*ZH(gt1,0) +
+      vu*(3*Sqr(g1) - 5*Sqr(g2))*ZH(gt1,1) + 2*(3.872983346207417*g1*(MDBS + Conj(
+      MDBS))*ZH(gt1,2) + 5*g2*(MDWBT + Conj(MDWBT))*ZH(gt1,3))));
 
    return result;
 }
@@ -539,8 +536,8 @@ std::complex<double> MRSSMEFTHiggs_effective_couplings::CphhHpmconjHpm(int gt1, 
    const auto vT = MODELPARAMETER(vT);
    const auto vu = MODELPARAMETER(vu);
 
-   const std::complex<double> result = 0.05*(7.745966692414834*g1*MDBS*ZH(gt1,2
-      )*ZP(gt2,0)*ZP(gt3,0) - 20*vS*AbsSqr(LamSD)*ZH(gt1,2)*ZP(gt2,0)*ZP(gt3,0) -
+   const std::complex<double> result = 0.05*(7.745966692414834*g1*MDBS*ZH(gt1,2)*
+      ZP(gt2,0)*ZP(gt3,0) - 20*vS*AbsSqr(LamSD)*ZH(gt1,2)*ZP(gt2,0)*ZP(gt3,0) -
       14.142135623730951*MuD*Conj(LamSD)*ZH(gt1,2)*ZP(gt2,0)*ZP(gt3,0) +
       7.0710678118654755*LamTD*vT*Conj(LamSD)*ZH(gt1,2)*ZP(gt2,0)*ZP(gt3,0) +
       7.0710678118654755*LamSD*vT*Conj(LamTD)*ZH(gt1,2)*ZP(gt2,0)*ZP(gt3,0) +
@@ -591,9 +588,9 @@ std::complex<double> MRSSMEFTHiggs_effective_couplings::CphhHpmconjHpm(int gt1, 
       ) + 2*LamTD*Conj(MuD) + vT*Sqr(g2)))*ZP(gt3,0) - 2*vd*(-2*AbsSqr(LamTD) +
       Sqr(g2))*ZP(gt3,2)) + ZP(gt2,3)*(((2.8284271247461903*MuD + 2*LamSD*vS +
       1.4142135623730951*LamTD*vT)*Conj(LamTD) + 1.4142135623730951*g2*(-(g2*vT) +
-      2*Conj(MDWBT)))*ZP(gt3,0) + 2*vd*Sqr(g2)*ZP(gt3,3))) + ZP(gt2,0)*(vd*(3*Sqr
-      (g1) + 5*Sqr(g2))*ZP(gt3,0) + 5*(vu*Sqr(g2)*ZP(gt3,1) + ((2.8284271247461903
-      *MuD + 2*LamSD*vS - 1.4142135623730951*LamTD*vT)*Conj(LamTD) +
+      2*Conj(MDWBT)))*ZP(gt3,0) + 2*vd*Sqr(g2)*ZP(gt3,3))) + ZP(gt2,0)*(vd*(3*Sqr(
+      g1) + 5*Sqr(g2))*ZP(gt3,0) + 5*(vu*Sqr(g2)*ZP(gt3,1) + ((2.8284271247461903*
+      MuD + 2*LamSD*vS - 1.4142135623730951*LamTD*vT)*Conj(LamTD) +
       1.4142135623730951*g2*(g2*vT + 2*Conj(MDWBT)))*ZP(gt3,2) + (2*LamTD*vS*Conj(
       LamSD) + 1.4142135623730951*(2*g2*MDWBT + vT*AbsSqr(LamTD) + 2*LamTD*Conj(
       MuD) - vT*Sqr(g2)))*ZP(gt3,3)))) - ZH(gt1,1)*(ZP(gt2,0)*((-3*vu*Sqr(g1) + 5*
@@ -618,11 +615,10 @@ std::complex<double> MRSSMEFTHiggs_effective_couplings::CpbarCha1Cha1hhPL(int gt
    const auto LamSD = MODELPARAMETER(LamSD);
    const auto LamTD = MODELPARAMETER(LamTD);
 
-   const std::complex<double> result = 0.5*(-(Conj(UM1(gt3,0))*(
-      1.4142135623730951*LamTD*Conj(UP1(gt1,1))*ZH(gt2,0) + 2*g2*Conj(UP1(gt1,0))*
-      ZH(gt2,3))) - Conj(UM1(gt3,1))*(1.4142135623730951*g2*Conj(UP1(gt1,0))*ZH(
-      gt2,0) + Conj(UP1(gt1,1))*(1.4142135623730951*LamSD*ZH(gt2,2) - LamTD*ZH(gt2
-      ,3))));
+   const std::complex<double> result = 0.5*(-(Conj(UM1(gt3,0))*(1.4142135623730951
+      *LamTD*Conj(UP1(gt1,1))*ZH(gt2,0) + 2*g2*Conj(UP1(gt1,0))*ZH(gt2,3))) - Conj
+      (UM1(gt3,1))*(1.4142135623730951*g2*Conj(UP1(gt1,0))*ZH(gt2,0) + Conj(UP1(
+      gt1,1))*(1.4142135623730951*LamSD*ZH(gt2,2) - LamTD*ZH(gt2,3))));
 
    return result;
 }
@@ -633,9 +629,9 @@ std::complex<double> MRSSMEFTHiggs_effective_couplings::CpbarCha2Cha2hhPL(int gt
    const auto LamSU = MODELPARAMETER(LamSU);
    const auto LamTU = MODELPARAMETER(LamTU);
 
-   const std::complex<double> result = 0.5*(g2*Conj(UM2(gt1,0))*(
-      -1.4142135623730951*Conj(UP2(gt3,1))*ZH(gt2,1) + 2*Conj(UP2(gt3,0))*ZH(gt2,3
-      )) + Conj(UM2(gt1,1))*(1.4142135623730951*LamTU*Conj(UP2(gt3,0))*ZH(gt2,1) +
+   const std::complex<double> result = 0.5*(g2*Conj(UM2(gt1,0))*(-
+      1.4142135623730951*Conj(UP2(gt3,1))*ZH(gt2,1) + 2*Conj(UP2(gt3,0))*ZH(gt2,3)
+      ) + Conj(UM2(gt1,1))*(1.4142135623730951*LamTU*Conj(UP2(gt3,0))*ZH(gt2,1) +
       Conj(UP2(gt3,1))*(1.4142135623730951*LamSU*ZH(gt2,2) + LamTU*ZH(gt2,3))));
 
    return result;
@@ -650,17 +646,17 @@ std::complex<double> MRSSMEFTHiggs_effective_couplings::CpAhSdconjSd(int gt1, in
    const auto Yd = MODELPARAMETER(Yd);
    const auto Mu = MODELPARAMETER(Mu);
 
-   const std::complex<double> result = std::complex<double>(0,
-      -0.16666666666666666)*(4.242640687119286*Conj(Mu)*SUM(j2,0,2,Conj(ZD(gt2,j2)
-      )*SUM(j1,0,2,Yd(j1,j2)*ZD(gt3,3 + j1)))*ZA(gt1,1) - 4.242640687119286*Mu*SUM
-      (j2,0,2,SUM(j1,0,2,Conj(Yd(j1,j2))*Conj(ZD(gt2,3 + j1)))*ZD(gt3,j2))*ZA(gt1,
-      1) + 0.7745966692414834*g1*MDBS*SUM(j1,0,2,Conj(ZD(gt2,j1))*ZD(gt3,j1))*ZA(
-      gt1,2) - 0.7745966692414834*g1*Conj(MDBS)*SUM(j1,0,2,Conj(ZD(gt2,j1))*ZD(gt3
-      ,j1))*ZA(gt1,2) + 1.5491933384829668*g1*MDBS*SUM(j1,0,2,Conj(ZD(gt2,3 + j1))
-      *ZD(gt3,3 + j1))*ZA(gt1,2) - 1.5491933384829668*g1*Conj(MDBS)*SUM(j1,0,2,
-      Conj(ZD(gt2,3 + j1))*ZD(gt3,3 + j1))*ZA(gt1,2) - 3*g2*MDWBT*SUM(j1,0,2,Conj(
-      ZD(gt2,j1))*ZD(gt3,j1))*ZA(gt1,3) + 3*g2*Conj(MDWBT)*SUM(j1,0,2,Conj(ZD(gt2,
-      j1))*ZD(gt3,j1))*ZA(gt1,3));
+   const std::complex<double> result = std::complex<double>(0,-0.16666666666666666
+      )*(4.242640687119286*Conj(Mu)*SUM(j2,0,2,Conj(ZD(gt2,j2))*SUM(j1,0,2,Yd(j1,
+      j2)*ZD(gt3,3 + j1)))*ZA(gt1,1) - 4.242640687119286*Mu*SUM(j2,0,2,SUM(j1,0,2,
+      Conj(Yd(j1,j2))*Conj(ZD(gt2,3 + j1)))*ZD(gt3,j2))*ZA(gt1,1) +
+      0.7745966692414834*g1*MDBS*SUM(j1,0,2,Conj(ZD(gt2,j1))*ZD(gt3,j1))*ZA(gt1,2)
+      - 0.7745966692414834*g1*Conj(MDBS)*SUM(j1,0,2,Conj(ZD(gt2,j1))*ZD(gt3,j1))*
+      ZA(gt1,2) + 1.5491933384829668*g1*MDBS*SUM(j1,0,2,Conj(ZD(gt2,3 + j1))*ZD(
+      gt3,3 + j1))*ZA(gt1,2) - 1.5491933384829668*g1*Conj(MDBS)*SUM(j1,0,2,Conj(ZD
+      (gt2,3 + j1))*ZD(gt3,3 + j1))*ZA(gt1,2) - 3*g2*MDWBT*SUM(j1,0,2,Conj(ZD(gt2,
+      j1))*ZD(gt3,j1))*ZA(gt1,3) + 3*g2*Conj(MDWBT)*SUM(j1,0,2,Conj(ZD(gt2,j1))*ZD
+      (gt3,j1))*ZA(gt1,3));
 
    return result;
 }
@@ -674,17 +670,17 @@ std::complex<double> MRSSMEFTHiggs_effective_couplings::CpAhSuconjSu(int gt1, in
    const auto Yu = MODELPARAMETER(Yu);
    const auto Mu = MODELPARAMETER(Mu);
 
-   const std::complex<double> result = std::complex<double>(0,
-      -0.16666666666666666)*(4.242640687119286*Conj(Mu)*SUM(j2,0,2,Conj(ZU(gt2,j2)
-      )*SUM(j1,0,2,Yu(j1,j2)*ZU(gt3,3 + j1)))*ZA(gt1,0) - 4.242640687119286*Mu*SUM
-      (j2,0,2,SUM(j1,0,2,Conj(Yu(j1,j2))*Conj(ZU(gt2,3 + j1)))*ZU(gt3,j2))*ZA(gt1,
-      0) + 0.7745966692414834*g1*MDBS*SUM(j1,0,2,Conj(ZU(gt2,j1))*ZU(gt3,j1))*ZA(
-      gt1,2) - 0.7745966692414834*g1*Conj(MDBS)*SUM(j1,0,2,Conj(ZU(gt2,j1))*ZU(gt3
-      ,j1))*ZA(gt1,2) - 3.0983866769659336*g1*MDBS*SUM(j1,0,2,Conj(ZU(gt2,3 + j1))
-      *ZU(gt3,3 + j1))*ZA(gt1,2) + 3.0983866769659336*g1*Conj(MDBS)*SUM(j1,0,2,
-      Conj(ZU(gt2,3 + j1))*ZU(gt3,3 + j1))*ZA(gt1,2) + 3*g2*MDWBT*SUM(j1,0,2,Conj(
-      ZU(gt2,j1))*ZU(gt3,j1))*ZA(gt1,3) - 3*g2*Conj(MDWBT)*SUM(j1,0,2,Conj(ZU(gt2,
-      j1))*ZU(gt3,j1))*ZA(gt1,3));
+   const std::complex<double> result = std::complex<double>(0,-0.16666666666666666
+      )*(4.242640687119286*Conj(Mu)*SUM(j2,0,2,Conj(ZU(gt2,j2))*SUM(j1,0,2,Yu(j1,
+      j2)*ZU(gt3,3 + j1)))*ZA(gt1,0) - 4.242640687119286*Mu*SUM(j2,0,2,SUM(j1,0,2,
+      Conj(Yu(j1,j2))*Conj(ZU(gt2,3 + j1)))*ZU(gt3,j2))*ZA(gt1,0) +
+      0.7745966692414834*g1*MDBS*SUM(j1,0,2,Conj(ZU(gt2,j1))*ZU(gt3,j1))*ZA(gt1,2)
+      - 0.7745966692414834*g1*Conj(MDBS)*SUM(j1,0,2,Conj(ZU(gt2,j1))*ZU(gt3,j1))*
+      ZA(gt1,2) - 3.0983866769659336*g1*MDBS*SUM(j1,0,2,Conj(ZU(gt2,3 + j1))*ZU(
+      gt3,3 + j1))*ZA(gt1,2) + 3.0983866769659336*g1*Conj(MDBS)*SUM(j1,0,2,Conj(ZU
+      (gt2,3 + j1))*ZU(gt3,3 + j1))*ZA(gt1,2) + 3*g2*MDWBT*SUM(j1,0,2,Conj(ZU(gt2,
+      j1))*ZU(gt3,j1))*ZA(gt1,3) - 3*g2*Conj(MDWBT)*SUM(j1,0,2,Conj(ZU(gt2,j1))*ZU
+      (gt3,j1))*ZA(gt1,3));
 
    return result;
 }
@@ -705,8 +701,8 @@ std::complex<double> MRSSMEFTHiggs_effective_couplings::CpAhSeconjSe(int gt1, in
       3.872983346207417*g1*MDBS*SUM(j1,0,2,Conj(ZE(gt2,j1))*ZE(gt3,j1))*ZA(gt1,2)
       + 3.872983346207417*g1*Conj(MDBS)*SUM(j1,0,2,Conj(ZE(gt2,j1))*ZE(gt3,j1))*ZA
       (gt1,2) + 7.745966692414834*g1*MDBS*SUM(j1,0,2,Conj(ZE(gt2,3 + j1))*ZE(gt3,3
-      + j1))*ZA(gt1,2) - 7.745966692414834*g1*Conj(MDBS)*SUM(j1,0,2,Conj(ZE(gt2,3
-      + j1))*ZE(gt3,3 + j1))*ZA(gt1,2) - 5*g2*MDWBT*SUM(j1,0,2,Conj(ZE(gt2,j1))*
+       + j1))*ZA(gt1,2) - 7.745966692414834*g1*Conj(MDBS)*SUM(j1,0,2,Conj(ZE(gt2,3
+       + j1))*ZE(gt3,3 + j1))*ZA(gt1,2) - 5*g2*MDWBT*SUM(j1,0,2,Conj(ZE(gt2,j1))*
       ZE(gt3,j1))*ZA(gt1,3) + 5*g2*Conj(MDWBT)*SUM(j1,0,2,Conj(ZE(gt2,j1))*ZE(gt3,
       j1))*ZA(gt1,3));
 
@@ -730,9 +726,9 @@ std::complex<double> MRSSMEFTHiggs_effective_couplings::CpAhHpmconjHpm(int gt1, 
    const auto vT = MODELPARAMETER(vT);
    const auto vu = MODELPARAMETER(vu);
 
-   const std::complex<double> result = std::complex<double>(0,0.05)*(ZA(gt1,2)*
-      (10*LamTD*vd*Conj(LamSD)*ZP(gt2,2)*ZP(gt3,0) - 10*LamSD*vd*Conj(LamTD)*ZP(
-      gt2,3)*ZP(gt3,0) - 7.745966692414834*g1*MDBS*ZP(gt2,1)*ZP(gt3,1) +
+   const std::complex<double> result = std::complex<double>(0,0.05)*(ZA(gt1,2)*(10
+      *LamTD*vd*Conj(LamSD)*ZP(gt2,2)*ZP(gt3,0) - 10*LamSD*vd*Conj(LamTD)*ZP(gt2,3
+      )*ZP(gt3,0) - 7.745966692414834*g1*MDBS*ZP(gt2,1)*ZP(gt3,1) +
       14.142135623730951*MuU*Conj(LamSU)*ZP(gt2,1)*ZP(gt3,1) + 7.0710678118654755*
       LamTU*vT*Conj(LamSU)*ZP(gt2,1)*ZP(gt3,1) - 7.0710678118654755*LamSU*vT*Conj(
       LamTU)*ZP(gt2,1)*ZP(gt3,1) + 7.745966692414834*g1*Conj(MDBS)*ZP(gt2,1)*ZP(
@@ -761,8 +757,8 @@ std::complex<double> MRSSMEFTHiggs_effective_couplings::CpAhHpmconjHpm(int gt1, 
       + 1.4142135623730951*(2*g2*MDWBT - vT*AbsSqr(LamTU) + 2*LamTU*Conj(MuU) + vT
       *Sqr(g2)))*ZP(gt2,2) + ((2.8284271247461903*MuU + 2*LamSU*vS +
       1.4142135623730951*LamTU*vT)*Conj(LamTU) + 1.4142135623730951*g2*(-(g2*vT) +
-      2*Conj(MDWBT)))*ZP(gt2,3))*ZP(gt3,1)) + ZP(gt2,1)*(vd*Sqr(g2)*ZP(gt3,0) + (
-      (2.8284271247461903*MuU + 2*LamSU*vS - 1.4142135623730951*LamTU*vT)*Conj(
+      2*Conj(MDWBT)))*ZP(gt2,3))*ZP(gt3,1)) + ZP(gt2,1)*(vd*Sqr(g2)*ZP(gt3,0) + ((
+      2.8284271247461903*MuU + 2*LamSU*vS - 1.4142135623730951*LamTU*vT)*Conj(
       LamTU) + 1.4142135623730951*g2*(g2*vT + 2*Conj(MDWBT)))*ZP(gt3,2) + (2*LamTU
       *vS*Conj(LamSU) + 1.4142135623730951*(2*g2*MDWBT + vT*AbsSqr(LamTU) + 2*
       LamTU*Conj(MuU) - vT*Sqr(g2)))*ZP(gt3,3))) + ZA(gt1,3)*(1.4142135623730951*
@@ -792,11 +788,11 @@ std::complex<double> MRSSMEFTHiggs_effective_couplings::CpbarCha1Cha1AhPL(int gt
    const auto LamSD = MODELPARAMETER(LamSD);
    const auto LamTD = MODELPARAMETER(LamTD);
 
-   const std::complex<double> result = std::complex<double>(0,0.5)*(Conj(UM1(
-      gt3,0))*(-1.4142135623730951*LamTD*Conj(UP1(gt2,1))*ZA(gt1,0) + 2*g2*Conj(
-      UP1(gt2,0))*ZA(gt1,3)) + Conj(UM1(gt3,1))*(1.4142135623730951*g2*Conj(UP1(
-      gt2,0))*ZA(gt1,0) + Conj(UP1(gt2,1))*(-1.4142135623730951*LamSD*ZA(gt1,2) +
-      LamTD*ZA(gt1,3))));
+   const std::complex<double> result = std::complex<double>(0,0.5)*(Conj(UM1(gt3,0
+      ))*(-1.4142135623730951*LamTD*Conj(UP1(gt2,1))*ZA(gt1,0) + 2*g2*Conj(UP1(gt2
+      ,0))*ZA(gt1,3)) + Conj(UM1(gt3,1))*(1.4142135623730951*g2*Conj(UP1(gt2,0))*
+      ZA(gt1,0) + Conj(UP1(gt2,1))*(-1.4142135623730951*LamSD*ZA(gt1,2) + LamTD*ZA
+      (gt1,3))));
 
    return result;
 }
@@ -807,11 +803,11 @@ std::complex<double> MRSSMEFTHiggs_effective_couplings::CpbarCha2Cha2AhPL(int gt
    const auto LamSU = MODELPARAMETER(LamSU);
    const auto LamTU = MODELPARAMETER(LamTU);
 
-   const std::complex<double> result = std::complex<double>(0,0.5)*(g2*Conj(UM2
-      (gt2,0))*(1.4142135623730951*Conj(UP2(gt3,1))*ZA(gt1,1) - 2*Conj(UP2(gt3,0))
-      *ZA(gt1,3)) + Conj(UM2(gt2,1))*(1.4142135623730951*LamTU*Conj(UP2(gt3,0))*ZA
-      (gt1,1) + Conj(UP2(gt3,1))*(1.4142135623730951*LamSU*ZA(gt1,2) + LamTU*ZA(
-      gt1,3))));
+   const std::complex<double> result = std::complex<double>(0,0.5)*(g2*Conj(UM2(
+      gt2,0))*(1.4142135623730951*Conj(UP2(gt3,1))*ZA(gt1,1) - 2*Conj(UP2(gt3,0))*
+      ZA(gt1,3)) + Conj(UM2(gt2,1))*(1.4142135623730951*LamTU*Conj(UP2(gt3,0))*ZA(
+      gt1,1) + Conj(UP2(gt3,1))*(1.4142135623730951*LamSU*ZA(gt1,2) + LamTU*ZA(gt1
+      ,3))));
 
    return result;
 }
@@ -841,55 +837,55 @@ void MRSSMEFTHiggs_effective_couplings::calculate_eff_CphhVPVP(int gO1)
    const auto vev = Sqrt(Sqr(vd) + 4*Sqr(vT) + Sqr(vu));
 
    std::complex<double> result = 0;
-   result += 0.5 * CpSRdphhconjSRdp(gO1) * vev * AS0(decay_scale / Sqr(MSRdp))
-      / Sqr(MSRdp);
-   result += 0.5 * CpSRumhhconjSRum(gO1) * vev * AS0(decay_scale / Sqr(MSRum))
-      / Sqr(MSRum);
+   result += 0.5 * CpSRdphhconjSRdp(gO1) * vev * AS0(decay_scale / Sqr(MSRdp)) /
+      Sqr(MSRdp);
+   result += 0.5 * CpSRumhhconjSRum(gO1) * vev * AS0(decay_scale / Sqr(MSRum)) /
+      Sqr(MSRum);
    for (int gI1 = 0; gI1 < 6; ++gI1) {
-      result += 0.16666666666666666 * scalar_scalar_qcd_factor(decay_mass,
-         MSd(gI1)) * CphhSdconjSd(gO1, gI1, gI1) * vev * AS0(decay_scale / Sqr(MSd
-         (gI1))) / Sqr(MSd(gI1));
+      result += 0.16666666666666666 * scalar_scalar_qcd_factor(decay_mass, MSd(gI1
+         )) * CphhSdconjSd(gO1, gI1, gI1) * vev * AS0(decay_scale / Sqr(MSd(gI1)))
+         / Sqr(MSd(gI1));
    }
    for (int gI1 = 0; gI1 < 6; ++gI1) {
-      result += 0.6666666666666666 * scalar_scalar_qcd_factor(decay_mass,
-         MSu(gI1)) * CphhSuconjSu(gO1, gI1, gI1) * vev * AS0(decay_scale / Sqr(MSu
-         (gI1))) / Sqr(MSu(gI1));
+      result += 0.6666666666666666 * scalar_scalar_qcd_factor(decay_mass, MSu(gI1)
+         ) * CphhSuconjSu(gO1, gI1, gI1) * vev * AS0(decay_scale / Sqr(MSu(gI1)))
+         / Sqr(MSu(gI1));
    }
    for (int gI1 = 0; gI1 < 6; ++gI1) {
-      result += 0.5 * CphhSeconjSe(gO1, gI1, gI1) * vev * AS0(decay_scale /
-         Sqr(MSe(gI1))) / Sqr(MSe(gI1));
+      result += 0.5 * CphhSeconjSe(gO1, gI1, gI1) * vev * AS0(decay_scale / Sqr(
+         MSe(gI1))) / Sqr(MSe(gI1));
    }
    for (int gI1 = 1; gI1 < 4; ++gI1) {
-      result += 0.5 * CphhHpmconjHpm(gO1, gI1, gI1) * vev * AS0(decay_scale
-         / Sqr(MHpm(gI1))) / Sqr(MHpm(gI1));
+      result += 0.5 * CphhHpmconjHpm(gO1, gI1, gI1) * vev * AS0(decay_scale / Sqr(
+         MHpm(gI1))) / Sqr(MHpm(gI1));
    }
    for (int gI1 = 0; gI1 < 2; ++gI1) {
-      result += CpbarCha1Cha1hhPL(gI1, gI1, gO1) * vev * AS12(decay_scale /
-         Sqr(MCha1(gI1))) / MCha1(gI1);
+      result += CpbarCha1Cha1hhPL(gI1, gI1, gO1) * vev * AS12(decay_scale / Sqr(
+         MCha1(gI1))) / MCha1(gI1);
    }
    for (int gI1 = 0; gI1 < 2; ++gI1) {
-      result += CpbarCha2Cha2hhPL(gI1, gI1, gO1) * vev * AS12(decay_scale /
-         Sqr(MCha2(gI1))) / MCha2(gI1);
+      result += CpbarCha2Cha2hhPL(gI1, gI1, gO1) * vev * AS12(decay_scale / Sqr(
+         MCha2(gI1))) / MCha2(gI1);
    }
    for (int gI1 = 0; gI1 < 3; ++gI1) {
-      result += CpbarFeFehhPL(gI1, gI1, gO1) * vev * AS12(decay_scale / Sqr(
-         MFe(gI1))) / MFe(gI1);
+      result += CpbarFeFehhPL(gI1, gI1, gO1) * vev * AS12(decay_scale / Sqr(MFe(
+         gI1))) / MFe(gI1);
    }
    for (int gI1 = 0; gI1 < 3; ++gI1) {
-      result += 0.3333333333333333 * scalar_fermion_qcd_factor(decay_mass,
-         MFd(gI1)) * CpbarFdFdhhPL(gI1, gI1, gO1) * vev * AS12(decay_scale / Sqr(
-         MFd(gI1))) / MFd(gI1);
+      result += 0.3333333333333333 * scalar_fermion_qcd_factor(decay_mass, MFd(gI1
+         )) * CpbarFdFdhhPL(gI1, gI1, gO1) * vev * AS12(decay_scale / Sqr(MFd(gI1)
+         )) / MFd(gI1);
    }
    for (int gI1 = 0; gI1 < 3; ++gI1) {
-      result += 1.3333333333333333 * scalar_fermion_qcd_factor(decay_mass,
-         MFu(gI1)) * CpbarFuFuhhPL(gI1, gI1, gO1) * vev * AS12(decay_scale / Sqr(
-         MFu(gI1))) / MFu(gI1);
+      result += 1.3333333333333333 * scalar_fermion_qcd_factor(decay_mass, MFu(gI1
+         )) * CpbarFuFuhhPL(gI1, gI1, gO1) * vev * AS12(decay_scale / Sqr(MFu(gI1)
+         )) / MFu(gI1);
    }
-   result += -0.5 * CphhconjVWmVWm(gO1) * vev * AS1(decay_scale / Sqr(MVWm)) /
-      Sqr(MVWm);
+   result += -0.5 * CphhconjVWmVWm(gO1) * vev * AS1(decay_scale / Sqr(MVWm)) / Sqr
+      (MVWm);
 
-   result *= 0.1892681907127351 * physical_input.get(Physical_input::alpha_em_0
-      ) * Sqrt(qedqcd.displayFermiConstant());
+   result *= 0.1892681907127351 * physical_input.get(Physical_input::alpha_em_0) *
+      Sqrt(qedqcd.displayFermiConstant());
 
    ZH = saved_ZH;
    eff_CphhVPVP(gO1) = result;
@@ -916,20 +912,20 @@ void MRSSMEFTHiggs_effective_couplings::calculate_eff_CphhVGVG(int gO1)
 
    std::complex<double> result = 0;
    for (int gI1 = 0; gI1 < 6; ++gI1) {
-      result += 0.5 * CphhSdconjSd(gO1, gI1, gI1) * vev * AS0(decay_scale /
-         Sqr(MSd(gI1))) / Sqr(MSd(gI1));
+      result += 0.5 * CphhSdconjSd(gO1, gI1, gI1) * vev * AS0(decay_scale / Sqr(
+         MSd(gI1))) / Sqr(MSd(gI1));
    }
    for (int gI1 = 0; gI1 < 6; ++gI1) {
-      result += 0.5 * CphhSuconjSu(gO1, gI1, gI1) * vev * AS0(decay_scale /
-         Sqr(MSu(gI1))) / Sqr(MSu(gI1));
+      result += 0.5 * CphhSuconjSu(gO1, gI1, gI1) * vev * AS0(decay_scale / Sqr(
+         MSu(gI1))) / Sqr(MSu(gI1));
    }
    for (int gI1 = 0; gI1 < 3; ++gI1) {
-      result += CpbarFdFdhhPL(gI1, gI1, gO1) * vev * AS12(decay_scale / Sqr(
-         MFd(gI1))) / MFd(gI1);
+      result += CpbarFdFdhhPL(gI1, gI1, gO1) * vev * AS12(decay_scale / Sqr(MFd(
+         gI1))) / MFd(gI1);
    }
    for (int gI1 = 0; gI1 < 3; ++gI1) {
-      result += CpbarFuFuhhPL(gI1, gI1, gO1) * vev * AS12(decay_scale / Sqr(
-         MFu(gI1))) / MFu(gI1);
+      result += CpbarFuFuhhPL(gI1, gI1, gO1) * vev * AS12(decay_scale / Sqr(MFu(
+         gI1))) / MFu(gI1);
    }
    result *= 0.75;
 
@@ -937,8 +933,7 @@ void MRSSMEFTHiggs_effective_couplings::calculate_eff_CphhVGVG(int gO1)
       result *= scalar_scaling_factor(decay_mass);
    }
 
-   result *= 0.12617879380849006 * alpha_s * Sqrt(qedqcd.displayFermiConstant()
-      );
+   result *= 0.12617879380849006 * alpha_s * Sqrt(qedqcd.displayFermiConstant());
 
    ZH = saved_ZH;
    eff_CphhVGVG(gO1) = result;
@@ -964,31 +959,31 @@ void MRSSMEFTHiggs_effective_couplings::calculate_eff_CpAhVPVP(int gO1)
 
    std::complex<double> result = 0;
    for (int gI1 = 0; gI1 < 2; ++gI1) {
-      result += CpbarCha1Cha1AhPL(gI1, gI1, gO1) * vev * AP12(decay_scale /
-         Sqr(MCha1(gI1))) / MCha1(gI1);
+      result += CpbarCha1Cha1AhPL(gI1, gI1, gO1) * vev * AP12(decay_scale / Sqr(
+         MCha1(gI1))) / MCha1(gI1);
    }
    for (int gI1 = 0; gI1 < 2; ++gI1) {
-      result += CpbarCha2Cha2AhPL(gI1, gI1, gO1) * vev * AP12(decay_scale /
-         Sqr(MCha2(gI1))) / MCha2(gI1);
+      result += CpbarCha2Cha2AhPL(gI1, gI1, gO1) * vev * AP12(decay_scale / Sqr(
+         MCha2(gI1))) / MCha2(gI1);
    }
    for (int gI1 = 0; gI1 < 3; ++gI1) {
-      result += CpbarFeFeAhPL(gI1, gI1, gO1) * vev * AP12(decay_scale / Sqr(
-         MFe(gI1))) / MFe(gI1);
+      result += CpbarFeFeAhPL(gI1, gI1, gO1) * vev * AP12(decay_scale / Sqr(MFe(
+         gI1))) / MFe(gI1);
    }
    for (int gI1 = 0; gI1 < 3; ++gI1) {
-      result += 0.3333333333333333 * pseudoscalar_fermion_qcd_factor(
-         decay_mass, MFd(gI1)) * CpbarFdFdAhPL(gI1, gI1, gO1) * vev * AP12(
-         decay_scale / Sqr(MFd(gI1))) / MFd(gI1);
+      result += 0.3333333333333333 * pseudoscalar_fermion_qcd_factor(decay_mass,
+         MFd(gI1)) * CpbarFdFdAhPL(gI1, gI1, gO1) * vev * AP12(decay_scale / Sqr(
+         MFd(gI1))) / MFd(gI1);
    }
    for (int gI1 = 0; gI1 < 3; ++gI1) {
-      result += 1.3333333333333333 * pseudoscalar_fermion_qcd_factor(
-         decay_mass, MFu(gI1)) * CpbarFuFuAhPL(gI1, gI1, gO1) * vev * AP12(
-         decay_scale / Sqr(MFu(gI1))) / MFu(gI1);
+      result += 1.3333333333333333 * pseudoscalar_fermion_qcd_factor(decay_mass,
+         MFu(gI1)) * CpbarFuFuAhPL(gI1, gI1, gO1) * vev * AP12(decay_scale / Sqr(
+         MFu(gI1))) / MFu(gI1);
    }
    result *= 2.0;
 
-   result *= 0.1892681907127351 * physical_input.get(Physical_input::alpha_em_0
-      ) * Sqrt(qedqcd.displayFermiConstant());
+   result *= 0.1892681907127351 * physical_input.get(Physical_input::alpha_em_0) *
+      Sqrt(qedqcd.displayFermiConstant());
 
    ZA = saved_ZA;
    eff_CpAhVPVP(gO1) = result;
@@ -1013,12 +1008,12 @@ void MRSSMEFTHiggs_effective_couplings::calculate_eff_CpAhVGVG(int gO1)
 
    std::complex<double> result = 0;
    for (int gI1 = 0; gI1 < 3; ++gI1) {
-      result += CpbarFdFdAhPL(gI1, gI1, gO1) * vev * AP12(decay_scale / Sqr(
-         MFd(gI1))) / MFd(gI1);
+      result += CpbarFdFdAhPL(gI1, gI1, gO1) * vev * AP12(decay_scale / Sqr(MFd(
+         gI1))) / MFd(gI1);
    }
    for (int gI1 = 0; gI1 < 3; ++gI1) {
-      result += CpbarFuFuAhPL(gI1, gI1, gO1) * vev * AP12(decay_scale / Sqr(
-         MFu(gI1))) / MFu(gI1);
+      result += CpbarFuFuAhPL(gI1, gI1, gO1) * vev * AP12(decay_scale / Sqr(MFu(
+         gI1))) / MFu(gI1);
    }
    result *= 1.5;
 
@@ -1026,8 +1021,7 @@ void MRSSMEFTHiggs_effective_couplings::calculate_eff_CpAhVGVG(int gO1)
       result *= pseudoscalar_scaling_factor(decay_mass);
    }
 
-   result *= 0.12617879380849006 * alpha_s * Sqrt(qedqcd.displayFermiConstant()
-      );
+   result *= 0.12617879380849006 * alpha_s * Sqrt(qedqcd.displayFermiConstant());
 
    ZA = saved_ZA;
    eff_CpAhVGVG(gO1) = result;

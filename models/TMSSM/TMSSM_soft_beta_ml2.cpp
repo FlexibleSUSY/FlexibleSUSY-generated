@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:55:20
+// File generated at Sun 26 Aug 2018 14:12:58
 
 #include "TMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -74,10 +74,10 @@ Eigen::Matrix<double,3,3> TMSSM_soft_parameters::calc_beta_ml2_1_loop(const Soft
 
    Eigen::Matrix<double,3,3> beta_ml2;
 
-   beta_ml2 = (oneOver16PiSqr*(2*mHd2*(Ye.adjoint()*Ye) + 2*((TYe)
-      .adjoint()*TYe) + ml2*Ye.adjoint()*Ye + 2*(Ye.adjoint()*me2*Ye) +
-      Ye.adjoint()*Ye*ml2 - 0.2*(3.872983346207417*g1*Tr11 + 6*AbsSqr(MassB)*
-      Sqr(g1) + 30*AbsSqr(MassWB)*Sqr(g2))*UNITMATRIX(3))).real();
+   beta_ml2 = (oneOver16PiSqr*(2*mHd2*(Ye.adjoint()*Ye) + 2*((TYe).adjoint()*
+      TYe) + ml2*Ye.adjoint()*Ye + 2*(Ye.adjoint()*me2*Ye) + Ye.adjoint()*Ye*
+      ml2 - 0.2*(3.872983346207417*g1*Tr11 + 6*AbsSqr(MassB)*Sqr(g1) + 30*
+      AbsSqr(MassWB)*Sqr(g2))*UNITMATRIX(3))).real();
 
 
    return beta_ml2;
@@ -117,21 +117,21 @@ Eigen::Matrix<double,3,3> TMSSM_soft_parameters::calc_beta_ml2_2_loop(const Soft
       traceconjTYeTpYe) - 3*Conj(TLambdax)*Lambdax - 2.4*Conj(MassB)*Sqr(g1))*(
       Ye.adjoint()*TYe) + (-6*traceAdjYdTYd - 2*traceAdjYeTYe - 2.4*MassB*Sqr(
       g1) - 3*Conj(Lambdax)*TLambdax)*((TYe).adjoint()*Ye) + (-2*(3*
-      traceYdAdjYd + traceYeAdjYe) - 3*AbsSqr(Lambdax) + 2.4*Sqr(g1))*((TYe)
-      .adjoint()*TYe) + (-3*traceYdAdjYd - traceYeAdjYe - 1.5*AbsSqr(Lambdax) +
+      traceYdAdjYd + traceYeAdjYe) - 3*AbsSqr(Lambdax) + 2.4*Sqr(g1))*((TYe).
+      adjoint()*TYe) + (-3*traceYdAdjYd - traceYeAdjYe - 1.5*AbsSqr(Lambdax) +
       1.2*Sqr(g1))*(ml2*Ye.adjoint()*Ye) + (-2*(3*traceYdAdjYd + traceYeAdjYe)
       - 3*AbsSqr(Lambdax) + 2.4*Sqr(g1))*(Ye.adjoint()*me2*Ye) + (-3*
-      traceYdAdjYd - traceYeAdjYe - 1.5*AbsSqr(Lambdax) + 1.2*Sqr(g1))*(
-      Ye.adjoint()*Ye*ml2) - 8*mHd2*(Ye.adjoint()*Ye*Ye.adjoint()*Ye) - 4*(
-      Ye.adjoint()*Ye*(TYe).adjoint()*TYe) - 4*(Ye.adjoint()*TYe*(TYe).adjoint(
-      )*Ye) - 4*((TYe).adjoint()*Ye*Ye.adjoint()*TYe) - 4*((TYe).adjoint()*TYe*
-      Ye.adjoint()*Ye) - 2*(ml2*Ye.adjoint()*Ye*Ye.adjoint()*Ye) - 4*(
-      Ye.adjoint()*me2*Ye*Ye.adjoint()*Ye) - 4*(Ye.adjoint()*Ye*ml2*Ye.adjoint(
-      )*Ye) - 4*(Ye.adjoint()*Ye*Ye.adjoint()*me2*Ye) - 2*(Ye.adjoint()*Ye*
-      Ye.adjoint()*Ye*ml2) + 0.04*(9*Conj(MassB)*Sqr(g1)*(69*MassB*Sqr(g1) + 5*
-      (2*MassB + MassWB)*Sqr(g2)) + 5*(-15.491933384829668*g1*Tr31 + 30*Tr22*
-      Quad(g2) + 6*Tr2U111*Sqr(g1) + 3*Conj(MassWB)*Sqr(g2)*(3*(MassB + 2*
-      MassWB)*Sqr(g1) + 115*MassWB*Sqr(g2))))*UNITMATRIX(3))).real();
+      traceYdAdjYd - traceYeAdjYe - 1.5*AbsSqr(Lambdax) + 1.2*Sqr(g1))*(Ye.
+      adjoint()*Ye*ml2) - 8*mHd2*(Ye.adjoint()*Ye*Ye.adjoint()*Ye) - 4*(Ye.
+      adjoint()*Ye*(TYe).adjoint()*TYe) - 4*(Ye.adjoint()*TYe*(TYe).adjoint()*
+      Ye) - 4*((TYe).adjoint()*Ye*Ye.adjoint()*TYe) - 4*((TYe).adjoint()*TYe*Ye
+      .adjoint()*Ye) - 2*(ml2*Ye.adjoint()*Ye*Ye.adjoint()*Ye) - 4*(Ye.adjoint(
+      )*me2*Ye*Ye.adjoint()*Ye) - 4*(Ye.adjoint()*Ye*ml2*Ye.adjoint()*Ye) - 4*(
+      Ye.adjoint()*Ye*Ye.adjoint()*me2*Ye) - 2*(Ye.adjoint()*Ye*Ye.adjoint()*Ye
+      *ml2) + 0.04*(9*Conj(MassB)*Sqr(g1)*(69*MassB*Sqr(g1) + 5*(2*MassB +
+      MassWB)*Sqr(g2)) + 5*(-15.491933384829668*g1*Tr31 + 30*Tr22*Quad(g2) + 6*
+      Tr2U111*Sqr(g1) + 3*Conj(MassWB)*Sqr(g2)*(3*(MassB + 2*MassWB)*Sqr(g1) +
+      115*MassWB*Sqr(g2))))*UNITMATRIX(3))).real();
 
 
    return beta_ml2;

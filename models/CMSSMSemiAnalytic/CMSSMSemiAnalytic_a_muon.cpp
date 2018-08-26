@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 19:10:13
+// File generated at Sun 26 Aug 2018 15:28:11
 
 /**
  * @file CMSSMSemiAnalytic_a_muon.cpp
  *
- * This file was generated at Mon 5 Mar 2018 19:10:13 with FlexibleSUSY
- * 2.1.0 and SARAH 4.12.3 .
+ * This file was generated at Sun 26 Aug 2018 15:28:11 with FlexibleSUSY
+ * 2.2.0 and SARAH 4.13.0 .
  */
 
 #include "CMSSMSemiAnalytic_a_muon.hpp"
@@ -217,10 +217,9 @@ double OneLoopFunctionF2N(double x)
 
 double get_MSUSY(const CMSSMSemiAnalytic_mass_eigenstates& model)
 {
-   return Min(model.get_MSd().tail<6>().minCoeff(), model.get_MSu().tail<6>()
-      .minCoeff(), model.get_MSe().tail<6>().minCoeff(), model.get_MHpm().tail<1>(
-      ).minCoeff(), model.get_MCha().tail<2>().minCoeff());
-
+   return Min(model.get_MSd().tail<6>().minCoeff(), model.get_MSu().tail<6>().
+      minCoeff(), model.get_MSe().tail<6>().minCoeff(), model.get_MHpm().tail<1>()
+      .minCoeff(), model.get_MCha().tail<2>().minCoeff());
 }
 
 void run_to_MSUSY(CMSSMSemiAnalytic_mass_eigenstates& model)

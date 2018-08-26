@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:32:08
+// File generated at Sun 26 Aug 2018 14:23:41
 
 #include "UMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -102,8 +102,8 @@ double UMSSM_soft_parameters::calc_beta_MassWB_2_loop(const Soft_traces& soft_tr
 
    double beta_MassWB;
 
-   beta_MassWB = Re(0.4*twoLoop*Sqr(g2)*(9*(MassB + MassWB)*Sqr(g1) + 10*
-      (3*traceAdjYdTYd + traceAdjYeTYe + 3*traceAdjYuTYu + traceAdjYvTYv - 3*
+   beta_MassWB = Re(0.4*twoLoop*Sqr(g2)*(9*(MassB + MassWB)*Sqr(g1) + 10*(3*
+      traceAdjYdTYd + traceAdjYeTYe + 3*traceAdjYuTYu + traceAdjYvTYv - 3*
       MassWB*traceYdAdjYd - MassWB*traceYeAdjYe - 3*MassWB*traceYuAdjYu -
       MassWB*traceYvAdjYv + 25*MassWB*Sqr(g2) + 12*(MassG + MassWB)*Sqr(g3) +
       MassU*Sqr(gp)*Sqr(QHd) + MassWB*Sqr(gp)*Sqr(QHd) + MassU*Sqr(gp)*Sqr(QHu)

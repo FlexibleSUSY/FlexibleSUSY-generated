@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:54:58
+// File generated at Sun 26 Aug 2018 14:12:27
 
 #include "TMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -40,8 +40,8 @@ double TMSSM_susy_parameters::calc_beta_Mu_1_loop(const Susy_traces& susy_traces
 
    double beta_Mu;
 
-   beta_Mu = Re(oneOver16PiSqr*(3*AbsSqr(Lambdax)*Mu - 0.6*Mu*Sqr(g1) +
-      Mu*(3*traceYdAdjYd + traceYeAdjYe + 3*traceYuAdjYu - 3*Sqr(g2))));
+   beta_Mu = Re(oneOver16PiSqr*(3*AbsSqr(Lambdax)*Mu - 0.6*Mu*Sqr(g1) + Mu*(3*
+      traceYdAdjYd + traceYeAdjYe + 3*traceYuAdjYu - 3*Sqr(g2))));
 
 
    return beta_Mu;
@@ -66,8 +66,8 @@ double TMSSM_susy_parameters::calc_beta_Mu_2_loop(const Susy_traces& susy_traces
    double beta_Mu;
 
    beta_Mu = Re(0.02*twoLoop*Mu*(207*Quad(g1) + 75*AbsSqr(Lambdax)*(-3*
-      traceYdAdjYd - traceYeAdjYe - 3*traceYuAdjYu + 8*Sqr(g2)) + 10*Sqr(g1)*(
-      -2*traceYdAdjYd + 6*traceYeAdjYe + 4*traceYuAdjYu + 9*Sqr(g2)) + 25*(27*
+      traceYdAdjYd - traceYeAdjYe - 3*traceYuAdjYu + 8*Sqr(g2)) + 10*Sqr(g1)*(-
+      2*traceYdAdjYd + 6*traceYeAdjYe + 4*traceYuAdjYu + 9*Sqr(g2)) + 25*(27*
       Quad(g2) + 2*(-3*(3*traceYdAdjYdYdAdjYd + 2*traceYdAdjYuYuAdjYd +
       traceYeAdjYeYeAdjYe + 3*traceYuAdjYuYuAdjYu) + 16*(traceYdAdjYd +
       traceYuAdjYu)*Sqr(g3))) - 375*Sqr(Conj(Lambdax))*Sqr(Lambdax)));

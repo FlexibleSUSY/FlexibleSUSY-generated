@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:04:53
+// File generated at Sun 26 Aug 2018 14:27:43
 
 #include "E6SSM_slha_io.hpp"
 #include "E6SSM_input_parameters.hpp"
@@ -1033,11 +1033,9 @@ void E6SSM_slha_io::fill_physical(E6SSM_physical& physical) const
 double E6SSM_slha_io::read_scale() const
 {
    static const std::array<std::string, 24> drbar_blocks =
-      { "gauge", "Yu", "Yd", "Ye", "Te", "Td", "Tu", "MSQ2", "MSE2", "MSL2",
-   "MSU2", "MSD2", "MSOFT", "mHdInert2", "mHuInert2", "mX2", "mXBar2",
-   "msInert2", "HMIX", "ESIXRUN", "ESIXKAPPA", "ESIXTKAPPA", "ESIXLAMBDA",
-   "ESIXTLAMBDA" }
-;
+      { "gauge", "Yu", "Yd", "Ye", "Te", "Td", "Tu", "MSQ2", "MSE2", "MSL2", "MSU2",
+   "MSD2", "MSOFT", "mHdInert2", "mHuInert2", "mX2", "mXBar2", "msInert2",
+   "HMIX", "ESIXRUN", "ESIXKAPPA", "ESIXTKAPPA", "ESIXLAMBDA", "ESIXTLAMBDA" };
 
    double scale = 0.;
 

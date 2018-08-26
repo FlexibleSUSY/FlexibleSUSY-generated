@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 19:06:57
+// File generated at Sun 26 Aug 2018 15:24:30
 
 #include "CMSSMSemiAnalytic_susy_parameters.hpp"
 #include "wrappers.hpp"

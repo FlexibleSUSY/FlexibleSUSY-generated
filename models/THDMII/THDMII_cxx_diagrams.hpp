@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:35:25
+// File generated at Sun 26 Aug 2018 14:10:20
 
 /**
  * @file THDMII_cxx_diagrams.hpp
  *
- * This file was generated at Mon 5 Mar 2018 17:35:25 with FlexibleSUSY
- * 2.1.0 and SARAH 4.12.3 .
+ * This file was generated at Sun 26 Aug 2018 14:10:20 with FlexibleSUSY
+ * 2.2.0 and SARAH 4.13.0 .
  */
 
 #ifndef THDMII_CXXDIAGRAMS_H

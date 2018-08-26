@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:19:14
+// File generated at Sun 26 Aug 2018 14:31:02
 
 #include "SMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -57,9 +57,9 @@ double SMSSM_susy_parameters::calc_beta_g1_2_loop(const Susy_traces& susy_traces
 
    double beta_g1;
 
-   beta_g1 = Re(0.04*twoLoop*Cube(g1)*(-30*AbsSqr(Lambdax) + 199*Sqr(g1)
-      + 5*(-14*traceYdAdjYd - 18*traceYeAdjYe - 26*traceYuAdjYu + 27*Sqr(g2) +
-      88*Sqr(g3))));
+   beta_g1 = Re(0.04*twoLoop*Cube(g1)*(-30*AbsSqr(Lambdax) + 199*Sqr(g1) + 5*(-
+      14*traceYdAdjYd - 18*traceYeAdjYe - 26*traceYuAdjYu + 27*Sqr(g2) + 88*Sqr
+      (g3))));
 
 
    return beta_g1;

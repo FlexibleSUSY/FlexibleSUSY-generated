@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 15:31:57
+// File generated at Sun 26 Aug 2018 14:25:21
 
 #include "MRSSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -105,22 +105,14 @@ double MRSSMEFTHiggs_soft_parameters::calc_beta_mHd2_2_loop(const Soft_traces& s
    const double traceYdAdjYdYdAdjYd = TRACE_STRUCT.traceYdAdjYdYdAdjYd;
    const double traceYdAdjYuYuAdjYd = TRACE_STRUCT.traceYdAdjYuYuAdjYd;
    const double traceYeAdjYeYeAdjYe = TRACE_STRUCT.traceYeAdjYeYeAdjYe;
-   const double tracemd2YdAdjYdYdAdjYd =
-      TRACE_STRUCT.tracemd2YdAdjYdYdAdjYd;
-   const double tracemd2YdAdjYuYuAdjYd =
-      TRACE_STRUCT.tracemd2YdAdjYuYuAdjYd;
-   const double traceme2YeAdjYeYeAdjYe =
-      TRACE_STRUCT.traceme2YeAdjYeYeAdjYe;
-   const double traceml2AdjYeYeAdjYeYe =
-      TRACE_STRUCT.traceml2AdjYeYeAdjYeYe;
-   const double tracemq2AdjYdYdAdjYdYd =
-      TRACE_STRUCT.tracemq2AdjYdYdAdjYdYd;
-   const double tracemq2AdjYdYdAdjYuYu =
-      TRACE_STRUCT.tracemq2AdjYdYdAdjYuYu;
-   const double tracemq2AdjYuYuAdjYdYd =
-      TRACE_STRUCT.tracemq2AdjYuYuAdjYdYd;
-   const double tracemu2YuAdjYdYdAdjYu =
-      TRACE_STRUCT.tracemu2YuAdjYdYdAdjYu;
+   const double tracemd2YdAdjYdYdAdjYd = TRACE_STRUCT.tracemd2YdAdjYdYdAdjYd;
+   const double tracemd2YdAdjYuYuAdjYd = TRACE_STRUCT.tracemd2YdAdjYuYuAdjYd;
+   const double traceme2YeAdjYeYeAdjYe = TRACE_STRUCT.traceme2YeAdjYeYeAdjYe;
+   const double traceml2AdjYeYeAdjYeYe = TRACE_STRUCT.traceml2AdjYeYeAdjYeYe;
+   const double tracemq2AdjYdYdAdjYdYd = TRACE_STRUCT.tracemq2AdjYdYdAdjYdYd;
+   const double tracemq2AdjYdYdAdjYuYu = TRACE_STRUCT.tracemq2AdjYdYdAdjYuYu;
+   const double tracemq2AdjYuYuAdjYdYd = TRACE_STRUCT.tracemq2AdjYuYuAdjYdYd;
+   const double tracemu2YuAdjYdYdAdjYu = TRACE_STRUCT.tracemu2YuAdjYdYdAdjYu;
    const double Tr2U111 = TRACE_STRUCT.Tr2U111;
    const double Tr31 = TRACE_STRUCT.Tr31;
    const double Tr22 = TRACE_STRUCT.Tr22;
@@ -128,11 +120,11 @@ double MRSSMEFTHiggs_soft_parameters::calc_beta_mHd2_2_loop(const Soft_traces& s
 
    double beta_mHd2;
 
-   beta_mHd2 = Re(twoLoop*(-2*AbsSqr(LamSD)*(2*(mHd2 + mHu2 + mRd2 + mRu2
-      + 2*mS2)*AbsSqr(LamSU) + 3*(2*mHd2 + 2*mRd2 + mS2 + mT2)*AbsSqr(LamTD))
-      + 3*AbsSqr(LamTD)*(-((mHd2 + mHu2 + mRd2 + mRu2 + 2*mT2)*AbsSqr(LamTU)) +
-      4*(mHd2 + mRd2 + mT2)*Sqr(g2)) + 0.4*(-7.745966692414834*g1*Tr31 + 15*
-      Tr22*Quad(g2) + (3*Tr2U111 - 2*(tracemd2YdAdjYd - 3*traceme2YeAdjYe - 3*
+   beta_mHd2 = Re(twoLoop*(-2*AbsSqr(LamSD)*(2*(mHd2 + mHu2 + mRd2 + mRu2 + 2*
+      mS2)*AbsSqr(LamSU) + 3*(2*mHd2 + 2*mRd2 + mS2 + mT2)*AbsSqr(LamTD)) + 3*
+      AbsSqr(LamTD)*(-((mHd2 + mHu2 + mRd2 + mRu2 + 2*mT2)*AbsSqr(LamTU)) + 4*(
+      mHd2 + mRd2 + mT2)*Sqr(g2)) + 0.4*(-7.745966692414834*g1*Tr31 + 15*Tr22*
+      Quad(g2) + (3*Tr2U111 - 2*(tracemd2YdAdjYd - 3*traceme2YeAdjYe - 3*
       traceml2AdjYeYe + tracemq2AdjYdYd + mHd2*traceYdAdjYd - 3*mHd2*
       traceYeAdjYe))*Sqr(g1) + 5*(-3*(6*tracemd2YdAdjYdYdAdjYd +
       tracemd2YdAdjYuYuAdjYd + 2*traceme2YeAdjYeYeAdjYe + 2*

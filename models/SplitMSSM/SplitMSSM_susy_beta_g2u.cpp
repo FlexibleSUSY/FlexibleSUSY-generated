@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:42:04
+// File generated at Sun 26 Aug 2018 14:09:47
 
 #include "SplitMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -66,8 +66,8 @@ double SplitMSSM_susy_parameters::calc_beta_g2u_2_loop(const Susy_traces& susy_t
 
    double beta_g2u;
 
-   beta_g2u = Re(0.0004166666666666667*twoLoop*(1404*g2u*Quad(g1) + 15*
-      Sqr(g1)*(24*g2d*gYd*gYu + 72*g2u*Sqr(g2) + 24*g2u*Sqr(g2d) + g2u*(100*
+   beta_g2u = Re(0.0004166666666666667*twoLoop*(1404*g2u*Quad(g1) + 15*Sqr(g1)*
+      (24*g2d*gYd*gYu + 72*g2u*Sqr(g2) + 24*g2u*Sqr(g2d) + g2u*(100*
       traceYdAdjYd + 300*traceYeAdjYe + 340*traceYuAdjYu + 435*Sqr(g2u) + 30*
       Sqr(gYd) + 63*Sqr(gYu))) - 25*(3272*g2u*Quad(g2) - 3*Sqr(g2)*(72*g2d*gYd*
       gYu + 136*g2u*Sqr(g2d) + g2u*(180*traceYdAdjYd + 60*traceYeAdjYe + 180*

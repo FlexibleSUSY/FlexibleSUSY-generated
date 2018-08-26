@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:25:05
+// File generated at Sun 26 Aug 2018 14:39:17
 
 #include "NUTSMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,10 +73,10 @@ double NUTSMSSM_soft_parameters::calc_beta_LL1_1_loop(const Soft_traces& soft_tr
 
    double beta_LL1;
 
-   beta_LL1 = Re(2*oneOver16PiSqr*(MS*BMS*Conj(Kappa) + 2*MS*BMu*Conj(
-      Lambdax) + 2*ms2*Conj(MS)*Kappa + 2*mHd2*Conj(Mu)*Lambdax + 2*mHu2*Conj(
-      Mu)*Lambdax + AbsSqr(Kappa)*LL1 + AbsSqr(Lambdax)*LL1 + Conj(BMS)*TKappa
-      + 2*L1*Conj(Kappa)*TKappa + 2*Conj(BMu)*TLambdax + 2*L1*Conj(Lambdax)*
+   beta_LL1 = Re(2*oneOver16PiSqr*(MS*BMS*Conj(Kappa) + 2*MS*BMu*Conj(Lambdax)
+      + 2*ms2*Conj(MS)*Kappa + 2*mHd2*Conj(Mu)*Lambdax + 2*mHu2*Conj(Mu)*
+      Lambdax + AbsSqr(Kappa)*LL1 + AbsSqr(Lambdax)*LL1 + Conj(BMS)*TKappa + 2*
+      L1*Conj(Kappa)*TKappa + 2*Conj(BMu)*TLambdax + 2*L1*Conj(Lambdax)*
       TLambdax));
 
 
@@ -112,17 +112,17 @@ double NUTSMSSM_soft_parameters::calc_beta_LL1_2_loop(const Soft_traces& soft_tr
 
    double beta_LL1;
 
-   beta_LL1 = Re(-0.4*twoLoop*(30*L1*traceAdjYdTYd*AbsSqr(Lambdax) + 10*
-      L1*traceAdjYeTYe*AbsSqr(Lambdax) + 30*L1*traceAdjYuTYu*AbsSqr(Lambdax) +
-      20*MS*(AbsSqr(Kappa) + AbsSqr(Lambdax))*BMS*Conj(Kappa) + 30*MS*
-      traceYdAdjYd*BMu*Conj(Lambdax) + 10*MS*traceYeAdjYe*BMu*Conj(Lambdax) +
-      30*MS*traceYuAdjYu*BMu*Conj(Lambdax) + 30*traceAdjYdTYd*Conj(BMu)*Lambdax
-      + 10*traceAdjYeTYe*Conj(BMu)*Lambdax + 30*traceAdjYuTYu*Conj(BMu)*
-      Lambdax + 30*traceconjTYdTpTYd*Conj(Mu)*Lambdax + 10*traceconjTYeTpTYe*
-      Conj(Mu)*Lambdax + 30*traceconjTYuTpTYu*Conj(Mu)*Lambdax + 60*mHd2*
-      traceYdAdjYd*Conj(Mu)*Lambdax + 30*mHu2*traceYdAdjYd*Conj(Mu)*Lambdax +
-      30*traceYdAdjYdconjmd2*Conj(Mu)*Lambdax + 30*traceYdconjmq2AdjYd*Conj(Mu)
-      *Lambdax + 20*mHd2*traceYeAdjYe*Conj(Mu)*Lambdax + 10*mHu2*traceYeAdjYe*
+   beta_LL1 = Re(-0.4*twoLoop*(30*L1*traceAdjYdTYd*AbsSqr(Lambdax) + 10*L1*
+      traceAdjYeTYe*AbsSqr(Lambdax) + 30*L1*traceAdjYuTYu*AbsSqr(Lambdax) + 20*
+      MS*(AbsSqr(Kappa) + AbsSqr(Lambdax))*BMS*Conj(Kappa) + 30*MS*traceYdAdjYd
+      *BMu*Conj(Lambdax) + 10*MS*traceYeAdjYe*BMu*Conj(Lambdax) + 30*MS*
+      traceYuAdjYu*BMu*Conj(Lambdax) + 30*traceAdjYdTYd*Conj(BMu)*Lambdax + 10*
+      traceAdjYeTYe*Conj(BMu)*Lambdax + 30*traceAdjYuTYu*Conj(BMu)*Lambdax + 30
+      *traceconjTYdTpTYd*Conj(Mu)*Lambdax + 10*traceconjTYeTpTYe*Conj(Mu)*
+      Lambdax + 30*traceconjTYuTpTYu*Conj(Mu)*Lambdax + 60*mHd2*traceYdAdjYd*
+      Conj(Mu)*Lambdax + 30*mHu2*traceYdAdjYd*Conj(Mu)*Lambdax + 30*
+      traceYdAdjYdconjmd2*Conj(Mu)*Lambdax + 30*traceYdconjmq2AdjYd*Conj(Mu)*
+      Lambdax + 20*mHd2*traceYeAdjYe*Conj(Mu)*Lambdax + 10*mHu2*traceYeAdjYe*
       Conj(Mu)*Lambdax + 10*traceYeAdjYeconjme2*Conj(Mu)*Lambdax + 10*
       traceYeconjml2AdjYe*Conj(Mu)*Lambdax + 30*mHd2*traceYuAdjYu*Conj(Mu)*
       Lambdax + 60*mHu2*traceYuAdjYu*Conj(Mu)*Lambdax + 30*traceYuAdjYuconjmu2*
@@ -132,15 +132,15 @@ double NUTSMSSM_soft_parameters::calc_beta_LL1_2_loop(const Soft_traces& soft_tr
       15*traceYdAdjYd*AbsSqr(Lambdax)*LL1 + 5*traceYeAdjYe*AbsSqr(Lambdax)*LL1
       + 15*traceYuAdjYu*AbsSqr(Lambdax)*LL1 + 20*AbsSqr(Kappa)*AbsSqr(Lambdax)*
       LL1 + 6*L1*MassB*AbsSqr(Lambdax)*Sqr(g1) - 6*MS*BMu*Conj(Lambdax)*Sqr(g1)
-      + 6*MassB*Conj(BMu)*Lambdax*Sqr(g1) - 6*mHd2*Conj(Mu)*Lambdax*Sqr(g1) -
-      6*mHu2*Conj(Mu)*Lambdax*Sqr(g1) - 12*AbsSqr(MassB)*Conj(Mu)*Lambdax*Sqr(
-      g1) + 6*MassB*MS*Conj(Lambdax)*Mu*Sqr(g1) - 3*AbsSqr(Lambdax)*LL1*Sqr(g1)
-      + 30*L1*MassWB*AbsSqr(Lambdax)*Sqr(g2) - 30*MS*BMu*Conj(Lambdax)*Sqr(g2)
-      + 30*MassWB*Conj(BMu)*Lambdax*Sqr(g2) - 30*mHd2*Conj(Mu)*Lambdax*Sqr(g2)
-      - 30*mHu2*Conj(Mu)*Lambdax*Sqr(g2) - 60*AbsSqr(MassWB)*Conj(Mu)*Lambdax*
-      Sqr(g2) + 30*MassWB*MS*Conj(Lambdax)*Mu*Sqr(g2) - 15*AbsSqr(Lambdax)*LL1*
-      Sqr(g2) + 20*MS*BMu*Lambdax*Sqr(Conj(Lambdax)) + 20*LL1*Sqr(Conj(Kappa))*
-      Sqr(Kappa) + 40*mHd2*Conj(Lambdax)*Conj(Mu)*Sqr(Lambdax) + 40*mHu2*Conj(
+      + 6*MassB*Conj(BMu)*Lambdax*Sqr(g1) - 6*mHd2*Conj(Mu)*Lambdax*Sqr(g1) - 6
+      *mHu2*Conj(Mu)*Lambdax*Sqr(g1) - 12*AbsSqr(MassB)*Conj(Mu)*Lambdax*Sqr(g1
+      ) + 6*MassB*MS*Conj(Lambdax)*Mu*Sqr(g1) - 3*AbsSqr(Lambdax)*LL1*Sqr(g1) +
+      30*L1*MassWB*AbsSqr(Lambdax)*Sqr(g2) - 30*MS*BMu*Conj(Lambdax)*Sqr(g2) +
+      30*MassWB*Conj(BMu)*Lambdax*Sqr(g2) - 30*mHd2*Conj(Mu)*Lambdax*Sqr(g2) -
+      30*mHu2*Conj(Mu)*Lambdax*Sqr(g2) - 60*AbsSqr(MassWB)*Conj(Mu)*Lambdax*Sqr
+      (g2) + 30*MassWB*MS*Conj(Lambdax)*Mu*Sqr(g2) - 15*AbsSqr(Lambdax)*LL1*Sqr
+      (g2) + 20*MS*BMu*Lambdax*Sqr(Conj(Lambdax)) + 20*LL1*Sqr(Conj(Kappa))*Sqr
+      (Kappa) + 40*mHd2*Conj(Lambdax)*Conj(Mu)*Sqr(Lambdax) + 40*mHu2*Conj(
       Lambdax)*Conj(Mu)*Sqr(Lambdax) + 20*ms2*Conj(Lambdax)*Conj(Mu)*Sqr(
       Lambdax) + 10*LL1*Sqr(Conj(Lambdax))*Sqr(Lambdax) + 40*AbsSqr(Kappa)*Conj
       (BMS)*TKappa + 20*AbsSqr(Lambdax)*Conj(BMS)*TKappa + 40*L1*AbsSqr(Lambdax

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 16:34:38
+// File generated at Sun 26 Aug 2018 13:57:50
 
 #include "E6SSMEFTHiggs_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -58,8 +58,8 @@ Eigen::Matrix<double,3,3> E6SSMEFTHiggs_susy_parameters::calc_beta_Ye_2_loop(con
    const double traceYeAdjYe = TRACE_STRUCT.traceYeAdjYe;
    const double traceYuAdjYu = TRACE_STRUCT.traceYuAdjYu;
    const double traceKappaAdjKappa = TRACE_STRUCT.traceKappaAdjKappa;
-   const double traceLambda12AdjLambda12 =
-      TRACE_STRUCT.traceLambda12AdjLambda12;
+   const double traceLambda12AdjLambda12 = TRACE_STRUCT.
+      traceLambda12AdjLambda12;
    const double traceYdAdjYdYdAdjYd = TRACE_STRUCT.traceYdAdjYdYdAdjYd;
    const double traceYdAdjYuYuAdjYd = TRACE_STRUCT.traceYdAdjYuYuAdjYd;
    const double traceYeAdjYeYeAdjYe = TRACE_STRUCT.traceYeAdjYeYeAdjYe;

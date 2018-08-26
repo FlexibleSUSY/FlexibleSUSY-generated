@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:45:57
+// File generated at Sun 26 Aug 2018 14:55:37
 
 #include "MSSMRHN_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -58,9 +58,9 @@ double MSSMRHN_susy_parameters::calc_beta_g1_2_loop(const Susy_traces& susy_trac
 
    double beta_g1;
 
-   beta_g1 = Re(0.04*twoLoop*Cube(g1)*(199*Sqr(g1) + 5*(-14*traceYdAdjYd
-      - 18*traceYeAdjYe - 26*traceYuAdjYu - 6*traceYvAdjYv + 27*Sqr(g2) + 88*
-      Sqr(g3))));
+   beta_g1 = Re(0.04*twoLoop*Cube(g1)*(199*Sqr(g1) + 5*(-14*traceYdAdjYd - 18*
+      traceYeAdjYe - 26*traceYuAdjYu - 6*traceYvAdjYv + 27*Sqr(g2) + 88*Sqr(g3)
+      )));
 
 
    return beta_g1;

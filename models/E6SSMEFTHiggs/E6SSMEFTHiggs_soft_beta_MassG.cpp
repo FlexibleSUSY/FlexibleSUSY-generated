@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 16:36:18
+// File generated at Sun 26 Aug 2018 13:59:26
 
 #include "E6SSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -96,11 +96,10 @@ double E6SSMEFTHiggs_soft_parameters::calc_beta_MassG_2_loop(const Soft_traces& 
 
    double beta_MassG;
 
-   beta_MassG = Re(2*twoLoop*Sqr(g3)*(2*traceAdjKappaTKappa + 4*
-      traceAdjYdTYd + 4*traceAdjYuTYu - 2*MassG*traceKappaAdjKappa - 4*MassG*
-      traceYdAdjYd - 4*MassG*traceYuAdjYu + 3*(MassB + MassG)*Sqr(g1) + 9*MassG
-      *Sqr(g2) + 9*MassWB*Sqr(g2) + 96*MassG*Sqr(g3) + 3*(MassBp + MassG)*Sqr(
-      gN)));
+   beta_MassG = Re(2*twoLoop*Sqr(g3)*(2*traceAdjKappaTKappa + 4*traceAdjYdTYd +
+      4*traceAdjYuTYu - 2*MassG*traceKappaAdjKappa - 4*MassG*traceYdAdjYd - 4*
+      MassG*traceYuAdjYu + 3*(MassB + MassG)*Sqr(g1) + 9*MassG*Sqr(g2) + 9*
+      MassWB*Sqr(g2) + 96*MassG*Sqr(g3) + 3*(MassBp + MassG)*Sqr(gN)));
 
 
    return beta_MassG;

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 14:59:15
+// File generated at Sun 26 Aug 2018 13:49:40
 
 #include "MSSMNoFVatMGUTHimalaya_info.hpp"
 
@@ -29,9 +29,9 @@ namespace MSSMNoFVatMGUTHimalaya_info {
    const double normalization_g2 = 1;
    const double normalization_g3 = 1;
 
-   const std::array<int, NUMBER_OF_PARTICLES> particle_multiplicities = {1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
-      , 2, 4, 2, 1, 1, 1};
+   const std::array<int, NUMBER_OF_PARTICLES> particle_multiplicities = {1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
+      , 4, 2, 1, 1, 1};
 
    const std::array<std::string, NUMBER_OF_PARTICLES> particle_names = {"VG",
       "Glu", "Fd", "Fs", "Fb", "Fu", "Fc", "Ft", "Fve", "Fvm", "Fvt", "Fe", "Fm",
@@ -48,53 +48,52 @@ namespace MSSMNoFVatMGUTHimalaya_info {
 
    const std::array<std::string, NUMBER_OF_PARAMETERS> parameter_names = {
       "Yd(0,0)", "Yd(0,1)", "Yd(0,2)", "Yd(1,0)", "Yd(1,1)", "Yd(1,2)", "Yd(2,0)",
-      "Yd(2,1)", "Yd(2,2)", "Ye(0,0)", "Ye(0,1)", "Ye(0,2)", "Ye(1,0)", "Ye(1,1)"
-      , "Ye(1,2)", "Ye(2,0)", "Ye(2,1)", "Ye(2,2)", "Yu(0,0)", "Yu(0,1)",
-      "Yu(0,2)", "Yu(1,0)", "Yu(1,1)", "Yu(1,2)", "Yu(2,0)", "Yu(2,1)", "Yu(2,2)",
-      "Mu", "g1", "g2", "g3", "vd", "vu", "TYd(0,0)", "TYd(0,1)", "TYd(0,2)",
-      "TYd(1,0)", "TYd(1,1)", "TYd(1,2)", "TYd(2,0)", "TYd(2,1)", "TYd(2,2)",
-      "TYe(0,0)", "TYe(0,1)", "TYe(0,2)", "TYe(1,0)", "TYe(1,1)", "TYe(1,2)",
-      "TYe(2,0)", "TYe(2,1)", "TYe(2,2)", "TYu(0,0)", "TYu(0,1)", "TYu(0,2)",
-      "TYu(1,0)", "TYu(1,1)", "TYu(1,2)", "TYu(2,0)", "TYu(2,1)", "TYu(2,2)",
-      "BMu", "mq2(0,0)", "mq2(0,1)", "mq2(0,2)", "mq2(1,0)", "mq2(1,1)",
-      "mq2(1,2)", "mq2(2,0)", "mq2(2,1)", "mq2(2,2)", "ml2(0,0)", "ml2(0,1)",
-      "ml2(0,2)", "ml2(1,0)", "ml2(1,1)", "ml2(1,2)", "ml2(2,0)", "ml2(2,1)",
-      "ml2(2,2)", "mHd2", "mHu2", "md2(0,0)", "md2(0,1)", "md2(0,2)", "md2(1,0)",
-      "md2(1,1)", "md2(1,2)", "md2(2,0)", "md2(2,1)", "md2(2,2)", "mu2(0,0)",
-      "mu2(0,1)", "mu2(0,2)", "mu2(1,0)", "mu2(1,1)", "mu2(1,2)", "mu2(2,0)",
-      "mu2(2,1)", "mu2(2,2)", "me2(0,0)", "me2(0,1)", "me2(0,2)", "me2(1,0)",
-      "me2(1,1)", "me2(1,2)", "me2(2,0)", "me2(2,1)", "me2(2,2)", "MassB",
-      "MassWB", "MassG"};
+      "Yd(2,1)", "Yd(2,2)", "Ye(0,0)", "Ye(0,1)", "Ye(0,2)", "Ye(1,0)", "Ye(1,1)",
+      "Ye(1,2)", "Ye(2,0)", "Ye(2,1)", "Ye(2,2)", "Yu(0,0)", "Yu(0,1)", "Yu(0,2)",
+      "Yu(1,0)", "Yu(1,1)", "Yu(1,2)", "Yu(2,0)", "Yu(2,1)", "Yu(2,2)", "Mu", "g1"
+      , "g2", "g3", "vd", "vu", "TYd(0,0)", "TYd(0,1)", "TYd(0,2)", "TYd(1,0)",
+      "TYd(1,1)", "TYd(1,2)", "TYd(2,0)", "TYd(2,1)", "TYd(2,2)", "TYe(0,0)",
+      "TYe(0,1)", "TYe(0,2)", "TYe(1,0)", "TYe(1,1)", "TYe(1,2)", "TYe(2,0)",
+      "TYe(2,1)", "TYe(2,2)", "TYu(0,0)", "TYu(0,1)", "TYu(0,2)", "TYu(1,0)",
+      "TYu(1,1)", "TYu(1,2)", "TYu(2,0)", "TYu(2,1)", "TYu(2,2)", "BMu",
+      "mq2(0,0)", "mq2(0,1)", "mq2(0,2)", "mq2(1,0)", "mq2(1,1)", "mq2(1,2)",
+      "mq2(2,0)", "mq2(2,1)", "mq2(2,2)", "ml2(0,0)", "ml2(0,1)", "ml2(0,2)",
+      "ml2(1,0)", "ml2(1,1)", "ml2(1,2)", "ml2(2,0)", "ml2(2,1)", "ml2(2,2)",
+      "mHd2", "mHu2", "md2(0,0)", "md2(0,1)", "md2(0,2)", "md2(1,0)", "md2(1,1)",
+      "md2(1,2)", "md2(2,0)", "md2(2,1)", "md2(2,2)", "mu2(0,0)", "mu2(0,1)",
+      "mu2(0,2)", "mu2(1,0)", "mu2(1,1)", "mu2(1,2)", "mu2(2,0)", "mu2(2,1)",
+      "mu2(2,2)", "me2(0,0)", "me2(0,1)", "me2(0,2)", "me2(1,0)", "me2(1,1)",
+      "me2(1,2)", "me2(2,0)", "me2(2,1)", "me2(2,2)", "MassB", "MassWB", "MassG"};
 
    const std::array<std::string, NUMBER_OF_MIXINGS> particle_mixing_names = {
-      "ZD(0,0)", "ZD(0,1)", "ZD(1,0)", "ZD(1,1)", "ZU(0,0)", "ZU(0,1)", "ZU(1,0)"
-      , "ZU(1,1)", "ZE(0,0)", "ZE(0,1)", "ZE(1,0)", "ZE(1,1)", "ZM(0,0)",
-      "ZM(0,1)", "ZM(1,0)", "ZM(1,1)", "ZTau(0,0)", "ZTau(0,1)", "ZTau(1,0)",
-      "ZTau(1,1)", "ZS(0,0)", "ZS(0,1)", "ZS(1,0)", "ZS(1,1)", "ZC(0,0)",
-      "ZC(0,1)", "ZC(1,0)", "ZC(1,1)", "ZB(0,0)", "ZB(0,1)", "ZB(1,0)", "ZB(1,1)",
-      "ZT(0,0)", "ZT(0,1)", "ZT(1,0)", "ZT(1,1)", "ZH(0,0)", "ZH(0,1)", "ZH(1,0)"
-      , "ZH(1,1)", "ZA(0,0)", "ZA(0,1)", "ZA(1,0)", "ZA(1,1)", "ZP(0,0)",
-      "ZP(0,1)", "ZP(1,0)", "ZP(1,1)", "Re(ZN(0,0))", "Im(ZN(0,0))", "Re(ZN(0,1))"
-      , "Im(ZN(0,1))", "Re(ZN(0,2))", "Im(ZN(0,2))", "Re(ZN(0,3))", "Im(ZN(0,3))",
-      "Re(ZN(1,0))", "Im(ZN(1,0))", "Re(ZN(1,1))", "Im(ZN(1,1))", "Re(ZN(1,2))",
-      "Im(ZN(1,2))", "Re(ZN(1,3))", "Im(ZN(1,3))", "Re(ZN(2,0))", "Im(ZN(2,0))",
-      "Re(ZN(2,1))", "Im(ZN(2,1))", "Re(ZN(2,2))", "Im(ZN(2,2))", "Re(ZN(2,3))",
-      "Im(ZN(2,3))", "Re(ZN(3,0))", "Im(ZN(3,0))", "Re(ZN(3,1))", "Im(ZN(3,1))",
-      "Re(ZN(3,2))", "Im(ZN(3,2))", "Re(ZN(3,3))", "Im(ZN(3,3))", "Re(UM(0,0))",
-      "Im(UM(0,0))", "Re(UM(0,1))", "Im(UM(0,1))", "Re(UM(1,0))", "Im(UM(1,0))",
-      "Re(UM(1,1))", "Im(UM(1,1))", "Re(UP(0,0))", "Im(UP(0,0))", "Re(UP(0,1))",
-      "Im(UP(0,1))", "Re(UP(1,0))", "Im(UP(1,0))", "Re(UP(1,1))", "Im(UP(1,1))",
-      "ZZ(0,0)", "ZZ(0,1)", "ZZ(1,0)", "ZZ(1,1)"};
+      "ZD(0,0)", "ZD(0,1)", "ZD(1,0)", "ZD(1,1)", "ZU(0,0)", "ZU(0,1)", "ZU(1,0)",
+      "ZU(1,1)", "ZE(0,0)", "ZE(0,1)", "ZE(1,0)", "ZE(1,1)", "ZM(0,0)", "ZM(0,1)",
+      "ZM(1,0)", "ZM(1,1)", "ZTau(0,0)", "ZTau(0,1)", "ZTau(1,0)", "ZTau(1,1)",
+      "ZS(0,0)", "ZS(0,1)", "ZS(1,0)", "ZS(1,1)", "ZC(0,0)", "ZC(0,1)", "ZC(1,0)",
+      "ZC(1,1)", "ZB(0,0)", "ZB(0,1)", "ZB(1,0)", "ZB(1,1)", "ZT(0,0)", "ZT(0,1)",
+      "ZT(1,0)", "ZT(1,1)", "ZH(0,0)", "ZH(0,1)", "ZH(1,0)", "ZH(1,1)", "ZA(0,0)",
+      "ZA(0,1)", "ZA(1,0)", "ZA(1,1)", "ZP(0,0)", "ZP(0,1)", "ZP(1,0)", "ZP(1,1)",
+      "Re(ZN(0,0))", "Im(ZN(0,0))", "Re(ZN(0,1))", "Im(ZN(0,1))", "Re(ZN(0,2))",
+      "Im(ZN(0,2))", "Re(ZN(0,3))", "Im(ZN(0,3))", "Re(ZN(1,0))", "Im(ZN(1,0))",
+      "Re(ZN(1,1))", "Im(ZN(1,1))", "Re(ZN(1,2))", "Im(ZN(1,2))", "Re(ZN(1,3))",
+      "Im(ZN(1,3))", "Re(ZN(2,0))", "Im(ZN(2,0))", "Re(ZN(2,1))", "Im(ZN(2,1))",
+      "Re(ZN(2,2))", "Im(ZN(2,2))", "Re(ZN(2,3))", "Im(ZN(2,3))", "Re(ZN(3,0))",
+      "Im(ZN(3,0))", "Re(ZN(3,1))", "Im(ZN(3,1))", "Re(ZN(3,2))", "Im(ZN(3,2))",
+      "Re(ZN(3,3))", "Im(ZN(3,3))", "Re(UM(0,0))", "Im(UM(0,0))", "Re(UM(0,1))",
+      "Im(UM(0,1))", "Re(UM(1,0))", "Im(UM(1,0))", "Re(UM(1,1))", "Im(UM(1,1))",
+      "Re(UP(0,0))", "Im(UP(0,0))", "Re(UP(0,1))", "Im(UP(0,1))", "Re(UP(1,0))",
+      "Im(UP(1,0))", "Re(UP(1,1))", "Im(UP(1,1))", "ZZ(0,0)", "ZZ(0,1)", "ZZ(1,0)"
+      , "ZZ(1,1)"};
 
-   const std::array<std::string, NUMBER_OF_INPUT_PARAMETERS>
-      input_parameter_names = {"TanBeta", "Sign(Mu)", "M1", "M2", "M3", "AtIN",
-      "AbIN", "AtauIN", "AcIN", "AsIN", "AmuonIN", "AuIN", "AdIN", "AeIN",
-      "mHd2IN", "mHu2IN", "ml11IN", "ml22IN", "ml33IN", "me11IN", "me22IN",
-      "me33IN", "mq11IN", "mq22IN", "mq33IN", "mu11IN", "mu22IN", "mu33IN",
-      "md11IN", "md22IN", "md33IN", "Mlow"};
+   const std::array<std::string, NUMBER_OF_INPUT_PARAMETERS> input_parameter_names
+       = {"TanBeta", "Sign(Mu)", "M1", "M2", "M3", "AtIN", "AbIN", "AtauIN",
+      "AcIN", "AsIN", "AmuonIN", "AuIN", "AdIN", "AeIN", "mHd2IN", "mHu2IN",
+      "ml11IN", "ml22IN", "ml33IN", "me11IN", "me22IN", "me33IN", "mq11IN",
+      "mq22IN", "mq33IN", "mu11IN", "mu22IN", "mu33IN", "md11IN", "md22IN",
+      "md33IN", "Mlow"};
 
-   const std::array<std::string, NUMBER_OF_EXTRA_PARAMETERS>
-      extra_parameter_names = {};
+   const std::array<std::string, NUMBER_OF_EXTRA_PARAMETERS> extra_parameter_names
+       = {};
 
    const std::string model_name = "MSSMNoFVatMGUTHimalaya";
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:21:02
+// File generated at Sun 26 Aug 2018 14:36:31
 
 #ifndef lowNMSSM_susy_parameters_H
 #define lowNMSSM_susy_parameters_H
@@ -39,10 +39,9 @@ namespace flexiblesusy {
 class lowNMSSM_susy_parameters : public Beta_function {
 public:
    explicit lowNMSSM_susy_parameters(const lowNMSSM_input_parameters& input_ = lowNMSSM_input_parameters());
-   lowNMSSM_susy_parameters(double scale_, int loops_, int thresholds_, const lowNMSSM_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
-   , double Lambdax_, double Kappa_, const Eigen::Matrix<double,3,3>& Yu_,
-   double g1_, double g2_, double g3_, double vd_, double vu_, double vS_
-);
+   lowNMSSM_susy_parameters(double scale_, int loops_, int thresholds_, const lowNMSSM_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_,
+   double Lambdax_, double Kappa_, const Eigen::Matrix<double,3,3>& Yu_, double
+    g1_, double g2_, double g3_, double vd_, double vu_, double vS_);
    lowNMSSM_susy_parameters(const lowNMSSM_susy_parameters&) = default;
    lowNMSSM_susy_parameters(lowNMSSM_susy_parameters&&) = default;
    virtual ~lowNMSSM_susy_parameters() = default;

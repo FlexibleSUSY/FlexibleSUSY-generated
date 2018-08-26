@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 19:10:00
+// File generated at Sun 26 Aug 2018 15:27:59
 
 #include "CMSSMSemiAnalytic_semi_analytic_susy_scale_constraint.hpp"
 #include "CMSSMSemiAnalytic_semi_analytic_model.hpp"
@@ -71,6 +71,7 @@ void CMSSMSemiAnalytic_susy_scale_constraint<Semi_analytic>::apply()
 {
    check_model_ptr();
 
+   
 
 
    model->calculate_DRbar_masses();

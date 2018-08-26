@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:57:41
+// File generated at Sun 26 Aug 2018 14:18:16
 
 #include "E6SSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -57,8 +57,8 @@ double E6SSM_susy_parameters::calc_beta_g3_2_loop(const Susy_traces& susy_traces
 
    double beta_g3;
 
-   beta_g3 = Re(twoLoop*Cube(g3)*(-2*traceKappaAdjKappa - 4*traceYdAdjYd
-      - 4*traceYuAdjYu + 3*Sqr(g1) + 9*Sqr(g2) + 48*Sqr(g3) + 3*Sqr(gN)));
+   beta_g3 = Re(twoLoop*Cube(g3)*(-2*traceKappaAdjKappa - 4*traceYdAdjYd - 4*
+      traceYuAdjYu + 3*Sqr(g1) + 9*Sqr(g2) + 48*Sqr(g3) + 3*Sqr(gN)));
 
 
    return beta_g3;

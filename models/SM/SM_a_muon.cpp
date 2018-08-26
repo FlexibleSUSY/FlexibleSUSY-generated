@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:45:17
+// File generated at Sun 26 Aug 2018 14:11:10
 
 /**
  * @file SM_a_muon.cpp
  *
- * This file was generated at Mon 5 Mar 2018 17:45:17 with FlexibleSUSY
- * 2.1.0 and SARAH 4.12.3 .
+ * This file was generated at Sun 26 Aug 2018 14:11:10 with FlexibleSUSY
+ * 2.2.0 and SARAH 4.13.0 .
  */
 
 #include "SM_a_muon.hpp"
@@ -218,7 +218,6 @@ double OneLoopFunctionF2N(double x)
 double get_MSUSY(const SM_mass_eigenstates& model)
 {
    return 0.;
-
 }
 
 void run_to_MSUSY(SM_mass_eigenstates& model)

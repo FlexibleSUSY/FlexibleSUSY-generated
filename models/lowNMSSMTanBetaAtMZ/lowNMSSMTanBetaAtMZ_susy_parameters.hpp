@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:17:28
+// File generated at Sun 26 Aug 2018 14:33:13
 
 #ifndef lowNMSSMTanBetaAtMZ_susy_parameters_H
 #define lowNMSSMTanBetaAtMZ_susy_parameters_H
@@ -39,10 +39,9 @@ namespace flexiblesusy {
 class lowNMSSMTanBetaAtMZ_susy_parameters : public Beta_function {
 public:
    explicit lowNMSSMTanBetaAtMZ_susy_parameters(const lowNMSSMTanBetaAtMZ_input_parameters& input_ = lowNMSSMTanBetaAtMZ_input_parameters());
-   lowNMSSMTanBetaAtMZ_susy_parameters(double scale_, int loops_, int thresholds_, const lowNMSSMTanBetaAtMZ_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
-   , double Lambdax_, double Kappa_, const Eigen::Matrix<double,3,3>& Yu_,
-   double g1_, double g2_, double g3_, double vd_, double vu_, double vS_
-);
+   lowNMSSMTanBetaAtMZ_susy_parameters(double scale_, int loops_, int thresholds_, const lowNMSSMTanBetaAtMZ_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_,
+   double Lambdax_, double Kappa_, const Eigen::Matrix<double,3,3>& Yu_, double
+    g1_, double g2_, double g3_, double vd_, double vu_, double vS_);
    lowNMSSMTanBetaAtMZ_susy_parameters(const lowNMSSMTanBetaAtMZ_susy_parameters&) = default;
    lowNMSSMTanBetaAtMZ_susy_parameters(lowNMSSMTanBetaAtMZ_susy_parameters&&) = default;
    virtual ~lowNMSSMTanBetaAtMZ_susy_parameters() = default;

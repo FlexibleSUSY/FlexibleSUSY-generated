@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 16:36:17
+// File generated at Sun 26 Aug 2018 13:59:25
 
 #include "E6SSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -90,14 +90,14 @@ double E6SSMEFTHiggs_soft_parameters::calc_beta_MassB_2_loop(const Soft_traces& 
    const double traceYeAdjYe = TRACE_STRUCT.traceYeAdjYe;
    const double traceYuAdjYu = TRACE_STRUCT.traceYuAdjYu;
    const double traceKappaAdjKappa = TRACE_STRUCT.traceKappaAdjKappa;
-   const double traceLambda12AdjLambda12 =
-      TRACE_STRUCT.traceLambda12AdjLambda12;
+   const double traceLambda12AdjLambda12 = TRACE_STRUCT.
+      traceLambda12AdjLambda12;
    const double traceAdjYdTYd = TRACE_STRUCT.traceAdjYdTYd;
    const double traceAdjYeTYe = TRACE_STRUCT.traceAdjYeTYe;
    const double traceAdjYuTYu = TRACE_STRUCT.traceAdjYuTYu;
    const double traceAdjKappaTKappa = TRACE_STRUCT.traceAdjKappaTKappa;
-   const double traceAdjLambda12TLambda12 =
-      TRACE_STRUCT.traceAdjLambda12TLambda12;
+   const double traceAdjLambda12TLambda12 = TRACE_STRUCT.
+      traceAdjLambda12TLambda12;
 
 
    double beta_MassB;

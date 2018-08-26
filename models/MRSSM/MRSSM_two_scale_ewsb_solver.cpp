@@ -16,15 +16,15 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:52:01
+// File generated at Sun 26 Aug 2018 15:32:34
 
 /**
  * @file MRSSM_two_scale_ewsb_solver.cpp
  *
  * @brief implementation of EWSB solver for two-scale iteration
  *
- * This file was generated at Mon 5 Mar 2018 17:52:01 with FlexibleSUSY
- * 2.1.0 (git commit: 8f20f6c9c42c159c1588fbc0bb3e15ce5ab6ace3) and SARAH 4.12.3 .
+ * This file was generated at Sun 26 Aug 2018 15:32:34 with FlexibleSUSY
+ * 2.2.0 (git commit: 8489097de2d6938a6da0149378457b5ad13d9425) and SARAH 4.13.0 .
  */
 
 #include "MRSSM_two_scale_ewsb_solver.hpp"
@@ -247,33 +247,33 @@ int CLASSNAME::solve_tree_level(MRSSM_mass_eigenstates& model)
    double mT2;
    double mS2;
 
-   mHd2 = Re((0.025*(15.491933384829668*g1*MDBS*vd*vS - 20*g2*MDWBT*vd*vT - 40*
-      vd*AbsSqr(MuD) - 40*vd*AbsSqr(Mu) + 20*vu*BMu - 28.284271247461902*MuD*vd*vS
-      *Conj(LamSD) - 14.142135623730951*LamTD*vd*vS*vT*Conj(LamSD) - 20*MuD*vd*vT*
+   mHd2 = Re((0.025*(15.491933384829668*g1*MDBS*vd*vS - 20*g2*MDWBT*vd*vT - 40*vd*
+      AbsSqr(MuD) - 40*vd*AbsSqr(Mu) + 20*vu*BMu - 28.284271247461902*MuD*vd*vS*
+      Conj(LamSD) - 14.142135623730951*LamTD*vd*vS*vT*Conj(LamSD) - 20*MuD*vd*vT*
       Conj(LamTD) - 14.142135623730951*LamSD*vd*vS*vT*Conj(LamTD) +
       15.491933384829668*g1*vd*vS*Conj(MDBS) - 20*g2*vd*vT*Conj(MDWBT) -
       28.284271247461902*LamSD*vd*vS*Conj(MuD) - 20*LamTD*vd*vT*Conj(MuD) + 20*vu*
       Conj(BMu) - 3*Cube(vd)*Sqr(g1) - 5*Cube(vd)*Sqr(g2) - 20*vd*AbsSqr(LamSD)*
       Sqr(vS) - 10*vd*AbsSqr(LamTD)*Sqr(vT) + 3*vd*Sqr(g1)*Sqr(vu) + 5*vd*Sqr(g2)*
       Sqr(vu)))/vd);
-   mHu2 = Re((0.025*(-15.491933384829668*g1*MDBS*vS*vu + 20*g2*MDWBT*vT*vu - 40
-      *vu*AbsSqr(MuU) - 40*vu*AbsSqr(Mu) + 20*vd*BMu - 28.284271247461902*MuU*vS*
-      vu*Conj(LamSU) + 14.142135623730951*LamTU*vS*vT*vu*Conj(LamSU) + 20*MuU*vT*
-      vu*Conj(LamTU) + 14.142135623730951*LamSU*vS*vT*vu*Conj(LamTU) -
+   mHu2 = Re((0.025*(-15.491933384829668*g1*MDBS*vS*vu + 20*g2*MDWBT*vT*vu - 40*vu
+      *AbsSqr(MuU) - 40*vu*AbsSqr(Mu) + 20*vd*BMu - 28.284271247461902*MuU*vS*vu*
+      Conj(LamSU) + 14.142135623730951*LamTU*vS*vT*vu*Conj(LamSU) + 20*MuU*vT*vu*
+      Conj(LamTU) + 14.142135623730951*LamSU*vS*vT*vu*Conj(LamTU) -
       15.491933384829668*g1*vS*vu*Conj(MDBS) + 20*g2*vT*vu*Conj(MDWBT) -
       28.284271247461902*LamSU*vS*vu*Conj(MuU) + 20*LamTU*vT*vu*Conj(MuU) + 20*vd*
       Conj(BMu) - 3*Cube(vu)*Sqr(g1) - 5*Cube(vu)*Sqr(g2) + 3*vu*Sqr(g1)*Sqr(vd) +
-      5*vu*Sqr(g2)*Sqr(vd) - 20*vu*AbsSqr(LamSU)*Sqr(vS) - 10*vu*AbsSqr(LamTU)*
-      Sqr(vT)))/vu);
-   mT2 = Re((0.125*(-32*vT*Sqr(MDWBT) - 2*g2*MDWBT*Sqr(vd) - 2*vT*AbsSqr(LamTD)
-      *Sqr(vd) - 1.4142135623730951*LamTD*vS*Conj(LamSD)*Sqr(vd) - 2*MuD*Conj(
-      LamTD)*Sqr(vd) - 1.4142135623730951*LamSD*vS*Conj(LamTD)*Sqr(vd) - 2*g2*Conj
-      (MDWBT)*Sqr(vd) - 2*LamTD*Conj(MuD)*Sqr(vd) + 2*g2*MDWBT*Sqr(vu) - 2*vT*
+      5*vu*Sqr(g2)*Sqr(vd) - 20*vu*AbsSqr(LamSU)*Sqr(vS) - 10*vu*AbsSqr(LamTU)*Sqr
+      (vT)))/vu);
+   mT2 = Re((0.125*(-32*vT*Sqr(MDWBT) - 2*g2*MDWBT*Sqr(vd) - 2*vT*AbsSqr(LamTD)*
+      Sqr(vd) - 1.4142135623730951*LamTD*vS*Conj(LamSD)*Sqr(vd) - 2*MuD*Conj(LamTD
+      )*Sqr(vd) - 1.4142135623730951*LamSD*vS*Conj(LamTD)*Sqr(vd) - 2*g2*Conj(
+      MDWBT)*Sqr(vd) - 2*LamTD*Conj(MuD)*Sqr(vd) + 2*g2*MDWBT*Sqr(vu) - 2*vT*
       AbsSqr(LamTU)*Sqr(vu) + 1.4142135623730951*LamTU*vS*Conj(LamSU)*Sqr(vu) + 2*
       MuU*Conj(LamTU)*Sqr(vu) + 1.4142135623730951*LamSU*vS*Conj(LamTU)*Sqr(vu) +
       2*g2*Conj(MDWBT)*Sqr(vu) + 2*LamTU*Conj(MuU)*Sqr(vu)))/vT);
-   mS2 = Re((0.025*(-160*vS*Sqr(MDBS) + 7.745966692414834*g1*MDBS*Sqr(vd) - 20*
-      vS*AbsSqr(LamSD)*Sqr(vd) - 14.142135623730951*MuD*Conj(LamSD)*Sqr(vd) -
+   mS2 = Re((0.025*(-160*vS*Sqr(MDBS) + 7.745966692414834*g1*MDBS*Sqr(vd) - 20*vS*
+      AbsSqr(LamSD)*Sqr(vd) - 14.142135623730951*MuD*Conj(LamSD)*Sqr(vd) -
       7.0710678118654755*LamTD*vT*Conj(LamSD)*Sqr(vd) - 7.0710678118654755*LamSD*
       vT*Conj(LamTD)*Sqr(vd) + 7.745966692414834*g1*Conj(MDBS)*Sqr(vd) -
       14.142135623730951*LamSD*Conj(MuD)*Sqr(vd) - 7.745966692414834*g1*MDBS*Sqr(
@@ -282,6 +282,7 @@ int CLASSNAME::solve_tree_level(MRSSM_mass_eigenstates& model)
       LamSU*vT*Conj(LamTU)*Sqr(vu) - 7.745966692414834*g1*Conj(MDBS)*Sqr(vu) -
       14.142135623730951*LamSU*Conj(MuU)*Sqr(vu)))/vS);
 
+   
    const bool is_finite = IsFinite(mHd2) && IsFinite(mHu2) && IsFinite(mT2) &&
       IsFinite(mS2);
 
@@ -295,7 +296,6 @@ int CLASSNAME::solve_tree_level(MRSSM_mass_eigenstates& model)
       error = EWSB_solver::FAIL;
       model.get_problems().flag_no_ewsb_tree_level();
    }
-
    return error;
 }
 
@@ -368,34 +368,34 @@ CLASSNAME::EWSB_vector_t CLASSNAME::ewsb_step(const MRSSM_mass_eigenstates& mode
    double mT2;
    double mS2;
 
-   mHd2 = Re((0.025*(15.491933384829668*g1*MDBS*vd*vS - 20*g2*MDWBT*vd*vT - 40*
-      vd*AbsSqr(MuD) - 40*vd*AbsSqr(Mu) + 20*vu*BMu - 28.284271247461902*MuD*vd*vS
-      *Conj(LamSD) - 14.142135623730951*LamTD*vd*vS*vT*Conj(LamSD) - 20*MuD*vd*vT*
+   mHd2 = Re((0.025*(15.491933384829668*g1*MDBS*vd*vS - 20*g2*MDWBT*vd*vT - 40*vd*
+      AbsSqr(MuD) - 40*vd*AbsSqr(Mu) + 20*vu*BMu - 28.284271247461902*MuD*vd*vS*
+      Conj(LamSD) - 14.142135623730951*LamTD*vd*vS*vT*Conj(LamSD) - 20*MuD*vd*vT*
       Conj(LamTD) - 14.142135623730951*LamSD*vd*vS*vT*Conj(LamTD) +
       15.491933384829668*g1*vd*vS*Conj(MDBS) - 20*g2*vd*vT*Conj(MDWBT) -
       28.284271247461902*LamSD*vd*vS*Conj(MuD) - 20*LamTD*vd*vT*Conj(MuD) + 20*vu*
       Conj(BMu) + 40*tadpole[0] - 3*Cube(vd)*Sqr(g1) - 5*Cube(vd)*Sqr(g2) - 20*vd*
       AbsSqr(LamSD)*Sqr(vS) - 10*vd*AbsSqr(LamTD)*Sqr(vT) + 3*vd*Sqr(g1)*Sqr(vu) +
       5*vd*Sqr(g2)*Sqr(vu)))/vd);
-   mHu2 = Re((0.025*(-15.491933384829668*g1*MDBS*vS*vu + 20*g2*MDWBT*vT*vu - 40
-      *vu*AbsSqr(MuU) - 40*vu*AbsSqr(Mu) + 20*vd*BMu - 28.284271247461902*MuU*vS*
-      vu*Conj(LamSU) + 14.142135623730951*LamTU*vS*vT*vu*Conj(LamSU) + 20*MuU*vT*
-      vu*Conj(LamTU) + 14.142135623730951*LamSU*vS*vT*vu*Conj(LamTU) -
+   mHu2 = Re((0.025*(-15.491933384829668*g1*MDBS*vS*vu + 20*g2*MDWBT*vT*vu - 40*vu
+      *AbsSqr(MuU) - 40*vu*AbsSqr(Mu) + 20*vd*BMu - 28.284271247461902*MuU*vS*vu*
+      Conj(LamSU) + 14.142135623730951*LamTU*vS*vT*vu*Conj(LamSU) + 20*MuU*vT*vu*
+      Conj(LamTU) + 14.142135623730951*LamSU*vS*vT*vu*Conj(LamTU) -
       15.491933384829668*g1*vS*vu*Conj(MDBS) + 20*g2*vT*vu*Conj(MDWBT) -
       28.284271247461902*LamSU*vS*vu*Conj(MuU) + 20*LamTU*vT*vu*Conj(MuU) + 20*vd*
       Conj(BMu) + 40*tadpole[1] - 3*Cube(vu)*Sqr(g1) - 5*Cube(vu)*Sqr(g2) + 3*vu*
       Sqr(g1)*Sqr(vd) + 5*vu*Sqr(g2)*Sqr(vd) - 20*vu*AbsSqr(LamSU)*Sqr(vS) - 10*vu
       *AbsSqr(LamTU)*Sqr(vT)))/vu);
-   mT2 = Re((0.125*(8*tadpole[2] - 32*vT*Sqr(MDWBT) - 2*g2*MDWBT*Sqr(vd) - 2*vT
-      *AbsSqr(LamTD)*Sqr(vd) - 1.4142135623730951*LamTD*vS*Conj(LamSD)*Sqr(vd) - 2
-      *MuD*Conj(LamTD)*Sqr(vd) - 1.4142135623730951*LamSD*vS*Conj(LamTD)*Sqr(vd) -
+   mT2 = Re((0.125*(8*tadpole[2] - 32*vT*Sqr(MDWBT) - 2*g2*MDWBT*Sqr(vd) - 2*vT*
+      AbsSqr(LamTD)*Sqr(vd) - 1.4142135623730951*LamTD*vS*Conj(LamSD)*Sqr(vd) - 2*
+      MuD*Conj(LamTD)*Sqr(vd) - 1.4142135623730951*LamSD*vS*Conj(LamTD)*Sqr(vd) -
       2*g2*Conj(MDWBT)*Sqr(vd) - 2*LamTD*Conj(MuD)*Sqr(vd) + 2*g2*MDWBT*Sqr(vu) -
-      2*vT*AbsSqr(LamTU)*Sqr(vu) + 1.4142135623730951*LamTU*vS*Conj(LamSU)*Sqr(vu
-      ) + 2*MuU*Conj(LamTU)*Sqr(vu) + 1.4142135623730951*LamSU*vS*Conj(LamTU)*Sqr(
-      vu) + 2*g2*Conj(MDWBT)*Sqr(vu) + 2*LamTU*Conj(MuU)*Sqr(vu)))/vT);
-   mS2 = Re((0.025*(40*tadpole[3] - 160*vS*Sqr(MDBS) + 7.745966692414834*g1*
-      MDBS*Sqr(vd) - 20*vS*AbsSqr(LamSD)*Sqr(vd) - 14.142135623730951*MuD*Conj(
-      LamSD)*Sqr(vd) - 7.0710678118654755*LamTD*vT*Conj(LamSD)*Sqr(vd) -
+      2*vT*AbsSqr(LamTU)*Sqr(vu) + 1.4142135623730951*LamTU*vS*Conj(LamSU)*Sqr(vu)
+      + 2*MuU*Conj(LamTU)*Sqr(vu) + 1.4142135623730951*LamSU*vS*Conj(LamTU)*Sqr(vu
+      ) + 2*g2*Conj(MDWBT)*Sqr(vu) + 2*LamTU*Conj(MuU)*Sqr(vu)))/vT);
+   mS2 = Re((0.025*(40*tadpole[3] - 160*vS*Sqr(MDBS) + 7.745966692414834*g1*MDBS*
+      Sqr(vd) - 20*vS*AbsSqr(LamSD)*Sqr(vd) - 14.142135623730951*MuD*Conj(LamSD)*
+      Sqr(vd) - 7.0710678118654755*LamTD*vT*Conj(LamSD)*Sqr(vd) -
       7.0710678118654755*LamSD*vT*Conj(LamTD)*Sqr(vd) + 7.745966692414834*g1*Conj(
       MDBS)*Sqr(vd) - 14.142135623730951*LamSD*Conj(MuD)*Sqr(vd) -
       7.745966692414834*g1*MDBS*Sqr(vu) - 20*vS*AbsSqr(LamSU)*Sqr(vu) -

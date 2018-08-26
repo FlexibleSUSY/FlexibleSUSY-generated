@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:17:40
+// File generated at Sun 26 Aug 2018 14:33:31
 
 #include "lowNMSSMTanBetaAtMZ_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -77,8 +77,8 @@ Eigen::Matrix<double,3,3> lowNMSSMTanBetaAtMZ_soft_parameters::calc_beta_TYe_1_l
 
    Eigen::Matrix<double,3,3> beta_TYe;
 
-   beta_TYe = (oneOver16PiSqr*((3*traceYdAdjYd + traceYeAdjYe + AbsSqr(
-      Lambdax) - 1.8*Sqr(g1) - 3*Sqr(g2))*TYe + 0.4*Ye*(9*MassB*Sqr(g1) + 5*(3*
+   beta_TYe = (oneOver16PiSqr*((3*traceYdAdjYd + traceYeAdjYe + AbsSqr(Lambdax)
+      - 1.8*Sqr(g1) - 3*Sqr(g2))*TYe + 0.4*Ye*(9*MassB*Sqr(g1) + 5*(3*
       traceAdjYdTYd + traceAdjYeTYe + 3*MassWB*Sqr(g2)) + 5*Conj(Lambdax)*
       TLambdax) + 4*(Ye*Ye.adjoint()*TYe) + 5*(TYe*Ye.adjoint()*Ye))).real();
 
@@ -125,10 +125,10 @@ Eigen::Matrix<double,3,3> lowNMSSMTanBetaAtMZ_soft_parameters::calc_beta_TYe_2_l
       traceAdjYeTYe + 2*MassWB*Sqr(g2) + Conj(Lambdax)*TLambdax)*(Ye*Ye.adjoint
       ()*Ye) + (-12*traceYdAdjYd - 4*traceYeAdjYe - 4*AbsSqr(Lambdax) + 1.2*Sqr
       (g1) + 6*Sqr(g2))*(Ye*Ye.adjoint()*TYe) + (-15*traceYdAdjYd - 5*
-      traceYeAdjYe - 5*AbsSqr(Lambdax) - 1.2*Sqr(g1) + 12*Sqr(g2))*(TYe*
-      Ye.adjoint()*Ye) - 6*(Ye*Ye.adjoint()*Ye*Ye.adjoint()*TYe) - 8*(Ye*
-      Ye.adjoint()*TYe*Ye.adjoint()*Ye) - 6*(TYe*Ye.adjoint()*Ye*Ye.adjoint()*
-      Ye))).real();
+      traceYeAdjYe - 5*AbsSqr(Lambdax) - 1.2*Sqr(g1) + 12*Sqr(g2))*(TYe*Ye.
+      adjoint()*Ye) - 6*(Ye*Ye.adjoint()*Ye*Ye.adjoint()*TYe) - 8*(Ye*Ye.
+      adjoint()*TYe*Ye.adjoint()*Ye) - 6*(TYe*Ye.adjoint()*Ye*Ye.adjoint()*Ye))
+      ).real();
 
 
    return beta_TYe;

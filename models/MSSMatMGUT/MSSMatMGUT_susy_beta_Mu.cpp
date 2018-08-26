@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 19:01:03
+// File generated at Sun 26 Aug 2018 15:20:36
 
 #include "MSSMatMGUT_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -65,11 +65,10 @@ double MSSMatMGUT_susy_parameters::calc_beta_Mu_2_loop(const Susy_traces& susy_t
 
    double beta_Mu;
 
-   beta_Mu = Re(0.02*twoLoop*Mu*(207*Quad(g1) + 10*Sqr(g1)*(-2*
-      traceYdAdjYd + 6*traceYeAdjYe + 4*traceYuAdjYu + 9*Sqr(g2)) + 25*(15*Quad
-      (g2) + 2*(-3*(3*traceYdAdjYdYdAdjYd + 2*traceYdAdjYuYuAdjYd +
-      traceYeAdjYeYeAdjYe + 3*traceYuAdjYuYuAdjYu) + 16*(traceYdAdjYd +
-      traceYuAdjYu)*Sqr(g3)))));
+   beta_Mu = Re(0.02*twoLoop*Mu*(207*Quad(g1) + 10*Sqr(g1)*(-2*traceYdAdjYd + 6
+      *traceYeAdjYe + 4*traceYuAdjYu + 9*Sqr(g2)) + 25*(15*Quad(g2) + 2*(-3*(3*
+      traceYdAdjYdYdAdjYd + 2*traceYdAdjYuYuAdjYd + traceYeAdjYeYeAdjYe + 3*
+      traceYuAdjYuYuAdjYu) + 16*(traceYdAdjYd + traceYuAdjYu)*Sqr(g3)))));
 
 
    return beta_Mu;
@@ -91,16 +90,16 @@ double MSSMatMGUT_susy_parameters::calc_beta_Mu_3_loop(const Susy_traces& susy_t
    const double traceAdjYeYe = TRACE_STRUCT.traceAdjYeYe;
    const double traceAdjYdYd = TRACE_STRUCT.traceAdjYdYd;
    const double traceAdjYuYuAdjYuYu = TRACE_STRUCT.traceAdjYuYuAdjYuYu;
-   const double traceAdjYdYdAdjYdYdAdjYdYd =
-      TRACE_STRUCT.traceAdjYdYdAdjYdYdAdjYdYd;
-   const double traceAdjYdYdAdjYuYuAdjYdYd =
-      TRACE_STRUCT.traceAdjYdYdAdjYuYuAdjYdYd;
-   const double traceAdjYeYeAdjYeYeAdjYeYe =
-      TRACE_STRUCT.traceAdjYeYeAdjYeYeAdjYeYe;
-   const double traceAdjYuYuAdjYuYuAdjYdYd =
-      TRACE_STRUCT.traceAdjYuYuAdjYuYuAdjYdYd;
-   const double traceAdjYuYuAdjYuYuAdjYuYu =
-      TRACE_STRUCT.traceAdjYuYuAdjYuYuAdjYuYu;
+   const double traceAdjYdYdAdjYdYdAdjYdYd = TRACE_STRUCT.
+      traceAdjYdYdAdjYdYdAdjYdYd;
+   const double traceAdjYdYdAdjYuYuAdjYdYd = TRACE_STRUCT.
+      traceAdjYdYdAdjYuYuAdjYdYd;
+   const double traceAdjYeYeAdjYeYeAdjYeYe = TRACE_STRUCT.
+      traceAdjYeYeAdjYeYeAdjYeYe;
+   const double traceAdjYuYuAdjYuYuAdjYdYd = TRACE_STRUCT.
+      traceAdjYuYuAdjYuYuAdjYdYd;
+   const double traceAdjYuYuAdjYuYuAdjYuYu = TRACE_STRUCT.
+      traceAdjYuYuAdjYuYuAdjYuYu;
 
 
    double beta_Mu;
@@ -124,10 +123,10 @@ double MSSMatMGUT_susy_parameters::calc_beta_Mu_3_loop(const Susy_traces& susy_t
       traceAdjYuYuAdjYdYd*Sqr(g3) - 101.09619405498157*traceAdjYuYuAdjYuYu*Sqr(
       g3) + Sqr(g1)*(15.982214554123619*traceAdjYdYdAdjYdYd - 3.982214554123619
       *traceAdjYeYeAdjYeYe + 10.339746270332105*traceAdjYuYuAdjYdYd +
-      7.072595148625461*traceAdjYuYuAdjYuYu - 14.973321831185427*Quad(g2) + (
-      -11.118512128436349*traceAdjYdYd + 11.373321831185427*traceAdjYeYe +
+      7.072595148625461*traceAdjYuYuAdjYuYu - 14.973321831185427*Quad(g2) + (-
+      11.118512128436349*traceAdjYdYd + 11.373321831185427*traceAdjYeYe +
       9.445916979810885*traceAdjYuYu)*Sqr(g2) + (7.992741297441576*traceAdjYdYd
-      + 8.67223383810579*traceAdjYuYu)*Sqr(g3)) + Sqr(g2)*(73.91107277061809*
+       + 8.67223383810579*traceAdjYuYu)*Sqr(g3)) + Sqr(g2)*(73.91107277061809*
       traceAdjYdYdAdjYdYd + 24.637024256872696*traceAdjYeYeAdjYeYe + 36*
       traceAdjYuYuAdjYdYd + 73.91107277061809*traceAdjYuYuAdjYuYu + (
       41.09619405498157*traceAdjYdYd + 41.09619405498157*traceAdjYuYu)*Sqr(g3))

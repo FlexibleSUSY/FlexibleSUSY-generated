@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:08:23
+// File generated at Sun 26 Aug 2018 14:06:40
 
 #ifndef HGTHDMIIMSSMBC_soft_parameters_H
 #define HGTHDMIIMSSMBC_soft_parameters_H
@@ -36,8 +36,7 @@ class HGTHDMIIMSSMBC_soft_parameters : public HGTHDMIIMSSMBC_susy_parameters {
 public:
    explicit HGTHDMIIMSSMBC_soft_parameters(const HGTHDMIIMSSMBC_input_parameters& input_ = HGTHDMIIMSSMBC_input_parameters());
    HGTHDMIIMSSMBC_soft_parameters(const HGTHDMIIMSSMBC_susy_parameters& , double MassB_, double MassG_, double MassWB_, double Mu_, double M122_,
-   double M112_, double M222_, double v1_, double v2_
-);
+   double M112_, double M222_, double v1_, double v2_);
    HGTHDMIIMSSMBC_soft_parameters(const HGTHDMIIMSSMBC_soft_parameters&) = default;
    HGTHDMIIMSSMBC_soft_parameters(HGTHDMIIMSSMBC_soft_parameters&&) = default;
    virtual ~HGTHDMIIMSSMBC_soft_parameters() = default;

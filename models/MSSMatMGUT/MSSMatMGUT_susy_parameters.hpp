@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 19:00:55
+// File generated at Sun 26 Aug 2018 15:20:27
 
 #ifndef MSSMatMGUT_susy_parameters_H
 #define MSSMatMGUT_susy_parameters_H
@@ -39,10 +39,9 @@ namespace flexiblesusy {
 class MSSMatMGUT_susy_parameters : public Beta_function {
 public:
    explicit MSSMatMGUT_susy_parameters(const MSSMatMGUT_input_parameters& input_ = MSSMatMGUT_input_parameters());
-   MSSMatMGUT_susy_parameters(double scale_, int loops_, int thresholds_, const MSSMatMGUT_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
-   , const Eigen::Matrix<double,3,3>& Yu_, double Mu_, double g1_, double g2_,
-   double g3_, double vd_, double vu_
-);
+   MSSMatMGUT_susy_parameters(double scale_, int loops_, int thresholds_, const MSSMatMGUT_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_,
+   const Eigen::Matrix<double,3,3>& Yu_, double Mu_, double g1_, double g2_,
+   double g3_, double vd_, double vu_);
    MSSMatMGUT_susy_parameters(const MSSMatMGUT_susy_parameters&) = default;
    MSSMatMGUT_susy_parameters(MSSMatMGUT_susy_parameters&&) = default;
    virtual ~MSSMatMGUT_susy_parameters() = default;

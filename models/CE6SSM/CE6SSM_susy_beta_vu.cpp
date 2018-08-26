@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 16:03:24
+// File generated at Sun 26 Aug 2018 13:46:27
 
 #include "CE6SSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -38,8 +38,8 @@ double CE6SSM_susy_parameters::calc_beta_vu_1_loop(const Susy_traces& susy_trace
 
    double beta_vu;
 
-   beta_vu = Re(0.1*oneOver16PiSqr*vu*(-30*traceYuAdjYu - 10*AbsSqr(
-      Lambdax) + 3*Sqr(g1) + 15*Sqr(g2) + 2*Sqr(gN)));
+   beta_vu = Re(0.1*oneOver16PiSqr*vu*(-30*traceYuAdjYu - 10*AbsSqr(Lambdax) +
+      3*Sqr(g1) + 15*Sqr(g2) + 2*Sqr(gN)));
 
 
    return beta_vu;
@@ -56,8 +56,8 @@ double CE6SSM_susy_parameters::calc_beta_vu_2_loop(const Susy_traces& susy_trace
    const double traceYdAdjYd = TRACE_STRUCT.traceYdAdjYd;
    const double traceYeAdjYe = TRACE_STRUCT.traceYeAdjYe;
    const double traceKappaAdjKappa = TRACE_STRUCT.traceKappaAdjKappa;
-   const double traceLambda12AdjLambda12 =
-      TRACE_STRUCT.traceLambda12AdjLambda12;
+   const double traceLambda12AdjLambda12 = TRACE_STRUCT.
+      traceLambda12AdjLambda12;
    const double traceYdAdjYuYuAdjYd = TRACE_STRUCT.traceYdAdjYuYuAdjYd;
    const double traceYuAdjYuYuAdjYu = TRACE_STRUCT.traceYuAdjYuYuAdjYu;
 

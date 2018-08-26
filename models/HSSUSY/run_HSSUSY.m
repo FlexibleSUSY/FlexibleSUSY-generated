@@ -6,10 +6,10 @@ handle = FSHSSUSYOpenHandle[
         maxIterations -> 0,                (* FlexibleSUSY[1] *)
         solver -> 1,     (* FlexibleSUSY[2] *)
         calculateStandardModelMasses -> 0, (* FlexibleSUSY[3] *)
-        poleMassLoopOrder -> 2,            (* FlexibleSUSY[4] *)
-        ewsbLoopOrder -> 2,                (* FlexibleSUSY[5] *)
+        poleMassLoopOrder -> 4,            (* FlexibleSUSY[4] *)
+        ewsbLoopOrder -> 4,                (* FlexibleSUSY[5] *)
         betaFunctionLoopOrder -> 4,        (* FlexibleSUSY[6] *)
-        thresholdCorrectionsLoopOrder -> 2,(* FlexibleSUSY[7] *)
+        thresholdCorrectionsLoopOrder -> 3,(* FlexibleSUSY[7] *)
         higgs2loopCorrectionAtAs -> 1,     (* FlexibleSUSY[8] *)
         higgs2loopCorrectionAbAs -> 1,     (* FlexibleSUSY[9] *)
         higgs2loopCorrectionAtAt -> 1,     (* FlexibleSUSY[10] *)
@@ -87,6 +87,8 @@ handle = FSHSSUSYOpenHandle[
         DeltaYt -> 0,
         DeltaOS -> 0,
         Qmatch -> 0,
+        DeltaLambda3L -> 0,
+        ThreeLoopAtAsAs -> 0,
         msq2 -> {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
         msu2 -> {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
         msd2 -> {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},

@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 19:04:22
+// File generated at Sun 26 Aug 2018 15:17:26
 
 /**
  * @file MSSMNoFVatMGUT_edm.cpp
  *
- * This file was generated at Mon 5 Mar 2018 19:04:22 with FlexibleSUSY
- * 2.1.0 and SARAH 4.12.3 .
+ * This file was generated at Sun 26 Aug 2018 15:17:26 with FlexibleSUSY
+ * 2.2.0 and SARAH 4.13.0 .
  */
 
 #include "MSSMNoFVatMGUT_edm.hpp"

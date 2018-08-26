@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 15:31:39
+// File generated at Sun 26 Aug 2018 14:24:59
 
 #ifndef MRSSMEFTHiggs_susy_parameters_H
 #define MRSSMEFTHiggs_susy_parameters_H
@@ -39,11 +39,10 @@ namespace flexiblesusy {
 class MRSSMEFTHiggs_susy_parameters : public Beta_function {
 public:
    explicit MRSSMEFTHiggs_susy_parameters(const MRSSMEFTHiggs_input_parameters& input_ = MRSSMEFTHiggs_input_parameters());
-   MRSSMEFTHiggs_susy_parameters(double scale_, int loops_, int thresholds_, const MRSSMEFTHiggs_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
-   , double LamTD_, double LamTU_, double LamSD_, double LamSU_, const
-   Eigen::Matrix<double,3,3>& Yu_, double Mu_, double MuD_, double MuU_, double
-   g1_, double g2_, double g3_, double vd_, double vu_, double vT_, double vS_
-);
+   MRSSMEFTHiggs_susy_parameters(double scale_, int loops_, int thresholds_, const MRSSMEFTHiggs_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_,
+   double LamTD_, double LamTU_, double LamSD_, double LamSU_, const Eigen::
+   Matrix<double,3,3>& Yu_, double Mu_, double MuD_, double MuU_, double g1_,
+   double g2_, double g3_, double vd_, double vu_, double vT_, double vS_);
    MRSSMEFTHiggs_susy_parameters(const MRSSMEFTHiggs_susy_parameters&) = default;
    MRSSMEFTHiggs_susy_parameters(MRSSMEFTHiggs_susy_parameters&&) = default;
    virtual ~MRSSMEFTHiggs_susy_parameters() = default;

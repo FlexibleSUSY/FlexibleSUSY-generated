@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:47:48
+// File generated at Sun 26 Aug 2018 14:43:42
 
 #include "MRSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -39,9 +39,9 @@ Eigen::Matrix<double,3,3> MRSSM_susy_parameters::calc_beta_Ye_1_loop(const Susy_
 
    Eigen::Matrix<double,3,3> beta_Ye;
 
-   beta_Ye = (oneOver16PiSqr*(Ye*(3*traceYdAdjYd + traceYeAdjYe + AbsSqr(
-      LamSD) + 1.5*AbsSqr(LamTD) - 1.8*Sqr(g1) - 3*Sqr(g2)) + 3*(Ye*Ye.adjoint(
-      )*Ye))).real();
+   beta_Ye = (oneOver16PiSqr*(Ye*(3*traceYdAdjYd + traceYeAdjYe + AbsSqr(LamSD)
+      + 1.5*AbsSqr(LamTD) - 1.8*Sqr(g1) - 3*Sqr(g2)) + 3*(Ye*Ye.adjoint()*Ye)))
+      .real();
 
 
    return beta_Ye;
@@ -63,14 +63,14 @@ Eigen::Matrix<double,3,3> MRSSM_susy_parameters::calc_beta_Ye_2_loop(const Susy_
 
    Eigen::Matrix<double,3,3> beta_Ye;
 
-   beta_Ye = (twoLoop*(0.01*Ye*(-100*AbsSqr(LamSD)*(2*AbsSqr(LamSU) + 3*
-      AbsSqr(LamTD)) + 150*AbsSqr(LamTD)*(-AbsSqr(LamTU) + 4*Sqr(g2)) + 2*(729*
-      Quad(g1) + 10*Sqr(g1)*(-2*traceYdAdjYd + 6*traceYeAdjYe + 9*Sqr(g2)) + 25
-      *(-6*(3*traceYdAdjYdYdAdjYd + traceYdAdjYuYuAdjYd + traceYeAdjYeYeAdjYe)
-      + 33*Quad(g2) + 32*traceYdAdjYd*Sqr(g3))) - 300*Sqr(LamSD)*Sqr(Conj(LamSD
-      )) - 375*Sqr(LamTD)*Sqr(Conj(LamTD))) + (-9*traceYdAdjYd - 3*traceYeAdjYe
-      - 3*AbsSqr(LamSD) - 4.5*AbsSqr(LamTD) + 6*Sqr(g2))*(Ye*Ye.adjoint()*Ye)
-      - 4*(Ye*Ye.adjoint()*Ye*Ye.adjoint()*Ye))).real();
+   beta_Ye = (twoLoop*(0.01*Ye*(-100*AbsSqr(LamSD)*(2*AbsSqr(LamSU) + 3*AbsSqr(
+      LamTD)) + 150*AbsSqr(LamTD)*(-AbsSqr(LamTU) + 4*Sqr(g2)) + 2*(729*Quad(g1
+      ) + 10*Sqr(g1)*(-2*traceYdAdjYd + 6*traceYeAdjYe + 9*Sqr(g2)) + 25*(-6*(3
+      *traceYdAdjYdYdAdjYd + traceYdAdjYuYuAdjYd + traceYeAdjYeYeAdjYe) + 33*
+      Quad(g2) + 32*traceYdAdjYd*Sqr(g3))) - 300*Sqr(LamSD)*Sqr(Conj(LamSD)) -
+      375*Sqr(LamTD)*Sqr(Conj(LamTD))) + (-9*traceYdAdjYd - 3*traceYeAdjYe - 3*
+      AbsSqr(LamSD) - 4.5*AbsSqr(LamTD) + 6*Sqr(g2))*(Ye*Ye.adjoint()*Ye) - 4*(
+      Ye*Ye.adjoint()*Ye*Ye.adjoint()*Ye))).real();
 
 
    return beta_Ye;

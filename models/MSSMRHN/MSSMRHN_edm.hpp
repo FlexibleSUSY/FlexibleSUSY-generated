@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:56:17
+// File generated at Sun 26 Aug 2018 15:07:40
 
 /**
  * @file MSSMRHN_edm.hpp
  *
- * This file was generated at Mon 5 Mar 2018 18:56:17 with FlexibleSUSY
- * 2.1.0 and SARAH 4.12.3 .
+ * This file was generated at Sun 26 Aug 2018 15:07:40 with FlexibleSUSY
+ * 2.2.0 and SARAH 4.13.0 .
  */
 
 #ifndef MSSMRHN_EDM_H

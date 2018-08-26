@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 15:31:44
+// File generated at Sun 26 Aug 2018 14:25:05
 
 #include "MRSSMEFTHiggs_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -39,9 +39,8 @@ double MRSSMEFTHiggs_susy_parameters::calc_beta_MuD_1_loop(const Susy_traces& su
 
    double beta_MuD;
 
-   beta_MuD = Re(oneOver16PiSqr*(3*MuD*traceYdAdjYd + MuD*traceYeAdjYe +
-      2*MuD*AbsSqr(LamSD) + 3*MuD*AbsSqr(LamTD) - 0.6*MuD*Sqr(g1) - 3*MuD*Sqr(
-      g2)));
+   beta_MuD = Re(oneOver16PiSqr*(3*MuD*traceYdAdjYd + MuD*traceYeAdjYe + 2*MuD*
+      AbsSqr(LamSD) + 3*MuD*AbsSqr(LamTD) - 0.6*MuD*Sqr(g1) - 3*MuD*Sqr(g2)));
 
 
    return beta_MuD;
@@ -68,7 +67,7 @@ double MRSSMEFTHiggs_susy_parameters::calc_beta_MuD_2_loop(const Susy_traces& su
       traceYdAdjYd + traceYeAdjYe + 4*AbsSqr(LamSU) + 6*AbsSqr(LamTD)) + 45*
       Quad(g1) + 165*Quad(g2) - 4*traceYdAdjYd*Sqr(g1) + 12*traceYeAdjYe*Sqr(g1
       ) + 18*Sqr(g1)*Sqr(g2) + 15*AbsSqr(LamTD)*(-3*traceYdAdjYd - traceYeAdjYe
-      - 2*AbsSqr(LamTU) + 8*Sqr(g2)) + 160*traceYdAdjYd*Sqr(g3) - 60*Sqr(LamSD
+       - 2*AbsSqr(LamTU) + 8*Sqr(g2)) + 160*traceYdAdjYd*Sqr(g3) - 60*Sqr(LamSD
       )*Sqr(Conj(LamSD)) - 75*Sqr(LamTD)*Sqr(Conj(LamTD))));
 
 

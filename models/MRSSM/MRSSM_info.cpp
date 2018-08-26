@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:51:27
+// File generated at Sun 26 Aug 2018 15:32:10
 
 #include "MRSSM_info.hpp"
 
@@ -29,8 +29,8 @@ namespace MRSSM_info {
    const double normalization_g2 = 1;
    const double normalization_g3 = 1;
 
-   const std::array<int, NUMBER_OF_PARTICLES> particle_multiplicities = {1, 1,
-      3, 1, 1, 1, 1, 6, 3, 6, 6, 4, 4, 2, 4, 4, 2, 2, 3, 3, 3, 1, 1, 1};
+   const std::array<int, NUMBER_OF_PARTICLES> particle_multiplicities = {1, 1, 3,
+      1, 1, 1, 1, 6, 3, 6, 6, 4, 4, 2, 4, 4, 2, 2, 3, 3, 3, 1, 1, 1};
 
    const std::array<std::string, NUMBER_OF_PARTICLES> particle_names = {"VG",
       "Glu", "Fv", "SRdp", "SRum", "sigmaO", "phiO", "Sd", "Sv", "Su", "Se", "hh",
@@ -45,12 +45,12 @@ namespace MRSSM_info {
 
    const std::array<std::string, NUMBER_OF_PARAMETERS> parameter_names = {
       "Yd(0,0)", "Yd(0,1)", "Yd(0,2)", "Yd(1,0)", "Yd(1,1)", "Yd(1,2)", "Yd(2,0)",
-      "Yd(2,1)", "Yd(2,2)", "Ye(0,0)", "Ye(0,1)", "Ye(0,2)", "Ye(1,0)", "Ye(1,1)"
-      , "Ye(1,2)", "Ye(2,0)", "Ye(2,1)", "Ye(2,2)", "LamTD", "LamTU", "LamSD",
+      "Yd(2,1)", "Yd(2,2)", "Ye(0,0)", "Ye(0,1)", "Ye(0,2)", "Ye(1,0)", "Ye(1,1)",
+      "Ye(1,2)", "Ye(2,0)", "Ye(2,1)", "Ye(2,2)", "LamTD", "LamTU", "LamSD",
       "LamSU", "Yu(0,0)", "Yu(0,1)", "Yu(0,2)", "Yu(1,0)", "Yu(1,1)", "Yu(1,2)",
       "Yu(2,0)", "Yu(2,1)", "Yu(2,2)", "Mu", "MuD", "MuU", "g1", "g2", "g3", "vd",
-      "vu", "vT", "vS", "BMu", "BMuD", "BMuU", "mq2(0,0)", "mq2(0,1)", "mq2(0,2)"
-      , "mq2(1,0)", "mq2(1,1)", "mq2(1,2)", "mq2(2,0)", "mq2(2,1)", "mq2(2,2)",
+      "vu", "vT", "vS", "BMu", "BMuD", "BMuU", "mq2(0,0)", "mq2(0,1)", "mq2(0,2)",
+      "mq2(1,0)", "mq2(1,1)", "mq2(1,2)", "mq2(2,0)", "mq2(2,1)", "mq2(2,2)",
       "ml2(0,0)", "ml2(0,1)", "ml2(0,2)", "ml2(1,0)", "ml2(1,1)", "ml2(1,2)",
       "ml2(2,0)", "ml2(2,1)", "ml2(2,2)", "mHd2", "mHu2", "md2(0,0)", "md2(0,1)",
       "md2(0,2)", "md2(1,0)", "md2(1,1)", "md2(1,2)", "md2(2,0)", "md2(2,1)",
@@ -60,32 +60,31 @@ namespace MRSSM_info {
       "me2(2,2)", "mS2", "mT2", "moc2", "mRd2", "mRu2", "MDBS", "MDWBT", "MDGoc"};
 
    const std::array<std::string, NUMBER_OF_MIXINGS> particle_mixing_names = {
-      "ZD(0,0)", "ZD(0,1)", "ZD(0,2)", "ZD(0,3)", "ZD(0,4)", "ZD(0,5)", "ZD(1,0)"
-      , "ZD(1,1)", "ZD(1,2)", "ZD(1,3)", "ZD(1,4)", "ZD(1,5)", "ZD(2,0)",
-      "ZD(2,1)", "ZD(2,2)", "ZD(2,3)", "ZD(2,4)", "ZD(2,5)", "ZD(3,0)", "ZD(3,1)",
-      "ZD(3,2)", "ZD(3,3)", "ZD(3,4)", "ZD(3,5)", "ZD(4,0)", "ZD(4,1)", "ZD(4,2)"
-      , "ZD(4,3)", "ZD(4,4)", "ZD(4,5)", "ZD(5,0)", "ZD(5,1)", "ZD(5,2)",
-      "ZD(5,3)", "ZD(5,4)", "ZD(5,5)", "ZV(0,0)", "ZV(0,1)", "ZV(0,2)", "ZV(1,0)",
-      "ZV(1,1)", "ZV(1,2)", "ZV(2,0)", "ZV(2,1)", "ZV(2,2)", "ZU(0,0)", "ZU(0,1)"
-      , "ZU(0,2)", "ZU(0,3)", "ZU(0,4)", "ZU(0,5)", "ZU(1,0)", "ZU(1,1)",
-      "ZU(1,2)", "ZU(1,3)", "ZU(1,4)", "ZU(1,5)", "ZU(2,0)", "ZU(2,1)", "ZU(2,2)",
-      "ZU(2,3)", "ZU(2,4)", "ZU(2,5)", "ZU(3,0)", "ZU(3,1)", "ZU(3,2)", "ZU(3,3)"
-      , "ZU(3,4)", "ZU(3,5)", "ZU(4,0)", "ZU(4,1)", "ZU(4,2)", "ZU(4,3)",
-      "ZU(4,4)", "ZU(4,5)", "ZU(5,0)", "ZU(5,1)", "ZU(5,2)", "ZU(5,3)", "ZU(5,4)",
-      "ZU(5,5)", "ZE(0,0)", "ZE(0,1)", "ZE(0,2)", "ZE(0,3)", "ZE(0,4)", "ZE(0,5)"
-      , "ZE(1,0)", "ZE(1,1)", "ZE(1,2)", "ZE(1,3)", "ZE(1,4)", "ZE(1,5)",
-      "ZE(2,0)", "ZE(2,1)", "ZE(2,2)", "ZE(2,3)", "ZE(2,4)", "ZE(2,5)", "ZE(3,0)",
-      "ZE(3,1)", "ZE(3,2)", "ZE(3,3)", "ZE(3,4)", "ZE(3,5)", "ZE(4,0)", "ZE(4,1)"
-      , "ZE(4,2)", "ZE(4,3)", "ZE(4,4)", "ZE(4,5)", "ZE(5,0)", "ZE(5,1)",
-      "ZE(5,2)", "ZE(5,3)", "ZE(5,4)", "ZE(5,5)", "ZH(0,0)", "ZH(0,1)", "ZH(0,2)",
-      "ZH(0,3)", "ZH(1,0)", "ZH(1,1)", "ZH(1,2)", "ZH(1,3)", "ZH(2,0)", "ZH(2,1)"
-      , "ZH(2,2)", "ZH(2,3)", "ZH(3,0)", "ZH(3,1)", "ZH(3,2)", "ZH(3,3)",
+      "ZD(0,0)", "ZD(0,1)", "ZD(0,2)", "ZD(0,3)", "ZD(0,4)", "ZD(0,5)", "ZD(1,0)",
+      "ZD(1,1)", "ZD(1,2)", "ZD(1,3)", "ZD(1,4)", "ZD(1,5)", "ZD(2,0)", "ZD(2,1)",
+      "ZD(2,2)", "ZD(2,3)", "ZD(2,4)", "ZD(2,5)", "ZD(3,0)", "ZD(3,1)", "ZD(3,2)",
+      "ZD(3,3)", "ZD(3,4)", "ZD(3,5)", "ZD(4,0)", "ZD(4,1)", "ZD(4,2)", "ZD(4,3)",
+      "ZD(4,4)", "ZD(4,5)", "ZD(5,0)", "ZD(5,1)", "ZD(5,2)", "ZD(5,3)", "ZD(5,4)",
+      "ZD(5,5)", "ZV(0,0)", "ZV(0,1)", "ZV(0,2)", "ZV(1,0)", "ZV(1,1)", "ZV(1,2)",
+      "ZV(2,0)", "ZV(2,1)", "ZV(2,2)", "ZU(0,0)", "ZU(0,1)", "ZU(0,2)", "ZU(0,3)",
+      "ZU(0,4)", "ZU(0,5)", "ZU(1,0)", "ZU(1,1)", "ZU(1,2)", "ZU(1,3)", "ZU(1,4)",
+      "ZU(1,5)", "ZU(2,0)", "ZU(2,1)", "ZU(2,2)", "ZU(2,3)", "ZU(2,4)", "ZU(2,5)",
+      "ZU(3,0)", "ZU(3,1)", "ZU(3,2)", "ZU(3,3)", "ZU(3,4)", "ZU(3,5)", "ZU(4,0)",
+      "ZU(4,1)", "ZU(4,2)", "ZU(4,3)", "ZU(4,4)", "ZU(4,5)", "ZU(5,0)", "ZU(5,1)",
+      "ZU(5,2)", "ZU(5,3)", "ZU(5,4)", "ZU(5,5)", "ZE(0,0)", "ZE(0,1)", "ZE(0,2)",
+      "ZE(0,3)", "ZE(0,4)", "ZE(0,5)", "ZE(1,0)", "ZE(1,1)", "ZE(1,2)", "ZE(1,3)",
+      "ZE(1,4)", "ZE(1,5)", "ZE(2,0)", "ZE(2,1)", "ZE(2,2)", "ZE(2,3)", "ZE(2,4)",
+      "ZE(2,5)", "ZE(3,0)", "ZE(3,1)", "ZE(3,2)", "ZE(3,3)", "ZE(3,4)", "ZE(3,5)",
+      "ZE(4,0)", "ZE(4,1)", "ZE(4,2)", "ZE(4,3)", "ZE(4,4)", "ZE(4,5)", "ZE(5,0)",
+      "ZE(5,1)", "ZE(5,2)", "ZE(5,3)", "ZE(5,4)", "ZE(5,5)", "ZH(0,0)", "ZH(0,1)",
+      "ZH(0,2)", "ZH(0,3)", "ZH(1,0)", "ZH(1,1)", "ZH(1,2)", "ZH(1,3)", "ZH(2,0)",
+      "ZH(2,1)", "ZH(2,2)", "ZH(2,3)", "ZH(3,0)", "ZH(3,1)", "ZH(3,2)", "ZH(3,3)",
       "ZA(0,0)", "ZA(0,1)", "ZA(0,2)", "ZA(0,3)", "ZA(1,0)", "ZA(1,1)", "ZA(1,2)",
-      "ZA(1,3)", "ZA(2,0)", "ZA(2,1)", "ZA(2,2)", "ZA(2,3)", "ZA(3,0)", "ZA(3,1)"
-      , "ZA(3,2)", "ZA(3,3)", "ZHR(0,0)", "ZHR(0,1)", "ZHR(1,0)", "ZHR(1,1)",
+      "ZA(1,3)", "ZA(2,0)", "ZA(2,1)", "ZA(2,2)", "ZA(2,3)", "ZA(3,0)", "ZA(3,1)",
+      "ZA(3,2)", "ZA(3,3)", "ZHR(0,0)", "ZHR(0,1)", "ZHR(1,0)", "ZHR(1,1)",
       "ZP(0,0)", "ZP(0,1)", "ZP(0,2)", "ZP(0,3)", "ZP(1,0)", "ZP(1,1)", "ZP(1,2)",
-      "ZP(1,3)", "ZP(2,0)", "ZP(2,1)", "ZP(2,2)", "ZP(2,3)", "ZP(3,0)", "ZP(3,1)"
-      , "ZP(3,2)", "ZP(3,3)", "Re(ZN1(0,0))", "Im(ZN1(0,0))", "Re(ZN1(0,1))",
+      "ZP(1,3)", "ZP(2,0)", "ZP(2,1)", "ZP(2,2)", "ZP(2,3)", "ZP(3,0)", "ZP(3,1)",
+      "ZP(3,2)", "ZP(3,3)", "Re(ZN1(0,0))", "Im(ZN1(0,0))", "Re(ZN1(0,1))",
       "Im(ZN1(0,1))", "Re(ZN1(0,2))", "Im(ZN1(0,2))", "Re(ZN1(0,3))",
       "Im(ZN1(0,3))", "Re(ZN1(1,0))", "Im(ZN1(1,0))", "Re(ZN1(1,1))",
       "Im(ZN1(1,1))", "Re(ZN1(1,2))", "Im(ZN1(1,2))", "Re(ZN1(1,3))",
@@ -138,25 +137,25 @@ namespace MRSSM_info {
       "Im(ZUR(2,0))", "Re(ZUR(2,1))", "Im(ZUR(2,1))", "Re(ZUR(2,2))",
       "Im(ZUR(2,2))", "ZZ(0,0)", "ZZ(0,1)", "ZZ(1,0)", "ZZ(1,1)"};
 
-   const std::array<std::string, NUMBER_OF_INPUT_PARAMETERS>
-      input_parameter_names = {"TanBeta", "LamTDInput", "LamTUInput", "LamSDInput"
-      , "LamSUInput", "MuInput", "MuDInput", "MuUInput", "vTInput", "vSInput",
-      "BMuInput", "BMuDInput", "BMuUInput", "mq2Input(0,0)", "mq2Input(0,1)",
-      "mq2Input(0,2)", "mq2Input(1,0)", "mq2Input(1,1)", "mq2Input(1,2)",
-      "mq2Input(2,0)", "mq2Input(2,1)", "mq2Input(2,2)", "ml2Input(0,0)",
-      "ml2Input(0,1)", "ml2Input(0,2)", "ml2Input(1,0)", "ml2Input(1,1)",
-      "ml2Input(1,2)", "ml2Input(2,0)", "ml2Input(2,1)", "ml2Input(2,2)",
-      "md2Input(0,0)", "md2Input(0,1)", "md2Input(0,2)", "md2Input(1,0)",
-      "md2Input(1,1)", "md2Input(1,2)", "md2Input(2,0)", "md2Input(2,1)",
-      "md2Input(2,2)", "mu2Input(0,0)", "mu2Input(0,1)", "mu2Input(0,2)",
-      "mu2Input(1,0)", "mu2Input(1,1)", "mu2Input(1,2)", "mu2Input(2,0)",
-      "mu2Input(2,1)", "mu2Input(2,2)", "me2Input(0,0)", "me2Input(0,1)",
-      "me2Input(0,2)", "me2Input(1,0)", "me2Input(1,1)", "me2Input(1,2)",
-      "me2Input(2,0)", "me2Input(2,1)", "me2Input(2,2)", "moc2Input", "mRd2Input",
-      "mRu2Input", "MDBSInput", "MDWBTInput", "MDGocInput"};
+   const std::array<std::string, NUMBER_OF_INPUT_PARAMETERS> input_parameter_names
+       = {"TanBeta", "LamTDInput", "LamTUInput", "LamSDInput", "LamSUInput",
+      "MuInput", "MuDInput", "MuUInput", "vTInput", "vSInput", "BMuInput",
+      "BMuDInput", "BMuUInput", "mq2Input(0,0)", "mq2Input(0,1)", "mq2Input(0,2)",
+      "mq2Input(1,0)", "mq2Input(1,1)", "mq2Input(1,2)", "mq2Input(2,0)",
+      "mq2Input(2,1)", "mq2Input(2,2)", "ml2Input(0,0)", "ml2Input(0,1)",
+      "ml2Input(0,2)", "ml2Input(1,0)", "ml2Input(1,1)", "ml2Input(1,2)",
+      "ml2Input(2,0)", "ml2Input(2,1)", "ml2Input(2,2)", "md2Input(0,0)",
+      "md2Input(0,1)", "md2Input(0,2)", "md2Input(1,0)", "md2Input(1,1)",
+      "md2Input(1,2)", "md2Input(2,0)", "md2Input(2,1)", "md2Input(2,2)",
+      "mu2Input(0,0)", "mu2Input(0,1)", "mu2Input(0,2)", "mu2Input(1,0)",
+      "mu2Input(1,1)", "mu2Input(1,2)", "mu2Input(2,0)", "mu2Input(2,1)",
+      "mu2Input(2,2)", "me2Input(0,0)", "me2Input(0,1)", "me2Input(0,2)",
+      "me2Input(1,0)", "me2Input(1,1)", "me2Input(1,2)", "me2Input(2,0)",
+      "me2Input(2,1)", "me2Input(2,2)", "moc2Input", "mRd2Input", "mRu2Input",
+      "MDBSInput", "MDWBTInput", "MDGocInput"};
 
-   const std::array<std::string, NUMBER_OF_EXTRA_PARAMETERS>
-      extra_parameter_names = {};
+   const std::array<std::string, NUMBER_OF_EXTRA_PARAMETERS> extra_parameter_names
+       = {};
 
    const std::string model_name = "MRSSM";
 

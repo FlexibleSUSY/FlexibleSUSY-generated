@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:47:50
+// File generated at Sun 26 Aug 2018 14:43:44
 
 #include "MRSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -39,9 +39,9 @@ double MRSSM_susy_parameters::calc_beta_LamSD_1_loop(const Susy_traces& susy_tra
 
    double beta_LamSD;
 
-   beta_LamSD = Re(oneOver16PiSqr*(3*LamSD*traceYdAdjYd + LamSD*
-      traceYeAdjYe + 2*LamSD*AbsSqr(LamSU) + 3*LamSD*AbsSqr(LamTD) - 0.6*LamSD*
-      Sqr(g1) - 3*LamSD*Sqr(g2) + 4*Conj(LamSD)*Sqr(LamSD)));
+   beta_LamSD = Re(oneOver16PiSqr*(3*LamSD*traceYdAdjYd + LamSD*traceYeAdjYe +
+      2*LamSD*AbsSqr(LamSU) + 3*LamSD*AbsSqr(LamTD) - 0.6*LamSD*Sqr(g1) - 3*
+      LamSD*Sqr(g2) + 4*Conj(LamSD)*Sqr(LamSD)));
 
 
    return beta_LamSD;
@@ -67,8 +67,8 @@ double MRSSM_susy_parameters::calc_beta_LamSD_2_loop(const Susy_traces& susy_tra
    beta_LamSD = Re(-0.1*LamSD*twoLoop*(90*traceYdAdjYdYdAdjYd + 30*
       traceYdAdjYuYuAdjYd + 30*traceYeAdjYeYeAdjYe + 45*traceYdAdjYd*AbsSqr(
       LamTD) + 15*traceYeAdjYe*AbsSqr(LamTD) + 30*AbsSqr(LamTD)*AbsSqr(LamTU) -
-      45*Quad(g1) - 165*Quad(g2) + 4*traceYdAdjYd*Sqr(g1) - 12*traceYeAdjYe*
-      Sqr(g1) + 2*AbsSqr(LamSD)*(45*traceYdAdjYd + 15*traceYeAdjYe + 20*AbsSqr(
+      45*Quad(g1) - 165*Quad(g2) + 4*traceYdAdjYd*Sqr(g1) - 12*traceYeAdjYe*Sqr
+      (g1) + 2*AbsSqr(LamSD)*(45*traceYdAdjYd + 15*traceYeAdjYe + 20*AbsSqr(
       LamSU) + 60*AbsSqr(LamTD) - 6*Sqr(g1) - 30*Sqr(g2)) - 120*AbsSqr(LamTD)*
       Sqr(g2) - 18*Sqr(g1)*Sqr(g2) - 12*AbsSqr(LamSU)*(-5*traceYuAdjYu - 5*
       AbsSqr(LamTU) + Sqr(g1) + 5*Sqr(g2)) - 160*traceYdAdjYd*Sqr(g3) + 100*Sqr

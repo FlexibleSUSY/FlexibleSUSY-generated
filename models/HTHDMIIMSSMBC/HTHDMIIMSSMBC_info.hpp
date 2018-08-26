@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:33:14
+// File generated at Sun 26 Aug 2018 14:08:04
 
 #ifndef HTHDMIIMSSMBC_INFO_H
 #define HTHDMIIMSSMBC_INFO_H
@@ -30,18 +30,18 @@
 namespace flexiblesusy {
 
 namespace HTHDMIIMSSMBC_info {
-   enum Particles : int { VG, Fv, Cha, hh, Ah, Hm, Fd, Fu, Fe, Chi, VWm, VP, VZ
-      , NUMBER_OF_PARTICLES };
+   enum Particles : int { VG, Fv, Cha, hh, Ah, Hm, Fd, Fu, Fe, Chi, VWm, VP, VZ,
+      NUMBER_OF_PARTICLES };
 
-   enum Masses : int { MVG, MFv_1, MFv_2, MFv_3, MCha, Mhh_1, Mhh_2, MAh_1,
-      MAh_2, MHm_1, MHm_2, MFd_1, MFd_2, MFd_3, MFu_1, MFu_2, MFu_3, MFe_1, MFe_2,
-      MFe_3, MChi_1, MChi_2, MVWm, MVP, MVZ, NUMBER_OF_MASSES };
+   enum Masses : int { MVG, MFv_1, MFv_2, MFv_3, MCha, Mhh_1, Mhh_2, MAh_1, MAh_2,
+      MHm_1, MHm_2, MFd_1, MFd_2, MFd_3, MFu_1, MFu_2, MFu_3, MFe_1, MFe_2, MFe_3,
+      MChi_1, MChi_2, MVWm, MVP, MVZ, NUMBER_OF_MASSES };
 
-   enum Parameters : int { g1, g2, g3, Lambda6, Lambda5, Lambda7, Lambda1,
-      Lambda4, Lambda3, Lambda2, Yu0_0, Yu0_1, Yu0_2, Yu1_0, Yu1_1, Yu1_2, Yu2_0,
-      Yu2_1, Yu2_2, Yd0_0, Yd0_1, Yd0_2, Yd1_0, Yd1_1, Yd1_2, Yd2_0, Yd2_1, Yd2_2,
-      Ye0_0, Ye0_1, Ye0_2, Ye1_0, Ye1_1, Ye1_2, Ye2_0, Ye2_1, Ye2_2, Mu, M122,
-      M112, M222, v1, v2, NUMBER_OF_PARAMETERS };
+   enum Parameters : int { g1, g2, g3, Lambda6, Lambda5, Lambda7, Lambda1, Lambda4
+      , Lambda3, Lambda2, Yu0_0, Yu0_1, Yu0_2, Yu1_0, Yu1_1, Yu1_2, Yu2_0, Yu2_1,
+      Yu2_2, Yd0_0, Yd0_1, Yd0_2, Yd1_0, Yd1_1, Yd1_2, Yd2_0, Yd2_1, Yd2_2, Ye0_0,
+      Ye0_1, Ye0_2, Ye1_0, Ye1_1, Ye1_2, Ye2_0, Ye2_1, Ye2_2, Mu, M122, M112, M222
+      , v1, v2, NUMBER_OF_PARAMETERS };
 
    enum Mixings : int { ZH0_0, ZH0_1, ZH1_0, ZH1_1, ZA0_0, ZA0_1, ZA1_0, ZA1_1,
       ZP0_0, ZP0_1, ZP1_0, ZP1_1, ReVd0_0, ImVd0_0, ReVd0_1, ImVd0_1, ReVd0_2,
@@ -61,8 +61,8 @@ namespace HTHDMIIMSSMBC_info {
       ImZN0_0, ReZN0_1, ImZN0_1, ReZN1_0, ImZN1_0, ReZN1_1, ImZN1_1, ZZ0_0, ZZ0_1,
       ZZ1_0, ZZ1_1, NUMBER_OF_MIXINGS };
 
-   enum Input_parameters : int { TanBeta, MSUSY, MEWSB, MuInput, MAInput,
-      AtInput, AbInput, AtauInput, LambdaLoopOrder, NUMBER_OF_INPUT_PARAMETERS };
+   enum Input_parameters : int { TanBeta, MSUSY, MEWSB, MuInput, MAInput, AtInput,
+      AbInput, AtauInput, LambdaLoopOrder, NUMBER_OF_INPUT_PARAMETERS };
 
    enum Extra_parameters : int { NUMBER_OF_EXTRA_PARAMETERS };
 

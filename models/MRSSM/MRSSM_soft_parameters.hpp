@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:47:59
+// File generated at Sun 26 Aug 2018 14:43:57
 
 #ifndef MRSSM_soft_parameters_H
 #define MRSSM_soft_parameters_H
@@ -40,8 +40,7 @@ public:
    const Eigen::Matrix<double,3,3>& md2_, const Eigen::Matrix<double,3,3>& mu2_
    , const Eigen::Matrix<double,3,3>& me2_, double mS2_, double mT2_, double
    moc2_, double mRd2_, double mRu2_, double MDBS_, double MDWBT_, double
-   MDGoc_
-);
+   MDGoc_);
    MRSSM_soft_parameters(const MRSSM_soft_parameters&) = default;
    MRSSM_soft_parameters(MRSSM_soft_parameters&&) = default;
    virtual ~MRSSM_soft_parameters() = default;

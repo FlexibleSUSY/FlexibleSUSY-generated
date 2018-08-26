@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:44:38
+// File generated at Sun 26 Aug 2018 14:10:36
 
 #include "config.h"
 
@@ -213,7 +213,10 @@ public:
    void check_spectrum(MLINK link) const;
    void calculate_model_observables();
 
-   double get_model_scale() const { return spectrum->get_model_scale(); }
+   double get_model_scale() const {
+      check_spectrum_pointer();
+      return spectrum->get_model_scale();
+   }
 private:
    SplitMSSM_input_parameters input{};     ///< model input parameters
    Physical_input physical_input{};          ///< extra non-SLHA physical input
@@ -341,7 +344,8 @@ void put_message(MLINK link,
 void Model_data::check_spectrum_pointer() const
 {
    if (!spectrum) {
-      throw SetupError("no spectrum generator set");
+      throw SetupError("No spectrum generator set! "
+                       "Did you run FSSplitMSSMCalculateSpectrum[]?");
    }
 }
 

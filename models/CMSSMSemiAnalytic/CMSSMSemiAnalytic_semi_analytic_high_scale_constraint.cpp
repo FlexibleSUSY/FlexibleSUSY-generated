@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 19:09:59
+// File generated at Sun 26 Aug 2018 15:27:58
 
 #include "CMSSMSemiAnalytic_semi_analytic_high_scale_constraint.hpp"
 #include "CMSSMSemiAnalytic_semi_analytic_model.hpp"
@@ -70,10 +70,12 @@ void CMSSMSemiAnalytic_high_scale_constraint<Semi_analytic>::apply()
 {
    check_model_ptr();
 
+   
 
 
    update_scale();
 
+   
 
    model->set_m0Sq(EXTRAPARAMETER(m0Sq));
    model->set_BMu0(EXTRAPARAMETER(BMu0));
@@ -325,6 +327,7 @@ void CMSSMSemiAnalytic_high_scale_constraint<Semi_analytic>::initialize()
 {
    check_model_ptr();
 
+   
    initial_scale_guess = 2.e16;
 
    scale = initial_scale_guess;

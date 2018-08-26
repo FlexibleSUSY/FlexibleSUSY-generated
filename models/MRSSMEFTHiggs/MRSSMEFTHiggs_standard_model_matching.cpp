@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 16:21:12
+// File generated at Sun 26 Aug 2018 15:18:00
 
 #include "MRSSMEFTHiggs_standard_model_matching.hpp"
 #include "wrappers.hpp"
@@ -235,15 +235,15 @@ double calculate_delta_alpha_em(double alpha_em, const MRSSMEFTHiggs_mass_eigens
    const auto MSRum = MODELPARAMETER(MSRum);
 
    delta_alpha_em += alpha_em/(2.*Pi)*(0.3333333333333333 - 0.3333333333333333*
-      FiniteLog(Abs(MSRdp/currentScale)) - 0.3333333333333333*FiniteLog(Abs(
-      MSRum/currentScale)) - 1.3333333333333333*FiniteLog(Abs(MCha1(0)
-      /currentScale)) - 1.3333333333333333*FiniteLog(Abs(MCha1(1)/currentScale)) -
+      FiniteLog(Abs(MSRdp/currentScale)) - 0.3333333333333333*FiniteLog(Abs(MSRum/
+      currentScale)) - 1.3333333333333333*FiniteLog(Abs(MCha1(0)/currentScale)) -
+      1.3333333333333333*FiniteLog(Abs(MCha1(1)/currentScale)) -
       1.3333333333333333*FiniteLog(Abs(MCha2(0)/currentScale)) -
       1.3333333333333333*FiniteLog(Abs(MCha2(1)/currentScale)) -
       0.3333333333333333*FiniteLog(Abs(MHpm(1)/currentScale)) - 0.3333333333333333
       *FiniteLog(Abs(MHpm(2)/currentScale)) - 0.3333333333333333*FiniteLog(Abs(
-      MHpm(3)/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(0)
-      /currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(1)/currentScale)) -
+      MHpm(3)/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(0)/
+      currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(1)/currentScale)) -
       0.1111111111111111*FiniteLog(Abs(MSd(2)/currentScale)) - 0.1111111111111111*
       FiniteLog(Abs(MSd(3)/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(4
       )/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(5)/currentScale)) -
@@ -272,10 +272,10 @@ double calculate_delta_alpha_s(double alpha_s, const MRSSMEFTHiggs_mass_eigensta
    const auto MphiO = MODELPARAMETER(MphiO);
    const auto MsigmaO = MODELPARAMETER(MsigmaO);
 
-   delta_alpha_s += alpha_s/(2.*Pi)*(0.5 - 4*FiniteLog(Abs(MGlu/currentScale))
-      - 0.5*FiniteLog(Abs(MphiO/currentScale)) - 0.5*FiniteLog(Abs(
-      MsigmaO/currentScale)) - 0.16666666666666666*FiniteLog(Abs(MSd(0)
-      /currentScale)) - 0.16666666666666666*FiniteLog(Abs(MSd(1)/currentScale)) -
+   delta_alpha_s += alpha_s/(2.*Pi)*(0.5 - 4*FiniteLog(Abs(MGlu/currentScale)) -
+      0.5*FiniteLog(Abs(MphiO/currentScale)) - 0.5*FiniteLog(Abs(MsigmaO/
+      currentScale)) - 0.16666666666666666*FiniteLog(Abs(MSd(0)/currentScale)) -
+      0.16666666666666666*FiniteLog(Abs(MSd(1)/currentScale)) -
       0.16666666666666666*FiniteLog(Abs(MSd(2)/currentScale)) -
       0.16666666666666666*FiniteLog(Abs(MSd(3)/currentScale)) -
       0.16666666666666666*FiniteLog(Abs(MSd(4)/currentScale)) -

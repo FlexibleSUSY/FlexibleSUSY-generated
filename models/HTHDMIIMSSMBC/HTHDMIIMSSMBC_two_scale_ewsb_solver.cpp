@@ -16,15 +16,15 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:33:26
+// File generated at Sun 26 Aug 2018 14:08:18
 
 /**
  * @file HTHDMIIMSSMBC_two_scale_ewsb_solver.cpp
  *
  * @brief implementation of EWSB solver for two-scale iteration
  *
- * This file was generated at Mon 5 Mar 2018 17:33:26 with FlexibleSUSY
- * 2.1.0 (git commit: 8f20f6c9c42c159c1588fbc0bb3e15ce5ab6ace3) and SARAH 4.12.3 .
+ * This file was generated at Sun 26 Aug 2018 14:08:18 with FlexibleSUSY
+ * 2.2.0 (git commit: 8489097de2d6938a6da0149378457b5ad13d9425) and SARAH 4.13.0 .
  */
 
 #include "HTHDMIIMSSMBC_two_scale_ewsb_solver.hpp"
@@ -231,11 +231,12 @@ int CLASSNAME::solve_tree_level(HTHDMIIMSSMBC_mass_eigenstates& model)
       Cube(v2) - Conj(Lambda7)*Cube(v2) - 3*Lambda6*v2*Sqr(v1) - 3*v2*Conj(Lambda6
       )*Sqr(v1) - 2*Lambda3*v1*Sqr(v2) - 2*Lambda4*v1*Sqr(v2) - Lambda5*v1*Sqr(v2)
       - v1*Conj(Lambda5)*Sqr(v2)))/v1);
-   M222 = Re((0.25*(2*M122*v1 + 2*v1*Conj(M122) - Lambda6*Cube(v1) - Conj(
-      Lambda6)*Cube(v1) - 4*Lambda2*Cube(v2) - 2*Lambda3*v2*Sqr(v1) - 2*Lambda4*v2
-      *Sqr(v1) - Lambda5*v2*Sqr(v1) - v2*Conj(Lambda5)*Sqr(v1) - 3*Lambda7*v1*Sqr(
-      v2) - 3*v1*Conj(Lambda7)*Sqr(v2)))/v2);
+   M222 = Re((0.25*(2*M122*v1 + 2*v1*Conj(M122) - Lambda6*Cube(v1) - Conj(Lambda6)
+      *Cube(v1) - 4*Lambda2*Cube(v2) - 2*Lambda3*v2*Sqr(v1) - 2*Lambda4*v2*Sqr(v1)
+      - Lambda5*v2*Sqr(v1) - v2*Conj(Lambda5)*Sqr(v1) - 3*Lambda7*v1*Sqr(v2) - 3*
+      v1*Conj(Lambda7)*Sqr(v2)))/v2);
 
+   
    const bool is_finite = IsFinite(M112) && IsFinite(M222);
 
    if (is_finite) {
@@ -246,7 +247,6 @@ int CLASSNAME::solve_tree_level(HTHDMIIMSSMBC_mass_eigenstates& model)
       error = EWSB_solver::FAIL;
       model.get_problems().flag_no_ewsb_tree_level();
    }
-
    return error;
 }
 
@@ -309,9 +309,9 @@ CLASSNAME::EWSB_vector_t CLASSNAME::ewsb_step(const HTHDMIIMSSMBC_mass_eigenstat
       Cube(v2) - Conj(Lambda7)*Cube(v2) + 4*tadpole[0] - 3*Lambda6*v2*Sqr(v1) - 3*
       v2*Conj(Lambda6)*Sqr(v1) - 2*Lambda3*v1*Sqr(v2) - 2*Lambda4*v1*Sqr(v2) -
       Lambda5*v1*Sqr(v2) - v1*Conj(Lambda5)*Sqr(v2)))/v1);
-   M222 = Re((0.25*(2*M122*v1 + 2*v1*Conj(M122) - Lambda6*Cube(v1) - Conj(
-      Lambda6)*Cube(v1) - 4*Lambda2*Cube(v2) + 4*tadpole[1] - 2*Lambda3*v2*Sqr(v1)
-      - 2*Lambda4*v2*Sqr(v1) - Lambda5*v2*Sqr(v1) - v2*Conj(Lambda5)*Sqr(v1) - 3*
+   M222 = Re((0.25*(2*M122*v1 + 2*v1*Conj(M122) - Lambda6*Cube(v1) - Conj(Lambda6)
+      *Cube(v1) - 4*Lambda2*Cube(v2) + 4*tadpole[1] - 2*Lambda3*v2*Sqr(v1) - 2*
+      Lambda4*v2*Sqr(v1) - Lambda5*v2*Sqr(v1) - v2*Conj(Lambda5)*Sqr(v1) - 3*
       Lambda7*v1*Sqr(v2) - 3*v1*Conj(Lambda7)*Sqr(v2)))/v2);
 
    const bool is_finite = IsFinite(M112) && IsFinite(M222);

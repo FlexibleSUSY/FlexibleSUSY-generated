@@ -16,14 +16,14 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:18:32
+// File generated at Sun 26 Aug 2018 14:01:50
 
 /**
  * @file CE6SSM_semi_analytic_solutions.cpp
  * @brief contains implementation of class for computing the semi-analytic solutions
  *
- * This file was generated at Mon 5 Mar 2018 17:18:32 with FlexibleSUSY
- * 2.1.0 (git commit: 8f20f6c9c42c159c1588fbc0bb3e15ce5ab6ace3) and SARAH 4.12.3 .
+ * This file was generated at Sun 26 Aug 2018 14:01:50 with FlexibleSUSY
+ * 2.2.0 (git commit: 8489097de2d6938a6da0149378457b5ad13d9425) and SARAH 4.13.0 .
  */
 
 #include "CE6SSM_semi_analytic_solutions.hpp"
@@ -191,6 +191,7 @@ void CE6SSM_semi_analytic_solutions::calculate_coefficients(const CE6SSM_mass_ei
       return result;
    };
 
+   
    auto solver_1 = create_solver<Eigen::MatrixXd,2>(datasets[1], basis_1);
    auto solver_2 = create_solver<Eigen::MatrixXd,4>(datasets[2], basis_2);
    auto solver_3 = create_solver<Eigen::MatrixXd,3>(datasets[3], basis_3);
@@ -295,32 +296,32 @@ void CE6SSM_semi_analytic_solutions::evaluate_solutions(
    model.set_TLambda12((Azero*TLambda12Coeff1 + m12*TLambda12Coeff2).real());
    model.set_md2((m0Sq*md2Coeff1 + Azero*m12*md2Coeff3 + md2Coeff2*Sqr(Azero) +
       md2Coeff4*Sqr(m12)).real());
-   model.set_mDx2((m0Sq*mDx2Coeff1 + Azero*m12*mDx2Coeff3 + mDx2Coeff2*Sqr(
-      Azero) + mDx2Coeff4*Sqr(m12)).real());
-   model.set_mDxbar2((m0Sq*mDxbar2Coeff1 + Azero*m12*mDxbar2Coeff3 +
-      mDxbar2Coeff2*Sqr(Azero) + mDxbar2Coeff4*Sqr(m12)).real());
+   model.set_mDx2((m0Sq*mDx2Coeff1 + Azero*m12*mDx2Coeff3 + mDx2Coeff2*Sqr(Azero)
+      + mDx2Coeff4*Sqr(m12)).real());
+   model.set_mDxbar2((m0Sq*mDxbar2Coeff1 + Azero*m12*mDxbar2Coeff3 + mDxbar2Coeff2
+      *Sqr(Azero) + mDxbar2Coeff4*Sqr(m12)).real());
    model.set_me2((m0Sq*me2Coeff1 + Azero*m12*me2Coeff3 + me2Coeff2*Sqr(Azero) +
       me2Coeff4*Sqr(m12)).real());
    model.set_mH1I2((m0Sq*mH1I2Coeff1 + Azero*m12*mH1I2Coeff3 + mH1I2Coeff2*Sqr(
       Azero) + mH1I2Coeff4*Sqr(m12)).real());
    model.set_mH2I2((m0Sq*mH2I2Coeff1 + Azero*m12*mH2I2Coeff3 + mH2I2Coeff2*Sqr(
       Azero) + mH2I2Coeff4*Sqr(m12)).real());
-   model.set_mHd2(Re(m0Sq*mHd2Coeff1 + Azero*m12*mHd2Coeff3 + mHd2Coeff2*Sqr(
-      Azero) + mHd2Coeff4*Sqr(m12)));
-   model.set_mHp2(Re(m0Sq*mHp2Coeff1 + Azero*m12*mHp2Coeff3 + mHp2Coeff2*Sqr(
-      Azero) + mHp2Coeff4*Sqr(m12)));
+   model.set_mHd2(Re(m0Sq*mHd2Coeff1 + Azero*m12*mHd2Coeff3 + mHd2Coeff2*Sqr(Azero
+      ) + mHd2Coeff4*Sqr(m12)));
+   model.set_mHp2(Re(m0Sq*mHp2Coeff1 + Azero*m12*mHp2Coeff3 + mHp2Coeff2*Sqr(Azero
+      ) + mHp2Coeff4*Sqr(m12)));
    model.set_mHpbar2(Re(m0Sq*mHpbar2Coeff1 + Azero*m12*mHpbar2Coeff3 +
       mHpbar2Coeff2*Sqr(Azero) + mHpbar2Coeff4*Sqr(m12)));
-   model.set_mHu2(Re(m0Sq*mHu2Coeff1 + Azero*m12*mHu2Coeff3 + mHu2Coeff2*Sqr(
-      Azero) + mHu2Coeff4*Sqr(m12)));
+   model.set_mHu2(Re(m0Sq*mHu2Coeff1 + Azero*m12*mHu2Coeff3 + mHu2Coeff2*Sqr(Azero
+      ) + mHu2Coeff4*Sqr(m12)));
    model.set_ml2((m0Sq*ml2Coeff1 + Azero*m12*ml2Coeff3 + ml2Coeff2*Sqr(Azero) +
       ml2Coeff4*Sqr(m12)).real());
    model.set_mq2((m0Sq*mq2Coeff1 + Azero*m12*mq2Coeff3 + mq2Coeff2*Sqr(Azero) +
       mq2Coeff4*Sqr(m12)).real());
-   model.set_ms2(Re(m0Sq*ms2Coeff1 + Azero*m12*ms2Coeff3 + ms2Coeff2*Sqr(Azero)
-      + ms2Coeff4*Sqr(m12)));
-   model.set_msI2((m0Sq*msI2Coeff1 + Azero*m12*msI2Coeff3 + msI2Coeff2*Sqr(
-      Azero) + msI2Coeff4*Sqr(m12)).real());
+   model.set_ms2(Re(m0Sq*ms2Coeff1 + Azero*m12*ms2Coeff3 + ms2Coeff2*Sqr(Azero) +
+      ms2Coeff4*Sqr(m12)));
+   model.set_msI2((m0Sq*msI2Coeff1 + Azero*m12*msI2Coeff3 + msI2Coeff2*Sqr(Azero)
+      + msI2Coeff4*Sqr(m12)).real());
    model.set_mu2((m0Sq*mu2Coeff1 + Azero*m12*mu2Coeff3 + mu2Coeff2*Sqr(Azero) +
       mu2Coeff4*Sqr(m12)).real());
    model.set_BMuPr(Re(BMuPrCoeff1*BMuPrimeInput + Azero*BMuPrCoeff2*MuPrBV +

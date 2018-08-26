@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 15:32:00
+// File generated at Sun 26 Aug 2018 14:25:26
 
 #include "MRSSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,8 +73,8 @@ double MRSSMEFTHiggs_soft_parameters::calc_beta_mS2_1_loop(const Soft_traces& so
 
    double beta_mS2;
 
-   beta_mS2 = Re(4*oneOver16PiSqr*((mHd2 + mRd2 + mS2)*AbsSqr(LamSD) + (
-      mHu2 + mRu2 + mS2)*AbsSqr(LamSU)));
+   beta_mS2 = Re(4*oneOver16PiSqr*((mHd2 + mRd2 + mS2)*AbsSqr(LamSD) + (mHu2 +
+      mRu2 + mS2)*AbsSqr(LamSU)));
 
 
    return beta_mS2;
@@ -100,10 +100,10 @@ double MRSSMEFTHiggs_soft_parameters::calc_beta_mS2_2_loop(const Soft_traces& so
 
    double beta_mS2;
 
-   beta_mS2 = Re(-0.8*twoLoop*(AbsSqr(LamSD)*(15*(2*mHd2 + 2*mRd2 + mS2 +
-      mT2)*AbsSqr(LamTD) - 3*(mHd2 + mRd2 + mS2)*Sqr(g1) + 5*(3*
-      tracemd2YdAdjYd + traceme2YeAdjYe + traceml2AdjYeYe + 3*tracemq2AdjYdYd +
-      6*mHd2*traceYdAdjYd + 3*mRd2*traceYdAdjYd + 3*mS2*traceYdAdjYd + 2*mHd2*
+   beta_mS2 = Re(-0.8*twoLoop*(AbsSqr(LamSD)*(15*(2*mHd2 + 2*mRd2 + mS2 + mT2)*
+      AbsSqr(LamTD) - 3*(mHd2 + mRd2 + mS2)*Sqr(g1) + 5*(3*tracemd2YdAdjYd +
+      traceme2YeAdjYe + traceml2AdjYeYe + 3*tracemq2AdjYdYd + 6*mHd2*
+      traceYdAdjYd + 3*mRd2*traceYdAdjYd + 3*mS2*traceYdAdjYd + 2*mHd2*
       traceYeAdjYe + mRd2*traceYeAdjYe + mS2*traceYeAdjYe - 3*(mHd2 + mRd2 +
       mS2)*Sqr(g2))) + AbsSqr(LamSU)*(20*(mHu2 + mRu2 + mS2)*AbsSqr(LamSU) - 3*
       (-5*(2*mHu2 + 2*mRu2 + mS2 + mT2)*AbsSqr(LamTU) + (mHu2 + mRu2 + mS2)*Sqr

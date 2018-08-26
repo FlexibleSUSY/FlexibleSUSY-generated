@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:43:27
+// File generated at Sun 26 Aug 2018 14:07:31
 
 #include "E6SSMEFTHiggs_slha_io.hpp"
 #include "E6SSMEFTHiggs_input_parameters.hpp"
@@ -1071,11 +1071,9 @@ void E6SSMEFTHiggs_slha_io::fill_physical(E6SSMEFTHiggs_physical& physical) cons
 double E6SSMEFTHiggs_slha_io::read_scale() const
 {
    static const std::array<std::string, 24> drbar_blocks =
-      { "gauge", "Yu", "Yd", "Ye", "Te", "Td", "Tu", "MSQ2", "MSE2", "MSL2",
-   "MSU2", "MSD2", "MSOFT", "mHdInert2", "mHuInert2", "mX2", "mXBar2",
-   "msInert2", "HMIX", "ESIXRUN", "ESIXKAPPA", "ESIXTKAPPA", "ESIXLAMBDA",
-   "ESIXTLAMBDA" }
-;
+      { "gauge", "Yu", "Yd", "Ye", "Te", "Td", "Tu", "MSQ2", "MSE2", "MSL2", "MSU2",
+   "MSD2", "MSOFT", "mHdInert2", "mHuInert2", "mX2", "mXBar2", "msInert2",
+   "HMIX", "ESIXRUN", "ESIXKAPPA", "ESIXTKAPPA", "ESIXLAMBDA", "ESIXTLAMBDA" };
 
    double scale = 0.;
 

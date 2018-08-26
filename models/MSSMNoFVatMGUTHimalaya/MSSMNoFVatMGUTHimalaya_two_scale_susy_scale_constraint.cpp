@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 14:59:32
+// File generated at Sun 26 Aug 2018 13:49:57
 
 #include "MSSMNoFVatMGUTHimalaya_two_scale_susy_scale_constraint.hpp"
 #include "MSSMNoFVatMGUTHimalaya_two_scale_model.hpp"
@@ -64,12 +64,14 @@ void MSSMNoFVatMGUTHimalaya_susy_scale_constraint<Two_scale>::apply()
 {
    check_model_ptr();
 
+   
 
 
    model->calculate_DRbar_masses();
    update_scale();
 
    // apply user-defined susy scale constraints
+   
    MODEL->solve_ewsb();
 
 }

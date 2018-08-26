@@ -174,7 +174,7 @@ METACODE_STAMP_lowNMSSMTanBetaAtMZ := $(DIR)/00_DELETE_ME_TO_RERUN_METACODE
 
 ifeq ($(ENABLE_META),yes)
 SARAH_MODEL_FILES_lowNMSSMTanBetaAtMZ := \
-		$(shell $(SARAH_DEP_GEN) $(SARAH_MODEL))
+		$(shell $(SARAH_DEP_GEN) $(SARAH_MODEL_DIR) $(SARAH_MODEL))
 endif
 
 .PHONY:         all-$(MODNAME) clean-$(MODNAME) clean-$(MODNAME)-src \
@@ -264,7 +264,7 @@ run-metacode-$(MODNAME): $(METACODE_STAMP_lowNMSSMTanBetaAtMZ)
 
 ifeq ($(ENABLE_META),yes)
 $(METACODE_STAMP_lowNMSSMTanBetaAtMZ): $(DIR)/start.m $(DIR)/FlexibleSUSY.m $(META_SRC) $(TEMPLATES) $(SARAH_MODEL_FILES_lowNMSSMTanBetaAtMZ)
-		"$(MATH)" -run "Get[\"$<\"]; Quit[]"
+		"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
 		@touch "$(METACODE_STAMP_lowNMSSMTanBetaAtMZ)"
 		@echo "Note: to regenerate lowNMSSMTanBetaAtMZ source files," \
 		      "please remove the file "

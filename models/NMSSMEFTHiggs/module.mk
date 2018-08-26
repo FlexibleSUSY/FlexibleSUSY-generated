@@ -169,7 +169,7 @@ METACODE_STAMP_NMSSMEFTHiggs := $(DIR)/00_DELETE_ME_TO_RERUN_METACODE
 
 ifeq ($(ENABLE_META),yes)
 SARAH_MODEL_FILES_NMSSMEFTHiggs := \
-		$(shell $(SARAH_DEP_GEN) $(SARAH_MODEL))
+		$(shell $(SARAH_DEP_GEN) $(SARAH_MODEL_DIR) $(SARAH_MODEL))
 endif
 
 .PHONY:         all-$(MODNAME) clean-$(MODNAME) clean-$(MODNAME)-src \
@@ -259,7 +259,7 @@ run-metacode-$(MODNAME): $(METACODE_STAMP_NMSSMEFTHiggs)
 
 ifeq ($(ENABLE_META),yes)
 $(METACODE_STAMP_NMSSMEFTHiggs): $(DIR)/start.m $(DIR)/FlexibleSUSY.m $(META_SRC) $(TEMPLATES) $(SARAH_MODEL_FILES_NMSSMEFTHiggs)
-		"$(MATH)" -run "Get[\"$<\"]; Quit[]"
+		"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
 		@touch "$(METACODE_STAMP_NMSSMEFTHiggs)"
 		@echo "Note: to regenerate NMSSMEFTHiggs source files," \
 		      "please remove the file "

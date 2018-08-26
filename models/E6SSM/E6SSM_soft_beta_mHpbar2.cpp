@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:58:50
+// File generated at Sun 26 Aug 2018 14:19:45
 
 #include "E6SSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -101,10 +101,10 @@ double E6SSM_soft_parameters::calc_beta_mHpbar2_2_loop(const Soft_traces& soft_t
 
    double beta_mHpbar2;
 
-   beta_mHpbar2 = Re(0.04*twoLoop*(6*Conj(MassBp)*Sqr(gN)*(3*(MassB + 2*
-      MassBp)*Sqr(g1) + 5*(2*MassBp + MassWB)*Sqr(g2) + 96*MassBp*Sqr(gN)) + 9*
-      Conj(MassB)*Sqr(g1)*(99*MassB*Sqr(g1) + 5*(2*MassB + MassWB)*Sqr(g2) + 2*
-      (2*MassB + MassBp)*Sqr(gN)) + 5*(-4.898979485566356*g1*gN*Tr2U114 -
+   beta_mHpbar2 = Re(0.04*twoLoop*(6*Conj(MassBp)*Sqr(gN)*(3*(MassB + 2*MassBp)
+      *Sqr(g1) + 5*(2*MassBp + MassWB)*Sqr(g2) + 96*MassBp*Sqr(gN)) + 9*Conj(
+      MassB)*Sqr(g1)*(99*MassB*Sqr(g1) + 5*(2*MassB + MassWB)*Sqr(g2) + 2*(2*
+      MassB + MassBp)*Sqr(gN)) + 5*(-4.898979485566356*g1*gN*Tr2U114 -
       4.898979485566356*g1*gN*Tr2U141 + 15.491933384829668*g1*Tr31 -
       12.649110640673518*gN*Tr34 + 30*Tr22*Quad(g2) + 6*Tr2U111*Sqr(g1) + 4*
       Tr2U144*Sqr(gN) + 3*Conj(MassWB)*Sqr(g2)*(3*(MassB + 2*MassWB)*Sqr(g1) +

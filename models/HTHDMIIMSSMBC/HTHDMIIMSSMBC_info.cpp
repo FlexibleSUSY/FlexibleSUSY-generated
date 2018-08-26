@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:33:14
+// File generated at Sun 26 Aug 2018 14:08:04
 
 #include "HTHDMIIMSSMBC_info.hpp"
 
@@ -29,27 +29,27 @@ namespace HTHDMIIMSSMBC_info {
    const double normalization_g2 = 1;
    const double normalization_g3 = 1;
 
-   const std::array<int, NUMBER_OF_PARTICLES> particle_multiplicities = {1, 3,
-      1, 2, 2, 2, 3, 3, 3, 2, 1, 1, 1};
+   const std::array<int, NUMBER_OF_PARTICLES> particle_multiplicities = {1, 3, 1,
+      2, 2, 2, 3, 3, 3, 2, 1, 1, 1};
 
-   const std::array<std::string, NUMBER_OF_PARTICLES> particle_names = {"VG",
-      "Fv", "Cha", "hh", "Ah", "Hm", "Fd", "Fu", "Fe", "Chi", "VWm", "VP", "VZ"};
+   const std::array<std::string, NUMBER_OF_PARTICLES> particle_names = {"VG", "Fv"
+      , "Cha", "hh", "Ah", "Hm", "Fd", "Fu", "Fe", "Chi", "VWm", "VP", "VZ"};
 
    const std::array<std::string, NUMBER_OF_PARTICLES> particle_latex_names = {
       "g", "\\nu", "\\tilde{\\chi}^-", "h", "A^0", "H^-", "d", "u", "e",
       "\\tilde{\\chi}^0", "W^-", "\\gamma", "Z"};
 
    const std::array<std::string, NUMBER_OF_PARAMETERS> parameter_names = {"g1",
-      "g2", "g3", "Lambda6", "Lambda5", "Lambda7", "Lambda1", "Lambda4",
-      "Lambda3", "Lambda2", "Yu(0,0)", "Yu(0,1)", "Yu(0,2)", "Yu(1,0)", "Yu(1,1)",
-      "Yu(1,2)", "Yu(2,0)", "Yu(2,1)", "Yu(2,2)", "Yd(0,0)", "Yd(0,1)", "Yd(0,2)"
-      , "Yd(1,0)", "Yd(1,1)", "Yd(1,2)", "Yd(2,0)", "Yd(2,1)", "Yd(2,2)",
-      "Ye(0,0)", "Ye(0,1)", "Ye(0,2)", "Ye(1,0)", "Ye(1,1)", "Ye(1,2)", "Ye(2,0)",
-      "Ye(2,1)", "Ye(2,2)", "Mu", "M122", "M112", "M222", "v1", "v2"};
+      "g2", "g3", "Lambda6", "Lambda5", "Lambda7", "Lambda1", "Lambda4", "Lambda3"
+      , "Lambda2", "Yu(0,0)", "Yu(0,1)", "Yu(0,2)", "Yu(1,0)", "Yu(1,1)",
+      "Yu(1,2)", "Yu(2,0)", "Yu(2,1)", "Yu(2,2)", "Yd(0,0)", "Yd(0,1)", "Yd(0,2)",
+      "Yd(1,0)", "Yd(1,1)", "Yd(1,2)", "Yd(2,0)", "Yd(2,1)", "Yd(2,2)", "Ye(0,0)",
+      "Ye(0,1)", "Ye(0,2)", "Ye(1,0)", "Ye(1,1)", "Ye(1,2)", "Ye(2,0)", "Ye(2,1)",
+      "Ye(2,2)", "Mu", "M122", "M112", "M222", "v1", "v2"};
 
    const std::array<std::string, NUMBER_OF_MIXINGS> particle_mixing_names = {
-      "ZH(0,0)", "ZH(0,1)", "ZH(1,0)", "ZH(1,1)", "ZA(0,0)", "ZA(0,1)", "ZA(1,0)"
-      , "ZA(1,1)", "ZP(0,0)", "ZP(0,1)", "ZP(1,0)", "ZP(1,1)", "Re(Vd(0,0))",
+      "ZH(0,0)", "ZH(0,1)", "ZH(1,0)", "ZH(1,1)", "ZA(0,0)", "ZA(0,1)", "ZA(1,0)",
+      "ZA(1,1)", "ZP(0,0)", "ZP(0,1)", "ZP(1,0)", "ZP(1,1)", "Re(Vd(0,0))",
       "Im(Vd(0,0))", "Re(Vd(0,1))", "Im(Vd(0,1))", "Re(Vd(0,2))", "Im(Vd(0,2))",
       "Re(Vd(1,0))", "Im(Vd(1,0))", "Re(Vd(1,1))", "Im(Vd(1,1))", "Re(Vd(1,2))",
       "Im(Vd(1,2))", "Re(Vd(2,0))", "Im(Vd(2,0))", "Re(Vd(2,1))", "Im(Vd(2,1))",
@@ -75,12 +75,12 @@ namespace HTHDMIIMSSMBC_info {
       "Im(ZN(0,1))", "Re(ZN(1,0))", "Im(ZN(1,0))", "Re(ZN(1,1))", "Im(ZN(1,1))",
       "ZZ(0,0)", "ZZ(0,1)", "ZZ(1,0)", "ZZ(1,1)"};
 
-   const std::array<std::string, NUMBER_OF_INPUT_PARAMETERS>
-      input_parameter_names = {"TanBeta", "MSUSY", "MEWSB", "MuInput", "MAInput",
-      "AtInput", "AbInput", "AtauInput", "LambdaLoopOrder"};
+   const std::array<std::string, NUMBER_OF_INPUT_PARAMETERS> input_parameter_names
+       = {"TanBeta", "MSUSY", "MEWSB", "MuInput", "MAInput", "AtInput", "AbInput",
+      "AtauInput", "LambdaLoopOrder"};
 
-   const std::array<std::string, NUMBER_OF_EXTRA_PARAMETERS>
-      extra_parameter_names = {};
+   const std::array<std::string, NUMBER_OF_EXTRA_PARAMETERS> extra_parameter_names
+       = {};
 
    const std::string model_name = "HTHDMIIMSSMBC";
 

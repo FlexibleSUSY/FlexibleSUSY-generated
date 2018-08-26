@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:47:47
+// File generated at Sun 26 Aug 2018 14:43:41
 
 #ifndef MRSSM_susy_parameters_H
 #define MRSSM_susy_parameters_H
@@ -39,11 +39,10 @@ namespace flexiblesusy {
 class MRSSM_susy_parameters : public Beta_function {
 public:
    explicit MRSSM_susy_parameters(const MRSSM_input_parameters& input_ = MRSSM_input_parameters());
-   MRSSM_susy_parameters(double scale_, int loops_, int thresholds_, const MRSSM_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
-   , double LamTD_, double LamTU_, double LamSD_, double LamSU_, const
-   Eigen::Matrix<double,3,3>& Yu_, double Mu_, double MuD_, double MuU_, double
-   g1_, double g2_, double g3_, double vd_, double vu_, double vT_, double vS_
-);
+   MRSSM_susy_parameters(double scale_, int loops_, int thresholds_, const MRSSM_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_,
+   double LamTD_, double LamTU_, double LamSD_, double LamSU_, const Eigen::
+   Matrix<double,3,3>& Yu_, double Mu_, double MuD_, double MuU_, double g1_,
+   double g2_, double g3_, double vd_, double vu_, double vT_, double vS_);
    MRSSM_susy_parameters(const MRSSM_susy_parameters&) = default;
    MRSSM_susy_parameters(MRSSM_susy_parameters&&) = default;
    virtual ~MRSSM_susy_parameters() = default;

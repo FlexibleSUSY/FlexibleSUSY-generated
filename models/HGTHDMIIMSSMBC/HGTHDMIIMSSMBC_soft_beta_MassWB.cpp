@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:08:24
+// File generated at Sun 26 Aug 2018 14:06:41
 
 #include "HGTHDMIIMSSMBC_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,8 +73,7 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_MassWB_1_loop(const Soft_traces
 
    double beta_MassWB;
 
-   beta_MassWB = Re(MassWB*oneOver16PiSqr*(Sqr(g1d) - 12*Sqr(g2) + Sqr(
-      g2u)));
+   beta_MassWB = Re(MassWB*oneOver16PiSqr*(Sqr(g1d) - 12*Sqr(g2) + Sqr(g2u)));
 
 
    return beta_MassWB;
@@ -94,11 +93,11 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_MassWB_2_loop(const Soft_traces
 
    double beta_MassWB;
 
-   beta_MassWB = Re(0.025*twoLoop*(-145*MassWB*Quad(g1d) - 2960*MassWB*
-      Quad(g2) - 145*MassWB*Quad(g2u) + Sqr(g1d)*(5*(8*MassB - 7*MassWB)*Sqr(
-      g1dp) + MassWB*(-180*traceYdAdjYd - 60*traceYeAdjYe + 51*Sqr(g1) + 455*
-      Sqr(g2))) + Sqr(g2u)*(MassWB*(-180*traceYuAdjYu + 51*Sqr(g1) + 455*Sqr(g2
-      )) + 5*(8*MassB - 7*MassWB)*Sqr(g2up))));
+   beta_MassWB = Re(0.025*twoLoop*(-145*MassWB*Quad(g1d) - 2960*MassWB*Quad(g2)
+      - 145*MassWB*Quad(g2u) + Sqr(g1d)*(5*(8*MassB - 7*MassWB)*Sqr(g1dp) +
+      MassWB*(-180*traceYdAdjYd - 60*traceYeAdjYe + 51*Sqr(g1) + 455*Sqr(g2)))
+      + Sqr(g2u)*(MassWB*(-180*traceYuAdjYu + 51*Sqr(g1) + 455*Sqr(g2)) + 5*(8*
+      MassB - 7*MassWB)*Sqr(g2up))));
 
 
    return beta_MassWB;

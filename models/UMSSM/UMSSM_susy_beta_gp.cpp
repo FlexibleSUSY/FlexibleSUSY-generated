@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:29:58
+// File generated at Sun 26 Aug 2018 14:20:51
 
 #include "UMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -46,9 +46,8 @@ double UMSSM_susy_parameters::calc_beta_gp_1_loop(const Susy_traces& susy_traces
 
    double beta_gp;
 
-   beta_gp = Re(oneOver16PiSqr*Cube(gp)*(9*Sqr(Qd) + 3*Sqr(Qe) + 2*Sqr(
-      QHd) + 2*Sqr(QHu) + 6*Sqr(Ql) + 18*Sqr(Qq) + Sqr(Qs) + 9*Sqr(Qu) + 3*Sqr(
-      Qv)));
+   beta_gp = Re(oneOver16PiSqr*Cube(gp)*(9*Sqr(Qd) + 3*Sqr(Qe) + 2*Sqr(QHd) + 2
+      *Sqr(QHu) + 6*Sqr(Ql) + 18*Sqr(Qq) + Sqr(Qs) + 9*Sqr(Qu) + 3*Sqr(Qv)));
 
 
    return beta_gp;
@@ -78,15 +77,15 @@ double UMSSM_susy_parameters::calc_beta_gp_2_loop(const Susy_traces& susy_traces
 
    double beta_gp;
 
-   beta_gp = Re(0.4*twoLoop*Cube(gp)*(-10*AbsSqr(Lambdax)*(Sqr(QHd) + Sqr
-      (QHu) + Sqr(Qs)) + 3*Sqr(g1)*(2*Sqr(Qd) + 6*Sqr(Qe) + Sqr(QHd) + Sqr(QHu)
-      + 3*Sqr(Ql) + Sqr(Qq) + 8*Sqr(Qu)) + 5*(2*(9*Quad(Qd) + 3*Quad(Qe) + 2*
-      Quad(QHd) + 2*Quad(QHu) + 6*Quad(Ql) + 18*Quad(Qq) + Quad(Qs) + 9*Quad(Qu
-      ) + 3*Quad(Qv))*Sqr(gp) - 6*traceYdAdjYd*Sqr(Qd) - 2*traceYeAdjYe*Sqr(Qe)
-      - 6*traceYdAdjYd*Sqr(QHd) - 2*traceYeAdjYe*Sqr(QHd) + 3*Sqr(g2)*Sqr(QHd)
-      - 6*traceYuAdjYu*Sqr(QHu) - 2*traceYvAdjYv*Sqr(QHu) + 3*Sqr(g2)*Sqr(QHu)
-      - 2*traceYeAdjYe*Sqr(Ql) - 2*traceYvAdjYv*Sqr(Ql) + 9*Sqr(g2)*Sqr(Ql) -
-      6*traceYdAdjYd*Sqr(Qq) - 6*traceYuAdjYu*Sqr(Qq) + 27*Sqr(g2)*Sqr(Qq) - 6*
+   beta_gp = Re(0.4*twoLoop*Cube(gp)*(-10*AbsSqr(Lambdax)*(Sqr(QHd) + Sqr(QHu)
+      + Sqr(Qs)) + 3*Sqr(g1)*(2*Sqr(Qd) + 6*Sqr(Qe) + Sqr(QHd) + Sqr(QHu) + 3*
+      Sqr(Ql) + Sqr(Qq) + 8*Sqr(Qu)) + 5*(2*(9*Quad(Qd) + 3*Quad(Qe) + 2*Quad(
+      QHd) + 2*Quad(QHu) + 6*Quad(Ql) + 18*Quad(Qq) + Quad(Qs) + 9*Quad(Qu) + 3
+      *Quad(Qv))*Sqr(gp) - 6*traceYdAdjYd*Sqr(Qd) - 2*traceYeAdjYe*Sqr(Qe) - 6*
+      traceYdAdjYd*Sqr(QHd) - 2*traceYeAdjYe*Sqr(QHd) + 3*Sqr(g2)*Sqr(QHd) - 6*
+      traceYuAdjYu*Sqr(QHu) - 2*traceYvAdjYv*Sqr(QHu) + 3*Sqr(g2)*Sqr(QHu) - 2*
+      traceYeAdjYe*Sqr(Ql) - 2*traceYvAdjYv*Sqr(Ql) + 9*Sqr(g2)*Sqr(Ql) - 6*
+      traceYdAdjYd*Sqr(Qq) - 6*traceYuAdjYu*Sqr(Qq) + 27*Sqr(g2)*Sqr(Qq) - 6*
       traceYuAdjYu*Sqr(Qu) + 24*Sqr(g3)*(Sqr(Qd) + 2*Sqr(Qq) + Sqr(Qu)) - 2*
       traceYvAdjYv*Sqr(Qv))));
 

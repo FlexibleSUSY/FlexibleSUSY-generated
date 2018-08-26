@@ -16,19 +16,23 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:44:31
+// File generated at Sun 26 Aug 2018 14:10:28
 
 #include "SplitMSSM_observables.hpp"
 #include "SplitMSSM_mass_eigenstates.hpp"
 #include "SplitMSSM_a_muon.hpp"
 #include "SplitMSSM_edm.hpp"
 #include "SplitMSSM_effective_couplings.hpp"
-#include "gm2calc_interface.hpp"
+#include "config.h"
 #include "eigen_utils.hpp"
 #include "numerics2.hpp"
 #include "wrappers.hpp"
 #include "lowe.h"
 #include "physical_input.hpp"
+
+#ifdef ENABLE_GM2Calc
+#include "gm2calc_interface.hpp"
+#endif
 
 #define MODEL model
 #define AMU a_muon

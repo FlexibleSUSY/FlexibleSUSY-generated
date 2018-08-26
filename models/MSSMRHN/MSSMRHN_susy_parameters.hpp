@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:45:54
+// File generated at Sun 26 Aug 2018 14:55:33
 
 #ifndef MSSMRHN_susy_parameters_H
 #define MSSMRHN_susy_parameters_H
@@ -39,11 +39,10 @@ namespace flexiblesusy {
 class MSSMRHN_susy_parameters : public Beta_function {
 public:
    explicit MSSMRHN_susy_parameters(const MSSMRHN_input_parameters& input_ = MSSMRHN_input_parameters());
-   MSSMRHN_susy_parameters(double scale_, int loops_, int thresholds_, const MSSMRHN_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
-   , const Eigen::Matrix<double,3,3>& Yu_, const Eigen::Matrix<double,3,3>& Yv_
-   , double Mu_, const Eigen::Matrix<double,3,3>& Mv_, double g1_, double g2_,
-   double g3_, double vd_, double vu_
-);
+   MSSMRHN_susy_parameters(double scale_, int loops_, int thresholds_, const MSSMRHN_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_,
+   const Eigen::Matrix<double,3,3>& Yu_, const Eigen::Matrix<double,3,3>& Yv_,
+   double Mu_, const Eigen::Matrix<double,3,3>& Mv_, double g1_, double g2_,
+   double g3_, double vd_, double vu_);
    MSSMRHN_susy_parameters(const MSSMRHN_susy_parameters&) = default;
    MSSMRHN_susy_parameters(MSSMRHN_susy_parameters&&) = default;
    virtual ~MSSMRHN_susy_parameters() = default;

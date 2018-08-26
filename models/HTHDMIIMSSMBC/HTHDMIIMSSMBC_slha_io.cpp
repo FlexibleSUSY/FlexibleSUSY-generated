@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:33:14
+// File generated at Sun 26 Aug 2018 14:08:04
 
 #include "HTHDMIIMSSMBC_slha_io.hpp"
 #include "HTHDMIIMSSMBC_input_parameters.hpp"
@@ -699,8 +699,7 @@ void HTHDMIIMSSMBC_slha_io::fill_physical(HTHDMIIMSSMBC_physical& physical) cons
 double HTHDMIIMSSMBC_slha_io::read_scale() const
 {
    static const std::array<std::string, 5> drbar_blocks =
-      { "gauge", "Yu", "Yd", "Ye", "HMIX" }
-;
+      { "gauge", "Yu", "Yd", "Ye", "HMIX" };
 
    double scale = 0.;
 

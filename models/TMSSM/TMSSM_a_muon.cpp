@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:09:31
+// File generated at Sun 26 Aug 2018 14:16:15
 
 /**
  * @file TMSSM_a_muon.cpp
  *
- * This file was generated at Mon 5 Mar 2018 18:09:31 with FlexibleSUSY
- * 2.1.0 and SARAH 4.12.3 .
+ * This file was generated at Sun 26 Aug 2018 14:16:15 with FlexibleSUSY
+ * 2.2.0 and SARAH 4.13.0 .
  */
 
 #include "TMSSM_a_muon.hpp"
@@ -217,10 +217,9 @@ double OneLoopFunctionF2N(double x)
 
 double get_MSUSY(const TMSSM_mass_eigenstates& model)
 {
-   return Min(model.get_MSd().tail<6>().minCoeff(), model.get_MSu().tail<6>()
-      .minCoeff(), model.get_MSe().tail<6>().minCoeff(), model.get_MHpm().tail<3>(
-      ).minCoeff(), model.get_MCha().tail<3>().minCoeff());
-
+   return Min(model.get_MSd().tail<6>().minCoeff(), model.get_MSu().tail<6>().
+      minCoeff(), model.get_MSe().tail<6>().minCoeff(), model.get_MHpm().tail<3>()
+      .minCoeff(), model.get_MCha().tail<3>().minCoeff());
 }
 
 void run_to_MSUSY(TMSSM_mass_eigenstates& model)

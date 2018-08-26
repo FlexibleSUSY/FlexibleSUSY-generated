@@ -16,19 +16,23 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:09:28
+// File generated at Sun 26 Aug 2018 14:16:11
 
 #include "TMSSM_observables.hpp"
 #include "TMSSM_mass_eigenstates.hpp"
 #include "TMSSM_a_muon.hpp"
 #include "TMSSM_edm.hpp"
 #include "TMSSM_effective_couplings.hpp"
-#include "gm2calc_interface.hpp"
+#include "config.h"
 #include "eigen_utils.hpp"
 #include "numerics2.hpp"
 #include "wrappers.hpp"
 #include "lowe.h"
 #include "physical_input.hpp"
+
+#ifdef ENABLE_GM2Calc
+#include "gm2calc_interface.hpp"
+#endif
 
 #define MODEL model
 #define AMU a_muon
@@ -58,10 +62,10 @@ TMSSM_observables::TMSSM_observables()
    : a_muon(0)
    , eff_cp_higgs_photon_photon(Eigen::Array<std::complex<double>,3,1>::Zero())
    , eff_cp_higgs_gluon_gluon(Eigen::Array<std::complex<double>,3,1>::Zero())
-   , eff_cp_pseudoscalar_photon_photon(Eigen::Array<std::complex<double>,2,1>
-      ::Zero())
-   , eff_cp_pseudoscalar_gluon_gluon(Eigen::Array<std::complex<double>,2,1>
-      ::Zero())
+   , eff_cp_pseudoscalar_photon_photon(Eigen::Array<std::complex<double>,2,1>::
+      Zero())
+   , eff_cp_pseudoscalar_gluon_gluon(Eigen::Array<std::complex<double>,2,1>::Zero(
+      ))
 
 {
 }

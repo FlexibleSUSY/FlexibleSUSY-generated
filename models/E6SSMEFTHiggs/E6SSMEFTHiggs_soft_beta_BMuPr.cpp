@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 16:35:16
+// File generated at Sun 26 Aug 2018 13:58:26
 
 #include "E6SSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,9 +73,9 @@ double E6SSMEFTHiggs_soft_parameters::calc_beta_BMuPr_1_loop(const Soft_traces& 
 
    double beta_BMuPr;
 
-   beta_BMuPr = Re(0.2*oneOver16PiSqr*(-(BMuPr*(3*Sqr(g1) + 15*Sqr(g2) +
-      2*Sqr(gN))) + 2*MuPr*(3*MassB*Sqr(g1) + 15*MassWB*Sqr(g2) + 2*MassBp*Sqr(
-      gN))));
+   beta_BMuPr = Re(0.2*oneOver16PiSqr*(-(BMuPr*(3*Sqr(g1) + 15*Sqr(g2) + 2*Sqr(
+      gN))) + 2*MuPr*(3*MassB*Sqr(g1) + 15*MassWB*Sqr(g2) + 2*MassBp*Sqr(gN))))
+      ;
 
 
    return beta_BMuPr;
@@ -92,11 +92,11 @@ double E6SSMEFTHiggs_soft_parameters::calc_beta_BMuPr_2_loop(const Soft_traces& 
 
    double beta_BMuPr;
 
-   beta_BMuPr = Re(-0.06*twoLoop*(-(BMuPr*(99*Quad(g1) + 275*Quad(g2) +
-      64*Quad(gN) + 20*Sqr(g2)*Sqr(gN) + 6*Sqr(g1)*(5*Sqr(g2) + 2*Sqr(gN)))) +
-      4*MuPr*(99*MassB*Quad(g1) + 275*MassWB*Quad(g2) + 64*MassBp*Quad(gN) + 10
-      *(MassBp + MassWB)*Sqr(g2)*Sqr(gN) + 3*Sqr(g1)*(5*(MassB + MassWB)*Sqr(g2
-      ) + 2*(MassB + MassBp)*Sqr(gN)))));
+   beta_BMuPr = Re(-0.06*twoLoop*(-(BMuPr*(99*Quad(g1) + 275*Quad(g2) + 64*Quad
+      (gN) + 20*Sqr(g2)*Sqr(gN) + 6*Sqr(g1)*(5*Sqr(g2) + 2*Sqr(gN)))) + 4*MuPr*
+      (99*MassB*Quad(g1) + 275*MassWB*Quad(g2) + 64*MassBp*Quad(gN) + 10*(
+      MassBp + MassWB)*Sqr(g2)*Sqr(gN) + 3*Sqr(g1)*(5*(MassB + MassWB)*Sqr(g2)
+      + 2*(MassB + MassBp)*Sqr(gN)))));
 
 
    return beta_BMuPr;

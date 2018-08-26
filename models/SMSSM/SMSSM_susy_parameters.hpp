@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:19:11
+// File generated at Sun 26 Aug 2018 14:30:57
 
 #ifndef SMSSM_susy_parameters_H
 #define SMSSM_susy_parameters_H
@@ -39,11 +39,10 @@ namespace flexiblesusy {
 class SMSSM_susy_parameters : public Beta_function {
 public:
    explicit SMSSM_susy_parameters(const SMSSM_input_parameters& input_ = SMSSM_input_parameters());
-   SMSSM_susy_parameters(double scale_, int loops_, int thresholds_, const SMSSM_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
-   , double Lambdax_, double Kappa_, const Eigen::Matrix<double,3,3>& Yu_,
-   double Mu_, double MS_, double L1_, double g1_, double g2_, double g3_,
-   double vd_, double vu_, double vS_
-);
+   SMSSM_susy_parameters(double scale_, int loops_, int thresholds_, const SMSSM_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_,
+   double Lambdax_, double Kappa_, const Eigen::Matrix<double,3,3>& Yu_, double
+    Mu_, double MS_, double L1_, double g1_, double g2_, double g3_, double vd_
+   , double vu_, double vS_);
    SMSSM_susy_parameters(const SMSSM_susy_parameters&) = default;
    SMSSM_susy_parameters(SMSSM_susy_parameters&&) = default;
    virtual ~SMSSM_susy_parameters() = default;

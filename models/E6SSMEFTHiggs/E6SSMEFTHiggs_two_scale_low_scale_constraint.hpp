@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:43:51
+// File generated at Sun 26 Aug 2018 14:08:07
 
 #ifndef E6SSMEFTHiggs_TWO_SCALE_LOW_SCALE_CONSTRAINT_H
 #define E6SSMEFTHiggs_TWO_SCALE_LOW_SCALE_CONSTRAINT_H
@@ -60,6 +60,9 @@ private:
    softsusy::QedQcd qedqcd{};
    Eigen::Matrix<std::complex<double>,3,3> ckm{Eigen::Matrix<std::complex<double>,3,3>::Identity()};
    Eigen::Matrix<std::complex<double>,3,3> pmns{Eigen::Matrix<std::complex<double>,3,3>::Identity()};
+   Eigen::Matrix<std::complex<double>,3,3> upQuarksDRbar{Eigen::Matrix<std::complex<double>,3,3>::Zero()};
+   Eigen::Matrix<std::complex<double>,3,3> downQuarksDRbar{Eigen::Matrix<std::complex<double>,3,3>::Zero()};
+   Eigen::Matrix<std::complex<double>,3,3> downLeptonsDRbar{Eigen::Matrix<std::complex<double>,3,3>::Zero()};
    Eigen::Matrix<double,3,3> neutrinoDRbar{Eigen::Matrix<double,3,3>::Zero()};
    double mW_run{0.};
    double mZ_run{0.};
@@ -75,7 +78,7 @@ private:
    void calculate_Yu_DRbar();
    void calculate_Yd_DRbar();
    void calculate_Ye_DRbar();
-   void calculate_MNeutrino_DRbar();
+   void calculate_running_SM_masses();
    double calculate_delta_alpha_em(double) const;
    double calculate_delta_alpha_s(double) const;
    double calculate_alpha_s_SM5_at(softsusy::QedQcd, double) const;

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:44:56
+// File generated at Sun 26 Aug 2018 14:10:44
 
 #ifndef SM_soft_parameters_H
 #define SM_soft_parameters_H
@@ -35,8 +35,7 @@ namespace flexiblesusy {
 class SM_soft_parameters : public SM_susy_parameters {
 public:
    explicit SM_soft_parameters(const SM_input_parameters& input_ = SM_input_parameters());
-   SM_soft_parameters(const SM_susy_parameters& , double mu2_, double v_
-);
+   SM_soft_parameters(const SM_susy_parameters& , double mu2_, double v_);
    SM_soft_parameters(const SM_soft_parameters&) = default;
    SM_soft_parameters(SM_soft_parameters&&) = default;
    virtual ~SM_soft_parameters() = default;

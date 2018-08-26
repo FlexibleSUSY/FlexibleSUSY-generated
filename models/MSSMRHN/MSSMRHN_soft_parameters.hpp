@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:46:05
+// File generated at Sun 26 Aug 2018 14:55:47
 
 #ifndef MSSMRHN_soft_parameters_H
 #define MSSMRHN_soft_parameters_H
@@ -35,15 +35,13 @@ namespace flexiblesusy {
 class MSSMRHN_soft_parameters : public MSSMRHN_susy_parameters {
 public:
    explicit MSSMRHN_soft_parameters(const MSSMRHN_input_parameters& input_ = MSSMRHN_input_parameters());
-   MSSMRHN_soft_parameters(const MSSMRHN_susy_parameters& , const Eigen::Matrix<double,3,3>& TYd_, const Eigen::Matrix<double,3,3>&
-   TYe_, const Eigen::Matrix<double,3,3>& TYu_, const Eigen::Matrix<double,3,3>
-   & TYv_, double BMu_, const Eigen::Matrix<double,3,3>& BMv_, const
-   Eigen::Matrix<double,3,3>& mq2_, const Eigen::Matrix<double,3,3>& ml2_,
-   double mHd2_, double mHu2_, const Eigen::Matrix<double,3,3>& md2_, const
-   Eigen::Matrix<double,3,3>& mu2_, const Eigen::Matrix<double,3,3>& me2_,
-   const Eigen::Matrix<double,3,3>& mv2_, double MassB_, double MassWB_, double
-   MassG_
-);
+   MSSMRHN_soft_parameters(const MSSMRHN_susy_parameters& , const Eigen::Matrix<double,3,3>& TYd_, const Eigen::Matrix<double,3,3>& TYe_,
+   const Eigen::Matrix<double,3,3>& TYu_, const Eigen::Matrix<double,3,3>& TYv_
+   , double BMu_, const Eigen::Matrix<double,3,3>& BMv_, const Eigen::Matrix<
+   double,3,3>& mq2_, const Eigen::Matrix<double,3,3>& ml2_, double mHd2_,
+   double mHu2_, const Eigen::Matrix<double,3,3>& md2_, const Eigen::Matrix<
+   double,3,3>& mu2_, const Eigen::Matrix<double,3,3>& me2_, const Eigen::
+   Matrix<double,3,3>& mv2_, double MassB_, double MassWB_, double MassG_);
    MSSMRHN_soft_parameters(const MSSMRHN_soft_parameters&) = default;
    MSSMRHN_soft_parameters(MSSMRHN_soft_parameters&&) = default;
    virtual ~MSSMRHN_soft_parameters() = default;

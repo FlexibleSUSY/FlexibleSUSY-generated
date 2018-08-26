@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 19:05:57
+// File generated at Sun 26 Aug 2018 15:21:34
 
 /**
  * @file MSSMNoFV_cxx_diagrams.hpp
  *
- * This file was generated at Mon 5 Mar 2018 19:05:57 with FlexibleSUSY
- * 2.1.0 and SARAH 4.12.3 .
+ * This file was generated at Sun 26 Aug 2018 15:21:34 with FlexibleSUSY
+ * 2.2.0 and SARAH 4.13.0 .
  */
 
 #ifndef MSSMNoFV_CXXDIAGRAMS_H
@@ -1114,8 +1114,8 @@ Vertex<bar<Fm>::type, SvmL, Cha>::evaluate(const indices_type& indices, const Ev
    const int gt3 = indices[0];
    const auto g2 = MODELPARAMETER(g2);
    const auto Ye = MODELPARAMETER(Ye);
-   const auto UP = MODELPARAMETER(UP);
    const auto UM = MODELPARAMETER(UM);
+   const auto UP = MODELPARAMETER(UP);
 
    const std::complex<double> left = Conj(UM(gt3,1))*Ye(1,1);
 

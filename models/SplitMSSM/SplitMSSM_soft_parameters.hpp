@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:42:06
+// File generated at Sun 26 Aug 2018 14:09:50
 
 #ifndef SplitMSSM_soft_parameters_H
 #define SplitMSSM_soft_parameters_H
@@ -35,9 +35,8 @@ namespace flexiblesusy {
 class SplitMSSM_soft_parameters : public SplitMSSM_susy_parameters {
 public:
    explicit SplitMSSM_soft_parameters(const SplitMSSM_input_parameters& input_ = SplitMSSM_input_parameters());
-   SplitMSSM_soft_parameters(const SplitMSSM_susy_parameters& , double MassB_, double MassG_, double MassWB_, double Mu_, double mu2_,
-   double v_
-);
+   SplitMSSM_soft_parameters(const SplitMSSM_susy_parameters& , double MassB_, double MassG_, double MassWB_, double Mu_, double mu2_, double
+    v_);
    SplitMSSM_soft_parameters(const SplitMSSM_soft_parameters&) = default;
    SplitMSSM_soft_parameters(SplitMSSM_soft_parameters&&) = default;
    virtual ~SplitMSSM_soft_parameters() = default;

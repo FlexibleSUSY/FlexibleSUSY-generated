@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 16:03:43
+// File generated at Sun 26 Aug 2018 13:46:46
 
 #include "CE6SSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -77,9 +77,9 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_TYd_1_loop(const Sof
 
    Eigen::Matrix<double,3,3> beta_TYd;
 
-   beta_TYd = (oneOver16PiSqr*((3*traceYdAdjYd + traceYeAdjYe + AbsSqr(
-      Lambdax) - 0.4666666666666667*Sqr(g1) - 3*Sqr(g2) - 5.333333333333333*Sqr
-      (g3) - 0.7*Sqr(gN))*TYd + 0.06666666666666667*Yd*(90*traceAdjYdTYd + 30*
+   beta_TYd = (oneOver16PiSqr*((3*traceYdAdjYd + traceYeAdjYe + AbsSqr(Lambdax)
+      - 0.4666666666666667*Sqr(g1) - 3*Sqr(g2) - 5.333333333333333*Sqr(g3) -
+      0.7*Sqr(gN))*TYd + 0.06666666666666667*Yd*(90*traceAdjYdTYd + 30*
       traceAdjYeTYe + 14*MassB*Sqr(g1) + 90*MassWB*Sqr(g2) + 160*MassG*Sqr(g3)
       + 21*MassBp*Sqr(gN) + 30*Conj(Lambdax)*TLambdax) + 4*(Yd*Yd.adjoint()*TYd
       ) + 2*(Yd*Yu.adjoint()*TYu) + 5*(TYd*Yd.adjoint()*Yd) + TYd*Yu.adjoint()*
@@ -102,12 +102,12 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_TYd_2_loop(const Sof
    const double traceAdjYeTYe = TRACE_STRUCT.traceAdjYeTYe;
    const double traceYuAdjYu = TRACE_STRUCT.traceYuAdjYu;
    const double traceKappaAdjKappa = TRACE_STRUCT.traceKappaAdjKappa;
-   const double traceLambda12AdjLambda12 =
-      TRACE_STRUCT.traceLambda12AdjLambda12;
+   const double traceLambda12AdjLambda12 = TRACE_STRUCT.
+      traceLambda12AdjLambda12;
    const double traceAdjYuTYu = TRACE_STRUCT.traceAdjYuTYu;
    const double traceAdjKappaTKappa = TRACE_STRUCT.traceAdjKappaTKappa;
-   const double traceAdjLambda12TLambda12 =
-      TRACE_STRUCT.traceAdjLambda12TLambda12;
+   const double traceAdjLambda12TLambda12 = TRACE_STRUCT.
+      traceAdjLambda12TLambda12;
    const double traceYdAdjYdTYdAdjYd = TRACE_STRUCT.traceYdAdjYdTYdAdjYd;
    const double traceYdAdjYuTYuAdjYd = TRACE_STRUCT.traceYdAdjYuTYuAdjYd;
    const double traceYeAdjYeTYeAdjYe = TRACE_STRUCT.traceYeAdjYeTYeAdjYe;
@@ -119,11 +119,11 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_TYd_2_loop(const Sof
 
    Eigen::Matrix<double,3,3> beta_TYd;
 
-   const Eigen::Matrix<double,3,3> beta_TYd_1 = ((-0.002777777777777778*
-      twoLoop*(4*Yd*(3240*traceYdAdjYdTYdAdjYd + 540*traceYdAdjYuTYuAdjYd +
-      1080*traceYeAdjYeTYeAdjYe + 540*traceYuAdjYdTYdAdjYu + 1652*MassB*Quad(g1
-      ) + 5940*MassWB*Quad(g2) + 5120*MassG*Quad(g3) + 2457*MassBp*Quad(gN) -
-      2880*traceAdjYdTYd*Sqr(g3) + 2880*MassG*traceYdAdjYd*Sqr(g3) + 108*
+   const Eigen::Matrix<double,3,3> beta_TYd_1 = ((-0.002777777777777778*twoLoop
+      *(4*Yd*(3240*traceYdAdjYdTYdAdjYd + 540*traceYdAdjYuTYuAdjYd + 1080*
+      traceYeAdjYeTYeAdjYe + 540*traceYuAdjYdTYdAdjYu + 1652*MassB*Quad(g1) +
+      5940*MassWB*Quad(g2) + 5120*MassG*Quad(g3) + 2457*MassBp*Quad(gN) - 2880*
+      traceAdjYdTYd*Sqr(g3) + 2880*MassG*traceYdAdjYd*Sqr(g3) + 108*
       traceAdjYdTYd*Sqr(gN) + 36*traceAdjYeTYe*Sqr(gN) - 108*MassBp*
       traceYdAdjYd*Sqr(gN) - 36*MassBp*traceYeAdjYe*Sqr(gN) + 240*MassBp*Sqr(g3
       )*Sqr(gN) + 240*MassG*Sqr(g3)*Sqr(gN) + 90*Sqr(g2)*(16*(MassG + MassWB)*
@@ -151,15 +151,15 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_TYd_2_loop(const Sof
       twoLoop*(-75*traceYdAdjYd - 25*traceYeAdjYe - 25*AbsSqr(Lambdax) + 6*Sqr(
       g1) + 60*Sqr(g2) + 9*Sqr(gN))*(TYd*Yd.adjoint()*Yd) + 0.2*twoLoop*(-15*
       traceYuAdjYu - 5*AbsSqr(Lambdax) + 4*Sqr(g1) + Sqr(gN))*(TYd*Yu.adjoint()
-      *Yu) - 6*twoLoop*(Yd*Yd.adjoint()*Yd*Yd.adjoint()*TYd) - 8*twoLoop*(Yd*
-      Yd.adjoint()*TYd*Yd.adjoint()*Yd) - 2*twoLoop*(Yd*Yu.adjoint()*Yu*
-      Yd.adjoint()*TYd) - 4*twoLoop*(Yd*Yu.adjoint()*Yu*Yu.adjoint()*TYu) - 4*
+      *Yu) - 6*twoLoop*(Yd*Yd.adjoint()*Yd*Yd.adjoint()*TYd) - 8*twoLoop*(Yd*Yd
+      .adjoint()*TYd*Yd.adjoint()*Yd) - 2*twoLoop*(Yd*Yu.adjoint()*Yu*Yd.
+      adjoint()*TYd) - 4*twoLoop*(Yd*Yu.adjoint()*Yu*Yu.adjoint()*TYu) - 4*
       twoLoop*(Yd*Yu.adjoint()*TYu*Yd.adjoint()*Yd) - 4*twoLoop*(Yd*Yu.adjoint(
       )*TYu*Yu.adjoint()*Yu) - 6*twoLoop*(TYd*Yd.adjoint()*Yd*Yd.adjoint()*Yd)
-      - 4*twoLoop*(TYd*Yu.adjoint()*Yu*Yd.adjoint()*Yd) - 2*twoLoop*(TYd*
-      Yu.adjoint()*Yu*Yu.adjoint()*Yu))*UNITMATRIX(3)).real();
-   const Eigen::Matrix<double,3,3> beta_TYd_2 = (-2*twoLoop*Conj(Lambdax)
-      *TLambdax*(Yd*Yu.adjoint()*Yu)*UNITMATRIX(3)).real();
+      - 4*twoLoop*(TYd*Yu.adjoint()*Yu*Yd.adjoint()*Yd) - 2*twoLoop*(TYd*Yu.
+      adjoint()*Yu*Yu.adjoint()*Yu))*UNITMATRIX(3)).real();
+   const Eigen::Matrix<double,3,3> beta_TYd_2 = (-2*twoLoop*Conj(Lambdax)*
+      TLambdax*(Yd*Yu.adjoint()*Yu)*UNITMATRIX(3)).real();
 
    beta_TYd = beta_TYd_1 + beta_TYd_2;
 

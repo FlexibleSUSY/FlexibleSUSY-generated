@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 15:11:21
+// File generated at Sun 26 Aug 2018 13:52:47
 
 #ifndef CNMSSM_susy_parameters_H
 #define CNMSSM_susy_parameters_H
@@ -39,10 +39,9 @@ namespace flexiblesusy {
 class CNMSSM_susy_parameters : public Beta_function {
 public:
    explicit CNMSSM_susy_parameters(const CNMSSM_input_parameters& input_ = CNMSSM_input_parameters());
-   CNMSSM_susy_parameters(double scale_, int loops_, int thresholds_, const CNMSSM_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
-   , double Lambdax_, double Kappa_, const Eigen::Matrix<double,3,3>& Yu_,
-   double g1_, double g2_, double g3_, double vd_, double vu_, double vS_
-);
+   CNMSSM_susy_parameters(double scale_, int loops_, int thresholds_, const CNMSSM_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_,
+   double Lambdax_, double Kappa_, const Eigen::Matrix<double,3,3>& Yu_, double
+    g1_, double g2_, double g3_, double vd_, double vu_, double vS_);
    CNMSSM_susy_parameters(const CNMSSM_susy_parameters&) = default;
    CNMSSM_susy_parameters(CNMSSM_susy_parameters&&) = default;
    virtual ~CNMSSM_susy_parameters() = default;

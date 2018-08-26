@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:43:28
+// File generated at Sun 26 Aug 2018 14:07:33
 
 #include "E6SSMEFTHiggs_standard_model_matching.hpp"
 #include "wrappers.hpp"
@@ -244,8 +244,8 @@ double calculate_delta_alpha_em(double alpha_em, const E6SSMEFTHiggs_mass_eigens
       1.3333333333333333*FiniteLog(Abs(MChaI(1)/currentScale)) -
       0.4444444444444444*FiniteLog(Abs(MFDX(0)/currentScale)) - 0.4444444444444444
       *FiniteLog(Abs(MFDX(1)/currentScale)) - 0.4444444444444444*FiniteLog(Abs(
-      MFDX(2)/currentScale)) - 0.3333333333333333*FiniteLog(Abs(MHpm(1)
-      /currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(0)/currentScale)) -
+      MFDX(2)/currentScale)) - 0.3333333333333333*FiniteLog(Abs(MHpm(1)/
+      currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(0)/currentScale)) -
       0.1111111111111111*FiniteLog(Abs(MSd(1)/currentScale)) - 0.1111111111111111*
       FiniteLog(Abs(MSd(2)/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(3
       )/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(4)/currentScale)) -
@@ -286,12 +286,12 @@ double calculate_delta_alpha_s(double alpha_s, const E6SSMEFTHiggs_mass_eigensta
    const auto MSu = MODELPARAMETER(MSu);
    const auto MGlu = MODELPARAMETER(MGlu);
 
-   delta_alpha_s += alpha_s/(2.*Pi)*(0.5 - 2*FiniteLog(Abs(MGlu/currentScale))
-      - 0.6666666666666666*FiniteLog(Abs(MFDX(0)/currentScale)) -
-      0.6666666666666666*FiniteLog(Abs(MFDX(1)/currentScale)) - 0.6666666666666666
-      *FiniteLog(Abs(MFDX(2)/currentScale)) - 0.16666666666666666*FiniteLog(Abs(
-      MSd(0)/currentScale)) - 0.16666666666666666*FiniteLog(Abs(MSd(1)
-      /currentScale)) - 0.16666666666666666*FiniteLog(Abs(MSd(2)/currentScale)) -
+   delta_alpha_s += alpha_s/(2.*Pi)*(0.5 - 2*FiniteLog(Abs(MGlu/currentScale)) -
+      0.6666666666666666*FiniteLog(Abs(MFDX(0)/currentScale)) - 0.6666666666666666
+      *FiniteLog(Abs(MFDX(1)/currentScale)) - 0.6666666666666666*FiniteLog(Abs(
+      MFDX(2)/currentScale)) - 0.16666666666666666*FiniteLog(Abs(MSd(0)/
+      currentScale)) - 0.16666666666666666*FiniteLog(Abs(MSd(1)/currentScale)) -
+      0.16666666666666666*FiniteLog(Abs(MSd(2)/currentScale)) -
       0.16666666666666666*FiniteLog(Abs(MSd(3)/currentScale)) -
       0.16666666666666666*FiniteLog(Abs(MSd(4)/currentScale)) -
       0.16666666666666666*FiniteLog(Abs(MSd(5)/currentScale)) -

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 19:08:25
+// File generated at Sun 26 Aug 2018 15:25:17
 
 #include "MSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -100,31 +100,19 @@ double MSSM_soft_parameters::calc_beta_mHu2_2_loop(const Soft_traces& soft_trace
    const double tracemq2AdjYuYu = TRACE_STRUCT.tracemq2AdjYuYu;
    const double tracemu2YuAdjYu = TRACE_STRUCT.tracemu2YuAdjYu;
    const double traceYdAdjYuYuAdjYd = TRACE_STRUCT.traceYdAdjYuYuAdjYd;
-   const double traceYdAdjYuTYuAdjTYd =
-      TRACE_STRUCT.traceYdAdjYuTYuAdjTYd;
-   const double traceYdAdjTYuTYuAdjYd =
-      TRACE_STRUCT.traceYdAdjTYuTYuAdjYd;
-   const double traceYuAdjYdTYdAdjTYu =
-      TRACE_STRUCT.traceYuAdjYdTYdAdjTYu;
+   const double traceYdAdjYuTYuAdjTYd = TRACE_STRUCT.traceYdAdjYuTYuAdjTYd;
+   const double traceYdAdjTYuTYuAdjYd = TRACE_STRUCT.traceYdAdjTYuTYuAdjYd;
+   const double traceYuAdjYdTYdAdjTYu = TRACE_STRUCT.traceYuAdjYdTYdAdjTYu;
    const double traceYuAdjYuYuAdjYu = TRACE_STRUCT.traceYuAdjYuYuAdjYu;
-   const double traceYuAdjYuTYuAdjTYu =
-      TRACE_STRUCT.traceYuAdjYuTYuAdjTYu;
-   const double traceYuAdjTYdTYdAdjYu =
-      TRACE_STRUCT.traceYuAdjTYdTYdAdjYu;
-   const double traceYuAdjTYuTYuAdjYu =
-      TRACE_STRUCT.traceYuAdjTYuTYuAdjYu;
-   const double tracemd2YdAdjYuYuAdjYd =
-      TRACE_STRUCT.tracemd2YdAdjYuYuAdjYd;
-   const double tracemq2AdjYdYdAdjYuYu =
-      TRACE_STRUCT.tracemq2AdjYdYdAdjYuYu;
-   const double tracemq2AdjYuYuAdjYdYd =
-      TRACE_STRUCT.tracemq2AdjYuYuAdjYdYd;
-   const double tracemq2AdjYuYuAdjYuYu =
-      TRACE_STRUCT.tracemq2AdjYuYuAdjYuYu;
-   const double tracemu2YuAdjYdYdAdjYu =
-      TRACE_STRUCT.tracemu2YuAdjYdYdAdjYu;
-   const double tracemu2YuAdjYuYuAdjYu =
-      TRACE_STRUCT.tracemu2YuAdjYuYuAdjYu;
+   const double traceYuAdjYuTYuAdjTYu = TRACE_STRUCT.traceYuAdjYuTYuAdjTYu;
+   const double traceYuAdjTYdTYdAdjYu = TRACE_STRUCT.traceYuAdjTYdTYdAdjYu;
+   const double traceYuAdjTYuTYuAdjYu = TRACE_STRUCT.traceYuAdjTYuTYuAdjYu;
+   const double tracemd2YdAdjYuYuAdjYd = TRACE_STRUCT.tracemd2YdAdjYuYuAdjYd;
+   const double tracemq2AdjYdYdAdjYuYu = TRACE_STRUCT.tracemq2AdjYdYdAdjYuYu;
+   const double tracemq2AdjYuYuAdjYdYd = TRACE_STRUCT.tracemq2AdjYuYuAdjYdYd;
+   const double tracemq2AdjYuYuAdjYuYu = TRACE_STRUCT.tracemq2AdjYuYuAdjYuYu;
+   const double tracemu2YuAdjYdYdAdjYu = TRACE_STRUCT.tracemu2YuAdjYdYdAdjYu;
+   const double tracemu2YuAdjYuYuAdjYu = TRACE_STRUCT.tracemu2YuAdjYuYuAdjYu;
    const double Tr2U111 = TRACE_STRUCT.Tr2U111;
    const double Tr31 = TRACE_STRUCT.Tr31;
    const double Tr22 = TRACE_STRUCT.Tr22;
@@ -193,88 +181,75 @@ double MSSM_soft_parameters::calc_beta_mHu2_3_loop(const Soft_traces& soft_trace
    const double traceAdjYuYuAdjTYuYu = TRACE_STRUCT.traceAdjYuYuAdjTYuYu;
    const double traceAdjYuTYuAdjYdYd = TRACE_STRUCT.traceAdjYuTYuAdjYdYd;
    const double traceAdjYuTYuAdjYuYu = TRACE_STRUCT.traceAdjYuTYuAdjYuYu;
-   const double traceAdjYuTYuAdjTYdYd =
-      TRACE_STRUCT.traceAdjYuTYuAdjTYdYd;
-   const double traceAdjYuTYuAdjTYuYu =
-      TRACE_STRUCT.traceAdjYuTYuAdjTYuYu;
-   const double traceAdjTYdTYdAdjYuYu =
-      TRACE_STRUCT.traceAdjTYdTYdAdjYuYu;
+   const double traceAdjYuTYuAdjTYdYd = TRACE_STRUCT.traceAdjYuTYuAdjTYdYd;
+   const double traceAdjYuTYuAdjTYuYu = TRACE_STRUCT.traceAdjYuTYuAdjTYuYu;
+   const double traceAdjTYdTYdAdjYuYu = TRACE_STRUCT.traceAdjTYdTYdAdjYuYu;
    const double traceAdjTYuYuAdjYdYd = TRACE_STRUCT.traceAdjTYuYuAdjYdYd;
-   const double traceAdjTYuTYuAdjYdYd =
-      TRACE_STRUCT.traceAdjTYuTYuAdjYdYd;
-   const double traceAdjTYuTYuAdjYuYu =
-      TRACE_STRUCT.traceAdjTYuTYuAdjYuYu;
+   const double traceAdjTYuTYuAdjYdYd = TRACE_STRUCT.traceAdjTYuTYuAdjYdYd;
+   const double traceAdjTYuTYuAdjYuYu = TRACE_STRUCT.traceAdjTYuTYuAdjYuYu;
    const double traceTYdAdjYuYuAdjYd = TRACE_STRUCT.traceTYdAdjYuYuAdjYd;
-   const double traceTYdAdjTYuYuAdjYd =
-      TRACE_STRUCT.traceTYdAdjTYuYuAdjYd;
-   const double traceYdAdjYuYuAdjYdmd2 =
-      TRACE_STRUCT.traceYdAdjYuYuAdjYdmd2;
-   const double traceYuAdjYdYdAdjYumu2 =
-      TRACE_STRUCT.traceYuAdjYdYdAdjYumu2;
-   const double traceYuAdjYuYuAdjYumu2 =
-      TRACE_STRUCT.traceYuAdjYuYuAdjYumu2;
-   const double traceAdjYdYdAdjYuYumq2 =
-      TRACE_STRUCT.traceAdjYdYdAdjYuYumq2;
-   const double traceAdjYuYuAdjYdYdmq2 =
-      TRACE_STRUCT.traceAdjYuYuAdjYdYdmq2;
-   const double traceAdjYuYuAdjYuYumq2 =
-      TRACE_STRUCT.traceAdjYuYuAdjYuYumq2;
-   const double traceAdjYdYdAdjYuYuAdjYdYd =
-      TRACE_STRUCT.traceAdjYdYdAdjYuYuAdjYdYd;
-   const double traceAdjYdYdAdjYuTYuAdjTYdYd =
-      TRACE_STRUCT.traceAdjYdYdAdjYuTYuAdjTYdYd;
-   const double traceAdjYdYdAdjTYuTYuAdjYdYd =
-      TRACE_STRUCT.traceAdjYdYdAdjTYuTYuAdjYdYd;
-   const double traceAdjYdTYdAdjYuYuAdjTYdYd =
-      TRACE_STRUCT.traceAdjYdTYdAdjYuYuAdjTYdYd;
-   const double traceAdjYdTYdAdjTYuYuAdjYdYd =
-      TRACE_STRUCT.traceAdjYdTYdAdjTYuYuAdjYdYd;
-   const double traceAdjYuYuAdjYdTYdAdjTYdYd =
-      TRACE_STRUCT.traceAdjYuYuAdjYdTYdAdjTYdYd;
-   const double traceAdjYuYuAdjYuYuAdjYuYu =
-      TRACE_STRUCT.traceAdjYuYuAdjYuYuAdjYuYu;
-   const double traceAdjYuYuAdjYuTYuAdjTYuYu =
-      TRACE_STRUCT.traceAdjYuYuAdjYuTYuAdjTYuYu;
-   const double traceAdjYuYuAdjTYdTYdAdjYdYd =
-      TRACE_STRUCT.traceAdjYuYuAdjTYdTYdAdjYdYd;
-   const double traceAdjYuYuAdjTYuTYuAdjYuYu =
-      TRACE_STRUCT.traceAdjYuYuAdjTYuTYuAdjYuYu;
-   const double traceAdjYuTYuAdjYdYdAdjTYdYd =
-      TRACE_STRUCT.traceAdjYuTYuAdjYdYdAdjTYdYd;
-   const double traceAdjYuTYuAdjYuYuAdjTYuYu =
-      TRACE_STRUCT.traceAdjYuTYuAdjYuYuAdjTYuYu;
-   const double traceAdjTYdTYdAdjYuYuAdjYdYd =
-      TRACE_STRUCT.traceAdjTYdTYdAdjYuYuAdjYdYd;
-   const double traceAdjTYuYuAdjYdTYdAdjYdYd =
-      TRACE_STRUCT.traceAdjTYuYuAdjYdTYdAdjYdYd;
-   const double traceYdAdjYdYdAdjYuYuAdjYdmd2 =
-      TRACE_STRUCT.traceYdAdjYdYdAdjYuYuAdjYdmd2;
-   const double traceYdAdjYuYuAdjYdYdAdjYdmd2 =
-      TRACE_STRUCT.traceYdAdjYuYuAdjYdYdAdjYdmd2;
-   const double traceYuAdjYdYdAdjYdYdAdjYumu2 =
-      TRACE_STRUCT.traceYuAdjYdYdAdjYdYdAdjYumu2;
-   const double traceYuAdjYuYuAdjYuYuAdjYumu2 =
-      TRACE_STRUCT.traceYuAdjYuYuAdjYuYuAdjYumu2;
-   const double traceAdjYdYdAdjYdYdAdjYuYumq2 =
-      TRACE_STRUCT.traceAdjYdYdAdjYdYdAdjYuYumq2;
-   const double traceAdjYdYdAdjYuYuAdjYdYdmq2 =
-      TRACE_STRUCT.traceAdjYdYdAdjYuYuAdjYdYdmq2;
-   const double traceAdjYuYuAdjYdYdAdjYdYdmq2 =
-      TRACE_STRUCT.traceAdjYuYuAdjYdYdAdjYdYdmq2;
-   const double traceAdjYuYuAdjYuYuAdjYuYumq2 =
-      TRACE_STRUCT.traceAdjYuYuAdjYuYuAdjYuYumq2;
+   const double traceTYdAdjTYuYuAdjYd = TRACE_STRUCT.traceTYdAdjTYuYuAdjYd;
+   const double traceYdAdjYuYuAdjYdmd2 = TRACE_STRUCT.traceYdAdjYuYuAdjYdmd2;
+   const double traceYuAdjYdYdAdjYumu2 = TRACE_STRUCT.traceYuAdjYdYdAdjYumu2;
+   const double traceYuAdjYuYuAdjYumu2 = TRACE_STRUCT.traceYuAdjYuYuAdjYumu2;
+   const double traceAdjYdYdAdjYuYumq2 = TRACE_STRUCT.traceAdjYdYdAdjYuYumq2;
+   const double traceAdjYuYuAdjYdYdmq2 = TRACE_STRUCT.traceAdjYuYuAdjYdYdmq2;
+   const double traceAdjYuYuAdjYuYumq2 = TRACE_STRUCT.traceAdjYuYuAdjYuYumq2;
+   const double traceAdjYdYdAdjYuYuAdjYdYd = TRACE_STRUCT.
+      traceAdjYdYdAdjYuYuAdjYdYd;
+   const double traceAdjYdYdAdjYuTYuAdjTYdYd = TRACE_STRUCT.
+      traceAdjYdYdAdjYuTYuAdjTYdYd;
+   const double traceAdjYdYdAdjTYuTYuAdjYdYd = TRACE_STRUCT.
+      traceAdjYdYdAdjTYuTYuAdjYdYd;
+   const double traceAdjYdTYdAdjYuYuAdjTYdYd = TRACE_STRUCT.
+      traceAdjYdTYdAdjYuYuAdjTYdYd;
+   const double traceAdjYdTYdAdjTYuYuAdjYdYd = TRACE_STRUCT.
+      traceAdjYdTYdAdjTYuYuAdjYdYd;
+   const double traceAdjYuYuAdjYdTYdAdjTYdYd = TRACE_STRUCT.
+      traceAdjYuYuAdjYdTYdAdjTYdYd;
+   const double traceAdjYuYuAdjYuYuAdjYuYu = TRACE_STRUCT.
+      traceAdjYuYuAdjYuYuAdjYuYu;
+   const double traceAdjYuYuAdjYuTYuAdjTYuYu = TRACE_STRUCT.
+      traceAdjYuYuAdjYuTYuAdjTYuYu;
+   const double traceAdjYuYuAdjTYdTYdAdjYdYd = TRACE_STRUCT.
+      traceAdjYuYuAdjTYdTYdAdjYdYd;
+   const double traceAdjYuYuAdjTYuTYuAdjYuYu = TRACE_STRUCT.
+      traceAdjYuYuAdjTYuTYuAdjYuYu;
+   const double traceAdjYuTYuAdjYdYdAdjTYdYd = TRACE_STRUCT.
+      traceAdjYuTYuAdjYdYdAdjTYdYd;
+   const double traceAdjYuTYuAdjYuYuAdjTYuYu = TRACE_STRUCT.
+      traceAdjYuTYuAdjYuYuAdjTYuYu;
+   const double traceAdjTYdTYdAdjYuYuAdjYdYd = TRACE_STRUCT.
+      traceAdjTYdTYdAdjYuYuAdjYdYd;
+   const double traceAdjTYuYuAdjYdTYdAdjYdYd = TRACE_STRUCT.
+      traceAdjTYuYuAdjYdTYdAdjYdYd;
+   const double traceYdAdjYdYdAdjYuYuAdjYdmd2 = TRACE_STRUCT.
+      traceYdAdjYdYdAdjYuYuAdjYdmd2;
+   const double traceYdAdjYuYuAdjYdYdAdjYdmd2 = TRACE_STRUCT.
+      traceYdAdjYuYuAdjYdYdAdjYdmd2;
+   const double traceYuAdjYdYdAdjYdYdAdjYumu2 = TRACE_STRUCT.
+      traceYuAdjYdYdAdjYdYdAdjYumu2;
+   const double traceYuAdjYuYuAdjYuYuAdjYumu2 = TRACE_STRUCT.
+      traceYuAdjYuYuAdjYuYuAdjYumu2;
+   const double traceAdjYdYdAdjYdYdAdjYuYumq2 = TRACE_STRUCT.
+      traceAdjYdYdAdjYdYdAdjYuYumq2;
+   const double traceAdjYdYdAdjYuYuAdjYdYdmq2 = TRACE_STRUCT.
+      traceAdjYdYdAdjYuYuAdjYdYdmq2;
+   const double traceAdjYuYuAdjYdYdAdjYdYdmq2 = TRACE_STRUCT.
+      traceAdjYuYuAdjYdYdAdjYdYdmq2;
+   const double traceAdjYuYuAdjYuYuAdjYuYumq2 = TRACE_STRUCT.
+      traceAdjYuYuAdjYuYuAdjYuYumq2;
 
 
    double beta_mHu2;
 
-   const double beta_mHu2_1 = Re(threeLoop*(18.*
-      traceAdjTYdTYdAdjYuYuAdjYdYd + 18.*traceAdjTYuYuAdjYdTYdAdjYdYd + 18.*
-      traceAdjYdTYdAdjTYuYuAdjYdYd + 18.*traceAdjYdTYdAdjYuYuAdjTYdYd + 36.*
-      traceAdjTYdTYdAdjYuYu*traceAdjYdYd + 36.*traceAdjTYuTYuAdjYdYd*
-      traceAdjYdYd + 18.*traceAdjYdYdAdjTYuTYuAdjYdYd + 18.*
-      traceAdjYdYdAdjYdYdAdjYuYumq2 + 18.*traceAdjYdYdAdjYuTYuAdjTYdYd + 36.*
-      mHd2*traceAdjYdYdAdjYuYuAdjYdYd + 18.*mHu2*traceAdjYdYdAdjYuYuAdjYdYd +
-      18.*traceAdjYdYdAdjYuYuAdjYdYdmq2 + 36.*traceAdjYdYd*
+   const double beta_mHu2_1 = Re(threeLoop*(18.*traceAdjTYdTYdAdjYuYuAdjYdYd +
+      18.*traceAdjTYuYuAdjYdTYdAdjYdYd + 18.*traceAdjYdTYdAdjTYuYuAdjYdYd + 18.
+      *traceAdjYdTYdAdjYuYuAdjTYdYd + 36.*traceAdjTYdTYdAdjYuYu*traceAdjYdYd +
+      36.*traceAdjTYuTYuAdjYdYd*traceAdjYdYd + 18.*traceAdjYdYdAdjTYuTYuAdjYdYd
+       + 18.*traceAdjYdYdAdjYdYdAdjYuYumq2 + 18.*traceAdjYdYdAdjYuTYuAdjTYdYd +
+      36.*mHd2*traceAdjYdYdAdjYuYuAdjYdYd + 18.*mHu2*traceAdjYdYdAdjYuYuAdjYdYd
+       + 18.*traceAdjYdYdAdjYuYuAdjYdYdmq2 + 36.*traceAdjYdYd*
       traceAdjYdYdAdjYuYumq2 + 12.*traceAdjTYdTYdAdjYuYu*traceAdjYeYe + 12.*
       traceAdjTYuTYuAdjYdYd*traceAdjYeYe + 12.*traceAdjYdYdAdjYuYumq2*
       traceAdjYeYe + 36.*traceAdjYdYd*traceAdjYuTYuAdjTYdYd + 12.*traceAdjYeYe*
@@ -296,7 +271,7 @@ double MSSM_soft_parameters::calc_beta_mHu2_3_loop(const Soft_traces& soft_trace
       MassWB*traceAdjYuTYuAdjYdYd - 295.64429108247236*MassWB*
       traceAdjYuTYuAdjYuYu - 82.19238810996313*MassG*traceAdjTYuYu*Sqr(g3) -
       82.19238810996313*MassWB*traceAdjTYuYu*Sqr(g3)) + Power6(g1)*(-4.968*mHd2
-      - 4.968*mHu2 + 239.45914429835202*Sqr(MassB)) + Sqr(g1)*(
+       - 4.968*mHu2 + 239.45914429835202*Sqr(MassB)) + Sqr(g1)*(
       5.284936567583026*traceAdjTYdTYdAdjYuYu + 5.284936567583026*
       traceAdjTYuTYuAdjYdYd + 28.290380594501844*traceAdjTYuTYuAdjYuYu -
       5.284936567583026*MassB*traceAdjTYuYuAdjYdYd + 5.284936567583026*
@@ -334,7 +309,7 @@ double MSSM_soft_parameters::calc_beta_mHu2_3_loop(const Soft_traces& soft_trace
       traceAdjYuYuAdjYdYdAdjYdYdmq2 + 36.*traceAdjYdYd*traceAdjYuYuAdjYdYdmq2 +
       12.*traceAdjYeYe*traceAdjYuYuAdjYdYdmq2 + 147.82214554123618*
       traceAdjYuYuAdjYuTYuAdjTYuYu + 324.*mHu2*traceAdjYuYu*traceAdjYuYuAdjYuYu
-      + 147.82214554123618*mHu2*traceAdjYuYuAdjYuYuAdjYuYu +
+       + 147.82214554123618*mHu2*traceAdjYuYuAdjYuYuAdjYuYu +
       147.82214554123618*traceAdjYuYuAdjYuYuAdjYuYumq2 + 216.*traceAdjYuYu*
       traceAdjYuYuAdjYuYumq2 + 108.*traceAdjYuYuAdjYuYu*traceAdjYuYumq2 + 36.*
       traceAdjYuYuAdjYdYd*traceTYdAdjTYd + 36.*traceAdjYdYd*
@@ -344,8 +319,8 @@ double MSSM_soft_parameters::calc_beta_mHu2_3_loop(const Soft_traces& soft_trace
       145.1324875677737*mHu2*traceAdjYuYu*Quad(g3) - 145.1324875677737*
       traceAdjYuYumq2*Quad(g3) - 31.999999999999996*traceAdjYuYu*tracemd2*Quad(
       g3) - 63.99999999999999*traceAdjYuYu*tracemq2*Quad(g3) -
-      31.999999999999996*traceAdjYuYu*tracemu2*Quad(g3) + Quad(g1)*(
-      -0.9599999999999999*mHd2*traceAdjYuYu - 76.41201461488161*mHu2*
+      31.999999999999996*traceAdjYuYu*tracemu2*Quad(g3) + Quad(g1)*(-
+      0.9599999999999999*mHd2*traceAdjYuYu - 76.41201461488161*mHu2*
       traceAdjYuYu - 75.45201461488162*traceAdjYuYumq2 - 0.64*traceAdjYuYu*
       tracemd2 - 1.9199999999999997*traceAdjYuYu*traceme2 - 0.9599999999999999*
       traceAdjYuYu*traceml2 - 0.32*traceAdjYuYu*tracemq2 - 2.56*traceAdjYuYu*
@@ -360,10 +335,10 @@ double MSSM_soft_parameters::calc_beta_mHu2_3_loop(const Soft_traces& soft_trace
       traceAdjYuYuAdjYuYumq2*Sqr(g3) - 67.39746270332105*traceTYdAdjTYuYuAdjYd*
       Sqr(g3) - 678.794925406642*traceAdjYuYu*Quad(g3)*Sqr(MassG) -
       134.7949254066421*traceAdjYuYuAdjYdYd*Sqr(g3)*Sqr(MassG) -
-      404.38477621992627*traceAdjYuYuAdjYuYu*Sqr(g3)*Sqr(MassG) + Quad(g2)*(
-      -348.6887546971633*mHu2*traceAdjYuYu - 348.6887546971633*traceAdjYuYumq2
-      - 54.*traceTYdAdjTYd - 2038.13252818298*traceAdjYuYu*Sqr(MassWB)) + Sqr(
-      g1)*(-5.284936567583026*MassB*traceAdjYuYuAdjTYdYd - 28.290380594501844*
+      404.38477621992627*traceAdjYuYuAdjYuYu*Sqr(g3)*Sqr(MassG) + Quad(g2)*(-
+      348.6887546971633*mHu2*traceAdjYuYu - 348.6887546971633*traceAdjYuYumq2 -
+      54.*traceTYdAdjTYd - 2038.13252818298*traceAdjYuYu*Sqr(MassWB)) + Sqr(g1)
+      *(-5.284936567583026*MassB*traceAdjYuYuAdjTYdYd - 28.290380594501844*
       MassB*traceAdjYuYuAdjTYuYu + 5.284936567583026*mHd2*traceAdjYuYuAdjYdYd +
       5.284936567583026*mHu2*traceAdjYuYuAdjYdYd + 5.284936567583026*
       traceAdjYuYuAdjYdYdmq2 + 28.290380594501844*mHu2*traceAdjYuYuAdjYuYu +
@@ -376,8 +351,8 @@ double MSSM_soft_parameters::calc_beta_mHu2_3_loop(const Soft_traces& soft_trace
       37.78366791924354*MassB*MassWB*traceAdjYuYu + 18.89183395962177*mHu2*
       traceAdjYuYu + 18.89183395962177*traceAdjYuYumq2 + 37.78366791924354*
       traceAdjYuYu*Sqr(MassWB))) + Sqr(g2)*(MassWB*(-36.*traceAdjYuYuAdjTYdYd -
-      295.64429108247236*traceAdjYuYuAdjTYuYu) + 36.*mHd2*traceAdjYuYuAdjYdYd
-      + 36.*mHu2*traceAdjYuYuAdjYdYd + 36.*traceAdjYuYuAdjYdYdmq2 +
+      295.64429108247236*traceAdjYuYuAdjTYuYu) + 36.*mHd2*traceAdjYuYuAdjYdYd +
+      36.*mHu2*traceAdjYuYuAdjYdYd + 36.*traceAdjYuYuAdjYdYdmq2 +
       295.64429108247236*mHu2*traceAdjYuYuAdjYuYu + 295.64429108247236*
       traceAdjYuYuAdjYuYumq2 + 36.*traceTYdAdjTYuYuAdjYd + (72.*
       traceAdjYuYuAdjYdYd + 295.64429108247236*traceAdjYuYuAdjYuYu)*Sqr(MassWB)
@@ -399,7 +374,7 @@ double MSSM_soft_parameters::calc_beta_mHu2_3_loop(const Soft_traces& soft_trace
       traceYuAdjYdYdAdjYumu2 + 12.*traceAdjYeYe*traceYuAdjYdYdAdjYumu2 + 108.*
       traceAdjYuYuAdjYuYu*traceYuAdjYumu2 + 216.*traceAdjYuYu*
       traceYuAdjYuYuAdjYumu2 + 147.82214554123618*traceYuAdjYuYuAdjYuYuAdjYumu2
-      - 6.48*traceTYeAdjTYe*Quad(g1) + 10.8*MassB*traceTYeAdjYe*Quad(g1) -
+       - 6.48*traceTYeAdjTYe*Quad(g1) + 10.8*MassB*traceTYeAdjYe*Quad(g1) -
       75.45201461488162*traceTYuAdjTYu*Quad(g1) + 147.78402922976323*MassB*
       traceTYuAdjYu*Quad(g1) - 5.04*traceYdAdjYdmd2*Quad(g1) - 6.48*
       traceYeAdjYeme2*Quad(g1) - 75.45201461488162*traceYuAdjYumu2*Quad(g1) + (

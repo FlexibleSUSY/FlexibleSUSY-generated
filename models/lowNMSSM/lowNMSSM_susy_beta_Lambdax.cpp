@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:21:03
+// File generated at Sun 26 Aug 2018 14:36:33
 
 #include "lowNMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -40,10 +40,9 @@ double lowNMSSM_susy_parameters::calc_beta_Lambdax_1_loop(const Susy_traces& sus
 
    double beta_Lambdax;
 
-   beta_Lambdax = Re(oneOver16PiSqr*(3*traceYdAdjYd*Lambdax +
-      traceYeAdjYe*Lambdax + 3*traceYuAdjYu*Lambdax + 2*AbsSqr(Kappa)*Lambdax -
-      0.6*Lambdax*Sqr(g1) - 3*Lambdax*Sqr(g2) + 4*Conj(Lambdax)*Sqr(Lambdax)))
-      ;
+   beta_Lambdax = Re(oneOver16PiSqr*(3*traceYdAdjYd*Lambdax + traceYeAdjYe*
+      Lambdax + 3*traceYuAdjYu*Lambdax + 2*AbsSqr(Kappa)*Lambdax - 0.6*Lambdax*
+      Sqr(g1) - 3*Lambdax*Sqr(g2) + 4*Conj(Lambdax)*Sqr(Lambdax)));
 
 
    return beta_Lambdax;
@@ -67,9 +66,9 @@ double lowNMSSM_susy_parameters::calc_beta_Lambdax_2_loop(const Susy_traces& sus
 
    double beta_Lambdax;
 
-   beta_Lambdax = Re(-0.02*twoLoop*Lambdax*(450*traceYdAdjYdYdAdjYd + 300
-      *traceYdAdjYuYuAdjYd + 150*traceYeAdjYeYeAdjYe + 450*traceYuAdjYuYuAdjYu
-      + 600*AbsSqr(Kappa)*AbsSqr(Lambdax) - 207*Quad(g1) - 375*Quad(g2) + 20*
+   beta_Lambdax = Re(-0.02*twoLoop*Lambdax*(450*traceYdAdjYdYdAdjYd + 300*
+      traceYdAdjYuYuAdjYd + 150*traceYeAdjYeYeAdjYe + 450*traceYuAdjYuYuAdjYu +
+      600*AbsSqr(Kappa)*AbsSqr(Lambdax) - 207*Quad(g1) - 375*Quad(g2) + 20*
       traceYdAdjYd*Sqr(g1) - 60*traceYeAdjYe*Sqr(g1) - 40*traceYuAdjYu*Sqr(g1)
       - 90*Sqr(g1)*Sqr(g2) - 30*AbsSqr(Lambdax)*(-15*traceYdAdjYd - 5*
       traceYeAdjYe - 15*traceYuAdjYu + 2*Sqr(g1) + 10*Sqr(g2)) - 800*

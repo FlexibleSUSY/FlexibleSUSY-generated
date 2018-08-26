@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 15:30:35
+// File generated at Sun 26 Aug 2018 13:59:44
 
 #ifndef CNMSSM_SEMI_ANALYTIC_INITIAL_GUESSER_H
 #define CNMSSM_SEMI_ANALYTIC_INITIAL_GUESSER_H
@@ -26,6 +26,8 @@
 #include "CNMSSM_semi_analytic_susy_scale_constraint.hpp"
 #include "CNMSSM_semi_analytic_high_scale_constraint.hpp"
 #include "initial_guesser.hpp"
+
+#include <Eigen/Core>
 
 namespace flexiblesusy {
 
@@ -68,6 +70,9 @@ private:
    CNMSSM_low_scale_constraint<Semi_analytic>& low_constraint;
    CNMSSM_susy_scale_constraint<Semi_analytic>& susy_constraint;
    CNMSSM_high_scale_constraint<Semi_analytic>& high_constraint;
+   Eigen::Matrix<std::complex<double>,3,3> upQuarksDRbar{Eigen::Matrix<std::complex<double>,3,3>::Zero()};
+   Eigen::Matrix<std::complex<double>,3,3> downQuarksDRbar{Eigen::Matrix<std::complex<double>,3,3>::Zero()};
+   Eigen::Matrix<std::complex<double>,3,3> downLeptonsDRbar{Eigen::Matrix<std::complex<double>,3,3>::Zero()};
 
    void initial_guess_low_scale_parameters();
    void initial_guess_high_scale_parameters();
@@ -78,6 +83,7 @@ private:
    void calculate_Yu_DRbar();
    void calculate_Yd_DRbar();
    void calculate_Ye_DRbar();
+   void calculate_running_SM_masses();
 };
 
 } // namespace flexiblesusy

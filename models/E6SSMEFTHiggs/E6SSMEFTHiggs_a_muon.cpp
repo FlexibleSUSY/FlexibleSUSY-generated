@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:44:08
+// File generated at Sun 26 Aug 2018 14:08:28
 
 /**
  * @file E6SSMEFTHiggs_a_muon.cpp
  *
- * This file was generated at Mon 5 Mar 2018 17:44:08 with FlexibleSUSY
- * 2.1.0 and SARAH 4.12.3 .
+ * This file was generated at Sun 26 Aug 2018 14:08:28 with FlexibleSUSY
+ * 2.2.0 and SARAH 4.13.0 .
  */
 
 #include "E6SSMEFTHiggs_a_muon.hpp"
@@ -217,13 +217,12 @@ double OneLoopFunctionF2N(double x)
 
 double get_MSUSY(const E6SSMEFTHiggs_mass_eigenstates& model)
 {
-   return Min(model.get_MChaP(), model.get_MSd().tail<6>().minCoeff(),
-      model.get_MSu().tail<6>().minCoeff(), model.get_MSe().tail<6>().minCoeff(),
-      model.get_MSDX().tail<6>().minCoeff(), model.get_MHpm().tail<1>().minCoeff()
-      , model.get_MCha().tail<2>().minCoeff(), model.get_MFDX().tail<3>().minCoeff
-      (), model.get_MSHIp().tail<4>().minCoeff(), model.get_MChaI().tail<2>()
-      .minCoeff(), model.get_MSHpp().tail<2>().minCoeff());
-
+   return Min(model.get_MChaP(), model.get_MSd().tail<6>().minCoeff(), model.
+      get_MSu().tail<6>().minCoeff(), model.get_MSe().tail<6>().minCoeff(), model.
+      get_MSDX().tail<6>().minCoeff(), model.get_MHpm().tail<1>().minCoeff(),
+      model.get_MCha().tail<2>().minCoeff(), model.get_MFDX().tail<3>().minCoeff()
+      , model.get_MSHIp().tail<4>().minCoeff(), model.get_MChaI().tail<2>().
+      minCoeff(), model.get_MSHpp().tail<2>().minCoeff());
 }
 
 void run_to_MSUSY(E6SSMEFTHiggs_mass_eigenstates& model)

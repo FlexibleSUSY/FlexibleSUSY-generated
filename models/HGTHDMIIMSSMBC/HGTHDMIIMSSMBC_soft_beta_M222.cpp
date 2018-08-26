@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:08:31
+// File generated at Sun 26 Aug 2018 14:06:51
 
 #include "HGTHDMIIMSSMBC_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -74,11 +74,11 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_M222_1_loop(const Soft_traces& 
 
    double beta_M222;
 
-   beta_M222 = Re(oneOver16PiSqr*(4*Lambda3*M112 + 2*Lambda4*M112 - 12*
-      Lambda7*M122 + 12*Lambda2*M222 + 6*M222*traceYuAdjYu - 0.9*M222*Sqr(g1) -
-      4.5*M222*Sqr(g2) + 3*M222*Sqr(g2u) - 6*AbsSqr(MassWB)*Sqr(g2u) + M222*
-      Sqr(g2up) - 2*AbsSqr(MassB)*Sqr(g2up) - 6*Sqr(g2u)*Sqr(Mu) - 2*Sqr(g2up)*
-      Sqr(Mu)));
+   beta_M222 = Re(oneOver16PiSqr*(4*Lambda3*M112 + 2*Lambda4*M112 + 12*Lambda2*
+      M222 + 6*M222*traceYuAdjYu - 6*M122*Conj(Lambda7) - 6*Lambda7*Conj(M122)
+      - 0.9*M222*Sqr(g1) - 4.5*M222*Sqr(g2) + 3*M222*Sqr(g2u) - 6*AbsSqr(MassWB
+      )*Sqr(g2u) + M222*Sqr(g2up) - 2*AbsSqr(MassB)*Sqr(g2up) - 6*Sqr(g2u)*Sqr(
+      Mu) - 2*Sqr(g2up)*Sqr(Mu)));
 
 
    return beta_M222;
@@ -100,42 +100,54 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_M222_2_loop(const Soft_traces& 
 
    double beta_M222;
 
-   beta_M222 = Re(twoLoop*(-8*Lambda3*Lambda4*M112 + 12*Lambda3*Lambda6*
-      M122 + 12*Lambda4*Lambda6*M122 + 12*Lambda5*Lambda6*M122 + 72*Lambda2*
-      Lambda7*M122 + 24*Lambda3*Lambda7*M122 + 24*Lambda4*Lambda7*M122 + 24*
-      Lambda5*Lambda7*M122 - 2*Lambda3*Lambda4*M222 - 24*Lambda3*M112*
-      traceYdAdjYd - 12*Lambda4*M112*traceYdAdjYd + 36*Lambda7*M122*
-      traceYdAdjYd - 4.5*M222*traceYdAdjYuYuAdjYd - 8*Lambda3*M112*traceYeAdjYe
-      - 4*Lambda4*M112*traceYeAdjYe + 12*Lambda7*M122*traceYeAdjYe + 36*
-      Lambda7*M122*traceYuAdjYu - 72*Lambda2*M222*traceYuAdjYu - 13.5*M222*
-      traceYuAdjYuYuAdjYu + 6*g1dp*g2up*Lambda7*MassB*Mu + 18*g1d*g2u*Lambda7*
-      MassWB*Mu + 0.9*M112*Quad(g1) + 4.6425*M222*Quad(g1) + 7.5*M112*Quad(g2)
-      - 0.1875*M222*Quad(g2) - 5.625*M222*Quad(g2u) - 1.125*M222*Quad(g2up) +
-      4.8*Lambda3*M112*Sqr(g1) + 2.4*Lambda4*M112*Sqr(g1) - 14.4*Lambda7*M122*
-      Sqr(g1) + 14.4*Lambda2*M222*Sqr(g1) + 4.25*M222*traceYuAdjYu*Sqr(g1) - 12
-      *Lambda3*M112*Sqr(g1d) - 6*Lambda4*M112*Sqr(g1d) + 18*Lambda7*M122*Sqr(
-      g1d) - 4*Lambda3*M112*Sqr(g1dp) - 2*Lambda4*M112*Sqr(g1dp) + 6*Lambda7*
-      M122*Sqr(g1dp) + 24*Lambda3*M112*Sqr(g2) + 12*Lambda4*M112*Sqr(g2) - 72*
-      Lambda7*M122*Sqr(g2) + 72*Lambda2*M222*Sqr(g2) + 11.25*M222*traceYuAdjYu*
-      Sqr(g2) + 1.125*M222*Sqr(g1)*Sqr(g2) + 18*Lambda7*M122*Sqr(g2u) - 36*
-      Lambda2*M222*Sqr(g2u) + 1.125*M222*Sqr(g1)*Sqr(g2u) - 2.25*M222*Sqr(g1d)*
-      Sqr(g2u) + 20.625*M222*Sqr(g2)*Sqr(g2u) + 0.5*g2up*Conj(MassB)*(11*MassB*
-      Cube(g2up) + 12*g1dp*Lambda7*Mu + 6*g2up*MassB*Sqr(g1dp) + 9*g2up*MassB*
-      Sqr(g2u) + 6*g2up*MassWB*Sqr(g2u)) + 6*Lambda7*M122*Sqr(g2up) - 12*
-      Lambda2*M222*Sqr(g2up) + 0.375*M222*Sqr(g1)*Sqr(g2up) - 0.75*M222*Sqr(
-      g1dp)*Sqr(g2up) + 1.875*M222*Sqr(g2)*Sqr(g2up) - 2.25*M222*Sqr(g2u)*Sqr(
-      g2up) + 1.5*Conj(MassWB)*(12*g1d*g2u*Lambda7*Mu - 24*MassWB*Quad(g2) + 13
-      *MassWB*Quad(g2u) + Sqr(g2u)*(6*MassWB*(Sqr(g1d) - 4*Sqr(g2)) + (2*MassB
-      + 3*MassWB)*Sqr(g2up))) + 40*M222*traceYuAdjYu*Sqr(g3) - 60*M222*Sqr(
-      Lambda2) - 8*M112*Sqr(Lambda3) - 2*M222*Sqr(Lambda3) - 8*M112*Sqr(Lambda4
-      ) - 2*M222*Sqr(Lambda4) - 12*M112*Sqr(Lambda5) - 3*M222*Sqr(Lambda5) - 18
-      *M112*Sqr(Lambda6) + 3*M222*Sqr(Lambda6) - 18*M112*Sqr(Lambda7) - 27*M222
-      *Sqr(Lambda7) + 6*g1d*g1dp*g2u*g2up*Sqr(Mu) - 2.16*Quad(g1)*Sqr(Mu) - 18*
-      Quad(g2)*Sqr(Mu) + 18*Quad(g2u)*Sqr(Mu) + 4*Quad(g2up)*Sqr(Mu) - 1.8*Sqr(
-      g1)*Sqr(g2u)*Sqr(Mu) + 10.5*Sqr(g1d)*Sqr(g2u)*Sqr(Mu) + 1.5*Sqr(g1dp)*Sqr
-      (g2u)*Sqr(Mu) - 21*Sqr(g2)*Sqr(g2u)*Sqr(Mu) - 0.6*Sqr(g1)*Sqr(g2up)*Sqr(
-      Mu) + 1.5*Sqr(g1d)*Sqr(g2up)*Sqr(Mu) + 4.5*Sqr(g1dp)*Sqr(g2up)*Sqr(Mu) -
-      3*Sqr(g2)*Sqr(g2up)*Sqr(Mu) + 6*Sqr(g2u)*Sqr(g2up)*Sqr(Mu)));
+   const double beta_M222_1 = Re(twoLoop*(-8*Lambda3*Lambda4*M112 + 6*Lambda5*
+      Lambda6*M122 + 12*Lambda5*Lambda7*M122 - 2*Lambda3*Lambda4*M222 - 24*
+      Lambda3*M112*traceYdAdjYd - 12*Lambda4*M112*traceYdAdjYd - 4.5*M222*
+      traceYdAdjYuYuAdjYd - 8*Lambda3*M112*traceYeAdjYe - 4*Lambda4*M112*
+      traceYeAdjYe - 72*Lambda2*M222*traceYuAdjYu - 13.5*M222*
+      traceYuAdjYuYuAdjYu - 18*M112*AbsSqr(Lambda7) - 27*M222*AbsSqr(Lambda7) +
+      3*(2*(Lambda3 + Lambda4)*M122 + Lambda6*(-6*M112 + M222))*Conj(Lambda6) +
+      36*Lambda2*M122*Conj(Lambda7) + 12*Lambda3*M122*Conj(Lambda7) + 12*
+      Lambda4*M122*Conj(Lambda7) + 18*M122*traceYdAdjYd*Conj(Lambda7) + 6*M122*
+      traceYeAdjYe*Conj(Lambda7) + 18*M122*traceYuAdjYu*Conj(Lambda7) + 6*
+      Lambda3*Lambda6*Conj(M122) + 6*Lambda4*Lambda6*Conj(M122) + 36*Lambda2*
+      Lambda7*Conj(M122) + 12*Lambda3*Lambda7*Conj(M122) + 12*Lambda4*Lambda7*
+      Conj(M122) + 18*Lambda7*traceYdAdjYd*Conj(M122) + 6*Lambda7*traceYeAdjYe*
+      Conj(M122) + 18*Lambda7*traceYuAdjYu*Conj(M122) - 3*Conj(Lambda5)*(4*
+      Lambda5*M112 + Lambda5*M222 - 2*Conj(Lambda6)*Conj(M122) - 4*Conj(Lambda7
+      )*Conj(M122)) + 6*g1dp*g2up*MassB*Conj(Lambda7)*Mu + 18*g1d*g2u*MassWB*
+      Conj(Lambda7)*Mu + 0.9*M112*Quad(g1) + 4.6425*M222*Quad(g1) + 7.5*M112*
+      Quad(g2) - 0.1875*M222*Quad(g2) - 5.625*M222*Quad(g2u) - 1.125*M222*Quad(
+      g2up) + 5.5*AbsSqr(MassB)*Quad(g2up) + 4.8*Lambda3*M112*Sqr(g1) + 2.4*
+      Lambda4*M112*Sqr(g1) + 14.4*Lambda2*M222*Sqr(g1) + 4.25*M222*traceYuAdjYu
+      *Sqr(g1) - 7.2*M122*Conj(Lambda7)*Sqr(g1) - 7.2*Lambda7*Conj(M122)*Sqr(g1
+      ) - 12*Lambda3*M112*Sqr(g1d) - 6*Lambda4*M112*Sqr(g1d) + 9*M122*Conj(
+      Lambda7)*Sqr(g1d) + 9*Lambda7*Conj(M122)*Sqr(g1d) - 4*Lambda3*M112*Sqr(
+      g1dp) - 2*Lambda4*M112*Sqr(g1dp) + 3*M122*Conj(Lambda7)*Sqr(g1dp) + 3*
+      Lambda7*Conj(M122)*Sqr(g1dp) + 24*Lambda3*M112*Sqr(g2) + 12*Lambda4*M112*
+      Sqr(g2) + 72*Lambda2*M222*Sqr(g2) + 11.25*M222*traceYuAdjYu*Sqr(g2) - 36*
+      M122*Conj(Lambda7)*Sqr(g2) - 36*Lambda7*Conj(M122)*Sqr(g2) + 1.125*M222*
+      Sqr(g1)*Sqr(g2) - 36*Lambda2*M222*Sqr(g2u) + 9*M122*Conj(Lambda7)*Sqr(g2u
+      ) + 9*Lambda7*Conj(M122)*Sqr(g2u) + 1.125*M222*Sqr(g1)*Sqr(g2u) - 2.25*
+      M222*Sqr(g1d)*Sqr(g2u) + 20.625*M222*Sqr(g2)*Sqr(g2u) - 12*Lambda2*M222*
+      Sqr(g2up) + 3*M122*Conj(Lambda7)*Sqr(g2up) + 3*Lambda7*Conj(M122)*Sqr(
+      g2up) + 0.375*M222*Sqr(g1)*Sqr(g2up) - 0.75*M222*Sqr(g1dp)*Sqr(g2up) + 3*
+      AbsSqr(MassB)*Sqr(g1dp)*Sqr(g2up) + 1.875*M222*Sqr(g2)*Sqr(g2up) - 2.25*
+      M222*Sqr(g2u)*Sqr(g2up) + 4.5*AbsSqr(MassB)*Sqr(g2u)*Sqr(g2up) + 40*M222*
+      traceYuAdjYu*Sqr(g3) - 60*M222*Sqr(Lambda2) - 8*M112*Sqr(Lambda3) - 2*
+      M222*Sqr(Lambda3) - 8*M112*Sqr(Lambda4) - 2*M222*Sqr(Lambda4) + 6*g1d*
+      g1dp*g2u*g2up*Sqr(Mu) - 2.16*Quad(g1)*Sqr(Mu) - 18*Quad(g2)*Sqr(Mu) + 18*
+      Quad(g2u)*Sqr(Mu) + 4*Quad(g2up)*Sqr(Mu) - 1.8*Sqr(g1)*Sqr(g2u)*Sqr(Mu) +
+      10.5*Sqr(g1d)*Sqr(g2u)*Sqr(Mu) + 1.5*Sqr(g1dp)*Sqr(g2u)*Sqr(Mu) - 21*Sqr(
+      g2)*Sqr(g2u)*Sqr(Mu) - 0.6*Sqr(g1)*Sqr(g2up)*Sqr(Mu) + 1.5*Sqr(g1d)*Sqr(
+      g2up)*Sqr(Mu) + 4.5*Sqr(g1dp)*Sqr(g2up)*Sqr(Mu) - 3*Sqr(g2)*Sqr(g2up)*Sqr
+      (Mu) + 6*Sqr(g2u)*Sqr(g2up)*Sqr(Mu)));
+   const double beta_M222_2 = Re(1.5*twoLoop*(2*g2up*Conj(MassB)*(2*g1dp*
+      Lambda7*Mu + g2up*MassWB*Sqr(g2u)) + Conj(MassWB)*(12*g1d*g2u*Lambda7*Mu
+      - 24*MassWB*Quad(g2) + 13*MassWB*Quad(g2u) + Sqr(g2u)*(6*MassWB*(Sqr(g1d)
+      - 4*Sqr(g2)) + (2*MassB + 3*MassWB)*Sqr(g2up)))));
+
+   beta_M222 = beta_M222_1 + beta_M222_2;
 
 
    return beta_M222;

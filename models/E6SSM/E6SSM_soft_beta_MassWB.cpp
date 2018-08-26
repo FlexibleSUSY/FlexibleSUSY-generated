@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:58:51
+// File generated at Sun 26 Aug 2018 14:19:46
 
 #include "E6SSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -89,19 +89,19 @@ double E6SSM_soft_parameters::calc_beta_MassWB_2_loop(const Soft_traces& soft_tr
    const double traceYdAdjYd = TRACE_STRUCT.traceYdAdjYd;
    const double traceYeAdjYe = TRACE_STRUCT.traceYeAdjYe;
    const double traceYuAdjYu = TRACE_STRUCT.traceYuAdjYu;
-   const double traceLambda12AdjLambda12 =
-      TRACE_STRUCT.traceLambda12AdjLambda12;
+   const double traceLambda12AdjLambda12 = TRACE_STRUCT.
+      traceLambda12AdjLambda12;
    const double traceAdjYdTYd = TRACE_STRUCT.traceAdjYdTYd;
    const double traceAdjYeTYe = TRACE_STRUCT.traceAdjYeTYe;
    const double traceAdjYuTYu = TRACE_STRUCT.traceAdjYuTYu;
-   const double traceAdjLambda12TLambda12 =
-      TRACE_STRUCT.traceAdjLambda12TLambda12;
+   const double traceAdjLambda12TLambda12 = TRACE_STRUCT.
+      traceAdjLambda12TLambda12;
 
 
    double beta_MassWB;
 
-   beta_MassWB = Re(0.4*twoLoop*Sqr(g2)*(10*traceAdjLambda12TLambda12 +
-      30*traceAdjYdTYd + 10*traceAdjYeTYe + 30*traceAdjYuTYu - 10*MassWB*
+   beta_MassWB = Re(0.4*twoLoop*Sqr(g2)*(10*traceAdjLambda12TLambda12 + 30*
+      traceAdjYdTYd + 10*traceAdjYeTYe + 30*traceAdjYuTYu - 10*MassWB*
       traceLambda12AdjLambda12 - 30*MassWB*traceYdAdjYd - 10*MassWB*
       traceYeAdjYe - 30*MassWB*traceYuAdjYu + 18*(MassB + MassWB)*Sqr(g1) + 460
       *MassWB*Sqr(g2) + 120*MassG*Sqr(g3) + 120*MassWB*Sqr(g3) + 17*MassBp*Sqr(

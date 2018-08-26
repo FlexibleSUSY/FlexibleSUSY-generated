@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:47:15
+// File generated at Sun 26 Aug 2018 14:58:18
 
 #ifndef NUHMSSM_susy_parameters_H
 #define NUHMSSM_susy_parameters_H
@@ -39,10 +39,9 @@ namespace flexiblesusy {
 class NUHMSSM_susy_parameters : public Beta_function {
 public:
    explicit NUHMSSM_susy_parameters(const NUHMSSM_input_parameters& input_ = NUHMSSM_input_parameters());
-   NUHMSSM_susy_parameters(double scale_, int loops_, int thresholds_, const NUHMSSM_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
-   , const Eigen::Matrix<double,3,3>& Yu_, double Mu_, double g1_, double g2_,
-   double g3_, double vd_, double vu_
-);
+   NUHMSSM_susy_parameters(double scale_, int loops_, int thresholds_, const NUHMSSM_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_,
+   const Eigen::Matrix<double,3,3>& Yu_, double Mu_, double g1_, double g2_,
+   double g3_, double vd_, double vu_);
    NUHMSSM_susy_parameters(const NUHMSSM_susy_parameters&) = default;
    NUHMSSM_susy_parameters(NUHMSSM_susy_parameters&&) = default;
    virtual ~NUHMSSM_susy_parameters() = default;

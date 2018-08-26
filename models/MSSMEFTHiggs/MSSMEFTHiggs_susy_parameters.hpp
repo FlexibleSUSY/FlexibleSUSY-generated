@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 16:38:04
+// File generated at Sun 26 Aug 2018 14:04:13
 
 #ifndef MSSMEFTHiggs_susy_parameters_H
 #define MSSMEFTHiggs_susy_parameters_H
@@ -39,10 +39,9 @@ namespace flexiblesusy {
 class MSSMEFTHiggs_susy_parameters : public Beta_function {
 public:
    explicit MSSMEFTHiggs_susy_parameters(const MSSMEFTHiggs_input_parameters& input_ = MSSMEFTHiggs_input_parameters());
-   MSSMEFTHiggs_susy_parameters(double scale_, int loops_, int thresholds_, const MSSMEFTHiggs_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
-   , const Eigen::Matrix<double,3,3>& Yu_, double Mu_, double g1_, double g2_,
-   double g3_, double vd_, double vu_
-);
+   MSSMEFTHiggs_susy_parameters(double scale_, int loops_, int thresholds_, const MSSMEFTHiggs_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_,
+   const Eigen::Matrix<double,3,3>& Yu_, double Mu_, double g1_, double g2_,
+   double g3_, double vd_, double vu_);
    MSSMEFTHiggs_susy_parameters(const MSSMEFTHiggs_susy_parameters&) = default;
    MSSMEFTHiggs_susy_parameters(MSSMEFTHiggs_susy_parameters&&) = default;
    virtual ~MSSMEFTHiggs_susy_parameters() = default;

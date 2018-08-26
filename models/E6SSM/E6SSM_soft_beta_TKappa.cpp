@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:57:59
+// File generated at Sun 26 Aug 2018 14:18:40
 
 #include "E6SSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -70,11 +70,11 @@ typename Eigen::MatrixBase<Derived>::PlainObject operator-(double n, const Eigen
 Eigen::Matrix<double,3,3> E6SSM_soft_parameters::calc_beta_TKappa_1_loop(const Soft_traces& soft_traces) const
 {
    const double traceAdjKappaTKappa = TRACE_STRUCT.traceAdjKappaTKappa;
-   const double traceAdjLambda12TLambda12 =
-      TRACE_STRUCT.traceAdjLambda12TLambda12;
+   const double traceAdjLambda12TLambda12 = TRACE_STRUCT.
+      traceAdjLambda12TLambda12;
    const double traceKappaAdjKappa = TRACE_STRUCT.traceKappaAdjKappa;
-   const double traceLambda12AdjLambda12 =
-      TRACE_STRUCT.traceLambda12AdjLambda12;
+   const double traceLambda12AdjLambda12 = TRACE_STRUCT.
+      traceLambda12AdjLambda12;
 
 
    Eigen::Matrix<double,3,3> beta_TKappa;
@@ -84,8 +84,8 @@ Eigen::Matrix<double,3,3> E6SSM_soft_parameters::calc_beta_TKappa_1_loop(const S
       ) - 5.333333333333333*Sqr(g3) - 1.9*Sqr(gN))*TKappa + 0.06666666666666667
       *Kappa*(90*traceAdjKappaTKappa + 60*traceAdjLambda12TLambda12 + 8*MassB*
       Sqr(g1) + 160*MassG*Sqr(g3) + 57*MassBp*Sqr(gN) + 60*Conj(Lambdax)*
-      TLambdax) + 3*(Kappa*(Kappa).adjoint()*TKappa) + 3*(TKappa*(Kappa)
-      .adjoint()*Kappa))).real();
+      TLambdax) + 3*(Kappa*(Kappa).adjoint()*TKappa) + 3*(TKappa*(Kappa).
+      adjoint()*Kappa))).real();
 
 
    return beta_TKappa;
@@ -99,8 +99,8 @@ Eigen::Matrix<double,3,3> E6SSM_soft_parameters::calc_beta_TKappa_1_loop(const S
 Eigen::Matrix<double,3,3> E6SSM_soft_parameters::calc_beta_TKappa_2_loop(const Soft_traces& soft_traces) const
 {
    const double traceKappaAdjKappa = TRACE_STRUCT.traceKappaAdjKappa;
-   const double traceLambda12AdjLambda12 =
-      TRACE_STRUCT.traceLambda12AdjLambda12;
+   const double traceLambda12AdjLambda12 = TRACE_STRUCT.
+      traceLambda12AdjLambda12;
    const double traceYdAdjYd = TRACE_STRUCT.traceYdAdjYd;
    const double traceYeAdjYe = TRACE_STRUCT.traceYeAdjYe;
    const double traceYuAdjYu = TRACE_STRUCT.traceYuAdjYu;
@@ -108,24 +108,24 @@ Eigen::Matrix<double,3,3> E6SSM_soft_parameters::calc_beta_TKappa_2_loop(const S
    const double traceAdjYeTYe = TRACE_STRUCT.traceAdjYeTYe;
    const double traceAdjYuTYu = TRACE_STRUCT.traceAdjYuTYu;
    const double traceAdjKappaTKappa = TRACE_STRUCT.traceAdjKappaTKappa;
-   const double traceAdjLambda12TLambda12 =
-      TRACE_STRUCT.traceAdjLambda12TLambda12;
-   const double traceKappaAdjKappaTKappaAdjKappa =
-      TRACE_STRUCT.traceKappaAdjKappaTKappaAdjKappa;
-   const double traceLambda12AdjLambda12TLambda12AdjLambda12 =
-      TRACE_STRUCT.traceLambda12AdjLambda12TLambda12AdjLambda12;
-   const double traceKappaAdjKappaKappaAdjKappa =
-      TRACE_STRUCT.traceKappaAdjKappaKappaAdjKappa;
-   const double traceLambda12AdjLambda12Lambda12AdjLambda12 =
-      TRACE_STRUCT.traceLambda12AdjLambda12Lambda12AdjLambda12;
+   const double traceAdjLambda12TLambda12 = TRACE_STRUCT.
+      traceAdjLambda12TLambda12;
+   const double traceKappaAdjKappaTKappaAdjKappa = TRACE_STRUCT.
+      traceKappaAdjKappaTKappaAdjKappa;
+   const double traceLambda12AdjLambda12TLambda12AdjLambda12 = TRACE_STRUCT.
+      traceLambda12AdjLambda12TLambda12AdjLambda12;
+   const double traceKappaAdjKappaKappaAdjKappa = TRACE_STRUCT.
+      traceKappaAdjKappaKappaAdjKappa;
+   const double traceLambda12AdjLambda12Lambda12AdjLambda12 = TRACE_STRUCT.
+      traceLambda12AdjLambda12Lambda12AdjLambda12;
 
 
    Eigen::Matrix<double,3,3> beta_TKappa;
 
-   beta_TKappa = (twoLoop*(-0.0022222222222222222*Kappa*(4672*MassB*Quad(
-      g1) + 25600*MassG*Quad(g3) + 240*Sqr(g3)*(60*(-traceAdjKappaTKappa +
-      MassG*traceKappaAdjKappa) + 13*(MassBp + MassG)*Sqr(gN)) + 9*(3933*MassBp
-      *Quad(gN) + 200*(6*traceKappaAdjKappaTKappaAdjKappa + 4*
+   beta_TKappa = (twoLoop*(-0.0022222222222222222*Kappa*(4672*MassB*Quad(g1) +
+      25600*MassG*Quad(g3) + 240*Sqr(g3)*(60*(-traceAdjKappaTKappa + MassG*
+      traceKappaAdjKappa) + 13*(MassBp + MassG)*Sqr(gN)) + 9*(3933*MassBp*Quad(
+      gN) + 200*(6*traceKappaAdjKappaTKappaAdjKappa + 4*
       traceLambda12AdjLambda12TLambda12AdjLambda12 - 3*(
       traceAdjLambda12TLambda12 - MassWB*traceLambda12AdjLambda12)*Sqr(g2)) +
       60*(3*traceAdjKappaTKappa + 2*traceAdjLambda12TLambda12 - 3*MassBp*
@@ -152,8 +152,8 @@ Eigen::Matrix<double,3,3> E6SSM_soft_parameters::calc_beta_TKappa_2_loop(const S
       traceKappaAdjKappa - 6*traceLambda12AdjLambda12 - 6*AbsSqr(Lambdax) + 4*
       Sqr(gN))*(TKappa*(Kappa).adjoint()*Kappa) - 3*(Kappa*(Kappa).adjoint()*
       Kappa*(Kappa).adjoint()*TKappa) - 4*(Kappa*(Kappa).adjoint()*TKappa*(
-      Kappa).adjoint()*Kappa) - 3*(TKappa*(Kappa).adjoint()*Kappa*(Kappa)
-      .adjoint()*Kappa))).real();
+      Kappa).adjoint()*Kappa) - 3*(TKappa*(Kappa).adjoint()*Kappa*(Kappa).
+      adjoint()*Kappa))).real();
 
 
    return beta_TKappa;

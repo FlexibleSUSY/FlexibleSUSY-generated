@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:51:27
+// File generated at Sun 26 Aug 2018 15:32:10
 
 #ifndef MRSSM_SUSY_SCALE_CONSTRAINT_H
 #define MRSSM_SUSY_SCALE_CONSTRAINT_H

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 16:27:36
+// File generated at Sun 26 Aug 2018 14:04:21
 
 #include "NMSSMEFTHiggs_slha_io.hpp"
 #include "NMSSMEFTHiggs_input_parameters.hpp"
@@ -845,9 +845,8 @@ void NMSSMEFTHiggs_slha_io::fill_physical(NMSSMEFTHiggs_physical& physical) cons
 double NMSSMEFTHiggs_slha_io::read_scale() const
 {
    static const std::array<std::string, 15> drbar_blocks =
-      { "gauge", "Yu", "Yd", "Ye", "Te", "Td", "Tu", "MSQ2", "MSE2", "MSL2",
-   "MSU2", "MSD2", "MSOFT", "HMIX", "NMSSMRUN" }
-;
+      { "gauge", "Yu", "Yd", "Ye", "Te", "Td", "Tu", "MSQ2", "MSE2", "MSL2", "MSU2",
+   "MSD2", "MSOFT", "HMIX", "NMSSMRUN" };
 
    double scale = 0.;
 

@@ -16,15 +16,15 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 14:59:45
+// File generated at Sun 26 Aug 2018 13:49:40
 
 /**
  * @file MSSMNoFVHimalaya_ewsb_solver_interface.hpp
  *
  * @brief contains interface for EWSB solver
  *
- * This file was generated at Mon 5 Mar 2018 14:59:45 with FlexibleSUSY
- * 2.1.0 (git commit: 8f20f6c9c42c159c1588fbc0bb3e15ce5ab6ace3) and SARAH 4.12.3 .
+ * This file was generated at Sun 26 Aug 2018 13:49:40 with FlexibleSUSY
+ * 2.2.0 (git commit: 8489097de2d6938a6da0149378457b5ad13d9425) and SARAH 4.13.0 .
  */
 
 #ifndef MSSMNoFVHimalaya_EWSB_SOLVER_INTERFACE_H

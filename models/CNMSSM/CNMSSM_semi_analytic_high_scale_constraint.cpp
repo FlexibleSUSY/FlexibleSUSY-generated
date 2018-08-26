@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 15:30:33
+// File generated at Sun 26 Aug 2018 13:59:41
 
 #include "CNMSSM_semi_analytic_high_scale_constraint.hpp"
 #include "CNMSSM_semi_analytic_model.hpp"
@@ -70,6 +70,7 @@ void CNMSSM_high_scale_constraint<Semi_analytic>::apply()
 {
    check_model_ptr();
 
+   
 
 
    update_scale();
@@ -340,6 +341,7 @@ void CNMSSM_high_scale_constraint<Semi_analytic>::initialize()
 {
    check_model_ptr();
 
+   
    initial_scale_guess = 2.e16;
 
    scale = initial_scale_guess;

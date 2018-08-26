@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:45:10
+// File generated at Sun 26 Aug 2018 14:11:01
 
 #include "SM_slha_io.hpp"
 #include "SM_input_parameters.hpp"
@@ -640,8 +640,7 @@ void SM_slha_io::fill_physical(SM_physical& physical) const
 double SM_slha_io::read_scale() const
 {
    static const std::array<std::string, 6> drbar_blocks =
-      { "gauge", "Yu", "Yd", "Ye", "SM", "HMIX" }
-;
+      { "gauge", "Yu", "Yd", "Ye", "SM", "HMIX" };
 
    double scale = 0.;
 

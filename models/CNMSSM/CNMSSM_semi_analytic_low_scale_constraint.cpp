@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 15:30:35
+// File generated at Sun 26 Aug 2018 13:59:44
 
 #include "CNMSSM_semi_analytic_low_scale_constraint.hpp"
 #include "CNMSSM_semi_analytic_model.hpp"
@@ -83,12 +83,14 @@ void CNMSSM_low_scale_constraint<Semi_analytic>::apply()
 {
    check_model_ptr();
 
+   
 
 
    model->calculate_DRbar_masses();
    update_scale();
    qedqcd.run_to(scale, 1.0e-5);
    calculate_DRbar_gauge_couplings();
+   calculate_running_SM_masses();
 
    const auto TanBeta = INPUTPARAMETER(TanBeta);
    const auto g1 = MODELPARAMETER(g1);
@@ -97,14 +99,15 @@ void CNMSSM_low_scale_constraint<Semi_analytic>::apply()
    calculate_Yu_DRbar();
    calculate_Yd_DRbar();
    calculate_Ye_DRbar();
-   MODEL->set_vd(Re((2*MZDRbar)/(Sqrt(0.6*Sqr(g1) + Sqr(g2))*Sqrt(1 + Sqr(
+   MODEL->set_vd(Re((2*MZDRbar)/(Sqrt(0.6*Sqr(g1) + Sqr(g2))*Sqrt(1 + Sqr(TanBeta)
+      ))));
+   MODEL->set_vu(Re((2*MZDRbar*TanBeta)/(Sqrt(0.6*Sqr(g1) + Sqr(g2))*Sqrt(1 + Sqr(
       TanBeta)))));
-   MODEL->set_vu(Re((2*MZDRbar*TanBeta)/(Sqrt(0.6*Sqr(g1) + Sqr(g2))*Sqrt(1 +
-      Sqr(TanBeta)))));
    MODEL->set_g1(new_g1);
    MODEL->set_g2(new_g2);
    MODEL->set_g3(new_g3);
    if (is_initial_guess) {
+
    }
 
 
@@ -125,6 +128,9 @@ void CNMSSM_low_scale_constraint<Semi_analytic>::clear()
    qedqcd = softsusy::QedQcd();
    ckm.setIdentity();
    pmns.setIdentity();
+   upQuarksDRbar.setZero();
+   downQuarksDRbar.setZero();
+   downLeptonsDRbar.setZero();
    neutrinoDRbar.setZero();
    mW_run = 0.;
    mZ_run = 0.;
@@ -147,7 +153,10 @@ void CNMSSM_low_scale_constraint<Semi_analytic>::initialize()
 
    ckm = qedqcd.get_complex_ckm();
    pmns = qedqcd.get_complex_pmns();
-   neutrinoDRbar = Eigen::Matrix<double,3,3>::Zero();
+   upQuarksDRbar.setZero();
+   downQuarksDRbar.setZero();
+   downLeptonsDRbar.setZero();
+   neutrinoDRbar.setZero();
    mW_run = 0.;
    mZ_run = 0.;
    AlphaS = 0.;
@@ -225,20 +234,19 @@ double CNMSSM_low_scale_constraint<Semi_analytic>::calculate_theta_w()
    sm_pars.alpha_s = calculate_alpha_s_SM5_at(qedqcd, qedqcd.displayPoleMt());
 
    const int number_of_iterations =
-       std::max(20, static_cast<int>(std::abs(-log10(MODEL->get_precision()
-          ) * 10)));
+       std::max(20, static_cast<int>(std::abs(-log10(MODEL->get_precision()) * 10)
+          ));
 
    CNMSSM_weinberg_angle weinberg(MODEL, sm_pars);
-   weinberg.set_number_of_loops(MODEL->get_threshold_corrections().sin_theta_w)
-      ;
+   weinberg.set_number_of_loops(MODEL->get_threshold_corrections().sin_theta_w);
    weinberg.set_number_of_iterations(number_of_iterations);
 
    try {
       const auto result = weinberg.calculate();
       THETAW = ArcSin(result.first);
 
-      if (MODEL->get_thresholds() && MODEL->get_threshold_corrections()
-         .sin_theta_w > 0)
+      if (MODEL->get_thresholds() && MODEL->get_threshold_corrections().
+         sin_theta_w > 0)
          qedqcd.setPoleMW(result.second);
 
       MODEL->get_problems().unflag_no_sinThetaW_convergence();
@@ -246,7 +254,6 @@ double CNMSSM_low_scale_constraint<Semi_analytic>::calculate_theta_w()
       VERBOSE_MSG(e.what());
       MODEL->get_problems().flag_no_sinThetaW_convergence();
    }
-
 
    return theta_w;
 }
@@ -261,8 +268,7 @@ void CNMSSM_low_scale_constraint<Semi_analytic>::calculate_DRbar_gauge_couplings
    new_g3 = 3.5449077018110318*Sqrt(AlphaS);
 
    if (IsFinite(new_g1)) {
-      model->get_problems().unflag_non_perturbative_parameter(
-         CNMSSM_info::g1);
+      model->get_problems().unflag_non_perturbative_parameter(CNMSSM_info::g1);
    } else {
       model->get_problems().flag_non_perturbative_parameter(
          CNMSSM_info::g1, new_g1, get_scale());
@@ -270,14 +276,12 @@ void CNMSSM_low_scale_constraint<Semi_analytic>::calculate_DRbar_gauge_couplings
    }
 
    if (IsFinite(new_g2)) {
-      model->get_problems().unflag_non_perturbative_parameter(
-         CNMSSM_info::g2);
+      model->get_problems().unflag_non_perturbative_parameter(CNMSSM_info::g2);
    } else {
       model->get_problems().flag_non_perturbative_parameter(
          CNMSSM_info::g2, new_g2, get_scale());
       new_g2 = Electroweak_constants::g2;
    }
-
 }
 
 double CNMSSM_low_scale_constraint<Semi_analytic>::calculate_delta_alpha_em(double alphaEm) const
@@ -286,33 +290,32 @@ double CNMSSM_low_scale_constraint<Semi_analytic>::calculate_delta_alpha_em(doub
 
    const double currentScale = model->get_scale();
    const auto MCha = MODELPARAMETER(MCha);
-   const auto MFu = MODELPARAMETER(MFu);
    const auto MHpm = MODELPARAMETER(MHpm);
    const auto MSd = MODELPARAMETER(MSd);
    const auto MSe = MODELPARAMETER(MSe);
    const auto MSu = MODELPARAMETER(MSu);
+   const auto MFu = MODELPARAMETER(MFu);
 
-   const double delta_alpha_em_SM = -0.28294212105225836*alphaEm*FiniteLog(Abs(
-      MFu(2)/currentScale));
+   const double delta_alpha_em_SM = -0.28294212105225836*alphaEm*FiniteLog(Abs(MFu
+      (2)/currentScale));
 
-   const double delta_alpha_em = 0.15915494309189535*alphaEm*(
-      0.3333333333333333 - 1.3333333333333333*FiniteLog(Abs(MCha(0)/currentScale))
-      - 1.3333333333333333*FiniteLog(Abs(MCha(1)/currentScale)) -
-      0.3333333333333333*FiniteLog(Abs(MHpm(1)/currentScale)) - 0.1111111111111111
-      *FiniteLog(Abs(MSd(0)/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(
-      1)/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(2)/currentScale)) -
-      0.1111111111111111*FiniteLog(Abs(MSd(3)/currentScale)) - 0.1111111111111111
-      *FiniteLog(Abs(MSd(4)/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(
-      5)/currentScale)) - 0.3333333333333333*FiniteLog(Abs(MSe(0)/currentScale)) -
-      0.3333333333333333*FiniteLog(Abs(MSe(1)/currentScale)) - 0.3333333333333333
-      *FiniteLog(Abs(MSe(2)/currentScale)) - 0.3333333333333333*FiniteLog(Abs(MSe(
-      3)/currentScale)) - 0.3333333333333333*FiniteLog(Abs(MSe(4)/currentScale)) -
-      0.3333333333333333*FiniteLog(Abs(MSe(5)/currentScale)) - 0.4444444444444444
-      *FiniteLog(Abs(MSu(0)/currentScale)) - 0.4444444444444444*FiniteLog(Abs(MSu(
-      1)/currentScale)) - 0.4444444444444444*FiniteLog(Abs(MSu(2)/currentScale)) -
-      0.4444444444444444*FiniteLog(Abs(MSu(3)/currentScale)) - 0.4444444444444444
-      *FiniteLog(Abs(MSu(4)/currentScale)) - 0.4444444444444444*FiniteLog(Abs(MSu(
-      5)/currentScale)));
+   const double delta_alpha_em = 0.15915494309189535*alphaEm*(0.3333333333333333 -
+      1.3333333333333333*FiniteLog(Abs(MCha(0)/currentScale)) - 1.3333333333333333
+      *FiniteLog(Abs(MCha(1)/currentScale)) - 0.3333333333333333*FiniteLog(Abs(
+      MHpm(1)/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(0)/
+      currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(1)/currentScale)) -
+      0.1111111111111111*FiniteLog(Abs(MSd(2)/currentScale)) - 0.1111111111111111*
+      FiniteLog(Abs(MSd(3)/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(4
+      )/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(5)/currentScale)) -
+      0.3333333333333333*FiniteLog(Abs(MSe(0)/currentScale)) - 0.3333333333333333*
+      FiniteLog(Abs(MSe(1)/currentScale)) - 0.3333333333333333*FiniteLog(Abs(MSe(2
+      )/currentScale)) - 0.3333333333333333*FiniteLog(Abs(MSe(3)/currentScale)) -
+      0.3333333333333333*FiniteLog(Abs(MSe(4)/currentScale)) - 0.3333333333333333*
+      FiniteLog(Abs(MSe(5)/currentScale)) - 0.4444444444444444*FiniteLog(Abs(MSu(0
+      )/currentScale)) - 0.4444444444444444*FiniteLog(Abs(MSu(1)/currentScale)) -
+      0.4444444444444444*FiniteLog(Abs(MSu(2)/currentScale)) - 0.4444444444444444*
+      FiniteLog(Abs(MSu(3)/currentScale)) - 0.4444444444444444*FiniteLog(Abs(MSu(4
+      )/currentScale)) - 0.4444444444444444*FiniteLog(Abs(MSu(5)/currentScale)));
 
    return delta_alpha_em + delta_alpha_em_SM;
 
@@ -323,17 +326,17 @@ double CNMSSM_low_scale_constraint<Semi_analytic>::calculate_delta_alpha_s(doubl
    check_model_ptr();
 
    const double currentScale = model->get_scale();
-   const auto MFu = MODELPARAMETER(MFu);
    const auto MSd = MODELPARAMETER(MSd);
    const auto MSu = MODELPARAMETER(MSu);
+   const auto MFu = MODELPARAMETER(MFu);
    const auto MGlu = MODELPARAMETER(MGlu);
 
-   const double delta_alpha_s_SM = -0.1061032953945969*alphaS*FiniteLog(Abs(MFu
-      (2)/currentScale));
+   const double delta_alpha_s_SM = -0.1061032953945969*alphaS*FiniteLog(Abs(MFu(2)
+      /currentScale));
 
-   const double delta_alpha_s = 0.15915494309189535*alphaS*(0.5 - 2*FiniteLog(
-      Abs(MGlu/currentScale)) - 0.16666666666666666*FiniteLog(Abs(MSd(0)
-      /currentScale)) - 0.16666666666666666*FiniteLog(Abs(MSd(1)/currentScale)) -
+   const double delta_alpha_s = 0.15915494309189535*alphaS*(0.5 - 2*FiniteLog(Abs(
+      MGlu/currentScale)) - 0.16666666666666666*FiniteLog(Abs(MSd(0)/currentScale)
+      ) - 0.16666666666666666*FiniteLog(Abs(MSd(1)/currentScale)) -
       0.16666666666666666*FiniteLog(Abs(MSd(2)/currentScale)) -
       0.16666666666666666*FiniteLog(Abs(MSd(3)/currentScale)) -
       0.16666666666666666*FiniteLog(Abs(MSd(4)/currentScale)) -
@@ -360,8 +363,51 @@ double CNMSSM_low_scale_constraint<Semi_analytic>::calculate_alpha_s_SM5_at(
    return qedqcd_tmp.displayAlpha(softsusy::ALPHAS);
 }
 
+void CNMSSM_low_scale_constraint<Semi_analytic>::calculate_running_SM_masses()
+{
+   check_model_ptr();
+
+   upQuarksDRbar.setZero();
+   upQuarksDRbar(0,0) = qedqcd.displayMass(softsusy::mUp);
+   upQuarksDRbar(1,1) = qedqcd.displayMass(softsusy::mCharm);
+   upQuarksDRbar(2,2) = qedqcd.displayPoleMt();
+
+   downQuarksDRbar.setZero();
+   downQuarksDRbar(0,0) = qedqcd.displayMass(softsusy::mDown);
+   downQuarksDRbar(1,1) = qedqcd.displayMass(softsusy::mStrange);
+   downQuarksDRbar(2,2) = qedqcd.displayMass(softsusy::mBottom);
+
+   downLeptonsDRbar.setZero();
+   downLeptonsDRbar(0,0) = qedqcd.displayPoleMel();
+   downLeptonsDRbar(1,1) = qedqcd.displayPoleMmuon();
+   downLeptonsDRbar(2,2) = qedqcd.displayPoleMtau();
+
+   neutrinoDRbar.setZero();
+   neutrinoDRbar(0,0) = qedqcd.displayNeutrinoPoleMass(1);
+   neutrinoDRbar(1,1) = qedqcd.displayNeutrinoPoleMass(2);
+   neutrinoDRbar(2,2) = qedqcd.displayNeutrinoPoleMass(3);
+
+   if (model->get_thresholds() && model->get_threshold_corrections().mt > 0) {
+      upQuarksDRbar(2,2) = MODEL->calculate_MFu_DRbar(qedqcd.displayPoleMt(), 2);
+   }
+
+   if (model->get_thresholds() && model->get_threshold_corrections().mb > 0) {
+      downQuarksDRbar(2,2) = MODEL->calculate_MFd_DRbar(qedqcd.displayMass(softsusy::mBottom), 2);
+   }
+
+   if (model->get_thresholds()) {
+      downLeptonsDRbar(0,0) = MODEL->calculate_MFe_DRbar(qedqcd.displayMass(softsusy::mElectron), 0);
+      downLeptonsDRbar(1,1) = MODEL->calculate_MFe_DRbar(qedqcd.displayMass(softsusy::mMuon), 1);
+   }
+
+   if (model->get_thresholds() && model->get_threshold_corrections().mtau > 0) {
+      downLeptonsDRbar(2,2) = MODEL->calculate_MFe_DRbar(qedqcd.displayMass(softsusy::mTau), 2);
+   }
+}
+
 void CNMSSM_low_scale_constraint<Semi_analytic>::calculate_DRbar_yukawa_couplings()
 {
+   calculate_running_SM_masses();
    calculate_Yu_DRbar();
    calculate_Yd_DRbar();
    calculate_Ye_DRbar();
@@ -370,15 +416,6 @@ void CNMSSM_low_scale_constraint<Semi_analytic>::calculate_DRbar_yukawa_coupling
 void CNMSSM_low_scale_constraint<Semi_analytic>::calculate_Yu_DRbar()
 {
    check_model_ptr();
-
-   Eigen::Matrix<std::complex<double>,3,3> upQuarksDRbar(ZEROMATRIXCOMPLEX(3,3));
-   upQuarksDRbar(0,0)      = qedqcd.displayMass(softsusy::mUp);
-   upQuarksDRbar(1,1)      = qedqcd.displayMass(softsusy::mCharm);
-   upQuarksDRbar(2,2)      = qedqcd.displayPoleMt();
-
-   if (model->get_thresholds() && model->get_threshold_corrections().mt > 0) {
-      upQuarksDRbar(2,2) = MODEL->calculate_MFu_DRbar(qedqcd.displayPoleMt(), 2);
-   }
 
    const auto vu = MODELPARAMETER(vu);
    MODEL->set_Yu((((1.4142135623730951*upQuarksDRbar)/vu).transpose()).real());
@@ -389,18 +426,8 @@ void CNMSSM_low_scale_constraint<Semi_analytic>::calculate_Yd_DRbar()
 {
    check_model_ptr();
 
-   Eigen::Matrix<std::complex<double>,3,3> downQuarksDRbar(ZEROMATRIXCOMPLEX(3,3));
-   downQuarksDRbar(0,0)   = qedqcd.displayMass(softsusy::mDown);
-   downQuarksDRbar(1,1)   = qedqcd.displayMass(softsusy::mStrange);
-   downQuarksDRbar(2,2)   = qedqcd.displayMass(softsusy::mBottom);
-
-   if (model->get_thresholds() && model->get_threshold_corrections().mb > 0) {
-      downQuarksDRbar(2,2) = MODEL->calculate_MFd_DRbar(qedqcd.displayMass(softsusy::mBottom), 2);
-   }
-
    const auto vd = MODELPARAMETER(vd);
-   MODEL->set_Yd((((1.4142135623730951*downQuarksDRbar)/vd).transpose()).real()
-      );
+   MODEL->set_Yd((((1.4142135623730951*downQuarksDRbar)/vd).transpose()).real());
 
 }
 
@@ -408,32 +435,9 @@ void CNMSSM_low_scale_constraint<Semi_analytic>::calculate_Ye_DRbar()
 {
    check_model_ptr();
 
-   Eigen::Matrix<std::complex<double>,3,3> downLeptonsDRbar(ZEROMATRIXCOMPLEX(3,3));
-   downLeptonsDRbar(0,0) = qedqcd.displayPoleMel();
-   downLeptonsDRbar(1,1) = qedqcd.displayPoleMmuon();
-   downLeptonsDRbar(2,2) = qedqcd.displayPoleMtau();
-
-   if (model->get_thresholds()) {
-      downLeptonsDRbar(0,0) = MODEL->calculate_MFe_DRbar(qedqcd.displayMass(softsusy::mElectron), 0);
-      downLeptonsDRbar(1,1) = MODEL->calculate_MFe_DRbar(qedqcd.displayMass(softsusy::mMuon), 1);
-   }
-
-   if (model->get_thresholds() && model->get_threshold_corrections().mtau > 0) {
-      downLeptonsDRbar(2,2) = MODEL->calculate_MFe_DRbar(qedqcd.displayMass(softsusy::mTau), 2);
-   }
-
    const auto vd = MODELPARAMETER(vd);
-   MODEL->set_Ye((((1.4142135623730951*downLeptonsDRbar)/vd).transpose()).real(
-      ));
+   MODEL->set_Ye((((1.4142135623730951*downLeptonsDRbar)/vd).transpose()).real());
 
-}
-
-void CNMSSM_low_scale_constraint<Semi_analytic>::calculate_MNeutrino_DRbar()
-{
-   neutrinoDRbar.setZero();
-   neutrinoDRbar(0,0) = qedqcd.displayNeutrinoPoleMass(1);
-   neutrinoDRbar(1,1) = qedqcd.displayNeutrinoPoleMass(2);
-   neutrinoDRbar(2,2) = qedqcd.displayNeutrinoPoleMass(3);
 }
 
 void CNMSSM_low_scale_constraint<Semi_analytic>::check_model_ptr() const

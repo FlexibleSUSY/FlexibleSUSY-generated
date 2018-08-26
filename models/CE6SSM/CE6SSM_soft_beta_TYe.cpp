@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 16:03:45
+// File generated at Sun 26 Aug 2018 13:46:48
 
 #include "CE6SSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -77,11 +77,11 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_TYe_1_loop(const Sof
 
    Eigen::Matrix<double,3,3> beta_TYe;
 
-   beta_TYe = (oneOver16PiSqr*((3*traceYdAdjYd + traceYeAdjYe + AbsSqr(
-      Lambdax) - 1.8*Sqr(g1) - 3*Sqr(g2) - 0.7*Sqr(gN))*TYe + 0.2*Ye*(30*
-      traceAdjYdTYd + 10*traceAdjYeTYe + 18*MassB*Sqr(g1) + 30*MassWB*Sqr(g2) +
-      7*MassBp*Sqr(gN) + 10*Conj(Lambdax)*TLambdax) + 4*(Ye*Ye.adjoint()*TYe)
-      + 5*(TYe*Ye.adjoint()*Ye))).real();
+   beta_TYe = (oneOver16PiSqr*((3*traceYdAdjYd + traceYeAdjYe + AbsSqr(Lambdax)
+      - 1.8*Sqr(g1) - 3*Sqr(g2) - 0.7*Sqr(gN))*TYe + 0.2*Ye*(30*traceAdjYdTYd +
+      10*traceAdjYeTYe + 18*MassB*Sqr(g1) + 30*MassWB*Sqr(g2) + 7*MassBp*Sqr(gN
+      ) + 10*Conj(Lambdax)*TLambdax) + 4*(Ye*Ye.adjoint()*TYe) + 5*(TYe*Ye.
+      adjoint()*Ye))).real();
 
 
    return beta_TYe;
@@ -100,12 +100,12 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_TYe_2_loop(const Sof
    const double traceAdjYeTYe = TRACE_STRUCT.traceAdjYeTYe;
    const double traceYuAdjYu = TRACE_STRUCT.traceYuAdjYu;
    const double traceKappaAdjKappa = TRACE_STRUCT.traceKappaAdjKappa;
-   const double traceLambda12AdjLambda12 =
-      TRACE_STRUCT.traceLambda12AdjLambda12;
+   const double traceLambda12AdjLambda12 = TRACE_STRUCT.
+      traceLambda12AdjLambda12;
    const double traceAdjYuTYu = TRACE_STRUCT.traceAdjYuTYu;
    const double traceAdjKappaTKappa = TRACE_STRUCT.traceAdjKappaTKappa;
-   const double traceAdjLambda12TLambda12 =
-      TRACE_STRUCT.traceAdjLambda12TLambda12;
+   const double traceAdjLambda12TLambda12 = TRACE_STRUCT.
+      traceAdjLambda12TLambda12;
    const double traceYdAdjYdTYdAdjYd = TRACE_STRUCT.traceYdAdjYdTYdAdjYd;
    const double traceYdAdjYuTYuAdjYd = TRACE_STRUCT.traceYdAdjYuTYuAdjYd;
    const double traceYeAdjYeTYeAdjYe = TRACE_STRUCT.traceYeAdjYeTYeAdjYe;
@@ -119,7 +119,7 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_TYe_2_loop(const Sof
 
    beta_TYe = (twoLoop*(0.025*(-4*Ye*(360*traceYdAdjYdTYdAdjYd + 60*
       traceYdAdjYuTYuAdjYd + 120*traceYeAdjYeTYeAdjYe + 60*traceYuAdjYdTYdAdjYu
-      + 756*MassB*Quad(g1) + 660*MassWB*Quad(g2) + 273*MassBp*Quad(gN) - 320*
+       + 756*MassB*Quad(g1) + 660*MassWB*Quad(g2) + 273*MassBp*Quad(gN) - 320*
       traceAdjYdTYd*Sqr(g3) + 320*MassG*traceYdAdjYd*Sqr(g3) + 12*traceAdjYdTYd
       *Sqr(gN) + 4*traceAdjYeTYe*Sqr(gN) - 12*MassBp*traceYdAdjYd*Sqr(gN) - 4*
       MassBp*traceYeAdjYe*Sqr(gN) + 39*(MassBp + MassWB)*Sqr(g2)*Sqr(gN) + Sqr(

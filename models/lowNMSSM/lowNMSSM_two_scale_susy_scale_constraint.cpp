@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:22:59
+// File generated at Sun 26 Aug 2018 14:39:27
 
 #include "lowNMSSM_two_scale_susy_scale_constraint.hpp"
 #include "lowNMSSM_two_scale_model.hpp"
@@ -64,6 +64,7 @@ void lowNMSSM_susy_scale_constraint<Two_scale>::apply()
 {
    check_model_ptr();
 
+   
 
 
    model->calculate_DRbar_masses();

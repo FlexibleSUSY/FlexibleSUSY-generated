@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 15:30:19
+// File generated at Sun 26 Aug 2018 13:59:25
 
 #include "CNMSSM_info.hpp"
 
@@ -29,8 +29,8 @@ namespace CNMSSM_info {
    const double normalization_g2 = 1;
    const double normalization_g3 = 1;
 
-   const std::array<int, NUMBER_OF_PARTICLES> particle_multiplicities = {1, 1,
-      3, 6, 3, 6, 6, 3, 3, 2, 5, 2, 3, 3, 3, 1, 1, 1};
+   const std::array<int, NUMBER_OF_PARTICLES> particle_multiplicities = {1, 1, 3,
+      6, 3, 6, 6, 3, 3, 2, 5, 2, 3, 3, 3, 1, 1, 1};
 
    const std::array<std::string, NUMBER_OF_PARTICLES> particle_names = {"VG",
       "Glu", "Fv", "Sd", "Sv", "Su", "Se", "hh", "Ah", "Hpm", "Chi", "Cha", "Fe",
@@ -43,10 +43,10 @@ namespace CNMSSM_info {
 
    const std::array<std::string, NUMBER_OF_PARAMETERS> parameter_names = {
       "Yd(0,0)", "Yd(0,1)", "Yd(0,2)", "Yd(1,0)", "Yd(1,1)", "Yd(1,2)", "Yd(2,0)",
-      "Yd(2,1)", "Yd(2,2)", "Ye(0,0)", "Ye(0,1)", "Ye(0,2)", "Ye(1,0)", "Ye(1,1)"
-      , "Ye(1,2)", "Ye(2,0)", "Ye(2,1)", "Ye(2,2)", "Lambdax", "Kappa", "Yu(0,0)",
-      "Yu(0,1)", "Yu(0,2)", "Yu(1,0)", "Yu(1,1)", "Yu(1,2)", "Yu(2,0)", "Yu(2,1)"
-      , "Yu(2,2)", "g1", "g2", "g3", "vd", "vu", "vS", "TYd(0,0)", "TYd(0,1)",
+      "Yd(2,1)", "Yd(2,2)", "Ye(0,0)", "Ye(0,1)", "Ye(0,2)", "Ye(1,0)", "Ye(1,1)",
+      "Ye(1,2)", "Ye(2,0)", "Ye(2,1)", "Ye(2,2)", "Lambdax", "Kappa", "Yu(0,0)",
+      "Yu(0,1)", "Yu(0,2)", "Yu(1,0)", "Yu(1,1)", "Yu(1,2)", "Yu(2,0)", "Yu(2,1)",
+      "Yu(2,2)", "g1", "g2", "g3", "vd", "vu", "vS", "TYd(0,0)", "TYd(0,1)",
       "TYd(0,2)", "TYd(1,0)", "TYd(1,1)", "TYd(1,2)", "TYd(2,0)", "TYd(2,1)",
       "TYd(2,2)", "TYe(0,0)", "TYe(0,1)", "TYe(0,2)", "TYe(1,0)", "TYe(1,1)",
       "TYe(1,2)", "TYe(2,0)", "TYe(2,1)", "TYe(2,2)", "TLambdax", "TKappa",
@@ -62,26 +62,25 @@ namespace CNMSSM_info {
       "me2(2,2)", "ms2", "MassB", "MassWB", "MassG"};
 
    const std::array<std::string, NUMBER_OF_MIXINGS> particle_mixing_names = {
-      "ZD(0,0)", "ZD(0,1)", "ZD(0,2)", "ZD(0,3)", "ZD(0,4)", "ZD(0,5)", "ZD(1,0)"
-      , "ZD(1,1)", "ZD(1,2)", "ZD(1,3)", "ZD(1,4)", "ZD(1,5)", "ZD(2,0)",
-      "ZD(2,1)", "ZD(2,2)", "ZD(2,3)", "ZD(2,4)", "ZD(2,5)", "ZD(3,0)", "ZD(3,1)",
-      "ZD(3,2)", "ZD(3,3)", "ZD(3,4)", "ZD(3,5)", "ZD(4,0)", "ZD(4,1)", "ZD(4,2)"
-      , "ZD(4,3)", "ZD(4,4)", "ZD(4,5)", "ZD(5,0)", "ZD(5,1)", "ZD(5,2)",
-      "ZD(5,3)", "ZD(5,4)", "ZD(5,5)", "ZV(0,0)", "ZV(0,1)", "ZV(0,2)", "ZV(1,0)",
-      "ZV(1,1)", "ZV(1,2)", "ZV(2,0)", "ZV(2,1)", "ZV(2,2)", "ZU(0,0)", "ZU(0,1)"
-      , "ZU(0,2)", "ZU(0,3)", "ZU(0,4)", "ZU(0,5)", "ZU(1,0)", "ZU(1,1)",
-      "ZU(1,2)", "ZU(1,3)", "ZU(1,4)", "ZU(1,5)", "ZU(2,0)", "ZU(2,1)", "ZU(2,2)",
-      "ZU(2,3)", "ZU(2,4)", "ZU(2,5)", "ZU(3,0)", "ZU(3,1)", "ZU(3,2)", "ZU(3,3)"
-      , "ZU(3,4)", "ZU(3,5)", "ZU(4,0)", "ZU(4,1)", "ZU(4,2)", "ZU(4,3)",
-      "ZU(4,4)", "ZU(4,5)", "ZU(5,0)", "ZU(5,1)", "ZU(5,2)", "ZU(5,3)", "ZU(5,4)",
-      "ZU(5,5)", "ZE(0,0)", "ZE(0,1)", "ZE(0,2)", "ZE(0,3)", "ZE(0,4)", "ZE(0,5)"
-      , "ZE(1,0)", "ZE(1,1)", "ZE(1,2)", "ZE(1,3)", "ZE(1,4)", "ZE(1,5)",
-      "ZE(2,0)", "ZE(2,1)", "ZE(2,2)", "ZE(2,3)", "ZE(2,4)", "ZE(2,5)", "ZE(3,0)",
-      "ZE(3,1)", "ZE(3,2)", "ZE(3,3)", "ZE(3,4)", "ZE(3,5)", "ZE(4,0)", "ZE(4,1)"
-      , "ZE(4,2)", "ZE(4,3)", "ZE(4,4)", "ZE(4,5)", "ZE(5,0)", "ZE(5,1)",
-      "ZE(5,2)", "ZE(5,3)", "ZE(5,4)", "ZE(5,5)", "ZH(0,0)", "ZH(0,1)", "ZH(0,2)",
-      "ZH(1,0)", "ZH(1,1)", "ZH(1,2)", "ZH(2,0)", "ZH(2,1)", "ZH(2,2)", "ZA(0,0)"
-      , "ZA(0,1)", "ZA(0,2)", "ZA(1,0)", "ZA(1,1)", "ZA(1,2)", "ZA(2,0)",
+      "ZD(0,0)", "ZD(0,1)", "ZD(0,2)", "ZD(0,3)", "ZD(0,4)", "ZD(0,5)", "ZD(1,0)",
+      "ZD(1,1)", "ZD(1,2)", "ZD(1,3)", "ZD(1,4)", "ZD(1,5)", "ZD(2,0)", "ZD(2,1)",
+      "ZD(2,2)", "ZD(2,3)", "ZD(2,4)", "ZD(2,5)", "ZD(3,0)", "ZD(3,1)", "ZD(3,2)",
+      "ZD(3,3)", "ZD(3,4)", "ZD(3,5)", "ZD(4,0)", "ZD(4,1)", "ZD(4,2)", "ZD(4,3)",
+      "ZD(4,4)", "ZD(4,5)", "ZD(5,0)", "ZD(5,1)", "ZD(5,2)", "ZD(5,3)", "ZD(5,4)",
+      "ZD(5,5)", "ZV(0,0)", "ZV(0,1)", "ZV(0,2)", "ZV(1,0)", "ZV(1,1)", "ZV(1,2)",
+      "ZV(2,0)", "ZV(2,1)", "ZV(2,2)", "ZU(0,0)", "ZU(0,1)", "ZU(0,2)", "ZU(0,3)",
+      "ZU(0,4)", "ZU(0,5)", "ZU(1,0)", "ZU(1,1)", "ZU(1,2)", "ZU(1,3)", "ZU(1,4)",
+      "ZU(1,5)", "ZU(2,0)", "ZU(2,1)", "ZU(2,2)", "ZU(2,3)", "ZU(2,4)", "ZU(2,5)",
+      "ZU(3,0)", "ZU(3,1)", "ZU(3,2)", "ZU(3,3)", "ZU(3,4)", "ZU(3,5)", "ZU(4,0)",
+      "ZU(4,1)", "ZU(4,2)", "ZU(4,3)", "ZU(4,4)", "ZU(4,5)", "ZU(5,0)", "ZU(5,1)",
+      "ZU(5,2)", "ZU(5,3)", "ZU(5,4)", "ZU(5,5)", "ZE(0,0)", "ZE(0,1)", "ZE(0,2)",
+      "ZE(0,3)", "ZE(0,4)", "ZE(0,5)", "ZE(1,0)", "ZE(1,1)", "ZE(1,2)", "ZE(1,3)",
+      "ZE(1,4)", "ZE(1,5)", "ZE(2,0)", "ZE(2,1)", "ZE(2,2)", "ZE(2,3)", "ZE(2,4)",
+      "ZE(2,5)", "ZE(3,0)", "ZE(3,1)", "ZE(3,2)", "ZE(3,3)", "ZE(3,4)", "ZE(3,5)",
+      "ZE(4,0)", "ZE(4,1)", "ZE(4,2)", "ZE(4,3)", "ZE(4,4)", "ZE(4,5)", "ZE(5,0)",
+      "ZE(5,1)", "ZE(5,2)", "ZE(5,3)", "ZE(5,4)", "ZE(5,5)", "ZH(0,0)", "ZH(0,1)",
+      "ZH(0,2)", "ZH(1,0)", "ZH(1,1)", "ZH(1,2)", "ZH(2,0)", "ZH(2,1)", "ZH(2,2)",
+      "ZA(0,0)", "ZA(0,1)", "ZA(0,2)", "ZA(1,0)", "ZA(1,1)", "ZA(1,2)", "ZA(2,0)",
       "ZA(2,1)", "ZA(2,2)", "ZP(0,0)", "ZP(0,1)", "ZP(1,0)", "ZP(1,1)",
       "Re(ZN(0,0))", "Im(ZN(0,0))", "Re(ZN(0,1))", "Im(ZN(0,1))", "Re(ZN(0,2))",
       "Im(ZN(0,2))", "Re(ZN(0,3))", "Im(ZN(0,3))", "Re(ZN(0,4))", "Im(ZN(0,4))",
@@ -125,12 +124,11 @@ namespace CNMSSM_info {
       "Im(ZUR(2,0))", "Re(ZUR(2,1))", "Im(ZUR(2,1))", "Re(ZUR(2,2))",
       "Im(ZUR(2,2))", "ZZ(0,0)", "ZZ(0,1)", "ZZ(1,0)", "ZZ(1,1)"};
 
-   const std::array<std::string, NUMBER_OF_INPUT_PARAMETERS>
-      input_parameter_names = {"m12", "TanBeta", "Sign(vS)", "Azero",
-      "LambdaInput"};
+   const std::array<std::string, NUMBER_OF_INPUT_PARAMETERS> input_parameter_names
+       = {"m12", "TanBeta", "Sign(vS)", "Azero", "LambdaInput"};
 
-   const std::array<std::string, NUMBER_OF_EXTRA_PARAMETERS>
-      extra_parameter_names = {"m0Sq"};
+   const std::array<std::string, NUMBER_OF_EXTRA_PARAMETERS> extra_parameter_names
+       = {"m0Sq"};
 
    const std::string model_name = "CNMSSM";
 

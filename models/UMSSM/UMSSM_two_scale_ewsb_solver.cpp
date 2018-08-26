@@ -16,15 +16,15 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:57:20
+// File generated at Sun 26 Aug 2018 14:30:51
 
 /**
  * @file UMSSM_two_scale_ewsb_solver.cpp
  *
  * @brief implementation of EWSB solver for two-scale iteration
  *
- * This file was generated at Mon 5 Mar 2018 18:57:20 with FlexibleSUSY
- * 2.1.0 (git commit: 8f20f6c9c42c159c1588fbc0bb3e15ce5ab6ace3) and SARAH 4.12.3 .
+ * This file was generated at Sun 26 Aug 2018 14:30:51 with FlexibleSUSY
+ * 2.2.0 (git commit: 8489097de2d6938a6da0149378457b5ad13d9425) and SARAH 4.13.0 .
  */
 
 #include "UMSSM_two_scale_ewsb_solver.hpp"
@@ -235,21 +235,22 @@ int CLASSNAME::solve_tree_level(UMSSM_mass_eigenstates& model)
    double mHu2;
    double ms2;
 
-   mHd2 = Re((0.025*(14.142135623730951*vS*vu*Conj(TLambdax) - 3*Cube(vd)*Sqr(
-      g1) - 5*Cube(vd)*Sqr(g2) - 20*Cube(vd)*Sqr(gp)*Sqr(QHd) - 20*vd*AbsSqr(
-      Lambdax)*Sqr(vS) - 20*QHd*Qs*vd*Sqr(gp)*Sqr(vS) - 20*vd*AbsSqr(Lambdax)*Sqr(
-      vu) + 3*vd*Sqr(g1)*Sqr(vu) + 5*vd*Sqr(g2)*Sqr(vu) - 20*QHd*QHu*vd*Sqr(gp)*
-      Sqr(vu) + 14.142135623730951*vS*vu*TLambdax))/vd);
-   mHu2 = Re((0.025*(14.142135623730951*vd*vS*Conj(TLambdax) - 3*Cube(vu)*Sqr(
-      g1) - 5*Cube(vu)*Sqr(g2) - 20*Cube(vu)*Sqr(gp)*Sqr(QHu) - 20*vu*AbsSqr(
-      Lambdax)*Sqr(vd) + 3*vu*Sqr(g1)*Sqr(vd) + 5*vu*Sqr(g2)*Sqr(vd) - 20*QHd*QHu*
-      vu*Sqr(gp)*Sqr(vd) - 20*vu*AbsSqr(Lambdax)*Sqr(vS) - 20*QHu*Qs*vu*Sqr(gp)*
-      Sqr(vS) + 14.142135623730951*vd*vS*TLambdax))/vu);
-   ms2 = Re((0.25*(1.4142135623730951*vd*vu*Conj(TLambdax) - 2*Cube(vS)*Sqr(gp)
-      *Sqr(Qs) - 2*vS*AbsSqr(Lambdax)*Sqr(vd) - 2*QHd*Qs*vS*Sqr(gp)*Sqr(vd) - 2*vS
-      *AbsSqr(Lambdax)*Sqr(vu) - 2*QHu*Qs*vS*Sqr(gp)*Sqr(vu) + 1.4142135623730951*
+   mHd2 = Re((0.025*(14.142135623730951*vS*vu*Conj(TLambdax) - 3*Cube(vd)*Sqr(g1)
+      - 5*Cube(vd)*Sqr(g2) - 20*Cube(vd)*Sqr(gp)*Sqr(QHd) - 20*vd*AbsSqr(Lambdax)*
+      Sqr(vS) - 20*QHd*Qs*vd*Sqr(gp)*Sqr(vS) - 20*vd*AbsSqr(Lambdax)*Sqr(vu) + 3*
+      vd*Sqr(g1)*Sqr(vu) + 5*vd*Sqr(g2)*Sqr(vu) - 20*QHd*QHu*vd*Sqr(gp)*Sqr(vu) +
+      14.142135623730951*vS*vu*TLambdax))/vd);
+   mHu2 = Re((0.025*(14.142135623730951*vd*vS*Conj(TLambdax) - 3*Cube(vu)*Sqr(g1)
+      - 5*Cube(vu)*Sqr(g2) - 20*Cube(vu)*Sqr(gp)*Sqr(QHu) - 20*vu*AbsSqr(Lambdax)*
+      Sqr(vd) + 3*vu*Sqr(g1)*Sqr(vd) + 5*vu*Sqr(g2)*Sqr(vd) - 20*QHd*QHu*vu*Sqr(gp
+      )*Sqr(vd) - 20*vu*AbsSqr(Lambdax)*Sqr(vS) - 20*QHu*Qs*vu*Sqr(gp)*Sqr(vS) +
+      14.142135623730951*vd*vS*TLambdax))/vu);
+   ms2 = Re((0.25*(1.4142135623730951*vd*vu*Conj(TLambdax) - 2*Cube(vS)*Sqr(gp)*
+      Sqr(Qs) - 2*vS*AbsSqr(Lambdax)*Sqr(vd) - 2*QHd*Qs*vS*Sqr(gp)*Sqr(vd) - 2*vS*
+      AbsSqr(Lambdax)*Sqr(vu) - 2*QHu*Qs*vS*Sqr(gp)*Sqr(vu) + 1.4142135623730951*
       vd*vu*TLambdax))/vS);
 
+   
    const bool is_finite = IsFinite(mHd2) && IsFinite(mHu2) && IsFinite(ms2);
 
    if (is_finite) {
@@ -261,7 +262,6 @@ int CLASSNAME::solve_tree_level(UMSSM_mass_eigenstates& model)
       error = EWSB_solver::FAIL;
       model.get_problems().flag_no_ewsb_tree_level();
    }
-
    return error;
 }
 
@@ -329,19 +329,19 @@ CLASSNAME::EWSB_vector_t CLASSNAME::ewsb_step(const UMSSM_mass_eigenstates& mode
    double mHu2;
    double ms2;
 
-   mHd2 = Re((0.025*(14.142135623730951*vS*vu*Conj(TLambdax) + 40*tadpole[0] -
-      3*Cube(vd)*Sqr(g1) - 5*Cube(vd)*Sqr(g2) - 20*Cube(vd)*Sqr(gp)*Sqr(QHd) - 20*
-      vd*AbsSqr(Lambdax)*Sqr(vS) - 20*QHd*Qs*vd*Sqr(gp)*Sqr(vS) - 20*vd*AbsSqr(
+   mHd2 = Re((0.025*(14.142135623730951*vS*vu*Conj(TLambdax) + 40*tadpole[0] - 3*
+      Cube(vd)*Sqr(g1) - 5*Cube(vd)*Sqr(g2) - 20*Cube(vd)*Sqr(gp)*Sqr(QHd) - 20*vd
+      *AbsSqr(Lambdax)*Sqr(vS) - 20*QHd*Qs*vd*Sqr(gp)*Sqr(vS) - 20*vd*AbsSqr(
       Lambdax)*Sqr(vu) + 3*vd*Sqr(g1)*Sqr(vu) + 5*vd*Sqr(g2)*Sqr(vu) - 20*QHd*QHu*
       vd*Sqr(gp)*Sqr(vu) + 14.142135623730951*vS*vu*TLambdax))/vd);
-   mHu2 = Re((0.025*(14.142135623730951*vd*vS*Conj(TLambdax) + 40*tadpole[1] -
-      3*Cube(vu)*Sqr(g1) - 5*Cube(vu)*Sqr(g2) - 20*Cube(vu)*Sqr(gp)*Sqr(QHu) - 20*
-      vu*AbsSqr(Lambdax)*Sqr(vd) + 3*vu*Sqr(g1)*Sqr(vd) + 5*vu*Sqr(g2)*Sqr(vd) -
-      20*QHd*QHu*vu*Sqr(gp)*Sqr(vd) - 20*vu*AbsSqr(Lambdax)*Sqr(vS) - 20*QHu*Qs*vu
-      *Sqr(gp)*Sqr(vS) + 14.142135623730951*vd*vS*TLambdax))/vu);
-   ms2 = Re((0.25*(1.4142135623730951*vd*vu*Conj(TLambdax) + 4*tadpole[2] - 2*
-      Cube(vS)*Sqr(gp)*Sqr(Qs) - 2*vS*AbsSqr(Lambdax)*Sqr(vd) - 2*QHd*Qs*vS*Sqr(gp
-      )*Sqr(vd) - 2*vS*AbsSqr(Lambdax)*Sqr(vu) - 2*QHu*Qs*vS*Sqr(gp)*Sqr(vu) +
+   mHu2 = Re((0.025*(14.142135623730951*vd*vS*Conj(TLambdax) + 40*tadpole[1] - 3*
+      Cube(vu)*Sqr(g1) - 5*Cube(vu)*Sqr(g2) - 20*Cube(vu)*Sqr(gp)*Sqr(QHu) - 20*vu
+      *AbsSqr(Lambdax)*Sqr(vd) + 3*vu*Sqr(g1)*Sqr(vd) + 5*vu*Sqr(g2)*Sqr(vd) - 20*
+      QHd*QHu*vu*Sqr(gp)*Sqr(vd) - 20*vu*AbsSqr(Lambdax)*Sqr(vS) - 20*QHu*Qs*vu*
+      Sqr(gp)*Sqr(vS) + 14.142135623730951*vd*vS*TLambdax))/vu);
+   ms2 = Re((0.25*(1.4142135623730951*vd*vu*Conj(TLambdax) + 4*tadpole[2] - 2*Cube
+      (vS)*Sqr(gp)*Sqr(Qs) - 2*vS*AbsSqr(Lambdax)*Sqr(vd) - 2*QHd*Qs*vS*Sqr(gp)*
+      Sqr(vd) - 2*vS*AbsSqr(Lambdax)*Sqr(vu) - 2*QHu*Qs*vS*Sqr(gp)*Sqr(vu) +
       1.4142135623730951*vd*vu*TLambdax))/vS);
 
    const bool is_finite = IsFinite(mHd2) && IsFinite(mHu2) && IsFinite(ms2);

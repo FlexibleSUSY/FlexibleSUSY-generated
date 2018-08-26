@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:51:57
+// File generated at Sun 26 Aug 2018 15:32:31
 
 #include "MRSSM_two_scale_susy_scale_constraint.hpp"
 #include "MRSSM_two_scale_model.hpp"
@@ -64,6 +64,7 @@ void MRSSM_susy_scale_constraint<Two_scale>::apply()
 {
    check_model_ptr();
 
+   
 
 
    model->calculate_DRbar_masses();
@@ -171,6 +172,7 @@ void MRSSM_susy_scale_constraint<Two_scale>::initialize()
 {
    check_model_ptr();
 
+   
    initial_scale_guess = 1000;
 
    scale = initial_scale_guess;
@@ -180,6 +182,7 @@ void MRSSM_susy_scale_constraint<Two_scale>::update_scale()
 {
    check_model_ptr();
 
+   
    scale = 1000;
 
 

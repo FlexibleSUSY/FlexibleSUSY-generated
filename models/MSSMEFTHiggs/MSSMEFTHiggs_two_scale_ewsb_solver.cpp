@@ -16,15 +16,15 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 16:48:55
+// File generated at Sun 26 Aug 2018 14:06:05
 
 /**
  * @file MSSMEFTHiggs_two_scale_ewsb_solver.cpp
  *
  * @brief implementation of EWSB solver for two-scale iteration
  *
- * This file was generated at Mon 5 Mar 2018 16:48:55 with FlexibleSUSY
- * 2.1.0 (git commit: 8f20f6c9c42c159c1588fbc0bb3e15ce5ab6ace3) and SARAH 4.12.3 .
+ * This file was generated at Sun 26 Aug 2018 14:06:05 with FlexibleSUSY
+ * 2.2.0 (git commit: 8489097de2d6938a6da0149378457b5ad13d9425) and SARAH 4.13.0 .
  */
 
 #include "MSSMEFTHiggs_two_scale_ewsb_solver.hpp"
@@ -223,13 +223,14 @@ int CLASSNAME::solve_tree_level(MSSMEFTHiggs_mass_eigenstates& model)
    double mHd2;
    double mHu2;
 
-   mHd2 = Re((0.025*(-40*vd*AbsSqr(Mu) + 20*vu*BMu + 20*vu*Conj(BMu) - 3*Cube(
-      vd)*Sqr(g1) - 5*Cube(vd)*Sqr(g2) + 3*vd*Sqr(g1)*Sqr(vu) + 5*vd*Sqr(g2)*Sqr(
-      vu)))/vd);
-   mHu2 = Re((0.025*(-40*vu*AbsSqr(Mu) + 20*vd*BMu + 20*vd*Conj(BMu) - 3*Cube(
-      vu)*Sqr(g1) - 5*Cube(vu)*Sqr(g2) + 3*vu*Sqr(g1)*Sqr(vd) + 5*vu*Sqr(g2)*Sqr(
-      vd)))/vu);
+   mHd2 = Re((0.025*(-40*vd*AbsSqr(Mu) + 20*vu*BMu + 20*vu*Conj(BMu) - 3*Cube(vd)*
+      Sqr(g1) - 5*Cube(vd)*Sqr(g2) + 3*vd*Sqr(g1)*Sqr(vu) + 5*vd*Sqr(g2)*Sqr(vu)))
+      /vd);
+   mHu2 = Re((0.025*(-40*vu*AbsSqr(Mu) + 20*vd*BMu + 20*vd*Conj(BMu) - 3*Cube(vu)*
+      Sqr(g1) - 5*Cube(vu)*Sqr(g2) + 3*vu*Sqr(g1)*Sqr(vd) + 5*vu*Sqr(g2)*Sqr(vd)))
+      /vu);
 
+   
    const bool is_finite = IsFinite(mHd2) && IsFinite(mHu2);
 
    if (is_finite) {
@@ -240,7 +241,6 @@ int CLASSNAME::solve_tree_level(MSSMEFTHiggs_mass_eigenstates& model)
       error = EWSB_solver::FAIL;
       model.get_problems().flag_no_ewsb_tree_level();
    }
-
    return error;
 }
 
@@ -298,12 +298,12 @@ CLASSNAME::EWSB_vector_t CLASSNAME::ewsb_step(const MSSMEFTHiggs_mass_eigenstate
    double mHd2;
    double mHu2;
 
-   mHd2 = Re((0.025*(-40*vd*AbsSqr(Mu) + 20*vu*BMu + 20*vu*Conj(BMu) + 40*
-      tadpole[0] - 3*Cube(vd)*Sqr(g1) - 5*Cube(vd)*Sqr(g2) + 3*vd*Sqr(g1)*Sqr(vu)
-      + 5*vd*Sqr(g2)*Sqr(vu)))/vd);
-   mHu2 = Re((0.025*(-40*vu*AbsSqr(Mu) + 20*vd*BMu + 20*vd*Conj(BMu) + 40*
-      tadpole[1] - 3*Cube(vu)*Sqr(g1) - 5*Cube(vu)*Sqr(g2) + 3*vu*Sqr(g1)*Sqr(vd)
-      + 5*vu*Sqr(g2)*Sqr(vd)))/vu);
+   mHd2 = Re((0.025*(-40*vd*AbsSqr(Mu) + 20*vu*BMu + 20*vu*Conj(BMu) + 40*tadpole[
+      0] - 3*Cube(vd)*Sqr(g1) - 5*Cube(vd)*Sqr(g2) + 3*vd*Sqr(g1)*Sqr(vu) + 5*vd*
+      Sqr(g2)*Sqr(vu)))/vd);
+   mHu2 = Re((0.025*(-40*vu*AbsSqr(Mu) + 20*vd*BMu + 20*vd*Conj(BMu) + 40*tadpole[
+      1] - 3*Cube(vu)*Sqr(g1) - 5*Cube(vu)*Sqr(g2) + 3*vu*Sqr(g1)*Sqr(vd) + 5*vu*
+      Sqr(g2)*Sqr(vd)))/vu);
 
    const bool is_finite = IsFinite(mHd2) && IsFinite(mHu2);
 

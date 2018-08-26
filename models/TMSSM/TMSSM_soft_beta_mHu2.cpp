@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:55:24
+// File generated at Sun 26 Aug 2018 14:13:05
 
 #include "TMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -114,31 +114,19 @@ double TMSSM_soft_parameters::calc_beta_mHu2_2_loop(const Soft_traces& soft_trac
    const double tracemq2AdjYuYu = TRACE_STRUCT.tracemq2AdjYuYu;
    const double tracemu2YuAdjYu = TRACE_STRUCT.tracemu2YuAdjYu;
    const double traceYdAdjYuYuAdjYd = TRACE_STRUCT.traceYdAdjYuYuAdjYd;
-   const double traceYdAdjYuTYuAdjTYd =
-      TRACE_STRUCT.traceYdAdjYuTYuAdjTYd;
-   const double traceYdAdjTYuTYuAdjYd =
-      TRACE_STRUCT.traceYdAdjTYuTYuAdjYd;
-   const double traceYuAdjYdTYdAdjTYu =
-      TRACE_STRUCT.traceYuAdjYdTYdAdjTYu;
+   const double traceYdAdjYuTYuAdjTYd = TRACE_STRUCT.traceYdAdjYuTYuAdjTYd;
+   const double traceYdAdjTYuTYuAdjYd = TRACE_STRUCT.traceYdAdjTYuTYuAdjYd;
+   const double traceYuAdjYdTYdAdjTYu = TRACE_STRUCT.traceYuAdjYdTYdAdjTYu;
    const double traceYuAdjYuYuAdjYu = TRACE_STRUCT.traceYuAdjYuYuAdjYu;
-   const double traceYuAdjYuTYuAdjTYu =
-      TRACE_STRUCT.traceYuAdjYuTYuAdjTYu;
-   const double traceYuAdjTYdTYdAdjYu =
-      TRACE_STRUCT.traceYuAdjTYdTYdAdjYu;
-   const double traceYuAdjTYuTYuAdjYu =
-      TRACE_STRUCT.traceYuAdjTYuTYuAdjYu;
-   const double tracemd2YdAdjYuYuAdjYd =
-      TRACE_STRUCT.tracemd2YdAdjYuYuAdjYd;
-   const double tracemq2AdjYdYdAdjYuYu =
-      TRACE_STRUCT.tracemq2AdjYdYdAdjYuYu;
-   const double tracemq2AdjYuYuAdjYdYd =
-      TRACE_STRUCT.tracemq2AdjYuYuAdjYdYd;
-   const double tracemq2AdjYuYuAdjYuYu =
-      TRACE_STRUCT.tracemq2AdjYuYuAdjYuYu;
-   const double tracemu2YuAdjYdYdAdjYu =
-      TRACE_STRUCT.tracemu2YuAdjYdYdAdjYu;
-   const double tracemu2YuAdjYuYuAdjYu =
-      TRACE_STRUCT.tracemu2YuAdjYuYuAdjYu;
+   const double traceYuAdjYuTYuAdjTYu = TRACE_STRUCT.traceYuAdjYuTYuAdjTYu;
+   const double traceYuAdjTYdTYdAdjYu = TRACE_STRUCT.traceYuAdjTYdTYdAdjYu;
+   const double traceYuAdjTYuTYuAdjYu = TRACE_STRUCT.traceYuAdjTYuTYuAdjYu;
+   const double tracemd2YdAdjYuYuAdjYd = TRACE_STRUCT.tracemd2YdAdjYuYuAdjYd;
+   const double tracemq2AdjYdYdAdjYuYu = TRACE_STRUCT.tracemq2AdjYdYdAdjYuYu;
+   const double tracemq2AdjYuYuAdjYdYd = TRACE_STRUCT.tracemq2AdjYuYuAdjYdYd;
+   const double tracemq2AdjYuYuAdjYuYu = TRACE_STRUCT.tracemq2AdjYuYuAdjYuYu;
+   const double tracemu2YuAdjYdYdAdjYu = TRACE_STRUCT.tracemu2YuAdjYdYdAdjYu;
+   const double tracemu2YuAdjYuYuAdjYu = TRACE_STRUCT.tracemu2YuAdjYuYuAdjYu;
    const double Tr2U111 = TRACE_STRUCT.Tr2U111;
    const double Tr31 = TRACE_STRUCT.Tr31;
    const double Tr22 = TRACE_STRUCT.Tr22;

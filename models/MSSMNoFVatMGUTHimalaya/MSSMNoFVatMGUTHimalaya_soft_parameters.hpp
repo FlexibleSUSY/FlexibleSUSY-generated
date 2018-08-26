@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 14:29:55
+// File generated at Sun 26 Aug 2018 13:44:55
 
 #ifndef MSSMNoFVatMGUTHimalaya_soft_parameters_H
 #define MSSMNoFVatMGUTHimalaya_soft_parameters_H
@@ -35,13 +35,12 @@ namespace flexiblesusy {
 class MSSMNoFVatMGUTHimalaya_soft_parameters : public MSSMNoFVatMGUTHimalaya_susy_parameters {
 public:
    explicit MSSMNoFVatMGUTHimalaya_soft_parameters(const MSSMNoFVatMGUTHimalaya_input_parameters& input_ = MSSMNoFVatMGUTHimalaya_input_parameters());
-   MSSMNoFVatMGUTHimalaya_soft_parameters(const MSSMNoFVatMGUTHimalaya_susy_parameters& , const Eigen::Matrix<double,3,3>& TYd_, const Eigen::Matrix<double,3,3>&
-   TYe_, const Eigen::Matrix<double,3,3>& TYu_, double BMu_, const
-   Eigen::Matrix<double,3,3>& mq2_, const Eigen::Matrix<double,3,3>& ml2_,
-   double mHd2_, double mHu2_, const Eigen::Matrix<double,3,3>& md2_, const
-   Eigen::Matrix<double,3,3>& mu2_, const Eigen::Matrix<double,3,3>& me2_,
-   double MassB_, double MassWB_, double MassG_
-);
+   MSSMNoFVatMGUTHimalaya_soft_parameters(const MSSMNoFVatMGUTHimalaya_susy_parameters& , const Eigen::Matrix<double,3,3>& TYd_, const Eigen::Matrix<double,3,3>& TYe_,
+   const Eigen::Matrix<double,3,3>& TYu_, double BMu_, const Eigen::Matrix<
+   double,3,3>& mq2_, const Eigen::Matrix<double,3,3>& ml2_, double mHd2_,
+   double mHu2_, const Eigen::Matrix<double,3,3>& md2_, const Eigen::Matrix<
+   double,3,3>& mu2_, const Eigen::Matrix<double,3,3>& me2_, double MassB_,
+   double MassWB_, double MassG_);
    MSSMNoFVatMGUTHimalaya_soft_parameters(const MSSMNoFVatMGUTHimalaya_soft_parameters&) = default;
    MSSMNoFVatMGUTHimalaya_soft_parameters(MSSMNoFVatMGUTHimalaya_soft_parameters&&) = default;
    virtual ~MSSMNoFVatMGUTHimalaya_soft_parameters() = default;

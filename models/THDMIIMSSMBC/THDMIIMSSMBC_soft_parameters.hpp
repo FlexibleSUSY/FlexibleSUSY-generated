@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:30:42
+// File generated at Sun 26 Aug 2018 14:08:50
 
 #ifndef THDMIIMSSMBC_soft_parameters_H
 #define THDMIIMSSMBC_soft_parameters_H
@@ -35,8 +35,7 @@ namespace flexiblesusy {
 class THDMIIMSSMBC_soft_parameters : public THDMIIMSSMBC_susy_parameters {
 public:
    explicit THDMIIMSSMBC_soft_parameters(const THDMIIMSSMBC_input_parameters& input_ = THDMIIMSSMBC_input_parameters());
-   THDMIIMSSMBC_soft_parameters(const THDMIIMSSMBC_susy_parameters& , double M122_, double M112_, double M222_, double v1_, double v2_
-);
+   THDMIIMSSMBC_soft_parameters(const THDMIIMSSMBC_susy_parameters& , double M122_, double M112_, double M222_, double v1_, double v2_);
    THDMIIMSSMBC_soft_parameters(const THDMIIMSSMBC_soft_parameters&) = default;
    THDMIIMSSMBC_soft_parameters(THDMIIMSSMBC_soft_parameters&&) = default;
    virtual ~THDMIIMSSMBC_soft_parameters() = default;

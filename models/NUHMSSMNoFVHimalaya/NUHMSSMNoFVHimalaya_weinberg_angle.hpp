@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 15:00:04
+// File generated at Sun 26 Aug 2018 13:49:59
 
 #ifndef NUHMSSMNoFVHimalaya_WEINBERG_ANGLE_H
 #define NUHMSSMNoFVHimalaya_WEINBERG_ANGLE_H
@@ -73,6 +73,7 @@ private:
    double calculate_delta_r_hat(double, double) const;
    double calculate_delta_vb(double, double) const;
    double calculate_delta_vb_sm(double) const;
+   int get_neutrino_index(int) const;
    double calculate_delta_vb_bsm(double) const;
 
    std::complex<double> CpbarChaFeconjSveLPL(int gI1) const;

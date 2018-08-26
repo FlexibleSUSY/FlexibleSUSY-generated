@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:39:53
+// File generated at Sun 26 Aug 2018 14:10:36
 
 #include "HSSUSY_slha_io.hpp"
 #include "HSSUSY_input_parameters.hpp"
@@ -90,6 +90,8 @@ void HSSUSY_slha_io::set_extpar(const HSSUSY_input_parameters& input)
    extpar << FORMAT_ELEMENT(201, input.DeltaYt, "DeltaYt");
    extpar << FORMAT_ELEMENT(202, input.DeltaOS, "DeltaOS");
    extpar << FORMAT_ELEMENT(203, input.Qmatch, "Qmatch");
+   extpar << FORMAT_ELEMENT(204, input.DeltaLambda3L, "DeltaLambda3L");
+   extpar << FORMAT_ELEMENT(205, input.ThreeLoopAtAsAs, "ThreeLoopAtAsAs");
    slha_io.set_block(extpar);
 
 }
@@ -593,6 +595,8 @@ void HSSUSY_slha_io::fill_extpar_tuple(HSSUSY_input_parameters& input,
    case 201: input.DeltaYt = value; break;
    case 202: input.DeltaOS = value; break;
    case 203: input.Qmatch = value; break;
+   case 204: input.DeltaLambda3L = value; break;
+   case 205: input.ThreeLoopAtAsAs = value; break;
    default: WARNING("Unrecognized entry in block EXTPAR: " << key); break;
    }
 
@@ -682,8 +686,7 @@ void HSSUSY_slha_io::fill_physical(HSSUSY_physical& physical) const
 double HSSUSY_slha_io::read_scale() const
 {
    static const std::array<std::string, 6> drbar_blocks =
-      { "gauge", "Yu", "Yd", "Ye", "SM", "HMIX" }
-;
+      { "gauge", "Yu", "Yd", "Ye", "SM", "HMIX" };
 
    double scale = 0.;
 

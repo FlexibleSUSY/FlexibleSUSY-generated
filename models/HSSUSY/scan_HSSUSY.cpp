@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:16:17
+// File generated at Sun 26 Aug 2018 14:11:55
 
 #include "config.h"
 
@@ -66,6 +66,8 @@ void print_usage()
       "  --DeltaYt=<value>\n"
       "  --DeltaOS=<value>\n"
       "  --Qmatch=<value>\n"
+      "  --DeltaLambda3L=<value>\n"
+      "  --ThreeLoopAtAsAs=<value>\n"
 
       "  --solver-type=<value>             an integer corresponding\n"
       "                                    to the solver type to use\n"
@@ -141,6 +143,12 @@ void set_command_line_parameters(const Dynamic_array_view<char*>& args,
          continue;
 
       if(Command_line_options::get_parameter_value(option, "--Qmatch=", input.Qmatch))
+         continue;
+
+      if(Command_line_options::get_parameter_value(option, "--DeltaLambda3L=", input.DeltaLambda3L))
+         continue;
+
+      if(Command_line_options::get_parameter_value(option, "--ThreeLoopAtAsAs=", input.ThreeLoopAtAsAs))
          continue;
 
       

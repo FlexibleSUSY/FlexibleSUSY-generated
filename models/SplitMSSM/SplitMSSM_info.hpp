@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:44:24
+// File generated at Sun 26 Aug 2018 14:10:19
 
 #ifndef SplitMSSM_INFO_H
 #define SplitMSSM_INFO_H
@@ -30,18 +30,18 @@
 namespace flexiblesusy {
 
 namespace SplitMSSM_info {
-   enum Particles : int { VG, Hp, Fv, Glu, Ah, hh, Fd, Fu, Fe, Chi, Cha, VWp,
-      VP, VZ, NUMBER_OF_PARTICLES };
+   enum Particles : int { VG, Hp, Fv, Glu, Ah, hh, Fd, Fu, Fe, Chi, Cha, VWp, VP,
+      VZ, NUMBER_OF_PARTICLES };
 
-   enum Masses : int { MVG, MHp, MFv_1, MFv_2, MFv_3, MGlu, MAh, Mhh, MFd_1,
-      MFd_2, MFd_3, MFu_1, MFu_2, MFu_3, MFe_1, MFe_2, MFe_3, MChi_1, MChi_2,
-      MChi_3, MChi_4, MCha_1, MCha_2, MVWp, MVP, MVZ, NUMBER_OF_MASSES };
+   enum Masses : int { MVG, MHp, MFv_1, MFv_2, MFv_3, MGlu, MAh, Mhh, MFd_1, MFd_2
+      , MFd_3, MFu_1, MFu_2, MFu_3, MFe_1, MFe_2, MFe_3, MChi_1, MChi_2, MChi_3,
+      MChi_4, MCha_1, MCha_2, MVWp, MVP, MVZ, NUMBER_OF_MASSES };
 
-   enum Parameters : int { g1, g2, g3, Lambdax, Yu0_0, Yu0_1, Yu0_2, Yu1_0,
-      Yu1_1, Yu1_2, Yu2_0, Yu2_1, Yu2_2, Yd0_0, Yd0_1, Yd0_2, Yd1_0, Yd1_1, Yd1_2,
-      Yd2_0, Yd2_1, Yd2_2, Ye0_0, Ye0_1, Ye0_2, Ye1_0, Ye1_1, Ye1_2, Ye2_0, Ye2_1
-      , Ye2_2, gYd, g2d, gYu, g2u, MassB, MassG, MassWB, Mu, mu2, v,
-      NUMBER_OF_PARAMETERS };
+   enum Parameters : int { g1, g2, g3, Lambdax, Yu0_0, Yu0_1, Yu0_2, Yu1_0, Yu1_1,
+      Yu1_2, Yu2_0, Yu2_1, Yu2_2, Yd0_0, Yd0_1, Yd0_2, Yd1_0, Yd1_1, Yd1_2, Yd2_0,
+      Yd2_1, Yd2_2, Ye0_0, Ye0_1, Ye0_2, Ye1_0, Ye1_1, Ye1_2, Ye2_0, Ye2_1, Ye2_2,
+      gYd, g2d, gYu, g2u, MassB, MassG, MassWB, Mu, mu2, v, NUMBER_OF_PARAMETERS }
+      ;
 
    enum Mixings : int { ReVd0_0, ImVd0_0, ReVd0_1, ImVd0_1, ReVd0_2, ImVd0_2,
       ReVd1_0, ImVd1_0, ReVd1_1, ImVd1_1, ReVd1_2, ImVd1_2, ReVd2_0, ImVd2_0,

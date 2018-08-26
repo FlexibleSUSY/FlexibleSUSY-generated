@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:54:57
+// File generated at Sun 26 Aug 2018 14:12:25
 
 #include "TMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -66,9 +66,9 @@ double TMSSM_susy_parameters::calc_beta_Lambdax_2_loop(const Susy_traces& susy_t
 
    double beta_Lambdax;
 
-   beta_Lambdax = Re(-0.02*twoLoop*Lambdax*(-207*Quad(g1) - 10*Sqr(g1)*(
-      -2*traceYdAdjYd + 6*traceYeAdjYe + 4*traceYuAdjYu + 9*Sqr(g2)) - 5*AbsSqr
-      (Lambdax)*(6*Sqr(g1) + 5*(-5*(3*traceYdAdjYd + traceYeAdjYe + 3*
+   beta_Lambdax = Re(-0.02*twoLoop*Lambdax*(-207*Quad(g1) - 10*Sqr(g1)*(-2*
+      traceYdAdjYd + 6*traceYeAdjYe + 4*traceYuAdjYu + 9*Sqr(g2)) - 5*AbsSqr(
+      Lambdax)*(6*Sqr(g1) + 5*(-5*(3*traceYdAdjYd + traceYeAdjYe + 3*
       traceYuAdjYu) + 22*Sqr(g2))) - 25*(83*Quad(g2) + 2*(-3*(3*
       traceYdAdjYdYdAdjYd + 2*traceYdAdjYuYuAdjYd + traceYeAdjYeYeAdjYe + 3*
       traceYuAdjYuYuAdjYu) + 16*(traceYdAdjYd + traceYuAdjYu)*Sqr(g3))) + 525*

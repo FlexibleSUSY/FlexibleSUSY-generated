@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:54:56
+// File generated at Sun 26 Aug 2018 14:12:24
 
 #include "TMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -39,10 +39,9 @@ Eigen::Matrix<double,3,3> TMSSM_susy_parameters::calc_beta_Yd_1_loop(const Susy_
 
    Eigen::Matrix<double,3,3> beta_Yd;
 
-   beta_Yd = (oneOver16PiSqr*(Yd*(3*traceYdAdjYd + traceYeAdjYe + 1.5*
-      AbsSqr(Lambdax) - 0.4666666666666667*Sqr(g1) - 3*Sqr(g2) -
-      5.333333333333333*Sqr(g3)) + 3*(Yd*Yd.adjoint()*Yd) + Yd*Yu.adjoint()*Yu)
-      ).real();
+   beta_Yd = (oneOver16PiSqr*(Yd*(3*traceYdAdjYd + traceYeAdjYe + 1.5*AbsSqr(
+      Lambdax) - 0.4666666666666667*Sqr(g1) - 3*Sqr(g2) - 5.333333333333333*Sqr
+      (g3)) + 3*(Yd*Yd.adjoint()*Yd) + Yd*Yu.adjoint()*Yu)).real();
 
 
    return beta_Yd;
@@ -65,17 +64,17 @@ Eigen::Matrix<double,3,3> TMSSM_susy_parameters::calc_beta_Yd_2_loop(const Susy_
 
    Eigen::Matrix<double,3,3> beta_Yd;
 
-   beta_Yd = (twoLoop*(Yd*(-9*traceYdAdjYdYdAdjYd - 3*traceYdAdjYuYuAdjYd
-      - 3*traceYeAdjYeYeAdjYe + 3.188888888888889*Quad(g1) + 13.5*Quad(g2) -
+   beta_Yd = (twoLoop*(Yd*(-9*traceYdAdjYdYdAdjYd - 3*traceYdAdjYuYuAdjYd - 3*
+      traceYeAdjYeYeAdjYe + 3.188888888888889*Quad(g1) + 13.5*Quad(g2) -
       1.7777777777777777*Quad(g3) + Conj(Lambdax)*(-4.5*traceYuAdjYu*Lambdax +
       6*Lambdax*Sqr(g2)) + Sqr(g1)*(-0.4*traceYdAdjYd + 1.2*traceYeAdjYe + Sqr(
       g2) + 0.8888888888888888*Sqr(g3)) + 16*traceYdAdjYd*Sqr(g3) + 8*Sqr(g2)*
       Sqr(g3) - 3.75*Sqr(Conj(Lambdax))*Sqr(Lambdax)) + (-9*traceYdAdjYd - 3*
-      traceYeAdjYe - 4.5*AbsSqr(Lambdax) + 0.8*Sqr(g1) + 6*Sqr(g2))*(Yd*
-      Yd.adjoint()*Yd) + (-3*traceYuAdjYu - 1.5*AbsSqr(Lambdax) + 0.8*Sqr(g1))*
-      (Yd*Yu.adjoint()*Yu) - 4*(Yd*Yd.adjoint()*Yd*Yd.adjoint()*Yd) - 2*(Yd*
-      Yu.adjoint()*Yu*Yd.adjoint()*Yd) - 2*(Yd*Yu.adjoint()*Yu*Yu.adjoint()*Yu)
-      )).real();
+      traceYeAdjYe - 4.5*AbsSqr(Lambdax) + 0.8*Sqr(g1) + 6*Sqr(g2))*(Yd*Yd.
+      adjoint()*Yd) + (-3*traceYuAdjYu - 1.5*AbsSqr(Lambdax) + 0.8*Sqr(g1))*(Yd
+      *Yu.adjoint()*Yu) - 4*(Yd*Yd.adjoint()*Yd*Yd.adjoint()*Yd) - 2*(Yd*Yu.
+      adjoint()*Yu*Yd.adjoint()*Yd) - 2*(Yd*Yu.adjoint()*Yu*Yu.adjoint()*Yu))).
+      real();
 
 
    return beta_Yd;

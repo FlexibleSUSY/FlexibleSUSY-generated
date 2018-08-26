@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 19:05:14
+// File generated at Sun 26 Aug 2018 15:20:43
 
 #include "MSSMNoFV_slha_io.hpp"
 #include "MSSMNoFV_input_parameters.hpp"
@@ -861,9 +861,8 @@ void MSSMNoFV_slha_io::fill_physical(MSSMNoFV_physical& physical) const
 double MSSMNoFV_slha_io::read_scale() const
 {
    static const std::array<std::string, 14> drbar_blocks =
-      { "gauge", "Yu", "Yd", "Ye", "Te", "Td", "Tu", "HMIX", "MSQ2", "MSE2",
-   "MSL2", "MSU2", "MSD2", "MSOFT" }
-;
+      { "gauge", "Yu", "Yd", "Ye", "Te", "Td", "Tu", "HMIX", "MSQ2", "MSE2", "MSL2",
+   "MSU2", "MSD2", "MSOFT" };
 
    double scale = 0.;
 

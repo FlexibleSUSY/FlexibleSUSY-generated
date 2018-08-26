@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 15:31:44
+// File generated at Sun 26 Aug 2018 14:25:06
 
 #include "MRSSMEFTHiggs_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -57,9 +57,9 @@ double MRSSMEFTHiggs_susy_parameters::calc_beta_g1_2_loop(const Susy_traces& sus
 
    double beta_g1;
 
-   beta_g1 = Re(0.04*twoLoop*Cube(g1)*(-70*traceYdAdjYd - 90*traceYeAdjYe
-      - 130*traceYuAdjYu - 30*AbsSqr(LamSD) - 30*AbsSqr(LamSU) - 45*AbsSqr(
-      LamTD) - 45*AbsSqr(LamTU) + 208*Sqr(g1) + 180*Sqr(g2) + 440*Sqr(g3)));
+   beta_g1 = Re(0.04*twoLoop*Cube(g1)*(-70*traceYdAdjYd - 90*traceYeAdjYe - 130
+      *traceYuAdjYu - 30*AbsSqr(LamSD) - 30*AbsSqr(LamSU) - 45*AbsSqr(LamTD) -
+      45*AbsSqr(LamTU) + 208*Sqr(g1) + 180*Sqr(g2) + 440*Sqr(g3)));
 
 
    return beta_g1;

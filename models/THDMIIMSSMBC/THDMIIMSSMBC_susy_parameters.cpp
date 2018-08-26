@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:30:27
+// File generated at Sun 26 Aug 2018 14:08:32
 
 #include "THDMIIMSSMBC_susy_parameters.hpp"
 #include "config.h"
@@ -45,17 +45,15 @@ THDMIIMSSMBC_susy_parameters::THDMIIMSSMBC_susy_parameters(const THDMIIMSSMBC_in
 THDMIIMSSMBC_susy_parameters::THDMIIMSSMBC_susy_parameters(
    double scale_, int loops_, int thresholds_,
    const THDMIIMSSMBC_input_parameters& input_
-   , double g1_, double g2_, double g3_, double Lambda6_, double Lambda5_,
-   double Lambda7_, double Lambda1_, double Lambda4_, double Lambda3_, double
-   Lambda2_, const Eigen::Matrix<double,3,3>& Yu_, const Eigen::Matrix<double,3
-   ,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
-
+   , double g1_, double g2_, double g3_, double Lambda6_, double Lambda5_, double
+   Lambda7_, double Lambda1_, double Lambda4_, double Lambda3_, double Lambda2_
+   , const Eigen::Matrix<double,3,3>& Yu_, const Eigen::Matrix<double,3,3>& Yd_
+   , const Eigen::Matrix<double,3,3>& Ye_
 )
    : Beta_function()
    , g1(g1_), g2(g2_), g3(g3_), Lambda6(Lambda6_), Lambda5(Lambda5_), Lambda7(
    Lambda7_), Lambda1(Lambda1_), Lambda4(Lambda4_), Lambda3(Lambda3_), Lambda2(
    Lambda2_), Yu(Yu_), Yd(Yd_), Ye(Ye_)
-
    , input(input_)
 {
    set_number_of_parameters(numberOfParameters);
@@ -120,6 +118,7 @@ THDMIIMSSMBC_susy_parameters THDMIIMSSMBC_susy_parameters::calc_beta(int loops) 
          if (loops > 2) {
          #ifdef ENABLE_THREADS
             {
+
 
             }
          #else
@@ -290,33 +289,35 @@ THDMIIMSSMBC_susy_parameters::Susy_traces THDMIIMSSMBC_susy_parameters::calc_sus
    Susy_traces susy_traces;
 
    if (loops > 0) {
+      
+
       TRACE_STRUCT.traceYdAdjYd = Re((Yd*Yd.adjoint()).trace());
       TRACE_STRUCT.traceYeAdjYe = Re((Ye*Ye.adjoint()).trace());
       TRACE_STRUCT.traceYuAdjYu = Re((Yu*Yu.adjoint()).trace());
-      TRACE_STRUCT.traceYdAdjYdYdAdjYd = Re((Yd*Yd.adjoint()*Yd*Yd.adjoint())
-         .trace());
-      TRACE_STRUCT.traceYdAdjYuYuAdjYd = Re((Yd*Yu.adjoint()*Yu*Yd.adjoint())
-         .trace());
-      TRACE_STRUCT.traceYeAdjYeYeAdjYe = Re((Ye*Ye.adjoint()*Ye*Ye.adjoint())
-         .trace());
-      TRACE_STRUCT.traceYuAdjYuYuAdjYu = Re((Yu*Yu.adjoint()*Yu*Yu.adjoint())
-         .trace());
+      TRACE_STRUCT.traceYdAdjYdYdAdjYd = Re((Yd*Yd.adjoint()*Yd*Yd.adjoint()).trace()
+         );
+      TRACE_STRUCT.traceYdAdjYuYuAdjYd = Re((Yd*Yu.adjoint()*Yu*Yd.adjoint()).trace()
+         );
+      TRACE_STRUCT.traceYeAdjYeYeAdjYe = Re((Ye*Ye.adjoint()*Ye*Ye.adjoint()).trace()
+         );
+      TRACE_STRUCT.traceYuAdjYuYuAdjYu = Re((Yu*Yu.adjoint()*Yu*Yu.adjoint()).trace()
+         );
 
    }
 
    if (loops > 1) {
-      TRACE_STRUCT.traceYdAdjYdYdAdjYdYdAdjYd = Re((Yd*Yd.adjoint()*Yd*Yd.adjoint(
-         )*Yd*Yd.adjoint()).trace());
-      TRACE_STRUCT.traceYdAdjYdYdAdjYuYuAdjYd = Re((Yd*Yd.adjoint()*Yd*Yu.adjoint(
-         )*Yu*Yd.adjoint()).trace());
-      TRACE_STRUCT.traceYdAdjYuYuAdjYdYdAdjYd = Re((Yd*Yu.adjoint()*Yu*Yd.adjoint(
-         )*Yd*Yd.adjoint()).trace());
-      TRACE_STRUCT.traceYdAdjYuYuAdjYuYuAdjYd = Re((Yd*Yu.adjoint()*Yu*Yu.adjoint(
-         )*Yu*Yd.adjoint()).trace());
-      TRACE_STRUCT.traceYeAdjYeYeAdjYeYeAdjYe = Re((Ye*Ye.adjoint()*Ye*Ye.adjoint(
-         )*Ye*Ye.adjoint()).trace());
-      TRACE_STRUCT.traceYuAdjYuYuAdjYuYuAdjYu = Re((Yu*Yu.adjoint()*Yu*Yu.adjoint(
-         )*Yu*Yu.adjoint()).trace());
+      TRACE_STRUCT.traceYdAdjYdYdAdjYdYdAdjYd = Re((Yd*Yd.adjoint()*Yd*Yd.adjoint()*
+         Yd*Yd.adjoint()).trace());
+      TRACE_STRUCT.traceYdAdjYdYdAdjYuYuAdjYd = Re((Yd*Yd.adjoint()*Yd*Yu.adjoint()*
+         Yu*Yd.adjoint()).trace());
+      TRACE_STRUCT.traceYdAdjYuYuAdjYdYdAdjYd = Re((Yd*Yu.adjoint()*Yu*Yd.adjoint()*
+         Yd*Yd.adjoint()).trace());
+      TRACE_STRUCT.traceYdAdjYuYuAdjYuYuAdjYd = Re((Yd*Yu.adjoint()*Yu*Yu.adjoint()*
+         Yu*Yd.adjoint()).trace());
+      TRACE_STRUCT.traceYeAdjYeYeAdjYeYeAdjYe = Re((Ye*Ye.adjoint()*Ye*Ye.adjoint()*
+         Ye*Ye.adjoint()).trace());
+      TRACE_STRUCT.traceYuAdjYuYuAdjYuYuAdjYu = Re((Yu*Yu.adjoint()*Yu*Yu.adjoint()*
+         Yu*Yu.adjoint()).trace());
 
    }
 

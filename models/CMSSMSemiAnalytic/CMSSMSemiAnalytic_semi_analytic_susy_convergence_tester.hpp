@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 19:09:58
+// File generated at Sun 26 Aug 2018 15:27:57
 
 #ifndef CMSSMSemiAnalytic_SEMI_ANALYTIC_SUSY_CONVERGENCE_TESTER_H
 #define CMSSMSemiAnalytic_SEMI_ANALYTIC_SUSY_CONVERGENCE_TESTER_H

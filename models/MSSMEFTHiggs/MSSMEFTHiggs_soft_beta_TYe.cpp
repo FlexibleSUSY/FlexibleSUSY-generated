@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 16:38:17
+// File generated at Sun 26 Aug 2018 14:04:26
 
 #include "MSSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -77,10 +77,10 @@ Eigen::Matrix<double,3,3> MSSMEFTHiggs_soft_parameters::calc_beta_TYe_1_loop(con
 
    Eigen::Matrix<double,3,3> beta_TYe;
 
-   beta_TYe = (oneOver16PiSqr*(0.4*Ye*(9*MassB*Sqr(g1) + 5*(3*
-      traceAdjYdTYd + traceAdjYeTYe + 3*MassWB*Sqr(g2))) + (3*traceYdAdjYd +
-      traceYeAdjYe - 1.8*Sqr(g1) - 3*Sqr(g2))*TYe + 4*(Ye*Ye.adjoint()*TYe) + 5
-      *(TYe*Ye.adjoint()*Ye))).real();
+   beta_TYe = (oneOver16PiSqr*(0.4*Ye*(9*MassB*Sqr(g1) + 5*(3*traceAdjYdTYd +
+      traceAdjYeTYe + 3*MassWB*Sqr(g2))) + (3*traceYdAdjYd + traceYeAdjYe - 1.8
+      *Sqr(g1) - 3*Sqr(g2))*TYe + 4*(Ye*Ye.adjoint()*TYe) + 5*(TYe*Ye.adjoint()
+      *Ye))).real();
 
 
    return beta_TYe;

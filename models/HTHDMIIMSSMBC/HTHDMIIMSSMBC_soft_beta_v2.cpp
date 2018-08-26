@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:28:31
+// File generated at Sun 26 Aug 2018 14:07:30
 
 #include "HTHDMIIMSSMBC_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -74,8 +74,7 @@ double HTHDMIIMSSMBC_soft_parameters::calc_beta_v2_1_loop(const Soft_traces& sof
 
    double beta_v2;
 
-   beta_v2 = Re(0.6*oneOver16PiSqr*v2*(-5*traceYuAdjYu + Sqr(g1) + 5*Sqr(
-      g2)));
+   beta_v2 = Re(0.6*oneOver16PiSqr*v2*(-5*traceYuAdjYu + Sqr(g1) + 5*Sqr(g2)));
 
 
    return beta_v2;
@@ -95,15 +94,18 @@ double HTHDMIIMSSMBC_soft_parameters::calc_beta_v2_2_loop(const Soft_traces& sof
 
    double beta_v2;
 
-   beta_v2 = Re(twoLoop*(-3*Lambda1*Lambda6*v1 - 1.5*Lambda4*Lambda6*v1 -
-      1.5*Lambda5*Lambda6*v1 - 3*Lambda2*Lambda7*v1 - 1.5*Lambda4*Lambda7*v1 -
-      1.5*Lambda5*Lambda7*v1 + 2.25*traceYdAdjYuYuAdjYd*v2 + 6.75*
-      traceYuAdjYuYuAdjYu*v2 - 0.5*Lambda3*(3*Lambda6*v1 + 3*Lambda7*v1 + 2*
-      Lambda4*v2) - 1.75875*v2*Quad(g1) + 9.90625*v2*Quad(g2) - 3.025*
+   beta_v2 = Re(twoLoop*(-1.5*Lambda1*Lambda6*v1 - 0.75*Lambda3*Lambda6*v1 -
+      0.75*Lambda4*Lambda6*v1 - 0.75*Lambda5*Lambda6*v1 - 1.5*Lambda2*Lambda7*
+      v1 - 0.75*Lambda3*Lambda7*v1 - 0.75*Lambda4*Lambda7*v1 - 0.75*Lambda5*
+      Lambda7*v1 - Lambda3*Lambda4*v2 + 2.25*traceYdAdjYuYuAdjYd*v2 + 6.75*
+      traceYuAdjYuYuAdjYu*v2 - 4.5*v2*AbsSqr(Lambda7) - 0.75*(2*Lambda1*v1 +
+      Lambda3*v1 + Lambda4*v1 + 2*Lambda6*v2)*Conj(Lambda6) - 1.5*Lambda2*v1*
+      Conj(Lambda7) - 0.75*Lambda3*v1*Conj(Lambda7) - 0.75*Lambda4*v1*Conj(
+      Lambda7) - 0.75*Conj(Lambda5)*(2*Lambda5*v2 + v1*Conj(Lambda6) + v1*Conj(
+      Lambda7)) - 1.75875*v2*Quad(g1) + 9.90625*v2*Quad(g2) - 3.025*
       traceYuAdjYu*v2*Sqr(g1) - 10.125*traceYuAdjYu*v2*Sqr(g2) + 0.5625*v2*Sqr(
       g1)*Sqr(g2) - 20*traceYuAdjYu*v2*Sqr(g3) - 6*v2*Sqr(Lambda2) - v2*Sqr(
-      Lambda3) - v2*Sqr(Lambda4) - 1.5*v2*Sqr(Lambda5) - 1.5*v2*Sqr(Lambda6) -
-      4.5*v2*Sqr(Lambda7)));
+      Lambda3) - v2*Sqr(Lambda4)));
 
 
    return beta_v2;

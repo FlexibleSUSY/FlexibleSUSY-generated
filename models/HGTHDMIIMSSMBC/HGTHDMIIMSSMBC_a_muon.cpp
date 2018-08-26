@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:14:43
+// File generated at Sun 26 Aug 2018 14:07:51
 
 /**
  * @file HGTHDMIIMSSMBC_a_muon.cpp
  *
- * This file was generated at Mon 5 Mar 2018 17:14:43 with FlexibleSUSY
- * 2.1.0 and SARAH 4.12.3 .
+ * This file was generated at Sun 26 Aug 2018 14:07:51 with FlexibleSUSY
+ * 2.2.0 and SARAH 4.13.0 .
  */
 
 #include "HGTHDMIIMSSMBC_a_muon.hpp"
@@ -217,9 +217,8 @@ double OneLoopFunctionF2N(double x)
 
 double get_MSUSY(const HGTHDMIIMSSMBC_mass_eigenstates& model)
 {
-   return Min(model.get_MHm().tail<1>().minCoeff(), model.get_MCha().tail<2>()
-      .minCoeff());
-
+   return Min(model.get_MHm().tail<1>().minCoeff(), model.get_MCha().tail<2>().
+      minCoeff());
 }
 
 void run_to_MSUSY(HGTHDMIIMSSMBC_mass_eigenstates& model)

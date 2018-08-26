@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 15:32:02
+// File generated at Sun 26 Aug 2018 14:25:28
 
 #include "MRSSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -74,8 +74,8 @@ double MRSSMEFTHiggs_soft_parameters::calc_beta_mRd2_1_loop(const Soft_traces& s
 
    double beta_mRd2;
 
-   beta_mRd2 = Re(oneOver16PiSqr*(0.7745966692414834*g1*Tr11 + 2*(mHd2 +
-      mRd2 + mS2)*AbsSqr(LamSD) + 3*(mHd2 + mRd2 + mT2)*AbsSqr(LamTD)));
+   beta_mRd2 = Re(oneOver16PiSqr*(0.7745966692414834*g1*Tr11 + 2*(mHd2 + mRd2 +
+      mS2)*AbsSqr(LamSD) + 3*(mHd2 + mRd2 + mT2)*AbsSqr(LamTD)));
 
 
    return beta_mRd2;
@@ -101,16 +101,16 @@ double MRSSMEFTHiggs_soft_parameters::calc_beta_mRd2_2_loop(const Soft_traces& s
 
    double beta_mRd2;
 
-   beta_mRd2 = Re(twoLoop*(3.0983866769659336*g1*Tr31 - 2*AbsSqr(LamSD)*(
-      3*tracemd2YdAdjYd + traceme2YeAdjYe + traceml2AdjYeYe + 3*tracemq2AdjYdYd
-      + 6*mHd2*traceYdAdjYd + 3*mRd2*traceYdAdjYd + 3*mS2*traceYdAdjYd + 2*
-      mHd2*traceYeAdjYe + mRd2*traceYeAdjYe + mS2*traceYeAdjYe + 2*(mHd2 + mHu2
-      + mRd2 + mRu2 + 2*mS2)*AbsSqr(LamSU) + 3*(2*mHd2 + 2*mRd2 + mS2 + mT2)*
+   beta_mRd2 = Re(twoLoop*(3.0983866769659336*g1*Tr31 - 2*AbsSqr(LamSD)*(3*
+      tracemd2YdAdjYd + traceme2YeAdjYe + traceml2AdjYeYe + 3*tracemq2AdjYdYd +
+      6*mHd2*traceYdAdjYd + 3*mRd2*traceYdAdjYd + 3*mS2*traceYdAdjYd + 2*mHd2*
+      traceYeAdjYe + mRd2*traceYeAdjYe + mS2*traceYeAdjYe + 2*(mHd2 + mHu2 +
+      mRd2 + mRu2 + 2*mS2)*AbsSqr(LamSU) + 3*(2*mHd2 + 2*mRd2 + mS2 + mT2)*
       AbsSqr(LamTD)) + 6*Tr22*Quad(g2) + 1.2*Tr2U111*Sqr(g1) + 3*AbsSqr(LamTD)*
       (-3*tracemd2YdAdjYd - traceme2YeAdjYe - traceml2AdjYeYe - 3*
       tracemq2AdjYdYd - 6*mHd2*traceYdAdjYd - 3*mRd2*traceYdAdjYd - 3*mT2*
       traceYdAdjYd - 2*mHd2*traceYeAdjYe - mRd2*traceYeAdjYe - mT2*traceYeAdjYe
-      - (mHd2 + mHu2 + mRd2 + mRu2 + 2*mT2)*AbsSqr(LamTU) + 4*(mHd2 + mRd2 +
+       - (mHd2 + mHu2 + mRd2 + mRu2 + 2*mT2)*AbsSqr(LamTU) + 4*(mHd2 + mRd2 +
       mT2)*Sqr(g2)) - 12*(mHd2 + mRd2 + mS2)*Sqr(LamSD)*Sqr(Conj(LamSD)) - 15*(
       mHd2 + mRd2 + mT2)*Sqr(LamTD)*Sqr(Conj(LamTD))));
 

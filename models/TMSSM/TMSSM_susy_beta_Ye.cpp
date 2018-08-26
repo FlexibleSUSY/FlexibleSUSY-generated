@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:54:56
+// File generated at Sun 26 Aug 2018 14:12:25
 
 #include "TMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -39,9 +39,8 @@ Eigen::Matrix<double,3,3> TMSSM_susy_parameters::calc_beta_Ye_1_loop(const Susy_
 
    Eigen::Matrix<double,3,3> beta_Ye;
 
-   beta_Ye = (oneOver16PiSqr*(Ye*(3*traceYdAdjYd + traceYeAdjYe + 1.5*
-      AbsSqr(Lambdax) - 1.8*Sqr(g1) - 3*Sqr(g2)) + 3*(Ye*Ye.adjoint()*Ye)))
-      .real();
+   beta_Ye = (oneOver16PiSqr*(Ye*(3*traceYdAdjYd + traceYeAdjYe + 1.5*AbsSqr(
+      Lambdax) - 1.8*Sqr(g1) - 3*Sqr(g2)) + 3*(Ye*Ye.adjoint()*Ye))).real();
 
 
    return beta_Ye;

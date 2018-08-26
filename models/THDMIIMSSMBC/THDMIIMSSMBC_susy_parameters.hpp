@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:30:27
+// File generated at Sun 26 Aug 2018 14:08:32
 
 #ifndef THDMIIMSSMBC_susy_parameters_H
 #define THDMIIMSSMBC_susy_parameters_H
@@ -39,11 +39,10 @@ namespace flexiblesusy {
 class THDMIIMSSMBC_susy_parameters : public Beta_function {
 public:
    explicit THDMIIMSSMBC_susy_parameters(const THDMIIMSSMBC_input_parameters& input_ = THDMIIMSSMBC_input_parameters());
-   THDMIIMSSMBC_susy_parameters(double scale_, int loops_, int thresholds_, const THDMIIMSSMBC_input_parameters& input_, double g1_, double g2_, double g3_, double Lambda6_, double Lambda5_,
-   double Lambda7_, double Lambda1_, double Lambda4_, double Lambda3_, double
-   Lambda2_, const Eigen::Matrix<double,3,3>& Yu_, const Eigen::Matrix<double,3
-   ,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
-);
+   THDMIIMSSMBC_susy_parameters(double scale_, int loops_, int thresholds_, const THDMIIMSSMBC_input_parameters& input_, double g1_, double g2_, double g3_, double Lambda6_, double Lambda5_, double
+   Lambda7_, double Lambda1_, double Lambda4_, double Lambda3_, double Lambda2_
+   , const Eigen::Matrix<double,3,3>& Yu_, const Eigen::Matrix<double,3,3>& Yd_
+   , const Eigen::Matrix<double,3,3>& Ye_);
    THDMIIMSSMBC_susy_parameters(const THDMIIMSSMBC_susy_parameters&) = default;
    THDMIIMSSMBC_susy_parameters(THDMIIMSSMBC_susy_parameters&&) = default;
    virtual ~THDMIIMSSMBC_susy_parameters() = default;

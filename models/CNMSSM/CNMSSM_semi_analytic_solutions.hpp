@@ -16,14 +16,14 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 15:30:37
+// File generated at Sun 26 Aug 2018 13:59:46
 
 /**
  * @file CNMSSM_semi_analytic_solutions.hpp
  * @brief contains class for computing the semi-analytic solutions
  *
- * This file was generated at Mon 5 Mar 2018 15:30:37 with FlexibleSUSY
- * 2.1.0 (git commit: 8f20f6c9c42c159c1588fbc0bb3e15ce5ab6ace3) and SARAH 4.12.3 .
+ * This file was generated at Sun 26 Aug 2018 13:59:46 with FlexibleSUSY
+ * 2.2.0 (git commit: 8489097de2d6938a6da0149378457b5ad13d9425) and SARAH 4.13.0 .
  */
 
 #ifndef CNMSSM_SEMI_ANALYTIC_SOLUTIONS_H
@@ -178,6 +178,7 @@ private:
       double m12{};
       double m0Sq{};
 
+      
    };
 
    struct Model_data {

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:29:57
+// File generated at Sun 26 Aug 2018 14:20:51
 
 #include "UMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -59,8 +59,8 @@ double UMSSM_susy_parameters::calc_beta_g3_2_loop(const Susy_traces& susy_traces
 
    double beta_g3;
 
-   beta_g3 = Re(0.2*twoLoop*Cube(g3)*(11*Sqr(g1) + 5*(-4*traceYdAdjYd - 4
-      *traceYuAdjYu + 9*Sqr(g2) + 14*Sqr(g3) + 6*Sqr(gp)*Sqr(Qd) + 12*Sqr(gp)*
+   beta_g3 = Re(0.2*twoLoop*Cube(g3)*(11*Sqr(g1) + 5*(-4*traceYdAdjYd - 4*
+      traceYuAdjYu + 9*Sqr(g2) + 14*Sqr(g3) + 6*Sqr(gp)*Sqr(Qd) + 12*Sqr(gp)*
       Sqr(Qq) + 6*Sqr(gp)*Sqr(Qu))));
 
 

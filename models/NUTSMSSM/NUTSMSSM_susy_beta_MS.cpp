@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:24:45
+// File generated at Sun 26 Aug 2018 14:38:44
 
 #include "NUTSMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -57,8 +57,8 @@ double NUTSMSSM_susy_parameters::calc_beta_MS_2_loop(const Susy_traces& susy_tra
 
    double beta_MS;
 
-   beta_MS = Re(-0.8*MS*twoLoop*(20*AbsSqr(Kappa)*AbsSqr(Lambdax) +
-      AbsSqr(Lambdax)*(10*AbsSqr(Lambdax) - 3*Sqr(g1) + 5*(3*traceYdAdjYd +
+   beta_MS = Re(-0.8*MS*twoLoop*(20*AbsSqr(Kappa)*AbsSqr(Lambdax) + AbsSqr(
+      Lambdax)*(10*AbsSqr(Lambdax) - 3*Sqr(g1) + 5*(3*traceYdAdjYd +
       traceYeAdjYe + 3*traceYuAdjYu - 3*Sqr(g2))) + 20*Sqr(Conj(Kappa))*Sqr(
       Kappa)));
 

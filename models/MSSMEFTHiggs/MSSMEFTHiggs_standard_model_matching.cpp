@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 16:48:41
+// File generated at Sun 26 Aug 2018 14:05:50
 
 #include "MSSMEFTHiggs_standard_model_matching.hpp"
 #include "wrappers.hpp"
@@ -262,8 +262,8 @@ double calculate_delta_alpha_s(double alpha_s, const MSSMEFTHiggs_mass_eigenstat
    const auto MSu = MODELPARAMETER(MSu);
    const auto MGlu = MODELPARAMETER(MGlu);
 
-   delta_alpha_s += alpha_s/(2.*Pi)*(0.5 - 2*FiniteLog(Abs(MGlu/currentScale))
-      - 0.16666666666666666*FiniteLog(Abs(MSd(0)/currentScale)) -
+   delta_alpha_s += alpha_s/(2.*Pi)*(0.5 - 2*FiniteLog(Abs(MGlu/currentScale)) -
+      0.16666666666666666*FiniteLog(Abs(MSd(0)/currentScale)) -
       0.16666666666666666*FiniteLog(Abs(MSd(1)/currentScale)) -
       0.16666666666666666*FiniteLog(Abs(MSd(2)/currentScale)) -
       0.16666666666666666*FiniteLog(Abs(MSd(3)/currentScale)) -

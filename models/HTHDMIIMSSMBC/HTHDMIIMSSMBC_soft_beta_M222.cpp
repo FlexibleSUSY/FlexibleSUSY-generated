@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:28:30
+// File generated at Sun 26 Aug 2018 14:07:29
 
 #include "HTHDMIIMSSMBC_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -74,9 +74,9 @@ double HTHDMIIMSSMBC_soft_parameters::calc_beta_M222_1_loop(const Soft_traces& s
 
    double beta_M222;
 
-   beta_M222 = Re(oneOver16PiSqr*(4*Lambda3*M112 + 2*Lambda4*M112 - 12*
-      Lambda7*M122 + 12*Lambda2*M222 + 6*M222*traceYuAdjYu - 0.9*M222*Sqr(g1) -
-      4.5*M222*Sqr(g2)));
+   beta_M222 = Re(oneOver16PiSqr*(4*Lambda3*M112 + 2*Lambda4*M112 + 12*Lambda2*
+      M222 + 6*M222*traceYuAdjYu - 6*M122*Conj(Lambda7) - 6*Lambda7*Conj(M122)
+      - 0.9*M222*Sqr(g1) - 4.5*M222*Sqr(g2)));
 
 
    return beta_M222;
@@ -98,23 +98,31 @@ double HTHDMIIMSSMBC_soft_parameters::calc_beta_M222_2_loop(const Soft_traces& s
 
    double beta_M222;
 
-   beta_M222 = Re(twoLoop*(-8*Lambda3*Lambda4*M112 + 12*Lambda3*Lambda6*
-      M122 + 12*Lambda4*Lambda6*M122 + 12*Lambda5*Lambda6*M122 + 72*Lambda2*
-      Lambda7*M122 + 24*Lambda3*Lambda7*M122 + 24*Lambda4*Lambda7*M122 + 24*
-      Lambda5*Lambda7*M122 - 2*Lambda3*Lambda4*M222 - 24*Lambda3*M112*
-      traceYdAdjYd - 12*Lambda4*M112*traceYdAdjYd + 36*Lambda7*M122*
-      traceYdAdjYd - 4.5*M222*traceYdAdjYuYuAdjYd - 8*Lambda3*M112*traceYeAdjYe
-      - 4*Lambda4*M112*traceYeAdjYe + 12*Lambda7*M122*traceYeAdjYe + 36*
-      Lambda7*M122*traceYuAdjYu - 72*Lambda2*M222*traceYuAdjYu - 13.5*M222*
-      traceYuAdjYuYuAdjYu + (24*Lambda3*M112 + 12*Lambda4*M112 - 72*Lambda7*
-      M122 + 72*Lambda2*M222 + 11.25*M222*traceYuAdjYu)*Sqr(g2) + 0.025*Sqr(g1)
-      *(192*Lambda3*M112 + 96*Lambda4*M112 - 576*Lambda7*M122 + 576*Lambda2*
-      M222 + 170*M222*traceYuAdjYu + 45*M222*Sqr(g2)) + 40*M222*traceYuAdjYu*
-      Sqr(g3) - 60*M222*Sqr(Lambda2) - 8*M112*Sqr(Lambda3) - 2*M222*Sqr(Lambda3
-      ) - 8*M112*Sqr(Lambda4) - 2*M222*Sqr(Lambda4) - 12*M112*Sqr(Lambda5) - 3*
-      M222*Sqr(Lambda5) - 18*M112*Sqr(Lambda6) + 3*M222*Sqr(Lambda6) - 18*M112*
-      Sqr(Lambda7) - 27*M222*Sqr(Lambda7) + 0.0075*Quad(g1)*(120*M112 + 619*
-      M222 - 288*Sqr(Mu)) + Quad(g2)*(7.5*M112 - 5.1875*M222 - 18*Sqr(Mu))));
+   beta_M222 = Re(twoLoop*(-8*Lambda3*Lambda4*M112 + 6*Lambda5*Lambda6*M122 +
+      12*Lambda5*Lambda7*M122 - 2*Lambda3*Lambda4*M222 - 24*Lambda3*M112*
+      traceYdAdjYd - 12*Lambda4*M112*traceYdAdjYd - 4.5*M222*
+      traceYdAdjYuYuAdjYd - 8*Lambda3*M112*traceYeAdjYe - 4*Lambda4*M112*
+      traceYeAdjYe - 72*Lambda2*M222*traceYuAdjYu - 13.5*M222*
+      traceYuAdjYuYuAdjYu - 18*M112*AbsSqr(Lambda7) - 27*M222*AbsSqr(Lambda7) +
+      3*(2*(Lambda3 + Lambda4)*M122 + Lambda6*(-6*M112 + M222))*Conj(Lambda6) +
+      36*Lambda2*M122*Conj(Lambda7) + 12*Lambda3*M122*Conj(Lambda7) + 12*
+      Lambda4*M122*Conj(Lambda7) + 18*M122*traceYdAdjYd*Conj(Lambda7) + 6*M122*
+      traceYeAdjYe*Conj(Lambda7) + 18*M122*traceYuAdjYu*Conj(Lambda7) + 6*
+      Lambda3*Lambda6*Conj(M122) + 6*Lambda4*Lambda6*Conj(M122) + 36*Lambda2*
+      Lambda7*Conj(M122) + 12*Lambda3*Lambda7*Conj(M122) + 12*Lambda4*Lambda7*
+      Conj(M122) + 18*Lambda7*traceYdAdjYd*Conj(M122) + 6*Lambda7*traceYeAdjYe*
+      Conj(M122) + 18*Lambda7*traceYuAdjYu*Conj(M122) - 3*Conj(Lambda5)*(4*
+      Lambda5*M112 + Lambda5*M222 - 2*Conj(Lambda6)*Conj(M122) - 4*Conj(Lambda7
+      )*Conj(M122)) + 0.9*M112*Quad(g1) + 4.6425*M222*Quad(g1) + 7.5*M112*Quad(
+      g2) - 5.1875*M222*Quad(g2) + 4.8*Lambda3*M112*Sqr(g1) + 2.4*Lambda4*M112*
+      Sqr(g1) + 14.4*Lambda2*M222*Sqr(g1) + 4.25*M222*traceYuAdjYu*Sqr(g1) -
+      7.2*M122*Conj(Lambda7)*Sqr(g1) - 7.2*Lambda7*Conj(M122)*Sqr(g1) + 24*
+      Lambda3*M112*Sqr(g2) + 12*Lambda4*M112*Sqr(g2) + 72*Lambda2*M222*Sqr(g2)
+      + 11.25*M222*traceYuAdjYu*Sqr(g2) - 36*M122*Conj(Lambda7)*Sqr(g2) - 36*
+      Lambda7*Conj(M122)*Sqr(g2) + 1.125*M222*Sqr(g1)*Sqr(g2) + 40*M222*
+      traceYuAdjYu*Sqr(g3) - 60*M222*Sqr(Lambda2) - 8*M112*Sqr(Lambda3) - 2*
+      M222*Sqr(Lambda3) - 8*M112*Sqr(Lambda4) - 2*M222*Sqr(Lambda4) - 2.16*Quad
+      (g1)*Sqr(Mu) - 18*Quad(g2)*Sqr(Mu)));
 
 
    return beta_M222;

@@ -16,19 +16,23 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:58:25
+// File generated at Sun 26 Aug 2018 15:11:28
 
 #include "CMSSMNoFV_observables.hpp"
 #include "CMSSMNoFV_mass_eigenstates.hpp"
 #include "CMSSMNoFV_a_muon.hpp"
 #include "CMSSMNoFV_edm.hpp"
 #include "CMSSMNoFV_effective_couplings.hpp"
-#include "gm2calc_interface.hpp"
+#include "config.h"
 #include "eigen_utils.hpp"
 #include "numerics2.hpp"
 #include "wrappers.hpp"
 #include "lowe.h"
 #include "physical_input.hpp"
+
+#ifdef ENABLE_GM2Calc
+#include "gm2calc_interface.hpp"
+#endif
 
 #define MODEL model
 #define AMU a_muon
@@ -171,6 +175,7 @@ CMSSMNoFV_observables calculate_observables(CMSSMNoFV_mass_eigenstates& model,
    CMSSMNoFV_observables observables;
 
    try {
+      #ifdef ENABLE_GM2Calc
       GM2Calc_data gm2calc_data;
       gm2calc_data.alpha_s_MZ = ALPHA_S_MZ;
       gm2calc_data.MZ    = MZPole;
@@ -201,13 +206,19 @@ CMSSMNoFV_observables calculate_observables(CMSSMNoFV_mass_eigenstates& model,
       gm2calc_data.Au    = div_safe(MODEL.get_TYu(), MODEL.get_Yu());
       gm2calc_data.Ad    = div_safe(MODEL.get_TYd(), MODEL.get_Yd());
       gm2calc_data.Ae    = div_safe(MODEL.get_TYe(), MODEL.get_Ye());
+      #endif
+
       CMSSMNoFV_effective_couplings effective_couplings(model, qedqcd, physical_input);
       effective_couplings.calculate_effective_couplings();
 
       observables.AMU = CMSSMNoFV_a_muon::calculate_a_muon(MODEL);
       observables.AMUUNCERTAINTY = CMSSMNoFV_a_muon::calculate_a_muon_uncertainty(MODEL);
+      #ifdef ENABLE_GM2Calc
       observables.AMUGM2CALC = gm2calc_calculate_amu(gm2calc_data);
+      #endif
+      #ifdef ENABLE_GM2Calc
       observables.AMUGM2CALCUNCERTAINTY = gm2calc_calculate_amu_uncertainty(gm2calc_data);
+      #endif
       observables.EFFCPHIGGSPHOTONPHOTON(0) = effective_couplings.get_eff_CphhVPVP(0);
       observables.EFFCPHIGGSPHOTONPHOTON(1) = effective_couplings.get_eff_CphhVPVP(1);
       observables.EFFCPHIGGSGLUONGLUON(0) = effective_couplings.get_eff_CphhVGVG(0);

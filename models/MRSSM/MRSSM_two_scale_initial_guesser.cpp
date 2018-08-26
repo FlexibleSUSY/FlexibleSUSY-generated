@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:51:58
+// File generated at Sun 26 Aug 2018 15:32:32
 
 #include "MRSSM_two_scale_initial_guesser.hpp"
 #include "MRSSM_two_scale_model.hpp"
@@ -101,6 +101,8 @@ void MRSSM_initial_guesser<Two_scale>::guess_susy_parameters()
       leAtMt.displayPoleMmuon();
    mtau_guess = leAtMt.displayMass(softsusy::mTau);
 
+   calculate_running_SM_masses();
+
    // guess gauge couplings at mt
    const auto alpha_sm(leAtMt.guess_alpha_SM5(mtpole));
 
@@ -124,9 +126,28 @@ void MRSSM_initial_guesser<Two_scale>::guess_susy_parameters()
 
 void MRSSM_initial_guesser<Two_scale>::calculate_DRbar_yukawa_couplings()
 {
+   calculate_running_SM_masses();
    calculate_Yu_DRbar();
    calculate_Yd_DRbar();
    calculate_Ye_DRbar();
+}
+
+void MRSSM_initial_guesser<Two_scale>::calculate_running_SM_masses()
+{
+   upQuarksDRbar.setZero();
+   upQuarksDRbar(0,0) = mu_guess;
+   upQuarksDRbar(1,1) = mc_guess;
+   upQuarksDRbar(2,2) = mt_guess;
+
+   downQuarksDRbar.setZero();
+   downQuarksDRbar(0,0) = md_guess;
+   downQuarksDRbar(1,1) = ms_guess;
+   downQuarksDRbar(2,2) = mb_guess;
+
+   downLeptonsDRbar.setZero();
+   downLeptonsDRbar(0,0) = me_guess;
+   downLeptonsDRbar(1,1) = mm_guess;
+   downLeptonsDRbar(2,2) = mtau_guess;
 }
 
 /**
@@ -136,11 +157,6 @@ void MRSSM_initial_guesser<Two_scale>::calculate_DRbar_yukawa_couplings()
  */
 void MRSSM_initial_guesser<Two_scale>::calculate_Yu_DRbar()
 {
-   Eigen::Matrix<std::complex<double>,3,3> upQuarksDRbar(ZEROMATRIXCOMPLEX(3,3));
-   upQuarksDRbar(0,0) = mu_guess;
-   upQuarksDRbar(1,1) = mc_guess;
-   upQuarksDRbar(2,2) = mt_guess;
-
    const auto vu = MODELPARAMETER(vu);
    MODEL->set_Yu((((1.4142135623730951*upQuarksDRbar)/vu).transpose()).real());
 
@@ -153,14 +169,8 @@ void MRSSM_initial_guesser<Two_scale>::calculate_Yu_DRbar()
  */
 void MRSSM_initial_guesser<Two_scale>::calculate_Yd_DRbar()
 {
-   Eigen::Matrix<std::complex<double>,3,3> downQuarksDRbar(ZEROMATRIXCOMPLEX(3,3));
-   downQuarksDRbar(0,0) = md_guess;
-   downQuarksDRbar(1,1) = ms_guess;
-   downQuarksDRbar(2,2) = mb_guess;
-
    const auto vd = MODELPARAMETER(vd);
-   MODEL->set_Yd((((1.4142135623730951*downQuarksDRbar)/vd).transpose()).real()
-      );
+   MODEL->set_Yd((((1.4142135623730951*downQuarksDRbar)/vd).transpose()).real());
 
 }
 
@@ -171,14 +181,8 @@ void MRSSM_initial_guesser<Two_scale>::calculate_Yd_DRbar()
  */
 void MRSSM_initial_guesser<Two_scale>::calculate_Ye_DRbar()
 {
-   Eigen::Matrix<std::complex<double>,3,3> downLeptonsDRbar(ZEROMATRIXCOMPLEX(3,3));
-   downLeptonsDRbar(0,0) = me_guess;
-   downLeptonsDRbar(1,1) = mm_guess;
-   downLeptonsDRbar(2,2) = mtau_guess;
-
    const auto vd = MODELPARAMETER(vd);
-   MODEL->set_Ye((((1.4142135623730951*downLeptonsDRbar)/vd).transpose()).real(
-      ));
+   MODEL->set_Ye((((1.4142135623730951*downLeptonsDRbar)/vd).transpose()).real());
 
 }
 

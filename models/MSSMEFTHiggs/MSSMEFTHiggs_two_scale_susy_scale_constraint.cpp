@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 16:48:53
+// File generated at Sun 26 Aug 2018 14:06:04
 
 #include "MSSMEFTHiggs_two_scale_susy_scale_constraint.hpp"
 #include "MSSMEFTHiggs_two_scale_model.hpp"
@@ -64,6 +64,7 @@ void MSSMEFTHiggs_susy_scale_constraint<Two_scale>::apply()
 {
    check_model_ptr();
 
+   
 
 
    model->calculate_DRbar_masses();
@@ -166,8 +167,8 @@ void MSSMEFTHiggs_susy_scale_constraint<Two_scale>::initialize()
    const auto mq2Input = INPUTPARAMETER(mq2Input);
    const auto mu2Input = INPUTPARAMETER(mu2Input);
 
-   initial_scale_guess = IF(MSUSY != 0, MSUSY, Sqrt(Sqrt((51200*MuInput*TanBeta
-      *AuInput(2,2) - 25600*Sqr(MuInput) + Sqr(TanBeta)*((25600 + mq2Input(2,2))*(
+   initial_scale_guess = IF(MSUSY != 0, MSUSY, Sqrt(Sqrt((51200*MuInput*TanBeta*
+      AuInput(2,2) - 25600*Sqr(MuInput) + Sqr(TanBeta)*((25600 + mq2Input(2,2))*(
       25600 + mu2Input(2,2)) - 25600*Sqr(AuInput(2,2))))/Sqr(TanBeta))));
 
    scale = initial_scale_guess;
@@ -186,9 +187,9 @@ void MSSMEFTHiggs_susy_scale_constraint<Two_scale>::update_scale()
    const auto Mu = MODELPARAMETER(Mu);
    const auto Yu = MODELPARAMETER(Yu);
 
-   scale = IF(MSUSY != 0, MSUSY, 0.7071067811865476*Sqrt(Sqrt(2*mq2Input(2,2)*(
-      2*mu2Input(2,2) + Sqr(vu)*Sqr(Yu(2,2))) + Sqr(Yu(2,2))*(4*vd*vu*AuInput(2,2)
-      *Mu - 2*Sqr(vd)*Sqr(Mu) + Sqr(vu)*(2*mu2Input(2,2) - 2*Sqr(AuInput(2,2)) +
+   scale = IF(MSUSY != 0, MSUSY, 0.7071067811865476*Sqrt(Sqrt(2*mq2Input(2,2)*(2*
+      mu2Input(2,2) + Sqr(vu)*Sqr(Yu(2,2))) + Sqr(Yu(2,2))*(4*vd*vu*AuInput(2,2)*
+      Mu - 2*Sqr(vd)*Sqr(Mu) + Sqr(vu)*(2*mu2Input(2,2) - 2*Sqr(AuInput(2,2)) +
       Sqr(vu)*Sqr(Yu(2,2)))))));
 
 

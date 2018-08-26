@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:35:00
+// File generated at Sun 26 Aug 2018 14:09:56
 
 #include "THDMII_slha_io.hpp"
 #include "THDMII_input_parameters.hpp"
@@ -687,8 +687,7 @@ void THDMII_slha_io::fill_physical(THDMII_physical& physical) const
 double THDMII_slha_io::read_scale() const
 {
    static const std::array<std::string, 5> drbar_blocks =
-      { "gauge", "Yu", "Yd", "Ye", "HMIX" }
-;
+      { "gauge", "Yu", "Yd", "Ye", "HMIX" };
 
    double scale = 0.;
 

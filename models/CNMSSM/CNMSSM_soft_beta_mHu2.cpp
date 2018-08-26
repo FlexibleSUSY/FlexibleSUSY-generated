@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 15:12:03
+// File generated at Sun 26 Aug 2018 13:53:36
 
 #include "CNMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -114,31 +114,19 @@ double CNMSSM_soft_parameters::calc_beta_mHu2_2_loop(const Soft_traces& soft_tra
    const double tracemq2AdjYuYu = TRACE_STRUCT.tracemq2AdjYuYu;
    const double tracemu2YuAdjYu = TRACE_STRUCT.tracemu2YuAdjYu;
    const double traceYdAdjYuYuAdjYd = TRACE_STRUCT.traceYdAdjYuYuAdjYd;
-   const double traceYdAdjYuTYuAdjTYd =
-      TRACE_STRUCT.traceYdAdjYuTYuAdjTYd;
-   const double traceYdAdjTYuTYuAdjYd =
-      TRACE_STRUCT.traceYdAdjTYuTYuAdjYd;
-   const double traceYuAdjYdTYdAdjTYu =
-      TRACE_STRUCT.traceYuAdjYdTYdAdjTYu;
+   const double traceYdAdjYuTYuAdjTYd = TRACE_STRUCT.traceYdAdjYuTYuAdjTYd;
+   const double traceYdAdjTYuTYuAdjYd = TRACE_STRUCT.traceYdAdjTYuTYuAdjYd;
+   const double traceYuAdjYdTYdAdjTYu = TRACE_STRUCT.traceYuAdjYdTYdAdjTYu;
    const double traceYuAdjYuYuAdjYu = TRACE_STRUCT.traceYuAdjYuYuAdjYu;
-   const double traceYuAdjYuTYuAdjTYu =
-      TRACE_STRUCT.traceYuAdjYuTYuAdjTYu;
-   const double traceYuAdjTYdTYdAdjYu =
-      TRACE_STRUCT.traceYuAdjTYdTYdAdjYu;
-   const double traceYuAdjTYuTYuAdjYu =
-      TRACE_STRUCT.traceYuAdjTYuTYuAdjYu;
-   const double tracemd2YdAdjYuYuAdjYd =
-      TRACE_STRUCT.tracemd2YdAdjYuYuAdjYd;
-   const double tracemq2AdjYdYdAdjYuYu =
-      TRACE_STRUCT.tracemq2AdjYdYdAdjYuYu;
-   const double tracemq2AdjYuYuAdjYdYd =
-      TRACE_STRUCT.tracemq2AdjYuYuAdjYdYd;
-   const double tracemq2AdjYuYuAdjYuYu =
-      TRACE_STRUCT.tracemq2AdjYuYuAdjYuYu;
-   const double tracemu2YuAdjYdYdAdjYu =
-      TRACE_STRUCT.tracemu2YuAdjYdYdAdjYu;
-   const double tracemu2YuAdjYuYuAdjYu =
-      TRACE_STRUCT.tracemu2YuAdjYuYuAdjYu;
+   const double traceYuAdjYuTYuAdjTYu = TRACE_STRUCT.traceYuAdjYuTYuAdjTYu;
+   const double traceYuAdjTYdTYdAdjYu = TRACE_STRUCT.traceYuAdjTYdTYdAdjYu;
+   const double traceYuAdjTYuTYuAdjYu = TRACE_STRUCT.traceYuAdjTYuTYuAdjYu;
+   const double tracemd2YdAdjYuYuAdjYd = TRACE_STRUCT.tracemd2YdAdjYuYuAdjYd;
+   const double tracemq2AdjYdYdAdjYuYu = TRACE_STRUCT.tracemq2AdjYdYdAdjYuYu;
+   const double tracemq2AdjYuYuAdjYdYd = TRACE_STRUCT.tracemq2AdjYuYuAdjYdYd;
+   const double tracemq2AdjYuYuAdjYuYu = TRACE_STRUCT.tracemq2AdjYuYuAdjYuYu;
+   const double tracemu2YuAdjYdYdAdjYu = TRACE_STRUCT.tracemu2YuAdjYdYdAdjYu;
+   const double tracemu2YuAdjYuYuAdjYu = TRACE_STRUCT.tracemu2YuAdjYuYuAdjYu;
    const double Tr2U111 = TRACE_STRUCT.Tr2U111;
    const double Tr31 = TRACE_STRUCT.Tr31;
    const double Tr22 = TRACE_STRUCT.Tr22;
@@ -146,17 +134,17 @@ double CNMSSM_soft_parameters::calc_beta_mHu2_2_loop(const Soft_traces& soft_tra
 
    double beta_mHu2;
 
-   beta_mHu2 = Re(0.04*twoLoop*(Conj(MassB)*Sqr(g1)*(621*MassB*Sqr(g1) +
-      5*(-8*(traceAdjYuTYu - 2*MassB*traceYuAdjYu) + 9*(2*MassB + MassWB)*Sqr(
-      g2))) + 5*(3*Conj(MassWB)*Sqr(g2)*(3*(MassB + 2*MassWB)*Sqr(g1) + 55*
-      MassWB*Sqr(g2)) - 160*(traceAdjYuTYu - 2*MassG*traceYuAdjYu)*Conj(MassG)*
-      Sqr(g3) + 2*(7.745966692414834*g1*Tr31 - 15*tracemd2YdAdjYuYuAdjYd - 15*
+   beta_mHu2 = Re(0.04*twoLoop*(Conj(MassB)*Sqr(g1)*(621*MassB*Sqr(g1) + 5*(-8*
+      (traceAdjYuTYu - 2*MassB*traceYuAdjYu) + 9*(2*MassB + MassWB)*Sqr(g2))) +
+      5*(3*Conj(MassWB)*Sqr(g2)*(3*(MassB + 2*MassWB)*Sqr(g1) + 55*MassWB*Sqr(
+      g2)) - 160*(traceAdjYuTYu - 2*MassG*traceYuAdjYu)*Conj(MassG)*Sqr(g3) + 2
+      *(7.745966692414834*g1*Tr31 - 15*tracemd2YdAdjYuYuAdjYd - 15*
       tracemq2AdjYdYdAdjYuYu - 15*tracemq2AdjYuYuAdjYdYd - 90*
       tracemq2AdjYuYuAdjYuYu - 15*tracemu2YuAdjYdYdAdjYu - 90*
       tracemu2YuAdjYuYuAdjYu - 15*traceYdAdjTYuTYuAdjYd - 15*
       traceYdAdjYuTYuAdjTYd - 15*mHd2*traceYdAdjYuYuAdjYd - 15*mHu2*
       traceYdAdjYuYuAdjYd - 15*traceYuAdjTYdTYdAdjYu - 90*traceYuAdjTYuTYuAdjYu
-      - 15*traceYuAdjYdTYdAdjTYu - 90*traceYuAdjYuTYuAdjTYu - 90*mHu2*
+       - 15*traceYuAdjYdTYdAdjTYu - 90*traceYuAdjYuTYuAdjTYu - 90*mHu2*
       traceYuAdjYuYuAdjYu + 15*Tr22*Quad(g2) + 3*Tr2U111*Sqr(g1) + 4*
       traceconjTYuTpTYu*Sqr(g1) - 4*MassB*traceconjTYuTpYu*Sqr(g1) + 4*
       tracemq2AdjYuYu*Sqr(g1) + 4*tracemu2YuAdjYu*Sqr(g1) + 4*mHu2*traceYuAdjYu

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:08:23
+// File generated at Sun 26 Aug 2018 14:06:41
 
 #include "HGTHDMIIMSSMBC_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -93,9 +93,9 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_MassB_2_loop(const Soft_traces&
 
    double beta_MassB;
 
-   beta_MassB = Re(0.025*twoLoop*(51*MassB*Sqr(g1)*(Sqr(g1dp) + Sqr(g2up)
-      ) - 5*(-(MassB*Quad(g1dp)) + 3*(7*MassB - 8*MassWB)*Sqr(g1d)*Sqr(g1dp) +
-      3*MassB*Sqr(g1dp)*(4*(3*traceYdAdjYd + traceYeAdjYe) - 17*Sqr(g2)) - Sqr(
+   beta_MassB = Re(0.025*twoLoop*(51*MassB*Sqr(g1)*(Sqr(g1dp) + Sqr(g2up)) - 5*
+      (-(MassB*Quad(g1dp)) + 3*(7*MassB - 8*MassWB)*Sqr(g1d)*Sqr(g1dp) + 3*
+      MassB*Sqr(g1dp)*(4*(3*traceYdAdjYd + traceYeAdjYe) - 17*Sqr(g2)) - Sqr(
       g2up)*(51*MassB*Sqr(g2) - 3*(7*MassB - 8*MassWB)*Sqr(g2u) + MassB*(-36*
       traceYuAdjYu + Sqr(g2up))))));
 

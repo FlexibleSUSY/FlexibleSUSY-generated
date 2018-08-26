@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:55:10
+// File generated at Sun 26 Aug 2018 14:12:44
 
 #include "TMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -79,10 +79,10 @@ double TMSSM_soft_parameters::calc_beta_TLambdax_1_loop(const Soft_traces& soft_
 
    double beta_TLambdax;
 
-   beta_TLambdax = Re(oneOver16PiSqr*(0.4*Lambdax*(3*MassB*Sqr(g1) + 5*(3
-      *traceAdjYdTYd + traceAdjYeTYe + 3*traceAdjYuTYu + 7*MassWB*Sqr(g2))) + (
-      3*traceYdAdjYd + traceYeAdjYe + 3*traceYuAdjYu + 12*AbsSqr(Lambdax) - 0.6
-      *Sqr(g1) - 7*Sqr(g2))*TLambdax));
+   beta_TLambdax = Re(oneOver16PiSqr*(0.4*Lambdax*(3*MassB*Sqr(g1) + 5*(3*
+      traceAdjYdTYd + traceAdjYeTYe + 3*traceAdjYuTYu + 7*MassWB*Sqr(g2))) + (3
+      *traceYdAdjYd + traceYeAdjYe + 3*traceYuAdjYu + 12*AbsSqr(Lambdax) - 0.6*
+      Sqr(g1) - 7*Sqr(g2))*TLambdax));
 
 
    return beta_TLambdax;
@@ -114,8 +114,8 @@ double TMSSM_soft_parameters::calc_beta_TLambdax_2_loop(const Soft_traces& soft_
 
    double beta_TLambdax;
 
-   beta_TLambdax = Re(0.02*twoLoop*(-4*Lambdax*(207*MassB*Quad(g1) + 5*
-      Sqr(g1)*(2*(traceAdjYdTYd - 3*traceAdjYeTYe - 2*traceAdjYuTYu - MassB*
+   beta_TLambdax = Re(0.02*twoLoop*(-4*Lambdax*(207*MassB*Quad(g1) + 5*Sqr(g1)*
+      (2*(traceAdjYdTYd - 3*traceAdjYeTYe - 2*traceAdjYuTYu - MassB*
       traceYdAdjYd + 3*MassB*traceYeAdjYe + 2*MassB*traceYuAdjYu) + 9*(MassB +
       MassWB)*Sqr(g2)) + 25*(83*MassWB*Quad(g2) + 2*(3*(3*traceYdAdjYdTYdAdjYd
       + traceYdAdjYuTYuAdjYd + traceYeAdjYeTYeAdjYe + traceYuAdjYdTYdAdjYu + 3*

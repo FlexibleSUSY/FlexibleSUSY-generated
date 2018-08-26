@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:44:55
+// File generated at Sun 26 Aug 2018 14:10:43
 
 #include "SM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -41,8 +41,8 @@ Eigen::Matrix<double,3,3> SM_susy_parameters::calc_beta_Ye_1_loop(const Susy_tra
    Eigen::Matrix<double,3,3> beta_Ye;
 
    beta_Ye = (oneOver16PiSqr*(Ye*(3*traceYdAdjYd + traceYeAdjYe + 3*
-      traceYuAdjYu - 2.25*Sqr(g1) - 2.25*Sqr(g2)) + 1.5*(Ye*Ye.adjoint()*Ye)))
-      .real();
+      traceYuAdjYu - 2.25*Sqr(g1) - 2.25*Sqr(g2)) + 1.5*(Ye*Ye.adjoint()*Ye))).
+      real();
 
 
    return beta_Ye;
@@ -66,12 +66,12 @@ Eigen::Matrix<double,3,3> SM_susy_parameters::calc_beta_Ye_2_loop(const Susy_tra
 
    Eigen::Matrix<double,3,3> beta_Ye;
 
-   beta_Ye = (twoLoop*(0.005*Ye*(1371*Quad(g1) + 5*Sqr(g1)*(25*
-      traceYdAdjYd + 75*traceYeAdjYe + 85*traceYuAdjYu + 54*Sqr(g2)) - 25*(46*
-      Quad(g2) - 15*(3*traceYdAdjYd + traceYeAdjYe + 3*traceYuAdjYu)*Sqr(g2) -
-      2*(80*(traceYdAdjYd + traceYuAdjYu)*Sqr(g3) - 3*(9*traceYdAdjYdYdAdjYd -
-      2*traceYdAdjYuYuAdjYd + 3*traceYeAdjYeYeAdjYe + 9*traceYuAdjYuYuAdjYu - 2
-      *Sqr(Lambdax))))) + 0.0375*(129*Sqr(g1) + 5*(-4*(9*traceYdAdjYd + 3*
+   beta_Ye = (twoLoop*(0.005*Ye*(1371*Quad(g1) + 5*Sqr(g1)*(25*traceYdAdjYd +
+      75*traceYeAdjYe + 85*traceYuAdjYu + 54*Sqr(g2)) - 25*(46*Quad(g2) - 15*(3
+      *traceYdAdjYd + traceYeAdjYe + 3*traceYuAdjYu)*Sqr(g2) - 2*(80*(
+      traceYdAdjYd + traceYuAdjYu)*Sqr(g3) - 3*(9*traceYdAdjYdYdAdjYd - 2*
+      traceYdAdjYuYuAdjYd + 3*traceYeAdjYeYeAdjYe + 9*traceYuAdjYuYuAdjYu - 2*
+      Sqr(Lambdax))))) + 0.0375*(129*Sqr(g1) + 5*(-4*(9*traceYdAdjYd + 3*
       traceYeAdjYe + 9*traceYuAdjYu + 8*Lambdax) + 45*Sqr(g2)))*(Ye*Ye.adjoint(
       )*Ye) + 1.5*(Ye*Ye.adjoint()*Ye*Ye.adjoint()*Ye))).real();
 

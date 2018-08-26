@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 16:03:17
+// File generated at Sun 26 Aug 2018 13:46:19
 
 #ifndef CE6SSM_susy_parameters_H
 #define CE6SSM_susy_parameters_H
@@ -39,12 +39,11 @@ namespace flexiblesusy {
 class CE6SSM_susy_parameters : public Beta_function {
 public:
    explicit CE6SSM_susy_parameters(const CE6SSM_input_parameters& input_ = CE6SSM_input_parameters());
-   CE6SSM_susy_parameters(double scale_, int loops_, int thresholds_, const CE6SSM_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
-   , const Eigen::Matrix<double,3,3>& Kappa_, const Eigen::Matrix<double,2,2>&
+   CE6SSM_susy_parameters(double scale_, int loops_, int thresholds_, const CE6SSM_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_,
+   const Eigen::Matrix<double,3,3>& Kappa_, const Eigen::Matrix<double,2,2>&
    Lambda12_, double Lambdax_, const Eigen::Matrix<double,3,3>& Yu_, double
    MuPr_, double g1_, double g2_, double g3_, double gN_, double vd_, double
-   vu_, double vs_
-);
+   vu_, double vs_);
    CE6SSM_susy_parameters(const CE6SSM_susy_parameters&) = default;
    CE6SSM_susy_parameters(CE6SSM_susy_parameters&&) = default;
    virtual ~CE6SSM_susy_parameters() = default;

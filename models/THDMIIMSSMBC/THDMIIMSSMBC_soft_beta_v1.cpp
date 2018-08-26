@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:30:45
+// File generated at Sun 26 Aug 2018 14:08:54
 
 #include "THDMIIMSSMBC_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -98,16 +98,19 @@ double THDMIIMSSMBC_soft_parameters::calc_beta_v1_2_loop(const Soft_traces& soft
 
    double beta_v1;
 
-   beta_v1 = Re(0.00125*twoLoop*(-1287*v1*Quad(g1) + 10*v1*Sqr(g1)*(-2*(
-      61*traceYdAdjYd + 87*traceYeAdjYe) + 45*Sqr(g2)) + 25*(357*v1*Quad(g2) -
-      108*(3*traceYdAdjYd + traceYeAdjYe)*v1*Sqr(g2) - 8*(4*Lambda3*Lambda4*v1
-      - 27*traceYdAdjYdYdAdjYd*v1 - 9*traceYdAdjYuYuAdjYd*v1 - 9*
-      traceYeAdjYeYeAdjYe*v1 + 12*Lambda1*Lambda6*v2 + 6*Lambda3*Lambda6*v2 + 6
-      *Lambda4*Lambda6*v2 + 6*Lambda5*Lambda6*v2 + 12*Lambda2*Lambda7*v2 + 6*
-      Lambda3*Lambda7*v2 + 6*Lambda4*Lambda7*v2 + 6*Lambda5*Lambda7*v2 + 80*
-      traceYdAdjYd*v1*Sqr(g3) + 24*v1*Sqr(Lambda1) + 4*v1*Sqr(Lambda3) + 4*v1*
-      Sqr(Lambda4) + 6*v1*Sqr(Lambda5) + 18*v1*Sqr(Lambda6) + 6*v1*Sqr(Lambda7)
-      ))));
+   beta_v1 = Re(twoLoop*(-(Lambda3*Lambda4*v1) + 6.75*traceYdAdjYdYdAdjYd*v1 +
+      2.25*traceYdAdjYuYuAdjYd*v1 + 2.25*traceYeAdjYeYeAdjYe*v1 - 1.5*Lambda1*
+      Lambda6*v2 - 0.75*Lambda3*Lambda6*v2 - 0.75*Lambda4*Lambda6*v2 - 0.75*
+      Lambda5*Lambda6*v2 - 1.5*Lambda2*Lambda7*v2 - 0.75*Lambda3*Lambda7*v2 -
+      0.75*Lambda4*Lambda7*v2 - 0.75*Lambda5*Lambda7*v2 - 1.5*v1*AbsSqr(Lambda7
+      ) - 0.75*(6*Lambda6*v1 + (2*Lambda1 + Lambda3 + Lambda4)*v2)*Conj(Lambda6
+      ) - 1.5*Lambda2*v2*Conj(Lambda7) - 0.75*Lambda3*v2*Conj(Lambda7) - 0.75*
+      Lambda4*v2*Conj(Lambda7) - 0.75*Conj(Lambda5)*(2*Lambda5*v1 + v2*Conj(
+      Lambda6) + v2*Conj(Lambda7)) - 1.60875*v1*Quad(g1) + 11.15625*v1*Quad(g2)
+      - 1.525*traceYdAdjYd*v1*Sqr(g1) - 2.175*traceYeAdjYe*v1*Sqr(g1) - 10.125*
+      traceYdAdjYd*v1*Sqr(g2) - 3.375*traceYeAdjYe*v1*Sqr(g2) + 0.5625*v1*Sqr(
+      g1)*Sqr(g2) - 20*traceYdAdjYd*v1*Sqr(g3) - 6*v1*Sqr(Lambda1) - v1*Sqr(
+      Lambda3) - v1*Sqr(Lambda4)));
 
 
    return beta_v1;

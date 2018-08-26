@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 19:10:01
+// File generated at Sun 26 Aug 2018 15:28:00
 
 #include "CMSSMSemiAnalytic_semi_analytic_initial_guesser.hpp"
 #include "CMSSMSemiAnalytic_semi_analytic_model.hpp"
@@ -104,6 +104,8 @@ void CMSSMSemiAnalytic_initial_guesser<Semi_analytic>::initial_guess_low_scale_p
       leAtMt.displayPoleMmuon();
    mtau_guess = leAtMt.displayMass(softsusy::mTau);
 
+   calculate_running_SM_masses();
+
    // guess gauge couplings at mt
    const auto alpha_sm(leAtMt.guess_alpha_SM5(mtpole));
 
@@ -132,9 +134,28 @@ void CMSSMSemiAnalytic_initial_guesser<Semi_analytic>::initial_guess_low_scale_p
 
 void CMSSMSemiAnalytic_initial_guesser<Semi_analytic>::calculate_DRbar_yukawa_couplings()
 {
+   calculate_running_SM_masses();
    calculate_Yu_DRbar();
    calculate_Yd_DRbar();
    calculate_Ye_DRbar();
+}
+
+void CMSSMSemiAnalytic_initial_guesser<Semi_analytic>::calculate_running_SM_masses()
+{
+   upQuarksDRbar.setZero();
+   upQuarksDRbar(0,0) = mu_guess;
+   upQuarksDRbar(1,1) = mc_guess;
+   upQuarksDRbar(2,2) = mt_guess;
+
+   downQuarksDRbar.setZero();
+   downQuarksDRbar(0,0) = md_guess;
+   downQuarksDRbar(1,1) = ms_guess;
+   downQuarksDRbar(2,2) = mb_guess;
+
+   downLeptonsDRbar.setZero();
+   downLeptonsDRbar(0,0) = me_guess;
+   downLeptonsDRbar(1,1) = mm_guess;
+   downLeptonsDRbar(2,2) = mtau_guess;
 }
 
 /**
@@ -144,11 +165,6 @@ void CMSSMSemiAnalytic_initial_guesser<Semi_analytic>::calculate_DRbar_yukawa_co
  */
 void CMSSMSemiAnalytic_initial_guesser<Semi_analytic>::calculate_Yu_DRbar()
 {
-   Eigen::Matrix<std::complex<double>,3,3> upQuarksDRbar(ZEROMATRIXCOMPLEX(3,3));
-   upQuarksDRbar(0,0) = mu_guess;
-   upQuarksDRbar(1,1) = mc_guess;
-   upQuarksDRbar(2,2) = mt_guess;
-
    const auto vu = MODELPARAMETER(vu);
    MODEL->set_Yu((((1.4142135623730951*upQuarksDRbar)/vu).transpose()).real());
 
@@ -161,14 +177,8 @@ void CMSSMSemiAnalytic_initial_guesser<Semi_analytic>::calculate_Yu_DRbar()
  */
 void CMSSMSemiAnalytic_initial_guesser<Semi_analytic>::calculate_Yd_DRbar()
 {
-   Eigen::Matrix<std::complex<double>,3,3> downQuarksDRbar(ZEROMATRIXCOMPLEX(3,3));
-   downQuarksDRbar(0,0) = md_guess;
-   downQuarksDRbar(1,1) = ms_guess;
-   downQuarksDRbar(2,2) = mb_guess;
-
    const auto vd = MODELPARAMETER(vd);
-   MODEL->set_Yd((((1.4142135623730951*downQuarksDRbar)/vd).transpose()).real()
-      );
+   MODEL->set_Yd((((1.4142135623730951*downQuarksDRbar)/vd).transpose()).real());
 
 }
 
@@ -177,16 +187,10 @@ void CMSSMSemiAnalytic_initial_guesser<Semi_analytic>::calculate_Yd_DRbar()
  * from the Standard Model down-type lepton masses (ignoring threshold
  * corrections).
  */
-   void CMSSMSemiAnalytic_initial_guesser<Semi_analytic>::calculate_Ye_DRbar()
+void CMSSMSemiAnalytic_initial_guesser<Semi_analytic>::calculate_Ye_DRbar()
 {
-   Eigen::Matrix<std::complex<double>,3,3> downLeptonsDRbar(ZEROMATRIXCOMPLEX(3,3));
-   downLeptonsDRbar(0,0) = me_guess;
-   downLeptonsDRbar(1,1) = mm_guess;
-   downLeptonsDRbar(2,2) = mtau_guess;
-
    const auto vd = MODELPARAMETER(vd);
-   MODEL->set_Ye((((1.4142135623730951*downLeptonsDRbar)/vd).transpose()).real(
-      ));
+   MODEL->set_Ye((((1.4142135623730951*downLeptonsDRbar)/vd).transpose()).real());
 
 }
 
@@ -200,6 +204,7 @@ void CMSSMSemiAnalytic_initial_guesser<Semi_analytic>::initial_guess_high_scale_
    high_constraint.apply();
 
    // apply user-defined initial guess at the high scale
+   
 
 }
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 16:21:10
+// File generated at Sun 26 Aug 2018 15:17:59
 
 #include "MRSSMEFTHiggs_slha_io.hpp"
 #include "MRSSMEFTHiggs_input_parameters.hpp"
@@ -917,8 +917,7 @@ double MRSSMEFTHiggs_slha_io::read_scale() const
 {
    static const std::array<std::string, 12> drbar_blocks =
       { "gauge", "Yu", "Yd", "Ye", "HMIX", "MSQ2", "MSE2", "MSL2", "MSU2", "MSD2",
-   "MSOFT", "NMSSMRUN" }
-;
+   "MSOFT", "NMSSMRUN" };
 
    double scale = 0.;
 

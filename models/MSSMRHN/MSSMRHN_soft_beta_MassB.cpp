@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:46:25
+// File generated at Sun 26 Aug 2018 14:56:14
 
 #include "MSSMRHN_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -98,11 +98,11 @@ double MSSMRHN_soft_parameters::calc_beta_MassB_2_loop(const Soft_traces& soft_t
 
    double beta_MassB;
 
-   beta_MassB = Re(0.08*twoLoop*Sqr(g1)*(398*MassB*Sqr(g1) + 5*(27*(MassB
-      + MassWB)*Sqr(g2) + 2*(7*traceAdjYdTYd + 9*traceAdjYeTYe + 13*
-      traceAdjYuTYu + 3*traceAdjYvTYv - 7*MassB*traceYdAdjYd - 9*MassB*
-      traceYeAdjYe - 13*MassB*traceYuAdjYu - 3*MassB*traceYvAdjYv + 44*(MassB +
-      MassG)*Sqr(g3)))));
+   beta_MassB = Re(0.08*twoLoop*Sqr(g1)*(398*MassB*Sqr(g1) + 5*(27*(MassB +
+      MassWB)*Sqr(g2) + 2*(7*traceAdjYdTYd + 9*traceAdjYeTYe + 13*traceAdjYuTYu
+       + 3*traceAdjYvTYv - 7*MassB*traceYdAdjYd - 9*MassB*traceYeAdjYe - 13*
+      MassB*traceYuAdjYu - 3*MassB*traceYvAdjYv + 44*(MassB + MassG)*Sqr(g3))))
+      );
 
 
    return beta_MassB;

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:50:29
+// File generated at Sun 26 Aug 2018 15:02:06
 
 #ifndef NUHMSSM_EFFECTIVE_COUPLINGS_H
 #define NUHMSSM_EFFECTIVE_COUPLINGS_H

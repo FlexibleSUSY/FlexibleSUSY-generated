@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:32:07
+// File generated at Sun 26 Aug 2018 14:23:40
 
 #include "UMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -75,8 +75,8 @@ double UMSSM_soft_parameters::calc_beta_ms2_1_loop(const Soft_traces& soft_trace
 
    double beta_ms2;
 
-   beta_ms2 = Re(oneOver16PiSqr*(2*gp*Qs*Tr14 + 4*(mHd2 + mHu2 + ms2)*
-      AbsSqr(Lambdax) + 4*AbsSqr(TLambdax) - 8*AbsSqr(MassU)*Sqr(gp)*Sqr(Qs)));
+   beta_ms2 = Re(oneOver16PiSqr*(2*gp*Qs*Tr14 + 4*(mHd2 + mHu2 + ms2)*AbsSqr(
+      Lambdax) + 4*AbsSqr(TLambdax) - 8*AbsSqr(MassU)*Sqr(gp)*Sqr(Qs)));
 
 
    return beta_ms2;
@@ -128,13 +128,13 @@ double UMSSM_soft_parameters::calc_beta_ms2_2_loop(const Soft_traces& soft_trace
 
    double beta_ms2;
 
-   beta_ms2 = Re(twoLoop*(8*gp*Qs*Tr34 - 12*traceYdAdjYd*AbsSqr(TLambdax)
-      - 4*traceYeAdjYe*AbsSqr(TLambdax) - 12*traceYuAdjYu*AbsSqr(TLambdax) - 4
-      *traceYvAdjYv*AbsSqr(TLambdax) - 12*traceAdjYdTYd*Conj(TLambdax)*Lambdax
-      - 4*traceAdjYeTYe*Conj(TLambdax)*Lambdax - 12*traceAdjYuTYu*Conj(TLambdax
-      )*Lambdax - 4*traceAdjYvTYv*Conj(TLambdax)*Lambdax + 2.4*AbsSqr(TLambdax)
-      *Sqr(g1) - 2.4*MassB*Conj(TLambdax)*Lambdax*Sqr(g1) + 12*AbsSqr(TLambdax)
-      *Sqr(g2) - 12*MassWB*Conj(TLambdax)*Lambdax*Sqr(g2) + 8*AbsSqr(TLambdax)*
+   beta_ms2 = Re(twoLoop*(8*gp*Qs*Tr34 - 12*traceYdAdjYd*AbsSqr(TLambdax) - 4*
+      traceYeAdjYe*AbsSqr(TLambdax) - 12*traceYuAdjYu*AbsSqr(TLambdax) - 4*
+      traceYvAdjYv*AbsSqr(TLambdax) - 12*traceAdjYdTYd*Conj(TLambdax)*Lambdax -
+      4*traceAdjYeTYe*Conj(TLambdax)*Lambdax - 12*traceAdjYuTYu*Conj(TLambdax)*
+      Lambdax - 4*traceAdjYvTYv*Conj(TLambdax)*Lambdax + 2.4*AbsSqr(TLambdax)*
+      Sqr(g1) - 2.4*MassB*Conj(TLambdax)*Lambdax*Sqr(g1) + 12*AbsSqr(TLambdax)*
+      Sqr(g2) - 12*MassWB*Conj(TLambdax)*Lambdax*Sqr(g2) + 8*AbsSqr(TLambdax)*
       Sqr(gp)*Sqr(QHd) - 8*MassU*Conj(TLambdax)*Lambdax*Sqr(gp)*Sqr(QHd) + 8*
       AbsSqr(TLambdax)*Sqr(gp)*Sqr(QHu) - 8*MassU*Conj(TLambdax)*Lambdax*Sqr(gp
       )*Sqr(QHu) + 8*Tr2U144*Sqr(gp)*Sqr(Qs) - 8*AbsSqr(TLambdax)*Sqr(gp)*Sqr(
@@ -156,10 +156,10 @@ double UMSSM_soft_parameters::calc_beta_ms2_2_loop(const Soft_traces& soft_trace
       *traceYvconjmvR2AdjYv*Lambdax - 40*AbsSqr(TLambdax)*Lambdax + 3*mHd2*
       Lambdax*Sqr(g1) + 3*mHu2*Lambdax*Sqr(g1) + 3*ms2*Lambdax*Sqr(g1) + 15*
       mHd2*Lambdax*Sqr(g2) + 15*mHu2*Lambdax*Sqr(g2) + 15*ms2*Lambdax*Sqr(g2) +
-      10*mHd2*Lambdax*Sqr(gp)*Sqr(QHd) + 10*mHu2*Lambdax*Sqr(gp)*Sqr(QHd) + 10
-      *ms2*Lambdax*Sqr(gp)*Sqr(QHd) + 10*mHd2*Lambdax*Sqr(gp)*Sqr(QHu) + 10*
-      mHu2*Lambdax*Sqr(gp)*Sqr(QHu) + 10*ms2*Lambdax*Sqr(gp)*Sqr(QHu) - 10*mHd2
-      *Lambdax*Sqr(gp)*Sqr(Qs) - 10*mHu2*Lambdax*Sqr(gp)*Sqr(Qs) - 10*ms2*
+      10*mHd2*Lambdax*Sqr(gp)*Sqr(QHd) + 10*mHu2*Lambdax*Sqr(gp)*Sqr(QHd) + 10*
+      ms2*Lambdax*Sqr(gp)*Sqr(QHd) + 10*mHd2*Lambdax*Sqr(gp)*Sqr(QHu) + 10*mHu2
+      *Lambdax*Sqr(gp)*Sqr(QHu) + 10*ms2*Lambdax*Sqr(gp)*Sqr(QHu) - 10*mHd2*
+      Lambdax*Sqr(gp)*Sqr(Qs) - 10*mHu2*Lambdax*Sqr(gp)*Sqr(Qs) - 10*ms2*
       Lambdax*Sqr(gp)*Sqr(Qs) + 3*Conj(MassB)*Sqr(g1)*(2*MassB*Lambdax -
       TLambdax) + 15*Conj(MassWB)*Sqr(g2)*(2*MassWB*Lambdax - TLambdax) - 15*
       traceconjTYdTpYd*TLambdax - 5*traceconjTYeTpYe*TLambdax - 15*

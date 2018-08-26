@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:38:30
+// File generated at Sun 26 Aug 2018 14:10:19
 
 #include "HSSUSY_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -101,12 +101,12 @@ double HSSUSY_soft_parameters::calc_beta_v_2_loop(const Soft_traces& soft_traces
 
    double beta_v;
 
-   beta_v = Re(-0.00125*twoLoop*v*(1221*Quad(g1) + 10*Sqr(g1)*(122*
-      traceYdAdjYd + 174*traceYeAdjYe + 242*traceYuAdjYu - 45*Sqr(g2)) - 25*(
-      379*Quad(g2) - 108*(3*traceYdAdjYd + traceYeAdjYe + 3*traceYuAdjYu)*Sqr(
-      g2) - 8*(80*(traceYdAdjYd + traceYuAdjYu)*Sqr(g3) - 3*(9*
-      traceYdAdjYdYdAdjYd - 2*traceYdAdjYuYuAdjYd + 3*traceYeAdjYeYeAdjYe + 9*
-      traceYuAdjYuYuAdjYu - 2*Sqr(Lambdax))))));
+   beta_v = Re(-0.00125*twoLoop*v*(1221*Quad(g1) + 10*Sqr(g1)*(122*traceYdAdjYd
+       + 174*traceYeAdjYe + 242*traceYuAdjYu - 45*Sqr(g2)) - 25*(379*Quad(g2) -
+      108*(3*traceYdAdjYd + traceYeAdjYe + 3*traceYuAdjYu)*Sqr(g2) - 8*(80*(
+      traceYdAdjYd + traceYuAdjYu)*Sqr(g3) - 3*(9*traceYdAdjYdYdAdjYd - 2*
+      traceYdAdjYuYuAdjYd + 3*traceYeAdjYeYeAdjYe + 9*traceYuAdjYuYuAdjYu - 2*
+      Sqr(Lambdax))))));
 
 
    return beta_v;

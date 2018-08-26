@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:34:54
+// File generated at Sun 26 Aug 2018 14:09:37
 
 #include "THDMIIMSSMBC_two_scale_susy_scale_constraint.hpp"
 #include "THDMIIMSSMBC_two_scale_model.hpp"
@@ -64,6 +64,7 @@ void THDMIIMSSMBC_susy_scale_constraint<Two_scale>::apply()
 {
    check_model_ptr();
 
+   
 
 
    model->calculate_DRbar_masses();

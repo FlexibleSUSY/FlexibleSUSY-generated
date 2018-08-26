@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:48:04
+// File generated at Sun 26 Aug 2018 14:44:04
 
 #include "MRSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -97,18 +97,12 @@ double MRSSM_soft_parameters::calc_beta_mHu2_2_loop(const Soft_traces& soft_trac
    const double tracemu2YuAdjYu = TRACE_STRUCT.tracemu2YuAdjYu;
    const double traceYdAdjYuYuAdjYd = TRACE_STRUCT.traceYdAdjYuYuAdjYd;
    const double traceYuAdjYuYuAdjYu = TRACE_STRUCT.traceYuAdjYuYuAdjYu;
-   const double tracemd2YdAdjYuYuAdjYd =
-      TRACE_STRUCT.tracemd2YdAdjYuYuAdjYd;
-   const double tracemq2AdjYdYdAdjYuYu =
-      TRACE_STRUCT.tracemq2AdjYdYdAdjYuYu;
-   const double tracemq2AdjYuYuAdjYdYd =
-      TRACE_STRUCT.tracemq2AdjYuYuAdjYdYd;
-   const double tracemq2AdjYuYuAdjYuYu =
-      TRACE_STRUCT.tracemq2AdjYuYuAdjYuYu;
-   const double tracemu2YuAdjYdYdAdjYu =
-      TRACE_STRUCT.tracemu2YuAdjYdYdAdjYu;
-   const double tracemu2YuAdjYuYuAdjYu =
-      TRACE_STRUCT.tracemu2YuAdjYuYuAdjYu;
+   const double tracemd2YdAdjYuYuAdjYd = TRACE_STRUCT.tracemd2YdAdjYuYuAdjYd;
+   const double tracemq2AdjYdYdAdjYuYu = TRACE_STRUCT.tracemq2AdjYdYdAdjYuYu;
+   const double tracemq2AdjYuYuAdjYdYd = TRACE_STRUCT.tracemq2AdjYuYuAdjYdYd;
+   const double tracemq2AdjYuYuAdjYuYu = TRACE_STRUCT.tracemq2AdjYuYuAdjYuYu;
+   const double tracemu2YuAdjYdYdAdjYu = TRACE_STRUCT.tracemu2YuAdjYdYdAdjYu;
+   const double tracemu2YuAdjYuYuAdjYu = TRACE_STRUCT.tracemu2YuAdjYuYuAdjYu;
    const double Tr2U111 = TRACE_STRUCT.Tr2U111;
    const double Tr31 = TRACE_STRUCT.Tr31;
    const double Tr22 = TRACE_STRUCT.Tr22;
@@ -131,8 +125,8 @@ double MRSSM_soft_parameters::calc_beta_mHu2_2_loop(const Soft_traces& soft_trac
       mRu2*AbsSqr(LamTU)*Sqr(g2) + 12*mT2*AbsSqr(LamTU)*Sqr(g2) + 32*
       tracemq2AdjYuYu*Sqr(g3) + 32*tracemu2YuAdjYu*Sqr(g3) + 32*mHu2*
       traceYuAdjYu*Sqr(g3) - 12*(mHu2 + mRu2 + mS2)*Sqr(LamSU)*Sqr(Conj(LamSU))
-      - 15*mHu2*Sqr(LamTU)*Sqr(Conj(LamTU)) - 15*mRu2*Sqr(LamTU)*Sqr(Conj(
-      LamTU)) - 15*mT2*Sqr(LamTU)*Sqr(Conj(LamTU))));
+      - 15*mHu2*Sqr(LamTU)*Sqr(Conj(LamTU)) - 15*mRu2*Sqr(LamTU)*Sqr(Conj(LamTU
+      )) - 15*mT2*Sqr(LamTU)*Sqr(Conj(LamTU))));
 
 
    return beta_mHu2;

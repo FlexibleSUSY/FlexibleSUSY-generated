@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:16:11
+// File generated at Sun 26 Aug 2018 14:11:47
 
 #include "HSSUSY_effective_couplings.hpp"
 
@@ -39,11 +39,9 @@ HSSUSY_effective_couplings::HSSUSY_effective_couplings(
    const Physical_input& input_)
    : model(model_), qedqcd(qedqcd_), physical_input(input_)
    , rg_improve(true), include_qcd_corrections(true)
-   , Vd(PHYSICAL(Vd)), Ud(PHYSICAL(Ud)), Vu(PHYSICAL(Vu)), Uu(PHYSICAL(Uu)), Ve
-      (PHYSICAL(Ve)), Ue(PHYSICAL(Ue)), ZZ(PHYSICAL(ZZ))
-
+   , Vd(PHYSICAL(Vd)), Ud(PHYSICAL(Ud)), Vu(PHYSICAL(Vu)), Uu(PHYSICAL(Uu)), Ve(
+      PHYSICAL(Ve)), Ue(PHYSICAL(Ue)), ZZ(PHYSICAL(ZZ))
    , eff_CphhVPVP(0), eff_CphhVGVG(0), eff_CpAhVPVP(0), eff_CpAhVGVG(0)
-
 {
 }
 
@@ -117,7 +115,6 @@ std::complex<double> HSSUSY_effective_couplings::scalar_scalar_qcd_factor(double
       if (m_loop > m_decay) {
          result = 1 + 0.06754745576155852*Sqr(g3);
       }
-
    }
 
    return result;
@@ -129,8 +126,8 @@ std::complex<double> HSSUSY_effective_couplings::scalar_fermion_qcd_factor(doubl
 
    if (include_qcd_corrections) {
       const auto g3 = MODELPARAMETER(g3);
-      result = 1.0 + 0.025330295910584444*Sqr(g3) *
-         scalar_diphoton_fermion_loop(m_decay, m_loop);
+      result = 1.0 + 0.025330295910584444*Sqr(g3) * scalar_diphoton_fermion_loop(
+         m_decay, m_loop);
 
    }
 
@@ -170,8 +167,8 @@ double HSSUSY_effective_couplings::scalar_scaling_factor(double m) const
 
    const auto g3 = MODELPARAMETER(g3);
 
-   const double nlo_qcd = 0.025330295910584444*(23.75 - 1.1666666666666667*Nf)*
-      Sqr(g3);
+   const double nlo_qcd = 0.025330295910584444*(23.75 - 1.1666666666666667*Nf)*Sqr
+      (g3);
    const double nnlo_qcd = 0.000641623890917771*Quad(g3)*(370.1956513893174 +
       2.375*l + (-47.18640261449638 + 0.6666666666666666*l)*Nf +
       0.9017702481178881*Sqr(Nf));
@@ -189,10 +186,10 @@ double HSSUSY_effective_couplings::pseudoscalar_scaling_factor(double m) const
 
    const auto g3 = MODELPARAMETER(g3);
 
-   const double nlo_qcd = 0.025330295910584444*(24.25 - 1.1666666666666667*Nf)*
-      Sqr(g3);
-   const double nnlo_qcd = 0.000641623890917771*(171.54400563089382 + 5*l)*Quad
+   const double nlo_qcd = 0.025330295910584444*(24.25 - 1.1666666666666667*Nf)*Sqr
       (g3);
+   const double nnlo_qcd = 0.000641623890917771*(171.54400563089382 + 5*l)*Quad(g3
+      );
    const double nnnlo_qcd = 0;
 
    return Sqrt(1.0 + nlo_qcd + nnlo_qcd + nnnlo_qcd);
@@ -226,9 +223,8 @@ std::complex<double> HSSUSY_effective_couplings::CpbarFdFdAhPL(int gI1, int gI2)
 {
    const auto Yd = MODELPARAMETER(Yd);
 
-   const std::complex<double> result = std::complex<double>(0.,
-      0.7071067811865475)*SUM(j2,0,2,Conj(Vd(gI2,j2))*SUM(j1,0,2,Conj(Ud(gI1,j1))*
-      Yd(j1,j2)));
+   const std::complex<double> result = std::complex<double>(0.,0.7071067811865475)
+      *SUM(j2,0,2,Conj(Vd(gI2,j2))*SUM(j1,0,2,Conj(Ud(gI1,j1))*Yd(j1,j2)));
 
    return result;
 }
@@ -237,9 +233,8 @@ std::complex<double> HSSUSY_effective_couplings::CpbarFeFeAhPL(int gI1, int gI2)
 {
    const auto Ye = MODELPARAMETER(Ye);
 
-   const std::complex<double> result = std::complex<double>(0.,
-      0.7071067811865475)*SUM(j2,0,2,Conj(Ve(gI2,j2))*SUM(j1,0,2,Conj(Ue(gI1,j1))*
-      Ye(j1,j2)));
+   const std::complex<double> result = std::complex<double>(0.,0.7071067811865475)
+      *SUM(j2,0,2,Conj(Ve(gI2,j2))*SUM(j1,0,2,Conj(Ue(gI1,j1))*Ye(j1,j2)));
 
    return result;
 }
@@ -248,9 +243,8 @@ std::complex<double> HSSUSY_effective_couplings::CpbarFuFuAhPL(int gI1, int gI2)
 {
    const auto Yu = MODELPARAMETER(Yu);
 
-   const std::complex<double> result = std::complex<double>(0.,
-      -0.7071067811865475)*SUM(j2,0,2,Conj(Vu(gI2,j2))*SUM(j1,0,2,Conj(Uu(gI1,j1))
-      *Yu(j1,j2)));
+   const std::complex<double> result = std::complex<double>(0.,-0.7071067811865475
+      )*SUM(j2,0,2,Conj(Vu(gI2,j2))*SUM(j1,0,2,Conj(Uu(gI1,j1))*Yu(j1,j2)));
 
    return result;
 }
@@ -269,8 +263,8 @@ std::complex<double> HSSUSY_effective_couplings::CpbarFdFdhhPL(int gI1, int gI2)
 {
    const auto Yd = MODELPARAMETER(Yd);
 
-   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,Conj(Vd(
-      gI2,j2))*SUM(j1,0,2,Conj(Ud(gI1,j1))*Yd(j1,j2)));
+   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,Conj(Vd(gI2,
+      j2))*SUM(j1,0,2,Conj(Ud(gI1,j1))*Yd(j1,j2)));
 
    return result;
 }
@@ -279,8 +273,8 @@ std::complex<double> HSSUSY_effective_couplings::CpbarFeFehhPL(int gI1, int gI2)
 {
    const auto Ye = MODELPARAMETER(Ye);
 
-   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,Conj(Ve(
-      gI2,j2))*SUM(j1,0,2,Conj(Ue(gI1,j1))*Ye(j1,j2)));
+   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,Conj(Ve(gI2,
+      j2))*SUM(j1,0,2,Conj(Ue(gI1,j1))*Ye(j1,j2)));
 
    return result;
 }
@@ -289,8 +283,8 @@ std::complex<double> HSSUSY_effective_couplings::CpbarFuFuhhPL(int gI1, int gI2)
 {
    const auto Yu = MODELPARAMETER(Yu);
 
-   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,Conj(Vu(
-      gI2,j2))*SUM(j1,0,2,Conj(Uu(gI1,j1))*Yu(j1,j2)));
+   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,Conj(Vu(gI2,
+      j2))*SUM(j1,0,2,Conj(Uu(gI1,j1))*Yu(j1,j2)));
 
    return result;
 }
@@ -308,25 +302,25 @@ void HSSUSY_effective_couplings::calculate_eff_CphhVPVP()
 
    std::complex<double> result = 0;
    for (int gI1 = 0; gI1 < 3; ++gI1) {
-      result += 0.3333333333333333 * scalar_fermion_qcd_factor(decay_mass,
-         MFd(gI1)) * CpbarFdFdhhPL(gI1, gI1) * vev * AS12(decay_scale / Sqr(MFd(
-         gI1))) / MFd(gI1);
+      result += 0.3333333333333333 * scalar_fermion_qcd_factor(decay_mass, MFd(gI1
+         )) * CpbarFdFdhhPL(gI1, gI1) * vev * AS12(decay_scale / Sqr(MFd(gI1))) /
+         MFd(gI1);
    }
    for (int gI1 = 0; gI1 < 3; ++gI1) {
-      result += 1.3333333333333333 * scalar_fermion_qcd_factor(decay_mass,
-         MFu(gI1)) * CpbarFuFuhhPL(gI1, gI1) * vev * AS12(decay_scale / Sqr(MFu(
-         gI1))) / MFu(gI1);
+      result += 1.3333333333333333 * scalar_fermion_qcd_factor(decay_mass, MFu(gI1
+         )) * CpbarFuFuhhPL(gI1, gI1) * vev * AS12(decay_scale / Sqr(MFu(gI1))) /
+         MFu(gI1);
    }
    for (int gI1 = 0; gI1 < 3; ++gI1) {
-      result += CpbarFeFehhPL(gI1, gI1) * vev * AS12(decay_scale / Sqr(MFe(
-         gI1))) / MFe(gI1);
+      result += CpbarFeFehhPL(gI1, gI1) * vev * AS12(decay_scale / Sqr(MFe(gI1)))
+         / MFe(gI1);
    }
-   result += -0.5 * CphhconjVWpVWp() * vev * AS1(decay_scale / Sqr(MVWp)) / Sqr
-      (MVWp);
+   result += -0.5 * CphhconjVWpVWp() * vev * AS1(decay_scale / Sqr(MVWp)) / Sqr(
+      MVWp);
 
 
-   result *= 0.1892681907127351 * physical_input.get(Physical_input::alpha_em_0
-      ) * Sqrt(qedqcd.displayFermiConstant());
+   result *= 0.1892681907127351 * physical_input.get(Physical_input::alpha_em_0) *
+      Sqrt(qedqcd.displayFermiConstant());
 
    eff_CphhVPVP = result;
 
@@ -345,12 +339,12 @@ void HSSUSY_effective_couplings::calculate_eff_CphhVGVG()
 
    std::complex<double> result = 0;
    for (int gI1 = 0; gI1 < 3; ++gI1) {
-      result += CpbarFdFdhhPL(gI1, gI1) * vev * AS12(decay_scale / Sqr(MFd(
-         gI1))) / MFd(gI1);
+      result += CpbarFdFdhhPL(gI1, gI1) * vev * AS12(decay_scale / Sqr(MFd(gI1)))
+         / MFd(gI1);
    }
    for (int gI1 = 0; gI1 < 3; ++gI1) {
-      result += CpbarFuFuhhPL(gI1, gI1) * vev * AS12(decay_scale / Sqr(MFu(
-         gI1))) / MFu(gI1);
+      result += CpbarFuFuhhPL(gI1, gI1) * vev * AS12(decay_scale / Sqr(MFu(gI1)))
+         / MFu(gI1);
    }
    result *= 0.75;
 
@@ -359,8 +353,7 @@ void HSSUSY_effective_couplings::calculate_eff_CphhVGVG()
    }
 
 
-   result *= 0.12617879380849006 * alpha_s * Sqrt(qedqcd.displayFermiConstant()
-      );
+   result *= 0.12617879380849006 * alpha_s * Sqrt(qedqcd.displayFermiConstant());
 
    eff_CphhVGVG = result;
 
@@ -378,24 +371,24 @@ void HSSUSY_effective_couplings::calculate_eff_CpAhVPVP()
 
    std::complex<double> result = 0;
    for (int gI1 = 0; gI1 < 3; ++gI1) {
-      result += 0.3333333333333333 * pseudoscalar_fermion_qcd_factor(
-         decay_mass, MFd(gI1)) * CpbarFdFdAhPL(gI1, gI1) * vev * AP12(decay_scale
-         / Sqr(MFd(gI1))) / MFd(gI1);
+      result += 0.3333333333333333 * pseudoscalar_fermion_qcd_factor(decay_mass,
+         MFd(gI1)) * CpbarFdFdAhPL(gI1, gI1) * vev * AP12(decay_scale / Sqr(MFd(
+         gI1))) / MFd(gI1);
    }
    for (int gI1 = 0; gI1 < 3; ++gI1) {
-      result += 1.3333333333333333 * pseudoscalar_fermion_qcd_factor(
-         decay_mass, MFu(gI1)) * CpbarFuFuAhPL(gI1, gI1) * vev * AP12(decay_scale
-         / Sqr(MFu(gI1))) / MFu(gI1);
+      result += 1.3333333333333333 * pseudoscalar_fermion_qcd_factor(decay_mass,
+         MFu(gI1)) * CpbarFuFuAhPL(gI1, gI1) * vev * AP12(decay_scale / Sqr(MFu(
+         gI1))) / MFu(gI1);
    }
    for (int gI1 = 0; gI1 < 3; ++gI1) {
-      result += CpbarFeFeAhPL(gI1, gI1) * vev * AP12(decay_scale / Sqr(MFe(
-         gI1))) / MFe(gI1);
+      result += CpbarFeFeAhPL(gI1, gI1) * vev * AP12(decay_scale / Sqr(MFe(gI1)))
+         / MFe(gI1);
    }
    result *= 2.0;
 
 
-   result *= 0.1892681907127351 * physical_input.get(Physical_input::alpha_em_0
-      ) * Sqrt(qedqcd.displayFermiConstant());
+   result *= 0.1892681907127351 * physical_input.get(Physical_input::alpha_em_0) *
+      Sqrt(qedqcd.displayFermiConstant());
 
    eff_CpAhVPVP = result;
 
@@ -414,12 +407,12 @@ void HSSUSY_effective_couplings::calculate_eff_CpAhVGVG()
 
    std::complex<double> result = 0;
    for (int gI1 = 0; gI1 < 3; ++gI1) {
-      result += CpbarFdFdAhPL(gI1, gI1) * vev * AP12(decay_scale / Sqr(MFd(
-         gI1))) / MFd(gI1);
+      result += CpbarFdFdAhPL(gI1, gI1) * vev * AP12(decay_scale / Sqr(MFd(gI1)))
+         / MFd(gI1);
    }
    for (int gI1 = 0; gI1 < 3; ++gI1) {
-      result += CpbarFuFuAhPL(gI1, gI1) * vev * AP12(decay_scale / Sqr(MFu(
-         gI1))) / MFu(gI1);
+      result += CpbarFuFuAhPL(gI1, gI1) * vev * AP12(decay_scale / Sqr(MFu(gI1)))
+         / MFu(gI1);
    }
    result *= 1.5;
 
@@ -428,8 +421,7 @@ void HSSUSY_effective_couplings::calculate_eff_CpAhVGVG()
    }
 
 
-   result *= 0.12617879380849006 * alpha_s * Sqrt(qedqcd.displayFermiConstant()
-      );
+   result *= 0.12617879380849006 * alpha_s * Sqrt(qedqcd.displayFermiConstant());
 
    eff_CpAhVGVG = result;
 

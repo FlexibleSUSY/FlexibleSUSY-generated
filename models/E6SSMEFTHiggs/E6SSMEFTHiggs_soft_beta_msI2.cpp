@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 16:36:10
+// File generated at Sun 26 Aug 2018 13:59:19
 
 #include "E6SSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -74,8 +74,8 @@ Eigen::Matrix<double,2,2> E6SSMEFTHiggs_soft_parameters::calc_beta_msI2_1_loop(c
 
    Eigen::Matrix<double,2,2> beta_msI2;
 
-   beta_msI2 = (0.5*gN*oneOver16PiSqr*(3.1622776601683795*Tr14 - 10*gN*
-      AbsSqr(MassBp))*UNITMATRIX(2)).real();
+   beta_msI2 = (0.5*gN*oneOver16PiSqr*(3.1622776601683795*Tr14 - 10*gN*AbsSqr(
+      MassBp))*UNITMATRIX(2)).real();
 
 
    return beta_msI2;
@@ -94,8 +94,8 @@ Eigen::Matrix<double,2,2> E6SSMEFTHiggs_soft_parameters::calc_beta_msI2_2_loop(c
 
    Eigen::Matrix<double,2,2> beta_msI2;
 
-   beta_msI2 = (0.25*gN*twoLoop*(20*gN*Tr2U144 + 25.298221281347036*Tr34
-      + 639*AbsSqr(MassBp)*Cube(gN))*UNITMATRIX(2)).real();
+   beta_msI2 = (0.25*gN*twoLoop*(20*gN*Tr2U144 + 25.298221281347036*Tr34 + 639*
+      AbsSqr(MassBp)*Cube(gN))*UNITMATRIX(2)).real();
 
 
    return beta_msI2;

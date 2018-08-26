@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 19:07:10
+// File generated at Sun 26 Aug 2018 15:23:50
 
 #ifndef MSSM_soft_parameters_H
 #define MSSM_soft_parameters_H
@@ -35,13 +35,12 @@ namespace flexiblesusy {
 class MSSM_soft_parameters : public MSSM_susy_parameters {
 public:
    explicit MSSM_soft_parameters(const MSSM_input_parameters& input_ = MSSM_input_parameters());
-   MSSM_soft_parameters(const MSSM_susy_parameters& , const Eigen::Matrix<double,3,3>& TYd_, const Eigen::Matrix<double,3,3>&
-   TYe_, const Eigen::Matrix<double,3,3>& TYu_, double BMu_, const
-   Eigen::Matrix<double,3,3>& mq2_, const Eigen::Matrix<double,3,3>& ml2_,
-   double mHd2_, double mHu2_, const Eigen::Matrix<double,3,3>& md2_, const
-   Eigen::Matrix<double,3,3>& mu2_, const Eigen::Matrix<double,3,3>& me2_,
-   double MassB_, double MassWB_, double MassG_
-);
+   MSSM_soft_parameters(const MSSM_susy_parameters& , const Eigen::Matrix<double,3,3>& TYd_, const Eigen::Matrix<double,3,3>& TYe_,
+   const Eigen::Matrix<double,3,3>& TYu_, double BMu_, const Eigen::Matrix<
+   double,3,3>& mq2_, const Eigen::Matrix<double,3,3>& ml2_, double mHd2_,
+   double mHu2_, const Eigen::Matrix<double,3,3>& md2_, const Eigen::Matrix<
+   double,3,3>& mu2_, const Eigen::Matrix<double,3,3>& me2_, double MassB_,
+   double MassWB_, double MassG_);
    MSSM_soft_parameters(const MSSM_soft_parameters&) = default;
    MSSM_soft_parameters(MSSM_soft_parameters&&) = default;
    virtual ~MSSM_soft_parameters() = default;

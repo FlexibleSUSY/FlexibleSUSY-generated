@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:43:50
+// File generated at Sun 26 Aug 2018 14:08:06
 
 #include "E6SSMEFTHiggs_two_scale_susy_scale_constraint.hpp"
 #include "E6SSMEFTHiggs_two_scale_model.hpp"
@@ -64,6 +64,7 @@ void E6SSMEFTHiggs_susy_scale_constraint<Two_scale>::apply()
 {
    check_model_ptr();
 
+   
 
 
    model->calculate_DRbar_masses();
@@ -134,8 +135,8 @@ void E6SSMEFTHiggs_susy_scale_constraint<Two_scale>::apply()
    MODEL->set_TKappa(((AKappaInput).cwiseProduct(KappaInput)).real());
    MODEL->set_TLambda12(((ALambda12Input).cwiseProduct(Lambda12Input)).real());
    MODEL->set_vs(Re((1.4142135623730951*MuInput)/LambdaInput));
-   MODEL->set_TLambdax(Re((1.4142135623730951*Sqr(mAInput))/((1/TanBeta +
-      TanBeta)*vs)));
+   MODEL->set_TLambdax(Re((1.4142135623730951*Sqr(mAInput))/((1/TanBeta + TanBeta)
+      *vs)));
    MODEL->set_TYu(((AuInput).cwiseProduct(Yu)).real());
    MODEL->set_TYd(((AdInput).cwiseProduct(Yd)).real());
    MODEL->set_TYe(((AeInput).cwiseProduct(Ye)).real());

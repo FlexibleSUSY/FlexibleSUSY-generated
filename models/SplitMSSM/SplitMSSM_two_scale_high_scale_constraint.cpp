@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:44:28
+// File generated at Sun 26 Aug 2018 14:10:24
 
 #include "SplitMSSM_two_scale_high_scale_constraint.hpp"
 #include "SplitMSSM_two_scale_model.hpp"
@@ -24,12 +24,17 @@
 #include "wrappers.hpp"
 #include "logger.hpp"
 #include "ew_input.hpp"
+#include "error.hpp"
 #include "gsl_utils.hpp"
 #include "minimizer.hpp"
 #include "raii.hpp"
 #include "root_finder.hpp"
 #include "threshold_loop_functions.hpp"
 #include "numerics2.hpp"
+
+#ifdef ENABLE_HIMALAYA
+#include "HierarchyCalculator.hpp"
+#endif
 
 #include <cmath>
 #include <cerrno>
@@ -55,6 +60,91 @@ namespace flexiblesusy {
 #define MODEL model
 #define MODELCLASSNAME SplitMSSM<Two_scale>
 
+#if defined(ENABLE_HIMALAYA) && Himalaya_VERSION_MAJOR >= 2
+#define FSHimalayaMh23L [&] () {                                        \
+      MODEL->calculate_DRbar_masses();                                  \
+                                                                        \
+      himalaya::Parameters pars;                                        \
+      const auto Mu = MODELPARAMETER(Mu); \
+      const auto g1 = MODELPARAMETER(g1); \
+      const auto g2 = MODELPARAMETER(g2); \
+      const auto g3 = MODELPARAMETER(g3); \
+      const auto Yu = MODELPARAMETER(Yu); \
+      const auto Yd = MODELPARAMETER(Yd); \
+      const auto Ye = MODELPARAMETER(Ye); \
+      const auto Vu = MODELPARAMETER(Vu); \
+      const auto Ud = MODELPARAMETER(Ud); \
+      const auto Uu = MODELPARAMETER(Uu); \
+      const auto Ve = MODELPARAMETER(Ve); \
+      const auto Ue = MODELPARAMETER(Ue); \
+      const auto MGlu = MODELPARAMETER(MGlu); \
+      const auto MAh = MODELPARAMETER(MAh); \
+       \
+       \
+      pars.scale = MODELPARAMETER(scale); \
+      pars.mu = Re(Mu); \
+      pars.g1 = Re(g1); \
+      pars.g2 = Re(g2); \
+      pars.g3 = Re(g3); \
+      pars.vd = Re(VEVSM1); \
+      pars.vu = Re(VEVSM2); \
+      pars.mq2 = Re(Vu); \
+      pars.md2 = Re(Ud); \
+      pars.mu2 = Re(Uu); \
+      pars.ml2 = Re(Ve); \
+      pars.me2 = Re(Ue); \
+      pars.Au(2,2) = Re(TrilinearUp); \
+      pars.Ad(2,2) = Re(TrilinearDown); \
+      pars.Ae(2,2) = Re(TrilinearLepton); \
+      pars.Yu = Re(Yu); \
+      pars.Yd = Re(Yd); \
+      pars.Ye = Re(Ye); \
+      pars.M1 = 0; \
+      pars.M2 = 0; \
+      pars.MG = MGlu; \
+      pars.MA = MAh; \
+       \
+      const double msbar_scheme = 1; \
+      const double lambda_3L_eft = 1; \
+      const double lambda_3L_uncertainty = 0; \
+       \
+                                                                        \
+      double lambda_3L = 0.;                                            \
+                                                                        \
+      try {                                                             \
+         const bool verbose = false;                                    \
+         himalaya::HierarchyCalculator hc(pars, verbose);               \
+                                                                        \
+         const auto ho = hc.calculateDMh3L(false);                      \
+                                                                        \
+         lambda_3L =                                                    \
+            lambda_3L_eft * (                                           \
+               ho.getDLambda(3)                                         \
+               + msbar_scheme*ho.getDLambdaDRbarPrimeToMSbarShift(3)    \
+               + lambda_3L_uncertainty*ho.getDLambdaUncertainty(3)      \
+            );                                                          \
+                                                                        \
+         VERBOSE_MSG("Himalaya top (hierarchy, Dlambda_3L) = ("         \
+                     << ho.getSuitableHierarchy() << ", "               \
+                     << lambda_3L <<")");                               \
+      } catch (const std::exception& e) {                               \
+         model->get_problems().flag_bad_mass(SplitMSSM_info::hh); \
+         WARNING(e.what());                                             \
+         VERBOSE_MSG(pars);                                             \
+      }                                                                 \
+                                                                        \
+      return lambda_3L;                                                 \
+   }()
+#else
+#define FSHimalayaMh23L [] () {                                         \
+      throw HimalayaError("The 3-loop corrections to lambda "           \
+                          "require Himalaya 2.0.0 (or higher), but "    \
+                          "FlexibleSUSY has not been configured with "  \
+                          "this Himalaya version!");                    \
+      return 0.;                                                        \
+   }()
+#endif
+
 SplitMSSM_high_scale_constraint<Two_scale>::SplitMSSM_high_scale_constraint(
    SplitMSSM<Two_scale>* model_)
    : model(model_)
@@ -66,6 +156,7 @@ void SplitMSSM_high_scale_constraint<Two_scale>::apply()
 {
    check_model_ptr();
 
+   
 
 
    update_scale();
@@ -85,55 +176,55 @@ void SplitMSSM_high_scale_constraint<Two_scale>::apply()
    const auto Mu = MODELPARAMETER(Mu);
    const auto Yu = MODELPARAMETER(Yu);
 
-   MODEL->set_Lambdax(Re(0.25*(0.6*Sqr(g1) + Sqr(g2))*Sqr(Cos(2*ArcTan(TanBeta)
-      )) + IF(IsCloseRel(msq2(2,2),msu2(2,2),0.01), (0.005208333333333333*Quad(Yu(
-      2,2))*Sqr(g3)*(-18 - Quad(AtInput - Mu/TanBeta)/Abs(msq2(2,2)*msu2(2,2)) + (
-      12*Sqr(AtInput - Mu/TanBeta))/Sqrt(Abs(msq2(2,2)*msu2(2,2))) + 6*Log(msq2(2,
-      2)/Sqr(SCALE))*(4 + Quad(AtInput - Mu/TanBeta)/Abs(msq2(2,2)*msu2(2,2)) - (
-      12*Sqr(AtInput - Mu/TanBeta))/Sqrt(Abs(msq2(2,2)*msu2(2,2)))) - 36*Sqr(Log(
-      msq2(2,2)/Sqr(SCALE)))))/Quad(3.141592653589793), (-0.03125*Quad(Yu(2,2))*
-      Sqr(g3)*(3 + 4*Log(Sqrt(Abs(msq2(2,2)/msu2(2,2)))) - 4*(1 + 3*Log(Sqrt(Abs(
-      msq2(2,2)/msu2(2,2)))))*Log(msq2(2,2)/Sqr(SCALE)) + 8*Sqr(Log(Sqrt(Abs(msq2(
-      2,2)/msu2(2,2))))) + (Sqr(AtInput - Mu/TanBeta)*((12*Sqrt(Abs(msq2(2,2)/msu2
-      (2,2)))*Log(Sqrt(Abs(msq2(2,2)/msu2(2,2))))*(-1 + 2*Log(msq2(2,2)/Sqr(SCALE)
-      )))/(-1 + Abs(msq2(2,2)/msu2(2,2))) - (16*(-2 + Abs(msq2(2,2)/msu2(2,2)))*
-      Sqrt(Abs(msq2(2,2)/msu2(2,2)))*Sqr(Log(Sqrt(Abs(msq2(2,2)/msu2(2,2))))))/Sqr
-      (-1 + Abs(msq2(2,2)/msu2(2,2)))))/Sqrt(Abs(msq2(2,2)*msu2(2,2))) + (Quad(
-      AtInput - Mu/TanBeta)*((6*Abs(msq2(2,2)/msu2(2,2))*(5 + Abs(msq2(2,2)/msu2(2
-      ,2)))*Log(Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/Cube(-1 + Abs(msq2(2,2)/msu2(2,2)
-      )) - (10*Abs(msq2(2,2)/msu2(2,2)))/Sqr(-1 + Abs(msq2(2,2)/msu2(2,2))) + (12*
-      Abs(msq2(2,2)/msu2(2,2))*(1 - ((1 + Abs(msq2(2,2)/msu2(2,2)))*Log(Sqrt(Abs(
-      msq2(2,2)/msu2(2,2)))))/(-1 + Abs(msq2(2,2)/msu2(2,2))))*Log(msq2(2,2)/Sqr(
-      SCALE)))/Sqr(-1 + Abs(msq2(2,2)/msu2(2,2))) + (4*Abs(msq2(2,2)/msu2(2,2))*(
-      -5 - 4*Abs(msq2(2,2)/msu2(2,2)) + Sqr(Abs(msq2(2,2)/msu2(2,2))))*Sqr(Log(
-      Sqrt(Abs(msq2(2,2)/msu2(2,2))))))/Quad(-1 + Abs(msq2(2,2)/msu2(2,2)))))/Abs(
-      msq2(2,2)*msu2(2,2)) + 6*Sqr(Log(msq2(2,2)/Sqr(SCALE)))))/Quad(
-      3.141592653589793))*UnitStep(-2 + LambdaLoopOrder) + UnitStep(-1 +
-      LambdaLoopOrder)*(0.006332573977646111*(-0.09*Quad(g1) - 0.3*Sqr(g1)*Sqr(g2)
-      - Quad(g2)*(0.75 - 0.16666666666666666*Sqr(Cos(2*ArcTan(TanBeta))))) +
-      0.006332573977646111*(0.00020833333333333335*Log(Sqr(mAInput)/Sqr(SCALE))*(
-      261*Quad(g1) + 1325*Quad(g2) + 630*Sqr(g1)*Sqr(g2) - 4*Cos(4*ArcTan(TanBeta)
-      )*(9*Quad(g1) + 175*Quad(g2) + 90*Sqr(g1)*Sqr(g2)) - 9*Cos(8*ArcTan(TanBeta)
-      )*Sqr(3*Sqr(g1) + 5*Sqr(g2))) + 0.0033333333333333335*(6*(Log(msd2(0,0)/Sqr(
-      SCALE)) + Log(msd2(1,1)/Sqr(SCALE)) + Log(msd2(2,2)/Sqr(SCALE)))*Quad(g1) +
-      18*(Log(mse2(0,0)/Sqr(SCALE)) + Log(mse2(1,1)/Sqr(SCALE)) + Log(mse2(2,2)
-      /Sqr(SCALE)))*Quad(g1) + 24*(Log(msu2(0,0)/Sqr(SCALE)) + Log(msu2(1,1)/Sqr(
-      SCALE)) + Log(msu2(2,2)/Sqr(SCALE)))*Quad(g1) + 3*(Log(msq2(0,0)/Sqr(SCALE))
-      + Log(msq2(1,1)/Sqr(SCALE)) + Log(msq2(2,2)/Sqr(SCALE)))*(Quad(g1) + 25*
-      Quad(g2)) + (Log(msl2(0,0)/Sqr(SCALE)) + Log(msl2(1,1)/Sqr(SCALE)) + Log(
-      msl2(2,2)/Sqr(SCALE)))*(9*Quad(g1) + 25*Quad(g2)))*Sqr(Cos(2*ArcTan(TanBeta)
-      )) - 0.1875*Sqr(0.6*Sqr(g1) + Sqr(g2))*Sqr(Sin(4*ArcTan(TanBeta))) + 3*Log(
-      msu2(2,2)/Sqr(SCALE))*Sqr(Yu(2,2))*(0.4*Cos(2*ArcTan(TanBeta))*Sqr(g1) + Sqr
-      (Yu(2,2))) + 3*Log(msq2(2,2)/Sqr(SCALE))*Sqr(Yu(2,2))*(0.5*Cos(2*ArcTan(
-      TanBeta))*(-0.2*Sqr(g1) + Sqr(g2)) + Sqr(Yu(2,2))) + (6*Quad(Yu(2,2))*Sqr(
-      AtInput - Mu/TanBeta)*(TCF(1)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))) - (
-      0.08333333333333333*Sqr(AtInput - Mu/TanBeta)*TCF(2)(Sqrt(Abs(msq2(2,2)/msu2
-      (2,2)))))/Sqrt(Abs(msq2(2,2)*msu2(2,2)))))/Sqrt(Abs(msq2(2,2)*msu2(2,2))) +
-      (0.75*Cos(2*ArcTan(TanBeta))*Sqr(AtInput - Mu/TanBeta)*Sqr(Yu(2,2))*(0.6*Sqr
-      (g1)*TCF(3)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))) + Sqr(g2)*TCF(4)(Sqrt(Abs(msq2(2
-      ,2)/msu2(2,2))))))/Sqrt(Abs(msq2(2,2)*msu2(2,2))) - (0.25*(0.6*Sqr(g1) + Sqr
-      (g2))*Sqr(Cos(2*ArcTan(TanBeta)))*Sqr(AtInput - Mu/TanBeta)*Sqr(Yu(2,2))*TCF
-      (5)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/Sqrt(Abs(msq2(2,2)*msu2(2,2)))))));
+   MODEL->set_Lambdax(Re(0.25*(0.6*Sqr(g1) + Sqr(g2))*Sqr(Cos(2*ArcTan(TanBeta)))
+      + IF(IsCloseRel(msq2(2,2),msu2(2,2),0.01), (0.005208333333333333*Quad(Yu(2,2
+      ))*Sqr(g3)*(-18 - Quad(AtInput - Mu/TanBeta)/Abs(msq2(2,2)*msu2(2,2)) + (12*
+      Sqr(AtInput - Mu/TanBeta))/Sqrt(Abs(msq2(2,2)*msu2(2,2))) + 6*Log(msq2(2,2)/
+      Sqr(SCALE))*(4 + Quad(AtInput - Mu/TanBeta)/Abs(msq2(2,2)*msu2(2,2)) - (12*
+      Sqr(AtInput - Mu/TanBeta))/Sqrt(Abs(msq2(2,2)*msu2(2,2)))) - 36*Sqr(Log(msq2
+      (2,2)/Sqr(SCALE)))))/Quad(3.141592653589793), (-0.03125*Quad(Yu(2,2))*Sqr(g3
+      )*(3 + 4*Log(Sqrt(Abs(msq2(2,2)/msu2(2,2)))) - 4*(1 + 3*Log(Sqrt(Abs(msq2(2,
+      2)/msu2(2,2)))))*Log(msq2(2,2)/Sqr(SCALE)) + 8*Sqr(Log(Sqrt(Abs(msq2(2,2)/
+      msu2(2,2))))) + (Sqr(AtInput - Mu/TanBeta)*((12*Sqrt(Abs(msq2(2,2)/msu2(2,2)
+      ))*Log(Sqrt(Abs(msq2(2,2)/msu2(2,2))))*(-1 + 2*Log(msq2(2,2)/Sqr(SCALE))))/(
+      -1 + Abs(msq2(2,2)/msu2(2,2))) - (16*(-2 + Abs(msq2(2,2)/msu2(2,2)))*Sqrt(
+      Abs(msq2(2,2)/msu2(2,2)))*Sqr(Log(Sqrt(Abs(msq2(2,2)/msu2(2,2))))))/Sqr(-1 +
+      Abs(msq2(2,2)/msu2(2,2)))))/Sqrt(Abs(msq2(2,2)*msu2(2,2))) + (Quad(AtInput -
+      Mu/TanBeta)*((6*Abs(msq2(2,2)/msu2(2,2))*(5 + Abs(msq2(2,2)/msu2(2,2)))*Log(
+      Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/Cube(-1 + Abs(msq2(2,2)/msu2(2,2))) - (10*
+      Abs(msq2(2,2)/msu2(2,2)))/Sqr(-1 + Abs(msq2(2,2)/msu2(2,2))) + (12*Abs(msq2(
+      2,2)/msu2(2,2))*(1 - ((1 + Abs(msq2(2,2)/msu2(2,2)))*Log(Sqrt(Abs(msq2(2,2)/
+      msu2(2,2)))))/(-1 + Abs(msq2(2,2)/msu2(2,2))))*Log(msq2(2,2)/Sqr(SCALE)))/
+      Sqr(-1 + Abs(msq2(2,2)/msu2(2,2))) + (4*Abs(msq2(2,2)/msu2(2,2))*(-5 - 4*Abs
+      (msq2(2,2)/msu2(2,2)) + Sqr(Abs(msq2(2,2)/msu2(2,2))))*Sqr(Log(Sqrt(Abs(msq2
+      (2,2)/msu2(2,2))))))/Quad(-1 + Abs(msq2(2,2)/msu2(2,2)))))/Abs(msq2(2,2)*
+      msu2(2,2)) + 6*Sqr(Log(msq2(2,2)/Sqr(SCALE)))))/Quad(3.141592653589793))*
+      UnitStep(-2 + LambdaLoopOrder) + UnitStep(-1 + LambdaLoopOrder)*(
+      0.006332573977646111*(-0.09*Quad(g1) - 0.3*Sqr(g1)*Sqr(g2) - Quad(g2)*(0.75
+      - 0.16666666666666666*Sqr(Cos(2*ArcTan(TanBeta))))) + 0.006332573977646111*(
+      0.00020833333333333335*Log(Sqr(mAInput)/Sqr(SCALE))*(261*Quad(g1) + 1325*
+      Quad(g2) + 630*Sqr(g1)*Sqr(g2) - 4*Cos(4*ArcTan(TanBeta))*(9*Quad(g1) + 175*
+      Quad(g2) + 90*Sqr(g1)*Sqr(g2)) - 9*Cos(8*ArcTan(TanBeta))*Sqr(3*Sqr(g1) + 5*
+      Sqr(g2))) + 0.0033333333333333335*(6*(Log(msd2(0,0)/Sqr(SCALE)) + Log(msd2(1
+      ,1)/Sqr(SCALE)) + Log(msd2(2,2)/Sqr(SCALE)))*Quad(g1) + 18*(Log(mse2(0,0)/
+      Sqr(SCALE)) + Log(mse2(1,1)/Sqr(SCALE)) + Log(mse2(2,2)/Sqr(SCALE)))*Quad(g1
+      ) + 24*(Log(msu2(0,0)/Sqr(SCALE)) + Log(msu2(1,1)/Sqr(SCALE)) + Log(msu2(2,2
+      )/Sqr(SCALE)))*Quad(g1) + 3*(Log(msq2(0,0)/Sqr(SCALE)) + Log(msq2(1,1)/Sqr(
+      SCALE)) + Log(msq2(2,2)/Sqr(SCALE)))*(Quad(g1) + 25*Quad(g2)) + (Log(msl2(0,
+      0)/Sqr(SCALE)) + Log(msl2(1,1)/Sqr(SCALE)) + Log(msl2(2,2)/Sqr(SCALE)))*(9*
+      Quad(g1) + 25*Quad(g2)))*Sqr(Cos(2*ArcTan(TanBeta))) - 0.1875*Sqr(0.6*Sqr(g1
+      ) + Sqr(g2))*Sqr(Sin(4*ArcTan(TanBeta))) + 3*Log(msu2(2,2)/Sqr(SCALE))*Sqr(
+      Yu(2,2))*(0.4*Cos(2*ArcTan(TanBeta))*Sqr(g1) + Sqr(Yu(2,2))) + 3*Log(msq2(2,
+      2)/Sqr(SCALE))*Sqr(Yu(2,2))*(0.5*Cos(2*ArcTan(TanBeta))*(-0.2*Sqr(g1) + Sqr(
+      g2)) + Sqr(Yu(2,2))) + (6*Quad(Yu(2,2))*Sqr(AtInput - Mu/TanBeta)*(TCF(1)(
+      Sqrt(Abs(msq2(2,2)/msu2(2,2)))) - (0.08333333333333333*Sqr(AtInput - Mu/
+      TanBeta)*TCF(2)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/Sqrt(Abs(msq2(2,2)*msu2(2,2
+      )))))/Sqrt(Abs(msq2(2,2)*msu2(2,2))) + (0.75*Cos(2*ArcTan(TanBeta))*Sqr(
+      AtInput - Mu/TanBeta)*Sqr(Yu(2,2))*(0.6*Sqr(g1)*TCF(3)(Sqrt(Abs(msq2(2,2)/
+      msu2(2,2)))) + Sqr(g2)*TCF(4)(Sqrt(Abs(msq2(2,2)/msu2(2,2))))))/Sqrt(Abs(
+      msq2(2,2)*msu2(2,2))) - (0.25*(0.6*Sqr(g1) + Sqr(g2))*Sqr(Cos(2*ArcTan(
+      TanBeta)))*Sqr(AtInput - Mu/TanBeta)*Sqr(Yu(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/
+      msu2(2,2)))))/Sqrt(Abs(msq2(2,2)*msu2(2,2)))))));
    MODEL->set_gYu(Re((0.7745966692414834*g1*TanBeta)/Sqrt(1 + Sqr(TanBeta)) + (
       0.004905190710809969*g1*TanBeta*(0.1*(2*Log(mse2(0,0)/Sqr(SCALE)) + 2*Log(
       mse2(1,1)/Sqr(SCALE)) + 2*Log(mse2(2,2)/Sqr(SCALE)) + Log(msl2(0,0)/Sqr(
@@ -149,9 +240,9 @@ void SplitMSSM_high_scale_constraint<Two_scale>::apply()
       )*(1 + Sqr(TanBeta))*Sqr(Yu(2,2)))/Sqr(TanBeta))*UnitStep(-1 +
       LambdaLoopOrder))/Sqrt(1 + Sqr(TanBeta))));
    MODEL->set_gYd(Re((0.7745966692414834*g1)/Sqrt(1 + Sqr(TanBeta)) + (
-      0.004905190710809969*g1*(0.1*(2*Log(mse2(0,0)/Sqr(SCALE)) + 2*Log(mse2(1,1)
-      /Sqr(SCALE)) + 2*Log(mse2(2,2)/Sqr(SCALE)) + Log(msl2(0,0)/Sqr(SCALE)) + Log
-      (msl2(1,1)/Sqr(SCALE)) + Log(msl2(2,2)/Sqr(SCALE)))*Sqr(g1) +
+      0.004905190710809969*g1*(0.1*(2*Log(mse2(0,0)/Sqr(SCALE)) + 2*Log(mse2(1,1)/
+      Sqr(SCALE)) + 2*Log(mse2(2,2)/Sqr(SCALE)) + Log(msl2(0,0)/Sqr(SCALE)) + Log(
+      msl2(1,1)/Sqr(SCALE)) + Log(msl2(2,2)/Sqr(SCALE)))*Sqr(g1) +
       0.03333333333333333*(2*Log(msd2(0,0)/Sqr(SCALE)) + 2*Log(msd2(1,1)/Sqr(SCALE
       )) + 2*Log(msd2(2,2)/Sqr(SCALE)) + Log(msq2(0,0)/Sqr(SCALE)) + Log(msq2(1,1)
       /Sqr(SCALE)) + Log(msq2(2,2)/Sqr(SCALE)) + 8*Log(msu2(0,0)/Sqr(SCALE)) + 8*
@@ -160,22 +251,21 @@ void SplitMSSM_high_scale_constraint<Two_scale>::apply()
       7*Sqr(TanBeta))/(1 + Sqr(TanBeta))) + 0.025*Log(Sqr(mAInput)/Sqr(SCALE))*(4*
       Sqr(g1) - (9*(Sqr(g1) + 5*Sqr(g2))*Sqr(TanBeta))/(1 + Sqr(TanBeta))))*
       UnitStep(-1 + LambdaLoopOrder))/Sqrt(1 + Sqr(TanBeta))));
-   MODEL->set_g2u(Re((g2*TanBeta)/Sqrt(1 + Sqr(TanBeta)) + (
-      0.006332573977646111*g2*TanBeta*(0.16666666666666666*(Log(msl2(0,0)/Sqr(
-      SCALE)) + Log(msl2(1,1)/Sqr(SCALE)) + Log(msl2(2,2)/Sqr(SCALE)))*Sqr(g2) +
-      0.5*(Log(msq2(0,0)/Sqr(SCALE)) + Log(msq2(1,1)/Sqr(SCALE)) + Log(msq2(2,2)
-      /Sqr(SCALE)))*Sqr(g2) - Sqr(g2)*(0.6666666666666666 + 0.6875/(1 + Sqr(
-      TanBeta))) + 0.0375*Sqr(g1)*(-2 + 7/(1 + Sqr(TanBeta))) +
-      0.008333333333333333*Log(Sqr(mAInput)/Sqr(SCALE))*(20*Sqr(g2) + (3*(-9*Sqr(
-      g1) + 35*Sqr(g2)))/(1 + Sqr(TanBeta))) + (2.25*(1 + Sqr(TanBeta))*Sqr(Yu(2,2
-      )))/Sqr(TanBeta) - (0.75*(3*Log(msq2(2,2)/Sqr(SCALE)) - Log(msu2(2,2)/Sqr(
-      SCALE)))*(1 + Sqr(TanBeta))*Sqr(Yu(2,2)))/Sqr(TanBeta))*UnitStep(-1 +
-      LambdaLoopOrder))/Sqrt(1 + Sqr(TanBeta))));
+   MODEL->set_g2u(Re((g2*TanBeta)/Sqrt(1 + Sqr(TanBeta)) + (0.006332573977646111*
+      g2*TanBeta*(0.16666666666666666*(Log(msl2(0,0)/Sqr(SCALE)) + Log(msl2(1,1)/
+      Sqr(SCALE)) + Log(msl2(2,2)/Sqr(SCALE)))*Sqr(g2) + 0.5*(Log(msq2(0,0)/Sqr(
+      SCALE)) + Log(msq2(1,1)/Sqr(SCALE)) + Log(msq2(2,2)/Sqr(SCALE)))*Sqr(g2) -
+      Sqr(g2)*(0.6666666666666666 + 0.6875/(1 + Sqr(TanBeta))) + 0.0375*Sqr(g1)*(-
+      2 + 7/(1 + Sqr(TanBeta))) + 0.008333333333333333*Log(Sqr(mAInput)/Sqr(SCALE)
+      )*(20*Sqr(g2) + (3*(-9*Sqr(g1) + 35*Sqr(g2)))/(1 + Sqr(TanBeta))) + (2.25*(1
+       + Sqr(TanBeta))*Sqr(Yu(2,2)))/Sqr(TanBeta) - (0.75*(3*Log(msq2(2,2)/Sqr(
+      SCALE)) - Log(msu2(2,2)/Sqr(SCALE)))*(1 + Sqr(TanBeta))*Sqr(Yu(2,2)))/Sqr(
+      TanBeta))*UnitStep(-1 + LambdaLoopOrder))/Sqrt(1 + Sqr(TanBeta))));
    MODEL->set_g2d(Re(g2/Sqrt(1 + Sqr(TanBeta)) + (0.006332573977646111*g2*(
       0.16666666666666666*Log(msl2(0,0)/Sqr(SCALE))*Sqr(g2) + 0.16666666666666666*
       Log(msl2(1,1)/Sqr(SCALE))*Sqr(g2) + 0.16666666666666666*Log(msl2(2,2)/Sqr(
-      SCALE))*Sqr(g2) + 0.5*Log(msq2(0,0)/Sqr(SCALE))*Sqr(g2) + 0.5*Log(msq2(1,1)
-      /Sqr(SCALE))*Sqr(g2) + 0.5*Log(msq2(2,2)/Sqr(SCALE))*Sqr(g2) - Sqr(g2)*(
+      SCALE))*Sqr(g2) + 0.5*Log(msq2(0,0)/Sqr(SCALE))*Sqr(g2) + 0.5*Log(msq2(1,1)/
+      Sqr(SCALE))*Sqr(g2) + 0.5*Log(msq2(2,2)/Sqr(SCALE))*Sqr(g2) - Sqr(g2)*(
       0.6666666666666666 + (0.6875*Sqr(TanBeta))/(1 + Sqr(TanBeta))) + 0.0375*Sqr(
       g1)*(-2 + (7*Sqr(TanBeta))/(1 + Sqr(TanBeta))) + 0.008333333333333333*Log(
       Sqr(mAInput)/Sqr(SCALE))*(20*Sqr(g2) + (3*(-9*Sqr(g1) + 35*Sqr(g2))*Sqr(

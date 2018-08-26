@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 16:27:54
+// File generated at Sun 26 Aug 2018 14:04:41
 
 #ifndef NMSSMEFTHiggs_STANDARD_MODEL_TWO_SCALE_INITIAL_GUESSER_H
 #define NMSSMEFTHiggs_STANDARD_MODEL_TWO_SCALE_INITIAL_GUESSER_H
@@ -28,6 +28,7 @@
 #include "lowe.h"
 
 #include <sstream>
+#include <Eigen/Core>
 
 namespace flexiblesusy {
 
@@ -76,6 +77,9 @@ private:
    double running_precision{1.0e-3}; ///< Runge-Kutta RG running precision
    standard_model::Standard_model_low_scale_constraint<Two_scale> low_constraint{};
    NMSSMEFTHiggs_susy_scale_constraint<Two_scale> susy_constraint{};
+   Eigen::Matrix<std::complex<double>,3,3> upQuarksDRbar{Eigen::Matrix<std::complex<double>,3,3>::Zero()};
+   Eigen::Matrix<std::complex<double>,3,3> downQuarksDRbar{Eigen::Matrix<std::complex<double>,3,3>::Zero()};
+   Eigen::Matrix<std::complex<double>,3,3> downLeptonsDRbar{Eigen::Matrix<std::complex<double>,3,3>::Zero()};
 
    void guess_eft_parameters();
    void guess_model_parameters();
@@ -83,6 +87,7 @@ private:
    void calculate_Yu_DRbar();
    void calculate_Yd_DRbar();
    void calculate_Ye_DRbar();
+   void calculate_running_SM_masses();
 };
 
 } // namespace flexiblesusy

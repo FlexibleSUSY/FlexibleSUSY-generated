@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:56:09
+// File generated at Sun 26 Aug 2018 15:07:31
 
 #ifndef MSSMRHN_TWO_SCALE_SPECTRUM_GENERATOR_H
 #define MSSMRHN_TWO_SCALE_SPECTRUM_GENERATOR_H

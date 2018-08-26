@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:34:09
+// File generated at Sun 26 Aug 2018 14:09:02
 
 #include "THDMII_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -57,8 +57,8 @@ double THDMII_susy_parameters::calc_beta_g1_2_loop(const Susy_traces& susy_trace
 
    double beta_g1;
 
-   beta_g1 = Re(0.02*twoLoop*Cube(g1)*(208*Sqr(g1) + 5*(-5*traceYdAdjYd -
-      15*traceYeAdjYe - 17*traceYuAdjYu + 36*Sqr(g2) + 88*Sqr(g3))));
+   beta_g1 = Re(0.02*twoLoop*Cube(g1)*(208*Sqr(g1) + 5*(-5*traceYdAdjYd - 15*
+      traceYeAdjYe - 17*traceYuAdjYu + 36*Sqr(g2) + 88*Sqr(g3))));
 
 
    return beta_g1;

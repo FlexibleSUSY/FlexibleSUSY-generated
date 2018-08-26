@@ -16,19 +16,23 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 14:59:43
+// File generated at Sun 26 Aug 2018 13:50:13
 
 #include "MSSMNoFVatMGUTHimalaya_observables.hpp"
 #include "MSSMNoFVatMGUTHimalaya_mass_eigenstates.hpp"
 #include "MSSMNoFVatMGUTHimalaya_a_muon.hpp"
 #include "MSSMNoFVatMGUTHimalaya_edm.hpp"
 #include "MSSMNoFVatMGUTHimalaya_effective_couplings.hpp"
-#include "gm2calc_interface.hpp"
+#include "config.h"
 #include "eigen_utils.hpp"
 #include "numerics2.hpp"
 #include "wrappers.hpp"
 #include "lowe.h"
 #include "physical_input.hpp"
+
+#ifdef ENABLE_GM2Calc
+#include "gm2calc_interface.hpp"
+#endif
 
 #define MODEL model
 #define AMU a_muon
@@ -128,6 +132,7 @@ MSSMNoFVatMGUTHimalaya_observables calculate_observables(MSSMNoFVatMGUTHimalaya_
    MSSMNoFVatMGUTHimalaya_observables observables;
 
    try {
+      #ifdef ENABLE_GM2Calc
       GM2Calc_data gm2calc_data;
       gm2calc_data.alpha_s_MZ = ALPHA_S_MZ;
       gm2calc_data.MZ    = MZPole;
@@ -158,10 +163,16 @@ MSSMNoFVatMGUTHimalaya_observables calculate_observables(MSSMNoFVatMGUTHimalaya_
       gm2calc_data.Au    = div_safe(MODEL.get_TYu(), MODEL.get_Yu());
       gm2calc_data.Ad    = div_safe(MODEL.get_TYd(), MODEL.get_Yd());
       gm2calc_data.Ae    = div_safe(MODEL.get_TYe(), MODEL.get_Ye());
+      #endif
+
 
       observables.AMU = MSSMNoFVatMGUTHimalaya_a_muon::calculate_a_muon(MODEL);
+      #ifdef ENABLE_GM2Calc
       observables.AMUGM2CALC = gm2calc_calculate_amu(gm2calc_data);
+      #endif
+      #ifdef ENABLE_GM2Calc
       observables.AMUGM2CALCUNCERTAINTY = gm2calc_calculate_amu_uncertainty(gm2calc_data);
+      #endif
    } catch (const Error& e) {
       model.get_problems().flag_thrown(e.what());
    }

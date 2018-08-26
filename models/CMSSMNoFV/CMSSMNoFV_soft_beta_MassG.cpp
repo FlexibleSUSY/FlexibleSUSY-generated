@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:56:11
+// File generated at Sun 26 Aug 2018 15:08:49
 
 #include "CMSSMNoFV_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -94,8 +94,8 @@ double CMSSMNoFV_soft_parameters::calc_beta_MassG_2_loop(const Soft_traces& soft
 
    double beta_MassG;
 
-   beta_MassG = Re(0.4*twoLoop*Sqr(g3)*(11*(MassB + MassG)*Sqr(g1) + 5*(9
-      *(MassG + MassWB)*Sqr(g2) + 4*(traceAdjYdTYd + traceAdjYuTYu - MassG*
+   beta_MassG = Re(0.4*twoLoop*Sqr(g3)*(11*(MassB + MassG)*Sqr(g1) + 5*(9*(
+      MassG + MassWB)*Sqr(g2) + 4*(traceAdjYdTYd + traceAdjYuTYu - MassG*
       traceYdAdjYd - MassG*traceYuAdjYu + 7*MassG*Sqr(g3)))));
 
 
@@ -128,8 +128,8 @@ double CMSSMNoFV_soft_parameters::calc_beta_MassG_3_loop(const Soft_traces& soft
 
    double beta_MassG;
 
-   beta_MassG = Re(0.02666666666666667*threeLoop*Sqr(g3)*(-1702*(2*MassB
-      + MassG)*Quad(g1) - 5*Sqr(g1)*(4*(8*MassB*traceAdjYdYd + 8*MassG*
+   beta_MassG = Re(0.02666666666666667*threeLoop*Sqr(g3)*(-1702*(2*MassB +
+      MassG)*Quad(g1) - 5*Sqr(g1)*(4*(8*MassB*traceAdjYdYd + 8*MassG*
       traceAdjYdYd + 11*MassB*traceAdjYuYu + 11*MassG*traceAdjYuYu - 8*
       traceTYdAdjYd - 11*traceTYuAdjYu) + 9*(MassB + MassG + MassWB)*Sqr(g2) -
       22*(MassB + 2*MassG)*Sqr(g3)) - 25*(81*(MassG + 2*MassWB)*Quad(g2) - 1041

@@ -16,14 +16,14 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:18:32
+// File generated at Sun 26 Aug 2018 14:01:50
 
 /**
  * @file CE6SSM_semi_analytic_solutions.hpp
  * @brief contains class for computing the semi-analytic solutions
  *
- * This file was generated at Mon 5 Mar 2018 17:18:32 with FlexibleSUSY
- * 2.1.0 (git commit: 8f20f6c9c42c159c1588fbc0bb3e15ce5ab6ace3) and SARAH 4.12.3 .
+ * This file was generated at Sun 26 Aug 2018 14:01:50 with FlexibleSUSY
+ * 2.2.0 (git commit: 8489097de2d6938a6da0149378457b5ad13d9425) and SARAH 4.13.0 .
  */
 
 #ifndef CE6SSM_SEMI_ANALYTIC_SOLUTIONS_H
@@ -103,22 +103,20 @@ public:
    double get_TYuCoeff1(int i, int k) const { return TYuCoeff1(i,k); }
    const Eigen::Matrix<double,3,3>& get_TYuCoeff2() const { return TYuCoeff2; }
    double get_TYuCoeff2(int i, int k) const { return TYuCoeff2(i,k); }
-   const Eigen::Matrix<double,3,3>& get_TKappaCoeff1() const { return
-      TKappaCoeff1; }
+   const Eigen::Matrix<double,3,3>& get_TKappaCoeff1() const { return TKappaCoeff1
+      ; }
    double get_TKappaCoeff1(int i, int k) const { return TKappaCoeff1(i,k); }
-   const Eigen::Matrix<double,3,3>& get_TKappaCoeff2() const { return
-      TKappaCoeff2; }
+   const Eigen::Matrix<double,3,3>& get_TKappaCoeff2() const { return TKappaCoeff2
+      ; }
    double get_TKappaCoeff2(int i, int k) const { return TKappaCoeff2(i,k); }
    double get_TLambdaxCoeff1() const { return TLambdaxCoeff1; }
    double get_TLambdaxCoeff2() const { return TLambdaxCoeff2; }
    const Eigen::Matrix<double,2,2>& get_TLambda12Coeff1() const { return
       TLambda12Coeff1; }
-   double get_TLambda12Coeff1(int i, int k) const { return TLambda12Coeff1(i,k)
-      ; }
+   double get_TLambda12Coeff1(int i, int k) const { return TLambda12Coeff1(i,k); }
    const Eigen::Matrix<double,2,2>& get_TLambda12Coeff2() const { return
       TLambda12Coeff2; }
-   double get_TLambda12Coeff2(int i, int k) const { return TLambda12Coeff2(i,k)
-      ; }
+   double get_TLambda12Coeff2(int i, int k) const { return TLambda12Coeff2(i,k); }
    const Eigen::Matrix<double,3,3>& get_md2Coeff1() const { return md2Coeff1; }
    double get_md2Coeff1(int i, int k) const { return md2Coeff1(i,k); }
    const Eigen::Matrix<double,3,3>& get_md2Coeff2() const { return md2Coeff2; }
@@ -127,17 +125,13 @@ public:
    double get_md2Coeff3(int i, int k) const { return md2Coeff3(i,k); }
    const Eigen::Matrix<double,3,3>& get_md2Coeff4() const { return md2Coeff4; }
    double get_md2Coeff4(int i, int k) const { return md2Coeff4(i,k); }
-   const Eigen::Matrix<double,3,3>& get_mDx2Coeff1() const { return mDx2Coeff1;
-      }
+   const Eigen::Matrix<double,3,3>& get_mDx2Coeff1() const { return mDx2Coeff1; }
    double get_mDx2Coeff1(int i, int k) const { return mDx2Coeff1(i,k); }
-   const Eigen::Matrix<double,3,3>& get_mDx2Coeff2() const { return mDx2Coeff2;
-      }
+   const Eigen::Matrix<double,3,3>& get_mDx2Coeff2() const { return mDx2Coeff2; }
    double get_mDx2Coeff2(int i, int k) const { return mDx2Coeff2(i,k); }
-   const Eigen::Matrix<double,3,3>& get_mDx2Coeff3() const { return mDx2Coeff3;
-      }
+   const Eigen::Matrix<double,3,3>& get_mDx2Coeff3() const { return mDx2Coeff3; }
    double get_mDx2Coeff3(int i, int k) const { return mDx2Coeff3(i,k); }
-   const Eigen::Matrix<double,3,3>& get_mDx2Coeff4() const { return mDx2Coeff4;
-      }
+   const Eigen::Matrix<double,3,3>& get_mDx2Coeff4() const { return mDx2Coeff4; }
    double get_mDx2Coeff4(int i, int k) const { return mDx2Coeff4(i,k); }
    const Eigen::Matrix<double,3,3>& get_mDxbar2Coeff1() const { return
       mDxbar2Coeff1; }
@@ -159,29 +153,29 @@ public:
    double get_me2Coeff3(int i, int k) const { return me2Coeff3(i,k); }
    const Eigen::Matrix<double,3,3>& get_me2Coeff4() const { return me2Coeff4; }
    double get_me2Coeff4(int i, int k) const { return me2Coeff4(i,k); }
-   const Eigen::Matrix<double,2,2>& get_mH1I2Coeff1() const { return
-      mH1I2Coeff1; }
+   const Eigen::Matrix<double,2,2>& get_mH1I2Coeff1() const { return mH1I2Coeff1;
+      }
    double get_mH1I2Coeff1(int i, int k) const { return mH1I2Coeff1(i,k); }
-   const Eigen::Matrix<double,2,2>& get_mH1I2Coeff2() const { return
-      mH1I2Coeff2; }
+   const Eigen::Matrix<double,2,2>& get_mH1I2Coeff2() const { return mH1I2Coeff2;
+      }
    double get_mH1I2Coeff2(int i, int k) const { return mH1I2Coeff2(i,k); }
-   const Eigen::Matrix<double,2,2>& get_mH1I2Coeff3() const { return
-      mH1I2Coeff3; }
+   const Eigen::Matrix<double,2,2>& get_mH1I2Coeff3() const { return mH1I2Coeff3;
+      }
    double get_mH1I2Coeff3(int i, int k) const { return mH1I2Coeff3(i,k); }
-   const Eigen::Matrix<double,2,2>& get_mH1I2Coeff4() const { return
-      mH1I2Coeff4; }
+   const Eigen::Matrix<double,2,2>& get_mH1I2Coeff4() const { return mH1I2Coeff4;
+      }
    double get_mH1I2Coeff4(int i, int k) const { return mH1I2Coeff4(i,k); }
-   const Eigen::Matrix<double,2,2>& get_mH2I2Coeff1() const { return
-      mH2I2Coeff1; }
+   const Eigen::Matrix<double,2,2>& get_mH2I2Coeff1() const { return mH2I2Coeff1;
+      }
    double get_mH2I2Coeff1(int i, int k) const { return mH2I2Coeff1(i,k); }
-   const Eigen::Matrix<double,2,2>& get_mH2I2Coeff2() const { return
-      mH2I2Coeff2; }
+   const Eigen::Matrix<double,2,2>& get_mH2I2Coeff2() const { return mH2I2Coeff2;
+      }
    double get_mH2I2Coeff2(int i, int k) const { return mH2I2Coeff2(i,k); }
-   const Eigen::Matrix<double,2,2>& get_mH2I2Coeff3() const { return
-      mH2I2Coeff3; }
+   const Eigen::Matrix<double,2,2>& get_mH2I2Coeff3() const { return mH2I2Coeff3;
+      }
    double get_mH2I2Coeff3(int i, int k) const { return mH2I2Coeff3(i,k); }
-   const Eigen::Matrix<double,2,2>& get_mH2I2Coeff4() const { return
-      mH2I2Coeff4; }
+   const Eigen::Matrix<double,2,2>& get_mH2I2Coeff4() const { return mH2I2Coeff4;
+      }
    double get_mH2I2Coeff4(int i, int k) const { return mH2I2Coeff4(i,k); }
    double get_mHd2Coeff1() const { return mHd2Coeff1; }
    double get_mHd2Coeff2() const { return mHd2Coeff2; }
@@ -219,17 +213,13 @@ public:
    double get_ms2Coeff2() const { return ms2Coeff2; }
    double get_ms2Coeff3() const { return ms2Coeff3; }
    double get_ms2Coeff4() const { return ms2Coeff4; }
-   const Eigen::Matrix<double,2,2>& get_msI2Coeff1() const { return msI2Coeff1;
-      }
+   const Eigen::Matrix<double,2,2>& get_msI2Coeff1() const { return msI2Coeff1; }
    double get_msI2Coeff1(int i, int k) const { return msI2Coeff1(i,k); }
-   const Eigen::Matrix<double,2,2>& get_msI2Coeff2() const { return msI2Coeff2;
-      }
+   const Eigen::Matrix<double,2,2>& get_msI2Coeff2() const { return msI2Coeff2; }
    double get_msI2Coeff2(int i, int k) const { return msI2Coeff2(i,k); }
-   const Eigen::Matrix<double,2,2>& get_msI2Coeff3() const { return msI2Coeff3;
-      }
+   const Eigen::Matrix<double,2,2>& get_msI2Coeff3() const { return msI2Coeff3; }
    double get_msI2Coeff3(int i, int k) const { return msI2Coeff3(i,k); }
-   const Eigen::Matrix<double,2,2>& get_msI2Coeff4() const { return msI2Coeff4;
-      }
+   const Eigen::Matrix<double,2,2>& get_msI2Coeff4() const { return msI2Coeff4; }
    double get_msI2Coeff4(int i, int k) const { return msI2Coeff4(i,k); }
    const Eigen::Matrix<double,3,3>& get_mu2Coeff1() const { return mu2Coeff1; }
    double get_mu2Coeff1(int i, int k) const { return mu2Coeff1(i,k); }
@@ -265,6 +255,7 @@ private:
       double BMuPrimeInput{};
       double MuPr{};
 
+      
    };
 
    struct Model_data {
@@ -298,10 +289,8 @@ private:
    Eigen::Matrix<double,3,3> TKappaCoeff2{Eigen::Matrix<double,3,3>::Zero()};
    double TLambdaxCoeff1{};
    double TLambdaxCoeff2{};
-   Eigen::Matrix<double,2,2> TLambda12Coeff1{Eigen::Matrix<double,2,2>::Zero()}
-      ;
-   Eigen::Matrix<double,2,2> TLambda12Coeff2{Eigen::Matrix<double,2,2>::Zero()}
-      ;
+   Eigen::Matrix<double,2,2> TLambda12Coeff1{Eigen::Matrix<double,2,2>::Zero()};
+   Eigen::Matrix<double,2,2> TLambda12Coeff2{Eigen::Matrix<double,2,2>::Zero()};
    Eigen::Matrix<double,3,3> md2Coeff1{Eigen::Matrix<double,3,3>::Zero()};
    Eigen::Matrix<double,3,3> md2Coeff2{Eigen::Matrix<double,3,3>::Zero()};
    Eigen::Matrix<double,3,3> md2Coeff3{Eigen::Matrix<double,3,3>::Zero()};

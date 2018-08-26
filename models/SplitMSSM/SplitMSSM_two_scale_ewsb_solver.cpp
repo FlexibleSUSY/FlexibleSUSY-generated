@@ -16,15 +16,15 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:44:29
+// File generated at Sun 26 Aug 2018 14:10:26
 
 /**
  * @file SplitMSSM_two_scale_ewsb_solver.cpp
  *
  * @brief implementation of EWSB solver for two-scale iteration
  *
- * This file was generated at Mon 5 Mar 2018 17:44:29 with FlexibleSUSY
- * 2.1.0 (git commit: 8f20f6c9c42c159c1588fbc0bb3e15ce5ab6ace3) and SARAH 4.12.3 .
+ * This file was generated at Sun 26 Aug 2018 14:10:26 with FlexibleSUSY
+ * 2.2.0 (git commit: 8489097de2d6938a6da0149378457b5ad13d9425) and SARAH 4.13.0 .
  */
 
 #include "SplitMSSM_two_scale_ewsb_solver.hpp"
@@ -214,6 +214,7 @@ int CLASSNAME::solve_tree_level(SplitMSSM_mass_eigenstates& model)
 
    mu2 = Re(Lambdax*Sqr(v));
 
+   
    const bool is_finite = IsFinite(mu2);
 
    if (is_finite) {
@@ -223,7 +224,6 @@ int CLASSNAME::solve_tree_level(SplitMSSM_mass_eigenstates& model)
       error = EWSB_solver::FAIL;
       model.get_problems().flag_no_ewsb_tree_level();
    }
-
    return error;
 }
 
@@ -270,8 +270,8 @@ CLASSNAME::EWSB_vector_t CLASSNAME::ewsb_step(const SplitMSSM_mass_eigenstates& 
    const auto Lambdax = MODELPARAMETER(Lambdax);
    double mu2;
 
-   mu2 = Re((0.7071067811865475*(1.4142135623730951*Cube(v)*Lambdax - tadpole[0
-      ]))/v);
+   mu2 = Re((0.7071067811865475*(1.4142135623730951*Cube(v)*Lambdax - tadpole[0]))
+      /v);
 
    const bool is_finite = IsFinite(mu2);
 

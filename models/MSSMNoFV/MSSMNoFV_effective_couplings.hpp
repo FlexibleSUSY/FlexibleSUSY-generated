@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 19:05:37
+// File generated at Sun 26 Aug 2018 15:21:11
 
 #ifndef MSSMNoFV_EFFECTIVE_COUPLINGS_H
 #define MSSMNoFV_EFFECTIVE_COUPLINGS_H

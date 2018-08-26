@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:56:52
+// File generated at Sun 26 Aug 2018 14:30:18
 
 #include "UMSSM_slha_io.hpp"
 #include "UMSSM_input_parameters.hpp"
@@ -880,9 +880,8 @@ void UMSSM_slha_io::fill_physical(UMSSM_physical& physical) const
 double UMSSM_slha_io::read_scale() const
 {
    static const std::array<std::string, 19> drbar_blocks =
-      { "gauge", "Yu", "Yd", "Ye", "Te", "Td", "Tu", "MSQ2", "MSE2", "MSL2",
-   "MSU2", "MSD2", "MSOFT", "HMIX", "Yv", "Tv", "mv2", "NMSSMRUN", "GAUGE" }
-;
+      { "gauge", "Yu", "Yd", "Ye", "Te", "Td", "Tu", "MSQ2", "MSE2", "MSL2", "MSU2",
+   "MSD2", "MSOFT", "HMIX", "Yv", "Tv", "mv2", "NMSSMRUN", "GAUGE" };
 
    double scale = 0.;
 

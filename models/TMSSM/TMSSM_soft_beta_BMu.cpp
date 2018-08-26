@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:55:13
+// File generated at Sun 26 Aug 2018 14:12:47
 
 #include "TMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -79,8 +79,8 @@ double TMSSM_soft_parameters::calc_beta_BMu_1_loop(const Soft_traces& soft_trace
 
    double beta_BMu;
 
-   beta_BMu = Re(oneOver16PiSqr*(6*traceAdjYdTYd*Mu + 2*traceAdjYeTYe*Mu
-      + 6*traceAdjYuTYu*Mu + 1.2*MassB*Mu*Sqr(g1) + BMu*(3*traceYdAdjYd +
+   beta_BMu = Re(oneOver16PiSqr*(6*traceAdjYdTYd*Mu + 2*traceAdjYeTYe*Mu + 6*
+      traceAdjYuTYu*Mu + 1.2*MassB*Mu*Sqr(g1) + BMu*(3*traceYdAdjYd +
       traceYeAdjYe + 3*traceYuAdjYu + 3*AbsSqr(Lambdax) - 0.6*Sqr(g1) - 3*Sqr(
       g2)) + 6*MassWB*Mu*Sqr(g2) + 6*Conj(Lambdax)*Mu*TLambdax));
 
@@ -114,9 +114,9 @@ double TMSSM_soft_parameters::calc_beta_BMu_2_loop(const Soft_traces& soft_trace
 
    double beta_BMu;
 
-   beta_BMu = Re(0.02*twoLoop*(BMu*(207*Quad(g1) + 75*AbsSqr(Lambdax)*(-3
-      *traceYdAdjYd - traceYeAdjYe - 3*traceYuAdjYu + 8*Sqr(g2)) + 10*Sqr(g1)*(
-      -2*traceYdAdjYd + 6*traceYeAdjYe + 4*traceYuAdjYu + 9*Sqr(g2)) + 25*(27*
+   beta_BMu = Re(0.02*twoLoop*(BMu*(207*Quad(g1) + 75*AbsSqr(Lambdax)*(-3*
+      traceYdAdjYd - traceYeAdjYe - 3*traceYuAdjYu + 8*Sqr(g2)) + 10*Sqr(g1)*(-
+      2*traceYdAdjYd + 6*traceYeAdjYe + 4*traceYuAdjYu + 9*Sqr(g2)) + 25*(27*
       Quad(g2) + 2*(-3*(3*traceYdAdjYdYdAdjYd + 2*traceYdAdjYuYuAdjYd +
       traceYeAdjYeYeAdjYe + 3*traceYuAdjYuYuAdjYu) + 16*(traceYdAdjYd +
       traceYuAdjYu)*Sqr(g3))) - 375*Sqr(Conj(Lambdax))*Sqr(Lambdax)) - 2*Mu*(

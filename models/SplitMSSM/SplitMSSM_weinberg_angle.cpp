@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:44:27
+// File generated at Sun 26 Aug 2018 14:10:22
 
 #include "SplitMSSM_mass_eigenstates.hpp"
 #include "SplitMSSM_weinberg_angle.hpp"
@@ -123,8 +123,8 @@ void CLASSNAME::set_sm_parameters(const Sm_parameters& sm_parameters_)
  */
 std::pair<double,double> CLASSNAME::calculate(double sinThetaW_start)
 {
-   const double gY = MODEL->get_g1() * SplitMSSM_info::normalization_g1;
-   const double g2 = MODEL->get_g2() * SplitMSSM_info::normalization_g2;
+   const auto gY = MODEL->get_g1() * SplitMSSM_info::normalization_g1;
+   const auto g2 = MODEL->get_g2() * SplitMSSM_info::normalization_g2;
    const double eDRbar     = gY * g2 / Sqrt(Sqr(gY) + Sqr(g2));
    const double alphaDRbar = Sqr(eDRbar) / (4.0 * Pi);
    const double mw         = sm_parameters.mw_pole;
@@ -146,46 +146,41 @@ std::pair<double,double> CLASSNAME::calculate(double sinThetaW_start)
 
    int iteration = 0;
    bool not_converged = true;
+   bool fudged = false;
    double sinThetaW_old = sinThetaW_start;
    double sinThetaW_new = sinThetaW_start;
 
    while (not_converged && iteration < number_of_iterations) {
+      fudged = false;
+
       double deltaRhoHat = calculate_delta_rho_hat(sinThetaW_old);
 
-      if (!std::isfinite(deltaRhoHat)) {
-#if defined(ENABLE_VERBOSE) || defined(ENABLE_DEBUG)
-         WARNING("delta_rho non-finite");
-#endif
+      if (!std::isfinite(deltaRhoHat) || Abs(deltaRhoHat) >= 1.0) {
+         fudged = true;
          deltaRhoHat = 0.;
       }
 
-      const double rhohat_ratio = Abs(deltaRhoHat) < 1.0 ?
-         1.0 / (1.0 - deltaRhoHat) : 1.0;
+      const double rhohat_ratio = 1.0 / (1.0 - deltaRhoHat);
 
       double deltaRHat = calculate_delta_r_hat(rhohat_ratio, sinThetaW_old);
 
-      if (deltaRHat > 1.) {
-#if defined(ENABLE_VERBOSE) || defined(ENABLE_DEBUG)
-         WARNING("delta_r_hat > 1");
-#endif
-         deltaRHat = 0.;
-      }
-
-      if (!std::isfinite(deltaRHat)) {
-#if defined(ENABLE_VERBOSE) || defined(ENABLE_DEBUG)
-         WARNING("delta_r_hat non-finite");
-#endif
+      if (!std::isfinite(deltaRHat) || Abs(deltaRHat) >= 1.0) {
+         fudged = true;
          deltaRHat = 0.;
       }
 
       double sin2thetasqO4 = Pi * alphaDRbar /
          (ROOT2 * Sqr(mz) * gfermi * (1.0 - deltaRHat) * rhohat_tree);
 
-      if (sin2thetasqO4 >= 0.25)
+      if (sin2thetasqO4 >= 0.25) {
+         fudged = true;
          sin2thetasqO4 = 0.25;
+      }
 
-      if (sin2thetasqO4 < 0.0)
+      if (sin2thetasqO4 < 0.0) {
+         fudged = true;
          sin2thetasqO4 = 0.0;
+      }
 
       const double sin2theta = Sqrt(4.0 * sin2thetasqO4);
       const double theta = 0.5 * ArcSin(sin2theta);
@@ -199,7 +194,8 @@ std::pair<double,double> CLASSNAME::calculate(double sinThetaW_start)
                   << " dRhoHat=" << deltaRhoHat
                   << " rhohat_ratio=" << rhohat_ratio
                   << " dRHat=" << deltaRHat
-                  << " sinThetaW_new=" << sinThetaW_new);
+                  << " sinThetaW_new=" << sinThetaW_new
+                  << " fudged = " << fudged);
 
       not_converged = precision >= precision_goal;
 
@@ -207,11 +203,19 @@ std::pair<double,double> CLASSNAME::calculate(double sinThetaW_start)
       iteration++;
    }
 
+   if (fudged)
+      throw NonPerturbativeSinThetaW();
+
    if (not_converged)
       throw NoSinThetaWConvergenceError(number_of_iterations, sinThetaW_new);
 
+   const double deltaRhoHat = calculate_delta_rho_hat(sinThetaW_new);
+
+   if (Abs(deltaRhoHat) >= 1.0)
+      throw NonPerturbativeSinThetaW();
+
    const double rhohat_ratio_final =
-      1.0 / (1.0 - calculate_delta_rho_hat(sinThetaW_new));
+      1.0 / (1.0 - deltaRhoHat);
    const double mw_pole =
       Sqrt(Sqr(mz) * rhohat_tree * rhohat_ratio_final * (1 - Sqr(sinThetaW_new)));
 
@@ -228,8 +232,8 @@ std::pair<double,double> CLASSNAME::calculate(double sinThetaW_start)
 double CLASSNAME::calculate_rho_hat_tree() const
 {
    double rhohat_tree = 1.;
+   
    rhohat_tree = 1;
-
    return rhohat_tree;
 }
 
@@ -270,15 +274,14 @@ double CLASSNAME::calculate_delta_rho_hat(double sinThetaW) const
       const auto Uu = MODELPARAMETER(Uu);
       const auto Mhh = MODELPARAMETER(Mhh);
 
-      deltaRhoHat2LoopSM = (6.015223977354103e-6*((64*ALPHAS*Pi*Sqr(g1)*Sqr(g2)*(
-         -2.24 + 1.262*Log(MT/MZ) - (2.145*Sqr(MT))/Sqr(MW) - (0.85*Sqr(MZ))/Sqr(MT))
-         )/((0.6*Sqr(g1) + Sqr(g2))*Sqr(SINTHETAW)) - 5*RHO2(Mhh/MT)*Sqr(GFERMI)*Sqr(
+      deltaRhoHat2LoopSM = (6.015223977354103e-6*((64*ALPHAS*Pi*Sqr(g1)*Sqr(g2)*(-
+         2.24 + 1.262*Log(MT/MZ) - (2.145*Sqr(MT))/Sqr(MW) - (0.85*Sqr(MZ))/Sqr(MT)))
+         /((0.6*Sqr(g1) + Sqr(g2))*Sqr(SINTHETAW)) - 5*RHO2(Mhh/MT)*Sqr(GFERMI)*Sqr(
          MT)*Sqr(v)*(Sqr(Abs(SUM(j2,0,2,Conj(Vu(2,j2))*SUM(j1,0,2,Conj(Uu(2,j1))*Yu(
          j1,j2))) - SUM(j2,0,2,SUM(j1,0,2,Conj(Yu(j1,j2))*Uu(2,j1))*Vu(2,j2)))) - Sqr
          (Abs(SUM(j2,0,2,Conj(Vu(2,j2))*SUM(j1,0,2,Conj(Uu(2,j1))*Yu(j1,j2))) + SUM(
          j2,0,2,SUM(j1,0,2,Conj(Yu(j1,j2))*Uu(2,j1))*Vu(2,j2)))))))/(1 + PIZZTMZ/Sqr(
-         MZ));
-   }
+         MZ));   }
 
    const double deltaRhoHat2LoopSMreal = std::real(deltaRhoHat2LoopSM);
 
@@ -328,15 +331,14 @@ double CLASSNAME::calculate_delta_r_hat(double rhohat_ratio, double sinThetaW) c
       const auto Uu = MODELPARAMETER(Uu);
       const auto Mhh = MODELPARAMETER(Mhh);
 
-      deltaRHat2LoopSM = 6.015223977354103e-6*((64*ALPHAS*Pi*Sqr(g1)*Sqr(g2)*(
-         -0.224 + 0.575*Log(MT/MZ) + (2.145*Sqr(MT))/Sqr(MZ) - (0.144*Sqr(MZ))/Sqr(MT
-         )))/((0.6*Sqr(g1) + Sqr(g2))*(1 - Sqr(SINTHETAW))*Sqr(SINTHETAW)) - 5*(-1 +
+      deltaRHat2LoopSM = 6.015223977354103e-6*((64*ALPHAS*Pi*Sqr(g1)*Sqr(g2)*(-0.224
+         + 0.575*Log(MT/MZ) + (2.145*Sqr(MT))/Sqr(MZ) - (0.144*Sqr(MZ))/Sqr(MT)))/((
+         0.6*Sqr(g1) + Sqr(g2))*(1 - Sqr(SINTHETAW))*Sqr(SINTHETAW)) - 5*(-1 +
          DELTARHAT1LOOP)*RHOHATRATIO*RHO2(Mhh/MT)*Sqr(GFERMI)*Sqr(MT)*Sqr(v)*(Sqr(Abs
          (SUM(j2,0,2,Conj(Vu(2,j2))*SUM(j1,0,2,Conj(Uu(2,j1))*Yu(j1,j2))) - SUM(j2,0,
          2,SUM(j1,0,2,Conj(Yu(j1,j2))*Uu(2,j1))*Vu(2,j2)))) - Sqr(Abs(SUM(j2,0,2,Conj
          (Vu(2,j2))*SUM(j1,0,2,Conj(Uu(2,j1))*Yu(j1,j2))) + SUM(j2,0,2,SUM(j1,0,2,
-         Conj(Yu(j1,j2))*Uu(2,j1))*Vu(2,j2))))));
-   }
+         Conj(Yu(j1,j2))*Uu(2,j1))*Vu(2,j2))))));   }
 
    const double deltaRHat2LoopSMreal = std::real(deltaRHat2LoopSM);
 
@@ -388,8 +390,8 @@ double CLASSNAME::calculate_delta_vb_sm(double sinThetaW) const
    const double outcos2    = 1.0 - sinThetaW2;
    const double q   = model->get_scale();
 
-   const double gY = MODEL->get_g1() * SplitMSSM_info::normalization_g1;
-   const double g2 = MODEL->get_g2() * SplitMSSM_info::normalization_g2;
+   const auto gY = MODEL->get_g1() * SplitMSSM_info::normalization_g1;
+   const auto g2 = MODEL->get_g2() * SplitMSSM_info::normalization_g2;
    const double eDRbar     = gY * g2 / Sqrt(Sqr(gY) + Sqr(g2));
    const double alphaDRbar = Sqr(eDRbar) / (4.0 * Pi);
 
@@ -399,6 +401,31 @@ double CLASSNAME::calculate_delta_vb_sm(double sinThetaW) const
        - 4. * Log(Sqr(mz/q)));
 
    return deltaVbSM;
+}
+
+/**
+ * Calculates the index of the neutrino belonging to the charged lepton with
+ * index FeIdx (in NoFV models there are no such indices since every lepton
+ * has its own field)
+ *
+ * @param index of the charged lepton
+ *
+ * @return index of the corresponding neutrino
+ */
+int CLASSNAME::get_neutrino_index(int FeIdx) const
+{
+   const auto Cp0 = Abs(CpbarFvFeVWpPL(0,FeIdx));
+   const auto Cp1 = Abs(CpbarFvFeVWpPL(1,FeIdx));
+   const auto Cp2 = Abs(CpbarFvFeVWpPL(2,FeIdx));
+
+   if (Cp0 >= std::max(Cp1,Cp2))
+      return 0;
+   if (Cp1 >= std::max(Cp0,Cp2))
+      return 1;
+   if (Cp2 >= std::max(Cp0,Cp1))
+      return 2;
+
+   throw NonPerturbativeSinThetaW();
 }
 
 /**
@@ -413,19 +440,22 @@ double CLASSNAME::calculate_delta_vb_sm(double sinThetaW) const
 double CLASSNAME::calculate_delta_vb_bsm(double sinThetaW) const
 {
    const double mz = sm_parameters.mz_pole;
-   const double gY = MODEL->get_g1() * SplitMSSM_info::normalization_g1;
-   const double g2 = MODEL->get_g2() * SplitMSSM_info::normalization_g2;
+   const auto gY = MODEL->get_g1() * SplitMSSM_info::normalization_g1;
+   const auto g2 = MODEL->get_g2() * SplitMSSM_info::normalization_g2;
    const double sinThetaW2 = Sqr(sinThetaW);
    const double outcos2    = 1.0 - sinThetaW2;
 
    const double eDRbar     = gY * g2 / Sqrt(Sqr(gY) + Sqr(g2));
    const double alphaDRbar = Sqr(eDRbar) / (4.0 * Pi);
 
-   const std::complex<double> a1 = delta_vb_box(1, 1, 0, 0);
+   const int FveIdx = get_neutrino_index(0);
+   const int FvmIdx = get_neutrino_index(1);
+
+   const std::complex<double> a1 = delta_vb_box(1, FvmIdx, FveIdx, 0);
    const std::complex<double> deltaV =
-      delta_vb_vertex(0, 0) + delta_vb_vertex(1, 1);
+      delta_vb_vertex(0, FveIdx) + delta_vb_vertex(1, FvmIdx);
    const std::complex<double> deltaZ =
-      delta_vb_wave_Fv(0) + delta_vb_wave_Fv(1) + delta_vb_wave_Fe(0) + delta_vb_wave_Fe(1);
+      delta_vb_wave_Fv(FveIdx) + delta_vb_wave_Fv(FvmIdx) + delta_vb_wave_Fe(0) + delta_vb_wave_Fe(1);
 
    const double deltaVbBSM = oneOver16PiSqr *
       (- sinThetaW2 * outcos2 / (2.0 * Pi * alphaDRbar) * Sqr(mz) * a1.real() +
@@ -445,8 +475,19 @@ std::complex<double> CLASSNAME::CpbarFeFehhPL(int gI1, int gI2) const
    const auto Ve = MODELPARAMETER(Ve);
    const auto Ue = MODELPARAMETER(Ue);
 
-   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,Conj(Ve(
-      gI2,j2))*SUM(j1,0,2,Conj(Ue(gI1,j1))*Ye(j1,j2)));
+   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,Conj(Ve(gI2,
+      j2))*SUM(j1,0,2,Conj(Ue(gI1,j1))*Ye(j1,j2)));
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFvFeVWpPL(int gO1, int gI2) const
+{
+   const auto g2 = MODELPARAMETER(g2);
+   const auto Ve = MODELPARAMETER(Ve);
+
+   const std::complex<double> result = IF(gO1 < 3,-0.7071067811865475*g2*Conj(Ve(
+      gI2,gO1)),0);
 
    return result;
 }
@@ -454,35 +495,34 @@ std::complex<double> CLASSNAME::CpbarFeFehhPL(int gI1, int gI2) const
 
 std::complex<double> CLASSNAME::delta_vb_wave_Fv(int gO1) const
 {
+   
    const std::complex<double> result = 0;
 
-   return result;
-}
+   return result;}
 
 std::complex<double> CLASSNAME::delta_vb_wave_Fe(int gO1) const
 {
    const auto Mhh = MODELPARAMETER(Mhh);
    const auto MFe = MODELPARAMETER(MFe);
 
-   const std::complex<double> result = SUM(gI2,0,2,-(AbsSqr(CpbarFeFehhPL(gI2,
-      gO1))*B1(0,Sqr(MFe(gI2)),Sqr(Mhh))));
+   const std::complex<double> result = SUM(gI2,0,2,-(AbsSqr(CpbarFeFehhPL(gI2,gO1)
+      )*B1(0,Sqr(MFe(gI2)),Sqr(Mhh))));
 
-   return result;
-}
+   return result;}
 
 std::complex<double> CLASSNAME::delta_vb_vertex(int gO1, int gO2) const
 {
+   
    const std::complex<double> result = 0;
 
-   return result;
-}
+   return result;}
 
 std::complex<double> CLASSNAME::delta_vb_box(int gO1, int gO2, int gO3, int gO4) const
 {
+   
    const std::complex<double> result = 0;
 
-   return result;
-}
+   return result;}
 
 
 /**
@@ -566,7 +606,7 @@ double CLASSNAME::calculate_self_energy_VZ(double p) const
 {
    const double mt      = sm_parameters.mt_pole;
    const double mtDRbar = MODEL->get_MFu(2);
-   const double pizzt   = Re(model->self_energy_VZ_1loop(p));
+   const auto pizzt   = Re(model->self_energy_VZ_1loop(p));
 
    double pizzt_corrected = pizzt;
 
@@ -591,7 +631,7 @@ double CLASSNAME::calculate_self_energy_VWp(double p) const
 {
    const double mt      = sm_parameters.mt_pole;
    const double mtDRbar = MODEL->get_MFu(2);
-   const double piwwt   = Re(model->self_energy_VWp_1loop(p));
+   const auto piwwt   = Re(model->self_energy_VWp_1loop(p));
 
    double piwwt_corrected = piwwt;
 
@@ -616,8 +656,8 @@ double CLASSNAME::calculate_self_energy_VZ_top(double p, double mt) const
 {
    const double q  = model->get_scale();
    const double Nc = 3.0;
-   const double gY = MODEL->get_g1() * SplitMSSM_info::normalization_g1;
-   const double g2 = MODEL->get_g2() * SplitMSSM_info::normalization_g2;
+   const auto gY = MODEL->get_g1() * SplitMSSM_info::normalization_g1;
+   const auto g2 = MODEL->get_g2() * SplitMSSM_info::normalization_g2;
    const double gY2 = Sqr(gY);
    const double g22 = Sqr(g2);
    const double sw2 = gY2 / (gY2 + g22);
@@ -646,7 +686,7 @@ double CLASSNAME::calculate_self_energy_VWp_top(double p, double mt) const
    const double q  = model->get_scale();
    const double mb = MODEL->get_MFd(2);
    const double Nc = 3.0;
-   const double g2 = MODEL->get_g2() * SplitMSSM_info::normalization_g2;
+   const auto g2 = MODEL->get_g2() * SplitMSSM_info::normalization_g2;
 
    const double self_energy_w_top =
       0.5 * Nc * softsusy::hfn(p, mt, mb, q) * Sqr(g2) * oneOver16PiSqr;

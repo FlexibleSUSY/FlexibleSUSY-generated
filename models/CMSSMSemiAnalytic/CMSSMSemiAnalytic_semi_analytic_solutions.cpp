@@ -16,14 +16,14 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 19:10:03
+// File generated at Sun 26 Aug 2018 15:28:02
 
 /**
  * @file CMSSMSemiAnalytic_semi_analytic_solutions.cpp
  * @brief contains implementation of class for computing the semi-analytic solutions
  *
- * This file was generated at Mon 5 Mar 2018 19:10:03 with FlexibleSUSY
- * 2.1.0 (git commit: 8f20f6c9c42c159c1588fbc0bb3e15ce5ab6ace3) and SARAH 4.12.3 .
+ * This file was generated at Sun 26 Aug 2018 15:28:02 with FlexibleSUSY
+ * 2.2.0 (git commit: 8489097de2d6938a6da0149378457b5ad13d9425) and SARAH 4.13.0 .
  */
 
 #include "CMSSMSemiAnalytic_semi_analytic_solutions.hpp"
@@ -191,6 +191,7 @@ void CMSSMSemiAnalytic_semi_analytic_solutions::calculate_coefficients(const CMS
       return result;
    };
 
+   
    auto solver_1 = create_solver<Eigen::MatrixXd,2>(datasets[1], basis_1);
    auto solver_2 = create_solver<Eigen::MatrixXd,4>(datasets[2], basis_2);
    auto solver_3 = create_solver<Eigen::MatrixXd,3>(datasets[3], basis_3);
@@ -266,18 +267,17 @@ void CMSSMSemiAnalytic_semi_analytic_solutions::evaluate_solutions(
       md2Coeff2*Sqr(m12)).real());
    model.set_me2((m0Sq*me2Coeff1 + Azero*m12*me2Coeff3 + me2Coeff4*Sqr(Azero) +
       me2Coeff2*Sqr(m12)).real());
-   model.set_mHd2(Re(m0Sq*mHd2Coeff1 + Azero*m12*mHd2Coeff3 + mHd2Coeff4*Sqr(
-      Azero) + mHd2Coeff2*Sqr(m12)));
-   model.set_mHu2(Re(m0Sq*mHu2Coeff1 + Azero*m12*mHu2Coeff3 + mHu2Coeff4*Sqr(
-      Azero) + mHu2Coeff2*Sqr(m12)));
+   model.set_mHd2(Re(m0Sq*mHd2Coeff1 + Azero*m12*mHd2Coeff3 + mHd2Coeff4*Sqr(Azero
+      ) + mHd2Coeff2*Sqr(m12)));
+   model.set_mHu2(Re(m0Sq*mHu2Coeff1 + Azero*m12*mHu2Coeff3 + mHu2Coeff4*Sqr(Azero
+      ) + mHu2Coeff2*Sqr(m12)));
    model.set_ml2((m0Sq*ml2Coeff1 + Azero*m12*ml2Coeff3 + ml2Coeff4*Sqr(Azero) +
       ml2Coeff2*Sqr(m12)).real());
    model.set_mq2((m0Sq*mq2Coeff1 + Azero*m12*mq2Coeff3 + mq2Coeff4*Sqr(Azero) +
       mq2Coeff2*Sqr(m12)).real());
    model.set_mu2((m0Sq*mu2Coeff1 + Azero*m12*mu2Coeff3 + mu2Coeff4*Sqr(Azero) +
       mu2Coeff2*Sqr(m12)).real());
-   model.set_BMu(Re(BMu0*BMuCoeff1 + Azero*BMuCoeff3*MuBV + BMuCoeff2*m12*MuBV)
-      );
+   model.set_BMu(Re(BMu0*BMuCoeff1 + Azero*BMuCoeff3*MuBV + BMuCoeff2*m12*MuBV));
 
 }
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:56:05
+// File generated at Sun 26 Aug 2018 15:07:26
 
 #include "MSSMRHN_mass_eigenstates.hpp"
 #include "MSSMRHN_weinberg_angle.hpp"
@@ -123,8 +123,8 @@ void CLASSNAME::set_sm_parameters(const Sm_parameters& sm_parameters_)
  */
 std::pair<double,double> CLASSNAME::calculate(double sinThetaW_start)
 {
-   const double gY = 1.;
-   const double g2 = 1.;
+   const auto gY = 1.;
+   const auto g2 = 1.;
    const double eDRbar     = gY * g2 / Sqrt(Sqr(gY) + Sqr(g2));
    const double alphaDRbar = Sqr(eDRbar) / (4.0 * Pi);
    const double mw         = sm_parameters.mw_pole;
@@ -146,46 +146,41 @@ std::pair<double,double> CLASSNAME::calculate(double sinThetaW_start)
 
    int iteration = 0;
    bool not_converged = true;
+   bool fudged = false;
    double sinThetaW_old = sinThetaW_start;
    double sinThetaW_new = sinThetaW_start;
 
    while (not_converged && iteration < number_of_iterations) {
+      fudged = false;
+
       double deltaRhoHat = calculate_delta_rho_hat(sinThetaW_old);
 
-      if (!std::isfinite(deltaRhoHat)) {
-#if defined(ENABLE_VERBOSE) || defined(ENABLE_DEBUG)
-         WARNING("delta_rho non-finite");
-#endif
+      if (!std::isfinite(deltaRhoHat) || Abs(deltaRhoHat) >= 1.0) {
+         fudged = true;
          deltaRhoHat = 0.;
       }
 
-      const double rhohat_ratio = Abs(deltaRhoHat) < 1.0 ?
-         1.0 / (1.0 - deltaRhoHat) : 1.0;
+      const double rhohat_ratio = 1.0 / (1.0 - deltaRhoHat);
 
       double deltaRHat = calculate_delta_r_hat(rhohat_ratio, sinThetaW_old);
 
-      if (deltaRHat > 1.) {
-#if defined(ENABLE_VERBOSE) || defined(ENABLE_DEBUG)
-         WARNING("delta_r_hat > 1");
-#endif
-         deltaRHat = 0.;
-      }
-
-      if (!std::isfinite(deltaRHat)) {
-#if defined(ENABLE_VERBOSE) || defined(ENABLE_DEBUG)
-         WARNING("delta_r_hat non-finite");
-#endif
+      if (!std::isfinite(deltaRHat) || Abs(deltaRHat) >= 1.0) {
+         fudged = true;
          deltaRHat = 0.;
       }
 
       double sin2thetasqO4 = Pi * alphaDRbar /
          (ROOT2 * Sqr(mz) * gfermi * (1.0 - deltaRHat) * rhohat_tree);
 
-      if (sin2thetasqO4 >= 0.25)
+      if (sin2thetasqO4 >= 0.25) {
+         fudged = true;
          sin2thetasqO4 = 0.25;
+      }
 
-      if (sin2thetasqO4 < 0.0)
+      if (sin2thetasqO4 < 0.0) {
+         fudged = true;
          sin2thetasqO4 = 0.0;
+      }
 
       const double sin2theta = Sqrt(4.0 * sin2thetasqO4);
       const double theta = 0.5 * ArcSin(sin2theta);
@@ -199,7 +194,8 @@ std::pair<double,double> CLASSNAME::calculate(double sinThetaW_start)
                   << " dRhoHat=" << deltaRhoHat
                   << " rhohat_ratio=" << rhohat_ratio
                   << " dRHat=" << deltaRHat
-                  << " sinThetaW_new=" << sinThetaW_new);
+                  << " sinThetaW_new=" << sinThetaW_new
+                  << " fudged = " << fudged);
 
       not_converged = precision >= precision_goal;
 
@@ -207,11 +203,19 @@ std::pair<double,double> CLASSNAME::calculate(double sinThetaW_start)
       iteration++;
    }
 
+   if (fudged)
+      throw NonPerturbativeSinThetaW();
+
    if (not_converged)
       throw NoSinThetaWConvergenceError(number_of_iterations, sinThetaW_new);
 
+   const double deltaRhoHat = calculate_delta_rho_hat(sinThetaW_new);
+
+   if (Abs(deltaRhoHat) >= 1.0)
+      throw NonPerturbativeSinThetaW();
+
    const double rhohat_ratio_final =
-      1.0 / (1.0 - calculate_delta_rho_hat(sinThetaW_new));
+      1.0 / (1.0 - deltaRhoHat);
    const double mw_pole =
       Sqrt(Sqr(mz) * rhohat_tree * rhohat_ratio_final * (1 - Sqr(sinThetaW_new)));
 
@@ -355,8 +359,8 @@ double CLASSNAME::calculate_delta_vb_sm(double sinThetaW) const
    const double outcos2    = 1.0 - sinThetaW2;
    const double q   = model->get_scale();
 
-   const double gY = 1.;
-   const double g2 = 1.;
+   const auto gY = 1.;
+   const auto g2 = 1.;
    const double eDRbar     = gY * g2 / Sqrt(Sqr(gY) + Sqr(g2));
    const double alphaDRbar = Sqr(eDRbar) / (4.0 * Pi);
 
@@ -366,6 +370,20 @@ double CLASSNAME::calculate_delta_vb_sm(double sinThetaW) const
        - 4. * Log(Sqr(mz/q)));
 
    return deltaVbSM;
+}
+
+/**
+ * Calculates the index of the neutrino belonging to the charged lepton with
+ * index FeIdx (in NoFV models there are no such indices since every lepton
+ * has its own field)
+ *
+ * @param index of the charged lepton
+ *
+ * @return index of the corresponding neutrino
+ */
+int CLASSNAME::get_neutrino_index(int FeIdx) const
+{
+   return 0;
 }
 
 /**
@@ -380,13 +398,16 @@ double CLASSNAME::calculate_delta_vb_sm(double sinThetaW) const
 double CLASSNAME::calculate_delta_vb_bsm(double sinThetaW) const
 {
    const double mz = sm_parameters.mz_pole;
-   const double gY = 1.;
-   const double g2 = 1.;
+   const auto gY = 1.;
+   const auto g2 = 1.;
    const double sinThetaW2 = Sqr(sinThetaW);
    const double outcos2    = 1.0 - sinThetaW2;
 
    const double eDRbar     = gY * g2 / Sqrt(Sqr(gY) + Sqr(g2));
    const double alphaDRbar = Sqr(eDRbar) / (4.0 * Pi);
+
+   const int FveIdx = get_neutrino_index(0);
+   const int FvmIdx = get_neutrino_index(1);
 
    const std::complex<double> a1 = 0.;
    const std::complex<double> deltaV =
@@ -489,7 +510,7 @@ double CLASSNAME::calculate_self_energy_VZ(double p) const
 {
    const double mt      = sm_parameters.mt_pole;
    const double mtDRbar = MODEL->get_MFu(2);
-   const double pizzt   = 0.;
+   const auto pizzt   = 0.;
 
    double pizzt_corrected = pizzt;
 
@@ -514,7 +535,7 @@ double CLASSNAME::calculate_self_energy_VWm(double p) const
 {
    const double mt      = sm_parameters.mt_pole;
    const double mtDRbar = MODEL->get_MFu(2);
-   const double piwwt   = 0.;
+   const auto piwwt   = 0.;
 
    double piwwt_corrected = piwwt;
 
@@ -539,8 +560,8 @@ double CLASSNAME::calculate_self_energy_VZ_top(double p, double mt) const
 {
    const double q  = model->get_scale();
    const double Nc = 3.0;
-   const double gY = 1.;
-   const double g2 = 1.;
+   const auto gY = 1.;
+   const auto g2 = 1.;
    const double gY2 = Sqr(gY);
    const double g22 = Sqr(g2);
    const double sw2 = gY2 / (gY2 + g22);
@@ -569,7 +590,7 @@ double CLASSNAME::calculate_self_energy_VWm_top(double p, double mt) const
    const double q  = model->get_scale();
    const double mb = MODEL->get_MFd(2);
    const double Nc = 3.0;
-   const double g2 = 1.;
+   const auto g2 = 1.;
 
    const double self_energy_w_top =
       0.5 * Nc * softsusy::hfn(p, mt, mb, q) * Sqr(g2) * oneOver16PiSqr;

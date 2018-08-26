@@ -16,15 +16,15 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 19:10:05
+// File generated at Sun 26 Aug 2018 15:28:03
 
 /**
  * @file CMSSMSemiAnalytic_semi_analytic_ewsb_solver.hpp
  *
  * @brief contains class for solving EWSB when semi-analytic algorithm is used
  *
- * This file was generated at Mon 5 Mar 2018 19:10:05 with FlexibleSUSY
- * 2.1.0 (git commit: 8f20f6c9c42c159c1588fbc0bb3e15ce5ab6ace3) and SARAH 4.12.3 .
+ * This file was generated at Sun 26 Aug 2018 15:28:03 with FlexibleSUSY
+ * 2.2.0 (git commit: 8489097de2d6938a6da0149378457b5ad13d9425) and SARAH 4.13.0 .
  */
 
 #ifndef CMSSMSemiAnalytic_SEMI_ANALYTIC_EWSB_SOLVER_H

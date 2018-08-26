@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:35:10
+// File generated at Sun 26 Aug 2018 14:10:05
 
 #include "THDMII_two_scale_high_scale_constraint.hpp"
 #include "THDMII_two_scale_model.hpp"
@@ -24,12 +24,17 @@
 #include "wrappers.hpp"
 #include "logger.hpp"
 #include "ew_input.hpp"
+#include "error.hpp"
 #include "gsl_utils.hpp"
 #include "minimizer.hpp"
 #include "raii.hpp"
 #include "root_finder.hpp"
 #include "threshold_loop_functions.hpp"
 #include "numerics2.hpp"
+
+#ifdef ENABLE_HIMALAYA
+#include "HierarchyCalculator.hpp"
+#endif
 
 #include <cmath>
 #include <cerrno>
@@ -55,6 +60,91 @@ namespace flexiblesusy {
 #define MODEL model
 #define MODELCLASSNAME THDMII<Two_scale>
 
+#if defined(ENABLE_HIMALAYA) && Himalaya_VERSION_MAJOR >= 2
+#define FSHimalayaMh23L [&] () {                                        \
+      MODEL->calculate_DRbar_masses();                                  \
+                                                                        \
+      himalaya::Parameters pars;                                        \
+      const auto g1 = MODELPARAMETER(g1); \
+      const auto g2 = MODELPARAMETER(g2); \
+      const auto g3 = MODELPARAMETER(g3); \
+      const auto v2 = MODELPARAMETER(v2); \
+      const auto v1 = MODELPARAMETER(v1); \
+      const auto Yu = MODELPARAMETER(Yu); \
+      const auto Yd = MODELPARAMETER(Yd); \
+      const auto Ye = MODELPARAMETER(Ye); \
+      const auto Vu = MODELPARAMETER(Vu); \
+      const auto Ud = MODELPARAMETER(Ud); \
+      const auto Uu = MODELPARAMETER(Uu); \
+      const auto Ve = MODELPARAMETER(Ve); \
+      const auto Ue = MODELPARAMETER(Ue); \
+      const auto MAh = MODELPARAMETER(MAh); \
+       \
+       \
+      pars.scale = MODELPARAMETER(scale); \
+      pars.mu = Re(Mu); \
+      pars.g1 = Re(g1); \
+      pars.g2 = Re(g2); \
+      pars.g3 = Re(g3); \
+      pars.vd = Re(v1); \
+      pars.vu = Re(v2); \
+      pars.mq2 = Re(Vu); \
+      pars.md2 = Re(Ud); \
+      pars.mu2 = Re(Uu); \
+      pars.ml2 = Re(Ve); \
+      pars.me2 = Re(Ue); \
+      pars.Au(2,2) = Re(TrilinearUp); \
+      pars.Ad(2,2) = Re(TrilinearDown); \
+      pars.Ae(2,2) = Re(TrilinearLepton); \
+      pars.Yu = Re(Yu); \
+      pars.Yd = Re(Yd); \
+      pars.Ye = Re(Ye); \
+      pars.M1 = 0; \
+      pars.M2 = 0; \
+      pars.MG = MGluino; \
+      pars.MA = MAh; \
+       \
+      const double msbar_scheme = 1; \
+      const double lambda_3L_eft = 1; \
+      const double lambda_3L_uncertainty = 0; \
+       \
+                                                                        \
+      double lambda_3L = 0.;                                            \
+                                                                        \
+      try {                                                             \
+         const bool verbose = false;                                    \
+         himalaya::HierarchyCalculator hc(pars, verbose);               \
+                                                                        \
+         const auto ho = hc.calculateDMh3L(false);                      \
+                                                                        \
+         lambda_3L =                                                    \
+            lambda_3L_eft * (                                           \
+               ho.getDLambda(3)                                         \
+               + msbar_scheme*ho.getDLambdaDRbarPrimeToMSbarShift(3)    \
+               + lambda_3L_uncertainty*ho.getDLambdaUncertainty(3)      \
+            );                                                          \
+                                                                        \
+         VERBOSE_MSG("Himalaya top (hierarchy, Dlambda_3L) = ("         \
+                     << ho.getSuitableHierarchy() << ", "               \
+                     << lambda_3L <<")");                               \
+      } catch (const std::exception& e) {                               \
+         model->get_problems().flag_bad_mass(THDMII_info::hh); \
+         WARNING(e.what());                                             \
+         VERBOSE_MSG(pars);                                             \
+      }                                                                 \
+                                                                        \
+      return lambda_3L;                                                 \
+   }()
+#else
+#define FSHimalayaMh23L [] () {                                         \
+      throw HimalayaError("The 3-loop corrections to lambda "           \
+                          "require Himalaya 2.0.0 (or higher), but "    \
+                          "FlexibleSUSY has not been configured with "  \
+                          "this Himalaya version!");                    \
+      return 0.;                                                        \
+   }()
+#endif
+
 THDMII_high_scale_constraint<Two_scale>::THDMII_high_scale_constraint(
    THDMII<Two_scale>* model_)
    : model(model_)
@@ -66,10 +156,12 @@ void THDMII_high_scale_constraint<Two_scale>::apply()
 {
    check_model_ptr();
 
+   
 
 
    update_scale();
 
+   
 
 
    check_non_perturbative();
@@ -385,6 +477,7 @@ void THDMII_high_scale_constraint<Two_scale>::initialize()
 {
    check_model_ptr();
 
+   
    initial_scale_guess = 2.e16;
 
    scale = initial_scale_guess;
@@ -394,6 +487,7 @@ void THDMII_high_scale_constraint<Two_scale>::update_scale()
 {
    check_model_ptr();
 
+   
    scale = 20000000000000000;
 
 

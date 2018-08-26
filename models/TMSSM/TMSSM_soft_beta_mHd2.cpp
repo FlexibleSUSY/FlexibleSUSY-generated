@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:55:22
+// File generated at Sun 26 Aug 2018 14:13:02
 
 #include "TMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -119,40 +119,24 @@ double TMSSM_soft_parameters::calc_beta_mHd2_2_loop(const Soft_traces& soft_trac
    const double tracemq2AdjYuYu = TRACE_STRUCT.tracemq2AdjYuYu;
    const double tracemu2YuAdjYu = TRACE_STRUCT.tracemu2YuAdjYu;
    const double traceYdAdjYdYdAdjYd = TRACE_STRUCT.traceYdAdjYdYdAdjYd;
-   const double traceYdAdjYdTYdAdjTYd =
-      TRACE_STRUCT.traceYdAdjYdTYdAdjTYd;
+   const double traceYdAdjYdTYdAdjTYd = TRACE_STRUCT.traceYdAdjYdTYdAdjTYd;
    const double traceYdAdjYuYuAdjYd = TRACE_STRUCT.traceYdAdjYuYuAdjYd;
-   const double traceYdAdjYuTYuAdjTYd =
-      TRACE_STRUCT.traceYdAdjYuTYuAdjTYd;
-   const double traceYdAdjTYdTYdAdjYd =
-      TRACE_STRUCT.traceYdAdjTYdTYdAdjYd;
-   const double traceYdAdjTYuTYuAdjYd =
-      TRACE_STRUCT.traceYdAdjTYuTYuAdjYd;
+   const double traceYdAdjYuTYuAdjTYd = TRACE_STRUCT.traceYdAdjYuTYuAdjTYd;
+   const double traceYdAdjTYdTYdAdjYd = TRACE_STRUCT.traceYdAdjTYdTYdAdjYd;
+   const double traceYdAdjTYuTYuAdjYd = TRACE_STRUCT.traceYdAdjTYuTYuAdjYd;
    const double traceYeAdjYeYeAdjYe = TRACE_STRUCT.traceYeAdjYeYeAdjYe;
-   const double traceYeAdjYeTYeAdjTYe =
-      TRACE_STRUCT.traceYeAdjYeTYeAdjTYe;
-   const double traceYeAdjTYeTYeAdjYe =
-      TRACE_STRUCT.traceYeAdjTYeTYeAdjYe;
-   const double traceYuAdjYdTYdAdjTYu =
-      TRACE_STRUCT.traceYuAdjYdTYdAdjTYu;
-   const double traceYuAdjTYdTYdAdjYu =
-      TRACE_STRUCT.traceYuAdjTYdTYdAdjYu;
-   const double tracemd2YdAdjYdYdAdjYd =
-      TRACE_STRUCT.tracemd2YdAdjYdYdAdjYd;
-   const double tracemd2YdAdjYuYuAdjYd =
-      TRACE_STRUCT.tracemd2YdAdjYuYuAdjYd;
-   const double traceme2YeAdjYeYeAdjYe =
-      TRACE_STRUCT.traceme2YeAdjYeYeAdjYe;
-   const double traceml2AdjYeYeAdjYeYe =
-      TRACE_STRUCT.traceml2AdjYeYeAdjYeYe;
-   const double tracemq2AdjYdYdAdjYdYd =
-      TRACE_STRUCT.tracemq2AdjYdYdAdjYdYd;
-   const double tracemq2AdjYdYdAdjYuYu =
-      TRACE_STRUCT.tracemq2AdjYdYdAdjYuYu;
-   const double tracemq2AdjYuYuAdjYdYd =
-      TRACE_STRUCT.tracemq2AdjYuYuAdjYdYd;
-   const double tracemu2YuAdjYdYdAdjYu =
-      TRACE_STRUCT.tracemu2YuAdjYdYdAdjYu;
+   const double traceYeAdjYeTYeAdjTYe = TRACE_STRUCT.traceYeAdjYeTYeAdjTYe;
+   const double traceYeAdjTYeTYeAdjYe = TRACE_STRUCT.traceYeAdjTYeTYeAdjYe;
+   const double traceYuAdjYdTYdAdjTYu = TRACE_STRUCT.traceYuAdjYdTYdAdjTYu;
+   const double traceYuAdjTYdTYdAdjYu = TRACE_STRUCT.traceYuAdjTYdTYdAdjYu;
+   const double tracemd2YdAdjYdYdAdjYd = TRACE_STRUCT.tracemd2YdAdjYdYdAdjYd;
+   const double tracemd2YdAdjYuYuAdjYd = TRACE_STRUCT.tracemd2YdAdjYuYuAdjYd;
+   const double traceme2YeAdjYeYeAdjYe = TRACE_STRUCT.traceme2YeAdjYeYeAdjYe;
+   const double traceml2AdjYeYeAdjYeYe = TRACE_STRUCT.traceml2AdjYeYeAdjYeYe;
+   const double tracemq2AdjYdYdAdjYdYd = TRACE_STRUCT.tracemq2AdjYdYdAdjYdYd;
+   const double tracemq2AdjYdYdAdjYuYu = TRACE_STRUCT.tracemq2AdjYdYdAdjYuYu;
+   const double tracemq2AdjYuYuAdjYdYd = TRACE_STRUCT.tracemq2AdjYuYuAdjYdYd;
+   const double tracemu2YuAdjYdYdAdjYu = TRACE_STRUCT.tracemu2YuAdjYdYdAdjYu;
    const double Tr2U111 = TRACE_STRUCT.Tr2U111;
    const double Tr31 = TRACE_STRUCT.Tr31;
    const double Tr22 = TRACE_STRUCT.Tr22;
@@ -169,7 +153,7 @@ double TMSSM_soft_parameters::calc_beta_mHd2_2_loop(const Soft_traces& soft_trac
       traceYdAdjYdTYdAdjTYd - 36*mHd2*traceYdAdjYdYdAdjYd - 6*
       traceYdAdjYuTYuAdjTYd - 6*mHd2*traceYdAdjYuYuAdjYd - 6*mHu2*
       traceYdAdjYuYuAdjYd - 12*traceYeAdjTYeTYeAdjYe - 12*traceYeAdjYeTYeAdjTYe
-      - 12*mHd2*traceYeAdjYeYeAdjYe - 6*traceYuAdjTYdTYdAdjYu - 6*
+       - 12*mHd2*traceYeAdjYeYeAdjYe - 6*traceYuAdjTYdTYdAdjYu - 6*
       traceYuAdjYdTYdAdjTYu - 9*traceconjTYuTpTYu*AbsSqr(Lambdax) - 9*
       tracemq2AdjYuYu*AbsSqr(Lambdax) - 9*tracemu2YuAdjYu*AbsSqr(Lambdax) - 9*
       mHd2*traceYuAdjYu*AbsSqr(Lambdax) - 18*mHu2*traceYuAdjYu*AbsSqr(Lambdax)

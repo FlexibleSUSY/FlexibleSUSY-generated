@@ -16,19 +16,23 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 19:04:16
+// File generated at Sun 26 Aug 2018 15:17:18
 
 #include "MSSMNoFVatMGUT_observables.hpp"
 #include "MSSMNoFVatMGUT_mass_eigenstates.hpp"
 #include "MSSMNoFVatMGUT_a_muon.hpp"
 #include "MSSMNoFVatMGUT_edm.hpp"
 #include "MSSMNoFVatMGUT_effective_couplings.hpp"
-#include "gm2calc_interface.hpp"
+#include "config.h"
 #include "eigen_utils.hpp"
 #include "numerics2.hpp"
 #include "wrappers.hpp"
 #include "lowe.h"
 #include "physical_input.hpp"
+
+#ifdef ENABLE_GM2Calc
+#include "gm2calc_interface.hpp"
+#endif
 
 #define MODEL model
 #define AMU a_muon

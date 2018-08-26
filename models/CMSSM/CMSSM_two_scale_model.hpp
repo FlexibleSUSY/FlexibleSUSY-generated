@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 19:11:06
+// File generated at Sun 26 Aug 2018 15:29:48
 
 /**
  * @file CMSSM_two_scale_model.hpp
@@ -24,8 +24,8 @@
  *        value problem using the two_scale solver by solving EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Mon 5 Mar 2018 19:11:06 with FlexibleSUSY
- * 2.1.0 (git commit: 8f20f6c9c42c159c1588fbc0bb3e15ce5ab6ace3) and SARAH 4.12.3 .
+ * This file was generated at Sun 26 Aug 2018 15:29:48 with FlexibleSUSY
+ * 2.2.0 (git commit: 8489097de2d6938a6da0149378457b5ad13d9425) and SARAH 4.13.0 .
  */
 
 #ifndef CMSSM_TWO_SCALE_H

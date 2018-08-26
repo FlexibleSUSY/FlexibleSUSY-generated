@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:46:25
+// File generated at Sun 26 Aug 2018 14:56:14
 
 #include "MSSMRHN_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,9 +73,9 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_mv2_1_loop(const So
 
    Eigen::Matrix<double,3,3> beta_mv2;
 
-   beta_mv2 = (oneOver16PiSqr*(4*mHu2*(Yv*Yv.adjoint()) + 4*(TYv*(TYv)
-      .adjoint()) + 2*(mv2*Yv*Yv.adjoint()) + 4*(Yv*ml2*Yv.adjoint()) + 2*(Yv*
-      Yv.adjoint()*mv2))).real();
+   beta_mv2 = (oneOver16PiSqr*(4*mHu2*(Yv*Yv.adjoint()) + 4*(TYv*(TYv).adjoint(
+      )) + 2*(mv2*Yv*Yv.adjoint()) + 4*(Yv*ml2*Yv.adjoint()) + 2*(Yv*Yv.adjoint
+      ()*mv2))).real();
 
 
    return beta_mv2;
@@ -104,8 +104,8 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_mv2_2_loop(const So
 
    Eigen::Matrix<double,3,3> beta_mv2;
 
-   beta_mv2 = (twoLoop*(0.8*(-15*traceconjTYuTpTYu - 5*traceconjTYvTpTYv
-      - 5*traceml2AdjYvYv - 15*tracemq2AdjYuYu - 15*tracemu2YuAdjYu - 5*
+   beta_mv2 = (twoLoop*(0.8*(-15*traceconjTYuTpTYu - 5*traceconjTYvTpTYv - 5*
+      traceml2AdjYvYv - 15*tracemq2AdjYuYu - 15*tracemu2YuAdjYu - 5*
       tracemv2YvAdjYv - 30*mHu2*traceYuAdjYu - 10*mHu2*traceYvAdjYv + 3*mHu2*
       Sqr(g1) + 6*AbsSqr(MassB)*Sqr(g1) + 15*mHu2*Sqr(g2) + 30*AbsSqr(MassWB)*
       Sqr(g2))*(Yv*Yv.adjoint()) - 0.8*(3*MassB*Sqr(g1) + 5*(3*traceAdjYuTYu +
@@ -114,21 +114,21 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_mv2_2_loop(const So
       )*Sqr(g2)))*(TYv*Yv.adjoint()) + (-12*traceYuAdjYu - 4*traceYvAdjYv + 2.4
       *Sqr(g1) + 12*Sqr(g2))*(TYv*(TYv).adjoint()) + (-2*(3*traceYuAdjYu +
       traceYvAdjYv) + 1.2*Sqr(g1) + 6*Sqr(g2))*(mv2*Yv*Yv.adjoint()) + (-12*
-      traceYuAdjYu - 4*traceYvAdjYv + 2.4*Sqr(g1) + 12*Sqr(g2))*(Yv*ml2*
-      Yv.adjoint()) + (-2*(3*traceYuAdjYu + traceYvAdjYv) + 1.2*Sqr(g1) + 6*Sqr
-      (g2))*(Yv*Yv.adjoint()*mv2) - 4*(mHd2 + mHu2)*(Yv*Ye.adjoint()*Ye*
-      Yv.adjoint()) - 4*(Yv*Ye.adjoint()*TYe*(TYv).adjoint()) - 8*mHu2*(Yv*
-      Yv.adjoint()*Yv*Yv.adjoint()) - 4*(Yv*Yv.adjoint()*TYv*(TYv).adjoint()) -
-      4*(Yv*(TYe).adjoint()*TYe*Yv.adjoint()) - 4*(Yv*(TYv).adjoint()*TYv*
-      Yv.adjoint()) - 4*(TYv*Ye.adjoint()*Ye*(TYv).adjoint()) - 4*(TYv*
-      Yv.adjoint()*Yv*(TYv).adjoint()) - 4*(TYv*(TYe).adjoint()*Ye*Yv.adjoint()
-      ) - 4*(TYv*(TYv).adjoint()*Yv*Yv.adjoint()) - 2*(mv2*Yv*Ye.adjoint()*Ye*
-      Yv.adjoint()) - 2*(mv2*Yv*Yv.adjoint()*Yv*Yv.adjoint()) - 4*(Yv*ml2*
-      Ye.adjoint()*Ye*Yv.adjoint()) - 4*(Yv*ml2*Yv.adjoint()*Yv*Yv.adjoint()) -
-      4*(Yv*Ye.adjoint()*me2*Ye*Yv.adjoint()) - 4*(Yv*Ye.adjoint()*Ye*ml2*
-      Yv.adjoint()) - 2*(Yv*Ye.adjoint()*Ye*Yv.adjoint()*mv2) - 4*(Yv*
-      Yv.adjoint()*mv2*Yv*Yv.adjoint()) - 4*(Yv*Yv.adjoint()*Yv*ml2*Yv.adjoint(
-      )) - 2*(Yv*Yv.adjoint()*Yv*Yv.adjoint()*mv2))).real();
+      traceYuAdjYu - 4*traceYvAdjYv + 2.4*Sqr(g1) + 12*Sqr(g2))*(Yv*ml2*Yv.
+      adjoint()) + (-2*(3*traceYuAdjYu + traceYvAdjYv) + 1.2*Sqr(g1) + 6*Sqr(g2
+      ))*(Yv*Yv.adjoint()*mv2) - 4*(mHd2 + mHu2)*(Yv*Ye.adjoint()*Ye*Yv.adjoint
+      ()) - 4*(Yv*Ye.adjoint()*TYe*(TYv).adjoint()) - 8*mHu2*(Yv*Yv.adjoint()*
+      Yv*Yv.adjoint()) - 4*(Yv*Yv.adjoint()*TYv*(TYv).adjoint()) - 4*(Yv*(TYe).
+      adjoint()*TYe*Yv.adjoint()) - 4*(Yv*(TYv).adjoint()*TYv*Yv.adjoint()) - 4
+      *(TYv*Ye.adjoint()*Ye*(TYv).adjoint()) - 4*(TYv*Yv.adjoint()*Yv*(TYv).
+      adjoint()) - 4*(TYv*(TYe).adjoint()*Ye*Yv.adjoint()) - 4*(TYv*(TYv).
+      adjoint()*Yv*Yv.adjoint()) - 2*(mv2*Yv*Ye.adjoint()*Ye*Yv.adjoint()) - 2*
+      (mv2*Yv*Yv.adjoint()*Yv*Yv.adjoint()) - 4*(Yv*ml2*Ye.adjoint()*Ye*Yv.
+      adjoint()) - 4*(Yv*ml2*Yv.adjoint()*Yv*Yv.adjoint()) - 4*(Yv*Ye.adjoint()
+      *me2*Ye*Yv.adjoint()) - 4*(Yv*Ye.adjoint()*Ye*ml2*Yv.adjoint()) - 2*(Yv*
+      Ye.adjoint()*Ye*Yv.adjoint()*mv2) - 4*(Yv*Yv.adjoint()*mv2*Yv*Yv.adjoint(
+      )) - 4*(Yv*Yv.adjoint()*Yv*ml2*Yv.adjoint()) - 2*(Yv*Yv.adjoint()*Yv*Yv.
+      adjoint()*mv2))).real();
 
 
    return beta_mv2;

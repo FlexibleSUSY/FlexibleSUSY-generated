@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:38:26
+// File generated at Sun 26 Aug 2018 14:10:14
 
 #include "HSSUSY_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -43,11 +43,10 @@ double HSSUSY_susy_parameters::calc_beta_Lambdax_1_loop(const Susy_traces& susy_
 
    double beta_Lambdax;
 
-   beta_Lambdax = Re(oneOver16PiSqr*(0.27*Quad(g1) + 2.25*Quad(g2) - 9*
-      Lambdax*Sqr(g2) + 0.9*Sqr(g1)*(-2*Lambdax + Sqr(g2)) + 4*(-3*
-      traceYdAdjYdYdAdjYd - traceYeAdjYeYeAdjYe - 3*traceYuAdjYuYuAdjYu + 3*
-      traceYdAdjYd*Lambdax + traceYeAdjYe*Lambdax + 3*traceYuAdjYu*Lambdax + 3*
-      Sqr(Lambdax))));
+   beta_Lambdax = Re(oneOver16PiSqr*(0.27*Quad(g1) + 2.25*Quad(g2) - 9*Lambdax*
+      Sqr(g2) + 0.9*Sqr(g1)*(-2*Lambdax + Sqr(g2)) + 4*(-3*traceYdAdjYdYdAdjYd
+      - traceYeAdjYeYeAdjYe - 3*traceYuAdjYuYuAdjYu + 3*traceYdAdjYd*Lambdax +
+      traceYeAdjYe*Lambdax + 3*traceYuAdjYu*Lambdax + 3*Sqr(Lambdax))));
 
 
    return beta_Lambdax;
@@ -67,18 +66,18 @@ double HSSUSY_susy_parameters::calc_beta_Lambdax_2_loop(const Susy_traces& susy_
    const double traceYdAdjYuYuAdjYd = TRACE_STRUCT.traceYdAdjYuYuAdjYd;
    const double traceYeAdjYeYeAdjYe = TRACE_STRUCT.traceYeAdjYeYeAdjYe;
    const double traceYuAdjYuYuAdjYu = TRACE_STRUCT.traceYuAdjYuYuAdjYu;
-   const double traceYdAdjYdYdAdjYdYdAdjYd =
-      TRACE_STRUCT.traceYdAdjYdYdAdjYdYdAdjYd;
-   const double traceYdAdjYdYdAdjYuYuAdjYd =
-      TRACE_STRUCT.traceYdAdjYdYdAdjYuYuAdjYd;
-   const double traceYdAdjYuYuAdjYdYdAdjYd =
-      TRACE_STRUCT.traceYdAdjYuYuAdjYdYdAdjYd;
-   const double traceYdAdjYuYuAdjYuYuAdjYd =
-      TRACE_STRUCT.traceYdAdjYuYuAdjYuYuAdjYd;
-   const double traceYeAdjYeYeAdjYeYeAdjYe =
-      TRACE_STRUCT.traceYeAdjYeYeAdjYeYeAdjYe;
-   const double traceYuAdjYuYuAdjYuYuAdjYu =
-      TRACE_STRUCT.traceYuAdjYuYuAdjYuYuAdjYu;
+   const double traceYdAdjYdYdAdjYdYdAdjYd = TRACE_STRUCT.
+      traceYdAdjYdYdAdjYdYdAdjYd;
+   const double traceYdAdjYdYdAdjYuYuAdjYd = TRACE_STRUCT.
+      traceYdAdjYdYdAdjYuYuAdjYd;
+   const double traceYdAdjYuYuAdjYdYdAdjYd = TRACE_STRUCT.
+      traceYdAdjYuYuAdjYdYdAdjYd;
+   const double traceYdAdjYuYuAdjYuYuAdjYd = TRACE_STRUCT.
+      traceYdAdjYuYuAdjYuYuAdjYd;
+   const double traceYeAdjYeYeAdjYeYeAdjYe = TRACE_STRUCT.
+      traceYeAdjYeYeAdjYeYeAdjYe;
+   const double traceYuAdjYuYuAdjYuYuAdjYu = TRACE_STRUCT.
+      traceYuAdjYuYuAdjYuYuAdjYu;
 
 
    double beta_Lambdax;
@@ -119,11 +118,11 @@ double HSSUSY_susy_parameters::calc_beta_Lambdax_3_loop(const Susy_traces& susy_
 
    double beta_Lambdax;
 
-   beta_Lambdax = Re(0.0001*threeLoop*(-60320*Power8(g1) - 4563640*Power8
-      (g2) - 40*Power6(g1)*(-14084*Lambdax + 1543*Sqr(g2) - 663*Sqr(g3) - 11117
-      *Sqr(Yu(2,2))) + 20*Power6(g2)*(865483*Lambdax + 15072*Sqr(g3) + 125000*
-      Sqr(Yu(2,2))) + 2*Sqr(g2)*(-968630*Cube(Lambdax) + 1482760*Power6(Yu(2,2)
-      ) - 54700*Lambdax*Quad(Yu(2,2)) + 266980*Quad(Yu(2,2))*Sqr(g3) + 151443*
+   beta_Lambdax = Re(0.0001*threeLoop*(-60320*Power8(g1) - 4563640*Power8(g2) -
+      40*Power6(g1)*(-14084*Lambdax + 1543*Sqr(g2) - 663*Sqr(g3) - 11117*Sqr(Yu
+      (2,2))) + 20*Power6(g2)*(865483*Lambdax + 15072*Sqr(g3) + 125000*Sqr(Yu(2
+      ,2))) + 2*Sqr(g2)*(-968630*Cube(Lambdax) + 1482760*Power6(Yu(2,2)) -
+      54700*Lambdax*Quad(Yu(2,2)) + 266980*Quad(Yu(2,2))*Sqr(g3) + 151443*
       Lambdax*Sqr(g3)*Sqr(Yu(2,2)) - 1797695*Sqr(Lambdax)*Sqr(Yu(2,2))) + 80*
       Quad(g2)*(7942*Quad(Yu(2,2)) - 98785*Sqr(Lambdax) - 79916*Lambdax*Sqr(Yu(
       2,2)) + Sqr(g3)*(-14286*Lambdax + 8232*Sqr(Yu(2,2)))) + 2*Quad(g1)*(
@@ -158,8 +157,7 @@ double HSSUSY_susy_parameters::calc_beta_Lambdax_4_loop(const Susy_traces& susy_
 
    double beta_Lambdax;
 
-   beta_Lambdax = Re(16616.34*Power6(g3)*Quad(oneOver16PiSqr)*Quad(Yu(2,2
-      )));
+   beta_Lambdax = Re(16616.34*Power6(g3)*Quad(oneOver16PiSqr)*Quad(Yu(2,2)));
 
 
    return beta_Lambdax;

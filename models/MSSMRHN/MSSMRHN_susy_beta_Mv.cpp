@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:45:56
+// File generated at Sun 26 Aug 2018 14:55:36
 
 #include "MSSMRHN_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -37,8 +37,8 @@ Eigen::Matrix<double,3,3> MSSMRHN_susy_parameters::calc_beta_Mv_1_loop(const Sus
 
    Eigen::Matrix<double,3,3> beta_Mv;
 
-   beta_Mv = (oneOver16PiSqr*(2*(Mv*Yv.conjugate()*Yv.transpose()) + 2*(
-      Yv*Yv.adjoint()*Mv))).real();
+   beta_Mv = (oneOver16PiSqr*(2*(Mv*Yv.conjugate()*Yv.transpose()) + 2*(Yv*Yv.
+      adjoint()*Mv))).real();
 
 
    return beta_Mv;
@@ -57,13 +57,13 @@ Eigen::Matrix<double,3,3> MSSMRHN_susy_parameters::calc_beta_Mv_2_loop(const Sus
 
    Eigen::Matrix<double,3,3> beta_Mv;
 
-   beta_Mv = (twoLoop*((-2*(3*traceYuAdjYu + traceYvAdjYv) + 1.2*Sqr(g1)
-      + 6*Sqr(g2))*(Mv*Yv.conjugate()*Yv.transpose()) + (-2*(3*traceYuAdjYu +
-      traceYvAdjYv) + 1.2*Sqr(g1) + 6*Sqr(g2))*(Yv*Yv.adjoint()*Mv) - 2*(Mv*
-      Yv.conjugate()*Ye.transpose()*Ye.conjugate()*Yv.transpose()) - 2*(Mv*
-      Yv.conjugate()*Yv.transpose()*Yv.conjugate()*Yv.transpose()) - 2*(Yv*
-      Ye.adjoint()*Ye*Yv.adjoint()*Mv) - 2*(Yv*Yv.adjoint()*Yv*Yv.adjoint()*Mv)
-      )).real();
+   beta_Mv = (twoLoop*((-2*(3*traceYuAdjYu + traceYvAdjYv) + 1.2*Sqr(g1) + 6*
+      Sqr(g2))*(Mv*Yv.conjugate()*Yv.transpose()) + (-2*(3*traceYuAdjYu +
+      traceYvAdjYv) + 1.2*Sqr(g1) + 6*Sqr(g2))*(Yv*Yv.adjoint()*Mv) - 2*(Mv*Yv.
+      conjugate()*Ye.transpose()*Ye.conjugate()*Yv.transpose()) - 2*(Mv*Yv.
+      conjugate()*Yv.transpose()*Yv.conjugate()*Yv.transpose()) - 2*(Yv*Ye.
+      adjoint()*Ye*Yv.adjoint()*Mv) - 2*(Yv*Yv.adjoint()*Yv*Yv.adjoint()*Mv))).
+      real();
 
 
    return beta_Mv;

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 15:12:09
+// File generated at Sun 26 Aug 2018 13:53:41
 
 #include "CNMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -74,10 +74,10 @@ Eigen::Matrix<double,3,3> CNMSSM_soft_parameters::calc_beta_me2_1_loop(const Sof
 
    Eigen::Matrix<double,3,3> beta_me2;
 
-   beta_me2 = (oneOver16PiSqr*(4*mHd2*(Ye*Ye.adjoint()) + 4*(TYe*(TYe)
-      .adjoint()) + 2*(me2*Ye*Ye.adjoint()) + 4*(Ye*ml2*Ye.adjoint()) + 2*(Ye*
-      Ye.adjoint()*me2) + 0.4*g1*(3.872983346207417*Tr11 - 12*g1*AbsSqr(MassB))
-      *UNITMATRIX(3))).real();
+   beta_me2 = (oneOver16PiSqr*(4*mHd2*(Ye*Ye.adjoint()) + 4*(TYe*(TYe).adjoint(
+      )) + 2*(me2*Ye*Ye.adjoint()) + 4*(Ye*ml2*Ye.adjoint()) + 2*(Ye*Ye.adjoint
+      ()*me2) + 0.4*g1*(3.872983346207417*Tr11 - 12*g1*AbsSqr(MassB))*
+      UNITMATRIX(3))).real();
 
 
    return beta_me2;
@@ -124,14 +124,13 @@ Eigen::Matrix<double,3,3> CNMSSM_soft_parameters::calc_beta_me2_2_loop(const Sof
       3*traceYdAdjYd + traceYeAdjYe - 3*Sqr(g2)))*(Ye*ml2*Ye.adjoint()) + (-6*
       traceYdAdjYd - 2*traceYeAdjYe - 2*AbsSqr(Lambdax) - 1.2*Sqr(g1) + 6*Sqr(
       g2))*(Ye*Ye.adjoint()*me2) - 8*mHd2*(Ye*Ye.adjoint()*Ye*Ye.adjoint()) - 4
-      *(Ye*Ye.adjoint()*TYe*(TYe).adjoint()) - 4*(Ye*(TYe).adjoint()*TYe*
-      Ye.adjoint()) - 4*(TYe*Ye.adjoint()*Ye*(TYe).adjoint()) - 4*(TYe*(TYe)
-      .adjoint()*Ye*Ye.adjoint()) - 2*(me2*Ye*Ye.adjoint()*Ye*Ye.adjoint()) - 4
-      *(Ye*ml2*Ye.adjoint()*Ye*Ye.adjoint()) - 4*(Ye*Ye.adjoint()*me2*Ye*
-      Ye.adjoint()) - 4*(Ye*Ye.adjoint()*Ye*ml2*Ye.adjoint()) - 2*(Ye*
-      Ye.adjoint()*Ye*Ye.adjoint()*me2) + 0.32*g1*(15*g1*Tr2U111 +
-      19.364916731037084*Tr31 + 351*AbsSqr(MassB)*Cube(g1))*UNITMATRIX(3)))
-      .real();
+      *(Ye*Ye.adjoint()*TYe*(TYe).adjoint()) - 4*(Ye*(TYe).adjoint()*TYe*Ye.
+      adjoint()) - 4*(TYe*Ye.adjoint()*Ye*(TYe).adjoint()) - 4*(TYe*(TYe).
+      adjoint()*Ye*Ye.adjoint()) - 2*(me2*Ye*Ye.adjoint()*Ye*Ye.adjoint()) - 4*
+      (Ye*ml2*Ye.adjoint()*Ye*Ye.adjoint()) - 4*(Ye*Ye.adjoint()*me2*Ye*Ye.
+      adjoint()) - 4*(Ye*Ye.adjoint()*Ye*ml2*Ye.adjoint()) - 2*(Ye*Ye.adjoint()
+      *Ye*Ye.adjoint()*me2) + 0.32*g1*(15*g1*Tr2U111 + 19.364916731037084*Tr31
+      + 351*AbsSqr(MassB)*Cube(g1))*UNITMATRIX(3))).real();
 
 
    return beta_me2;

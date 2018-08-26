@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:07:53
+// File generated at Sun 26 Aug 2018 14:06:05
 
 #ifndef HGTHDMIIMSSMBC_susy_parameters_H
 #define HGTHDMIIMSSMBC_susy_parameters_H
@@ -39,12 +39,11 @@ namespace flexiblesusy {
 class HGTHDMIIMSSMBC_susy_parameters : public Beta_function {
 public:
    explicit HGTHDMIIMSSMBC_susy_parameters(const HGTHDMIIMSSMBC_input_parameters& input_ = HGTHDMIIMSSMBC_input_parameters());
-   HGTHDMIIMSSMBC_susy_parameters(double scale_, int loops_, int thresholds_, const HGTHDMIIMSSMBC_input_parameters& input_, double g1_, double g2_, double g3_, double Lambda6_, double Lambda5_,
-   double Lambda7_, double Lambda1_, double Lambda4_, double Lambda3_, double
-   Lambda2_, const Eigen::Matrix<double,3,3>& Yu_, const Eigen::Matrix<double,3
-   ,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_, double g1dp_, double g1d_,
-   double g2up_, double g2u_
-);
+   HGTHDMIIMSSMBC_susy_parameters(double scale_, int loops_, int thresholds_, const HGTHDMIIMSSMBC_input_parameters& input_, double g1_, double g2_, double g3_, double Lambda6_, double Lambda5_, double
+   Lambda7_, double Lambda1_, double Lambda4_, double Lambda3_, double Lambda2_
+   , const Eigen::Matrix<double,3,3>& Yu_, const Eigen::Matrix<double,3,3>& Yd_
+   , const Eigen::Matrix<double,3,3>& Ye_, double g1dp_, double g1d_, double
+   g2up_, double g2u_);
    HGTHDMIIMSSMBC_susy_parameters(const HGTHDMIIMSSMBC_susy_parameters&) = default;
    HGTHDMIIMSSMBC_susy_parameters(HGTHDMIIMSSMBC_susy_parameters&&) = default;
    virtual ~HGTHDMIIMSSMBC_susy_parameters() = default;

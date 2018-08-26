@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:38:29
+// File generated at Sun 26 Aug 2018 14:10:17
 
 #ifndef HSSUSY_soft_parameters_H
 #define HSSUSY_soft_parameters_H
@@ -35,8 +35,7 @@ namespace flexiblesusy {
 class HSSUSY_soft_parameters : public HSSUSY_susy_parameters {
 public:
    explicit HSSUSY_soft_parameters(const HSSUSY_input_parameters& input_ = HSSUSY_input_parameters());
-   HSSUSY_soft_parameters(const HSSUSY_susy_parameters& , double mu2_, double v_
-);
+   HSSUSY_soft_parameters(const HSSUSY_susy_parameters& , double mu2_, double v_);
    HSSUSY_soft_parameters(const HSSUSY_soft_parameters&) = default;
    HSSUSY_soft_parameters(HSSUSY_soft_parameters&&) = default;
    virtual ~HSSUSY_soft_parameters() = default;

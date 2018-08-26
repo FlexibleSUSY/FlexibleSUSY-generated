@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:48:06
+// File generated at Sun 26 Aug 2018 14:44:07
 
 #include "MRSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -74,8 +74,8 @@ Eigen::Matrix<double,3,3> MRSSM_soft_parameters::calc_beta_me2_1_loop(const Soft
 
    Eigen::Matrix<double,3,3> beta_me2;
 
-   beta_me2 = (oneOver16PiSqr*(4*mHd2*(Ye*Ye.adjoint()) + 2*(me2*Ye*
-      Ye.adjoint()) + 4*(Ye*ml2*Ye.adjoint()) + 2*(Ye*Ye.adjoint()*me2) +
+   beta_me2 = (oneOver16PiSqr*(4*mHd2*(Ye*Ye.adjoint()) + 2*(me2*Ye*Ye.adjoint(
+      )) + 4*(Ye*ml2*Ye.adjoint()) + 2*(Ye*Ye.adjoint()*me2) +
       1.5491933384829668*g1*Tr11*UNITMATRIX(3))).real();
 
 
@@ -101,21 +101,20 @@ Eigen::Matrix<double,3,3> MRSSM_soft_parameters::calc_beta_me2_2_loop(const Soft
 
    Eigen::Matrix<double,3,3> beta_me2;
 
-   beta_me2 = (twoLoop*(-0.4*(10*(2*mHd2 + mRd2 + mS2)*AbsSqr(LamSD) + 15
-      *(2*mHd2 + mRd2 + mT2)*AbsSqr(LamTD) + 2*(3*mHd2*Sqr(g1) + 5*(3*
+   beta_me2 = (twoLoop*(-0.4*(10*(2*mHd2 + mRd2 + mS2)*AbsSqr(LamSD) + 15*(2*
+      mHd2 + mRd2 + mT2)*AbsSqr(LamTD) + 2*(3*mHd2*Sqr(g1) + 5*(3*
       tracemd2YdAdjYd + traceme2YeAdjYe + traceml2AdjYeYe + 3*tracemq2AdjYdYd +
-      6*mHd2*traceYdAdjYd + 2*mHd2*traceYeAdjYe - 3*mHd2*Sqr(g2))))*(Ye*
-      Ye.adjoint()) + (-6*traceYdAdjYd - 2*traceYeAdjYe - 2*AbsSqr(LamSD) - 3*
+      6*mHd2*traceYdAdjYd + 2*mHd2*traceYeAdjYe - 3*mHd2*Sqr(g2))))*(Ye*Ye.
+      adjoint()) + (-6*traceYdAdjYd - 2*traceYeAdjYe - 2*AbsSqr(LamSD) - 3*
       AbsSqr(LamTD) - 1.2*Sqr(g1) + 6*Sqr(g2))*(me2*Ye*Ye.adjoint()) + (-12*
       traceYdAdjYd - 4*traceYeAdjYe - 4*AbsSqr(LamSD) - 6*AbsSqr(LamTD) - 2.4*
       Sqr(g1) + 12*Sqr(g2))*(Ye*ml2*Ye.adjoint()) + (-6*traceYdAdjYd - 2*
       traceYeAdjYe - 2*AbsSqr(LamSD) - 3*AbsSqr(LamTD) - 1.2*Sqr(g1) + 6*Sqr(g2
       ))*(Ye*Ye.adjoint()*me2) - 8*mHd2*(Ye*Ye.adjoint()*Ye*Ye.adjoint()) - 2*(
-      me2*Ye*Ye.adjoint()*Ye*Ye.adjoint()) - 4*(Ye*ml2*Ye.adjoint()*Ye*
-      Ye.adjoint()) - 4*(Ye*Ye.adjoint()*me2*Ye*Ye.adjoint()) - 4*(Ye*
-      Ye.adjoint()*Ye*ml2*Ye.adjoint()) - 2*(Ye*Ye.adjoint()*Ye*Ye.adjoint()*
-      me2) + 1.6*g1*(3*g1*Tr2U111 + 3.872983346207417*Tr31)*UNITMATRIX(3)))
-      .real();
+      me2*Ye*Ye.adjoint()*Ye*Ye.adjoint()) - 4*(Ye*ml2*Ye.adjoint()*Ye*Ye.
+      adjoint()) - 4*(Ye*Ye.adjoint()*me2*Ye*Ye.adjoint()) - 4*(Ye*Ye.adjoint()
+      *Ye*ml2*Ye.adjoint()) - 2*(Ye*Ye.adjoint()*Ye*Ye.adjoint()*me2) + 1.6*g1*
+      (3*g1*Tr2U111 + 3.872983346207417*Tr31)*UNITMATRIX(3))).real();
 
 
    return beta_me2;

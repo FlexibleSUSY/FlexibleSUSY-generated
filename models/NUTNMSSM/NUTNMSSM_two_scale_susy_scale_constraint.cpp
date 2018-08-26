@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:35:51
+// File generated at Sun 26 Aug 2018 14:44:35
 
 #include "NUTNMSSM_two_scale_susy_scale_constraint.hpp"
 #include "NUTNMSSM_two_scale_model.hpp"
@@ -64,6 +64,7 @@ void NUTNMSSM_susy_scale_constraint<Two_scale>::apply()
 {
    check_model_ptr();
 
+   
 
 
    model->calculate_DRbar_masses();
@@ -146,11 +147,11 @@ void NUTNMSSM_susy_scale_constraint<Two_scale>::update_scale()
    const auto ZU = MODELPARAMETER(ZU);
    const auto MSu = MODELPARAMETER(MSu);
 
-   scale = Sqrt(Power(MSu(0),Sqr(Abs(ZU(0,2))) + Sqr(Abs(ZU(0,5))))*Power(MSu(1
-      ),Sqr(Abs(ZU(1,2))) + Sqr(Abs(ZU(1,5))))*Power(MSu(2),Sqr(Abs(ZU(2,2))) +
-      Sqr(Abs(ZU(2,5))))*Power(MSu(3),Sqr(Abs(ZU(3,2))) + Sqr(Abs(ZU(3,5))))*Power
-      (MSu(4),Sqr(Abs(ZU(4,2))) + Sqr(Abs(ZU(4,5))))*Power(MSu(5),Sqr(Abs(ZU(5,2))
-      ) + Sqr(Abs(ZU(5,5)))));
+   scale = Sqrt(Power(MSu(0),Sqr(Abs(ZU(0,2))) + Sqr(Abs(ZU(0,5))))*Power(MSu(1),
+      Sqr(Abs(ZU(1,2))) + Sqr(Abs(ZU(1,5))))*Power(MSu(2),Sqr(Abs(ZU(2,2))) + Sqr(
+      Abs(ZU(2,5))))*Power(MSu(3),Sqr(Abs(ZU(3,2))) + Sqr(Abs(ZU(3,5))))*Power(MSu
+      (4),Sqr(Abs(ZU(4,2))) + Sqr(Abs(ZU(4,5))))*Power(MSu(5),Sqr(Abs(ZU(5,2))) +
+      Sqr(Abs(ZU(5,5)))));
 
 
 }

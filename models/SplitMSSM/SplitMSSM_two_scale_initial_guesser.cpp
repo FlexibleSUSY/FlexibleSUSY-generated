@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:44:29
+// File generated at Sun 26 Aug 2018 14:10:26
 
 #include "SplitMSSM_two_scale_initial_guesser.hpp"
 #include "SplitMSSM_two_scale_model.hpp"
@@ -109,6 +109,8 @@ void SplitMSSM_initial_guesser<Two_scale>::guess_susy_parameters()
       leAtMt.displayPoleMmuon();
    mtau_guess = leAtMt.displayMass(softsusy::mTau);
 
+   calculate_running_SM_masses();
+
    // guess gauge couplings at mt
    const auto alpha_sm(leAtMt.guess_alpha_SM5(mtpole));
 
@@ -138,9 +140,28 @@ void SplitMSSM_initial_guesser<Two_scale>::guess_susy_parameters()
 
 void SplitMSSM_initial_guesser<Two_scale>::calculate_DRbar_yukawa_couplings()
 {
+   calculate_running_SM_masses();
    calculate_Yu_DRbar();
    calculate_Yd_DRbar();
    calculate_Ye_DRbar();
+}
+
+void SplitMSSM_initial_guesser<Two_scale>::calculate_running_SM_masses()
+{
+   upQuarksDRbar.setZero();
+   upQuarksDRbar(0,0) = mu_guess;
+   upQuarksDRbar(1,1) = mc_guess;
+   upQuarksDRbar(2,2) = mt_guess;
+
+   downQuarksDRbar.setZero();
+   downQuarksDRbar(0,0) = md_guess;
+   downQuarksDRbar(1,1) = ms_guess;
+   downQuarksDRbar(2,2) = mb_guess;
+
+   downLeptonsDRbar.setZero();
+   downLeptonsDRbar(0,0) = me_guess;
+   downLeptonsDRbar(1,1) = mm_guess;
+   downLeptonsDRbar(2,2) = mtau_guess;
 }
 
 /**
@@ -150,11 +171,6 @@ void SplitMSSM_initial_guesser<Two_scale>::calculate_DRbar_yukawa_couplings()
  */
 void SplitMSSM_initial_guesser<Two_scale>::calculate_Yu_DRbar()
 {
-   Eigen::Matrix<std::complex<double>,3,3> upQuarksDRbar(ZEROMATRIXCOMPLEX(3,3));
-   upQuarksDRbar(0,0) = mu_guess;
-   upQuarksDRbar(1,1) = mc_guess;
-   upQuarksDRbar(2,2) = mt_guess;
-
    const auto v = MODELPARAMETER(v);
    MODEL->set_Yu(((upQuarksDRbar/v).transpose()).real());
 
@@ -167,11 +183,6 @@ void SplitMSSM_initial_guesser<Two_scale>::calculate_Yu_DRbar()
  */
 void SplitMSSM_initial_guesser<Two_scale>::calculate_Yd_DRbar()
 {
-   Eigen::Matrix<std::complex<double>,3,3> downQuarksDRbar(ZEROMATRIXCOMPLEX(3,3));
-   downQuarksDRbar(0,0) = md_guess;
-   downQuarksDRbar(1,1) = ms_guess;
-   downQuarksDRbar(2,2) = mb_guess;
-
    const auto v = MODELPARAMETER(v);
    MODEL->set_Yd(((downQuarksDRbar/v).transpose()).real());
 
@@ -184,11 +195,6 @@ void SplitMSSM_initial_guesser<Two_scale>::calculate_Yd_DRbar()
  */
 void SplitMSSM_initial_guesser<Two_scale>::calculate_Ye_DRbar()
 {
-   Eigen::Matrix<std::complex<double>,3,3> downLeptonsDRbar(ZEROMATRIXCOMPLEX(3,3));
-   downLeptonsDRbar(0,0) = me_guess;
-   downLeptonsDRbar(1,1) = mm_guess;
-   downLeptonsDRbar(2,2) = mtau_guess;
-
    const auto v = MODELPARAMETER(v);
    MODEL->set_Ye(((downLeptonsDRbar/v).transpose()).real());
 
@@ -200,6 +206,7 @@ void SplitMSSM_initial_guesser<Two_scale>::calculate_Ye_DRbar()
  * high-scale constraint (HighScaleInput):
  *
  * \code{.cpp}
+   
 
  * \endcode
  *
@@ -219,6 +226,7 @@ void SplitMSSM_initial_guesser<Two_scale>::guess_soft_parameters()
    high_constraint.apply();
 
    // apply user-defined initial guess at the high scale
+   
 
 
    model->run_to(low_scale_guess, running_precision);

@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:58:00
+// File generated at Sun 26 Aug 2018 14:31:39
 
 /**
  * @file UMSSM_cxx_diagrams.hpp
  *
- * This file was generated at Mon 5 Mar 2018 18:58:00 with FlexibleSUSY
- * 2.1.0 and SARAH 4.12.3 .
+ * This file was generated at Sun 26 Aug 2018 14:31:39 with FlexibleSUSY
+ * 2.2.0 and SARAH 4.13.0 .
  */
 
 #ifndef UMSSM_CXXDIAGRAMS_H
@@ -972,13 +972,13 @@ Vertex<Fe, bar<Fv>::type, conj<Hpm>::type>::evaluate(const indices_type& indices
    const int gt1 = indices[0];
    const int gt2 = indices[1];
    const int gt3 = indices[2];
-   const auto Ye = MODELPARAMETER(Ye);
    const auto Yv = MODELPARAMETER(Yv);
-   const auto ZER = MODELPARAMETER(ZER);
-   const auto ZVL = MODELPARAMETER(ZVL);
-   const auto ZP = MODELPARAMETER(ZP);
+   const auto Ye = MODELPARAMETER(Ye);
    const auto ZVR = MODELPARAMETER(ZVR);
    const auto ZEL = MODELPARAMETER(ZEL);
+   const auto ZP = MODELPARAMETER(ZP);
+   const auto ZER = MODELPARAMETER(ZER);
+   const auto ZVL = MODELPARAMETER(ZVL);
 
    const std::complex<double> left = SUM(j2,0,2,Conj(ZVR(gt2,j2))*SUM(j1,0,2,Conj(ZEL(gt1,j1))*Yv(j1,j2)))*ZP(gt3,1);
 

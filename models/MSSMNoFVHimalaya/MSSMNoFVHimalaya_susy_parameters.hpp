@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 14:30:07
+// File generated at Sun 26 Aug 2018 13:44:25
 
 #ifndef MSSMNoFVHimalaya_susy_parameters_H
 #define MSSMNoFVHimalaya_susy_parameters_H
@@ -39,10 +39,9 @@ namespace flexiblesusy {
 class MSSMNoFVHimalaya_susy_parameters : public Beta_function {
 public:
    explicit MSSMNoFVHimalaya_susy_parameters(const MSSMNoFVHimalaya_input_parameters& input_ = MSSMNoFVHimalaya_input_parameters());
-   MSSMNoFVHimalaya_susy_parameters(double scale_, int loops_, int thresholds_, const MSSMNoFVHimalaya_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
-   , const Eigen::Matrix<double,3,3>& Yu_, double Mu_, double g1_, double g2_,
-   double g3_, double vd_, double vu_
-);
+   MSSMNoFVHimalaya_susy_parameters(double scale_, int loops_, int thresholds_, const MSSMNoFVHimalaya_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_,
+   const Eigen::Matrix<double,3,3>& Yu_, double Mu_, double g1_, double g2_,
+   double g3_, double vd_, double vu_);
    MSSMNoFVHimalaya_susy_parameters(const MSSMNoFVHimalaya_susy_parameters&) = default;
    MSSMNoFVHimalaya_susy_parameters(MSSMNoFVHimalaya_susy_parameters&&) = default;
    virtual ~MSSMNoFVHimalaya_susy_parameters() = default;

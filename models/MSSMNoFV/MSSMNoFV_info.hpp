@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 19:05:14
+// File generated at Sun 26 Aug 2018 15:20:43
 
 #ifndef MSSMNoFV_INFO_H
 #define MSSMNoFV_INFO_H
@@ -30,29 +30,28 @@
 namespace flexiblesusy {
 
 namespace MSSMNoFV_info {
-   enum Particles : int { VG, Glu, Fd, Fs, Fb, Fu, Fc, Ft, Fve, Fvm, Fvt, Fe,
-      Fm, Ftau, SveL, SvmL, SvtL, Sd, Su, Se, Sm, Stau, Ss, Sc, Sb, St, hh, Ah,
-      Hpm, Chi, Cha, VWm, VP, VZ, NUMBER_OF_PARTICLES };
+   enum Particles : int { VG, Glu, Fd, Fs, Fb, Fu, Fc, Ft, Fve, Fvm, Fvt, Fe, Fm,
+      Ftau, SveL, SvmL, SvtL, Sd, Su, Se, Sm, Stau, Ss, Sc, Sb, St, hh, Ah, Hpm,
+      Chi, Cha, VWm, VP, VZ, NUMBER_OF_PARTICLES };
 
-   enum Masses : int { MVG, MGlu, MFd, MFs, MFb, MFu, MFc, MFt, MFve, MFvm,
-      MFvt, MFe, MFm, MFtau, MSveL, MSvmL, MSvtL, MSd_1, MSd_2, MSu_1, MSu_2,
-      MSe_1, MSe_2, MSm_1, MSm_2, MStau_1, MStau_2, MSs_1, MSs_2, MSc_1, MSc_2,
-      MSb_1, MSb_2, MSt_1, MSt_2, Mhh_1, Mhh_2, MAh_1, MAh_2, MHpm_1, MHpm_2,
-      MChi_1, MChi_2, MChi_3, MChi_4, MCha_1, MCha_2, MVWm, MVP, MVZ,
-      NUMBER_OF_MASSES };
+   enum Masses : int { MVG, MGlu, MFd, MFs, MFb, MFu, MFc, MFt, MFve, MFvm, MFvt,
+      MFe, MFm, MFtau, MSveL, MSvmL, MSvtL, MSd_1, MSd_2, MSu_1, MSu_2, MSe_1,
+      MSe_2, MSm_1, MSm_2, MStau_1, MStau_2, MSs_1, MSs_2, MSc_1, MSc_2, MSb_1,
+      MSb_2, MSt_1, MSt_2, Mhh_1, Mhh_2, MAh_1, MAh_2, MHpm_1, MHpm_2, MChi_1,
+      MChi_2, MChi_3, MChi_4, MCha_1, MCha_2, MVWm, MVP, MVZ, NUMBER_OF_MASSES };
 
-   enum Parameters : int { Yd0_0, Yd0_1, Yd0_2, Yd1_0, Yd1_1, Yd1_2, Yd2_0,
-      Yd2_1, Yd2_2, Ye0_0, Ye0_1, Ye0_2, Ye1_0, Ye1_1, Ye1_2, Ye2_0, Ye2_1, Ye2_2,
-      Yu0_0, Yu0_1, Yu0_2, Yu1_0, Yu1_1, Yu1_2, Yu2_0, Yu2_1, Yu2_2, Mu, g1, g2,
-      g3, vd, vu, TYd0_0, TYd0_1, TYd0_2, TYd1_0, TYd1_1, TYd1_2, TYd2_0, TYd2_1,
-      TYd2_2, TYe0_0, TYe0_1, TYe0_2, TYe1_0, TYe1_1, TYe1_2, TYe2_0, TYe2_1,
-      TYe2_2, TYu0_0, TYu0_1, TYu0_2, TYu1_0, TYu1_1, TYu1_2, TYu2_0, TYu2_1,
-      TYu2_2, BMu, mq20_0, mq20_1, mq20_2, mq21_0, mq21_1, mq21_2, mq22_0, mq22_1,
-      mq22_2, ml20_0, ml20_1, ml20_2, ml21_0, ml21_1, ml21_2, ml22_0, ml22_1,
-      ml22_2, mHd2, mHu2, md20_0, md20_1, md20_2, md21_0, md21_1, md21_2, md22_0,
-      md22_1, md22_2, mu20_0, mu20_1, mu20_2, mu21_0, mu21_1, mu21_2, mu22_0,
-      mu22_1, mu22_2, me20_0, me20_1, me20_2, me21_0, me21_1, me21_2, me22_0,
-      me22_1, me22_2, MassB, MassWB, MassG, NUMBER_OF_PARAMETERS };
+   enum Parameters : int { Yd0_0, Yd0_1, Yd0_2, Yd1_0, Yd1_1, Yd1_2, Yd2_0, Yd2_1,
+      Yd2_2, Ye0_0, Ye0_1, Ye0_2, Ye1_0, Ye1_1, Ye1_2, Ye2_0, Ye2_1, Ye2_2, Yu0_0,
+      Yu0_1, Yu0_2, Yu1_0, Yu1_1, Yu1_2, Yu2_0, Yu2_1, Yu2_2, Mu, g1, g2, g3, vd,
+      vu, TYd0_0, TYd0_1, TYd0_2, TYd1_0, TYd1_1, TYd1_2, TYd2_0, TYd2_1, TYd2_2,
+      TYe0_0, TYe0_1, TYe0_2, TYe1_0, TYe1_1, TYe1_2, TYe2_0, TYe2_1, TYe2_2,
+      TYu0_0, TYu0_1, TYu0_2, TYu1_0, TYu1_1, TYu1_2, TYu2_0, TYu2_1, TYu2_2, BMu,
+      mq20_0, mq20_1, mq20_2, mq21_0, mq21_1, mq21_2, mq22_0, mq22_1, mq22_2,
+      ml20_0, ml20_1, ml20_2, ml21_0, ml21_1, ml21_2, ml22_0, ml22_1, ml22_2, mHd2
+      , mHu2, md20_0, md20_1, md20_2, md21_0, md21_1, md21_2, md22_0, md22_1,
+      md22_2, mu20_0, mu20_1, mu20_2, mu21_0, mu21_1, mu21_2, mu22_0, mu22_1,
+      mu22_2, me20_0, me20_1, me20_2, me21_0, me21_1, me21_2, me22_0, me22_1,
+      me22_2, MassB, MassWB, MassG, NUMBER_OF_PARAMETERS };
 
    enum Mixings : int { ZD0_0, ZD0_1, ZD1_0, ZD1_1, ZU0_0, ZU0_1, ZU1_0, ZU1_1,
       ZE0_0, ZE0_1, ZE1_0, ZE1_1, ZM0_0, ZM0_1, ZM1_0, ZM1_1, ZTau0_0, ZTau0_1,

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:30:42
+// File generated at Sun 26 Aug 2018 14:08:50
 
 #include "THDMIIMSSMBC_soft_parameters.hpp"
 #include "config.h"
@@ -44,11 +44,9 @@ THDMIIMSSMBC_soft_parameters::THDMIIMSSMBC_soft_parameters(const THDMIIMSSMBC_in
 THDMIIMSSMBC_soft_parameters::THDMIIMSSMBC_soft_parameters(
    const THDMIIMSSMBC_susy_parameters& susy_model
    , double M122_, double M112_, double M222_, double v1_, double v2_
-
 )
    : THDMIIMSSMBC_susy_parameters(susy_model)
    , M122(M122_), M112(M112_), M222(M222_), v1(v1_), v2(v2_)
-
 {
    set_number_of_parameters(numberOfParameters);
 }
@@ -85,6 +83,7 @@ THDMIIMSSMBC_soft_parameters THDMIIMSSMBC_soft_parameters::calc_beta(int loops) 
          if (loops > 2) {
          #ifdef ENABLE_THREADS
             {
+
 
             }
          #else
@@ -164,6 +163,8 @@ THDMIIMSSMBC_soft_parameters::Soft_traces THDMIIMSSMBC_soft_parameters::calc_sof
    Soft_traces soft_traces;
 
    if (loops > 0) {
+      
+
       TRACE_STRUCT.traceYdAdjYd = Re((Yd*Yd.adjoint()).trace());
       TRACE_STRUCT.traceYeAdjYe = Re((Ye*Ye.adjoint()).trace());
       TRACE_STRUCT.traceYuAdjYu = Re((Yu*Yu.adjoint()).trace());
@@ -171,14 +172,14 @@ THDMIIMSSMBC_soft_parameters::Soft_traces THDMIIMSSMBC_soft_parameters::calc_sof
    }
 
    if (loops > 1) {
-      TRACE_STRUCT.traceYdAdjYdYdAdjYd = Re((Yd*Yd.adjoint()*Yd*Yd.adjoint())
-         .trace());
-      TRACE_STRUCT.traceYdAdjYuYuAdjYd = Re((Yd*Yu.adjoint()*Yu*Yd.adjoint())
-         .trace());
-      TRACE_STRUCT.traceYeAdjYeYeAdjYe = Re((Ye*Ye.adjoint()*Ye*Ye.adjoint())
-         .trace());
-      TRACE_STRUCT.traceYuAdjYuYuAdjYu = Re((Yu*Yu.adjoint()*Yu*Yu.adjoint())
-         .trace());
+      TRACE_STRUCT.traceYdAdjYdYdAdjYd = Re((Yd*Yd.adjoint()*Yd*Yd.adjoint()).trace()
+         );
+      TRACE_STRUCT.traceYdAdjYuYuAdjYd = Re((Yd*Yu.adjoint()*Yu*Yd.adjoint()).trace()
+         );
+      TRACE_STRUCT.traceYeAdjYeYeAdjYe = Re((Ye*Ye.adjoint()*Ye*Ye.adjoint()).trace()
+         );
+      TRACE_STRUCT.traceYuAdjYuYuAdjYu = Re((Yu*Yu.adjoint()*Yu*Yu.adjoint()).trace()
+         );
 
    }
 

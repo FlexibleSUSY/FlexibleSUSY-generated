@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:42:07
+// File generated at Sun 26 Aug 2018 14:09:50
 
 #include "SplitMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,8 +73,8 @@ double SplitMSSM_soft_parameters::calc_beta_MassB_1_loop(const Soft_traces& soft
 
    double beta_MassB;
 
-   beta_MassB = Re(oneOver16PiSqr*(4*gYd*gYu*Mu + MassB*Sqr(gYd) + MassB*
-      Sqr(gYu)));
+   beta_MassB = Re(oneOver16PiSqr*(4*gYd*gYu*Mu + MassB*Sqr(gYd) + MassB*Sqr(
+      gYu)));
 
 
    return beta_MassB;
@@ -94,16 +94,16 @@ double SplitMSSM_soft_parameters::calc_beta_MassB_2_loop(const Soft_traces& soft
 
    double beta_MassB;
 
-   beta_MassB = Re(0.025*twoLoop*(3*Sqr(g1)*(64*gYd*gYu*Mu + 17*MassB*Sqr
-      (gYd) + 17*MassB*Sqr(gYu)) - 5*(48*g2d*g2u*gYd*gYu*MassWB + 8*gYu*Cube(
-      gYd)*Mu + 8*gYd*Cube(gYu)*Mu - MassB*Quad(gYd) - MassB*Quad(gYu) + 24*gYd
-      *gYu*Mu*Sqr(g2u) + 36*MassB*traceYdAdjYd*Sqr(gYd) + 12*MassB*traceYeAdjYe
-      *Sqr(gYd) + 36*MassB*traceYuAdjYu*Sqr(gYd) + 18*MassB*Sqr(g2u)*Sqr(gYd) +
-      36*MassB*traceYdAdjYd*Sqr(gYu) + 12*MassB*traceYeAdjYe*Sqr(gYu) + 36*
-      MassB*traceYuAdjYu*Sqr(gYu) + 21*MassB*Sqr(g2u)*Sqr(gYu) - 24*MassWB*Sqr(
-      g2u)*Sqr(gYu) + 28*MassB*Sqr(gYd)*Sqr(gYu) + 3*Sqr(g2d)*(8*gYd*gYu*Mu + (
-      7*MassB - 8*MassWB)*Sqr(gYd) + 6*MassB*Sqr(gYu)) - 3*Sqr(g2)*(64*gYd*gYu*
-      Mu + 17*MassB*Sqr(gYd) + 17*MassB*Sqr(gYu)))));
+   beta_MassB = Re(0.025*twoLoop*(3*Sqr(g1)*(64*gYd*gYu*Mu + 17*MassB*Sqr(gYd)
+      + 17*MassB*Sqr(gYu)) - 5*(48*g2d*g2u*gYd*gYu*MassWB + 8*gYu*Cube(gYd)*Mu
+      + 8*gYd*Cube(gYu)*Mu - MassB*Quad(gYd) - MassB*Quad(gYu) + 24*gYd*gYu*Mu*
+      Sqr(g2u) + 36*MassB*traceYdAdjYd*Sqr(gYd) + 12*MassB*traceYeAdjYe*Sqr(gYd
+      ) + 36*MassB*traceYuAdjYu*Sqr(gYd) + 18*MassB*Sqr(g2u)*Sqr(gYd) + 36*
+      MassB*traceYdAdjYd*Sqr(gYu) + 12*MassB*traceYeAdjYe*Sqr(gYu) + 36*MassB*
+      traceYuAdjYu*Sqr(gYu) + 21*MassB*Sqr(g2u)*Sqr(gYu) - 24*MassWB*Sqr(g2u)*
+      Sqr(gYu) + 28*MassB*Sqr(gYd)*Sqr(gYu) + 3*Sqr(g2d)*(8*gYd*gYu*Mu + (7*
+      MassB - 8*MassWB)*Sqr(gYd) + 6*MassB*Sqr(gYu)) - 3*Sqr(g2)*(64*gYd*gYu*Mu
+       + 17*MassB*Sqr(gYd) + 17*MassB*Sqr(gYu)))));
 
 
    return beta_MassB;

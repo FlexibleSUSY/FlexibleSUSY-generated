@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:41:58
+// File generated at Sun 26 Aug 2018 14:09:39
 
 #include "SplitMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -70,46 +70,46 @@ double SplitMSSM_susy_parameters::calc_beta_Lambdax_2_loop(const Susy_traces& su
    const double traceYdAdjYuYuAdjYd = TRACE_STRUCT.traceYdAdjYuYuAdjYd;
    const double traceYeAdjYeYeAdjYe = TRACE_STRUCT.traceYeAdjYeYeAdjYe;
    const double traceYuAdjYuYuAdjYu = TRACE_STRUCT.traceYuAdjYuYuAdjYu;
-   const double traceYdAdjYdYdAdjYdYdAdjYd =
-      TRACE_STRUCT.traceYdAdjYdYdAdjYdYdAdjYd;
-   const double traceYdAdjYdYdAdjYuYuAdjYd =
-      TRACE_STRUCT.traceYdAdjYdYdAdjYuYuAdjYd;
-   const double traceYdAdjYuYuAdjYdYdAdjYd =
-      TRACE_STRUCT.traceYdAdjYuYuAdjYdYdAdjYd;
-   const double traceYdAdjYuYuAdjYuYuAdjYd =
-      TRACE_STRUCT.traceYdAdjYuYuAdjYuYuAdjYd;
-   const double traceYeAdjYeYeAdjYeYeAdjYe =
-      TRACE_STRUCT.traceYeAdjYeYeAdjYeYeAdjYe;
-   const double traceYuAdjYuYuAdjYuYuAdjYu =
-      TRACE_STRUCT.traceYuAdjYuYuAdjYuYuAdjYu;
+   const double traceYdAdjYdYdAdjYdYdAdjYd = TRACE_STRUCT.
+      traceYdAdjYdYdAdjYdYdAdjYd;
+   const double traceYdAdjYdYdAdjYuYuAdjYd = TRACE_STRUCT.
+      traceYdAdjYdYdAdjYuYuAdjYd;
+   const double traceYdAdjYuYuAdjYdYdAdjYd = TRACE_STRUCT.
+      traceYdAdjYuYuAdjYdYdAdjYd;
+   const double traceYdAdjYuYuAdjYuYuAdjYd = TRACE_STRUCT.
+      traceYdAdjYuYuAdjYuYuAdjYd;
+   const double traceYeAdjYeYeAdjYeYeAdjYe = TRACE_STRUCT.
+      traceYeAdjYeYeAdjYeYeAdjYe;
+   const double traceYuAdjYuYuAdjYuYuAdjYu = TRACE_STRUCT.
+      traceYuAdjYuYuAdjYuYuAdjYu;
 
 
    double beta_Lambdax;
 
-   const double beta_Lambdax_1 = Re(-0.001*twoLoop*(3699*Power6(g1) + 45*
-      Quad(g1)*(-20*traceYdAdjYd + 100*traceYeAdjYe + 76*traceYuAdjYu - 223*
-      Lambdax + 197*Sqr(g2) + 6*Sqr(g2d) + 6*Sqr(g2u) + 2*Sqr(gYd) + 2*Sqr(gYu)
-      ) + 25*Sqr(g1)*(385*Quad(g2) - 6*Sqr(g2)*(36*traceYdAdjYd + 44*
-      traceYeAdjYe + 84*traceYuAdjYu + 39*Lambdax + 42*Sqr(g2d) + 42*Sqr(g2u) -
-      2*Sqr(gYd) - 2*Sqr(gYu)) - 2*(32*traceYdAdjYdYdAdjYd - 96*
-      traceYeAdjYeYeAdjYe - 64*traceYuAdjYuYuAdjYu + 50*traceYdAdjYd*Lambdax +
-      150*traceYeAdjYe*Lambdax + 170*traceYuAdjYu*Lambdax + 45*Lambdax*Sqr(g2d)
-      + 45*Lambdax*Sqr(g2u) + 15*Lambdax*Sqr(gYd) + 15*Lambdax*Sqr(gYu) + 216*
-      Sqr(Lambdax))) - 125*(209*Power6(g2) - Quad(g2)*(36*traceYdAdjYd + 12*
-      traceYeAdjYe + 36*traceYuAdjYu - 47*Lambdax + 306*Sqr(g2d) + 306*Sqr(g2u)
-      + 6*Sqr(gYd) + 6*Sqr(gYu)) - 2*Sqr(g2)*(32*g2d*g2u*gYd*gYu + 80*Quad(g2d
-      ) + 80*Quad(g2u) + Sqr(g2d)*(-165*Lambdax + 32*Sqr(g2u) + 16*Sqr(gYd)) -
-      3*Lambdax*(30*traceYdAdjYd + 10*traceYeAdjYe + 30*traceYuAdjYu + 72*
-      Lambdax + 5*Sqr(gYd) + 5*Sqr(gYu)) + Sqr(g2u)*(-165*Lambdax + 16*Sqr(gYu)
-      )) + 2*(240*traceYdAdjYdYdAdjYdYdAdjYd - 96*traceYdAdjYdYdAdjYuYuAdjYd +
-      48*traceYdAdjYuYuAdjYdYdAdjYd - 48*traceYdAdjYuYuAdjYuYuAdjYd + 80*
+   const double beta_Lambdax_1 = Re(-0.001*twoLoop*(3699*Power6(g1) + 45*Quad(
+      g1)*(-20*traceYdAdjYd + 100*traceYeAdjYe + 76*traceYuAdjYu - 223*Lambdax
+      + 197*Sqr(g2) + 6*Sqr(g2d) + 6*Sqr(g2u) + 2*Sqr(gYd) + 2*Sqr(gYu)) + 25*
+      Sqr(g1)*(385*Quad(g2) - 6*Sqr(g2)*(36*traceYdAdjYd + 44*traceYeAdjYe + 84
+      *traceYuAdjYu + 39*Lambdax + 42*Sqr(g2d) + 42*Sqr(g2u) - 2*Sqr(gYd) - 2*
+      Sqr(gYu)) - 2*(32*traceYdAdjYdYdAdjYd - 96*traceYeAdjYeYeAdjYe - 64*
+      traceYuAdjYuYuAdjYu + 50*traceYdAdjYd*Lambdax + 150*traceYeAdjYe*Lambdax
+      + 170*traceYuAdjYu*Lambdax + 45*Lambdax*Sqr(g2d) + 45*Lambdax*Sqr(g2u) +
+      15*Lambdax*Sqr(gYd) + 15*Lambdax*Sqr(gYu) + 216*Sqr(Lambdax))) - 125*(209
+      *Power6(g2) - Quad(g2)*(36*traceYdAdjYd + 12*traceYeAdjYe + 36*
+      traceYuAdjYu - 47*Lambdax + 306*Sqr(g2d) + 306*Sqr(g2u) + 6*Sqr(gYd) + 6*
+      Sqr(gYu)) - 2*Sqr(g2)*(32*g2d*g2u*gYd*gYu + 80*Quad(g2d) + 80*Quad(g2u) +
+      Sqr(g2d)*(-165*Lambdax + 32*Sqr(g2u) + 16*Sqr(gYd)) - 3*Lambdax*(30*
+      traceYdAdjYd + 10*traceYeAdjYe + 30*traceYuAdjYu + 72*Lambdax + 5*Sqr(gYd
+      ) + 5*Sqr(gYu)) + Sqr(g2u)*(-165*Lambdax + 16*Sqr(gYu))) + 2*(240*
+      traceYdAdjYdYdAdjYdYdAdjYd - 96*traceYdAdjYdYdAdjYuYuAdjYd + 48*
+      traceYdAdjYuYuAdjYdYdAdjYd - 48*traceYdAdjYuYuAdjYuYuAdjYd + 80*
       traceYeAdjYeYeAdjYeYeAdjYe + 240*traceYuAdjYuYuAdjYuYuAdjYu + 76*g2u*gYd*
       gYu*Cube(g2d) - 12*traceYdAdjYdYdAdjYd*Lambdax - 168*traceYdAdjYuYuAdjYd*
       Lambdax - 4*traceYeAdjYeYeAdjYe*Lambdax - 12*traceYuAdjYuYuAdjYu*Lambdax
       + 94*Power6(g2d) + 94*Power6(g2u) + 10*Power6(gYd) + 10*Power6(gYu) -
       Lambdax*Quad(gYd) - Lambdax*Quad(gYu) - 256*traceYdAdjYdYdAdjYd*Sqr(g3) -
-      256*traceYuAdjYuYuAdjYu*Sqr(g3) + 320*traceYdAdjYd*Lambdax*Sqr(g3) + 320
-      *traceYuAdjYu*Lambdax*Sqr(g3) + 34*Quad(gYu)*Sqr(gYd) + Quad(g2d)*(-5*
+      256*traceYuAdjYuYuAdjYu*Sqr(g3) + 320*traceYdAdjYd*Lambdax*Sqr(g3) + 320*
+      traceYuAdjYu*Lambdax*Sqr(g3) + 34*Quad(gYu)*Sqr(gYd) + Quad(g2d)*(-5*
       Lambdax + 14*Sqr(g2u) + 22*Sqr(gYd)) + 34*Quad(gYd)*Sqr(gYu) + 12*Lambdax
       *Sqr(gYd)*Sqr(gYu) + 4*g2d*g2u*gYd*gYu*(20*Lambdax + 19*Sqr(g2u) + 21*Sqr
       (gYd) + 21*Sqr(gYu)) + Quad(g2u)*(-5*Lambdax + 22*Sqr(gYu)) + 2*Sqr(g2u)*

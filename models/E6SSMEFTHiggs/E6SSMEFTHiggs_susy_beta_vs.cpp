@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 16:34:44
+// File generated at Sun 26 Aug 2018 13:57:56
 
 #include "E6SSMEFTHiggs_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -34,8 +34,8 @@ namespace flexiblesusy {
 double E6SSMEFTHiggs_susy_parameters::calc_beta_vs_1_loop(const Susy_traces& susy_traces) const
 {
    const double traceKappaAdjKappa = TRACE_STRUCT.traceKappaAdjKappa;
-   const double traceLambda12AdjLambda12 =
-      TRACE_STRUCT.traceLambda12AdjLambda12;
+   const double traceLambda12AdjLambda12 = TRACE_STRUCT.
+      traceLambda12AdjLambda12;
 
 
    double beta_vs;
@@ -58,18 +58,18 @@ double E6SSMEFTHiggs_susy_parameters::calc_beta_vs_2_loop(const Susy_traces& sus
    const double traceYeAdjYe = TRACE_STRUCT.traceYeAdjYe;
    const double traceYuAdjYu = TRACE_STRUCT.traceYuAdjYu;
    const double traceKappaAdjKappa = TRACE_STRUCT.traceKappaAdjKappa;
-   const double traceLambda12AdjLambda12 =
-      TRACE_STRUCT.traceLambda12AdjLambda12;
-   const double traceKappaAdjKappaKappaAdjKappa =
-      TRACE_STRUCT.traceKappaAdjKappaKappaAdjKappa;
-   const double traceLambda12AdjLambda12Lambda12AdjLambda12 =
-      TRACE_STRUCT.traceLambda12AdjLambda12Lambda12AdjLambda12;
+   const double traceLambda12AdjLambda12 = TRACE_STRUCT.
+      traceLambda12AdjLambda12;
+   const double traceKappaAdjKappaKappaAdjKappa = TRACE_STRUCT.
+      traceKappaAdjKappaKappaAdjKappa;
+   const double traceLambda12AdjLambda12Lambda12AdjLambda12 = TRACE_STRUCT.
+      traceLambda12AdjLambda12Lambda12AdjLambda12;
 
 
    double beta_vs;
 
-   beta_vs = Re(-0.00625*twoLoop*vs*(1065*Quad(gN) + 64*((2*
-      traceKappaAdjKappa + 3*traceLambda12AdjLambda12)*Sqr(g1) + 5*(-3*
+   beta_vs = Re(-0.00625*twoLoop*vs*(1065*Quad(gN) + 64*((2*traceKappaAdjKappa
+      + 3*traceLambda12AdjLambda12)*Sqr(g1) + 5*(-3*
       traceKappaAdjKappaKappaAdjKappa - 2*
       traceLambda12AdjLambda12Lambda12AdjLambda12 + 3*traceLambda12AdjLambda12*
       Sqr(g2) + 8*traceKappaAdjKappa*Sqr(g3))) + 104*(3*traceKappaAdjKappa + 2*

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:09:11
+// File generated at Sun 26 Aug 2018 14:15:48
 
 #ifndef TMSSM_WEINBERG_ANGLE_H
 #define TMSSM_WEINBERG_ANGLE_H
@@ -73,6 +73,7 @@ private:
    double calculate_delta_r_hat(double, double) const;
    double calculate_delta_vb(double, double) const;
    double calculate_delta_vb_sm(double) const;
+   int get_neutrino_index(int) const;
    double calculate_delta_vb_bsm(double) const;
 
    std::complex<double> CpbarFvFeconjVWmPL(int gI1, int gI2) const;

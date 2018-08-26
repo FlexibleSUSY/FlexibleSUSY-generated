@@ -21,7 +21,7 @@
  * @brief contains wrapper class for model class in SLHA convention
  */
 
-// File generated at Mon 5 Mar 2018 18:35:34
+// File generated at Sun 26 Aug 2018 14:44:11
 
 #ifndef NUTNMSSM_SLHA_H
 #define NUTNMSSM_SLHA_H

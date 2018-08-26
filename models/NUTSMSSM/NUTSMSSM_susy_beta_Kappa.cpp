@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:24:44
+// File generated at Sun 26 Aug 2018 14:38:42
 
 #include "NUTSMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -37,8 +37,7 @@ double NUTSMSSM_susy_parameters::calc_beta_Kappa_1_loop(const Susy_traces& susy_
 
    double beta_Kappa;
 
-   beta_Kappa = Re(6*oneOver16PiSqr*(AbsSqr(Kappa) + AbsSqr(Lambdax))*
-      Kappa);
+   beta_Kappa = Re(6*oneOver16PiSqr*(AbsSqr(Kappa) + AbsSqr(Lambdax))*Kappa);
 
 
    return beta_Kappa;

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:44:29
+// File generated at Sun 26 Aug 2018 14:10:25
 
 #include "SplitMSSM_two_scale_low_scale_constraint.hpp"
 #include "SplitMSSM_two_scale_model.hpp"
@@ -81,12 +81,14 @@ void SplitMSSM_low_scale_constraint<Two_scale>::apply()
 {
    check_model_ptr();
 
+   
 
 
    model->calculate_DRbar_masses();
    update_scale();
    qedqcd.run_to(scale, 1.0e-5);
    calculate_DRbar_gauge_couplings();
+   calculate_running_SM_masses();
 
    const auto MuInput = INPUTPARAMETER(MuInput);
    const auto M1Input = INPUTPARAMETER(M1Input);
@@ -153,6 +155,9 @@ void SplitMSSM_low_scale_constraint<Two_scale>::clear()
    qedqcd = softsusy::QedQcd();
    ckm.setIdentity();
    pmns.setIdentity();
+   upQuarksDRbar.setZero();
+   downQuarksDRbar.setZero();
+   downLeptonsDRbar.setZero();
    neutrinoDRbar.setZero();
    mW_run = 0.;
    mZ_run = 0.;
@@ -174,7 +179,10 @@ void SplitMSSM_low_scale_constraint<Two_scale>::initialize()
 
    ckm = qedqcd.get_complex_ckm();
    pmns = qedqcd.get_complex_pmns();
-   neutrinoDRbar = Eigen::Matrix<double,3,3>::Zero();
+   upQuarksDRbar.setZero();
+   downQuarksDRbar.setZero();
+   downLeptonsDRbar.setZero();
+   neutrinoDRbar.setZero();
    mW_run = 0.;
    mZ_run = 0.;
    AlphaS = 0.;
@@ -251,20 +259,19 @@ double SplitMSSM_low_scale_constraint<Two_scale>::calculate_theta_w()
    sm_pars.alpha_s = calculate_alpha_s_SM5_at(qedqcd, qedqcd.displayPoleMt());
 
    const int number_of_iterations =
-       std::max(20, static_cast<int>(std::abs(-log10(MODEL->get_precision()
-          ) * 10)));
+       std::max(20, static_cast<int>(std::abs(-log10(MODEL->get_precision()) * 10)
+          ));
 
    SplitMSSM_weinberg_angle weinberg(MODEL, sm_pars);
-   weinberg.set_number_of_loops(MODEL->get_threshold_corrections().sin_theta_w)
-      ;
+   weinberg.set_number_of_loops(MODEL->get_threshold_corrections().sin_theta_w);
    weinberg.set_number_of_iterations(number_of_iterations);
 
    try {
       const auto result = weinberg.calculate();
       THETAW = ArcSin(result.first);
 
-      if (MODEL->get_thresholds() && MODEL->get_threshold_corrections()
-         .sin_theta_w > 0)
+      if (MODEL->get_thresholds() && MODEL->get_threshold_corrections().
+         sin_theta_w > 0)
          qedqcd.setPoleMW(result.second);
 
       MODEL->get_problems().unflag_no_sinThetaW_convergence();
@@ -272,7 +279,6 @@ double SplitMSSM_low_scale_constraint<Two_scale>::calculate_theta_w()
       VERBOSE_MSG(e.what());
       MODEL->get_problems().flag_no_sinThetaW_convergence();
    }
-
 
    return theta_w;
 }
@@ -287,8 +293,7 @@ void SplitMSSM_low_scale_constraint<Two_scale>::calculate_DRbar_gauge_couplings(
    new_g3 = 3.5449077018110318*Sqrt(AlphaS);
 
    if (IsFinite(new_g1)) {
-      model->get_problems().unflag_non_perturbative_parameter(
-         SplitMSSM_info::g1);
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::g1);
    } else {
       model->get_problems().flag_non_perturbative_parameter(
          SplitMSSM_info::g1, new_g1, get_scale());
@@ -296,14 +301,12 @@ void SplitMSSM_low_scale_constraint<Two_scale>::calculate_DRbar_gauge_couplings(
    }
 
    if (IsFinite(new_g2)) {
-      model->get_problems().unflag_non_perturbative_parameter(
-         SplitMSSM_info::g2);
+      model->get_problems().unflag_non_perturbative_parameter(SplitMSSM_info::g2);
    } else {
       model->get_problems().flag_non_perturbative_parameter(
          SplitMSSM_info::g2, new_g2, get_scale());
       new_g2 = Electroweak_constants::g2;
    }
-
 }
 
 double SplitMSSM_low_scale_constraint<Two_scale>::calculate_delta_alpha_em(double alphaEm) const
@@ -314,12 +317,12 @@ double SplitMSSM_low_scale_constraint<Two_scale>::calculate_delta_alpha_em(doubl
    const auto MCha = MODELPARAMETER(MCha);
    const auto MFu = MODELPARAMETER(MFu);
 
-   const double delta_alpha_em_SM = -0.28294212105225836*alphaEm*FiniteLog(Abs(
-      MFu(2)/currentScale));
+   const double delta_alpha_em_SM = -0.28294212105225836*alphaEm*FiniteLog(Abs(MFu
+      (2)/currentScale));
 
-   const double delta_alpha_em = 0.15915494309189535*alphaEm*(
-      -1.3333333333333333*FiniteLog(Abs(MCha(0)/currentScale)) -
-      1.3333333333333333*FiniteLog(Abs(MCha(1)/currentScale)));
+   const double delta_alpha_em = 0.15915494309189535*alphaEm*(-1.3333333333333333*
+      FiniteLog(Abs(MCha(0)/currentScale)) - 1.3333333333333333*FiniteLog(Abs(MCha
+      (1)/currentScale)));
 
    return delta_alpha_em + delta_alpha_em_SM;
 
@@ -333,11 +336,11 @@ double SplitMSSM_low_scale_constraint<Two_scale>::calculate_delta_alpha_s(double
    const auto MFu = MODELPARAMETER(MFu);
    const auto MGlu = MODELPARAMETER(MGlu);
 
-   const double delta_alpha_s_SM = -0.1061032953945969*alphaS*FiniteLog(Abs(MFu
-      (2)/currentScale));
+   const double delta_alpha_s_SM = -0.1061032953945969*alphaS*FiniteLog(Abs(MFu(2)
+      /currentScale));
 
-   const double delta_alpha_s = -0.3183098861837907*alphaS*FiniteLog(Abs(
-      MGlu/currentScale));
+   const double delta_alpha_s = -0.3183098861837907*alphaS*FiniteLog(Abs(MGlu/
+      currentScale));
 
    const double delta_alpha_s_1loop = delta_alpha_s + delta_alpha_s_SM;
    double delta_alpha_s_2loop = 0.;
@@ -354,8 +357,51 @@ double SplitMSSM_low_scale_constraint<Two_scale>::calculate_alpha_s_SM5_at(
    return qedqcd_tmp.displayAlpha(softsusy::ALPHAS);
 }
 
+void SplitMSSM_low_scale_constraint<Two_scale>::calculate_running_SM_masses()
+{
+   check_model_ptr();
+
+   upQuarksDRbar.setZero();
+   upQuarksDRbar(0,0) = qedqcd.displayMass(softsusy::mUp);
+   upQuarksDRbar(1,1) = qedqcd.displayMass(softsusy::mCharm);
+   upQuarksDRbar(2,2) = qedqcd.displayPoleMt();
+
+   downQuarksDRbar.setZero();
+   downQuarksDRbar(0,0) = qedqcd.displayMass(softsusy::mDown);
+   downQuarksDRbar(1,1) = qedqcd.displayMass(softsusy::mStrange);
+   downQuarksDRbar(2,2) = qedqcd.displayMass(softsusy::mBottom);
+
+   downLeptonsDRbar.setZero();
+   downLeptonsDRbar(0,0) = qedqcd.displayPoleMel();
+   downLeptonsDRbar(1,1) = qedqcd.displayPoleMmuon();
+   downLeptonsDRbar(2,2) = qedqcd.displayPoleMtau();
+
+   neutrinoDRbar.setZero();
+   neutrinoDRbar(0,0) = qedqcd.displayNeutrinoPoleMass(1);
+   neutrinoDRbar(1,1) = qedqcd.displayNeutrinoPoleMass(2);
+   neutrinoDRbar(2,2) = qedqcd.displayNeutrinoPoleMass(3);
+
+   if (model->get_thresholds() && model->get_threshold_corrections().mt > 0) {
+      upQuarksDRbar(2,2) = MODEL->calculate_MFu_DRbar(qedqcd.displayPoleMt(), 2);
+   }
+
+   if (model->get_thresholds() && model->get_threshold_corrections().mb > 0) {
+      downQuarksDRbar(2,2) = MODEL->calculate_MFd_DRbar(qedqcd.displayMass(softsusy::mBottom), 2);
+   }
+
+   if (model->get_thresholds()) {
+      downLeptonsDRbar(0,0) = MODEL->calculate_MFe_DRbar(qedqcd.displayMass(softsusy::mElectron), 0);
+      downLeptonsDRbar(1,1) = MODEL->calculate_MFe_DRbar(qedqcd.displayMass(softsusy::mMuon), 1);
+   }
+
+   if (model->get_thresholds() && model->get_threshold_corrections().mtau > 0) {
+      downLeptonsDRbar(2,2) = MODEL->calculate_MFe_DRbar(qedqcd.displayMass(softsusy::mTau), 2);
+   }
+}
+
 void SplitMSSM_low_scale_constraint<Two_scale>::calculate_DRbar_yukawa_couplings()
 {
+   calculate_running_SM_masses();
    calculate_Yu_DRbar();
    calculate_Yd_DRbar();
    calculate_Ye_DRbar();
@@ -364,15 +410,6 @@ void SplitMSSM_low_scale_constraint<Two_scale>::calculate_DRbar_yukawa_couplings
 void SplitMSSM_low_scale_constraint<Two_scale>::calculate_Yu_DRbar()
 {
    check_model_ptr();
-
-   Eigen::Matrix<std::complex<double>,3,3> upQuarksDRbar(ZEROMATRIXCOMPLEX(3,3));
-   upQuarksDRbar(0,0)      = qedqcd.displayMass(softsusy::mUp);
-   upQuarksDRbar(1,1)      = qedqcd.displayMass(softsusy::mCharm);
-   upQuarksDRbar(2,2)      = qedqcd.displayPoleMt();
-
-   if (model->get_thresholds() && model->get_threshold_corrections().mt > 0) {
-      upQuarksDRbar(2,2) = MODEL->calculate_MFu_DRbar(qedqcd.displayPoleMt(), 2);
-   }
 
    const auto v = MODELPARAMETER(v);
    MODEL->set_Yu(((upQuarksDRbar/v).transpose()).real());
@@ -383,15 +420,6 @@ void SplitMSSM_low_scale_constraint<Two_scale>::calculate_Yd_DRbar()
 {
    check_model_ptr();
 
-   Eigen::Matrix<std::complex<double>,3,3> downQuarksDRbar(ZEROMATRIXCOMPLEX(3,3));
-   downQuarksDRbar(0,0)   = qedqcd.displayMass(softsusy::mDown);
-   downQuarksDRbar(1,1)   = qedqcd.displayMass(softsusy::mStrange);
-   downQuarksDRbar(2,2)   = qedqcd.displayMass(softsusy::mBottom);
-
-   if (model->get_thresholds() && model->get_threshold_corrections().mb > 0) {
-      downQuarksDRbar(2,2) = MODEL->calculate_MFd_DRbar(qedqcd.displayMass(softsusy::mBottom), 2);
-   }
-
    const auto v = MODELPARAMETER(v);
    MODEL->set_Yd(((downQuarksDRbar/v).transpose()).real());
 
@@ -401,31 +429,9 @@ void SplitMSSM_low_scale_constraint<Two_scale>::calculate_Ye_DRbar()
 {
    check_model_ptr();
 
-   Eigen::Matrix<std::complex<double>,3,3> downLeptonsDRbar(ZEROMATRIXCOMPLEX(3,3));
-   downLeptonsDRbar(0,0) = qedqcd.displayPoleMel();
-   downLeptonsDRbar(1,1) = qedqcd.displayPoleMmuon();
-   downLeptonsDRbar(2,2) = qedqcd.displayPoleMtau();
-
-   if (model->get_thresholds()) {
-      downLeptonsDRbar(0,0) = MODEL->calculate_MFe_DRbar(qedqcd.displayMass(softsusy::mElectron), 0);
-      downLeptonsDRbar(1,1) = MODEL->calculate_MFe_DRbar(qedqcd.displayMass(softsusy::mMuon), 1);
-   }
-
-   if (model->get_thresholds() && model->get_threshold_corrections().mtau > 0) {
-      downLeptonsDRbar(2,2) = MODEL->calculate_MFe_DRbar(qedqcd.displayMass(softsusy::mTau), 2);
-   }
-
    const auto v = MODELPARAMETER(v);
    MODEL->set_Ye(((downLeptonsDRbar/v).transpose()).real());
 
-}
-
-void SplitMSSM_low_scale_constraint<Two_scale>::calculate_MNeutrino_DRbar()
-{
-   neutrinoDRbar.setZero();
-   neutrinoDRbar(0,0) = qedqcd.displayNeutrinoPoleMass(1);
-   neutrinoDRbar(1,1) = qedqcd.displayNeutrinoPoleMass(2);
-   neutrinoDRbar(2,2) = qedqcd.displayNeutrinoPoleMass(3);
 }
 
 void SplitMSSM_low_scale_constraint<Two_scale>::check_model_ptr() const

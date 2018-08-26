@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:42:10
+// File generated at Sun 26 Aug 2018 14:09:55
 
 #include "SplitMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -76,13 +76,13 @@ double SplitMSSM_soft_parameters::calc_beta_mu2_1_loop(const Soft_traces& soft_t
 
    double beta_mu2;
 
-   beta_mu2 = Re(oneOver16PiSqr*(6*mu2*traceYdAdjYd + 2*mu2*traceYeAdjYe
-      + 6*mu2*traceYuAdjYu + 6*mu2*Lambdax + 2*gYd*gYu*MassB*Mu + 6*g2d*g2u*
-      MassWB*Mu - 0.9*mu2*Sqr(g1) - 4.5*mu2*Sqr(g2) + 3*mu2*Sqr(g2d) + 3*mu2*
-      Sqr(g2u) + 6*Conj(MassWB)*(g2d*g2u*Mu + MassWB*Sqr(g2d) + MassWB*Sqr(g2u)
-      ) + mu2*Sqr(gYd) + mu2*Sqr(gYu) + 2*Conj(MassB)*(gYd*gYu*Mu + MassB*Sqr(
-      gYd) + MassB*Sqr(gYu)) + 6*Sqr(g2d)*Sqr(Mu) + 6*Sqr(g2u)*Sqr(Mu) + 2*Sqr(
-      gYd)*Sqr(Mu) + 2*Sqr(gYu)*Sqr(Mu)));
+   beta_mu2 = Re(oneOver16PiSqr*(6*mu2*traceYdAdjYd + 2*mu2*traceYeAdjYe + 6*
+      mu2*traceYuAdjYu + 6*mu2*Lambdax + 2*gYd*gYu*MassB*Mu + 6*g2d*g2u*MassWB*
+      Mu - 0.9*mu2*Sqr(g1) - 4.5*mu2*Sqr(g2) + 3*mu2*Sqr(g2d) + 3*mu2*Sqr(g2u)
+      + 6*Conj(MassWB)*(g2d*g2u*Mu + MassWB*Sqr(g2d) + MassWB*Sqr(g2u)) + mu2*
+      Sqr(gYd) + mu2*Sqr(gYu) + 2*Conj(MassB)*(gYd*gYu*Mu + MassB*Sqr(gYd) +
+      MassB*Sqr(gYu)) + 6*Sqr(g2d)*Sqr(Mu) + 6*Sqr(g2u)*Sqr(Mu) + 2*Sqr(gYd)*
+      Sqr(Mu) + 2*Sqr(gYu)*Sqr(Mu)));
 
 
    return beta_mu2;
@@ -106,8 +106,8 @@ double SplitMSSM_soft_parameters::calc_beta_mu2_2_loop(const Soft_traces& soft_t
 
    double beta_mu2;
 
-   const double beta_mu2_1 = Re(twoLoop*(6*g2d*g2u*gYd*gYu*mu2 - 13.5*mu2
-      *traceYdAdjYdYdAdjYd - 21*mu2*traceYdAdjYuYuAdjYd - 4.5*mu2*
+   const double beta_mu2_1 = Re(twoLoop*(6*g2d*g2u*gYd*gYu*mu2 - 13.5*mu2*
+      traceYdAdjYdYdAdjYd - 21*mu2*traceYdAdjYuYuAdjYd - 4.5*mu2*
       traceYeAdjYeYeAdjYe - 13.5*mu2*traceYuAdjYuYuAdjYu - 36*mu2*traceYdAdjYd*
       Lambdax - 12*mu2*traceYeAdjYe*Lambdax - 36*mu2*traceYuAdjYu*Lambdax -
       25.5*g2u*MassWB*Cube(g2d)*Mu - 25.5*g2d*MassWB*Cube(g2u)*Mu - 9.5*gYu*
@@ -145,13 +145,13 @@ double SplitMSSM_soft_parameters::calc_beta_mu2_2_loop(const Soft_traces& soft_t
       gYd)*Sqr(Mu) - 3*Sqr(g2u)*Sqr(gYd)*Sqr(Mu) + 0.6*Sqr(g1)*Sqr(gYu)*Sqr(Mu)
       + 3*Sqr(g2)*Sqr(gYu)*Sqr(Mu) - 3*Sqr(g2d)*Sqr(gYu)*Sqr(Mu) - 6*Sqr(g2u)*
       Sqr(gYu)*Sqr(Mu) - 21*Sqr(gYd)*Sqr(gYu)*Sqr(Mu)));
-   const double beta_mu2_2 = Re(-0.3*twoLoop*Conj(MassWB)*(85*g2u*Cube(
-      g2d)*Mu + 65*MassWB*Quad(g2d) + 5*Sqr(g2d)*(4*gYd*gYu*Mu - 24*MassWB*Sqr(
-      g2) + 16*MassWB*Sqr(g2u) + 3*MassWB*Sqr(gYd)) + g2d*g2u*(20*gYd*gYu*(
-      MassB + 2*MassWB) + 15*Mu*Sqr(gYd) + Mu*(60*Lambdax - 3*Sqr(g1) - 95*Sqr(
-      g2) + 85*Sqr(g2u) + 15*Sqr(gYu))) + 5*(-24*MassWB*Quad(g2) + 13*MassWB*
-      Quad(g2u) + Sqr(g2u)*(4*gYd*gYu*Mu - 24*MassWB*Sqr(g2) + (2*MassB + 3*
-      MassWB)*Sqr(gYu)))));
+   const double beta_mu2_2 = Re(-0.3*twoLoop*Conj(MassWB)*(85*g2u*Cube(g2d)*Mu
+      + 65*MassWB*Quad(g2d) + 5*Sqr(g2d)*(4*gYd*gYu*Mu - 24*MassWB*Sqr(g2) + 16
+      *MassWB*Sqr(g2u) + 3*MassWB*Sqr(gYd)) + g2d*g2u*(20*gYd*gYu*(MassB + 2*
+      MassWB) + 15*Mu*Sqr(gYd) + Mu*(60*Lambdax - 3*Sqr(g1) - 95*Sqr(g2) + 85*
+      Sqr(g2u) + 15*Sqr(gYu))) + 5*(-24*MassWB*Quad(g2) + 13*MassWB*Quad(g2u) +
+      Sqr(g2u)*(4*gYd*gYu*Mu - 24*MassWB*Sqr(g2) + (2*MassB + 3*MassWB)*Sqr(gYu
+      )))));
 
    beta_mu2 = beta_mu2_1 + beta_mu2_2;
 

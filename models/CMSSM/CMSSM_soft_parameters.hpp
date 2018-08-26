@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 19:08:35
+// File generated at Sun 26 Aug 2018 15:27:52
 
 #ifndef CMSSM_soft_parameters_H
 #define CMSSM_soft_parameters_H
@@ -35,13 +35,12 @@ namespace flexiblesusy {
 class CMSSM_soft_parameters : public CMSSM_susy_parameters {
 public:
    explicit CMSSM_soft_parameters(const CMSSM_input_parameters& input_ = CMSSM_input_parameters());
-   CMSSM_soft_parameters(const CMSSM_susy_parameters& , const Eigen::Matrix<double,3,3>& TYd_, const Eigen::Matrix<double,3,3>&
-   TYe_, const Eigen::Matrix<double,3,3>& TYu_, double BMu_, const
-   Eigen::Matrix<double,3,3>& mq2_, const Eigen::Matrix<double,3,3>& ml2_,
-   double mHd2_, double mHu2_, const Eigen::Matrix<double,3,3>& md2_, const
-   Eigen::Matrix<double,3,3>& mu2_, const Eigen::Matrix<double,3,3>& me2_,
-   double MassB_, double MassWB_, double MassG_
-);
+   CMSSM_soft_parameters(const CMSSM_susy_parameters& , const Eigen::Matrix<double,3,3>& TYd_, const Eigen::Matrix<double,3,3>& TYe_,
+   const Eigen::Matrix<double,3,3>& TYu_, double BMu_, const Eigen::Matrix<
+   double,3,3>& mq2_, const Eigen::Matrix<double,3,3>& ml2_, double mHd2_,
+   double mHu2_, const Eigen::Matrix<double,3,3>& md2_, const Eigen::Matrix<
+   double,3,3>& mu2_, const Eigen::Matrix<double,3,3>& me2_, double MassB_,
+   double MassWB_, double MassG_);
    CMSSM_soft_parameters(const CMSSM_soft_parameters&) = default;
    CMSSM_soft_parameters(CMSSM_soft_parameters&&) = default;
    virtual ~CMSSM_soft_parameters() = default;

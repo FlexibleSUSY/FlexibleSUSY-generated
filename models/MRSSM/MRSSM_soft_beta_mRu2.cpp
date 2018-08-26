@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:48:09
+// File generated at Sun 26 Aug 2018 14:44:11
 
 #include "MRSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -74,8 +74,8 @@ double MRSSM_soft_parameters::calc_beta_mRu2_1_loop(const Soft_traces& soft_trac
 
    double beta_mRu2;
 
-   beta_mRu2 = Re(oneOver16PiSqr*(-0.7745966692414834*g1*Tr11 + 2*(mHu2 +
-      mRu2 + mS2)*AbsSqr(LamSU) + 3*(mHu2 + mRu2 + mT2)*AbsSqr(LamTU)));
+   beta_mRu2 = Re(oneOver16PiSqr*(-0.7745966692414834*g1*Tr11 + 2*(mHu2 + mRu2
+      + mS2)*AbsSqr(LamSU) + 3*(mHu2 + mRu2 + mT2)*AbsSqr(LamTU)));
 
 
    return beta_mRu2;
@@ -98,9 +98,9 @@ double MRSSM_soft_parameters::calc_beta_mRu2_2_loop(const Soft_traces& soft_trac
 
    double beta_mRu2;
 
-   beta_mRu2 = Re(twoLoop*(-3.0983866769659336*g1*Tr31 - 2*AbsSqr(LamSU)*
-      (2*(mHd2 + mHu2 + mRd2 + mRu2 + 2*mS2)*AbsSqr(LamSD) + 3*(tracemq2AdjYuYu
-      + tracemu2YuAdjYu + 2*mHu2*traceYuAdjYu + mRu2*traceYuAdjYu + mS2*
+   beta_mRu2 = Re(twoLoop*(-3.0983866769659336*g1*Tr31 - 2*AbsSqr(LamSU)*(2*(
+      mHd2 + mHu2 + mRd2 + mRu2 + 2*mS2)*AbsSqr(LamSD) + 3*(tracemq2AdjYuYu +
+      tracemu2YuAdjYu + 2*mHu2*traceYuAdjYu + mRu2*traceYuAdjYu + mS2*
       traceYuAdjYu + (2*mHu2 + 2*mRu2 + mS2 + mT2)*AbsSqr(LamTU))) + 6*Tr22*
       Quad(g2) + 1.2*Tr2U111*Sqr(g1) + 3*AbsSqr(LamTU)*(-3*(tracemq2AdjYuYu +
       tracemu2YuAdjYu + (2*mHu2 + mRu2 + mT2)*traceYuAdjYu) - (mHd2 + mHu2 +

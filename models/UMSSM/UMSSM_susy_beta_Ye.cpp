@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:29:52
+// File generated at Sun 26 Aug 2018 14:20:43
 
 #include "UMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -42,10 +42,10 @@ Eigen::Matrix<double,3,3> UMSSM_susy_parameters::calc_beta_Ye_1_loop(const Susy_
 
    Eigen::Matrix<double,3,3> beta_Ye;
 
-   beta_Ye = (oneOver16PiSqr*(-0.2*Ye*(-5*AbsSqr(Lambdax) + 9*Sqr(g1) + 5
-      *(-3*traceYdAdjYd - traceYeAdjYe + 3*Sqr(g2) + 2*Sqr(gp)*(Sqr(Qe) + Sqr(
-      QHd) + Sqr(Ql)))) + 3*(Ye*Ye.adjoint()*Ye) + Ye*Yv.conjugate()*
-      Yv.transpose())).real();
+   beta_Ye = (oneOver16PiSqr*(-0.2*Ye*(-5*AbsSqr(Lambdax) + 9*Sqr(g1) + 5*(-3*
+      traceYdAdjYd - traceYeAdjYe + 3*Sqr(g2) + 2*Sqr(gp)*(Sqr(Qe) + Sqr(QHd) +
+      Sqr(Ql)))) + 3*(Ye*Ye.adjoint()*Ye) + Ye*Yv.conjugate()*Yv.transpose())).
+      real();
 
 
    return beta_Ye;
@@ -74,16 +74,15 @@ Eigen::Matrix<double,3,3> UMSSM_susy_parameters::calc_beta_Ye_2_loop(const Susy_
    const double traceYdAdjYdYdAdjYd = TRACE_STRUCT.traceYdAdjYdYdAdjYd;
    const double traceYdAdjYuYuAdjYd = TRACE_STRUCT.traceYdAdjYuYuAdjYd;
    const double traceYeAdjYeYeAdjYe = TRACE_STRUCT.traceYeAdjYeYeAdjYe;
-   const double traceYvAdjYvTpYeconjYe =
-      TRACE_STRUCT.traceYvAdjYvTpYeconjYe;
+   const double traceYvAdjYvTpYeconjYe = TRACE_STRUCT.traceYvAdjYvTpYeconjYe;
 
 
    Eigen::Matrix<double,3,3> beta_Ye;
 
-   beta_Ye = (twoLoop*(0.1*Ye*(135*Quad(g1) + 2*Sqr(g1)*(9*Sqr(g2) + 2*(
-      -traceYdAdjYd + 3*traceYeAdjYe + 3*Sqr(gp)*(-(QHd*QHu) + 4*QHd*Ql - QHu*
-      Ql + Qd*(6*Qe - 3*(QHd + Ql)) - 3*QHd*Qq - 3*Ql*Qq + Qe*(-5*QHd + 2*QHu -
-      9*Ql + 6*Qq - 12*Qu) + 6*QHd*Qu + 6*Ql*Qu + 10*Sqr(Qe) + 2*Sqr(QHd) + 4*
+   beta_Ye = (twoLoop*(0.1*Ye*(135*Quad(g1) + 2*Sqr(g1)*(9*Sqr(g2) + 2*(-
+      traceYdAdjYd + 3*traceYeAdjYe + 3*Sqr(gp)*(-(QHd*QHu) + 4*QHd*Ql - QHu*Ql
+       + Qd*(6*Qe - 3*(QHd + Ql)) - 3*QHd*Qq - 3*Ql*Qq + Qe*(-5*QHd + 2*QHu - 9
+      *Ql + 6*Qq - 12*Qu) + 6*QHd*Qu + 6*Ql*Qu + 10*Sqr(Qe) + 2*Sqr(QHd) + 4*
       Sqr(Ql)))) - 10*AbsSqr(Lambdax)*(3*traceYuAdjYu + traceYvAdjYv + 2*Sqr(gp
       )*(Sqr(QHd) - Sqr(QHu) - Sqr(Qs))) + 5*(15*Quad(g2) + 12*Sqr(g2)*Sqr(gp)*
       (Sqr(QHd) + Sqr(Ql)) + 2*(-9*traceYdAdjYdYdAdjYd - 3*traceYdAdjYuYuAdjYd
@@ -99,11 +98,11 @@ Eigen::Matrix<double,3,3> UMSSM_susy_parameters::calc_beta_Ye_2_loop(const Susy_
       )) - 30*Sqr(Conj(Lambdax))*Sqr(Lambdax)) + (-9*traceYdAdjYd - 3*
       traceYeAdjYe - 3*AbsSqr(Lambdax) + 6*Sqr(g2) - 2*Sqr(gp)*Sqr(Qe) + 6*Sqr(
       gp)*Sqr(QHd) + 2*Sqr(gp)*Sqr(Ql))*(Ye*Ye.adjoint()*Ye) + (-3*traceYuAdjYu
-      - traceYvAdjYv - AbsSqr(Lambdax) + 2*Sqr(gp)*(Sqr(QHu) - Sqr(Ql) + Sqr(
-      Qv)))*(Ye*Yv.conjugate()*Yv.transpose()) - 4*(Ye*Ye.adjoint()*Ye*
-      Ye.adjoint()*Ye) - 2*(Ye*Yv.conjugate()*Yv.transpose()*Ye.adjoint()*Ye) -
-      2*(Ye*Yv.conjugate()*Yv.transpose()*Yv.conjugate()*Yv.transpose())))
-      .real();
+       - traceYvAdjYv - AbsSqr(Lambdax) + 2*Sqr(gp)*(Sqr(QHu) - Sqr(Ql) + Sqr(
+      Qv)))*(Ye*Yv.conjugate()*Yv.transpose()) - 4*(Ye*Ye.adjoint()*Ye*Ye.
+      adjoint()*Ye) - 2*(Ye*Yv.conjugate()*Yv.transpose()*Ye.adjoint()*Ye) - 2*
+      (Ye*Yv.conjugate()*Yv.transpose()*Yv.conjugate()*Yv.transpose()))).real()
+      ;
 
 
    return beta_Ye;

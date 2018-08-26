@@ -16,15 +16,15 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 16:22:02
+// File generated at Sun 26 Aug 2018 15:18:52
 
 /**
  * @file MRSSMEFTHiggs_two_scale_ewsb_solver.cpp
  *
  * @brief implementation of EWSB solver for two-scale iteration
  *
- * This file was generated at Mon 5 Mar 2018 16:22:02 with FlexibleSUSY
- * 2.1.0 (git commit: 8f20f6c9c42c159c1588fbc0bb3e15ce5ab6ace3) and SARAH 4.12.3 .
+ * This file was generated at Sun 26 Aug 2018 15:18:52 with FlexibleSUSY
+ * 2.2.0 (git commit: 8489097de2d6938a6da0149378457b5ad13d9425) and SARAH 4.13.0 .
  */
 
 #include "MRSSMEFTHiggs_two_scale_ewsb_solver.hpp"
@@ -247,10 +247,10 @@ int CLASSNAME::solve_tree_level(MRSSMEFTHiggs_mass_eigenstates& model)
    double mHd2;
    double mHu2;
 
-   vT = Re((0.2*(-20*g2*MDWBT*AbsSqr(LamSD)*Quad(vd) - 5.477225575051661*g1*
-      LamTD*MDBS*Conj(LamSD)*Quad(vd) - 5.477225575051661*g1*LamSD*MDBS*Conj(LamTD
-      )*Quad(vd) - 10*MuD*AbsSqr(LamSD)*Conj(LamTD)*Quad(vd) - 5.477225575051661*
-      g1*LamTD*Conj(LamSD)*Conj(MDBS)*Quad(vd) - 5.477225575051661*g1*LamSD*Conj(
+   vT = Re((0.2*(-20*g2*MDWBT*AbsSqr(LamSD)*Quad(vd) - 5.477225575051661*g1*LamTD*
+      MDBS*Conj(LamSD)*Quad(vd) - 5.477225575051661*g1*LamSD*MDBS*Conj(LamTD)*Quad
+      (vd) - 10*MuD*AbsSqr(LamSD)*Conj(LamTD)*Quad(vd) - 5.477225575051661*g1*
+      LamTD*Conj(LamSD)*Conj(MDBS)*Quad(vd) - 5.477225575051661*g1*LamSD*Conj(
       LamTD)*Conj(MDBS)*Quad(vd) - 20*g2*AbsSqr(LamSD)*Conj(MDWBT)*Quad(vd) - 10*
       LamTD*AbsSqr(LamSD)*Conj(MuD)*Quad(vd) + 20*g2*MDWBT*AbsSqr(LamSU)*Quad(vu)
       - 5.477225575051661*g1*LamTU*MDBS*Conj(LamSU)*Quad(vu) - 5.477225575051661*
@@ -299,31 +299,32 @@ int CLASSNAME::solve_tree_level(MRSSMEFTHiggs_mass_eigenstates& model)
       Quad(vd)*Sqr(LamTD)*Sqr(Conj(LamSD)) - Quad(vu)*Sqr(LamTU)*Sqr(Conj(LamSU))
       - Quad(vd)*Sqr(LamSD)*Sqr(Conj(LamTD)) - Quad(vu)*Sqr(LamSU)*Sqr(Conj(LamTU)
       )));
-   vS = Re((-1.4142135623730951*(4*mT2*vT + 16*vT*Sqr(MDWBT) + g2*MDWBT*Sqr(vd)
-      + vT*AbsSqr(LamTD)*Sqr(vd) + MuD*Conj(LamTD)*Sqr(vd) + g2*Conj(MDWBT)*Sqr(
-      vd) + LamTD*Conj(MuD)*Sqr(vd) - g2*MDWBT*Sqr(vu) + vT*AbsSqr(LamTU)*Sqr(vu)
-      - MuU*Conj(LamTU)*Sqr(vu) - g2*Conj(MDWBT)*Sqr(vu) - LamTU*Conj(MuU)*Sqr(vu)
-      ))/(LamTD*Conj(LamSD)*Sqr(vd) + LamSD*Conj(LamTD)*Sqr(vd) - LamTU*Conj(LamSU
-      )*Sqr(vu) - LamSU*Conj(LamTU)*Sqr(vu)));
-   mHd2 = Re((0.025*(15.491933384829668*g1*MDBS*vd*vS - 20*g2*MDWBT*vd*vT - 40*
-      vd*AbsSqr(MuD) - 40*vd*AbsSqr(Mu) + 20*vu*BMu - 28.284271247461902*MuD*vd*vS
-      *Conj(LamSD) - 14.142135623730951*LamTD*vd*vS*vT*Conj(LamSD) - 20*MuD*vd*vT*
+   vS = Re((-1.4142135623730951*(4*mT2*vT + 16*vT*Sqr(MDWBT) + g2*MDWBT*Sqr(vd) +
+      vT*AbsSqr(LamTD)*Sqr(vd) + MuD*Conj(LamTD)*Sqr(vd) + g2*Conj(MDWBT)*Sqr(vd)
+      + LamTD*Conj(MuD)*Sqr(vd) - g2*MDWBT*Sqr(vu) + vT*AbsSqr(LamTU)*Sqr(vu) -
+      MuU*Conj(LamTU)*Sqr(vu) - g2*Conj(MDWBT)*Sqr(vu) - LamTU*Conj(MuU)*Sqr(vu)))
+      /(LamTD*Conj(LamSD)*Sqr(vd) + LamSD*Conj(LamTD)*Sqr(vd) - LamTU*Conj(LamSU)*
+      Sqr(vu) - LamSU*Conj(LamTU)*Sqr(vu)));
+   mHd2 = Re((0.025*(15.491933384829668*g1*MDBS*vd*vS - 20*g2*MDWBT*vd*vT - 40*vd*
+      AbsSqr(MuD) - 40*vd*AbsSqr(Mu) + 20*vu*BMu - 28.284271247461902*MuD*vd*vS*
+      Conj(LamSD) - 14.142135623730951*LamTD*vd*vS*vT*Conj(LamSD) - 20*MuD*vd*vT*
       Conj(LamTD) - 14.142135623730951*LamSD*vd*vS*vT*Conj(LamTD) +
       15.491933384829668*g1*vd*vS*Conj(MDBS) - 20*g2*vd*vT*Conj(MDWBT) -
       28.284271247461902*LamSD*vd*vS*Conj(MuD) - 20*LamTD*vd*vT*Conj(MuD) + 20*vu*
       Conj(BMu) - 3*Cube(vd)*Sqr(g1) - 5*Cube(vd)*Sqr(g2) - 20*vd*AbsSqr(LamSD)*
       Sqr(vS) - 10*vd*AbsSqr(LamTD)*Sqr(vT) + 3*vd*Sqr(g1)*Sqr(vu) + 5*vd*Sqr(g2)*
       Sqr(vu)))/vd);
-   mHu2 = Re((0.025*(-15.491933384829668*g1*MDBS*vS*vu + 20*g2*MDWBT*vT*vu - 40
-      *vu*AbsSqr(MuU) - 40*vu*AbsSqr(Mu) + 20*vd*BMu - 28.284271247461902*MuU*vS*
-      vu*Conj(LamSU) + 14.142135623730951*LamTU*vS*vT*vu*Conj(LamSU) + 20*MuU*vT*
-      vu*Conj(LamTU) + 14.142135623730951*LamSU*vS*vT*vu*Conj(LamTU) -
+   mHu2 = Re((0.025*(-15.491933384829668*g1*MDBS*vS*vu + 20*g2*MDWBT*vT*vu - 40*vu
+      *AbsSqr(MuU) - 40*vu*AbsSqr(Mu) + 20*vd*BMu - 28.284271247461902*MuU*vS*vu*
+      Conj(LamSU) + 14.142135623730951*LamTU*vS*vT*vu*Conj(LamSU) + 20*MuU*vT*vu*
+      Conj(LamTU) + 14.142135623730951*LamSU*vS*vT*vu*Conj(LamTU) -
       15.491933384829668*g1*vS*vu*Conj(MDBS) + 20*g2*vT*vu*Conj(MDWBT) -
       28.284271247461902*LamSU*vS*vu*Conj(MuU) + 20*LamTU*vT*vu*Conj(MuU) + 20*vd*
       Conj(BMu) - 3*Cube(vu)*Sqr(g1) - 5*Cube(vu)*Sqr(g2) + 3*vu*Sqr(g1)*Sqr(vd) +
-      5*vu*Sqr(g2)*Sqr(vd) - 20*vu*AbsSqr(LamSU)*Sqr(vS) - 10*vu*AbsSqr(LamTU)*
-      Sqr(vT)))/vu);
+      5*vu*Sqr(g2)*Sqr(vd) - 20*vu*AbsSqr(LamSU)*Sqr(vS) - 10*vu*AbsSqr(LamTU)*Sqr
+      (vT)))/vu);
 
+   
    const bool is_finite = IsFinite(vT) && IsFinite(vS) && IsFinite(mHd2) &&
       IsFinite(mHu2);
 
@@ -337,7 +338,6 @@ int CLASSNAME::solve_tree_level(MRSSMEFTHiggs_mass_eigenstates& model)
       error = EWSB_solver::FAIL;
       model.get_problems().flag_no_ewsb_tree_level();
    }
-
    return error;
 }
 
@@ -467,25 +467,25 @@ CLASSNAME::EWSB_vector_t CLASSNAME::ewsb_step(const MRSSMEFTHiggs_mass_eigenstat
       Quad(vd)*Sqr(LamTD)*Sqr(Conj(LamSD)) - Quad(vu)*Sqr(LamTU)*Sqr(Conj(LamSU))
       - Quad(vd)*Sqr(LamSD)*Sqr(Conj(LamTD)) - Quad(vu)*Sqr(LamSU)*Sqr(Conj(LamTU)
       )));
-   vS = Re((-1.4142135623730951*(4*mT2*vT - 4*tadpole[2] + 16*vT*Sqr(MDWBT) +
-      g2*MDWBT*Sqr(vd) + vT*AbsSqr(LamTD)*Sqr(vd) + MuD*Conj(LamTD)*Sqr(vd) + g2*
-      Conj(MDWBT)*Sqr(vd) + LamTD*Conj(MuD)*Sqr(vd) - g2*MDWBT*Sqr(vu) + vT*AbsSqr
-      (LamTU)*Sqr(vu) - MuU*Conj(LamTU)*Sqr(vu) - g2*Conj(MDWBT)*Sqr(vu) - LamTU*
+   vS = Re((-1.4142135623730951*(4*mT2*vT - 4*tadpole[2] + 16*vT*Sqr(MDWBT) + g2*
+      MDWBT*Sqr(vd) + vT*AbsSqr(LamTD)*Sqr(vd) + MuD*Conj(LamTD)*Sqr(vd) + g2*Conj
+      (MDWBT)*Sqr(vd) + LamTD*Conj(MuD)*Sqr(vd) - g2*MDWBT*Sqr(vu) + vT*AbsSqr(
+      LamTU)*Sqr(vu) - MuU*Conj(LamTU)*Sqr(vu) - g2*Conj(MDWBT)*Sqr(vu) - LamTU*
       Conj(MuU)*Sqr(vu)))/(LamTD*Conj(LamSD)*Sqr(vd) + LamSD*Conj(LamTD)*Sqr(vd) -
       LamTU*Conj(LamSU)*Sqr(vu) - LamSU*Conj(LamTU)*Sqr(vu)));
-   mHd2 = Re((0.025*(15.491933384829668*g1*MDBS*vd*vS - 20*g2*MDWBT*vd*vT - 40*
-      vd*AbsSqr(MuD) - 40*vd*AbsSqr(Mu) + 20*vu*BMu - 28.284271247461902*MuD*vd*vS
-      *Conj(LamSD) - 14.142135623730951*LamTD*vd*vS*vT*Conj(LamSD) - 20*MuD*vd*vT*
+   mHd2 = Re((0.025*(15.491933384829668*g1*MDBS*vd*vS - 20*g2*MDWBT*vd*vT - 40*vd*
+      AbsSqr(MuD) - 40*vd*AbsSqr(Mu) + 20*vu*BMu - 28.284271247461902*MuD*vd*vS*
+      Conj(LamSD) - 14.142135623730951*LamTD*vd*vS*vT*Conj(LamSD) - 20*MuD*vd*vT*
       Conj(LamTD) - 14.142135623730951*LamSD*vd*vS*vT*Conj(LamTD) +
       15.491933384829668*g1*vd*vS*Conj(MDBS) - 20*g2*vd*vT*Conj(MDWBT) -
       28.284271247461902*LamSD*vd*vS*Conj(MuD) - 20*LamTD*vd*vT*Conj(MuD) + 20*vu*
       Conj(BMu) + 40*tadpole[0] - 3*Cube(vd)*Sqr(g1) - 5*Cube(vd)*Sqr(g2) - 20*vd*
       AbsSqr(LamSD)*Sqr(vS) - 10*vd*AbsSqr(LamTD)*Sqr(vT) + 3*vd*Sqr(g1)*Sqr(vu) +
       5*vd*Sqr(g2)*Sqr(vu)))/vd);
-   mHu2 = Re((0.025*(-15.491933384829668*g1*MDBS*vS*vu + 20*g2*MDWBT*vT*vu - 40
-      *vu*AbsSqr(MuU) - 40*vu*AbsSqr(Mu) + 20*vd*BMu - 28.284271247461902*MuU*vS*
-      vu*Conj(LamSU) + 14.142135623730951*LamTU*vS*vT*vu*Conj(LamSU) + 20*MuU*vT*
-      vu*Conj(LamTU) + 14.142135623730951*LamSU*vS*vT*vu*Conj(LamTU) -
+   mHu2 = Re((0.025*(-15.491933384829668*g1*MDBS*vS*vu + 20*g2*MDWBT*vT*vu - 40*vu
+      *AbsSqr(MuU) - 40*vu*AbsSqr(Mu) + 20*vd*BMu - 28.284271247461902*MuU*vS*vu*
+      Conj(LamSU) + 14.142135623730951*LamTU*vS*vT*vu*Conj(LamSU) + 20*MuU*vT*vu*
+      Conj(LamTU) + 14.142135623730951*LamSU*vS*vT*vu*Conj(LamTU) -
       15.491933384829668*g1*vS*vu*Conj(MDBS) + 20*g2*vT*vu*Conj(MDWBT) -
       28.284271247461902*LamSU*vS*vu*Conj(MuU) + 20*LamTU*vT*vu*Conj(MuU) + 20*vd*
       Conj(BMu) + 40*tadpole[1] - 3*Cube(vu)*Sqr(g1) - 5*Cube(vu)*Sqr(g2) + 3*vu*

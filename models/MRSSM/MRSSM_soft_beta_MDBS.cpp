@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:48:09
+// File generated at Sun 26 Aug 2018 14:44:11
 
 #include "MRSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,8 +73,8 @@ double MRSSM_soft_parameters::calc_beta_MDBS_1_loop(const Soft_traces& soft_trac
 
    double beta_MDBS;
 
-   beta_MDBS = Re(0.4*MDBS*oneOver16PiSqr*(5*AbsSqr(LamSD) + 5*AbsSqr(
-      LamSU) + 18*Sqr(g1)));
+   beta_MDBS = Re(0.4*MDBS*oneOver16PiSqr*(5*AbsSqr(LamSD) + 5*AbsSqr(LamSU) +
+      18*Sqr(g1)));
 
 
    return beta_MDBS;

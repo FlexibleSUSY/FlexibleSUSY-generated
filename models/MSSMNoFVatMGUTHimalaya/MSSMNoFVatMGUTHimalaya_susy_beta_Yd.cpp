@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 14:29:36
+// File generated at Sun 26 Aug 2018 13:44:31
 
 #include "MSSMNoFVatMGUTHimalaya_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -64,15 +64,15 @@ Eigen::Matrix<double,3,3> MSSMNoFVatMGUTHimalaya_susy_parameters::calc_beta_Yd_2
 
    Eigen::Matrix<double,3,3> beta_Yd;
 
-   beta_Yd = (twoLoop*(0.011111111111111112*Yd*(287*Quad(g1) + 2*Sqr(g1)*
-      (-18*traceYdAdjYd + 54*traceYeAdjYe + 45*Sqr(g2) + 40*Sqr(g3)) + 5*(135*
-      Quad(g2) + 144*Sqr(g2)*Sqr(g3) - 2*(27*(3*traceYdAdjYdYdAdjYd +
+   beta_Yd = (twoLoop*(0.011111111111111112*Yd*(287*Quad(g1) + 2*Sqr(g1)*(-18*
+      traceYdAdjYd + 54*traceYeAdjYe + 45*Sqr(g2) + 40*Sqr(g3)) + 5*(135*Quad(
+      g2) + 144*Sqr(g2)*Sqr(g3) - 2*(27*(3*traceYdAdjYdYdAdjYd +
       traceYdAdjYuYuAdjYd + traceYeAdjYeYeAdjYe) + 16*Quad(g3) - 144*
       traceYdAdjYd*Sqr(g3)))) + (-3*(3*traceYdAdjYd + traceYeAdjYe) + 0.8*Sqr(
       g1) + 6*Sqr(g2))*(Yd*Yd.adjoint()*Yd) + (-3*traceYuAdjYu + 0.8*Sqr(g1))*(
-      Yd*Yu.adjoint()*Yu) - 4*(Yd*Yd.adjoint()*Yd*Yd.adjoint()*Yd) - 2*(Yd*
-      Yu.adjoint()*Yu*Yd.adjoint()*Yd) - 2*(Yd*Yu.adjoint()*Yu*Yu.adjoint()*Yu)
-      )).real();
+      Yd*Yu.adjoint()*Yu) - 4*(Yd*Yd.adjoint()*Yd*Yd.adjoint()*Yd) - 2*(Yd*Yu.
+      adjoint()*Yu*Yd.adjoint()*Yd) - 2*(Yd*Yu.adjoint()*Yu*Yu.adjoint()*Yu))).
+      real();
 
 
    return beta_Yd;
@@ -94,12 +94,12 @@ Eigen::Matrix<double,3,3> MSSMNoFVatMGUTHimalaya_susy_parameters::calc_beta_Yd_3
    const double traceAdjYeYeAdjYeYe = TRACE_STRUCT.traceAdjYeYeAdjYeYe;
    const double traceAdjYuYuAdjYdYd = TRACE_STRUCT.traceAdjYuYuAdjYdYd;
    const double traceAdjYuYuAdjYuYu = TRACE_STRUCT.traceAdjYuYuAdjYuYu;
-   const double traceAdjYdYdAdjYdYdAdjYdYd =
-      TRACE_STRUCT.traceAdjYdYdAdjYdYdAdjYdYd;
-   const double traceAdjYeYeAdjYeYeAdjYeYe =
-      TRACE_STRUCT.traceAdjYeYeAdjYeYeAdjYeYe;
-   const double traceAdjYuYuAdjYuYuAdjYdYd =
-      TRACE_STRUCT.traceAdjYuYuAdjYuYuAdjYdYd;
+   const double traceAdjYdYdAdjYdYdAdjYdYd = TRACE_STRUCT.
+      traceAdjYdYdAdjYdYdAdjYdYd;
+   const double traceAdjYeYeAdjYeYeAdjYeYe = TRACE_STRUCT.
+      traceAdjYeYeAdjYeYeAdjYeYe;
+   const double traceAdjYuYuAdjYuYuAdjYdYd = TRACE_STRUCT.
+      traceAdjYuYuAdjYuYuAdjYdYd;
 
 
    Eigen::Matrix<double,3,3> beta_Yd;
@@ -116,7 +116,7 @@ Eigen::Matrix<double,3,3> MSSMNoFVatMGUTHimalaya_susy_parameters::calc_beta_Yd_3
       Quad(g3) - 132*traceAdjYdYd*Sqr(g3)) + 4*(27*(3*
       traceAdjYdYdAdjYdYdAdjYdYd + 18*traceAdjYdYdAdjYdYd*traceAdjYeYe + 6*
       traceAdjYeYe*traceAdjYeYeAdjYeYe + 18*traceAdjYdYd*(3*traceAdjYdYdAdjYdYd
-      + traceAdjYeYeAdjYeYe) + traceAdjYeYeAdjYeYeAdjYeYe + 18*traceAdjYuYu*
+       + traceAdjYeYeAdjYeYe) + traceAdjYeYeAdjYeYeAdjYeYe + 18*traceAdjYuYu*
       traceAdjYuYuAdjYdYd + 9*traceAdjYuYuAdjYuYuAdjYdYd) + 5440*Power6(g3) -
       1440*(2*traceAdjYdYd + traceAdjYuYu)*Quad(g3) + 648*(3*
       traceAdjYdYdAdjYdYd + traceAdjYuYuAdjYdYd)*Sqr(g3)))) - 0.004*threeLoop*(
@@ -137,7 +137,7 @@ Eigen::Matrix<double,3,3> MSSMNoFVatMGUTHimalaya_susy_parameters::calc_beta_Yd_3
       3*(-18*traceAdjYdYdAdjYdYd + 6*traceAdjYdYd*traceAdjYeYe - 6*
       traceAdjYeYeAdjYeYe - 6*traceAdjYuYuAdjYdYd + 9*Sqr(traceAdjYdYd) + Sqr(
       traceAdjYeYe)))))*(Yd*Yd.adjoint()*Yd) + (6*threeLoop*traceAdjYuYuAdjYdYd
-      + 18*threeLoop*traceAdjYuYuAdjYuYu - 12.556666666666667*threeLoop*Quad(
+       + 18*threeLoop*traceAdjYuYuAdjYuYu - 12.556666666666667*threeLoop*Quad(
       g1) - 11.25*threeLoop*Quad(g2) + 2.6666666666666665*threeLoop*Quad(g3) -
       8*threeLoop*traceAdjYuYu*Sqr(g3) - 0.1*threeLoop*Sqr(g1)*(-20*
       traceAdjYuYu + 59*Sqr(g2) + 136*Sqr(g3)) + Sqr(g2)*(18*threeLoop*
@@ -145,9 +145,9 @@ Eigen::Matrix<double,3,3> MSSMNoFVatMGUTHimalaya_susy_parameters::calc_beta_Yd_3
       Yu.adjoint()*Yu) + 0.02*threeLoop*(7*Quad(g1) + 30*Sqr(g1)*(17*Sqr(g2) +
       32*Sqr(g3)) + 75*Sqr(g2)*(-27*Sqr(g2) + 64*Sqr(g3)))*(Yd*Yd.adjoint()*Yd*
       1.2020569031595942))*UNITMATRIX(3)).real();
-   const Eigen::Matrix<double,3,3> beta_Yd_2 = ((-0.4*threeLoop*(680*Quad
-      (g3) + 3*((9*traceAdjYdYd - 7*traceAdjYeYe)*Sqr(g1) + 15*(3*traceAdjYdYd
-      + traceAdjYeYe)*Sqr(g2)) - 360*traceAdjYdYd*Sqr(g3))*(Yd*Yd.adjoint()*Yd*
+   const Eigen::Matrix<double,3,3> beta_Yd_2 = ((-0.4*threeLoop*(680*Quad(g3) +
+      3*((9*traceAdjYdYd - 7*traceAdjYeYe)*Sqr(g1) + 15*(3*traceAdjYdYd +
+      traceAdjYeYe)*Sqr(g2)) - 360*traceAdjYdYd*Sqr(g3))*(Yd*Yd.adjoint()*Yd*
       1.2020569031595942) + 0.006666666666666667*threeLoop*(143*Quad(g1) + 10*
       Sqr(g1)*(-72*traceAdjYuYu + 135*Sqr(g2) + 128*Sqr(g3)) - 25*(189*Quad(g2)
       + 544*Quad(g3) - 288*traceAdjYuYu*Sqr(g3)))*(Yd*Yu.adjoint()*Yu*
@@ -166,8 +166,8 @@ Eigen::Matrix<double,3,3> MSSMNoFVatMGUTHimalaya_susy_parameters::calc_beta_Yd_3
       threeLoop*(Yd*Yu.adjoint()*Yu*Yd.adjoint()*Yd*Yu.adjoint()*Yu) + 6*
       threeLoop*(Yd*Yu.adjoint()*Yu*Yu.adjoint()*Yu*Yd.adjoint()*Yd) + 18*
       threeLoop*(Yd*Yd.adjoint()*Yd*Yd.adjoint()*Yd*Yd.adjoint()*Yd*
-      1.2020569031595942) + 6*threeLoop*(Yd*Yu.adjoint()*Yu*Yu.adjoint()*Yu*
-      Yu.adjoint()*Yu*1.2020569031595942))*UNITMATRIX(3)).real();
+      1.2020569031595942) + 6*threeLoop*(Yd*Yu.adjoint()*Yu*Yu.adjoint()*Yu*Yu.
+      adjoint()*Yu*1.2020569031595942))*UNITMATRIX(3)).real();
 
    beta_Yd = beta_Yd_1 + beta_Yd_2;
 

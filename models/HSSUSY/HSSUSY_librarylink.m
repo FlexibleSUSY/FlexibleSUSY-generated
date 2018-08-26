@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.1.0"];
+Print["FlexibleSUSY 2.2.0"];
 Print["HSSUSY"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -39,10 +39,10 @@ fsDefaultSettings = {
       maxIterations -> 0,                (* FlexibleSUSY[1] *)
       solver -> 1,     (* FlexibleSUSY[2] *)
       calculateStandardModelMasses -> 0, (* FlexibleSUSY[3] *)
-      poleMassLoopOrder -> 2,            (* FlexibleSUSY[4] *)
-      ewsbLoopOrder -> 2,                (* FlexibleSUSY[5] *)
+      poleMassLoopOrder -> 4,            (* FlexibleSUSY[4] *)
+      ewsbLoopOrder -> 4,                (* FlexibleSUSY[5] *)
       betaFunctionLoopOrder -> 4,        (* FlexibleSUSY[6] *)
-      thresholdCorrectionsLoopOrder -> 2,(* FlexibleSUSY[7] *)
+      thresholdCorrectionsLoopOrder -> 3,(* FlexibleSUSY[7] *)
       higgs2loopCorrectionAtAs -> 1,     (* FlexibleSUSY[8] *)
       higgs2loopCorrectionAbAs -> 1,     (* FlexibleSUSY[9] *)
       higgs2loopCorrectionAtAt -> 1,     (* FlexibleSUSY[10] *)
@@ -122,6 +122,8 @@ fsHSSUSYDefaultInputParameters = {
    DeltaYt -> 0,
    DeltaOS -> 0,
    Qmatch -> 0,
+   DeltaLambda3L -> 0,
+   ThreeLoopAtAsAs -> 0,
    msq2 -> {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
    msu2 -> {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
    msd2 -> {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
@@ -228,6 +230,8 @@ FSHSSUSYOpenHandle[OptionsPattern[]] :=
             OptionValue[DeltaYt],
             OptionValue[DeltaOS],
             OptionValue[Qmatch],
+            OptionValue[DeltaLambda3L],
+            OptionValue[ThreeLoopAtAsAs],
             OptionValue[msq2][[1,1]],
             OptionValue[msq2][[1,2]],
             OptionValue[msq2][[1,3]],
@@ -372,6 +376,8 @@ FSHSSUSYSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[DeltaYt],
             OptionValue[DeltaOS],
             OptionValue[Qmatch],
+            OptionValue[DeltaLambda3L],
+            OptionValue[ThreeLoopAtAsAs],
             OptionValue[msq2][[1,1]],
             OptionValue[msq2][[1,2]],
             OptionValue[msq2][[1,3]],

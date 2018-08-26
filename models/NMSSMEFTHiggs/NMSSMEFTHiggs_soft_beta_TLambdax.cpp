@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 16:25:36
+// File generated at Sun 26 Aug 2018 14:02:15
 
 #include "NMSSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -79,11 +79,11 @@ double NMSSMEFTHiggs_soft_parameters::calc_beta_TLambdax_1_loop(const Soft_trace
 
    double beta_TLambdax;
 
-   beta_TLambdax = Re(oneOver16PiSqr*(6*traceAdjYdTYd*Lambdax + 2*
-      traceAdjYeTYe*Lambdax + 6*traceAdjYuTYu*Lambdax + 1.2*MassB*Lambdax*Sqr(
-      g1) + 6*MassWB*Lambdax*Sqr(g2) + (3*traceYdAdjYd + traceYeAdjYe + 3*
-      traceYuAdjYu + 12*AbsSqr(Lambdax) - 0.6*Sqr(g1) - 3*Sqr(g2))*TLambdax + 2
-      *Conj(Kappa)*(2*Lambdax*TKappa + Kappa*TLambdax)));
+   beta_TLambdax = Re(oneOver16PiSqr*(6*traceAdjYdTYd*Lambdax + 2*traceAdjYeTYe
+      *Lambdax + 6*traceAdjYuTYu*Lambdax + 1.2*MassB*Lambdax*Sqr(g1) + 6*MassWB
+      *Lambdax*Sqr(g2) + (3*traceYdAdjYd + traceYeAdjYe + 3*traceYuAdjYu + 12*
+      AbsSqr(Lambdax) - 0.6*Sqr(g1) - 3*Sqr(g2))*TLambdax + 2*Conj(Kappa)*(2*
+      Lambdax*TKappa + Kappa*TLambdax)));
 
 
    return beta_TLambdax;
@@ -128,7 +128,7 @@ double NMSSMEFTHiggs_soft_parameters::calc_beta_TLambdax_2_loop(const Soft_trace
       ) - 9*traceYdAdjYdYdAdjYd*TLambdax - 6*traceYdAdjYuYuAdjYd*TLambdax - 3*
       traceYeAdjYeYeAdjYe*TLambdax - 9*traceYuAdjYuYuAdjYu*TLambdax + 4.14*Quad
       (g1)*TLambdax + 7.5*Quad(g2)*TLambdax - 0.4*traceYdAdjYd*Sqr(g1)*TLambdax
-      + 1.2*traceYeAdjYe*Sqr(g1)*TLambdax + 0.8*traceYuAdjYu*Sqr(g1)*TLambdax
+       + 1.2*traceYeAdjYe*Sqr(g1)*TLambdax + 0.8*traceYuAdjYu*Sqr(g1)*TLambdax
       + 1.8*Sqr(g1)*Sqr(g2)*TLambdax + 16*traceYdAdjYd*Sqr(g3)*TLambdax + 16*
       traceYuAdjYu*Sqr(g3)*TLambdax - 50*Sqr(Conj(Lambdax))*Sqr(Lambdax)*
       TLambdax - 8*Kappa*Sqr(Conj(Kappa))*(4*Lambdax*TKappa + Kappa*TLambdax) -

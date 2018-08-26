@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:33:57
+// File generated at Sun 26 Aug 2018 14:41:49
 
 #include "NUTNMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -38,8 +38,8 @@ double NUTNMSSM_susy_parameters::calc_beta_vu_1_loop(const Susy_traces& susy_tra
 
    double beta_vu;
 
-   beta_vu = Re(0.1*oneOver16PiSqr*vu*(-10*AbsSqr(Lambdax) + 3*(Sqr(g1) +
-      5*(-2*traceYuAdjYu + Sqr(g2)))));
+   beta_vu = Re(0.1*oneOver16PiSqr*vu*(-10*AbsSqr(Lambdax) + 3*(Sqr(g1) + 5*(-2
+      *traceYuAdjYu + Sqr(g2)))));
 
 
    return beta_vu;
@@ -61,12 +61,11 @@ double NUTNMSSM_susy_parameters::calc_beta_vu_2_loop(const Susy_traces& susy_tra
 
    double beta_vu;
 
-   beta_vu = Re(-0.005*twoLoop*vu*(207*Quad(g1) + 10*Sqr(g1)*(34*
-      traceYuAdjYu + 9*Sqr(g2)) + 20*AbsSqr(Lambdax)*(-30*traceYdAdjYd - 10*
-      traceYeAdjYe - 20*AbsSqr(Kappa) + 3*Sqr(g1) + 15*Sqr(g2)) + 25*(-24*
-      traceYdAdjYuYuAdjYd - 72*traceYuAdjYuYuAdjYu + 11*Quad(g2) + 36*
-      traceYuAdjYu*Sqr(g2) + 128*traceYuAdjYu*Sqr(g3)) - 600*Sqr(Conj(Lambdax))
-      *Sqr(Lambdax)));
+   beta_vu = Re(-0.005*twoLoop*vu*(207*Quad(g1) + 10*Sqr(g1)*(34*traceYuAdjYu +
+      9*Sqr(g2)) + 20*AbsSqr(Lambdax)*(-30*traceYdAdjYd - 10*traceYeAdjYe - 20*
+      AbsSqr(Kappa) + 3*Sqr(g1) + 15*Sqr(g2)) + 25*(-24*traceYdAdjYuYuAdjYd -
+      72*traceYuAdjYuYuAdjYu + 11*Quad(g2) + 36*traceYuAdjYu*Sqr(g2) + 128*
+      traceYuAdjYu*Sqr(g3)) - 600*Sqr(Conj(Lambdax))*Sqr(Lambdax)));
 
 
    return beta_vu;

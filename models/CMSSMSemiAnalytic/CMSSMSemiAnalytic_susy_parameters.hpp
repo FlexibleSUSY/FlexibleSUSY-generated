@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 19:06:48
+// File generated at Sun 26 Aug 2018 15:24:19
 
 #ifndef CMSSMSemiAnalytic_susy_parameters_H
 #define CMSSMSemiAnalytic_susy_parameters_H
@@ -39,10 +39,9 @@ namespace flexiblesusy {
 class CMSSMSemiAnalytic_susy_parameters : public Beta_function {
 public:
    explicit CMSSMSemiAnalytic_susy_parameters(const CMSSMSemiAnalytic_input_parameters& input_ = CMSSMSemiAnalytic_input_parameters());
-   CMSSMSemiAnalytic_susy_parameters(double scale_, int loops_, int thresholds_, const CMSSMSemiAnalytic_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
-   , const Eigen::Matrix<double,3,3>& Yu_, double Mu_, double g1_, double g2_,
-   double g3_, double vd_, double vu_
-);
+   CMSSMSemiAnalytic_susy_parameters(double scale_, int loops_, int thresholds_, const CMSSMSemiAnalytic_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_,
+   const Eigen::Matrix<double,3,3>& Yu_, double Mu_, double g1_, double g2_,
+   double g3_, double vd_, double vu_);
    CMSSMSemiAnalytic_susy_parameters(const CMSSMSemiAnalytic_susy_parameters&) = default;
    CMSSMSemiAnalytic_susy_parameters(CMSSMSemiAnalytic_susy_parameters&&) = default;
    virtual ~CMSSMSemiAnalytic_susy_parameters() = default;

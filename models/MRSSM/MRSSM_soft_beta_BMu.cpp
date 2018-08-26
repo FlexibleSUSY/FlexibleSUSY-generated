@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:48:00
+// File generated at Sun 26 Aug 2018 14:43:58
 
 #include "MRSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -76,9 +76,9 @@ double MRSSM_soft_parameters::calc_beta_BMu_1_loop(const Soft_traces& soft_trace
 
    double beta_BMu;
 
-   beta_BMu = Re(0.1*oneOver16PiSqr*BMu*(30*traceYdAdjYd + 10*
-      traceYeAdjYe + 30*traceYuAdjYu + 10*AbsSqr(LamSD) + 10*AbsSqr(LamSU) + 15
-      *AbsSqr(LamTD) + 15*AbsSqr(LamTU) - 6*Sqr(g1) - 30*Sqr(g2)));
+   beta_BMu = Re(0.1*oneOver16PiSqr*BMu*(30*traceYdAdjYd + 10*traceYeAdjYe + 30
+      *traceYuAdjYu + 10*AbsSqr(LamSD) + 10*AbsSqr(LamSU) + 15*AbsSqr(LamTD) +
+      15*AbsSqr(LamTU) - 6*Sqr(g1) - 30*Sqr(g2)));
 
 
    return beta_BMu;

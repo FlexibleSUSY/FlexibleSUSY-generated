@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:42:11
+// File generated at Sun 26 Aug 2018 14:09:56
 
 #include "SplitMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -102,11 +102,11 @@ double SplitMSSM_soft_parameters::calc_beta_v_2_loop(const Soft_traces& soft_tra
 
    double beta_v;
 
-   beta_v = Re(-0.00125*twoLoop*v*(1341*Quad(g1) + 10*Sqr(g1)*(122*
-      traceYdAdjYd + 174*traceYeAdjYe + 242*traceYuAdjYu - 45*Sqr(g2) + 81*Sqr(
-      g2d) + 81*Sqr(g2u) + 27*Sqr(gYd) + 27*Sqr(gYu)) - 25*(259*Quad(g2) - 6*
-      Sqr(g2)*(67*Sqr(g2d) + 67*Sqr(g2u) + 9*(6*traceYdAdjYd + 2*traceYeAdjYe +
-      6*traceYuAdjYu + Sqr(gYd) + Sqr(gYu))) + 2*(48*g2d*g2u*gYd*gYu + 108*
+   beta_v = Re(-0.00125*twoLoop*v*(1341*Quad(g1) + 10*Sqr(g1)*(122*traceYdAdjYd
+       + 174*traceYeAdjYe + 242*traceYuAdjYu - 45*Sqr(g2) + 81*Sqr(g2d) + 81*
+      Sqr(g2u) + 27*Sqr(gYd) + 27*Sqr(gYu)) - 25*(259*Quad(g2) - 6*Sqr(g2)*(67*
+      Sqr(g2d) + 67*Sqr(g2u) + 9*(6*traceYdAdjYd + 2*traceYeAdjYe + 6*
+      traceYuAdjYu + Sqr(gYd) + Sqr(gYu))) + 2*(48*g2d*g2u*gYd*gYu + 108*
       traceYdAdjYdYdAdjYd - 24*traceYdAdjYuYuAdjYd + 36*traceYeAdjYeYeAdjYe +
       108*traceYuAdjYuYuAdjYu + 45*Quad(g2d) + 45*Quad(g2u) + 9*Quad(gYd) + 9*
       Quad(gYu) - 320*traceYdAdjYd*Sqr(g3) - 320*traceYuAdjYu*Sqr(g3) + 6*Sqr(

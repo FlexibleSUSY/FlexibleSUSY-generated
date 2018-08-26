@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 14:59:54
+// File generated at Sun 26 Aug 2018 13:49:45
 
 #include "NUHMSSMNoFVHimalaya_slha_io.hpp"
 #include "NUHMSSMNoFVHimalaya_input_parameters.hpp"
@@ -861,9 +861,8 @@ void NUHMSSMNoFVHimalaya_slha_io::fill_physical(NUHMSSMNoFVHimalaya_physical& ph
 double NUHMSSMNoFVHimalaya_slha_io::read_scale() const
 {
    static const std::array<std::string, 14> drbar_blocks =
-      { "gauge", "Yu", "Yd", "Ye", "Te", "Td", "Tu", "HMIX", "MSQ2", "MSE2",
-   "MSL2", "MSU2", "MSD2", "MSOFT" }
-;
+      { "gauge", "Yu", "Yd", "Ye", "Te", "Td", "Tu", "HMIX", "MSQ2", "MSE2", "MSL2",
+   "MSU2", "MSD2", "MSOFT" };
 
    double scale = 0.;
 

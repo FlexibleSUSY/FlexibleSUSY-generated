@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:45:10
+// File generated at Sun 26 Aug 2018 14:11:01
 
 #include "SM_info.hpp"
 
@@ -29,21 +29,21 @@ namespace SM_info {
    const double normalization_g2 = 1;
    const double normalization_g3 = 1;
 
-   const std::array<int, NUMBER_OF_PARTICLES> particle_multiplicities = {1, 1,
-      3, 1, 1, 3, 3, 3, 1, 1, 1};
+   const std::array<int, NUMBER_OF_PARTICLES> particle_multiplicities = {1, 1, 3,
+      1, 1, 3, 3, 3, 1, 1, 1};
 
-   const std::array<std::string, NUMBER_OF_PARTICLES> particle_names = {"VG",
-      "Hp", "Fv", "Ah", "hh", "Fd", "Fu", "Fe", "VWp", "VP", "VZ"};
+   const std::array<std::string, NUMBER_OF_PARTICLES> particle_names = {"VG", "Hp"
+      , "Fv", "Ah", "hh", "Fd", "Fu", "Fe", "VWp", "VP", "VZ"};
 
    const std::array<std::string, NUMBER_OF_PARTICLES> particle_latex_names = {
       "g", "H^+", "\\nu", "A^0", "h", "d", "u", "e", "W^+", "\\gamma", "Z"};
 
    const std::array<std::string, NUMBER_OF_PARAMETERS> parameter_names = {"g1",
-      "g2", "g3", "Lambdax", "Yu(0,0)", "Yu(0,1)", "Yu(0,2)", "Yu(1,0)",
-      "Yu(1,1)", "Yu(1,2)", "Yu(2,0)", "Yu(2,1)", "Yu(2,2)", "Yd(0,0)", "Yd(0,1)",
-      "Yd(0,2)", "Yd(1,0)", "Yd(1,1)", "Yd(1,2)", "Yd(2,0)", "Yd(2,1)", "Yd(2,2)"
-      , "Ye(0,0)", "Ye(0,1)", "Ye(0,2)", "Ye(1,0)", "Ye(1,1)", "Ye(1,2)",
-      "Ye(2,0)", "Ye(2,1)", "Ye(2,2)", "mu2", "v"};
+      "g2", "g3", "Lambdax", "Yu(0,0)", "Yu(0,1)", "Yu(0,2)", "Yu(1,0)", "Yu(1,1)"
+      , "Yu(1,2)", "Yu(2,0)", "Yu(2,1)", "Yu(2,2)", "Yd(0,0)", "Yd(0,1)",
+      "Yd(0,2)", "Yd(1,0)", "Yd(1,1)", "Yd(1,2)", "Yd(2,0)", "Yd(2,1)", "Yd(2,2)",
+      "Ye(0,0)", "Ye(0,1)", "Ye(0,2)", "Ye(1,0)", "Ye(1,1)", "Ye(1,2)", "Ye(2,0)",
+      "Ye(2,1)", "Ye(2,2)", "mu2", "v"};
 
    const std::array<std::string, NUMBER_OF_MIXINGS> particle_mixing_names = {
       "Re(Vd(0,0))", "Im(Vd(0,0))", "Re(Vd(0,1))", "Im(Vd(0,1))", "Re(Vd(0,2))",
@@ -70,11 +70,11 @@ namespace SM_info {
       "Im(Ue(2,1))", "Re(Ue(2,2))", "Im(Ue(2,2))", "ZZ(0,0)", "ZZ(0,1)", "ZZ(1,0)"
       , "ZZ(1,1)"};
 
-   const std::array<std::string, NUMBER_OF_INPUT_PARAMETERS>
-      input_parameter_names = {"LambdaIN", "Qin", "QEWSB"};
+   const std::array<std::string, NUMBER_OF_INPUT_PARAMETERS> input_parameter_names
+       = {"LambdaIN", "Qin", "QEWSB"};
 
-   const std::array<std::string, NUMBER_OF_EXTRA_PARAMETERS>
-      extra_parameter_names = {};
+   const std::array<std::string, NUMBER_OF_EXTRA_PARAMETERS> extra_parameter_names
+       = {};
 
    const std::string model_name = "SM";
 

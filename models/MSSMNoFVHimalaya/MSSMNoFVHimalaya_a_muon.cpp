@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 15:00:14
+// File generated at Sun 26 Aug 2018 13:50:21
 
 /**
  * @file MSSMNoFVHimalaya_a_muon.cpp
  *
- * This file was generated at Mon 5 Mar 2018 15:00:14 with FlexibleSUSY
- * 2.1.0 and SARAH 4.12.3 .
+ * This file was generated at Sun 26 Aug 2018 13:50:21 with FlexibleSUSY
+ * 2.2.0 and SARAH 4.13.0 .
  */
 
 #include "MSSMNoFVHimalaya_a_muon.hpp"
@@ -217,13 +217,12 @@ double OneLoopFunctionF2N(double x)
 
 double get_MSUSY(const MSSMNoFVHimalaya_mass_eigenstates& model)
 {
-   return Min(model.get_MSd().tail<2>().minCoeff(), model.get_MSu().tail<2>()
-      .minCoeff(), model.get_MSe().tail<2>().minCoeff(), model.get_MSm().tail<2>()
-      .minCoeff(), model.get_MStau().tail<2>().minCoeff(), model.get_MSs().tail<2>
-      ().minCoeff(), model.get_MSc().tail<2>().minCoeff(), model.get_MSb().tail<2>
-      ().minCoeff(), model.get_MSt().tail<2>().minCoeff(), model.get_MHpm().tail<1
-      >().minCoeff(), model.get_MCha().tail<2>().minCoeff());
-
+   return Min(model.get_MSd().tail<2>().minCoeff(), model.get_MSu().tail<2>().
+      minCoeff(), model.get_MSe().tail<2>().minCoeff(), model.get_MSm().tail<2>().
+      minCoeff(), model.get_MStau().tail<2>().minCoeff(), model.get_MSs().tail<2>(
+      ).minCoeff(), model.get_MSc().tail<2>().minCoeff(), model.get_MSb().tail<2>(
+      ).minCoeff(), model.get_MSt().tail<2>().minCoeff(), model.get_MHpm().tail<1>
+      ().minCoeff(), model.get_MCha().tail<2>().minCoeff());
 }
 
 void run_to_MSUSY(MSSMNoFVHimalaya_mass_eigenstates& model)

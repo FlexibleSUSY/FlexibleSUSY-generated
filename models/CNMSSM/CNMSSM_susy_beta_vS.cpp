@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 15:11:27
+// File generated at Sun 26 Aug 2018 13:52:54
 
 #include "CNMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -57,8 +57,8 @@ double CNMSSM_susy_parameters::calc_beta_vS_2_loop(const Susy_traces& susy_trace
 
    double beta_vS;
 
-   beta_vS = Re(twoLoop*(8*vS*AbsSqr(Kappa)*AbsSqr(Lambdax) + 0.4*vS*
-      AbsSqr(Lambdax)*(10*AbsSqr(Lambdax) - 3*Sqr(g1) + 5*(3*traceYdAdjYd +
+   beta_vS = Re(twoLoop*(8*vS*AbsSqr(Kappa)*AbsSqr(Lambdax) + 0.4*vS*AbsSqr(
+      Lambdax)*(10*AbsSqr(Lambdax) - 3*Sqr(g1) + 5*(3*traceYdAdjYd +
       traceYeAdjYe + 3*traceYuAdjYu - 3*Sqr(g2))) + 8*vS*Sqr(Conj(Kappa))*Sqr(
       Kappa)));
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:57:53
+// File generated at Sun 26 Aug 2018 14:18:31
 
 #ifndef E6SSM_soft_parameters_H
 #define E6SSM_soft_parameters_H
@@ -35,18 +35,17 @@ namespace flexiblesusy {
 class E6SSM_soft_parameters : public E6SSM_susy_parameters {
 public:
    explicit E6SSM_soft_parameters(const E6SSM_input_parameters& input_ = E6SSM_input_parameters());
-   E6SSM_soft_parameters(const E6SSM_susy_parameters& , const Eigen::Matrix<double,3,3>& TYd_, const Eigen::Matrix<double,3,3>&
-   TYe_, const Eigen::Matrix<double,3,3>& TKappa_, const Eigen::Matrix<double,2
-   ,2>& TLambda12_, double TLambdax_, const Eigen::Matrix<double,3,3>& TYu_,
-   double BMuPr_, const Eigen::Matrix<double,3,3>& mq2_, const Eigen::Matrix<
-   double,3,3>& ml2_, double mHd2_, double mHu2_, const Eigen::Matrix<double,3,
-   3>& md2_, const Eigen::Matrix<double,3,3>& mu2_, const Eigen::Matrix<double,
-   3,3>& me2_, double ms2_, const Eigen::Matrix<double,2,2>& mH1I2_, const
-   Eigen::Matrix<double,2,2>& mH2I2_, const Eigen::Matrix<double,2,2>& msI2_,
-   const Eigen::Matrix<double,3,3>& mDx2_, const Eigen::Matrix<double,3,3>&
-   mDxbar2_, double mHp2_, double mHpbar2_, double MassB_, double MassWB_,
-   double MassG_, double MassBp_
-);
+   E6SSM_soft_parameters(const E6SSM_susy_parameters& , const Eigen::Matrix<double,3,3>& TYd_, const Eigen::Matrix<double,3,3>& TYe_,
+   const Eigen::Matrix<double,3,3>& TKappa_, const Eigen::Matrix<double,2,2>&
+   TLambda12_, double TLambdax_, const Eigen::Matrix<double,3,3>& TYu_, double
+   BMuPr_, const Eigen::Matrix<double,3,3>& mq2_, const Eigen::Matrix<double,3,
+   3>& ml2_, double mHd2_, double mHu2_, const Eigen::Matrix<double,3,3>& md2_,
+   const Eigen::Matrix<double,3,3>& mu2_, const Eigen::Matrix<double,3,3>& me2_
+   , double ms2_, const Eigen::Matrix<double,2,2>& mH1I2_, const Eigen::Matrix<
+   double,2,2>& mH2I2_, const Eigen::Matrix<double,2,2>& msI2_, const Eigen::
+   Matrix<double,3,3>& mDx2_, const Eigen::Matrix<double,3,3>& mDxbar2_, double
+    mHp2_, double mHpbar2_, double MassB_, double MassWB_, double MassG_,
+   double MassBp_);
    E6SSM_soft_parameters(const E6SSM_soft_parameters&) = default;
    E6SSM_soft_parameters(E6SSM_soft_parameters&&) = default;
    virtual ~E6SSM_soft_parameters() = default;

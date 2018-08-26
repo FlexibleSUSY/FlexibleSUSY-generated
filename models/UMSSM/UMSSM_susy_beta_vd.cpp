@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:29:59
+// File generated at Sun 26 Aug 2018 14:20:53
 
 #include "UMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -40,8 +40,8 @@ double UMSSM_susy_parameters::calc_beta_vd_1_loop(const Susy_traces& susy_traces
 
    double beta_vd;
 
-   beta_vd = Re(0.1*oneOver16PiSqr*vd*(-10*AbsSqr(Lambdax) + 3*Sqr(g1) +
-      5*(-6*traceYdAdjYd - 2*traceYeAdjYe + 3*Sqr(g2) + 4*Sqr(gp)*Sqr(QHd))));
+   beta_vd = Re(0.1*oneOver16PiSqr*vd*(-10*AbsSqr(Lambdax) + 3*Sqr(g1) + 5*(-6*
+      traceYdAdjYd - 2*traceYeAdjYe + 3*Sqr(g2) + 4*Sqr(gp)*Sqr(QHd))));
 
 
    return beta_vd;
@@ -70,23 +70,22 @@ double UMSSM_susy_parameters::calc_beta_vd_2_loop(const Susy_traces& susy_traces
    const double traceYdAdjYdYdAdjYd = TRACE_STRUCT.traceYdAdjYdYdAdjYd;
    const double traceYdAdjYuYuAdjYd = TRACE_STRUCT.traceYdAdjYuYuAdjYd;
    const double traceYeAdjYeYeAdjYe = TRACE_STRUCT.traceYeAdjYeYeAdjYe;
-   const double traceYvAdjYvTpYeconjYe =
-      TRACE_STRUCT.traceYvAdjYvTpYeconjYe;
+   const double traceYvAdjYvTpYeconjYe = TRACE_STRUCT.traceYvAdjYvTpYeconjYe;
 
 
    double beta_vd;
 
-   beta_vd = Re(-0.005*twoLoop*vd*(207*Quad(g1) + 10*Sqr(g1)*(10*(
-      traceYdAdjYd + 3*traceYeAdjYe) + 9*Sqr(g2) - 12*QHd*(3*Qd + 3*Qe - 2*QHd
-      + QHu - 3*Ql + 3*Qq - 6*Qu)*Sqr(gp)) + 20*AbsSqr(Lambdax)*(3*Sqr(g1) + 5*
-      (-2*(3*traceYuAdjYu + traceYvAdjYv) + 3*Sqr(g2) + 4*Sqr(gp)*(Sqr(QHu) +
-      Sqr(Qs)))) + 25*(11*Quad(g2) + 12*Sqr(g2)*(3*traceYdAdjYd + traceYeAdjYe
-      + 2*Sqr(gp)*Sqr(QHd)) + 8*(-9*traceYdAdjYdYdAdjYd - 3*traceYdAdjYuYuAdjYd
-      - 3*traceYeAdjYeYeAdjYe - traceYvAdjYvTpYeconjYe + 16*traceYdAdjYd*Sqr(
-      g3) + 2*Sqr(gp)*(3*traceYdAdjYd*Sqr(Qd) + traceYeAdjYe*(Sqr(Qe) + Sqr(Ql)
-      ) + 3*traceYdAdjYd*Sqr(Qq)) + Quad(gp)*Sqr(QHd)*(9*Sqr(Qd) + 3*Sqr(Qe) +
-      4*Sqr(QHd) + 2*Sqr(QHu) + 6*Sqr(Ql) + 18*Sqr(Qq) + Sqr(Qs) + 9*Sqr(Qu) +
-      3*Sqr(Qv)))) - 600*Sqr(Conj(Lambdax))*Sqr(Lambdax)));
+   beta_vd = Re(-0.005*twoLoop*vd*(207*Quad(g1) + 10*Sqr(g1)*(10*(traceYdAdjYd
+      + 3*traceYeAdjYe) + 9*Sqr(g2) - 12*QHd*(3*Qd + 3*Qe - 2*QHd + QHu - 3*Ql
+      + 3*Qq - 6*Qu)*Sqr(gp)) + 20*AbsSqr(Lambdax)*(3*Sqr(g1) + 5*(-2*(3*
+      traceYuAdjYu + traceYvAdjYv) + 3*Sqr(g2) + 4*Sqr(gp)*(Sqr(QHu) + Sqr(Qs))
+      )) + 25*(11*Quad(g2) + 12*Sqr(g2)*(3*traceYdAdjYd + traceYeAdjYe + 2*Sqr(
+      gp)*Sqr(QHd)) + 8*(-9*traceYdAdjYdYdAdjYd - 3*traceYdAdjYuYuAdjYd - 3*
+      traceYeAdjYeYeAdjYe - traceYvAdjYvTpYeconjYe + 16*traceYdAdjYd*Sqr(g3) +
+      2*Sqr(gp)*(3*traceYdAdjYd*Sqr(Qd) + traceYeAdjYe*(Sqr(Qe) + Sqr(Ql)) + 3*
+      traceYdAdjYd*Sqr(Qq)) + Quad(gp)*Sqr(QHd)*(9*Sqr(Qd) + 3*Sqr(Qe) + 4*Sqr(
+      QHd) + 2*Sqr(QHu) + 6*Sqr(Ql) + 18*Sqr(Qq) + Sqr(Qs) + 9*Sqr(Qu) + 3*Sqr(
+      Qv)))) - 600*Sqr(Conj(Lambdax))*Sqr(Lambdax)));
 
 
    return beta_vd;

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 15:30:39
+// File generated at Sun 26 Aug 2018 13:59:49
 
 /**
  * @file CNMSSM_semi_analytic_model.hpp
@@ -24,8 +24,8 @@
  *        value problem using the semi_analytic solver by solving EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Mon 5 Mar 2018 15:30:39 with FlexibleSUSY
- * 2.1.0 (git commit: 8f20f6c9c42c159c1588fbc0bb3e15ce5ab6ace3) and SARAH 4.12.3 .
+ * This file was generated at Sun 26 Aug 2018 13:59:49 with FlexibleSUSY
+ * 2.2.0 (git commit: 8489097de2d6938a6da0149378457b5ad13d9425) and SARAH 4.13.0 .
  */
 
 #ifndef CNMSSM_SEMI_ANALYTIC_MODEL_H
@@ -92,20 +92,20 @@ public:
    double get_MassWBCoeff1() const { return solutions.get_MassWBCoeff1(); }
    double get_MassWBCoeff2() const { return solutions.get_MassWBCoeff2(); }
 
-   const Eigen::Matrix<double,3,3>& get_TYdCoeff1() const { return
-      solutions.get_TYdCoeff1(); }
-   const Eigen::Matrix<double,3,3>& get_TYdCoeff2() const { return
-      solutions.get_TYdCoeff2(); }
+   const Eigen::Matrix<double,3,3>& get_TYdCoeff1() const { return solutions.
+      get_TYdCoeff1(); }
+   const Eigen::Matrix<double,3,3>& get_TYdCoeff2() const { return solutions.
+      get_TYdCoeff2(); }
 
-   const Eigen::Matrix<double,3,3>& get_TYeCoeff1() const { return
-      solutions.get_TYeCoeff1(); }
-   const Eigen::Matrix<double,3,3>& get_TYeCoeff2() const { return
-      solutions.get_TYeCoeff2(); }
+   const Eigen::Matrix<double,3,3>& get_TYeCoeff1() const { return solutions.
+      get_TYeCoeff1(); }
+   const Eigen::Matrix<double,3,3>& get_TYeCoeff2() const { return solutions.
+      get_TYeCoeff2(); }
 
-   const Eigen::Matrix<double,3,3>& get_TYuCoeff1() const { return
-      solutions.get_TYuCoeff1(); }
-   const Eigen::Matrix<double,3,3>& get_TYuCoeff2() const { return
-      solutions.get_TYuCoeff2(); }
+   const Eigen::Matrix<double,3,3>& get_TYuCoeff1() const { return solutions.
+      get_TYuCoeff1(); }
+   const Eigen::Matrix<double,3,3>& get_TYuCoeff2() const { return solutions.
+      get_TYuCoeff2(); }
 
    double get_TKappaCoeff1() const { return solutions.get_TKappaCoeff1(); }
    double get_TKappaCoeff2() const { return solutions.get_TKappaCoeff2(); }
@@ -113,23 +113,23 @@ public:
    double get_TLambdaxCoeff1() const { return solutions.get_TLambdaxCoeff1(); }
    double get_TLambdaxCoeff2() const { return solutions.get_TLambdaxCoeff2(); }
 
-   const Eigen::Matrix<double,3,3>& get_md2Coeff1() const { return
-      solutions.get_md2Coeff1(); }
-   const Eigen::Matrix<double,3,3>& get_md2Coeff2() const { return
-      solutions.get_md2Coeff2(); }
-   const Eigen::Matrix<double,3,3>& get_md2Coeff3() const { return
-      solutions.get_md2Coeff3(); }
-   const Eigen::Matrix<double,3,3>& get_md2Coeff4() const { return
-      solutions.get_md2Coeff4(); }
+   const Eigen::Matrix<double,3,3>& get_md2Coeff1() const { return solutions.
+      get_md2Coeff1(); }
+   const Eigen::Matrix<double,3,3>& get_md2Coeff2() const { return solutions.
+      get_md2Coeff2(); }
+   const Eigen::Matrix<double,3,3>& get_md2Coeff3() const { return solutions.
+      get_md2Coeff3(); }
+   const Eigen::Matrix<double,3,3>& get_md2Coeff4() const { return solutions.
+      get_md2Coeff4(); }
 
-   const Eigen::Matrix<double,3,3>& get_me2Coeff1() const { return
-      solutions.get_me2Coeff1(); }
-   const Eigen::Matrix<double,3,3>& get_me2Coeff2() const { return
-      solutions.get_me2Coeff2(); }
-   const Eigen::Matrix<double,3,3>& get_me2Coeff3() const { return
-      solutions.get_me2Coeff3(); }
-   const Eigen::Matrix<double,3,3>& get_me2Coeff4() const { return
-      solutions.get_me2Coeff4(); }
+   const Eigen::Matrix<double,3,3>& get_me2Coeff1() const { return solutions.
+      get_me2Coeff1(); }
+   const Eigen::Matrix<double,3,3>& get_me2Coeff2() const { return solutions.
+      get_me2Coeff2(); }
+   const Eigen::Matrix<double,3,3>& get_me2Coeff3() const { return solutions.
+      get_me2Coeff3(); }
+   const Eigen::Matrix<double,3,3>& get_me2Coeff4() const { return solutions.
+      get_me2Coeff4(); }
 
    double get_mHd2Coeff1() const { return solutions.get_mHd2Coeff1(); }
    double get_mHd2Coeff2() const { return solutions.get_mHd2Coeff2(); }
@@ -141,37 +141,37 @@ public:
    double get_mHu2Coeff3() const { return solutions.get_mHu2Coeff3(); }
    double get_mHu2Coeff4() const { return solutions.get_mHu2Coeff4(); }
 
-   const Eigen::Matrix<double,3,3>& get_ml2Coeff1() const { return
-      solutions.get_ml2Coeff1(); }
-   const Eigen::Matrix<double,3,3>& get_ml2Coeff2() const { return
-      solutions.get_ml2Coeff2(); }
-   const Eigen::Matrix<double,3,3>& get_ml2Coeff3() const { return
-      solutions.get_ml2Coeff3(); }
-   const Eigen::Matrix<double,3,3>& get_ml2Coeff4() const { return
-      solutions.get_ml2Coeff4(); }
+   const Eigen::Matrix<double,3,3>& get_ml2Coeff1() const { return solutions.
+      get_ml2Coeff1(); }
+   const Eigen::Matrix<double,3,3>& get_ml2Coeff2() const { return solutions.
+      get_ml2Coeff2(); }
+   const Eigen::Matrix<double,3,3>& get_ml2Coeff3() const { return solutions.
+      get_ml2Coeff3(); }
+   const Eigen::Matrix<double,3,3>& get_ml2Coeff4() const { return solutions.
+      get_ml2Coeff4(); }
 
-   const Eigen::Matrix<double,3,3>& get_mq2Coeff1() const { return
-      solutions.get_mq2Coeff1(); }
-   const Eigen::Matrix<double,3,3>& get_mq2Coeff2() const { return
-      solutions.get_mq2Coeff2(); }
-   const Eigen::Matrix<double,3,3>& get_mq2Coeff3() const { return
-      solutions.get_mq2Coeff3(); }
-   const Eigen::Matrix<double,3,3>& get_mq2Coeff4() const { return
-      solutions.get_mq2Coeff4(); }
+   const Eigen::Matrix<double,3,3>& get_mq2Coeff1() const { return solutions.
+      get_mq2Coeff1(); }
+   const Eigen::Matrix<double,3,3>& get_mq2Coeff2() const { return solutions.
+      get_mq2Coeff2(); }
+   const Eigen::Matrix<double,3,3>& get_mq2Coeff3() const { return solutions.
+      get_mq2Coeff3(); }
+   const Eigen::Matrix<double,3,3>& get_mq2Coeff4() const { return solutions.
+      get_mq2Coeff4(); }
 
    double get_ms2Coeff1() const { return solutions.get_ms2Coeff1(); }
    double get_ms2Coeff2() const { return solutions.get_ms2Coeff2(); }
    double get_ms2Coeff3() const { return solutions.get_ms2Coeff3(); }
    double get_ms2Coeff4() const { return solutions.get_ms2Coeff4(); }
 
-   const Eigen::Matrix<double,3,3>& get_mu2Coeff1() const { return
-      solutions.get_mu2Coeff1(); }
-   const Eigen::Matrix<double,3,3>& get_mu2Coeff2() const { return
-      solutions.get_mu2Coeff2(); }
-   const Eigen::Matrix<double,3,3>& get_mu2Coeff3() const { return
-      solutions.get_mu2Coeff3(); }
-   const Eigen::Matrix<double,3,3>& get_mu2Coeff4() const { return
-      solutions.get_mu2Coeff4(); }
+   const Eigen::Matrix<double,3,3>& get_mu2Coeff1() const { return solutions.
+      get_mu2Coeff1(); }
+   const Eigen::Matrix<double,3,3>& get_mu2Coeff2() const { return solutions.
+      get_mu2Coeff2(); }
+   const Eigen::Matrix<double,3,3>& get_mu2Coeff3() const { return solutions.
+      get_mu2Coeff3(); }
+   const Eigen::Matrix<double,3,3>& get_mu2Coeff4() const { return solutions.
+      get_mu2Coeff4(); }
 
 private:
    /// semi-analytic solutions for the model soft parameters

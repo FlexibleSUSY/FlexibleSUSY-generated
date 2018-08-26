@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 15:30:32
+// File generated at Sun 26 Aug 2018 13:59:40
 
 #ifndef CNMSSM_SUSY_CONVERGENCE_TESTER_H
 #define CNMSSM_SUSY_CONVERGENCE_TESTER_H

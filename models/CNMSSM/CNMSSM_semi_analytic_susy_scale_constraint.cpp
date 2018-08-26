@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 15:30:34
+// File generated at Sun 26 Aug 2018 13:59:42
 
 #include "CNMSSM_semi_analytic_susy_scale_constraint.hpp"
 #include "CNMSSM_semi_analytic_model.hpp"
@@ -71,12 +71,14 @@ void CNMSSM_susy_scale_constraint<Semi_analytic>::apply()
 {
    check_model_ptr();
 
+   
 
 
    model->calculate_DRbar_masses();
    update_scale();
 
    // apply user-defined susy scale constraints
+   
 
 
 

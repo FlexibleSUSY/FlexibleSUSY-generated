@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:44:24
+// File generated at Sun 26 Aug 2018 14:10:19
 
 #include "SplitMSSM_slha_io.hpp"
 #include "SplitMSSM_input_parameters.hpp"
@@ -701,8 +701,7 @@ void SplitMSSM_slha_io::fill_physical(SplitMSSM_physical& physical) const
 double SplitMSSM_slha_io::read_scale() const
 {
    static const std::array<std::string, 8> drbar_blocks =
-      { "gauge", "Yu", "Yd", "Ye", "SM", "HMIX", "MSOFT", "SplitMSSM" }
-;
+      { "gauge", "Yu", "Yd", "Ye", "SM", "HMIX", "MSOFT", "SplitMSSM" };
 
    double scale = 0.;
 

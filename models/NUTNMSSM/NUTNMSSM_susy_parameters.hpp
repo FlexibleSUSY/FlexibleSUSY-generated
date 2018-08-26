@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:33:54
+// File generated at Sun 26 Aug 2018 14:41:44
 
 #ifndef NUTNMSSM_susy_parameters_H
 #define NUTNMSSM_susy_parameters_H
@@ -39,10 +39,9 @@ namespace flexiblesusy {
 class NUTNMSSM_susy_parameters : public Beta_function {
 public:
    explicit NUTNMSSM_susy_parameters(const NUTNMSSM_input_parameters& input_ = NUTNMSSM_input_parameters());
-   NUTNMSSM_susy_parameters(double scale_, int loops_, int thresholds_, const NUTNMSSM_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_
-   , double Lambdax_, double Kappa_, const Eigen::Matrix<double,3,3>& Yu_,
-   double g1_, double g2_, double g3_, double vd_, double vu_, double vS_
-);
+   NUTNMSSM_susy_parameters(double scale_, int loops_, int thresholds_, const NUTNMSSM_input_parameters& input_, const Eigen::Matrix<double,3,3>& Yd_, const Eigen::Matrix<double,3,3>& Ye_,
+   double Lambdax_, double Kappa_, const Eigen::Matrix<double,3,3>& Yu_, double
+    g1_, double g2_, double g3_, double vd_, double vu_, double vS_);
    NUTNMSSM_susy_parameters(const NUTNMSSM_susy_parameters&) = default;
    NUTNMSSM_susy_parameters(NUTNMSSM_susy_parameters&&) = default;
    virtual ~NUTNMSSM_susy_parameters() = default;

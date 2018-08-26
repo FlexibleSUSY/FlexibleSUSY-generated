@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 15:30:34
+// File generated at Sun 26 Aug 2018 13:59:42
 
 #include "CNMSSM_semi_analytic_soft_parameters_constraint.hpp"
 #include "CNMSSM_semi_analytic_model.hpp"
@@ -61,6 +61,7 @@ void CNMSSM_soft_parameters_constraint<Semi_analytic>::apply()
 {
    check_model_ptr();
 
+   
 
 
    const double boundary_scale = get_boundary_scale();
@@ -69,6 +70,7 @@ void CNMSSM_soft_parameters_constraint<Semi_analytic>::apply()
    update_scale();
 
    // apply user-defined constraints
+   
    MODEL->solve_ewsb();
 
 
@@ -113,11 +115,11 @@ void CNMSSM_soft_parameters_constraint<Semi_analytic>::update_scale()
    const auto ZU = MODELPARAMETER(ZU);
    const auto MSu = MODELPARAMETER(MSu);
 
-   scale = Sqrt(Power(MSu(0),Sqr(Abs(ZU(0,2))) + Sqr(Abs(ZU(0,5))))*Power(MSu(1
-      ),Sqr(Abs(ZU(1,2))) + Sqr(Abs(ZU(1,5))))*Power(MSu(2),Sqr(Abs(ZU(2,2))) +
-      Sqr(Abs(ZU(2,5))))*Power(MSu(3),Sqr(Abs(ZU(3,2))) + Sqr(Abs(ZU(3,5))))*Power
-      (MSu(4),Sqr(Abs(ZU(4,2))) + Sqr(Abs(ZU(4,5))))*Power(MSu(5),Sqr(Abs(ZU(5,2))
-      ) + Sqr(Abs(ZU(5,5)))));
+   scale = Sqrt(Power(MSu(0),Sqr(Abs(ZU(0,2))) + Sqr(Abs(ZU(0,5))))*Power(MSu(1),
+      Sqr(Abs(ZU(1,2))) + Sqr(Abs(ZU(1,5))))*Power(MSu(2),Sqr(Abs(ZU(2,2))) + Sqr(
+      Abs(ZU(2,5))))*Power(MSu(3),Sqr(Abs(ZU(3,2))) + Sqr(Abs(ZU(3,5))))*Power(MSu
+      (4),Sqr(Abs(ZU(4,2))) + Sqr(Abs(ZU(4,5))))*Power(MSu(5),Sqr(Abs(ZU(5,2))) +
+      Sqr(Abs(ZU(5,5)))));
 
 
 }

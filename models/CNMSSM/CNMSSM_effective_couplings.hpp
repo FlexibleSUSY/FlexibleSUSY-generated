@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 15:30:46
+// File generated at Sun 26 Aug 2018 13:59:57
 
 #ifndef CNMSSM_EFFECTIVE_COUPLINGS_H
 #define CNMSSM_EFFECTIVE_COUPLINGS_H

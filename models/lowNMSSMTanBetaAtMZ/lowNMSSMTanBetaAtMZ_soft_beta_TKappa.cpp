@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:17:42
+// File generated at Sun 26 Aug 2018 14:33:34
 
 #include "lowNMSSMTanBetaAtMZ_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,8 +73,8 @@ double lowNMSSMTanBetaAtMZ_soft_parameters::calc_beta_TKappa_1_loop(const Soft_t
 
    double beta_TKappa;
 
-   beta_TKappa = Re(6*oneOver16PiSqr*(3*AbsSqr(Kappa)*TKappa + Conj(
-      Lambdax)*(Lambdax*TKappa + 2*Kappa*TLambdax)));
+   beta_TKappa = Re(6*oneOver16PiSqr*(3*AbsSqr(Kappa)*TKappa + Conj(Lambdax)*(
+      Lambdax*TKappa + 2*Kappa*TLambdax)));
 
 
    return beta_TKappa;
@@ -97,12 +97,12 @@ double lowNMSSMTanBetaAtMZ_soft_parameters::calc_beta_TKappa_2_loop(const Soft_t
 
    double beta_TKappa;
 
-   beta_TKappa = Re(-1.2*twoLoop*(100*Sqr(Conj(Kappa))*Sqr(Kappa)*TKappa
-      + 10*Lambdax*Sqr(Conj(Lambdax))*(Lambdax*TKappa + 4*Kappa*TLambdax) +
-      Conj(Lambdax)*(Lambdax*(60*AbsSqr(Kappa) - 3*Sqr(g1) + 5*(3*traceYdAdjYd
-      + traceYeAdjYe + 3*traceYuAdjYu - 3*Sqr(g2)))*TKappa + 2*Kappa*(Lambdax*(
-      3*MassB*Sqr(g1) + 5*(3*traceAdjYdTYd + traceAdjYeTYe + 3*traceAdjYuTYu +
-      3*MassWB*Sqr(g2))) + (20*AbsSqr(Kappa) - 3*Sqr(g1) + 5*(3*traceYdAdjYd +
+   beta_TKappa = Re(-1.2*twoLoop*(100*Sqr(Conj(Kappa))*Sqr(Kappa)*TKappa + 10*
+      Lambdax*Sqr(Conj(Lambdax))*(Lambdax*TKappa + 4*Kappa*TLambdax) + Conj(
+      Lambdax)*(Lambdax*(60*AbsSqr(Kappa) - 3*Sqr(g1) + 5*(3*traceYdAdjYd +
+      traceYeAdjYe + 3*traceYuAdjYu - 3*Sqr(g2)))*TKappa + 2*Kappa*(Lambdax*(3*
+      MassB*Sqr(g1) + 5*(3*traceAdjYdTYd + traceAdjYeTYe + 3*traceAdjYuTYu + 3*
+      MassWB*Sqr(g2))) + (20*AbsSqr(Kappa) - 3*Sqr(g1) + 5*(3*traceYdAdjYd +
       traceYeAdjYe + 3*traceYuAdjYu - 3*Sqr(g2)))*TLambdax))));
 
 

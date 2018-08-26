@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 15:31:43
+// File generated at Sun 26 Aug 2018 14:25:04
 
 #include "MRSSMEFTHiggs_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -38,10 +38,9 @@ Eigen::Matrix<double,3,3> MRSSMEFTHiggs_susy_parameters::calc_beta_Yu_1_loop(con
 
    Eigen::Matrix<double,3,3> beta_Yu;
 
-   beta_Yu = (oneOver16PiSqr*(Yu*(3*traceYuAdjYu + AbsSqr(LamSU) + 1.5*
-      AbsSqr(LamTU) - 0.8666666666666667*Sqr(g1) - 3*Sqr(g2) -
-      5.333333333333333*Sqr(g3)) + Yu*Yd.adjoint()*Yd + 3*(Yu*Yu.adjoint()*Yu))
-      ).real();
+   beta_Yu = (oneOver16PiSqr*(Yu*(3*traceYuAdjYu + AbsSqr(LamSU) + 1.5*AbsSqr(
+      LamTU) - 0.8666666666666667*Sqr(g1) - 3*Sqr(g2) - 5.333333333333333*Sqr(
+      g3)) + Yu*Yd.adjoint()*Yd + 3*(Yu*Yu.adjoint()*Yu))).real();
 
 
    return beta_Yu;
@@ -63,12 +62,12 @@ Eigen::Matrix<double,3,3> MRSSMEFTHiggs_susy_parameters::calc_beta_Yu_2_loop(con
 
    Eigen::Matrix<double,3,3> beta_Yu;
 
-   beta_Yu = (twoLoop*(Yu*(-3*traceYdAdjYuYuAdjYd - 9*traceYuAdjYuYuAdjYu
-      - 2*AbsSqr(LamSD)*AbsSqr(LamSU) - 3*AbsSqr(LamSU)*AbsSqr(LamTU) - 1.5*
-      AbsSqr(LamTD)*AbsSqr(LamTU) + 6.615555555555556*Quad(g1) + 16.5*Quad(g2)
-      + 14.222222222222221*Quad(g3) + 0.8*traceYuAdjYu*Sqr(g1) + 6*AbsSqr(LamTU
-      )*Sqr(g2) + Sqr(g1)*Sqr(g2) + 16*traceYuAdjYu*Sqr(g3) + 3.022222222222222
-      *Sqr(g1)*Sqr(g3) + 8*Sqr(g2)*Sqr(g3) - 3*Sqr(LamSU)*Sqr(Conj(LamSU)) -
+   beta_Yu = (twoLoop*(Yu*(-3*traceYdAdjYuYuAdjYd - 9*traceYuAdjYuYuAdjYu - 2*
+      AbsSqr(LamSD)*AbsSqr(LamSU) - 3*AbsSqr(LamSU)*AbsSqr(LamTU) - 1.5*AbsSqr(
+      LamTD)*AbsSqr(LamTU) + 6.615555555555556*Quad(g1) + 16.5*Quad(g2) +
+      14.222222222222221*Quad(g3) + 0.8*traceYuAdjYu*Sqr(g1) + 6*AbsSqr(LamTU)*
+      Sqr(g2) + Sqr(g1)*Sqr(g2) + 16*traceYuAdjYu*Sqr(g3) + 3.022222222222222*
+      Sqr(g1)*Sqr(g3) + 8*Sqr(g2)*Sqr(g3) - 3*Sqr(LamSU)*Sqr(Conj(LamSU)) -
       3.75*Sqr(LamTU)*Sqr(Conj(LamTU))) + (-3*traceYdAdjYd - traceYeAdjYe -
       AbsSqr(LamSD) - 1.5*AbsSqr(LamTD) + 0.4*Sqr(g1))*(Yu*Yd.adjoint()*Yd) + (
       -9*traceYuAdjYu - 3*AbsSqr(LamSU) - 4.5*AbsSqr(LamTU) + 0.4*Sqr(g1) + 6*

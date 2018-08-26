@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:43:27
+// File generated at Sun 26 Aug 2018 14:07:31
 
 #include "E6SSMEFTHiggs_info.hpp"
 
@@ -30,9 +30,9 @@ namespace E6SSMEFTHiggs_info {
    const double normalization_g3 = 1;
    const double normalization_gN = 1;
 
-   const std::array<int, NUMBER_OF_PARTICLES> particle_multiplicities = {1, 1,
-      3, 1, 6, 3, 6, 6, 6, 3, 3, 2, 6, 2, 3, 3, 3, 3, 4, 4, 2, 4, 2, 2, 2, 2, 2, 1
-      , 1, 1, 1};
+   const std::array<int, NUMBER_OF_PARTICLES> particle_multiplicities = {1, 1, 3,
+      1, 6, 3, 6, 6, 6, 3, 3, 2, 6, 2, 3, 3, 3, 3, 4, 4, 2, 4, 2, 2, 2, 2, 2, 1, 1
+      , 1, 1};
 
    const std::array<std::string, NUMBER_OF_PARTICLES> particle_names = {"VG",
       "Glu", "Fv", "ChaP", "Sd", "Sv", "Su", "Se", "SDX", "hh", "Ah", "Hpm", "Chi"
@@ -49,8 +49,8 @@ namespace E6SSMEFTHiggs_info {
 
    const std::array<std::string, NUMBER_OF_PARAMETERS> parameter_names = {
       "Yd(0,0)", "Yd(0,1)", "Yd(0,2)", "Yd(1,0)", "Yd(1,1)", "Yd(1,2)", "Yd(2,0)",
-      "Yd(2,1)", "Yd(2,2)", "Ye(0,0)", "Ye(0,1)", "Ye(0,2)", "Ye(1,0)", "Ye(1,1)"
-      , "Ye(1,2)", "Ye(2,0)", "Ye(2,1)", "Ye(2,2)", "Kappa(0,0)", "Kappa(0,1)",
+      "Yd(2,1)", "Yd(2,2)", "Ye(0,0)", "Ye(0,1)", "Ye(0,2)", "Ye(1,0)", "Ye(1,1)",
+      "Ye(1,2)", "Ye(2,0)", "Ye(2,1)", "Ye(2,2)", "Kappa(0,0)", "Kappa(0,1)",
       "Kappa(0,2)", "Kappa(1,0)", "Kappa(1,1)", "Kappa(1,2)", "Kappa(2,0)",
       "Kappa(2,1)", "Kappa(2,2)", "Lambda12(0,0)", "Lambda12(0,1)",
       "Lambda12(1,0)", "Lambda12(1,1)", "Lambdax", "Yu(0,0)", "Yu(0,1)", "Yu(0,2)"
@@ -80,33 +80,32 @@ namespace E6SSMEFTHiggs_info {
       "mDxbar2(2,2)", "mHp2", "mHpbar2", "MassB", "MassWB", "MassG", "MassBp"};
 
    const std::array<std::string, NUMBER_OF_MIXINGS> particle_mixing_names = {
-      "ZD(0,0)", "ZD(0,1)", "ZD(0,2)", "ZD(0,3)", "ZD(0,4)", "ZD(0,5)", "ZD(1,0)"
-      , "ZD(1,1)", "ZD(1,2)", "ZD(1,3)", "ZD(1,4)", "ZD(1,5)", "ZD(2,0)",
-      "ZD(2,1)", "ZD(2,2)", "ZD(2,3)", "ZD(2,4)", "ZD(2,5)", "ZD(3,0)", "ZD(3,1)",
-      "ZD(3,2)", "ZD(3,3)", "ZD(3,4)", "ZD(3,5)", "ZD(4,0)", "ZD(4,1)", "ZD(4,2)"
-      , "ZD(4,3)", "ZD(4,4)", "ZD(4,5)", "ZD(5,0)", "ZD(5,1)", "ZD(5,2)",
-      "ZD(5,3)", "ZD(5,4)", "ZD(5,5)", "ZV(0,0)", "ZV(0,1)", "ZV(0,2)", "ZV(1,0)",
-      "ZV(1,1)", "ZV(1,2)", "ZV(2,0)", "ZV(2,1)", "ZV(2,2)", "ZU(0,0)", "ZU(0,1)"
-      , "ZU(0,2)", "ZU(0,3)", "ZU(0,4)", "ZU(0,5)", "ZU(1,0)", "ZU(1,1)",
-      "ZU(1,2)", "ZU(1,3)", "ZU(1,4)", "ZU(1,5)", "ZU(2,0)", "ZU(2,1)", "ZU(2,2)",
-      "ZU(2,3)", "ZU(2,4)", "ZU(2,5)", "ZU(3,0)", "ZU(3,1)", "ZU(3,2)", "ZU(3,3)"
-      , "ZU(3,4)", "ZU(3,5)", "ZU(4,0)", "ZU(4,1)", "ZU(4,2)", "ZU(4,3)",
-      "ZU(4,4)", "ZU(4,5)", "ZU(5,0)", "ZU(5,1)", "ZU(5,2)", "ZU(5,3)", "ZU(5,4)",
-      "ZU(5,5)", "ZE(0,0)", "ZE(0,1)", "ZE(0,2)", "ZE(0,3)", "ZE(0,4)", "ZE(0,5)"
-      , "ZE(1,0)", "ZE(1,1)", "ZE(1,2)", "ZE(1,3)", "ZE(1,4)", "ZE(1,5)",
-      "ZE(2,0)", "ZE(2,1)", "ZE(2,2)", "ZE(2,3)", "ZE(2,4)", "ZE(2,5)", "ZE(3,0)",
-      "ZE(3,1)", "ZE(3,2)", "ZE(3,3)", "ZE(3,4)", "ZE(3,5)", "ZE(4,0)", "ZE(4,1)"
-      , "ZE(4,2)", "ZE(4,3)", "ZE(4,4)", "ZE(4,5)", "ZE(5,0)", "ZE(5,1)",
-      "ZE(5,2)", "ZE(5,3)", "ZE(5,4)", "ZE(5,5)", "ZDX(0,0)", "ZDX(0,1)",
-      "ZDX(0,2)", "ZDX(0,3)", "ZDX(0,4)", "ZDX(0,5)", "ZDX(1,0)", "ZDX(1,1)",
-      "ZDX(1,2)", "ZDX(1,3)", "ZDX(1,4)", "ZDX(1,5)", "ZDX(2,0)", "ZDX(2,1)",
-      "ZDX(2,2)", "ZDX(2,3)", "ZDX(2,4)", "ZDX(2,5)", "ZDX(3,0)", "ZDX(3,1)",
-      "ZDX(3,2)", "ZDX(3,3)", "ZDX(3,4)", "ZDX(3,5)", "ZDX(4,0)", "ZDX(4,1)",
-      "ZDX(4,2)", "ZDX(4,3)", "ZDX(4,4)", "ZDX(4,5)", "ZDX(5,0)", "ZDX(5,1)",
-      "ZDX(5,2)", "ZDX(5,3)", "ZDX(5,4)", "ZDX(5,5)", "ZH(0,0)", "ZH(0,1)",
-      "ZH(0,2)", "ZH(1,0)", "ZH(1,1)", "ZH(1,2)", "ZH(2,0)", "ZH(2,1)", "ZH(2,2)",
-      "ZA(0,0)", "ZA(0,1)", "ZA(0,2)", "ZA(1,0)", "ZA(1,1)", "ZA(1,2)", "ZA(2,0)"
-      , "ZA(2,1)", "ZA(2,2)", "ZP(0,0)", "ZP(0,1)", "ZP(1,0)", "ZP(1,1)",
+      "ZD(0,0)", "ZD(0,1)", "ZD(0,2)", "ZD(0,3)", "ZD(0,4)", "ZD(0,5)", "ZD(1,0)",
+      "ZD(1,1)", "ZD(1,2)", "ZD(1,3)", "ZD(1,4)", "ZD(1,5)", "ZD(2,0)", "ZD(2,1)",
+      "ZD(2,2)", "ZD(2,3)", "ZD(2,4)", "ZD(2,5)", "ZD(3,0)", "ZD(3,1)", "ZD(3,2)",
+      "ZD(3,3)", "ZD(3,4)", "ZD(3,5)", "ZD(4,0)", "ZD(4,1)", "ZD(4,2)", "ZD(4,3)",
+      "ZD(4,4)", "ZD(4,5)", "ZD(5,0)", "ZD(5,1)", "ZD(5,2)", "ZD(5,3)", "ZD(5,4)",
+      "ZD(5,5)", "ZV(0,0)", "ZV(0,1)", "ZV(0,2)", "ZV(1,0)", "ZV(1,1)", "ZV(1,2)",
+      "ZV(2,0)", "ZV(2,1)", "ZV(2,2)", "ZU(0,0)", "ZU(0,1)", "ZU(0,2)", "ZU(0,3)",
+      "ZU(0,4)", "ZU(0,5)", "ZU(1,0)", "ZU(1,1)", "ZU(1,2)", "ZU(1,3)", "ZU(1,4)",
+      "ZU(1,5)", "ZU(2,0)", "ZU(2,1)", "ZU(2,2)", "ZU(2,3)", "ZU(2,4)", "ZU(2,5)",
+      "ZU(3,0)", "ZU(3,1)", "ZU(3,2)", "ZU(3,3)", "ZU(3,4)", "ZU(3,5)", "ZU(4,0)",
+      "ZU(4,1)", "ZU(4,2)", "ZU(4,3)", "ZU(4,4)", "ZU(4,5)", "ZU(5,0)", "ZU(5,1)",
+      "ZU(5,2)", "ZU(5,3)", "ZU(5,4)", "ZU(5,5)", "ZE(0,0)", "ZE(0,1)", "ZE(0,2)",
+      "ZE(0,3)", "ZE(0,4)", "ZE(0,5)", "ZE(1,0)", "ZE(1,1)", "ZE(1,2)", "ZE(1,3)",
+      "ZE(1,4)", "ZE(1,5)", "ZE(2,0)", "ZE(2,1)", "ZE(2,2)", "ZE(2,3)", "ZE(2,4)",
+      "ZE(2,5)", "ZE(3,0)", "ZE(3,1)", "ZE(3,2)", "ZE(3,3)", "ZE(3,4)", "ZE(3,5)",
+      "ZE(4,0)", "ZE(4,1)", "ZE(4,2)", "ZE(4,3)", "ZE(4,4)", "ZE(4,5)", "ZE(5,0)",
+      "ZE(5,1)", "ZE(5,2)", "ZE(5,3)", "ZE(5,4)", "ZE(5,5)", "ZDX(0,0)",
+      "ZDX(0,1)", "ZDX(0,2)", "ZDX(0,3)", "ZDX(0,4)", "ZDX(0,5)", "ZDX(1,0)",
+      "ZDX(1,1)", "ZDX(1,2)", "ZDX(1,3)", "ZDX(1,4)", "ZDX(1,5)", "ZDX(2,0)",
+      "ZDX(2,1)", "ZDX(2,2)", "ZDX(2,3)", "ZDX(2,4)", "ZDX(2,5)", "ZDX(3,0)",
+      "ZDX(3,1)", "ZDX(3,2)", "ZDX(3,3)", "ZDX(3,4)", "ZDX(3,5)", "ZDX(4,0)",
+      "ZDX(4,1)", "ZDX(4,2)", "ZDX(4,3)", "ZDX(4,4)", "ZDX(4,5)", "ZDX(5,0)",
+      "ZDX(5,1)", "ZDX(5,2)", "ZDX(5,3)", "ZDX(5,4)", "ZDX(5,5)", "ZH(0,0)",
+      "ZH(0,1)", "ZH(0,2)", "ZH(1,0)", "ZH(1,1)", "ZH(1,2)", "ZH(2,0)", "ZH(2,1)",
+      "ZH(2,2)", "ZA(0,0)", "ZA(0,1)", "ZA(0,2)", "ZA(1,0)", "ZA(1,1)", "ZA(1,2)",
+      "ZA(2,0)", "ZA(2,1)", "ZA(2,2)", "ZP(0,0)", "ZP(0,1)", "ZP(1,0)", "ZP(1,1)",
       "Re(ZN(0,0))", "Im(ZN(0,0))", "Re(ZN(0,1))", "Im(ZN(0,1))", "Re(ZN(0,2))",
       "Im(ZN(0,2))", "Re(ZN(0,3))", "Im(ZN(0,3))", "Re(ZN(0,4))", "Im(ZN(0,4))",
       "Re(ZN(0,5))", "Im(ZN(0,5))", "Re(ZN(1,0))", "Im(ZN(1,0))", "Re(ZN(1,1))",
@@ -187,29 +186,29 @@ namespace E6SSMEFTHiggs_info {
       "Im(ZNp(1,1))", "ZZ(0,0)", "ZZ(0,1)", "ZZ(0,2)", "ZZ(1,0)", "ZZ(1,1)",
       "ZZ(1,2)", "ZZ(2,0)", "ZZ(2,1)", "ZZ(2,2)"};
 
-   const std::array<std::string, NUMBER_OF_INPUT_PARAMETERS>
-      input_parameter_names = {"MSUSY", "M1Input", "M2Input", "M3Input", "MuInput"
-      , "mAInput", "TanBeta", "LambdaInput", "gNInput", "M4Input", "mHp2Input",
-      "mHpbar2Input", "MuPrInput", "BMuPrInput", "AeInput(0,0)", "AeInput(0,1)",
-      "AeInput(0,2)", "AeInput(1,0)", "AeInput(1,1)", "AeInput(1,2)",
-      "AeInput(2,0)", "AeInput(2,1)", "AeInput(2,2)", "AdInput(0,0)",
-      "AdInput(0,1)", "AdInput(0,2)", "AdInput(1,0)", "AdInput(1,1)",
-      "AdInput(1,2)", "AdInput(2,0)", "AdInput(2,1)", "AdInput(2,2)",
-      "AuInput(0,0)", "AuInput(0,1)", "AuInput(0,2)", "AuInput(1,0)",
-      "AuInput(1,1)", "AuInput(1,2)", "AuInput(2,0)", "AuInput(2,1)",
-      "AuInput(2,2)", "ml2Input(0,0)", "ml2Input(0,1)", "ml2Input(0,2)",
-      "ml2Input(1,0)", "ml2Input(1,1)", "ml2Input(1,2)", "ml2Input(2,0)",
-      "ml2Input(2,1)", "ml2Input(2,2)", "me2Input(0,0)", "me2Input(0,1)",
-      "me2Input(0,2)", "me2Input(1,0)", "me2Input(1,1)", "me2Input(1,2)",
-      "me2Input(2,0)", "me2Input(2,1)", "me2Input(2,2)", "mq2Input(0,0)",
-      "mq2Input(0,1)", "mq2Input(0,2)", "mq2Input(1,0)", "mq2Input(1,1)",
-      "mq2Input(1,2)", "mq2Input(2,0)", "mq2Input(2,1)", "mq2Input(2,2)",
-      "md2Input(0,0)", "md2Input(0,1)", "md2Input(0,2)", "md2Input(1,0)",
-      "md2Input(1,1)", "md2Input(1,2)", "md2Input(2,0)", "md2Input(2,1)",
-      "md2Input(2,2)", "mu2Input(0,0)", "mu2Input(0,1)", "mu2Input(0,2)",
-      "mu2Input(1,0)", "mu2Input(1,1)", "mu2Input(1,2)", "mu2Input(2,0)",
-      "mu2Input(2,1)", "mu2Input(2,2)", "Lambda12Input(0,0)", "Lambda12Input(0,1)"
-      , "Lambda12Input(1,0)", "Lambda12Input(1,1)", "ALambda12Input(0,0)",
+   const std::array<std::string, NUMBER_OF_INPUT_PARAMETERS> input_parameter_names
+       = {"MSUSY", "M1Input", "M2Input", "M3Input", "MuInput", "mAInput",
+      "TanBeta", "LambdaInput", "gNInput", "M4Input", "mHp2Input", "mHpbar2Input",
+      "MuPrInput", "BMuPrInput", "AeInput(0,0)", "AeInput(0,1)", "AeInput(0,2)",
+      "AeInput(1,0)", "AeInput(1,1)", "AeInput(1,2)", "AeInput(2,0)",
+      "AeInput(2,1)", "AeInput(2,2)", "AdInput(0,0)", "AdInput(0,1)",
+      "AdInput(0,2)", "AdInput(1,0)", "AdInput(1,1)", "AdInput(1,2)",
+      "AdInput(2,0)", "AdInput(2,1)", "AdInput(2,2)", "AuInput(0,0)",
+      "AuInput(0,1)", "AuInput(0,2)", "AuInput(1,0)", "AuInput(1,1)",
+      "AuInput(1,2)", "AuInput(2,0)", "AuInput(2,1)", "AuInput(2,2)",
+      "ml2Input(0,0)", "ml2Input(0,1)", "ml2Input(0,2)", "ml2Input(1,0)",
+      "ml2Input(1,1)", "ml2Input(1,2)", "ml2Input(2,0)", "ml2Input(2,1)",
+      "ml2Input(2,2)", "me2Input(0,0)", "me2Input(0,1)", "me2Input(0,2)",
+      "me2Input(1,0)", "me2Input(1,1)", "me2Input(1,2)", "me2Input(2,0)",
+      "me2Input(2,1)", "me2Input(2,2)", "mq2Input(0,0)", "mq2Input(0,1)",
+      "mq2Input(0,2)", "mq2Input(1,0)", "mq2Input(1,1)", "mq2Input(1,2)",
+      "mq2Input(2,0)", "mq2Input(2,1)", "mq2Input(2,2)", "md2Input(0,0)",
+      "md2Input(0,1)", "md2Input(0,2)", "md2Input(1,0)", "md2Input(1,1)",
+      "md2Input(1,2)", "md2Input(2,0)", "md2Input(2,1)", "md2Input(2,2)",
+      "mu2Input(0,0)", "mu2Input(0,1)", "mu2Input(0,2)", "mu2Input(1,0)",
+      "mu2Input(1,1)", "mu2Input(1,2)", "mu2Input(2,0)", "mu2Input(2,1)",
+      "mu2Input(2,2)", "Lambda12Input(0,0)", "Lambda12Input(0,1)",
+      "Lambda12Input(1,0)", "Lambda12Input(1,1)", "ALambda12Input(0,0)",
       "ALambda12Input(0,1)", "ALambda12Input(1,0)", "ALambda12Input(1,1)",
       "KappaInput(0,0)", "KappaInput(0,1)", "KappaInput(0,2)", "KappaInput(1,0)",
       "KappaInput(1,1)", "KappaInput(1,2)", "KappaInput(2,0)", "KappaInput(2,1)",
@@ -226,8 +225,8 @@ namespace E6SSMEFTHiggs_info {
       , "mH2I2Input(1,1)", "msI2Input(0,0)", "msI2Input(0,1)", "msI2Input(1,0)",
       "msI2Input(1,1)"};
 
-   const std::array<std::string, NUMBER_OF_EXTRA_PARAMETERS>
-      extra_parameter_names = {};
+   const std::array<std::string, NUMBER_OF_EXTRA_PARAMETERS> extra_parameter_names
+       = {};
 
    const std::string model_name = "E6SSMEFTHiggs";
 

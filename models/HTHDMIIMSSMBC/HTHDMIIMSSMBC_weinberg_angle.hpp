@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:33:23
+// File generated at Sun 26 Aug 2018 14:08:14
 
 #ifndef HTHDMIIMSSMBC_WEINBERG_ANGLE_H
 #define HTHDMIIMSSMBC_WEINBERG_ANGLE_H
@@ -73,6 +73,7 @@ private:
    double calculate_delta_r_hat(double, double) const;
    double calculate_delta_vb(double, double) const;
    double calculate_delta_vb_sm(double) const;
+   int get_neutrino_index(int) const;
    double calculate_delta_vb_bsm(double) const;
 
    std::complex<double> CpAhHmconjVWm(int gI2, int gI1) const;

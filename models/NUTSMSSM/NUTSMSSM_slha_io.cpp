@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:37:29
+// File generated at Sun 26 Aug 2018 14:42:03
 
 #include "NUTSMSSM_slha_io.hpp"
 #include "NUTSMSSM_input_parameters.hpp"
@@ -843,9 +843,8 @@ void NUTSMSSM_slha_io::fill_physical(NUTSMSSM_physical& physical) const
 double NUTSMSSM_slha_io::read_scale() const
 {
    static const std::array<std::string, 15> drbar_blocks =
-      { "gauge", "Yu", "Yd", "Ye", "Te", "Td", "Tu", "HMIX", "MSQ2", "MSE2",
-   "MSL2", "MSU2", "MSD2", "MSOFT", "NMSSMRUN" }
-;
+      { "gauge", "Yu", "Yd", "Ye", "Te", "Td", "Tu", "HMIX", "MSQ2", "MSE2", "MSL2",
+   "MSU2", "MSD2", "MSOFT", "NMSSMRUN" };
 
    double scale = 0.;
 

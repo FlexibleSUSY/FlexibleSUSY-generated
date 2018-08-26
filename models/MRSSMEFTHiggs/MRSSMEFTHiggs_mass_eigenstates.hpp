@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 16:21:04
+// File generated at Sun 26 Aug 2018 15:17:52
 
 /**
  * @file MRSSMEFTHiggs_mass_eigenstates.hpp
@@ -25,8 +25,8 @@
  *        value problem using the two_scale solver by solving EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Mon 5 Mar 2018 16:21:04 with FlexibleSUSY
- * 2.1.0 (git commit: 8f20f6c9c42c159c1588fbc0bb3e15ce5ab6ace3) and SARAH 4.12.3 .
+ * This file was generated at Sun 26 Aug 2018 15:17:52 with FlexibleSUSY
+ * 2.2.0 (git commit: 8489097de2d6938a6da0149378457b5ad13d9425) and SARAH 4.13.0 .
  */
 
 #ifndef MRSSMEFTHiggs_MASS_EIGENSTATES_H
@@ -37,9 +37,7 @@
 #include "MRSSMEFTHiggs_soft_parameters.hpp"
 #include "loop_corrections.hpp"
 #include "threshold_corrections.hpp"
-#include "error.hpp"
 #include "problems.hpp"
-#include "config.h"
 
 #include <iosfwd>
 #include <memory>
@@ -1072,12 +1070,12 @@ public:
 
 
 private:
-   int ewsb_loop_order{2};           ///< loop order for EWSB
-   int pole_mass_loop_order{2};      ///< loop order for pole masses
+   int ewsb_loop_order{4};           ///< loop order for EWSB
+   int pole_mass_loop_order{4};      ///< loop order for pole masses
    bool calculate_sm_pole_masses{false};  ///< switch to calculate the pole masses of the Standard Model particles
    bool calculate_bsm_pole_masses{true};  ///< switch to calculate the pole masses of the BSM particles
    bool force_output{false};              ///< switch to force output of pole masses
-   double precision{1.e-3};               ///< RG running precision
+   double precision{1.e-4};               ///< RG running precision
    double ewsb_iteration_precision{1.e-5};///< precision goal of EWSB solution
    MRSSMEFTHiggs_physical physical{}; ///< contains the pole masses and mixings
    Problems problems{MRSSMEFTHiggs_info::model_name,

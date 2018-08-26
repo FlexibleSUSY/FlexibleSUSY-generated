@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 14:59:49
+// File generated at Sun 26 Aug 2018 13:50:21
 
 /**
  * @file MSSMNoFVatMGUTHimalaya_edm.cpp
  *
- * This file was generated at Mon 5 Mar 2018 14:59:49 with FlexibleSUSY
- * 2.1.0 and SARAH 4.12.3 .
+ * This file was generated at Sun 26 Aug 2018 13:50:21 with FlexibleSUSY
+ * 2.2.0 and SARAH 4.13.0 .
  */
 
 #include "MSSMNoFVatMGUTHimalaya_edm.hpp"

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 15:31:52
+// File generated at Sun 26 Aug 2018 14:25:15
 
 #ifndef MRSSMEFTHiggs_soft_parameters_H
 #define MRSSMEFTHiggs_soft_parameters_H
@@ -40,8 +40,7 @@ public:
    const Eigen::Matrix<double,3,3>& md2_, const Eigen::Matrix<double,3,3>& mu2_
    , const Eigen::Matrix<double,3,3>& me2_, double mS2_, double mT2_, double
    moc2_, double mRd2_, double mRu2_, double MDBS_, double MDWBT_, double
-   MDGoc_
-);
+   MDGoc_);
    MRSSMEFTHiggs_soft_parameters(const MRSSMEFTHiggs_soft_parameters&) = default;
    MRSSMEFTHiggs_soft_parameters(MRSSMEFTHiggs_soft_parameters&&) = default;
    virtual ~MRSSMEFTHiggs_soft_parameters() = default;

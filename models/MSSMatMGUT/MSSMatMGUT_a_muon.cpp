@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 19:04:16
+// File generated at Sun 26 Aug 2018 15:24:20
 
 /**
  * @file MSSMatMGUT_a_muon.cpp
  *
- * This file was generated at Mon 5 Mar 2018 19:04:16 with FlexibleSUSY
- * 2.1.0 and SARAH 4.12.3 .
+ * This file was generated at Sun 26 Aug 2018 15:24:20 with FlexibleSUSY
+ * 2.2.0 and SARAH 4.13.0 .
  */
 
 #include "MSSMatMGUT_a_muon.hpp"
@@ -217,10 +217,9 @@ double OneLoopFunctionF2N(double x)
 
 double get_MSUSY(const MSSMatMGUT_mass_eigenstates& model)
 {
-   return Min(model.get_MSd().tail<6>().minCoeff(), model.get_MSu().tail<6>()
-      .minCoeff(), model.get_MSe().tail<6>().minCoeff(), model.get_MHpm().tail<1>(
-      ).minCoeff(), model.get_MCha().tail<2>().minCoeff());
-
+   return Min(model.get_MSd().tail<6>().minCoeff(), model.get_MSu().tail<6>().
+      minCoeff(), model.get_MSe().tail<6>().minCoeff(), model.get_MHpm().tail<1>()
+      .minCoeff(), model.get_MCha().tail<2>().minCoeff());
 }
 
 void run_to_MSUSY(MSSMatMGUT_mass_eigenstates& model)

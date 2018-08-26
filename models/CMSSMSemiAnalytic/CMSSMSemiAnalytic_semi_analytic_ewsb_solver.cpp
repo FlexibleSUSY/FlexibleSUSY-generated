@@ -16,15 +16,15 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 19:10:05
+// File generated at Sun 26 Aug 2018 15:28:03
 
 /**
  * @file CMSSMSemiAnalytic_semi_analytic_ewsb_solver.cpp
  *
  * @brief implementation of EWSB solver for semi-analytic iteration
  *
- * This file was generated at Mon 5 Mar 2018 19:10:05 with FlexibleSUSY
- * 2.1.0 (git commit: 8f20f6c9c42c159c1588fbc0bb3e15ce5ab6ace3) and SARAH 4.12.3 .
+ * This file was generated at Sun 26 Aug 2018 15:28:03 with FlexibleSUSY
+ * 2.2.0 (git commit: 8489097de2d6938a6da0149378457b5ad13d9425) and SARAH 4.13.0 .
  */
 
 #include "CMSSMSemiAnalytic_semi_analytic_ewsb_solver.hpp"
@@ -251,11 +251,12 @@ int CLASSNAME::solve_tree_level(CMSSMSemiAnalytic_mass_eigenstates& model)
       mHu2Coeff4*Sqr(vu)) + (Sqr(vd) - Sqr(vu))*(0.125*(0.6*Sqr(g1) + Sqr(g2))*(
       Sqr(vd) + Sqr(vu)) + Sqr(Abs(Mu))))/(-(mHd2Coeff1*Sqr(vd)) + mHu2Coeff1*Sqr(
       vu)));
-   BMu0 = Re(-((Azero*BMuCoeff3*MuBV)/BMuCoeff1) - (BMuCoeff2*m12*MuBV)
-      /BMuCoeff1 + (vd*vu*(m0Sq*(mHd2Coeff1 + mHu2Coeff1) + Azero*m12*(mHd2Coeff3
-      + mHu2Coeff3) + (mHd2Coeff4 + mHu2Coeff4)*Sqr(Azero) + (mHd2Coeff2 +
+   BMu0 = Re(-((Azero*BMuCoeff3*MuBV)/BMuCoeff1) - (BMuCoeff2*m12*MuBV)/BMuCoeff1
+      + (vd*vu*(m0Sq*(mHd2Coeff1 + mHu2Coeff1) + Azero*m12*(mHd2Coeff3 +
+      mHu2Coeff3) + (mHd2Coeff4 + mHu2Coeff4)*Sqr(Azero) + (mHd2Coeff2 +
       mHu2Coeff2)*Sqr(m12) + 2*Sqr(Abs(Mu))))/(BMuCoeff1*(Sqr(vd) + Sqr(vu))));
 
+   
    const bool is_finite = IsFinite(m0Sq) && IsFinite(BMu0);
 
    if (is_finite) {
@@ -265,7 +266,6 @@ int CLASSNAME::solve_tree_level(CMSSMSemiAnalytic_mass_eigenstates& model)
    } else {
       error = 1;
    }
-
    return error;
 }
 
@@ -339,14 +339,14 @@ CLASSNAME::EWSB_vector_t CLASSNAME::ewsb_step(
 
    m0Sq = Re((-(vd*tadpole[0]) + vu*tadpole[1] + Sqr(m12)*(mHd2Coeff2*Sqr(vd) -
       mHu2Coeff2*Sqr(vu)) + Azero*m12*(mHd2Coeff3*Sqr(vd) - mHu2Coeff3*Sqr(vu)) +
-      Sqr(Azero)*(mHd2Coeff4*Sqr(vd) - mHu2Coeff4*Sqr(vu)) + (Sqr(vd) - Sqr(vu))*
-      (0.125*(0.6*Sqr(g1) + Sqr(g2))*(Sqr(vd) + Sqr(vu)) + Sqr(Abs(Mu))))/(-(
+      Sqr(Azero)*(mHd2Coeff4*Sqr(vd) - mHu2Coeff4*Sqr(vu)) + (Sqr(vd) - Sqr(vu))*(
+      0.125*(0.6*Sqr(g1) + Sqr(g2))*(Sqr(vd) + Sqr(vu)) + Sqr(Abs(Mu))))/(-(
       mHd2Coeff1*Sqr(vd)) + mHu2Coeff1*Sqr(vu)));
-   BMu0 = Re(-((Azero*BMuCoeff3*MuBV)/BMuCoeff1) - (BMuCoeff2*m12*MuBV)
-      /BMuCoeff1 + (vd*vu*(m0Sq*(mHd2Coeff1 + mHu2Coeff1) + Azero*m12*(mHd2Coeff3
-      + mHu2Coeff3) - tadpole[0]/vd - tadpole[1]/vu + (mHd2Coeff4 + mHu2Coeff4)*
-      Sqr(Azero) + (mHd2Coeff2 + mHu2Coeff2)*Sqr(m12) + 2*Sqr(Abs(Mu))))/(
-      BMuCoeff1*(Sqr(vd) + Sqr(vu))));
+   BMu0 = Re(-((Azero*BMuCoeff3*MuBV)/BMuCoeff1) - (BMuCoeff2*m12*MuBV)/BMuCoeff1
+      + (vd*vu*(m0Sq*(mHd2Coeff1 + mHu2Coeff1) + Azero*m12*(mHd2Coeff3 +
+      mHu2Coeff3) - tadpole[0]/vd - tadpole[1]/vu + (mHd2Coeff4 + mHu2Coeff4)*Sqr(
+      Azero) + (mHd2Coeff2 + mHu2Coeff2)*Sqr(m12) + 2*Sqr(Abs(Mu))))/(BMuCoeff1*(
+      Sqr(vd) + Sqr(vu))));
 
    const bool is_finite = IsFinite(m0Sq) && IsFinite(BMu0);
 

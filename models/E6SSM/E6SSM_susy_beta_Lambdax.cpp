@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:57:40
+// File generated at Sun 26 Aug 2018 14:18:14
 
 #include "E6SSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -37,14 +37,14 @@ double E6SSM_susy_parameters::calc_beta_Lambdax_1_loop(const Susy_traces& susy_t
    const double traceYeAdjYe = TRACE_STRUCT.traceYeAdjYe;
    const double traceYuAdjYu = TRACE_STRUCT.traceYuAdjYu;
    const double traceKappaAdjKappa = TRACE_STRUCT.traceKappaAdjKappa;
-   const double traceLambda12AdjLambda12 =
-      TRACE_STRUCT.traceLambda12AdjLambda12;
+   const double traceLambda12AdjLambda12 = TRACE_STRUCT.
+      traceLambda12AdjLambda12;
 
 
    double beta_Lambdax;
 
-   beta_Lambdax = Re(0.1*oneOver16PiSqr*Lambdax*(30*traceKappaAdjKappa +
-      20*traceLambda12AdjLambda12 + 30*traceYdAdjYd + 10*traceYeAdjYe + 30*
+   beta_Lambdax = Re(0.1*oneOver16PiSqr*Lambdax*(30*traceKappaAdjKappa + 20*
+      traceLambda12AdjLambda12 + 30*traceYdAdjYd + 10*traceYeAdjYe + 30*
       traceYuAdjYu + 40*AbsSqr(Lambdax) - 6*Sqr(g1) - 30*Sqr(g2) - 19*Sqr(gN)))
       ;
 
@@ -63,16 +63,16 @@ double E6SSM_susy_parameters::calc_beta_Lambdax_2_loop(const Susy_traces& susy_t
    const double traceYeAdjYe = TRACE_STRUCT.traceYeAdjYe;
    const double traceYuAdjYu = TRACE_STRUCT.traceYuAdjYu;
    const double traceKappaAdjKappa = TRACE_STRUCT.traceKappaAdjKappa;
-   const double traceLambda12AdjLambda12 =
-      TRACE_STRUCT.traceLambda12AdjLambda12;
+   const double traceLambda12AdjLambda12 = TRACE_STRUCT.
+      traceLambda12AdjLambda12;
    const double traceYdAdjYdYdAdjYd = TRACE_STRUCT.traceYdAdjYdYdAdjYd;
    const double traceYdAdjYuYuAdjYd = TRACE_STRUCT.traceYdAdjYuYuAdjYd;
    const double traceYeAdjYeYeAdjYe = TRACE_STRUCT.traceYeAdjYeYeAdjYe;
    const double traceYuAdjYuYuAdjYu = TRACE_STRUCT.traceYuAdjYuYuAdjYu;
-   const double traceKappaAdjKappaKappaAdjKappa =
-      TRACE_STRUCT.traceKappaAdjKappaKappaAdjKappa;
-   const double traceLambda12AdjLambda12Lambda12AdjLambda12 =
-      TRACE_STRUCT.traceLambda12AdjLambda12Lambda12AdjLambda12;
+   const double traceKappaAdjKappaKappaAdjKappa = TRACE_STRUCT.
+      traceKappaAdjKappaKappaAdjKappa;
+   const double traceLambda12AdjLambda12Lambda12AdjLambda12 = TRACE_STRUCT.
+      traceLambda12AdjLambda12Lambda12AdjLambda12;
 
 
    double beta_Lambdax;

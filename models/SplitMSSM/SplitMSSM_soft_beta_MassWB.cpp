@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 17:42:07
+// File generated at Sun 26 Aug 2018 14:09:51
 
 #include "SplitMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,8 +73,8 @@ double SplitMSSM_soft_parameters::calc_beta_MassWB_1_loop(const Soft_traces& sof
 
    double beta_MassWB;
 
-   beta_MassWB = Re(oneOver16PiSqr*(4*g2d*g2u*Mu - 12*MassWB*Sqr(g2) +
-      MassWB*Sqr(g2d) + MassWB*Sqr(g2u)));
+   beta_MassWB = Re(oneOver16PiSqr*(4*g2d*g2u*Mu - 12*MassWB*Sqr(g2) + MassWB*
+      Sqr(g2d) + MassWB*Sqr(g2u)));
 
 
    return beta_MassWB;
@@ -94,14 +94,14 @@ double SplitMSSM_soft_parameters::calc_beta_MassWB_2_loop(const Soft_traces& sof
 
    double beta_MassWB;
 
-   beta_MassWB = Re(0.008333333333333333*twoLoop*(-360*g2u*Cube(g2d)*Mu -
-      9320*MassWB*Quad(g2) - 435*MassWB*Quad(g2d) - 435*MassWB*Quad(g2u) + 3*
-      Sqr(g2u)*(MassWB*(51*Sqr(g1) + 5*(91*Sqr(g2) - 6*(6*traceYdAdjYd + 2*
+   beta_MassWB = Re(0.008333333333333333*twoLoop*(-360*g2u*Cube(g2d)*Mu - 9320*
+      MassWB*Quad(g2) - 435*MassWB*Quad(g2d) - 435*MassWB*Quad(g2u) + 3*Sqr(g2u
+      )*(MassWB*(51*Sqr(g1) + 5*(91*Sqr(g2) - 6*(6*traceYdAdjYd + 2*
       traceYeAdjYe + 6*traceYuAdjYu + Sqr(gYd)))) + 5*(8*MassB - 7*MassWB)*Sqr(
       gYu)) - 24*g2d*g2u*(10*gYd*gYu*MassB + 5*Mu*Sqr(gYd) + Mu*(-24*Sqr(g1) +
       5*(-48*Sqr(g2) + 3*Sqr(g2u) + Sqr(gYu)))) + 3*Sqr(g2d)*(5*(8*MassB - 7*
       MassWB)*Sqr(gYd) + MassWB*(51*Sqr(g1) + 5*(91*Sqr(g2) - 6*(6*traceYdAdjYd
-      + 2*traceYeAdjYe + 6*traceYuAdjYu + 14*Sqr(g2u) + Sqr(gYu)))))));
+       + 2*traceYeAdjYe + 6*traceYuAdjYu + 14*Sqr(g2u) + Sqr(gYu)))))));
 
 
    return beta_MassWB;

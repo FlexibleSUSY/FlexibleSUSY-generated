@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 16:34:38
+// File generated at Sun 26 Aug 2018 13:57:51
 
 #include "E6SSMEFTHiggs_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -34,8 +34,8 @@ namespace flexiblesusy {
 Eigen::Matrix<double,3,3> E6SSMEFTHiggs_susy_parameters::calc_beta_Kappa_1_loop(const Susy_traces& susy_traces) const
 {
    const double traceKappaAdjKappa = TRACE_STRUCT.traceKappaAdjKappa;
-   const double traceLambda12AdjLambda12 =
-      TRACE_STRUCT.traceLambda12AdjLambda12;
+   const double traceLambda12AdjLambda12 = TRACE_STRUCT.
+      traceLambda12AdjLambda12;
 
 
    Eigen::Matrix<double,3,3> beta_Kappa;
@@ -60,12 +60,12 @@ Eigen::Matrix<double,3,3> E6SSMEFTHiggs_susy_parameters::calc_beta_Kappa_2_loop(
    const double traceYeAdjYe = TRACE_STRUCT.traceYeAdjYe;
    const double traceYuAdjYu = TRACE_STRUCT.traceYuAdjYu;
    const double traceKappaAdjKappa = TRACE_STRUCT.traceKappaAdjKappa;
-   const double traceLambda12AdjLambda12 =
-      TRACE_STRUCT.traceLambda12AdjLambda12;
-   const double traceKappaAdjKappaKappaAdjKappa =
-      TRACE_STRUCT.traceKappaAdjKappaKappaAdjKappa;
-   const double traceLambda12AdjLambda12Lambda12AdjLambda12 =
-      TRACE_STRUCT.traceLambda12AdjLambda12Lambda12AdjLambda12;
+   const double traceLambda12AdjLambda12 = TRACE_STRUCT.
+      traceLambda12AdjLambda12;
+   const double traceKappaAdjKappaKappaAdjKappa = TRACE_STRUCT.
+      traceKappaAdjKappaKappaAdjKappa;
+   const double traceLambda12AdjLambda12Lambda12AdjLambda12 = TRACE_STRUCT.
+      traceLambda12AdjLambda12Lambda12AdjLambda12;
 
 
    Eigen::Matrix<double,3,3> beta_Kappa;

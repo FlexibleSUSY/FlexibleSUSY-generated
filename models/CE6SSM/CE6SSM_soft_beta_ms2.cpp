@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 16:04:46
+// File generated at Sun 26 Aug 2018 13:48:01
 
 #include "CE6SSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -70,20 +70,19 @@ typename Eigen::MatrixBase<Derived>::PlainObject operator-(double n, const Eigen
 double CE6SSM_soft_parameters::calc_beta_ms2_1_loop(const Soft_traces& soft_traces) const
 {
    const double traceKappaAdjKappa = TRACE_STRUCT.traceKappaAdjKappa;
-   const double traceLambda12AdjLambda12 =
-      TRACE_STRUCT.traceLambda12AdjLambda12;
-   const double traceconjTKappaTpTKappa =
-      TRACE_STRUCT.traceconjTKappaTpTKappa;
-   const double traceconjTLambda12TpTLambda12 =
-      TRACE_STRUCT.traceconjTLambda12TpTLambda12;
-   const double tracemH1I2AdjLambda12Lambda12 =
-      TRACE_STRUCT.tracemH1I2AdjLambda12Lambda12;
-   const double traceKappaAdjKappaconjmDx2 =
-      TRACE_STRUCT.traceKappaAdjKappaconjmDx2;
-   const double traceKappaconjmDxbar2AdjKappa =
-      TRACE_STRUCT.traceKappaconjmDxbar2AdjKappa;
-   const double traceLambda12AdjLambda12conjmH2I2 =
-      TRACE_STRUCT.traceLambda12AdjLambda12conjmH2I2;
+   const double traceLambda12AdjLambda12 = TRACE_STRUCT.
+      traceLambda12AdjLambda12;
+   const double traceconjTKappaTpTKappa = TRACE_STRUCT.traceconjTKappaTpTKappa;
+   const double traceconjTLambda12TpTLambda12 = TRACE_STRUCT.
+      traceconjTLambda12TpTLambda12;
+   const double tracemH1I2AdjLambda12Lambda12 = TRACE_STRUCT.
+      tracemH1I2AdjLambda12Lambda12;
+   const double traceKappaAdjKappaconjmDx2 = TRACE_STRUCT.
+      traceKappaAdjKappaconjmDx2;
+   const double traceKappaconjmDxbar2AdjKappa = TRACE_STRUCT.
+      traceKappaconjmDxbar2AdjKappa;
+   const double traceLambda12AdjLambda12conjmH2I2 = TRACE_STRUCT.
+      traceLambda12AdjLambda12conjmH2I2;
    const double Tr14 = TRACE_STRUCT.Tr14;
 
 
@@ -109,27 +108,25 @@ double CE6SSM_soft_parameters::calc_beta_ms2_1_loop(const Soft_traces& soft_trac
 double CE6SSM_soft_parameters::calc_beta_ms2_2_loop(const Soft_traces& soft_traces) const
 {
    const double traceKappaAdjKappa = TRACE_STRUCT.traceKappaAdjKappa;
-   const double traceLambda12AdjLambda12 =
-      TRACE_STRUCT.traceLambda12AdjLambda12;
+   const double traceLambda12AdjLambda12 = TRACE_STRUCT.
+      traceLambda12AdjLambda12;
    const double traceAdjKappaTKappa = TRACE_STRUCT.traceAdjKappaTKappa;
-   const double traceAdjLambda12TLambda12 =
-      TRACE_STRUCT.traceAdjLambda12TLambda12;
+   const double traceAdjLambda12TLambda12 = TRACE_STRUCT.
+      traceAdjLambda12TLambda12;
    const double traceYdAdjYd = TRACE_STRUCT.traceYdAdjYd;
    const double traceYeAdjYe = TRACE_STRUCT.traceYeAdjYe;
    const double traceYuAdjYu = TRACE_STRUCT.traceYuAdjYu;
    const double traceAdjYdTYd = TRACE_STRUCT.traceAdjYdTYd;
    const double traceAdjYeTYe = TRACE_STRUCT.traceAdjYeTYe;
    const double traceAdjYuTYu = TRACE_STRUCT.traceAdjYuTYu;
-   const double traceconjTKappaTpKappa =
-      TRACE_STRUCT.traceconjTKappaTpKappa;
-   const double traceconjTKappaTpTKappa =
-      TRACE_STRUCT.traceconjTKappaTpTKappa;
-   const double traceconjTLambda12TpLambda12 =
-      TRACE_STRUCT.traceconjTLambda12TpLambda12;
-   const double traceconjTLambda12TpTLambda12 =
-      TRACE_STRUCT.traceconjTLambda12TpTLambda12;
-   const double tracemH1I2AdjLambda12Lambda12 =
-      TRACE_STRUCT.tracemH1I2AdjLambda12Lambda12;
+   const double traceconjTKappaTpKappa = TRACE_STRUCT.traceconjTKappaTpKappa;
+   const double traceconjTKappaTpTKappa = TRACE_STRUCT.traceconjTKappaTpTKappa;
+   const double traceconjTLambda12TpLambda12 = TRACE_STRUCT.
+      traceconjTLambda12TpLambda12;
+   const double traceconjTLambda12TpTLambda12 = TRACE_STRUCT.
+      traceconjTLambda12TpTLambda12;
+   const double tracemH1I2AdjLambda12Lambda12 = TRACE_STRUCT.
+      tracemH1I2AdjLambda12Lambda12;
    const double traceconjTYdTpYd = TRACE_STRUCT.traceconjTYdTpYd;
    const double traceconjTYdTpTYd = TRACE_STRUCT.traceconjTYdTpTYd;
    const double traceconjTYeTpYe = TRACE_STRUCT.traceconjTYeTpYe;
@@ -142,34 +139,34 @@ double CE6SSM_soft_parameters::calc_beta_ms2_2_loop(const Soft_traces& soft_trac
    const double tracemq2AdjYdYd = TRACE_STRUCT.tracemq2AdjYdYd;
    const double tracemq2AdjYuYu = TRACE_STRUCT.tracemq2AdjYuYu;
    const double tracemu2YuAdjYu = TRACE_STRUCT.tracemu2YuAdjYu;
-   const double traceKappaAdjKappaconjmDx2 =
-      TRACE_STRUCT.traceKappaAdjKappaconjmDx2;
-   const double traceKappaconjmDxbar2AdjKappa =
-      TRACE_STRUCT.traceKappaconjmDxbar2AdjKappa;
-   const double traceLambda12AdjLambda12conjmH2I2 =
-      TRACE_STRUCT.traceLambda12AdjLambda12conjmH2I2;
-   const double traceKappaAdjKappaKappaAdjKappa =
-      TRACE_STRUCT.traceKappaAdjKappaKappaAdjKappa;
-   const double traceKappaAdjKappaTKappaAdjTKappa =
-      TRACE_STRUCT.traceKappaAdjKappaTKappaAdjTKappa;
-   const double traceKappaAdjTKappaTKappaAdjKappa =
-      TRACE_STRUCT.traceKappaAdjTKappaTKappaAdjKappa;
-   const double traceLambda12AdjLambda12Lambda12AdjLambda12 =
-      TRACE_STRUCT.traceLambda12AdjLambda12Lambda12AdjLambda12;
-   const double traceLambda12AdjLambda12TLambda12AdjTLambda12 =
-      TRACE_STRUCT.traceLambda12AdjLambda12TLambda12AdjTLambda12;
-   const double traceLambda12AdjTLambda12TLambda12AdjLambda12 =
-      TRACE_STRUCT.traceLambda12AdjTLambda12TLambda12AdjLambda12;
-   const double tracemH1I2AdjLambda12Lambda12AdjLambda12Lambda12 =
-      TRACE_STRUCT.tracemH1I2AdjLambda12Lambda12AdjLambda12Lambda12;
-   const double traceKappaAdjKappaKappaAdjKappaconjmDx2 =
-      TRACE_STRUCT.traceKappaAdjKappaKappaAdjKappaconjmDx2;
-   const double traceKappaAdjKappaKappaconjmDxbar2AdjKappa =
-      TRACE_STRUCT.traceKappaAdjKappaKappaconjmDxbar2AdjKappa;
-   const double traceKappaAdjKappaconjmDx2KappaAdjKappa =
-      TRACE_STRUCT.traceKappaAdjKappaconjmDx2KappaAdjKappa;
-   const double traceKappaconjmDxbar2AdjKappaKappaAdjKappa =
-      TRACE_STRUCT.traceKappaconjmDxbar2AdjKappaKappaAdjKappa;
+   const double traceKappaAdjKappaconjmDx2 = TRACE_STRUCT.
+      traceKappaAdjKappaconjmDx2;
+   const double traceKappaconjmDxbar2AdjKappa = TRACE_STRUCT.
+      traceKappaconjmDxbar2AdjKappa;
+   const double traceLambda12AdjLambda12conjmH2I2 = TRACE_STRUCT.
+      traceLambda12AdjLambda12conjmH2I2;
+   const double traceKappaAdjKappaKappaAdjKappa = TRACE_STRUCT.
+      traceKappaAdjKappaKappaAdjKappa;
+   const double traceKappaAdjKappaTKappaAdjTKappa = TRACE_STRUCT.
+      traceKappaAdjKappaTKappaAdjTKappa;
+   const double traceKappaAdjTKappaTKappaAdjKappa = TRACE_STRUCT.
+      traceKappaAdjTKappaTKappaAdjKappa;
+   const double traceLambda12AdjLambda12Lambda12AdjLambda12 = TRACE_STRUCT.
+      traceLambda12AdjLambda12Lambda12AdjLambda12;
+   const double traceLambda12AdjLambda12TLambda12AdjTLambda12 = TRACE_STRUCT.
+      traceLambda12AdjLambda12TLambda12AdjTLambda12;
+   const double traceLambda12AdjTLambda12TLambda12AdjLambda12 = TRACE_STRUCT.
+      traceLambda12AdjTLambda12TLambda12AdjLambda12;
+   const double tracemH1I2AdjLambda12Lambda12AdjLambda12Lambda12 = TRACE_STRUCT
+      .tracemH1I2AdjLambda12Lambda12AdjLambda12Lambda12;
+   const double traceKappaAdjKappaKappaAdjKappaconjmDx2 = TRACE_STRUCT.
+      traceKappaAdjKappaKappaAdjKappaconjmDx2;
+   const double traceKappaAdjKappaKappaconjmDxbar2AdjKappa = TRACE_STRUCT.
+      traceKappaAdjKappaKappaconjmDxbar2AdjKappa;
+   const double traceKappaAdjKappaconjmDx2KappaAdjKappa = TRACE_STRUCT.
+      traceKappaAdjKappaconjmDx2KappaAdjKappa;
+   const double traceKappaconjmDxbar2AdjKappaKappaAdjKappa = TRACE_STRUCT.
+      traceKappaconjmDxbar2AdjKappaKappaAdjKappa;
    const double traceLambda12AdjLambda12Lambda12AdjLambda12conjmH2I2 =
       TRACE_STRUCT.traceLambda12AdjLambda12Lambda12AdjLambda12conjmH2I2;
    const double traceLambda12AdjLambda12conjmH2I2Lambda12AdjLambda12 =
@@ -180,8 +177,8 @@ double CE6SSM_soft_parameters::calc_beta_ms2_2_loop(const Soft_traces& soft_trac
 
    double beta_ms2;
 
-   const double beta_ms2_1 = Re(0.05*twoLoop*(-16*(2*traceAdjKappaTKappa
-      + 3*traceAdjLambda12TLambda12 - 4*MassB*traceKappaAdjKappa - 6*MassB*
+   const double beta_ms2_1 = Re(0.05*twoLoop*(-16*(2*traceAdjKappaTKappa + 3*
+      traceAdjLambda12TLambda12 - 4*MassB*traceKappaAdjKappa - 6*MassB*
       traceLambda12AdjLambda12 - 6*MassB*AbsSqr(Lambdax))*Conj(MassB)*Sqr(g1) +
       3*Conj(MassBp)*Sqr(gN)*(8*(3*traceAdjKappaTKappa + 2*
       traceAdjLambda12TLambda12 - 6*MassBp*traceKappaAdjKappa - 4*MassBp*
@@ -192,7 +189,7 @@ double CE6SSM_soft_parameters::calc_beta_ms2_2_loop(const Soft_traces& soft_trac
       traceKappaAdjKappaKappaAdjKappaconjmDx2 - 60*
       traceKappaAdjKappaKappaconjmDxbar2AdjKappa - 120*
       traceKappaAdjKappaTKappaAdjTKappa - 120*traceKappaAdjTKappaTKappaAdjKappa
-      - 60*traceKappaconjmDxbar2AdjKappaKappaAdjKappa - 40*
+       - 60*traceKappaconjmDxbar2AdjKappaKappaAdjKappa - 40*
       traceLambda12AdjLambda12conjmH2I2Lambda12AdjLambda12 - 80*ms2*
       traceLambda12AdjLambda12Lambda12AdjLambda12 - 40*
       traceLambda12AdjLambda12Lambda12AdjLambda12conjmH2I2 - 80*
@@ -202,13 +199,13 @@ double CE6SSM_soft_parameters::calc_beta_ms2_2_loop(const Soft_traces& soft_trac
       AbsSqr(Lambdax) - 20*traceconjTYeTpTYe*AbsSqr(Lambdax) - 60*
       traceconjTYuTpTYu*AbsSqr(Lambdax) - 60*tracemd2YdAdjYd*AbsSqr(Lambdax) -
       20*traceme2YeAdjYe*AbsSqr(Lambdax) - 20*traceml2AdjYeYe*AbsSqr(Lambdax) -
-      60*tracemq2AdjYdYd*AbsSqr(Lambdax) - 60*tracemq2AdjYuYu*AbsSqr(Lambdax)
-      - 60*tracemu2YuAdjYu*AbsSqr(Lambdax) - 120*mHd2*traceYdAdjYd*AbsSqr(
-      Lambdax) - 60*mHu2*traceYdAdjYd*AbsSqr(Lambdax) - 60*ms2*traceYdAdjYd*
-      AbsSqr(Lambdax) - 40*mHd2*traceYeAdjYe*AbsSqr(Lambdax) - 20*mHu2*
-      traceYeAdjYe*AbsSqr(Lambdax) - 20*ms2*traceYeAdjYe*AbsSqr(Lambdax) - 60*
-      mHd2*traceYuAdjYu*AbsSqr(Lambdax) - 120*mHu2*traceYuAdjYu*AbsSqr(Lambdax)
-      - 60*ms2*traceYuAdjYu*AbsSqr(Lambdax) - 60*traceAdjYdTYd*Conj(TLambdax)*
+      60*tracemq2AdjYdYd*AbsSqr(Lambdax) - 60*tracemq2AdjYuYu*AbsSqr(Lambdax) -
+      60*tracemu2YuAdjYu*AbsSqr(Lambdax) - 120*mHd2*traceYdAdjYd*AbsSqr(Lambdax
+      ) - 60*mHu2*traceYdAdjYd*AbsSqr(Lambdax) - 60*ms2*traceYdAdjYd*AbsSqr(
+      Lambdax) - 40*mHd2*traceYeAdjYe*AbsSqr(Lambdax) - 20*mHu2*traceYeAdjYe*
+      AbsSqr(Lambdax) - 20*ms2*traceYeAdjYe*AbsSqr(Lambdax) - 60*mHd2*
+      traceYuAdjYu*AbsSqr(Lambdax) - 120*mHu2*traceYuAdjYu*AbsSqr(Lambdax) - 60
+      *ms2*traceYuAdjYu*AbsSqr(Lambdax) - 60*traceAdjYdTYd*Conj(TLambdax)*
       Lambdax - 20*traceAdjYeTYe*Conj(TLambdax)*Lambdax - 60*traceAdjYuTYu*Conj
       (TLambdax)*Lambdax - 8*MassB*traceconjTKappaTpKappa*Sqr(g1) + 8*
       traceconjTKappaTpTKappa*Sqr(g1) - 12*MassB*traceconjTLambda12TpLambda12*
@@ -244,12 +241,12 @@ double CE6SSM_soft_parameters::calc_beta_ms2_2_loop(const Soft_traces& soft_trac
       Lambdax))*Sqr(Lambdax) - 60*traceconjTYdTpYd*Conj(Lambdax)*TLambdax - 20*
       traceconjTYeTpYe*Conj(Lambdax)*TLambdax - 60*traceconjTYuTpYu*Conj(
       Lambdax)*TLambdax)));
-   const double beta_ms2_2 = Re(-0.8*twoLoop*(15*traceYdAdjYd*Conj(
-      TLambdax) + 5*traceYeAdjYe*Conj(TLambdax) + 15*traceYuAdjYu*Conj(TLambdax
-      ) + 40*AbsSqr(Lambdax)*Conj(TLambdax) + 3*Conj(MassB)*Conj(Lambdax)*Sqr(
-      g1) - 3*Conj(TLambdax)*Sqr(g1) + 15*Conj(MassWB)*Conj(Lambdax)*Sqr(g2) -
-      15*Conj(TLambdax)*Sqr(g2) - 3*Conj(MassBp)*Conj(Lambdax)*Sqr(gN) + 3*Conj
-      (TLambdax)*Sqr(gN))*TLambdax);
+   const double beta_ms2_2 = Re(-0.8*twoLoop*(15*traceYdAdjYd*Conj(TLambdax) +
+      5*traceYeAdjYe*Conj(TLambdax) + 15*traceYuAdjYu*Conj(TLambdax) + 40*
+      AbsSqr(Lambdax)*Conj(TLambdax) + 3*Conj(MassB)*Conj(Lambdax)*Sqr(g1) - 3*
+      Conj(TLambdax)*Sqr(g1) + 15*Conj(MassWB)*Conj(Lambdax)*Sqr(g2) - 15*Conj(
+      TLambdax)*Sqr(g2) - 3*Conj(MassBp)*Conj(Lambdax)*Sqr(gN) + 3*Conj(
+      TLambdax)*Sqr(gN))*TLambdax);
 
    beta_ms2 = beta_ms2_1 + beta_ms2_2;
 

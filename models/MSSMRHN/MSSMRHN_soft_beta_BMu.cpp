@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:46:12
+// File generated at Sun 26 Aug 2018 14:55:57
 
 #include "MSSMRHN_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -121,18 +121,18 @@ double MSSMRHN_soft_parameters::calc_beta_BMu_2_loop(const Soft_traces& soft_tra
 
    double beta_BMu;
 
-   beta_BMu = Re(0.02*twoLoop*(BMu*(207*Quad(g1) + 10*Sqr(g1)*(-2*
-      traceYdAdjYd + 6*traceYeAdjYe + 4*traceYuAdjYu + 9*Sqr(g2)) + 25*(15*Quad
-      (g2) + 2*(-9*traceYdAdjYdYdAdjYd - 6*traceYdAdjYuYuAdjYd - 3*
-      traceYeAdjYeYeAdjYe - 2*traceYeAdjYvYvAdjYe - 9*traceYuAdjYuYuAdjYu - 3*
-      traceYvAdjYvYvAdjYv + 16*(traceYdAdjYd + traceYuAdjYu)*Sqr(g3)))) - 4*Mu*
-      (207*MassB*Quad(g1) + 5*Sqr(g1)*(2*(traceAdjYdTYd - 3*traceAdjYeTYe - 2*
-      traceAdjYuTYu - MassB*traceYdAdjYd + 3*MassB*traceYeAdjYe + 2*MassB*
-      traceYuAdjYu) + 9*(MassB + MassWB)*Sqr(g2)) + 25*(15*MassWB*Quad(g2) + 2*
-      (9*traceYdAdjYdTYdAdjYd + 3*traceYdAdjYuTYuAdjYd + 3*traceYeAdjYeTYeAdjYe
-      + traceYeAdjYvTYvAdjYe + 3*traceYuAdjYdTYdAdjYu + 9*traceYuAdjYuTYuAdjYu
-      + traceYvAdjYeTYeAdjYv + 3*traceYvAdjYvTYvAdjYv - 8*(traceAdjYdTYd +
-      traceAdjYuTYu - MassG*(traceYdAdjYd + traceYuAdjYu))*Sqr(g3))))));
+   beta_BMu = Re(0.02*twoLoop*(BMu*(207*Quad(g1) + 10*Sqr(g1)*(-2*traceYdAdjYd
+      + 6*traceYeAdjYe + 4*traceYuAdjYu + 9*Sqr(g2)) + 25*(15*Quad(g2) + 2*(-9*
+      traceYdAdjYdYdAdjYd - 6*traceYdAdjYuYuAdjYd - 3*traceYeAdjYeYeAdjYe - 2*
+      traceYeAdjYvYvAdjYe - 9*traceYuAdjYuYuAdjYu - 3*traceYvAdjYvYvAdjYv + 16*
+      (traceYdAdjYd + traceYuAdjYu)*Sqr(g3)))) - 4*Mu*(207*MassB*Quad(g1) + 5*
+      Sqr(g1)*(2*(traceAdjYdTYd - 3*traceAdjYeTYe - 2*traceAdjYuTYu - MassB*
+      traceYdAdjYd + 3*MassB*traceYeAdjYe + 2*MassB*traceYuAdjYu) + 9*(MassB +
+      MassWB)*Sqr(g2)) + 25*(15*MassWB*Quad(g2) + 2*(9*traceYdAdjYdTYdAdjYd + 3
+      *traceYdAdjYuTYuAdjYd + 3*traceYeAdjYeTYeAdjYe + traceYeAdjYvTYvAdjYe + 3
+      *traceYuAdjYdTYdAdjYu + 9*traceYuAdjYuTYuAdjYu + traceYvAdjYeTYeAdjYv + 3
+      *traceYvAdjYvTYvAdjYv - 8*(traceAdjYdTYd + traceAdjYuTYu - MassG*(
+      traceYdAdjYd + traceYuAdjYu))*Sqr(g3))))));
 
 
    return beta_BMu;

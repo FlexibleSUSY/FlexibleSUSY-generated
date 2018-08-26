@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Mon 5 Mar 2018 18:19:34
+// File generated at Sun 26 Aug 2018 14:36:15
 
 /**
  * @file lowNMSSMTanBetaAtMZ_a_muon.cpp
  *
- * This file was generated at Mon 5 Mar 2018 18:19:34 with FlexibleSUSY
- * 2.1.0 and SARAH 4.12.3 .
+ * This file was generated at Sun 26 Aug 2018 14:36:15 with FlexibleSUSY
+ * 2.2.0 and SARAH 4.13.0 .
  */
 
 #include "lowNMSSMTanBetaAtMZ_a_muon.hpp"
@@ -217,10 +217,9 @@ double OneLoopFunctionF2N(double x)
 
 double get_MSUSY(const lowNMSSMTanBetaAtMZ_mass_eigenstates& model)
 {
-   return Min(model.get_MSd().tail<6>().minCoeff(), model.get_MSu().tail<6>()
-      .minCoeff(), model.get_MSe().tail<6>().minCoeff(), model.get_MHpm().tail<1>(
-      ).minCoeff(), model.get_MCha().tail<2>().minCoeff());
-
+   return Min(model.get_MSd().tail<6>().minCoeff(), model.get_MSu().tail<6>().
+      minCoeff(), model.get_MSe().tail<6>().minCoeff(), model.get_MHpm().tail<1>()
+      .minCoeff(), model.get_MCha().tail<2>().minCoeff());
 }
 
 void run_to_MSUSY(lowNMSSMTanBetaAtMZ_mass_eigenstates& model)
