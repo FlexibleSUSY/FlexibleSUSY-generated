@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 13:50:20
+// File generated at Tue 22 Jan 2019 13:27:28
 
 /**
  * @file MSSMNoFVHimalaya_edm.hpp
  *
- * This file was generated at Sun 26 Aug 2018 13:50:20 with FlexibleSUSY
- * 2.2.0 and SARAH 4.13.0 .
+ * This file was generated at Tue 22 Jan 2019 13:27:28 with FlexibleSUSY
+ * 2.3.0 and SARAH 4.14.1 .
  */
 
 #ifndef MSSMNoFVHimalaya_EDM_H

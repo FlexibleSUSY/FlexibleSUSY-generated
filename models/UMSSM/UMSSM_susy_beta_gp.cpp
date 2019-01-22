@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:20:51
+// File generated at Tue 22 Jan 2019 17:28:27
 
 #include "UMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -77,17 +77,19 @@ double UMSSM_susy_parameters::calc_beta_gp_2_loop(const Susy_traces& susy_traces
 
    double beta_gp;
 
-   beta_gp = Re(0.4*twoLoop*Cube(gp)*(-10*AbsSqr(Lambdax)*(Sqr(QHd) + Sqr(QHu)
-      + Sqr(Qs)) + 3*Sqr(g1)*(2*Sqr(Qd) + 6*Sqr(Qe) + Sqr(QHd) + Sqr(QHu) + 3*
-      Sqr(Ql) + Sqr(Qq) + 8*Sqr(Qu)) + 5*(2*(9*Quad(Qd) + 3*Quad(Qe) + 2*Quad(
-      QHd) + 2*Quad(QHu) + 6*Quad(Ql) + 18*Quad(Qq) + Quad(Qs) + 9*Quad(Qu) + 3
-      *Quad(Qv))*Sqr(gp) - 6*traceYdAdjYd*Sqr(Qd) - 2*traceYeAdjYe*Sqr(Qe) - 6*
-      traceYdAdjYd*Sqr(QHd) - 2*traceYeAdjYe*Sqr(QHd) + 3*Sqr(g2)*Sqr(QHd) - 6*
-      traceYuAdjYu*Sqr(QHu) - 2*traceYvAdjYv*Sqr(QHu) + 3*Sqr(g2)*Sqr(QHu) - 2*
-      traceYeAdjYe*Sqr(Ql) - 2*traceYvAdjYv*Sqr(Ql) + 9*Sqr(g2)*Sqr(Ql) - 6*
-      traceYdAdjYd*Sqr(Qq) - 6*traceYuAdjYu*Sqr(Qq) + 27*Sqr(g2)*Sqr(Qq) - 6*
-      traceYuAdjYu*Sqr(Qu) + 24*Sqr(g3)*(Sqr(Qd) + 2*Sqr(Qq) + Sqr(Qu)) - 2*
-      traceYvAdjYv*Sqr(Qv))));
+   beta_gp = Re(0.4*twoLoop*Cube(gp)*(90*Quad(Qd)*Sqr(gp) + 30*Quad(Qe)*Sqr(gp)
+      + 20*Quad(QHd)*Sqr(gp) + 20*Quad(QHu)*Sqr(gp) + 60*Quad(Ql)*Sqr(gp) + 180
+      *Quad(Qq)*Sqr(gp) + 10*Quad(Qs)*Sqr(gp) + 90*Quad(Qu)*Sqr(gp) + 30*Quad(
+      Qv)*Sqr(gp) - 30*traceYdAdjYd*Sqr(Qd) + 6*Sqr(g1)*Sqr(Qd) + 120*Sqr(g3)*
+      Sqr(Qd) - 10*traceYeAdjYe*Sqr(Qe) + 18*Sqr(g1)*Sqr(Qe) - 30*traceYdAdjYd*
+      Sqr(QHd) - 10*traceYeAdjYe*Sqr(QHd) - 10*AbsSqr(Lambdax)*Sqr(QHd) + 3*Sqr
+      (g1)*Sqr(QHd) + 15*Sqr(g2)*Sqr(QHd) - 30*traceYuAdjYu*Sqr(QHu) - 10*
+      traceYvAdjYv*Sqr(QHu) - 10*AbsSqr(Lambdax)*Sqr(QHu) + 3*Sqr(g1)*Sqr(QHu)
+      + 15*Sqr(g2)*Sqr(QHu) - 10*traceYeAdjYe*Sqr(Ql) - 10*traceYvAdjYv*Sqr(Ql)
+      + 9*Sqr(g1)*Sqr(Ql) + 45*Sqr(g2)*Sqr(Ql) - 30*traceYdAdjYd*Sqr(Qq) - 30*
+      traceYuAdjYu*Sqr(Qq) + 3*Sqr(g1)*Sqr(Qq) + 135*Sqr(g2)*Sqr(Qq) + 240*Sqr(
+      g3)*Sqr(Qq) - 10*AbsSqr(Lambdax)*Sqr(Qs) - 30*traceYuAdjYu*Sqr(Qu) + 24*
+      Sqr(g1)*Sqr(Qu) + 120*Sqr(g3)*Sqr(Qu) - 10*traceYvAdjYv*Sqr(Qv)));
 
 
    return beta_gp;
@@ -118,6 +120,25 @@ double UMSSM_susy_parameters::calc_beta_gp_3_loop(const Susy_traces& susy_traces
  * @return 4-loop beta function
  */
 double UMSSM_susy_parameters::calc_beta_gp_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_gp;
+
+   beta_gp = 0;
+
+
+   return beta_gp;
+}
+
+/**
+ * Calculates the 5-loop beta function of gp.
+ *
+ * @return 5-loop beta function
+ */
+double UMSSM_susy_parameters::calc_beta_gp_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:10:29
+// File generated at Tue 22 Jan 2019 16:49:15
 
 /**
  * @file SplitMSSM_a_muon.hpp
  *
- * This file was generated at Sun 26 Aug 2018 14:10:29 with FlexibleSUSY
- * 2.2.0 and SARAH 4.13.0 .
+ * This file was generated at Tue 22 Jan 2019 16:49:15 with FlexibleSUSY
+ * 2.3.0 and SARAH 4.14.1 .
  */
 
 #ifndef SplitMSSM_A_MUON_H

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 13:57:54
+// File generated at Tue 22 Jan 2019 14:41:52
 
 #include "E6SSMEFTHiggs_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -94,6 +94,25 @@ double E6SSMEFTHiggs_susy_parameters::calc_beta_gN_3_loop(const Susy_traces& sus
  * @return 4-loop beta function
  */
 double E6SSMEFTHiggs_susy_parameters::calc_beta_gN_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_gN;
+
+   beta_gN = 0;
+
+
+   return beta_gN;
+}
+
+/**
+ * Calculates the 5-loop beta function of gN.
+ *
+ * @return 5-loop beta function
+ */
+double E6SSMEFTHiggs_susy_parameters::calc_beta_gN_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

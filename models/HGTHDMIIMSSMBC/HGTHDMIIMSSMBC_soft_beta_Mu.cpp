@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:06:42
+// File generated at Tue 22 Jan 2019 16:22:34
 
 #include "HGTHDMIIMSSMBC_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,8 +73,8 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_Mu_1_loop(const Soft_traces& so
 
    double beta_Mu;
 
-   beta_Mu = Re(0.05*oneOver16PiSqr*Mu*(-18*Sqr(g1) + 5*(3*Sqr(g1d) + Sqr(g1dp)
-      - 18*Sqr(g2) + 3*Sqr(g2u) + Sqr(g2up))));
+   beta_Mu = Re(-0.05*oneOver16PiSqr*Mu*(18*Sqr(g1) - 15*Sqr(g1d) - 5*Sqr(g1dp)
+      + 90*Sqr(g2) - 15*Sqr(g2u) - 5*Sqr(g2up)));
 
 
    return beta_Mu;
@@ -94,14 +94,15 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_Mu_2_loop(const Soft_traces& so
 
    double beta_Mu;
 
-   beta_Mu = Re(0.00625*twoLoop*Mu*(570*Quad(g1) + 3*Sqr(g1)*(33*Sqr(g1d) + 11*
-      Sqr(g1dp) - 36*Sqr(g2) + 33*Sqr(g2u) + 11*Sqr(g2up)) - 5*(-96*g1d*g1dp*
-      g2u*g2up + 60*Quad(g1d) + 8*Quad(g1dp) + 798*Quad(g2) + 60*Quad(g2u) + 8*
-      Quad(g2up) + 108*traceYuAdjYu*Sqr(g2u) - 363*Sqr(g2)*Sqr(g2u) + 3*Sqr(g1d
-      )*(36*traceYdAdjYd + 12*traceYeAdjYe + 12*Sqr(g1dp) - 121*Sqr(g2) + 20*
-      Sqr(g2u)) + 36*traceYuAdjYu*Sqr(g2up) - 33*Sqr(g2)*Sqr(g2up) + 36*Sqr(g2u
-      )*Sqr(g2up) - 3*Sqr(g1dp)*(-12*traceYdAdjYd - 4*traceYeAdjYe + 11*Sqr(g2)
-      + 4*Sqr(g2up)))));
+   beta_Mu = Re(0.00625*twoLoop*Mu*(480*g1d*g1dp*g2u*g2up + 570*Quad(g1) - 300*
+      Quad(g1d) - 40*Quad(g1dp) - 3990*Quad(g2) - 300*Quad(g2u) - 40*Quad(g2up)
+      - 540*traceYdAdjYd*Sqr(g1d) - 180*traceYeAdjYe*Sqr(g1d) + 99*Sqr(g1)*Sqr(
+      g1d) - 180*traceYdAdjYd*Sqr(g1dp) - 60*traceYeAdjYe*Sqr(g1dp) + 33*Sqr(g1
+      )*Sqr(g1dp) - 180*Sqr(g1d)*Sqr(g1dp) - 108*Sqr(g1)*Sqr(g2) + 1815*Sqr(g1d
+      )*Sqr(g2) + 165*Sqr(g1dp)*Sqr(g2) - 540*traceYuAdjYu*Sqr(g2u) + 99*Sqr(g1
+      )*Sqr(g2u) - 300*Sqr(g1d)*Sqr(g2u) + 1815*Sqr(g2)*Sqr(g2u) - 180*
+      traceYuAdjYu*Sqr(g2up) + 33*Sqr(g1)*Sqr(g2up) + 60*Sqr(g1dp)*Sqr(g2up) +
+      165*Sqr(g2)*Sqr(g2up) - 180*Sqr(g2u)*Sqr(g2up)));
 
 
    return beta_Mu;
@@ -132,6 +133,25 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_Mu_3_loop(const Soft_traces& so
  * @return 4-loop beta function
  */
 double HGTHDMIIMSSMBC_soft_parameters::calc_beta_Mu_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_Mu;
+
+   beta_Mu = 0;
+
+
+   return beta_Mu;
+}
+
+/**
+ * Calculates the 5-loop beta function of Mu.
+ *
+ * @return 5-loop beta function
+ */
+double HGTHDMIIMSSMBC_soft_parameters::calc_beta_Mu_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

@@ -7,7 +7,12 @@ MODMSSMEFTHiggs_DEP := $(patsubst %,model_specific/%,$(MODMSSMEFTHiggs_MOD))
 MODMSSMEFTHiggs_INC := $(patsubst %,-Imodel_specific/%,$(MODMSSMEFTHiggs_MOD))
 MODMSSMEFTHiggs_LIB := $(foreach M,$(MODMSSMEFTHiggs_MOD),model_specific/$M/libmodel_specific_$M$(MODULE_LIBEXT))
 
+MODMSSMEFTHiggs_SUBMOD  := $(DIR)/cxx_qft
+MODMSSMEFTHiggs_SUBMOD_INC := $(patsubst %,-I%,$(MODMSSMEFTHiggs_SUBMOD))
+
 MSSMEFTHiggs_INSTALL_DIR := $(INSTALL_DIR)/$(DIR)
+MSSMEFTHiggs_INSTALL_CXXQFT_DIR := \
+		$(MSSMEFTHiggs_INSTALL_DIR)/cxx_qft
 
 MSSMEFTHiggs_MK     := \
 		$(DIR)/module.mk
@@ -68,7 +73,6 @@ LLMSSMEFTHiggs_MMA  := \
 		$(DIR)/run_MSSMEFTHiggs.m
 
 LIBMSSMEFTHiggs_HDR := \
-		$(DIR)/MSSMEFTHiggs_cxx_diagrams.hpp \
 		$(DIR)/MSSMEFTHiggs_a_muon.hpp \
 		$(DIR)/MSSMEFTHiggs_convergence_tester.hpp \
 		$(DIR)/MSSMEFTHiggs_edm.hpp \
@@ -93,6 +97,13 @@ LIBMSSMEFTHiggs_HDR := \
 		$(DIR)/MSSMEFTHiggs_susy_scale_constraint.hpp \
 		$(DIR)/MSSMEFTHiggs_utilities.hpp \
 		$(DIR)/MSSMEFTHiggs_weinberg_angle.hpp
+
+LIBMSSMEFTHiggs_CXXQFT_HDR := \
+		$(DIR)/cxx_qft/MSSMEFTHiggs_qft.hpp \
+		$(DIR)/cxx_qft/MSSMEFTHiggs_fields.hpp \
+		$(DIR)/cxx_qft/MSSMEFTHiggs_vertices.hpp \
+		$(DIR)/cxx_qft/MSSMEFTHiggs_context_base.hpp \
+		$(DIR)/cxx_qft/MSSMEFTHiggs_npointfunctions.hpp
 
 ifneq ($(findstring two_scale,$(SOLVERS)),)
 -include $(DIR)/two_scale.mk
@@ -182,8 +193,10 @@ all-$(MODNAME): $(LIBMSSMEFTHiggs) $(EXEMSSMEFTHiggs_EXE)
 ifneq ($(INSTALL_DIR),)
 install-src::
 		install -d $(MSSMEFTHiggs_INSTALL_DIR)
+		install -d $(MSSMEFTHiggs_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(LIBMSSMEFTHiggs_SRC) $(MSSMEFTHiggs_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LIBMSSMEFTHiggs_HDR) $(MSSMEFTHiggs_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(LIBMSSMEFTHiggs_CXXQFT_HDR) $(MSSMEFTHiggs_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(EXEMSSMEFTHiggs_SRC) $(MSSMEFTHiggs_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLMSSMEFTHiggs_SRC) $(MSSMEFTHiggs_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLMSSMEFTHiggs_MMA) $(MSSMEFTHiggs_INSTALL_DIR)
@@ -214,6 +227,7 @@ clean-$(MODNAME)-obj:
 clean-$(MODNAME)-src:
 		-rm -f $(LIBMSSMEFTHiggs_SRC)
 		-rm -f $(LIBMSSMEFTHiggs_HDR)
+		-rm -f $(LIBMSSMEFTHiggs_CXXQFT_HDR)
 		-rm -f $(EXEMSSMEFTHiggs_SRC)
 		-rm -f $(LLMSSMEFTHiggs_SRC)
 		-rm -f $(LLMSSMEFTHiggs_MMA)
@@ -242,14 +256,14 @@ distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
 		tar -czf $(MSSMEFTHiggs_TARBALL) \
-		$(LIBMSSMEFTHiggs_SRC) $(LIBMSSMEFTHiggs_HDR) \
+		$(LIBMSSMEFTHiggs_SRC) $(LIBMSSMEFTHiggs_HDR) $(LIBMSSMEFTHiggs_CXXQFT_HDR) \
 		$(EXEMSSMEFTHiggs_SRC) \
 		$(LLMSSMEFTHiggs_SRC) $(LLMSSMEFTHiggs_MMA) \
 		$(MSSMEFTHiggs_MK) $(MSSMEFTHiggs_INCLUDE_MK) \
 		$(MSSMEFTHiggs_SLHA_INPUT) $(MSSMEFTHiggs_REFERENCES) \
 		$(MSSMEFTHiggs_GNUPLOT)
 
-$(LIBMSSMEFTHiggs_SRC) $(LIBMSSMEFTHiggs_HDR) $(EXEMSSMEFTHiggs_SRC) $(LLMSSMEFTHiggs_SRC) $(LLMSSMEFTHiggs_MMA) \
+$(LIBMSSMEFTHiggs_SRC) $(LIBMSSMEFTHiggs_HDR) $(LIBMSSMEFTHiggs_CXXQFT_HDR) $(EXEMSSMEFTHiggs_SRC) $(LLMSSMEFTHiggs_SRC) $(LLMSSMEFTHiggs_MMA) \
 : run-metacode-$(MODNAME)
 		@true
 
@@ -270,7 +284,7 @@ $(METACODE_STAMP_MSSMEFTHiggs):
 endif
 
 $(LIBMSSMEFTHiggs_DEP) $(EXEMSSMEFTHiggs_DEP) $(LLMSSMEFTHiggs_DEP) $(LIBMSSMEFTHiggs_OBJ) $(EXEMSSMEFTHiggs_OBJ) $(LLMSSMEFTHiggs_OBJ) $(LLMSSMEFTHiggs_LIB): \
-	CPPFLAGS += $(MODMSSMEFTHiggs_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODMSSMEFTHiggs_SUBMOD_INC) $(MODMSSMEFTHiggs_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBMSSMEFTHiggs_DEP) $(EXEMSSMEFTHiggs_DEP) $(LLMSSMEFTHiggs_DEP) $(LIBMSSMEFTHiggs_OBJ) $(EXEMSSMEFTHiggs_OBJ) $(LLMSSMEFTHiggs_OBJ) $(LLMSSMEFTHiggs_LIB): \

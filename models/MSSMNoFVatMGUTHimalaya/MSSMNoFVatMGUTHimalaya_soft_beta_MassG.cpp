@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 13:47:02
+// File generated at Tue 22 Jan 2019 13:05:07
 
 #include "MSSMNoFVatMGUTHimalaya_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -94,9 +94,10 @@ double MSSMNoFVatMGUTHimalaya_soft_parameters::calc_beta_MassG_2_loop(const Soft
 
    double beta_MassG;
 
-   beta_MassG = Re(0.4*twoLoop*Sqr(g3)*(11*(MassB + MassG)*Sqr(g1) + 5*(9*(
-      MassG + MassWB)*Sqr(g2) + 4*(traceAdjYdTYd + traceAdjYuTYu - MassG*
-      traceYdAdjYd - MassG*traceYuAdjYu + 7*MassG*Sqr(g3)))));
+   beta_MassG = Re(0.4*twoLoop*Sqr(g3)*(20*traceAdjYdTYd + 20*traceAdjYuTYu -
+      20*MassG*traceYdAdjYd - 20*MassG*traceYuAdjYu + 11*MassB*Sqr(g1) + 11*
+      MassG*Sqr(g1) + 45*MassG*Sqr(g2) + 45*MassWB*Sqr(g2) + 140*MassG*Sqr(g3))
+      );
 
 
    return beta_MassG;
@@ -112,9 +113,9 @@ double MSSMNoFVatMGUTHimalaya_soft_parameters::calc_beta_MassG_3_loop(const Soft
    DEFINE_PROJECTOR(3,3,3,3)
 
    const double traceAdjYdYd = TRACE_STRUCT.traceAdjYdYd;
+   const double traceAdjYeYe = TRACE_STRUCT.traceAdjYeYe;
    const double traceAdjYuYu = TRACE_STRUCT.traceAdjYuYu;
    const double traceTYdAdjYd = TRACE_STRUCT.traceTYdAdjYd;
-   const double traceAdjYeYe = TRACE_STRUCT.traceAdjYeYe;
    const double traceTYeAdjYe = TRACE_STRUCT.traceTYeAdjYe;
    const double traceTYuAdjYu = TRACE_STRUCT.traceTYuAdjYu;
    const double traceAdjYdYdAdjYdYd = TRACE_STRUCT.traceAdjYdYdAdjYdYd;
@@ -128,21 +129,26 @@ double MSSMNoFVatMGUTHimalaya_soft_parameters::calc_beta_MassG_3_loop(const Soft
 
    double beta_MassG;
 
-   beta_MassG = Re(0.02666666666666667*threeLoop*Sqr(g3)*(-1702*(2*MassB +
-      MassG)*Quad(g1) - 5*Sqr(g1)*(4*(8*MassB*traceAdjYdYd + 8*MassG*
-      traceAdjYdYd + 11*MassB*traceAdjYuYu + 11*MassG*traceAdjYuYu - 8*
-      traceTYdAdjYd - 11*traceTYuAdjYu) + 9*(MassB + MassG + MassWB)*Sqr(g2) -
-      22*(MassB + 2*MassG)*Sqr(g3)) - 25*(81*(MassG + 2*MassWB)*Quad(g2) - 1041
-      *MassG*Quad(g3) + 104*(2*MassG*(traceAdjYdYd + traceAdjYuYu) -
-      traceTYdAdjYd - traceTYuAdjYu)*Sqr(g3) - 18*Sqr(g2)*(-2*(MassG*(
-      traceAdjYdYd + traceAdjYuYu) + MassWB*(traceAdjYdYd + traceAdjYuYu) -
-      traceTYdAdjYd - traceTYuAdjYu) + (2*MassG + MassWB)*Sqr(g3)) + 6*(12*
-      traceAdjYdTYdAdjYdYd + 4*traceAdjYuTYuAdjYdYd + 12*traceAdjYuTYuAdjYuYu +
-      18*traceAdjYdYd*traceTYdAdjYd + 3*traceAdjYeYe*traceTYdAdjYd + 4*
-      traceTYdAdjYuYuAdjYd + 3*traceAdjYdYd*traceTYeAdjYe + 18*traceAdjYuYu*
-      traceTYuAdjYu - MassG*(6*traceAdjYdYdAdjYdYd + 3*traceAdjYdYd*
-      traceAdjYeYe + 4*traceAdjYuYuAdjYdYd + 6*traceAdjYuYuAdjYuYu + 9*Sqr(
-      traceAdjYdYd) + 9*Sqr(traceAdjYuYu))))));
+   beta_MassG = Re(0.02666666666666667*threeLoop*Sqr(g3)*(-1800*
+      traceAdjYdTYdAdjYdYd + 900*MassG*traceAdjYdYdAdjYdYd + 450*MassG*
+      traceAdjYdYd*traceAdjYeYe - 600*traceAdjYuTYuAdjYdYd - 1800*
+      traceAdjYuTYuAdjYuYu + 600*MassG*traceAdjYuYuAdjYdYd + 900*MassG*
+      traceAdjYuYuAdjYuYu - 2700*traceAdjYdYd*traceTYdAdjYd - 450*traceAdjYeYe*
+      traceTYdAdjYd - 600*traceTYdAdjYuYuAdjYd - 450*traceAdjYdYd*traceTYeAdjYe
+       - 2700*traceAdjYuYu*traceTYuAdjYu - 3404*MassB*Quad(g1) - 1702*MassG*
+      Quad(g1) - 2025*MassG*Quad(g2) - 4050*MassWB*Quad(g2) + 26025*MassG*Quad(
+      g3) - 160*MassB*traceAdjYdYd*Sqr(g1) - 160*MassG*traceAdjYdYd*Sqr(g1) -
+      220*MassB*traceAdjYuYu*Sqr(g1) - 220*MassG*traceAdjYuYu*Sqr(g1) + 160*
+      traceTYdAdjYd*Sqr(g1) + 220*traceTYuAdjYu*Sqr(g1) - 900*MassG*
+      traceAdjYdYd*Sqr(g2) - 900*MassWB*traceAdjYdYd*Sqr(g2) - 900*MassG*
+      traceAdjYuYu*Sqr(g2) - 900*MassWB*traceAdjYuYu*Sqr(g2) + 900*
+      traceTYdAdjYd*Sqr(g2) + 900*traceTYuAdjYu*Sqr(g2) - 45*MassB*Sqr(g1)*Sqr(
+      g2) - 45*MassG*Sqr(g1)*Sqr(g2) - 45*MassWB*Sqr(g1)*Sqr(g2) - 5200*MassG*
+      traceAdjYdYd*Sqr(g3) - 5200*MassG*traceAdjYuYu*Sqr(g3) + 2600*
+      traceTYdAdjYd*Sqr(g3) + 2600*traceTYuAdjYu*Sqr(g3) + 110*MassB*Sqr(g1)*
+      Sqr(g3) + 220*MassG*Sqr(g1)*Sqr(g3) + 900*MassG*Sqr(g2)*Sqr(g3) + 450*
+      MassWB*Sqr(g2)*Sqr(g3) + 1350*MassG*Sqr(traceAdjYdYd) + 1350*MassG*Sqr(
+      traceAdjYuYu)));
 
 
    return beta_MassG;
@@ -154,6 +160,25 @@ double MSSMNoFVatMGUTHimalaya_soft_parameters::calc_beta_MassG_3_loop(const Soft
  * @return 4-loop beta function
  */
 double MSSMNoFVatMGUTHimalaya_soft_parameters::calc_beta_MassG_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MassG;
+
+   beta_MassG = 0;
+
+
+   return beta_MassG;
+}
+
+/**
+ * Calculates the 5-loop beta function of MassG.
+ *
+ * @return 5-loop beta function
+ */
+double MSSMNoFVatMGUTHimalaya_soft_parameters::calc_beta_MassG_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

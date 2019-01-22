@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:09:39
+// File generated at Tue 22 Jan 2019 16:46:33
 
 #include "SplitMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -43,14 +43,15 @@ double SplitMSSM_susy_parameters::calc_beta_Lambdax_1_loop(const Susy_traces& su
 
    double beta_Lambdax;
 
-   beta_Lambdax = Re(oneOver16PiSqr*(-4*g2d*g2u*gYd*gYu - 12*
-      traceYdAdjYdYdAdjYd - 4*traceYeAdjYeYeAdjYe - 12*traceYuAdjYuYuAdjYu + 12
-      *traceYdAdjYd*Lambdax + 4*traceYeAdjYe*Lambdax + 12*traceYuAdjYu*Lambdax
-      + 0.27*Quad(g1) + 2.25*Quad(g2) - 5*Quad(g2d) - 5*Quad(g2u) - Quad(gYd) -
-      Quad(gYu) - 9*Lambdax*Sqr(g2) + 0.9*Sqr(g1)*(-2*Lambdax + Sqr(g2)) + 6*
-      Lambdax*Sqr(g2d) + 6*Lambdax*Sqr(g2u) - 2*Sqr(g2d)*Sqr(g2u) + 2*Lambdax*
-      Sqr(gYd) - 2*Sqr(g2d)*Sqr(gYd) + 2*Lambdax*Sqr(gYu) - 2*Sqr(g2u)*Sqr(gYu)
-      - 2*Sqr(gYd)*Sqr(gYu) + 12*Sqr(Lambdax)));
+   beta_Lambdax = Re(0.01*oneOver16PiSqr*(-400*g2d*g2u*gYd*gYu - 1200*
+      traceYdAdjYdYdAdjYd - 400*traceYeAdjYeYeAdjYe - 1200*traceYuAdjYuYuAdjYu
+      + 1200*traceYdAdjYd*Lambdax + 400*traceYeAdjYe*Lambdax + 1200*
+      traceYuAdjYu*Lambdax + 27*Quad(g1) + 225*Quad(g2) - 500*Quad(g2d) - 500*
+      Quad(g2u) - 100*Quad(gYd) - 100*Quad(gYu) - 180*Lambdax*Sqr(g1) - 900*
+      Lambdax*Sqr(g2) + 90*Sqr(g1)*Sqr(g2) + 600*Lambdax*Sqr(g2d) + 600*Lambdax
+      *Sqr(g2u) - 200*Sqr(g2d)*Sqr(g2u) + 200*Lambdax*Sqr(gYd) - 200*Sqr(g2d)*
+      Sqr(gYd) + 200*Lambdax*Sqr(gYu) - 200*Sqr(g2u)*Sqr(gYu) - 200*Sqr(gYd)*
+      Sqr(gYu) + 1200*Sqr(Lambdax)));
 
 
    return beta_Lambdax;
@@ -86,37 +87,49 @@ double SplitMSSM_susy_parameters::calc_beta_Lambdax_2_loop(const Susy_traces& su
 
    double beta_Lambdax;
 
-   const double beta_Lambdax_1 = Re(-0.001*twoLoop*(3699*Power6(g1) + 45*Quad(
-      g1)*(-20*traceYdAdjYd + 100*traceYeAdjYe + 76*traceYuAdjYu - 223*Lambdax
-      + 197*Sqr(g2) + 6*Sqr(g2d) + 6*Sqr(g2u) + 2*Sqr(gYd) + 2*Sqr(gYu)) + 25*
-      Sqr(g1)*(385*Quad(g2) - 6*Sqr(g2)*(36*traceYdAdjYd + 44*traceYeAdjYe + 84
-      *traceYuAdjYu + 39*Lambdax + 42*Sqr(g2d) + 42*Sqr(g2u) - 2*Sqr(gYd) - 2*
-      Sqr(gYu)) - 2*(32*traceYdAdjYdYdAdjYd - 96*traceYeAdjYeYeAdjYe - 64*
-      traceYuAdjYuYuAdjYu + 50*traceYdAdjYd*Lambdax + 150*traceYeAdjYe*Lambdax
-      + 170*traceYuAdjYu*Lambdax + 45*Lambdax*Sqr(g2d) + 45*Lambdax*Sqr(g2u) +
-      15*Lambdax*Sqr(gYd) + 15*Lambdax*Sqr(gYu) + 216*Sqr(Lambdax))) - 125*(209
-      *Power6(g2) - Quad(g2)*(36*traceYdAdjYd + 12*traceYeAdjYe + 36*
-      traceYuAdjYu - 47*Lambdax + 306*Sqr(g2d) + 306*Sqr(g2u) + 6*Sqr(gYd) + 6*
-      Sqr(gYu)) - 2*Sqr(g2)*(32*g2d*g2u*gYd*gYu + 80*Quad(g2d) + 80*Quad(g2u) +
-      Sqr(g2d)*(-165*Lambdax + 32*Sqr(g2u) + 16*Sqr(gYd)) - 3*Lambdax*(30*
-      traceYdAdjYd + 10*traceYeAdjYe + 30*traceYuAdjYu + 72*Lambdax + 5*Sqr(gYd
-      ) + 5*Sqr(gYu)) + Sqr(g2u)*(-165*Lambdax + 16*Sqr(gYu))) + 2*(240*
-      traceYdAdjYdYdAdjYdYdAdjYd - 96*traceYdAdjYdYdAdjYuYuAdjYd + 48*
-      traceYdAdjYuYuAdjYdYdAdjYd - 48*traceYdAdjYuYuAdjYuYuAdjYd + 80*
-      traceYeAdjYeYeAdjYeYeAdjYe + 240*traceYuAdjYuYuAdjYuYuAdjYu + 76*g2u*gYd*
-      gYu*Cube(g2d) - 12*traceYdAdjYdYdAdjYd*Lambdax - 168*traceYdAdjYuYuAdjYd*
-      Lambdax - 4*traceYeAdjYeYeAdjYe*Lambdax - 12*traceYuAdjYuYuAdjYu*Lambdax
-      + 94*Power6(g2d) + 94*Power6(g2u) + 10*Power6(gYd) + 10*Power6(gYu) -
-      Lambdax*Quad(gYd) - Lambdax*Quad(gYu) - 256*traceYdAdjYdYdAdjYd*Sqr(g3) -
-      256*traceYuAdjYuYuAdjYu*Sqr(g3) + 320*traceYdAdjYd*Lambdax*Sqr(g3) + 320*
-      traceYuAdjYu*Lambdax*Sqr(g3) + 34*Quad(gYu)*Sqr(gYd) + Quad(g2d)*(-5*
-      Lambdax + 14*Sqr(g2u) + 22*Sqr(gYd)) + 34*Quad(gYd)*Sqr(gYu) + 12*Lambdax
-      *Sqr(gYd)*Sqr(gYu) + 4*g2d*g2u*gYd*gYu*(20*Lambdax + 19*Sqr(g2u) + 21*Sqr
-      (gYd) + 21*Sqr(gYu)) + Quad(g2u)*(-5*Lambdax + 22*Sqr(gYu)) + 2*Sqr(g2u)*
-      (17*Quad(gYu) - Lambdax*Sqr(gYu) + 19*Sqr(gYd)*Sqr(gYu) - 72*Sqr(Lambdax)
-      ) + 2*Sqr(g2d)*(7*Quad(g2u) + 17*Quad(gYd) + Sqr(gYd)*(-Lambdax + 19*Sqr(
-      gYu)) + Sqr(g2u)*(-22*Lambdax + 21*Sqr(gYd) + 21*Sqr(gYu)) - 72*Sqr(
-      Lambdax)) - 48*Sqr(gYd)*Sqr(Lambdax) - 48*Sqr(gYu)*Sqr(Lambdax)))));
+   const double beta_Lambdax_1 = Re(-0.001*twoLoop*(-60000*
+      traceYdAdjYdYdAdjYdYdAdjYd + 24000*traceYdAdjYdYdAdjYuYuAdjYd - 12000*
+      traceYdAdjYuYuAdjYdYdAdjYd + 12000*traceYdAdjYuYuAdjYuYuAdjYd - 20000*
+      traceYeAdjYeYeAdjYeYeAdjYe - 60000*traceYuAdjYuYuAdjYuYuAdjYu - 19000*g2u
+      *gYd*gYu*Cube(g2d) - 19000*g2d*gYd*gYu*Cube(g2u) - 21000*g2d*g2u*gYu*Cube
+      (gYd) - 21000*g2d*g2u*gYd*Cube(gYu) - 20000*g2d*g2u*gYd*gYu*Lambdax +
+      3000*traceYdAdjYdYdAdjYd*Lambdax + 42000*traceYdAdjYuYuAdjYd*Lambdax +
+      1000*traceYeAdjYeYeAdjYe*Lambdax + 3000*traceYuAdjYuYuAdjYu*Lambdax +
+      3699*Power6(g1) - 26125*Power6(g2) - 23500*Power6(g2d) - 23500*Power6(g2u
+      ) - 2500*Power6(gYd) - 2500*Power6(gYu) - 900*traceYdAdjYd*Quad(g1) +
+      4500*traceYeAdjYe*Quad(g1) + 3420*traceYuAdjYu*Quad(g1) - 10035*Lambdax*
+      Quad(g1) + 4500*traceYdAdjYd*Quad(g2) + 1500*traceYeAdjYe*Quad(g2) + 4500
+      *traceYuAdjYu*Quad(g2) - 5875*Lambdax*Quad(g2) + 1250*Lambdax*Quad(g2d) +
+      1250*Lambdax*Quad(g2u) + 250*Lambdax*Quad(gYd) + 250*Lambdax*Quad(gYu) -
+      1600*traceYdAdjYdYdAdjYd*Sqr(g1) + 4800*traceYeAdjYeYeAdjYe*Sqr(g1) +
+      3200*traceYuAdjYuYuAdjYu*Sqr(g1) - 2500*traceYdAdjYd*Lambdax*Sqr(g1) -
+      7500*traceYeAdjYe*Lambdax*Sqr(g1) - 8500*traceYuAdjYu*Lambdax*Sqr(g1) +
+      9625*Quad(g2)*Sqr(g1) + 8000*g2d*g2u*gYd*gYu*Sqr(g2) - 22500*traceYdAdjYd
+      *Lambdax*Sqr(g2) - 7500*traceYeAdjYe*Lambdax*Sqr(g2) - 22500*traceYuAdjYu
+      *Lambdax*Sqr(g2) + 8865*Quad(g1)*Sqr(g2) + 20000*Quad(g2d)*Sqr(g2) +
+      20000*Quad(g2u)*Sqr(g2) - 5400*traceYdAdjYd*Sqr(g1)*Sqr(g2) - 6600*
+      traceYeAdjYe*Sqr(g1)*Sqr(g2) - 12600*traceYuAdjYu*Sqr(g1)*Sqr(g2) - 5850*
+      Lambdax*Sqr(g1)*Sqr(g2) + 270*Quad(g1)*Sqr(g2d) + 38250*Quad(g2)*Sqr(g2d)
+      - 3500*Quad(g2u)*Sqr(g2d) - 8500*Quad(gYd)*Sqr(g2d) - 2250*Lambdax*Sqr(g1
+      )*Sqr(g2d) - 41250*Lambdax*Sqr(g2)*Sqr(g2d) - 6300*Sqr(g1)*Sqr(g2)*Sqr(
+      g2d) + 270*Quad(g1)*Sqr(g2u) + 38250*Quad(g2)*Sqr(g2u) - 3500*Quad(g2d)*
+      Sqr(g2u) - 8500*Quad(gYu)*Sqr(g2u) - 2250*Lambdax*Sqr(g1)*Sqr(g2u) -
+      41250*Lambdax*Sqr(g2)*Sqr(g2u) - 6300*Sqr(g1)*Sqr(g2)*Sqr(g2u) + 11000*
+      Lambdax*Sqr(g2d)*Sqr(g2u) + 8000*Sqr(g2)*Sqr(g2d)*Sqr(g2u) + 64000*
+      traceYdAdjYdYdAdjYd*Sqr(g3) + 64000*traceYuAdjYuYuAdjYu*Sqr(g3) - 80000*
+      traceYdAdjYd*Lambdax*Sqr(g3) - 80000*traceYuAdjYu*Lambdax*Sqr(g3) + 90*
+      Quad(g1)*Sqr(gYd) + 750*Quad(g2)*Sqr(gYd) - 5500*Quad(g2d)*Sqr(gYd) -
+      8500*Quad(gYu)*Sqr(gYd) - 750*Lambdax*Sqr(g1)*Sqr(gYd) - 3750*Lambdax*Sqr
+      (g2)*Sqr(gYd) + 300*Sqr(g1)*Sqr(g2)*Sqr(gYd) + 500*Lambdax*Sqr(g2d)*Sqr(
+      gYd) + 4000*Sqr(g2)*Sqr(g2d)*Sqr(gYd) - 10500*Sqr(g2d)*Sqr(g2u)*Sqr(gYd)
+      + 90*Quad(g1)*Sqr(gYu) + 750*Quad(g2)*Sqr(gYu) - 5500*Quad(g2u)*Sqr(gYu)
+      - 8500*Quad(gYd)*Sqr(gYu) - 750*Lambdax*Sqr(g1)*Sqr(gYu) - 3750*Lambdax*
+      Sqr(g2)*Sqr(gYu) + 300*Sqr(g1)*Sqr(g2)*Sqr(gYu) + 500*Lambdax*Sqr(g2u)*
+      Sqr(gYu) + 4000*Sqr(g2)*Sqr(g2u)*Sqr(gYu) - 10500*Sqr(g2d)*Sqr(g2u)*Sqr(
+      gYu) - 3000*Lambdax*Sqr(gYd)*Sqr(gYu) - 9500*Sqr(g2d)*Sqr(gYd)*Sqr(gYu) -
+      9500*Sqr(g2u)*Sqr(gYd)*Sqr(gYu) - 10800*Sqr(g1)*Sqr(Lambdax) - 54000*Sqr(
+      g2)*Sqr(Lambdax) + 36000*Sqr(g2d)*Sqr(Lambdax) + 36000*Sqr(g2u)*Sqr(
+      Lambdax) + 12000*Sqr(gYd)*Sqr(Lambdax) + 12000*Sqr(gYu)*Sqr(Lambdax)));
    const double beta_Lambdax_2 = Re(-6*twoLoop*(12*traceYdAdjYd + 4*
       traceYeAdjYe + 12*traceYuAdjYu + 13*Lambdax)*Sqr(Lambdax));
 
@@ -151,6 +164,25 @@ double SplitMSSM_susy_parameters::calc_beta_Lambdax_3_loop(const Susy_traces& su
  * @return 4-loop beta function
  */
 double SplitMSSM_susy_parameters::calc_beta_Lambdax_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_Lambdax;
+
+   beta_Lambdax = 0;
+
+
+   return beta_Lambdax;
+}
+
+/**
+ * Calculates the 5-loop beta function of Lambdax.
+ *
+ * @return 5-loop beta function
+ */
+double SplitMSSM_susy_parameters::calc_beta_Lambdax_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

@@ -16,19 +16,22 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 15:11:35
+// File generated at Tue 22 Jan 2019 17:48:01
 
 /**
  * @file CMSSMNoFV_a_muon.cpp
  *
- * This file was generated at Sun 26 Aug 2018 15:11:35 with FlexibleSUSY
- * 2.2.0 and SARAH 4.13.0 .
+ * This file was generated at Tue 22 Jan 2019 17:48:01 with FlexibleSUSY
+ * 2.3.0 and SARAH 4.14.1 .
  */
 
 #include "CMSSMNoFV_a_muon.hpp"
 #include "CMSSMNoFV_mass_eigenstates.hpp"
 
-#include "CMSSMNoFV_cxx_diagrams.hpp"
+#include "cxx_qft/CMSSMNoFV_qft.hpp"
+
+#include "wrappers.hpp"
+#include "numerics2.hpp"
 
 #define INPUTPARAMETER(p) context.model.get_input().p
 #define MODELPARAMETER(p) context.model.get_##p()
@@ -36,9 +39,9 @@
 #define PHASE(p) context.model.get_##p()
 
 using namespace flexiblesusy;
-using namespace cxx_diagrams;
+using namespace CMSSMNoFV_cxx_diagrams;
 
-using Muon = Fm;
+using Muon = fields::Fm;
 
 namespace {
 static constexpr double oneOver16PiSquared = 0.0063325739776461107152;
@@ -48,7 +51,7 @@ double OneLoopFunctionF2C(double);
 double OneLoopFunctionF1N(double);
 double OneLoopFunctionF2N(double);
 
-double get_QED_2L(EvaluationContext&);
+double get_QED_2L(context_base&);
 
 /**
  * @class AMuonVertexCorrectionSF
@@ -69,7 +72,7 @@ double get_QED_2L(EvaluationContext&);
 template<class PhotonEmitter, class ExchangeParticle>
 struct AMuonVertexCorrectionSF {
    static double value(const typename field_indices<Muon>::type& indices,
-                       const EvaluationContext& context);
+                       const context_base& context);
 };
 
 /**
@@ -91,7 +94,7 @@ struct AMuonVertexCorrectionSF {
 template<class PhotonEmitter, class ExchangeParticle>
 struct AMuonVertexCorrectionFS {
    static double value(const typename field_indices<Muon>::type& indices,
-                       const EvaluationContext& context);
+                       const context_base& context);
 };
 
 /**
@@ -263,8 +266,10 @@ double calculate_a_muon_impl(CMSSMNoFV_mass_eigenstates& model)
 {
    VERBOSE_MSG("CMSSMNoFV_a_muon: calculating a_mu at Q = " << model.get_scale());
 
-   EvaluationContext context{ model };
+   context_base context{ model };
    double val = 0.0;
+   
+   using namespace CMSSMNoFV_cxx_diagrams::fields;
 
    std::array<int, 0> indices = {};
 
@@ -327,7 +332,7 @@ std::pair<double,double> vary_scale(const CMSSMNoFV_mass_eigenstates& model)
    return std::make_pair(*(minmax.first), *(minmax.second));
 }
 
-double muonPhysicalMass(const EvaluationContext& context)
+double muonPhysicalMass(const context_base& context)
 {
    return context.model.get_physical().MFm;
 }
@@ -348,7 +353,7 @@ double CMSSMNoFV_a_muon::calculate_a_muon(const CMSSMNoFV_mass_eigenstates& mode
       return std::numeric_limits<double>::quiet_NaN();
    }
 
-   double m_muon_pole = muonPhysicalMass(EvaluationContext{model});
+   double m_muon_pole = muonPhysicalMass(context_base{model});
 
    if (m_muon_pole == 0.0) {
       model.solve_ewsb();
@@ -379,7 +384,7 @@ double CMSSMNoFV_a_muon::calculate_a_muon_uncertainty(const CMSSMNoFV_mass_eigen
 }
 
 namespace {
-double get_QED_2L(EvaluationContext& context)
+double get_QED_2L(context_base& context)
 {
    const double MSUSY = Abs(get_MSUSY(context.model));
    const double m_muon = muonPhysicalMass(context);
@@ -392,7 +397,7 @@ double get_QED_2L(EvaluationContext& context)
 template<class PhotonEmitter, class ExchangeField>
 double AMuonVertexCorrectionFS<
 PhotonEmitter, ExchangeField
->::value(const typename field_indices<Muon>::type& indices, const EvaluationContext& context)
+>::value(const typename field_indices<Muon>::type& indices, const context_base& context)
 {
    double res = 0.0;
 
@@ -402,16 +407,14 @@ PhotonEmitter, ExchangeField
                       PhotonEmitter
                       >;
 
-   constexpr auto indexBounds = MuonVertex::index_bounds;
-
-   for (const auto& index: indexBounds) {
-      const auto muonIndices = MuonVertex::template fieldIndices<0>(index);
+   for (const auto& index: index_range<MuonVertex>()) {
+      const auto muonIndices = MuonVertex::template field_indices<0>(index);
 
       if (muonIndices != indices)
          continue;
 
-      const auto photonEmitterIndices = MuonVertex::template fieldIndices<2>(index);
-      const auto exchangeFieldIndices = MuonVertex::template fieldIndices<1>(index);
+      const auto photonEmitterIndices = MuonVertex::template field_indices<2>(index);
+      const auto exchangeFieldIndices = MuonVertex::template field_indices<1>(index);
 
       if (isSMField<PhotonEmitter>(photonEmitterIndices) &&
           isSMField<ExchangeField>(exchangeFieldIndices))
@@ -452,7 +455,7 @@ PhotonEmitter, ExchangeField
 template<class PhotonEmitter, class ExchangeField>
 double AMuonVertexCorrectionSF<
 PhotonEmitter, ExchangeField
->::value(const typename field_indices<Muon>::type& indices, const EvaluationContext& context)
+>::value(const typename field_indices<Muon>::type& indices, const context_base& context)
 {
    double res = 0.0;
 
@@ -462,16 +465,14 @@ PhotonEmitter, ExchangeField
                       PhotonEmitter
                       >;
 
-   constexpr auto indexBounds = MuonVertex::index_bounds;
-
-   for (const auto& index: indexBounds) {
-      const auto muonIndices = MuonVertex::template fieldIndices<0>(index);
+   for (const auto& index: index_range<MuonVertex>()) {
+      const auto muonIndices = MuonVertex::template field_indices<0>(index);
 
       if (muonIndices != indices)
          continue;
 
-      const auto photonEmitterIndices = MuonVertex::template fieldIndices<2>(index);
-      const auto exchangeFieldIndices = MuonVertex::template fieldIndices<1>(index);
+      const auto photonEmitterIndices = MuonVertex::template field_indices<2>(index);
+      const auto exchangeFieldIndices = MuonVertex::template field_indices<1>(index);
 
       if (isSMField<PhotonEmitter>(photonEmitterIndices) &&
           isSMField<ExchangeField>(exchangeFieldIndices))

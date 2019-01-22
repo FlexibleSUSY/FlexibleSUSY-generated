@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:56:14
+// File generated at Tue 22 Jan 2019 17:43:22
 
 #include "MSSMRHN_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -98,11 +98,11 @@ double MSSMRHN_soft_parameters::calc_beta_MassB_2_loop(const Soft_traces& soft_t
 
    double beta_MassB;
 
-   beta_MassB = Re(0.08*twoLoop*Sqr(g1)*(398*MassB*Sqr(g1) + 5*(27*(MassB +
-      MassWB)*Sqr(g2) + 2*(7*traceAdjYdTYd + 9*traceAdjYeTYe + 13*traceAdjYuTYu
-       + 3*traceAdjYvTYv - 7*MassB*traceYdAdjYd - 9*MassB*traceYeAdjYe - 13*
-      MassB*traceYuAdjYu - 3*MassB*traceYvAdjYv + 44*(MassB + MassG)*Sqr(g3))))
-      );
+   beta_MassB = Re(0.08*twoLoop*Sqr(g1)*(70*traceAdjYdTYd + 90*traceAdjYeTYe +
+      130*traceAdjYuTYu + 30*traceAdjYvTYv - 70*MassB*traceYdAdjYd - 90*MassB*
+      traceYeAdjYe - 130*MassB*traceYuAdjYu - 30*MassB*traceYvAdjYv + 398*MassB
+      *Sqr(g1) + 135*MassB*Sqr(g2) + 135*MassWB*Sqr(g2) + 440*MassB*Sqr(g3) +
+      440*MassG*Sqr(g3)));
 
 
    return beta_MassB;
@@ -133,6 +133,25 @@ double MSSMRHN_soft_parameters::calc_beta_MassB_3_loop(const Soft_traces& soft_t
  * @return 4-loop beta function
  */
 double MSSMRHN_soft_parameters::calc_beta_MassB_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MassB;
+
+   beta_MassB = 0;
+
+
+   return beta_MassB;
+}
+
+/**
+ * Calculates the 5-loop beta function of MassB.
+ *
+ * @return 5-loop beta function
+ */
+double MSSMRHN_soft_parameters::calc_beta_MassB_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

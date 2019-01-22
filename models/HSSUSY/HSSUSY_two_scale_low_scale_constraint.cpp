@@ -16,12 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:11:45
+// File generated at Tue 22 Jan 2019 16:37:56
 
 #include "HSSUSY_two_scale_low_scale_constraint.hpp"
 #include "HSSUSY_two_scale_model.hpp"
 #include "HSSUSY_info.hpp"
 #include "HSSUSY_weinberg_angle.hpp"
+#include "config.h"
 #include "wrappers.hpp"
 #include "logger.hpp"
 #include "error.hpp"

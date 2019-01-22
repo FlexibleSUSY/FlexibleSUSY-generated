@@ -7,7 +7,12 @@ MODHSSUSY_DEP := $(patsubst %,model_specific/%,$(MODHSSUSY_MOD))
 MODHSSUSY_INC := $(patsubst %,-Imodel_specific/%,$(MODHSSUSY_MOD))
 MODHSSUSY_LIB := $(foreach M,$(MODHSSUSY_MOD),model_specific/$M/libmodel_specific_$M$(MODULE_LIBEXT))
 
+MODHSSUSY_SUBMOD  := $(DIR)/cxx_qft
+MODHSSUSY_SUBMOD_INC := $(patsubst %,-I%,$(MODHSSUSY_SUBMOD))
+
 HSSUSY_INSTALL_DIR := $(INSTALL_DIR)/$(DIR)
+HSSUSY_INSTALL_CXXQFT_DIR := \
+		$(HSSUSY_INSTALL_DIR)/cxx_qft
 
 HSSUSY_MK     := \
 		$(DIR)/module.mk
@@ -68,7 +73,6 @@ LLHSSUSY_MMA  := \
 		$(DIR)/run_HSSUSY.m
 
 LIBHSSUSY_HDR := \
-		$(DIR)/HSSUSY_cxx_diagrams.hpp \
 		$(DIR)/HSSUSY_a_muon.hpp \
 		$(DIR)/HSSUSY_convergence_tester.hpp \
 		$(DIR)/HSSUSY_edm.hpp \
@@ -93,6 +97,13 @@ LIBHSSUSY_HDR := \
 		$(DIR)/HSSUSY_susy_scale_constraint.hpp \
 		$(DIR)/HSSUSY_utilities.hpp \
 		$(DIR)/HSSUSY_weinberg_angle.hpp
+
+LIBHSSUSY_CXXQFT_HDR := \
+		$(DIR)/cxx_qft/HSSUSY_qft.hpp \
+		$(DIR)/cxx_qft/HSSUSY_fields.hpp \
+		$(DIR)/cxx_qft/HSSUSY_vertices.hpp \
+		$(DIR)/cxx_qft/HSSUSY_context_base.hpp \
+		$(DIR)/cxx_qft/HSSUSY_npointfunctions.hpp
 
 ifneq ($(findstring two_scale,$(SOLVERS)),)
 -include $(DIR)/two_scale.mk
@@ -182,8 +193,10 @@ all-$(MODNAME): $(LIBHSSUSY) $(EXEHSSUSY_EXE)
 ifneq ($(INSTALL_DIR),)
 install-src::
 		install -d $(HSSUSY_INSTALL_DIR)
+		install -d $(HSSUSY_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(LIBHSSUSY_SRC) $(HSSUSY_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LIBHSSUSY_HDR) $(HSSUSY_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(LIBHSSUSY_CXXQFT_HDR) $(HSSUSY_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(EXEHSSUSY_SRC) $(HSSUSY_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLHSSUSY_SRC) $(HSSUSY_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLHSSUSY_MMA) $(HSSUSY_INSTALL_DIR)
@@ -214,6 +227,7 @@ clean-$(MODNAME)-obj:
 clean-$(MODNAME)-src:
 		-rm -f $(LIBHSSUSY_SRC)
 		-rm -f $(LIBHSSUSY_HDR)
+		-rm -f $(LIBHSSUSY_CXXQFT_HDR)
 		-rm -f $(EXEHSSUSY_SRC)
 		-rm -f $(LLHSSUSY_SRC)
 		-rm -f $(LLHSSUSY_MMA)
@@ -242,14 +256,14 @@ distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
 		tar -czf $(HSSUSY_TARBALL) \
-		$(LIBHSSUSY_SRC) $(LIBHSSUSY_HDR) \
+		$(LIBHSSUSY_SRC) $(LIBHSSUSY_HDR) $(LIBHSSUSY_CXXQFT_HDR) \
 		$(EXEHSSUSY_SRC) \
 		$(LLHSSUSY_SRC) $(LLHSSUSY_MMA) \
 		$(HSSUSY_MK) $(HSSUSY_INCLUDE_MK) \
 		$(HSSUSY_SLHA_INPUT) $(HSSUSY_REFERENCES) \
 		$(HSSUSY_GNUPLOT)
 
-$(LIBHSSUSY_SRC) $(LIBHSSUSY_HDR) $(EXEHSSUSY_SRC) $(LLHSSUSY_SRC) $(LLHSSUSY_MMA) \
+$(LIBHSSUSY_SRC) $(LIBHSSUSY_HDR) $(LIBHSSUSY_CXXQFT_HDR) $(EXEHSSUSY_SRC) $(LLHSSUSY_SRC) $(LLHSSUSY_MMA) \
 : run-metacode-$(MODNAME)
 		@true
 
@@ -270,7 +284,7 @@ $(METACODE_STAMP_HSSUSY):
 endif
 
 $(LIBHSSUSY_DEP) $(EXEHSSUSY_DEP) $(LLHSSUSY_DEP) $(LIBHSSUSY_OBJ) $(EXEHSSUSY_OBJ) $(LLHSSUSY_OBJ) $(LLHSSUSY_LIB): \
-	CPPFLAGS += $(MODHSSUSY_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODHSSUSY_SUBMOD_INC) $(MODHSSUSY_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBHSSUSY_DEP) $(EXEHSSUSY_DEP) $(LLHSSUSY_DEP) $(LIBHSSUSY_OBJ) $(EXEHSSUSY_OBJ) $(LLHSSUSY_OBJ) $(LLHSSUSY_LIB): \

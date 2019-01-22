@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:07:23
+// File generated at Tue 22 Jan 2019 16:12:20
 
 #include "HTHDMIIMSSMBC_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -39,8 +39,8 @@ Eigen::Matrix<double,3,3> HTHDMIIMSSMBC_susy_parameters::calc_beta_Ye_1_loop(con
 
    Eigen::Matrix<double,3,3> beta_Ye;
 
-   beta_Ye = (oneOver16PiSqr*(0.25*Ye*(12*traceYdAdjYd + 4*traceYeAdjYe - 9*(
-      Sqr(g1) + Sqr(g2))) + 1.5*(Ye*Ye.adjoint()*Ye))).real();
+   beta_Ye = (oneOver16PiSqr*(-0.25*Ye*(-12*traceYdAdjYd - 4*traceYeAdjYe + 9*
+      Sqr(g1) + 9*Sqr(g2)) + 1.5*(Ye*Ye.adjoint()*Ye))).real();
 
 
    return beta_Ye;
@@ -62,15 +62,15 @@ Eigen::Matrix<double,3,3> HTHDMIIMSSMBC_susy_parameters::calc_beta_Ye_2_loop(con
 
    Eigen::Matrix<double,3,3> beta_Ye;
 
-   beta_Ye = (twoLoop*(Ye*(Lambda3*Lambda4 - 6.75*traceYdAdjYdYdAdjYd - 2.25*
-      traceYdAdjYuYuAdjYd - 2.25*traceYeAdjYeYeAdjYe + 1.5*AbsSqr(Lambda5) +
-      4.5*AbsSqr(Lambda6) + 1.5*AbsSqr(Lambda7) + 7.905*Quad(g1) - 4.75*Quad(g2
-      ) + 0.625*traceYdAdjYd*Sqr(g1) + 1.875*traceYeAdjYe*Sqr(g1) + 5.625*
-      traceYdAdjYd*Sqr(g2) + 1.875*traceYeAdjYe*Sqr(g2) + 1.35*Sqr(g1)*Sqr(g2)
-      + 20*traceYdAdjYd*Sqr(g3) + 6*Sqr(Lambda1) + Sqr(Lambda3) + Sqr(Lambda4))
-      + 0.0375*(129*Sqr(g1) + 5*(-4*(16*Lambda1 + 9*traceYdAdjYd + 3*
-      traceYeAdjYe) + 45*Sqr(g2)))*(Ye*Ye.adjoint()*Ye) + 1.5*(Ye*Ye.adjoint()*
-      Ye*Ye.adjoint()*Ye))).real();
+   beta_Ye = (twoLoop*(0.005*Ye*(200*Lambda3*Lambda4 - 1350*traceYdAdjYdYdAdjYd
+       - 450*traceYdAdjYuYuAdjYd - 450*traceYeAdjYeYeAdjYe + 300*AbsSqr(Lambda5
+      ) + 900*AbsSqr(Lambda6) + 300*AbsSqr(Lambda7) + 1581*Quad(g1) - 950*Quad(
+      g2) + 125*traceYdAdjYd*Sqr(g1) + 375*traceYeAdjYe*Sqr(g1) + 1125*
+      traceYdAdjYd*Sqr(g2) + 375*traceYeAdjYe*Sqr(g2) + 270*Sqr(g1)*Sqr(g2) +
+      4000*traceYdAdjYd*Sqr(g3) + 1200*Sqr(Lambda1) + 200*Sqr(Lambda3) + 200*
+      Sqr(Lambda4)) + 0.0375*(-320*Lambda1 - 180*traceYdAdjYd - 60*traceYeAdjYe
+       + 129*Sqr(g1) + 225*Sqr(g2))*(Ye*Ye.adjoint()*Ye) + 1.5*(Ye*Ye.adjoint()
+      *Ye*Ye.adjoint()*Ye))).real();
 
 
    return beta_Ye;
@@ -101,6 +101,25 @@ Eigen::Matrix<double,3,3> HTHDMIIMSSMBC_susy_parameters::calc_beta_Ye_3_loop(con
  * @return 4-loop beta function
  */
 Eigen::Matrix<double,3,3> HTHDMIIMSSMBC_susy_parameters::calc_beta_Ye_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_Ye;
+
+   beta_Ye = ZEROMATRIX(3,3);
+
+
+   return beta_Ye;
+}
+
+/**
+ * Calculates the 5-loop beta function of Ye.
+ *
+ * @return 5-loop beta function
+ */
+Eigen::Matrix<double,3,3> HTHDMIIMSSMBC_susy_parameters::calc_beta_Ye_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

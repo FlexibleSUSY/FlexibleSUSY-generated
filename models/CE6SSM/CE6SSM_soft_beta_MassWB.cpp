@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 13:48:16
+// File generated at Tue 22 Jan 2019 14:20:05
 
 #include "CE6SSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -103,9 +103,10 @@ double CE6SSM_soft_parameters::calc_beta_MassWB_2_loop(const Soft_traces& soft_t
    beta_MassWB = Re(0.4*twoLoop*Sqr(g2)*(10*traceAdjLambda12TLambda12 + 30*
       traceAdjYdTYd + 10*traceAdjYeTYe + 30*traceAdjYuTYu - 10*MassWB*
       traceLambda12AdjLambda12 - 30*MassWB*traceYdAdjYd - 10*MassWB*
-      traceYeAdjYe - 30*MassWB*traceYuAdjYu + 18*(MassB + MassWB)*Sqr(g1) + 460
-      *MassWB*Sqr(g2) + 120*MassG*Sqr(g3) + 120*MassWB*Sqr(g3) + 17*MassBp*Sqr(
-      gN) + 17*MassWB*Sqr(gN) - 10*Conj(Lambdax)*(MassWB*Lambdax - TLambdax)));
+      traceYeAdjYe - 30*MassWB*traceYuAdjYu - 10*MassWB*AbsSqr(Lambdax) + 18*
+      MassB*Sqr(g1) + 18*MassWB*Sqr(g1) + 460*MassWB*Sqr(g2) + 120*MassG*Sqr(g3
+      ) + 120*MassWB*Sqr(g3) + 17*MassBp*Sqr(gN) + 17*MassWB*Sqr(gN) + 10*Conj(
+      Lambdax)*TLambdax));
 
 
    return beta_MassWB;
@@ -136,6 +137,25 @@ double CE6SSM_soft_parameters::calc_beta_MassWB_3_loop(const Soft_traces& soft_t
  * @return 4-loop beta function
  */
 double CE6SSM_soft_parameters::calc_beta_MassWB_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MassWB;
+
+   beta_MassWB = 0;
+
+
+   return beta_MassWB;
+}
+
+/**
+ * Calculates the 5-loop beta function of MassWB.
+ *
+ * @return 5-loop beta function
+ */
+double CE6SSM_soft_parameters::calc_beta_MassWB_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

@@ -16,10 +16,11 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 15:29:47
+// File generated at Tue 22 Jan 2019 18:00:36
 
 #include "CMSSM_two_scale_susy_scale_constraint.hpp"
 #include "CMSSM_two_scale_model.hpp"
+#include "config.h"
 #include "wrappers.hpp"
 #include "logger.hpp"
 #include "error.hpp"

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:19:45
+// File generated at Tue 22 Jan 2019 17:02:31
 
 #include "E6SSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -101,14 +101,17 @@ double E6SSM_soft_parameters::calc_beta_mHpbar2_2_loop(const Soft_traces& soft_t
 
    double beta_mHpbar2;
 
-   beta_mHpbar2 = Re(0.04*twoLoop*(6*Conj(MassBp)*Sqr(gN)*(3*(MassB + 2*MassBp)
-      *Sqr(g1) + 5*(2*MassBp + MassWB)*Sqr(g2) + 96*MassBp*Sqr(gN)) + 9*Conj(
-      MassB)*Sqr(g1)*(99*MassB*Sqr(g1) + 5*(2*MassB + MassWB)*Sqr(g2) + 2*(2*
-      MassB + MassBp)*Sqr(gN)) + 5*(-4.898979485566356*g1*gN*Tr2U114 -
-      4.898979485566356*g1*gN*Tr2U141 + 15.491933384829668*g1*Tr31 -
-      12.649110640673518*gN*Tr34 + 30*Tr22*Quad(g2) + 6*Tr2U111*Sqr(g1) + 4*
-      Tr2U144*Sqr(gN) + 3*Conj(MassWB)*Sqr(g2)*(3*(MassB + 2*MassWB)*Sqr(g1) +
-      145*MassWB*Sqr(g2) + 2*(MassBp + 2*MassWB)*Sqr(gN)))));
+   beta_mHpbar2 = Re(0.04*twoLoop*(-24.49489742783178*g1*gN*Tr2U114 -
+      24.49489742783178*g1*gN*Tr2U141 + 77.45966692414834*g1*Tr31 -
+      63.24555320336759*gN*Tr34 + 891*AbsSqr(MassB)*Quad(g1) + 150*Tr22*Quad(g2
+      ) + 2175*AbsSqr(MassWB)*Quad(g2) + 576*AbsSqr(MassBp)*Quad(gN) + 30*
+      Tr2U111*Sqr(g1) + 90*AbsSqr(MassB)*Sqr(g1)*Sqr(g2) + 90*AbsSqr(MassWB)*
+      Sqr(g1)*Sqr(g2) + 45*MassWB*Conj(MassB)*Sqr(g1)*Sqr(g2) + 45*MassB*Conj(
+      MassWB)*Sqr(g1)*Sqr(g2) + 20*Tr2U144*Sqr(gN) + 36*AbsSqr(MassB)*Sqr(g1)*
+      Sqr(gN) + 36*AbsSqr(MassBp)*Sqr(g1)*Sqr(gN) + 18*MassBp*Conj(MassB)*Sqr(
+      g1)*Sqr(gN) + 18*MassB*Conj(MassBp)*Sqr(g1)*Sqr(gN) + 60*AbsSqr(MassBp)*
+      Sqr(g2)*Sqr(gN) + 60*AbsSqr(MassWB)*Sqr(g2)*Sqr(gN) + 30*MassWB*Conj(
+      MassBp)*Sqr(g2)*Sqr(gN) + 30*MassBp*Conj(MassWB)*Sqr(g2)*Sqr(gN)));
 
 
    return beta_mHpbar2;
@@ -139,6 +142,25 @@ double E6SSM_soft_parameters::calc_beta_mHpbar2_3_loop(const Soft_traces& soft_t
  * @return 4-loop beta function
  */
 double E6SSM_soft_parameters::calc_beta_mHpbar2_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_mHpbar2;
+
+   beta_mHpbar2 = 0;
+
+
+   return beta_mHpbar2;
+}
+
+/**
+ * Calculates the 5-loop beta function of mHpbar2.
+ *
+ * @return 5-loop beta function
+ */
+double E6SSM_soft_parameters::calc_beta_mHpbar2_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

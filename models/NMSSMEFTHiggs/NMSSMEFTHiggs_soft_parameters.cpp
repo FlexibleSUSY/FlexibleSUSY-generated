@@ -16,11 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:02:10
+// File generated at Tue 22 Jan 2019 14:36:27
 
 #include "NMSSMEFTHiggs_soft_parameters.hpp"
 #include "config.h"
+#ifdef ENABLE_THREADS
 #include "global_thread_pool.hpp"
+#endif
 #include "wrappers.hpp"
 #include "functors.hpp"
 
@@ -131,6 +133,9 @@ NMSSMEFTHiggs_soft_parameters NMSSMEFTHiggs_soft_parameters::calc_beta(int loops
 
             if (loops > 3) {
 
+               if (loops > 4) {
+
+               }
             }
          }
       }

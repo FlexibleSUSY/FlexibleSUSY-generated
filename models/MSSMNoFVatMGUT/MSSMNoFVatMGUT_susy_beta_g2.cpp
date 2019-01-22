@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 15:12:12
+// File generated at Tue 22 Jan 2019 17:50:14
 
 #include "MSSMNoFVatMGUT_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -57,8 +57,8 @@ double MSSMNoFVatMGUT_susy_parameters::calc_beta_g2_2_loop(const Susy_traces& su
 
    double beta_g2;
 
-   beta_g2 = Re(0.2*twoLoop*Cube(g2)*(9*Sqr(g1) + 5*(-2*(3*traceYdAdjYd +
-      traceYeAdjYe + 3*traceYuAdjYu) + 25*Sqr(g2) + 24*Sqr(g3))));
+   beta_g2 = Re(0.2*twoLoop*Cube(g2)*(-30*traceYdAdjYd - 10*traceYeAdjYe - 30*
+      traceYuAdjYu + 9*Sqr(g1) + 125*Sqr(g2) + 120*Sqr(g3)));
 
 
    return beta_g2;
@@ -84,13 +84,15 @@ double MSSMNoFVatMGUT_susy_parameters::calc_beta_g2_3_loop(const Susy_traces& su
 
    double beta_g2;
 
-   beta_g2 = Re(0.04*threeLoop*Cube(g2)*(-457*Quad(g1) + 5*Sqr(g1)*(-11*
-      traceAdjYdYd - 21*traceAdjYeYe - 29*traceAdjYuYu + 9*Sqr(g2) - 8*Sqr(g3))
-      + 25*(35*Quad(g2) + Sqr(g2)*(-11*(3*traceAdjYdYd + traceAdjYeYe + 3*
-      traceAdjYuYu) + 24*Sqr(g3)) + 2*(12*traceAdjYdYdAdjYdYd + 6*traceAdjYdYd*
-      traceAdjYeYe + 4*traceAdjYeYeAdjYeYe + 6*traceAdjYuYuAdjYdYd + 12*
-      traceAdjYuYuAdjYuYu + 22*Quad(g3) - 16*(traceAdjYdYd + traceAdjYuYu)*Sqr(
-      g3) + 9*Sqr(traceAdjYdYd) + Sqr(traceAdjYeYe) + 9*Sqr(traceAdjYuYu)))));
+   beta_g2 = Re(0.04*threeLoop*Cube(g2)*(600*traceAdjYdYdAdjYdYd + 300*
+      traceAdjYdYd*traceAdjYeYe + 200*traceAdjYeYeAdjYeYe + 300*
+      traceAdjYuYuAdjYdYd + 600*traceAdjYuYuAdjYuYu - 457*Quad(g1) + 875*Quad(
+      g2) + 1100*Quad(g3) - 55*traceAdjYdYd*Sqr(g1) - 105*traceAdjYeYe*Sqr(g1)
+      - 145*traceAdjYuYu*Sqr(g1) - 825*traceAdjYdYd*Sqr(g2) - 275*traceAdjYeYe*
+      Sqr(g2) - 825*traceAdjYuYu*Sqr(g2) + 45*Sqr(g1)*Sqr(g2) - 800*
+      traceAdjYdYd*Sqr(g3) - 800*traceAdjYuYu*Sqr(g3) - 40*Sqr(g1)*Sqr(g3) +
+      600*Sqr(g2)*Sqr(g3) + 450*Sqr(traceAdjYdYd) + 50*Sqr(traceAdjYeYe) + 450*
+      Sqr(traceAdjYuYu)));
 
 
    return beta_g2;
@@ -102,6 +104,25 @@ double MSSMNoFVatMGUT_susy_parameters::calc_beta_g2_3_loop(const Susy_traces& su
  * @return 4-loop beta function
  */
 double MSSMNoFVatMGUT_susy_parameters::calc_beta_g2_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_g2;
+
+   beta_g2 = 0;
+
+
+   return beta_g2;
+}
+
+/**
+ * Calculates the 5-loop beta function of g2.
+ *
+ * @return 5-loop beta function
+ */
+double MSSMNoFVatMGUT_susy_parameters::calc_beta_g2_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:28:16
+// File generated at Tue 22 Jan 2019 17:09:13
 
 #include "E6SSM_two_scale_spectrum_generator.hpp"
 #include "E6SSM_input_parameters.hpp"

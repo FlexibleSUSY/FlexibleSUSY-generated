@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:19:46
+// File generated at Tue 22 Jan 2019 17:02:33
 
 #include "E6SSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -98,8 +98,9 @@ double E6SSM_soft_parameters::calc_beta_MassG_2_loop(const Soft_traces& soft_tra
 
    beta_MassG = Re(2*twoLoop*Sqr(g3)*(2*traceAdjKappaTKappa + 4*traceAdjYdTYd +
       4*traceAdjYuTYu - 2*MassG*traceKappaAdjKappa - 4*MassG*traceYdAdjYd - 4*
-      MassG*traceYuAdjYu + 3*(MassB + MassG)*Sqr(g1) + 9*MassG*Sqr(g2) + 9*
-      MassWB*Sqr(g2) + 96*MassG*Sqr(g3) + 3*(MassBp + MassG)*Sqr(gN)));
+      MassG*traceYuAdjYu + 3*MassB*Sqr(g1) + 3*MassG*Sqr(g1) + 9*MassG*Sqr(g2)
+      + 9*MassWB*Sqr(g2) + 96*MassG*Sqr(g3) + 3*MassBp*Sqr(gN) + 3*MassG*Sqr(gN
+      )));
 
 
    return beta_MassG;
@@ -130,6 +131,25 @@ double E6SSM_soft_parameters::calc_beta_MassG_3_loop(const Soft_traces& soft_tra
  * @return 4-loop beta function
  */
 double E6SSM_soft_parameters::calc_beta_MassG_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MassG;
+
+   beta_MassG = 0;
+
+
+   return beta_MassG;
+}
+
+/**
+ * Calculates the 5-loop beta function of MassG.
+ *
+ * @return 5-loop beta function
+ */
+double E6SSM_soft_parameters::calc_beta_MassG_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

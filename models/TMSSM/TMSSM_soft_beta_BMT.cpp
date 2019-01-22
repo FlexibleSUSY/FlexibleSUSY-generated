@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:12:48
+// File generated at Tue 22 Jan 2019 16:50:16
 
 #include "TMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -97,13 +97,17 @@ double TMSSM_soft_parameters::calc_beta_BMT_2_loop(const Soft_traces& soft_trace
 
    double beta_BMT;
 
-   beta_BMT = Re(-0.4*twoLoop*(BMT*(-140*Quad(g2) + AbsSqr(Lambdax)*(-3*Sqr(g1)
-      + 5*(3*traceYdAdjYd + traceYeAdjYe + 3*traceYuAdjYu + Sqr(g2))) + 15*Sqr(
-      Conj(Lambdax))*Sqr(Lambdax)) + 2*MT*(280*MassWB*Quad(g2) + 30*Lambdax*Sqr
-      (Conj(Lambdax))*TLambdax + Conj(Lambdax)*(Lambdax*(3*MassB*Sqr(g1) + 5*(3
-      *traceAdjYdTYd + traceAdjYeTYe + 3*traceAdjYuTYu - MassWB*Sqr(g2))) + (-3
-      *Sqr(g1) + 5*(3*traceYdAdjYd + traceYeAdjYe + 3*traceYuAdjYu + Sqr(g2)))*
-      TLambdax))));
+   beta_BMT = Re(-0.4*twoLoop*(30*MT*traceAdjYdTYd*AbsSqr(Lambdax) + 10*MT*
+      traceAdjYeTYe*AbsSqr(Lambdax) + 30*MT*traceAdjYuTYu*AbsSqr(Lambdax) + 15*
+      traceYdAdjYd*AbsSqr(Lambdax)*BMT + 5*traceYeAdjYe*AbsSqr(Lambdax)*BMT +
+      15*traceYuAdjYu*AbsSqr(Lambdax)*BMT + 560*MassWB*MT*Quad(g2) - 140*BMT*
+      Quad(g2) + 6*MassB*MT*AbsSqr(Lambdax)*Sqr(g1) - 3*AbsSqr(Lambdax)*BMT*Sqr
+      (g1) - 10*MassWB*MT*AbsSqr(Lambdax)*Sqr(g2) + 5*AbsSqr(Lambdax)*BMT*Sqr(
+      g2) + 15*BMT*Sqr(Conj(Lambdax))*Sqr(Lambdax) + 30*MT*traceYdAdjYd*Conj(
+      Lambdax)*TLambdax + 10*MT*traceYeAdjYe*Conj(Lambdax)*TLambdax + 30*MT*
+      traceYuAdjYu*Conj(Lambdax)*TLambdax - 6*MT*Conj(Lambdax)*Sqr(g1)*TLambdax
+       + 10*MT*Conj(Lambdax)*Sqr(g2)*TLambdax + 60*MT*Lambdax*Sqr(Conj(Lambdax)
+      )*TLambdax));
 
 
    return beta_BMT;
@@ -134,6 +138,25 @@ double TMSSM_soft_parameters::calc_beta_BMT_3_loop(const Soft_traces& soft_trace
  * @return 4-loop beta function
  */
 double TMSSM_soft_parameters::calc_beta_BMT_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_BMT;
+
+   beta_BMT = 0;
+
+
+   return beta_BMT;
+}
+
+/**
+ * Calculates the 5-loop beta function of BMT.
+ *
+ * @return 5-loop beta function
+ */
+double TMSSM_soft_parameters::calc_beta_BMT_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

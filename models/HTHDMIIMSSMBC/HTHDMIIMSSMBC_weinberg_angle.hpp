@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:08:14
+// File generated at Tue 22 Jan 2019 16:16:04
 
 #ifndef HTHDMIIMSSMBC_WEINBERG_ANGLE_H
 #define HTHDMIIMSSMBC_WEINBERG_ANGLE_H

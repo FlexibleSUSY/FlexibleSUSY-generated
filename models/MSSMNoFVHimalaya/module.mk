@@ -7,7 +7,12 @@ MODMSSMNoFVHimalaya_DEP := $(patsubst %,model_specific/%,$(MODMSSMNoFVHimalaya_M
 MODMSSMNoFVHimalaya_INC := $(patsubst %,-Imodel_specific/%,$(MODMSSMNoFVHimalaya_MOD))
 MODMSSMNoFVHimalaya_LIB := $(foreach M,$(MODMSSMNoFVHimalaya_MOD),model_specific/$M/libmodel_specific_$M$(MODULE_LIBEXT))
 
+MODMSSMNoFVHimalaya_SUBMOD  := $(DIR)/cxx_qft
+MODMSSMNoFVHimalaya_SUBMOD_INC := $(patsubst %,-I%,$(MODMSSMNoFVHimalaya_SUBMOD))
+
 MSSMNoFVHimalaya_INSTALL_DIR := $(INSTALL_DIR)/$(DIR)
+MSSMNoFVHimalaya_INSTALL_CXXQFT_DIR := \
+		$(MSSMNoFVHimalaya_INSTALL_DIR)/cxx_qft
 
 MSSMNoFVHimalaya_MK     := \
 		$(DIR)/module.mk
@@ -68,7 +73,6 @@ LLMSSMNoFVHimalaya_MMA  := \
 		$(DIR)/run_MSSMNoFVHimalaya.m
 
 LIBMSSMNoFVHimalaya_HDR := \
-		$(DIR)/MSSMNoFVHimalaya_cxx_diagrams.hpp \
 		$(DIR)/MSSMNoFVHimalaya_a_muon.hpp \
 		$(DIR)/MSSMNoFVHimalaya_convergence_tester.hpp \
 		$(DIR)/MSSMNoFVHimalaya_edm.hpp \
@@ -93,6 +97,13 @@ LIBMSSMNoFVHimalaya_HDR := \
 		$(DIR)/MSSMNoFVHimalaya_susy_scale_constraint.hpp \
 		$(DIR)/MSSMNoFVHimalaya_utilities.hpp \
 		$(DIR)/MSSMNoFVHimalaya_weinberg_angle.hpp
+
+LIBMSSMNoFVHimalaya_CXXQFT_HDR := \
+		$(DIR)/cxx_qft/MSSMNoFVHimalaya_qft.hpp \
+		$(DIR)/cxx_qft/MSSMNoFVHimalaya_fields.hpp \
+		$(DIR)/cxx_qft/MSSMNoFVHimalaya_vertices.hpp \
+		$(DIR)/cxx_qft/MSSMNoFVHimalaya_context_base.hpp \
+		$(DIR)/cxx_qft/MSSMNoFVHimalaya_npointfunctions.hpp
 
 ifneq ($(findstring two_scale,$(SOLVERS)),)
 -include $(DIR)/two_scale.mk
@@ -182,8 +193,10 @@ all-$(MODNAME): $(LIBMSSMNoFVHimalaya) $(EXEMSSMNoFVHimalaya_EXE)
 ifneq ($(INSTALL_DIR),)
 install-src::
 		install -d $(MSSMNoFVHimalaya_INSTALL_DIR)
+		install -d $(MSSMNoFVHimalaya_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(LIBMSSMNoFVHimalaya_SRC) $(MSSMNoFVHimalaya_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LIBMSSMNoFVHimalaya_HDR) $(MSSMNoFVHimalaya_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(LIBMSSMNoFVHimalaya_CXXQFT_HDR) $(MSSMNoFVHimalaya_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(EXEMSSMNoFVHimalaya_SRC) $(MSSMNoFVHimalaya_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLMSSMNoFVHimalaya_SRC) $(MSSMNoFVHimalaya_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLMSSMNoFVHimalaya_MMA) $(MSSMNoFVHimalaya_INSTALL_DIR)
@@ -214,6 +227,7 @@ clean-$(MODNAME)-obj:
 clean-$(MODNAME)-src:
 		-rm -f $(LIBMSSMNoFVHimalaya_SRC)
 		-rm -f $(LIBMSSMNoFVHimalaya_HDR)
+		-rm -f $(LIBMSSMNoFVHimalaya_CXXQFT_HDR)
 		-rm -f $(EXEMSSMNoFVHimalaya_SRC)
 		-rm -f $(LLMSSMNoFVHimalaya_SRC)
 		-rm -f $(LLMSSMNoFVHimalaya_MMA)
@@ -242,14 +256,14 @@ distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
 		tar -czf $(MSSMNoFVHimalaya_TARBALL) \
-		$(LIBMSSMNoFVHimalaya_SRC) $(LIBMSSMNoFVHimalaya_HDR) \
+		$(LIBMSSMNoFVHimalaya_SRC) $(LIBMSSMNoFVHimalaya_HDR) $(LIBMSSMNoFVHimalaya_CXXQFT_HDR) \
 		$(EXEMSSMNoFVHimalaya_SRC) \
 		$(LLMSSMNoFVHimalaya_SRC) $(LLMSSMNoFVHimalaya_MMA) \
 		$(MSSMNoFVHimalaya_MK) $(MSSMNoFVHimalaya_INCLUDE_MK) \
 		$(MSSMNoFVHimalaya_SLHA_INPUT) $(MSSMNoFVHimalaya_REFERENCES) \
 		$(MSSMNoFVHimalaya_GNUPLOT)
 
-$(LIBMSSMNoFVHimalaya_SRC) $(LIBMSSMNoFVHimalaya_HDR) $(EXEMSSMNoFVHimalaya_SRC) $(LLMSSMNoFVHimalaya_SRC) $(LLMSSMNoFVHimalaya_MMA) \
+$(LIBMSSMNoFVHimalaya_SRC) $(LIBMSSMNoFVHimalaya_HDR) $(LIBMSSMNoFVHimalaya_CXXQFT_HDR) $(EXEMSSMNoFVHimalaya_SRC) $(LLMSSMNoFVHimalaya_SRC) $(LLMSSMNoFVHimalaya_MMA) \
 : run-metacode-$(MODNAME)
 		@true
 
@@ -270,7 +284,7 @@ $(METACODE_STAMP_MSSMNoFVHimalaya):
 endif
 
 $(LIBMSSMNoFVHimalaya_DEP) $(EXEMSSMNoFVHimalaya_DEP) $(LLMSSMNoFVHimalaya_DEP) $(LIBMSSMNoFVHimalaya_OBJ) $(EXEMSSMNoFVHimalaya_OBJ) $(LLMSSMNoFVHimalaya_OBJ) $(LLMSSMNoFVHimalaya_LIB): \
-	CPPFLAGS += $(MODMSSMNoFVHimalaya_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODMSSMNoFVHimalaya_SUBMOD_INC) $(MODMSSMNoFVHimalaya_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBMSSMNoFVHimalaya_DEP) $(EXEMSSMNoFVHimalaya_DEP) $(LLMSSMNoFVHimalaya_DEP) $(LIBMSSMNoFVHimalaya_OBJ) $(EXEMSSMNoFVHimalaya_OBJ) $(LLMSSMNoFVHimalaya_OBJ) $(LLMSSMNoFVHimalaya_LIB): \

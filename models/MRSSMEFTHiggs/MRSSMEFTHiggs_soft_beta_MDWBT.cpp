@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:25:29
+// File generated at Tue 22 Jan 2019 13:53:40
 
 #include "MRSSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -94,13 +94,13 @@ double MRSSMEFTHiggs_soft_parameters::calc_beta_MDWBT_2_loop(const Soft_traces& 
    double beta_MDWBT;
 
    beta_MDWBT = Re(0.2*MDWBT*twoLoop*(-15*traceYdAdjYd*AbsSqr(LamTD) - 5*
-      traceYeAdjYe*AbsSqr(LamTD) - 15*traceYuAdjYu*AbsSqr(LamTU) + 440*Quad(g2)
-      + 3*AbsSqr(LamTD)*Sqr(g1) + 3*AbsSqr(LamTU)*Sqr(g1) - 30*traceYdAdjYd*Sqr
-      (g2) - 10*traceYeAdjYe*Sqr(g2) - 30*traceYuAdjYu*Sqr(g2) - 40*AbsSqr(
-      LamTD)*Sqr(g2) - 40*AbsSqr(LamTU)*Sqr(g2) + 12*Sqr(g1)*Sqr(g2) - 10*
-      AbsSqr(LamSD)*(AbsSqr(LamTD) + Sqr(g2)) - 10*AbsSqr(LamSU)*(AbsSqr(LamTU)
-      + Sqr(g2)) + 120*Sqr(g2)*Sqr(g3) - 15*Sqr(LamTD)*Sqr(Conj(LamTD)) - 15*
-      Sqr(LamTU)*Sqr(Conj(LamTU))));
+      traceYeAdjYe*AbsSqr(LamTD) - 10*AbsSqr(LamSD)*AbsSqr(LamTD) - 15*
+      traceYuAdjYu*AbsSqr(LamTU) - 10*AbsSqr(LamSU)*AbsSqr(LamTU) + 440*Quad(g2
+      ) + 3*AbsSqr(LamTD)*Sqr(g1) + 3*AbsSqr(LamTU)*Sqr(g1) - 30*traceYdAdjYd*
+      Sqr(g2) - 10*traceYeAdjYe*Sqr(g2) - 30*traceYuAdjYu*Sqr(g2) - 10*AbsSqr(
+      LamSD)*Sqr(g2) - 10*AbsSqr(LamSU)*Sqr(g2) - 40*AbsSqr(LamTD)*Sqr(g2) - 40
+      *AbsSqr(LamTU)*Sqr(g2) + 12*Sqr(g1)*Sqr(g2) + 120*Sqr(g2)*Sqr(g3) - 15*
+      Sqr(LamTD)*Sqr(Conj(LamTD)) - 15*Sqr(LamTU)*Sqr(Conj(LamTU))));
 
 
    return beta_MDWBT;
@@ -131,6 +131,25 @@ double MRSSMEFTHiggs_soft_parameters::calc_beta_MDWBT_3_loop(const Soft_traces& 
  * @return 4-loop beta function
  */
 double MRSSMEFTHiggs_soft_parameters::calc_beta_MDWBT_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MDWBT;
+
+   beta_MDWBT = 0;
+
+
+   return beta_MDWBT;
+}
+
+/**
+ * Calculates the 5-loop beta function of MDWBT.
+ *
+ * @return 5-loop beta function
+ */
+double MRSSMEFTHiggs_soft_parameters::calc_beta_MDWBT_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

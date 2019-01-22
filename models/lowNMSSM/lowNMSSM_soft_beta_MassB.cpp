@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:37:20
+// File generated at Tue 22 Jan 2019 17:14:54
 
 #include "lowNMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -96,11 +96,11 @@ double lowNMSSM_soft_parameters::calc_beta_MassB_2_loop(const Soft_traces& soft_
 
    double beta_MassB;
 
-   beta_MassB = Re(0.08*twoLoop*Sqr(g1)*(398*MassB*Sqr(g1) + 5*(27*(MassB +
-      MassWB)*Sqr(g2) + 2*(7*traceAdjYdTYd + 9*traceAdjYeTYe + 13*traceAdjYuTYu
-       - 7*MassB*traceYdAdjYd - 9*MassB*traceYeAdjYe - 13*MassB*traceYuAdjYu +
-      44*(MassB + MassG)*Sqr(g3))) - 30*Conj(Lambdax)*(MassB*Lambdax - TLambdax
-      )));
+   beta_MassB = Re(0.08*twoLoop*Sqr(g1)*(70*traceAdjYdTYd + 90*traceAdjYeTYe +
+      130*traceAdjYuTYu - 70*MassB*traceYdAdjYd - 90*MassB*traceYeAdjYe - 130*
+      MassB*traceYuAdjYu - 30*MassB*AbsSqr(Lambdax) + 398*MassB*Sqr(g1) + 135*
+      MassB*Sqr(g2) + 135*MassWB*Sqr(g2) + 440*MassB*Sqr(g3) + 440*MassG*Sqr(g3
+      ) + 30*Conj(Lambdax)*TLambdax));
 
 
    return beta_MassB;
@@ -131,6 +131,25 @@ double lowNMSSM_soft_parameters::calc_beta_MassB_3_loop(const Soft_traces& soft_
  * @return 4-loop beta function
  */
 double lowNMSSM_soft_parameters::calc_beta_MassB_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MassB;
+
+   beta_MassB = 0;
+
+
+   return beta_MassB;
+}
+
+/**
+ * Calculates the 5-loop beta function of MassB.
+ *
+ * @return 5-loop beta function
+ */
+double lowNMSSM_soft_parameters::calc_beta_MassB_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:25:30
+// File generated at Tue 22 Jan 2019 13:53:41
 
 #include "MRSSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -92,8 +92,8 @@ double MRSSMEFTHiggs_soft_parameters::calc_beta_MDGoc_2_loop(const Soft_traces& 
 
    double beta_MDGoc;
 
-   beta_MDGoc = Re(0.2*MDGoc*twoLoop*Sqr(g3)*(11*Sqr(g1) + 5*(-4*traceYdAdjYd -
-      4*traceYuAdjYu + 9*Sqr(g2) + 104*Sqr(g3))));
+   beta_MDGoc = Re(0.2*MDGoc*twoLoop*Sqr(g3)*(-20*traceYdAdjYd - 20*
+      traceYuAdjYu + 11*Sqr(g1) + 45*Sqr(g2) + 520*Sqr(g3)));
 
 
    return beta_MDGoc;
@@ -124,6 +124,25 @@ double MRSSMEFTHiggs_soft_parameters::calc_beta_MDGoc_3_loop(const Soft_traces& 
  * @return 4-loop beta function
  */
 double MRSSMEFTHiggs_soft_parameters::calc_beta_MDGoc_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MDGoc;
+
+   beta_MDGoc = 0;
+
+
+   return beta_MDGoc;
+}
+
+/**
+ * Calculates the 5-loop beta function of MDGoc.
+ *
+ * @return 5-loop beta function
+ */
+double MRSSMEFTHiggs_soft_parameters::calc_beta_MDGoc_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

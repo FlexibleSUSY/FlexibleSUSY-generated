@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 13:59:19
+// File generated at Tue 22 Jan 2019 14:42:51
 
 #include "E6SSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -74,8 +74,8 @@ Eigen::Matrix<double,2,2> E6SSMEFTHiggs_soft_parameters::calc_beta_msI2_1_loop(c
 
    Eigen::Matrix<double,2,2> beta_msI2;
 
-   beta_msI2 = (0.5*gN*oneOver16PiSqr*(3.1622776601683795*Tr14 - 10*gN*AbsSqr(
-      MassBp))*UNITMATRIX(2)).real();
+   beta_msI2 = (-0.5*gN*oneOver16PiSqr*(-3.1622776601683795*Tr14 + 10*gN*AbsSqr
+      (MassBp))*UNITMATRIX(2)).real();
 
 
    return beta_msI2;
@@ -126,6 +126,25 @@ Eigen::Matrix<double,2,2> E6SSMEFTHiggs_soft_parameters::calc_beta_msI2_3_loop(c
  * @return 4-loop beta function
  */
 Eigen::Matrix<double,2,2> E6SSMEFTHiggs_soft_parameters::calc_beta_msI2_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,2,2> beta_msI2;
+
+   beta_msI2 = ZEROMATRIX(2,2);
+
+
+   return beta_msI2;
+}
+
+/**
+ * Calculates the 5-loop beta function of msI2.
+ *
+ * @return 5-loop beta function
+ */
+Eigen::Matrix<double,2,2> E6SSMEFTHiggs_soft_parameters::calc_beta_msI2_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:55:20
+// File generated at Tue 22 Jan 2019 17:38:51
 
 /**
  * @file lowMSSM_a_muon.hpp
  *
- * This file was generated at Sun 26 Aug 2018 14:55:20 with FlexibleSUSY
- * 2.2.0 and SARAH 4.13.0 .
+ * This file was generated at Tue 22 Jan 2019 17:38:51 with FlexibleSUSY
+ * 2.3.0 and SARAH 4.14.1 .
  */
 
 #ifndef lowMSSM_A_MUON_H

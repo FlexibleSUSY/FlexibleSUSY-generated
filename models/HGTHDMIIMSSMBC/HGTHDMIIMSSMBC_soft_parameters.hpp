@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:06:40
+// File generated at Tue 22 Jan 2019 16:22:32
 
 #ifndef HGTHDMIIMSSMBC_soft_parameters_H
 #define HGTHDMIIMSSMBC_soft_parameters_H
@@ -104,38 +104,47 @@ private:
    double calc_beta_MassB_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassB_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassB_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_MassB_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassG_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassG_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassG_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassG_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_MassG_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassWB_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassWB_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassWB_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassWB_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_MassWB_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Mu_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Mu_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Mu_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Mu_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_Mu_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_M122_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_M122_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_M122_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_M122_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_M122_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_M112_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_M112_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_M112_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_M112_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_M112_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_M222_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_M222_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_M222_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_M222_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_M222_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_v1_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_v1_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_v1_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_v1_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_v1_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_v2_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_v2_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_v2_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_v2_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_v2_5_loop(const TRACE_STRUCT_TYPE&) const;
 
 };
 

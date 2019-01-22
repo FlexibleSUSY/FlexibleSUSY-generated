@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:18:45
+// File generated at Tue 22 Jan 2019 17:02:06
 
 #include "E6SSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -85,12 +85,14 @@ double E6SSM_soft_parameters::calc_beta_TLambdax_1_loop(const Soft_traces& soft_
 
    double beta_TLambdax;
 
-   beta_TLambdax = Re(oneOver16PiSqr*(0.2*Lambdax*(6*MassB*Sqr(g1) + 10*(3*
-      traceAdjKappaTKappa + 2*traceAdjLambda12TLambda12 + 3*traceAdjYdTYd +
-      traceAdjYeTYe + 3*traceAdjYuTYu + 3*MassWB*Sqr(g2)) + 19*MassBp*Sqr(gN))
-      + (3*traceKappaAdjKappa + 2*traceLambda12AdjLambda12 + 3*traceYdAdjYd +
-      traceYeAdjYe + 3*traceYuAdjYu + 12*AbsSqr(Lambdax) - 0.6*Sqr(g1) - 3*Sqr(
-      g2) - 1.9*Sqr(gN))*TLambdax));
+   beta_TLambdax = Re(0.1*oneOver16PiSqr*(60*traceAdjKappaTKappa*Lambdax + 40*
+      traceAdjLambda12TLambda12*Lambdax + 60*traceAdjYdTYd*Lambdax + 20*
+      traceAdjYeTYe*Lambdax + 60*traceAdjYuTYu*Lambdax + 12*MassB*Lambdax*Sqr(
+      g1) + 60*MassWB*Lambdax*Sqr(g2) + 38*MassBp*Lambdax*Sqr(gN) + 30*
+      traceKappaAdjKappa*TLambdax + 20*traceLambda12AdjLambda12*TLambdax + 30*
+      traceYdAdjYd*TLambdax + 10*traceYeAdjYe*TLambdax + 30*traceYuAdjYu*
+      TLambdax + 120*AbsSqr(Lambdax)*TLambdax - 6*Sqr(g1)*TLambdax - 30*Sqr(g2)
+      *TLambdax - 19*Sqr(gN)*TLambdax));
 
 
    return beta_TLambdax;
@@ -116,64 +118,79 @@ double E6SSM_soft_parameters::calc_beta_TLambdax_2_loop(const Soft_traces& soft_
    const double traceAdjLambda12TLambda12 = TRACE_STRUCT.
       traceAdjLambda12TLambda12;
    const double traceYdAdjYdYdAdjYd = TRACE_STRUCT.traceYdAdjYdYdAdjYd;
-   const double traceYdAdjYuYuAdjYd = TRACE_STRUCT.traceYdAdjYuYuAdjYd;
-   const double traceYeAdjYeYeAdjYe = TRACE_STRUCT.traceYeAdjYeYeAdjYe;
-   const double traceYuAdjYuYuAdjYu = TRACE_STRUCT.traceYuAdjYuYuAdjYu;
-   const double traceKappaAdjKappaKappaAdjKappa = TRACE_STRUCT.
-      traceKappaAdjKappaKappaAdjKappa;
-   const double traceLambda12AdjLambda12Lambda12AdjLambda12 = TRACE_STRUCT.
-      traceLambda12AdjLambda12Lambda12AdjLambda12;
    const double traceYdAdjYdTYdAdjYd = TRACE_STRUCT.traceYdAdjYdTYdAdjYd;
+   const double traceYdAdjYuYuAdjYd = TRACE_STRUCT.traceYdAdjYuYuAdjYd;
    const double traceYdAdjYuTYuAdjYd = TRACE_STRUCT.traceYdAdjYuTYuAdjYd;
+   const double traceYeAdjYeYeAdjYe = TRACE_STRUCT.traceYeAdjYeYeAdjYe;
    const double traceYeAdjYeTYeAdjYe = TRACE_STRUCT.traceYeAdjYeTYeAdjYe;
    const double traceYuAdjYdTYdAdjYu = TRACE_STRUCT.traceYuAdjYdTYdAdjYu;
+   const double traceYuAdjYuYuAdjYu = TRACE_STRUCT.traceYuAdjYuYuAdjYu;
    const double traceYuAdjYuTYuAdjYu = TRACE_STRUCT.traceYuAdjYuTYuAdjYu;
+   const double traceKappaAdjKappaKappaAdjKappa = TRACE_STRUCT.
+      traceKappaAdjKappaKappaAdjKappa;
    const double traceKappaAdjKappaTKappaAdjKappa = TRACE_STRUCT.
       traceKappaAdjKappaTKappaAdjKappa;
+   const double traceLambda12AdjLambda12Lambda12AdjLambda12 = TRACE_STRUCT.
+      traceLambda12AdjLambda12Lambda12AdjLambda12;
    const double traceLambda12AdjLambda12TLambda12AdjLambda12 = TRACE_STRUCT.
       traceLambda12AdjLambda12TLambda12AdjLambda12;
 
 
    double beta_TLambdax;
 
-   beta_TLambdax = Re(0.005*twoLoop*(-4*Lambdax*(1200*
-      traceKappaAdjKappaTKappaAdjKappa + 800*
-      traceLambda12AdjLambda12TLambda12AdjLambda12 + 1800*traceYdAdjYdTYdAdjYd
-      + 600*traceYdAdjYuTYuAdjYd + 600*traceYeAdjYeTYeAdjYe + 600*
-      traceYuAdjYdTYdAdjYu + 1800*traceYuAdjYuTYuAdjYu + 1188*MassB*Quad(g1) +
-      3300*MassWB*Quad(g2) + 3933*MassBp*Quad(gN) - 1600*traceAdjKappaTKappa*
-      Sqr(g3) - 1600*traceAdjYdTYd*Sqr(g3) - 1600*traceAdjYuTYu*Sqr(g3) + 1600*
-      MassG*traceKappaAdjKappa*Sqr(g3) + 1600*MassG*traceYdAdjYd*Sqr(g3) + 1600
-      *MassG*traceYuAdjYu*Sqr(g3) + 180*traceAdjKappaTKappa*Sqr(gN) + 120*
-      traceAdjLambda12TLambda12*Sqr(gN) + 60*traceAdjYdTYd*Sqr(gN) + 20*
-      traceAdjYeTYe*Sqr(gN) + 30*traceAdjYuTYu*Sqr(gN) - 180*MassBp*
-      traceKappaAdjKappa*Sqr(gN) - 120*MassBp*traceLambda12AdjLambda12*Sqr(gN)
-      - 60*MassBp*traceYdAdjYd*Sqr(gN) - 20*MassBp*traceYeAdjYe*Sqr(gN) - 30*
-      MassBp*traceYuAdjYu*Sqr(gN) + Sqr(g1)*(40*(-2*traceAdjKappaTKappa - 3*
-      traceAdjLambda12TLambda12 + traceAdjYdTYd - 3*traceAdjYeTYe - 2*
-      traceAdjYuTYu + 2*MassB*traceKappaAdjKappa + 3*MassB*
-      traceLambda12AdjLambda12 - MassB*traceYdAdjYd + 3*MassB*traceYeAdjYe + 2*
-      MassB*traceYuAdjYu) + 180*(MassB + MassWB)*Sqr(g2) + 27*(MassB + MassBp)*
-      Sqr(gN)) + 15*Sqr(g2)*(40*(-traceAdjLambda12TLambda12 + MassWB*
-      traceLambda12AdjLambda12) + 13*(MassBp + MassWB)*Sqr(gN))) + (-1200*
-      traceKappaAdjKappaKappaAdjKappa - 800*
-      traceLambda12AdjLambda12Lambda12AdjLambda12 - 1800*traceYdAdjYdYdAdjYd -
-      1200*traceYdAdjYuYuAdjYd - 600*traceYeAdjYeYeAdjYe - 1800*
-      traceYuAdjYuYuAdjYu + 1188*Quad(g1) + 3300*Quad(g2) + 3933*Quad(gN) +
-      3200*traceKappaAdjKappa*Sqr(g3) + 3200*traceYdAdjYd*Sqr(g3) + 3200*
-      traceYuAdjYu*Sqr(g3) - 360*traceKappaAdjKappa*Sqr(gN) - 240*
-      traceLambda12AdjLambda12*Sqr(gN) - 120*traceYdAdjYd*Sqr(gN) - 40*
-      traceYeAdjYe*Sqr(gN) - 60*traceYuAdjYu*Sqr(gN) + 30*Sqr(g2)*(40*
-      traceLambda12AdjLambda12 + 13*Sqr(gN)) + 2*Sqr(g1)*(40*(2*
-      traceKappaAdjKappa + 3*traceLambda12AdjLambda12 - traceYdAdjYd + 3*
-      traceYeAdjYe + 2*traceYuAdjYu) + 180*Sqr(g2) + 27*Sqr(gN)))*TLambdax -
-      10000*Sqr(Conj(Lambdax))*Sqr(Lambdax)*TLambdax - 20*AbsSqr(Lambdax)*(2*
-      Lambdax*(12*MassB*Sqr(g1) + 10*(6*traceAdjKappaTKappa + 4*
-      traceAdjLambda12TLambda12 + 9*traceAdjYdTYd + 3*traceAdjYeTYe + 9*
-      traceAdjYuTYu + 6*MassWB*Sqr(g2)) + 13*MassBp*Sqr(gN)) - 3*(-60*
-      traceKappaAdjKappa - 40*traceLambda12AdjLambda12 - 90*traceYdAdjYd - 30*
-      traceYeAdjYe - 90*traceYuAdjYu + 12*Sqr(g1) + 60*Sqr(g2) + 13*Sqr(gN))*
-      TLambdax)));
+   beta_TLambdax = Re(0.005*twoLoop*(-4800*traceKappaAdjKappaTKappaAdjKappa*
+      Lambdax - 3200*traceLambda12AdjLambda12TLambda12AdjLambda12*Lambdax -
+      7200*traceYdAdjYdTYdAdjYd*Lambdax - 2400*traceYdAdjYuTYuAdjYd*Lambdax -
+      2400*traceYeAdjYeTYeAdjYe*Lambdax - 2400*traceYuAdjYdTYdAdjYu*Lambdax -
+      7200*traceYuAdjYuTYuAdjYu*Lambdax - 4752*MassB*Lambdax*Quad(g1) - 13200*
+      MassWB*Lambdax*Quad(g2) - 15732*MassBp*Lambdax*Quad(gN) + 320*
+      traceAdjKappaTKappa*Lambdax*Sqr(g1) + 480*traceAdjLambda12TLambda12*
+      Lambdax*Sqr(g1) - 160*traceAdjYdTYd*Lambdax*Sqr(g1) + 480*traceAdjYeTYe*
+      Lambdax*Sqr(g1) + 320*traceAdjYuTYu*Lambdax*Sqr(g1) - 320*MassB*
+      traceKappaAdjKappa*Lambdax*Sqr(g1) - 480*MassB*traceLambda12AdjLambda12*
+      Lambdax*Sqr(g1) + 160*MassB*traceYdAdjYd*Lambdax*Sqr(g1) - 480*MassB*
+      traceYeAdjYe*Lambdax*Sqr(g1) - 320*MassB*traceYuAdjYu*Lambdax*Sqr(g1) +
+      2400*traceAdjLambda12TLambda12*Lambdax*Sqr(g2) - 2400*MassWB*
+      traceLambda12AdjLambda12*Lambdax*Sqr(g2) - 720*MassB*Lambdax*Sqr(g1)*Sqr(
+      g2) - 720*MassWB*Lambdax*Sqr(g1)*Sqr(g2) + 6400*traceAdjKappaTKappa*
+      Lambdax*Sqr(g3) + 6400*traceAdjYdTYd*Lambdax*Sqr(g3) + 6400*traceAdjYuTYu
+      *Lambdax*Sqr(g3) - 6400*MassG*traceKappaAdjKappa*Lambdax*Sqr(g3) - 6400*
+      MassG*traceYdAdjYd*Lambdax*Sqr(g3) - 6400*MassG*traceYuAdjYu*Lambdax*Sqr(
+      g3) - 720*traceAdjKappaTKappa*Lambdax*Sqr(gN) - 480*
+      traceAdjLambda12TLambda12*Lambdax*Sqr(gN) - 240*traceAdjYdTYd*Lambdax*Sqr
+      (gN) - 80*traceAdjYeTYe*Lambdax*Sqr(gN) - 120*traceAdjYuTYu*Lambdax*Sqr(
+      gN) + 720*MassBp*traceKappaAdjKappa*Lambdax*Sqr(gN) + 480*MassBp*
+      traceLambda12AdjLambda12*Lambdax*Sqr(gN) + 240*MassBp*traceYdAdjYd*
+      Lambdax*Sqr(gN) + 80*MassBp*traceYeAdjYe*Lambdax*Sqr(gN) + 120*MassBp*
+      traceYuAdjYu*Lambdax*Sqr(gN) - 108*MassB*Lambdax*Sqr(g1)*Sqr(gN) - 108*
+      MassBp*Lambdax*Sqr(g1)*Sqr(gN) - 780*MassBp*Lambdax*Sqr(g2)*Sqr(gN) - 780
+      *MassWB*Lambdax*Sqr(g2)*Sqr(gN) - 2400*traceAdjKappaTKappa*Conj(Lambdax)*
+      Sqr(Lambdax) - 1600*traceAdjLambda12TLambda12*Conj(Lambdax)*Sqr(Lambdax)
+      - 3600*traceAdjYdTYd*Conj(Lambdax)*Sqr(Lambdax) - 1200*traceAdjYeTYe*Conj
+      (Lambdax)*Sqr(Lambdax) - 3600*traceAdjYuTYu*Conj(Lambdax)*Sqr(Lambdax) -
+      480*MassB*Conj(Lambdax)*Sqr(g1)*Sqr(Lambdax) - 2400*MassWB*Conj(Lambdax)*
+      Sqr(g2)*Sqr(Lambdax) - 520*MassBp*Conj(Lambdax)*Sqr(gN)*Sqr(Lambdax) -
+      1200*traceKappaAdjKappaKappaAdjKappa*TLambdax - 800*
+      traceLambda12AdjLambda12Lambda12AdjLambda12*TLambdax - 1800*
+      traceYdAdjYdYdAdjYd*TLambdax - 1200*traceYdAdjYuYuAdjYd*TLambdax - 600*
+      traceYeAdjYeYeAdjYe*TLambdax - 1800*traceYuAdjYuYuAdjYu*TLambdax - 3600*
+      traceKappaAdjKappa*AbsSqr(Lambdax)*TLambdax - 2400*
+      traceLambda12AdjLambda12*AbsSqr(Lambdax)*TLambdax - 5400*traceYdAdjYd*
+      AbsSqr(Lambdax)*TLambdax - 1800*traceYeAdjYe*AbsSqr(Lambdax)*TLambdax -
+      5400*traceYuAdjYu*AbsSqr(Lambdax)*TLambdax + 1188*Quad(g1)*TLambdax +
+      3300*Quad(g2)*TLambdax + 3933*Quad(gN)*TLambdax + 160*traceKappaAdjKappa*
+      Sqr(g1)*TLambdax + 240*traceLambda12AdjLambda12*Sqr(g1)*TLambdax - 80*
+      traceYdAdjYd*Sqr(g1)*TLambdax + 240*traceYeAdjYe*Sqr(g1)*TLambdax + 160*
+      traceYuAdjYu*Sqr(g1)*TLambdax + 720*AbsSqr(Lambdax)*Sqr(g1)*TLambdax +
+      1200*traceLambda12AdjLambda12*Sqr(g2)*TLambdax + 3600*AbsSqr(Lambdax)*Sqr
+      (g2)*TLambdax + 360*Sqr(g1)*Sqr(g2)*TLambdax + 3200*traceKappaAdjKappa*
+      Sqr(g3)*TLambdax + 3200*traceYdAdjYd*Sqr(g3)*TLambdax + 3200*traceYuAdjYu
+      *Sqr(g3)*TLambdax - 360*traceKappaAdjKappa*Sqr(gN)*TLambdax - 240*
+      traceLambda12AdjLambda12*Sqr(gN)*TLambdax - 120*traceYdAdjYd*Sqr(gN)*
+      TLambdax - 40*traceYeAdjYe*Sqr(gN)*TLambdax - 60*traceYuAdjYu*Sqr(gN)*
+      TLambdax + 780*AbsSqr(Lambdax)*Sqr(gN)*TLambdax + 54*Sqr(g1)*Sqr(gN)*
+      TLambdax + 390*Sqr(g2)*Sqr(gN)*TLambdax - 10000*Sqr(Conj(Lambdax))*Sqr(
+      Lambdax)*TLambdax));
 
 
    return beta_TLambdax;
@@ -204,6 +221,25 @@ double E6SSM_soft_parameters::calc_beta_TLambdax_3_loop(const Soft_traces& soft_
  * @return 4-loop beta function
  */
 double E6SSM_soft_parameters::calc_beta_TLambdax_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_TLambdax;
+
+   beta_TLambdax = 0;
+
+
+   return beta_TLambdax;
+}
+
+/**
+ * Calculates the 5-loop beta function of TLambdax.
+ *
+ * @return 5-loop beta function
+ */
+double E6SSM_soft_parameters::calc_beta_TLambdax_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

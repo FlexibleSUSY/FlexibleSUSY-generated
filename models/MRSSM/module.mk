@@ -7,7 +7,12 @@ MODMRSSM_DEP := $(patsubst %,model_specific/%,$(MODMRSSM_MOD))
 MODMRSSM_INC := $(patsubst %,-Imodel_specific/%,$(MODMRSSM_MOD))
 MODMRSSM_LIB := $(foreach M,$(MODMRSSM_MOD),model_specific/$M/libmodel_specific_$M$(MODULE_LIBEXT))
 
+MODMRSSM_SUBMOD  := $(DIR)/cxx_qft
+MODMRSSM_SUBMOD_INC := $(patsubst %,-I%,$(MODMRSSM_SUBMOD))
+
 MRSSM_INSTALL_DIR := $(INSTALL_DIR)/$(DIR)
+MRSSM_INSTALL_CXXQFT_DIR := \
+		$(MRSSM_INSTALL_DIR)/cxx_qft
 
 MRSSM_MK     := \
 		$(DIR)/module.mk
@@ -68,7 +73,6 @@ LLMRSSM_MMA  := \
 		$(DIR)/run_MRSSM.m
 
 LIBMRSSM_HDR := \
-		$(DIR)/MRSSM_cxx_diagrams.hpp \
 		$(DIR)/MRSSM_a_muon.hpp \
 		$(DIR)/MRSSM_convergence_tester.hpp \
 		$(DIR)/MRSSM_edm.hpp \
@@ -93,6 +97,13 @@ LIBMRSSM_HDR := \
 		$(DIR)/MRSSM_susy_scale_constraint.hpp \
 		$(DIR)/MRSSM_utilities.hpp \
 		$(DIR)/MRSSM_weinberg_angle.hpp
+
+LIBMRSSM_CXXQFT_HDR := \
+		$(DIR)/cxx_qft/MRSSM_qft.hpp \
+		$(DIR)/cxx_qft/MRSSM_fields.hpp \
+		$(DIR)/cxx_qft/MRSSM_vertices.hpp \
+		$(DIR)/cxx_qft/MRSSM_context_base.hpp \
+		$(DIR)/cxx_qft/MRSSM_npointfunctions.hpp
 
 ifneq ($(findstring two_scale,$(SOLVERS)),)
 -include $(DIR)/two_scale.mk
@@ -182,8 +193,10 @@ all-$(MODNAME): $(LIBMRSSM) $(EXEMRSSM_EXE)
 ifneq ($(INSTALL_DIR),)
 install-src::
 		install -d $(MRSSM_INSTALL_DIR)
+		install -d $(MRSSM_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(LIBMRSSM_SRC) $(MRSSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LIBMRSSM_HDR) $(MRSSM_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(LIBMRSSM_CXXQFT_HDR) $(MRSSM_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(EXEMRSSM_SRC) $(MRSSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLMRSSM_SRC) $(MRSSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLMRSSM_MMA) $(MRSSM_INSTALL_DIR)
@@ -214,6 +227,7 @@ clean-$(MODNAME)-obj:
 clean-$(MODNAME)-src:
 		-rm -f $(LIBMRSSM_SRC)
 		-rm -f $(LIBMRSSM_HDR)
+		-rm -f $(LIBMRSSM_CXXQFT_HDR)
 		-rm -f $(EXEMRSSM_SRC)
 		-rm -f $(LLMRSSM_SRC)
 		-rm -f $(LLMRSSM_MMA)
@@ -242,14 +256,14 @@ distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
 		tar -czf $(MRSSM_TARBALL) \
-		$(LIBMRSSM_SRC) $(LIBMRSSM_HDR) \
+		$(LIBMRSSM_SRC) $(LIBMRSSM_HDR) $(LIBMRSSM_CXXQFT_HDR) \
 		$(EXEMRSSM_SRC) \
 		$(LLMRSSM_SRC) $(LLMRSSM_MMA) \
 		$(MRSSM_MK) $(MRSSM_INCLUDE_MK) \
 		$(MRSSM_SLHA_INPUT) $(MRSSM_REFERENCES) \
 		$(MRSSM_GNUPLOT)
 
-$(LIBMRSSM_SRC) $(LIBMRSSM_HDR) $(EXEMRSSM_SRC) $(LLMRSSM_SRC) $(LLMRSSM_MMA) \
+$(LIBMRSSM_SRC) $(LIBMRSSM_HDR) $(LIBMRSSM_CXXQFT_HDR) $(EXEMRSSM_SRC) $(LLMRSSM_SRC) $(LLMRSSM_MMA) \
 : run-metacode-$(MODNAME)
 		@true
 
@@ -270,7 +284,7 @@ $(METACODE_STAMP_MRSSM):
 endif
 
 $(LIBMRSSM_DEP) $(EXEMRSSM_DEP) $(LLMRSSM_DEP) $(LIBMRSSM_OBJ) $(EXEMRSSM_OBJ) $(LLMRSSM_OBJ) $(LLMRSSM_LIB): \
-	CPPFLAGS += $(MODMRSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODMRSSM_SUBMOD_INC) $(MODMRSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBMRSSM_DEP) $(EXEMRSSM_DEP) $(LLMRSSM_DEP) $(LIBMRSSM_OBJ) $(EXEMRSSM_OBJ) $(LLMRSSM_OBJ) $(LLMRSSM_LIB): \

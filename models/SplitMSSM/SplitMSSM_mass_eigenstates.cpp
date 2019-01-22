@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:10:16
+// File generated at Tue 22 Jan 2019 16:49:04
 
 /**
  * @file SplitMSSM_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from MSbar
  * parameters.
  *
- * This file was generated at Sun 26 Aug 2018 14:10:16 with FlexibleSUSY
- * 2.2.0 (git commit: 8489097de2d6938a6da0149378457b5ad13d9425) and SARAH 4.13.0 .
+ * This file was generated at Tue 22 Jan 2019 16:49:04 with FlexibleSUSY
+ * 2.3.0 (git commit: b5dda61ad35a8ffff74bde70f63e1c2b815e751a) and SARAH 4.14.1 .
  */
 
 #include "SplitMSSM_mass_eigenstates.hpp"
@@ -42,8 +42,11 @@
 #include "error.hpp"
 #include "pv.hpp"
 #include "raii.hpp"
-#include "thread_pool.hpp"
 #include "functors.hpp"
+
+#ifdef ENABLE_THREADS
+#include "thread_pool.hpp"
+#endif
 
 #ifdef ENABLE_TWO_SCALE_SOLVER
 #include "SplitMSSM_two_scale_ewsb_solver.hpp"
@@ -66,6 +69,8 @@
 
 namespace flexiblesusy {
 
+#define STRINGIFY(s) XSTRINGIFY(s)
+#define XSTRINGIFY(s) #s
 #define CLASSNAME SplitMSSM_mass_eigenstates
 
 #define PHYSICAL(parameter) physical.parameter
@@ -86,7 +91,7 @@ namespace flexiblesusy {
 #define HIGGS_3LOOP_CORRECTION_AT_AT_AT    loop_corrections.higgs_at_at_at
 #define HIGGS_4LOOP_CORRECTION_AT_AS_AS_AS loop_corrections.higgs_at_as_as_as
 
-CLASSNAME::SplitMSSM_mass_eigenstates(const SplitMSSM_input_parameters& input_)
+CLASSNAME::CLASSNAME(const SplitMSSM_input_parameters& input_)
    : SplitMSSM_soft_parameters(input_)
 #if defined(ENABLE_TWO_SCALE_SOLVER)
    , ewsb_solver(new SplitMSSM_ewsb_solver<Two_scale>())
@@ -279,7 +284,7 @@ Eigen::Matrix<double,CLASSNAME::number_of_ewsb_equations,1> CLASSNAME::tadpole_e
 {
    auto tadpole = tadpole_equations();
 
-   tadpole[0] /= v;
+   tadpole[0] /= 1.4142135623730951*v;
 
 
    return tadpole;
@@ -297,7 +302,7 @@ int CLASSNAME::solve_ewsb_tree_level_custom()
 int CLASSNAME::solve_ewsb_tree_level()
 {
    if (!ewsb_solver) {
-      throw SetupError("SplitMSSM_mass_eigenstates::solve_ewsb_tree_level: "
+      throw SetupError(STRINGIFY(CLASSNAME) "::solve_ewsb_tree_level: "
                        "no EWSB solver set");
    }
 
@@ -329,7 +334,7 @@ int CLASSNAME::solve_ewsb_tree_level()
 int CLASSNAME::solve_ewsb_one_loop()
 {
    if (!ewsb_solver) {
-      throw SetupError("SplitMSSM_mass_eigenstates::solve_ewsb_one_loop: "
+      throw SetupError(STRINGIFY(CLASSNAME) "::solve_ewsb_one_loop: "
                        "no EWSB solver set");
    }
 
@@ -361,7 +366,7 @@ int CLASSNAME::solve_ewsb_one_loop()
 int CLASSNAME::solve_ewsb()
 {
    if (!ewsb_solver) {
-      throw SetupError("SplitMSSM_mass_eigenstates::solve_ewsb: "
+      throw SetupError(STRINGIFY(CLASSNAME) "::solve_ewsb: "
                        "no EWSB solver set");
    }
 
@@ -1067,8 +1072,7 @@ void CLASSNAME::calculate_MVG()
 double CLASSNAME::get_mass_matrix_Hp() const
 {
 
-   const double mass_matrix_Hp = Re(-mu2 + Lambdax*Sqr(v) + 0.5*Sqr(g2)*Sqr(v))
-      ;
+   const double mass_matrix_Hp = Re(-mu2 + 0.5*(2*Lambdax + Sqr(g2))*Sqr(v));
 
    return mass_matrix_Hp;
 }
@@ -1127,8 +1131,9 @@ void CLASSNAME::calculate_MGlu()
 double CLASSNAME::get_mass_matrix_Ah() const
 {
 
-   const double mass_matrix_Ah = Re(-mu2 + Lambdax*Sqr(v) + 0.5*Sqr(v)*Sqr(g2*
-      Cos(ThetaW()) + 0.7745966692414834*g1*Sin(ThetaW())));
+   const double mass_matrix_Ah = Re(-mu2 + Lambdax*Sqr(v) + 0.7745966692414834*
+      g1*g2*Cos(ThetaW())*Sin(ThetaW())*Sqr(v) + 0.5*Sqr(g2)*Sqr(v)*Sqr(Cos(
+      ThetaW())) + 0.3*Sqr(g1)*Sqr(v)*Sqr(Sin(ThetaW())));
 
    return mass_matrix_Ah;
 }
@@ -4928,7 +4933,7 @@ double CLASSNAME::ThetaW() const
 
 
 
-std::ostream& operator<<(std::ostream& ostr, const SplitMSSM_mass_eigenstates& model)
+std::ostream& operator<<(std::ostream& ostr, const CLASSNAME& model)
 {
    model.print(ostr);
    return ostr;

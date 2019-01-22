@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:04:14
+// File generated at Tue 22 Jan 2019 14:45:25
 
 #include "MSSMEFTHiggs_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -62,14 +62,14 @@ Eigen::Matrix<double,3,3> MSSMEFTHiggs_susy_parameters::calc_beta_Yu_2_loop(cons
 
    Eigen::Matrix<double,3,3> beta_Yu;
 
-   beta_Yu = (twoLoop*(Yu*(-3*traceYdAdjYuYuAdjYd - 9*traceYuAdjYuYuAdjYu +
-      6.095555555555555*Quad(g1) + 7.5*Quad(g2) - 1.7777777777777777*Quad(g3) +
-      16*traceYuAdjYu*Sqr(g3) + 8*Sqr(g2)*Sqr(g3) + Sqr(g1)*(Sqr(g2) +
-      0.08888888888888889*(9*traceYuAdjYu + 34*Sqr(g3)))) + (-3*traceYdAdjYd -
-      traceYeAdjYe + 0.4*Sqr(g1))*(Yu*Yd.adjoint()*Yd) + (-9*traceYuAdjYu + 0.4
-      *Sqr(g1) + 6*Sqr(g2))*(Yu*Yu.adjoint()*Yu) - 2*(Yu*Yd.adjoint()*Yd*Yd.
-      adjoint()*Yd) - 2*(Yu*Yd.adjoint()*Yd*Yu.adjoint()*Yu) - 4*(Yu*Yu.adjoint
-      ()*Yu*Yu.adjoint()*Yu))).real();
+   beta_Yu = (twoLoop*(0.0022222222222222222*Yu*(-1350*traceYdAdjYuYuAdjYd -
+      4050*traceYuAdjYuYuAdjYu + 2743*Quad(g1) + 3375*Quad(g2) - 800*Quad(g3) +
+      360*traceYuAdjYu*Sqr(g1) + 450*Sqr(g1)*Sqr(g2) + 7200*traceYuAdjYu*Sqr(g3
+      ) + 1360*Sqr(g1)*Sqr(g3) + 3600*Sqr(g2)*Sqr(g3)) + 0.2*(-15*traceYdAdjYd
+      - 5*traceYeAdjYe + 2*Sqr(g1))*(Yu*Yd.adjoint()*Yd) + 0.2*(-45*
+      traceYuAdjYu + 2*Sqr(g1) + 30*Sqr(g2))*(Yu*Yu.adjoint()*Yu) - 2*(Yu*Yd.
+      adjoint()*Yd*Yd.adjoint()*Yd) - 2*(Yu*Yd.adjoint()*Yd*Yu.adjoint()*Yu) -
+      4*(Yu*Yu.adjoint()*Yu*Yu.adjoint()*Yu))).real();
 
 
    return beta_Yu;
@@ -100,6 +100,25 @@ Eigen::Matrix<double,3,3> MSSMEFTHiggs_susy_parameters::calc_beta_Yu_3_loop(cons
  * @return 4-loop beta function
  */
 Eigen::Matrix<double,3,3> MSSMEFTHiggs_susy_parameters::calc_beta_Yu_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_Yu;
+
+   beta_Yu = ZEROMATRIX(3,3);
+
+
+   return beta_Yu;
+}
+
+/**
+ * Calculates the 5-loop beta function of Yu.
+ *
+ * @return 5-loop beta function
+ */
+Eigen::Matrix<double,3,3> MSSMEFTHiggs_susy_parameters::calc_beta_Yu_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

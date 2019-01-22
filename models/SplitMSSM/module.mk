@@ -7,7 +7,12 @@ MODSplitMSSM_DEP := $(patsubst %,model_specific/%,$(MODSplitMSSM_MOD))
 MODSplitMSSM_INC := $(patsubst %,-Imodel_specific/%,$(MODSplitMSSM_MOD))
 MODSplitMSSM_LIB := $(foreach M,$(MODSplitMSSM_MOD),model_specific/$M/libmodel_specific_$M$(MODULE_LIBEXT))
 
+MODSplitMSSM_SUBMOD  := $(DIR)/cxx_qft
+MODSplitMSSM_SUBMOD_INC := $(patsubst %,-I%,$(MODSplitMSSM_SUBMOD))
+
 SplitMSSM_INSTALL_DIR := $(INSTALL_DIR)/$(DIR)
+SplitMSSM_INSTALL_CXXQFT_DIR := \
+		$(SplitMSSM_INSTALL_DIR)/cxx_qft
 
 SplitMSSM_MK     := \
 		$(DIR)/module.mk
@@ -68,7 +73,6 @@ LLSplitMSSM_MMA  := \
 		$(DIR)/run_SplitMSSM.m
 
 LIBSplitMSSM_HDR := \
-		$(DIR)/SplitMSSM_cxx_diagrams.hpp \
 		$(DIR)/SplitMSSM_a_muon.hpp \
 		$(DIR)/SplitMSSM_convergence_tester.hpp \
 		$(DIR)/SplitMSSM_edm.hpp \
@@ -93,6 +97,13 @@ LIBSplitMSSM_HDR := \
 		$(DIR)/SplitMSSM_susy_scale_constraint.hpp \
 		$(DIR)/SplitMSSM_utilities.hpp \
 		$(DIR)/SplitMSSM_weinberg_angle.hpp
+
+LIBSplitMSSM_CXXQFT_HDR := \
+		$(DIR)/cxx_qft/SplitMSSM_qft.hpp \
+		$(DIR)/cxx_qft/SplitMSSM_fields.hpp \
+		$(DIR)/cxx_qft/SplitMSSM_vertices.hpp \
+		$(DIR)/cxx_qft/SplitMSSM_context_base.hpp \
+		$(DIR)/cxx_qft/SplitMSSM_npointfunctions.hpp
 
 ifneq ($(findstring two_scale,$(SOLVERS)),)
 -include $(DIR)/two_scale.mk
@@ -182,8 +193,10 @@ all-$(MODNAME): $(LIBSplitMSSM) $(EXESplitMSSM_EXE)
 ifneq ($(INSTALL_DIR),)
 install-src::
 		install -d $(SplitMSSM_INSTALL_DIR)
+		install -d $(SplitMSSM_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(LIBSplitMSSM_SRC) $(SplitMSSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LIBSplitMSSM_HDR) $(SplitMSSM_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(LIBSplitMSSM_CXXQFT_HDR) $(SplitMSSM_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(EXESplitMSSM_SRC) $(SplitMSSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLSplitMSSM_SRC) $(SplitMSSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLSplitMSSM_MMA) $(SplitMSSM_INSTALL_DIR)
@@ -214,6 +227,7 @@ clean-$(MODNAME)-obj:
 clean-$(MODNAME)-src:
 		-rm -f $(LIBSplitMSSM_SRC)
 		-rm -f $(LIBSplitMSSM_HDR)
+		-rm -f $(LIBSplitMSSM_CXXQFT_HDR)
 		-rm -f $(EXESplitMSSM_SRC)
 		-rm -f $(LLSplitMSSM_SRC)
 		-rm -f $(LLSplitMSSM_MMA)
@@ -242,14 +256,14 @@ distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
 		tar -czf $(SplitMSSM_TARBALL) \
-		$(LIBSplitMSSM_SRC) $(LIBSplitMSSM_HDR) \
+		$(LIBSplitMSSM_SRC) $(LIBSplitMSSM_HDR) $(LIBSplitMSSM_CXXQFT_HDR) \
 		$(EXESplitMSSM_SRC) \
 		$(LLSplitMSSM_SRC) $(LLSplitMSSM_MMA) \
 		$(SplitMSSM_MK) $(SplitMSSM_INCLUDE_MK) \
 		$(SplitMSSM_SLHA_INPUT) $(SplitMSSM_REFERENCES) \
 		$(SplitMSSM_GNUPLOT)
 
-$(LIBSplitMSSM_SRC) $(LIBSplitMSSM_HDR) $(EXESplitMSSM_SRC) $(LLSplitMSSM_SRC) $(LLSplitMSSM_MMA) \
+$(LIBSplitMSSM_SRC) $(LIBSplitMSSM_HDR) $(LIBSplitMSSM_CXXQFT_HDR) $(EXESplitMSSM_SRC) $(LLSplitMSSM_SRC) $(LLSplitMSSM_MMA) \
 : run-metacode-$(MODNAME)
 		@true
 
@@ -270,7 +284,7 @@ $(METACODE_STAMP_SplitMSSM):
 endif
 
 $(LIBSplitMSSM_DEP) $(EXESplitMSSM_DEP) $(LLSplitMSSM_DEP) $(LIBSplitMSSM_OBJ) $(EXESplitMSSM_OBJ) $(LLSplitMSSM_OBJ) $(LLSplitMSSM_LIB): \
-	CPPFLAGS += $(MODSplitMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODSplitMSSM_SUBMOD_INC) $(MODSplitMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBSplitMSSM_DEP) $(EXESplitMSSM_DEP) $(LLSplitMSSM_DEP) $(LIBSplitMSSM_OBJ) $(EXESplitMSSM_OBJ) $(LLSplitMSSM_OBJ) $(LLSplitMSSM_LIB): \

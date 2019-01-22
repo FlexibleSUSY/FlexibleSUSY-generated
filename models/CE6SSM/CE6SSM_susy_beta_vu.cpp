@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 13:46:27
+// File generated at Tue 22 Jan 2019 14:19:01
 
 #include "CE6SSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -52,9 +52,9 @@ double CE6SSM_susy_parameters::calc_beta_vu_1_loop(const Susy_traces& susy_trace
  */
 double CE6SSM_susy_parameters::calc_beta_vu_2_loop(const Susy_traces& susy_traces) const
 {
-   const double traceYuAdjYu = TRACE_STRUCT.traceYuAdjYu;
    const double traceYdAdjYd = TRACE_STRUCT.traceYdAdjYd;
    const double traceYeAdjYe = TRACE_STRUCT.traceYeAdjYe;
+   const double traceYuAdjYu = TRACE_STRUCT.traceYuAdjYu;
    const double traceKappaAdjKappa = TRACE_STRUCT.traceKappaAdjKappa;
    const double traceLambda12AdjLambda12 = TRACE_STRUCT.
       traceLambda12AdjLambda12;
@@ -65,12 +65,14 @@ double CE6SSM_susy_parameters::calc_beta_vu_2_loop(const Susy_traces& susy_trace
    double beta_vu;
 
    beta_vu = Re(-0.005*twoLoop*vu*(-600*traceYdAdjYuYuAdjYd - 1800*
-      traceYuAdjYuYuAdjYu + 297*Quad(g1) + 725*Quad(g2) + 192*Quad(gN) + 900*
-      traceYuAdjYu*Sqr(g2) + 3200*traceYuAdjYu*Sqr(g3) + 60*traceYuAdjYu*Sqr(gN
-      ) + 60*Sqr(g2)*Sqr(gN) + 20*AbsSqr(Lambdax)*(-30*traceKappaAdjKappa - 20*
-      traceLambda12AdjLambda12 - 30*traceYdAdjYd - 10*traceYeAdjYe + 3*Sqr(g1)
-      + 15*Sqr(g2) + 17*Sqr(gN)) + Sqr(g1)*(340*traceYuAdjYu + 90*Sqr(g2) + 36*
-      Sqr(gN)) - 600*Sqr(Conj(Lambdax))*Sqr(Lambdax)));
+      traceYuAdjYuYuAdjYu - 600*traceKappaAdjKappa*AbsSqr(Lambdax) - 400*
+      traceLambda12AdjLambda12*AbsSqr(Lambdax) - 600*traceYdAdjYd*AbsSqr(
+      Lambdax) - 200*traceYeAdjYe*AbsSqr(Lambdax) + 297*Quad(g1) + 725*Quad(g2)
+      + 192*Quad(gN) + 340*traceYuAdjYu*Sqr(g1) + 60*AbsSqr(Lambdax)*Sqr(g1) +
+      900*traceYuAdjYu*Sqr(g2) + 300*AbsSqr(Lambdax)*Sqr(g2) + 90*Sqr(g1)*Sqr(
+      g2) + 3200*traceYuAdjYu*Sqr(g3) + 60*traceYuAdjYu*Sqr(gN) + 340*AbsSqr(
+      Lambdax)*Sqr(gN) + 36*Sqr(g1)*Sqr(gN) + 60*Sqr(g2)*Sqr(gN) - 600*Sqr(Conj
+      (Lambdax))*Sqr(Lambdax)));
 
 
    return beta_vu;
@@ -101,6 +103,25 @@ double CE6SSM_susy_parameters::calc_beta_vu_3_loop(const Susy_traces& susy_trace
  * @return 4-loop beta function
  */
 double CE6SSM_susy_parameters::calc_beta_vu_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_vu;
+
+   beta_vu = 0;
+
+
+   return beta_vu;
+}
+
+/**
+ * Calculates the 5-loop beta function of vu.
+ *
+ * @return 5-loop beta function
+ */
+double CE6SSM_susy_parameters::calc_beta_vu_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

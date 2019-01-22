@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:45:01
+// File generated at Tue 22 Jan 2019 17:32:41
 
 #include "NMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -40,9 +40,9 @@ double NMSSM_susy_parameters::calc_beta_Lambdax_1_loop(const Susy_traces& susy_t
 
    double beta_Lambdax;
 
-   beta_Lambdax = Re(oneOver16PiSqr*(3*traceYdAdjYd*Lambdax + traceYeAdjYe*
-      Lambdax + 3*traceYuAdjYu*Lambdax + 2*AbsSqr(Kappa)*Lambdax - 0.6*Lambdax*
-      Sqr(g1) - 3*Lambdax*Sqr(g2) + 4*Conj(Lambdax)*Sqr(Lambdax)));
+   beta_Lambdax = Re(0.2*oneOver16PiSqr*Lambdax*(15*traceYdAdjYd + 5*
+      traceYeAdjYe + 15*traceYuAdjYu + 10*AbsSqr(Kappa) + 20*AbsSqr(Lambdax) -
+      3*Sqr(g1) - 15*Sqr(g2)));
 
 
    return beta_Lambdax;
@@ -68,12 +68,13 @@ double NMSSM_susy_parameters::calc_beta_Lambdax_2_loop(const Susy_traces& susy_t
 
    beta_Lambdax = Re(-0.02*twoLoop*Lambdax*(450*traceYdAdjYdYdAdjYd + 300*
       traceYdAdjYuYuAdjYd + 150*traceYeAdjYeYeAdjYe + 450*traceYuAdjYuYuAdjYu +
-      600*AbsSqr(Kappa)*AbsSqr(Lambdax) - 207*Quad(g1) - 375*Quad(g2) + 20*
-      traceYdAdjYd*Sqr(g1) - 60*traceYeAdjYe*Sqr(g1) - 40*traceYuAdjYu*Sqr(g1)
-      - 90*Sqr(g1)*Sqr(g2) - 30*AbsSqr(Lambdax)*(-15*traceYdAdjYd - 5*
-      traceYeAdjYe - 15*traceYuAdjYu + 2*Sqr(g1) + 10*Sqr(g2)) - 800*
-      traceYdAdjYd*Sqr(g3) - 800*traceYuAdjYu*Sqr(g3) + 400*Sqr(Conj(Kappa))*
-      Sqr(Kappa) + 500*Sqr(Conj(Lambdax))*Sqr(Lambdax)));
+      450*traceYdAdjYd*AbsSqr(Lambdax) + 150*traceYeAdjYe*AbsSqr(Lambdax) + 450
+      *traceYuAdjYu*AbsSqr(Lambdax) + 600*AbsSqr(Kappa)*AbsSqr(Lambdax) - 207*
+      Quad(g1) - 375*Quad(g2) + 20*traceYdAdjYd*Sqr(g1) - 60*traceYeAdjYe*Sqr(
+      g1) - 40*traceYuAdjYu*Sqr(g1) - 60*AbsSqr(Lambdax)*Sqr(g1) - 300*AbsSqr(
+      Lambdax)*Sqr(g2) - 90*Sqr(g1)*Sqr(g2) - 800*traceYdAdjYd*Sqr(g3) - 800*
+      traceYuAdjYu*Sqr(g3) + 400*Sqr(Conj(Kappa))*Sqr(Kappa) + 500*Sqr(Conj(
+      Lambdax))*Sqr(Lambdax)));
 
 
    return beta_Lambdax;
@@ -104,6 +105,25 @@ double NMSSM_susy_parameters::calc_beta_Lambdax_3_loop(const Susy_traces& susy_t
  * @return 4-loop beta function
  */
 double NMSSM_susy_parameters::calc_beta_Lambdax_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_Lambdax;
+
+   beta_Lambdax = 0;
+
+
+   return beta_Lambdax;
+}
+
+/**
+ * Calculates the 5-loop beta function of Lambdax.
+ *
+ * @return 5-loop beta function
+ */
+double NMSSM_susy_parameters::calc_beta_Lambdax_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 13:57:49
+// File generated at Tue 22 Jan 2019 14:41:46
 
 #include "E6SSMEFTHiggs_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -39,10 +39,9 @@ Eigen::Matrix<double,3,3> E6SSMEFTHiggs_susy_parameters::calc_beta_Yd_1_loop(con
 
    Eigen::Matrix<double,3,3> beta_Yd;
 
-   beta_Yd = (oneOver16PiSqr*(Yd*(3*traceYdAdjYd + traceYeAdjYe + AbsSqr(
-      Lambdax) - 0.4666666666666667*Sqr(g1) - 3*Sqr(g2) - 5.333333333333333*Sqr
-      (g3) - 0.7*Sqr(gN)) + 3*(Yd*Yd.adjoint()*Yd) + Yd*Yu.adjoint()*Yu)).real(
-      );
+   beta_Yd = (oneOver16PiSqr*(-0.03333333333333333*Yd*(-90*traceYdAdjYd - 30*
+      traceYeAdjYe - 30*AbsSqr(Lambdax) + 14*Sqr(g1) + 90*Sqr(g2) + 160*Sqr(g3)
+      + 21*Sqr(gN)) + 3*(Yd*Yd.adjoint()*Yd) + Yd*Yu.adjoint()*Yu)).real();
 
 
    return beta_Yd;
@@ -68,20 +67,20 @@ Eigen::Matrix<double,3,3> E6SSMEFTHiggs_susy_parameters::calc_beta_Yd_2_loop(con
 
    Eigen::Matrix<double,3,3> beta_Yd;
 
-   beta_Yd = (twoLoop*(Yd*(-9*traceYdAdjYdYdAdjYd - 3*traceYdAdjYuYuAdjYd - 3*
-      traceYeAdjYeYeAdjYe + 4.588888888888889*Quad(g1) + 16.5*Quad(g2) +
-      14.222222222222221*Quad(g3) + 6.825*Quad(gN) + 16*traceYdAdjYd*Sqr(g3) +
-      8*Sqr(g2)*Sqr(g3) + Sqr(g1)*(-0.4*traceYdAdjYd + 1.2*traceYeAdjYe + Sqr(
-      g2) + 0.8888888888888888*Sqr(g3) - 0.23333333333333334*Sqr(gN)) - 0.6*
-      traceYdAdjYd*Sqr(gN) - 0.2*traceYeAdjYe*Sqr(gN) + 1.5*Sqr(g2)*Sqr(gN) +
-      1.3333333333333333*Sqr(g3)*Sqr(gN) + AbsSqr(Lambdax)*(-3*
-      traceKappaAdjKappa - 2*traceLambda12AdjLambda12 - 3*traceYuAdjYu + Sqr(gN
-      )) - 3*Sqr(Conj(Lambdax))*Sqr(Lambdax)) + (-9*traceYdAdjYd - 3*
-      traceYeAdjYe - 3*AbsSqr(Lambdax) + 0.8*Sqr(g1) + 6*Sqr(g2) + 1.2*Sqr(gN))
-      *(Yd*Yd.adjoint()*Yd) + 0.2*(-15*traceYuAdjYu - 5*AbsSqr(Lambdax) + 4*Sqr
-      (g1) + Sqr(gN))*(Yd*Yu.adjoint()*Yu) - 4*(Yd*Yd.adjoint()*Yd*Yd.adjoint()
-      *Yd) - 2*(Yd*Yu.adjoint()*Yu*Yd.adjoint()*Yd) - 2*(Yd*Yu.adjoint()*Yu*Yu.
-      adjoint()*Yu))).real();
+   beta_Yd = (twoLoop*(0.002777777777777778*Yd*(-3240*traceYdAdjYdYdAdjYd -
+      1080*traceYdAdjYuYuAdjYd - 1080*traceYeAdjYeYeAdjYe - 1080*
+      traceKappaAdjKappa*AbsSqr(Lambdax) - 720*traceLambda12AdjLambda12*AbsSqr(
+      Lambdax) - 1080*traceYuAdjYu*AbsSqr(Lambdax) + 1652*Quad(g1) + 5940*Quad(
+      g2) + 5120*Quad(g3) + 2457*Quad(gN) - 144*traceYdAdjYd*Sqr(g1) + 432*
+      traceYeAdjYe*Sqr(g1) + 360*Sqr(g1)*Sqr(g2) + 5760*traceYdAdjYd*Sqr(g3) +
+      320*Sqr(g1)*Sqr(g3) + 2880*Sqr(g2)*Sqr(g3) - 216*traceYdAdjYd*Sqr(gN) -
+      72*traceYeAdjYe*Sqr(gN) + 360*AbsSqr(Lambdax)*Sqr(gN) - 84*Sqr(g1)*Sqr(gN
+      ) + 540*Sqr(g2)*Sqr(gN) + 480*Sqr(g3)*Sqr(gN) - 1080*Sqr(Conj(Lambdax))*
+      Sqr(Lambdax)) + 0.2*(-45*traceYdAdjYd - 15*traceYeAdjYe - 15*AbsSqr(
+      Lambdax) + 4*Sqr(g1) + 30*Sqr(g2) + 6*Sqr(gN))*(Yd*Yd.adjoint()*Yd) + 0.2
+      *(-15*traceYuAdjYu - 5*AbsSqr(Lambdax) + 4*Sqr(g1) + Sqr(gN))*(Yd*Yu.
+      adjoint()*Yu) - 4*(Yd*Yd.adjoint()*Yd*Yd.adjoint()*Yd) - 2*(Yd*Yu.adjoint
+      ()*Yu*Yd.adjoint()*Yd) - 2*(Yd*Yu.adjoint()*Yu*Yu.adjoint()*Yu))).real();
 
 
    return beta_Yd;
@@ -112,6 +111,25 @@ Eigen::Matrix<double,3,3> E6SSMEFTHiggs_susy_parameters::calc_beta_Yd_3_loop(con
  * @return 4-loop beta function
  */
 Eigen::Matrix<double,3,3> E6SSMEFTHiggs_susy_parameters::calc_beta_Yd_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_Yd;
+
+   beta_Yd = ZEROMATRIX(3,3);
+
+
+   return beta_Yd;
+}
+
+/**
+ * Calculates the 5-loop beta function of Yd.
+ *
+ * @return 5-loop beta function
+ */
+Eigen::Matrix<double,3,3> E6SSMEFTHiggs_susy_parameters::calc_beta_Yd_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:18:12
+// File generated at Tue 22 Jan 2019 17:01:19
 
 #include "E6SSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -39,9 +39,9 @@ Eigen::Matrix<double,3,3> E6SSM_susy_parameters::calc_beta_Ye_1_loop(const Susy_
 
    Eigen::Matrix<double,3,3> beta_Ye;
 
-   beta_Ye = (oneOver16PiSqr*(Ye*(3*traceYdAdjYd + traceYeAdjYe + AbsSqr(
-      Lambdax) - 1.8*Sqr(g1) - 3*Sqr(g2) - 0.7*Sqr(gN)) + 3*(Ye*Ye.adjoint()*Ye
-      ))).real();
+   beta_Ye = (oneOver16PiSqr*(-0.1*Ye*(-30*traceYdAdjYd - 10*traceYeAdjYe - 10*
+      AbsSqr(Lambdax) + 18*Sqr(g1) + 30*Sqr(g2) + 7*Sqr(gN)) + 3*(Ye*Ye.adjoint
+      ()*Ye))).real();
 
 
    return beta_Ye;
@@ -68,12 +68,13 @@ Eigen::Matrix<double,3,3> E6SSM_susy_parameters::calc_beta_Ye_2_loop(const Susy_
    Eigen::Matrix<double,3,3> beta_Ye;
 
    beta_Ye = (twoLoop*(0.025*Ye*(-360*traceYdAdjYdYdAdjYd - 120*
-      traceYdAdjYuYuAdjYd - 120*traceYeAdjYeYeAdjYe + 756*Quad(g1) + 660*Quad(
-      g2) + 273*Quad(gN) + 640*traceYdAdjYd*Sqr(g3) - 24*traceYdAdjYd*Sqr(gN) -
-      8*traceYeAdjYe*Sqr(gN) + 78*Sqr(g2)*Sqr(gN) + 40*AbsSqr(Lambdax)*(-3*
-      traceKappaAdjKappa - 2*traceLambda12AdjLambda12 - 3*traceYuAdjYu + Sqr(gN
-      )) + 2*Sqr(g1)*(-8*traceYdAdjYd + 24*traceYeAdjYe + 36*Sqr(g2) + 3*Sqr(gN
-      )) - 120*Sqr(Conj(Lambdax))*Sqr(Lambdax)) + 1.5*(-6*traceYdAdjYd - 2*
+      traceYdAdjYuYuAdjYd - 120*traceYeAdjYeYeAdjYe - 120*traceKappaAdjKappa*
+      AbsSqr(Lambdax) - 80*traceLambda12AdjLambda12*AbsSqr(Lambdax) - 120*
+      traceYuAdjYu*AbsSqr(Lambdax) + 756*Quad(g1) + 660*Quad(g2) + 273*Quad(gN)
+      - 16*traceYdAdjYd*Sqr(g1) + 48*traceYeAdjYe*Sqr(g1) + 72*Sqr(g1)*Sqr(g2)
+      + 640*traceYdAdjYd*Sqr(g3) - 24*traceYdAdjYd*Sqr(gN) - 8*traceYeAdjYe*Sqr
+      (gN) + 40*AbsSqr(Lambdax)*Sqr(gN) + 6*Sqr(g1)*Sqr(gN) + 78*Sqr(g2)*Sqr(gN
+      ) - 120*Sqr(Conj(Lambdax))*Sqr(Lambdax)) + 1.5*(-6*traceYdAdjYd - 2*
       traceYeAdjYe - 2*AbsSqr(Lambdax) + 4*Sqr(g2) + Sqr(gN))*(Ye*Ye.adjoint()*
       Ye) - 4*(Ye*Ye.adjoint()*Ye*Ye.adjoint()*Ye))).real();
 
@@ -106,6 +107,25 @@ Eigen::Matrix<double,3,3> E6SSM_susy_parameters::calc_beta_Ye_3_loop(const Susy_
  * @return 4-loop beta function
  */
 Eigen::Matrix<double,3,3> E6SSM_susy_parameters::calc_beta_Ye_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_Ye;
+
+   beta_Ye = ZEROMATRIX(3,3);
+
+
+   return beta_Ye;
+}
+
+/**
+ * Calculates the 5-loop beta function of Ye.
+ *
+ * @return 5-loop beta function
+ */
+Eigen::Matrix<double,3,3> E6SSM_susy_parameters::calc_beta_Ye_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

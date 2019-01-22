@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:02:24
+// File generated at Tue 22 Jan 2019 14:36:35
 
 #include "NMSSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -109,29 +109,31 @@ Eigen::Matrix<double,3,3> NMSSMEFTHiggs_soft_parameters::calc_beta_ml2_2_loop(co
 
    Eigen::Matrix<double,3,3> beta_ml2;
 
-   beta_ml2 = (twoLoop*((-6*traceconjTYdTpTYd - 2*traceconjTYeTpTYe - 6*
-      tracemd2YdAdjYd - 2*traceme2YeAdjYe - 2*traceml2AdjYeYe - 6*
-      tracemq2AdjYdYd - 12*mHd2*traceYdAdjYd - 4*mHd2*traceYeAdjYe - 2*(2*mHd2
-      + mHu2 + ms2)*AbsSqr(Lambdax) - 2*AbsSqr(TLambdax) + 2.4*mHd2*Sqr(g1) +
-      4.8*AbsSqr(MassB)*Sqr(g1))*(Ye.adjoint()*Ye) - 0.4*(5*(3*traceconjTYdTpYd
-       + traceconjTYeTpYe + Conj(TLambdax)*Lambdax) + 6*Conj(MassB)*Sqr(g1))*(
-      Ye.adjoint()*TYe) - 0.4*(5*(3*traceAdjYdTYd + traceAdjYeTYe) + 6*MassB*
-      Sqr(g1) + 5*Conj(Lambdax)*TLambdax)*((TYe).adjoint()*Ye) + (-2*(3*
-      traceYdAdjYd + traceYeAdjYe) - 2*AbsSqr(Lambdax) + 2.4*Sqr(g1))*((TYe).
-      adjoint()*TYe) + (-3*traceYdAdjYd - traceYeAdjYe - AbsSqr(Lambdax) + 1.2*
-      Sqr(g1))*(ml2*Ye.adjoint()*Ye) + (-2*(3*traceYdAdjYd + traceYeAdjYe) - 2*
-      AbsSqr(Lambdax) + 2.4*Sqr(g1))*(Ye.adjoint()*me2*Ye) + (-3*traceYdAdjYd -
-      traceYeAdjYe - AbsSqr(Lambdax) + 1.2*Sqr(g1))*(Ye.adjoint()*Ye*ml2) - 8*
+   beta_ml2 = (twoLoop*(0.4*(-15*traceconjTYdTpTYd - 5*traceconjTYeTpTYe - 15*
+      tracemd2YdAdjYd - 5*traceme2YeAdjYe - 5*traceml2AdjYeYe - 15*
+      tracemq2AdjYdYd - 30*mHd2*traceYdAdjYd - 10*mHd2*traceYeAdjYe - 10*mHd2*
+      AbsSqr(Lambdax) - 5*mHu2*AbsSqr(Lambdax) - 5*ms2*AbsSqr(Lambdax) - 5*
+      AbsSqr(TLambdax) + 6*mHd2*Sqr(g1) + 12*AbsSqr(MassB)*Sqr(g1))*(Ye.adjoint
+      ()*Ye) - 0.4*(15*traceconjTYdTpYd + 5*traceconjTYeTpYe + 5*Conj(TLambdax)
+      *Lambdax + 6*Conj(MassB)*Sqr(g1))*(Ye.adjoint()*TYe) - 0.4*(15*
+      traceAdjYdTYd + 5*traceAdjYeTYe + 6*MassB*Sqr(g1) + 5*Conj(Lambdax)*
+      TLambdax)*((TYe).adjoint()*Ye) + 0.4*(-15*traceYdAdjYd - 5*traceYeAdjYe -
+      5*AbsSqr(Lambdax) + 6*Sqr(g1))*((TYe).adjoint()*TYe) + 0.2*(-15*
+      traceYdAdjYd - 5*traceYeAdjYe - 5*AbsSqr(Lambdax) + 6*Sqr(g1))*(ml2*Ye.
+      adjoint()*Ye) + 0.4*(-15*traceYdAdjYd - 5*traceYeAdjYe - 5*AbsSqr(Lambdax
+      ) + 6*Sqr(g1))*(Ye.adjoint()*me2*Ye) + 0.2*(-15*traceYdAdjYd - 5*
+      traceYeAdjYe - 5*AbsSqr(Lambdax) + 6*Sqr(g1))*(Ye.adjoint()*Ye*ml2) - 8*
       mHd2*(Ye.adjoint()*Ye*Ye.adjoint()*Ye) - 4*(Ye.adjoint()*Ye*(TYe).adjoint
       ()*TYe) - 4*(Ye.adjoint()*TYe*(TYe).adjoint()*Ye) - 4*((TYe).adjoint()*Ye
       *Ye.adjoint()*TYe) - 4*((TYe).adjoint()*TYe*Ye.adjoint()*Ye) - 2*(ml2*Ye.
       adjoint()*Ye*Ye.adjoint()*Ye) - 4*(Ye.adjoint()*me2*Ye*Ye.adjoint()*Ye) -
       4*(Ye.adjoint()*Ye*ml2*Ye.adjoint()*Ye) - 4*(Ye.adjoint()*Ye*Ye.adjoint()
-      *me2*Ye) - 2*(Ye.adjoint()*Ye*Ye.adjoint()*Ye*ml2) + 0.04*(9*Conj(MassB)*
-      Sqr(g1)*(69*MassB*Sqr(g1) + 5*(2*MassB + MassWB)*Sqr(g2)) + 5*(-
-      15.491933384829668*g1*Tr31 + 30*Tr22*Quad(g2) + 6*Tr2U111*Sqr(g1) + 3*
-      Conj(MassWB)*Sqr(g2)*(3*(MassB + 2*MassWB)*Sqr(g1) + 55*MassWB*Sqr(g2))))
-      *UNITMATRIX(3))).real();
+      *me2*Ye) - 2*(Ye.adjoint()*Ye*Ye.adjoint()*Ye*ml2) + 0.04*(-
+      77.45966692414834*g1*Tr31 + 621*AbsSqr(MassB)*Quad(g1) + 150*Tr22*Quad(g2
+      ) + 825*AbsSqr(MassWB)*Quad(g2) + 30*Tr2U111*Sqr(g1) + 90*AbsSqr(MassB)*
+      Sqr(g1)*Sqr(g2) + 90*AbsSqr(MassWB)*Sqr(g1)*Sqr(g2) + 45*MassWB*Conj(
+      MassB)*Sqr(g1)*Sqr(g2) + 45*MassB*Conj(MassWB)*Sqr(g1)*Sqr(g2))*
+      UNITMATRIX(3))).real();
 
 
    return beta_ml2;
@@ -162,6 +164,25 @@ Eigen::Matrix<double,3,3> NMSSMEFTHiggs_soft_parameters::calc_beta_ml2_3_loop(co
  * @return 4-loop beta function
  */
 Eigen::Matrix<double,3,3> NMSSMEFTHiggs_soft_parameters::calc_beta_ml2_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_ml2;
+
+   beta_ml2 = ZEROMATRIX(3,3);
+
+
+   return beta_ml2;
+}
+
+/**
+ * Calculates the 5-loop beta function of ml2.
+ *
+ * @return 5-loop beta function
+ */
+Eigen::Matrix<double,3,3> NMSSMEFTHiggs_soft_parameters::calc_beta_ml2_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

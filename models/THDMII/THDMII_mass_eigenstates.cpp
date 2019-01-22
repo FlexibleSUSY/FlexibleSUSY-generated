@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:09:53
+// File generated at Tue 22 Jan 2019 17:07:38
 
 /**
  * @file THDMII_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from MSbar
  * parameters.
  *
- * This file was generated at Sun 26 Aug 2018 14:09:53 with FlexibleSUSY
- * 2.2.0 (git commit: 8489097de2d6938a6da0149378457b5ad13d9425) and SARAH 4.13.0 .
+ * This file was generated at Tue 22 Jan 2019 17:07:38 with FlexibleSUSY
+ * 2.3.0 (git commit: b5dda61ad35a8ffff74bde70f63e1c2b815e751a) and SARAH 4.14.1 .
  */
 
 #include "THDMII_mass_eigenstates.hpp"
@@ -42,8 +42,11 @@
 #include "error.hpp"
 #include "pv.hpp"
 #include "raii.hpp"
-#include "thread_pool.hpp"
 #include "functors.hpp"
+
+#ifdef ENABLE_THREADS
+#include "thread_pool.hpp"
+#endif
 
 #ifdef ENABLE_TWO_SCALE_SOLVER
 #include "THDMII_two_scale_ewsb_solver.hpp"
@@ -64,6 +67,8 @@
 
 namespace flexiblesusy {
 
+#define STRINGIFY(s) XSTRINGIFY(s)
+#define XSTRINGIFY(s) #s
 #define CLASSNAME THDMII_mass_eigenstates
 
 #define PHYSICAL(parameter) physical.parameter
@@ -84,7 +89,7 @@ namespace flexiblesusy {
 #define HIGGS_3LOOP_CORRECTION_AT_AT_AT    loop_corrections.higgs_at_at_at
 #define HIGGS_4LOOP_CORRECTION_AT_AS_AS_AS loop_corrections.higgs_at_as_as_as
 
-CLASSNAME::THDMII_mass_eigenstates(const THDMII_input_parameters& input_)
+CLASSNAME::CLASSNAME(const THDMII_input_parameters& input_)
    : THDMII_soft_parameters(input_)
 #if defined(ENABLE_TWO_SCALE_SOLVER)
    , ewsb_solver(new THDMII_ewsb_solver<Two_scale>())
@@ -298,7 +303,7 @@ int CLASSNAME::solve_ewsb_tree_level_custom()
 int CLASSNAME::solve_ewsb_tree_level()
 {
    if (!ewsb_solver) {
-      throw SetupError("THDMII_mass_eigenstates::solve_ewsb_tree_level: "
+      throw SetupError(STRINGIFY(CLASSNAME) "::solve_ewsb_tree_level: "
                        "no EWSB solver set");
    }
 
@@ -330,7 +335,7 @@ int CLASSNAME::solve_ewsb_tree_level()
 int CLASSNAME::solve_ewsb_one_loop()
 {
    if (!ewsb_solver) {
-      throw SetupError("THDMII_mass_eigenstates::solve_ewsb_one_loop: "
+      throw SetupError(STRINGIFY(CLASSNAME) "::solve_ewsb_one_loop: "
                        "no EWSB solver set");
    }
 
@@ -362,7 +367,7 @@ int CLASSNAME::solve_ewsb_one_loop()
 int CLASSNAME::solve_ewsb()
 {
    if (!ewsb_solver) {
-      throw SetupError("THDMII_mass_eigenstates::solve_ewsb: "
+      throw SetupError(STRINGIFY(CLASSNAME) "::solve_ewsb: "
                        "no EWSB solver set");
    }
 
@@ -4792,7 +4797,7 @@ double CLASSNAME::ThetaW() const
 
 
 
-std::ostream& operator<<(std::ostream& ostr, const THDMII_mass_eigenstates& model)
+std::ostream& operator<<(std::ostream& ostr, const CLASSNAME& model)
 {
    model.print(ostr);
    return ostr;

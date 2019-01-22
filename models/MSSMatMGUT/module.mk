@@ -7,7 +7,12 @@ MODMSSMatMGUT_DEP := $(patsubst %,model_specific/%,$(MODMSSMatMGUT_MOD))
 MODMSSMatMGUT_INC := $(patsubst %,-Imodel_specific/%,$(MODMSSMatMGUT_MOD))
 MODMSSMatMGUT_LIB := $(foreach M,$(MODMSSMatMGUT_MOD),model_specific/$M/libmodel_specific_$M$(MODULE_LIBEXT))
 
+MODMSSMatMGUT_SUBMOD  := $(DIR)/cxx_qft
+MODMSSMatMGUT_SUBMOD_INC := $(patsubst %,-I%,$(MODMSSMatMGUT_SUBMOD))
+
 MSSMatMGUT_INSTALL_DIR := $(INSTALL_DIR)/$(DIR)
+MSSMatMGUT_INSTALL_CXXQFT_DIR := \
+		$(MSSMatMGUT_INSTALL_DIR)/cxx_qft
 
 MSSMatMGUT_MK     := \
 		$(DIR)/module.mk
@@ -68,7 +73,6 @@ LLMSSMatMGUT_MMA  := \
 		$(DIR)/run_MSSMatMGUT.m
 
 LIBMSSMatMGUT_HDR := \
-		$(DIR)/MSSMatMGUT_cxx_diagrams.hpp \
 		$(DIR)/MSSMatMGUT_a_muon.hpp \
 		$(DIR)/MSSMatMGUT_convergence_tester.hpp \
 		$(DIR)/MSSMatMGUT_edm.hpp \
@@ -93,6 +97,13 @@ LIBMSSMatMGUT_HDR := \
 		$(DIR)/MSSMatMGUT_susy_scale_constraint.hpp \
 		$(DIR)/MSSMatMGUT_utilities.hpp \
 		$(DIR)/MSSMatMGUT_weinberg_angle.hpp
+
+LIBMSSMatMGUT_CXXQFT_HDR := \
+		$(DIR)/cxx_qft/MSSMatMGUT_qft.hpp \
+		$(DIR)/cxx_qft/MSSMatMGUT_fields.hpp \
+		$(DIR)/cxx_qft/MSSMatMGUT_vertices.hpp \
+		$(DIR)/cxx_qft/MSSMatMGUT_context_base.hpp \
+		$(DIR)/cxx_qft/MSSMatMGUT_npointfunctions.hpp
 
 ifneq ($(findstring two_scale,$(SOLVERS)),)
 -include $(DIR)/two_scale.mk
@@ -182,8 +193,10 @@ all-$(MODNAME): $(LIBMSSMatMGUT) $(EXEMSSMatMGUT_EXE)
 ifneq ($(INSTALL_DIR),)
 install-src::
 		install -d $(MSSMatMGUT_INSTALL_DIR)
+		install -d $(MSSMatMGUT_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(LIBMSSMatMGUT_SRC) $(MSSMatMGUT_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LIBMSSMatMGUT_HDR) $(MSSMatMGUT_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(LIBMSSMatMGUT_CXXQFT_HDR) $(MSSMatMGUT_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(EXEMSSMatMGUT_SRC) $(MSSMatMGUT_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLMSSMatMGUT_SRC) $(MSSMatMGUT_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLMSSMatMGUT_MMA) $(MSSMatMGUT_INSTALL_DIR)
@@ -214,6 +227,7 @@ clean-$(MODNAME)-obj:
 clean-$(MODNAME)-src:
 		-rm -f $(LIBMSSMatMGUT_SRC)
 		-rm -f $(LIBMSSMatMGUT_HDR)
+		-rm -f $(LIBMSSMatMGUT_CXXQFT_HDR)
 		-rm -f $(EXEMSSMatMGUT_SRC)
 		-rm -f $(LLMSSMatMGUT_SRC)
 		-rm -f $(LLMSSMatMGUT_MMA)
@@ -242,14 +256,14 @@ distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
 		tar -czf $(MSSMatMGUT_TARBALL) \
-		$(LIBMSSMatMGUT_SRC) $(LIBMSSMatMGUT_HDR) \
+		$(LIBMSSMatMGUT_SRC) $(LIBMSSMatMGUT_HDR) $(LIBMSSMatMGUT_CXXQFT_HDR) \
 		$(EXEMSSMatMGUT_SRC) \
 		$(LLMSSMatMGUT_SRC) $(LLMSSMatMGUT_MMA) \
 		$(MSSMatMGUT_MK) $(MSSMatMGUT_INCLUDE_MK) \
 		$(MSSMatMGUT_SLHA_INPUT) $(MSSMatMGUT_REFERENCES) \
 		$(MSSMatMGUT_GNUPLOT)
 
-$(LIBMSSMatMGUT_SRC) $(LIBMSSMatMGUT_HDR) $(EXEMSSMatMGUT_SRC) $(LLMSSMatMGUT_SRC) $(LLMSSMatMGUT_MMA) \
+$(LIBMSSMatMGUT_SRC) $(LIBMSSMatMGUT_HDR) $(LIBMSSMatMGUT_CXXQFT_HDR) $(EXEMSSMatMGUT_SRC) $(LLMSSMatMGUT_SRC) $(LLMSSMatMGUT_MMA) \
 : run-metacode-$(MODNAME)
 		@true
 
@@ -270,7 +284,7 @@ $(METACODE_STAMP_MSSMatMGUT):
 endif
 
 $(LIBMSSMatMGUT_DEP) $(EXEMSSMatMGUT_DEP) $(LLMSSMatMGUT_DEP) $(LIBMSSMatMGUT_OBJ) $(EXEMSSMatMGUT_OBJ) $(LLMSSMatMGUT_OBJ) $(LLMSSMatMGUT_LIB): \
-	CPPFLAGS += $(MODMSSMatMGUT_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODMSSMatMGUT_SUBMOD_INC) $(MODMSSMatMGUT_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBMSSMatMGUT_DEP) $(EXEMSSMatMGUT_DEP) $(LLMSSMatMGUT_DEP) $(LIBMSSMatMGUT_OBJ) $(EXEMSSMatMGUT_OBJ) $(LLMSSMatMGUT_OBJ) $(LLMSSMatMGUT_LIB): \

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:25:07
+// File generated at Tue 22 Jan 2019 13:53:07
 
 #include "MRSSMEFTHiggs_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -63,13 +63,14 @@ double MRSSMEFTHiggs_susy_parameters::calc_beta_vd_2_loop(const Susy_traces& sus
    double beta_vd;
 
    beta_vd = Re(-0.025*twoLoop*vd*(-360*traceYdAdjYdYdAdjYd - 120*
-      traceYdAdjYuYuAdjYd - 120*traceYeAdjYeYeAdjYe + 45*Quad(g1) + 145*Quad(g2
-      ) + 20*traceYdAdjYd*Sqr(g1) + 60*traceYeAdjYe*Sqr(g1) + 180*traceYdAdjYd*
-      Sqr(g2) + 60*traceYeAdjYe*Sqr(g2) + 18*Sqr(g1)*Sqr(g2) + 6*AbsSqr(LamTD)*
-      (-10*AbsSqr(LamTU) + 3*Sqr(g1) + 55*Sqr(g2)) + 4*AbsSqr(LamSD)*(-20*
-      AbsSqr(LamSU) + 3*(-10*AbsSqr(LamTD) + Sqr(g1) + 5*Sqr(g2))) + 640*
-      traceYdAdjYd*Sqr(g3) - 120*Sqr(LamSD)*Sqr(Conj(LamSD)) - 150*Sqr(LamTD)*
-      Sqr(Conj(LamTD))));
+      traceYdAdjYuYuAdjYd - 120*traceYeAdjYeYeAdjYe - 80*AbsSqr(LamSD)*AbsSqr(
+      LamSU) - 120*AbsSqr(LamSD)*AbsSqr(LamTD) - 60*AbsSqr(LamTD)*AbsSqr(LamTU)
+      + 45*Quad(g1) + 145*Quad(g2) + 20*traceYdAdjYd*Sqr(g1) + 60*traceYeAdjYe*
+      Sqr(g1) + 12*AbsSqr(LamSD)*Sqr(g1) + 18*AbsSqr(LamTD)*Sqr(g1) + 180*
+      traceYdAdjYd*Sqr(g2) + 60*traceYeAdjYe*Sqr(g2) + 60*AbsSqr(LamSD)*Sqr(g2)
+      + 330*AbsSqr(LamTD)*Sqr(g2) + 18*Sqr(g1)*Sqr(g2) + 640*traceYdAdjYd*Sqr(
+      g3) - 120*Sqr(LamSD)*Sqr(Conj(LamSD)) - 150*Sqr(LamTD)*Sqr(Conj(LamTD))))
+      ;
 
 
    return beta_vd;
@@ -100,6 +101,25 @@ double MRSSMEFTHiggs_susy_parameters::calc_beta_vd_3_loop(const Susy_traces& sus
  * @return 4-loop beta function
  */
 double MRSSMEFTHiggs_susy_parameters::calc_beta_vd_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_vd;
+
+   beta_vd = 0;
+
+
+   return beta_vd;
+}
+
+/**
+ * Calculates the 5-loop beta function of vd.
+ *
+ * @return 5-loop beta function
+ */
+double MRSSMEFTHiggs_susy_parameters::calc_beta_vd_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:43:49
+// File generated at Tue 22 Jan 2019 16:52:00
 
 #include "MRSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -38,8 +38,8 @@ double MRSSM_susy_parameters::calc_beta_vu_1_loop(const Susy_traces& susy_traces
 
    double beta_vu;
 
-   beta_vu = Re(0.1*oneOver16PiSqr*vu*(-10*AbsSqr(LamSU) + 3*(-10*traceYuAdjYu
-      - 5*AbsSqr(LamTU) + Sqr(g1) + 5*Sqr(g2))));
+   beta_vu = Re(0.1*oneOver16PiSqr*vu*(-30*traceYuAdjYu - 10*AbsSqr(LamSU) - 15
+      *AbsSqr(LamTU) + 3*Sqr(g1) + 15*Sqr(g2)));
 
 
    return beta_vu;
@@ -60,12 +60,12 @@ double MRSSM_susy_parameters::calc_beta_vu_2_loop(const Susy_traces& susy_traces
    double beta_vu;
 
    beta_vu = Re(-0.025*twoLoop*vu*(-120*traceYdAdjYuYuAdjYd - 360*
-      traceYuAdjYuYuAdjYu + 45*Quad(g1) + 145*Quad(g2) + 68*traceYuAdjYu*Sqr(g1
-      ) + 180*traceYuAdjYu*Sqr(g2) + 18*Sqr(g1)*Sqr(g2) + 6*AbsSqr(LamTU)*(-10*
-      AbsSqr(LamTD) + 3*Sqr(g1) + 55*Sqr(g2)) + 4*AbsSqr(LamSU)*(-20*AbsSqr(
-      LamSD) + 3*(-10*AbsSqr(LamTU) + Sqr(g1) + 5*Sqr(g2))) + 640*traceYuAdjYu*
-      Sqr(g3) - 120*Sqr(LamSU)*Sqr(Conj(LamSU)) - 150*Sqr(LamTU)*Sqr(Conj(LamTU
-      ))));
+      traceYuAdjYuYuAdjYu - 80*AbsSqr(LamSD)*AbsSqr(LamSU) - 120*AbsSqr(LamSU)*
+      AbsSqr(LamTU) - 60*AbsSqr(LamTD)*AbsSqr(LamTU) + 45*Quad(g1) + 145*Quad(
+      g2) + 68*traceYuAdjYu*Sqr(g1) + 12*AbsSqr(LamSU)*Sqr(g1) + 18*AbsSqr(
+      LamTU)*Sqr(g1) + 180*traceYuAdjYu*Sqr(g2) + 60*AbsSqr(LamSU)*Sqr(g2) +
+      330*AbsSqr(LamTU)*Sqr(g2) + 18*Sqr(g1)*Sqr(g2) + 640*traceYuAdjYu*Sqr(g3)
+      - 120*Sqr(LamSU)*Sqr(Conj(LamSU)) - 150*Sqr(LamTU)*Sqr(Conj(LamTU))));
 
 
    return beta_vu;
@@ -96,6 +96,25 @@ double MRSSM_susy_parameters::calc_beta_vu_3_loop(const Susy_traces& susy_traces
  * @return 4-loop beta function
  */
 double MRSSM_susy_parameters::calc_beta_vu_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_vu;
+
+   beta_vu = 0;
+
+
+   return beta_vu;
+}
+
+/**
+ * Calculates the 5-loop beta function of vu.
+ *
+ * @return 5-loop beta function
+ */
+double MRSSM_susy_parameters::calc_beta_vu_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

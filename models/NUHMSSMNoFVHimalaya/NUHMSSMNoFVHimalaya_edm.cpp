@@ -16,19 +16,21 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 13:50:26
+// File generated at Tue 22 Jan 2019 13:27:45
 
 /**
  * @file NUHMSSMNoFVHimalaya_edm.cpp
  *
- * This file was generated at Sun 26 Aug 2018 13:50:26 with FlexibleSUSY
- * 2.2.0 and SARAH 4.13.0 .
+ * This file was generated at Tue 22 Jan 2019 13:27:45 with FlexibleSUSY
+ * 2.3.0 and SARAH 4.14.1 .
  */
 
 #include "NUHMSSMNoFVHimalaya_edm.hpp"
 #include "NUHMSSMNoFVHimalaya_mass_eigenstates.hpp"
 
-#include "NUHMSSMNoFVHimalaya_cxx_diagrams.hpp"
+#include "cxx_qft/NUHMSSMNoFVHimalaya_qft.hpp"
+
+#include "numerics2.hpp"
 
 #define INPUTPARAMETER(p) context.model.get_input().p
 #define MODELPARAMETER(p) context.model.get_##p()
@@ -36,7 +38,7 @@
 #define PHASE(p) context.model.get_##p()
 
 using namespace flexiblesusy;
-using namespace cxx_diagrams;
+using namespace NUHMSSMNoFVHimalaya_cxx_diagrams;
 
 namespace {
 static constexpr double oneOver16PiSquared = 0.0063325739776461107152;
@@ -59,7 +61,7 @@ static constexpr double oneOver16PiSquared = 0.0063325739776461107152;
 template<class EDMField, class PhotonEmitter, class ExchangeParticle>
 struct EDMVertexCorrectionSF {
    static double value(const typename field_indices<EDMField>::type& indices,
-                       EvaluationContext& context);
+                       context_base& context);
 };
 
 /**
@@ -80,7 +82,7 @@ struct EDMVertexCorrectionSF {
 template<class EDMField, class PhotonEmitter, class ExchangeParticle>
 struct EDMVertexCorrectionFS {
    static double value(const typename field_indices<EDMField>::type& indices,
-                       EvaluationContext& context);
+                       context_base& context);
 };
 } // anonymous namespace
 
@@ -149,7 +151,7 @@ double OneLoopFunctionB(double r)
 template<class EDMField, class PhotonEmitter, class ExchangeField>
 double EDMVertexCorrectionFS<
 EDMField, PhotonEmitter, ExchangeField
->::value(const typename field_indices<EDMField>::type& indices, EvaluationContext& context)
+>::value(const typename field_indices<EDMField>::type& indices, context_base& context)
 {
    double res = 0.0;
 
@@ -159,16 +161,14 @@ EDMField, PhotonEmitter, ExchangeField
                          PhotonEmitter
                          >;
 
-   constexpr auto indexBounds = FermionVertex::index_bounds;
-
-   for (const auto& index: indexBounds) {
-      const auto edmFieldIndices = FermionVertex::template fieldIndices<0>(index);
+   for (const auto& index: index_range<FermionVertex>()) {
+      const auto edmFieldIndices = FermionVertex::template field_indices<0>(index);
 
       if (edmFieldIndices != indices)
          continue;
 
-      const auto photonEmitterIndices = FermionVertex::template fieldIndices<2>(index);
-      const auto exchangeFieldIndices = FermionVertex::template fieldIndices<1>(index);
+      const auto photonEmitterIndices = FermionVertex::template field_indices<2>(index);
+      const auto exchangeFieldIndices = FermionVertex::template field_indices<1>(index);
       const auto vertex = FermionVertex::evaluate(index, context);
 
       const auto photonEmitterMass = context.mass<PhotonEmitter>(photonEmitterIndices);
@@ -194,7 +194,7 @@ EDMField, PhotonEmitter, ExchangeField
 template<class EDMField, class PhotonEmitter, class ExchangeField>
 double EDMVertexCorrectionSF<
 EDMField, PhotonEmitter, ExchangeField
->::value(const typename field_indices<EDMField>::type& indices, EvaluationContext& context)
+>::value(const typename field_indices<EDMField>::type& indices, context_base& context)
 {
    double res = 0.0;
 
@@ -204,16 +204,14 @@ EDMField, PhotonEmitter, ExchangeField
                          PhotonEmitter
                          >;
 
-   constexpr auto indexBounds = FermionVertex::index_bounds;
-
-   for (const auto& index: indexBounds) {
-      const auto edmFieldIndices = FermionVertex::template fieldIndices<0>(index);
+   for (const auto& index: index_range<FermionVertex>()) {
+      const auto edmFieldIndices = FermionVertex::template field_indices<0>(index);
 
       if (edmFieldIndices != indices)
          continue;
 
-      const auto photonEmitterIndices = FermionVertex::template fieldIndices<2>(index);
-      const auto exchangeFieldIndices = FermionVertex::template fieldIndices<1>(index);
+      const auto photonEmitterIndices = FermionVertex::template field_indices<2>(index);
+      const auto exchangeFieldIndices = FermionVertex::template field_indices<1>(index);
       const auto vertex = FermionVertex::evaluate(index, context);
 
       const auto photonEmitterMass = context.mass<PhotonEmitter>(photonEmitterIndices);

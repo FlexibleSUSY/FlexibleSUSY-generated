@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:10:38
+// File generated at Tue 22 Jan 2019 16:38:19
 
 #include "SM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -57,9 +57,9 @@ double SM_susy_parameters::calc_beta_g2_2_loop(const Susy_traces& susy_traces) c
 
    double beta_g2;
 
-   beta_g2 = Re(0.03333333333333333*twoLoop*Cube(g2)*(27*Sqr(g1) + 5*(-3*(3*
-      traceYdAdjYd + traceYeAdjYe + 3*traceYuAdjYu) + 35*Sqr(g2) + 72*Sqr(g3)))
-      );
+   beta_g2 = Re(0.03333333333333333*twoLoop*Cube(g2)*(-45*traceYdAdjYd - 15*
+      traceYeAdjYe - 45*traceYuAdjYu + 27*Sqr(g1) + 175*Sqr(g2) + 360*Sqr(g3)))
+      ;
 
 
    return beta_g2;
@@ -79,10 +79,11 @@ double SM_susy_parameters::calc_beta_g2_3_loop(const Susy_traces& susy_traces) c
    double beta_g2;
 
    beta_g2 = Re(0.000023148148148148147*threeLoop*Cube(g2)*(-151119*Quad(g1) +
-      270*Sqr(g1)*(24*Lambdax + 873*Sqr(g2) - 32*Sqr(g3) - 593*Sqr(Yu(2,2))) +
-      25*(324953*Quad(g2) + 162*Sqr(g2)*(8*Lambdax + 416*Sqr(g3) - 243*Sqr(Yu(2
-      ,2))) + 108*(1296*Quad(g3) + 147*Quad(Yu(2,2)) - 12*Sqr(Lambdax) - 112*
-      Sqr(g3)*Sqr(Yu(2,2))))));
+      8123825*Quad(g2) + 3499200*Quad(g3) + 396900*Quad(Yu(2,2)) + 6480*Lambdax
+      *Sqr(g1) + 32400*Lambdax*Sqr(g2) + 235710*Sqr(g1)*Sqr(g2) - 8640*Sqr(g1)*
+      Sqr(g3) + 1684800*Sqr(g2)*Sqr(g3) - 32400*Sqr(Lambdax) - 160110*Sqr(g1)*
+      Sqr(Yu(2,2)) - 984150*Sqr(g2)*Sqr(Yu(2,2)) - 302400*Sqr(g3)*Sqr(Yu(2,2)))
+      );
 
 
    return beta_g2;
@@ -94,6 +95,25 @@ double SM_susy_parameters::calc_beta_g2_3_loop(const Susy_traces& susy_traces) c
  * @return 4-loop beta function
  */
 double SM_susy_parameters::calc_beta_g2_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_g2;
+
+   beta_g2 = 0;
+
+
+   return beta_g2;
+}
+
+/**
+ * Calculates the 5-loop beta function of g2.
+ *
+ * @return 5-loop beta function
+ */
+double SM_susy_parameters::calc_beta_g2_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

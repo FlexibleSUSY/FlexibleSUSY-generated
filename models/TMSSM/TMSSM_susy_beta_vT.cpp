@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:12:29
+// File generated at Tue 22 Jan 2019 16:49:51
 
 #include "TMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -57,9 +57,10 @@ double TMSSM_susy_parameters::calc_beta_vT_2_loop(const Susy_traces& susy_traces
 
    double beta_vT;
 
-   beta_vT = Re(twoLoop*(-12.666666666666666*vT*Quad(g2) + 0.2*vT*AbsSqr(
-      Lambdax)*(-3*Sqr(g1) + 5*(3*traceYdAdjYd + traceYeAdjYe + 3*traceYuAdjYu
-      - 3*Sqr(g2))) + 3*vT*Sqr(Conj(Lambdax))*Sqr(Lambdax)));
+   beta_vT = Re(-0.06666666666666667*twoLoop*vT*(-45*traceYdAdjYd*AbsSqr(
+      Lambdax) - 15*traceYeAdjYe*AbsSqr(Lambdax) - 45*traceYuAdjYu*AbsSqr(
+      Lambdax) + 190*Quad(g2) + 9*AbsSqr(Lambdax)*Sqr(g1) + 45*AbsSqr(Lambdax)*
+      Sqr(g2) - 45*Sqr(Conj(Lambdax))*Sqr(Lambdax)));
 
 
    return beta_vT;
@@ -90,6 +91,25 @@ double TMSSM_susy_parameters::calc_beta_vT_3_loop(const Susy_traces& susy_traces
  * @return 4-loop beta function
  */
 double TMSSM_susy_parameters::calc_beta_vT_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_vT;
+
+   beta_vT = 0;
+
+
+   return beta_vT;
+}
+
+/**
+ * Calculates the 5-loop beta function of vT.
+ *
+ * @return 5-loop beta function
+ */
+double TMSSM_susy_parameters::calc_beta_vT_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

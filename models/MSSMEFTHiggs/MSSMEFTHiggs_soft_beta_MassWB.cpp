@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:04:43
+// File generated at Tue 22 Jan 2019 14:45:56
 
 #include "MSSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -96,10 +96,10 @@ double MSSMEFTHiggs_soft_parameters::calc_beta_MassWB_2_loop(const Soft_traces& 
 
    double beta_MassWB;
 
-   beta_MassWB = Re(0.4*twoLoop*Sqr(g2)*(9*(MassB + MassWB)*Sqr(g1) + 10*(3*
-      traceAdjYdTYd + traceAdjYeTYe + 3*traceAdjYuTYu - 3*MassWB*traceYdAdjYd -
-      MassWB*traceYeAdjYe - 3*MassWB*traceYuAdjYu + 25*MassWB*Sqr(g2) + 12*(
-      MassG + MassWB)*Sqr(g3))));
+   beta_MassWB = Re(0.4*twoLoop*Sqr(g2)*(30*traceAdjYdTYd + 10*traceAdjYeTYe +
+      30*traceAdjYuTYu - 30*MassWB*traceYdAdjYd - 10*MassWB*traceYeAdjYe - 30*
+      MassWB*traceYuAdjYu + 9*MassB*Sqr(g1) + 9*MassWB*Sqr(g1) + 250*MassWB*Sqr
+      (g2) + 120*MassG*Sqr(g3) + 120*MassWB*Sqr(g3)));
 
 
    return beta_MassWB;
@@ -130,6 +130,25 @@ double MSSMEFTHiggs_soft_parameters::calc_beta_MassWB_3_loop(const Soft_traces& 
  * @return 4-loop beta function
  */
 double MSSMEFTHiggs_soft_parameters::calc_beta_MassWB_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MassWB;
+
+   beta_MassWB = 0;
+
+
+   return beta_MassWB;
+}
+
+/**
+ * Calculates the 5-loop beta function of MassWB.
+ *
+ * @return 5-loop beta function
+ */
+double MSSMEFTHiggs_soft_parameters::calc_beta_MassWB_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

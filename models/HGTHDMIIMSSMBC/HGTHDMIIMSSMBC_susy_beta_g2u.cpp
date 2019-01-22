@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:06:37
+// File generated at Tue 22 Jan 2019 16:22:22
 
 #include "HGTHDMIIMSSMBC_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -38,8 +38,8 @@ double HGTHDMIIMSSMBC_susy_parameters::calc_beta_g2u_1_loop(const Susy_traces& s
 
    double beta_g2u;
 
-   beta_g2u = Re(0.05*g2u*oneOver16PiSqr*(-9*Sqr(g1) + 5*(12*traceYuAdjYu + 2*
-      Sqr(g1d) - 33*Sqr(g2) + 11*Sqr(g2u) + 3*Sqr(g2up))));
+   beta_g2u = Re(0.05*g2u*oneOver16PiSqr*(60*traceYuAdjYu - 9*Sqr(g1) + 10*Sqr(
+      g1d) - 165*Sqr(g2) + 55*Sqr(g2u) + 15*Sqr(g2up)));
 
 
    return beta_g2u;
@@ -61,21 +61,21 @@ double HGTHDMIIMSSMBC_susy_parameters::calc_beta_g2u_2_loop(const Susy_traces& s
 
    double beta_g2u;
 
-   beta_g2u = Re(twoLoop*(-(g1d*g1dp*g2up*Lambda4) + g2u*Lambda3*Lambda4 - 2.25
-      *g2u*traceYdAdjYuYuAdjYd - 6.75*g2u*traceYuAdjYuYuAdjYu + 1.5*g2u*AbsSqr(
-      Lambda5) + 1.5*g2u*AbsSqr(Lambda6) + 4.5*g2u*AbsSqr(Lambda7) - 10*Lambda2
-      *Cube(g2u) - 5.625*traceYuAdjYu*Cube(g2u) - 3.5*Power5(g2u) + 0.645*g2u*
-      Quad(g1) - 1.3125*g2u*Quad(g1d) - 31.75*g2u*Quad(g2) - 0.3125*g2u*Quad(
-      g2up) + 2.125*g2u*traceYuAdjYu*Sqr(g1) + 2.71875*Cube(g2u)*Sqr(g1) - 2*
-      g2u*Lambda3*Sqr(g1d) + g2u*Lambda4*Sqr(g1d) - 2.25*g2u*traceYdAdjYd*Sqr(
-      g1d) - 0.75*g2u*traceYeAdjYe*Sqr(g1d) - 1.3125*Cube(g2u)*Sqr(g1d) -
-      0.2625*g2u*Sqr(g1)*Sqr(g1d) - 0.4375*g2u*Sqr(g1d)*Sqr(g1dp) - 1.5*g1d*
-      g1dp*g2up*Sqr(g2) + 5.625*g2u*traceYuAdjYu*Sqr(g2) + 27.34375*Cube(g2u)*
-      Sqr(g2) + 0.45*g2u*Sqr(g1)*Sqr(g2) + 2.6875*g2u*Sqr(g1d)*Sqr(g2) - 2*g2u*
-      Lambda2*Sqr(g2up) - 1.125*g2u*traceYuAdjYu*Sqr(g2up) - 3.6875*Cube(g2u)*
-      Sqr(g2up) + 0.39375*g2u*Sqr(g1)*Sqr(g2up) - 0.4375*g2u*Sqr(g1dp)*Sqr(g2up
-      ) + 3.46875*g2u*Sqr(g2)*Sqr(g2up) + 20*g2u*traceYuAdjYu*Sqr(g3) + 6*g2u*
-      Sqr(Lambda2) + g2u*Sqr(Lambda3) + g2u*Sqr(Lambda4)));
+   beta_g2u = Re(0.00125*twoLoop*(-800*g1d*g1dp*g2up*Lambda4 + 800*g2u*Lambda3*
+      Lambda4 - 1800*g2u*traceYdAdjYuYuAdjYd - 5400*g2u*traceYuAdjYuYuAdjYu +
+      1200*g2u*AbsSqr(Lambda5) + 1200*g2u*AbsSqr(Lambda6) + 3600*g2u*AbsSqr(
+      Lambda7) - 8000*Lambda2*Cube(g2u) - 4500*traceYuAdjYu*Cube(g2u) - 2800*
+      Power5(g2u) + 516*g2u*Quad(g1) - 1050*g2u*Quad(g1d) - 25400*g2u*Quad(g2)
+      - 250*g2u*Quad(g2up) + 1700*g2u*traceYuAdjYu*Sqr(g1) + 2175*Cube(g2u)*Sqr
+      (g1) - 1600*g2u*Lambda3*Sqr(g1d) + 800*g2u*Lambda4*Sqr(g1d) - 1800*g2u*
+      traceYdAdjYd*Sqr(g1d) - 600*g2u*traceYeAdjYe*Sqr(g1d) - 1050*Cube(g2u)*
+      Sqr(g1d) - 210*g2u*Sqr(g1)*Sqr(g1d) - 350*g2u*Sqr(g1d)*Sqr(g1dp) - 1200*
+      g1d*g1dp*g2up*Sqr(g2) + 4500*g2u*traceYuAdjYu*Sqr(g2) + 21875*Cube(g2u)*
+      Sqr(g2) + 360*g2u*Sqr(g1)*Sqr(g2) + 2150*g2u*Sqr(g1d)*Sqr(g2) - 1600*g2u*
+      Lambda2*Sqr(g2up) - 900*g2u*traceYuAdjYu*Sqr(g2up) - 2950*Cube(g2u)*Sqr(
+      g2up) + 315*g2u*Sqr(g1)*Sqr(g2up) - 350*g2u*Sqr(g1dp)*Sqr(g2up) + 2775*
+      g2u*Sqr(g2)*Sqr(g2up) + 16000*g2u*traceYuAdjYu*Sqr(g3) + 4800*g2u*Sqr(
+      Lambda2) + 800*g2u*Sqr(Lambda3) + 800*g2u*Sqr(Lambda4)));
 
 
    return beta_g2u;
@@ -106,6 +106,25 @@ double HGTHDMIIMSSMBC_susy_parameters::calc_beta_g2u_3_loop(const Susy_traces& s
  * @return 4-loop beta function
  */
 double HGTHDMIIMSSMBC_susy_parameters::calc_beta_g2u_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_g2u;
+
+   beta_g2u = 0;
+
+
+   return beta_g2u;
+}
+
+/**
+ * Calculates the 5-loop beta function of g2u.
+ *
+ * @return 5-loop beta function
+ */
+double HGTHDMIIMSSMBC_susy_parameters::calc_beta_g2u_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

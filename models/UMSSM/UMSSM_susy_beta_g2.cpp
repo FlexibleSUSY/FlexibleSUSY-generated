@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:20:50
+// File generated at Tue 22 Jan 2019 17:28:26
 
 #include "UMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -62,10 +62,10 @@ double UMSSM_susy_parameters::calc_beta_g2_2_loop(const Susy_traces& susy_traces
 
    double beta_g2;
 
-   beta_g2 = Re(0.2*twoLoop*Cube(g2)*(-10*AbsSqr(Lambdax) + 9*Sqr(g1) + 5*(-6*
-      traceYdAdjYd - 2*traceYeAdjYe - 6*traceYuAdjYu - 2*traceYvAdjYv + 25*Sqr(
-      g2) + 24*Sqr(g3) + 2*Sqr(gp)*Sqr(QHd) + 2*Sqr(gp)*Sqr(QHu) + 6*Sqr(gp)*
-      Sqr(Ql) + 18*Sqr(gp)*Sqr(Qq))));
+   beta_g2 = Re(0.2*twoLoop*Cube(g2)*(-30*traceYdAdjYd - 10*traceYeAdjYe - 30*
+      traceYuAdjYu - 10*traceYvAdjYv - 10*AbsSqr(Lambdax) + 9*Sqr(g1) + 125*Sqr
+      (g2) + 120*Sqr(g3) + 10*Sqr(gp)*Sqr(QHd) + 10*Sqr(gp)*Sqr(QHu) + 30*Sqr(
+      gp)*Sqr(Ql) + 90*Sqr(gp)*Sqr(Qq)));
 
 
    return beta_g2;
@@ -96,6 +96,25 @@ double UMSSM_susy_parameters::calc_beta_g2_3_loop(const Susy_traces& susy_traces
  * @return 4-loop beta function
  */
 double UMSSM_susy_parameters::calc_beta_g2_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_g2;
+
+   beta_g2 = 0;
+
+
+   return beta_g2;
+}
+
+/**
+ * Calculates the 5-loop beta function of g2.
+ *
+ * @return 5-loop beta function
+ */
+double UMSSM_susy_parameters::calc_beta_g2_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

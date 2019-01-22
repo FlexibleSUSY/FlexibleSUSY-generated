@@ -16,10 +16,11 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:09:37
+// File generated at Tue 22 Jan 2019 16:31:32
 
 #include "THDMIIMSSMBC_two_scale_susy_scale_constraint.hpp"
 #include "THDMIIMSSMBC_two_scale_model.hpp"
+#include "config.h"
 #include "wrappers.hpp"
 #include "logger.hpp"
 #include "error.hpp"

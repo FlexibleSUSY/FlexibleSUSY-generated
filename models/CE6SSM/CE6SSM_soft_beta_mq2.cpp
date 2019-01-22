@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 13:47:07
+// File generated at Tue 22 Jan 2019 14:19:43
 
 #include "CE6SSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -124,14 +124,14 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_mq2_2_loop(const Sof
 
    Eigen::Matrix<double,3,3> beta_mq2;
 
-   const Eigen::Matrix<double,3,3> beta_mq2_1 = ((-0.4*twoLoop*(15*
-      traceconjTYdTpTYd + 5*traceconjTYeTpTYe + 15*tracemd2YdAdjYd + 5*
-      traceme2YeAdjYe + 5*traceml2AdjYeYe + 15*tracemq2AdjYdYd + 30*mHd2*
-      traceYdAdjYd + 10*mHd2*traceYeAdjYe + 10*mHd2*AbsSqr(Lambdax) + 5*mHu2*
-      AbsSqr(Lambdax) + 5*ms2*AbsSqr(Lambdax) + 5*AbsSqr(TLambdax) - 2*mHd2*Sqr
-      (g1) - 4*AbsSqr(MassB)*Sqr(g1) - 3*mHd2*Sqr(gN) - 6*AbsSqr(MassBp)*Sqr(gN
-      ))*(Yd.adjoint()*Yd) - 0.4*twoLoop*(5*(3*traceconjTYdTpYd +
-      traceconjTYeTpYe + Conj(TLambdax)*Lambdax) + 2*Conj(MassB)*Sqr(g1) + 3*
+   const Eigen::Matrix<double,3,3> beta_mq2_1 = ((0.4*twoLoop*(-15*
+      traceconjTYdTpTYd - 5*traceconjTYeTpTYe - 15*tracemd2YdAdjYd - 5*
+      traceme2YeAdjYe - 5*traceml2AdjYeYe - 15*tracemq2AdjYdYd - 30*mHd2*
+      traceYdAdjYd - 10*mHd2*traceYeAdjYe - 10*mHd2*AbsSqr(Lambdax) - 5*mHu2*
+      AbsSqr(Lambdax) - 5*ms2*AbsSqr(Lambdax) - 5*AbsSqr(TLambdax) + 2*mHd2*Sqr
+      (g1) + 4*AbsSqr(MassB)*Sqr(g1) + 3*mHd2*Sqr(gN) + 6*AbsSqr(MassBp)*Sqr(gN
+      ))*(Yd.adjoint()*Yd) - 0.4*twoLoop*(15*traceconjTYdTpYd + 5*
+      traceconjTYeTpYe + 5*Conj(TLambdax)*Lambdax + 2*Conj(MassB)*Sqr(g1) + 3*
       Conj(MassBp)*Sqr(gN))*(Yd.adjoint()*TYd) + 0.4*twoLoop*(-15*
       traceconjTYuTpTYu - 15*tracemq2AdjYuYu - 15*tracemu2YuAdjYu - 30*mHu2*
       traceYuAdjYu - 5*mHd2*AbsSqr(Lambdax) - 10*mHu2*AbsSqr(Lambdax) - 5*ms2*
@@ -139,9 +139,9 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_mq2_2_loop(const Sof
       Sqr(g1) + mHu2*Sqr(gN) + 2*AbsSqr(MassBp)*Sqr(gN))*(Yu.adjoint()*Yu) -
       0.4*twoLoop*(15*traceconjTYuTpYu + 5*Conj(TLambdax)*Lambdax + 4*Conj(
       MassB)*Sqr(g1) + Conj(MassBp)*Sqr(gN))*(Yu.adjoint()*TYu) - 0.4*twoLoop*(
-      5*(3*traceAdjYdTYd + traceAdjYeTYe) + 2*MassB*Sqr(g1) + 3*MassBp*Sqr(gN))
-      *((TYd).adjoint()*Yd) + 0.4*twoLoop*(-15*traceYdAdjYd - 5*traceYeAdjYe -
-      5*AbsSqr(Lambdax) + 2*Sqr(g1) + 3*Sqr(gN))*((TYd).adjoint()*TYd) - 0.4*
+      15*traceAdjYdTYd + 5*traceAdjYeTYe + 2*MassB*Sqr(g1) + 3*MassBp*Sqr(gN))*
+      ((TYd).adjoint()*Yd) + 0.4*twoLoop*(-15*traceYdAdjYd - 5*traceYeAdjYe - 5
+      *AbsSqr(Lambdax) + 2*Sqr(g1) + 3*Sqr(gN))*((TYd).adjoint()*TYd) - 0.4*
       twoLoop*(15*traceAdjYuTYu + 4*MassB*Sqr(g1) + MassBp*Sqr(gN))*((TYu).
       adjoint()*Yu) + 0.4*twoLoop*(-15*traceYuAdjYu - 5*AbsSqr(Lambdax) + 4*Sqr
       (g1) + Sqr(gN))*((TYu).adjoint()*TYu) + 0.2*twoLoop*(-15*traceYdAdjYd - 5
@@ -170,19 +170,25 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_mq2_2_loop(const Sof
       twoLoop*(Yu.adjoint()*Yu*Yu.adjoint()*Yu*mq2))*UNITMATRIX(3)).real();
    const Eigen::Matrix<double,3,3> beta_mq2_2 = (UNITMATRIX(3)*(-2*twoLoop*Conj
       (Lambdax)*TLambdax*((TYd).adjoint()*Yd) - 2*twoLoop*Conj(Lambdax)*
-      TLambdax*((TYu).adjoint()*Yu) + 0.0011111111111111111*twoLoop*(2*Conj(
-      MassB)*Sqr(g1)*(1734*MassB*Sqr(g1) + 90*(2*MassB + MassWB)*Sqr(g2) + 320*
-      MassB*Sqr(g3) + 160*MassG*Sqr(g3) - 66*MassB*Sqr(gN) - 33*MassBp*Sqr(gN))
-      + 3*Conj(MassBp)*Sqr(gN)*(-22*(MassB + 2*MassBp)*Sqr(g1) + 90*(2*MassBp +
-      MassWB)*Sqr(g2) + 320*MassBp*Sqr(g3) + 160*MassG*Sqr(g3) + 1701*MassBp*
-      Sqr(gN)) + 10*(16*Conj(MassG)*Sqr(g3)*(2*(MassB + 2*MassG)*Sqr(g1) + 3*(
-      10*(3*(2*MassG + MassWB)*Sqr(g2) + 10*MassG*Sqr(g3)) + (MassBp + 2*MassG)
-      *Sqr(gN))) + 3*(3*Conj(MassWB)*Sqr(g2)*(2*(MassB + 2*MassWB)*Sqr(g1) + 10
-      *(87*MassWB*Sqr(g2) + 16*(MassG + 2*MassWB)*Sqr(g3)) + 3*(MassBp + 2*
-      MassWB)*Sqr(gN)) + 2*(2.449489742783178*g1*gN*Tr2U114 + 2.449489742783178
-      *g1*gN*Tr2U141 + 15.491933384829668*g1*Tr31 + 18.973665961010276*gN*Tr34
-      + 90*Tr22*Quad(g2) + 160*Tr23*Quad(g3) + 2*Tr2U111*Sqr(g1) + 3*Tr2U144*
-      Sqr(gN)))))*UNITMATRIX(3))).real();
+      TLambdax*((TYu).adjoint()*Yu) + 0.0011111111111111111*twoLoop*(
+      146.96938456699067*g1*gN*Tr2U114 + 146.96938456699067*g1*gN*Tr2U141 +
+      929.51600308978*g1*Tr31 + 1138.4199576606165*gN*Tr34 + 3468*AbsSqr(MassB)
+      *Quad(g1) + 5400*Tr22*Quad(g2) + 78300*AbsSqr(MassWB)*Quad(g2) + 9600*
+      Tr23*Quad(g3) + 48000*AbsSqr(MassG)*Quad(g3) + 5103*AbsSqr(MassBp)*Quad(
+      gN) + 120*Tr2U111*Sqr(g1) + 360*AbsSqr(MassB)*Sqr(g1)*Sqr(g2) + 360*
+      AbsSqr(MassWB)*Sqr(g1)*Sqr(g2) + 180*MassWB*Conj(MassB)*Sqr(g1)*Sqr(g2) +
+      180*MassB*Conj(MassWB)*Sqr(g1)*Sqr(g2) + 640*AbsSqr(MassB)*Sqr(g1)*Sqr(g3
+      ) + 640*AbsSqr(MassG)*Sqr(g1)*Sqr(g3) + 320*MassG*Conj(MassB)*Sqr(g1)*Sqr
+      (g3) + 320*MassB*Conj(MassG)*Sqr(g1)*Sqr(g3) + 28800*AbsSqr(MassG)*Sqr(g2
+      )*Sqr(g3) + 28800*AbsSqr(MassWB)*Sqr(g2)*Sqr(g3) + 14400*MassWB*Conj(
+      MassG)*Sqr(g2)*Sqr(g3) + 14400*MassG*Conj(MassWB)*Sqr(g2)*Sqr(g3) + 180*
+      Tr2U144*Sqr(gN) - 132*AbsSqr(MassB)*Sqr(g1)*Sqr(gN) - 132*AbsSqr(MassBp)*
+      Sqr(g1)*Sqr(gN) - 66*MassBp*Conj(MassB)*Sqr(g1)*Sqr(gN) - 66*MassB*Conj(
+      MassBp)*Sqr(g1)*Sqr(gN) + 540*AbsSqr(MassBp)*Sqr(g2)*Sqr(gN) + 540*AbsSqr
+      (MassWB)*Sqr(g2)*Sqr(gN) + 270*MassWB*Conj(MassBp)*Sqr(g2)*Sqr(gN) + 270*
+      MassBp*Conj(MassWB)*Sqr(g2)*Sqr(gN) + 960*AbsSqr(MassBp)*Sqr(g3)*Sqr(gN)
+      + 960*AbsSqr(MassG)*Sqr(g3)*Sqr(gN) + 480*MassG*Conj(MassBp)*Sqr(g3)*Sqr(
+      gN) + 480*MassBp*Conj(MassG)*Sqr(g3)*Sqr(gN))*UNITMATRIX(3))).real();
 
    beta_mq2 = beta_mq2_1 + beta_mq2_2;
 
@@ -215,6 +221,25 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_mq2_3_loop(const Sof
  * @return 4-loop beta function
  */
 Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_mq2_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_mq2;
+
+   beta_mq2 = ZEROMATRIX(3,3);
+
+
+   return beta_mq2;
+}
+
+/**
+ * Calculates the 5-loop beta function of mq2.
+ *
+ * @return 5-loop beta function
+ */
+Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_mq2_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

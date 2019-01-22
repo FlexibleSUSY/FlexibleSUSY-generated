@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:10:39
+// File generated at Tue 22 Jan 2019 16:38:20
 
 #include "SM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -56,8 +56,8 @@ double SM_susy_parameters::calc_beta_g3_2_loop(const Susy_traces& susy_traces) c
 
    double beta_g3;
 
-   beta_g3 = Re(-0.1*twoLoop*Cube(g3)*(-11*Sqr(g1) + 5*(-9*Sqr(g2) + 4*(
-      traceYdAdjYd + traceYuAdjYu + 13*Sqr(g3)))));
+   beta_g3 = Re(-0.1*twoLoop*Cube(g3)*(20*traceYdAdjYd + 20*traceYuAdjYu - 11*
+      Sqr(g1) - 45*Sqr(g2) + 260*Sqr(g3)));
 
 
    return beta_g3;
@@ -76,10 +76,10 @@ double SM_susy_parameters::calc_beta_g3_3_loop(const Susy_traces& susy_traces) c
 
    double beta_g3;
 
-   beta_g3 = Re(0.008333333333333333*threeLoop*Cube(g3)*(-523*Quad(g1) + Sqr(g1
-      )*(-9*Sqr(g2) + 616*Sqr(g3) - 303*Sqr(Yu(2,2))) + 15*(109*Quad(g2) + 3*
-      Sqr(g2)*(56*Sqr(g3) - 31*Sqr(Yu(2,2))) + 20*(13*Quad(g3) + 6*Quad(Yu(2,2)
-      ) - 16*Sqr(g3)*Sqr(Yu(2,2))))));
+   beta_g3 = Re(0.008333333333333333*threeLoop*Cube(g3)*(-523*Quad(g1) + 1635*
+      Quad(g2) + 3900*Quad(g3) + 1800*Quad(Yu(2,2)) - 9*Sqr(g1)*Sqr(g2) + 616*
+      Sqr(g1)*Sqr(g3) + 2520*Sqr(g2)*Sqr(g3) - 303*Sqr(g1)*Sqr(Yu(2,2)) - 1395*
+      Sqr(g2)*Sqr(Yu(2,2)) - 4800*Sqr(g3)*Sqr(Yu(2,2))));
 
 
    return beta_g3;
@@ -103,6 +103,25 @@ double SM_susy_parameters::calc_beta_g3_4_loop(const Susy_traces& susy_traces) c
       Quad(Yu(2,2)) - 0.12603833934188147*Quad(Yu(2,2))*Sqr(g3) +
       0.16927060578749137*Quad(g3)*Sqr(Yu(2,2)) - 0.003640358849186505*Sqr(
       Lambdax)*Sqr(Yu(2,2))));
+
+
+   return beta_g3;
+}
+
+/**
+ * Calculates the 5-loop beta function of g3.
+ *
+ * @return 5-loop beta function
+ */
+double SM_susy_parameters::calc_beta_g3_5_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_g3;
+
+   beta_g3 = Re(271.4283824198132*Power11(g3)*Power5(oneOver16PiSqr));
 
 
    return beta_g3;

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:08:06
+// File generated at Tue 22 Jan 2019 15:36:22
 
 #ifndef E6SSMEFTHiggs_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
 #define E6SSMEFTHiggs_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H

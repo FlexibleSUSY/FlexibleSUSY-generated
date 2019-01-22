@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:06:05
+// File generated at Tue 22 Jan 2019 16:22:09
 
 #ifndef HGTHDMIIMSSMBC_susy_parameters_H
 #define HGTHDMIIMSSMBC_susy_parameters_H
@@ -152,70 +152,87 @@ private:
    double calc_beta_g1_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g1_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g1_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_g1_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g2_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g2_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g2_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g2_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_g2_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g3_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g3_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g3_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g3_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_g3_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Lambda6_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Lambda6_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Lambda6_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Lambda6_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_Lambda6_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Lambda5_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Lambda5_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Lambda5_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Lambda5_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_Lambda5_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Lambda7_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Lambda7_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Lambda7_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Lambda7_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_Lambda7_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Lambda1_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Lambda1_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Lambda1_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Lambda1_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_Lambda1_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Lambda4_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Lambda4_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Lambda4_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Lambda4_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_Lambda4_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Lambda3_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Lambda3_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Lambda3_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Lambda3_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_Lambda3_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Lambda2_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Lambda2_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Lambda2_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Lambda2_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_Lambda2_5_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_Yu_1_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_Yu_2_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_Yu_3_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_Yu_4_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_Yu_5_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_Yd_1_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_Yd_2_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_Yd_3_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_Yd_4_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_Yd_5_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_Ye_1_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_Ye_2_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_Ye_3_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_Ye_4_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_Ye_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g1dp_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g1dp_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g1dp_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g1dp_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_g1dp_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g1d_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g1d_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g1d_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g1d_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_g1d_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g2up_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g2up_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g2up_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g2up_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_g2up_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g2u_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g2u_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g2u_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_g2u_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_g2u_5_loop(const TRACE_STRUCT_TYPE&) const;
 
 };
 

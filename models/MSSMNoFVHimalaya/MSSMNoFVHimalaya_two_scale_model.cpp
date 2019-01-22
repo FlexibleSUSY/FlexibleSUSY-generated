@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 13:49:59
+// File generated at Tue 22 Jan 2019 13:27:20
 
 /**
  * @file MSSMNoFVHimalaya_two_scale_model.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Sun 26 Aug 2018 13:49:59 with FlexibleSUSY
- * 2.2.0 (git commit: 8489097de2d6938a6da0149378457b5ad13d9425) and SARAH 4.13.0 .
+ * This file was generated at Tue 22 Jan 2019 13:27:20 with FlexibleSUSY
+ * 2.3.0 (git commit: b5dda61ad35a8ffff74bde70f63e1c2b815e751a) and SARAH 4.14.1 .
  */
 
 #include "MSSMNoFVHimalaya_two_scale_model.hpp"

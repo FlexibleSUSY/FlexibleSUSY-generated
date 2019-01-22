@@ -7,7 +7,12 @@ MODNUTSMSSM_DEP := $(patsubst %,model_specific/%,$(MODNUTSMSSM_MOD))
 MODNUTSMSSM_INC := $(patsubst %,-Imodel_specific/%,$(MODNUTSMSSM_MOD))
 MODNUTSMSSM_LIB := $(foreach M,$(MODNUTSMSSM_MOD),model_specific/$M/libmodel_specific_$M$(MODULE_LIBEXT))
 
+MODNUTSMSSM_SUBMOD  := $(DIR)/cxx_qft
+MODNUTSMSSM_SUBMOD_INC := $(patsubst %,-I%,$(MODNUTSMSSM_SUBMOD))
+
 NUTSMSSM_INSTALL_DIR := $(INSTALL_DIR)/$(DIR)
+NUTSMSSM_INSTALL_CXXQFT_DIR := \
+		$(NUTSMSSM_INSTALL_DIR)/cxx_qft
 
 NUTSMSSM_MK     := \
 		$(DIR)/module.mk
@@ -68,7 +73,6 @@ LLNUTSMSSM_MMA  := \
 		$(DIR)/run_NUTSMSSM.m
 
 LIBNUTSMSSM_HDR := \
-		$(DIR)/NUTSMSSM_cxx_diagrams.hpp \
 		$(DIR)/NUTSMSSM_a_muon.hpp \
 		$(DIR)/NUTSMSSM_convergence_tester.hpp \
 		$(DIR)/NUTSMSSM_edm.hpp \
@@ -93,6 +97,13 @@ LIBNUTSMSSM_HDR := \
 		$(DIR)/NUTSMSSM_susy_scale_constraint.hpp \
 		$(DIR)/NUTSMSSM_utilities.hpp \
 		$(DIR)/NUTSMSSM_weinberg_angle.hpp
+
+LIBNUTSMSSM_CXXQFT_HDR := \
+		$(DIR)/cxx_qft/NUTSMSSM_qft.hpp \
+		$(DIR)/cxx_qft/NUTSMSSM_fields.hpp \
+		$(DIR)/cxx_qft/NUTSMSSM_vertices.hpp \
+		$(DIR)/cxx_qft/NUTSMSSM_context_base.hpp \
+		$(DIR)/cxx_qft/NUTSMSSM_npointfunctions.hpp
 
 ifneq ($(findstring two_scale,$(SOLVERS)),)
 -include $(DIR)/two_scale.mk
@@ -182,8 +193,10 @@ all-$(MODNAME): $(LIBNUTSMSSM) $(EXENUTSMSSM_EXE)
 ifneq ($(INSTALL_DIR),)
 install-src::
 		install -d $(NUTSMSSM_INSTALL_DIR)
+		install -d $(NUTSMSSM_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(LIBNUTSMSSM_SRC) $(NUTSMSSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LIBNUTSMSSM_HDR) $(NUTSMSSM_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(LIBNUTSMSSM_CXXQFT_HDR) $(NUTSMSSM_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(EXENUTSMSSM_SRC) $(NUTSMSSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLNUTSMSSM_SRC) $(NUTSMSSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLNUTSMSSM_MMA) $(NUTSMSSM_INSTALL_DIR)
@@ -214,6 +227,7 @@ clean-$(MODNAME)-obj:
 clean-$(MODNAME)-src:
 		-rm -f $(LIBNUTSMSSM_SRC)
 		-rm -f $(LIBNUTSMSSM_HDR)
+		-rm -f $(LIBNUTSMSSM_CXXQFT_HDR)
 		-rm -f $(EXENUTSMSSM_SRC)
 		-rm -f $(LLNUTSMSSM_SRC)
 		-rm -f $(LLNUTSMSSM_MMA)
@@ -242,14 +256,14 @@ distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
 		tar -czf $(NUTSMSSM_TARBALL) \
-		$(LIBNUTSMSSM_SRC) $(LIBNUTSMSSM_HDR) \
+		$(LIBNUTSMSSM_SRC) $(LIBNUTSMSSM_HDR) $(LIBNUTSMSSM_CXXQFT_HDR) \
 		$(EXENUTSMSSM_SRC) \
 		$(LLNUTSMSSM_SRC) $(LLNUTSMSSM_MMA) \
 		$(NUTSMSSM_MK) $(NUTSMSSM_INCLUDE_MK) \
 		$(NUTSMSSM_SLHA_INPUT) $(NUTSMSSM_REFERENCES) \
 		$(NUTSMSSM_GNUPLOT)
 
-$(LIBNUTSMSSM_SRC) $(LIBNUTSMSSM_HDR) $(EXENUTSMSSM_SRC) $(LLNUTSMSSM_SRC) $(LLNUTSMSSM_MMA) \
+$(LIBNUTSMSSM_SRC) $(LIBNUTSMSSM_HDR) $(LIBNUTSMSSM_CXXQFT_HDR) $(EXENUTSMSSM_SRC) $(LLNUTSMSSM_SRC) $(LLNUTSMSSM_MMA) \
 : run-metacode-$(MODNAME)
 		@true
 
@@ -270,7 +284,7 @@ $(METACODE_STAMP_NUTSMSSM):
 endif
 
 $(LIBNUTSMSSM_DEP) $(EXENUTSMSSM_DEP) $(LLNUTSMSSM_DEP) $(LIBNUTSMSSM_OBJ) $(EXENUTSMSSM_OBJ) $(LLNUTSMSSM_OBJ) $(LLNUTSMSSM_LIB): \
-	CPPFLAGS += $(MODNUTSMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODNUTSMSSM_SUBMOD_INC) $(MODNUTSMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBNUTSMSSM_DEP) $(EXENUTSMSSM_DEP) $(LLNUTSMSSM_DEP) $(LIBNUTSMSSM_OBJ) $(EXENUTSMSSM_OBJ) $(LLNUTSMSSM_OBJ) $(LLNUTSMSSM_LIB): \

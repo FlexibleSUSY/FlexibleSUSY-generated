@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:06:05
+// File generated at Tue 22 Jan 2019 16:22:09
 
 #include "HGTHDMIIMSSMBC_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -57,9 +57,9 @@ double HGTHDMIIMSSMBC_susy_parameters::calc_beta_g1_2_loop(const Susy_traces& su
 
    double beta_g1;
 
-   beta_g1 = Re(0.01*twoLoop*Cube(g1)*(434*Sqr(g1) - 5*(10*traceYdAdjYd + 30*
-      traceYeAdjYe + 34*traceYuAdjYu + 9*Sqr(g1d) + 3*Sqr(g1dp) - 90*Sqr(g2) +
-      9*Sqr(g2u) + 3*Sqr(g2up) - 176*Sqr(g3))));
+   beta_g1 = Re(0.01*twoLoop*Cube(g1)*(-50*traceYdAdjYd - 150*traceYeAdjYe -
+      170*traceYuAdjYu + 434*Sqr(g1) - 45*Sqr(g1d) - 15*Sqr(g1dp) + 450*Sqr(g2)
+      - 45*Sqr(g2u) - 15*Sqr(g2up) + 880*Sqr(g3)));
 
 
    return beta_g1;
@@ -90,6 +90,25 @@ double HGTHDMIIMSSMBC_susy_parameters::calc_beta_g1_3_loop(const Susy_traces& su
  * @return 4-loop beta function
  */
 double HGTHDMIIMSSMBC_susy_parameters::calc_beta_g1_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_g1;
+
+   beta_g1 = 0;
+
+
+   return beta_g1;
+}
+
+/**
+ * Calculates the 5-loop beta function of g1.
+ *
+ * @return 5-loop beta function
+ */
+double HGTHDMIIMSSMBC_susy_parameters::calc_beta_g1_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

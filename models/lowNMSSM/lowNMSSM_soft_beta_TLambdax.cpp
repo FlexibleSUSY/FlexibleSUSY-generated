@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:36:51
+// File generated at Tue 22 Jan 2019 17:14:41
 
 #include "lowNMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -79,11 +79,12 @@ double lowNMSSM_soft_parameters::calc_beta_TLambdax_1_loop(const Soft_traces& so
 
    double beta_TLambdax;
 
-   beta_TLambdax = Re(oneOver16PiSqr*(6*traceAdjYdTYd*Lambdax + 2*traceAdjYeTYe
-      *Lambdax + 6*traceAdjYuTYu*Lambdax + 1.2*MassB*Lambdax*Sqr(g1) + 6*MassWB
-      *Lambdax*Sqr(g2) + (3*traceYdAdjYd + traceYeAdjYe + 3*traceYuAdjYu + 12*
-      AbsSqr(Lambdax) - 0.6*Sqr(g1) - 3*Sqr(g2))*TLambdax + 2*Conj(Kappa)*(2*
-      Lambdax*TKappa + Kappa*TLambdax)));
+   beta_TLambdax = Re(0.2*oneOver16PiSqr*(30*traceAdjYdTYd*Lambdax + 10*
+      traceAdjYeTYe*Lambdax + 30*traceAdjYuTYu*Lambdax + 6*MassB*Lambdax*Sqr(g1
+      ) + 30*MassWB*Lambdax*Sqr(g2) + 20*Conj(Kappa)*Lambdax*TKappa + 15*
+      traceYdAdjYd*TLambdax + 5*traceYeAdjYe*TLambdax + 15*traceYuAdjYu*
+      TLambdax + 10*AbsSqr(Kappa)*TLambdax + 60*AbsSqr(Lambdax)*TLambdax - 3*
+      Sqr(g1)*TLambdax - 15*Sqr(g2)*TLambdax));
 
 
    return beta_TLambdax;
@@ -115,27 +116,32 @@ double lowNMSSM_soft_parameters::calc_beta_TLambdax_2_loop(const Soft_traces& so
 
    double beta_TLambdax;
 
-   beta_TLambdax = Re(twoLoop*(-36*traceYdAdjYdTYdAdjYd*Lambdax - 12*
-      traceYdAdjYuTYuAdjYd*Lambdax - 12*traceYeAdjYeTYeAdjYe*Lambdax - 12*
-      traceYuAdjYdTYdAdjYu*Lambdax - 36*traceYuAdjYuTYuAdjYu*Lambdax - 16.56*
-      MassB*Lambdax*Quad(g1) - 30*MassWB*Lambdax*Quad(g2) - 0.8*traceAdjYdTYd*
-      Lambdax*Sqr(g1) + 2.4*traceAdjYeTYe*Lambdax*Sqr(g1) + 1.6*traceAdjYuTYu*
-      Lambdax*Sqr(g1) + 0.8*MassB*traceYdAdjYd*Lambdax*Sqr(g1) - 2.4*MassB*
-      traceYeAdjYe*Lambdax*Sqr(g1) - 1.6*MassB*traceYuAdjYu*Lambdax*Sqr(g1) -
-      3.6*MassB*Lambdax*Sqr(g1)*Sqr(g2) - 3.6*MassWB*Lambdax*Sqr(g1)*Sqr(g2) +
-      32*traceAdjYdTYd*Lambdax*Sqr(g3) + 32*traceAdjYuTYu*Lambdax*Sqr(g3) - 32*
-      MassG*traceYdAdjYd*Lambdax*Sqr(g3) - 32*MassG*traceYuAdjYu*Lambdax*Sqr(g3
-      ) - 9*traceYdAdjYdYdAdjYd*TLambdax - 6*traceYdAdjYuYuAdjYd*TLambdax - 3*
-      traceYeAdjYeYeAdjYe*TLambdax - 9*traceYuAdjYuYuAdjYu*TLambdax + 4.14*Quad
-      (g1)*TLambdax + 7.5*Quad(g2)*TLambdax - 0.4*traceYdAdjYd*Sqr(g1)*TLambdax
-       + 1.2*traceYeAdjYe*Sqr(g1)*TLambdax + 0.8*traceYuAdjYu*Sqr(g1)*TLambdax
-      + 1.8*Sqr(g1)*Sqr(g2)*TLambdax + 16*traceYdAdjYd*Sqr(g3)*TLambdax + 16*
-      traceYuAdjYu*Sqr(g3)*TLambdax - 50*Sqr(Conj(Lambdax))*Sqr(Lambdax)*
-      TLambdax - 8*Kappa*Sqr(Conj(Kappa))*(4*Lambdax*TKappa + Kappa*TLambdax) -
-      0.6*AbsSqr(Lambdax)*(2*Lambdax*(2*MassB*Sqr(g1) + 5*(3*traceAdjYdTYd +
-      traceAdjYeTYe + 3*traceAdjYuTYu + 2*MassWB*Sqr(g2))) + (-6*Sqr(g1) + 15*(
-      3*traceYdAdjYd + traceYeAdjYe + 3*traceYuAdjYu - 2*Sqr(g2)))*TLambdax +
-      20*Conj(Kappa)*(2*Lambdax*TKappa + 3*Kappa*TLambdax))));
+   beta_TLambdax = Re(0.02*twoLoop*(-1800*traceYdAdjYdTYdAdjYd*Lambdax - 600*
+      traceYdAdjYuTYuAdjYd*Lambdax - 600*traceYeAdjYeTYeAdjYe*Lambdax - 600*
+      traceYuAdjYdTYdAdjYu*Lambdax - 1800*traceYuAdjYuTYuAdjYu*Lambdax - 828*
+      MassB*Lambdax*Quad(g1) - 1500*MassWB*Lambdax*Quad(g2) - 40*traceAdjYdTYd*
+      Lambdax*Sqr(g1) + 120*traceAdjYeTYe*Lambdax*Sqr(g1) + 80*traceAdjYuTYu*
+      Lambdax*Sqr(g1) + 40*MassB*traceYdAdjYd*Lambdax*Sqr(g1) - 120*MassB*
+      traceYeAdjYe*Lambdax*Sqr(g1) - 80*MassB*traceYuAdjYu*Lambdax*Sqr(g1) -
+      180*MassB*Lambdax*Sqr(g1)*Sqr(g2) - 180*MassWB*Lambdax*Sqr(g1)*Sqr(g2) +
+      1600*traceAdjYdTYd*Lambdax*Sqr(g3) + 1600*traceAdjYuTYu*Lambdax*Sqr(g3) -
+      1600*MassG*traceYdAdjYd*Lambdax*Sqr(g3) - 1600*MassG*traceYuAdjYu*Lambdax
+      *Sqr(g3) - 900*traceAdjYdTYd*Conj(Lambdax)*Sqr(Lambdax) - 300*
+      traceAdjYeTYe*Conj(Lambdax)*Sqr(Lambdax) - 900*traceAdjYuTYu*Conj(Lambdax
+      )*Sqr(Lambdax) - 120*MassB*Conj(Lambdax)*Sqr(g1)*Sqr(Lambdax) - 600*
+      MassWB*Conj(Lambdax)*Sqr(g2)*Sqr(Lambdax) - 1600*Kappa*Lambdax*Sqr(Conj(
+      Kappa))*TKappa - 1200*Conj(Kappa)*Conj(Lambdax)*Sqr(Lambdax)*TKappa - 450
+      *traceYdAdjYdYdAdjYd*TLambdax - 300*traceYdAdjYuYuAdjYd*TLambdax - 150*
+      traceYeAdjYeYeAdjYe*TLambdax - 450*traceYuAdjYuYuAdjYu*TLambdax - 1350*
+      traceYdAdjYd*AbsSqr(Lambdax)*TLambdax - 450*traceYeAdjYe*AbsSqr(Lambdax)*
+      TLambdax - 1350*traceYuAdjYu*AbsSqr(Lambdax)*TLambdax - 1800*AbsSqr(Kappa
+      )*AbsSqr(Lambdax)*TLambdax + 207*Quad(g1)*TLambdax + 375*Quad(g2)*
+      TLambdax - 20*traceYdAdjYd*Sqr(g1)*TLambdax + 60*traceYeAdjYe*Sqr(g1)*
+      TLambdax + 40*traceYuAdjYu*Sqr(g1)*TLambdax + 180*AbsSqr(Lambdax)*Sqr(g1)
+      *TLambdax + 900*AbsSqr(Lambdax)*Sqr(g2)*TLambdax + 90*Sqr(g1)*Sqr(g2)*
+      TLambdax + 800*traceYdAdjYd*Sqr(g3)*TLambdax + 800*traceYuAdjYu*Sqr(g3)*
+      TLambdax - 400*Sqr(Conj(Kappa))*Sqr(Kappa)*TLambdax - 2500*Sqr(Conj(
+      Lambdax))*Sqr(Lambdax)*TLambdax));
 
 
    return beta_TLambdax;
@@ -166,6 +172,25 @@ double lowNMSSM_soft_parameters::calc_beta_TLambdax_3_loop(const Soft_traces& so
  * @return 4-loop beta function
  */
 double lowNMSSM_soft_parameters::calc_beta_TLambdax_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_TLambdax;
+
+   beta_TLambdax = 0;
+
+
+   return beta_TLambdax;
+}
+
+/**
+ * Calculates the 5-loop beta function of TLambdax.
+ *
+ * @return 5-loop beta function
+ */
+double lowNMSSM_soft_parameters::calc_beta_TLambdax_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:10:38
+// File generated at Tue 22 Jan 2019 16:38:19
 
 #include "SM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -57,8 +57,8 @@ double SM_susy_parameters::calc_beta_g1_2_loop(const Susy_traces& susy_traces) c
 
    double beta_g1;
 
-   beta_g1 = Re(0.02*twoLoop*Cube(g1)*(199*Sqr(g1) + 5*(-5*traceYdAdjYd - 15*
-      traceYeAdjYe - 17*traceYuAdjYu + 27*Sqr(g2) + 88*Sqr(g3))));
+   beta_g1 = Re(0.02*twoLoop*Cube(g1)*(-25*traceYdAdjYd - 75*traceYeAdjYe - 85*
+      traceYuAdjYu + 199*Sqr(g1) + 135*Sqr(g2) + 440*Sqr(g3)));
 
 
    return beta_g1;
@@ -78,10 +78,10 @@ double SM_susy_parameters::calc_beta_g1_3_loop(const Susy_traces& susy_traces) c
    double beta_g1;
 
    beta_g1 = Re(-0.000041666666666666665*threeLoop*Cube(g1)*(388613*Quad(g1) -
-      10*Sqr(g1)*(648*Lambdax + 1845*Sqr(g2) - 4384*Sqr(g3) - 8481*Sqr(Yu(2,2))
-      ) - 75*(3945*Quad(g2) - 6*Sqr(g2)*(-24*Lambdax + 32*Sqr(g3) + 785*Sqr(Yu(
-      2,2))) + 4*(4752*Quad(g3) + 945*Quad(Yu(2,2)) - 36*Sqr(Lambdax) - 464*Sqr
-      (g3)*Sqr(Yu(2,2))))));
+      295875*Quad(g2) - 1425600*Quad(g3) - 283500*Quad(Yu(2,2)) - 6480*Lambdax*
+      Sqr(g1) - 10800*Lambdax*Sqr(g2) - 18450*Sqr(g1)*Sqr(g2) + 43840*Sqr(g1)*
+      Sqr(g3) + 14400*Sqr(g2)*Sqr(g3) + 10800*Sqr(Lambdax) + 84810*Sqr(g1)*Sqr(
+      Yu(2,2)) + 353250*Sqr(g2)*Sqr(Yu(2,2)) + 139200*Sqr(g3)*Sqr(Yu(2,2))));
 
 
    return beta_g1;
@@ -93,6 +93,25 @@ double SM_susy_parameters::calc_beta_g1_3_loop(const Susy_traces& susy_traces) c
  * @return 4-loop beta function
  */
 double SM_susy_parameters::calc_beta_g1_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_g1;
+
+   beta_g1 = 0;
+
+
+   return beta_g1;
+}
+
+/**
+ * Calculates the 5-loop beta function of g1.
+ *
+ * @return 5-loop beta function
+ */
+double SM_susy_parameters::calc_beta_g1_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

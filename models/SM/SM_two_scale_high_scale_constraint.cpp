@@ -16,11 +16,12 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:11:05
+// File generated at Tue 22 Jan 2019 16:38:43
 
 #include "SM_two_scale_high_scale_constraint.hpp"
 #include "SM_two_scale_model.hpp"
 #include "SM_info.hpp"
+#include "config.h"
 #include "wrappers.hpp"
 #include "logger.hpp"
 #include "ew_input.hpp"
@@ -34,6 +35,7 @@
 
 #ifdef ENABLE_HIMALAYA
 #include "HierarchyCalculator.hpp"
+#include "version.hpp"
 #endif
 
 #include <cmath>

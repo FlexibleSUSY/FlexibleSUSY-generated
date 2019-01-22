@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 15:27:59
+// File generated at Tue 22 Jan 2019 18:00:05
 
 #include "CMSSMSemiAnalytic_semi_analytic_soft_parameters_constraint.hpp"
 #include "CMSSMSemiAnalytic_semi_analytic_model.hpp"

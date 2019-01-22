@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:55:35
+// File generated at Tue 22 Jan 2019 17:42:39
 
 #include "MSSMRHN_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -39,8 +39,9 @@ Eigen::Matrix<double,3,3> MSSMRHN_susy_parameters::calc_beta_Yv_1_loop(const Sus
 
    Eigen::Matrix<double,3,3> beta_Yv;
 
-   beta_Yv = (oneOver16PiSqr*(Yv*(3*traceYuAdjYu + traceYvAdjYv - 0.6*Sqr(g1) -
-      3*Sqr(g2)) + Yv*Ye.adjoint()*Ye + 3*(Yv*Yv.adjoint()*Yv))).real();
+   beta_Yv = (oneOver16PiSqr*(-0.2*Yv*(-15*traceYuAdjYu - 5*traceYvAdjYv + 3*
+      Sqr(g1) + 15*Sqr(g2)) + Yv*Ye.adjoint()*Ye + 3*(Yv*Yv.adjoint()*Yv))).
+      real();
 
 
    return beta_Yv;
@@ -65,14 +66,14 @@ Eigen::Matrix<double,3,3> MSSMRHN_susy_parameters::calc_beta_Yv_2_loop(const Sus
 
    Eigen::Matrix<double,3,3> beta_Yv;
 
-   beta_Yv = (twoLoop*(0.02*Yv*(207*Quad(g1) + 10*Sqr(g1)*(4*traceYuAdjYu + 9*
-      Sqr(g2)) + 25*(15*Quad(g2) - 2*(3*traceYdAdjYuYuAdjYd +
-      traceYeAdjYvYvAdjYe + 9*traceYuAdjYuYuAdjYu + 3*traceYvAdjYvYvAdjYv - 16*
-      traceYuAdjYu*Sqr(g3)))) + (-3*traceYdAdjYd - traceYeAdjYe + 1.2*Sqr(g1))*
-      (Yv*Ye.adjoint()*Ye) + (-3*(3*traceYuAdjYu + traceYvAdjYv) + 1.2*Sqr(g1)
-      + 6*Sqr(g2))*(Yv*Yv.adjoint()*Yv) - 2*(Yv*Ye.adjoint()*Ye*Ye.adjoint()*Ye
-      ) - 2*(Yv*Ye.adjoint()*Ye*Yv.adjoint()*Yv) - 4*(Yv*Yv.adjoint()*Yv*Yv.
-      adjoint()*Yv))).real();
+   beta_Yv = (twoLoop*(0.02*Yv*(-150*traceYdAdjYuYuAdjYd - 50*
+      traceYeAdjYvYvAdjYe - 450*traceYuAdjYuYuAdjYu - 150*traceYvAdjYvYvAdjYv +
+      207*Quad(g1) + 375*Quad(g2) + 40*traceYuAdjYu*Sqr(g1) + 90*Sqr(g1)*Sqr(g2
+      ) + 800*traceYuAdjYu*Sqr(g3)) + 0.2*(-15*traceYdAdjYd - 5*traceYeAdjYe +
+      6*Sqr(g1))*(Yv*Ye.adjoint()*Ye) + 0.6*(-15*traceYuAdjYu - 5*traceYvAdjYv
+      + 2*Sqr(g1) + 10*Sqr(g2))*(Yv*Yv.adjoint()*Yv) - 2*(Yv*Ye.adjoint()*Ye*Ye
+      .adjoint()*Ye) - 2*(Yv*Ye.adjoint()*Ye*Yv.adjoint()*Yv) - 4*(Yv*Yv.
+      adjoint()*Yv*Yv.adjoint()*Yv))).real();
 
 
    return beta_Yv;
@@ -103,6 +104,25 @@ Eigen::Matrix<double,3,3> MSSMRHN_susy_parameters::calc_beta_Yv_3_loop(const Sus
  * @return 4-loop beta function
  */
 Eigen::Matrix<double,3,3> MSSMRHN_susy_parameters::calc_beta_Yv_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_Yv;
+
+   beta_Yv = ZEROMATRIX(3,3);
+
+
+   return beta_Yv;
+}
+
+/**
+ * Calculates the 5-loop beta function of Yv.
+ *
+ * @return 5-loop beta function
+ */
+Eigen::Matrix<double,3,3> MSSMRHN_susy_parameters::calc_beta_Yv_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

@@ -16,17 +16,20 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:05:50
+// File generated at Tue 22 Jan 2019 14:54:11
 
 #include "MSSMEFTHiggs_standard_model_matching.hpp"
 #include "wrappers.hpp"
 #include "single_scale_matching.hpp"
+#include "linalg2.hpp"
 #include "loop_corrections.hpp"
 #include "standard_model.hpp"
 #include "MSSMEFTHiggs_mass_eigenstates.hpp"
 #include "MSSMEFTHiggs_info.hpp"
 #include "config.h"
+#ifdef ENABLE_THREADS
 #include "global_thread_pool.hpp"
+#endif
 #include <cmath>
 
 using namespace flexiblesusy::standard_model;

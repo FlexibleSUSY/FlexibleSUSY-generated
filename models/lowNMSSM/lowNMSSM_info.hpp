@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:39:09
+// File generated at Tue 22 Jan 2019 17:16:07
 
 #ifndef lowNMSSM_INFO_H
 #define lowNMSSM_INFO_H

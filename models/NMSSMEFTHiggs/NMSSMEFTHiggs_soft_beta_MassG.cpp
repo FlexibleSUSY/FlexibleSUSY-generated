@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:02:43
+// File generated at Tue 22 Jan 2019 14:36:45
 
 #include "NMSSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -94,9 +94,10 @@ double NMSSMEFTHiggs_soft_parameters::calc_beta_MassG_2_loop(const Soft_traces& 
 
    double beta_MassG;
 
-   beta_MassG = Re(0.4*twoLoop*Sqr(g3)*(11*(MassB + MassG)*Sqr(g1) + 5*(9*(
-      MassG + MassWB)*Sqr(g2) + 4*(traceAdjYdTYd + traceAdjYuTYu - MassG*
-      traceYdAdjYd - MassG*traceYuAdjYu + 7*MassG*Sqr(g3)))));
+   beta_MassG = Re(0.4*twoLoop*Sqr(g3)*(20*traceAdjYdTYd + 20*traceAdjYuTYu -
+      20*MassG*traceYdAdjYd - 20*MassG*traceYuAdjYu + 11*MassB*Sqr(g1) + 11*
+      MassG*Sqr(g1) + 45*MassG*Sqr(g2) + 45*MassWB*Sqr(g2) + 140*MassG*Sqr(g3))
+      );
 
 
    return beta_MassG;
@@ -127,6 +128,25 @@ double NMSSMEFTHiggs_soft_parameters::calc_beta_MassG_3_loop(const Soft_traces& 
  * @return 4-loop beta function
  */
 double NMSSMEFTHiggs_soft_parameters::calc_beta_MassG_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MassG;
+
+   beta_MassG = 0;
+
+
+   return beta_MassG;
+}
+
+/**
+ * Calculates the 5-loop beta function of MassG.
+ *
+ * @return 5-loop beta function
+ */
+double NMSSMEFTHiggs_soft_parameters::calc_beta_MassG_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

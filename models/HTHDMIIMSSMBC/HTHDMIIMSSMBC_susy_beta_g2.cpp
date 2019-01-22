@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:07:09
+// File generated at Tue 22 Jan 2019 16:12:12
 
 #include "HTHDMIIMSSMBC_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -89,6 +89,25 @@ double HTHDMIIMSSMBC_susy_parameters::calc_beta_g2_3_loop(const Susy_traces& sus
  * @return 4-loop beta function
  */
 double HTHDMIIMSSMBC_susy_parameters::calc_beta_g2_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_g2;
+
+   beta_g2 = 0;
+
+
+   return beta_g2;
+}
+
+/**
+ * Calculates the 5-loop beta function of g2.
+ *
+ * @return 5-loop beta function
+ */
+double HTHDMIIMSSMBC_susy_parameters::calc_beta_g2_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

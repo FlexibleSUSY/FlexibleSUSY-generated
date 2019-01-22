@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:12:27
+// File generated at Tue 22 Jan 2019 16:49:48
 
 #include "TMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -37,7 +37,7 @@ double TMSSM_susy_parameters::calc_beta_MT_1_loop(const Susy_traces& susy_traces
 
    double beta_MT;
 
-   beta_MT = Re(oneOver16PiSqr*(2*MT*AbsSqr(Lambdax) - 8*MT*Sqr(g2)));
+   beta_MT = Re(-2*MT*oneOver16PiSqr*(-AbsSqr(Lambdax) + 4*Sqr(g2)));
 
 
    return beta_MT;
@@ -57,9 +57,10 @@ double TMSSM_susy_parameters::calc_beta_MT_2_loop(const Susy_traces& susy_traces
 
    double beta_MT;
 
-   beta_MT = Re(0.4*MT*twoLoop*(140*Quad(g2) + AbsSqr(Lambdax)*(3*Sqr(g1) - 5*(
-      3*traceYdAdjYd + traceYeAdjYe + 3*traceYuAdjYu + Sqr(g2))) - 15*Sqr(Conj(
-      Lambdax))*Sqr(Lambdax)));
+   beta_MT = Re(0.4*MT*twoLoop*(-15*traceYdAdjYd*AbsSqr(Lambdax) - 5*
+      traceYeAdjYe*AbsSqr(Lambdax) - 15*traceYuAdjYu*AbsSqr(Lambdax) + 140*Quad
+      (g2) + 3*AbsSqr(Lambdax)*Sqr(g1) - 5*AbsSqr(Lambdax)*Sqr(g2) - 15*Sqr(
+      Conj(Lambdax))*Sqr(Lambdax)));
 
 
    return beta_MT;
@@ -90,6 +91,25 @@ double TMSSM_susy_parameters::calc_beta_MT_3_loop(const Susy_traces& susy_traces
  * @return 4-loop beta function
  */
 double TMSSM_susy_parameters::calc_beta_MT_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MT;
+
+   beta_MT = 0;
+
+
+   return beta_MT;
+}
+
+/**
+ * Calculates the 5-loop beta function of MT.
+ *
+ * @return 5-loop beta function
+ */
+double TMSSM_susy_parameters::calc_beta_MT_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

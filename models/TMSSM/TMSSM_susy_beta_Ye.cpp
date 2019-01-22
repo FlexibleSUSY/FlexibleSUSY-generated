@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:12:25
+// File generated at Tue 22 Jan 2019 16:49:45
 
 #include "TMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -39,8 +39,9 @@ Eigen::Matrix<double,3,3> TMSSM_susy_parameters::calc_beta_Ye_1_loop(const Susy_
 
    Eigen::Matrix<double,3,3> beta_Ye;
 
-   beta_Ye = (oneOver16PiSqr*(Ye*(3*traceYdAdjYd + traceYeAdjYe + 1.5*AbsSqr(
-      Lambdax) - 1.8*Sqr(g1) - 3*Sqr(g2)) + 3*(Ye*Ye.adjoint()*Ye))).real();
+   beta_Ye = (oneOver16PiSqr*(-0.1*Ye*(-30*traceYdAdjYd - 10*traceYeAdjYe - 15*
+      AbsSqr(Lambdax) + 18*Sqr(g1) + 30*Sqr(g2)) + 3*(Ye*Ye.adjoint()*Ye))).
+      real();
 
 
    return beta_Ye;
@@ -54,8 +55,8 @@ Eigen::Matrix<double,3,3> TMSSM_susy_parameters::calc_beta_Ye_1_loop(const Susy_
 Eigen::Matrix<double,3,3> TMSSM_susy_parameters::calc_beta_Ye_2_loop(const Susy_traces& susy_traces) const
 {
    const double traceYdAdjYd = TRACE_STRUCT.traceYdAdjYd;
-   const double traceYuAdjYu = TRACE_STRUCT.traceYuAdjYu;
    const double traceYeAdjYe = TRACE_STRUCT.traceYeAdjYe;
+   const double traceYuAdjYu = TRACE_STRUCT.traceYuAdjYu;
    const double traceYdAdjYdYdAdjYd = TRACE_STRUCT.traceYdAdjYdYdAdjYd;
    const double traceYdAdjYuYuAdjYd = TRACE_STRUCT.traceYdAdjYuYuAdjYd;
    const double traceYeAdjYeYeAdjYe = TRACE_STRUCT.traceYeAdjYeYeAdjYe;
@@ -63,13 +64,13 @@ Eigen::Matrix<double,3,3> TMSSM_susy_parameters::calc_beta_Ye_2_loop(const Susy_
 
    Eigen::Matrix<double,3,3> beta_Ye;
 
-   beta_Ye = (twoLoop*(0.05*Ye*(270*Quad(g1) + 30*AbsSqr(Lambdax)*(-3*
-      traceYuAdjYu + 4*Sqr(g2)) + 4*Sqr(g1)*(-2*traceYdAdjYd + 6*traceYeAdjYe +
-      9*Sqr(g2)) + 10*(-6*(3*traceYdAdjYdYdAdjYd + traceYdAdjYuYuAdjYd +
-      traceYeAdjYeYeAdjYe) + 27*Quad(g2) + 32*traceYdAdjYd*Sqr(g3)) - 75*Sqr(
-      Conj(Lambdax))*Sqr(Lambdax)) + (-3*(3*traceYdAdjYd + traceYeAdjYe) - 4.5*
-      AbsSqr(Lambdax) + 6*Sqr(g2))*(Ye*Ye.adjoint()*Ye) - 4*(Ye*Ye.adjoint()*Ye
-      *Ye.adjoint()*Ye))).real();
+   beta_Ye = (twoLoop*(0.05*Ye*(-180*traceYdAdjYdYdAdjYd - 60*
+      traceYdAdjYuYuAdjYd - 60*traceYeAdjYeYeAdjYe - 90*traceYuAdjYu*AbsSqr(
+      Lambdax) + 270*Quad(g1) + 270*Quad(g2) - 8*traceYdAdjYd*Sqr(g1) + 24*
+      traceYeAdjYe*Sqr(g1) + 120*AbsSqr(Lambdax)*Sqr(g2) + 36*Sqr(g1)*Sqr(g2) +
+      320*traceYdAdjYd*Sqr(g3) - 75*Sqr(Conj(Lambdax))*Sqr(Lambdax)) + 1.5*(-6*
+      traceYdAdjYd - 2*traceYeAdjYe - 3*AbsSqr(Lambdax) + 4*Sqr(g2))*(Ye*Ye.
+      adjoint()*Ye) - 4*(Ye*Ye.adjoint()*Ye*Ye.adjoint()*Ye))).real();
 
 
    return beta_Ye;
@@ -100,6 +101,25 @@ Eigen::Matrix<double,3,3> TMSSM_susy_parameters::calc_beta_Ye_3_loop(const Susy_
  * @return 4-loop beta function
  */
 Eigen::Matrix<double,3,3> TMSSM_susy_parameters::calc_beta_Ye_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_Ye;
+
+   beta_Ye = ZEROMATRIX(3,3);
+
+
+   return beta_Ye;
+}
+
+/**
+ * Calculates the 5-loop beta function of Ye.
+ *
+ * @return 5-loop beta function
+ */
+Eigen::Matrix<double,3,3> TMSSM_susy_parameters::calc_beta_Ye_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

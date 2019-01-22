@@ -7,7 +7,12 @@ MODMSSMRHN_DEP := $(patsubst %,model_specific/%,$(MODMSSMRHN_MOD))
 MODMSSMRHN_INC := $(patsubst %,-Imodel_specific/%,$(MODMSSMRHN_MOD))
 MODMSSMRHN_LIB := $(foreach M,$(MODMSSMRHN_MOD),model_specific/$M/libmodel_specific_$M$(MODULE_LIBEXT))
 
+MODMSSMRHN_SUBMOD  := $(DIR)/cxx_qft
+MODMSSMRHN_SUBMOD_INC := $(patsubst %,-I%,$(MODMSSMRHN_SUBMOD))
+
 MSSMRHN_INSTALL_DIR := $(INSTALL_DIR)/$(DIR)
+MSSMRHN_INSTALL_CXXQFT_DIR := \
+		$(MSSMRHN_INSTALL_DIR)/cxx_qft
 
 MSSMRHN_MK     := \
 		$(DIR)/module.mk
@@ -68,7 +73,6 @@ LLMSSMRHN_MMA  := \
 		$(DIR)/run_MSSMRHN.m
 
 LIBMSSMRHN_HDR := \
-		$(DIR)/MSSMRHN_cxx_diagrams.hpp \
 		$(DIR)/MSSMRHN_a_muon.hpp \
 		$(DIR)/MSSMRHN_convergence_tester.hpp \
 		$(DIR)/MSSMRHN_edm.hpp \
@@ -93,6 +97,13 @@ LIBMSSMRHN_HDR := \
 		$(DIR)/MSSMRHN_susy_scale_constraint.hpp \
 		$(DIR)/MSSMRHN_utilities.hpp \
 		$(DIR)/MSSMRHN_weinberg_angle.hpp
+
+LIBMSSMRHN_CXXQFT_HDR := \
+		$(DIR)/cxx_qft/MSSMRHN_qft.hpp \
+		$(DIR)/cxx_qft/MSSMRHN_fields.hpp \
+		$(DIR)/cxx_qft/MSSMRHN_vertices.hpp \
+		$(DIR)/cxx_qft/MSSMRHN_context_base.hpp \
+		$(DIR)/cxx_qft/MSSMRHN_npointfunctions.hpp
 
 ifneq ($(findstring two_scale,$(SOLVERS)),)
 -include $(DIR)/two_scale.mk
@@ -182,8 +193,10 @@ all-$(MODNAME): $(LIBMSSMRHN) $(EXEMSSMRHN_EXE)
 ifneq ($(INSTALL_DIR),)
 install-src::
 		install -d $(MSSMRHN_INSTALL_DIR)
+		install -d $(MSSMRHN_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(LIBMSSMRHN_SRC) $(MSSMRHN_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LIBMSSMRHN_HDR) $(MSSMRHN_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(LIBMSSMRHN_CXXQFT_HDR) $(MSSMRHN_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(EXEMSSMRHN_SRC) $(MSSMRHN_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLMSSMRHN_SRC) $(MSSMRHN_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLMSSMRHN_MMA) $(MSSMRHN_INSTALL_DIR)
@@ -214,6 +227,7 @@ clean-$(MODNAME)-obj:
 clean-$(MODNAME)-src:
 		-rm -f $(LIBMSSMRHN_SRC)
 		-rm -f $(LIBMSSMRHN_HDR)
+		-rm -f $(LIBMSSMRHN_CXXQFT_HDR)
 		-rm -f $(EXEMSSMRHN_SRC)
 		-rm -f $(LLMSSMRHN_SRC)
 		-rm -f $(LLMSSMRHN_MMA)
@@ -242,14 +256,14 @@ distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
 		tar -czf $(MSSMRHN_TARBALL) \
-		$(LIBMSSMRHN_SRC) $(LIBMSSMRHN_HDR) \
+		$(LIBMSSMRHN_SRC) $(LIBMSSMRHN_HDR) $(LIBMSSMRHN_CXXQFT_HDR) \
 		$(EXEMSSMRHN_SRC) \
 		$(LLMSSMRHN_SRC) $(LLMSSMRHN_MMA) \
 		$(MSSMRHN_MK) $(MSSMRHN_INCLUDE_MK) \
 		$(MSSMRHN_SLHA_INPUT) $(MSSMRHN_REFERENCES) \
 		$(MSSMRHN_GNUPLOT)
 
-$(LIBMSSMRHN_SRC) $(LIBMSSMRHN_HDR) $(EXEMSSMRHN_SRC) $(LLMSSMRHN_SRC) $(LLMSSMRHN_MMA) \
+$(LIBMSSMRHN_SRC) $(LIBMSSMRHN_HDR) $(LIBMSSMRHN_CXXQFT_HDR) $(EXEMSSMRHN_SRC) $(LLMSSMRHN_SRC) $(LLMSSMRHN_MMA) \
 : run-metacode-$(MODNAME)
 		@true
 
@@ -270,7 +284,7 @@ $(METACODE_STAMP_MSSMRHN):
 endif
 
 $(LIBMSSMRHN_DEP) $(EXEMSSMRHN_DEP) $(LLMSSMRHN_DEP) $(LIBMSSMRHN_OBJ) $(EXEMSSMRHN_OBJ) $(LLMSSMRHN_OBJ) $(LLMSSMRHN_LIB): \
-	CPPFLAGS += $(MODMSSMRHN_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODMSSMRHN_SUBMOD_INC) $(MODMSSMRHN_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBMSSMRHN_DEP) $(EXEMSSMRHN_DEP) $(LLMSSMRHN_DEP) $(LIBMSSMRHN_OBJ) $(EXEMSSMRHN_OBJ) $(LLMSSMRHN_OBJ) $(LLMSSMRHN_LIB): \

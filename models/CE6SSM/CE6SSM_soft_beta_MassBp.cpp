@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 13:48:18
+// File generated at Tue 22 Jan 2019 14:20:06
 
 #include "CE6SSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -106,10 +106,10 @@ double CE6SSM_soft_parameters::calc_beta_MassBp_2_loop(const Soft_traces& soft_t
       traceAdjLambda12TLambda12 + 210*traceAdjYdTYd + 70*traceAdjYeTYe + 90*
       traceAdjYuTYu - 285*MassBp*traceKappaAdjKappa - 190*MassBp*
       traceLambda12AdjLambda12 - 210*MassBp*traceYdAdjYd - 70*MassBp*
-      traceYeAdjYe - 90*MassBp*traceYuAdjYu + 162*(MassB + MassBp)*Sqr(g1) +
-      510*MassBp*Sqr(g2) + 510*MassWB*Sqr(g2) + 1200*MassBp*Sqr(g3) + 1200*
-      MassG*Sqr(g3) + 916*MassBp*Sqr(gN) - 190*Conj(Lambdax)*(MassBp*Lambdax -
-      TLambdax)));
+      traceYeAdjYe - 90*MassBp*traceYuAdjYu - 190*MassBp*AbsSqr(Lambdax) + 162*
+      MassB*Sqr(g1) + 162*MassBp*Sqr(g1) + 510*MassBp*Sqr(g2) + 510*MassWB*Sqr(
+      g2) + 1200*MassBp*Sqr(g3) + 1200*MassG*Sqr(g3) + 916*MassBp*Sqr(gN) + 190
+      *Conj(Lambdax)*TLambdax));
 
 
    return beta_MassBp;
@@ -140,6 +140,25 @@ double CE6SSM_soft_parameters::calc_beta_MassBp_3_loop(const Soft_traces& soft_t
  * @return 4-loop beta function
  */
 double CE6SSM_soft_parameters::calc_beta_MassBp_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MassBp;
+
+   beta_MassBp = 0;
+
+
+   return beta_MassBp;
+}
+
+/**
+ * Calculates the 5-loop beta function of MassBp.
+ *
+ * @return 5-loop beta function
+ */
+double CE6SSM_soft_parameters::calc_beta_MassBp_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

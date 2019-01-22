@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:12:27
+// File generated at Tue 22 Jan 2019 16:49:48
 
 #include "TMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -57,9 +57,9 @@ double TMSSM_susy_parameters::calc_beta_g1_2_loop(const Susy_traces& susy_traces
 
    double beta_g1;
 
-   beta_g1 = Re(0.04*twoLoop*Cube(g1)*(-45*AbsSqr(Lambdax) + 199*Sqr(g1) + 5*(-
-      14*traceYdAdjYd - 18*traceYeAdjYe - 26*traceYuAdjYu + 27*Sqr(g2) + 88*Sqr
-      (g3))));
+   beta_g1 = Re(0.04*twoLoop*Cube(g1)*(-70*traceYdAdjYd - 90*traceYeAdjYe - 130
+      *traceYuAdjYu - 45*AbsSqr(Lambdax) + 199*Sqr(g1) + 135*Sqr(g2) + 440*Sqr(
+      g3)));
 
 
    return beta_g1;
@@ -90,6 +90,25 @@ double TMSSM_susy_parameters::calc_beta_g1_3_loop(const Susy_traces& susy_traces
  * @return 4-loop beta function
  */
 double TMSSM_susy_parameters::calc_beta_g1_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_g1;
+
+   beta_g1 = 0;
+
+
+   return beta_g1;
+}
+
+/**
+ * Calculates the 5-loop beta function of g1.
+ *
+ * @return 5-loop beta function
+ */
+double TMSSM_susy_parameters::calc_beta_g1_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

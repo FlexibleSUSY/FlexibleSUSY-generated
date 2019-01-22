@@ -16,14 +16,14 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 15:28:02
+// File generated at Tue 22 Jan 2019 18:00:07
 
 /**
  * @file CMSSMSemiAnalytic_semi_analytic_solutions.cpp
  * @brief contains implementation of class for computing the semi-analytic solutions
  *
- * This file was generated at Sun 26 Aug 2018 15:28:02 with FlexibleSUSY
- * 2.2.0 (git commit: 8489097de2d6938a6da0149378457b5ad13d9425) and SARAH 4.13.0 .
+ * This file was generated at Tue 22 Jan 2019 18:00:07 with FlexibleSUSY
+ * 2.3.0 (git commit: b5dda61ad35a8ffff74bde70f63e1c2b815e751a) and SARAH 4.14.1 .
  */
 
 #include "CMSSMSemiAnalytic_semi_analytic_solutions.hpp"

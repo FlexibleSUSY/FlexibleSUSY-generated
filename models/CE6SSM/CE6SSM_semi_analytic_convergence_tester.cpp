@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:01:41
+// File generated at Tue 22 Jan 2019 15:17:59
 
 #include "CE6SSM_semi_analytic_convergence_tester.hpp"
 #include <array>
@@ -44,10 +44,6 @@ namespace flexiblesusy {
 CE6SSM_convergence_tester<Semi_analytic>::CE6SSM_convergence_tester(
    CE6SSM<Semi_analytic>* model, double accuracy_goal, const Scale_getter& sg)
    : Convergence_tester_DRbar<CE6SSM<Semi_analytic> >(model, accuracy_goal, sg)
-{
-}
-
-CE6SSM_convergence_tester<Semi_analytic>::~CE6SSM_convergence_tester()
 {
 }
 

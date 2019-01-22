@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 13:49:34
+// File generated at Tue 22 Jan 2019 13:27:00
 
 /**
  * @file MSSMNoFVHimalaya_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Sun 26 Aug 2018 13:49:34 with FlexibleSUSY
- * 2.2.0 (git commit: 8489097de2d6938a6da0149378457b5ad13d9425) and SARAH 4.13.0 .
+ * This file was generated at Tue 22 Jan 2019 13:27:00 with FlexibleSUSY
+ * 2.3.0 (git commit: b5dda61ad35a8ffff74bde70f63e1c2b815e751a) and SARAH 4.14.1 .
  */
 
 #include "MSSMNoFVHimalaya_mass_eigenstates.hpp"
@@ -42,8 +42,11 @@
 #include "error.hpp"
 #include "pv.hpp"
 #include "raii.hpp"
-#include "thread_pool.hpp"
 #include "functors.hpp"
+
+#ifdef ENABLE_THREADS
+#include "thread_pool.hpp"
+#endif
 
 #ifdef ENABLE_TWO_SCALE_SOLVER
 #include "MSSMNoFVHimalaya_two_scale_ewsb_solver.hpp"
@@ -54,6 +57,7 @@
 
 #ifdef ENABLE_HIMALAYA
 #include "HierarchyCalculator.hpp"
+#include "version.hpp"
 #endif
 
 
@@ -73,6 +77,8 @@
 
 namespace flexiblesusy {
 
+#define STRINGIFY(s) XSTRINGIFY(s)
+#define XSTRINGIFY(s) #s
 #define CLASSNAME MSSMNoFVHimalaya_mass_eigenstates
 
 #define PHYSICAL(parameter) physical.parameter
@@ -93,7 +99,7 @@ namespace flexiblesusy {
 #define HIGGS_3LOOP_CORRECTION_AT_AT_AT    loop_corrections.higgs_at_at_at
 #define HIGGS_4LOOP_CORRECTION_AT_AS_AS_AS loop_corrections.higgs_at_as_as_as
 
-CLASSNAME::MSSMNoFVHimalaya_mass_eigenstates(const MSSMNoFVHimalaya_input_parameters& input_)
+CLASSNAME::CLASSNAME(const MSSMNoFVHimalaya_input_parameters& input_)
    : MSSMNoFVHimalaya_soft_parameters(input_)
 #if defined(ENABLE_TWO_SCALE_SOLVER)
    , ewsb_solver(new MSSMNoFVHimalaya_ewsb_solver<Two_scale>())
@@ -327,7 +333,7 @@ int CLASSNAME::solve_ewsb_tree_level_custom()
 int CLASSNAME::solve_ewsb_tree_level()
 {
    if (!ewsb_solver) {
-      throw SetupError("MSSMNoFVHimalaya_mass_eigenstates::solve_ewsb_tree_level: "
+      throw SetupError(STRINGIFY(CLASSNAME) "::solve_ewsb_tree_level: "
                        "no EWSB solver set");
    }
 
@@ -359,7 +365,7 @@ int CLASSNAME::solve_ewsb_tree_level()
 int CLASSNAME::solve_ewsb_one_loop()
 {
    if (!ewsb_solver) {
-      throw SetupError("MSSMNoFVHimalaya_mass_eigenstates::solve_ewsb_one_loop: "
+      throw SetupError(STRINGIFY(CLASSNAME) "::solve_ewsb_one_loop: "
                        "no EWSB solver set");
    }
 
@@ -391,7 +397,7 @@ int CLASSNAME::solve_ewsb_one_loop()
 int CLASSNAME::solve_ewsb()
 {
    if (!ewsb_solver) {
-      throw SetupError("MSSMNoFVHimalaya_mass_eigenstates::solve_ewsb: "
+      throw SetupError(STRINGIFY(CLASSNAME) "::solve_ewsb: "
                        "no EWSB solver set");
    }
 
@@ -14894,6 +14900,8 @@ Eigen::Matrix<double,2,2> CLASSNAME::self_energy_hh_3loop() const
       pars.Au(2,2) = Re(TYu(2,2)/Yu(2,2));
       pars.Ad(2,2) = Re(TYd(2,2)/Yd(2,2));
       pars.Ae(2,2) = Re(TYe(2,2)/Ye(2,2));
+      pars.ml2 = Re(ml2);
+      pars.me2 = Re(me2);
       pars.Mtau = MFtau;
    #endif
 
@@ -16145,7 +16153,7 @@ double CLASSNAME::ThetaW() const
 
 
 
-std::ostream& operator<<(std::ostream& ostr, const MSSMNoFVHimalaya_mass_eigenstates& model)
+std::ostream& operator<<(std::ostream& ostr, const CLASSNAME& model)
 {
    model.print(ostr);
    return ostr;

@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 15:32:55
+// File generated at Tue 22 Jan 2019 16:57:06
 
 /**
  * @file MRSSM_a_muon.hpp
  *
- * This file was generated at Sun 26 Aug 2018 15:32:55 with FlexibleSUSY
- * 2.2.0 and SARAH 4.13.0 .
+ * This file was generated at Tue 22 Jan 2019 16:57:06 with FlexibleSUSY
+ * 2.3.0 and SARAH 4.14.1 .
  */
 
 #ifndef MRSSM_A_MUON_H

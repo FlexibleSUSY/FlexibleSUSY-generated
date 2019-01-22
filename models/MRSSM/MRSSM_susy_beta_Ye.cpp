@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:43:42
+// File generated at Tue 22 Jan 2019 16:51:52
 
 #include "MRSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -39,9 +39,9 @@ Eigen::Matrix<double,3,3> MRSSM_susy_parameters::calc_beta_Ye_1_loop(const Susy_
 
    Eigen::Matrix<double,3,3> beta_Ye;
 
-   beta_Ye = (oneOver16PiSqr*(Ye*(3*traceYdAdjYd + traceYeAdjYe + AbsSqr(LamSD)
-      + 1.5*AbsSqr(LamTD) - 1.8*Sqr(g1) - 3*Sqr(g2)) + 3*(Ye*Ye.adjoint()*Ye)))
-      .real();
+   beta_Ye = (oneOver16PiSqr*(-0.1*Ye*(-30*traceYdAdjYd - 10*traceYeAdjYe - 10*
+      AbsSqr(LamSD) - 15*AbsSqr(LamTD) + 18*Sqr(g1) + 30*Sqr(g2)) + 3*(Ye*Ye.
+      adjoint()*Ye))).real();
 
 
    return beta_Ye;
@@ -63,14 +63,15 @@ Eigen::Matrix<double,3,3> MRSSM_susy_parameters::calc_beta_Ye_2_loop(const Susy_
 
    Eigen::Matrix<double,3,3> beta_Ye;
 
-   beta_Ye = (twoLoop*(0.01*Ye*(-100*AbsSqr(LamSD)*(2*AbsSqr(LamSU) + 3*AbsSqr(
-      LamTD)) + 150*AbsSqr(LamTD)*(-AbsSqr(LamTU) + 4*Sqr(g2)) + 2*(729*Quad(g1
-      ) + 10*Sqr(g1)*(-2*traceYdAdjYd + 6*traceYeAdjYe + 9*Sqr(g2)) + 25*(-6*(3
-      *traceYdAdjYdYdAdjYd + traceYdAdjYuYuAdjYd + traceYeAdjYeYeAdjYe) + 33*
-      Quad(g2) + 32*traceYdAdjYd*Sqr(g3))) - 300*Sqr(LamSD)*Sqr(Conj(LamSD)) -
-      375*Sqr(LamTD)*Sqr(Conj(LamTD))) + (-9*traceYdAdjYd - 3*traceYeAdjYe - 3*
-      AbsSqr(LamSD) - 4.5*AbsSqr(LamTD) + 6*Sqr(g2))*(Ye*Ye.adjoint()*Ye) - 4*(
-      Ye*Ye.adjoint()*Ye*Ye.adjoint()*Ye))).real();
+   beta_Ye = (twoLoop*(0.01*Ye*(-900*traceYdAdjYdYdAdjYd - 300*
+      traceYdAdjYuYuAdjYd - 300*traceYeAdjYeYeAdjYe - 200*AbsSqr(LamSD)*AbsSqr(
+      LamSU) - 300*AbsSqr(LamSD)*AbsSqr(LamTD) - 150*AbsSqr(LamTD)*AbsSqr(LamTU
+      ) + 1458*Quad(g1) + 1650*Quad(g2) - 40*traceYdAdjYd*Sqr(g1) + 120*
+      traceYeAdjYe*Sqr(g1) + 600*AbsSqr(LamTD)*Sqr(g2) + 180*Sqr(g1)*Sqr(g2) +
+      1600*traceYdAdjYd*Sqr(g3) - 300*Sqr(LamSD)*Sqr(Conj(LamSD)) - 375*Sqr(
+      LamTD)*Sqr(Conj(LamTD))) + 1.5*(-6*traceYdAdjYd - 2*traceYeAdjYe - 2*
+      AbsSqr(LamSD) - 3*AbsSqr(LamTD) + 4*Sqr(g2))*(Ye*Ye.adjoint()*Ye) - 4*(Ye
+      *Ye.adjoint()*Ye*Ye.adjoint()*Ye))).real();
 
 
    return beta_Ye;
@@ -101,6 +102,25 @@ Eigen::Matrix<double,3,3> MRSSM_susy_parameters::calc_beta_Ye_3_loop(const Susy_
  * @return 4-loop beta function
  */
 Eigen::Matrix<double,3,3> MRSSM_susy_parameters::calc_beta_Ye_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_Ye;
+
+   beta_Ye = ZEROMATRIX(3,3);
+
+
+   return beta_Ye;
+}
+
+/**
+ * Calculates the 5-loop beta function of Ye.
+ *
+ * @return 5-loop beta function
+ */
+Eigen::Matrix<double,3,3> MRSSM_susy_parameters::calc_beta_Ye_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

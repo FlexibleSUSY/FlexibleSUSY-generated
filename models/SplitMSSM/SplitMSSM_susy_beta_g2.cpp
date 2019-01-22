@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:09:35
+// File generated at Tue 22 Jan 2019 16:46:31
 
 #include "SplitMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -57,9 +57,9 @@ double SplitMSSM_susy_parameters::calc_beta_g2_2_loop(const Susy_traces& susy_tr
 
    double beta_g2;
 
-   beta_g2 = Re(0.016666666666666666*twoLoop*Cube(g2)*(72*Sqr(g1) + 5*(424*Sqr(
-      g2) - 3*(6*traceYdAdjYd + 2*traceYeAdjYe + 6*traceYuAdjYu + 11*Sqr(g2d) +
-      11*Sqr(g2u) - 48*Sqr(g3) + Sqr(gYd) + Sqr(gYu)))));
+   beta_g2 = Re(0.016666666666666666*twoLoop*Cube(g2)*(-90*traceYdAdjYd - 30*
+      traceYeAdjYe - 90*traceYuAdjYu + 72*Sqr(g1) + 2120*Sqr(g2) - 165*Sqr(g2d)
+      - 165*Sqr(g2u) + 720*Sqr(g3) - 15*Sqr(gYd) - 15*Sqr(gYu)));
 
 
    return beta_g2;
@@ -90,6 +90,25 @@ double SplitMSSM_susy_parameters::calc_beta_g2_3_loop(const Susy_traces& susy_tr
  * @return 4-loop beta function
  */
 double SplitMSSM_susy_parameters::calc_beta_g2_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_g2;
+
+   beta_g2 = 0;
+
+
+   return beta_g2;
+}
+
+/**
+ * Calculates the 5-loop beta function of g2.
+ *
+ * @return 5-loop beta function
+ */
+double SplitMSSM_susy_parameters::calc_beta_g2_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

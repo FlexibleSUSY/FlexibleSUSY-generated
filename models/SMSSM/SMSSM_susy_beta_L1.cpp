@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:31:01
+// File generated at Tue 22 Jan 2019 17:17:29
 
 #include "SMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -57,10 +57,11 @@ double SMSSM_susy_parameters::calc_beta_L1_2_loop(const Susy_traces& susy_traces
 
    double beta_L1;
 
-   beta_L1 = Re(-0.4*L1*twoLoop*(20*AbsSqr(Kappa)*AbsSqr(Lambdax) + AbsSqr(
-      Lambdax)*(10*AbsSqr(Lambdax) - 3*Sqr(g1) + 5*(3*traceYdAdjYd +
-      traceYeAdjYe + 3*traceYuAdjYu - 3*Sqr(g2))) + 20*Sqr(Conj(Kappa))*Sqr(
-      Kappa)));
+   beta_L1 = Re(-0.4*L1*twoLoop*(15*traceYdAdjYd*AbsSqr(Lambdax) + 5*
+      traceYeAdjYe*AbsSqr(Lambdax) + 15*traceYuAdjYu*AbsSqr(Lambdax) + 20*
+      AbsSqr(Kappa)*AbsSqr(Lambdax) - 3*AbsSqr(Lambdax)*Sqr(g1) - 15*AbsSqr(
+      Lambdax)*Sqr(g2) + 20*Sqr(Conj(Kappa))*Sqr(Kappa) + 10*Sqr(Conj(Lambdax))
+      *Sqr(Lambdax)));
 
 
    return beta_L1;
@@ -91,6 +92,25 @@ double SMSSM_susy_parameters::calc_beta_L1_3_loop(const Susy_traces& susy_traces
  * @return 4-loop beta function
  */
 double SMSSM_susy_parameters::calc_beta_L1_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_L1;
+
+   beta_L1 = 0;
+
+
+   return beta_L1;
+}
+
+/**
+ * Calculates the 5-loop beta function of L1.
+ *
+ * @return 5-loop beta function
+ */
+double SMSSM_susy_parameters::calc_beta_L1_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

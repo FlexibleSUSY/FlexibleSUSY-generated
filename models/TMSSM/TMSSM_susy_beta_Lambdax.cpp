@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:12:25
+// File generated at Tue 22 Jan 2019 16:49:46
 
 #include "TMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -40,9 +40,9 @@ double TMSSM_susy_parameters::calc_beta_Lambdax_1_loop(const Susy_traces& susy_t
 
    double beta_Lambdax;
 
-   beta_Lambdax = Re(oneOver16PiSqr*(-0.6*Lambdax*Sqr(g1) + Lambdax*(3*
-      traceYdAdjYd + traceYeAdjYe + 3*traceYuAdjYu - 7*Sqr(g2)) + 4*Conj(
-      Lambdax)*Sqr(Lambdax)));
+   beta_Lambdax = Re(0.2*oneOver16PiSqr*Lambdax*(15*traceYdAdjYd + 5*
+      traceYeAdjYe + 15*traceYuAdjYu + 20*AbsSqr(Lambdax) - 3*Sqr(g1) - 35*Sqr(
+      g2)));
 
 
    return beta_Lambdax;
@@ -66,13 +66,14 @@ double TMSSM_susy_parameters::calc_beta_Lambdax_2_loop(const Susy_traces& susy_t
 
    double beta_Lambdax;
 
-   beta_Lambdax = Re(-0.02*twoLoop*Lambdax*(-207*Quad(g1) - 10*Sqr(g1)*(-2*
-      traceYdAdjYd + 6*traceYeAdjYe + 4*traceYuAdjYu + 9*Sqr(g2)) - 5*AbsSqr(
-      Lambdax)*(6*Sqr(g1) + 5*(-5*(3*traceYdAdjYd + traceYeAdjYe + 3*
-      traceYuAdjYu) + 22*Sqr(g2))) - 25*(83*Quad(g2) + 2*(-3*(3*
-      traceYdAdjYdYdAdjYd + 2*traceYdAdjYuYuAdjYd + traceYeAdjYeYeAdjYe + 3*
-      traceYuAdjYuYuAdjYu) + 16*(traceYdAdjYd + traceYuAdjYu)*Sqr(g3))) + 525*
-      Sqr(Conj(Lambdax))*Sqr(Lambdax)));
+   beta_Lambdax = Re(-0.02*twoLoop*Lambdax*(450*traceYdAdjYdYdAdjYd + 300*
+      traceYdAdjYuYuAdjYd + 150*traceYeAdjYeYeAdjYe + 450*traceYuAdjYuYuAdjYu +
+      375*traceYdAdjYd*AbsSqr(Lambdax) + 125*traceYeAdjYe*AbsSqr(Lambdax) + 375
+      *traceYuAdjYu*AbsSqr(Lambdax) - 207*Quad(g1) - 2075*Quad(g2) + 20*
+      traceYdAdjYd*Sqr(g1) - 60*traceYeAdjYe*Sqr(g1) - 40*traceYuAdjYu*Sqr(g1)
+      - 30*AbsSqr(Lambdax)*Sqr(g1) - 550*AbsSqr(Lambdax)*Sqr(g2) - 90*Sqr(g1)*
+      Sqr(g2) - 800*traceYdAdjYd*Sqr(g3) - 800*traceYuAdjYu*Sqr(g3) + 525*Sqr(
+      Conj(Lambdax))*Sqr(Lambdax)));
 
 
    return beta_Lambdax;
@@ -103,6 +104,25 @@ double TMSSM_susy_parameters::calc_beta_Lambdax_3_loop(const Susy_traces& susy_t
  * @return 4-loop beta function
  */
 double TMSSM_susy_parameters::calc_beta_Lambdax_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_Lambdax;
+
+   beta_Lambdax = 0;
+
+
+   return beta_Lambdax;
+}
+
+/**
+ * Calculates the 5-loop beta function of Lambdax.
+ *
+ * @return 5-loop beta function
+ */
+double TMSSM_susy_parameters::calc_beta_Lambdax_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

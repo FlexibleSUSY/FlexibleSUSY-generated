@@ -7,7 +7,12 @@ MODTHDMII_DEP := $(patsubst %,model_specific/%,$(MODTHDMII_MOD))
 MODTHDMII_INC := $(patsubst %,-Imodel_specific/%,$(MODTHDMII_MOD))
 MODTHDMII_LIB := $(foreach M,$(MODTHDMII_MOD),model_specific/$M/libmodel_specific_$M$(MODULE_LIBEXT))
 
+MODTHDMII_SUBMOD  := $(DIR)/cxx_qft
+MODTHDMII_SUBMOD_INC := $(patsubst %,-I%,$(MODTHDMII_SUBMOD))
+
 THDMII_INSTALL_DIR := $(INSTALL_DIR)/$(DIR)
+THDMII_INSTALL_CXXQFT_DIR := \
+		$(THDMII_INSTALL_DIR)/cxx_qft
 
 THDMII_MK     := \
 		$(DIR)/module.mk
@@ -68,7 +73,6 @@ LLTHDMII_MMA  := \
 		$(DIR)/run_THDMII.m
 
 LIBTHDMII_HDR := \
-		$(DIR)/THDMII_cxx_diagrams.hpp \
 		$(DIR)/THDMII_a_muon.hpp \
 		$(DIR)/THDMII_convergence_tester.hpp \
 		$(DIR)/THDMII_edm.hpp \
@@ -93,6 +97,13 @@ LIBTHDMII_HDR := \
 		$(DIR)/THDMII_susy_scale_constraint.hpp \
 		$(DIR)/THDMII_utilities.hpp \
 		$(DIR)/THDMII_weinberg_angle.hpp
+
+LIBTHDMII_CXXQFT_HDR := \
+		$(DIR)/cxx_qft/THDMII_qft.hpp \
+		$(DIR)/cxx_qft/THDMII_fields.hpp \
+		$(DIR)/cxx_qft/THDMII_vertices.hpp \
+		$(DIR)/cxx_qft/THDMII_context_base.hpp \
+		$(DIR)/cxx_qft/THDMII_npointfunctions.hpp
 
 ifneq ($(findstring two_scale,$(SOLVERS)),)
 -include $(DIR)/two_scale.mk
@@ -182,8 +193,10 @@ all-$(MODNAME): $(LIBTHDMII) $(EXETHDMII_EXE)
 ifneq ($(INSTALL_DIR),)
 install-src::
 		install -d $(THDMII_INSTALL_DIR)
+		install -d $(THDMII_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(LIBTHDMII_SRC) $(THDMII_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LIBTHDMII_HDR) $(THDMII_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(LIBTHDMII_CXXQFT_HDR) $(THDMII_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(EXETHDMII_SRC) $(THDMII_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLTHDMII_SRC) $(THDMII_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLTHDMII_MMA) $(THDMII_INSTALL_DIR)
@@ -214,6 +227,7 @@ clean-$(MODNAME)-obj:
 clean-$(MODNAME)-src:
 		-rm -f $(LIBTHDMII_SRC)
 		-rm -f $(LIBTHDMII_HDR)
+		-rm -f $(LIBTHDMII_CXXQFT_HDR)
 		-rm -f $(EXETHDMII_SRC)
 		-rm -f $(LLTHDMII_SRC)
 		-rm -f $(LLTHDMII_MMA)
@@ -242,14 +256,14 @@ distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
 		tar -czf $(THDMII_TARBALL) \
-		$(LIBTHDMII_SRC) $(LIBTHDMII_HDR) \
+		$(LIBTHDMII_SRC) $(LIBTHDMII_HDR) $(LIBTHDMII_CXXQFT_HDR) \
 		$(EXETHDMII_SRC) \
 		$(LLTHDMII_SRC) $(LLTHDMII_MMA) \
 		$(THDMII_MK) $(THDMII_INCLUDE_MK) \
 		$(THDMII_SLHA_INPUT) $(THDMII_REFERENCES) \
 		$(THDMII_GNUPLOT)
 
-$(LIBTHDMII_SRC) $(LIBTHDMII_HDR) $(EXETHDMII_SRC) $(LLTHDMII_SRC) $(LLTHDMII_MMA) \
+$(LIBTHDMII_SRC) $(LIBTHDMII_HDR) $(LIBTHDMII_CXXQFT_HDR) $(EXETHDMII_SRC) $(LLTHDMII_SRC) $(LLTHDMII_MMA) \
 : run-metacode-$(MODNAME)
 		@true
 
@@ -270,7 +284,7 @@ $(METACODE_STAMP_THDMII):
 endif
 
 $(LIBTHDMII_DEP) $(EXETHDMII_DEP) $(LLTHDMII_DEP) $(LIBTHDMII_OBJ) $(EXETHDMII_OBJ) $(LLTHDMII_OBJ) $(LLTHDMII_LIB): \
-	CPPFLAGS += $(MODTHDMII_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODTHDMII_SUBMOD_INC) $(MODTHDMII_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBTHDMII_DEP) $(EXETHDMII_DEP) $(LLTHDMII_DEP) $(LIBTHDMII_OBJ) $(EXETHDMII_OBJ) $(LLTHDMII_OBJ) $(LLTHDMII_LIB): \

@@ -7,7 +7,12 @@ MODMSSMNoFVatMGUT_DEP := $(patsubst %,model_specific/%,$(MODMSSMNoFVatMGUT_MOD))
 MODMSSMNoFVatMGUT_INC := $(patsubst %,-Imodel_specific/%,$(MODMSSMNoFVatMGUT_MOD))
 MODMSSMNoFVatMGUT_LIB := $(foreach M,$(MODMSSMNoFVatMGUT_MOD),model_specific/$M/libmodel_specific_$M$(MODULE_LIBEXT))
 
+MODMSSMNoFVatMGUT_SUBMOD  := $(DIR)/cxx_qft
+MODMSSMNoFVatMGUT_SUBMOD_INC := $(patsubst %,-I%,$(MODMSSMNoFVatMGUT_SUBMOD))
+
 MSSMNoFVatMGUT_INSTALL_DIR := $(INSTALL_DIR)/$(DIR)
+MSSMNoFVatMGUT_INSTALL_CXXQFT_DIR := \
+		$(MSSMNoFVatMGUT_INSTALL_DIR)/cxx_qft
 
 MSSMNoFVatMGUT_MK     := \
 		$(DIR)/module.mk
@@ -68,7 +73,6 @@ LLMSSMNoFVatMGUT_MMA  := \
 		$(DIR)/run_MSSMNoFVatMGUT.m
 
 LIBMSSMNoFVatMGUT_HDR := \
-		$(DIR)/MSSMNoFVatMGUT_cxx_diagrams.hpp \
 		$(DIR)/MSSMNoFVatMGUT_a_muon.hpp \
 		$(DIR)/MSSMNoFVatMGUT_convergence_tester.hpp \
 		$(DIR)/MSSMNoFVatMGUT_edm.hpp \
@@ -93,6 +97,13 @@ LIBMSSMNoFVatMGUT_HDR := \
 		$(DIR)/MSSMNoFVatMGUT_susy_scale_constraint.hpp \
 		$(DIR)/MSSMNoFVatMGUT_utilities.hpp \
 		$(DIR)/MSSMNoFVatMGUT_weinberg_angle.hpp
+
+LIBMSSMNoFVatMGUT_CXXQFT_HDR := \
+		$(DIR)/cxx_qft/MSSMNoFVatMGUT_qft.hpp \
+		$(DIR)/cxx_qft/MSSMNoFVatMGUT_fields.hpp \
+		$(DIR)/cxx_qft/MSSMNoFVatMGUT_vertices.hpp \
+		$(DIR)/cxx_qft/MSSMNoFVatMGUT_context_base.hpp \
+		$(DIR)/cxx_qft/MSSMNoFVatMGUT_npointfunctions.hpp
 
 ifneq ($(findstring two_scale,$(SOLVERS)),)
 -include $(DIR)/two_scale.mk
@@ -182,8 +193,10 @@ all-$(MODNAME): $(LIBMSSMNoFVatMGUT) $(EXEMSSMNoFVatMGUT_EXE)
 ifneq ($(INSTALL_DIR),)
 install-src::
 		install -d $(MSSMNoFVatMGUT_INSTALL_DIR)
+		install -d $(MSSMNoFVatMGUT_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(LIBMSSMNoFVatMGUT_SRC) $(MSSMNoFVatMGUT_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LIBMSSMNoFVatMGUT_HDR) $(MSSMNoFVatMGUT_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(LIBMSSMNoFVatMGUT_CXXQFT_HDR) $(MSSMNoFVatMGUT_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(EXEMSSMNoFVatMGUT_SRC) $(MSSMNoFVatMGUT_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLMSSMNoFVatMGUT_SRC) $(MSSMNoFVatMGUT_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLMSSMNoFVatMGUT_MMA) $(MSSMNoFVatMGUT_INSTALL_DIR)
@@ -214,6 +227,7 @@ clean-$(MODNAME)-obj:
 clean-$(MODNAME)-src:
 		-rm -f $(LIBMSSMNoFVatMGUT_SRC)
 		-rm -f $(LIBMSSMNoFVatMGUT_HDR)
+		-rm -f $(LIBMSSMNoFVatMGUT_CXXQFT_HDR)
 		-rm -f $(EXEMSSMNoFVatMGUT_SRC)
 		-rm -f $(LLMSSMNoFVatMGUT_SRC)
 		-rm -f $(LLMSSMNoFVatMGUT_MMA)
@@ -242,14 +256,14 @@ distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
 		tar -czf $(MSSMNoFVatMGUT_TARBALL) \
-		$(LIBMSSMNoFVatMGUT_SRC) $(LIBMSSMNoFVatMGUT_HDR) \
+		$(LIBMSSMNoFVatMGUT_SRC) $(LIBMSSMNoFVatMGUT_HDR) $(LIBMSSMNoFVatMGUT_CXXQFT_HDR) \
 		$(EXEMSSMNoFVatMGUT_SRC) \
 		$(LLMSSMNoFVatMGUT_SRC) $(LLMSSMNoFVatMGUT_MMA) \
 		$(MSSMNoFVatMGUT_MK) $(MSSMNoFVatMGUT_INCLUDE_MK) \
 		$(MSSMNoFVatMGUT_SLHA_INPUT) $(MSSMNoFVatMGUT_REFERENCES) \
 		$(MSSMNoFVatMGUT_GNUPLOT)
 
-$(LIBMSSMNoFVatMGUT_SRC) $(LIBMSSMNoFVatMGUT_HDR) $(EXEMSSMNoFVatMGUT_SRC) $(LLMSSMNoFVatMGUT_SRC) $(LLMSSMNoFVatMGUT_MMA) \
+$(LIBMSSMNoFVatMGUT_SRC) $(LIBMSSMNoFVatMGUT_HDR) $(LIBMSSMNoFVatMGUT_CXXQFT_HDR) $(EXEMSSMNoFVatMGUT_SRC) $(LLMSSMNoFVatMGUT_SRC) $(LLMSSMNoFVatMGUT_MMA) \
 : run-metacode-$(MODNAME)
 		@true
 
@@ -270,7 +284,7 @@ $(METACODE_STAMP_MSSMNoFVatMGUT):
 endif
 
 $(LIBMSSMNoFVatMGUT_DEP) $(EXEMSSMNoFVatMGUT_DEP) $(LLMSSMNoFVatMGUT_DEP) $(LIBMSSMNoFVatMGUT_OBJ) $(EXEMSSMNoFVatMGUT_OBJ) $(LLMSSMNoFVatMGUT_OBJ) $(LLMSSMNoFVatMGUT_LIB): \
-	CPPFLAGS += $(MODMSSMNoFVatMGUT_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODMSSMNoFVatMGUT_SUBMOD_INC) $(MODMSSMNoFVatMGUT_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBMSSMNoFVatMGUT_DEP) $(EXEMSSMNoFVatMGUT_DEP) $(LLMSSMNoFVatMGUT_DEP) $(LIBMSSMNoFVatMGUT_OBJ) $(EXEMSSMNoFVatMGUT_OBJ) $(LLMSSMNoFVatMGUT_OBJ) $(LLMSSMNoFVatMGUT_LIB): \

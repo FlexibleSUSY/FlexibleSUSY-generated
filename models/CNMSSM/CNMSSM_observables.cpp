@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 13:59:57
+// File generated at Tue 22 Jan 2019 13:51:59
 
 #include "CNMSSM_observables.hpp"
 #include "CNMSSM_mass_eigenstates.hpp"

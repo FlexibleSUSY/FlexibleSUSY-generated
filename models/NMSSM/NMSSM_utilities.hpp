@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:47:32
+// File generated at Tue 22 Jan 2019 17:34:43
 
 #ifndef NMSSM_UTILITIES_H
 #define NMSSM_UTILITIES_H

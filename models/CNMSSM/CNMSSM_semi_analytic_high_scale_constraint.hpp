@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 13:59:41
+// File generated at Tue 22 Jan 2019 13:51:47
 
 #ifndef CNMSSM_SEMI_ANALYTIC_HIGH_SCALE_CONSTRAINT_H
 #define CNMSSM_SEMI_ANALYTIC_HIGH_SCALE_CONSTRAINT_H

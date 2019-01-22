@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 13:45:55
+// File generated at Tue 22 Jan 2019 13:04:48
 
 #include "NUHMSSMNoFVHimalaya_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -79,9 +79,10 @@ double NUHMSSMNoFVHimalaya_soft_parameters::calc_beta_BMu_1_loop(const Soft_trac
 
    double beta_BMu;
 
-   beta_BMu = Re(oneOver16PiSqr*(1.2*MassB*Mu*Sqr(g1) + BMu*(3*traceYdAdjYd +
-      traceYeAdjYe + 3*traceYuAdjYu - 0.6*Sqr(g1) - 3*Sqr(g2)) + 2*Mu*(3*
-      traceAdjYdTYd + traceAdjYeTYe + 3*traceAdjYuTYu + 3*MassWB*Sqr(g2))));
+   beta_BMu = Re(0.2*oneOver16PiSqr*(15*traceYdAdjYd*BMu + 5*traceYeAdjYe*BMu +
+      15*traceYuAdjYu*BMu + 30*traceAdjYdTYd*Mu + 10*traceAdjYeTYe*Mu + 30*
+      traceAdjYuTYu*Mu - 3*BMu*Sqr(g1) + 6*MassB*Mu*Sqr(g1) - 15*BMu*Sqr(g2) +
+      30*MassWB*Mu*Sqr(g2)));
 
 
    return beta_BMu;
@@ -97,32 +98,36 @@ double NUHMSSMNoFVHimalaya_soft_parameters::calc_beta_BMu_2_loop(const Soft_trac
    const double traceYdAdjYd = TRACE_STRUCT.traceYdAdjYd;
    const double traceYeAdjYe = TRACE_STRUCT.traceYeAdjYe;
    const double traceYuAdjYu = TRACE_STRUCT.traceYuAdjYu;
-   const double traceYdAdjYdYdAdjYd = TRACE_STRUCT.traceYdAdjYdYdAdjYd;
-   const double traceYdAdjYuYuAdjYd = TRACE_STRUCT.traceYdAdjYuYuAdjYd;
-   const double traceYeAdjYeYeAdjYe = TRACE_STRUCT.traceYeAdjYeYeAdjYe;
-   const double traceYuAdjYuYuAdjYu = TRACE_STRUCT.traceYuAdjYuYuAdjYu;
    const double traceAdjYdTYd = TRACE_STRUCT.traceAdjYdTYd;
    const double traceAdjYeTYe = TRACE_STRUCT.traceAdjYeTYe;
    const double traceAdjYuTYu = TRACE_STRUCT.traceAdjYuTYu;
+   const double traceYdAdjYdYdAdjYd = TRACE_STRUCT.traceYdAdjYdYdAdjYd;
    const double traceYdAdjYdTYdAdjYd = TRACE_STRUCT.traceYdAdjYdTYdAdjYd;
+   const double traceYdAdjYuYuAdjYd = TRACE_STRUCT.traceYdAdjYuYuAdjYd;
    const double traceYdAdjYuTYuAdjYd = TRACE_STRUCT.traceYdAdjYuTYuAdjYd;
+   const double traceYeAdjYeYeAdjYe = TRACE_STRUCT.traceYeAdjYeYeAdjYe;
    const double traceYeAdjYeTYeAdjYe = TRACE_STRUCT.traceYeAdjYeTYeAdjYe;
    const double traceYuAdjYdTYdAdjYu = TRACE_STRUCT.traceYuAdjYdTYdAdjYu;
+   const double traceYuAdjYuYuAdjYu = TRACE_STRUCT.traceYuAdjYuYuAdjYu;
    const double traceYuAdjYuTYuAdjYu = TRACE_STRUCT.traceYuAdjYuTYuAdjYu;
 
 
    double beta_BMu;
 
-   beta_BMu = Re(0.02*twoLoop*(BMu*(207*Quad(g1) + 10*Sqr(g1)*(-2*traceYdAdjYd
-      + 6*traceYeAdjYe + 4*traceYuAdjYu + 9*Sqr(g2)) + 25*(15*Quad(g2) + 2*(-3*
-      (3*traceYdAdjYdYdAdjYd + 2*traceYdAdjYuYuAdjYd + traceYeAdjYeYeAdjYe + 3*
-      traceYuAdjYuYuAdjYu) + 16*(traceYdAdjYd + traceYuAdjYu)*Sqr(g3)))) - 4*Mu
-      *(207*MassB*Quad(g1) + 5*Sqr(g1)*(2*(traceAdjYdTYd - 3*traceAdjYeTYe - 2*
-      traceAdjYuTYu - MassB*traceYdAdjYd + 3*MassB*traceYeAdjYe + 2*MassB*
-      traceYuAdjYu) + 9*(MassB + MassWB)*Sqr(g2)) + 25*(15*MassWB*Quad(g2) + 2*
-      (3*(3*traceYdAdjYdTYdAdjYd + traceYdAdjYuTYuAdjYd + traceYeAdjYeTYeAdjYe
-      + traceYuAdjYdTYdAdjYu + 3*traceYuAdjYuTYuAdjYu) - 8*(traceAdjYdTYd +
-      traceAdjYuTYu - MassG*(traceYdAdjYd + traceYuAdjYu))*Sqr(g3))))));
+   beta_BMu = Re(0.02*twoLoop*(-450*traceYdAdjYdYdAdjYd*BMu - 300*
+      traceYdAdjYuYuAdjYd*BMu - 150*traceYeAdjYeYeAdjYe*BMu - 450*
+      traceYuAdjYuYuAdjYu*BMu - 1800*traceYdAdjYdTYdAdjYd*Mu - 600*
+      traceYdAdjYuTYuAdjYd*Mu - 600*traceYeAdjYeTYeAdjYe*Mu - 600*
+      traceYuAdjYdTYdAdjYu*Mu - 1800*traceYuAdjYuTYuAdjYu*Mu + 207*BMu*Quad(g1)
+      - 828*MassB*Mu*Quad(g1) + 375*BMu*Quad(g2) - 1500*MassWB*Mu*Quad(g2) - 20
+      *traceYdAdjYd*BMu*Sqr(g1) + 60*traceYeAdjYe*BMu*Sqr(g1) + 40*traceYuAdjYu
+      *BMu*Sqr(g1) - 40*traceAdjYdTYd*Mu*Sqr(g1) + 120*traceAdjYeTYe*Mu*Sqr(g1)
+      + 80*traceAdjYuTYu*Mu*Sqr(g1) + 40*MassB*traceYdAdjYd*Mu*Sqr(g1) - 120*
+      MassB*traceYeAdjYe*Mu*Sqr(g1) - 80*MassB*traceYuAdjYu*Mu*Sqr(g1) + 90*BMu
+      *Sqr(g1)*Sqr(g2) - 180*MassB*Mu*Sqr(g1)*Sqr(g2) - 180*MassWB*Mu*Sqr(g1)*
+      Sqr(g2) + 800*traceYdAdjYd*BMu*Sqr(g3) + 800*traceYuAdjYu*BMu*Sqr(g3) +
+      1600*traceAdjYdTYd*Mu*Sqr(g3) + 1600*traceAdjYuTYu*Mu*Sqr(g3) - 1600*
+      MassG*traceYdAdjYd*Mu*Sqr(g3) - 1600*MassG*traceYuAdjYu*Mu*Sqr(g3)));
 
 
    return beta_BMu;
@@ -137,38 +142,32 @@ double NUHMSSMNoFVHimalaya_soft_parameters::calc_beta_BMu_3_loop(const Soft_trac
 {
    DEFINE_PROJECTOR(3,3,3,3)
 
-   const double traceAdjYuYu = TRACE_STRUCT.traceAdjYuYu;
-   const double traceAdjYdYdAdjYdYd = TRACE_STRUCT.traceAdjYdYdAdjYdYd;
-   const double traceAdjYeYeAdjYeYe = TRACE_STRUCT.traceAdjYeYeAdjYeYe;
-   const double traceAdjYuYuAdjYdYd = TRACE_STRUCT.traceAdjYuYuAdjYdYd;
-   const double traceAdjYeYe = TRACE_STRUCT.traceAdjYeYe;
    const double traceAdjYdYd = TRACE_STRUCT.traceAdjYdYd;
-   const double traceAdjYuYuAdjYuYu = TRACE_STRUCT.traceAdjYuYuAdjYuYu;
-   const double traceAdjYdYdAdjYdYdAdjYdYd = TRACE_STRUCT.
-      traceAdjYdYdAdjYdYdAdjYdYd;
-   const double traceAdjYdYdAdjYuYuAdjYdYd = TRACE_STRUCT.
-      traceAdjYdYdAdjYuYuAdjYdYd;
-   const double traceAdjYeYeAdjYeYeAdjYeYe = TRACE_STRUCT.
-      traceAdjYeYeAdjYeYeAdjYeYe;
-   const double traceAdjYuYuAdjYuYuAdjYdYd = TRACE_STRUCT.
-      traceAdjYuYuAdjYuYuAdjYdYd;
-   const double traceAdjYuYuAdjYuYuAdjYuYu = TRACE_STRUCT.
-      traceAdjYuYuAdjYuYuAdjYuYu;
+   const double traceAdjYdTYd = TRACE_STRUCT.traceAdjYdTYd;
+   const double traceAdjYeYe = TRACE_STRUCT.traceAdjYeYe;
    const double traceAdjYeTYe = TRACE_STRUCT.traceAdjYeTYe;
+   const double traceAdjYuYu = TRACE_STRUCT.traceAdjYuYu;
    const double traceAdjYuTYu = TRACE_STRUCT.traceAdjYuTYu;
+   const double traceAdjYdYdAdjYdYd = TRACE_STRUCT.traceAdjYdYdAdjYdYd;
    const double traceAdjYdYdAdjYdTYd = TRACE_STRUCT.traceAdjYdYdAdjYdTYd;
    const double traceAdjYdTYdAdjYdYd = TRACE_STRUCT.traceAdjYdTYdAdjYdYd;
+   const double traceAdjYeYeAdjYeYe = TRACE_STRUCT.traceAdjYeYeAdjYeYe;
    const double traceAdjYeYeAdjYeTYe = TRACE_STRUCT.traceAdjYeYeAdjYeTYe;
    const double traceAdjYeTYeAdjYeYe = TRACE_STRUCT.traceAdjYeTYeAdjYeYe;
-   const double traceAdjYdTYd = TRACE_STRUCT.traceAdjYdTYd;
+   const double traceAdjYuYuAdjYdYd = TRACE_STRUCT.traceAdjYuYuAdjYdYd;
    const double traceAdjYuYuAdjYdTYd = TRACE_STRUCT.traceAdjYuYuAdjYdTYd;
+   const double traceAdjYuYuAdjYuYu = TRACE_STRUCT.traceAdjYuYuAdjYuYu;
    const double traceAdjYuYuAdjYuTYu = TRACE_STRUCT.traceAdjYuYuAdjYuTYu;
    const double traceAdjYuTYuAdjYdYd = TRACE_STRUCT.traceAdjYuTYuAdjYdYd;
    const double traceAdjYuTYuAdjYuYu = TRACE_STRUCT.traceAdjYuTYuAdjYuYu;
+   const double traceAdjYdYdAdjYdYdAdjYdYd = TRACE_STRUCT.
+      traceAdjYdYdAdjYdYdAdjYdYd;
    const double traceAdjYdYdAdjYdYdAdjYdTYd = TRACE_STRUCT.
       traceAdjYdYdAdjYdYdAdjYdTYd;
    const double traceAdjYdYdAdjYdTYdAdjYdYd = TRACE_STRUCT.
       traceAdjYdYdAdjYdTYdAdjYdYd;
+   const double traceAdjYdYdAdjYuYuAdjYdYd = TRACE_STRUCT.
+      traceAdjYdYdAdjYuYuAdjYdYd;
    const double traceAdjYdYdAdjYuYuAdjYdTYd = TRACE_STRUCT.
       traceAdjYdYdAdjYuYuAdjYdTYd;
    const double traceAdjYdYdAdjYuTYuAdjYdYd = TRACE_STRUCT.
@@ -177,14 +176,20 @@ double NUHMSSMNoFVHimalaya_soft_parameters::calc_beta_BMu_3_loop(const Soft_trac
       traceAdjYdTYdAdjYdYdAdjYdYd;
    const double traceAdjYdTYdAdjYuYuAdjYdYd = TRACE_STRUCT.
       traceAdjYdTYdAdjYuYuAdjYdYd;
+   const double traceAdjYeYeAdjYeYeAdjYeYe = TRACE_STRUCT.
+      traceAdjYeYeAdjYeYeAdjYeYe;
    const double traceAdjYeYeAdjYeYeAdjYeTYe = TRACE_STRUCT.
       traceAdjYeYeAdjYeYeAdjYeTYe;
    const double traceAdjYeYeAdjYeTYeAdjYeYe = TRACE_STRUCT.
       traceAdjYeYeAdjYeTYeAdjYeYe;
    const double traceAdjYeTYeAdjYeYeAdjYeYe = TRACE_STRUCT.
       traceAdjYeTYeAdjYeYeAdjYeYe;
+   const double traceAdjYuYuAdjYuYuAdjYdYd = TRACE_STRUCT.
+      traceAdjYuYuAdjYuYuAdjYdYd;
    const double traceAdjYuYuAdjYuYuAdjYdTYd = TRACE_STRUCT.
       traceAdjYuYuAdjYuYuAdjYdTYd;
+   const double traceAdjYuYuAdjYuYuAdjYuYu = TRACE_STRUCT.
+      traceAdjYuYuAdjYuYuAdjYuYu;
    const double traceAdjYuYuAdjYuYuAdjYuTYu = TRACE_STRUCT.
       traceAdjYuYuAdjYuYuAdjYuTYu;
    const double traceAdjYuYuAdjYuTYuAdjYdYd = TRACE_STRUCT.
@@ -199,109 +204,135 @@ double NUHMSSMNoFVHimalaya_soft_parameters::calc_beta_BMu_3_loop(const Soft_trac
 
    double beta_BMu;
 
-   const double beta_BMu_1 = Re(threeLoop*Mu*(49.27404851374539*
-      traceAdjYdTYdAdjYdYdAdjYdYd + 18.*traceAdjYdTYdAdjYuYuAdjYdYd + 108.*
-      traceAdjYdTYdAdjYdYd*traceAdjYdYd + 108.*traceAdjYdYd*
-      traceAdjYdYdAdjYdTYd + 49.27404851374539*traceAdjYdYdAdjYdTYdAdjYdYd +
-      108.*traceAdjYdTYd*traceAdjYdYdAdjYdYd + 49.27404851374539*
-      traceAdjYdYdAdjYdYdAdjYdTYd + 18.*traceAdjYdYdAdjYuTYuAdjYdYd + 18.*
-      traceAdjYdYdAdjYuYuAdjYdTYd + 36.*traceAdjYdYdAdjYdYd*traceAdjYeTYe + 36.
-      *traceAdjYdYd*traceAdjYeTYeAdjYeYe + 16.42468283791513*
-      traceAdjYeTYeAdjYeYeAdjYeYe + 36.*traceAdjYdTYdAdjYdYd*traceAdjYeYe + 36.
-      *traceAdjYdYdAdjYdTYd*traceAdjYeYe + 12.*traceAdjYeTYeAdjYeYe*
-      traceAdjYeYe + 36.*traceAdjYdYd*traceAdjYeYeAdjYeTYe + 12.*traceAdjYeYe*
-      traceAdjYeYeAdjYeTYe + 16.42468283791513*traceAdjYeYeAdjYeTYeAdjYeYe +
-      36.*traceAdjYdTYd*traceAdjYeYeAdjYeYe + 12.*traceAdjYeTYe*
-      traceAdjYeYeAdjYeYe + 16.42468283791513*traceAdjYeYeAdjYeYeAdjYeTYe + 36.
-      *traceAdjYdYd*traceAdjYuTYuAdjYdYd + 12.*traceAdjYeYe*
-      traceAdjYuTYuAdjYdYd + 18.*traceAdjYuTYuAdjYuYuAdjYdYd +
-      49.27404851374539*traceAdjYuTYuAdjYuYuAdjYuYu + 36.*traceAdjYuTYuAdjYdYd*
-      traceAdjYuYu + 108.*traceAdjYuTYuAdjYuYu*traceAdjYuYu + 36.*traceAdjYdYd*
-      traceAdjYuYuAdjYdTYd + 12.*traceAdjYeYe*traceAdjYuYuAdjYdTYd -
-      117.341572149176*MassB*Power6(g1) - 3306.887546971633*MassWB*Power6(g2) -
-      145.1324875677737*traceAdjYdTYd*Quad(g3) + 290.2649751355474*MassG*
-      traceAdjYdYd*Quad(g3) - 145.1324875677737*traceAdjYuTYu*Quad(g3) +
-      290.2649751355474*MassG*traceAdjYuYu*Quad(g3) - 202.19238810996313*
-      traceAdjYdTYdAdjYdYd*Sqr(g3) - 202.19238810996313*traceAdjYdYdAdjYdTYd*
-      Sqr(g3) + 202.19238810996313*MassG*traceAdjYdYdAdjYdYd*Sqr(g3) -
-      134.7949254066421*traceAdjYuTYuAdjYdYd*Sqr(g3) - 202.19238810996313*
-      traceAdjYuTYuAdjYuYu*Sqr(g3) - 134.7949254066421*traceAdjYuYuAdjYdTYd*Sqr
-      (g3) + Quad(g1)*(-37.069001928398215*traceAdjYdTYd + 74.13800385679643*
-      MassB*traceAdjYdYd - 61.80533563376292*traceAdjYeTYe + 123.61067126752584
-      *MassB*traceAdjYeYe - 81.69201461488161*traceAdjYuTYu +
-      163.38402922976323*MassB*traceAdjYuYu + (44.575972394845024*MassB +
-      22.287986197422512*MassWB)*Sqr(g2) + (46.72465076838378*MassB +
-      23.36232538419189*MassG)*Sqr(g3)) + Quad(g2)*(-384.6887546971633*
-      traceAdjYdTYd + 769.3775093943266*MassWB*traceAdjYdYd -
-      128.22958489905443*traceAdjYeTYe + 256.45916979810886*MassWB*traceAdjYeYe
-       - 384.6887546971633*traceAdjYuTYu + 769.3775093943266*MassWB*
-      traceAdjYuYu + (159.28858216494473*MassG + 318.57716432988946*MassWB)*Sqr
-      (g3)) + Sqr(g1)*(31.964429108247238*traceAdjYdTYdAdjYdYd +
-      31.964429108247238*traceAdjYdYdAdjYdTYd - 31.964429108247238*MassB*
-      traceAdjYdYdAdjYdYd - 7.964429108247239*traceAdjYeTYeAdjYeYe -
-      7.964429108247239*traceAdjYeYeAdjYeTYe + 7.964429108247239*MassB*
-      traceAdjYeYeAdjYeYe + 20.67949254066421*traceAdjYuTYuAdjYdYd +
-      14.145190297250922*traceAdjYuTYuAdjYuYu + 20.67949254066421*
-      traceAdjYuYuAdjYdTYd + (29.946643662370857*MassB + 59.89328732474171*
-      MassWB)*Quad(g2) + (-22.237024256872694*traceAdjYdTYd +
-      22.237024256872694*MassB*traceAdjYdYd + 22.237024256872694*MassWB*
-      traceAdjYdYd + 22.746643662370854*traceAdjYeTYe - 22.746643662370854*
-      MassB*traceAdjYeYe - 22.746643662370854*MassWB*traceAdjYeYe +
-      18.89183395962177*traceAdjYuTYu - 18.89183395962177*MassB*traceAdjYuYu -
-      18.89183395962177*MassWB*traceAdjYuYu)*Sqr(g2) + (15.98548259488315*
-      traceAdjYdTYd - 15.98548259488315*MassB*traceAdjYdYd - 15.98548259488315*
-      MassG*traceAdjYdYd + 17.34446767621158*traceAdjYuTYu - 17.34446767621158*
-      MassB*traceAdjYuYu - 17.34446767621158*MassG*traceAdjYuYu)*Sqr(g3)) + Sqr
-      (g2)*(147.82214554123618*traceAdjYdTYdAdjYdYd + 147.82214554123618*
-      traceAdjYdYdAdjYdTYd - 147.82214554123618*MassWB*traceAdjYdYdAdjYdYd +
-      49.27404851374539*traceAdjYeTYeAdjYeYe + 49.27404851374539*
-      traceAdjYeYeAdjYeTYe - 49.27404851374539*MassWB*traceAdjYeYeAdjYeYe + 72.
-      *traceAdjYuTYuAdjYdYd + 147.82214554123618*traceAdjYuTYuAdjYuYu + 72.*
-      traceAdjYuYuAdjYdTYd + (82.19238810996313*traceAdjYdTYd -
-      82.19238810996313*MassG*traceAdjYdYd - 82.19238810996313*MassWB*
-      traceAdjYdYd + 82.19238810996313*traceAdjYuTYu - 82.19238810996313*MassG*
-      traceAdjYuYu - 82.19238810996313*MassWB*traceAdjYuYu)*Sqr(g3))));
-   const double beta_BMu_2 = Re(threeLoop*(Mu*(36.*traceAdjYdTYd*
-      traceAdjYuYuAdjYdYd + 12.*traceAdjYeTYe*traceAdjYuYuAdjYdYd + 36.*
-      traceAdjYuTYu*traceAdjYuYuAdjYdYd + traceAdjYuYu*(36.*
-      traceAdjYuYuAdjYdTYd + 108.*traceAdjYuYuAdjYuTYu) + 18.*
-      traceAdjYuYuAdjYuTYuAdjYdYd + 49.27404851374539*
-      traceAdjYuYuAdjYuTYuAdjYuYu + 108.*traceAdjYuTYu*traceAdjYuYuAdjYuYu +
-      18.*traceAdjYuYuAdjYuYuAdjYdTYd + 49.27404851374539*
-      traceAdjYuYuAdjYuYuAdjYuTYu + (-20.67949254066421*MassB*
-      traceAdjYuYuAdjYdYd + 14.145190297250922*traceAdjYuYuAdjYuTYu -
-      14.145190297250922*MassB*traceAdjYuYuAdjYuYu)*Sqr(g1) - 72.*MassWB*
-      traceAdjYuYuAdjYdYd*Sqr(g2) + 147.82214554123618*traceAdjYuYuAdjYuTYu*Sqr
-      (g2) - 147.82214554123618*MassWB*traceAdjYuYuAdjYuYu*Sqr(g2) +
-      134.7949254066421*MassG*traceAdjYuYuAdjYdYd*Sqr(g3) - 202.19238810996313*
-      traceAdjYuYuAdjYuTYu*Sqr(g3) + 202.19238810996313*MassG*
-      traceAdjYuYuAdjYuYu*Sqr(g3)) + BMu*(54*traceAdjYdYd*traceAdjYdYdAdjYdYd +
-      24.637024256872696*traceAdjYdYdAdjYdYdAdjYdYd + 9*
-      traceAdjYdYdAdjYuYuAdjYdYd + 18*traceAdjYdYdAdjYdYd*traceAdjYeYe + 18*
-      traceAdjYdYd*traceAdjYeYeAdjYeYe + 6*traceAdjYeYe*traceAdjYeYeAdjYeYe +
-      8.212341418957566*traceAdjYeYeAdjYeYeAdjYeYe + 18*traceAdjYdYd*
-      traceAdjYuYuAdjYdYd + 6*traceAdjYeYe*traceAdjYuYuAdjYdYd + 18*
-      traceAdjYuYu*traceAdjYuYuAdjYdYd + 54*traceAdjYuYu*traceAdjYuYuAdjYuYu +
-      9*traceAdjYuYuAdjYuYuAdjYdYd + 24.637024256872696*
-      traceAdjYuYuAdjYuYuAdjYuYu + 19.556928691529336*Power6(g1) +
-      551.1479244952723*Power6(g2) - 72.56624378388685*traceAdjYdYd*Quad(g3) -
-      72.56624378388685*traceAdjYuYu*Quad(g3) + Quad(g2)*(-192.34437734858165*
-      traceAdjYdYd - 64.11479244952722*traceAdjYeYe - 192.34437734858165*
-      traceAdjYuYu - 79.64429108247236*Sqr(g3)) + Quad(g1)*(-18.534500964199108
-      *traceAdjYdYd - 30.902667816881458*traceAdjYeYe - 40.84600730744081*
-      traceAdjYuYu - 11.143993098711256*Sqr(g2) - 11.681162692095945*Sqr(g3)) -
-      101.09619405498157*traceAdjYdYdAdjYdYd*Sqr(g3) - 67.39746270332105*
-      traceAdjYuYuAdjYdYd*Sqr(g3) - 101.09619405498157*traceAdjYuYuAdjYuYu*Sqr(
-      g3) + Sqr(g1)*(15.982214554123619*traceAdjYdYdAdjYdYd - 3.982214554123619
-      *traceAdjYeYeAdjYeYe + 10.339746270332105*traceAdjYuYuAdjYdYd +
-      7.072595148625461*traceAdjYuYuAdjYuYu - 14.973321831185427*Quad(g2) + (-
-      11.118512128436349*traceAdjYdYd + 11.373321831185427*traceAdjYeYe +
-      9.445916979810885*traceAdjYuYu)*Sqr(g2) + (7.992741297441576*traceAdjYdYd
-       + 8.67223383810579*traceAdjYuYu)*Sqr(g3)) + Sqr(g2)*(73.91107277061809*
-      traceAdjYdYdAdjYdYd + 24.637024256872696*traceAdjYeYeAdjYeYe + 36*
-      traceAdjYuYuAdjYdYd + 73.91107277061809*traceAdjYuYuAdjYuYu + (
-      41.09619405498157*traceAdjYdYd + 41.09619405498157*traceAdjYuYu)*Sqr(g3))
-      )));
+   const double beta_BMu_1 = Re(-117.341572149176*threeLoop*(-
+      0.4199197915219974*traceAdjYdTYdAdjYdYdAdjYdYd*Mu - 0.15339831971159082*
+      traceAdjYdTYdAdjYuYuAdjYdYd*Mu - 0.9203899182695449*traceAdjYdTYdAdjYdYd*
+      traceAdjYdYd*Mu - 0.9203899182695449*traceAdjYdYd*traceAdjYdYdAdjYdTYd*Mu
+       - 0.4199197915219974*traceAdjYdYdAdjYdTYdAdjYdYd*Mu - 0.9203899182695449
+      *traceAdjYdTYd*traceAdjYdYdAdjYdYd*Mu - 0.4199197915219974*
+      traceAdjYdYdAdjYdYdAdjYdTYd*Mu - 0.15339831971159082*
+      traceAdjYdYdAdjYuTYuAdjYdYd*Mu - 0.15339831971159082*
+      traceAdjYdYdAdjYuYuAdjYdTYd*Mu - 0.30679663942318164*traceAdjYdYdAdjYdYd*
+      traceAdjYeTYe*Mu - 0.30679663942318164*traceAdjYdYd*traceAdjYeTYeAdjYeYe*
+      Mu - 0.13997326384066577*traceAdjYeTYeAdjYeYeAdjYeYe*Mu -
+      0.30679663942318164*traceAdjYdTYdAdjYdYd*traceAdjYeYe*Mu -
+      0.30679663942318164*traceAdjYdYdAdjYdTYd*traceAdjYeYe*Mu -
+      0.10226554647439387*traceAdjYeTYeAdjYeYe*traceAdjYeYe*Mu -
+      0.30679663942318164*traceAdjYdYd*traceAdjYeYeAdjYeTYe*Mu -
+      0.10226554647439387*traceAdjYeYe*traceAdjYeYeAdjYeTYe*Mu -
+      0.13997326384066577*traceAdjYeYeAdjYeTYeAdjYeYe*Mu - 0.30679663942318164*
+      traceAdjYdTYd*traceAdjYeYeAdjYeYe*Mu - 0.10226554647439387*traceAdjYeTYe*
+      traceAdjYeYeAdjYeYe*Mu - 0.13997326384066577*traceAdjYeYeAdjYeYeAdjYeTYe*
+      Mu - 0.30679663942318164*traceAdjYdYd*traceAdjYuTYuAdjYdYd*Mu -
+      0.10226554647439387*traceAdjYeYe*traceAdjYuTYuAdjYdYd*Mu -
+      0.15339831971159082*traceAdjYuTYuAdjYuYuAdjYdYd*Mu - 0.4199197915219974*
+      traceAdjYuTYuAdjYuYuAdjYuYu*Mu - 0.30679663942318164*traceAdjYuTYuAdjYdYd
+      *traceAdjYuYu*Mu - 0.9203899182695449*traceAdjYuTYuAdjYuYu*traceAdjYuYu*
+      Mu - 0.30679663942318164*traceAdjYdYd*traceAdjYuYuAdjYdTYd*Mu -
+      0.10226554647439387*traceAdjYeYe*traceAdjYuYuAdjYdTYd*Mu + 1.*MassB*Mu*
+      Power6(g1) + 28.181721843368493*MassWB*Mu*Power6(g2) +
+      0.31590681162233364*traceAdjYdTYd*Mu*Quad(g1) - 0.6318136232446673*MassB*
+      traceAdjYdYd*Mu*Quad(g1) + 0.5267130353016745*traceAdjYeTYe*Mu*Quad(g1) -
+      1.053426070603349*MassB*traceAdjYeYe*Mu*Quad(g1) + 0.6961898764320866*
+      traceAdjYuTYu*Mu*Quad(g1) - 1.3923797528641733*MassB*traceAdjYuYu*Mu*Quad
+      (g1) + 3.2783671434716215*traceAdjYdTYd*Mu*Quad(g2) - 6.556734286943243*
+      MassWB*traceAdjYdYd*Mu*Quad(g2) + 1.0927890478238738*traceAdjYeTYe*Mu*
+      Quad(g2) - 2.1855780956477475*MassWB*traceAdjYeYe*Mu*Quad(g2) +
+      3.2783671434716215*traceAdjYuTYu*Mu*Quad(g2) - 6.556734286943243*MassWB*
+      traceAdjYuYu*Mu*Quad(g2) + 1.2368377626922127*traceAdjYdTYd*Mu*Quad(g3) -
+      2.4736755253844254*MassG*traceAdjYdYd*Mu*Quad(g3) + 1.2368377626922127*
+      traceAdjYuTYu*Mu*Quad(g3) - 2.4736755253844254*MassG*traceAdjYuYu*Mu*Quad
+      (g3) - 0.27240498420807713*traceAdjYdTYdAdjYdYd*Mu*Sqr(g1) -
+      0.27240498420807713*traceAdjYdYdAdjYdTYd*Mu*Sqr(g1) + 0.27240498420807713
+      *MassB*traceAdjYdYdAdjYdYd*Mu*Sqr(g1) + 0.06787389125928944*
+      traceAdjYeTYeAdjYeYe*Mu*Sqr(g1) + 0.06787389125928944*
+      traceAdjYeYeAdjYeTYe*Mu*Sqr(g1) - 0.06787389125928944*MassB*
+      traceAdjYeYeAdjYeYe*Mu*Sqr(g1) - 0.1762333004570148*traceAdjYuTYuAdjYdYd*
+      Mu*Sqr(g1) - 0.12054713464438828*traceAdjYuTYuAdjYuYu*Mu*Sqr(g1) -
+      0.1762333004570148*traceAdjYuYuAdjYdTYd*Mu*Sqr(g1) - 0.25520915660052496*
+      MassB*Mu*Quad(g2)*Sqr(g1) - 0.5104183132010499*MassWB*Mu*Quad(g2)*Sqr(g1)
+      - 1.2597593745659919*traceAdjYdTYdAdjYdYd*Mu*Sqr(g2) - 1.2597593745659919
+      *traceAdjYdYdAdjYdTYd*Mu*Sqr(g2) + 1.2597593745659919*MassWB*
+      traceAdjYdYdAdjYdYd*Mu*Sqr(g2) - 0.4199197915219974*traceAdjYeTYeAdjYeYe*
+      Mu*Sqr(g2) - 0.4199197915219974*traceAdjYeYeAdjYeTYe*Mu*Sqr(g2) +
+      0.4199197915219974*MassWB*traceAdjYeYeAdjYeYe*Mu*Sqr(g2) -
+      0.6135932788463633*traceAdjYuTYuAdjYdYd*Mu*Sqr(g2) - 1.2597593745659919*
+      traceAdjYuTYuAdjYuYu*Mu*Sqr(g2) - 0.6135932788463633*traceAdjYuYuAdjYdTYd
+      *Mu*Sqr(g2) - 0.3798821813821935*MassB*Mu*Quad(g1)*Sqr(g2) -
+      0.18994109069109674*MassWB*Mu*Quad(g1)*Sqr(g2) + 0.18950678646611985*
+      traceAdjYdTYd*Mu*Sqr(g1)*Sqr(g2) - 0.18950678646611985*MassB*traceAdjYdYd
+      *Mu*Sqr(g1)*Sqr(g2) - 0.18950678646611985*MassWB*traceAdjYdYd*Mu*Sqr(g1)*
+      Sqr(g2) - 0.19384982871588863*traceAdjYeTYe*Mu*Sqr(g1)*Sqr(g2) +
+      0.19384982871588863*MassB*traceAdjYeYe*Mu*Sqr(g1)*Sqr(g2) +
+      0.19384982871588863*MassWB*traceAdjYeYe*Mu*Sqr(g1)*Sqr(g2) -
+      0.16099864364868605*traceAdjYuTYu*Mu*Sqr(g1)*Sqr(g2) +
+      0.16099864364868605*MassB*traceAdjYuYu*Mu*Sqr(g1)*Sqr(g2) +
+      0.16099864364868605*MassWB*traceAdjYuYu*Mu*Sqr(g1)*Sqr(g2) +
+      1.7231095885856764*traceAdjYdTYdAdjYdYd*Mu*Sqr(g3) + 1.7231095885856764*
+      traceAdjYdYdAdjYdTYd*Mu*Sqr(g3) - 1.7231095885856764*MassG*
+      traceAdjYdYdAdjYdYd*Mu*Sqr(g3) + 1.1487397257237846*traceAdjYuTYuAdjYdYd*
+      Mu*Sqr(g3) + 1.7231095885856764*traceAdjYuTYuAdjYuYu*Mu*Sqr(g3) +
+      1.1487397257237846*traceAdjYuYuAdjYdTYd*Mu*Sqr(g3) - 0.3981934953878312*
+      MassB*Mu*Quad(g1)*Sqr(g3) - 0.1990967476939156*MassG*Mu*Quad(g1)*Sqr(g3)
+      - 1.3574778251857884*MassG*Mu*Quad(g2)*Sqr(g3) - 2.714955650371577*MassWB
+      *Mu*Quad(g2)*Sqr(g3) - 0.13623034276855311*traceAdjYdTYd*Mu*Sqr(g1)*Sqr(
+      g3) + 0.13623034276855311*MassB*traceAdjYdYd*Mu*Sqr(g1)*Sqr(g3) +
+      0.13623034276855311*MassG*traceAdjYdYd*Mu*Sqr(g1)*Sqr(g3) -
+      0.14781178876793646*traceAdjYuTYu*Mu*Sqr(g1)*Sqr(g3) +
+      0.14781178876793646*MassB*traceAdjYuYu*Mu*Sqr(g1)*Sqr(g3) +
+      0.14781178876793646*MassG*traceAdjYuYu*Mu*Sqr(g1)*Sqr(g3) -
+      0.7004541238417379*traceAdjYdTYd*Mu*Sqr(g2)*Sqr(g3) + 0.7004541238417379*
+      MassG*traceAdjYdYd*Mu*Sqr(g2)*Sqr(g3) + 0.7004541238417379*MassWB*
+      traceAdjYdYd*Mu*Sqr(g2)*Sqr(g3) - 0.7004541238417379*traceAdjYuTYu*Mu*Sqr
+      (g2)*Sqr(g3) + 0.7004541238417379*MassG*traceAdjYuYu*Mu*Sqr(g2)*Sqr(g3) +
+      0.7004541238417379*MassWB*traceAdjYuYu*Mu*Sqr(g2)*Sqr(g3)));
+   const double beta_BMu_2 = Re(36.*threeLoop*(1.5*traceAdjYdYd*
+      traceAdjYdYdAdjYdYd*BMu + 0.6843617849131305*traceAdjYdYdAdjYdYdAdjYdYd*
+      BMu + 0.25*traceAdjYdYdAdjYuYuAdjYdYd*BMu + 0.5*traceAdjYdYdAdjYdYd*
+      traceAdjYeYe*BMu + 0.5*traceAdjYdYd*traceAdjYeYeAdjYeYe*BMu +
+      0.16666666666666666*traceAdjYeYe*traceAdjYeYeAdjYeYe*BMu +
+      0.2281205949710435*traceAdjYeYeAdjYeYeAdjYeYe*BMu + 0.5*traceAdjYdYd*
+      traceAdjYuYuAdjYdYd*BMu + 0.16666666666666666*traceAdjYeYe*
+      traceAdjYuYuAdjYdYd*BMu + 0.5*traceAdjYuYu*traceAdjYuYuAdjYdYd*BMu + 1.5*
+      traceAdjYuYu*traceAdjYuYuAdjYuYu*BMu + 0.25*traceAdjYuYuAdjYuYuAdjYdYd*
+      BMu + 0.6843617849131305*traceAdjYuYuAdjYuYuAdjYuYu*BMu + 1.*traceAdjYuYu
+      *traceAdjYuYuAdjYdTYd*Mu + 1.*traceAdjYdTYd*traceAdjYuYuAdjYdYd*Mu +
+      0.3333333333333333*traceAdjYeTYe*traceAdjYuYuAdjYdYd*Mu + 1.*
+      traceAdjYuTYu*traceAdjYuYuAdjYdYd*Mu + 3.*traceAdjYuYu*
+      traceAdjYuYuAdjYuTYu*Mu + 0.5*traceAdjYuYuAdjYuTYuAdjYdYd*Mu +
+      1.368723569826261*traceAdjYuYuAdjYuTYuAdjYuYu*Mu + 3.*traceAdjYuTYu*
+      traceAdjYuYuAdjYuYu*Mu + 0.5*traceAdjYuYuAdjYuYuAdjYdTYd*Mu +
+      1.368723569826261*traceAdjYuYuAdjYuYuAdjYuTYu*Mu + 0.5432480192091482*BMu
+      *Power6(g1) + 15.309664569313119*BMu*Power6(g2) - 0.5148472490055308*
+      traceAdjYdYd*BMu*Quad(g1) - 0.8584074393578184*traceAdjYeYe*BMu*Quad(g1)
+      - 1.134611314095578*traceAdjYuYu*BMu*Quad(g1) - 5.342899370793934*
+      traceAdjYdYd*BMu*Quad(g2) - 1.7809664569313115*traceAdjYeYe*BMu*Quad(g2)
+      - 5.342899370793934*traceAdjYuYu*BMu*Quad(g2) - 2.015728993996857*
+      traceAdjYdYd*BMu*Quad(g3) - 2.015728993996857*traceAdjYuYu*BMu*Quad(g3) +
+      0.4439504042812115*traceAdjYdYdAdjYdYd*BMu*Sqr(g1) - 0.11061707094787832*
+      traceAdjYeYeAdjYeYe*BMu*Sqr(g1) + 0.2872151741758919*traceAdjYuYuAdjYdYd*
+      BMu*Sqr(g1) + 0.19646097635070725*traceAdjYuYuAdjYuYu*BMu*Sqr(g1) -
+      0.5744303483517837*MassB*traceAdjYuYuAdjYdYd*Mu*Sqr(g1) +
+      0.3929219527014145*traceAdjYuYuAdjYuTYu*Mu*Sqr(g1) - 0.3929219527014145*
+      MassB*traceAdjYuYuAdjYuYu*Mu*Sqr(g1) - 0.4159256064218175*BMu*Quad(g2)*
+      Sqr(g1) + 2.0530853547393915*traceAdjYdYdAdjYdYd*BMu*Sqr(g2) +
+      0.6843617849131305*traceAdjYeYeAdjYeYe*BMu*Sqr(g2) + 1.*
+      traceAdjYuYuAdjYdYd*BMu*Sqr(g2) + 2.0530853547393915*traceAdjYuYuAdjYuYu*
+      BMu*Sqr(g2) - 2.*MassWB*traceAdjYuYuAdjYdYd*Mu*Sqr(g2) +
+      4.106170709478783*traceAdjYuYuAdjYuTYu*Mu*Sqr(g2) - 4.106170709478783*
+      MassWB*traceAdjYuYuAdjYuYu*Mu*Sqr(g2) - 0.30955536385309046*BMu*Quad(g1)*
+      Sqr(g2) - 0.30884755912323186*traceAdjYdYd*BMu*Sqr(g1)*Sqr(g2) +
+      0.31592560642181744*traceAdjYeYe*BMu*Sqr(g1)*Sqr(g2) + 0.2623865827725246
+      *traceAdjYuYu*BMu*Sqr(g1)*Sqr(g2) - 2.808227612638377*traceAdjYdYdAdjYdYd
+      *BMu*Sqr(g3) - 1.8721517417589182*traceAdjYuYuAdjYdYd*BMu*Sqr(g3) -
+      2.808227612638377*traceAdjYuYuAdjYuYu*BMu*Sqr(g3) + 3.7443034835178364*
+      MassG*traceAdjYuYuAdjYdYd*Mu*Sqr(g3) - 5.616455225276754*
+      traceAdjYuYuAdjYuTYu*Mu*Sqr(g3) + 5.616455225276754*MassG*
+      traceAdjYuYuAdjYuYu*Mu*Sqr(g3) - 0.3244767414471096*BMu*Quad(g1)*Sqr(g3)
+      - 2.212341418957566*BMu*Quad(g2)*Sqr(g3) + 0.22202059159559934*
+      traceAdjYdYd*BMu*Sqr(g1)*Sqr(g3) + 0.24089538439182748*traceAdjYuYu*BMu*
+      Sqr(g1)*Sqr(g3) + 1.1415609459717104*traceAdjYdYd*BMu*Sqr(g2)*Sqr(g3) +
+      1.1415609459717104*traceAdjYuYu*BMu*Sqr(g2)*Sqr(g3)));
 
    beta_BMu = beta_BMu_1 + beta_BMu_2;
 
@@ -315,6 +346,25 @@ double NUHMSSMNoFVHimalaya_soft_parameters::calc_beta_BMu_3_loop(const Soft_trac
  * @return 4-loop beta function
  */
 double NUHMSSMNoFVHimalaya_soft_parameters::calc_beta_BMu_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_BMu;
+
+   beta_BMu = 0;
+
+
+   return beta_BMu;
+}
+
+/**
+ * Calculates the 5-loop beta function of BMu.
+ *
+ * @return 5-loop beta function
+ */
+double NUHMSSMNoFVHimalaya_soft_parameters::calc_beta_BMu_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

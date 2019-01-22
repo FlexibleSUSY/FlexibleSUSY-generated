@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:23:43
+// File generated at Tue 22 Jan 2019 17:29:34
 
 #include "UMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -118,26 +118,34 @@ double UMSSM_soft_parameters::calc_beta_MassU_2_loop(const Soft_traces& soft_tra
 
    double beta_MassU;
 
-   beta_MassU = Re(0.8*twoLoop*Sqr(gp)*(3*(MassB + MassU)*Sqr(g1)*(2*Sqr(Qd) +
-      6*Sqr(Qe) + Sqr(QHd) + Sqr(QHu) + 3*Sqr(Ql) + Sqr(Qq) + 8*Sqr(Qu)) + 5*(4
-      *MassU*(9*Quad(Qd) + 3*Quad(Qe) + 2*Quad(QHd) + 2*Quad(QHu) + 6*Quad(Ql)
-      + 18*Quad(Qq) + Quad(Qs) + 9*Quad(Qu) + 3*Quad(Qv))*Sqr(gp) + 6*
-      traceAdjYdTYd*Sqr(Qd) - 6*MassU*traceYdAdjYd*Sqr(Qd) + 2*traceAdjYeTYe*
-      Sqr(Qe) - 2*MassU*traceYeAdjYe*Sqr(Qe) + 6*traceAdjYdTYd*Sqr(QHd) + 2*
-      traceAdjYeTYe*Sqr(QHd) - 6*MassU*traceYdAdjYd*Sqr(QHd) - 2*MassU*
-      traceYeAdjYe*Sqr(QHd) + 3*MassU*Sqr(g2)*Sqr(QHd) + 3*MassWB*Sqr(g2)*Sqr(
-      QHd) + 6*traceAdjYuTYu*Sqr(QHu) + 2*traceAdjYvTYv*Sqr(QHu) - 6*MassU*
-      traceYuAdjYu*Sqr(QHu) - 2*MassU*traceYvAdjYv*Sqr(QHu) + 3*MassU*Sqr(g2)*
-      Sqr(QHu) + 3*MassWB*Sqr(g2)*Sqr(QHu) + 2*traceAdjYeTYe*Sqr(Ql) + 2*
-      traceAdjYvTYv*Sqr(Ql) - 2*MassU*traceYeAdjYe*Sqr(Ql) - 2*MassU*
-      traceYvAdjYv*Sqr(Ql) + 9*MassU*Sqr(g2)*Sqr(Ql) + 9*MassWB*Sqr(g2)*Sqr(Ql)
-      + 6*traceAdjYdTYd*Sqr(Qq) + 6*traceAdjYuTYu*Sqr(Qq) - 6*MassU*
-      traceYdAdjYd*Sqr(Qq) - 6*MassU*traceYuAdjYu*Sqr(Qq) + 27*MassU*Sqr(g2)*
-      Sqr(Qq) + 27*MassWB*Sqr(g2)*Sqr(Qq) + 6*traceAdjYuTYu*Sqr(Qu) - 6*MassU*
-      traceYuAdjYu*Sqr(Qu) + 24*(MassG + MassU)*Sqr(g3)*(Sqr(Qd) + 2*Sqr(Qq) +
-      Sqr(Qu)) + 2*traceAdjYvTYv*Sqr(Qv) - 2*MassU*traceYvAdjYv*Sqr(Qv)) - 10*
-      Conj(Lambdax)*(Sqr(QHd) + Sqr(QHu) + Sqr(Qs))*(MassU*Lambdax - TLambdax))
-      );
+   beta_MassU = Re(0.8*twoLoop*Sqr(gp)*(180*MassU*Quad(Qd)*Sqr(gp) + 60*MassU*
+      Quad(Qe)*Sqr(gp) + 40*MassU*Quad(QHd)*Sqr(gp) + 40*MassU*Quad(QHu)*Sqr(gp
+      ) + 120*MassU*Quad(Ql)*Sqr(gp) + 360*MassU*Quad(Qq)*Sqr(gp) + 20*MassU*
+      Quad(Qs)*Sqr(gp) + 180*MassU*Quad(Qu)*Sqr(gp) + 60*MassU*Quad(Qv)*Sqr(gp)
+      + 30*traceAdjYdTYd*Sqr(Qd) - 30*MassU*traceYdAdjYd*Sqr(Qd) + 6*MassB*Sqr(
+      g1)*Sqr(Qd) + 6*MassU*Sqr(g1)*Sqr(Qd) + 120*MassG*Sqr(g3)*Sqr(Qd) + 120*
+      MassU*Sqr(g3)*Sqr(Qd) + 10*traceAdjYeTYe*Sqr(Qe) - 10*MassU*traceYeAdjYe*
+      Sqr(Qe) + 18*MassB*Sqr(g1)*Sqr(Qe) + 18*MassU*Sqr(g1)*Sqr(Qe) + 30*
+      traceAdjYdTYd*Sqr(QHd) + 10*traceAdjYeTYe*Sqr(QHd) - 30*MassU*
+      traceYdAdjYd*Sqr(QHd) - 10*MassU*traceYeAdjYe*Sqr(QHd) - 10*MassU*AbsSqr(
+      Lambdax)*Sqr(QHd) + 3*MassB*Sqr(g1)*Sqr(QHd) + 3*MassU*Sqr(g1)*Sqr(QHd) +
+      15*MassU*Sqr(g2)*Sqr(QHd) + 15*MassWB*Sqr(g2)*Sqr(QHd) + 30*traceAdjYuTYu
+      *Sqr(QHu) + 10*traceAdjYvTYv*Sqr(QHu) - 30*MassU*traceYuAdjYu*Sqr(QHu) -
+      10*MassU*traceYvAdjYv*Sqr(QHu) - 10*MassU*AbsSqr(Lambdax)*Sqr(QHu) + 3*
+      MassB*Sqr(g1)*Sqr(QHu) + 3*MassU*Sqr(g1)*Sqr(QHu) + 15*MassU*Sqr(g2)*Sqr(
+      QHu) + 15*MassWB*Sqr(g2)*Sqr(QHu) + 10*traceAdjYeTYe*Sqr(Ql) + 10*
+      traceAdjYvTYv*Sqr(Ql) - 10*MassU*traceYeAdjYe*Sqr(Ql) - 10*MassU*
+      traceYvAdjYv*Sqr(Ql) + 9*MassB*Sqr(g1)*Sqr(Ql) + 9*MassU*Sqr(g1)*Sqr(Ql)
+      + 45*MassU*Sqr(g2)*Sqr(Ql) + 45*MassWB*Sqr(g2)*Sqr(Ql) + 30*traceAdjYdTYd
+      *Sqr(Qq) + 30*traceAdjYuTYu*Sqr(Qq) - 30*MassU*traceYdAdjYd*Sqr(Qq) - 30*
+      MassU*traceYuAdjYu*Sqr(Qq) + 3*MassB*Sqr(g1)*Sqr(Qq) + 3*MassU*Sqr(g1)*
+      Sqr(Qq) + 135*MassU*Sqr(g2)*Sqr(Qq) + 135*MassWB*Sqr(g2)*Sqr(Qq) + 240*
+      MassG*Sqr(g3)*Sqr(Qq) + 240*MassU*Sqr(g3)*Sqr(Qq) - 10*MassU*AbsSqr(
+      Lambdax)*Sqr(Qs) + 30*traceAdjYuTYu*Sqr(Qu) - 30*MassU*traceYuAdjYu*Sqr(
+      Qu) + 24*MassB*Sqr(g1)*Sqr(Qu) + 24*MassU*Sqr(g1)*Sqr(Qu) + 120*MassG*Sqr
+      (g3)*Sqr(Qu) + 120*MassU*Sqr(g3)*Sqr(Qu) + 10*traceAdjYvTYv*Sqr(Qv) - 10*
+      MassU*traceYvAdjYv*Sqr(Qv) + 10*Conj(Lambdax)*Sqr(QHd)*TLambdax + 10*Conj
+      (Lambdax)*Sqr(QHu)*TLambdax + 10*Conj(Lambdax)*Sqr(Qs)*TLambdax));
 
 
    return beta_MassU;
@@ -168,6 +176,25 @@ double UMSSM_soft_parameters::calc_beta_MassU_3_loop(const Soft_traces& soft_tra
  * @return 4-loop beta function
  */
 double UMSSM_soft_parameters::calc_beta_MassU_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MassU;
+
+   beta_MassU = 0;
+
+
+   return beta_MassU;
+}
+
+/**
+ * Calculates the 5-loop beta function of MassU.
+ *
+ * @return 5-loop beta function
+ */
+double UMSSM_soft_parameters::calc_beta_MassU_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

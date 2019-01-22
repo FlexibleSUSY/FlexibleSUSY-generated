@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 13:46:25
+// File generated at Tue 22 Jan 2019 14:18:59
 
 #include "CE6SSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -89,6 +89,25 @@ double CE6SSM_susy_parameters::calc_beta_g3_3_loop(const Susy_traces& susy_trace
  * @return 4-loop beta function
  */
 double CE6SSM_susy_parameters::calc_beta_g3_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_g3;
+
+   beta_g3 = 0;
+
+
+   return beta_g3;
+}
+
+/**
+ * Calculates the 5-loop beta function of g3.
+ *
+ * @return 5-loop beta function
+ */
+double CE6SSM_susy_parameters::calc_beta_g3_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

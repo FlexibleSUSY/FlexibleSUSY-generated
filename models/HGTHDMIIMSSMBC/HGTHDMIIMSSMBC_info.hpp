@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:07:31
+// File generated at Tue 22 Jan 2019 16:27:06
 
 #ifndef HGTHDMIIMSSMBC_INFO_H
 #define HGTHDMIIMSSMBC_INFO_H

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:43:58
+// File generated at Tue 22 Jan 2019 16:52:23
 
 #include "MRSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -75,9 +75,9 @@ double MRSSM_soft_parameters::calc_beta_BMuD_1_loop(const Soft_traces& soft_trac
 
    double beta_BMuD;
 
-   beta_BMuD = Re(oneOver16PiSqr*(4*LamSD*BMuU*Conj(LamSU) + BMuD*(3*
-      traceYdAdjYd + traceYeAdjYe + 6*AbsSqr(LamSD) + 3*AbsSqr(LamTD) - 0.6*Sqr
-      (g1) - 3*Sqr(g2))));
+   beta_BMuD = Re(0.2*oneOver16PiSqr*(15*traceYdAdjYd*BMuD + 5*traceYeAdjYe*
+      BMuD + 30*AbsSqr(LamSD)*BMuD + 15*AbsSqr(LamTD)*BMuD + 20*LamSD*BMuU*Conj
+      (LamSU) - 3*BMuD*Sqr(g1) - 15*BMuD*Sqr(g2)));
 
 
    return beta_BMuD;
@@ -90,9 +90,9 @@ double MRSSM_soft_parameters::calc_beta_BMuD_1_loop(const Soft_traces& soft_trac
  */
 double MRSSM_soft_parameters::calc_beta_BMuD_2_loop(const Soft_traces& soft_traces) const
 {
-   const double traceYuAdjYu = TRACE_STRUCT.traceYuAdjYu;
    const double traceYdAdjYd = TRACE_STRUCT.traceYdAdjYd;
    const double traceYeAdjYe = TRACE_STRUCT.traceYeAdjYe;
+   const double traceYuAdjYu = TRACE_STRUCT.traceYuAdjYu;
    const double traceYdAdjYdYdAdjYd = TRACE_STRUCT.traceYdAdjYdYdAdjYd;
    const double traceYdAdjYuYuAdjYd = TRACE_STRUCT.traceYdAdjYuYuAdjYd;
    const double traceYeAdjYeYeAdjYe = TRACE_STRUCT.traceYeAdjYeYeAdjYe;
@@ -100,15 +100,20 @@ double MRSSM_soft_parameters::calc_beta_BMuD_2_loop(const Soft_traces& soft_trac
 
    double beta_BMuD;
 
-   beta_BMuD = Re(0.1*twoLoop*(-8*LamSD*BMuU*Conj(LamSU)*(15*traceYuAdjYu + 10*
-      AbsSqr(LamSU) + 15*AbsSqr(LamTU) - 9*Sqr(g1) - 45*Sqr(g2)) + BMuD*(-90*
-      traceYdAdjYdYdAdjYd - 30*traceYdAdjYuYuAdjYd - 30*traceYeAdjYeYeAdjYe +
-      45*Quad(g1) + 165*Quad(g2) - 4*traceYdAdjYd*Sqr(g1) + 12*traceYeAdjYe*Sqr
-      (g1) + 18*Sqr(g1)*Sqr(g2) + 15*AbsSqr(LamTD)*(-3*traceYdAdjYd -
-      traceYeAdjYe - 2*AbsSqr(LamTU) + 8*Sqr(g2)) + 2*AbsSqr(LamSD)*(-75*
-      traceYdAdjYd - 25*traceYeAdjYe - 20*AbsSqr(LamSU) - 90*AbsSqr(LamTD) + 36
-      *Sqr(g1) + 180*Sqr(g2)) + 160*traceYdAdjYd*Sqr(g3) - 140*Sqr(LamSD)*Sqr(
-      Conj(LamSD)) - 75*Sqr(LamTD)*Sqr(Conj(LamTD)))));
+   beta_BMuD = Re(0.1*twoLoop*(-90*traceYdAdjYdYdAdjYd*BMuD - 30*
+      traceYdAdjYuYuAdjYd*BMuD - 30*traceYeAdjYeYeAdjYe*BMuD - 150*traceYdAdjYd
+      *AbsSqr(LamSD)*BMuD - 50*traceYeAdjYe*AbsSqr(LamSD)*BMuD - 40*AbsSqr(
+      LamSD)*AbsSqr(LamSU)*BMuD - 45*traceYdAdjYd*AbsSqr(LamTD)*BMuD - 15*
+      traceYeAdjYe*AbsSqr(LamTD)*BMuD - 180*AbsSqr(LamSD)*AbsSqr(LamTD)*BMuD -
+      30*AbsSqr(LamTD)*AbsSqr(LamTU)*BMuD - 120*LamSD*traceYuAdjYu*BMuU*Conj(
+      LamSU) - 120*LamSD*AbsSqr(LamTU)*BMuU*Conj(LamSU) + 45*BMuD*Quad(g1) +
+      165*BMuD*Quad(g2) - 4*traceYdAdjYd*BMuD*Sqr(g1) + 12*traceYeAdjYe*BMuD*
+      Sqr(g1) + 72*AbsSqr(LamSD)*BMuD*Sqr(g1) + 72*LamSD*BMuU*Conj(LamSU)*Sqr(
+      g1) + 360*AbsSqr(LamSD)*BMuD*Sqr(g2) + 120*AbsSqr(LamTD)*BMuD*Sqr(g2) +
+      360*LamSD*BMuU*Conj(LamSU)*Sqr(g2) + 18*BMuD*Sqr(g1)*Sqr(g2) + 160*
+      traceYdAdjYd*BMuD*Sqr(g3) - 140*BMuD*Sqr(LamSD)*Sqr(Conj(LamSD)) - 80*
+      LamSD*LamSU*BMuU*Sqr(Conj(LamSU)) - 75*BMuD*Sqr(LamTD)*Sqr(Conj(LamTD))))
+      ;
 
 
    return beta_BMuD;
@@ -139,6 +144,25 @@ double MRSSM_soft_parameters::calc_beta_BMuD_3_loop(const Soft_traces& soft_trac
  * @return 4-loop beta function
  */
 double MRSSM_soft_parameters::calc_beta_BMuD_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_BMuD;
+
+   beta_BMuD = 0;
+
+
+   return beta_BMuD;
+}
+
+/**
+ * Calculates the 5-loop beta function of BMuD.
+ *
+ * @return 5-loop beta function
+ */
+double MRSSM_soft_parameters::calc_beta_BMuD_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

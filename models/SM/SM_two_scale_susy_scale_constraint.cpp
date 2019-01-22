@@ -16,10 +16,11 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:11:06
+// File generated at Tue 22 Jan 2019 16:38:43
 
 #include "SM_two_scale_susy_scale_constraint.hpp"
 #include "SM_two_scale_model.hpp"
+#include "config.h"
 #include "wrappers.hpp"
 #include "logger.hpp"
 #include "error.hpp"

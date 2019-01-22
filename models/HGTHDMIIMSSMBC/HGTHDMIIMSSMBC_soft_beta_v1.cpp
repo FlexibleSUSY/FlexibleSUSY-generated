@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:06:52
+// File generated at Tue 22 Jan 2019 16:22:37
 
 #include "HGTHDMIIMSSMBC_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -75,8 +75,8 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_v1_1_loop(const Soft_traces& so
 
    double beta_v1;
 
-   beta_v1 = Re(0.1*oneOver16PiSqr*v1*(6*Sqr(g1) - 5*(6*traceYdAdjYd + 2*
-      traceYeAdjYe + 3*Sqr(g1d) + Sqr(g1dp) - 6*Sqr(g2))));
+   beta_v1 = Re(0.1*oneOver16PiSqr*v1*(-30*traceYdAdjYd - 10*traceYeAdjYe + 6*
+      Sqr(g1) - 15*Sqr(g1d) - 5*Sqr(g1dp) + 30*Sqr(g2)));
 
 
    return beta_v1;
@@ -103,11 +103,12 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_v1_2_loop(const Soft_traces& so
       traceYeAdjYeYeAdjYe*v1 - 1200*Lambda1*Lambda6*v2 - 600*Lambda3*Lambda6*v2
        - 600*Lambda4*Lambda6*v2 - 600*Lambda5*Lambda6*v2 - 1200*Lambda2*Lambda7
       *v2 - 600*Lambda3*Lambda7*v2 - 600*Lambda4*Lambda7*v2 - 600*Lambda5*
-      Lambda7*v2 - 1200*v1*AbsSqr(Lambda7) - 600*(6*Lambda6*v1 + (2*Lambda1 +
-      Lambda3 + Lambda4)*v2)*Conj(Lambda6) - 1200*Lambda2*v2*Conj(Lambda7) -
-      600*Lambda3*v2*Conj(Lambda7) - 600*Lambda4*v2*Conj(Lambda7) - 600*Conj(
-      Lambda5)*(2*Lambda5*v1 + v2*Conj(Lambda6) + v2*Conj(Lambda7)) - 1407*v1*
-      Quad(g1) + 2250*v1*Quad(g1d) + 450*v1*Quad(g1dp) + 5925*v1*Quad(g2) -
+      Lambda7*v2 - 1200*v1*AbsSqr(Lambda5) - 3600*v1*AbsSqr(Lambda6) - 1200*v1*
+      AbsSqr(Lambda7) - 1200*Lambda1*v2*Conj(Lambda6) - 600*Lambda3*v2*Conj(
+      Lambda6) - 600*Lambda4*v2*Conj(Lambda6) - 600*v2*Conj(Lambda5)*Conj(
+      Lambda6) - 1200*Lambda2*v2*Conj(Lambda7) - 600*Lambda3*v2*Conj(Lambda7) -
+      600*Lambda4*v2*Conj(Lambda7) - 600*v2*Conj(Lambda5)*Conj(Lambda7) - 1407*
+      v1*Quad(g1) + 2250*v1*Quad(g1d) + 450*v1*Quad(g1dp) + 5925*v1*Quad(g2) -
       1220*traceYdAdjYd*v1*Sqr(g1) - 1740*traceYeAdjYe*v1*Sqr(g1) - 810*v1*Sqr(
       g1)*Sqr(g1d) - 270*v1*Sqr(g1)*Sqr(g1dp) + 900*v1*Sqr(g1d)*Sqr(g1dp) -
       8100*traceYdAdjYd*v1*Sqr(g2) - 2700*traceYeAdjYe*v1*Sqr(g2) + 450*v1*Sqr(
@@ -145,6 +146,25 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_v1_3_loop(const Soft_traces& so
  * @return 4-loop beta function
  */
 double HGTHDMIIMSSMBC_soft_parameters::calc_beta_v1_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_v1;
+
+   beta_v1 = 0;
+
+
+   return beta_v1;
+}
+
+/**
+ * Calculates the 5-loop beta function of v1.
+ *
+ * @return 5-loop beta function
+ */
+double HGTHDMIIMSSMBC_soft_parameters::calc_beta_v1_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:21:05
+// File generated at Tue 22 Jan 2019 17:28:53
 
 #ifndef UMSSM_soft_parameters_H
 #define UMSSM_soft_parameters_H
@@ -160,8 +160,8 @@ private:
       double traceYeAdjYeYeAdjYe{};
       double traceYvAdjYvTpYeconjYe{};
       double traceYuAdjYuYuAdjYu{};
-      double traceYvAdjYvYvAdjYv{};
       double traceYuAdjYuTYuAdjYu{};
+      double traceYvAdjYvYvAdjYv{};
       double traceYvAdjYvTYvAdjYv{};
       double traceconjTYdTpTYd{};
       double traceconjTYeTpTYe{};
@@ -231,74 +231,92 @@ private:
    Eigen::Matrix<double,3,3> calc_beta_TYd_2_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_TYd_3_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_TYd_4_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_TYd_5_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_TYe_1_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_TYe_2_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_TYe_3_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_TYe_4_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_TYe_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_TLambdax_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_TLambdax_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_TLambdax_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_TLambdax_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_TLambdax_5_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_TYv_1_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_TYv_2_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_TYv_3_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_TYv_4_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_TYv_5_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_TYu_1_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_TYu_2_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_TYu_3_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_TYu_4_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_TYu_5_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_mq2_1_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_mq2_2_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_mq2_3_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_mq2_4_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_mq2_5_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_ml2_1_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_ml2_2_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_ml2_3_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_ml2_4_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_ml2_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_mHd2_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_mHd2_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_mHd2_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_mHd2_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_mHd2_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_mHu2_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_mHu2_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_mHu2_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_mHu2_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_mHu2_5_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_md2_1_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_md2_2_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_md2_3_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_md2_4_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_md2_5_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_mu2_1_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_mu2_2_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_mu2_3_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_mu2_4_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_mu2_5_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_me2_1_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_me2_2_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_me2_3_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_me2_4_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_me2_5_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_mvR2_1_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_mvR2_2_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_mvR2_3_loop(const TRACE_STRUCT_TYPE&) const;
    Eigen::Matrix<double,3,3> calc_beta_mvR2_4_loop(const TRACE_STRUCT_TYPE&) const;
+   Eigen::Matrix<double,3,3> calc_beta_mvR2_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_ms2_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_ms2_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_ms2_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_ms2_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_ms2_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassB_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassB_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassB_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassB_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_MassB_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassWB_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassWB_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassWB_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassWB_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_MassWB_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassG_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassG_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassG_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassG_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_MassG_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassU_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassU_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassU_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassU_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_MassU_5_loop(const TRACE_STRUCT_TYPE&) const;
 
 };
 

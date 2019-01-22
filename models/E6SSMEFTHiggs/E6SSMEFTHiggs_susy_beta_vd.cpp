@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 13:57:55
+// File generated at Tue 22 Jan 2019 14:41:52
 
 #include "E6SSMEFTHiggs_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -67,14 +67,15 @@ double E6SSMEFTHiggs_susy_parameters::calc_beta_vd_2_loop(const Susy_traces& sus
    double beta_vd;
 
    beta_vd = Re(-0.00125*twoLoop*vd*(-7200*traceYdAdjYdYdAdjYd - 2400*
-      traceYdAdjYuYuAdjYd - 2400*traceYeAdjYeYeAdjYe + 1188*Quad(g1) + 2900*
-      Quad(g2) + 1773*Quad(gN) + 3600*traceYdAdjYd*Sqr(g2) + 1200*traceYeAdjYe*
-      Sqr(g2) + 12800*traceYdAdjYd*Sqr(g3) + 4*Sqr(g1)*(100*(traceYdAdjYd + 3*
-      traceYeAdjYe) + 90*Sqr(g2) - 9*Sqr(gN)) + 600*traceYdAdjYd*Sqr(gN) + 200*
-      traceYeAdjYe*Sqr(gN) + 540*Sqr(g2)*Sqr(gN) + 40*AbsSqr(Lambdax)*(-60*
-      traceKappaAdjKappa - 40*traceLambda12AdjLambda12 - 60*traceYuAdjYu + 6*
-      Sqr(g1) + 30*Sqr(g2) + 29*Sqr(gN)) - 2400*Sqr(Conj(Lambdax))*Sqr(Lambdax)
-      ));
+      traceYdAdjYuYuAdjYd - 2400*traceYeAdjYeYeAdjYe - 2400*traceKappaAdjKappa*
+      AbsSqr(Lambdax) - 1600*traceLambda12AdjLambda12*AbsSqr(Lambdax) - 2400*
+      traceYuAdjYu*AbsSqr(Lambdax) + 1188*Quad(g1) + 2900*Quad(g2) + 1773*Quad(
+      gN) + 400*traceYdAdjYd*Sqr(g1) + 1200*traceYeAdjYe*Sqr(g1) + 240*AbsSqr(
+      Lambdax)*Sqr(g1) + 3600*traceYdAdjYd*Sqr(g2) + 1200*traceYeAdjYe*Sqr(g2)
+      + 1200*AbsSqr(Lambdax)*Sqr(g2) + 360*Sqr(g1)*Sqr(g2) + 12800*traceYdAdjYd
+      *Sqr(g3) + 600*traceYdAdjYd*Sqr(gN) + 200*traceYeAdjYe*Sqr(gN) + 1160*
+      AbsSqr(Lambdax)*Sqr(gN) - 36*Sqr(g1)*Sqr(gN) + 540*Sqr(g2)*Sqr(gN) - 2400
+      *Sqr(Conj(Lambdax))*Sqr(Lambdax)));
 
 
    return beta_vd;
@@ -105,6 +106,25 @@ double E6SSMEFTHiggs_susy_parameters::calc_beta_vd_3_loop(const Susy_traces& sus
  * @return 4-loop beta function
  */
 double E6SSMEFTHiggs_susy_parameters::calc_beta_vd_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_vd;
+
+   beta_vd = 0;
+
+
+   return beta_vd;
+}
+
+/**
+ * Calculates the 5-loop beta function of vd.
+ *
+ * @return 5-loop beta function
+ */
+double E6SSMEFTHiggs_susy_parameters::calc_beta_vd_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

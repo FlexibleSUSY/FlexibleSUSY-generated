@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:45:39
+// File generated at Tue 22 Jan 2019 17:33:18
 
 #include "NMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -109,22 +109,22 @@ Eigen::Matrix<double,3,3> NMSSM_soft_parameters::calc_beta_md2_2_loop(const Soft
 
    Eigen::Matrix<double,3,3> beta_md2;
 
-   beta_md2 = (twoLoop*((-12*traceconjTYdTpTYd - 4*traceconjTYeTpTYe - 12*
-      tracemd2YdAdjYd - 4*traceme2YeAdjYe - 4*traceml2AdjYeYe - 12*
-      tracemq2AdjYdYd - 24*mHd2*traceYdAdjYd - 8*mHd2*traceYeAdjYe - 8*mHd2*
-      AbsSqr(Lambdax) - 4*mHu2*AbsSqr(Lambdax) - 4*ms2*AbsSqr(Lambdax) - 4*
-      AbsSqr(TLambdax) + 0.8*mHd2*Sqr(g1) + 1.6*AbsSqr(MassB)*Sqr(g1) + 12*mHd2
-      *Sqr(g2) + 24*AbsSqr(MassWB)*Sqr(g2))*(Yd*Yd.adjoint()) - 0.8*(MassB*Sqr(
-      g1) + 5*(3*traceAdjYdTYd + traceAdjYeTYe + 3*MassWB*Sqr(g2)) + 5*Conj(
-      Lambdax)*TLambdax)*(Yd*(TYd).adjoint()) - 0.8*(Conj(MassB)*Sqr(g1) + 5*(3
-      *traceconjTYdTpYd + traceconjTYeTpYe + Conj(TLambdax)*Lambdax + 3*Conj(
-      MassWB)*Sqr(g2)))*(TYd*Yd.adjoint()) + 0.8*(-15*traceYdAdjYd - 5*
+   beta_md2 = (twoLoop*(0.8*(-15*traceconjTYdTpTYd - 5*traceconjTYeTpTYe - 15*
+      tracemd2YdAdjYd - 5*traceme2YeAdjYe - 5*traceml2AdjYeYe - 15*
+      tracemq2AdjYdYd - 30*mHd2*traceYdAdjYd - 10*mHd2*traceYeAdjYe - 10*mHd2*
+      AbsSqr(Lambdax) - 5*mHu2*AbsSqr(Lambdax) - 5*ms2*AbsSqr(Lambdax) - 5*
+      AbsSqr(TLambdax) + mHd2*Sqr(g1) + 2*AbsSqr(MassB)*Sqr(g1) + 15*mHd2*Sqr(
+      g2) + 30*AbsSqr(MassWB)*Sqr(g2))*(Yd*Yd.adjoint()) - 0.8*(15*
+      traceAdjYdTYd + 5*traceAdjYeTYe + MassB*Sqr(g1) + 15*MassWB*Sqr(g2) + 5*
+      Conj(Lambdax)*TLambdax)*(Yd*(TYd).adjoint()) - 0.8*(15*traceconjTYdTpYd +
+      5*traceconjTYeTpYe + 5*Conj(TLambdax)*Lambdax + Conj(MassB)*Sqr(g1) + 15*
+      Conj(MassWB)*Sqr(g2))*(TYd*Yd.adjoint()) + 0.8*(-15*traceYdAdjYd - 5*
       traceYeAdjYe - 5*AbsSqr(Lambdax) + Sqr(g1) + 15*Sqr(g2))*(TYd*(TYd).
-      adjoint()) + (-6*traceYdAdjYd - 2*traceYeAdjYe - 2*AbsSqr(Lambdax) + 0.4*
-      Sqr(g1) + 6*Sqr(g2))*(md2*Yd*Yd.adjoint()) + 0.8*(-15*traceYdAdjYd - 5*
+      adjoint()) + 0.4*(-15*traceYdAdjYd - 5*traceYeAdjYe - 5*AbsSqr(Lambdax) +
+      Sqr(g1) + 15*Sqr(g2))*(md2*Yd*Yd.adjoint()) + 0.8*(-15*traceYdAdjYd - 5*
       traceYeAdjYe - 5*AbsSqr(Lambdax) + Sqr(g1) + 15*Sqr(g2))*(Yd*mq2*Yd.
-      adjoint()) + (-6*traceYdAdjYd - 2*traceYeAdjYe - 2*AbsSqr(Lambdax) + 0.4*
-      Sqr(g1) + 6*Sqr(g2))*(Yd*Yd.adjoint()*md2) - 8*mHd2*(Yd*Yd.adjoint()*Yd*
+      adjoint()) + 0.4*(-15*traceYdAdjYd - 5*traceYeAdjYe - 5*AbsSqr(Lambdax) +
+      Sqr(g1) + 15*Sqr(g2))*(Yd*Yd.adjoint()*md2) - 8*mHd2*(Yd*Yd.adjoint()*Yd*
       Yd.adjoint()) - 4*(Yd*Yd.adjoint()*TYd*(TYd).adjoint()) - 4*(mHd2 + mHu2)
       *(Yd*Yu.adjoint()*Yu*Yd.adjoint()) - 4*(Yd*Yu.adjoint()*TYu*(TYd).adjoint
       ()) - 4*(Yd*(TYd).adjoint()*TYd*Yd.adjoint()) - 4*(Yd*(TYu).adjoint()*TYu
@@ -136,10 +136,11 @@ Eigen::Matrix<double,3,3> NMSSM_soft_parameters::calc_beta_md2_2_loop(const Soft
       (Yd*Yd.adjoint()*md2*Yd*Yd.adjoint()) - 4*(Yd*Yd.adjoint()*Yd*mq2*Yd.
       adjoint()) - 2*(Yd*Yd.adjoint()*Yd*Yd.adjoint()*md2) - 4*(Yd*Yu.adjoint()
       *mu2*Yu*Yd.adjoint()) - 4*(Yd*Yu.adjoint()*Yu*mq2*Yd.adjoint()) - 2*(Yd*
-      Yu.adjoint()*Yu*Yd.adjoint()*md2) + 0.035555555555555556*(Conj(MassB)*Sqr
-      (g1)*(303*MassB*Sqr(g1) + 40*(2*MassB + MassG)*Sqr(g3)) + 5*(3*(g1*(g1*
-      Tr2U111 + 3.872983346207417*Tr31) + 20*Tr23*Quad(g3)) + 8*Conj(MassG)*Sqr
-      (g3)*((MassB + 2*MassG)*Sqr(g1) - 30*MassG*Sqr(g3))))*UNITMATRIX(3))).
+      Yu.adjoint()*Yu*Yd.adjoint()*md2) + 0.035555555555555556*(
+      58.09475019311125*g1*Tr31 + 303*AbsSqr(MassB)*Quad(g1) + 300*Tr23*Quad(g3
+      ) - 1200*AbsSqr(MassG)*Quad(g3) + 15*Tr2U111*Sqr(g1) + 80*AbsSqr(MassB)*
+      Sqr(g1)*Sqr(g3) + 80*AbsSqr(MassG)*Sqr(g1)*Sqr(g3) + 40*MassG*Conj(MassB)
+      *Sqr(g1)*Sqr(g3) + 40*MassB*Conj(MassG)*Sqr(g1)*Sqr(g3))*UNITMATRIX(3))).
       real();
 
 
@@ -171,6 +172,25 @@ Eigen::Matrix<double,3,3> NMSSM_soft_parameters::calc_beta_md2_3_loop(const Soft
  * @return 4-loop beta function
  */
 Eigen::Matrix<double,3,3> NMSSM_soft_parameters::calc_beta_md2_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_md2;
+
+   beta_md2 = ZEROMATRIX(3,3);
+
+
+   return beta_md2;
+}
+
+/**
+ * Calculates the 5-loop beta function of md2.
+ *
+ * @return 5-loop beta function
+ */
+Eigen::Matrix<double,3,3> NMSSM_soft_parameters::calc_beta_md2_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

@@ -7,7 +7,12 @@ MODCMSSMSemiAnalytic_DEP := $(patsubst %,model_specific/%,$(MODCMSSMSemiAnalytic
 MODCMSSMSemiAnalytic_INC := $(patsubst %,-Imodel_specific/%,$(MODCMSSMSemiAnalytic_MOD))
 MODCMSSMSemiAnalytic_LIB := $(foreach M,$(MODCMSSMSemiAnalytic_MOD),model_specific/$M/libmodel_specific_$M$(MODULE_LIBEXT))
 
+MODCMSSMSemiAnalytic_SUBMOD  := $(DIR)/cxx_qft
+MODCMSSMSemiAnalytic_SUBMOD_INC := $(patsubst %,-I%,$(MODCMSSMSemiAnalytic_SUBMOD))
+
 CMSSMSemiAnalytic_INSTALL_DIR := $(INSTALL_DIR)/$(DIR)
+CMSSMSemiAnalytic_INSTALL_CXXQFT_DIR := \
+		$(CMSSMSemiAnalytic_INSTALL_DIR)/cxx_qft
 
 CMSSMSemiAnalytic_MK     := \
 		$(DIR)/module.mk
@@ -68,7 +73,6 @@ LLCMSSMSemiAnalytic_MMA  := \
 		$(DIR)/run_CMSSMSemiAnalytic.m
 
 LIBCMSSMSemiAnalytic_HDR := \
-		$(DIR)/CMSSMSemiAnalytic_cxx_diagrams.hpp \
 		$(DIR)/CMSSMSemiAnalytic_a_muon.hpp \
 		$(DIR)/CMSSMSemiAnalytic_convergence_tester.hpp \
 		$(DIR)/CMSSMSemiAnalytic_edm.hpp \
@@ -93,6 +97,13 @@ LIBCMSSMSemiAnalytic_HDR := \
 		$(DIR)/CMSSMSemiAnalytic_susy_scale_constraint.hpp \
 		$(DIR)/CMSSMSemiAnalytic_utilities.hpp \
 		$(DIR)/CMSSMSemiAnalytic_weinberg_angle.hpp
+
+LIBCMSSMSemiAnalytic_CXXQFT_HDR := \
+		$(DIR)/cxx_qft/CMSSMSemiAnalytic_qft.hpp \
+		$(DIR)/cxx_qft/CMSSMSemiAnalytic_fields.hpp \
+		$(DIR)/cxx_qft/CMSSMSemiAnalytic_vertices.hpp \
+		$(DIR)/cxx_qft/CMSSMSemiAnalytic_context_base.hpp \
+		$(DIR)/cxx_qft/CMSSMSemiAnalytic_npointfunctions.hpp
 
 ifneq ($(findstring two_scale,$(SOLVERS)),)
 -include $(DIR)/two_scale.mk
@@ -182,8 +193,10 @@ all-$(MODNAME): $(LIBCMSSMSemiAnalytic) $(EXECMSSMSemiAnalytic_EXE)
 ifneq ($(INSTALL_DIR),)
 install-src::
 		install -d $(CMSSMSemiAnalytic_INSTALL_DIR)
+		install -d $(CMSSMSemiAnalytic_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(LIBCMSSMSemiAnalytic_SRC) $(CMSSMSemiAnalytic_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LIBCMSSMSemiAnalytic_HDR) $(CMSSMSemiAnalytic_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(LIBCMSSMSemiAnalytic_CXXQFT_HDR) $(CMSSMSemiAnalytic_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(EXECMSSMSemiAnalytic_SRC) $(CMSSMSemiAnalytic_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLCMSSMSemiAnalytic_SRC) $(CMSSMSemiAnalytic_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLCMSSMSemiAnalytic_MMA) $(CMSSMSemiAnalytic_INSTALL_DIR)
@@ -214,6 +227,7 @@ clean-$(MODNAME)-obj:
 clean-$(MODNAME)-src:
 		-rm -f $(LIBCMSSMSemiAnalytic_SRC)
 		-rm -f $(LIBCMSSMSemiAnalytic_HDR)
+		-rm -f $(LIBCMSSMSemiAnalytic_CXXQFT_HDR)
 		-rm -f $(EXECMSSMSemiAnalytic_SRC)
 		-rm -f $(LLCMSSMSemiAnalytic_SRC)
 		-rm -f $(LLCMSSMSemiAnalytic_MMA)
@@ -242,14 +256,14 @@ distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
 		tar -czf $(CMSSMSemiAnalytic_TARBALL) \
-		$(LIBCMSSMSemiAnalytic_SRC) $(LIBCMSSMSemiAnalytic_HDR) \
+		$(LIBCMSSMSemiAnalytic_SRC) $(LIBCMSSMSemiAnalytic_HDR) $(LIBCMSSMSemiAnalytic_CXXQFT_HDR) \
 		$(EXECMSSMSemiAnalytic_SRC) \
 		$(LLCMSSMSemiAnalytic_SRC) $(LLCMSSMSemiAnalytic_MMA) \
 		$(CMSSMSemiAnalytic_MK) $(CMSSMSemiAnalytic_INCLUDE_MK) \
 		$(CMSSMSemiAnalytic_SLHA_INPUT) $(CMSSMSemiAnalytic_REFERENCES) \
 		$(CMSSMSemiAnalytic_GNUPLOT)
 
-$(LIBCMSSMSemiAnalytic_SRC) $(LIBCMSSMSemiAnalytic_HDR) $(EXECMSSMSemiAnalytic_SRC) $(LLCMSSMSemiAnalytic_SRC) $(LLCMSSMSemiAnalytic_MMA) \
+$(LIBCMSSMSemiAnalytic_SRC) $(LIBCMSSMSemiAnalytic_HDR) $(LIBCMSSMSemiAnalytic_CXXQFT_HDR) $(EXECMSSMSemiAnalytic_SRC) $(LLCMSSMSemiAnalytic_SRC) $(LLCMSSMSemiAnalytic_MMA) \
 : run-metacode-$(MODNAME)
 		@true
 
@@ -270,7 +284,7 @@ $(METACODE_STAMP_CMSSMSemiAnalytic):
 endif
 
 $(LIBCMSSMSemiAnalytic_DEP) $(EXECMSSMSemiAnalytic_DEP) $(LLCMSSMSemiAnalytic_DEP) $(LIBCMSSMSemiAnalytic_OBJ) $(EXECMSSMSemiAnalytic_OBJ) $(LLCMSSMSemiAnalytic_OBJ) $(LLCMSSMSemiAnalytic_LIB): \
-	CPPFLAGS += $(MODCMSSMSemiAnalytic_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODCMSSMSemiAnalytic_SUBMOD_INC) $(MODCMSSMSemiAnalytic_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBCMSSMSemiAnalytic_DEP) $(EXECMSSMSemiAnalytic_DEP) $(LLCMSSMSemiAnalytic_DEP) $(LIBCMSSMSemiAnalytic_OBJ) $(EXECMSSMSemiAnalytic_OBJ) $(LLCMSSMSemiAnalytic_OBJ) $(LLCMSSMSemiAnalytic_LIB): \

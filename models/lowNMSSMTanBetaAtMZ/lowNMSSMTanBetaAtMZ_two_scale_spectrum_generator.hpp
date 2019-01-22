@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:36:03
+// File generated at Tue 22 Jan 2019 17:12:49
 
 #ifndef lowNMSSMTanBetaAtMZ_TWO_SCALE_SPECTRUM_GENERATOR_H
 #define lowNMSSMTanBetaAtMZ_TWO_SCALE_SPECTRUM_GENERATOR_H

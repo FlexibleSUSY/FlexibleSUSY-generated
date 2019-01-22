@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 13:46:24
+// File generated at Tue 22 Jan 2019 14:18:58
 
 #include "CE6SSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -56,7 +56,7 @@ double CE6SSM_susy_parameters::calc_beta_MuPr_2_loop(const Susy_traces& susy_tra
    double beta_MuPr;
 
    beta_MuPr = Re(0.06*twoLoop*MuPr*(99*Quad(g1) + 275*Quad(g2) + 64*Quad(gN) +
-      20*Sqr(g2)*Sqr(gN) + 6*Sqr(g1)*(5*Sqr(g2) + 2*Sqr(gN))));
+      30*Sqr(g1)*Sqr(g2) + 12*Sqr(g1)*Sqr(gN) + 20*Sqr(g2)*Sqr(gN)));
 
 
    return beta_MuPr;
@@ -87,6 +87,25 @@ double CE6SSM_susy_parameters::calc_beta_MuPr_3_loop(const Susy_traces& susy_tra
  * @return 4-loop beta function
  */
 double CE6SSM_susy_parameters::calc_beta_MuPr_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MuPr;
+
+   beta_MuPr = 0;
+
+
+   return beta_MuPr;
+}
+
+/**
+ * Calculates the 5-loop beta function of MuPr.
+ *
+ * @return 5-loop beta function
+ */
+double CE6SSM_susy_parameters::calc_beta_MuPr_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

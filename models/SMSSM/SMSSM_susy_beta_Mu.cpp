@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:31:01
+// File generated at Tue 22 Jan 2019 17:17:28
 
 #include "SMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -40,8 +40,8 @@ double SMSSM_susy_parameters::calc_beta_Mu_1_loop(const Susy_traces& susy_traces
 
    double beta_Mu;
 
-   beta_Mu = Re(oneOver16PiSqr*(2*AbsSqr(Lambdax)*Mu - 0.6*Mu*Sqr(g1) + Mu*(3*
-      traceYdAdjYd + traceYeAdjYe + 3*traceYuAdjYu - 3*Sqr(g2))));
+   beta_Mu = Re(-0.2*oneOver16PiSqr*Mu*(-15*traceYdAdjYd - 5*traceYeAdjYe - 15*
+      traceYuAdjYu - 10*AbsSqr(Lambdax) + 3*Sqr(g1) + 15*Sqr(g2)));
 
 
    return beta_Mu;
@@ -65,12 +65,13 @@ double SMSSM_susy_parameters::calc_beta_Mu_2_loop(const Susy_traces& susy_traces
 
    double beta_Mu;
 
-   beta_Mu = Re(0.02*twoLoop*Mu*(-50*(3*traceYdAdjYd + traceYeAdjYe + 3*
-      traceYuAdjYu + 4*AbsSqr(Kappa))*AbsSqr(Lambdax) + 207*Quad(g1) + 10*Sqr(
-      g1)*(-2*traceYdAdjYd + 6*traceYeAdjYe + 4*traceYuAdjYu + 9*Sqr(g2)) + 25*
-      (15*Quad(g2) + 2*(-3*(3*traceYdAdjYdYdAdjYd + 2*traceYdAdjYuYuAdjYd +
-      traceYeAdjYeYeAdjYe + 3*traceYuAdjYuYuAdjYu) + 16*(traceYdAdjYd +
-      traceYuAdjYu)*Sqr(g3))) - 300*Sqr(Conj(Lambdax))*Sqr(Lambdax)));
+   beta_Mu = Re(0.02*twoLoop*Mu*(-450*traceYdAdjYdYdAdjYd - 300*
+      traceYdAdjYuYuAdjYd - 150*traceYeAdjYeYeAdjYe - 450*traceYuAdjYuYuAdjYu -
+      150*traceYdAdjYd*AbsSqr(Lambdax) - 50*traceYeAdjYe*AbsSqr(Lambdax) - 150*
+      traceYuAdjYu*AbsSqr(Lambdax) - 200*AbsSqr(Kappa)*AbsSqr(Lambdax) + 207*
+      Quad(g1) + 375*Quad(g2) - 20*traceYdAdjYd*Sqr(g1) + 60*traceYeAdjYe*Sqr(
+      g1) + 40*traceYuAdjYu*Sqr(g1) + 90*Sqr(g1)*Sqr(g2) + 800*traceYdAdjYd*Sqr
+      (g3) + 800*traceYuAdjYu*Sqr(g3) - 300*Sqr(Conj(Lambdax))*Sqr(Lambdax)));
 
 
    return beta_Mu;
@@ -101,6 +102,25 @@ double SMSSM_susy_parameters::calc_beta_Mu_3_loop(const Susy_traces& susy_traces
  * @return 4-loop beta function
  */
 double SMSSM_susy_parameters::calc_beta_Mu_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_Mu;
+
+   beta_Mu = 0;
+
+
+   return beta_Mu;
+}
+
+/**
+ * Calculates the 5-loop beta function of Mu.
+ *
+ * @return 5-loop beta function
+ */
+double SMSSM_susy_parameters::calc_beta_Mu_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

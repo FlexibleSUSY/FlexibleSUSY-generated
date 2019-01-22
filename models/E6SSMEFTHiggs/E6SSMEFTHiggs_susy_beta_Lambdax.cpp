@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 13:57:52
+// File generated at Tue 22 Jan 2019 14:41:49
 
 #include "E6SSMEFTHiggs_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -81,17 +81,20 @@ double E6SSMEFTHiggs_susy_parameters::calc_beta_Lambdax_2_loop(const Susy_traces
       traceKappaAdjKappaKappaAdjKappa + 800*
       traceLambda12AdjLambda12Lambda12AdjLambda12 + 1800*traceYdAdjYdYdAdjYd +
       1200*traceYdAdjYuYuAdjYd + 600*traceYeAdjYeYeAdjYe + 1800*
-      traceYuAdjYuYuAdjYu - 1188*Quad(g1) - 3300*Quad(g2) - 3933*Quad(gN) -
-      1200*traceLambda12AdjLambda12*Sqr(g2) - 3200*traceKappaAdjKappa*Sqr(g3) -
-      3200*traceYdAdjYd*Sqr(g3) - 3200*traceYuAdjYu*Sqr(g3) + 360*
-      traceKappaAdjKappa*Sqr(gN) + 240*traceLambda12AdjLambda12*Sqr(gN) + 120*
-      traceYdAdjYd*Sqr(gN) + 40*traceYeAdjYe*Sqr(gN) + 60*traceYuAdjYu*Sqr(gN)
-      - 390*Sqr(g2)*Sqr(gN) - 20*AbsSqr(Lambdax)*(-60*traceKappaAdjKappa - 40*
-      traceLambda12AdjLambda12 - 90*traceYdAdjYd - 30*traceYeAdjYe - 90*
-      traceYuAdjYu + 12*Sqr(g1) + 60*Sqr(g2) + 13*Sqr(gN)) - 2*Sqr(g1)*(40*(2*
-      traceKappaAdjKappa + 3*traceLambda12AdjLambda12 - traceYdAdjYd + 3*
-      traceYeAdjYe + 2*traceYuAdjYu) + 180*Sqr(g2) + 27*Sqr(gN)) + 2000*Sqr(
-      Conj(Lambdax))*Sqr(Lambdax)));
+      traceYuAdjYuYuAdjYu + 1200*traceKappaAdjKappa*AbsSqr(Lambdax) + 800*
+      traceLambda12AdjLambda12*AbsSqr(Lambdax) + 1800*traceYdAdjYd*AbsSqr(
+      Lambdax) + 600*traceYeAdjYe*AbsSqr(Lambdax) + 1800*traceYuAdjYu*AbsSqr(
+      Lambdax) - 1188*Quad(g1) - 3300*Quad(g2) - 3933*Quad(gN) - 160*
+      traceKappaAdjKappa*Sqr(g1) - 240*traceLambda12AdjLambda12*Sqr(g1) + 80*
+      traceYdAdjYd*Sqr(g1) - 240*traceYeAdjYe*Sqr(g1) - 160*traceYuAdjYu*Sqr(g1
+      ) - 240*AbsSqr(Lambdax)*Sqr(g1) - 1200*traceLambda12AdjLambda12*Sqr(g2) -
+      1200*AbsSqr(Lambdax)*Sqr(g2) - 360*Sqr(g1)*Sqr(g2) - 3200*
+      traceKappaAdjKappa*Sqr(g3) - 3200*traceYdAdjYd*Sqr(g3) - 3200*
+      traceYuAdjYu*Sqr(g3) + 360*traceKappaAdjKappa*Sqr(gN) + 240*
+      traceLambda12AdjLambda12*Sqr(gN) + 120*traceYdAdjYd*Sqr(gN) + 40*
+      traceYeAdjYe*Sqr(gN) + 60*traceYuAdjYu*Sqr(gN) - 260*AbsSqr(Lambdax)*Sqr(
+      gN) - 54*Sqr(g1)*Sqr(gN) - 390*Sqr(g2)*Sqr(gN) + 2000*Sqr(Conj(Lambdax))*
+      Sqr(Lambdax)));
 
 
    return beta_Lambdax;
@@ -122,6 +125,25 @@ double E6SSMEFTHiggs_susy_parameters::calc_beta_Lambdax_3_loop(const Susy_traces
  * @return 4-loop beta function
  */
 double E6SSMEFTHiggs_susy_parameters::calc_beta_Lambdax_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_Lambdax;
+
+   beta_Lambdax = 0;
+
+
+   return beta_Lambdax;
+}
+
+/**
+ * Calculates the 5-loop beta function of Lambdax.
+ *
+ * @return 5-loop beta function
+ */
+double E6SSMEFTHiggs_susy_parameters::calc_beta_Lambdax_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

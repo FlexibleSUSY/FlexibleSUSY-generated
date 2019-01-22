@@ -7,7 +7,12 @@ MODNUHMSSMNoFVHimalaya_DEP := $(patsubst %,model_specific/%,$(MODNUHMSSMNoFVHima
 MODNUHMSSMNoFVHimalaya_INC := $(patsubst %,-Imodel_specific/%,$(MODNUHMSSMNoFVHimalaya_MOD))
 MODNUHMSSMNoFVHimalaya_LIB := $(foreach M,$(MODNUHMSSMNoFVHimalaya_MOD),model_specific/$M/libmodel_specific_$M$(MODULE_LIBEXT))
 
+MODNUHMSSMNoFVHimalaya_SUBMOD  := $(DIR)/cxx_qft
+MODNUHMSSMNoFVHimalaya_SUBMOD_INC := $(patsubst %,-I%,$(MODNUHMSSMNoFVHimalaya_SUBMOD))
+
 NUHMSSMNoFVHimalaya_INSTALL_DIR := $(INSTALL_DIR)/$(DIR)
+NUHMSSMNoFVHimalaya_INSTALL_CXXQFT_DIR := \
+		$(NUHMSSMNoFVHimalaya_INSTALL_DIR)/cxx_qft
 
 NUHMSSMNoFVHimalaya_MK     := \
 		$(DIR)/module.mk
@@ -68,7 +73,6 @@ LLNUHMSSMNoFVHimalaya_MMA  := \
 		$(DIR)/run_NUHMSSMNoFVHimalaya.m
 
 LIBNUHMSSMNoFVHimalaya_HDR := \
-		$(DIR)/NUHMSSMNoFVHimalaya_cxx_diagrams.hpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_a_muon.hpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_convergence_tester.hpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_edm.hpp \
@@ -93,6 +97,13 @@ LIBNUHMSSMNoFVHimalaya_HDR := \
 		$(DIR)/NUHMSSMNoFVHimalaya_susy_scale_constraint.hpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_utilities.hpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_weinberg_angle.hpp
+
+LIBNUHMSSMNoFVHimalaya_CXXQFT_HDR := \
+		$(DIR)/cxx_qft/NUHMSSMNoFVHimalaya_qft.hpp \
+		$(DIR)/cxx_qft/NUHMSSMNoFVHimalaya_fields.hpp \
+		$(DIR)/cxx_qft/NUHMSSMNoFVHimalaya_vertices.hpp \
+		$(DIR)/cxx_qft/NUHMSSMNoFVHimalaya_context_base.hpp \
+		$(DIR)/cxx_qft/NUHMSSMNoFVHimalaya_npointfunctions.hpp
 
 ifneq ($(findstring two_scale,$(SOLVERS)),)
 -include $(DIR)/two_scale.mk
@@ -182,8 +193,10 @@ all-$(MODNAME): $(LIBNUHMSSMNoFVHimalaya) $(EXENUHMSSMNoFVHimalaya_EXE)
 ifneq ($(INSTALL_DIR),)
 install-src::
 		install -d $(NUHMSSMNoFVHimalaya_INSTALL_DIR)
+		install -d $(NUHMSSMNoFVHimalaya_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(LIBNUHMSSMNoFVHimalaya_SRC) $(NUHMSSMNoFVHimalaya_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LIBNUHMSSMNoFVHimalaya_HDR) $(NUHMSSMNoFVHimalaya_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(LIBNUHMSSMNoFVHimalaya_CXXQFT_HDR) $(NUHMSSMNoFVHimalaya_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(EXENUHMSSMNoFVHimalaya_SRC) $(NUHMSSMNoFVHimalaya_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLNUHMSSMNoFVHimalaya_SRC) $(NUHMSSMNoFVHimalaya_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLNUHMSSMNoFVHimalaya_MMA) $(NUHMSSMNoFVHimalaya_INSTALL_DIR)
@@ -214,6 +227,7 @@ clean-$(MODNAME)-obj:
 clean-$(MODNAME)-src:
 		-rm -f $(LIBNUHMSSMNoFVHimalaya_SRC)
 		-rm -f $(LIBNUHMSSMNoFVHimalaya_HDR)
+		-rm -f $(LIBNUHMSSMNoFVHimalaya_CXXQFT_HDR)
 		-rm -f $(EXENUHMSSMNoFVHimalaya_SRC)
 		-rm -f $(LLNUHMSSMNoFVHimalaya_SRC)
 		-rm -f $(LLNUHMSSMNoFVHimalaya_MMA)
@@ -242,14 +256,14 @@ distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
 		tar -czf $(NUHMSSMNoFVHimalaya_TARBALL) \
-		$(LIBNUHMSSMNoFVHimalaya_SRC) $(LIBNUHMSSMNoFVHimalaya_HDR) \
+		$(LIBNUHMSSMNoFVHimalaya_SRC) $(LIBNUHMSSMNoFVHimalaya_HDR) $(LIBNUHMSSMNoFVHimalaya_CXXQFT_HDR) \
 		$(EXENUHMSSMNoFVHimalaya_SRC) \
 		$(LLNUHMSSMNoFVHimalaya_SRC) $(LLNUHMSSMNoFVHimalaya_MMA) \
 		$(NUHMSSMNoFVHimalaya_MK) $(NUHMSSMNoFVHimalaya_INCLUDE_MK) \
 		$(NUHMSSMNoFVHimalaya_SLHA_INPUT) $(NUHMSSMNoFVHimalaya_REFERENCES) \
 		$(NUHMSSMNoFVHimalaya_GNUPLOT)
 
-$(LIBNUHMSSMNoFVHimalaya_SRC) $(LIBNUHMSSMNoFVHimalaya_HDR) $(EXENUHMSSMNoFVHimalaya_SRC) $(LLNUHMSSMNoFVHimalaya_SRC) $(LLNUHMSSMNoFVHimalaya_MMA) \
+$(LIBNUHMSSMNoFVHimalaya_SRC) $(LIBNUHMSSMNoFVHimalaya_HDR) $(LIBNUHMSSMNoFVHimalaya_CXXQFT_HDR) $(EXENUHMSSMNoFVHimalaya_SRC) $(LLNUHMSSMNoFVHimalaya_SRC) $(LLNUHMSSMNoFVHimalaya_MMA) \
 : run-metacode-$(MODNAME)
 		@true
 
@@ -270,7 +284,7 @@ $(METACODE_STAMP_NUHMSSMNoFVHimalaya):
 endif
 
 $(LIBNUHMSSMNoFVHimalaya_DEP) $(EXENUHMSSMNoFVHimalaya_DEP) $(LLNUHMSSMNoFVHimalaya_DEP) $(LIBNUHMSSMNoFVHimalaya_OBJ) $(EXENUHMSSMNoFVHimalaya_OBJ) $(LLNUHMSSMNoFVHimalaya_OBJ) $(LLNUHMSSMNoFVHimalaya_LIB): \
-	CPPFLAGS += $(MODNUHMSSMNoFVHimalaya_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODNUHMSSMNoFVHimalaya_SUBMOD_INC) $(MODNUHMSSMNoFVHimalaya_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBNUHMSSMNoFVHimalaya_DEP) $(EXENUHMSSMNoFVHimalaya_DEP) $(LLNUHMSSMNoFVHimalaya_DEP) $(LIBNUHMSSMNoFVHimalaya_OBJ) $(EXENUHMSSMNoFVHimalaya_OBJ) $(LLNUHMSSMNoFVHimalaya_OBJ) $(LLNUHMSSMNoFVHimalaya_LIB): \

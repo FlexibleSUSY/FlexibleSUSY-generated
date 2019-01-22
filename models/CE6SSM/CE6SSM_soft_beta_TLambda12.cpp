@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 13:46:53
+// File generated at Tue 22 Jan 2019 14:19:38
 
 #include "CE6SSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -79,12 +79,14 @@ Eigen::Matrix<double,2,2> CE6SSM_soft_parameters::calc_beta_TLambda12_1_loop(con
 
    Eigen::Matrix<double,2,2> beta_TLambda12;
 
-   beta_TLambda12 = (oneOver16PiSqr*(0.2*Lambda12*(30*traceAdjKappaTKappa + 20*
-      traceAdjLambda12TLambda12 + 6*MassB*Sqr(g1) + 30*MassWB*Sqr(g2) + 19*
-      MassBp*Sqr(gN)) + (3*traceKappaAdjKappa + 2*traceLambda12AdjLambda12 -
-      0.6*Sqr(g1) - 3*Sqr(g2) - 1.9*Sqr(gN))*TLambda12 + 2*Conj(Lambdax)*(2*
-      Lambda12*TLambdax + Lambdax*TLambda12) + 3*(Lambda12*(Lambda12).adjoint()
-      *TLambda12) + 3*(TLambda12*(Lambda12).adjoint()*Lambda12))).real();
+   beta_TLambda12 = (oneOver16PiSqr*(0.1*(60*traceAdjKappaTKappa*Lambda12 + 40*
+      traceAdjLambda12TLambda12*Lambda12 + 12*MassB*Lambda12*Sqr(g1) + 60*
+      MassWB*Lambda12*Sqr(g2) + 38*MassBp*Lambda12*Sqr(gN) + 40*Conj(Lambdax)*
+      Lambda12*TLambdax + 30*traceKappaAdjKappa*TLambda12 + 20*
+      traceLambda12AdjLambda12*TLambda12 + 20*AbsSqr(Lambdax)*TLambda12 - 6*Sqr
+      (g1)*TLambda12 - 30*Sqr(g2)*TLambda12 - 19*Sqr(gN)*TLambda12) + 3*(
+      Lambda12*(Lambda12).adjoint()*TLambda12) + 3*(TLambda12*(Lambda12).
+      adjoint()*Lambda12))).real();
 
 
    return beta_TLambda12;
@@ -97,12 +99,12 @@ Eigen::Matrix<double,2,2> CE6SSM_soft_parameters::calc_beta_TLambda12_1_loop(con
  */
 Eigen::Matrix<double,2,2> CE6SSM_soft_parameters::calc_beta_TLambda12_2_loop(const Soft_traces& soft_traces) const
 {
-   const double traceKappaAdjKappa = TRACE_STRUCT.traceKappaAdjKappa;
-   const double traceLambda12AdjLambda12 = TRACE_STRUCT.
-      traceLambda12AdjLambda12;
    const double traceYdAdjYd = TRACE_STRUCT.traceYdAdjYd;
    const double traceYeAdjYe = TRACE_STRUCT.traceYeAdjYe;
    const double traceYuAdjYu = TRACE_STRUCT.traceYuAdjYu;
+   const double traceKappaAdjKappa = TRACE_STRUCT.traceKappaAdjKappa;
+   const double traceLambda12AdjLambda12 = TRACE_STRUCT.
+      traceLambda12AdjLambda12;
    const double traceAdjYdTYd = TRACE_STRUCT.traceAdjYdTYd;
    const double traceAdjYeTYe = TRACE_STRUCT.traceAdjYeTYe;
    const double traceAdjYuTYu = TRACE_STRUCT.traceAdjYuTYu;
@@ -121,39 +123,53 @@ Eigen::Matrix<double,2,2> CE6SSM_soft_parameters::calc_beta_TLambda12_2_loop(con
 
    Eigen::Matrix<double,2,2> beta_TLambda12;
 
-   beta_TLambda12 = (twoLoop*(-4*Lambdax*Sqr(Conj(Lambdax))*(4*Lambda12*
-      TLambdax + Lambdax*TLambda12) + 0.005*(-4*Lambda12*(1200*
-      traceKappaAdjKappaTKappaAdjKappa + 800*
-      traceLambda12AdjLambda12TLambda12AdjLambda12 + 1188*MassB*Quad(g1) + 3300
-      *MassWB*Quad(g2) + 3933*MassBp*Quad(gN) - 1600*traceAdjKappaTKappa*Sqr(g3
-      ) + 1600*MassG*traceKappaAdjKappa*Sqr(g3) + 180*traceAdjKappaTKappa*Sqr(
-      gN) + 120*traceAdjLambda12TLambda12*Sqr(gN) - 180*MassBp*
-      traceKappaAdjKappa*Sqr(gN) - 120*MassBp*traceLambda12AdjLambda12*Sqr(gN)
-      + Sqr(g1)*(40*(-2*traceAdjKappaTKappa - 3*traceAdjLambda12TLambda12 + 2*
-      MassB*traceKappaAdjKappa + 3*MassB*traceLambda12AdjLambda12) + 180*(MassB
-       + MassWB)*Sqr(g2) + 27*(MassB + MassBp)*Sqr(gN)) + 15*Sqr(g2)*(40*(-
-      traceAdjLambda12TLambda12 + MassWB*traceLambda12AdjLambda12) + 13*(MassBp
-       + MassWB)*Sqr(gN))) + (-1200*traceKappaAdjKappaKappaAdjKappa - 800*
-      traceLambda12AdjLambda12Lambda12AdjLambda12 + 1188*Quad(g1) + 3300*Quad(
-      g2) + 3933*Quad(gN) + 3200*traceKappaAdjKappa*Sqr(g3) - 360*
-      traceKappaAdjKappa*Sqr(gN) - 240*traceLambda12AdjLambda12*Sqr(gN) + 30*
-      Sqr(g2)*(40*traceLambda12AdjLambda12 + 13*Sqr(gN)) + 2*Sqr(g1)*(80*
-      traceKappaAdjKappa + 120*traceLambda12AdjLambda12 + 180*Sqr(g2) + 27*Sqr(
-      gN)))*TLambda12) - 0.4*Conj(Lambdax)*(2*Lambda12*(15*traceYdAdjYd + 5*
-      traceYeAdjYe + 15*traceYuAdjYu - 3*Sqr(g1) - 15*Sqr(g2) + 3*Sqr(gN))*
-      TLambdax + Lambdax*(2*Lambda12*(3*MassB*Sqr(g1) + 5*(3*traceAdjYdTYd +
-      traceAdjYeTYe + 3*traceAdjYuTYu + 3*MassWB*Sqr(g2)) - 3*MassBp*Sqr(gN)) +
-      (15*traceYdAdjYd + 5*traceYeAdjYe + 15*traceYuAdjYu - 3*Sqr(g1) - 15*Sqr(
-      g2) + 3*Sqr(gN))*TLambda12)) + (-12*traceAdjKappaTKappa - 8*
-      traceAdjLambda12TLambda12 - 5*MassBp*Sqr(gN) - 8*Conj(Lambdax)*TLambdax)*
-      (Lambda12*(Lambda12).adjoint()*Lambda12) + (-9*traceKappaAdjKappa - 6*
-      traceLambda12AdjLambda12 - 6*AbsSqr(Lambdax) + 3.5*Sqr(gN))*(Lambda12*(
-      Lambda12).adjoint()*TLambda12) + (-9*traceKappaAdjKappa - 6*
-      traceLambda12AdjLambda12 - 6*AbsSqr(Lambdax) + 4*Sqr(gN))*(TLambda12*(
-      Lambda12).adjoint()*Lambda12) - 3*(Lambda12*(Lambda12).adjoint()*Lambda12
-      *(Lambda12).adjoint()*TLambda12) - 4*(Lambda12*(Lambda12).adjoint()*
-      TLambda12*(Lambda12).adjoint()*Lambda12) - 3*(TLambda12*(Lambda12).
-      adjoint()*Lambda12*(Lambda12).adjoint()*Lambda12))).real();
+   beta_TLambda12 = (twoLoop*(0.005*(-4800*traceKappaAdjKappaTKappaAdjKappa*
+      Lambda12 - 3200*traceLambda12AdjLambda12TLambda12AdjLambda12*Lambda12 -
+      2400*traceAdjYdTYd*AbsSqr(Lambdax)*Lambda12 - 800*traceAdjYeTYe*AbsSqr(
+      Lambdax)*Lambda12 - 2400*traceAdjYuTYu*AbsSqr(Lambdax)*Lambda12 - 4752*
+      MassB*Lambda12*Quad(g1) - 13200*MassWB*Lambda12*Quad(g2) - 15732*MassBp*
+      Lambda12*Quad(gN) + 320*traceAdjKappaTKappa*Lambda12*Sqr(g1) + 480*
+      traceAdjLambda12TLambda12*Lambda12*Sqr(g1) - 320*MassB*traceKappaAdjKappa
+      *Lambda12*Sqr(g1) - 480*MassB*traceLambda12AdjLambda12*Lambda12*Sqr(g1) -
+      480*MassB*AbsSqr(Lambdax)*Lambda12*Sqr(g1) + 2400*
+      traceAdjLambda12TLambda12*Lambda12*Sqr(g2) - 2400*MassWB*
+      traceLambda12AdjLambda12*Lambda12*Sqr(g2) - 2400*MassWB*AbsSqr(Lambdax)*
+      Lambda12*Sqr(g2) - 720*MassB*Lambda12*Sqr(g1)*Sqr(g2) - 720*MassWB*
+      Lambda12*Sqr(g1)*Sqr(g2) + 6400*traceAdjKappaTKappa*Lambda12*Sqr(g3) -
+      6400*MassG*traceKappaAdjKappa*Lambda12*Sqr(g3) - 720*traceAdjKappaTKappa*
+      Lambda12*Sqr(gN) - 480*traceAdjLambda12TLambda12*Lambda12*Sqr(gN) + 720*
+      MassBp*traceKappaAdjKappa*Lambda12*Sqr(gN) + 480*MassBp*
+      traceLambda12AdjLambda12*Lambda12*Sqr(gN) + 480*MassBp*AbsSqr(Lambdax)*
+      Lambda12*Sqr(gN) - 108*MassB*Lambda12*Sqr(g1)*Sqr(gN) - 108*MassBp*
+      Lambda12*Sqr(g1)*Sqr(gN) - 780*MassBp*Lambda12*Sqr(g2)*Sqr(gN) - 780*
+      MassWB*Lambda12*Sqr(g2)*Sqr(gN) - 2400*traceYdAdjYd*Conj(Lambdax)*
+      Lambda12*TLambdax - 800*traceYeAdjYe*Conj(Lambdax)*Lambda12*TLambdax -
+      2400*traceYuAdjYu*Conj(Lambdax)*Lambda12*TLambdax + 480*Conj(Lambdax)*
+      Lambda12*Sqr(g1)*TLambdax + 2400*Conj(Lambdax)*Lambda12*Sqr(g2)*TLambdax
+      - 480*Conj(Lambdax)*Lambda12*Sqr(gN)*TLambdax - 3200*Lambdax*Lambda12*Sqr
+      (Conj(Lambdax))*TLambdax - 1200*traceKappaAdjKappaKappaAdjKappa*TLambda12
+       - 800*traceLambda12AdjLambda12Lambda12AdjLambda12*TLambda12 - 1200*
+      traceYdAdjYd*AbsSqr(Lambdax)*TLambda12 - 400*traceYeAdjYe*AbsSqr(Lambdax)
+      *TLambda12 - 1200*traceYuAdjYu*AbsSqr(Lambdax)*TLambda12 + 1188*Quad(g1)*
+      TLambda12 + 3300*Quad(g2)*TLambda12 + 3933*Quad(gN)*TLambda12 + 160*
+      traceKappaAdjKappa*Sqr(g1)*TLambda12 + 240*traceLambda12AdjLambda12*Sqr(
+      g1)*TLambda12 + 240*AbsSqr(Lambdax)*Sqr(g1)*TLambda12 + 1200*
+      traceLambda12AdjLambda12*Sqr(g2)*TLambda12 + 1200*AbsSqr(Lambdax)*Sqr(g2)
+      *TLambda12 + 360*Sqr(g1)*Sqr(g2)*TLambda12 + 3200*traceKappaAdjKappa*Sqr(
+      g3)*TLambda12 - 360*traceKappaAdjKappa*Sqr(gN)*TLambda12 - 240*
+      traceLambda12AdjLambda12*Sqr(gN)*TLambda12 - 240*AbsSqr(Lambdax)*Sqr(gN)*
+      TLambda12 + 54*Sqr(g1)*Sqr(gN)*TLambda12 + 390*Sqr(g2)*Sqr(gN)*TLambda12
+      - 800*Sqr(Conj(Lambdax))*Sqr(Lambdax)*TLambda12) + (-12*
+      traceAdjKappaTKappa - 8*traceAdjLambda12TLambda12 - 5*MassBp*Sqr(gN) - 8*
+      Conj(Lambdax)*TLambdax)*(Lambda12*(Lambda12).adjoint()*Lambda12) + 0.5*(-
+      18*traceKappaAdjKappa - 12*traceLambda12AdjLambda12 - 12*AbsSqr(Lambdax)
+      + 7*Sqr(gN))*(Lambda12*(Lambda12).adjoint()*TLambda12) + (-9*
+      traceKappaAdjKappa - 6*traceLambda12AdjLambda12 - 6*AbsSqr(Lambdax) + 4*
+      Sqr(gN))*(TLambda12*(Lambda12).adjoint()*Lambda12) - 3*(Lambda12*(
+      Lambda12).adjoint()*Lambda12*(Lambda12).adjoint()*TLambda12) - 4*(
+      Lambda12*(Lambda12).adjoint()*TLambda12*(Lambda12).adjoint()*Lambda12) -
+      3*(TLambda12*(Lambda12).adjoint()*Lambda12*(Lambda12).adjoint()*Lambda12)
+      )).real();
 
 
    return beta_TLambda12;
@@ -184,6 +200,25 @@ Eigen::Matrix<double,2,2> CE6SSM_soft_parameters::calc_beta_TLambda12_3_loop(con
  * @return 4-loop beta function
  */
 Eigen::Matrix<double,2,2> CE6SSM_soft_parameters::calc_beta_TLambda12_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,2,2> beta_TLambda12;
+
+   beta_TLambda12 = ZEROMATRIX(2,2);
+
+
+   return beta_TLambda12;
+}
+
+/**
+ * Calculates the 5-loop beta function of TLambda12.
+ *
+ * @return 5-loop beta function
+ */
+Eigen::Matrix<double,2,2> CE6SSM_soft_parameters::calc_beta_TLambda12_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 13:48:10
+// File generated at Tue 22 Jan 2019 14:20:01
 
 #include "CE6SSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -129,21 +129,21 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_mDx2_2_loop(const So
       traceconjTLambda12TpTLambda12 - 12*ms2*traceKappaAdjKappa - 6*
       traceKappaAdjKappaconjmDx2 - 6*traceKappaconjmDxbar2AdjKappa - 8*ms2*
       traceLambda12AdjLambda12 - 4*traceLambda12AdjLambda12conjmH2I2 - 4*
-      tracemH1I2AdjLambda12Lambda12 - 4*(mHd2 + mHu2 + 2*ms2)*AbsSqr(Lambdax) -
-      4*AbsSqr(TLambdax) + 3*ms2*Sqr(gN) + 6*AbsSqr(MassBp)*Sqr(gN))*(Kappa.
-      conjugate()*(Kappa).transpose()) + (-6*traceconjTKappaTpKappa - 4*
-      traceconjTLambda12TpLambda12 - 4*Conj(TLambdax)*Lambdax - 3*Conj(MassBp)*
-      Sqr(gN))*(Kappa.conjugate()*(TKappa).transpose()) + (-6*
-      traceAdjKappaTKappa - 4*traceAdjLambda12TLambda12 - 3*MassBp*Sqr(gN) - 4*
-      Conj(Lambdax)*TLambdax)*(TKappa.conjugate()*(Kappa).transpose()) + (-6*
+      tracemH1I2AdjLambda12Lambda12 - 4*mHd2*AbsSqr(Lambdax) - 4*mHu2*AbsSqr(
+      Lambdax) - 8*ms2*AbsSqr(Lambdax) - 4*AbsSqr(TLambdax) + 3*ms2*Sqr(gN) + 6
+      *AbsSqr(MassBp)*Sqr(gN))*(Kappa.conjugate()*(Kappa).transpose()) + (-6*
+      traceconjTKappaTpKappa - 4*traceconjTLambda12TpLambda12 - 4*Conj(TLambdax
+      )*Lambdax - 3*Conj(MassBp)*Sqr(gN))*(Kappa.conjugate()*(TKappa).transpose
+      ()) + (-6*traceAdjKappaTKappa - 4*traceAdjLambda12TLambda12 - 3*MassBp*
+      Sqr(gN) - 4*Conj(Lambdax)*TLambdax)*(TKappa.conjugate()*(Kappa).transpose
+      ()) + (-6*traceKappaAdjKappa - 4*traceLambda12AdjLambda12 - 4*AbsSqr(
+      Lambdax) + 3*Sqr(gN))*(TKappa.conjugate()*(TKappa).transpose()) + 0.5*(-6
+      *traceKappaAdjKappa - 4*traceLambda12AdjLambda12 - 4*AbsSqr(Lambdax) + 3*
+      Sqr(gN))*(mDx2*Kappa.conjugate()*(Kappa).transpose()) + (-6*
       traceKappaAdjKappa - 4*traceLambda12AdjLambda12 - 4*AbsSqr(Lambdax) + 3*
-      Sqr(gN))*(TKappa.conjugate()*(TKappa).transpose()) + (-3*
-      traceKappaAdjKappa - 2*traceLambda12AdjLambda12 - 2*AbsSqr(Lambdax) + 1.5
-      *Sqr(gN))*(mDx2*Kappa.conjugate()*(Kappa).transpose()) + (-6*
+      Sqr(gN))*(Kappa.conjugate()*mDxbar2*(Kappa).transpose()) + 0.5*(-6*
       traceKappaAdjKappa - 4*traceLambda12AdjLambda12 - 4*AbsSqr(Lambdax) + 3*
-      Sqr(gN))*(Kappa.conjugate()*mDxbar2*(Kappa).transpose()) + (-3*
-      traceKappaAdjKappa - 2*traceLambda12AdjLambda12 - 2*AbsSqr(Lambdax) + 1.5
-      *Sqr(gN))*(Kappa.conjugate()*(Kappa).transpose()*mDx2) - 4*ms2*(Kappa.
+      Sqr(gN))*(Kappa.conjugate()*(Kappa).transpose()*mDx2) - 4*ms2*(Kappa.
       conjugate()*(Kappa).transpose()*Kappa.conjugate()*(Kappa).transpose()) -
       2*(Kappa.conjugate()*(Kappa).transpose()*TKappa.conjugate()*(TKappa).
       transpose()) - 2*(Kappa.conjugate()*(TKappa).transpose()*TKappa.conjugate
@@ -156,14 +156,17 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_mDx2_2_loop(const So
       conjugate()*(Kappa).transpose()) - 2*(Kappa.conjugate()*(Kappa).transpose
       ()*Kappa.conjugate()*mDxbar2*(Kappa).transpose()) - Kappa.conjugate()*(
       Kappa).transpose()*Kappa.conjugate()*(Kappa).transpose()*mDx2 +
-      0.017777777777777778*(4*Conj(MassB)*Sqr(g1)*(219*MassB*Sqr(g1) + 20*(2*
-      MassB + MassG)*Sqr(g3) - 3*(2*MassB + MassBp)*Sqr(gN)) + 12*Conj(MassBp)*
-      Sqr(gN)*(-((MassB + 2*MassBp)*Sqr(g1)) + 2*(5*(2*MassBp + MassG)*Sqr(g3)
-      + 54*MassBp*Sqr(gN))) + 5*(3*(g1*(2.449489742783178*gN*Tr2U114 +
-      2.449489742783178*gN*Tr2U141 - 7.745966692414834*Tr31) + 3*gN*(gN*Tr2U144
-       - 3.1622776601683795*Tr34) + 40*Tr23*Quad(g3) + 2*Tr2U111*Sqr(g1)) + 8*
-      Conj(MassG)*Sqr(g3)*(2*(MassB + 2*MassG)*Sqr(g1) + 75*MassG*Sqr(g3) + 3*(
-      MassBp + 2*MassG)*Sqr(gN))))*UNITMATRIX(3))).real();
+      0.017777777777777778*(36.74234614174767*g1*gN*Tr2U114 + 36.74234614174767
+      *g1*gN*Tr2U141 - 116.1895003862225*g1*Tr31 - 142.30249470757707*gN*Tr34 +
+      876*AbsSqr(MassB)*Quad(g1) + 600*Tr23*Quad(g3) + 3000*AbsSqr(MassG)*Quad(
+      g3) + 1296*AbsSqr(MassBp)*Quad(gN) + 30*Tr2U111*Sqr(g1) + 160*AbsSqr(
+      MassB)*Sqr(g1)*Sqr(g3) + 160*AbsSqr(MassG)*Sqr(g1)*Sqr(g3) + 80*MassG*
+      Conj(MassB)*Sqr(g1)*Sqr(g3) + 80*MassB*Conj(MassG)*Sqr(g1)*Sqr(g3) + 45*
+      Tr2U144*Sqr(gN) - 24*AbsSqr(MassB)*Sqr(g1)*Sqr(gN) - 24*AbsSqr(MassBp)*
+      Sqr(g1)*Sqr(gN) - 12*MassBp*Conj(MassB)*Sqr(g1)*Sqr(gN) - 12*MassB*Conj(
+      MassBp)*Sqr(g1)*Sqr(gN) + 240*AbsSqr(MassBp)*Sqr(g3)*Sqr(gN) + 240*AbsSqr
+      (MassG)*Sqr(g3)*Sqr(gN) + 120*MassG*Conj(MassBp)*Sqr(g3)*Sqr(gN) + 120*
+      MassBp*Conj(MassG)*Sqr(g3)*Sqr(gN))*UNITMATRIX(3))).real();
 
 
    return beta_mDx2;
@@ -194,6 +197,25 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_mDx2_3_loop(const So
  * @return 4-loop beta function
  */
 Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_mDx2_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_mDx2;
+
+   beta_mDx2 = ZEROMATRIX(3,3);
+
+
+   return beta_mDx2;
+}
+
+/**
+ * Calculates the 5-loop beta function of mDx2.
+ *
+ * @return 5-loop beta function
+ */
+Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_mDx2_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 13:46:22
+// File generated at Tue 22 Jan 2019 14:18:55
 
 #include "CE6SSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -40,10 +40,10 @@ Eigen::Matrix<double,3,3> CE6SSM_susy_parameters::calc_beta_Kappa_1_loop(const S
 
    Eigen::Matrix<double,3,3> beta_Kappa;
 
-   beta_Kappa = (oneOver16PiSqr*(Kappa*(3*traceKappaAdjKappa + 2*
-      traceLambda12AdjLambda12 + 2*AbsSqr(Lambdax) - 0.26666666666666666*Sqr(g1
-      ) - 5.333333333333333*Sqr(g3) - 1.9*Sqr(gN)) + 2*(Kappa*(Kappa).adjoint()
-      *Kappa))).real();
+   beta_Kappa = (oneOver16PiSqr*(-0.03333333333333333*Kappa*(-90*
+      traceKappaAdjKappa - 60*traceLambda12AdjLambda12 - 60*AbsSqr(Lambdax) + 8
+      *Sqr(g1) + 160*Sqr(g3) + 57*Sqr(gN)) + 2*(Kappa*(Kappa).adjoint()*Kappa))
+      ).real();
 
 
    return beta_Kappa;
@@ -70,18 +70,20 @@ Eigen::Matrix<double,3,3> CE6SSM_susy_parameters::calc_beta_Kappa_2_loop(const S
 
    Eigen::Matrix<double,3,3> beta_Kappa;
 
-   beta_Kappa = (twoLoop*(Kappa*(-6*traceKappaAdjKappaKappaAdjKappa - 4*
-      traceLambda12AdjLambda12Lambda12AdjLambda12 + 2.5955555555555554*Quad(g1)
-      + 14.222222222222221*Quad(g3) + 19.665*Quad(gN) + 6*
-      traceLambda12AdjLambda12*Sqr(g2) + 16*traceKappaAdjKappa*Sqr(g3) + 0.4*
-      AbsSqr(Lambdax)*(-15*traceYdAdjYd - 5*traceYeAdjYe - 15*traceYuAdjYu + 3*
-      Sqr(g1) + 15*Sqr(g2) - 3*Sqr(gN)) - 1.8*traceKappaAdjKappa*Sqr(gN) - 1.2*
-      traceLambda12AdjLambda12*Sqr(gN) + 3.466666666666667*Sqr(g3)*Sqr(gN) +
-      0.0044444444444444444*Sqr(g1)*(180*traceKappaAdjKappa + 270*
-      traceLambda12AdjLambda12 + 320*Sqr(g3) + 57*Sqr(gN)) - 4*Sqr(Conj(Lambdax
-      ))*Sqr(Lambdax)) + (-6*traceKappaAdjKappa - 4*traceLambda12AdjLambda12 -
-      4*AbsSqr(Lambdax) + 2.5*Sqr(gN))*(Kappa*(Kappa).adjoint()*Kappa) - 2*(
-      Kappa*(Kappa).adjoint()*Kappa*(Kappa).adjoint()*Kappa))).real();
+   beta_Kappa = (twoLoop*(0.0005555555555555556*Kappa*(-10800*
+      traceKappaAdjKappaKappaAdjKappa - 7200*
+      traceLambda12AdjLambda12Lambda12AdjLambda12 - 10800*traceYdAdjYd*AbsSqr(
+      Lambdax) - 3600*traceYeAdjYe*AbsSqr(Lambdax) - 10800*traceYuAdjYu*AbsSqr(
+      Lambdax) + 4672*Quad(g1) + 25600*Quad(g3) + 35397*Quad(gN) + 1440*
+      traceKappaAdjKappa*Sqr(g1) + 2160*traceLambda12AdjLambda12*Sqr(g1) + 2160
+      *AbsSqr(Lambdax)*Sqr(g1) + 10800*traceLambda12AdjLambda12*Sqr(g2) + 10800
+      *AbsSqr(Lambdax)*Sqr(g2) + 28800*traceKappaAdjKappa*Sqr(g3) + 2560*Sqr(g1
+      )*Sqr(g3) - 3240*traceKappaAdjKappa*Sqr(gN) - 2160*
+      traceLambda12AdjLambda12*Sqr(gN) - 2160*AbsSqr(Lambdax)*Sqr(gN) + 456*Sqr
+      (g1)*Sqr(gN) + 6240*Sqr(g3)*Sqr(gN) - 7200*Sqr(Conj(Lambdax))*Sqr(Lambdax
+      )) + 0.5*(-12*traceKappaAdjKappa - 8*traceLambda12AdjLambda12 - 8*AbsSqr(
+      Lambdax) + 5*Sqr(gN))*(Kappa*(Kappa).adjoint()*Kappa) - 2*(Kappa*(Kappa).
+      adjoint()*Kappa*(Kappa).adjoint()*Kappa))).real();
 
 
    return beta_Kappa;
@@ -112,6 +114,25 @@ Eigen::Matrix<double,3,3> CE6SSM_susy_parameters::calc_beta_Kappa_3_loop(const S
  * @return 4-loop beta function
  */
 Eigen::Matrix<double,3,3> CE6SSM_susy_parameters::calc_beta_Kappa_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_Kappa;
+
+   beta_Kappa = ZEROMATRIX(3,3);
+
+
+   return beta_Kappa;
+}
+
+/**
+ * Calculates the 5-loop beta function of Kappa.
+ *
+ * @return 5-loop beta function
+ */
+Eigen::Matrix<double,3,3> CE6SSM_susy_parameters::calc_beta_Kappa_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

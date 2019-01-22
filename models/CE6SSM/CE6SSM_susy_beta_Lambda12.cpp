@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 13:46:22
+// File generated at Tue 22 Jan 2019 14:18:56
 
 #include "CE6SSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -40,9 +40,9 @@ Eigen::Matrix<double,2,2> CE6SSM_susy_parameters::calc_beta_Lambda12_1_loop(cons
 
    Eigen::Matrix<double,2,2> beta_Lambda12;
 
-   beta_Lambda12 = (oneOver16PiSqr*(Lambda12*(3*traceKappaAdjKappa + 2*
-      traceLambda12AdjLambda12 + 2*AbsSqr(Lambdax) - 0.6*Sqr(g1) - 3*Sqr(g2) -
-      1.9*Sqr(gN)) + 2*(Lambda12*(Lambda12).adjoint()*Lambda12))).real();
+   beta_Lambda12 = (oneOver16PiSqr*(-0.1*Lambda12*(-30*traceKappaAdjKappa - 20*
+      traceLambda12AdjLambda12 - 20*AbsSqr(Lambdax) + 6*Sqr(g1) + 30*Sqr(g2) +
+      19*Sqr(gN)) + 2*(Lambda12*(Lambda12).adjoint()*Lambda12))).real();
 
 
    return beta_Lambda12;
@@ -71,17 +71,18 @@ Eigen::Matrix<double,2,2> CE6SSM_susy_parameters::calc_beta_Lambda12_2_loop(cons
 
    beta_Lambda12 = (twoLoop*(0.005*Lambda12*(-1200*
       traceKappaAdjKappaKappaAdjKappa - 800*
-      traceLambda12AdjLambda12Lambda12AdjLambda12 + 1188*Quad(g1) + 3300*Quad(
-      g2) + 3933*Quad(gN) + 1200*traceLambda12AdjLambda12*Sqr(g2) + 3200*
-      traceKappaAdjKappa*Sqr(g3) + 80*AbsSqr(Lambdax)*(-15*traceYdAdjYd - 5*
-      traceYeAdjYe - 15*traceYuAdjYu + 3*Sqr(g1) + 15*Sqr(g2) - 3*Sqr(gN)) -
-      360*traceKappaAdjKappa*Sqr(gN) - 240*traceLambda12AdjLambda12*Sqr(gN) +
-      390*Sqr(g2)*Sqr(gN) + 2*Sqr(g1)*(80*traceKappaAdjKappa + 120*
-      traceLambda12AdjLambda12 + 180*Sqr(g2) + 27*Sqr(gN)) - 800*Sqr(Conj(
-      Lambdax))*Sqr(Lambdax)) + (-6*traceKappaAdjKappa - 4*
-      traceLambda12AdjLambda12 - 4*AbsSqr(Lambdax) + 2.5*Sqr(gN))*(Lambda12*(
-      Lambda12).adjoint()*Lambda12) - 2*(Lambda12*(Lambda12).adjoint()*Lambda12
-      *(Lambda12).adjoint()*Lambda12))).real();
+      traceLambda12AdjLambda12Lambda12AdjLambda12 - 1200*traceYdAdjYd*AbsSqr(
+      Lambdax) - 400*traceYeAdjYe*AbsSqr(Lambdax) - 1200*traceYuAdjYu*AbsSqr(
+      Lambdax) + 1188*Quad(g1) + 3300*Quad(g2) + 3933*Quad(gN) + 160*
+      traceKappaAdjKappa*Sqr(g1) + 240*traceLambda12AdjLambda12*Sqr(g1) + 240*
+      AbsSqr(Lambdax)*Sqr(g1) + 1200*traceLambda12AdjLambda12*Sqr(g2) + 1200*
+      AbsSqr(Lambdax)*Sqr(g2) + 360*Sqr(g1)*Sqr(g2) + 3200*traceKappaAdjKappa*
+      Sqr(g3) - 360*traceKappaAdjKappa*Sqr(gN) - 240*traceLambda12AdjLambda12*
+      Sqr(gN) - 240*AbsSqr(Lambdax)*Sqr(gN) + 54*Sqr(g1)*Sqr(gN) + 390*Sqr(g2)*
+      Sqr(gN) - 800*Sqr(Conj(Lambdax))*Sqr(Lambdax)) + 0.5*(-12*
+      traceKappaAdjKappa - 8*traceLambda12AdjLambda12 - 8*AbsSqr(Lambdax) + 5*
+      Sqr(gN))*(Lambda12*(Lambda12).adjoint()*Lambda12) - 2*(Lambda12*(Lambda12
+      ).adjoint()*Lambda12*(Lambda12).adjoint()*Lambda12))).real();
 
 
    return beta_Lambda12;
@@ -112,6 +113,25 @@ Eigen::Matrix<double,2,2> CE6SSM_susy_parameters::calc_beta_Lambda12_3_loop(cons
  * @return 4-loop beta function
  */
 Eigen::Matrix<double,2,2> CE6SSM_susy_parameters::calc_beta_Lambda12_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,2,2> beta_Lambda12;
+
+   beta_Lambda12 = ZEROMATRIX(2,2);
+
+
+   return beta_Lambda12;
+}
+
+/**
+ * Calculates the 5-loop beta function of Lambda12.
+ *
+ * @return 5-loop beta function
+ */
+Eigen::Matrix<double,2,2> CE6SSM_susy_parameters::calc_beta_Lambda12_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

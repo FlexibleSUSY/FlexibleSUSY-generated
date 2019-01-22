@@ -7,7 +7,12 @@ MODNUHMSSM_DEP := $(patsubst %,model_specific/%,$(MODNUHMSSM_MOD))
 MODNUHMSSM_INC := $(patsubst %,-Imodel_specific/%,$(MODNUHMSSM_MOD))
 MODNUHMSSM_LIB := $(foreach M,$(MODNUHMSSM_MOD),model_specific/$M/libmodel_specific_$M$(MODULE_LIBEXT))
 
+MODNUHMSSM_SUBMOD  := $(DIR)/cxx_qft
+MODNUHMSSM_SUBMOD_INC := $(patsubst %,-I%,$(MODNUHMSSM_SUBMOD))
+
 NUHMSSM_INSTALL_DIR := $(INSTALL_DIR)/$(DIR)
+NUHMSSM_INSTALL_CXXQFT_DIR := \
+		$(NUHMSSM_INSTALL_DIR)/cxx_qft
 
 NUHMSSM_MK     := \
 		$(DIR)/module.mk
@@ -68,7 +73,6 @@ LLNUHMSSM_MMA  := \
 		$(DIR)/run_NUHMSSM.m
 
 LIBNUHMSSM_HDR := \
-		$(DIR)/NUHMSSM_cxx_diagrams.hpp \
 		$(DIR)/NUHMSSM_a_muon.hpp \
 		$(DIR)/NUHMSSM_convergence_tester.hpp \
 		$(DIR)/NUHMSSM_edm.hpp \
@@ -93,6 +97,13 @@ LIBNUHMSSM_HDR := \
 		$(DIR)/NUHMSSM_susy_scale_constraint.hpp \
 		$(DIR)/NUHMSSM_utilities.hpp \
 		$(DIR)/NUHMSSM_weinberg_angle.hpp
+
+LIBNUHMSSM_CXXQFT_HDR := \
+		$(DIR)/cxx_qft/NUHMSSM_qft.hpp \
+		$(DIR)/cxx_qft/NUHMSSM_fields.hpp \
+		$(DIR)/cxx_qft/NUHMSSM_vertices.hpp \
+		$(DIR)/cxx_qft/NUHMSSM_context_base.hpp \
+		$(DIR)/cxx_qft/NUHMSSM_npointfunctions.hpp
 
 ifneq ($(findstring two_scale,$(SOLVERS)),)
 -include $(DIR)/two_scale.mk
@@ -182,8 +193,10 @@ all-$(MODNAME): $(LIBNUHMSSM) $(EXENUHMSSM_EXE)
 ifneq ($(INSTALL_DIR),)
 install-src::
 		install -d $(NUHMSSM_INSTALL_DIR)
+		install -d $(NUHMSSM_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(LIBNUHMSSM_SRC) $(NUHMSSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LIBNUHMSSM_HDR) $(NUHMSSM_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(LIBNUHMSSM_CXXQFT_HDR) $(NUHMSSM_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(EXENUHMSSM_SRC) $(NUHMSSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLNUHMSSM_SRC) $(NUHMSSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLNUHMSSM_MMA) $(NUHMSSM_INSTALL_DIR)
@@ -214,6 +227,7 @@ clean-$(MODNAME)-obj:
 clean-$(MODNAME)-src:
 		-rm -f $(LIBNUHMSSM_SRC)
 		-rm -f $(LIBNUHMSSM_HDR)
+		-rm -f $(LIBNUHMSSM_CXXQFT_HDR)
 		-rm -f $(EXENUHMSSM_SRC)
 		-rm -f $(LLNUHMSSM_SRC)
 		-rm -f $(LLNUHMSSM_MMA)
@@ -242,14 +256,14 @@ distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
 		tar -czf $(NUHMSSM_TARBALL) \
-		$(LIBNUHMSSM_SRC) $(LIBNUHMSSM_HDR) \
+		$(LIBNUHMSSM_SRC) $(LIBNUHMSSM_HDR) $(LIBNUHMSSM_CXXQFT_HDR) \
 		$(EXENUHMSSM_SRC) \
 		$(LLNUHMSSM_SRC) $(LLNUHMSSM_MMA) \
 		$(NUHMSSM_MK) $(NUHMSSM_INCLUDE_MK) \
 		$(NUHMSSM_SLHA_INPUT) $(NUHMSSM_REFERENCES) \
 		$(NUHMSSM_GNUPLOT)
 
-$(LIBNUHMSSM_SRC) $(LIBNUHMSSM_HDR) $(EXENUHMSSM_SRC) $(LLNUHMSSM_SRC) $(LLNUHMSSM_MMA) \
+$(LIBNUHMSSM_SRC) $(LIBNUHMSSM_HDR) $(LIBNUHMSSM_CXXQFT_HDR) $(EXENUHMSSM_SRC) $(LLNUHMSSM_SRC) $(LLNUHMSSM_MMA) \
 : run-metacode-$(MODNAME)
 		@true
 
@@ -270,7 +284,7 @@ $(METACODE_STAMP_NUHMSSM):
 endif
 
 $(LIBNUHMSSM_DEP) $(EXENUHMSSM_DEP) $(LLNUHMSSM_DEP) $(LIBNUHMSSM_OBJ) $(EXENUHMSSM_OBJ) $(LLNUHMSSM_OBJ) $(LLNUHMSSM_LIB): \
-	CPPFLAGS += $(MODNUHMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODNUHMSSM_SUBMOD_INC) $(MODNUHMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBNUHMSSM_DEP) $(EXENUHMSSM_DEP) $(LLNUHMSSM_DEP) $(LIBNUHMSSM_OBJ) $(EXENUHMSSM_OBJ) $(LLNUHMSSM_OBJ) $(LLNUHMSSM_LIB): \

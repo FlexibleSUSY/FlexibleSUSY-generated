@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:56:12
+// File generated at Tue 22 Jan 2019 17:43:19
 
 #include "MSSMRHN_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -113,30 +113,31 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_mu2_2_loop(const So
       traceml2AdjYvYv + 15*tracemq2AdjYuYu + 15*tracemu2YuAdjYu + 5*
       tracemv2YvAdjYv + 30*mHu2*traceYuAdjYu + 10*mHu2*traceYvAdjYv + mHu2*Sqr(
       g1) + 2*AbsSqr(MassB)*Sqr(g1) - 15*mHu2*Sqr(g2) - 30*AbsSqr(MassWB)*Sqr(
-      g2))*(Yu*Yu.adjoint()) + (0.8*MassB*Sqr(g1) - 4*(3*traceAdjYuTYu +
-      traceAdjYvTYv + 3*MassWB*Sqr(g2)))*(Yu*(TYu).adjoint()) + (0.8*Conj(MassB
-      )*Sqr(g1) - 4*(3*traceconjTYuTpYu + traceconjTYvTpYv + 3*Conj(MassWB)*Sqr
-      (g2)))*(TYu*Yu.adjoint()) - 0.8*(Sqr(g1) + 5*(3*traceYuAdjYu +
-      traceYvAdjYv - 3*Sqr(g2)))*(TYu*(TYu).adjoint()) + (-2*(3*traceYuAdjYu +
-      traceYvAdjYv) - 0.4*Sqr(g1) + 6*Sqr(g2))*(mu2*Yu*Yu.adjoint()) - 0.8*(Sqr
-      (g1) + 5*(3*traceYuAdjYu + traceYvAdjYv - 3*Sqr(g2)))*(Yu*mq2*Yu.adjoint(
-      )) + (-2*(3*traceYuAdjYu + traceYvAdjYv) - 0.4*Sqr(g1) + 6*Sqr(g2))*(Yu*
-      Yu.adjoint()*mu2) - 4*(mHd2 + mHu2)*(Yu*Yd.adjoint()*Yd*Yu.adjoint()) - 4
-      *(Yu*Yd.adjoint()*TYd*(TYu).adjoint()) - 8*mHu2*(Yu*Yu.adjoint()*Yu*Yu.
-      adjoint()) - 4*(Yu*Yu.adjoint()*TYu*(TYu).adjoint()) - 4*(Yu*(TYd).
-      adjoint()*TYd*Yu.adjoint()) - 4*(Yu*(TYu).adjoint()*TYu*Yu.adjoint()) - 4
-      *(TYu*Yd.adjoint()*Yd*(TYu).adjoint()) - 4*(TYu*Yu.adjoint()*Yu*(TYu).
-      adjoint()) - 4*(TYu*(TYd).adjoint()*Yd*Yu.adjoint()) - 4*(TYu*(TYu).
-      adjoint()*Yu*Yu.adjoint()) - 2*(mu2*Yu*Yd.adjoint()*Yd*Yu.adjoint()) - 2*
-      (mu2*Yu*Yu.adjoint()*Yu*Yu.adjoint()) - 4*(Yu*mq2*Yd.adjoint()*Yd*Yu.
-      adjoint()) - 4*(Yu*mq2*Yu.adjoint()*Yu*Yu.adjoint()) - 4*(Yu*Yd.adjoint()
-      *md2*Yd*Yu.adjoint()) - 4*(Yu*Yd.adjoint()*Yd*mq2*Yu.adjoint()) - 2*(Yu*
-      Yd.adjoint()*Yd*Yu.adjoint()*mu2) - 4*(Yu*Yu.adjoint()*mu2*Yu*Yu.adjoint(
-      )) - 4*(Yu*Yu.adjoint()*Yu*mq2*Yu.adjoint()) - 2*(Yu*Yu.adjoint()*Yu*Yu.
-      adjoint()*mu2) + 0.07111111111111111*(2*Conj(MassB)*Sqr(g1)*(321*MassB*
-      Sqr(g1) + 40*(2*MassB + MassG)*Sqr(g3)) + 5*(-11.618950038622252*g1*Tr31
-      + 30*Tr23*Quad(g3) + 6*Tr2U111*Sqr(g1) + 8*Conj(MassG)*Sqr(g3)*(2*(MassB
-      + 2*MassG)*Sqr(g1) - 15*MassG*Sqr(g3))))*UNITMATRIX(3))).real();
+      g2))*(Yu*Yu.adjoint()) + 0.8*(-15*traceAdjYuTYu - 5*traceAdjYvTYv + MassB
+      *Sqr(g1) - 15*MassWB*Sqr(g2))*(Yu*(TYu).adjoint()) - 0.8*(15*
+      traceconjTYuTpYu + 5*traceconjTYvTpYv - Conj(MassB)*Sqr(g1) + 15*Conj(
+      MassWB)*Sqr(g2))*(TYu*Yu.adjoint()) - 0.8*(15*traceYuAdjYu + 5*
+      traceYvAdjYv + Sqr(g1) - 15*Sqr(g2))*(TYu*(TYu).adjoint()) - 0.4*(15*
+      traceYuAdjYu + 5*traceYvAdjYv + Sqr(g1) - 15*Sqr(g2))*(mu2*Yu*Yu.adjoint(
+      )) - 0.8*(15*traceYuAdjYu + 5*traceYvAdjYv + Sqr(g1) - 15*Sqr(g2))*(Yu*
+      mq2*Yu.adjoint()) - 0.4*(15*traceYuAdjYu + 5*traceYvAdjYv + Sqr(g1) - 15*
+      Sqr(g2))*(Yu*Yu.adjoint()*mu2) - 4*(mHd2 + mHu2)*(Yu*Yd.adjoint()*Yd*Yu.
+      adjoint()) - 4*(Yu*Yd.adjoint()*TYd*(TYu).adjoint()) - 8*mHu2*(Yu*Yu.
+      adjoint()*Yu*Yu.adjoint()) - 4*(Yu*Yu.adjoint()*TYu*(TYu).adjoint()) - 4*
+      (Yu*(TYd).adjoint()*TYd*Yu.adjoint()) - 4*(Yu*(TYu).adjoint()*TYu*Yu.
+      adjoint()) - 4*(TYu*Yd.adjoint()*Yd*(TYu).adjoint()) - 4*(TYu*Yu.adjoint(
+      )*Yu*(TYu).adjoint()) - 4*(TYu*(TYd).adjoint()*Yd*Yu.adjoint()) - 4*(TYu*
+      (TYu).adjoint()*Yu*Yu.adjoint()) - 2*(mu2*Yu*Yd.adjoint()*Yd*Yu.adjoint()
+      ) - 2*(mu2*Yu*Yu.adjoint()*Yu*Yu.adjoint()) - 4*(Yu*mq2*Yd.adjoint()*Yd*
+      Yu.adjoint()) - 4*(Yu*mq2*Yu.adjoint()*Yu*Yu.adjoint()) - 4*(Yu*Yd.
+      adjoint()*md2*Yd*Yu.adjoint()) - 4*(Yu*Yd.adjoint()*Yd*mq2*Yu.adjoint())
+      - 2*(Yu*Yd.adjoint()*Yd*Yu.adjoint()*mu2) - 4*(Yu*Yu.adjoint()*mu2*Yu*Yu.
+      adjoint()) - 4*(Yu*Yu.adjoint()*Yu*mq2*Yu.adjoint()) - 2*(Yu*Yu.adjoint()
+      *Yu*Yu.adjoint()*mu2) + 0.07111111111111111*(-58.09475019311125*g1*Tr31 +
+      642*AbsSqr(MassB)*Quad(g1) + 150*Tr23*Quad(g3) - 600*AbsSqr(MassG)*Quad(
+      g3) + 30*Tr2U111*Sqr(g1) + 160*AbsSqr(MassB)*Sqr(g1)*Sqr(g3) + 160*AbsSqr
+      (MassG)*Sqr(g1)*Sqr(g3) + 80*MassG*Conj(MassB)*Sqr(g1)*Sqr(g3) + 80*MassB
+      *Conj(MassG)*Sqr(g1)*Sqr(g3))*UNITMATRIX(3))).real();
 
 
    return beta_mu2;
@@ -167,6 +168,25 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_mu2_3_loop(const So
  * @return 4-loop beta function
  */
 Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_mu2_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_mu2;
+
+   beta_mu2 = ZEROMATRIX(3,3);
+
+
+   return beta_mu2;
+}
+
+/**
+ * Calculates the 5-loop beta function of mu2.
+ *
+ * @return 5-loop beta function
+ */
+Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_mu2_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

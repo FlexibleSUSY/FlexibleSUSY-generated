@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 13:46:24
+// File generated at Tue 22 Jan 2019 13:05:04
 
 #include "NUHMSSMNoFVHimalaya_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -82,10 +82,10 @@ double NUHMSSMNoFVHimalaya_soft_parameters::calc_beta_mHd2_1_loop(const Soft_tra
 
    double beta_mHd2;
 
-   beta_mHd2 = Re(oneOver16PiSqr*(-0.7745966692414834*g1*Tr11 + 6*
-      traceconjTYdTpTYd + 2*traceconjTYeTpTYe + 6*tracemd2YdAdjYd + 2*
-      traceme2YeAdjYe + 2*traceml2AdjYeYe + 6*tracemq2AdjYdYd + 6*mHd2*
-      traceYdAdjYd + 2*mHd2*traceYeAdjYe - 1.2*AbsSqr(MassB)*Sqr(g1) - 6*AbsSqr
+   beta_mHd2 = Re(0.2*oneOver16PiSqr*(-3.872983346207417*g1*Tr11 + 30*
+      traceconjTYdTpTYd + 10*traceconjTYeTpTYe + 30*tracemd2YdAdjYd + 10*
+      traceme2YeAdjYe + 10*traceml2AdjYeYe + 30*tracemq2AdjYdYd + 30*mHd2*
+      traceYdAdjYd + 10*mHd2*traceYeAdjYe - 6*AbsSqr(MassB)*Sqr(g1) - 30*AbsSqr
       (MassWB)*Sqr(g2)));
 
 
@@ -137,26 +137,31 @@ double NUHMSSMNoFVHimalaya_soft_parameters::calc_beta_mHd2_2_loop(const Soft_tra
 
    double beta_mHd2;
 
-   beta_mHd2 = Re(0.04*twoLoop*(Conj(MassB)*Sqr(g1)*(621*MassB*Sqr(g1) + 5*(4*(
-      traceAdjYdTYd - 3*traceAdjYeTYe - 2*MassB*traceYdAdjYd + 6*MassB*
-      traceYeAdjYe) + 9*(2*MassB + MassWB)*Sqr(g2))) + 5*(3*Conj(MassWB)*Sqr(g2
-      )*(3*(MassB + 2*MassWB)*Sqr(g1) + 55*MassWB*Sqr(g2)) - 160*(traceAdjYdTYd
-       - 2*MassG*traceYdAdjYd)*Conj(MassG)*Sqr(g3) + 2*(-7.745966692414834*g1*
-      Tr31 + 15*Tr22*Quad(g2) + (3*Tr2U111 - 2*(traceconjTYdTpTYd - MassB*
-      traceconjTYdTpYd - 3*traceconjTYeTpTYe + 3*MassB*traceconjTYeTpYe +
-      tracemd2YdAdjYd - 3*traceme2YeAdjYe - 3*traceml2AdjYeYe + tracemq2AdjYdYd
-       + mHd2*traceYdAdjYd - 3*mHd2*traceYeAdjYe))*Sqr(g1) - 5*(3*(6*
-      tracemd2YdAdjYdYdAdjYd + tracemd2YdAdjYuYuAdjYd + 2*
-      traceme2YeAdjYeYeAdjYe + 2*traceml2AdjYeYeAdjYeYe + 6*
-      tracemq2AdjYdYdAdjYdYd + tracemq2AdjYdYdAdjYuYu + tracemq2AdjYuYuAdjYdYd
-      + tracemu2YuAdjYdYdAdjYu + 6*traceYdAdjTYdTYdAdjYd +
-      traceYdAdjTYuTYuAdjYd + 6*traceYdAdjYdTYdAdjTYd + 6*mHd2*
-      traceYdAdjYdYdAdjYd + traceYdAdjYuTYuAdjTYd + mHd2*traceYdAdjYuYuAdjYd +
-      mHu2*traceYdAdjYuYuAdjYd + 2*traceYeAdjTYeTYeAdjYe + 2*
-      traceYeAdjYeTYeAdjTYe + 2*mHd2*traceYeAdjYeYeAdjYe +
-      traceYuAdjTYdTYdAdjYu + traceYuAdjYdTYdAdjTYu) - 16*(traceconjTYdTpTYd -
-      MassG*traceconjTYdTpYd + tracemd2YdAdjYd + tracemq2AdjYdYd + mHd2*
-      traceYdAdjYd)*Sqr(g3))))));
+   beta_mHd2 = Re(0.04*twoLoop*(-77.45966692414834*g1*Tr31 - 900*
+      tracemd2YdAdjYdYdAdjYd - 150*tracemd2YdAdjYuYuAdjYd - 300*
+      traceme2YeAdjYeYeAdjYe - 300*traceml2AdjYeYeAdjYeYe - 900*
+      tracemq2AdjYdYdAdjYdYd - 150*tracemq2AdjYdYdAdjYuYu - 150*
+      tracemq2AdjYuYuAdjYdYd - 150*tracemu2YuAdjYdYdAdjYu - 900*
+      traceYdAdjTYdTYdAdjYd - 150*traceYdAdjTYuTYuAdjYd - 900*
+      traceYdAdjYdTYdAdjTYd - 900*mHd2*traceYdAdjYdYdAdjYd - 150*
+      traceYdAdjYuTYuAdjTYd - 150*mHd2*traceYdAdjYuYuAdjYd - 150*mHu2*
+      traceYdAdjYuYuAdjYd - 300*traceYeAdjTYeTYeAdjYe - 300*
+      traceYeAdjYeTYeAdjTYe - 300*mHd2*traceYeAdjYeYeAdjYe - 150*
+      traceYuAdjTYdTYdAdjYu - 150*traceYuAdjYdTYdAdjTYu + 621*AbsSqr(MassB)*
+      Quad(g1) + 150*Tr22*Quad(g2) + 825*AbsSqr(MassWB)*Quad(g2) + 30*Tr2U111*
+      Sqr(g1) - 20*traceconjTYdTpTYd*Sqr(g1) + 20*MassB*traceconjTYdTpYd*Sqr(g1
+      ) + 60*traceconjTYeTpTYe*Sqr(g1) - 60*MassB*traceconjTYeTpYe*Sqr(g1) - 20
+      *tracemd2YdAdjYd*Sqr(g1) + 60*traceme2YeAdjYe*Sqr(g1) + 60*
+      traceml2AdjYeYe*Sqr(g1) - 20*tracemq2AdjYdYd*Sqr(g1) - 20*mHd2*
+      traceYdAdjYd*Sqr(g1) + 60*mHd2*traceYeAdjYe*Sqr(g1) - 40*traceYdAdjYd*
+      AbsSqr(MassB)*Sqr(g1) + 120*traceYeAdjYe*AbsSqr(MassB)*Sqr(g1) + 20*
+      traceAdjYdTYd*Conj(MassB)*Sqr(g1) - 60*traceAdjYeTYe*Conj(MassB)*Sqr(g1)
+      + 90*AbsSqr(MassB)*Sqr(g1)*Sqr(g2) + 90*AbsSqr(MassWB)*Sqr(g1)*Sqr(g2) +
+      45*MassWB*Conj(MassB)*Sqr(g1)*Sqr(g2) + 45*MassB*Conj(MassWB)*Sqr(g1)*Sqr
+      (g2) + 800*traceconjTYdTpTYd*Sqr(g3) - 800*MassG*traceconjTYdTpYd*Sqr(g3)
+      + 800*tracemd2YdAdjYd*Sqr(g3) + 800*tracemq2AdjYdYd*Sqr(g3) + 800*mHd2*
+      traceYdAdjYd*Sqr(g3) + 1600*traceYdAdjYd*AbsSqr(MassG)*Sqr(g3) - 800*
+      traceAdjYdTYd*Conj(MassG)*Sqr(g3)));
 
 
    return beta_mHd2;
@@ -171,13 +176,13 @@ double NUHMSSMNoFVHimalaya_soft_parameters::calc_beta_mHd2_3_loop(const Soft_tra
 {
    DEFINE_PROJECTOR(3,3,3,3)
 
+   const double tracemd2 = TRACE_STRUCT.tracemd2;
+   const double traceme2 = TRACE_STRUCT.traceme2;
    const double traceml2 = TRACE_STRUCT.traceml2;
    const double tracemq2 = TRACE_STRUCT.tracemq2;
    const double tracemu2 = TRACE_STRUCT.tracemu2;
    const double traceAdjYdYd = TRACE_STRUCT.traceAdjYdYd;
-   const double tracemd2 = TRACE_STRUCT.tracemd2;
    const double traceAdjYeYe = TRACE_STRUCT.traceAdjYeYe;
-   const double traceme2 = TRACE_STRUCT.traceme2;
    const double traceAdjYuYu = TRACE_STRUCT.traceAdjYuYu;
    const double traceAdjTYdYd = TRACE_STRUCT.traceAdjTYdYd;
    const double traceAdjTYeYe = TRACE_STRUCT.traceAdjTYeYe;
@@ -281,206 +286,263 @@ double NUHMSSMNoFVHimalaya_soft_parameters::calc_beta_mHd2_3_loop(const Soft_tra
 
    double beta_mHd2;
 
-   const double beta_mHd2_1 = Re(threeLoop*(18.*traceAdjTYuTYuAdjYuYuAdjYdYd +
-      18.*traceAdjTYuYuAdjYuTYuAdjYdYd + 216.*traceAdjTYdYd*
-      traceAdjYdTYdAdjYdYd + 72.*traceAdjTYeYe*traceAdjYdTYdAdjYdYd +
-      147.82214554123618*traceAdjYdTYdAdjYdYdAdjTYdYd + 216.*
-      traceAdjTYdTYdAdjYdYd*traceAdjYdYd + 72.*traceAdjTYeTYeAdjYeYe*
-      traceAdjYdYd + 216.*traceAdjYdTYdAdjTYdYd*traceAdjYdYd +
-      147.82214554123618*traceAdjYdYdAdjTYdTYdAdjYdYd + 147.82214554123618*
-      traceAdjYdYdAdjYdTYdAdjTYdYd + 324.*mHd2*traceAdjYdYd*traceAdjYdYdAdjYdYd
-       + 147.82214554123618*mHd2*traceAdjYdYdAdjYdYdAdjYdYd +
-      147.82214554123618*traceAdjYdYdAdjYdYdAdjYdYdmq2 + 290.2649751355474*
-      MassG*traceAdjTYdYd*Quad(g3) - 145.1324875677737*mHd2*traceAdjYdYd*Quad(
-      g3) - 404.38477621992627*traceAdjTYdTYdAdjYdYd*Sqr(g3) -
-      67.39746270332105*traceAdjTYdTYdAdjYuYu*Sqr(g3) - 67.39746270332105*
-      traceAdjTYuTYuAdjYdYd*Sqr(g3) + 67.39746270332105*MassG*
-      traceAdjTYuYuAdjYdYd*Sqr(g3) - 404.38477621992627*traceAdjYdTYdAdjTYdYd*
-      Sqr(g3) + 404.38477621992627*MassG*traceAdjYdTYdAdjYdYd*Sqr(g3) +
-      404.38477621992627*MassG*traceAdjYdYdAdjTYdYd*Sqr(g3) -
-      404.38477621992627*mHd2*traceAdjYdYdAdjYdYd*Sqr(g3) + Power6(g1)*(-4.968*
-      mHd2 - 4.968*mHu2 + 239.45914429835202*Sqr(MassB)) - 678.794925406642*
-      traceAdjYdYd*Quad(g3)*Sqr(MassG) - 404.38477621992627*traceAdjYdYdAdjYdYd
-      *Sqr(g3)*Sqr(MassG) + Quad(g1)*(65.73800385679644*MassB*traceAdjTYdYd +
-      112.81067126752582*MassB*traceAdjTYeYe + 15.6*MassB*traceAdjTYuYu -
-      33.22900192839822*mHd2*traceAdjYdYd + 0.4799999999999999*mHu2*
-      traceAdjYdYd - 197.2140115703893*traceAdjYdYd*Sqr(MassB) + Sqr(g3)*(-
-      46.72465076838378*MassB*MassG - 70.08697615257569*Sqr(MassB) -
-      12.802325384191889*Sqr(MassG)) + Sqr(g2)*(-44.575972394845024*MassB*
-      MassWB - 1.08*mHd2 - 1.08*mHu2 - 66.86395859226754*Sqr(MassB) -
-      19.047986197422514*Sqr(MassWB))) + Power6(g2)*(-3.*mHd2 - 3.*mHu2 +
-      6700.775093943266*Sqr(MassWB)) + Quad(g2)*(MassWB*(679.3775093943266*
-      traceAdjTYdYd + 226.45916979810886*traceAdjTYeYe + 90.*traceAdjTYuYu) -
-      348.6887546971633*mHd2*traceAdjYdYd + Sqr(g3)*(-318.57716432988946*MassG*
-      MassWB - 87.28858216494473*Sqr(MassG) - 477.8657464948342*Sqr(MassWB)) -
-      2038.13252818298*traceAdjYdYd*Sqr(MassWB)) + Sqr(g2)*(295.64429108247236*
-      traceAdjTYdTYdAdjYdYd + 36.*traceAdjTYdTYdAdjYuYu + 98.54809702749078*
-      traceAdjTYeTYeAdjYeYe + 36.*traceAdjTYuTYuAdjYdYd - 36.*MassWB*
-      traceAdjTYuYuAdjYdYd + 295.64429108247236*traceAdjYdTYdAdjTYdYd -
-      295.64429108247236*MassWB*traceAdjYdTYdAdjYdYd - 295.64429108247236*
-      MassWB*traceAdjYdYdAdjTYdYd + 295.64429108247236*mHd2*traceAdjYdYdAdjYdYd
-       + 295.64429108247236*traceAdjYdYdAdjYdYdmq2 - 82.19238810996313*MassG*
-      traceAdjTYdYd*Sqr(g3) - 82.19238810996313*MassWB*traceAdjTYdYd*Sqr(g3) +
-      164.38477621992627*MassG*MassWB*traceAdjYdYd*Sqr(g3) + 82.19238810996313*
-      mHd2*traceAdjYdYd*Sqr(g3) + 164.38477621992627*traceAdjYdYd*Sqr(g3)*Sqr(
-      MassG) + 295.64429108247236*traceAdjYdYdAdjYdYd*Sqr(MassWB) +
-      164.38477621992627*traceAdjYdYd*Sqr(g3)*Sqr(MassWB)) + Sqr(g1)*(
-      63.92885821649447*traceAdjTYdTYdAdjYdYd + 15.39455597308118*
-      traceAdjTYdTYdAdjYuYu - 15.928858216494477*traceAdjTYeTYeAdjYeYe +
-      15.39455597308118*traceAdjTYuTYuAdjYdYd - 15.39455597308118*MassB*
-      traceAdjTYuYuAdjYdYd + 63.92885821649447*traceAdjYdTYdAdjTYdYd -
-      63.92885821649447*MassB*traceAdjYdTYdAdjYdYd - 63.92885821649447*MassB*
-      traceAdjYdYdAdjTYdYd + 63.92885821649447*mHd2*traceAdjYdYdAdjYdYd +
-      63.92885821649447*traceAdjYdYdAdjYdYdmq2 - 15.98548259488315*MassB*
-      traceAdjTYdYd*Sqr(g3) - 15.98548259488315*MassG*traceAdjTYdYd*Sqr(g3) +
-      31.9709651897663*MassB*MassG*traceAdjYdYd*Sqr(g3) + 15.98548259488315*
-      mHd2*traceAdjYdYd*Sqr(g3) + 63.92885821649447*traceAdjYdYdAdjYdYd*Sqr(
-      MassB) + 31.9709651897663*traceAdjYdYd*Sqr(g3)*Sqr(MassB) +
-      31.9709651897663*traceAdjYdYd*Sqr(g3)*Sqr(MassG) + Quad(g2)*(-
-      59.893287324741706*MassB*MassWB - 1.8*mHd2 - 1.8*mHu2 -
-      24.546643662370855*Sqr(MassB) - 82.63993098711256*Sqr(MassWB)) + Sqr(g2)*
-      (22.237024256872697*MassWB*traceAdjTYdYd - 22.746643662370854*MassWB*
-      traceAdjTYeYe - 22.237024256872697*mHd2*traceAdjYdYd + MassB*(
-      22.237024256872697*traceAdjTYdYd - 22.746643662370854*traceAdjTYeYe -
-      44.474048513745394*MassWB*traceAdjYdYd) - 44.474048513745394*traceAdjYdYd
-      *Sqr(MassB) - 44.474048513745394*traceAdjYdYd*Sqr(MassWB)))));
-   const double beta_mHd2_2 = Re(threeLoop*(18.*traceAdjYdYdAdjYuYuAdjYuYumq2 +
-      108.*traceAdjYdYdAdjYdYd*traceAdjYdYdmq2 + 72.*traceAdjTYdYd*
-      traceAdjYeTYeAdjYeYe + 24.*traceAdjTYeYe*traceAdjYeTYeAdjYeYe +
-      49.27404851374539*traceAdjYeTYeAdjYeYeAdjTYeYe + 72.*
-      traceAdjTYdTYdAdjYdYd*traceAdjYeYe + 24.*traceAdjTYeTYeAdjYeYe*
-      traceAdjYeYe + 72.*traceAdjYdTYdAdjTYdYd*traceAdjYeYe + 108.*mHd2*
-      traceAdjYdYdAdjYdYd*traceAdjYeYe + 72.*traceAdjYdYdAdjYdYdmq2*
-      traceAdjYeYe + 24.*traceAdjYeTYeAdjTYeYe*traceAdjYeYe + 49.27404851374539
-      *traceAdjYeYeAdjTYeTYeAdjYeYe + 49.27404851374539*
-      traceAdjYeYeAdjYeTYeAdjTYeYe + 36.*traceAdjYdYdmq2*traceAdjYeYeAdjYeYe +
-      36.*mHd2*traceAdjYeYe*traceAdjYeYeAdjYeYe + 49.27404851374539*mHd2*
-      traceAdjYeYeAdjYeYeAdjYeYe + 49.27404851374539*
-      traceAdjYeYeAdjYeYeAdjYeYeml2 + 24.*traceAdjYeYe*traceAdjYeYeAdjYeYeml2 +
-      traceAdjYdYd*(216.*traceAdjYdYdAdjYdYdmq2 + 72.*traceAdjYeTYeAdjTYeYe +
-      108.*mHd2*traceAdjYeYeAdjYeYe + 72.*traceAdjYeYeAdjYeYeml2) + 36.*
-      traceAdjYdYdAdjYdYd*traceAdjYeYeml2 + 12.*traceAdjYeYeAdjYeYe*
-      traceAdjYeYeml2 + 18.*traceAdjYuTYuAdjTYuYuAdjYdYd + 36.*traceAdjTYuYu*
-      traceAdjYuTYuAdjYdYd + 18.*traceAdjYuTYuAdjYuYuAdjTYdYd + 36.*
-      traceAdjTYdTYdAdjYuYu*traceAdjYuYu + 36.*traceAdjTYuTYuAdjYdYd*
-      traceAdjYuYu + 36.*traceAdjYdYdAdjYuYumq2*traceAdjYuYu + 36.*
-      traceAdjYuTYuAdjTYdYd*traceAdjYuYu + 18.*traceAdjYuYuAdjTYdTYdAdjYuYu +
-      18.*traceAdjYuYuAdjTYuTYuAdjYdYd + 36.*mHd2*traceAdjYuYu*
-      traceAdjYuYuAdjYdYd + 72.*mHu2*traceAdjYuYu*traceAdjYuYuAdjYdYd + 18.*
-      traceAdjYuYuAdjYdYdAdjYuYumq2 + 36.*traceAdjYuYu*traceAdjYuYuAdjYdYdmq2 +
-      18.*traceAdjYuYuAdjYuTYuAdjTYdYd + 18.*mHd2*traceAdjYuYuAdjYuYuAdjYdYd +
-      36.*mHu2*traceAdjYuYuAdjYuYuAdjYdYd + 18.*traceAdjYuYuAdjYuYuAdjYdYdmq2 -
-      33.709001928398216*traceAdjYdYdmq2*Quad(g1) - 58.92533563376291*mHd2*
-      traceAdjYeYe*Quad(g1) - 1.44*mHu2*traceAdjYeYe*Quad(g1) -
-      57.485335633762915*traceAdjYeYeml2*Quad(g1) - 9.36*mHu2*traceAdjYuYu*Quad
-      (g1) - 348.6887546971633*traceAdjYdYdmq2*Quad(g2) - 116.22958489905443*
-      mHd2*traceAdjYeYe*Quad(g2) - 116.22958489905443*traceAdjYeYeml2*Quad(g2)
-      - 54.*mHu2*traceAdjYuYu*Quad(g2) - 145.1324875677737*traceAdjYdYdmq2*Quad
-      (g3) + 15.39455597308118*traceAdjYdYdAdjYuYumq2*Sqr(g1) -
-      15.928858216494477*traceAdjYeTYeAdjTYeYe*Sqr(g1) + 15.928858216494477*
-      MassB*traceAdjYeTYeAdjYeYe*Sqr(g1) + 15.928858216494477*MassB*
-      traceAdjYeYeAdjTYeYe*Sqr(g1) - 15.928858216494477*mHd2*
-      traceAdjYeYeAdjYeYe*Sqr(g1) - 15.928858216494477*traceAdjYeYeAdjYeYeml2*
-      Sqr(g1) + 15.39455597308118*traceAdjYuTYuAdjTYdYd*Sqr(g1) -
-      15.39455597308118*MassB*traceAdjYuTYuAdjYdYd*Sqr(g1) - 15.39455597308118*
-      MassB*traceAdjYuYuAdjTYdYd*Sqr(g1) + 15.39455597308118*mHd2*
-      traceAdjYuYuAdjYdYd*Sqr(g1) + 15.39455597308118*mHu2*traceAdjYuYuAdjYdYd*
-      Sqr(g1) + 15.39455597308118*traceAdjYuYuAdjYdYdmq2*Sqr(g1) + 36.*
-      traceAdjYdYdAdjYuYumq2*Sqr(g2) + 98.54809702749078*traceAdjYeTYeAdjTYeYe*
-      Sqr(g2) - 98.54809702749078*MassWB*traceAdjYeTYeAdjYeYe*Sqr(g2) -
-      98.54809702749078*MassWB*traceAdjYeYeAdjTYeYe*Sqr(g2) + 98.54809702749078
-      *mHd2*traceAdjYeYeAdjYeYe*Sqr(g2) + 98.54809702749078*
-      traceAdjYeYeAdjYeYeml2*Sqr(g2) + 36.*traceAdjYuTYuAdjTYdYd*Sqr(g2) - 36.*
-      MassWB*traceAdjYuTYuAdjYdYd*Sqr(g2) - 36.*MassWB*traceAdjYuYuAdjTYdYd*Sqr
-      (g2) + 36.*mHd2*traceAdjYuYuAdjYdYd*Sqr(g2) + 36.*mHu2*
-      traceAdjYuYuAdjYdYd*Sqr(g2) + 36.*traceAdjYuYuAdjYdYdmq2*Sqr(g2) -
-      22.237024256872697*traceAdjYdYdmq2*Sqr(g1)*Sqr(g2) + 45.49328732474171*
-      MassB*MassWB*traceAdjYeYe*Sqr(g1)*Sqr(g2) + 22.746643662370854*mHd2*
-      traceAdjYeYe*Sqr(g1)*Sqr(g2) + 22.746643662370854*traceAdjYeYeml2*Sqr(g1)
-      *Sqr(g2) - 338.4320138025775*traceAdjYeYe*Quad(g1)*Sqr(MassB) - 46.8*
-      traceAdjYuYu*Quad(g1)*Sqr(MassB) - 15.928858216494477*traceAdjYeYeAdjYeYe
-      *Sqr(g1)*Sqr(MassB) + 30.78911194616236*traceAdjYuYuAdjYdYd*Sqr(g1)*Sqr(
-      MassB) + 45.49328732474171*traceAdjYeYe*Sqr(g1)*Sqr(g2)*Sqr(MassB) + Sqr(
-      g3)*(-404.38477621992627*traceAdjYdYdAdjYdYdmq2 - 67.39746270332105*
-      traceAdjYdYdAdjYuYumq2 - 67.39746270332105*traceAdjYuTYuAdjTYdYd +
-      67.39746270332105*MassG*traceAdjYuTYuAdjYdYd + 67.39746270332105*MassG*
-      traceAdjYuYuAdjTYdYd - 67.39746270332105*mHd2*traceAdjYuYuAdjYdYd -
-      67.39746270332105*mHu2*traceAdjYuYuAdjYdYd - 67.39746270332105*
-      traceAdjYuYuAdjYdYdmq2 + 15.98548259488315*traceAdjYdYdmq2*Sqr(g1) +
-      82.19238810996313*traceAdjYdYdmq2*Sqr(g2) - 134.7949254066421*
-      traceAdjYuYuAdjYdYd*Sqr(MassG)) - 679.3775093943266*traceAdjYeYe*Quad(g2)
-      *Sqr(MassWB) - 270.*traceAdjYuYu*Quad(g2)*Sqr(MassWB) + 98.54809702749078
-      *traceAdjYeYeAdjYeYe*Sqr(g2)*Sqr(MassWB) + 72.*traceAdjYuYuAdjYdYd*Sqr(g2
-      )*Sqr(MassWB) + 45.49328732474171*traceAdjYeYe*Sqr(g1)*Sqr(g2)*Sqr(MassWB
-      )));
-   const double beta_mHd2_3 = Re(threeLoop*(36.*traceAdjYuYuAdjYdYd*
-      traceAdjYuYumq2 + 108.*traceAdjYdYdAdjYdYd*traceTYdAdjTYd + 36.*
-      traceAdjYeYeAdjYeYe*traceTYdAdjTYd + 36.*traceAdjYuYu*
-      traceTYdAdjTYuYuAdjYd + 18.*traceTYdAdjTYuYuAdjYuYuAdjYd + 216.*
-      traceAdjYdYdAdjTYdYd*traceTYdAdjYd + 72.*traceAdjYeYeAdjTYeYe*
-      traceTYdAdjYd + 18.*traceTYdAdjYuYuAdjTYuYuAdjYd + 36.*traceAdjTYuYu*
-      traceTYdAdjYuYuAdjYd + 36.*traceAdjYdYdAdjYdYd*traceTYeAdjTYe + 12.*
-      traceAdjYeYeAdjYeYe*traceTYeAdjTYe + 72.*traceAdjYdYdAdjTYdYd*
-      traceTYeAdjYe + 24.*traceAdjYeYeAdjTYeYe*traceTYeAdjYe + 36.*
-      traceAdjYuYuAdjYdYd*traceTYuAdjTYu + 36.*traceAdjTYuYuAdjYdYd*
-      traceTYuAdjYu + 36.*traceAdjYuYuAdjTYdYd*traceTYuAdjYu + 108.*
-      traceAdjYdYdAdjYdYd*traceYdAdjYdmd2 + 36.*traceAdjYeYeAdjYeYe*
-      traceYdAdjYdmd2 + 216.*traceAdjYdYd*traceYdAdjYdYdAdjYdmd2 + 72.*
-      traceAdjYeYe*traceYdAdjYdYdAdjYdmd2 + 147.82214554123618*
-      traceYdAdjYdYdAdjYdYdAdjYdmd2 + 36.*traceAdjYuYu*traceYdAdjYuYuAdjYdmd2 +
-      18.*traceYdAdjYuYuAdjYuYuAdjYdmd2 + 36.*traceAdjYdYdAdjYdYd*
-      traceYeAdjYeme2 + (-3.312*tracemd2 - 9.936*traceme2 - 4.968*traceml2 -
-      1.656*tracemq2 - 13.248*tracemu2)*Power6(g1) + (-3.*traceml2 - 9.*
-      tracemq2)*Power6(g2) + (-54.*traceAdjYuYumq2 - 348.6887546971633*
-      traceTYdAdjTYd + 679.3775093943266*MassWB*traceTYdAdjYd -
-      116.22958489905443*traceTYeAdjTYe + 226.45916979810886*MassWB*
-      traceTYeAdjYe - 54.*traceTYuAdjTYu + 90.*MassWB*traceTYuAdjYu -
-      348.6887546971633*traceYdAdjYdmd2 - 116.22958489905443*traceYeAdjYeme2)*
-      Quad(g2) - 31.999999999999996*traceAdjYdYd*tracemd2*Quad(g3) -
-      63.99999999999999*traceAdjYdYd*tracemq2*Quad(g3) - 31.999999999999996*
-      traceAdjYdYd*tracemu2*Quad(g3) - 145.1324875677737*traceTYdAdjTYd*Quad(g3
-      ) + 290.2649751355474*MassG*traceTYdAdjYd*Quad(g3) - 145.1324875677737*
-      traceYdAdjYdmd2*Quad(g3) + Quad(g1)*(-9.36*traceAdjYuYumq2 + 0.32*
-      traceAdjYdYd*tracemd2 - 0.9599999999999999*traceAdjYeYe*tracemd2 +
-      0.9599999999999999*traceAdjYdYd*traceme2 - 2.88*traceAdjYeYe*traceme2 +
-      0.4799999999999999*traceAdjYdYd*traceml2 - 1.44*traceAdjYeYe*traceml2 +
-      0.16*traceAdjYdYd*tracemq2 - 0.4799999999999999*traceAdjYeYe*tracemq2 +
-      1.28*traceAdjYdYd*tracemu2 - 3.8399999999999994*traceAdjYeYe*tracemu2 -
-      33.709001928398216*traceTYdAdjTYd + 65.73800385679644*MassB*traceTYdAdjYd
-       - 57.485335633762915*traceTYeAdjTYe + 112.81067126752582*MassB*
-      traceTYeAdjYe - 9.36*traceTYuAdjTYu + 15.6*MassB*traceTYuAdjYu -
-      33.709001928398216*traceYdAdjYdmd2 - 57.485335633762915*traceYeAdjYeme2 +
-      (-0.72*tracemd2 - 2.16*traceme2 - 1.08*traceml2 - 0.36*tracemq2 - 2.88*
-      tracemu2)*Sqr(g2)) - 67.39746270332105*traceTYdAdjTYuYuAdjYd*Sqr(g3) +
-      67.39746270332105*MassG*traceTYdAdjYuYuAdjYd*Sqr(g3) - 404.38477621992627
-      *traceYdAdjYdYdAdjYdmd2*Sqr(g3) - 67.39746270332105*
-      traceYdAdjYuYuAdjYdmd2*Sqr(g3) + Sqr(g1)*(15.39455597308118*
-      traceTYdAdjTYuYuAdjYd - 15.39455597308118*MassB*traceTYdAdjYuYuAdjYd +
-      63.92885821649447*traceYdAdjYdYdAdjYdmd2 + 15.39455597308118*
-      traceYdAdjYuYuAdjYdmd2 + (-1.8*traceml2 - 5.4*tracemq2)*Quad(g2) + (-
-      22.237024256872697*traceTYdAdjTYd + 22.237024256872697*MassB*
-      traceTYdAdjYd + 22.237024256872697*MassWB*traceTYdAdjYd +
-      22.746643662370854*traceTYeAdjTYe - 22.746643662370854*MassB*
-      traceTYeAdjYe - 22.746643662370854*MassWB*traceTYeAdjYe -
-      22.237024256872697*traceYdAdjYdmd2 + 22.746643662370854*traceYeAdjYeme2)*
-      Sqr(g2) + (15.98548259488315*traceTYdAdjTYd - 15.98548259488315*MassB*
-      traceTYdAdjYd - 15.98548259488315*MassG*traceTYdAdjYd + 15.98548259488315
-      *traceYdAdjYdmd2)*Sqr(g3)) + Sqr(g2)*(36.*traceTYdAdjTYuYuAdjYd - 36.*
-      MassWB*traceTYdAdjYuYuAdjYd + 295.64429108247236*traceYdAdjYdYdAdjYdmd2 +
-      36.*traceYdAdjYuYuAdjYdmd2 + (82.19238810996313*traceTYdAdjTYd -
-      82.19238810996313*MassG*traceTYdAdjYd - 82.19238810996313*MassWB*
-      traceTYdAdjYd + 82.19238810996313*traceYdAdjYdmd2)*Sqr(g3))));
-   const double beta_mHd2_4 = Re(threeLoop*(12.*traceAdjYeYeAdjYeYe*
-      traceYeAdjYeme2 + 72.*traceAdjYdYd*traceYeAdjYeYeAdjYeme2 + 24.*
-      traceAdjYeYe*traceYeAdjYeYeAdjYeme2 + 49.27404851374539*
-      traceYeAdjYeYeAdjYeYeAdjYeme2 + 36.*traceAdjYuYu*traceYuAdjYdYdAdjYumu2 +
-      18.*traceYuAdjYdYdAdjYuYuAdjYumu2 + 36.*traceAdjYuYuAdjYdYd*
-      traceYuAdjYumu2 + 18.*traceYuAdjYuYuAdjYdYdAdjYumu2 - 9.36*
-      traceYuAdjYumu2*Quad(g1) - 54.*traceYuAdjYumu2*Quad(g2) + (-
-      15.928858216494477*traceYeAdjYeYeAdjYeme2 + 15.39455597308118*
-      traceYuAdjYdYdAdjYumu2)*Sqr(g1) + 98.54809702749078*
-      traceYeAdjYeYeAdjYeme2*Sqr(g2) + 36.*traceYuAdjYdYdAdjYumu2*Sqr(g2) -
-      67.39746270332105*traceYuAdjYdYdAdjYumu2*Sqr(g3)));
+   const double beta_mHd2_1 = Re(239.45914429835202*threeLoop*(
+      0.07516939915885217*traceAdjTYuTYuAdjYuYuAdjYdYd + 0.07516939915885217*
+      traceAdjTYuYuAdjYuTYuAdjYdYd + 0.9020327899062259*traceAdjTYdYd*
+      traceAdjYdTYdAdjYdYd + 0.30067759663540866*traceAdjTYeYe*
+      traceAdjYdTYdAdjYdYd + 0.6173167701503955*traceAdjYdTYdAdjYdYdAdjTYdYd +
+      0.9020327899062259*traceAdjTYdTYdAdjYdYd*traceAdjYdYd +
+      0.30067759663540866*traceAdjTYeTYeAdjYeYe*traceAdjYdYd +
+      0.9020327899062259*traceAdjYdTYdAdjTYdYd*traceAdjYdYd +
+      0.6173167701503955*traceAdjYdYdAdjTYdTYdAdjYdYd + 0.6173167701503955*
+      traceAdjYdYdAdjYdTYdAdjTYdYd + 1.353049184859339*mHd2*traceAdjYdYd*
+      traceAdjYdYdAdjYdYd + 0.6173167701503955*mHd2*traceAdjYdYdAdjYdYdAdjYdYd
+      + 0.6173167701503955*traceAdjYdYdAdjYdYdAdjYdYdmq2 - 0.020746754167843197
+      *mHd2*Power6(g1) - 0.020746754167843197*mHu2*Power6(g1) -
+      0.012528233193142026*mHd2*Power6(g2) - 0.012528233193142026*mHu2*Power6(
+      g2) + 0.2745270139898719*MassB*traceAdjTYdYd*Quad(g1) +
+      0.47110613210481683*MassB*traceAdjTYeYe*Quad(g1) + 0.06514681260433854*
+      MassB*traceAdjTYuYu*Quad(g1) - 0.13876689497811298*mHd2*traceAdjYdYd*Quad
+      (g1) + 0.002004517310902724*mHu2*traceAdjYdYd*Quad(g1) +
+      2.837133287956054*MassWB*traceAdjTYdYd*Quad(g2) + 0.9457110959853513*
+      MassWB*traceAdjTYeYe*Quad(g2) + 0.3758469957942608*MassWB*traceAdjTYuYu*
+      Quad(g2) - 1.456151343557453*mHd2*traceAdjYdYd*Quad(g2) +
+      1.2121690987665699*MassG*traceAdjTYdYd*Quad(g3) - 0.6060845493832849*mHd2
+      *traceAdjYdYd*Quad(g3) + 0.26697188116918547*traceAdjTYdTYdAdjYdYd*Sqr(g1
+      ) + 0.06428886237854617*traceAdjTYdTYdAdjYuYu*Sqr(g1) -
+      0.06652015007891307*traceAdjTYeTYeAdjYeYe*Sqr(g1) + 0.06428886237854617*
+      traceAdjTYuTYuAdjYdYd*Sqr(g1) - 0.06428886237854617*MassB*
+      traceAdjTYuYuAdjYdYd*Sqr(g1) + 0.26697188116918547*traceAdjYdTYdAdjTYdYd*
+      Sqr(g1) - 0.26697188116918547*MassB*traceAdjYdTYdAdjYdYd*Sqr(g1) -
+      0.26697188116918547*MassB*traceAdjYdYdAdjTYdYd*Sqr(g1) +
+      0.26697188116918547*mHd2*traceAdjYdYdAdjYdYd*Sqr(g1) +
+      0.26697188116918547*traceAdjYdYdAdjYdYdmq2*Sqr(g1) - 0.2501190234360739*
+      MassB*MassWB*Quad(g2)*Sqr(g1) - 0.007516939915885216*mHd2*Quad(g2)*Sqr(g1
+      ) - 0.007516939915885216*mHu2*Quad(g2)*Sqr(g1) + 1.234633540300791*
+      traceAdjTYdTYdAdjYdYd*Sqr(g2) + 0.15033879831770433*traceAdjTYdTYdAdjYuYu
+      *Sqr(g2) + 0.41154451343359705*traceAdjTYeTYeAdjYeYe*Sqr(g2) +
+      0.15033879831770433*traceAdjTYuTYuAdjYdYd*Sqr(g2) - 0.15033879831770433*
+      MassWB*traceAdjTYuYuAdjYdYd*Sqr(g2) + 1.234633540300791*
+      traceAdjYdTYdAdjTYdYd*Sqr(g2) - 1.234633540300791*MassWB*
+      traceAdjYdTYdAdjYdYd*Sqr(g2) - 1.234633540300791*MassWB*
+      traceAdjYdYdAdjTYdYd*Sqr(g2) + 1.234633540300791*mHd2*traceAdjYdYdAdjYdYd
+      *Sqr(g2) + 1.234633540300791*traceAdjYdYdAdjYdYdmq2*Sqr(g2) -
+      0.18615272565789337*MassB*MassWB*Quad(g1)*Sqr(g2) - 0.00451016394953113*
+      mHd2*Quad(g1)*Sqr(g2) - 0.00451016394953113*mHu2*Quad(g1)*Sqr(g2) +
+      0.09286354180388565*MassB*traceAdjTYdYd*Sqr(g1)*Sqr(g2) +
+      0.09286354180388565*MassWB*traceAdjTYdYd*Sqr(g1)*Sqr(g2) -
+      0.09499175205449609*MassB*traceAdjTYeYe*Sqr(g1)*Sqr(g2) -
+      0.09499175205449609*MassWB*traceAdjTYeYe*Sqr(g1)*Sqr(g2) -
+      0.1857270836077713*MassB*MassWB*traceAdjYdYd*Sqr(g1)*Sqr(g2) -
+      0.09286354180388565*mHd2*traceAdjYdYd*Sqr(g1)*Sqr(g2) - 1.688742258746597
+      *traceAdjTYdTYdAdjYdYd*Sqr(g3) - 0.28145704312443287*
+      traceAdjTYdTYdAdjYuYu*Sqr(g3) - 0.28145704312443287*traceAdjTYuTYuAdjYdYd
+      *Sqr(g3) + 0.28145704312443287*MassG*traceAdjTYuYuAdjYdYd*Sqr(g3) -
+      1.688742258746597*traceAdjYdTYdAdjTYdYd*Sqr(g3) + 1.688742258746597*MassG
+      *traceAdjYdTYdAdjYdYd*Sqr(g3) + 1.688742258746597*MassG*
+      traceAdjYdYdAdjTYdYd*Sqr(g3) - 1.688742258746597*mHd2*traceAdjYdYdAdjYdYd
+      *Sqr(g3) - 0.1951257735648116*MassB*MassG*Quad(g1)*Sqr(g3) -
+      1.330403001578261*MassG*MassWB*Quad(g2)*Sqr(g3) - 0.0667566178845364*
+      MassB*traceAdjTYdYd*Sqr(g1)*Sqr(g3) - 0.0667566178845364*MassG*
+      traceAdjTYdYd*Sqr(g1)*Sqr(g3) + 0.1335132357690728*MassB*MassG*
+      traceAdjYdYd*Sqr(g1)*Sqr(g3) + 0.0667566178845364*mHd2*traceAdjYdYd*Sqr(
+      g1)*Sqr(g3) - 0.3432418016476174*MassG*traceAdjTYdYd*Sqr(g2)*Sqr(g3) -
+      0.3432418016476174*MassWB*traceAdjTYdYd*Sqr(g2)*Sqr(g3) +
+      0.6864836032952348*MassG*MassWB*traceAdjYdYd*Sqr(g2)*Sqr(g3) +
+      0.3432418016476174*mHd2*traceAdjYdYd*Sqr(g2)*Sqr(g3) + 1.*Power6(g1)*Sqr(
+      MassB) - 0.8235810419696156*traceAdjYdYd*Quad(g1)*Sqr(MassB) +
+      0.26697188116918547*traceAdjYdYdAdjYdYd*Sqr(g1)*Sqr(MassB) -
+      0.1025086919703813*Quad(g2)*Sqr(g1)*Sqr(MassB) - 0.2792290884868401*Quad(
+      g1)*Sqr(g2)*Sqr(MassB) - 0.1857270836077713*traceAdjYdYd*Sqr(g1)*Sqr(g2)*
+      Sqr(MassB) - 0.29268866034721747*Quad(g1)*Sqr(g3)*Sqr(MassB) +
+      0.1335132357690728*traceAdjYdYd*Sqr(g1)*Sqr(g3)*Sqr(MassB) -
+      2.8347003719386197*traceAdjYdYd*Quad(g3)*Sqr(MassG) - 1.688742258746597*
+      traceAdjYdYdAdjYdYd*Sqr(g3)*Sqr(MassG) - 0.053463505942545855*Quad(g1)*
+      Sqr(g3)*Sqr(MassG) - 0.3645239041537219*Quad(g2)*Sqr(g3)*Sqr(MassG) +
+      0.1335132357690728*traceAdjYdYd*Sqr(g1)*Sqr(g3)*Sqr(MassG) +
+      0.6864836032952348*traceAdjYdYd*Sqr(g2)*Sqr(g3)*Sqr(MassG) +
+      27.982957650573137*Power6(g2)*Sqr(MassWB) - 8.511399863868162*
+      traceAdjYdYd*Quad(g2)*Sqr(MassWB) - 0.34511077549057*Quad(g2)*Sqr(g1)*Sqr
+      (MassWB) + 1.234633540300791*traceAdjYdYdAdjYdYd*Sqr(g2)*Sqr(MassWB) -
+      0.0795458709803533*Quad(g1)*Sqr(g2)*Sqr(MassWB) - 0.1857270836077713*
+      traceAdjYdYd*Sqr(g1)*Sqr(g2)*Sqr(MassWB) - 1.9956045023673916*Quad(g2)*
+      Sqr(g3)*Sqr(MassWB) + 0.6864836032952348*traceAdjYdYd*Sqr(g2)*Sqr(g3)*Sqr
+      (MassWB)));
+   const double beta_mHd2_2 = Re(-145.1324875677737*threeLoop*(-
+      1.488295306032929*traceAdjYdYd*traceAdjYdYdAdjYdYdmq2 -
+      0.12402460883607741*traceAdjYdYdAdjYuYuAdjYuYumq2 - 0.7441476530164645*
+      traceAdjYdYdAdjYdYd*traceAdjYdYdmq2 - 0.49609843534430964*traceAdjYdYd*
+      traceAdjYeTYeAdjTYeYe - 0.49609843534430964*traceAdjTYdYd*
+      traceAdjYeTYeAdjYeYe - 0.16536614511476988*traceAdjTYeYe*
+      traceAdjYeTYeAdjYeYe - 0.33951081070484296*traceAdjYeTYeAdjYeYeAdjTYeYe -
+      0.49609843534430964*traceAdjTYdTYdAdjYdYd*traceAdjYeYe -
+      0.16536614511476988*traceAdjTYeTYeAdjYeYe*traceAdjYeYe -
+      0.49609843534430964*traceAdjYdTYdAdjTYdYd*traceAdjYeYe -
+      0.7441476530164645*mHd2*traceAdjYdYdAdjYdYd*traceAdjYeYe -
+      0.49609843534430964*traceAdjYdYdAdjYdYdmq2*traceAdjYeYe -
+      0.16536614511476988*traceAdjYeTYeAdjTYeYe*traceAdjYeYe -
+      0.33951081070484296*traceAdjYeYeAdjTYeTYeAdjYeYe - 0.33951081070484296*
+      traceAdjYeYeAdjYeTYeAdjTYeYe - 0.7441476530164645*mHd2*traceAdjYdYd*
+      traceAdjYeYeAdjYeYe - 0.24804921767215482*traceAdjYdYdmq2*
+      traceAdjYeYeAdjYeYe - 0.24804921767215482*mHd2*traceAdjYeYe*
+      traceAdjYeYeAdjYeYe - 0.33951081070484296*mHd2*traceAdjYeYeAdjYeYeAdjYeYe
+       - 0.33951081070484296*traceAdjYeYeAdjYeYeAdjYeYeml2 -
+      0.49609843534430964*traceAdjYdYd*traceAdjYeYeAdjYeYeml2 -
+      0.16536614511476988*traceAdjYeYe*traceAdjYeYeAdjYeYeml2 -
+      0.24804921767215482*traceAdjYdYdAdjYdYd*traceAdjYeYeml2 -
+      0.08268307255738494*traceAdjYeYeAdjYeYe*traceAdjYeYeml2 -
+      0.12402460883607741*traceAdjYuTYuAdjTYuYuAdjYdYd - 0.24804921767215482*
+      traceAdjTYuYu*traceAdjYuTYuAdjYdYd - 0.12402460883607741*
+      traceAdjYuTYuAdjYuYuAdjTYdYd - 0.24804921767215482*traceAdjTYdTYdAdjYuYu*
+      traceAdjYuYu - 0.24804921767215482*traceAdjTYuTYuAdjYdYd*traceAdjYuYu -
+      0.24804921767215482*traceAdjYdYdAdjYuYumq2*traceAdjYuYu -
+      0.24804921767215482*traceAdjYuTYuAdjTYdYd*traceAdjYuYu -
+      0.12402460883607741*traceAdjYuYuAdjTYdTYdAdjYuYu - 0.12402460883607741*
+      traceAdjYuYuAdjTYuTYuAdjYdYd - 0.24804921767215482*mHd2*traceAdjYuYu*
+      traceAdjYuYuAdjYdYd - 0.49609843534430964*mHu2*traceAdjYuYu*
+      traceAdjYuYuAdjYdYd - 0.12402460883607741*traceAdjYuYuAdjYdYdAdjYuYumq2 -
+      0.24804921767215482*traceAdjYuYu*traceAdjYuYuAdjYdYdmq2 -
+      0.12402460883607741*traceAdjYuYuAdjYuTYuAdjTYdYd - 0.12402460883607741*
+      mHd2*traceAdjYuYuAdjYuYuAdjYdYd - 0.24804921767215482*mHu2*
+      traceAdjYuYuAdjYuYuAdjYdYd - 0.12402460883607741*
+      traceAdjYuYuAdjYuYuAdjYdYdmq2 + 0.23226365435689822*traceAdjYdYdmq2*Quad(
+      g1) + 0.4060106501395566*mHd2*traceAdjYeYe*Quad(g1) +
+      0.009921968706886192*mHu2*traceAdjYeYe*Quad(g1) + 0.3960886814326704*
+      traceAdjYeYeml2*Quad(g1) + 0.06449279659476025*mHu2*traceAdjYuYu*Quad(g1)
+      + 2.4025548003808126*traceAdjYdYdmq2*Quad(g2) + 0.8008516001269376*mHd2*
+      traceAdjYeYe*Quad(g2) + 0.8008516001269376*traceAdjYeYeml2*Quad(g2) +
+      0.37207382650823223*mHu2*traceAdjYuYu*Quad(g2) + 1.*traceAdjYdYdmq2*Quad(
+      g3) - 0.10607243237591625*traceAdjYdYdAdjYuYumq2*Sqr(g1) +
+      0.10975391163922585*traceAdjYeTYeAdjTYeYe*Sqr(g1) - 0.10975391163922585*
+      MassB*traceAdjYeTYeAdjYeYe*Sqr(g1) - 0.10975391163922585*MassB*
+      traceAdjYeYeAdjTYeYe*Sqr(g1) + 0.10975391163922585*mHd2*
+      traceAdjYeYeAdjYeYe*Sqr(g1) + 0.10975391163922585*traceAdjYeYeAdjYeYeml2*
+      Sqr(g1) - 0.10607243237591625*traceAdjYuTYuAdjTYdYd*Sqr(g1) +
+      0.10607243237591625*MassB*traceAdjYuTYuAdjYdYd*Sqr(g1) +
+      0.10607243237591625*MassB*traceAdjYuYuAdjTYdYd*Sqr(g1) -
+      0.10607243237591625*mHd2*traceAdjYuYuAdjYdYd*Sqr(g1) -
+      0.10607243237591625*mHu2*traceAdjYuYuAdjYdYd*Sqr(g1) -
+      0.10607243237591625*traceAdjYuYuAdjYdYdmq2*Sqr(g1) - 0.24804921767215482*
+      traceAdjYdYdAdjYuYumq2*Sqr(g2) - 0.6790216214096859*traceAdjYeTYeAdjTYeYe
+      *Sqr(g2) + 0.6790216214096859*MassWB*traceAdjYeTYeAdjYeYe*Sqr(g2) +
+      0.6790216214096859*MassWB*traceAdjYeYeAdjTYeYe*Sqr(g2) -
+      0.6790216214096859*mHd2*traceAdjYeYeAdjYeYe*Sqr(g2) - 0.6790216214096859*
+      traceAdjYeYeAdjYeYeml2*Sqr(g2) - 0.24804921767215482*
+      traceAdjYuTYuAdjTYdYd*Sqr(g2) + 0.24804921767215482*MassWB*
+      traceAdjYuTYuAdjYdYd*Sqr(g2) + 0.24804921767215482*MassWB*
+      traceAdjYuYuAdjTYdYd*Sqr(g2) - 0.24804921767215482*mHd2*
+      traceAdjYuYuAdjYdYd*Sqr(g2) - 0.24804921767215482*mHu2*
+      traceAdjYuYuAdjYdYd*Sqr(g2) - 0.24804921767215482*traceAdjYuYuAdjYdYdmq2*
+      Sqr(g2) + 0.1532187908409445*traceAdjYdYdmq2*Sqr(g1)*Sqr(g2) -
+      0.3134603980621316*MassB*MassWB*traceAdjYeYe*Sqr(g1)*Sqr(g2) -
+      0.1567301990310658*mHd2*traceAdjYeYe*Sqr(g1)*Sqr(g2) - 0.1567301990310658
+      *traceAdjYeYeml2*Sqr(g1)*Sqr(g2) + 2.7863146494411697*
+      traceAdjYdYdAdjYdYdmq2*Sqr(g3) + 0.46438577490686167*
+      traceAdjYdYdAdjYuYumq2*Sqr(g3) + 0.46438577490686167*
+      traceAdjYuTYuAdjTYdYd*Sqr(g3) - 0.46438577490686167*MassG*
+      traceAdjYuTYuAdjYdYd*Sqr(g3) - 0.46438577490686167*MassG*
+      traceAdjYuYuAdjTYdYd*Sqr(g3) + 0.46438577490686167*mHd2*
+      traceAdjYuYuAdjYdYd*Sqr(g3) + 0.46438577490686167*mHu2*
+      traceAdjYuYuAdjYdYd*Sqr(g3) + 0.46438577490686167*traceAdjYuYuAdjYdYdmq2*
+      Sqr(g3) - 0.1101440681047948*traceAdjYdYdmq2*Sqr(g1)*Sqr(g3) -
+      0.5663265991467354*traceAdjYdYdmq2*Sqr(g2)*Sqr(g3) + 2.331883229415035*
+      traceAdjYeYe*Quad(g1)*Sqr(MassB) + 0.32246398297380124*traceAdjYuYu*Quad(
+      g1)*Sqr(MassB) + 0.10975391163922585*traceAdjYeYeAdjYeYe*Sqr(g1)*Sqr(
+      MassB) - 0.2121448647518325*traceAdjYuYuAdjYdYd*Sqr(g1)*Sqr(MassB) -
+      0.3134603980621316*traceAdjYeYe*Sqr(g1)*Sqr(g2)*Sqr(MassB) +
+      0.9287715498137233*traceAdjYuYuAdjYdYd*Sqr(g3)*Sqr(MassG) +
+      4.681084991925548*traceAdjYeYe*Quad(g2)*Sqr(MassWB) + 1.860369132541161*
+      traceAdjYuYu*Quad(g2)*Sqr(MassWB) - 0.6790216214096859*
+      traceAdjYeYeAdjYeYe*Sqr(g2)*Sqr(MassWB) - 0.49609843534430964*
+      traceAdjYuYuAdjYdYd*Sqr(g2)*Sqr(MassWB) - 0.3134603980621316*traceAdjYeYe
+      *Sqr(g1)*Sqr(g2)*Sqr(MassWB)));
+   const double beta_mHd2_3 = Re(-3.312*threeLoop*(-10.869565217391305*
+      traceAdjYuYuAdjYdYd*traceAdjYuYumq2 - 32.608695652173914*
+      traceAdjYdYdAdjYdYd*traceTYdAdjTYd - 10.869565217391305*
+      traceAdjYeYeAdjYeYe*traceTYdAdjTYd - 10.869565217391305*traceAdjYuYu*
+      traceTYdAdjTYuYuAdjYd - 5.434782608695652*traceTYdAdjTYuYuAdjYuYuAdjYd -
+      65.21739130434783*traceAdjYdYdAdjTYdYd*traceTYdAdjYd - 21.73913043478261*
+      traceAdjYeYeAdjTYeYe*traceTYdAdjYd - 5.434782608695652*
+      traceTYdAdjYuYuAdjTYuYuAdjYd - 10.869565217391305*traceAdjTYuYu*
+      traceTYdAdjYuYuAdjYd - 10.869565217391305*traceAdjYdYdAdjYdYd*
+      traceTYeAdjTYe - 3.6231884057971016*traceAdjYeYeAdjYeYe*traceTYeAdjTYe -
+      21.73913043478261*traceAdjYdYdAdjTYdYd*traceTYeAdjYe - 7.246376811594203*
+      traceAdjYeYeAdjTYeYe*traceTYeAdjYe - 10.869565217391305*
+      traceAdjYuYuAdjYdYd*traceTYuAdjTYu - 10.869565217391305*
+      traceAdjTYuYuAdjYdYd*traceTYuAdjYu - 10.869565217391305*
+      traceAdjYuYuAdjTYdYd*traceTYuAdjYu - 32.608695652173914*
+      traceAdjYdYdAdjYdYd*traceYdAdjYdmd2 - 10.869565217391305*
+      traceAdjYeYeAdjYeYe*traceYdAdjYdmd2 - 65.21739130434783*traceAdjYdYd*
+      traceYdAdjYdYdAdjYdmd2 - 21.73913043478261*traceAdjYeYe*
+      traceYdAdjYdYdAdjYdmd2 - 44.63229032042155*traceYdAdjYdYdAdjYdYdAdjYdmd2
+      - 10.869565217391305*traceAdjYuYu*traceYdAdjYuYuAdjYdmd2 -
+      5.434782608695652*traceYdAdjYuYuAdjYuYuAdjYdmd2 - 10.869565217391305*
+      traceAdjYdYdAdjYdYd*traceYeAdjYeme2 + 1.*tracemd2*Power6(g1) + 3.*
+      traceme2*Power6(g1) + 1.5*traceml2*Power6(g1) + 0.5*tracemq2*Power6(g1) +
+      4.*tracemu2*Power6(g1) + 0.9057971014492754*traceml2*Power6(g2) +
+      2.717391304347826*tracemq2*Power6(g2) + 2.8260869565217392*
+      traceAdjYuYumq2*Quad(g1) - 0.09661835748792272*traceAdjYdYd*tracemd2*Quad
+      (g1) + 0.28985507246376807*traceAdjYeYe*tracemd2*Quad(g1) -
+      0.28985507246376807*traceAdjYdYd*traceme2*Quad(g1) + 0.8695652173913043*
+      traceAdjYeYe*traceme2*Quad(g1) - 0.14492753623188404*traceAdjYdYd*
+      traceml2*Quad(g1) + 0.43478260869565216*traceAdjYeYe*traceml2*Quad(g1) -
+      0.04830917874396136*traceAdjYdYd*tracemq2*Quad(g1) + 0.14492753623188404*
+      traceAdjYeYe*tracemq2*Quad(g1) - 0.38647342995169087*traceAdjYdYd*
+      tracemu2*Quad(g1) + 1.1594202898550723*traceAdjYeYe*tracemu2*Quad(g1) +
+      10.177838746497047*traceTYdAdjTYd*Quad(g1) - 19.8484311161825*MassB*
+      traceTYdAdjYd*Quad(g1) + 17.3566834643004*traceTYeAdjTYe*Quad(g1) -
+      34.061193015557315*MassB*traceTYeAdjYe*Quad(g1) + 2.8260869565217392*
+      traceTYuAdjTYu*Quad(g1) - 4.710144927536232*MassB*traceTYuAdjYu*Quad(g1)
+      + 10.177838746497047*traceYdAdjYdmd2*Quad(g1) + 17.3566834643004*
+      traceYeAdjYeme2*Quad(g1) + 16.304347826086957*traceAdjYuYumq2*Quad(g2) +
+      105.28042110421597*traceTYdAdjTYd*Quad(g2) - 205.1260595997363*MassWB*
+      traceTYdAdjYd*Quad(g2) + 35.09347370140532*traceTYeAdjTYe*Quad(g2) -
+      68.3753531999121*MassWB*traceTYeAdjYe*Quad(g2) + 16.304347826086957*
+      traceTYuAdjTYu*Quad(g2) - 27.17391304347826*MassWB*traceTYuAdjYu*Quad(g2)
+      + 105.28042110421597*traceYdAdjYdmd2*Quad(g2) + 35.09347370140532*
+      traceYeAdjYeme2*Quad(g2) + 9.66183574879227*traceAdjYdYd*tracemd2*Quad(g3
+      ) + 19.32367149758454*traceAdjYdYd*tracemq2*Quad(g3) + 9.66183574879227*
+      traceAdjYdYd*tracemu2*Quad(g3) + 43.820195521670804*traceTYdAdjTYd*Quad(
+      g3) - 87.64039104334161*MassG*traceTYdAdjYd*Quad(g3) + 43.820195521670804
+      *traceYdAdjYdmd2*Quad(g3) - 4.648114726171854*traceTYdAdjTYuYuAdjYd*Sqr(
+      g1) + 4.648114726171854*MassB*traceTYdAdjYuYuAdjYd*Sqr(g1) -
+      19.302191490487463*traceYdAdjYdYdAdjYdmd2*Sqr(g1) - 4.648114726171854*
+      traceYdAdjYuYuAdjYdmd2*Sqr(g1) + 0.5434782608695653*traceml2*Quad(g2)*Sqr
+      (g1) + 1.6304347826086958*tracemq2*Quad(g2)*Sqr(g1) - 10.869565217391305*
+      traceTYdAdjTYuYuAdjYd*Sqr(g2) + 10.869565217391305*MassWB*
+      traceTYdAdjYuYuAdjYd*Sqr(g2) - 89.2645806408431*traceYdAdjYdYdAdjYdmd2*
+      Sqr(g2) - 10.869565217391305*traceYdAdjYuYuAdjYdmd2*Sqr(g2) +
+      0.21739130434782608*tracemd2*Quad(g1)*Sqr(g2) + 0.6521739130434784*
+      traceme2*Quad(g1)*Sqr(g2) + 0.3260869565217392*traceml2*Quad(g1)*Sqr(g2)
+      + 0.10869565217391304*tracemq2*Quad(g1)*Sqr(g2) + 0.8695652173913043*
+      tracemu2*Quad(g1)*Sqr(g2) + 6.714077372244172*traceTYdAdjTYd*Sqr(g1)*Sqr(
+      g2) - 6.714077372244172*MassB*traceTYdAdjYd*Sqr(g1)*Sqr(g2) -
+      6.714077372244172*MassWB*traceTYdAdjYd*Sqr(g1)*Sqr(g2) -
+      6.867947965691683*traceTYeAdjTYe*Sqr(g1)*Sqr(g2) + 6.867947965691683*
+      MassB*traceTYeAdjYe*Sqr(g1)*Sqr(g2) + 6.867947965691683*MassWB*
+      traceTYeAdjYe*Sqr(g1)*Sqr(g2) + 6.714077372244172*traceYdAdjYdmd2*Sqr(g1)
+      *Sqr(g2) - 6.867947965691683*traceYeAdjYeme2*Sqr(g1)*Sqr(g2) +
+      20.349475453901285*traceTYdAdjTYuYuAdjYd*Sqr(g3) - 20.349475453901285*
+      MassG*traceTYdAdjYuYuAdjYd*Sqr(g3) + 122.0968527234077*
+      traceYdAdjYdYdAdjYdmd2*Sqr(g3) + 20.349475453901285*
+      traceYdAdjYuYuAdjYdmd2*Sqr(g3) - 4.826534599904333*traceTYdAdjTYd*Sqr(g1)
+      *Sqr(g3) + 4.826534599904333*MassB*traceTYdAdjYd*Sqr(g1)*Sqr(g3) +
+      4.826534599904333*MassG*traceTYdAdjYd*Sqr(g1)*Sqr(g3) - 4.826534599904333
+      *traceYdAdjYdmd2*Sqr(g1)*Sqr(g3) - 24.81654230373283*traceTYdAdjTYd*Sqr(
+      g2)*Sqr(g3) + 24.81654230373283*MassG*traceTYdAdjYd*Sqr(g2)*Sqr(g3) +
+      24.81654230373283*MassWB*traceTYdAdjYd*Sqr(g2)*Sqr(g3) -
+      24.81654230373283*traceYdAdjYdmd2*Sqr(g2)*Sqr(g3)));
+   const double beta_mHd2_4 = Re(12.*threeLoop*(1.*traceAdjYeYeAdjYeYe*
+      traceYeAdjYeme2 + 6.*traceAdjYdYd*traceYeAdjYeYeAdjYeme2 + 2.*
+      traceAdjYeYe*traceYeAdjYeYeAdjYeme2 + 4.106170709478783*
+      traceYeAdjYeYeAdjYeYeAdjYeme2 + 3.*traceAdjYuYu*traceYuAdjYdYdAdjYumu2 +
+      1.5*traceYuAdjYdYdAdjYuYuAdjYumu2 + 3.*traceAdjYuYuAdjYdYd*
+      traceYuAdjYumu2 + 1.5*traceYuAdjYuYuAdjYdYdAdjYumu2 - 0.7799999999999999*
+      traceYuAdjYumu2*Quad(g1) - 4.5*traceYuAdjYumu2*Quad(g2) -
+      1.3274048513745398*traceYeAdjYeYeAdjYeme2*Sqr(g1) + 1.2828796644234317*
+      traceYuAdjYdYdAdjYumu2*Sqr(g1) + 8.212341418957566*traceYeAdjYeYeAdjYeme2
+      *Sqr(g2) + 3.*traceYuAdjYdYdAdjYumu2*Sqr(g2) - 5.616455225276755*
+      traceYuAdjYdYdAdjYumu2*Sqr(g3)));
 
    beta_mHd2 = beta_mHd2_1 + beta_mHd2_2 + beta_mHd2_3 + beta_mHd2_4;
 
@@ -494,6 +556,25 @@ double NUHMSSMNoFVHimalaya_soft_parameters::calc_beta_mHd2_3_loop(const Soft_tra
  * @return 4-loop beta function
  */
 double NUHMSSMNoFVHimalaya_soft_parameters::calc_beta_mHd2_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_mHd2;
+
+   beta_mHd2 = 0;
+
+
+   return beta_mHd2;
+}
+
+/**
+ * Calculates the 5-loop beta function of mHd2.
+ *
+ * @return 5-loop beta function
+ */
+double NUHMSSMNoFVHimalaya_soft_parameters::calc_beta_mHd2_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:02:06
+// File generated at Tue 22 Jan 2019 15:18:18
 
 #include "CE6SSM_effective_couplings.hpp"
 

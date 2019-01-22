@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 15:01:55
+// File generated at Tue 22 Jan 2019 17:42:22
 
 #include "NUHMSSM_mass_eigenstates.hpp"
 #include "NUHMSSM_weinberg_angle.hpp"

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:38:42
+// File generated at Tue 22 Jan 2019 17:17:48
 
 #include "NUTSMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -57,10 +57,11 @@ double NUTSMSSM_susy_parameters::calc_beta_Kappa_2_loop(const Susy_traces& susy_
 
    double beta_Kappa;
 
-   beta_Kappa = Re(-1.2*twoLoop*Kappa*(20*AbsSqr(Kappa)*AbsSqr(Lambdax) +
-      AbsSqr(Lambdax)*(10*AbsSqr(Lambdax) - 3*Sqr(g1) + 5*(3*traceYdAdjYd +
-      traceYeAdjYe + 3*traceYuAdjYu - 3*Sqr(g2))) + 20*Sqr(Conj(Kappa))*Sqr(
-      Kappa)));
+   beta_Kappa = Re(-1.2*twoLoop*Kappa*(15*traceYdAdjYd*AbsSqr(Lambdax) + 5*
+      traceYeAdjYe*AbsSqr(Lambdax) + 15*traceYuAdjYu*AbsSqr(Lambdax) + 20*
+      AbsSqr(Kappa)*AbsSqr(Lambdax) - 3*AbsSqr(Lambdax)*Sqr(g1) - 15*AbsSqr(
+      Lambdax)*Sqr(g2) + 20*Sqr(Conj(Kappa))*Sqr(Kappa) + 10*Sqr(Conj(Lambdax))
+      *Sqr(Lambdax)));
 
 
    return beta_Kappa;
@@ -91,6 +92,25 @@ double NUTSMSSM_susy_parameters::calc_beta_Kappa_3_loop(const Susy_traces& susy_
  * @return 4-loop beta function
  */
 double NUTSMSSM_susy_parameters::calc_beta_Kappa_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_Kappa;
+
+   beta_Kappa = 0;
+
+
+   return beta_Kappa;
+}
+
+/**
+ * Calculates the 5-loop beta function of Kappa.
+ *
+ * @return 5-loop beta function
+ */
+double NUTSMSSM_susy_parameters::calc_beta_Kappa_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 15:27:57
+// File generated at Tue 22 Jan 2019 18:00:04
 
 #include "CMSSMSemiAnalytic_semi_analytic_convergence_tester.hpp"
 #include <array>
@@ -44,10 +44,6 @@ namespace flexiblesusy {
 CMSSMSemiAnalytic_convergence_tester<Semi_analytic>::CMSSMSemiAnalytic_convergence_tester(
    CMSSMSemiAnalytic<Semi_analytic>* model, double accuracy_goal, const Scale_getter& sg)
    : Convergence_tester_DRbar<CMSSMSemiAnalytic<Semi_analytic> >(model, accuracy_goal, sg)
-{
-}
-
-CMSSMSemiAnalytic_convergence_tester<Semi_analytic>::~CMSSMSemiAnalytic_convergence_tester()
 {
 }
 

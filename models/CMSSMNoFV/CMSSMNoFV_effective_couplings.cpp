@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 15:11:28
+// File generated at Tue 22 Jan 2019 17:48:00
 
 #include "CMSSMNoFV_effective_couplings.hpp"
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:43:45
+// File generated at Tue 22 Jan 2019 16:51:55
 
 #include "MRSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -38,9 +38,8 @@ double MRSSM_susy_parameters::calc_beta_LamSU_1_loop(const Susy_traces& susy_tra
 
    double beta_LamSU;
 
-   beta_LamSU = Re(oneOver16PiSqr*(2*LamSU*AbsSqr(LamSD) - 0.6*LamSU*(-5*
-      traceYuAdjYu - 5*AbsSqr(LamTU) + Sqr(g1) + 5*Sqr(g2)) + 4*Conj(LamSU)*Sqr
-      (LamSU)));
+   beta_LamSU = Re(0.2*LamSU*oneOver16PiSqr*(15*traceYuAdjYu + 10*AbsSqr(LamSD)
+      + 20*AbsSqr(LamSU) + 15*AbsSqr(LamTU) - 3*Sqr(g1) - 15*Sqr(g2)));
 
 
    return beta_LamSU;
@@ -63,14 +62,15 @@ double MRSSM_susy_parameters::calc_beta_LamSU_2_loop(const Susy_traces& susy_tra
    double beta_LamSU;
 
    beta_LamSU = Re(-0.1*LamSU*twoLoop*(30*traceYdAdjYuYuAdjYd + 90*
-      traceYuAdjYuYuAdjYu + 45*traceYuAdjYu*AbsSqr(LamTU) + 30*AbsSqr(LamTD)*
-      AbsSqr(LamTU) - 45*Quad(g1) - 165*Quad(g2) - 8*traceYuAdjYu*Sqr(g1) + 4*
-      AbsSqr(LamSD)*(15*traceYdAdjYd + 5*traceYeAdjYe + 10*AbsSqr(LamSU) + 15*
-      AbsSqr(LamTD) - 3*Sqr(g1) - 15*Sqr(g2)) - 120*AbsSqr(LamTU)*Sqr(g2) - 18*
-      Sqr(g1)*Sqr(g2) - 6*AbsSqr(LamSU)*(-15*traceYuAdjYu - 20*AbsSqr(LamTU) +
-      2*Sqr(g1) + 10*Sqr(g2)) - 160*traceYuAdjYu*Sqr(g3) + 40*Sqr(LamSD)*Sqr(
-      Conj(LamSD)) + 100*Sqr(LamSU)*Sqr(Conj(LamSU)) + 75*Sqr(LamTU)*Sqr(Conj(
-      LamTU))));
+      traceYuAdjYuYuAdjYu + 60*traceYdAdjYd*AbsSqr(LamSD) + 20*traceYeAdjYe*
+      AbsSqr(LamSD) + 90*traceYuAdjYu*AbsSqr(LamSU) + 40*AbsSqr(LamSD)*AbsSqr(
+      LamSU) + 60*AbsSqr(LamSD)*AbsSqr(LamTD) + 45*traceYuAdjYu*AbsSqr(LamTU) +
+      120*AbsSqr(LamSU)*AbsSqr(LamTU) + 30*AbsSqr(LamTD)*AbsSqr(LamTU) - 45*
+      Quad(g1) - 165*Quad(g2) - 8*traceYuAdjYu*Sqr(g1) - 12*AbsSqr(LamSD)*Sqr(
+      g1) - 12*AbsSqr(LamSU)*Sqr(g1) - 60*AbsSqr(LamSD)*Sqr(g2) - 60*AbsSqr(
+      LamSU)*Sqr(g2) - 120*AbsSqr(LamTU)*Sqr(g2) - 18*Sqr(g1)*Sqr(g2) - 160*
+      traceYuAdjYu*Sqr(g3) + 40*Sqr(LamSD)*Sqr(Conj(LamSD)) + 100*Sqr(LamSU)*
+      Sqr(Conj(LamSU)) + 75*Sqr(LamTU)*Sqr(Conj(LamTU))));
 
 
    return beta_LamSU;
@@ -101,6 +101,25 @@ double MRSSM_susy_parameters::calc_beta_LamSU_3_loop(const Susy_traces& susy_tra
  * @return 4-loop beta function
  */
 double MRSSM_susy_parameters::calc_beta_LamSU_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_LamSU;
+
+   beta_LamSU = 0;
+
+
+   return beta_LamSU;
+}
+
+/**
+ * Calculates the 5-loop beta function of LamSU.
+ *
+ * @return 5-loop beta function
+ */
+double MRSSM_susy_parameters::calc_beta_LamSU_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

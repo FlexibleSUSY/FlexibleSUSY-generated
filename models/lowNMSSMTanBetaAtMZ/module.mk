@@ -7,7 +7,12 @@ MODlowNMSSMTanBetaAtMZ_DEP := $(patsubst %,model_specific/%,$(MODlowNMSSMTanBeta
 MODlowNMSSMTanBetaAtMZ_INC := $(patsubst %,-Imodel_specific/%,$(MODlowNMSSMTanBetaAtMZ_MOD))
 MODlowNMSSMTanBetaAtMZ_LIB := $(foreach M,$(MODlowNMSSMTanBetaAtMZ_MOD),model_specific/$M/libmodel_specific_$M$(MODULE_LIBEXT))
 
+MODlowNMSSMTanBetaAtMZ_SUBMOD  := $(DIR)/cxx_qft
+MODlowNMSSMTanBetaAtMZ_SUBMOD_INC := $(patsubst %,-I%,$(MODlowNMSSMTanBetaAtMZ_SUBMOD))
+
 lowNMSSMTanBetaAtMZ_INSTALL_DIR := $(INSTALL_DIR)/$(DIR)
+lowNMSSMTanBetaAtMZ_INSTALL_CXXQFT_DIR := \
+		$(lowNMSSMTanBetaAtMZ_INSTALL_DIR)/cxx_qft
 
 lowNMSSMTanBetaAtMZ_MK     := \
 		$(DIR)/module.mk
@@ -74,7 +79,6 @@ LLlowNMSSMTanBetaAtMZ_MMA  := \
 		$(DIR)/run_lowNMSSMTanBetaAtMZ.m
 
 LIBlowNMSSMTanBetaAtMZ_HDR := \
-		$(DIR)/lowNMSSMTanBetaAtMZ_cxx_diagrams.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_a_muon.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_convergence_tester.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_edm.hpp \
@@ -99,6 +103,13 @@ LIBlowNMSSMTanBetaAtMZ_HDR := \
 		$(DIR)/lowNMSSMTanBetaAtMZ_susy_scale_constraint.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_utilities.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_weinberg_angle.hpp
+
+LIBlowNMSSMTanBetaAtMZ_CXXQFT_HDR := \
+		$(DIR)/cxx_qft/lowNMSSMTanBetaAtMZ_qft.hpp \
+		$(DIR)/cxx_qft/lowNMSSMTanBetaAtMZ_fields.hpp \
+		$(DIR)/cxx_qft/lowNMSSMTanBetaAtMZ_vertices.hpp \
+		$(DIR)/cxx_qft/lowNMSSMTanBetaAtMZ_context_base.hpp \
+		$(DIR)/cxx_qft/lowNMSSMTanBetaAtMZ_npointfunctions.hpp
 
 ifneq ($(findstring two_scale,$(SOLVERS)),)
 -include $(DIR)/two_scale.mk
@@ -188,8 +199,10 @@ all-$(MODNAME): $(LIBlowNMSSMTanBetaAtMZ) $(EXElowNMSSMTanBetaAtMZ_EXE)
 ifneq ($(INSTALL_DIR),)
 install-src::
 		install -d $(lowNMSSMTanBetaAtMZ_INSTALL_DIR)
+		install -d $(lowNMSSMTanBetaAtMZ_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(LIBlowNMSSMTanBetaAtMZ_SRC) $(lowNMSSMTanBetaAtMZ_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LIBlowNMSSMTanBetaAtMZ_HDR) $(lowNMSSMTanBetaAtMZ_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(LIBlowNMSSMTanBetaAtMZ_CXXQFT_HDR) $(lowNMSSMTanBetaAtMZ_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(EXElowNMSSMTanBetaAtMZ_SRC) $(lowNMSSMTanBetaAtMZ_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLlowNMSSMTanBetaAtMZ_SRC) $(lowNMSSMTanBetaAtMZ_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLlowNMSSMTanBetaAtMZ_MMA) $(lowNMSSMTanBetaAtMZ_INSTALL_DIR)
@@ -220,6 +233,7 @@ clean-$(MODNAME)-obj:
 clean-$(MODNAME)-src:
 		-rm -f $(LIBlowNMSSMTanBetaAtMZ_SRC)
 		-rm -f $(LIBlowNMSSMTanBetaAtMZ_HDR)
+		-rm -f $(LIBlowNMSSMTanBetaAtMZ_CXXQFT_HDR)
 		-rm -f $(EXElowNMSSMTanBetaAtMZ_SRC)
 		-rm -f $(LLlowNMSSMTanBetaAtMZ_SRC)
 		-rm -f $(LLlowNMSSMTanBetaAtMZ_MMA)
@@ -248,14 +262,14 @@ distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
 		tar -czf $(lowNMSSMTanBetaAtMZ_TARBALL) \
-		$(LIBlowNMSSMTanBetaAtMZ_SRC) $(LIBlowNMSSMTanBetaAtMZ_HDR) \
+		$(LIBlowNMSSMTanBetaAtMZ_SRC) $(LIBlowNMSSMTanBetaAtMZ_HDR) $(LIBlowNMSSMTanBetaAtMZ_CXXQFT_HDR) \
 		$(EXElowNMSSMTanBetaAtMZ_SRC) \
 		$(LLlowNMSSMTanBetaAtMZ_SRC) $(LLlowNMSSMTanBetaAtMZ_MMA) \
 		$(lowNMSSMTanBetaAtMZ_MK) $(lowNMSSMTanBetaAtMZ_INCLUDE_MK) \
 		$(lowNMSSMTanBetaAtMZ_SLHA_INPUT) $(lowNMSSMTanBetaAtMZ_REFERENCES) \
 		$(lowNMSSMTanBetaAtMZ_GNUPLOT)
 
-$(LIBlowNMSSMTanBetaAtMZ_SRC) $(LIBlowNMSSMTanBetaAtMZ_HDR) $(EXElowNMSSMTanBetaAtMZ_SRC) $(LLlowNMSSMTanBetaAtMZ_SRC) $(LLlowNMSSMTanBetaAtMZ_MMA) \
+$(LIBlowNMSSMTanBetaAtMZ_SRC) $(LIBlowNMSSMTanBetaAtMZ_HDR) $(LIBlowNMSSMTanBetaAtMZ_CXXQFT_HDR) $(EXElowNMSSMTanBetaAtMZ_SRC) $(LLlowNMSSMTanBetaAtMZ_SRC) $(LLlowNMSSMTanBetaAtMZ_MMA) \
 : run-metacode-$(MODNAME)
 		@true
 
@@ -276,7 +290,7 @@ $(METACODE_STAMP_lowNMSSMTanBetaAtMZ):
 endif
 
 $(LIBlowNMSSMTanBetaAtMZ_DEP) $(EXElowNMSSMTanBetaAtMZ_DEP) $(LLlowNMSSMTanBetaAtMZ_DEP) $(LIBlowNMSSMTanBetaAtMZ_OBJ) $(EXElowNMSSMTanBetaAtMZ_OBJ) $(LLlowNMSSMTanBetaAtMZ_OBJ) $(LLlowNMSSMTanBetaAtMZ_LIB): \
-	CPPFLAGS += $(MODlowNMSSMTanBetaAtMZ_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODlowNMSSMTanBetaAtMZ_SUBMOD_INC) $(MODlowNMSSMTanBetaAtMZ_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBlowNMSSMTanBetaAtMZ_DEP) $(EXElowNMSSMTanBetaAtMZ_DEP) $(LLlowNMSSMTanBetaAtMZ_DEP) $(LIBlowNMSSMTanBetaAtMZ_OBJ) $(EXElowNMSSMTanBetaAtMZ_OBJ) $(LLlowNMSSMTanBetaAtMZ_OBJ) $(LLlowNMSSMTanBetaAtMZ_LIB): \

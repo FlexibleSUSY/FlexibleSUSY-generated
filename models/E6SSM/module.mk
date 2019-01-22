@@ -7,7 +7,12 @@ MODE6SSM_DEP := $(patsubst %,model_specific/%,$(MODE6SSM_MOD))
 MODE6SSM_INC := $(patsubst %,-Imodel_specific/%,$(MODE6SSM_MOD))
 MODE6SSM_LIB := $(foreach M,$(MODE6SSM_MOD),model_specific/$M/libmodel_specific_$M$(MODULE_LIBEXT))
 
+MODE6SSM_SUBMOD  := $(DIR)/cxx_qft
+MODE6SSM_SUBMOD_INC := $(patsubst %,-I%,$(MODE6SSM_SUBMOD))
+
 E6SSM_INSTALL_DIR := $(INSTALL_DIR)/$(DIR)
+E6SSM_INSTALL_CXXQFT_DIR := \
+		$(E6SSM_INSTALL_DIR)/cxx_qft
 
 E6SSM_MK     := \
 		$(DIR)/module.mk
@@ -68,7 +73,6 @@ LLE6SSM_MMA  := \
 		$(DIR)/run_E6SSM.m
 
 LIBE6SSM_HDR := \
-		$(DIR)/E6SSM_cxx_diagrams.hpp \
 		$(DIR)/E6SSM_a_muon.hpp \
 		$(DIR)/E6SSM_convergence_tester.hpp \
 		$(DIR)/E6SSM_edm.hpp \
@@ -93,6 +97,13 @@ LIBE6SSM_HDR := \
 		$(DIR)/E6SSM_susy_scale_constraint.hpp \
 		$(DIR)/E6SSM_utilities.hpp \
 		$(DIR)/E6SSM_weinberg_angle.hpp
+
+LIBE6SSM_CXXQFT_HDR := \
+		$(DIR)/cxx_qft/E6SSM_qft.hpp \
+		$(DIR)/cxx_qft/E6SSM_fields.hpp \
+		$(DIR)/cxx_qft/E6SSM_vertices.hpp \
+		$(DIR)/cxx_qft/E6SSM_context_base.hpp \
+		$(DIR)/cxx_qft/E6SSM_npointfunctions.hpp
 
 ifneq ($(findstring two_scale,$(SOLVERS)),)
 -include $(DIR)/two_scale.mk
@@ -182,8 +193,10 @@ all-$(MODNAME): $(LIBE6SSM) $(EXEE6SSM_EXE)
 ifneq ($(INSTALL_DIR),)
 install-src::
 		install -d $(E6SSM_INSTALL_DIR)
+		install -d $(E6SSM_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(LIBE6SSM_SRC) $(E6SSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LIBE6SSM_HDR) $(E6SSM_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(LIBE6SSM_CXXQFT_HDR) $(E6SSM_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(EXEE6SSM_SRC) $(E6SSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLE6SSM_SRC) $(E6SSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLE6SSM_MMA) $(E6SSM_INSTALL_DIR)
@@ -214,6 +227,7 @@ clean-$(MODNAME)-obj:
 clean-$(MODNAME)-src:
 		-rm -f $(LIBE6SSM_SRC)
 		-rm -f $(LIBE6SSM_HDR)
+		-rm -f $(LIBE6SSM_CXXQFT_HDR)
 		-rm -f $(EXEE6SSM_SRC)
 		-rm -f $(LLE6SSM_SRC)
 		-rm -f $(LLE6SSM_MMA)
@@ -242,14 +256,14 @@ distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
 		tar -czf $(E6SSM_TARBALL) \
-		$(LIBE6SSM_SRC) $(LIBE6SSM_HDR) \
+		$(LIBE6SSM_SRC) $(LIBE6SSM_HDR) $(LIBE6SSM_CXXQFT_HDR) \
 		$(EXEE6SSM_SRC) \
 		$(LLE6SSM_SRC) $(LLE6SSM_MMA) \
 		$(E6SSM_MK) $(E6SSM_INCLUDE_MK) \
 		$(E6SSM_SLHA_INPUT) $(E6SSM_REFERENCES) \
 		$(E6SSM_GNUPLOT)
 
-$(LIBE6SSM_SRC) $(LIBE6SSM_HDR) $(EXEE6SSM_SRC) $(LLE6SSM_SRC) $(LLE6SSM_MMA) \
+$(LIBE6SSM_SRC) $(LIBE6SSM_HDR) $(LIBE6SSM_CXXQFT_HDR) $(EXEE6SSM_SRC) $(LLE6SSM_SRC) $(LLE6SSM_MMA) \
 : run-metacode-$(MODNAME)
 		@true
 
@@ -270,7 +284,7 @@ $(METACODE_STAMP_E6SSM):
 endif
 
 $(LIBE6SSM_DEP) $(EXEE6SSM_DEP) $(LLE6SSM_DEP) $(LIBE6SSM_OBJ) $(EXEE6SSM_OBJ) $(LLE6SSM_OBJ) $(LLE6SSM_LIB): \
-	CPPFLAGS += $(MODE6SSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODE6SSM_SUBMOD_INC) $(MODE6SSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBE6SSM_DEP) $(EXEE6SSM_DEP) $(LLE6SSM_DEP) $(LIBE6SSM_OBJ) $(EXEE6SSM_OBJ) $(LLE6SSM_OBJ) $(LLE6SSM_LIB): \

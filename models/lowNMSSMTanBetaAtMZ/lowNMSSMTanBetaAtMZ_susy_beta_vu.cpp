@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:33:19
+// File generated at Tue 22 Jan 2019 17:10:43
 
 #include "lowNMSSMTanBetaAtMZ_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -38,8 +38,8 @@ double lowNMSSMTanBetaAtMZ_susy_parameters::calc_beta_vu_1_loop(const Susy_trace
 
    double beta_vu;
 
-   beta_vu = Re(0.1*oneOver16PiSqr*vu*(-10*AbsSqr(Lambdax) + 3*(Sqr(g1) + 5*(-2
-      *traceYuAdjYu + Sqr(g2)))));
+   beta_vu = Re(0.1*oneOver16PiSqr*vu*(-30*traceYuAdjYu - 10*AbsSqr(Lambdax) +
+      3*Sqr(g1) + 15*Sqr(g2)));
 
 
    return beta_vu;
@@ -61,11 +61,12 @@ double lowNMSSMTanBetaAtMZ_susy_parameters::calc_beta_vu_2_loop(const Susy_trace
 
    double beta_vu;
 
-   beta_vu = Re(-0.005*twoLoop*vu*(207*Quad(g1) + 10*Sqr(g1)*(34*traceYuAdjYu +
-      9*Sqr(g2)) + 20*AbsSqr(Lambdax)*(-30*traceYdAdjYd - 10*traceYeAdjYe - 20*
-      AbsSqr(Kappa) + 3*Sqr(g1) + 15*Sqr(g2)) + 25*(-24*traceYdAdjYuYuAdjYd -
-      72*traceYuAdjYuYuAdjYu + 11*Quad(g2) + 36*traceYuAdjYu*Sqr(g2) + 128*
-      traceYuAdjYu*Sqr(g3)) - 600*Sqr(Conj(Lambdax))*Sqr(Lambdax)));
+   beta_vu = Re(-0.005*twoLoop*vu*(-600*traceYdAdjYuYuAdjYd - 1800*
+      traceYuAdjYuYuAdjYu - 600*traceYdAdjYd*AbsSqr(Lambdax) - 200*traceYeAdjYe
+      *AbsSqr(Lambdax) - 400*AbsSqr(Kappa)*AbsSqr(Lambdax) + 207*Quad(g1) + 275
+      *Quad(g2) + 340*traceYuAdjYu*Sqr(g1) + 60*AbsSqr(Lambdax)*Sqr(g1) + 900*
+      traceYuAdjYu*Sqr(g2) + 300*AbsSqr(Lambdax)*Sqr(g2) + 90*Sqr(g1)*Sqr(g2) +
+      3200*traceYuAdjYu*Sqr(g3) - 600*Sqr(Conj(Lambdax))*Sqr(Lambdax)));
 
 
    return beta_vu;
@@ -96,6 +97,25 @@ double lowNMSSMTanBetaAtMZ_susy_parameters::calc_beta_vu_3_loop(const Susy_trace
  * @return 4-loop beta function
  */
 double lowNMSSMTanBetaAtMZ_susy_parameters::calc_beta_vu_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_vu;
+
+   beta_vu = 0;
+
+
+   return beta_vu;
+}
+
+/**
+ * Calculates the 5-loop beta function of vu.
+ *
+ * @return 5-loop beta function
+ */
+double lowNMSSMTanBetaAtMZ_susy_parameters::calc_beta_vu_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

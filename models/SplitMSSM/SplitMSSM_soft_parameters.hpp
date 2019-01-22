@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:09:50
+// File generated at Tue 22 Jan 2019 16:46:45
 
 #ifndef SplitMSSM_soft_parameters_H
 #define SplitMSSM_soft_parameters_H
@@ -95,26 +95,32 @@ private:
    double calc_beta_MassB_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassB_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassB_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_MassB_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassG_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassG_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassG_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassG_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_MassG_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassWB_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassWB_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassWB_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_MassWB_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_MassWB_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Mu_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Mu_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Mu_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_Mu_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_Mu_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_mu2_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_mu2_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_mu2_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_mu2_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_mu2_5_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_v_1_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_v_2_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_v_3_loop(const TRACE_STRUCT_TYPE&) const;
    double calc_beta_v_4_loop(const TRACE_STRUCT_TYPE&) const;
+   double calc_beta_v_5_loop(const TRACE_STRUCT_TYPE&) const;
 
 };
 

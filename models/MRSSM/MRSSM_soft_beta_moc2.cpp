@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:44:09
+// File generated at Tue 22 Jan 2019 16:52:31
 
 #include "MRSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -122,6 +122,25 @@ double MRSSM_soft_parameters::calc_beta_moc2_3_loop(const Soft_traces& soft_trac
  * @return 4-loop beta function
  */
 double MRSSM_soft_parameters::calc_beta_moc2_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_moc2;
+
+   beta_moc2 = 0;
+
+
+   return beta_moc2;
+}
+
+/**
+ * Calculates the 5-loop beta function of moc2.
+ *
+ * @return 5-loop beta function
+ */
+double MRSSM_soft_parameters::calc_beta_moc2_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

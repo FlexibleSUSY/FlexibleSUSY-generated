@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:47:52
+// File generated at Tue 22 Jan 2019 17:34:56
 
 #ifndef NMSSM_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
 #define NMSSM_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H

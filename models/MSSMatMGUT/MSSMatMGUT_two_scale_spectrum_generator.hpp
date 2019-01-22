@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 15:24:11
+// File generated at Tue 22 Jan 2019 17:57:10
 
 #ifndef MSSMatMGUT_TWO_SCALE_SPECTRUM_GENERATOR_H
 #define MSSMatMGUT_TWO_SCALE_SPECTRUM_GENERATOR_H

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:09:21
+// File generated at Tue 22 Jan 2019 17:07:13
 
 #include "THDMII_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -75,9 +75,9 @@ double THDMII_soft_parameters::calc_beta_M112_1_loop(const Soft_traces& soft_tra
 
    double beta_M112;
 
-   beta_M112 = Re(oneOver16PiSqr*(12*Lambda1*M112 + 4*Lambda3*M222 + 2*Lambda4*
-      M222 + 6*M112*traceYdAdjYd + 2*M112*traceYeAdjYe - 6*M122*Conj(Lambda6) -
-      6*Lambda6*Conj(M122) - 0.9*M112*Sqr(g1) - 4.5*M112*Sqr(g2)));
+   beta_M112 = Re(0.1*oneOver16PiSqr*(120*Lambda1*M112 + 40*Lambda3*M222 + 20*
+      Lambda4*M222 + 60*M112*traceYdAdjYd + 20*M112*traceYeAdjYe - 60*M122*Conj
+      (Lambda6) - 60*Lambda6*Conj(M122) - 9*M112*Sqr(g1) - 45*M112*Sqr(g2)));
 
 
    return beta_M112;
@@ -100,30 +100,34 @@ double THDMII_soft_parameters::calc_beta_M112_2_loop(const Soft_traces& soft_tra
 
    double beta_M112;
 
-   beta_M112 = Re(twoLoop*(-2*Lambda3*Lambda4*M112 + 12*Lambda5*Lambda6*M122 +
-      6*Lambda5*Lambda7*M122 - 8*Lambda3*Lambda4*M222 - 72*Lambda1*M112*
-      traceYdAdjYd - 13.5*M112*traceYdAdjYdYdAdjYd - 4.5*M112*
-      traceYdAdjYuYuAdjYd - 24*Lambda1*M112*traceYeAdjYe - 4.5*M112*
-      traceYeAdjYeYeAdjYe - 24*Lambda3*M222*traceYuAdjYu - 12*Lambda4*M222*
-      traceYuAdjYu + 3*M112*AbsSqr(Lambda7) - 18*M222*AbsSqr(Lambda7) + 6*
-      Lambda3*M122*Conj(Lambda7) + 6*Lambda4*M122*Conj(Lambda7) + 36*Lambda1*
-      Lambda6*Conj(M122) + 12*Lambda3*Lambda6*Conj(M122) + 12*Lambda4*Lambda6*
-      Conj(M122) + 6*Lambda3*Lambda7*Conj(M122) + 6*Lambda4*Lambda7*Conj(M122)
-      + 18*Lambda6*traceYdAdjYd*Conj(M122) + 6*Lambda6*traceYeAdjYe*Conj(M122)
-      + 18*Lambda6*traceYuAdjYu*Conj(M122) - 3*Conj(Lambda5)*(Lambda5*M112 + 4*
-      Lambda5*M222 - 4*Conj(Lambda6)*Conj(M122) - 2*Conj(Lambda7)*Conj(M122)) +
-      4.3425*M112*Quad(g1) + 0.9*M222*Quad(g1) - 7.6875*M112*Quad(g2) + 7.5*
-      M222*Quad(g2) + 14.4*Lambda1*M112*Sqr(g1) + 4.8*Lambda3*M222*Sqr(g1) +
-      2.4*Lambda4*M222*Sqr(g1) + 1.25*M112*traceYdAdjYd*Sqr(g1) + 3.75*M112*
-      traceYeAdjYe*Sqr(g1) - 7.2*Lambda6*Conj(M122)*Sqr(g1) + 72*Lambda1*M112*
-      Sqr(g2) + 24*Lambda3*M222*Sqr(g2) + 12*Lambda4*M222*Sqr(g2) + 11.25*M112*
-      traceYdAdjYd*Sqr(g2) + 3.75*M112*traceYeAdjYe*Sqr(g2) - 36*Lambda6*Conj(
-      M122)*Sqr(g2) + 1.125*M112*Sqr(g1)*Sqr(g2) - 0.6*Conj(Lambda6)*(15*
-      Lambda6*(3*M112 + 2*M222) + 2*M122*(6*Sqr(g1) + 5*(-6*Lambda1 - 2*Lambda3
-       - 2*Lambda4 - 3*traceYdAdjYd - traceYeAdjYe - 3*traceYuAdjYu + 6*Sqr(g2)
-      ))) + 40*M112*traceYdAdjYd*Sqr(g3) - 60*M112*Sqr(Lambda1) - 2*M112*Sqr(
-      Lambda3) - 8*M222*Sqr(Lambda3) - 2*M112*Sqr(Lambda4) - 8*M222*Sqr(Lambda4
-      )));
+   beta_M112 = Re(0.0025*twoLoop*(-800*Lambda3*Lambda4*M112 + 4200*Lambda5*
+      Lambda6*M122 + 1800*Lambda5*Lambda7*M122 - 3200*Lambda3*Lambda4*M222 -
+      28800*Lambda1*M112*traceYdAdjYd - 5400*M112*traceYdAdjYdYdAdjYd - 1800*
+      M112*traceYdAdjYuYuAdjYd - 9600*Lambda1*M112*traceYeAdjYe - 1800*M112*
+      traceYeAdjYeYeAdjYe - 9600*Lambda3*M222*traceYuAdjYu - 4800*Lambda4*M222*
+      traceYuAdjYu - 1200*M112*AbsSqr(Lambda5) - 4800*M222*AbsSqr(Lambda5) -
+      10800*M112*AbsSqr(Lambda6) - 7200*M222*AbsSqr(Lambda6) + 1200*M112*AbsSqr
+      (Lambda7) - 7200*M222*AbsSqr(Lambda7) + 13200*Lambda1*M122*Conj(Lambda6)
+      + 4200*Lambda3*M122*Conj(Lambda6) + 4200*Lambda4*M122*Conj(Lambda6) +
+      7200*M122*traceYdAdjYd*Conj(Lambda6) + 2400*M122*traceYeAdjYe*Conj(
+      Lambda6) + 7200*M122*traceYuAdjYu*Conj(Lambda6) - 1200*Lambda2*M122*Conj(
+      Lambda7) + 1800*Lambda3*M122*Conj(Lambda7) + 1800*Lambda4*M122*Conj(
+      Lambda7) + 13200*Lambda1*Lambda6*Conj(M122) + 4200*Lambda3*Lambda6*Conj(
+      M122) + 4200*Lambda4*Lambda6*Conj(M122) - 1200*Lambda2*Lambda7*Conj(M122)
+      + 1800*Lambda3*Lambda7*Conj(M122) + 1800*Lambda4*Lambda7*Conj(M122) +
+      7200*Lambda6*traceYdAdjYd*Conj(M122) + 2400*Lambda6*traceYeAdjYe*Conj(
+      M122) + 7200*Lambda6*traceYuAdjYu*Conj(M122) + 4200*Conj(Lambda5)*Conj(
+      Lambda6)*Conj(M122) + 1800*Conj(Lambda5)*Conj(Lambda7)*Conj(M122) + 1737*
+      M112*Quad(g1) + 360*M222*Quad(g1) - 3075*M112*Quad(g2) + 3000*M222*Quad(
+      g2) + 5760*Lambda1*M112*Sqr(g1) + 1920*Lambda3*M222*Sqr(g1) + 960*Lambda4
+      *M222*Sqr(g1) + 500*M112*traceYdAdjYd*Sqr(g1) + 1500*M112*traceYeAdjYe*
+      Sqr(g1) - 2880*M122*Conj(Lambda6)*Sqr(g1) - 2880*Lambda6*Conj(M122)*Sqr(
+      g1) + 28800*Lambda1*M112*Sqr(g2) + 9600*Lambda3*M222*Sqr(g2) + 4800*
+      Lambda4*M222*Sqr(g2) + 4500*M112*traceYdAdjYd*Sqr(g2) + 1500*M112*
+      traceYeAdjYe*Sqr(g2) - 14400*M122*Conj(Lambda6)*Sqr(g2) - 14400*Lambda6*
+      Conj(M122)*Sqr(g2) + 450*M112*Sqr(g1)*Sqr(g2) + 16000*M112*traceYdAdjYd*
+      Sqr(g3) - 24000*M112*Sqr(Lambda1) - 800*M112*Sqr(Lambda3) - 3200*M222*Sqr
+      (Lambda3) - 800*M112*Sqr(Lambda4) - 3200*M222*Sqr(Lambda4)));
 
 
    return beta_M112;
@@ -154,6 +158,25 @@ double THDMII_soft_parameters::calc_beta_M112_3_loop(const Soft_traces& soft_tra
  * @return 4-loop beta function
  */
 double THDMII_soft_parameters::calc_beta_M112_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_M112;
+
+   beta_M112 = 0;
+
+
+   return beta_M112;
+}
+
+/**
+ * Calculates the 5-loop beta function of M112.
+ *
+ * @return 5-loop beta function
+ */
+double THDMII_soft_parameters::calc_beta_M112_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

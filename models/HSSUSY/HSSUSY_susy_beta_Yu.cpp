@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:10:15
+// File generated at Tue 22 Jan 2019 16:35:37
 
 #include "HSSUSY_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -40,8 +40,8 @@ Eigen::Matrix<double,3,3> HSSUSY_susy_parameters::calc_beta_Yu_1_loop(const Susy
 
    Eigen::Matrix<double,3,3> beta_Yu;
 
-   beta_Yu = (oneOver16PiSqr*(Yu*(3*traceYdAdjYd + traceYeAdjYe + 3*
-      traceYuAdjYu - 0.85*Sqr(g1) - 2.25*Sqr(g2) - 8*Sqr(g3)) - 1.5*(Yu*Yd.
+   beta_Yu = (oneOver16PiSqr*(-0.05*Yu*(-60*traceYdAdjYd - 20*traceYeAdjYe - 60
+      *traceYuAdjYu + 17*Sqr(g1) + 45*Sqr(g2) + 160*Sqr(g3)) - 1.5*(Yu*Yd.
       adjoint()*Yd) + 1.5*(Yu*Yu.adjoint()*Yu))).real();
 
 
@@ -66,19 +66,20 @@ Eigen::Matrix<double,3,3> HSSUSY_susy_parameters::calc_beta_Yu_2_loop(const Susy
 
    Eigen::Matrix<double,3,3> beta_Yu;
 
-   beta_Yu = (twoLoop*(0.0016666666666666668*Yu*(1187*Quad(g1) + 5*Sqr(g1)*(75*
-      traceYdAdjYd + 225*traceYeAdjYe + 255*traceYuAdjYu - 54*Sqr(g2) + 152*Sqr
-      (g3)) - 75*(46*Quad(g2) - 3*Sqr(g2)*(5*(3*traceYdAdjYd + traceYeAdjYe + 3
-      *traceYuAdjYu) + 24*Sqr(g3)) + 2*(432*Quad(g3) - 80*(traceYdAdjYd +
-      traceYuAdjYu)*Sqr(g3) + 3*(9*traceYdAdjYdYdAdjYd - 2*traceYdAdjYuYuAdjYd
-      + 3*traceYeAdjYeYeAdjYe + 9*traceYuAdjYuYuAdjYu - 2*Sqr(Lambdax))))) +
-      0.0125*(-43*Sqr(g1) + 5*(20*(3*traceYdAdjYd + traceYeAdjYe + 3*
-      traceYuAdjYu) + 9*Sqr(g2) - 256*Sqr(g3)))*(Yu*Yd.adjoint()*Yd) + 0.0125*(
-      223*Sqr(g1) + 675*Sqr(g2) + 20*(-3*(9*traceYdAdjYd + 3*traceYeAdjYe + 9*
-      traceYuAdjYu + 8*Lambdax) + 64*Sqr(g3)))*(Yu*Yu.adjoint()*Yu) + 2.75*(Yu*
-      Yd.adjoint()*Yd*Yd.adjoint()*Yd) - 0.25*(Yu*Yd.adjoint()*Yd*Yu.adjoint()*
-      Yu) - Yu*Yu.adjoint()*Yu*Yd.adjoint()*Yd + 1.5*(Yu*Yu.adjoint()*Yu*Yu.
-      adjoint()*Yu))).real();
+   beta_Yu = (twoLoop*(0.0016666666666666668*Yu*(-4050*traceYdAdjYdYdAdjYd +
+      900*traceYdAdjYuYuAdjYd - 1350*traceYeAdjYeYeAdjYe - 4050*
+      traceYuAdjYuYuAdjYu + 1187*Quad(g1) - 3450*Quad(g2) - 64800*Quad(g3) +
+      375*traceYdAdjYd*Sqr(g1) + 1125*traceYeAdjYe*Sqr(g1) + 1275*traceYuAdjYu*
+      Sqr(g1) + 3375*traceYdAdjYd*Sqr(g2) + 1125*traceYeAdjYe*Sqr(g2) + 3375*
+      traceYuAdjYu*Sqr(g2) - 270*Sqr(g1)*Sqr(g2) + 12000*traceYdAdjYd*Sqr(g3) +
+      12000*traceYuAdjYu*Sqr(g3) + 760*Sqr(g1)*Sqr(g3) + 5400*Sqr(g2)*Sqr(g3) +
+      900*Sqr(Lambdax)) + 0.0125*(300*traceYdAdjYd + 100*traceYeAdjYe + 300*
+      traceYuAdjYu - 43*Sqr(g1) + 45*Sqr(g2) - 1280*Sqr(g3))*(Yu*Yd.adjoint()*
+      Yd) + 0.0125*(-540*traceYdAdjYd - 180*traceYeAdjYe - 540*traceYuAdjYu -
+      480*Lambdax + 223*Sqr(g1) + 675*Sqr(g2) + 1280*Sqr(g3))*(Yu*Yu.adjoint()*
+      Yu) + 2.75*(Yu*Yd.adjoint()*Yd*Yd.adjoint()*Yd) - 0.25*(Yu*Yd.adjoint()*
+      Yd*Yu.adjoint()*Yu) - Yu*Yu.adjoint()*Yu*Yd.adjoint()*Yd + 1.5*(Yu*Yu.
+      adjoint()*Yu*Yu.adjoint()*Yu))).real();
 
 
    return beta_Yu;
@@ -97,18 +98,20 @@ Eigen::Matrix<double,3,3> HSSUSY_susy_parameters::calc_beta_Yu_3_loop(const Susy
 
    Eigen::Matrix<double,3,3> beta_Yu;
 
-   beta_Yu = (0.00005*PROJECTOR*threeLoop*(321980*Power6(g1) + 3396580*Power6(
-      g2) - 5*Quad(g2)*(21375*Lambdax + 84288*Sqr(g3) - 67960*Sqr(Yu(2,2))) - 5
-      *Quad(g1)*(5445*Lambdax + 17768*Sqr(g2) + 89276*Sqr(g3) + 97688*Sqr(Yu(2,
-      2))) - 10*Sqr(g1)*(9486*Quad(g2) + 30192*Quad(g3) + 60925*Quad(Yu(2,2)) -
-      4500*Sqr(Lambdax) + Sqr(g2)*(-2925*Lambdax + 32100*Sqr(g3) - 69658*Sqr(Yu
-      (2,2))) + 12700*Lambdax*Sqr(Yu(2,2)) - 36148*Sqr(g3)*Sqr(Yu(2,2))) + 10*
-      Sqr(g2)*(147308*Quad(g3) + 96740*Sqr(g3)*Sqr(Yu(2,2)) + 1125*(-177*Quad(
-      Yu(2,2)) + 20*Sqr(Lambdax) - 60*Lambdax*Sqr(Yu(2,2)))) + 2*(-45000*Cube(
-      Lambdax) - 6193500*Power6(g3) + 586028*Power6(Yu(2,2)) + 990000*Lambdax*
-      Quad(Yu(2,2)) + 3637640*Quad(g3)*Sqr(Yu(2,2)) + 9375*Sqr(Lambdax)*Sqr(Yu(
-      2,2)) + 10000*Sqr(g3)*(-157*Quad(Yu(2,2)) + 8*Lambdax*Sqr(Yu(2,2)))))*Yu(
-      2,2)).real();
+   beta_Yu = (0.00005*PROJECTOR*threeLoop*(-90000*Cube(Lambdax) + 321980*Power6
+      (g1) + 3396580*Power6(g2) - 12387000*Power6(g3) + 1172056*Power6(Yu(2,2))
+      - 27225*Lambdax*Quad(g1) - 106875*Lambdax*Quad(g2) + 1980000*Lambdax*Quad
+      (Yu(2,2)) - 94860*Quad(g2)*Sqr(g1) - 301920*Quad(g3)*Sqr(g1) - 609250*
+      Quad(Yu(2,2))*Sqr(g1) - 88840*Quad(g1)*Sqr(g2) + 1473080*Quad(g3)*Sqr(g2)
+      - 1991250*Quad(Yu(2,2))*Sqr(g2) + 29250*Lambdax*Sqr(g1)*Sqr(g2) - 446380*
+      Quad(g1)*Sqr(g3) - 421440*Quad(g2)*Sqr(g3) - 3140000*Quad(Yu(2,2))*Sqr(g3
+      ) - 321000*Sqr(g1)*Sqr(g2)*Sqr(g3) + 45000*Sqr(g1)*Sqr(Lambdax) + 225000*
+      Sqr(g2)*Sqr(Lambdax) - 488440*Quad(g1)*Sqr(Yu(2,2)) + 339800*Quad(g2)*Sqr
+      (Yu(2,2)) + 7275280*Quad(g3)*Sqr(Yu(2,2)) - 127000*Lambdax*Sqr(g1)*Sqr(Yu
+      (2,2)) - 675000*Lambdax*Sqr(g2)*Sqr(Yu(2,2)) + 696580*Sqr(g1)*Sqr(g2)*Sqr
+      (Yu(2,2)) + 160000*Lambdax*Sqr(g3)*Sqr(Yu(2,2)) + 361480*Sqr(g1)*Sqr(g3)*
+      Sqr(Yu(2,2)) + 967400*Sqr(g2)*Sqr(g3)*Sqr(Yu(2,2)) + 18750*Sqr(Lambdax)*
+      Sqr(Yu(2,2)))*Yu(2,2)).real();
 
 
    return beta_Yu;
@@ -129,6 +132,25 @@ Eigen::Matrix<double,3,3> HSSUSY_susy_parameters::calc_beta_Yu_4_loop(const Susy
 
    beta_Yu = (2308.18*PROJECTOR*Power8(g3)*Quad(oneOver16PiSqr)*Yu(2,2)).real()
       ;
+
+
+   return beta_Yu;
+}
+
+/**
+ * Calculates the 5-loop beta function of Yu.
+ *
+ * @return 5-loop beta function
+ */
+Eigen::Matrix<double,3,3> HSSUSY_susy_parameters::calc_beta_Yu_5_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_Yu;
+
+   beta_Yu = ZEROMATRIX(3,3);
 
 
    return beta_Yu;

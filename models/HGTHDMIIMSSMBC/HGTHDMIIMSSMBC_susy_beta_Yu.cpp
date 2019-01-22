@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:06:33
+// File generated at Tue 22 Jan 2019 16:22:18
 
 #include "HGTHDMIIMSSMBC_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -38,9 +38,9 @@ Eigen::Matrix<double,3,3> HGTHDMIIMSSMBC_susy_parameters::calc_beta_Yu_1_loop(co
 
    Eigen::Matrix<double,3,3> beta_Yu;
 
-   beta_Yu = (oneOver16PiSqr*(-0.05*Yu*(17*Sqr(g1) + 5*(9*Sqr(g2) - 2*(6*
-      traceYuAdjYu + 3*Sqr(g2u) + Sqr(g2up) - 16*Sqr(g3)))) + 0.5*(Yu*Yd.
-      adjoint()*Yd) + 1.5*(Yu*Yu.adjoint()*Yu))).real();
+   beta_Yu = (oneOver16PiSqr*(-0.05*Yu*(-60*traceYuAdjYu + 17*Sqr(g1) + 45*Sqr(
+      g2) - 30*Sqr(g2u) - 10*Sqr(g2up) + 160*Sqr(g3)) + 0.5*(Yu*Yd.adjoint()*Yd
+      ) + 1.5*(Yu*Yu.adjoint()*Yu))).real();
 
 
    return beta_Yu;
@@ -62,22 +62,22 @@ Eigen::Matrix<double,3,3> HGTHDMIIMSSMBC_susy_parameters::calc_beta_Yu_2_loop(co
 
    Eigen::Matrix<double,3,3> beta_Yu;
 
-   beta_Yu = (twoLoop*(Yu*(Lambda3*Lambda4 - 2.25*traceYdAdjYuYuAdjYd - 6.75*
-      traceYuAdjYuYuAdjYu + 1.5*AbsSqr(Lambda5) + 1.5*AbsSqr(Lambda6) + 4.5*
-      AbsSqr(Lambda7) + 2.305*Quad(g1) - 3.75*Quad(g2) - 2.8125*Quad(g2u) -
-      0.5625*Quad(g2up) - 94.66666666666667*Quad(g3) + 2.125*traceYuAdjYu*Sqr(
-      g1) + 5.625*traceYuAdjYu*Sqr(g2) - 0.45*Sqr(g1)*Sqr(g2) + 0.5625*Sqr(g1)*
-      Sqr(g2u) - 1.125*Sqr(g1d)*Sqr(g2u) + 10.3125*Sqr(g2)*Sqr(g2u) + 0.1875*
-      Sqr(g1)*Sqr(g2up) - 0.375*Sqr(g1dp)*Sqr(g2up) + 0.9375*Sqr(g2)*Sqr(g2up)
-      - 1.125*Sqr(g2u)*Sqr(g2up) + 20*traceYuAdjYu*Sqr(g3) + 1.2666666666666666
-      *Sqr(g1)*Sqr(g3) + 9*Sqr(g2)*Sqr(g3) + 6*Sqr(Lambda2) + Sqr(Lambda3) +
-      Sqr(Lambda4)) + (-2*Lambda3 + 2*Lambda4 - 2.25*traceYdAdjYd - 0.75*
-      traceYeAdjYe - 0.17083333333333334*Sqr(g1) - 1.125*Sqr(g1d) - 0.375*Sqr(
-      g1dp) + 2.0625*Sqr(g2) + 5.333333333333333*Sqr(g3))*(Yu*Yd.adjoint()*Yd)
-      + 0.0125*(223*Sqr(g1) + 5*(135*Sqr(g2) - 2*(96*Lambda2 + 54*traceYuAdjYu
-      + 27*Sqr(g2u) + 9*Sqr(g2up) - 128*Sqr(g3))))*(Yu*Yu.adjoint()*Yu) - 0.25*
-      (Yu*Yd.adjoint()*Yd*Yd.adjoint()*Yd) - 0.25*(Yu*Yd.adjoint()*Yd*Yu.
-      adjoint()*Yu) + 1.5*(Yu*Yu.adjoint()*Yu*Yu.adjoint()*Yu))).real();
+   beta_Yu = (twoLoop*(0.0008333333333333334*Yu*(1200*Lambda3*Lambda4 - 2700*
+      traceYdAdjYuYuAdjYd - 8100*traceYuAdjYuYuAdjYu + 1800*AbsSqr(Lambda5) +
+      1800*AbsSqr(Lambda6) + 5400*AbsSqr(Lambda7) + 2766*Quad(g1) - 4500*Quad(
+      g2) - 3375*Quad(g2u) - 675*Quad(g2up) - 113600*Quad(g3) + 2550*
+      traceYuAdjYu*Sqr(g1) + 6750*traceYuAdjYu*Sqr(g2) - 540*Sqr(g1)*Sqr(g2) +
+      675*Sqr(g1)*Sqr(g2u) - 1350*Sqr(g1d)*Sqr(g2u) + 12375*Sqr(g2)*Sqr(g2u) +
+      225*Sqr(g1)*Sqr(g2up) - 450*Sqr(g1dp)*Sqr(g2up) + 1125*Sqr(g2)*Sqr(g2up)
+      - 1350*Sqr(g2u)*Sqr(g2up) + 24000*traceYuAdjYu*Sqr(g3) + 1520*Sqr(g1)*Sqr
+      (g3) + 10800*Sqr(g2)*Sqr(g3) + 7200*Sqr(Lambda2) + 1200*Sqr(Lambda3) +
+      1200*Sqr(Lambda4)) + 0.004166666666666667*(-480*Lambda3 + 480*Lambda4 -
+      540*traceYdAdjYd - 180*traceYeAdjYe - 41*Sqr(g1) - 270*Sqr(g1d) - 90*Sqr(
+      g1dp) + 495*Sqr(g2) + 1280*Sqr(g3))*(Yu*Yd.adjoint()*Yd) + 0.0125*(-960*
+      Lambda2 - 540*traceYuAdjYu + 223*Sqr(g1) + 675*Sqr(g2) - 270*Sqr(g2u) -
+      90*Sqr(g2up) + 1280*Sqr(g3))*(Yu*Yu.adjoint()*Yu) - 0.25*(Yu*Yd.adjoint()
+      *Yd*Yd.adjoint()*Yd) - 0.25*(Yu*Yd.adjoint()*Yd*Yu.adjoint()*Yu) + 1.5*(
+      Yu*Yu.adjoint()*Yu*Yu.adjoint()*Yu))).real();
 
 
    return beta_Yu;
@@ -108,6 +108,25 @@ Eigen::Matrix<double,3,3> HGTHDMIIMSSMBC_susy_parameters::calc_beta_Yu_3_loop(co
  * @return 4-loop beta function
  */
 Eigen::Matrix<double,3,3> HGTHDMIIMSSMBC_susy_parameters::calc_beta_Yu_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_Yu;
+
+   beta_Yu = ZEROMATRIX(3,3);
+
+
+   return beta_Yu;
+}
+
+/**
+ * Calculates the 5-loop beta function of Yu.
+ *
+ * @return 5-loop beta function
+ */
+Eigen::Matrix<double,3,3> HGTHDMIIMSSMBC_susy_parameters::calc_beta_Yu_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

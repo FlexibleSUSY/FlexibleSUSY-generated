@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:04:23
+// File generated at Tue 22 Jan 2019 14:37:58
 
 #ifndef NMSSMEFTHiggs_LOW_SCALE_CONSTRAINT_H
 #define NMSSMEFTHiggs_LOW_SCALE_CONSTRAINT_H

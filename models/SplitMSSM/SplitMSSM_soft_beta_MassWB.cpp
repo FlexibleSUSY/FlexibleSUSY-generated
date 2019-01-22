@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:09:51
+// File generated at Tue 22 Jan 2019 16:46:46
 
 #include "SplitMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -94,14 +94,18 @@ double SplitMSSM_soft_parameters::calc_beta_MassWB_2_loop(const Soft_traces& sof
 
    double beta_MassWB;
 
-   beta_MassWB = Re(0.008333333333333333*twoLoop*(-360*g2u*Cube(g2d)*Mu - 9320*
-      MassWB*Quad(g2) - 435*MassWB*Quad(g2d) - 435*MassWB*Quad(g2u) + 3*Sqr(g2u
-      )*(MassWB*(51*Sqr(g1) + 5*(91*Sqr(g2) - 6*(6*traceYdAdjYd + 2*
-      traceYeAdjYe + 6*traceYuAdjYu + Sqr(gYd)))) + 5*(8*MassB - 7*MassWB)*Sqr(
-      gYu)) - 24*g2d*g2u*(10*gYd*gYu*MassB + 5*Mu*Sqr(gYd) + Mu*(-24*Sqr(g1) +
-      5*(-48*Sqr(g2) + 3*Sqr(g2u) + Sqr(gYu)))) + 3*Sqr(g2d)*(5*(8*MassB - 7*
-      MassWB)*Sqr(gYd) + MassWB*(51*Sqr(g1) + 5*(91*Sqr(g2) - 6*(6*traceYdAdjYd
-       + 2*traceYeAdjYe + 6*traceYuAdjYu + 14*Sqr(g2u) + Sqr(gYu)))))));
+   beta_MassWB = Re(0.008333333333333333*twoLoop*(-240*g2d*g2u*gYd*gYu*MassB -
+      360*g2u*Cube(g2d)*Mu - 360*g2d*Cube(g2u)*Mu - 9320*MassWB*Quad(g2) - 435*
+      MassWB*Quad(g2d) - 435*MassWB*Quad(g2u) + 576*g2d*g2u*Mu*Sqr(g1) + 5760*
+      g2d*g2u*Mu*Sqr(g2) - 540*MassWB*traceYdAdjYd*Sqr(g2d) - 180*MassWB*
+      traceYeAdjYe*Sqr(g2d) - 540*MassWB*traceYuAdjYu*Sqr(g2d) + 153*MassWB*Sqr
+      (g1)*Sqr(g2d) + 1365*MassWB*Sqr(g2)*Sqr(g2d) - 540*MassWB*traceYdAdjYd*
+      Sqr(g2u) - 180*MassWB*traceYeAdjYe*Sqr(g2u) - 540*MassWB*traceYuAdjYu*Sqr
+      (g2u) + 153*MassWB*Sqr(g1)*Sqr(g2u) + 1365*MassWB*Sqr(g2)*Sqr(g2u) - 1260
+      *MassWB*Sqr(g2d)*Sqr(g2u) - 120*g2d*g2u*Mu*Sqr(gYd) + 120*MassB*Sqr(g2d)*
+      Sqr(gYd) - 105*MassWB*Sqr(g2d)*Sqr(gYd) - 90*MassWB*Sqr(g2u)*Sqr(gYd) -
+      120*g2d*g2u*Mu*Sqr(gYu) - 90*MassWB*Sqr(g2d)*Sqr(gYu) + 120*MassB*Sqr(g2u
+      )*Sqr(gYu) - 105*MassWB*Sqr(g2u)*Sqr(gYu)));
 
 
    return beta_MassWB;
@@ -132,6 +136,25 @@ double SplitMSSM_soft_parameters::calc_beta_MassWB_3_loop(const Soft_traces& sof
  * @return 4-loop beta function
  */
 double SplitMSSM_soft_parameters::calc_beta_MassWB_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MassWB;
+
+   beta_MassWB = 0;
+
+
+   return beta_MassWB;
+}
+
+/**
+ * Calculates the 5-loop beta function of MassWB.
+ *
+ * @return 5-loop beta function
+ */
+double SplitMSSM_soft_parameters::calc_beta_MassWB_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

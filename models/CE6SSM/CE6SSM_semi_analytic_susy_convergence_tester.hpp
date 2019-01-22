@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:01:41
+// File generated at Tue 22 Jan 2019 15:17:58
 
 #ifndef CE6SSM_SEMI_ANALYTIC_SUSY_CONVERGENCE_TESTER_H
 #define CE6SSM_SEMI_ANALYTIC_SUSY_CONVERGENCE_TESTER_H
@@ -37,7 +37,7 @@ public:
    using Scale_getter = Convergence_tester_DRbar<CE6SSM<Semi_analytic> >::Scale_getter;
 
    CE6SSM_susy_convergence_tester(CE6SSM<Semi_analytic>*, double, const Scale_getter& sg = Scale_getter());
-   virtual ~CE6SSM_susy_convergence_tester();
+   virtual ~CE6SSM_susy_convergence_tester() = default;
 
 protected:
    virtual double max_rel_diff() const;

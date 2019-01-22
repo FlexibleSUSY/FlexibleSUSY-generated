@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 13:46:27
+// File generated at Tue 22 Jan 2019 14:19:02
 
 #include "CE6SSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -68,14 +68,15 @@ double CE6SSM_susy_parameters::calc_beta_vs_2_loop(const Susy_traces& susy_trace
 
    double beta_vs;
 
-   beta_vs = Re(-0.00625*twoLoop*vs*(1065*Quad(gN) + 64*((2*traceKappaAdjKappa
-      + 3*traceLambda12AdjLambda12)*Sqr(g1) + 5*(-3*
-      traceKappaAdjKappaKappaAdjKappa - 2*
-      traceLambda12AdjLambda12Lambda12AdjLambda12 + 3*traceLambda12AdjLambda12*
-      Sqr(g2) + 8*traceKappaAdjKappa*Sqr(g3))) + 104*(3*traceKappaAdjKappa + 2*
-      traceLambda12AdjLambda12)*Sqr(gN) + 16*AbsSqr(Lambdax)*(-60*traceYdAdjYd
-      - 20*traceYeAdjYe - 60*traceYuAdjYu + 12*Sqr(g1) + 60*Sqr(g2) + 13*Sqr(gN
-      )) - 640*Sqr(Conj(Lambdax))*Sqr(Lambdax)));
+   beta_vs = Re(-0.00625*twoLoop*vs*(-960*traceKappaAdjKappaKappaAdjKappa - 640
+      *traceLambda12AdjLambda12Lambda12AdjLambda12 - 960*traceYdAdjYd*AbsSqr(
+      Lambdax) - 320*traceYeAdjYe*AbsSqr(Lambdax) - 960*traceYuAdjYu*AbsSqr(
+      Lambdax) + 1065*Quad(gN) + 128*traceKappaAdjKappa*Sqr(g1) + 192*
+      traceLambda12AdjLambda12*Sqr(g1) + 192*AbsSqr(Lambdax)*Sqr(g1) + 960*
+      traceLambda12AdjLambda12*Sqr(g2) + 960*AbsSqr(Lambdax)*Sqr(g2) + 2560*
+      traceKappaAdjKappa*Sqr(g3) + 312*traceKappaAdjKappa*Sqr(gN) + 208*
+      traceLambda12AdjLambda12*Sqr(gN) + 208*AbsSqr(Lambdax)*Sqr(gN) - 640*Sqr(
+      Conj(Lambdax))*Sqr(Lambdax)));
 
 
    return beta_vs;
@@ -106,6 +107,25 @@ double CE6SSM_susy_parameters::calc_beta_vs_3_loop(const Susy_traces& susy_trace
  * @return 4-loop beta function
  */
 double CE6SSM_susy_parameters::calc_beta_vs_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_vs;
+
+   beta_vs = 0;
+
+
+   return beta_vs;
+}
+
+/**
+ * Calculates the 5-loop beta function of vs.
+ *
+ * @return 5-loop beta function
+ */
+double CE6SSM_susy_parameters::calc_beta_vs_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

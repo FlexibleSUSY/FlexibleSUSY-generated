@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:18:47
+// File generated at Tue 22 Jan 2019 17:02:07
 
 #include "E6SSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,9 +73,9 @@ double E6SSM_soft_parameters::calc_beta_BMuPr_1_loop(const Soft_traces& soft_tra
 
    double beta_BMuPr;
 
-   beta_BMuPr = Re(0.2*oneOver16PiSqr*(-(BMuPr*(3*Sqr(g1) + 15*Sqr(g2) + 2*Sqr(
-      gN))) + 2*MuPr*(3*MassB*Sqr(g1) + 15*MassWB*Sqr(g2) + 2*MassBp*Sqr(gN))))
-      ;
+   beta_BMuPr = Re(0.2*oneOver16PiSqr*(-3*BMuPr*Sqr(g1) + 6*MassB*MuPr*Sqr(g1)
+      - 15*BMuPr*Sqr(g2) + 30*MassWB*MuPr*Sqr(g2) - 2*BMuPr*Sqr(gN) + 4*MassBp*
+      MuPr*Sqr(gN)));
 
 
    return beta_BMuPr;
@@ -92,11 +92,13 @@ double E6SSM_soft_parameters::calc_beta_BMuPr_2_loop(const Soft_traces& soft_tra
 
    double beta_BMuPr;
 
-   beta_BMuPr = Re(-0.06*twoLoop*(-(BMuPr*(99*Quad(g1) + 275*Quad(g2) + 64*Quad
-      (gN) + 20*Sqr(g2)*Sqr(gN) + 6*Sqr(g1)*(5*Sqr(g2) + 2*Sqr(gN)))) + 4*MuPr*
-      (99*MassB*Quad(g1) + 275*MassWB*Quad(g2) + 64*MassBp*Quad(gN) + 10*(
-      MassBp + MassWB)*Sqr(g2)*Sqr(gN) + 3*Sqr(g1)*(5*(MassB + MassWB)*Sqr(g2)
-      + 2*(MassB + MassBp)*Sqr(gN)))));
+   beta_BMuPr = Re(-0.06*twoLoop*(-99*BMuPr*Quad(g1) + 396*MassB*MuPr*Quad(g1)
+      - 275*BMuPr*Quad(g2) + 1100*MassWB*MuPr*Quad(g2) - 64*BMuPr*Quad(gN) +
+      256*MassBp*MuPr*Quad(gN) - 30*BMuPr*Sqr(g1)*Sqr(g2) + 60*MassB*MuPr*Sqr(
+      g1)*Sqr(g2) + 60*MassWB*MuPr*Sqr(g1)*Sqr(g2) - 12*BMuPr*Sqr(g1)*Sqr(gN) +
+      24*MassB*MuPr*Sqr(g1)*Sqr(gN) + 24*MassBp*MuPr*Sqr(g1)*Sqr(gN) - 20*BMuPr
+      *Sqr(g2)*Sqr(gN) + 40*MassBp*MuPr*Sqr(g2)*Sqr(gN) + 40*MassWB*MuPr*Sqr(g2
+      )*Sqr(gN)));
 
 
    return beta_BMuPr;
@@ -127,6 +129,25 @@ double E6SSM_soft_parameters::calc_beta_BMuPr_3_loop(const Soft_traces& soft_tra
  * @return 4-loop beta function
  */
 double E6SSM_soft_parameters::calc_beta_BMuPr_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_BMuPr;
+
+   beta_BMuPr = 0;
+
+
+   return beta_BMuPr;
+}
+
+/**
+ * Calculates the 5-loop beta function of BMuPr.
+ *
+ * @return 5-loop beta function
+ */
+double E6SSM_soft_parameters::calc_beta_BMuPr_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:25:18
+// File generated at Tue 22 Jan 2019 13:53:31
 
 #include "MRSSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -74,9 +74,9 @@ double MRSSMEFTHiggs_soft_parameters::calc_beta_BMuU_1_loop(const Soft_traces& s
 
    double beta_BMuU;
 
-   beta_BMuU = Re(oneOver16PiSqr*(4*LamSU*BMuD*Conj(LamSD) + BMuU*(3*
-      traceYuAdjYu + 6*AbsSqr(LamSU) + 3*AbsSqr(LamTU) - 0.6*Sqr(g1) - 3*Sqr(g2
-      ))));
+   beta_BMuU = Re(0.2*oneOver16PiSqr*(15*traceYuAdjYu*BMuU + 30*AbsSqr(LamSU)*
+      BMuU + 15*AbsSqr(LamTU)*BMuU + 20*LamSU*BMuD*Conj(LamSD) - 3*BMuU*Sqr(g1)
+      - 15*BMuU*Sqr(g2)));
 
 
    return beta_BMuU;
@@ -98,14 +98,18 @@ double MRSSMEFTHiggs_soft_parameters::calc_beta_BMuU_2_loop(const Soft_traces& s
 
    double beta_BMuU;
 
-   beta_BMuU = Re(0.1*twoLoop*(-8*LamSU*BMuD*Conj(LamSD)*(15*traceYdAdjYd + 5*
-      traceYeAdjYe + 10*AbsSqr(LamSD) + 15*AbsSqr(LamTD) - 9*Sqr(g1) - 45*Sqr(
-      g2)) + BMuU*(-30*traceYdAdjYuYuAdjYd - 90*traceYuAdjYuYuAdjYu + 45*Quad(
-      g1) + 165*Quad(g2) + 8*traceYuAdjYu*Sqr(g1) + 18*Sqr(g1)*Sqr(g2) + 15*
-      AbsSqr(LamTU)*(-3*traceYuAdjYu - 2*AbsSqr(LamTD) + 8*Sqr(g2)) + 2*AbsSqr(
-      LamSU)*(-75*traceYuAdjYu - 20*AbsSqr(LamSD) - 90*AbsSqr(LamTU) + 36*Sqr(
-      g1) + 180*Sqr(g2)) + 160*traceYuAdjYu*Sqr(g3) - 140*Sqr(LamSU)*Sqr(Conj(
-      LamSU)) - 75*Sqr(LamTU)*Sqr(Conj(LamTU)))));
+   beta_BMuU = Re(0.1*twoLoop*(-30*traceYdAdjYuYuAdjYd*BMuU - 90*
+      traceYuAdjYuYuAdjYu*BMuU - 150*traceYuAdjYu*AbsSqr(LamSU)*BMuU - 40*
+      AbsSqr(LamSD)*AbsSqr(LamSU)*BMuU - 45*traceYuAdjYu*AbsSqr(LamTU)*BMuU -
+      180*AbsSqr(LamSU)*AbsSqr(LamTU)*BMuU - 30*AbsSqr(LamTD)*AbsSqr(LamTU)*
+      BMuU - 120*LamSU*traceYdAdjYd*BMuD*Conj(LamSD) - 40*LamSU*traceYeAdjYe*
+      BMuD*Conj(LamSD) - 120*LamSU*AbsSqr(LamTD)*BMuD*Conj(LamSD) + 45*BMuU*
+      Quad(g1) + 165*BMuU*Quad(g2) + 8*traceYuAdjYu*BMuU*Sqr(g1) + 72*AbsSqr(
+      LamSU)*BMuU*Sqr(g1) + 72*LamSU*BMuD*Conj(LamSD)*Sqr(g1) + 360*AbsSqr(
+      LamSU)*BMuU*Sqr(g2) + 120*AbsSqr(LamTU)*BMuU*Sqr(g2) + 360*LamSU*BMuD*
+      Conj(LamSD)*Sqr(g2) + 18*BMuU*Sqr(g1)*Sqr(g2) + 160*traceYuAdjYu*BMuU*Sqr
+      (g3) - 80*LamSD*LamSU*BMuD*Sqr(Conj(LamSD)) - 140*BMuU*Sqr(LamSU)*Sqr(
+      Conj(LamSU)) - 75*BMuU*Sqr(LamTU)*Sqr(Conj(LamTU))));
 
 
    return beta_BMuU;
@@ -136,6 +140,25 @@ double MRSSMEFTHiggs_soft_parameters::calc_beta_BMuU_3_loop(const Soft_traces& s
  * @return 4-loop beta function
  */
 double MRSSMEFTHiggs_soft_parameters::calc_beta_BMuU_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_BMuU;
+
+   beta_BMuU = 0;
+
+
+   return beta_BMuU;
+}
+
+/**
+ * Calculates the 5-loop beta function of BMuU.
+ *
+ * @return 5-loop beta function
+ */
+double MRSSMEFTHiggs_soft_parameters::calc_beta_BMuU_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

@@ -7,7 +7,12 @@ MODNUTNMSSM_DEP := $(patsubst %,model_specific/%,$(MODNUTNMSSM_MOD))
 MODNUTNMSSM_INC := $(patsubst %,-Imodel_specific/%,$(MODNUTNMSSM_MOD))
 MODNUTNMSSM_LIB := $(foreach M,$(MODNUTNMSSM_MOD),model_specific/$M/libmodel_specific_$M$(MODULE_LIBEXT))
 
+MODNUTNMSSM_SUBMOD  := $(DIR)/cxx_qft
+MODNUTNMSSM_SUBMOD_INC := $(patsubst %,-I%,$(MODNUTNMSSM_SUBMOD))
+
 NUTNMSSM_INSTALL_DIR := $(INSTALL_DIR)/$(DIR)
+NUTNMSSM_INSTALL_CXXQFT_DIR := \
+		$(NUTNMSSM_INSTALL_DIR)/cxx_qft
 
 NUTNMSSM_MK     := \
 		$(DIR)/module.mk
@@ -73,7 +78,6 @@ LLNUTNMSSM_MMA  := \
 		$(DIR)/run_NUTNMSSM.m
 
 LIBNUTNMSSM_HDR := \
-		$(DIR)/NUTNMSSM_cxx_diagrams.hpp \
 		$(DIR)/NUTNMSSM_a_muon.hpp \
 		$(DIR)/NUTNMSSM_convergence_tester.hpp \
 		$(DIR)/NUTNMSSM_edm.hpp \
@@ -98,6 +102,13 @@ LIBNUTNMSSM_HDR := \
 		$(DIR)/NUTNMSSM_susy_scale_constraint.hpp \
 		$(DIR)/NUTNMSSM_utilities.hpp \
 		$(DIR)/NUTNMSSM_weinberg_angle.hpp
+
+LIBNUTNMSSM_CXXQFT_HDR := \
+		$(DIR)/cxx_qft/NUTNMSSM_qft.hpp \
+		$(DIR)/cxx_qft/NUTNMSSM_fields.hpp \
+		$(DIR)/cxx_qft/NUTNMSSM_vertices.hpp \
+		$(DIR)/cxx_qft/NUTNMSSM_context_base.hpp \
+		$(DIR)/cxx_qft/NUTNMSSM_npointfunctions.hpp
 
 ifneq ($(findstring two_scale,$(SOLVERS)),)
 -include $(DIR)/two_scale.mk
@@ -187,8 +198,10 @@ all-$(MODNAME): $(LIBNUTNMSSM) $(EXENUTNMSSM_EXE)
 ifneq ($(INSTALL_DIR),)
 install-src::
 		install -d $(NUTNMSSM_INSTALL_DIR)
+		install -d $(NUTNMSSM_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(LIBNUTNMSSM_SRC) $(NUTNMSSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LIBNUTNMSSM_HDR) $(NUTNMSSM_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(LIBNUTNMSSM_CXXQFT_HDR) $(NUTNMSSM_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(EXENUTNMSSM_SRC) $(NUTNMSSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLNUTNMSSM_SRC) $(NUTNMSSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLNUTNMSSM_MMA) $(NUTNMSSM_INSTALL_DIR)
@@ -219,6 +232,7 @@ clean-$(MODNAME)-obj:
 clean-$(MODNAME)-src:
 		-rm -f $(LIBNUTNMSSM_SRC)
 		-rm -f $(LIBNUTNMSSM_HDR)
+		-rm -f $(LIBNUTNMSSM_CXXQFT_HDR)
 		-rm -f $(EXENUTNMSSM_SRC)
 		-rm -f $(LLNUTNMSSM_SRC)
 		-rm -f $(LLNUTNMSSM_MMA)
@@ -247,14 +261,14 @@ distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
 		tar -czf $(NUTNMSSM_TARBALL) \
-		$(LIBNUTNMSSM_SRC) $(LIBNUTNMSSM_HDR) \
+		$(LIBNUTNMSSM_SRC) $(LIBNUTNMSSM_HDR) $(LIBNUTNMSSM_CXXQFT_HDR) \
 		$(EXENUTNMSSM_SRC) \
 		$(LLNUTNMSSM_SRC) $(LLNUTNMSSM_MMA) \
 		$(NUTNMSSM_MK) $(NUTNMSSM_INCLUDE_MK) \
 		$(NUTNMSSM_SLHA_INPUT) $(NUTNMSSM_REFERENCES) \
 		$(NUTNMSSM_GNUPLOT)
 
-$(LIBNUTNMSSM_SRC) $(LIBNUTNMSSM_HDR) $(EXENUTNMSSM_SRC) $(LLNUTNMSSM_SRC) $(LLNUTNMSSM_MMA) \
+$(LIBNUTNMSSM_SRC) $(LIBNUTNMSSM_HDR) $(LIBNUTNMSSM_CXXQFT_HDR) $(EXENUTNMSSM_SRC) $(LLNUTNMSSM_SRC) $(LLNUTNMSSM_MMA) \
 : run-metacode-$(MODNAME)
 		@true
 
@@ -275,7 +289,7 @@ $(METACODE_STAMP_NUTNMSSM):
 endif
 
 $(LIBNUTNMSSM_DEP) $(EXENUTNMSSM_DEP) $(LLNUTNMSSM_DEP) $(LIBNUTNMSSM_OBJ) $(EXENUTNMSSM_OBJ) $(LLNUTNMSSM_OBJ) $(LLNUTNMSSM_LIB): \
-	CPPFLAGS += $(MODNUTNMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODNUTNMSSM_SUBMOD_INC) $(MODNUTNMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBNUTNMSSM_DEP) $(EXENUTNMSSM_DEP) $(LLNUTNMSSM_DEP) $(LIBNUTNMSSM_OBJ) $(EXENUTNMSSM_OBJ) $(LLNUTNMSSM_OBJ) $(LLNUTNMSSM_LIB): \

@@ -16,11 +16,12 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:44:34
+// File generated at Tue 22 Jan 2019 17:34:25
 
 #include "NUTNMSSM_two_scale_high_scale_constraint.hpp"
 #include "NUTNMSSM_two_scale_model.hpp"
 #include "NUTNMSSM_info.hpp"
+#include "config.h"
 #include "wrappers.hpp"
 #include "logger.hpp"
 #include "ew_input.hpp"
@@ -34,6 +35,7 @@
 
 #ifdef ENABLE_HIMALAYA
 #include "HierarchyCalculator.hpp"
+#include "version.hpp"
 #endif
 
 #include <cmath>

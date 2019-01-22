@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 15:23:57
+// File generated at Tue 22 Jan 2019 17:56:58
 
 #ifndef MSSMatMGUT_SPECTRUM_GENERATOR_INTERFACE_H
 #define MSSMatMGUT_SPECTRUM_GENERATOR_INTERFACE_H

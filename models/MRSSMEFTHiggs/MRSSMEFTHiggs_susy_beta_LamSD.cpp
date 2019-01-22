@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:25:03
+// File generated at Tue 22 Jan 2019 13:53:02
 
 #include "MRSSMEFTHiggs_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -39,9 +39,9 @@ double MRSSMEFTHiggs_susy_parameters::calc_beta_LamSD_1_loop(const Susy_traces& 
 
    double beta_LamSD;
 
-   beta_LamSD = Re(oneOver16PiSqr*(3*LamSD*traceYdAdjYd + LamSD*traceYeAdjYe +
-      2*LamSD*AbsSqr(LamSU) + 3*LamSD*AbsSqr(LamTD) - 0.6*LamSD*Sqr(g1) - 3*
-      LamSD*Sqr(g2) + 4*Conj(LamSD)*Sqr(LamSD)));
+   beta_LamSD = Re(0.2*LamSD*oneOver16PiSqr*(15*traceYdAdjYd + 5*traceYeAdjYe +
+      20*AbsSqr(LamSD) + 10*AbsSqr(LamSU) + 15*AbsSqr(LamTD) - 3*Sqr(g1) - 15*
+      Sqr(g2)));
 
 
    return beta_LamSD;
@@ -65,15 +65,16 @@ double MRSSMEFTHiggs_susy_parameters::calc_beta_LamSD_2_loop(const Susy_traces& 
    double beta_LamSD;
 
    beta_LamSD = Re(-0.1*LamSD*twoLoop*(90*traceYdAdjYdYdAdjYd + 30*
-      traceYdAdjYuYuAdjYd + 30*traceYeAdjYeYeAdjYe + 45*traceYdAdjYd*AbsSqr(
-      LamTD) + 15*traceYeAdjYe*AbsSqr(LamTD) + 30*AbsSqr(LamTD)*AbsSqr(LamTU) -
-      45*Quad(g1) - 165*Quad(g2) + 4*traceYdAdjYd*Sqr(g1) - 12*traceYeAdjYe*Sqr
-      (g1) + 2*AbsSqr(LamSD)*(45*traceYdAdjYd + 15*traceYeAdjYe + 20*AbsSqr(
-      LamSU) + 60*AbsSqr(LamTD) - 6*Sqr(g1) - 30*Sqr(g2)) - 120*AbsSqr(LamTD)*
-      Sqr(g2) - 18*Sqr(g1)*Sqr(g2) - 12*AbsSqr(LamSU)*(-5*traceYuAdjYu - 5*
-      AbsSqr(LamTU) + Sqr(g1) + 5*Sqr(g2)) - 160*traceYdAdjYd*Sqr(g3) + 100*Sqr
-      (LamSD)*Sqr(Conj(LamSD)) + 40*Sqr(LamSU)*Sqr(Conj(LamSU)) + 75*Sqr(LamTD)
-      *Sqr(Conj(LamTD))));
+      traceYdAdjYuYuAdjYd + 30*traceYeAdjYeYeAdjYe + 90*traceYdAdjYd*AbsSqr(
+      LamSD) + 30*traceYeAdjYe*AbsSqr(LamSD) + 60*traceYuAdjYu*AbsSqr(LamSU) +
+      40*AbsSqr(LamSD)*AbsSqr(LamSU) + 45*traceYdAdjYd*AbsSqr(LamTD) + 15*
+      traceYeAdjYe*AbsSqr(LamTD) + 120*AbsSqr(LamSD)*AbsSqr(LamTD) + 60*AbsSqr(
+      LamSU)*AbsSqr(LamTU) + 30*AbsSqr(LamTD)*AbsSqr(LamTU) - 45*Quad(g1) - 165
+      *Quad(g2) + 4*traceYdAdjYd*Sqr(g1) - 12*traceYeAdjYe*Sqr(g1) - 12*AbsSqr(
+      LamSD)*Sqr(g1) - 12*AbsSqr(LamSU)*Sqr(g1) - 60*AbsSqr(LamSD)*Sqr(g2) - 60
+      *AbsSqr(LamSU)*Sqr(g2) - 120*AbsSqr(LamTD)*Sqr(g2) - 18*Sqr(g1)*Sqr(g2) -
+      160*traceYdAdjYd*Sqr(g3) + 100*Sqr(LamSD)*Sqr(Conj(LamSD)) + 40*Sqr(LamSU
+      )*Sqr(Conj(LamSU)) + 75*Sqr(LamTD)*Sqr(Conj(LamTD))));
 
 
    return beta_LamSD;
@@ -104,6 +105,25 @@ double MRSSMEFTHiggs_susy_parameters::calc_beta_LamSD_3_loop(const Susy_traces& 
  * @return 4-loop beta function
  */
 double MRSSMEFTHiggs_susy_parameters::calc_beta_LamSD_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_LamSD;
+
+   beta_LamSD = 0;
+
+
+   return beta_LamSD;
+}
+
+/**
+ * Calculates the 5-loop beta function of LamSD.
+ *
+ * @return 5-loop beta function
+ */
+double MRSSMEFTHiggs_susy_parameters::calc_beta_LamSD_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

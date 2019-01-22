@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 15:11:12
+// File generated at Tue 22 Jan 2019 17:47:48
 
 #ifndef CMSSMNoFV_WEINBERG_ANGLE_H
 #define CMSSMNoFV_WEINBERG_ANGLE_H

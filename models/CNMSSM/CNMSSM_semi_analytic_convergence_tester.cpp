@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 13:59:40
+// File generated at Tue 22 Jan 2019 13:51:46
 
 #include "CNMSSM_semi_analytic_convergence_tester.hpp"
 #include <array>
@@ -44,10 +44,6 @@ namespace flexiblesusy {
 CNMSSM_convergence_tester<Semi_analytic>::CNMSSM_convergence_tester(
    CNMSSM<Semi_analytic>* model, double accuracy_goal, const Scale_getter& sg)
    : Convergence_tester_DRbar<CNMSSM<Semi_analytic> >(model, accuracy_goal, sg)
-{
-}
-
-CNMSSM_convergence_tester<Semi_analytic>::~CNMSSM_convergence_tester()
 {
 }
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 15:01:40
+// File generated at Tue 22 Jan 2019 17:42:09
 
 #include "NUHMSSM_physical.hpp"
 #include "slha_io.hpp"

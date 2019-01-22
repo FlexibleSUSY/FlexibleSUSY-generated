@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:55:55
+// File generated at Tue 22 Jan 2019 17:43:09
 
 #include "MSSMRHN_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -77,10 +77,11 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_TYv_1_loop(const So
 
    Eigen::Matrix<double,3,3> beta_TYv;
 
-   beta_TYv = (oneOver16PiSqr*(1.2*MassB*Yv*Sqr(g1) + 2*Yv*(3*traceAdjYuTYu +
-      traceAdjYvTYv + 3*MassWB*Sqr(g2)) + (3*traceYuAdjYu + traceYvAdjYv - 0.6*
-      Sqr(g1) - 3*Sqr(g2))*TYv + 2*(Yv*Ye.adjoint()*TYe) + 4*(Yv*Yv.adjoint()*
-      TYv) + TYv*Ye.adjoint()*Ye + 5*(TYv*Yv.adjoint()*Yv))).real();
+   beta_TYv = (oneOver16PiSqr*(0.2*(30*traceAdjYuTYu*Yv + 10*traceAdjYvTYv*Yv +
+      6*MassB*Yv*Sqr(g1) + 30*MassWB*Yv*Sqr(g2) + 15*traceYuAdjYu*TYv + 5*
+      traceYvAdjYv*TYv - 3*Sqr(g1)*TYv - 15*Sqr(g2)*TYv) + 2*(Yv*Ye.adjoint()*
+      TYe) + 4*(Yv*Yv.adjoint()*TYv) + TYv*Ye.adjoint()*Ye + 5*(TYv*Yv.adjoint(
+      )*Yv))).real();
 
 
    return beta_TYv;
@@ -115,21 +116,24 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_TYv_2_loop(const So
 
    Eigen::Matrix<double,3,3> beta_TYv;
 
-   beta_TYv = (twoLoop*(0.02*(-4*Yv*(207*MassB*Quad(g1) + 5*Sqr(g1)*(-4*
-      traceAdjYuTYu + 4*MassB*traceYuAdjYu + 9*(MassB + MassWB)*Sqr(g2)) + 25*(
-      3*traceYdAdjYuTYuAdjYd + traceYeAdjYvTYvAdjYe + 3*traceYuAdjYdTYdAdjYu +
-      18*traceYuAdjYuTYuAdjYu + traceYvAdjYeTYeAdjYv + 6*traceYvAdjYvTYvAdjYv +
-      15*MassWB*Quad(g2) - 16*(traceAdjYuTYu - MassG*traceYuAdjYu)*Sqr(g3))) +
-      (207*Quad(g1) + 10*Sqr(g1)*(4*traceYuAdjYu + 9*Sqr(g2)) + 25*(15*Quad(g2)
-      - 2*(3*traceYdAdjYuYuAdjYd + traceYeAdjYvYvAdjYe + 9*traceYuAdjYuYuAdjYu
-      + 3*traceYvAdjYvYvAdjYv - 16*traceYuAdjYu*Sqr(g3))))*TYv) - 0.4*(5*(3*
-      traceAdjYdTYd + traceAdjYeTYe) + 6*MassB*Sqr(g1))*(Yv*Ye.adjoint()*Ye) +
-      (-2*(3*traceYdAdjYd + traceYeAdjYe) + 2.4*Sqr(g1))*(Yv*Ye.adjoint()*TYe)
-      - 1.2*(2*MassB*Sqr(g1) + 5*(3*traceAdjYuTYu + traceAdjYvTYv + 2*MassWB*
-      Sqr(g2)))*(Yv*Yv.adjoint()*Yv) + (-4*(3*traceYuAdjYu + traceYvAdjYv) +
-      1.2*Sqr(g1) + 6*Sqr(g2))*(Yv*Yv.adjoint()*TYv) + (-3*traceYdAdjYd -
-      traceYeAdjYe + 1.2*Sqr(g1))*(TYv*Ye.adjoint()*Ye) + (-5*(3*traceYuAdjYu +
-      traceYvAdjYv) + 2.4*Sqr(g1) + 12*Sqr(g2))*(TYv*Yv.adjoint()*Yv) - 4*(Yv*
+   beta_TYv = (twoLoop*(0.02*(-300*traceYdAdjYuTYuAdjYd*Yv - 100*
+      traceYeAdjYvTYvAdjYe*Yv - 300*traceYuAdjYdTYdAdjYu*Yv - 1800*
+      traceYuAdjYuTYuAdjYu*Yv - 100*traceYvAdjYeTYeAdjYv*Yv - 600*
+      traceYvAdjYvTYvAdjYv*Yv - 828*MassB*Yv*Quad(g1) - 1500*MassWB*Yv*Quad(g2)
+      + 80*traceAdjYuTYu*Yv*Sqr(g1) - 80*MassB*traceYuAdjYu*Yv*Sqr(g1) - 180*
+      MassB*Yv*Sqr(g1)*Sqr(g2) - 180*MassWB*Yv*Sqr(g1)*Sqr(g2) + 1600*
+      traceAdjYuTYu*Yv*Sqr(g3) - 1600*MassG*traceYuAdjYu*Yv*Sqr(g3) - 150*
+      traceYdAdjYuYuAdjYd*TYv - 50*traceYeAdjYvYvAdjYe*TYv - 450*
+      traceYuAdjYuYuAdjYu*TYv - 150*traceYvAdjYvYvAdjYv*TYv + 207*Quad(g1)*TYv
+      + 375*Quad(g2)*TYv + 40*traceYuAdjYu*Sqr(g1)*TYv + 90*Sqr(g1)*Sqr(g2)*TYv
+       + 800*traceYuAdjYu*Sqr(g3)*TYv) - 0.4*(15*traceAdjYdTYd + 5*
+      traceAdjYeTYe + 6*MassB*Sqr(g1))*(Yv*Ye.adjoint()*Ye) + 0.4*(-15*
+      traceYdAdjYd - 5*traceYeAdjYe + 6*Sqr(g1))*(Yv*Ye.adjoint()*TYe) - 1.2*(
+      15*traceAdjYuTYu + 5*traceAdjYvTYv + 2*MassB*Sqr(g1) + 10*MassWB*Sqr(g2))
+      *(Yv*Yv.adjoint()*Yv) + 0.4*(-30*traceYuAdjYu - 10*traceYvAdjYv + 3*Sqr(
+      g1) + 15*Sqr(g2))*(Yv*Yv.adjoint()*TYv) + 0.2*(-15*traceYdAdjYd - 5*
+      traceYeAdjYe + 6*Sqr(g1))*(TYv*Ye.adjoint()*Ye) + 0.2*(-75*traceYuAdjYu -
+      25*traceYvAdjYv + 12*Sqr(g1) + 60*Sqr(g2))*(TYv*Yv.adjoint()*Yv) - 4*(Yv*
       Ye.adjoint()*Ye*Ye.adjoint()*TYe) - 2*(Yv*Ye.adjoint()*Ye*Yv.adjoint()*
       TYv) - 4*(Yv*Ye.adjoint()*TYe*Ye.adjoint()*Ye) - 4*(Yv*Ye.adjoint()*TYe*
       Yv.adjoint()*Yv) - 6*(Yv*Yv.adjoint()*Yv*Yv.adjoint()*TYv) - 8*(Yv*Yv.
@@ -166,6 +170,25 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_TYv_3_loop(const So
  * @return 4-loop beta function
  */
 Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_TYv_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_TYv;
+
+   beta_TYv = ZEROMATRIX(3,3);
+
+
+   return beta_TYv;
+}
+
+/**
+ * Calculates the 5-loop beta function of TYv.
+ *
+ * @return 5-loop beta function
+ */
+Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_TYv_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

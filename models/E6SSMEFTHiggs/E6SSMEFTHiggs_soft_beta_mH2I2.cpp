@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 13:59:18
+// File generated at Tue 22 Jan 2019 14:42:51
 
 #include "E6SSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -129,22 +129,23 @@ Eigen::Matrix<double,2,2> E6SSMEFTHiggs_soft_parameters::calc_beta_mH2I2_2_loop(
       traceconjTLambda12TpTLambda12 - 12*ms2*traceKappaAdjKappa - 6*
       traceKappaAdjKappaconjmDx2 - 6*traceKappaconjmDxbar2AdjKappa - 8*ms2*
       traceLambda12AdjLambda12 - 4*traceLambda12AdjLambda12conjmH2I2 - 4*
-      tracemH1I2AdjLambda12Lambda12 - 4*(mHd2 + mHu2 + 2*ms2)*AbsSqr(Lambdax) -
-      4*AbsSqr(TLambdax) + 3*ms2*Sqr(gN) + 6*AbsSqr(MassBp)*Sqr(gN))*(Lambda12.
-      conjugate()*(Lambda12).transpose()) + (-6*traceconjTKappaTpKappa - 4*
-      traceconjTLambda12TpLambda12 - 4*Conj(TLambdax)*Lambdax - 3*Conj(MassBp)*
-      Sqr(gN))*(Lambda12.conjugate()*(TLambda12).transpose()) + (-6*
-      traceAdjKappaTKappa - 4*traceAdjLambda12TLambda12 - 3*MassBp*Sqr(gN) - 4*
-      Conj(Lambdax)*TLambdax)*(TLambda12.conjugate()*(Lambda12).transpose()) +
-      (-6*traceKappaAdjKappa - 4*traceLambda12AdjLambda12 - 4*AbsSqr(Lambdax) +
-      3*Sqr(gN))*(TLambda12.conjugate()*(TLambda12).transpose()) + (-3*
-      traceKappaAdjKappa - 2*traceLambda12AdjLambda12 - 2*AbsSqr(Lambdax) + 1.5
-      *Sqr(gN))*(mH2I2*Lambda12.conjugate()*(Lambda12).transpose()) + (-6*
+      tracemH1I2AdjLambda12Lambda12 - 4*mHd2*AbsSqr(Lambdax) - 4*mHu2*AbsSqr(
+      Lambdax) - 8*ms2*AbsSqr(Lambdax) - 4*AbsSqr(TLambdax) + 3*ms2*Sqr(gN) + 6
+      *AbsSqr(MassBp)*Sqr(gN))*(Lambda12.conjugate()*(Lambda12).transpose()) +
+      (-6*traceconjTKappaTpKappa - 4*traceconjTLambda12TpLambda12 - 4*Conj(
+      TLambdax)*Lambdax - 3*Conj(MassBp)*Sqr(gN))*(Lambda12.conjugate()*(
+      TLambda12).transpose()) + (-6*traceAdjKappaTKappa - 4*
+      traceAdjLambda12TLambda12 - 3*MassBp*Sqr(gN) - 4*Conj(Lambdax)*TLambdax)*
+      (TLambda12.conjugate()*(Lambda12).transpose()) + (-6*traceKappaAdjKappa -
+      4*traceLambda12AdjLambda12 - 4*AbsSqr(Lambdax) + 3*Sqr(gN))*(TLambda12.
+      conjugate()*(TLambda12).transpose()) + 0.5*(-6*traceKappaAdjKappa - 4*
+      traceLambda12AdjLambda12 - 4*AbsSqr(Lambdax) + 3*Sqr(gN))*(mH2I2*Lambda12
+      .conjugate()*(Lambda12).transpose()) + (-6*traceKappaAdjKappa - 4*
+      traceLambda12AdjLambda12 - 4*AbsSqr(Lambdax) + 3*Sqr(gN))*(Lambda12.
+      conjugate()*mH1I2.conjugate()*(Lambda12).transpose()) + 0.5*(-6*
       traceKappaAdjKappa - 4*traceLambda12AdjLambda12 - 4*AbsSqr(Lambdax) + 3*
-      Sqr(gN))*(Lambda12.conjugate()*mH1I2.conjugate()*(Lambda12).transpose())
-      + (-3*traceKappaAdjKappa - 2*traceLambda12AdjLambda12 - 2*AbsSqr(Lambdax)
-      + 1.5*Sqr(gN))*(Lambda12.conjugate()*(Lambda12).transpose()*mH2I2) - 4*
-      ms2*(Lambda12.conjugate()*(Lambda12).transpose()*Lambda12.conjugate()*(
+      Sqr(gN))*(Lambda12.conjugate()*(Lambda12).transpose()*mH2I2) - 4*ms2*(
+      Lambda12.conjugate()*(Lambda12).transpose()*Lambda12.conjugate()*(
       Lambda12).transpose()) - 2*(Lambda12.conjugate()*(Lambda12).transpose()*
       TLambda12.conjugate()*(TLambda12).transpose()) - 2*(Lambda12.conjugate()*
       (TLambda12).transpose()*TLambda12.conjugate()*(Lambda12).transpose()) - 2
@@ -157,15 +158,18 @@ Eigen::Matrix<double,2,2> E6SSMEFTHiggs_soft_parameters::calc_beta_mH2I2_2_loop(
       transpose()*mH2I2*Lambda12.conjugate()*(Lambda12).transpose()) - 2*(
       Lambda12.conjugate()*(Lambda12).transpose()*Lambda12.conjugate()*mH1I2.
       conjugate()*(Lambda12).transpose()) - Lambda12.conjugate()*(Lambda12).
-      transpose()*Lambda12.conjugate()*(Lambda12).transpose()*mH2I2 + 0.04*(6*
-      Conj(MassBp)*Sqr(gN)*(3*(MassB + 2*MassBp)*Sqr(g1) + 5*(2*MassBp + MassWB
-      )*Sqr(g2) + 96*MassBp*Sqr(gN)) + 9*Conj(MassB)*Sqr(g1)*(99*MassB*Sqr(g1)
-      + 5*(2*MassB + MassWB)*Sqr(g2) + 2*(2*MassB + MassBp)*Sqr(gN)) + 5*(-
-      4.898979485566356*g1*gN*Tr2U114 - 4.898979485566356*g1*gN*Tr2U141 +
-      15.491933384829668*g1*Tr31 - 12.649110640673518*gN*Tr34 + 30*Tr22*Quad(g2
-      ) + 6*Tr2U111*Sqr(g1) + 4*Tr2U144*Sqr(gN) + 3*Conj(MassWB)*Sqr(g2)*(3*(
-      MassB + 2*MassWB)*Sqr(g1) + 145*MassWB*Sqr(g2) + 2*(MassBp + 2*MassWB)*
-      Sqr(gN))))*UNITMATRIX(2))).real();
+      transpose()*Lambda12.conjugate()*(Lambda12).transpose()*mH2I2 + 0.04*(-
+      24.49489742783178*g1*gN*Tr2U114 - 24.49489742783178*g1*gN*Tr2U141 +
+      77.45966692414834*g1*Tr31 - 63.24555320336759*gN*Tr34 + 891*AbsSqr(MassB)
+      *Quad(g1) + 150*Tr22*Quad(g2) + 2175*AbsSqr(MassWB)*Quad(g2) + 576*AbsSqr
+      (MassBp)*Quad(gN) + 30*Tr2U111*Sqr(g1) + 90*AbsSqr(MassB)*Sqr(g1)*Sqr(g2)
+      + 90*AbsSqr(MassWB)*Sqr(g1)*Sqr(g2) + 45*MassWB*Conj(MassB)*Sqr(g1)*Sqr(
+      g2) + 45*MassB*Conj(MassWB)*Sqr(g1)*Sqr(g2) + 20*Tr2U144*Sqr(gN) + 36*
+      AbsSqr(MassB)*Sqr(g1)*Sqr(gN) + 36*AbsSqr(MassBp)*Sqr(g1)*Sqr(gN) + 18*
+      MassBp*Conj(MassB)*Sqr(g1)*Sqr(gN) + 18*MassB*Conj(MassBp)*Sqr(g1)*Sqr(gN
+      ) + 60*AbsSqr(MassBp)*Sqr(g2)*Sqr(gN) + 60*AbsSqr(MassWB)*Sqr(g2)*Sqr(gN)
+      + 30*MassWB*Conj(MassBp)*Sqr(g2)*Sqr(gN) + 30*MassBp*Conj(MassWB)*Sqr(g2)
+      *Sqr(gN))*UNITMATRIX(2))).real();
 
 
    return beta_mH2I2;
@@ -196,6 +200,25 @@ Eigen::Matrix<double,2,2> E6SSMEFTHiggs_soft_parameters::calc_beta_mH2I2_3_loop(
  * @return 4-loop beta function
  */
 Eigen::Matrix<double,2,2> E6SSMEFTHiggs_soft_parameters::calc_beta_mH2I2_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,2,2> beta_mH2I2;
+
+   beta_mH2I2 = ZEROMATRIX(2,2);
+
+
+   return beta_mH2I2;
+}
+
+/**
+ * Calculates the 5-loop beta function of mH2I2.
+ *
+ * @return 5-loop beta function
+ */
+Eigen::Matrix<double,2,2> E6SSMEFTHiggs_soft_parameters::calc_beta_mH2I2_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

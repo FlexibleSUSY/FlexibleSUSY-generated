@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:39:12
+// File generated at Tue 22 Jan 2019 17:18:22
 
 #include "NUTSMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,9 +73,9 @@ double NUTSMSSM_soft_parameters::calc_beta_BMS_1_loop(const Soft_traces& soft_tr
 
    double beta_BMS;
 
-   beta_BMS = Re(oneOver16PiSqr*(4*(2*AbsSqr(Kappa) + AbsSqr(Lambdax))*BMS + 8*
-      (BMu*Conj(Lambdax)*Kappa + MS*Conj(Kappa)*TKappa + MS*Conj(Lambdax)*
-      TLambdax)));
+   beta_BMS = Re(4*oneOver16PiSqr*(2*AbsSqr(Kappa)*BMS + AbsSqr(Lambdax)*BMS +
+      2*BMu*Conj(Lambdax)*Kappa + 2*MS*Conj(Kappa)*TKappa + 2*MS*Conj(Lambdax)*
+      TLambdax));
 
 
    return beta_BMS;
@@ -98,20 +98,26 @@ double NUTSMSSM_soft_parameters::calc_beta_BMS_2_loop(const Soft_traces& soft_tr
 
    double beta_BMS;
 
-   beta_BMS = Re(-0.8*twoLoop*(BMS*(40*AbsSqr(Kappa)*AbsSqr(Lambdax) + AbsSqr(
-      Lambdax)*(10*AbsSqr(Lambdax) - 3*Sqr(g1) + 5*(3*traceYdAdjYd +
-      traceYeAdjYe + 3*traceYuAdjYu - 3*Sqr(g2))) + 40*Sqr(Conj(Kappa))*Sqr(
-      Kappa)) + 2*(50*MS*Kappa*Sqr(Conj(Kappa))*TKappa + 10*Sqr(Conj(Lambdax))*
-      (BMu*Kappa*Lambdax + (2*MS*Lambdax + Kappa*Mu)*TLambdax) + Conj(Lambdax)*
-      (15*MS*traceAdjYdTYd*Lambdax + 5*MS*traceAdjYeTYe*Lambdax + 15*MS*
-      traceAdjYuTYu*Lambdax + 15*traceAdjYdTYd*Kappa*Mu + 5*traceAdjYeTYe*Kappa
-      *Mu + 15*traceAdjYuTYu*Kappa*Mu + 3*MassB*MS*Lambdax*Sqr(g1) + 9*MassB*
-      Kappa*Mu*Sqr(g1) + BMu*Kappa*(-9*Sqr(g1) + 5*(3*traceYdAdjYd +
-      traceYeAdjYe + 3*traceYuAdjYu - 9*Sqr(g2))) + 15*MassWB*MS*Lambdax*Sqr(g2
-      ) + 45*MassWB*Kappa*Mu*Sqr(g2) + 15*MS*traceYdAdjYd*TLambdax + 5*MS*
-      traceYeAdjYe*TLambdax + 15*MS*traceYuAdjYu*TLambdax - 3*MS*Sqr(g1)*
-      TLambdax - 15*MS*Sqr(g2)*TLambdax + 10*MS*Conj(Kappa)*(2*Lambdax*TKappa +
-      3*Kappa*TLambdax)))));
+   beta_BMS = Re(-0.8*twoLoop*(30*MS*traceAdjYdTYd*AbsSqr(Lambdax) + 10*MS*
+      traceAdjYeTYe*AbsSqr(Lambdax) + 30*MS*traceAdjYuTYu*AbsSqr(Lambdax) + 15*
+      traceYdAdjYd*AbsSqr(Lambdax)*BMS + 5*traceYeAdjYe*AbsSqr(Lambdax)*BMS +
+      15*traceYuAdjYu*AbsSqr(Lambdax)*BMS + 40*AbsSqr(Kappa)*AbsSqr(Lambdax)*
+      BMS + 30*traceYdAdjYd*BMu*Conj(Lambdax)*Kappa + 10*traceYeAdjYe*BMu*Conj(
+      Lambdax)*Kappa + 30*traceYuAdjYu*BMu*Conj(Lambdax)*Kappa + 30*
+      traceAdjYdTYd*Conj(Lambdax)*Kappa*Mu + 10*traceAdjYeTYe*Conj(Lambdax)*
+      Kappa*Mu + 30*traceAdjYuTYu*Conj(Lambdax)*Kappa*Mu + 6*MassB*MS*AbsSqr(
+      Lambdax)*Sqr(g1) - 3*AbsSqr(Lambdax)*BMS*Sqr(g1) - 18*BMu*Conj(Lambdax)*
+      Kappa*Sqr(g1) + 18*MassB*Conj(Lambdax)*Kappa*Mu*Sqr(g1) + 30*MassWB*MS*
+      AbsSqr(Lambdax)*Sqr(g2) - 15*AbsSqr(Lambdax)*BMS*Sqr(g2) - 90*BMu*Conj(
+      Lambdax)*Kappa*Sqr(g2) + 90*MassWB*Conj(Lambdax)*Kappa*Mu*Sqr(g2) + 20*
+      BMu*Kappa*Lambdax*Sqr(Conj(Lambdax)) + 40*BMS*Sqr(Conj(Kappa))*Sqr(Kappa)
+      + 10*BMS*Sqr(Conj(Lambdax))*Sqr(Lambdax) + 40*MS*AbsSqr(Lambdax)*Conj(
+      Kappa)*TKappa + 100*MS*Kappa*Sqr(Conj(Kappa))*TKappa + 30*MS*traceYdAdjYd
+      *Conj(Lambdax)*TLambdax + 10*MS*traceYeAdjYe*Conj(Lambdax)*TLambdax + 30*
+      MS*traceYuAdjYu*Conj(Lambdax)*TLambdax + 60*MS*AbsSqr(Kappa)*Conj(Lambdax
+      )*TLambdax - 6*MS*Conj(Lambdax)*Sqr(g1)*TLambdax - 30*MS*Conj(Lambdax)*
+      Sqr(g2)*TLambdax + 40*MS*Lambdax*Sqr(Conj(Lambdax))*TLambdax + 20*Kappa*
+      Mu*Sqr(Conj(Lambdax))*TLambdax));
 
 
    return beta_BMS;
@@ -142,6 +148,25 @@ double NUTSMSSM_soft_parameters::calc_beta_BMS_3_loop(const Soft_traces& soft_tr
  * @return 4-loop beta function
  */
 double NUTSMSSM_soft_parameters::calc_beta_BMS_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_BMS;
+
+   beta_BMS = 0;
+
+
+   return beta_BMS;
+}
+
+/**
+ * Calculates the 5-loop beta function of BMS.
+ *
+ * @return 5-loop beta function
+ */
+double NUTSMSSM_soft_parameters::calc_beta_BMS_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

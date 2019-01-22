@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:09:43
+// File generated at Tue 22 Jan 2019 16:46:36
 
 #include "SplitMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -40,10 +40,9 @@ double SplitMSSM_susy_parameters::calc_beta_gYd_1_loop(const Susy_traces& susy_t
 
    double beta_gYd;
 
-   beta_gYd = Re(oneOver16PiSqr*(3*g2d*g2u*gYu + 3*gYd*traceYdAdjYd + gYd*
-      traceYeAdjYe + 3*gYd*traceYuAdjYu + 1.25*Cube(gYd) - 0.45*gYd*Sqr(g1) -
-      2.25*gYd*Sqr(g2) + 2.25*gYd*Sqr(g2d) + 1.5*gYd*Sqr(g2u) + 2*gYd*Sqr(gYu))
-      );
+   beta_gYd = Re(0.05*oneOver16PiSqr*(60*g2d*g2u*gYu + 60*gYd*traceYdAdjYd + 20
+      *gYd*traceYeAdjYe + 60*gYd*traceYuAdjYu + 25*Cube(gYd) - 9*gYd*Sqr(g1) -
+      45*gYd*Sqr(g2) + 45*gYd*Sqr(g2d) + 30*gYd*Sqr(g2u) + 40*gYd*Sqr(gYu)));
 
 
    return beta_gYd;
@@ -67,22 +66,29 @@ double SplitMSSM_susy_parameters::calc_beta_gYd_2_loop(const Susy_traces& susy_t
 
    double beta_gYd;
 
-   beta_gYd = Re(0.00125*twoLoop*(468*gYd*Quad(g1) + 5*Sqr(g1)*(72*g2d*g2u*gYu
-      - 216*gYd*Sqr(g2) + 189*gYd*Sqr(g2d) + gYd*(90*Sqr(g2u) + 309*Sqr(gYd) +
-      4*(25*traceYdAdjYd + 75*traceYeAdjYe + 85*traceYuAdjYu + 3*Sqr(gYu)))) -
-      25*(136*gYd*Quad(g2) - 3*Sqr(g2)*(136*g2d*g2u*gYu + 183*gYd*Sqr(g2d) +
-      gYd*(60*traceYdAdjYd + 20*traceYeAdjYe + 60*traceYuAdjYu + 110*Sqr(g2u) +
-      55*Sqr(gYd) + 52*Sqr(gYu))) + 2*(72*g2u*gYu*Cube(g2d) + 99*gYd*Quad(g2d)
-      + 12*g2d*g2u*gYu*(12*traceYdAdjYd + 4*traceYeAdjYe + 12*traceYuAdjYu + 4*
-      Lambdax + 11*Sqr(g2u) + 8*Sqr(gYd) + 3*Sqr(gYu)) + 3*gYd*Sqr(g2d)*(18*
-      traceYdAdjYd + 6*traceYeAdjYe + 18*traceYuAdjYu + 16*Lambdax + 14*Sqr(g2u
-      ) + 3*Sqr(gYd) + 25*Sqr(gYu)) + gYd*(45*Quad(g2u) + 3*Sqr(g2u)*(9*Sqr(gYd
-      ) + 25*Sqr(gYu)) + 2*(6*Quad(gYd) + 3*Sqr(gYd)*(9*traceYdAdjYd + 3*
-      traceYeAdjYe + 9*traceYuAdjYu + 8*Lambdax + 10*Sqr(gYu)) + 2*(9*Quad(gYu)
-      - 80*(traceYdAdjYd + traceYuAdjYu)*Sqr(g3) + (21*traceYdAdjYd + 7*
-      traceYeAdjYe + 21*traceYuAdjYu + 12*Lambdax)*Sqr(gYu) + 3*(9*
-      traceYdAdjYdYdAdjYd - 2*traceYdAdjYuYuAdjYd + 3*traceYeAdjYeYeAdjYe + 9*
-      traceYuAdjYuYuAdjYu - 2*Sqr(Lambdax)))))))));
+   beta_gYd = Re(0.00125*twoLoop*(-7200*g2d*g2u*gYu*traceYdAdjYd - 5400*gYd*
+      traceYdAdjYdYdAdjYd + 1200*gYd*traceYdAdjYuYuAdjYd - 2400*g2d*g2u*gYu*
+      traceYeAdjYe - 1800*gYd*traceYeAdjYeYeAdjYe - 7200*g2d*g2u*gYu*
+      traceYuAdjYu - 5400*gYd*traceYuAdjYuYuAdjYu - 3600*g2u*gYu*Cube(g2d) -
+      6600*g2d*gYu*Cube(g2u) - 2700*traceYdAdjYd*Cube(gYd) - 900*traceYeAdjYe*
+      Cube(gYd) - 2700*traceYuAdjYu*Cube(gYd) - 1800*g2d*g2u*Cube(gYu) - 2400*
+      g2d*g2u*gYu*Lambdax - 2400*Cube(gYd)*Lambdax - 600*Power5(gYd) + 468*gYd*
+      Quad(g1) - 3400*gYd*Quad(g2) - 4950*gYd*Quad(g2d) - 2250*gYd*Quad(g2u) -
+      1800*gYd*Quad(gYu) + 360*g2d*g2u*gYu*Sqr(g1) + 500*gYd*traceYdAdjYd*Sqr(
+      g1) + 1500*gYd*traceYeAdjYe*Sqr(g1) + 1700*gYd*traceYuAdjYu*Sqr(g1) +
+      1545*Cube(gYd)*Sqr(g1) + 10200*g2d*g2u*gYu*Sqr(g2) + 4500*gYd*
+      traceYdAdjYd*Sqr(g2) + 1500*gYd*traceYeAdjYe*Sqr(g2) + 4500*gYd*
+      traceYuAdjYu*Sqr(g2) + 4125*Cube(gYd)*Sqr(g2) - 1080*gYd*Sqr(g1)*Sqr(g2)
+      - 2700*gYd*traceYdAdjYd*Sqr(g2d) - 900*gYd*traceYeAdjYe*Sqr(g2d) - 2700*
+      gYd*traceYuAdjYu*Sqr(g2d) - 450*Cube(gYd)*Sqr(g2d) - 2400*gYd*Lambdax*Sqr
+      (g2d) + 945*gYd*Sqr(g1)*Sqr(g2d) + 13725*gYd*Sqr(g2)*Sqr(g2d) - 1350*Cube
+      (gYd)*Sqr(g2u) + 450*gYd*Sqr(g1)*Sqr(g2u) + 8250*gYd*Sqr(g2)*Sqr(g2u) -
+      2100*gYd*Sqr(g2d)*Sqr(g2u) + 16000*gYd*traceYdAdjYd*Sqr(g3) + 16000*gYd*
+      traceYuAdjYu*Sqr(g3) - 4800*g2d*g2u*gYu*Sqr(gYd) - 4200*gYd*traceYdAdjYd*
+      Sqr(gYu) - 1400*gYd*traceYeAdjYe*Sqr(gYu) - 4200*gYd*traceYuAdjYu*Sqr(gYu
+      ) - 3000*Cube(gYd)*Sqr(gYu) - 2400*gYd*Lambdax*Sqr(gYu) + 60*gYd*Sqr(g1)*
+      Sqr(gYu) + 3900*gYd*Sqr(g2)*Sqr(gYu) - 3750*gYd*Sqr(g2d)*Sqr(gYu) - 3750*
+      gYd*Sqr(g2u)*Sqr(gYu) + 1200*gYd*Sqr(Lambdax)));
 
 
    return beta_gYd;
@@ -113,6 +119,25 @@ double SplitMSSM_susy_parameters::calc_beta_gYd_3_loop(const Susy_traces& susy_t
  * @return 4-loop beta function
  */
 double SplitMSSM_susy_parameters::calc_beta_gYd_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_gYd;
+
+   beta_gYd = 0;
+
+
+   return beta_gYd;
+}
+
+/**
+ * Calculates the 5-loop beta function of gYd.
+ *
+ * @return 5-loop beta function
+ */
+double SplitMSSM_susy_parameters::calc_beta_gYd_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

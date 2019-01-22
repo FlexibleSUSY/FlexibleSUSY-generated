@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:20:53
+// File generated at Tue 22 Jan 2019 17:28:28
 
 #include "UMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -40,8 +40,8 @@ double UMSSM_susy_parameters::calc_beta_vd_1_loop(const Susy_traces& susy_traces
 
    double beta_vd;
 
-   beta_vd = Re(0.1*oneOver16PiSqr*vd*(-10*AbsSqr(Lambdax) + 3*Sqr(g1) + 5*(-6*
-      traceYdAdjYd - 2*traceYeAdjYe + 3*Sqr(g2) + 4*Sqr(gp)*Sqr(QHd))));
+   beta_vd = Re(0.1*oneOver16PiSqr*vd*(-30*traceYdAdjYd - 10*traceYeAdjYe - 10*
+      AbsSqr(Lambdax) + 3*Sqr(g1) + 15*Sqr(g2) + 20*Sqr(gp)*Sqr(QHd)));
 
 
    return beta_vd;
@@ -75,17 +75,24 @@ double UMSSM_susy_parameters::calc_beta_vd_2_loop(const Susy_traces& susy_traces
 
    double beta_vd;
 
-   beta_vd = Re(-0.005*twoLoop*vd*(207*Quad(g1) + 10*Sqr(g1)*(10*(traceYdAdjYd
-      + 3*traceYeAdjYe) + 9*Sqr(g2) - 12*QHd*(3*Qd + 3*Qe - 2*QHd + QHu - 3*Ql
-      + 3*Qq - 6*Qu)*Sqr(gp)) + 20*AbsSqr(Lambdax)*(3*Sqr(g1) + 5*(-2*(3*
-      traceYuAdjYu + traceYvAdjYv) + 3*Sqr(g2) + 4*Sqr(gp)*(Sqr(QHu) + Sqr(Qs))
-      )) + 25*(11*Quad(g2) + 12*Sqr(g2)*(3*traceYdAdjYd + traceYeAdjYe + 2*Sqr(
-      gp)*Sqr(QHd)) + 8*(-9*traceYdAdjYdYdAdjYd - 3*traceYdAdjYuYuAdjYd - 3*
-      traceYeAdjYeYeAdjYe - traceYvAdjYvTpYeconjYe + 16*traceYdAdjYd*Sqr(g3) +
-      2*Sqr(gp)*(3*traceYdAdjYd*Sqr(Qd) + traceYeAdjYe*(Sqr(Qe) + Sqr(Ql)) + 3*
-      traceYdAdjYd*Sqr(Qq)) + Quad(gp)*Sqr(QHd)*(9*Sqr(Qd) + 3*Sqr(Qe) + 4*Sqr(
-      QHd) + 2*Sqr(QHu) + 6*Sqr(Ql) + 18*Sqr(Qq) + Sqr(Qs) + 9*Sqr(Qu) + 3*Sqr(
-      Qv)))) - 600*Sqr(Conj(Lambdax))*Sqr(Lambdax)));
+   beta_vd = Re(-0.005*twoLoop*vd*(-1800*traceYdAdjYdYdAdjYd - 600*
+      traceYdAdjYuYuAdjYd - 600*traceYeAdjYeYeAdjYe - 200*
+      traceYvAdjYvTpYeconjYe - 600*traceYuAdjYu*AbsSqr(Lambdax) - 200*
+      traceYvAdjYv*AbsSqr(Lambdax) + 207*Quad(g1) + 275*Quad(g2) + 800*Quad(gp)
+      *Quad(QHd) + 100*traceYdAdjYd*Sqr(g1) + 300*traceYeAdjYe*Sqr(g1) + 60*
+      AbsSqr(Lambdax)*Sqr(g1) + 900*traceYdAdjYd*Sqr(g2) + 300*traceYeAdjYe*Sqr
+      (g2) + 300*AbsSqr(Lambdax)*Sqr(g2) + 90*Sqr(g1)*Sqr(g2) + 3200*
+      traceYdAdjYd*Sqr(g3) - 360*Qd*QHd*Sqr(g1)*Sqr(gp) - 360*Qe*QHd*Sqr(g1)*
+      Sqr(gp) - 120*QHd*QHu*Sqr(g1)*Sqr(gp) + 360*QHd*Ql*Sqr(g1)*Sqr(gp) - 360*
+      QHd*Qq*Sqr(g1)*Sqr(gp) + 720*QHd*Qu*Sqr(g1)*Sqr(gp) + 1200*traceYdAdjYd*
+      Sqr(gp)*Sqr(Qd) + 400*traceYeAdjYe*Sqr(gp)*Sqr(Qe) + 240*Sqr(g1)*Sqr(gp)*
+      Sqr(QHd) + 600*Sqr(g2)*Sqr(gp)*Sqr(QHd) + 1800*Quad(gp)*Sqr(Qd)*Sqr(QHd)
+      + 600*Quad(gp)*Sqr(Qe)*Sqr(QHd) + 400*AbsSqr(Lambdax)*Sqr(gp)*Sqr(QHu) +
+      400*Quad(gp)*Sqr(QHd)*Sqr(QHu) + 400*traceYeAdjYe*Sqr(gp)*Sqr(Ql) + 1200*
+      Quad(gp)*Sqr(QHd)*Sqr(Ql) + 1200*traceYdAdjYd*Sqr(gp)*Sqr(Qq) + 3600*Quad
+      (gp)*Sqr(QHd)*Sqr(Qq) + 400*AbsSqr(Lambdax)*Sqr(gp)*Sqr(Qs) + 200*Quad(gp
+      )*Sqr(QHd)*Sqr(Qs) + 1800*Quad(gp)*Sqr(QHd)*Sqr(Qu) + 600*Quad(gp)*Sqr(
+      QHd)*Sqr(Qv) - 600*Sqr(Conj(Lambdax))*Sqr(Lambdax)));
 
 
    return beta_vd;
@@ -116,6 +123,25 @@ double UMSSM_susy_parameters::calc_beta_vd_3_loop(const Susy_traces& susy_traces
  * @return 4-loop beta function
  */
 double UMSSM_susy_parameters::calc_beta_vd_4_loop(const Susy_traces& susy_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_vd;
+
+   beta_vd = 0;
+
+
+   return beta_vd;
+}
+
+/**
+ * Calculates the 5-loop beta function of vd.
+ *
+ * @return 5-loop beta function
+ */
+double UMSSM_susy_parameters::calc_beta_vd_5_loop(const Susy_traces& susy_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

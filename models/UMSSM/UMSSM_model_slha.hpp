@@ -21,7 +21,7 @@
  * @brief contains wrapper class for model class in SLHA convention
  */
 
-// File generated at Sun 26 Aug 2018 14:30:13
+// File generated at Tue 22 Jan 2019 17:53:49
 
 #ifndef UMSSM_SLHA_H
 #define UMSSM_SLHA_H
@@ -285,6 +285,7 @@ template <class Model>
 void UMSSM_slha<Model>::calculate_pmns_matrix()
 {
    pmns = ZEL_slha * ZVL_slha.adjoint();
+   PMNS_parameters::to_pdg_convention(pmns, ZVL_slha, ZEL_slha, ZER_slha);
 
 }
 

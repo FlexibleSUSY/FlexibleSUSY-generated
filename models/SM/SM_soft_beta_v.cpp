@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:10:46
+// File generated at Tue 22 Jan 2019 16:38:27
 
 #include "SM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -76,8 +76,8 @@ double SM_soft_parameters::calc_beta_v_1_loop(const Soft_traces& soft_traces) co
 
    double beta_v;
 
-   beta_v = Re(oneOver16PiSqr*(0.6*v*Sqr(g1) + v*(-3*traceYdAdjYd -
-      traceYeAdjYe - 3*traceYuAdjYu + 3*Sqr(g2))));
+   beta_v = Re(0.2*oneOver16PiSqr*v*(-15*traceYdAdjYd - 5*traceYeAdjYe - 15*
+      traceYuAdjYu + 3*Sqr(g1) + 15*Sqr(g2)));
 
 
    return beta_v;
@@ -101,12 +101,13 @@ double SM_soft_parameters::calc_beta_v_2_loop(const Soft_traces& soft_traces) co
 
    double beta_v;
 
-   beta_v = Re(-0.00125*twoLoop*v*(1221*Quad(g1) + 10*Sqr(g1)*(122*traceYdAdjYd
-       + 174*traceYeAdjYe + 242*traceYuAdjYu - 45*Sqr(g2)) - 25*(379*Quad(g2) -
-      108*(3*traceYdAdjYd + traceYeAdjYe + 3*traceYuAdjYu)*Sqr(g2) - 8*(80*(
-      traceYdAdjYd + traceYuAdjYu)*Sqr(g3) - 3*(9*traceYdAdjYdYdAdjYd - 2*
-      traceYdAdjYuYuAdjYd + 3*traceYeAdjYeYeAdjYe + 9*traceYuAdjYuYuAdjYu - 2*
-      Sqr(Lambdax))))));
+   beta_v = Re(-0.00125*twoLoop*v*(-5400*traceYdAdjYdYdAdjYd + 1200*
+      traceYdAdjYuYuAdjYd - 1800*traceYeAdjYeYeAdjYe - 5400*traceYuAdjYuYuAdjYu
+       + 1221*Quad(g1) - 9475*Quad(g2) + 1220*traceYdAdjYd*Sqr(g1) + 1740*
+      traceYeAdjYe*Sqr(g1) + 2420*traceYuAdjYu*Sqr(g1) + 8100*traceYdAdjYd*Sqr(
+      g2) + 2700*traceYeAdjYe*Sqr(g2) + 8100*traceYuAdjYu*Sqr(g2) - 450*Sqr(g1)
+      *Sqr(g2) + 16000*traceYdAdjYd*Sqr(g3) + 16000*traceYuAdjYu*Sqr(g3) + 1200
+      *Sqr(Lambdax)));
 
 
    return beta_v;
@@ -137,6 +138,25 @@ double SM_soft_parameters::calc_beta_v_3_loop(const Soft_traces& soft_traces) co
  * @return 4-loop beta function
  */
 double SM_soft_parameters::calc_beta_v_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_v;
+
+   beta_v = 0;
+
+
+   return beta_v;
+}
+
+/**
+ * Calculates the 5-loop beta function of v.
+ *
+ * @return 5-loop beta function
+ */
+double SM_soft_parameters::calc_beta_v_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

@@ -16,11 +16,12 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:34:06
+// File generated at Tue 22 Jan 2019 17:30:52
 
 #include "SMSSM_two_scale_high_scale_constraint.hpp"
 #include "SMSSM_two_scale_model.hpp"
 #include "SMSSM_info.hpp"
+#include "config.h"
 #include "wrappers.hpp"
 #include "logger.hpp"
 #include "ew_input.hpp"
@@ -34,6 +35,7 @@
 
 #ifdef ENABLE_HIMALAYA
 #include "HierarchyCalculator.hpp"
+#include "version.hpp"
 #endif
 
 #include <cmath>

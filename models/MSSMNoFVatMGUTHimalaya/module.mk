@@ -7,7 +7,12 @@ MODMSSMNoFVatMGUTHimalaya_DEP := $(patsubst %,model_specific/%,$(MODMSSMNoFVatMG
 MODMSSMNoFVatMGUTHimalaya_INC := $(patsubst %,-Imodel_specific/%,$(MODMSSMNoFVatMGUTHimalaya_MOD))
 MODMSSMNoFVatMGUTHimalaya_LIB := $(foreach M,$(MODMSSMNoFVatMGUTHimalaya_MOD),model_specific/$M/libmodel_specific_$M$(MODULE_LIBEXT))
 
+MODMSSMNoFVatMGUTHimalaya_SUBMOD  := $(DIR)/cxx_qft
+MODMSSMNoFVatMGUTHimalaya_SUBMOD_INC := $(patsubst %,-I%,$(MODMSSMNoFVatMGUTHimalaya_SUBMOD))
+
 MSSMNoFVatMGUTHimalaya_INSTALL_DIR := $(INSTALL_DIR)/$(DIR)
+MSSMNoFVatMGUTHimalaya_INSTALL_CXXQFT_DIR := \
+		$(MSSMNoFVatMGUTHimalaya_INSTALL_DIR)/cxx_qft
 
 MSSMNoFVatMGUTHimalaya_MK     := \
 		$(DIR)/module.mk
@@ -68,7 +73,6 @@ LLMSSMNoFVatMGUTHimalaya_MMA  := \
 		$(DIR)/run_MSSMNoFVatMGUTHimalaya.m
 
 LIBMSSMNoFVatMGUTHimalaya_HDR := \
-		$(DIR)/MSSMNoFVatMGUTHimalaya_cxx_diagrams.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_a_muon.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_convergence_tester.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_edm.hpp \
@@ -93,6 +97,13 @@ LIBMSSMNoFVatMGUTHimalaya_HDR := \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_susy_scale_constraint.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_utilities.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_weinberg_angle.hpp
+
+LIBMSSMNoFVatMGUTHimalaya_CXXQFT_HDR := \
+		$(DIR)/cxx_qft/MSSMNoFVatMGUTHimalaya_qft.hpp \
+		$(DIR)/cxx_qft/MSSMNoFVatMGUTHimalaya_fields.hpp \
+		$(DIR)/cxx_qft/MSSMNoFVatMGUTHimalaya_vertices.hpp \
+		$(DIR)/cxx_qft/MSSMNoFVatMGUTHimalaya_context_base.hpp \
+		$(DIR)/cxx_qft/MSSMNoFVatMGUTHimalaya_npointfunctions.hpp
 
 ifneq ($(findstring two_scale,$(SOLVERS)),)
 -include $(DIR)/two_scale.mk
@@ -182,8 +193,10 @@ all-$(MODNAME): $(LIBMSSMNoFVatMGUTHimalaya) $(EXEMSSMNoFVatMGUTHimalaya_EXE)
 ifneq ($(INSTALL_DIR),)
 install-src::
 		install -d $(MSSMNoFVatMGUTHimalaya_INSTALL_DIR)
+		install -d $(MSSMNoFVatMGUTHimalaya_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(LIBMSSMNoFVatMGUTHimalaya_SRC) $(MSSMNoFVatMGUTHimalaya_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LIBMSSMNoFVatMGUTHimalaya_HDR) $(MSSMNoFVatMGUTHimalaya_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(LIBMSSMNoFVatMGUTHimalaya_CXXQFT_HDR) $(MSSMNoFVatMGUTHimalaya_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(EXEMSSMNoFVatMGUTHimalaya_SRC) $(MSSMNoFVatMGUTHimalaya_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLMSSMNoFVatMGUTHimalaya_SRC) $(MSSMNoFVatMGUTHimalaya_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLMSSMNoFVatMGUTHimalaya_MMA) $(MSSMNoFVatMGUTHimalaya_INSTALL_DIR)
@@ -214,6 +227,7 @@ clean-$(MODNAME)-obj:
 clean-$(MODNAME)-src:
 		-rm -f $(LIBMSSMNoFVatMGUTHimalaya_SRC)
 		-rm -f $(LIBMSSMNoFVatMGUTHimalaya_HDR)
+		-rm -f $(LIBMSSMNoFVatMGUTHimalaya_CXXQFT_HDR)
 		-rm -f $(EXEMSSMNoFVatMGUTHimalaya_SRC)
 		-rm -f $(LLMSSMNoFVatMGUTHimalaya_SRC)
 		-rm -f $(LLMSSMNoFVatMGUTHimalaya_MMA)
@@ -242,14 +256,14 @@ distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
 		tar -czf $(MSSMNoFVatMGUTHimalaya_TARBALL) \
-		$(LIBMSSMNoFVatMGUTHimalaya_SRC) $(LIBMSSMNoFVatMGUTHimalaya_HDR) \
+		$(LIBMSSMNoFVatMGUTHimalaya_SRC) $(LIBMSSMNoFVatMGUTHimalaya_HDR) $(LIBMSSMNoFVatMGUTHimalaya_CXXQFT_HDR) \
 		$(EXEMSSMNoFVatMGUTHimalaya_SRC) \
 		$(LLMSSMNoFVatMGUTHimalaya_SRC) $(LLMSSMNoFVatMGUTHimalaya_MMA) \
 		$(MSSMNoFVatMGUTHimalaya_MK) $(MSSMNoFVatMGUTHimalaya_INCLUDE_MK) \
 		$(MSSMNoFVatMGUTHimalaya_SLHA_INPUT) $(MSSMNoFVatMGUTHimalaya_REFERENCES) \
 		$(MSSMNoFVatMGUTHimalaya_GNUPLOT)
 
-$(LIBMSSMNoFVatMGUTHimalaya_SRC) $(LIBMSSMNoFVatMGUTHimalaya_HDR) $(EXEMSSMNoFVatMGUTHimalaya_SRC) $(LLMSSMNoFVatMGUTHimalaya_SRC) $(LLMSSMNoFVatMGUTHimalaya_MMA) \
+$(LIBMSSMNoFVatMGUTHimalaya_SRC) $(LIBMSSMNoFVatMGUTHimalaya_HDR) $(LIBMSSMNoFVatMGUTHimalaya_CXXQFT_HDR) $(EXEMSSMNoFVatMGUTHimalaya_SRC) $(LLMSSMNoFVatMGUTHimalaya_SRC) $(LLMSSMNoFVatMGUTHimalaya_MMA) \
 : run-metacode-$(MODNAME)
 		@true
 
@@ -270,7 +284,7 @@ $(METACODE_STAMP_MSSMNoFVatMGUTHimalaya):
 endif
 
 $(LIBMSSMNoFVatMGUTHimalaya_DEP) $(EXEMSSMNoFVatMGUTHimalaya_DEP) $(LLMSSMNoFVatMGUTHimalaya_DEP) $(LIBMSSMNoFVatMGUTHimalaya_OBJ) $(EXEMSSMNoFVatMGUTHimalaya_OBJ) $(LLMSSMNoFVatMGUTHimalaya_OBJ) $(LLMSSMNoFVatMGUTHimalaya_LIB): \
-	CPPFLAGS += $(MODMSSMNoFVatMGUTHimalaya_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODMSSMNoFVatMGUTHimalaya_SUBMOD_INC) $(MODMSSMNoFVatMGUTHimalaya_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBMSSMNoFVatMGUTHimalaya_DEP) $(EXEMSSMNoFVatMGUTHimalaya_DEP) $(LLMSSMNoFVatMGUTHimalaya_DEP) $(LIBMSSMNoFVatMGUTHimalaya_OBJ) $(EXEMSSMNoFVatMGUTHimalaya_OBJ) $(LLMSSMNoFVatMGUTHimalaya_OBJ) $(LLMSSMNoFVatMGUTHimalaya_LIB): \

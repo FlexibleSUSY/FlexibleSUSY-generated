@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 15:22:22
+// File generated at Tue 22 Jan 2019 17:55:51
 
 #include "MSSMatMGUT_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -78,9 +78,9 @@ double MSSMatMGUT_soft_parameters::calc_beta_mHu2_1_loop(const Soft_traces& soft
 
    double beta_mHu2;
 
-   beta_mHu2 = Re(oneOver16PiSqr*(0.7745966692414834*g1*Tr11 + 6*
-      traceconjTYuTpTYu + 6*tracemq2AdjYuYu + 6*tracemu2YuAdjYu + 6*mHu2*
-      traceYuAdjYu - 1.2*AbsSqr(MassB)*Sqr(g1) - 6*AbsSqr(MassWB)*Sqr(g2)));
+   beta_mHu2 = Re(0.2*oneOver16PiSqr*(3.872983346207417*g1*Tr11 + 30*
+      traceconjTYuTpTYu + 30*tracemq2AdjYuYu + 30*tracemu2YuAdjYu + 30*mHu2*
+      traceYuAdjYu - 6*AbsSqr(MassB)*Sqr(g1) - 30*AbsSqr(MassWB)*Sqr(g2)));
 
 
    return beta_mHu2;
@@ -120,23 +120,24 @@ double MSSMatMGUT_soft_parameters::calc_beta_mHu2_2_loop(const Soft_traces& soft
 
    double beta_mHu2;
 
-   beta_mHu2 = Re(twoLoop*(3.0983866769659336*g1*Tr31 - 6*
-      tracemd2YdAdjYuYuAdjYd - 6*tracemq2AdjYdYdAdjYuYu - 6*
-      tracemq2AdjYuYuAdjYdYd - 36*tracemq2AdjYuYuAdjYuYu - 6*
-      tracemu2YuAdjYdYdAdjYu - 36*tracemu2YuAdjYuYuAdjYu - 6*
-      traceYdAdjTYuTYuAdjYd - 6*traceYdAdjYuTYuAdjTYd - 6*mHd2*
-      traceYdAdjYuYuAdjYd - 6*mHu2*traceYdAdjYuYuAdjYd - 6*
-      traceYuAdjTYdTYdAdjYu - 36*traceYuAdjTYuTYuAdjYu - 6*
-      traceYuAdjYdTYdAdjTYu - 36*traceYuAdjYuTYuAdjTYu - 36*mHu2*
-      traceYuAdjYuYuAdjYu + 6*Tr22*Quad(g2) + 1.2*Tr2U111*Sqr(g1) + 1.6*
-      traceconjTYuTpTYu*Sqr(g1) - 1.6*MassB*traceconjTYuTpYu*Sqr(g1) + 1.6*
-      tracemq2AdjYuYu*Sqr(g1) + 1.6*tracemu2YuAdjYu*Sqr(g1) + 1.6*mHu2*
-      traceYuAdjYu*Sqr(g1) + 0.6*Conj(MassWB)*Sqr(g2)*(3*(MassB + 2*MassWB)*Sqr
-      (g1) + 55*MassWB*Sqr(g2)) + 0.04*Conj(MassB)*Sqr(g1)*(621*MassB*Sqr(g1) +
-      5*(-8*(traceAdjYuTYu - 2*MassB*traceYuAdjYu) + 9*(2*MassB + MassWB)*Sqr(
-      g2))) + 32*traceconjTYuTpTYu*Sqr(g3) - 32*MassG*traceconjTYuTpYu*Sqr(g3)
-      + 32*tracemq2AdjYuYu*Sqr(g3) + 32*tracemu2YuAdjYu*Sqr(g3) + 32*mHu2*
-      traceYuAdjYu*Sqr(g3) + 64*traceYuAdjYu*AbsSqr(MassG)*Sqr(g3) - 32*
+   beta_mHu2 = Re(0.04*twoLoop*(77.45966692414834*g1*Tr31 - 150*
+      tracemd2YdAdjYuYuAdjYd - 150*tracemq2AdjYdYdAdjYuYu - 150*
+      tracemq2AdjYuYuAdjYdYd - 900*tracemq2AdjYuYuAdjYuYu - 150*
+      tracemu2YuAdjYdYdAdjYu - 900*tracemu2YuAdjYuYuAdjYu - 150*
+      traceYdAdjTYuTYuAdjYd - 150*traceYdAdjYuTYuAdjTYd - 150*mHd2*
+      traceYdAdjYuYuAdjYd - 150*mHu2*traceYdAdjYuYuAdjYd - 150*
+      traceYuAdjTYdTYdAdjYu - 900*traceYuAdjTYuTYuAdjYu - 150*
+      traceYuAdjYdTYdAdjTYu - 900*traceYuAdjYuTYuAdjTYu - 900*mHu2*
+      traceYuAdjYuYuAdjYu + 621*AbsSqr(MassB)*Quad(g1) + 150*Tr22*Quad(g2) +
+      825*AbsSqr(MassWB)*Quad(g2) + 30*Tr2U111*Sqr(g1) + 40*traceconjTYuTpTYu*
+      Sqr(g1) - 40*MassB*traceconjTYuTpYu*Sqr(g1) + 40*tracemq2AdjYuYu*Sqr(g1)
+      + 40*tracemu2YuAdjYu*Sqr(g1) + 40*mHu2*traceYuAdjYu*Sqr(g1) + 80*
+      traceYuAdjYu*AbsSqr(MassB)*Sqr(g1) - 40*traceAdjYuTYu*Conj(MassB)*Sqr(g1)
+      + 90*AbsSqr(MassB)*Sqr(g1)*Sqr(g2) + 90*AbsSqr(MassWB)*Sqr(g1)*Sqr(g2) +
+      45*MassWB*Conj(MassB)*Sqr(g1)*Sqr(g2) + 45*MassB*Conj(MassWB)*Sqr(g1)*Sqr
+      (g2) + 800*traceconjTYuTpTYu*Sqr(g3) - 800*MassG*traceconjTYuTpYu*Sqr(g3)
+      + 800*tracemq2AdjYuYu*Sqr(g3) + 800*tracemu2YuAdjYu*Sqr(g3) + 800*mHu2*
+      traceYuAdjYu*Sqr(g3) + 1600*traceYuAdjYu*AbsSqr(MassG)*Sqr(g3) - 800*
       traceAdjYuTYu*Conj(MassG)*Sqr(g3)));
 
 
@@ -152,14 +153,14 @@ double MSSMatMGUT_soft_parameters::calc_beta_mHu2_3_loop(const Soft_traces& soft
 {
    DEFINE_PROJECTOR(3,3,3,3)
 
+   const double tracemd2 = TRACE_STRUCT.tracemd2;
+   const double traceme2 = TRACE_STRUCT.traceme2;
    const double traceml2 = TRACE_STRUCT.traceml2;
    const double tracemq2 = TRACE_STRUCT.tracemq2;
    const double tracemu2 = TRACE_STRUCT.tracemu2;
    const double traceAdjYdYd = TRACE_STRUCT.traceAdjYdYd;
    const double traceAdjYeYe = TRACE_STRUCT.traceAdjYeYe;
-   const double traceme2 = TRACE_STRUCT.traceme2;
    const double traceAdjYuYu = TRACE_STRUCT.traceAdjYuYu;
-   const double tracemd2 = TRACE_STRUCT.tracemd2;
    const double traceAdjTYdYd = TRACE_STRUCT.traceAdjTYdYd;
    const double traceAdjTYeYe = TRACE_STRUCT.traceAdjTYeYe;
    const double traceAdjTYuYu = TRACE_STRUCT.traceAdjTYuYu;
@@ -243,163 +244,213 @@ double MSSMatMGUT_soft_parameters::calc_beta_mHu2_3_loop(const Soft_traces& soft
 
    double beta_mHu2;
 
-   const double beta_mHu2_1 = Re(threeLoop*(18.*traceAdjTYdTYdAdjYuYuAdjYdYd +
-      18.*traceAdjTYuYuAdjYdTYdAdjYdYd + 18.*traceAdjYdTYdAdjTYuYuAdjYdYd + 18.
-      *traceAdjYdTYdAdjYuYuAdjTYdYd + 36.*traceAdjTYdTYdAdjYuYu*traceAdjYdYd +
-      36.*traceAdjTYuTYuAdjYdYd*traceAdjYdYd + 18.*traceAdjYdYdAdjTYuTYuAdjYdYd
-       + 18.*traceAdjYdYdAdjYdYdAdjYuYumq2 + 18.*traceAdjYdYdAdjYuTYuAdjTYdYd +
-      36.*mHd2*traceAdjYdYdAdjYuYuAdjYdYd + 18.*mHu2*traceAdjYdYdAdjYuYuAdjYdYd
-       + 18.*traceAdjYdYdAdjYuYuAdjYdYdmq2 + 36.*traceAdjYdYd*
-      traceAdjYdYdAdjYuYumq2 + 12.*traceAdjTYdTYdAdjYuYu*traceAdjYeYe + 12.*
-      traceAdjTYuTYuAdjYdYd*traceAdjYeYe + 12.*traceAdjYdYdAdjYuYumq2*
-      traceAdjYeYe + 36.*traceAdjYdYd*traceAdjYuTYuAdjTYdYd + 12.*traceAdjYeYe*
-      traceAdjYuTYuAdjTYdYd + 36.*traceAdjTYdYd*traceAdjYuTYuAdjYdYd + 12.*
-      traceAdjTYeYe*traceAdjYuTYuAdjYdYd + 18.*traceAdjYuTYuAdjYdYdAdjTYdYd +
-      216.*traceAdjTYuYu*traceAdjYuTYuAdjYuYu + 147.82214554123618*
-      traceAdjYuTYuAdjYuYuAdjTYuYu + 290.2649751355474*MassG*traceAdjTYuYu*Quad
-      (g3) - 67.39746270332105*traceAdjTYdTYdAdjYuYu*Sqr(g3) -
-      67.39746270332105*traceAdjTYuTYuAdjYdYd*Sqr(g3) - 404.38477621992627*
-      traceAdjTYuTYuAdjYuYu*Sqr(g3) + 67.39746270332105*MassG*
-      traceAdjTYuYuAdjYdYd*Sqr(g3) - 67.39746270332105*traceAdjYdYdAdjYuYumq2*
-      Sqr(g3) - 67.39746270332105*traceAdjYuTYuAdjTYdYd*Sqr(g3) -
-      404.38477621992627*traceAdjYuTYuAdjTYuYu*Sqr(g3) + 67.39746270332105*
-      MassG*traceAdjYuTYuAdjYdYd*Sqr(g3) + 404.38477621992627*MassG*
-      traceAdjYuTYuAdjYuYu*Sqr(g3) + Sqr(g2)*(36.*traceAdjTYdTYdAdjYuYu + 36.*
-      traceAdjTYuTYuAdjYdYd + 295.64429108247236*traceAdjTYuTYuAdjYuYu - 36.*
-      MassWB*traceAdjTYuYuAdjYdYd + 36.*traceAdjYdYdAdjYuYumq2 + 36.*
-      traceAdjYuTYuAdjTYdYd + 295.64429108247236*traceAdjYuTYuAdjTYuYu - 36.*
-      MassWB*traceAdjYuTYuAdjYdYd - 295.64429108247236*MassWB*
-      traceAdjYuTYuAdjYuYu - 82.19238810996313*MassG*traceAdjTYuYu*Sqr(g3) -
-      82.19238810996313*MassWB*traceAdjTYuYu*Sqr(g3)) + Power6(g1)*(-4.968*mHd2
-       - 4.968*mHu2 + 239.45914429835202*Sqr(MassB)) + Sqr(g1)*(
-      5.284936567583026*traceAdjTYdTYdAdjYuYu + 5.284936567583026*
-      traceAdjTYuTYuAdjYdYd + 28.290380594501844*traceAdjTYuTYuAdjYuYu -
-      5.284936567583026*MassB*traceAdjTYuYuAdjYdYd + 5.284936567583026*
-      traceAdjYdYdAdjYuYumq2 + 5.284936567583026*traceAdjYuTYuAdjTYdYd +
-      28.290380594501844*traceAdjYuTYuAdjTYuYu - 5.284936567583026*MassB*
-      traceAdjYuTYuAdjYdYd - 28.290380594501844*MassB*traceAdjYuTYuAdjYuYu -
-      17.34446767621158*MassB*traceAdjTYuYu*Sqr(g3) - 17.34446767621158*MassG*
-      traceAdjTYuYu*Sqr(g3) + 34.68893535242316*traceAdjYuYu*Sqr(g3)*Sqr(MassB)
-      + Sqr(g2)*(-18.89183395962177*MassB*traceAdjTYuYu - 18.89183395962177*
-      MassWB*traceAdjTYuYu + 37.78366791924354*traceAdjYuYu*Sqr(MassB)) + Quad(
-      g2)*(-59.893287324741706*MassB*MassWB - 1.8*mHd2 - 1.8*mHu2 -
-      24.546643662370855*Sqr(MassB) - 82.63993098711256*Sqr(MassWB))) + Quad(g1
-      )*(8.4*MassB*traceAdjTYdYd + 10.8*MassB*traceAdjTYeYe +
-      147.78402922976323*MassB*traceAdjTYuYu - 5.04*mHd2*traceAdjYdYd - 5.04*
-      traceAdjYdYdmq2 - 6.48*mHd2*traceAdjYeYe - 6.48*traceAdjYeYeml2 - 25.2*
-      traceAdjYdYd*Sqr(MassB) - 32.4*traceAdjYeYe*Sqr(MassB) -
-      443.3520876892897*traceAdjYuYu*Sqr(MassB) + Sqr(g3)*(-46.72465076838378*
-      MassB*MassG - 70.08697615257569*Sqr(MassB) - 12.802325384191889*Sqr(MassG
-      )) + Sqr(g2)*(-44.575972394845024*MassB*MassWB - 1.08*mHd2 - 1.08*mHu2 -
-      66.86395859226754*Sqr(MassB) - 19.047986197422514*Sqr(MassWB))) + Power6(
-      g2)*(-3.*mHd2 - 3.*mHu2 + 6700.775093943266*Sqr(MassWB)) + Quad(g2)*(
-      MassWB*(90.*traceAdjTYdYd + 30.*traceAdjTYeYe + 679.3775093943266*
-      traceAdjTYuYu) - 54.*mHd2*traceAdjYdYd - 54.*traceAdjYdYdmq2 - 18.*mHd2*
-      traceAdjYeYe - 18.*traceAdjYeYeml2 + Sqr(g3)*(-318.57716432988946*MassG*
-      MassWB - 87.28858216494473*Sqr(MassG) - 477.8657464948342*Sqr(MassWB)) +
-      (-270.*traceAdjYdYd - 90.*traceAdjYeYe)*Sqr(MassWB))));
-   const double beta_mHu2_2 = Re(threeLoop*(216.*traceAdjTYuTYuAdjYuYu*
-      traceAdjYuYu + 216.*traceAdjYuTYuAdjTYuYu*traceAdjYuYu + 18.*
-      traceAdjYuYuAdjTYdTYdAdjYdYd + 147.82214554123618*
-      traceAdjYuYuAdjTYuTYuAdjYuYu + 18.*traceAdjYuYuAdjYdTYdAdjTYdYd + 72.*
-      mHd2*traceAdjYdYd*traceAdjYuYuAdjYdYd + 36.*mHu2*traceAdjYdYd*
-      traceAdjYuYuAdjYdYd + 36.*traceAdjYdYdmq2*traceAdjYuYuAdjYdYd + 24.*mHd2*
-      traceAdjYeYe*traceAdjYuYuAdjYdYd + 12.*mHu2*traceAdjYeYe*
-      traceAdjYuYuAdjYdYd + 12.*traceAdjYeYeml2*traceAdjYuYuAdjYdYd + 18.*
-      traceAdjYuYuAdjYdYdAdjYdYdmq2 + 36.*traceAdjYdYd*traceAdjYuYuAdjYdYdmq2 +
-      12.*traceAdjYeYe*traceAdjYuYuAdjYdYdmq2 + 147.82214554123618*
-      traceAdjYuYuAdjYuTYuAdjTYuYu + 324.*mHu2*traceAdjYuYu*traceAdjYuYuAdjYuYu
-       + 147.82214554123618*mHu2*traceAdjYuYuAdjYuYuAdjYuYu +
-      147.82214554123618*traceAdjYuYuAdjYuYuAdjYuYumq2 + 216.*traceAdjYuYu*
-      traceAdjYuYuAdjYuYumq2 + 108.*traceAdjYuYuAdjYuYu*traceAdjYuYumq2 + 36.*
-      traceAdjYuYuAdjYdYd*traceTYdAdjTYd + 36.*traceAdjYdYd*
-      traceTYdAdjTYuYuAdjYd + 12.*traceAdjYeYe*traceTYdAdjTYuYuAdjYd + (-3.312*
-      tracemd2 - 9.936*traceme2 - 4.968*traceml2 - 1.656*tracemq2 - 13.248*
-      tracemu2)*Power6(g1) + (-3.*traceml2 - 9.*tracemq2)*Power6(g2) -
-      145.1324875677737*mHu2*traceAdjYuYu*Quad(g3) - 145.1324875677737*
-      traceAdjYuYumq2*Quad(g3) - 31.999999999999996*traceAdjYuYu*tracemd2*Quad(
-      g3) - 63.99999999999999*traceAdjYuYu*tracemq2*Quad(g3) -
-      31.999999999999996*traceAdjYuYu*tracemu2*Quad(g3) + Quad(g1)*(-
-      0.9599999999999999*mHd2*traceAdjYuYu - 76.41201461488161*mHu2*
-      traceAdjYuYu - 75.45201461488162*traceAdjYuYumq2 - 0.64*traceAdjYuYu*
-      tracemd2 - 1.9199999999999997*traceAdjYuYu*traceme2 - 0.9599999999999999*
-      traceAdjYuYu*traceml2 - 0.32*traceAdjYuYu*tracemq2 - 2.56*traceAdjYuYu*
-      tracemu2 - 5.04*traceTYdAdjTYd + 8.4*MassB*traceTYdAdjYd - 0.72*tracemd2*
-      Sqr(g2) - 2.16*traceme2*Sqr(g2) - 1.08*traceml2*Sqr(g2) - 0.36*tracemq2*
-      Sqr(g2) - 2.88*tracemu2*Sqr(g2)) + 67.39746270332105*MassG*
-      traceAdjYuYuAdjTYdYd*Sqr(g3) + 404.38477621992627*MassG*
-      traceAdjYuYuAdjTYuYu*Sqr(g3) - 67.39746270332105*mHd2*traceAdjYuYuAdjYdYd
-      *Sqr(g3) - 67.39746270332105*mHu2*traceAdjYuYuAdjYdYd*Sqr(g3) -
-      67.39746270332105*traceAdjYuYuAdjYdYdmq2*Sqr(g3) - 404.38477621992627*
-      mHu2*traceAdjYuYuAdjYuYu*Sqr(g3) - 404.38477621992627*
-      traceAdjYuYuAdjYuYumq2*Sqr(g3) - 67.39746270332105*traceTYdAdjTYuYuAdjYd*
-      Sqr(g3) - 678.794925406642*traceAdjYuYu*Quad(g3)*Sqr(MassG) -
-      134.7949254066421*traceAdjYuYuAdjYdYd*Sqr(g3)*Sqr(MassG) -
-      404.38477621992627*traceAdjYuYuAdjYuYu*Sqr(g3)*Sqr(MassG) + Quad(g2)*(-
-      348.6887546971633*mHu2*traceAdjYuYu - 348.6887546971633*traceAdjYuYumq2 -
-      54.*traceTYdAdjTYd - 2038.13252818298*traceAdjYuYu*Sqr(MassWB)) + Sqr(g1)
-      *(-5.284936567583026*MassB*traceAdjYuYuAdjTYdYd - 28.290380594501844*
-      MassB*traceAdjYuYuAdjTYuYu + 5.284936567583026*mHd2*traceAdjYuYuAdjYdYd +
-      5.284936567583026*mHu2*traceAdjYuYuAdjYdYd + 5.284936567583026*
-      traceAdjYuYuAdjYdYdmq2 + 28.290380594501844*mHu2*traceAdjYuYuAdjYuYu +
-      28.290380594501844*traceAdjYuYuAdjYuYumq2 + 5.284936567583026*
-      traceTYdAdjTYuYuAdjYd + (-1.8*traceml2 - 5.4*tracemq2)*Quad(g2) +
-      10.569873135166052*traceAdjYuYuAdjYdYd*Sqr(MassB) + 28.290380594501844*
-      traceAdjYuYuAdjYuYu*Sqr(MassB) + Sqr(g3)*(34.68893535242316*MassB*MassG*
-      traceAdjYuYu + 17.34446767621158*mHu2*traceAdjYuYu + 17.34446767621158*
-      traceAdjYuYumq2 + 34.68893535242316*traceAdjYuYu*Sqr(MassG)) + Sqr(g2)*(
-      37.78366791924354*MassB*MassWB*traceAdjYuYu + 18.89183395962177*mHu2*
-      traceAdjYuYu + 18.89183395962177*traceAdjYuYumq2 + 37.78366791924354*
-      traceAdjYuYu*Sqr(MassWB))) + Sqr(g2)*(MassWB*(-36.*traceAdjYuYuAdjTYdYd -
-      295.64429108247236*traceAdjYuYuAdjTYuYu) + 36.*mHd2*traceAdjYuYuAdjYdYd +
-      36.*mHu2*traceAdjYuYuAdjYdYd + 36.*traceAdjYuYuAdjYdYdmq2 +
-      295.64429108247236*mHu2*traceAdjYuYuAdjYuYu + 295.64429108247236*
-      traceAdjYuYuAdjYuYumq2 + 36.*traceTYdAdjTYuYuAdjYd + (72.*
-      traceAdjYuYuAdjYdYd + 295.64429108247236*traceAdjYuYuAdjYuYu)*Sqr(MassWB)
-      + Sqr(g3)*(164.38477621992627*MassG*MassWB*traceAdjYuYu +
-      82.19238810996313*mHu2*traceAdjYuYu + 82.19238810996313*traceAdjYuYumq2 +
-      164.38477621992627*traceAdjYuYu*Sqr(MassG) + 164.38477621992627*
-      traceAdjYuYu*Sqr(MassWB)))));
-   const double beta_mHu2_3 = Re(threeLoop*(36.*traceAdjTYuYuAdjYdYd*
-      traceTYdAdjYd + 36.*traceAdjYuYuAdjTYdYd*traceTYdAdjYd + 36.*
-      traceAdjTYdYd*traceTYdAdjYuYuAdjYd + 12.*traceAdjTYeYe*
-      traceTYdAdjYuYuAdjYd + 12.*traceAdjYuYuAdjYdYd*traceTYeAdjTYe + 12.*
-      traceAdjTYuYuAdjYdYd*traceTYeAdjYe + 12.*traceAdjYuYuAdjTYdYd*
-      traceTYeAdjYe + 108.*traceAdjYuYuAdjYuYu*traceTYuAdjTYu + 216.*
-      traceAdjYuYuAdjTYuYu*traceTYuAdjYu + 36.*traceAdjYuYuAdjYdYd*
-      traceYdAdjYdmd2 + 18.*traceYdAdjYdYdAdjYuYuAdjYdmd2 + 36.*traceAdjYdYd*
-      traceYdAdjYuYuAdjYdmd2 + 12.*traceAdjYeYe*traceYdAdjYuYuAdjYdmd2 + 18.*
-      traceYdAdjYuYuAdjYdYdAdjYdmd2 + 12.*traceAdjYuYuAdjYdYd*traceYeAdjYeme2 +
-      18.*traceYuAdjYdYdAdjYdYdAdjYumu2 + 36.*traceAdjYdYd*
-      traceYuAdjYdYdAdjYumu2 + 12.*traceAdjYeYe*traceYuAdjYdYdAdjYumu2 + 108.*
-      traceAdjYuYuAdjYuYu*traceYuAdjYumu2 + 216.*traceAdjYuYu*
-      traceYuAdjYuYuAdjYumu2 + 147.82214554123618*traceYuAdjYuYuAdjYuYuAdjYumu2
-       - 6.48*traceTYeAdjTYe*Quad(g1) + 10.8*MassB*traceTYeAdjYe*Quad(g1) -
-      75.45201461488162*traceTYuAdjTYu*Quad(g1) + 147.78402922976323*MassB*
-      traceTYuAdjYu*Quad(g1) - 5.04*traceYdAdjYdmd2*Quad(g1) - 6.48*
-      traceYeAdjYeme2*Quad(g1) - 75.45201461488162*traceYuAdjYumu2*Quad(g1) + (
-      -18.*traceTYeAdjTYe - 348.6887546971633*traceTYuAdjTYu + MassWB*(90.*
-      traceTYdAdjYd + 30.*traceTYeAdjYe + 679.3775093943266*traceTYuAdjYu) -
-      54.*traceYdAdjYdmd2 - 18.*traceYeAdjYeme2 - 348.6887546971633*
-      traceYuAdjYumu2)*Quad(g2) - 145.1324875677737*traceTYuAdjTYu*Quad(g3) +
-      290.2649751355474*MassG*traceTYuAdjYu*Quad(g3) - 145.1324875677737*
-      traceYuAdjYumu2*Quad(g3) - 5.284936567583026*MassB*traceTYdAdjYuYuAdjYd*
-      Sqr(g1) + 5.284936567583026*traceYdAdjYuYuAdjYdmd2*Sqr(g1) +
-      5.284936567583026*traceYuAdjYdYdAdjYumu2*Sqr(g1) + 28.290380594501844*
-      traceYuAdjYuYuAdjYumu2*Sqr(g1) + 67.39746270332105*MassG*
-      traceTYdAdjYuYuAdjYd*Sqr(g3) - 67.39746270332105*traceYdAdjYuYuAdjYdmd2*
-      Sqr(g3) - 67.39746270332105*traceYuAdjYdYdAdjYumu2*Sqr(g3) -
-      404.38477621992627*traceYuAdjYuYuAdjYumu2*Sqr(g3) + 17.34446767621158*
-      traceTYuAdjTYu*Sqr(g1)*Sqr(g3) - 17.34446767621158*MassB*traceTYuAdjYu*
-      Sqr(g1)*Sqr(g3) - 17.34446767621158*MassG*traceTYuAdjYu*Sqr(g1)*Sqr(g3) +
-      17.34446767621158*traceYuAdjYumu2*Sqr(g1)*Sqr(g3) + Sqr(g2)*(36.*
-      traceYdAdjYuYuAdjYdmd2 + 36.*traceYuAdjYdYdAdjYumu2 + 295.64429108247236*
-      traceYuAdjYuYuAdjYumu2 + (18.89183395962177*traceTYuAdjTYu -
-      18.89183395962177*MassB*traceTYuAdjYu + 18.89183395962177*traceYuAdjYumu2
-      )*Sqr(g1) + 82.19238810996313*traceTYuAdjTYu*Sqr(g3) - 82.19238810996313*
-      MassG*traceTYuAdjYu*Sqr(g3) + 82.19238810996313*traceYuAdjYumu2*Sqr(g3) +
-      MassWB*(-36.*traceTYdAdjYuYuAdjYd - 18.89183395962177*traceTYuAdjYu*Sqr(
-      g1) - 82.19238810996313*traceTYuAdjYu*Sqr(g3)))));
+   const double beta_mHu2_1 = Re(239.45914429835202*threeLoop*(
+      0.07516939915885217*traceAdjTYdTYdAdjYuYuAdjYdYd + 0.07516939915885217*
+      traceAdjTYuYuAdjYdTYdAdjYdYd + 0.07516939915885217*
+      traceAdjYdTYdAdjTYuYuAdjYdYd + 0.07516939915885217*
+      traceAdjYdTYdAdjYuYuAdjTYdYd + 0.15033879831770433*traceAdjTYdTYdAdjYuYu*
+      traceAdjYdYd + 0.15033879831770433*traceAdjTYuTYuAdjYdYd*traceAdjYdYd +
+      0.07516939915885217*traceAdjYdYdAdjTYuTYuAdjYdYd + 0.07516939915885217*
+      traceAdjYdYdAdjYdYdAdjYuYumq2 + 0.07516939915885217*
+      traceAdjYdYdAdjYuTYuAdjTYdYd + 0.15033879831770433*mHd2*
+      traceAdjYdYdAdjYuYuAdjYdYd + 0.07516939915885217*mHu2*
+      traceAdjYdYdAdjYuYuAdjYdYd + 0.07516939915885217*
+      traceAdjYdYdAdjYuYuAdjYdYdmq2 + 0.15033879831770433*traceAdjYdYd*
+      traceAdjYdYdAdjYuYumq2 + 0.050112932772568106*traceAdjTYdTYdAdjYuYu*
+      traceAdjYeYe + 0.050112932772568106*traceAdjTYuTYuAdjYdYd*traceAdjYeYe +
+      0.050112932772568106*traceAdjYdYdAdjYuYumq2*traceAdjYeYe +
+      0.15033879831770433*traceAdjYdYd*traceAdjYuTYuAdjTYdYd +
+      0.050112932772568106*traceAdjYeYe*traceAdjYuTYuAdjTYdYd +
+      0.15033879831770433*traceAdjTYdYd*traceAdjYuTYuAdjYdYd +
+      0.050112932772568106*traceAdjTYeYe*traceAdjYuTYuAdjYdYd +
+      0.07516939915885217*traceAdjYuTYuAdjYdYdAdjTYdYd + 0.9020327899062259*
+      traceAdjTYuYu*traceAdjYuTYuAdjYuYu + 0.6173167701503955*
+      traceAdjYuTYuAdjYuYuAdjTYuYu - 0.020746754167843197*mHd2*Power6(g1) -
+      0.020746754167843197*mHu2*Power6(g1) - 0.012528233193142026*mHd2*Power6(
+      g2) - 0.012528233193142026*mHu2*Power6(g2) + 0.035079052940797675*MassB*
+      traceAdjTYdYd*Quad(g1) + 0.0451016394953113*MassB*traceAdjTYeYe*Quad(g1)
+      + 0.6171575934708637*MassB*traceAdjTYuYu*Quad(g1) - 0.021047431764478604*
+      mHd2*traceAdjYdYd*Quad(g1) - 0.021047431764478604*traceAdjYdYdmq2*Quad(g1
+      ) - 0.02706098369718678*mHd2*traceAdjYeYe*Quad(g1) - 0.02706098369718678*
+      traceAdjYeYeml2*Quad(g1) + 0.3758469957942608*MassWB*traceAdjTYdYd*Quad(
+      g2) + 0.12528233193142027*MassWB*traceAdjTYeYe*Quad(g2) +
+      2.837133287956054*MassWB*traceAdjTYuYu*Quad(g2) - 0.22550819747655648*
+      mHd2*traceAdjYdYd*Quad(g2) - 0.22550819747655648*traceAdjYdYdmq2*Quad(g2)
+      - 0.07516939915885217*mHd2*traceAdjYeYe*Quad(g2) - 0.07516939915885217*
+      traceAdjYeYeml2*Quad(g2) + 1.2121690987665699*MassG*traceAdjTYuYu*Quad(g3
+      ) + 0.022070305909881252*traceAdjTYdTYdAdjYuYu*Sqr(g1) +
+      0.022070305909881252*traceAdjTYuTYuAdjYdYd*Sqr(g1) + 0.11814282840355302*
+      traceAdjTYuTYuAdjYuYu*Sqr(g1) - 0.022070305909881252*MassB*
+      traceAdjTYuYuAdjYdYd*Sqr(g1) + 0.022070305909881252*
+      traceAdjYdYdAdjYuYumq2*Sqr(g1) + 0.022070305909881252*
+      traceAdjYuTYuAdjTYdYd*Sqr(g1) + 0.11814282840355302*traceAdjYuTYuAdjTYuYu
+      *Sqr(g1) - 0.022070305909881252*MassB*traceAdjYuTYuAdjYdYd*Sqr(g1) -
+      0.11814282840355302*MassB*traceAdjYuTYuAdjYuYu*Sqr(g1) -
+      0.2501190234360739*MassB*MassWB*Quad(g2)*Sqr(g1) - 0.007516939915885216*
+      mHd2*Quad(g2)*Sqr(g1) - 0.007516939915885216*mHu2*Quad(g2)*Sqr(g1) +
+      0.15033879831770433*traceAdjTYdTYdAdjYuYu*Sqr(g2) + 0.15033879831770433*
+      traceAdjTYuTYuAdjYdYd*Sqr(g2) + 1.234633540300791*traceAdjTYuTYuAdjYuYu*
+      Sqr(g2) - 0.15033879831770433*MassWB*traceAdjTYuYuAdjYdYd*Sqr(g2) +
+      0.15033879831770433*traceAdjYdYdAdjYuYumq2*Sqr(g2) + 0.15033879831770433*
+      traceAdjYuTYuAdjTYdYd*Sqr(g2) + 1.234633540300791*traceAdjYuTYuAdjTYuYu*
+      Sqr(g2) - 0.15033879831770433*MassWB*traceAdjYuTYuAdjYdYd*Sqr(g2) -
+      1.234633540300791*MassWB*traceAdjYuTYuAdjYuYu*Sqr(g2) -
+      0.18615272565789337*MassB*MassWB*Quad(g1)*Sqr(g2) - 0.00451016394953113*
+      mHd2*Quad(g1)*Sqr(g2) - 0.00451016394953113*mHu2*Quad(g1)*Sqr(g2) -
+      0.07889376709742041*MassB*traceAdjTYuYu*Sqr(g1)*Sqr(g2) -
+      0.07889376709742041*MassWB*traceAdjTYuYu*Sqr(g1)*Sqr(g2) -
+      0.28145704312443287*traceAdjTYdTYdAdjYuYu*Sqr(g3) - 0.28145704312443287*
+      traceAdjTYuTYuAdjYdYd*Sqr(g3) - 1.688742258746597*traceAdjTYuTYuAdjYuYu*
+      Sqr(g3) + 0.28145704312443287*MassG*traceAdjTYuYuAdjYdYd*Sqr(g3) -
+      0.28145704312443287*traceAdjYdYdAdjYuYumq2*Sqr(g3) - 0.28145704312443287*
+      traceAdjYuTYuAdjTYdYd*Sqr(g3) - 1.688742258746597*traceAdjYuTYuAdjTYuYu*
+      Sqr(g3) + 0.28145704312443287*MassG*traceAdjYuTYuAdjYdYd*Sqr(g3) +
+      1.688742258746597*MassG*traceAdjYuTYuAdjYuYu*Sqr(g3) - 0.1951257735648116
+      *MassB*MassG*Quad(g1)*Sqr(g3) - 1.330403001578261*MassG*MassWB*Quad(g2)*
+      Sqr(g3) - 0.07243184521949762*MassB*traceAdjTYuYu*Sqr(g1)*Sqr(g3) -
+      0.07243184521949762*MassG*traceAdjTYuYu*Sqr(g1)*Sqr(g3) -
+      0.3432418016476174*MassG*traceAdjTYuYu*Sqr(g2)*Sqr(g3) -
+      0.3432418016476174*MassWB*traceAdjTYuYu*Sqr(g2)*Sqr(g3) + 1.*Power6(g1)*
+      Sqr(MassB) - 0.10523715882239303*traceAdjYdYd*Quad(g1)*Sqr(MassB) -
+      0.13530491848593387*traceAdjYeYe*Quad(g1)*Sqr(MassB) - 1.8514727804125912
+      *traceAdjYuYu*Quad(g1)*Sqr(MassB) - 0.1025086919703813*Quad(g2)*Sqr(g1)*
+      Sqr(MassB) - 0.2792290884868401*Quad(g1)*Sqr(g2)*Sqr(MassB) +
+      0.15778753419484082*traceAdjYuYu*Sqr(g1)*Sqr(g2)*Sqr(MassB) -
+      0.29268866034721747*Quad(g1)*Sqr(g3)*Sqr(MassB) + 0.14486369043899525*
+      traceAdjYuYu*Sqr(g1)*Sqr(g3)*Sqr(MassB) - 0.053463505942545855*Quad(g1)*
+      Sqr(g3)*Sqr(MassG) - 0.3645239041537219*Quad(g2)*Sqr(g3)*Sqr(MassG) +
+      27.982957650573137*Power6(g2)*Sqr(MassWB) - 1.1275409873827824*
+      traceAdjYdYd*Quad(g2)*Sqr(MassWB) - 0.3758469957942608*traceAdjYeYe*Quad(
+      g2)*Sqr(MassWB) - 0.34511077549057*Quad(g2)*Sqr(g1)*Sqr(MassWB) -
+      0.0795458709803533*Quad(g1)*Sqr(g2)*Sqr(MassWB) - 1.9956045023673916*Quad
+      (g2)*Sqr(g3)*Sqr(MassWB)));
+   const double beta_mHu2_2 = Re(-3.312*threeLoop*(-65.21739130434783*
+      traceAdjTYuTYuAdjYuYu*traceAdjYuYu - 65.21739130434783*
+      traceAdjYuTYuAdjTYuYu*traceAdjYuYu - 5.434782608695652*
+      traceAdjYuYuAdjTYdTYdAdjYdYd - 44.63229032042155*
+      traceAdjYuYuAdjTYuTYuAdjYuYu - 5.434782608695652*
+      traceAdjYuYuAdjYdTYdAdjTYdYd - 21.73913043478261*mHd2*traceAdjYdYd*
+      traceAdjYuYuAdjYdYd - 10.869565217391305*mHu2*traceAdjYdYd*
+      traceAdjYuYuAdjYdYd - 10.869565217391305*traceAdjYdYdmq2*
+      traceAdjYuYuAdjYdYd - 7.246376811594203*mHd2*traceAdjYeYe*
+      traceAdjYuYuAdjYdYd - 3.6231884057971016*mHu2*traceAdjYeYe*
+      traceAdjYuYuAdjYdYd - 3.6231884057971016*traceAdjYeYeml2*
+      traceAdjYuYuAdjYdYd - 5.434782608695652*traceAdjYuYuAdjYdYdAdjYdYdmq2 -
+      10.869565217391305*traceAdjYdYd*traceAdjYuYuAdjYdYdmq2 -
+      3.6231884057971016*traceAdjYeYe*traceAdjYuYuAdjYdYdmq2 -
+      44.63229032042155*traceAdjYuYuAdjYuTYuAdjTYuYu - 97.82608695652175*mHu2*
+      traceAdjYuYu*traceAdjYuYuAdjYuYu - 44.63229032042155*mHu2*
+      traceAdjYuYuAdjYuYuAdjYuYu - 44.63229032042155*
+      traceAdjYuYuAdjYuYuAdjYuYumq2 - 65.21739130434783*traceAdjYuYu*
+      traceAdjYuYuAdjYuYumq2 - 32.608695652173914*traceAdjYuYuAdjYuYu*
+      traceAdjYuYumq2 - 10.869565217391305*traceAdjYuYuAdjYdYd*traceTYdAdjTYd -
+      10.869565217391305*traceAdjYdYd*traceTYdAdjTYuYuAdjYd -
+      3.6231884057971016*traceAdjYeYe*traceTYdAdjTYuYuAdjYd + 1.*tracemd2*
+      Power6(g1) + 3.*traceme2*Power6(g1) + 1.5*traceml2*Power6(g1) + 0.5*
+      tracemq2*Power6(g1) + 4.*tracemu2*Power6(g1) + 0.9057971014492754*
+      traceml2*Power6(g2) + 2.717391304347826*tracemq2*Power6(g2) +
+      0.28985507246376807*mHd2*traceAdjYuYu*Quad(g1) + 23.071260451353144*mHu2*
+      traceAdjYuYu*Quad(g1) + 22.781405378889378*traceAdjYuYumq2*Quad(g1) +
+      0.19323671497584544*traceAdjYuYu*tracemd2*Quad(g1) + 0.5797101449275361*
+      traceAdjYuYu*traceme2*Quad(g1) + 0.28985507246376807*traceAdjYuYu*
+      traceml2*Quad(g1) + 0.09661835748792272*traceAdjYuYu*tracemq2*Quad(g1) +
+      0.7729468599033817*traceAdjYuYu*tracemu2*Quad(g1) + 1.5217391304347827*
+      traceTYdAdjTYd*Quad(g1) - 2.536231884057971*MassB*traceTYdAdjYd*Quad(g1)
+      + 105.28042110421597*mHu2*traceAdjYuYu*Quad(g2) + 105.28042110421597*
+      traceAdjYuYumq2*Quad(g2) + 16.304347826086957*traceTYdAdjTYd*Quad(g2) +
+      43.820195521670804*mHu2*traceAdjYuYu*Quad(g3) + 43.820195521670804*
+      traceAdjYuYumq2*Quad(g3) + 9.66183574879227*traceAdjYuYu*tracemd2*Quad(g3
+      ) + 19.32367149758454*traceAdjYuYu*tracemq2*Quad(g3) + 9.66183574879227*
+      traceAdjYuYu*tracemu2*Quad(g3) + 1.5956934080866625*MassB*
+      traceAdjYuYuAdjTYdYd*Sqr(g1) + 8.541781580465534*MassB*
+      traceAdjYuYuAdjTYuYu*Sqr(g1) - 1.5956934080866625*mHd2*
+      traceAdjYuYuAdjYdYd*Sqr(g1) - 1.5956934080866625*mHu2*traceAdjYuYuAdjYdYd
+      *Sqr(g1) - 1.5956934080866625*traceAdjYuYuAdjYdYdmq2*Sqr(g1) -
+      8.541781580465534*mHu2*traceAdjYuYuAdjYuYu*Sqr(g1) - 8.541781580465534*
+      traceAdjYuYuAdjYuYumq2*Sqr(g1) - 1.5956934080866625*traceTYdAdjTYuYuAdjYd
+      *Sqr(g1) + 0.5434782608695653*traceml2*Quad(g2)*Sqr(g1) +
+      1.6304347826086958*tracemq2*Quad(g2)*Sqr(g1) + 10.869565217391305*MassWB*
+      traceAdjYuYuAdjTYdYd*Sqr(g2) + 89.2645806408431*MassWB*
+      traceAdjYuYuAdjTYuYu*Sqr(g2) - 10.869565217391305*mHd2*
+      traceAdjYuYuAdjYdYd*Sqr(g2) - 10.869565217391305*mHu2*traceAdjYuYuAdjYdYd
+      *Sqr(g2) - 10.869565217391305*traceAdjYuYuAdjYdYdmq2*Sqr(g2) -
+      89.2645806408431*mHu2*traceAdjYuYuAdjYuYu*Sqr(g2) - 89.2645806408431*
+      traceAdjYuYuAdjYuYumq2*Sqr(g2) - 10.869565217391305*traceTYdAdjTYuYuAdjYd
+      *Sqr(g2) + 0.21739130434782608*tracemd2*Quad(g1)*Sqr(g2) +
+      0.6521739130434784*traceme2*Quad(g1)*Sqr(g2) + 0.3260869565217392*
+      traceml2*Quad(g1)*Sqr(g2) + 0.10869565217391304*tracemq2*Quad(g1)*Sqr(g2)
+      + 0.8695652173913043*tracemu2*Quad(g1)*Sqr(g2) - 11.408112294457592*MassB
+      *MassWB*traceAdjYuYu*Sqr(g1)*Sqr(g2) - 5.704056147228796*mHu2*
+      traceAdjYuYu*Sqr(g1)*Sqr(g2) - 5.704056147228796*traceAdjYuYumq2*Sqr(g1)*
+      Sqr(g2) - 20.349475453901285*MassG*traceAdjYuYuAdjTYdYd*Sqr(g3) -
+      122.0968527234077*MassG*traceAdjYuYuAdjTYuYu*Sqr(g3) + 20.349475453901285
+      *mHd2*traceAdjYuYuAdjYdYd*Sqr(g3) + 20.349475453901285*mHu2*
+      traceAdjYuYuAdjYdYd*Sqr(g3) + 20.349475453901285*traceAdjYuYuAdjYdYdmq2*
+      Sqr(g3) + 122.0968527234077*mHu2*traceAdjYuYuAdjYuYu*Sqr(g3) +
+      122.0968527234077*traceAdjYuYuAdjYuYumq2*Sqr(g3) + 20.349475453901285*
+      traceTYdAdjTYuYuAdjYd*Sqr(g3) - 10.473712364862065*MassB*MassG*
+      traceAdjYuYu*Sqr(g1)*Sqr(g3) - 5.2368561824310325*mHu2*traceAdjYuYu*Sqr(
+      g1)*Sqr(g3) - 5.2368561824310325*traceAdjYuYumq2*Sqr(g1)*Sqr(g3) -
+      49.63308460746566*MassG*MassWB*traceAdjYuYu*Sqr(g2)*Sqr(g3) -
+      24.81654230373283*mHu2*traceAdjYuYu*Sqr(g2)*Sqr(g3) - 24.81654230373283*
+      traceAdjYuYumq2*Sqr(g2)*Sqr(g3) - 3.191386816173325*traceAdjYuYuAdjYdYd*
+      Sqr(g1)*Sqr(MassB) - 8.541781580465534*traceAdjYuYuAdjYuYu*Sqr(g1)*Sqr(
+      MassB) + 204.95015863727116*traceAdjYuYu*Quad(g3)*Sqr(MassG) +
+      40.69895090780257*traceAdjYuYuAdjYdYd*Sqr(g3)*Sqr(MassG) +
+      122.0968527234077*traceAdjYuYuAdjYuYu*Sqr(g3)*Sqr(MassG) -
+      10.473712364862065*traceAdjYuYu*Sqr(g1)*Sqr(g3)*Sqr(MassG) -
+      49.63308460746566*traceAdjYuYu*Sqr(g2)*Sqr(g3)*Sqr(MassG) +
+      615.378178799209*traceAdjYuYu*Quad(g2)*Sqr(MassWB) - 21.73913043478261*
+      traceAdjYuYuAdjYdYd*Sqr(g2)*Sqr(MassWB) - 89.2645806408431*
+      traceAdjYuYuAdjYuYu*Sqr(g2)*Sqr(MassWB) - 11.408112294457592*traceAdjYuYu
+      *Sqr(g1)*Sqr(g2)*Sqr(MassWB) - 49.63308460746566*traceAdjYuYu*Sqr(g2)*Sqr
+      (g3)*Sqr(MassWB)));
+   const double beta_mHu2_3 = Re(90.*threeLoop*(0.4*traceAdjTYuYuAdjYdYd*
+      traceTYdAdjYd + 0.4*traceAdjYuYuAdjTYdYd*traceTYdAdjYd + 0.4*
+      traceAdjTYdYd*traceTYdAdjYuYuAdjYd + 0.13333333333333333*traceAdjTYeYe*
+      traceTYdAdjYuYuAdjYd + 0.13333333333333333*traceAdjYuYuAdjYdYd*
+      traceTYeAdjTYe + 0.13333333333333333*traceAdjTYuYuAdjYdYd*traceTYeAdjYe +
+      0.13333333333333333*traceAdjYuYuAdjTYdYd*traceTYeAdjYe + 1.2*
+      traceAdjYuYuAdjYuYu*traceTYuAdjTYu + 2.4*traceAdjYuYuAdjTYuYu*
+      traceTYuAdjYu + 0.4*traceAdjYuYuAdjYdYd*traceYdAdjYdmd2 + 0.2*
+      traceYdAdjYdYdAdjYuYuAdjYdmd2 + 0.4*traceAdjYdYd*traceYdAdjYuYuAdjYdmd2 +
+      0.13333333333333333*traceAdjYeYe*traceYdAdjYuYuAdjYdmd2 + 0.2*
+      traceYdAdjYuYuAdjYdYdAdjYdmd2 + 0.13333333333333333*traceAdjYuYuAdjYdYd*
+      traceYeAdjYeme2 + 0.2*traceYuAdjYdYdAdjYdYdAdjYumu2 + 0.4*traceAdjYdYd*
+      traceYuAdjYdYdAdjYumu2 + 0.13333333333333333*traceAdjYeYe*
+      traceYuAdjYdYdAdjYumu2 + 1.2*traceAdjYuYuAdjYuYu*traceYuAdjYumu2 + 2.4*
+      traceAdjYuYu*traceYuAdjYuYuAdjYumu2 + 1.6424682837915132*
+      traceYuAdjYuYuAdjYuYuAdjYumu2 - 0.07200000000000001*traceTYeAdjTYe*Quad(
+      g1) + 0.12000000000000001*MassB*traceTYeAdjYe*Quad(g1) -
+      0.8383557179431291*traceTYuAdjTYu*Quad(g1) + 1.6420447692195914*MassB*
+      traceTYuAdjYu*Quad(g1) - 0.056*traceYdAdjYdmd2*Quad(g1) -
+      0.07200000000000001*traceYeAdjYeme2*Quad(g1) - 0.8383557179431291*
+      traceYuAdjYumu2*Quad(g1) + 1.*MassWB*traceTYdAdjYd*Quad(g2) - 0.2*
+      traceTYeAdjTYe*Quad(g2) + 0.3333333333333333*MassWB*traceTYeAdjYe*Quad(g2
+      ) - 3.8743194966351475*traceTYuAdjTYu*Quad(g2) + 7.548638993270296*MassWB
+      *traceTYuAdjYu*Quad(g2) - 0.6*traceYdAdjYdmd2*Quad(g2) - 0.2*
+      traceYeAdjYeme2*Quad(g2) - 3.8743194966351475*traceYuAdjYumu2*Quad(g2) -
+      1.6125831951974854*traceTYuAdjTYu*Quad(g3) + 3.2251663903949708*MassG*
+      traceTYuAdjYu*Quad(g3) - 1.6125831951974854*traceYuAdjYumu2*Quad(g3) -
+      0.05872151741758918*MassB*traceTYdAdjYuYuAdjYd*Sqr(g1) +
+      0.05872151741758918*traceYdAdjYuYuAdjYdmd2*Sqr(g1) + 0.05872151741758918*
+      traceYuAdjYdYdAdjYumu2*Sqr(g1) + 0.3143375621611316*
+      traceYuAdjYuYuAdjYumu2*Sqr(g1) - 0.4*MassWB*traceTYdAdjYuYuAdjYd*Sqr(g2)
+      + 0.4*traceYdAdjYuYuAdjYdmd2*Sqr(g2) + 0.4*traceYuAdjYdYdAdjYumu2*Sqr(g2)
+      + 3.2849365675830264*traceYuAdjYuYuAdjYumu2*Sqr(g2) + 0.20990926621801967
+      *traceTYuAdjTYu*Sqr(g1)*Sqr(g2) - 0.20990926621801967*MassB*traceTYuAdjYu
+      *Sqr(g1)*Sqr(g2) - 0.20990926621801967*MassWB*traceTYuAdjYu*Sqr(g1)*Sqr(
+      g2) + 0.20990926621801967*traceYuAdjYumu2*Sqr(g1)*Sqr(g2) +
+      0.7488606967035673*MassG*traceTYdAdjYuYuAdjYd*Sqr(g3) -
+      0.7488606967035673*traceYdAdjYuYuAdjYdmd2*Sqr(g3) - 0.7488606967035673*
+      traceYuAdjYdYdAdjYumu2*Sqr(g3) - 4.493164180221403*traceYuAdjYuYuAdjYumu2
+      *Sqr(g3) + 0.192716307513462*traceTYuAdjTYu*Sqr(g1)*Sqr(g3) -
+      0.192716307513462*MassB*traceTYuAdjYu*Sqr(g1)*Sqr(g3) - 0.192716307513462
+      *MassG*traceTYuAdjYu*Sqr(g1)*Sqr(g3) + 0.192716307513462*traceYuAdjYumu2*
+      Sqr(g1)*Sqr(g3) + 0.9132487567773682*traceTYuAdjTYu*Sqr(g2)*Sqr(g3) -
+      0.9132487567773682*MassG*traceTYuAdjYu*Sqr(g2)*Sqr(g3) -
+      0.9132487567773682*MassWB*traceTYuAdjYu*Sqr(g2)*Sqr(g3) +
+      0.9132487567773682*traceYuAdjYumu2*Sqr(g2)*Sqr(g3)));
 
    beta_mHu2 = beta_mHu2_1 + beta_mHu2_2 + beta_mHu2_3;
 
@@ -413,6 +464,25 @@ double MSSMatMGUT_soft_parameters::calc_beta_mHu2_3_loop(const Soft_traces& soft
  * @return 4-loop beta function
  */
 double MSSMatMGUT_soft_parameters::calc_beta_mHu2_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_mHu2;
+
+   beta_mHu2 = 0;
+
+
+   return beta_mHu2;
+}
+
+/**
+ * Calculates the 5-loop beta function of mHu2.
+ *
+ * @return 5-loop beta function
+ */
+double MSSMatMGUT_soft_parameters::calc_beta_mHu2_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

@@ -7,7 +7,12 @@ MODlowMSSM_DEP := $(patsubst %,model_specific/%,$(MODlowMSSM_MOD))
 MODlowMSSM_INC := $(patsubst %,-Imodel_specific/%,$(MODlowMSSM_MOD))
 MODlowMSSM_LIB := $(foreach M,$(MODlowMSSM_MOD),model_specific/$M/libmodel_specific_$M$(MODULE_LIBEXT))
 
+MODlowMSSM_SUBMOD  := $(DIR)/cxx_qft
+MODlowMSSM_SUBMOD_INC := $(patsubst %,-I%,$(MODlowMSSM_SUBMOD))
+
 lowMSSM_INSTALL_DIR := $(INSTALL_DIR)/$(DIR)
+lowMSSM_INSTALL_CXXQFT_DIR := \
+		$(lowMSSM_INSTALL_DIR)/cxx_qft
 
 lowMSSM_MK     := \
 		$(DIR)/module.mk
@@ -68,7 +73,6 @@ LLlowMSSM_MMA  := \
 		$(DIR)/run_lowMSSM.m
 
 LIBlowMSSM_HDR := \
-		$(DIR)/lowMSSM_cxx_diagrams.hpp \
 		$(DIR)/lowMSSM_a_muon.hpp \
 		$(DIR)/lowMSSM_convergence_tester.hpp \
 		$(DIR)/lowMSSM_edm.hpp \
@@ -93,6 +97,13 @@ LIBlowMSSM_HDR := \
 		$(DIR)/lowMSSM_susy_scale_constraint.hpp \
 		$(DIR)/lowMSSM_utilities.hpp \
 		$(DIR)/lowMSSM_weinberg_angle.hpp
+
+LIBlowMSSM_CXXQFT_HDR := \
+		$(DIR)/cxx_qft/lowMSSM_qft.hpp \
+		$(DIR)/cxx_qft/lowMSSM_fields.hpp \
+		$(DIR)/cxx_qft/lowMSSM_vertices.hpp \
+		$(DIR)/cxx_qft/lowMSSM_context_base.hpp \
+		$(DIR)/cxx_qft/lowMSSM_npointfunctions.hpp
 
 ifneq ($(findstring two_scale,$(SOLVERS)),)
 -include $(DIR)/two_scale.mk
@@ -182,8 +193,10 @@ all-$(MODNAME): $(LIBlowMSSM) $(EXElowMSSM_EXE)
 ifneq ($(INSTALL_DIR),)
 install-src::
 		install -d $(lowMSSM_INSTALL_DIR)
+		install -d $(lowMSSM_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(LIBlowMSSM_SRC) $(lowMSSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LIBlowMSSM_HDR) $(lowMSSM_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(LIBlowMSSM_CXXQFT_HDR) $(lowMSSM_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(EXElowMSSM_SRC) $(lowMSSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLlowMSSM_SRC) $(lowMSSM_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLlowMSSM_MMA) $(lowMSSM_INSTALL_DIR)
@@ -214,6 +227,7 @@ clean-$(MODNAME)-obj:
 clean-$(MODNAME)-src:
 		-rm -f $(LIBlowMSSM_SRC)
 		-rm -f $(LIBlowMSSM_HDR)
+		-rm -f $(LIBlowMSSM_CXXQFT_HDR)
 		-rm -f $(EXElowMSSM_SRC)
 		-rm -f $(LLlowMSSM_SRC)
 		-rm -f $(LLlowMSSM_MMA)
@@ -242,14 +256,14 @@ distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
 		tar -czf $(lowMSSM_TARBALL) \
-		$(LIBlowMSSM_SRC) $(LIBlowMSSM_HDR) \
+		$(LIBlowMSSM_SRC) $(LIBlowMSSM_HDR) $(LIBlowMSSM_CXXQFT_HDR) \
 		$(EXElowMSSM_SRC) \
 		$(LLlowMSSM_SRC) $(LLlowMSSM_MMA) \
 		$(lowMSSM_MK) $(lowMSSM_INCLUDE_MK) \
 		$(lowMSSM_SLHA_INPUT) $(lowMSSM_REFERENCES) \
 		$(lowMSSM_GNUPLOT)
 
-$(LIBlowMSSM_SRC) $(LIBlowMSSM_HDR) $(EXElowMSSM_SRC) $(LLlowMSSM_SRC) $(LLlowMSSM_MMA) \
+$(LIBlowMSSM_SRC) $(LIBlowMSSM_HDR) $(LIBlowMSSM_CXXQFT_HDR) $(EXElowMSSM_SRC) $(LLlowMSSM_SRC) $(LLlowMSSM_MMA) \
 : run-metacode-$(MODNAME)
 		@true
 
@@ -270,7 +284,7 @@ $(METACODE_STAMP_lowMSSM):
 endif
 
 $(LIBlowMSSM_DEP) $(EXElowMSSM_DEP) $(LLlowMSSM_DEP) $(LIBlowMSSM_OBJ) $(EXElowMSSM_OBJ) $(LLlowMSSM_OBJ) $(LLlowMSSM_LIB): \
-	CPPFLAGS += $(MODlowMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODlowMSSM_SUBMOD_INC) $(MODlowMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBlowMSSM_DEP) $(EXElowMSSM_DEP) $(LLlowMSSM_DEP) $(LIBlowMSSM_OBJ) $(EXElowMSSM_OBJ) $(LLlowMSSM_OBJ) $(LLlowMSSM_LIB): \

@@ -16,11 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:10:38
+// File generated at Tue 22 Jan 2019 16:38:18
 
 #include "SM_susy_parameters.hpp"
 #include "config.h"
+#ifdef ENABLE_THREADS
 #include "global_thread_pool.hpp"
+#endif
 #include "wrappers.hpp"
 #include "functors.hpp"
 
@@ -137,6 +139,10 @@ SM_susy_parameters SM_susy_parameters::calc_beta(int loops) const
                beta_Lambdax += calc_beta_Lambdax_4_loop(TRACE_STRUCT);
                beta_Yu += calc_beta_Yu_4_loop(TRACE_STRUCT);
 
+               if (loops > 4) {
+                  beta_g3 += calc_beta_g3_5_loop(TRACE_STRUCT);
+
+               }
             }
          }
       }

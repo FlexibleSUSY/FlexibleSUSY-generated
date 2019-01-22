@@ -16,11 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 13:46:19
+// File generated at Tue 22 Jan 2019 14:18:53
 
 #include "CE6SSM_susy_parameters.hpp"
 #include "config.h"
+#ifdef ENABLE_THREADS
 #include "global_thread_pool.hpp"
+#endif
 #include "wrappers.hpp"
 #include "functors.hpp"
 
@@ -130,6 +132,9 @@ CE6SSM_susy_parameters CE6SSM_susy_parameters::calc_beta(int loops) const
 
             if (loops > 3) {
 
+               if (loops > 4) {
+
+               }
             }
          }
       }

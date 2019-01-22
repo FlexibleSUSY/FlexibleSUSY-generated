@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:23:41
+// File generated at Tue 22 Jan 2019 17:29:32
 
 #include "UMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -102,14 +102,15 @@ double UMSSM_soft_parameters::calc_beta_MassWB_2_loop(const Soft_traces& soft_tr
 
    double beta_MassWB;
 
-   beta_MassWB = Re(0.4*twoLoop*Sqr(g2)*(9*(MassB + MassWB)*Sqr(g1) + 10*(3*
-      traceAdjYdTYd + traceAdjYeTYe + 3*traceAdjYuTYu + traceAdjYvTYv - 3*
-      MassWB*traceYdAdjYd - MassWB*traceYeAdjYe - 3*MassWB*traceYuAdjYu -
-      MassWB*traceYvAdjYv + 25*MassWB*Sqr(g2) + 12*(MassG + MassWB)*Sqr(g3) +
-      MassU*Sqr(gp)*Sqr(QHd) + MassWB*Sqr(gp)*Sqr(QHd) + MassU*Sqr(gp)*Sqr(QHu)
-      + MassWB*Sqr(gp)*Sqr(QHu) + 3*MassU*Sqr(gp)*Sqr(Ql) + 3*MassWB*Sqr(gp)*
-      Sqr(Ql) + 9*MassU*Sqr(gp)*Sqr(Qq) + 9*MassWB*Sqr(gp)*Sqr(Qq)) - 10*Conj(
-      Lambdax)*(MassWB*Lambdax - TLambdax)));
+   beta_MassWB = Re(0.4*twoLoop*Sqr(g2)*(30*traceAdjYdTYd + 10*traceAdjYeTYe +
+      30*traceAdjYuTYu + 10*traceAdjYvTYv - 30*MassWB*traceYdAdjYd - 10*MassWB*
+      traceYeAdjYe - 30*MassWB*traceYuAdjYu - 10*MassWB*traceYvAdjYv - 10*
+      MassWB*AbsSqr(Lambdax) + 9*MassB*Sqr(g1) + 9*MassWB*Sqr(g1) + 250*MassWB*
+      Sqr(g2) + 120*MassG*Sqr(g3) + 120*MassWB*Sqr(g3) + 10*MassU*Sqr(gp)*Sqr(
+      QHd) + 10*MassWB*Sqr(gp)*Sqr(QHd) + 10*MassU*Sqr(gp)*Sqr(QHu) + 10*MassWB
+      *Sqr(gp)*Sqr(QHu) + 30*MassU*Sqr(gp)*Sqr(Ql) + 30*MassWB*Sqr(gp)*Sqr(Ql)
+      + 90*MassU*Sqr(gp)*Sqr(Qq) + 90*MassWB*Sqr(gp)*Sqr(Qq) + 10*Conj(Lambdax)
+      *TLambdax));
 
 
    return beta_MassWB;
@@ -140,6 +141,25 @@ double UMSSM_soft_parameters::calc_beta_MassWB_3_loop(const Soft_traces& soft_tr
  * @return 4-loop beta function
  */
 double UMSSM_soft_parameters::calc_beta_MassWB_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   double beta_MassWB;
+
+   beta_MassWB = 0;
+
+
+   return beta_MassWB;
+}
+
+/**
+ * Calculates the 5-loop beta function of MassWB.
+ *
+ * @return 5-loop beta function
+ */
+double UMSSM_soft_parameters::calc_beta_MassWB_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 13:59:49
+// File generated at Tue 22 Jan 2019 13:51:53
 
 #include "CNMSSM_semi_analytic_spectrum_generator.hpp"
 #include "CNMSSM_input_parameters.hpp"

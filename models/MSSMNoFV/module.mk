@@ -7,7 +7,12 @@ MODMSSMNoFV_DEP := $(patsubst %,model_specific/%,$(MODMSSMNoFV_MOD))
 MODMSSMNoFV_INC := $(patsubst %,-Imodel_specific/%,$(MODMSSMNoFV_MOD))
 MODMSSMNoFV_LIB := $(foreach M,$(MODMSSMNoFV_MOD),model_specific/$M/libmodel_specific_$M$(MODULE_LIBEXT))
 
+MODMSSMNoFV_SUBMOD  := $(DIR)/cxx_qft
+MODMSSMNoFV_SUBMOD_INC := $(patsubst %,-I%,$(MODMSSMNoFV_SUBMOD))
+
 MSSMNoFV_INSTALL_DIR := $(INSTALL_DIR)/$(DIR)
+MSSMNoFV_INSTALL_CXXQFT_DIR := \
+		$(MSSMNoFV_INSTALL_DIR)/cxx_qft
 
 MSSMNoFV_MK     := \
 		$(DIR)/module.mk
@@ -68,7 +73,6 @@ LLMSSMNoFV_MMA  := \
 		$(DIR)/run_MSSMNoFV.m
 
 LIBMSSMNoFV_HDR := \
-		$(DIR)/MSSMNoFV_cxx_diagrams.hpp \
 		$(DIR)/MSSMNoFV_a_muon.hpp \
 		$(DIR)/MSSMNoFV_convergence_tester.hpp \
 		$(DIR)/MSSMNoFV_edm.hpp \
@@ -93,6 +97,13 @@ LIBMSSMNoFV_HDR := \
 		$(DIR)/MSSMNoFV_susy_scale_constraint.hpp \
 		$(DIR)/MSSMNoFV_utilities.hpp \
 		$(DIR)/MSSMNoFV_weinberg_angle.hpp
+
+LIBMSSMNoFV_CXXQFT_HDR := \
+		$(DIR)/cxx_qft/MSSMNoFV_qft.hpp \
+		$(DIR)/cxx_qft/MSSMNoFV_fields.hpp \
+		$(DIR)/cxx_qft/MSSMNoFV_vertices.hpp \
+		$(DIR)/cxx_qft/MSSMNoFV_context_base.hpp \
+		$(DIR)/cxx_qft/MSSMNoFV_npointfunctions.hpp
 
 ifneq ($(findstring two_scale,$(SOLVERS)),)
 -include $(DIR)/two_scale.mk
@@ -182,8 +193,10 @@ all-$(MODNAME): $(LIBMSSMNoFV) $(EXEMSSMNoFV_EXE)
 ifneq ($(INSTALL_DIR),)
 install-src::
 		install -d $(MSSMNoFV_INSTALL_DIR)
+		install -d $(MSSMNoFV_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(LIBMSSMNoFV_SRC) $(MSSMNoFV_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LIBMSSMNoFV_HDR) $(MSSMNoFV_INSTALL_DIR)
+		install -m u=rw,g=r,o=r $(LIBMSSMNoFV_CXXQFT_HDR) $(MSSMNoFV_INSTALL_CXXQFT_DIR)
 		install -m u=rw,g=r,o=r $(EXEMSSMNoFV_SRC) $(MSSMNoFV_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLMSSMNoFV_SRC) $(MSSMNoFV_INSTALL_DIR)
 		install -m u=rw,g=r,o=r $(LLMSSMNoFV_MMA) $(MSSMNoFV_INSTALL_DIR)
@@ -214,6 +227,7 @@ clean-$(MODNAME)-obj:
 clean-$(MODNAME)-src:
 		-rm -f $(LIBMSSMNoFV_SRC)
 		-rm -f $(LIBMSSMNoFV_HDR)
+		-rm -f $(LIBMSSMNoFV_CXXQFT_HDR)
 		-rm -f $(EXEMSSMNoFV_SRC)
 		-rm -f $(LLMSSMNoFV_SRC)
 		-rm -f $(LLMSSMNoFV_MMA)
@@ -242,14 +256,14 @@ distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
 		tar -czf $(MSSMNoFV_TARBALL) \
-		$(LIBMSSMNoFV_SRC) $(LIBMSSMNoFV_HDR) \
+		$(LIBMSSMNoFV_SRC) $(LIBMSSMNoFV_HDR) $(LIBMSSMNoFV_CXXQFT_HDR) \
 		$(EXEMSSMNoFV_SRC) \
 		$(LLMSSMNoFV_SRC) $(LLMSSMNoFV_MMA) \
 		$(MSSMNoFV_MK) $(MSSMNoFV_INCLUDE_MK) \
 		$(MSSMNoFV_SLHA_INPUT) $(MSSMNoFV_REFERENCES) \
 		$(MSSMNoFV_GNUPLOT)
 
-$(LIBMSSMNoFV_SRC) $(LIBMSSMNoFV_HDR) $(EXEMSSMNoFV_SRC) $(LLMSSMNoFV_SRC) $(LLMSSMNoFV_MMA) \
+$(LIBMSSMNoFV_SRC) $(LIBMSSMNoFV_HDR) $(LIBMSSMNoFV_CXXQFT_HDR) $(EXEMSSMNoFV_SRC) $(LLMSSMNoFV_SRC) $(LLMSSMNoFV_MMA) \
 : run-metacode-$(MODNAME)
 		@true
 
@@ -270,7 +284,7 @@ $(METACODE_STAMP_MSSMNoFV):
 endif
 
 $(LIBMSSMNoFV_DEP) $(EXEMSSMNoFV_DEP) $(LLMSSMNoFV_DEP) $(LIBMSSMNoFV_OBJ) $(EXEMSSMNoFV_OBJ) $(LLMSSMNoFV_OBJ) $(LLMSSMNoFV_LIB): \
-	CPPFLAGS += $(MODMSSMNoFV_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODMSSMNoFV_SUBMOD_INC) $(MODMSSMNoFV_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBMSSMNoFV_DEP) $(EXEMSSMNoFV_DEP) $(LLMSSMNoFV_DEP) $(LIBMSSMNoFV_OBJ) $(EXEMSSMNoFV_OBJ) $(LLMSSMNoFV_OBJ) $(LLMSSMNoFV_LIB): \

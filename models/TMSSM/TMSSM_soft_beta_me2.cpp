@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:13:10
+// File generated at Tue 22 Jan 2019 16:50:26
 
 #include "TMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -113,25 +113,25 @@ Eigen::Matrix<double,3,3> TMSSM_soft_parameters::calc_beta_me2_2_loop(const Soft
       tracemq2AdjYdYd + 60*mHd2*traceYdAdjYd + 20*mHd2*traceYeAdjYe + 30*mHd2*
       AbsSqr(Lambdax) + 15*mHu2*AbsSqr(Lambdax) + 15*mT2*AbsSqr(Lambdax) + 15*
       AbsSqr(TLambdax) + 6*mHd2*Sqr(g1) + 12*AbsSqr(MassB)*Sqr(g1) - 30*mHd2*
-      Sqr(g2) - 60*AbsSqr(MassWB)*Sqr(g2))*(Ye*Ye.adjoint()) + (2.4*MassB*Sqr(
-      g1) - 4*(3*traceAdjYdTYd + traceAdjYeTYe + 3*MassWB*Sqr(g2)) - 6*Conj(
-      Lambdax)*TLambdax)*(Ye*(TYe).adjoint()) + (2.4*Conj(MassB)*Sqr(g1) - 2*(6
-      *traceconjTYdTpYd + 2*traceconjTYeTpYe + 3*Conj(TLambdax)*Lambdax + 6*
-      Conj(MassWB)*Sqr(g2)))*(TYe*Ye.adjoint()) + (-6*AbsSqr(Lambdax) - 0.8*(3*
-      Sqr(g1) + 5*(3*traceYdAdjYd + traceYeAdjYe - 3*Sqr(g2))))*(TYe*(TYe).
-      adjoint()) + (-6*traceYdAdjYd - 2*traceYeAdjYe - 3*AbsSqr(Lambdax) - 1.2*
-      Sqr(g1) + 6*Sqr(g2))*(me2*Ye*Ye.adjoint()) + (-6*AbsSqr(Lambdax) - 0.8*(3
-      *Sqr(g1) + 5*(3*traceYdAdjYd + traceYeAdjYe - 3*Sqr(g2))))*(Ye*ml2*Ye.
-      adjoint()) + (-6*traceYdAdjYd - 2*traceYeAdjYe - 3*AbsSqr(Lambdax) - 1.2*
-      Sqr(g1) + 6*Sqr(g2))*(Ye*Ye.adjoint()*me2) - 8*mHd2*(Ye*Ye.adjoint()*Ye*
-      Ye.adjoint()) - 4*(Ye*Ye.adjoint()*TYe*(TYe).adjoint()) - 4*(Ye*(TYe).
-      adjoint()*TYe*Ye.adjoint()) - 4*(TYe*Ye.adjoint()*Ye*(TYe).adjoint()) - 4
-      *(TYe*(TYe).adjoint()*Ye*Ye.adjoint()) - 2*(me2*Ye*Ye.adjoint()*Ye*Ye.
-      adjoint()) - 4*(Ye*ml2*Ye.adjoint()*Ye*Ye.adjoint()) - 4*(Ye*Ye.adjoint()
-      *me2*Ye*Ye.adjoint()) - 4*(Ye*Ye.adjoint()*Ye*ml2*Ye.adjoint()) - 2*(Ye*
-      Ye.adjoint()*Ye*Ye.adjoint()*me2) + 0.32*g1*(15*g1*Tr2U111 +
-      19.364916731037084*Tr31 + 351*AbsSqr(MassB)*Cube(g1))*UNITMATRIX(3))).
-      real();
+      Sqr(g2) - 60*AbsSqr(MassWB)*Sqr(g2))*(Ye*Ye.adjoint()) + 0.4*(-30*
+      traceAdjYdTYd - 10*traceAdjYeTYe + 6*MassB*Sqr(g1) - 30*MassWB*Sqr(g2) -
+      15*Conj(Lambdax)*TLambdax)*(Ye*(TYe).adjoint()) - 0.4*(30*
+      traceconjTYdTpYd + 10*traceconjTYeTpYe + 15*Conj(TLambdax)*Lambdax - 6*
+      Conj(MassB)*Sqr(g1) + 30*Conj(MassWB)*Sqr(g2))*(TYe*Ye.adjoint()) - 0.4*(
+      30*traceYdAdjYd + 10*traceYeAdjYe + 15*AbsSqr(Lambdax) + 6*Sqr(g1) - 30*
+      Sqr(g2))*(TYe*(TYe).adjoint()) + 0.2*(-30*traceYdAdjYd - 10*traceYeAdjYe
+      - 15*AbsSqr(Lambdax) - 6*Sqr(g1) + 30*Sqr(g2))*(me2*Ye*Ye.adjoint()) -
+      0.4*(30*traceYdAdjYd + 10*traceYeAdjYe + 15*AbsSqr(Lambdax) + 6*Sqr(g1) -
+      30*Sqr(g2))*(Ye*ml2*Ye.adjoint()) + 0.2*(-30*traceYdAdjYd - 10*
+      traceYeAdjYe - 15*AbsSqr(Lambdax) - 6*Sqr(g1) + 30*Sqr(g2))*(Ye*Ye.
+      adjoint()*me2) - 8*mHd2*(Ye*Ye.adjoint()*Ye*Ye.adjoint()) - 4*(Ye*Ye.
+      adjoint()*TYe*(TYe).adjoint()) - 4*(Ye*(TYe).adjoint()*TYe*Ye.adjoint())
+      - 4*(TYe*Ye.adjoint()*Ye*(TYe).adjoint()) - 4*(TYe*(TYe).adjoint()*Ye*Ye.
+      adjoint()) - 2*(me2*Ye*Ye.adjoint()*Ye*Ye.adjoint()) - 4*(Ye*ml2*Ye.
+      adjoint()*Ye*Ye.adjoint()) - 4*(Ye*Ye.adjoint()*me2*Ye*Ye.adjoint()) - 4*
+      (Ye*Ye.adjoint()*Ye*ml2*Ye.adjoint()) - 2*(Ye*Ye.adjoint()*Ye*Ye.adjoint(
+      )*me2) + 0.32*g1*(15*g1*Tr2U111 + 19.364916731037084*Tr31 + 351*AbsSqr(
+      MassB)*Cube(g1))*UNITMATRIX(3))).real();
 
 
    return beta_me2;
@@ -162,6 +162,25 @@ Eigen::Matrix<double,3,3> TMSSM_soft_parameters::calc_beta_me2_3_loop(const Soft
  * @return 4-loop beta function
  */
 Eigen::Matrix<double,3,3> TMSSM_soft_parameters::calc_beta_me2_4_loop(const Soft_traces& soft_traces) const
+{
+   DEFINE_PROJECTOR(3,3,3,3)
+
+
+
+   Eigen::Matrix<double,3,3> beta_me2;
+
+   beta_me2 = ZEROMATRIX(3,3);
+
+
+   return beta_me2;
+}
+
+/**
+ * Calculates the 5-loop beta function of me2.
+ *
+ * @return 5-loop beta function
+ */
+Eigen::Matrix<double,3,3> TMSSM_soft_parameters::calc_beta_me2_5_loop(const Soft_traces& soft_traces) const
 {
    DEFINE_PROJECTOR(3,3,3,3)
 

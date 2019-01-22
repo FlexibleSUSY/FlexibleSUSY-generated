@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 26 Aug 2018 14:04:43
+// File generated at Tue 22 Jan 2019 14:38:13
 
 #include "NMSSMEFTHiggs_two_scale_spectrum_generator.hpp"
 #include "NMSSMEFTHiggs_two_scale_convergence_tester.hpp"
