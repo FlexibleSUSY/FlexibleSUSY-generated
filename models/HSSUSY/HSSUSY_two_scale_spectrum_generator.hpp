@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 16:37:57
+// File generated at Sun 4 Aug 2019 19:04:17
 
 #ifndef HSSUSY_TWO_SCALE_SPECTRUM_GENERATOR_H
 #define HSSUSY_TWO_SCALE_SPECTRUM_GENERATOR_H

@@ -23,12 +23,16 @@ NUTSMSSM_SUSY_BETAS_MK := \
 NUTSMSSM_SOFT_BETAS_MK := \
 		$(DIR)/soft_betas.mk
 
+NUTSMSSM_CXX_QFT_VERTICES_MK := \
+		$(DIR)/cxx_qft/vertices.mk
+
 NUTSMSSM_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
 NUTSMSSM_INCLUDE_MK := \
 		$(NUTSMSSM_SUSY_BETAS_MK) \
-		$(NUTSMSSM_SOFT_BETAS_MK)
+		$(NUTSMSSM_SOFT_BETAS_MK) \
+		$(NUTSMSSM_CXX_QFT_VERTICES_MK)
 
 NUTSMSSM_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.NUTSMSSM_generated \
@@ -47,6 +51,8 @@ NUTSMSSM_TARBALL := \
 LIBNUTSMSSM_SRC := \
 		$(DIR)/NUTSMSSM_a_muon.cpp \
 		$(DIR)/NUTSMSSM_edm.cpp \
+		$(DIR)/NUTSMSSM_FFV_form_factors.cpp \
+		$(DIR)/NUTSMSSM_l_to_lgamma.cpp \
 		$(DIR)/NUTSMSSM_effective_couplings.cpp \
 		$(DIR)/NUTSMSSM_info.cpp \
 		$(DIR)/NUTSMSSM_input_parameters.cpp \
@@ -76,6 +82,8 @@ LIBNUTSMSSM_HDR := \
 		$(DIR)/NUTSMSSM_a_muon.hpp \
 		$(DIR)/NUTSMSSM_convergence_tester.hpp \
 		$(DIR)/NUTSMSSM_edm.hpp \
+		$(DIR)/NUTSMSSM_FFV_form_factors.hpp \
+		$(DIR)/NUTSMSSM_l_to_lgamma.hpp \
 		$(DIR)/NUTSMSSM_effective_couplings.hpp \
 		$(DIR)/NUTSMSSM_ewsb_solver.hpp \
 		$(DIR)/NUTSMSSM_ewsb_solver_interface.hpp \
@@ -121,6 +129,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(NUTSMSSM_SUSY_BETAS_MK)
 -include $(NUTSMSSM_SOFT_BETAS_MK)
+-include $(NUTSMSSM_CXX_QFT_VERTICES_MK)
 -include $(NUTSMSSM_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
@@ -131,6 +140,8 @@ ifeq ($(findstring doc-,$(MAKECMDGOALS)),)
 $(NUTSMSSM_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(NUTSMSSM_SOFT_BETAS_MK): run-metacode-$(MODNAME)
+		@$(CONVERT_DOS_PATHS) $@
+$(NUTSMSSM_CXX_QFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(NUTSMSSM_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
@@ -192,56 +203,56 @@ all-$(MODNAME): $(LIBNUTSMSSM) $(EXENUTSMSSM_EXE)
 
 ifneq ($(INSTALL_DIR),)
 install-src::
-		install -d $(NUTSMSSM_INSTALL_DIR)
-		install -d $(NUTSMSSM_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(LIBNUTSMSSM_SRC) $(NUTSMSSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBNUTSMSSM_HDR) $(NUTSMSSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBNUTSMSSM_CXXQFT_HDR) $(NUTSMSSM_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(EXENUTSMSSM_SRC) $(NUTSMSSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLNUTSMSSM_SRC) $(NUTSMSSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLNUTSMSSM_MMA) $(NUTSMSSM_INSTALL_DIR)
-		$(INSTALL_STRIPPED) $(NUTSMSSM_MK) $(NUTSMSSM_INSTALL_DIR) -m u=rw,g=r,o=r
-		install -m u=rw,g=r,o=r $(NUTSMSSM_INCLUDE_MK) $(NUTSMSSM_INSTALL_DIR)
+		$(Q)install -d $(NUTSMSSM_INSTALL_DIR)
+		$(Q)install -d $(NUTSMSSM_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBNUTSMSSM_SRC) $(NUTSMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBNUTSMSSM_HDR) $(NUTSMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBNUTSMSSM_CXXQFT_HDR) $(NUTSMSSM_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(EXENUTSMSSM_SRC) $(NUTSMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLNUTSMSSM_SRC) $(NUTSMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLNUTSMSSM_MMA) $(NUTSMSSM_INSTALL_DIR)
+		$(Q)$(INSTALL_STRIPPED) $(NUTSMSSM_MK) $(NUTSMSSM_INSTALL_DIR) -m u=rw,g=r,o=r
+		$(Q)install -m u=rw,g=r,o=r $(NUTSMSSM_INCLUDE_MK) $(NUTSMSSM_INSTALL_DIR)
 ifneq ($(NUTSMSSM_SLHA_INPUT),)
-		install -m u=rw,g=r,o=r $(NUTSMSSM_SLHA_INPUT) $(NUTSMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(NUTSMSSM_SLHA_INPUT) $(NUTSMSSM_INSTALL_DIR)
 endif
-		install -m u=rw,g=r,o=r $(NUTSMSSM_REFERENCES) $(NUTSMSSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(NUTSMSSM_GNUPLOT) $(NUTSMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(NUTSMSSM_REFERENCES) $(NUTSMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(NUTSMSSM_GNUPLOT) $(NUTSMSSM_INSTALL_DIR)
 endif
 
 clean-$(MODNAME)-dep:
-		-rm -f $(LIBNUTSMSSM_DEP)
-		-rm -f $(EXENUTSMSSM_DEP)
-		-rm -f $(LLNUTSMSSM_DEP)
+		$(Q)-rm -f $(LIBNUTSMSSM_DEP)
+		$(Q)-rm -f $(EXENUTSMSSM_DEP)
+		$(Q)-rm -f $(LLNUTSMSSM_DEP)
 
 clean-$(MODNAME)-lib:
-		-rm -f $(LIBNUTSMSSM)
-		-rm -f $(LLNUTSMSSM_LIB)
+		$(Q)-rm -f $(LIBNUTSMSSM)
+		$(Q)-rm -f $(LLNUTSMSSM_LIB)
 
 clean-$(MODNAME)-obj:
-		-rm -f $(LIBNUTSMSSM_OBJ)
-		-rm -f $(EXENUTSMSSM_OBJ)
-		-rm -f $(LLNUTSMSSM_OBJ)
+		$(Q)-rm -f $(LIBNUTSMSSM_OBJ)
+		$(Q)-rm -f $(EXENUTSMSSM_OBJ)
+		$(Q)-rm -f $(LLNUTSMSSM_OBJ)
 
 # BEGIN: NOT EXPORTED ##########################################
 clean-$(MODNAME)-src:
-		-rm -f $(LIBNUTSMSSM_SRC)
-		-rm -f $(LIBNUTSMSSM_HDR)
-		-rm -f $(LIBNUTSMSSM_CXXQFT_HDR)
-		-rm -f $(EXENUTSMSSM_SRC)
-		-rm -f $(LLNUTSMSSM_SRC)
-		-rm -f $(LLNUTSMSSM_MMA)
-		-rm -f $(METACODE_STAMP_NUTSMSSM)
-		-rm -f $(NUTSMSSM_INCLUDE_MK)
-		-rm -f $(NUTSMSSM_SLHA_INPUT)
-		-rm -f $(NUTSMSSM_REFERENCES)
-		-rm -f $(NUTSMSSM_GNUPLOT)
+		$(Q)-rm -f $(LIBNUTSMSSM_SRC)
+		$(Q)-rm -f $(LIBNUTSMSSM_HDR)
+		$(Q)-rm -f $(LIBNUTSMSSM_CXXQFT_HDR)
+		$(Q)-rm -f $(EXENUTSMSSM_SRC)
+		$(Q)-rm -f $(LLNUTSMSSM_SRC)
+		$(Q)-rm -f $(LLNUTSMSSM_MMA)
+		$(Q)-rm -f $(METACODE_STAMP_NUTSMSSM)
+		$(Q)-rm -f $(NUTSMSSM_INCLUDE_MK)
+		$(Q)-rm -f $(NUTSMSSM_SLHA_INPUT)
+		$(Q)-rm -f $(NUTSMSSM_REFERENCES)
+		$(Q)-rm -f $(NUTSMSSM_GNUPLOT)
 
 distclean-$(MODNAME): clean-$(MODNAME)-src
 # END:   NOT EXPORTED ##########################################
 
 clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-lib clean-$(MODNAME)-obj
-		-rm -f $(EXENUTSMSSM_EXE)
+		$(Q)-rm -f $(EXENUTSMSSM_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
 		@true
@@ -255,7 +266,7 @@ clean::         clean-$(MODNAME)
 distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
-		tar -czf $(NUTSMSSM_TARBALL) \
+		$(Q)tar -czf $(NUTSMSSM_TARBALL) \
 		$(LIBNUTSMSSM_SRC) $(LIBNUTSMSSM_HDR) $(LIBNUTSMSSM_CXXQFT_HDR) \
 		$(EXENUTSMSSM_SRC) \
 		$(LLNUTSMSSM_SRC) $(LLNUTSMSSM_MMA) \
@@ -272,7 +283,8 @@ run-metacode-$(MODNAME): $(METACODE_STAMP_NUTSMSSM)
 
 ifeq ($(ENABLE_META),yes)
 $(METACODE_STAMP_NUTSMSSM): $(DIR)/start.m $(DIR)/FlexibleSUSY.m $(META_SRC) $(TEMPLATES) $(SARAH_MODEL_FILES_NUTSMSSM)
-		"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
+		@$(MSG)
+		$(Q)"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
 		@touch "$(METACODE_STAMP_NUTSMSSM)"
 		@echo "Note: to regenerate NUTSMSSM source files," \
 		      "please remove the file "
@@ -295,13 +307,16 @@ $(LLNUTSMSSM_OBJ) $(LLNUTSMSSM_LIB): \
 	CPPFLAGS += $(LLFLAGS)
 
 $(LIBNUTSMSSM): $(LIBNUTSMSSM_OBJ)
-		$(MODULE_MAKE_LIB_CMD) $@ $^
+		@$(MSG)
+		$(Q)$(MODULE_MAKE_LIB_CMD) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBNUTSMSSM) $(MODNUTSMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+		@$(MSG)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
 $(LLNUTSMSSM_LIB): $(LLNUTSMSSM_OBJ) $(LIBNUTSMSSM) $(MODNUTSMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
+		@$(MSG)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
 
 ALLDEP += $(LIBNUTSMSSM_DEP) $(EXENUTSMSSM_DEP)
 ALLSRC += $(LIBNUTSMSSM_SRC) $(EXENUTSMSSM_SRC)

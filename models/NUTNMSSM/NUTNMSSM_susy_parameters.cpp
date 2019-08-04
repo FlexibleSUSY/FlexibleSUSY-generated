@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 17:32:17
+// File generated at Sun 4 Aug 2019 19:46:20
 
 #include "NUTNMSSM_susy_parameters.hpp"
 #include "config.h"

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 18:00:06
+// File generated at Sun 4 Aug 2019 20:05:50
 
 #include "CMSSMSemiAnalytic_semi_analytic_low_scale_constraint.hpp"
 #include "CMSSMSemiAnalytic_semi_analytic_model.hpp"
@@ -253,7 +253,7 @@ double CMSSMSemiAnalytic_low_scale_constraint<Semi_analytic>::calculate_theta_w(
 
       MODEL->get_problems().unflag_no_sinThetaW_convergence();
    } catch (const Error& e) {
-      VERBOSE_MSG(e.what());
+      VERBOSE_MSG(e.what_detailed());
       MODEL->get_problems().flag_no_sinThetaW_convergence();
    }
 

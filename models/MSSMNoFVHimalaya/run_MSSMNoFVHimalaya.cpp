@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 13:27:31
+// File generated at Sun 4 Aug 2019 17:12:26
 
 #include "config.h"
 
@@ -68,7 +68,7 @@ int run_solver(flexiblesusy::MSSMNoFVHimalaya_slha_io& slha_io,
       slha_io.fill(input);
       slha_io.fill(physical_input);
    } catch (const Error& error) {
-      ERROR(error.what());
+      ERROR(error.what_detailed());
       return EXIT_FAILURE;
    }
 
@@ -202,7 +202,7 @@ int main(int argc, char* argv[])
       slha_io.read_from_source(slha_input_source);
       slha_io.fill(spectrum_generator_settings);
    } catch (const Error& error) {
-      ERROR(error.what());
+      ERROR(error.what_detailed());
       return EXIT_FAILURE;
    }
 

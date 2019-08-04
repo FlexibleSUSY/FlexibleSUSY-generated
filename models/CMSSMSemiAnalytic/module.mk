@@ -23,12 +23,16 @@ CMSSMSemiAnalytic_SUSY_BETAS_MK := \
 CMSSMSemiAnalytic_SOFT_BETAS_MK := \
 		$(DIR)/soft_betas.mk
 
+CMSSMSemiAnalytic_CXX_QFT_VERTICES_MK := \
+		$(DIR)/cxx_qft/vertices.mk
+
 CMSSMSemiAnalytic_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
 CMSSMSemiAnalytic_INCLUDE_MK := \
 		$(CMSSMSemiAnalytic_SUSY_BETAS_MK) \
-		$(CMSSMSemiAnalytic_SOFT_BETAS_MK)
+		$(CMSSMSemiAnalytic_SOFT_BETAS_MK) \
+		$(CMSSMSemiAnalytic_CXX_QFT_VERTICES_MK)
 
 CMSSMSemiAnalytic_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.CMSSMSemiAnalytic_generated \
@@ -47,6 +51,8 @@ CMSSMSemiAnalytic_TARBALL := \
 LIBCMSSMSemiAnalytic_SRC := \
 		$(DIR)/CMSSMSemiAnalytic_a_muon.cpp \
 		$(DIR)/CMSSMSemiAnalytic_edm.cpp \
+		$(DIR)/CMSSMSemiAnalytic_FFV_form_factors.cpp \
+		$(DIR)/CMSSMSemiAnalytic_l_to_lgamma.cpp \
 		$(DIR)/CMSSMSemiAnalytic_effective_couplings.cpp \
 		$(DIR)/CMSSMSemiAnalytic_info.cpp \
 		$(DIR)/CMSSMSemiAnalytic_input_parameters.cpp \
@@ -76,6 +82,8 @@ LIBCMSSMSemiAnalytic_HDR := \
 		$(DIR)/CMSSMSemiAnalytic_a_muon.hpp \
 		$(DIR)/CMSSMSemiAnalytic_convergence_tester.hpp \
 		$(DIR)/CMSSMSemiAnalytic_edm.hpp \
+		$(DIR)/CMSSMSemiAnalytic_FFV_form_factors.hpp \
+		$(DIR)/CMSSMSemiAnalytic_l_to_lgamma.hpp \
 		$(DIR)/CMSSMSemiAnalytic_effective_couplings.hpp \
 		$(DIR)/CMSSMSemiAnalytic_ewsb_solver.hpp \
 		$(DIR)/CMSSMSemiAnalytic_ewsb_solver_interface.hpp \
@@ -121,6 +129,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(CMSSMSemiAnalytic_SUSY_BETAS_MK)
 -include $(CMSSMSemiAnalytic_SOFT_BETAS_MK)
+-include $(CMSSMSemiAnalytic_CXX_QFT_VERTICES_MK)
 -include $(CMSSMSemiAnalytic_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
@@ -131,6 +140,8 @@ ifeq ($(findstring doc-,$(MAKECMDGOALS)),)
 $(CMSSMSemiAnalytic_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(CMSSMSemiAnalytic_SOFT_BETAS_MK): run-metacode-$(MODNAME)
+		@$(CONVERT_DOS_PATHS) $@
+$(CMSSMSemiAnalytic_CXX_QFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(CMSSMSemiAnalytic_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
@@ -192,56 +203,56 @@ all-$(MODNAME): $(LIBCMSSMSemiAnalytic) $(EXECMSSMSemiAnalytic_EXE)
 
 ifneq ($(INSTALL_DIR),)
 install-src::
-		install -d $(CMSSMSemiAnalytic_INSTALL_DIR)
-		install -d $(CMSSMSemiAnalytic_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(LIBCMSSMSemiAnalytic_SRC) $(CMSSMSemiAnalytic_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBCMSSMSemiAnalytic_HDR) $(CMSSMSemiAnalytic_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBCMSSMSemiAnalytic_CXXQFT_HDR) $(CMSSMSemiAnalytic_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(EXECMSSMSemiAnalytic_SRC) $(CMSSMSemiAnalytic_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLCMSSMSemiAnalytic_SRC) $(CMSSMSemiAnalytic_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLCMSSMSemiAnalytic_MMA) $(CMSSMSemiAnalytic_INSTALL_DIR)
-		$(INSTALL_STRIPPED) $(CMSSMSemiAnalytic_MK) $(CMSSMSemiAnalytic_INSTALL_DIR) -m u=rw,g=r,o=r
-		install -m u=rw,g=r,o=r $(CMSSMSemiAnalytic_INCLUDE_MK) $(CMSSMSemiAnalytic_INSTALL_DIR)
+		$(Q)install -d $(CMSSMSemiAnalytic_INSTALL_DIR)
+		$(Q)install -d $(CMSSMSemiAnalytic_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBCMSSMSemiAnalytic_SRC) $(CMSSMSemiAnalytic_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBCMSSMSemiAnalytic_HDR) $(CMSSMSemiAnalytic_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBCMSSMSemiAnalytic_CXXQFT_HDR) $(CMSSMSemiAnalytic_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(EXECMSSMSemiAnalytic_SRC) $(CMSSMSemiAnalytic_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLCMSSMSemiAnalytic_SRC) $(CMSSMSemiAnalytic_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLCMSSMSemiAnalytic_MMA) $(CMSSMSemiAnalytic_INSTALL_DIR)
+		$(Q)$(INSTALL_STRIPPED) $(CMSSMSemiAnalytic_MK) $(CMSSMSemiAnalytic_INSTALL_DIR) -m u=rw,g=r,o=r
+		$(Q)install -m u=rw,g=r,o=r $(CMSSMSemiAnalytic_INCLUDE_MK) $(CMSSMSemiAnalytic_INSTALL_DIR)
 ifneq ($(CMSSMSemiAnalytic_SLHA_INPUT),)
-		install -m u=rw,g=r,o=r $(CMSSMSemiAnalytic_SLHA_INPUT) $(CMSSMSemiAnalytic_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(CMSSMSemiAnalytic_SLHA_INPUT) $(CMSSMSemiAnalytic_INSTALL_DIR)
 endif
-		install -m u=rw,g=r,o=r $(CMSSMSemiAnalytic_REFERENCES) $(CMSSMSemiAnalytic_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(CMSSMSemiAnalytic_GNUPLOT) $(CMSSMSemiAnalytic_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(CMSSMSemiAnalytic_REFERENCES) $(CMSSMSemiAnalytic_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(CMSSMSemiAnalytic_GNUPLOT) $(CMSSMSemiAnalytic_INSTALL_DIR)
 endif
 
 clean-$(MODNAME)-dep:
-		-rm -f $(LIBCMSSMSemiAnalytic_DEP)
-		-rm -f $(EXECMSSMSemiAnalytic_DEP)
-		-rm -f $(LLCMSSMSemiAnalytic_DEP)
+		$(Q)-rm -f $(LIBCMSSMSemiAnalytic_DEP)
+		$(Q)-rm -f $(EXECMSSMSemiAnalytic_DEP)
+		$(Q)-rm -f $(LLCMSSMSemiAnalytic_DEP)
 
 clean-$(MODNAME)-lib:
-		-rm -f $(LIBCMSSMSemiAnalytic)
-		-rm -f $(LLCMSSMSemiAnalytic_LIB)
+		$(Q)-rm -f $(LIBCMSSMSemiAnalytic)
+		$(Q)-rm -f $(LLCMSSMSemiAnalytic_LIB)
 
 clean-$(MODNAME)-obj:
-		-rm -f $(LIBCMSSMSemiAnalytic_OBJ)
-		-rm -f $(EXECMSSMSemiAnalytic_OBJ)
-		-rm -f $(LLCMSSMSemiAnalytic_OBJ)
+		$(Q)-rm -f $(LIBCMSSMSemiAnalytic_OBJ)
+		$(Q)-rm -f $(EXECMSSMSemiAnalytic_OBJ)
+		$(Q)-rm -f $(LLCMSSMSemiAnalytic_OBJ)
 
 # BEGIN: NOT EXPORTED ##########################################
 clean-$(MODNAME)-src:
-		-rm -f $(LIBCMSSMSemiAnalytic_SRC)
-		-rm -f $(LIBCMSSMSemiAnalytic_HDR)
-		-rm -f $(LIBCMSSMSemiAnalytic_CXXQFT_HDR)
-		-rm -f $(EXECMSSMSemiAnalytic_SRC)
-		-rm -f $(LLCMSSMSemiAnalytic_SRC)
-		-rm -f $(LLCMSSMSemiAnalytic_MMA)
-		-rm -f $(METACODE_STAMP_CMSSMSemiAnalytic)
-		-rm -f $(CMSSMSemiAnalytic_INCLUDE_MK)
-		-rm -f $(CMSSMSemiAnalytic_SLHA_INPUT)
-		-rm -f $(CMSSMSemiAnalytic_REFERENCES)
-		-rm -f $(CMSSMSemiAnalytic_GNUPLOT)
+		$(Q)-rm -f $(LIBCMSSMSemiAnalytic_SRC)
+		$(Q)-rm -f $(LIBCMSSMSemiAnalytic_HDR)
+		$(Q)-rm -f $(LIBCMSSMSemiAnalytic_CXXQFT_HDR)
+		$(Q)-rm -f $(EXECMSSMSemiAnalytic_SRC)
+		$(Q)-rm -f $(LLCMSSMSemiAnalytic_SRC)
+		$(Q)-rm -f $(LLCMSSMSemiAnalytic_MMA)
+		$(Q)-rm -f $(METACODE_STAMP_CMSSMSemiAnalytic)
+		$(Q)-rm -f $(CMSSMSemiAnalytic_INCLUDE_MK)
+		$(Q)-rm -f $(CMSSMSemiAnalytic_SLHA_INPUT)
+		$(Q)-rm -f $(CMSSMSemiAnalytic_REFERENCES)
+		$(Q)-rm -f $(CMSSMSemiAnalytic_GNUPLOT)
 
 distclean-$(MODNAME): clean-$(MODNAME)-src
 # END:   NOT EXPORTED ##########################################
 
 clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-lib clean-$(MODNAME)-obj
-		-rm -f $(EXECMSSMSemiAnalytic_EXE)
+		$(Q)-rm -f $(EXECMSSMSemiAnalytic_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
 		@true
@@ -255,7 +266,7 @@ clean::         clean-$(MODNAME)
 distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
-		tar -czf $(CMSSMSemiAnalytic_TARBALL) \
+		$(Q)tar -czf $(CMSSMSemiAnalytic_TARBALL) \
 		$(LIBCMSSMSemiAnalytic_SRC) $(LIBCMSSMSemiAnalytic_HDR) $(LIBCMSSMSemiAnalytic_CXXQFT_HDR) \
 		$(EXECMSSMSemiAnalytic_SRC) \
 		$(LLCMSSMSemiAnalytic_SRC) $(LLCMSSMSemiAnalytic_MMA) \
@@ -272,7 +283,8 @@ run-metacode-$(MODNAME): $(METACODE_STAMP_CMSSMSemiAnalytic)
 
 ifeq ($(ENABLE_META),yes)
 $(METACODE_STAMP_CMSSMSemiAnalytic): $(DIR)/start.m $(DIR)/FlexibleSUSY.m $(META_SRC) $(TEMPLATES) $(SARAH_MODEL_FILES_CMSSMSemiAnalytic)
-		"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
+		@$(MSG)
+		$(Q)"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
 		@touch "$(METACODE_STAMP_CMSSMSemiAnalytic)"
 		@echo "Note: to regenerate CMSSMSemiAnalytic source files," \
 		      "please remove the file "
@@ -295,13 +307,16 @@ $(LLCMSSMSemiAnalytic_OBJ) $(LLCMSSMSemiAnalytic_LIB): \
 	CPPFLAGS += $(LLFLAGS)
 
 $(LIBCMSSMSemiAnalytic): $(LIBCMSSMSemiAnalytic_OBJ)
-		$(MODULE_MAKE_LIB_CMD) $@ $^
+		@$(MSG)
+		$(Q)$(MODULE_MAKE_LIB_CMD) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBCMSSMSemiAnalytic) $(MODCMSSMSemiAnalytic_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+		@$(MSG)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
 $(LLCMSSMSemiAnalytic_LIB): $(LLCMSSMSemiAnalytic_OBJ) $(LIBCMSSMSemiAnalytic) $(MODCMSSMSemiAnalytic_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
+		@$(MSG)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
 
 ALLDEP += $(LIBCMSSMSemiAnalytic_DEP) $(EXECMSSMSemiAnalytic_DEP)
 ALLSRC += $(LIBCMSSMSemiAnalytic_SRC) $(EXECMSSMSemiAnalytic_SRC)

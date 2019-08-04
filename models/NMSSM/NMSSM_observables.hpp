@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 17:35:05
+// File generated at Sun 4 Aug 2019 19:51:45
 
 #ifndef NMSSM_OBSERVABLES_H
 #define NMSSM_OBSERVABLES_H

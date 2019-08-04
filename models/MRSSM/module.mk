@@ -23,12 +23,16 @@ MRSSM_SUSY_BETAS_MK := \
 MRSSM_SOFT_BETAS_MK := \
 		$(DIR)/soft_betas.mk
 
+MRSSM_CXX_QFT_VERTICES_MK := \
+		$(DIR)/cxx_qft/vertices.mk
+
 MRSSM_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
 MRSSM_INCLUDE_MK := \
 		$(MRSSM_SUSY_BETAS_MK) \
-		$(MRSSM_SOFT_BETAS_MK)
+		$(MRSSM_SOFT_BETAS_MK) \
+		$(MRSSM_CXX_QFT_VERTICES_MK)
 
 MRSSM_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.MRSSM_generated \
@@ -47,6 +51,8 @@ MRSSM_TARBALL := \
 LIBMRSSM_SRC := \
 		$(DIR)/MRSSM_a_muon.cpp \
 		$(DIR)/MRSSM_edm.cpp \
+		$(DIR)/MRSSM_FFV_form_factors.cpp \
+		$(DIR)/MRSSM_l_to_lgamma.cpp \
 		$(DIR)/MRSSM_effective_couplings.cpp \
 		$(DIR)/MRSSM_info.cpp \
 		$(DIR)/MRSSM_input_parameters.cpp \
@@ -76,6 +82,8 @@ LIBMRSSM_HDR := \
 		$(DIR)/MRSSM_a_muon.hpp \
 		$(DIR)/MRSSM_convergence_tester.hpp \
 		$(DIR)/MRSSM_edm.hpp \
+		$(DIR)/MRSSM_FFV_form_factors.hpp \
+		$(DIR)/MRSSM_l_to_lgamma.hpp \
 		$(DIR)/MRSSM_effective_couplings.hpp \
 		$(DIR)/MRSSM_ewsb_solver.hpp \
 		$(DIR)/MRSSM_ewsb_solver_interface.hpp \
@@ -121,6 +129,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(MRSSM_SUSY_BETAS_MK)
 -include $(MRSSM_SOFT_BETAS_MK)
+-include $(MRSSM_CXX_QFT_VERTICES_MK)
 -include $(MRSSM_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
@@ -131,6 +140,8 @@ ifeq ($(findstring doc-,$(MAKECMDGOALS)),)
 $(MRSSM_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(MRSSM_SOFT_BETAS_MK): run-metacode-$(MODNAME)
+		@$(CONVERT_DOS_PATHS) $@
+$(MRSSM_CXX_QFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(MRSSM_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
@@ -192,56 +203,56 @@ all-$(MODNAME): $(LIBMRSSM) $(EXEMRSSM_EXE)
 
 ifneq ($(INSTALL_DIR),)
 install-src::
-		install -d $(MRSSM_INSTALL_DIR)
-		install -d $(MRSSM_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(LIBMRSSM_SRC) $(MRSSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBMRSSM_HDR) $(MRSSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBMRSSM_CXXQFT_HDR) $(MRSSM_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(EXEMRSSM_SRC) $(MRSSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLMRSSM_SRC) $(MRSSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLMRSSM_MMA) $(MRSSM_INSTALL_DIR)
-		$(INSTALL_STRIPPED) $(MRSSM_MK) $(MRSSM_INSTALL_DIR) -m u=rw,g=r,o=r
-		install -m u=rw,g=r,o=r $(MRSSM_INCLUDE_MK) $(MRSSM_INSTALL_DIR)
+		$(Q)install -d $(MRSSM_INSTALL_DIR)
+		$(Q)install -d $(MRSSM_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBMRSSM_SRC) $(MRSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBMRSSM_HDR) $(MRSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBMRSSM_CXXQFT_HDR) $(MRSSM_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(EXEMRSSM_SRC) $(MRSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLMRSSM_SRC) $(MRSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLMRSSM_MMA) $(MRSSM_INSTALL_DIR)
+		$(Q)$(INSTALL_STRIPPED) $(MRSSM_MK) $(MRSSM_INSTALL_DIR) -m u=rw,g=r,o=r
+		$(Q)install -m u=rw,g=r,o=r $(MRSSM_INCLUDE_MK) $(MRSSM_INSTALL_DIR)
 ifneq ($(MRSSM_SLHA_INPUT),)
-		install -m u=rw,g=r,o=r $(MRSSM_SLHA_INPUT) $(MRSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(MRSSM_SLHA_INPUT) $(MRSSM_INSTALL_DIR)
 endif
-		install -m u=rw,g=r,o=r $(MRSSM_REFERENCES) $(MRSSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(MRSSM_GNUPLOT) $(MRSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(MRSSM_REFERENCES) $(MRSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(MRSSM_GNUPLOT) $(MRSSM_INSTALL_DIR)
 endif
 
 clean-$(MODNAME)-dep:
-		-rm -f $(LIBMRSSM_DEP)
-		-rm -f $(EXEMRSSM_DEP)
-		-rm -f $(LLMRSSM_DEP)
+		$(Q)-rm -f $(LIBMRSSM_DEP)
+		$(Q)-rm -f $(EXEMRSSM_DEP)
+		$(Q)-rm -f $(LLMRSSM_DEP)
 
 clean-$(MODNAME)-lib:
-		-rm -f $(LIBMRSSM)
-		-rm -f $(LLMRSSM_LIB)
+		$(Q)-rm -f $(LIBMRSSM)
+		$(Q)-rm -f $(LLMRSSM_LIB)
 
 clean-$(MODNAME)-obj:
-		-rm -f $(LIBMRSSM_OBJ)
-		-rm -f $(EXEMRSSM_OBJ)
-		-rm -f $(LLMRSSM_OBJ)
+		$(Q)-rm -f $(LIBMRSSM_OBJ)
+		$(Q)-rm -f $(EXEMRSSM_OBJ)
+		$(Q)-rm -f $(LLMRSSM_OBJ)
 
 # BEGIN: NOT EXPORTED ##########################################
 clean-$(MODNAME)-src:
-		-rm -f $(LIBMRSSM_SRC)
-		-rm -f $(LIBMRSSM_HDR)
-		-rm -f $(LIBMRSSM_CXXQFT_HDR)
-		-rm -f $(EXEMRSSM_SRC)
-		-rm -f $(LLMRSSM_SRC)
-		-rm -f $(LLMRSSM_MMA)
-		-rm -f $(METACODE_STAMP_MRSSM)
-		-rm -f $(MRSSM_INCLUDE_MK)
-		-rm -f $(MRSSM_SLHA_INPUT)
-		-rm -f $(MRSSM_REFERENCES)
-		-rm -f $(MRSSM_GNUPLOT)
+		$(Q)-rm -f $(LIBMRSSM_SRC)
+		$(Q)-rm -f $(LIBMRSSM_HDR)
+		$(Q)-rm -f $(LIBMRSSM_CXXQFT_HDR)
+		$(Q)-rm -f $(EXEMRSSM_SRC)
+		$(Q)-rm -f $(LLMRSSM_SRC)
+		$(Q)-rm -f $(LLMRSSM_MMA)
+		$(Q)-rm -f $(METACODE_STAMP_MRSSM)
+		$(Q)-rm -f $(MRSSM_INCLUDE_MK)
+		$(Q)-rm -f $(MRSSM_SLHA_INPUT)
+		$(Q)-rm -f $(MRSSM_REFERENCES)
+		$(Q)-rm -f $(MRSSM_GNUPLOT)
 
 distclean-$(MODNAME): clean-$(MODNAME)-src
 # END:   NOT EXPORTED ##########################################
 
 clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-lib clean-$(MODNAME)-obj
-		-rm -f $(EXEMRSSM_EXE)
+		$(Q)-rm -f $(EXEMRSSM_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
 		@true
@@ -255,7 +266,7 @@ clean::         clean-$(MODNAME)
 distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
-		tar -czf $(MRSSM_TARBALL) \
+		$(Q)tar -czf $(MRSSM_TARBALL) \
 		$(LIBMRSSM_SRC) $(LIBMRSSM_HDR) $(LIBMRSSM_CXXQFT_HDR) \
 		$(EXEMRSSM_SRC) \
 		$(LLMRSSM_SRC) $(LLMRSSM_MMA) \
@@ -272,7 +283,8 @@ run-metacode-$(MODNAME): $(METACODE_STAMP_MRSSM)
 
 ifeq ($(ENABLE_META),yes)
 $(METACODE_STAMP_MRSSM): $(DIR)/start.m $(DIR)/FlexibleSUSY.m $(META_SRC) $(TEMPLATES) $(SARAH_MODEL_FILES_MRSSM)
-		"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
+		@$(MSG)
+		$(Q)"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
 		@touch "$(METACODE_STAMP_MRSSM)"
 		@echo "Note: to regenerate MRSSM source files," \
 		      "please remove the file "
@@ -295,13 +307,16 @@ $(LLMRSSM_OBJ) $(LLMRSSM_LIB): \
 	CPPFLAGS += $(LLFLAGS)
 
 $(LIBMRSSM): $(LIBMRSSM_OBJ)
-		$(MODULE_MAKE_LIB_CMD) $@ $^
+		@$(MSG)
+		$(Q)$(MODULE_MAKE_LIB_CMD) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBMRSSM) $(MODMRSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+		@$(MSG)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
 $(LLMRSSM_LIB): $(LLMRSSM_OBJ) $(LIBMRSSM) $(MODMRSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
+		@$(MSG)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
 
 ALLDEP += $(LIBMRSSM_DEP) $(EXEMRSSM_DEP)
 ALLSRC += $(LIBMRSSM_SRC) $(EXEMRSSM_SRC)

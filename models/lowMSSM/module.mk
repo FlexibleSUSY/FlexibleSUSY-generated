@@ -23,12 +23,16 @@ lowMSSM_SUSY_BETAS_MK := \
 lowMSSM_SOFT_BETAS_MK := \
 		$(DIR)/soft_betas.mk
 
+lowMSSM_CXX_QFT_VERTICES_MK := \
+		$(DIR)/cxx_qft/vertices.mk
+
 lowMSSM_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
 lowMSSM_INCLUDE_MK := \
 		$(lowMSSM_SUSY_BETAS_MK) \
-		$(lowMSSM_SOFT_BETAS_MK)
+		$(lowMSSM_SOFT_BETAS_MK) \
+		$(lowMSSM_CXX_QFT_VERTICES_MK)
 
 lowMSSM_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.lowMSSM_generated \
@@ -47,6 +51,8 @@ lowMSSM_TARBALL := \
 LIBlowMSSM_SRC := \
 		$(DIR)/lowMSSM_a_muon.cpp \
 		$(DIR)/lowMSSM_edm.cpp \
+		$(DIR)/lowMSSM_FFV_form_factors.cpp \
+		$(DIR)/lowMSSM_l_to_lgamma.cpp \
 		$(DIR)/lowMSSM_effective_couplings.cpp \
 		$(DIR)/lowMSSM_info.cpp \
 		$(DIR)/lowMSSM_input_parameters.cpp \
@@ -76,6 +82,8 @@ LIBlowMSSM_HDR := \
 		$(DIR)/lowMSSM_a_muon.hpp \
 		$(DIR)/lowMSSM_convergence_tester.hpp \
 		$(DIR)/lowMSSM_edm.hpp \
+		$(DIR)/lowMSSM_FFV_form_factors.hpp \
+		$(DIR)/lowMSSM_l_to_lgamma.hpp \
 		$(DIR)/lowMSSM_effective_couplings.hpp \
 		$(DIR)/lowMSSM_ewsb_solver.hpp \
 		$(DIR)/lowMSSM_ewsb_solver_interface.hpp \
@@ -121,6 +129,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(lowMSSM_SUSY_BETAS_MK)
 -include $(lowMSSM_SOFT_BETAS_MK)
+-include $(lowMSSM_CXX_QFT_VERTICES_MK)
 -include $(lowMSSM_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
@@ -131,6 +140,8 @@ ifeq ($(findstring doc-,$(MAKECMDGOALS)),)
 $(lowMSSM_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(lowMSSM_SOFT_BETAS_MK): run-metacode-$(MODNAME)
+		@$(CONVERT_DOS_PATHS) $@
+$(lowMSSM_CXX_QFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(lowMSSM_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
@@ -192,56 +203,56 @@ all-$(MODNAME): $(LIBlowMSSM) $(EXElowMSSM_EXE)
 
 ifneq ($(INSTALL_DIR),)
 install-src::
-		install -d $(lowMSSM_INSTALL_DIR)
-		install -d $(lowMSSM_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(LIBlowMSSM_SRC) $(lowMSSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBlowMSSM_HDR) $(lowMSSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBlowMSSM_CXXQFT_HDR) $(lowMSSM_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(EXElowMSSM_SRC) $(lowMSSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLlowMSSM_SRC) $(lowMSSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLlowMSSM_MMA) $(lowMSSM_INSTALL_DIR)
-		$(INSTALL_STRIPPED) $(lowMSSM_MK) $(lowMSSM_INSTALL_DIR) -m u=rw,g=r,o=r
-		install -m u=rw,g=r,o=r $(lowMSSM_INCLUDE_MK) $(lowMSSM_INSTALL_DIR)
+		$(Q)install -d $(lowMSSM_INSTALL_DIR)
+		$(Q)install -d $(lowMSSM_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBlowMSSM_SRC) $(lowMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBlowMSSM_HDR) $(lowMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBlowMSSM_CXXQFT_HDR) $(lowMSSM_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(EXElowMSSM_SRC) $(lowMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLlowMSSM_SRC) $(lowMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLlowMSSM_MMA) $(lowMSSM_INSTALL_DIR)
+		$(Q)$(INSTALL_STRIPPED) $(lowMSSM_MK) $(lowMSSM_INSTALL_DIR) -m u=rw,g=r,o=r
+		$(Q)install -m u=rw,g=r,o=r $(lowMSSM_INCLUDE_MK) $(lowMSSM_INSTALL_DIR)
 ifneq ($(lowMSSM_SLHA_INPUT),)
-		install -m u=rw,g=r,o=r $(lowMSSM_SLHA_INPUT) $(lowMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(lowMSSM_SLHA_INPUT) $(lowMSSM_INSTALL_DIR)
 endif
-		install -m u=rw,g=r,o=r $(lowMSSM_REFERENCES) $(lowMSSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(lowMSSM_GNUPLOT) $(lowMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(lowMSSM_REFERENCES) $(lowMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(lowMSSM_GNUPLOT) $(lowMSSM_INSTALL_DIR)
 endif
 
 clean-$(MODNAME)-dep:
-		-rm -f $(LIBlowMSSM_DEP)
-		-rm -f $(EXElowMSSM_DEP)
-		-rm -f $(LLlowMSSM_DEP)
+		$(Q)-rm -f $(LIBlowMSSM_DEP)
+		$(Q)-rm -f $(EXElowMSSM_DEP)
+		$(Q)-rm -f $(LLlowMSSM_DEP)
 
 clean-$(MODNAME)-lib:
-		-rm -f $(LIBlowMSSM)
-		-rm -f $(LLlowMSSM_LIB)
+		$(Q)-rm -f $(LIBlowMSSM)
+		$(Q)-rm -f $(LLlowMSSM_LIB)
 
 clean-$(MODNAME)-obj:
-		-rm -f $(LIBlowMSSM_OBJ)
-		-rm -f $(EXElowMSSM_OBJ)
-		-rm -f $(LLlowMSSM_OBJ)
+		$(Q)-rm -f $(LIBlowMSSM_OBJ)
+		$(Q)-rm -f $(EXElowMSSM_OBJ)
+		$(Q)-rm -f $(LLlowMSSM_OBJ)
 
 # BEGIN: NOT EXPORTED ##########################################
 clean-$(MODNAME)-src:
-		-rm -f $(LIBlowMSSM_SRC)
-		-rm -f $(LIBlowMSSM_HDR)
-		-rm -f $(LIBlowMSSM_CXXQFT_HDR)
-		-rm -f $(EXElowMSSM_SRC)
-		-rm -f $(LLlowMSSM_SRC)
-		-rm -f $(LLlowMSSM_MMA)
-		-rm -f $(METACODE_STAMP_lowMSSM)
-		-rm -f $(lowMSSM_INCLUDE_MK)
-		-rm -f $(lowMSSM_SLHA_INPUT)
-		-rm -f $(lowMSSM_REFERENCES)
-		-rm -f $(lowMSSM_GNUPLOT)
+		$(Q)-rm -f $(LIBlowMSSM_SRC)
+		$(Q)-rm -f $(LIBlowMSSM_HDR)
+		$(Q)-rm -f $(LIBlowMSSM_CXXQFT_HDR)
+		$(Q)-rm -f $(EXElowMSSM_SRC)
+		$(Q)-rm -f $(LLlowMSSM_SRC)
+		$(Q)-rm -f $(LLlowMSSM_MMA)
+		$(Q)-rm -f $(METACODE_STAMP_lowMSSM)
+		$(Q)-rm -f $(lowMSSM_INCLUDE_MK)
+		$(Q)-rm -f $(lowMSSM_SLHA_INPUT)
+		$(Q)-rm -f $(lowMSSM_REFERENCES)
+		$(Q)-rm -f $(lowMSSM_GNUPLOT)
 
 distclean-$(MODNAME): clean-$(MODNAME)-src
 # END:   NOT EXPORTED ##########################################
 
 clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-lib clean-$(MODNAME)-obj
-		-rm -f $(EXElowMSSM_EXE)
+		$(Q)-rm -f $(EXElowMSSM_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
 		@true
@@ -255,7 +266,7 @@ clean::         clean-$(MODNAME)
 distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
-		tar -czf $(lowMSSM_TARBALL) \
+		$(Q)tar -czf $(lowMSSM_TARBALL) \
 		$(LIBlowMSSM_SRC) $(LIBlowMSSM_HDR) $(LIBlowMSSM_CXXQFT_HDR) \
 		$(EXElowMSSM_SRC) \
 		$(LLlowMSSM_SRC) $(LLlowMSSM_MMA) \
@@ -272,7 +283,8 @@ run-metacode-$(MODNAME): $(METACODE_STAMP_lowMSSM)
 
 ifeq ($(ENABLE_META),yes)
 $(METACODE_STAMP_lowMSSM): $(DIR)/start.m $(DIR)/FlexibleSUSY.m $(META_SRC) $(TEMPLATES) $(SARAH_MODEL_FILES_lowMSSM)
-		"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
+		@$(MSG)
+		$(Q)"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
 		@touch "$(METACODE_STAMP_lowMSSM)"
 		@echo "Note: to regenerate lowMSSM source files," \
 		      "please remove the file "
@@ -295,13 +307,16 @@ $(LLlowMSSM_OBJ) $(LLlowMSSM_LIB): \
 	CPPFLAGS += $(LLFLAGS)
 
 $(LIBlowMSSM): $(LIBlowMSSM_OBJ)
-		$(MODULE_MAKE_LIB_CMD) $@ $^
+		@$(MSG)
+		$(Q)$(MODULE_MAKE_LIB_CMD) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBlowMSSM) $(MODlowMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+		@$(MSG)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
 $(LLlowMSSM_LIB): $(LLlowMSSM_OBJ) $(LIBlowMSSM) $(MODlowMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
+		@$(MSG)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
 
 ALLDEP += $(LIBlowMSSM_DEP) $(EXElowMSSM_DEP)
 ALLSRC += $(LIBlowMSSM_SRC) $(EXElowMSSM_SRC)

@@ -23,12 +23,16 @@ THDMIIMSSMBC_SUSY_BETAS_MK := \
 THDMIIMSSMBC_SOFT_BETAS_MK := \
 		$(DIR)/soft_betas.mk
 
+THDMIIMSSMBC_CXX_QFT_VERTICES_MK := \
+		$(DIR)/cxx_qft/vertices.mk
+
 THDMIIMSSMBC_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
 THDMIIMSSMBC_INCLUDE_MK := \
 		$(THDMIIMSSMBC_SUSY_BETAS_MK) \
-		$(THDMIIMSSMBC_SOFT_BETAS_MK)
+		$(THDMIIMSSMBC_SOFT_BETAS_MK) \
+		$(THDMIIMSSMBC_CXX_QFT_VERTICES_MK)
 
 THDMIIMSSMBC_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.THDMIIMSSMBC_generated \
@@ -47,6 +51,8 @@ THDMIIMSSMBC_TARBALL := \
 LIBTHDMIIMSSMBC_SRC := \
 		$(DIR)/THDMIIMSSMBC_a_muon.cpp \
 		$(DIR)/THDMIIMSSMBC_edm.cpp \
+		$(DIR)/THDMIIMSSMBC_FFV_form_factors.cpp \
+		$(DIR)/THDMIIMSSMBC_l_to_lgamma.cpp \
 		$(DIR)/THDMIIMSSMBC_effective_couplings.cpp \
 		$(DIR)/THDMIIMSSMBC_info.cpp \
 		$(DIR)/THDMIIMSSMBC_input_parameters.cpp \
@@ -76,6 +82,8 @@ LIBTHDMIIMSSMBC_HDR := \
 		$(DIR)/THDMIIMSSMBC_a_muon.hpp \
 		$(DIR)/THDMIIMSSMBC_convergence_tester.hpp \
 		$(DIR)/THDMIIMSSMBC_edm.hpp \
+		$(DIR)/THDMIIMSSMBC_FFV_form_factors.hpp \
+		$(DIR)/THDMIIMSSMBC_l_to_lgamma.hpp \
 		$(DIR)/THDMIIMSSMBC_effective_couplings.hpp \
 		$(DIR)/THDMIIMSSMBC_ewsb_solver.hpp \
 		$(DIR)/THDMIIMSSMBC_ewsb_solver_interface.hpp \
@@ -121,6 +129,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(THDMIIMSSMBC_SUSY_BETAS_MK)
 -include $(THDMIIMSSMBC_SOFT_BETAS_MK)
+-include $(THDMIIMSSMBC_CXX_QFT_VERTICES_MK)
 -include $(THDMIIMSSMBC_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
@@ -131,6 +140,8 @@ ifeq ($(findstring doc-,$(MAKECMDGOALS)),)
 $(THDMIIMSSMBC_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(THDMIIMSSMBC_SOFT_BETAS_MK): run-metacode-$(MODNAME)
+		@$(CONVERT_DOS_PATHS) $@
+$(THDMIIMSSMBC_CXX_QFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(THDMIIMSSMBC_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
@@ -192,56 +203,56 @@ all-$(MODNAME): $(LIBTHDMIIMSSMBC) $(EXETHDMIIMSSMBC_EXE)
 
 ifneq ($(INSTALL_DIR),)
 install-src::
-		install -d $(THDMIIMSSMBC_INSTALL_DIR)
-		install -d $(THDMIIMSSMBC_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(LIBTHDMIIMSSMBC_SRC) $(THDMIIMSSMBC_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBTHDMIIMSSMBC_HDR) $(THDMIIMSSMBC_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBTHDMIIMSSMBC_CXXQFT_HDR) $(THDMIIMSSMBC_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(EXETHDMIIMSSMBC_SRC) $(THDMIIMSSMBC_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLTHDMIIMSSMBC_SRC) $(THDMIIMSSMBC_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLTHDMIIMSSMBC_MMA) $(THDMIIMSSMBC_INSTALL_DIR)
-		$(INSTALL_STRIPPED) $(THDMIIMSSMBC_MK) $(THDMIIMSSMBC_INSTALL_DIR) -m u=rw,g=r,o=r
-		install -m u=rw,g=r,o=r $(THDMIIMSSMBC_INCLUDE_MK) $(THDMIIMSSMBC_INSTALL_DIR)
+		$(Q)install -d $(THDMIIMSSMBC_INSTALL_DIR)
+		$(Q)install -d $(THDMIIMSSMBC_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBTHDMIIMSSMBC_SRC) $(THDMIIMSSMBC_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBTHDMIIMSSMBC_HDR) $(THDMIIMSSMBC_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBTHDMIIMSSMBC_CXXQFT_HDR) $(THDMIIMSSMBC_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(EXETHDMIIMSSMBC_SRC) $(THDMIIMSSMBC_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLTHDMIIMSSMBC_SRC) $(THDMIIMSSMBC_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLTHDMIIMSSMBC_MMA) $(THDMIIMSSMBC_INSTALL_DIR)
+		$(Q)$(INSTALL_STRIPPED) $(THDMIIMSSMBC_MK) $(THDMIIMSSMBC_INSTALL_DIR) -m u=rw,g=r,o=r
+		$(Q)install -m u=rw,g=r,o=r $(THDMIIMSSMBC_INCLUDE_MK) $(THDMIIMSSMBC_INSTALL_DIR)
 ifneq ($(THDMIIMSSMBC_SLHA_INPUT),)
-		install -m u=rw,g=r,o=r $(THDMIIMSSMBC_SLHA_INPUT) $(THDMIIMSSMBC_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(THDMIIMSSMBC_SLHA_INPUT) $(THDMIIMSSMBC_INSTALL_DIR)
 endif
-		install -m u=rw,g=r,o=r $(THDMIIMSSMBC_REFERENCES) $(THDMIIMSSMBC_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(THDMIIMSSMBC_GNUPLOT) $(THDMIIMSSMBC_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(THDMIIMSSMBC_REFERENCES) $(THDMIIMSSMBC_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(THDMIIMSSMBC_GNUPLOT) $(THDMIIMSSMBC_INSTALL_DIR)
 endif
 
 clean-$(MODNAME)-dep:
-		-rm -f $(LIBTHDMIIMSSMBC_DEP)
-		-rm -f $(EXETHDMIIMSSMBC_DEP)
-		-rm -f $(LLTHDMIIMSSMBC_DEP)
+		$(Q)-rm -f $(LIBTHDMIIMSSMBC_DEP)
+		$(Q)-rm -f $(EXETHDMIIMSSMBC_DEP)
+		$(Q)-rm -f $(LLTHDMIIMSSMBC_DEP)
 
 clean-$(MODNAME)-lib:
-		-rm -f $(LIBTHDMIIMSSMBC)
-		-rm -f $(LLTHDMIIMSSMBC_LIB)
+		$(Q)-rm -f $(LIBTHDMIIMSSMBC)
+		$(Q)-rm -f $(LLTHDMIIMSSMBC_LIB)
 
 clean-$(MODNAME)-obj:
-		-rm -f $(LIBTHDMIIMSSMBC_OBJ)
-		-rm -f $(EXETHDMIIMSSMBC_OBJ)
-		-rm -f $(LLTHDMIIMSSMBC_OBJ)
+		$(Q)-rm -f $(LIBTHDMIIMSSMBC_OBJ)
+		$(Q)-rm -f $(EXETHDMIIMSSMBC_OBJ)
+		$(Q)-rm -f $(LLTHDMIIMSSMBC_OBJ)
 
 # BEGIN: NOT EXPORTED ##########################################
 clean-$(MODNAME)-src:
-		-rm -f $(LIBTHDMIIMSSMBC_SRC)
-		-rm -f $(LIBTHDMIIMSSMBC_HDR)
-		-rm -f $(LIBTHDMIIMSSMBC_CXXQFT_HDR)
-		-rm -f $(EXETHDMIIMSSMBC_SRC)
-		-rm -f $(LLTHDMIIMSSMBC_SRC)
-		-rm -f $(LLTHDMIIMSSMBC_MMA)
-		-rm -f $(METACODE_STAMP_THDMIIMSSMBC)
-		-rm -f $(THDMIIMSSMBC_INCLUDE_MK)
-		-rm -f $(THDMIIMSSMBC_SLHA_INPUT)
-		-rm -f $(THDMIIMSSMBC_REFERENCES)
-		-rm -f $(THDMIIMSSMBC_GNUPLOT)
+		$(Q)-rm -f $(LIBTHDMIIMSSMBC_SRC)
+		$(Q)-rm -f $(LIBTHDMIIMSSMBC_HDR)
+		$(Q)-rm -f $(LIBTHDMIIMSSMBC_CXXQFT_HDR)
+		$(Q)-rm -f $(EXETHDMIIMSSMBC_SRC)
+		$(Q)-rm -f $(LLTHDMIIMSSMBC_SRC)
+		$(Q)-rm -f $(LLTHDMIIMSSMBC_MMA)
+		$(Q)-rm -f $(METACODE_STAMP_THDMIIMSSMBC)
+		$(Q)-rm -f $(THDMIIMSSMBC_INCLUDE_MK)
+		$(Q)-rm -f $(THDMIIMSSMBC_SLHA_INPUT)
+		$(Q)-rm -f $(THDMIIMSSMBC_REFERENCES)
+		$(Q)-rm -f $(THDMIIMSSMBC_GNUPLOT)
 
 distclean-$(MODNAME): clean-$(MODNAME)-src
 # END:   NOT EXPORTED ##########################################
 
 clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-lib clean-$(MODNAME)-obj
-		-rm -f $(EXETHDMIIMSSMBC_EXE)
+		$(Q)-rm -f $(EXETHDMIIMSSMBC_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
 		@true
@@ -255,7 +266,7 @@ clean::         clean-$(MODNAME)
 distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
-		tar -czf $(THDMIIMSSMBC_TARBALL) \
+		$(Q)tar -czf $(THDMIIMSSMBC_TARBALL) \
 		$(LIBTHDMIIMSSMBC_SRC) $(LIBTHDMIIMSSMBC_HDR) $(LIBTHDMIIMSSMBC_CXXQFT_HDR) \
 		$(EXETHDMIIMSSMBC_SRC) \
 		$(LLTHDMIIMSSMBC_SRC) $(LLTHDMIIMSSMBC_MMA) \
@@ -272,7 +283,8 @@ run-metacode-$(MODNAME): $(METACODE_STAMP_THDMIIMSSMBC)
 
 ifeq ($(ENABLE_META),yes)
 $(METACODE_STAMP_THDMIIMSSMBC): $(DIR)/start.m $(DIR)/FlexibleSUSY.m $(META_SRC) $(TEMPLATES) $(SARAH_MODEL_FILES_THDMIIMSSMBC)
-		"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
+		@$(MSG)
+		$(Q)"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
 		@touch "$(METACODE_STAMP_THDMIIMSSMBC)"
 		@echo "Note: to regenerate THDMIIMSSMBC source files," \
 		      "please remove the file "
@@ -295,13 +307,16 @@ $(LLTHDMIIMSSMBC_OBJ) $(LLTHDMIIMSSMBC_LIB): \
 	CPPFLAGS += $(LLFLAGS)
 
 $(LIBTHDMIIMSSMBC): $(LIBTHDMIIMSSMBC_OBJ)
-		$(MODULE_MAKE_LIB_CMD) $@ $^
+		@$(MSG)
+		$(Q)$(MODULE_MAKE_LIB_CMD) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBTHDMIIMSSMBC) $(MODTHDMIIMSSMBC_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+		@$(MSG)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
 $(LLTHDMIIMSSMBC_LIB): $(LLTHDMIIMSSMBC_OBJ) $(LIBTHDMIIMSSMBC) $(MODTHDMIIMSSMBC_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
+		@$(MSG)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
 
 ALLDEP += $(LIBTHDMIIMSSMBC_DEP) $(EXETHDMIIMSSMBC_DEP)
 ALLSRC += $(LIBTHDMIIMSSMBC_SRC) $(EXETHDMIIMSSMBC_SRC)

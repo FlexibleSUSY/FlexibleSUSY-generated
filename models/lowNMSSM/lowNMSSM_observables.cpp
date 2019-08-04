@@ -16,12 +16,14 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 17:16:29
+// File generated at Sun 4 Aug 2019 19:47:01
 
 #include "lowNMSSM_observables.hpp"
 #include "lowNMSSM_mass_eigenstates.hpp"
 #include "lowNMSSM_a_muon.hpp"
 #include "lowNMSSM_edm.hpp"
+#include "lowNMSSM_l_to_lgamma.hpp"
+//#include "lowNMSSM_f_to_f_conversion.hpp"
 #include "lowNMSSM_effective_couplings.hpp"
 #include "config.h"
 #include "eigen_utils.hpp"
@@ -41,6 +43,9 @@
 #define AMUGM2CALCUNCERTAINTY a_muon_gm2calc_uncertainty
 #define EDM0(p) edm_ ## p
 #define EDM1(p,idx) edm_ ## p ## _ ## idx
+#define LToLGamma0(pIn, pOut, spec) pIn ## _to_ ## pOut ## _ ## spec
+#define LToLGamma1(pIn,idxIn,pOut,idxOut,spec) pIn ## _to_ ## pOut ## _ ## spec
+#define FToFConversion1(pIn,idxIn,pOut,idxOut,nuclei) pIn ## _to_ ## pOut ## _in_ ## nuclei
 #define EFFCPHIGGSPHOTONPHOTON eff_cp_higgs_photon_photon
 #define EFFCPHIGGSGLUONGLUON eff_cp_higgs_gluon_gluon
 #define EFFCPPSEUDOSCALARPHOTONPHOTON eff_cp_pseudoscalar_photon_photon
@@ -102,7 +107,7 @@ lowNMSSM_observables calculate_observables(lowNMSSM_mass_eigenstates& model,
       try {
          model_at_scale.run_to(scale);
       } catch (const Error& e) {
-         model.get_problems().flag_thrown(e.what());
+         model.get_problems().flag_thrown(e.what_detailed());
          return lowNMSSM_observables();
       }
    }
@@ -120,7 +125,7 @@ lowNMSSM_observables calculate_observables(lowNMSSM_mass_eigenstates& model,
       
 
    } catch (const Error& e) {
-      model.get_problems().flag_thrown(e.what());
+      model.get_problems().flag_thrown(e.what_detailed());
    }
 
    return observables;

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 17:34:58
+// File generated at Sun 4 Aug 2019 19:51:36
 
 #include "NMSSM_two_scale_low_scale_constraint.hpp"
 #include "NMSSM_two_scale_model.hpp"
@@ -273,7 +273,7 @@ double NMSSM_low_scale_constraint<Two_scale>::calculate_theta_w()
 
       MODEL->get_problems().unflag_no_sinThetaW_convergence();
    } catch (const Error& e) {
-      VERBOSE_MSG(e.what());
+      VERBOSE_MSG(e.what_detailed());
       MODEL->get_problems().flag_no_sinThetaW_convergence();
    }
 

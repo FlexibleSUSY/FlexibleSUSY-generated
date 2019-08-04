@@ -23,12 +23,16 @@ MSSMNoFV_SUSY_BETAS_MK := \
 MSSMNoFV_SOFT_BETAS_MK := \
 		$(DIR)/soft_betas.mk
 
+MSSMNoFV_CXX_QFT_VERTICES_MK := \
+		$(DIR)/cxx_qft/vertices.mk
+
 MSSMNoFV_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
 MSSMNoFV_INCLUDE_MK := \
 		$(MSSMNoFV_SUSY_BETAS_MK) \
-		$(MSSMNoFV_SOFT_BETAS_MK)
+		$(MSSMNoFV_SOFT_BETAS_MK) \
+		$(MSSMNoFV_CXX_QFT_VERTICES_MK)
 
 MSSMNoFV_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.MSSMNoFV_generated \
@@ -47,6 +51,8 @@ MSSMNoFV_TARBALL := \
 LIBMSSMNoFV_SRC := \
 		$(DIR)/MSSMNoFV_a_muon.cpp \
 		$(DIR)/MSSMNoFV_edm.cpp \
+		$(DIR)/MSSMNoFV_FFV_form_factors.cpp \
+		$(DIR)/MSSMNoFV_l_to_lgamma.cpp \
 		$(DIR)/MSSMNoFV_effective_couplings.cpp \
 		$(DIR)/MSSMNoFV_info.cpp \
 		$(DIR)/MSSMNoFV_input_parameters.cpp \
@@ -76,6 +82,8 @@ LIBMSSMNoFV_HDR := \
 		$(DIR)/MSSMNoFV_a_muon.hpp \
 		$(DIR)/MSSMNoFV_convergence_tester.hpp \
 		$(DIR)/MSSMNoFV_edm.hpp \
+		$(DIR)/MSSMNoFV_FFV_form_factors.hpp \
+		$(DIR)/MSSMNoFV_l_to_lgamma.hpp \
 		$(DIR)/MSSMNoFV_effective_couplings.hpp \
 		$(DIR)/MSSMNoFV_ewsb_solver.hpp \
 		$(DIR)/MSSMNoFV_ewsb_solver_interface.hpp \
@@ -121,6 +129,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(MSSMNoFV_SUSY_BETAS_MK)
 -include $(MSSMNoFV_SOFT_BETAS_MK)
+-include $(MSSMNoFV_CXX_QFT_VERTICES_MK)
 -include $(MSSMNoFV_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
@@ -131,6 +140,8 @@ ifeq ($(findstring doc-,$(MAKECMDGOALS)),)
 $(MSSMNoFV_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(MSSMNoFV_SOFT_BETAS_MK): run-metacode-$(MODNAME)
+		@$(CONVERT_DOS_PATHS) $@
+$(MSSMNoFV_CXX_QFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(MSSMNoFV_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
@@ -192,56 +203,56 @@ all-$(MODNAME): $(LIBMSSMNoFV) $(EXEMSSMNoFV_EXE)
 
 ifneq ($(INSTALL_DIR),)
 install-src::
-		install -d $(MSSMNoFV_INSTALL_DIR)
-		install -d $(MSSMNoFV_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(LIBMSSMNoFV_SRC) $(MSSMNoFV_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBMSSMNoFV_HDR) $(MSSMNoFV_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBMSSMNoFV_CXXQFT_HDR) $(MSSMNoFV_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(EXEMSSMNoFV_SRC) $(MSSMNoFV_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLMSSMNoFV_SRC) $(MSSMNoFV_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLMSSMNoFV_MMA) $(MSSMNoFV_INSTALL_DIR)
-		$(INSTALL_STRIPPED) $(MSSMNoFV_MK) $(MSSMNoFV_INSTALL_DIR) -m u=rw,g=r,o=r
-		install -m u=rw,g=r,o=r $(MSSMNoFV_INCLUDE_MK) $(MSSMNoFV_INSTALL_DIR)
+		$(Q)install -d $(MSSMNoFV_INSTALL_DIR)
+		$(Q)install -d $(MSSMNoFV_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBMSSMNoFV_SRC) $(MSSMNoFV_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBMSSMNoFV_HDR) $(MSSMNoFV_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBMSSMNoFV_CXXQFT_HDR) $(MSSMNoFV_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(EXEMSSMNoFV_SRC) $(MSSMNoFV_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLMSSMNoFV_SRC) $(MSSMNoFV_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLMSSMNoFV_MMA) $(MSSMNoFV_INSTALL_DIR)
+		$(Q)$(INSTALL_STRIPPED) $(MSSMNoFV_MK) $(MSSMNoFV_INSTALL_DIR) -m u=rw,g=r,o=r
+		$(Q)install -m u=rw,g=r,o=r $(MSSMNoFV_INCLUDE_MK) $(MSSMNoFV_INSTALL_DIR)
 ifneq ($(MSSMNoFV_SLHA_INPUT),)
-		install -m u=rw,g=r,o=r $(MSSMNoFV_SLHA_INPUT) $(MSSMNoFV_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(MSSMNoFV_SLHA_INPUT) $(MSSMNoFV_INSTALL_DIR)
 endif
-		install -m u=rw,g=r,o=r $(MSSMNoFV_REFERENCES) $(MSSMNoFV_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(MSSMNoFV_GNUPLOT) $(MSSMNoFV_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(MSSMNoFV_REFERENCES) $(MSSMNoFV_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(MSSMNoFV_GNUPLOT) $(MSSMNoFV_INSTALL_DIR)
 endif
 
 clean-$(MODNAME)-dep:
-		-rm -f $(LIBMSSMNoFV_DEP)
-		-rm -f $(EXEMSSMNoFV_DEP)
-		-rm -f $(LLMSSMNoFV_DEP)
+		$(Q)-rm -f $(LIBMSSMNoFV_DEP)
+		$(Q)-rm -f $(EXEMSSMNoFV_DEP)
+		$(Q)-rm -f $(LLMSSMNoFV_DEP)
 
 clean-$(MODNAME)-lib:
-		-rm -f $(LIBMSSMNoFV)
-		-rm -f $(LLMSSMNoFV_LIB)
+		$(Q)-rm -f $(LIBMSSMNoFV)
+		$(Q)-rm -f $(LLMSSMNoFV_LIB)
 
 clean-$(MODNAME)-obj:
-		-rm -f $(LIBMSSMNoFV_OBJ)
-		-rm -f $(EXEMSSMNoFV_OBJ)
-		-rm -f $(LLMSSMNoFV_OBJ)
+		$(Q)-rm -f $(LIBMSSMNoFV_OBJ)
+		$(Q)-rm -f $(EXEMSSMNoFV_OBJ)
+		$(Q)-rm -f $(LLMSSMNoFV_OBJ)
 
 # BEGIN: NOT EXPORTED ##########################################
 clean-$(MODNAME)-src:
-		-rm -f $(LIBMSSMNoFV_SRC)
-		-rm -f $(LIBMSSMNoFV_HDR)
-		-rm -f $(LIBMSSMNoFV_CXXQFT_HDR)
-		-rm -f $(EXEMSSMNoFV_SRC)
-		-rm -f $(LLMSSMNoFV_SRC)
-		-rm -f $(LLMSSMNoFV_MMA)
-		-rm -f $(METACODE_STAMP_MSSMNoFV)
-		-rm -f $(MSSMNoFV_INCLUDE_MK)
-		-rm -f $(MSSMNoFV_SLHA_INPUT)
-		-rm -f $(MSSMNoFV_REFERENCES)
-		-rm -f $(MSSMNoFV_GNUPLOT)
+		$(Q)-rm -f $(LIBMSSMNoFV_SRC)
+		$(Q)-rm -f $(LIBMSSMNoFV_HDR)
+		$(Q)-rm -f $(LIBMSSMNoFV_CXXQFT_HDR)
+		$(Q)-rm -f $(EXEMSSMNoFV_SRC)
+		$(Q)-rm -f $(LLMSSMNoFV_SRC)
+		$(Q)-rm -f $(LLMSSMNoFV_MMA)
+		$(Q)-rm -f $(METACODE_STAMP_MSSMNoFV)
+		$(Q)-rm -f $(MSSMNoFV_INCLUDE_MK)
+		$(Q)-rm -f $(MSSMNoFV_SLHA_INPUT)
+		$(Q)-rm -f $(MSSMNoFV_REFERENCES)
+		$(Q)-rm -f $(MSSMNoFV_GNUPLOT)
 
 distclean-$(MODNAME): clean-$(MODNAME)-src
 # END:   NOT EXPORTED ##########################################
 
 clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-lib clean-$(MODNAME)-obj
-		-rm -f $(EXEMSSMNoFV_EXE)
+		$(Q)-rm -f $(EXEMSSMNoFV_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
 		@true
@@ -255,7 +266,7 @@ clean::         clean-$(MODNAME)
 distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
-		tar -czf $(MSSMNoFV_TARBALL) \
+		$(Q)tar -czf $(MSSMNoFV_TARBALL) \
 		$(LIBMSSMNoFV_SRC) $(LIBMSSMNoFV_HDR) $(LIBMSSMNoFV_CXXQFT_HDR) \
 		$(EXEMSSMNoFV_SRC) \
 		$(LLMSSMNoFV_SRC) $(LLMSSMNoFV_MMA) \
@@ -272,7 +283,8 @@ run-metacode-$(MODNAME): $(METACODE_STAMP_MSSMNoFV)
 
 ifeq ($(ENABLE_META),yes)
 $(METACODE_STAMP_MSSMNoFV): $(DIR)/start.m $(DIR)/FlexibleSUSY.m $(META_SRC) $(TEMPLATES) $(SARAH_MODEL_FILES_MSSMNoFV)
-		"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
+		@$(MSG)
+		$(Q)"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
 		@touch "$(METACODE_STAMP_MSSMNoFV)"
 		@echo "Note: to regenerate MSSMNoFV source files," \
 		      "please remove the file "
@@ -295,13 +307,16 @@ $(LLMSSMNoFV_OBJ) $(LLMSSMNoFV_LIB): \
 	CPPFLAGS += $(LLFLAGS)
 
 $(LIBMSSMNoFV): $(LIBMSSMNoFV_OBJ)
-		$(MODULE_MAKE_LIB_CMD) $@ $^
+		@$(MSG)
+		$(Q)$(MODULE_MAKE_LIB_CMD) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBMSSMNoFV) $(MODMSSMNoFV_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+		@$(MSG)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
 $(LLMSSMNoFV_LIB): $(LLMSSMNoFV_OBJ) $(LIBMSSMNoFV) $(MODMSSMNoFV_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
+		@$(MSG)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
 
 ALLDEP += $(LIBMSSMNoFV_DEP) $(EXEMSSMNoFV_DEP)
 ALLSRC += $(LIBMSSMNoFV_SRC) $(EXEMSSMNoFV_SRC)

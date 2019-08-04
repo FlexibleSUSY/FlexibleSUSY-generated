@@ -23,12 +23,16 @@ NUHMSSM_SUSY_BETAS_MK := \
 NUHMSSM_SOFT_BETAS_MK := \
 		$(DIR)/soft_betas.mk
 
+NUHMSSM_CXX_QFT_VERTICES_MK := \
+		$(DIR)/cxx_qft/vertices.mk
+
 NUHMSSM_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
 NUHMSSM_INCLUDE_MK := \
 		$(NUHMSSM_SUSY_BETAS_MK) \
-		$(NUHMSSM_SOFT_BETAS_MK)
+		$(NUHMSSM_SOFT_BETAS_MK) \
+		$(NUHMSSM_CXX_QFT_VERTICES_MK)
 
 NUHMSSM_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.NUHMSSM_generated \
@@ -47,6 +51,8 @@ NUHMSSM_TARBALL := \
 LIBNUHMSSM_SRC := \
 		$(DIR)/NUHMSSM_a_muon.cpp \
 		$(DIR)/NUHMSSM_edm.cpp \
+		$(DIR)/NUHMSSM_FFV_form_factors.cpp \
+		$(DIR)/NUHMSSM_l_to_lgamma.cpp \
 		$(DIR)/NUHMSSM_effective_couplings.cpp \
 		$(DIR)/NUHMSSM_info.cpp \
 		$(DIR)/NUHMSSM_input_parameters.cpp \
@@ -76,6 +82,8 @@ LIBNUHMSSM_HDR := \
 		$(DIR)/NUHMSSM_a_muon.hpp \
 		$(DIR)/NUHMSSM_convergence_tester.hpp \
 		$(DIR)/NUHMSSM_edm.hpp \
+		$(DIR)/NUHMSSM_FFV_form_factors.hpp \
+		$(DIR)/NUHMSSM_l_to_lgamma.hpp \
 		$(DIR)/NUHMSSM_effective_couplings.hpp \
 		$(DIR)/NUHMSSM_ewsb_solver.hpp \
 		$(DIR)/NUHMSSM_ewsb_solver_interface.hpp \
@@ -121,6 +129,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(NUHMSSM_SUSY_BETAS_MK)
 -include $(NUHMSSM_SOFT_BETAS_MK)
+-include $(NUHMSSM_CXX_QFT_VERTICES_MK)
 -include $(NUHMSSM_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
@@ -131,6 +140,8 @@ ifeq ($(findstring doc-,$(MAKECMDGOALS)),)
 $(NUHMSSM_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(NUHMSSM_SOFT_BETAS_MK): run-metacode-$(MODNAME)
+		@$(CONVERT_DOS_PATHS) $@
+$(NUHMSSM_CXX_QFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(NUHMSSM_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
@@ -192,56 +203,56 @@ all-$(MODNAME): $(LIBNUHMSSM) $(EXENUHMSSM_EXE)
 
 ifneq ($(INSTALL_DIR),)
 install-src::
-		install -d $(NUHMSSM_INSTALL_DIR)
-		install -d $(NUHMSSM_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(LIBNUHMSSM_SRC) $(NUHMSSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBNUHMSSM_HDR) $(NUHMSSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBNUHMSSM_CXXQFT_HDR) $(NUHMSSM_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(EXENUHMSSM_SRC) $(NUHMSSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLNUHMSSM_SRC) $(NUHMSSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLNUHMSSM_MMA) $(NUHMSSM_INSTALL_DIR)
-		$(INSTALL_STRIPPED) $(NUHMSSM_MK) $(NUHMSSM_INSTALL_DIR) -m u=rw,g=r,o=r
-		install -m u=rw,g=r,o=r $(NUHMSSM_INCLUDE_MK) $(NUHMSSM_INSTALL_DIR)
+		$(Q)install -d $(NUHMSSM_INSTALL_DIR)
+		$(Q)install -d $(NUHMSSM_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBNUHMSSM_SRC) $(NUHMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBNUHMSSM_HDR) $(NUHMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBNUHMSSM_CXXQFT_HDR) $(NUHMSSM_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(EXENUHMSSM_SRC) $(NUHMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLNUHMSSM_SRC) $(NUHMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLNUHMSSM_MMA) $(NUHMSSM_INSTALL_DIR)
+		$(Q)$(INSTALL_STRIPPED) $(NUHMSSM_MK) $(NUHMSSM_INSTALL_DIR) -m u=rw,g=r,o=r
+		$(Q)install -m u=rw,g=r,o=r $(NUHMSSM_INCLUDE_MK) $(NUHMSSM_INSTALL_DIR)
 ifneq ($(NUHMSSM_SLHA_INPUT),)
-		install -m u=rw,g=r,o=r $(NUHMSSM_SLHA_INPUT) $(NUHMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(NUHMSSM_SLHA_INPUT) $(NUHMSSM_INSTALL_DIR)
 endif
-		install -m u=rw,g=r,o=r $(NUHMSSM_REFERENCES) $(NUHMSSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(NUHMSSM_GNUPLOT) $(NUHMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(NUHMSSM_REFERENCES) $(NUHMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(NUHMSSM_GNUPLOT) $(NUHMSSM_INSTALL_DIR)
 endif
 
 clean-$(MODNAME)-dep:
-		-rm -f $(LIBNUHMSSM_DEP)
-		-rm -f $(EXENUHMSSM_DEP)
-		-rm -f $(LLNUHMSSM_DEP)
+		$(Q)-rm -f $(LIBNUHMSSM_DEP)
+		$(Q)-rm -f $(EXENUHMSSM_DEP)
+		$(Q)-rm -f $(LLNUHMSSM_DEP)
 
 clean-$(MODNAME)-lib:
-		-rm -f $(LIBNUHMSSM)
-		-rm -f $(LLNUHMSSM_LIB)
+		$(Q)-rm -f $(LIBNUHMSSM)
+		$(Q)-rm -f $(LLNUHMSSM_LIB)
 
 clean-$(MODNAME)-obj:
-		-rm -f $(LIBNUHMSSM_OBJ)
-		-rm -f $(EXENUHMSSM_OBJ)
-		-rm -f $(LLNUHMSSM_OBJ)
+		$(Q)-rm -f $(LIBNUHMSSM_OBJ)
+		$(Q)-rm -f $(EXENUHMSSM_OBJ)
+		$(Q)-rm -f $(LLNUHMSSM_OBJ)
 
 # BEGIN: NOT EXPORTED ##########################################
 clean-$(MODNAME)-src:
-		-rm -f $(LIBNUHMSSM_SRC)
-		-rm -f $(LIBNUHMSSM_HDR)
-		-rm -f $(LIBNUHMSSM_CXXQFT_HDR)
-		-rm -f $(EXENUHMSSM_SRC)
-		-rm -f $(LLNUHMSSM_SRC)
-		-rm -f $(LLNUHMSSM_MMA)
-		-rm -f $(METACODE_STAMP_NUHMSSM)
-		-rm -f $(NUHMSSM_INCLUDE_MK)
-		-rm -f $(NUHMSSM_SLHA_INPUT)
-		-rm -f $(NUHMSSM_REFERENCES)
-		-rm -f $(NUHMSSM_GNUPLOT)
+		$(Q)-rm -f $(LIBNUHMSSM_SRC)
+		$(Q)-rm -f $(LIBNUHMSSM_HDR)
+		$(Q)-rm -f $(LIBNUHMSSM_CXXQFT_HDR)
+		$(Q)-rm -f $(EXENUHMSSM_SRC)
+		$(Q)-rm -f $(LLNUHMSSM_SRC)
+		$(Q)-rm -f $(LLNUHMSSM_MMA)
+		$(Q)-rm -f $(METACODE_STAMP_NUHMSSM)
+		$(Q)-rm -f $(NUHMSSM_INCLUDE_MK)
+		$(Q)-rm -f $(NUHMSSM_SLHA_INPUT)
+		$(Q)-rm -f $(NUHMSSM_REFERENCES)
+		$(Q)-rm -f $(NUHMSSM_GNUPLOT)
 
 distclean-$(MODNAME): clean-$(MODNAME)-src
 # END:   NOT EXPORTED ##########################################
 
 clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-lib clean-$(MODNAME)-obj
-		-rm -f $(EXENUHMSSM_EXE)
+		$(Q)-rm -f $(EXENUHMSSM_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
 		@true
@@ -255,7 +266,7 @@ clean::         clean-$(MODNAME)
 distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
-		tar -czf $(NUHMSSM_TARBALL) \
+		$(Q)tar -czf $(NUHMSSM_TARBALL) \
 		$(LIBNUHMSSM_SRC) $(LIBNUHMSSM_HDR) $(LIBNUHMSSM_CXXQFT_HDR) \
 		$(EXENUHMSSM_SRC) \
 		$(LLNUHMSSM_SRC) $(LLNUHMSSM_MMA) \
@@ -272,7 +283,8 @@ run-metacode-$(MODNAME): $(METACODE_STAMP_NUHMSSM)
 
 ifeq ($(ENABLE_META),yes)
 $(METACODE_STAMP_NUHMSSM): $(DIR)/start.m $(DIR)/FlexibleSUSY.m $(META_SRC) $(TEMPLATES) $(SARAH_MODEL_FILES_NUHMSSM)
-		"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
+		@$(MSG)
+		$(Q)"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
 		@touch "$(METACODE_STAMP_NUHMSSM)"
 		@echo "Note: to regenerate NUHMSSM source files," \
 		      "please remove the file "
@@ -295,13 +307,16 @@ $(LLNUHMSSM_OBJ) $(LLNUHMSSM_LIB): \
 	CPPFLAGS += $(LLFLAGS)
 
 $(LIBNUHMSSM): $(LIBNUHMSSM_OBJ)
-		$(MODULE_MAKE_LIB_CMD) $@ $^
+		@$(MSG)
+		$(Q)$(MODULE_MAKE_LIB_CMD) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBNUHMSSM) $(MODNUHMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+		@$(MSG)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
 $(LLNUHMSSM_LIB): $(LLNUHMSSM_OBJ) $(LIBNUHMSSM) $(MODNUHMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
+		@$(MSG)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
 
 ALLDEP += $(LIBNUHMSSM_DEP) $(EXENUHMSSM_DEP)
 ALLSRC += $(LIBNUHMSSM_SRC) $(EXENUHMSSM_SRC)

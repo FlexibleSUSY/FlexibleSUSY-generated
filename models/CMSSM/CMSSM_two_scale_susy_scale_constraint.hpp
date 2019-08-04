@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 18:00:36
+// File generated at Sun 4 Aug 2019 20:07:10
 
 #ifndef CMSSM_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
 #define CMSSM_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H

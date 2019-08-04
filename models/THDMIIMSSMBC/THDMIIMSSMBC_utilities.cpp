@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 16:31:23
+// File generated at Sun 4 Aug 2019 19:01:53
 
 #include "THDMIIMSSMBC_utilities.hpp"
 #include "THDMIIMSSMBC_input_parameters.hpp"
@@ -241,7 +241,7 @@ void to_database(
       database::Database db(file_name);
       db.insert("Point", names, values);
    } catch(const flexiblesusy::Error& e) {
-      ERROR(e.what());
+      ERROR(e.what_detailed());
    }
 }
 
@@ -254,7 +254,7 @@ Eigen::ArrayXd extract_entry(const std::string& file_name, long long entry)
    try {
       values = db.extract("Point", entry);
    } catch (const flexiblesusy::Error& e) {
-      ERROR(e.what());
+      ERROR(e.what_detailed());
    }
 
    return values;

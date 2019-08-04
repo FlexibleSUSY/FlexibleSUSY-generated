@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 17:42:33
+// File generated at Sun 4 Aug 2019 19:54:04
 
 #include "config.h"
 
@@ -100,10 +100,10 @@ private:
 
 class EUnknownHandle : public Error {
 public:
-   explicit EUnknownHandle(Handle hid_) : hid(hid_) {}
+   explicit EUnknownHandle(Handle hid_) : Error("Unknown handle"), hid(hid_) {}
    virtual ~EUnknownHandle() = default;
-   virtual std::string what() const override {
-      return "Unknown handle: " + ToString(hid);
+   std::string what_detailed() const override {
+      return std::string(what()) + ": " + ToString(hid);
    }
    Handle hid;
 };
@@ -111,10 +111,11 @@ public:
 class ENotEnoughFreeHandles : public Error {
 public:
    explicit ENotEnoughFreeHandles(std::size_t max_handles_)
-      : max_handles(max_handles_) {}
+      : Error("Maximum number of open handles reached")
+      , max_handles(max_handles_) {}
    virtual ~ENotEnoughFreeHandles() = default;
-   virtual std::string what() const override {
-      return "Maximum number of open handles reached: "
+   std::string what_detailed() const override {
+      return std::string(what()) + ": "
          + ToString(max_handles) + ".  Please close some handles!";
    }
    std::size_t max_handles;
@@ -123,10 +124,11 @@ public:
 class EWrongNumberOfParameters : public Error {
 public:
    EWrongNumberOfParameters(mint pars_, mint expected_)
-      : pars(pars_), expected(expected_) {}
+      : Error("Wrong number of arguments")
+      , pars(pars_), expected(expected_) {}
    virtual ~EWrongNumberOfParameters() = default;
-   virtual std::string what() const override {
-      return "Wrong number of arguments: " + ToString(pars)
+   std::string what_detailed() const override {
+      return std::string(what()) + ": " + ToString(pars)
          + ".  Expected: " + ToString(expected);
    }
    mint pars, expected;
@@ -134,9 +136,8 @@ public:
 
 class EInvalidSpectrum : public Error {
 public:
-   EInvalidSpectrum() {}
+   EInvalidSpectrum() : Error("Invalid spectrum") {}
    virtual ~EInvalidSpectrum() = default;
-   virtual std::string what() const override { return "Invalid spectrum"; }
 };
 
 class NUHMSSM_spectrum {
@@ -1141,7 +1142,7 @@ DLLEXPORT int FSNUHMSSMGetSettings(WolframLibraryData /* libData */, MLINK link)
    try {
       find_data(hid).put_settings(link);
    } catch (const flexiblesusy::Error& e) {
-      std::cerr << e.what() << std::endl;
+      std::cerr << e.what_detailed() << std::endl;
       put_error_output(link);
    }
 
@@ -1162,7 +1163,7 @@ DLLEXPORT int FSNUHMSSMGetSMInputParameters(WolframLibraryData /* libData */, ML
    try {
       find_data(hid).put_sm_input_parameters(link);
    } catch (const flexiblesusy::Error& e) {
-      std::cerr << e.what() << std::endl;
+      std::cerr << e.what_detailed() << std::endl;
       put_error_output(link);
    }
 
@@ -1183,7 +1184,7 @@ DLLEXPORT int FSNUHMSSMGetInputParameters(WolframLibraryData /* libData */, MLIN
    try {
       find_data(hid).put_input_parameters(link);
    } catch (const flexiblesusy::Error& e) {
-      std::cerr << e.what() << std::endl;
+      std::cerr << e.what_detailed() << std::endl;
       put_error_output(link);
    }
 
@@ -1218,7 +1219,7 @@ DLLEXPORT int FSNUHMSSMOpenHandle(
 
       MArgument_setInteger(Res, hid);
    } catch (const flexiblesusy::Error& e) {
-      std::cerr << e.what() << std::endl;
+      std::cerr << e.what_detailed() << std::endl;
       return LIBRARY_FUNCTION_ERROR;
    }
 
@@ -1268,7 +1269,7 @@ DLLEXPORT int FSNUHMSSMSet(
                       libData->MTensor_getRealData(pars),
                       libData->MTensor_getDimensions(pars)[0]));
    } catch (const flexiblesusy::Error& e) {
-      std::cerr << e.what() << std::endl;
+      std::cerr << e.what_detailed() << std::endl;
       return LIBRARY_FUNCTION_ERROR;
    }
 
@@ -1290,7 +1291,7 @@ DLLEXPORT int FSNUHMSSMGetProblems(
    try {
       find_data(hid).put_problems(link);
    } catch (const flexiblesusy::Error& e) {
-      std::cerr << e.what() << std::endl;
+      std::cerr << e.what_detailed() << std::endl;
       put_error_output(link);
    }
 
@@ -1311,7 +1312,7 @@ DLLEXPORT int FSNUHMSSMToSLHA(WolframLibraryData /* libData */, MLINK link)
    try {
       find_data(hid).put_slha(link);
    } catch (const flexiblesusy::Error& e) {
-      std::cerr << e.what() << std::endl;
+      std::cerr << e.what_detailed() << std::endl;
       put_error_output(link);
    }
 
@@ -1333,7 +1334,7 @@ DLLEXPORT int FSNUHMSSMGetWarnings(
    try {
       find_data(hid).put_warnings(link);
    } catch (const flexiblesusy::Error& e) {
-      std::cerr << e.what() << std::endl;
+      std::cerr << e.what_detailed() << std::endl;
       put_error_output(link);
    }
 
@@ -1398,7 +1399,7 @@ DLLEXPORT int FSNUHMSSMCalculateObservables(
 
       data.put_observables(link);
    } catch (const flexiblesusy::Error& e) {
-      put_message(link, "FSNUHMSSMCalculateObservables", "error", e.what());
+      put_message(link, "FSNUHMSSMCalculateObservables", "error", e.what_detailed());
       put_error_output(link);
    }
 

@@ -16,26 +16,28 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 17:07:53
+// File generated at Sun 4 Aug 2019 19:21:25
 
 /**
  * @file cxx_qft/THDMII_context_base.hpp
  *
- * This file was generated at Tue 22 Jan 2019 17:07:53 with FlexibleSUSY
- * 2.3.0 and SARAH 4.14.1 .
+ * This file was generated at Sun 4 Aug 2019 19:21:25 with FlexibleSUSY
+ * 2.4.0 and SARAH 4.14.2 .
  */
 
 #ifndef THDMII_CXXQFT_CONTEXT_BASE_H
 #define THDMII_CXXQFT_CONTEXT_BASE_H
 
-#include "THDMII_fields.hpp"
+#include "THDMII_mass_eigenstates.hpp"
 
-namespace flexiblesusy
-{
-namespace THDMII_cxx_diagrams
-{
+#include "THDMII_fields.hpp"
+#include "THDMII_mass_eigenstates.hpp"
+
+namespace flexiblesusy {
+namespace THDMII_cxx_diagrams {
+
    struct context_base {
-      THDMII_mass_eigenstates& model; ///< The model object.
+      THDMII_mass_eigenstates model; ///< The model object.
 
       template <class Field>
       double mass(const typename field_indices<Field>::type& indices) const
@@ -45,7 +47,7 @@ namespace THDMII_cxx_diagrams
          return mass_impl<CleanField>(indices);
       }
 
-      context_base(THDMII_mass_eigenstates& m) : model(m) {}
+      context_base(const THDMII_mass_eigenstates& m) : model(m) {}
       context_base(const context_base&) = default;
       context_base(context_base&&) = default;
 
@@ -61,11 +63,11 @@ namespace THDMII_cxx_diagrams
    };
 
    template<> inline
-double context_base::mass_impl<fields::VG>(const std::array<int, 1>& indices) const
+double context_base::mass_impl<fields::VG>(const std::array<int, 0>& indices) const
 { return model.get_MVG(); }
 
 template<> inline
-double context_base::mass_impl<fields::gG>(const std::array<int, 1>& indices) const
+double context_base::mass_impl<fields::gG>(const std::array<int, 0>& indices) const
 { return model.get_MVG(); }
 
 template<> inline
@@ -109,11 +111,11 @@ double context_base::mass_impl<fields::Hm>(const std::array<int, 1>& indices) co
 { return model.get_MHm(indices[0]); }
 
 template<> inline
-double context_base::mass_impl<fields::Fd>(const std::array<int, 2>& indices) const
+double context_base::mass_impl<fields::Fd>(const std::array<int, 1>& indices) const
 { return model.get_MFd(indices[0]); }
 
 template<> inline
-double context_base::mass_impl<fields::Fu>(const std::array<int, 2>& indices) const
+double context_base::mass_impl<fields::Fu>(const std::array<int, 1>& indices) const
 { return model.get_MFu(indices[0]); }
 
 template<> inline

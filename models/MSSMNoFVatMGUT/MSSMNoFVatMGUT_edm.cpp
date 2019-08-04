@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 17:53:36
+// File generated at Sun 4 Aug 2019 20:00:25
 
 /**
  * @file MSSMNoFVatMGUT_edm.cpp
  *
- * This file was generated at Tue 22 Jan 2019 17:53:36 with FlexibleSUSY
- * 2.3.0 and SARAH 4.14.1 .
+ * This file was generated at Sun 4 Aug 2019 20:00:25 with FlexibleSUSY
+ * 2.4.0 and SARAH 4.14.2 .
  */
 
 #include "MSSMNoFVatMGUT_edm.hpp"
@@ -30,6 +30,7 @@
 
 #include "cxx_qft/MSSMNoFVatMGUT_qft.hpp"
 
+#include "wrappers.hpp"
 #include "numerics2.hpp"
 
 #define INPUTPARAMETER(p) context.model.get_input().p
@@ -156,26 +157,26 @@ EDMField, PhotonEmitter, ExchangeField
    double res = 0.0;
 
    using FermionVertex = Vertex<
-                         typename EDMField::lorentz_conjugate,
+                         EDMField,
                          ExchangeField,
                          PhotonEmitter
                          >;
 
    for (const auto& index: index_range<FermionVertex>()) {
-      const auto edmFieldIndices = FermionVertex::template field_indices<0>(index);
+      const auto edmFieldIndices = FermionVertex::template indices_of_field<0>(index);
 
       if (edmFieldIndices != indices)
          continue;
 
-      const auto photonEmitterIndices = FermionVertex::template field_indices<2>(index);
-      const auto exchangeFieldIndices = FermionVertex::template field_indices<1>(index);
+      const auto photonEmitterIndices = FermionVertex::template indices_of_field<2>(index);
+      const auto exchangeFieldIndices = FermionVertex::template indices_of_field<1>(index);
       const auto vertex = FermionVertex::evaluate(index, context);
 
       const auto photonEmitterMass = context.mass<PhotonEmitter>(photonEmitterIndices);
       const auto exchangeFieldMass = context.mass<ExchangeField>(exchangeFieldIndices);
 
       const double photonEmitterCharge =
-         PhotonEmitter::electric_charge * unit_charge(context);
+         - PhotonEmitter::electric_charge * unit_charge(context);
 
       constexpr double numericFactor = oneOver16PiSquared;
       const double massFactor = photonEmitterMass/(exchangeFieldMass * exchangeFieldMass);
@@ -199,26 +200,26 @@ EDMField, PhotonEmitter, ExchangeField
    double res = 0.0;
 
    using FermionVertex = Vertex<
-                         typename EDMField::lorentz_conjugate,
+                         EDMField,
                          ExchangeField,
                          PhotonEmitter
                          >;
 
    for (const auto& index: index_range<FermionVertex>()) {
-      const auto edmFieldIndices = FermionVertex::template field_indices<0>(index);
+      const auto edmFieldIndices = FermionVertex::template indices_of_field<0>(index);
 
       if (edmFieldIndices != indices)
          continue;
 
-      const auto photonEmitterIndices = FermionVertex::template field_indices<2>(index);
-      const auto exchangeFieldIndices = FermionVertex::template field_indices<1>(index);
+      const auto photonEmitterIndices = FermionVertex::template indices_of_field<2>(index);
+      const auto exchangeFieldIndices = FermionVertex::template indices_of_field<1>(index);
       const auto vertex = FermionVertex::evaluate(index, context);
 
       const auto photonEmitterMass = context.mass<PhotonEmitter>(photonEmitterIndices);
       const auto exchangeFieldMass = context.mass<ExchangeField>(exchangeFieldIndices);
 
       const double photonEmitterCharge =
-         PhotonEmitter::electric_charge * unit_charge(context);
+         - PhotonEmitter::electric_charge * unit_charge(context);
 
       constexpr double numericFactor = oneOver16PiSquared;
       const double massFactor = exchangeFieldMass/(photonEmitterMass * photonEmitterMass);

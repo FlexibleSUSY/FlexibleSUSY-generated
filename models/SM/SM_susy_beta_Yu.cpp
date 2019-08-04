@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 16:38:22
+// File generated at Sun 4 Aug 2019 19:04:50
 
 #include "SM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -98,20 +98,71 @@ Eigen::Matrix<double,3,3> SM_susy_parameters::calc_beta_Yu_3_loop(const Susy_tra
 
    Eigen::Matrix<double,3,3> beta_Yu;
 
-   beta_Yu = (0.00005*PROJECTOR*threeLoop*(-90000*Cube(Lambdax) + 321980*Power6
-      (g1) + 3396580*Power6(g2) - 12387000*Power6(g3) + 1172056*Power6(Yu(2,2))
-      - 27225*Lambdax*Quad(g1) - 106875*Lambdax*Quad(g2) + 1980000*Lambdax*Quad
-      (Yu(2,2)) - 94860*Quad(g2)*Sqr(g1) - 301920*Quad(g3)*Sqr(g1) - 609250*
-      Quad(Yu(2,2))*Sqr(g1) - 88840*Quad(g1)*Sqr(g2) + 1473080*Quad(g3)*Sqr(g2)
-      - 1991250*Quad(Yu(2,2))*Sqr(g2) + 29250*Lambdax*Sqr(g1)*Sqr(g2) - 446380*
-      Quad(g1)*Sqr(g3) - 421440*Quad(g2)*Sqr(g3) - 3140000*Quad(Yu(2,2))*Sqr(g3
-      ) - 321000*Sqr(g1)*Sqr(g2)*Sqr(g3) + 45000*Sqr(g1)*Sqr(Lambdax) + 225000*
-      Sqr(g2)*Sqr(Lambdax) - 488440*Quad(g1)*Sqr(Yu(2,2)) + 339800*Quad(g2)*Sqr
-      (Yu(2,2)) + 7275280*Quad(g3)*Sqr(Yu(2,2)) - 127000*Lambdax*Sqr(g1)*Sqr(Yu
-      (2,2)) - 675000*Lambdax*Sqr(g2)*Sqr(Yu(2,2)) + 696580*Sqr(g1)*Sqr(g2)*Sqr
-      (Yu(2,2)) + 160000*Lambdax*Sqr(g3)*Sqr(Yu(2,2)) + 361480*Sqr(g1)*Sqr(g3)*
-      Sqr(Yu(2,2)) + 967400*Sqr(g2)*Sqr(g3)*Sqr(Yu(2,2)) + 18750*Sqr(Lambdax)*
-      Sqr(Yu(2,2)))*Yu(2,2)).real();
+   beta_Yu = (16.09896843832796*threeLoop*(6.1494623322761255*PROJECTOR*Lambdax
+      *Power5(Yu(2,2)) + 3.6401567229074585*PROJECTOR*Power7(Yu(2,2)) -
+      1.5170193131852032*PROJECTOR*Cube(Yu(2,2))*Quad(g1) + 1.0553414347426693*
+      PROJECTOR*Cube(Yu(2,2))*Quad(g2) + 22.59550733368146*PROJECTOR*Cube(Yu(2,
+      2))*Quad(g3) + 2.821688161099187*PROJECTOR*Cube(Yu(2,2))*Quad(Yd(2,2)) +
+      1.6072458368448965*PROJECTOR*Cube(Yu(2,2))*Quad(Ye(2,2)) -
+      0.3944352102015494*PROJECTOR*Cube(Yu(2,2))*Lambdax*Sqr(g1) -
+      1.8922019827975904*PROJECTOR*Power5(Yu(2,2))*Sqr(g1) - 2.096407613275952*
+      PROJECTOR*Cube(Yu(2,2))*Lambdax*Sqr(g2) - 6.184402459164058*PROJECTOR*
+      Power5(Yu(2,2))*Sqr(g2) + 2.163462366965912*PROJECTOR*Cube(Yu(2,2))*Sqr(
+      g1)*Sqr(g2) + 0.49692624907281824*PROJECTOR*Cube(Yu(2,2))*Lambdax*Sqr(g3)
+      - 9.752177638054057*PROJECTOR*Power5(Yu(2,2))*Sqr(g3) +
+      1.1226836416869554*PROJECTOR*Cube(Yu(2,2))*Sqr(g1)*Sqr(g3) +
+      3.0045554008024813*PROJECTOR*Cube(Yu(2,2))*Sqr(g2)*Sqr(g3) +
+      0.058233544813220885*PROJECTOR*Cube(Yu(2,2))*Sqr(Lambdax) +
+      2.8883838227357557*PROJECTOR*Cube(Yu(2,2))*Lambdax*Sqr(Yd(2,2)) +
+      2.8689726411313488*PROJECTOR*Power5(Yu(2,2))*Sqr(Yd(2,2)) -
+      0.49957993142419754*PROJECTOR*Cube(Yu(2,2))*Sqr(g1)*Sqr(Yd(2,2)) -
+      4.814159761919977*PROJECTOR*Cube(Yu(2,2))*Sqr(g2)*Sqr(Yd(2,2)) -
+      0.7122084216159787*PROJECTOR*Cube(Yu(2,2))*Sqr(g3)*Sqr(Yd(2,2)) +
+      0.9317367170115342*PROJECTOR*Cube(Yu(2,2))*Lambdax*Sqr(Ye(2,2)) +
+      0.6522157019080739*PROJECTOR*Power5(Yu(2,2))*Sqr(Ye(2,2)) -
+      0.4242586654541776*PROJECTOR*Cube(Yu(2,2))*Sqr(g1)*Sqr(Ye(2,2)) -
+      1.9298448995321542*PROJECTOR*Cube(Yu(2,2))*Sqr(g2)*Sqr(Ye(2,2)) +
+      0.1552894528352557*PROJECTOR*Cube(Yu(2,2))*Sqr(g3)*Sqr(Ye(2,2)) +
+      0.21740523396935796*PROJECTOR*Cube(Yu(2,2))*Sqr(Yd(2,2))*Sqr(Ye(2,2)) -
+      0.2795210151034602*PROJECTOR*Cube(Lambdax)*Yu(2,2) + 1.*PROJECTOR*Power6(
+      g1)*Yu(2,2) + 10.549072334227892*PROJECTOR*Power6(g2)*Yu(2,2) -
+      38.47142449015523*PROJECTOR*Power6(g3)*Yu(2,2) + 2.187826890843716*
+      PROJECTOR*Power6(Yd(2,2))*Yu(2,2) + 0.4996388893047732*PROJECTOR*Power6(
+      Ye(2,2))*Yu(2,2) - 0.08455510706879672*PROJECTOR*Lambdax*Quad(g1)*Yu(2,2)
+      - 0.33193120543535903*PROJECTOR*Lambdax*Quad(g2)*Yu(2,2) +
+      0.4658683585057671*PROJECTOR*Lambdax*Quad(Yd(2,2))*Yu(2,2) +
+      0.4658683585057671*PROJECTOR*Lambdax*Quad(Ye(2,2))*Yu(2,2) -
+      0.29462264646735065*PROJECTOR*Quad(g2)*Sqr(g1)*Yu(2,2) -
+      0.9376834535939306*PROJECTOR*Quad(g3)*Sqr(g1)*Yu(2,2) -
+      0.23043972650846906*PROJECTOR*Quad(Yd(2,2))*Sqr(g1)*Yu(2,2) -
+      0.5080205796037476*PROJECTOR*Quad(Ye(2,2))*Sqr(g1)*Yu(2,2) -
+      0.2759050553623628*PROJECTOR*Quad(g1)*Sqr(g2)*Yu(2,2) + 4.575063689774406
+      *PROJECTOR*Quad(g3)*Sqr(g2)*Yu(2,2) - 2.0795715998030686*PROJECTOR*Quad(
+      Yd(2,2))*Sqr(g2)*Yu(2,2) - 0.5509041095110554*PROJECTOR*Quad(Ye(2,2))*Sqr
+      (g2)*Yu(2,2) + 0.09084432990862458*PROJECTOR*Lambdax*Sqr(g1)*Sqr(g2)*Yu(2
+      ,2) - 1.3863544090646365*PROJECTOR*Quad(g1)*Sqr(g3)*Yu(2,2) -
+      1.3089127804653757*PROJECTOR*Quad(g2)*Sqr(g3)*Yu(2,2) +
+      0.3148250285229063*PROJECTOR*Quad(Yd(2,2))*Sqr(g3)*Yu(2,2) -
+      0.9969582872023416*PROJECTOR*Sqr(g1)*Sqr(g2)*Sqr(g3)*Yu(2,2) +
+      0.1397605075517301*PROJECTOR*Sqr(g1)*Sqr(Lambdax)*Yu(2,2) +
+      0.6988025377586506*PROJECTOR*Sqr(g2)*Sqr(Lambdax)*Yu(2,2) -
+      0.20587853488920188*PROJECTOR*Quad(g1)*Sqr(Yd(2,2))*Yu(2,2) +
+      0.40913682599408235*PROJECTOR*Quad(g2)*Sqr(Yd(2,2))*Yu(2,2) -
+      12.757991577276114*PROJECTOR*Quad(g3)*Sqr(Yd(2,2))*Yu(2,2) +
+      0.8230341000268552*PROJECTOR*Quad(Ye(2,2))*Sqr(Yd(2,2))*Yu(2,2) +
+      0.5641039159322749*PROJECTOR*Sqr(g1)*Sqr(g2)*Sqr(Yd(2,2))*Yu(2,2) -
+      1.3643639389175877*PROJECTOR*Sqr(g1)*Sqr(g3)*Sqr(Yd(2,2))*Yu(2,2) -
+      8.902567024109379*PROJECTOR*Sqr(g2)*Sqr(g3)*Sqr(Yd(2,2))*Yu(2,2) -
+      1.129730769376485*PROJECTOR*Sqr(Lambdax)*Sqr(Yd(2,2))*Yu(2,2) -
+      1.5400233128895373*PROJECTOR*Quad(g1)*Sqr(Ye(2,2))*Yu(2,2) -
+      0.9718846178821886*PROJECTOR*Quad(g2)*Sqr(Ye(2,2))*Yu(2,2) +
+      1.3665471849502502*PROJECTOR*Quad(Yd(2,2))*Sqr(Ye(2,2))*Yu(2,2) -
+      0.3364704668151931*PROJECTOR*Sqr(g1)*Sqr(g2)*Sqr(Ye(2,2))*Yu(2,2) -
+      0.3494012688793253*PROJECTOR*Sqr(Lambdax)*Sqr(Ye(2,2))*Yu(2,2) -
+      0.14904312779958145*PROJECTOR*Sqr(g1)*Sqr(Yd(2,2))*Sqr(Ye(2,2))*Yu(2,2) -
+      0.5159639826231229*PROJECTOR*Sqr(g2)*Sqr(Yd(2,2))*Sqr(Ye(2,2))*Yu(2,2) -
+      0.445163098127733*PROJECTOR*Sqr(g3)*Sqr(Yd(2,2))*Sqr(Ye(2,2))*Yu(2,2))).
+      real();
 
 
    return beta_Yu;
@@ -130,8 +181,8 @@ Eigen::Matrix<double,3,3> SM_susy_parameters::calc_beta_Yu_4_loop(const Susy_tra
 
    Eigen::Matrix<double,3,3> beta_Yu;
 
-   beta_Yu = (2308.18*PROJECTOR*Power8(g3)*Quad(oneOver16PiSqr)*Yu(2,2)).real()
-      ;
+   beta_Yu = (2308.1827208150457*PROJECTOR*Power8(g3)*Quad(oneOver16PiSqr)*Yu(2
+      ,2)).real();
 
 
    return beta_Yu;

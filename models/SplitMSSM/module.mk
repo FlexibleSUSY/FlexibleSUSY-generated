@@ -23,12 +23,16 @@ SplitMSSM_SUSY_BETAS_MK := \
 SplitMSSM_SOFT_BETAS_MK := \
 		$(DIR)/soft_betas.mk
 
+SplitMSSM_CXX_QFT_VERTICES_MK := \
+		$(DIR)/cxx_qft/vertices.mk
+
 SplitMSSM_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
 SplitMSSM_INCLUDE_MK := \
 		$(SplitMSSM_SUSY_BETAS_MK) \
-		$(SplitMSSM_SOFT_BETAS_MK)
+		$(SplitMSSM_SOFT_BETAS_MK) \
+		$(SplitMSSM_CXX_QFT_VERTICES_MK)
 
 SplitMSSM_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.SplitMSSM_generated \
@@ -47,6 +51,8 @@ SplitMSSM_TARBALL := \
 LIBSplitMSSM_SRC := \
 		$(DIR)/SplitMSSM_a_muon.cpp \
 		$(DIR)/SplitMSSM_edm.cpp \
+		$(DIR)/SplitMSSM_FFV_form_factors.cpp \
+		$(DIR)/SplitMSSM_l_to_lgamma.cpp \
 		$(DIR)/SplitMSSM_effective_couplings.cpp \
 		$(DIR)/SplitMSSM_info.cpp \
 		$(DIR)/SplitMSSM_input_parameters.cpp \
@@ -76,6 +82,8 @@ LIBSplitMSSM_HDR := \
 		$(DIR)/SplitMSSM_a_muon.hpp \
 		$(DIR)/SplitMSSM_convergence_tester.hpp \
 		$(DIR)/SplitMSSM_edm.hpp \
+		$(DIR)/SplitMSSM_FFV_form_factors.hpp \
+		$(DIR)/SplitMSSM_l_to_lgamma.hpp \
 		$(DIR)/SplitMSSM_effective_couplings.hpp \
 		$(DIR)/SplitMSSM_ewsb_solver.hpp \
 		$(DIR)/SplitMSSM_ewsb_solver_interface.hpp \
@@ -121,6 +129,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(SplitMSSM_SUSY_BETAS_MK)
 -include $(SplitMSSM_SOFT_BETAS_MK)
+-include $(SplitMSSM_CXX_QFT_VERTICES_MK)
 -include $(SplitMSSM_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
@@ -131,6 +140,8 @@ ifeq ($(findstring doc-,$(MAKECMDGOALS)),)
 $(SplitMSSM_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(SplitMSSM_SOFT_BETAS_MK): run-metacode-$(MODNAME)
+		@$(CONVERT_DOS_PATHS) $@
+$(SplitMSSM_CXX_QFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(SplitMSSM_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
@@ -192,56 +203,56 @@ all-$(MODNAME): $(LIBSplitMSSM) $(EXESplitMSSM_EXE)
 
 ifneq ($(INSTALL_DIR),)
 install-src::
-		install -d $(SplitMSSM_INSTALL_DIR)
-		install -d $(SplitMSSM_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(LIBSplitMSSM_SRC) $(SplitMSSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBSplitMSSM_HDR) $(SplitMSSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBSplitMSSM_CXXQFT_HDR) $(SplitMSSM_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(EXESplitMSSM_SRC) $(SplitMSSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLSplitMSSM_SRC) $(SplitMSSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLSplitMSSM_MMA) $(SplitMSSM_INSTALL_DIR)
-		$(INSTALL_STRIPPED) $(SplitMSSM_MK) $(SplitMSSM_INSTALL_DIR) -m u=rw,g=r,o=r
-		install -m u=rw,g=r,o=r $(SplitMSSM_INCLUDE_MK) $(SplitMSSM_INSTALL_DIR)
+		$(Q)install -d $(SplitMSSM_INSTALL_DIR)
+		$(Q)install -d $(SplitMSSM_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBSplitMSSM_SRC) $(SplitMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBSplitMSSM_HDR) $(SplitMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBSplitMSSM_CXXQFT_HDR) $(SplitMSSM_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(EXESplitMSSM_SRC) $(SplitMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLSplitMSSM_SRC) $(SplitMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLSplitMSSM_MMA) $(SplitMSSM_INSTALL_DIR)
+		$(Q)$(INSTALL_STRIPPED) $(SplitMSSM_MK) $(SplitMSSM_INSTALL_DIR) -m u=rw,g=r,o=r
+		$(Q)install -m u=rw,g=r,o=r $(SplitMSSM_INCLUDE_MK) $(SplitMSSM_INSTALL_DIR)
 ifneq ($(SplitMSSM_SLHA_INPUT),)
-		install -m u=rw,g=r,o=r $(SplitMSSM_SLHA_INPUT) $(SplitMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(SplitMSSM_SLHA_INPUT) $(SplitMSSM_INSTALL_DIR)
 endif
-		install -m u=rw,g=r,o=r $(SplitMSSM_REFERENCES) $(SplitMSSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(SplitMSSM_GNUPLOT) $(SplitMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(SplitMSSM_REFERENCES) $(SplitMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(SplitMSSM_GNUPLOT) $(SplitMSSM_INSTALL_DIR)
 endif
 
 clean-$(MODNAME)-dep:
-		-rm -f $(LIBSplitMSSM_DEP)
-		-rm -f $(EXESplitMSSM_DEP)
-		-rm -f $(LLSplitMSSM_DEP)
+		$(Q)-rm -f $(LIBSplitMSSM_DEP)
+		$(Q)-rm -f $(EXESplitMSSM_DEP)
+		$(Q)-rm -f $(LLSplitMSSM_DEP)
 
 clean-$(MODNAME)-lib:
-		-rm -f $(LIBSplitMSSM)
-		-rm -f $(LLSplitMSSM_LIB)
+		$(Q)-rm -f $(LIBSplitMSSM)
+		$(Q)-rm -f $(LLSplitMSSM_LIB)
 
 clean-$(MODNAME)-obj:
-		-rm -f $(LIBSplitMSSM_OBJ)
-		-rm -f $(EXESplitMSSM_OBJ)
-		-rm -f $(LLSplitMSSM_OBJ)
+		$(Q)-rm -f $(LIBSplitMSSM_OBJ)
+		$(Q)-rm -f $(EXESplitMSSM_OBJ)
+		$(Q)-rm -f $(LLSplitMSSM_OBJ)
 
 # BEGIN: NOT EXPORTED ##########################################
 clean-$(MODNAME)-src:
-		-rm -f $(LIBSplitMSSM_SRC)
-		-rm -f $(LIBSplitMSSM_HDR)
-		-rm -f $(LIBSplitMSSM_CXXQFT_HDR)
-		-rm -f $(EXESplitMSSM_SRC)
-		-rm -f $(LLSplitMSSM_SRC)
-		-rm -f $(LLSplitMSSM_MMA)
-		-rm -f $(METACODE_STAMP_SplitMSSM)
-		-rm -f $(SplitMSSM_INCLUDE_MK)
-		-rm -f $(SplitMSSM_SLHA_INPUT)
-		-rm -f $(SplitMSSM_REFERENCES)
-		-rm -f $(SplitMSSM_GNUPLOT)
+		$(Q)-rm -f $(LIBSplitMSSM_SRC)
+		$(Q)-rm -f $(LIBSplitMSSM_HDR)
+		$(Q)-rm -f $(LIBSplitMSSM_CXXQFT_HDR)
+		$(Q)-rm -f $(EXESplitMSSM_SRC)
+		$(Q)-rm -f $(LLSplitMSSM_SRC)
+		$(Q)-rm -f $(LLSplitMSSM_MMA)
+		$(Q)-rm -f $(METACODE_STAMP_SplitMSSM)
+		$(Q)-rm -f $(SplitMSSM_INCLUDE_MK)
+		$(Q)-rm -f $(SplitMSSM_SLHA_INPUT)
+		$(Q)-rm -f $(SplitMSSM_REFERENCES)
+		$(Q)-rm -f $(SplitMSSM_GNUPLOT)
 
 distclean-$(MODNAME): clean-$(MODNAME)-src
 # END:   NOT EXPORTED ##########################################
 
 clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-lib clean-$(MODNAME)-obj
-		-rm -f $(EXESplitMSSM_EXE)
+		$(Q)-rm -f $(EXESplitMSSM_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
 		@true
@@ -255,7 +266,7 @@ clean::         clean-$(MODNAME)
 distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
-		tar -czf $(SplitMSSM_TARBALL) \
+		$(Q)tar -czf $(SplitMSSM_TARBALL) \
 		$(LIBSplitMSSM_SRC) $(LIBSplitMSSM_HDR) $(LIBSplitMSSM_CXXQFT_HDR) \
 		$(EXESplitMSSM_SRC) \
 		$(LLSplitMSSM_SRC) $(LLSplitMSSM_MMA) \
@@ -272,7 +283,8 @@ run-metacode-$(MODNAME): $(METACODE_STAMP_SplitMSSM)
 
 ifeq ($(ENABLE_META),yes)
 $(METACODE_STAMP_SplitMSSM): $(DIR)/start.m $(DIR)/FlexibleSUSY.m $(META_SRC) $(TEMPLATES) $(SARAH_MODEL_FILES_SplitMSSM)
-		"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
+		@$(MSG)
+		$(Q)"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
 		@touch "$(METACODE_STAMP_SplitMSSM)"
 		@echo "Note: to regenerate SplitMSSM source files," \
 		      "please remove the file "
@@ -295,13 +307,16 @@ $(LLSplitMSSM_OBJ) $(LLSplitMSSM_LIB): \
 	CPPFLAGS += $(LLFLAGS)
 
 $(LIBSplitMSSM): $(LIBSplitMSSM_OBJ)
-		$(MODULE_MAKE_LIB_CMD) $@ $^
+		@$(MSG)
+		$(Q)$(MODULE_MAKE_LIB_CMD) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBSplitMSSM) $(MODSplitMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+		@$(MSG)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
 $(LLSplitMSSM_LIB): $(LLSplitMSSM_OBJ) $(LIBSplitMSSM) $(MODSplitMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
+		@$(MSG)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
 
 ALLDEP += $(LIBSplitMSSM_DEP) $(EXESplitMSSM_DEP)
 ALLSRC += $(LIBSplitMSSM_SRC) $(EXESplitMSSM_SRC)

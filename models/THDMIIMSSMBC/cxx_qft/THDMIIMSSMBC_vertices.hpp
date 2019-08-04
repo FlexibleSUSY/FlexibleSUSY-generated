@@ -16,52 +16,34 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 16:31:36
+// File generated at Sun 4 Aug 2019 19:02:09
 
 /**
  * @file cxx_qft/THDMIIMSSMBC_vertices.hpp
  *
- * This file was generated at Tue 22 Jan 2019 16:31:36 with FlexibleSUSY
- * 2.3.0 and SARAH 4.14.1 .
+ * This file was generated at Sun 4 Aug 2019 19:02:09 with FlexibleSUSY
+ * 2.4.0 and SARAH 4.14.2 .
  */
 
 #ifndef THDMIIMSSMBC_CXXQFT_VERTICES_H
 #define THDMIIMSSMBC_CXXQFT_VERTICES_H
 
-#include "concatenate.hpp"
 #include "multiindex.hpp"
 #include "numerics2.hpp"
-#include "wrappers.hpp"
+
+#include "THDMIIMSSMBC_fields.hpp"
 
 #include <array>
-
-#include <boost/array.hpp>
-#include <boost/range/join.hpp>
-#include <boost/version.hpp>
+#include <algorithm>
 
 #include <boost/mpl/erase.hpp>
+#include <boost/mpl/fold.hpp>
 #include <boost/mpl/joint_view.hpp>
-#include <boost/mpl/vector_c.hpp>
+#include <boost/mpl/vector.hpp>
 
-#include <boost/fusion/adapted/boost_array.hpp>
-#include <boost/fusion/adapted/mpl.hpp>
-#include <boost/fusion/include/vector.hpp>
+namespace flexiblesusy {
+namespace THDMIIMSSMBC_cxx_diagrams {
 
-#if BOOST_VERSION >= 105800
-#include <boost/fusion/include/move.hpp>
-#else
-#include <boost/fusion/include/copy.hpp>
-#endif
-
-#define INPUTPARAMETER(p) context.model.get_input().p
-#define MODELPARAMETER(p) context.model.get_##p()
-#define DERIVEDPARAMETER(p) context.model.p()
-#define PHASE(p) context.model.get_##p()
-
-namespace flexiblesusy
-{
-namespace THDMIIMSSMBC_cxx_diagrams
-{
    class ScalarVertex
    {
    private:
@@ -91,7 +73,6 @@ namespace THDMIIMSSMBC_cxx_diagrams
       }
 
       std::complex<double> left() const { return value.first; }
-
       std::complex<double> right() const { return value.second; }
 
       bool isZero() const
@@ -101,338 +82,328 @@ namespace THDMIIMSSMBC_cxx_diagrams
       }
    };
 
-   class MomentumDifferenceVertex
+/** \brief A class representing a numerically evaluated
+ * tree-level vertex that is proportional to a momentum.
+ * It consists of a complex number as well as an index
+ * corresponding to the index of the field to whose
+ * momentum the vertex is proportional.
+ **/
+class MomentumVertex {
+  std::complex<double> val;
+   int ind;
+public:
+   /** \brief Contruct a MomentumVertex from a
+    * complex number representing and a field index.
+    **/
+   MomentumVertex(const std::complex<double>& v, int i)
+      : val(v), ind(i)
+   {}
+
+   /** \brief Retrieve the index of the field to whose
+    * momentum the vertex is proportional.
+    * \returns the appropriate index
+    **/
+   int index() const { return ind; }
+
+   /** \brief Retrieve the numerical value of the vertex
+    * \param i The index of the field to whose momentum
+    * the vertex is proportional.
+    * \returns the coefficient of the even permutation
+    **/
+   std::complex<double> value(int i) const
    {
-   private:
-      std::complex<double> val;
-      int minuendIndex;
-      int subtrahendIndex;
-
-   public:
-      MomentumDifferenceVertex(std::complex<double> v, int mi, int si)
-         : val(v), minuendIndex(mi), subtrahendIndex(si)
-      {
-      }
-
-      std::complex<double> value(int mi, int si) const
-      {
-         if (mi == minuendIndex && si == subtrahendIndex)
-            return val;
-         if (mi == subtrahendIndex && si == minuendIndex)
-            return -val;
-
+      if (i != ind)
          throw std::invalid_argument(
-            "MomentumDifferenceVertex: Wrong index combination");
-         return 0.0;
-      }
+            "MomentumVertex: Wrong index specified");
 
-      bool isZero() const
-      {
-         return (is_zero(val.real()) && is_zero(val.imag()));
-      }
-   };
-
-   class InverseMetricVertex
-   {
-   private:
-      std::complex<double> val;
-
-   public:
-      InverseMetricVertex(std::complex<double> v) : val(v) {}
-
-      std::complex<double> value() const { return val; }
-
-      bool isZero() const
-      {
-         return (is_zero(val.real()) && is_zero(val.imag()));
-      }
-   };
-
-   /**
-    * @class VertexData<F...>
-    * @brief VertexData data for a vertex with the fields specified by F....
-    */
-   template <class... Fields>
-   struct VertexData;
-
-   struct context_base;
-
-   template <class... Fields>
-   class Vertex
-   {
-      using Data = VertexData<Fields...>;
-
-   public:
-      using index_bounds = typename boost::mpl::fold<
-         boost::mpl::vector<Fields...>,
-         boost::mpl::pair<boost::mpl::vector<>, boost::mpl::vector<>>,
-         boost::mpl::pair<
-            boost::mpl::joint_view<
-               boost::mpl::first<boost::mpl::_1>,
-               boost::mpl::first<meta::index_bounds<boost::mpl::_2>>>,
-            boost::mpl::joint_view<
-               boost::mpl::second<boost::mpl::_1>,
-               boost::mpl::second<meta::index_bounds<boost::mpl::_2>>>>>::type;
-      using indices_type =
-         std::array<int, detail::total_number_of_field_indices<
-                            boost::mpl::vector<Fields...>>::value>;
-      using vertex_type = typename Data::vertex_type;
-
-      template <int FieldIndex>
-      static typename field_indices<typename boost::mpl::at_c<
-         boost::mpl::vector<Fields...>, FieldIndex>::type>::type
-      field_indices(const indices_type& indices)
-      {
-         using namespace boost::mpl;
-         using fields = vector<Fields...>;
-
-         using result_type = typename field_indices<
-            typename boost::mpl::at_c<fields, FieldIndex>::type>::type;
-
-         using preceeding_fields =
-            typename erase<fields,
-                           typename advance<typename begin<fields>::type,
-                                            int_<FieldIndex>>::type,
-                           typename end<fields>::type>::type;
-
-         constexpr int offset =
-            detail::total_number_of_field_indices<preceeding_fields>::value;
-         constexpr int length = std::tuple_size<result_type>::value;
-
-         result_type result_indices;
-         std::copy(indices.begin() + offset, indices.begin() + offset + length,
-                   result_indices.begin());
-         return result_indices;
-      }
-
-      static vertex_type evaluate(const indices_type& indices,
-                                  const context_base& context);
-   };
-
-   template<> struct VertexData<typename bar<fields::Fe>::type, fields::Ah, fields::Fe>
-{
-   using vertex_type = ChiralVertex;
-};
-
-template<> struct VertexData<fields::Fe, fields::Ah, typename bar<fields::Fe>::type>
-{
-   using vertex_type = ChiralVertex;
-};
-
-template<> struct VertexData<fields::VP, typename bar<fields::Fe>::type, fields::Fe>
-{
-   using vertex_type = ChiralVertex;
-};
-
-template<> struct VertexData<typename bar<fields::Fe>::type, fields::Fv, fields::Hm>
-{
-   using vertex_type = ChiralVertex;
-};
-
-template<> struct VertexData<fields::Fe, typename bar<fields::Fv>::type, typename conj<fields::Hm>::type>
-{
-   using vertex_type = ChiralVertex;
-};
-
-template<> struct VertexData<fields::VP, typename conj<fields::Hm>::type, fields::Hm>
-{
-   using vertex_type = MomentumDifferenceVertex;
-};
-
-template<> struct VertexData<typename bar<fields::Fe>::type, fields::hh, fields::Fe>
-{
-   using vertex_type = ChiralVertex;
-};
-
-template<> struct VertexData<fields::Fe, fields::hh, typename bar<fields::Fe>::type>
-{
-   using vertex_type = ChiralVertex;
-};
-
-   template<> inline
-Vertex<typename bar<fields::Fe>::type, fields::Ah, fields::Fe>::vertex_type
-Vertex<typename bar<fields::Fe>::type, fields::Ah, fields::Fe>::evaluate(const indices_type& indices, const context_base& context)
-{
-   const int gt1 = indices[0];
-   const int gt3 = indices[1];
-   const int gt2 = indices[2];
-   const auto Ye = MODELPARAMETER(Ye);
-   const auto Ve = MODELPARAMETER(Ve);
-   const auto Ue = MODELPARAMETER(Ue);
-   const auto ZA = MODELPARAMETER(ZA);
-
-   const std::complex<double> left = std::complex<double>(0.,0.7071067811865475)*SUM(j2,0,2,Conj(Ve(gt2,j2))*SUM(j1,0,2,Conj(Ue(gt1,j1))*Ye(j1,j2)))*ZA(gt3,0);
-
-   const std::complex<double> right = std::complex<double>(0.,-0.7071067811865475)*SUM(j2,0,2,SUM(j1,0,2,Conj(Ye(j1,j2))*Ue(gt2,j1))*Ve(gt1,j2))*ZA(gt3,0);
-
-   return vertex_type(left, right);
-}
-
-template<> inline
-Vertex<fields::Fe, fields::Ah, typename bar<fields::Fe>::type>::vertex_type
-Vertex<fields::Fe, fields::Ah, typename bar<fields::Fe>::type>::evaluate(const indices_type& indices, const context_base& context)
-{
-   const int gt2 = indices[0];
-   const int gt3 = indices[1];
-   const int gt1 = indices[2];
-   const auto Ye = MODELPARAMETER(Ye);
-   const auto Ve = MODELPARAMETER(Ve);
-   const auto Ue = MODELPARAMETER(Ue);
-   const auto ZA = MODELPARAMETER(ZA);
-
-   const std::complex<double> left = std::complex<double>(0.,0.7071067811865475)*SUM(j2,0,2,Conj(Ve(gt2,j2))*SUM(j1,0,2,Conj(Ue(gt1,j1))*Ye(j1,j2)))*ZA(gt3,0);
-
-   const std::complex<double> right = std::complex<double>(0.,-0.7071067811865475)*SUM(j2,0,2,SUM(j1,0,2,Conj(Ye(j1,j2))*Ue(gt2,j1))*Ve(gt1,j2))*ZA(gt3,0);
-
-   return vertex_type(left, right);
-}
-
-template<> inline
-Vertex<fields::VP, typename bar<fields::Fe>::type, fields::Fe>::vertex_type
-Vertex<fields::VP, typename bar<fields::Fe>::type, fields::Fe>::evaluate(const indices_type& indices, const context_base& context)
-{
-   const int gt1 = indices[0];
-   const int gt2 = indices[1];
-   const auto g1 = MODELPARAMETER(g1);
-   const auto g2 = MODELPARAMETER(g2);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> left = 0.5*KroneckerDelta(gt1,gt2)*(0.7745966692414834*g1*Cos(ThetaW) + g2*Sin(ThetaW));
-
-   const std::complex<double> right = 0.7745966692414834*g1*Cos(ThetaW)*KroneckerDelta(gt1,gt2);
-
-   return vertex_type(left, right);
-}
-
-template<> inline
-Vertex<typename bar<fields::Fe>::type, fields::Fv, fields::Hm>::vertex_type
-Vertex<typename bar<fields::Fe>::type, fields::Fv, fields::Hm>::evaluate(const indices_type& indices, const context_base& context)
-{
-   const int gt1 = indices[0];
-   const int gt2 = indices[1];
-   const int gt3 = indices[2];
-   const auto Ye = MODELPARAMETER(Ye);
-   const auto Ue = MODELPARAMETER(Ue);
-   const auto ZP = MODELPARAMETER(ZP);
-
-   const std::complex<double> left = -(SUM(j1,0,2,Conj(Ue(gt1,j1))*Ye(j1,gt2))*ZP(gt3,0));
-
-   const std::complex<double> right = 0;
-
-   return vertex_type(left, right);
-}
-
-template<> inline
-Vertex<fields::Fe, typename bar<fields::Fv>::type, typename conj<fields::Hm>::type>::vertex_type
-Vertex<fields::Fe, typename bar<fields::Fv>::type, typename conj<fields::Hm>::type>::evaluate(const indices_type& indices, const context_base& context)
-{
-   const int gt2 = indices[0];
-   const int gt1 = indices[1];
-   const int gt3 = indices[2];
-   const auto Ye = MODELPARAMETER(Ye);
-   const auto Ue = MODELPARAMETER(Ue);
-   const auto ZP = MODELPARAMETER(ZP);
-
-   const std::complex<double> left = 0;
-
-   const std::complex<double> right = -(SUM(j1,0,2,Conj(Ye(j1,gt1))*Ue(gt2,j1))*ZP(gt3,0));
-
-   return vertex_type(left, right);
-}
-
-template<> inline
-Vertex<fields::VP, typename conj<fields::Hm>::type, fields::Hm>::vertex_type
-Vertex<fields::VP, typename conj<fields::Hm>::type, fields::Hm>::evaluate(const indices_type& indices, const context_base& context)
-{
-   int minuend_index = 2;
-   int subtrahend_index = 1;
-
-   const int gt2 = indices[0];
-   const int gt1 = indices[1];
-   const auto g1 = MODELPARAMETER(g1);
-   const auto g2 = MODELPARAMETER(g2);
-   const auto ZP = MODELPARAMETER(ZP);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = 0.5*(0.7745966692414834*g1*Cos(ThetaW) + g2*Sin(ThetaW))*(ZP(gt1,0)*ZP(gt2,0) + ZP(gt1,1)*ZP(gt2,1));
-
-   return vertex_type(result, minuend_index, subtrahend_index);
-}
-
-template<> inline
-Vertex<typename bar<fields::Fe>::type, fields::hh, fields::Fe>::vertex_type
-Vertex<typename bar<fields::Fe>::type, fields::hh, fields::Fe>::evaluate(const indices_type& indices, const context_base& context)
-{
-   const int gt1 = indices[0];
-   const int gt3 = indices[1];
-   const int gt2 = indices[2];
-   const auto Ye = MODELPARAMETER(Ye);
-   const auto Ve = MODELPARAMETER(Ve);
-   const auto Ue = MODELPARAMETER(Ue);
-   const auto ZH = MODELPARAMETER(ZH);
-
-   const std::complex<double> left = -0.7071067811865475*SUM(j2,0,2,Conj(Ve(gt2,j2))*SUM(j1,0,2,Conj(Ue(gt1,j1))*Ye(j1,j2)))*ZH(gt3,0);
-
-   const std::complex<double> right = -0.7071067811865475*SUM(j2,0,2,SUM(j1,0,2,Conj(Ye(j1,j2))*Ue(gt2,j1))*Ve(gt1,j2))*ZH(gt3,0);
-
-   return vertex_type(left, right);
-}
-
-template<> inline
-Vertex<fields::Fe, fields::hh, typename bar<fields::Fe>::type>::vertex_type
-Vertex<fields::Fe, fields::hh, typename bar<fields::Fe>::type>::evaluate(const indices_type& indices, const context_base& context)
-{
-   const int gt2 = indices[0];
-   const int gt3 = indices[1];
-   const int gt1 = indices[2];
-   const auto Ye = MODELPARAMETER(Ye);
-   const auto Ve = MODELPARAMETER(Ve);
-   const auto Ue = MODELPARAMETER(Ue);
-   const auto ZH = MODELPARAMETER(ZH);
-
-   const std::complex<double> left = -0.7071067811865475*SUM(j2,0,2,Conj(Ve(gt2,j2))*SUM(j1,0,2,Conj(Ue(gt1,j1))*Ye(j1,j2)))*ZH(gt3,0);
-
-   const std::complex<double> right = -0.7071067811865475*SUM(j2,0,2,SUM(j1,0,2,Conj(Ye(j1,j2))*Ue(gt2,j1))*Ve(gt1,j2))*ZH(gt3,0);
-
-   return vertex_type(left, right);
-}
-
-   namespace detail
-   {
-         static ChiralVertex unit_charge(const context_base& context)
-   {
-      using vertex_type = ChiralVertex;
-
-      std::array<int, 1> electron_indices = { 0 };
-      std::array<int, 0> photon_indices = {};
-      std::array<int, 2> indices = concatenate(photon_indices, electron_indices, electron_indices);
-
-         const int gt1 = indices[0];
-      const int gt2 = indices[1];
-      const auto g1 = MODELPARAMETER(g1);
-      const auto g2 = MODELPARAMETER(g2);
-      const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-      const std::complex<double> left = 0.5*KroneckerDelta(gt1,gt2)*(0.7745966692414834*g1*Cos(ThetaW) + g2*Sin(ThetaW));
-
-      const std::complex<double> right = 0.7745966692414834*g1*Cos(ThetaW)*KroneckerDelta(gt1,gt2);
-
-      return vertex_type(left, right);
-   }
+      return val;
    }
 
-   static double unit_charge(const context_base& context)
+   bool isZero() const
    {
-      return -(detail::unit_charge(context).left().real() /
-               fields::Electron::electric_charge);
+      return (is_zero(val.real()) && is_zero(val.imag()));
    }
+};
+
+/** \brief A class representing a numerically evaluated
+ * tree-level vertex with three vector bosons.
+ * It consists of one complex number as well as an \a ordering
+ * encoding whether the complex number is taken to be the
+ * coefficient of
+ *
+ * \f{equation}{
+ * g[l1, l2] * (p[field1, l3] - p[field2, lIndex3]) +
+ * g[l2, l3] * (p[field2, l1] - p[field3, lIndex1]) +
+ * g[l1, l3] * (p[field3, l2] - p[field1, lIndex2])
+ * \f}
+ *
+ * or its negative.
+ * The former corresponds to the \a even permutation and
+ * the latter to the \a odd permutation.
+ **/
+class TripleVectorVertex {
+public:
+   struct even_permutation {};
+   struct odd_permutation {};
+private:
+   std::complex<double> val;
+   bool even;
+public:
+   /** \brief Contruct a TripleVectorVertex from a
+    * complex number representing the even coefficient.
+    **/
+   TripleVectorVertex(const std::complex<double>& v,
+                      even_permutation)
+      : val(v), even(true)
+   {}
+
+   /** \brief Contruct a TripleVectorVertex from a
+    * complex number representing the odd coefficient.
+    **/
+   TripleVectorVertex(const std::complex<double>& v,
+                      odd_permutation)
+      : val(v), even(false)
+   {}
+
+   /** \brief Check whether the value in the vertex is stored
+    * as proportional to the even permutation.
+    * \returns true if yes and false otherwise
+    **/
+   bool is_even() const { return even; }
+
+   /** \brief Retrieve the coefficient of the even permutation
+    * \returns the coefficient of the even permutation
+    **/
+   std::complex<double> value(even_permutation) const
+   { return even ? val : - val; }
+
+   /** \brief Retrieve the coefficient of the odd permutation
+    * \returns the coefficient of the odd permutation
+    **/
+   std::complex<double> value(odd_permutation) const
+   { return even ? - val : val; }
+
+   bool isZero() const
+   {
+      return (is_zero(val.real()) && is_zero(val.imag()));
+   }
+};
+
+/** \brief A class representing a numerically evaluated
+ * tree-level vertex with four vector bosons.
+ * It consists of three complex numbers corresponding to
+ * (in order) the basis expansion with respect to the basis:
+ *
+ * \f{equation}{
+ * ( g[l1, l2] g[l3, l4], g[l1, l3] g[l2, l4], g[l1, l4] g[l2, l3] )
+ * \f}
+ **/
+class QuadrupleVectorVertex {
+   std::complex<double> part1, part2, part3;
+
+public:
+   /** \brief Contruct a QuadrupleVectorVertex from three
+    * complex numbers representing the coefficients in the
+    * basis expansion.
+    **/
+   QuadrupleVectorVertex(const std::complex<double>& p1,
+                         const std::complex<double>& p2,
+                         const std::complex<double>& p3)
+      : part1(p1), part2(p2), part3(p3)
+   {}
+
+   /** \brief Retrieve the coefficient of \f$ g[l1, l2] g[l3, l4] \f$
+    * \returns the corresponding coefficient
+    **/
+   std::complex<double> value1() const { return part1; }
+
+   /** \brief Retrieve the coefficient of \f$ g[l1, l3] g[l2, l4] \f$
+    * \returns the corresponding coefficient
+    **/
+   std::complex<double> value2() const { return part2; }
+
+   /** \brief Retrieve the coefficient of \f$ g[l1, l4] g[l2, l3] \f$
+    * \returns the corresponding coefficient
+    **/
+   std::complex<double> value3() const { return part3; }
+
+   bool isZero() const
+   {
+      return (is_zero(part1.real()) && is_zero(part1.imag()) &&
+              is_zero(part2.real()) && is_zero(part2.imag()) &&
+              is_zero(part3.real()) && is_zero(part3.imag()));
+   }
+};
+
+class MomentumDifferenceVertex {
+   std::complex<double> val;
+   int minuendIndex;
+   int subtrahendIndex;
+public:
+   MomentumDifferenceVertex(std::complex<double> v, int mi, int si)
+      : val(v), minuendIndex(mi), subtrahendIndex(si) {}
+
+   std::complex<double> value(int mi, int si) const
+   {
+      if (mi == minuendIndex && si == subtrahendIndex)
+         return val;
+      if (mi == subtrahendIndex && si == minuendIndex)
+         return -val;
+
+      throw std::invalid_argument(
+         "MomentumDifferenceVertex: Wrong index combination");
+      return 0.0;
+   }
+
+   int incoming_index() const { return minuendIndex; }
+   int outgoing_index() const { return subtrahendIndex; }
+
+   bool isZero() const
+   {
+      return (is_zero(val.real()) && is_zero(val.imag()));
+   }
+};
+
+class InverseMetricVertex {
+   std::complex<double> val;
+public:
+   InverseMetricVertex(std::complex<double> v) : val(v) {}
+
+   std::complex<double> value() const { return val; }
+
+   bool isZero() const
+   {
+      return (is_zero(val.real()) && is_zero(val.imag()));
+   }
+};
+
+namespace detail {
+template<class... Fields> struct VertexImpl;
+} // namespace detail
+
+template <class... Fields>
+struct Vertex {
+   using index_bounds = typename boost::mpl::fold<
+      boost::mpl::vector<Fields...>,
+      boost::mpl::pair<boost::mpl::vector<>, boost::mpl::vector<>>,
+      boost::mpl::pair<
+         boost::mpl::joint_view<
+            boost::mpl::first<boost::mpl::_1>,
+            boost::mpl::first<meta::index_bounds<boost::mpl::_2>>
+         >,
+         boost::mpl::joint_view<
+            boost::mpl::second<boost::mpl::_1>,
+            boost::mpl::second<meta::index_bounds<boost::mpl::_2>>
+         >
+      >
+   >::type;
+   using indices_type = std::array<int,
+      detail::total_number_of_field_indices<
+         boost::mpl::vector<Fields...>
+      >::value
+   >;
+   using vertex_type = decltype(
+      detail::VertexImpl<Fields...>::evaluate(
+         std::declval<indices_type>(),
+         std::declval<context_base>()
+      )
+   );
+
+   template <int FieldIndex>
+   static typename field_indices<typename boost::mpl::at_c<
+      boost::mpl::vector<Fields...>, FieldIndex>::type
+   >::type indices_of_field(const indices_type& indices)
+   {
+      using namespace boost::mpl;
+      using fields = vector<Fields...>;
+
+      using result_type = typename field_indices<
+         typename boost::mpl::at_c<fields, FieldIndex>::type
+      >::type;
+
+      using preceeding_fields = typename erase<fields,
+         typename advance<
+            typename begin<fields>::type,
+            int_<FieldIndex>
+         >::type,
+         typename end<fields>::type
+      >::type;
+
+      constexpr int offset =
+         detail::total_number_of_field_indices<preceeding_fields>::value;
+      constexpr int length = std::tuple_size<result_type>::value;
+
+      result_type result_indices;
+      std::copy(indices.begin() + offset,
+         indices.begin() + offset + length,
+         result_indices.begin()
+      );
+
+      return result_indices;
+   }
+
+   static vertex_type
+   evaluate(const indices_type& indices, const context_base& context)
+   {
+      return detail::VertexImpl<Fields...>::evaluate(indices, context);
+   }
+};
+
+struct context_base;
+
+namespace detail {
+template<> struct VertexImpl<fields::Ah, typename bar<fields::Fe>::type, fields::Fe>
+{
+   static ChiralVertex evaluate(const std::array<int, 3>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<fields::hh, typename bar<fields::Fe>::type, fields::Fe>
+{
+   static ChiralVertex evaluate(const std::array<int, 3>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<typename bar<fields::Fe>::type, fields::Fe, fields::Ah>
+{
+   static ChiralVertex evaluate(const std::array<int, 3>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<typename bar<fields::Fe>::type, fields::Fe, fields::hh>
+{
+   static ChiralVertex evaluate(const std::array<int, 3>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<typename bar<fields::Fe>::type, fields::Fe, fields::VP>
+{
+   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<typename bar<fields::Fe>::type, fields::Hm, fields::Fv>
+{
+   static ChiralVertex evaluate(const std::array<int, 3>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<typename bar<fields::Fv>::type, typename conj<fields::Hm>::type, fields::Fe>
+{
+   static ChiralVertex evaluate(const std::array<int, 3>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<typename conj<fields::Hm>::type, fields::Hm, fields::VP>
+{
+   static MomentumDifferenceVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+};
+
+
+
+ChiralVertex unit_charge(const context_base& context);
+} // namespace detail
+
+inline double unit_charge(const context_base& context)
+{
+   return -(detail::unit_charge(context).left().real() /
+            fields::Electron::electric_charge);
+}
 
 } // namespace THDMIIMSSMBC_cxx_diagrams
 } // namespace flexiblesusy
-
-#undef INPUTPARAMETER
-#undef MODELPARAMETER
-#undef DERIVEDPARAMETER
-#undef PHASE
 
 #endif

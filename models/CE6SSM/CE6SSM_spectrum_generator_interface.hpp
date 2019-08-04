@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 15:17:38
+// File generated at Sun 4 Aug 2019 17:24:09
 
 #ifndef CE6SSM_SPECTRUM_GENERATOR_INTERFACE_H
 #define CE6SSM_SPECTRUM_GENERATOR_INTERFACE_H
@@ -139,7 +139,7 @@ void CE6SSM_spectrum_generator_interface<T>::write_running_couplings(
       tmp_model.run_to(start);
    } catch (const Error& error) {
       ERROR("write_running_couplings: running to scale "
-            << start << " failed: " << error.what());
+            << start << " failed: " << error.what_detailed());
       return;
    }
 
@@ -186,11 +186,11 @@ void CE6SSM_spectrum_generator_interface<T>::translate_exception_to_problem(CE6S
          error.get_scale());
    } catch (const NonPerturbativeRunningQedQcdError& error) {
       model.get_problems().flag_no_perturbative();
-      model.get_problems().flag_thrown(error.what());
+      model.get_problems().flag_thrown(error.what_detailed());
    } catch (const NoSinThetaWConvergenceError&) {
       model.get_problems().flag_no_sinThetaW_convergence();
    } catch (const Error& error) {
-      model.get_problems().flag_thrown(error.what());
+      model.get_problems().flag_thrown(error.what_detailed());
    } catch (const std::exception& error) {
       model.get_problems().flag_thrown(error.what());
    }

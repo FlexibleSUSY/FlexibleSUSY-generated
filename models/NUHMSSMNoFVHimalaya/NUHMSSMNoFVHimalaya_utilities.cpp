@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 13:27:23
+// File generated at Sun 4 Aug 2019 17:11:51
 
 #include "NUHMSSMNoFVHimalaya_utilities.hpp"
 #include "NUHMSSMNoFVHimalaya_input_parameters.hpp"
@@ -264,7 +264,7 @@ void to_database(
       database::Database db(file_name);
       db.insert("Point", names, values);
    } catch(const flexiblesusy::Error& e) {
-      ERROR(e.what());
+      ERROR(e.what_detailed());
    }
 }
 
@@ -277,7 +277,7 @@ Eigen::ArrayXd extract_entry(const std::string& file_name, long long entry)
    try {
       values = db.extract("Point", entry);
    } catch (const flexiblesusy::Error& e) {
-      ERROR(e.what());
+      ERROR(e.what_detailed());
    }
 
    return values;

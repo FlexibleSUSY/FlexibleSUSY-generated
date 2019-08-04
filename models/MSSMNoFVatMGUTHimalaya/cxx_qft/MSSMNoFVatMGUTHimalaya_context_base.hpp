@@ -16,26 +16,28 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 13:27:22
+// File generated at Sun 4 Aug 2019 17:12:18
 
 /**
  * @file cxx_qft/MSSMNoFVatMGUTHimalaya_context_base.hpp
  *
- * This file was generated at Tue 22 Jan 2019 13:27:22 with FlexibleSUSY
- * 2.3.0 and SARAH 4.14.1 .
+ * This file was generated at Sun 4 Aug 2019 17:12:18 with FlexibleSUSY
+ * 2.4.0 and SARAH 4.14.2 .
  */
 
 #ifndef MSSMNoFVatMGUTHimalaya_CXXQFT_CONTEXT_BASE_H
 #define MSSMNoFVatMGUTHimalaya_CXXQFT_CONTEXT_BASE_H
 
-#include "MSSMNoFVatMGUTHimalaya_fields.hpp"
+#include "MSSMNoFVatMGUTHimalaya_mass_eigenstates.hpp"
 
-namespace flexiblesusy
-{
-namespace MSSMNoFVatMGUTHimalaya_cxx_diagrams
-{
+#include "MSSMNoFVatMGUTHimalaya_fields.hpp"
+#include "MSSMNoFVatMGUTHimalaya_mass_eigenstates.hpp"
+
+namespace flexiblesusy {
+namespace MSSMNoFVatMGUTHimalaya_cxx_diagrams {
+
    struct context_base {
-      MSSMNoFVatMGUTHimalaya_mass_eigenstates& model; ///< The model object.
+      MSSMNoFVatMGUTHimalaya_mass_eigenstates model; ///< The model object.
 
       template <class Field>
       double mass(const typename field_indices<Field>::type& indices) const
@@ -45,7 +47,7 @@ namespace MSSMNoFVatMGUTHimalaya_cxx_diagrams
          return mass_impl<CleanField>(indices);
       }
 
-      context_base(MSSMNoFVatMGUTHimalaya_mass_eigenstates& m) : model(m) {}
+      context_base(const MSSMNoFVatMGUTHimalaya_mass_eigenstates& m) : model(m) {}
       context_base(const context_base&) = default;
       context_base(context_base&&) = default;
 
@@ -61,15 +63,15 @@ namespace MSSMNoFVatMGUTHimalaya_cxx_diagrams
    };
 
    template<> inline
-double context_base::mass_impl<fields::VG>(const std::array<int, 1>& indices) const
+double context_base::mass_impl<fields::VG>(const std::array<int, 0>& indices) const
 { return model.get_MVG(); }
 
 template<> inline
-double context_base::mass_impl<fields::gG>(const std::array<int, 1>& indices) const
+double context_base::mass_impl<fields::gG>(const std::array<int, 0>& indices) const
 { return model.get_MVG(); }
 
 template<> inline
-double context_base::mass_impl<fields::Glu>(const std::array<int, 1>& indices) const
+double context_base::mass_impl<fields::Glu>(const std::array<int, 0>& indices) const
 { return model.get_MGlu(); }
 
 template<> inline
@@ -97,27 +99,27 @@ double context_base::mass_impl<fields::gWmC>(const std::array<int, 0>& indices) 
 { return model.get_MVWm(); }
 
 template<> inline
-double context_base::mass_impl<fields::Fd>(const std::array<int, 1>& indices) const
+double context_base::mass_impl<fields::Fd>(const std::array<int, 0>& indices) const
 { return model.get_MFd(); }
 
 template<> inline
-double context_base::mass_impl<fields::Fs>(const std::array<int, 1>& indices) const
+double context_base::mass_impl<fields::Fs>(const std::array<int, 0>& indices) const
 { return model.get_MFs(); }
 
 template<> inline
-double context_base::mass_impl<fields::Fb>(const std::array<int, 1>& indices) const
+double context_base::mass_impl<fields::Fb>(const std::array<int, 0>& indices) const
 { return model.get_MFb(); }
 
 template<> inline
-double context_base::mass_impl<fields::Fu>(const std::array<int, 1>& indices) const
+double context_base::mass_impl<fields::Fu>(const std::array<int, 0>& indices) const
 { return model.get_MFu(); }
 
 template<> inline
-double context_base::mass_impl<fields::Fc>(const std::array<int, 1>& indices) const
+double context_base::mass_impl<fields::Fc>(const std::array<int, 0>& indices) const
 { return model.get_MFc(); }
 
 template<> inline
-double context_base::mass_impl<fields::Ft>(const std::array<int, 1>& indices) const
+double context_base::mass_impl<fields::Ft>(const std::array<int, 0>& indices) const
 { return model.get_MFt(); }
 
 template<> inline
@@ -157,11 +159,11 @@ double context_base::mass_impl<fields::SvtL>(const std::array<int, 0>& indices) 
 { return model.get_MSvtL(); }
 
 template<> inline
-double context_base::mass_impl<fields::Sd>(const std::array<int, 2>& indices) const
+double context_base::mass_impl<fields::Sd>(const std::array<int, 1>& indices) const
 { return model.get_MSd(indices[0]); }
 
 template<> inline
-double context_base::mass_impl<fields::Su>(const std::array<int, 2>& indices) const
+double context_base::mass_impl<fields::Su>(const std::array<int, 1>& indices) const
 { return model.get_MSu(indices[0]); }
 
 template<> inline
@@ -177,19 +179,19 @@ double context_base::mass_impl<fields::Stau>(const std::array<int, 1>& indices) 
 { return model.get_MStau(indices[0]); }
 
 template<> inline
-double context_base::mass_impl<fields::Ss>(const std::array<int, 2>& indices) const
+double context_base::mass_impl<fields::Ss>(const std::array<int, 1>& indices) const
 { return model.get_MSs(indices[0]); }
 
 template<> inline
-double context_base::mass_impl<fields::Sc>(const std::array<int, 2>& indices) const
+double context_base::mass_impl<fields::Sc>(const std::array<int, 1>& indices) const
 { return model.get_MSc(indices[0]); }
 
 template<> inline
-double context_base::mass_impl<fields::Sb>(const std::array<int, 2>& indices) const
+double context_base::mass_impl<fields::Sb>(const std::array<int, 1>& indices) const
 { return model.get_MSb(indices[0]); }
 
 template<> inline
-double context_base::mass_impl<fields::St>(const std::array<int, 2>& indices) const
+double context_base::mass_impl<fields::St>(const std::array<int, 1>& indices) const
 { return model.get_MSt(indices[0]); }
 
 template<> inline

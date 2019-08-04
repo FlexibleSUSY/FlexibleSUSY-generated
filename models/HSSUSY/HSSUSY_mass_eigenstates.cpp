@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 16:37:01
+// File generated at Sun 4 Aug 2019 19:03:04
 
 /**
  * @file HSSUSY_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from MSbar
  * parameters.
  *
- * This file was generated at Tue 22 Jan 2019 16:37:01 with FlexibleSUSY
- * 2.3.0 (git commit: b5dda61ad35a8ffff74bde70f63e1c2b815e751a) and SARAH 4.14.1 .
+ * This file was generated at Sun 4 Aug 2019 19:03:04 with FlexibleSUSY
+ * 2.4.0 (git commit: 544c83a2e6b5f23da8d0b6ccdb06f1c91f75d6eb) and SARAH 4.14.2 .
  */
 
 #include "HSSUSY_mass_eigenstates.hpp"
@@ -58,6 +58,7 @@
 
 #include "sm_fourloophiggs.hpp"
 
+#include "sm_twoloop_mt.hpp"
 #include "sm_threeloop_as.hpp"
 
 
@@ -3769,7 +3770,7 @@ void CLASSNAME::calculate_MFu_pole()
 
       {
          const double currentScale = get_scale();
-         qcd_1l = -0.008443431970194815*(4. - 3.*Log(Sqr(MFu(2))/Sqr(
+         qcd_1l = 0.008443431970194815*(-4. + 3.*Log(Sqr(MFu(2))/Sqr(
             currentScale)))*Sqr(g3);
       }
 
@@ -3777,19 +3778,30 @@ void CLASSNAME::calculate_MFu_pole()
 
       if (pole_mass_loop_order > 1 && TOP_POLE_QCD_CORRECTION > 0) {
          const double currentScale = get_scale();
-         qcd_2l = -0.005284774766427138*Quad(g3) - 0.0032348537833770956*Log(
-            Sqr(currentScale)/Sqr(MFu(2)))*Quad(g3) - 0.0008822328500119351*
-            Quad(g3)*Sqr(Log(Sqr(currentScale)/Sqr(MFu(2))));
+         qcd_2l = 2.2278607323533713e-6*Quad(g3)*(-2372.129769909197 + 1452.*
+            Log(Sqr(MFu(2))/Sqr(currentScale)) - 396.*Sqr(Log(Sqr(MFu(2))/Sqr(
+            currentScale))));
       }
 
       double qcd_3l = 0.;
 
       if (pole_mass_loop_order > 2 && TOP_POLE_QCD_CORRECTION > 1) {
          const double currentScale = get_scale();
-         qcd_3l = -0.00003352082872926087*Power6(g3)*(35.70257721711602 + 1.*
-            Cube(Log(Sqr(currentScale)/Sqr(MFu(2)))) + 15.3874108148848*Log(Sqr
-            (currentScale)/Sqr(MFu(2))) + 5.378787878787879*Sqr(Log(Sqr(
-            currentScale)/Sqr(MFu(2)))));
+         qcd_3l = 1.0450439184830051e-10*Power6(g3)*(-1.1451958668162137e7 +
+            320760.*Cube(Log(Sqr(MFu(2))/Sqr(currentScale))) +
+            4.935665892982448e6*Log(Sqr(MFu(2))/Sqr(currentScale)) - 1.7253e6*
+            Sqr(Log(Sqr(MFu(2))/Sqr(currentScale))));
+      }
+
+      double qcd_4l = 0.;
+
+      if (pole_mass_loop_order > 3 && TOP_POLE_QCD_CORRECTION > 2) {
+         const double currentScale = get_scale();
+         qcd_4l = -1.6081297554549208e-9*Power8(g3)*(211681.74421123447 - 5638.
+            *Cube(Log(Sqr(MFu(2))/Sqr(currentScale))) - 104673.38261571848*Log(
+            Sqr(MFu(2))/Sqr(currentScale)) + 825.*Quad(Log(Sqr(MFu(2))/Sqr(
+            currentScale))) + 22162.91142653778*Sqr(Log(Sqr(MFu(2))/Sqr(
+            currentScale))));
       }
 
       const Eigen::Matrix<double,3,3> M_tree(get_mass_matrix_Fu());
@@ -3816,7 +3828,7 @@ void CLASSNAME::calculate_MFu_pole()
          }
          Eigen::Matrix<double,3,3> delta_M(- self_energy_PR * M_tree - M_tree *
             self_energy_PL - self_energy_1);
-         delta_M(2,2) -= M_tree(2,2) * (qcd_1l + qcd_2l + qcd_3l);
+         delta_M(2,2) -= M_tree(2,2) * (qcd_1l + qcd_2l + qcd_3l + qcd_4l);
          const Eigen::Matrix<double,3,3> M_loop(M_tree + delta_M);
          Eigen::Array<double,3,1> eigen_values;
          decltype(Vu) mix_Vu;
@@ -4001,29 +4013,55 @@ double CLASSNAME::calculate_MFu_DRbar(double m_pole, int idx) const
       idx, idx));
 
    const double currentScale = get_scale();
-   double qcd_1l = 0., qcd_2l = 0., qcd_3l = 0.;
+   double qcd_1l = 0., qcd_2l = 0., qcd_3l = 0., qcd_4l = 0.;
+   double atas_S_2l = 0., atas_LR_2l = 0., atat_S_2l = 0., atat_LR_2l = 0.;
 
-   qcd_1l = -0.008443431970194815*(4. - 3.*Log(Sqr(MFu(idx))/Sqr(currentScale))
+   qcd_1l = 0.008443431970194815*(-4. + 3.*Log(Sqr(MFu(idx))/Sqr(currentScale))
       )*Sqr(g3);
 
    if (get_thresholds() > 1 && threshold_corrections.mt > 1) {
-      const double q_2l = 0.005284774766427138*Quad(g3) + 0.0032348537833770956
-         *Log(Sqr(currentScale)/Sqr(MFu(idx)))*Quad(g3) + 0.0008822328500119351
-         *Quad(g3)*Sqr(Log(Sqr(currentScale)/Sqr(MFu(idx))));
+      const double q_2l = 2.2278607323533713e-6*Quad(g3)*(2372.129769909197 -
+         1452.*Log(Sqr(MFu(idx))/Sqr(currentScale)) + 396.*Sqr(Log(Sqr(MFu(idx)
+         )/Sqr(currentScale))));
 
       qcd_2l = -q_2l + qcd_1l * qcd_1l;
+
+      const double gs = g3;
+      const double yt = Yu(2,2);
+      const double t = Sqr(MFu(idx));
+      const double h = Sqr(Mhh);
+      const double s = Sqr(p);
+      const double qq = Sqr(get_scale());
+
+      atas_S_2l  = sm_twoloop_mt::delta_mt_2loop_as_at_S_flexiblesusy(gs, yt, t
+         , h, s, qq);
+      atas_LR_2l = sm_twoloop_mt::delta_mt_2loop_as_at_LR_flexiblesusy(gs, yt,
+         t, h, s, qq);
+
+      atat_S_2l  = sm_twoloop_mt::delta_mt_2loop_at_at_S_flexiblesusy(yt, t, h,
+         s, qq);
+      atat_LR_2l = sm_twoloop_mt::delta_mt_2loop_at_at_LR_flexiblesusy(yt, t, h
+         , s, qq);
    }
 
    if (get_thresholds() > 2 && threshold_corrections.mt > 2) {
-      qcd_3l = -0.0008783313853540776*Power6(g3) - 5.078913443827405e-6*Cube(
-         Log(Sqr(currentScale)/Sqr(MFu(idx))))*Power6(g3) -
-         0.00011624292515063117*Log(Sqr(currentScale)/Sqr(MFu(idx)))*Power6(g3)
-         - 0.00002183932780845784*Power6(g3)*Sqr(Log(Sqr(currentScale)/Sqr(MFu(
-         idx))));
+      qcd_3l = 1.0450439184830051e-10*Power6(g3)*(-8.404731799492894e6 + 48600.
+         *Cube(Log(Sqr(MFu(idx))/Sqr(currentScale))) + 1.112325741480515e6*Log(
+         Sqr(MFu(idx))/Sqr(currentScale)) - 208980.*Sqr(Log(Sqr(MFu(idx))/Sqr(
+         currentScale))));
    }
 
-   const double m_susy_drbar = m_pole + self_energy_1 + m_pole * (
-      self_energy_PL + self_energy_PR + qcd_1l + qcd_2l + qcd_3l);
+   if (get_thresholds() > 3 && threshold_corrections.mt > 3) {
+      qcd_4l = 1.6544544809207004e-13*Power8(g3)*(-1.5015630809970136e9 +
+         3.1428e6*Cube(Log(Sqr(MFu(idx))/Sqr(currentScale))) +
+         4.409910543513119e8*Log(Sqr(MFu(idx))/Sqr(currentScale)) - 826200.*
+         Quad(Log(Sqr(MFu(idx))/Sqr(currentScale))) - 1.7811910793512717e7*Sqr(
+         Log(Sqr(MFu(idx))/Sqr(currentScale))));
+   }
+
+   const double m_susy_drbar = m_pole + self_energy_1 + atas_S_2l + atat_S_2l +
+      m_pole * (self_energy_PL + self_energy_PR + qcd_1l + qcd_2l + qcd_3l +
+      qcd_4l + atas_LR_2l + atat_LR_2l);
 
    return m_susy_drbar;
 }
@@ -4088,6 +4126,12 @@ double CLASSNAME::ThetaW() const
 {
 
    return ArcCos(Abs(ZZ(0,0)));
+}
+
+double CLASSNAME::VEV() const
+{
+
+   return v;
 }
 
 

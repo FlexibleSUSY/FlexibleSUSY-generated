@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 16:37:56
+// File generated at Sun 4 Aug 2019 19:04:16
 
 #include "HSSUSY_two_scale_low_scale_constraint.hpp"
 #include "HSSUSY_two_scale_model.hpp"
@@ -32,6 +32,7 @@
 #include "raii.hpp"
 #include "root_finder.hpp"
 #include "threshold_loop_functions.hpp"
+#include "sm_twoloop_mt.hpp"
 #include "sm_threeloop_as.hpp"
 
 
@@ -270,7 +271,7 @@ double HSSUSY_low_scale_constraint<Two_scale>::calculate_theta_w()
 
       MODEL->get_problems().unflag_no_sinThetaW_convergence();
    } catch (const Error& e) {
-      VERBOSE_MSG(e.what());
+      VERBOSE_MSG(e.what_detailed());
       MODEL->get_problems().flag_no_sinThetaW_convergence();
    }
 

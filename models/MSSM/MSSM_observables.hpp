@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 17:58:09
+// File generated at Sun 4 Aug 2019 20:05:06
 
 #ifndef MSSM_OBSERVABLES_H
 #define MSSM_OBSERVABLES_H
@@ -35,7 +35,7 @@ class MSSM_mass_eigenstates;
 class Physical_input;
 
 struct MSSM_observables {
-   static const int NUMBER_OF_OBSERVABLES = 0;
+   static const int NUMBER_OF_OBSERVABLES = 5;
 
    MSSM_observables();
    Eigen::ArrayXd get() const; ///< returns vector of all observables
@@ -43,6 +43,11 @@ struct MSSM_observables {
    void clear(); ///< sets all observables to zero
    void set(const Eigen::ArrayXd&); ///< sets all observables from given vector
 
+   double a_muon; ///< a_muon = (g-2)/2 of the muon (calculated with FlexibleSUSY)
+   double edm_Fe_0; ///< electric dipole moment of Fe(0) [1/GeV]
+   double edm_Fe_1; ///< electric dipole moment of Fe(1) [1/GeV]
+   double edm_Fe_2; ///< electric dipole moment of Fe(2) [1/GeV]
+   double Fe_to_Fe_VP; ///< BR(Fe1 -> Fe0 VP)
 
 };
 

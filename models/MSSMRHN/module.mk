@@ -23,12 +23,16 @@ MSSMRHN_SUSY_BETAS_MK := \
 MSSMRHN_SOFT_BETAS_MK := \
 		$(DIR)/soft_betas.mk
 
+MSSMRHN_CXX_QFT_VERTICES_MK := \
+		$(DIR)/cxx_qft/vertices.mk
+
 MSSMRHN_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
 MSSMRHN_INCLUDE_MK := \
 		$(MSSMRHN_SUSY_BETAS_MK) \
-		$(MSSMRHN_SOFT_BETAS_MK)
+		$(MSSMRHN_SOFT_BETAS_MK) \
+		$(MSSMRHN_CXX_QFT_VERTICES_MK)
 
 MSSMRHN_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.MSSMRHN_generated \
@@ -47,6 +51,8 @@ MSSMRHN_TARBALL := \
 LIBMSSMRHN_SRC := \
 		$(DIR)/MSSMRHN_a_muon.cpp \
 		$(DIR)/MSSMRHN_edm.cpp \
+		$(DIR)/MSSMRHN_FFV_form_factors.cpp \
+		$(DIR)/MSSMRHN_l_to_lgamma.cpp \
 		$(DIR)/MSSMRHN_effective_couplings.cpp \
 		$(DIR)/MSSMRHN_info.cpp \
 		$(DIR)/MSSMRHN_input_parameters.cpp \
@@ -76,6 +82,8 @@ LIBMSSMRHN_HDR := \
 		$(DIR)/MSSMRHN_a_muon.hpp \
 		$(DIR)/MSSMRHN_convergence_tester.hpp \
 		$(DIR)/MSSMRHN_edm.hpp \
+		$(DIR)/MSSMRHN_FFV_form_factors.hpp \
+		$(DIR)/MSSMRHN_l_to_lgamma.hpp \
 		$(DIR)/MSSMRHN_effective_couplings.hpp \
 		$(DIR)/MSSMRHN_ewsb_solver.hpp \
 		$(DIR)/MSSMRHN_ewsb_solver_interface.hpp \
@@ -121,6 +129,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(MSSMRHN_SUSY_BETAS_MK)
 -include $(MSSMRHN_SOFT_BETAS_MK)
+-include $(MSSMRHN_CXX_QFT_VERTICES_MK)
 -include $(MSSMRHN_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
@@ -131,6 +140,8 @@ ifeq ($(findstring doc-,$(MAKECMDGOALS)),)
 $(MSSMRHN_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(MSSMRHN_SOFT_BETAS_MK): run-metacode-$(MODNAME)
+		@$(CONVERT_DOS_PATHS) $@
+$(MSSMRHN_CXX_QFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(MSSMRHN_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
@@ -192,56 +203,56 @@ all-$(MODNAME): $(LIBMSSMRHN) $(EXEMSSMRHN_EXE)
 
 ifneq ($(INSTALL_DIR),)
 install-src::
-		install -d $(MSSMRHN_INSTALL_DIR)
-		install -d $(MSSMRHN_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(LIBMSSMRHN_SRC) $(MSSMRHN_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBMSSMRHN_HDR) $(MSSMRHN_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBMSSMRHN_CXXQFT_HDR) $(MSSMRHN_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(EXEMSSMRHN_SRC) $(MSSMRHN_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLMSSMRHN_SRC) $(MSSMRHN_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLMSSMRHN_MMA) $(MSSMRHN_INSTALL_DIR)
-		$(INSTALL_STRIPPED) $(MSSMRHN_MK) $(MSSMRHN_INSTALL_DIR) -m u=rw,g=r,o=r
-		install -m u=rw,g=r,o=r $(MSSMRHN_INCLUDE_MK) $(MSSMRHN_INSTALL_DIR)
+		$(Q)install -d $(MSSMRHN_INSTALL_DIR)
+		$(Q)install -d $(MSSMRHN_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBMSSMRHN_SRC) $(MSSMRHN_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBMSSMRHN_HDR) $(MSSMRHN_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBMSSMRHN_CXXQFT_HDR) $(MSSMRHN_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(EXEMSSMRHN_SRC) $(MSSMRHN_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLMSSMRHN_SRC) $(MSSMRHN_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLMSSMRHN_MMA) $(MSSMRHN_INSTALL_DIR)
+		$(Q)$(INSTALL_STRIPPED) $(MSSMRHN_MK) $(MSSMRHN_INSTALL_DIR) -m u=rw,g=r,o=r
+		$(Q)install -m u=rw,g=r,o=r $(MSSMRHN_INCLUDE_MK) $(MSSMRHN_INSTALL_DIR)
 ifneq ($(MSSMRHN_SLHA_INPUT),)
-		install -m u=rw,g=r,o=r $(MSSMRHN_SLHA_INPUT) $(MSSMRHN_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(MSSMRHN_SLHA_INPUT) $(MSSMRHN_INSTALL_DIR)
 endif
-		install -m u=rw,g=r,o=r $(MSSMRHN_REFERENCES) $(MSSMRHN_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(MSSMRHN_GNUPLOT) $(MSSMRHN_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(MSSMRHN_REFERENCES) $(MSSMRHN_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(MSSMRHN_GNUPLOT) $(MSSMRHN_INSTALL_DIR)
 endif
 
 clean-$(MODNAME)-dep:
-		-rm -f $(LIBMSSMRHN_DEP)
-		-rm -f $(EXEMSSMRHN_DEP)
-		-rm -f $(LLMSSMRHN_DEP)
+		$(Q)-rm -f $(LIBMSSMRHN_DEP)
+		$(Q)-rm -f $(EXEMSSMRHN_DEP)
+		$(Q)-rm -f $(LLMSSMRHN_DEP)
 
 clean-$(MODNAME)-lib:
-		-rm -f $(LIBMSSMRHN)
-		-rm -f $(LLMSSMRHN_LIB)
+		$(Q)-rm -f $(LIBMSSMRHN)
+		$(Q)-rm -f $(LLMSSMRHN_LIB)
 
 clean-$(MODNAME)-obj:
-		-rm -f $(LIBMSSMRHN_OBJ)
-		-rm -f $(EXEMSSMRHN_OBJ)
-		-rm -f $(LLMSSMRHN_OBJ)
+		$(Q)-rm -f $(LIBMSSMRHN_OBJ)
+		$(Q)-rm -f $(EXEMSSMRHN_OBJ)
+		$(Q)-rm -f $(LLMSSMRHN_OBJ)
 
 # BEGIN: NOT EXPORTED ##########################################
 clean-$(MODNAME)-src:
-		-rm -f $(LIBMSSMRHN_SRC)
-		-rm -f $(LIBMSSMRHN_HDR)
-		-rm -f $(LIBMSSMRHN_CXXQFT_HDR)
-		-rm -f $(EXEMSSMRHN_SRC)
-		-rm -f $(LLMSSMRHN_SRC)
-		-rm -f $(LLMSSMRHN_MMA)
-		-rm -f $(METACODE_STAMP_MSSMRHN)
-		-rm -f $(MSSMRHN_INCLUDE_MK)
-		-rm -f $(MSSMRHN_SLHA_INPUT)
-		-rm -f $(MSSMRHN_REFERENCES)
-		-rm -f $(MSSMRHN_GNUPLOT)
+		$(Q)-rm -f $(LIBMSSMRHN_SRC)
+		$(Q)-rm -f $(LIBMSSMRHN_HDR)
+		$(Q)-rm -f $(LIBMSSMRHN_CXXQFT_HDR)
+		$(Q)-rm -f $(EXEMSSMRHN_SRC)
+		$(Q)-rm -f $(LLMSSMRHN_SRC)
+		$(Q)-rm -f $(LLMSSMRHN_MMA)
+		$(Q)-rm -f $(METACODE_STAMP_MSSMRHN)
+		$(Q)-rm -f $(MSSMRHN_INCLUDE_MK)
+		$(Q)-rm -f $(MSSMRHN_SLHA_INPUT)
+		$(Q)-rm -f $(MSSMRHN_REFERENCES)
+		$(Q)-rm -f $(MSSMRHN_GNUPLOT)
 
 distclean-$(MODNAME): clean-$(MODNAME)-src
 # END:   NOT EXPORTED ##########################################
 
 clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-lib clean-$(MODNAME)-obj
-		-rm -f $(EXEMSSMRHN_EXE)
+		$(Q)-rm -f $(EXEMSSMRHN_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
 		@true
@@ -255,7 +266,7 @@ clean::         clean-$(MODNAME)
 distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
-		tar -czf $(MSSMRHN_TARBALL) \
+		$(Q)tar -czf $(MSSMRHN_TARBALL) \
 		$(LIBMSSMRHN_SRC) $(LIBMSSMRHN_HDR) $(LIBMSSMRHN_CXXQFT_HDR) \
 		$(EXEMSSMRHN_SRC) \
 		$(LLMSSMRHN_SRC) $(LLMSSMRHN_MMA) \
@@ -272,7 +283,8 @@ run-metacode-$(MODNAME): $(METACODE_STAMP_MSSMRHN)
 
 ifeq ($(ENABLE_META),yes)
 $(METACODE_STAMP_MSSMRHN): $(DIR)/start.m $(DIR)/FlexibleSUSY.m $(META_SRC) $(TEMPLATES) $(SARAH_MODEL_FILES_MSSMRHN)
-		"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
+		@$(MSG)
+		$(Q)"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
 		@touch "$(METACODE_STAMP_MSSMRHN)"
 		@echo "Note: to regenerate MSSMRHN source files," \
 		      "please remove the file "
@@ -295,13 +307,16 @@ $(LLMSSMRHN_OBJ) $(LLMSSMRHN_LIB): \
 	CPPFLAGS += $(LLFLAGS)
 
 $(LIBMSSMRHN): $(LIBMSSMRHN_OBJ)
-		$(MODULE_MAKE_LIB_CMD) $@ $^
+		@$(MSG)
+		$(Q)$(MODULE_MAKE_LIB_CMD) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBMSSMRHN) $(MODMSSMRHN_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+		@$(MSG)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
 $(LLMSSMRHN_LIB): $(LLMSSMRHN_OBJ) $(LIBMSSMRHN) $(MODMSSMRHN_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
+		@$(MSG)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
 
 ALLDEP += $(LIBMSSMRHN_DEP) $(EXEMSSMRHN_DEP)
 ALLSRC += $(LIBMSSMRHN_SRC) $(EXEMSSMRHN_SRC)

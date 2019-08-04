@@ -16,17 +16,21 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 16:49:15
+// File generated at Sun 4 Aug 2019 19:27:37
 
 /**
  * @file SplitMSSM_a_muon.hpp
  *
- * This file was generated at Tue 22 Jan 2019 16:49:15 with FlexibleSUSY
- * 2.3.0 and SARAH 4.14.1 .
+ * This file was generated at Sun 4 Aug 2019 19:27:37 with FlexibleSUSY
+ * 2.4.0 and SARAH 4.14.2 .
  */
 
 #ifndef SplitMSSM_A_MUON_H
 #define SplitMSSM_A_MUON_H
+
+namespace softsusy {
+   class QedQcd;
+} // namespace softsusy
 
 namespace flexiblesusy {
 class SplitMSSM_mass_eigenstates;
@@ -36,13 +40,13 @@ namespace SplitMSSM_a_muon {
 * @fn calculate_a_muon
 * @brief Calculates \f$a_\mu = (g-2)_\mu/2\f$ of the muon.
 */
-double calculate_a_muon(const SplitMSSM_mass_eigenstates& model);
+double calculate_a_muon(const SplitMSSM_mass_eigenstates& model, const softsusy::QedQcd& qedqcd);
 
 /**
 * @fn calculate_a_muon_uncertainty
 * @brief Calculates \f$\Delta a_\mu\f$ of the muon.
 */
-double calculate_a_muon_uncertainty(const SplitMSSM_mass_eigenstates& model);
+double calculate_a_muon_uncertainty(const SplitMSSM_mass_eigenstates& model, const softsusy::QedQcd& qedqcd);
 } // namespace SplitMSSM_a_muon
 } // namespace flexiblesusy
 

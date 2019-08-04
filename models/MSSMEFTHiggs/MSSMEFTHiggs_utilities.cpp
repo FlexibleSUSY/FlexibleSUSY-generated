@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 14:54:10
+// File generated at Sun 4 Aug 2019 17:48:39
 
 #include "MSSMEFTHiggs_utilities.hpp"
 #include "MSSMEFTHiggs_input_parameters.hpp"
@@ -248,7 +248,7 @@ void to_database(
       database::Database db(file_name);
       db.insert("Point", names, values);
    } catch(const flexiblesusy::Error& e) {
-      ERROR(e.what());
+      ERROR(e.what_detailed());
    }
 }
 
@@ -261,7 +261,7 @@ Eigen::ArrayXd extract_entry(const std::string& file_name, long long entry)
    try {
       values = db.extract("Point", entry);
    } catch (const flexiblesusy::Error& e) {
-      ERROR(e.what());
+      ERROR(e.what_detailed());
    }
 
    return values;

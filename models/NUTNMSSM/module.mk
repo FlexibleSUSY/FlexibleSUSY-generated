@@ -23,12 +23,16 @@ NUTNMSSM_SUSY_BETAS_MK := \
 NUTNMSSM_SOFT_BETAS_MK := \
 		$(DIR)/soft_betas.mk
 
+NUTNMSSM_CXX_QFT_VERTICES_MK := \
+		$(DIR)/cxx_qft/vertices.mk
+
 NUTNMSSM_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
 NUTNMSSM_INCLUDE_MK := \
 		$(NUTNMSSM_SUSY_BETAS_MK) \
-		$(NUTNMSSM_SOFT_BETAS_MK)
+		$(NUTNMSSM_SOFT_BETAS_MK) \
+		$(NUTNMSSM_CXX_QFT_VERTICES_MK)
 
 NUTNMSSM_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.NUTNMSSM_generated \
@@ -52,6 +56,8 @@ NUTNMSSM_TARBALL := \
 LIBNUTNMSSM_SRC := \
 		$(DIR)/NUTNMSSM_a_muon.cpp \
 		$(DIR)/NUTNMSSM_edm.cpp \
+		$(DIR)/NUTNMSSM_FFV_form_factors.cpp \
+		$(DIR)/NUTNMSSM_l_to_lgamma.cpp \
 		$(DIR)/NUTNMSSM_effective_couplings.cpp \
 		$(DIR)/NUTNMSSM_info.cpp \
 		$(DIR)/NUTNMSSM_input_parameters.cpp \
@@ -81,6 +87,8 @@ LIBNUTNMSSM_HDR := \
 		$(DIR)/NUTNMSSM_a_muon.hpp \
 		$(DIR)/NUTNMSSM_convergence_tester.hpp \
 		$(DIR)/NUTNMSSM_edm.hpp \
+		$(DIR)/NUTNMSSM_FFV_form_factors.hpp \
+		$(DIR)/NUTNMSSM_l_to_lgamma.hpp \
 		$(DIR)/NUTNMSSM_effective_couplings.hpp \
 		$(DIR)/NUTNMSSM_ewsb_solver.hpp \
 		$(DIR)/NUTNMSSM_ewsb_solver_interface.hpp \
@@ -126,6 +134,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(NUTNMSSM_SUSY_BETAS_MK)
 -include $(NUTNMSSM_SOFT_BETAS_MK)
+-include $(NUTNMSSM_CXX_QFT_VERTICES_MK)
 -include $(NUTNMSSM_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
@@ -136,6 +145,8 @@ ifeq ($(findstring doc-,$(MAKECMDGOALS)),)
 $(NUTNMSSM_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(NUTNMSSM_SOFT_BETAS_MK): run-metacode-$(MODNAME)
+		@$(CONVERT_DOS_PATHS) $@
+$(NUTNMSSM_CXX_QFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(NUTNMSSM_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
@@ -197,56 +208,56 @@ all-$(MODNAME): $(LIBNUTNMSSM) $(EXENUTNMSSM_EXE)
 
 ifneq ($(INSTALL_DIR),)
 install-src::
-		install -d $(NUTNMSSM_INSTALL_DIR)
-		install -d $(NUTNMSSM_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(LIBNUTNMSSM_SRC) $(NUTNMSSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBNUTNMSSM_HDR) $(NUTNMSSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBNUTNMSSM_CXXQFT_HDR) $(NUTNMSSM_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(EXENUTNMSSM_SRC) $(NUTNMSSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLNUTNMSSM_SRC) $(NUTNMSSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLNUTNMSSM_MMA) $(NUTNMSSM_INSTALL_DIR)
-		$(INSTALL_STRIPPED) $(NUTNMSSM_MK) $(NUTNMSSM_INSTALL_DIR) -m u=rw,g=r,o=r
-		install -m u=rw,g=r,o=r $(NUTNMSSM_INCLUDE_MK) $(NUTNMSSM_INSTALL_DIR)
+		$(Q)install -d $(NUTNMSSM_INSTALL_DIR)
+		$(Q)install -d $(NUTNMSSM_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBNUTNMSSM_SRC) $(NUTNMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBNUTNMSSM_HDR) $(NUTNMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBNUTNMSSM_CXXQFT_HDR) $(NUTNMSSM_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(EXENUTNMSSM_SRC) $(NUTNMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLNUTNMSSM_SRC) $(NUTNMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLNUTNMSSM_MMA) $(NUTNMSSM_INSTALL_DIR)
+		$(Q)$(INSTALL_STRIPPED) $(NUTNMSSM_MK) $(NUTNMSSM_INSTALL_DIR) -m u=rw,g=r,o=r
+		$(Q)install -m u=rw,g=r,o=r $(NUTNMSSM_INCLUDE_MK) $(NUTNMSSM_INSTALL_DIR)
 ifneq ($(NUTNMSSM_SLHA_INPUT),)
-		install -m u=rw,g=r,o=r $(NUTNMSSM_SLHA_INPUT) $(NUTNMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(NUTNMSSM_SLHA_INPUT) $(NUTNMSSM_INSTALL_DIR)
 endif
-		install -m u=rw,g=r,o=r $(NUTNMSSM_REFERENCES) $(NUTNMSSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(NUTNMSSM_GNUPLOT) $(NUTNMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(NUTNMSSM_REFERENCES) $(NUTNMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(NUTNMSSM_GNUPLOT) $(NUTNMSSM_INSTALL_DIR)
 endif
 
 clean-$(MODNAME)-dep:
-		-rm -f $(LIBNUTNMSSM_DEP)
-		-rm -f $(EXENUTNMSSM_DEP)
-		-rm -f $(LLNUTNMSSM_DEP)
+		$(Q)-rm -f $(LIBNUTNMSSM_DEP)
+		$(Q)-rm -f $(EXENUTNMSSM_DEP)
+		$(Q)-rm -f $(LLNUTNMSSM_DEP)
 
 clean-$(MODNAME)-lib:
-		-rm -f $(LIBNUTNMSSM)
-		-rm -f $(LLNUTNMSSM_LIB)
+		$(Q)-rm -f $(LIBNUTNMSSM)
+		$(Q)-rm -f $(LLNUTNMSSM_LIB)
 
 clean-$(MODNAME)-obj:
-		-rm -f $(LIBNUTNMSSM_OBJ)
-		-rm -f $(EXENUTNMSSM_OBJ)
-		-rm -f $(LLNUTNMSSM_OBJ)
+		$(Q)-rm -f $(LIBNUTNMSSM_OBJ)
+		$(Q)-rm -f $(EXENUTNMSSM_OBJ)
+		$(Q)-rm -f $(LLNUTNMSSM_OBJ)
 
 # BEGIN: NOT EXPORTED ##########################################
 clean-$(MODNAME)-src:
-		-rm -f $(LIBNUTNMSSM_SRC)
-		-rm -f $(LIBNUTNMSSM_HDR)
-		-rm -f $(LIBNUTNMSSM_CXXQFT_HDR)
-		-rm -f $(EXENUTNMSSM_SRC)
-		-rm -f $(LLNUTNMSSM_SRC)
-		-rm -f $(LLNUTNMSSM_MMA)
-		-rm -f $(METACODE_STAMP_NUTNMSSM)
-		-rm -f $(NUTNMSSM_INCLUDE_MK)
-		-rm -f $(NUTNMSSM_SLHA_INPUT)
-		-rm -f $(NUTNMSSM_REFERENCES)
-		-rm -f $(NUTNMSSM_GNUPLOT)
+		$(Q)-rm -f $(LIBNUTNMSSM_SRC)
+		$(Q)-rm -f $(LIBNUTNMSSM_HDR)
+		$(Q)-rm -f $(LIBNUTNMSSM_CXXQFT_HDR)
+		$(Q)-rm -f $(EXENUTNMSSM_SRC)
+		$(Q)-rm -f $(LLNUTNMSSM_SRC)
+		$(Q)-rm -f $(LLNUTNMSSM_MMA)
+		$(Q)-rm -f $(METACODE_STAMP_NUTNMSSM)
+		$(Q)-rm -f $(NUTNMSSM_INCLUDE_MK)
+		$(Q)-rm -f $(NUTNMSSM_SLHA_INPUT)
+		$(Q)-rm -f $(NUTNMSSM_REFERENCES)
+		$(Q)-rm -f $(NUTNMSSM_GNUPLOT)
 
 distclean-$(MODNAME): clean-$(MODNAME)-src
 # END:   NOT EXPORTED ##########################################
 
 clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-lib clean-$(MODNAME)-obj
-		-rm -f $(EXENUTNMSSM_EXE)
+		$(Q)-rm -f $(EXENUTNMSSM_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
 		@true
@@ -260,7 +271,7 @@ clean::         clean-$(MODNAME)
 distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
-		tar -czf $(NUTNMSSM_TARBALL) \
+		$(Q)tar -czf $(NUTNMSSM_TARBALL) \
 		$(LIBNUTNMSSM_SRC) $(LIBNUTNMSSM_HDR) $(LIBNUTNMSSM_CXXQFT_HDR) \
 		$(EXENUTNMSSM_SRC) \
 		$(LLNUTNMSSM_SRC) $(LLNUTNMSSM_MMA) \
@@ -277,7 +288,8 @@ run-metacode-$(MODNAME): $(METACODE_STAMP_NUTNMSSM)
 
 ifeq ($(ENABLE_META),yes)
 $(METACODE_STAMP_NUTNMSSM): $(DIR)/start.m $(DIR)/FlexibleSUSY.m $(META_SRC) $(TEMPLATES) $(SARAH_MODEL_FILES_NUTNMSSM)
-		"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
+		@$(MSG)
+		$(Q)"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
 		@touch "$(METACODE_STAMP_NUTNMSSM)"
 		@echo "Note: to regenerate NUTNMSSM source files," \
 		      "please remove the file "
@@ -300,13 +312,16 @@ $(LLNUTNMSSM_OBJ) $(LLNUTNMSSM_LIB): \
 	CPPFLAGS += $(LLFLAGS)
 
 $(LIBNUTNMSSM): $(LIBNUTNMSSM_OBJ)
-		$(MODULE_MAKE_LIB_CMD) $@ $^
+		@$(MSG)
+		$(Q)$(MODULE_MAKE_LIB_CMD) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBNUTNMSSM) $(MODNUTNMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+		@$(MSG)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
 $(LLNUTNMSSM_LIB): $(LLNUTNMSSM_OBJ) $(LIBNUTNMSSM) $(MODNUTNMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
+		@$(MSG)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
 
 ALLDEP += $(LIBNUTNMSSM_DEP) $(EXENUTNMSSM_DEP)
 ALLSRC += $(LIBNUTNMSSM_SRC) $(EXENUTNMSSM_SRC)

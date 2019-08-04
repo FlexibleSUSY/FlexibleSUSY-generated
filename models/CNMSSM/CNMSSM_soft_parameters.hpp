@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 13:36:22
+// File generated at Sun 4 Aug 2019 17:23:46
 
 #ifndef CNMSSM_soft_parameters_H
 #define CNMSSM_soft_parameters_H

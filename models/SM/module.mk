@@ -23,12 +23,16 @@ SM_SUSY_BETAS_MK := \
 SM_SOFT_BETAS_MK := \
 		$(DIR)/soft_betas.mk
 
+SM_CXX_QFT_VERTICES_MK := \
+		$(DIR)/cxx_qft/vertices.mk
+
 SM_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
 SM_INCLUDE_MK := \
 		$(SM_SUSY_BETAS_MK) \
-		$(SM_SOFT_BETAS_MK)
+		$(SM_SOFT_BETAS_MK) \
+		$(SM_CXX_QFT_VERTICES_MK)
 
 SM_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.SM_generated \
@@ -47,6 +51,8 @@ SM_TARBALL := \
 LIBSM_SRC := \
 		$(DIR)/SM_a_muon.cpp \
 		$(DIR)/SM_edm.cpp \
+		$(DIR)/SM_FFV_form_factors.cpp \
+		$(DIR)/SM_l_to_lgamma.cpp \
 		$(DIR)/SM_effective_couplings.cpp \
 		$(DIR)/SM_info.cpp \
 		$(DIR)/SM_input_parameters.cpp \
@@ -76,6 +82,8 @@ LIBSM_HDR := \
 		$(DIR)/SM_a_muon.hpp \
 		$(DIR)/SM_convergence_tester.hpp \
 		$(DIR)/SM_edm.hpp \
+		$(DIR)/SM_FFV_form_factors.hpp \
+		$(DIR)/SM_l_to_lgamma.hpp \
 		$(DIR)/SM_effective_couplings.hpp \
 		$(DIR)/SM_ewsb_solver.hpp \
 		$(DIR)/SM_ewsb_solver_interface.hpp \
@@ -121,6 +129,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(SM_SUSY_BETAS_MK)
 -include $(SM_SOFT_BETAS_MK)
+-include $(SM_CXX_QFT_VERTICES_MK)
 -include $(SM_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
@@ -131,6 +140,8 @@ ifeq ($(findstring doc-,$(MAKECMDGOALS)),)
 $(SM_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(SM_SOFT_BETAS_MK): run-metacode-$(MODNAME)
+		@$(CONVERT_DOS_PATHS) $@
+$(SM_CXX_QFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(SM_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
@@ -192,56 +203,56 @@ all-$(MODNAME): $(LIBSM) $(EXESM_EXE)
 
 ifneq ($(INSTALL_DIR),)
 install-src::
-		install -d $(SM_INSTALL_DIR)
-		install -d $(SM_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(LIBSM_SRC) $(SM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBSM_HDR) $(SM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBSM_CXXQFT_HDR) $(SM_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(EXESM_SRC) $(SM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLSM_SRC) $(SM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLSM_MMA) $(SM_INSTALL_DIR)
-		$(INSTALL_STRIPPED) $(SM_MK) $(SM_INSTALL_DIR) -m u=rw,g=r,o=r
-		install -m u=rw,g=r,o=r $(SM_INCLUDE_MK) $(SM_INSTALL_DIR)
+		$(Q)install -d $(SM_INSTALL_DIR)
+		$(Q)install -d $(SM_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBSM_SRC) $(SM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBSM_HDR) $(SM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBSM_CXXQFT_HDR) $(SM_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(EXESM_SRC) $(SM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLSM_SRC) $(SM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLSM_MMA) $(SM_INSTALL_DIR)
+		$(Q)$(INSTALL_STRIPPED) $(SM_MK) $(SM_INSTALL_DIR) -m u=rw,g=r,o=r
+		$(Q)install -m u=rw,g=r,o=r $(SM_INCLUDE_MK) $(SM_INSTALL_DIR)
 ifneq ($(SM_SLHA_INPUT),)
-		install -m u=rw,g=r,o=r $(SM_SLHA_INPUT) $(SM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(SM_SLHA_INPUT) $(SM_INSTALL_DIR)
 endif
-		install -m u=rw,g=r,o=r $(SM_REFERENCES) $(SM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(SM_GNUPLOT) $(SM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(SM_REFERENCES) $(SM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(SM_GNUPLOT) $(SM_INSTALL_DIR)
 endif
 
 clean-$(MODNAME)-dep:
-		-rm -f $(LIBSM_DEP)
-		-rm -f $(EXESM_DEP)
-		-rm -f $(LLSM_DEP)
+		$(Q)-rm -f $(LIBSM_DEP)
+		$(Q)-rm -f $(EXESM_DEP)
+		$(Q)-rm -f $(LLSM_DEP)
 
 clean-$(MODNAME)-lib:
-		-rm -f $(LIBSM)
-		-rm -f $(LLSM_LIB)
+		$(Q)-rm -f $(LIBSM)
+		$(Q)-rm -f $(LLSM_LIB)
 
 clean-$(MODNAME)-obj:
-		-rm -f $(LIBSM_OBJ)
-		-rm -f $(EXESM_OBJ)
-		-rm -f $(LLSM_OBJ)
+		$(Q)-rm -f $(LIBSM_OBJ)
+		$(Q)-rm -f $(EXESM_OBJ)
+		$(Q)-rm -f $(LLSM_OBJ)
 
 # BEGIN: NOT EXPORTED ##########################################
 clean-$(MODNAME)-src:
-		-rm -f $(LIBSM_SRC)
-		-rm -f $(LIBSM_HDR)
-		-rm -f $(LIBSM_CXXQFT_HDR)
-		-rm -f $(EXESM_SRC)
-		-rm -f $(LLSM_SRC)
-		-rm -f $(LLSM_MMA)
-		-rm -f $(METACODE_STAMP_SM)
-		-rm -f $(SM_INCLUDE_MK)
-		-rm -f $(SM_SLHA_INPUT)
-		-rm -f $(SM_REFERENCES)
-		-rm -f $(SM_GNUPLOT)
+		$(Q)-rm -f $(LIBSM_SRC)
+		$(Q)-rm -f $(LIBSM_HDR)
+		$(Q)-rm -f $(LIBSM_CXXQFT_HDR)
+		$(Q)-rm -f $(EXESM_SRC)
+		$(Q)-rm -f $(LLSM_SRC)
+		$(Q)-rm -f $(LLSM_MMA)
+		$(Q)-rm -f $(METACODE_STAMP_SM)
+		$(Q)-rm -f $(SM_INCLUDE_MK)
+		$(Q)-rm -f $(SM_SLHA_INPUT)
+		$(Q)-rm -f $(SM_REFERENCES)
+		$(Q)-rm -f $(SM_GNUPLOT)
 
 distclean-$(MODNAME): clean-$(MODNAME)-src
 # END:   NOT EXPORTED ##########################################
 
 clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-lib clean-$(MODNAME)-obj
-		-rm -f $(EXESM_EXE)
+		$(Q)-rm -f $(EXESM_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
 		@true
@@ -255,7 +266,7 @@ clean::         clean-$(MODNAME)
 distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
-		tar -czf $(SM_TARBALL) \
+		$(Q)tar -czf $(SM_TARBALL) \
 		$(LIBSM_SRC) $(LIBSM_HDR) $(LIBSM_CXXQFT_HDR) \
 		$(EXESM_SRC) \
 		$(LLSM_SRC) $(LLSM_MMA) \
@@ -272,7 +283,8 @@ run-metacode-$(MODNAME): $(METACODE_STAMP_SM)
 
 ifeq ($(ENABLE_META),yes)
 $(METACODE_STAMP_SM): $(DIR)/start.m $(DIR)/FlexibleSUSY.m $(META_SRC) $(TEMPLATES) $(SARAH_MODEL_FILES_SM)
-		"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
+		@$(MSG)
+		$(Q)"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
 		@touch "$(METACODE_STAMP_SM)"
 		@echo "Note: to regenerate SM source files," \
 		      "please remove the file "
@@ -295,13 +307,16 @@ $(LLSM_OBJ) $(LLSM_LIB): \
 	CPPFLAGS += $(LLFLAGS)
 
 $(LIBSM): $(LIBSM_OBJ)
-		$(MODULE_MAKE_LIB_CMD) $@ $^
+		@$(MSG)
+		$(Q)$(MODULE_MAKE_LIB_CMD) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBSM) $(MODSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+		@$(MSG)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
 $(LLSM_LIB): $(LLSM_OBJ) $(LIBSM) $(MODSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
+		@$(MSG)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
 
 ALLDEP += $(LIBSM_DEP) $(EXESM_DEP)
 ALLSRC += $(LIBSM_SRC) $(EXESM_SRC)

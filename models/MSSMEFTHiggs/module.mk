@@ -23,12 +23,16 @@ MSSMEFTHiggs_SUSY_BETAS_MK := \
 MSSMEFTHiggs_SOFT_BETAS_MK := \
 		$(DIR)/soft_betas.mk
 
+MSSMEFTHiggs_CXX_QFT_VERTICES_MK := \
+		$(DIR)/cxx_qft/vertices.mk
+
 MSSMEFTHiggs_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
 MSSMEFTHiggs_INCLUDE_MK := \
 		$(MSSMEFTHiggs_SUSY_BETAS_MK) \
-		$(MSSMEFTHiggs_SOFT_BETAS_MK)
+		$(MSSMEFTHiggs_SOFT_BETAS_MK) \
+		$(MSSMEFTHiggs_CXX_QFT_VERTICES_MK)
 
 MSSMEFTHiggs_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.MSSMEFTHiggs_generated \
@@ -47,6 +51,8 @@ MSSMEFTHiggs_TARBALL := \
 LIBMSSMEFTHiggs_SRC := \
 		$(DIR)/MSSMEFTHiggs_a_muon.cpp \
 		$(DIR)/MSSMEFTHiggs_edm.cpp \
+		$(DIR)/MSSMEFTHiggs_FFV_form_factors.cpp \
+		$(DIR)/MSSMEFTHiggs_l_to_lgamma.cpp \
 		$(DIR)/MSSMEFTHiggs_effective_couplings.cpp \
 		$(DIR)/MSSMEFTHiggs_info.cpp \
 		$(DIR)/MSSMEFTHiggs_input_parameters.cpp \
@@ -76,6 +82,8 @@ LIBMSSMEFTHiggs_HDR := \
 		$(DIR)/MSSMEFTHiggs_a_muon.hpp \
 		$(DIR)/MSSMEFTHiggs_convergence_tester.hpp \
 		$(DIR)/MSSMEFTHiggs_edm.hpp \
+		$(DIR)/MSSMEFTHiggs_FFV_form_factors.hpp \
+		$(DIR)/MSSMEFTHiggs_l_to_lgamma.hpp \
 		$(DIR)/MSSMEFTHiggs_effective_couplings.hpp \
 		$(DIR)/MSSMEFTHiggs_ewsb_solver.hpp \
 		$(DIR)/MSSMEFTHiggs_ewsb_solver_interface.hpp \
@@ -121,6 +129,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(MSSMEFTHiggs_SUSY_BETAS_MK)
 -include $(MSSMEFTHiggs_SOFT_BETAS_MK)
+-include $(MSSMEFTHiggs_CXX_QFT_VERTICES_MK)
 -include $(MSSMEFTHiggs_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
@@ -131,6 +140,8 @@ ifeq ($(findstring doc-,$(MAKECMDGOALS)),)
 $(MSSMEFTHiggs_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(MSSMEFTHiggs_SOFT_BETAS_MK): run-metacode-$(MODNAME)
+		@$(CONVERT_DOS_PATHS) $@
+$(MSSMEFTHiggs_CXX_QFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(MSSMEFTHiggs_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
@@ -192,56 +203,56 @@ all-$(MODNAME): $(LIBMSSMEFTHiggs) $(EXEMSSMEFTHiggs_EXE)
 
 ifneq ($(INSTALL_DIR),)
 install-src::
-		install -d $(MSSMEFTHiggs_INSTALL_DIR)
-		install -d $(MSSMEFTHiggs_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(LIBMSSMEFTHiggs_SRC) $(MSSMEFTHiggs_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBMSSMEFTHiggs_HDR) $(MSSMEFTHiggs_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBMSSMEFTHiggs_CXXQFT_HDR) $(MSSMEFTHiggs_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(EXEMSSMEFTHiggs_SRC) $(MSSMEFTHiggs_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLMSSMEFTHiggs_SRC) $(MSSMEFTHiggs_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLMSSMEFTHiggs_MMA) $(MSSMEFTHiggs_INSTALL_DIR)
-		$(INSTALL_STRIPPED) $(MSSMEFTHiggs_MK) $(MSSMEFTHiggs_INSTALL_DIR) -m u=rw,g=r,o=r
-		install -m u=rw,g=r,o=r $(MSSMEFTHiggs_INCLUDE_MK) $(MSSMEFTHiggs_INSTALL_DIR)
+		$(Q)install -d $(MSSMEFTHiggs_INSTALL_DIR)
+		$(Q)install -d $(MSSMEFTHiggs_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBMSSMEFTHiggs_SRC) $(MSSMEFTHiggs_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBMSSMEFTHiggs_HDR) $(MSSMEFTHiggs_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBMSSMEFTHiggs_CXXQFT_HDR) $(MSSMEFTHiggs_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(EXEMSSMEFTHiggs_SRC) $(MSSMEFTHiggs_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLMSSMEFTHiggs_SRC) $(MSSMEFTHiggs_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLMSSMEFTHiggs_MMA) $(MSSMEFTHiggs_INSTALL_DIR)
+		$(Q)$(INSTALL_STRIPPED) $(MSSMEFTHiggs_MK) $(MSSMEFTHiggs_INSTALL_DIR) -m u=rw,g=r,o=r
+		$(Q)install -m u=rw,g=r,o=r $(MSSMEFTHiggs_INCLUDE_MK) $(MSSMEFTHiggs_INSTALL_DIR)
 ifneq ($(MSSMEFTHiggs_SLHA_INPUT),)
-		install -m u=rw,g=r,o=r $(MSSMEFTHiggs_SLHA_INPUT) $(MSSMEFTHiggs_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(MSSMEFTHiggs_SLHA_INPUT) $(MSSMEFTHiggs_INSTALL_DIR)
 endif
-		install -m u=rw,g=r,o=r $(MSSMEFTHiggs_REFERENCES) $(MSSMEFTHiggs_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(MSSMEFTHiggs_GNUPLOT) $(MSSMEFTHiggs_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(MSSMEFTHiggs_REFERENCES) $(MSSMEFTHiggs_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(MSSMEFTHiggs_GNUPLOT) $(MSSMEFTHiggs_INSTALL_DIR)
 endif
 
 clean-$(MODNAME)-dep:
-		-rm -f $(LIBMSSMEFTHiggs_DEP)
-		-rm -f $(EXEMSSMEFTHiggs_DEP)
-		-rm -f $(LLMSSMEFTHiggs_DEP)
+		$(Q)-rm -f $(LIBMSSMEFTHiggs_DEP)
+		$(Q)-rm -f $(EXEMSSMEFTHiggs_DEP)
+		$(Q)-rm -f $(LLMSSMEFTHiggs_DEP)
 
 clean-$(MODNAME)-lib:
-		-rm -f $(LIBMSSMEFTHiggs)
-		-rm -f $(LLMSSMEFTHiggs_LIB)
+		$(Q)-rm -f $(LIBMSSMEFTHiggs)
+		$(Q)-rm -f $(LLMSSMEFTHiggs_LIB)
 
 clean-$(MODNAME)-obj:
-		-rm -f $(LIBMSSMEFTHiggs_OBJ)
-		-rm -f $(EXEMSSMEFTHiggs_OBJ)
-		-rm -f $(LLMSSMEFTHiggs_OBJ)
+		$(Q)-rm -f $(LIBMSSMEFTHiggs_OBJ)
+		$(Q)-rm -f $(EXEMSSMEFTHiggs_OBJ)
+		$(Q)-rm -f $(LLMSSMEFTHiggs_OBJ)
 
 # BEGIN: NOT EXPORTED ##########################################
 clean-$(MODNAME)-src:
-		-rm -f $(LIBMSSMEFTHiggs_SRC)
-		-rm -f $(LIBMSSMEFTHiggs_HDR)
-		-rm -f $(LIBMSSMEFTHiggs_CXXQFT_HDR)
-		-rm -f $(EXEMSSMEFTHiggs_SRC)
-		-rm -f $(LLMSSMEFTHiggs_SRC)
-		-rm -f $(LLMSSMEFTHiggs_MMA)
-		-rm -f $(METACODE_STAMP_MSSMEFTHiggs)
-		-rm -f $(MSSMEFTHiggs_INCLUDE_MK)
-		-rm -f $(MSSMEFTHiggs_SLHA_INPUT)
-		-rm -f $(MSSMEFTHiggs_REFERENCES)
-		-rm -f $(MSSMEFTHiggs_GNUPLOT)
+		$(Q)-rm -f $(LIBMSSMEFTHiggs_SRC)
+		$(Q)-rm -f $(LIBMSSMEFTHiggs_HDR)
+		$(Q)-rm -f $(LIBMSSMEFTHiggs_CXXQFT_HDR)
+		$(Q)-rm -f $(EXEMSSMEFTHiggs_SRC)
+		$(Q)-rm -f $(LLMSSMEFTHiggs_SRC)
+		$(Q)-rm -f $(LLMSSMEFTHiggs_MMA)
+		$(Q)-rm -f $(METACODE_STAMP_MSSMEFTHiggs)
+		$(Q)-rm -f $(MSSMEFTHiggs_INCLUDE_MK)
+		$(Q)-rm -f $(MSSMEFTHiggs_SLHA_INPUT)
+		$(Q)-rm -f $(MSSMEFTHiggs_REFERENCES)
+		$(Q)-rm -f $(MSSMEFTHiggs_GNUPLOT)
 
 distclean-$(MODNAME): clean-$(MODNAME)-src
 # END:   NOT EXPORTED ##########################################
 
 clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-lib clean-$(MODNAME)-obj
-		-rm -f $(EXEMSSMEFTHiggs_EXE)
+		$(Q)-rm -f $(EXEMSSMEFTHiggs_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
 		@true
@@ -255,7 +266,7 @@ clean::         clean-$(MODNAME)
 distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
-		tar -czf $(MSSMEFTHiggs_TARBALL) \
+		$(Q)tar -czf $(MSSMEFTHiggs_TARBALL) \
 		$(LIBMSSMEFTHiggs_SRC) $(LIBMSSMEFTHiggs_HDR) $(LIBMSSMEFTHiggs_CXXQFT_HDR) \
 		$(EXEMSSMEFTHiggs_SRC) \
 		$(LLMSSMEFTHiggs_SRC) $(LLMSSMEFTHiggs_MMA) \
@@ -272,7 +283,8 @@ run-metacode-$(MODNAME): $(METACODE_STAMP_MSSMEFTHiggs)
 
 ifeq ($(ENABLE_META),yes)
 $(METACODE_STAMP_MSSMEFTHiggs): $(DIR)/start.m $(DIR)/FlexibleSUSY.m $(META_SRC) $(TEMPLATES) $(SARAH_MODEL_FILES_MSSMEFTHiggs)
-		"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
+		@$(MSG)
+		$(Q)"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
 		@touch "$(METACODE_STAMP_MSSMEFTHiggs)"
 		@echo "Note: to regenerate MSSMEFTHiggs source files," \
 		      "please remove the file "
@@ -295,13 +307,16 @@ $(LLMSSMEFTHiggs_OBJ) $(LLMSSMEFTHiggs_LIB): \
 	CPPFLAGS += $(LLFLAGS)
 
 $(LIBMSSMEFTHiggs): $(LIBMSSMEFTHiggs_OBJ)
-		$(MODULE_MAKE_LIB_CMD) $@ $^
+		@$(MSG)
+		$(Q)$(MODULE_MAKE_LIB_CMD) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBMSSMEFTHiggs) $(MODMSSMEFTHiggs_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+		@$(MSG)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
 $(LLMSSMEFTHiggs_LIB): $(LLMSSMEFTHiggs_OBJ) $(LIBMSSMEFTHiggs) $(MODMSSMEFTHiggs_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
+		@$(MSG)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
 
 ALLDEP += $(LIBMSSMEFTHiggs_DEP) $(EXEMSSMEFTHiggs_DEP)
 ALLSRC += $(LIBMSSMEFTHiggs_SRC) $(EXEMSSMEFTHiggs_SRC)

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 17:34:55
+// File generated at Sun 4 Aug 2019 19:51:33
 
 #ifndef NMSSM_TWO_SCALE_CONVERGENCE_TESTER_H
 #define NMSSM_TWO_SCALE_CONVERGENCE_TESTER_H

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 14:38:10
+// File generated at Sun 4 Aug 2019 17:41:58
 
 #ifndef NMSSMEFTHiggs_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
 #define NMSSMEFTHiggs_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H

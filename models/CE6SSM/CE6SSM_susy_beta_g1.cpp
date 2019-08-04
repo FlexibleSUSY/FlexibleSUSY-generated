@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 14:18:58
+// File generated at Sun 4 Aug 2019 17:10:43
 
 #include "CE6SSM_susy_parameters.hpp"
 #include "wrappers.hpp"

@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 16:31:35
+// File generated at Sun 4 Aug 2019 19:02:07
 
 /**
  * @file THDMIIMSSMBC_edm.hpp
  *
- * This file was generated at Tue 22 Jan 2019 16:31:35 with FlexibleSUSY
- * 2.3.0 and SARAH 4.14.1 .
+ * This file was generated at Sun 4 Aug 2019 19:02:07 with FlexibleSUSY
+ * 2.4.0 and SARAH 4.14.2 .
  */
 
 #ifndef THDMIIMSSMBC_EDM_H

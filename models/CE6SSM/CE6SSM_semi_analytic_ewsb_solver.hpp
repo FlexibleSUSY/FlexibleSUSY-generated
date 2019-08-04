@@ -16,15 +16,15 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 15:18:08
+// File generated at Sun 4 Aug 2019 17:24:47
 
 /**
  * @file CE6SSM_semi_analytic_ewsb_solver.hpp
  *
  * @brief contains class for solving EWSB when semi-analytic algorithm is used
  *
- * This file was generated at Tue 22 Jan 2019 15:18:08 with FlexibleSUSY
- * 2.3.0 (git commit: b5dda61ad35a8ffff74bde70f63e1c2b815e751a) and SARAH 4.14.1 .
+ * This file was generated at Sun 4 Aug 2019 17:24:47 with FlexibleSUSY
+ * 2.4.0 (git commit: 544c83a2e6b5f23da8d0b6ccdb06f1c91f75d6eb) and SARAH 4.14.2 .
  */
 
 #ifndef CE6SSM_SEMI_ANALYTIC_EWSB_SOLVER_H
@@ -71,8 +71,8 @@ private:
 
    class EEWSBStepFailed : public Error {
    public:
+      EEWSBStepFailed() : Error("Could not perform EWSB step") {}
       virtual ~EEWSBStepFailed() {}
-      virtual std::string what() const { return "Could not perform EWSB step."; }
    };
 
    int number_of_iterations{100}; ///< maximum number of iterations

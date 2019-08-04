@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 17:59:53
+// File generated at Sun 4 Aug 2019 20:05:28
 
 #include "CMSSMSemiAnalytic_physical.hpp"
 #include "slha_io.hpp"

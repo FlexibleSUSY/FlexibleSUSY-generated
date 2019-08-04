@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 17:52:19
+// File generated at Sun 4 Aug 2019 20:07:33
 
 #ifndef MSSMRHN_SLHA_IO_H
 #define MSSMRHN_SLHA_IO_H
@@ -291,15 +291,13 @@ void MSSMRHN_slha_io::set_extra(
  * Stores the model (DR-bar) parameters, masses and mixing matrices of
  * all given models in the SLHA object.
  *
- * @todo Use generic lambda instead of Set_spectrum in C++14
- *
  * @param models model classes
  */
 template <class... Ts>
 void MSSMRHN_slha_io::set_spectrum(const std::tuple<Ts...>& models)
 {
-   Set_spectrum<MSSMRHN_slha_io> ss(this);
-   boost::fusion::for_each(models, ss);
+   boost::fusion::for_each(models,
+                           [this](auto model) { this->set_spectrum(model); });
 }
 
 /**

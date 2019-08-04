@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 17:53:14
+// File generated at Sun 4 Aug 2019 19:59:57
 
 #include "MSSMNoFVatMGUT_slha_io.hpp"
 #include "MSSMNoFVatMGUT_input_parameters.hpp"

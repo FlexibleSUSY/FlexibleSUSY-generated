@@ -16,12 +16,14 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 17:52:29
+// File generated at Sun 4 Aug 2019 20:07:39
 
 #include "MSSMRHN_observables.hpp"
 #include "MSSMRHN_mass_eigenstates.hpp"
 #include "MSSMRHN_a_muon.hpp"
 #include "MSSMRHN_edm.hpp"
+#include "MSSMRHN_l_to_lgamma.hpp"
+//#include "MSSMRHN_f_to_f_conversion.hpp"
 #include "MSSMRHN_effective_couplings.hpp"
 #include "config.h"
 #include "eigen_utils.hpp"
@@ -41,6 +43,9 @@
 #define AMUGM2CALCUNCERTAINTY a_muon_gm2calc_uncertainty
 #define EDM0(p) edm_ ## p
 #define EDM1(p,idx) edm_ ## p ## _ ## idx
+#define LToLGamma0(pIn, pOut, spec) pIn ## _to_ ## pOut ## _ ## spec
+#define LToLGamma1(pIn,idxIn,pOut,idxOut,spec) pIn ## _to_ ## pOut ## _ ## spec
+#define FToFConversion1(pIn,idxIn,pOut,idxOut,nuclei) pIn ## _to_ ## pOut ## _in_ ## nuclei
 #define EFFCPHIGGSPHOTONPHOTON eff_cp_higgs_photon_photon
 #define EFFCPHIGGSGLUONGLUON eff_cp_higgs_gluon_gluon
 #define EFFCPPSEUDOSCALARPHOTONPHOTON eff_cp_pseudoscalar_photon_photon
@@ -145,7 +150,7 @@ MSSMRHN_observables calculate_observables(MSSMRHN_mass_eigenstates& model,
       try {
          model_at_scale.run_to(scale);
       } catch (const Error& e) {
-         model.get_problems().flag_thrown(e.what());
+         model.get_problems().flag_thrown(e.what_detailed());
          return MSSMRHN_observables();
       }
    }
@@ -163,7 +168,7 @@ MSSMRHN_observables calculate_observables(MSSMRHN_mass_eigenstates& model,
       MSSMRHN_effective_couplings effective_couplings(model, qedqcd, physical_input);
       effective_couplings.calculate_effective_couplings();
 
-      observables.AMU = MSSMRHN_a_muon::calculate_a_muon(MODEL);
+      observables.AMU = MSSMRHN_a_muon::calculate_a_muon(MODEL, qedqcd);
       observables.EFFCPHIGGSPHOTONPHOTON(0) = effective_couplings.get_eff_CphhVPVP(0);
       observables.EFFCPHIGGSPHOTONPHOTON(1) = effective_couplings.get_eff_CphhVPVP(1);
       observables.EFFCPHIGGSGLUONGLUON(0) = effective_couplings.get_eff_CphhVGVG(0);
@@ -171,7 +176,7 @@ MSSMRHN_observables calculate_observables(MSSMRHN_mass_eigenstates& model,
       observables.EFFCPPSEUDOSCALARPHOTONPHOTON = effective_couplings.get_eff_CpAhVPVP(1);
       observables.EFFCPPSEUDOSCALARGLUONGLUON = effective_couplings.get_eff_CpAhVGVG(1);
    } catch (const Error& e) {
-      model.get_problems().flag_thrown(e.what());
+      model.get_problems().flag_thrown(e.what_detailed());
    }
 
    return observables;

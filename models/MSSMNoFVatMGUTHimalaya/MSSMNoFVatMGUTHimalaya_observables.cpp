@@ -16,12 +16,14 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 13:27:20
+// File generated at Sun 4 Aug 2019 17:12:15
 
 #include "MSSMNoFVatMGUTHimalaya_observables.hpp"
 #include "MSSMNoFVatMGUTHimalaya_mass_eigenstates.hpp"
 #include "MSSMNoFVatMGUTHimalaya_a_muon.hpp"
 #include "MSSMNoFVatMGUTHimalaya_edm.hpp"
+#include "MSSMNoFVatMGUTHimalaya_l_to_lgamma.hpp"
+//#include "MSSMNoFVatMGUTHimalaya_f_to_f_conversion.hpp"
 #include "MSSMNoFVatMGUTHimalaya_effective_couplings.hpp"
 #include "config.h"
 #include "eigen_utils.hpp"
@@ -41,6 +43,9 @@
 #define AMUGM2CALCUNCERTAINTY a_muon_gm2calc_uncertainty
 #define EDM0(p) edm_ ## p
 #define EDM1(p,idx) edm_ ## p ## _ ## idx
+#define LToLGamma0(pIn, pOut, spec) pIn ## _to_ ## pOut ## _ ## spec
+#define LToLGamma1(pIn,idxIn,pOut,idxOut,spec) pIn ## _to_ ## pOut ## _ ## spec
+#define FToFConversion1(pIn,idxIn,pOut,idxOut,nuclei) pIn ## _to_ ## pOut ## _in_ ## nuclei
 #define EFFCPHIGGSPHOTONPHOTON eff_cp_higgs_photon_photon
 #define EFFCPHIGGSGLUONGLUON eff_cp_higgs_gluon_gluon
 #define EFFCPPSEUDOSCALARPHOTONPHOTON eff_cp_pseudoscalar_photon_photon
@@ -117,7 +122,7 @@ MSSMNoFVatMGUTHimalaya_observables calculate_observables(MSSMNoFVatMGUTHimalaya_
       try {
          model_at_scale.run_to(scale);
       } catch (const Error& e) {
-         model.get_problems().flag_thrown(e.what());
+         model.get_problems().flag_thrown(e.what_detailed());
          return MSSMNoFVatMGUTHimalaya_observables();
       }
    }
@@ -166,7 +171,7 @@ MSSMNoFVatMGUTHimalaya_observables calculate_observables(MSSMNoFVatMGUTHimalaya_
       #endif
 
 
-      observables.AMU = MSSMNoFVatMGUTHimalaya_a_muon::calculate_a_muon(MODEL);
+      observables.AMU = MSSMNoFVatMGUTHimalaya_a_muon::calculate_a_muon(MODEL, qedqcd);
       #ifdef ENABLE_GM2Calc
       observables.AMUGM2CALC = gm2calc_calculate_amu(gm2calc_data);
       #endif
@@ -174,7 +179,7 @@ MSSMNoFVatMGUTHimalaya_observables calculate_observables(MSSMNoFVatMGUTHimalaya_
       observables.AMUGM2CALCUNCERTAINTY = gm2calc_calculate_amu_uncertainty(gm2calc_data);
       #endif
    } catch (const Error& e) {
-      model.get_problems().flag_thrown(e.what());
+      model.get_problems().flag_thrown(e.what_detailed());
    }
 
    return observables;

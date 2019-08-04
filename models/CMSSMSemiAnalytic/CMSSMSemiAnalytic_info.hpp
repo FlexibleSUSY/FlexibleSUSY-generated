@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 17:59:58
+// File generated at Sun 4 Aug 2019 20:05:35
 
 #ifndef CMSSMSemiAnalytic_INFO_H
 #define CMSSMSemiAnalytic_INFO_H

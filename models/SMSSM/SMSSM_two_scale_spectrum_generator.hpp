@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 17:30:56
+// File generated at Sun 4 Aug 2019 19:42:16
 
 #ifndef SMSSM_TWO_SCALE_SPECTRUM_GENERATOR_H
 #define SMSSM_TWO_SCALE_SPECTRUM_GENERATOR_H

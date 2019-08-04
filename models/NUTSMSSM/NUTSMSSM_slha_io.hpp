@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 17:31:03
+// File generated at Sun 4 Aug 2019 19:47:58
 
 #ifndef NUTSMSSM_SLHA_IO_H
 #define NUTSMSSM_SLHA_IO_H
@@ -308,15 +308,13 @@ void NUTSMSSM_slha_io::set_extra(
  * Stores the model (DR-bar) parameters, masses and mixing matrices of
  * all given models in the SLHA object.
  *
- * @todo Use generic lambda instead of Set_spectrum in C++14
- *
  * @param models model classes
  */
 template <class... Ts>
 void NUTSMSSM_slha_io::set_spectrum(const std::tuple<Ts...>& models)
 {
-   Set_spectrum<NUTSMSSM_slha_io> ss(this);
-   boost::fusion::for_each(models, ss);
+   boost::fusion::for_each(models,
+                           [this](auto model) { this->set_spectrum(model); });
 }
 
 /**

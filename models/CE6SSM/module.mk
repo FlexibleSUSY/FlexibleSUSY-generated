@@ -23,12 +23,16 @@ CE6SSM_SUSY_BETAS_MK := \
 CE6SSM_SOFT_BETAS_MK := \
 		$(DIR)/soft_betas.mk
 
+CE6SSM_CXX_QFT_VERTICES_MK := \
+		$(DIR)/cxx_qft/vertices.mk
+
 CE6SSM_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
 CE6SSM_INCLUDE_MK := \
 		$(CE6SSM_SUSY_BETAS_MK) \
-		$(CE6SSM_SOFT_BETAS_MK)
+		$(CE6SSM_SOFT_BETAS_MK) \
+		$(CE6SSM_CXX_QFT_VERTICES_MK)
 
 CE6SSM_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.CE6SSM_generated \
@@ -47,6 +51,8 @@ CE6SSM_TARBALL := \
 LIBCE6SSM_SRC := \
 		$(DIR)/CE6SSM_a_muon.cpp \
 		$(DIR)/CE6SSM_edm.cpp \
+		$(DIR)/CE6SSM_FFV_form_factors.cpp \
+		$(DIR)/CE6SSM_l_to_lgamma.cpp \
 		$(DIR)/CE6SSM_effective_couplings.cpp \
 		$(DIR)/CE6SSM_info.cpp \
 		$(DIR)/CE6SSM_input_parameters.cpp \
@@ -76,6 +82,8 @@ LIBCE6SSM_HDR := \
 		$(DIR)/CE6SSM_a_muon.hpp \
 		$(DIR)/CE6SSM_convergence_tester.hpp \
 		$(DIR)/CE6SSM_edm.hpp \
+		$(DIR)/CE6SSM_FFV_form_factors.hpp \
+		$(DIR)/CE6SSM_l_to_lgamma.hpp \
 		$(DIR)/CE6SSM_effective_couplings.hpp \
 		$(DIR)/CE6SSM_ewsb_solver.hpp \
 		$(DIR)/CE6SSM_ewsb_solver_interface.hpp \
@@ -121,6 +129,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(CE6SSM_SUSY_BETAS_MK)
 -include $(CE6SSM_SOFT_BETAS_MK)
+-include $(CE6SSM_CXX_QFT_VERTICES_MK)
 -include $(CE6SSM_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
@@ -131,6 +140,8 @@ ifeq ($(findstring doc-,$(MAKECMDGOALS)),)
 $(CE6SSM_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(CE6SSM_SOFT_BETAS_MK): run-metacode-$(MODNAME)
+		@$(CONVERT_DOS_PATHS) $@
+$(CE6SSM_CXX_QFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(CE6SSM_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
@@ -192,56 +203,56 @@ all-$(MODNAME): $(LIBCE6SSM) $(EXECE6SSM_EXE)
 
 ifneq ($(INSTALL_DIR),)
 install-src::
-		install -d $(CE6SSM_INSTALL_DIR)
-		install -d $(CE6SSM_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(LIBCE6SSM_SRC) $(CE6SSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBCE6SSM_HDR) $(CE6SSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBCE6SSM_CXXQFT_HDR) $(CE6SSM_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(EXECE6SSM_SRC) $(CE6SSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLCE6SSM_SRC) $(CE6SSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLCE6SSM_MMA) $(CE6SSM_INSTALL_DIR)
-		$(INSTALL_STRIPPED) $(CE6SSM_MK) $(CE6SSM_INSTALL_DIR) -m u=rw,g=r,o=r
-		install -m u=rw,g=r,o=r $(CE6SSM_INCLUDE_MK) $(CE6SSM_INSTALL_DIR)
+		$(Q)install -d $(CE6SSM_INSTALL_DIR)
+		$(Q)install -d $(CE6SSM_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBCE6SSM_SRC) $(CE6SSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBCE6SSM_HDR) $(CE6SSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBCE6SSM_CXXQFT_HDR) $(CE6SSM_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(EXECE6SSM_SRC) $(CE6SSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLCE6SSM_SRC) $(CE6SSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLCE6SSM_MMA) $(CE6SSM_INSTALL_DIR)
+		$(Q)$(INSTALL_STRIPPED) $(CE6SSM_MK) $(CE6SSM_INSTALL_DIR) -m u=rw,g=r,o=r
+		$(Q)install -m u=rw,g=r,o=r $(CE6SSM_INCLUDE_MK) $(CE6SSM_INSTALL_DIR)
 ifneq ($(CE6SSM_SLHA_INPUT),)
-		install -m u=rw,g=r,o=r $(CE6SSM_SLHA_INPUT) $(CE6SSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(CE6SSM_SLHA_INPUT) $(CE6SSM_INSTALL_DIR)
 endif
-		install -m u=rw,g=r,o=r $(CE6SSM_REFERENCES) $(CE6SSM_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(CE6SSM_GNUPLOT) $(CE6SSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(CE6SSM_REFERENCES) $(CE6SSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(CE6SSM_GNUPLOT) $(CE6SSM_INSTALL_DIR)
 endif
 
 clean-$(MODNAME)-dep:
-		-rm -f $(LIBCE6SSM_DEP)
-		-rm -f $(EXECE6SSM_DEP)
-		-rm -f $(LLCE6SSM_DEP)
+		$(Q)-rm -f $(LIBCE6SSM_DEP)
+		$(Q)-rm -f $(EXECE6SSM_DEP)
+		$(Q)-rm -f $(LLCE6SSM_DEP)
 
 clean-$(MODNAME)-lib:
-		-rm -f $(LIBCE6SSM)
-		-rm -f $(LLCE6SSM_LIB)
+		$(Q)-rm -f $(LIBCE6SSM)
+		$(Q)-rm -f $(LLCE6SSM_LIB)
 
 clean-$(MODNAME)-obj:
-		-rm -f $(LIBCE6SSM_OBJ)
-		-rm -f $(EXECE6SSM_OBJ)
-		-rm -f $(LLCE6SSM_OBJ)
+		$(Q)-rm -f $(LIBCE6SSM_OBJ)
+		$(Q)-rm -f $(EXECE6SSM_OBJ)
+		$(Q)-rm -f $(LLCE6SSM_OBJ)
 
 # BEGIN: NOT EXPORTED ##########################################
 clean-$(MODNAME)-src:
-		-rm -f $(LIBCE6SSM_SRC)
-		-rm -f $(LIBCE6SSM_HDR)
-		-rm -f $(LIBCE6SSM_CXXQFT_HDR)
-		-rm -f $(EXECE6SSM_SRC)
-		-rm -f $(LLCE6SSM_SRC)
-		-rm -f $(LLCE6SSM_MMA)
-		-rm -f $(METACODE_STAMP_CE6SSM)
-		-rm -f $(CE6SSM_INCLUDE_MK)
-		-rm -f $(CE6SSM_SLHA_INPUT)
-		-rm -f $(CE6SSM_REFERENCES)
-		-rm -f $(CE6SSM_GNUPLOT)
+		$(Q)-rm -f $(LIBCE6SSM_SRC)
+		$(Q)-rm -f $(LIBCE6SSM_HDR)
+		$(Q)-rm -f $(LIBCE6SSM_CXXQFT_HDR)
+		$(Q)-rm -f $(EXECE6SSM_SRC)
+		$(Q)-rm -f $(LLCE6SSM_SRC)
+		$(Q)-rm -f $(LLCE6SSM_MMA)
+		$(Q)-rm -f $(METACODE_STAMP_CE6SSM)
+		$(Q)-rm -f $(CE6SSM_INCLUDE_MK)
+		$(Q)-rm -f $(CE6SSM_SLHA_INPUT)
+		$(Q)-rm -f $(CE6SSM_REFERENCES)
+		$(Q)-rm -f $(CE6SSM_GNUPLOT)
 
 distclean-$(MODNAME): clean-$(MODNAME)-src
 # END:   NOT EXPORTED ##########################################
 
 clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-lib clean-$(MODNAME)-obj
-		-rm -f $(EXECE6SSM_EXE)
+		$(Q)-rm -f $(EXECE6SSM_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
 		@true
@@ -255,7 +266,7 @@ clean::         clean-$(MODNAME)
 distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
-		tar -czf $(CE6SSM_TARBALL) \
+		$(Q)tar -czf $(CE6SSM_TARBALL) \
 		$(LIBCE6SSM_SRC) $(LIBCE6SSM_HDR) $(LIBCE6SSM_CXXQFT_HDR) \
 		$(EXECE6SSM_SRC) \
 		$(LLCE6SSM_SRC) $(LLCE6SSM_MMA) \
@@ -272,7 +283,8 @@ run-metacode-$(MODNAME): $(METACODE_STAMP_CE6SSM)
 
 ifeq ($(ENABLE_META),yes)
 $(METACODE_STAMP_CE6SSM): $(DIR)/start.m $(DIR)/FlexibleSUSY.m $(META_SRC) $(TEMPLATES) $(SARAH_MODEL_FILES_CE6SSM)
-		"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
+		@$(MSG)
+		$(Q)"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
 		@touch "$(METACODE_STAMP_CE6SSM)"
 		@echo "Note: to regenerate CE6SSM source files," \
 		      "please remove the file "
@@ -295,13 +307,16 @@ $(LLCE6SSM_OBJ) $(LLCE6SSM_LIB): \
 	CPPFLAGS += $(LLFLAGS)
 
 $(LIBCE6SSM): $(LIBCE6SSM_OBJ)
-		$(MODULE_MAKE_LIB_CMD) $@ $^
+		@$(MSG)
+		$(Q)$(MODULE_MAKE_LIB_CMD) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBCE6SSM) $(MODCE6SSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+		@$(MSG)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
 $(LLCE6SSM_LIB): $(LLCE6SSM_OBJ) $(LIBCE6SSM) $(MODCE6SSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
+		@$(MSG)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
 
 ALLDEP += $(LIBCE6SSM_DEP) $(EXECE6SSM_DEP)
 ALLSRC += $(LIBCE6SSM_SRC) $(EXECE6SSM_SRC)

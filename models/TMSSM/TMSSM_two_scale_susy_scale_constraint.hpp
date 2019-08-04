@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 17:04:43
+// File generated at Sun 4 Aug 2019 19:36:50
 
 #ifndef TMSSM_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
 #define TMSSM_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H

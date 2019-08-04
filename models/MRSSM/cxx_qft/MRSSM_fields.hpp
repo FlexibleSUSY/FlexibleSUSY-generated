@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 16:57:08
+// File generated at Sun 4 Aug 2019 19:30:50
 
 /**
  * @file cxx_qft/MRSSM_fields.hpp
  *
- * This file was generated at Tue 22 Jan 2019 16:57:08 with FlexibleSUSY
- * 2.3.0 and SARAH 4.14.1 .
+ * This file was generated at Sun 4 Aug 2019 19:30:50 with FlexibleSUSY
+ * 2.4.0 and SARAH 4.14.2 .
  */
 
 #ifndef MRSSM_CXXQFT_FIELDS_H
@@ -153,36 +153,36 @@ namespace MRSSM_cxx_diagrams
 
    struct VG {
    using index_bounds = boost::mpl::pair<
-     boost::mpl::vector_c<int, 0>,
-     boost::mpl::vector_c<int, 8>
+     boost::mpl::vector_c<int>,
+     boost::mpl::vector_c<int>
    >;
    static constexpr int numberOfGenerations = 1;
    using sm_flags = boost::mpl::vector_c<bool, true>;
-   static constexpr int numberOfFieldIndices = 1;
+   static constexpr int numberOfFieldIndices = 0;
    static constexpr double electric_charge = 0;
    using lorentz_conjugate = VG;
 };
 
 struct gG {
    using index_bounds = boost::mpl::pair<
-     boost::mpl::vector_c<int, 0>,
-     boost::mpl::vector_c<int, 8>
+     boost::mpl::vector_c<int>,
+     boost::mpl::vector_c<int>
    >;
    static constexpr int numberOfGenerations = 1;
    using sm_flags = boost::mpl::vector_c<bool, true>;
-   static constexpr int numberOfFieldIndices = 1;
+   static constexpr int numberOfFieldIndices = 0;
    static constexpr double electric_charge = 0;
    using lorentz_conjugate = typename bar<gG>::type;
 };
 
 struct Glu {
    using index_bounds = boost::mpl::pair<
-     boost::mpl::vector_c<int, 0>,
-     boost::mpl::vector_c<int, 8>
+     boost::mpl::vector_c<int>,
+     boost::mpl::vector_c<int>
    >;
    static constexpr int numberOfGenerations = 1;
    using sm_flags = boost::mpl::vector_c<bool, false>;
-   static constexpr int numberOfFieldIndices = 1;
+   static constexpr int numberOfFieldIndices = 0;
    static constexpr double electric_charge = 0;
    using lorentz_conjugate = typename bar<Glu>::type;
 };
@@ -225,24 +225,24 @@ struct SRum {
 
 struct sigmaO {
    using index_bounds = boost::mpl::pair<
-     boost::mpl::vector_c<int, 0>,
-     boost::mpl::vector_c<int, 8>
+     boost::mpl::vector_c<int>,
+     boost::mpl::vector_c<int>
    >;
    static constexpr int numberOfGenerations = 1;
    using sm_flags = boost::mpl::vector_c<bool, false>;
-   static constexpr int numberOfFieldIndices = 1;
+   static constexpr int numberOfFieldIndices = 0;
    static constexpr double electric_charge = 0;
    using lorentz_conjugate = sigmaO;
 };
 
 struct phiO {
    using index_bounds = boost::mpl::pair<
-     boost::mpl::vector_c<int, 0>,
-     boost::mpl::vector_c<int, 8>
+     boost::mpl::vector_c<int>,
+     boost::mpl::vector_c<int>
    >;
    static constexpr int numberOfGenerations = 1;
    using sm_flags = boost::mpl::vector_c<bool, false>;
-   static constexpr int numberOfFieldIndices = 1;
+   static constexpr int numberOfFieldIndices = 0;
    static constexpr double electric_charge = 0;
    using lorentz_conjugate = phiO;
 };
@@ -321,12 +321,12 @@ struct gWmC {
 
 struct Sd {
    using index_bounds = boost::mpl::pair<
-     boost::mpl::vector_c<int, 0, 0>,
-     boost::mpl::vector_c<int, 6, 3>
+     boost::mpl::vector_c<int, 0>,
+     boost::mpl::vector_c<int, 6>
    >;
    static constexpr int numberOfGenerations = 6;
    using sm_flags = boost::mpl::vector_c<bool, false, false, false, false, false, false>;
-   static constexpr int numberOfFieldIndices = 2;
+   static constexpr int numberOfFieldIndices = 1;
    static constexpr double electric_charge = -0.3333333333333333;
    using lorentz_conjugate = typename conj<Sd>::type;
 };
@@ -345,12 +345,12 @@ struct Sv {
 
 struct Su {
    using index_bounds = boost::mpl::pair<
-     boost::mpl::vector_c<int, 0, 0>,
-     boost::mpl::vector_c<int, 6, 3>
+     boost::mpl::vector_c<int, 0>,
+     boost::mpl::vector_c<int, 6>
    >;
    static constexpr int numberOfGenerations = 6;
    using sm_flags = boost::mpl::vector_c<bool, false, false, false, false, false, false>;
-   static constexpr int numberOfFieldIndices = 2;
+   static constexpr int numberOfFieldIndices = 1;
    static constexpr double electric_charge = 0.6666666666666666;
    using lorentz_conjugate = typename conj<Su>::type;
 };
@@ -385,7 +385,7 @@ struct Ah {
      boost::mpl::vector_c<int, 4>
    >;
    static constexpr int numberOfGenerations = 4;
-   using sm_flags = boost::mpl::vector_c<bool, false, false, false, false>;
+   using sm_flags = boost::mpl::vector_c<bool, true, false, false, false>;
    static constexpr int numberOfFieldIndices = 1;
    static constexpr double electric_charge = 0;
    using lorentz_conjugate = Ah;
@@ -409,7 +409,7 @@ struct Hpm {
      boost::mpl::vector_c<int, 4>
    >;
    static constexpr int numberOfGenerations = 4;
-   using sm_flags = boost::mpl::vector_c<bool, false, false, false, false>;
+   using sm_flags = boost::mpl::vector_c<bool, true, false, false, false>;
    static constexpr int numberOfFieldIndices = 1;
    static constexpr double electric_charge = -1;
    using lorentz_conjugate = typename conj<Hpm>::type;
@@ -465,24 +465,24 @@ struct Fe {
 
 struct Fd {
    using index_bounds = boost::mpl::pair<
-     boost::mpl::vector_c<int, 0, 0>,
-     boost::mpl::vector_c<int, 3, 3>
+     boost::mpl::vector_c<int, 0>,
+     boost::mpl::vector_c<int, 3>
    >;
    static constexpr int numberOfGenerations = 3;
    using sm_flags = boost::mpl::vector_c<bool, true, true, true>;
-   static constexpr int numberOfFieldIndices = 2;
+   static constexpr int numberOfFieldIndices = 1;
    static constexpr double electric_charge = -0.3333333333333333;
    using lorentz_conjugate = typename bar<Fd>::type;
 };
 
 struct Fu {
    using index_bounds = boost::mpl::pair<
-     boost::mpl::vector_c<int, 0, 0>,
-     boost::mpl::vector_c<int, 3, 3>
+     boost::mpl::vector_c<int, 0>,
+     boost::mpl::vector_c<int, 3>
    >;
    static constexpr int numberOfGenerations = 3;
    using sm_flags = boost::mpl::vector_c<bool, true, true, true>;
-   static constexpr int numberOfFieldIndices = 2;
+   static constexpr int numberOfFieldIndices = 1;
    static constexpr double electric_charge = 0.6666666666666666;
    using lorentz_conjugate = typename bar<Fu>::type;
 };

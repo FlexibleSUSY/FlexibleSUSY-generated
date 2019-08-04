@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 13:51:48
+// File generated at Sun 4 Aug 2019 17:42:33
 
 #include "CNMSSM_semi_analytic_susy_scale_constraint.hpp"
 #include "CNMSSM_semi_analytic_model.hpp"

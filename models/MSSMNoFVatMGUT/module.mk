@@ -23,12 +23,16 @@ MSSMNoFVatMGUT_SUSY_BETAS_MK := \
 MSSMNoFVatMGUT_SOFT_BETAS_MK := \
 		$(DIR)/soft_betas.mk
 
+MSSMNoFVatMGUT_CXX_QFT_VERTICES_MK := \
+		$(DIR)/cxx_qft/vertices.mk
+
 MSSMNoFVatMGUT_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
 MSSMNoFVatMGUT_INCLUDE_MK := \
 		$(MSSMNoFVatMGUT_SUSY_BETAS_MK) \
-		$(MSSMNoFVatMGUT_SOFT_BETAS_MK)
+		$(MSSMNoFVatMGUT_SOFT_BETAS_MK) \
+		$(MSSMNoFVatMGUT_CXX_QFT_VERTICES_MK)
 
 MSSMNoFVatMGUT_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.MSSMNoFVatMGUT_generated \
@@ -47,6 +51,8 @@ MSSMNoFVatMGUT_TARBALL := \
 LIBMSSMNoFVatMGUT_SRC := \
 		$(DIR)/MSSMNoFVatMGUT_a_muon.cpp \
 		$(DIR)/MSSMNoFVatMGUT_edm.cpp \
+		$(DIR)/MSSMNoFVatMGUT_FFV_form_factors.cpp \
+		$(DIR)/MSSMNoFVatMGUT_l_to_lgamma.cpp \
 		$(DIR)/MSSMNoFVatMGUT_effective_couplings.cpp \
 		$(DIR)/MSSMNoFVatMGUT_info.cpp \
 		$(DIR)/MSSMNoFVatMGUT_input_parameters.cpp \
@@ -76,6 +82,8 @@ LIBMSSMNoFVatMGUT_HDR := \
 		$(DIR)/MSSMNoFVatMGUT_a_muon.hpp \
 		$(DIR)/MSSMNoFVatMGUT_convergence_tester.hpp \
 		$(DIR)/MSSMNoFVatMGUT_edm.hpp \
+		$(DIR)/MSSMNoFVatMGUT_FFV_form_factors.hpp \
+		$(DIR)/MSSMNoFVatMGUT_l_to_lgamma.hpp \
 		$(DIR)/MSSMNoFVatMGUT_effective_couplings.hpp \
 		$(DIR)/MSSMNoFVatMGUT_ewsb_solver.hpp \
 		$(DIR)/MSSMNoFVatMGUT_ewsb_solver_interface.hpp \
@@ -121,6 +129,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(MSSMNoFVatMGUT_SUSY_BETAS_MK)
 -include $(MSSMNoFVatMGUT_SOFT_BETAS_MK)
+-include $(MSSMNoFVatMGUT_CXX_QFT_VERTICES_MK)
 -include $(MSSMNoFVatMGUT_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
@@ -131,6 +140,8 @@ ifeq ($(findstring doc-,$(MAKECMDGOALS)),)
 $(MSSMNoFVatMGUT_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(MSSMNoFVatMGUT_SOFT_BETAS_MK): run-metacode-$(MODNAME)
+		@$(CONVERT_DOS_PATHS) $@
+$(MSSMNoFVatMGUT_CXX_QFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(MSSMNoFVatMGUT_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
@@ -192,56 +203,56 @@ all-$(MODNAME): $(LIBMSSMNoFVatMGUT) $(EXEMSSMNoFVatMGUT_EXE)
 
 ifneq ($(INSTALL_DIR),)
 install-src::
-		install -d $(MSSMNoFVatMGUT_INSTALL_DIR)
-		install -d $(MSSMNoFVatMGUT_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(LIBMSSMNoFVatMGUT_SRC) $(MSSMNoFVatMGUT_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBMSSMNoFVatMGUT_HDR) $(MSSMNoFVatMGUT_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBMSSMNoFVatMGUT_CXXQFT_HDR) $(MSSMNoFVatMGUT_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(EXEMSSMNoFVatMGUT_SRC) $(MSSMNoFVatMGUT_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLMSSMNoFVatMGUT_SRC) $(MSSMNoFVatMGUT_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLMSSMNoFVatMGUT_MMA) $(MSSMNoFVatMGUT_INSTALL_DIR)
-		$(INSTALL_STRIPPED) $(MSSMNoFVatMGUT_MK) $(MSSMNoFVatMGUT_INSTALL_DIR) -m u=rw,g=r,o=r
-		install -m u=rw,g=r,o=r $(MSSMNoFVatMGUT_INCLUDE_MK) $(MSSMNoFVatMGUT_INSTALL_DIR)
+		$(Q)install -d $(MSSMNoFVatMGUT_INSTALL_DIR)
+		$(Q)install -d $(MSSMNoFVatMGUT_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBMSSMNoFVatMGUT_SRC) $(MSSMNoFVatMGUT_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBMSSMNoFVatMGUT_HDR) $(MSSMNoFVatMGUT_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBMSSMNoFVatMGUT_CXXQFT_HDR) $(MSSMNoFVatMGUT_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(EXEMSSMNoFVatMGUT_SRC) $(MSSMNoFVatMGUT_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLMSSMNoFVatMGUT_SRC) $(MSSMNoFVatMGUT_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLMSSMNoFVatMGUT_MMA) $(MSSMNoFVatMGUT_INSTALL_DIR)
+		$(Q)$(INSTALL_STRIPPED) $(MSSMNoFVatMGUT_MK) $(MSSMNoFVatMGUT_INSTALL_DIR) -m u=rw,g=r,o=r
+		$(Q)install -m u=rw,g=r,o=r $(MSSMNoFVatMGUT_INCLUDE_MK) $(MSSMNoFVatMGUT_INSTALL_DIR)
 ifneq ($(MSSMNoFVatMGUT_SLHA_INPUT),)
-		install -m u=rw,g=r,o=r $(MSSMNoFVatMGUT_SLHA_INPUT) $(MSSMNoFVatMGUT_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(MSSMNoFVatMGUT_SLHA_INPUT) $(MSSMNoFVatMGUT_INSTALL_DIR)
 endif
-		install -m u=rw,g=r,o=r $(MSSMNoFVatMGUT_REFERENCES) $(MSSMNoFVatMGUT_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(MSSMNoFVatMGUT_GNUPLOT) $(MSSMNoFVatMGUT_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(MSSMNoFVatMGUT_REFERENCES) $(MSSMNoFVatMGUT_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(MSSMNoFVatMGUT_GNUPLOT) $(MSSMNoFVatMGUT_INSTALL_DIR)
 endif
 
 clean-$(MODNAME)-dep:
-		-rm -f $(LIBMSSMNoFVatMGUT_DEP)
-		-rm -f $(EXEMSSMNoFVatMGUT_DEP)
-		-rm -f $(LLMSSMNoFVatMGUT_DEP)
+		$(Q)-rm -f $(LIBMSSMNoFVatMGUT_DEP)
+		$(Q)-rm -f $(EXEMSSMNoFVatMGUT_DEP)
+		$(Q)-rm -f $(LLMSSMNoFVatMGUT_DEP)
 
 clean-$(MODNAME)-lib:
-		-rm -f $(LIBMSSMNoFVatMGUT)
-		-rm -f $(LLMSSMNoFVatMGUT_LIB)
+		$(Q)-rm -f $(LIBMSSMNoFVatMGUT)
+		$(Q)-rm -f $(LLMSSMNoFVatMGUT_LIB)
 
 clean-$(MODNAME)-obj:
-		-rm -f $(LIBMSSMNoFVatMGUT_OBJ)
-		-rm -f $(EXEMSSMNoFVatMGUT_OBJ)
-		-rm -f $(LLMSSMNoFVatMGUT_OBJ)
+		$(Q)-rm -f $(LIBMSSMNoFVatMGUT_OBJ)
+		$(Q)-rm -f $(EXEMSSMNoFVatMGUT_OBJ)
+		$(Q)-rm -f $(LLMSSMNoFVatMGUT_OBJ)
 
 # BEGIN: NOT EXPORTED ##########################################
 clean-$(MODNAME)-src:
-		-rm -f $(LIBMSSMNoFVatMGUT_SRC)
-		-rm -f $(LIBMSSMNoFVatMGUT_HDR)
-		-rm -f $(LIBMSSMNoFVatMGUT_CXXQFT_HDR)
-		-rm -f $(EXEMSSMNoFVatMGUT_SRC)
-		-rm -f $(LLMSSMNoFVatMGUT_SRC)
-		-rm -f $(LLMSSMNoFVatMGUT_MMA)
-		-rm -f $(METACODE_STAMP_MSSMNoFVatMGUT)
-		-rm -f $(MSSMNoFVatMGUT_INCLUDE_MK)
-		-rm -f $(MSSMNoFVatMGUT_SLHA_INPUT)
-		-rm -f $(MSSMNoFVatMGUT_REFERENCES)
-		-rm -f $(MSSMNoFVatMGUT_GNUPLOT)
+		$(Q)-rm -f $(LIBMSSMNoFVatMGUT_SRC)
+		$(Q)-rm -f $(LIBMSSMNoFVatMGUT_HDR)
+		$(Q)-rm -f $(LIBMSSMNoFVatMGUT_CXXQFT_HDR)
+		$(Q)-rm -f $(EXEMSSMNoFVatMGUT_SRC)
+		$(Q)-rm -f $(LLMSSMNoFVatMGUT_SRC)
+		$(Q)-rm -f $(LLMSSMNoFVatMGUT_MMA)
+		$(Q)-rm -f $(METACODE_STAMP_MSSMNoFVatMGUT)
+		$(Q)-rm -f $(MSSMNoFVatMGUT_INCLUDE_MK)
+		$(Q)-rm -f $(MSSMNoFVatMGUT_SLHA_INPUT)
+		$(Q)-rm -f $(MSSMNoFVatMGUT_REFERENCES)
+		$(Q)-rm -f $(MSSMNoFVatMGUT_GNUPLOT)
 
 distclean-$(MODNAME): clean-$(MODNAME)-src
 # END:   NOT EXPORTED ##########################################
 
 clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-lib clean-$(MODNAME)-obj
-		-rm -f $(EXEMSSMNoFVatMGUT_EXE)
+		$(Q)-rm -f $(EXEMSSMNoFVatMGUT_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
 		@true
@@ -255,7 +266,7 @@ clean::         clean-$(MODNAME)
 distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
-		tar -czf $(MSSMNoFVatMGUT_TARBALL) \
+		$(Q)tar -czf $(MSSMNoFVatMGUT_TARBALL) \
 		$(LIBMSSMNoFVatMGUT_SRC) $(LIBMSSMNoFVatMGUT_HDR) $(LIBMSSMNoFVatMGUT_CXXQFT_HDR) \
 		$(EXEMSSMNoFVatMGUT_SRC) \
 		$(LLMSSMNoFVatMGUT_SRC) $(LLMSSMNoFVatMGUT_MMA) \
@@ -272,7 +283,8 @@ run-metacode-$(MODNAME): $(METACODE_STAMP_MSSMNoFVatMGUT)
 
 ifeq ($(ENABLE_META),yes)
 $(METACODE_STAMP_MSSMNoFVatMGUT): $(DIR)/start.m $(DIR)/FlexibleSUSY.m $(META_SRC) $(TEMPLATES) $(SARAH_MODEL_FILES_MSSMNoFVatMGUT)
-		"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
+		@$(MSG)
+		$(Q)"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
 		@touch "$(METACODE_STAMP_MSSMNoFVatMGUT)"
 		@echo "Note: to regenerate MSSMNoFVatMGUT source files," \
 		      "please remove the file "
@@ -295,13 +307,16 @@ $(LLMSSMNoFVatMGUT_OBJ) $(LLMSSMNoFVatMGUT_LIB): \
 	CPPFLAGS += $(LLFLAGS)
 
 $(LIBMSSMNoFVatMGUT): $(LIBMSSMNoFVatMGUT_OBJ)
-		$(MODULE_MAKE_LIB_CMD) $@ $^
+		@$(MSG)
+		$(Q)$(MODULE_MAKE_LIB_CMD) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBMSSMNoFVatMGUT) $(MODMSSMNoFVatMGUT_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+		@$(MSG)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
 $(LLMSSMNoFVatMGUT_LIB): $(LLMSSMNoFVatMGUT_OBJ) $(LIBMSSMNoFVatMGUT) $(MODMSSMNoFVatMGUT_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
+		@$(MSG)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
 
 ALLDEP += $(LIBMSSMNoFVatMGUT_DEP) $(EXEMSSMNoFVatMGUT_DEP)
 ALLSRC += $(LIBMSSMNoFVatMGUT_SRC) $(EXEMSSMNoFVatMGUT_SRC)

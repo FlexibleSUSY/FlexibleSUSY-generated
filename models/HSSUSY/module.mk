@@ -2,7 +2,7 @@ DIR          := models/HSSUSY
 MODNAME      := HSSUSY
 SARAH_MODEL  := SM
 WITH_$(MODNAME) := yes
-MODHSSUSY_MOD := SM
+MODHSSUSY_MOD := SM SM_thresholds
 MODHSSUSY_DEP := $(patsubst %,model_specific/%,$(MODHSSUSY_MOD))
 MODHSSUSY_INC := $(patsubst %,-Imodel_specific/%,$(MODHSSUSY_MOD))
 MODHSSUSY_LIB := $(foreach M,$(MODHSSUSY_MOD),model_specific/$M/libmodel_specific_$M$(MODULE_LIBEXT))
@@ -23,12 +23,16 @@ HSSUSY_SUSY_BETAS_MK := \
 HSSUSY_SOFT_BETAS_MK := \
 		$(DIR)/soft_betas.mk
 
+HSSUSY_CXX_QFT_VERTICES_MK := \
+		$(DIR)/cxx_qft/vertices.mk
+
 HSSUSY_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
 HSSUSY_INCLUDE_MK := \
 		$(HSSUSY_SUSY_BETAS_MK) \
-		$(HSSUSY_SOFT_BETAS_MK)
+		$(HSSUSY_SOFT_BETAS_MK) \
+		$(HSSUSY_CXX_QFT_VERTICES_MK)
 
 HSSUSY_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.HSSUSY_generated \
@@ -47,6 +51,8 @@ HSSUSY_TARBALL := \
 LIBHSSUSY_SRC := \
 		$(DIR)/HSSUSY_a_muon.cpp \
 		$(DIR)/HSSUSY_edm.cpp \
+		$(DIR)/HSSUSY_FFV_form_factors.cpp \
+		$(DIR)/HSSUSY_l_to_lgamma.cpp \
 		$(DIR)/HSSUSY_effective_couplings.cpp \
 		$(DIR)/HSSUSY_info.cpp \
 		$(DIR)/HSSUSY_input_parameters.cpp \
@@ -76,6 +82,8 @@ LIBHSSUSY_HDR := \
 		$(DIR)/HSSUSY_a_muon.hpp \
 		$(DIR)/HSSUSY_convergence_tester.hpp \
 		$(DIR)/HSSUSY_edm.hpp \
+		$(DIR)/HSSUSY_FFV_form_factors.hpp \
+		$(DIR)/HSSUSY_l_to_lgamma.hpp \
 		$(DIR)/HSSUSY_effective_couplings.hpp \
 		$(DIR)/HSSUSY_ewsb_solver.hpp \
 		$(DIR)/HSSUSY_ewsb_solver_interface.hpp \
@@ -121,6 +129,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(HSSUSY_SUSY_BETAS_MK)
 -include $(HSSUSY_SOFT_BETAS_MK)
+-include $(HSSUSY_CXX_QFT_VERTICES_MK)
 -include $(HSSUSY_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
@@ -131,6 +140,8 @@ ifeq ($(findstring doc-,$(MAKECMDGOALS)),)
 $(HSSUSY_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(HSSUSY_SOFT_BETAS_MK): run-metacode-$(MODNAME)
+		@$(CONVERT_DOS_PATHS) $@
+$(HSSUSY_CXX_QFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(HSSUSY_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
@@ -192,56 +203,56 @@ all-$(MODNAME): $(LIBHSSUSY) $(EXEHSSUSY_EXE)
 
 ifneq ($(INSTALL_DIR),)
 install-src::
-		install -d $(HSSUSY_INSTALL_DIR)
-		install -d $(HSSUSY_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(LIBHSSUSY_SRC) $(HSSUSY_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBHSSUSY_HDR) $(HSSUSY_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBHSSUSY_CXXQFT_HDR) $(HSSUSY_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(EXEHSSUSY_SRC) $(HSSUSY_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLHSSUSY_SRC) $(HSSUSY_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLHSSUSY_MMA) $(HSSUSY_INSTALL_DIR)
-		$(INSTALL_STRIPPED) $(HSSUSY_MK) $(HSSUSY_INSTALL_DIR) -m u=rw,g=r,o=r
-		install -m u=rw,g=r,o=r $(HSSUSY_INCLUDE_MK) $(HSSUSY_INSTALL_DIR)
+		$(Q)install -d $(HSSUSY_INSTALL_DIR)
+		$(Q)install -d $(HSSUSY_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBHSSUSY_SRC) $(HSSUSY_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBHSSUSY_HDR) $(HSSUSY_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBHSSUSY_CXXQFT_HDR) $(HSSUSY_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(EXEHSSUSY_SRC) $(HSSUSY_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLHSSUSY_SRC) $(HSSUSY_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLHSSUSY_MMA) $(HSSUSY_INSTALL_DIR)
+		$(Q)$(INSTALL_STRIPPED) $(HSSUSY_MK) $(HSSUSY_INSTALL_DIR) -m u=rw,g=r,o=r
+		$(Q)install -m u=rw,g=r,o=r $(HSSUSY_INCLUDE_MK) $(HSSUSY_INSTALL_DIR)
 ifneq ($(HSSUSY_SLHA_INPUT),)
-		install -m u=rw,g=r,o=r $(HSSUSY_SLHA_INPUT) $(HSSUSY_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(HSSUSY_SLHA_INPUT) $(HSSUSY_INSTALL_DIR)
 endif
-		install -m u=rw,g=r,o=r $(HSSUSY_REFERENCES) $(HSSUSY_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(HSSUSY_GNUPLOT) $(HSSUSY_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(HSSUSY_REFERENCES) $(HSSUSY_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(HSSUSY_GNUPLOT) $(HSSUSY_INSTALL_DIR)
 endif
 
 clean-$(MODNAME)-dep:
-		-rm -f $(LIBHSSUSY_DEP)
-		-rm -f $(EXEHSSUSY_DEP)
-		-rm -f $(LLHSSUSY_DEP)
+		$(Q)-rm -f $(LIBHSSUSY_DEP)
+		$(Q)-rm -f $(EXEHSSUSY_DEP)
+		$(Q)-rm -f $(LLHSSUSY_DEP)
 
 clean-$(MODNAME)-lib:
-		-rm -f $(LIBHSSUSY)
-		-rm -f $(LLHSSUSY_LIB)
+		$(Q)-rm -f $(LIBHSSUSY)
+		$(Q)-rm -f $(LLHSSUSY_LIB)
 
 clean-$(MODNAME)-obj:
-		-rm -f $(LIBHSSUSY_OBJ)
-		-rm -f $(EXEHSSUSY_OBJ)
-		-rm -f $(LLHSSUSY_OBJ)
+		$(Q)-rm -f $(LIBHSSUSY_OBJ)
+		$(Q)-rm -f $(EXEHSSUSY_OBJ)
+		$(Q)-rm -f $(LLHSSUSY_OBJ)
 
 # BEGIN: NOT EXPORTED ##########################################
 clean-$(MODNAME)-src:
-		-rm -f $(LIBHSSUSY_SRC)
-		-rm -f $(LIBHSSUSY_HDR)
-		-rm -f $(LIBHSSUSY_CXXQFT_HDR)
-		-rm -f $(EXEHSSUSY_SRC)
-		-rm -f $(LLHSSUSY_SRC)
-		-rm -f $(LLHSSUSY_MMA)
-		-rm -f $(METACODE_STAMP_HSSUSY)
-		-rm -f $(HSSUSY_INCLUDE_MK)
-		-rm -f $(HSSUSY_SLHA_INPUT)
-		-rm -f $(HSSUSY_REFERENCES)
-		-rm -f $(HSSUSY_GNUPLOT)
+		$(Q)-rm -f $(LIBHSSUSY_SRC)
+		$(Q)-rm -f $(LIBHSSUSY_HDR)
+		$(Q)-rm -f $(LIBHSSUSY_CXXQFT_HDR)
+		$(Q)-rm -f $(EXEHSSUSY_SRC)
+		$(Q)-rm -f $(LLHSSUSY_SRC)
+		$(Q)-rm -f $(LLHSSUSY_MMA)
+		$(Q)-rm -f $(METACODE_STAMP_HSSUSY)
+		$(Q)-rm -f $(HSSUSY_INCLUDE_MK)
+		$(Q)-rm -f $(HSSUSY_SLHA_INPUT)
+		$(Q)-rm -f $(HSSUSY_REFERENCES)
+		$(Q)-rm -f $(HSSUSY_GNUPLOT)
 
 distclean-$(MODNAME): clean-$(MODNAME)-src
 # END:   NOT EXPORTED ##########################################
 
 clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-lib clean-$(MODNAME)-obj
-		-rm -f $(EXEHSSUSY_EXE)
+		$(Q)-rm -f $(EXEHSSUSY_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
 		@true
@@ -255,7 +266,7 @@ clean::         clean-$(MODNAME)
 distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
-		tar -czf $(HSSUSY_TARBALL) \
+		$(Q)tar -czf $(HSSUSY_TARBALL) \
 		$(LIBHSSUSY_SRC) $(LIBHSSUSY_HDR) $(LIBHSSUSY_CXXQFT_HDR) \
 		$(EXEHSSUSY_SRC) \
 		$(LLHSSUSY_SRC) $(LLHSSUSY_MMA) \
@@ -272,7 +283,8 @@ run-metacode-$(MODNAME): $(METACODE_STAMP_HSSUSY)
 
 ifeq ($(ENABLE_META),yes)
 $(METACODE_STAMP_HSSUSY): $(DIR)/start.m $(DIR)/FlexibleSUSY.m $(META_SRC) $(TEMPLATES) $(SARAH_MODEL_FILES_HSSUSY)
-		"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
+		@$(MSG)
+		$(Q)"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
 		@touch "$(METACODE_STAMP_HSSUSY)"
 		@echo "Note: to regenerate HSSUSY source files," \
 		      "please remove the file "
@@ -295,13 +307,16 @@ $(LLHSSUSY_OBJ) $(LLHSSUSY_LIB): \
 	CPPFLAGS += $(LLFLAGS)
 
 $(LIBHSSUSY): $(LIBHSSUSY_OBJ)
-		$(MODULE_MAKE_LIB_CMD) $@ $^
+		@$(MSG)
+		$(Q)$(MODULE_MAKE_LIB_CMD) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBHSSUSY) $(MODHSSUSY_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+		@$(MSG)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
 $(LLHSSUSY_LIB): $(LLHSSUSY_OBJ) $(LIBHSSUSY) $(MODHSSUSY_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
+		@$(MSG)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
 
 ALLDEP += $(LIBHSSUSY_DEP) $(EXEHSSUSY_DEP)
 ALLSRC += $(LIBHSSUSY_SRC) $(EXEHSSUSY_SRC)

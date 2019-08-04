@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 18:00:12
+// File generated at Sun 4 Aug 2019 20:06:00
 
 #ifndef CMSSMSemiAnalytic_EFFECTIVE_COUPLINGS_H
 #define CMSSMSemiAnalytic_EFFECTIVE_COUPLINGS_H

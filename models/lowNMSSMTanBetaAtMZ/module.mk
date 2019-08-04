@@ -23,12 +23,16 @@ lowNMSSMTanBetaAtMZ_SUSY_BETAS_MK := \
 lowNMSSMTanBetaAtMZ_SOFT_BETAS_MK := \
 		$(DIR)/soft_betas.mk
 
+lowNMSSMTanBetaAtMZ_CXX_QFT_VERTICES_MK := \
+		$(DIR)/cxx_qft/vertices.mk
+
 lowNMSSMTanBetaAtMZ_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
 lowNMSSMTanBetaAtMZ_INCLUDE_MK := \
 		$(lowNMSSMTanBetaAtMZ_SUSY_BETAS_MK) \
-		$(lowNMSSMTanBetaAtMZ_SOFT_BETAS_MK)
+		$(lowNMSSMTanBetaAtMZ_SOFT_BETAS_MK) \
+		$(lowNMSSMTanBetaAtMZ_CXX_QFT_VERTICES_MK)
 
 lowNMSSMTanBetaAtMZ_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.lowNMSSMTanBetaAtMZ_generated \
@@ -53,6 +57,8 @@ lowNMSSMTanBetaAtMZ_TARBALL := \
 LIBlowNMSSMTanBetaAtMZ_SRC := \
 		$(DIR)/lowNMSSMTanBetaAtMZ_a_muon.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_edm.cpp \
+		$(DIR)/lowNMSSMTanBetaAtMZ_FFV_form_factors.cpp \
+		$(DIR)/lowNMSSMTanBetaAtMZ_l_to_lgamma.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_effective_couplings.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_info.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_input_parameters.cpp \
@@ -82,6 +88,8 @@ LIBlowNMSSMTanBetaAtMZ_HDR := \
 		$(DIR)/lowNMSSMTanBetaAtMZ_a_muon.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_convergence_tester.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_edm.hpp \
+		$(DIR)/lowNMSSMTanBetaAtMZ_FFV_form_factors.hpp \
+		$(DIR)/lowNMSSMTanBetaAtMZ_l_to_lgamma.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_effective_couplings.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_ewsb_solver.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_ewsb_solver_interface.hpp \
@@ -127,6 +135,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(lowNMSSMTanBetaAtMZ_SUSY_BETAS_MK)
 -include $(lowNMSSMTanBetaAtMZ_SOFT_BETAS_MK)
+-include $(lowNMSSMTanBetaAtMZ_CXX_QFT_VERTICES_MK)
 -include $(lowNMSSMTanBetaAtMZ_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
@@ -137,6 +146,8 @@ ifeq ($(findstring doc-,$(MAKECMDGOALS)),)
 $(lowNMSSMTanBetaAtMZ_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(lowNMSSMTanBetaAtMZ_SOFT_BETAS_MK): run-metacode-$(MODNAME)
+		@$(CONVERT_DOS_PATHS) $@
+$(lowNMSSMTanBetaAtMZ_CXX_QFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(lowNMSSMTanBetaAtMZ_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
@@ -198,56 +209,56 @@ all-$(MODNAME): $(LIBlowNMSSMTanBetaAtMZ) $(EXElowNMSSMTanBetaAtMZ_EXE)
 
 ifneq ($(INSTALL_DIR),)
 install-src::
-		install -d $(lowNMSSMTanBetaAtMZ_INSTALL_DIR)
-		install -d $(lowNMSSMTanBetaAtMZ_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(LIBlowNMSSMTanBetaAtMZ_SRC) $(lowNMSSMTanBetaAtMZ_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBlowNMSSMTanBetaAtMZ_HDR) $(lowNMSSMTanBetaAtMZ_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBlowNMSSMTanBetaAtMZ_CXXQFT_HDR) $(lowNMSSMTanBetaAtMZ_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(EXElowNMSSMTanBetaAtMZ_SRC) $(lowNMSSMTanBetaAtMZ_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLlowNMSSMTanBetaAtMZ_SRC) $(lowNMSSMTanBetaAtMZ_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLlowNMSSMTanBetaAtMZ_MMA) $(lowNMSSMTanBetaAtMZ_INSTALL_DIR)
-		$(INSTALL_STRIPPED) $(lowNMSSMTanBetaAtMZ_MK) $(lowNMSSMTanBetaAtMZ_INSTALL_DIR) -m u=rw,g=r,o=r
-		install -m u=rw,g=r,o=r $(lowNMSSMTanBetaAtMZ_INCLUDE_MK) $(lowNMSSMTanBetaAtMZ_INSTALL_DIR)
+		$(Q)install -d $(lowNMSSMTanBetaAtMZ_INSTALL_DIR)
+		$(Q)install -d $(lowNMSSMTanBetaAtMZ_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBlowNMSSMTanBetaAtMZ_SRC) $(lowNMSSMTanBetaAtMZ_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBlowNMSSMTanBetaAtMZ_HDR) $(lowNMSSMTanBetaAtMZ_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBlowNMSSMTanBetaAtMZ_CXXQFT_HDR) $(lowNMSSMTanBetaAtMZ_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(EXElowNMSSMTanBetaAtMZ_SRC) $(lowNMSSMTanBetaAtMZ_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLlowNMSSMTanBetaAtMZ_SRC) $(lowNMSSMTanBetaAtMZ_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLlowNMSSMTanBetaAtMZ_MMA) $(lowNMSSMTanBetaAtMZ_INSTALL_DIR)
+		$(Q)$(INSTALL_STRIPPED) $(lowNMSSMTanBetaAtMZ_MK) $(lowNMSSMTanBetaAtMZ_INSTALL_DIR) -m u=rw,g=r,o=r
+		$(Q)install -m u=rw,g=r,o=r $(lowNMSSMTanBetaAtMZ_INCLUDE_MK) $(lowNMSSMTanBetaAtMZ_INSTALL_DIR)
 ifneq ($(lowNMSSMTanBetaAtMZ_SLHA_INPUT),)
-		install -m u=rw,g=r,o=r $(lowNMSSMTanBetaAtMZ_SLHA_INPUT) $(lowNMSSMTanBetaAtMZ_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(lowNMSSMTanBetaAtMZ_SLHA_INPUT) $(lowNMSSMTanBetaAtMZ_INSTALL_DIR)
 endif
-		install -m u=rw,g=r,o=r $(lowNMSSMTanBetaAtMZ_REFERENCES) $(lowNMSSMTanBetaAtMZ_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(lowNMSSMTanBetaAtMZ_GNUPLOT) $(lowNMSSMTanBetaAtMZ_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(lowNMSSMTanBetaAtMZ_REFERENCES) $(lowNMSSMTanBetaAtMZ_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(lowNMSSMTanBetaAtMZ_GNUPLOT) $(lowNMSSMTanBetaAtMZ_INSTALL_DIR)
 endif
 
 clean-$(MODNAME)-dep:
-		-rm -f $(LIBlowNMSSMTanBetaAtMZ_DEP)
-		-rm -f $(EXElowNMSSMTanBetaAtMZ_DEP)
-		-rm -f $(LLlowNMSSMTanBetaAtMZ_DEP)
+		$(Q)-rm -f $(LIBlowNMSSMTanBetaAtMZ_DEP)
+		$(Q)-rm -f $(EXElowNMSSMTanBetaAtMZ_DEP)
+		$(Q)-rm -f $(LLlowNMSSMTanBetaAtMZ_DEP)
 
 clean-$(MODNAME)-lib:
-		-rm -f $(LIBlowNMSSMTanBetaAtMZ)
-		-rm -f $(LLlowNMSSMTanBetaAtMZ_LIB)
+		$(Q)-rm -f $(LIBlowNMSSMTanBetaAtMZ)
+		$(Q)-rm -f $(LLlowNMSSMTanBetaAtMZ_LIB)
 
 clean-$(MODNAME)-obj:
-		-rm -f $(LIBlowNMSSMTanBetaAtMZ_OBJ)
-		-rm -f $(EXElowNMSSMTanBetaAtMZ_OBJ)
-		-rm -f $(LLlowNMSSMTanBetaAtMZ_OBJ)
+		$(Q)-rm -f $(LIBlowNMSSMTanBetaAtMZ_OBJ)
+		$(Q)-rm -f $(EXElowNMSSMTanBetaAtMZ_OBJ)
+		$(Q)-rm -f $(LLlowNMSSMTanBetaAtMZ_OBJ)
 
 # BEGIN: NOT EXPORTED ##########################################
 clean-$(MODNAME)-src:
-		-rm -f $(LIBlowNMSSMTanBetaAtMZ_SRC)
-		-rm -f $(LIBlowNMSSMTanBetaAtMZ_HDR)
-		-rm -f $(LIBlowNMSSMTanBetaAtMZ_CXXQFT_HDR)
-		-rm -f $(EXElowNMSSMTanBetaAtMZ_SRC)
-		-rm -f $(LLlowNMSSMTanBetaAtMZ_SRC)
-		-rm -f $(LLlowNMSSMTanBetaAtMZ_MMA)
-		-rm -f $(METACODE_STAMP_lowNMSSMTanBetaAtMZ)
-		-rm -f $(lowNMSSMTanBetaAtMZ_INCLUDE_MK)
-		-rm -f $(lowNMSSMTanBetaAtMZ_SLHA_INPUT)
-		-rm -f $(lowNMSSMTanBetaAtMZ_REFERENCES)
-		-rm -f $(lowNMSSMTanBetaAtMZ_GNUPLOT)
+		$(Q)-rm -f $(LIBlowNMSSMTanBetaAtMZ_SRC)
+		$(Q)-rm -f $(LIBlowNMSSMTanBetaAtMZ_HDR)
+		$(Q)-rm -f $(LIBlowNMSSMTanBetaAtMZ_CXXQFT_HDR)
+		$(Q)-rm -f $(EXElowNMSSMTanBetaAtMZ_SRC)
+		$(Q)-rm -f $(LLlowNMSSMTanBetaAtMZ_SRC)
+		$(Q)-rm -f $(LLlowNMSSMTanBetaAtMZ_MMA)
+		$(Q)-rm -f $(METACODE_STAMP_lowNMSSMTanBetaAtMZ)
+		$(Q)-rm -f $(lowNMSSMTanBetaAtMZ_INCLUDE_MK)
+		$(Q)-rm -f $(lowNMSSMTanBetaAtMZ_SLHA_INPUT)
+		$(Q)-rm -f $(lowNMSSMTanBetaAtMZ_REFERENCES)
+		$(Q)-rm -f $(lowNMSSMTanBetaAtMZ_GNUPLOT)
 
 distclean-$(MODNAME): clean-$(MODNAME)-src
 # END:   NOT EXPORTED ##########################################
 
 clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-lib clean-$(MODNAME)-obj
-		-rm -f $(EXElowNMSSMTanBetaAtMZ_EXE)
+		$(Q)-rm -f $(EXElowNMSSMTanBetaAtMZ_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
 		@true
@@ -261,7 +272,7 @@ clean::         clean-$(MODNAME)
 distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
-		tar -czf $(lowNMSSMTanBetaAtMZ_TARBALL) \
+		$(Q)tar -czf $(lowNMSSMTanBetaAtMZ_TARBALL) \
 		$(LIBlowNMSSMTanBetaAtMZ_SRC) $(LIBlowNMSSMTanBetaAtMZ_HDR) $(LIBlowNMSSMTanBetaAtMZ_CXXQFT_HDR) \
 		$(EXElowNMSSMTanBetaAtMZ_SRC) \
 		$(LLlowNMSSMTanBetaAtMZ_SRC) $(LLlowNMSSMTanBetaAtMZ_MMA) \
@@ -278,7 +289,8 @@ run-metacode-$(MODNAME): $(METACODE_STAMP_lowNMSSMTanBetaAtMZ)
 
 ifeq ($(ENABLE_META),yes)
 $(METACODE_STAMP_lowNMSSMTanBetaAtMZ): $(DIR)/start.m $(DIR)/FlexibleSUSY.m $(META_SRC) $(TEMPLATES) $(SARAH_MODEL_FILES_lowNMSSMTanBetaAtMZ)
-		"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
+		@$(MSG)
+		$(Q)"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
 		@touch "$(METACODE_STAMP_lowNMSSMTanBetaAtMZ)"
 		@echo "Note: to regenerate lowNMSSMTanBetaAtMZ source files," \
 		      "please remove the file "
@@ -301,13 +313,16 @@ $(LLlowNMSSMTanBetaAtMZ_OBJ) $(LLlowNMSSMTanBetaAtMZ_LIB): \
 	CPPFLAGS += $(LLFLAGS)
 
 $(LIBlowNMSSMTanBetaAtMZ): $(LIBlowNMSSMTanBetaAtMZ_OBJ)
-		$(MODULE_MAKE_LIB_CMD) $@ $^
+		@$(MSG)
+		$(Q)$(MODULE_MAKE_LIB_CMD) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBlowNMSSMTanBetaAtMZ) $(MODlowNMSSMTanBetaAtMZ_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+		@$(MSG)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
 $(LLlowNMSSMTanBetaAtMZ_LIB): $(LLlowNMSSMTanBetaAtMZ_OBJ) $(LIBlowNMSSMTanBetaAtMZ) $(MODlowNMSSMTanBetaAtMZ_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
+		@$(MSG)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
 
 ALLDEP += $(LIBlowNMSSMTanBetaAtMZ_DEP) $(EXElowNMSSMTanBetaAtMZ_DEP)
 ALLSRC += $(LIBlowNMSSMTanBetaAtMZ_SRC) $(EXElowNMSSMTanBetaAtMZ_SRC)

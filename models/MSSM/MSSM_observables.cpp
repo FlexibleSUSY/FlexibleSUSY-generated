@@ -16,12 +16,14 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 17:58:09
+// File generated at Sun 4 Aug 2019 20:05:06
 
 #include "MSSM_observables.hpp"
 #include "MSSM_mass_eigenstates.hpp"
 #include "MSSM_a_muon.hpp"
 #include "MSSM_edm.hpp"
+#include "MSSM_l_to_lgamma.hpp"
+//#include "MSSM_f_to_f_conversion.hpp"
 #include "MSSM_effective_couplings.hpp"
 #include "config.h"
 #include "eigen_utils.hpp"
@@ -41,6 +43,9 @@
 #define AMUGM2CALCUNCERTAINTY a_muon_gm2calc_uncertainty
 #define EDM0(p) edm_ ## p
 #define EDM1(p,idx) edm_ ## p ## _ ## idx
+#define LToLGamma0(pIn, pOut, spec) pIn ## _to_ ## pOut ## _ ## spec
+#define LToLGamma1(pIn,idxIn,pOut,idxOut,spec) pIn ## _to_ ## pOut ## _ ## spec
+#define FToFConversion1(pIn,idxIn,pOut,idxOut,nuclei) pIn ## _to_ ## pOut ## _in_ ## nuclei
 #define EFFCPHIGGSPHOTONPHOTON eff_cp_higgs_photon_photon
 #define EFFCPHIGGSGLUONGLUON eff_cp_higgs_gluon_gluon
 #define EFFCPPSEUDOSCALARPHOTONPHOTON eff_cp_pseudoscalar_photon_photon
@@ -59,35 +64,60 @@ namespace flexiblesusy {
 const int MSSM_observables::NUMBER_OF_OBSERVABLES;
 
 MSSM_observables::MSSM_observables()
+   : a_muon(0)
+   , edm_Fe_0(0)
+   , edm_Fe_1(0)
+   , edm_Fe_2(0)
+   , Fe_to_Fe_VP(0)
 
 {
 }
 
 Eigen::ArrayXd MSSM_observables::get() const
 {
-   Eigen::ArrayXd vec(1);
+   Eigen::ArrayXd vec(MSSM_observables::NUMBER_OF_OBSERVABLES);
 
-   vec(0) = 0.;
+   vec(0) = a_muon;
+   vec(1) = edm_Fe_0;
+   vec(2) = edm_Fe_1;
+   vec(3) = edm_Fe_2;
+   vec(4) = Fe_to_Fe_VP;
 
    return vec;
 }
 
 std::vector<std::string> MSSM_observables::get_names()
 {
-   std::vector<std::string> names(1);
+   std::vector<std::string> names(MSSM_observables::NUMBER_OF_OBSERVABLES);
 
-   names[0] = "no observables defined";
+   names[0] = "a_muon";
+   names[1] = "edm_Fe_0";
+   names[2] = "edm_Fe_1";
+   names[3] = "edm_Fe_2";
+   names[4] = "Fe_to_Fe_VP";
 
    return names;
 }
 
 void MSSM_observables::clear()
 {
+   a_muon = 0.;
+   edm_Fe_0 = 0.;
+   edm_Fe_1 = 0.;
+   edm_Fe_2 = 0.;
+   Fe_to_Fe_VP = 0.;
 
 }
 
 void MSSM_observables::set(const Eigen::ArrayXd& vec)
 {
+   assert(vec.rows() == MSSM_observables::NUMBER_OF_OBSERVABLES);
+
+   a_muon = vec(0);
+   edm_Fe_0 = vec(1);
+   edm_Fe_1 = vec(2);
+   edm_Fe_2 = vec(3);
+   Fe_to_Fe_VP = vec(4);
 
 }
 
@@ -102,7 +132,7 @@ MSSM_observables calculate_observables(MSSM_mass_eigenstates& model,
       try {
          model_at_scale.run_to(scale);
       } catch (const Error& e) {
-         model.get_problems().flag_thrown(e.what());
+         model.get_problems().flag_thrown(e.what_detailed());
          return MSSM_observables();
       }
    }
@@ -118,9 +148,13 @@ MSSM_observables calculate_observables(MSSM_mass_eigenstates& model,
 
    try {
       
-
+      observables.AMU = MSSM_a_muon::calculate_a_muon(MODEL, qedqcd);
+      observables.EDM1(Fe, 0) = MSSM_edm::calculate_edm_Fe(0, MODEL);
+      observables.EDM1(Fe, 1) = MSSM_edm::calculate_edm_Fe(1, MODEL);
+      observables.EDM1(Fe, 2) = MSSM_edm::calculate_edm_Fe(2, MODEL);
+      observables.LToLGamma1(Fe, 1, Fe, 0, VP) = MSSM_l_to_lgamma::calculate_Fe_to_Fe_VP(1, 0, MODEL, qedqcd, physical_input);
    } catch (const Error& e) {
-      model.get_problems().flag_thrown(e.what());
+      model.get_problems().flag_thrown(e.what_detailed());
    }
 
    return observables;

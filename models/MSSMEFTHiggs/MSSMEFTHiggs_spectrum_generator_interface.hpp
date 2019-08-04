@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 14:54:12
+// File generated at Sun 4 Aug 2019 17:48:41
 
 #ifndef MSSMEFTHiggs_SPECTRUM_GENERATOR_INTERFACE_H
 #define MSSMEFTHiggs_SPECTRUM_GENERATOR_INTERFACE_H
@@ -150,7 +150,7 @@ void MSSMEFTHiggs_spectrum_generator_interface<T>::write_running_couplings(
       tmp_model.run_to(start);
    } catch (const Error& error) {
       ERROR("write_running_couplings: running to scale "
-            << start << " failed: " << error.what());
+            << start << " failed: " << error.what_detailed());
       return;
    }
 
@@ -198,15 +198,15 @@ void MSSMEFTHiggs_spectrum_generator_interface<T>::translate_exception_to_proble
          error.get_scale());
    } catch (const NonPerturbativeRunningQedQcdError& error) {
       model.get_problems().flag_no_perturbative();
-      model.get_problems().flag_thrown(error.what());
+      model.get_problems().flag_thrown(error.what_detailed());
       eft.get_problems().flag_no_perturbative();
-      eft.get_problems().flag_thrown(error.what());
+      eft.get_problems().flag_thrown(error.what_detailed());
    } catch (const NoSinThetaWConvergenceError&) {
       model.get_problems().flag_no_sinThetaW_convergence();
       eft.get_problems().flag_no_sinThetaW_convergence();
    } catch (const Error& error) {
-      model.get_problems().flag_thrown(error.what());
-      eft.get_problems().flag_thrown(error.what());
+      model.get_problems().flag_thrown(error.what_detailed());
+      eft.get_problems().flag_thrown(error.what_detailed());
    } catch (const std::exception& error) {
       model.get_problems().flag_thrown(error.what());
       eft.get_problems().flag_thrown(error.what());

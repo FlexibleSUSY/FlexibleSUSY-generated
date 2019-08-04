@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 16:49:16
+// File generated at Sun 4 Aug 2019 19:27:37
 
 /**
  * @file cxx_qft/SplitMSSM_qft.hpp
  *
- * This file was generated at Tue 22 Jan 2019 16:49:16 with FlexibleSUSY
- * 2.3.0 and SARAH 4.14.1 .
+ * This file was generated at Sun 4 Aug 2019 19:27:37 with FlexibleSUSY
+ * 2.4.0 and SARAH 4.14.2 .
  */
 
 #ifndef SplitMSSM_CXXQFT_QFT_H

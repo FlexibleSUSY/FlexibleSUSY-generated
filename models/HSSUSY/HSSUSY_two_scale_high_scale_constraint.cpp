@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 16:37:55
+// File generated at Sun 4 Aug 2019 19:04:15
 
 #include "HSSUSY_two_scale_high_scale_constraint.hpp"
 #include "HSSUSY_two_scale_model.hpp"
@@ -5806,108 +5806,113 @@ void HSSUSY_high_scale_constraint<Two_scale>::apply()
       MuInput)/Sqr(SCALE)) + (0.125*(-1 + 2*Log(Sqr(mAInput)/Sqr(SCALE))))/(1 +
       Sqr(TanBeta)) + ((-1 + Log(Sqr(mAInput)/Sqr(SCALE)))*Sqr(TanBeta))/(1 + Sqr(
       TanBeta)))*Sqr(Yu(2,2)))/(Sqr(3.141592653589793)*Sqr(TanBeta)) + 0.5*((-
-      0.03125*Sqr(AbInput - MuInput*TanBeta)*Sqr(Yd(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2
-      )/msd2(2,2)))))/(Sqrt(Abs(msd2(2,2)*msq2(2,2)))*Sqr(3.141592653589793)) - (
-      0.03125*Sqr(AtInput - MuInput/TanBeta)*Sqr(Yu(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2
-      )/msu2(2,2)))))/(Sqrt(Abs(msq2(2,2)*msu2(2,2)))*Sqr(3.141592653589793))) + (
-      0.0625*(1 + Sqr(TanBeta))*Sqr(Yd(2,2))*(0.75*Log(Sqr(MuInput)/Sqr(SCALE)) +
-      (0.375*(-1 + 2*Log(Sqr(mAInput)/Sqr(SCALE)))*Sqr(TanBeta))/(1 + Sqr(TanBeta)
-      ) + 0.5*TCF(6)(Sqrt(msd2(2,2))/MuInput) + TCF(6)(Sqrt(msq2(2,2))/MuInput)))/
-      Sqr(3.141592653589793) + (0.08333333333333333*Sqr(g3)*(1 + Log(Sqr(M3Input)/
-      Sqr(SCALE)) + TCF(6)(Sqrt(msd2(2,2))/M3Input) + TCF(6)(Sqrt(msq2(2,2))/
-      M3Input) - ((AbInput - MuInput*TanBeta)*TCF(9)(Sqrt(msq2(2,2))/M3Input,Sqrt(
-      msd2(2,2))/M3Input))/M3Input))/Sqr(3.141592653589793) + (0.0625*(1 + Sqr(
-      TanBeta))*Sqr(Yu(2,2))*(0.5*TCF(6)(Sqrt(msu2(2,2))/MuInput) + (0.5*(AtInput
-      - MuInput/TanBeta)*TanBeta*TCF(9)(Sqrt(msq2(2,2))/MuInput,Sqrt(msu2(2,2))/
-      MuInput))/MuInput))/(Sqr(3.141592653589793)*Sqr(TanBeta)))), IsCloseRel(msq2
-      (2,2),msu2(2,2),0.01), (-0.010416666666666666*Quad(Yd(2,2))*Sqr(g3)*(24*Cube
-      (msq2(2,2))*PolyLog(2,1 - Sqr(M3Input)/msq2(2,2))*((-2*M3Input*(AbInput -
-      MuInput*TanBeta))/Abs(M3Input) + Sqrt(Sqr(M3Input)))*Power3(Sqrt(Sqr(M3Input
-      ))) + 6*Cube(msq2(2,2))*Sqr(Log(msq2(2,2)))*(3*Quad(M3Input) - 2*msq2(2,2)*
-      Sqr(M3Input) - (4*M3Input*(AbInput - MuInput*TanBeta)*Power3(Sqrt(Sqr(
-      M3Input))))/Abs(M3Input) + Sqr(msq2(2,2))) + Log(Sqr(M3Input))*Power3(Sqrt(
-      Sqr(M3Input)))*(-12*Cube(msq2(2,2))*(Log(msq2(2,2)) - Log(Sqr(SCALE)))*((-2*
-      M3Input*(AbInput - MuInput*TanBeta))/Abs(M3Input) + Sqrt(Sqr(M3Input))) + (4
-      *M3Input*Cube(AbInput - MuInput*TanBeta)*msq2(2,2)*(-2*msq2(2,2) + Sqr(
-      M3Input)))/Abs(M3Input) + Quad(AbInput - MuInput*TanBeta)*Sqrt(Sqr(M3Input))
-      *(-3*msq2(2,2) + 2*Sqr(M3Input)) - 12*msq2(2,2)*Sqrt(Sqr(M3Input))*(-2*msq2(
-      2,2) + Sqr(M3Input))*Sqr(AbInput - MuInput*TanBeta) - (24*M3Input*(AbInput -
-      MuInput*TanBeta)*(msq2(2,2) + Sqr(M3Input))*Sqr(msq2(2,2)))/Abs(M3Input) + 6
-      *Sqrt(Sqr(M3Input))*(msq2(2,2) + 2*Sqr(M3Input))*Sqr(msq2(2,2))) + Log(msq2(
-      2,2))*msq2(2,2)*(12*msq2(2,2)*(-2*msq2(2,2) + Sqr(M3Input))*(-msq2(2,2) + 2*
-      Sqr(M3Input))*Sqr(AbInput - MuInput*TanBeta) + Quad(AbInput - MuInput*
-      TanBeta)*(-3*Quad(M3Input) + 6*msq2(2,2)*Sqr(M3Input) - 2*Sqr(msq2(2,2))) +
-      (4*M3Input*Cube(AbInput - MuInput*TanBeta)*Sqrt(Sqr(M3Input))*Sqr(msq2(2,2))
-      )/Abs(M3Input) + (48*M3Input*(AbInput - MuInput*TanBeta)*Power3(Sqrt(Sqr(
-      M3Input)))*Sqr(msq2(2,2)))/Abs(M3Input) - 18*Sqr(msq2(2,2))*(2*Quad(M3Input)
-      - 2*msq2(2,2)*Sqr(M3Input) + Sqr(msq2(2,2))) - 12*Log(Sqr(SCALE))*Sqr(msq2(2
-      ,2))*(2*Quad(M3Input) - 2*msq2(2,2)*Sqr(M3Input) - (2*M3Input*(AbInput -
-      MuInput*TanBeta)*Power3(Sqrt(Sqr(M3Input))))/Abs(M3Input) + Sqr(msq2(2,2))))
-      - (-msq2(2,2) + Sqr(M3Input))*((4*M3Input*Cube(AbInput - MuInput*TanBeta)*
-      msq2(2,2)*Sqrt(Sqr(M3Input))*(-2*msq2(2,2) + Sqr(M3Input)))/Abs(M3Input) + (
-      24*M3Input*(AbInput - MuInput*TanBeta)*(msq2(2,2) - Sqr(M3Input))*Sqrt(Sqr(
-      M3Input))*Sqr(msq2(2,2)))/Abs(M3Input) + Quad(AbInput - MuInput*TanBeta)*(2*
-      Quad(M3Input) - 4*msq2(2,2)*Sqr(M3Input) + Sqr(msq2(2,2))) - 12*msq2(2,2)*
-      Sqr(AbInput - MuInput*TanBeta)*(Quad(M3Input) - 3*msq2(2,2)*Sqr(M3Input) +
-      Sqr(msq2(2,2))) + 3*Sqr(msq2(2,2))*(4*Quad(M3Input) - 9*msq2(2,2)*Sqr(
-      M3Input) + 3*Sqr(msq2(2,2))) + 2*Log(Sqr(SCALE))*(3*Cube(msq2(2,2))*Log(Sqr(
-      SCALE))*(msq2(2,2) - Sqr(M3Input)) + (2*M3Input*Cube(AbInput - MuInput*
-      TanBeta)*msq2(2,2)*Sqrt(Sqr(M3Input))*(-msq2(2,2) + Sqr(M3Input)))/Abs(
-      M3Input) - 6*msq2(2,2)*(-2*msq2(2,2) + Sqr(M3Input))*(-msq2(2,2) + Sqr(
-      M3Input))*Sqr(AbInput - MuInput*TanBeta) + Quad(AbInput - MuInput*TanBeta)*
-      Sqr(Sqr(M3Input) - msq2(2,2)) - (12*M3Input*(AbInput - MuInput*TanBeta)*
-      Power3(Sqrt(Sqr(M3Input)))*Sqr(msq2(2,2)))/Abs(M3Input) + 3*Sqr(msq2(2,2))*(
-      2*Quad(M3Input) - 3*msq2(2,2)*Sqr(M3Input) + 3*Sqr(msq2(2,2)))))))/(Cube(
-      msq2(2,2))*Quad(3.141592653589793)*Quad(1 + (0.0625*(1 + Sqr(TanBeta))*(0.25
-      *Log(Sqr(MuInput)/Sqr(SCALE)) + (0.125*(-1 + 2*Log(Sqr(mAInput)/Sqr(SCALE)))
-      )/(1 + Sqr(TanBeta)) + ((-1 + Log(Sqr(mAInput)/Sqr(SCALE)))*Sqr(TanBeta))/(1
-       + Sqr(TanBeta)))*Sqr(Yu(2,2)))/(Sqr(3.141592653589793)*Sqr(TanBeta)) + 0.5*
-      ((-0.03125*Sqr(AbInput - MuInput*TanBeta)*Sqr(Yd(2,2))*TCF(5)(Sqrt(Abs(msq2(
-      2,2)/msd2(2,2)))))/(Sqrt(Abs(msd2(2,2)*msq2(2,2)))*Sqr(3.141592653589793)) -
-      (0.03125*Sqr(AtInput - MuInput/TanBeta)*Sqr(Yu(2,2))*TCF(5)(Sqrt(Abs(msq2(2,
-      2)/msu2(2,2)))))/(Sqrt(Abs(msq2(2,2)*msu2(2,2)))*Sqr(3.141592653589793))) +
-      (0.0625*(1 + Sqr(TanBeta))*Sqr(Yd(2,2))*(0.75*Log(Sqr(MuInput)/Sqr(SCALE)) +
-      (0.375*(-1 + 2*Log(Sqr(mAInput)/Sqr(SCALE)))*Sqr(TanBeta))/(1 + Sqr(TanBeta)
-      ) + 0.5*TCF(6)(Sqrt(msd2(2,2))/MuInput) + TCF(6)(Sqrt(msq2(2,2))/MuInput)))/
-      Sqr(3.141592653589793) + (0.08333333333333333*Sqr(g3)*(1 + Log(Sqr(M3Input)/
-      Sqr(SCALE)) + TCF(6)(Sqrt(msd2(2,2))/M3Input) + TCF(6)(Sqrt(msq2(2,2))/
-      M3Input) - ((AbInput - MuInput*TanBeta)*TCF(9)(Sqrt(msq2(2,2))/M3Input,Sqrt(
-      msd2(2,2))/M3Input))/M3Input))/Sqr(3.141592653589793) + (0.0625*(1 + Sqr(
-      TanBeta))*Sqr(Yu(2,2))*(0.5*TCF(6)(Sqrt(msu2(2,2))/MuInput) + (0.5*(AtInput
-      - MuInput/TanBeta)*TanBeta*TCF(9)(Sqrt(msq2(2,2))/MuInput,Sqrt(msu2(2,2))/
-      MuInput))/MuInput))/(Sqr(3.141592653589793)*Sqr(TanBeta)))*Sqr(-msq2(2,2) +
-      Sqr(M3Input))), True, (0.00390625*Quad(Yd(2,2))*Sqr(g3)*(-16*Sqr(Log(Sqr(
-      SCALE))) + (AbInput - MuInput*TanBeta)*((64*M3Input*Log(0.985*msd2(2,2))*
-      Sqrt(Sqr(M3Input)))/(Abs(M3Input)*(-0.985*msd2(2,2) + 1.02*msq2(2,2))) - (64
-      *M3Input*Log(0.985*msd2(2,2))*Log(Sqr(SCALE))*Power3(Sqrt(Sqr(M3Input))))/(
-      Abs(M3Input)*(0.985*msd2(2,2) - 1.02*msq2(2,2))*(-0.985*msd2(2,2) + Sqr(
-      M3Input))) + (128*M3Input*PolyLog(2,1 - (1.015228426395939*Sqr(M3Input))/
-      msd2(2,2))*Power3(Sqrt(Sqr(M3Input))))/(Abs(M3Input)*(0.985*msd2(2,2) - 1.02
-      *msq2(2,2))*(-0.985*msd2(2,2) + Sqr(M3Input))) + (128*M3Input*PolyLog(2,1 -
-      (0.9803921568627451*Sqr(M3Input))/msq2(2,2))*Power3(Sqrt(Sqr(M3Input))))/(
-      Abs(M3Input)*(-0.985*msd2(2,2) + 1.02*msq2(2,2))*(-1.02*msq2(2,2) + Sqr(
-      M3Input))) + Log(1.02*msq2(2,2))*((-64*M3Input*Sqrt(Sqr(M3Input)))/(Abs(
-      M3Input)*(-0.985*msd2(2,2) + 1.02*msq2(2,2))) - (64*M3Input*Log(Sqr(SCALE))*
-      Power3(Sqrt(Sqr(M3Input))))/(Abs(M3Input)*(-0.985*msd2(2,2) + 1.02*msq2(2,2)
-      )*(-1.02*msq2(2,2) + Sqr(M3Input)))) + Log(Sqr(M3Input))*((-64*M3Input*Log(
-      0.985*msd2(2,2))*Power3(Sqrt(Sqr(M3Input))))/(Abs(M3Input)*(0.985*msd2(2,2)
-      - 1.02*msq2(2,2))*(-0.985*msd2(2,2) + Sqr(M3Input))) - (64*M3Input*Log(1.02*
-      msq2(2,2))*Power3(Sqrt(Sqr(M3Input))))/(Abs(M3Input)*(-0.985*msd2(2,2) +
-      1.02*msq2(2,2))*(-1.02*msq2(2,2) + Sqr(M3Input))) + (64*M3Input*Log(Sqr(
-      SCALE))*Power3(Sqrt(Sqr(M3Input))))/(Abs(M3Input)*(-0.985*msd2(2,2) + Sqr(
-      M3Input))*(-1.02*msq2(2,2) + Sqr(M3Input)))) + (64*M3Input*Power3(Sqrt(Sqr(
-      M3Input)))*Sqr(Log(0.985*msd2(2,2))))/(Abs(M3Input)*(0.985*msd2(2,2) - 1.02*
-      msq2(2,2))*(-0.985*msd2(2,2) + Sqr(M3Input))) + (64*M3Input*Power3(Sqrt(Sqr(
-      M3Input)))*Sqr(Log(1.02*msq2(2,2))))/(Abs(M3Input)*(-0.985*msd2(2,2) + 1.02*
-      msq2(2,2))*(-1.02*msq2(2,2) + Sqr(M3Input)))) + (7.962575893301484*(2*(0.985
-      *msd2(2,2) + 1.02*msq2(2,2))*Power6(M3Input) + 6.0282*msd2(2,2)*msq2(2,2)*(
-      0.985*msd2(2,2) + 1.02*msq2(2,2))*Sqr(M3Input) - 3.02826627*Sqr(msd2(2,2))*
-      Sqr(msq2(2,2)) - Quad(M3Input)*(9.0423*msd2(2,2)*msq2(2,2) + 1.94045*Sqr(
-      msd2(2,2)) + 2.0808*Sqr(msq2(2,2)))))/(msd2(2,2)*msq2(2,2)*(-0.985*msd2(2,2)
-      + Sqr(M3Input))*(-1.02*msq2(2,2) + Sqr(M3Input))) + Cube(AbInput - MuInput*
-      TanBeta)*(Log(1.02*msq2(2,2))*((64*M3Input*Log(Sqr(SCALE))*(0.985*msd2(2,2)
-      + 1.02*msq2(2,2))*Sqrt(Sqr(M3Input)))/(Abs(M3Input)*Cube(-0.985*msd2(2,2) +
-      1.02*msq2(2,2))) + (64*M3Input*(0.985*msd2(2,2) + 3.06*msq2(2,2))*Sqrt(Sqr(
+      0.010416666666666666*Sqr(AtauInput - MuInput*TanBeta)*Sqr(Ye(2,2))*TCF(5)(
+      Sqrt(Abs(msl2(2,2)/mse2(2,2)))))/(Sqrt(Abs(mse2(2,2)*msl2(2,2)))*Sqr(
+      3.141592653589793)) - (0.03125*Sqr(AbInput - MuInput*TanBeta)*Sqr(Yd(2,2))*
+      TCF(5)(Sqrt(Abs(msq2(2,2)/msd2(2,2)))))/(Sqrt(Abs(msd2(2,2)*msq2(2,2)))*Sqr(
+      3.141592653589793)) - (0.03125*Sqr(AtInput - MuInput/TanBeta)*Sqr(Yu(2,2))*
+      TCF(5)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/(Sqrt(Abs(msq2(2,2)*msu2(2,2)))*Sqr(
+      3.141592653589793))) + (0.0625*(1 + Sqr(TanBeta))*Sqr(Yd(2,2))*(0.75*Log(Sqr
+      (MuInput)/Sqr(SCALE)) + (0.375*(-1 + 2*Log(Sqr(mAInput)/Sqr(SCALE)))*Sqr(
+      TanBeta))/(1 + Sqr(TanBeta)) + 0.5*TCF(6)(Sqrt(msd2(2,2))/MuInput) + TCF(6)(
+      Sqrt(msq2(2,2))/MuInput)))/Sqr(3.141592653589793) + (0.08333333333333333*Sqr
+      (g3)*(1 + Log(Sqr(M3Input)/Sqr(SCALE)) + TCF(6)(Sqrt(msd2(2,2))/M3Input) +
+      TCF(6)(Sqrt(msq2(2,2))/M3Input) - ((AbInput - MuInput*TanBeta)*TCF(9)(Sqrt(
+      msq2(2,2))/M3Input,Sqrt(msd2(2,2))/M3Input))/M3Input))/Sqr(3.141592653589793
+      ) + (0.0625*(1 + Sqr(TanBeta))*Sqr(Yu(2,2))*(0.5*TCF(6)(Sqrt(msu2(2,2))/
+      MuInput) + (0.5*(AtInput - MuInput/TanBeta)*TanBeta*TCF(9)(Sqrt(msq2(2,2))/
+      MuInput,Sqrt(msu2(2,2))/MuInput))/MuInput))/(Sqr(3.141592653589793)*Sqr(
+      TanBeta)))), IsCloseRel(msq2(2,2),msu2(2,2),0.01), (-0.010416666666666666*
+      Quad(Yd(2,2))*Sqr(g3)*(24*Cube(msq2(2,2))*PolyLog(2,1 - Sqr(M3Input)/msq2(2,
+      2))*((-2*M3Input*(AbInput - MuInput*TanBeta))/Abs(M3Input) + Sqrt(Sqr(
+      M3Input)))*Power3(Sqrt(Sqr(M3Input))) + 6*Cube(msq2(2,2))*Sqr(Log(msq2(2,2))
+      )*(3*Quad(M3Input) - 2*msq2(2,2)*Sqr(M3Input) - (4*M3Input*(AbInput -
+      MuInput*TanBeta)*Power3(Sqrt(Sqr(M3Input))))/Abs(M3Input) + Sqr(msq2(2,2)))
+      + Log(Sqr(M3Input))*Power3(Sqrt(Sqr(M3Input)))*(-12*Cube(msq2(2,2))*(Log(
+      msq2(2,2)) - Log(Sqr(SCALE)))*((-2*M3Input*(AbInput - MuInput*TanBeta))/Abs(
+      M3Input) + Sqrt(Sqr(M3Input))) + (4*M3Input*Cube(AbInput - MuInput*TanBeta)*
+      msq2(2,2)*(-2*msq2(2,2) + Sqr(M3Input)))/Abs(M3Input) + Quad(AbInput -
+      MuInput*TanBeta)*Sqrt(Sqr(M3Input))*(-3*msq2(2,2) + 2*Sqr(M3Input)) - 12*
+      msq2(2,2)*Sqrt(Sqr(M3Input))*(-2*msq2(2,2) + Sqr(M3Input))*Sqr(AbInput -
+      MuInput*TanBeta) - (24*M3Input*(AbInput - MuInput*TanBeta)*(msq2(2,2) + Sqr(
+      M3Input))*Sqr(msq2(2,2)))/Abs(M3Input) + 6*Sqrt(Sqr(M3Input))*(msq2(2,2) + 2
+      *Sqr(M3Input))*Sqr(msq2(2,2))) + Log(msq2(2,2))*msq2(2,2)*(12*msq2(2,2)*(-2*
+      msq2(2,2) + Sqr(M3Input))*(-msq2(2,2) + 2*Sqr(M3Input))*Sqr(AbInput -
+      MuInput*TanBeta) + Quad(AbInput - MuInput*TanBeta)*(-3*Quad(M3Input) + 6*
+      msq2(2,2)*Sqr(M3Input) - 2*Sqr(msq2(2,2))) + (4*M3Input*Cube(AbInput -
+      MuInput*TanBeta)*Sqrt(Sqr(M3Input))*Sqr(msq2(2,2)))/Abs(M3Input) + (48*
+      M3Input*(AbInput - MuInput*TanBeta)*Power3(Sqrt(Sqr(M3Input)))*Sqr(msq2(2,2)
+      ))/Abs(M3Input) - 18*Sqr(msq2(2,2))*(2*Quad(M3Input) - 2*msq2(2,2)*Sqr(
+      M3Input) + Sqr(msq2(2,2))) - 12*Log(Sqr(SCALE))*Sqr(msq2(2,2))*(2*Quad(
+      M3Input) - 2*msq2(2,2)*Sqr(M3Input) - (2*M3Input*(AbInput - MuInput*TanBeta)
+      *Power3(Sqrt(Sqr(M3Input))))/Abs(M3Input) + Sqr(msq2(2,2)))) - (-msq2(2,2) +
+      Sqr(M3Input))*((4*M3Input*Cube(AbInput - MuInput*TanBeta)*msq2(2,2)*Sqrt(Sqr
+      (M3Input))*(-2*msq2(2,2) + Sqr(M3Input)))/Abs(M3Input) + (24*M3Input*(
+      AbInput - MuInput*TanBeta)*(msq2(2,2) - Sqr(M3Input))*Sqrt(Sqr(M3Input))*Sqr
+      (msq2(2,2)))/Abs(M3Input) + Quad(AbInput - MuInput*TanBeta)*(2*Quad(M3Input)
+      - 4*msq2(2,2)*Sqr(M3Input) + Sqr(msq2(2,2))) - 12*msq2(2,2)*Sqr(AbInput -
+      MuInput*TanBeta)*(Quad(M3Input) - 3*msq2(2,2)*Sqr(M3Input) + Sqr(msq2(2,2)))
+      + 3*Sqr(msq2(2,2))*(4*Quad(M3Input) - 9*msq2(2,2)*Sqr(M3Input) + 3*Sqr(msq2(
+      2,2))) + 2*Log(Sqr(SCALE))*(3*Cube(msq2(2,2))*Log(Sqr(SCALE))*(msq2(2,2) -
+      Sqr(M3Input)) + (2*M3Input*Cube(AbInput - MuInput*TanBeta)*msq2(2,2)*Sqrt(
+      Sqr(M3Input))*(-msq2(2,2) + Sqr(M3Input)))/Abs(M3Input) - 6*msq2(2,2)*(-2*
+      msq2(2,2) + Sqr(M3Input))*(-msq2(2,2) + Sqr(M3Input))*Sqr(AbInput - MuInput*
+      TanBeta) + Quad(AbInput - MuInput*TanBeta)*Sqr(Sqr(M3Input) - msq2(2,2)) - (
+      12*M3Input*(AbInput - MuInput*TanBeta)*Power3(Sqrt(Sqr(M3Input)))*Sqr(msq2(2
+      ,2)))/Abs(M3Input) + 3*Sqr(msq2(2,2))*(2*Quad(M3Input) - 3*msq2(2,2)*Sqr(
+      M3Input) + 3*Sqr(msq2(2,2)))))))/(Cube(msq2(2,2))*Quad(3.141592653589793)*
+      Quad(1 + (0.0625*(1 + Sqr(TanBeta))*(0.25*Log(Sqr(MuInput)/Sqr(SCALE)) + (
+      0.125*(-1 + 2*Log(Sqr(mAInput)/Sqr(SCALE))))/(1 + Sqr(TanBeta)) + ((-1 + Log
+      (Sqr(mAInput)/Sqr(SCALE)))*Sqr(TanBeta))/(1 + Sqr(TanBeta)))*Sqr(Yu(2,2)))/(
+      Sqr(3.141592653589793)*Sqr(TanBeta)) + 0.5*((-0.010416666666666666*Sqr(
+      AtauInput - MuInput*TanBeta)*Sqr(Ye(2,2))*TCF(5)(Sqrt(Abs(msl2(2,2)/mse2(2,2
+      )))))/(Sqrt(Abs(mse2(2,2)*msl2(2,2)))*Sqr(3.141592653589793)) - (0.03125*Sqr
+      (AbInput - MuInput*TanBeta)*Sqr(Yd(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msd2(2,2)
+      ))))/(Sqrt(Abs(msd2(2,2)*msq2(2,2)))*Sqr(3.141592653589793)) - (0.03125*Sqr(
+      AtInput - MuInput/TanBeta)*Sqr(Yu(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msu2(2,2))
+      )))/(Sqrt(Abs(msq2(2,2)*msu2(2,2)))*Sqr(3.141592653589793))) + (0.0625*(1 +
+      Sqr(TanBeta))*Sqr(Yd(2,2))*(0.75*Log(Sqr(MuInput)/Sqr(SCALE)) + (0.375*(-1 +
+      2*Log(Sqr(mAInput)/Sqr(SCALE)))*Sqr(TanBeta))/(1 + Sqr(TanBeta)) + 0.5*TCF(6
+      )(Sqrt(msd2(2,2))/MuInput) + TCF(6)(Sqrt(msq2(2,2))/MuInput)))/Sqr(
+      3.141592653589793) + (0.08333333333333333*Sqr(g3)*(1 + Log(Sqr(M3Input)/Sqr(
+      SCALE)) + TCF(6)(Sqrt(msd2(2,2))/M3Input) + TCF(6)(Sqrt(msq2(2,2))/M3Input)
+      - ((AbInput - MuInput*TanBeta)*TCF(9)(Sqrt(msq2(2,2))/M3Input,Sqrt(msd2(2,2)
+      )/M3Input))/M3Input))/Sqr(3.141592653589793) + (0.0625*(1 + Sqr(TanBeta))*
+      Sqr(Yu(2,2))*(0.5*TCF(6)(Sqrt(msu2(2,2))/MuInput) + (0.5*(AtInput - MuInput/
+      TanBeta)*TanBeta*TCF(9)(Sqrt(msq2(2,2))/MuInput,Sqrt(msu2(2,2))/MuInput))/
+      MuInput))/(Sqr(3.141592653589793)*Sqr(TanBeta)))*Sqr(-msq2(2,2) + Sqr(
+      M3Input))), True, (0.00390625*Quad(Yd(2,2))*Sqr(g3)*(-16*Sqr(Log(Sqr(SCALE))
+      ) + (AbInput - MuInput*TanBeta)*((64*M3Input*Log(0.985*msd2(2,2))*Sqrt(Sqr(
+      M3Input)))/(Abs(M3Input)*(-0.985*msd2(2,2) + 1.02*msq2(2,2))) - (64*M3Input*
+      Log(0.985*msd2(2,2))*Log(Sqr(SCALE))*Power3(Sqrt(Sqr(M3Input))))/(Abs(
+      M3Input)*(0.985*msd2(2,2) - 1.02*msq2(2,2))*(-0.985*msd2(2,2) + Sqr(M3Input)
+      )) + (128*M3Input*PolyLog(2,1 - (1.015228426395939*Sqr(M3Input))/msd2(2,2))*
+      Power3(Sqrt(Sqr(M3Input))))/(Abs(M3Input)*(0.985*msd2(2,2) - 1.02*msq2(2,2))
+      *(-0.985*msd2(2,2) + Sqr(M3Input))) + (128*M3Input*PolyLog(2,1 - (
+      0.9803921568627451*Sqr(M3Input))/msq2(2,2))*Power3(Sqrt(Sqr(M3Input))))/(Abs
+      (M3Input)*(-0.985*msd2(2,2) + 1.02*msq2(2,2))*(-1.02*msq2(2,2) + Sqr(M3Input
+      ))) + Log(1.02*msq2(2,2))*((-64*M3Input*Sqrt(Sqr(M3Input)))/(Abs(M3Input)*(-
+      0.985*msd2(2,2) + 1.02*msq2(2,2))) - (64*M3Input*Log(Sqr(SCALE))*Power3(Sqrt
+      (Sqr(M3Input))))/(Abs(M3Input)*(-0.985*msd2(2,2) + 1.02*msq2(2,2))*(-1.02*
+      msq2(2,2) + Sqr(M3Input)))) + Log(Sqr(M3Input))*((-64*M3Input*Log(0.985*msd2
+      (2,2))*Power3(Sqrt(Sqr(M3Input))))/(Abs(M3Input)*(0.985*msd2(2,2) - 1.02*
+      msq2(2,2))*(-0.985*msd2(2,2) + Sqr(M3Input))) - (64*M3Input*Log(1.02*msq2(2,
+      2))*Power3(Sqrt(Sqr(M3Input))))/(Abs(M3Input)*(-0.985*msd2(2,2) + 1.02*msq2(
+      2,2))*(-1.02*msq2(2,2) + Sqr(M3Input))) + (64*M3Input*Log(Sqr(SCALE))*Power3
+      (Sqrt(Sqr(M3Input))))/(Abs(M3Input)*(-0.985*msd2(2,2) + Sqr(M3Input))*(-1.02
+      *msq2(2,2) + Sqr(M3Input)))) + (64*M3Input*Power3(Sqrt(Sqr(M3Input)))*Sqr(
+      Log(0.985*msd2(2,2))))/(Abs(M3Input)*(0.985*msd2(2,2) - 1.02*msq2(2,2))*(-
+      0.985*msd2(2,2) + Sqr(M3Input))) + (64*M3Input*Power3(Sqrt(Sqr(M3Input)))*
+      Sqr(Log(1.02*msq2(2,2))))/(Abs(M3Input)*(-0.985*msd2(2,2) + 1.02*msq2(2,2))*
+      (-1.02*msq2(2,2) + Sqr(M3Input)))) + (7.962575893301484*(2*(0.985*msd2(2,2)
+      + 1.02*msq2(2,2))*Power6(M3Input) + 6.0282*msd2(2,2)*msq2(2,2)*(0.985*msd2(2
+      ,2) + 1.02*msq2(2,2))*Sqr(M3Input) - 3.02826627*Sqr(msd2(2,2))*Sqr(msq2(2,2)
+      ) - Quad(M3Input)*(9.0423*msd2(2,2)*msq2(2,2) + 1.94045*Sqr(msd2(2,2)) +
+      2.0808*Sqr(msq2(2,2)))))/(msd2(2,2)*msq2(2,2)*(-0.985*msd2(2,2) + Sqr(
+      M3Input))*(-1.02*msq2(2,2) + Sqr(M3Input))) + Cube(AbInput - MuInput*TanBeta
+      )*(Log(1.02*msq2(2,2))*((64*M3Input*Log(Sqr(SCALE))*(0.985*msd2(2,2) + 1.02*
+      msq2(2,2))*Sqrt(Sqr(M3Input)))/(Abs(M3Input)*Cube(-0.985*msd2(2,2) + 1.02*
+      msq2(2,2))) + (64*M3Input*(0.985*msd2(2,2) + 3.06*msq2(2,2))*Sqrt(Sqr(
       M3Input)))/(Abs(M3Input)*Cube(-0.985*msd2(2,2) + 1.02*msq2(2,2)))) - (64*
       M3Input*Log(0.985*msd2(2,2))*(2.955*msd2(2,2) + 1.02*msq2(2,2))*Sqrt(Sqr(
       M3Input)))/(Abs(M3Input)*Cube(-0.985*msd2(2,2) + 1.02*msq2(2,2))) + (64*
@@ -6002,34 +6007,36 @@ void HSSUSY_high_scale_constraint<Two_scale>::apply()
       0.25*Log(Sqr(MuInput)/Sqr(SCALE)) + (0.125*(-1 + 2*Log(Sqr(mAInput)/Sqr(
       SCALE))))/(1 + Sqr(TanBeta)) + ((-1 + Log(Sqr(mAInput)/Sqr(SCALE)))*Sqr(
       TanBeta))/(1 + Sqr(TanBeta)))*Sqr(Yu(2,2)))/(Sqr(3.141592653589793)*Sqr(
-      TanBeta)) + 0.5*((-0.03125*Sqr(AbInput - MuInput*TanBeta)*Sqr(Yd(2,2))*TCF(5
-      )(Sqrt(Abs(msq2(2,2)/msd2(2,2)))))/(Sqrt(Abs(msd2(2,2)*msq2(2,2)))*Sqr(
-      3.141592653589793)) - (0.03125*Sqr(AtInput - MuInput/TanBeta)*Sqr(Yu(2,2))*
-      TCF(5)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/(Sqrt(Abs(msq2(2,2)*msu2(2,2)))*Sqr(
-      3.141592653589793))) + (0.0625*(1 + Sqr(TanBeta))*Sqr(Yd(2,2))*(0.75*Log(Sqr
-      (MuInput)/Sqr(SCALE)) + (0.375*(-1 + 2*Log(Sqr(mAInput)/Sqr(SCALE)))*Sqr(
-      TanBeta))/(1 + Sqr(TanBeta)) + 0.5*TCF(6)(Sqrt(msd2(2,2))/MuInput) + TCF(6)(
-      Sqrt(msq2(2,2))/MuInput)))/Sqr(3.141592653589793) + (0.08333333333333333*Sqr
-      (g3)*(1 + Log(Sqr(M3Input)/Sqr(SCALE)) + TCF(6)(Sqrt(msd2(2,2))/M3Input) +
-      TCF(6)(Sqrt(msq2(2,2))/M3Input) - ((AbInput - MuInput*TanBeta)*TCF(9)(Sqrt(
-      msq2(2,2))/M3Input,Sqrt(msd2(2,2))/M3Input))/M3Input))/Sqr(3.141592653589793
-      ) + (0.0625*(1 + Sqr(TanBeta))*Sqr(Yu(2,2))*(0.5*TCF(6)(Sqrt(msu2(2,2))/
-      MuInput) + (0.5*(AtInput - MuInput/TanBeta)*TanBeta*TCF(9)(Sqrt(msq2(2,2))/
-      MuInput,Sqrt(msu2(2,2))/MuInput))/MuInput))/(Sqr(3.141592653589793)*Sqr(
-      TanBeta))))), 0) + IF(TwoLoopAtAb >= 1, WHICH(IsCloseRel(Sqr(SCALE),msq2(2,2
-      ),0.01) && IsCloseRel(Sqr(SCALE),msu2(2,2),0.01) && IsCloseRel(Sqr(SCALE),
-      msd2(2,2),0.01) && IsCloseRel(SCALE,mAInput,0.01) && IsCloseRel(SCALE,Abs(
-      MuInput),0.01), (0.00390625*((Power6(Yd(2,2))*(15 - Power6(AbInput - MuInput
-      *TanBeta)/Power3(Sqrt(msq2(2,2)*msu2(2,2))) + (10.5*Quad(AbInput - MuInput*
-      TanBeta))/(msq2(2,2)*msu2(2,2)) - (42*Sqr(AbInput - MuInput*TanBeta))/Sqrt(
-      msq2(2,2)*msu2(2,2)) + (1 + Sqr(TanBeta))*(12 + (3*Quad(AbInput - MuInput*
-      TanBeta))/(msq2(2,2)*msu2(2,2)) - (6*Sqr(AbInput - MuInput*TanBeta))/Sqrt(
-      msq2(2,2)*msu2(2,2))) + Sqr(TanBeta)*(-10.049794796731925 + (
-      2.6243712000000006*(AbInput + MuInput/TanBeta)*Cube(AbInput - MuInput*
-      TanBeta))/(msq2(2,2)*msu2(2,2)) + (1.5025151999999977*(AbInput + MuInput/
-      TanBeta)*(AbInput - MuInput*TanBeta))/Sqrt(msq2(2,2)*msu2(2,2)) + (
-      0.37562879999999943*Sqr(AbInput + MuInput/TanBeta))/Sqrt(msq2(2,2)*msu2(2,2)
-      ) + Quad(AbInput - MuInput*TanBeta)*(-1.5/(msq2(2,2)*msu2(2,2)) - (
+      TanBeta)) + 0.5*((-0.010416666666666666*Sqr(AtauInput - MuInput*TanBeta)*Sqr
+      (Ye(2,2))*TCF(5)(Sqrt(Abs(msl2(2,2)/mse2(2,2)))))/(Sqrt(Abs(mse2(2,2)*msl2(2
+      ,2)))*Sqr(3.141592653589793)) - (0.03125*Sqr(AbInput - MuInput*TanBeta)*Sqr(
+      Yd(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msd2(2,2)))))/(Sqrt(Abs(msd2(2,2)*msq2(2,
+      2)))*Sqr(3.141592653589793)) - (0.03125*Sqr(AtInput - MuInput/TanBeta)*Sqr(
+      Yu(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/(Sqrt(Abs(msq2(2,2)*msu2(2,
+      2)))*Sqr(3.141592653589793))) + (0.0625*(1 + Sqr(TanBeta))*Sqr(Yd(2,2))*(
+      0.75*Log(Sqr(MuInput)/Sqr(SCALE)) + (0.375*(-1 + 2*Log(Sqr(mAInput)/Sqr(
+      SCALE)))*Sqr(TanBeta))/(1 + Sqr(TanBeta)) + 0.5*TCF(6)(Sqrt(msd2(2,2))/
+      MuInput) + TCF(6)(Sqrt(msq2(2,2))/MuInput)))/Sqr(3.141592653589793) + (
+      0.08333333333333333*Sqr(g3)*(1 + Log(Sqr(M3Input)/Sqr(SCALE)) + TCF(6)(Sqrt(
+      msd2(2,2))/M3Input) + TCF(6)(Sqrt(msq2(2,2))/M3Input) - ((AbInput - MuInput*
+      TanBeta)*TCF(9)(Sqrt(msq2(2,2))/M3Input,Sqrt(msd2(2,2))/M3Input))/M3Input))/
+      Sqr(3.141592653589793) + (0.0625*(1 + Sqr(TanBeta))*Sqr(Yu(2,2))*(0.5*TCF(6)
+      (Sqrt(msu2(2,2))/MuInput) + (0.5*(AtInput - MuInput/TanBeta)*TanBeta*TCF(9)(
+      Sqrt(msq2(2,2))/MuInput,Sqrt(msu2(2,2))/MuInput))/MuInput))/(Sqr(
+      3.141592653589793)*Sqr(TanBeta))))), 0) + IF(TwoLoopAtAb >= 1, WHICH(
+      IsCloseRel(Sqr(SCALE),msq2(2,2),0.01) && IsCloseRel(Sqr(SCALE),msu2(2,2),
+      0.01) && IsCloseRel(Sqr(SCALE),msd2(2,2),0.01) && IsCloseRel(SCALE,mAInput,
+      0.01) && IsCloseRel(SCALE,Abs(MuInput),0.01), (0.00390625*((Power6(Yd(2,2))*
+      (15 - Power6(AbInput - MuInput*TanBeta)/Power3(Sqrt(msq2(2,2)*msu2(2,2))) +
+      (10.5*Quad(AbInput - MuInput*TanBeta))/(msq2(2,2)*msu2(2,2)) - (42*Sqr(
+      AbInput - MuInput*TanBeta))/Sqrt(msq2(2,2)*msu2(2,2)) + (1 + Sqr(TanBeta))*(
+      12 + (3*Quad(AbInput - MuInput*TanBeta))/(msq2(2,2)*msu2(2,2)) - (6*Sqr(
+      AbInput - MuInput*TanBeta))/Sqrt(msq2(2,2)*msu2(2,2))) + Sqr(TanBeta)*(-
+      10.049794796731925 + (2.6243712000000006*(AbInput + MuInput/TanBeta)*Cube(
+      AbInput - MuInput*TanBeta))/(msq2(2,2)*msu2(2,2)) + (1.5025151999999977*(
+      AbInput + MuInput/TanBeta)*(AbInput - MuInput*TanBeta))/Sqrt(msq2(2,2)*msu2(
+      2,2)) + (0.37562879999999943*Sqr(AbInput + MuInput/TanBeta))/Sqrt(msq2(2,2)*
+      msu2(2,2)) + Quad(AbInput - MuInput*TanBeta)*(-1.5/(msq2(2,2)*msu2(2,2)) - (
       0.06218560000000006*Sqr(AbInput + MuInput/TanBeta))/Power3(Sqrt(msq2(2,2)*
       msu2(2,2)))) + (8.063443199999998/Sqrt(msq2(2,2)*msu2(2,2)) - (
       0.06344319999999826*Sqr(AbInput + MuInput/TanBeta))/(msq2(2,2)*msu2(2,2)))*
@@ -6037,54 +6044,57 @@ void HSSUSY_high_scale_constraint<Two_scale>::apply()
       0.25*Log(Sqr(MuInput)/Sqr(SCALE)) + (0.125*(-1 + 2*Log(Sqr(mAInput)/Sqr(
       SCALE))))/(1 + Sqr(TanBeta)) + ((-1 + Log(Sqr(mAInput)/Sqr(SCALE)))*Sqr(
       TanBeta))/(1 + Sqr(TanBeta)))*Sqr(Yu(2,2)))/(Sqr(3.141592653589793)*Sqr(
-      TanBeta)) + 0.5*((-0.03125*Sqr(AbInput - MuInput*TanBeta)*Sqr(Yd(2,2))*TCF(5
-      )(Sqrt(Abs(msq2(2,2)/msd2(2,2)))))/(Sqrt(Abs(msd2(2,2)*msq2(2,2)))*Sqr(
-      3.141592653589793)) - (0.03125*Sqr(AtInput - MuInput/TanBeta)*Sqr(Yu(2,2))*
-      TCF(5)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/(Sqrt(Abs(msq2(2,2)*msu2(2,2)))*Sqr(
-      3.141592653589793))) + (0.0625*(1 + Sqr(TanBeta))*Sqr(Yd(2,2))*(0.75*Log(Sqr
-      (MuInput)/Sqr(SCALE)) + (0.375*(-1 + 2*Log(Sqr(mAInput)/Sqr(SCALE)))*Sqr(
-      TanBeta))/(1 + Sqr(TanBeta)) + 0.5*TCF(6)(Sqrt(msd2(2,2))/MuInput) + TCF(6)(
-      Sqrt(msq2(2,2))/MuInput)))/Sqr(3.141592653589793) + (0.08333333333333333*Sqr
-      (g3)*(1 + Log(Sqr(M3Input)/Sqr(SCALE)) + TCF(6)(Sqrt(msd2(2,2))/M3Input) +
-      TCF(6)(Sqrt(msq2(2,2))/M3Input) - ((AbInput - MuInput*TanBeta)*TCF(9)(Sqrt(
-      msq2(2,2))/M3Input,Sqrt(msd2(2,2))/M3Input))/M3Input))/Sqr(3.141592653589793
-      ) + (0.0625*(1 + Sqr(TanBeta))*Sqr(Yu(2,2))*(0.5*TCF(6)(Sqrt(msu2(2,2))/
-      MuInput) + (0.5*(AtInput - MuInput/TanBeta)*TanBeta*TCF(9)(Sqrt(msq2(2,2))/
-      MuInput,Sqrt(msu2(2,2))/MuInput))/MuInput))/(Sqr(3.141592653589793)*Sqr(
-      TanBeta))) + (Quad(Yd(2,2))*(8.35153120435743 - (0.4585429333333333*(AbInput
-       + MuInput/TanBeta)*Cube(AbInput - MuInput*TanBeta))/(msq2(2,2)*msu2(2,2)) +
-      (6.751257599999999*(AbInput + MuInput/TanBeta)*(AbInput - MuInput*TanBeta))/
-      Sqrt(msq2(2,2)*msu2(2,2)) + (AtInput + MuInput*TanBeta)*((-
-      0.4585429333333333*Cube(AbInput - MuInput*TanBeta))/(msq2(2,2)*msu2(2,2)) +
-      (6.751257599999999*(AbInput - MuInput*TanBeta))/Sqrt(msq2(2,2)*msu2(2,2))) +
-      (0.5*Quad(AbInput - MuInput*TanBeta))/(msq2(2,2)*msu2(2,2)) + ((-2*MuInput*
-      Cube(AbInput - MuInput*TanBeta))/(Abs(MuInput)*Power3(Sqrt(Sqrt(msq2(2,2)*
-      msu2(2,2))))) + (12*MuInput*(AtInput - MuInput/TanBeta))/(Abs(MuInput)*Sqrt(
-      Sqrt(msq2(2,2)*msu2(2,2)))))/(Sqrt(1/(1 + Sqr(TanBeta)))*Sqrt(Sqr(TanBeta)/(
-      1 + Sqr(TanBeta)))) - (11.248742400000001*Sqr(AbInput - MuInput*TanBeta))/
-      Sqrt(msq2(2,2)*msu2(2,2)) + Sqr(AtInput - MuInput/TanBeta)*(12/Sqrt(msq2(2,2
-      )*msu2(2,2)) + Quad(AbInput - MuInput*TanBeta)/Power3(Sqrt(msq2(2,2)*msu2(2,
-      2))) - (9*Sqr(AbInput - MuInput*TanBeta))/(msq2(2,2)*msu2(2,2))) + (1 + Sqr(
-      TanBeta))*(-24 - (3*Sqr(AbInput - MuInput*TanBeta))/Sqrt(msq2(2,2)*msu2(2,2)
-      ) + Sqr(AtInput - MuInput/TanBeta)*(-3/Sqrt(msq2(2,2)*msu2(2,2)) + (1.5*Sqr(
-      AbInput - MuInput*TanBeta))/(msq2(2,2)*msu2(2,2)))) + (AtInput - MuInput/
-      TanBeta)*((-9.3756288*(AbInput + MuInput/TanBeta))/Sqrt(msq2(2,2)*msu2(2,2))
-      - (9.3756288*(AbInput - MuInput*TanBeta))/Sqrt(msq2(2,2)*msu2(2,2)) + (2*(
-      AbInput + MuInput/TanBeta)*Sqr(AbInput - MuInput*TanBeta))/(msq2(2,2)*msu2(2
-      ,2)) + (AtInput + MuInput*TanBeta)*((4*(AbInput + MuInput/TanBeta)*(AbInput
-      - MuInput*TanBeta))/(msq2(2,2)*msu2(2,2)) - (0.819514311111111*(AbInput +
-      MuInput/TanBeta)*Cube(AbInput - MuInput*TanBeta))/Power3(Sqrt(msq2(2,2)*msu2
-      (2,2))) - 9.3756288/Sqrt(msq2(2,2)*msu2(2,2)) + (2*Sqr(AbInput - MuInput*
-      TanBeta))/(msq2(2,2)*msu2(2,2)))) + Sqr(TanBeta)*(-14.063443199999998 - (
-      9.3756288*(AbInput + MuInput/TanBeta)*(AbInput - MuInput*TanBeta))/Sqrt(msq2
-      (2,2)*msu2(2,2)) - (4.6878144*Sqr(AbInput + MuInput/TanBeta))/Sqrt(msq2(2,2)
-      *msu2(2,2)) + (1.6878143999999997/Sqrt(msq2(2,2)*msu2(2,2)) + Sqr(AbInput +
-      MuInput/TanBeta)/(msq2(2,2)*msu2(2,2)))*Sqr(AbInput - MuInput*TanBeta) + (
-      AtInput - MuInput/TanBeta)*((-9.3756288*(AbInput + MuInput/TanBeta))/Sqrt(
-      msq2(2,2)*msu2(2,2)) - (9.3756288*(AbInput - MuInput*TanBeta))/Sqrt(msq2(2,2
-      )*msu2(2,2)) + (2*(AbInput + MuInput/TanBeta)*Sqr(AbInput - MuInput*TanBeta)
-      )/(msq2(2,2)*msu2(2,2))) + Sqr(AtInput - MuInput/TanBeta)*((2*(AbInput +
-      MuInput/TanBeta)*(AbInput - MuInput*TanBeta))/(msq2(2,2)*msu2(2,2)) +
+      TanBeta)) + 0.5*((-0.010416666666666666*Sqr(AtauInput - MuInput*TanBeta)*Sqr
+      (Ye(2,2))*TCF(5)(Sqrt(Abs(msl2(2,2)/mse2(2,2)))))/(Sqrt(Abs(mse2(2,2)*msl2(2
+      ,2)))*Sqr(3.141592653589793)) - (0.03125*Sqr(AbInput - MuInput*TanBeta)*Sqr(
+      Yd(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msd2(2,2)))))/(Sqrt(Abs(msd2(2,2)*msq2(2,
+      2)))*Sqr(3.141592653589793)) - (0.03125*Sqr(AtInput - MuInput/TanBeta)*Sqr(
+      Yu(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/(Sqrt(Abs(msq2(2,2)*msu2(2,
+      2)))*Sqr(3.141592653589793))) + (0.0625*(1 + Sqr(TanBeta))*Sqr(Yd(2,2))*(
+      0.75*Log(Sqr(MuInput)/Sqr(SCALE)) + (0.375*(-1 + 2*Log(Sqr(mAInput)/Sqr(
+      SCALE)))*Sqr(TanBeta))/(1 + Sqr(TanBeta)) + 0.5*TCF(6)(Sqrt(msd2(2,2))/
+      MuInput) + TCF(6)(Sqrt(msq2(2,2))/MuInput)))/Sqr(3.141592653589793) + (
+      0.08333333333333333*Sqr(g3)*(1 + Log(Sqr(M3Input)/Sqr(SCALE)) + TCF(6)(Sqrt(
+      msd2(2,2))/M3Input) + TCF(6)(Sqrt(msq2(2,2))/M3Input) - ((AbInput - MuInput*
+      TanBeta)*TCF(9)(Sqrt(msq2(2,2))/M3Input,Sqrt(msd2(2,2))/M3Input))/M3Input))/
+      Sqr(3.141592653589793) + (0.0625*(1 + Sqr(TanBeta))*Sqr(Yu(2,2))*(0.5*TCF(6)
+      (Sqrt(msu2(2,2))/MuInput) + (0.5*(AtInput - MuInput/TanBeta)*TanBeta*TCF(9)(
+      Sqrt(msq2(2,2))/MuInput,Sqrt(msu2(2,2))/MuInput))/MuInput))/(Sqr(
+      3.141592653589793)*Sqr(TanBeta))) + (Quad(Yd(2,2))*(8.35153120435743 - (
+      0.4585429333333333*(AbInput + MuInput/TanBeta)*Cube(AbInput - MuInput*
+      TanBeta))/(msq2(2,2)*msu2(2,2)) + (6.751257599999999*(AbInput + MuInput/
+      TanBeta)*(AbInput - MuInput*TanBeta))/Sqrt(msq2(2,2)*msu2(2,2)) + (AtInput +
+      MuInput*TanBeta)*((-0.4585429333333333*Cube(AbInput - MuInput*TanBeta))/(
+      msq2(2,2)*msu2(2,2)) + (6.751257599999999*(AbInput - MuInput*TanBeta))/Sqrt(
+      msq2(2,2)*msu2(2,2))) + (0.5*Quad(AbInput - MuInput*TanBeta))/(msq2(2,2)*
+      msu2(2,2)) + ((-2*MuInput*Cube(AbInput - MuInput*TanBeta))/(Abs(MuInput)*
+      Power3(Sqrt(Sqrt(msq2(2,2)*msu2(2,2))))) + (12*MuInput*(AtInput - MuInput/
+      TanBeta))/(Abs(MuInput)*Sqrt(Sqrt(msq2(2,2)*msu2(2,2)))))/(Sqrt(1/(1 + Sqr(
+      TanBeta)))*Sqrt(Sqr(TanBeta)/(1 + Sqr(TanBeta)))) - (11.248742400000001*Sqr(
+      AbInput - MuInput*TanBeta))/Sqrt(msq2(2,2)*msu2(2,2)) + Sqr(AtInput -
+      MuInput/TanBeta)*(12/Sqrt(msq2(2,2)*msu2(2,2)) + Quad(AbInput - MuInput*
+      TanBeta)/Power3(Sqrt(msq2(2,2)*msu2(2,2))) - (9*Sqr(AbInput - MuInput*
+      TanBeta))/(msq2(2,2)*msu2(2,2))) + (1 + Sqr(TanBeta))*(-24 - (3*Sqr(AbInput
+      - MuInput*TanBeta))/Sqrt(msq2(2,2)*msu2(2,2)) + Sqr(AtInput - MuInput/
+      TanBeta)*(-3/Sqrt(msq2(2,2)*msu2(2,2)) + (1.5*Sqr(AbInput - MuInput*TanBeta)
+      )/(msq2(2,2)*msu2(2,2)))) + (AtInput - MuInput/TanBeta)*((-9.3756288*(
+      AbInput + MuInput/TanBeta))/Sqrt(msq2(2,2)*msu2(2,2)) - (9.3756288*(AbInput
+      - MuInput*TanBeta))/Sqrt(msq2(2,2)*msu2(2,2)) + (2*(AbInput + MuInput/
+      TanBeta)*Sqr(AbInput - MuInput*TanBeta))/(msq2(2,2)*msu2(2,2)) + (AtInput +
+      MuInput*TanBeta)*((4*(AbInput + MuInput/TanBeta)*(AbInput - MuInput*TanBeta)
+      )/(msq2(2,2)*msu2(2,2)) - (0.819514311111111*(AbInput + MuInput/TanBeta)*
+      Cube(AbInput - MuInput*TanBeta))/Power3(Sqrt(msq2(2,2)*msu2(2,2))) -
+      9.3756288/Sqrt(msq2(2,2)*msu2(2,2)) + (2*Sqr(AbInput - MuInput*TanBeta))/(
+      msq2(2,2)*msu2(2,2)))) + Sqr(TanBeta)*(-14.063443199999998 - (9.3756288*(
+      AbInput + MuInput/TanBeta)*(AbInput - MuInput*TanBeta))/Sqrt(msq2(2,2)*msu2(
+      2,2)) - (4.6878144*Sqr(AbInput + MuInput/TanBeta))/Sqrt(msq2(2,2)*msu2(2,2))
+      + (1.6878143999999997/Sqrt(msq2(2,2)*msu2(2,2)) + Sqr(AbInput + MuInput/
+      TanBeta)/(msq2(2,2)*msu2(2,2)))*Sqr(AbInput - MuInput*TanBeta) + (AtInput -
+      MuInput/TanBeta)*((-9.3756288*(AbInput + MuInput/TanBeta))/Sqrt(msq2(2,2)*
+      msu2(2,2)) - (9.3756288*(AbInput - MuInput*TanBeta))/Sqrt(msq2(2,2)*msu2(2,2
+      )) + (2*(AbInput + MuInput/TanBeta)*Sqr(AbInput - MuInput*TanBeta))/(msq2(2,
+      2)*msu2(2,2))) + Sqr(AtInput - MuInput/TanBeta)*((2*(AbInput + MuInput/
+      TanBeta)*(AbInput - MuInput*TanBeta))/(msq2(2,2)*msu2(2,2)) +
       1.6878143999999997/Sqrt(msq2(2,2)*msu2(2,2)) + Sqr(AbInput + MuInput/TanBeta
       )/(msq2(2,2)*msu2(2,2)) - (0.2707285333333336*Sqr(AbInput + MuInput/TanBeta)
       *Sqr(AbInput - MuInput*TanBeta))/Power3(Sqrt(msq2(2,2)*msu2(2,2))))) + ((1 +
@@ -6101,78 +6111,82 @@ void HSSUSY_high_scale_constraint<Two_scale>::apply()
       (1 + Sqr(TanBeta))*(0.25*Log(Sqr(MuInput)/Sqr(SCALE)) + (0.125*(-1 + 2*Log(
       Sqr(mAInput)/Sqr(SCALE))))/(1 + Sqr(TanBeta)) + ((-1 + Log(Sqr(mAInput)/Sqr(
       SCALE)))*Sqr(TanBeta))/(1 + Sqr(TanBeta)))*Sqr(Yu(2,2)))/(Sqr(
-      3.141592653589793)*Sqr(TanBeta)) + 0.5*((-0.03125*Sqr(AbInput - MuInput*
-      TanBeta)*Sqr(Yd(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msd2(2,2)))))/(Sqrt(Abs(msd2
-      (2,2)*msq2(2,2)))*Sqr(3.141592653589793)) - (0.03125*Sqr(AtInput - MuInput/
-      TanBeta)*Sqr(Yu(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/(Sqrt(Abs(msq2
-      (2,2)*msu2(2,2)))*Sqr(3.141592653589793))) + (0.0625*(1 + Sqr(TanBeta))*Sqr(
-      Yd(2,2))*(0.75*Log(Sqr(MuInput)/Sqr(SCALE)) + (0.375*(-1 + 2*Log(Sqr(mAInput
-      )/Sqr(SCALE)))*Sqr(TanBeta))/(1 + Sqr(TanBeta)) + 0.5*TCF(6)(Sqrt(msd2(2,2))
-      /MuInput) + TCF(6)(Sqrt(msq2(2,2))/MuInput)))/Sqr(3.141592653589793) + (
-      0.08333333333333333*Sqr(g3)*(1 + Log(Sqr(M3Input)/Sqr(SCALE)) + TCF(6)(Sqrt(
-      msd2(2,2))/M3Input) + TCF(6)(Sqrt(msq2(2,2))/M3Input) - ((AbInput - MuInput*
-      TanBeta)*TCF(9)(Sqrt(msq2(2,2))/M3Input,Sqrt(msd2(2,2))/M3Input))/M3Input))/
-      Sqr(3.141592653589793) + (0.0625*(1 + Sqr(TanBeta))*Sqr(Yu(2,2))*(0.5*TCF(6)
-      (Sqrt(msu2(2,2))/MuInput) + (0.5*(AtInput - MuInput/TanBeta)*TanBeta*TCF(9)(
-      Sqrt(msq2(2,2))/MuInput,Sqrt(msu2(2,2))/MuInput))/MuInput))/(Sqr(
-      3.141592653589793)*Sqr(TanBeta))) + (Quad(Yu(2,2))*(8.35153120435743 - (
-      9.3756288*(AbInput + MuInput/TanBeta)*(AbInput - MuInput*TanBeta))/Sqrt(msq2
-      (2,2)*msu2(2,2)) - (9.3756288*(AbInput - MuInput*TanBeta)*(AtInput + MuInput
-      *TanBeta))/Sqrt(msq2(2,2)*msu2(2,2)) + Cube(AtInput - MuInput/TanBeta)*((-
-      0.4585429333333333*(AbInput + MuInput/TanBeta))/(msq2(2,2)*msu2(2,2)) + (
-      AtInput + MuInput*TanBeta)*(-0.4585429333333333/(msq2(2,2)*msu2(2,2)) - (
-      0.819514311111111*(AbInput + MuInput/TanBeta)*(AbInput - MuInput*TanBeta))/
-      Power3(Sqrt(msq2(2,2)*msu2(2,2))))) + (AtInput - MuInput/TanBeta)*((
-      6.751257599999999*(AbInput + MuInput/TanBeta))/Sqrt(msq2(2,2)*msu2(2,2)) - (
-      9.3756288*(AbInput - MuInput*TanBeta))/Sqrt(msq2(2,2)*msu2(2,2)) + (AtInput
-      + MuInput*TanBeta)*((4*(AbInput + MuInput/TanBeta)*(AbInput - MuInput*
-      TanBeta))/(msq2(2,2)*msu2(2,2)) + 6.751257599999999/Sqrt(msq2(2,2)*msu2(2,2)
-      ))) + (1.3378828010893575 - (0.4585429333333333*(AbInput + MuInput/TanBeta)*
-      Cube(AtInput - MuInput/TanBeta))/(msq2(2,2)*msu2(2,2)) + (6.751257599999999*
-      (AtInput - MuInput/TanBeta)*(AbInput + MuInput/TanBeta))/Sqrt(msq2(2,2)*msu2
-      (2,2)) + (1.6878143999999997*Sqr(AbInput + MuInput/TanBeta))/Sqrt(msq2(2,2)*
-      msu2(2,2)) + Sqr(AtInput - MuInput/TanBeta)*(7.6878144/Sqrt(msq2(2,2)*msu2(2
-      ,2)) - (0.6878143999999999*Sqr(AbInput + MuInput/TanBeta))/(msq2(2,2)*msu2(2
-      ,2))) + Quad(AtInput - MuInput/TanBeta)*(-0.75/(msq2(2,2)*msu2(2,2)) + (
-      0.069514311111111*Sqr(AbInput + MuInput/TanBeta))/Power3(Sqrt(msq2(2,2)*msu2
-      (2,2)))))*Sqr(TanBeta) + ((-2*MuInput*Cube(AtInput - MuInput/TanBeta))/(Abs(
-      MuInput)*Power3(Sqrt(Sqrt(msq2(2,2)*msu2(2,2))))) + (12*MuInput*(AbInput -
-      MuInput*TanBeta))/(Abs(MuInput)*Sqrt(Sqrt(msq2(2,2)*msu2(2,2)))) + (MuInput*
-      (AbInput - MuInput*TanBeta)*Quad(AtInput - MuInput/TanBeta))/(Abs(MuInput)*
-      Power5(Sqrt(Sqrt(msq2(2,2)*msu2(2,2))))) - (12*MuInput*(AbInput - MuInput*
-      TanBeta)*Sqr(AtInput - MuInput/TanBeta))/(Abs(MuInput)*Power3(Sqrt(Sqrt(msq2
-      (2,2)*msu2(2,2))))))/(Sqrt(1/(1 + Sqr(TanBeta)))*Sqrt(Sqr(TanBeta)/(1 + Sqr(
-      TanBeta)))) + (12 + (0.5*Quad(AtInput - MuInput/TanBeta))/(msq2(2,2)*msu2(2,
-      2)))*(1 + Sqr(TanBeta)) + (12*Sqr(AbInput - MuInput*TanBeta))/Sqrt(msq2(2,2)
-      *msu2(2,2)) + Sqr(AtInput - MuInput/TanBeta)*((2*(AbInput + MuInput/TanBeta)
-      *(AbInput - MuInput*TanBeta))/(msq2(2,2)*msu2(2,2)) + (2*(AbInput - MuInput*
-      TanBeta)*(AtInput + MuInput*TanBeta))/(msq2(2,2)*msu2(2,2)) +
-      12.751257599999999/Sqrt(msq2(2,2)*msu2(2,2)) - (3*Sqr(AbInput - MuInput*
-      TanBeta))/(msq2(2,2)*msu2(2,2))) + Quad(AtInput - MuInput/TanBeta)*(-1.5/(
-      msq2(2,2)*msu2(2,2)) + (0.5*Sqr(AbInput - MuInput*TanBeta))/Power3(Sqrt(msq2
-      (2,2)*msu2(2,2)))) + ((1 + Sqr(TanBeta))*(-24 - (3*Sqr(AbInput - MuInput*
-      TanBeta))/Sqrt(msq2(2,2)*msu2(2,2)) + Sqr(AtInput - MuInput/TanBeta)*(-3/
-      Sqrt(msq2(2,2)*msu2(2,2)) + (1.5*Sqr(AbInput - MuInput*TanBeta))/(msq2(2,2)*
-      msu2(2,2))) + (-14.063443199999998 - (9.3756288*(AbInput - MuInput*TanBeta)*
-      (AtInput + MuInput*TanBeta))/Sqrt(msq2(2,2)*msu2(2,2)) + (1.6878143999999997
-      *Sqr(AbInput - MuInput*TanBeta))/Sqrt(msq2(2,2)*msu2(2,2)) + (AtInput -
-      MuInput/TanBeta)*((-9.3756288*(AbInput - MuInput*TanBeta))/Sqrt(msq2(2,2)*
-      msu2(2,2)) + (AtInput + MuInput*TanBeta)*(-9.3756288/Sqrt(msq2(2,2)*msu2(2,2
-      )) + (2*Sqr(AbInput - MuInput*TanBeta))/(msq2(2,2)*msu2(2,2)))) + (-
-      4.6878144/Sqrt(msq2(2,2)*msu2(2,2)) + Sqr(AbInput - MuInput*TanBeta)/(msq2(2
-      ,2)*msu2(2,2)))*Sqr(AtInput + MuInput*TanBeta) + Sqr(AtInput - MuInput/
-      TanBeta)*((2*(AbInput - MuInput*TanBeta)*(AtInput + MuInput*TanBeta))/(msq2(
-      2,2)*msu2(2,2)) + 1.6878143999999997/Sqrt(msq2(2,2)*msu2(2,2)) + (1/(msq2(2,
-      2)*msu2(2,2)) - (0.2707285333333336*Sqr(AbInput - MuInput*TanBeta))/Power3(
-      Sqrt(msq2(2,2)*msu2(2,2))))*Sqr(AtInput + MuInput*TanBeta)))/(1 + Sqr(
-      TanBeta))))/Sqr(TanBeta))*Sqr(Yd(2,2)))/Sqr(1 + (0.006332573977646111*(1 +
-      Sqr(TanBeta))*(0.25*Log(Sqr(MuInput)/Sqr(SCALE)) + (0.125*(-1 + 2*Log(Sqr(
-      mAInput)/Sqr(SCALE))))/(1 + Sqr(TanBeta)) + ((-1 + Log(Sqr(mAInput)/Sqr(
-      SCALE)))*Sqr(TanBeta))/(1 + Sqr(TanBeta)))*Sqr(Yu(2,2)))/Sqr(TanBeta) + 0.5*
-      ((-0.0031662869888230555*Sqr(AbInput - MuInput*TanBeta)*Sqr(Yd(2,2))*TCF(5)(
-      Sqrt(Abs(msq2(2,2)/msd2(2,2)))))/Sqrt(Abs(msd2(2,2)*msq2(2,2))) - (
-      0.0031662869888230555*Sqr(AtInput - MuInput/TanBeta)*Sqr(Yu(2,2))*TCF(5)(
-      Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/Sqrt(Abs(msq2(2,2)*msu2(2,2)))) +
+      3.141592653589793)*Sqr(TanBeta)) + 0.5*((-0.010416666666666666*Sqr(AtauInput
+       - MuInput*TanBeta)*Sqr(Ye(2,2))*TCF(5)(Sqrt(Abs(msl2(2,2)/mse2(2,2)))))/(
+      Sqrt(Abs(mse2(2,2)*msl2(2,2)))*Sqr(3.141592653589793)) - (0.03125*Sqr(
+      AbInput - MuInput*TanBeta)*Sqr(Yd(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msd2(2,2))
+      )))/(Sqrt(Abs(msd2(2,2)*msq2(2,2)))*Sqr(3.141592653589793)) - (0.03125*Sqr(
+      AtInput - MuInput/TanBeta)*Sqr(Yu(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msu2(2,2))
+      )))/(Sqrt(Abs(msq2(2,2)*msu2(2,2)))*Sqr(3.141592653589793))) + (0.0625*(1 +
+      Sqr(TanBeta))*Sqr(Yd(2,2))*(0.75*Log(Sqr(MuInput)/Sqr(SCALE)) + (0.375*(-1 +
+      2*Log(Sqr(mAInput)/Sqr(SCALE)))*Sqr(TanBeta))/(1 + Sqr(TanBeta)) + 0.5*TCF(6
+      )(Sqrt(msd2(2,2))/MuInput) + TCF(6)(Sqrt(msq2(2,2))/MuInput)))/Sqr(
+      3.141592653589793) + (0.08333333333333333*Sqr(g3)*(1 + Log(Sqr(M3Input)/Sqr(
+      SCALE)) + TCF(6)(Sqrt(msd2(2,2))/M3Input) + TCF(6)(Sqrt(msq2(2,2))/M3Input)
+      - ((AbInput - MuInput*TanBeta)*TCF(9)(Sqrt(msq2(2,2))/M3Input,Sqrt(msd2(2,2)
+      )/M3Input))/M3Input))/Sqr(3.141592653589793) + (0.0625*(1 + Sqr(TanBeta))*
+      Sqr(Yu(2,2))*(0.5*TCF(6)(Sqrt(msu2(2,2))/MuInput) + (0.5*(AtInput - MuInput/
+      TanBeta)*TanBeta*TCF(9)(Sqrt(msq2(2,2))/MuInput,Sqrt(msu2(2,2))/MuInput))/
+      MuInput))/(Sqr(3.141592653589793)*Sqr(TanBeta))) + (Quad(Yu(2,2))*(
+      8.35153120435743 - (9.3756288*(AbInput + MuInput/TanBeta)*(AbInput - MuInput
+      *TanBeta))/Sqrt(msq2(2,2)*msu2(2,2)) - (9.3756288*(AbInput - MuInput*TanBeta
+      )*(AtInput + MuInput*TanBeta))/Sqrt(msq2(2,2)*msu2(2,2)) + Cube(AtInput -
+      MuInput/TanBeta)*((-0.4585429333333333*(AbInput + MuInput/TanBeta))/(msq2(2,
+      2)*msu2(2,2)) + (AtInput + MuInput*TanBeta)*(-0.4585429333333333/(msq2(2,2)*
+      msu2(2,2)) - (0.819514311111111*(AbInput + MuInput/TanBeta)*(AbInput -
+      MuInput*TanBeta))/Power3(Sqrt(msq2(2,2)*msu2(2,2))))) + (AtInput - MuInput/
+      TanBeta)*((6.751257599999999*(AbInput + MuInput/TanBeta))/Sqrt(msq2(2,2)*
+      msu2(2,2)) - (9.3756288*(AbInput - MuInput*TanBeta))/Sqrt(msq2(2,2)*msu2(2,2
+      )) + (AtInput + MuInput*TanBeta)*((4*(AbInput + MuInput/TanBeta)*(AbInput -
+      MuInput*TanBeta))/(msq2(2,2)*msu2(2,2)) + 6.751257599999999/Sqrt(msq2(2,2)*
+      msu2(2,2)))) + (1.3378828010893575 - (0.4585429333333333*(AbInput + MuInput/
+      TanBeta)*Cube(AtInput - MuInput/TanBeta))/(msq2(2,2)*msu2(2,2)) + (
+      6.751257599999999*(AtInput - MuInput/TanBeta)*(AbInput + MuInput/TanBeta))/
+      Sqrt(msq2(2,2)*msu2(2,2)) + (1.6878143999999997*Sqr(AbInput + MuInput/
+      TanBeta))/Sqrt(msq2(2,2)*msu2(2,2)) + Sqr(AtInput - MuInput/TanBeta)*(
+      7.6878144/Sqrt(msq2(2,2)*msu2(2,2)) - (0.6878143999999999*Sqr(AbInput +
+      MuInput/TanBeta))/(msq2(2,2)*msu2(2,2))) + Quad(AtInput - MuInput/TanBeta)*(
+      -0.75/(msq2(2,2)*msu2(2,2)) + (0.069514311111111*Sqr(AbInput + MuInput/
+      TanBeta))/Power3(Sqrt(msq2(2,2)*msu2(2,2)))))*Sqr(TanBeta) + ((-2*MuInput*
+      Cube(AtInput - MuInput/TanBeta))/(Abs(MuInput)*Power3(Sqrt(Sqrt(msq2(2,2)*
+      msu2(2,2))))) + (12*MuInput*(AbInput - MuInput*TanBeta))/(Abs(MuInput)*Sqrt(
+      Sqrt(msq2(2,2)*msu2(2,2)))) + (MuInput*(AbInput - MuInput*TanBeta)*Quad(
+      AtInput - MuInput/TanBeta))/(Abs(MuInput)*Power5(Sqrt(Sqrt(msq2(2,2)*msu2(2,
+      2))))) - (12*MuInput*(AbInput - MuInput*TanBeta)*Sqr(AtInput - MuInput/
+      TanBeta))/(Abs(MuInput)*Power3(Sqrt(Sqrt(msq2(2,2)*msu2(2,2))))))/(Sqrt(1/(1
+       + Sqr(TanBeta)))*Sqrt(Sqr(TanBeta)/(1 + Sqr(TanBeta)))) + (12 + (0.5*Quad(
+      AtInput - MuInput/TanBeta))/(msq2(2,2)*msu2(2,2)))*(1 + Sqr(TanBeta)) + (12*
+      Sqr(AbInput - MuInput*TanBeta))/Sqrt(msq2(2,2)*msu2(2,2)) + Sqr(AtInput -
+      MuInput/TanBeta)*((2*(AbInput + MuInput/TanBeta)*(AbInput - MuInput*TanBeta)
+      )/(msq2(2,2)*msu2(2,2)) + (2*(AbInput - MuInput*TanBeta)*(AtInput + MuInput*
+      TanBeta))/(msq2(2,2)*msu2(2,2)) + 12.751257599999999/Sqrt(msq2(2,2)*msu2(2,2
+      )) - (3*Sqr(AbInput - MuInput*TanBeta))/(msq2(2,2)*msu2(2,2))) + Quad(
+      AtInput - MuInput/TanBeta)*(-1.5/(msq2(2,2)*msu2(2,2)) + (0.5*Sqr(AbInput -
+      MuInput*TanBeta))/Power3(Sqrt(msq2(2,2)*msu2(2,2)))) + ((1 + Sqr(TanBeta))*(
+      -24 - (3*Sqr(AbInput - MuInput*TanBeta))/Sqrt(msq2(2,2)*msu2(2,2)) + Sqr(
+      AtInput - MuInput/TanBeta)*(-3/Sqrt(msq2(2,2)*msu2(2,2)) + (1.5*Sqr(AbInput
+      - MuInput*TanBeta))/(msq2(2,2)*msu2(2,2))) + (-14.063443199999998 - (
+      9.3756288*(AbInput - MuInput*TanBeta)*(AtInput + MuInput*TanBeta))/Sqrt(msq2
+      (2,2)*msu2(2,2)) + (1.6878143999999997*Sqr(AbInput - MuInput*TanBeta))/Sqrt(
+      msq2(2,2)*msu2(2,2)) + (AtInput - MuInput/TanBeta)*((-9.3756288*(AbInput -
+      MuInput*TanBeta))/Sqrt(msq2(2,2)*msu2(2,2)) + (AtInput + MuInput*TanBeta)*(-
+      9.3756288/Sqrt(msq2(2,2)*msu2(2,2)) + (2*Sqr(AbInput - MuInput*TanBeta))/(
+      msq2(2,2)*msu2(2,2)))) + (-4.6878144/Sqrt(msq2(2,2)*msu2(2,2)) + Sqr(AbInput
+       - MuInput*TanBeta)/(msq2(2,2)*msu2(2,2)))*Sqr(AtInput + MuInput*TanBeta) +
+      Sqr(AtInput - MuInput/TanBeta)*((2*(AbInput - MuInput*TanBeta)*(AtInput +
+      MuInput*TanBeta))/(msq2(2,2)*msu2(2,2)) + 1.6878143999999997/Sqrt(msq2(2,2)*
+      msu2(2,2)) + (1/(msq2(2,2)*msu2(2,2)) - (0.2707285333333336*Sqr(AbInput -
+      MuInput*TanBeta))/Power3(Sqrt(msq2(2,2)*msu2(2,2))))*Sqr(AtInput + MuInput*
+      TanBeta)))/(1 + Sqr(TanBeta))))/Sqr(TanBeta))*Sqr(Yd(2,2)))/Sqr(1 + (
+      0.006332573977646111*(1 + Sqr(TanBeta))*(0.25*Log(Sqr(MuInput)/Sqr(SCALE)) +
+      (0.125*(-1 + 2*Log(Sqr(mAInput)/Sqr(SCALE))))/(1 + Sqr(TanBeta)) + ((-1 +
+      Log(Sqr(mAInput)/Sqr(SCALE)))*Sqr(TanBeta))/(1 + Sqr(TanBeta)))*Sqr(Yu(2,2))
+      )/Sqr(TanBeta) + 0.5*((-0.0010554289962743518*Sqr(AtauInput - MuInput*
+      TanBeta)*Sqr(Ye(2,2))*TCF(5)(Sqrt(Abs(msl2(2,2)/mse2(2,2)))))/Sqrt(Abs(mse2(
+      2,2)*msl2(2,2))) - (0.0031662869888230555*Sqr(AbInput - MuInput*TanBeta)*Sqr
+      (Yd(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msd2(2,2)))))/Sqrt(Abs(msd2(2,2)*msq2(2,
+      2))) - (0.0031662869888230555*Sqr(AtInput - MuInput/TanBeta)*Sqr(Yu(2,2))*
+      TCF(5)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/Sqrt(Abs(msq2(2,2)*msu2(2,2)))) +
       0.006332573977646111*(1 + Sqr(TanBeta))*Sqr(Yd(2,2))*(0.75*Log(Sqr(MuInput)/
       Sqr(SCALE)) + (0.375*(-1 + 2*Log(Sqr(mAInput)/Sqr(SCALE)))*Sqr(TanBeta))/(1
       + Sqr(TanBeta)) + 0.5*TCF(6)(Sqrt(msd2(2,2))/MuInput) + TCF(6)(Sqrt(msq2(2,2
@@ -6663,67 +6677,70 @@ void HSSUSY_high_scale_constraint<Two_scale>::apply()
       0.25*Log(Sqr(MuInput)/Sqr(SCALE)) + (0.125*(-1 + 2*Log(Sqr(mAInput)/Sqr(
       SCALE))))/(1 + Sqr(TanBeta)) + ((-1 + Log(Sqr(mAInput)/Sqr(SCALE)))*Sqr(
       TanBeta))/(1 + Sqr(TanBeta)))*Sqr(Yu(2,2)))/(Sqr(3.141592653589793)*Sqr(
-      TanBeta)) + 0.5*((-0.03125*Sqr(AbInput - MuInput*TanBeta)*Sqr(Yd(2,2))*TCF(5
-      )(Sqrt(Abs(msq2(2,2)/msd2(2,2)))))/(Sqrt(Abs(msd2(2,2)*msq2(2,2)))*Sqr(
-      3.141592653589793)) - (0.03125*Sqr(AtInput - MuInput/TanBeta)*Sqr(Yu(2,2))*
-      TCF(5)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/(Sqrt(Abs(msq2(2,2)*msu2(2,2)))*Sqr(
-      3.141592653589793))) + (0.0625*(1 + Sqr(TanBeta))*Sqr(Yd(2,2))*(0.75*Log(Sqr
-      (MuInput)/Sqr(SCALE)) + (0.375*(-1 + 2*Log(Sqr(mAInput)/Sqr(SCALE)))*Sqr(
-      TanBeta))/(1 + Sqr(TanBeta)) + 0.5*TCF(6)(Sqrt(msd2(2,2))/MuInput) + TCF(6)(
-      Sqrt(msq2(2,2))/MuInput)))/Sqr(3.141592653589793) + (0.08333333333333333*Sqr
-      (g3)*(1 + Log(Sqr(M3Input)/Sqr(SCALE)) + TCF(6)(Sqrt(msd2(2,2))/M3Input) +
-      TCF(6)(Sqrt(msq2(2,2))/M3Input) - ((AbInput - MuInput*TanBeta)*TCF(9)(Sqrt(
-      msq2(2,2))/M3Input,Sqrt(msd2(2,2))/M3Input))/M3Input))/Sqr(3.141592653589793
-      ) + (0.0625*(1 + Sqr(TanBeta))*Sqr(Yu(2,2))*(0.5*TCF(6)(Sqrt(msu2(2,2))/
-      MuInput) + (0.5*(AtInput - MuInput/TanBeta)*TanBeta*TCF(9)(Sqrt(msq2(2,2))/
-      MuInput,Sqrt(msu2(2,2))/MuInput))/MuInput))/(Sqr(3.141592653589793)*Sqr(
-      TanBeta))) + (Quad(Yd(2,2))*Sqr(Yu(2,2))*((3*(AbInput - MuInput*TanBeta)*(
-      Log(0.96*msd2(2,2))*((8.119113252073776*MuInput*Sqrt(Sqr(MuInput)))/(Abs(
-      MuInput)*(0.96*msd2(2,2) - 1.02*msq2(2,2))) + (8.119113252073776*MuInput*Log
-      (Sqr(SCALE))*Sqrt(Sqr(MuInput)))/(Abs(MuInput)*(0.96*msd2(2,2) - 1.02*msq2(2
-      ,2)))) + Log(1.02*msq2(2,2))*((8.119113252073776*MuInput*Sqrt(Sqr(MuInput)))
-      /(Abs(MuInput)*(-0.96*msd2(2,2) + 1.02*msq2(2,2))) + (8.119113252073776*
-      MuInput*Log(Sqr(SCALE))*Sqrt(Sqr(MuInput)))/(Abs(MuInput)*(-0.96*msd2(2,2) +
-      1.02*msq2(2,2)))) + (8.119113252073776*MuInput*PolyLog(2,1 - (
-      1.0729166666666667*Sqr(MuInput))/msd2(2,2))*Sqrt(Sqr(MuInput)))/(Abs(MuInput
-      )*(-0.96*msd2(2,2) + 1.02*msq2(2,2))) + (8.119113252073776*MuInput*PolyLog(2
-      ,1 - (1.0098039215686274*Sqr(MuInput))/msq2(2,2))*Sqrt(Sqr(MuInput)))/(Abs(
-      MuInput)*(0.96*msd2(2,2) - 1.02*msq2(2,2))) + (4.059556626036888*MuInput*
-      Sqrt(Sqr(MuInput))*Sqr(Log(0.96*msd2(2,2))))/(Abs(MuInput)*(-0.96*msd2(2,2)
-      + 1.02*msq2(2,2))) + (4.059556626036888*MuInput*Sqrt(Sqr(MuInput))*Sqr(Log(
-      1.02*msq2(2,2))))/(Abs(MuInput)*(0.96*msd2(2,2) - 1.02*msq2(2,2)))) + 3*(
-      AtInput - MuInput/TanBeta)*((8.281495517115252*MuInput*Log(1.02*msq2(2,2))*
-      Log(Sqr(SCALE))*msq2(2,2)*Sqrt(Sqr(MuInput)))/(Abs(MuInput)*(1.02*msq2(2,2)
-      - 0.98*msu2(2,2))*(-1.02*msq2(2,2) + 1.03*Sqr(MuInput))) + (
-      8.119113252073776*MuInput*PolyLog(2,1 - (1.0098039215686274*Sqr(MuInput))/
-      msq2(2,2))*Sqrt(Sqr(MuInput))*(1.02*msq2(2,2) + 1.03*Sqr(MuInput)))/(Abs(
-      MuInput)*(-1.02*msq2(2,2) + 0.98*msu2(2,2))*(-1.02*msq2(2,2) + 1.03*Sqr(
-      MuInput))) + (7.9567309870323*MuInput*Log(0.98*msu2(2,2))*Log(Sqr(SCALE))*
-      msu2(2,2)*Sqrt(Sqr(MuInput)))/(Abs(MuInput)*(-1.02*msq2(2,2) + 0.98*msu2(2,2
-      ))*(-0.98*msu2(2,2) + 1.03*Sqr(MuInput))) - (8.119113252073776*MuInput*
-      PolyLog(2,1 - (1.0510204081632653*Sqr(MuInput))/msu2(2,2))*Sqrt(Sqr(MuInput)
-      )*(0.98*msu2(2,2) + 1.03*Sqr(MuInput)))/(Abs(MuInput)*(-1.02*msq2(2,2) +
-      0.98*msu2(2,2))*(-0.98*msu2(2,2) + 1.03*Sqr(MuInput))) + Log(1.03*Sqr(
-      MuInput))*((8.36268664963599*MuInput*Log(1.02*msq2(2,2))*Power3(Sqrt(Sqr(
-      MuInput))))/(Abs(MuInput)*(1.02*msq2(2,2) - 0.98*msu2(2,2))*(-1.02*msq2(2,2)
-      + 1.03*Sqr(MuInput))) + (8.36268664963599*MuInput*Log(Sqr(SCALE))*Power3(
-      Sqrt(Sqr(MuInput))))/(Abs(MuInput)*(0.98*msu2(2,2) - 1.03*Sqr(MuInput))*(-
-      1.02*msq2(2,2) + 1.03*Sqr(MuInput))) + (8.36268664963599*MuInput*Log(0.98*
-      msu2(2,2))*Power3(Sqrt(Sqr(MuInput))))/(Abs(MuInput)*(-1.02*msq2(2,2) + 0.98
-      *msu2(2,2))*(-0.98*msu2(2,2) + 1.03*Sqr(MuInput)))) + (4.059556626036888*
-      MuInput*Sqrt(Sqr(MuInput))*(1.02*msq2(2,2) + 1.03*Sqr(MuInput))*Sqr(Log(1.02
-      *msq2(2,2))))/(Abs(MuInput)*(-1.02*msq2(2,2) + 0.98*msu2(2,2))*(-1.02*msq2(2
-      ,2) + 1.03*Sqr(MuInput))) - (4.059556626036888*MuInput*Sqrt(Sqr(MuInput))*(
-      0.98*msu2(2,2) + 1.03*Sqr(MuInput))*Sqr(Log(0.98*msu2(2,2))))/(Abs(MuInput)*
-      (-1.02*msq2(2,2) + 0.98*msu2(2,2))*(-0.98*msu2(2,2) + 1.03*Sqr(MuInput)))) +
-      3*Cube(AbInput - MuInput*TanBeta)*(Log(1.02*msq2(2,2))*((8.119113252073776*
-      MuInput*Log(Sqr(SCALE))*(0.96*msd2(2,2) + 1.02*msq2(2,2))*Sqrt(Sqr(MuInput))
-      )/(Abs(MuInput)*Cube(0.96*msd2(2,2) - 1.02*msq2(2,2))) + (8.119113252073776*
-      MuInput*(0.96*msd2(2,2) + 3.06*msq2(2,2))*Sqrt(Sqr(MuInput)))/(Abs(MuInput)*
-      Cube(0.96*msd2(2,2) - 1.02*msq2(2,2)))) + (8.119113252073776*MuInput*PolyLog
-      (2,1 - (1.0729166666666667*Sqr(MuInput))/msd2(2,2))*(0.96*msd2(2,2) + 1.02*
-      msq2(2,2) - 2.06*Sqr(MuInput))*Sqrt(Sqr(MuInput)))/(Abs(MuInput)*Cube(0.96*
-      msd2(2,2) - 1.02*msq2(2,2))) - (8.119113252073776*MuInput*PolyLog(2,1 - (
+      TanBeta)) + 0.5*((-0.010416666666666666*Sqr(AtauInput - MuInput*TanBeta)*Sqr
+      (Ye(2,2))*TCF(5)(Sqrt(Abs(msl2(2,2)/mse2(2,2)))))/(Sqrt(Abs(mse2(2,2)*msl2(2
+      ,2)))*Sqr(3.141592653589793)) - (0.03125*Sqr(AbInput - MuInput*TanBeta)*Sqr(
+      Yd(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msd2(2,2)))))/(Sqrt(Abs(msd2(2,2)*msq2(2,
+      2)))*Sqr(3.141592653589793)) - (0.03125*Sqr(AtInput - MuInput/TanBeta)*Sqr(
+      Yu(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/(Sqrt(Abs(msq2(2,2)*msu2(2,
+      2)))*Sqr(3.141592653589793))) + (0.0625*(1 + Sqr(TanBeta))*Sqr(Yd(2,2))*(
+      0.75*Log(Sqr(MuInput)/Sqr(SCALE)) + (0.375*(-1 + 2*Log(Sqr(mAInput)/Sqr(
+      SCALE)))*Sqr(TanBeta))/(1 + Sqr(TanBeta)) + 0.5*TCF(6)(Sqrt(msd2(2,2))/
+      MuInput) + TCF(6)(Sqrt(msq2(2,2))/MuInput)))/Sqr(3.141592653589793) + (
+      0.08333333333333333*Sqr(g3)*(1 + Log(Sqr(M3Input)/Sqr(SCALE)) + TCF(6)(Sqrt(
+      msd2(2,2))/M3Input) + TCF(6)(Sqrt(msq2(2,2))/M3Input) - ((AbInput - MuInput*
+      TanBeta)*TCF(9)(Sqrt(msq2(2,2))/M3Input,Sqrt(msd2(2,2))/M3Input))/M3Input))/
+      Sqr(3.141592653589793) + (0.0625*(1 + Sqr(TanBeta))*Sqr(Yu(2,2))*(0.5*TCF(6)
+      (Sqrt(msu2(2,2))/MuInput) + (0.5*(AtInput - MuInput/TanBeta)*TanBeta*TCF(9)(
+      Sqrt(msq2(2,2))/MuInput,Sqrt(msu2(2,2))/MuInput))/MuInput))/(Sqr(
+      3.141592653589793)*Sqr(TanBeta))) + (Quad(Yd(2,2))*Sqr(Yu(2,2))*((3*(AbInput
+       - MuInput*TanBeta)*(Log(0.96*msd2(2,2))*((8.119113252073776*MuInput*Sqrt(
+      Sqr(MuInput)))/(Abs(MuInput)*(0.96*msd2(2,2) - 1.02*msq2(2,2))) + (
+      8.119113252073776*MuInput*Log(Sqr(SCALE))*Sqrt(Sqr(MuInput)))/(Abs(MuInput)*
+      (0.96*msd2(2,2) - 1.02*msq2(2,2)))) + Log(1.02*msq2(2,2))*((
+      8.119113252073776*MuInput*Sqrt(Sqr(MuInput)))/(Abs(MuInput)*(-0.96*msd2(2,2)
+      + 1.02*msq2(2,2))) + (8.119113252073776*MuInput*Log(Sqr(SCALE))*Sqrt(Sqr(
+      MuInput)))/(Abs(MuInput)*(-0.96*msd2(2,2) + 1.02*msq2(2,2)))) + (
+      8.119113252073776*MuInput*PolyLog(2,1 - (1.0729166666666667*Sqr(MuInput))/
+      msd2(2,2))*Sqrt(Sqr(MuInput)))/(Abs(MuInput)*(-0.96*msd2(2,2) + 1.02*msq2(2,
+      2))) + (8.119113252073776*MuInput*PolyLog(2,1 - (1.0098039215686274*Sqr(
+      MuInput))/msq2(2,2))*Sqrt(Sqr(MuInput)))/(Abs(MuInput)*(0.96*msd2(2,2) -
+      1.02*msq2(2,2))) + (4.059556626036888*MuInput*Sqrt(Sqr(MuInput))*Sqr(Log(
+      0.96*msd2(2,2))))/(Abs(MuInput)*(-0.96*msd2(2,2) + 1.02*msq2(2,2))) + (
+      4.059556626036888*MuInput*Sqrt(Sqr(MuInput))*Sqr(Log(1.02*msq2(2,2))))/(Abs(
+      MuInput)*(0.96*msd2(2,2) - 1.02*msq2(2,2)))) + 3*(AtInput - MuInput/TanBeta)
+      *((8.281495517115252*MuInput*Log(1.02*msq2(2,2))*Log(Sqr(SCALE))*msq2(2,2)*
+      Sqrt(Sqr(MuInput)))/(Abs(MuInput)*(1.02*msq2(2,2) - 0.98*msu2(2,2))*(-1.02*
+      msq2(2,2) + 1.03*Sqr(MuInput))) + (8.119113252073776*MuInput*PolyLog(2,1 - (
+      1.0098039215686274*Sqr(MuInput))/msq2(2,2))*Sqrt(Sqr(MuInput))*(1.02*msq2(2,
+      2) + 1.03*Sqr(MuInput)))/(Abs(MuInput)*(-1.02*msq2(2,2) + 0.98*msu2(2,2))*(-
+      1.02*msq2(2,2) + 1.03*Sqr(MuInput))) + (7.9567309870323*MuInput*Log(0.98*
+      msu2(2,2))*Log(Sqr(SCALE))*msu2(2,2)*Sqrt(Sqr(MuInput)))/(Abs(MuInput)*(-
+      1.02*msq2(2,2) + 0.98*msu2(2,2))*(-0.98*msu2(2,2) + 1.03*Sqr(MuInput))) - (
+      8.119113252073776*MuInput*PolyLog(2,1 - (1.0510204081632653*Sqr(MuInput))/
+      msu2(2,2))*Sqrt(Sqr(MuInput))*(0.98*msu2(2,2) + 1.03*Sqr(MuInput)))/(Abs(
+      MuInput)*(-1.02*msq2(2,2) + 0.98*msu2(2,2))*(-0.98*msu2(2,2) + 1.03*Sqr(
+      MuInput))) + Log(1.03*Sqr(MuInput))*((8.36268664963599*MuInput*Log(1.02*msq2
+      (2,2))*Power3(Sqrt(Sqr(MuInput))))/(Abs(MuInput)*(1.02*msq2(2,2) - 0.98*msu2
+      (2,2))*(-1.02*msq2(2,2) + 1.03*Sqr(MuInput))) + (8.36268664963599*MuInput*
+      Log(Sqr(SCALE))*Power3(Sqrt(Sqr(MuInput))))/(Abs(MuInput)*(0.98*msu2(2,2) -
+      1.03*Sqr(MuInput))*(-1.02*msq2(2,2) + 1.03*Sqr(MuInput))) + (
+      8.36268664963599*MuInput*Log(0.98*msu2(2,2))*Power3(Sqrt(Sqr(MuInput))))/(
+      Abs(MuInput)*(-1.02*msq2(2,2) + 0.98*msu2(2,2))*(-0.98*msu2(2,2) + 1.03*Sqr(
+      MuInput)))) + (4.059556626036888*MuInput*Sqrt(Sqr(MuInput))*(1.02*msq2(2,2)
+      + 1.03*Sqr(MuInput))*Sqr(Log(1.02*msq2(2,2))))/(Abs(MuInput)*(-1.02*msq2(2,2
+      ) + 0.98*msu2(2,2))*(-1.02*msq2(2,2) + 1.03*Sqr(MuInput))) - (
+      4.059556626036888*MuInput*Sqrt(Sqr(MuInput))*(0.98*msu2(2,2) + 1.03*Sqr(
+      MuInput))*Sqr(Log(0.98*msu2(2,2))))/(Abs(MuInput)*(-1.02*msq2(2,2) + 0.98*
+      msu2(2,2))*(-0.98*msu2(2,2) + 1.03*Sqr(MuInput)))) + 3*Cube(AbInput -
+      MuInput*TanBeta)*(Log(1.02*msq2(2,2))*((8.119113252073776*MuInput*Log(Sqr(
+      SCALE))*(0.96*msd2(2,2) + 1.02*msq2(2,2))*Sqrt(Sqr(MuInput)))/(Abs(MuInput)*
+      Cube(0.96*msd2(2,2) - 1.02*msq2(2,2))) + (8.119113252073776*MuInput*(0.96*
+      msd2(2,2) + 3.06*msq2(2,2))*Sqrt(Sqr(MuInput)))/(Abs(MuInput)*Cube(0.96*msd2
+      (2,2) - 1.02*msq2(2,2)))) + (8.119113252073776*MuInput*PolyLog(2,1 - (
+      1.0729166666666667*Sqr(MuInput))/msd2(2,2))*(0.96*msd2(2,2) + 1.02*msq2(2,2)
+      - 2.06*Sqr(MuInput))*Sqrt(Sqr(MuInput)))/(Abs(MuInput)*Cube(0.96*msd2(2,2) -
+      1.02*msq2(2,2))) - (8.119113252073776*MuInput*PolyLog(2,1 - (
       1.0098039215686274*Sqr(MuInput))/msq2(2,2))*(0.96*msd2(2,2) + 1.02*msq2(2,2)
       - 2.06*Sqr(MuInput))*Sqrt(Sqr(MuInput)))/(Abs(MuInput)*Cube(0.96*msd2(2,2) -
       1.02*msq2(2,2))) + (16.72537329927198*MuInput*Log(1.02*msq2(2,2))*Log(1.03*
@@ -7805,69 +7822,71 @@ void HSSUSY_high_scale_constraint<Two_scale>::apply()
       (MuInput)/Sqr(SCALE)) + (0.125*(-1 + 2*Log(Sqr(mAInput)/Sqr(SCALE))))/(1 +
       Sqr(TanBeta)) + ((-1 + Log(Sqr(mAInput)/Sqr(SCALE)))*Sqr(TanBeta))/(1 + Sqr(
       TanBeta)))*Sqr(Yu(2,2)))/(Sqr(3.141592653589793)*Sqr(TanBeta)) + 0.5*((-
-      0.03125*Sqr(AbInput - MuInput*TanBeta)*Sqr(Yd(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2
-      )/msd2(2,2)))))/(Sqrt(Abs(msd2(2,2)*msq2(2,2)))*Sqr(3.141592653589793)) - (
-      0.03125*Sqr(AtInput - MuInput/TanBeta)*Sqr(Yu(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2
-      )/msu2(2,2)))))/(Sqrt(Abs(msq2(2,2)*msu2(2,2)))*Sqr(3.141592653589793))) + (
-      0.0625*(1 + Sqr(TanBeta))*Sqr(Yd(2,2))*(0.75*Log(Sqr(MuInput)/Sqr(SCALE)) +
-      (0.375*(-1 + 2*Log(Sqr(mAInput)/Sqr(SCALE)))*Sqr(TanBeta))/(1 + Sqr(TanBeta)
-      ) + 0.5*TCF(6)(Sqrt(msd2(2,2))/MuInput) + TCF(6)(Sqrt(msq2(2,2))/MuInput)))/
-      Sqr(3.141592653589793) + (0.08333333333333333*Sqr(g3)*(1 + Log(Sqr(M3Input)/
-      Sqr(SCALE)) + TCF(6)(Sqrt(msd2(2,2))/M3Input) + TCF(6)(Sqrt(msq2(2,2))/
-      M3Input) - ((AbInput - MuInput*TanBeta)*TCF(9)(Sqrt(msq2(2,2))/M3Input,Sqrt(
-      msd2(2,2))/M3Input))/M3Input))/Sqr(3.141592653589793) + (0.0625*(1 + Sqr(
-      TanBeta))*Sqr(Yu(2,2))*(0.5*TCF(6)(Sqrt(msu2(2,2))/MuInput) + (0.5*(AtInput
-      - MuInput/TanBeta)*TanBeta*TCF(9)(Sqrt(msq2(2,2))/MuInput,Sqrt(msu2(2,2))/
-      MuInput))/MuInput))/(Sqr(3.141592653589793)*Sqr(TanBeta))) + (Quad(Yu(2,2))*
-      Sqr(Yd(2,2))*(3*Sqr(AbInput - MuInput*TanBeta)*((0.9803921568627451*(0.96*
-      msd2(2,2) - 5.1*msq2(2,2)))/(msq2(2,2)*(-0.96*msd2(2,2) + 1.02*msq2(2,2))) +
-      (0.9803921568627451*Log(Sqr(SCALE))*(0.96*msd2(2,2) - 3.06*msq2(2,2)))/(msq2
-      (2,2)*(-0.96*msd2(2,2) + 1.02*msq2(2,2))) + (6*PolyLog(2,1 - (
-      0.9411764705882352*msd2(2,2))/msq2(2,2)))/(-0.96*msd2(2,2) + 1.02*msq2(2,2))
-      + Log(0.96*msd2(2,2))*((1.92*Log(1.02*msq2(2,2))*msd2(2,2))/Sqr(0.96*msd2(2,
-      2) - 1.02*msq2(2,2)) - (1.92*Log(Sqr(SCALE))*msd2(2,2))/Sqr(0.96*msd2(2,2) -
-      1.02*msq2(2,2)) + (0.9411764705882352*msd2(2,2)*(0.96*msd2(2,2) - 5.1*msq2(2
-      ,2)))/(msq2(2,2)*Sqr(0.96*msd2(2,2) - 1.02*msq2(2,2)))) + Log(1.02*msq2(2,2)
-      )*((1.92*Log(Sqr(SCALE))*msd2(2,2))/Sqr(0.96*msd2(2,2) - 1.02*msq2(2,2)) + (
-      0.96*msd2(2,2) + 3.06*msq2(2,2))/Sqr(0.96*msd2(2,2) - 1.02*msq2(2,2))) - (
-      1.92*msd2(2,2)*Sqr(Log(1.02*msq2(2,2))))/Sqr(0.96*msd2(2,2) - 1.02*msq2(2,2)
-      )) + (3*(AbInput - MuInput*TanBeta)*Sqr(AtInput - MuInput/TanBeta)*(Log(0.96
-      *msd2(2,2))*((7.794348721990825*MuInput*Log(0.98*msu2(2,2))*msd2(2,2)*Sqrt(
-      Sqr(MuInput)))/(Abs(MuInput)*(0.96*msd2(2,2) - 1.02*msq2(2,2))*(1.02*msq2(2,
-      2) - 0.98*msu2(2,2))*(0.96*msd2(2,2) - 1.03*Sqr(MuInput))) + (
-      7.794348721990825*MuInput*Log(1.02*msq2(2,2))*msd2(2,2)*Sqrt(Sqr(MuInput)))/
-      (Abs(MuInput)*(0.96*msd2(2,2) - 1.02*msq2(2,2))*(-1.02*msq2(2,2) + 0.98*msu2
-      (2,2))*(0.96*msd2(2,2) - 1.03*Sqr(MuInput)))) + (8.281495517115252*MuInput*
-      Log(1.02*msq2(2,2))*Log(0.98*msu2(2,2))*msq2(2,2)*Sqrt(Sqr(MuInput)))/(Abs(
-      MuInput)*(-0.96*msd2(2,2) + 1.02*msq2(2,2))*(-1.02*msq2(2,2) + 0.98*msu2(2,2
-      ))*(-1.02*msq2(2,2) + 1.03*Sqr(MuInput))) + Log(1.03*Sqr(MuInput))*((
-      8.36268664963599*MuInput*Log(1.02*msq2(2,2))*Power3(Sqrt(Sqr(MuInput))))/(
-      Abs(MuInput)*(1.02*msq2(2,2) - 0.98*msu2(2,2))*(0.96*msd2(2,2) - 1.03*Sqr(
-      MuInput))*(-1.02*msq2(2,2) + 1.03*Sqr(MuInput))) + (8.36268664963599*MuInput
-      *Log(0.98*msu2(2,2))*Power3(Sqrt(Sqr(MuInput))))/(Abs(MuInput)*(1.02*msq2(2,
-      2) - 0.98*msu2(2,2))*(-0.96*msd2(2,2) + 1.03*Sqr(MuInput))*(-1.02*msq2(2,2)
-      + 1.03*Sqr(MuInput)))) + (8.281495517115252*MuInput*msq2(2,2)*Sqrt(Sqr(
-      MuInput))*Sqr(Log(1.02*msq2(2,2))))/(Abs(MuInput)*(-0.96*msd2(2,2) + 1.02*
-      msq2(2,2))*(1.02*msq2(2,2) - 0.98*msu2(2,2))*(-1.02*msq2(2,2) + 1.03*Sqr(
-      MuInput)))) + 3*(AbInput - MuInput*TanBeta)*((8.119113252073776*MuInput*
-      PolyLog(2,1 - (1.0729166666666667*Sqr(MuInput))/msd2(2,2))*Sqrt(Sqr(MuInput)
-      )*(0.96*msd2(2,2) + 1.03*Sqr(MuInput)))/(Abs(MuInput)*(0.96*msd2(2,2) - 1.02
-      *msq2(2,2))*(0.96*msd2(2,2) - 1.03*Sqr(MuInput))) + (4.140747758557626*
-      MuInput*Log(1.02*msq2(2,2))*Log(0.98*msu2(2,2))*msq2(2,2)*Sqrt(Sqr(MuInput))
-      )/(Abs(MuInput)*(-0.96*msd2(2,2) + 1.02*msq2(2,2))*(-1.02*msq2(2,2) + 1.03*
-      Sqr(MuInput))) - (8.119113252073776*MuInput*PolyLog(2,1 - (
-      1.0098039215686274*Sqr(MuInput))/msq2(2,2))*Sqrt(Sqr(MuInput))*(1.02*msq2(2,
-      2) + 1.03*Sqr(MuInput)))/(Abs(MuInput)*(-0.96*msd2(2,2) + 1.02*msq2(2,2))*(-
-      1.02*msq2(2,2) + 1.03*Sqr(MuInput))) + Log(0.96*msd2(2,2))*((
-      3.8971743609954124*MuInput*Log(1.02*msq2(2,2))*msd2(2,2)*Sqrt(Sqr(MuInput)))
-      /(Abs(MuInput)*(-0.96*msd2(2,2) + 1.02*msq2(2,2))*(0.96*msd2(2,2) - 1.03*Sqr
-      (MuInput))) + (3.8971743609954124*MuInput*Log(0.98*msu2(2,2))*msd2(2,2)*Sqrt
-      (Sqr(MuInput)))/(Abs(MuInput)*(-0.96*msd2(2,2) + 1.02*msq2(2,2))*(0.96*msd2(
-      2,2) - 1.03*Sqr(MuInput))) + (8.36268664963599*MuInput*Log(1.03*Sqr(MuInput)
-      )*Power3(Sqrt(Sqr(MuInput))))/(Abs(MuInput)*(0.96*msd2(2,2) - 1.02*msq2(2,2)
-      )*(-0.96*msd2(2,2) + 1.03*Sqr(MuInput)))) + Log(1.03*Sqr(MuInput))*((
-      4.181343324817995*MuInput*Log(0.98*msu2(2,2))*Power3(Sqrt(Sqr(MuInput))))/(
-      Abs(MuInput)*(0.96*msd2(2,2) - 1.03*Sqr(MuInput))*(-1.02*msq2(2,2) + 1.03*
+      0.010416666666666666*Sqr(AtauInput - MuInput*TanBeta)*Sqr(Ye(2,2))*TCF(5)(
+      Sqrt(Abs(msl2(2,2)/mse2(2,2)))))/(Sqrt(Abs(mse2(2,2)*msl2(2,2)))*Sqr(
+      3.141592653589793)) - (0.03125*Sqr(AbInput - MuInput*TanBeta)*Sqr(Yd(2,2))*
+      TCF(5)(Sqrt(Abs(msq2(2,2)/msd2(2,2)))))/(Sqrt(Abs(msd2(2,2)*msq2(2,2)))*Sqr(
+      3.141592653589793)) - (0.03125*Sqr(AtInput - MuInput/TanBeta)*Sqr(Yu(2,2))*
+      TCF(5)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/(Sqrt(Abs(msq2(2,2)*msu2(2,2)))*Sqr(
+      3.141592653589793))) + (0.0625*(1 + Sqr(TanBeta))*Sqr(Yd(2,2))*(0.75*Log(Sqr
+      (MuInput)/Sqr(SCALE)) + (0.375*(-1 + 2*Log(Sqr(mAInput)/Sqr(SCALE)))*Sqr(
+      TanBeta))/(1 + Sqr(TanBeta)) + 0.5*TCF(6)(Sqrt(msd2(2,2))/MuInput) + TCF(6)(
+      Sqrt(msq2(2,2))/MuInput)))/Sqr(3.141592653589793) + (0.08333333333333333*Sqr
+      (g3)*(1 + Log(Sqr(M3Input)/Sqr(SCALE)) + TCF(6)(Sqrt(msd2(2,2))/M3Input) +
+      TCF(6)(Sqrt(msq2(2,2))/M3Input) - ((AbInput - MuInput*TanBeta)*TCF(9)(Sqrt(
+      msq2(2,2))/M3Input,Sqrt(msd2(2,2))/M3Input))/M3Input))/Sqr(3.141592653589793
+      ) + (0.0625*(1 + Sqr(TanBeta))*Sqr(Yu(2,2))*(0.5*TCF(6)(Sqrt(msu2(2,2))/
+      MuInput) + (0.5*(AtInput - MuInput/TanBeta)*TanBeta*TCF(9)(Sqrt(msq2(2,2))/
+      MuInput,Sqrt(msu2(2,2))/MuInput))/MuInput))/(Sqr(3.141592653589793)*Sqr(
+      TanBeta))) + (Quad(Yu(2,2))*Sqr(Yd(2,2))*(3*Sqr(AbInput - MuInput*TanBeta)*(
+      (0.9803921568627451*(0.96*msd2(2,2) - 5.1*msq2(2,2)))/(msq2(2,2)*(-0.96*msd2
+      (2,2) + 1.02*msq2(2,2))) + (0.9803921568627451*Log(Sqr(SCALE))*(0.96*msd2(2,
+      2) - 3.06*msq2(2,2)))/(msq2(2,2)*(-0.96*msd2(2,2) + 1.02*msq2(2,2))) + (6*
+      PolyLog(2,1 - (0.9411764705882352*msd2(2,2))/msq2(2,2)))/(-0.96*msd2(2,2) +
+      1.02*msq2(2,2)) + Log(0.96*msd2(2,2))*((1.92*Log(1.02*msq2(2,2))*msd2(2,2))/
+      Sqr(0.96*msd2(2,2) - 1.02*msq2(2,2)) - (1.92*Log(Sqr(SCALE))*msd2(2,2))/Sqr(
+      0.96*msd2(2,2) - 1.02*msq2(2,2)) + (0.9411764705882352*msd2(2,2)*(0.96*msd2(
+      2,2) - 5.1*msq2(2,2)))/(msq2(2,2)*Sqr(0.96*msd2(2,2) - 1.02*msq2(2,2)))) +
+      Log(1.02*msq2(2,2))*((1.92*Log(Sqr(SCALE))*msd2(2,2))/Sqr(0.96*msd2(2,2) -
+      1.02*msq2(2,2)) + (0.96*msd2(2,2) + 3.06*msq2(2,2))/Sqr(0.96*msd2(2,2) -
+      1.02*msq2(2,2))) - (1.92*msd2(2,2)*Sqr(Log(1.02*msq2(2,2))))/Sqr(0.96*msd2(2
+      ,2) - 1.02*msq2(2,2))) + (3*(AbInput - MuInput*TanBeta)*Sqr(AtInput -
+      MuInput/TanBeta)*(Log(0.96*msd2(2,2))*((7.794348721990825*MuInput*Log(0.98*
+      msu2(2,2))*msd2(2,2)*Sqrt(Sqr(MuInput)))/(Abs(MuInput)*(0.96*msd2(2,2) -
+      1.02*msq2(2,2))*(1.02*msq2(2,2) - 0.98*msu2(2,2))*(0.96*msd2(2,2) - 1.03*Sqr
+      (MuInput))) + (7.794348721990825*MuInput*Log(1.02*msq2(2,2))*msd2(2,2)*Sqrt(
+      Sqr(MuInput)))/(Abs(MuInput)*(0.96*msd2(2,2) - 1.02*msq2(2,2))*(-1.02*msq2(2
+      ,2) + 0.98*msu2(2,2))*(0.96*msd2(2,2) - 1.03*Sqr(MuInput)))) + (
+      8.281495517115252*MuInput*Log(1.02*msq2(2,2))*Log(0.98*msu2(2,2))*msq2(2,2)*
+      Sqrt(Sqr(MuInput)))/(Abs(MuInput)*(-0.96*msd2(2,2) + 1.02*msq2(2,2))*(-1.02*
+      msq2(2,2) + 0.98*msu2(2,2))*(-1.02*msq2(2,2) + 1.03*Sqr(MuInput))) + Log(
+      1.03*Sqr(MuInput))*((8.36268664963599*MuInput*Log(1.02*msq2(2,2))*Power3(
+      Sqrt(Sqr(MuInput))))/(Abs(MuInput)*(1.02*msq2(2,2) - 0.98*msu2(2,2))*(0.96*
+      msd2(2,2) - 1.03*Sqr(MuInput))*(-1.02*msq2(2,2) + 1.03*Sqr(MuInput))) + (
+      8.36268664963599*MuInput*Log(0.98*msu2(2,2))*Power3(Sqrt(Sqr(MuInput))))/(
+      Abs(MuInput)*(1.02*msq2(2,2) - 0.98*msu2(2,2))*(-0.96*msd2(2,2) + 1.03*Sqr(
+      MuInput))*(-1.02*msq2(2,2) + 1.03*Sqr(MuInput)))) + (8.281495517115252*
+      MuInput*msq2(2,2)*Sqrt(Sqr(MuInput))*Sqr(Log(1.02*msq2(2,2))))/(Abs(MuInput)
+      *(-0.96*msd2(2,2) + 1.02*msq2(2,2))*(1.02*msq2(2,2) - 0.98*msu2(2,2))*(-1.02
+      *msq2(2,2) + 1.03*Sqr(MuInput)))) + 3*(AbInput - MuInput*TanBeta)*((
+      8.119113252073776*MuInput*PolyLog(2,1 - (1.0729166666666667*Sqr(MuInput))/
+      msd2(2,2))*Sqrt(Sqr(MuInput))*(0.96*msd2(2,2) + 1.03*Sqr(MuInput)))/(Abs(
+      MuInput)*(0.96*msd2(2,2) - 1.02*msq2(2,2))*(0.96*msd2(2,2) - 1.03*Sqr(
+      MuInput))) + (4.140747758557626*MuInput*Log(1.02*msq2(2,2))*Log(0.98*msu2(2,
+      2))*msq2(2,2)*Sqrt(Sqr(MuInput)))/(Abs(MuInput)*(-0.96*msd2(2,2) + 1.02*msq2
+      (2,2))*(-1.02*msq2(2,2) + 1.03*Sqr(MuInput))) - (8.119113252073776*MuInput*
+      PolyLog(2,1 - (1.0098039215686274*Sqr(MuInput))/msq2(2,2))*Sqrt(Sqr(MuInput)
+      )*(1.02*msq2(2,2) + 1.03*Sqr(MuInput)))/(Abs(MuInput)*(-0.96*msd2(2,2) +
+      1.02*msq2(2,2))*(-1.02*msq2(2,2) + 1.03*Sqr(MuInput))) + Log(0.96*msd2(2,2))
+      *((3.8971743609954124*MuInput*Log(1.02*msq2(2,2))*msd2(2,2)*Sqrt(Sqr(MuInput
+      )))/(Abs(MuInput)*(-0.96*msd2(2,2) + 1.02*msq2(2,2))*(0.96*msd2(2,2) - 1.03*
+      Sqr(MuInput))) + (3.8971743609954124*MuInput*Log(0.98*msu2(2,2))*msd2(2,2)*
+      Sqrt(Sqr(MuInput)))/(Abs(MuInput)*(-0.96*msd2(2,2) + 1.02*msq2(2,2))*(0.96*
+      msd2(2,2) - 1.03*Sqr(MuInput))) + (8.36268664963599*MuInput*Log(1.03*Sqr(
+      MuInput))*Power3(Sqrt(Sqr(MuInput))))/(Abs(MuInput)*(0.96*msd2(2,2) - 1.02*
+      msq2(2,2))*(-0.96*msd2(2,2) + 1.03*Sqr(MuInput)))) + Log(1.03*Sqr(MuInput))*
+      ((4.181343324817995*MuInput*Log(0.98*msu2(2,2))*Power3(Sqrt(Sqr(MuInput))))/
+      (Abs(MuInput)*(0.96*msd2(2,2) - 1.03*Sqr(MuInput))*(-1.02*msq2(2,2) + 1.03*
       Sqr(MuInput))) - (4.181343324817995*MuInput*Log(1.02*msq2(2,2))*(0.96*msd2(2
       ,2) + 1.02*msq2(2,2) - 2.06*Sqr(MuInput))*Power3(Sqrt(Sqr(MuInput))))/(Abs(
       MuInput)*(0.96*msd2(2,2) - 1.02*msq2(2,2))*(0.96*msd2(2,2) - 1.03*Sqr(
@@ -8866,7 +8885,9 @@ void HSSUSY_high_scale_constraint<Two_scale>::apply()
       + Sqr(TanBeta))*(0.25*Log(Sqr(MuInput)/Sqr(SCALE)) + (0.125*(-1 + 2*Log(Sqr(
       mAInput)/Sqr(SCALE))))/(1 + Sqr(TanBeta)) + ((-1 + Log(Sqr(mAInput)/Sqr(
       SCALE)))*Sqr(TanBeta))/(1 + Sqr(TanBeta)))*Sqr(Yu(2,2)))/Sqr(TanBeta) + 0.5*
-      ((-0.0031662869888230555*Sqr(AbInput - MuInput*TanBeta)*Sqr(Yd(2,2))*TCF(5)(
+      ((-0.0010554289962743518*Sqr(AtauInput - MuInput*TanBeta)*Sqr(Ye(2,2))*TCF(5
+      )(Sqrt(Abs(msl2(2,2)/mse2(2,2)))))/Sqrt(Abs(mse2(2,2)*msl2(2,2))) - (
+      0.0031662869888230555*Sqr(AbInput - MuInput*TanBeta)*Sqr(Yd(2,2))*TCF(5)(
       Sqrt(Abs(msq2(2,2)/msd2(2,2)))))/Sqrt(Abs(msd2(2,2)*msq2(2,2))) - (
       0.0031662869888230555*Sqr(AtInput - MuInput/TanBeta)*Sqr(Yu(2,2))*TCF(5)(
       Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/Sqrt(Abs(msq2(2,2)*msu2(2,2)))) +
@@ -10220,8 +10241,9 @@ void HSSUSY_high_scale_constraint<Two_scale>::apply()
       0.99*Sqr(mAInput),0.98*msu2(2,2),0.98*msu2(2,2)))*TPhi(0.99*Sqr(mAInput),
       0.98*msu2(2,2),0.98*msu2(2,2)))/(Quad(1.02*msq2(2,2) - 0.98*msu2(2,2))*Sqr(
       msu2(2,2))))))/(1 + Sqr(TanBeta))))/Sqr(TanBeta)))/Quad(3.141592653589793)),
-      0) + IF(TwoLoopAtauAtau >= 1, (0.01171875*(((AtauInput - MuInput*TanBeta)*
-      Quad(Yd(2,2))*((AbInput - MuInput*TanBeta)*(Log(1.03*msq2(2,2))*(4/(0.97*
+      0) + IF(TwoLoopAtauAtau >= 1, (0.00390625*((5.333333333333333*Quad(
+      3.141592653589793)*Quad(Yd(2,2))*((0.5625*(AtauInput - MuInput*TanBeta)*(1 +
+      Sqr(TanBeta))*((AbInput - MuInput*TanBeta)*(Log(1.03*msq2(2,2))*(4/(0.97*
       msd2(2,2) - 1.03*msq2(2,2)) + (4.04*Log(1.01*mse2(2,2))*mse2(2,2))/((-1.01*
       mse2(2,2) + 0.99*msl2(2,2))*(0.97*msd2(2,2) - 1.03*msq2(2,2)))) + (4*Log(
       1.03*msq2(2,2))*Log(Sqr(SCALE)))/(0.97*msd2(2,2) - 1.03*msq2(2,2)) + (3.96*
@@ -10248,78 +10270,124 @@ void HSSUSY_high_scale_constraint<Two_scale>::apply()
       - 1.03*msq2(2,2))*(-1.01*mse2(2,2) + 0.99*msl2(2,2))) + (7.92*msl2(2,2))/((-
       1.01*mse2(2,2) + 0.99*msl2(2,2))*Sqr(0.97*msd2(2,2) - 1.03*msq2(2,2)))) - 8/
       Sqr(0.97*msd2(2,2) - 1.03*msq2(2,2)) + (8.08*Log(1.01*mse2(2,2))*mse2(2,2))/
-      ((1.01*mse2(2,2) - 0.99*msl2(2,2))*Sqr(0.97*msd2(2,2) - 1.03*msq2(2,2)))))*
-      Sqr(Ye(2,2)))/(Quad(1 + (0.0625*(1 + Sqr(TanBeta))*(0.25*Log(Sqr(MuInput)/
-      Sqr(SCALE)) + (0.125*(-1 + 2*Log(Sqr(mAInput)/Sqr(SCALE))))/(1 + Sqr(TanBeta
-      )) + ((-1 + Log(Sqr(mAInput)/Sqr(SCALE)))*Sqr(TanBeta))/(1 + Sqr(TanBeta)))*
-      Sqr(Yu(2,2)))/(Sqr(3.141592653589793)*Sqr(TanBeta)) + 0.5*((-0.03125*Sqr(
-      AbInput - MuInput*TanBeta)*Sqr(Yd(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msd2(2,2))
-      )))/(Sqrt(Abs(msd2(2,2)*msq2(2,2)))*Sqr(3.141592653589793)) - (0.03125*Sqr(
-      AtInput - MuInput/TanBeta)*Sqr(Yu(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msu2(2,2))
-      )))/(Sqrt(Abs(msq2(2,2)*msu2(2,2)))*Sqr(3.141592653589793))) + (0.0625*(1 +
-      Sqr(TanBeta))*Sqr(Yd(2,2))*(0.75*Log(Sqr(MuInput)/Sqr(SCALE)) + (0.375*(-1 +
-      2*Log(Sqr(mAInput)/Sqr(SCALE)))*Sqr(TanBeta))/(1 + Sqr(TanBeta)) + 0.5*TCF(6
-      )(Sqrt(msd2(2,2))/MuInput) + TCF(6)(Sqrt(msq2(2,2))/MuInput)))/Sqr(
-      3.141592653589793) + (0.08333333333333333*Sqr(g3)*(1 + Log(Sqr(M3Input)/Sqr(
-      SCALE)) + TCF(6)(Sqrt(msd2(2,2))/M3Input) + TCF(6)(Sqrt(msq2(2,2))/M3Input)
-      - ((AbInput - MuInput*TanBeta)*TCF(9)(Sqrt(msq2(2,2))/M3Input,Sqrt(msd2(2,2)
-      )/M3Input))/M3Input))/Sqr(3.141592653589793) + (0.0625*(1 + Sqr(TanBeta))*
-      Sqr(Yu(2,2))*(0.5*TCF(6)(Sqrt(msu2(2,2))/MuInput) + (0.5*(AtInput - MuInput/
-      TanBeta)*TanBeta*TCF(9)(Sqrt(msq2(2,2))/MuInput,Sqrt(msu2(2,2))/MuInput))/
-      MuInput))/(Sqr(3.141592653589793)*Sqr(TanBeta)))*Sqrt(1/(1 + Sqr(TanBeta)))*
-      Sqrt(Sqr(TanBeta)/(1 + Sqr(TanBeta)))) + (Quad(Ye(2,2))*((AbInput - MuInput*
-      TanBeta)*(AtauInput - MuInput*TanBeta)*((4*Log(1.01*mse2(2,2)))/(-1.01*mse2(
-      2,2) + 0.99*msl2(2,2)) + (4*Log(1.01*mse2(2,2))*Log(Sqr(SCALE)))/(-1.01*mse2
-      (2,2) + 0.99*msl2(2,2)) + Log(0.97*msd2(2,2))*((3.88*Log(1.01*mse2(2,2))*
-      msd2(2,2))/((1.01*mse2(2,2) - 0.99*msl2(2,2))*(0.97*msd2(2,2) - 1.03*msq2(2,
-      2))) + (3.88*Log(0.99*msl2(2,2))*msd2(2,2))/((-1.01*mse2(2,2) + 0.99*msl2(2,
-      2))*(0.97*msd2(2,2) - 1.03*msq2(2,2)))) + (4.12*Log(1.01*mse2(2,2))*Log(1.03
-      *msq2(2,2))*msq2(2,2))/((-1.01*mse2(2,2) + 0.99*msl2(2,2))*(0.97*msd2(2,2) -
-      1.03*msq2(2,2))) + Log(0.99*msl2(2,2))*(4/(1.01*mse2(2,2) - 0.99*msl2(2,2))
-      + (4*Log(Sqr(SCALE)))/(1.01*mse2(2,2) - 0.99*msl2(2,2)) + (4.12*Log(1.03*
-      msq2(2,2))*msq2(2,2))/((-1.01*mse2(2,2) + 0.99*msl2(2,2))*(-0.97*msd2(2,2) +
-      1.03*msq2(2,2))))) + (AbInput - MuInput*TanBeta)*Cube(AtauInput - MuInput*
-      TanBeta)*((-4*Log(1.01*mse2(2,2))*(1.01*mse2(2,2) + 0.99*msl2(2,2)))/Cube(-
-      1.01*mse2(2,2) + 0.99*msl2(2,2)) + Log(0.99*msl2(2,2))*((4*(1.01*mse2(2,2) +
-      0.99*msl2(2,2)))/Cube(-1.01*mse2(2,2) + 0.99*msl2(2,2)) + (4*Log(Sqr(SCALE))
-      *(1.01*mse2(2,2) + 0.99*msl2(2,2)))/Cube(-1.01*mse2(2,2) + 0.99*msl2(2,2)) +
-      (4.12*Log(1.03*msq2(2,2))*(1.01*mse2(2,2) + 0.99*msl2(2,2))*msq2(2,2))/(Cube
-      (-1.01*mse2(2,2) + 0.99*msl2(2,2))*(0.97*msd2(2,2) - 1.03*msq2(2,2)))) + Log
-      (Sqr(SCALE))*((-4*Log(1.01*mse2(2,2))*(1.01*mse2(2,2) + 0.99*msl2(2,2)))/
-      Cube(-1.01*mse2(2,2) + 0.99*msl2(2,2)) - 8/Sqr(-1.01*mse2(2,2) + 0.99*msl2(2
-      ,2))) + Log(0.97*msd2(2,2))*((3.88*Log(1.01*mse2(2,2))*msd2(2,2)*(1.01*mse2(
-      2,2) + 0.99*msl2(2,2)))/(Cube(-1.01*mse2(2,2) + 0.99*msl2(2,2))*(0.97*msd2(2
-      ,2) - 1.03*msq2(2,2))) - (3.88*Log(0.99*msl2(2,2))*msd2(2,2)*(1.01*mse2(2,2)
-      + 0.99*msl2(2,2)))/(Cube(-1.01*mse2(2,2) + 0.99*msl2(2,2))*(0.97*msd2(2,2) -
-      1.03*msq2(2,2))) + (7.76*msd2(2,2))/((0.97*msd2(2,2) - 1.03*msq2(2,2))*Sqr(-
-      1.01*mse2(2,2) + 0.99*msl2(2,2)))) + Log(1.03*msq2(2,2))*((-4.12*Log(1.01*
-      mse2(2,2))*(1.01*mse2(2,2) + 0.99*msl2(2,2))*msq2(2,2))/(Cube(-1.01*mse2(2,2
-      ) + 0.99*msl2(2,2))*(0.97*msd2(2,2) - 1.03*msq2(2,2))) + (8.24*msq2(2,2))/((
-      -0.97*msd2(2,2) + 1.03*msq2(2,2))*Sqr(-1.01*mse2(2,2) + 0.99*msl2(2,2)))) -
-      8/Sqr(-1.01*mse2(2,2) + 0.99*msl2(2,2))))*Sqr(Yd(2,2)))/(Sqrt(1/(1 + Sqr(
-      TanBeta)))*Sqrt(Sqr(TanBeta)/(1 + Sqr(TanBeta)))*Sqr(1 + (
-      0.006332573977646111*(1 + Sqr(TanBeta))*(0.25*Log(Sqr(MuInput)/Sqr(SCALE)) +
-      (0.125*(-1 + 2*Log(Sqr(mAInput)/Sqr(SCALE))))/(1 + Sqr(TanBeta)) + ((-1 +
-      Log(Sqr(mAInput)/Sqr(SCALE)))*Sqr(TanBeta))/(1 + Sqr(TanBeta)))*Sqr(Yu(2,2))
-      )/Sqr(TanBeta) + 0.5*((-0.0031662869888230555*Sqr(AbInput - MuInput*TanBeta)
-      *Sqr(Yd(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msd2(2,2)))))/Sqrt(Abs(msd2(2,2)*
-      msq2(2,2))) - (0.0031662869888230555*Sqr(AtInput - MuInput/TanBeta)*Sqr(Yu(2
-      ,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/Sqrt(Abs(msq2(2,2)*msu2(2,2))))
-      + 0.006332573977646111*(1 + Sqr(TanBeta))*Sqr(Yd(2,2))*(0.75*Log(Sqr(MuInput
-      )/Sqr(SCALE)) + (0.375*(-1 + 2*Log(Sqr(mAInput)/Sqr(SCALE)))*Sqr(TanBeta))/(
-      1 + Sqr(TanBeta)) + 0.5*TCF(6)(Sqrt(msd2(2,2))/MuInput) + TCF(6)(Sqrt(msq2(2
-      ,2))/MuInput)) + 0.008443431970194815*Sqr(g3)*(1 + Log(Sqr(M3Input)/Sqr(
-      SCALE)) + TCF(6)(Sqrt(msd2(2,2))/M3Input) + TCF(6)(Sqrt(msq2(2,2))/M3Input)
-      - ((AbInput - MuInput*TanBeta)*TCF(9)(Sqrt(msq2(2,2))/M3Input,Sqrt(msd2(2,2)
-      )/M3Input))/M3Input) + (0.006332573977646111*(1 + Sqr(TanBeta))*Sqr(Yu(2,2))
-      *(0.5*TCF(6)(Sqrt(msu2(2,2))/MuInput) + (0.5*(AtInput - MuInput/TanBeta)*
-      TanBeta*TCF(9)(Sqrt(msq2(2,2))/MuInput,Sqrt(msu2(2,2))/MuInput))/MuInput))/
-      Sqr(TanBeta)))))/Quad(3.141592653589793) + (0.00390625*Power6(Ye(2,2))*(5 -
-      4*Log(1.01*mse2(2,2)) + Log(0.99*msl2(2,2))*(-6 - 6*Log(Sqr(SCALE))) + (10 -
-      4*Log(1.01*mse2(2,2)))*Log(Sqr(SCALE)) + 5*Sqr(Log(Sqr(SCALE))) + 2*Sqr(Log(
-      1.01*mse2(2,2))) + 3*Sqr(Log(0.99*msl2(2,2))) + Power6(AtauInput - MuInput*
-      TanBeta)*((4*PolyLog(2,(1.0101010101010102*(-1.01*mse2(2,2) + 0.99*msl2(2,2)
-      ))/msl2(2,2)))/Cube(-1.01*mse2(2,2) + 0.99*msl2(2,2)) - (2*PolyLog(2,1 - (
+      ((1.01*mse2(2,2) - 0.99*msl2(2,2))*Sqr(0.97*msd2(2,2) - 1.03*msq2(2,2))))))/
+      Quad(3.141592653589793) + (0.1875*(3*Sqr(AtauInput - MuInput*TanBeta)*(Log(
+      0.99*msl2(2,2))*((1.9998*Log(1.03*msq2(2,2))*mse2(2,2)*msl2(2,2))/Cube(-1.01
+      *mse2(2,2) + 0.99*msl2(2,2)) - (3.9996*Log(Sqr(SCALE))*mse2(2,2)*msl2(2,2))/
+      Cube(-1.01*mse2(2,2) + 0.99*msl2(2,2))) + Log(1.03*msq2(2,2))*((-1.9998*Log(
+      1.01*mse2(2,2))*mse2(2,2)*msl2(2,2))/Cube(-1.01*mse2(2,2) + 0.99*msl2(2,2))
+      - (1.01*mse2(2,2) + 0.99*msl2(2,2))/Sqr(-1.01*mse2(2,2) + 0.99*msl2(2,2))) +
+      Log(0.97*msd2(2,2))*((-1.9998*Log(1.01*mse2(2,2))*mse2(2,2)*msl2(2,2))/Cube(
+      -1.01*mse2(2,2) + 0.99*msl2(2,2)) + (1.9998*Log(0.99*msl2(2,2))*mse2(2,2)*
+      msl2(2,2))/Cube(-1.01*mse2(2,2) + 0.99*msl2(2,2)) - (1.01*mse2(2,2) + 0.99*
+      msl2(2,2))/Sqr(-1.01*mse2(2,2) + 0.99*msl2(2,2))) + Log(Sqr(SCALE))*((3.9996
+      *Log(1.01*mse2(2,2))*mse2(2,2)*msl2(2,2))/Cube(-1.01*mse2(2,2) + 0.99*msl2(2
+      ,2)) + (2*(1.01*mse2(2,2) + 0.99*msl2(2,2)))/Sqr(-1.01*mse2(2,2) + 0.99*msl2
+      (2,2)))) + 3*Sqr(AbInput - MuInput*TanBeta)*Sqr(AtauInput - MuInput*TanBeta)
+      *((-3.9996*Log(0.99*msl2(2,2))*Log(1.03*msq2(2,2))*mse2(2,2)*msl2(2,2))/(
+      Cube(-1.01*mse2(2,2) + 0.99*msl2(2,2))*(0.97*msd2(2,2) - 1.03*msq2(2,2))) +
+      Log(0.97*msd2(2,2))*((-3.9996*Log(1.01*mse2(2,2))*mse2(2,2)*msl2(2,2))/(Cube
+      (-1.01*mse2(2,2) + 0.99*msl2(2,2))*(0.97*msd2(2,2) - 1.03*msq2(2,2))) + (
+      3.9996*Log(0.99*msl2(2,2))*mse2(2,2)*msl2(2,2))/(Cube(-1.01*mse2(2,2) + 0.99
+      *msl2(2,2))*(0.97*msd2(2,2) - 1.03*msq2(2,2))) - (2*(1.01*mse2(2,2) + 0.99*
+      msl2(2,2)))/((0.97*msd2(2,2) - 1.03*msq2(2,2))*Sqr(-1.01*mse2(2,2) + 0.99*
+      msl2(2,2)))) + Log(1.03*msq2(2,2))*((3.9996*Log(1.01*mse2(2,2))*mse2(2,2)*
+      msl2(2,2))/(Cube(-1.01*mse2(2,2) + 0.99*msl2(2,2))*(0.97*msd2(2,2) - 1.03*
+      msq2(2,2))) + (2*(1.01*mse2(2,2) + 0.99*msl2(2,2)))/((0.97*msd2(2,2) - 1.03*
+      msq2(2,2))*Sqr(-1.01*mse2(2,2) + 0.99*msl2(2,2))))) + 3*Quad(AbInput -
+      MuInput*TanBeta)*Sqr(AtauInput - MuInput*TanBeta)*(Log(1.03*msq2(2,2))*((-
+      1.9998*Log(1.01*mse2(2,2))*mse2(2,2)*msl2(2,2)*(0.97*msd2(2,2) + 1.03*msq2(2
+      ,2)))/(Cube(-1.01*mse2(2,2) + 0.99*msl2(2,2))*Cube(0.97*msd2(2,2) - 1.03*
+      msq2(2,2))) - ((1.01*mse2(2,2) + 0.99*msl2(2,2))*(0.97*msd2(2,2) + 1.03*msq2
+      (2,2)))/(Cube(0.97*msd2(2,2) - 1.03*msq2(2,2))*Sqr(-1.01*mse2(2,2) + 0.99*
+      msl2(2,2)))) + Log(0.97*msd2(2,2))*((1.9998*Log(1.01*mse2(2,2))*mse2(2,2)*
+      msl2(2,2)*(0.97*msd2(2,2) + 1.03*msq2(2,2)))/(Cube(-1.01*mse2(2,2) + 0.99*
+      msl2(2,2))*Cube(0.97*msd2(2,2) - 1.03*msq2(2,2))) - (1.9998*Log(0.99*msl2(2,
+      2))*mse2(2,2)*msl2(2,2)*(0.97*msd2(2,2) + 1.03*msq2(2,2)))/(Cube(-1.01*mse2(
+      2,2) + 0.99*msl2(2,2))*Cube(0.97*msd2(2,2) - 1.03*msq2(2,2))) + ((1.01*mse2(
+      2,2) + 0.99*msl2(2,2))*(0.97*msd2(2,2) + 1.03*msq2(2,2)))/(Cube(0.97*msd2(2,
+      2) - 1.03*msq2(2,2))*Sqr(-1.01*mse2(2,2) + 0.99*msl2(2,2)))) + Log(0.99*msl2
+      (2,2))*((1.9998*Log(1.03*msq2(2,2))*mse2(2,2)*msl2(2,2)*(0.97*msd2(2,2) +
+      1.03*msq2(2,2)))/(Cube(-1.01*mse2(2,2) + 0.99*msl2(2,2))*Cube(0.97*msd2(2,2)
+      - 1.03*msq2(2,2))) + (3.9996*mse2(2,2)*msl2(2,2))/(Cube(-1.01*mse2(2,2) +
+      0.99*msl2(2,2))*Sqr(0.97*msd2(2,2) - 1.03*msq2(2,2)))) - (3.9996*Log(1.01*
+      mse2(2,2))*mse2(2,2)*msl2(2,2))/(Cube(-1.01*mse2(2,2) + 0.99*msl2(2,2))*Sqr(
+      0.97*msd2(2,2) - 1.03*msq2(2,2))) - (2*(1.01*mse2(2,2) + 0.99*msl2(2,2)))/(
+      Sqr(-1.01*mse2(2,2) + 0.99*msl2(2,2))*Sqr(0.97*msd2(2,2) - 1.03*msq2(2,2))))
+      ))/Quad(3.141592653589793))*Sqr(Ye(2,2)))/Quad(1 + (0.0625*(1 + Sqr(TanBeta)
+      )*(0.25*Log(Sqr(MuInput)/Sqr(SCALE)) + (0.125*(-1 + 2*Log(Sqr(mAInput)/Sqr(
+      SCALE))))/(1 + Sqr(TanBeta)) + ((-1 + Log(Sqr(mAInput)/Sqr(SCALE)))*Sqr(
+      TanBeta))/(1 + Sqr(TanBeta)))*Sqr(Yu(2,2)))/(Sqr(3.141592653589793)*Sqr(
+      TanBeta)) + 0.5*((-0.010416666666666666*Sqr(AtauInput - MuInput*TanBeta)*Sqr
+      (Ye(2,2))*TCF(5)(Sqrt(Abs(msl2(2,2)/mse2(2,2)))))/(Sqrt(Abs(mse2(2,2)*msl2(2
+      ,2)))*Sqr(3.141592653589793)) - (0.03125*Sqr(AbInput - MuInput*TanBeta)*Sqr(
+      Yd(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msd2(2,2)))))/(Sqrt(Abs(msd2(2,2)*msq2(2,
+      2)))*Sqr(3.141592653589793)) - (0.03125*Sqr(AtInput - MuInput/TanBeta)*Sqr(
+      Yu(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/(Sqrt(Abs(msq2(2,2)*msu2(2,
+      2)))*Sqr(3.141592653589793))) + (0.0625*(1 + Sqr(TanBeta))*Sqr(Yd(2,2))*(
+      0.75*Log(Sqr(MuInput)/Sqr(SCALE)) + (0.375*(-1 + 2*Log(Sqr(mAInput)/Sqr(
+      SCALE)))*Sqr(TanBeta))/(1 + Sqr(TanBeta)) + 0.5*TCF(6)(Sqrt(msd2(2,2))/
+      MuInput) + TCF(6)(Sqrt(msq2(2,2))/MuInput)))/Sqr(3.141592653589793) + (
+      0.08333333333333333*Sqr(g3)*(1 + Log(Sqr(M3Input)/Sqr(SCALE)) + TCF(6)(Sqrt(
+      msd2(2,2))/M3Input) + TCF(6)(Sqrt(msq2(2,2))/M3Input) - ((AbInput - MuInput*
+      TanBeta)*TCF(9)(Sqrt(msq2(2,2))/M3Input,Sqrt(msd2(2,2))/M3Input))/M3Input))/
+      Sqr(3.141592653589793) + (0.0625*(1 + Sqr(TanBeta))*Sqr(Yu(2,2))*(0.5*TCF(6)
+      (Sqrt(msu2(2,2))/MuInput) + (0.5*(AtInput - MuInput/TanBeta)*TanBeta*TCF(9)(
+      Sqrt(msq2(2,2))/MuInput,Sqrt(msu2(2,2))/MuInput))/MuInput))/(Sqr(
+      3.141592653589793)*Sqr(TanBeta))) + (3*Quad(Ye(2,2))*(1 + Sqr(TanBeta))*((
+      AbInput - MuInput*TanBeta)*(AtauInput - MuInput*TanBeta)*((4*Log(1.01*mse2(2
+      ,2)))/(-1.01*mse2(2,2) + 0.99*msl2(2,2)) + (4*Log(1.01*mse2(2,2))*Log(Sqr(
+      SCALE)))/(-1.01*mse2(2,2) + 0.99*msl2(2,2)) + Log(0.97*msd2(2,2))*((3.88*Log
+      (1.01*mse2(2,2))*msd2(2,2))/((1.01*mse2(2,2) - 0.99*msl2(2,2))*(0.97*msd2(2,
+      2) - 1.03*msq2(2,2))) + (3.88*Log(0.99*msl2(2,2))*msd2(2,2))/((-1.01*mse2(2,
+      2) + 0.99*msl2(2,2))*(0.97*msd2(2,2) - 1.03*msq2(2,2)))) + (4.12*Log(1.01*
+      mse2(2,2))*Log(1.03*msq2(2,2))*msq2(2,2))/((-1.01*mse2(2,2) + 0.99*msl2(2,2)
+      )*(0.97*msd2(2,2) - 1.03*msq2(2,2))) + Log(0.99*msl2(2,2))*(4/(1.01*mse2(2,2
+      ) - 0.99*msl2(2,2)) + (4*Log(Sqr(SCALE)))/(1.01*mse2(2,2) - 0.99*msl2(2,2))
+      + (4.12*Log(1.03*msq2(2,2))*msq2(2,2))/((-1.01*mse2(2,2) + 0.99*msl2(2,2))*(
+      -0.97*msd2(2,2) + 1.03*msq2(2,2))))) + (AbInput - MuInput*TanBeta)*Cube(
+      AtauInput - MuInput*TanBeta)*((-4*Log(1.01*mse2(2,2))*(1.01*mse2(2,2) + 0.99
+      *msl2(2,2)))/Cube(-1.01*mse2(2,2) + 0.99*msl2(2,2)) + Log(0.99*msl2(2,2))*((
+      4*(1.01*mse2(2,2) + 0.99*msl2(2,2)))/Cube(-1.01*mse2(2,2) + 0.99*msl2(2,2))
+      + (4*Log(Sqr(SCALE))*(1.01*mse2(2,2) + 0.99*msl2(2,2)))/Cube(-1.01*mse2(2,2)
+      + 0.99*msl2(2,2)) + (4.12*Log(1.03*msq2(2,2))*(1.01*mse2(2,2) + 0.99*msl2(2,
+      2))*msq2(2,2))/(Cube(-1.01*mse2(2,2) + 0.99*msl2(2,2))*(0.97*msd2(2,2) -
+      1.03*msq2(2,2)))) + Log(Sqr(SCALE))*((-4*Log(1.01*mse2(2,2))*(1.01*mse2(2,2)
+      + 0.99*msl2(2,2)))/Cube(-1.01*mse2(2,2) + 0.99*msl2(2,2)) - 8/Sqr(-1.01*mse2
+      (2,2) + 0.99*msl2(2,2))) + Log(0.97*msd2(2,2))*((3.88*Log(1.01*mse2(2,2))*
+      msd2(2,2)*(1.01*mse2(2,2) + 0.99*msl2(2,2)))/(Cube(-1.01*mse2(2,2) + 0.99*
+      msl2(2,2))*(0.97*msd2(2,2) - 1.03*msq2(2,2))) - (3.88*Log(0.99*msl2(2,2))*
+      msd2(2,2)*(1.01*mse2(2,2) + 0.99*msl2(2,2)))/(Cube(-1.01*mse2(2,2) + 0.99*
+      msl2(2,2))*(0.97*msd2(2,2) - 1.03*msq2(2,2))) + (7.76*msd2(2,2))/((0.97*msd2
+      (2,2) - 1.03*msq2(2,2))*Sqr(-1.01*mse2(2,2) + 0.99*msl2(2,2)))) + Log(1.03*
+      msq2(2,2))*((-4.12*Log(1.01*mse2(2,2))*(1.01*mse2(2,2) + 0.99*msl2(2,2))*
+      msq2(2,2))/(Cube(-1.01*mse2(2,2) + 0.99*msl2(2,2))*(0.97*msd2(2,2) - 1.03*
+      msq2(2,2))) + (8.24*msq2(2,2))/((-0.97*msd2(2,2) + 1.03*msq2(2,2))*Sqr(-1.01
+      *mse2(2,2) + 0.99*msl2(2,2)))) - 8/Sqr(-1.01*mse2(2,2) + 0.99*msl2(2,2))))*
+      Sqr(Yd(2,2)))/Sqr(1 + (0.006332573977646111*(1 + Sqr(TanBeta))*(0.25*Log(Sqr
+      (MuInput)/Sqr(SCALE)) + (0.125*(-1 + 2*Log(Sqr(mAInput)/Sqr(SCALE))))/(1 +
+      Sqr(TanBeta)) + ((-1 + Log(Sqr(mAInput)/Sqr(SCALE)))*Sqr(TanBeta))/(1 + Sqr(
+      TanBeta)))*Sqr(Yu(2,2)))/Sqr(TanBeta) + 0.5*((-0.0010554289962743518*Sqr(
+      AtauInput - MuInput*TanBeta)*Sqr(Ye(2,2))*TCF(5)(Sqrt(Abs(msl2(2,2)/mse2(2,2
+      )))))/Sqrt(Abs(mse2(2,2)*msl2(2,2))) - (0.0031662869888230555*Sqr(AbInput -
+      MuInput*TanBeta)*Sqr(Yd(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msd2(2,2)))))/Sqrt(
+      Abs(msd2(2,2)*msq2(2,2))) - (0.0031662869888230555*Sqr(AtInput - MuInput/
+      TanBeta)*Sqr(Yu(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/Sqrt(Abs(msq2(
+      2,2)*msu2(2,2)))) + 0.006332573977646111*(1 + Sqr(TanBeta))*Sqr(Yd(2,2))*(
+      0.75*Log(Sqr(MuInput)/Sqr(SCALE)) + (0.375*(-1 + 2*Log(Sqr(mAInput)/Sqr(
+      SCALE)))*Sqr(TanBeta))/(1 + Sqr(TanBeta)) + 0.5*TCF(6)(Sqrt(msd2(2,2))/
+      MuInput) + TCF(6)(Sqrt(msq2(2,2))/MuInput)) + 0.008443431970194815*Sqr(g3)*(
+      1 + Log(Sqr(M3Input)/Sqr(SCALE)) + TCF(6)(Sqrt(msd2(2,2))/M3Input) + TCF(6)(
+      Sqrt(msq2(2,2))/M3Input) - ((AbInput - MuInput*TanBeta)*TCF(9)(Sqrt(msq2(2,2
+      ))/M3Input,Sqrt(msd2(2,2))/M3Input))/M3Input) + (0.006332573977646111*(1 +
+      Sqr(TanBeta))*Sqr(Yu(2,2))*(0.5*TCF(6)(Sqrt(msu2(2,2))/MuInput) + (0.5*(
+      AtInput - MuInput/TanBeta)*TanBeta*TCF(9)(Sqrt(msq2(2,2))/MuInput,Sqrt(msu2(
+      2,2))/MuInput))/MuInput))/Sqr(TanBeta)) + Power6(Ye(2,2))*(5 - 4*Log(1.01*
+      mse2(2,2)) + Log(0.99*msl2(2,2))*(-6 - 6*Log(Sqr(SCALE))) + (10 - 4*Log(1.01
+      *mse2(2,2)))*Log(Sqr(SCALE)) + 5*Sqr(Log(Sqr(SCALE))) + 2*Sqr(Log(1.01*mse2(
+      2,2))) + 3*Sqr(Log(0.99*msl2(2,2))) + Power6(AtauInput - MuInput*TanBeta)*((
+      4*PolyLog(2,(1.0101010101010102*(-1.01*mse2(2,2) + 0.99*msl2(2,2)))/msl2(2,2
+      )))/Cube(-1.01*mse2(2,2) + 0.99*msl2(2,2)) - (2*PolyLog(2,1 - (
       0.9801980198019802*msl2(2,2))/mse2(2,2)))/Cube(-1.01*mse2(2,2) + 0.99*msl2(2
       ,2)) + ((-5.05*mse2(2,2) - 2.9699999999999998*msl2(2,2))*Sqr(Log(1.01*mse2(2
       ,2))))/Quad(-1.01*mse2(2,2) + 0.99*msl2(2,2)) + ((-5.05*mse2(2,2) - 8.91*
@@ -10943,22 +11011,22 @@ void HSSUSY_high_scale_constraint<Two_scale>::apply()
       mAInput))*Sqr(mAInput) + (1.01*mse2(2,2) - 7.92*msl2(2,2))*TDelta(0.985*Sqr(
       mAInput),0.99*msl2(2,2),0.99*msl2(2,2)))*TPhi(0.985*Sqr(mAInput),0.99*msl2(2
       ,2),0.99*msl2(2,2)))/(Quad(-1.01*mse2(2,2) + 0.99*msl2(2,2))*Sqr(msl2(2,2)))
-      )))))/Quad(3.141592653589793), 0))*UnitStep(-2 + LambdaLoopOrder) + UnitStep
-      (-1 + LambdaLoopOrder)*(0.006332573977646111*(-0.09*Quad(g1) - 0.3*Sqr(g1)*
-      Sqr(g2) - Quad(g2)*(0.75 - 0.16666666666666666*Sqr(Cos(2*ArcTan(TanBeta)))))
-      - 0.0010554289962743518*(2*Log(Sqr(M2Input)/Sqr(SCALE))*Quad(g2)*(1 + (
-      DeltaEFT*Sqr(v))/Sqr(M2Input)) + Log(Sqr(MuInput)/Sqr(SCALE))*(0.36*Quad(g1)
-      + Quad(g2))*(1 + (DeltaEFT*Sqr(v))/Sqr(MuInput)))*Sqr(Cos(2*ArcTan(TanBeta))
-      ) + 0.006332573977646111*(0.5*Log(Sqr(MuInput)/Sqr(SCALE))*(1 + (DeltaEFT*
-      Sqr(v))/Sqr(MuInput))*(-2*(Sqr(g2)/(1 + Sqr(TanBeta)) + (0.6*Sqr(g1)*Sqr(
-      TanBeta))/(1 + Sqr(TanBeta)))*((0.6*Sqr(g1))/(1 + Sqr(TanBeta)) + (Sqr(g2)*
-      Sqr(TanBeta))/(1 + Sqr(TanBeta))) + 0.5*(0.6*Sqr(g1) + Sqr(g2))*((0.6*Sqr(g1
-      ))/(1 + Sqr(TanBeta)) + (3*Sqr(g2))/(1 + Sqr(TanBeta)) + (0.6*Sqr(g1)*Sqr(
-      TanBeta))/(1 + Sqr(TanBeta)) + (3*Sqr(g2)*Sqr(TanBeta))/(1 + Sqr(TanBeta)))*
-      Sqr(Cos(2*ArcTan(TanBeta))) - (0.36*Quad(g1))/Sqr(1 + Sqr(TanBeta)) - (5*
-      Quad(g2))/Sqr(1 + Sqr(TanBeta)) - (0.36*Quad(g1)*Quad(TanBeta))/Sqr(1 + Sqr(
-      TanBeta)) - (5*Quad(g2)*Quad(TanBeta))/Sqr(1 + Sqr(TanBeta)) - (2.4*Sqr(g1)*
-      Sqr(g2)*Sqr(TanBeta))/Sqr(1 + Sqr(TanBeta))) + (0.4*TanBeta*Sqr(g1)*(1 + (
+      ))))))/Quad(3.141592653589793), 0))*UnitStep(-2 + LambdaLoopOrder) +
+      UnitStep(-1 + LambdaLoopOrder)*(0.006332573977646111*(-0.09*Quad(g1) - 0.3*
+      Sqr(g1)*Sqr(g2) - Quad(g2)*(0.75 - 0.16666666666666666*Sqr(Cos(2*ArcTan(
+      TanBeta))))) - 0.0010554289962743518*(2*Log(Sqr(M2Input)/Sqr(SCALE))*Quad(g2
+      )*(1 + (DeltaEFT*Sqr(v))/Sqr(M2Input)) + Log(Sqr(MuInput)/Sqr(SCALE))*(0.36*
+      Quad(g1) + Quad(g2))*(1 + (DeltaEFT*Sqr(v))/Sqr(MuInput)))*Sqr(Cos(2*ArcTan(
+      TanBeta))) + 0.006332573977646111*(0.5*Log(Sqr(MuInput)/Sqr(SCALE))*(1 + (
+      DeltaEFT*Sqr(v))/Sqr(MuInput))*(-2*(Sqr(g2)/(1 + Sqr(TanBeta)) + (0.6*Sqr(g1
+      )*Sqr(TanBeta))/(1 + Sqr(TanBeta)))*((0.6*Sqr(g1))/(1 + Sqr(TanBeta)) + (Sqr
+      (g2)*Sqr(TanBeta))/(1 + Sqr(TanBeta))) + 0.5*(0.6*Sqr(g1) + Sqr(g2))*((0.6*
+      Sqr(g1))/(1 + Sqr(TanBeta)) + (3*Sqr(g2))/(1 + Sqr(TanBeta)) + (0.6*Sqr(g1)*
+      Sqr(TanBeta))/(1 + Sqr(TanBeta)) + (3*Sqr(g2)*Sqr(TanBeta))/(1 + Sqr(TanBeta
+      )))*Sqr(Cos(2*ArcTan(TanBeta))) - (0.36*Quad(g1))/Sqr(1 + Sqr(TanBeta)) - (5
+      *Quad(g2))/Sqr(1 + Sqr(TanBeta)) - (0.36*Quad(g1)*Quad(TanBeta))/Sqr(1 + Sqr
+      (TanBeta)) - (5*Quad(g2)*Quad(TanBeta))/Sqr(1 + Sqr(TanBeta)) - (2.4*Sqr(g1)
+      *Sqr(g2)*Sqr(TanBeta))/Sqr(1 + Sqr(TanBeta))) + (0.4*TanBeta*Sqr(g1)*(1 + (
       DeltaEFT*Sqr(v))/Min(Sqr(M1Input),Sqr(MuInput)))*(-2*((0.6*Sqr(g1))/(1 + Sqr
       (TanBeta)) + (0.6*Sqr(g1)*Sqr(TanBeta))/(1 + Sqr(TanBeta))) + 0.25*(0.6*Sqr(
       g1) + Sqr(g2))*Sqr(Cos(2*ArcTan(TanBeta))))*TCf0(M1Input/MuInput))/(1 + Sqr(
@@ -11010,7 +11078,9 @@ void HSSUSY_high_scale_constraint<Two_scale>::apply()
       (1 + (0.006332573977646111*(1 + Sqr(TanBeta))*(0.25*Log(Sqr(MuInput)/Sqr(
       SCALE)) + (0.125*(-1 + 2*Log(Sqr(mAInput)/Sqr(SCALE))))/(1 + Sqr(TanBeta)) +
       ((-1 + Log(Sqr(mAInput)/Sqr(SCALE)))*Sqr(TanBeta))/(1 + Sqr(TanBeta)))*Sqr(
-      Yu(2,2)))/Sqr(TanBeta) + 0.5*((-0.0031662869888230555*Sqr(AbInput - MuInput*
+      Yu(2,2)))/Sqr(TanBeta) + 0.5*((-0.0010554289962743518*Sqr(AtauInput -
+      MuInput*TanBeta)*Sqr(Ye(2,2))*TCF(5)(Sqrt(Abs(msl2(2,2)/mse2(2,2)))))/Sqrt(
+      Abs(mse2(2,2)*msl2(2,2))) - (0.0031662869888230555*Sqr(AbInput - MuInput*
       TanBeta)*Sqr(Yd(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msd2(2,2)))))/Sqrt(Abs(msd2(
       2,2)*msq2(2,2))) - (0.0031662869888230555*Sqr(AtInput - MuInput/TanBeta)*Sqr
       (Yu(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/Sqrt(Abs(msq2(2,2)*msu2(2,
@@ -11027,7 +11097,9 @@ void HSSUSY_high_scale_constraint<Two_scale>::apply()
       TanBeta))*(0.25*Log(Sqr(MuInput)/Sqr(SCALE)) + (0.125*(-1 + 2*Log(Sqr(
       mAInput)/Sqr(SCALE))))/(1 + Sqr(TanBeta)) + ((-1 + Log(Sqr(mAInput)/Sqr(
       SCALE)))*Sqr(TanBeta))/(1 + Sqr(TanBeta)))*Sqr(Yu(2,2)))/Sqr(TanBeta) + 0.5*
-      ((-0.0031662869888230555*Sqr(AbInput - MuInput*TanBeta)*Sqr(Yd(2,2))*TCF(5)(
+      ((-0.0010554289962743518*Sqr(AtauInput - MuInput*TanBeta)*Sqr(Ye(2,2))*TCF(5
+      )(Sqrt(Abs(msl2(2,2)/mse2(2,2)))))/Sqrt(Abs(mse2(2,2)*msl2(2,2))) - (
+      0.0031662869888230555*Sqr(AbInput - MuInput*TanBeta)*Sqr(Yd(2,2))*TCF(5)(
       Sqrt(Abs(msq2(2,2)/msd2(2,2)))))/Sqrt(Abs(msd2(2,2)*msq2(2,2))) - (
       0.0031662869888230555*Sqr(AtInput - MuInput/TanBeta)*Sqr(Yu(2,2))*TCF(5)(
       Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/Sqrt(Abs(msq2(2,2)*msu2(2,2)))) +
@@ -11045,29 +11117,33 @@ void HSSUSY_high_scale_constraint<Two_scale>::apply()
       0.006332573977646111*(1 + Sqr(TanBeta))*(0.25*Log(Sqr(MuInput)/Sqr(SCALE)) +
       (0.125*(-1 + 2*Log(Sqr(mAInput)/Sqr(SCALE))))/(1 + Sqr(TanBeta)) + ((-1 +
       Log(Sqr(mAInput)/Sqr(SCALE)))*Sqr(TanBeta))/(1 + Sqr(TanBeta)))*Sqr(Yu(2,2))
-      )/Sqr(TanBeta) + 0.5*((-0.0031662869888230555*Sqr(AbInput - MuInput*TanBeta)
-      *Sqr(Yd(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msd2(2,2)))))/Sqrt(Abs(msd2(2,2)*
-      msq2(2,2))) - (0.0031662869888230555*Sqr(AtInput - MuInput/TanBeta)*Sqr(Yu(2
-      ,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/Sqrt(Abs(msq2(2,2)*msu2(2,2))))
-      + 0.006332573977646111*(1 + Sqr(TanBeta))*Sqr(Yd(2,2))*(0.75*Log(Sqr(MuInput
-      )/Sqr(SCALE)) + (0.375*(-1 + 2*Log(Sqr(mAInput)/Sqr(SCALE)))*Sqr(TanBeta))/(
-      1 + Sqr(TanBeta)) + 0.5*TCF(6)(Sqrt(msd2(2,2))/MuInput) + TCF(6)(Sqrt(msq2(2
-      ,2))/MuInput)) + 0.008443431970194815*Sqr(g3)*(1 + Log(Sqr(M3Input)/Sqr(
-      SCALE)) + TCF(6)(Sqrt(msd2(2,2))/M3Input) + TCF(6)(Sqrt(msq2(2,2))/M3Input)
-      - ((AbInput - MuInput*TanBeta)*TCF(9)(Sqrt(msq2(2,2))/M3Input,Sqrt(msd2(2,2)
-      )/M3Input))/M3Input) + (0.006332573977646111*(1 + Sqr(TanBeta))*Sqr(Yu(2,2))
-      *(0.5*TCF(6)(Sqrt(msu2(2,2))/MuInput) + (0.5*(AtInput - MuInput/TanBeta)*
+      )/Sqr(TanBeta) + 0.5*((-0.0010554289962743518*Sqr(AtauInput - MuInput*
+      TanBeta)*Sqr(Ye(2,2))*TCF(5)(Sqrt(Abs(msl2(2,2)/mse2(2,2)))))/Sqrt(Abs(mse2(
+      2,2)*msl2(2,2))) - (0.0031662869888230555*Sqr(AbInput - MuInput*TanBeta)*Sqr
+      (Yd(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msd2(2,2)))))/Sqrt(Abs(msd2(2,2)*msq2(2,
+      2))) - (0.0031662869888230555*Sqr(AtInput - MuInput/TanBeta)*Sqr(Yu(2,2))*
+      TCF(5)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/Sqrt(Abs(msq2(2,2)*msu2(2,2)))) +
+      0.006332573977646111*(1 + Sqr(TanBeta))*Sqr(Yd(2,2))*(0.75*Log(Sqr(MuInput)/
+      Sqr(SCALE)) + (0.375*(-1 + 2*Log(Sqr(mAInput)/Sqr(SCALE)))*Sqr(TanBeta))/(1
+      + Sqr(TanBeta)) + 0.5*TCF(6)(Sqrt(msd2(2,2))/MuInput) + TCF(6)(Sqrt(msq2(2,2
+      ))/MuInput)) + 0.008443431970194815*Sqr(g3)*(1 + Log(Sqr(M3Input)/Sqr(SCALE)
+      ) + TCF(6)(Sqrt(msd2(2,2))/M3Input) + TCF(6)(Sqrt(msq2(2,2))/M3Input) - ((
+      AbInput - MuInput*TanBeta)*TCF(9)(Sqrt(msq2(2,2))/M3Input,Sqrt(msd2(2,2))/
+      M3Input))/M3Input) + (0.006332573977646111*(1 + Sqr(TanBeta))*Sqr(Yu(2,2))*(
+      0.5*TCF(6)(Sqrt(msu2(2,2))/MuInput) + (0.5*(AtInput - MuInput/TanBeta)*
       TanBeta*TCF(9)(Sqrt(msq2(2,2))/MuInput,Sqrt(msu2(2,2))/MuInput))/MuInput))/
       Sqr(TanBeta))))/Sqr(1 + (0.006332573977646111*(1 + Sqr(TanBeta))*(0.25*Log(
       Sqr(MuInput)/Sqr(SCALE)) + (0.125*(-1 + 2*Log(Sqr(mAInput)/Sqr(SCALE))))/(1
       + Sqr(TanBeta)) + ((-1 + Log(Sqr(mAInput)/Sqr(SCALE)))*Sqr(TanBeta))/(1 +
-      Sqr(TanBeta)))*Sqr(Yu(2,2)))/Sqr(TanBeta) + 0.5*((-0.0031662869888230555*Sqr
-      (AbInput - MuInput*TanBeta)*Sqr(Yd(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msd2(2,2)
-      ))))/Sqrt(Abs(msd2(2,2)*msq2(2,2))) - (0.0031662869888230555*Sqr(AtInput -
-      MuInput/TanBeta)*Sqr(Yu(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/Sqrt(
-      Abs(msq2(2,2)*msu2(2,2)))) + 0.006332573977646111*(1 + Sqr(TanBeta))*Sqr(Yd(
-      2,2))*(0.75*Log(Sqr(MuInput)/Sqr(SCALE)) + (0.375*(-1 + 2*Log(Sqr(mAInput)/
-      Sqr(SCALE)))*Sqr(TanBeta))/(1 + Sqr(TanBeta)) + 0.5*TCF(6)(Sqrt(msd2(2,2))/
+      Sqr(TanBeta)))*Sqr(Yu(2,2)))/Sqr(TanBeta) + 0.5*((-0.0010554289962743518*Sqr
+      (AtauInput - MuInput*TanBeta)*Sqr(Ye(2,2))*TCF(5)(Sqrt(Abs(msl2(2,2)/mse2(2,
+      2)))))/Sqrt(Abs(mse2(2,2)*msl2(2,2))) - (0.0031662869888230555*Sqr(AbInput -
+      MuInput*TanBeta)*Sqr(Yd(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msd2(2,2)))))/Sqrt(
+      Abs(msd2(2,2)*msq2(2,2))) - (0.0031662869888230555*Sqr(AtInput - MuInput/
+      TanBeta)*Sqr(Yu(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/Sqrt(Abs(msq2(
+      2,2)*msu2(2,2)))) + 0.006332573977646111*(1 + Sqr(TanBeta))*Sqr(Yd(2,2))*(
+      0.75*Log(Sqr(MuInput)/Sqr(SCALE)) + (0.375*(-1 + 2*Log(Sqr(mAInput)/Sqr(
+      SCALE)))*Sqr(TanBeta))/(1 + Sqr(TanBeta)) + 0.5*TCF(6)(Sqrt(msd2(2,2))/
       MuInput) + TCF(6)(Sqrt(msq2(2,2))/MuInput)) + 0.008443431970194815*Sqr(g3)*(
       1 + Log(Sqr(M3Input)/Sqr(SCALE)) + TCF(6)(Sqrt(msd2(2,2))/M3Input) + TCF(6)(
       Sqrt(msq2(2,2))/M3Input) - ((AbInput - MuInput*TanBeta)*TCF(9)(Sqrt(msq2(2,2
@@ -11081,13 +11157,15 @@ void HSSUSY_high_scale_constraint<Two_scale>::apply()
       )))*Quad(1 + (0.006332573977646111*(1 + Sqr(TanBeta))*(0.25*Log(Sqr(MuInput)
       /Sqr(SCALE)) + (0.125*(-1 + 2*Log(Sqr(mAInput)/Sqr(SCALE))))/(1 + Sqr(
       TanBeta)) + ((-1 + Log(Sqr(mAInput)/Sqr(SCALE)))*Sqr(TanBeta))/(1 + Sqr(
-      TanBeta)))*Sqr(Yu(2,2)))/Sqr(TanBeta) + 0.5*((-0.0031662869888230555*Sqr(
-      AbInput - MuInput*TanBeta)*Sqr(Yd(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msd2(2,2))
-      )))/Sqrt(Abs(msd2(2,2)*msq2(2,2))) - (0.0031662869888230555*Sqr(AtInput -
-      MuInput/TanBeta)*Sqr(Yu(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/Sqrt(
-      Abs(msq2(2,2)*msu2(2,2)))) + 0.006332573977646111*(1 + Sqr(TanBeta))*Sqr(Yd(
-      2,2))*(0.75*Log(Sqr(MuInput)/Sqr(SCALE)) + (0.375*(-1 + 2*Log(Sqr(mAInput)/
-      Sqr(SCALE)))*Sqr(TanBeta))/(1 + Sqr(TanBeta)) + 0.5*TCF(6)(Sqrt(msd2(2,2))/
+      TanBeta)))*Sqr(Yu(2,2)))/Sqr(TanBeta) + 0.5*((-0.0010554289962743518*Sqr(
+      AtauInput - MuInput*TanBeta)*Sqr(Ye(2,2))*TCF(5)(Sqrt(Abs(msl2(2,2)/mse2(2,2
+      )))))/Sqrt(Abs(mse2(2,2)*msl2(2,2))) - (0.0031662869888230555*Sqr(AbInput -
+      MuInput*TanBeta)*Sqr(Yd(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msd2(2,2)))))/Sqrt(
+      Abs(msd2(2,2)*msq2(2,2))) - (0.0031662869888230555*Sqr(AtInput - MuInput/
+      TanBeta)*Sqr(Yu(2,2))*TCF(5)(Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/Sqrt(Abs(msq2(
+      2,2)*msu2(2,2)))) + 0.006332573977646111*(1 + Sqr(TanBeta))*Sqr(Yd(2,2))*(
+      0.75*Log(Sqr(MuInput)/Sqr(SCALE)) + (0.375*(-1 + 2*Log(Sqr(mAInput)/Sqr(
+      SCALE)))*Sqr(TanBeta))/(1 + Sqr(TanBeta)) + 0.5*TCF(6)(Sqrt(msd2(2,2))/
       MuInput) + TCF(6)(Sqrt(msq2(2,2))/MuInput)) + 0.008443431970194815*Sqr(g3)*(
       1 + Log(Sqr(M3Input)/Sqr(SCALE)) + TCF(6)(Sqrt(msd2(2,2))/M3Input) + TCF(6)(
       Sqrt(msq2(2,2))/M3Input) - ((AbInput - MuInput*TanBeta)*TCF(9)(Sqrt(msq2(2,2
@@ -11101,7 +11179,9 @@ void HSSUSY_high_scale_constraint<Two_scale>::apply()
       Sqr(TanBeta))*(0.25*Log(Sqr(MuInput)/Sqr(SCALE)) + (0.125*(-1 + 2*Log(Sqr(
       mAInput)/Sqr(SCALE))))/(1 + Sqr(TanBeta)) + ((-1 + Log(Sqr(mAInput)/Sqr(
       SCALE)))*Sqr(TanBeta))/(1 + Sqr(TanBeta)))*Sqr(Yu(2,2)))/Sqr(TanBeta) + 0.5*
-      ((-0.0031662869888230555*Sqr(AbInput - MuInput*TanBeta)*Sqr(Yd(2,2))*TCF(5)(
+      ((-0.0010554289962743518*Sqr(AtauInput - MuInput*TanBeta)*Sqr(Ye(2,2))*TCF(5
+      )(Sqrt(Abs(msl2(2,2)/mse2(2,2)))))/Sqrt(Abs(mse2(2,2)*msl2(2,2))) - (
+      0.0031662869888230555*Sqr(AbInput - MuInput*TanBeta)*Sqr(Yd(2,2))*TCF(5)(
       Sqrt(Abs(msq2(2,2)/msd2(2,2)))))/Sqrt(Abs(msd2(2,2)*msq2(2,2))) - (
       0.0031662869888230555*Sqr(AtInput - MuInput/TanBeta)*Sqr(Yu(2,2))*TCF(5)(
       Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/Sqrt(Abs(msq2(2,2)*msu2(2,2)))) +
@@ -11120,7 +11200,9 @@ void HSSUSY_high_scale_constraint<Two_scale>::apply()
       Sqr(TanBeta))*(0.25*Log(Sqr(MuInput)/Sqr(SCALE)) + (0.125*(-1 + 2*Log(Sqr(
       mAInput)/Sqr(SCALE))))/(1 + Sqr(TanBeta)) + ((-1 + Log(Sqr(mAInput)/Sqr(
       SCALE)))*Sqr(TanBeta))/(1 + Sqr(TanBeta)))*Sqr(Yu(2,2)))/Sqr(TanBeta) + 0.5*
-      ((-0.0031662869888230555*Sqr(AbInput - MuInput*TanBeta)*Sqr(Yd(2,2))*TCF(5)(
+      ((-0.0010554289962743518*Sqr(AtauInput - MuInput*TanBeta)*Sqr(Ye(2,2))*TCF(5
+      )(Sqrt(Abs(msl2(2,2)/mse2(2,2)))))/Sqrt(Abs(mse2(2,2)*msl2(2,2))) - (
+      0.0031662869888230555*Sqr(AbInput - MuInput*TanBeta)*Sqr(Yd(2,2))*TCF(5)(
       Sqrt(Abs(msq2(2,2)/msd2(2,2)))))/Sqrt(Abs(msd2(2,2)*msq2(2,2))) - (
       0.0031662869888230555*Sqr(AtInput - MuInput/TanBeta)*Sqr(Yu(2,2))*TCF(5)(
       Sqrt(Abs(msq2(2,2)/msu2(2,2)))))/Sqrt(Abs(msq2(2,2)*msu2(2,2)))) +

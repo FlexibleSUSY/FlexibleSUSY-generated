@@ -16,17 +16,21 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 16:27:19
+// File generated at Sun 4 Aug 2019 19:44:47
 
 /**
  * @file HGTHDMIIMSSMBC_a_muon.hpp
  *
- * This file was generated at Tue 22 Jan 2019 16:27:19 with FlexibleSUSY
- * 2.3.0 and SARAH 4.14.1 .
+ * This file was generated at Sun 4 Aug 2019 19:44:47 with FlexibleSUSY
+ * 2.4.0 and SARAH 4.14.2 .
  */
 
 #ifndef HGTHDMIIMSSMBC_A_MUON_H
 #define HGTHDMIIMSSMBC_A_MUON_H
+
+namespace softsusy {
+   class QedQcd;
+} // namespace softsusy
 
 namespace flexiblesusy {
 class HGTHDMIIMSSMBC_mass_eigenstates;
@@ -36,13 +40,13 @@ namespace HGTHDMIIMSSMBC_a_muon {
 * @fn calculate_a_muon
 * @brief Calculates \f$a_\mu = (g-2)_\mu/2\f$ of the muon.
 */
-double calculate_a_muon(const HGTHDMIIMSSMBC_mass_eigenstates& model);
+double calculate_a_muon(const HGTHDMIIMSSMBC_mass_eigenstates& model, const softsusy::QedQcd& qedqcd);
 
 /**
 * @fn calculate_a_muon_uncertainty
 * @brief Calculates \f$\Delta a_\mu\f$ of the muon.
 */
-double calculate_a_muon_uncertainty(const HGTHDMIIMSSMBC_mass_eigenstates& model);
+double calculate_a_muon_uncertainty(const HGTHDMIIMSSMBC_mass_eigenstates& model, const softsusy::QedQcd& qedqcd);
 } // namespace HGTHDMIIMSSMBC_a_muon
 } // namespace flexiblesusy
 

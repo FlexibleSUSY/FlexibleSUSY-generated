@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 15:17:38
+// File generated at Sun 4 Aug 2019 17:24:08
 
 #ifndef CE6SSM_SLHA_IO_H
 #define CE6SSM_SLHA_IO_H
@@ -380,15 +380,13 @@ void CE6SSM_slha_io::set_extra(
  * Stores the model (DR-bar) parameters, masses and mixing matrices of
  * all given models in the SLHA object.
  *
- * @todo Use generic lambda instead of Set_spectrum in C++14
- *
  * @param models model classes
  */
 template <class... Ts>
 void CE6SSM_slha_io::set_spectrum(const std::tuple<Ts...>& models)
 {
-   Set_spectrum<CE6SSM_slha_io> ss(this);
-   boost::fusion::for_each(models, ss);
+   boost::fusion::for_each(models,
+                           [this](auto model) { this->set_spectrum(model); });
 }
 
 /**

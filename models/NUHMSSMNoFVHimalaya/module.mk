@@ -23,12 +23,16 @@ NUHMSSMNoFVHimalaya_SUSY_BETAS_MK := \
 NUHMSSMNoFVHimalaya_SOFT_BETAS_MK := \
 		$(DIR)/soft_betas.mk
 
+NUHMSSMNoFVHimalaya_CXX_QFT_VERTICES_MK := \
+		$(DIR)/cxx_qft/vertices.mk
+
 NUHMSSMNoFVHimalaya_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
 NUHMSSMNoFVHimalaya_INCLUDE_MK := \
 		$(NUHMSSMNoFVHimalaya_SUSY_BETAS_MK) \
-		$(NUHMSSMNoFVHimalaya_SOFT_BETAS_MK)
+		$(NUHMSSMNoFVHimalaya_SOFT_BETAS_MK) \
+		$(NUHMSSMNoFVHimalaya_CXX_QFT_VERTICES_MK)
 
 NUHMSSMNoFVHimalaya_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.NUHMSSMNoFVHimalaya_generated \
@@ -47,6 +51,8 @@ NUHMSSMNoFVHimalaya_TARBALL := \
 LIBNUHMSSMNoFVHimalaya_SRC := \
 		$(DIR)/NUHMSSMNoFVHimalaya_a_muon.cpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_edm.cpp \
+		$(DIR)/NUHMSSMNoFVHimalaya_FFV_form_factors.cpp \
+		$(DIR)/NUHMSSMNoFVHimalaya_l_to_lgamma.cpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_effective_couplings.cpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_info.cpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_input_parameters.cpp \
@@ -76,6 +82,8 @@ LIBNUHMSSMNoFVHimalaya_HDR := \
 		$(DIR)/NUHMSSMNoFVHimalaya_a_muon.hpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_convergence_tester.hpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_edm.hpp \
+		$(DIR)/NUHMSSMNoFVHimalaya_FFV_form_factors.hpp \
+		$(DIR)/NUHMSSMNoFVHimalaya_l_to_lgamma.hpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_effective_couplings.hpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_ewsb_solver.hpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_ewsb_solver_interface.hpp \
@@ -121,6 +129,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(NUHMSSMNoFVHimalaya_SUSY_BETAS_MK)
 -include $(NUHMSSMNoFVHimalaya_SOFT_BETAS_MK)
+-include $(NUHMSSMNoFVHimalaya_CXX_QFT_VERTICES_MK)
 -include $(NUHMSSMNoFVHimalaya_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
@@ -131,6 +140,8 @@ ifeq ($(findstring doc-,$(MAKECMDGOALS)),)
 $(NUHMSSMNoFVHimalaya_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(NUHMSSMNoFVHimalaya_SOFT_BETAS_MK): run-metacode-$(MODNAME)
+		@$(CONVERT_DOS_PATHS) $@
+$(NUHMSSMNoFVHimalaya_CXX_QFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(NUHMSSMNoFVHimalaya_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
@@ -192,56 +203,56 @@ all-$(MODNAME): $(LIBNUHMSSMNoFVHimalaya) $(EXENUHMSSMNoFVHimalaya_EXE)
 
 ifneq ($(INSTALL_DIR),)
 install-src::
-		install -d $(NUHMSSMNoFVHimalaya_INSTALL_DIR)
-		install -d $(NUHMSSMNoFVHimalaya_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(LIBNUHMSSMNoFVHimalaya_SRC) $(NUHMSSMNoFVHimalaya_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBNUHMSSMNoFVHimalaya_HDR) $(NUHMSSMNoFVHimalaya_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBNUHMSSMNoFVHimalaya_CXXQFT_HDR) $(NUHMSSMNoFVHimalaya_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(EXENUHMSSMNoFVHimalaya_SRC) $(NUHMSSMNoFVHimalaya_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLNUHMSSMNoFVHimalaya_SRC) $(NUHMSSMNoFVHimalaya_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLNUHMSSMNoFVHimalaya_MMA) $(NUHMSSMNoFVHimalaya_INSTALL_DIR)
-		$(INSTALL_STRIPPED) $(NUHMSSMNoFVHimalaya_MK) $(NUHMSSMNoFVHimalaya_INSTALL_DIR) -m u=rw,g=r,o=r
-		install -m u=rw,g=r,o=r $(NUHMSSMNoFVHimalaya_INCLUDE_MK) $(NUHMSSMNoFVHimalaya_INSTALL_DIR)
+		$(Q)install -d $(NUHMSSMNoFVHimalaya_INSTALL_DIR)
+		$(Q)install -d $(NUHMSSMNoFVHimalaya_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBNUHMSSMNoFVHimalaya_SRC) $(NUHMSSMNoFVHimalaya_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBNUHMSSMNoFVHimalaya_HDR) $(NUHMSSMNoFVHimalaya_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBNUHMSSMNoFVHimalaya_CXXQFT_HDR) $(NUHMSSMNoFVHimalaya_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(EXENUHMSSMNoFVHimalaya_SRC) $(NUHMSSMNoFVHimalaya_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLNUHMSSMNoFVHimalaya_SRC) $(NUHMSSMNoFVHimalaya_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLNUHMSSMNoFVHimalaya_MMA) $(NUHMSSMNoFVHimalaya_INSTALL_DIR)
+		$(Q)$(INSTALL_STRIPPED) $(NUHMSSMNoFVHimalaya_MK) $(NUHMSSMNoFVHimalaya_INSTALL_DIR) -m u=rw,g=r,o=r
+		$(Q)install -m u=rw,g=r,o=r $(NUHMSSMNoFVHimalaya_INCLUDE_MK) $(NUHMSSMNoFVHimalaya_INSTALL_DIR)
 ifneq ($(NUHMSSMNoFVHimalaya_SLHA_INPUT),)
-		install -m u=rw,g=r,o=r $(NUHMSSMNoFVHimalaya_SLHA_INPUT) $(NUHMSSMNoFVHimalaya_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(NUHMSSMNoFVHimalaya_SLHA_INPUT) $(NUHMSSMNoFVHimalaya_INSTALL_DIR)
 endif
-		install -m u=rw,g=r,o=r $(NUHMSSMNoFVHimalaya_REFERENCES) $(NUHMSSMNoFVHimalaya_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(NUHMSSMNoFVHimalaya_GNUPLOT) $(NUHMSSMNoFVHimalaya_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(NUHMSSMNoFVHimalaya_REFERENCES) $(NUHMSSMNoFVHimalaya_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(NUHMSSMNoFVHimalaya_GNUPLOT) $(NUHMSSMNoFVHimalaya_INSTALL_DIR)
 endif
 
 clean-$(MODNAME)-dep:
-		-rm -f $(LIBNUHMSSMNoFVHimalaya_DEP)
-		-rm -f $(EXENUHMSSMNoFVHimalaya_DEP)
-		-rm -f $(LLNUHMSSMNoFVHimalaya_DEP)
+		$(Q)-rm -f $(LIBNUHMSSMNoFVHimalaya_DEP)
+		$(Q)-rm -f $(EXENUHMSSMNoFVHimalaya_DEP)
+		$(Q)-rm -f $(LLNUHMSSMNoFVHimalaya_DEP)
 
 clean-$(MODNAME)-lib:
-		-rm -f $(LIBNUHMSSMNoFVHimalaya)
-		-rm -f $(LLNUHMSSMNoFVHimalaya_LIB)
+		$(Q)-rm -f $(LIBNUHMSSMNoFVHimalaya)
+		$(Q)-rm -f $(LLNUHMSSMNoFVHimalaya_LIB)
 
 clean-$(MODNAME)-obj:
-		-rm -f $(LIBNUHMSSMNoFVHimalaya_OBJ)
-		-rm -f $(EXENUHMSSMNoFVHimalaya_OBJ)
-		-rm -f $(LLNUHMSSMNoFVHimalaya_OBJ)
+		$(Q)-rm -f $(LIBNUHMSSMNoFVHimalaya_OBJ)
+		$(Q)-rm -f $(EXENUHMSSMNoFVHimalaya_OBJ)
+		$(Q)-rm -f $(LLNUHMSSMNoFVHimalaya_OBJ)
 
 # BEGIN: NOT EXPORTED ##########################################
 clean-$(MODNAME)-src:
-		-rm -f $(LIBNUHMSSMNoFVHimalaya_SRC)
-		-rm -f $(LIBNUHMSSMNoFVHimalaya_HDR)
-		-rm -f $(LIBNUHMSSMNoFVHimalaya_CXXQFT_HDR)
-		-rm -f $(EXENUHMSSMNoFVHimalaya_SRC)
-		-rm -f $(LLNUHMSSMNoFVHimalaya_SRC)
-		-rm -f $(LLNUHMSSMNoFVHimalaya_MMA)
-		-rm -f $(METACODE_STAMP_NUHMSSMNoFVHimalaya)
-		-rm -f $(NUHMSSMNoFVHimalaya_INCLUDE_MK)
-		-rm -f $(NUHMSSMNoFVHimalaya_SLHA_INPUT)
-		-rm -f $(NUHMSSMNoFVHimalaya_REFERENCES)
-		-rm -f $(NUHMSSMNoFVHimalaya_GNUPLOT)
+		$(Q)-rm -f $(LIBNUHMSSMNoFVHimalaya_SRC)
+		$(Q)-rm -f $(LIBNUHMSSMNoFVHimalaya_HDR)
+		$(Q)-rm -f $(LIBNUHMSSMNoFVHimalaya_CXXQFT_HDR)
+		$(Q)-rm -f $(EXENUHMSSMNoFVHimalaya_SRC)
+		$(Q)-rm -f $(LLNUHMSSMNoFVHimalaya_SRC)
+		$(Q)-rm -f $(LLNUHMSSMNoFVHimalaya_MMA)
+		$(Q)-rm -f $(METACODE_STAMP_NUHMSSMNoFVHimalaya)
+		$(Q)-rm -f $(NUHMSSMNoFVHimalaya_INCLUDE_MK)
+		$(Q)-rm -f $(NUHMSSMNoFVHimalaya_SLHA_INPUT)
+		$(Q)-rm -f $(NUHMSSMNoFVHimalaya_REFERENCES)
+		$(Q)-rm -f $(NUHMSSMNoFVHimalaya_GNUPLOT)
 
 distclean-$(MODNAME): clean-$(MODNAME)-src
 # END:   NOT EXPORTED ##########################################
 
 clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-lib clean-$(MODNAME)-obj
-		-rm -f $(EXENUHMSSMNoFVHimalaya_EXE)
+		$(Q)-rm -f $(EXENUHMSSMNoFVHimalaya_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
 		@true
@@ -255,7 +266,7 @@ clean::         clean-$(MODNAME)
 distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
-		tar -czf $(NUHMSSMNoFVHimalaya_TARBALL) \
+		$(Q)tar -czf $(NUHMSSMNoFVHimalaya_TARBALL) \
 		$(LIBNUHMSSMNoFVHimalaya_SRC) $(LIBNUHMSSMNoFVHimalaya_HDR) $(LIBNUHMSSMNoFVHimalaya_CXXQFT_HDR) \
 		$(EXENUHMSSMNoFVHimalaya_SRC) \
 		$(LLNUHMSSMNoFVHimalaya_SRC) $(LLNUHMSSMNoFVHimalaya_MMA) \
@@ -272,7 +283,8 @@ run-metacode-$(MODNAME): $(METACODE_STAMP_NUHMSSMNoFVHimalaya)
 
 ifeq ($(ENABLE_META),yes)
 $(METACODE_STAMP_NUHMSSMNoFVHimalaya): $(DIR)/start.m $(DIR)/FlexibleSUSY.m $(META_SRC) $(TEMPLATES) $(SARAH_MODEL_FILES_NUHMSSMNoFVHimalaya)
-		"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
+		@$(MSG)
+		$(Q)"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
 		@touch "$(METACODE_STAMP_NUHMSSMNoFVHimalaya)"
 		@echo "Note: to regenerate NUHMSSMNoFVHimalaya source files," \
 		      "please remove the file "
@@ -295,13 +307,16 @@ $(LLNUHMSSMNoFVHimalaya_OBJ) $(LLNUHMSSMNoFVHimalaya_LIB): \
 	CPPFLAGS += $(LLFLAGS)
 
 $(LIBNUHMSSMNoFVHimalaya): $(LIBNUHMSSMNoFVHimalaya_OBJ)
-		$(MODULE_MAKE_LIB_CMD) $@ $^
+		@$(MSG)
+		$(Q)$(MODULE_MAKE_LIB_CMD) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBNUHMSSMNoFVHimalaya) $(MODNUHMSSMNoFVHimalaya_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+		@$(MSG)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
 $(LLNUHMSSMNoFVHimalaya_LIB): $(LLNUHMSSMNoFVHimalaya_OBJ) $(LIBNUHMSSMNoFVHimalaya) $(MODNUHMSSMNoFVHimalaya_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
+		@$(MSG)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
 
 ALLDEP += $(LIBNUHMSSMNoFVHimalaya_DEP) $(EXENUHMSSMNoFVHimalaya_DEP)
 ALLSRC += $(LIBNUHMSSMNoFVHimalaya_SRC) $(EXENUHMSSMNoFVHimalaya_SRC)

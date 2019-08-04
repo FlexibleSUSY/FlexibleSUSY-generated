@@ -23,12 +23,16 @@ MSSMatMGUT_SUSY_BETAS_MK := \
 MSSMatMGUT_SOFT_BETAS_MK := \
 		$(DIR)/soft_betas.mk
 
+MSSMatMGUT_CXX_QFT_VERTICES_MK := \
+		$(DIR)/cxx_qft/vertices.mk
+
 MSSMatMGUT_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
 MSSMatMGUT_INCLUDE_MK := \
 		$(MSSMatMGUT_SUSY_BETAS_MK) \
-		$(MSSMatMGUT_SOFT_BETAS_MK)
+		$(MSSMatMGUT_SOFT_BETAS_MK) \
+		$(MSSMatMGUT_CXX_QFT_VERTICES_MK)
 
 MSSMatMGUT_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.MSSMatMGUT_generated \
@@ -47,6 +51,8 @@ MSSMatMGUT_TARBALL := \
 LIBMSSMatMGUT_SRC := \
 		$(DIR)/MSSMatMGUT_a_muon.cpp \
 		$(DIR)/MSSMatMGUT_edm.cpp \
+		$(DIR)/MSSMatMGUT_FFV_form_factors.cpp \
+		$(DIR)/MSSMatMGUT_l_to_lgamma.cpp \
 		$(DIR)/MSSMatMGUT_effective_couplings.cpp \
 		$(DIR)/MSSMatMGUT_info.cpp \
 		$(DIR)/MSSMatMGUT_input_parameters.cpp \
@@ -76,6 +82,8 @@ LIBMSSMatMGUT_HDR := \
 		$(DIR)/MSSMatMGUT_a_muon.hpp \
 		$(DIR)/MSSMatMGUT_convergence_tester.hpp \
 		$(DIR)/MSSMatMGUT_edm.hpp \
+		$(DIR)/MSSMatMGUT_FFV_form_factors.hpp \
+		$(DIR)/MSSMatMGUT_l_to_lgamma.hpp \
 		$(DIR)/MSSMatMGUT_effective_couplings.hpp \
 		$(DIR)/MSSMatMGUT_ewsb_solver.hpp \
 		$(DIR)/MSSMatMGUT_ewsb_solver_interface.hpp \
@@ -121,6 +129,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(MSSMatMGUT_SUSY_BETAS_MK)
 -include $(MSSMatMGUT_SOFT_BETAS_MK)
+-include $(MSSMatMGUT_CXX_QFT_VERTICES_MK)
 -include $(MSSMatMGUT_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
@@ -131,6 +140,8 @@ ifeq ($(findstring doc-,$(MAKECMDGOALS)),)
 $(MSSMatMGUT_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(MSSMatMGUT_SOFT_BETAS_MK): run-metacode-$(MODNAME)
+		@$(CONVERT_DOS_PATHS) $@
+$(MSSMatMGUT_CXX_QFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(MSSMatMGUT_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
@@ -192,56 +203,56 @@ all-$(MODNAME): $(LIBMSSMatMGUT) $(EXEMSSMatMGUT_EXE)
 
 ifneq ($(INSTALL_DIR),)
 install-src::
-		install -d $(MSSMatMGUT_INSTALL_DIR)
-		install -d $(MSSMatMGUT_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(LIBMSSMatMGUT_SRC) $(MSSMatMGUT_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBMSSMatMGUT_HDR) $(MSSMatMGUT_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LIBMSSMatMGUT_CXXQFT_HDR) $(MSSMatMGUT_INSTALL_CXXQFT_DIR)
-		install -m u=rw,g=r,o=r $(EXEMSSMatMGUT_SRC) $(MSSMatMGUT_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLMSSMatMGUT_SRC) $(MSSMatMGUT_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(LLMSSMatMGUT_MMA) $(MSSMatMGUT_INSTALL_DIR)
-		$(INSTALL_STRIPPED) $(MSSMatMGUT_MK) $(MSSMatMGUT_INSTALL_DIR) -m u=rw,g=r,o=r
-		install -m u=rw,g=r,o=r $(MSSMatMGUT_INCLUDE_MK) $(MSSMatMGUT_INSTALL_DIR)
+		$(Q)install -d $(MSSMatMGUT_INSTALL_DIR)
+		$(Q)install -d $(MSSMatMGUT_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBMSSMatMGUT_SRC) $(MSSMatMGUT_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBMSSMatMGUT_HDR) $(MSSMatMGUT_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBMSSMatMGUT_CXXQFT_HDR) $(MSSMatMGUT_INSTALL_CXXQFT_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(EXEMSSMatMGUT_SRC) $(MSSMatMGUT_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLMSSMatMGUT_SRC) $(MSSMatMGUT_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LLMSSMatMGUT_MMA) $(MSSMatMGUT_INSTALL_DIR)
+		$(Q)$(INSTALL_STRIPPED) $(MSSMatMGUT_MK) $(MSSMatMGUT_INSTALL_DIR) -m u=rw,g=r,o=r
+		$(Q)install -m u=rw,g=r,o=r $(MSSMatMGUT_INCLUDE_MK) $(MSSMatMGUT_INSTALL_DIR)
 ifneq ($(MSSMatMGUT_SLHA_INPUT),)
-		install -m u=rw,g=r,o=r $(MSSMatMGUT_SLHA_INPUT) $(MSSMatMGUT_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(MSSMatMGUT_SLHA_INPUT) $(MSSMatMGUT_INSTALL_DIR)
 endif
-		install -m u=rw,g=r,o=r $(MSSMatMGUT_REFERENCES) $(MSSMatMGUT_INSTALL_DIR)
-		install -m u=rw,g=r,o=r $(MSSMatMGUT_GNUPLOT) $(MSSMatMGUT_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(MSSMatMGUT_REFERENCES) $(MSSMatMGUT_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(MSSMatMGUT_GNUPLOT) $(MSSMatMGUT_INSTALL_DIR)
 endif
 
 clean-$(MODNAME)-dep:
-		-rm -f $(LIBMSSMatMGUT_DEP)
-		-rm -f $(EXEMSSMatMGUT_DEP)
-		-rm -f $(LLMSSMatMGUT_DEP)
+		$(Q)-rm -f $(LIBMSSMatMGUT_DEP)
+		$(Q)-rm -f $(EXEMSSMatMGUT_DEP)
+		$(Q)-rm -f $(LLMSSMatMGUT_DEP)
 
 clean-$(MODNAME)-lib:
-		-rm -f $(LIBMSSMatMGUT)
-		-rm -f $(LLMSSMatMGUT_LIB)
+		$(Q)-rm -f $(LIBMSSMatMGUT)
+		$(Q)-rm -f $(LLMSSMatMGUT_LIB)
 
 clean-$(MODNAME)-obj:
-		-rm -f $(LIBMSSMatMGUT_OBJ)
-		-rm -f $(EXEMSSMatMGUT_OBJ)
-		-rm -f $(LLMSSMatMGUT_OBJ)
+		$(Q)-rm -f $(LIBMSSMatMGUT_OBJ)
+		$(Q)-rm -f $(EXEMSSMatMGUT_OBJ)
+		$(Q)-rm -f $(LLMSSMatMGUT_OBJ)
 
 # BEGIN: NOT EXPORTED ##########################################
 clean-$(MODNAME)-src:
-		-rm -f $(LIBMSSMatMGUT_SRC)
-		-rm -f $(LIBMSSMatMGUT_HDR)
-		-rm -f $(LIBMSSMatMGUT_CXXQFT_HDR)
-		-rm -f $(EXEMSSMatMGUT_SRC)
-		-rm -f $(LLMSSMatMGUT_SRC)
-		-rm -f $(LLMSSMatMGUT_MMA)
-		-rm -f $(METACODE_STAMP_MSSMatMGUT)
-		-rm -f $(MSSMatMGUT_INCLUDE_MK)
-		-rm -f $(MSSMatMGUT_SLHA_INPUT)
-		-rm -f $(MSSMatMGUT_REFERENCES)
-		-rm -f $(MSSMatMGUT_GNUPLOT)
+		$(Q)-rm -f $(LIBMSSMatMGUT_SRC)
+		$(Q)-rm -f $(LIBMSSMatMGUT_HDR)
+		$(Q)-rm -f $(LIBMSSMatMGUT_CXXQFT_HDR)
+		$(Q)-rm -f $(EXEMSSMatMGUT_SRC)
+		$(Q)-rm -f $(LLMSSMatMGUT_SRC)
+		$(Q)-rm -f $(LLMSSMatMGUT_MMA)
+		$(Q)-rm -f $(METACODE_STAMP_MSSMatMGUT)
+		$(Q)-rm -f $(MSSMatMGUT_INCLUDE_MK)
+		$(Q)-rm -f $(MSSMatMGUT_SLHA_INPUT)
+		$(Q)-rm -f $(MSSMatMGUT_REFERENCES)
+		$(Q)-rm -f $(MSSMatMGUT_GNUPLOT)
 
 distclean-$(MODNAME): clean-$(MODNAME)-src
 # END:   NOT EXPORTED ##########################################
 
 clean-$(MODNAME): clean-$(MODNAME)-dep clean-$(MODNAME)-lib clean-$(MODNAME)-obj
-		-rm -f $(EXEMSSMatMGUT_EXE)
+		$(Q)-rm -f $(EXEMSSMatMGUT_EXE)
 
 distclean-$(MODNAME): clean-$(MODNAME)
 		@true
@@ -255,7 +266,7 @@ clean::         clean-$(MODNAME)
 distclean::     distclean-$(MODNAME)
 
 pack-$(MODNAME)-src:
-		tar -czf $(MSSMatMGUT_TARBALL) \
+		$(Q)tar -czf $(MSSMatMGUT_TARBALL) \
 		$(LIBMSSMatMGUT_SRC) $(LIBMSSMatMGUT_HDR) $(LIBMSSMatMGUT_CXXQFT_HDR) \
 		$(EXEMSSMatMGUT_SRC) \
 		$(LLMSSMatMGUT_SRC) $(LLMSSMatMGUT_MMA) \
@@ -272,7 +283,8 @@ run-metacode-$(MODNAME): $(METACODE_STAMP_MSSMatMGUT)
 
 ifeq ($(ENABLE_META),yes)
 $(METACODE_STAMP_MSSMatMGUT): $(DIR)/start.m $(DIR)/FlexibleSUSY.m $(META_SRC) $(TEMPLATES) $(SARAH_MODEL_FILES_MSSMatMGUT)
-		"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
+		@$(MSG)
+		$(Q)"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
 		@touch "$(METACODE_STAMP_MSSMatMGUT)"
 		@echo "Note: to regenerate MSSMatMGUT source files," \
 		      "please remove the file "
@@ -295,13 +307,16 @@ $(LLMSSMatMGUT_OBJ) $(LLMSSMatMGUT_LIB): \
 	CPPFLAGS += $(LLFLAGS)
 
 $(LIBMSSMatMGUT): $(LIBMSSMatMGUT_OBJ)
-		$(MODULE_MAKE_LIB_CMD) $@ $^
+		@$(MSG)
+		$(Q)$(MODULE_MAKE_LIB_CMD) $@ $^
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBMSSMatMGUT) $(MODMSSMatMGUT_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+		@$(MSG)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
 
 $(LLMSSMatMGUT_LIB): $(LLMSSMatMGUT_OBJ) $(LIBMSSMatMGUT) $(MODMSSMatMGUT_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
-		$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(LAPACKLIBS) $(BLASLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
+		@$(MSG)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
 
 ALLDEP += $(LIBMSSMatMGUT_DEP) $(EXEMSSMatMGUT_DEP)
 ALLSRC += $(LIBMSSMatMGUT_SRC) $(EXEMSSMatMGUT_SRC)

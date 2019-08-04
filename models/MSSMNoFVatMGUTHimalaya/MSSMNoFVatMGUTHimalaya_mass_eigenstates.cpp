@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 13:26:53
+// File generated at Sun 4 Aug 2019 17:11:40
 
 /**
  * @file MSSMNoFVatMGUTHimalaya_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Tue 22 Jan 2019 13:26:53 with FlexibleSUSY
- * 2.3.0 (git commit: b5dda61ad35a8ffff74bde70f63e1c2b815e751a) and SARAH 4.14.1 .
+ * This file was generated at Sun 4 Aug 2019 17:11:40 with FlexibleSUSY
+ * 2.4.0 (git commit: 544c83a2e6b5f23da8d0b6ccdb06f1c91f75d6eb) and SARAH 4.14.2 .
  */
 
 #include "MSSMNoFVatMGUTHimalaya_mass_eigenstates.hpp"
@@ -15136,12 +15136,19 @@ void CLASSNAME::calculate_MFt_pole()
       qcd_3l = 0;
    }
 
+   double qcd_4l = 0.;
+
+   if (pole_mass_loop_order > 3 && TOP_POLE_QCD_CORRECTION > 2) {
+      const double currentScale = get_scale();
+      qcd_4l = 0;
+   }
+
    const double p = MFt;
    const double self_energy_1  = Re(self_energy_Ft_1loop_1_heavy(p));
    const double self_energy_PL = Re(self_energy_Ft_1loop_PL_heavy(p));
    const double self_energy_PR = Re(self_energy_Ft_1loop_PR_heavy(p));
    const auto M_loop = M_tree - self_energy_1 - M_tree * (self_energy_PL +
-      self_energy_PR) - M_tree * (qcd_1l + qcd_2l + qcd_3l);
+      self_energy_PR) - M_tree * (qcd_1l + qcd_2l + qcd_3l + qcd_4l);
 
    PHYSICAL(MFt) = calculate_singlet_mass(M_loop);
 }
@@ -15579,7 +15586,7 @@ void CLASSNAME::calculate_Mhh_pole()
       if (pole_mass_loop_order > 2)
          self_energy_3l = self_energy_hh_3loop();
    } catch (const flexiblesusy::Error& e) {
-      WARNING("3-loop Higgs mass calculation failed: " << e.what());
+      WARNING("3-loop Higgs mass calculation failed: " << e.what_detailed());
       problems.flag_bad_mass(MSSMNoFVatMGUTHimalaya_info::hh);
    }
 
@@ -15990,7 +15997,8 @@ double CLASSNAME::calculate_MFt_DRbar(double m_pole) const
    const double self_energy_PR = Re(self_energy_Ft_1loop_PR_heavy_rotated(p));
 
    const double currentScale = get_scale();
-   double qcd_1l = 0., qcd_2l = 0., qcd_3l = 0.;
+   double qcd_1l = 0., qcd_2l = 0., qcd_3l = 0., qcd_4l = 0.;
+   double atas_S_2l = 0., atas_LR_2l = 0., atat_S_2l = 0., atat_LR_2l = 0.;
 
    {
       double mst_1, mst_2, theta_t;
@@ -16028,8 +16036,9 @@ double CLASSNAME::calculate_MFt_DRbar(double m_pole) const
       qcd_2l = -q_2l + qcd_1l * qcd_1l;
    }
 
-   const double m_susy_drbar = m_pole + self_energy_1 + m_pole * (
-      self_energy_PL + self_energy_PR + qcd_1l + qcd_2l + qcd_3l);
+   const double m_susy_drbar = m_pole + self_energy_1 + atas_S_2l + atat_S_2l +
+      m_pole * (self_energy_PL + self_energy_PR + qcd_1l + qcd_2l + qcd_3l +
+      qcd_4l + atas_LR_2l + atat_LR_2l);
 
    return m_susy_drbar;
 }
@@ -16164,6 +16173,12 @@ double CLASSNAME::ThetaW() const
 {
 
    return ArcCos(Abs(ZZ(0,0)));
+}
+
+double CLASSNAME::VEV() const
+{
+
+   return Sqrt(Sqr(vd) + Sqr(vu));
 }
 
 

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 15:18:03
+// File generated at Sun 4 Aug 2019 17:24:40
 
 #include "CE6SSM_semi_analytic_low_scale_constraint.hpp"
 #include "CE6SSM_semi_analytic_model.hpp"
@@ -271,7 +271,7 @@ double CE6SSM_low_scale_constraint<Semi_analytic>::calculate_theta_w()
 
       MODEL->get_problems().unflag_no_sinThetaW_convergence();
    } catch (const Error& e) {
-      VERBOSE_MSG(e.what());
+      VERBOSE_MSG(e.what_detailed());
       MODEL->get_problems().flag_no_sinThetaW_convergence();
    }
 

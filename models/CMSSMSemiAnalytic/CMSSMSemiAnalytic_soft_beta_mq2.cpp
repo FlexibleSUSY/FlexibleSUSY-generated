@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 17:59:02
+// File generated at Sun 4 Aug 2019 20:03:53
 
 #include "CMSSMSemiAnalytic_soft_parameters.hpp"
 #include "wrappers.hpp"

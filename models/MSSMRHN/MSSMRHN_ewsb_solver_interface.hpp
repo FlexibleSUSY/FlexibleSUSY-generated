@@ -16,15 +16,15 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 17:52:20
+// File generated at Sun 4 Aug 2019 20:07:33
 
 /**
  * @file MSSMRHN_ewsb_solver_interface.hpp
  *
  * @brief contains interface for EWSB solver
  *
- * This file was generated at Tue 22 Jan 2019 17:52:20 with FlexibleSUSY
- * 2.3.0 (git commit: b5dda61ad35a8ffff74bde70f63e1c2b815e751a) and SARAH 4.14.1 .
+ * This file was generated at Sun 4 Aug 2019 20:07:33 with FlexibleSUSY
+ * 2.4.0 (git commit: 544c83a2e6b5f23da8d0b6ccdb06f1c91f75d6eb) and SARAH 4.14.2 .
  */
 
 #ifndef MSSMRHN_EWSB_SOLVER_INTERFACE_H

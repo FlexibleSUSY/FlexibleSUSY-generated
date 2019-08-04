@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Tue 22 Jan 2019 17:59:58
+// File generated at Sun 4 Aug 2019 20:05:35
 
 #ifndef CMSSMSemiAnalytic_SLHA_IO_H
 #define CMSSMSemiAnalytic_SLHA_IO_H
@@ -376,15 +376,13 @@ void CMSSMSemiAnalytic_slha_io::set_extra(
  * Stores the model (DR-bar) parameters, masses and mixing matrices of
  * all given models in the SLHA object.
  *
- * @todo Use generic lambda instead of Set_spectrum in C++14
- *
  * @param models model classes
  */
 template <class... Ts>
 void CMSSMSemiAnalytic_slha_io::set_spectrum(const std::tuple<Ts...>& models)
 {
-   Set_spectrum<CMSSMSemiAnalytic_slha_io> ss(this);
-   boost::fusion::for_each(models, ss);
+   boost::fusion::for_each(models,
+                           [this](auto model) { this->set_spectrum(model); });
 }
 
 /**
