@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 4 Aug 2019 20:07:15
+// File generated at Wed 16 Oct 2019 22:57:42
 
 /**
  * @file CMSSM_edm.hpp
  *
- * This file was generated at Sun 4 Aug 2019 20:07:15 with FlexibleSUSY
- * 2.4.0 and SARAH 4.14.2 .
+ * This file was generated at Wed 16 Oct 2019 22:57:42 with FlexibleSUSY
+ * 2.4.1 and SARAH 4.14.3 .
  */
 
 #ifndef CMSSM_EDM_H

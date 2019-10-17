@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 4 Aug 2019 20:05:50
+// File generated at Wed 16 Oct 2019 22:56:05
 
 #include "CMSSMSemiAnalytic_semi_analytic_low_scale_constraint.hpp"
 #include "CMSSMSemiAnalytic_semi_analytic_model.hpp"
@@ -355,8 +355,10 @@ double CMSSMSemiAnalytic_low_scale_constraint<Semi_analytic>::calculate_delta_al
    const double delta_alpha_s_1loop = delta_alpha_s + delta_alpha_s_SM;
    double delta_alpha_s_2loop = 0.;
    double delta_alpha_s_3loop = 0.;
+   double delta_alpha_s_4loop = 0.;
 
-   return delta_alpha_s_1loop + delta_alpha_s_2loop + delta_alpha_s_3loop;
+   return delta_alpha_s_1loop + delta_alpha_s_2loop + delta_alpha_s_3loop +
+      delta_alpha_s_4loop;
 
 }
 

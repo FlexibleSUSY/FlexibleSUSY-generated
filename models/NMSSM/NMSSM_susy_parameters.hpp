@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 4 Aug 2019 19:48:33
+// File generated at Wed 16 Oct 2019 22:20:17
 
 #ifndef NMSSM_susy_parameters_H
 #define NMSSM_susy_parameters_H

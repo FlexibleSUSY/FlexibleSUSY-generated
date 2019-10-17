@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 4 Aug 2019 17:23:20
+// File generated at Wed 16 Oct 2019 19:14:30
 
 #include "CNMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"

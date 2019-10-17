@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 4 Aug 2019 19:32:55
+// File generated at Wed 16 Oct 2019 21:52:03
 
 #ifndef E6SSM_susy_parameters_H
 #define E6SSM_susy_parameters_H

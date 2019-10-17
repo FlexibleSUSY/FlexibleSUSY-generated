@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 4 Aug 2019 19:41:55
+// File generated at Wed 16 Oct 2019 22:32:32
 
 #ifndef SMSSM_SLHA_IO_H
 #define SMSSM_SLHA_IO_H

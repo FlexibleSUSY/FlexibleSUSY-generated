@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 4 Aug 2019 19:43:13
+// File generated at Wed 16 Oct 2019 22:02:29
 
 /**
  * @file cxx_qft/E6SSM_npointfunctions.hpp
  *
- * This file was generated at Sun 4 Aug 2019 19:43:13 with FlexibleSUSY
- * 2.4.0 and SARAH 4.14.2 .
+ * This file was generated at Wed 16 Oct 2019 22:02:29 with FlexibleSUSY
+ * 2.4.1 and SARAH 4.14.3 .
  */
 
 #ifndef E6SSM_CXXQFT_NPOINTFUNCTIONS_H

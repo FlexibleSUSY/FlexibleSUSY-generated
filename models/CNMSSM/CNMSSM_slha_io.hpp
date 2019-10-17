@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 4 Aug 2019 17:42:16
+// File generated at Wed 16 Oct 2019 19:33:27
 
 #ifndef CNMSSM_SLHA_IO_H
 #define CNMSSM_SLHA_IO_H

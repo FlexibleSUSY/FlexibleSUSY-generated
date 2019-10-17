@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 4 Aug 2019 20:05:55
+// File generated at Wed 16 Oct 2019 22:56:08
 
 #include "CMSSMSemiAnalytic_semi_analytic_spectrum_generator.hpp"
 #include "CMSSMSemiAnalytic_input_parameters.hpp"

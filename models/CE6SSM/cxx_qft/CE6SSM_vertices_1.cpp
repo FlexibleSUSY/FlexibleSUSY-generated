@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 4 Aug 2019 17:25:04
+// File generated at Wed 16 Oct 2019 20:12:40
 
 /**
  * @file cxx_qft/CE6SSM_vertices.cpp
  *
- * This file was generated at Sun 4 Aug 2019 17:25:04 with FlexibleSUSY
- * 2.4.0 and SARAH 4.14.2 .
+ * This file was generated at Wed 16 Oct 2019 20:12:40 with FlexibleSUSY
+ * 2.4.1 and SARAH 4.14.3 .
  */
 
 #include "CE6SSM_context_base.hpp"

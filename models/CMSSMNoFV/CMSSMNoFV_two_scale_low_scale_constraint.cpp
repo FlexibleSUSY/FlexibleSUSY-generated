@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 4 Aug 2019 19:58:44
+// File generated at Wed 16 Oct 2019 22:47:19
 
 #include "CMSSMNoFV_two_scale_low_scale_constraint.hpp"
 #include "CMSSMNoFV_two_scale_model.hpp"
@@ -388,8 +388,10 @@ double CMSSMNoFV_low_scale_constraint<Two_scale>::calculate_delta_alpha_s(double
    const double delta_alpha_s_1loop = delta_alpha_s + delta_alpha_s_SM;
    double delta_alpha_s_2loop = 0.;
    double delta_alpha_s_3loop = 0.;
+   double delta_alpha_s_4loop = 0.;
 
-   return delta_alpha_s_1loop + delta_alpha_s_2loop + delta_alpha_s_3loop;
+   return delta_alpha_s_1loop + delta_alpha_s_2loop + delta_alpha_s_3loop +
+      delta_alpha_s_4loop;
 
 }
 

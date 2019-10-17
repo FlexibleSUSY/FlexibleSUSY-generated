@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 4 Aug 2019 20:05:49
+// File generated at Wed 16 Oct 2019 22:56:04
 
 #ifndef CMSSMSemiAnalytic_SEMI_ANALYTIC_SUSY_SCALE_CONSTRAINT_H
 #define CMSSMSemiAnalytic_SEMI_ANALYTIC_SUSY_SCALE_CONSTRAINT_H

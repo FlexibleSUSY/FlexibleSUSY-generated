@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 4 Aug 2019 20:03:17
+// File generated at Wed 16 Oct 2019 22:51:53
 
 #ifndef MSSMatMGUT_INFO_H
 #define MSSMatMGUT_INFO_H

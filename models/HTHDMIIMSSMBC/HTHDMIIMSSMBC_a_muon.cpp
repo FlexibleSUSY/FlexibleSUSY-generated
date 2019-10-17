@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 4 Aug 2019 18:59:47
+// File generated at Wed 16 Oct 2019 21:27:03
 
 /**
  * @file HTHDMIIMSSMBC_a_muon.cpp
  *
- * This file was generated at Sun 4 Aug 2019 18:59:47 with FlexibleSUSY
- * 2.4.0 and SARAH 4.14.2 .
+ * This file was generated at Wed 16 Oct 2019 21:27:03 with FlexibleSUSY
+ * 2.4.1 and SARAH 4.14.3 .
  */
 
 #include "HTHDMIIMSSMBC_a_muon.hpp"

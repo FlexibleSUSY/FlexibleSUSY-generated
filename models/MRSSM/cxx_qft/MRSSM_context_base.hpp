@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 4 Aug 2019 19:30:50
+// File generated at Wed 16 Oct 2019 21:46:44
 
 /**
  * @file cxx_qft/MRSSM_context_base.hpp
  *
- * This file was generated at Sun 4 Aug 2019 19:30:50 with FlexibleSUSY
- * 2.4.0 and SARAH 4.14.2 .
+ * This file was generated at Wed 16 Oct 2019 21:46:44 with FlexibleSUSY
+ * 2.4.1 and SARAH 4.14.3 .
  */
 
 #ifndef MRSSM_CXXQFT_CONTEXT_BASE_H

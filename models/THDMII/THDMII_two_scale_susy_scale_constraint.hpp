@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 4 Aug 2019 19:21:19
+// File generated at Wed 16 Oct 2019 21:28:47
 
 #ifndef THDMII_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
 #define THDMII_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H

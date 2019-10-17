@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 4 Aug 2019 19:01:48
+// File generated at Wed 16 Oct 2019 21:28:08
 
 /**
  * @file THDMIIMSSMBC_mass_eigenstates.hpp
@@ -25,8 +25,8 @@
  *        value problem using the two_scale solver by solving EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Sun 4 Aug 2019 19:01:48 with FlexibleSUSY
- * 2.4.0 (git commit: 544c83a2e6b5f23da8d0b6ccdb06f1c91f75d6eb) and SARAH 4.14.2 .
+ * This file was generated at Wed 16 Oct 2019 21:28:08 with FlexibleSUSY
+ * 2.4.1 (git commit: 3e3a10f4fde301d99a4732f29d14f4ac1c646945) and SARAH 4.14.3 .
  */
 
 #ifndef THDMIIMSSMBC_MASS_EIGENSTATES_H

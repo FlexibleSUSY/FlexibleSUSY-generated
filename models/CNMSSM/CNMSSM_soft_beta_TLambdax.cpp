@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 4 Aug 2019 17:23:50
+// File generated at Wed 16 Oct 2019 19:15:01
 
 #include "CNMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 4 Aug 2019 19:05:21
+// File generated at Wed 16 Oct 2019 21:36:15
 
 #ifndef SM_TWO_SCALE_SPECTRUM_GENERATOR_H
 #define SM_TWO_SCALE_SPECTRUM_GENERATOR_H

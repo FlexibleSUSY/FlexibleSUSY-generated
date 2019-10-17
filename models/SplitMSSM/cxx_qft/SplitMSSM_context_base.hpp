@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 4 Aug 2019 19:27:37
+// File generated at Wed 16 Oct 2019 21:55:32
 
 /**
  * @file cxx_qft/SplitMSSM_context_base.hpp
  *
- * This file was generated at Sun 4 Aug 2019 19:27:37 with FlexibleSUSY
- * 2.4.0 and SARAH 4.14.2 .
+ * This file was generated at Wed 16 Oct 2019 21:55:32 with FlexibleSUSY
+ * 2.4.1 and SARAH 4.14.3 .
  */
 
 #ifndef SplitMSSM_CXXQFT_CONTEXT_BASE_H

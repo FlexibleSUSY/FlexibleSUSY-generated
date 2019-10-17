@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 4 Aug 2019 19:51:38
+// File generated at Wed 16 Oct 2019 22:23:24
 
 #include "NMSSM_two_scale_spectrum_generator.hpp"
 #include "NMSSM_input_parameters.hpp"

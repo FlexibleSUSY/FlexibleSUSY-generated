@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 4 Aug 2019 19:05:20
+// File generated at Wed 16 Oct 2019 21:36:14
 
 #include "SM_two_scale_low_scale_constraint.hpp"
 #include "SM_two_scale_model.hpp"
@@ -32,7 +32,7 @@
 #include "raii.hpp"
 #include "root_finder.hpp"
 #include "threshold_loop_functions.hpp"
-#include "sm_threeloop_as.hpp"
+#include "sm_fourloop_as.hpp"
 
 
 #include <algorithm>
@@ -334,35 +334,53 @@ double SM_low_scale_constraint<Two_scale>::calculate_delta_alpha_s(double alphaS
    const double delta_alpha_s_1loop = delta_alpha_s + delta_alpha_s_SM;
    double delta_alpha_s_2loop = 0.;
    double delta_alpha_s_3loop = 0.;
+   double delta_alpha_s_4loop = 0.;
 
    if (model->get_thresholds() > 1 && model->get_threshold_corrections().alpha_s >
       1) {
-      sm_threeloop_as::Parameters pars;
+      sm_fourloop_as::Parameters pars;
       pars.as   = alphaS; // alpha_s(SM(5)) MS-bar
       pars.mt   = model->get_MFu(2);
       pars.Q    = model->get_scale();
 
-      const auto das_1L = sm_threeloop_as::delta_alpha_s_1loop_as(pars);
-      const auto das_2L = sm_threeloop_as::delta_alpha_s_2loop_as_as(pars);
+      const auto das_1L = sm_fourloop_as::delta_alpha_s_1loop_as(pars);
+      const auto das_2L = sm_fourloop_as::delta_alpha_s_2loop_as_as(pars);
 
-      delta_alpha_s_2loop = - das_2L + Sqr(das_1L);
+      delta_alpha_s_2loop = das_2L - Sqr(das_1L);
    }
 
    if (model->get_thresholds() > 2 && model->get_threshold_corrections().alpha_s >
       2) {
-      sm_threeloop_as::Parameters pars;
+      sm_fourloop_as::Parameters pars;
       pars.as   = alphaS; // alpha_s(SM(5)) MS-bar
       pars.mt   = model->get_MFu(2);
       pars.Q    = model->get_scale();
 
-      const auto das_1L = sm_threeloop_as::delta_alpha_s_1loop_as(pars);
-      const auto das_2L = sm_threeloop_as::delta_alpha_s_2loop_as_as(pars);
-      const auto das_3L = sm_threeloop_as::delta_alpha_s_3loop_as_as_as(pars);
+      const auto das_1L = sm_fourloop_as::delta_alpha_s_1loop_as(pars);
+      const auto das_2L = sm_fourloop_as::delta_alpha_s_2loop_as_as(pars);
+      const auto das_3L = sm_fourloop_as::delta_alpha_s_3loop_as_as_as(pars);
 
-      delta_alpha_s_3loop = - das_3L - Power3(das_1L) + 2. * das_1L * das_2L;
+      delta_alpha_s_3loop = das_3L + Power3(das_1L) - 2. * das_1L * das_2L;
    }
 
-   return delta_alpha_s_1loop + delta_alpha_s_2loop + delta_alpha_s_3loop;
+   if (model->get_thresholds() > 3 && model->get_threshold_corrections().alpha_s >
+      3) {
+      sm_fourloop_as::Parameters pars;
+      pars.as   = alphaS; // alpha_s(SM(5)) MS-bar
+      pars.mt   = model->get_MFu(2);
+      pars.Q    = model->get_scale();
+
+      const auto das_1L = sm_fourloop_as::delta_alpha_s_1loop_as(pars);
+      const auto das_2L = sm_fourloop_as::delta_alpha_s_2loop_as_as(pars);
+      const auto das_3L = sm_fourloop_as::delta_alpha_s_3loop_as_as_as(pars);
+      const auto das_4L = sm_fourloop_as::delta_alpha_s_4loop_as_as_as_as(pars);
+
+      delta_alpha_s_4loop = das_4L - 2. * das_1L * das_3L - Power2(das_2L) + 3. *
+         Power2(das_1L) * das_2L - Power4(das_1L);
+   }
+
+   return delta_alpha_s_1loop + delta_alpha_s_2loop + delta_alpha_s_3loop +
+      delta_alpha_s_4loop;
 
 }
 

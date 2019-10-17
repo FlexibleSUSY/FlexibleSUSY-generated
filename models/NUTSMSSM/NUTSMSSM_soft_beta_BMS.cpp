@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 4 Aug 2019 19:45:41
+// File generated at Wed 16 Oct 2019 22:23:06
 
 #include "NUTSMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -106,10 +106,10 @@ double NUTSMSSM_soft_parameters::calc_beta_BMS_2_loop(const Soft_traces& soft_tr
       Lambdax)*Kappa + 30*traceYuAdjYu*BMu*Conj(Lambdax)*Kappa + 30*
       traceAdjYdTYd*Conj(Lambdax)*Kappa*Mu + 10*traceAdjYeTYe*Conj(Lambdax)*
       Kappa*Mu + 30*traceAdjYuTYu*Conj(Lambdax)*Kappa*Mu + 6*MassB*MS*AbsSqr(
-      Lambdax)*Sqr(g1) - 3*AbsSqr(Lambdax)*BMS*Sqr(g1) - 18*BMu*Conj(Lambdax)*
-      Kappa*Sqr(g1) + 18*MassB*Conj(Lambdax)*Kappa*Mu*Sqr(g1) + 30*MassWB*MS*
-      AbsSqr(Lambdax)*Sqr(g2) - 15*AbsSqr(Lambdax)*BMS*Sqr(g2) - 90*BMu*Conj(
-      Lambdax)*Kappa*Sqr(g2) + 90*MassWB*Conj(Lambdax)*Kappa*Mu*Sqr(g2) + 20*
+      Lambdax)*Sqr(g1) - 3*AbsSqr(Lambdax)*BMS*Sqr(g1) - 6*BMu*Conj(Lambdax)*
+      Kappa*Sqr(g1) + 6*MassB*Conj(Lambdax)*Kappa*Mu*Sqr(g1) + 30*MassWB*MS*
+      AbsSqr(Lambdax)*Sqr(g2) - 15*AbsSqr(Lambdax)*BMS*Sqr(g2) - 30*BMu*Conj(
+      Lambdax)*Kappa*Sqr(g2) + 30*MassWB*Conj(Lambdax)*Kappa*Mu*Sqr(g2) + 20*
       BMu*Kappa*Lambdax*Sqr(Conj(Lambdax)) + 40*BMS*Sqr(Conj(Kappa))*Sqr(Kappa)
       + 10*BMS*Sqr(Conj(Lambdax))*Sqr(Lambdax) + 40*MS*AbsSqr(Lambdax)*Conj(
       Kappa)*TKappa + 100*MS*Kappa*Sqr(Conj(Kappa))*TKappa + 30*MS*traceYdAdjYd

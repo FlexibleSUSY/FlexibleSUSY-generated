@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 4 Aug 2019 19:39:39
+// File generated at Wed 16 Oct 2019 22:15:36
 
 #include "SMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -126,14 +126,14 @@ double SMSSM_soft_parameters::calc_beta_BMu_2_loop(const Soft_traces& soft_trace
       900*traceAdjYuTYu*AbsSqr(Lambdax)*Mu + 207*BMu*Quad(g1) - 828*MassB*Mu*
       Quad(g1) + 375*BMu*Quad(g2) - 1500*MassWB*Mu*Quad(g2) - 20*traceYdAdjYd*
       BMu*Sqr(g1) + 60*traceYeAdjYe*BMu*Sqr(g1) + 40*traceYuAdjYu*BMu*Sqr(g1) +
-      360*AbsSqr(Lambdax)*BMu*Sqr(g1) - 40*traceAdjYdTYd*Mu*Sqr(g1) + 120*
+      120*AbsSqr(Lambdax)*BMu*Sqr(g1) - 40*traceAdjYdTYd*Mu*Sqr(g1) + 120*
       traceAdjYeTYe*Mu*Sqr(g1) + 80*traceAdjYuTYu*Mu*Sqr(g1) + 40*MassB*
       traceYdAdjYd*Mu*Sqr(g1) - 120*MassB*traceYeAdjYe*Mu*Sqr(g1) - 80*MassB*
-      traceYuAdjYu*Mu*Sqr(g1) - 360*MassB*AbsSqr(Lambdax)*Mu*Sqr(g1) + 1800*
-      AbsSqr(Lambdax)*BMu*Sqr(g2) - 1800*MassWB*AbsSqr(Lambdax)*Mu*Sqr(g2) + 90
-      *BMu*Sqr(g1)*Sqr(g2) - 180*MassB*Mu*Sqr(g1)*Sqr(g2) - 180*MassWB*Mu*Sqr(
-      g1)*Sqr(g2) + 800*traceYdAdjYd*BMu*Sqr(g3) + 800*traceYuAdjYu*BMu*Sqr(g3)
-      + 1600*traceAdjYdTYd*Mu*Sqr(g3) + 1600*traceAdjYuTYu*Mu*Sqr(g3) - 1600*
+      traceYuAdjYu*Mu*Sqr(g1) - 120*MassB*AbsSqr(Lambdax)*Mu*Sqr(g1) + 600*
+      AbsSqr(Lambdax)*BMu*Sqr(g2) - 600*MassWB*AbsSqr(Lambdax)*Mu*Sqr(g2) + 90*
+      BMu*Sqr(g1)*Sqr(g2) - 180*MassB*Mu*Sqr(g1)*Sqr(g2) - 180*MassWB*Mu*Sqr(g1
+      )*Sqr(g2) + 800*traceYdAdjYd*BMu*Sqr(g3) + 800*traceYuAdjYu*BMu*Sqr(g3) +
+      1600*traceAdjYdTYd*Mu*Sqr(g3) + 1600*traceAdjYuTYu*Mu*Sqr(g3) - 1600*
       MassG*traceYdAdjYd*Mu*Sqr(g3) - 1600*MassG*traceYuAdjYu*Mu*Sqr(g3) - 400*
       BMS*Kappa*Lambdax*Sqr(Conj(Kappa)) - 400*BMS*Conj(Kappa)*Conj(Lambdax)*
       Sqr(Lambdax) - 700*BMu*Sqr(Conj(Lambdax))*Sqr(Lambdax) - 400*AbsSqr(

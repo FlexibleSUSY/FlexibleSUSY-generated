@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 4 Aug 2019 17:36:00
+// File generated at Wed 16 Oct 2019 19:27:06
 
 #include "MRSSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -104,9 +104,9 @@ double MRSSMEFTHiggs_soft_parameters::calc_beta_BMuU_2_loop(const Soft_traces& s
       180*AbsSqr(LamSU)*AbsSqr(LamTU)*BMuU - 30*AbsSqr(LamTD)*AbsSqr(LamTU)*
       BMuU - 120*LamSU*traceYdAdjYd*BMuD*Conj(LamSD) - 40*LamSU*traceYeAdjYe*
       BMuD*Conj(LamSD) - 120*LamSU*AbsSqr(LamTD)*BMuD*Conj(LamSD) + 45*BMuU*
-      Quad(g1) + 165*BMuU*Quad(g2) + 8*traceYuAdjYu*BMuU*Sqr(g1) + 72*AbsSqr(
-      LamSU)*BMuU*Sqr(g1) + 72*LamSU*BMuD*Conj(LamSD)*Sqr(g1) + 360*AbsSqr(
-      LamSU)*BMuU*Sqr(g2) + 120*AbsSqr(LamTU)*BMuU*Sqr(g2) + 360*LamSU*BMuD*
+      Quad(g1) + 165*BMuU*Quad(g2) + 8*traceYuAdjYu*BMuU*Sqr(g1) + 24*AbsSqr(
+      LamSU)*BMuU*Sqr(g1) + 24*LamSU*BMuD*Conj(LamSD)*Sqr(g1) + 120*AbsSqr(
+      LamSU)*BMuU*Sqr(g2) + 120*AbsSqr(LamTU)*BMuU*Sqr(g2) + 120*LamSU*BMuD*
       Conj(LamSD)*Sqr(g2) + 18*BMuU*Sqr(g1)*Sqr(g2) + 160*traceYuAdjYu*BMuU*Sqr
       (g3) - 80*LamSD*LamSU*BMuD*Sqr(Conj(LamSD)) - 140*BMuU*Sqr(LamSU)*Sqr(
       Conj(LamSU)) - 75*BMuU*Sqr(LamTU)*Sqr(Conj(LamTU))));

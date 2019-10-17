@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 4 Aug 2019 18:14:07
+// File generated at Wed 16 Oct 2019 20:06:17
 
 #include "MRSSMEFTHiggs_standard_model_matching.hpp"
 #include "wrappers.hpp"
@@ -689,10 +689,10 @@ MRSSMEFTHiggs_mass_eigenstates calculate_MRSSMEFTHiggs_1loop(
    auto sm = sm_1l;
 
    model.calculate_DRbar_masses();
-   model.solve_ewsb();
+   model.solve_ewsb_one_loop();
 
    sm.calculate_DRbar_masses();
-   sm.solve_ewsb();
+   sm.solve_ewsb_one_loop();
 
    const double alpha_em = Sqr(sm_0l.get_g1() * sm_0l.get_g2() * standard_model_info::normalization_g1 * standard_model_info::normalization_g2)
             /(4. * Pi * (Sqr(sm_0l.get_g1()*standard_model_info::normalization_g1) + Sqr(sm_0l.get_g2()*standard_model_info::normalization_g2)));

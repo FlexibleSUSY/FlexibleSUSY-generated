@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 4 Aug 2019 17:42:30
+// File generated at Wed 16 Oct 2019 19:33:41
 
 #ifndef CNMSSM_WEINBERG_ANGLE_H
 #define CNMSSM_WEINBERG_ANGLE_H

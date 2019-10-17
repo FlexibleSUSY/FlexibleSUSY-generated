@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Sun 4 Aug 2019 17:24:08
+// File generated at Wed 16 Oct 2019 20:11:41
 
 #include "CE6SSM_slha_io.hpp"
 #include "CE6SSM_input_parameters.hpp"
