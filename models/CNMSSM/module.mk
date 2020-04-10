@@ -284,7 +284,7 @@ run-metacode-$(MODNAME): $(METACODE_STAMP_CNMSSM)
 ifeq ($(ENABLE_META),yes)
 $(METACODE_STAMP_CNMSSM): $(DIR)/start.m $(DIR)/FlexibleSUSY.m $(META_SRC) $(TEMPLATES) $(SARAH_MODEL_FILES_CNMSSM)
 		@$(MSG)
-		$(Q)"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
+		$(Q)printf "%s" "Get[\"$<\"]; Quit[]" | "$(MATH)" || (echo "Error: The code generation failed!"; exit 1)
 		@touch "$(METACODE_STAMP_CNMSSM)"
 		@echo "Note: to regenerate CNMSSM source files," \
 		      "please remove the file "

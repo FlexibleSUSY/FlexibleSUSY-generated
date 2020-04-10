@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 19:33:41
+// File generated at Fri 10 Apr 2020 17:55:55
 
 #include "CNMSSM_mass_eigenstates.hpp"
 #include "CNMSSM_weinberg_angle.hpp"

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 20:07:29
+// File generated at Fri 10 Apr 2020 18:27:37
 
 #include "MRSSMEFTHiggs_effective_couplings.hpp"
 
@@ -487,8 +487,8 @@ std::complex<double> MRSSMEFTHiggs_effective_couplings::CphhSuconjSu(int gt1, in
       j1))*ZU(gt3,3 + j1))*(-3*g1*vd*ZH(gt1,0) + 3*g1*vu*ZH(gt1,1) +
       7.745966692414834*(MDBS + Conj(MDBS))*ZH(gt1,2)) + SUM(j1,0,2,Conj(ZU(gt2,j1
       ))*ZU(gt3,j1))*(3*vd*(Sqr(g1) - 5*Sqr(g2))*ZH(gt1,0) - 3*vu*(Sqr(g1) - 5*Sqr
-      (g2))*ZH(gt1,1) - 2*(3.872983346207417*g1*(MDBS + Conj(MDBS))*ZH(gt1,2) + 15
-      *g2*(MDWBT + Conj(MDWBT))*ZH(gt1,3))));
+      (g2))*ZH(gt1,1) - 7.745966692414834*g1*(MDBS + Conj(MDBS))*ZH(gt1,2) - 30*g2
+      *(MDWBT + Conj(MDWBT))*ZH(gt1,3)));
 
    return result;
 }
@@ -513,8 +513,8 @@ std::complex<double> MRSSMEFTHiggs_effective_couplings::CphhSeconjSe(int gt1, in
       g1*SUM(j1,0,2,Conj(ZE(gt2,3 + j1))*ZE(gt3,3 + j1))*(3*g1*vd*ZH(gt1,0) - 3*g1
       *vu*ZH(gt1,1) - 7.745966692414834*(MDBS + Conj(MDBS))*ZH(gt1,2))) + SUM(j1,0
       ,2,Conj(ZE(gt2,j1))*ZE(gt3,j1))*((-3*vd*Sqr(g1) + 5*vd*Sqr(g2))*ZH(gt1,0) +
-      vu*(3*Sqr(g1) - 5*Sqr(g2))*ZH(gt1,1) + 2*(3.872983346207417*g1*(MDBS + Conj(
-      MDBS))*ZH(gt1,2) + 5*g2*(MDWBT + Conj(MDWBT))*ZH(gt1,3))));
+      vu*(3*Sqr(g1) - 5*Sqr(g2))*ZH(gt1,1) + 7.745966692414834*g1*(MDBS + Conj(
+      MDBS))*ZH(gt1,2) + 10*g2*(MDWBT + Conj(MDWBT))*ZH(gt1,3)));
 
    return result;
 }
@@ -582,29 +582,29 @@ std::complex<double> MRSSMEFTHiggs_effective_couplings::CphhHpmconjHpm(int gt1, 
       10*LamTU*vu*Conj(LamSU)*ZH(gt1,2)*ZP(gt2,1)*ZP(gt3,3) - 7.0710678118654755*
       vu*AbsSqr(LamTU)*ZH(gt1,3)*ZP(gt2,1)*ZP(gt3,3) + 7.0710678118654755*vu*Sqr(
       g2)*ZH(gt1,3)*ZP(gt2,1)*ZP(gt3,3) + 20*vT*Sqr(g2)*ZH(gt1,3)*ZP(gt2,2)*ZP(gt3
-      ,3) - 20*vT*Sqr(g2)*ZH(gt1,3)*ZP(gt2,3)*ZP(gt3,3) - ZH(gt1,0)*(ZP(gt2,1)*(5*
-      vu*Sqr(g2)*ZP(gt3,0) + vd*(-3*Sqr(g1) + 5*Sqr(g2))*ZP(gt3,1)) + 5*(ZP(gt2,2)
-      *((2*LamTD*vS*Conj(LamSD) + 1.4142135623730951*(2*g2*MDWBT - vT*AbsSqr(LamTD
-      ) + 2*LamTD*Conj(MuD) + vT*Sqr(g2)))*ZP(gt3,0) - 2*vd*(-2*AbsSqr(LamTD) +
-      Sqr(g2))*ZP(gt3,2)) + ZP(gt2,3)*(((2.8284271247461903*MuD + 2*LamSD*vS +
+      ,3) - 20*vT*Sqr(g2)*ZH(gt1,3)*ZP(gt2,3)*ZP(gt3,3) - ZH(gt1,1)*(ZP(gt2,0)*((-
+      3*vu*Sqr(g1) + 5*vu*Sqr(g2))*ZP(gt3,0) + 5*vd*Sqr(g2)*ZP(gt3,1)) + 5*ZP(gt2,
+      2)*((2*LamTU*vS*Conj(LamSU) + 1.4142135623730951*(2*g2*MDWBT - vT*AbsSqr(
+      LamTU) + 2*LamTU*Conj(MuU) + vT*Sqr(g2)))*ZP(gt3,1) + 2*vu*Sqr(g2)*ZP(gt3,2)
+      ) + 5*ZP(gt2,3)*(((2.8284271247461903*MuU + 2*LamSU*vS + 1.4142135623730951*
+      LamTU*vT)*Conj(LamTU) + 1.4142135623730951*g2*(-(g2*vT) + 2*Conj(MDWBT)))*ZP
+      (gt3,1) - 2*vu*(-2*AbsSqr(LamTU) + Sqr(g2))*ZP(gt3,3)) + ZP(gt2,1)*(5*vd*Sqr
+      (g2)*ZP(gt3,0) + vu*(3*Sqr(g1) + 5*Sqr(g2))*ZP(gt3,1) + 5*((
+      2.8284271247461903*MuU + 2*LamSU*vS - 1.4142135623730951*LamTU*vT)*Conj(
+      LamTU) + 1.4142135623730951*g2*(g2*vT + 2*Conj(MDWBT)))*ZP(gt3,2) + 5*(2*
+      LamTU*vS*Conj(LamSU) + 1.4142135623730951*(2*g2*MDWBT + vT*AbsSqr(LamTU) + 2
+      *LamTU*Conj(MuU) - vT*Sqr(g2)))*ZP(gt3,3))) - ZH(gt1,0)*(ZP(gt2,1)*(5*vu*Sqr
+      (g2)*ZP(gt3,0) + vd*(-3*Sqr(g1) + 5*Sqr(g2))*ZP(gt3,1)) + 5*(ZP(gt2,2)*((2*
+      LamTD*vS*Conj(LamSD) + 1.4142135623730951*(2*g2*MDWBT - vT*AbsSqr(LamTD) + 2
+      *LamTD*Conj(MuD) + vT*Sqr(g2)))*ZP(gt3,0) - 2*vd*(-2*AbsSqr(LamTD) + Sqr(g2)
+      )*ZP(gt3,2)) + ZP(gt2,3)*(((2.8284271247461903*MuD + 2*LamSD*vS +
       1.4142135623730951*LamTD*vT)*Conj(LamTD) + 1.4142135623730951*g2*(-(g2*vT) +
       2*Conj(MDWBT)))*ZP(gt3,0) + 2*vd*Sqr(g2)*ZP(gt3,3))) + ZP(gt2,0)*(vd*(3*Sqr(
       g1) + 5*Sqr(g2))*ZP(gt3,0) + 5*(vu*Sqr(g2)*ZP(gt3,1) + ((2.8284271247461903*
       MuD + 2*LamSD*vS - 1.4142135623730951*LamTD*vT)*Conj(LamTD) +
       1.4142135623730951*g2*(g2*vT + 2*Conj(MDWBT)))*ZP(gt3,2) + (2*LamTD*vS*Conj(
       LamSD) + 1.4142135623730951*(2*g2*MDWBT + vT*AbsSqr(LamTD) + 2*LamTD*Conj(
-      MuD) - vT*Sqr(g2)))*ZP(gt3,3)))) - ZH(gt1,1)*(ZP(gt2,0)*((-3*vu*Sqr(g1) + 5*
-      vu*Sqr(g2))*ZP(gt3,0) + 5*vd*Sqr(g2)*ZP(gt3,1)) + 5*(ZP(gt2,2)*((2*LamTU*vS*
-      Conj(LamSU) + 1.4142135623730951*(2*g2*MDWBT - vT*AbsSqr(LamTU) + 2*LamTU*
-      Conj(MuU) + vT*Sqr(g2)))*ZP(gt3,1) + 2*vu*Sqr(g2)*ZP(gt3,2)) + ZP(gt2,3)*(((
-      2.8284271247461903*MuU + 2*LamSU*vS + 1.4142135623730951*LamTU*vT)*Conj(
-      LamTU) + 1.4142135623730951*g2*(-(g2*vT) + 2*Conj(MDWBT)))*ZP(gt3,1) - 2*vu*
-      (-2*AbsSqr(LamTU) + Sqr(g2))*ZP(gt3,3))) + ZP(gt2,1)*(5*vd*Sqr(g2)*ZP(gt3,0)
-      + vu*(3*Sqr(g1) + 5*Sqr(g2))*ZP(gt3,1) + 5*(((2.8284271247461903*MuU + 2*
-      LamSU*vS - 1.4142135623730951*LamTU*vT)*Conj(LamTU) + 1.4142135623730951*g2*
-      (g2*vT + 2*Conj(MDWBT)))*ZP(gt3,2) + (2*LamTU*vS*Conj(LamSU) +
-      1.4142135623730951*(2*g2*MDWBT + vT*AbsSqr(LamTU) + 2*LamTU*Conj(MuU) - vT*
-      Sqr(g2)))*ZP(gt3,3)))));
+      MuD) - vT*Sqr(g2)))*ZP(gt3,3)))));
 
    return result;
 }

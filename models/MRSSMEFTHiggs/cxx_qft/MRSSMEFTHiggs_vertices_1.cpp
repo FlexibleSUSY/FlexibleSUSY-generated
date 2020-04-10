@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 20:07:33
+// File generated at Fri 10 Apr 2020 18:27:39
 
 /**
  * @file cxx_qft/MRSSMEFTHiggs_vertices.cpp
  *
- * This file was generated at Wed 16 Oct 2019 20:07:33 with FlexibleSUSY
- * 2.4.1 and SARAH 4.14.3 .
+ * This file was generated at Fri 10 Apr 2020 18:27:39 with FlexibleSUSY
+ * 2.4.2 and SARAH 4.14.3 .
  */
 
 #include "MRSSMEFTHiggs_context_base.hpp"
@@ -69,9 +69,9 @@ ChiralVertex VertexImpl<fields::Cha1, typename bar<fields::Cha1>::type, fields::
    const auto UP1 = MODELPARAMETER(UP1);
    const auto ThetaW = DERIVEDPARAMETER(ThetaW);
 
-   const std::complex<double> left = 0.5*(2*g2*Conj(UM1(gt1,0))*Sin(ThetaW)*UM1(gt2,0) + Conj(UM1(gt1,1))*(0.7745966692414834*g1*Cos(ThetaW) + g2*Sin(ThetaW))*UM1(gt2,1));
+   const std::complex<double> left = g2*Conj(UM1(gt1,0))*Sin(ThetaW)*UM1(gt2,0) + 0.5*Conj(UM1(gt1,1))*(0.7745966692414834*g1*Cos(ThetaW) + g2*Sin(ThetaW))*UM1(gt2,1);
 
-   const std::complex<double> right = 0.5*(2*g2*Conj(UP1(gt2,0))*Sin(ThetaW)*UP1(gt1,0) + Conj(UP1(gt2,1))*(0.7745966692414834*g1*Cos(ThetaW) + g2*Sin(ThetaW))*UP1(gt1,1));
+   const std::complex<double> right = g2*Conj(UP1(gt2,0))*Sin(ThetaW)*UP1(gt1,0) + 0.5*Conj(UP1(gt2,1))*(0.7745966692414834*g1*Cos(ThetaW) + g2*Sin(ThetaW))*UP1(gt1,1);
 
    return {left, right};
 }
@@ -318,7 +318,7 @@ MomentumDifferenceVertex VertexImpl<typename conj<fields::Se>::type, fields::Se,
    const auto ZE = MODELPARAMETER(ZE);
    const auto ThetaW = DERIVEDPARAMETER(ThetaW);
 
-   const std::complex<double> result = 0.5*((0.7745966692414834*g1*Cos(ThetaW) + g2*Sin(ThetaW))*SUM(j1,0,2,Conj(ZE(gt1,j1))*ZE(gt2,j1)) + 1.5491933384829668*g1*Cos(ThetaW)*SUM(j1,0,2,Conj(ZE(gt1,3 + j1))*ZE(gt2,3 + j1)));
+   const std::complex<double> result = 0.5*(0.7745966692414834*g1*Cos(ThetaW) + g2*Sin(ThetaW))*SUM(j1,0,2,Conj(ZE(gt1,j1))*ZE(gt2,j1)) + 0.7745966692414834*g1*Cos(ThetaW)*SUM(j1,0,2,Conj(ZE(gt1,3 + j1))*ZE(gt2,3 + j1));
 
    return {result, minuend_index, subtrahend_index};
 }

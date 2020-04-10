@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 22:14:47
+// File generated at Fri 10 Apr 2020 20:11:35
 
 #include "SMSSM_susy_parameters.hpp"
 #include "config.h"
@@ -273,10 +273,10 @@ Eigen::Matrix<double,3,3> CLASSNAME::get_SuRSuR() const
       0.5333333333333333*(Sqr(g1) + 5*Sqr(g3))*UNITMATRIX(3))).real();
 
    if (get_loops() > 1) {
-      anomDim += (twoLoop*(-0.4*(5*(Yu.conjugate()*Yd.transpose()*Yd.conjugate(
-         )*Yu.transpose() + Yu.conjugate()*Yu.transpose()*Yu.conjugate()*Yu.
-         transpose()) + Yu.conjugate()*Yu.transpose()*(5*AbsSqr(Lambdax) + Sqr(
-         g1) - 15*Sqr(g2) + 15*(Yu*Yu.adjoint()).trace())) +
+      anomDim += (twoLoop*(-2*(Yu.conjugate()*Yd.transpose()*Yd.conjugate()*Yu.
+         transpose() + Yu.conjugate()*Yu.transpose()*Yu.conjugate()*Yu.
+         transpose()) - 0.4*(Yu.conjugate()*Yu.transpose())*(5*AbsSqr(Lambdax)
+         + Sqr(g1) - 15*Sqr(g2) + 15*(Yu*Yu.adjoint()).trace()) +
          0.035555555555555556*(107*Quad(g1) - 25*Quad(g3) + 80*Sqr(g1)*Sqr(g3))
          *UNITMATRIX(3))).real();
    }

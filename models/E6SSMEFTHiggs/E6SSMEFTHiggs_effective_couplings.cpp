@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 20:19:33
+// File generated at Fri 10 Apr 2020 19:01:58
 
 #include "E6SSMEFTHiggs_effective_couplings.hpp"
 
@@ -357,20 +357,20 @@ std::complex<double> E6SSMEFTHiggs_effective_couplings::CphhSdconjSd(int gt1, in
    const auto Yd = MODELPARAMETER(Yd);
    const auto Lambdax = MODELPARAMETER(Lambdax);
 
-   const std::complex<double> result = 0.008333333333333333*(SUM(j1,0,2,Conj(ZD(
-      gt2,j1))*ZD(gt3,j1))*(vd*(6*Sqr(g1) + 30*Sqr(g2) + 9*Sqr(gN))*ZH(gt1,0) - 6*
-      vu*(Sqr(g1) + 5*Sqr(g2) - Sqr(gN))*ZH(gt1,1) - 15*vs*Sqr(gN)*ZH(gt1,2)) + 2*
-      (-42.42640687119285*SUM(j1,0,2,Conj(ZD(gt2,3 + j1))*Conj(TYd(j1,j1))*ZD(gt3,
-      j1))*ZH(gt1,0) + SUM(j1,0,2,Conj(ZD(gt2,3 + j1))*ZD(gt3,3 + j1))*(vd*(6*Sqr(
-      g1) + 9*Sqr(gN))*ZH(gt1,0) + 6*vu*(-Sqr(g1) + Sqr(gN))*ZH(gt1,1) - 15*vs*Sqr
-      (gN)*ZH(gt1,2)) - 30*(1.4142135623730951*SUM(j1,0,2,Conj(ZD(gt2,j1))*ZD(gt3,
-      3 + j1)*TYd(j1,j1))*ZH(gt1,0) + 2*vd*SUM(j2,0,2,AbsSqr(Yd(j2,j2))*Conj(ZD(
-      gt2,j2))*ZD(gt3,j2))*ZH(gt1,0) + 2*vd*SUM(j2,0,2,AbsSqr(Yd(j2,j2))*Conj(ZD(
-      gt2,3 + j2))*ZD(gt3,3 + j2))*ZH(gt1,0) - vs*Lambdax*SUM(j1,0,2,Conj(Yd(j1,j1
-      ))*Conj(ZD(gt2,3 + j1))*ZD(gt3,j1))*ZH(gt1,1) - vs*Conj(Lambdax)*SUM(j1,0,2,
-      Conj(ZD(gt2,j1))*Yd(j1,j1)*ZD(gt3,3 + j1))*ZH(gt1,1) - vu*Lambdax*SUM(j1,0,2
-      ,Conj(Yd(j1,j1))*Conj(ZD(gt2,3 + j1))*ZD(gt3,j1))*ZH(gt1,2) - vu*Conj(
-      Lambdax)*SUM(j1,0,2,Conj(ZD(gt2,j1))*Yd(j1,j1)*ZD(gt3,3 + j1))*ZH(gt1,2))));
+   const std::complex<double> result = 0.008333333333333333*(-84.8528137423857*SUM
+      (j1,0,2,Conj(ZD(gt2,3 + j1))*Conj(TYd(j1,j1))*ZD(gt3,j1))*ZH(gt1,0) + SUM(j1
+      ,0,2,Conj(ZD(gt2,j1))*ZD(gt3,j1))*(vd*(6*Sqr(g1) + 30*Sqr(g2) + 9*Sqr(gN))*
+      ZH(gt1,0) - 6*vu*(Sqr(g1) + 5*Sqr(g2) - Sqr(gN))*ZH(gt1,1) - 15*vs*Sqr(gN)*
+      ZH(gt1,2)) + 2*SUM(j1,0,2,Conj(ZD(gt2,3 + j1))*ZD(gt3,3 + j1))*(vd*(6*Sqr(g1
+      ) + 9*Sqr(gN))*ZH(gt1,0) + 6*vu*(-Sqr(g1) + Sqr(gN))*ZH(gt1,1) - 15*vs*Sqr(
+      gN)*ZH(gt1,2)) + 60*(-1.4142135623730951*SUM(j1,0,2,Conj(ZD(gt2,j1))*ZD(gt3,
+      3 + j1)*TYd(j1,j1))*ZH(gt1,0) - 2*vd*SUM(j2,0,2,AbsSqr(Yd(j2,j2))*Conj(ZD(
+      gt2,j2))*ZD(gt3,j2))*ZH(gt1,0) - 2*vd*SUM(j2,0,2,AbsSqr(Yd(j2,j2))*Conj(ZD(
+      gt2,3 + j2))*ZD(gt3,3 + j2))*ZH(gt1,0) + vs*Lambdax*SUM(j1,0,2,Conj(Yd(j1,j1
+      ))*Conj(ZD(gt2,3 + j1))*ZD(gt3,j1))*ZH(gt1,1) + vs*Conj(Lambdax)*SUM(j1,0,2,
+      Conj(ZD(gt2,j1))*Yd(j1,j1)*ZD(gt3,3 + j1))*ZH(gt1,1) + vu*Lambdax*SUM(j1,0,2
+      ,Conj(Yd(j1,j1))*Conj(ZD(gt2,3 + j1))*ZD(gt3,j1))*ZH(gt1,2) + vu*Conj(
+      Lambdax)*SUM(j1,0,2,Conj(ZD(gt2,j1))*Yd(j1,j1)*ZD(gt3,3 + j1))*ZH(gt1,2)));
 
    return result;
 }
@@ -531,19 +531,19 @@ std::complex<double> E6SSMEFTHiggs_effective_couplings::CphhSHIpconjSHIp(int gt1
    const auto Lambdax = MODELPARAMETER(Lambdax);
    const auto Lambda12 = MODELPARAMETER(Lambda12);
 
-   const std::complex<double> result = 0.025*(SUM(j1,0,1,Conj(UHIp(gt2,j1))*UHIp(
-      gt3,j1))*(vd*(-6*Sqr(g1) + 10*Sqr(g2) - 9*Sqr(gN))*ZH(gt1,0) + 2*vu*(3*Sqr(
-      g1) - 5*Sqr(g2) - 3*Sqr(gN))*ZH(gt1,1) + 15*vs*Sqr(gN)*ZH(gt1,2)) + 2*(10*
-      Lambdax*SUM(j1,0,1,Conj(UHIp(gt2,2 + j1))*Conj(Lambda12(j1,j1))*UHIp(gt3,j1)
-      )*(vu*ZH(gt1,0) + vd*ZH(gt1,1)) + SUM(j1,0,1,Conj(UHIp(gt2,2 + j1))*UHIp(gt3
-      ,2 + j1))*(vd*(3*Sqr(g1) - 5*Sqr(g2) - 3*Sqr(gN))*ZH(gt1,0) + vu*(-3*Sqr(g1)
-      + 5*Sqr(g2) - 2*Sqr(gN))*ZH(gt1,1) + 5*vs*Sqr(gN)*ZH(gt1,2)) + 10*(Conj(
-      Lambdax)*SUM(j1,0,1,Conj(UHIp(gt2,j1))*UHIp(gt3,2 + j1)*Lambda12(j1,j1))*(vu
-      *ZH(gt1,0) + vd*ZH(gt1,1)) - (1.4142135623730951*SUM(j1,0,1,Conj(UHIp(gt2,2
-      + j1))*Conj(TLambda12(j1,j1))*UHIp(gt3,j1)) + 1.4142135623730951*SUM(j1,0,1,
-      Conj(UHIp(gt2,j1))*UHIp(gt3,2 + j1)*TLambda12(j1,j1)) + 2*vs*(SUM(j2,0,1,
-      AbsSqr(Lambda12(j2,j2))*Conj(UHIp(gt2,j2))*UHIp(gt3,j2)) + SUM(j2,0,1,AbsSqr
-      (Lambda12(j2,j2))*Conj(UHIp(gt2,2 + j2))*UHIp(gt3,2 + j2))))*ZH(gt1,2))));
+   const std::complex<double> result = 0.025*(20*Lambdax*SUM(j1,0,1,Conj(UHIp(gt2,
+      2 + j1))*Conj(Lambda12(j1,j1))*UHIp(gt3,j1))*(vu*ZH(gt1,0) + vd*ZH(gt1,1)) +
+      2*SUM(j1,0,1,Conj(UHIp(gt2,2 + j1))*UHIp(gt3,2 + j1))*(vd*(3*Sqr(g1) - 5*Sqr
+      (g2) - 3*Sqr(gN))*ZH(gt1,0) + vu*(-3*Sqr(g1) + 5*Sqr(g2) - 2*Sqr(gN))*ZH(gt1
+      ,1) + 5*vs*Sqr(gN)*ZH(gt1,2)) + SUM(j1,0,1,Conj(UHIp(gt2,j1))*UHIp(gt3,j1))*
+      (vd*(-6*Sqr(g1) + 10*Sqr(g2) - 9*Sqr(gN))*ZH(gt1,0) + 2*vu*(3*Sqr(g1) - 5*
+      Sqr(g2) - 3*Sqr(gN))*ZH(gt1,1) + 15*vs*Sqr(gN)*ZH(gt1,2)) + 20*(Conj(Lambdax
+      )*SUM(j1,0,1,Conj(UHIp(gt2,j1))*UHIp(gt3,2 + j1)*Lambda12(j1,j1))*(vu*ZH(gt1
+      ,0) + vd*ZH(gt1,1)) - (1.4142135623730951*SUM(j1,0,1,Conj(UHIp(gt2,2 + j1))*
+      Conj(TLambda12(j1,j1))*UHIp(gt3,j1)) + 1.4142135623730951*SUM(j1,0,1,Conj(
+      UHIp(gt2,j1))*UHIp(gt3,2 + j1)*TLambda12(j1,j1)) + 2*vs*(SUM(j2,0,1,AbsSqr(
+      Lambda12(j2,j2))*Conj(UHIp(gt2,j2))*UHIp(gt3,j2)) + SUM(j2,0,1,AbsSqr(
+      Lambda12(j2,j2))*Conj(UHIp(gt2,2 + j2))*UHIp(gt3,2 + j2))))*ZH(gt1,2)));
 
    return result;
 }

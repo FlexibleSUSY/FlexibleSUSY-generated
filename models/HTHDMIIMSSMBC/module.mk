@@ -284,7 +284,7 @@ run-metacode-$(MODNAME): $(METACODE_STAMP_HTHDMIIMSSMBC)
 ifeq ($(ENABLE_META),yes)
 $(METACODE_STAMP_HTHDMIIMSSMBC): $(DIR)/start.m $(DIR)/FlexibleSUSY.m $(META_SRC) $(TEMPLATES) $(SARAH_MODEL_FILES_HTHDMIIMSSMBC)
 		@$(MSG)
-		$(Q)"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
+		$(Q)printf "%s" "Get[\"$<\"]; Quit[]" | "$(MATH)" || (echo "Error: The code generation failed!"; exit 1)
 		@touch "$(METACODE_STAMP_HTHDMIIMSSMBC)"
 		@echo "Note: to regenerate HTHDMIIMSSMBC source files," \
 		      "please remove the file "

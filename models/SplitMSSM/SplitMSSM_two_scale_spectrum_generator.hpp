@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 21:55:29
+// File generated at Fri 10 Apr 2020 19:54:40
 
 #ifndef SplitMSSM_TWO_SCALE_SPECTRUM_GENERATOR_H
 #define SplitMSSM_TWO_SCALE_SPECTRUM_GENERATOR_H

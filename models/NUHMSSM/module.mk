@@ -284,7 +284,7 @@ run-metacode-$(MODNAME): $(METACODE_STAMP_NUHMSSM)
 ifeq ($(ENABLE_META),yes)
 $(METACODE_STAMP_NUHMSSM): $(DIR)/start.m $(DIR)/FlexibleSUSY.m $(META_SRC) $(TEMPLATES) $(SARAH_MODEL_FILES_NUHMSSM)
 		@$(MSG)
-		$(Q)"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
+		$(Q)printf "%s" "Get[\"$<\"]; Quit[]" | "$(MATH)" || (echo "Error: The code generation failed!"; exit 1)
 		@touch "$(METACODE_STAMP_NUHMSSM)"
 		@echo "Note: to regenerate NUHMSSM source files," \
 		      "please remove the file "

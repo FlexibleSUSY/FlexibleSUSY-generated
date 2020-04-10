@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 21:40:15
+// File generated at Fri 10 Apr 2020 19:56:13
 
 #include "MRSSM_susy_parameters.hpp"
 #include "config.h"
@@ -326,11 +326,11 @@ double CLASSNAME::get_SsSs() const
    anomDim = Re(2*oneOver16PiSqr*(AbsSqr(LamSD) + AbsSqr(LamSU)));
 
    if (get_loops() > 1) {
-      anomDim += Re(twoLoop*(-4*Sqr(LamSD)*Sqr(Conj(LamSD)) + Conj(LamSD)*(-6*
-         LamSD*AbsSqr(LamTD) + 1.2*LamSD*Sqr(g1) + 6*LamSD*Sqr(g2) - 6*LamSD*(
-         Yd*Yd.adjoint()).trace() - 2*LamSD*(Ye*Ye.adjoint()).trace()) - 0.4*
-         AbsSqr(LamSU)*(10*AbsSqr(LamSU) - 3*(-5*AbsSqr(LamTU) + Sqr(g1) + 5*
-         Sqr(g2) - 5*(Yu*Yu.adjoint()).trace()))));
+      anomDim += Re(twoLoop*(-4*Sqr(LamSD)*Sqr(Conj(LamSD)) - 4*Sqr(LamSU)*Sqr(
+         Conj(LamSU)) + Conj(LamSD)*(-6*LamSD*AbsSqr(LamTD) + 1.2*LamSD*Sqr(g1)
+         + 6*LamSD*Sqr(g2) - 6*LamSD*(Yd*Yd.adjoint()).trace() - 2*LamSD*(Ye*Ye
+         .adjoint()).trace()) + 1.2*AbsSqr(LamSU)*(-5*AbsSqr(LamTU) + Sqr(g1) +
+         5*Sqr(g2) - 5*(Yu*Yu.adjoint()).trace())));
    }
 
    return anomDim;

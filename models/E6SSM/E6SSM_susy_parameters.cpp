@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 21:52:03
+// File generated at Fri 10 Apr 2020 20:01:41
 
 #include "E6SSM_susy_parameters.hpp"
 #include "config.h"
@@ -240,14 +240,14 @@ double CLASSNAME::get_SHuSHu() const
       0.2*Sqr(gN) + 3*(Yu*Yu.adjoint()).trace()));
 
    if (get_loops() > 1) {
-      anomDim += Re(twoLoop*(-3*Sqr(Conj(Lambdax))*Sqr(Lambdax) + 0.5*AbsSqr(
+      anomDim += Re(twoLoop*(-3*Sqr(Conj(Lambdax))*Sqr(Lambdax) + 0.1*(8*Sqr(g1
+         ) + 160*Sqr(g3) - 3*Sqr(gN))*(Yu*Yu.adjoint()).trace() + 0.5*AbsSqr(
          Lambdax)*(3*Sqr(gN) - 6*(Yd*Yd.adjoint()).trace() - 2*(Ye*Ye.adjoint()
          ).trace() - 6*(Kappa*(Kappa).adjoint()).trace() - 4*(Lambda12*(
-         Lambda12).adjoint()).trace()) + 0.01*(10*(8*Sqr(g1) + 160*Sqr(g3) - 3*
-         Sqr(gN))*(Yu*Yu.adjoint()).trace() + 3*(99*Quad(g1) + 275*Quad(g2) +
-         64*Quad(gN) + 30*Sqr(g1)*Sqr(g2) + 12*Sqr(g1)*Sqr(gN) + 20*Sqr(g2)*Sqr
-         (gN) - 100*(Yd*Yu.adjoint()*Yu*Yd.adjoint()).trace() - 300*(Yu*Yu.
-         adjoint()*Yu*Yu.adjoint()).trace()))));
+         Lambda12).adjoint()).trace()) + 0.03*(99*Quad(g1) + 275*Quad(g2) + 64*
+         Quad(gN) + 30*Sqr(g1)*Sqr(g2) + 12*Sqr(g1)*Sqr(gN) + 20*Sqr(g2)*Sqr(gN
+         ) - 100*(Yd*Yu.adjoint()*Yu*Yd.adjoint()).trace() - 300*(Yu*Yu.adjoint
+         ()*Yu*Yu.adjoint()).trace())));
    }
 
    return anomDim;
@@ -257,9 +257,9 @@ Eigen::Matrix<double,3,3> CLASSNAME::get_SdRSdR() const
 {
    Eigen::Matrix<double,3,3> anomDim;
 
-   anomDim = (0.06666666666666667*oneOver16PiSqr*(30*(Yd.conjugate()*Yd.
-      transpose()) - (2*Sqr(g1) + 40*Sqr(g3) + 3*Sqr(gN))*UNITMATRIX(3))).real(
-      );
+   anomDim = (oneOver16PiSqr*(2*(Yd.conjugate()*Yd.transpose()) -
+      0.06666666666666667*(2*Sqr(g1) + 40*Sqr(g3) + 3*Sqr(gN))*UNITMATRIX(3))).
+      real();
 
    if (get_loops() > 1) {
       anomDim += (twoLoop*(-2*(Yd.conjugate()*Yd.transpose()*Yd.conjugate()*Yd.
@@ -303,11 +303,11 @@ Eigen::Matrix<double,3,3> CLASSNAME::get_SeRSeR() const
       g1) + Sqr(gN))*UNITMATRIX(3))).real();
 
    if (get_loops() > 1) {
-      anomDim += (twoLoop*(-0.4*(5*(Ye.conjugate()*Ye.transpose()*Ye.conjugate(
-         )*Ye.transpose()) + Ye.conjugate()*Ye.transpose()*(5*AbsSqr(Lambdax) +
-         3*Sqr(g1) - 15*Sqr(g2) - 3*Sqr(gN) + 15*(Yd*Yd.adjoint()).trace() + 5*
-         (Ye*Ye.adjoint()).trace())) + 0.0075*(1728*Quad(g1) + 63*Quad(gN) - 16
-         *Sqr(g1)*Sqr(gN))*UNITMATRIX(3))).real();
+      anomDim += (twoLoop*(-2*(Ye.conjugate()*Ye.transpose()*Ye.conjugate()*Ye.
+         transpose()) - 0.4*(Ye.conjugate()*Ye.transpose())*(5*AbsSqr(Lambdax)
+         + 3*Sqr(g1) - 15*Sqr(g2) - 3*Sqr(gN) + 15*(Yd*Yd.adjoint()).trace() +
+         5*(Ye*Ye.adjoint()).trace()) + 0.0075*(1728*Quad(g1) + 63*Quad(gN) -
+         16*Sqr(g1)*Sqr(gN))*UNITMATRIX(3))).real();
    }
 
    return anomDim;

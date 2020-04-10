@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 22:46:57
+// File generated at Fri 10 Apr 2020 20:40:42
 
 /**
  * @file cxx_qft/MSSMRHN_vertices.hpp
  *
- * This file was generated at Wed 16 Oct 2019 22:46:57 with FlexibleSUSY
- * 2.4.1 and SARAH 4.14.3 .
+ * This file was generated at Fri 10 Apr 2020 20:40:42 with FlexibleSUSY
+ * 2.4.2 and SARAH 4.14.3 .
  */
 
 #ifndef MSSMRHN_CXXQFT_VERTICES_H

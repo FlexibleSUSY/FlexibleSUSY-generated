@@ -284,7 +284,7 @@ run-metacode-$(MODNAME): $(METACODE_STAMP_MSSM)
 ifeq ($(ENABLE_META),yes)
 $(METACODE_STAMP_MSSM): $(DIR)/start.m $(DIR)/FlexibleSUSY.m $(META_SRC) $(TEMPLATES) $(SARAH_MODEL_FILES_MSSM)
 		@$(MSG)
-		$(Q)"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
+		$(Q)printf "%s" "Get[\"$<\"]; Quit[]" | "$(MATH)" || (echo "Error: The code generation failed!"; exit 1)
 		@touch "$(METACODE_STAMP_MSSM)"
 		@echo "Note: to regenerate MSSM source files," \
 		      "please remove the file "

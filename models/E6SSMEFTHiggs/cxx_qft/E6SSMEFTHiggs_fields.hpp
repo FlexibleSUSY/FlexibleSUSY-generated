@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 20:19:37
+// File generated at Fri 10 Apr 2020 19:01:59
 
 /**
  * @file cxx_qft/E6SSMEFTHiggs_fields.hpp
  *
- * This file was generated at Wed 16 Oct 2019 20:19:37 with FlexibleSUSY
- * 2.4.1 and SARAH 4.14.3 .
+ * This file was generated at Fri 10 Apr 2020 19:01:59 with FlexibleSUSY
+ * 2.4.2 and SARAH 4.14.3 .
  */
 
 #ifndef E6SSMEFTHiggs_CXXQFT_FIELDS_H

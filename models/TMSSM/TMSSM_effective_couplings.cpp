@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 22:09:22
+// File generated at Fri 10 Apr 2020 20:02:59
 
 #include "TMSSM_effective_couplings.hpp"
 
@@ -445,7 +445,18 @@ std::complex<double> TMSSM_effective_couplings::CphhHpmconjHpm(int gt1, int gt2,
    const auto Lambdax = MODELPARAMETER(Lambdax);
    const auto Mu = MODELPARAMETER(Mu);
 
-   const std::complex<double> result = 0.05*(-5*ZH(gt1,2)*(-2*Conj(Mu)*Lambdax*ZP(
+   const std::complex<double> result = 0.05*(-(ZH(gt1,0)*(ZP(gt2,1)*(5*vu*(AbsSqr(
+      Lambdax) + Sqr(g2))*ZP(gt3,0) + vd*(20*AbsSqr(Lambdax) - 3*Sqr(g1) + 5*Sqr(
+      g2))*ZP(gt3,1) + 14.142135623730951*(Conj(TLambdax)*ZP(gt3,2) + 2*MT*Conj(
+      Lambdax)*ZP(gt3,3))) + 5*(ZP(gt2,2)*(1.4142135623730951*(-(vT*AbsSqr(Lambdax
+      )) + 2*Conj(Mu)*Lambdax + vT*Sqr(g2))*ZP(gt3,0) + 2.8284271247461903*
+      TLambdax*ZP(gt3,1) - 2*vd*(-2*AbsSqr(Lambdax) + Sqr(g2))*ZP(gt3,2)) + ZP(gt2
+      ,3)*(1.4142135623730951*(Conj(Lambdax)*(vT*Lambdax + 2*Mu) - vT*Sqr(g2))*ZP(
+      gt3,0) + 5.656854249492381*Conj(MT)*Lambdax*ZP(gt3,1) + 2*vd*Sqr(g2)*ZP(gt3,
+      3))) + ZP(gt2,0)*(vd*(3*Sqr(g1) + 5*Sqr(g2))*ZP(gt3,0) + 5*vu*(AbsSqr(
+      Lambdax) + Sqr(g2))*ZP(gt3,1) + 7.0710678118654755*((Conj(Lambdax)*(-(vT*
+      Lambdax) + 2*Mu) + vT*Sqr(g2))*ZP(gt3,2) + (vT*AbsSqr(Lambdax) + 2*Conj(Mu)*
+      Lambdax - vT*Sqr(g2))*ZP(gt3,3))))) - 5*ZH(gt1,2)*(-2*Conj(Mu)*Lambdax*ZP(
       gt2,0)*ZP(gt3,0) - 2*Conj(TLambdax)*ZP(gt2,1)*ZP(gt3,0) + 1.4142135623730951
       *vd*Sqr(g2)*ZP(gt2,2)*ZP(gt3,0) - 1.4142135623730951*vd*Sqr(g2)*ZP(gt2,3)*ZP
       (gt3,0) - 4*Conj(MT)*Lambdax*ZP(gt2,0)*ZP(gt3,1) - 2*TLambdax*ZP(gt2,0)*ZP(
@@ -460,30 +471,19 @@ std::complex<double> TMSSM_effective_couplings::CphhHpmconjHpm(int gt1, int gt2,
       ,1)) + ZP(gt2,0)*(2*(vT*Lambdax - Mu)*ZP(gt3,0) + 1.4142135623730951*vd*
       Lambdax*(-ZP(gt3,2) + ZP(gt3,3))) + ZP(gt2,1)*(-4*MT*ZP(gt3,0) + 2*(vT*
       Lambdax - Mu)*ZP(gt3,1) + 1.4142135623730951*vu*Lambdax*(-ZP(gt3,2) + ZP(gt3
-      ,3))))) - ZH(gt1,0)*(ZP(gt2,1)*(5*vu*(AbsSqr(Lambdax) + Sqr(g2))*ZP(gt3,0) +
-      vd*(20*AbsSqr(Lambdax) - 3*Sqr(g1) + 5*Sqr(g2))*ZP(gt3,1) +
-      14.142135623730951*(Conj(TLambdax)*ZP(gt3,2) + 2*MT*Conj(Lambdax)*ZP(gt3,3))
-      ) + 5*(ZP(gt2,2)*(1.4142135623730951*(-(vT*AbsSqr(Lambdax)) + 2*Conj(Mu)*
-      Lambdax + vT*Sqr(g2))*ZP(gt3,0) + 2.8284271247461903*TLambdax*ZP(gt3,1) - 2*
-      vd*(-2*AbsSqr(Lambdax) + Sqr(g2))*ZP(gt3,2)) + ZP(gt2,3)*(1.4142135623730951
-      *(Conj(Lambdax)*(vT*Lambdax + 2*Mu) - vT*Sqr(g2))*ZP(gt3,0) +
-      5.656854249492381*Conj(MT)*Lambdax*ZP(gt3,1) + 2*vd*Sqr(g2)*ZP(gt3,3))) + ZP
-      (gt2,0)*(vd*(3*Sqr(g1) + 5*Sqr(g2))*ZP(gt3,0) + 5*(vu*(AbsSqr(Lambdax) + Sqr
-      (g2))*ZP(gt3,1) + 1.4142135623730951*((-(vT*AbsSqr(Lambdax)) + 2*Conj(
-      Lambdax)*Mu + vT*Sqr(g2))*ZP(gt3,2) + (vT*AbsSqr(Lambdax) + 2*Conj(Mu)*
-      Lambdax - vT*Sqr(g2))*ZP(gt3,3))))) + ZH(gt1,1)*(-(ZP(gt2,1)*(5*vd*(AbsSqr(
-      Lambdax) + Sqr(g2))*ZP(gt3,0) + vu*(3*Sqr(g1) + 5*Sqr(g2))*ZP(gt3,1) +
-      7.0710678118654755*((-(Conj(Lambdax)*(vT*Lambdax + 2*Mu)) + vT*Sqr(g2))*ZP(
-      gt3,2) + (vT*AbsSqr(Lambdax) - 2*Conj(Mu)*Lambdax - vT*Sqr(g2))*ZP(gt3,3))))
-      + 5*(2.8284271247461903*Conj(TLambdax)*ZP(gt2,3)*ZP(gt3,0) +
+      ,3))))) + ZH(gt1,1)*(-(ZP(gt2,1)*(5*vd*(AbsSqr(Lambdax) + Sqr(g2))*ZP(gt3,0)
+      + vu*(3*Sqr(g1) + 5*Sqr(g2))*ZP(gt3,1) + 7.0710678118654755*((-(Conj(Lambdax
+      )*(vT*Lambdax + 2*Mu)) + vT*Sqr(g2))*ZP(gt3,2) + (vT*AbsSqr(Lambdax) - 2*
+      Conj(Mu)*Lambdax - vT*Sqr(g2))*ZP(gt3,3)))) + ZP(gt2,0)*(vu*(-20*AbsSqr(
+      Lambdax) + 3*Sqr(g1) - 5*Sqr(g2))*ZP(gt3,0) - 5*vd*(AbsSqr(Lambdax) + Sqr(g2
+      ))*ZP(gt3,1) + 14.142135623730951*(2*Conj(MT)*Lambdax*ZP(gt3,2) + TLambdax*
+      ZP(gt3,3))) + 5*(2.8284271247461903*Conj(TLambdax)*ZP(gt2,3)*ZP(gt3,0) +
       2.8284271247461903*Conj(Mu)*Lambdax*ZP(gt2,2)*ZP(gt3,1) - 1.4142135623730951
       *vT*Sqr(g2)*ZP(gt2,2)*ZP(gt3,1) + 1.4142135623730951*vT*Sqr(g2)*ZP(gt2,3)*ZP
       (gt3,1) - 2*vu*Sqr(g2)*ZP(gt2,2)*ZP(gt3,2) + 2*vu*Sqr(g2)*ZP(gt2,3)*ZP(gt3,3
       ) + Conj(Lambdax)*(1.4142135623730951*ZP(gt2,2)*(4*MT*ZP(gt3,0) + vT*Lambdax
       *ZP(gt3,1)) - ZP(gt2,3)*(1.4142135623730951*(vT*Lambdax - 2*Mu)*ZP(gt3,1) +
-      4*vu*Lambdax*ZP(gt3,3)))) + ZP(gt2,0)*(vu*(-20*AbsSqr(Lambdax) + 3*Sqr(g1) -
-      5*Sqr(g2))*ZP(gt3,0) - 5*(vd*(AbsSqr(Lambdax) + Sqr(g2))*ZP(gt3,1) -
-      2.8284271247461903*(2*Conj(MT)*Lambdax*ZP(gt3,2) + TLambdax*ZP(gt3,3))))));
+      4*vu*Lambdax*ZP(gt3,3))))));
 
    return result;
 }

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 19:38:25
+// File generated at Fri 10 Apr 2020 18:45:14
 
 #ifndef NMSSMEFTHiggs_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
 #define NMSSMEFTHiggs_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H

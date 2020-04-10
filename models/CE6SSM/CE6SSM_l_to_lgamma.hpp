@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 20:12:36
+// File generated at Fri 10 Apr 2020 18:43:14
 
 /**
  * @file CE6SSM_edm.hpp
  *
- * This file was generated at Wed 16 Oct 2019 20:12:36 with FlexibleSUSY
- * 2.4.1 and SARAH 4.14.3 .
+ * This file was generated at Fri 10 Apr 2020 18:43:14 with FlexibleSUSY
+ * 2.4.2 and SARAH 4.14.3 .
  */
 
 #ifndef CE6SSM_MuToEGamma_H

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 22:26:02
+// File generated at Fri 10 Apr 2020 20:17:57
 
 #include "UMSSM_susy_parameters.hpp"
 #include "config.h"
@@ -186,10 +186,10 @@ Eigen::Matrix<double,3,3> CLASSNAME::get_SqSq() const
          + 2*Sqr(gp)*Sqr(QHd) - 2*Sqr(gp)*Sqr(Qq) - 3*(Yd*Yd.adjoint()).trace()
          - (Ye*Ye.adjoint()).trace()) - 3*(Yu.adjoint()*Yu)*(Yu*Yu.adjoint()).
          trace() - Yu.adjoint()*Yu*(Yv*Yv.adjoint()).trace() +
-         0.0011111111111111111*(199*Quad(g1) + 10*Sqr(g1)*(9*Sqr(g2) + 4*(4*Sqr
-         (g3) + 3*Qq*(9*Qd + 9*Qe - 3*QHd + 3*QHu - 9*Ql + 10*Qq - 18*Qu)*Sqr(
-         gp))) + 25*(135*Quad(g2) + 72*Sqr(g2)*(4*Sqr(g3) + 3*Sqr(gp)*Sqr(Qq))
-         + 8*(-4*Quad(g3) + 48*Sqr(g3)*Sqr(gp)*Sqr(Qq) + 9*Quad(gp)*Sqr(Qq)*(9*
+         0.0011111111111111111*(199*Quad(g1) + 10*Sqr(g1)*(9*Sqr(g2) + 16*Sqr(
+         g3) + 12*Qq*(9*Qd + 9*Qe - 3*QHd + 3*QHu - 9*Ql + 10*Qq - 18*Qu)*Sqr(
+         gp)) + 25*(135*Quad(g2) + 72*Sqr(g2)*(4*Sqr(g3) + 3*Sqr(gp)*Sqr(Qq)) +
+         8*(-4*Quad(g3) + 48*Sqr(g3)*Sqr(gp)*Sqr(Qq) + 9*Quad(gp)*Sqr(Qq)*(9*
          Sqr(Qd) + 3*Sqr(Qe) + 2*Sqr(QHd) + 2*Sqr(QHu) + 6*Sqr(Ql) + 20*Sqr(Qq)
          + Sqr(Qs) + 9*Sqr(Qu) + 3*Sqr(Qv)))))*UNITMATRIX(3))).real();
    }
@@ -302,14 +302,13 @@ double CLASSNAME::get_SHuSHu() const
          + 2*Quad(gp)*Sqr(QHu)*Sqr(Qs) + 18*Quad(gp)*Sqr(QHu)*Sqr(Qu) + 6*Quad(
          gp)*Sqr(QHu)*Sqr(Qv) - 3*Sqr(Conj(Lambdax))*Sqr(Lambdax) + AbsSqr(
          Lambdax)*(2*Sqr(gp)*(Sqr(QHd) - Sqr(QHu) + Sqr(Qs)) - 3*(Yd*Yd.adjoint
-         ()).trace() - (Ye*Ye.adjoint()).trace()) + 0.4*(2*Sqr(g1) + 5*(8*Sqr(
-         g3) + 3*Sqr(gp)*(-Sqr(QHu) + Sqr(Qq) + Sqr(Qu))))*(Yu*Yu.adjoint()).
-         trace() - 2*Sqr(gp)*Sqr(QHu)*(Yv*Yv.adjoint()).trace() + 2*Sqr(gp)*Sqr
-         (Ql)*(Yv*Yv.adjoint()).trace() + 2*Sqr(gp)*Sqr(Qv)*(Yv*Yv.adjoint()).
-         trace() - 3*(Yd*Yu.adjoint()*Yu*Yd.adjoint()).trace() - 9*(Yu*Yu.
-         adjoint()*Yu*Yu.adjoint()).trace() - 3*(Yv*Yv.adjoint()*Yv*Yv.adjoint(
-         )).trace() - (Yv*Yv.adjoint()*Ye.transpose()*Ye.conjugate()).trace()))
-         ;
+         ()).trace() - (Ye*Ye.adjoint()).trace()) + 0.4*(2*Sqr(g1) + 40*Sqr(g3)
+         + 15*Sqr(gp)*(-Sqr(QHu) + Sqr(Qq) + Sqr(Qu)))*(Yu*Yu.adjoint()).trace(
+         ) - 2*Sqr(gp)*Sqr(QHu)*(Yv*Yv.adjoint()).trace() + 2*Sqr(gp)*Sqr(Ql)*(
+         Yv*Yv.adjoint()).trace() + 2*Sqr(gp)*Sqr(Qv)*(Yv*Yv.adjoint()).trace()
+         - 3*(Yd*Yu.adjoint()*Yu*Yd.adjoint()).trace() - 9*(Yu*Yu.adjoint()*Yu*
+         Yu.adjoint()).trace() - 3*(Yv*Yv.adjoint()*Yv*Yv.adjoint()).trace() -
+         (Yv*Yv.adjoint()*Ye.transpose()*Ye.conjugate()).trace()));
    }
 
    return anomDim;

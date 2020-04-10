@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 21:55:17
+// File generated at Fri 10 Apr 2020 19:54:35
 
 /**
  * @file SplitMSSM_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from MSbar
  * parameters.
  *
- * This file was generated at Wed 16 Oct 2019 21:55:17 with FlexibleSUSY
- * 2.4.1 (git commit: 3e3a10f4fde301d99a4732f29d14f4ac1c646945) and SARAH 4.14.3 .
+ * This file was generated at Fri 10 Apr 2020 19:54:35 with FlexibleSUSY
+ * 2.4.2 (git commit: a94199e5620b8684f5d30d0eece5757a5a72c4a4) and SARAH 4.14.3 .
  */
 
 #include "SplitMSSM_mass_eigenstates.hpp"
@@ -2086,9 +2086,9 @@ double CLASSNAME::CpconjVWpVPVWp() const
 std::complex<double> CLASSNAME::CpbarChaChaVPPL(int gI1, int gI2) const
 {
    
-   const std::complex<double> result = 0.5*(2*g2*Conj(UM(gI2,0))*Sin(ThetaW())*UM(
-      gI1,0) + Conj(UM(gI2,1))*(0.7745966692414834*g1*Cos(ThetaW()) + g2*Sin(
-      ThetaW()))*UM(gI1,1));
+   const std::complex<double> result = g2*Conj(UM(gI2,0))*Sin(ThetaW())*UM(gI1,0)
+      + 0.5*Conj(UM(gI2,1))*(0.7745966692414834*g1*Cos(ThetaW()) + g2*Sin(ThetaW()
+      ))*UM(gI1,1);
 
    return result;
 }
@@ -2096,9 +2096,9 @@ std::complex<double> CLASSNAME::CpbarChaChaVPPL(int gI1, int gI2) const
 std::complex<double> CLASSNAME::CpbarChaChaVPPR(int gI1, int gI2) const
 {
    
-   const std::complex<double> result = 0.5*(2*g2*Conj(UP(gI1,0))*Sin(ThetaW())*UP(
-      gI2,0) + Conj(UP(gI1,1))*(0.7745966692414834*g1*Cos(ThetaW()) + g2*Sin(
-      ThetaW()))*UP(gI2,1));
+   const std::complex<double> result = g2*Conj(UP(gI1,0))*Sin(ThetaW())*UP(gI2,0)
+      + 0.5*Conj(UP(gI1,1))*(0.7745966692414834*g1*Cos(ThetaW()) + g2*Sin(ThetaW()
+      ))*UP(gI2,1);
 
    return result;
 }
@@ -2216,9 +2216,9 @@ double CLASSNAME::CpconjVWpVWpVZ() const
 std::complex<double> CLASSNAME::CpbarChaChaVZPL(int gI1, int gI2) const
 {
    
-   const std::complex<double> result = 0.5*(2*g2*Conj(UM(gI2,0))*Cos(ThetaW())*UM(
-      gI1,0) + Conj(UM(gI2,1))*(g2*Cos(ThetaW()) - 0.7745966692414834*g1*Sin(
-      ThetaW()))*UM(gI1,1));
+   const std::complex<double> result = g2*Conj(UM(gI2,0))*Cos(ThetaW())*UM(gI1,0)
+      + 0.5*Conj(UM(gI2,1))*(g2*Cos(ThetaW()) - 0.7745966692414834*g1*Sin(ThetaW()
+      ))*UM(gI1,1);
 
    return result;
 }
@@ -2226,9 +2226,9 @@ std::complex<double> CLASSNAME::CpbarChaChaVZPL(int gI1, int gI2) const
 std::complex<double> CLASSNAME::CpbarChaChaVZPR(int gI1, int gI2) const
 {
    
-   const std::complex<double> result = 0.5*(2*g2*Conj(UP(gI1,0))*Cos(ThetaW())*UP(
-      gI2,0) + Conj(UP(gI1,1))*(g2*Cos(ThetaW()) - 0.7745966692414834*g1*Sin(
-      ThetaW()))*UP(gI2,1));
+   const std::complex<double> result = g2*Conj(UP(gI1,0))*Cos(ThetaW())*UP(gI2,0)
+      + 0.5*Conj(UP(gI1,1))*(g2*Cos(ThetaW()) - 0.7745966692414834*g1*Sin(ThetaW()
+      ))*UP(gI2,1);
 
    return result;
 }
@@ -3279,9 +3279,9 @@ std::complex<double> CLASSNAME::self_energy_VG_1loop(double p ) const
    result += -(AbsSqr(CpVGVGVG())*(15*B00(Sqr(p),0,0) + Sqr(p) + 6*B0(Sqr(p),0,0)*
       Sqr(p)));
    result += 0;
-   result += 1.5*((AbsSqr(CpGluGluVGPL()) + AbsSqr(CpGluGluVGPR()))*H0(Sqr(p),Sqr(
-      MGlu),Sqr(MGlu)) + 4*B0(Sqr(p),Sqr(MGlu),Sqr(MGlu))*Re(Conj(CpGluGluVGPL())*
-      CpGluGluVGPR())*Sqr(MGlu));
+   result += 1.5*(AbsSqr(CpGluGluVGPL()) + AbsSqr(CpGluGluVGPR()))*H0(Sqr(p),Sqr(
+      MGlu),Sqr(MGlu)) + 6*B0(Sqr(p),Sqr(MGlu),Sqr(MGlu))*Re(Conj(CpGluGluVGPL())*
+      CpGluGluVGPR())*Sqr(MGlu);
    result += 0.5*SUM(gI1,0,2,SUM(gI2,0,2,(AbsSqr(CpbarFdFdVGPL(gI1,gI2)) + AbsSqr(
       CpbarFdFdVGPR(gI1,gI2)))*H0(Sqr(p),Sqr(MFd(gI1)),Sqr(MFd(gI2))) + 4*B0(Sqr(p
       ),Sqr(MFd(gI1)),Sqr(MFd(gI2)))*MFd(gI1)*MFd(gI2)*Re(Conj(CpbarFdFdVGPL(gI1,
@@ -3399,8 +3399,8 @@ std::complex<double> CLASSNAME::self_energy_VWp_1loop(double p ) const
    result += -(AbsSqr(CpconjVWpVPVWp())*(A0(Sqr(MVWp)) + 10*B00(Sqr(p),Sqr(MVWp),0
       ) - 2*Sqr(MVWp) + 0.6666666666666666*Sqr(p) + B0(Sqr(p),Sqr(MVWp),0)*(Sqr(
       MVWp) + 4*Sqr(p))));
-   result += 0.5*(-(A0(Sqr(MVZ))*(4*CpconjVWpVWpVZVZ1() + CpconjVWpVWpVZVZ2() +
-      CpconjVWpVWpVZVZ3())) + 2*CpconjVWpVWpVZVZ1()*Sqr(MVZ));
+   result += -0.5*A0(Sqr(MVZ))*(4*CpconjVWpVWpVZVZ1() + CpconjVWpVWpVZVZ2() +
+      CpconjVWpVWpVZVZ3()) + CpconjVWpVWpVZVZ1()*Sqr(MVZ);
    result += -(AbsSqr(CpconjVWpVWpVZ())*(A0(Sqr(MVWp)) + A0(Sqr(MVZ)) + 10*B00(Sqr
       (p),Sqr(MVZ),Sqr(MVWp)) - 2*(Sqr(MVWp) + Sqr(MVZ) - 0.3333333333333333*Sqr(p
       )) + B0(Sqr(p),Sqr(MVZ),Sqr(MVWp))*(Sqr(MVWp) + Sqr(MVZ) + 4*Sqr(p))));

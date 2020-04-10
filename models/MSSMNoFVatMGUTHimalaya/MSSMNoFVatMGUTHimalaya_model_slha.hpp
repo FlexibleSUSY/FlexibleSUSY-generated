@@ -21,7 +21,7 @@
  * @brief contains wrapper class for model class in SLHA convention
  */
 
-// File generated at Wed 16 Oct 2019 19:02:19
+// File generated at Fri 10 Apr 2020 17:38:31
 
 #ifndef MSSMNoFVatMGUTHimalaya_SLHA_H
 #define MSSMNoFVatMGUTHimalaya_SLHA_H

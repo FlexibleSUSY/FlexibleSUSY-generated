@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 21:36:59
+// File generated at Fri 10 Apr 2020 19:47:04
 
 #include "HSSUSY_two_scale_susy_scale_constraint.hpp"
 #include "HSSUSY_two_scale_model.hpp"

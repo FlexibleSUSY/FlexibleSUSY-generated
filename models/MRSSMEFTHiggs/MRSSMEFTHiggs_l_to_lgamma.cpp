@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 20:07:29
+// File generated at Fri 10 Apr 2020 18:27:38
 
 /**
  * @file MRSSMEFTHiggs_l_to_lgamma.cpp
  *
- * This file was generated at Wed 16 Oct 2019 20:07:29 with FlexibleSUSY
- * 2.4.1 and SARAH 4.14.3 .
+ * This file was generated at Fri 10 Apr 2020 18:27:38 with FlexibleSUSY
+ * 2.4.2 and SARAH 4.14.3 .
  */
 
 #include <valarray>

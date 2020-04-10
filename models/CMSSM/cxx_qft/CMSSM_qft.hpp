@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 22:57:43
+// File generated at Fri 10 Apr 2020 20:48:28
 
 /**
  * @file cxx_qft/CMSSM_qft.hpp
  *
- * This file was generated at Wed 16 Oct 2019 22:57:43 with FlexibleSUSY
- * 2.4.1 and SARAH 4.14.3 .
+ * This file was generated at Fri 10 Apr 2020 20:48:28 with FlexibleSUSY
+ * 2.4.2 and SARAH 4.14.3 .
  */
 
 #ifndef CMSSM_CXXQFT_QFT_H

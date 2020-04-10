@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 21:35:46
+// File generated at Fri 10 Apr 2020 19:46:34
 
 /**
  * @file HSSUSY_mass_eigenstates.cpp
@@ -26,8 +26,8 @@
  * which solve EWSB and calculate pole masses and mixings from MSbar
  * parameters.
  *
- * This file was generated at Wed 16 Oct 2019 21:35:46 with FlexibleSUSY
- * 2.4.1 (git commit: 3e3a10f4fde301d99a4732f29d14f4ac1c646945) and SARAH 4.14.3 .
+ * This file was generated at Fri 10 Apr 2020 19:46:34 with FlexibleSUSY
+ * 2.4.2 (git commit: a94199e5620b8684f5d30d0eece5757a5a72c4a4) and SARAH 4.14.3 .
  */
 
 #include "HSSUSY_mass_eigenstates.hpp"
@@ -961,8 +961,7 @@ void CLASSNAME::calculate_MVG()
 double CLASSNAME::get_mass_matrix_Hp() const
 {
 
-   const double mass_matrix_Hp = Re(0.25*(4*mu2 + (2*Lambdax + Sqr(g2))*Sqr(v))
-      );
+   const double mass_matrix_Hp = Re(mu2 + 0.25*(2*Lambdax + Sqr(g2))*Sqr(v));
 
    return mass_matrix_Hp;
 }
@@ -2706,8 +2705,8 @@ std::complex<double> CLASSNAME::self_energy_VWp_1loop(double p ) const
    result += -(AbsSqr(CpconjVWpVPVWp())*(A0(Sqr(MVWp)) + 10*B00(Sqr(p),Sqr(MVWp),0
       ) - 2*Sqr(MVWp) + 0.6666666666666666*Sqr(p) + B0(Sqr(p),Sqr(MVWp),0)*(Sqr(
       MVWp) + 4*Sqr(p))));
-   result += 0.5*(-(A0(Sqr(MVZ))*(4*CpconjVWpVWpVZVZ1() + CpconjVWpVWpVZVZ2() +
-      CpconjVWpVWpVZVZ3())) + 2*CpconjVWpVWpVZVZ1()*Sqr(MVZ));
+   result += -0.5*A0(Sqr(MVZ))*(4*CpconjVWpVWpVZVZ1() + CpconjVWpVWpVZVZ2() +
+      CpconjVWpVWpVZVZ3()) + CpconjVWpVWpVZVZ1()*Sqr(MVZ);
    result += -(AbsSqr(CpconjVWpVWpVZ())*(A0(Sqr(MVWp)) + A0(Sqr(MVZ)) + 10*B00(Sqr
       (p),Sqr(MVZ),Sqr(MVWp)) - 2*(Sqr(MVWp) + Sqr(MVZ) - 0.3333333333333333*Sqr(p
       )) + B0(Sqr(p),Sqr(MVZ),Sqr(MVWp))*(Sqr(MVWp) + Sqr(MVZ) + 4*Sqr(p))));

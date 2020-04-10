@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 21:55:21
+// File generated at Fri 10 Apr 2020 19:54:37
 
 #ifndef SplitMSSM_SLHA_IO_H
 #define SplitMSSM_SLHA_IO_H

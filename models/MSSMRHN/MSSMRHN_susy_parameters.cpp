@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 22:34:11
+// File generated at Fri 10 Apr 2020 20:34:54
 
 #include "MSSMRHN_susy_parameters.hpp"
 #include "config.h"
@@ -261,10 +261,10 @@ Eigen::Matrix<double,3,3> CLASSNAME::get_SuRSuR() const
       0.5333333333333333*(Sqr(g1) + 5*Sqr(g3))*UNITMATRIX(3))).real();
 
    if (get_loops() > 1) {
-      anomDim += (twoLoop*(-0.4*(5*(Yu.conjugate()*Yd.transpose()*Yd.conjugate(
-         )*Yu.transpose() + Yu.conjugate()*Yu.transpose()*Yu.conjugate()*Yu.
-         transpose()) + Yu.conjugate()*Yu.transpose()*(Sqr(g1) - 15*Sqr(g2) +
-         15*(Yu*Yu.adjoint()).trace() + 5*(Yv*Yv.adjoint()).trace())) +
+      anomDim += (twoLoop*(-2*(Yu.conjugate()*Yd.transpose()*Yd.conjugate()*Yu.
+         transpose() + Yu.conjugate()*Yu.transpose()*Yu.conjugate()*Yu.
+         transpose()) - 0.4*(Yu.conjugate()*Yu.transpose())*(Sqr(g1) - 15*Sqr(
+         g2) + 15*(Yu*Yu.adjoint()).trace() + 5*(Yv*Yv.adjoint()).trace()) +
          0.035555555555555556*(107*Quad(g1) - 25*Quad(g3) + 80*Sqr(g1)*Sqr(g3))
          *UNITMATRIX(3))).real();
    }

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 22:57:53
+// File generated at Fri 10 Apr 2020 20:33:27
 
 #include "UMSSM_mass_eigenstates.hpp"
 #include "UMSSM_weinberg_angle.hpp"
@@ -243,11 +243,11 @@ double CLASSNAME::calculate_rho_hat_tree() const
    const auto vS = MODELPARAMETER(vS);
    const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
 
-   rhohat_tree = (5*(0.6*Sqr(g1) + Sqr(g2))*Sqrt(3*Sqr(g1) + 5*Sqr(g2))*(Sqr(vd) +
-      Sqr(vu)))/(4*gp*Sin(ThetaWp)*(2.23606797749979*Cos(ThetaWp)*(3*Sqr(g1) + 5*
-      Sqr(g2))*(QHd*Sqr(vd) - QHu*Sqr(vu)) + 5*gp*Sin(ThetaWp)*Sqrt(3*Sqr(g1) + 5*
-      Sqr(g2))*(Sqr(QHd)*Sqr(vd) + Sqr(Qs)*Sqr(vS) + Sqr(QHu)*Sqr(vu))) + Power3(
-      Sqrt(3*Sqr(g1) + 5*Sqr(g2)))*(Sqr(vd) + Sqr(vu))*Sqr(Cos(ThetaWp)));
+   rhohat_tree = ((3*Sqr(g1) + 5*Sqr(g2))*(Sqr(vd) + Sqr(vu)))/(4*gp*Sin(ThetaWp)*
+      (2.23606797749979*Cos(ThetaWp)*Sqrt(3*Sqr(g1) + 5*Sqr(g2))*(QHd*Sqr(vd) -
+      QHu*Sqr(vu)) + 5*gp*Sin(ThetaWp)*(Sqr(QHd)*Sqr(vd) + Sqr(Qs)*Sqr(vS) + Sqr(
+      QHu)*Sqr(vu))) + (3*Sqr(g1) + 5*Sqr(g2))*(Sqr(vd) + Sqr(vu))*Sqr(Cos(ThetaWp
+      )));
    return rhohat_tree;
 }
 

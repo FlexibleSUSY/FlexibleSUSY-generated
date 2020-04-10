@@ -285,7 +285,7 @@ run-metacode-$(MODNAME): $(METACODE_STAMP_NMSSMEFTHiggs)
 ifeq ($(ENABLE_META),yes)
 $(METACODE_STAMP_NMSSMEFTHiggs): $(DIR)/start.m $(DIR)/FlexibleSUSY.m $(META_SRC) $(TEMPLATES) $(SARAH_MODEL_FILES_NMSSMEFTHiggs)
 		@$(MSG)
-		$(Q)"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
+		$(Q)printf "%s" "Get[\"$<\"]; Quit[]" | "$(MATH)" || (echo "Error: The code generation failed!"; exit 1)
 		@touch "$(METACODE_STAMP_NMSSMEFTHiggs)"
 		@echo "Note: to regenerate NMSSMEFTHiggs source files," \
 		      "please remove the file "

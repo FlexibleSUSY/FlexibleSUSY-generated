@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 22:33:07
+// File generated at Fri 10 Apr 2020 20:19:28
 
 #include "config.h"
 
@@ -65,7 +65,7 @@
 namespace flexiblesusy {
 namespace SMSSM_librarylink {
 
-using Handle = mint;
+using Handle = long;
 
 class Redirect_output {
 public:

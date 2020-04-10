@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 22:52:16
+// File generated at Fri 10 Apr 2020 20:46:01
 
 /**
  * @file MSSMatMGUT_a_muon.cpp
  *
- * This file was generated at Wed 16 Oct 2019 22:52:16 with FlexibleSUSY
- * 2.4.1 and SARAH 4.14.3 .
+ * This file was generated at Fri 10 Apr 2020 20:46:01 with FlexibleSUSY
+ * 2.4.2 and SARAH 4.14.3 .
  */
 
 #include "MSSMatMGUT_a_muon.hpp"

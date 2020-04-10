@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 22:18:40
+// File generated at Fri 10 Apr 2020 20:28:00
 
 /**
  * @file NUTNMSSM_edm.cpp
  *
- * This file was generated at Wed 16 Oct 2019 22:18:40 with FlexibleSUSY
- * 2.4.1 and SARAH 4.14.3 .
+ * This file was generated at Fri 10 Apr 2020 20:28:00 with FlexibleSUSY
+ * 2.4.2 and SARAH 4.14.3 .
  */
 
 #include "NUTNMSSM_edm.hpp"

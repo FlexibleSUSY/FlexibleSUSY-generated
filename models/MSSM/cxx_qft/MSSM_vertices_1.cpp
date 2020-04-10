@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 22:54:40
+// File generated at Fri 10 Apr 2020 20:46:23
 
 /**
  * @file cxx_qft/MSSM_vertices.cpp
  *
- * This file was generated at Wed 16 Oct 2019 22:54:40 with FlexibleSUSY
- * 2.4.1 and SARAH 4.14.3 .
+ * This file was generated at Fri 10 Apr 2020 20:46:23 with FlexibleSUSY
+ * 2.4.2 and SARAH 4.14.3 .
  */
 
 #include "MSSM_context_base.hpp"
@@ -203,9 +203,9 @@ ChiralVertex VertexImpl<fields::VP, fields::Cha, typename bar<fields::Cha>::type
    const auto UM = MODELPARAMETER(UM);
    const auto ThetaW = DERIVEDPARAMETER(ThetaW);
 
-   const std::complex<double> left = 0.5*(-2*g2*Conj(UP(gt1,0))*Sin(ThetaW)*UP(gt2,0) - Conj(UP(gt1,1))*(0.7745966692414834*g1*Cos(ThetaW) + g2*Sin(ThetaW))*UP(gt2,1));
+   const std::complex<double> left = -(g2*Conj(UP(gt1,0))*Sin(ThetaW)*UP(gt2,0)) - 0.5*Conj(UP(gt1,1))*(0.7745966692414834*g1*Cos(ThetaW) + g2*Sin(ThetaW))*UP(gt2,1);
 
-   const std::complex<double> right = 0.5*(-2*g2*Conj(UM(gt2,0))*Sin(ThetaW)*UM(gt1,0) - Conj(UM(gt2,1))*(0.7745966692414834*g1*Cos(ThetaW) + g2*Sin(ThetaW))*UM(gt1,1));
+   const std::complex<double> right = -(g2*Conj(UM(gt2,0))*Sin(ThetaW)*UM(gt1,0)) - 0.5*Conj(UM(gt2,1))*(0.7745966692414834*g1*Cos(ThetaW) + g2*Sin(ThetaW))*UM(gt1,1);
 
    return {left, right};
 }
@@ -257,7 +257,7 @@ MomentumDifferenceVertex VertexImpl<fields::VP, fields::Se, typename conj<fields
    const auto ZE = MODELPARAMETER(ZE);
    const auto ThetaW = DERIVEDPARAMETER(ThetaW);
 
-   const std::complex<double> result = 0.5*((0.7745966692414834*g1*Cos(ThetaW) + g2*Sin(ThetaW))*SUM(j1,0,2,Conj(ZE(gt1,j1))*ZE(gt2,j1)) + 1.5491933384829668*g1*Cos(ThetaW)*SUM(j1,0,2,Conj(ZE(gt1,3 + j1))*ZE(gt2,3 + j1)));
+   const std::complex<double> result = 0.5*(0.7745966692414834*g1*Cos(ThetaW) + g2*Sin(ThetaW))*SUM(j1,0,2,Conj(ZE(gt1,j1))*ZE(gt2,j1)) + 0.7745966692414834*g1*Cos(ThetaW)*SUM(j1,0,2,Conj(ZE(gt1,3 + j1))*ZE(gt2,3 + j1));
 
    return {result, minuend_index, subtrahend_index};
 }
@@ -273,9 +273,9 @@ ChiralVertex VertexImpl<typename bar<fields::Cha>::type, fields::Cha, fields::VP
    const auto UP = MODELPARAMETER(UP);
    const auto ThetaW = DERIVEDPARAMETER(ThetaW);
 
-   const std::complex<double> left = 0.5*(2*g2*Conj(UM(gt2,0))*Sin(ThetaW)*UM(gt1,0) + Conj(UM(gt2,1))*(0.7745966692414834*g1*Cos(ThetaW) + g2*Sin(ThetaW))*UM(gt1,1));
+   const std::complex<double> left = g2*Conj(UM(gt2,0))*Sin(ThetaW)*UM(gt1,0) + 0.5*Conj(UM(gt2,1))*(0.7745966692414834*g1*Cos(ThetaW) + g2*Sin(ThetaW))*UM(gt1,1);
 
-   const std::complex<double> right = 0.5*(2*g2*Conj(UP(gt1,0))*Sin(ThetaW)*UP(gt2,0) + Conj(UP(gt1,1))*(0.7745966692414834*g1*Cos(ThetaW) + g2*Sin(ThetaW))*UP(gt2,1));
+   const std::complex<double> right = g2*Conj(UP(gt1,0))*Sin(ThetaW)*UP(gt2,0) + 0.5*Conj(UP(gt1,1))*(0.7745966692414834*g1*Cos(ThetaW) + g2*Sin(ThetaW))*UP(gt2,1);
 
    return {left, right};
 }
@@ -335,7 +335,7 @@ ChiralVertex VertexImpl<typename bar<fields::Fe>::type, fields::Chi, fields::Se>
 
    const std::complex<double> left = -1.0954451150103321*g1*Conj(ZN(gt2,0))*SUM(j1,0,2,Conj(ZE(gt3,3 + j1))*Conj(ZER(gt1,j1))) - Conj(ZN(gt2,2))*SUM(j2,0,2,Conj(ZE(gt3,j2))*SUM(j1,0,2,Conj(ZER(gt1,j1))*Ye(j1,j2)));
 
-   const std::complex<double> right = 0.5*(SUM(j1,0,2,Conj(ZE(gt3,j1))*ZEL(gt1,j1))*(1.0954451150103321*g1*ZN(gt2,0) + 1.4142135623730951*g2*ZN(gt2,1)) - 2*SUM(j2,0,2,SUM(j1,0,2,Conj(Ye(j1,j2))*Conj(ZE(gt3,3 + j1)))*ZEL(gt1,j2))*ZN(gt2,2));
+   const std::complex<double> right = 0.7071067811865475*SUM(j1,0,2,Conj(ZE(gt3,j1))*ZEL(gt1,j1))*(0.7745966692414834*g1*ZN(gt2,0) + g2*ZN(gt2,1)) - SUM(j2,0,2,SUM(j1,0,2,Conj(Ye(j1,j2))*Conj(ZE(gt3,3 + j1)))*ZEL(gt1,j2))*ZN(gt2,2);
 
    return {left, right};
 }
@@ -460,7 +460,7 @@ ChiralVertex VertexImpl<typename bar<fields::Fe>::type, fields::Se, fields::Chi>
 
    const std::complex<double> left = -1.0954451150103321*g1*Conj(ZN(gt2,0))*SUM(j1,0,2,Conj(ZE(gt3,3 + j1))*Conj(ZER(gt1,j1))) - Conj(ZN(gt2,2))*SUM(j2,0,2,Conj(ZE(gt3,j2))*SUM(j1,0,2,Conj(ZER(gt1,j1))*Ye(j1,j2)));
 
-   const std::complex<double> right = 0.5*(SUM(j1,0,2,Conj(ZE(gt3,j1))*ZEL(gt1,j1))*(1.0954451150103321*g1*ZN(gt2,0) + 1.4142135623730951*g2*ZN(gt2,1)) - 2*SUM(j2,0,2,SUM(j1,0,2,Conj(Ye(j1,j2))*Conj(ZE(gt3,3 + j1)))*ZEL(gt1,j2))*ZN(gt2,2));
+   const std::complex<double> right = 0.7071067811865475*SUM(j1,0,2,Conj(ZE(gt3,j1))*ZEL(gt1,j1))*(0.7745966692414834*g1*ZN(gt2,0) + g2*ZN(gt2,1)) - SUM(j2,0,2,SUM(j1,0,2,Conj(Ye(j1,j2))*Conj(ZE(gt3,3 + j1)))*ZEL(gt1,j2))*ZN(gt2,2);
 
    return {left, right};
 }
@@ -534,7 +534,7 @@ MomentumDifferenceVertex VertexImpl<typename conj<fields::Se>::type, fields::Se,
    const auto ZE = MODELPARAMETER(ZE);
    const auto ThetaW = DERIVEDPARAMETER(ThetaW);
 
-   const std::complex<double> result = 0.5*((0.7745966692414834*g1*Cos(ThetaW) + g2*Sin(ThetaW))*SUM(j1,0,2,Conj(ZE(gt1,j1))*ZE(gt2,j1)) + 1.5491933384829668*g1*Cos(ThetaW)*SUM(j1,0,2,Conj(ZE(gt1,3 + j1))*ZE(gt2,3 + j1)));
+   const std::complex<double> result = 0.5*(0.7745966692414834*g1*Cos(ThetaW) + g2*Sin(ThetaW))*SUM(j1,0,2,Conj(ZE(gt1,j1))*ZE(gt2,j1)) + 0.7745966692414834*g1*Cos(ThetaW)*SUM(j1,0,2,Conj(ZE(gt1,3 + j1))*ZE(gt2,3 + j1));
 
    return {result, minuend_index, subtrahend_index};
 }

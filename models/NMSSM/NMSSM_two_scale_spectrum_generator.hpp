@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 22:23:24
+// File generated at Fri 10 Apr 2020 20:30:00
 
 #ifndef NMSSM_TWO_SCALE_SPECTRUM_GENERATOR_H
 #define NMSSM_TWO_SCALE_SPECTRUM_GENERATOR_H

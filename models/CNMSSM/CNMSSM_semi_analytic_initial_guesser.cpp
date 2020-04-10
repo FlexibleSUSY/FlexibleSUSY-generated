@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 19:33:46
+// File generated at Fri 10 Apr 2020 17:55:57
 
 #include "CNMSSM_semi_analytic_initial_guesser.hpp"
 #include "CNMSSM_semi_analytic_model.hpp"

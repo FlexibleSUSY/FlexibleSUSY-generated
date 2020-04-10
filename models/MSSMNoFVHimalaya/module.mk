@@ -284,7 +284,7 @@ run-metacode-$(MODNAME): $(METACODE_STAMP_MSSMNoFVHimalaya)
 ifeq ($(ENABLE_META),yes)
 $(METACODE_STAMP_MSSMNoFVHimalaya): $(DIR)/start.m $(DIR)/FlexibleSUSY.m $(META_SRC) $(TEMPLATES) $(SARAH_MODEL_FILES_MSSMNoFVHimalaya)
 		@$(MSG)
-		$(Q)"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
+		$(Q)printf "%s" "Get[\"$<\"]; Quit[]" | "$(MATH)" || (echo "Error: The code generation failed!"; exit 1)
 		@touch "$(METACODE_STAMP_MSSMNoFVHimalaya)"
 		@echo "Note: to regenerate MSSMNoFVHimalaya source files," \
 		      "please remove the file "

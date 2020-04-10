@@ -16,13 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 21:36:18
+// File generated at Fri 10 Apr 2020 19:47:35
 
 /**
  * @file cxx_qft/SM_qft.hpp
  *
- * This file was generated at Wed 16 Oct 2019 21:36:18 with FlexibleSUSY
- * 2.4.1 and SARAH 4.14.3 .
+ * This file was generated at Fri 10 Apr 2020 19:47:35 with FlexibleSUSY
+ * 2.4.2 and SARAH 4.14.3 .
  */
 
 #ifndef SM_CXXQFT_QFT_H

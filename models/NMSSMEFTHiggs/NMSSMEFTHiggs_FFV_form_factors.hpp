@@ -19,8 +19,8 @@
 /**
  * @file NMSSMEFTHiggs_FFV_form_factors.hpp
  *
- * This file was generated at Wed 16 Oct 2019 19:38:38 with FlexibleSUSY
- * 2.4.1 and SARAH 4.14.3 .
+ * This file was generated at Fri 10 Apr 2020 18:45:20 with FlexibleSUSY
+ * 2.4.2 and SARAH 4.14.3 .
  */
 
 #ifndef NMSSMEFTHiggs_FFVFormFactors_H

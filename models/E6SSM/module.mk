@@ -284,7 +284,7 @@ run-metacode-$(MODNAME): $(METACODE_STAMP_E6SSM)
 ifeq ($(ENABLE_META),yes)
 $(METACODE_STAMP_E6SSM): $(DIR)/start.m $(DIR)/FlexibleSUSY.m $(META_SRC) $(TEMPLATES) $(SARAH_MODEL_FILES_E6SSM)
 		@$(MSG)
-		$(Q)"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
+		$(Q)printf "%s" "Get[\"$<\"]; Quit[]" | "$(MATH)" || (echo "Error: The code generation failed!"; exit 1)
 		@touch "$(METACODE_STAMP_E6SSM)"
 		@echo "Note: to regenerate E6SSM source files," \
 		      "please remove the file "

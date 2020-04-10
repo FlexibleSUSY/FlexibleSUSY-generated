@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 18:31:48
+// File generated at Fri 10 Apr 2020 17:36:42
 
 #ifndef MSSMNoFVatMGUTHimalaya_susy_parameters_H
 #define MSSMNoFVatMGUTHimalaya_susy_parameters_H

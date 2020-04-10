@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 22:33:04
+// File generated at Fri 10 Apr 2020 20:19:27
 
 #include "SMSSM_effective_couplings.hpp"
 
@@ -347,19 +347,19 @@ std::complex<double> SMSSM_effective_couplings::CphhSdconjSd(int gt1, int gt2, i
       SUM(j2,0,2,Conj(ZD(gt2,j2))*SUM(j1,0,2,Yd(j1,j2)*ZD(gt3,3 + j1))) + Lambdax*
       SUM(j2,0,2,SUM(j1,0,2,Conj(Yd(j1,j2))*Conj(ZD(gt2,3 + j1)))*ZD(gt3,j2))) +
       Conj(ZH(gt1,1))*(-(vu*(Sqr(g1) + 5*Sqr(g2))*SUM(j1,0,2,Conj(ZD(gt2,j1))*ZD(
-      gt3,j1))) + 2*(-(vu*Sqr(g1)*SUM(j1,0,2,Conj(ZD(gt2,3 + j1))*ZD(gt3,3 + j1)))
-      + 5*(vS*Conj(Lambdax)*SUM(j2,0,2,Conj(ZD(gt2,j2))*SUM(j1,0,2,Yd(j1,j2)*ZD(
-      gt3,3 + j1))) + 1.4142135623730951*Conj(Mu)*SUM(j2,0,2,Conj(ZD(gt2,j2))*SUM(
-      j1,0,2,Yd(j1,j2)*ZD(gt3,3 + j1))) + (vS*Lambdax + 1.4142135623730951*Mu)*SUM
-      (j2,0,2,SUM(j1,0,2,Conj(Yd(j1,j2))*Conj(ZD(gt2,3 + j1)))*ZD(gt3,j2))))) +
-      Conj(ZH(gt1,0))*(vd*(Sqr(g1) + 5*Sqr(g2))*SUM(j1,0,2,Conj(ZD(gt2,j1))*ZD(gt3
-      ,j1)) + 2*(vd*Sqr(g1)*SUM(j1,0,2,Conj(ZD(gt2,3 + j1))*ZD(gt3,3 + j1)) - 5*(
+      gt3,j1))) - 2*vu*Sqr(g1)*SUM(j1,0,2,Conj(ZD(gt2,3 + j1))*ZD(gt3,3 + j1)) +
+      10*(vS*Conj(Lambdax)*SUM(j2,0,2,Conj(ZD(gt2,j2))*SUM(j1,0,2,Yd(j1,j2)*ZD(gt3
+      ,3 + j1))) + 1.4142135623730951*Conj(Mu)*SUM(j2,0,2,Conj(ZD(gt2,j2))*SUM(j1,
+      0,2,Yd(j1,j2)*ZD(gt3,3 + j1))) + (vS*Lambdax + 1.4142135623730951*Mu)*SUM(j2
+      ,0,2,SUM(j1,0,2,Conj(Yd(j1,j2))*Conj(ZD(gt2,3 + j1)))*ZD(gt3,j2)))) + Conj(
+      ZH(gt1,0))*(vd*(Sqr(g1) + 5*Sqr(g2))*SUM(j1,0,2,Conj(ZD(gt2,j1))*ZD(gt3,j1))
+      + 2*vd*Sqr(g1)*SUM(j1,0,2,Conj(ZD(gt2,3 + j1))*ZD(gt3,3 + j1)) - 10*(
       1.4142135623730951*SUM(j2,0,2,Conj(ZD(gt2,j2))*SUM(j1,0,2,ZD(gt3,3 + j1)*TYd
       (j1,j2))) + 1.4142135623730951*SUM(j2,0,2,SUM(j1,0,2,Conj(ZD(gt2,3 + j1))*
       Conj(TYd(j1,j2)))*ZD(gt3,j2)) + 2*vd*(SUM(j3,0,2,Conj(ZD(gt2,3 + j3))*SUM(j2
       ,0,2,SUM(j1,0,2,Conj(Yd(j3,j1))*Yd(j2,j1))*ZD(gt3,3 + j2))) + SUM(j3,0,2,SUM
       (j2,0,2,Conj(ZD(gt2,j2))*SUM(j1,0,2,Conj(Yd(j1,j3))*Yd(j1,j2)))*ZD(gt3,j3)))
-      ))));
+      )));
 
    return result;
 }
@@ -380,12 +380,12 @@ std::complex<double> SMSSM_effective_couplings::CphhSuconjSu(int gt1, int gt2, i
       SUM(j2,0,2,Conj(ZU(gt2,j2))*SUM(j1,0,2,Yu(j1,j2)*ZU(gt3,3 + j1))) + Lambdax*
       SUM(j2,0,2,SUM(j1,0,2,Conj(Yu(j1,j2))*Conj(ZU(gt2,3 + j1)))*ZU(gt3,j2))) +
       Conj(ZH(gt1,0))*(vd*(Sqr(g1) - 5*Sqr(g2))*SUM(j1,0,2,Conj(ZU(gt2,j1))*ZU(gt3
-      ,j1)) + 2*(-2*vd*Sqr(g1)*SUM(j1,0,2,Conj(ZU(gt2,3 + j1))*ZU(gt3,3 + j1)) + 5
-      *(vS*Conj(Lambdax)*SUM(j2,0,2,Conj(ZU(gt2,j2))*SUM(j1,0,2,Yu(j1,j2)*ZU(gt3,3
-       + j1))) + 1.4142135623730951*Conj(Mu)*SUM(j2,0,2,Conj(ZU(gt2,j2))*SUM(j1,0,
-      2,Yu(j1,j2)*ZU(gt3,3 + j1))) + (vS*Lambdax + 1.4142135623730951*Mu)*SUM(j2,0
-      ,2,SUM(j1,0,2,Conj(Yu(j1,j2))*Conj(ZU(gt2,3 + j1)))*ZU(gt3,j2))))) - Conj(ZH
-      (gt1,1))*(vu*(Sqr(g1) - 5*Sqr(g2))*SUM(j1,0,2,Conj(ZU(gt2,j1))*ZU(gt3,j1)) -
+      ,j1)) - 4*vd*Sqr(g1)*SUM(j1,0,2,Conj(ZU(gt2,3 + j1))*ZU(gt3,3 + j1)) + 10*(
+      vS*Conj(Lambdax)*SUM(j2,0,2,Conj(ZU(gt2,j2))*SUM(j1,0,2,Yu(j1,j2)*ZU(gt3,3 +
+      j1))) + 1.4142135623730951*Conj(Mu)*SUM(j2,0,2,Conj(ZU(gt2,j2))*SUM(j1,0,2,
+      Yu(j1,j2)*ZU(gt3,3 + j1))) + (vS*Lambdax + 1.4142135623730951*Mu)*SUM(j2,0,2
+      ,SUM(j1,0,2,Conj(Yu(j1,j2))*Conj(ZU(gt2,3 + j1)))*ZU(gt3,j2)))) - Conj(ZH(
+      gt1,1))*(vu*(Sqr(g1) - 5*Sqr(g2))*SUM(j1,0,2,Conj(ZU(gt2,j1))*ZU(gt3,j1)) -
       4*vu*Sqr(g1)*SUM(j1,0,2,Conj(ZU(gt2,3 + j1))*ZU(gt3,3 + j1)) + 10*(
       1.4142135623730951*SUM(j2,0,2,Conj(ZU(gt2,j2))*SUM(j1,0,2,ZU(gt3,3 + j1)*TYu
       (j1,j2))) + 1.4142135623730951*SUM(j2,0,2,SUM(j1,0,2,Conj(ZU(gt2,3 + j1))*
@@ -413,19 +413,19 @@ std::complex<double> SMSSM_effective_couplings::CphhSeconjSe(int gt1, int gt2, i
       SUM(j2,0,2,Conj(ZE(gt2,j2))*SUM(j1,0,2,Ye(j1,j2)*ZE(gt3,3 + j1))) + Lambdax*
       SUM(j2,0,2,SUM(j1,0,2,Conj(Ye(j1,j2))*Conj(ZE(gt2,3 + j1)))*ZE(gt3,j2))) +
       Conj(ZH(gt1,1))*(vu*(3*Sqr(g1) - 5*Sqr(g2))*SUM(j1,0,2,Conj(ZE(gt2,j1))*ZE(
-      gt3,j1)) + 2*(-3*vu*Sqr(g1)*SUM(j1,0,2,Conj(ZE(gt2,3 + j1))*ZE(gt3,3 + j1))
-      + 5*(vS*Conj(Lambdax)*SUM(j2,0,2,Conj(ZE(gt2,j2))*SUM(j1,0,2,Ye(j1,j2)*ZE(
-      gt3,3 + j1))) + 1.4142135623730951*Conj(Mu)*SUM(j2,0,2,Conj(ZE(gt2,j2))*SUM(
-      j1,0,2,Ye(j1,j2)*ZE(gt3,3 + j1))) + (vS*Lambdax + 1.4142135623730951*Mu)*SUM
-      (j2,0,2,SUM(j1,0,2,Conj(Ye(j1,j2))*Conj(ZE(gt2,3 + j1)))*ZE(gt3,j2))))) -
-      Conj(ZH(gt1,0))*(vd*(3*Sqr(g1) - 5*Sqr(g2))*SUM(j1,0,2,Conj(ZE(gt2,j1))*ZE(
-      gt3,j1)) - 6*vd*Sqr(g1)*SUM(j1,0,2,Conj(ZE(gt2,3 + j1))*ZE(gt3,3 + j1)) + 10
-      *(1.4142135623730951*SUM(j2,0,2,Conj(ZE(gt2,j2))*SUM(j1,0,2,ZE(gt3,3 + j1)*
-      TYe(j1,j2))) + 1.4142135623730951*SUM(j2,0,2,SUM(j1,0,2,Conj(ZE(gt2,3 + j1))
-      *Conj(TYe(j1,j2)))*ZE(gt3,j2)) + 2*vd*(SUM(j3,0,2,Conj(ZE(gt2,3 + j3))*SUM(
-      j2,0,2,SUM(j1,0,2,Conj(Ye(j3,j1))*Ye(j2,j1))*ZE(gt3,3 + j2))) + SUM(j3,0,2,
-      SUM(j2,0,2,Conj(ZE(gt2,j2))*SUM(j1,0,2,Conj(Ye(j1,j3))*Ye(j1,j2)))*ZE(gt3,j3
-      ))))));
+      gt3,j1)) - 6*vu*Sqr(g1)*SUM(j1,0,2,Conj(ZE(gt2,3 + j1))*ZE(gt3,3 + j1)) + 10
+      *(vS*Conj(Lambdax)*SUM(j2,0,2,Conj(ZE(gt2,j2))*SUM(j1,0,2,Ye(j1,j2)*ZE(gt3,3
+       + j1))) + 1.4142135623730951*Conj(Mu)*SUM(j2,0,2,Conj(ZE(gt2,j2))*SUM(j1,0,
+      2,Ye(j1,j2)*ZE(gt3,3 + j1))) + (vS*Lambdax + 1.4142135623730951*Mu)*SUM(j2,0
+      ,2,SUM(j1,0,2,Conj(Ye(j1,j2))*Conj(ZE(gt2,3 + j1)))*ZE(gt3,j2)))) - Conj(ZH(
+      gt1,0))*(vd*(3*Sqr(g1) - 5*Sqr(g2))*SUM(j1,0,2,Conj(ZE(gt2,j1))*ZE(gt3,j1))
+      - 6*vd*Sqr(g1)*SUM(j1,0,2,Conj(ZE(gt2,3 + j1))*ZE(gt3,3 + j1)) + 10*(
+      1.4142135623730951*SUM(j2,0,2,Conj(ZE(gt2,j2))*SUM(j1,0,2,ZE(gt3,3 + j1)*TYe
+      (j1,j2))) + 1.4142135623730951*SUM(j2,0,2,SUM(j1,0,2,Conj(ZE(gt2,3 + j1))*
+      Conj(TYe(j1,j2)))*ZE(gt3,j2)) + 2*vd*(SUM(j3,0,2,Conj(ZE(gt2,3 + j3))*SUM(j2
+      ,0,2,SUM(j1,0,2,Conj(Ye(j3,j1))*Ye(j2,j1))*ZE(gt3,3 + j2))) + SUM(j3,0,2,SUM
+      (j2,0,2,Conj(ZE(gt2,j2))*SUM(j1,0,2,Conj(Ye(j1,j3))*Ye(j1,j2)))*ZE(gt3,j3)))
+      )));
 
    return result;
 }

@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 19:02:45
+// File generated at Fri 10 Apr 2020 17:35:14
 
 #include "NUHMSSMNoFVHimalaya_two_scale_high_scale_constraint.hpp"
 #include "NUHMSSMNoFVHimalaya_two_scale_model.hpp"
@@ -494,15 +494,15 @@ void NUHMSSMNoFVHimalaya_high_scale_constraint<Two_scale>::initialize()
    check_model_ptr();
 
    const auto Qin = INPUTPARAMETER(Qin);
-   const auto TanBeta = INPUTPARAMETER(TanBeta);
-   const auto MuIN = INPUTPARAMETER(MuIN);
    const auto AtIN = INPUTPARAMETER(AtIN);
    const auto mq33IN = INPUTPARAMETER(mq33IN);
    const auto mu33IN = INPUTPARAMETER(mu33IN);
+   const auto MuIN = INPUTPARAMETER(MuIN);
+   const auto TanBeta = INPUTPARAMETER(TanBeta);
 
-   initial_scale_guess = IF(Qin != 0, Qin, Sqrt(Sqrt((51200*AtIN*MuIN*TanBeta -
-      25600*Sqr(MuIN) + (-25600*Sqr(AtIN) + (25600 + Sqr(mq33IN))*(25600 + Sqr(
-      mu33IN)))*Sqr(TanBeta))/Sqr(TanBeta))));
+   initial_scale_guess = IF(Qin != 0, Qin, Sqrt(Sqrt((51200*AtIN*MuIN)/TanBeta -
+      25600*Sqr(AtIN) + (25600 + Sqr(mq33IN))*(25600 + Sqr(mu33IN)) - (25600*Sqr(
+      MuIN))/Sqr(TanBeta))));
 
    scale = initial_scale_guess;
 }
@@ -512,18 +512,18 @@ void NUHMSSMNoFVHimalaya_high_scale_constraint<Two_scale>::update_scale()
    check_model_ptr();
 
    const auto Qin = INPUTPARAMETER(Qin);
-   const auto TanBeta = INPUTPARAMETER(TanBeta);
    const auto mq33IN = INPUTPARAMETER(mq33IN);
    const auto mu33IN = INPUTPARAMETER(mu33IN);
+   const auto TanBeta = INPUTPARAMETER(TanBeta);
    const auto MuIN = INPUTPARAMETER(MuIN);
    const auto AtIN = INPUTPARAMETER(AtIN);
    const auto vu = MODELPARAMETER(vu);
    const auto Yu = MODELPARAMETER(Yu);
 
-   scale = IF(Qin != 0, Qin, 0.7071067811865476*Sqrt(Sqrt((2*Sqr(mq33IN)*Sqr(
-      TanBeta)*(2*Sqr(mu33IN) + Sqr(vu)*Sqr(Yu(2,2))) + Sqr(vu)*Sqr(Yu(2,2))*(4*
-      AtIN*MuIN*TanBeta - 2*Sqr(MuIN) + Sqr(TanBeta)*(-2*Sqr(AtIN) + 2*Sqr(mu33IN)
-      + Sqr(vu)*Sqr(Yu(2,2)))))/Sqr(TanBeta))));
+   scale = IF(Qin != 0, Qin, 0.7071067811865476*Sqrt(Sqrt(2*Sqr(mq33IN)*(2*Sqr(
+      mu33IN) + Sqr(vu)*Sqr(Yu(2,2))) + (Sqr(vu)*Sqr(Yu(2,2))*(4*AtIN*MuIN*TanBeta
+       - 2*Sqr(MuIN) + Sqr(TanBeta)*(-2*Sqr(AtIN) + 2*Sqr(mu33IN) + Sqr(vu)*Sqr(Yu
+      (2,2)))))/Sqr(TanBeta))));
 
 
 }

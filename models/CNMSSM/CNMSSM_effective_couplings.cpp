@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 19:33:58
+// File generated at Fri 10 Apr 2020 17:56:03
 
 #include "CNMSSM_effective_couplings.hpp"
 
@@ -342,8 +342,8 @@ std::complex<double> CNMSSM_effective_couplings::CphhSdconjSd(int gt1, int gt2, 
    const auto Lambdax = MODELPARAMETER(Lambdax);
 
    const std::complex<double> result = 0.05*((Sqr(g1) + 5*Sqr(g2))*SUM(j1,0,2,Conj
-      (ZD(gt2,j1))*ZD(gt3,j1))*(vd*ZH(gt1,0) - vu*ZH(gt1,1)) + 2*(Sqr(g1)*SUM(j1,0
-      ,2,Conj(ZD(gt2,3 + j1))*ZD(gt3,3 + j1))*(vd*ZH(gt1,0) - vu*ZH(gt1,1)) - 5*(
+      (ZD(gt2,j1))*ZD(gt3,j1))*(vd*ZH(gt1,0) - vu*ZH(gt1,1)) + 2*Sqr(g1)*SUM(j1,0,
+      2,Conj(ZD(gt2,3 + j1))*ZD(gt3,3 + j1))*(vd*ZH(gt1,0) - vu*ZH(gt1,1)) - 10*(
       1.4142135623730951*SUM(j2,0,2,Conj(ZD(gt2,j2))*SUM(j1,0,2,ZD(gt3,3 + j1)*TYd
       (j1,j2)))*ZH(gt1,0) + 1.4142135623730951*SUM(j2,0,2,SUM(j1,0,2,Conj(ZD(gt2,3
        + j1))*Conj(TYd(j1,j2)))*ZD(gt3,j2))*ZH(gt1,0) + 2*vd*SUM(j3,0,2,Conj(ZD(
@@ -354,7 +354,7 @@ std::complex<double> CNMSSM_effective_couplings::CphhSdconjSd(int gt1, int gt2, 
       Lambdax*SUM(j2,0,2,SUM(j1,0,2,Conj(Yd(j1,j2))*Conj(ZD(gt2,3 + j1)))*ZD(gt3,
       j2))*ZH(gt1,1) - vu*Conj(Lambdax)*SUM(j2,0,2,Conj(ZD(gt2,j2))*SUM(j1,0,2,Yd(
       j1,j2)*ZD(gt3,3 + j1)))*ZH(gt1,2) - vu*Lambdax*SUM(j2,0,2,SUM(j1,0,2,Conj(Yd
-      (j1,j2))*Conj(ZD(gt2,3 + j1)))*ZD(gt3,j2))*ZH(gt1,2))));
+      (j1,j2))*Conj(ZD(gt2,3 + j1)))*ZD(gt3,j2))*ZH(gt1,2)));
 
    return result;
 }
@@ -371,17 +371,17 @@ std::complex<double> CNMSSM_effective_couplings::CphhSuconjSu(int gt1, int gt2, 
    const auto Lambdax = MODELPARAMETER(Lambdax);
 
    const std::complex<double> result = 0.05*((Sqr(g1) - 5*Sqr(g2))*SUM(j1,0,2,Conj
-      (ZU(gt2,j1))*ZU(gt3,j1))*(vd*ZH(gt1,0) - vu*ZH(gt1,1)) - 2*(2*Sqr(g1)*SUM(j1
-      ,0,2,Conj(ZU(gt2,3 + j1))*ZU(gt3,3 + j1))*(vd*ZH(gt1,0) - vu*ZH(gt1,1)) - 5*
-      (-((1.4142135623730951*SUM(j2,0,2,Conj(ZU(gt2,j2))*SUM(j1,0,2,ZU(gt3,3 + j1)
-      *TYu(j1,j2))) + 1.4142135623730951*SUM(j2,0,2,SUM(j1,0,2,Conj(ZU(gt2,3 + j1)
-      )*Conj(TYu(j1,j2)))*ZU(gt3,j2)) + 2*vu*(SUM(j3,0,2,Conj(ZU(gt2,3 + j3))*SUM(
+      (ZU(gt2,j1))*ZU(gt3,j1))*(vd*ZH(gt1,0) - vu*ZH(gt1,1)) - 4*Sqr(g1)*SUM(j1,0,
+      2,Conj(ZU(gt2,3 + j1))*ZU(gt3,3 + j1))*(vd*ZH(gt1,0) - vu*ZH(gt1,1)) + 10*(-
+      ((1.4142135623730951*SUM(j2,0,2,Conj(ZU(gt2,j2))*SUM(j1,0,2,ZU(gt3,3 + j1)*
+      TYu(j1,j2))) + 1.4142135623730951*SUM(j2,0,2,SUM(j1,0,2,Conj(ZU(gt2,3 + j1))
+      *Conj(TYu(j1,j2)))*ZU(gt3,j2)) + 2*vu*(SUM(j3,0,2,Conj(ZU(gt2,3 + j3))*SUM(
       j2,0,2,SUM(j1,0,2,Conj(Yu(j3,j1))*Yu(j2,j1))*ZU(gt3,3 + j2))) + SUM(j3,0,2,
       SUM(j2,0,2,Conj(ZU(gt2,j2))*SUM(j1,0,2,Conj(Yu(j1,j3))*Yu(j1,j2)))*ZU(gt3,j3
       ))))*ZH(gt1,1)) + Conj(Lambdax)*SUM(j2,0,2,Conj(ZU(gt2,j2))*SUM(j1,0,2,Yu(j1
       ,j2)*ZU(gt3,3 + j1)))*(vS*ZH(gt1,0) + vd*ZH(gt1,2)) + Lambdax*SUM(j2,0,2,SUM
       (j1,0,2,Conj(Yu(j1,j2))*Conj(ZU(gt2,3 + j1)))*ZU(gt3,j2))*(vS*ZH(gt1,0) + vd
-      *ZH(gt1,2)))));
+      *ZH(gt1,2))));
 
    return result;
 }

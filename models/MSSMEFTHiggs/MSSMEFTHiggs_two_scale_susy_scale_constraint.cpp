@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 19:59:17
+// File generated at Fri 10 Apr 2020 18:54:51
 
 #include "MSSMEFTHiggs_two_scale_susy_scale_constraint.hpp"
 #include "MSSMEFTHiggs_two_scale_model.hpp"
@@ -162,15 +162,15 @@ void MSSMEFTHiggs_susy_scale_constraint<Two_scale>::initialize()
    check_model_ptr();
 
    const auto MSUSY = INPUTPARAMETER(MSUSY);
-   const auto TanBeta = INPUTPARAMETER(TanBeta);
    const auto MuInput = INPUTPARAMETER(MuInput);
+   const auto TanBeta = INPUTPARAMETER(TanBeta);
    const auto AuInput = INPUTPARAMETER(AuInput);
    const auto mq2Input = INPUTPARAMETER(mq2Input);
    const auto mu2Input = INPUTPARAMETER(mu2Input);
 
-   initial_scale_guess = IF(MSUSY != 0, MSUSY, Sqrt(Sqrt((51200*MuInput*TanBeta*
-      AuInput(2,2) - 25600*Sqr(MuInput) + Sqr(TanBeta)*((25600 + mq2Input(2,2))*(
-      25600 + mu2Input(2,2)) - 25600*Sqr(AuInput(2,2))))/Sqr(TanBeta))));
+   initial_scale_guess = IF(MSUSY != 0, MSUSY, Sqrt(Sqrt((51200*MuInput*AuInput(2,
+      2))/TanBeta + (25600 + mq2Input(2,2))*(25600 + mu2Input(2,2)) - (25600*Sqr(
+      MuInput))/Sqr(TanBeta) - 25600*Sqr(AuInput(2,2)))));
 
    scale = initial_scale_guess;
 }

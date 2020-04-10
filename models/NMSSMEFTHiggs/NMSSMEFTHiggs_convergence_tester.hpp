@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Wed 16 Oct 2019 19:38:10
+// File generated at Fri 10 Apr 2020 18:45:08
 
 #ifndef NMSSMEFTHiggs_CONVERGENCE_TESTER_H
 #define NMSSMEFTHiggs_CONVERGENCE_TESTER_H

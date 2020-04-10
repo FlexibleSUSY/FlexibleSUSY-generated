@@ -284,7 +284,7 @@ run-metacode-$(MODNAME): $(METACODE_STAMP_E6SSMEFTHiggs)
 ifeq ($(ENABLE_META),yes)
 $(METACODE_STAMP_E6SSMEFTHiggs): $(DIR)/start.m $(DIR)/FlexibleSUSY.m $(META_SRC) $(TEMPLATES) $(SARAH_MODEL_FILES_E6SSMEFTHiggs)
 		@$(MSG)
-		$(Q)"$(MATH)" -run "Get[\"$<\"]; Quit[]" || (echo "Error: The code generation failed!"; exit 1)
+		$(Q)printf "%s" "Get[\"$<\"]; Quit[]" | "$(MATH)" || (echo "Error: The code generation failed!"; exit 1)
 		@touch "$(METACODE_STAMP_E6SSMEFTHiggs)"
 		@echo "Note: to regenerate E6SSMEFTHiggs source files," \
 		      "please remove the file "
