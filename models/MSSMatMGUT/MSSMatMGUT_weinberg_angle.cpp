@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:45:56
 
 #include "MSSMatMGUT_mass_eigenstates.hpp"
 #include "MSSMatMGUT_weinberg_angle.hpp"
@@ -27,7 +26,9 @@
 #include "config.h"
 #include "numerics.h"
 #include "error.hpp"
-#include "pv.hpp"
+#include "loop_libraries/loop_library.hpp"
+#include "standard_model.hpp"
+#include "ew_input.hpp"
 
 #include <limits>
 #include <cmath>
@@ -59,7 +60,7 @@ const double ROOT2 = Sqrt(2.0);
 /**
  * Sets the maximum number of iterations to 20, the number of loops to 2,
  * the precision goal to 1.0e-8, and the model pointer as well as the
- * SM parameter struct to the ones which are handed over as parameters. 
+ * SM parameter struct to the ones which are handed over as parameters.
  *
  * @param model_ pointer to the model for which the calculation shall be done
  * @param sm_parameters_ struct containing the required SM parameters
@@ -209,15 +210,7 @@ std::pair<double,double> CLASSNAME::calculate(double sinThetaW_start)
    if (not_converged)
       throw NoSinThetaWConvergenceError(number_of_iterations, sinThetaW_new);
 
-   const double deltaRhoHat = calculate_delta_rho_hat(sinThetaW_new);
-
-   if (Abs(deltaRhoHat) >= 1.0)
-      throw NonPerturbativeSinThetaW();
-
-   const double rhohat_ratio_final =
-      1.0 / (1.0 - deltaRhoHat);
-   const double mw_pole =
-      Sqrt(Sqr(mz) * rhohat_tree * rhohat_ratio_final * (1 - Sqr(sinThetaW_new)));
+   const double mw_pole = calculate_mw_pole(sinThetaW_new);
 
    return std::make_pair(sinThetaW_new, mw_pole);
 }
@@ -239,7 +232,7 @@ double CLASSNAME::calculate_rho_hat_tree() const
 
 /**
  * Calculates the \f$\Delta\hat{\rho}\f$ corrections as defined in
- * Eqs. (C.4), (C.6) from hep-ph/9606211 but with the dependency on 
+ * Eqs. (C.4), (C.6) from hep-ph/9606211 but with the dependency on
  * rhohat eliminated.
  *
  * @param sinThetaW sin(theta_W)
@@ -788,7 +781,8 @@ std::complex<double> CLASSNAME::delta_vb_wave_Fv(int gO1) const
       )),Sqr(MSv(gI2)))))) + SUM(gI1,1,1,SUM(gI2,0,2,-(AbsSqr(CpbarFeFvHpmPL(gI2,
       gO1,gI1))*B1(0,Sqr(MFe(gI2)),Sqr(MHpm(gI1))))));
 
-   return result;}
+   return result;
+}
 
 std::complex<double> CLASSNAME::delta_vb_wave_Fe(int gO1) const
 {
@@ -811,7 +805,8 @@ std::complex<double> CLASSNAME::delta_vb_wave_Fe(int gO1) const
       + SUM(gI1,1,1,SUM(gI2,0,2,-(AbsSqr(CpbarFeFeAhPL(gI2,gO1,gI1))*B1(0,Sqr(MFe(
       gI2)),Sqr(MAh(gI1))))));
 
-   return result;}
+   return result;
+}
 
 std::complex<double> CLASSNAME::delta_vb_vertex(int gO1, int gO2) const
 {
@@ -845,7 +840,8 @@ std::complex<double> CLASSNAME::delta_vb_vertex(int gO1, int gO2) const
       MAh(gI2))) + C0(Sqr(MFe(gI3)),Sqr(MHpm(gI1)),Sqr(MAh(gI2)))*Sqr(MFe(gI3)))))
       ))/CpbarFvFeconjVWmPL(gO2,gO1);
 
-   return result;}
+   return result;
+}
 
 std::complex<double> CLASSNAME::delta_vb_box(int gO1, int gO2, int gO3, int gO4) const
 {
@@ -894,7 +890,8 @@ std::complex<double> CLASSNAME::delta_vb_box(int gO1, int gO2, int gO3, int gO4)
       CpbarFvFeconjHpmPR(gO2,gI2,gI3)*D27(Sqr(MHpm(gI1)),Sqr(MFe(gI2)),Sqr(MHpm(
       gI3)),Sqr(MFv(gI4))))))));
 
-   return result;}
+   return result;
+}
 
 
 /**
@@ -903,12 +900,13 @@ std::complex<double> CLASSNAME::delta_vb_box(int gO1, int gO2, int gO3, int gO4)
 
 double CLASSNAME::B0(double p2, double m12, double m22) const noexcept
 {
-   return passarino_veltman::ReB0(p2, m12, m22, Sqr(model->get_scale()));
+   return Loop_library::get().B0(p2, m12, m22, Sqr(model->get_scale())).real();
 }
 
 double CLASSNAME::B1(double p2, double m12, double m22) const noexcept
 {
-   return -1. * passarino_veltman::ReB1(p2, m12, m22, Sqr(model->get_scale()));
+   // @note this minus sign is very confusing
+   return -1. * Loop_library::get().B1(p2, m12, m22, Sqr(model->get_scale())).real();
 }
 
 double CLASSNAME::C0(double m12, double m22, double m32) const noexcept
@@ -1064,6 +1062,123 @@ double CLASSNAME::calculate_self_energy_VWm_top(double p, double mt) const
       0.5 * Nc * softsusy::hfn(p, mt, mb, q) * Sqr(g2) * oneOver16PiSqr;
 
    return self_energy_w_top;
+}
+
+double CLASSNAME::calculate_mw_pole() const
+{
+   const auto gY = MODEL->get_g1() * MSSMatMGUT_info::normalization_g1;
+   const auto g2 = MODEL->get_g2() * MSSMatMGUT_info::normalization_g2;
+   const double sinThetaW = gY / Sqrt(Sqr(gY) + Sqr(g2));
+
+   return calculate_mw_pole(sinThetaW);
+}
+
+/**
+ * Calculates W boson pole mass from SM value and BSM contributions
+ * taken into account strictly on 1-loop level
+ *
+ * @param sinThetaW sin(theta_W)
+ *
+ * @return W boson pole mass
+ */
+double CLASSNAME::calculate_mw_pole(double sinThetaW) const
+{
+   const auto gY = MODEL->get_g1() * MSSMatMGUT_info::normalization_g1;
+   const auto g2 = MODEL->get_g2() * MSSMatMGUT_info::normalization_g2;
+   const double eDRbar     = gY * g2 / Sqrt(Sqr(gY) + Sqr(g2));
+   const double alphaDRbar = Sqr(eDRbar) / (4.0 * Pi);
+   const double sinThetaW2 = Sqr(sinThetaW);
+   const double cosThetaW2 = 1.0 - sinThetaW2;
+
+   const double mz = model->get_MVZ();
+   const double mw = model->get_MVWm();
+   const int higgs_idx = sm_parameters.higgs_index;
+
+   standard_model::Standard_model sm;
+   sm.set_scale(model->get_scale());
+
+   const double SMvev = 2.0 * mw / g2;
+
+   sm.set_g1(gY / standard_model_info::normalization_g1);
+   sm.set_g2(g2 / standard_model_info::normalization_g2);
+   sm.set_g3(model->get_g3() * MSSMatMGUT_info::normalization_g3 /
+             standard_model_info::normalization_g3);
+   sm.set_v(SMvev);
+   sm.set_Lambdax(Sqr(model->get_Mhh(higgs_idx) / SMvev));
+
+   const auto vu = MODELPARAMETER(vu);
+   const auto vd = MODELPARAMETER(vd);
+
+   sm.set_Yu(Re(model->get_Yu()*vu/SMvev));
+   sm.set_Yd(Re(model->get_Yd()*vd/SMvev));
+   sm.set_Ye(Re(model->get_Ye()*vd/SMvev));
+
+   sm.calculate_DRbar_masses();
+
+   const double sigma_Z_MZ_SM = Re(sm.self_energy_VZ_1loop(mz));
+   const double sigma_W_MW_SM = Re(sm.self_energy_VWp_1loop(mw));
+   const double sigma_W_0_SM  = Re(sm.self_energy_VWp_1loop(0.));
+   const double sigma_Z_MZ_Model = Re(model->self_energy_VZ_1loop(mz));
+   const double sigma_W_MW_Model = Re(model->self_energy_VWm_1loop(mw));
+   const double sigma_W_0_Model  = Re(model->self_energy_VWm_1loop(0.));
+
+   const double deltaVbBSM = include_dvb_bsm ?
+      calculate_delta_vb_bsm(sinThetaW) : 0.;
+
+   const double delta_rho_hat_BSM  =
+      (sigma_Z_MZ_Model - sigma_Z_MZ_SM) / Sqr(mz) -
+      (sigma_W_MW_Model - sigma_W_MW_SM) / Sqr(mw);
+   const double delta_rw_hat_BSM   =
+      (sigma_W_0_Model - sigma_W_0_SM -
+       sigma_W_MW_Model + sigma_W_MW_SM) / Sqr(mw) + deltaVbBSM;
+   const double delta_alpha_hat_BSM =
+      calculate_delta_alpha_hat_bsm(alphaDRbar);
+   const double delta_rho_hat_tree = calculate_rho_hat_tree() - 1.0;
+
+   const double mwSM = Electroweak_constants::MWSM;
+
+   return mwSM * Sqrt(1.0 + sinThetaW2 / (cosThetaW2 - sinThetaW2) *
+                    (cosThetaW2 / sinThetaW2 *
+                     (delta_rho_hat_BSM + delta_rho_hat_tree)
+                     - delta_rw_hat_BSM - delta_alpha_hat_BSM));
+}
+
+/**
+ * Calculates BSM threshold corrections to alpha_em
+ *
+ * @param alpha_em
+ *
+ * @return BSM threshold corrections to alpha_em
+ */
+double CLASSNAME::calculate_delta_alpha_hat_bsm(double alpha_em) const
+{
+   const double currentScale = model->get_scale();
+   double delta_alpha_hat_bsm = 0.;
+
+   const auto MCha = MODELPARAMETER(MCha);
+   const auto MHpm = MODELPARAMETER(MHpm);
+   const auto MSd = MODELPARAMETER(MSd);
+   const auto MSe = MODELPARAMETER(MSe);
+   const auto MSu = MODELPARAMETER(MSu);
+
+   delta_alpha_hat_bsm += alpha_em/(2.*Pi)*(0.3333333333333333 -
+      1.3333333333333333*FiniteLog(Abs(MCha(0)/currentScale)) - 1.3333333333333333
+      *FiniteLog(Abs(MCha(1)/currentScale)) - 0.3333333333333333*FiniteLog(Abs(
+      MHpm(1)/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(0)/
+      currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(1)/currentScale)) -
+      0.1111111111111111*FiniteLog(Abs(MSd(2)/currentScale)) - 0.1111111111111111*
+      FiniteLog(Abs(MSd(3)/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(4
+      )/currentScale)) - 0.1111111111111111*FiniteLog(Abs(MSd(5)/currentScale)) -
+      0.3333333333333333*FiniteLog(Abs(MSe(0)/currentScale)) - 0.3333333333333333*
+      FiniteLog(Abs(MSe(1)/currentScale)) - 0.3333333333333333*FiniteLog(Abs(MSe(2
+      )/currentScale)) - 0.3333333333333333*FiniteLog(Abs(MSe(3)/currentScale)) -
+      0.3333333333333333*FiniteLog(Abs(MSe(4)/currentScale)) - 0.3333333333333333*
+      FiniteLog(Abs(MSe(5)/currentScale)) - 0.4444444444444444*FiniteLog(Abs(MSu(0
+      )/currentScale)) - 0.4444444444444444*FiniteLog(Abs(MSu(1)/currentScale)) -
+      0.4444444444444444*FiniteLog(Abs(MSu(2)/currentScale)) - 0.4444444444444444*
+      FiniteLog(Abs(MSu(3)/currentScale)) - 0.4444444444444444*FiniteLog(Abs(MSu(4
+      )/currentScale)) - 0.4444444444444444*FiniteLog(Abs(MSu(5)/currentScale)));
+   return delta_alpha_hat_bsm;
 }
 
 } // namespace flexiblesusy

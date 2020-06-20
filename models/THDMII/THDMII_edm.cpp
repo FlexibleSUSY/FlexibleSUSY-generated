@@ -16,13 +16,11 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:46:08
 
 /**
  * @file THDMII_edm.cpp
  *
- * This file was generated at Fri 10 Apr 2020 19:46:08 with FlexibleSUSY
- * 2.4.2 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #include "THDMII_edm.hpp"
@@ -89,7 +87,21 @@ struct EDMVertexCorrectionFS {
 
 namespace flexiblesusy {
 namespace THDMII_edm {
+double calculate_edm_Fe( int generationIndex, const THDMII_mass_eigenstates& model )
+{
+   context_base context{ model };
+   std::array<int, 1> indices = { generationIndex };
 
+   double val = 0.0;
+
+   using namespace THDMII_cxx_diagrams::fields;
+
+   val += 1 * EDMVertexCorrectionFS<Fe, typename bar<Fe>::type, Ah>::value(indices, context);
+   val += 1 * EDMVertexCorrectionFS<Fe, typename bar<Fe>::type, hh>::value(indices, context);
+   val += 1 * EDMVertexCorrectionSF<Fe, typename conj<Hm>::type, typename bar<Fv>::type>::value(indices, context);
+
+   return val;
+}
 }
 } // namespace flexiblesusy
 

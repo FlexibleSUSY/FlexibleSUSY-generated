@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:25:49
 
 #include "HGTHDMIIMSSMBC_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,10 +72,10 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_MassG_1_loop(const Soft_traces&
 
    double beta_MassG;
 
-   beta_MassG = Re(-18*MassG*oneOver16PiSqr*Sqr(g3));
+   beta_MassG = Re(-18*MassG*Sqr(g3));
 
 
-   return beta_MassG;
+   return oneLoop * beta_MassG;
 }
 
 /**
@@ -90,10 +89,10 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_MassG_2_loop(const Soft_traces&
 
    double beta_MassG;
 
-   beta_MassG = Re(-228*MassG*twoLoop*Quad(g3));
+   beta_MassG = Re(-228*MassG*Quad(g3));
 
 
-   return beta_MassG;
+   return twoLoop * beta_MassG;
 }
 
 /**
@@ -112,7 +111,7 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_MassG_3_loop(const Soft_traces&
    beta_MassG = 0;
 
 
-   return beta_MassG;
+   return threeLoop * beta_MassG;
 }
 
 /**
@@ -131,7 +130,7 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_MassG_4_loop(const Soft_traces&
    beta_MassG = 0;
 
 
-   return beta_MassG;
+   return fourLoop * beta_MassG;
 }
 
 /**
@@ -150,7 +149,7 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_MassG_5_loop(const Soft_traces&
    beta_MassG = 0;
 
 
-   return beta_MassG;
+   return fiveLoop * beta_MassG;
 }
 
 } // namespace flexiblesusy

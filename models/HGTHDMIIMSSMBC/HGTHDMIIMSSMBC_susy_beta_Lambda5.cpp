@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:25:37
 
 #include "HGTHDMIIMSSMBC_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -40,15 +39,15 @@ double HGTHDMIIMSSMBC_susy_parameters::calc_beta_Lambda5_1_loop(const Susy_trace
 
    double beta_Lambda5;
 
-   beta_Lambda5 = Re(0.2*oneOver16PiSqr*(20*Lambda1*Lambda5 + 20*Lambda2*
-      Lambda5 + 40*Lambda3*Lambda5 + 60*Lambda4*Lambda5 + 30*Lambda5*
-      traceYdAdjYd + 10*Lambda5*traceYeAdjYe + 30*Lambda5*traceYuAdjYu + 20*
-      Conj(Lambda6)*Conj(Lambda7) - 9*Lambda5*Sqr(g1) + 15*Lambda5*Sqr(g1d) + 5
-      *Lambda5*Sqr(g1dp) - 45*Lambda5*Sqr(g2) + 15*Lambda5*Sqr(g2u) + 5*Lambda5
-      *Sqr(g2up) + 50*Sqr(Conj(Lambda6)) + 50*Sqr(Conj(Lambda7))));
+   beta_Lambda5 = Re(0.2*(20*Lambda1*Lambda5 + 20*Lambda2*Lambda5 + 40*Lambda3*
+      Lambda5 + 60*Lambda4*Lambda5 + 30*Lambda5*traceYdAdjYd + 10*Lambda5*
+      traceYeAdjYe + 30*Lambda5*traceYuAdjYu + 20*Conj(Lambda6)*Conj(Lambda7) -
+      9*Lambda5*Sqr(g1) + 15*Lambda5*Sqr(g1d) + 5*Lambda5*Sqr(g1dp) - 45*
+      Lambda5*Sqr(g2) + 15*Lambda5*Sqr(g2u) + 5*Lambda5*Sqr(g2up) + 50*Sqr(Conj
+      (Lambda6)) + 50*Sqr(Conj(Lambda7))));
 
 
-   return beta_Lambda5;
+   return oneLoop * beta_Lambda5;
 }
 
 /**
@@ -69,22 +68,22 @@ double HGTHDMIIMSSMBC_susy_parameters::calc_beta_Lambda5_2_loop(const Susy_trace
 
    double beta_Lambda5;
 
-   const double beta_Lambda5_1 = Re(0.005*twoLoop*(3200*g1d*g1dp*g2u*g2up*
-      Lambda5 - 16000*Lambda1*Lambda3*Lambda5 - 16000*Lambda2*Lambda3*Lambda5 -
-      17600*Lambda1*Lambda4*Lambda5 - 17600*Lambda2*Lambda4*Lambda5 - 15200*
-      Lambda3*Lambda4*Lambda5 - 4800*Lambda1*Lambda5*traceYdAdjYd - 4800*
-      Lambda3*Lambda5*traceYdAdjYd - 7200*Lambda4*Lambda5*traceYdAdjYd - 1500*
-      Lambda5*traceYdAdjYdYdAdjYd - 6600*Lambda5*traceYdAdjYuYuAdjYd - 1600*
-      Lambda1*Lambda5*traceYeAdjYe - 1600*Lambda3*Lambda5*traceYeAdjYe - 2400*
-      Lambda4*Lambda5*traceYeAdjYe - 500*Lambda5*traceYeAdjYeYeAdjYe - 4800*
-      Lambda2*Lambda5*traceYuAdjYu - 4800*Lambda3*Lambda5*traceYuAdjYu - 7200*
-      Lambda4*Lambda5*traceYuAdjYu - 1500*Lambda5*traceYuAdjYuYuAdjYu - 13800*
-      Lambda5*AbsSqr(Lambda6) - 13800*Lambda5*AbsSqr(Lambda7) - 16200*Lambda5*
-      Lambda7*Conj(Lambda6) - 16200*Lambda5*Lambda6*Conj(Lambda7) + 1533*
-      Lambda5*Quad(g1) + 90*traceYdAdjYd*Quad(g1) - 450*traceYeAdjYe*Quad(g1) +
-      375*Lambda5*Quad(g1d) + 75*Lambda5*Quad(g1dp) - 2775*Lambda5*Quad(g2) -
-      450*traceYdAdjYd*Quad(g2) - 150*traceYeAdjYe*Quad(g2) + 375*Lambda5*Quad(
-      g2u) + 75*Lambda5*Quad(g2up) - 480*Lambda1*Lambda5*Sqr(g1) - 480*Lambda2*
+   const double beta_Lambda5_1 = Re(0.005*(3200*g1d*g1dp*g2u*g2up*Lambda5 -
+      16000*Lambda1*Lambda3*Lambda5 - 16000*Lambda2*Lambda3*Lambda5 - 17600*
+      Lambda1*Lambda4*Lambda5 - 17600*Lambda2*Lambda4*Lambda5 - 15200*Lambda3*
+      Lambda4*Lambda5 - 4800*Lambda1*Lambda5*traceYdAdjYd - 4800*Lambda3*
+      Lambda5*traceYdAdjYd - 7200*Lambda4*Lambda5*traceYdAdjYd - 1500*Lambda5*
+      traceYdAdjYdYdAdjYd - 6600*Lambda5*traceYdAdjYuYuAdjYd - 1600*Lambda1*
+      Lambda5*traceYeAdjYe - 1600*Lambda3*Lambda5*traceYeAdjYe - 2400*Lambda4*
+      Lambda5*traceYeAdjYe - 500*Lambda5*traceYeAdjYeYeAdjYe - 4800*Lambda2*
+      Lambda5*traceYuAdjYu - 4800*Lambda3*Lambda5*traceYuAdjYu - 7200*Lambda4*
+      Lambda5*traceYuAdjYu - 1500*Lambda5*traceYuAdjYuYuAdjYu - 13800*Lambda5*
+      AbsSqr(Lambda6) - 13800*Lambda5*AbsSqr(Lambda7) - 16200*Lambda5*Lambda7*
+      Conj(Lambda6) - 16200*Lambda5*Lambda6*Conj(Lambda7) + 1533*Lambda5*Quad(
+      g1) + 90*traceYdAdjYd*Quad(g1) - 450*traceYeAdjYe*Quad(g1) + 375*Lambda5*
+      Quad(g1d) + 75*Lambda5*Quad(g1dp) - 2775*Lambda5*Quad(g2) - 450*
+      traceYdAdjYd*Quad(g2) - 150*traceYeAdjYe*Quad(g2) + 375*Lambda5*Quad(g2u)
+      + 75*Lambda5*Quad(g2up) - 480*Lambda1*Lambda5*Sqr(g1) - 480*Lambda2*
       Lambda5*Sqr(g1) + 1920*Lambda3*Lambda5*Sqr(g1) + 2880*Lambda4*Lambda5*Sqr
       (g1) + 250*Lambda5*traceYdAdjYd*Sqr(g1) + 750*Lambda5*traceYeAdjYe*Sqr(g1
       ) + 850*Lambda5*traceYuAdjYu*Sqr(g1) - 480*Conj(Lambda6)*Conj(Lambda7)*
@@ -116,19 +115,18 @@ double HGTHDMIIMSSMBC_susy_parameters::calc_beta_Lambda5_2_loop(const Susy_trace
       *traceYeAdjYe*Sqr(Conj(Lambda6)) + 2400*Sqr(g1)*Sqr(Conj(Lambda6)) - 6000
       *Sqr(g1d)*Sqr(Conj(Lambda6)) - 2000*Sqr(g1dp)*Sqr(Conj(Lambda6)) + 10800*
       Sqr(g2)*Sqr(Conj(Lambda6))));
-   const double beta_Lambda5_2 = Re(-(twoLoop*Conj(Lambda7)*(34*Lambda1*Conj(
-      Lambda6) + 34*Lambda2*Conj(Lambda6) + 74*Lambda3*Conj(Lambda6) + 82*
-      Lambda4*Conj(Lambda6) + 12*traceYdAdjYd*Conj(Lambda6) + 4*traceYeAdjYe*
-      Conj(Lambda6) + 12*traceYuAdjYu*Conj(Lambda6) + 20*Lambda1*Conj(Lambda7)
-      + 142*Lambda2*Conj(Lambda7) + 69*Lambda3*Conj(Lambda7) + 73*Lambda4*Conj(
-      Lambda7) + 60*traceYuAdjYu*Conj(Lambda7) - 12*Conj(Lambda7)*Sqr(g1) - 54*
-      Conj(Lambda7)*Sqr(g2) + 30*Conj(Lambda7)*Sqr(g2u) + 10*Conj(Lambda7)*Sqr(
-      g2up))));
+   const double beta_Lambda5_2 = Re(-(Conj(Lambda7)*(34*Lambda1*Conj(Lambda6) +
+      34*Lambda2*Conj(Lambda6) + 74*Lambda3*Conj(Lambda6) + 82*Lambda4*Conj(
+      Lambda6) + 12*traceYdAdjYd*Conj(Lambda6) + 4*traceYeAdjYe*Conj(Lambda6) +
+      12*traceYuAdjYu*Conj(Lambda6) + 20*Lambda1*Conj(Lambda7) + 142*Lambda2*
+      Conj(Lambda7) + 69*Lambda3*Conj(Lambda7) + 73*Lambda4*Conj(Lambda7) + 60*
+      traceYuAdjYu*Conj(Lambda7) - 12*Conj(Lambda7)*Sqr(g1) - 54*Conj(Lambda7)*
+      Sqr(g2) + 30*Conj(Lambda7)*Sqr(g2u) + 10*Conj(Lambda7)*Sqr(g2up))));
 
    beta_Lambda5 = beta_Lambda5_1 + beta_Lambda5_2;
 
 
-   return beta_Lambda5;
+   return twoLoop * beta_Lambda5;
 }
 
 /**
@@ -147,7 +145,7 @@ double HGTHDMIIMSSMBC_susy_parameters::calc_beta_Lambda5_3_loop(const Susy_trace
    beta_Lambda5 = 0;
 
 
-   return beta_Lambda5;
+   return threeLoop * beta_Lambda5;
 }
 
 /**
@@ -166,7 +164,7 @@ double HGTHDMIIMSSMBC_susy_parameters::calc_beta_Lambda5_4_loop(const Susy_trace
    beta_Lambda5 = 0;
 
 
-   return beta_Lambda5;
+   return fourLoop * beta_Lambda5;
 }
 
 /**
@@ -185,7 +183,7 @@ double HGTHDMIIMSSMBC_susy_parameters::calc_beta_Lambda5_5_loop(const Susy_trace
    beta_Lambda5 = 0;
 
 
-   return beta_Lambda5;
+   return fiveLoop * beta_Lambda5;
 }
 
 } // namespace flexiblesusy

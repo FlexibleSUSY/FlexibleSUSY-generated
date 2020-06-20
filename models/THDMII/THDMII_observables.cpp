@@ -16,14 +16,14 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:46:08
 
 #include "THDMII_observables.hpp"
 #include "THDMII_mass_eigenstates.hpp"
 #include "THDMII_a_muon.hpp"
 #include "THDMII_edm.hpp"
 #include "THDMII_l_to_lgamma.hpp"
-//#include "THDMII_f_to_f_conversion.hpp"
+#include "THDMII_b_to_s_gamma.hpp"
+#include "THDMII_f_to_f_conversion.hpp"
 #include "THDMII_effective_couplings.hpp"
 #include "config.h"
 #include "eigen_utils.hpp"
@@ -45,7 +45,8 @@
 #define EDM1(p,idx) edm_ ## p ## _ ## idx
 #define LToLGamma0(pIn, pOut, spec) pIn ## _to_ ## pOut ## _ ## spec
 #define LToLGamma1(pIn,idxIn,pOut,idxOut,spec) pIn ## _to_ ## pOut ## _ ## spec
-#define FToFConversion1(pIn,idxIn,pOut,idxOut,nuclei) pIn ## _to_ ## pOut ## _in_ ## nuclei
+#define FToFConversion1(pIn,idxIn,pOut,idxOut,nuclei,qedqcd) pIn ## _to_ ## pOut ## _in_ ## nuclei
+#define BSGAMMA b_to_s_gamma
 #define EFFCPHIGGSPHOTONPHOTON eff_cp_higgs_photon_photon
 #define EFFCPHIGGSGLUONGLUON eff_cp_higgs_gluon_gluon
 #define EFFCPPSEUDOSCALARPHOTONPHOTON eff_cp_pseudoscalar_photon_photon
@@ -68,6 +69,10 @@ THDMII_observables::THDMII_observables()
    , eff_cp_higgs_gluon_gluon(Eigen::Array<std::complex<double>,2,1>::Zero())
    , eff_cp_pseudoscalar_photon_photon(0)
    , eff_cp_pseudoscalar_gluon_gluon(0)
+   , a_muon(0)
+   , edm_Fe_0(0)
+   , edm_Fe_1(0)
+   , edm_Fe_2(0)
 
 {
 }
@@ -88,6 +93,10 @@ Eigen::ArrayXd THDMII_observables::get() const
    vec(9) = Im(eff_cp_pseudoscalar_photon_photon);
    vec(10) = Re(eff_cp_pseudoscalar_gluon_gluon);
    vec(11) = Im(eff_cp_pseudoscalar_gluon_gluon);
+   vec(12) = a_muon;
+   vec(13) = edm_Fe_0;
+   vec(14) = edm_Fe_1;
+   vec(15) = edm_Fe_2;
 
    return vec;
 }
@@ -108,6 +117,10 @@ std::vector<std::string> THDMII_observables::get_names()
    names[9] = "Im(eff_cp_pseudoscalar_photon_photon)";
    names[10] = "Re(eff_cp_pseudoscalar_gluon_gluon)";
    names[11] = "Im(eff_cp_pseudoscalar_gluon_gluon)";
+   names[12] = "a_muon";
+   names[13] = "edm_Fe_0";
+   names[14] = "edm_Fe_1";
+   names[15] = "edm_Fe_2";
 
    return names;
 }
@@ -118,6 +131,10 @@ void THDMII_observables::clear()
    eff_cp_higgs_gluon_gluon = Eigen::Array<std::complex<double>,2,1>::Zero();
    eff_cp_pseudoscalar_photon_photon = std::complex<double>(0.,0.);
    eff_cp_pseudoscalar_gluon_gluon = std::complex<double>(0.,0.);
+   a_muon = 0.;
+   edm_Fe_0 = 0.;
+   edm_Fe_1 = 0.;
+   edm_Fe_2 = 0.;
 
 }
 
@@ -131,6 +148,10 @@ void THDMII_observables::set(const Eigen::ArrayXd& vec)
    eff_cp_higgs_gluon_gluon(1) = std::complex<double>(vec(6), vec(7));
    eff_cp_pseudoscalar_photon_photon = std::complex<double>(vec(8), vec(9));
    eff_cp_pseudoscalar_gluon_gluon = std::complex<double>(vec(10), vec(11));
+   a_muon = vec(12);
+   edm_Fe_0 = vec(13);
+   edm_Fe_1 = vec(14);
+   edm_Fe_2 = vec(15);
 
 }
 
@@ -146,6 +167,9 @@ THDMII_observables calculate_observables(THDMII_mass_eigenstates& model,
          model_at_scale.run_to(scale);
       } catch (const Error& e) {
          model.get_problems().flag_thrown(e.what_detailed());
+         return THDMII_observables();
+      } catch (const std::exception& e) {
+         model.get_problems().flag_thrown(e.what());
          return THDMII_observables();
       }
    }
@@ -169,8 +193,14 @@ THDMII_observables calculate_observables(THDMII_mass_eigenstates& model,
       observables.EFFCPHIGGSGLUONGLUON(1) = effective_couplings.get_eff_CphhVGVG(1);
       observables.EFFCPPSEUDOSCALARPHOTONPHOTON = effective_couplings.get_eff_CpAhVPVP(1);
       observables.EFFCPPSEUDOSCALARGLUONGLUON = effective_couplings.get_eff_CpAhVGVG(1);
+      observables.AMU = THDMII_a_muon::calculate_a_muon(MODEL, qedqcd);
+      observables.EDM1(Fe, 0) = THDMII_edm::calculate_edm_Fe(0, MODEL);
+      observables.EDM1(Fe, 1) = THDMII_edm::calculate_edm_Fe(1, MODEL);
+      observables.EDM1(Fe, 2) = THDMII_edm::calculate_edm_Fe(2, MODEL);
    } catch (const Error& e) {
       model.get_problems().flag_thrown(e.what_detailed());
+   } catch (const std::exception& e) {
+      model.get_problems().flag_thrown(e.what());
    }
 
    return observables;

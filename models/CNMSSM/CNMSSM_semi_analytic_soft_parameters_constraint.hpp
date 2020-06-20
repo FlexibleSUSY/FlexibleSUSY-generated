@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 17:55:56
 
 #ifndef CNMSSM_SEMI_ANALYTIC_SOFT_PARAMETERS_CONSTRAINT_H
 #define CNMSSM_SEMI_ANALYTIC_SOFT_PARAMETERS_CONSTRAINT_H

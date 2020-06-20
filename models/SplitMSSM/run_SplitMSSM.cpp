@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:54:42
 
 #include "config.h"
 
@@ -89,8 +88,12 @@ int run_solver(flexiblesusy::SplitMSSM_slha_io& slha_io,
    scales.pole_mass_scale = spectrum_generator.get_pole_mass_scale();
 
    SplitMSSM_observables observables;
-   if (spectrum_generator_settings.get(Spectrum_generator_settings::calculate_observables))
-      observables = calculate_observables(std::get<0>(models), qedqcd, physical_input, scales.pole_mass_scale);
+   if (spectrum_generator_settings.get(Spectrum_generator_settings::calculate_observables)) {
+      if (spectrum_generator_settings.get(Spectrum_generator_settings::force_output) ||
+         !problems.have_problem()) {
+         observables = calculate_observables(std::get<0>(models), qedqcd, physical_input, scales.pole_mass_scale);
+      }
+   }
 
    const bool show_result = !problems.have_problem() ||
       spectrum_generator_settings.get(Spectrum_generator_settings::force_output);
@@ -105,7 +108,6 @@ int run_solver(flexiblesusy::SplitMSSM_slha_io& slha_io,
          slha_io.set_spectrum(models);
          slha_io.set_extra(std::get<0>(models), scales, observables);
       }
-
       slha_io.write_to(slha_output_file);
    }
 

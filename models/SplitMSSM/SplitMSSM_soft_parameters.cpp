@@ -16,13 +16,8 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:53:15
 
 #include "SplitMSSM_soft_parameters.hpp"
-#include "config.h"
-#ifdef ENABLE_THREADS
-#include "global_thread_pool.hpp"
-#endif
 #include "wrappers.hpp"
 #include "functors.hpp"
 
@@ -87,13 +82,6 @@ SplitMSSM_soft_parameters SplitMSSM_soft_parameters::calc_beta(int loops) const
          beta_v += calc_beta_v_2_loop(TRACE_STRUCT);
 
          if (loops > 2) {
-         #ifdef ENABLE_THREADS
-            {
-
-
-            }
-         #else
-         #endif
 
             if (loops > 3) {
 

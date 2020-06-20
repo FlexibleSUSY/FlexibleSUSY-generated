@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:53:10
 
 #include "SplitMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -40,12 +39,12 @@ double SplitMSSM_susy_parameters::calc_beta_g2d_1_loop(const Susy_traces& susy_t
 
    double beta_g2d;
 
-   beta_g2d = Re(0.05*oneOver16PiSqr*(20*g2u*gYd*gYu + 60*g2d*traceYdAdjYd + 20
-      *g2d*traceYeAdjYe + 60*g2d*traceYuAdjYu + 55*Cube(g2d) - 9*g2d*Sqr(g1) -
-      165*g2d*Sqr(g2) + 20*g2d*Sqr(g2u) + 15*g2d*Sqr(gYd) + 10*g2d*Sqr(gYu)));
+   beta_g2d = Re(0.05*(20*g2u*gYd*gYu + 60*g2d*traceYdAdjYd + 20*g2d*
+      traceYeAdjYe + 60*g2d*traceYuAdjYu + 55*Cube(g2d) - 9*g2d*Sqr(g1) - 165*
+      g2d*Sqr(g2) + 20*g2d*Sqr(g2u) + 15*g2d*Sqr(gYd) + 10*g2d*Sqr(gYu)));
 
 
-   return beta_g2d;
+   return oneLoop * beta_g2d;
 }
 
 /**
@@ -66,9 +65,9 @@ double SplitMSSM_susy_parameters::calc_beta_g2d_2_loop(const Susy_traces& susy_t
 
    double beta_g2d;
 
-   beta_g2d = Re(0.0004166666666666667*twoLoop*(-7200*g2u*gYd*gYu*traceYdAdjYd
-      - 16200*g2d*traceYdAdjYdYdAdjYd + 3600*g2d*traceYdAdjYuYuAdjYd - 2400*g2u
-      *gYd*gYu*traceYeAdjYe - 5400*g2d*traceYeAdjYeYeAdjYe - 7200*g2u*gYd*gYu*
+   beta_g2d = Re(0.0004166666666666667*(-7200*g2u*gYd*gYu*traceYdAdjYd - 16200*
+      g2d*traceYdAdjYdYdAdjYd + 3600*g2d*traceYdAdjYuYuAdjYd - 2400*g2u*gYd*gYu
+      *traceYeAdjYe - 5400*g2d*traceYeAdjYeYeAdjYe - 7200*g2u*gYd*gYu*
       traceYuAdjYu - 16200*g2d*traceYuAdjYuYuAdjYu - 13500*traceYdAdjYd*Cube(
       g2d) - 4500*traceYeAdjYe*Cube(g2d) - 13500*traceYuAdjYu*Cube(g2d) - 5400*
       gYd*gYu*Cube(g2u) - 3600*g2u*gYu*Cube(gYd) - 3000*g2u*gYd*Cube(gYu) -
@@ -91,7 +90,7 @@ double SplitMSSM_susy_parameters::calc_beta_g2d_2_loop(const Susy_traces& susy_t
       Sqr(g2u)*Sqr(gYu) - 3600*g2d*Sqr(gYd)*Sqr(gYu) + 3600*g2d*Sqr(Lambdax)));
 
 
-   return beta_g2d;
+   return twoLoop * beta_g2d;
 }
 
 /**
@@ -110,7 +109,7 @@ double SplitMSSM_susy_parameters::calc_beta_g2d_3_loop(const Susy_traces& susy_t
    beta_g2d = 0;
 
 
-   return beta_g2d;
+   return threeLoop * beta_g2d;
 }
 
 /**
@@ -129,7 +128,7 @@ double SplitMSSM_susy_parameters::calc_beta_g2d_4_loop(const Susy_traces& susy_t
    beta_g2d = 0;
 
 
-   return beta_g2d;
+   return fourLoop * beta_g2d;
 }
 
 /**
@@ -148,7 +147,7 @@ double SplitMSSM_susy_parameters::calc_beta_g2d_5_loop(const Susy_traces& susy_t
    beta_g2d = 0;
 
 
-   return beta_g2d;
+   return fiveLoop * beta_g2d;
 }
 
 } // namespace flexiblesusy

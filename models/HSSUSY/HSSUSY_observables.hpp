@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:47:06
 
 #ifndef HSSUSY_OBSERVABLES_H
 #define HSSUSY_OBSERVABLES_H

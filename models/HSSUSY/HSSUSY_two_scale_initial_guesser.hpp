@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:47:05
 
 #ifndef HSSUSY_TWO_SCALE_INITIAL_GUESSER_H
 #define HSSUSY_TWO_SCALE_INITIAL_GUESSER_H

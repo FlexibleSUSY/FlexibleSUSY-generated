@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:05:31
 
 #ifndef E6SSM_INITIAL_GUESSER_H
 #define E6SSM_INITIAL_GUESSER_H

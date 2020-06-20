@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:43:14
 
 #ifndef CE6SSM_OBSERVABLES_H
 #define CE6SSM_OBSERVABLES_H

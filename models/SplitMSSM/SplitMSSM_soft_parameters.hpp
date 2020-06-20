@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:53:15
 
 #ifndef SplitMSSM_soft_parameters_H
 #define SplitMSSM_soft_parameters_H

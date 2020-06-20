@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:01:58
 
 #ifndef E6SSMEFTHiggs_OBSERVABLES_H
 #define E6SSMEFTHiggs_OBSERVABLES_H

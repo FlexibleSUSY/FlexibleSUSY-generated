@@ -16,10 +16,10 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:47:53
 
 #include "CMSSMSemiAnalytic_physical.hpp"
-#include "slha_io.hpp"
+#include "mixings.hpp"
+#include "wrappers.hpp"
 
 #include <iostream>
 
@@ -73,7 +73,7 @@ void CMSSMSemiAnalytic_physical::clear()
  */
 void CMSSMSemiAnalytic_physical::convert_to_hk()
 {
-   SLHA_io::convert_symmetric_fermion_mixings_to_hk(LOCALPHYSICAL(MChi), LOCALPHYSICAL(ZN));
+   convert_symmetric_fermion_mixings_to_hk(LOCALPHYSICAL(MChi), LOCALPHYSICAL(ZN));
 
 }
 
@@ -84,7 +84,7 @@ void CMSSMSemiAnalytic_physical::convert_to_hk()
  */
 void CMSSMSemiAnalytic_physical::convert_to_slha()
 {
-   SLHA_io::convert_symmetric_fermion_mixings_to_slha(LOCALPHYSICAL(MChi), LOCALPHYSICAL(ZN));
+   convert_symmetric_fermion_mixings_to_slha(LOCALPHYSICAL(MChi), LOCALPHYSICAL(ZN));
 
 }
 

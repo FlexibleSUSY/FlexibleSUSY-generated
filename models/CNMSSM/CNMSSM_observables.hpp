@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 17:56:03
 
 #ifndef CNMSSM_OBSERVABLES_H
 #define CNMSSM_OBSERVABLES_H

@@ -16,13 +16,8 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:46:22
 
 #include "HSSUSY_susy_parameters.hpp"
-#include "config.h"
-#ifdef ENABLE_THREADS
-#include "global_thread_pool.hpp"
-#endif
 #include "wrappers.hpp"
 #include "functors.hpp"
 
@@ -97,34 +92,6 @@ HSSUSY_susy_parameters HSSUSY_susy_parameters::calc_beta(int loops) const
          beta_Ye += calc_beta_Ye_2_loop(TRACE_STRUCT);
 
          if (loops > 2) {
-         #ifdef ENABLE_THREADS
-            {
-               auto fut_g1 = global_thread_pool().run_packaged_task([this, &
-                  TRACE_STRUCT](){ return calc_beta_g1_3_loop(TRACE_STRUCT); });
-               auto fut_g2 = global_thread_pool().run_packaged_task([this, &
-                  TRACE_STRUCT](){ return calc_beta_g2_3_loop(TRACE_STRUCT); });
-               auto fut_g3 = global_thread_pool().run_packaged_task([this, &
-                  TRACE_STRUCT](){ return calc_beta_g3_3_loop(TRACE_STRUCT); });
-               auto fut_Lambdax = global_thread_pool().run_packaged_task([this, &
-                  TRACE_STRUCT](){ return calc_beta_Lambdax_3_loop(TRACE_STRUCT);
-                  });
-               auto fut_Yu = global_thread_pool().run_packaged_task([this, &
-                  TRACE_STRUCT](){ return calc_beta_Yu_3_loop(TRACE_STRUCT); });
-               auto fut_Yd = global_thread_pool().run_packaged_task([this, &
-                  TRACE_STRUCT](){ return calc_beta_Yd_3_loop(TRACE_STRUCT); });
-               auto fut_Ye = global_thread_pool().run_packaged_task([this, &
-                  TRACE_STRUCT](){ return calc_beta_Ye_3_loop(TRACE_STRUCT); });
-
-               beta_g1 += fut_g1.get();
-               beta_g2 += fut_g2.get();
-               beta_g3 += fut_g3.get();
-               beta_Lambdax += fut_Lambdax.get();
-               beta_Yu += fut_Yu.get();
-               beta_Yd += fut_Yd.get();
-               beta_Ye += fut_Ye.get();
-
-            }
-         #else
             beta_g1 += calc_beta_g1_3_loop(TRACE_STRUCT);
             beta_g2 += calc_beta_g2_3_loop(TRACE_STRUCT);
             beta_g3 += calc_beta_g3_3_loop(TRACE_STRUCT);
@@ -132,7 +99,6 @@ HSSUSY_susy_parameters HSSUSY_susy_parameters::calc_beta(int loops) const
             beta_Yu += calc_beta_Yu_3_loop(TRACE_STRUCT);
             beta_Yd += calc_beta_Yd_3_loop(TRACE_STRUCT);
             beta_Ye += calc_beta_Ye_3_loop(TRACE_STRUCT);
-         #endif
 
             if (loops > 3) {
                beta_g3 += calc_beta_g3_4_loop(TRACE_STRUCT);
@@ -211,6 +177,11 @@ Eigen::ArrayXd HSSUSY_susy_parameters::get() const
 
 
    return pars;
+}
+
+void HSSUSY_susy_parameters::print() const
+{
+   this->print(std::cerr);
 }
 
 void HSSUSY_susy_parameters::print(std::ostream& ostr) const

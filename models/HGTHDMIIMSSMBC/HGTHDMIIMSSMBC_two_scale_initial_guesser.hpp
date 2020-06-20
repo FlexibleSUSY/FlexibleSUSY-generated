@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:28:41
 
 #ifndef HGTHDMIIMSSMBC_TWO_SCALE_INITIAL_GUESSER_H
 #define HGTHDMIIMSSMBC_TWO_SCALE_INITIAL_GUESSER_H

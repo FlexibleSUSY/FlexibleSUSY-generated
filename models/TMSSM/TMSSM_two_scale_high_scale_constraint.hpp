@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:02:47
 
 #ifndef TMSSM_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
 #define TMSSM_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
@@ -38,6 +37,8 @@ public:
    TMSSM_high_scale_constraint() = default;
    TMSSM_high_scale_constraint(TMSSM<Two_scale>*);
    virtual ~TMSSM_high_scale_constraint() = default;
+   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+
    virtual void apply() override;
    virtual double get_scale() const override;
    virtual std::string name() const override { return "TMSSM high-scale constraint"; }

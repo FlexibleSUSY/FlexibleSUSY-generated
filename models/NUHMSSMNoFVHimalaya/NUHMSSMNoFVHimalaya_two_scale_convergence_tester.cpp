@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 17:35:13
 
 #include "NUHMSSMNoFVHimalaya_two_scale_convergence_tester.hpp"
 #include <array>

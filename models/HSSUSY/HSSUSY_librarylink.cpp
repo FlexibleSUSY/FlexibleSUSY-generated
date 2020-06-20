@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:47:07
 
 #include "config.h"
 
@@ -162,6 +161,7 @@ class HSSUSY_spectrum_impl : public HSSUSY_spectrum
 {
 public:
    virtual ~HSSUSY_spectrum_impl() = default;
+   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
    virtual void put_model_spectra(MLINK link) const override;
 
@@ -176,7 +176,7 @@ public:
    virtual void calculate_model_observables(const softsusy::QedQcd&, const Physical_input&) override;
 
 private:
-   std::tuple<HSSUSY_slha<HSSUSY<Solver_type>>> models{};        ///< running parameters and pole masses
+   std::tuple<HSSUSY<Solver_type>> models{};        ///< running parameters and pole masses
    Spectrum_generator_problems problems{};   ///< spectrum generator problems
    HSSUSY_scales scales{};              ///< scale information
    HSSUSY_observables observables{};    ///< observables
@@ -240,7 +240,7 @@ Handle_map handles;
 Handle get_new_handle()
 {
    static const std::size_t max_handles =
-      static_cast<std::size_t>(std::exp2(std::numeric_limits<Handle>::digits) - 1);
+      static_cast<std::size_t>(std::numeric_limits<Handle>::max());
 
    if (handles.size() >= max_handles)
       throw ENotEnoughFreeHandles(handles.size());
@@ -386,6 +386,7 @@ void Model_data::put_settings(MLINK link) const
    MLPutRuleTo(link, static_cast<int>(settings.get(Spectrum_generator_settings::higgs_3loop_correction_at2_as)), "higgs3loopCorrectionAtAtAs");
    MLPutRuleTo(link, static_cast<int>(settings.get(Spectrum_generator_settings::higgs_3loop_correction_at3)), "higgs3loopCorrectionAtAtAt");
    MLPutRuleTo(link, static_cast<int>(settings.get(Spectrum_generator_settings::higgs_4loop_correction_at_as3)), "higgs4loopCorrectionAtAsAsAs");
+   MLPutRuleTo(link, static_cast<int>(settings.get(Spectrum_generator_settings::loop_library)), "loopLibrary");
    MLPutRuleTo(link, modsel.parameter_output_scale, "parameterOutputScale");
 
    MLEndPacket(link);
@@ -745,8 +746,7 @@ void put_spectrum(const standard_model::StandardModel<Solver_type>& model, MLINK
 
 /******************************************************************/
 
-template <typename Model>
-void put_spectrum(const HSSUSY_slha<Model>& model, MLINK link)
+void put_spectrum(const HSSUSY_slha& model, MLINK link)
 {
    MLPutRule(link, HSSUSY_info::model_name);
    MLPutFunction(link, "List", 46);
@@ -1001,6 +1001,7 @@ Model_data make_data(const Dynamic_array_view<Element_t>& pars)
    settings.set(Spectrum_generator_settings::higgs_3loop_correction_at2_as, pars[c++]);
    settings.set(Spectrum_generator_settings::higgs_3loop_correction_at3, pars[c++]);
    settings.set(Spectrum_generator_settings::higgs_4loop_correction_at_as3, pars[c++]);
+   settings.set(Spectrum_generator_settings::loop_library, pars[c++]);
 
    SLHA_io::Modsel modsel;
    modsel.parameter_output_scale = pars[c++];

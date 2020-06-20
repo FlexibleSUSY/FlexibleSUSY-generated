@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:44:45
 
 /**
  * @file THDMIIMSSMBC_two_scale_model.cpp
@@ -26,8 +25,7 @@
  * which solve EWSB and calculate pole masses and mixings from MSbar
  * parameters.
  *
- * This file was generated at Fri 10 Apr 2020 19:44:45 with FlexibleSUSY
- * 2.4.2 (git commit: a94199e5620b8684f5d30d0eece5757a5a72c4a4) and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #include "THDMIIMSSMBC_two_scale_model.hpp"
@@ -36,39 +34,44 @@ namespace flexiblesusy {
 
 #define CLASSNAME THDMIIMSSMBC<Two_scale>
 
-CLASSNAME::THDMIIMSSMBC(const THDMIIMSSMBC_input_parameters& input_)
-   : THDMIIMSSMBC_mass_eigenstates(input_)
+CLASSNAME::THDMIIMSSMBC(const THDMIIMSSMBC_slha& model_, bool do_convert_masses_to_slha)
+   : THDMIIMSSMBC_slha(model_, do_convert_masses_to_slha)
+{
+}
+
+CLASSNAME::THDMIIMSSMBC(const THDMIIMSSMBC_input_parameters& input_, bool do_convert_masses_to_slha)
+   : THDMIIMSSMBC_slha(input_, do_convert_masses_to_slha)
 {
 }
 
 void CLASSNAME::calculate_spectrum()
 {
-   THDMIIMSSMBC_mass_eigenstates::calculate_spectrum();
+   THDMIIMSSMBC_slha::calculate_spectrum();
 }
 
 void CLASSNAME::clear_problems()
 {
-   THDMIIMSSMBC_mass_eigenstates::clear_problems();
+   THDMIIMSSMBC_slha::clear_problems();
 }
 
 std::string CLASSNAME::name() const
 {
-   return THDMIIMSSMBC_mass_eigenstates::name();
+   return THDMIIMSSMBC_slha::name();
 }
 
 void CLASSNAME::run_to(double scale, double eps)
 {
-   THDMIIMSSMBC_mass_eigenstates::run_to(scale, eps);
+   THDMIIMSSMBC_slha::run_to(scale, eps);
 }
 
 void CLASSNAME::print(std::ostream& out) const
 {
-   THDMIIMSSMBC_mass_eigenstates::print(out);
+   THDMIIMSSMBC_slha::print(out);
 }
 
 void CLASSNAME::set_precision(double p)
 {
-   THDMIIMSSMBC_mass_eigenstates::set_precision(p);
+   THDMIIMSSMBC_slha::set_precision(p);
 }
 
 std::ostream& operator<<(std::ostream& ostr, const THDMIIMSSMBC<Two_scale>& model)

@@ -16,13 +16,19 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:46:02
 
 #include "THDMII_slha_io.hpp"
 #include "THDMII_input_parameters.hpp"
+#include "THDMII_mass_eigenstates.hpp"
+#include "THDMII_model_slha.hpp"
+#include "THDMII_observables.hpp"
+#include "THDMII_physical.hpp"
+#include "ew_input.hpp"
 #include "logger.hpp"
-#include "wrappers.hpp"
 #include "numerics2.hpp"
+#include "spectrum_generator_problems.hpp"
+#include "standard_model.hpp"
+#include "wrappers.hpp"
 #include "config.h"
 
 #include <array>
@@ -35,11 +41,14 @@
 #define PHYSICAL(p) model.get_physical().p
 #define PHYSICAL_SLHA(p) model.get_physical_slha().p
 #define LOCALPHYSICAL(p) physical.p
+#define MODEL model
 #define MODELPARAMETER(p) model.get_##p()
 #define INPUTPARAMETER(p) input.p
 #define EXTRAPARAMETER(p) model.get_##p()
+#define OBSERVABLES observables
 #define DEFINE_PHYSICAL_PARAMETER(p) decltype(LOCALPHYSICAL(p)) p;
 #define LowEnergyConstant(p) Electroweak_constants::p
+#define SCALES(p) scales.p
 
 namespace flexiblesusy {
 
@@ -57,6 +66,16 @@ void THDMII_slha_io::clear()
 void THDMII_slha_io::set_print_imaginary_parts_of_majorana_mixings(bool flag)
 {
    print_imaginary_parts_of_majorana_mixings = flag;
+}
+
+/**
+ * Reads DR-bar parameters, pole masses and mixing matrices from a
+ * SLHA output file.
+ */
+void THDMII_slha_io::fill(THDMII_slha& model) const
+{
+   fill(static_cast<THDMII_mass_eigenstates&>(model));
+   fill_physical(model.get_physical_slha());
 }
 
 /**
@@ -313,6 +332,47 @@ void THDMII_slha_io::set_pmns(
    slha_io.set_block("IMVPMNS", pmns_matrix.imag(), "Im(PMNS)", scale);
 }
 
+/**
+ * Stores the model (DR-bar) parameters in the SLHA object.
+ *
+ * @param model model class
+ */
+void THDMII_slha_io::set_model_parameters(const THDMII_slha& model)
+{
+   {
+      std::ostringstream block;
+      block << "Block gauge Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(1, (MODELPARAMETER(g1) * 0.7745966692414834), "g1 * 0.7745966692414834")
+            << FORMAT_ELEMENT(2, (MODELPARAMETER(g2)), "g2")
+            << FORMAT_ELEMENT(3, (MODELPARAMETER(g3)), "g3")
+      ;
+      slha_io.set_block(block);
+   }
+   slha_io.set_block("Yu", ToMatrix(MODELPARAMETER(Yu_slha)), "Yu", model.get_scale());
+   slha_io.set_block("Yd", ToMatrix(MODELPARAMETER(Yd_slha)), "Yd", model.get_scale());
+   slha_io.set_block("Ye", ToMatrix(MODELPARAMETER(Ye_slha)), "Ye", model.get_scale());
+   {
+      std::ostringstream block;
+      block << "Block HMIX Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(31, (MODELPARAMETER(Lambda1)), "Lambda1")
+            << FORMAT_ELEMENT(32, (MODELPARAMETER(Lambda2)), "Lambda2")
+            << FORMAT_ELEMENT(33, (MODELPARAMETER(Lambda3)), "Lambda3")
+            << FORMAT_ELEMENT(34, (MODELPARAMETER(Lambda4)), "Lambda4")
+            << FORMAT_ELEMENT(35, (MODELPARAMETER(Lambda5)), "Lambda5")
+            << FORMAT_ELEMENT(36, (MODELPARAMETER(Lambda6)), "Lambda6")
+            << FORMAT_ELEMENT(37, (MODELPARAMETER(Lambda7)), "Lambda7")
+            << FORMAT_ELEMENT(20, (MODELPARAMETER(M112)), "M112")
+            << FORMAT_ELEMENT(21, (MODELPARAMETER(M222)), "M222")
+            << FORMAT_ELEMENT(22, (MODELPARAMETER(M122)), "M122")
+            << FORMAT_ELEMENT(102, (MODELPARAMETER(v1)), "v1")
+            << FORMAT_ELEMENT(103, (MODELPARAMETER(v2)), "v2")
+      ;
+      slha_io.set_block(block);
+   }
+
+
+}
+
 void THDMII_slha_io::set_model_parameters(const standard_model::Standard_model& model)
 {
    {
@@ -391,6 +451,67 @@ void THDMII_slha_io::set_spectrum(const standard_model::Standard_model& model)
 }
 
 /**
+ * Stores the model (DR-bar) parameters, masses and mixing matrices in
+ * the SLHA object.
+ *
+ * @param model model class in SLHA convention
+ */
+void THDMII_slha_io::set_spectrum(const THDMII_slha& model)
+{
+   const THDMII_physical physical(model.get_physical_slha());
+   const bool write_sm_masses = model.do_calculate_sm_pole_masses();
+
+   set_model_parameters(model);
+   set_mass(physical, write_sm_masses);
+   set_mixing_matrices(physical, write_sm_masses);
+
+   if (slha_io.get_modsel().quark_flavour_violated)
+      set_ckm(model.get_ckm_matrix(), model.get_scale());
+
+   if (slha_io.get_modsel().lepton_flavour_violated)
+      set_pmns(model.get_pmns_matrix(), model.get_scale());
+}
+
+/**
+ * Writes extra SLHA blocks
+ *
+ * @param model model class
+ * @param scales struct of boundary condition scales
+ * @param observables struct of observables
+ */
+void THDMII_slha_io::set_extra(
+   const THDMII_slha& model,
+   const THDMII_scales& scales,
+   const THDMII_observables& observables)
+{
+   const THDMII_physical physical(model.get_physical_slha());
+
+   {
+      std::ostringstream block;
+      block << "Block EFFHIGGSCOUPLINGS" << '\n'
+            << FORMAT_RANK_THREE_TENSOR(25, 22, 22, (Abs(OBSERVABLES.eff_cp_higgs_photon_photon(0))), "Abs(effective H-Photon-Photon coupling)")
+            << FORMAT_RANK_THREE_TENSOR(35, 22, 22, (Abs(OBSERVABLES.eff_cp_higgs_photon_photon(1))), "Abs(effective H-Photon-Photon coupling)")
+            << FORMAT_RANK_THREE_TENSOR(25, 21, 21, (Abs(OBSERVABLES.eff_cp_higgs_gluon_gluon(0))), "Abs(effective H-Gluon-Gluon coupling)")
+            << FORMAT_RANK_THREE_TENSOR(35, 21, 21, (Abs(OBSERVABLES.eff_cp_higgs_gluon_gluon(1))), "Abs(effective H-Gluon-Gluon coupling)")
+            << FORMAT_RANK_THREE_TENSOR(36, 22, 22, (Abs(OBSERVABLES.eff_cp_pseudoscalar_photon_photon)), "Abs(effective A-Photon-Photon coupling)")
+            << FORMAT_RANK_THREE_TENSOR(36, 21, 21, (Abs(OBSERVABLES.eff_cp_pseudoscalar_gluon_gluon)), "Abs(effective A-Gluon-Gluon coupling)")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block FlexibleSUSYLowEnergy Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(21, (OBSERVABLES.a_muon), "Delta(g-2)_muon/2 FlexibleSUSY")
+            << FORMAT_ELEMENT(23, (OBSERVABLES.edm_Fe_0), "electric dipole moment of Fe(0) [1/GeV]")
+            << FORMAT_ELEMENT(24, (OBSERVABLES.edm_Fe_1), "electric dipole moment of Fe(1) [1/GeV]")
+            << FORMAT_ELEMENT(25, (OBSERVABLES.edm_Fe_2), "electric dipole moment of Fe(2) [1/GeV]")
+      ;
+      slha_io.set_block(block);
+   }
+
+}
+
+/**
  * Write SLHA object to given output.  If output == "-", then the SLHA
  * object is written to std::cout.  Otherwise, output is interpreted
  * as a file name
@@ -403,6 +524,21 @@ void THDMII_slha_io::write_to(const std::string& output) const
       write_to_stream(std::cout);
    else
       write_to_file(output);
+}
+
+void THDMII_slha_io::write_to_file(const std::string& file_name) const
+{
+   slha_io.write_to_file(file_name);
+}
+
+void THDMII_slha_io::write_to_stream() const
+{
+   write_to_stream(std::cout);
+}
+
+void THDMII_slha_io::write_to_stream(std::ostream& ostr) const
+{
+   slha_io.write_to_stream(ostr);
 }
 
 /**
@@ -453,19 +589,19 @@ void THDMII_slha_io::read_from_stream(std::istream& istr)
  */
 void THDMII_slha_io::fill(THDMII_input_parameters& input) const
 {
-   SLHA_io::Tuple_processor minpar_processor = [&input, this] (int key, double value) {
+   SLHA_io::Tuple_processor minpar_processor = [&input] (int key, double value) {
       return fill_minpar_tuple(input, key, value);
    };
 
-   SLHA_io::Tuple_processor extpar_processor = [&input, this] (int key, double value) {
+   SLHA_io::Tuple_processor extpar_processor = [&input] (int key, double value) {
       return fill_extpar_tuple(input, key, value);
    };
 
-   SLHA_io::Tuple_processor imminpar_processor = [&input, this] (int key, double value) {
+   SLHA_io::Tuple_processor imminpar_processor = [&input] (int key, double value) {
       return fill_imminpar_tuple(input, key, value);
    };
 
-   SLHA_io::Tuple_processor imextpar_processor = [&input, this] (int key, double value) {
+   SLHA_io::Tuple_processor imextpar_processor = [&input] (int key, double value) {
       return fill_imextpar_tuple(input, key, value);
    };
 

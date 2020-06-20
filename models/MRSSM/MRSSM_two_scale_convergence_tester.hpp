@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:58:42
 
 #ifndef MRSSM_TWO_SCALE_CONVERGENCE_TESTER_H
 #define MRSSM_TWO_SCALE_CONVERGENCE_TESTER_H

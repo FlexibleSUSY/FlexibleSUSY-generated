@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:33:27
 
 #ifndef UMSSM_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
 #define UMSSM_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
@@ -38,6 +37,8 @@ public:
    UMSSM_high_scale_constraint() = default;
    UMSSM_high_scale_constraint(UMSSM<Two_scale>*);
    virtual ~UMSSM_high_scale_constraint() = default;
+   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+
    virtual void apply() override;
    virtual double get_scale() const override;
    virtual std::string name() const override { return "UMSSM high-scale constraint"; }

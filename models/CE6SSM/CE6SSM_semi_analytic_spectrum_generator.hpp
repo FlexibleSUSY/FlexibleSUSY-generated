@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:43:09
 
 #ifndef CE6SSM_SEMI_ANALYTIC_SPECTRUM_GENERATOR_H
 #define CE6SSM_SEMI_ANALYTIC_SPECTRUM_GENERATOR_H

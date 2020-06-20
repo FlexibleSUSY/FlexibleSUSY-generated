@@ -16,10 +16,10 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:28:33
 
 #include "HGTHDMIIMSSMBC_physical.hpp"
-#include "slha_io.hpp"
+#include "mixings.hpp"
+#include "wrappers.hpp"
 
 #include <iostream>
 
@@ -65,7 +65,7 @@ void HGTHDMIIMSSMBC_physical::clear()
  */
 void HGTHDMIIMSSMBC_physical::convert_to_hk()
 {
-   SLHA_io::convert_symmetric_fermion_mixings_to_hk(LOCALPHYSICAL(MChi), LOCALPHYSICAL(ZN));
+   convert_symmetric_fermion_mixings_to_hk(LOCALPHYSICAL(MChi), LOCALPHYSICAL(ZN));
 
 }
 
@@ -76,7 +76,7 @@ void HGTHDMIIMSSMBC_physical::convert_to_hk()
  */
 void HGTHDMIIMSSMBC_physical::convert_to_slha()
 {
-   SLHA_io::convert_symmetric_fermion_mixings_to_slha(LOCALPHYSICAL(MChi), LOCALPHYSICAL(ZN));
+   convert_symmetric_fermion_mixings_to_slha(LOCALPHYSICAL(MChi), LOCALPHYSICAL(ZN));
 
 }
 

@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:25:53
 
 /**
  * @file NUTSMSSM_two_scale_model.cpp
@@ -26,8 +25,7 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Fri 10 Apr 2020 20:25:53 with FlexibleSUSY
- * 2.4.2 (git commit: a94199e5620b8684f5d30d0eece5757a5a72c4a4) and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #include "NUTSMSSM_two_scale_model.hpp"
@@ -36,39 +34,44 @@ namespace flexiblesusy {
 
 #define CLASSNAME NUTSMSSM<Two_scale>
 
-CLASSNAME::NUTSMSSM(const NUTSMSSM_input_parameters& input_)
-   : NUTSMSSM_mass_eigenstates(input_)
+CLASSNAME::NUTSMSSM(const NUTSMSSM_slha& model_, bool do_convert_masses_to_slha)
+   : NUTSMSSM_slha(model_, do_convert_masses_to_slha)
+{
+}
+
+CLASSNAME::NUTSMSSM(const NUTSMSSM_input_parameters& input_, bool do_convert_masses_to_slha)
+   : NUTSMSSM_slha(input_, do_convert_masses_to_slha)
 {
 }
 
 void CLASSNAME::calculate_spectrum()
 {
-   NUTSMSSM_mass_eigenstates::calculate_spectrum();
+   NUTSMSSM_slha::calculate_spectrum();
 }
 
 void CLASSNAME::clear_problems()
 {
-   NUTSMSSM_mass_eigenstates::clear_problems();
+   NUTSMSSM_slha::clear_problems();
 }
 
 std::string CLASSNAME::name() const
 {
-   return NUTSMSSM_mass_eigenstates::name();
+   return NUTSMSSM_slha::name();
 }
 
 void CLASSNAME::run_to(double scale, double eps)
 {
-   NUTSMSSM_mass_eigenstates::run_to(scale, eps);
+   NUTSMSSM_slha::run_to(scale, eps);
 }
 
 void CLASSNAME::print(std::ostream& out) const
 {
-   NUTSMSSM_mass_eigenstates::print(out);
+   NUTSMSSM_slha::print(out);
 }
 
 void CLASSNAME::set_precision(double p)
 {
-   NUTSMSSM_mass_eigenstates::set_precision(p);
+   NUTSMSSM_slha::set_precision(p);
 }
 
 std::ostream& operator<<(std::ostream& ostr, const NUTSMSSM<Two_scale>& model)

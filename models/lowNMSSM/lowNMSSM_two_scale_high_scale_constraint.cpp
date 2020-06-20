@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:23:29
 
 #include "lowNMSSM_two_scale_high_scale_constraint.hpp"
 #include "lowNMSSM_two_scale_model.hpp"
@@ -26,7 +25,6 @@
 #include "logger.hpp"
 #include "ew_input.hpp"
 #include "error.hpp"
-#include "gsl_utils.hpp"
 #include "minimizer.hpp"
 #include "raii.hpp"
 #include "root_finder.hpp"

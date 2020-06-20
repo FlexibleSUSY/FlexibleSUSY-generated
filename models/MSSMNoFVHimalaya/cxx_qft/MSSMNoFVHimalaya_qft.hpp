@@ -16,13 +16,11 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 17:35:25
 
 /**
  * @file cxx_qft/MSSMNoFVHimalaya_qft.hpp
  *
- * This file was generated at Fri 10 Apr 2020 17:35:25 with FlexibleSUSY
- * 2.4.2 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #ifndef MSSMNoFVHimalaya_CXXQFT_QFT_H

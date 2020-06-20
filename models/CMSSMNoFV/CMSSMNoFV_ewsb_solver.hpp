@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:40:48
 
 #ifndef CMSSMNoFV_EWSB_SOLVER_H
 #define CMSSMNoFV_EWSB_SOLVER_H

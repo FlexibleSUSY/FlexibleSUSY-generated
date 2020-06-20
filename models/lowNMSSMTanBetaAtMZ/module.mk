@@ -23,16 +23,18 @@ lowNMSSMTanBetaAtMZ_SUSY_BETAS_MK := \
 lowNMSSMTanBetaAtMZ_SOFT_BETAS_MK := \
 		$(DIR)/soft_betas.mk
 
-lowNMSSMTanBetaAtMZ_CXX_QFT_VERTICES_MK := \
+lowNMSSMTanBetaAtMZ_CXXQFT_VERTICES_MK := \
 		$(DIR)/cxx_qft/vertices.mk
+
+-include $(lowNMSSMTanBetaAtMZ_CXXQFT_VERTICES_MK)
+LIBlowNMSSMTanBetaAtMZ_CXXQFT_VERTICES_SRC ?= ''
 
 lowNMSSMTanBetaAtMZ_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
 lowNMSSMTanBetaAtMZ_INCLUDE_MK := \
 		$(lowNMSSMTanBetaAtMZ_SUSY_BETAS_MK) \
-		$(lowNMSSMTanBetaAtMZ_SOFT_BETAS_MK) \
-		$(lowNMSSMTanBetaAtMZ_CXX_QFT_VERTICES_MK)
+		$(lowNMSSMTanBetaAtMZ_SOFT_BETAS_MK)
 
 lowNMSSMTanBetaAtMZ_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.lowNMSSMTanBetaAtMZ_generated \
@@ -58,11 +60,15 @@ LIBlowNMSSMTanBetaAtMZ_SRC := \
 		$(DIR)/lowNMSSMTanBetaAtMZ_a_muon.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_edm.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_FFV_form_factors.cpp \
+		$(DIR)/lowNMSSMTanBetaAtMZ_f_to_f_conversion.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_l_to_lgamma.cpp \
+		$(DIR)/lowNMSSMTanBetaAtMZ_b_to_s_gamma.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_effective_couplings.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_info.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_input_parameters.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_mass_eigenstates.cpp \
+		$(DIR)/lowNMSSMTanBetaAtMZ_mass_eigenstates_decoupling_scheme.cpp \
+		$(DIR)/lowNMSSMTanBetaAtMZ_model_slha.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_observables.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_physical.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_slha_io.cpp \
@@ -70,6 +76,8 @@ LIBlowNMSSMTanBetaAtMZ_SRC := \
 		$(DIR)/lowNMSSMTanBetaAtMZ_susy_parameters.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_utilities.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_weinberg_angle.cpp
+
+LIBlowNMSSMTanBetaAtMZ_SRC += $(LIBlowNMSSMTanBetaAtMZ_CXXQFT_VERTICES_SRC)
 
 EXElowNMSSMTanBetaAtMZ_SRC := \
 		$(DIR)/run_lowNMSSMTanBetaAtMZ.cpp \
@@ -89,7 +97,9 @@ LIBlowNMSSMTanBetaAtMZ_HDR := \
 		$(DIR)/lowNMSSMTanBetaAtMZ_convergence_tester.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_edm.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_FFV_form_factors.hpp \
+		$(DIR)/lowNMSSMTanBetaAtMZ_f_to_f_conversion.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_l_to_lgamma.hpp \
+		$(DIR)/lowNMSSMTanBetaAtMZ_b_to_s_gamma.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_effective_couplings.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_ewsb_solver.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_ewsb_solver_interface.hpp \
@@ -99,6 +109,8 @@ LIBlowNMSSMTanBetaAtMZ_HDR := \
 		$(DIR)/lowNMSSMTanBetaAtMZ_input_parameters.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_low_scale_constraint.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_mass_eigenstates.hpp \
+		$(DIR)/lowNMSSMTanBetaAtMZ_mass_eigenstates_interface.hpp \
+		$(DIR)/lowNMSSMTanBetaAtMZ_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_model.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_model_slha.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_observables.hpp \
@@ -117,7 +129,7 @@ LIBlowNMSSMTanBetaAtMZ_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/lowNMSSMTanBetaAtMZ_fields.hpp \
 		$(DIR)/cxx_qft/lowNMSSMTanBetaAtMZ_vertices.hpp \
 		$(DIR)/cxx_qft/lowNMSSMTanBetaAtMZ_context_base.hpp \
-		$(DIR)/cxx_qft/lowNMSSMTanBetaAtMZ_npointfunctions.hpp
+		$(DIR)/cxx_qft/lowNMSSMTanBetaAtMZ_npointfunctions_wilsoncoeffs.hpp
 
 ifneq ($(findstring two_scale,$(SOLVERS)),)
 -include $(DIR)/two_scale.mk
@@ -135,7 +147,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(lowNMSSMTanBetaAtMZ_SUSY_BETAS_MK)
 -include $(lowNMSSMTanBetaAtMZ_SOFT_BETAS_MK)
--include $(lowNMSSMTanBetaAtMZ_CXX_QFT_VERTICES_MK)
+-include $(lowNMSSMTanBetaAtMZ_CXXQFT_VERTICES_MK)
 -include $(lowNMSSMTanBetaAtMZ_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
@@ -147,7 +159,7 @@ $(lowNMSSMTanBetaAtMZ_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(lowNMSSMTanBetaAtMZ_SOFT_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
-$(lowNMSSMTanBetaAtMZ_CXX_QFT_VERTICES_MK): run-metacode-$(MODNAME)
+$(lowNMSSMTanBetaAtMZ_CXXQFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(lowNMSSMTanBetaAtMZ_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
@@ -212,6 +224,7 @@ install-src::
 		$(Q)install -d $(lowNMSSMTanBetaAtMZ_INSTALL_DIR)
 		$(Q)install -d $(lowNMSSMTanBetaAtMZ_INSTALL_CXXQFT_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(LIBlowNMSSMTanBetaAtMZ_SRC) $(lowNMSSMTanBetaAtMZ_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBlowNMSSMTanBetaAtMZ_CXXQFT_VERTICES_SRC) $(lowNMSSMTanBetaAtMZ_INSTALL_CXXQFT_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(LIBlowNMSSMTanBetaAtMZ_HDR) $(lowNMSSMTanBetaAtMZ_INSTALL_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(LIBlowNMSSMTanBetaAtMZ_CXXQFT_HDR) $(lowNMSSMTanBetaAtMZ_INSTALL_CXXQFT_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(EXElowNMSSMTanBetaAtMZ_SRC) $(lowNMSSMTanBetaAtMZ_INSTALL_DIR)
@@ -219,6 +232,8 @@ install-src::
 		$(Q)install -m u=rw,g=r,o=r $(LLlowNMSSMTanBetaAtMZ_MMA) $(lowNMSSMTanBetaAtMZ_INSTALL_DIR)
 		$(Q)$(INSTALL_STRIPPED) $(lowNMSSMTanBetaAtMZ_MK) $(lowNMSSMTanBetaAtMZ_INSTALL_DIR) -m u=rw,g=r,o=r
 		$(Q)install -m u=rw,g=r,o=r $(lowNMSSMTanBetaAtMZ_INCLUDE_MK) $(lowNMSSMTanBetaAtMZ_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(lowNMSSMTanBetaAtMZ_CXXQFT_VERTICES_MK) $(lowNMSSMTanBetaAtMZ_INSTALL_CXXQFT_DIR)
+
 ifneq ($(lowNMSSMTanBetaAtMZ_SLHA_INPUT),)
 		$(Q)install -m u=rw,g=r,o=r $(lowNMSSMTanBetaAtMZ_SLHA_INPUT) $(lowNMSSMTanBetaAtMZ_INSTALL_DIR)
 endif
@@ -250,6 +265,7 @@ clean-$(MODNAME)-src:
 		$(Q)-rm -f $(LLlowNMSSMTanBetaAtMZ_MMA)
 		$(Q)-rm -f $(METACODE_STAMP_lowNMSSMTanBetaAtMZ)
 		$(Q)-rm -f $(lowNMSSMTanBetaAtMZ_INCLUDE_MK)
+		$(Q)-rm -f $(lowNMSSMTanBetaAtMZ_CXXQFT_VERTICES_MK)
 		$(Q)-rm -f $(lowNMSSMTanBetaAtMZ_SLHA_INPUT)
 		$(Q)-rm -f $(lowNMSSMTanBetaAtMZ_REFERENCES)
 		$(Q)-rm -f $(lowNMSSMTanBetaAtMZ_GNUPLOT)
@@ -276,7 +292,7 @@ pack-$(MODNAME)-src:
 		$(LIBlowNMSSMTanBetaAtMZ_SRC) $(LIBlowNMSSMTanBetaAtMZ_HDR) $(LIBlowNMSSMTanBetaAtMZ_CXXQFT_HDR) \
 		$(EXElowNMSSMTanBetaAtMZ_SRC) \
 		$(LLlowNMSSMTanBetaAtMZ_SRC) $(LLlowNMSSMTanBetaAtMZ_MMA) \
-		$(lowNMSSMTanBetaAtMZ_MK) $(lowNMSSMTanBetaAtMZ_INCLUDE_MK) \
+		$(lowNMSSMTanBetaAtMZ_MK) $(lowNMSSMTanBetaAtMZ_INCLUDE_MK) $(lowNMSSMTanBetaAtMZ_CXXQFT_VERTICES_MK) \
 		$(lowNMSSMTanBetaAtMZ_SLHA_INPUT) $(lowNMSSMTanBetaAtMZ_REFERENCES) \
 		$(lowNMSSMTanBetaAtMZ_GNUPLOT)
 
@@ -302,7 +318,7 @@ $(METACODE_STAMP_lowNMSSMTanBetaAtMZ):
 endif
 
 $(LIBlowNMSSMTanBetaAtMZ_DEP) $(EXElowNMSSMTanBetaAtMZ_DEP) $(LLlowNMSSMTanBetaAtMZ_DEP) $(LIBlowNMSSMTanBetaAtMZ_OBJ) $(EXElowNMSSMTanBetaAtMZ_OBJ) $(LLlowNMSSMTanBetaAtMZ_OBJ) $(LLlowNMSSMTanBetaAtMZ_LIB): \
-	CPPFLAGS += $(MODlowNMSSMTanBetaAtMZ_SUBMOD_INC) $(MODlowNMSSMTanBetaAtMZ_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODlowNMSSMTanBetaAtMZ_SUBMOD_INC) $(MODlowNMSSMTanBetaAtMZ_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS)  $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBlowNMSSMTanBetaAtMZ_DEP) $(EXElowNMSSMTanBetaAtMZ_DEP) $(LLlowNMSSMTanBetaAtMZ_DEP) $(LIBlowNMSSMTanBetaAtMZ_OBJ) $(EXElowNMSSMTanBetaAtMZ_OBJ) $(LLlowNMSSMTanBetaAtMZ_OBJ) $(LLlowNMSSMTanBetaAtMZ_LIB): \
@@ -316,13 +332,13 @@ $(LIBlowNMSSMTanBetaAtMZ): $(LIBlowNMSSMTanBetaAtMZ_OBJ)
 		@$(MSG)
 		$(Q)$(MODULE_MAKE_LIB_CMD) $@ $^
 
-$(DIR)/%.x: $(DIR)/%.o $(LIBlowNMSSMTanBetaAtMZ) $(MODlowNMSSMTanBetaAtMZ_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+$(DIR)/%.x: $(DIR)/%.o $(LIBlowNMSSMTanBetaAtMZ) $(MODlowNMSSMTanBetaAtMZ_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
-$(LLlowNMSSMTanBetaAtMZ_LIB): $(LLlowNMSSMTanBetaAtMZ_OBJ) $(LIBlowNMSSMTanBetaAtMZ) $(MODlowNMSSMTanBetaAtMZ_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+$(LLlowNMSSMTanBetaAtMZ_LIB): $(LLlowNMSSMTanBetaAtMZ_OBJ) $(LIBlowNMSSMTanBetaAtMZ) $(MODlowNMSSMTanBetaAtMZ_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS)
 
 ALLDEP += $(LIBlowNMSSMTanBetaAtMZ_DEP) $(EXElowNMSSMTanBetaAtMZ_DEP)
 ALLSRC += $(LIBlowNMSSMTanBetaAtMZ_SRC) $(EXElowNMSSMTanBetaAtMZ_SRC)

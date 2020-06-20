@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:50:00
 
 #include "MSSMEFTHiggs_input_parameters.hpp"
 #include "wrappers.hpp"

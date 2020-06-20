@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:45:36
 
 #include "THDMII_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -37,10 +36,10 @@ double THDMII_susy_parameters::calc_beta_g2_1_loop(const Susy_traces& susy_trace
 
    double beta_g2;
 
-   beta_g2 = Re(-3*oneOver16PiSqr*Cube(g2));
+   beta_g2 = Re(-3*Cube(g2));
 
 
-   return beta_g2;
+   return oneLoop * beta_g2;
 }
 
 /**
@@ -57,11 +56,11 @@ double THDMII_susy_parameters::calc_beta_g2_2_loop(const Susy_traces& susy_trace
 
    double beta_g2;
 
-   beta_g2 = Re(0.1*twoLoop*Cube(g2)*(-15*traceYdAdjYd - 5*traceYeAdjYe - 15*
+   beta_g2 = Re(0.1*Cube(g2)*(-15*traceYdAdjYd - 5*traceYeAdjYe - 15*
       traceYuAdjYu + 12*Sqr(g1) + 80*Sqr(g2) + 120*Sqr(g3)));
 
 
-   return beta_g2;
+   return twoLoop * beta_g2;
 }
 
 /**
@@ -80,7 +79,7 @@ double THDMII_susy_parameters::calc_beta_g2_3_loop(const Susy_traces& susy_trace
    beta_g2 = 0;
 
 
-   return beta_g2;
+   return threeLoop * beta_g2;
 }
 
 /**
@@ -99,7 +98,7 @@ double THDMII_susy_parameters::calc_beta_g2_4_loop(const Susy_traces& susy_trace
    beta_g2 = 0;
 
 
-   return beta_g2;
+   return fourLoop * beta_g2;
 }
 
 /**
@@ -118,7 +117,7 @@ double THDMII_susy_parameters::calc_beta_g2_5_loop(const Susy_traces& susy_trace
    beta_g2 = 0;
 
 
-   return beta_g2;
+   return fiveLoop * beta_g2;
 }
 
 } // namespace flexiblesusy

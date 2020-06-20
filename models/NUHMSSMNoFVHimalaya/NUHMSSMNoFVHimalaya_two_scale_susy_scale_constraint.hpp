@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 17:35:15
 
 #ifndef NUHMSSMNoFVHimalaya_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
 #define NUHMSSMNoFVHimalaya_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
@@ -39,6 +38,8 @@ public:
    NUHMSSMNoFVHimalaya_susy_scale_constraint() = default;
    NUHMSSMNoFVHimalaya_susy_scale_constraint(NUHMSSMNoFVHimalaya<Two_scale>*, const softsusy::QedQcd&);
    virtual ~NUHMSSMNoFVHimalaya_susy_scale_constraint() = default;
+   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+
    virtual void apply() override;
    virtual double get_scale() const override;
    virtual std::string name() const override { return "NUHMSSMNoFVHimalaya SUSY-scale constraint"; }

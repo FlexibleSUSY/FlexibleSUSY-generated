@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:01:43
 
 #include "E6SSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -43,13 +42,13 @@ double E6SSM_susy_parameters::calc_beta_Lambdax_1_loop(const Susy_traces& susy_t
 
    double beta_Lambdax;
 
-   beta_Lambdax = Re(0.1*oneOver16PiSqr*Lambdax*(30*traceKappaAdjKappa + 20*
+   beta_Lambdax = Re(0.1*Lambdax*(30*traceKappaAdjKappa + 20*
       traceLambda12AdjLambda12 + 30*traceYdAdjYd + 10*traceYeAdjYe + 30*
       traceYuAdjYu + 40*AbsSqr(Lambdax) - 6*Sqr(g1) - 30*Sqr(g2) - 19*Sqr(gN)))
       ;
 
 
-   return beta_Lambdax;
+   return oneLoop * beta_Lambdax;
 }
 
 /**
@@ -77,9 +76,8 @@ double E6SSM_susy_parameters::calc_beta_Lambdax_2_loop(const Susy_traces& susy_t
 
    double beta_Lambdax;
 
-   beta_Lambdax = Re(-0.005*twoLoop*Lambdax*(1200*
-      traceKappaAdjKappaKappaAdjKappa + 800*
-      traceLambda12AdjLambda12Lambda12AdjLambda12 + 1800*traceYdAdjYdYdAdjYd +
+   beta_Lambdax = Re(-0.005*Lambdax*(1200*traceKappaAdjKappaKappaAdjKappa + 800
+      *traceLambda12AdjLambda12Lambda12AdjLambda12 + 1800*traceYdAdjYdYdAdjYd +
       1200*traceYdAdjYuYuAdjYd + 600*traceYeAdjYeYeAdjYe + 1800*
       traceYuAdjYuYuAdjYu + 1200*traceKappaAdjKappa*AbsSqr(Lambdax) + 800*
       traceLambda12AdjLambda12*AbsSqr(Lambdax) + 1800*traceYdAdjYd*AbsSqr(
@@ -97,7 +95,7 @@ double E6SSM_susy_parameters::calc_beta_Lambdax_2_loop(const Susy_traces& susy_t
       Sqr(Lambdax)));
 
 
-   return beta_Lambdax;
+   return twoLoop * beta_Lambdax;
 }
 
 /**
@@ -116,7 +114,7 @@ double E6SSM_susy_parameters::calc_beta_Lambdax_3_loop(const Susy_traces& susy_t
    beta_Lambdax = 0;
 
 
-   return beta_Lambdax;
+   return threeLoop * beta_Lambdax;
 }
 
 /**
@@ -135,7 +133,7 @@ double E6SSM_susy_parameters::calc_beta_Lambdax_4_loop(const Susy_traces& susy_t
    beta_Lambdax = 0;
 
 
-   return beta_Lambdax;
+   return fourLoop * beta_Lambdax;
 }
 
 /**
@@ -154,7 +152,7 @@ double E6SSM_susy_parameters::calc_beta_Lambdax_5_loop(const Susy_traces& susy_t
    beta_Lambdax = 0;
 
 
-   return beta_Lambdax;
+   return fiveLoop * beta_Lambdax;
 }
 
 } // namespace flexiblesusy

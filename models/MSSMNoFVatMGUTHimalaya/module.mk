@@ -23,16 +23,18 @@ MSSMNoFVatMGUTHimalaya_SUSY_BETAS_MK := \
 MSSMNoFVatMGUTHimalaya_SOFT_BETAS_MK := \
 		$(DIR)/soft_betas.mk
 
-MSSMNoFVatMGUTHimalaya_CXX_QFT_VERTICES_MK := \
+MSSMNoFVatMGUTHimalaya_CXXQFT_VERTICES_MK := \
 		$(DIR)/cxx_qft/vertices.mk
+
+-include $(MSSMNoFVatMGUTHimalaya_CXXQFT_VERTICES_MK)
+LIBMSSMNoFVatMGUTHimalaya_CXXQFT_VERTICES_SRC ?= ''
 
 MSSMNoFVatMGUTHimalaya_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
 MSSMNoFVatMGUTHimalaya_INCLUDE_MK := \
 		$(MSSMNoFVatMGUTHimalaya_SUSY_BETAS_MK) \
-		$(MSSMNoFVatMGUTHimalaya_SOFT_BETAS_MK) \
-		$(MSSMNoFVatMGUTHimalaya_CXX_QFT_VERTICES_MK)
+		$(MSSMNoFVatMGUTHimalaya_SOFT_BETAS_MK)
 
 MSSMNoFVatMGUTHimalaya_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.MSSMNoFVatMGUTHimalaya_generated \
@@ -52,11 +54,15 @@ LIBMSSMNoFVatMGUTHimalaya_SRC := \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_a_muon.cpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_edm.cpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_FFV_form_factors.cpp \
+		$(DIR)/MSSMNoFVatMGUTHimalaya_f_to_f_conversion.cpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_l_to_lgamma.cpp \
+		$(DIR)/MSSMNoFVatMGUTHimalaya_b_to_s_gamma.cpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_effective_couplings.cpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_info.cpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_input_parameters.cpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_mass_eigenstates.cpp \
+		$(DIR)/MSSMNoFVatMGUTHimalaya_mass_eigenstates_decoupling_scheme.cpp \
+		$(DIR)/MSSMNoFVatMGUTHimalaya_model_slha.cpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_observables.cpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_physical.cpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_slha_io.cpp \
@@ -64,6 +70,8 @@ LIBMSSMNoFVatMGUTHimalaya_SRC := \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_susy_parameters.cpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_utilities.cpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_weinberg_angle.cpp
+
+LIBMSSMNoFVatMGUTHimalaya_SRC += $(LIBMSSMNoFVatMGUTHimalaya_CXXQFT_VERTICES_SRC)
 
 EXEMSSMNoFVatMGUTHimalaya_SRC := \
 		$(DIR)/run_MSSMNoFVatMGUTHimalaya.cpp \
@@ -83,7 +91,9 @@ LIBMSSMNoFVatMGUTHimalaya_HDR := \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_convergence_tester.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_edm.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_FFV_form_factors.hpp \
+		$(DIR)/MSSMNoFVatMGUTHimalaya_f_to_f_conversion.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_l_to_lgamma.hpp \
+		$(DIR)/MSSMNoFVatMGUTHimalaya_b_to_s_gamma.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_effective_couplings.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_ewsb_solver.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_ewsb_solver_interface.hpp \
@@ -93,6 +103,8 @@ LIBMSSMNoFVatMGUTHimalaya_HDR := \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_input_parameters.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_low_scale_constraint.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_mass_eigenstates.hpp \
+		$(DIR)/MSSMNoFVatMGUTHimalaya_mass_eigenstates_interface.hpp \
+		$(DIR)/MSSMNoFVatMGUTHimalaya_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_model.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_model_slha.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_observables.hpp \
@@ -111,7 +123,7 @@ LIBMSSMNoFVatMGUTHimalaya_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/MSSMNoFVatMGUTHimalaya_fields.hpp \
 		$(DIR)/cxx_qft/MSSMNoFVatMGUTHimalaya_vertices.hpp \
 		$(DIR)/cxx_qft/MSSMNoFVatMGUTHimalaya_context_base.hpp \
-		$(DIR)/cxx_qft/MSSMNoFVatMGUTHimalaya_npointfunctions.hpp
+		$(DIR)/cxx_qft/MSSMNoFVatMGUTHimalaya_npointfunctions_wilsoncoeffs.hpp
 
 ifneq ($(findstring two_scale,$(SOLVERS)),)
 -include $(DIR)/two_scale.mk
@@ -129,7 +141,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(MSSMNoFVatMGUTHimalaya_SUSY_BETAS_MK)
 -include $(MSSMNoFVatMGUTHimalaya_SOFT_BETAS_MK)
--include $(MSSMNoFVatMGUTHimalaya_CXX_QFT_VERTICES_MK)
+-include $(MSSMNoFVatMGUTHimalaya_CXXQFT_VERTICES_MK)
 -include $(MSSMNoFVatMGUTHimalaya_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
@@ -141,7 +153,7 @@ $(MSSMNoFVatMGUTHimalaya_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(MSSMNoFVatMGUTHimalaya_SOFT_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
-$(MSSMNoFVatMGUTHimalaya_CXX_QFT_VERTICES_MK): run-metacode-$(MODNAME)
+$(MSSMNoFVatMGUTHimalaya_CXXQFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(MSSMNoFVatMGUTHimalaya_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
@@ -206,6 +218,7 @@ install-src::
 		$(Q)install -d $(MSSMNoFVatMGUTHimalaya_INSTALL_DIR)
 		$(Q)install -d $(MSSMNoFVatMGUTHimalaya_INSTALL_CXXQFT_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(LIBMSSMNoFVatMGUTHimalaya_SRC) $(MSSMNoFVatMGUTHimalaya_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBMSSMNoFVatMGUTHimalaya_CXXQFT_VERTICES_SRC) $(MSSMNoFVatMGUTHimalaya_INSTALL_CXXQFT_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(LIBMSSMNoFVatMGUTHimalaya_HDR) $(MSSMNoFVatMGUTHimalaya_INSTALL_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(LIBMSSMNoFVatMGUTHimalaya_CXXQFT_HDR) $(MSSMNoFVatMGUTHimalaya_INSTALL_CXXQFT_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(EXEMSSMNoFVatMGUTHimalaya_SRC) $(MSSMNoFVatMGUTHimalaya_INSTALL_DIR)
@@ -213,6 +226,8 @@ install-src::
 		$(Q)install -m u=rw,g=r,o=r $(LLMSSMNoFVatMGUTHimalaya_MMA) $(MSSMNoFVatMGUTHimalaya_INSTALL_DIR)
 		$(Q)$(INSTALL_STRIPPED) $(MSSMNoFVatMGUTHimalaya_MK) $(MSSMNoFVatMGUTHimalaya_INSTALL_DIR) -m u=rw,g=r,o=r
 		$(Q)install -m u=rw,g=r,o=r $(MSSMNoFVatMGUTHimalaya_INCLUDE_MK) $(MSSMNoFVatMGUTHimalaya_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(MSSMNoFVatMGUTHimalaya_CXXQFT_VERTICES_MK) $(MSSMNoFVatMGUTHimalaya_INSTALL_CXXQFT_DIR)
+
 ifneq ($(MSSMNoFVatMGUTHimalaya_SLHA_INPUT),)
 		$(Q)install -m u=rw,g=r,o=r $(MSSMNoFVatMGUTHimalaya_SLHA_INPUT) $(MSSMNoFVatMGUTHimalaya_INSTALL_DIR)
 endif
@@ -244,6 +259,7 @@ clean-$(MODNAME)-src:
 		$(Q)-rm -f $(LLMSSMNoFVatMGUTHimalaya_MMA)
 		$(Q)-rm -f $(METACODE_STAMP_MSSMNoFVatMGUTHimalaya)
 		$(Q)-rm -f $(MSSMNoFVatMGUTHimalaya_INCLUDE_MK)
+		$(Q)-rm -f $(MSSMNoFVatMGUTHimalaya_CXXQFT_VERTICES_MK)
 		$(Q)-rm -f $(MSSMNoFVatMGUTHimalaya_SLHA_INPUT)
 		$(Q)-rm -f $(MSSMNoFVatMGUTHimalaya_REFERENCES)
 		$(Q)-rm -f $(MSSMNoFVatMGUTHimalaya_GNUPLOT)
@@ -270,7 +286,7 @@ pack-$(MODNAME)-src:
 		$(LIBMSSMNoFVatMGUTHimalaya_SRC) $(LIBMSSMNoFVatMGUTHimalaya_HDR) $(LIBMSSMNoFVatMGUTHimalaya_CXXQFT_HDR) \
 		$(EXEMSSMNoFVatMGUTHimalaya_SRC) \
 		$(LLMSSMNoFVatMGUTHimalaya_SRC) $(LLMSSMNoFVatMGUTHimalaya_MMA) \
-		$(MSSMNoFVatMGUTHimalaya_MK) $(MSSMNoFVatMGUTHimalaya_INCLUDE_MK) \
+		$(MSSMNoFVatMGUTHimalaya_MK) $(MSSMNoFVatMGUTHimalaya_INCLUDE_MK) $(MSSMNoFVatMGUTHimalaya_CXXQFT_VERTICES_MK) \
 		$(MSSMNoFVatMGUTHimalaya_SLHA_INPUT) $(MSSMNoFVatMGUTHimalaya_REFERENCES) \
 		$(MSSMNoFVatMGUTHimalaya_GNUPLOT)
 
@@ -296,7 +312,7 @@ $(METACODE_STAMP_MSSMNoFVatMGUTHimalaya):
 endif
 
 $(LIBMSSMNoFVatMGUTHimalaya_DEP) $(EXEMSSMNoFVatMGUTHimalaya_DEP) $(LLMSSMNoFVatMGUTHimalaya_DEP) $(LIBMSSMNoFVatMGUTHimalaya_OBJ) $(EXEMSSMNoFVatMGUTHimalaya_OBJ) $(LLMSSMNoFVatMGUTHimalaya_OBJ) $(LLMSSMNoFVatMGUTHimalaya_LIB): \
-	CPPFLAGS += $(MODMSSMNoFVatMGUTHimalaya_SUBMOD_INC) $(MODMSSMNoFVatMGUTHimalaya_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODMSSMNoFVatMGUTHimalaya_SUBMOD_INC) $(MODMSSMNoFVatMGUTHimalaya_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS)  $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBMSSMNoFVatMGUTHimalaya_DEP) $(EXEMSSMNoFVatMGUTHimalaya_DEP) $(LLMSSMNoFVatMGUTHimalaya_DEP) $(LIBMSSMNoFVatMGUTHimalaya_OBJ) $(EXEMSSMNoFVatMGUTHimalaya_OBJ) $(LLMSSMNoFVatMGUTHimalaya_OBJ) $(LLMSSMNoFVatMGUTHimalaya_LIB): \
@@ -310,13 +326,13 @@ $(LIBMSSMNoFVatMGUTHimalaya): $(LIBMSSMNoFVatMGUTHimalaya_OBJ)
 		@$(MSG)
 		$(Q)$(MODULE_MAKE_LIB_CMD) $@ $^
 
-$(DIR)/%.x: $(DIR)/%.o $(LIBMSSMNoFVatMGUTHimalaya) $(MODMSSMNoFVatMGUTHimalaya_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+$(DIR)/%.x: $(DIR)/%.o $(LIBMSSMNoFVatMGUTHimalaya) $(MODMSSMNoFVatMGUTHimalaya_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
-$(LLMSSMNoFVatMGUTHimalaya_LIB): $(LLMSSMNoFVatMGUTHimalaya_OBJ) $(LIBMSSMNoFVatMGUTHimalaya) $(MODMSSMNoFVatMGUTHimalaya_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+$(LLMSSMNoFVatMGUTHimalaya_LIB): $(LLMSSMNoFVatMGUTHimalaya_OBJ) $(LIBMSSMNoFVatMGUTHimalaya) $(MODMSSMNoFVatMGUTHimalaya_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS)
 
 ALLDEP += $(LIBMSSMNoFVatMGUTHimalaya_DEP) $(EXEMSSMNoFVatMGUTHimalaya_DEP)
 ALLSRC += $(LIBMSSMNoFVatMGUTHimalaya_SRC) $(EXEMSSMNoFVatMGUTHimalaya_SRC)

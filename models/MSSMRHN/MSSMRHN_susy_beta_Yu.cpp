@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:34:55
 
 #include "MSSMRHN_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -39,12 +38,12 @@ Eigen::Matrix<double,3,3> MSSMRHN_susy_parameters::calc_beta_Yu_1_loop(const Sus
 
    Eigen::Matrix<double,3,3> beta_Yu;
 
-   beta_Yu = (oneOver16PiSqr*(-0.06666666666666667*Yu*(-45*traceYuAdjYu - 15*
-      traceYvAdjYv + 13*Sqr(g1) + 45*Sqr(g2) + 80*Sqr(g3)) + Yu*Yd.adjoint()*Yd
-       + 3*(Yu*Yu.adjoint()*Yu))).real();
+   beta_Yu = (-0.06666666666666667*Yu*(-45*traceYuAdjYu - 15*traceYvAdjYv + 13*
+      Sqr(g1) + 45*Sqr(g2) + 80*Sqr(g3)) + Yu*Yd.adjoint()*Yd + 3*(Yu*Yu.
+      adjoint()*Yu)).real();
 
 
-   return beta_Yu;
+   return oneLoop * beta_Yu;
 }
 
 /**
@@ -66,18 +65,18 @@ Eigen::Matrix<double,3,3> MSSMRHN_susy_parameters::calc_beta_Yu_2_loop(const Sus
 
    Eigen::Matrix<double,3,3> beta_Yu;
 
-   beta_Yu = (twoLoop*(0.0022222222222222222*Yu*(-1350*traceYdAdjYuYuAdjYd -
-      450*traceYeAdjYvYvAdjYe - 4050*traceYuAdjYuYuAdjYu - 1350*
-      traceYvAdjYvYvAdjYv + 2743*Quad(g1) + 3375*Quad(g2) - 800*Quad(g3) + 360*
-      traceYuAdjYu*Sqr(g1) + 450*Sqr(g1)*Sqr(g2) + 7200*traceYuAdjYu*Sqr(g3) +
-      1360*Sqr(g1)*Sqr(g3) + 3600*Sqr(g2)*Sqr(g3)) + 0.2*(-15*traceYdAdjYd - 5*
-      traceYeAdjYe + 2*Sqr(g1))*(Yu*Yd.adjoint()*Yd) + 0.2*(-45*traceYuAdjYu -
-      15*traceYvAdjYv + 2*Sqr(g1) + 30*Sqr(g2))*(Yu*Yu.adjoint()*Yu) - 2*(Yu*Yd
-      .adjoint()*Yd*Yd.adjoint()*Yd) - 2*(Yu*Yd.adjoint()*Yd*Yu.adjoint()*Yu) -
-      4*(Yu*Yu.adjoint()*Yu*Yu.adjoint()*Yu))).real();
+   beta_Yu = (0.0022222222222222222*Yu*(-1350*traceYdAdjYuYuAdjYd - 450*
+      traceYeAdjYvYvAdjYe - 4050*traceYuAdjYuYuAdjYu - 1350*traceYvAdjYvYvAdjYv
+       + 2743*Quad(g1) + 3375*Quad(g2) - 800*Quad(g3) + 360*traceYuAdjYu*Sqr(g1
+      ) + 450*Sqr(g1)*Sqr(g2) + 7200*traceYuAdjYu*Sqr(g3) + 1360*Sqr(g1)*Sqr(g3
+      ) + 3600*Sqr(g2)*Sqr(g3)) + 0.2*(-15*traceYdAdjYd - 5*traceYeAdjYe + 2*
+      Sqr(g1))*(Yu*Yd.adjoint()*Yd) + 0.2*(-45*traceYuAdjYu - 15*traceYvAdjYv +
+      2*Sqr(g1) + 30*Sqr(g2))*(Yu*Yu.adjoint()*Yu) - 2*(Yu*Yd.adjoint()*Yd*Yd.
+      adjoint()*Yd) - 2*(Yu*Yd.adjoint()*Yd*Yu.adjoint()*Yu) - 4*(Yu*Yu.adjoint
+      ()*Yu*Yu.adjoint()*Yu)).real();
 
 
-   return beta_Yu;
+   return twoLoop * beta_Yu;
 }
 
 /**
@@ -96,7 +95,7 @@ Eigen::Matrix<double,3,3> MSSMRHN_susy_parameters::calc_beta_Yu_3_loop(const Sus
    beta_Yu = ZEROMATRIX(3,3);
 
 
-   return beta_Yu;
+   return threeLoop * beta_Yu;
 }
 
 /**
@@ -115,7 +114,7 @@ Eigen::Matrix<double,3,3> MSSMRHN_susy_parameters::calc_beta_Yu_4_loop(const Sus
    beta_Yu = ZEROMATRIX(3,3);
 
 
-   return beta_Yu;
+   return fourLoop * beta_Yu;
 }
 
 /**
@@ -134,7 +133,7 @@ Eigen::Matrix<double,3,3> MSSMRHN_susy_parameters::calc_beta_Yu_5_loop(const Sus
    beta_Yu = ZEROMATRIX(3,3);
 
 
-   return beta_Yu;
+   return fiveLoop * beta_Yu;
 }
 
 } // namespace flexiblesusy

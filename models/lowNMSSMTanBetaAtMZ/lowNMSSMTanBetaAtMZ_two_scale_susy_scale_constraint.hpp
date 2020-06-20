@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:21:26
 
 #ifndef lowNMSSMTanBetaAtMZ_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
 #define lowNMSSMTanBetaAtMZ_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
@@ -39,6 +38,8 @@ public:
    lowNMSSMTanBetaAtMZ_susy_scale_constraint() = default;
    lowNMSSMTanBetaAtMZ_susy_scale_constraint(lowNMSSMTanBetaAtMZ<Two_scale>*, const softsusy::QedQcd&);
    virtual ~lowNMSSMTanBetaAtMZ_susy_scale_constraint() = default;
+   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+
    virtual void apply() override;
    virtual double get_scale() const override;
    virtual std::string name() const override { return "lowNMSSMTanBetaAtMZ SUSY-scale constraint"; }

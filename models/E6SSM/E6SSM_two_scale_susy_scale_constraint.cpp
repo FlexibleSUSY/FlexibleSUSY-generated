@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:05:45
 
 #include "E6SSM_two_scale_susy_scale_constraint.hpp"
 #include "E6SSM_two_scale_model.hpp"
@@ -25,7 +24,6 @@
 #include "logger.hpp"
 #include "error.hpp"
 #include "ew_input.hpp"
-#include "gsl_utils.hpp"
 #include "minimizer.hpp"
 #include "raii.hpp"
 #include "root_finder.hpp"

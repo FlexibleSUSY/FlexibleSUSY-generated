@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:40:40
 
 #ifndef MSSMRHN_OBSERVABLES_H
 #define MSSMRHN_OBSERVABLES_H

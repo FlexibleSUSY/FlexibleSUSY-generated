@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:21:15
 
 #ifndef lowNMSSMTanBetaAtMZ_PHYSICAL_H
 #define lowNMSSMTanBetaAtMZ_PHYSICAL_H

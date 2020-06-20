@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:06:49
 
 #include "CE6SSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -75,16 +74,16 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_mDxbar2_1_loop(const
 
    Eigen::Matrix<double,3,3> beta_mDxbar2;
 
-   beta_mDxbar2 = (oneOver16PiSqr*(2*ms2*((Kappa).transpose()*Kappa.conjugate()
-      ) + 2*((TKappa).transpose()*TKappa.conjugate()) + mDxbar2*(Kappa).
-      transpose()*Kappa.conjugate() + 2*((Kappa).transpose()*mDx2*Kappa.
-      conjugate()) + (Kappa).transpose()*Kappa.conjugate()*mDxbar2 +
-      0.03333333333333333*(15.491933384829668*g1*Tr11 - 28.460498941515414*gN*
-      Tr14 - 16*AbsSqr(MassB)*Sqr(g1) - 320*AbsSqr(MassG)*Sqr(g3) - 54*AbsSqr(
-      MassBp)*Sqr(gN))*UNITMATRIX(3))).real();
+   beta_mDxbar2 = (2*ms2*((Kappa).transpose()*Kappa.conjugate()) + 2*((TKappa).
+      transpose()*TKappa.conjugate()) + mDxbar2*(Kappa).transpose()*Kappa.
+      conjugate() + 2*((Kappa).transpose()*mDx2*Kappa.conjugate()) + (Kappa).
+      transpose()*Kappa.conjugate()*mDxbar2 + 0.03333333333333333*(
+      15.491933384829668*g1*Tr11 - 28.460498941515414*gN*Tr14 - 16*AbsSqr(MassB
+      )*Sqr(g1) - 320*AbsSqr(MassG)*Sqr(g3) - 54*AbsSqr(MassBp)*Sqr(gN))*
+      UNITMATRIX(3)).real();
 
 
-   return beta_mDxbar2;
+   return oneLoop * beta_mDxbar2;
 }
 
 /**
@@ -125,7 +124,7 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_mDxbar2_2_loop(const
 
    Eigen::Matrix<double,3,3> beta_mDxbar2;
 
-   beta_mDxbar2 = (twoLoop*(2*(-3*traceconjTKappaTpTKappa - 2*
+   beta_mDxbar2 = (2*(-3*traceconjTKappaTpTKappa - 2*
       traceconjTLambda12TpTLambda12 - 6*ms2*traceKappaAdjKappa - 3*
       traceKappaAdjKappaconjmDx2 - 3*traceKappaconjmDxbar2AdjKappa - 4*ms2*
       traceLambda12AdjLambda12 - 2*traceLambda12AdjLambda12conjmH2I2 - 2*
@@ -167,10 +166,10 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_mDxbar2_2_loop(const
       MassB)*Sqr(g1)*Sqr(gN) + 648*MassB*Conj(MassBp)*Sqr(g1)*Sqr(gN) + 8640*
       AbsSqr(MassBp)*Sqr(g3)*Sqr(gN) + 8640*AbsSqr(MassG)*Sqr(g3)*Sqr(gN) +
       4320*MassG*Conj(MassBp)*Sqr(g3)*Sqr(gN) + 4320*MassBp*Conj(MassG)*Sqr(g3)
-      *Sqr(gN))*UNITMATRIX(3))).real();
+      *Sqr(gN))*UNITMATRIX(3)).real();
 
 
-   return beta_mDxbar2;
+   return twoLoop * beta_mDxbar2;
 }
 
 /**
@@ -189,7 +188,7 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_mDxbar2_3_loop(const
    beta_mDxbar2 = ZEROMATRIX(3,3);
 
 
-   return beta_mDxbar2;
+   return threeLoop * beta_mDxbar2;
 }
 
 /**
@@ -208,7 +207,7 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_mDxbar2_4_loop(const
    beta_mDxbar2 = ZEROMATRIX(3,3);
 
 
-   return beta_mDxbar2;
+   return fourLoop * beta_mDxbar2;
 }
 
 /**
@@ -227,7 +226,7 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_mDxbar2_5_loop(const
    beta_mDxbar2 = ZEROMATRIX(3,3);
 
 
-   return beta_mDxbar2;
+   return fiveLoop * beta_mDxbar2;
 }
 
 } // namespace flexiblesusy

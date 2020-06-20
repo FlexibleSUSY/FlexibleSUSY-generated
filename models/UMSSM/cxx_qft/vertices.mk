@@ -17,6 +17,6 @@
 #  ====================================================================
 
 
-LIBUMSSM_SRC += \
+LIBUMSSM_CXXQFT_VERTICES_SRC := \
 	models/UMSSM/cxx_qft/UMSSM_vertices_1.cpp \
 	models/UMSSM/cxx_qft/UMSSM_vertices_2.cpp

@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:22:05
 
 #include "HTHDMIIMSSMBC_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -41,15 +40,15 @@ double HTHDMIIMSSMBC_susy_parameters::calc_beta_Lambda1_1_loop(const Susy_traces
 
    double beta_Lambda1;
 
-   beta_Lambda1 = Re(0.005*oneOver16PiSqr*(400*Lambda3*Lambda4 + 2400*Lambda1*
-      traceYdAdjYd - 1200*traceYdAdjYdYdAdjYd + 800*Lambda1*traceYeAdjYe - 400*
+   beta_Lambda1 = Re(0.005*(400*Lambda3*Lambda4 + 2400*Lambda1*traceYdAdjYd -
+      1200*traceYdAdjYdYdAdjYd + 800*Lambda1*traceYeAdjYe - 400*
       traceYeAdjYeYeAdjYe + 200*AbsSqr(Lambda5) + 2400*AbsSqr(Lambda6) + 27*
       Quad(g1) + 225*Quad(g2) - 360*Lambda1*Sqr(g1) - 1800*Lambda1*Sqr(g2) + 90
       *Sqr(g1)*Sqr(g2) + 4800*Sqr(Lambda1) + 400*Sqr(Lambda3) + 200*Sqr(Lambda4
       )));
 
 
-   return beta_Lambda1;
+   return oneLoop * beta_Lambda1;
 }
 
 /**
@@ -75,8 +74,8 @@ double HTHDMIIMSSMBC_susy_parameters::calc_beta_Lambda1_2_loop(const Susy_traces
 
    double beta_Lambda1;
 
-   beta_Lambda1 = Re(0.0025*twoLoop*(-8000*Lambda1*Lambda3*Lambda4 - 3400*
-      Lambda5*Lambda6*Lambda7 - 1200*Lambda1*traceYdAdjYdYdAdjYd + 12000*
+   beta_Lambda1 = Re(0.0025*(-8000*Lambda1*Lambda3*Lambda4 - 3400*Lambda5*
+      Lambda6*Lambda7 - 1200*Lambda1*traceYdAdjYdYdAdjYd + 12000*
       traceYdAdjYdYdAdjYdYdAdjYd - 3600*Lambda1*traceYdAdjYuYuAdjYd + 2400*
       traceYdAdjYuYuAdjYdYdAdjYd - 400*Lambda1*traceYeAdjYeYeAdjYe + 4000*
       traceYeAdjYeYeAdjYeYeAdjYe - 4800*Lambda3*Lambda4*traceYuAdjYu - 5600*
@@ -113,7 +112,7 @@ double HTHDMIIMSSMBC_susy_parameters::calc_beta_Lambda1_2_loop(const Susy_traces
       Sqr(Conj(Lambda6)) - 2000*Conj(Lambda5)*Sqr(Conj(Lambda7))));
 
 
-   return beta_Lambda1;
+   return twoLoop * beta_Lambda1;
 }
 
 /**
@@ -132,7 +131,7 @@ double HTHDMIIMSSMBC_susy_parameters::calc_beta_Lambda1_3_loop(const Susy_traces
    beta_Lambda1 = 0;
 
 
-   return beta_Lambda1;
+   return threeLoop * beta_Lambda1;
 }
 
 /**
@@ -151,7 +150,7 @@ double HTHDMIIMSSMBC_susy_parameters::calc_beta_Lambda1_4_loop(const Susy_traces
    beta_Lambda1 = 0;
 
 
-   return beta_Lambda1;
+   return fourLoop * beta_Lambda1;
 }
 
 /**
@@ -170,7 +169,7 @@ double HTHDMIIMSSMBC_susy_parameters::calc_beta_Lambda1_5_loop(const Susy_traces
    beta_Lambda1 = 0;
 
 
-   return beta_Lambda1;
+   return fiveLoop * beta_Lambda1;
 }
 
 } // namespace flexiblesusy

@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:50:00
 
 #include "MSSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,10 +72,10 @@ double MSSMEFTHiggs_soft_parameters::calc_beta_MassB_1_loop(const Soft_traces& s
 
    double beta_MassB;
 
-   beta_MassB = Re(13.2*MassB*oneOver16PiSqr*Sqr(g1));
+   beta_MassB = Re(13.2*MassB*Sqr(g1));
 
 
-   return beta_MassB;
+   return oneLoop * beta_MassB;
 }
 
 /**
@@ -96,13 +95,13 @@ double MSSMEFTHiggs_soft_parameters::calc_beta_MassB_2_loop(const Soft_traces& s
 
    double beta_MassB;
 
-   beta_MassB = Re(0.08*twoLoop*Sqr(g1)*(70*traceAdjYdTYd + 90*traceAdjYeTYe +
-      130*traceAdjYuTYu - 70*MassB*traceYdAdjYd - 90*MassB*traceYeAdjYe - 130*
-      MassB*traceYuAdjYu + 398*MassB*Sqr(g1) + 135*MassB*Sqr(g2) + 135*MassWB*
-      Sqr(g2) + 440*MassB*Sqr(g3) + 440*MassG*Sqr(g3)));
+   beta_MassB = Re(0.08*Sqr(g1)*(70*traceAdjYdTYd + 90*traceAdjYeTYe + 130*
+      traceAdjYuTYu - 70*MassB*traceYdAdjYd - 90*MassB*traceYeAdjYe - 130*MassB
+      *traceYuAdjYu + 398*MassB*Sqr(g1) + 135*MassB*Sqr(g2) + 135*MassWB*Sqr(g2
+      ) + 440*MassB*Sqr(g3) + 440*MassG*Sqr(g3)));
 
 
-   return beta_MassB;
+   return twoLoop * beta_MassB;
 }
 
 /**
@@ -121,7 +120,7 @@ double MSSMEFTHiggs_soft_parameters::calc_beta_MassB_3_loop(const Soft_traces& s
    beta_MassB = 0;
 
 
-   return beta_MassB;
+   return threeLoop * beta_MassB;
 }
 
 /**
@@ -140,7 +139,7 @@ double MSSMEFTHiggs_soft_parameters::calc_beta_MassB_4_loop(const Soft_traces& s
    beta_MassB = 0;
 
 
-   return beta_MassB;
+   return fourLoop * beta_MassB;
 }
 
 /**
@@ -159,7 +158,7 @@ double MSSMEFTHiggs_soft_parameters::calc_beta_MassB_5_loop(const Soft_traces& s
    beta_MassB = 0;
 
 
-   return beta_MassB;
+   return fiveLoop * beta_MassB;
 }
 
 } // namespace flexiblesusy

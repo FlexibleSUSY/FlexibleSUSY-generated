@@ -17,6 +17,6 @@
 #  ====================================================================
 
 
-LIBNUHMSSMNoFVHimalaya_SRC += \
+LIBNUHMSSMNoFVHimalaya_CXXQFT_VERTICES_SRC := \
 	models/NUHMSSMNoFVHimalaya/cxx_qft/NUHMSSMNoFVHimalaya_vertices_1.cpp \
 	models/NUHMSSMNoFVHimalaya/cxx_qft/NUHMSSMNoFVHimalaya_vertices_2.cpp

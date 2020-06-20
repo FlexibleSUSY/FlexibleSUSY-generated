@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:35:40
 
 /**
  * @file lowMSSM_two_scale_model.cpp
@@ -26,8 +25,7 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Fri 10 Apr 2020 20:35:40 with FlexibleSUSY
- * 2.4.2 (git commit: a94199e5620b8684f5d30d0eece5757a5a72c4a4) and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #include "lowMSSM_two_scale_model.hpp"
@@ -36,39 +34,44 @@ namespace flexiblesusy {
 
 #define CLASSNAME lowMSSM<Two_scale>
 
-CLASSNAME::lowMSSM(const lowMSSM_input_parameters& input_)
-   : lowMSSM_mass_eigenstates(input_)
+CLASSNAME::lowMSSM(const lowMSSM_slha& model_, bool do_convert_masses_to_slha)
+   : lowMSSM_slha(model_, do_convert_masses_to_slha)
+{
+}
+
+CLASSNAME::lowMSSM(const lowMSSM_input_parameters& input_, bool do_convert_masses_to_slha)
+   : lowMSSM_slha(input_, do_convert_masses_to_slha)
 {
 }
 
 void CLASSNAME::calculate_spectrum()
 {
-   lowMSSM_mass_eigenstates::calculate_spectrum();
+   lowMSSM_slha::calculate_spectrum();
 }
 
 void CLASSNAME::clear_problems()
 {
-   lowMSSM_mass_eigenstates::clear_problems();
+   lowMSSM_slha::clear_problems();
 }
 
 std::string CLASSNAME::name() const
 {
-   return lowMSSM_mass_eigenstates::name();
+   return lowMSSM_slha::name();
 }
 
 void CLASSNAME::run_to(double scale, double eps)
 {
-   lowMSSM_mass_eigenstates::run_to(scale, eps);
+   lowMSSM_slha::run_to(scale, eps);
 }
 
 void CLASSNAME::print(std::ostream& out) const
 {
-   lowMSSM_mass_eigenstates::print(out);
+   lowMSSM_slha::print(out);
 }
 
 void CLASSNAME::set_precision(double p)
 {
-   lowMSSM_mass_eigenstates::set_precision(p);
+   lowMSSM_slha::set_precision(p);
 }
 
 std::ostream& operator<<(std::ostream& ostr, const lowMSSM<Two_scale>& model)

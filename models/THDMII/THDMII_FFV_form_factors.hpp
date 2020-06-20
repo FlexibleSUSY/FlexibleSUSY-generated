@@ -19,8 +19,7 @@
 /**
  * @file THDMII_FFV_form_factors.hpp
  *
- * This file was generated at Fri 10 Apr 2020 19:46:08 with FlexibleSUSY
- * 2.4.2 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #ifndef THDMII_FFVFormFactors_H
@@ -35,7 +34,9 @@ namespace flexiblesusy {
 class THDMII_mass_eigenstates;
 
 namespace THDMII_FFV_form_factors {
-
+std::valarray<std::complex<double>> calculate_Fe_Fe_VP_form_factors (
+   int generationIndex1, int generationIndex2,
+   const THDMII_mass_eigenstates& model, bool discard_SM_contributions);
 }
 
 } // namespace flexiblesusy

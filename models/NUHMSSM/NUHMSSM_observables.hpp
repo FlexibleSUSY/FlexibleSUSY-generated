@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:37:48
 
 #ifndef NUHMSSM_OBSERVABLES_H
 #define NUHMSSM_OBSERVABLES_H

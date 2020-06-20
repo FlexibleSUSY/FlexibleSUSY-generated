@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:56:35
 
 #include "MRSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -74,12 +73,12 @@ double MRSSM_soft_parameters::calc_beta_mRd2_1_loop(const Soft_traces& soft_trac
 
    double beta_mRd2;
 
-   beta_mRd2 = Re(0.2*oneOver16PiSqr*(3.872983346207417*g1*Tr11 + 10*mHd2*
-      AbsSqr(LamSD) + 10*mRd2*AbsSqr(LamSD) + 10*mS2*AbsSqr(LamSD) + 15*mHd2*
-      AbsSqr(LamTD) + 15*mRd2*AbsSqr(LamTD) + 15*mT2*AbsSqr(LamTD)));
+   beta_mRd2 = Re(0.2*(3.872983346207417*g1*Tr11 + 10*mHd2*AbsSqr(LamSD) + 10*
+      mRd2*AbsSqr(LamSD) + 10*mS2*AbsSqr(LamSD) + 15*mHd2*AbsSqr(LamTD) + 15*
+      mRd2*AbsSqr(LamTD) + 15*mT2*AbsSqr(LamTD)));
 
 
-   return beta_mRd2;
+   return oneLoop * beta_mRd2;
 }
 
 /**
@@ -102,13 +101,13 @@ double MRSSM_soft_parameters::calc_beta_mRd2_2_loop(const Soft_traces& soft_trac
 
    double beta_mRd2;
 
-   beta_mRd2 = Re(0.2*twoLoop*(15.491933384829668*g1*Tr31 - 30*tracemd2YdAdjYd*
-      AbsSqr(LamSD) - 10*traceme2YeAdjYe*AbsSqr(LamSD) - 10*traceml2AdjYeYe*
-      AbsSqr(LamSD) - 30*tracemq2AdjYdYd*AbsSqr(LamSD) - 60*mHd2*traceYdAdjYd*
-      AbsSqr(LamSD) - 30*mRd2*traceYdAdjYd*AbsSqr(LamSD) - 30*mS2*traceYdAdjYd*
-      AbsSqr(LamSD) - 20*mHd2*traceYeAdjYe*AbsSqr(LamSD) - 10*mRd2*traceYeAdjYe
-      *AbsSqr(LamSD) - 10*mS2*traceYeAdjYe*AbsSqr(LamSD) - 20*mHd2*AbsSqr(LamSD
-      )*AbsSqr(LamSU) - 20*mHu2*AbsSqr(LamSD)*AbsSqr(LamSU) - 20*mRd2*AbsSqr(
+   beta_mRd2 = Re(0.2*(15.491933384829668*g1*Tr31 - 30*tracemd2YdAdjYd*AbsSqr(
+      LamSD) - 10*traceme2YeAdjYe*AbsSqr(LamSD) - 10*traceml2AdjYeYe*AbsSqr(
+      LamSD) - 30*tracemq2AdjYdYd*AbsSqr(LamSD) - 60*mHd2*traceYdAdjYd*AbsSqr(
+      LamSD) - 30*mRd2*traceYdAdjYd*AbsSqr(LamSD) - 30*mS2*traceYdAdjYd*AbsSqr(
+      LamSD) - 20*mHd2*traceYeAdjYe*AbsSqr(LamSD) - 10*mRd2*traceYeAdjYe*AbsSqr
+      (LamSD) - 10*mS2*traceYeAdjYe*AbsSqr(LamSD) - 20*mHd2*AbsSqr(LamSD)*
+      AbsSqr(LamSU) - 20*mHu2*AbsSqr(LamSD)*AbsSqr(LamSU) - 20*mRd2*AbsSqr(
       LamSD)*AbsSqr(LamSU) - 20*mRu2*AbsSqr(LamSD)*AbsSqr(LamSU) - 40*mS2*
       AbsSqr(LamSD)*AbsSqr(LamSU) - 45*tracemd2YdAdjYd*AbsSqr(LamTD) - 15*
       traceme2YeAdjYe*AbsSqr(LamTD) - 15*traceml2AdjYeYe*AbsSqr(LamTD) - 45*
@@ -128,7 +127,7 @@ double MRSSM_soft_parameters::calc_beta_mRd2_2_loop(const Soft_traces& soft_trac
       Sqr(Conj(LamTD))));
 
 
-   return beta_mRd2;
+   return twoLoop * beta_mRd2;
 }
 
 /**
@@ -147,7 +146,7 @@ double MRSSM_soft_parameters::calc_beta_mRd2_3_loop(const Soft_traces& soft_trac
    beta_mRd2 = 0;
 
 
-   return beta_mRd2;
+   return threeLoop * beta_mRd2;
 }
 
 /**
@@ -166,7 +165,7 @@ double MRSSM_soft_parameters::calc_beta_mRd2_4_loop(const Soft_traces& soft_trac
    beta_mRd2 = 0;
 
 
-   return beta_mRd2;
+   return fourLoop * beta_mRd2;
 }
 
 /**
@@ -185,7 +184,7 @@ double MRSSM_soft_parameters::calc_beta_mRd2_5_loop(const Soft_traces& soft_trac
    beta_mRd2 = 0;
 
 
-   return beta_mRd2;
+   return fiveLoop * beta_mRd2;
 }
 
 } // namespace flexiblesusy

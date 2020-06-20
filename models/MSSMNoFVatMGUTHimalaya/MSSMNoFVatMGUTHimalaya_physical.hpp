@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 17:38:30
 
 #ifndef MSSMNoFVatMGUTHimalaya_PHYSICAL_H
 #define MSSMNoFVatMGUTHimalaya_PHYSICAL_H

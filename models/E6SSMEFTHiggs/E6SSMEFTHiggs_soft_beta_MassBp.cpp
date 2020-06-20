@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:31:01
 
 #include "E6SSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,10 +72,10 @@ double E6SSMEFTHiggs_soft_parameters::calc_beta_MassBp_1_loop(const Soft_traces&
 
    double beta_MassBp;
 
-   beta_MassBp = Re(18.8*MassBp*oneOver16PiSqr*Sqr(gN));
+   beta_MassBp = Re(18.8*MassBp*Sqr(gN));
 
 
-   return beta_MassBp;
+   return oneLoop * beta_MassBp;
 }
 
 /**
@@ -102,7 +101,7 @@ double E6SSMEFTHiggs_soft_parameters::calc_beta_MassBp_2_loop(const Soft_traces&
 
    double beta_MassBp;
 
-   beta_MassBp = Re(0.04*twoLoop*Sqr(gN)*(285*traceAdjKappaTKappa + 190*
+   beta_MassBp = Re(0.04*Sqr(gN)*(285*traceAdjKappaTKappa + 190*
       traceAdjLambda12TLambda12 + 210*traceAdjYdTYd + 70*traceAdjYeTYe + 90*
       traceAdjYuTYu - 285*MassBp*traceKappaAdjKappa - 190*MassBp*
       traceLambda12AdjLambda12 - 210*MassBp*traceYdAdjYd - 70*MassBp*
@@ -112,7 +111,7 @@ double E6SSMEFTHiggs_soft_parameters::calc_beta_MassBp_2_loop(const Soft_traces&
       *Conj(Lambdax)*TLambdax));
 
 
-   return beta_MassBp;
+   return twoLoop * beta_MassBp;
 }
 
 /**
@@ -131,7 +130,7 @@ double E6SSMEFTHiggs_soft_parameters::calc_beta_MassBp_3_loop(const Soft_traces&
    beta_MassBp = 0;
 
 
-   return beta_MassBp;
+   return threeLoop * beta_MassBp;
 }
 
 /**
@@ -150,7 +149,7 @@ double E6SSMEFTHiggs_soft_parameters::calc_beta_MassBp_4_loop(const Soft_traces&
    beta_MassBp = 0;
 
 
-   return beta_MassBp;
+   return fourLoop * beta_MassBp;
 }
 
 /**
@@ -169,7 +168,7 @@ double E6SSMEFTHiggs_soft_parameters::calc_beta_MassBp_5_loop(const Soft_traces&
    beta_MassBp = 0;
 
 
-   return beta_MassBp;
+   return fiveLoop * beta_MassBp;
 }
 
 } // namespace flexiblesusy

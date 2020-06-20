@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:01:50
 
 #ifndef E6SSMEFTHiggs_TWO_SCALE_CONVERGENCE_TESTER_H
 #define E6SSMEFTHiggs_TWO_SCALE_CONVERGENCE_TESTER_H

@@ -19,8 +19,7 @@
 /**
  * @file NMSSM_FFV_form_factors.hpp
  *
- * This file was generated at Fri 10 Apr 2020 20:30:04 with FlexibleSUSY
- * 2.4.2 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #ifndef NMSSM_FFVFormFactors_H

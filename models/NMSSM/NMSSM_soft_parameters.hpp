@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:28:59
 
 #ifndef NMSSM_soft_parameters_H
 #define NMSSM_soft_parameters_H

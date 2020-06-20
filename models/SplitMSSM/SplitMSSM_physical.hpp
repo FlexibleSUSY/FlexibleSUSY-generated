@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:54:35
 
 #ifndef SplitMSSM_PHYSICAL_H
 #define SplitMSSM_PHYSICAL_H

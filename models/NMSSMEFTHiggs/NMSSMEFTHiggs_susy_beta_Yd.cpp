@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:44:02
 
 #include "NMSSMEFTHiggs_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -39,12 +38,12 @@ Eigen::Matrix<double,3,3> NMSSMEFTHiggs_susy_parameters::calc_beta_Yd_1_loop(con
 
    Eigen::Matrix<double,3,3> beta_Yd;
 
-   beta_Yd = (oneOver16PiSqr*(-0.06666666666666667*Yd*(-45*traceYdAdjYd - 15*
-      traceYeAdjYe - 15*AbsSqr(Lambdax) + 7*Sqr(g1) + 45*Sqr(g2) + 80*Sqr(g3))
-      + 3*(Yd*Yd.adjoint()*Yd) + Yd*Yu.adjoint()*Yu)).real();
+   beta_Yd = (-0.06666666666666667*Yd*(-45*traceYdAdjYd - 15*traceYeAdjYe - 15*
+      AbsSqr(Lambdax) + 7*Sqr(g1) + 45*Sqr(g2) + 80*Sqr(g3)) + 3*(Yd*Yd.adjoint
+      ()*Yd) + Yd*Yu.adjoint()*Yu).real();
 
 
-   return beta_Yd;
+   return oneLoop * beta_Yd;
 }
 
 /**
@@ -64,7 +63,7 @@ Eigen::Matrix<double,3,3> NMSSMEFTHiggs_susy_parameters::calc_beta_Yd_2_loop(con
 
    Eigen::Matrix<double,3,3> beta_Yd;
 
-   beta_Yd = (twoLoop*(0.011111111111111112*Yd*(-810*traceYdAdjYdYdAdjYd - 270*
+   beta_Yd = (0.011111111111111112*Yd*(-810*traceYdAdjYdYdAdjYd - 270*
       traceYdAdjYuYuAdjYd - 270*traceYeAdjYeYeAdjYe - 270*traceYuAdjYu*AbsSqr(
       Lambdax) - 180*AbsSqr(Kappa)*AbsSqr(Lambdax) + 287*Quad(g1) + 675*Quad(g2
       ) - 160*Quad(g3) - 36*traceYdAdjYd*Sqr(g1) + 108*traceYeAdjYe*Sqr(g1) +
@@ -74,10 +73,10 @@ Eigen::Matrix<double,3,3> NMSSMEFTHiggs_susy_parameters::calc_beta_Yd_2_loop(con
       g2))*(Yd*Yd.adjoint()*Yd) + 0.2*(-15*traceYuAdjYu - 5*AbsSqr(Lambdax) + 4
       *Sqr(g1))*(Yd*Yu.adjoint()*Yu) - 4*(Yd*Yd.adjoint()*Yd*Yd.adjoint()*Yd) -
       2*(Yd*Yu.adjoint()*Yu*Yd.adjoint()*Yd) - 2*(Yd*Yu.adjoint()*Yu*Yu.adjoint
-      ()*Yu))).real();
+      ()*Yu)).real();
 
 
-   return beta_Yd;
+   return twoLoop * beta_Yd;
 }
 
 /**
@@ -96,7 +95,7 @@ Eigen::Matrix<double,3,3> NMSSMEFTHiggs_susy_parameters::calc_beta_Yd_3_loop(con
    beta_Yd = ZEROMATRIX(3,3);
 
 
-   return beta_Yd;
+   return threeLoop * beta_Yd;
 }
 
 /**
@@ -115,7 +114,7 @@ Eigen::Matrix<double,3,3> NMSSMEFTHiggs_susy_parameters::calc_beta_Yd_4_loop(con
    beta_Yd = ZEROMATRIX(3,3);
 
 
-   return beta_Yd;
+   return fourLoop * beta_Yd;
 }
 
 /**
@@ -134,7 +133,7 @@ Eigen::Matrix<double,3,3> NMSSMEFTHiggs_susy_parameters::calc_beta_Yd_5_loop(con
    beta_Yd = ZEROMATRIX(3,3);
 
 
-   return beta_Yd;
+   return fiveLoop * beta_Yd;
 }
 
 } // namespace flexiblesusy

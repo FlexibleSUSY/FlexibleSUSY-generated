@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:45:56
 
 #ifndef MSSMatMGUT_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
 #define MSSMatMGUT_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
@@ -38,6 +37,8 @@ public:
    MSSMatMGUT_high_scale_constraint() = default;
    MSSMatMGUT_high_scale_constraint(MSSMatMGUT<Two_scale>*);
    virtual ~MSSMatMGUT_high_scale_constraint() = default;
+   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+
    virtual void apply() override;
    virtual double get_scale() const override;
    virtual std::string name() const override { return "MSSMatMGUT high-scale constraint"; }

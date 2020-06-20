@@ -16,22 +16,21 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:46:23
 
 /**
  * @file cxx_qft/MSSM_vertices.cpp
  *
- * This file was generated at Fri 10 Apr 2020 20:46:23 with FlexibleSUSY
- * 2.4.2 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #include "MSSM_context_base.hpp"
+#include "MSSM_input_parameters.hpp"
 #include "MSSM_vertices.hpp"
 
 #include "concatenate.hpp"
 #include "wrappers.hpp"
 
-#define INPUTPARAMETER(p) context.model.get_input().p
+#define INPUTPARAMETER(p) context.model.get_input_parameters().p
 #define MODELPARAMETER(p) context.model.get_##p()
 #define DERIVEDPARAMETER(p) context.model.p()
 #define PHASE(p) context.model.get_##p()
@@ -40,7 +39,7 @@ namespace flexiblesusy {
 namespace MSSM_cxx_diagrams {
 namespace detail {
 
-ChiralVertex VertexImpl<fields::Ah, typename bar<fields::Fe>::type, fields::Fe>::evaluate(
+ChiralVertex VertexImpl<fields::Ah, typename fields::bar<fields::Fe>::type, fields::Fe>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt3 = indices[0];
@@ -58,7 +57,7 @@ ChiralVertex VertexImpl<fields::Ah, typename bar<fields::Fe>::type, fields::Fe>:
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::Chi, typename conj<fields::Se>::type, fields::Fe>::evaluate(
+ChiralVertex VertexImpl<fields::Chi, typename fields::conj<fields::Se>::type, fields::Fe>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -79,7 +78,7 @@ ChiralVertex VertexImpl<fields::Chi, typename conj<fields::Se>::type, fields::Fe
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::Fe, fields::Ah, typename bar<fields::Fe>::type>::evaluate(
+ChiralVertex VertexImpl<fields::Fe, fields::Ah, typename fields::bar<fields::Fe>::type>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt2 = indices[0];
@@ -97,7 +96,7 @@ ChiralVertex VertexImpl<fields::Fe, fields::Ah, typename bar<fields::Fe>::type>:
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::Fe, fields::Chi, typename conj<fields::Se>::type>::evaluate(
+ChiralVertex VertexImpl<fields::Fe, fields::Chi, typename fields::conj<fields::Se>::type>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt2 = indices[0];
@@ -118,7 +117,7 @@ ChiralVertex VertexImpl<fields::Fe, fields::Chi, typename conj<fields::Se>::type
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::Fe, fields::hh, typename bar<fields::Fe>::type>::evaluate(
+ChiralVertex VertexImpl<fields::Fe, fields::hh, typename fields::bar<fields::Fe>::type>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt2 = indices[0];
@@ -136,7 +135,7 @@ ChiralVertex VertexImpl<fields::Fe, fields::hh, typename bar<fields::Fe>::type>:
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::Fe, typename bar<fields::Fv>::type, typename conj<fields::Hpm>::type>::evaluate(
+ChiralVertex VertexImpl<fields::Fe, typename fields::bar<fields::Fv>::type, typename fields::conj<fields::Hpm>::type>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt2 = indices[0];
@@ -153,7 +152,7 @@ ChiralVertex VertexImpl<fields::Fe, typename bar<fields::Fv>::type, typename con
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::Fe, typename conj<fields::Sv>::type, typename bar<fields::Cha>::type>::evaluate(
+ChiralVertex VertexImpl<fields::Fe, typename fields::conj<fields::Sv>::type, typename fields::bar<fields::Cha>::type>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt2 = indices[0];
@@ -174,7 +173,7 @@ ChiralVertex VertexImpl<fields::Fe, typename conj<fields::Sv>::type, typename ba
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::hh, typename bar<fields::Fe>::type, fields::Fe>::evaluate(
+ChiralVertex VertexImpl<fields::hh, typename fields::bar<fields::Fe>::type, fields::Fe>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt3 = indices[0];
@@ -192,7 +191,7 @@ ChiralVertex VertexImpl<fields::hh, typename bar<fields::Fe>::type, fields::Fe>:
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::VP, fields::Cha, typename bar<fields::Cha>::type>::evaluate(
+ChiralVertex VertexImpl<fields::VP, fields::Cha, typename fields::bar<fields::Cha>::type>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt2 = indices[0];
@@ -210,7 +209,7 @@ ChiralVertex VertexImpl<fields::VP, fields::Cha, typename bar<fields::Cha>::type
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::VP, fields::Fe, typename bar<fields::Fe>::type>::evaluate(
+ChiralVertex VertexImpl<fields::VP, fields::Fe, typename fields::bar<fields::Fe>::type>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt2 = indices[0];
@@ -226,7 +225,7 @@ ChiralVertex VertexImpl<fields::VP, fields::Fe, typename bar<fields::Fe>::type>:
    return {left, right};
 }
 
-MomentumDifferenceVertex VertexImpl<fields::VP, fields::Hpm, typename conj<fields::Hpm>::type>::evaluate(
+MomentumDifferenceVertex VertexImpl<fields::VP, fields::Hpm, typename fields::conj<fields::Hpm>::type>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    int minuend_index = 1;
@@ -244,7 +243,7 @@ MomentumDifferenceVertex VertexImpl<fields::VP, fields::Hpm, typename conj<field
    return {result, minuend_index, subtrahend_index};
 }
 
-MomentumDifferenceVertex VertexImpl<fields::VP, fields::Se, typename conj<fields::Se>::type>::evaluate(
+MomentumDifferenceVertex VertexImpl<fields::VP, fields::Se, typename fields::conj<fields::Se>::type>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    int minuend_index = 1;
@@ -262,7 +261,7 @@ MomentumDifferenceVertex VertexImpl<fields::VP, fields::Se, typename conj<fields
    return {result, minuend_index, subtrahend_index};
 }
 
-ChiralVertex VertexImpl<typename bar<fields::Cha>::type, fields::Cha, fields::VP>::evaluate(
+ChiralVertex VertexImpl<typename fields::bar<fields::Cha>::type, fields::Cha, fields::VP>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -280,7 +279,7 @@ ChiralVertex VertexImpl<typename bar<fields::Cha>::type, fields::Cha, fields::VP
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename bar<fields::Fe>::type, fields::Ah, fields::Fe>::evaluate(
+ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Ah, fields::Fe>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -298,7 +297,7 @@ ChiralVertex VertexImpl<typename bar<fields::Fe>::type, fields::Ah, fields::Fe>:
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename bar<fields::Fe>::type, fields::Cha, fields::Sv>::evaluate(
+ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Cha, fields::Sv>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -319,7 +318,7 @@ ChiralVertex VertexImpl<typename bar<fields::Fe>::type, fields::Cha, fields::Sv>
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename bar<fields::Fe>::type, fields::Chi, fields::Se>::evaluate(
+ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Chi, fields::Se>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -340,7 +339,7 @@ ChiralVertex VertexImpl<typename bar<fields::Fe>::type, fields::Chi, fields::Se>
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename bar<fields::Fe>::type, fields::Fe, fields::Ah>::evaluate(
+ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fe, fields::Ah>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -358,7 +357,7 @@ ChiralVertex VertexImpl<typename bar<fields::Fe>::type, fields::Fe, fields::Ah>:
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename bar<fields::Fe>::type, fields::Fe, fields::hh>::evaluate(
+ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fe, fields::hh>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -376,7 +375,7 @@ ChiralVertex VertexImpl<typename bar<fields::Fe>::type, fields::Fe, fields::hh>:
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename bar<fields::Fe>::type, fields::Fe, fields::VP>::evaluate(
+ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fe, fields::VP>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -392,7 +391,7 @@ ChiralVertex VertexImpl<typename bar<fields::Fe>::type, fields::Fe, fields::VP>:
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename bar<fields::Fe>::type, fields::Fv, fields::Hpm>::evaluate(
+ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fv, fields::Hpm>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -409,7 +408,7 @@ ChiralVertex VertexImpl<typename bar<fields::Fe>::type, fields::Fv, fields::Hpm>
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename bar<fields::Fe>::type, fields::hh, fields::Fe>::evaluate(
+ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::hh, fields::Fe>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -427,7 +426,7 @@ ChiralVertex VertexImpl<typename bar<fields::Fe>::type, fields::hh, fields::Fe>:
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename bar<fields::Fe>::type, fields::Hpm, fields::Fv>::evaluate(
+ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Hpm, fields::Fv>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -444,7 +443,7 @@ ChiralVertex VertexImpl<typename bar<fields::Fe>::type, fields::Hpm, fields::Fv>
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename bar<fields::Fe>::type, fields::Se, fields::Chi>::evaluate(
+ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Se, fields::Chi>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -465,7 +464,7 @@ ChiralVertex VertexImpl<typename bar<fields::Fe>::type, fields::Se, fields::Chi>
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename bar<fields::Fe>::type, fields::Sv, fields::Cha>::evaluate(
+ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Sv, fields::Cha>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -486,7 +485,7 @@ ChiralVertex VertexImpl<typename bar<fields::Fe>::type, fields::Sv, fields::Cha>
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename bar<fields::Fv>::type, typename conj<fields::Hpm>::type, fields::Fe>::evaluate(
+ChiralVertex VertexImpl<typename fields::bar<fields::Fv>::type, typename fields::conj<fields::Hpm>::type, fields::Fe>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -503,7 +502,7 @@ ChiralVertex VertexImpl<typename bar<fields::Fv>::type, typename conj<fields::Hp
    return {left, right};
 }
 
-MomentumDifferenceVertex VertexImpl<typename conj<fields::Hpm>::type, fields::Hpm, fields::VP>::evaluate(
+MomentumDifferenceVertex VertexImpl<typename fields::conj<fields::Hpm>::type, fields::Hpm, fields::VP>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    int minuend_index = 1;
@@ -521,7 +520,7 @@ MomentumDifferenceVertex VertexImpl<typename conj<fields::Hpm>::type, fields::Hp
    return {result, minuend_index, subtrahend_index};
 }
 
-MomentumDifferenceVertex VertexImpl<typename conj<fields::Se>::type, fields::Se, fields::VP>::evaluate(
+MomentumDifferenceVertex VertexImpl<typename fields::conj<fields::Se>::type, fields::Se, fields::VP>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    int minuend_index = 1;
@@ -539,7 +538,7 @@ MomentumDifferenceVertex VertexImpl<typename conj<fields::Se>::type, fields::Se,
    return {result, minuend_index, subtrahend_index};
 }
 
-ChiralVertex VertexImpl<typename conj<fields::Sv>::type, typename bar<fields::Cha>::type, fields::Fe>::evaluate(
+ChiralVertex VertexImpl<typename fields::conj<fields::Sv>::type, typename fields::bar<fields::Cha>::type, fields::Fe>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt3 = indices[0];

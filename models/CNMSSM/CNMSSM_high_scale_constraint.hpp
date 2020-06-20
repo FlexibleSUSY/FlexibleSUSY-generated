@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 17:55:49
 
 #ifndef CNMSSM_HIGH_SCALE_CONSTRAINT_H
 #define CNMSSM_HIGH_SCALE_CONSTRAINT_H

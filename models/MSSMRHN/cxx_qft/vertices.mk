@@ -17,6 +17,6 @@
 #  ====================================================================
 
 
-LIBMSSMRHN_SRC += \
+LIBMSSMRHN_CXXQFT_VERTICES_SRC := \
 	models/MSSMRHN/cxx_qft/MSSMRHN_vertices_1.cpp \
 	models/MSSMRHN/cxx_qft/MSSMRHN_vertices_2.cpp

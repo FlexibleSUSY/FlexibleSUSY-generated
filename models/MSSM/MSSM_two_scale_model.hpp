@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:46:18
 
 /**
  * @file MSSM_two_scale_model.hpp
@@ -24,15 +23,15 @@
  *        value problem using the two_scale solver by solving EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Fri 10 Apr 2020 20:46:18 with FlexibleSUSY
- * 2.4.2 (git commit: a94199e5620b8684f5d30d0eece5757a5a72c4a4) and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #ifndef MSSM_TWO_SCALE_H
 #define MSSM_TWO_SCALE_H
 
 #include "MSSM_model.hpp"
-#include "MSSM_mass_eigenstates.hpp"
+#include "MSSM_model_slha.hpp"
+#include "MSSM_input_parameters.hpp"
 
 #include "model.hpp"
 
@@ -44,9 +43,10 @@ class Two_scale;
  * @brief model class with routines for determining masses and mixings and EWSB
  */
 template<>
-class MSSM<Two_scale> : public Model, public MSSM_mass_eigenstates {
+class MSSM<Two_scale> : public Model, public MSSM_slha {
 public:
-   explicit MSSM(const MSSM_input_parameters& input_ = MSSM_input_parameters());
+   explicit MSSM(const MSSM_input_parameters& input_ = MSSM_input_parameters(), bool do_convert_masses_to_slha = true);
+   explicit MSSM(const MSSM_slha&, bool do_convert_masses_to_slha = true);
    MSSM(const MSSM&) = default;
    MSSM(MSSM&&) = default;
    virtual ~MSSM() = default;
@@ -58,7 +58,7 @@ public:
    virtual void clear_problems() override;
    virtual std::string name() const override;
    virtual void run_to(double scale, double eps = -1.0) override;
-   virtual void print(std::ostream& out = std::cerr) const override;
+   virtual void print(std::ostream&) const override;
    virtual void set_precision(double) override;
 };
 

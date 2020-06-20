@@ -16,12 +16,12 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:45:44
 
 #ifndef MSSM_INPUT_PARAMETERS_H
 #define MSSM_INPUT_PARAMETERS_H
 
 #include <complex>
+#include <iosfwd>
 #include <Eigen/Core>
 
 namespace flexiblesusy {

@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:25:50
 
 #include "HGTHDMIIMSSMBC_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,11 +72,11 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_Mu_1_loop(const Soft_traces& so
 
    double beta_Mu;
 
-   beta_Mu = Re(-0.05*oneOver16PiSqr*Mu*(18*Sqr(g1) - 15*Sqr(g1d) - 5*Sqr(g1dp)
-      + 90*Sqr(g2) - 15*Sqr(g2u) - 5*Sqr(g2up)));
+   beta_Mu = Re(-0.05*Mu*(18*Sqr(g1) - 15*Sqr(g1d) - 5*Sqr(g1dp) + 90*Sqr(g2) -
+      15*Sqr(g2u) - 5*Sqr(g2up)));
 
 
-   return beta_Mu;
+   return oneLoop * beta_Mu;
 }
 
 /**
@@ -94,18 +93,18 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_Mu_2_loop(const Soft_traces& so
 
    double beta_Mu;
 
-   beta_Mu = Re(0.00625*twoLoop*Mu*(480*g1d*g1dp*g2u*g2up + 570*Quad(g1) - 300*
-      Quad(g1d) - 40*Quad(g1dp) - 3990*Quad(g2) - 300*Quad(g2u) - 40*Quad(g2up)
-      - 540*traceYdAdjYd*Sqr(g1d) - 180*traceYeAdjYe*Sqr(g1d) + 99*Sqr(g1)*Sqr(
-      g1d) - 180*traceYdAdjYd*Sqr(g1dp) - 60*traceYeAdjYe*Sqr(g1dp) + 33*Sqr(g1
-      )*Sqr(g1dp) - 180*Sqr(g1d)*Sqr(g1dp) - 108*Sqr(g1)*Sqr(g2) + 1815*Sqr(g1d
-      )*Sqr(g2) + 165*Sqr(g1dp)*Sqr(g2) - 540*traceYuAdjYu*Sqr(g2u) + 99*Sqr(g1
-      )*Sqr(g2u) - 300*Sqr(g1d)*Sqr(g2u) + 1815*Sqr(g2)*Sqr(g2u) - 180*
-      traceYuAdjYu*Sqr(g2up) + 33*Sqr(g1)*Sqr(g2up) + 60*Sqr(g1dp)*Sqr(g2up) +
-      165*Sqr(g2)*Sqr(g2up) - 180*Sqr(g2u)*Sqr(g2up)));
+   beta_Mu = Re(0.00625*Mu*(480*g1d*g1dp*g2u*g2up + 570*Quad(g1) - 300*Quad(g1d
+      ) - 40*Quad(g1dp) - 3990*Quad(g2) - 300*Quad(g2u) - 40*Quad(g2up) - 540*
+      traceYdAdjYd*Sqr(g1d) - 180*traceYeAdjYe*Sqr(g1d) + 99*Sqr(g1)*Sqr(g1d) -
+      180*traceYdAdjYd*Sqr(g1dp) - 60*traceYeAdjYe*Sqr(g1dp) + 33*Sqr(g1)*Sqr(
+      g1dp) - 180*Sqr(g1d)*Sqr(g1dp) - 108*Sqr(g1)*Sqr(g2) + 1815*Sqr(g1d)*Sqr(
+      g2) + 165*Sqr(g1dp)*Sqr(g2) - 540*traceYuAdjYu*Sqr(g2u) + 99*Sqr(g1)*Sqr(
+      g2u) - 300*Sqr(g1d)*Sqr(g2u) + 1815*Sqr(g2)*Sqr(g2u) - 180*traceYuAdjYu*
+      Sqr(g2up) + 33*Sqr(g1)*Sqr(g2up) + 60*Sqr(g1dp)*Sqr(g2up) + 165*Sqr(g2)*
+      Sqr(g2up) - 180*Sqr(g2u)*Sqr(g2up)));
 
 
-   return beta_Mu;
+   return twoLoop * beta_Mu;
 }
 
 /**
@@ -124,7 +123,7 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_Mu_3_loop(const Soft_traces& so
    beta_Mu = 0;
 
 
-   return beta_Mu;
+   return threeLoop * beta_Mu;
 }
 
 /**
@@ -143,7 +142,7 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_Mu_4_loop(const Soft_traces& so
    beta_Mu = 0;
 
 
-   return beta_Mu;
+   return fourLoop * beta_Mu;
 }
 
 /**
@@ -162,7 +161,7 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_Mu_5_loop(const Soft_traces& so
    beta_Mu = 0;
 
 
-   return beta_Mu;
+   return fiveLoop * beta_Mu;
 }
 
 } // namespace flexiblesusy

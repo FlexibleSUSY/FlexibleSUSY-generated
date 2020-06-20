@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:06:46
 
 #include "CE6SSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -75,15 +74,15 @@ Eigen::Matrix<double,2,2> CE6SSM_soft_parameters::calc_beta_mH1I2_1_loop(const S
 
    Eigen::Matrix<double,2,2> beta_mH1I2;
 
-   beta_mH1I2 = (oneOver16PiSqr*(2*ms2*((Lambda12).adjoint()*Lambda12) + 2*((
-      TLambda12).adjoint()*TLambda12) + mH1I2*(Lambda12).adjoint()*Lambda12 + 2
-      *((Lambda12).adjoint()*mH2I2.conjugate()*Lambda12) + (Lambda12).adjoint()
-      *Lambda12*mH1I2 - 0.1*(7.745966692414834*g1*Tr11 + 9.486832980505138*gN*
-      Tr14 + 12*AbsSqr(MassB)*Sqr(g1) + 60*AbsSqr(MassWB)*Sqr(g2) + 18*AbsSqr(
-      MassBp)*Sqr(gN))*UNITMATRIX(2))).real();
+   beta_mH1I2 = (2*ms2*((Lambda12).adjoint()*Lambda12) + 2*((TLambda12).adjoint
+      ()*TLambda12) + mH1I2*(Lambda12).adjoint()*Lambda12 + 2*((Lambda12).
+      adjoint()*mH2I2.conjugate()*Lambda12) + (Lambda12).adjoint()*Lambda12*
+      mH1I2 - 0.1*(7.745966692414834*g1*Tr11 + 9.486832980505138*gN*Tr14 + 12*
+      AbsSqr(MassB)*Sqr(g1) + 60*AbsSqr(MassWB)*Sqr(g2) + 18*AbsSqr(MassBp)*Sqr
+      (gN))*UNITMATRIX(2)).real();
 
 
-   return beta_mH1I2;
+   return oneLoop * beta_mH1I2;
 }
 
 /**
@@ -124,7 +123,7 @@ Eigen::Matrix<double,2,2> CE6SSM_soft_parameters::calc_beta_mH1I2_2_loop(const S
 
    Eigen::Matrix<double,2,2> beta_mH1I2;
 
-   beta_mH1I2 = (twoLoop*(2*(-3*traceconjTKappaTpTKappa - 2*
+   beta_mH1I2 = (2*(-3*traceconjTKappaTpTKappa - 2*
       traceconjTLambda12TpTLambda12 - 6*ms2*traceKappaAdjKappa - 3*
       traceKappaAdjKappaconjmDx2 - 3*traceKappaconjmDxbar2AdjKappa - 4*ms2*
       traceLambda12AdjLambda12 - 2*traceLambda12AdjLambda12conjmH2I2 - 2*
@@ -163,10 +162,10 @@ Eigen::Matrix<double,2,2> CE6SSM_soft_parameters::calc_beta_mH1I2_2_loop(const S
       Sqr(gN) - 18*MassBp*Conj(MassB)*Sqr(g1)*Sqr(gN) - 18*MassB*Conj(MassBp)*
       Sqr(g1)*Sqr(gN) + 540*AbsSqr(MassBp)*Sqr(g2)*Sqr(gN) + 540*AbsSqr(MassWB)
       *Sqr(g2)*Sqr(gN) + 270*MassWB*Conj(MassBp)*Sqr(g2)*Sqr(gN) + 270*MassBp*
-      Conj(MassWB)*Sqr(g2)*Sqr(gN))*UNITMATRIX(2))).real();
+      Conj(MassWB)*Sqr(g2)*Sqr(gN))*UNITMATRIX(2)).real();
 
 
-   return beta_mH1I2;
+   return twoLoop * beta_mH1I2;
 }
 
 /**
@@ -185,7 +184,7 @@ Eigen::Matrix<double,2,2> CE6SSM_soft_parameters::calc_beta_mH1I2_3_loop(const S
    beta_mH1I2 = ZEROMATRIX(2,2);
 
 
-   return beta_mH1I2;
+   return threeLoop * beta_mH1I2;
 }
 
 /**
@@ -204,7 +203,7 @@ Eigen::Matrix<double,2,2> CE6SSM_soft_parameters::calc_beta_mH1I2_4_loop(const S
    beta_mH1I2 = ZEROMATRIX(2,2);
 
 
-   return beta_mH1I2;
+   return fourLoop * beta_mH1I2;
 }
 
 /**
@@ -223,7 +222,7 @@ Eigen::Matrix<double,2,2> CE6SSM_soft_parameters::calc_beta_mH1I2_5_loop(const S
    beta_mH1I2 = ZEROMATRIX(2,2);
 
 
-   return beta_mH1I2;
+   return fiveLoop * beta_mH1I2;
 }
 
 } // namespace flexiblesusy

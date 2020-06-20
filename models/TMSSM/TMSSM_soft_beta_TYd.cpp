@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:54:08
 
 #include "TMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -77,15 +76,15 @@ Eigen::Matrix<double,3,3> TMSSM_soft_parameters::calc_beta_TYd_1_loop(const Soft
 
    Eigen::Matrix<double,3,3> beta_TYd;
 
-   beta_TYd = (oneOver16PiSqr*(0.03333333333333333*(180*traceAdjYdTYd*Yd + 60*
-      traceAdjYeTYe*Yd + 28*MassB*Yd*Sqr(g1) + 180*MassWB*Yd*Sqr(g2) + 320*
-      MassG*Yd*Sqr(g3) + 90*traceYdAdjYd*TYd + 30*traceYeAdjYe*TYd + 45*AbsSqr(
-      Lambdax)*TYd - 14*Sqr(g1)*TYd - 90*Sqr(g2)*TYd - 160*Sqr(g3)*TYd + 90*Yd*
-      Conj(Lambdax)*TLambdax) + 4*(Yd*Yd.adjoint()*TYd) + 2*(Yd*Yu.adjoint()*
-      TYu) + 5*(TYd*Yd.adjoint()*Yd) + TYd*Yu.adjoint()*Yu)).real();
+   beta_TYd = (0.03333333333333333*(180*traceAdjYdTYd*Yd + 60*traceAdjYeTYe*Yd
+      + 28*MassB*Yd*Sqr(g1) + 180*MassWB*Yd*Sqr(g2) + 320*MassG*Yd*Sqr(g3) + 90
+      *traceYdAdjYd*TYd + 30*traceYeAdjYe*TYd + 45*AbsSqr(Lambdax)*TYd - 14*Sqr
+      (g1)*TYd - 90*Sqr(g2)*TYd - 160*Sqr(g3)*TYd + 90*Yd*Conj(Lambdax)*
+      TLambdax) + 4*(Yd*Yd.adjoint()*TYd) + 2*(Yd*Yu.adjoint()*TYu) + 5*(TYd*Yd
+      .adjoint()*Yd) + TYd*Yu.adjoint()*Yu).real();
 
 
-   return beta_TYd;
+   return oneLoop * beta_TYd;
 }
 
 /**
@@ -112,8 +111,8 @@ Eigen::Matrix<double,3,3> TMSSM_soft_parameters::calc_beta_TYd_2_loop(const Soft
 
    Eigen::Matrix<double,3,3> beta_TYd;
 
-   beta_TYd = (twoLoop*(0.005555555555555556*(-6480*traceYdAdjYdTYdAdjYd*Yd -
-      1080*traceYdAdjYuTYuAdjYd*Yd - 2160*traceYeAdjYeTYeAdjYe*Yd - 1080*
+   beta_TYd = (0.005555555555555556*(-6480*traceYdAdjYdTYdAdjYd*Yd - 1080*
+      traceYdAdjYuTYuAdjYd*Yd - 2160*traceYeAdjYeTYeAdjYe*Yd - 1080*
       traceYuAdjYdTYdAdjYu*Yd - 1620*traceAdjYuTYu*Yd*AbsSqr(Lambdax) - 2296*
       MassB*Yd*Quad(g1) - 9720*MassWB*Yd*Quad(g2) + 1280*MassG*Yd*Quad(g3) -
       144*traceAdjYdTYd*Yd*Sqr(g1) + 432*traceAdjYeTYe*Yd*Sqr(g1) + 144*MassB*
@@ -143,11 +142,11 @@ Eigen::Matrix<double,3,3> TMSSM_soft_parameters::calc_beta_TYd_2_loop(const Soft
       adjoint()*Yu*Yd.adjoint()*TYd) - 4*(Yd*Yu.adjoint()*Yu*Yu.adjoint()*TYu)
       - 4*(Yd*Yu.adjoint()*TYu*Yd.adjoint()*Yd) - 4*(Yd*Yu.adjoint()*TYu*Yu.
       adjoint()*Yu) - 6*(TYd*Yd.adjoint()*Yd*Yd.adjoint()*Yd) - 4*(TYd*Yu.
-      adjoint()*Yu*Yd.adjoint()*Yd) - 2*(TYd*Yu.adjoint()*Yu*Yu.adjoint()*Yu)))
-      .real();
+      adjoint()*Yu*Yd.adjoint()*Yd) - 2*(TYd*Yu.adjoint()*Yu*Yu.adjoint()*Yu)).
+      real();
 
 
-   return beta_TYd;
+   return twoLoop * beta_TYd;
 }
 
 /**
@@ -166,7 +165,7 @@ Eigen::Matrix<double,3,3> TMSSM_soft_parameters::calc_beta_TYd_3_loop(const Soft
    beta_TYd = ZEROMATRIX(3,3);
 
 
-   return beta_TYd;
+   return threeLoop * beta_TYd;
 }
 
 /**
@@ -185,7 +184,7 @@ Eigen::Matrix<double,3,3> TMSSM_soft_parameters::calc_beta_TYd_4_loop(const Soft
    beta_TYd = ZEROMATRIX(3,3);
 
 
-   return beta_TYd;
+   return fourLoop * beta_TYd;
 }
 
 /**
@@ -204,7 +203,7 @@ Eigen::Matrix<double,3,3> TMSSM_soft_parameters::calc_beta_TYd_5_loop(const Soft
    beta_TYd = ZEROMATRIX(3,3);
 
 
-   return beta_TYd;
+   return fiveLoop * beta_TYd;
 }
 
 } // namespace flexiblesusy

@@ -16,10 +16,10 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:40:31
 
 #include "MSSMRHN_physical.hpp"
-#include "slha_io.hpp"
+#include "mixings.hpp"
+#include "wrappers.hpp"
 
 #include <iostream>
 
@@ -74,8 +74,8 @@ void MSSMRHN_physical::clear()
  */
 void MSSMRHN_physical::convert_to_hk()
 {
-   SLHA_io::convert_symmetric_fermion_mixings_to_hk(LOCALPHYSICAL(MChi), LOCALPHYSICAL(ZN));
-   SLHA_io::convert_symmetric_fermion_mixings_to_hk(LOCALPHYSICAL(MFv), LOCALPHYSICAL(UV));
+   convert_symmetric_fermion_mixings_to_hk(LOCALPHYSICAL(MChi), LOCALPHYSICAL(ZN));
+   convert_symmetric_fermion_mixings_to_hk(LOCALPHYSICAL(MFv), LOCALPHYSICAL(UV));
 
 }
 
@@ -86,8 +86,8 @@ void MSSMRHN_physical::convert_to_hk()
  */
 void MSSMRHN_physical::convert_to_slha()
 {
-   SLHA_io::convert_symmetric_fermion_mixings_to_slha(LOCALPHYSICAL(MChi), LOCALPHYSICAL(ZN));
-   SLHA_io::convert_symmetric_fermion_mixings_to_slha(LOCALPHYSICAL(MFv), LOCALPHYSICAL(UV));
+   convert_symmetric_fermion_mixings_to_slha(LOCALPHYSICAL(MChi), LOCALPHYSICAL(ZN));
+   convert_symmetric_fermion_mixings_to_slha(LOCALPHYSICAL(MFv), LOCALPHYSICAL(UV));
 
 }
 

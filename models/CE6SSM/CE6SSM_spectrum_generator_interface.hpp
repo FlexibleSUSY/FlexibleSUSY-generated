@@ -16,11 +16,11 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:42:50
 
 #ifndef CE6SSM_SPECTRUM_GENERATOR_INTERFACE_H
 #define CE6SSM_SPECTRUM_GENERATOR_INTERFACE_H
 
+#include "CE6SSM_info.hpp"
 #include "CE6SSM_mass_eigenstates.hpp"
 #include "CE6SSM_model.hpp"
 #include "CE6SSM_model_slha.hpp"
@@ -32,7 +32,8 @@
 #include "lowe.h"
 #include "spectrum_generator_problems.hpp"
 #include "spectrum_generator_settings.hpp"
-#include "loop_corrections.hpp"
+
+#include "loop_libraries/loop_library.hpp"
 
 #include <string>
 #include <tuple>
@@ -48,15 +49,15 @@ public:
 
    std::tuple<CE6SSM<T>> get_models() const
    { return std::make_tuple(model); }
-   std::tuple<CE6SSM_slha<CE6SSM<T>>> get_models_slha() const
-   { return std::make_tuple(CE6SSM_slha<CE6SSM<T> >(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.)); }
+   std::tuple<CE6SSM<T>> get_models_slha() const
+   { return std::make_tuple(CE6SSM<T>(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.)); }
 
    const CE6SSM<T>& get_model() const
    { return model; }
    CE6SSM<T>& get_model()
    { return model; }
-   CE6SSM_slha<CE6SSM<T>> get_model_slha() const
-   { return CE6SSM_slha<CE6SSM<T>>(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.); }
+   CE6SSM<T> get_model_slha() const
+   { return CE6SSM<T>(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.); }
 
    Spectrum_generator_problems get_problems() const { return problems; }
    int get_exit_code() const { return problems.have_problem(); }
@@ -90,6 +91,8 @@ void CE6SSM_spectrum_generator_interface<T>::set_settings(
    const Spectrum_generator_settings& settings_)
 {
    settings = settings_;
+   Loop_library::set(settings.get(Spectrum_generator_settings::loop_library));
+
    model.set_pole_mass_loop_order(settings.get(Spectrum_generator_settings::pole_mass_loop_order));
    model.set_ewsb_loop_order(settings.get(Spectrum_generator_settings::ewsb_loop_order));
    model.set_loop_corrections(settings.get_loop_corrections());
@@ -109,6 +112,7 @@ template <class T>
 void CE6SSM_spectrum_generator_interface<T>::run(
    const softsusy::QedQcd& qedqcd_, const CE6SSM_input_parameters& input)
 {
+
    softsusy::QedQcd qedqcd = qedqcd_;
 
    try {
@@ -143,10 +147,17 @@ void CE6SSM_spectrum_generator_interface<T>::write_running_couplings(
       return;
    }
 
-   CE6SSM_parameter_getter parameter_getter;
-   Coupling_monitor<CE6SSM_mass_eigenstates, CE6SSM_parameter_getter>
-      coupling_monitor(tmp_model, parameter_getter);
+   // returns parameters at given scale
+   auto data_getter = [&tmp_model](double scale) {
+      tmp_model.run_to(scale);
+      return CE6SSM_parameter_getter::get_parameters(tmp_model);
+   };
 
+   std::vector<std::string> parameter_names(
+      std::cbegin(CE6SSM_info::parameter_names),
+      std::cend(CE6SSM_info::parameter_names));
+
+   Coupling_monitor coupling_monitor(data_getter, parameter_names);
    coupling_monitor.run(start, stop, 100, true);
    coupling_monitor.write_to_file(filename);
 }

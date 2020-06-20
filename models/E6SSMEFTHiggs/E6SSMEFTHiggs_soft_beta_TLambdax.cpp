@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:30:47
 
 #include "E6SSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -85,7 +84,7 @@ double E6SSMEFTHiggs_soft_parameters::calc_beta_TLambdax_1_loop(const Soft_trace
 
    double beta_TLambdax;
 
-   beta_TLambdax = Re(0.1*oneOver16PiSqr*(60*traceAdjKappaTKappa*Lambdax + 40*
+   beta_TLambdax = Re(0.1*(60*traceAdjKappaTKappa*Lambdax + 40*
       traceAdjLambda12TLambda12*Lambdax + 60*traceAdjYdTYd*Lambdax + 20*
       traceAdjYeTYe*Lambdax + 60*traceAdjYuTYu*Lambdax + 12*MassB*Lambdax*Sqr(
       g1) + 60*MassWB*Lambdax*Sqr(g2) + 38*MassBp*Lambdax*Sqr(gN) + 30*
@@ -95,7 +94,7 @@ double E6SSMEFTHiggs_soft_parameters::calc_beta_TLambdax_1_loop(const Soft_trace
       *TLambdax - 19*Sqr(gN)*TLambdax));
 
 
-   return beta_TLambdax;
+   return oneLoop * beta_TLambdax;
 }
 
 /**
@@ -138,12 +137,12 @@ double E6SSMEFTHiggs_soft_parameters::calc_beta_TLambdax_2_loop(const Soft_trace
 
    double beta_TLambdax;
 
-   beta_TLambdax = Re(0.005*twoLoop*(-4800*traceKappaAdjKappaTKappaAdjKappa*
-      Lambdax - 3200*traceLambda12AdjLambda12TLambda12AdjLambda12*Lambdax -
-      7200*traceYdAdjYdTYdAdjYd*Lambdax - 2400*traceYdAdjYuTYuAdjYd*Lambdax -
-      2400*traceYeAdjYeTYeAdjYe*Lambdax - 2400*traceYuAdjYdTYdAdjYu*Lambdax -
-      7200*traceYuAdjYuTYuAdjYu*Lambdax - 4752*MassB*Lambdax*Quad(g1) - 13200*
-      MassWB*Lambdax*Quad(g2) - 15732*MassBp*Lambdax*Quad(gN) + 320*
+   beta_TLambdax = Re(0.005*(-4800*traceKappaAdjKappaTKappaAdjKappa*Lambdax -
+      3200*traceLambda12AdjLambda12TLambda12AdjLambda12*Lambdax - 7200*
+      traceYdAdjYdTYdAdjYd*Lambdax - 2400*traceYdAdjYuTYuAdjYd*Lambdax - 2400*
+      traceYeAdjYeTYeAdjYe*Lambdax - 2400*traceYuAdjYdTYdAdjYu*Lambdax - 7200*
+      traceYuAdjYuTYuAdjYu*Lambdax - 4752*MassB*Lambdax*Quad(g1) - 13200*MassWB
+      *Lambdax*Quad(g2) - 15732*MassBp*Lambdax*Quad(gN) + 320*
       traceAdjKappaTKappa*Lambdax*Sqr(g1) + 480*traceAdjLambda12TLambda12*
       Lambdax*Sqr(g1) - 160*traceAdjYdTYd*Lambdax*Sqr(g1) + 480*traceAdjYeTYe*
       Lambdax*Sqr(g1) + 320*traceAdjYuTYu*Lambdax*Sqr(g1) - 320*MassB*
@@ -193,7 +192,7 @@ double E6SSMEFTHiggs_soft_parameters::calc_beta_TLambdax_2_loop(const Soft_trace
       Lambdax)*TLambdax));
 
 
-   return beta_TLambdax;
+   return twoLoop * beta_TLambdax;
 }
 
 /**
@@ -212,7 +211,7 @@ double E6SSMEFTHiggs_soft_parameters::calc_beta_TLambdax_3_loop(const Soft_trace
    beta_TLambdax = 0;
 
 
-   return beta_TLambdax;
+   return threeLoop * beta_TLambdax;
 }
 
 /**
@@ -231,7 +230,7 @@ double E6SSMEFTHiggs_soft_parameters::calc_beta_TLambdax_4_loop(const Soft_trace
    beta_TLambdax = 0;
 
 
-   return beta_TLambdax;
+   return fourLoop * beta_TLambdax;
 }
 
 /**
@@ -250,7 +249,7 @@ double E6SSMEFTHiggs_soft_parameters::calc_beta_TLambdax_5_loop(const Soft_trace
    beta_TLambdax = 0;
 
 
-   return beta_TLambdax;
+   return fiveLoop * beta_TLambdax;
 }
 
 } // namespace flexiblesusy

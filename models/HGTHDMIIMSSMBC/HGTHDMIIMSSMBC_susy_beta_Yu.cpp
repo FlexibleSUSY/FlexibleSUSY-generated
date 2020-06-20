@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:25:40
 
 #include "HGTHDMIIMSSMBC_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -38,12 +37,12 @@ Eigen::Matrix<double,3,3> HGTHDMIIMSSMBC_susy_parameters::calc_beta_Yu_1_loop(co
 
    Eigen::Matrix<double,3,3> beta_Yu;
 
-   beta_Yu = (oneOver16PiSqr*(-0.05*Yu*(-60*traceYuAdjYu + 17*Sqr(g1) + 45*Sqr(
-      g2) - 30*Sqr(g2u) - 10*Sqr(g2up) + 160*Sqr(g3)) + 0.5*(Yu*Yd.adjoint()*Yd
-      ) + 1.5*(Yu*Yu.adjoint()*Yu))).real();
+   beta_Yu = (-0.05*Yu*(-60*traceYuAdjYu + 17*Sqr(g1) + 45*Sqr(g2) - 30*Sqr(g2u
+      ) - 10*Sqr(g2up) + 160*Sqr(g3)) + 0.5*(Yu*Yd.adjoint()*Yd) + 1.5*(Yu*Yu.
+      adjoint()*Yu)).real();
 
 
-   return beta_Yu;
+   return oneLoop * beta_Yu;
 }
 
 /**
@@ -62,7 +61,7 @@ Eigen::Matrix<double,3,3> HGTHDMIIMSSMBC_susy_parameters::calc_beta_Yu_2_loop(co
 
    Eigen::Matrix<double,3,3> beta_Yu;
 
-   beta_Yu = (twoLoop*(0.0008333333333333334*Yu*(1200*Lambda3*Lambda4 - 2700*
+   beta_Yu = (0.0008333333333333334*Yu*(1200*Lambda3*Lambda4 - 2700*
       traceYdAdjYuYuAdjYd - 8100*traceYuAdjYuYuAdjYu + 1800*AbsSqr(Lambda5) +
       1800*AbsSqr(Lambda6) + 5400*AbsSqr(Lambda7) + 2766*Quad(g1) - 4500*Quad(
       g2) - 3375*Quad(g2u) - 675*Quad(g2up) - 113600*Quad(g3) + 2550*
@@ -77,10 +76,10 @@ Eigen::Matrix<double,3,3> HGTHDMIIMSSMBC_susy_parameters::calc_beta_Yu_2_loop(co
       Lambda2 - 540*traceYuAdjYu + 223*Sqr(g1) + 675*Sqr(g2) - 270*Sqr(g2u) -
       90*Sqr(g2up) + 1280*Sqr(g3))*(Yu*Yu.adjoint()*Yu) - 0.25*(Yu*Yd.adjoint()
       *Yd*Yd.adjoint()*Yd) - 0.25*(Yu*Yd.adjoint()*Yd*Yu.adjoint()*Yu) + 1.5*(
-      Yu*Yu.adjoint()*Yu*Yu.adjoint()*Yu))).real();
+      Yu*Yu.adjoint()*Yu*Yu.adjoint()*Yu)).real();
 
 
-   return beta_Yu;
+   return twoLoop * beta_Yu;
 }
 
 /**
@@ -99,7 +98,7 @@ Eigen::Matrix<double,3,3> HGTHDMIIMSSMBC_susy_parameters::calc_beta_Yu_3_loop(co
    beta_Yu = ZEROMATRIX(3,3);
 
 
-   return beta_Yu;
+   return threeLoop * beta_Yu;
 }
 
 /**
@@ -118,7 +117,7 @@ Eigen::Matrix<double,3,3> HGTHDMIIMSSMBC_susy_parameters::calc_beta_Yu_4_loop(co
    beta_Yu = ZEROMATRIX(3,3);
 
 
-   return beta_Yu;
+   return fourLoop * beta_Yu;
 }
 
 /**
@@ -137,7 +136,7 @@ Eigen::Matrix<double,3,3> HGTHDMIIMSSMBC_susy_parameters::calc_beta_Yu_5_loop(co
    beta_Yu = ZEROMATRIX(3,3);
 
 
-   return beta_Yu;
+   return fiveLoop * beta_Yu;
 }
 
 } // namespace flexiblesusy

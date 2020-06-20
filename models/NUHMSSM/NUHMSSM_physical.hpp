@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:37:36
 
 #ifndef NUHMSSM_PHYSICAL_H
 #define NUHMSSM_PHYSICAL_H

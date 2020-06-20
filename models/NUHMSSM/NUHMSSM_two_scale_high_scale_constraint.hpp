@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:37:44
 
 #ifndef NUHMSSM_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
 #define NUHMSSM_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
@@ -38,6 +37,8 @@ public:
    NUHMSSM_high_scale_constraint() = default;
    NUHMSSM_high_scale_constraint(NUHMSSM<Two_scale>*);
    virtual ~NUHMSSM_high_scale_constraint() = default;
+   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+
    virtual void apply() override;
    virtual double get_scale() const override;
    virtual std::string name() const override { return "NUHMSSM high-scale constraint"; }

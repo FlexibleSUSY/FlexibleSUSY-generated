@@ -17,6 +17,6 @@
 #  ====================================================================
 
 
-LIBE6SSMEFTHiggs_SRC += \
+LIBE6SSMEFTHiggs_CXXQFT_VERTICES_SRC := \
 	models/E6SSMEFTHiggs/cxx_qft/E6SSMEFTHiggs_vertices_1.cpp \
 	models/E6SSMEFTHiggs/cxx_qft/E6SSMEFTHiggs_vertices_2.cpp

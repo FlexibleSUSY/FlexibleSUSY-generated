@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:45:40
 
 #include "THDMII_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -39,14 +38,14 @@ double THDMII_susy_parameters::calc_beta_Lambda2_1_loop(const Susy_traces& susy_
 
    double beta_Lambda2;
 
-   beta_Lambda2 = Re(0.005*oneOver16PiSqr*(400*Lambda3*Lambda4 + 2400*Lambda2*
-      traceYuAdjYu - 1200*traceYuAdjYuYuAdjYu + 200*AbsSqr(Lambda5) + 2400*
-      AbsSqr(Lambda7) + 27*Quad(g1) + 225*Quad(g2) - 360*Lambda2*Sqr(g1) - 1800
-      *Lambda2*Sqr(g2) + 90*Sqr(g1)*Sqr(g2) + 4800*Sqr(Lambda2) + 400*Sqr(
-      Lambda3) + 200*Sqr(Lambda4)));
+   beta_Lambda2 = Re(0.005*(400*Lambda3*Lambda4 + 2400*Lambda2*traceYuAdjYu -
+      1200*traceYuAdjYuYuAdjYu + 200*AbsSqr(Lambda5) + 2400*AbsSqr(Lambda7) +
+      27*Quad(g1) + 225*Quad(g2) - 360*Lambda2*Sqr(g1) - 1800*Lambda2*Sqr(g2) +
+      90*Sqr(g1)*Sqr(g2) + 4800*Sqr(Lambda2) + 400*Sqr(Lambda3) + 200*Sqr(
+      Lambda4)));
 
 
-   return beta_Lambda2;
+   return oneLoop * beta_Lambda2;
 }
 
 /**
@@ -69,10 +68,10 @@ double THDMII_susy_parameters::calc_beta_Lambda2_2_loop(const Susy_traces& susy_
 
    double beta_Lambda2;
 
-   beta_Lambda2 = Re(0.0005*twoLoop*(-40000*Lambda2*Lambda3*Lambda4 - 17000*
-      Lambda5*Lambda6*Lambda7 - 24000*Lambda3*Lambda4*traceYdAdjYd - 18000*
-      Lambda2*traceYdAdjYuYuAdjYd + 12000*traceYdAdjYuYuAdjYuYuAdjYd - 8000*
-      Lambda3*Lambda4*traceYeAdjYe - 6000*Lambda2*traceYuAdjYuYuAdjYu + 60000*
+   beta_Lambda2 = Re(0.0005*(-40000*Lambda2*Lambda3*Lambda4 - 17000*Lambda5*
+      Lambda6*Lambda7 - 24000*Lambda3*Lambda4*traceYdAdjYd - 18000*Lambda2*
+      traceYdAdjYuYuAdjYd + 12000*traceYdAdjYuYuAdjYuYuAdjYd - 8000*Lambda3*
+      Lambda4*traceYeAdjYe - 6000*Lambda2*traceYuAdjYuYuAdjYu + 60000*
       traceYuAdjYuYuAdjYuYuAdjYu - 28000*Lambda2*AbsSqr(Lambda5) - 40000*
       Lambda3*AbsSqr(Lambda5) - 44000*Lambda4*AbsSqr(Lambda5) - 12000*
       traceYdAdjYd*AbsSqr(Lambda5) - 4000*traceYeAdjYe*AbsSqr(Lambda5) + 12000*
@@ -106,7 +105,7 @@ double THDMII_susy_parameters::calc_beta_Lambda2_2_loop(const Susy_traces& susy_
       Sqr(Conj(Lambda6)) - 71000*Conj(Lambda5)*Sqr(Conj(Lambda7))));
 
 
-   return beta_Lambda2;
+   return twoLoop * beta_Lambda2;
 }
 
 /**
@@ -125,7 +124,7 @@ double THDMII_susy_parameters::calc_beta_Lambda2_3_loop(const Susy_traces& susy_
    beta_Lambda2 = 0;
 
 
-   return beta_Lambda2;
+   return threeLoop * beta_Lambda2;
 }
 
 /**
@@ -144,7 +143,7 @@ double THDMII_susy_parameters::calc_beta_Lambda2_4_loop(const Susy_traces& susy_
    beta_Lambda2 = 0;
 
 
-   return beta_Lambda2;
+   return fourLoop * beta_Lambda2;
 }
 
 /**
@@ -163,7 +162,7 @@ double THDMII_susy_parameters::calc_beta_Lambda2_5_loop(const Susy_traces& susy_
    beta_Lambda2 = 0;
 
 
-   return beta_Lambda2;
+   return fiveLoop * beta_Lambda2;
 }
 
 } // namespace flexiblesusy

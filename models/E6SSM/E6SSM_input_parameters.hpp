@@ -16,12 +16,12 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:02:23
 
 #ifndef E6SSM_INPUT_PARAMETERS_H
 #define E6SSM_INPUT_PARAMETERS_H
 
 #include <complex>
+#include <iosfwd>
 #include <Eigen/Core>
 
 namespace flexiblesusy {

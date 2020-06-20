@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.4.2"];
+Print["FlexibleSUSY 2.5.0"];
 Print["MRSSM"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -65,6 +65,7 @@ fsDefaultSettings = {
       higgs3loopCorrectionAtAtAs -> 1,   (* FlexibleSUSY[28] *)
       higgs3loopCorrectionAtAtAt -> 1,   (* FlexibleSUSY[29] *)
       higgs4loopCorrectionAtAsAsAs -> 1, (* FlexibleSUSY[30] *)
+      loopLibrary -> 0,                  (* FlexibleSUSY[31] *)
       parameterOutputScale -> 0          (* MODSEL[12] *)
 };
 
@@ -170,6 +171,7 @@ FSMRSSMOpenHandle[OptionsPattern[]] :=
             OptionValue[higgs3loopCorrectionAtAtAs],
             OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[higgs4loopCorrectionAtAsAsAs],
+            OptionValue[loopLibrary],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)
@@ -312,6 +314,7 @@ FSMRSSMSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[higgs3loopCorrectionAtAtAs],
             OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[higgs4loopCorrectionAtAsAsAs],
+            OptionValue[loopLibrary],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)

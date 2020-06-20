@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:05:47
 
 /**
  * @file E6SSM_two_scale_model.hpp
@@ -24,15 +23,15 @@
  *        value problem using the two_scale solver by solving EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Fri 10 Apr 2020 20:05:47 with FlexibleSUSY
- * 2.4.2 (git commit: a94199e5620b8684f5d30d0eece5757a5a72c4a4) and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #ifndef E6SSM_TWO_SCALE_H
 #define E6SSM_TWO_SCALE_H
 
 #include "E6SSM_model.hpp"
-#include "E6SSM_mass_eigenstates.hpp"
+#include "E6SSM_model_slha.hpp"
+#include "E6SSM_input_parameters.hpp"
 
 #include "model.hpp"
 
@@ -44,9 +43,10 @@ class Two_scale;
  * @brief model class with routines for determining masses and mixings and EWSB
  */
 template<>
-class E6SSM<Two_scale> : public Model, public E6SSM_mass_eigenstates {
+class E6SSM<Two_scale> : public Model, public E6SSM_slha {
 public:
-   explicit E6SSM(const E6SSM_input_parameters& input_ = E6SSM_input_parameters());
+   explicit E6SSM(const E6SSM_input_parameters& input_ = E6SSM_input_parameters(), bool do_convert_masses_to_slha = true);
+   explicit E6SSM(const E6SSM_slha&, bool do_convert_masses_to_slha = true);
    E6SSM(const E6SSM&) = default;
    E6SSM(E6SSM&&) = default;
    virtual ~E6SSM() = default;
@@ -58,7 +58,7 @@ public:
    virtual void clear_problems() override;
    virtual std::string name() const override;
    virtual void run_to(double scale, double eps = -1.0) override;
-   virtual void print(std::ostream& out = std::cerr) const override;
+   virtual void print(std::ostream&) const override;
    virtual void set_precision(double) override;
 };
 

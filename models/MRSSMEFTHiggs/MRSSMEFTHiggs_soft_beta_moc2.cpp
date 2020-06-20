@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:07:34
 
 #include "MRSSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -76,7 +75,7 @@ double MRSSMEFTHiggs_soft_parameters::calc_beta_moc2_1_loop(const Soft_traces& s
    beta_moc2 = Re(0);
 
 
-   return beta_moc2;
+   return oneLoop * beta_moc2;
 }
 
 /**
@@ -91,10 +90,10 @@ double MRSSMEFTHiggs_soft_parameters::calc_beta_moc2_2_loop(const Soft_traces& s
 
    double beta_moc2;
 
-   beta_moc2 = Re(24*Tr23*twoLoop*Quad(g3));
+   beta_moc2 = Re(24*Tr23*Quad(g3));
 
 
-   return beta_moc2;
+   return twoLoop * beta_moc2;
 }
 
 /**
@@ -113,7 +112,7 @@ double MRSSMEFTHiggs_soft_parameters::calc_beta_moc2_3_loop(const Soft_traces& s
    beta_moc2 = 0;
 
 
-   return beta_moc2;
+   return threeLoop * beta_moc2;
 }
 
 /**
@@ -132,7 +131,7 @@ double MRSSMEFTHiggs_soft_parameters::calc_beta_moc2_4_loop(const Soft_traces& s
    beta_moc2 = 0;
 
 
-   return beta_moc2;
+   return fourLoop * beta_moc2;
 }
 
 /**
@@ -151,7 +150,7 @@ double MRSSMEFTHiggs_soft_parameters::calc_beta_moc2_5_loop(const Soft_traces& s
    beta_moc2 = 0;
 
 
-   return beta_moc2;
+   return fiveLoop * beta_moc2;
 }
 
 } // namespace flexiblesusy

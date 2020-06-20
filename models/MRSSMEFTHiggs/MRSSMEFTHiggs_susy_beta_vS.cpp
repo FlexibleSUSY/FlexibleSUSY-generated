@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:07:17
 
 #include "MRSSMEFTHiggs_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -37,10 +36,10 @@ double MRSSMEFTHiggs_susy_parameters::calc_beta_vS_1_loop(const Susy_traces& sus
 
    double beta_vS;
 
-   beta_vS = Re(-2*oneOver16PiSqr*vS*(AbsSqr(LamSD) + AbsSqr(LamSU)));
+   beta_vS = Re(-2*vS*(AbsSqr(LamSD) + AbsSqr(LamSU)));
 
 
-   return beta_vS;
+   return oneLoop * beta_vS;
 }
 
 /**
@@ -57,15 +56,14 @@ double MRSSMEFTHiggs_susy_parameters::calc_beta_vS_2_loop(const Susy_traces& sus
 
    double beta_vS;
 
-   beta_vS = Re(-0.4*twoLoop*vS*(-15*traceYdAdjYd*AbsSqr(LamSD) - 5*
-      traceYeAdjYe*AbsSqr(LamSD) - 15*traceYuAdjYu*AbsSqr(LamSU) - 15*AbsSqr(
-      LamSD)*AbsSqr(LamTD) - 15*AbsSqr(LamSU)*AbsSqr(LamTU) + 3*AbsSqr(LamSD)*
-      Sqr(g1) + 3*AbsSqr(LamSU)*Sqr(g1) + 15*AbsSqr(LamSD)*Sqr(g2) + 15*AbsSqr(
-      LamSU)*Sqr(g2) - 10*Sqr(LamSD)*Sqr(Conj(LamSD)) - 10*Sqr(LamSU)*Sqr(Conj(
-      LamSU))));
+   beta_vS = Re(-0.4*vS*(-15*traceYdAdjYd*AbsSqr(LamSD) - 5*traceYeAdjYe*AbsSqr
+      (LamSD) - 15*traceYuAdjYu*AbsSqr(LamSU) - 15*AbsSqr(LamSD)*AbsSqr(LamTD)
+      - 15*AbsSqr(LamSU)*AbsSqr(LamTU) + 3*AbsSqr(LamSD)*Sqr(g1) + 3*AbsSqr(
+      LamSU)*Sqr(g1) + 15*AbsSqr(LamSD)*Sqr(g2) + 15*AbsSqr(LamSU)*Sqr(g2) - 10
+      *Sqr(LamSD)*Sqr(Conj(LamSD)) - 10*Sqr(LamSU)*Sqr(Conj(LamSU))));
 
 
-   return beta_vS;
+   return twoLoop * beta_vS;
 }
 
 /**
@@ -84,7 +82,7 @@ double MRSSMEFTHiggs_susy_parameters::calc_beta_vS_3_loop(const Susy_traces& sus
    beta_vS = 0;
 
 
-   return beta_vS;
+   return threeLoop * beta_vS;
 }
 
 /**
@@ -103,7 +101,7 @@ double MRSSMEFTHiggs_susy_parameters::calc_beta_vS_4_loop(const Susy_traces& sus
    beta_vS = 0;
 
 
-   return beta_vS;
+   return fourLoop * beta_vS;
 }
 
 /**
@@ -122,7 +120,7 @@ double MRSSMEFTHiggs_susy_parameters::calc_beta_vS_5_loop(const Susy_traces& sus
    beta_vS = 0;
 
 
-   return beta_vS;
+   return fiveLoop * beta_vS;
 }
 
 } // namespace flexiblesusy

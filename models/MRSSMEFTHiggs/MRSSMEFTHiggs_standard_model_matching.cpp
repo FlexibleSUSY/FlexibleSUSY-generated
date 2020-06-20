@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:26:59
 
 #include "MRSSMEFTHiggs_standard_model_matching.hpp"
 #include "wrappers.hpp"

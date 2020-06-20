@@ -23,16 +23,18 @@ NMSSMEFTHiggs_SUSY_BETAS_MK := \
 NMSSMEFTHiggs_SOFT_BETAS_MK := \
 		$(DIR)/soft_betas.mk
 
-NMSSMEFTHiggs_CXX_QFT_VERTICES_MK := \
+NMSSMEFTHiggs_CXXQFT_VERTICES_MK := \
 		$(DIR)/cxx_qft/vertices.mk
+
+-include $(NMSSMEFTHiggs_CXXQFT_VERTICES_MK)
+LIBNMSSMEFTHiggs_CXXQFT_VERTICES_SRC ?= ''
 
 NMSSMEFTHiggs_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
 NMSSMEFTHiggs_INCLUDE_MK := \
 		$(NMSSMEFTHiggs_SUSY_BETAS_MK) \
-		$(NMSSMEFTHiggs_SOFT_BETAS_MK) \
-		$(NMSSMEFTHiggs_CXX_QFT_VERTICES_MK)
+		$(NMSSMEFTHiggs_SOFT_BETAS_MK)
 
 NMSSMEFTHiggs_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.NMSSMEFTHiggs_generated \
@@ -53,11 +55,15 @@ LIBNMSSMEFTHiggs_SRC := \
 		$(DIR)/NMSSMEFTHiggs_a_muon.cpp \
 		$(DIR)/NMSSMEFTHiggs_edm.cpp \
 		$(DIR)/NMSSMEFTHiggs_FFV_form_factors.cpp \
+		$(DIR)/NMSSMEFTHiggs_f_to_f_conversion.cpp \
 		$(DIR)/NMSSMEFTHiggs_l_to_lgamma.cpp \
+		$(DIR)/NMSSMEFTHiggs_b_to_s_gamma.cpp \
 		$(DIR)/NMSSMEFTHiggs_effective_couplings.cpp \
 		$(DIR)/NMSSMEFTHiggs_info.cpp \
 		$(DIR)/NMSSMEFTHiggs_input_parameters.cpp \
 		$(DIR)/NMSSMEFTHiggs_mass_eigenstates.cpp \
+		$(DIR)/NMSSMEFTHiggs_mass_eigenstates_decoupling_scheme.cpp \
+		$(DIR)/NMSSMEFTHiggs_model_slha.cpp \
 		$(DIR)/NMSSMEFTHiggs_observables.cpp \
 		$(DIR)/NMSSMEFTHiggs_physical.cpp \
 		$(DIR)/NMSSMEFTHiggs_slha_io.cpp \
@@ -65,6 +71,8 @@ LIBNMSSMEFTHiggs_SRC := \
 		$(DIR)/NMSSMEFTHiggs_susy_parameters.cpp \
 		$(DIR)/NMSSMEFTHiggs_utilities.cpp \
 		$(DIR)/NMSSMEFTHiggs_weinberg_angle.cpp
+
+LIBNMSSMEFTHiggs_SRC += $(LIBNMSSMEFTHiggs_CXXQFT_VERTICES_SRC)
 
 EXENMSSMEFTHiggs_SRC := \
 		$(DIR)/run_NMSSMEFTHiggs.cpp \
@@ -84,7 +92,9 @@ LIBNMSSMEFTHiggs_HDR := \
 		$(DIR)/NMSSMEFTHiggs_convergence_tester.hpp \
 		$(DIR)/NMSSMEFTHiggs_edm.hpp \
 		$(DIR)/NMSSMEFTHiggs_FFV_form_factors.hpp \
+		$(DIR)/NMSSMEFTHiggs_f_to_f_conversion.hpp \
 		$(DIR)/NMSSMEFTHiggs_l_to_lgamma.hpp \
+		$(DIR)/NMSSMEFTHiggs_b_to_s_gamma.hpp \
 		$(DIR)/NMSSMEFTHiggs_effective_couplings.hpp \
 		$(DIR)/NMSSMEFTHiggs_ewsb_solver.hpp \
 		$(DIR)/NMSSMEFTHiggs_ewsb_solver_interface.hpp \
@@ -94,6 +104,8 @@ LIBNMSSMEFTHiggs_HDR := \
 		$(DIR)/NMSSMEFTHiggs_input_parameters.hpp \
 		$(DIR)/NMSSMEFTHiggs_low_scale_constraint.hpp \
 		$(DIR)/NMSSMEFTHiggs_mass_eigenstates.hpp \
+		$(DIR)/NMSSMEFTHiggs_mass_eigenstates_interface.hpp \
+		$(DIR)/NMSSMEFTHiggs_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/NMSSMEFTHiggs_model.hpp \
 		$(DIR)/NMSSMEFTHiggs_model_slha.hpp \
 		$(DIR)/NMSSMEFTHiggs_observables.hpp \
@@ -112,7 +124,7 @@ LIBNMSSMEFTHiggs_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/NMSSMEFTHiggs_fields.hpp \
 		$(DIR)/cxx_qft/NMSSMEFTHiggs_vertices.hpp \
 		$(DIR)/cxx_qft/NMSSMEFTHiggs_context_base.hpp \
-		$(DIR)/cxx_qft/NMSSMEFTHiggs_npointfunctions.hpp
+		$(DIR)/cxx_qft/NMSSMEFTHiggs_npointfunctions_wilsoncoeffs.hpp
 
 ifneq ($(findstring two_scale,$(SOLVERS)),)
 -include $(DIR)/two_scale.mk
@@ -130,7 +142,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(NMSSMEFTHiggs_SUSY_BETAS_MK)
 -include $(NMSSMEFTHiggs_SOFT_BETAS_MK)
--include $(NMSSMEFTHiggs_CXX_QFT_VERTICES_MK)
+-include $(NMSSMEFTHiggs_CXXQFT_VERTICES_MK)
 -include $(NMSSMEFTHiggs_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
@@ -142,7 +154,7 @@ $(NMSSMEFTHiggs_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(NMSSMEFTHiggs_SOFT_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
-$(NMSSMEFTHiggs_CXX_QFT_VERTICES_MK): run-metacode-$(MODNAME)
+$(NMSSMEFTHiggs_CXXQFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(NMSSMEFTHiggs_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
@@ -207,6 +219,7 @@ install-src::
 		$(Q)install -d $(NMSSMEFTHiggs_INSTALL_DIR)
 		$(Q)install -d $(NMSSMEFTHiggs_INSTALL_CXXQFT_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(LIBNMSSMEFTHiggs_SRC) $(NMSSMEFTHiggs_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBNMSSMEFTHiggs_CXXQFT_VERTICES_SRC) $(NMSSMEFTHiggs_INSTALL_CXXQFT_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(LIBNMSSMEFTHiggs_HDR) $(NMSSMEFTHiggs_INSTALL_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(LIBNMSSMEFTHiggs_CXXQFT_HDR) $(NMSSMEFTHiggs_INSTALL_CXXQFT_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(EXENMSSMEFTHiggs_SRC) $(NMSSMEFTHiggs_INSTALL_DIR)
@@ -214,6 +227,8 @@ install-src::
 		$(Q)install -m u=rw,g=r,o=r $(LLNMSSMEFTHiggs_MMA) $(NMSSMEFTHiggs_INSTALL_DIR)
 		$(Q)$(INSTALL_STRIPPED) $(NMSSMEFTHiggs_MK) $(NMSSMEFTHiggs_INSTALL_DIR) -m u=rw,g=r,o=r
 		$(Q)install -m u=rw,g=r,o=r $(NMSSMEFTHiggs_INCLUDE_MK) $(NMSSMEFTHiggs_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(NMSSMEFTHiggs_CXXQFT_VERTICES_MK) $(NMSSMEFTHiggs_INSTALL_CXXQFT_DIR)
+
 ifneq ($(NMSSMEFTHiggs_SLHA_INPUT),)
 		$(Q)install -m u=rw,g=r,o=r $(NMSSMEFTHiggs_SLHA_INPUT) $(NMSSMEFTHiggs_INSTALL_DIR)
 endif
@@ -245,6 +260,7 @@ clean-$(MODNAME)-src:
 		$(Q)-rm -f $(LLNMSSMEFTHiggs_MMA)
 		$(Q)-rm -f $(METACODE_STAMP_NMSSMEFTHiggs)
 		$(Q)-rm -f $(NMSSMEFTHiggs_INCLUDE_MK)
+		$(Q)-rm -f $(NMSSMEFTHiggs_CXXQFT_VERTICES_MK)
 		$(Q)-rm -f $(NMSSMEFTHiggs_SLHA_INPUT)
 		$(Q)-rm -f $(NMSSMEFTHiggs_REFERENCES)
 		$(Q)-rm -f $(NMSSMEFTHiggs_GNUPLOT)
@@ -271,7 +287,7 @@ pack-$(MODNAME)-src:
 		$(LIBNMSSMEFTHiggs_SRC) $(LIBNMSSMEFTHiggs_HDR) $(LIBNMSSMEFTHiggs_CXXQFT_HDR) \
 		$(EXENMSSMEFTHiggs_SRC) \
 		$(LLNMSSMEFTHiggs_SRC) $(LLNMSSMEFTHiggs_MMA) \
-		$(NMSSMEFTHiggs_MK) $(NMSSMEFTHiggs_INCLUDE_MK) \
+		$(NMSSMEFTHiggs_MK) $(NMSSMEFTHiggs_INCLUDE_MK) $(NMSSMEFTHiggs_CXXQFT_VERTICES_MK) \
 		$(NMSSMEFTHiggs_SLHA_INPUT) $(NMSSMEFTHiggs_REFERENCES) \
 		$(NMSSMEFTHiggs_GNUPLOT)
 
@@ -297,7 +313,7 @@ $(METACODE_STAMP_NMSSMEFTHiggs):
 endif
 
 $(LIBNMSSMEFTHiggs_DEP) $(EXENMSSMEFTHiggs_DEP) $(LLNMSSMEFTHiggs_DEP) $(LIBNMSSMEFTHiggs_OBJ) $(EXENMSSMEFTHiggs_OBJ) $(LLNMSSMEFTHiggs_OBJ) $(LLNMSSMEFTHiggs_LIB): \
-	CPPFLAGS += $(MODNMSSMEFTHiggs_SUBMOD_INC) $(MODNMSSMEFTHiggs_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODNMSSMEFTHiggs_SUBMOD_INC) $(MODNMSSMEFTHiggs_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS)  $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBNMSSMEFTHiggs_DEP) $(EXENMSSMEFTHiggs_DEP) $(LLNMSSMEFTHiggs_DEP) $(LIBNMSSMEFTHiggs_OBJ) $(EXENMSSMEFTHiggs_OBJ) $(LLNMSSMEFTHiggs_OBJ) $(LLNMSSMEFTHiggs_LIB): \
@@ -311,13 +327,13 @@ $(LIBNMSSMEFTHiggs): $(LIBNMSSMEFTHiggs_OBJ)
 		@$(MSG)
 		$(Q)$(MODULE_MAKE_LIB_CMD) $@ $^
 
-$(DIR)/%.x: $(DIR)/%.o $(LIBNMSSMEFTHiggs) $(MODNMSSMEFTHiggs_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+$(DIR)/%.x: $(DIR)/%.o $(LIBNMSSMEFTHiggs) $(MODNMSSMEFTHiggs_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
-$(LLNMSSMEFTHiggs_LIB): $(LLNMSSMEFTHiggs_OBJ) $(LIBNMSSMEFTHiggs) $(MODNMSSMEFTHiggs_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+$(LLNMSSMEFTHiggs_LIB): $(LLNMSSMEFTHiggs_OBJ) $(LIBNMSSMEFTHiggs) $(MODNMSSMEFTHiggs_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS)
 
 ALLDEP += $(LIBNMSSMEFTHiggs_DEP) $(EXENMSSMEFTHiggs_DEP)
 ALLSRC += $(LIBNMSSMEFTHiggs_SRC) $(EXENMSSMEFTHiggs_SRC)

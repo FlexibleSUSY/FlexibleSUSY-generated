@@ -17,6 +17,6 @@
 #  ====================================================================
 
 
-LIBCE6SSM_SRC += \
+LIBCE6SSM_CXXQFT_VERTICES_SRC := \
 	models/CE6SSM/cxx_qft/CE6SSM_vertices_1.cpp \
 	models/CE6SSM/cxx_qft/CE6SSM_vertices_2.cpp

@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 17:55:57
 
 #ifndef CNMSSM_SEMI_ANALYTIC_LOW_SCALE_CONSTRAINT_H
 #define CNMSSM_SEMI_ANALYTIC_LOW_SCALE_CONSTRAINT_H
@@ -53,6 +52,8 @@ public:
    void initialize();
    const softsusy::QedQcd& get_sm_parameters() const { return qedqcd; }
    void set_sm_parameters(const softsusy::QedQcd& qedqcd_) { qedqcd = qedqcd_; }
+   int get_SM_like_Higgs_index() const { return higgs_idx; }
+   void set_SM_like_Higgs_index(int i) { higgs_idx = i; }
    void set_is_initial_guess(bool flag) { is_initial_guess = flag; }
 
 private:
@@ -74,6 +75,7 @@ private:
    double new_g1{0.};
    double new_g2{0.};
    double new_g3{0.};
+   int higgs_idx{0};
    bool is_initial_guess{false};
 
    double calculate_theta_w();

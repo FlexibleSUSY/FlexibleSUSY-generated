@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:02:48
 
 #ifndef TMSSM_TWO_SCALE_LOW_SCALE_CONSTRAINT_H
 #define TMSSM_TWO_SCALE_LOW_SCALE_CONSTRAINT_H
@@ -40,6 +39,8 @@ public:
    TMSSM_low_scale_constraint() = default;
    TMSSM_low_scale_constraint(TMSSM<Two_scale>*, const softsusy::QedQcd&);
    virtual ~TMSSM_low_scale_constraint() = default;
+   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+
    virtual void apply() override;
    virtual double get_scale() const override;
    virtual std::string name() const override { return "TMSSM low-scale constraint"; }
@@ -52,6 +53,8 @@ public:
    void initialize();
    const softsusy::QedQcd& get_sm_parameters() const;
    void set_sm_parameters(const softsusy::QedQcd&);
+   int get_SM_like_Higgs_index() const { return higgs_idx; }
+   void set_SM_like_Higgs_index(int i) { higgs_idx = i; }
 
 private:
    double scale{0.};
@@ -70,6 +73,7 @@ private:
    double e_run{0.};
    double ThetaWDRbar{0.};
    double new_g1{0.}, new_g2{0.}, new_g3{0.};
+   int higgs_idx{0};
 
    double calculate_theta_w();
    void calculate_threshold_corrections();

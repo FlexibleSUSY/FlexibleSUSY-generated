@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:22:11
 
 #include "HTHDMIIMSSMBC_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,10 +72,10 @@ double HTHDMIIMSSMBC_soft_parameters::calc_beta_Mu_1_loop(const Soft_traces& sof
 
    double beta_Mu;
 
-   beta_Mu = Re(-0.9*oneOver16PiSqr*Mu*(Sqr(g1) + 5*Sqr(g2)));
+   beta_Mu = Re(-0.9*Mu*(Sqr(g1) + 5*Sqr(g2)));
 
 
-   return beta_Mu;
+   return oneLoop * beta_Mu;
 }
 
 /**
@@ -90,11 +89,10 @@ double HTHDMIIMSSMBC_soft_parameters::calc_beta_Mu_2_loop(const Soft_traces& sof
 
    double beta_Mu;
 
-   beta_Mu = Re(0.0125*twoLoop*Mu*(285*Quad(g1) - 2395*Quad(g2) - 54*Sqr(g1)*
-      Sqr(g2)));
+   beta_Mu = Re(0.0125*Mu*(285*Quad(g1) - 2395*Quad(g2) - 54*Sqr(g1)*Sqr(g2)));
 
 
-   return beta_Mu;
+   return twoLoop * beta_Mu;
 }
 
 /**
@@ -113,7 +111,7 @@ double HTHDMIIMSSMBC_soft_parameters::calc_beta_Mu_3_loop(const Soft_traces& sof
    beta_Mu = 0;
 
 
-   return beta_Mu;
+   return threeLoop * beta_Mu;
 }
 
 /**
@@ -132,7 +130,7 @@ double HTHDMIIMSSMBC_soft_parameters::calc_beta_Mu_4_loop(const Soft_traces& sof
    beta_Mu = 0;
 
 
-   return beta_Mu;
+   return fourLoop * beta_Mu;
 }
 
 /**
@@ -151,7 +149,7 @@ double HTHDMIIMSSMBC_soft_parameters::calc_beta_Mu_5_loop(const Soft_traces& sof
    beta_Mu = 0;
 
 
-   return beta_Mu;
+   return fiveLoop * beta_Mu;
 }
 
 } // namespace flexiblesusy

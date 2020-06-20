@@ -21,7 +21,6 @@
  * @brief contains wrapper class for model class in SLHA convention
  */
 
-// File generated at Fri 10 Apr 2020 19:46:34
 
 #ifndef HSSUSY_SLHA_H
 #define HSSUSY_SLHA_H
@@ -29,11 +28,6 @@
 #include "HSSUSY_input_parameters.hpp"
 #include "HSSUSY_mass_eigenstates.hpp"
 #include "HSSUSY_physical.hpp"
-
-#include "ckm.hpp"
-#include "linalg2.hpp"
-#include "pmns.hpp"
-#include "slha_io.hpp"
 #include "wrappers.hpp"
 
 #define LOCALPHYSICAL(p) physical.p
@@ -50,11 +44,10 @@ namespace flexiblesusy {
  * @tparam Model model class to wrap
  */
 
-template <class Model>
-class HSSUSY_slha : public Model {
+class HSSUSY_slha : public HSSUSY_mass_eigenstates {
 public:
-   explicit HSSUSY_slha(const HSSUSY_input_parameters& input_ = HSSUSY_input_parameters());
-   explicit HSSUSY_slha(const Model&, bool do_convert_masses_to_slha = true);
+   explicit HSSUSY_slha(const HSSUSY_input_parameters& input_ = HSSUSY_input_parameters(), bool do_convert_masses_to_slha = true);
+   explicit HSSUSY_slha(const HSSUSY_mass_eigenstates&, bool do_convert_masses_to_slha = true);
    HSSUSY_slha(const HSSUSY_slha&) = default;
    HSSUSY_slha(HSSUSY_slha&&) = default;
    virtual ~HSSUSY_slha() = default;
@@ -152,139 +145,6 @@ private:
    void convert_trilinear_couplings_to_slha();
    void convert_soft_squared_masses_to_slha();
 };
-
-template <class Model>
-HSSUSY_slha<Model>::HSSUSY_slha(const HSSUSY_input_parameters& input_)
-   : Model(input_)
-{
-}
-
-/**
- * Copy constructor.  Copies from base class (model class in
- * BPMZ convention) and converts parameters to SLHA.
- *
- * @param model_ model class in BPMZ convention
- * @param do_convert_masses_to_slha whether to convert majorana
- *    fermion masses to SLHA convention (allow them to be negative)
- */
-template <class Model>
-HSSUSY_slha<Model>::HSSUSY_slha(const Model& model_,
-                            bool do_convert_masses_to_slha)
-   : Model(model_)
-   , convert_masses_to_slha(do_convert_masses_to_slha)
-{
-   convert_to_slha();
-}
-
-template <class Model>
-void HSSUSY_slha<Model>::clear()
-{
-   Model::clear();
-   physical_slha.clear();
-}
-
-template <class Model>
-void HSSUSY_slha<Model>::calculate_spectrum()
-{
-   Model::calculate_spectrum();
-   convert_to_slha();
-}
-
-template <class Model>
-void HSSUSY_slha<Model>::convert_to_slha()
-{
-   physical_slha = this->get_physical();
-
-   if (convert_masses_to_slha)
-      physical_slha.convert_to_slha();
-
-   convert_yukawa_couplings_to_slha();
-   calculate_ckm_matrix();
-   calculate_pmns_matrix();
-   convert_trilinear_couplings_to_slha();
-   convert_soft_squared_masses_to_slha();
-}
-
-template <class Model>
-void HSSUSY_slha<Model>::calculate_ckm_matrix()
-{
-   ckm = Vu_slha * Vd_slha.adjoint();
-   CKM_parameters::to_pdg_convention(ckm, Vu_slha, Vd_slha, Uu_slha, Ud_slha);
-
-}
-
-template <class Model>
-void HSSUSY_slha<Model>::calculate_pmns_matrix()
-{
-   pmns << 1, 0, 0, 0, 1, 0, 0, 0, 1;
-
-}
-
-/**
- * Convert Yukawa couplings to SLHA convention
- */
-template <class Model>
-void HSSUSY_slha<Model>::convert_yukawa_couplings_to_slha()
-{
-   fs_svd(MODELPARAMETER(Yu), Yu_slha, Uu_slha, Vu_slha);
-   fs_svd(MODELPARAMETER(Yd), Yd_slha, Ud_slha, Vd_slha);
-   fs_svd(MODELPARAMETER(Ye), Ye_slha, Ue_slha, Ve_slha);
-
-}
-
-/**
- * Convert trilinear couplings to SLHA convention
- */
-template <class Model>
-void HSSUSY_slha<Model>::convert_trilinear_couplings_to_slha()
-{
-
-}
-
-/**
- * Convert soft-breaking squared mass parameters to SLHA convention
- */
-template <class Model>
-void HSSUSY_slha<Model>::convert_soft_squared_masses_to_slha()
-{
-
-}
-
-template <class Model>
-const HSSUSY_physical& HSSUSY_slha<Model>::get_physical_slha() const
-{
-   return physical_slha;
-}
-
-template <class Model>
-HSSUSY_physical& HSSUSY_slha<Model>::get_physical_slha()
-{
-   return physical_slha;
-}
-
-template <class Model>
-void HSSUSY_slha<Model>::print(std::ostream& ostr) const
-{
-   Model::print(ostr);
-
-   ostr << "----------------------------------------\n"
-           "SLHA convention:\n"
-           "----------------------------------------\n";
-   physical_slha.print(ostr);
-}
-
-template <class Model>
-void HSSUSY_slha<Model>::set_convert_masses_to_slha(bool flag)
-{
-   convert_masses_to_slha = flag;
-}
-
-template <class Model>
-std::ostream& operator<<(std::ostream& ostr, const HSSUSY_slha<Model>& model)
-{
-   model.print(ostr);
-   return ostr;
-}
 
 } // namespace flexiblesusy
 

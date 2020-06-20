@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:07:29
 
 #ifndef MRSSMEFTHiggs_soft_parameters_H
 #define MRSSMEFTHiggs_soft_parameters_H

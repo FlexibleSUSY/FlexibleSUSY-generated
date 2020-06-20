@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:18:36
 
 #include "UMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,10 +72,10 @@ double UMSSM_soft_parameters::calc_beta_MassG_1_loop(const Soft_traces& soft_tra
 
    double beta_MassG;
 
-   beta_MassG = Re(-6*MassG*oneOver16PiSqr*Sqr(g3));
+   beta_MassG = Re(-6*MassG*Sqr(g3));
 
 
-   return beta_MassG;
+   return oneLoop * beta_MassG;
 }
 
 /**
@@ -97,15 +96,15 @@ double UMSSM_soft_parameters::calc_beta_MassG_2_loop(const Soft_traces& soft_tra
 
    double beta_MassG;
 
-   beta_MassG = Re(0.4*twoLoop*Sqr(g3)*(20*traceAdjYdTYd + 20*traceAdjYuTYu -
-      20*MassG*traceYdAdjYd - 20*MassG*traceYuAdjYu + 11*MassB*Sqr(g1) + 11*
-      MassG*Sqr(g1) + 45*MassG*Sqr(g2) + 45*MassWB*Sqr(g2) + 140*MassG*Sqr(g3)
-      + 30*MassG*Sqr(gp)*Sqr(Qd) + 30*MassU*Sqr(gp)*Sqr(Qd) + 60*MassG*Sqr(gp)*
-      Sqr(Qq) + 60*MassU*Sqr(gp)*Sqr(Qq) + 30*MassG*Sqr(gp)*Sqr(Qu) + 30*MassU*
-      Sqr(gp)*Sqr(Qu)));
+   beta_MassG = Re(0.4*Sqr(g3)*(20*traceAdjYdTYd + 20*traceAdjYuTYu - 20*MassG*
+      traceYdAdjYd - 20*MassG*traceYuAdjYu + 11*MassB*Sqr(g1) + 11*MassG*Sqr(g1
+      ) + 45*MassG*Sqr(g2) + 45*MassWB*Sqr(g2) + 140*MassG*Sqr(g3) + 30*MassG*
+      Sqr(gp)*Sqr(Qd) + 30*MassU*Sqr(gp)*Sqr(Qd) + 60*MassG*Sqr(gp)*Sqr(Qq) +
+      60*MassU*Sqr(gp)*Sqr(Qq) + 30*MassG*Sqr(gp)*Sqr(Qu) + 30*MassU*Sqr(gp)*
+      Sqr(Qu)));
 
 
-   return beta_MassG;
+   return twoLoop * beta_MassG;
 }
 
 /**
@@ -124,7 +123,7 @@ double UMSSM_soft_parameters::calc_beta_MassG_3_loop(const Soft_traces& soft_tra
    beta_MassG = 0;
 
 
-   return beta_MassG;
+   return threeLoop * beta_MassG;
 }
 
 /**
@@ -143,7 +142,7 @@ double UMSSM_soft_parameters::calc_beta_MassG_4_loop(const Soft_traces& soft_tra
    beta_MassG = 0;
 
 
-   return beta_MassG;
+   return fourLoop * beta_MassG;
 }
 
 /**
@@ -162,7 +161,7 @@ double UMSSM_soft_parameters::calc_beta_MassG_5_loop(const Soft_traces& soft_tra
    beta_MassG = 0;
 
 
-   return beta_MassG;
+   return fiveLoop * beta_MassG;
 }
 
 } // namespace flexiblesusy

@@ -16,10 +16,10 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:21:15
 
 #include "lowNMSSMTanBetaAtMZ_physical.hpp"
-#include "slha_io.hpp"
+#include "mixings.hpp"
+#include "wrappers.hpp"
 
 #include <iostream>
 
@@ -73,7 +73,7 @@ void lowNMSSMTanBetaAtMZ_physical::clear()
  */
 void lowNMSSMTanBetaAtMZ_physical::convert_to_hk()
 {
-   SLHA_io::convert_symmetric_fermion_mixings_to_hk(LOCALPHYSICAL(MChi), LOCALPHYSICAL(ZN));
+   convert_symmetric_fermion_mixings_to_hk(LOCALPHYSICAL(MChi), LOCALPHYSICAL(ZN));
 
 }
 
@@ -84,7 +84,7 @@ void lowNMSSMTanBetaAtMZ_physical::convert_to_hk()
  */
 void lowNMSSMTanBetaAtMZ_physical::convert_to_slha()
 {
-   SLHA_io::convert_symmetric_fermion_mixings_to_slha(LOCALPHYSICAL(MChi), LOCALPHYSICAL(ZN));
+   convert_symmetric_fermion_mixings_to_slha(LOCALPHYSICAL(MChi), LOCALPHYSICAL(ZN));
 
 }
 

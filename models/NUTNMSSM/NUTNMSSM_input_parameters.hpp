@@ -16,12 +16,12 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:27:06
 
 #ifndef NUTNMSSM_INPUT_PARAMETERS_H
 #define NUTNMSSM_INPUT_PARAMETERS_H
 
 #include <complex>
+#include <iosfwd>
 #include <Eigen/Core>
 
 namespace flexiblesusy {

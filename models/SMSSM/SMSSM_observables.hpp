@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:19:27
 
 #ifndef SMSSM_OBSERVABLES_H
 #define SMSSM_OBSERVABLES_H

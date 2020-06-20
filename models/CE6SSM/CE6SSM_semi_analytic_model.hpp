@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:43:09
 
 /**
  * @file CE6SSM_semi_analytic_model.hpp
@@ -24,15 +23,14 @@
  *        value problem using the semi_analytic solver by solving EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Fri 10 Apr 2020 18:43:09 with FlexibleSUSY
- * 2.4.2 (git commit: a94199e5620b8684f5d30d0eece5757a5a72c4a4) and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #ifndef CE6SSM_SEMI_ANALYTIC_MODEL_H
 #define CE6SSM_SEMI_ANALYTIC_MODEL_H
 
 #include "CE6SSM_model.hpp"
-#include "CE6SSM_mass_eigenstates.hpp"
+#include "CE6SSM_model_slha.hpp"
 #include "CE6SSM_semi_analytic_solutions.hpp"
 
 #include "model.hpp"
@@ -45,9 +43,10 @@ class Semi_analytic;
  * @brief model class with routines for determining masses and mixings and EWSB
  */
 template<>
-class CE6SSM<Semi_analytic> : public Model, public CE6SSM_mass_eigenstates {
+class CE6SSM<Semi_analytic> : public Model, public CE6SSM_slha {
 public:
-   explicit CE6SSM(const CE6SSM_input_parameters& input_ = CE6SSM_input_parameters());
+   explicit CE6SSM(const CE6SSM_input_parameters& input_ = CE6SSM_input_parameters(), bool do_convert_masses_to_slha = true);
+   explicit CE6SSM(const CE6SSM_slha&, bool do_convert_masses_to_slha = true);
    CE6SSM(const CE6SSM&) = default;
    CE6SSM(CE6SSM&&) = default;
    virtual ~CE6SSM() = default;
@@ -59,7 +58,7 @@ public:
    virtual void clear_problems();
    virtual std::string name() const;
    virtual void run_to(double scale, double eps = -1.0);
-   virtual void print(std::ostream& out = std::cerr) const;
+   virtual void print(std::ostream&) const;
    virtual void set_precision(double);
 
    /**

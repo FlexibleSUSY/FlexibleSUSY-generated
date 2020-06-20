@@ -16,11 +16,11 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:54:46
 
 #ifndef MSSMEFTHiggs_SPECTRUM_GENERATOR_INTERFACE_H
 #define MSSMEFTHiggs_SPECTRUM_GENERATOR_INTERFACE_H
 
+#include "MSSMEFTHiggs_info.hpp"
 #include "MSSMEFTHiggs_mass_eigenstates.hpp"
 #include "MSSMEFTHiggs_model.hpp"
 #include "MSSMEFTHiggs_model_slha.hpp"
@@ -49,15 +49,15 @@ public:
 
    std::tuple<MSSMEFTHiggs<T>, standard_model::StandardModel<T>> get_models() const
    { return std::make_tuple(model, eft); }
-   std::tuple<MSSMEFTHiggs_slha<MSSMEFTHiggs<T>>, standard_model::StandardModel<T>> get_models_slha() const
-   { return std::make_tuple(MSSMEFTHiggs_slha<MSSMEFTHiggs<T>>(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.), eft); }
+   std::tuple<MSSMEFTHiggs<T>, standard_model::StandardModel<T>> get_models_slha() const
+   { return std::make_tuple(MSSMEFTHiggs<T>(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.), eft); }
 
    const MSSMEFTHiggs<T>& get_model() const
    { return model; }
    MSSMEFTHiggs<T>& get_model()
    { return model; }
-   MSSMEFTHiggs_slha<MSSMEFTHiggs<T>> get_model_slha() const
-   { return MSSMEFTHiggs_slha<MSSMEFTHiggs<T>>(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.); }
+   MSSMEFTHiggs<T> get_model_slha() const
+   { return MSSMEFTHiggs<T>(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.); }
 
    const standard_model::StandardModel<T>& get_sm() const
    { return eft; }
@@ -154,10 +154,17 @@ void MSSMEFTHiggs_spectrum_generator_interface<T>::write_running_couplings(
       return;
    }
 
-   MSSMEFTHiggs_parameter_getter parameter_getter;
-   Coupling_monitor<MSSMEFTHiggs_mass_eigenstates, MSSMEFTHiggs_parameter_getter>
-      coupling_monitor(tmp_model, parameter_getter);
+   // returns parameters at given scale
+   auto data_getter = [&tmp_model](double scale) {
+      tmp_model.run_to(scale);
+      return MSSMEFTHiggs_parameter_getter::get_parameters(tmp_model);
+   };
 
+   std::vector<std::string> parameter_names(
+      std::cbegin(MSSMEFTHiggs_info::parameter_names),
+      std::cend(MSSMEFTHiggs_info::parameter_names));
+
+   Coupling_monitor coupling_monitor(data_getter, parameter_names);
    coupling_monitor.run(start, stop, 100, true);
    coupling_monitor.write_to_file(filename);
 }

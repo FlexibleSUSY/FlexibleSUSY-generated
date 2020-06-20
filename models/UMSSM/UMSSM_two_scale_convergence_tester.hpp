@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:33:27
 
 #ifndef UMSSM_TWO_SCALE_CONVERGENCE_TESTER_H
 #define UMSSM_TWO_SCALE_CONVERGENCE_TESTER_H

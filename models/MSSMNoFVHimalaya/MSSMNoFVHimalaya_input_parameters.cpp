@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 17:34:03
 
 #include "MSSMNoFVHimalaya_input_parameters.hpp"
 #include "wrappers.hpp"

@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:28:00
 
 #ifndef NUTNMSSM_OBSERVABLES_H
 #define NUTNMSSM_OBSERVABLES_H

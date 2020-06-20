@@ -23,16 +23,18 @@ SplitMSSM_SUSY_BETAS_MK := \
 SplitMSSM_SOFT_BETAS_MK := \
 		$(DIR)/soft_betas.mk
 
-SplitMSSM_CXX_QFT_VERTICES_MK := \
+SplitMSSM_CXXQFT_VERTICES_MK := \
 		$(DIR)/cxx_qft/vertices.mk
+
+-include $(SplitMSSM_CXXQFT_VERTICES_MK)
+LIBSplitMSSM_CXXQFT_VERTICES_SRC ?= ''
 
 SplitMSSM_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
 SplitMSSM_INCLUDE_MK := \
 		$(SplitMSSM_SUSY_BETAS_MK) \
-		$(SplitMSSM_SOFT_BETAS_MK) \
-		$(SplitMSSM_CXX_QFT_VERTICES_MK)
+		$(SplitMSSM_SOFT_BETAS_MK)
 
 SplitMSSM_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.SplitMSSM_generated \
@@ -52,11 +54,15 @@ LIBSplitMSSM_SRC := \
 		$(DIR)/SplitMSSM_a_muon.cpp \
 		$(DIR)/SplitMSSM_edm.cpp \
 		$(DIR)/SplitMSSM_FFV_form_factors.cpp \
+		$(DIR)/SplitMSSM_f_to_f_conversion.cpp \
 		$(DIR)/SplitMSSM_l_to_lgamma.cpp \
+		$(DIR)/SplitMSSM_b_to_s_gamma.cpp \
 		$(DIR)/SplitMSSM_effective_couplings.cpp \
 		$(DIR)/SplitMSSM_info.cpp \
 		$(DIR)/SplitMSSM_input_parameters.cpp \
 		$(DIR)/SplitMSSM_mass_eigenstates.cpp \
+		$(DIR)/SplitMSSM_mass_eigenstates_decoupling_scheme.cpp \
+		$(DIR)/SplitMSSM_model_slha.cpp \
 		$(DIR)/SplitMSSM_observables.cpp \
 		$(DIR)/SplitMSSM_physical.cpp \
 		$(DIR)/SplitMSSM_slha_io.cpp \
@@ -64,6 +70,8 @@ LIBSplitMSSM_SRC := \
 		$(DIR)/SplitMSSM_susy_parameters.cpp \
 		$(DIR)/SplitMSSM_utilities.cpp \
 		$(DIR)/SplitMSSM_weinberg_angle.cpp
+
+LIBSplitMSSM_SRC += $(LIBSplitMSSM_CXXQFT_VERTICES_SRC)
 
 EXESplitMSSM_SRC := \
 		$(DIR)/run_SplitMSSM.cpp \
@@ -83,7 +91,9 @@ LIBSplitMSSM_HDR := \
 		$(DIR)/SplitMSSM_convergence_tester.hpp \
 		$(DIR)/SplitMSSM_edm.hpp \
 		$(DIR)/SplitMSSM_FFV_form_factors.hpp \
+		$(DIR)/SplitMSSM_f_to_f_conversion.hpp \
 		$(DIR)/SplitMSSM_l_to_lgamma.hpp \
+		$(DIR)/SplitMSSM_b_to_s_gamma.hpp \
 		$(DIR)/SplitMSSM_effective_couplings.hpp \
 		$(DIR)/SplitMSSM_ewsb_solver.hpp \
 		$(DIR)/SplitMSSM_ewsb_solver_interface.hpp \
@@ -93,6 +103,8 @@ LIBSplitMSSM_HDR := \
 		$(DIR)/SplitMSSM_input_parameters.hpp \
 		$(DIR)/SplitMSSM_low_scale_constraint.hpp \
 		$(DIR)/SplitMSSM_mass_eigenstates.hpp \
+		$(DIR)/SplitMSSM_mass_eigenstates_interface.hpp \
+		$(DIR)/SplitMSSM_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/SplitMSSM_model.hpp \
 		$(DIR)/SplitMSSM_model_slha.hpp \
 		$(DIR)/SplitMSSM_observables.hpp \
@@ -111,7 +123,7 @@ LIBSplitMSSM_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/SplitMSSM_fields.hpp \
 		$(DIR)/cxx_qft/SplitMSSM_vertices.hpp \
 		$(DIR)/cxx_qft/SplitMSSM_context_base.hpp \
-		$(DIR)/cxx_qft/SplitMSSM_npointfunctions.hpp
+		$(DIR)/cxx_qft/SplitMSSM_npointfunctions_wilsoncoeffs.hpp
 
 ifneq ($(findstring two_scale,$(SOLVERS)),)
 -include $(DIR)/two_scale.mk
@@ -129,7 +141,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(SplitMSSM_SUSY_BETAS_MK)
 -include $(SplitMSSM_SOFT_BETAS_MK)
--include $(SplitMSSM_CXX_QFT_VERTICES_MK)
+-include $(SplitMSSM_CXXQFT_VERTICES_MK)
 -include $(SplitMSSM_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
@@ -141,7 +153,7 @@ $(SplitMSSM_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(SplitMSSM_SOFT_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
-$(SplitMSSM_CXX_QFT_VERTICES_MK): run-metacode-$(MODNAME)
+$(SplitMSSM_CXXQFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(SplitMSSM_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
@@ -206,6 +218,7 @@ install-src::
 		$(Q)install -d $(SplitMSSM_INSTALL_DIR)
 		$(Q)install -d $(SplitMSSM_INSTALL_CXXQFT_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(LIBSplitMSSM_SRC) $(SplitMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBSplitMSSM_CXXQFT_VERTICES_SRC) $(SplitMSSM_INSTALL_CXXQFT_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(LIBSplitMSSM_HDR) $(SplitMSSM_INSTALL_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(LIBSplitMSSM_CXXQFT_HDR) $(SplitMSSM_INSTALL_CXXQFT_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(EXESplitMSSM_SRC) $(SplitMSSM_INSTALL_DIR)
@@ -213,6 +226,8 @@ install-src::
 		$(Q)install -m u=rw,g=r,o=r $(LLSplitMSSM_MMA) $(SplitMSSM_INSTALL_DIR)
 		$(Q)$(INSTALL_STRIPPED) $(SplitMSSM_MK) $(SplitMSSM_INSTALL_DIR) -m u=rw,g=r,o=r
 		$(Q)install -m u=rw,g=r,o=r $(SplitMSSM_INCLUDE_MK) $(SplitMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(SplitMSSM_CXXQFT_VERTICES_MK) $(SplitMSSM_INSTALL_CXXQFT_DIR)
+
 ifneq ($(SplitMSSM_SLHA_INPUT),)
 		$(Q)install -m u=rw,g=r,o=r $(SplitMSSM_SLHA_INPUT) $(SplitMSSM_INSTALL_DIR)
 endif
@@ -244,6 +259,7 @@ clean-$(MODNAME)-src:
 		$(Q)-rm -f $(LLSplitMSSM_MMA)
 		$(Q)-rm -f $(METACODE_STAMP_SplitMSSM)
 		$(Q)-rm -f $(SplitMSSM_INCLUDE_MK)
+		$(Q)-rm -f $(SplitMSSM_CXXQFT_VERTICES_MK)
 		$(Q)-rm -f $(SplitMSSM_SLHA_INPUT)
 		$(Q)-rm -f $(SplitMSSM_REFERENCES)
 		$(Q)-rm -f $(SplitMSSM_GNUPLOT)
@@ -270,7 +286,7 @@ pack-$(MODNAME)-src:
 		$(LIBSplitMSSM_SRC) $(LIBSplitMSSM_HDR) $(LIBSplitMSSM_CXXQFT_HDR) \
 		$(EXESplitMSSM_SRC) \
 		$(LLSplitMSSM_SRC) $(LLSplitMSSM_MMA) \
-		$(SplitMSSM_MK) $(SplitMSSM_INCLUDE_MK) \
+		$(SplitMSSM_MK) $(SplitMSSM_INCLUDE_MK) $(SplitMSSM_CXXQFT_VERTICES_MK) \
 		$(SplitMSSM_SLHA_INPUT) $(SplitMSSM_REFERENCES) \
 		$(SplitMSSM_GNUPLOT)
 
@@ -296,7 +312,7 @@ $(METACODE_STAMP_SplitMSSM):
 endif
 
 $(LIBSplitMSSM_DEP) $(EXESplitMSSM_DEP) $(LLSplitMSSM_DEP) $(LIBSplitMSSM_OBJ) $(EXESplitMSSM_OBJ) $(LLSplitMSSM_OBJ) $(LLSplitMSSM_LIB): \
-	CPPFLAGS += $(MODSplitMSSM_SUBMOD_INC) $(MODSplitMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODSplitMSSM_SUBMOD_INC) $(MODSplitMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS)  $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBSplitMSSM_DEP) $(EXESplitMSSM_DEP) $(LLSplitMSSM_DEP) $(LIBSplitMSSM_OBJ) $(EXESplitMSSM_OBJ) $(LLSplitMSSM_OBJ) $(LLSplitMSSM_LIB): \
@@ -310,13 +326,13 @@ $(LIBSplitMSSM): $(LIBSplitMSSM_OBJ)
 		@$(MSG)
 		$(Q)$(MODULE_MAKE_LIB_CMD) $@ $^
 
-$(DIR)/%.x: $(DIR)/%.o $(LIBSplitMSSM) $(MODSplitMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+$(DIR)/%.x: $(DIR)/%.o $(LIBSplitMSSM) $(MODSplitMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
-$(LLSplitMSSM_LIB): $(LLSplitMSSM_OBJ) $(LIBSplitMSSM) $(MODSplitMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+$(LLSplitMSSM_LIB): $(LLSplitMSSM_OBJ) $(LIBSplitMSSM) $(MODSplitMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS)
 
 ALLDEP += $(LIBSplitMSSM_DEP) $(EXESplitMSSM_DEP)
 ALLSRC += $(LIBSplitMSSM_SRC) $(EXESplitMSSM_SRC)

@@ -17,6 +17,6 @@
 #  ====================================================================
 
 
-LIBCMSSMSemiAnalytic_SRC += \
+LIBCMSSMSemiAnalytic_CXXQFT_VERTICES_SRC := \
 	models/CMSSMSemiAnalytic/cxx_qft/CMSSMSemiAnalytic_vertices_1.cpp \
 	models/CMSSMSemiAnalytic/cxx_qft/CMSSMSemiAnalytic_vertices_2.cpp

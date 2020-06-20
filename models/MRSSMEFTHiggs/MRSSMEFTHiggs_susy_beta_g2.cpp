@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:07:15
 
 #include "MRSSMEFTHiggs_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -37,10 +36,10 @@ double MRSSMEFTHiggs_susy_parameters::calc_beta_g2_1_loop(const Susy_traces& sus
 
    double beta_g2;
 
-   beta_g2 = Re(4*oneOver16PiSqr*Cube(g2));
+   beta_g2 = Re(4*Cube(g2));
 
 
-   return beta_g2;
+   return oneLoop * beta_g2;
 }
 
 /**
@@ -57,12 +56,12 @@ double MRSSMEFTHiggs_susy_parameters::calc_beta_g2_2_loop(const Susy_traces& sus
 
    double beta_g2;
 
-   beta_g2 = Re(0.2*twoLoop*Cube(g2)*(-30*traceYdAdjYd - 10*traceYeAdjYe - 30*
+   beta_g2 = Re(0.2*Cube(g2)*(-30*traceYdAdjYd - 10*traceYeAdjYe - 30*
       traceYuAdjYu - 10*AbsSqr(LamSD) - 10*AbsSqr(LamSU) - 35*AbsSqr(LamTD) -
       35*AbsSqr(LamTU) + 12*Sqr(g1) + 280*Sqr(g2) + 120*Sqr(g3)));
 
 
-   return beta_g2;
+   return twoLoop * beta_g2;
 }
 
 /**
@@ -81,7 +80,7 @@ double MRSSMEFTHiggs_susy_parameters::calc_beta_g2_3_loop(const Susy_traces& sus
    beta_g2 = 0;
 
 
-   return beta_g2;
+   return threeLoop * beta_g2;
 }
 
 /**
@@ -100,7 +99,7 @@ double MRSSMEFTHiggs_susy_parameters::calc_beta_g2_4_loop(const Susy_traces& sus
    beta_g2 = 0;
 
 
-   return beta_g2;
+   return fourLoop * beta_g2;
 }
 
 /**
@@ -119,7 +118,7 @@ double MRSSMEFTHiggs_susy_parameters::calc_beta_g2_5_loop(const Susy_traces& sus
    beta_g2 = 0;
 
 
-   return beta_g2;
+   return fiveLoop * beta_g2;
 }
 
 } // namespace flexiblesusy

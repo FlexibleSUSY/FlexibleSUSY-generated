@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:18:01
 
 #include "UMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -38,10 +37,10 @@ double UMSSM_susy_parameters::calc_beta_vS_1_loop(const Susy_traces& susy_traces
 
    double beta_vS;
 
-   beta_vS = Re(2*oneOver16PiSqr*vS*(-AbsSqr(Lambdax) + Sqr(gp)*Sqr(Qs)));
+   beta_vS = Re(2*vS*(-AbsSqr(Lambdax) + Sqr(gp)*Sqr(Qs)));
 
 
-   return beta_vS;
+   return oneLoop * beta_vS;
 }
 
 /**
@@ -68,18 +67,18 @@ double UMSSM_susy_parameters::calc_beta_vS_2_loop(const Susy_traces& susy_traces
 
    double beta_vS;
 
-   beta_vS = Re(-0.2*twoLoop*vS*(-30*traceYdAdjYd*AbsSqr(Lambdax) - 10*
-      traceYeAdjYe*AbsSqr(Lambdax) - 30*traceYuAdjYu*AbsSqr(Lambdax) - 10*
-      traceYvAdjYv*AbsSqr(Lambdax) + 15*Quad(gp)*Quad(Qs) + 6*AbsSqr(Lambdax)*
-      Sqr(g1) + 30*AbsSqr(Lambdax)*Sqr(g2) + 20*AbsSqr(Lambdax)*Sqr(gp)*Sqr(QHd
-      ) + 20*AbsSqr(Lambdax)*Sqr(gp)*Sqr(QHu) + 45*Quad(gp)*Sqr(Qd)*Sqr(Qs) +
-      15*Quad(gp)*Sqr(Qe)*Sqr(Qs) + 10*Quad(gp)*Sqr(QHd)*Sqr(Qs) + 10*Quad(gp)*
-      Sqr(QHu)*Sqr(Qs) + 30*Quad(gp)*Sqr(Ql)*Sqr(Qs) + 90*Quad(gp)*Sqr(Qq)*Sqr(
-      Qs) + 45*Quad(gp)*Sqr(Qs)*Sqr(Qu) + 15*Quad(gp)*Sqr(Qs)*Sqr(Qv) - 20*Sqr(
-      Conj(Lambdax))*Sqr(Lambdax)));
+   beta_vS = Re(-0.2*vS*(-30*traceYdAdjYd*AbsSqr(Lambdax) - 10*traceYeAdjYe*
+      AbsSqr(Lambdax) - 30*traceYuAdjYu*AbsSqr(Lambdax) - 10*traceYvAdjYv*
+      AbsSqr(Lambdax) + 15*Quad(gp)*Quad(Qs) + 6*AbsSqr(Lambdax)*Sqr(g1) + 30*
+      AbsSqr(Lambdax)*Sqr(g2) + 20*AbsSqr(Lambdax)*Sqr(gp)*Sqr(QHd) + 20*AbsSqr
+      (Lambdax)*Sqr(gp)*Sqr(QHu) + 45*Quad(gp)*Sqr(Qd)*Sqr(Qs) + 15*Quad(gp)*
+      Sqr(Qe)*Sqr(Qs) + 10*Quad(gp)*Sqr(QHd)*Sqr(Qs) + 10*Quad(gp)*Sqr(QHu)*Sqr
+      (Qs) + 30*Quad(gp)*Sqr(Ql)*Sqr(Qs) + 90*Quad(gp)*Sqr(Qq)*Sqr(Qs) + 45*
+      Quad(gp)*Sqr(Qs)*Sqr(Qu) + 15*Quad(gp)*Sqr(Qs)*Sqr(Qv) - 20*Sqr(Conj(
+      Lambdax))*Sqr(Lambdax)));
 
 
-   return beta_vS;
+   return twoLoop * beta_vS;
 }
 
 /**
@@ -98,7 +97,7 @@ double UMSSM_susy_parameters::calc_beta_vS_3_loop(const Susy_traces& susy_traces
    beta_vS = 0;
 
 
-   return beta_vS;
+   return threeLoop * beta_vS;
 }
 
 /**
@@ -117,7 +116,7 @@ double UMSSM_susy_parameters::calc_beta_vS_4_loop(const Susy_traces& susy_traces
    beta_vS = 0;
 
 
-   return beta_vS;
+   return fourLoop * beta_vS;
 }
 
 /**
@@ -136,7 +135,7 @@ double UMSSM_susy_parameters::calc_beta_vS_5_loop(const Susy_traces& susy_traces
    beta_vS = 0;
 
 
-   return beta_vS;
+   return fiveLoop * beta_vS;
 }
 
 } // namespace flexiblesusy

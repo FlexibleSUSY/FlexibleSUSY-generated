@@ -23,16 +23,18 @@ E6SSM_SUSY_BETAS_MK := \
 E6SSM_SOFT_BETAS_MK := \
 		$(DIR)/soft_betas.mk
 
-E6SSM_CXX_QFT_VERTICES_MK := \
+E6SSM_CXXQFT_VERTICES_MK := \
 		$(DIR)/cxx_qft/vertices.mk
+
+-include $(E6SSM_CXXQFT_VERTICES_MK)
+LIBE6SSM_CXXQFT_VERTICES_SRC ?= ''
 
 E6SSM_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
 E6SSM_INCLUDE_MK := \
 		$(E6SSM_SUSY_BETAS_MK) \
-		$(E6SSM_SOFT_BETAS_MK) \
-		$(E6SSM_CXX_QFT_VERTICES_MK)
+		$(E6SSM_SOFT_BETAS_MK)
 
 E6SSM_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.E6SSM_generated \
@@ -52,11 +54,15 @@ LIBE6SSM_SRC := \
 		$(DIR)/E6SSM_a_muon.cpp \
 		$(DIR)/E6SSM_edm.cpp \
 		$(DIR)/E6SSM_FFV_form_factors.cpp \
+		$(DIR)/E6SSM_f_to_f_conversion.cpp \
 		$(DIR)/E6SSM_l_to_lgamma.cpp \
+		$(DIR)/E6SSM_b_to_s_gamma.cpp \
 		$(DIR)/E6SSM_effective_couplings.cpp \
 		$(DIR)/E6SSM_info.cpp \
 		$(DIR)/E6SSM_input_parameters.cpp \
 		$(DIR)/E6SSM_mass_eigenstates.cpp \
+		$(DIR)/E6SSM_mass_eigenstates_decoupling_scheme.cpp \
+		$(DIR)/E6SSM_model_slha.cpp \
 		$(DIR)/E6SSM_observables.cpp \
 		$(DIR)/E6SSM_physical.cpp \
 		$(DIR)/E6SSM_slha_io.cpp \
@@ -64,6 +70,8 @@ LIBE6SSM_SRC := \
 		$(DIR)/E6SSM_susy_parameters.cpp \
 		$(DIR)/E6SSM_utilities.cpp \
 		$(DIR)/E6SSM_weinberg_angle.cpp
+
+LIBE6SSM_SRC += $(LIBE6SSM_CXXQFT_VERTICES_SRC)
 
 EXEE6SSM_SRC := \
 		$(DIR)/run_E6SSM.cpp \
@@ -83,7 +91,9 @@ LIBE6SSM_HDR := \
 		$(DIR)/E6SSM_convergence_tester.hpp \
 		$(DIR)/E6SSM_edm.hpp \
 		$(DIR)/E6SSM_FFV_form_factors.hpp \
+		$(DIR)/E6SSM_f_to_f_conversion.hpp \
 		$(DIR)/E6SSM_l_to_lgamma.hpp \
+		$(DIR)/E6SSM_b_to_s_gamma.hpp \
 		$(DIR)/E6SSM_effective_couplings.hpp \
 		$(DIR)/E6SSM_ewsb_solver.hpp \
 		$(DIR)/E6SSM_ewsb_solver_interface.hpp \
@@ -93,6 +103,8 @@ LIBE6SSM_HDR := \
 		$(DIR)/E6SSM_input_parameters.hpp \
 		$(DIR)/E6SSM_low_scale_constraint.hpp \
 		$(DIR)/E6SSM_mass_eigenstates.hpp \
+		$(DIR)/E6SSM_mass_eigenstates_interface.hpp \
+		$(DIR)/E6SSM_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/E6SSM_model.hpp \
 		$(DIR)/E6SSM_model_slha.hpp \
 		$(DIR)/E6SSM_observables.hpp \
@@ -111,7 +123,7 @@ LIBE6SSM_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/E6SSM_fields.hpp \
 		$(DIR)/cxx_qft/E6SSM_vertices.hpp \
 		$(DIR)/cxx_qft/E6SSM_context_base.hpp \
-		$(DIR)/cxx_qft/E6SSM_npointfunctions.hpp
+		$(DIR)/cxx_qft/E6SSM_npointfunctions_wilsoncoeffs.hpp
 
 ifneq ($(findstring two_scale,$(SOLVERS)),)
 -include $(DIR)/two_scale.mk
@@ -129,7 +141,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(E6SSM_SUSY_BETAS_MK)
 -include $(E6SSM_SOFT_BETAS_MK)
--include $(E6SSM_CXX_QFT_VERTICES_MK)
+-include $(E6SSM_CXXQFT_VERTICES_MK)
 -include $(E6SSM_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
@@ -141,7 +153,7 @@ $(E6SSM_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(E6SSM_SOFT_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
-$(E6SSM_CXX_QFT_VERTICES_MK): run-metacode-$(MODNAME)
+$(E6SSM_CXXQFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(E6SSM_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
@@ -206,6 +218,7 @@ install-src::
 		$(Q)install -d $(E6SSM_INSTALL_DIR)
 		$(Q)install -d $(E6SSM_INSTALL_CXXQFT_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(LIBE6SSM_SRC) $(E6SSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBE6SSM_CXXQFT_VERTICES_SRC) $(E6SSM_INSTALL_CXXQFT_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(LIBE6SSM_HDR) $(E6SSM_INSTALL_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(LIBE6SSM_CXXQFT_HDR) $(E6SSM_INSTALL_CXXQFT_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(EXEE6SSM_SRC) $(E6SSM_INSTALL_DIR)
@@ -213,6 +226,8 @@ install-src::
 		$(Q)install -m u=rw,g=r,o=r $(LLE6SSM_MMA) $(E6SSM_INSTALL_DIR)
 		$(Q)$(INSTALL_STRIPPED) $(E6SSM_MK) $(E6SSM_INSTALL_DIR) -m u=rw,g=r,o=r
 		$(Q)install -m u=rw,g=r,o=r $(E6SSM_INCLUDE_MK) $(E6SSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(E6SSM_CXXQFT_VERTICES_MK) $(E6SSM_INSTALL_CXXQFT_DIR)
+
 ifneq ($(E6SSM_SLHA_INPUT),)
 		$(Q)install -m u=rw,g=r,o=r $(E6SSM_SLHA_INPUT) $(E6SSM_INSTALL_DIR)
 endif
@@ -244,6 +259,7 @@ clean-$(MODNAME)-src:
 		$(Q)-rm -f $(LLE6SSM_MMA)
 		$(Q)-rm -f $(METACODE_STAMP_E6SSM)
 		$(Q)-rm -f $(E6SSM_INCLUDE_MK)
+		$(Q)-rm -f $(E6SSM_CXXQFT_VERTICES_MK)
 		$(Q)-rm -f $(E6SSM_SLHA_INPUT)
 		$(Q)-rm -f $(E6SSM_REFERENCES)
 		$(Q)-rm -f $(E6SSM_GNUPLOT)
@@ -270,7 +286,7 @@ pack-$(MODNAME)-src:
 		$(LIBE6SSM_SRC) $(LIBE6SSM_HDR) $(LIBE6SSM_CXXQFT_HDR) \
 		$(EXEE6SSM_SRC) \
 		$(LLE6SSM_SRC) $(LLE6SSM_MMA) \
-		$(E6SSM_MK) $(E6SSM_INCLUDE_MK) \
+		$(E6SSM_MK) $(E6SSM_INCLUDE_MK) $(E6SSM_CXXQFT_VERTICES_MK) \
 		$(E6SSM_SLHA_INPUT) $(E6SSM_REFERENCES) \
 		$(E6SSM_GNUPLOT)
 
@@ -296,7 +312,7 @@ $(METACODE_STAMP_E6SSM):
 endif
 
 $(LIBE6SSM_DEP) $(EXEE6SSM_DEP) $(LLE6SSM_DEP) $(LIBE6SSM_OBJ) $(EXEE6SSM_OBJ) $(LLE6SSM_OBJ) $(LLE6SSM_LIB): \
-	CPPFLAGS += $(MODE6SSM_SUBMOD_INC) $(MODE6SSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODE6SSM_SUBMOD_INC) $(MODE6SSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS)  $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBE6SSM_DEP) $(EXEE6SSM_DEP) $(LLE6SSM_DEP) $(LIBE6SSM_OBJ) $(EXEE6SSM_OBJ) $(LLE6SSM_OBJ) $(LLE6SSM_LIB): \
@@ -310,13 +326,13 @@ $(LIBE6SSM): $(LIBE6SSM_OBJ)
 		@$(MSG)
 		$(Q)$(MODULE_MAKE_LIB_CMD) $@ $^
 
-$(DIR)/%.x: $(DIR)/%.o $(LIBE6SSM) $(MODE6SSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+$(DIR)/%.x: $(DIR)/%.o $(LIBE6SSM) $(MODE6SSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
-$(LLE6SSM_LIB): $(LLE6SSM_OBJ) $(LIBE6SSM) $(MODE6SSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+$(LLE6SSM_LIB): $(LLE6SSM_OBJ) $(LIBE6SSM) $(MODE6SSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS)
 
 ALLDEP += $(LIBE6SSM_DEP) $(EXEE6SSM_DEP)
 ALLSRC += $(LIBE6SSM_SRC) $(EXEE6SSM_SRC)

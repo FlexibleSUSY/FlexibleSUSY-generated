@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:46:07
 
 #include "THDMII_two_scale_initial_guesser.hpp"
 #include "THDMII_two_scale_model.hpp"

@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 17:35:09
 
 #ifndef MSSMNoFVHimalaya_INITIAL_GUESSER_H
 #define MSSMNoFVHimalaya_INITIAL_GUESSER_H

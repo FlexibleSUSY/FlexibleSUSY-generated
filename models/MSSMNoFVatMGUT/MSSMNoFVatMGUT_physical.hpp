@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:43:38
 
 #ifndef MSSMNoFVatMGUT_PHYSICAL_H
 #define MSSMNoFVatMGUT_PHYSICAL_H

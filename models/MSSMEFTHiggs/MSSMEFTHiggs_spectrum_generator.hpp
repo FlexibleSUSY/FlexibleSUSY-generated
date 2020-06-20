@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:54:46
 
 #ifndef MSSMEFTHiggs_SPECTRUM_GENERATOR_H
 #define MSSMEFTHiggs_SPECTRUM_GENERATOR_H

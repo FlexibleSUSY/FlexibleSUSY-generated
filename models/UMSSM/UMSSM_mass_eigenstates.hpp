@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:33:10
 
 /**
  * @file UMSSM_mass_eigenstates.hpp
@@ -25,8 +24,7 @@
  *        value problem using the two_scale solver by solving EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Fri 10 Apr 2020 20:33:10 with FlexibleSUSY
- * 2.4.2 (git commit: a94199e5620b8684f5d30d0eece5757a5a72c4a4) and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #ifndef UMSSM_MASS_EIGENSTATES_H
@@ -35,6 +33,7 @@
 #include "UMSSM_info.hpp"
 #include "UMSSM_physical.hpp"
 #include "UMSSM_soft_parameters.hpp"
+#include "UMSSM_mass_eigenstates_interface.hpp"
 #include "loop_corrections.hpp"
 #include "threshold_corrections.hpp"
 #include "problems.hpp"
@@ -45,6 +44,8 @@
 
 #include <Eigen/Core>
 
+#define SUPER(p) UMSSM_soft_parameters::p
+
 namespace flexiblesusy {
 
 class UMSSM_ewsb_solver_interface;
@@ -52,7 +53,10 @@ class UMSSM_ewsb_solver_interface;
  * @class UMSSM_mass_eigenstates
  * @brief model class with routines for determing masses and mixinga and EWSB
  */
-class UMSSM_mass_eigenstates : public UMSSM_soft_parameters {
+class UMSSM_mass_eigenstates
+   : public UMSSM_soft_parameters
+   , public UMSSM_mass_eigenstates_interface
+{
 public:
    explicit UMSSM_mass_eigenstates(const UMSSM_input_parameters& input_ = UMSSM_input_parameters());
    UMSSM_mass_eigenstates(const UMSSM_mass_eigenstates&) = default;
@@ -60,6 +64,9 @@ public:
    virtual ~UMSSM_mass_eigenstates() = default;
    UMSSM_mass_eigenstates& operator=(const UMSSM_mass_eigenstates&) = default;
    UMSSM_mass_eigenstates& operator=(UMSSM_mass_eigenstates&&) = default;
+   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+
+   std::unique_ptr<UMSSM_mass_eigenstates_interface> clone() const override;
 
    /// number of EWSB equations
    static const int number_of_ewsb_equations = 3;
@@ -71,7 +78,6 @@ public:
    void clear_DRbar_parameters();
    Eigen::ArrayXd get_DRbar_masses() const;
    Eigen::ArrayXd get_DRbar_masses_and_mixings() const;
-   Eigen::ArrayXd get_extra_parameters() const;
    void do_calculate_sm_pole_masses(bool);
    bool do_calculate_sm_pole_masses() const;
    void do_calculate_bsm_pole_masses(bool);
@@ -88,151 +94,256 @@ public:
    const Threshold_corrections& get_threshold_corrections() const;
    void set_DRbar_masses(const Eigen::ArrayXd&);
    void set_DRbar_masses_and_mixings(const Eigen::ArrayXd&);
-   void set_extra_parameters(const Eigen::ArrayXd&);
    void set_pole_mass_loop_order(int);
    int get_pole_mass_loop_order() const;
-   void set_physical(const UMSSM_physical&);
    double get_ewsb_iteration_precision() const;
    double get_ewsb_loop_order() const;
-   const UMSSM_physical& get_physical() const;
-   UMSSM_physical& get_physical();
-   const Problems& get_problems() const;
-   Problems& get_problems();
    void set_ewsb_solver(const std::shared_ptr<UMSSM_ewsb_solver_interface>&);
    int solve_ewsb_tree_level();
    int solve_ewsb_one_loop();
    int solve_ewsb();            ///< solve EWSB at ewsb_loop_order level
 
-   void calculate_spectrum();
-   void clear_problems();
+   virtual void calculate_spectrum();
    std::string name() const;
    void run_to(double scale, double eps = -1.0) override;
-   void print(std::ostream& out = std::cerr) const override;
+   void print(std::ostream&) const override;
    void set_precision(double);
    double get_precision() const;
 
+   // mass_eigenstates_interface functions
+
+   void calculate_tree_level_mass_spectrum() override;
+   void calculate_pole_mass_spectrum() override;
+   void calculate_mass_spectrum() override;
+   int solve_ewsb_equations_tree_level() override;
+   int solve_ewsb_equations() override;
+   Eigen::ArrayXd get_tree_level_masses() const override;
+   Eigen::ArrayXd get_tree_level_masses_and_mixings() const override;
+   const UMSSM_input_parameters& get_input_parameters() const override;
+   UMSSM_input_parameters& get_input_parameters() override;
+   Eigen::ArrayXd get_extra_parameters() const override;
+   const UMSSM_physical& get_physical() const override;
+   UMSSM_physical& get_physical() override;
+   const Problems& get_problems() const override;
+   Problems& get_problems() override;
+   void set_tree_level_masses(const Eigen::ArrayXd&) override;
+   void set_tree_level_masses_and_mixings(const Eigen::ArrayXd&) override;
+   void set_extra_parameters(const Eigen::ArrayXd&) override;
+   void set_physical(const UMSSM_physical&) override;
+   void clear_problems() override;
+
    double get_lsp(UMSSM_info::Particles&) const;
 
-   double get_MVG() const { return MVG; }
-   double get_MGlu() const { return MGlu; }
-   const Eigen::Array<double,6,1>& get_MSd() const { return MSd; }
-   double get_MSd(int i) const { return MSd(i); }
-   const Eigen::Array<double,6,1>& get_MSv() const { return MSv; }
-   double get_MSv(int i) const { return MSv(i); }
-   const Eigen::Array<double,6,1>& get_MSu() const { return MSu; }
-   double get_MSu(int i) const { return MSu(i); }
-   const Eigen::Array<double,6,1>& get_MSe() const { return MSe; }
-   double get_MSe(int i) const { return MSe(i); }
-   const Eigen::Array<double,3,1>& get_Mhh() const { return Mhh; }
-   double get_Mhh(int i) const { return Mhh(i); }
-   const Eigen::Array<double,3,1>& get_MAh() const { return MAh; }
-   double get_MAh(int i) const { return MAh(i); }
-   const Eigen::Array<double,2,1>& get_MHpm() const { return MHpm; }
-   double get_MHpm(int i) const { return MHpm(i); }
-   const Eigen::Array<double,6,1>& get_MChi() const { return MChi; }
-   double get_MChi(int i) const { return MChi(i); }
-   const Eigen::Array<double,3,1>& get_MFv() const { return MFv; }
-   double get_MFv(int i) const { return MFv(i); }
-   const Eigen::Array<double,2,1>& get_MCha() const { return MCha; }
-   double get_MCha(int i) const { return MCha(i); }
-   const Eigen::Array<double,3,1>& get_MFe() const { return MFe; }
-   double get_MFe(int i) const { return MFe(i); }
-   const Eigen::Array<double,3,1>& get_MFd() const { return MFd; }
-   double get_MFd(int i) const { return MFd(i); }
-   const Eigen::Array<double,3,1>& get_MFu() const { return MFu; }
-   double get_MFu(int i) const { return MFu(i); }
-   double get_MVWm() const { return MVWm; }
-   double get_MVP() const { return MVP; }
-   double get_MVZ() const { return MVZ; }
-   double get_MVZp() const { return MVZp; }
+   const Eigen::Matrix<double,3,3>& get_Yd() const override { return SUPER(Yd); }
+   double get_Yd(int i, int k) const override { return SUPER(Yd(i,k)); }
+   const Eigen::Matrix<double,3,3>& get_Ye() const override { return SUPER(Ye); }
+   double get_Ye(int i, int k) const override { return SUPER(Ye(i,k)); }
+   double get_Lambdax() const override { return SUPER(Lambdax); }
+   const Eigen::Matrix<double,3,3>& get_Yv() const override { return SUPER(Yv); }
+   double get_Yv(int i, int k) const override { return SUPER(Yv(i,k)); }
+   const Eigen::Matrix<double,3,3>& get_Yu() const override { return SUPER(Yu); }
+   double get_Yu(int i, int k) const override { return SUPER(Yu(i,k)); }
+   double get_g1() const override { return SUPER(g1); }
+   double get_g2() const override { return SUPER(g2); }
+   double get_g3() const override { return SUPER(g3); }
+   double get_gp() const override { return SUPER(gp); }
+   double get_vd() const override { return SUPER(vd); }
+   double get_vu() const override { return SUPER(vu); }
+   double get_vS() const override { return SUPER(vS); }
+   const Eigen::Matrix<double,3,3>& get_TYd() const override { return SUPER(TYd); }
+   double get_TYd(int i, int k) const override { return SUPER(TYd(i,k)); }
+   const Eigen::Matrix<double,3,3>& get_TYe() const override { return SUPER(TYe); }
+   double get_TYe(int i, int k) const override { return SUPER(TYe(i,k)); }
+   double get_TLambdax() const override { return SUPER(TLambdax); }
+   const Eigen::Matrix<double,3,3>& get_TYv() const override { return SUPER(TYv); }
+   double get_TYv(int i, int k) const override { return SUPER(TYv(i,k)); }
+   const Eigen::Matrix<double,3,3>& get_TYu() const override { return SUPER(TYu); }
+   double get_TYu(int i, int k) const override { return SUPER(TYu(i,k)); }
+   const Eigen::Matrix<double,3,3>& get_mq2() const override { return SUPER(mq2); }
+   double get_mq2(int i, int k) const override { return SUPER(mq2(i,k)); }
+   const Eigen::Matrix<double,3,3>& get_ml2() const override { return SUPER(ml2); }
+   double get_ml2(int i, int k) const override { return SUPER(ml2(i,k)); }
+   double get_mHd2() const override { return SUPER(mHd2); }
+   double get_mHu2() const override { return SUPER(mHu2); }
+   const Eigen::Matrix<double,3,3>& get_md2() const override { return SUPER(md2); }
+   double get_md2(int i, int k) const override { return SUPER(md2(i,k)); }
+   const Eigen::Matrix<double,3,3>& get_mu2() const override { return SUPER(mu2); }
+   double get_mu2(int i, int k) const override { return SUPER(mu2(i,k)); }
+   const Eigen::Matrix<double,3,3>& get_me2() const override { return SUPER(me2); }
+   double get_me2(int i, int k) const override { return SUPER(me2(i,k)); }
+   const Eigen::Matrix<double,3,3>& get_mvR2() const override { return SUPER(mvR2); }
+   double get_mvR2(int i, int k) const override { return SUPER(mvR2(i,k)); }
+   double get_ms2() const override { return SUPER(ms2); }
+   double get_MassB() const override { return SUPER(MassB); }
+   double get_MassWB() const override { return SUPER(MassWB); }
+   double get_MassG() const override { return SUPER(MassG); }
+   double get_MassU() const override { return SUPER(MassU); }
+
+   void set_Yd(const Eigen::Matrix<double,3,3>& Yd_) override { Yd = Yd_; }
+   void set_Yd(int i, int k, const double& value) override { Yd(i,k) = value; }
+   void set_Ye(const Eigen::Matrix<double,3,3>& Ye_) override { Ye = Ye_; }
+   void set_Ye(int i, int k, const double& value) override { Ye(i,k) = value; }
+   void set_Lambdax(double Lambdax_) override { Lambdax = Lambdax_; }
+   void set_Yv(const Eigen::Matrix<double,3,3>& Yv_) override { Yv = Yv_; }
+   void set_Yv(int i, int k, const double& value) override { Yv(i,k) = value; }
+   void set_Yu(const Eigen::Matrix<double,3,3>& Yu_) override { Yu = Yu_; }
+   void set_Yu(int i, int k, const double& value) override { Yu(i,k) = value; }
+   void set_g1(double g1_) override { g1 = g1_; }
+   void set_g2(double g2_) override { g2 = g2_; }
+   void set_g3(double g3_) override { g3 = g3_; }
+   void set_gp(double gp_) override { gp = gp_; }
+   void set_vd(double vd_) override { vd = vd_; }
+   void set_vu(double vu_) override { vu = vu_; }
+   void set_vS(double vS_) override { vS = vS_; }
+   void set_TYd(const Eigen::Matrix<double,3,3>& TYd_) override { TYd = TYd_; }
+   void set_TYd(int i, int k, const double& value) override { TYd(i,k) = value; }
+   void set_TYe(const Eigen::Matrix<double,3,3>& TYe_) override { TYe = TYe_; }
+   void set_TYe(int i, int k, const double& value) override { TYe(i,k) = value; }
+   void set_TLambdax(double TLambdax_) override { TLambdax = TLambdax_; }
+   void set_TYv(const Eigen::Matrix<double,3,3>& TYv_) override { TYv = TYv_; }
+   void set_TYv(int i, int k, const double& value) override { TYv(i,k) = value; }
+   void set_TYu(const Eigen::Matrix<double,3,3>& TYu_) override { TYu = TYu_; }
+   void set_TYu(int i, int k, const double& value) override { TYu(i,k) = value; }
+   void set_mq2(const Eigen::Matrix<double,3,3>& mq2_) override { mq2 = mq2_; }
+   void set_mq2(int i, int k, const double& value) override { mq2(i,k) = value; }
+   void set_ml2(const Eigen::Matrix<double,3,3>& ml2_) override { ml2 = ml2_; }
+   void set_ml2(int i, int k, const double& value) override { ml2(i,k) = value; }
+   void set_mHd2(double mHd2_) override { mHd2 = mHd2_; }
+   void set_mHu2(double mHu2_) override { mHu2 = mHu2_; }
+   void set_md2(const Eigen::Matrix<double,3,3>& md2_) override { md2 = md2_; }
+   void set_md2(int i, int k, const double& value) override { md2(i,k) = value; }
+   void set_mu2(const Eigen::Matrix<double,3,3>& mu2_) override { mu2 = mu2_; }
+   void set_mu2(int i, int k, const double& value) override { mu2(i,k) = value; }
+   void set_me2(const Eigen::Matrix<double,3,3>& me2_) override { me2 = me2_; }
+   void set_me2(int i, int k, const double& value) override { me2(i,k) = value; }
+   void set_mvR2(const Eigen::Matrix<double,3,3>& mvR2_) override { mvR2 = mvR2_; }
+   void set_mvR2(int i, int k, const double& value) override { mvR2(i,k) = value; }
+   void set_ms2(double ms2_) override { ms2 = ms2_; }
+   void set_MassB(double MassB_) override { MassB = MassB_; }
+   void set_MassWB(double MassWB_) override { MassWB = MassWB_; }
+   void set_MassG(double MassG_) override { MassG = MassG_; }
+   void set_MassU(double MassU_) override { MassU = MassU_; }
+
+   double get_MVG() const override { return MVG; }
+   double get_MGlu() const override { return MGlu; }
+   const Eigen::Array<double,6,1>& get_MSd() const override { return MSd; }
+   double get_MSd(int i) const override { return MSd(i); }
+   const Eigen::Array<double,6,1>& get_MSv() const override { return MSv; }
+   double get_MSv(int i) const override { return MSv(i); }
+   const Eigen::Array<double,6,1>& get_MSu() const override { return MSu; }
+   double get_MSu(int i) const override { return MSu(i); }
+   const Eigen::Array<double,6,1>& get_MSe() const override { return MSe; }
+   double get_MSe(int i) const override { return MSe(i); }
+   const Eigen::Array<double,3,1>& get_Mhh() const override { return Mhh; }
+   double get_Mhh(int i) const override { return Mhh(i); }
+   const Eigen::Array<double,3,1>& get_MAh() const override { return MAh; }
+   double get_MAh(int i) const override { return MAh(i); }
+   const Eigen::Array<double,2,1>& get_MHpm() const override { return MHpm; }
+   double get_MHpm(int i) const override { return MHpm(i); }
+   const Eigen::Array<double,6,1>& get_MChi() const override { return MChi; }
+   double get_MChi(int i) const override { return MChi(i); }
+   const Eigen::Array<double,3,1>& get_MFv() const override { return MFv; }
+   double get_MFv(int i) const override { return MFv(i); }
+   const Eigen::Array<double,2,1>& get_MCha() const override { return MCha; }
+   double get_MCha(int i) const override { return MCha(i); }
+   const Eigen::Array<double,3,1>& get_MFe() const override { return MFe; }
+   double get_MFe(int i) const override { return MFe(i); }
+   const Eigen::Array<double,3,1>& get_MFd() const override { return MFd; }
+   double get_MFd(int i) const override { return MFd(i); }
+   const Eigen::Array<double,3,1>& get_MFu() const override { return MFu; }
+   double get_MFu(int i) const override { return MFu(i); }
+   double get_MVWm() const override { return MVWm; }
+   double get_MVP() const override { return MVP; }
+   double get_MVZ() const override { return MVZ; }
+   double get_MVZp() const override { return MVZp; }
 
    
-   Eigen::Array<double,1,1> get_MChargedHiggs() const;
+   Eigen::Array<double,1,1> get_MChargedHiggs() const override;
 
-   Eigen::Array<double,1,1> get_MPseudoscalarHiggs() const;
+   Eigen::Array<double,1,1> get_MPseudoscalarHiggs() const override;
 
-   const Eigen::Matrix<double,6,6>& get_ZD() const { return ZD; }
-   double get_ZD(int i, int k) const { return ZD(i,k); }
-   const Eigen::Matrix<double,6,6>& get_ZV() const { return ZV; }
-   double get_ZV(int i, int k) const { return ZV(i,k); }
-   const Eigen::Matrix<double,6,6>& get_ZU() const { return ZU; }
-   double get_ZU(int i, int k) const { return ZU(i,k); }
-   const Eigen::Matrix<double,6,6>& get_ZE() const { return ZE; }
-   double get_ZE(int i, int k) const { return ZE(i,k); }
-   const Eigen::Matrix<double,3,3>& get_ZH() const { return ZH; }
-   double get_ZH(int i, int k) const { return ZH(i,k); }
-   const Eigen::Matrix<double,3,3>& get_ZA() const { return ZA; }
-   double get_ZA(int i, int k) const { return ZA(i,k); }
-   const Eigen::Matrix<double,2,2>& get_ZP() const { return ZP; }
-   double get_ZP(int i, int k) const { return ZP(i,k); }
-   const Eigen::Matrix<std::complex<double>,6,6>& get_ZN() const { return ZN; }
-   std::complex<double> get_ZN(int i, int k) const { return ZN(i,k); }
-   const Eigen::Matrix<std::complex<double>,3,3>& get_ZVL() const { return ZVL; }
-   std::complex<double> get_ZVL(int i, int k) const { return ZVL(i,k); }
-   const Eigen::Matrix<std::complex<double>,3,3>& get_ZVR() const { return ZVR; }
-   std::complex<double> get_ZVR(int i, int k) const { return ZVR(i,k); }
-   const Eigen::Matrix<std::complex<double>,2,2>& get_UM() const { return UM; }
-   std::complex<double> get_UM(int i, int k) const { return UM(i,k); }
-   const Eigen::Matrix<std::complex<double>,2,2>& get_UP() const { return UP; }
-   std::complex<double> get_UP(int i, int k) const { return UP(i,k); }
-   const Eigen::Matrix<std::complex<double>,3,3>& get_ZEL() const { return ZEL; }
-   std::complex<double> get_ZEL(int i, int k) const { return ZEL(i,k); }
-   const Eigen::Matrix<std::complex<double>,3,3>& get_ZER() const { return ZER; }
-   std::complex<double> get_ZER(int i, int k) const { return ZER(i,k); }
-   const Eigen::Matrix<std::complex<double>,3,3>& get_ZDL() const { return ZDL; }
-   std::complex<double> get_ZDL(int i, int k) const { return ZDL(i,k); }
-   const Eigen::Matrix<std::complex<double>,3,3>& get_ZDR() const { return ZDR; }
-   std::complex<double> get_ZDR(int i, int k) const { return ZDR(i,k); }
-   const Eigen::Matrix<std::complex<double>,3,3>& get_ZUL() const { return ZUL; }
-   std::complex<double> get_ZUL(int i, int k) const { return ZUL(i,k); }
-   const Eigen::Matrix<std::complex<double>,3,3>& get_ZUR() const { return ZUR; }
-   std::complex<double> get_ZUR(int i, int k) const { return ZUR(i,k); }
-   const Eigen::Matrix<double,3,3>& get_ZZ() const { return ZZ; }
-   double get_ZZ(int i, int k) const { return ZZ(i,k); }
+   const Eigen::Matrix<double,6,6>& get_ZD() const override { return ZD; }
+   double get_ZD(int i, int k) const override { return ZD(i,k); }
+   const Eigen::Matrix<double,6,6>& get_ZV() const override { return ZV; }
+   double get_ZV(int i, int k) const override { return ZV(i,k); }
+   const Eigen::Matrix<double,6,6>& get_ZU() const override { return ZU; }
+   double get_ZU(int i, int k) const override { return ZU(i,k); }
+   const Eigen::Matrix<double,6,6>& get_ZE() const override { return ZE; }
+   double get_ZE(int i, int k) const override { return ZE(i,k); }
+   const Eigen::Matrix<double,3,3>& get_ZH() const override { return ZH; }
+   double get_ZH(int i, int k) const override { return ZH(i,k); }
+   const Eigen::Matrix<double,3,3>& get_ZA() const override { return ZA; }
+   double get_ZA(int i, int k) const override { return ZA(i,k); }
+   const Eigen::Matrix<double,2,2>& get_ZP() const override { return ZP; }
+   double get_ZP(int i, int k) const override { return ZP(i,k); }
+   const Eigen::Matrix<std::complex<double>,6,6>& get_ZN() const override { return ZN; }
+   std::complex<double> get_ZN(int i, int k) const override { return ZN(i,k); }
+   const Eigen::Matrix<std::complex<double>,3,3>& get_ZVL() const override { return ZVL; }
+   std::complex<double> get_ZVL(int i, int k) const override { return ZVL(i,k); }
+   const Eigen::Matrix<std::complex<double>,3,3>& get_ZVR() const override { return ZVR; }
+   std::complex<double> get_ZVR(int i, int k) const override { return ZVR(i,k); }
+   const Eigen::Matrix<std::complex<double>,2,2>& get_UM() const override { return UM; }
+   std::complex<double> get_UM(int i, int k) const override { return UM(i,k); }
+   const Eigen::Matrix<std::complex<double>,2,2>& get_UP() const override { return UP; }
+   std::complex<double> get_UP(int i, int k) const override { return UP(i,k); }
+   const Eigen::Matrix<std::complex<double>,3,3>& get_ZEL() const override { return ZEL; }
+   std::complex<double> get_ZEL(int i, int k) const override { return ZEL(i,k); }
+   const Eigen::Matrix<std::complex<double>,3,3>& get_ZER() const override { return ZER; }
+   std::complex<double> get_ZER(int i, int k) const override { return ZER(i,k); }
+   const Eigen::Matrix<std::complex<double>,3,3>& get_ZDL() const override { return ZDL; }
+   std::complex<double> get_ZDL(int i, int k) const override { return ZDL(i,k); }
+   const Eigen::Matrix<std::complex<double>,3,3>& get_ZDR() const override { return ZDR; }
+   std::complex<double> get_ZDR(int i, int k) const override { return ZDR(i,k); }
+   const Eigen::Matrix<std::complex<double>,3,3>& get_ZUL() const override { return ZUL; }
+   std::complex<double> get_ZUL(int i, int k) const override { return ZUL(i,k); }
+   const Eigen::Matrix<std::complex<double>,3,3>& get_ZUR() const override { return ZUR; }
+   std::complex<double> get_ZUR(int i, int k) const override { return ZUR(i,k); }
+   const Eigen::Matrix<double,3,3>& get_ZZ() const override { return ZZ; }
+   double get_ZZ(int i, int k) const override { return ZZ(i,k); }
 
-   void set_PhaseGlu(std::complex<double> PhaseGlu_) { PhaseGlu = PhaseGlu_; }
-   std::complex<double> get_PhaseGlu() const { return PhaseGlu; }
+   void set_PhaseGlu(std::complex<double> PhaseGlu_) override { PhaseGlu = PhaseGlu_; }
+   std::complex<double> get_PhaseGlu() const override { return PhaseGlu; }
 
 
 
-   double get_mass_matrix_VG() const;
-   void calculate_MVG();
-   double get_mass_matrix_Glu() const;
-   void calculate_MGlu();
-   Eigen::Matrix<double,6,6> get_mass_matrix_Sd() const;
-   void calculate_MSd();
-   Eigen::Matrix<double,6,6> get_mass_matrix_Sv() const;
-   void calculate_MSv();
-   Eigen::Matrix<double,6,6> get_mass_matrix_Su() const;
-   void calculate_MSu();
-   Eigen::Matrix<double,6,6> get_mass_matrix_Se() const;
-   void calculate_MSe();
-   Eigen::Matrix<double,3,3> get_mass_matrix_hh() const;
-   void calculate_Mhh();
-   Eigen::Matrix<double,3,3> get_mass_matrix_Ah() const;
-   void calculate_MAh();
-   Eigen::Matrix<double,2,2> get_mass_matrix_Hpm() const;
-   void calculate_MHpm();
-   Eigen::Matrix<double,6,6> get_mass_matrix_Chi() const;
-   void calculate_MChi();
-   Eigen::Matrix<double,3,3> get_mass_matrix_Fv() const;
-   void calculate_MFv();
-   Eigen::Matrix<double,2,2> get_mass_matrix_Cha() const;
-   void calculate_MCha();
-   Eigen::Matrix<double,3,3> get_mass_matrix_Fe() const;
-   void calculate_MFe();
-   Eigen::Matrix<double,3,3> get_mass_matrix_Fd() const;
-   void calculate_MFd();
-   Eigen::Matrix<double,3,3> get_mass_matrix_Fu() const;
-   void calculate_MFu();
-   double get_mass_matrix_VWm() const;
-   void calculate_MVWm();
-   Eigen::Matrix<double,3,3> get_mass_matrix_VPVZVZp() const;
-   void calculate_MVPVZVZp();
+   double get_mass_matrix_VG() const override;
+   void calculate_MVG() override;
+   double get_mass_matrix_Glu() const override;
+   void calculate_MGlu() override;
+   Eigen::Matrix<double,6,6> get_mass_matrix_Sd() const override;
+   void calculate_MSd() override;
+   Eigen::Matrix<double,6,6> get_mass_matrix_Sv() const override;
+   void calculate_MSv() override;
+   Eigen::Matrix<double,6,6> get_mass_matrix_Su() const override;
+   void calculate_MSu() override;
+   Eigen::Matrix<double,6,6> get_mass_matrix_Se() const override;
+   void calculate_MSe() override;
+   Eigen::Matrix<double,3,3> get_mass_matrix_hh() const override;
+   void calculate_Mhh() override;
+   Eigen::Matrix<double,3,3> get_mass_matrix_Ah() const override;
+   void calculate_MAh() override;
+   Eigen::Matrix<double,2,2> get_mass_matrix_Hpm() const override;
+   void calculate_MHpm() override;
+   Eigen::Matrix<double,6,6> get_mass_matrix_Chi() const override;
+   void calculate_MChi() override;
+   Eigen::Matrix<double,3,3> get_mass_matrix_Fv() const override;
+   void calculate_MFv() override;
+   Eigen::Matrix<double,2,2> get_mass_matrix_Cha() const override;
+   void calculate_MCha() override;
+   Eigen::Matrix<double,3,3> get_mass_matrix_Fe() const override;
+   void calculate_MFe() override;
+   Eigen::Matrix<double,3,3> get_mass_matrix_Fd() const override;
+   void calculate_MFd() override;
+   Eigen::Matrix<double,3,3> get_mass_matrix_Fu() const override;
+   void calculate_MFu() override;
+   double get_mass_matrix_VWm() const override;
+   void calculate_MVWm() override;
+   Eigen::Matrix<double,3,3> get_mass_matrix_VPVZVZp() const override;
+   void calculate_MVPVZVZp() override;
 
-   double get_ewsb_eq_hh_1() const;
-   double get_ewsb_eq_hh_2() const;
-   double get_ewsb_eq_hh_3() const;
+   double get_ewsb_eq_hh_1() const override;
+   double get_ewsb_eq_hh_2() const override;
+   double get_ewsb_eq_hh_3() const override;
 
    std::complex<double> CpUSdconjUSdVZVZ(int gO1, int gO2) const;
    std::complex<double> CpUSdconjUSdVZpVZp(int gO1, int gO2) const;
@@ -877,15 +988,15 @@ public:
    double calculate_MFe_DRbar(double, int) const;
    double calculate_MFu_DRbar(double, int) const;
    double calculate_MFd_DRbar(double, int) const;
-   double calculate_MVP_DRbar(double);
-   double calculate_MVZ_DRbar(double);
-   double calculate_MVWm_DRbar(double);
+   double calculate_MVP_DRbar(double) const;
+   double calculate_MVZ_DRbar(double) const;
+   double calculate_MVWm_DRbar(double) const;
 
-   double v() const;
-   double Betax() const;
-   double ThetaW() const;
-   double ThetaWp() const;
-   double VEV() const;
+   double v() const override;
+   double Betax() const override;
+   double ThetaW() const override;
+   double ThetaWp() const override;
+   double VEV() const override;
 
 
 private:
@@ -897,9 +1008,9 @@ private:
    double precision{1.e-4};               ///< RG running precision
    double ewsb_iteration_precision{1.e-5};///< precision goal of EWSB solution
    UMSSM_physical physical{}; ///< contains the pole masses and mixings
-   Problems problems{UMSSM_info::model_name,
-                     &UMSSM_info::particle_names_getter,
-                     &UMSSM_info::parameter_names_getter}; ///< problems
+   mutable Problems problems{UMSSM_info::model_name,
+                             &UMSSM_info::particle_names_getter,
+                             &UMSSM_info::parameter_names_getter}; ///< problems
    Loop_corrections loop_corrections{}; ///< used pole mass corrections
    std::shared_ptr<UMSSM_ewsb_solver_interface> ewsb_solver{};
    Threshold_corrections threshold_corrections{}; ///< used threshold corrections
@@ -971,5 +1082,7 @@ private:
 std::ostream& operator<<(std::ostream&, const UMSSM_mass_eigenstates&);
 
 } // namespace flexiblesusy
+
+#undef SUPER
 
 #endif

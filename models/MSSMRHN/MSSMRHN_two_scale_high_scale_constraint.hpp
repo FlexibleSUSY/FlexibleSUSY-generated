@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:40:36
 
 #ifndef MSSMRHN_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
 #define MSSMRHN_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
@@ -38,6 +37,8 @@ public:
    MSSMRHN_high_scale_constraint() = default;
    MSSMRHN_high_scale_constraint(MSSMRHN<Two_scale>*);
    virtual ~MSSMRHN_high_scale_constraint() = default;
+   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+
    virtual void apply() override;
    virtual double get_scale() const override;
    virtual std::string name() const override { return "MSSMRHN high-scale constraint"; }

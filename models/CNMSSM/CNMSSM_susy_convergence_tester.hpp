@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 17:55:55
 
 #ifndef CNMSSM_SUSY_CONVERGENCE_TESTER_H
 #define CNMSSM_SUSY_CONVERGENCE_TESTER_H

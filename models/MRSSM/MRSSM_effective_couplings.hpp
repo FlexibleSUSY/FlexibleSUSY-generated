@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:59:01
 
 #ifndef MRSSM_EFFECTIVE_COUPLINGS_H
 #define MRSSM_EFFECTIVE_COUPLINGS_H

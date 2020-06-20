@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:44:45
 
 #include "THDMIIMSSMBC_two_scale_spectrum_generator.hpp"
 #include "THDMIIMSSMBC_input_parameters.hpp"
@@ -90,6 +89,9 @@ void THDMIIMSSMBC_spectrum_generator<Two_scale>::run_except(const softsusy::QedQ
    high_scale_constraint.initialize();
    susy_scale_constraint.initialize();
    low_scale_constraint .initialize();
+
+   low_scale_constraint.set_SM_like_Higgs_index(
+      settings.get(Spectrum_generator_settings::eft_higgs_index));
 
    THDMIIMSSMBC_convergence_tester<Two_scale> convergence_tester(
       &model, settings.get(Spectrum_generator_settings::precision));

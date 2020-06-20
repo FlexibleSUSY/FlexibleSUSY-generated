@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 17:55:57
 
 #include "CNMSSM_semi_analytic_low_scale_constraint.hpp"
 #include "CNMSSM_semi_analytic_model.hpp"
@@ -25,7 +24,6 @@
 #include "wrappers.hpp"
 #include "logger.hpp"
 #include "ew_input.hpp"
-#include "gsl_utils.hpp"
 #include "minimizer.hpp"
 #include "root_finder.hpp"
 #include "threshold_loop_functions.hpp"
@@ -232,6 +230,7 @@ double CNMSSM_low_scale_constraint<Semi_analytic>::calculate_theta_w()
    sm_pars.mz_pole = qedqcd.displayPoleMZ();
    sm_pars.mt_pole = qedqcd.displayPoleMt();
    sm_pars.alpha_s = calculate_alpha_s_SM5_at(qedqcd, qedqcd.displayPoleMt());
+   sm_pars.higgs_index = higgs_idx;
 
    const int number_of_iterations =
        std::max(20, static_cast<int>(std::abs(-log10(MODEL->get_precision()) * 10)

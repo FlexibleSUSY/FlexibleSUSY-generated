@@ -21,7 +21,6 @@
  * @brief contains wrapper class for model class in SLHA convention
  */
 
-// File generated at Fri 10 Apr 2020 20:45:48
 
 #ifndef MSSMatMGUT_SLHA_H
 #define MSSMatMGUT_SLHA_H
@@ -29,11 +28,6 @@
 #include "MSSMatMGUT_input_parameters.hpp"
 #include "MSSMatMGUT_mass_eigenstates.hpp"
 #include "MSSMatMGUT_physical.hpp"
-
-#include "ckm.hpp"
-#include "linalg2.hpp"
-#include "pmns.hpp"
-#include "slha_io.hpp"
 #include "wrappers.hpp"
 
 #define LOCALPHYSICAL(p) physical.p
@@ -50,11 +44,10 @@ namespace flexiblesusy {
  * @tparam Model model class to wrap
  */
 
-template <class Model>
-class MSSMatMGUT_slha : public Model {
+class MSSMatMGUT_slha : public MSSMatMGUT_mass_eigenstates {
 public:
-   explicit MSSMatMGUT_slha(const MSSMatMGUT_input_parameters& input_ = MSSMatMGUT_input_parameters());
-   explicit MSSMatMGUT_slha(const Model&, bool do_convert_masses_to_slha = true);
+   explicit MSSMatMGUT_slha(const MSSMatMGUT_input_parameters& input_ = MSSMatMGUT_input_parameters(), bool do_convert_masses_to_slha = true);
+   explicit MSSMatMGUT_slha(const MSSMatMGUT_mass_eigenstates&, bool do_convert_masses_to_slha = true);
    MSSMatMGUT_slha(const MSSMatMGUT_slha&) = default;
    MSSMatMGUT_slha(MSSMatMGUT_slha&&) = default;
    virtual ~MSSMatMGUT_slha() = default;
@@ -212,147 +205,6 @@ private:
    void convert_trilinear_couplings_to_slha();
    void convert_soft_squared_masses_to_slha();
 };
-
-template <class Model>
-MSSMatMGUT_slha<Model>::MSSMatMGUT_slha(const MSSMatMGUT_input_parameters& input_)
-   : Model(input_)
-{
-}
-
-/**
- * Copy constructor.  Copies from base class (model class in
- * BPMZ convention) and converts parameters to SLHA.
- *
- * @param model_ model class in BPMZ convention
- * @param do_convert_masses_to_slha whether to convert majorana
- *    fermion masses to SLHA convention (allow them to be negative)
- */
-template <class Model>
-MSSMatMGUT_slha<Model>::MSSMatMGUT_slha(const Model& model_,
-                            bool do_convert_masses_to_slha)
-   : Model(model_)
-   , convert_masses_to_slha(do_convert_masses_to_slha)
-{
-   convert_to_slha();
-}
-
-template <class Model>
-void MSSMatMGUT_slha<Model>::clear()
-{
-   Model::clear();
-   physical_slha.clear();
-}
-
-template <class Model>
-void MSSMatMGUT_slha<Model>::calculate_spectrum()
-{
-   Model::calculate_spectrum();
-   convert_to_slha();
-}
-
-template <class Model>
-void MSSMatMGUT_slha<Model>::convert_to_slha()
-{
-   physical_slha = this->get_physical();
-
-   if (convert_masses_to_slha)
-      physical_slha.convert_to_slha();
-
-   convert_yukawa_couplings_to_slha();
-   calculate_ckm_matrix();
-   calculate_pmns_matrix();
-   convert_trilinear_couplings_to_slha();
-   convert_soft_squared_masses_to_slha();
-}
-
-template <class Model>
-void MSSMatMGUT_slha<Model>::calculate_ckm_matrix()
-{
-   ckm = ZUL_slha * ZDL_slha.adjoint();
-   CKM_parameters::to_pdg_convention(ckm, ZUL_slha, ZDL_slha, ZUR_slha, ZDR_slha);
-
-}
-
-template <class Model>
-void MSSMatMGUT_slha<Model>::calculate_pmns_matrix()
-{
-   pmns << 1, 0, 0, 0, 1, 0, 0, 0, 1;
-
-}
-
-/**
- * Convert Yukawa couplings to SLHA convention
- */
-template <class Model>
-void MSSMatMGUT_slha<Model>::convert_yukawa_couplings_to_slha()
-{
-   fs_svd(MODELPARAMETER(Yu), Yu_slha, ZUR_slha, ZUL_slha);
-   fs_svd(MODELPARAMETER(Yd), Yd_slha, ZDR_slha, ZDL_slha);
-   fs_svd(MODELPARAMETER(Ye), Ye_slha, ZER_slha, ZEL_slha);
-
-}
-
-/**
- * Convert trilinear couplings to SLHA convention
- */
-template <class Model>
-void MSSMatMGUT_slha<Model>::convert_trilinear_couplings_to_slha()
-{
-   TYu_slha = (ZUR_slha.conjugate() * MODELPARAMETER(TYu) * ZUL_slha.adjoint()).real();
-   TYd_slha = (ZDR_slha.conjugate() * MODELPARAMETER(TYd) * ZDL_slha.adjoint()).real();
-   TYe_slha = (ZER_slha.conjugate() * MODELPARAMETER(TYe) * ZEL_slha.adjoint()).real();
-
-}
-
-/**
- * Convert soft-breaking squared mass parameters to SLHA convention
- */
-template <class Model>
-void MSSMatMGUT_slha<Model>::convert_soft_squared_masses_to_slha()
-{
-   mq2_slha = (ZDL_slha * MODELPARAMETER(mq2) * ZDL_slha.adjoint()).real();
-   mu2_slha = (ZUR_slha.conjugate() * MODELPARAMETER(mu2) * ZUR_slha.transpose()).real();
-   md2_slha = (ZDR_slha.conjugate() * MODELPARAMETER(md2) * ZDR_slha.transpose()).real();
-   ml2_slha = (ZEL_slha * MODELPARAMETER(ml2) * ZEL_slha.adjoint()).real();
-   me2_slha = (ZER_slha.conjugate() * MODELPARAMETER(me2) * ZER_slha.transpose()).real();
-
-}
-
-template <class Model>
-const MSSMatMGUT_physical& MSSMatMGUT_slha<Model>::get_physical_slha() const
-{
-   return physical_slha;
-}
-
-template <class Model>
-MSSMatMGUT_physical& MSSMatMGUT_slha<Model>::get_physical_slha()
-{
-   return physical_slha;
-}
-
-template <class Model>
-void MSSMatMGUT_slha<Model>::print(std::ostream& ostr) const
-{
-   Model::print(ostr);
-
-   ostr << "----------------------------------------\n"
-           "SLHA convention:\n"
-           "----------------------------------------\n";
-   physical_slha.print(ostr);
-}
-
-template <class Model>
-void MSSMatMGUT_slha<Model>::set_convert_masses_to_slha(bool flag)
-{
-   convert_masses_to_slha = flag;
-}
-
-template <class Model>
-std::ostream& operator<<(std::ostream& ostr, const MSSMatMGUT_slha<Model>& model)
-{
-   model.print(ostr);
-   return ostr;
-}
 
 } // namespace flexiblesusy
 

@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:47:30
 
 /**
  * @file SM_mass_eigenstates.cpp
@@ -26,8 +25,7 @@
  * which solve EWSB and calculate pole masses and mixings from MSbar
  * parameters.
  *
- * This file was generated at Fri 10 Apr 2020 19:47:30 with FlexibleSUSY
- * 2.4.2 (git commit: a94199e5620b8684f5d30d0eece5757a5a72c4a4) and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #include "SM_mass_eigenstates.hpp"
@@ -37,12 +35,10 @@
 #include "ewsb_solver.hpp"
 #include "wrappers.hpp"
 #include "linalg2.hpp"
-#include "numerics2.hpp"
 #include "logger.hpp"
 #include "error.hpp"
-#include "pv.hpp"
+#include "loop_libraries/loop_library.hpp"
 #include "raii.hpp"
-#include "functors.hpp"
 
 #ifdef ENABLE_THREADS
 #include "thread_pool.hpp"
@@ -61,13 +57,11 @@
 #include "sm_fourloop_as.hpp"
 
 
-#include <array>
 #include <cmath>
 #include <functional>
 #include <iostream>
 #include <memory>
 #include <algorithm>
-#include <stdexcept>
 
 namespace flexiblesusy {
 
@@ -99,6 +93,11 @@ CLASSNAME::CLASSNAME(const SM_input_parameters& input_)
    , ewsb_solver(new SM_ewsb_solver<Two_scale>())
 #endif
 {
+}
+
+std::unique_ptr<SM_mass_eigenstates_interface> CLASSNAME::clone() const
+{
+   return std::make_unique<SM_mass_eigenstates>(*this);
 }
 
 void CLASSNAME::do_calculate_sm_pole_masses(bool flag)
@@ -296,7 +295,17 @@ int CLASSNAME::solve_ewsb_tree_level_custom()
 {
    int error = EWSB_solver::SUCCESS;
 
+   
+   const double old_mu2 = mu2;
 
+   mu2 = Re(-0.5*Lambdax*Sqr(v));
+
+   const bool is_finite = IsFinite(mu2);
+
+   if (!is_finite) {
+      mu2 = old_mu2;
+      error = EWSB_solver::FAIL;
+   }
 
    return error;
 }
@@ -441,42 +450,55 @@ void CLASSNAME::print(std::ostream& ostr) const
 
 double CLASSNAME::A0(double m) const noexcept
 {
-   return passarino_veltman::ReA0(m, Sqr(get_scale()));
+   return Loop_library::get().A0(m, Sqr(get_scale())).real();
 }
 
 double CLASSNAME::B0(double p, double m1, double m2) const noexcept
 {
-   return passarino_veltman::ReB0(p, m1, m2, Sqr(get_scale()));
+   return Loop_library::get().B0(p, m1, m2, Sqr(get_scale())).real();
 }
 
 double CLASSNAME::B1(double p, double m1, double m2) const noexcept
 {
-   return passarino_veltman::ReB1(p, m1, m2, Sqr(get_scale()));
+   return Loop_library::get().B1(p, m1, m2, Sqr(get_scale())).real();
 }
 
 double CLASSNAME::B00(double p, double m1, double m2) const noexcept
 {
-   return passarino_veltman::ReB00(p, m1, m2, Sqr(get_scale()));
+   return Loop_library::get().B00(p, m1, m2, Sqr(get_scale())).real();
 }
 
 double CLASSNAME::B22(double p, double m1, double m2) const noexcept
 {
-   return passarino_veltman::ReB22(p, m1, m2, Sqr(get_scale()));
+   const double scl2 = Sqr(get_scale());
+   return (
+      Loop_library::get().B00(p, m1, m2, scl2) - Loop_library::get().A0(m1, scl2)/4.0 -
+      Loop_library::get().A0(m2, scl2)/4.0
+   ).real();
 }
 
 double CLASSNAME::H0(double p, double m1, double m2) const noexcept
 {
-   return passarino_veltman::ReH0(p, m1, m2, Sqr(get_scale()));
+   const double scl2 = Sqr(get_scale());
+   return 4.0*Loop_library::get().B00(p, m1, m2, scl2).real() + CLASSNAME::G0(p, m1, m2);
 }
 
 double CLASSNAME::F0(double p, double m1, double m2) const noexcept
 {
-   return passarino_veltman::ReF0(p, m1, m2, Sqr(get_scale()));
+   const double scl2 = Sqr(get_scale());
+   return (
+      Loop_library::get().A0(m1, scl2) - 2.0*Loop_library::get().A0(m2, scl2)
+      - (2.0*p + 2.0*m1 - m2) * Loop_library::get().B0(p, m1, m2, scl2)
+   ).real();
 }
 
 double CLASSNAME::G0(double p, double m1, double m2) const noexcept
 {
-   return passarino_veltman::ReG0(p, m1, m2, Sqr(get_scale()));
+   const double scl2 = Sqr(get_scale());
+   return (
+      (p - m1 - m2) * Loop_library::get().B0(p, m1, m2, scl2)
+      - Loop_library::get().A0(m1, scl2) - Loop_library::get().A0(m2, scl2)
+   ).real();
 }
 
 /**
@@ -486,23 +508,7 @@ void CLASSNAME::calculate_DRbar_masses()
 {
    const auto save_mu2_raii = make_raii_save(mu2);
 
-   const bool has_no_ewsb_flag = problems.no_ewsb();
-   const auto save_ewsb_flag = make_raii_guard(
-      [this, has_no_ewsb_flag] () {
-         if (has_no_ewsb_flag) {
-            this->problems.flag_no_ewsb_tree_level();
-         } else {
-            this->problems.unflag_no_ewsb_tree_level();
-         }
-      }
-   );
-   problems.unflag_no_ewsb_tree_level();
-   solve_ewsb_tree_level();
-#ifdef ENABLE_VERBOSE
-   if (problems.no_ewsb()) {
-      WARNING("solving EWSB at 0-loop order failed");
-   }
-#endif
+   solve_ewsb_tree_level_custom();
 
    calculate_MVPVZ();
    calculate_MVWp();
@@ -578,6 +584,7 @@ void CLASSNAME::copy_DRbar_masses_to_pole_masses()
    PHYSICAL(MVWp) = MVWp;
    PHYSICAL(MVP) = MVP;
    PHYSICAL(MVZ) = MVZ;
+   PHYSICAL(ZZ) = ZZ;
 
 }
 
@@ -608,8 +615,7 @@ void CLASSNAME::reorder_pole_masses()
  */
 void CLASSNAME::check_pole_masses_for_tachyons()
 {
-   if (PHYSICAL(Mhh) < 0.) problems.flag_pole_tachyon(SM_info::hh);
-
+   if (PHYSICAL(Mhh) < 0.) { problems.flag_pole_tachyon(SM_info::hh); }
 }
 
 /**
@@ -936,6 +942,61 @@ void CLASSNAME::run_to(double scale, double eps)
    SM_soft_parameters::run_to(scale, eps);
 }
 
+void CLASSNAME::calculate_tree_level_mass_spectrum()
+{
+   calculate_DRbar_masses();
+}
+
+void CLASSNAME::calculate_pole_mass_spectrum()
+{
+   calculate_pole_masses();
+}
+
+void CLASSNAME::calculate_mass_spectrum()
+{
+   calculate_spectrum();
+}
+
+int CLASSNAME::solve_ewsb_equations_tree_level()
+{
+   return solve_ewsb_tree_level();
+}
+
+int CLASSNAME::solve_ewsb_equations()
+{
+   return solve_ewsb();
+}
+
+const SM_input_parameters& CLASSNAME::get_input_parameters() const
+{
+   return get_input();
+}
+
+SM_input_parameters& CLASSNAME::get_input_parameters()
+{
+   return get_input();
+}
+
+Eigen::ArrayXd CLASSNAME::get_tree_level_masses() const
+{
+   return get_DRbar_masses();
+}
+
+Eigen::ArrayXd CLASSNAME::get_tree_level_masses_and_mixings() const
+{
+   return get_DRbar_masses_and_mixings();
+}
+
+void CLASSNAME::set_tree_level_masses(const Eigen::ArrayXd& m)
+{
+   set_DRbar_masses(m);
+}
+
+void CLASSNAME::set_tree_level_masses_and_mixings(const Eigen::ArrayXd& m)
+{
+   set_DRbar_masses_and_mixings(m);
+}
+
 
 
 
@@ -960,7 +1021,8 @@ void CLASSNAME::calculate_MVG()
 double CLASSNAME::get_mass_matrix_Hp() const
 {
 
-   const double mass_matrix_Hp = Re(mu2 + 0.25*(2*Lambdax + Sqr(g2))*Sqr(v));
+   const double mass_matrix_Hp = Re(0.25*(4*mu2 + (2*Lambdax + Sqr(g2))*Sqr(v))
+      );
 
    return mass_matrix_Hp;
 }
@@ -3625,8 +3687,9 @@ void CLASSNAME::calculate_MVZ_pole()
    const double self_energy = Re(self_energy_VZ_1loop(p));
    const double mass_sqr = M_tree - self_energy;
 
-   if (mass_sqr < 0.)
+   if (mass_sqr < 0.) {
       problems.flag_pole_tachyon(SM_info::VZ);
+   }
 
    PHYSICAL(MVZ) = AbsSqrt(mass_sqr);
 }
@@ -3796,8 +3859,9 @@ void CLASSNAME::calculate_MVWp_pole()
    const double self_energy = Re(self_energy_VWp_1loop(p));
    const double mass_sqr = M_tree - self_energy;
 
-   if (mass_sqr < 0.)
+   if (mass_sqr < 0.) {
       problems.flag_pole_tachyon(SM_info::VWp);
+   }
 
    PHYSICAL(MVWp) = AbsSqrt(mass_sqr);
 }
@@ -3810,8 +3874,9 @@ double CLASSNAME::calculate_MVWp_pole(double p)
    const double self_energy = Re(self_energy_VWp_1loop(p));
    const double mass_sqr = Sqr(MVWp) - self_energy;
 
-   if (mass_sqr < 0.)
+   if (mass_sqr < 0.) {
       problems.flag_pole_tachyon(SM_info::VWp);
+   }
 
    return AbsSqrt(mass_sqr);
 }
@@ -3824,8 +3889,9 @@ double CLASSNAME::calculate_MVZ_pole(double p)
    const double self_energy = Re(self_energy_VZ_1loop(p));
    const double mass_sqr = Sqr(MVZ) - self_energy;
 
-   if (mass_sqr < 0.)
+   if (mass_sqr < 0.) {
       problems.flag_pole_tachyon(SM_info::VZ);
+   }
 
    return AbsSqrt(mass_sqr);
 }
@@ -3924,34 +3990,32 @@ double CLASSNAME::calculate_MFd_DRbar(double m_sm_msbar, int idx) const
    return m_susy_drbar;
 }
 
-double CLASSNAME::calculate_MVP_DRbar(double)
+double CLASSNAME::calculate_MVP_DRbar(double) const
 {
    return 0.0;
 }
 
-double CLASSNAME::calculate_MVZ_DRbar(double m_pole)
+double CLASSNAME::calculate_MVZ_DRbar(double m_pole) const
 {
    const double p = m_pole;
    const double self_energy = Re(self_energy_VZ_1loop(p));
    const double mass_sqr = Sqr(m_pole) + self_energy;
 
    if (mass_sqr < 0.) {
-      problems.flag_pole_tachyon(SM_info::VZ);
-      return m_pole;
+      problems.flag_pole_tachyon(SM_info::VZ);return m_pole;
    }
 
    return AbsSqrt(mass_sqr);
 }
 
-double CLASSNAME::calculate_MVWp_DRbar(double m_pole)
+double CLASSNAME::calculate_MVWp_DRbar(double m_pole) const
 {
    const double p = m_pole;
    const double self_energy = Re(self_energy_VWp_1loop(p));
    const double mass_sqr = Sqr(m_pole) + self_energy;
 
    if (mass_sqr < 0.) {
-      problems.flag_pole_tachyon(SM_info::VWp);
-      return m_pole;
+      problems.flag_pole_tachyon(SM_info::VWp);return m_pole;
    }
 
    return AbsSqrt(mass_sqr);

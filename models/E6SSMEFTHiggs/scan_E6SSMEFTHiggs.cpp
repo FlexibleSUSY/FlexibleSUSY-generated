@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:02:00
 
 #include "config.h"
 
@@ -29,12 +28,14 @@
 #endif
 
 #include "command_line_options.hpp"
+#include "array_view.hpp"
 #include "scan.hpp"
 #include "lowe.h"
 #include "logger.hpp"
 
 #include <iostream>
-#include <cstring>
+#include <iomanip>
+#include <string>
 
 #define INPUTPARAMETER(p) input.p
 
@@ -62,16 +63,19 @@ void print_usage()
 
       "  --solver-type=<value>             an integer corresponding\n"
       "                                    to the solver type to use\n"
+      "  --loop-library=<value>            an integer corresponding to the used\n"
+      "                                    realization of loop library\n"
       "  --help,-h                         print this help message"
              << std::endl;
 }
 
 void set_command_line_parameters(const Dynamic_array_view<char*>& args,
                                  E6SSMEFTHiggs_input_parameters& input,
-                                 int& solver_type)
+                                 int& solver_type,
+                                 int& loop_library)
 {
    for (int i = 1; i < args.size(); ++i) {
-      const auto option = args[i];
+      const std::string option = args[i];
 
       if(Command_line_options::get_parameter_value(option, "--MSUSY=", input.MSUSY))
          continue;
@@ -120,7 +124,11 @@ void set_command_line_parameters(const Dynamic_array_view<char*>& args,
              option, "--solver-type=", solver_type))
          continue;
 
-      if (strcmp(option,"--help") == 0 || strcmp(option,"-h") == 0) {
+      if (Command_line_options::get_parameter_value(
+             option, "--loop-library=", loop_library))
+         continue;
+
+      if (option == "--help" || option == "-h") {
          print_usage();
          exit(EXIT_SUCCESS);
       }
@@ -136,11 +144,12 @@ struct E6SSMEFTHiggs_scan_result {
 };
 
 template <class solver_type>
-E6SSMEFTHiggs_scan_result run_parameter_point(const softsusy::QedQcd& qedqcd,
+E6SSMEFTHiggs_scan_result run_parameter_point(int loop_library, const softsusy::QedQcd& qedqcd,
    E6SSMEFTHiggs_input_parameters& input)
 {
    Spectrum_generator_settings settings;
    settings.set(Spectrum_generator_settings::precision, 1.0e-4);
+   settings.set(Spectrum_generator_settings::loop_library, loop_library);
 
    E6SSMEFTHiggs_spectrum_generator<solver_type> spectrum_generator;
    spectrum_generator.set_settings(settings);
@@ -156,7 +165,7 @@ E6SSMEFTHiggs_scan_result run_parameter_point(const softsusy::QedQcd& qedqcd,
    return result;
 }
 
-void scan(int solver_type, E6SSMEFTHiggs_input_parameters& input,
+void scan(int solver_type, int loop_library, E6SSMEFTHiggs_input_parameters& input,
           const std::vector<double>& range)
 {
    softsusy::QedQcd qedqcd;
@@ -169,7 +178,7 @@ void scan(int solver_type, E6SSMEFTHiggs_input_parameters& input,
       case 0:
 #ifdef ENABLE_TWO_SCALE_SOLVER
       case 1:
-         result = run_parameter_point<Two_scale>(qedqcd, input);
+         result = run_parameter_point<Two_scale>(loop_library, qedqcd, input);
          if (!result.problems.have_problem() || solver_type != 0) break;
 #endif
 
@@ -201,8 +210,9 @@ int main(int argc, char* argv[])
 
    E6SSMEFTHiggs_input_parameters input;
    int solver_type = 1;
+   int loop_library = 0;
    set_command_line_parameters(make_dynamic_array_view(&argv[0], argc), input,
-                               solver_type);
+                               solver_type, loop_library);
 
    std::cout << "# "
              << std::setw(12) << std::left << "MSUSY" << ' '
@@ -212,7 +222,7 @@ int main(int argc, char* argv[])
 
    const std::vector<double> range(float_range(0., 100., 10));
 
-   scan(solver_type, input, range);
+   scan(solver_type, loop_library, input, range);
 
    return 0;
 }

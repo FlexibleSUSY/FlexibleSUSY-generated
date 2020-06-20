@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:06:46
 
 #include "CE6SSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -88,16 +87,16 @@ double CE6SSM_soft_parameters::calc_beta_ms2_1_loop(const Soft_traces& soft_trac
 
    double beta_ms2;
 
-   beta_ms2 = Re(0.5*oneOver16PiSqr*(3.1622776601683795*gN*Tr14 + 12*
-      traceconjTKappaTpTKappa + 8*traceconjTLambda12TpTLambda12 + 12*ms2*
-      traceKappaAdjKappa + 12*traceKappaAdjKappaconjmDx2 + 12*
-      traceKappaconjmDxbar2AdjKappa + 8*ms2*traceLambda12AdjLambda12 + 8*
-      traceLambda12AdjLambda12conjmH2I2 + 8*tracemH1I2AdjLambda12Lambda12 + 8*
-      mHd2*AbsSqr(Lambdax) + 8*mHu2*AbsSqr(Lambdax) + 8*ms2*AbsSqr(Lambdax) + 8
-      *AbsSqr(TLambdax) - 10*AbsSqr(MassBp)*Sqr(gN)));
+   beta_ms2 = Re(0.5*(3.1622776601683795*gN*Tr14 + 12*traceconjTKappaTpTKappa +
+      8*traceconjTLambda12TpTLambda12 + 12*ms2*traceKappaAdjKappa + 12*
+      traceKappaAdjKappaconjmDx2 + 12*traceKappaconjmDxbar2AdjKappa + 8*ms2*
+      traceLambda12AdjLambda12 + 8*traceLambda12AdjLambda12conjmH2I2 + 8*
+      tracemH1I2AdjLambda12Lambda12 + 8*mHd2*AbsSqr(Lambdax) + 8*mHu2*AbsSqr(
+      Lambdax) + 8*ms2*AbsSqr(Lambdax) + 8*AbsSqr(TLambdax) - 10*AbsSqr(MassBp)
+      *Sqr(gN)));
 
 
-   return beta_ms2;
+   return oneLoop * beta_ms2;
 }
 
 /**
@@ -177,7 +176,7 @@ double CE6SSM_soft_parameters::calc_beta_ms2_2_loop(const Soft_traces& soft_trac
 
    double beta_ms2;
 
-   const double beta_ms2_1 = Re(0.05*twoLoop*(126.49110640673518*gN*Tr34 - 240*
+   const double beta_ms2_1 = Re(0.05*(126.49110640673518*gN*Tr34 - 240*
       traceKappaAdjKappaconjmDx2KappaAdjKappa - 480*ms2*
       traceKappaAdjKappaKappaAdjKappa - 240*
       traceKappaAdjKappaKappaAdjKappaconjmDx2 - 240*
@@ -242,17 +241,17 @@ double CE6SSM_soft_parameters::calc_beta_ms2_2_loop(const Soft_traces& soft_trac
       Lambdax) - 320*ms2*Sqr(Conj(Lambdax))*Sqr(Lambdax) - 240*traceconjTYdTpYd
       *Conj(Lambdax)*TLambdax - 80*traceconjTYeTpYe*Conj(Lambdax)*TLambdax -
       240*traceconjTYuTpYu*Conj(Lambdax)*TLambdax));
-   const double beta_ms2_2 = Re(-0.8*twoLoop*(15*traceYdAdjYd*Conj(TLambdax) +
-      5*traceYeAdjYe*Conj(TLambdax) + 15*traceYuAdjYu*Conj(TLambdax) + 40*
-      AbsSqr(Lambdax)*Conj(TLambdax) + 3*Conj(MassB)*Conj(Lambdax)*Sqr(g1) - 3*
-      Conj(TLambdax)*Sqr(g1) + 15*Conj(MassWB)*Conj(Lambdax)*Sqr(g2) - 15*Conj(
+   const double beta_ms2_2 = Re(-0.8*(15*traceYdAdjYd*Conj(TLambdax) + 5*
+      traceYeAdjYe*Conj(TLambdax) + 15*traceYuAdjYu*Conj(TLambdax) + 40*AbsSqr(
+      Lambdax)*Conj(TLambdax) + 3*Conj(MassB)*Conj(Lambdax)*Sqr(g1) - 3*Conj(
+      TLambdax)*Sqr(g1) + 15*Conj(MassWB)*Conj(Lambdax)*Sqr(g2) - 15*Conj(
       TLambdax)*Sqr(g2) - 3*Conj(MassBp)*Conj(Lambdax)*Sqr(gN) + 3*Conj(
       TLambdax)*Sqr(gN))*TLambdax);
 
    beta_ms2 = beta_ms2_1 + beta_ms2_2;
 
 
-   return beta_ms2;
+   return twoLoop * beta_ms2;
 }
 
 /**
@@ -271,7 +270,7 @@ double CE6SSM_soft_parameters::calc_beta_ms2_3_loop(const Soft_traces& soft_trac
    beta_ms2 = 0;
 
 
-   return beta_ms2;
+   return threeLoop * beta_ms2;
 }
 
 /**
@@ -290,7 +289,7 @@ double CE6SSM_soft_parameters::calc_beta_ms2_4_loop(const Soft_traces& soft_trac
    beta_ms2 = 0;
 
 
-   return beta_ms2;
+   return fourLoop * beta_ms2;
 }
 
 /**
@@ -309,7 +308,7 @@ double CE6SSM_soft_parameters::calc_beta_ms2_5_loop(const Soft_traces& soft_trac
    beta_ms2 = 0;
 
 
-   return beta_ms2;
+   return fiveLoop * beta_ms2;
 }
 
 } // namespace flexiblesusy

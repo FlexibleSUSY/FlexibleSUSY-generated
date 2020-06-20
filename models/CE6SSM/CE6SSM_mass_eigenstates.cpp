@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:42:44
 
 /**
  * @file CE6SSM_mass_eigenstates.cpp
@@ -26,8 +25,7 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Fri 10 Apr 2020 18:42:44 with FlexibleSUSY
- * 2.4.2 (git commit: a94199e5620b8684f5d30d0eece5757a5a72c4a4) and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #include "CE6SSM_mass_eigenstates.hpp"
@@ -37,12 +35,10 @@
 #include "ewsb_solver.hpp"
 #include "wrappers.hpp"
 #include "linalg2.hpp"
-#include "numerics2.hpp"
 #include "logger.hpp"
 #include "error.hpp"
-#include "pv.hpp"
+#include "loop_libraries/loop_library.hpp"
 #include "raii.hpp"
-#include "functors.hpp"
 
 #ifdef ENABLE_THREADS
 #include "thread_pool.hpp"
@@ -60,13 +56,11 @@
 
 
 
-#include <array>
 #include <cmath>
 #include <functional>
 #include <iostream>
 #include <memory>
 #include <algorithm>
-#include <stdexcept>
 
 namespace flexiblesusy {
 
@@ -98,6 +92,11 @@ CLASSNAME::CLASSNAME(const CE6SSM_input_parameters& input_)
    , ewsb_solver(new CE6SSM_ewsb_solver<Semi_analytic>())
 #endif
 {
+}
+
+std::unique_ptr<CE6SSM_mass_eigenstates_interface> CLASSNAME::clone() const
+{
+   return std::make_unique<CE6SSM_mass_eigenstates>(*this);
 }
 
 void CLASSNAME::do_calculate_sm_pole_masses(bool flag)
@@ -519,42 +518,55 @@ void CLASSNAME::print(std::ostream& ostr) const
 
 double CLASSNAME::A0(double m) const noexcept
 {
-   return passarino_veltman::ReA0(m, Sqr(get_scale()));
+   return Loop_library::get().A0(m, Sqr(get_scale())).real();
 }
 
 double CLASSNAME::B0(double p, double m1, double m2) const noexcept
 {
-   return passarino_veltman::ReB0(p, m1, m2, Sqr(get_scale()));
+   return Loop_library::get().B0(p, m1, m2, Sqr(get_scale())).real();
 }
 
 double CLASSNAME::B1(double p, double m1, double m2) const noexcept
 {
-   return passarino_veltman::ReB1(p, m1, m2, Sqr(get_scale()));
+   return Loop_library::get().B1(p, m1, m2, Sqr(get_scale())).real();
 }
 
 double CLASSNAME::B00(double p, double m1, double m2) const noexcept
 {
-   return passarino_veltman::ReB00(p, m1, m2, Sqr(get_scale()));
+   return Loop_library::get().B00(p, m1, m2, Sqr(get_scale())).real();
 }
 
 double CLASSNAME::B22(double p, double m1, double m2) const noexcept
 {
-   return passarino_veltman::ReB22(p, m1, m2, Sqr(get_scale()));
+   const double scl2 = Sqr(get_scale());
+   return (
+      Loop_library::get().B00(p, m1, m2, scl2) - Loop_library::get().A0(m1, scl2)/4.0 -
+      Loop_library::get().A0(m2, scl2)/4.0
+   ).real();
 }
 
 double CLASSNAME::H0(double p, double m1, double m2) const noexcept
 {
-   return passarino_veltman::ReH0(p, m1, m2, Sqr(get_scale()));
+   const double scl2 = Sqr(get_scale());
+   return 4.0*Loop_library::get().B00(p, m1, m2, scl2).real() + CLASSNAME::G0(p, m1, m2);
 }
 
 double CLASSNAME::F0(double p, double m1, double m2) const noexcept
 {
-   return passarino_veltman::ReF0(p, m1, m2, Sqr(get_scale()));
+   const double scl2 = Sqr(get_scale());
+   return (
+      Loop_library::get().A0(m1, scl2) - 2.0*Loop_library::get().A0(m2, scl2)
+      - (2.0*p + 2.0*m1 - m2) * Loop_library::get().B0(p, m1, m2, scl2)
+   ).real();
 }
 
 double CLASSNAME::G0(double p, double m1, double m2) const noexcept
 {
-   return passarino_veltman::ReG0(p, m1, m2, Sqr(get_scale()));
+   const double scl2 = Sqr(get_scale());
+   return (
+      (p - m1 - m2) * Loop_library::get().B0(p, m1, m2, scl2)
+      - Loop_library::get().A0(m1, scl2) - Loop_library::get().A0(m2, scl2)
+   ).real();
 }
 
 /**
@@ -748,6 +760,7 @@ void CLASSNAME::copy_DRbar_masses_to_pole_masses()
    PHYSICAL(MVP) = MVP;
    PHYSICAL(MVZ) = MVZ;
    PHYSICAL(MVZp) = MVZp;
+   PHYSICAL(ZZ) = ZZ;
 
 }
 
@@ -784,20 +797,19 @@ void CLASSNAME::reorder_pole_masses()
  */
 void CLASSNAME::check_pole_masses_for_tachyons()
 {
-   if (PHYSICAL(MSd).tail<6>().minCoeff() < 0.) problems.flag_pole_tachyon(CE6SSM_info::Sd);
-   if (PHYSICAL(MSv).tail<3>().minCoeff() < 0.) problems.flag_pole_tachyon(CE6SSM_info::Sv);
-   if (PHYSICAL(MSu).tail<6>().minCoeff() < 0.) problems.flag_pole_tachyon(CE6SSM_info::Su);
-   if (PHYSICAL(MSe).tail<6>().minCoeff() < 0.) problems.flag_pole_tachyon(CE6SSM_info::Se);
-   if (PHYSICAL(MSDX).tail<6>().minCoeff() < 0.) problems.flag_pole_tachyon(CE6SSM_info::SDX);
-   if (PHYSICAL(Mhh).tail<3>().minCoeff() < 0.) problems.flag_pole_tachyon(CE6SSM_info::hh);
-   if (PHYSICAL(MAh).tail<1>().minCoeff() < 0.) problems.flag_pole_tachyon(CE6SSM_info::Ah);
-   if (PHYSICAL(MHpm).tail<1>().minCoeff() < 0.) problems.flag_pole_tachyon(CE6SSM_info::Hpm);
-   if (PHYSICAL(MSHI0).tail<4>().minCoeff() < 0.) problems.flag_pole_tachyon(CE6SSM_info::SHI0);
-   if (PHYSICAL(MSHIp).tail<4>().minCoeff() < 0.) problems.flag_pole_tachyon(CE6SSM_info::SHIp);
-   if (PHYSICAL(MSSI0).tail<2>().minCoeff() < 0.) problems.flag_pole_tachyon(CE6SSM_info::SSI0);
-   if (PHYSICAL(MSHp0).tail<2>().minCoeff() < 0.) problems.flag_pole_tachyon(CE6SSM_info::SHp0);
-   if (PHYSICAL(MSHpp).tail<2>().minCoeff() < 0.) problems.flag_pole_tachyon(CE6SSM_info::SHpp);
-
+   if (PHYSICAL(MSd).tail<6>().minCoeff() < 0.) { problems.flag_pole_tachyon(CE6SSM_info::Sd); }
+   if (PHYSICAL(MSv).tail<3>().minCoeff() < 0.) { problems.flag_pole_tachyon(CE6SSM_info::Sv); }
+   if (PHYSICAL(MSu).tail<6>().minCoeff() < 0.) { problems.flag_pole_tachyon(CE6SSM_info::Su); }
+   if (PHYSICAL(MSe).tail<6>().minCoeff() < 0.) { problems.flag_pole_tachyon(CE6SSM_info::Se); }
+   if (PHYSICAL(MSDX).tail<6>().minCoeff() < 0.) { problems.flag_pole_tachyon(CE6SSM_info::SDX); }
+   if (PHYSICAL(Mhh).tail<3>().minCoeff() < 0.) { problems.flag_pole_tachyon(CE6SSM_info::hh); }
+   if (PHYSICAL(MAh).tail<1>().minCoeff() < 0.) { problems.flag_pole_tachyon(CE6SSM_info::Ah); }
+   if (PHYSICAL(MHpm).tail<1>().minCoeff() < 0.) { problems.flag_pole_tachyon(CE6SSM_info::Hpm); }
+   if (PHYSICAL(MSHI0).tail<4>().minCoeff() < 0.) { problems.flag_pole_tachyon(CE6SSM_info::SHI0); }
+   if (PHYSICAL(MSHIp).tail<4>().minCoeff() < 0.) { problems.flag_pole_tachyon(CE6SSM_info::SHIp); }
+   if (PHYSICAL(MSSI0).tail<2>().minCoeff() < 0.) { problems.flag_pole_tachyon(CE6SSM_info::SSI0); }
+   if (PHYSICAL(MSHp0).tail<2>().minCoeff() < 0.) { problems.flag_pole_tachyon(CE6SSM_info::SHp0); }
+   if (PHYSICAL(MSHpp).tail<2>().minCoeff() < 0.) { problems.flag_pole_tachyon(CE6SSM_info::SHpp); }
 }
 
 /**
@@ -2051,6 +2063,61 @@ void CLASSNAME::run_to(double scale, double eps)
    if (eps < 0.0)
       eps = precision;
    CE6SSM_soft_parameters::run_to(scale, eps);
+}
+
+void CLASSNAME::calculate_tree_level_mass_spectrum()
+{
+   calculate_DRbar_masses();
+}
+
+void CLASSNAME::calculate_pole_mass_spectrum()
+{
+   calculate_pole_masses();
+}
+
+void CLASSNAME::calculate_mass_spectrum()
+{
+   calculate_spectrum();
+}
+
+int CLASSNAME::solve_ewsb_equations_tree_level()
+{
+   return solve_ewsb_tree_level();
+}
+
+int CLASSNAME::solve_ewsb_equations()
+{
+   return solve_ewsb();
+}
+
+const CE6SSM_input_parameters& CLASSNAME::get_input_parameters() const
+{
+   return get_input();
+}
+
+CE6SSM_input_parameters& CLASSNAME::get_input_parameters()
+{
+   return get_input();
+}
+
+Eigen::ArrayXd CLASSNAME::get_tree_level_masses() const
+{
+   return get_DRbar_masses();
+}
+
+Eigen::ArrayXd CLASSNAME::get_tree_level_masses_and_mixings() const
+{
+   return get_DRbar_masses_and_mixings();
+}
+
+void CLASSNAME::set_tree_level_masses(const Eigen::ArrayXd& m)
+{
+   set_DRbar_masses(m);
+}
+
+void CLASSNAME::set_tree_level_masses_and_mixings(const Eigen::ArrayXd& m)
+{
+   set_DRbar_masses_and_mixings(m);
 }
 
 
@@ -4968,12 +5035,12 @@ std::complex<double> CLASSNAME::CpUSeconjUSeVZVZ(int gO1, int gO2) const
 std::complex<double> CLASSNAME::CpUSeconjUSeVZpVZp(int gO1, int gO2) const
 {
    
-   const std::complex<double> result = IF(gO1 < 3,0.6324555320336759*g2*gN*Cos(
-      ThetaW())*Cos(ThetaWp())*KroneckerDelta(gO1,gO2)*Sin(ThetaWp()),0) + IF(gO1
-      < 3,-0.4898979485566356*g1*gN*Cos(ThetaWp())*KroneckerDelta(gO1,gO2)*Sin(
-      ThetaW())*Sin(ThetaWp()),0) + IF(gO1 < 3,0.2*KroneckerDelta(gO1,gO2)*Sqr(gN)
-      *Sqr(Cos(ThetaWp())),0) + IF(gO1 < 3,-0.7745966692414834*g1*g2*Cos(ThetaW())
-      *KroneckerDelta(gO1,gO2)*Sin(ThetaW())*Sqr(Sin(ThetaWp())),0) + IF(gO1 < 3,
+   const std::complex<double> result = IF(gO1 < 3,-0.4898979485566356*g1*gN*Cos(
+      ThetaWp())*KroneckerDelta(gO1,gO2)*Sin(ThetaW())*Sin(ThetaWp()),0) + IF(gO1
+      < 3,0.31622776601683794*g2*gN*Cos(ThetaW())*KroneckerDelta(gO1,gO2)*Sin(2*
+      ThetaWp()),0) + IF(gO1 < 3,0.2*KroneckerDelta(gO1,gO2)*Sqr(gN)*Sqr(Cos(
+      ThetaWp())),0) + IF(gO1 < 3,-0.7745966692414834*g1*g2*Cos(ThetaW())*
+      KroneckerDelta(gO1,gO2)*Sin(ThetaW())*Sqr(Sin(ThetaWp())),0) + IF(gO1 < 3,
       0.5*KroneckerDelta(gO1,gO2)*Sqr(g2)*Sqr(Cos(ThetaW()))*Sqr(Sin(ThetaWp())),0
       ) + IF(gO1 < 3,0.3*KroneckerDelta(gO1,gO2)*Sqr(g1)*Sqr(Sin(ThetaW()))*Sqr(
       Sin(ThetaWp())),0) + 0.4898979485566356*g1*gN*Cos(ThetaWp())*Sin(ThetaW())*
@@ -8247,17 +8314,17 @@ std::complex<double> CLASSNAME::CpUSHI0conjUSHI0VZpVZp(int gO1, int gO2) const
       *KroneckerDelta(gO1,gO2)*Sin(ThetaW())*Sqr(Sin(ThetaWp())),0) + IF(gO1 < 2,
       0.5*KroneckerDelta(gO1,gO2)*Sqr(g2)*Sqr(Cos(ThetaW()))*Sqr(Sin(ThetaWp())),0
       ) + IF(gO1 < 2,0.3*KroneckerDelta(gO1,gO2)*Sqr(g1)*Sqr(Sin(ThetaW()))*Sqr(
-      Sin(ThetaWp())),0) - 0.6324555320336759*g2*gN*Cos(ThetaW())*Cos(ThetaWp())*
+      Sin(ThetaWp())),0) - 0.4898979485566356*g1*gN*Cos(ThetaWp())*Sin(ThetaW())*
       Sin(ThetaWp())*SUM(j1,0,1,KroneckerDelta(gO1,2 + j1)*KroneckerDelta(gO2,2 +
-      j1)) - 0.4898979485566356*g1*gN*Cos(ThetaWp())*Sin(ThetaW())*Sin(ThetaWp())*
-      SUM(j1,0,1,KroneckerDelta(gO1,2 + j1)*KroneckerDelta(gO2,2 + j1)) + 0.2*Sqr(
-      gN)*Sqr(Cos(ThetaWp()))*SUM(j1,0,1,KroneckerDelta(gO1,2 + j1)*KroneckerDelta
-      (gO2,2 + j1)) + 0.7745966692414834*g1*g2*Cos(ThetaW())*Sin(ThetaW())*Sqr(Sin
+      j1)) - 0.31622776601683794*g2*gN*Cos(ThetaW())*Sin(2*ThetaWp())*SUM(j1,0,1,
+      KroneckerDelta(gO1,2 + j1)*KroneckerDelta(gO2,2 + j1)) + 0.2*Sqr(gN)*Sqr(Cos
       (ThetaWp()))*SUM(j1,0,1,KroneckerDelta(gO1,2 + j1)*KroneckerDelta(gO2,2 + j1
-      )) + 0.5*Sqr(g2)*Sqr(Cos(ThetaW()))*Sqr(Sin(ThetaWp()))*SUM(j1,0,1,
-      KroneckerDelta(gO1,2 + j1)*KroneckerDelta(gO2,2 + j1)) + 0.3*Sqr(g1)*Sqr(Sin
-      (ThetaW()))*Sqr(Sin(ThetaWp()))*SUM(j1,0,1,KroneckerDelta(gO1,2 + j1)*
-      KroneckerDelta(gO2,2 + j1));
+      )) + 0.7745966692414834*g1*g2*Cos(ThetaW())*Sin(ThetaW())*Sqr(Sin(ThetaWp())
+      )*SUM(j1,0,1,KroneckerDelta(gO1,2 + j1)*KroneckerDelta(gO2,2 + j1)) + 0.5*
+      Sqr(g2)*Sqr(Cos(ThetaW()))*Sqr(Sin(ThetaWp()))*SUM(j1,0,1,KroneckerDelta(gO1
+      ,2 + j1)*KroneckerDelta(gO2,2 + j1)) + 0.3*Sqr(g1)*Sqr(Sin(ThetaW()))*Sqr(
+      Sin(ThetaWp()))*SUM(j1,0,1,KroneckerDelta(gO1,2 + j1)*KroneckerDelta(gO2,2 +
+      j1));
 
    return result;
 }
@@ -8902,17 +8969,17 @@ std::complex<double> CLASSNAME::CpUSHIpconjUSHIpVZpVZp(int gO1, int gO2) const
       )*KroneckerDelta(gO1,gO2)*Sin(ThetaW())*Sqr(Sin(ThetaWp())),0) + IF(gO1 < 2,
       0.5*KroneckerDelta(gO1,gO2)*Sqr(g2)*Sqr(Cos(ThetaW()))*Sqr(Sin(ThetaWp())),0
       ) + IF(gO1 < 2,0.3*KroneckerDelta(gO1,gO2)*Sqr(g1)*Sqr(Sin(ThetaW()))*Sqr(
-      Sin(ThetaWp())),0) + 0.6324555320336759*g2*gN*Cos(ThetaW())*Cos(ThetaWp())*
+      Sin(ThetaWp())),0) - 0.4898979485566356*g1*gN*Cos(ThetaWp())*Sin(ThetaW())*
       Sin(ThetaWp())*SUM(j1,0,1,KroneckerDelta(gO1,2 + j1)*KroneckerDelta(gO2,2 +
-      j1)) - 0.4898979485566356*g1*gN*Cos(ThetaWp())*Sin(ThetaW())*Sin(ThetaWp())*
-      SUM(j1,0,1,KroneckerDelta(gO1,2 + j1)*KroneckerDelta(gO2,2 + j1)) + 0.2*Sqr(
-      gN)*Sqr(Cos(ThetaWp()))*SUM(j1,0,1,KroneckerDelta(gO1,2 + j1)*KroneckerDelta
-      (gO2,2 + j1)) - 0.7745966692414834*g1*g2*Cos(ThetaW())*Sin(ThetaW())*Sqr(Sin
+      j1)) + 0.31622776601683794*g2*gN*Cos(ThetaW())*Sin(2*ThetaWp())*SUM(j1,0,1,
+      KroneckerDelta(gO1,2 + j1)*KroneckerDelta(gO2,2 + j1)) + 0.2*Sqr(gN)*Sqr(Cos
       (ThetaWp()))*SUM(j1,0,1,KroneckerDelta(gO1,2 + j1)*KroneckerDelta(gO2,2 + j1
-      )) + 0.5*Sqr(g2)*Sqr(Cos(ThetaW()))*Sqr(Sin(ThetaWp()))*SUM(j1,0,1,
-      KroneckerDelta(gO1,2 + j1)*KroneckerDelta(gO2,2 + j1)) + 0.3*Sqr(g1)*Sqr(Sin
-      (ThetaW()))*Sqr(Sin(ThetaWp()))*SUM(j1,0,1,KroneckerDelta(gO1,2 + j1)*
-      KroneckerDelta(gO2,2 + j1));
+      )) - 0.7745966692414834*g1*g2*Cos(ThetaW())*Sin(ThetaW())*Sqr(Sin(ThetaWp())
+      )*SUM(j1,0,1,KroneckerDelta(gO1,2 + j1)*KroneckerDelta(gO2,2 + j1)) + 0.5*
+      Sqr(g2)*Sqr(Cos(ThetaW()))*Sqr(Sin(ThetaWp()))*SUM(j1,0,1,KroneckerDelta(gO1
+      ,2 + j1)*KroneckerDelta(gO2,2 + j1)) + 0.3*Sqr(g1)*Sqr(Sin(ThetaW()))*Sqr(
+      Sin(ThetaWp()))*SUM(j1,0,1,KroneckerDelta(gO1,2 + j1)*KroneckerDelta(gO2,2 +
+      j1));
 
    return result;
 }
@@ -11729,11 +11796,11 @@ std::complex<double> CLASSNAME::CpSvconjSvVZpVZp(int gI1, int gI2) const
 {
    
    const std::complex<double> result = 0.1*KroneckerDelta(gI1,gI2)*(-
+      4.898979485566356*g1*gN*Cos(ThetaWp())*Sin(ThetaW())*Sin(ThetaWp()) -
       3.1622776601683795*g2*gN*Cos(ThetaW())*Sin(2*ThetaWp()) + 2*Sqr(gN)*Sqr(Cos(
-      ThetaWp())) + 5*Sqr(g2)*Sqr(Cos(ThetaW()))*Sqr(Sin(ThetaWp())) + g1*(-
-      2.449489742783178*gN*Sin(ThetaW())*Sin(2*ThetaWp()) + 3.872983346207417*g2*
-      Sin(2*ThetaW())*Sqr(Sin(ThetaWp())) + 3*g1*Sqr(Sin(ThetaW()))*Sqr(Sin(
-      ThetaWp()))));
+      ThetaWp())) + g1*Sin(ThetaW())*(7.745966692414834*g2*Cos(ThetaW()) + 3*g1*
+      Sin(ThetaW()))*Sqr(Sin(ThetaWp())) + 5*Sqr(g2)*Sqr(Cos(ThetaW()))*Sqr(Sin(
+      ThetaWp())));
 
    return result;
 }
@@ -18836,11 +18903,14 @@ void CLASSNAME::calculate_MSu_2nd_generation(double& msf1, double& msf2, double&
    sf_data.Yl  = sfermions::Hypercharge_left[sfermions::up];
    sf_data.Yr  = sfermions::Hypercharge_right[sfermions::up];
 
-   Eigen::Array<double,2,1> msf;
+   theta = sfermions::diagonalize_sfermions_2x2(sf_data, msf1, msf2);
 
-   theta = sfermions::diagonalize_sfermions_2x2(sf_data, msf);
-   msf1  = msf(0);
-   msf2  = msf(1);
+   if (msf1 < 0 || msf2 < 0) {
+      VERBOSE_MSG("diagonalize_sfermions_2x2: stop tachyon");
+   }
+
+   msf1 = AbsSqrt(msf1);
+   msf2 = AbsSqrt(msf2);
 }
 
 void CLASSNAME::calculate_MSd_2nd_generation(double& msf1, double& msf2, double& theta) const {
@@ -18858,11 +18928,14 @@ void CLASSNAME::calculate_MSd_2nd_generation(double& msf1, double& msf2, double&
    sf_data.Yl  = sfermions::Hypercharge_left[sfermions::down];
    sf_data.Yr  = sfermions::Hypercharge_right[sfermions::down];
 
-   Eigen::Array<double,2,1> msf;
+   theta = sfermions::diagonalize_sfermions_2x2(sf_data, msf1, msf2);
 
-   theta = sfermions::diagonalize_sfermions_2x2(sf_data, msf);
-   msf1  = msf(0);
-   msf2  = msf(1);
+   if (msf1 < 0 || msf2 < 0) {
+      VERBOSE_MSG("diagonalize_sfermions_2x2: sbottom tachyon");
+   }
+
+   msf1 = AbsSqrt(msf1);
+   msf2 = AbsSqrt(msf2);
 }
 
 void CLASSNAME::calculate_MSv_2nd_generation(double& msf1, double& msf2, double& theta) const {
@@ -18880,11 +18953,14 @@ void CLASSNAME::calculate_MSv_2nd_generation(double& msf1, double& msf2, double&
    sf_data.Yl  = sfermions::Hypercharge_left[sfermions::neutrino];
    sf_data.Yr  = sfermions::Hypercharge_right[sfermions::neutrino];
 
-   Eigen::Array<double,2,1> msf;
+   theta = sfermions::diagonalize_sfermions_2x2(sf_data, msf1, msf2);
 
-   theta = sfermions::diagonalize_sfermions_2x2(sf_data, msf);
-   msf1  = msf(0);
-   msf2  = msf(1);
+   if (msf1 < 0 || msf2 < 0) {
+      VERBOSE_MSG("diagonalize_sfermions_2x2: sneutrino tachyon");
+   }
+
+   msf1 = AbsSqrt(msf1);
+   msf2 = AbsSqrt(msf2);
 }
 
 void CLASSNAME::calculate_MSe_2nd_generation(double& msf1, double& msf2, double& theta) const {
@@ -18902,11 +18978,14 @@ void CLASSNAME::calculate_MSe_2nd_generation(double& msf1, double& msf2, double&
    sf_data.Yl  = sfermions::Hypercharge_left[sfermions::electron];
    sf_data.Yr  = sfermions::Hypercharge_right[sfermions::electron];
 
-   Eigen::Array<double,2,1> msf;
+   theta = sfermions::diagonalize_sfermions_2x2(sf_data, msf1, msf2);
 
-   theta = sfermions::diagonalize_sfermions_2x2(sf_data, msf);
-   msf1  = msf(0);
-   msf2  = msf(1);
+   if (msf1 < 0 || msf2 < 0) {
+      VERBOSE_MSG("diagonalize_sfermions_2x2: selecton tachyon");
+   }
+
+   msf1 = AbsSqrt(msf1);
+   msf2 = AbsSqrt(msf2);
 }
 
 void CLASSNAME::calculate_MSu_3rd_generation(double& msf1, double& msf2, double& theta) const {
@@ -18924,11 +19003,14 @@ void CLASSNAME::calculate_MSu_3rd_generation(double& msf1, double& msf2, double&
    sf_data.Yl  = sfermions::Hypercharge_left[sfermions::up];
    sf_data.Yr  = sfermions::Hypercharge_right[sfermions::up];
 
-   Eigen::Array<double,2,1> msf;
+   theta = sfermions::diagonalize_sfermions_2x2(sf_data, msf1, msf2);
 
-   theta = sfermions::diagonalize_sfermions_2x2(sf_data, msf);
-   msf1  = msf(0);
-   msf2  = msf(1);
+   if (msf1 < 0 || msf2 < 0) {
+      VERBOSE_MSG("diagonalize_sfermions_2x2: stop tachyon");
+   }
+
+   msf1 = AbsSqrt(msf1);
+   msf2 = AbsSqrt(msf2);
 }
 
 void CLASSNAME::calculate_MSd_3rd_generation(double& msf1, double& msf2, double& theta) const {
@@ -18946,11 +19028,14 @@ void CLASSNAME::calculate_MSd_3rd_generation(double& msf1, double& msf2, double&
    sf_data.Yl  = sfermions::Hypercharge_left[sfermions::down];
    sf_data.Yr  = sfermions::Hypercharge_right[sfermions::down];
 
-   Eigen::Array<double,2,1> msf;
+   theta = sfermions::diagonalize_sfermions_2x2(sf_data, msf1, msf2);
 
-   theta = sfermions::diagonalize_sfermions_2x2(sf_data, msf);
-   msf1  = msf(0);
-   msf2  = msf(1);
+   if (msf1 < 0 || msf2 < 0) {
+      VERBOSE_MSG("diagonalize_sfermions_2x2: sbottom tachyon");
+   }
+
+   msf1 = AbsSqrt(msf1);
+   msf2 = AbsSqrt(msf2);
 }
 
 void CLASSNAME::calculate_MSv_3rd_generation(double& msf1, double& msf2, double& theta) const {
@@ -18968,11 +19053,14 @@ void CLASSNAME::calculate_MSv_3rd_generation(double& msf1, double& msf2, double&
    sf_data.Yl  = sfermions::Hypercharge_left[sfermions::neutrino];
    sf_data.Yr  = sfermions::Hypercharge_right[sfermions::neutrino];
 
-   Eigen::Array<double,2,1> msf;
+   theta = sfermions::diagonalize_sfermions_2x2(sf_data, msf1, msf2);
 
-   theta = sfermions::diagonalize_sfermions_2x2(sf_data, msf);
-   msf1  = msf(0);
-   msf2  = msf(1);
+   if (msf1 < 0 || msf2 < 0) {
+      VERBOSE_MSG("diagonalize_sfermions_2x2: sneutrino tachyon");
+   }
+
+   msf1 = AbsSqrt(msf1);
+   msf2 = AbsSqrt(msf2);
 }
 
 void CLASSNAME::calculate_MSe_3rd_generation(double& msf1, double& msf2, double& theta) const {
@@ -18990,11 +19078,14 @@ void CLASSNAME::calculate_MSe_3rd_generation(double& msf1, double& msf2, double&
    sf_data.Yl  = sfermions::Hypercharge_left[sfermions::electron];
    sf_data.Yr  = sfermions::Hypercharge_right[sfermions::electron];
 
-   Eigen::Array<double,2,1> msf;
+   theta = sfermions::diagonalize_sfermions_2x2(sf_data, msf1, msf2);
 
-   theta = sfermions::diagonalize_sfermions_2x2(sf_data, msf);
-   msf1  = msf(0);
-   msf2  = msf(1);
+   if (msf1 < 0 || msf2 < 0) {
+      VERBOSE_MSG("diagonalize_sfermions_2x2: selecton tachyon");
+   }
+
+   msf1 = AbsSqrt(msf1);
+   msf2 = AbsSqrt(msf2);
 }
 
 
@@ -19274,8 +19365,9 @@ void CLASSNAME::calculate_MVZ_pole()
    const double self_energy = Re(self_energy_VZ_1loop(p));
    const double mass_sqr = M_tree - self_energy;
 
-   if (mass_sqr < 0.)
+   if (mass_sqr < 0.) {
       problems.flag_pole_tachyon(CE6SSM_info::VZ);
+   }
 
    PHYSICAL(MVZ) = AbsSqrt(mass_sqr);
 }
@@ -19291,8 +19383,9 @@ void CLASSNAME::calculate_MVZp_pole()
    const double self_energy = Re(self_energy_VZp_1loop(p));
    const double mass_sqr = M_tree - self_energy;
 
-   if (mass_sqr < 0.)
+   if (mass_sqr < 0.) {
       problems.flag_pole_tachyon(CE6SSM_info::VZp);
+   }
 
    PHYSICAL(MVZp) = AbsSqrt(mass_sqr);
 }
@@ -20199,8 +20292,9 @@ void CLASSNAME::calculate_MVWm_pole()
    const double self_energy = Re(self_energy_VWm_1loop(p));
    const double mass_sqr = M_tree - self_energy;
 
-   if (mass_sqr < 0.)
+   if (mass_sqr < 0.) {
       problems.flag_pole_tachyon(CE6SSM_info::VWm);
+   }
 
    PHYSICAL(MVWm) = AbsSqrt(mass_sqr);
 }
@@ -20213,8 +20307,9 @@ double CLASSNAME::calculate_MVWm_pole(double p)
    const double self_energy = Re(self_energy_VWm_1loop(p));
    const double mass_sqr = Sqr(MVWm) - self_energy;
 
-   if (mass_sqr < 0.)
+   if (mass_sqr < 0.) {
       problems.flag_pole_tachyon(CE6SSM_info::VWm);
+   }
 
    return AbsSqrt(mass_sqr);
 }
@@ -20227,8 +20322,9 @@ double CLASSNAME::calculate_MVZ_pole(double p)
    const double self_energy = Re(self_energy_VZ_1loop(p));
    const double mass_sqr = Sqr(MVZ) - self_energy;
 
-   if (mass_sqr < 0.)
+   if (mass_sqr < 0.) {
       problems.flag_pole_tachyon(CE6SSM_info::VZ);
+   }
 
    return AbsSqrt(mass_sqr);
 }
@@ -20314,34 +20410,32 @@ double CLASSNAME::calculate_MFd_DRbar(double m_sm_msbar, int idx) const
    return m_susy_drbar;
 }
 
-double CLASSNAME::calculate_MVP_DRbar(double)
+double CLASSNAME::calculate_MVP_DRbar(double) const
 {
    return 0.0;
 }
 
-double CLASSNAME::calculate_MVZ_DRbar(double m_pole)
+double CLASSNAME::calculate_MVZ_DRbar(double m_pole) const
 {
    const double p = m_pole;
    const double self_energy = Re(self_energy_VZ_1loop(p));
    const double mass_sqr = Sqr(m_pole) + self_energy;
 
    if (mass_sqr < 0.) {
-      problems.flag_pole_tachyon(CE6SSM_info::VZ);
-      return m_pole;
+      problems.flag_pole_tachyon(CE6SSM_info::VZ);return m_pole;
    }
 
    return AbsSqrt(mass_sqr);
 }
 
-double CLASSNAME::calculate_MVWm_DRbar(double m_pole)
+double CLASSNAME::calculate_MVWm_DRbar(double m_pole) const
 {
    const double p = m_pole;
    const double self_energy = Re(self_energy_VWm_1loop(p));
    const double mass_sqr = Sqr(m_pole) + self_energy;
 
    if (mass_sqr < 0.) {
-      problems.flag_pole_tachyon(CE6SSM_info::VWm);
-      return m_pole;
+      problems.flag_pole_tachyon(CE6SSM_info::VWm);return m_pole;
    }
 
    return AbsSqrt(mass_sqr);

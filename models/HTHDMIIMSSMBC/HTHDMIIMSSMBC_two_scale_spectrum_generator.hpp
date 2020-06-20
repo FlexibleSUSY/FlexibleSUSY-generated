@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:24:24
 
 #ifndef HTHDMIIMSSMBC_TWO_SCALE_SPECTRUM_GENERATOR_H
 #define HTHDMIIMSSMBC_TWO_SCALE_SPECTRUM_GENERATOR_H

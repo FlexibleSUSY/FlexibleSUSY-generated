@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:27:48
 
 #ifndef NUTNMSSM_EWSB_SOLVER_H
 #define NUTNMSSM_EWSB_SOLVER_H

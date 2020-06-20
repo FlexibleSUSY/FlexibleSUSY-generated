@@ -16,10 +16,10 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:01:31
 
 #include "E6SSMEFTHiggs_physical.hpp"
-#include "slha_io.hpp"
+#include "mixings.hpp"
+#include "wrappers.hpp"
 
 #include <iostream>
 
@@ -99,10 +99,10 @@ void E6SSMEFTHiggs_physical::clear()
  */
 void E6SSMEFTHiggs_physical::convert_to_hk()
 {
-   SLHA_io::convert_symmetric_fermion_mixings_to_hk(LOCALPHYSICAL(MChi), LOCALPHYSICAL(ZN));
-   SLHA_io::convert_symmetric_fermion_mixings_to_hk(LOCALPHYSICAL(MChiI), LOCALPHYSICAL(ZNI));
-   SLHA_io::convert_symmetric_fermion_mixings_to_hk(LOCALPHYSICAL(MFSI), LOCALPHYSICAL(ZFSI));
-   SLHA_io::convert_symmetric_fermion_mixings_to_hk(LOCALPHYSICAL(MChiP), LOCALPHYSICAL(ZNp));
+   convert_symmetric_fermion_mixings_to_hk(LOCALPHYSICAL(MChi), LOCALPHYSICAL(ZN));
+   convert_symmetric_fermion_mixings_to_hk(LOCALPHYSICAL(MChiI), LOCALPHYSICAL(ZNI));
+   convert_symmetric_fermion_mixings_to_hk(LOCALPHYSICAL(MFSI), LOCALPHYSICAL(ZFSI));
+   convert_symmetric_fermion_mixings_to_hk(LOCALPHYSICAL(MChiP), LOCALPHYSICAL(ZNp));
 
 }
 
@@ -113,10 +113,10 @@ void E6SSMEFTHiggs_physical::convert_to_hk()
  */
 void E6SSMEFTHiggs_physical::convert_to_slha()
 {
-   SLHA_io::convert_symmetric_fermion_mixings_to_slha(LOCALPHYSICAL(MChi), LOCALPHYSICAL(ZN));
-   SLHA_io::convert_symmetric_fermion_mixings_to_slha(LOCALPHYSICAL(MChiI), LOCALPHYSICAL(ZNI));
-   SLHA_io::convert_symmetric_fermion_mixings_to_slha(LOCALPHYSICAL(MFSI), LOCALPHYSICAL(ZFSI));
-   SLHA_io::convert_symmetric_fermion_mixings_to_slha(LOCALPHYSICAL(MChiP), LOCALPHYSICAL(ZNp));
+   convert_symmetric_fermion_mixings_to_slha(LOCALPHYSICAL(MChi), LOCALPHYSICAL(ZN));
+   convert_symmetric_fermion_mixings_to_slha(LOCALPHYSICAL(MChiI), LOCALPHYSICAL(ZNI));
+   convert_symmetric_fermion_mixings_to_slha(LOCALPHYSICAL(MFSI), LOCALPHYSICAL(ZFSI));
+   convert_symmetric_fermion_mixings_to_slha(LOCALPHYSICAL(MChiP), LOCALPHYSICAL(ZNp));
 
 }
 

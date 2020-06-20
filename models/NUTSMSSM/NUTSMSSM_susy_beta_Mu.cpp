@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:24:26
 
 #include "NUTSMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -40,11 +39,11 @@ double NUTSMSSM_susy_parameters::calc_beta_Mu_1_loop(const Susy_traces& susy_tra
 
    double beta_Mu;
 
-   beta_Mu = Re(-0.2*oneOver16PiSqr*Mu*(-15*traceYdAdjYd - 5*traceYeAdjYe - 15*
-      traceYuAdjYu - 10*AbsSqr(Lambdax) + 3*Sqr(g1) + 15*Sqr(g2)));
+   beta_Mu = Re(-0.2*Mu*(-15*traceYdAdjYd - 5*traceYeAdjYe - 15*traceYuAdjYu -
+      10*AbsSqr(Lambdax) + 3*Sqr(g1) + 15*Sqr(g2)));
 
 
-   return beta_Mu;
+   return oneLoop * beta_Mu;
 }
 
 /**
@@ -65,16 +64,16 @@ double NUTSMSSM_susy_parameters::calc_beta_Mu_2_loop(const Susy_traces& susy_tra
 
    double beta_Mu;
 
-   beta_Mu = Re(0.02*twoLoop*Mu*(-450*traceYdAdjYdYdAdjYd - 300*
-      traceYdAdjYuYuAdjYd - 150*traceYeAdjYeYeAdjYe - 450*traceYuAdjYuYuAdjYu -
-      150*traceYdAdjYd*AbsSqr(Lambdax) - 50*traceYeAdjYe*AbsSqr(Lambdax) - 150*
-      traceYuAdjYu*AbsSqr(Lambdax) - 200*AbsSqr(Kappa)*AbsSqr(Lambdax) + 207*
-      Quad(g1) + 375*Quad(g2) - 20*traceYdAdjYd*Sqr(g1) + 60*traceYeAdjYe*Sqr(
-      g1) + 40*traceYuAdjYu*Sqr(g1) + 90*Sqr(g1)*Sqr(g2) + 800*traceYdAdjYd*Sqr
-      (g3) + 800*traceYuAdjYu*Sqr(g3) - 300*Sqr(Conj(Lambdax))*Sqr(Lambdax)));
+   beta_Mu = Re(0.02*Mu*(-450*traceYdAdjYdYdAdjYd - 300*traceYdAdjYuYuAdjYd -
+      150*traceYeAdjYeYeAdjYe - 450*traceYuAdjYuYuAdjYu - 150*traceYdAdjYd*
+      AbsSqr(Lambdax) - 50*traceYeAdjYe*AbsSqr(Lambdax) - 150*traceYuAdjYu*
+      AbsSqr(Lambdax) - 200*AbsSqr(Kappa)*AbsSqr(Lambdax) + 207*Quad(g1) + 375*
+      Quad(g2) - 20*traceYdAdjYd*Sqr(g1) + 60*traceYeAdjYe*Sqr(g1) + 40*
+      traceYuAdjYu*Sqr(g1) + 90*Sqr(g1)*Sqr(g2) + 800*traceYdAdjYd*Sqr(g3) +
+      800*traceYuAdjYu*Sqr(g3) - 300*Sqr(Conj(Lambdax))*Sqr(Lambdax)));
 
 
-   return beta_Mu;
+   return twoLoop * beta_Mu;
 }
 
 /**
@@ -93,7 +92,7 @@ double NUTSMSSM_susy_parameters::calc_beta_Mu_3_loop(const Susy_traces& susy_tra
    beta_Mu = 0;
 
 
-   return beta_Mu;
+   return threeLoop * beta_Mu;
 }
 
 /**
@@ -112,7 +111,7 @@ double NUTSMSSM_susy_parameters::calc_beta_Mu_4_loop(const Susy_traces& susy_tra
    beta_Mu = 0;
 
 
-   return beta_Mu;
+   return fourLoop * beta_Mu;
 }
 
 /**
@@ -131,7 +130,7 @@ double NUTSMSSM_susy_parameters::calc_beta_Mu_5_loop(const Susy_traces& susy_tra
    beta_Mu = 0;
 
 
-   return beta_Mu;
+   return fiveLoop * beta_Mu;
 }
 
 } // namespace flexiblesusy

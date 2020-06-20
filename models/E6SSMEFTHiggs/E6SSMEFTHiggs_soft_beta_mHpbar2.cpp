@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:31:00
 
 #include "E6SSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -75,12 +74,12 @@ double E6SSMEFTHiggs_soft_parameters::calc_beta_mHpbar2_1_loop(const Soft_traces
 
    double beta_mHpbar2;
 
-   beta_mHpbar2 = Re(0.2*oneOver16PiSqr*(3.872983346207417*g1*Tr11 -
-      3.1622776601683795*gN*Tr14 - 6*AbsSqr(MassB)*Sqr(g1) - 30*AbsSqr(MassWB)*
-      Sqr(g2) - 4*AbsSqr(MassBp)*Sqr(gN)));
+   beta_mHpbar2 = Re(0.2*(3.872983346207417*g1*Tr11 - 3.1622776601683795*gN*
+      Tr14 - 6*AbsSqr(MassB)*Sqr(g1) - 30*AbsSqr(MassWB)*Sqr(g2) - 4*AbsSqr(
+      MassBp)*Sqr(gN)));
 
 
-   return beta_mHpbar2;
+   return oneLoop * beta_mHpbar2;
 }
 
 /**
@@ -101,20 +100,20 @@ double E6SSMEFTHiggs_soft_parameters::calc_beta_mHpbar2_2_loop(const Soft_traces
 
    double beta_mHpbar2;
 
-   beta_mHpbar2 = Re(0.04*twoLoop*(-24.49489742783178*g1*gN*Tr2U114 -
-      24.49489742783178*g1*gN*Tr2U141 + 77.45966692414834*g1*Tr31 -
-      63.24555320336759*gN*Tr34 + 891*AbsSqr(MassB)*Quad(g1) + 150*Tr22*Quad(g2
-      ) + 2175*AbsSqr(MassWB)*Quad(g2) + 576*AbsSqr(MassBp)*Quad(gN) + 30*
-      Tr2U111*Sqr(g1) + 90*AbsSqr(MassB)*Sqr(g1)*Sqr(g2) + 90*AbsSqr(MassWB)*
-      Sqr(g1)*Sqr(g2) + 45*MassWB*Conj(MassB)*Sqr(g1)*Sqr(g2) + 45*MassB*Conj(
-      MassWB)*Sqr(g1)*Sqr(g2) + 20*Tr2U144*Sqr(gN) + 36*AbsSqr(MassB)*Sqr(g1)*
-      Sqr(gN) + 36*AbsSqr(MassBp)*Sqr(g1)*Sqr(gN) + 18*MassBp*Conj(MassB)*Sqr(
-      g1)*Sqr(gN) + 18*MassB*Conj(MassBp)*Sqr(g1)*Sqr(gN) + 60*AbsSqr(MassBp)*
-      Sqr(g2)*Sqr(gN) + 60*AbsSqr(MassWB)*Sqr(g2)*Sqr(gN) + 30*MassWB*Conj(
-      MassBp)*Sqr(g2)*Sqr(gN) + 30*MassBp*Conj(MassWB)*Sqr(g2)*Sqr(gN)));
+   beta_mHpbar2 = Re(0.04*(-24.49489742783178*g1*gN*Tr2U114 - 24.49489742783178
+      *g1*gN*Tr2U141 + 77.45966692414834*g1*Tr31 - 63.24555320336759*gN*Tr34 +
+      891*AbsSqr(MassB)*Quad(g1) + 150*Tr22*Quad(g2) + 2175*AbsSqr(MassWB)*Quad
+      (g2) + 576*AbsSqr(MassBp)*Quad(gN) + 30*Tr2U111*Sqr(g1) + 90*AbsSqr(MassB
+      )*Sqr(g1)*Sqr(g2) + 90*AbsSqr(MassWB)*Sqr(g1)*Sqr(g2) + 45*MassWB*Conj(
+      MassB)*Sqr(g1)*Sqr(g2) + 45*MassB*Conj(MassWB)*Sqr(g1)*Sqr(g2) + 20*
+      Tr2U144*Sqr(gN) + 36*AbsSqr(MassB)*Sqr(g1)*Sqr(gN) + 36*AbsSqr(MassBp)*
+      Sqr(g1)*Sqr(gN) + 18*MassBp*Conj(MassB)*Sqr(g1)*Sqr(gN) + 18*MassB*Conj(
+      MassBp)*Sqr(g1)*Sqr(gN) + 60*AbsSqr(MassBp)*Sqr(g2)*Sqr(gN) + 60*AbsSqr(
+      MassWB)*Sqr(g2)*Sqr(gN) + 30*MassWB*Conj(MassBp)*Sqr(g2)*Sqr(gN) + 30*
+      MassBp*Conj(MassWB)*Sqr(g2)*Sqr(gN)));
 
 
-   return beta_mHpbar2;
+   return twoLoop * beta_mHpbar2;
 }
 
 /**
@@ -133,7 +132,7 @@ double E6SSMEFTHiggs_soft_parameters::calc_beta_mHpbar2_3_loop(const Soft_traces
    beta_mHpbar2 = 0;
 
 
-   return beta_mHpbar2;
+   return threeLoop * beta_mHpbar2;
 }
 
 /**
@@ -152,7 +151,7 @@ double E6SSMEFTHiggs_soft_parameters::calc_beta_mHpbar2_4_loop(const Soft_traces
    beta_mHpbar2 = 0;
 
 
-   return beta_mHpbar2;
+   return fourLoop * beta_mHpbar2;
 }
 
 /**
@@ -171,7 +170,7 @@ double E6SSMEFTHiggs_soft_parameters::calc_beta_mHpbar2_5_loop(const Soft_traces
    beta_mHpbar2 = 0;
 
 
-   return beta_mHpbar2;
+   return fiveLoop * beta_mHpbar2;
 }
 
 } // namespace flexiblesusy

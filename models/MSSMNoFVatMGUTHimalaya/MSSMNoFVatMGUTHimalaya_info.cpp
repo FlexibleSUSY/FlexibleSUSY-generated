@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 17:38:34
 
 #include "MSSMNoFVatMGUTHimalaya_info.hpp"
 

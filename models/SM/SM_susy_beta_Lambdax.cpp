@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:47:20
 
 #include "SM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -43,14 +42,14 @@ double SM_susy_parameters::calc_beta_Lambdax_1_loop(const Susy_traces& susy_trac
 
    double beta_Lambdax;
 
-   beta_Lambdax = Re(0.01*oneOver16PiSqr*(-1200*traceYdAdjYdYdAdjYd - 400*
-      traceYeAdjYeYeAdjYe - 1200*traceYuAdjYuYuAdjYu + 1200*traceYdAdjYd*
-      Lambdax + 400*traceYeAdjYe*Lambdax + 1200*traceYuAdjYu*Lambdax + 27*Quad(
-      g1) + 225*Quad(g2) - 180*Lambdax*Sqr(g1) - 900*Lambdax*Sqr(g2) + 90*Sqr(
-      g1)*Sqr(g2) + 1200*Sqr(Lambdax)));
+   beta_Lambdax = Re(0.01*(-1200*traceYdAdjYdYdAdjYd - 400*traceYeAdjYeYeAdjYe
+      - 1200*traceYuAdjYuYuAdjYu + 1200*traceYdAdjYd*Lambdax + 400*traceYeAdjYe
+      *Lambdax + 1200*traceYuAdjYu*Lambdax + 27*Quad(g1) + 225*Quad(g2) - 180*
+      Lambdax*Sqr(g1) - 900*Lambdax*Sqr(g2) + 90*Sqr(g1)*Sqr(g2) + 1200*Sqr(
+      Lambdax)));
 
 
-   return beta_Lambdax;
+   return oneLoop * beta_Lambdax;
 }
 
 /**
@@ -83,7 +82,7 @@ double SM_susy_parameters::calc_beta_Lambdax_2_loop(const Susy_traces& susy_trac
 
    double beta_Lambdax;
 
-   beta_Lambdax = Re(0.001*twoLoop*(60000*traceYdAdjYdYdAdjYdYdAdjYd - 24000*
+   beta_Lambdax = Re(0.001*(60000*traceYdAdjYdYdAdjYdYdAdjYd - 24000*
       traceYdAdjYdYdAdjYuYuAdjYd + 12000*traceYdAdjYuYuAdjYdYdAdjYd - 12000*
       traceYdAdjYuYuAdjYuYuAdjYd + 20000*traceYeAdjYeYeAdjYeYeAdjYe + 60000*
       traceYuAdjYuYuAdjYuYuAdjYu - 78000*Cube(Lambdax) - 3000*
@@ -107,7 +106,7 @@ double SM_susy_parameters::calc_beta_Lambdax_2_loop(const Susy_traces& susy_trac
       Sqr(Lambdax)));
 
 
-   return beta_Lambdax;
+   return twoLoop * beta_Lambdax;
 }
 
 /**
@@ -123,10 +122,10 @@ double SM_susy_parameters::calc_beta_Lambdax_3_loop(const Susy_traces& susy_trac
 
    double beta_Lambdax;
 
-   const double beta_Lambdax_1 = Re(-6.031600412410262*threeLoop*(-
-      9.339962685289576*Lambdax*Power6(g1) - 286.9827742168705*Lambdax*Power6(
-      g2) + 74.07064511965402*Lambdax*Power6(Yd(2,2)) + 77.74412745450469*
-      Lambdax*Power6(Ye(2,2)) + 1.*Power8(g1) + 75.66229767543491*Power8(g2) +
+   const double beta_Lambdax_1 = Re(-6.031600412410262*(-9.339962685289576*
+      Lambdax*Power6(g1) - 286.9827742168705*Lambdax*Power6(g2) +
+      74.07064511965402*Lambdax*Power6(Yd(2,2)) + 77.74412745450469*Lambdax*
+      Power6(Ye(2,2)) + 1.*Power8(g1) + 75.66229767543491*Power8(g2) +
       161.25010404433053*Power8(Yd(2,2)) + 21.420306803784438*Power8(Ye(2,2)) -
       4.310550825785817*Quad(g1)*Quad(g2) - 249.16051734798086*Quad(Lambdax) +
       11.266458319444492*Quad(g1)*Quad(Yd(2,2)) - 10.53370494294467*Quad(g2)*
@@ -194,20 +193,20 @@ double SM_susy_parameters::calc_beta_Lambdax_3_loop(const Susy_traces& susy_trac
       10.589103130834523*Sqr(g1)*Sqr(Lambdax)*Sqr(Yu(2,2)) + 59.60915139954888*
       Sqr(g2)*Sqr(Lambdax)*Sqr(Yu(2,2)) - 26.654542981504992*Sqr(g3)*Sqr(
       Lambdax)*Sqr(Yu(2,2))));
-   const double beta_Lambdax_2 = Re(436.5*threeLoop*(-1.023515541010766*Lambdax
-      *Power6(Yu(2,2)) - 2.228169974925502*Power8(Yu(2,2)) +
-      0.14614411445535522*Quad(g1)*Quad(Yu(2,2)) + 0.14555578253854087*Quad(g2)
-      *Quad(Yu(2,2)) - 0.4600306599364001*Quad(g3)*Quad(Yu(2,2)) +
-      0.7931097093011755*Quad(Yd(2,2))*Quad(Yu(2,2)) - 0.6597938144329897*Quad(
-      Ye(2,2))*Quad(Yu(2,2)) + 0.31092536460231723*Power6(Yu(2,2))*Sqr(g1) -
-      0.09628707405242558*Lambdax*Quad(Yu(2,2))*Sqr(g1) + 0.6793879827233994*
-      Power6(Yu(2,2))*Sqr(g2) - 0.025062124532088004*Lambdax*Quad(Yu(2,2))*Sqr(
-      g2) - 0.6447330669284618*Quad(Yu(2,2))*Sqr(g1)*Sqr(g2) +
-      2.2954745178309515*Power6(Yu(2,2))*Sqr(g3) - 3.0371855509499848*Lambdax*
-      Quad(Yu(2,2))*Sqr(g3) + 0.16101073097774002*Quad(Yu(2,2))*Sqr(g1)*Sqr(g3)
-      + 0.12233095693773434*Quad(Yu(2,2))*Sqr(g2)*Sqr(g3) + 4.050985151864039*
-      Quad(Yu(2,2))*Sqr(Lambdax) - 1.2178606965749863*Power6(Yu(2,2))*Sqr(Yd(2,
-      2)) + 4.458058162909423*Lambdax*Quad(Yu(2,2))*Sqr(Yd(2,2)) -
+   const double beta_Lambdax_2 = Re(436.5*(-1.023515541010766*Lambdax*Power6(Yu
+      (2,2)) - 2.228169974925502*Power8(Yu(2,2)) + 0.14614411445535522*Quad(g1)
+      *Quad(Yu(2,2)) + 0.14555578253854087*Quad(g2)*Quad(Yu(2,2)) -
+      0.4600306599364001*Quad(g3)*Quad(Yu(2,2)) + 0.7931097093011755*Quad(Yd(2,
+      2))*Quad(Yu(2,2)) - 0.6597938144329897*Quad(Ye(2,2))*Quad(Yu(2,2)) +
+      0.31092536460231723*Power6(Yu(2,2))*Sqr(g1) - 0.09628707405242558*Lambdax
+      *Quad(Yu(2,2))*Sqr(g1) + 0.6793879827233994*Power6(Yu(2,2))*Sqr(g2) -
+      0.025062124532088004*Lambdax*Quad(Yu(2,2))*Sqr(g2) - 0.6447330669284618*
+      Quad(Yu(2,2))*Sqr(g1)*Sqr(g2) + 2.2954745178309515*Power6(Yu(2,2))*Sqr(g3
+      ) - 3.0371855509499848*Lambdax*Quad(Yu(2,2))*Sqr(g3) +
+      0.16101073097774002*Quad(Yu(2,2))*Sqr(g1)*Sqr(g3) + 0.12233095693773434*
+      Quad(Yu(2,2))*Sqr(g2)*Sqr(g3) + 4.050985151864039*Quad(Yu(2,2))*Sqr(
+      Lambdax) - 1.2178606965749863*Power6(Yu(2,2))*Sqr(Yd(2,2)) +
+      4.458058162909423*Lambdax*Quad(Yu(2,2))*Sqr(Yd(2,2)) -
       0.10848390353339003*Quad(Yu(2,2))*Sqr(g1)*Sqr(Yd(2,2)) +
       0.13659793814432988*Quad(Yu(2,2))*Sqr(g2)*Sqr(Yd(2,2)) -
       0.5470674121572557*Quad(Yu(2,2))*Sqr(g3)*Sqr(Yd(2,2)) -
@@ -242,7 +241,7 @@ double SM_susy_parameters::calc_beta_Lambdax_3_loop(const Susy_traces& susy_trac
    beta_Lambdax = beta_Lambdax_1 + beta_Lambdax_2;
 
 
-   return beta_Lambdax;
+   return threeLoop * beta_Lambdax;
 }
 
 /**
@@ -258,11 +257,10 @@ double SM_susy_parameters::calc_beta_Lambdax_4_loop(const Susy_traces& susy_trac
 
    double beta_Lambdax;
 
-   beta_Lambdax = Re(16616.342695047893*Power6(g3)*Quad(oneOver16PiSqr)*Quad(Yu
-      (2,2)));
+   beta_Lambdax = Re(16616.342695047893*Power6(g3)*Quad(Yu(2,2)));
 
 
-   return beta_Lambdax;
+   return fourLoop * beta_Lambdax;
 }
 
 /**
@@ -281,7 +279,7 @@ double SM_susy_parameters::calc_beta_Lambdax_5_loop(const Susy_traces& susy_trac
    beta_Lambdax = 0;
 
 
-   return beta_Lambdax;
+   return fiveLoop * beta_Lambdax;
 }
 
 } // namespace flexiblesusy

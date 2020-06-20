@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:45:19
 
 #include "NMSSMEFTHiggs_effective_couplings.hpp"
 

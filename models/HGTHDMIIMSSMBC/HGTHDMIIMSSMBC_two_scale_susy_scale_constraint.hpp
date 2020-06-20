@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:28:41
 
 #ifndef HGTHDMIIMSSMBC_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
 #define HGTHDMIIMSSMBC_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
@@ -39,6 +38,8 @@ public:
    HGTHDMIIMSSMBC_susy_scale_constraint() = default;
    HGTHDMIIMSSMBC_susy_scale_constraint(HGTHDMIIMSSMBC<Two_scale>*, const softsusy::QedQcd&);
    virtual ~HGTHDMIIMSSMBC_susy_scale_constraint() = default;
+   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+
    virtual void apply() override;
    virtual double get_scale() const override;
    virtual std::string name() const override { return "HGTHDMIIMSSMBC SUSY-scale constraint"; }

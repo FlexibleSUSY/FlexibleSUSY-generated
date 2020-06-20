@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:02:48
 
 #ifndef TMSSM_TWO_SCALE_INITIAL_GUESSER_H
 #define TMSSM_TWO_SCALE_INITIAL_GUESSER_H

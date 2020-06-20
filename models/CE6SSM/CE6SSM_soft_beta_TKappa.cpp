@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:06:35
 
 #include "CE6SSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -79,16 +78,16 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_TKappa_1_loop(const 
 
    Eigen::Matrix<double,3,3> beta_TKappa;
 
-   beta_TKappa = (oneOver16PiSqr*(0.03333333333333333*(180*traceAdjKappaTKappa*
-      Kappa + 120*traceAdjLambda12TLambda12*Kappa + 16*MassB*Kappa*Sqr(g1) +
-      320*MassG*Kappa*Sqr(g3) + 114*MassBp*Kappa*Sqr(gN) + 90*
-      traceKappaAdjKappa*TKappa + 60*traceLambda12AdjLambda12*TKappa + 60*
-      AbsSqr(Lambdax)*TKappa - 8*Sqr(g1)*TKappa - 160*Sqr(g3)*TKappa - 57*Sqr(
-      gN)*TKappa + 120*Conj(Lambdax)*Kappa*TLambdax) + 3*(Kappa*(Kappa).adjoint
-      ()*TKappa) + 3*(TKappa*(Kappa).adjoint()*Kappa))).real();
+   beta_TKappa = (0.03333333333333333*(180*traceAdjKappaTKappa*Kappa + 120*
+      traceAdjLambda12TLambda12*Kappa + 16*MassB*Kappa*Sqr(g1) + 320*MassG*
+      Kappa*Sqr(g3) + 114*MassBp*Kappa*Sqr(gN) + 90*traceKappaAdjKappa*TKappa +
+      60*traceLambda12AdjLambda12*TKappa + 60*AbsSqr(Lambdax)*TKappa - 8*Sqr(g1
+      )*TKappa - 160*Sqr(g3)*TKappa - 57*Sqr(gN)*TKappa + 120*Conj(Lambdax)*
+      Kappa*TLambdax) + 3*(Kappa*(Kappa).adjoint()*TKappa) + 3*(TKappa*(Kappa).
+      adjoint()*Kappa)).real();
 
 
-   return beta_TKappa;
+   return oneLoop * beta_TKappa;
 }
 
 /**
@@ -122,7 +121,7 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_TKappa_2_loop(const 
 
    Eigen::Matrix<double,3,3> beta_TKappa;
 
-   beta_TKappa = (twoLoop*(0.0005555555555555556*(-43200*
+   beta_TKappa = (0.0005555555555555556*(-43200*
       traceKappaAdjKappaTKappaAdjKappa*Kappa - 28800*
       traceLambda12AdjLambda12TLambda12AdjLambda12*Kappa - 21600*traceAdjYdTYd*
       AbsSqr(Lambdax)*Kappa - 7200*traceAdjYeTYe*AbsSqr(Lambdax)*Kappa - 21600*
@@ -165,10 +164,10 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_TKappa_2_loop(const 
       - 6*AbsSqr(Lambdax) + 4*Sqr(gN))*(TKappa*(Kappa).adjoint()*Kappa) - 3*(
       Kappa*(Kappa).adjoint()*Kappa*(Kappa).adjoint()*TKappa) - 4*(Kappa*(Kappa
       ).adjoint()*TKappa*(Kappa).adjoint()*Kappa) - 3*(TKappa*(Kappa).adjoint()
-      *Kappa*(Kappa).adjoint()*Kappa))).real();
+      *Kappa*(Kappa).adjoint()*Kappa)).real();
 
 
-   return beta_TKappa;
+   return twoLoop * beta_TKappa;
 }
 
 /**
@@ -187,7 +186,7 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_TKappa_3_loop(const 
    beta_TKappa = ZEROMATRIX(3,3);
 
 
-   return beta_TKappa;
+   return threeLoop * beta_TKappa;
 }
 
 /**
@@ -206,7 +205,7 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_TKappa_4_loop(const 
    beta_TKappa = ZEROMATRIX(3,3);
 
 
-   return beta_TKappa;
+   return fourLoop * beta_TKappa;
 }
 
 /**
@@ -225,7 +224,7 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_TKappa_5_loop(const 
    beta_TKappa = ZEROMATRIX(3,3);
 
 
-   return beta_TKappa;
+   return fiveLoop * beta_TKappa;
 }
 
 } // namespace flexiblesusy

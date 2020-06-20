@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:27:17
 
 #include "MRSSMEFTHiggs_standard_model_two_scale_matching.hpp"
 #include "MRSSMEFTHiggs_standard_model_matching.hpp"

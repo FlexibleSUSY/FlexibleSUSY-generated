@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:58:44
 
 #include "MRSSM_two_scale_initial_guesser.hpp"
 #include "MRSSM_two_scale_model.hpp"

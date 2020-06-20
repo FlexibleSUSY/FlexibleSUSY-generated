@@ -23,16 +23,18 @@ MSSMNoFVatMGUT_SUSY_BETAS_MK := \
 MSSMNoFVatMGUT_SOFT_BETAS_MK := \
 		$(DIR)/soft_betas.mk
 
-MSSMNoFVatMGUT_CXX_QFT_VERTICES_MK := \
+MSSMNoFVatMGUT_CXXQFT_VERTICES_MK := \
 		$(DIR)/cxx_qft/vertices.mk
+
+-include $(MSSMNoFVatMGUT_CXXQFT_VERTICES_MK)
+LIBMSSMNoFVatMGUT_CXXQFT_VERTICES_SRC ?= ''
 
 MSSMNoFVatMGUT_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
 MSSMNoFVatMGUT_INCLUDE_MK := \
 		$(MSSMNoFVatMGUT_SUSY_BETAS_MK) \
-		$(MSSMNoFVatMGUT_SOFT_BETAS_MK) \
-		$(MSSMNoFVatMGUT_CXX_QFT_VERTICES_MK)
+		$(MSSMNoFVatMGUT_SOFT_BETAS_MK)
 
 MSSMNoFVatMGUT_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.MSSMNoFVatMGUT_generated \
@@ -52,11 +54,15 @@ LIBMSSMNoFVatMGUT_SRC := \
 		$(DIR)/MSSMNoFVatMGUT_a_muon.cpp \
 		$(DIR)/MSSMNoFVatMGUT_edm.cpp \
 		$(DIR)/MSSMNoFVatMGUT_FFV_form_factors.cpp \
+		$(DIR)/MSSMNoFVatMGUT_f_to_f_conversion.cpp \
 		$(DIR)/MSSMNoFVatMGUT_l_to_lgamma.cpp \
+		$(DIR)/MSSMNoFVatMGUT_b_to_s_gamma.cpp \
 		$(DIR)/MSSMNoFVatMGUT_effective_couplings.cpp \
 		$(DIR)/MSSMNoFVatMGUT_info.cpp \
 		$(DIR)/MSSMNoFVatMGUT_input_parameters.cpp \
 		$(DIR)/MSSMNoFVatMGUT_mass_eigenstates.cpp \
+		$(DIR)/MSSMNoFVatMGUT_mass_eigenstates_decoupling_scheme.cpp \
+		$(DIR)/MSSMNoFVatMGUT_model_slha.cpp \
 		$(DIR)/MSSMNoFVatMGUT_observables.cpp \
 		$(DIR)/MSSMNoFVatMGUT_physical.cpp \
 		$(DIR)/MSSMNoFVatMGUT_slha_io.cpp \
@@ -64,6 +70,8 @@ LIBMSSMNoFVatMGUT_SRC := \
 		$(DIR)/MSSMNoFVatMGUT_susy_parameters.cpp \
 		$(DIR)/MSSMNoFVatMGUT_utilities.cpp \
 		$(DIR)/MSSMNoFVatMGUT_weinberg_angle.cpp
+
+LIBMSSMNoFVatMGUT_SRC += $(LIBMSSMNoFVatMGUT_CXXQFT_VERTICES_SRC)
 
 EXEMSSMNoFVatMGUT_SRC := \
 		$(DIR)/run_MSSMNoFVatMGUT.cpp \
@@ -83,7 +91,9 @@ LIBMSSMNoFVatMGUT_HDR := \
 		$(DIR)/MSSMNoFVatMGUT_convergence_tester.hpp \
 		$(DIR)/MSSMNoFVatMGUT_edm.hpp \
 		$(DIR)/MSSMNoFVatMGUT_FFV_form_factors.hpp \
+		$(DIR)/MSSMNoFVatMGUT_f_to_f_conversion.hpp \
 		$(DIR)/MSSMNoFVatMGUT_l_to_lgamma.hpp \
+		$(DIR)/MSSMNoFVatMGUT_b_to_s_gamma.hpp \
 		$(DIR)/MSSMNoFVatMGUT_effective_couplings.hpp \
 		$(DIR)/MSSMNoFVatMGUT_ewsb_solver.hpp \
 		$(DIR)/MSSMNoFVatMGUT_ewsb_solver_interface.hpp \
@@ -93,6 +103,8 @@ LIBMSSMNoFVatMGUT_HDR := \
 		$(DIR)/MSSMNoFVatMGUT_input_parameters.hpp \
 		$(DIR)/MSSMNoFVatMGUT_low_scale_constraint.hpp \
 		$(DIR)/MSSMNoFVatMGUT_mass_eigenstates.hpp \
+		$(DIR)/MSSMNoFVatMGUT_mass_eigenstates_interface.hpp \
+		$(DIR)/MSSMNoFVatMGUT_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/MSSMNoFVatMGUT_model.hpp \
 		$(DIR)/MSSMNoFVatMGUT_model_slha.hpp \
 		$(DIR)/MSSMNoFVatMGUT_observables.hpp \
@@ -111,7 +123,7 @@ LIBMSSMNoFVatMGUT_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/MSSMNoFVatMGUT_fields.hpp \
 		$(DIR)/cxx_qft/MSSMNoFVatMGUT_vertices.hpp \
 		$(DIR)/cxx_qft/MSSMNoFVatMGUT_context_base.hpp \
-		$(DIR)/cxx_qft/MSSMNoFVatMGUT_npointfunctions.hpp
+		$(DIR)/cxx_qft/MSSMNoFVatMGUT_npointfunctions_wilsoncoeffs.hpp
 
 ifneq ($(findstring two_scale,$(SOLVERS)),)
 -include $(DIR)/two_scale.mk
@@ -129,7 +141,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(MSSMNoFVatMGUT_SUSY_BETAS_MK)
 -include $(MSSMNoFVatMGUT_SOFT_BETAS_MK)
--include $(MSSMNoFVatMGUT_CXX_QFT_VERTICES_MK)
+-include $(MSSMNoFVatMGUT_CXXQFT_VERTICES_MK)
 -include $(MSSMNoFVatMGUT_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
@@ -141,7 +153,7 @@ $(MSSMNoFVatMGUT_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(MSSMNoFVatMGUT_SOFT_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
-$(MSSMNoFVatMGUT_CXX_QFT_VERTICES_MK): run-metacode-$(MODNAME)
+$(MSSMNoFVatMGUT_CXXQFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(MSSMNoFVatMGUT_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
@@ -206,6 +218,7 @@ install-src::
 		$(Q)install -d $(MSSMNoFVatMGUT_INSTALL_DIR)
 		$(Q)install -d $(MSSMNoFVatMGUT_INSTALL_CXXQFT_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(LIBMSSMNoFVatMGUT_SRC) $(MSSMNoFVatMGUT_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBMSSMNoFVatMGUT_CXXQFT_VERTICES_SRC) $(MSSMNoFVatMGUT_INSTALL_CXXQFT_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(LIBMSSMNoFVatMGUT_HDR) $(MSSMNoFVatMGUT_INSTALL_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(LIBMSSMNoFVatMGUT_CXXQFT_HDR) $(MSSMNoFVatMGUT_INSTALL_CXXQFT_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(EXEMSSMNoFVatMGUT_SRC) $(MSSMNoFVatMGUT_INSTALL_DIR)
@@ -213,6 +226,8 @@ install-src::
 		$(Q)install -m u=rw,g=r,o=r $(LLMSSMNoFVatMGUT_MMA) $(MSSMNoFVatMGUT_INSTALL_DIR)
 		$(Q)$(INSTALL_STRIPPED) $(MSSMNoFVatMGUT_MK) $(MSSMNoFVatMGUT_INSTALL_DIR) -m u=rw,g=r,o=r
 		$(Q)install -m u=rw,g=r,o=r $(MSSMNoFVatMGUT_INCLUDE_MK) $(MSSMNoFVatMGUT_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(MSSMNoFVatMGUT_CXXQFT_VERTICES_MK) $(MSSMNoFVatMGUT_INSTALL_CXXQFT_DIR)
+
 ifneq ($(MSSMNoFVatMGUT_SLHA_INPUT),)
 		$(Q)install -m u=rw,g=r,o=r $(MSSMNoFVatMGUT_SLHA_INPUT) $(MSSMNoFVatMGUT_INSTALL_DIR)
 endif
@@ -244,6 +259,7 @@ clean-$(MODNAME)-src:
 		$(Q)-rm -f $(LLMSSMNoFVatMGUT_MMA)
 		$(Q)-rm -f $(METACODE_STAMP_MSSMNoFVatMGUT)
 		$(Q)-rm -f $(MSSMNoFVatMGUT_INCLUDE_MK)
+		$(Q)-rm -f $(MSSMNoFVatMGUT_CXXQFT_VERTICES_MK)
 		$(Q)-rm -f $(MSSMNoFVatMGUT_SLHA_INPUT)
 		$(Q)-rm -f $(MSSMNoFVatMGUT_REFERENCES)
 		$(Q)-rm -f $(MSSMNoFVatMGUT_GNUPLOT)
@@ -270,7 +286,7 @@ pack-$(MODNAME)-src:
 		$(LIBMSSMNoFVatMGUT_SRC) $(LIBMSSMNoFVatMGUT_HDR) $(LIBMSSMNoFVatMGUT_CXXQFT_HDR) \
 		$(EXEMSSMNoFVatMGUT_SRC) \
 		$(LLMSSMNoFVatMGUT_SRC) $(LLMSSMNoFVatMGUT_MMA) \
-		$(MSSMNoFVatMGUT_MK) $(MSSMNoFVatMGUT_INCLUDE_MK) \
+		$(MSSMNoFVatMGUT_MK) $(MSSMNoFVatMGUT_INCLUDE_MK) $(MSSMNoFVatMGUT_CXXQFT_VERTICES_MK) \
 		$(MSSMNoFVatMGUT_SLHA_INPUT) $(MSSMNoFVatMGUT_REFERENCES) \
 		$(MSSMNoFVatMGUT_GNUPLOT)
 
@@ -296,7 +312,7 @@ $(METACODE_STAMP_MSSMNoFVatMGUT):
 endif
 
 $(LIBMSSMNoFVatMGUT_DEP) $(EXEMSSMNoFVatMGUT_DEP) $(LLMSSMNoFVatMGUT_DEP) $(LIBMSSMNoFVatMGUT_OBJ) $(EXEMSSMNoFVatMGUT_OBJ) $(LLMSSMNoFVatMGUT_OBJ) $(LLMSSMNoFVatMGUT_LIB): \
-	CPPFLAGS += $(MODMSSMNoFVatMGUT_SUBMOD_INC) $(MODMSSMNoFVatMGUT_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODMSSMNoFVatMGUT_SUBMOD_INC) $(MODMSSMNoFVatMGUT_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS)  $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBMSSMNoFVatMGUT_DEP) $(EXEMSSMNoFVatMGUT_DEP) $(LLMSSMNoFVatMGUT_DEP) $(LIBMSSMNoFVatMGUT_OBJ) $(EXEMSSMNoFVatMGUT_OBJ) $(LLMSSMNoFVatMGUT_OBJ) $(LLMSSMNoFVatMGUT_LIB): \
@@ -310,13 +326,13 @@ $(LIBMSSMNoFVatMGUT): $(LIBMSSMNoFVatMGUT_OBJ)
 		@$(MSG)
 		$(Q)$(MODULE_MAKE_LIB_CMD) $@ $^
 
-$(DIR)/%.x: $(DIR)/%.o $(LIBMSSMNoFVatMGUT) $(MODMSSMNoFVatMGUT_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+$(DIR)/%.x: $(DIR)/%.o $(LIBMSSMNoFVatMGUT) $(MODMSSMNoFVatMGUT_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
-$(LLMSSMNoFVatMGUT_LIB): $(LLMSSMNoFVatMGUT_OBJ) $(LIBMSSMNoFVatMGUT) $(MODMSSMNoFVatMGUT_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+$(LLMSSMNoFVatMGUT_LIB): $(LLMSSMNoFVatMGUT_OBJ) $(LIBMSSMNoFVatMGUT) $(MODMSSMNoFVatMGUT_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS)
 
 ALLDEP += $(LIBMSSMNoFVatMGUT_DEP) $(EXEMSSMNoFVatMGUT_DEP)
 ALLSRC += $(LIBMSSMNoFVatMGUT_SRC) $(EXEMSSMNoFVatMGUT_SRC)

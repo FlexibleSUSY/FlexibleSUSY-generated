@@ -16,22 +16,22 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 17:38:53
 
 /**
  * @file MSSMNoFVatMGUTHimalaya_edm.hpp
  *
- * This file was generated at Fri 10 Apr 2020 17:38:53 with FlexibleSUSY
- * 2.4.2 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #ifndef MSSMNoFVatMGUTHimalaya_MuToEGamma_H
 #define MSSMNoFVatMGUTHimalaya_MuToEGamma_H
 
-#include "lowe.h"
-#include "physical_input.hpp"
+namespace softsusy {
+class QedQcd;
+}
 
 namespace flexiblesusy {
+class Physical_input;
 class MSSMNoFVatMGUTHimalaya_mass_eigenstates;
 
 namespace MSSMNoFVatMGUTHimalaya_l_to_lgamma {

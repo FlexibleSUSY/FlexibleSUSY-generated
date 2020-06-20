@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:48:01
 
 #ifndef CMSSMSemiAnalytic_SEMI_ANALYTIC_SUSY_CONVERGENCE_TESTER_H
 #define CMSSMSemiAnalytic_SEMI_ANALYTIC_SUSY_CONVERGENCE_TESTER_H

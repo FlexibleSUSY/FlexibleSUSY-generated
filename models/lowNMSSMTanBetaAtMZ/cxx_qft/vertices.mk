@@ -17,5 +17,5 @@
 #  ====================================================================
 
 
-LIBlowNMSSMTanBetaAtMZ_SRC += \
+LIBlowNMSSMTanBetaAtMZ_CXXQFT_VERTICES_SRC := \
 	models/lowNMSSMTanBetaAtMZ/cxx_qft/lowNMSSMTanBetaAtMZ_vertices_1.cpp

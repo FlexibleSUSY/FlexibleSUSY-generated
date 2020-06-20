@@ -17,6 +17,6 @@
 #  ====================================================================
 
 
-LIBNUTNMSSM_SRC += \
+LIBNUTNMSSM_CXXQFT_VERTICES_SRC := \
 	models/NUTNMSSM/cxx_qft/NUTNMSSM_vertices_1.cpp \
 	models/NUTNMSSM/cxx_qft/NUTNMSSM_vertices_2.cpp

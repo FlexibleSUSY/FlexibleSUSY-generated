@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:01:42
 
 #include "E6SSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -39,12 +38,12 @@ Eigen::Matrix<double,3,3> E6SSM_susy_parameters::calc_beta_Yd_1_loop(const Susy_
 
    Eigen::Matrix<double,3,3> beta_Yd;
 
-   beta_Yd = (oneOver16PiSqr*(-0.03333333333333333*Yd*(-90*traceYdAdjYd - 30*
-      traceYeAdjYe - 30*AbsSqr(Lambdax) + 14*Sqr(g1) + 90*Sqr(g2) + 160*Sqr(g3)
-      + 21*Sqr(gN)) + 3*(Yd*Yd.adjoint()*Yd) + Yd*Yu.adjoint()*Yu)).real();
+   beta_Yd = (-0.03333333333333333*Yd*(-90*traceYdAdjYd - 30*traceYeAdjYe - 30*
+      AbsSqr(Lambdax) + 14*Sqr(g1) + 90*Sqr(g2) + 160*Sqr(g3) + 21*Sqr(gN)) + 3
+      *(Yd*Yd.adjoint()*Yd) + Yd*Yu.adjoint()*Yu).real();
 
 
-   return beta_Yd;
+   return oneLoop * beta_Yd;
 }
 
 /**
@@ -67,23 +66,23 @@ Eigen::Matrix<double,3,3> E6SSM_susy_parameters::calc_beta_Yd_2_loop(const Susy_
 
    Eigen::Matrix<double,3,3> beta_Yd;
 
-   beta_Yd = (twoLoop*(0.002777777777777778*Yd*(-3240*traceYdAdjYdYdAdjYd -
-      1080*traceYdAdjYuYuAdjYd - 1080*traceYeAdjYeYeAdjYe - 1080*
-      traceKappaAdjKappa*AbsSqr(Lambdax) - 720*traceLambda12AdjLambda12*AbsSqr(
-      Lambdax) - 1080*traceYuAdjYu*AbsSqr(Lambdax) + 1652*Quad(g1) + 5940*Quad(
-      g2) + 5120*Quad(g3) + 2457*Quad(gN) - 144*traceYdAdjYd*Sqr(g1) + 432*
-      traceYeAdjYe*Sqr(g1) + 360*Sqr(g1)*Sqr(g2) + 5760*traceYdAdjYd*Sqr(g3) +
-      320*Sqr(g1)*Sqr(g3) + 2880*Sqr(g2)*Sqr(g3) - 216*traceYdAdjYd*Sqr(gN) -
-      72*traceYeAdjYe*Sqr(gN) + 360*AbsSqr(Lambdax)*Sqr(gN) - 84*Sqr(g1)*Sqr(gN
-      ) + 540*Sqr(g2)*Sqr(gN) + 480*Sqr(g3)*Sqr(gN) - 1080*Sqr(Conj(Lambdax))*
-      Sqr(Lambdax)) + 0.2*(-45*traceYdAdjYd - 15*traceYeAdjYe - 15*AbsSqr(
-      Lambdax) + 4*Sqr(g1) + 30*Sqr(g2) + 6*Sqr(gN))*(Yd*Yd.adjoint()*Yd) + 0.2
-      *(-15*traceYuAdjYu - 5*AbsSqr(Lambdax) + 4*Sqr(g1) + Sqr(gN))*(Yd*Yu.
-      adjoint()*Yu) - 4*(Yd*Yd.adjoint()*Yd*Yd.adjoint()*Yd) - 2*(Yd*Yu.adjoint
-      ()*Yu*Yd.adjoint()*Yd) - 2*(Yd*Yu.adjoint()*Yu*Yu.adjoint()*Yu))).real();
+   beta_Yd = (0.002777777777777778*Yd*(-3240*traceYdAdjYdYdAdjYd - 1080*
+      traceYdAdjYuYuAdjYd - 1080*traceYeAdjYeYeAdjYe - 1080*traceKappaAdjKappa*
+      AbsSqr(Lambdax) - 720*traceLambda12AdjLambda12*AbsSqr(Lambdax) - 1080*
+      traceYuAdjYu*AbsSqr(Lambdax) + 1652*Quad(g1) + 5940*Quad(g2) + 5120*Quad(
+      g3) + 2457*Quad(gN) - 144*traceYdAdjYd*Sqr(g1) + 432*traceYeAdjYe*Sqr(g1)
+      + 360*Sqr(g1)*Sqr(g2) + 5760*traceYdAdjYd*Sqr(g3) + 320*Sqr(g1)*Sqr(g3) +
+      2880*Sqr(g2)*Sqr(g3) - 216*traceYdAdjYd*Sqr(gN) - 72*traceYeAdjYe*Sqr(gN)
+      + 360*AbsSqr(Lambdax)*Sqr(gN) - 84*Sqr(g1)*Sqr(gN) + 540*Sqr(g2)*Sqr(gN)
+      + 480*Sqr(g3)*Sqr(gN) - 1080*Sqr(Conj(Lambdax))*Sqr(Lambdax)) + 0.2*(-45*
+      traceYdAdjYd - 15*traceYeAdjYe - 15*AbsSqr(Lambdax) + 4*Sqr(g1) + 30*Sqr(
+      g2) + 6*Sqr(gN))*(Yd*Yd.adjoint()*Yd) + 0.2*(-15*traceYuAdjYu - 5*AbsSqr(
+      Lambdax) + 4*Sqr(g1) + Sqr(gN))*(Yd*Yu.adjoint()*Yu) - 4*(Yd*Yd.adjoint()
+      *Yd*Yd.adjoint()*Yd) - 2*(Yd*Yu.adjoint()*Yu*Yd.adjoint()*Yd) - 2*(Yd*Yu.
+      adjoint()*Yu*Yu.adjoint()*Yu)).real();
 
 
-   return beta_Yd;
+   return twoLoop * beta_Yd;
 }
 
 /**
@@ -102,7 +101,7 @@ Eigen::Matrix<double,3,3> E6SSM_susy_parameters::calc_beta_Yd_3_loop(const Susy_
    beta_Yd = ZEROMATRIX(3,3);
 
 
-   return beta_Yd;
+   return threeLoop * beta_Yd;
 }
 
 /**
@@ -121,7 +120,7 @@ Eigen::Matrix<double,3,3> E6SSM_susy_parameters::calc_beta_Yd_4_loop(const Susy_
    beta_Yd = ZEROMATRIX(3,3);
 
 
-   return beta_Yd;
+   return fourLoop * beta_Yd;
 }
 
 /**
@@ -140,7 +139,7 @@ Eigen::Matrix<double,3,3> E6SSM_susy_parameters::calc_beta_Yd_5_loop(const Susy_
    beta_Yd = ZEROMATRIX(3,3);
 
 
-   return beta_Yd;
+   return fiveLoop * beta_Yd;
 }
 
 } // namespace flexiblesusy

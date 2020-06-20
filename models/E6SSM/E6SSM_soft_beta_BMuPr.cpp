@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:02:09
 
 #include "E6SSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,12 +72,11 @@ double E6SSM_soft_parameters::calc_beta_BMuPr_1_loop(const Soft_traces& soft_tra
 
    double beta_BMuPr;
 
-   beta_BMuPr = Re(0.2*oneOver16PiSqr*(-3*BMuPr*Sqr(g1) + 6*MassB*MuPr*Sqr(g1)
-      - 15*BMuPr*Sqr(g2) + 30*MassWB*MuPr*Sqr(g2) - 2*BMuPr*Sqr(gN) + 4*MassBp*
-      MuPr*Sqr(gN)));
+   beta_BMuPr = Re(0.2*(-3*BMuPr*Sqr(g1) + 6*MassB*MuPr*Sqr(g1) - 15*BMuPr*Sqr(
+      g2) + 30*MassWB*MuPr*Sqr(g2) - 2*BMuPr*Sqr(gN) + 4*MassBp*MuPr*Sqr(gN)));
 
 
-   return beta_BMuPr;
+   return oneLoop * beta_BMuPr;
 }
 
 /**
@@ -92,16 +90,16 @@ double E6SSM_soft_parameters::calc_beta_BMuPr_2_loop(const Soft_traces& soft_tra
 
    double beta_BMuPr;
 
-   beta_BMuPr = Re(-0.06*twoLoop*(-99*BMuPr*Quad(g1) + 396*MassB*MuPr*Quad(g1)
-      - 275*BMuPr*Quad(g2) + 1100*MassWB*MuPr*Quad(g2) - 64*BMuPr*Quad(gN) +
-      256*MassBp*MuPr*Quad(gN) - 30*BMuPr*Sqr(g1)*Sqr(g2) + 60*MassB*MuPr*Sqr(
-      g1)*Sqr(g2) + 60*MassWB*MuPr*Sqr(g1)*Sqr(g2) - 12*BMuPr*Sqr(g1)*Sqr(gN) +
-      24*MassB*MuPr*Sqr(g1)*Sqr(gN) + 24*MassBp*MuPr*Sqr(g1)*Sqr(gN) - 20*BMuPr
-      *Sqr(g2)*Sqr(gN) + 40*MassBp*MuPr*Sqr(g2)*Sqr(gN) + 40*MassWB*MuPr*Sqr(g2
-      )*Sqr(gN)));
+   beta_BMuPr = Re(-0.06*(-99*BMuPr*Quad(g1) + 396*MassB*MuPr*Quad(g1) - 275*
+      BMuPr*Quad(g2) + 1100*MassWB*MuPr*Quad(g2) - 64*BMuPr*Quad(gN) + 256*
+      MassBp*MuPr*Quad(gN) - 30*BMuPr*Sqr(g1)*Sqr(g2) + 60*MassB*MuPr*Sqr(g1)*
+      Sqr(g2) + 60*MassWB*MuPr*Sqr(g1)*Sqr(g2) - 12*BMuPr*Sqr(g1)*Sqr(gN) + 24*
+      MassB*MuPr*Sqr(g1)*Sqr(gN) + 24*MassBp*MuPr*Sqr(g1)*Sqr(gN) - 20*BMuPr*
+      Sqr(g2)*Sqr(gN) + 40*MassBp*MuPr*Sqr(g2)*Sqr(gN) + 40*MassWB*MuPr*Sqr(g2)
+      *Sqr(gN)));
 
 
-   return beta_BMuPr;
+   return twoLoop * beta_BMuPr;
 }
 
 /**
@@ -120,7 +118,7 @@ double E6SSM_soft_parameters::calc_beta_BMuPr_3_loop(const Soft_traces& soft_tra
    beta_BMuPr = 0;
 
 
-   return beta_BMuPr;
+   return threeLoop * beta_BMuPr;
 }
 
 /**
@@ -139,7 +137,7 @@ double E6SSM_soft_parameters::calc_beta_BMuPr_4_loop(const Soft_traces& soft_tra
    beta_BMuPr = 0;
 
 
-   return beta_BMuPr;
+   return fourLoop * beta_BMuPr;
 }
 
 /**
@@ -158,7 +156,7 @@ double E6SSM_soft_parameters::calc_beta_BMuPr_5_loop(const Soft_traces& soft_tra
    beta_BMuPr = 0;
 
 
-   return beta_BMuPr;
+   return fiveLoop * beta_BMuPr;
 }
 
 } // namespace flexiblesusy

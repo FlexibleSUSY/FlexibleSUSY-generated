@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 17:55:59
 
 /**
  * @file CNMSSM_semi_analytic_model.hpp
@@ -24,15 +23,14 @@
  *        value problem using the semi_analytic solver by solving EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Fri 10 Apr 2020 17:55:59 with FlexibleSUSY
- * 2.4.2 (git commit: a94199e5620b8684f5d30d0eece5757a5a72c4a4) and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #ifndef CNMSSM_SEMI_ANALYTIC_MODEL_H
 #define CNMSSM_SEMI_ANALYTIC_MODEL_H
 
 #include "CNMSSM_model.hpp"
-#include "CNMSSM_mass_eigenstates.hpp"
+#include "CNMSSM_model_slha.hpp"
 #include "CNMSSM_semi_analytic_solutions.hpp"
 
 #include "model.hpp"
@@ -45,9 +43,10 @@ class Semi_analytic;
  * @brief model class with routines for determining masses and mixings and EWSB
  */
 template<>
-class CNMSSM<Semi_analytic> : public Model, public CNMSSM_mass_eigenstates {
+class CNMSSM<Semi_analytic> : public Model, public CNMSSM_slha {
 public:
-   explicit CNMSSM(const CNMSSM_input_parameters& input_ = CNMSSM_input_parameters());
+   explicit CNMSSM(const CNMSSM_input_parameters& input_ = CNMSSM_input_parameters(), bool do_convert_masses_to_slha = true);
+   explicit CNMSSM(const CNMSSM_slha&, bool do_convert_masses_to_slha = true);
    CNMSSM(const CNMSSM&) = default;
    CNMSSM(CNMSSM&&) = default;
    virtual ~CNMSSM() = default;
@@ -59,7 +58,7 @@ public:
    virtual void clear_problems();
    virtual std::string name() const;
    virtual void run_to(double scale, double eps = -1.0);
-   virtual void print(std::ostream& out = std::cerr) const;
+   virtual void print(std::ostream&) const;
    virtual void set_precision(double);
 
    /**

@@ -16,15 +16,13 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:43:08
 
 /**
  * @file CE6SSM_semi_analytic_ewsb_solver.cpp
  *
  * @brief implementation of EWSB solver for semi-analytic iteration
  *
- * This file was generated at Fri 10 Apr 2020 18:43:08 with FlexibleSUSY
- * 2.4.2 (git commit: a94199e5620b8684f5d30d0eece5757a5a72c4a4) and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #include "CE6SSM_semi_analytic_ewsb_solver.hpp"
@@ -36,6 +34,7 @@
 #include "root_finder.hpp"
 #include "fixed_point_iterator.hpp"
 #include "raii.hpp"
+#include "wrappers.hpp"
 
 #include <memory>
 

@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:46:08
 
 #ifndef THDMII_OBSERVABLES_H
 #define THDMII_OBSERVABLES_H
@@ -35,7 +34,7 @@ class THDMII_mass_eigenstates;
 class Physical_input;
 
 struct THDMII_observables {
-   static const int NUMBER_OF_OBSERVABLES = 12;
+   static const int NUMBER_OF_OBSERVABLES = 16;
 
    THDMII_observables();
    Eigen::ArrayXd get() const; ///< returns vector of all observables
@@ -47,6 +46,10 @@ struct THDMII_observables {
    Eigen::Array<std::complex<double>,2,1> eff_cp_higgs_gluon_gluon; ///< effective H-Gluon-Gluon coupling
    std::complex<double> eff_cp_pseudoscalar_photon_photon; ///< effective A-Photon-Photon coupling
    std::complex<double> eff_cp_pseudoscalar_gluon_gluon; ///< effective A-Gluon-Gluon coupling
+   double a_muon; ///< a_muon = (g-2)/2 of the muon (calculated with FlexibleSUSY)
+   double edm_Fe_0; ///< electric dipole moment of Fe(0) [1/GeV]
+   double edm_Fe_1; ///< electric dipole moment of Fe(1) [1/GeV]
+   double edm_Fe_2; ///< electric dipole moment of Fe(2) [1/GeV]
 
 };
 

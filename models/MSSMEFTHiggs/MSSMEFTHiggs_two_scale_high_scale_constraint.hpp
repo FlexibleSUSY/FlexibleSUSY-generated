@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:54:51
 
 #ifndef MSSMEFTHiggs_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
 #define MSSMEFTHiggs_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
@@ -38,6 +37,8 @@ public:
    MSSMEFTHiggs_high_scale_constraint() = default;
    MSSMEFTHiggs_high_scale_constraint(MSSMEFTHiggs<Two_scale>*);
    virtual ~MSSMEFTHiggs_high_scale_constraint() = default;
+   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+
    virtual void apply() override;
    virtual double get_scale() const override;
    virtual std::string name() const override { return "MSSMEFTHiggs high-scale constraint"; }

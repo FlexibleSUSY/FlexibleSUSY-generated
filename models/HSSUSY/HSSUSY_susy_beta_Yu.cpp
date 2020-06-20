@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:46:24
 
 #include "HSSUSY_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -40,12 +39,12 @@ Eigen::Matrix<double,3,3> HSSUSY_susy_parameters::calc_beta_Yu_1_loop(const Susy
 
    Eigen::Matrix<double,3,3> beta_Yu;
 
-   beta_Yu = (oneOver16PiSqr*(-0.05*Yu*(-60*traceYdAdjYd - 20*traceYeAdjYe - 60
-      *traceYuAdjYu + 17*Sqr(g1) + 45*Sqr(g2) + 160*Sqr(g3)) - 1.5*(Yu*Yd.
-      adjoint()*Yd) + 1.5*(Yu*Yu.adjoint()*Yu))).real();
+   beta_Yu = (-0.05*Yu*(-60*traceYdAdjYd - 20*traceYeAdjYe - 60*traceYuAdjYu +
+      17*Sqr(g1) + 45*Sqr(g2) + 160*Sqr(g3)) - 1.5*(Yu*Yd.adjoint()*Yd) + 1.5*(
+      Yu*Yu.adjoint()*Yu)).real();
 
 
-   return beta_Yu;
+   return oneLoop * beta_Yu;
 }
 
 /**
@@ -66,23 +65,23 @@ Eigen::Matrix<double,3,3> HSSUSY_susy_parameters::calc_beta_Yu_2_loop(const Susy
 
    Eigen::Matrix<double,3,3> beta_Yu;
 
-   beta_Yu = (twoLoop*(0.0016666666666666668*Yu*(-4050*traceYdAdjYdYdAdjYd +
-      900*traceYdAdjYuYuAdjYd - 1350*traceYeAdjYeYeAdjYe - 4050*
-      traceYuAdjYuYuAdjYu + 1187*Quad(g1) - 3450*Quad(g2) - 64800*Quad(g3) +
-      375*traceYdAdjYd*Sqr(g1) + 1125*traceYeAdjYe*Sqr(g1) + 1275*traceYuAdjYu*
-      Sqr(g1) + 3375*traceYdAdjYd*Sqr(g2) + 1125*traceYeAdjYe*Sqr(g2) + 3375*
-      traceYuAdjYu*Sqr(g2) - 270*Sqr(g1)*Sqr(g2) + 12000*traceYdAdjYd*Sqr(g3) +
-      12000*traceYuAdjYu*Sqr(g3) + 760*Sqr(g1)*Sqr(g3) + 5400*Sqr(g2)*Sqr(g3) +
-      900*Sqr(Lambdax)) + 0.0125*(300*traceYdAdjYd + 100*traceYeAdjYe + 300*
+   beta_Yu = (0.0016666666666666668*Yu*(-4050*traceYdAdjYdYdAdjYd + 900*
+      traceYdAdjYuYuAdjYd - 1350*traceYeAdjYeYeAdjYe - 4050*traceYuAdjYuYuAdjYu
+       + 1187*Quad(g1) - 3450*Quad(g2) - 64800*Quad(g3) + 375*traceYdAdjYd*Sqr(
+      g1) + 1125*traceYeAdjYe*Sqr(g1) + 1275*traceYuAdjYu*Sqr(g1) + 3375*
+      traceYdAdjYd*Sqr(g2) + 1125*traceYeAdjYe*Sqr(g2) + 3375*traceYuAdjYu*Sqr(
+      g2) - 270*Sqr(g1)*Sqr(g2) + 12000*traceYdAdjYd*Sqr(g3) + 12000*
+      traceYuAdjYu*Sqr(g3) + 760*Sqr(g1)*Sqr(g3) + 5400*Sqr(g2)*Sqr(g3) + 900*
+      Sqr(Lambdax)) + 0.0125*(300*traceYdAdjYd + 100*traceYeAdjYe + 300*
       traceYuAdjYu - 43*Sqr(g1) + 45*Sqr(g2) - 1280*Sqr(g3))*(Yu*Yd.adjoint()*
       Yd) + 0.0125*(-540*traceYdAdjYd - 180*traceYeAdjYe - 540*traceYuAdjYu -
       480*Lambdax + 223*Sqr(g1) + 675*Sqr(g2) + 1280*Sqr(g3))*(Yu*Yu.adjoint()*
       Yu) + 2.75*(Yu*Yd.adjoint()*Yd*Yd.adjoint()*Yd) - 0.25*(Yu*Yd.adjoint()*
       Yd*Yu.adjoint()*Yu) - Yu*Yu.adjoint()*Yu*Yd.adjoint()*Yd + 1.5*(Yu*Yu.
-      adjoint()*Yu*Yu.adjoint()*Yu))).real();
+      adjoint()*Yu*Yu.adjoint()*Yu)).real();
 
 
-   return beta_Yu;
+   return twoLoop * beta_Yu;
 }
 
 /**
@@ -98,8 +97,8 @@ Eigen::Matrix<double,3,3> HSSUSY_susy_parameters::calc_beta_Yu_3_loop(const Susy
 
    Eigen::Matrix<double,3,3> beta_Yu;
 
-   beta_Yu = (16.09896843832796*threeLoop*(6.1494623322761255*PROJECTOR*Lambdax
-      *Power5(Yu(2,2)) + 3.6401567229074585*PROJECTOR*Power7(Yu(2,2)) -
+   beta_Yu = (16.09896843832796*(6.1494623322761255*PROJECTOR*Lambdax*Power5(Yu
+      (2,2)) + 3.6401567229074585*PROJECTOR*Power7(Yu(2,2)) -
       1.5170193131852032*PROJECTOR*Cube(Yu(2,2))*Quad(g1) + 1.0553414347426693*
       PROJECTOR*Cube(Yu(2,2))*Quad(g2) + 22.59550733368146*PROJECTOR*Cube(Yu(2,
       2))*Quad(g3) + 2.821688161099187*PROJECTOR*Cube(Yu(2,2))*Quad(Yd(2,2)) +
@@ -165,7 +164,7 @@ Eigen::Matrix<double,3,3> HSSUSY_susy_parameters::calc_beta_Yu_3_loop(const Susy
       real();
 
 
-   return beta_Yu;
+   return threeLoop * beta_Yu;
 }
 
 /**
@@ -181,11 +180,10 @@ Eigen::Matrix<double,3,3> HSSUSY_susy_parameters::calc_beta_Yu_4_loop(const Susy
 
    Eigen::Matrix<double,3,3> beta_Yu;
 
-   beta_Yu = (2308.1827208150457*PROJECTOR*Power8(g3)*Quad(oneOver16PiSqr)*Yu(2
-      ,2)).real();
+   beta_Yu = (2308.1827208150457*PROJECTOR*Power8(g3)*Yu(2,2)).real();
 
 
-   return beta_Yu;
+   return fourLoop * beta_Yu;
 }
 
 /**
@@ -204,7 +202,7 @@ Eigen::Matrix<double,3,3> HSSUSY_susy_parameters::calc_beta_Yu_5_loop(const Susy
    beta_Yu = ZEROMATRIX(3,3);
 
 
-   return beta_Yu;
+   return fiveLoop * beta_Yu;
 }
 
 } // namespace flexiblesusy

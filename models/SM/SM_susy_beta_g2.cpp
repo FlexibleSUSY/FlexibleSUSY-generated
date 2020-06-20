@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:47:19
 
 #include "SM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -37,10 +36,10 @@ double SM_susy_parameters::calc_beta_g2_1_loop(const Susy_traces& susy_traces) c
 
    double beta_g2;
 
-   beta_g2 = Re(-3.1666666666666665*oneOver16PiSqr*Cube(g2));
+   beta_g2 = Re(-3.1666666666666665*Cube(g2));
 
 
-   return beta_g2;
+   return oneLoop * beta_g2;
 }
 
 /**
@@ -57,12 +56,12 @@ double SM_susy_parameters::calc_beta_g2_2_loop(const Susy_traces& susy_traces) c
 
    double beta_g2;
 
-   beta_g2 = Re(0.03333333333333333*twoLoop*Cube(g2)*(-45*traceYdAdjYd - 15*
+   beta_g2 = Re(0.03333333333333333*Cube(g2)*(-45*traceYdAdjYd - 15*
       traceYeAdjYe - 45*traceYuAdjYu + 27*Sqr(g1) + 175*Sqr(g2) + 360*Sqr(g3)))
       ;
 
 
-   return beta_g2;
+   return twoLoop * beta_g2;
 }
 
 /**
@@ -78,15 +77,14 @@ double SM_susy_parameters::calc_beta_g2_3_loop(const Susy_traces& susy_traces) c
 
    double beta_g2;
 
-   beta_g2 = Re(0.000023148148148148147*threeLoop*Cube(g2)*(-151119*Quad(g1) +
-      8123825*Quad(g2) + 3499200*Quad(g3) + 396900*Quad(Yu(2,2)) + 6480*Lambdax
-      *Sqr(g1) + 32400*Lambdax*Sqr(g2) + 235710*Sqr(g1)*Sqr(g2) - 8640*Sqr(g1)*
-      Sqr(g3) + 1684800*Sqr(g2)*Sqr(g3) - 32400*Sqr(Lambdax) - 160110*Sqr(g1)*
-      Sqr(Yu(2,2)) - 984150*Sqr(g2)*Sqr(Yu(2,2)) - 302400*Sqr(g3)*Sqr(Yu(2,2)))
-      );
+   beta_g2 = Re(0.000023148148148148147*Cube(g2)*(-151119*Quad(g1) + 8123825*
+      Quad(g2) + 3499200*Quad(g3) + 396900*Quad(Yu(2,2)) + 6480*Lambdax*Sqr(g1)
+      + 32400*Lambdax*Sqr(g2) + 235710*Sqr(g1)*Sqr(g2) - 8640*Sqr(g1)*Sqr(g3) +
+      1684800*Sqr(g2)*Sqr(g3) - 32400*Sqr(Lambdax) - 160110*Sqr(g1)*Sqr(Yu(2,2)
+      ) - 984150*Sqr(g2)*Sqr(Yu(2,2)) - 302400*Sqr(g3)*Sqr(Yu(2,2))));
 
 
-   return beta_g2;
+   return threeLoop * beta_g2;
 }
 
 /**
@@ -105,7 +103,7 @@ double SM_susy_parameters::calc_beta_g2_4_loop(const Susy_traces& susy_traces) c
    beta_g2 = 0;
 
 
-   return beta_g2;
+   return fourLoop * beta_g2;
 }
 
 /**
@@ -124,7 +122,7 @@ double SM_susy_parameters::calc_beta_g2_5_loop(const Susy_traces& susy_traces) c
    beta_g2 = 0;
 
 
-   return beta_g2;
+   return fiveLoop * beta_g2;
 }
 
 } // namespace flexiblesusy

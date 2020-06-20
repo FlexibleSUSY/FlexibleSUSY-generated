@@ -17,6 +17,6 @@
 #  ====================================================================
 
 
-LIBMSSM_SRC += \
+LIBMSSM_CXXQFT_VERTICES_SRC := \
 	models/MSSM/cxx_qft/MSSM_vertices_1.cpp \
 	models/MSSM/cxx_qft/MSSM_vertices_2.cpp

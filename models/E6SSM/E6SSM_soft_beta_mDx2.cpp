@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:02:19
 
 #include "E6SSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -75,16 +74,16 @@ Eigen::Matrix<double,3,3> E6SSM_soft_parameters::calc_beta_mDx2_1_loop(const Sof
 
    Eigen::Matrix<double,3,3> beta_mDx2;
 
-   beta_mDx2 = (oneOver16PiSqr*(2*ms2*(Kappa.conjugate()*(Kappa).transpose()) +
-      2*(TKappa.conjugate()*(TKappa).transpose()) + mDx2*Kappa.conjugate()*(
-      Kappa).transpose() + 2*(Kappa.conjugate()*mDxbar2*(Kappa).transpose()) +
-      Kappa.conjugate()*(Kappa).transpose()*mDx2 - 0.06666666666666667*(
+   beta_mDx2 = (2*ms2*(Kappa.conjugate()*(Kappa).transpose()) + 2*(TKappa.
+      conjugate()*(TKappa).transpose()) + mDx2*Kappa.conjugate()*(Kappa).
+      transpose() + 2*(Kappa.conjugate()*mDxbar2*(Kappa).transpose()) + Kappa.
+      conjugate()*(Kappa).transpose()*mDx2 - 0.06666666666666667*(
       7.745966692414834*g1*Tr11 + 9.486832980505138*gN*Tr14 + 8*AbsSqr(MassB)*
       Sqr(g1) + 160*AbsSqr(MassG)*Sqr(g3) + 12*AbsSqr(MassBp)*Sqr(gN))*
-      UNITMATRIX(3))).real();
+      UNITMATRIX(3)).real();
 
 
-   return beta_mDx2;
+   return oneLoop * beta_mDx2;
 }
 
 /**
@@ -125,20 +124,20 @@ Eigen::Matrix<double,3,3> E6SSM_soft_parameters::calc_beta_mDx2_2_loop(const Sof
 
    Eigen::Matrix<double,3,3> beta_mDx2;
 
-   beta_mDx2 = (twoLoop*((-6*traceconjTKappaTpTKappa - 4*
-      traceconjTLambda12TpTLambda12 - 12*ms2*traceKappaAdjKappa - 6*
-      traceKappaAdjKappaconjmDx2 - 6*traceKappaconjmDxbar2AdjKappa - 8*ms2*
-      traceLambda12AdjLambda12 - 4*traceLambda12AdjLambda12conjmH2I2 - 4*
-      tracemH1I2AdjLambda12Lambda12 - 4*mHd2*AbsSqr(Lambdax) - 4*mHu2*AbsSqr(
-      Lambdax) - 8*ms2*AbsSqr(Lambdax) - 4*AbsSqr(TLambdax) + 3*ms2*Sqr(gN) + 6
-      *AbsSqr(MassBp)*Sqr(gN))*(Kappa.conjugate()*(Kappa).transpose()) + (-6*
-      traceconjTKappaTpKappa - 4*traceconjTLambda12TpLambda12 - 4*Conj(TLambdax
-      )*Lambdax - 3*Conj(MassBp)*Sqr(gN))*(Kappa.conjugate()*(TKappa).transpose
-      ()) + (-6*traceAdjKappaTKappa - 4*traceAdjLambda12TLambda12 - 3*MassBp*
-      Sqr(gN) - 4*Conj(Lambdax)*TLambdax)*(TKappa.conjugate()*(Kappa).transpose
-      ()) + (-6*traceKappaAdjKappa - 4*traceLambda12AdjLambda12 - 4*AbsSqr(
-      Lambdax) + 3*Sqr(gN))*(TKappa.conjugate()*(TKappa).transpose()) + 0.5*(-6
-      *traceKappaAdjKappa - 4*traceLambda12AdjLambda12 - 4*AbsSqr(Lambdax) + 3*
+   beta_mDx2 = ((-6*traceconjTKappaTpTKappa - 4*traceconjTLambda12TpTLambda12 -
+      12*ms2*traceKappaAdjKappa - 6*traceKappaAdjKappaconjmDx2 - 6*
+      traceKappaconjmDxbar2AdjKappa - 8*ms2*traceLambda12AdjLambda12 - 4*
+      traceLambda12AdjLambda12conjmH2I2 - 4*tracemH1I2AdjLambda12Lambda12 - 4*
+      mHd2*AbsSqr(Lambdax) - 4*mHu2*AbsSqr(Lambdax) - 8*ms2*AbsSqr(Lambdax) - 4
+      *AbsSqr(TLambdax) + 3*ms2*Sqr(gN) + 6*AbsSqr(MassBp)*Sqr(gN))*(Kappa.
+      conjugate()*(Kappa).transpose()) + (-6*traceconjTKappaTpKappa - 4*
+      traceconjTLambda12TpLambda12 - 4*Conj(TLambdax)*Lambdax - 3*Conj(MassBp)*
+      Sqr(gN))*(Kappa.conjugate()*(TKappa).transpose()) + (-6*
+      traceAdjKappaTKappa - 4*traceAdjLambda12TLambda12 - 3*MassBp*Sqr(gN) - 4*
+      Conj(Lambdax)*TLambdax)*(TKappa.conjugate()*(Kappa).transpose()) + (-6*
+      traceKappaAdjKappa - 4*traceLambda12AdjLambda12 - 4*AbsSqr(Lambdax) + 3*
+      Sqr(gN))*(TKappa.conjugate()*(TKappa).transpose()) + 0.5*(-6*
+      traceKappaAdjKappa - 4*traceLambda12AdjLambda12 - 4*AbsSqr(Lambdax) + 3*
       Sqr(gN))*(mDx2*Kappa.conjugate()*(Kappa).transpose()) + (-6*
       traceKappaAdjKappa - 4*traceLambda12AdjLambda12 - 4*AbsSqr(Lambdax) + 3*
       Sqr(gN))*(Kappa.conjugate()*mDxbar2*(Kappa).transpose()) + 0.5*(-6*
@@ -166,10 +165,10 @@ Eigen::Matrix<double,3,3> E6SSM_soft_parameters::calc_beta_mDx2_2_loop(const Sof
       Sqr(g1)*Sqr(gN) - 12*MassBp*Conj(MassB)*Sqr(g1)*Sqr(gN) - 12*MassB*Conj(
       MassBp)*Sqr(g1)*Sqr(gN) + 240*AbsSqr(MassBp)*Sqr(g3)*Sqr(gN) + 240*AbsSqr
       (MassG)*Sqr(g3)*Sqr(gN) + 120*MassG*Conj(MassBp)*Sqr(g3)*Sqr(gN) + 120*
-      MassBp*Conj(MassG)*Sqr(g3)*Sqr(gN))*UNITMATRIX(3))).real();
+      MassBp*Conj(MassG)*Sqr(g3)*Sqr(gN))*UNITMATRIX(3)).real();
 
 
-   return beta_mDx2;
+   return twoLoop * beta_mDx2;
 }
 
 /**
@@ -188,7 +187,7 @@ Eigen::Matrix<double,3,3> E6SSM_soft_parameters::calc_beta_mDx2_3_loop(const Sof
    beta_mDx2 = ZEROMATRIX(3,3);
 
 
-   return beta_mDx2;
+   return threeLoop * beta_mDx2;
 }
 
 /**
@@ -207,7 +206,7 @@ Eigen::Matrix<double,3,3> E6SSM_soft_parameters::calc_beta_mDx2_4_loop(const Sof
    beta_mDx2 = ZEROMATRIX(3,3);
 
 
-   return beta_mDx2;
+   return fourLoop * beta_mDx2;
 }
 
 /**
@@ -226,7 +225,7 @@ Eigen::Matrix<double,3,3> E6SSM_soft_parameters::calc_beta_mDx2_5_loop(const Sof
    beta_mDx2 = ZEROMATRIX(3,3);
 
 
-   return beta_mDx2;
+   return fiveLoop * beta_mDx2;
 }
 
 } // namespace flexiblesusy

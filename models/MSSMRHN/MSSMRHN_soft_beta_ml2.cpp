@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:35:14
 
 #include "MSSMRHN_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -74,15 +73,15 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_ml2_1_loop(const So
 
    Eigen::Matrix<double,3,3> beta_ml2;
 
-   beta_ml2 = (oneOver16PiSqr*(2*mHd2*(Ye.adjoint()*Ye) + 2*mHu2*(Yv.adjoint()*
-      Yv) + 2*((TYe).adjoint()*TYe) + 2*((TYv).adjoint()*TYv) + ml2*Ye.adjoint(
-      )*Ye + ml2*Yv.adjoint()*Yv + 2*(Ye.adjoint()*me2*Ye) + Ye.adjoint()*Ye*
-      ml2 + 2*(Yv.adjoint()*mv2*Yv) + Yv.adjoint()*Yv*ml2 - 0.2*(
-      3.872983346207417*g1*Tr11 + 6*AbsSqr(MassB)*Sqr(g1) + 30*AbsSqr(MassWB)*
-      Sqr(g2))*UNITMATRIX(3))).real();
+   beta_ml2 = (2*mHd2*(Ye.adjoint()*Ye) + 2*mHu2*(Yv.adjoint()*Yv) + 2*((TYe).
+      adjoint()*TYe) + 2*((TYv).adjoint()*TYv) + ml2*Ye.adjoint()*Ye + ml2*Yv.
+      adjoint()*Yv + 2*(Ye.adjoint()*me2*Ye) + Ye.adjoint()*Ye*ml2 + 2*(Yv.
+      adjoint()*mv2*Yv) + Yv.adjoint()*Yv*ml2 - 0.2*(3.872983346207417*g1*Tr11
+      + 6*AbsSqr(MassB)*Sqr(g1) + 30*AbsSqr(MassWB)*Sqr(g2))*UNITMATRIX(3)).
+      real();
 
 
-   return beta_ml2;
+   return oneLoop * beta_ml2;
 }
 
 /**
@@ -123,7 +122,7 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_ml2_2_loop(const So
 
    Eigen::Matrix<double,3,3> beta_ml2;
 
-   beta_ml2 = (twoLoop*(0.4*(-15*traceconjTYdTpTYd - 5*traceconjTYeTpTYe - 15*
+   beta_ml2 = (0.4*(-15*traceconjTYdTpTYd - 5*traceconjTYeTpTYe - 15*
       tracemd2YdAdjYd - 5*traceme2YeAdjYe - 5*traceml2AdjYeYe - 15*
       tracemq2AdjYdYd - 30*mHd2*traceYdAdjYd - 10*mHd2*traceYeAdjYe + 6*mHd2*
       Sqr(g1) + 12*AbsSqr(MassB)*Sqr(g1))*(Ye.adjoint()*Ye) - 0.4*(15*
@@ -157,10 +156,10 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_ml2_2_loop(const So
       Quad(g1) + 150*Tr22*Quad(g2) + 825*AbsSqr(MassWB)*Quad(g2) + 30*Tr2U111*
       Sqr(g1) + 90*AbsSqr(MassB)*Sqr(g1)*Sqr(g2) + 90*AbsSqr(MassWB)*Sqr(g1)*
       Sqr(g2) + 45*MassWB*Conj(MassB)*Sqr(g1)*Sqr(g2) + 45*MassB*Conj(MassWB)*
-      Sqr(g1)*Sqr(g2))*UNITMATRIX(3))).real();
+      Sqr(g1)*Sqr(g2))*UNITMATRIX(3)).real();
 
 
-   return beta_ml2;
+   return twoLoop * beta_ml2;
 }
 
 /**
@@ -179,7 +178,7 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_ml2_3_loop(const So
    beta_ml2 = ZEROMATRIX(3,3);
 
 
-   return beta_ml2;
+   return threeLoop * beta_ml2;
 }
 
 /**
@@ -198,7 +197,7 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_ml2_4_loop(const So
    beta_ml2 = ZEROMATRIX(3,3);
 
 
-   return beta_ml2;
+   return fourLoop * beta_ml2;
 }
 
 /**
@@ -217,7 +216,7 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_ml2_5_loop(const So
    beta_ml2 = ZEROMATRIX(3,3);
 
 
-   return beta_ml2;
+   return fiveLoop * beta_ml2;
 }
 
 } // namespace flexiblesusy

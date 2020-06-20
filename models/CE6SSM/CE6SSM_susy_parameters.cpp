@@ -16,13 +16,8 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:06:07
 
 #include "CE6SSM_susy_parameters.hpp"
-#include "config.h"
-#ifdef ENABLE_THREADS
-#include "global_thread_pool.hpp"
-#endif
 #include "wrappers.hpp"
 #include "functors.hpp"
 
@@ -122,13 +117,6 @@ CE6SSM_susy_parameters CE6SSM_susy_parameters::calc_beta(int loops) const
          beta_vs += calc_beta_vs_2_loop(TRACE_STRUCT);
 
          if (loops > 2) {
-         #ifdef ENABLE_THREADS
-            {
-
-
-            }
-         #else
-         #endif
 
             if (loops > 3) {
 
@@ -512,6 +500,11 @@ Eigen::ArrayXd CE6SSM_susy_parameters::get() const
 
 
    return pars;
+}
+
+void CE6SSM_susy_parameters::print() const
+{
+   this->print(std::cerr);
 }
 
 void CE6SSM_susy_parameters::print(std::ostream& ostr) const

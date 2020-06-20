@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:56:35
 
 #include "MRSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,11 +72,10 @@ double MRSSM_soft_parameters::calc_beta_MDBS_1_loop(const Soft_traces& soft_trac
 
    double beta_MDBS;
 
-   beta_MDBS = Re(0.4*MDBS*oneOver16PiSqr*(5*AbsSqr(LamSD) + 5*AbsSqr(LamSU) +
-      18*Sqr(g1)));
+   beta_MDBS = Re(0.4*MDBS*(5*AbsSqr(LamSD) + 5*AbsSqr(LamSU) + 18*Sqr(g1)));
 
 
-   return beta_MDBS;
+   return oneLoop * beta_MDBS;
 }
 
 /**
@@ -94,17 +92,17 @@ double MRSSM_soft_parameters::calc_beta_MDBS_2_loop(const Soft_traces& soft_trac
 
    double beta_MDBS;
 
-   beta_MDBS = Re(0.04*MDBS*twoLoop*(-150*traceYdAdjYd*AbsSqr(LamSD) - 50*
-      traceYeAdjYe*AbsSqr(LamSD) - 150*traceYuAdjYu*AbsSqr(LamSU) - 150*AbsSqr(
-      LamSD)*AbsSqr(LamTD) - 150*AbsSqr(LamSU)*AbsSqr(LamTU) + 208*Quad(g1) -
-      70*traceYdAdjYd*Sqr(g1) - 90*traceYeAdjYe*Sqr(g1) - 130*traceYuAdjYu*Sqr(
-      g1) - 45*AbsSqr(LamTD)*Sqr(g1) - 45*AbsSqr(LamTU)*Sqr(g1) + 150*AbsSqr(
-      LamSD)*Sqr(g2) + 150*AbsSqr(LamSU)*Sqr(g2) + 180*Sqr(g1)*Sqr(g2) + 440*
-      Sqr(g1)*Sqr(g3) - 100*Sqr(LamSD)*Sqr(Conj(LamSD)) - 100*Sqr(LamSU)*Sqr(
-      Conj(LamSU))));
+   beta_MDBS = Re(0.04*MDBS*(-150*traceYdAdjYd*AbsSqr(LamSD) - 50*traceYeAdjYe*
+      AbsSqr(LamSD) - 150*traceYuAdjYu*AbsSqr(LamSU) - 150*AbsSqr(LamSD)*AbsSqr
+      (LamTD) - 150*AbsSqr(LamSU)*AbsSqr(LamTU) + 208*Quad(g1) - 70*
+      traceYdAdjYd*Sqr(g1) - 90*traceYeAdjYe*Sqr(g1) - 130*traceYuAdjYu*Sqr(g1)
+      - 45*AbsSqr(LamTD)*Sqr(g1) - 45*AbsSqr(LamTU)*Sqr(g1) + 150*AbsSqr(LamSD)
+      *Sqr(g2) + 150*AbsSqr(LamSU)*Sqr(g2) + 180*Sqr(g1)*Sqr(g2) + 440*Sqr(g1)*
+      Sqr(g3) - 100*Sqr(LamSD)*Sqr(Conj(LamSD)) - 100*Sqr(LamSU)*Sqr(Conj(LamSU
+      ))));
 
 
-   return beta_MDBS;
+   return twoLoop * beta_MDBS;
 }
 
 /**
@@ -123,7 +121,7 @@ double MRSSM_soft_parameters::calc_beta_MDBS_3_loop(const Soft_traces& soft_trac
    beta_MDBS = 0;
 
 
-   return beta_MDBS;
+   return threeLoop * beta_MDBS;
 }
 
 /**
@@ -142,7 +140,7 @@ double MRSSM_soft_parameters::calc_beta_MDBS_4_loop(const Soft_traces& soft_trac
    beta_MDBS = 0;
 
 
-   return beta_MDBS;
+   return fourLoop * beta_MDBS;
 }
 
 /**
@@ -161,7 +159,7 @@ double MRSSM_soft_parameters::calc_beta_MDBS_5_loop(const Soft_traces& soft_trac
    beta_MDBS = 0;
 
 
-   return beta_MDBS;
+   return fiveLoop * beta_MDBS;
 }
 
 } // namespace flexiblesusy

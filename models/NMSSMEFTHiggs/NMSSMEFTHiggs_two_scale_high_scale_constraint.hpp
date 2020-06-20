@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:45:14
 
 #ifndef NMSSMEFTHiggs_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
 #define NMSSMEFTHiggs_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
@@ -38,6 +37,8 @@ public:
    NMSSMEFTHiggs_high_scale_constraint() = default;
    NMSSMEFTHiggs_high_scale_constraint(NMSSMEFTHiggs<Two_scale>*);
    virtual ~NMSSMEFTHiggs_high_scale_constraint() = default;
+   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+
    virtual void apply() override;
    virtual double get_scale() const override;
    virtual std::string name() const override { return "NMSSMEFTHiggs high-scale constraint"; }

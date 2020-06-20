@@ -16,13 +16,19 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:47:31
 
 #include "SM_slha_io.hpp"
 #include "SM_input_parameters.hpp"
+#include "SM_mass_eigenstates.hpp"
+#include "SM_model_slha.hpp"
+#include "SM_observables.hpp"
+#include "SM_physical.hpp"
+#include "ew_input.hpp"
 #include "logger.hpp"
-#include "wrappers.hpp"
 #include "numerics2.hpp"
+#include "spectrum_generator_problems.hpp"
+#include "standard_model.hpp"
+#include "wrappers.hpp"
 #include "config.h"
 
 #include <array>
@@ -35,11 +41,14 @@
 #define PHYSICAL(p) model.get_physical().p
 #define PHYSICAL_SLHA(p) model.get_physical_slha().p
 #define LOCALPHYSICAL(p) physical.p
+#define MODEL model
 #define MODELPARAMETER(p) model.get_##p()
 #define INPUTPARAMETER(p) input.p
 #define EXTRAPARAMETER(p) model.get_##p()
+#define OBSERVABLES observables
 #define DEFINE_PHYSICAL_PARAMETER(p) decltype(LOCALPHYSICAL(p)) p;
 #define LowEnergyConstant(p) Electroweak_constants::p
+#define SCALES(p) scales.p
 
 namespace flexiblesusy {
 
@@ -57,6 +66,16 @@ void SM_slha_io::clear()
 void SM_slha_io::set_print_imaginary_parts_of_majorana_mixings(bool flag)
 {
    print_imaginary_parts_of_majorana_mixings = flag;
+}
+
+/**
+ * Reads DR-bar parameters, pole masses and mixing matrices from a
+ * SLHA output file.
+ */
+void SM_slha_io::fill(SM_slha& model) const
+{
+   fill(static_cast<SM_mass_eigenstates&>(model));
+   fill_physical(model.get_physical_slha());
 }
 
 /**
@@ -300,6 +319,44 @@ void SM_slha_io::set_pmns(
    slha_io.set_block("IMVPMNS", pmns_matrix.imag(), "Im(PMNS)", scale);
 }
 
+/**
+ * Stores the model (DR-bar) parameters in the SLHA object.
+ *
+ * @param model model class
+ */
+void SM_slha_io::set_model_parameters(const SM_slha& model)
+{
+   {
+      std::ostringstream block;
+      block << "Block gauge Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(1, (MODELPARAMETER(g1) * 0.7745966692414834), "g1 * 0.7745966692414834")
+            << FORMAT_ELEMENT(2, (MODELPARAMETER(g2)), "g2")
+            << FORMAT_ELEMENT(3, (MODELPARAMETER(g3)), "g3")
+      ;
+      slha_io.set_block(block);
+   }
+   slha_io.set_block("Yu", ToMatrix(MODELPARAMETER(Yu_slha)), "Yu", model.get_scale());
+   slha_io.set_block("Yd", ToMatrix(MODELPARAMETER(Yd_slha)), "Yd", model.get_scale());
+   slha_io.set_block("Ye", ToMatrix(MODELPARAMETER(Ye_slha)), "Ye", model.get_scale());
+   {
+      std::ostringstream block;
+      block << "Block SM Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(1, (MODELPARAMETER(mu2)), "mu2")
+            << FORMAT_ELEMENT(2, (MODELPARAMETER(Lambdax)), "Lambdax")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block HMIX Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(3, (MODELPARAMETER(v)), "v")
+      ;
+      slha_io.set_block(block);
+   }
+
+
+}
+
 void SM_slha_io::set_model_parameters(const standard_model::Standard_model& model)
 {
    {
@@ -378,6 +435,60 @@ void SM_slha_io::set_spectrum(const standard_model::Standard_model& model)
 }
 
 /**
+ * Stores the model (DR-bar) parameters, masses and mixing matrices in
+ * the SLHA object.
+ *
+ * @param model model class in SLHA convention
+ */
+void SM_slha_io::set_spectrum(const SM_slha& model)
+{
+   const SM_physical physical(model.get_physical_slha());
+   const bool write_sm_masses = model.do_calculate_sm_pole_masses();
+
+   set_model_parameters(model);
+   set_mass(physical, write_sm_masses);
+   set_mixing_matrices(physical, write_sm_masses);
+
+   if (slha_io.get_modsel().quark_flavour_violated)
+      set_ckm(model.get_ckm_matrix(), model.get_scale());
+
+   if (slha_io.get_modsel().lepton_flavour_violated)
+      set_pmns(model.get_pmns_matrix(), model.get_scale());
+}
+
+/**
+ * Writes extra SLHA blocks
+ *
+ * @param model model class
+ * @param scales struct of boundary condition scales
+ * @param observables struct of observables
+ */
+void SM_slha_io::set_extra(
+   const SM_slha& model,
+   const SM_scales& scales,
+   const SM_observables& observables)
+{
+   const SM_physical physical(model.get_physical_slha());
+
+   {
+      std::ostringstream block;
+      block << "Block FlexibleSUSYLowEnergy Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(21, (OBSERVABLES.a_muon), "Delta(g-2)_muon/2 FlexibleSUSY")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block EFFHIGGSCOUPLINGS" << '\n'
+            << FORMAT_RANK_THREE_TENSOR(25, 22, 22, (Abs(OBSERVABLES.eff_cp_higgs_photon_photon)), "Abs(effective H-Photon-Photon coupling)")
+            << FORMAT_RANK_THREE_TENSOR(25, 21, 21, (Abs(OBSERVABLES.eff_cp_higgs_gluon_gluon)), "Abs(effective H-Gluon-Gluon coupling)")
+      ;
+      slha_io.set_block(block);
+   }
+
+}
+
+/**
  * Write SLHA object to given output.  If output == "-", then the SLHA
  * object is written to std::cout.  Otherwise, output is interpreted
  * as a file name
@@ -390,6 +501,21 @@ void SM_slha_io::write_to(const std::string& output) const
       write_to_stream(std::cout);
    else
       write_to_file(output);
+}
+
+void SM_slha_io::write_to_file(const std::string& file_name) const
+{
+   slha_io.write_to_file(file_name);
+}
+
+void SM_slha_io::write_to_stream() const
+{
+   write_to_stream(std::cout);
+}
+
+void SM_slha_io::write_to_stream(std::ostream& ostr) const
+{
+   slha_io.write_to_stream(ostr);
 }
 
 /**
@@ -440,19 +566,19 @@ void SM_slha_io::read_from_stream(std::istream& istr)
  */
 void SM_slha_io::fill(SM_input_parameters& input) const
 {
-   SLHA_io::Tuple_processor minpar_processor = [&input, this] (int key, double value) {
+   SLHA_io::Tuple_processor minpar_processor = [&input] (int key, double value) {
       return fill_minpar_tuple(input, key, value);
    };
 
-   SLHA_io::Tuple_processor extpar_processor = [&input, this] (int key, double value) {
+   SLHA_io::Tuple_processor extpar_processor = [&input] (int key, double value) {
       return fill_extpar_tuple(input, key, value);
    };
 
-   SLHA_io::Tuple_processor imminpar_processor = [&input, this] (int key, double value) {
+   SLHA_io::Tuple_processor imminpar_processor = [&input] (int key, double value) {
       return fill_imminpar_tuple(input, key, value);
    };
 
-   SLHA_io::Tuple_processor imextpar_processor = [&input, this] (int key, double value) {
+   SLHA_io::Tuple_processor imextpar_processor = [&input] (int key, double value) {
       return fill_imextpar_tuple(input, key, value);
    };
 

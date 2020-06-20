@@ -17,6 +17,6 @@
 #  ====================================================================
 
 
-LIBCMSSMNoFV_SRC += \
+LIBCMSSMNoFV_CXXQFT_VERTICES_SRC := \
 	models/CMSSMNoFV/cxx_qft/CMSSMNoFV_vertices_1.cpp \
 	models/CMSSMNoFV/cxx_qft/CMSSMNoFV_vertices_2.cpp

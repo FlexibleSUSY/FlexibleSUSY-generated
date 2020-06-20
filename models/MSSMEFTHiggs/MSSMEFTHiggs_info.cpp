@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:54:45
 
 #include "MSSMEFTHiggs_info.hpp"
 

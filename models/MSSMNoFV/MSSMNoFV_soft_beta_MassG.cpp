@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:43:05
 
 #include "MSSMNoFV_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,10 +72,10 @@ double MSSMNoFV_soft_parameters::calc_beta_MassG_1_loop(const Soft_traces& soft_
 
    double beta_MassG;
 
-   beta_MassG = Re(-6*MassG*oneOver16PiSqr*Sqr(g3));
+   beta_MassG = Re(-6*MassG*Sqr(g3));
 
 
-   return beta_MassG;
+   return oneLoop * beta_MassG;
 }
 
 /**
@@ -94,13 +93,12 @@ double MSSMNoFV_soft_parameters::calc_beta_MassG_2_loop(const Soft_traces& soft_
 
    double beta_MassG;
 
-   beta_MassG = Re(0.4*twoLoop*Sqr(g3)*(20*traceAdjYdTYd + 20*traceAdjYuTYu -
-      20*MassG*traceYdAdjYd - 20*MassG*traceYuAdjYu + 11*MassB*Sqr(g1) + 11*
-      MassG*Sqr(g1) + 45*MassG*Sqr(g2) + 45*MassWB*Sqr(g2) + 140*MassG*Sqr(g3))
-      );
+   beta_MassG = Re(0.4*Sqr(g3)*(20*traceAdjYdTYd + 20*traceAdjYuTYu - 20*MassG*
+      traceYdAdjYd - 20*MassG*traceYuAdjYu + 11*MassB*Sqr(g1) + 11*MassG*Sqr(g1
+      ) + 45*MassG*Sqr(g2) + 45*MassWB*Sqr(g2) + 140*MassG*Sqr(g3)));
 
 
-   return beta_MassG;
+   return twoLoop * beta_MassG;
 }
 
 /**
@@ -129,29 +127,28 @@ double MSSMNoFV_soft_parameters::calc_beta_MassG_3_loop(const Soft_traces& soft_
 
    double beta_MassG;
 
-   beta_MassG = Re(0.02666666666666667*threeLoop*Sqr(g3)*(-1800*
-      traceAdjYdTYdAdjYdYd + 900*MassG*traceAdjYdYdAdjYdYd + 450*MassG*
-      traceAdjYdYd*traceAdjYeYe - 600*traceAdjYuTYuAdjYdYd - 1800*
-      traceAdjYuTYuAdjYuYu + 600*MassG*traceAdjYuYuAdjYdYd + 900*MassG*
-      traceAdjYuYuAdjYuYu - 2700*traceAdjYdYd*traceTYdAdjYd - 450*traceAdjYeYe*
-      traceTYdAdjYd - 600*traceTYdAdjYuYuAdjYd - 450*traceAdjYdYd*traceTYeAdjYe
-       - 2700*traceAdjYuYu*traceTYuAdjYu - 3404*MassB*Quad(g1) - 1702*MassG*
-      Quad(g1) - 2025*MassG*Quad(g2) - 4050*MassWB*Quad(g2) + 26025*MassG*Quad(
-      g3) - 160*MassB*traceAdjYdYd*Sqr(g1) - 160*MassG*traceAdjYdYd*Sqr(g1) -
-      220*MassB*traceAdjYuYu*Sqr(g1) - 220*MassG*traceAdjYuYu*Sqr(g1) + 160*
-      traceTYdAdjYd*Sqr(g1) + 220*traceTYuAdjYu*Sqr(g1) - 900*MassG*
-      traceAdjYdYd*Sqr(g2) - 900*MassWB*traceAdjYdYd*Sqr(g2) - 900*MassG*
-      traceAdjYuYu*Sqr(g2) - 900*MassWB*traceAdjYuYu*Sqr(g2) + 900*
-      traceTYdAdjYd*Sqr(g2) + 900*traceTYuAdjYu*Sqr(g2) - 45*MassB*Sqr(g1)*Sqr(
-      g2) - 45*MassG*Sqr(g1)*Sqr(g2) - 45*MassWB*Sqr(g1)*Sqr(g2) - 5200*MassG*
-      traceAdjYdYd*Sqr(g3) - 5200*MassG*traceAdjYuYu*Sqr(g3) + 2600*
-      traceTYdAdjYd*Sqr(g3) + 2600*traceTYuAdjYu*Sqr(g3) + 110*MassB*Sqr(g1)*
-      Sqr(g3) + 220*MassG*Sqr(g1)*Sqr(g3) + 900*MassG*Sqr(g2)*Sqr(g3) + 450*
-      MassWB*Sqr(g2)*Sqr(g3) + 1350*MassG*Sqr(traceAdjYdYd) + 1350*MassG*Sqr(
-      traceAdjYuYu)));
+   beta_MassG = Re(0.02666666666666667*Sqr(g3)*(-1800*traceAdjYdTYdAdjYdYd +
+      900*MassG*traceAdjYdYdAdjYdYd + 450*MassG*traceAdjYdYd*traceAdjYeYe - 600
+      *traceAdjYuTYuAdjYdYd - 1800*traceAdjYuTYuAdjYuYu + 600*MassG*
+      traceAdjYuYuAdjYdYd + 900*MassG*traceAdjYuYuAdjYuYu - 2700*traceAdjYdYd*
+      traceTYdAdjYd - 450*traceAdjYeYe*traceTYdAdjYd - 600*traceTYdAdjYuYuAdjYd
+       - 450*traceAdjYdYd*traceTYeAdjYe - 2700*traceAdjYuYu*traceTYuAdjYu -
+      3404*MassB*Quad(g1) - 1702*MassG*Quad(g1) - 2025*MassG*Quad(g2) - 4050*
+      MassWB*Quad(g2) + 26025*MassG*Quad(g3) - 160*MassB*traceAdjYdYd*Sqr(g1) -
+      160*MassG*traceAdjYdYd*Sqr(g1) - 220*MassB*traceAdjYuYu*Sqr(g1) - 220*
+      MassG*traceAdjYuYu*Sqr(g1) + 160*traceTYdAdjYd*Sqr(g1) + 220*
+      traceTYuAdjYu*Sqr(g1) - 900*MassG*traceAdjYdYd*Sqr(g2) - 900*MassWB*
+      traceAdjYdYd*Sqr(g2) - 900*MassG*traceAdjYuYu*Sqr(g2) - 900*MassWB*
+      traceAdjYuYu*Sqr(g2) + 900*traceTYdAdjYd*Sqr(g2) + 900*traceTYuAdjYu*Sqr(
+      g2) - 45*MassB*Sqr(g1)*Sqr(g2) - 45*MassG*Sqr(g1)*Sqr(g2) - 45*MassWB*Sqr
+      (g1)*Sqr(g2) - 5200*MassG*traceAdjYdYd*Sqr(g3) - 5200*MassG*traceAdjYuYu*
+      Sqr(g3) + 2600*traceTYdAdjYd*Sqr(g3) + 2600*traceTYuAdjYu*Sqr(g3) + 110*
+      MassB*Sqr(g1)*Sqr(g3) + 220*MassG*Sqr(g1)*Sqr(g3) + 900*MassG*Sqr(g2)*Sqr
+      (g3) + 450*MassWB*Sqr(g2)*Sqr(g3) + 1350*MassG*Sqr(traceAdjYdYd) + 1350*
+      MassG*Sqr(traceAdjYuYu)));
 
 
-   return beta_MassG;
+   return threeLoop * beta_MassG;
 }
 
 /**
@@ -170,7 +167,7 @@ double MSSMNoFV_soft_parameters::calc_beta_MassG_4_loop(const Soft_traces& soft_
    beta_MassG = 0;
 
 
-   return beta_MassG;
+   return fourLoop * beta_MassG;
 }
 
 /**
@@ -189,7 +186,7 @@ double MSSMNoFV_soft_parameters::calc_beta_MassG_5_loop(const Soft_traces& soft_
    beta_MassG = 0;
 
 
-   return beta_MassG;
+   return fiveLoop * beta_MassG;
 }
 
 } // namespace flexiblesusy

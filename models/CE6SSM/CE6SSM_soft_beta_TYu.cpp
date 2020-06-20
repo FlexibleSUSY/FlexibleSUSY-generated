@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:06:37
 
 #include "CE6SSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -75,15 +74,15 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_TYu_1_loop(const Sof
 
    Eigen::Matrix<double,3,3> beta_TYu;
 
-   beta_TYu = (oneOver16PiSqr*(0.03333333333333333*(180*traceAdjYuTYu*Yu + 52*
-      MassB*Yu*Sqr(g1) + 180*MassWB*Yu*Sqr(g2) + 320*MassG*Yu*Sqr(g3) + 18*
-      MassBp*Yu*Sqr(gN) + 90*traceYuAdjYu*TYu + 30*AbsSqr(Lambdax)*TYu - 26*Sqr
-      (g1)*TYu - 90*Sqr(g2)*TYu - 160*Sqr(g3)*TYu - 9*Sqr(gN)*TYu + 60*Yu*Conj(
-      Lambdax)*TLambdax) + 2*(Yu*Yd.adjoint()*TYd) + 4*(Yu*Yu.adjoint()*TYu) +
-      TYu*Yd.adjoint()*Yd + 5*(TYu*Yu.adjoint()*Yu))).real();
+   beta_TYu = (0.03333333333333333*(180*traceAdjYuTYu*Yu + 52*MassB*Yu*Sqr(g1)
+      + 180*MassWB*Yu*Sqr(g2) + 320*MassG*Yu*Sqr(g3) + 18*MassBp*Yu*Sqr(gN) +
+      90*traceYuAdjYu*TYu + 30*AbsSqr(Lambdax)*TYu - 26*Sqr(g1)*TYu - 90*Sqr(g2
+      )*TYu - 160*Sqr(g3)*TYu - 9*Sqr(gN)*TYu + 60*Yu*Conj(Lambdax)*TLambdax) +
+      2*(Yu*Yd.adjoint()*TYd) + 4*(Yu*Yu.adjoint()*TYu) + TYu*Yd.adjoint()*Yd +
+      5*(TYu*Yu.adjoint()*Yu)).real();
 
 
-   return beta_TYu;
+   return oneLoop * beta_TYu;
 }
 
 /**
@@ -114,8 +113,8 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_TYu_2_loop(const Sof
 
    Eigen::Matrix<double,3,3> beta_TYu;
 
-   beta_TYu = (twoLoop*(0.0005555555555555556*(-10800*traceYdAdjYuTYuAdjYd*Yu -
-      10800*traceYuAdjYdTYdAdjYu*Yu - 64800*traceYuAdjYuTYuAdjYu*Yu - 10800*
+   beta_TYu = (0.0005555555555555556*(-10800*traceYdAdjYuTYuAdjYd*Yu - 10800*
+      traceYuAdjYdTYdAdjYu*Yu - 64800*traceYuAdjYuTYuAdjYu*Yu - 10800*
       traceAdjKappaTKappa*Yu*AbsSqr(Lambdax) - 7200*traceAdjLambda12TLambda12*
       Yu*AbsSqr(Lambdax) - 10800*traceAdjYdTYd*Yu*AbsSqr(Lambdax) - 3600*
       traceAdjYeTYe*Yu*AbsSqr(Lambdax) - 62608*MassB*Yu*Quad(g1) - 118800*
@@ -157,10 +156,10 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_TYu_2_loop(const Sof
       adjoint()*TYd*Yu.adjoint()*Yu) - 6*(Yu*Yu.adjoint()*Yu*Yu.adjoint()*TYu)
       - 8*(Yu*Yu.adjoint()*TYu*Yu.adjoint()*Yu) - 2*(TYu*Yd.adjoint()*Yd*Yd.
       adjoint()*Yd) - 4*(TYu*Yd.adjoint()*Yd*Yu.adjoint()*Yu) - 6*(TYu*Yu.
-      adjoint()*Yu*Yu.adjoint()*Yu))).real();
+      adjoint()*Yu*Yu.adjoint()*Yu)).real();
 
 
-   return beta_TYu;
+   return twoLoop * beta_TYu;
 }
 
 /**
@@ -179,7 +178,7 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_TYu_3_loop(const Sof
    beta_TYu = ZEROMATRIX(3,3);
 
 
-   return beta_TYu;
+   return threeLoop * beta_TYu;
 }
 
 /**
@@ -198,7 +197,7 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_TYu_4_loop(const Sof
    beta_TYu = ZEROMATRIX(3,3);
 
 
-   return beta_TYu;
+   return fourLoop * beta_TYu;
 }
 
 /**
@@ -217,7 +216,7 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_TYu_5_loop(const Sof
    beta_TYu = ZEROMATRIX(3,3);
 
 
-   return beta_TYu;
+   return fiveLoop * beta_TYu;
 }
 
 } // namespace flexiblesusy

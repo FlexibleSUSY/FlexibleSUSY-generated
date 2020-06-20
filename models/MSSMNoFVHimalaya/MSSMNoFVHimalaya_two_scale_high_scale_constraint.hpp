@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 17:35:17
 
 #ifndef MSSMNoFVHimalaya_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
 #define MSSMNoFVHimalaya_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
@@ -38,6 +37,8 @@ public:
    MSSMNoFVHimalaya_high_scale_constraint() = default;
    MSSMNoFVHimalaya_high_scale_constraint(MSSMNoFVHimalaya<Two_scale>*);
    virtual ~MSSMNoFVHimalaya_high_scale_constraint() = default;
+   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+
    virtual void apply() override;
    virtual double get_scale() const override;
    virtual std::string name() const override { return "MSSMNoFVHimalaya high-scale constraint"; }

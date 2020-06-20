@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:44:10
 
 #include "MSSMNoFV_two_scale_spectrum_generator.hpp"
 #include "MSSMNoFV_input_parameters.hpp"
@@ -90,6 +89,9 @@ void MSSMNoFV_spectrum_generator<Two_scale>::run_except(const softsusy::QedQcd& 
    high_scale_constraint.initialize();
    susy_scale_constraint.initialize();
    low_scale_constraint .initialize();
+
+   low_scale_constraint.set_SM_like_Higgs_index(
+      settings.get(Spectrum_generator_settings::eft_higgs_index));
 
    MSSMNoFV_convergence_tester<Two_scale> convergence_tester(
       &model, settings.get(Spectrum_generator_settings::precision));

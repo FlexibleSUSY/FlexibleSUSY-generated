@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:49:56
 
 #include "MSSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -74,15 +73,15 @@ Eigen::Matrix<double,3,3> MSSMEFTHiggs_soft_parameters::calc_beta_mq2_1_loop(con
 
    Eigen::Matrix<double,3,3> beta_mq2;
 
-   beta_mq2 = (oneOver16PiSqr*(2*mHd2*(Yd.adjoint()*Yd) + 2*mHu2*(Yu.adjoint()*
-      Yu) + 2*((TYd).adjoint()*TYd) + 2*((TYu).adjoint()*TYu) + mq2*Yd.adjoint(
-      )*Yd + mq2*Yu.adjoint()*Yu + 2*(Yd.adjoint()*md2*Yd) + Yd.adjoint()*Yd*
-      mq2 + 2*(Yu.adjoint()*mu2*Yu) + Yu.adjoint()*Yu*mq2 + 0.06666666666666667
-      *(3.872983346207417*g1*Tr11 - 2*AbsSqr(MassB)*Sqr(g1) - 90*AbsSqr(MassWB)
-      *Sqr(g2) - 160*AbsSqr(MassG)*Sqr(g3))*UNITMATRIX(3))).real();
+   beta_mq2 = (2*mHd2*(Yd.adjoint()*Yd) + 2*mHu2*(Yu.adjoint()*Yu) + 2*((TYd).
+      adjoint()*TYd) + 2*((TYu).adjoint()*TYu) + mq2*Yd.adjoint()*Yd + mq2*Yu.
+      adjoint()*Yu + 2*(Yd.adjoint()*md2*Yd) + Yd.adjoint()*Yd*mq2 + 2*(Yu.
+      adjoint()*mu2*Yu) + Yu.adjoint()*Yu*mq2 + 0.06666666666666667*(
+      3.872983346207417*g1*Tr11 - 2*AbsSqr(MassB)*Sqr(g1) - 90*AbsSqr(MassWB)*
+      Sqr(g2) - 160*AbsSqr(MassG)*Sqr(g3))*UNITMATRIX(3)).real();
 
 
-   return beta_mq2;
+   return oneLoop * beta_mq2;
 }
 
 /**
@@ -118,7 +117,7 @@ Eigen::Matrix<double,3,3> MSSMEFTHiggs_soft_parameters::calc_beta_mq2_2_loop(con
 
    Eigen::Matrix<double,3,3> beta_mq2;
 
-   beta_mq2 = (twoLoop*(0.4*(-15*traceconjTYdTpTYd - 5*traceconjTYeTpTYe - 15*
+   beta_mq2 = (0.4*(-15*traceconjTYdTpTYd - 5*traceconjTYeTpTYe - 15*
       tracemd2YdAdjYd - 5*traceme2YeAdjYe - 5*traceml2AdjYeYe - 15*
       tracemq2AdjYdYd - 30*mHd2*traceYdAdjYd - 10*mHd2*traceYeAdjYe + 2*mHd2*
       Sqr(g1) + 4*AbsSqr(MassB)*Sqr(g1))*(Yd.adjoint()*Yd) - 0.4*(15*
@@ -157,10 +156,10 @@ Eigen::Matrix<double,3,3> MSSMEFTHiggs_soft_parameters::calc_beta_mq2_2_loop(con
       Sqr(g3) + 80*MassB*Conj(MassG)*Sqr(g1)*Sqr(g3) + 7200*AbsSqr(MassG)*Sqr(
       g2)*Sqr(g3) + 7200*AbsSqr(MassWB)*Sqr(g2)*Sqr(g3) + 3600*MassWB*Conj(
       MassG)*Sqr(g2)*Sqr(g3) + 3600*MassG*Conj(MassWB)*Sqr(g2)*Sqr(g3))*
-      UNITMATRIX(3))).real();
+      UNITMATRIX(3)).real();
 
 
-   return beta_mq2;
+   return twoLoop * beta_mq2;
 }
 
 /**
@@ -179,7 +178,7 @@ Eigen::Matrix<double,3,3> MSSMEFTHiggs_soft_parameters::calc_beta_mq2_3_loop(con
    beta_mq2 = ZEROMATRIX(3,3);
 
 
-   return beta_mq2;
+   return threeLoop * beta_mq2;
 }
 
 /**
@@ -198,7 +197,7 @@ Eigen::Matrix<double,3,3> MSSMEFTHiggs_soft_parameters::calc_beta_mq2_4_loop(con
    beta_mq2 = ZEROMATRIX(3,3);
 
 
-   return beta_mq2;
+   return fourLoop * beta_mq2;
 }
 
 /**
@@ -217,7 +216,7 @@ Eigen::Matrix<double,3,3> MSSMEFTHiggs_soft_parameters::calc_beta_mq2_5_loop(con
    beta_mq2 = ZEROMATRIX(3,3);
 
 
-   return beta_mq2;
+   return fiveLoop * beta_mq2;
 }
 
 } // namespace flexiblesusy

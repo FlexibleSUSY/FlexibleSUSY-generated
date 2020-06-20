@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:25:49
 
 #ifndef HGTHDMIIMSSMBC_soft_parameters_H
 #define HGTHDMIIMSSMBC_soft_parameters_H

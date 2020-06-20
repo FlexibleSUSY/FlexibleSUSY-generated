@@ -21,7 +21,6 @@
  * @brief contains wrapper class for model class in SLHA convention
  */
 
-// File generated at Fri 10 Apr 2020 20:40:45
 
 #ifndef CMSSMNoFV_SLHA_H
 #define CMSSMNoFV_SLHA_H
@@ -29,11 +28,6 @@
 #include "CMSSMNoFV_input_parameters.hpp"
 #include "CMSSMNoFV_mass_eigenstates.hpp"
 #include "CMSSMNoFV_physical.hpp"
-
-#include "ckm.hpp"
-#include "linalg2.hpp"
-#include "pmns.hpp"
-#include "slha_io.hpp"
 #include "wrappers.hpp"
 
 #define LOCALPHYSICAL(p) physical.p
@@ -50,11 +44,10 @@ namespace flexiblesusy {
  * @tparam Model model class to wrap
  */
 
-template <class Model>
-class CMSSMNoFV_slha : public Model {
+class CMSSMNoFV_slha : public CMSSMNoFV_mass_eigenstates {
 public:
-   explicit CMSSMNoFV_slha(const CMSSMNoFV_input_parameters& input_ = CMSSMNoFV_input_parameters());
-   explicit CMSSMNoFV_slha(const Model&, bool do_convert_masses_to_slha = true);
+   explicit CMSSMNoFV_slha(const CMSSMNoFV_input_parameters& input_ = CMSSMNoFV_input_parameters(), bool do_convert_masses_to_slha = true);
+   explicit CMSSMNoFV_slha(const CMSSMNoFV_mass_eigenstates&, bool do_convert_masses_to_slha = true);
    CMSSMNoFV_slha(const CMSSMNoFV_slha&) = default;
    CMSSMNoFV_slha(CMSSMNoFV_slha&&) = default;
    virtual ~CMSSMNoFV_slha() = default;
@@ -209,145 +202,6 @@ private:
    void convert_trilinear_couplings_to_slha();
    void convert_soft_squared_masses_to_slha();
 };
-
-template <class Model>
-CMSSMNoFV_slha<Model>::CMSSMNoFV_slha(const CMSSMNoFV_input_parameters& input_)
-   : Model(input_)
-{
-}
-
-/**
- * Copy constructor.  Copies from base class (model class in
- * BPMZ convention) and converts parameters to SLHA.
- *
- * @param model_ model class in BPMZ convention
- * @param do_convert_masses_to_slha whether to convert majorana
- *    fermion masses to SLHA convention (allow them to be negative)
- */
-template <class Model>
-CMSSMNoFV_slha<Model>::CMSSMNoFV_slha(const Model& model_,
-                            bool do_convert_masses_to_slha)
-   : Model(model_)
-   , convert_masses_to_slha(do_convert_masses_to_slha)
-{
-   convert_to_slha();
-}
-
-template <class Model>
-void CMSSMNoFV_slha<Model>::clear()
-{
-   Model::clear();
-   physical_slha.clear();
-}
-
-template <class Model>
-void CMSSMNoFV_slha<Model>::calculate_spectrum()
-{
-   Model::calculate_spectrum();
-   convert_to_slha();
-}
-
-template <class Model>
-void CMSSMNoFV_slha<Model>::convert_to_slha()
-{
-   physical_slha = this->get_physical();
-
-   if (convert_masses_to_slha)
-      physical_slha.convert_to_slha();
-
-   convert_yukawa_couplings_to_slha();
-   calculate_ckm_matrix();
-   calculate_pmns_matrix();
-   convert_trilinear_couplings_to_slha();
-   convert_soft_squared_masses_to_slha();
-}
-
-template <class Model>
-void CMSSMNoFV_slha<Model>::calculate_ckm_matrix()
-{
-
-}
-
-template <class Model>
-void CMSSMNoFV_slha<Model>::calculate_pmns_matrix()
-{
-   pmns << 1, 0, 0, 0, 1, 0, 0, 0, 1;
-
-}
-
-/**
- * Convert Yukawa couplings to SLHA convention
- */
-template <class Model>
-void CMSSMNoFV_slha<Model>::convert_yukawa_couplings_to_slha()
-{
-   Yu_slha = MODELPARAMETER(Yu).diagonal().real();
-   Yd_slha = MODELPARAMETER(Yd).diagonal().real();
-   Ye_slha = MODELPARAMETER(Ye).diagonal().real();
-
-}
-
-/**
- * Convert trilinear couplings to SLHA convention
- */
-template <class Model>
-void CMSSMNoFV_slha<Model>::convert_trilinear_couplings_to_slha()
-{
-   TYu_slha = (MODELPARAMETER(TYu)).real();
-   TYd_slha = (MODELPARAMETER(TYd)).real();
-   TYe_slha = (MODELPARAMETER(TYe)).real();
-
-}
-
-/**
- * Convert soft-breaking squared mass parameters to SLHA convention
- */
-template <class Model>
-void CMSSMNoFV_slha<Model>::convert_soft_squared_masses_to_slha()
-{
-   mq2_slha = (MODELPARAMETER(mq2)).real();
-   mu2_slha = (MODELPARAMETER(mu2)).real();
-   md2_slha = (MODELPARAMETER(md2)).real();
-   ml2_slha = (MODELPARAMETER(ml2)).real();
-   me2_slha = (MODELPARAMETER(me2)).real();
-
-}
-
-template <class Model>
-const CMSSMNoFV_physical& CMSSMNoFV_slha<Model>::get_physical_slha() const
-{
-   return physical_slha;
-}
-
-template <class Model>
-CMSSMNoFV_physical& CMSSMNoFV_slha<Model>::get_physical_slha()
-{
-   return physical_slha;
-}
-
-template <class Model>
-void CMSSMNoFV_slha<Model>::print(std::ostream& ostr) const
-{
-   Model::print(ostr);
-
-   ostr << "----------------------------------------\n"
-           "SLHA convention:\n"
-           "----------------------------------------\n";
-   physical_slha.print(ostr);
-}
-
-template <class Model>
-void CMSSMNoFV_slha<Model>::set_convert_masses_to_slha(bool flag)
-{
-   convert_masses_to_slha = flag;
-}
-
-template <class Model>
-std::ostream& operator<<(std::ostream& ostr, const CMSSMNoFV_slha<Model>& model)
-{
-   model.print(ostr);
-   return ostr;
-}
 
 } // namespace flexiblesusy
 

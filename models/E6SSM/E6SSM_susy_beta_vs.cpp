@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:01:46
 
 #include "E6SSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -40,11 +39,11 @@ double E6SSM_susy_parameters::calc_beta_vs_1_loop(const Susy_traces& susy_traces
 
    double beta_vs;
 
-   beta_vs = Re(0.25*oneOver16PiSqr*vs*(-12*traceKappaAdjKappa - 8*
-      traceLambda12AdjLambda12 - 8*AbsSqr(Lambdax) + 5*Sqr(gN)));
+   beta_vs = Re(0.25*vs*(-12*traceKappaAdjKappa - 8*traceLambda12AdjLambda12 -
+      8*AbsSqr(Lambdax) + 5*Sqr(gN)));
 
 
-   return beta_vs;
+   return oneLoop * beta_vs;
 }
 
 /**
@@ -68,8 +67,8 @@ double E6SSM_susy_parameters::calc_beta_vs_2_loop(const Susy_traces& susy_traces
 
    double beta_vs;
 
-   beta_vs = Re(-0.00625*twoLoop*vs*(-960*traceKappaAdjKappaKappaAdjKappa - 640
-      *traceLambda12AdjLambda12Lambda12AdjLambda12 - 960*traceYdAdjYd*AbsSqr(
+   beta_vs = Re(-0.00625*vs*(-960*traceKappaAdjKappaKappaAdjKappa - 640*
+      traceLambda12AdjLambda12Lambda12AdjLambda12 - 960*traceYdAdjYd*AbsSqr(
       Lambdax) - 320*traceYeAdjYe*AbsSqr(Lambdax) - 960*traceYuAdjYu*AbsSqr(
       Lambdax) + 1065*Quad(gN) + 128*traceKappaAdjKappa*Sqr(g1) + 192*
       traceLambda12AdjLambda12*Sqr(g1) + 192*AbsSqr(Lambdax)*Sqr(g1) + 960*
@@ -79,7 +78,7 @@ double E6SSM_susy_parameters::calc_beta_vs_2_loop(const Susy_traces& susy_traces
       Conj(Lambdax))*Sqr(Lambdax)));
 
 
-   return beta_vs;
+   return twoLoop * beta_vs;
 }
 
 /**
@@ -98,7 +97,7 @@ double E6SSM_susy_parameters::calc_beta_vs_3_loop(const Susy_traces& susy_traces
    beta_vs = 0;
 
 
-   return beta_vs;
+   return threeLoop * beta_vs;
 }
 
 /**
@@ -117,7 +116,7 @@ double E6SSM_susy_parameters::calc_beta_vs_4_loop(const Susy_traces& susy_traces
    beta_vs = 0;
 
 
-   return beta_vs;
+   return fourLoop * beta_vs;
 }
 
 /**
@@ -136,7 +135,7 @@ double E6SSM_susy_parameters::calc_beta_vs_5_loop(const Susy_traces& susy_traces
    beta_vs = 0;
 
 
-   return beta_vs;
+   return fiveLoop * beta_vs;
 }
 
 } // namespace flexiblesusy

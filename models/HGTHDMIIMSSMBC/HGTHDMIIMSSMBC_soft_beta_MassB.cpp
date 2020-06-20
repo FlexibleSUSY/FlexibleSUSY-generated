@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:25:49
 
 #include "HGTHDMIIMSSMBC_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,10 +72,10 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_MassB_1_loop(const Soft_traces&
 
    double beta_MassB;
 
-   beta_MassB = Re(MassB*oneOver16PiSqr*(Sqr(g1dp) + Sqr(g2up)));
+   beta_MassB = Re(MassB*(Sqr(g1dp) + Sqr(g2up)));
 
 
-   return beta_MassB;
+   return oneLoop * beta_MassB;
 }
 
 /**
@@ -93,15 +92,15 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_MassB_2_loop(const Soft_traces&
 
    double beta_MassB;
 
-   beta_MassB = Re(0.025*twoLoop*(5*MassB*Quad(g1dp) + 5*MassB*Quad(g2up) - 180
-      *MassB*traceYdAdjYd*Sqr(g1dp) - 60*MassB*traceYeAdjYe*Sqr(g1dp) + 51*
-      MassB*Sqr(g1)*Sqr(g1dp) - 105*MassB*Sqr(g1d)*Sqr(g1dp) + 120*MassWB*Sqr(
-      g1d)*Sqr(g1dp) + 255*MassB*Sqr(g1dp)*Sqr(g2) - 180*MassB*traceYuAdjYu*Sqr
-      (g2up) + 51*MassB*Sqr(g1)*Sqr(g2up) + 255*MassB*Sqr(g2)*Sqr(g2up) - 105*
-      MassB*Sqr(g2u)*Sqr(g2up) + 120*MassWB*Sqr(g2u)*Sqr(g2up)));
+   beta_MassB = Re(0.025*(5*MassB*Quad(g1dp) + 5*MassB*Quad(g2up) - 180*MassB*
+      traceYdAdjYd*Sqr(g1dp) - 60*MassB*traceYeAdjYe*Sqr(g1dp) + 51*MassB*Sqr(
+      g1)*Sqr(g1dp) - 105*MassB*Sqr(g1d)*Sqr(g1dp) + 120*MassWB*Sqr(g1d)*Sqr(
+      g1dp) + 255*MassB*Sqr(g1dp)*Sqr(g2) - 180*MassB*traceYuAdjYu*Sqr(g2up) +
+      51*MassB*Sqr(g1)*Sqr(g2up) + 255*MassB*Sqr(g2)*Sqr(g2up) - 105*MassB*Sqr(
+      g2u)*Sqr(g2up) + 120*MassWB*Sqr(g2u)*Sqr(g2up)));
 
 
-   return beta_MassB;
+   return twoLoop * beta_MassB;
 }
 
 /**
@@ -120,7 +119,7 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_MassB_3_loop(const Soft_traces&
    beta_MassB = 0;
 
 
-   return beta_MassB;
+   return threeLoop * beta_MassB;
 }
 
 /**
@@ -139,7 +138,7 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_MassB_4_loop(const Soft_traces&
    beta_MassB = 0;
 
 
-   return beta_MassB;
+   return fourLoop * beta_MassB;
 }
 
 /**
@@ -158,7 +157,7 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_MassB_5_loop(const Soft_traces&
    beta_MassB = 0;
 
 
-   return beta_MassB;
+   return fiveLoop * beta_MassB;
 }
 
 } // namespace flexiblesusy

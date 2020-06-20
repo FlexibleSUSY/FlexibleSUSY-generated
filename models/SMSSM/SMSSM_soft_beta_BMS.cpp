@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:11:56
 
 #include "SMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,12 +72,11 @@ double SMSSM_soft_parameters::calc_beta_BMS_1_loop(const Soft_traces& soft_trace
 
    double beta_BMS;
 
-   beta_BMS = Re(4*oneOver16PiSqr*(2*AbsSqr(Kappa)*BMS + AbsSqr(Lambdax)*BMS +
-      2*BMu*Conj(Lambdax)*Kappa + 2*MS*Conj(Kappa)*TKappa + 2*MS*Conj(Lambdax)*
-      TLambdax));
+   beta_BMS = Re(4*(2*AbsSqr(Kappa)*BMS + AbsSqr(Lambdax)*BMS + 2*BMu*Conj(
+      Lambdax)*Kappa + 2*MS*Conj(Kappa)*TKappa + 2*MS*Conj(Lambdax)*TLambdax));
 
 
-   return beta_BMS;
+   return oneLoop * beta_BMS;
 }
 
 /**
@@ -98,7 +96,7 @@ double SMSSM_soft_parameters::calc_beta_BMS_2_loop(const Soft_traces& soft_trace
 
    double beta_BMS;
 
-   beta_BMS = Re(-0.8*twoLoop*(30*MS*traceAdjYdTYd*AbsSqr(Lambdax) + 10*MS*
+   beta_BMS = Re(-0.8*(30*MS*traceAdjYdTYd*AbsSqr(Lambdax) + 10*MS*
       traceAdjYeTYe*AbsSqr(Lambdax) + 30*MS*traceAdjYuTYu*AbsSqr(Lambdax) + 15*
       traceYdAdjYd*AbsSqr(Lambdax)*BMS + 5*traceYeAdjYe*AbsSqr(Lambdax)*BMS +
       15*traceYuAdjYu*AbsSqr(Lambdax)*BMS + 40*AbsSqr(Kappa)*AbsSqr(Lambdax)*
@@ -120,7 +118,7 @@ double SMSSM_soft_parameters::calc_beta_BMS_2_loop(const Soft_traces& soft_trace
       Mu*Sqr(Conj(Lambdax))*TLambdax));
 
 
-   return beta_BMS;
+   return twoLoop * beta_BMS;
 }
 
 /**
@@ -139,7 +137,7 @@ double SMSSM_soft_parameters::calc_beta_BMS_3_loop(const Soft_traces& soft_trace
    beta_BMS = 0;
 
 
-   return beta_BMS;
+   return threeLoop * beta_BMS;
 }
 
 /**
@@ -158,7 +156,7 @@ double SMSSM_soft_parameters::calc_beta_BMS_4_loop(const Soft_traces& soft_trace
    beta_BMS = 0;
 
 
-   return beta_BMS;
+   return fourLoop * beta_BMS;
 }
 
 /**
@@ -177,7 +175,7 @@ double SMSSM_soft_parameters::calc_beta_BMS_5_loop(const Soft_traces& soft_trace
    beta_BMS = 0;
 
 
-   return beta_BMS;
+   return fiveLoop * beta_BMS;
 }
 
 } // namespace flexiblesusy

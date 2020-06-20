@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:37:45
 
 #include "NUHMSSM_two_scale_initial_guesser.hpp"
 #include "NUHMSSM_two_scale_model.hpp"

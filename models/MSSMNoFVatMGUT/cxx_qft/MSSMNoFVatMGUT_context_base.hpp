@@ -16,28 +16,24 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:43:54
 
 /**
  * @file cxx_qft/MSSMNoFVatMGUT_context_base.hpp
  *
- * This file was generated at Fri 10 Apr 2020 20:43:54 with FlexibleSUSY
- * 2.4.2 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #ifndef MSSMNoFVatMGUT_CXXQFT_CONTEXT_BASE_H
 #define MSSMNoFVatMGUT_CXXQFT_CONTEXT_BASE_H
 
-#include "MSSMNoFVatMGUT_mass_eigenstates.hpp"
-
 #include "MSSMNoFVatMGUT_fields.hpp"
-#include "MSSMNoFVatMGUT_mass_eigenstates.hpp"
+#include "MSSMNoFVatMGUT_mass_eigenstates_interface.hpp"
 
 namespace flexiblesusy {
 namespace MSSMNoFVatMGUT_cxx_diagrams {
 
    struct context_base {
-      MSSMNoFVatMGUT_mass_eigenstates model; ///< The model object.
+      MSSMNoFVatMGUT_mass_eigenstates_interface const& model; ///< The model object.
 
       template <class Field>
       double mass(const typename field_indices<Field>::type& indices) const
@@ -46,13 +42,19 @@ namespace MSSMNoFVatMGUT_cxx_diagrams {
             typename fields::remove_lorentz_conjugation<Field>::type;
          return mass_impl<CleanField>(indices);
       }
+      template<class Field>
+      double physical_mass(const typename field_indices<Field>::type& indices) const
+      {
+         using CleanField =
+            typename fields::remove_lorentz_conjugation<Field>::type;
+         return physical_mass_impl<CleanField>(indices);
+      }
 
-      context_base(const MSSMNoFVatMGUT_mass_eigenstates& m) : model(m) {}
+      context_base(MSSMNoFVatMGUT_mass_eigenstates_interface const& m) : model(m) {}
+      context_base(MSSMNoFVatMGUT_mass_eigenstates_interface const* const m) : model(*m) {}
+
       context_base(const context_base&) = default;
       context_base(context_base&&) = default;
-
-      context_base& operator=(const context_base&) = default;
-      context_base& operator=(context_base&&) = default;
 
       virtual ~context_base(void) = default;
 
@@ -60,9 +62,11 @@ namespace MSSMNoFVatMGUT_cxx_diagrams {
       template <class Field>
       double
       mass_impl(const typename field_indices<Field>::type& indices) const;
+      template<class Field>
+      double physical_mass_impl(const typename field_indices<Field>::type& indices) const;
    };
 
-   template<> inline
+template<> inline
 double context_base::mass_impl<fields::VG>(const std::array<int, 0>& indices) const
 { return model.get_MVG(); }
 
@@ -217,6 +221,162 @@ double context_base::mass_impl<fields::Cha>(const std::array<int, 1>& indices) c
 template<> inline
 double context_base::mass_impl<fields::VWm>(const std::array<int, 0>& indices) const
 { return model.get_MVWm(); }
+
+template<> inline
+double context_base::physical_mass_impl<fields::VG>(const std::array<int, 0>& indices) const
+{ return model.get_physical().MVG; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::gG>(const std::array<int, 0>& indices) const
+{ return model.get_physical().MVG; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::Glu>(const std::array<int, 0>& indices) const
+{ return model.get_physical().MGlu; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::VP>(const std::array<int, 0>& indices) const
+{ return model.get_physical().MVP; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::VZ>(const std::array<int, 0>& indices) const
+{ return model.get_physical().MVZ; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::gP>(const std::array<int, 0>& indices) const
+{ return model.get_physical().MVP; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::gZ>(const std::array<int, 0>& indices) const
+{ return model.get_physical().MVZ; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::gWm>(const std::array<int, 0>& indices) const
+{ return model.get_physical().MVWm; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::gWmC>(const std::array<int, 0>& indices) const
+{ return model.get_physical().MVWm; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::Fd>(const std::array<int, 0>& indices) const
+{ return model.get_physical().MFd; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::Fs>(const std::array<int, 0>& indices) const
+{ return model.get_physical().MFs; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::Fb>(const std::array<int, 0>& indices) const
+{ return model.get_physical().MFb; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::Fu>(const std::array<int, 0>& indices) const
+{ return model.get_physical().MFu; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::Fc>(const std::array<int, 0>& indices) const
+{ return model.get_physical().MFc; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::Ft>(const std::array<int, 0>& indices) const
+{ return model.get_physical().MFt; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::Fve>(const std::array<int, 0>& indices) const
+{ return model.get_physical().MFve; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::Fvm>(const std::array<int, 0>& indices) const
+{ return model.get_physical().MFvm; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::Fvt>(const std::array<int, 0>& indices) const
+{ return model.get_physical().MFvt; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::Fe>(const std::array<int, 0>& indices) const
+{ return model.get_physical().MFe; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::Fm>(const std::array<int, 0>& indices) const
+{ return model.get_physical().MFm; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::Ftau>(const std::array<int, 0>& indices) const
+{ return model.get_physical().MFtau; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::SveL>(const std::array<int, 0>& indices) const
+{ return model.get_physical().MSveL; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::SvmL>(const std::array<int, 0>& indices) const
+{ return model.get_physical().MSvmL; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::SvtL>(const std::array<int, 0>& indices) const
+{ return model.get_physical().MSvtL; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::Sd>(const std::array<int, 1>& indices) const
+{ return model.get_physical().MSd[indices[0]]; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::Su>(const std::array<int, 1>& indices) const
+{ return model.get_physical().MSu[indices[0]]; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::Se>(const std::array<int, 1>& indices) const
+{ return model.get_physical().MSe[indices[0]]; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::Sm>(const std::array<int, 1>& indices) const
+{ return model.get_physical().MSm[indices[0]]; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::Stau>(const std::array<int, 1>& indices) const
+{ return model.get_physical().MStau[indices[0]]; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::Ss>(const std::array<int, 1>& indices) const
+{ return model.get_physical().MSs[indices[0]]; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::Sc>(const std::array<int, 1>& indices) const
+{ return model.get_physical().MSc[indices[0]]; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::Sb>(const std::array<int, 1>& indices) const
+{ return model.get_physical().MSb[indices[0]]; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::St>(const std::array<int, 1>& indices) const
+{ return model.get_physical().MSt[indices[0]]; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::hh>(const std::array<int, 1>& indices) const
+{ return model.get_physical().Mhh[indices[0]]; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::Ah>(const std::array<int, 1>& indices) const
+{ return model.get_physical().MAh[indices[0]]; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::Hpm>(const std::array<int, 1>& indices) const
+{ return model.get_physical().MHpm[indices[0]]; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::Chi>(const std::array<int, 1>& indices) const
+{ return model.get_physical().MChi[indices[0]]; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::Cha>(const std::array<int, 1>& indices) const
+{ return model.get_physical().MCha[indices[0]]; }
+
+template<> inline
+double context_base::physical_mass_impl<fields::VWm>(const std::array<int, 0>& indices) const
+{ return model.get_physical().MVWm; }
 
 } // namespace MSSMNoFVatMGUT_cxx_diagrams
 } // namespace flexiblesusy

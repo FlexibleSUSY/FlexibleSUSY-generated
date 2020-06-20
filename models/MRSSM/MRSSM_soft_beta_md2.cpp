@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:56:33
 
 #include "MRSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -74,12 +73,12 @@ Eigen::Matrix<double,3,3> MRSSM_soft_parameters::calc_beta_md2_1_loop(const Soft
 
    Eigen::Matrix<double,3,3> beta_md2;
 
-   beta_md2 = (oneOver16PiSqr*(4*mHd2*(Yd*Yd.adjoint()) + 2*(md2*Yd*Yd.adjoint(
-      )) + 4*(Yd*mq2*Yd.adjoint()) + 2*(Yd*Yd.adjoint()*md2) +
-      0.5163977794943222*g1*Tr11*UNITMATRIX(3))).real();
+   beta_md2 = (4*mHd2*(Yd*Yd.adjoint()) + 2*(md2*Yd*Yd.adjoint()) + 4*(Yd*mq2*
+      Yd.adjoint()) + 2*(Yd*Yd.adjoint()*md2) + 0.5163977794943222*g1*Tr11*
+      UNITMATRIX(3)).real();
 
 
-   return beta_md2;
+   return oneLoop * beta_md2;
 }
 
 /**
@@ -102,7 +101,7 @@ Eigen::Matrix<double,3,3> MRSSM_soft_parameters::calc_beta_md2_2_loop(const Soft
 
    Eigen::Matrix<double,3,3> beta_md2;
 
-   beta_md2 = (twoLoop*(0.4*(-30*tracemd2YdAdjYd - 10*traceme2YeAdjYe - 10*
+   beta_md2 = (0.4*(-30*tracemd2YdAdjYd - 10*traceme2YeAdjYe - 10*
       traceml2AdjYeYe - 30*tracemq2AdjYdYd - 60*mHd2*traceYdAdjYd - 20*mHd2*
       traceYeAdjYe - 20*mHd2*AbsSqr(LamSD) - 10*mRd2*AbsSqr(LamSD) - 10*mS2*
       AbsSqr(LamSD) - 30*mHd2*AbsSqr(LamTD) - 15*mRd2*AbsSqr(LamTD) - 15*mT2*
@@ -120,10 +119,10 @@ Eigen::Matrix<double,3,3> MRSSM_soft_parameters::calc_beta_md2_2_loop(const Soft
       adjoint()) - 2*(Yd*Yd.adjoint()*Yd*Yd.adjoint()*md2) - 4*(Yd*Yu.adjoint()
       *mu2*Yu*Yd.adjoint()) - 4*(Yd*Yu.adjoint()*Yu*mq2*Yd.adjoint()) - 2*(Yd*
       Yu.adjoint()*Yu*Yd.adjoint()*md2) + 0.5333333333333333*(3.872983346207417
-      *g1*Tr31 + 20*Tr23*Quad(g3) + Tr2U111*Sqr(g1))*UNITMATRIX(3))).real();
+      *g1*Tr31 + 20*Tr23*Quad(g3) + Tr2U111*Sqr(g1))*UNITMATRIX(3)).real();
 
 
-   return beta_md2;
+   return twoLoop * beta_md2;
 }
 
 /**
@@ -142,7 +141,7 @@ Eigen::Matrix<double,3,3> MRSSM_soft_parameters::calc_beta_md2_3_loop(const Soft
    beta_md2 = ZEROMATRIX(3,3);
 
 
-   return beta_md2;
+   return threeLoop * beta_md2;
 }
 
 /**
@@ -161,7 +160,7 @@ Eigen::Matrix<double,3,3> MRSSM_soft_parameters::calc_beta_md2_4_loop(const Soft
    beta_md2 = ZEROMATRIX(3,3);
 
 
-   return beta_md2;
+   return fourLoop * beta_md2;
 }
 
 /**
@@ -180,7 +179,7 @@ Eigen::Matrix<double,3,3> MRSSM_soft_parameters::calc_beta_md2_5_loop(const Soft
    beta_md2 = ZEROMATRIX(3,3);
 
 
-   return beta_md2;
+   return fiveLoop * beta_md2;
 }
 
 } // namespace flexiblesusy

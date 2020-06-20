@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:25:40
 
 #ifndef NUTSMSSM_PHYSICAL_H
 #define NUTSMSSM_PHYSICAL_H

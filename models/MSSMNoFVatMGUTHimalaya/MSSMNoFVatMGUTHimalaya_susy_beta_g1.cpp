@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 17:36:44
 
 #include "MSSMNoFVatMGUTHimalaya_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -37,10 +36,10 @@ double MSSMNoFVatMGUTHimalaya_susy_parameters::calc_beta_g1_1_loop(const Susy_tr
 
    double beta_g1;
 
-   beta_g1 = Re(6.6*oneOver16PiSqr*Cube(g1));
+   beta_g1 = Re(6.6*Cube(g1));
 
 
-   return beta_g1;
+   return oneLoop * beta_g1;
 }
 
 /**
@@ -57,11 +56,11 @@ double MSSMNoFVatMGUTHimalaya_susy_parameters::calc_beta_g1_2_loop(const Susy_tr
 
    double beta_g1;
 
-   beta_g1 = Re(0.04*twoLoop*Cube(g1)*(-70*traceYdAdjYd - 90*traceYeAdjYe - 130
-      *traceYuAdjYu + 199*Sqr(g1) + 135*Sqr(g2) + 440*Sqr(g3)));
+   beta_g1 = Re(0.04*Cube(g1)*(-70*traceYdAdjYd - 90*traceYeAdjYe - 130*
+      traceYuAdjYu + 199*Sqr(g1) + 135*Sqr(g2) + 440*Sqr(g3)));
 
 
-   return beta_g1;
+   return twoLoop * beta_g1;
 }
 
 /**
@@ -84,18 +83,18 @@ double MSSMNoFVatMGUTHimalaya_susy_parameters::calc_beta_g1_3_loop(const Susy_tr
 
    double beta_g1;
 
-   beta_g1 = Re(-0.0026666666666666666*threeLoop*Cube(g1)*(-4050*
-      traceAdjYdYdAdjYdYd - 6300*traceAdjYdYd*traceAdjYeYe - 4050*
-      traceAdjYeYeAdjYeYe - 4350*traceAdjYuYuAdjYdYd - 6300*traceAdjYuYuAdjYuYu
-       + 32117*Quad(g1) + 6075*Quad(g2) - 12100*Quad(g3) + 245*traceAdjYdYd*Sqr
-      (g1) + 1215*traceAdjYeYe*Sqr(g1) + 845*traceAdjYuYu*Sqr(g1) + 2475*
-      traceAdjYdYd*Sqr(g2) + 4725*traceAdjYeYe*Sqr(g2) + 6525*traceAdjYuYu*Sqr(
-      g2) + 1035*Sqr(g1)*Sqr(g2) + 6400*traceAdjYdYd*Sqr(g3) + 8800*
-      traceAdjYuYu*Sqr(g3) + 5480*Sqr(g1)*Sqr(g3) + 1800*Sqr(g2)*Sqr(g3) - 2700
-      *Sqr(traceAdjYdYd) - 1800*Sqr(traceAdjYeYe) - 6750*Sqr(traceAdjYuYu)));
+   beta_g1 = Re(-0.0026666666666666666*Cube(g1)*(-4050*traceAdjYdYdAdjYdYd -
+      6300*traceAdjYdYd*traceAdjYeYe - 4050*traceAdjYeYeAdjYeYe - 4350*
+      traceAdjYuYuAdjYdYd - 6300*traceAdjYuYuAdjYuYu + 32117*Quad(g1) + 6075*
+      Quad(g2) - 12100*Quad(g3) + 245*traceAdjYdYd*Sqr(g1) + 1215*traceAdjYeYe*
+      Sqr(g1) + 845*traceAdjYuYu*Sqr(g1) + 2475*traceAdjYdYd*Sqr(g2) + 4725*
+      traceAdjYeYe*Sqr(g2) + 6525*traceAdjYuYu*Sqr(g2) + 1035*Sqr(g1)*Sqr(g2) +
+      6400*traceAdjYdYd*Sqr(g3) + 8800*traceAdjYuYu*Sqr(g3) + 5480*Sqr(g1)*Sqr(
+      g3) + 1800*Sqr(g2)*Sqr(g3) - 2700*Sqr(traceAdjYdYd) - 1800*Sqr(
+      traceAdjYeYe) - 6750*Sqr(traceAdjYuYu)));
 
 
-   return beta_g1;
+   return threeLoop * beta_g1;
 }
 
 /**
@@ -114,7 +113,7 @@ double MSSMNoFVatMGUTHimalaya_susy_parameters::calc_beta_g1_4_loop(const Susy_tr
    beta_g1 = 0;
 
 
-   return beta_g1;
+   return fourLoop * beta_g1;
 }
 
 /**
@@ -133,7 +132,7 @@ double MSSMNoFVatMGUTHimalaya_susy_parameters::calc_beta_g1_5_loop(const Susy_tr
    beta_g1 = 0;
 
 
-   return beta_g1;
+   return fiveLoop * beta_g1;
 }
 
 } // namespace flexiblesusy

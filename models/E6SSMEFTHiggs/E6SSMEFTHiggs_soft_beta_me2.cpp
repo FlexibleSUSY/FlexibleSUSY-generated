@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:30:55
 
 #include "E6SSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -75,14 +74,13 @@ Eigen::Matrix<double,3,3> E6SSMEFTHiggs_soft_parameters::calc_beta_me2_1_loop(co
 
    Eigen::Matrix<double,3,3> beta_me2;
 
-   beta_me2 = (oneOver16PiSqr*(4*mHd2*(Ye*Ye.adjoint()) + 4*(TYe*(TYe).adjoint(
-      )) + 2*(me2*Ye*Ye.adjoint()) + 4*(Ye*ml2*Ye.adjoint()) + 2*(Ye*Ye.adjoint
-      ()*me2) + 0.1*(15.491933384829668*g1*Tr11 + 3.1622776601683795*gN*Tr14 -
-      48*AbsSqr(MassB)*Sqr(g1) - 2*AbsSqr(MassBp)*Sqr(gN))*UNITMATRIX(3))).real
-      ();
+   beta_me2 = (4*mHd2*(Ye*Ye.adjoint()) + 4*(TYe*(TYe).adjoint()) + 2*(me2*Ye*
+      Ye.adjoint()) + 4*(Ye*ml2*Ye.adjoint()) + 2*(Ye*Ye.adjoint()*me2) + 0.1*(
+      15.491933384829668*g1*Tr11 + 3.1622776601683795*gN*Tr14 - 48*AbsSqr(MassB
+      )*Sqr(g1) - 2*AbsSqr(MassBp)*Sqr(gN))*UNITMATRIX(3)).real();
 
 
-   return beta_me2;
+   return oneLoop * beta_me2;
 }
 
 /**
@@ -114,7 +112,7 @@ Eigen::Matrix<double,3,3> E6SSMEFTHiggs_soft_parameters::calc_beta_me2_2_loop(co
 
    Eigen::Matrix<double,3,3> beta_me2;
 
-   beta_me2 = (twoLoop*(-0.8*(15*traceconjTYdTpTYd + 5*traceconjTYeTpTYe + 15*
+   beta_me2 = (-0.8*(15*traceconjTYdTpTYd + 5*traceconjTYeTpTYe + 15*
       tracemd2YdAdjYd + 5*traceme2YeAdjYe + 5*traceml2AdjYeYe + 15*
       tracemq2AdjYdYd + 30*mHd2*traceYdAdjYd + 10*mHd2*traceYeAdjYe + 10*mHd2*
       AbsSqr(Lambdax) + 5*mHu2*AbsSqr(Lambdax) + 5*ms2*AbsSqr(Lambdax) + 5*
@@ -143,10 +141,10 @@ Eigen::Matrix<double,3,3> E6SSMEFTHiggs_soft_parameters::calc_beta_me2_2_loop(co
       MassBp)*Quad(gN) + 480*Tr2U111*Sqr(g1) + 20*Tr2U144*Sqr(gN) - 48*AbsSqr(
       MassB)*Sqr(g1)*Sqr(gN) - 48*AbsSqr(MassBp)*Sqr(g1)*Sqr(gN) - 24*MassBp*
       Conj(MassB)*Sqr(g1)*Sqr(gN) - 24*MassB*Conj(MassBp)*Sqr(g1)*Sqr(gN))*
-      UNITMATRIX(3))).real();
+      UNITMATRIX(3)).real();
 
 
-   return beta_me2;
+   return twoLoop * beta_me2;
 }
 
 /**
@@ -165,7 +163,7 @@ Eigen::Matrix<double,3,3> E6SSMEFTHiggs_soft_parameters::calc_beta_me2_3_loop(co
    beta_me2 = ZEROMATRIX(3,3);
 
 
-   return beta_me2;
+   return threeLoop * beta_me2;
 }
 
 /**
@@ -184,7 +182,7 @@ Eigen::Matrix<double,3,3> E6SSMEFTHiggs_soft_parameters::calc_beta_me2_4_loop(co
    beta_me2 = ZEROMATRIX(3,3);
 
 
-   return beta_me2;
+   return fourLoop * beta_me2;
 }
 
 /**
@@ -203,7 +201,7 @@ Eigen::Matrix<double,3,3> E6SSMEFTHiggs_soft_parameters::calc_beta_me2_5_loop(co
    beta_me2 = ZEROMATRIX(3,3);
 
 
-   return beta_me2;
+   return fiveLoop * beta_me2;
 }
 
 } // namespace flexiblesusy

@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:44:44
 
 #ifndef THDMIIMSSMBC_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
 #define THDMIIMSSMBC_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
@@ -39,6 +38,8 @@ public:
    THDMIIMSSMBC_susy_scale_constraint() = default;
    THDMIIMSSMBC_susy_scale_constraint(THDMIIMSSMBC<Two_scale>*, const softsusy::QedQcd&);
    virtual ~THDMIIMSSMBC_susy_scale_constraint() = default;
+   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+
    virtual void apply() override;
    virtual double get_scale() const override;
    virtual std::string name() const override { return "THDMIIMSSMBC SUSY-scale constraint"; }

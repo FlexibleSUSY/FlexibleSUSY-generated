@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:56:36
 
 #include "MRSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,10 +72,10 @@ double MRSSM_soft_parameters::calc_beta_MDWBT_1_loop(const Soft_traces& soft_tra
 
    double beta_MDWBT;
 
-   beta_MDWBT = Re(MDWBT*oneOver16PiSqr*(AbsSqr(LamTD) + AbsSqr(LamTU)));
+   beta_MDWBT = Re(MDWBT*(AbsSqr(LamTD) + AbsSqr(LamTU)));
 
 
-   return beta_MDWBT;
+   return oneLoop * beta_MDWBT;
 }
 
 /**
@@ -93,17 +92,17 @@ double MRSSM_soft_parameters::calc_beta_MDWBT_2_loop(const Soft_traces& soft_tra
 
    double beta_MDWBT;
 
-   beta_MDWBT = Re(0.2*MDWBT*twoLoop*(-15*traceYdAdjYd*AbsSqr(LamTD) - 5*
-      traceYeAdjYe*AbsSqr(LamTD) - 10*AbsSqr(LamSD)*AbsSqr(LamTD) - 15*
-      traceYuAdjYu*AbsSqr(LamTU) - 10*AbsSqr(LamSU)*AbsSqr(LamTU) + 440*Quad(g2
-      ) + 3*AbsSqr(LamTD)*Sqr(g1) + 3*AbsSqr(LamTU)*Sqr(g1) - 30*traceYdAdjYd*
-      Sqr(g2) - 10*traceYeAdjYe*Sqr(g2) - 30*traceYuAdjYu*Sqr(g2) - 10*AbsSqr(
-      LamSD)*Sqr(g2) - 10*AbsSqr(LamSU)*Sqr(g2) - 40*AbsSqr(LamTD)*Sqr(g2) - 40
-      *AbsSqr(LamTU)*Sqr(g2) + 12*Sqr(g1)*Sqr(g2) + 120*Sqr(g2)*Sqr(g3) - 15*
-      Sqr(LamTD)*Sqr(Conj(LamTD)) - 15*Sqr(LamTU)*Sqr(Conj(LamTU))));
+   beta_MDWBT = Re(0.2*MDWBT*(-15*traceYdAdjYd*AbsSqr(LamTD) - 5*traceYeAdjYe*
+      AbsSqr(LamTD) - 10*AbsSqr(LamSD)*AbsSqr(LamTD) - 15*traceYuAdjYu*AbsSqr(
+      LamTU) - 10*AbsSqr(LamSU)*AbsSqr(LamTU) + 440*Quad(g2) + 3*AbsSqr(LamTD)*
+      Sqr(g1) + 3*AbsSqr(LamTU)*Sqr(g1) - 30*traceYdAdjYd*Sqr(g2) - 10*
+      traceYeAdjYe*Sqr(g2) - 30*traceYuAdjYu*Sqr(g2) - 10*AbsSqr(LamSD)*Sqr(g2)
+      - 10*AbsSqr(LamSU)*Sqr(g2) - 40*AbsSqr(LamTD)*Sqr(g2) - 40*AbsSqr(LamTU)*
+      Sqr(g2) + 12*Sqr(g1)*Sqr(g2) + 120*Sqr(g2)*Sqr(g3) - 15*Sqr(LamTD)*Sqr(
+      Conj(LamTD)) - 15*Sqr(LamTU)*Sqr(Conj(LamTU))));
 
 
-   return beta_MDWBT;
+   return twoLoop * beta_MDWBT;
 }
 
 /**
@@ -122,7 +121,7 @@ double MRSSM_soft_parameters::calc_beta_MDWBT_3_loop(const Soft_traces& soft_tra
    beta_MDWBT = 0;
 
 
-   return beta_MDWBT;
+   return threeLoop * beta_MDWBT;
 }
 
 /**
@@ -141,7 +140,7 @@ double MRSSM_soft_parameters::calc_beta_MDWBT_4_loop(const Soft_traces& soft_tra
    beta_MDWBT = 0;
 
 
-   return beta_MDWBT;
+   return fourLoop * beta_MDWBT;
 }
 
 /**
@@ -160,7 +159,7 @@ double MRSSM_soft_parameters::calc_beta_MDWBT_5_loop(const Soft_traces& soft_tra
    beta_MDWBT = 0;
 
 
-   return beta_MDWBT;
+   return fiveLoop * beta_MDWBT;
 }
 
 } // namespace flexiblesusy

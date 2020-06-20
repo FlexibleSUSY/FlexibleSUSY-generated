@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:45:56
 
 #ifndef MSSMatMGUT_TWO_SCALE_CONVERGENCE_TESTER_H
 #define MSSMatMGUT_TWO_SCALE_CONVERGENCE_TESTER_H

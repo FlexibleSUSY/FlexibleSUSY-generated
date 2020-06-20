@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:07:15
 
 #include "MRSSMEFTHiggs_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -38,11 +37,11 @@ double MRSSMEFTHiggs_susy_parameters::calc_beta_MuU_1_loop(const Susy_traces& su
 
    double beta_MuU;
 
-   beta_MuU = Re(-0.2*MuU*oneOver16PiSqr*(-15*traceYuAdjYu - 10*AbsSqr(LamSU) -
-      15*AbsSqr(LamTU) + 3*Sqr(g1) + 15*Sqr(g2)));
+   beta_MuU = Re(-0.2*MuU*(-15*traceYuAdjYu - 10*AbsSqr(LamSU) - 15*AbsSqr(
+      LamTU) + 3*Sqr(g1) + 15*Sqr(g2)));
 
 
-   return beta_MuU;
+   return oneLoop * beta_MuU;
 }
 
 /**
@@ -59,16 +58,15 @@ double MRSSMEFTHiggs_susy_parameters::calc_beta_MuU_2_loop(const Susy_traces& su
 
    double beta_MuU;
 
-   beta_MuU = Re(0.1*MuU*twoLoop*(-30*traceYdAdjYuYuAdjYd - 90*
-      traceYuAdjYuYuAdjYu - 30*traceYuAdjYu*AbsSqr(LamSU) - 40*AbsSqr(LamSD)*
-      AbsSqr(LamSU) - 45*traceYuAdjYu*AbsSqr(LamTU) - 60*AbsSqr(LamSU)*AbsSqr(
-      LamTU) - 30*AbsSqr(LamTD)*AbsSqr(LamTU) + 45*Quad(g1) + 165*Quad(g2) + 8*
-      traceYuAdjYu*Sqr(g1) + 120*AbsSqr(LamTU)*Sqr(g2) + 18*Sqr(g1)*Sqr(g2) +
-      160*traceYuAdjYu*Sqr(g3) - 60*Sqr(LamSU)*Sqr(Conj(LamSU)) - 75*Sqr(LamTU)
-      *Sqr(Conj(LamTU))));
+   beta_MuU = Re(0.1*MuU*(-30*traceYdAdjYuYuAdjYd - 90*traceYuAdjYuYuAdjYu - 30
+      *traceYuAdjYu*AbsSqr(LamSU) - 40*AbsSqr(LamSD)*AbsSqr(LamSU) - 45*
+      traceYuAdjYu*AbsSqr(LamTU) - 60*AbsSqr(LamSU)*AbsSqr(LamTU) - 30*AbsSqr(
+      LamTD)*AbsSqr(LamTU) + 45*Quad(g1) + 165*Quad(g2) + 8*traceYuAdjYu*Sqr(g1
+      ) + 120*AbsSqr(LamTU)*Sqr(g2) + 18*Sqr(g1)*Sqr(g2) + 160*traceYuAdjYu*Sqr
+      (g3) - 60*Sqr(LamSU)*Sqr(Conj(LamSU)) - 75*Sqr(LamTU)*Sqr(Conj(LamTU))));
 
 
-   return beta_MuU;
+   return twoLoop * beta_MuU;
 }
 
 /**
@@ -87,7 +85,7 @@ double MRSSMEFTHiggs_susy_parameters::calc_beta_MuU_3_loop(const Susy_traces& su
    beta_MuU = 0;
 
 
-   return beta_MuU;
+   return threeLoop * beta_MuU;
 }
 
 /**
@@ -106,7 +104,7 @@ double MRSSMEFTHiggs_susy_parameters::calc_beta_MuU_4_loop(const Susy_traces& su
    beta_MuU = 0;
 
 
-   return beta_MuU;
+   return fourLoop * beta_MuU;
 }
 
 /**
@@ -125,7 +123,7 @@ double MRSSMEFTHiggs_susy_parameters::calc_beta_MuU_5_loop(const Susy_traces& su
    beta_MuU = 0;
 
 
-   return beta_MuU;
+   return fiveLoop * beta_MuU;
 }
 
 } // namespace flexiblesusy

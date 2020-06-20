@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:54:16
 
 #include "TMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,12 +72,11 @@ double TMSSM_soft_parameters::calc_beta_mT2_1_loop(const Soft_traces& soft_trace
 
    double beta_mT2;
 
-   beta_mT2 = Re(-2*oneOver16PiSqr*(-(mHd2*AbsSqr(Lambdax)) - mHu2*AbsSqr(
-      Lambdax) - mT2*AbsSqr(Lambdax) - AbsSqr(TLambdax) + 8*AbsSqr(MassWB)*Sqr(
-      g2)));
+   beta_mT2 = Re(-2*(-(mHd2*AbsSqr(Lambdax)) - mHu2*AbsSqr(Lambdax) - mT2*
+      AbsSqr(Lambdax) - AbsSqr(TLambdax) + 8*AbsSqr(MassWB)*Sqr(g2)));
 
 
-   return beta_mT2;
+   return oneLoop * beta_mT2;
 }
 
 /**
@@ -111,7 +109,7 @@ double TMSSM_soft_parameters::calc_beta_mT2_2_loop(const Soft_traces& soft_trace
 
    double beta_mT2;
 
-   beta_mT2 = Re(0.4*twoLoop*(-15*traceconjTYdTpTYd*AbsSqr(Lambdax) - 5*
+   beta_mT2 = Re(0.4*(-15*traceconjTYdTpTYd*AbsSqr(Lambdax) - 5*
       traceconjTYeTpTYe*AbsSqr(Lambdax) - 15*traceconjTYuTpTYu*AbsSqr(Lambdax)
       - 15*tracemd2YdAdjYd*AbsSqr(Lambdax) - 5*traceme2YeAdjYe*AbsSqr(Lambdax)
       - 5*traceml2AdjYeYe*AbsSqr(Lambdax) - 15*tracemq2AdjYdYd*AbsSqr(Lambdax)
@@ -139,7 +137,7 @@ double TMSSM_soft_parameters::calc_beta_mT2_2_loop(const Soft_traces& soft_trace
       (MassWB)*Conj(Lambdax)*Sqr(g2)*TLambdax));
 
 
-   return beta_mT2;
+   return twoLoop * beta_mT2;
 }
 
 /**
@@ -158,7 +156,7 @@ double TMSSM_soft_parameters::calc_beta_mT2_3_loop(const Soft_traces& soft_trace
    beta_mT2 = 0;
 
 
-   return beta_mT2;
+   return threeLoop * beta_mT2;
 }
 
 /**
@@ -177,7 +175,7 @@ double TMSSM_soft_parameters::calc_beta_mT2_4_loop(const Soft_traces& soft_trace
    beta_mT2 = 0;
 
 
-   return beta_mT2;
+   return fourLoop * beta_mT2;
 }
 
 /**
@@ -196,7 +194,7 @@ double TMSSM_soft_parameters::calc_beta_mT2_5_loop(const Soft_traces& soft_trace
    beta_mT2 = 0;
 
 
-   return beta_mT2;
+   return fiveLoop * beta_mT2;
 }
 
 } // namespace flexiblesusy

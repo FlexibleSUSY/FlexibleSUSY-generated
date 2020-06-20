@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 17:55:55
 
 #include "CNMSSM_semi_analytic_convergence_tester.hpp"
 #include <array>

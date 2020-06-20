@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:53:17
 
 #include "SplitMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -76,12 +75,12 @@ double SplitMSSM_soft_parameters::calc_beta_v_1_loop(const Soft_traces& soft_tra
 
    double beta_v;
 
-   beta_v = Re(0.1*oneOver16PiSqr*v*(-30*traceYdAdjYd - 10*traceYeAdjYe - 30*
-      traceYuAdjYu + 6*Sqr(g1) + 30*Sqr(g2) - 15*Sqr(g2d) - 15*Sqr(g2u) - 5*Sqr
-      (gYd) - 5*Sqr(gYu)));
+   beta_v = Re(0.1*v*(-30*traceYdAdjYd - 10*traceYeAdjYe - 30*traceYuAdjYu + 6*
+      Sqr(g1) + 30*Sqr(g2) - 15*Sqr(g2d) - 15*Sqr(g2u) - 5*Sqr(gYd) - 5*Sqr(gYu
+      )));
 
 
-   return beta_v;
+   return oneLoop * beta_v;
 }
 
 /**
@@ -102,11 +101,11 @@ double SplitMSSM_soft_parameters::calc_beta_v_2_loop(const Soft_traces& soft_tra
 
    double beta_v;
 
-   beta_v = Re(-0.00125*twoLoop*v*(-2400*g2d*g2u*gYd*gYu - 5400*
-      traceYdAdjYdYdAdjYd + 1200*traceYdAdjYuYuAdjYd - 1800*traceYeAdjYeYeAdjYe
-       - 5400*traceYuAdjYuYuAdjYu + 1341*Quad(g1) - 6475*Quad(g2) - 2250*Quad(
-      g2d) - 2250*Quad(g2u) - 450*Quad(gYd) - 450*Quad(gYu) + 1220*traceYdAdjYd
-      *Sqr(g1) + 1740*traceYeAdjYe*Sqr(g1) + 2420*traceYuAdjYu*Sqr(g1) + 8100*
+   beta_v = Re(-0.00125*v*(-2400*g2d*g2u*gYd*gYu - 5400*traceYdAdjYdYdAdjYd +
+      1200*traceYdAdjYuYuAdjYd - 1800*traceYeAdjYeYeAdjYe - 5400*
+      traceYuAdjYuYuAdjYu + 1341*Quad(g1) - 6475*Quad(g2) - 2250*Quad(g2d) -
+      2250*Quad(g2u) - 450*Quad(gYd) - 450*Quad(gYu) + 1220*traceYdAdjYd*Sqr(g1
+      ) + 1740*traceYeAdjYe*Sqr(g1) + 2420*traceYuAdjYu*Sqr(g1) + 8100*
       traceYdAdjYd*Sqr(g2) + 2700*traceYeAdjYe*Sqr(g2) + 8100*traceYuAdjYu*Sqr(
       g2) - 450*Sqr(g1)*Sqr(g2) + 810*Sqr(g1)*Sqr(g2d) + 10050*Sqr(g2)*Sqr(g2d)
       + 810*Sqr(g1)*Sqr(g2u) + 10050*Sqr(g2)*Sqr(g2u) - 600*Sqr(g2d)*Sqr(g2u) +
@@ -116,7 +115,7 @@ double SplitMSSM_soft_parameters::calc_beta_v_2_loop(const Soft_traces& soft_tra
       gYu) + 1200*Sqr(Lambdax)));
 
 
-   return beta_v;
+   return twoLoop * beta_v;
 }
 
 /**
@@ -135,7 +134,7 @@ double SplitMSSM_soft_parameters::calc_beta_v_3_loop(const Soft_traces& soft_tra
    beta_v = 0;
 
 
-   return beta_v;
+   return threeLoop * beta_v;
 }
 
 /**
@@ -154,7 +153,7 @@ double SplitMSSM_soft_parameters::calc_beta_v_4_loop(const Soft_traces& soft_tra
    beta_v = 0;
 
 
-   return beta_v;
+   return fourLoop * beta_v;
 }
 
 /**
@@ -173,7 +172,7 @@ double SplitMSSM_soft_parameters::calc_beta_v_5_loop(const Soft_traces& soft_tra
    beta_v = 0;
 
 
-   return beta_v;
+   return fiveLoop * beta_v;
 }
 
 } // namespace flexiblesusy

@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:24:46
 
 #include "NUTSMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,14 +72,13 @@ double NUTSMSSM_soft_parameters::calc_beta_LL1_1_loop(const Soft_traces& soft_tr
 
    double beta_LL1;
 
-   beta_LL1 = Re(2*oneOver16PiSqr*(MS*BMS*Conj(Kappa) + 2*MS*BMu*Conj(Lambdax)
-      + 2*ms2*Conj(MS)*Kappa + 2*mHd2*Conj(Mu)*Lambdax + 2*mHu2*Conj(Mu)*
-      Lambdax + AbsSqr(Kappa)*LL1 + AbsSqr(Lambdax)*LL1 + Conj(BMS)*TKappa + 2*
-      L1*Conj(Kappa)*TKappa + 2*Conj(BMu)*TLambdax + 2*L1*Conj(Lambdax)*
-      TLambdax));
+   beta_LL1 = Re(2*(MS*BMS*Conj(Kappa) + 2*MS*BMu*Conj(Lambdax) + 2*ms2*Conj(MS
+      )*Kappa + 2*mHd2*Conj(Mu)*Lambdax + 2*mHu2*Conj(Mu)*Lambdax + AbsSqr(
+      Kappa)*LL1 + AbsSqr(Lambdax)*LL1 + Conj(BMS)*TKappa + 2*L1*Conj(Kappa)*
+      TKappa + 2*Conj(BMu)*TLambdax + 2*L1*Conj(Lambdax)*TLambdax));
 
 
-   return beta_LL1;
+   return oneLoop * beta_LL1;
 }
 
 /**
@@ -112,7 +110,7 @@ double NUTSMSSM_soft_parameters::calc_beta_LL1_2_loop(const Soft_traces& soft_tr
 
    double beta_LL1;
 
-   beta_LL1 = Re(-0.4*twoLoop*(30*L1*traceAdjYdTYd*AbsSqr(Lambdax) + 10*L1*
+   beta_LL1 = Re(-0.4*(30*L1*traceAdjYdTYd*AbsSqr(Lambdax) + 10*L1*
       traceAdjYeTYe*AbsSqr(Lambdax) + 30*L1*traceAdjYuTYu*AbsSqr(Lambdax) + 20*
       MS*AbsSqr(Lambdax)*BMS*Conj(Kappa) + 30*MS*traceYdAdjYd*BMu*Conj(Lambdax)
       + 10*MS*traceYeAdjYe*BMu*Conj(Lambdax) + 30*MS*traceYuAdjYu*BMu*Conj(
@@ -164,7 +162,7 @@ double NUTSMSSM_soft_parameters::calc_beta_LL1_2_loop(const Soft_traces& soft_tr
       )*TLambdax));
 
 
-   return beta_LL1;
+   return twoLoop * beta_LL1;
 }
 
 /**
@@ -183,7 +181,7 @@ double NUTSMSSM_soft_parameters::calc_beta_LL1_3_loop(const Soft_traces& soft_tr
    beta_LL1 = 0;
 
 
-   return beta_LL1;
+   return threeLoop * beta_LL1;
 }
 
 /**
@@ -202,7 +200,7 @@ double NUTSMSSM_soft_parameters::calc_beta_LL1_4_loop(const Soft_traces& soft_tr
    beta_LL1 = 0;
 
 
-   return beta_LL1;
+   return fourLoop * beta_LL1;
 }
 
 /**
@@ -221,7 +219,7 @@ double NUTSMSSM_soft_parameters::calc_beta_LL1_5_loop(const Soft_traces& soft_tr
    beta_LL1 = 0;
 
 
-   return beta_LL1;
+   return fiveLoop * beta_LL1;
 }
 
 } // namespace flexiblesusy

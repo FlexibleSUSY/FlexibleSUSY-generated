@@ -16,13 +16,8 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:22:17
 
 #include "lowNMSSM_susy_parameters.hpp"
-#include "config.h"
-#ifdef ENABLE_THREADS
-#include "global_thread_pool.hpp"
-#endif
 #include "wrappers.hpp"
 #include "functors.hpp"
 
@@ -110,13 +105,6 @@ lowNMSSM_susy_parameters lowNMSSM_susy_parameters::calc_beta(int loops) const
          beta_vS += calc_beta_vS_2_loop(TRACE_STRUCT);
 
          if (loops > 2) {
-         #ifdef ENABLE_THREADS
-            {
-
-
-            }
-         #else
-         #endif
 
             if (loops > 3) {
 
@@ -348,6 +336,11 @@ Eigen::ArrayXd lowNMSSM_susy_parameters::get() const
 
 
    return pars;
+}
+
+void lowNMSSM_susy_parameters::print() const
+{
+   this->print(std::cerr);
 }
 
 void lowNMSSM_susy_parameters::print(std::ostream& ostr) const

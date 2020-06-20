@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:54:38
 
 #ifndef SplitMSSM_TWO_SCALE_CONVERGENCE_TESTER_H
 #define SplitMSSM_TWO_SCALE_CONVERGENCE_TESTER_H

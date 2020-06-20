@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:44:46
 
 #ifndef THDMIIMSSMBC_OBSERVABLES_H
 #define THDMIIMSSMBC_OBSERVABLES_H

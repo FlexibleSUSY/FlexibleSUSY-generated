@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:24:23
 
 #ifndef HTHDMIIMSSMBC_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
 #define HTHDMIIMSSMBC_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
@@ -38,6 +37,8 @@ public:
    HTHDMIIMSSMBC_high_scale_constraint() = default;
    HTHDMIIMSSMBC_high_scale_constraint(HTHDMIIMSSMBC<Two_scale>*);
    virtual ~HTHDMIIMSSMBC_high_scale_constraint() = default;
+   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+
    virtual void apply() override;
    virtual double get_scale() const override;
    virtual std::string name() const override { return "HTHDMIIMSSMBC high-scale constraint"; }

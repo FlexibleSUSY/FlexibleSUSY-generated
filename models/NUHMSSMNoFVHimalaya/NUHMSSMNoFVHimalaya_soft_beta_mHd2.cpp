@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 17:33:48
 
 #include "NUHMSSMNoFVHimalaya_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -82,14 +81,13 @@ double NUHMSSMNoFVHimalaya_soft_parameters::calc_beta_mHd2_1_loop(const Soft_tra
 
    double beta_mHd2;
 
-   beta_mHd2 = Re(0.2*oneOver16PiSqr*(-3.872983346207417*g1*Tr11 + 30*
-      traceconjTYdTpTYd + 10*traceconjTYeTpTYe + 30*tracemd2YdAdjYd + 10*
-      traceme2YeAdjYe + 10*traceml2AdjYeYe + 30*tracemq2AdjYdYd + 30*mHd2*
-      traceYdAdjYd + 10*mHd2*traceYeAdjYe - 6*AbsSqr(MassB)*Sqr(g1) - 30*AbsSqr
-      (MassWB)*Sqr(g2)));
+   beta_mHd2 = Re(0.2*(-3.872983346207417*g1*Tr11 + 30*traceconjTYdTpTYd + 10*
+      traceconjTYeTpTYe + 30*tracemd2YdAdjYd + 10*traceme2YeAdjYe + 10*
+      traceml2AdjYeYe + 30*tracemq2AdjYdYd + 30*mHd2*traceYdAdjYd + 10*mHd2*
+      traceYeAdjYe - 6*AbsSqr(MassB)*Sqr(g1) - 30*AbsSqr(MassWB)*Sqr(g2)));
 
 
-   return beta_mHd2;
+   return oneLoop * beta_mHd2;
 }
 
 /**
@@ -137,34 +135,34 @@ double NUHMSSMNoFVHimalaya_soft_parameters::calc_beta_mHd2_2_loop(const Soft_tra
 
    double beta_mHd2;
 
-   beta_mHd2 = Re(0.04*twoLoop*(-77.45966692414834*g1*Tr31 - 900*
-      tracemd2YdAdjYdYdAdjYd - 150*tracemd2YdAdjYuYuAdjYd - 300*
-      traceme2YeAdjYeYeAdjYe - 300*traceml2AdjYeYeAdjYeYe - 900*
-      tracemq2AdjYdYdAdjYdYd - 150*tracemq2AdjYdYdAdjYuYu - 150*
-      tracemq2AdjYuYuAdjYdYd - 150*tracemu2YuAdjYdYdAdjYu - 900*
-      traceYdAdjTYdTYdAdjYd - 150*traceYdAdjTYuTYuAdjYd - 900*
-      traceYdAdjYdTYdAdjTYd - 900*mHd2*traceYdAdjYdYdAdjYd - 150*
-      traceYdAdjYuTYuAdjTYd - 150*mHd2*traceYdAdjYuYuAdjYd - 150*mHu2*
-      traceYdAdjYuYuAdjYd - 300*traceYeAdjTYeTYeAdjYe - 300*
-      traceYeAdjYeTYeAdjTYe - 300*mHd2*traceYeAdjYeYeAdjYe - 150*
-      traceYuAdjTYdTYdAdjYu - 150*traceYuAdjYdTYdAdjTYu + 621*AbsSqr(MassB)*
-      Quad(g1) + 150*Tr22*Quad(g2) + 825*AbsSqr(MassWB)*Quad(g2) + 30*Tr2U111*
-      Sqr(g1) - 20*traceconjTYdTpTYd*Sqr(g1) + 20*MassB*traceconjTYdTpYd*Sqr(g1
-      ) + 60*traceconjTYeTpTYe*Sqr(g1) - 60*MassB*traceconjTYeTpYe*Sqr(g1) - 20
-      *tracemd2YdAdjYd*Sqr(g1) + 60*traceme2YeAdjYe*Sqr(g1) + 60*
-      traceml2AdjYeYe*Sqr(g1) - 20*tracemq2AdjYdYd*Sqr(g1) - 20*mHd2*
-      traceYdAdjYd*Sqr(g1) + 60*mHd2*traceYeAdjYe*Sqr(g1) - 40*traceYdAdjYd*
-      AbsSqr(MassB)*Sqr(g1) + 120*traceYeAdjYe*AbsSqr(MassB)*Sqr(g1) + 20*
-      traceAdjYdTYd*Conj(MassB)*Sqr(g1) - 60*traceAdjYeTYe*Conj(MassB)*Sqr(g1)
-      + 90*AbsSqr(MassB)*Sqr(g1)*Sqr(g2) + 90*AbsSqr(MassWB)*Sqr(g1)*Sqr(g2) +
-      45*MassWB*Conj(MassB)*Sqr(g1)*Sqr(g2) + 45*MassB*Conj(MassWB)*Sqr(g1)*Sqr
-      (g2) + 800*traceconjTYdTpTYd*Sqr(g3) - 800*MassG*traceconjTYdTpYd*Sqr(g3)
-      + 800*tracemd2YdAdjYd*Sqr(g3) + 800*tracemq2AdjYdYd*Sqr(g3) + 800*mHd2*
-      traceYdAdjYd*Sqr(g3) + 1600*traceYdAdjYd*AbsSqr(MassG)*Sqr(g3) - 800*
-      traceAdjYdTYd*Conj(MassG)*Sqr(g3)));
+   beta_mHd2 = Re(0.04*(-77.45966692414834*g1*Tr31 - 900*tracemd2YdAdjYdYdAdjYd
+       - 150*tracemd2YdAdjYuYuAdjYd - 300*traceme2YeAdjYeYeAdjYe - 300*
+      traceml2AdjYeYeAdjYeYe - 900*tracemq2AdjYdYdAdjYdYd - 150*
+      tracemq2AdjYdYdAdjYuYu - 150*tracemq2AdjYuYuAdjYdYd - 150*
+      tracemu2YuAdjYdYdAdjYu - 900*traceYdAdjTYdTYdAdjYd - 150*
+      traceYdAdjTYuTYuAdjYd - 900*traceYdAdjYdTYdAdjTYd - 900*mHd2*
+      traceYdAdjYdYdAdjYd - 150*traceYdAdjYuTYuAdjTYd - 150*mHd2*
+      traceYdAdjYuYuAdjYd - 150*mHu2*traceYdAdjYuYuAdjYd - 300*
+      traceYeAdjTYeTYeAdjYe - 300*traceYeAdjYeTYeAdjTYe - 300*mHd2*
+      traceYeAdjYeYeAdjYe - 150*traceYuAdjTYdTYdAdjYu - 150*
+      traceYuAdjYdTYdAdjTYu + 621*AbsSqr(MassB)*Quad(g1) + 150*Tr22*Quad(g2) +
+      825*AbsSqr(MassWB)*Quad(g2) + 30*Tr2U111*Sqr(g1) - 20*traceconjTYdTpTYd*
+      Sqr(g1) + 20*MassB*traceconjTYdTpYd*Sqr(g1) + 60*traceconjTYeTpTYe*Sqr(g1
+      ) - 60*MassB*traceconjTYeTpYe*Sqr(g1) - 20*tracemd2YdAdjYd*Sqr(g1) + 60*
+      traceme2YeAdjYe*Sqr(g1) + 60*traceml2AdjYeYe*Sqr(g1) - 20*tracemq2AdjYdYd
+      *Sqr(g1) - 20*mHd2*traceYdAdjYd*Sqr(g1) + 60*mHd2*traceYeAdjYe*Sqr(g1) -
+      40*traceYdAdjYd*AbsSqr(MassB)*Sqr(g1) + 120*traceYeAdjYe*AbsSqr(MassB)*
+      Sqr(g1) + 20*traceAdjYdTYd*Conj(MassB)*Sqr(g1) - 60*traceAdjYeTYe*Conj(
+      MassB)*Sqr(g1) + 90*AbsSqr(MassB)*Sqr(g1)*Sqr(g2) + 90*AbsSqr(MassWB)*Sqr
+      (g1)*Sqr(g2) + 45*MassWB*Conj(MassB)*Sqr(g1)*Sqr(g2) + 45*MassB*Conj(
+      MassWB)*Sqr(g1)*Sqr(g2) + 800*traceconjTYdTpTYd*Sqr(g3) - 800*MassG*
+      traceconjTYdTpYd*Sqr(g3) + 800*tracemd2YdAdjYd*Sqr(g3) + 800*
+      tracemq2AdjYdYd*Sqr(g3) + 800*mHd2*traceYdAdjYd*Sqr(g3) + 1600*
+      traceYdAdjYd*AbsSqr(MassG)*Sqr(g3) - 800*traceAdjYdTYd*Conj(MassG)*Sqr(g3
+      )));
 
 
-   return beta_mHd2;
+   return twoLoop * beta_mHd2;
 }
 
 /**
@@ -286,8 +284,8 @@ double NUHMSSMNoFVHimalaya_soft_parameters::calc_beta_mHd2_3_loop(const Soft_tra
 
    double beta_mHd2;
 
-   const double beta_mHd2_1 = Re(239.45914429835202*threeLoop*(
-      0.07516939915885217*traceAdjTYuTYuAdjYuYuAdjYdYd + 0.07516939915885217*
+   const double beta_mHd2_1 = Re(239.45914429835202*(0.07516939915885217*
+      traceAdjTYuTYuAdjYuYuAdjYdYd + 0.07516939915885217*
       traceAdjTYuYuAdjYuTYuAdjYdYd + 0.9020327899062259*traceAdjTYdYd*
       traceAdjYdTYdAdjYdYd + 0.30067759663540866*traceAdjTYeYe*
       traceAdjYdTYdAdjYdYd + 0.6173167701503955*traceAdjYdTYdAdjYdYdAdjTYdYd +
@@ -368,20 +366,20 @@ double NUHMSSMNoFVHimalaya_soft_parameters::calc_beta_mHd2_3_loop(const Soft_tra
       traceAdjYdYd*Sqr(g1)*Sqr(g2)*Sqr(MassWB) - 1.9956045023673916*Quad(g2)*
       Sqr(g3)*Sqr(MassWB) + 0.6864836032952348*traceAdjYdYd*Sqr(g2)*Sqr(g3)*Sqr
       (MassWB)));
-   const double beta_mHd2_2 = Re(-145.1324875677737*threeLoop*(-
-      1.488295306032929*traceAdjYdYd*traceAdjYdYdAdjYdYdmq2 -
-      0.12402460883607741*traceAdjYdYdAdjYuYuAdjYuYumq2 - 0.7441476530164645*
-      traceAdjYdYdAdjYdYd*traceAdjYdYdmq2 - 0.49609843534430964*traceAdjYdYd*
-      traceAdjYeTYeAdjTYeYe - 0.49609843534430964*traceAdjTYdYd*
-      traceAdjYeTYeAdjYeYe - 0.16536614511476988*traceAdjTYeYe*
-      traceAdjYeTYeAdjYeYe - 0.33951081070484296*traceAdjYeTYeAdjYeYeAdjTYeYe -
-      0.49609843534430964*traceAdjTYdTYdAdjYdYd*traceAdjYeYe -
-      0.16536614511476988*traceAdjTYeTYeAdjYeYe*traceAdjYeYe -
-      0.49609843534430964*traceAdjYdTYdAdjTYdYd*traceAdjYeYe -
-      0.7441476530164645*mHd2*traceAdjYdYdAdjYdYd*traceAdjYeYe -
-      0.49609843534430964*traceAdjYdYdAdjYdYdmq2*traceAdjYeYe -
-      0.16536614511476988*traceAdjYeTYeAdjTYeYe*traceAdjYeYe -
-      0.33951081070484296*traceAdjYeYeAdjTYeTYeAdjYeYe - 0.33951081070484296*
+   const double beta_mHd2_2 = Re(-145.1324875677737*(-1.488295306032929*
+      traceAdjYdYd*traceAdjYdYdAdjYdYdmq2 - 0.12402460883607741*
+      traceAdjYdYdAdjYuYuAdjYuYumq2 - 0.7441476530164645*traceAdjYdYdAdjYdYd*
+      traceAdjYdYdmq2 - 0.49609843534430964*traceAdjYdYd*traceAdjYeTYeAdjTYeYe
+      - 0.49609843534430964*traceAdjTYdYd*traceAdjYeTYeAdjYeYe -
+      0.16536614511476988*traceAdjTYeYe*traceAdjYeTYeAdjYeYe -
+      0.33951081070484296*traceAdjYeTYeAdjYeYeAdjTYeYe - 0.49609843534430964*
+      traceAdjTYdTYdAdjYdYd*traceAdjYeYe - 0.16536614511476988*
+      traceAdjTYeTYeAdjYeYe*traceAdjYeYe - 0.49609843534430964*
+      traceAdjYdTYdAdjTYdYd*traceAdjYeYe - 0.7441476530164645*mHd2*
+      traceAdjYdYdAdjYdYd*traceAdjYeYe - 0.49609843534430964*
+      traceAdjYdYdAdjYdYdmq2*traceAdjYeYe - 0.16536614511476988*
+      traceAdjYeTYeAdjTYeYe*traceAdjYeYe - 0.33951081070484296*
+      traceAdjYeYeAdjTYeTYeAdjYeYe - 0.33951081070484296*
       traceAdjYeYeAdjYeTYeAdjTYeYe - 0.7441476530164645*mHd2*traceAdjYdYd*
       traceAdjYeYeAdjYeYe - 0.24804921767215482*traceAdjYdYdmq2*
       traceAdjYeYeAdjYeYe - 0.24804921767215482*mHd2*traceAdjYeYe*
@@ -456,7 +454,7 @@ double NUHMSSMNoFVHimalaya_soft_parameters::calc_beta_mHd2_3_loop(const Soft_tra
       traceAdjYeYeAdjYeYe*Sqr(g2)*Sqr(MassWB) - 0.49609843534430964*
       traceAdjYuYuAdjYdYd*Sqr(g2)*Sqr(MassWB) - 0.3134603980621316*traceAdjYeYe
       *Sqr(g1)*Sqr(g2)*Sqr(MassWB)));
-   const double beta_mHd2_3 = Re(-3.312*threeLoop*(-10.869565217391305*
+   const double beta_mHd2_3 = Re(-3.312*(-10.869565217391305*
       traceAdjYuYuAdjYdYd*traceAdjYuYumq2 - 32.608695652173914*
       traceAdjYdYdAdjYdYd*traceTYdAdjTYd - 10.869565217391305*
       traceAdjYeYeAdjYeYe*traceTYdAdjTYd - 10.869565217391305*traceAdjYuYu*
@@ -532,14 +530,14 @@ double NUHMSSMNoFVHimalaya_soft_parameters::calc_beta_mHd2_3_loop(const Soft_tra
       g2)*Sqr(g3) + 24.81654230373283*MassG*traceTYdAdjYd*Sqr(g2)*Sqr(g3) +
       24.81654230373283*MassWB*traceTYdAdjYd*Sqr(g2)*Sqr(g3) -
       24.81654230373283*traceYdAdjYdmd2*Sqr(g2)*Sqr(g3)));
-   const double beta_mHd2_4 = Re(12.*threeLoop*(1.*traceAdjYeYeAdjYeYe*
-      traceYeAdjYeme2 + 6.*traceAdjYdYd*traceYeAdjYeYeAdjYeme2 + 2.*
-      traceAdjYeYe*traceYeAdjYeYeAdjYeme2 + 4.106170709478783*
-      traceYeAdjYeYeAdjYeYeAdjYeme2 + 3.*traceAdjYuYu*traceYuAdjYdYdAdjYumu2 +
-      1.5*traceYuAdjYdYdAdjYuYuAdjYumu2 + 3.*traceAdjYuYuAdjYdYd*
-      traceYuAdjYumu2 + 1.5*traceYuAdjYuYuAdjYdYdAdjYumu2 - 0.7799999999999999*
-      traceYuAdjYumu2*Quad(g1) - 4.5*traceYuAdjYumu2*Quad(g2) -
-      1.3274048513745398*traceYeAdjYeYeAdjYeme2*Sqr(g1) + 1.2828796644234317*
+   const double beta_mHd2_4 = Re(12.*(1.*traceAdjYeYeAdjYeYe*traceYeAdjYeme2 +
+      6.*traceAdjYdYd*traceYeAdjYeYeAdjYeme2 + 2.*traceAdjYeYe*
+      traceYeAdjYeYeAdjYeme2 + 4.106170709478783*traceYeAdjYeYeAdjYeYeAdjYeme2
+      + 3.*traceAdjYuYu*traceYuAdjYdYdAdjYumu2 + 1.5*
+      traceYuAdjYdYdAdjYuYuAdjYumu2 + 3.*traceAdjYuYuAdjYdYd*traceYuAdjYumu2 +
+      1.5*traceYuAdjYuYuAdjYdYdAdjYumu2 - 0.7799999999999999*traceYuAdjYumu2*
+      Quad(g1) - 4.5*traceYuAdjYumu2*Quad(g2) - 1.3274048513745398*
+      traceYeAdjYeYeAdjYeme2*Sqr(g1) + 1.2828796644234317*
       traceYuAdjYdYdAdjYumu2*Sqr(g1) + 8.212341418957566*traceYeAdjYeYeAdjYeme2
       *Sqr(g2) + 3.*traceYuAdjYdYdAdjYumu2*Sqr(g2) - 5.616455225276755*
       traceYuAdjYdYdAdjYumu2*Sqr(g3)));
@@ -547,7 +545,7 @@ double NUHMSSMNoFVHimalaya_soft_parameters::calc_beta_mHd2_3_loop(const Soft_tra
    beta_mHd2 = beta_mHd2_1 + beta_mHd2_2 + beta_mHd2_3 + beta_mHd2_4;
 
 
-   return beta_mHd2;
+   return threeLoop * beta_mHd2;
 }
 
 /**
@@ -566,7 +564,7 @@ double NUHMSSMNoFVHimalaya_soft_parameters::calc_beta_mHd2_4_loop(const Soft_tra
    beta_mHd2 = 0;
 
 
-   return beta_mHd2;
+   return fourLoop * beta_mHd2;
 }
 
 /**
@@ -585,7 +583,7 @@ double NUHMSSMNoFVHimalaya_soft_parameters::calc_beta_mHd2_5_loop(const Soft_tra
    beta_mHd2 = 0;
 
 
-   return beta_mHd2;
+   return fiveLoop * beta_mHd2;
 }
 
 } // namespace flexiblesusy

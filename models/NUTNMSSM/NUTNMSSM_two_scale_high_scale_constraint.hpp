@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:27:54
 
 #ifndef NUTNMSSM_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
 #define NUTNMSSM_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
@@ -38,6 +37,8 @@ public:
    NUTNMSSM_high_scale_constraint() = default;
    NUTNMSSM_high_scale_constraint(NUTNMSSM<Two_scale>*);
    virtual ~NUTNMSSM_high_scale_constraint() = default;
+   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+
    virtual void apply() override;
    virtual double get_scale() const override;
    virtual std::string name() const override { return "NUTNMSSM high-scale constraint"; }

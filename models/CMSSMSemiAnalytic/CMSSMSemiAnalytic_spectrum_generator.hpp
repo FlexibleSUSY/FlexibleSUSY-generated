@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:47:57
 
 #ifndef CMSSMSemiAnalytic_SPECTRUM_GENERATOR_H
 #define CMSSMSemiAnalytic_SPECTRUM_GENERATOR_H

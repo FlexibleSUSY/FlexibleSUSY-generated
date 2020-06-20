@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:28:46
 
 #include "NMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -40,12 +39,12 @@ double NMSSM_susy_parameters::calc_beta_Lambdax_1_loop(const Susy_traces& susy_t
 
    double beta_Lambdax;
 
-   beta_Lambdax = Re(0.2*oneOver16PiSqr*Lambdax*(15*traceYdAdjYd + 5*
-      traceYeAdjYe + 15*traceYuAdjYu + 10*AbsSqr(Kappa) + 20*AbsSqr(Lambdax) -
-      3*Sqr(g1) - 15*Sqr(g2)));
+   beta_Lambdax = Re(0.2*Lambdax*(15*traceYdAdjYd + 5*traceYeAdjYe + 15*
+      traceYuAdjYu + 10*AbsSqr(Kappa) + 20*AbsSqr(Lambdax) - 3*Sqr(g1) - 15*Sqr
+      (g2)));
 
 
-   return beta_Lambdax;
+   return oneLoop * beta_Lambdax;
 }
 
 /**
@@ -66,7 +65,7 @@ double NMSSM_susy_parameters::calc_beta_Lambdax_2_loop(const Susy_traces& susy_t
 
    double beta_Lambdax;
 
-   beta_Lambdax = Re(-0.02*twoLoop*Lambdax*(450*traceYdAdjYdYdAdjYd + 300*
+   beta_Lambdax = Re(-0.02*Lambdax*(450*traceYdAdjYdYdAdjYd + 300*
       traceYdAdjYuYuAdjYd + 150*traceYeAdjYeYeAdjYe + 450*traceYuAdjYuYuAdjYu +
       450*traceYdAdjYd*AbsSqr(Lambdax) + 150*traceYeAdjYe*AbsSqr(Lambdax) + 450
       *traceYuAdjYu*AbsSqr(Lambdax) + 600*AbsSqr(Kappa)*AbsSqr(Lambdax) - 207*
@@ -77,7 +76,7 @@ double NMSSM_susy_parameters::calc_beta_Lambdax_2_loop(const Susy_traces& susy_t
       Lambdax))*Sqr(Lambdax)));
 
 
-   return beta_Lambdax;
+   return twoLoop * beta_Lambdax;
 }
 
 /**
@@ -96,7 +95,7 @@ double NMSSM_susy_parameters::calc_beta_Lambdax_3_loop(const Susy_traces& susy_t
    beta_Lambdax = 0;
 
 
-   return beta_Lambdax;
+   return threeLoop * beta_Lambdax;
 }
 
 /**
@@ -115,7 +114,7 @@ double NMSSM_susy_parameters::calc_beta_Lambdax_4_loop(const Susy_traces& susy_t
    beta_Lambdax = 0;
 
 
-   return beta_Lambdax;
+   return fourLoop * beta_Lambdax;
 }
 
 /**
@@ -134,7 +133,7 @@ double NMSSM_susy_parameters::calc_beta_Lambdax_5_loop(const Susy_traces& susy_t
    beta_Lambdax = 0;
 
 
-   return beta_Lambdax;
+   return fiveLoop * beta_Lambdax;
 }
 
 } // namespace flexiblesusy

@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:42:42
 
 #ifndef THDMIIMSSMBC_susy_parameters_H
 #define THDMIIMSSMBC_susy_parameters_H
@@ -25,8 +24,6 @@
 #include "THDMIIMSSMBC_input_parameters.hpp"
 
 #include <iosfwd>
-#include <string>
-#include <vector>
 #include <Eigen/Core>
 
 namespace flexiblesusy {
@@ -51,6 +48,7 @@ public:
 
    virtual Eigen::ArrayXd beta() const override;
    virtual Eigen::ArrayXd get() const override;
+   void print() const;
    virtual void print(std::ostream&) const;
    virtual void set(const Eigen::ArrayXd&) override;
    const THDMIIMSSMBC_input_parameters& get_input() const;

@@ -16,13 +16,8 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:44:15
 
 #include "NMSSMEFTHiggs_soft_parameters.hpp"
-#include "config.h"
-#ifdef ENABLE_THREADS
-#include "global_thread_pool.hpp"
-#endif
 #include "wrappers.hpp"
 #include "functors.hpp"
 
@@ -123,13 +118,6 @@ NMSSMEFTHiggs_soft_parameters NMSSMEFTHiggs_soft_parameters::calc_beta(int loops
          beta_MassG += calc_beta_MassG_2_loop(TRACE_STRUCT);
 
          if (loops > 2) {
-         #ifdef ENABLE_THREADS
-            {
-
-
-            }
-         #else
-         #endif
 
             if (loops > 3) {
 

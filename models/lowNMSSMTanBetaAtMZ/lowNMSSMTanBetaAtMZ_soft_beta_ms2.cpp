@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:20:36
 
 #include "lowNMSSMTanBetaAtMZ_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,12 +72,11 @@ double lowNMSSMTanBetaAtMZ_soft_parameters::calc_beta_ms2_1_loop(const Soft_trac
 
    double beta_ms2;
 
-   beta_ms2 = Re(4*oneOver16PiSqr*(3*ms2*AbsSqr(Kappa) + mHd2*AbsSqr(Lambdax) +
-      mHu2*AbsSqr(Lambdax) + ms2*AbsSqr(Lambdax) + AbsSqr(TKappa) + AbsSqr(
-      TLambdax)));
+   beta_ms2 = Re(4*(3*ms2*AbsSqr(Kappa) + mHd2*AbsSqr(Lambdax) + mHu2*AbsSqr(
+      Lambdax) + ms2*AbsSqr(Lambdax) + AbsSqr(TKappa) + AbsSqr(TLambdax)));
 
 
-   return beta_ms2;
+   return oneLoop * beta_ms2;
 }
 
 /**
@@ -110,7 +108,7 @@ double lowNMSSMTanBetaAtMZ_soft_parameters::calc_beta_ms2_2_loop(const Soft_trac
 
    double beta_ms2;
 
-   beta_ms2 = Re(-0.8*twoLoop*(15*traceconjTYdTpTYd*AbsSqr(Lambdax) + 5*
+   beta_ms2 = Re(-0.8*(15*traceconjTYdTpTYd*AbsSqr(Lambdax) + 5*
       traceconjTYeTpTYe*AbsSqr(Lambdax) + 15*traceconjTYuTpTYu*AbsSqr(Lambdax)
       + 15*tracemd2YdAdjYd*AbsSqr(Lambdax) + 5*traceme2YeAdjYe*AbsSqr(Lambdax)
       + 5*traceml2AdjYeYe*AbsSqr(Lambdax) + 15*tracemq2AdjYdYd*AbsSqr(Lambdax)
@@ -142,7 +140,7 @@ double lowNMSSMTanBetaAtMZ_soft_parameters::calc_beta_ms2_2_loop(const Soft_trac
       TLambdax + 15*Conj(MassWB)*Conj(Lambdax)*Sqr(g2)*TLambdax));
 
 
-   return beta_ms2;
+   return twoLoop * beta_ms2;
 }
 
 /**
@@ -161,7 +159,7 @@ double lowNMSSMTanBetaAtMZ_soft_parameters::calc_beta_ms2_3_loop(const Soft_trac
    beta_ms2 = 0;
 
 
-   return beta_ms2;
+   return threeLoop * beta_ms2;
 }
 
 /**
@@ -180,7 +178,7 @@ double lowNMSSMTanBetaAtMZ_soft_parameters::calc_beta_ms2_4_loop(const Soft_trac
    beta_ms2 = 0;
 
 
-   return beta_ms2;
+   return fourLoop * beta_ms2;
 }
 
 /**
@@ -199,7 +197,7 @@ double lowNMSSMTanBetaAtMZ_soft_parameters::calc_beta_ms2_5_loop(const Soft_trac
    beta_ms2 = 0;
 
 
-   return beta_ms2;
+   return fiveLoop * beta_ms2;
 }
 
 } // namespace flexiblesusy

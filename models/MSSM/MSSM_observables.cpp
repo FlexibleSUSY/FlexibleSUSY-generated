@@ -16,14 +16,14 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:46:21
 
 #include "MSSM_observables.hpp"
 #include "MSSM_mass_eigenstates.hpp"
 #include "MSSM_a_muon.hpp"
 #include "MSSM_edm.hpp"
 #include "MSSM_l_to_lgamma.hpp"
-//#include "MSSM_f_to_f_conversion.hpp"
+#include "MSSM_b_to_s_gamma.hpp"
+#include "MSSM_f_to_f_conversion.hpp"
 #include "MSSM_effective_couplings.hpp"
 #include "config.h"
 #include "eigen_utils.hpp"
@@ -45,7 +45,8 @@
 #define EDM1(p,idx) edm_ ## p ## _ ## idx
 #define LToLGamma0(pIn, pOut, spec) pIn ## _to_ ## pOut ## _ ## spec
 #define LToLGamma1(pIn,idxIn,pOut,idxOut,spec) pIn ## _to_ ## pOut ## _ ## spec
-#define FToFConversion1(pIn,idxIn,pOut,idxOut,nuclei) pIn ## _to_ ## pOut ## _in_ ## nuclei
+#define FToFConversion1(pIn,idxIn,pOut,idxOut,nuclei,qedqcd) pIn ## _to_ ## pOut ## _in_ ## nuclei
+#define BSGAMMA b_to_s_gamma
 #define EFFCPHIGGSPHOTONPHOTON eff_cp_higgs_photon_photon
 #define EFFCPHIGGSGLUONGLUON eff_cp_higgs_gluon_gluon
 #define EFFCPPSEUDOSCALARPHOTONPHOTON eff_cp_pseudoscalar_photon_photon
@@ -134,6 +135,9 @@ MSSM_observables calculate_observables(MSSM_mass_eigenstates& model,
       } catch (const Error& e) {
          model.get_problems().flag_thrown(e.what_detailed());
          return MSSM_observables();
+      } catch (const std::exception& e) {
+         model.get_problems().flag_thrown(e.what());
+         return MSSM_observables();
       }
    }
 
@@ -155,6 +159,8 @@ MSSM_observables calculate_observables(MSSM_mass_eigenstates& model,
       observables.LToLGamma1(Fe, 1, Fe, 0, VP) = MSSM_l_to_lgamma::calculate_Fe_to_Fe_VP(1, 0, MODEL, qedqcd, physical_input);
    } catch (const Error& e) {
       model.get_problems().flag_thrown(e.what_detailed());
+   } catch (const std::exception& e) {
+      model.get_problems().flag_thrown(e.what());
    }
 
    return observables;

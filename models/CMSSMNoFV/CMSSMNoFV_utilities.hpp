@@ -16,14 +16,11 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:40:48
 
 #ifndef CMSSMNoFV_UTILITIES_H
 #define CMSSMNoFV_UTILITIES_H
 
-#include "CMSSMNoFV_mass_eigenstates.hpp"
 #include "CMSSMNoFV_info.hpp"
-#include "wrappers.hpp"
 
 #include <Eigen/Core>
 #include <array>
@@ -38,81 +35,46 @@ class QedQcd;
 
 namespace flexiblesusy {
 
+class CMSSMNoFV_mass_eigenstates;
 struct CMSSMNoFV_observables;
 class Physical_input;
 
 class CMSSMNoFV_parameter_getter {
 private:
-   std::vector<std::string> get_mass_names(const std::string& head = "") const {
-      using namespace CMSSMNoFV_info;
-      std::vector<std::string> masses;
-      for (int i = 0; i < NUMBER_OF_PARTICLES; i++) {
-         for (int m = 0; m < particle_multiplicities[i]; m++) {
-            masses.push_back(
-               head + "M" + particle_names[i] +
-               (particle_multiplicities[i] == 1 ? "" : "("
-                + std::to_string(static_cast<long long>(m)) + ")"));
-         }
-      }
+   static std::vector<std::string> get_mass_names(const std::string& head = "");
 
-      masses.shrink_to_fit();
-
-      return masses;
-   }
-
-   std::array<std::string, CMSSMNoFV_info::NUMBER_OF_MIXINGS> get_mixing_names() const {
-      return CMSSMNoFV_info::particle_mixing_names;
-   }
+   static std::array<std::string, CMSSMNoFV_info::NUMBER_OF_MIXINGS> get_mixing_names();
 
 public:
    /// returns DR-bar parameters
-   Eigen::ArrayXd get_parameters(const CMSSMNoFV_mass_eigenstates& model) {
-      return model.get();
-   }
+   static Eigen::ArrayXd get_parameters(const CMSSMNoFV_mass_eigenstates& model);
 
    /// returns names of DR-bar parameters
-   std::array<std::string, CMSSMNoFV_info::NUMBER_OF_PARAMETERS> get_parameter_names() const {
-      return CMSSMNoFV_info::parameter_names;
-   }
+   static std::array<std::string, CMSSMNoFV_info::NUMBER_OF_PARAMETERS> get_parameter_names();
 
    /// returns names of particles
-   std::array<std::string, CMSSMNoFV_info::NUMBER_OF_PARTICLES> get_particle_names() const {
-      return CMSSMNoFV_info::particle_names;
-   }
+   static std::array<std::string, CMSSMNoFV_info::NUMBER_OF_PARTICLES> get_particle_names();
 
    /// returns names of DR-bar masses
-   std::vector<std::string> get_DRbar_mass_names() const { return get_mass_names(); }
+   static std::vector<std::string> get_DRbar_mass_names();
 
    /// returns names of pole masses
-   std::vector<std::string> get_pole_mass_names() const { return get_mass_names("Pole"); }
+   static std::vector<std::string> get_pole_mass_names();
 
    /// returns names of DR-bar mixing matrices
-   std::array<std::string, CMSSMNoFV_info::NUMBER_OF_MIXINGS> get_DRbar_mixing_names() const {
-      return get_mixing_names();
-   }
+   static std::array<std::string, CMSSMNoFV_info::NUMBER_OF_MIXINGS> get_DRbar_mixing_names();
 
    /// returns names of pole mixing matrices
-   std::array<std::string, CMSSMNoFV_info::NUMBER_OF_MIXINGS> get_pole_mixing_names() const {
-      auto mixing_names = get_mixing_names();
-      for (auto& n: mixing_names)
-         n = std::string("Pole") + n;
-      return mixing_names;
-   }
+   static std::array<std::string, CMSSMNoFV_info::NUMBER_OF_MIXINGS> get_pole_mixing_names();
 
    /// returns names of input parameters
-   std::array<std::string, CMSSMNoFV_info::NUMBER_OF_INPUT_PARAMETERS> get_input_parameter_names() const {
-      return CMSSMNoFV_info::input_parameter_names;
-   }
+   static std::array<std::string, CMSSMNoFV_info::NUMBER_OF_INPUT_PARAMETERS> get_input_parameter_names();
 
    /// returns names of input parameters
-   std::array<std::string, CMSSMNoFV_info::NUMBER_OF_EXTRA_PARAMETERS> get_extra_parameter_names() const {
-      return CMSSMNoFV_info::extra_parameter_names;
-   }
+   static std::array<std::string, CMSSMNoFV_info::NUMBER_OF_EXTRA_PARAMETERS> get_extra_parameter_names();
 
    /// returns number of particle masses
-   decltype(CMSSMNoFV_info::NUMBER_OF_MASSES) get_number_of_masses() const {
-      return CMSSMNoFV_info::NUMBER_OF_MASSES;
-   }
+   static decltype(CMSSMNoFV_info::NUMBER_OF_MASSES) get_number_of_masses();
 };
 
 class CMSSMNoFV_spectrum_plotter {

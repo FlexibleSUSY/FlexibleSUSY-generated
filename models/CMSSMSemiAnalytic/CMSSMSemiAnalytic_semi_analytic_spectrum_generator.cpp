@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:48:05
 
 #include "CMSSMSemiAnalytic_semi_analytic_spectrum_generator.hpp"
 #include "CMSSMSemiAnalytic_input_parameters.hpp"
@@ -95,16 +94,17 @@ void CMSSMSemiAnalytic_spectrum_generator<Semi_analytic>::run_except(const softs
    CMSSMSemiAnalytic_soft_parameters_constraint<Semi_analytic> soft_constraint(&model, qedqcd);
 
    soft_constraint.set_boundary_scale(
-      [this,&high_scale_constraint] () {
-         return high_scale_constraint.get_scale(); });
+      [&high_scale_constraint] () { return high_scale_constraint.get_scale(); });
    susy_scale_constraint.set_scale(
-      [this,&soft_constraint] () {
-         return soft_constraint.get_scale(); });
+      [&soft_constraint] () { return soft_constraint.get_scale(); });
 
    high_scale_constraint.initialize();
    susy_scale_constraint.initialize();
    low_scale_constraint .initialize();
    soft_constraint      .initialize();
+
+   low_scale_constraint.set_SM_like_Higgs_index(
+      settings.get(Spectrum_generator_settings::eft_higgs_index));
 
    CMSSMSemiAnalytic_susy_convergence_tester<Semi_analytic> inner_ct(
       &model, settings.get(Spectrum_generator_settings::precision));

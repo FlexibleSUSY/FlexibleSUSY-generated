@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:46:09
 
 #include "config.h"
 
@@ -162,6 +161,7 @@ class THDMII_spectrum_impl : public THDMII_spectrum
 {
 public:
    virtual ~THDMII_spectrum_impl() = default;
+   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
    virtual void put_model_spectra(MLINK link) const override;
 
@@ -176,7 +176,7 @@ public:
    virtual void calculate_model_observables(const softsusy::QedQcd&, const Physical_input&) override;
 
 private:
-   std::tuple<THDMII_slha<THDMII<Solver_type>>> models{};        ///< running parameters and pole masses
+   std::tuple<THDMII<Solver_type>> models{};        ///< running parameters and pole masses
    Spectrum_generator_problems problems{};   ///< spectrum generator problems
    THDMII_scales scales{};              ///< scale information
    THDMII_observables observables{};    ///< observables
@@ -240,7 +240,7 @@ Handle_map handles;
 Handle get_new_handle()
 {
    static const std::size_t max_handles =
-      static_cast<std::size_t>(std::exp2(std::numeric_limits<Handle>::digits) - 1);
+      static_cast<std::size_t>(std::numeric_limits<Handle>::max());
 
    if (handles.size() >= max_handles)
       throw ENotEnoughFreeHandles(handles.size());
@@ -386,6 +386,7 @@ void Model_data::put_settings(MLINK link) const
    MLPutRuleTo(link, static_cast<int>(settings.get(Spectrum_generator_settings::higgs_3loop_correction_at2_as)), "higgs3loopCorrectionAtAtAs");
    MLPutRuleTo(link, static_cast<int>(settings.get(Spectrum_generator_settings::higgs_3loop_correction_at3)), "higgs3loopCorrectionAtAtAt");
    MLPutRuleTo(link, static_cast<int>(settings.get(Spectrum_generator_settings::higgs_4loop_correction_at_as3)), "higgs4loopCorrectionAtAsAsAs");
+   MLPutRuleTo(link, static_cast<int>(settings.get(Spectrum_generator_settings::loop_library)), "loopLibrary");
    MLPutRuleTo(link, modsel.parameter_output_scale, "parameterOutputScale");
 
    MLEndPacket(link);
@@ -727,8 +728,7 @@ void put_spectrum(const standard_model::StandardModel<Solver_type>& model, MLINK
 
 /******************************************************************/
 
-template <typename Model>
-void put_spectrum(const THDMII_slha<Model>& model, MLINK link)
+void put_spectrum(const THDMII_slha& model, MLINK link)
 {
    MLPutRule(link, THDMII_info::model_name);
    MLPutFunction(link, "List", 61);
@@ -892,12 +892,16 @@ void Model_data::put_observables(MLINK link) const
 
    MLPutFunction(link, "List", 1);
    MLPutRule(link, THDMII_info::model_name);
-   MLPutFunction(link, "List", 4);
+   MLPutFunction(link, "List", 8);
 
    MLPutRuleTo(link, OBSERVABLE(eff_cp_higgs_photon_photon), "FlexibleSUSYObservable`CpHiggsPhotonPhoton");
    MLPutRuleTo(link, OBSERVABLE(eff_cp_higgs_gluon_gluon), "FlexibleSUSYObservable`CpHiggsGluonGluon");
    MLPutRuleTo(link, OBSERVABLE(eff_cp_pseudoscalar_photon_photon), "FlexibleSUSYObservable`CpPseudoScalarPhotonPhoton");
    MLPutRuleTo(link, OBSERVABLE(eff_cp_pseudoscalar_gluon_gluon), "FlexibleSUSYObservable`CpPseudoScalarGluonGluon");
+   MLPutRuleTo(link, OBSERVABLE(a_muon), "FlexibleSUSYObservable`aMuon");
+   MLPutRuleTo(link, OBSERVABLE(edm_Fe_0), 1, {"FlexibleSUSYObservable`EDM", "Fe"});
+   MLPutRuleTo(link, OBSERVABLE(edm_Fe_1), 2, {"FlexibleSUSYObservable`EDM", "Fe"});
+   MLPutRuleTo(link, OBSERVABLE(edm_Fe_2), 3, {"FlexibleSUSYObservable`EDM", "Fe"});
 
 
    MLEndPacket(link);
@@ -1000,6 +1004,7 @@ Model_data make_data(const Dynamic_array_view<Element_t>& pars)
    settings.set(Spectrum_generator_settings::higgs_3loop_correction_at2_as, pars[c++]);
    settings.set(Spectrum_generator_settings::higgs_3loop_correction_at3, pars[c++]);
    settings.set(Spectrum_generator_settings::higgs_4loop_correction_at_as3, pars[c++]);
+   settings.set(Spectrum_generator_settings::loop_library, pars[c++]);
 
    SLHA_io::Modsel modsel;
    modsel.parameter_output_scale = pars[c++];

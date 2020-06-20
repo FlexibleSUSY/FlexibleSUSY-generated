@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:30:43
 
 #ifndef E6SSMEFTHiggs_soft_parameters_H
 #define E6SSMEFTHiggs_soft_parameters_H

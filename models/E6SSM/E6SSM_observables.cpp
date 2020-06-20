@@ -16,14 +16,14 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:05:52
 
 #include "E6SSM_observables.hpp"
 #include "E6SSM_mass_eigenstates.hpp"
 #include "E6SSM_a_muon.hpp"
 #include "E6SSM_edm.hpp"
 #include "E6SSM_l_to_lgamma.hpp"
-//#include "E6SSM_f_to_f_conversion.hpp"
+#include "E6SSM_b_to_s_gamma.hpp"
+#include "E6SSM_f_to_f_conversion.hpp"
 #include "E6SSM_effective_couplings.hpp"
 #include "config.h"
 #include "eigen_utils.hpp"
@@ -45,7 +45,8 @@
 #define EDM1(p,idx) edm_ ## p ## _ ## idx
 #define LToLGamma0(pIn, pOut, spec) pIn ## _to_ ## pOut ## _ ## spec
 #define LToLGamma1(pIn,idxIn,pOut,idxOut,spec) pIn ## _to_ ## pOut ## _ ## spec
-#define FToFConversion1(pIn,idxIn,pOut,idxOut,nuclei) pIn ## _to_ ## pOut ## _in_ ## nuclei
+#define FToFConversion1(pIn,idxIn,pOut,idxOut,nuclei,qedqcd) pIn ## _to_ ## pOut ## _in_ ## nuclei
+#define BSGAMMA b_to_s_gamma
 #define EFFCPHIGGSPHOTONPHOTON eff_cp_higgs_photon_photon
 #define EFFCPHIGGSGLUONGLUON eff_cp_higgs_gluon_gluon
 #define EFFCPPSEUDOSCALARPHOTONPHOTON eff_cp_pseudoscalar_photon_photon
@@ -162,6 +163,9 @@ E6SSM_observables calculate_observables(E6SSM_mass_eigenstates& model,
       } catch (const Error& e) {
          model.get_problems().flag_thrown(e.what_detailed());
          return E6SSM_observables();
+      } catch (const std::exception& e) {
+         model.get_problems().flag_thrown(e.what());
+         return E6SSM_observables();
       }
    }
 
@@ -189,6 +193,8 @@ E6SSM_observables calculate_observables(E6SSM_mass_eigenstates& model,
       observables.EFFCPPSEUDOSCALARGLUONGLUON = effective_couplings.get_eff_CpAhVGVG(2);
    } catch (const Error& e) {
       model.get_problems().flag_thrown(e.what_detailed());
+   } catch (const std::exception& e) {
+      model.get_problems().flag_thrown(e.what());
    }
 
    return observables;

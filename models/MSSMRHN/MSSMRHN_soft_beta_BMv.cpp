@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:35:13
 
 #include "MSSMRHN_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,12 +72,12 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_BMv_1_loop(const So
 
    Eigen::Matrix<double,3,3> beta_BMv;
 
-   beta_BMv = (oneOver16PiSqr*(4*(Mv*Yv.conjugate()*(TYv).transpose()) + 2*(Yv*
-      Yv.adjoint()*BMv) + 2*(BMv*Yv.conjugate()*Yv.transpose()) + 4*(TYv*Yv.
-      adjoint()*Mv))).real();
+   beta_BMv = (4*(Mv*Yv.conjugate()*(TYv).transpose()) + 2*(Yv*Yv.adjoint()*BMv
+      ) + 2*(BMv*Yv.conjugate()*Yv.transpose()) + 4*(TYv*Yv.adjoint()*Mv)).real
+      ();
 
 
-   return beta_BMv;
+   return oneLoop * beta_BMv;
 }
 
 /**
@@ -96,8 +95,8 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_BMv_2_loop(const So
 
    Eigen::Matrix<double,3,3> beta_BMv;
 
-   beta_BMv = (twoLoop*(-0.8*(15*traceAdjYuTYu + 5*traceAdjYvTYv + 3*MassB*Sqr(
-      g1) + 15*MassWB*Sqr(g2))*(Mv*Yv.conjugate()*Yv.transpose()) + 0.8*(-15*
+   beta_BMv = (-0.8*(15*traceAdjYuTYu + 5*traceAdjYvTYv + 3*MassB*Sqr(g1) + 15*
+      MassWB*Sqr(g2))*(Mv*Yv.conjugate()*Yv.transpose()) + 0.8*(-15*
       traceYuAdjYu - 5*traceYvAdjYv + 3*Sqr(g1) + 15*Sqr(g2))*(Mv*Yv.conjugate(
       )*(TYv).transpose()) - 0.8*(15*traceAdjYuTYu + 5*traceAdjYvTYv + 3*MassB*
       Sqr(g1) + 15*MassWB*Sqr(g2))*(Yv*Yv.adjoint()*Mv) + 0.4*(-15*traceYuAdjYu
@@ -114,10 +113,10 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_BMv_2_loop(const So
       - 2*(BMv*Yv.conjugate()*Ye.transpose()*Ye.conjugate()*Yv.transpose()) - 2
       *(BMv*Yv.conjugate()*Yv.transpose()*Yv.conjugate()*Yv.transpose()) - 4*(
       TYv*Ye.adjoint()*Ye*Yv.adjoint()*Mv) - 4*(TYv*Yv.adjoint()*Yv*Yv.adjoint(
-      )*Mv))).real();
+      )*Mv)).real();
 
 
-   return beta_BMv;
+   return twoLoop * beta_BMv;
 }
 
 /**
@@ -136,7 +135,7 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_BMv_3_loop(const So
    beta_BMv = ZEROMATRIX(3,3);
 
 
-   return beta_BMv;
+   return threeLoop * beta_BMv;
 }
 
 /**
@@ -155,7 +154,7 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_BMv_4_loop(const So
    beta_BMv = ZEROMATRIX(3,3);
 
 
-   return beta_BMv;
+   return fourLoop * beta_BMv;
 }
 
 /**
@@ -174,7 +173,7 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_BMv_5_loop(const So
    beta_BMv = ZEROMATRIX(3,3);
 
 
-   return beta_BMv;
+   return fiveLoop * beta_BMv;
 }
 
 } // namespace flexiblesusy

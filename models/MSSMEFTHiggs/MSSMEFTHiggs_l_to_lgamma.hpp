@@ -16,22 +16,22 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:54:55
 
 /**
  * @file MSSMEFTHiggs_edm.hpp
  *
- * This file was generated at Fri 10 Apr 2020 18:54:55 with FlexibleSUSY
- * 2.4.2 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #ifndef MSSMEFTHiggs_MuToEGamma_H
 #define MSSMEFTHiggs_MuToEGamma_H
 
-#include "lowe.h"
-#include "physical_input.hpp"
+namespace softsusy {
+class QedQcd;
+}
 
 namespace flexiblesusy {
+class Physical_input;
 class MSSMEFTHiggs_mass_eigenstates;
 
 namespace MSSMEFTHiggs_l_to_lgamma {

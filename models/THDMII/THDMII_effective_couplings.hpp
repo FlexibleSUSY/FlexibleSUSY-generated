@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:46:08
 
 #ifndef THDMII_EFFECTIVE_COUPLINGS_H
 #define THDMII_EFFECTIVE_COUPLINGS_H

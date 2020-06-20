@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:27:17
 
 /**
  * @file MRSSMEFTHiggs_two_scale_model.hpp
@@ -24,15 +23,15 @@
  *        value problem using the two_scale solver by solving EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Fri 10 Apr 2020 18:27:17 with FlexibleSUSY
- * 2.4.2 (git commit: a94199e5620b8684f5d30d0eece5757a5a72c4a4) and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #ifndef MRSSMEFTHiggs_TWO_SCALE_H
 #define MRSSMEFTHiggs_TWO_SCALE_H
 
 #include "MRSSMEFTHiggs_model.hpp"
-#include "MRSSMEFTHiggs_mass_eigenstates.hpp"
+#include "MRSSMEFTHiggs_model_slha.hpp"
+#include "MRSSMEFTHiggs_input_parameters.hpp"
 
 #include "model.hpp"
 
@@ -44,9 +43,10 @@ class Two_scale;
  * @brief model class with routines for determining masses and mixings and EWSB
  */
 template<>
-class MRSSMEFTHiggs<Two_scale> : public Model, public MRSSMEFTHiggs_mass_eigenstates {
+class MRSSMEFTHiggs<Two_scale> : public Model, public MRSSMEFTHiggs_slha {
 public:
-   explicit MRSSMEFTHiggs(const MRSSMEFTHiggs_input_parameters& input_ = MRSSMEFTHiggs_input_parameters());
+   explicit MRSSMEFTHiggs(const MRSSMEFTHiggs_input_parameters& input_ = MRSSMEFTHiggs_input_parameters(), bool do_convert_masses_to_slha = true);
+   explicit MRSSMEFTHiggs(const MRSSMEFTHiggs_slha&, bool do_convert_masses_to_slha = true);
    MRSSMEFTHiggs(const MRSSMEFTHiggs&) = default;
    MRSSMEFTHiggs(MRSSMEFTHiggs&&) = default;
    virtual ~MRSSMEFTHiggs() = default;
@@ -58,7 +58,7 @@ public:
    virtual void clear_problems() override;
    virtual std::string name() const override;
    virtual void run_to(double scale, double eps = -1.0) override;
-   virtual void print(std::ostream& out = std::cerr) const override;
+   virtual void print(std::ostream&) const override;
    virtual void set_precision(double) override;
 };
 

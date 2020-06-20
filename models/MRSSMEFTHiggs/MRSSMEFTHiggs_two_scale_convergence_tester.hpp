@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:27:10
 
 #ifndef MRSSMEFTHiggs_TWO_SCALE_CONVERGENCE_TESTER_H
 #define MRSSMEFTHiggs_TWO_SCALE_CONVERGENCE_TESTER_H

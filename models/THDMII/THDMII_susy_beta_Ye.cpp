@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:45:41
 
 #include "THDMII_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -39,11 +38,11 @@ Eigen::Matrix<double,3,3> THDMII_susy_parameters::calc_beta_Ye_1_loop(const Susy
 
    Eigen::Matrix<double,3,3> beta_Ye;
 
-   beta_Ye = (oneOver16PiSqr*(-0.25*Ye*(-12*traceYdAdjYd - 4*traceYeAdjYe + 9*
-      Sqr(g1) + 9*Sqr(g2)) + 1.5*(Ye*Ye.adjoint()*Ye))).real();
+   beta_Ye = (-0.25*Ye*(-12*traceYdAdjYd - 4*traceYeAdjYe + 9*Sqr(g1) + 9*Sqr(
+      g2)) + 1.5*(Ye*Ye.adjoint()*Ye)).real();
 
 
-   return beta_Ye;
+   return oneLoop * beta_Ye;
 }
 
 /**
@@ -62,18 +61,18 @@ Eigen::Matrix<double,3,3> THDMII_susy_parameters::calc_beta_Ye_2_loop(const Susy
 
    Eigen::Matrix<double,3,3> beta_Ye;
 
-   beta_Ye = (twoLoop*(0.005*Ye*(200*Lambda3*Lambda4 - 1350*traceYdAdjYdYdAdjYd
-       - 450*traceYdAdjYuYuAdjYd - 450*traceYeAdjYeYeAdjYe + 300*AbsSqr(Lambda5
-      ) + 900*AbsSqr(Lambda6) + 300*AbsSqr(Lambda7) + 1449*Quad(g1) - 1050*Quad
-      (g2) + 125*traceYdAdjYd*Sqr(g1) + 375*traceYeAdjYe*Sqr(g1) + 1125*
-      traceYdAdjYd*Sqr(g2) + 375*traceYeAdjYe*Sqr(g2) + 270*Sqr(g1)*Sqr(g2) +
-      4000*traceYdAdjYd*Sqr(g3) + 1200*Sqr(Lambda1) + 200*Sqr(Lambda3) + 200*
-      Sqr(Lambda4)) + 0.0375*(-320*Lambda1 - 180*traceYdAdjYd - 60*traceYeAdjYe
-       + 129*Sqr(g1) + 225*Sqr(g2))*(Ye*Ye.adjoint()*Ye) + 1.5*(Ye*Ye.adjoint()
-      *Ye*Ye.adjoint()*Ye))).real();
+   beta_Ye = (0.005*Ye*(200*Lambda3*Lambda4 - 1350*traceYdAdjYdYdAdjYd - 450*
+      traceYdAdjYuYuAdjYd - 450*traceYeAdjYeYeAdjYe + 300*AbsSqr(Lambda5) + 900
+      *AbsSqr(Lambda6) + 300*AbsSqr(Lambda7) + 1449*Quad(g1) - 1050*Quad(g2) +
+      125*traceYdAdjYd*Sqr(g1) + 375*traceYeAdjYe*Sqr(g1) + 1125*traceYdAdjYd*
+      Sqr(g2) + 375*traceYeAdjYe*Sqr(g2) + 270*Sqr(g1)*Sqr(g2) + 4000*
+      traceYdAdjYd*Sqr(g3) + 1200*Sqr(Lambda1) + 200*Sqr(Lambda3) + 200*Sqr(
+      Lambda4)) + 0.0375*(-320*Lambda1 - 180*traceYdAdjYd - 60*traceYeAdjYe +
+      129*Sqr(g1) + 225*Sqr(g2))*(Ye*Ye.adjoint()*Ye) + 1.5*(Ye*Ye.adjoint()*Ye
+      *Ye.adjoint()*Ye)).real();
 
 
-   return beta_Ye;
+   return twoLoop * beta_Ye;
 }
 
 /**
@@ -92,7 +91,7 @@ Eigen::Matrix<double,3,3> THDMII_susy_parameters::calc_beta_Ye_3_loop(const Susy
    beta_Ye = ZEROMATRIX(3,3);
 
 
-   return beta_Ye;
+   return threeLoop * beta_Ye;
 }
 
 /**
@@ -111,7 +110,7 @@ Eigen::Matrix<double,3,3> THDMII_susy_parameters::calc_beta_Ye_4_loop(const Susy
    beta_Ye = ZEROMATRIX(3,3);
 
 
-   return beta_Ye;
+   return fourLoop * beta_Ye;
 }
 
 /**
@@ -130,7 +129,7 @@ Eigen::Matrix<double,3,3> THDMII_susy_parameters::calc_beta_Ye_5_loop(const Susy
    beta_Ye = ZEROMATRIX(3,3);
 
 
-   return beta_Ye;
+   return fiveLoop * beta_Ye;
 }
 
 } // namespace flexiblesusy

@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:53:53
 
 #include "TMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -39,12 +38,12 @@ Eigen::Matrix<double,3,3> TMSSM_susy_parameters::calc_beta_Yd_1_loop(const Susy_
 
    Eigen::Matrix<double,3,3> beta_Yd;
 
-   beta_Yd = (oneOver16PiSqr*(-0.03333333333333333*Yd*(-90*traceYdAdjYd - 30*
-      traceYeAdjYe - 45*AbsSqr(Lambdax) + 14*Sqr(g1) + 90*Sqr(g2) + 160*Sqr(g3)
-      ) + 3*(Yd*Yd.adjoint()*Yd) + Yd*Yu.adjoint()*Yu)).real();
+   beta_Yd = (-0.03333333333333333*Yd*(-90*traceYdAdjYd - 30*traceYeAdjYe - 45*
+      AbsSqr(Lambdax) + 14*Sqr(g1) + 90*Sqr(g2) + 160*Sqr(g3)) + 3*(Yd*Yd.
+      adjoint()*Yd) + Yd*Yu.adjoint()*Yu).real();
 
 
-   return beta_Yd;
+   return oneLoop * beta_Yd;
 }
 
 /**
@@ -64,8 +63,8 @@ Eigen::Matrix<double,3,3> TMSSM_susy_parameters::calc_beta_Yd_2_loop(const Susy_
 
    Eigen::Matrix<double,3,3> beta_Yd;
 
-   beta_Yd = (twoLoop*(0.005555555555555556*Yd*(-1620*traceYdAdjYdYdAdjYd - 540
-      *traceYdAdjYuYuAdjYd - 540*traceYeAdjYeYeAdjYe - 810*traceYuAdjYu*AbsSqr(
+   beta_Yd = (0.005555555555555556*Yd*(-1620*traceYdAdjYdYdAdjYd - 540*
+      traceYdAdjYuYuAdjYd - 540*traceYeAdjYeYeAdjYe - 810*traceYuAdjYu*AbsSqr(
       Lambdax) + 574*Quad(g1) + 2430*Quad(g2) - 320*Quad(g3) - 72*traceYdAdjYd*
       Sqr(g1) + 216*traceYeAdjYe*Sqr(g1) + 1080*AbsSqr(Lambdax)*Sqr(g2) + 180*
       Sqr(g1)*Sqr(g2) + 2880*traceYdAdjYd*Sqr(g3) + 160*Sqr(g1)*Sqr(g3) + 1440*
@@ -74,10 +73,10 @@ Eigen::Matrix<double,3,3> TMSSM_susy_parameters::calc_beta_Yd_2_loop(const Susy_
       g2))*(Yd*Yd.adjoint()*Yd) + 0.1*(-30*traceYuAdjYu - 15*AbsSqr(Lambdax) +
       8*Sqr(g1))*(Yd*Yu.adjoint()*Yu) - 4*(Yd*Yd.adjoint()*Yd*Yd.adjoint()*Yd)
       - 2*(Yd*Yu.adjoint()*Yu*Yd.adjoint()*Yd) - 2*(Yd*Yu.adjoint()*Yu*Yu.
-      adjoint()*Yu))).real();
+      adjoint()*Yu)).real();
 
 
-   return beta_Yd;
+   return twoLoop * beta_Yd;
 }
 
 /**
@@ -96,7 +95,7 @@ Eigen::Matrix<double,3,3> TMSSM_susy_parameters::calc_beta_Yd_3_loop(const Susy_
    beta_Yd = ZEROMATRIX(3,3);
 
 
-   return beta_Yd;
+   return threeLoop * beta_Yd;
 }
 
 /**
@@ -115,7 +114,7 @@ Eigen::Matrix<double,3,3> TMSSM_susy_parameters::calc_beta_Yd_4_loop(const Susy_
    beta_Yd = ZEROMATRIX(3,3);
 
 
-   return beta_Yd;
+   return fourLoop * beta_Yd;
 }
 
 /**
@@ -134,7 +133,7 @@ Eigen::Matrix<double,3,3> TMSSM_susy_parameters::calc_beta_Yd_5_loop(const Susy_
    beta_Yd = ZEROMATRIX(3,3);
 
 
-   return beta_Yd;
+   return fiveLoop * beta_Yd;
 }
 
 } // namespace flexiblesusy

@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 17:35:08
 
 #ifndef NUHMSSMNoFVHimalaya_EWSB_SOLVER_H
 #define NUHMSSMNoFVHimalaya_EWSB_SOLVER_H

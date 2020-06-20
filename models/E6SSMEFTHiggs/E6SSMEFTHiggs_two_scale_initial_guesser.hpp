@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:01:52
 
 #ifndef E6SSMEFTHiggs_STANDARD_MODEL_TWO_SCALE_INITIAL_GUESSER_H
 #define E6SSMEFTHiggs_STANDARD_MODEL_TWO_SCALE_INITIAL_GUESSER_H

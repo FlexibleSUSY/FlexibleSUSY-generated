@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:11:36
 
 #include "SMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -37,10 +36,10 @@ double SMSSM_susy_parameters::calc_beta_Kappa_1_loop(const Susy_traces& susy_tra
 
    double beta_Kappa;
 
-   beta_Kappa = Re(6*oneOver16PiSqr*(AbsSqr(Kappa) + AbsSqr(Lambdax))*Kappa);
+   beta_Kappa = Re(6*(AbsSqr(Kappa) + AbsSqr(Lambdax))*Kappa);
 
 
-   return beta_Kappa;
+   return oneLoop * beta_Kappa;
 }
 
 /**
@@ -57,14 +56,13 @@ double SMSSM_susy_parameters::calc_beta_Kappa_2_loop(const Susy_traces& susy_tra
 
    double beta_Kappa;
 
-   beta_Kappa = Re(-1.2*twoLoop*Kappa*(15*traceYdAdjYd*AbsSqr(Lambdax) + 5*
-      traceYeAdjYe*AbsSqr(Lambdax) + 15*traceYuAdjYu*AbsSqr(Lambdax) + 20*
-      AbsSqr(Kappa)*AbsSqr(Lambdax) - 3*AbsSqr(Lambdax)*Sqr(g1) - 15*AbsSqr(
-      Lambdax)*Sqr(g2) + 20*Sqr(Conj(Kappa))*Sqr(Kappa) + 10*Sqr(Conj(Lambdax))
-      *Sqr(Lambdax)));
+   beta_Kappa = Re(-1.2*Kappa*(15*traceYdAdjYd*AbsSqr(Lambdax) + 5*traceYeAdjYe
+      *AbsSqr(Lambdax) + 15*traceYuAdjYu*AbsSqr(Lambdax) + 20*AbsSqr(Kappa)*
+      AbsSqr(Lambdax) - 3*AbsSqr(Lambdax)*Sqr(g1) - 15*AbsSqr(Lambdax)*Sqr(g2)
+      + 20*Sqr(Conj(Kappa))*Sqr(Kappa) + 10*Sqr(Conj(Lambdax))*Sqr(Lambdax)));
 
 
-   return beta_Kappa;
+   return twoLoop * beta_Kappa;
 }
 
 /**
@@ -83,7 +81,7 @@ double SMSSM_susy_parameters::calc_beta_Kappa_3_loop(const Susy_traces& susy_tra
    beta_Kappa = 0;
 
 
-   return beta_Kappa;
+   return threeLoop * beta_Kappa;
 }
 
 /**
@@ -102,7 +100,7 @@ double SMSSM_susy_parameters::calc_beta_Kappa_4_loop(const Susy_traces& susy_tra
    beta_Kappa = 0;
 
 
-   return beta_Kappa;
+   return fourLoop * beta_Kappa;
 }
 
 /**
@@ -121,7 +119,7 @@ double SMSSM_susy_parameters::calc_beta_Kappa_5_loop(const Susy_traces& susy_tra
    beta_Kappa = 0;
 
 
-   return beta_Kappa;
+   return fiveLoop * beta_Kappa;
 }
 
 } // namespace flexiblesusy

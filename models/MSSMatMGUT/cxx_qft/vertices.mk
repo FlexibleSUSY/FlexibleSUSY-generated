@@ -17,5 +17,5 @@
 #  ====================================================================
 
 
-LIBMSSMatMGUT_SRC += \
+LIBMSSMatMGUT_CXXQFT_VERTICES_SRC := \
 	models/MSSMatMGUT/cxx_qft/MSSMatMGUT_vertices_1.cpp

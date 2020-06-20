@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:47:23
 
 #ifndef SM_soft_parameters_H
 #define SM_soft_parameters_H

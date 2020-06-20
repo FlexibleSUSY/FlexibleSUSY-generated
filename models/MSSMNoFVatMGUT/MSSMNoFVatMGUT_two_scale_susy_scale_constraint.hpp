@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:43:48
 
 #ifndef MSSMNoFVatMGUT_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
 #define MSSMNoFVatMGUT_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
@@ -39,6 +38,8 @@ public:
    MSSMNoFVatMGUT_susy_scale_constraint() = default;
    MSSMNoFVatMGUT_susy_scale_constraint(MSSMNoFVatMGUT<Two_scale>*, const softsusy::QedQcd&);
    virtual ~MSSMNoFVatMGUT_susy_scale_constraint() = default;
+   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+
    virtual void apply() override;
    virtual double get_scale() const override;
    virtual std::string name() const override { return "MSSMNoFVatMGUT SUSY-scale constraint"; }

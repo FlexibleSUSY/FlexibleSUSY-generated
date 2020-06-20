@@ -17,6 +17,6 @@
 #  ====================================================================
 
 
-LIBNUHMSSM_SRC += \
+LIBNUHMSSM_CXXQFT_VERTICES_SRC := \
 	models/NUHMSSM/cxx_qft/NUHMSSM_vertices_1.cpp \
 	models/NUHMSSM/cxx_qft/NUHMSSM_vertices_2.cpp

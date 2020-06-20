@@ -16,12 +16,11 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:26:59
 
 #ifndef MRSSMEFTHiggs_INFO_H
 #define MRSSMEFTHiggs_INFO_H
 
-#include "problems.hpp"
+#include "names.hpp"
 
 #include <array>
 #include <iosfwd>
@@ -130,6 +129,7 @@ namespace MRSSMEFTHiggs_info {
    constexpr bool is_low_energy_model = true;
    constexpr bool is_supersymmetric_model = true;
    constexpr bool is_FlexibleEFTHiggs = true;
+   constexpr bool is_CP_violating_Higgs_sector {false};
 
    void print(std::ostream&);
 

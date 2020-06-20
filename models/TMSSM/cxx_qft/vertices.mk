@@ -17,6 +17,6 @@
 #  ====================================================================
 
 
-LIBTMSSM_SRC += \
+LIBTMSSM_CXXQFT_VERTICES_SRC := \
 	models/TMSSM/cxx_qft/TMSSM_vertices_1.cpp \
 	models/TMSSM/cxx_qft/TMSSM_vertices_2.cpp

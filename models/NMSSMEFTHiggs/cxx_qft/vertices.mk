@@ -17,6 +17,6 @@
 #  ====================================================================
 
 
-LIBNMSSMEFTHiggs_SRC += \
+LIBNMSSMEFTHiggs_CXXQFT_VERTICES_SRC := \
 	models/NMSSMEFTHiggs/cxx_qft/NMSSMEFTHiggs_vertices_1.cpp \
 	models/NMSSMEFTHiggs/cxx_qft/NMSSMEFTHiggs_vertices_2.cpp

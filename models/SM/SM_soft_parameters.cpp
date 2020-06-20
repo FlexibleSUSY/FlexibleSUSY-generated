@@ -16,13 +16,8 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:47:23
 
 #include "SM_soft_parameters.hpp"
-#include "config.h"
-#ifdef ENABLE_THREADS
-#include "global_thread_pool.hpp"
-#endif
 #include "wrappers.hpp"
 #include "functors.hpp"
 
@@ -74,17 +69,7 @@ SM_soft_parameters SM_soft_parameters::calc_beta(int loops) const
          beta_v += calc_beta_v_2_loop(TRACE_STRUCT);
 
          if (loops > 2) {
-         #ifdef ENABLE_THREADS
-            {
-               auto fut_mu2 = global_thread_pool().run_packaged_task([this, &
-                  TRACE_STRUCT](){ return calc_beta_mu2_3_loop(TRACE_STRUCT); });
-
-               beta_mu2 += fut_mu2.get();
-
-            }
-         #else
             beta_mu2 += calc_beta_mu2_3_loop(TRACE_STRUCT);
-         #endif
 
             if (loops > 3) {
 

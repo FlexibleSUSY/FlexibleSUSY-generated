@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:53:56
 
 #include "TMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -38,11 +37,11 @@ double TMSSM_susy_parameters::calc_beta_vu_1_loop(const Susy_traces& susy_traces
 
    double beta_vu;
 
-   beta_vu = Re(0.3*oneOver16PiSqr*vu*(-10*traceYuAdjYu - 5*AbsSqr(Lambdax) +
-      Sqr(g1) + 5*Sqr(g2)));
+   beta_vu = Re(0.3*vu*(-10*traceYuAdjYu - 5*AbsSqr(Lambdax) + Sqr(g1) + 5*Sqr(
+      g2)));
 
 
-   return beta_vu;
+   return oneLoop * beta_vu;
 }
 
 /**
@@ -61,15 +60,15 @@ double TMSSM_susy_parameters::calc_beta_vu_2_loop(const Susy_traces& susy_traces
 
    double beta_vu;
 
-   beta_vu = Re(-0.005*twoLoop*vu*(-600*traceYdAdjYuYuAdjYd - 1800*
-      traceYuAdjYuYuAdjYu - 900*traceYdAdjYd*AbsSqr(Lambdax) - 300*traceYeAdjYe
-      *AbsSqr(Lambdax) + 207*Quad(g1) + 575*Quad(g2) + 340*traceYuAdjYu*Sqr(g1)
-      + 90*AbsSqr(Lambdax)*Sqr(g1) + 900*traceYuAdjYu*Sqr(g2) + 1650*AbsSqr(
-      Lambdax)*Sqr(g2) + 90*Sqr(g1)*Sqr(g2) + 3200*traceYuAdjYu*Sqr(g3) - 750*
-      Sqr(Conj(Lambdax))*Sqr(Lambdax)));
+   beta_vu = Re(-0.005*vu*(-600*traceYdAdjYuYuAdjYd - 1800*traceYuAdjYuYuAdjYu
+      - 900*traceYdAdjYd*AbsSqr(Lambdax) - 300*traceYeAdjYe*AbsSqr(Lambdax) +
+      207*Quad(g1) + 575*Quad(g2) + 340*traceYuAdjYu*Sqr(g1) + 90*AbsSqr(
+      Lambdax)*Sqr(g1) + 900*traceYuAdjYu*Sqr(g2) + 1650*AbsSqr(Lambdax)*Sqr(g2
+      ) + 90*Sqr(g1)*Sqr(g2) + 3200*traceYuAdjYu*Sqr(g3) - 750*Sqr(Conj(Lambdax
+      ))*Sqr(Lambdax)));
 
 
-   return beta_vu;
+   return twoLoop * beta_vu;
 }
 
 /**
@@ -88,7 +87,7 @@ double TMSSM_susy_parameters::calc_beta_vu_3_loop(const Susy_traces& susy_traces
    beta_vu = 0;
 
 
-   return beta_vu;
+   return threeLoop * beta_vu;
 }
 
 /**
@@ -107,7 +106,7 @@ double TMSSM_susy_parameters::calc_beta_vu_4_loop(const Susy_traces& susy_traces
    beta_vu = 0;
 
 
-   return beta_vu;
+   return fourLoop * beta_vu;
 }
 
 /**
@@ -126,7 +125,7 @@ double TMSSM_susy_parameters::calc_beta_vu_5_loop(const Susy_traces& susy_traces
    beta_vu = 0;
 
 
-   return beta_vu;
+   return fiveLoop * beta_vu;
 }
 
 } // namespace flexiblesusy

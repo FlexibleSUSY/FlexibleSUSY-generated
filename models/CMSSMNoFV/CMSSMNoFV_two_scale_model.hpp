@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:40:55
 
 /**
  * @file CMSSMNoFV_two_scale_model.hpp
@@ -24,15 +23,15 @@
  *        value problem using the two_scale solver by solving EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Fri 10 Apr 2020 20:40:55 with FlexibleSUSY
- * 2.4.2 (git commit: a94199e5620b8684f5d30d0eece5757a5a72c4a4) and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #ifndef CMSSMNoFV_TWO_SCALE_H
 #define CMSSMNoFV_TWO_SCALE_H
 
 #include "CMSSMNoFV_model.hpp"
-#include "CMSSMNoFV_mass_eigenstates.hpp"
+#include "CMSSMNoFV_model_slha.hpp"
+#include "CMSSMNoFV_input_parameters.hpp"
 
 #include "model.hpp"
 
@@ -44,9 +43,10 @@ class Two_scale;
  * @brief model class with routines for determining masses and mixings and EWSB
  */
 template<>
-class CMSSMNoFV<Two_scale> : public Model, public CMSSMNoFV_mass_eigenstates {
+class CMSSMNoFV<Two_scale> : public Model, public CMSSMNoFV_slha {
 public:
-   explicit CMSSMNoFV(const CMSSMNoFV_input_parameters& input_ = CMSSMNoFV_input_parameters());
+   explicit CMSSMNoFV(const CMSSMNoFV_input_parameters& input_ = CMSSMNoFV_input_parameters(), bool do_convert_masses_to_slha = true);
+   explicit CMSSMNoFV(const CMSSMNoFV_slha&, bool do_convert_masses_to_slha = true);
    CMSSMNoFV(const CMSSMNoFV&) = default;
    CMSSMNoFV(CMSSMNoFV&&) = default;
    virtual ~CMSSMNoFV() = default;
@@ -58,7 +58,7 @@ public:
    virtual void clear_problems() override;
    virtual std::string name() const override;
    virtual void run_to(double scale, double eps = -1.0) override;
-   virtual void print(std::ostream& out = std::cerr) const override;
+   virtual void print(std::ostream&) const override;
    virtual void set_precision(double) override;
 };
 

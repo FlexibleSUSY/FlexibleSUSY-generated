@@ -16,13 +16,8 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:44:57
 
 #include "MSSMatMGUT_soft_parameters.hpp"
-#include "config.h"
-#ifdef ENABLE_THREADS
-#include "global_thread_pool.hpp"
-#endif
 #include "wrappers.hpp"
 #include "functors.hpp"
 
@@ -117,57 +112,6 @@ MSSMatMGUT_soft_parameters MSSMatMGUT_soft_parameters::calc_beta(int loops) cons
          beta_MassG += calc_beta_MassG_2_loop(TRACE_STRUCT);
 
          if (loops > 2) {
-         #ifdef ENABLE_THREADS
-            {
-               auto fut_TYd = global_thread_pool().run_packaged_task([this, &
-                  TRACE_STRUCT](){ return calc_beta_TYd_3_loop(TRACE_STRUCT); });
-               auto fut_TYe = global_thread_pool().run_packaged_task([this, &
-                  TRACE_STRUCT](){ return calc_beta_TYe_3_loop(TRACE_STRUCT); });
-               auto fut_TYu = global_thread_pool().run_packaged_task([this, &
-                  TRACE_STRUCT](){ return calc_beta_TYu_3_loop(TRACE_STRUCT); });
-               auto fut_BMu = global_thread_pool().run_packaged_task([this, &
-                  TRACE_STRUCT](){ return calc_beta_BMu_3_loop(TRACE_STRUCT); });
-               auto fut_mq2 = global_thread_pool().run_packaged_task([this, &
-                  TRACE_STRUCT](){ return calc_beta_mq2_3_loop(TRACE_STRUCT); });
-               auto fut_ml2 = global_thread_pool().run_packaged_task([this, &
-                  TRACE_STRUCT](){ return calc_beta_ml2_3_loop(TRACE_STRUCT); });
-               auto fut_mHd2 = global_thread_pool().run_packaged_task([this, &
-                  TRACE_STRUCT](){ return calc_beta_mHd2_3_loop(TRACE_STRUCT); });
-               auto fut_mHu2 = global_thread_pool().run_packaged_task([this, &
-                  TRACE_STRUCT](){ return calc_beta_mHu2_3_loop(TRACE_STRUCT); });
-               auto fut_md2 = global_thread_pool().run_packaged_task([this, &
-                  TRACE_STRUCT](){ return calc_beta_md2_3_loop(TRACE_STRUCT); });
-               auto fut_mu2 = global_thread_pool().run_packaged_task([this, &
-                  TRACE_STRUCT](){ return calc_beta_mu2_3_loop(TRACE_STRUCT); });
-               auto fut_me2 = global_thread_pool().run_packaged_task([this, &
-                  TRACE_STRUCT](){ return calc_beta_me2_3_loop(TRACE_STRUCT); });
-               auto fut_MassB = global_thread_pool().run_packaged_task([this, &
-                  TRACE_STRUCT](){ return calc_beta_MassB_3_loop(TRACE_STRUCT); })
-                  ;
-               auto fut_MassWB = global_thread_pool().run_packaged_task([this, &
-                  TRACE_STRUCT](){ return calc_beta_MassWB_3_loop(TRACE_STRUCT); }
-                  );
-               auto fut_MassG = global_thread_pool().run_packaged_task([this, &
-                  TRACE_STRUCT](){ return calc_beta_MassG_3_loop(TRACE_STRUCT); })
-                  ;
-
-               beta_TYd += fut_TYd.get();
-               beta_TYe += fut_TYe.get();
-               beta_TYu += fut_TYu.get();
-               beta_BMu += fut_BMu.get();
-               beta_mq2 += fut_mq2.get();
-               beta_ml2 += fut_ml2.get();
-               beta_mHd2 += fut_mHd2.get();
-               beta_mHu2 += fut_mHu2.get();
-               beta_md2 += fut_md2.get();
-               beta_mu2 += fut_mu2.get();
-               beta_me2 += fut_me2.get();
-               beta_MassB += fut_MassB.get();
-               beta_MassWB += fut_MassWB.get();
-               beta_MassG += fut_MassG.get();
-
-            }
-         #else
             beta_TYd += calc_beta_TYd_3_loop(TRACE_STRUCT);
             beta_TYe += calc_beta_TYe_3_loop(TRACE_STRUCT);
             beta_TYu += calc_beta_TYu_3_loop(TRACE_STRUCT);
@@ -182,7 +126,6 @@ MSSMatMGUT_soft_parameters MSSMatMGUT_soft_parameters::calc_beta(int loops) cons
             beta_MassB += calc_beta_MassB_3_loop(TRACE_STRUCT);
             beta_MassWB += calc_beta_MassWB_3_loop(TRACE_STRUCT);
             beta_MassG += calc_beta_MassG_3_loop(TRACE_STRUCT);
-         #endif
 
             if (loops > 3) {
 

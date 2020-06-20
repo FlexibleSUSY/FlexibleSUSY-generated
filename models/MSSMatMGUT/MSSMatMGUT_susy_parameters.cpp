@@ -16,13 +16,8 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:44:39
 
 #include "MSSMatMGUT_susy_parameters.hpp"
-#include "config.h"
-#ifdef ENABLE_THREADS
-#include "global_thread_pool.hpp"
-#endif
 #include "wrappers.hpp"
 #include "functors.hpp"
 
@@ -104,33 +99,6 @@ MSSMatMGUT_susy_parameters MSSMatMGUT_susy_parameters::calc_beta(int loops) cons
          beta_vu += calc_beta_vu_2_loop(TRACE_STRUCT);
 
          if (loops > 2) {
-         #ifdef ENABLE_THREADS
-            {
-               auto fut_Yd = global_thread_pool().run_packaged_task([this, &
-                  TRACE_STRUCT](){ return calc_beta_Yd_3_loop(TRACE_STRUCT); });
-               auto fut_Ye = global_thread_pool().run_packaged_task([this, &
-                  TRACE_STRUCT](){ return calc_beta_Ye_3_loop(TRACE_STRUCT); });
-               auto fut_Yu = global_thread_pool().run_packaged_task([this, &
-                  TRACE_STRUCT](){ return calc_beta_Yu_3_loop(TRACE_STRUCT); });
-               auto fut_Mu = global_thread_pool().run_packaged_task([this, &
-                  TRACE_STRUCT](){ return calc_beta_Mu_3_loop(TRACE_STRUCT); });
-               auto fut_g1 = global_thread_pool().run_packaged_task([this, &
-                  TRACE_STRUCT](){ return calc_beta_g1_3_loop(TRACE_STRUCT); });
-               auto fut_g2 = global_thread_pool().run_packaged_task([this, &
-                  TRACE_STRUCT](){ return calc_beta_g2_3_loop(TRACE_STRUCT); });
-               auto fut_g3 = global_thread_pool().run_packaged_task([this, &
-                  TRACE_STRUCT](){ return calc_beta_g3_3_loop(TRACE_STRUCT); });
-
-               beta_Yd += fut_Yd.get();
-               beta_Ye += fut_Ye.get();
-               beta_Yu += fut_Yu.get();
-               beta_Mu += fut_Mu.get();
-               beta_g1 += fut_g1.get();
-               beta_g2 += fut_g2.get();
-               beta_g3 += fut_g3.get();
-
-            }
-         #else
             beta_Yd += calc_beta_Yd_3_loop(TRACE_STRUCT);
             beta_Ye += calc_beta_Ye_3_loop(TRACE_STRUCT);
             beta_Yu += calc_beta_Yu_3_loop(TRACE_STRUCT);
@@ -138,7 +106,6 @@ MSSMatMGUT_susy_parameters MSSMatMGUT_susy_parameters::calc_beta(int loops) cons
             beta_g1 += calc_beta_g1_3_loop(TRACE_STRUCT);
             beta_g2 += calc_beta_g2_3_loop(TRACE_STRUCT);
             beta_g3 += calc_beta_g3_3_loop(TRACE_STRUCT);
-         #endif
 
             if (loops > 3) {
 
@@ -344,6 +311,11 @@ Eigen::ArrayXd MSSMatMGUT_susy_parameters::get() const
 
 
    return pars;
+}
+
+void MSSMatMGUT_susy_parameters::print() const
+{
+   this->print(std::cerr);
 }
 
 void MSSMatMGUT_susy_parameters::print(std::ostream& ostr) const

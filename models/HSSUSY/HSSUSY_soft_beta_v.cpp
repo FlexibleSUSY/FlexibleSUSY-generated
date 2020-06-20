@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:46:27
 
 #include "HSSUSY_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -76,11 +75,11 @@ double HSSUSY_soft_parameters::calc_beta_v_1_loop(const Soft_traces& soft_traces
 
    double beta_v;
 
-   beta_v = Re(0.2*oneOver16PiSqr*v*(-15*traceYdAdjYd - 5*traceYeAdjYe - 15*
-      traceYuAdjYu + 3*Sqr(g1) + 15*Sqr(g2)));
+   beta_v = Re(0.2*v*(-15*traceYdAdjYd - 5*traceYeAdjYe - 15*traceYuAdjYu + 3*
+      Sqr(g1) + 15*Sqr(g2)));
 
 
-   return beta_v;
+   return oneLoop * beta_v;
 }
 
 /**
@@ -101,16 +100,15 @@ double HSSUSY_soft_parameters::calc_beta_v_2_loop(const Soft_traces& soft_traces
 
    double beta_v;
 
-   beta_v = Re(-0.00125*twoLoop*v*(-5400*traceYdAdjYdYdAdjYd + 1200*
-      traceYdAdjYuYuAdjYd - 1800*traceYeAdjYeYeAdjYe - 5400*traceYuAdjYuYuAdjYu
-       + 1221*Quad(g1) - 9475*Quad(g2) + 1220*traceYdAdjYd*Sqr(g1) + 1740*
-      traceYeAdjYe*Sqr(g1) + 2420*traceYuAdjYu*Sqr(g1) + 8100*traceYdAdjYd*Sqr(
-      g2) + 2700*traceYeAdjYe*Sqr(g2) + 8100*traceYuAdjYu*Sqr(g2) - 450*Sqr(g1)
-      *Sqr(g2) + 16000*traceYdAdjYd*Sqr(g3) + 16000*traceYuAdjYu*Sqr(g3) + 1200
-      *Sqr(Lambdax)));
+   beta_v = Re(-0.00125*v*(-5400*traceYdAdjYdYdAdjYd + 1200*traceYdAdjYuYuAdjYd
+       - 1800*traceYeAdjYeYeAdjYe - 5400*traceYuAdjYuYuAdjYu + 1221*Quad(g1) -
+      9475*Quad(g2) + 1220*traceYdAdjYd*Sqr(g1) + 1740*traceYeAdjYe*Sqr(g1) +
+      2420*traceYuAdjYu*Sqr(g1) + 8100*traceYdAdjYd*Sqr(g2) + 2700*traceYeAdjYe
+      *Sqr(g2) + 8100*traceYuAdjYu*Sqr(g2) - 450*Sqr(g1)*Sqr(g2) + 16000*
+      traceYdAdjYd*Sqr(g3) + 16000*traceYuAdjYu*Sqr(g3) + 1200*Sqr(Lambdax)));
 
 
-   return beta_v;
+   return twoLoop * beta_v;
 }
 
 /**
@@ -129,7 +127,7 @@ double HSSUSY_soft_parameters::calc_beta_v_3_loop(const Soft_traces& soft_traces
    beta_v = 0;
 
 
-   return beta_v;
+   return threeLoop * beta_v;
 }
 
 /**
@@ -148,7 +146,7 @@ double HSSUSY_soft_parameters::calc_beta_v_4_loop(const Soft_traces& soft_traces
    beta_v = 0;
 
 
-   return beta_v;
+   return fourLoop * beta_v;
 }
 
 /**
@@ -167,7 +165,7 @@ double HSSUSY_soft_parameters::calc_beta_v_5_loop(const Soft_traces& soft_traces
    beta_v = 0;
 
 
-   return beta_v;
+   return fiveLoop * beta_v;
 }
 
 } // namespace flexiblesusy

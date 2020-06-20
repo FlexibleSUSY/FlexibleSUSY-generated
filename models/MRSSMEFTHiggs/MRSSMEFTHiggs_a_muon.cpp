@@ -16,13 +16,11 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:27:38
 
 /**
  * @file MRSSMEFTHiggs_a_muon.cpp
  *
- * This file was generated at Fri 10 Apr 2020 18:27:38 with FlexibleSUSY
- * 2.4.2 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #include "MRSSMEFTHiggs_a_muon.hpp"
@@ -45,7 +43,7 @@ namespace {
 
 double get_QED_2L(context_base&, const softsusy::QedQcd&);
 
-double get_MSUSY(const MRSSMEFTHiggs_mass_eigenstates& model)
+double get_MSUSY(const MRSSMEFTHiggs_mass_eigenstates_interface& model)
 {
    return Min(model.get_MSRdp(), model.get_MSRum(), model.get_MSd().tail<6>().
       minCoeff(), model.get_MSu().tail<6>().minCoeff(), model.get_MSe().tail<6>().

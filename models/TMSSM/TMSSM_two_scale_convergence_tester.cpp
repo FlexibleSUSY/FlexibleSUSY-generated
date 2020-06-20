@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:02:46
 
 #include "TMSSM_two_scale_convergence_tester.hpp"
 #include <array>

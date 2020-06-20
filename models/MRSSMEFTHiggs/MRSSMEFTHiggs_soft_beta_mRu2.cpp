@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:07:35
 
 #include "MRSSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -74,12 +73,12 @@ double MRSSMEFTHiggs_soft_parameters::calc_beta_mRu2_1_loop(const Soft_traces& s
 
    double beta_mRu2;
 
-   beta_mRu2 = Re(0.2*oneOver16PiSqr*(-3.872983346207417*g1*Tr11 + 10*mHu2*
-      AbsSqr(LamSU) + 10*mRu2*AbsSqr(LamSU) + 10*mS2*AbsSqr(LamSU) + 15*mHu2*
-      AbsSqr(LamTU) + 15*mRu2*AbsSqr(LamTU) + 15*mT2*AbsSqr(LamTU)));
+   beta_mRu2 = Re(0.2*(-3.872983346207417*g1*Tr11 + 10*mHu2*AbsSqr(LamSU) + 10*
+      mRu2*AbsSqr(LamSU) + 10*mS2*AbsSqr(LamSU) + 15*mHu2*AbsSqr(LamTU) + 15*
+      mRu2*AbsSqr(LamTU) + 15*mT2*AbsSqr(LamTU)));
 
 
-   return beta_mRu2;
+   return oneLoop * beta_mRu2;
 }
 
 /**
@@ -99,12 +98,12 @@ double MRSSMEFTHiggs_soft_parameters::calc_beta_mRu2_2_loop(const Soft_traces& s
 
    double beta_mRu2;
 
-   beta_mRu2 = Re(0.2*twoLoop*(-15.491933384829668*g1*Tr31 - 30*tracemq2AdjYuYu
-      *AbsSqr(LamSU) - 30*tracemu2YuAdjYu*AbsSqr(LamSU) - 60*mHu2*traceYuAdjYu*
-      AbsSqr(LamSU) - 30*mRu2*traceYuAdjYu*AbsSqr(LamSU) - 30*mS2*traceYuAdjYu*
-      AbsSqr(LamSU) - 20*mHd2*AbsSqr(LamSD)*AbsSqr(LamSU) - 20*mHu2*AbsSqr(
-      LamSD)*AbsSqr(LamSU) - 20*mRd2*AbsSqr(LamSD)*AbsSqr(LamSU) - 20*mRu2*
-      AbsSqr(LamSD)*AbsSqr(LamSU) - 40*mS2*AbsSqr(LamSD)*AbsSqr(LamSU) - 45*
+   beta_mRu2 = Re(0.2*(-15.491933384829668*g1*Tr31 - 30*tracemq2AdjYuYu*AbsSqr(
+      LamSU) - 30*tracemu2YuAdjYu*AbsSqr(LamSU) - 60*mHu2*traceYuAdjYu*AbsSqr(
+      LamSU) - 30*mRu2*traceYuAdjYu*AbsSqr(LamSU) - 30*mS2*traceYuAdjYu*AbsSqr(
+      LamSU) - 20*mHd2*AbsSqr(LamSD)*AbsSqr(LamSU) - 20*mHu2*AbsSqr(LamSD)*
+      AbsSqr(LamSU) - 20*mRd2*AbsSqr(LamSD)*AbsSqr(LamSU) - 20*mRu2*AbsSqr(
+      LamSD)*AbsSqr(LamSU) - 40*mS2*AbsSqr(LamSD)*AbsSqr(LamSU) - 45*
       tracemq2AdjYuYu*AbsSqr(LamTU) - 45*tracemu2YuAdjYu*AbsSqr(LamTU) - 90*
       mHu2*traceYuAdjYu*AbsSqr(LamTU) - 45*mRu2*traceYuAdjYu*AbsSqr(LamTU) - 45
       *mT2*traceYuAdjYu*AbsSqr(LamTU) - 60*mHu2*AbsSqr(LamSU)*AbsSqr(LamTU) -
@@ -120,7 +119,7 @@ double MRSSMEFTHiggs_soft_parameters::calc_beta_mRu2_2_loop(const Soft_traces& s
       Sqr(Conj(LamTU))));
 
 
-   return beta_mRu2;
+   return twoLoop * beta_mRu2;
 }
 
 /**
@@ -139,7 +138,7 @@ double MRSSMEFTHiggs_soft_parameters::calc_beta_mRu2_3_loop(const Soft_traces& s
    beta_mRu2 = 0;
 
 
-   return beta_mRu2;
+   return threeLoop * beta_mRu2;
 }
 
 /**
@@ -158,7 +157,7 @@ double MRSSMEFTHiggs_soft_parameters::calc_beta_mRu2_4_loop(const Soft_traces& s
    beta_mRu2 = 0;
 
 
-   return beta_mRu2;
+   return fourLoop * beta_mRu2;
 }
 
 /**
@@ -177,7 +176,7 @@ double MRSSMEFTHiggs_soft_parameters::calc_beta_mRu2_5_loop(const Soft_traces& s
    beta_mRu2 = 0;
 
 
-   return beta_mRu2;
+   return fiveLoop * beta_mRu2;
 }
 
 } // namespace flexiblesusy

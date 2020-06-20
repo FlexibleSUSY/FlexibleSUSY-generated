@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:01:44
 
 #include "E6SSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -37,11 +36,10 @@ double E6SSM_susy_parameters::calc_beta_MuPr_1_loop(const Susy_traces& susy_trac
 
    double beta_MuPr;
 
-   beta_MuPr = Re(-0.2*oneOver16PiSqr*MuPr*(3*Sqr(g1) + 15*Sqr(g2) + 2*Sqr(gN))
-      );
+   beta_MuPr = Re(-0.2*MuPr*(3*Sqr(g1) + 15*Sqr(g2) + 2*Sqr(gN)));
 
 
-   return beta_MuPr;
+   return oneLoop * beta_MuPr;
 }
 
 /**
@@ -55,11 +53,11 @@ double E6SSM_susy_parameters::calc_beta_MuPr_2_loop(const Susy_traces& susy_trac
 
    double beta_MuPr;
 
-   beta_MuPr = Re(0.06*twoLoop*MuPr*(99*Quad(g1) + 275*Quad(g2) + 64*Quad(gN) +
-      30*Sqr(g1)*Sqr(g2) + 12*Sqr(g1)*Sqr(gN) + 20*Sqr(g2)*Sqr(gN)));
+   beta_MuPr = Re(0.06*MuPr*(99*Quad(g1) + 275*Quad(g2) + 64*Quad(gN) + 30*Sqr(
+      g1)*Sqr(g2) + 12*Sqr(g1)*Sqr(gN) + 20*Sqr(g2)*Sqr(gN)));
 
 
-   return beta_MuPr;
+   return twoLoop * beta_MuPr;
 }
 
 /**
@@ -78,7 +76,7 @@ double E6SSM_susy_parameters::calc_beta_MuPr_3_loop(const Susy_traces& susy_trac
    beta_MuPr = 0;
 
 
-   return beta_MuPr;
+   return threeLoop * beta_MuPr;
 }
 
 /**
@@ -97,7 +95,7 @@ double E6SSM_susy_parameters::calc_beta_MuPr_4_loop(const Susy_traces& susy_trac
    beta_MuPr = 0;
 
 
-   return beta_MuPr;
+   return fourLoop * beta_MuPr;
 }
 
 /**
@@ -116,7 +114,7 @@ double E6SSM_susy_parameters::calc_beta_MuPr_5_loop(const Susy_traces& susy_trac
    beta_MuPr = 0;
 
 
-   return beta_MuPr;
+   return fiveLoop * beta_MuPr;
 }
 
 } // namespace flexiblesusy

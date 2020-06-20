@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:46:12
 
 #ifndef MSSM_INITIAL_GUESSER_H
 #define MSSM_INITIAL_GUESSER_H

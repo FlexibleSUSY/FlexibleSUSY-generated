@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 17:38:30
 
 /**
  * @file MSSMNoFVatMGUTHimalaya_mass_eigenstates.cpp
@@ -26,8 +25,7 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Fri 10 Apr 2020 17:38:30 with FlexibleSUSY
- * 2.4.2 (git commit: a94199e5620b8684f5d30d0eece5757a5a72c4a4) and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #include "MSSMNoFVatMGUTHimalaya_mass_eigenstates.hpp"
@@ -37,12 +35,10 @@
 #include "ewsb_solver.hpp"
 #include "wrappers.hpp"
 #include "linalg2.hpp"
-#include "numerics2.hpp"
 #include "logger.hpp"
 #include "error.hpp"
-#include "pv.hpp"
+#include "loop_libraries/loop_library.hpp"
 #include "raii.hpp"
-#include "functors.hpp"
 
 #ifdef ENABLE_THREADS
 #include "thread_pool.hpp"
@@ -67,13 +63,11 @@
 #include "mssm_twoloop_as.hpp"
 
 
-#include <array>
 #include <cmath>
 #include <functional>
 #include <iostream>
 #include <memory>
 #include <algorithm>
-#include <stdexcept>
 
 namespace flexiblesusy {
 
@@ -105,6 +99,11 @@ CLASSNAME::CLASSNAME(const MSSMNoFVatMGUTHimalaya_input_parameters& input_)
    , ewsb_solver(new MSSMNoFVatMGUTHimalaya_ewsb_solver<Two_scale>())
 #endif
 {
+}
+
+std::unique_ptr<MSSMNoFVatMGUTHimalaya_mass_eigenstates_interface> CLASSNAME::clone() const
+{
+   return std::make_unique<MSSMNoFVatMGUTHimalaya_mass_eigenstates>(*this);
 }
 
 void CLASSNAME::do_calculate_sm_pole_masses(bool flag)
@@ -502,42 +501,55 @@ void CLASSNAME::print(std::ostream& ostr) const
 
 double CLASSNAME::A0(double m) const noexcept
 {
-   return passarino_veltman::ReA0(m, Sqr(get_scale()));
+   return Loop_library::get().A0(m, Sqr(get_scale())).real();
 }
 
 double CLASSNAME::B0(double p, double m1, double m2) const noexcept
 {
-   return passarino_veltman::ReB0(p, m1, m2, Sqr(get_scale()));
+   return Loop_library::get().B0(p, m1, m2, Sqr(get_scale())).real();
 }
 
 double CLASSNAME::B1(double p, double m1, double m2) const noexcept
 {
-   return passarino_veltman::ReB1(p, m1, m2, Sqr(get_scale()));
+   return Loop_library::get().B1(p, m1, m2, Sqr(get_scale())).real();
 }
 
 double CLASSNAME::B00(double p, double m1, double m2) const noexcept
 {
-   return passarino_veltman::ReB00(p, m1, m2, Sqr(get_scale()));
+   return Loop_library::get().B00(p, m1, m2, Sqr(get_scale())).real();
 }
 
 double CLASSNAME::B22(double p, double m1, double m2) const noexcept
 {
-   return passarino_veltman::ReB22(p, m1, m2, Sqr(get_scale()));
+   const double scl2 = Sqr(get_scale());
+   return (
+      Loop_library::get().B00(p, m1, m2, scl2) - Loop_library::get().A0(m1, scl2)/4.0 -
+      Loop_library::get().A0(m2, scl2)/4.0
+   ).real();
 }
 
 double CLASSNAME::H0(double p, double m1, double m2) const noexcept
 {
-   return passarino_veltman::ReH0(p, m1, m2, Sqr(get_scale()));
+   const double scl2 = Sqr(get_scale());
+   return 4.0*Loop_library::get().B00(p, m1, m2, scl2).real() + CLASSNAME::G0(p, m1, m2);
 }
 
 double CLASSNAME::F0(double p, double m1, double m2) const noexcept
 {
-   return passarino_veltman::ReF0(p, m1, m2, Sqr(get_scale()));
+   const double scl2 = Sqr(get_scale());
+   return (
+      Loop_library::get().A0(m1, scl2) - 2.0*Loop_library::get().A0(m2, scl2)
+      - (2.0*p + 2.0*m1 - m2) * Loop_library::get().B0(p, m1, m2, scl2)
+   ).real();
 }
 
 double CLASSNAME::G0(double p, double m1, double m2) const noexcept
 {
-   return passarino_veltman::ReG0(p, m1, m2, Sqr(get_scale()));
+   const double scl2 = Sqr(get_scale());
+   return (
+      (p - m1 - m2) * Loop_library::get().B0(p, m1, m2, scl2)
+      - Loop_library::get().A0(m1, scl2) - Loop_library::get().A0(m2, scl2)
+   ).real();
 }
 
 /**
@@ -729,6 +741,7 @@ void CLASSNAME::copy_DRbar_masses_to_pole_masses()
    PHYSICAL(MVWm) = MVWm;
    PHYSICAL(MVP) = MVP;
    PHYSICAL(MVZ) = MVZ;
+   PHYSICAL(ZZ) = ZZ;
 
 }
 
@@ -763,22 +776,21 @@ void CLASSNAME::reorder_pole_masses()
  */
 void CLASSNAME::check_pole_masses_for_tachyons()
 {
-   if (PHYSICAL(MSveL) < 0.) problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::SveL);
-   if (PHYSICAL(MSvmL) < 0.) problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::SvmL);
-   if (PHYSICAL(MSvtL) < 0.) problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::SvtL);
-   if (PHYSICAL(MSd).tail<2>().minCoeff() < 0.) problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::Sd);
-   if (PHYSICAL(MSu).tail<2>().minCoeff() < 0.) problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::Su);
-   if (PHYSICAL(MSe).tail<2>().minCoeff() < 0.) problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::Se);
-   if (PHYSICAL(MSm).tail<2>().minCoeff() < 0.) problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::Sm);
-   if (PHYSICAL(MStau).tail<2>().minCoeff() < 0.) problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::Stau);
-   if (PHYSICAL(MSs).tail<2>().minCoeff() < 0.) problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::Ss);
-   if (PHYSICAL(MSc).tail<2>().minCoeff() < 0.) problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::Sc);
-   if (PHYSICAL(MSb).tail<2>().minCoeff() < 0.) problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::Sb);
-   if (PHYSICAL(MSt).tail<2>().minCoeff() < 0.) problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::St);
-   if (PHYSICAL(Mhh).tail<2>().minCoeff() < 0.) problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::hh);
-   if (PHYSICAL(MAh).tail<1>().minCoeff() < 0.) problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::Ah);
-   if (PHYSICAL(MHpm).tail<1>().minCoeff() < 0.) problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::Hpm);
-
+   if (PHYSICAL(MSveL) < 0.) { problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::SveL); }
+   if (PHYSICAL(MSvmL) < 0.) { problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::SvmL); }
+   if (PHYSICAL(MSvtL) < 0.) { problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::SvtL); }
+   if (PHYSICAL(MSd).tail<2>().minCoeff() < 0.) { problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::Sd); }
+   if (PHYSICAL(MSu).tail<2>().minCoeff() < 0.) { problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::Su); }
+   if (PHYSICAL(MSe).tail<2>().minCoeff() < 0.) { problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::Se); }
+   if (PHYSICAL(MSm).tail<2>().minCoeff() < 0.) { problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::Sm); }
+   if (PHYSICAL(MStau).tail<2>().minCoeff() < 0.) { problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::Stau); }
+   if (PHYSICAL(MSs).tail<2>().minCoeff() < 0.) { problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::Ss); }
+   if (PHYSICAL(MSc).tail<2>().minCoeff() < 0.) { problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::Sc); }
+   if (PHYSICAL(MSb).tail<2>().minCoeff() < 0.) { problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::Sb); }
+   if (PHYSICAL(MSt).tail<2>().minCoeff() < 0.) { problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::St); }
+   if (PHYSICAL(Mhh).tail<2>().minCoeff() < 0.) { problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::hh); }
+   if (PHYSICAL(MAh).tail<1>().minCoeff() < 0.) { problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::Ah); }
+   if (PHYSICAL(MHpm).tail<1>().minCoeff() < 0.) { problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::Hpm); }
 }
 
 /**
@@ -1204,6 +1216,61 @@ void CLASSNAME::run_to(double scale, double eps)
    if (eps < 0.0)
       eps = precision;
    MSSMNoFVatMGUTHimalaya_soft_parameters::run_to(scale, eps);
+}
+
+void CLASSNAME::calculate_tree_level_mass_spectrum()
+{
+   calculate_DRbar_masses();
+}
+
+void CLASSNAME::calculate_pole_mass_spectrum()
+{
+   calculate_pole_masses();
+}
+
+void CLASSNAME::calculate_mass_spectrum()
+{
+   calculate_spectrum();
+}
+
+int CLASSNAME::solve_ewsb_equations_tree_level()
+{
+   return solve_ewsb_tree_level();
+}
+
+int CLASSNAME::solve_ewsb_equations()
+{
+   return solve_ewsb();
+}
+
+const MSSMNoFVatMGUTHimalaya_input_parameters& CLASSNAME::get_input_parameters() const
+{
+   return get_input();
+}
+
+MSSMNoFVatMGUTHimalaya_input_parameters& CLASSNAME::get_input_parameters()
+{
+   return get_input();
+}
+
+Eigen::ArrayXd CLASSNAME::get_tree_level_masses() const
+{
+   return get_DRbar_masses();
+}
+
+Eigen::ArrayXd CLASSNAME::get_tree_level_masses_and_mixings() const
+{
+   return get_DRbar_masses_and_mixings();
+}
+
+void CLASSNAME::set_tree_level_masses(const Eigen::ArrayXd& m)
+{
+   set_DRbar_masses(m);
+}
+
+void CLASSNAME::set_tree_level_masses_and_mixings(const Eigen::ArrayXd& m)
+{
+   set_DRbar_masses_and_mixings(m);
 }
 
 
@@ -14504,11 +14571,14 @@ void CLASSNAME::calculate_MTopSquark_2nd_generation(double& msf1, double& msf2, 
    sf_data.Yl  = sfermions::Hypercharge_left[sfermions::up];
    sf_data.Yr  = sfermions::Hypercharge_right[sfermions::up];
 
-   Eigen::Array<double,2,1> msf;
+   theta = sfermions::diagonalize_sfermions_2x2(sf_data, msf1, msf2);
 
-   theta = sfermions::diagonalize_sfermions_2x2(sf_data, msf);
-   msf1  = msf(0);
-   msf2  = msf(1);
+   if (msf1 < 0 || msf2 < 0) {
+      VERBOSE_MSG("diagonalize_sfermions_2x2: stop tachyon");
+   }
+
+   msf1 = AbsSqrt(msf1);
+   msf2 = AbsSqrt(msf2);
 }
 
 void CLASSNAME::calculate_MBottomSquark_2nd_generation(double& msf1, double& msf2, double& theta) const {
@@ -14526,11 +14596,14 @@ void CLASSNAME::calculate_MBottomSquark_2nd_generation(double& msf1, double& msf
    sf_data.Yl  = sfermions::Hypercharge_left[sfermions::down];
    sf_data.Yr  = sfermions::Hypercharge_right[sfermions::down];
 
-   Eigen::Array<double,2,1> msf;
+   theta = sfermions::diagonalize_sfermions_2x2(sf_data, msf1, msf2);
 
-   theta = sfermions::diagonalize_sfermions_2x2(sf_data, msf);
-   msf1  = msf(0);
-   msf2  = msf(1);
+   if (msf1 < 0 || msf2 < 0) {
+      VERBOSE_MSG("diagonalize_sfermions_2x2: sbottom tachyon");
+   }
+
+   msf1 = AbsSqrt(msf1);
+   msf2 = AbsSqrt(msf2);
 }
 
 void CLASSNAME::calculate_MSneutrino_2nd_generation(double& msf1, double& msf2, double& theta) const {
@@ -14548,11 +14621,14 @@ void CLASSNAME::calculate_MSneutrino_2nd_generation(double& msf1, double& msf2, 
    sf_data.Yl  = sfermions::Hypercharge_left[sfermions::neutrino];
    sf_data.Yr  = sfermions::Hypercharge_right[sfermions::neutrino];
 
-   Eigen::Array<double,2,1> msf;
+   theta = sfermions::diagonalize_sfermions_2x2(sf_data, msf1, msf2);
 
-   theta = sfermions::diagonalize_sfermions_2x2(sf_data, msf);
-   msf1  = msf(0);
-   msf2  = msf(1);
+   if (msf1 < 0 || msf2 < 0) {
+      VERBOSE_MSG("diagonalize_sfermions_2x2: sneutrino tachyon");
+   }
+
+   msf1 = AbsSqrt(msf1);
+   msf2 = AbsSqrt(msf2);
 }
 
 void CLASSNAME::calculate_MSelectron_2nd_generation(double& msf1, double& msf2, double& theta) const {
@@ -14570,11 +14646,14 @@ void CLASSNAME::calculate_MSelectron_2nd_generation(double& msf1, double& msf2, 
    sf_data.Yl  = sfermions::Hypercharge_left[sfermions::electron];
    sf_data.Yr  = sfermions::Hypercharge_right[sfermions::electron];
 
-   Eigen::Array<double,2,1> msf;
+   theta = sfermions::diagonalize_sfermions_2x2(sf_data, msf1, msf2);
 
-   theta = sfermions::diagonalize_sfermions_2x2(sf_data, msf);
-   msf1  = msf(0);
-   msf2  = msf(1);
+   if (msf1 < 0 || msf2 < 0) {
+      VERBOSE_MSG("diagonalize_sfermions_2x2: selecton tachyon");
+   }
+
+   msf1 = AbsSqrt(msf1);
+   msf2 = AbsSqrt(msf2);
 }
 
 void CLASSNAME::calculate_MTopSquark_3rd_generation(double& msf1, double& msf2, double& theta) const {
@@ -14592,11 +14671,14 @@ void CLASSNAME::calculate_MTopSquark_3rd_generation(double& msf1, double& msf2, 
    sf_data.Yl  = sfermions::Hypercharge_left[sfermions::up];
    sf_data.Yr  = sfermions::Hypercharge_right[sfermions::up];
 
-   Eigen::Array<double,2,1> msf;
+   theta = sfermions::diagonalize_sfermions_2x2(sf_data, msf1, msf2);
 
-   theta = sfermions::diagonalize_sfermions_2x2(sf_data, msf);
-   msf1  = msf(0);
-   msf2  = msf(1);
+   if (msf1 < 0 || msf2 < 0) {
+      VERBOSE_MSG("diagonalize_sfermions_2x2: stop tachyon");
+   }
+
+   msf1 = AbsSqrt(msf1);
+   msf2 = AbsSqrt(msf2);
 }
 
 void CLASSNAME::calculate_MBottomSquark_3rd_generation(double& msf1, double& msf2, double& theta) const {
@@ -14614,11 +14696,14 @@ void CLASSNAME::calculate_MBottomSquark_3rd_generation(double& msf1, double& msf
    sf_data.Yl  = sfermions::Hypercharge_left[sfermions::down];
    sf_data.Yr  = sfermions::Hypercharge_right[sfermions::down];
 
-   Eigen::Array<double,2,1> msf;
+   theta = sfermions::diagonalize_sfermions_2x2(sf_data, msf1, msf2);
 
-   theta = sfermions::diagonalize_sfermions_2x2(sf_data, msf);
-   msf1  = msf(0);
-   msf2  = msf(1);
+   if (msf1 < 0 || msf2 < 0) {
+      VERBOSE_MSG("diagonalize_sfermions_2x2: sbottom tachyon");
+   }
+
+   msf1 = AbsSqrt(msf1);
+   msf2 = AbsSqrt(msf2);
 }
 
 void CLASSNAME::calculate_MSneutrino_3rd_generation(double& msf1, double& msf2, double& theta) const {
@@ -14636,11 +14721,14 @@ void CLASSNAME::calculate_MSneutrino_3rd_generation(double& msf1, double& msf2, 
    sf_data.Yl  = sfermions::Hypercharge_left[sfermions::neutrino];
    sf_data.Yr  = sfermions::Hypercharge_right[sfermions::neutrino];
 
-   Eigen::Array<double,2,1> msf;
+   theta = sfermions::diagonalize_sfermions_2x2(sf_data, msf1, msf2);
 
-   theta = sfermions::diagonalize_sfermions_2x2(sf_data, msf);
-   msf1  = msf(0);
-   msf2  = msf(1);
+   if (msf1 < 0 || msf2 < 0) {
+      VERBOSE_MSG("diagonalize_sfermions_2x2: sneutrino tachyon");
+   }
+
+   msf1 = AbsSqrt(msf1);
+   msf2 = AbsSqrt(msf2);
 }
 
 void CLASSNAME::calculate_MSelectron_3rd_generation(double& msf1, double& msf2, double& theta) const {
@@ -14658,11 +14746,14 @@ void CLASSNAME::calculate_MSelectron_3rd_generation(double& msf1, double& msf2, 
    sf_data.Yl  = sfermions::Hypercharge_left[sfermions::electron];
    sf_data.Yr  = sfermions::Hypercharge_right[sfermions::electron];
 
-   Eigen::Array<double,2,1> msf;
+   theta = sfermions::diagonalize_sfermions_2x2(sf_data, msf1, msf2);
 
-   theta = sfermions::diagonalize_sfermions_2x2(sf_data, msf);
-   msf1  = msf(0);
-   msf2  = msf(1);
+   if (msf1 < 0 || msf2 < 0) {
+      VERBOSE_MSG("diagonalize_sfermions_2x2: selecton tachyon");
+   }
+
+   msf1 = AbsSqrt(msf1);
+   msf2 = AbsSqrt(msf2);
 }
 
 
@@ -15016,8 +15107,9 @@ void CLASSNAME::calculate_MVZ_pole()
    const double self_energy = Re(self_energy_VZ_1loop(p));
    const double mass_sqr = M_tree - self_energy;
 
-   if (mass_sqr < 0.)
+   if (mass_sqr < 0.) {
       problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::VZ);
+   }
 
    PHYSICAL(MVZ) = AbsSqrt(mass_sqr);
 }
@@ -15833,8 +15925,9 @@ void CLASSNAME::calculate_MVWm_pole()
    const double self_energy = Re(self_energy_VWm_1loop(p));
    const double mass_sqr = M_tree - self_energy;
 
-   if (mass_sqr < 0.)
+   if (mass_sqr < 0.) {
       problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::VWm);
+   }
 
    PHYSICAL(MVWm) = AbsSqrt(mass_sqr);
 }
@@ -15848,8 +15941,9 @@ double CLASSNAME::calculate_MVWm_pole(double p)
    const double self_energy = Re(self_energy_VWm_1loop(p));
    const double mass_sqr = Sqr(MVWm) - self_energy;
 
-   if (mass_sqr < 0.)
+   if (mass_sqr < 0.) {
       problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::VWm);
+   }
 
    return AbsSqrt(mass_sqr);
 }
@@ -15863,8 +15957,9 @@ double CLASSNAME::calculate_MVZ_pole(double p)
    const double self_energy = Re(self_energy_VZ_1loop(p));
    const double mass_sqr = Sqr(MVZ) - self_energy;
 
-   if (mass_sqr < 0.)
+   if (mass_sqr < 0.) {
       problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::VZ);
+   }
 
    return AbsSqrt(mass_sqr);
 }
@@ -16116,34 +16211,34 @@ double CLASSNAME::calculate_MFb_DRbar(double m_sm_msbar) const
    return m_susy_drbar;
 }
 
-double CLASSNAME::calculate_MVP_DRbar(double)
+double CLASSNAME::calculate_MVP_DRbar(double) const
 {
    return 0.0;
 }
 
-double CLASSNAME::calculate_MVZ_DRbar(double m_pole)
+double CLASSNAME::calculate_MVZ_DRbar(double m_pole) const
 {
    const double p = m_pole;
    const double self_energy = Re(self_energy_VZ_1loop(p));
    const double mass_sqr = Sqr(m_pole) + self_energy;
 
    if (mass_sqr < 0.) {
-      problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::VZ);
-      return m_pole;
+      problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::VZ);return m_pole
+         ;
    }
 
    return AbsSqrt(mass_sqr);
 }
 
-double CLASSNAME::calculate_MVWm_DRbar(double m_pole)
+double CLASSNAME::calculate_MVWm_DRbar(double m_pole) const
 {
    const double p = m_pole;
    const double self_energy = Re(self_energy_VWm_1loop(p));
    const double mass_sqr = Sqr(m_pole) + self_energy;
 
    if (mass_sqr < 0.) {
-      problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::VWm);
-      return m_pole;
+      problems.flag_pole_tachyon(MSSMNoFVatMGUTHimalaya_info::VWm);return
+         m_pole;
    }
 
    return AbsSqrt(mass_sqr);

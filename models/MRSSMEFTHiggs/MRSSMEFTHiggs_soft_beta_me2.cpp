@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:07:33
 
 #include "MRSSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -74,12 +73,12 @@ Eigen::Matrix<double,3,3> MRSSMEFTHiggs_soft_parameters::calc_beta_me2_1_loop(co
 
    Eigen::Matrix<double,3,3> beta_me2;
 
-   beta_me2 = (oneOver16PiSqr*(4*mHd2*(Ye*Ye.adjoint()) + 2*(me2*Ye*Ye.adjoint(
-      )) + 4*(Ye*ml2*Ye.adjoint()) + 2*(Ye*Ye.adjoint()*me2) +
-      1.5491933384829668*g1*Tr11*UNITMATRIX(3))).real();
+   beta_me2 = (4*mHd2*(Ye*Ye.adjoint()) + 2*(me2*Ye*Ye.adjoint()) + 4*(Ye*ml2*
+      Ye.adjoint()) + 2*(Ye*Ye.adjoint()*me2) + 1.5491933384829668*g1*Tr11*
+      UNITMATRIX(3)).real();
 
 
-   return beta_me2;
+   return oneLoop * beta_me2;
 }
 
 /**
@@ -101,7 +100,7 @@ Eigen::Matrix<double,3,3> MRSSMEFTHiggs_soft_parameters::calc_beta_me2_2_loop(co
 
    Eigen::Matrix<double,3,3> beta_me2;
 
-   beta_me2 = (twoLoop*(-0.4*(30*tracemd2YdAdjYd + 10*traceme2YeAdjYe + 10*
+   beta_me2 = (-0.4*(30*tracemd2YdAdjYd + 10*traceme2YeAdjYe + 10*
       traceml2AdjYeYe + 30*tracemq2AdjYdYd + 60*mHd2*traceYdAdjYd + 20*mHd2*
       traceYeAdjYe + 20*mHd2*AbsSqr(LamSD) + 10*mRd2*AbsSqr(LamSD) + 10*mS2*
       AbsSqr(LamSD) + 30*mHd2*AbsSqr(LamTD) + 15*mRd2*AbsSqr(LamTD) + 15*mT2*
@@ -115,10 +114,10 @@ Eigen::Matrix<double,3,3> MRSSMEFTHiggs_soft_parameters::calc_beta_me2_2_loop(co
       adjoint()*Ye*Ye.adjoint()) - 4*(Ye*ml2*Ye.adjoint()*Ye*Ye.adjoint()) - 4*
       (Ye*Ye.adjoint()*me2*Ye*Ye.adjoint()) - 4*(Ye*Ye.adjoint()*Ye*ml2*Ye.
       adjoint()) - 2*(Ye*Ye.adjoint()*Ye*Ye.adjoint()*me2) + 1.6*g1*(3*g1*
-      Tr2U111 + 3.872983346207417*Tr31)*UNITMATRIX(3))).real();
+      Tr2U111 + 3.872983346207417*Tr31)*UNITMATRIX(3)).real();
 
 
-   return beta_me2;
+   return twoLoop * beta_me2;
 }
 
 /**
@@ -137,7 +136,7 @@ Eigen::Matrix<double,3,3> MRSSMEFTHiggs_soft_parameters::calc_beta_me2_3_loop(co
    beta_me2 = ZEROMATRIX(3,3);
 
 
-   return beta_me2;
+   return threeLoop * beta_me2;
 }
 
 /**
@@ -156,7 +155,7 @@ Eigen::Matrix<double,3,3> MRSSMEFTHiggs_soft_parameters::calc_beta_me2_4_loop(co
    beta_me2 = ZEROMATRIX(3,3);
 
 
-   return beta_me2;
+   return fourLoop * beta_me2;
 }
 
 /**
@@ -175,7 +174,7 @@ Eigen::Matrix<double,3,3> MRSSMEFTHiggs_soft_parameters::calc_beta_me2_5_loop(co
    beta_me2 = ZEROMATRIX(3,3);
 
 
-   return beta_me2;
+   return fiveLoop * beta_me2;
 }
 
 } // namespace flexiblesusy

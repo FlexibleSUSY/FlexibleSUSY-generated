@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:45:45
 
 #ifndef THDMII_soft_parameters_H
 #define THDMII_soft_parameters_H

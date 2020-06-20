@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:54:11
 
 #include "TMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,11 +72,11 @@ double TMSSM_soft_parameters::calc_beta_BMT_1_loop(const Soft_traces& soft_trace
 
    double beta_BMT;
 
-   beta_BMT = Re(2*oneOver16PiSqr*(AbsSqr(Lambdax)*BMT + 8*MassWB*MT*Sqr(g2) -
-      4*BMT*Sqr(g2) + 2*MT*Conj(Lambdax)*TLambdax));
+   beta_BMT = Re(2*(AbsSqr(Lambdax)*BMT + 8*MassWB*MT*Sqr(g2) - 4*BMT*Sqr(g2) +
+      2*MT*Conj(Lambdax)*TLambdax));
 
 
-   return beta_BMT;
+   return oneLoop * beta_BMT;
 }
 
 /**
@@ -97,7 +96,7 @@ double TMSSM_soft_parameters::calc_beta_BMT_2_loop(const Soft_traces& soft_trace
 
    double beta_BMT;
 
-   beta_BMT = Re(-0.4*twoLoop*(30*MT*traceAdjYdTYd*AbsSqr(Lambdax) + 10*MT*
+   beta_BMT = Re(-0.4*(30*MT*traceAdjYdTYd*AbsSqr(Lambdax) + 10*MT*
       traceAdjYeTYe*AbsSqr(Lambdax) + 30*MT*traceAdjYuTYu*AbsSqr(Lambdax) + 15*
       traceYdAdjYd*AbsSqr(Lambdax)*BMT + 5*traceYeAdjYe*AbsSqr(Lambdax)*BMT +
       15*traceYuAdjYu*AbsSqr(Lambdax)*BMT + 560*MassWB*MT*Quad(g2) - 140*BMT*
@@ -110,7 +109,7 @@ double TMSSM_soft_parameters::calc_beta_BMT_2_loop(const Soft_traces& soft_trace
       )*TLambdax));
 
 
-   return beta_BMT;
+   return twoLoop * beta_BMT;
 }
 
 /**
@@ -129,7 +128,7 @@ double TMSSM_soft_parameters::calc_beta_BMT_3_loop(const Soft_traces& soft_trace
    beta_BMT = 0;
 
 
-   return beta_BMT;
+   return threeLoop * beta_BMT;
 }
 
 /**
@@ -148,7 +147,7 @@ double TMSSM_soft_parameters::calc_beta_BMT_4_loop(const Soft_traces& soft_trace
    beta_BMT = 0;
 
 
-   return beta_BMT;
+   return fourLoop * beta_BMT;
 }
 
 /**
@@ -167,7 +166,7 @@ double TMSSM_soft_parameters::calc_beta_BMT_5_loop(const Soft_traces& soft_trace
    beta_BMT = 0;
 
 
-   return beta_BMT;
+   return fiveLoop * beta_BMT;
 }
 
 } // namespace flexiblesusy

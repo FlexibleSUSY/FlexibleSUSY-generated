@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:02:35
 
 #ifndef TMSSM_PHYSICAL_H
 #define TMSSM_PHYSICAL_H

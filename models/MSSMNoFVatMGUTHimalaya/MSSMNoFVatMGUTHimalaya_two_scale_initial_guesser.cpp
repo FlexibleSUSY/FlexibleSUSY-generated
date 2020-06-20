@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 17:38:45
 
 #include "MSSMNoFVatMGUTHimalaya_two_scale_initial_guesser.hpp"
 #include "MSSMNoFVatMGUTHimalaya_two_scale_model.hpp"

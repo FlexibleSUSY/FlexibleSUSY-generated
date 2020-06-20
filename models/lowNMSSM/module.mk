@@ -23,16 +23,18 @@ lowNMSSM_SUSY_BETAS_MK := \
 lowNMSSM_SOFT_BETAS_MK := \
 		$(DIR)/soft_betas.mk
 
-lowNMSSM_CXX_QFT_VERTICES_MK := \
+lowNMSSM_CXXQFT_VERTICES_MK := \
 		$(DIR)/cxx_qft/vertices.mk
+
+-include $(lowNMSSM_CXXQFT_VERTICES_MK)
+LIBlowNMSSM_CXXQFT_VERTICES_SRC ?= ''
 
 lowNMSSM_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
 lowNMSSM_INCLUDE_MK := \
 		$(lowNMSSM_SUSY_BETAS_MK) \
-		$(lowNMSSM_SOFT_BETAS_MK) \
-		$(lowNMSSM_CXX_QFT_VERTICES_MK)
+		$(lowNMSSM_SOFT_BETAS_MK)
 
 lowNMSSM_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.lowNMSSM_generated \
@@ -58,11 +60,15 @@ LIBlowNMSSM_SRC := \
 		$(DIR)/lowNMSSM_a_muon.cpp \
 		$(DIR)/lowNMSSM_edm.cpp \
 		$(DIR)/lowNMSSM_FFV_form_factors.cpp \
+		$(DIR)/lowNMSSM_f_to_f_conversion.cpp \
 		$(DIR)/lowNMSSM_l_to_lgamma.cpp \
+		$(DIR)/lowNMSSM_b_to_s_gamma.cpp \
 		$(DIR)/lowNMSSM_effective_couplings.cpp \
 		$(DIR)/lowNMSSM_info.cpp \
 		$(DIR)/lowNMSSM_input_parameters.cpp \
 		$(DIR)/lowNMSSM_mass_eigenstates.cpp \
+		$(DIR)/lowNMSSM_mass_eigenstates_decoupling_scheme.cpp \
+		$(DIR)/lowNMSSM_model_slha.cpp \
 		$(DIR)/lowNMSSM_observables.cpp \
 		$(DIR)/lowNMSSM_physical.cpp \
 		$(DIR)/lowNMSSM_slha_io.cpp \
@@ -70,6 +76,8 @@ LIBlowNMSSM_SRC := \
 		$(DIR)/lowNMSSM_susy_parameters.cpp \
 		$(DIR)/lowNMSSM_utilities.cpp \
 		$(DIR)/lowNMSSM_weinberg_angle.cpp
+
+LIBlowNMSSM_SRC += $(LIBlowNMSSM_CXXQFT_VERTICES_SRC)
 
 EXElowNMSSM_SRC := \
 		$(DIR)/run_lowNMSSM.cpp \
@@ -89,7 +97,9 @@ LIBlowNMSSM_HDR := \
 		$(DIR)/lowNMSSM_convergence_tester.hpp \
 		$(DIR)/lowNMSSM_edm.hpp \
 		$(DIR)/lowNMSSM_FFV_form_factors.hpp \
+		$(DIR)/lowNMSSM_f_to_f_conversion.hpp \
 		$(DIR)/lowNMSSM_l_to_lgamma.hpp \
+		$(DIR)/lowNMSSM_b_to_s_gamma.hpp \
 		$(DIR)/lowNMSSM_effective_couplings.hpp \
 		$(DIR)/lowNMSSM_ewsb_solver.hpp \
 		$(DIR)/lowNMSSM_ewsb_solver_interface.hpp \
@@ -99,6 +109,8 @@ LIBlowNMSSM_HDR := \
 		$(DIR)/lowNMSSM_input_parameters.hpp \
 		$(DIR)/lowNMSSM_low_scale_constraint.hpp \
 		$(DIR)/lowNMSSM_mass_eigenstates.hpp \
+		$(DIR)/lowNMSSM_mass_eigenstates_interface.hpp \
+		$(DIR)/lowNMSSM_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/lowNMSSM_model.hpp \
 		$(DIR)/lowNMSSM_model_slha.hpp \
 		$(DIR)/lowNMSSM_observables.hpp \
@@ -117,7 +129,7 @@ LIBlowNMSSM_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/lowNMSSM_fields.hpp \
 		$(DIR)/cxx_qft/lowNMSSM_vertices.hpp \
 		$(DIR)/cxx_qft/lowNMSSM_context_base.hpp \
-		$(DIR)/cxx_qft/lowNMSSM_npointfunctions.hpp
+		$(DIR)/cxx_qft/lowNMSSM_npointfunctions_wilsoncoeffs.hpp
 
 ifneq ($(findstring two_scale,$(SOLVERS)),)
 -include $(DIR)/two_scale.mk
@@ -135,7 +147,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(lowNMSSM_SUSY_BETAS_MK)
 -include $(lowNMSSM_SOFT_BETAS_MK)
--include $(lowNMSSM_CXX_QFT_VERTICES_MK)
+-include $(lowNMSSM_CXXQFT_VERTICES_MK)
 -include $(lowNMSSM_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
@@ -147,7 +159,7 @@ $(lowNMSSM_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(lowNMSSM_SOFT_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
-$(lowNMSSM_CXX_QFT_VERTICES_MK): run-metacode-$(MODNAME)
+$(lowNMSSM_CXXQFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(lowNMSSM_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
@@ -212,6 +224,7 @@ install-src::
 		$(Q)install -d $(lowNMSSM_INSTALL_DIR)
 		$(Q)install -d $(lowNMSSM_INSTALL_CXXQFT_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(LIBlowNMSSM_SRC) $(lowNMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBlowNMSSM_CXXQFT_VERTICES_SRC) $(lowNMSSM_INSTALL_CXXQFT_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(LIBlowNMSSM_HDR) $(lowNMSSM_INSTALL_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(LIBlowNMSSM_CXXQFT_HDR) $(lowNMSSM_INSTALL_CXXQFT_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(EXElowNMSSM_SRC) $(lowNMSSM_INSTALL_DIR)
@@ -219,6 +232,8 @@ install-src::
 		$(Q)install -m u=rw,g=r,o=r $(LLlowNMSSM_MMA) $(lowNMSSM_INSTALL_DIR)
 		$(Q)$(INSTALL_STRIPPED) $(lowNMSSM_MK) $(lowNMSSM_INSTALL_DIR) -m u=rw,g=r,o=r
 		$(Q)install -m u=rw,g=r,o=r $(lowNMSSM_INCLUDE_MK) $(lowNMSSM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(lowNMSSM_CXXQFT_VERTICES_MK) $(lowNMSSM_INSTALL_CXXQFT_DIR)
+
 ifneq ($(lowNMSSM_SLHA_INPUT),)
 		$(Q)install -m u=rw,g=r,o=r $(lowNMSSM_SLHA_INPUT) $(lowNMSSM_INSTALL_DIR)
 endif
@@ -250,6 +265,7 @@ clean-$(MODNAME)-src:
 		$(Q)-rm -f $(LLlowNMSSM_MMA)
 		$(Q)-rm -f $(METACODE_STAMP_lowNMSSM)
 		$(Q)-rm -f $(lowNMSSM_INCLUDE_MK)
+		$(Q)-rm -f $(lowNMSSM_CXXQFT_VERTICES_MK)
 		$(Q)-rm -f $(lowNMSSM_SLHA_INPUT)
 		$(Q)-rm -f $(lowNMSSM_REFERENCES)
 		$(Q)-rm -f $(lowNMSSM_GNUPLOT)
@@ -276,7 +292,7 @@ pack-$(MODNAME)-src:
 		$(LIBlowNMSSM_SRC) $(LIBlowNMSSM_HDR) $(LIBlowNMSSM_CXXQFT_HDR) \
 		$(EXElowNMSSM_SRC) \
 		$(LLlowNMSSM_SRC) $(LLlowNMSSM_MMA) \
-		$(lowNMSSM_MK) $(lowNMSSM_INCLUDE_MK) \
+		$(lowNMSSM_MK) $(lowNMSSM_INCLUDE_MK) $(lowNMSSM_CXXQFT_VERTICES_MK) \
 		$(lowNMSSM_SLHA_INPUT) $(lowNMSSM_REFERENCES) \
 		$(lowNMSSM_GNUPLOT)
 
@@ -302,7 +318,7 @@ $(METACODE_STAMP_lowNMSSM):
 endif
 
 $(LIBlowNMSSM_DEP) $(EXElowNMSSM_DEP) $(LLlowNMSSM_DEP) $(LIBlowNMSSM_OBJ) $(EXElowNMSSM_OBJ) $(LLlowNMSSM_OBJ) $(LLlowNMSSM_LIB): \
-	CPPFLAGS += $(MODlowNMSSM_SUBMOD_INC) $(MODlowNMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODlowNMSSM_SUBMOD_INC) $(MODlowNMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS)  $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBlowNMSSM_DEP) $(EXElowNMSSM_DEP) $(LLlowNMSSM_DEP) $(LIBlowNMSSM_OBJ) $(EXElowNMSSM_OBJ) $(LLlowNMSSM_OBJ) $(LLlowNMSSM_LIB): \
@@ -316,13 +332,13 @@ $(LIBlowNMSSM): $(LIBlowNMSSM_OBJ)
 		@$(MSG)
 		$(Q)$(MODULE_MAKE_LIB_CMD) $@ $^
 
-$(DIR)/%.x: $(DIR)/%.o $(LIBlowNMSSM) $(MODlowNMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+$(DIR)/%.x: $(DIR)/%.o $(LIBlowNMSSM) $(MODlowNMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
-$(LLlowNMSSM_LIB): $(LLlowNMSSM_OBJ) $(LIBlowNMSSM) $(MODlowNMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+$(LLlowNMSSM_LIB): $(LLlowNMSSM_OBJ) $(LIBlowNMSSM) $(MODlowNMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS)
 
 ALLDEP += $(LIBlowNMSSM_DEP) $(EXElowNMSSM_DEP)
 ALLSRC += $(LIBlowNMSSM_SRC) $(EXElowNMSSM_SRC)

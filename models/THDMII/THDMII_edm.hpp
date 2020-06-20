@@ -16,13 +16,11 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:46:08
 
 /**
  * @file THDMII_edm.hpp
  *
- * This file was generated at Fri 10 Apr 2020 19:46:08 with FlexibleSUSY
- * 2.4.2 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #ifndef THDMII_EDM_H
@@ -32,7 +30,7 @@ namespace flexiblesusy {
 class THDMII_mass_eigenstates;
 
 namespace THDMII_edm {
-
+double calculate_edm_Fe( int generationIndex, const THDMII_mass_eigenstates& model );
 }
 } // namespace flexiblesusy
 

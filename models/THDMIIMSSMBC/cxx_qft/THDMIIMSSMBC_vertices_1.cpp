@@ -16,22 +16,21 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:44:47
 
 /**
  * @file cxx_qft/THDMIIMSSMBC_vertices.cpp
  *
- * This file was generated at Fri 10 Apr 2020 19:44:47 with FlexibleSUSY
- * 2.4.2 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #include "THDMIIMSSMBC_context_base.hpp"
+#include "THDMIIMSSMBC_input_parameters.hpp"
 #include "THDMIIMSSMBC_vertices.hpp"
 
 #include "concatenate.hpp"
 #include "wrappers.hpp"
 
-#define INPUTPARAMETER(p) context.model.get_input().p
+#define INPUTPARAMETER(p) context.model.get_input_parameters().p
 #define MODELPARAMETER(p) context.model.get_##p()
 #define DERIVEDPARAMETER(p) context.model.p()
 #define PHASE(p) context.model.get_##p()
@@ -40,7 +39,7 @@ namespace flexiblesusy {
 namespace THDMIIMSSMBC_cxx_diagrams {
 namespace detail {
 
-ChiralVertex VertexImpl<fields::Ah, typename bar<fields::Fe>::type, fields::Fe>::evaluate(
+ChiralVertex VertexImpl<fields::Ah, typename fields::bar<fields::Fe>::type, fields::Fe>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt3 = indices[0];
@@ -58,7 +57,7 @@ ChiralVertex VertexImpl<fields::Ah, typename bar<fields::Fe>::type, fields::Fe>:
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::hh, typename bar<fields::Fe>::type, fields::Fe>::evaluate(
+ChiralVertex VertexImpl<fields::hh, typename fields::bar<fields::Fe>::type, fields::Fe>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt3 = indices[0];
@@ -76,7 +75,7 @@ ChiralVertex VertexImpl<fields::hh, typename bar<fields::Fe>::type, fields::Fe>:
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename bar<fields::Fe>::type, fields::Fe, fields::Ah>::evaluate(
+ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fe, fields::Ah>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -94,7 +93,7 @@ ChiralVertex VertexImpl<typename bar<fields::Fe>::type, fields::Fe, fields::Ah>:
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename bar<fields::Fe>::type, fields::Fe, fields::hh>::evaluate(
+ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fe, fields::hh>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -112,7 +111,7 @@ ChiralVertex VertexImpl<typename bar<fields::Fe>::type, fields::Fe, fields::hh>:
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename bar<fields::Fe>::type, fields::Fe, fields::VP>::evaluate(
+ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fe, fields::VP>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -128,7 +127,7 @@ ChiralVertex VertexImpl<typename bar<fields::Fe>::type, fields::Fe, fields::VP>:
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename bar<fields::Fe>::type, fields::Hm, fields::Fv>::evaluate(
+ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Hm, fields::Fv>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -145,7 +144,7 @@ ChiralVertex VertexImpl<typename bar<fields::Fe>::type, fields::Hm, fields::Fv>:
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename bar<fields::Fv>::type, typename conj<fields::Hm>::type, fields::Fe>::evaluate(
+ChiralVertex VertexImpl<typename fields::bar<fields::Fv>::type, typename fields::conj<fields::Hm>::type, fields::Fe>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -162,7 +161,7 @@ ChiralVertex VertexImpl<typename bar<fields::Fv>::type, typename conj<fields::Hm
    return {left, right};
 }
 
-MomentumDifferenceVertex VertexImpl<typename conj<fields::Hm>::type, fields::Hm, fields::VP>::evaluate(
+MomentumDifferenceVertex VertexImpl<typename fields::conj<fields::Hm>::type, fields::Hm, fields::VP>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    int minuend_index = 1;

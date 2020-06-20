@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:22:07
 
 #include "HTHDMIIMSSMBC_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -38,12 +37,11 @@ Eigen::Matrix<double,3,3> HTHDMIIMSSMBC_susy_parameters::calc_beta_Yu_1_loop(con
 
    Eigen::Matrix<double,3,3> beta_Yu;
 
-   beta_Yu = (oneOver16PiSqr*(-0.05*Yu*(-60*traceYuAdjYu + 17*Sqr(g1) + 45*Sqr(
-      g2) + 160*Sqr(g3)) + 0.5*(Yu*Yd.adjoint()*Yd) + 1.5*(Yu*Yu.adjoint()*Yu))
-      ).real();
+   beta_Yu = (-0.05*Yu*(-60*traceYuAdjYu + 17*Sqr(g1) + 45*Sqr(g2) + 160*Sqr(g3
+      )) + 0.5*(Yu*Yd.adjoint()*Yd) + 1.5*(Yu*Yu.adjoint()*Yu)).real();
 
 
-   return beta_Yu;
+   return oneLoop * beta_Yu;
 }
 
 /**
@@ -62,7 +60,7 @@ Eigen::Matrix<double,3,3> HTHDMIIMSSMBC_susy_parameters::calc_beta_Yu_2_loop(con
 
    Eigen::Matrix<double,3,3> beta_Yu;
 
-   beta_Yu = (twoLoop*(0.0016666666666666668*Yu*(600*Lambda3*Lambda4 - 1350*
+   beta_Yu = (0.0016666666666666668*Yu*(600*Lambda3*Lambda4 - 1350*
       traceYdAdjYuYuAdjYd - 4050*traceYuAdjYuYuAdjYu + 900*AbsSqr(Lambda5) +
       900*AbsSqr(Lambda6) + 2700*AbsSqr(Lambda7) + 1383*Quad(g1) - 2850*Quad(g2
       ) - 64800*Quad(g3) + 1275*traceYuAdjYu*Sqr(g1) + 3375*traceYuAdjYu*Sqr(g2
@@ -73,10 +71,10 @@ Eigen::Matrix<double,3,3> HTHDMIIMSSMBC_susy_parameters::calc_beta_Yu_2_loop(con
       )*(Yu*Yd.adjoint()*Yd) + 0.0125*(-960*Lambda2 - 540*traceYuAdjYu + 223*
       Sqr(g1) + 675*Sqr(g2) + 1280*Sqr(g3))*(Yu*Yu.adjoint()*Yu) - 0.25*(Yu*Yd.
       adjoint()*Yd*Yd.adjoint()*Yd) - 0.25*(Yu*Yd.adjoint()*Yd*Yu.adjoint()*Yu)
-      + 1.5*(Yu*Yu.adjoint()*Yu*Yu.adjoint()*Yu))).real();
+      + 1.5*(Yu*Yu.adjoint()*Yu*Yu.adjoint()*Yu)).real();
 
 
-   return beta_Yu;
+   return twoLoop * beta_Yu;
 }
 
 /**
@@ -95,7 +93,7 @@ Eigen::Matrix<double,3,3> HTHDMIIMSSMBC_susy_parameters::calc_beta_Yu_3_loop(con
    beta_Yu = ZEROMATRIX(3,3);
 
 
-   return beta_Yu;
+   return threeLoop * beta_Yu;
 }
 
 /**
@@ -114,7 +112,7 @@ Eigen::Matrix<double,3,3> HTHDMIIMSSMBC_susy_parameters::calc_beta_Yu_4_loop(con
    beta_Yu = ZEROMATRIX(3,3);
 
 
-   return beta_Yu;
+   return fourLoop * beta_Yu;
 }
 
 /**
@@ -133,7 +131,7 @@ Eigen::Matrix<double,3,3> HTHDMIIMSSMBC_susy_parameters::calc_beta_Yu_5_loop(con
    beta_Yu = ZEROMATRIX(3,3);
 
 
-   return beta_Yu;
+   return fiveLoop * beta_Yu;
 }
 
 } // namespace flexiblesusy

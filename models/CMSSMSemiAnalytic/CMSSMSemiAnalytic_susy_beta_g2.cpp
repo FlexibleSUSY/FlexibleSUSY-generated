@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:46:49
 
 #include "CMSSMSemiAnalytic_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -37,10 +36,10 @@ double CMSSMSemiAnalytic_susy_parameters::calc_beta_g2_1_loop(const Susy_traces&
 
    double beta_g2;
 
-   beta_g2 = Re(oneOver16PiSqr*Cube(g2));
+   beta_g2 = Re(Cube(g2));
 
 
-   return beta_g2;
+   return oneLoop * beta_g2;
 }
 
 /**
@@ -57,11 +56,11 @@ double CMSSMSemiAnalytic_susy_parameters::calc_beta_g2_2_loop(const Susy_traces&
 
    double beta_g2;
 
-   beta_g2 = Re(0.2*twoLoop*Cube(g2)*(-30*traceYdAdjYd - 10*traceYeAdjYe - 30*
+   beta_g2 = Re(0.2*Cube(g2)*(-30*traceYdAdjYd - 10*traceYeAdjYe - 30*
       traceYuAdjYu + 9*Sqr(g1) + 125*Sqr(g2) + 120*Sqr(g3)));
 
 
-   return beta_g2;
+   return twoLoop * beta_g2;
 }
 
 /**
@@ -84,18 +83,17 @@ double CMSSMSemiAnalytic_susy_parameters::calc_beta_g2_3_loop(const Susy_traces&
 
    double beta_g2;
 
-   beta_g2 = Re(0.04*threeLoop*Cube(g2)*(600*traceAdjYdYdAdjYdYd + 300*
-      traceAdjYdYd*traceAdjYeYe + 200*traceAdjYeYeAdjYeYe + 300*
-      traceAdjYuYuAdjYdYd + 600*traceAdjYuYuAdjYuYu - 457*Quad(g1) + 875*Quad(
-      g2) + 1100*Quad(g3) - 55*traceAdjYdYd*Sqr(g1) - 105*traceAdjYeYe*Sqr(g1)
-      - 145*traceAdjYuYu*Sqr(g1) - 825*traceAdjYdYd*Sqr(g2) - 275*traceAdjYeYe*
-      Sqr(g2) - 825*traceAdjYuYu*Sqr(g2) + 45*Sqr(g1)*Sqr(g2) - 800*
-      traceAdjYdYd*Sqr(g3) - 800*traceAdjYuYu*Sqr(g3) - 40*Sqr(g1)*Sqr(g3) +
-      600*Sqr(g2)*Sqr(g3) + 450*Sqr(traceAdjYdYd) + 50*Sqr(traceAdjYeYe) + 450*
-      Sqr(traceAdjYuYu)));
+   beta_g2 = Re(0.04*Cube(g2)*(600*traceAdjYdYdAdjYdYd + 300*traceAdjYdYd*
+      traceAdjYeYe + 200*traceAdjYeYeAdjYeYe + 300*traceAdjYuYuAdjYdYd + 600*
+      traceAdjYuYuAdjYuYu - 457*Quad(g1) + 875*Quad(g2) + 1100*Quad(g3) - 55*
+      traceAdjYdYd*Sqr(g1) - 105*traceAdjYeYe*Sqr(g1) - 145*traceAdjYuYu*Sqr(g1
+      ) - 825*traceAdjYdYd*Sqr(g2) - 275*traceAdjYeYe*Sqr(g2) - 825*
+      traceAdjYuYu*Sqr(g2) + 45*Sqr(g1)*Sqr(g2) - 800*traceAdjYdYd*Sqr(g3) -
+      800*traceAdjYuYu*Sqr(g3) - 40*Sqr(g1)*Sqr(g3) + 600*Sqr(g2)*Sqr(g3) + 450
+      *Sqr(traceAdjYdYd) + 50*Sqr(traceAdjYeYe) + 450*Sqr(traceAdjYuYu)));
 
 
-   return beta_g2;
+   return threeLoop * beta_g2;
 }
 
 /**
@@ -114,7 +112,7 @@ double CMSSMSemiAnalytic_susy_parameters::calc_beta_g2_4_loop(const Susy_traces&
    beta_g2 = 0;
 
 
-   return beta_g2;
+   return fourLoop * beta_g2;
 }
 
 /**
@@ -133,7 +131,7 @@ double CMSSMSemiAnalytic_susy_parameters::calc_beta_g2_5_loop(const Susy_traces&
    beta_g2 = 0;
 
 
-   return beta_g2;
+   return fiveLoop * beta_g2;
 }
 
 } // namespace flexiblesusy

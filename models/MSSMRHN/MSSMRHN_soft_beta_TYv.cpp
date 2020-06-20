@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:35:12
 
 #include "MSSMRHN_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -77,14 +76,13 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_TYv_1_loop(const So
 
    Eigen::Matrix<double,3,3> beta_TYv;
 
-   beta_TYv = (oneOver16PiSqr*(0.2*(30*traceAdjYuTYu*Yv + 10*traceAdjYvTYv*Yv +
-      6*MassB*Yv*Sqr(g1) + 30*MassWB*Yv*Sqr(g2) + 15*traceYuAdjYu*TYv + 5*
-      traceYvAdjYv*TYv - 3*Sqr(g1)*TYv - 15*Sqr(g2)*TYv) + 2*(Yv*Ye.adjoint()*
-      TYe) + 4*(Yv*Yv.adjoint()*TYv) + TYv*Ye.adjoint()*Ye + 5*(TYv*Yv.adjoint(
-      )*Yv))).real();
+   beta_TYv = (0.2*(30*traceAdjYuTYu*Yv + 10*traceAdjYvTYv*Yv + 6*MassB*Yv*Sqr(
+      g1) + 30*MassWB*Yv*Sqr(g2) + 15*traceYuAdjYu*TYv + 5*traceYvAdjYv*TYv - 3
+      *Sqr(g1)*TYv - 15*Sqr(g2)*TYv) + 2*(Yv*Ye.adjoint()*TYe) + 4*(Yv*Yv.
+      adjoint()*TYv) + TYv*Ye.adjoint()*Ye + 5*(TYv*Yv.adjoint()*Yv)).real();
 
 
-   return beta_TYv;
+   return oneLoop * beta_TYv;
 }
 
 /**
@@ -116,17 +114,16 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_TYv_2_loop(const So
 
    Eigen::Matrix<double,3,3> beta_TYv;
 
-   beta_TYv = (twoLoop*(0.02*(-300*traceYdAdjYuTYuAdjYd*Yv - 100*
-      traceYeAdjYvTYvAdjYe*Yv - 300*traceYuAdjYdTYdAdjYu*Yv - 1800*
-      traceYuAdjYuTYuAdjYu*Yv - 100*traceYvAdjYeTYeAdjYv*Yv - 600*
-      traceYvAdjYvTYvAdjYv*Yv - 828*MassB*Yv*Quad(g1) - 1500*MassWB*Yv*Quad(g2)
-      + 80*traceAdjYuTYu*Yv*Sqr(g1) - 80*MassB*traceYuAdjYu*Yv*Sqr(g1) - 180*
-      MassB*Yv*Sqr(g1)*Sqr(g2) - 180*MassWB*Yv*Sqr(g1)*Sqr(g2) + 1600*
-      traceAdjYuTYu*Yv*Sqr(g3) - 1600*MassG*traceYuAdjYu*Yv*Sqr(g3) - 150*
-      traceYdAdjYuYuAdjYd*TYv - 50*traceYeAdjYvYvAdjYe*TYv - 450*
-      traceYuAdjYuYuAdjYu*TYv - 150*traceYvAdjYvYvAdjYv*TYv + 207*Quad(g1)*TYv
-      + 375*Quad(g2)*TYv + 40*traceYuAdjYu*Sqr(g1)*TYv + 90*Sqr(g1)*Sqr(g2)*TYv
-       + 800*traceYuAdjYu*Sqr(g3)*TYv) - 0.4*(15*traceAdjYdTYd + 5*
+   beta_TYv = (0.02*(-300*traceYdAdjYuTYuAdjYd*Yv - 100*traceYeAdjYvTYvAdjYe*Yv
+       - 300*traceYuAdjYdTYdAdjYu*Yv - 1800*traceYuAdjYuTYuAdjYu*Yv - 100*
+      traceYvAdjYeTYeAdjYv*Yv - 600*traceYvAdjYvTYvAdjYv*Yv - 828*MassB*Yv*Quad
+      (g1) - 1500*MassWB*Yv*Quad(g2) + 80*traceAdjYuTYu*Yv*Sqr(g1) - 80*MassB*
+      traceYuAdjYu*Yv*Sqr(g1) - 180*MassB*Yv*Sqr(g1)*Sqr(g2) - 180*MassWB*Yv*
+      Sqr(g1)*Sqr(g2) + 1600*traceAdjYuTYu*Yv*Sqr(g3) - 1600*MassG*traceYuAdjYu
+      *Yv*Sqr(g3) - 150*traceYdAdjYuYuAdjYd*TYv - 50*traceYeAdjYvYvAdjYe*TYv -
+      450*traceYuAdjYuYuAdjYu*TYv - 150*traceYvAdjYvYvAdjYv*TYv + 207*Quad(g1)*
+      TYv + 375*Quad(g2)*TYv + 40*traceYuAdjYu*Sqr(g1)*TYv + 90*Sqr(g1)*Sqr(g2)
+      *TYv + 800*traceYuAdjYu*Sqr(g3)*TYv) - 0.4*(15*traceAdjYdTYd + 5*
       traceAdjYeTYe + 6*MassB*Sqr(g1))*(Yv*Ye.adjoint()*Ye) + 0.4*(-15*
       traceYdAdjYd - 5*traceYeAdjYe + 6*Sqr(g1))*(Yv*Ye.adjoint()*TYe) - 1.2*(
       15*traceAdjYuTYu + 5*traceAdjYvTYv + 2*MassB*Sqr(g1) + 10*MassWB*Sqr(g2))
@@ -139,10 +136,10 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_TYv_2_loop(const So
       Yv.adjoint()*Yv) - 6*(Yv*Yv.adjoint()*Yv*Yv.adjoint()*TYv) - 8*(Yv*Yv.
       adjoint()*TYv*Yv.adjoint()*Yv) - 2*(TYv*Ye.adjoint()*Ye*Ye.adjoint()*Ye)
       - 4*(TYv*Ye.adjoint()*Ye*Yv.adjoint()*Yv) - 6*(TYv*Yv.adjoint()*Yv*Yv.
-      adjoint()*Yv))).real();
+      adjoint()*Yv)).real();
 
 
-   return beta_TYv;
+   return twoLoop * beta_TYv;
 }
 
 /**
@@ -161,7 +158,7 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_TYv_3_loop(const So
    beta_TYv = ZEROMATRIX(3,3);
 
 
-   return beta_TYv;
+   return threeLoop * beta_TYv;
 }
 
 /**
@@ -180,7 +177,7 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_TYv_4_loop(const So
    beta_TYv = ZEROMATRIX(3,3);
 
 
-   return beta_TYv;
+   return fourLoop * beta_TYv;
 }
 
 /**
@@ -199,7 +196,7 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_TYv_5_loop(const So
    beta_TYv = ZEROMATRIX(3,3);
 
 
-   return beta_TYv;
+   return fiveLoop * beta_TYv;
 }
 
 } // namespace flexiblesusy

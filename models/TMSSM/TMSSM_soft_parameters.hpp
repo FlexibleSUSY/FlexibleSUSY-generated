@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:54:07
 
 #ifndef TMSSM_soft_parameters_H
 #define TMSSM_soft_parameters_H

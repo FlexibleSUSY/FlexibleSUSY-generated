@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 17:33:33
 
 #ifndef MSSMNoFVHimalaya_soft_parameters_H
 #define MSSMNoFVHimalaya_soft_parameters_H

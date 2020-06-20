@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:49:59
 
 #include "MSSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -74,13 +73,12 @@ Eigen::Matrix<double,3,3> MSSMEFTHiggs_soft_parameters::calc_beta_me2_1_loop(con
 
    Eigen::Matrix<double,3,3> beta_me2;
 
-   beta_me2 = (oneOver16PiSqr*(4*mHd2*(Ye*Ye.adjoint()) + 4*(TYe*(TYe).adjoint(
-      )) + 2*(me2*Ye*Ye.adjoint()) + 4*(Ye*ml2*Ye.adjoint()) + 2*(Ye*Ye.adjoint
-      ()*me2) + 0.4*g1*(3.872983346207417*Tr11 - 12*g1*AbsSqr(MassB))*
-      UNITMATRIX(3))).real();
+   beta_me2 = (4*mHd2*(Ye*Ye.adjoint()) + 4*(TYe*(TYe).adjoint()) + 2*(me2*Ye*
+      Ye.adjoint()) + 4*(Ye*ml2*Ye.adjoint()) + 2*(Ye*Ye.adjoint()*me2) + 0.4*
+      g1*(3.872983346207417*Tr11 - 12*g1*AbsSqr(MassB))*UNITMATRIX(3)).real();
 
 
-   return beta_me2;
+   return oneLoop * beta_me2;
 }
 
 /**
@@ -108,7 +106,7 @@ Eigen::Matrix<double,3,3> MSSMEFTHiggs_soft_parameters::calc_beta_me2_2_loop(con
 
    Eigen::Matrix<double,3,3> beta_me2;
 
-   beta_me2 = (twoLoop*(-0.8*(15*traceconjTYdTpTYd + 5*traceconjTYeTpTYe + 15*
+   beta_me2 = (-0.8*(15*traceconjTYdTpTYd + 5*traceconjTYeTpTYe + 15*
       tracemd2YdAdjYd + 5*traceme2YeAdjYe + 5*traceml2AdjYeYe + 15*
       tracemq2AdjYdYd + 30*mHd2*traceYdAdjYd + 10*mHd2*traceYeAdjYe + 3*mHd2*
       Sqr(g1) + 6*AbsSqr(MassB)*Sqr(g1) - 15*mHd2*Sqr(g2) - 30*AbsSqr(MassWB)*
@@ -127,11 +125,11 @@ Eigen::Matrix<double,3,3> MSSMEFTHiggs_soft_parameters::calc_beta_me2_2_loop(con
       adjoint()) - 4*(Ye*ml2*Ye.adjoint()*Ye*Ye.adjoint()) - 4*(Ye*Ye.adjoint()
       *me2*Ye*Ye.adjoint()) - 4*(Ye*Ye.adjoint()*Ye*ml2*Ye.adjoint()) - 2*(Ye*
       Ye.adjoint()*Ye*Ye.adjoint()*me2) + 0.32*g1*(15*g1*Tr2U111 +
-      19.364916731037084*Tr31 + 351*AbsSqr(MassB)*Cube(g1))*UNITMATRIX(3))).
-      real();
+      19.364916731037084*Tr31 + 351*AbsSqr(MassB)*Cube(g1))*UNITMATRIX(3)).real
+      ();
 
 
-   return beta_me2;
+   return twoLoop * beta_me2;
 }
 
 /**
@@ -150,7 +148,7 @@ Eigen::Matrix<double,3,3> MSSMEFTHiggs_soft_parameters::calc_beta_me2_3_loop(con
    beta_me2 = ZEROMATRIX(3,3);
 
 
-   return beta_me2;
+   return threeLoop * beta_me2;
 }
 
 /**
@@ -169,7 +167,7 @@ Eigen::Matrix<double,3,3> MSSMEFTHiggs_soft_parameters::calc_beta_me2_4_loop(con
    beta_me2 = ZEROMATRIX(3,3);
 
 
-   return beta_me2;
+   return fourLoop * beta_me2;
 }
 
 /**
@@ -188,7 +186,7 @@ Eigen::Matrix<double,3,3> MSSMEFTHiggs_soft_parameters::calc_beta_me2_5_loop(con
    beta_me2 = ZEROMATRIX(3,3);
 
 
-   return beta_me2;
+   return fiveLoop * beta_me2;
 }
 
 } // namespace flexiblesusy

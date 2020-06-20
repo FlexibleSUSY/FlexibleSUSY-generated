@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 17:38:36
 
 #ifndef MSSMNoFVatMGUTHimalaya_SPECTRUM_GENERATOR_H
 #define MSSMNoFVatMGUTHimalaya_SPECTRUM_GENERATOR_H

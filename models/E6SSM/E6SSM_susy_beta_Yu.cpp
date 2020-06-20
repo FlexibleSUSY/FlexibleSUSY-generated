@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:01:44
 
 #include "E6SSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -38,12 +37,12 @@ Eigen::Matrix<double,3,3> E6SSM_susy_parameters::calc_beta_Yu_1_loop(const Susy_
 
    Eigen::Matrix<double,3,3> beta_Yu;
 
-   beta_Yu = (oneOver16PiSqr*(-0.03333333333333333*Yu*(-90*traceYuAdjYu - 30*
-      AbsSqr(Lambdax) + 26*Sqr(g1) + 90*Sqr(g2) + 160*Sqr(g3) + 9*Sqr(gN)) + Yu
-      *Yd.adjoint()*Yd + 3*(Yu*Yu.adjoint()*Yu))).real();
+   beta_Yu = (-0.03333333333333333*Yu*(-90*traceYuAdjYu - 30*AbsSqr(Lambdax) +
+      26*Sqr(g1) + 90*Sqr(g2) + 160*Sqr(g3) + 9*Sqr(gN)) + Yu*Yd.adjoint()*Yd +
+      3*(Yu*Yu.adjoint()*Yu)).real();
 
 
-   return beta_Yu;
+   return oneLoop * beta_Yu;
 }
 
 /**
@@ -65,9 +64,9 @@ Eigen::Matrix<double,3,3> E6SSM_susy_parameters::calc_beta_Yu_2_loop(const Susy_
 
    Eigen::Matrix<double,3,3> beta_Yu;
 
-   beta_Yu = (twoLoop*(0.0005555555555555556*Yu*(-5400*traceYdAdjYuYuAdjYd -
-      16200*traceYuAdjYuYuAdjYu - 5400*traceKappaAdjKappa*AbsSqr(Lambdax) -
-      3600*traceLambda12AdjLambda12*AbsSqr(Lambdax) - 5400*traceYdAdjYd*AbsSqr(
+   beta_Yu = (0.0005555555555555556*Yu*(-5400*traceYdAdjYuYuAdjYd - 16200*
+      traceYuAdjYuYuAdjYu - 5400*traceKappaAdjKappa*AbsSqr(Lambdax) - 3600*
+      traceLambda12AdjLambda12*AbsSqr(Lambdax) - 5400*traceYdAdjYd*AbsSqr(
       Lambdax) - 1800*traceYeAdjYe*AbsSqr(Lambdax) + 15652*Quad(g1) + 29700*
       Quad(g2) + 25600*Quad(g3) + 5157*Quad(gN) + 1440*traceYuAdjYu*Sqr(g1) +
       1800*Sqr(g1)*Sqr(g2) + 28800*traceYuAdjYu*Sqr(g3) + 5440*Sqr(g1)*Sqr(g3)
@@ -78,10 +77,10 @@ Eigen::Matrix<double,3,3> E6SSM_susy_parameters::calc_beta_Yu_2_loop(const Susy_
       )*Yd) + 0.2*(-45*traceYuAdjYu - 15*AbsSqr(Lambdax) + 2*Sqr(g1) + 30*Sqr(
       g2) + 3*Sqr(gN))*(Yu*Yu.adjoint()*Yu) - 2*(Yu*Yd.adjoint()*Yd*Yd.adjoint(
       )*Yd) - 2*(Yu*Yd.adjoint()*Yd*Yu.adjoint()*Yu) - 4*(Yu*Yu.adjoint()*Yu*Yu
-      .adjoint()*Yu))).real();
+      .adjoint()*Yu)).real();
 
 
-   return beta_Yu;
+   return twoLoop * beta_Yu;
 }
 
 /**
@@ -100,7 +99,7 @@ Eigen::Matrix<double,3,3> E6SSM_susy_parameters::calc_beta_Yu_3_loop(const Susy_
    beta_Yu = ZEROMATRIX(3,3);
 
 
-   return beta_Yu;
+   return threeLoop * beta_Yu;
 }
 
 /**
@@ -119,7 +118,7 @@ Eigen::Matrix<double,3,3> E6SSM_susy_parameters::calc_beta_Yu_4_loop(const Susy_
    beta_Yu = ZEROMATRIX(3,3);
 
 
-   return beta_Yu;
+   return fourLoop * beta_Yu;
 }
 
 /**
@@ -138,7 +137,7 @@ Eigen::Matrix<double,3,3> E6SSM_susy_parameters::calc_beta_Yu_5_loop(const Susy_
    beta_Yu = ZEROMATRIX(3,3);
 
 
-   return beta_Yu;
+   return fiveLoop * beta_Yu;
 }
 
 } // namespace flexiblesusy

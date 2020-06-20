@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:25:42
 
 #include "HGTHDMIIMSSMBC_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -38,11 +37,11 @@ double HGTHDMIIMSSMBC_susy_parameters::calc_beta_g2u_1_loop(const Susy_traces& s
 
    double beta_g2u;
 
-   beta_g2u = Re(0.05*g2u*oneOver16PiSqr*(60*traceYuAdjYu - 9*Sqr(g1) + 10*Sqr(
-      g1d) - 165*Sqr(g2) + 55*Sqr(g2u) + 15*Sqr(g2up)));
+   beta_g2u = Re(0.05*g2u*(60*traceYuAdjYu - 9*Sqr(g1) + 10*Sqr(g1d) - 165*Sqr(
+      g2) + 55*Sqr(g2u) + 15*Sqr(g2up)));
 
 
-   return beta_g2u;
+   return oneLoop * beta_g2u;
 }
 
 /**
@@ -61,24 +60,24 @@ double HGTHDMIIMSSMBC_susy_parameters::calc_beta_g2u_2_loop(const Susy_traces& s
 
    double beta_g2u;
 
-   beta_g2u = Re(0.00125*twoLoop*(-800*g1d*g1dp*g2up*Lambda4 + 800*g2u*Lambda3*
-      Lambda4 - 1800*g2u*traceYdAdjYuYuAdjYd - 5400*g2u*traceYuAdjYuYuAdjYu +
-      1200*g2u*AbsSqr(Lambda5) + 1200*g2u*AbsSqr(Lambda6) + 3600*g2u*AbsSqr(
-      Lambda7) - 8000*Lambda2*Cube(g2u) - 4500*traceYuAdjYu*Cube(g2u) - 2800*
-      Power5(g2u) + 516*g2u*Quad(g1) - 1050*g2u*Quad(g1d) - 25400*g2u*Quad(g2)
-      - 250*g2u*Quad(g2up) + 1700*g2u*traceYuAdjYu*Sqr(g1) + 2175*Cube(g2u)*Sqr
-      (g1) - 1600*g2u*Lambda3*Sqr(g1d) + 800*g2u*Lambda4*Sqr(g1d) - 1800*g2u*
-      traceYdAdjYd*Sqr(g1d) - 600*g2u*traceYeAdjYe*Sqr(g1d) - 1050*Cube(g2u)*
-      Sqr(g1d) - 210*g2u*Sqr(g1)*Sqr(g1d) - 350*g2u*Sqr(g1d)*Sqr(g1dp) - 1200*
-      g1d*g1dp*g2up*Sqr(g2) + 4500*g2u*traceYuAdjYu*Sqr(g2) + 21875*Cube(g2u)*
-      Sqr(g2) + 360*g2u*Sqr(g1)*Sqr(g2) + 2150*g2u*Sqr(g1d)*Sqr(g2) - 1600*g2u*
-      Lambda2*Sqr(g2up) - 900*g2u*traceYuAdjYu*Sqr(g2up) - 2950*Cube(g2u)*Sqr(
-      g2up) + 315*g2u*Sqr(g1)*Sqr(g2up) - 350*g2u*Sqr(g1dp)*Sqr(g2up) + 2775*
-      g2u*Sqr(g2)*Sqr(g2up) + 16000*g2u*traceYuAdjYu*Sqr(g3) + 4800*g2u*Sqr(
-      Lambda2) + 800*g2u*Sqr(Lambda3) + 800*g2u*Sqr(Lambda4)));
+   beta_g2u = Re(0.00125*(-800*g1d*g1dp*g2up*Lambda4 + 800*g2u*Lambda3*Lambda4
+      - 1800*g2u*traceYdAdjYuYuAdjYd - 5400*g2u*traceYuAdjYuYuAdjYu + 1200*g2u*
+      AbsSqr(Lambda5) + 1200*g2u*AbsSqr(Lambda6) + 3600*g2u*AbsSqr(Lambda7) -
+      8000*Lambda2*Cube(g2u) - 4500*traceYuAdjYu*Cube(g2u) - 2800*Power5(g2u) +
+      516*g2u*Quad(g1) - 1050*g2u*Quad(g1d) - 25400*g2u*Quad(g2) - 250*g2u*Quad
+      (g2up) + 1700*g2u*traceYuAdjYu*Sqr(g1) + 2175*Cube(g2u)*Sqr(g1) - 1600*
+      g2u*Lambda3*Sqr(g1d) + 800*g2u*Lambda4*Sqr(g1d) - 1800*g2u*traceYdAdjYd*
+      Sqr(g1d) - 600*g2u*traceYeAdjYe*Sqr(g1d) - 1050*Cube(g2u)*Sqr(g1d) - 210*
+      g2u*Sqr(g1)*Sqr(g1d) - 350*g2u*Sqr(g1d)*Sqr(g1dp) - 1200*g1d*g1dp*g2up*
+      Sqr(g2) + 4500*g2u*traceYuAdjYu*Sqr(g2) + 21875*Cube(g2u)*Sqr(g2) + 360*
+      g2u*Sqr(g1)*Sqr(g2) + 2150*g2u*Sqr(g1d)*Sqr(g2) - 1600*g2u*Lambda2*Sqr(
+      g2up) - 900*g2u*traceYuAdjYu*Sqr(g2up) - 2950*Cube(g2u)*Sqr(g2up) + 315*
+      g2u*Sqr(g1)*Sqr(g2up) - 350*g2u*Sqr(g1dp)*Sqr(g2up) + 2775*g2u*Sqr(g2)*
+      Sqr(g2up) + 16000*g2u*traceYuAdjYu*Sqr(g3) + 4800*g2u*Sqr(Lambda2) + 800*
+      g2u*Sqr(Lambda3) + 800*g2u*Sqr(Lambda4)));
 
 
-   return beta_g2u;
+   return twoLoop * beta_g2u;
 }
 
 /**
@@ -97,7 +96,7 @@ double HGTHDMIIMSSMBC_susy_parameters::calc_beta_g2u_3_loop(const Susy_traces& s
    beta_g2u = 0;
 
 
-   return beta_g2u;
+   return threeLoop * beta_g2u;
 }
 
 /**
@@ -116,7 +115,7 @@ double HGTHDMIIMSSMBC_susy_parameters::calc_beta_g2u_4_loop(const Susy_traces& s
    beta_g2u = 0;
 
 
-   return beta_g2u;
+   return fourLoop * beta_g2u;
 }
 
 /**
@@ -135,7 +134,7 @@ double HGTHDMIIMSSMBC_susy_parameters::calc_beta_g2u_5_loop(const Susy_traces& s
    beta_g2u = 0;
 
 
-   return beta_g2u;
+   return fiveLoop * beta_g2u;
 }
 
 } // namespace flexiblesusy

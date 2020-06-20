@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:30:24
 
 #include "E6SSMEFTHiggs_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -40,7 +39,7 @@ double E6SSMEFTHiggs_susy_parameters::calc_beta_g3_1_loop(const Susy_traces& sus
    beta_g3 = Re(0);
 
 
-   return beta_g3;
+   return oneLoop * beta_g3;
 }
 
 /**
@@ -57,11 +56,11 @@ double E6SSMEFTHiggs_susy_parameters::calc_beta_g3_2_loop(const Susy_traces& sus
 
    double beta_g3;
 
-   beta_g3 = Re(twoLoop*Cube(g3)*(-2*traceKappaAdjKappa - 4*traceYdAdjYd - 4*
+   beta_g3 = Re(Cube(g3)*(-2*traceKappaAdjKappa - 4*traceYdAdjYd - 4*
       traceYuAdjYu + 3*Sqr(g1) + 9*Sqr(g2) + 48*Sqr(g3) + 3*Sqr(gN)));
 
 
-   return beta_g3;
+   return twoLoop * beta_g3;
 }
 
 /**
@@ -80,7 +79,7 @@ double E6SSMEFTHiggs_susy_parameters::calc_beta_g3_3_loop(const Susy_traces& sus
    beta_g3 = 0;
 
 
-   return beta_g3;
+   return threeLoop * beta_g3;
 }
 
 /**
@@ -99,7 +98,7 @@ double E6SSMEFTHiggs_susy_parameters::calc_beta_g3_4_loop(const Susy_traces& sus
    beta_g3 = 0;
 
 
-   return beta_g3;
+   return fourLoop * beta_g3;
 }
 
 /**
@@ -118,7 +117,7 @@ double E6SSMEFTHiggs_susy_parameters::calc_beta_g3_5_loop(const Susy_traces& sus
    beta_g3 = 0;
 
 
-   return beta_g3;
+   return fiveLoop * beta_g3;
 }
 
 } // namespace flexiblesusy

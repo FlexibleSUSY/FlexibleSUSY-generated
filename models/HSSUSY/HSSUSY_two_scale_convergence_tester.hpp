@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:46:36
 
 #ifndef HSSUSY_TWO_SCALE_CONVERGENCE_TESTER_H
 #define HSSUSY_TWO_SCALE_CONVERGENCE_TESTER_H

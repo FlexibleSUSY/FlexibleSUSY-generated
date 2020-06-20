@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 17:35:24
 
 #ifndef MSSMNoFVHimalaya_OBSERVABLES_H
 #define MSSMNoFVHimalaya_OBSERVABLES_H

@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:18:00
 
 #include "UMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -37,10 +36,10 @@ double UMSSM_susy_parameters::calc_beta_g3_1_loop(const Susy_traces& susy_traces
 
    double beta_g3;
 
-   beta_g3 = Re(-3*oneOver16PiSqr*Cube(g3));
+   beta_g3 = Re(-3*Cube(g3));
 
 
-   return beta_g3;
+   return oneLoop * beta_g3;
 }
 
 /**
@@ -59,12 +58,12 @@ double UMSSM_susy_parameters::calc_beta_g3_2_loop(const Susy_traces& susy_traces
 
    double beta_g3;
 
-   beta_g3 = Re(0.2*twoLoop*Cube(g3)*(-20*traceYdAdjYd - 20*traceYuAdjYu + 11*
-      Sqr(g1) + 45*Sqr(g2) + 70*Sqr(g3) + 30*Sqr(gp)*Sqr(Qd) + 60*Sqr(gp)*Sqr(
-      Qq) + 30*Sqr(gp)*Sqr(Qu)));
+   beta_g3 = Re(0.2*Cube(g3)*(-20*traceYdAdjYd - 20*traceYuAdjYu + 11*Sqr(g1) +
+      45*Sqr(g2) + 70*Sqr(g3) + 30*Sqr(gp)*Sqr(Qd) + 60*Sqr(gp)*Sqr(Qq) + 30*
+      Sqr(gp)*Sqr(Qu)));
 
 
-   return beta_g3;
+   return twoLoop * beta_g3;
 }
 
 /**
@@ -83,7 +82,7 @@ double UMSSM_susy_parameters::calc_beta_g3_3_loop(const Susy_traces& susy_traces
    beta_g3 = 0;
 
 
-   return beta_g3;
+   return threeLoop * beta_g3;
 }
 
 /**
@@ -102,7 +101,7 @@ double UMSSM_susy_parameters::calc_beta_g3_4_loop(const Susy_traces& susy_traces
    beta_g3 = 0;
 
 
-   return beta_g3;
+   return fourLoop * beta_g3;
 }
 
 /**
@@ -121,7 +120,7 @@ double UMSSM_susy_parameters::calc_beta_g3_5_loop(const Susy_traces& susy_traces
    beta_g3 = 0;
 
 
-   return beta_g3;
+   return fiveLoop * beta_g3;
 }
 
 } // namespace flexiblesusy

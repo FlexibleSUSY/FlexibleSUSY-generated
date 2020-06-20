@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:34:39
 
 #ifndef lowMSSM_soft_parameters_H
 #define lowMSSM_soft_parameters_H

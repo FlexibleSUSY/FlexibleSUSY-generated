@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:45:20
 
 #ifndef NMSSMEFTHiggs_OBSERVABLES_H
 #define NMSSMEFTHiggs_OBSERVABLES_H

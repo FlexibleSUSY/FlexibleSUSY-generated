@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:21:27
 
 #include "lowNMSSMTanBetaAtMZ_two_scale_spectrum_generator.hpp"
 #include "lowNMSSMTanBetaAtMZ_input_parameters.hpp"
@@ -88,6 +87,9 @@ void lowNMSSMTanBetaAtMZ_spectrum_generator<Two_scale>::run_except(const softsus
 
    susy_scale_constraint.initialize();
    low_scale_constraint .initialize();
+
+   low_scale_constraint.set_SM_like_Higgs_index(
+      settings.get(Spectrum_generator_settings::eft_higgs_index));
 
    lowNMSSMTanBetaAtMZ_convergence_tester<Two_scale> convergence_tester(
       &model, settings.get(Spectrum_generator_settings::precision));

@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:39:26
 
 #ifndef CMSSMNoFV_soft_parameters_H
 #define CMSSMNoFV_soft_parameters_H

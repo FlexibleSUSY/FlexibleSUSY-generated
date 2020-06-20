@@ -16,22 +16,21 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:24:26
 
 /**
  * @file cxx_qft/HTHDMIIMSSMBC_vertices.cpp
  *
- * This file was generated at Fri 10 Apr 2020 19:24:26 with FlexibleSUSY
- * 2.4.2 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #include "HTHDMIIMSSMBC_context_base.hpp"
+#include "HTHDMIIMSSMBC_input_parameters.hpp"
 #include "HTHDMIIMSSMBC_vertices.hpp"
 
 #include "concatenate.hpp"
 #include "wrappers.hpp"
 
-#define INPUTPARAMETER(p) context.model.get_input().p
+#define INPUTPARAMETER(p) context.model.get_input_parameters().p
 #define MODELPARAMETER(p) context.model.get_##p()
 #define DERIVEDPARAMETER(p) context.model.p()
 #define PHASE(p) context.model.get_##p()

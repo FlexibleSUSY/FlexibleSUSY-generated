@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:56:36
 
 #include "MRSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,10 +72,10 @@ double MRSSM_soft_parameters::calc_beta_MDGoc_1_loop(const Soft_traces& soft_tra
 
    double beta_MDGoc;
 
-   beta_MDGoc = Re(-6*MDGoc*oneOver16PiSqr*Sqr(g3));
+   beta_MDGoc = Re(-6*MDGoc*Sqr(g3));
 
 
-   return beta_MDGoc;
+   return oneLoop * beta_MDGoc;
 }
 
 /**
@@ -92,11 +91,11 @@ double MRSSM_soft_parameters::calc_beta_MDGoc_2_loop(const Soft_traces& soft_tra
 
    double beta_MDGoc;
 
-   beta_MDGoc = Re(0.2*MDGoc*twoLoop*Sqr(g3)*(-20*traceYdAdjYd - 20*
-      traceYuAdjYu + 11*Sqr(g1) + 45*Sqr(g2) + 520*Sqr(g3)));
+   beta_MDGoc = Re(0.2*MDGoc*Sqr(g3)*(-20*traceYdAdjYd - 20*traceYuAdjYu + 11*
+      Sqr(g1) + 45*Sqr(g2) + 520*Sqr(g3)));
 
 
-   return beta_MDGoc;
+   return twoLoop * beta_MDGoc;
 }
 
 /**
@@ -115,7 +114,7 @@ double MRSSM_soft_parameters::calc_beta_MDGoc_3_loop(const Soft_traces& soft_tra
    beta_MDGoc = 0;
 
 
-   return beta_MDGoc;
+   return threeLoop * beta_MDGoc;
 }
 
 /**
@@ -134,7 +133,7 @@ double MRSSM_soft_parameters::calc_beta_MDGoc_4_loop(const Soft_traces& soft_tra
    beta_MDGoc = 0;
 
 
-   return beta_MDGoc;
+   return fourLoop * beta_MDGoc;
 }
 
 /**
@@ -153,7 +152,7 @@ double MRSSM_soft_parameters::calc_beta_MDGoc_5_loop(const Soft_traces& soft_tra
    beta_MDGoc = 0;
 
 
-   return beta_MDGoc;
+   return fiveLoop * beta_MDGoc;
 }
 
 } // namespace flexiblesusy

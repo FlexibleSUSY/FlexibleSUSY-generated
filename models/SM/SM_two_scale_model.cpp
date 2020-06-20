@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:47:33
 
 /**
  * @file SM_two_scale_model.cpp
@@ -26,8 +25,7 @@
  * which solve EWSB and calculate pole masses and mixings from MSbar
  * parameters.
  *
- * This file was generated at Fri 10 Apr 2020 19:47:33 with FlexibleSUSY
- * 2.4.2 (git commit: a94199e5620b8684f5d30d0eece5757a5a72c4a4) and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #include "SM_two_scale_model.hpp"
@@ -36,39 +34,44 @@ namespace flexiblesusy {
 
 #define CLASSNAME SM<Two_scale>
 
-CLASSNAME::SM(const SM_input_parameters& input_)
-   : SM_mass_eigenstates(input_)
+CLASSNAME::SM(const SM_slha& model_, bool do_convert_masses_to_slha)
+   : SM_slha(model_, do_convert_masses_to_slha)
+{
+}
+
+CLASSNAME::SM(const SM_input_parameters& input_, bool do_convert_masses_to_slha)
+   : SM_slha(input_, do_convert_masses_to_slha)
 {
 }
 
 void CLASSNAME::calculate_spectrum()
 {
-   SM_mass_eigenstates::calculate_spectrum();
+   SM_slha::calculate_spectrum();
 }
 
 void CLASSNAME::clear_problems()
 {
-   SM_mass_eigenstates::clear_problems();
+   SM_slha::clear_problems();
 }
 
 std::string CLASSNAME::name() const
 {
-   return SM_mass_eigenstates::name();
+   return SM_slha::name();
 }
 
 void CLASSNAME::run_to(double scale, double eps)
 {
-   SM_mass_eigenstates::run_to(scale, eps);
+   SM_slha::run_to(scale, eps);
 }
 
 void CLASSNAME::print(std::ostream& out) const
 {
-   SM_mass_eigenstates::print(out);
+   SM_slha::print(out);
 }
 
 void CLASSNAME::set_precision(double p)
 {
-   SM_mass_eigenstates::set_precision(p);
+   SM_slha::set_precision(p);
 }
 
 std::ostream& operator<<(std::ostream& ostr, const SM<Two_scale>& model)

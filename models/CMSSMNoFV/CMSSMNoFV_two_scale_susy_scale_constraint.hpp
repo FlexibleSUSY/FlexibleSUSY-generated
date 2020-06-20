@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:40:54
 
 #ifndef CMSSMNoFV_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
 #define CMSSMNoFV_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
@@ -39,6 +38,8 @@ public:
    CMSSMNoFV_susy_scale_constraint() = default;
    CMSSMNoFV_susy_scale_constraint(CMSSMNoFV<Two_scale>*, const softsusy::QedQcd&);
    virtual ~CMSSMNoFV_susy_scale_constraint() = default;
+   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+
    virtual void apply() override;
    virtual double get_scale() const override;
    virtual std::string name() const override { return "CMSSMNoFV SUSY-scale constraint"; }

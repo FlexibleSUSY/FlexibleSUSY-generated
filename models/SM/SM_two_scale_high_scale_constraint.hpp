@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:47:33
 
 #ifndef SM_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
 #define SM_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
@@ -38,6 +37,8 @@ public:
    SM_high_scale_constraint() = default;
    SM_high_scale_constraint(SM<Two_scale>*);
    virtual ~SM_high_scale_constraint() = default;
+   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+
    virtual void apply() override;
    virtual double get_scale() const override;
    virtual std::string name() const override { return "SM high-scale constraint"; }

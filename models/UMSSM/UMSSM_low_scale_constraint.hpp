@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:33:14
 
 #ifndef UMSSM_LOW_SCALE_CONSTRAINT_H
 #define UMSSM_LOW_SCALE_CONSTRAINT_H

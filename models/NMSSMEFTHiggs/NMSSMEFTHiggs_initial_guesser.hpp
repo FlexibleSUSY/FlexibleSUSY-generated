@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:45:08
 
 #ifndef NMSSMEFTHiggs_INITIAL_GUESSER_H
 #define NMSSMEFTHiggs_INITIAL_GUESSER_H

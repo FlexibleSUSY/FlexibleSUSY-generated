@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:01:50
 
 #ifndef E6SSMEFTHiggs_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
 #define E6SSMEFTHiggs_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
@@ -38,6 +37,8 @@ public:
    E6SSMEFTHiggs_high_scale_constraint() = default;
    E6SSMEFTHiggs_high_scale_constraint(E6SSMEFTHiggs<Two_scale>*);
    virtual ~E6SSMEFTHiggs_high_scale_constraint() = default;
+   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+
    virtual void apply() override;
    virtual double get_scale() const override;
    virtual std::string name() const override { return "E6SSMEFTHiggs high-scale constraint"; }

@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:40:37
 
 /**
  * @file MSSMRHN_two_scale_model.cpp
@@ -26,8 +25,7 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Fri 10 Apr 2020 20:40:37 with FlexibleSUSY
- * 2.4.2 (git commit: a94199e5620b8684f5d30d0eece5757a5a72c4a4) and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #include "MSSMRHN_two_scale_model.hpp"
@@ -36,39 +34,44 @@ namespace flexiblesusy {
 
 #define CLASSNAME MSSMRHN<Two_scale>
 
-CLASSNAME::MSSMRHN(const MSSMRHN_input_parameters& input_)
-   : MSSMRHN_mass_eigenstates(input_)
+CLASSNAME::MSSMRHN(const MSSMRHN_slha& model_, bool do_convert_masses_to_slha)
+   : MSSMRHN_slha(model_, do_convert_masses_to_slha)
+{
+}
+
+CLASSNAME::MSSMRHN(const MSSMRHN_input_parameters& input_, bool do_convert_masses_to_slha)
+   : MSSMRHN_slha(input_, do_convert_masses_to_slha)
 {
 }
 
 void CLASSNAME::calculate_spectrum()
 {
-   MSSMRHN_mass_eigenstates::calculate_spectrum();
+   MSSMRHN_slha::calculate_spectrum();
 }
 
 void CLASSNAME::clear_problems()
 {
-   MSSMRHN_mass_eigenstates::clear_problems();
+   MSSMRHN_slha::clear_problems();
 }
 
 std::string CLASSNAME::name() const
 {
-   return MSSMRHN_mass_eigenstates::name();
+   return MSSMRHN_slha::name();
 }
 
 void CLASSNAME::run_to(double scale, double eps)
 {
-   MSSMRHN_mass_eigenstates::run_to(scale, eps);
+   MSSMRHN_slha::run_to(scale, eps);
 }
 
 void CLASSNAME::print(std::ostream& out) const
 {
-   MSSMRHN_mass_eigenstates::print(out);
+   MSSMRHN_slha::print(out);
 }
 
 void CLASSNAME::set_precision(double p)
 {
-   MSSMRHN_mass_eigenstates::set_precision(p);
+   MSSMRHN_slha::set_precision(p);
 }
 
 std::ostream& operator<<(std::ostream& ostr, const MSSMRHN<Two_scale>& model)

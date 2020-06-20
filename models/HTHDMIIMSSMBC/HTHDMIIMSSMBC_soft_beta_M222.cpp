@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:22:13
 
 #include "HTHDMIIMSSMBC_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -74,12 +73,12 @@ double HTHDMIIMSSMBC_soft_parameters::calc_beta_M222_1_loop(const Soft_traces& s
 
    double beta_M222;
 
-   beta_M222 = Re(0.1*oneOver16PiSqr*(40*Lambda3*M112 + 20*Lambda4*M112 + 120*
-      Lambda2*M222 + 60*M222*traceYuAdjYu - 60*M122*Conj(Lambda7) - 60*Lambda7*
-      Conj(M122) - 9*M222*Sqr(g1) - 45*M222*Sqr(g2)));
+   beta_M222 = Re(0.1*(40*Lambda3*M112 + 20*Lambda4*M112 + 120*Lambda2*M222 +
+      60*M222*traceYuAdjYu - 60*M122*Conj(Lambda7) - 60*Lambda7*Conj(M122) - 9*
+      M222*Sqr(g1) - 45*M222*Sqr(g2)));
 
 
-   return beta_M222;
+   return oneLoop * beta_M222;
 }
 
 /**
@@ -98,11 +97,11 @@ double HTHDMIIMSSMBC_soft_parameters::calc_beta_M222_2_loop(const Soft_traces& s
 
    double beta_M222;
 
-   beta_M222 = Re(0.0025*twoLoop*(-3200*Lambda3*Lambda4*M112 + 1800*Lambda5*
-      Lambda6*M122 + 4200*Lambda5*Lambda7*M122 - 800*Lambda3*Lambda4*M222 -
-      9600*Lambda3*M112*traceYdAdjYd - 4800*Lambda4*M112*traceYdAdjYd - 1800*
-      M222*traceYdAdjYuYuAdjYd - 3200*Lambda3*M112*traceYeAdjYe - 1600*Lambda4*
-      M112*traceYeAdjYe - 28800*Lambda2*M222*traceYuAdjYu - 5400*M222*
+   beta_M222 = Re(0.0025*(-3200*Lambda3*Lambda4*M112 + 1800*Lambda5*Lambda6*
+      M122 + 4200*Lambda5*Lambda7*M122 - 800*Lambda3*Lambda4*M222 - 9600*
+      Lambda3*M112*traceYdAdjYd - 4800*Lambda4*M112*traceYdAdjYd - 1800*M222*
+      traceYdAdjYuYuAdjYd - 3200*Lambda3*M112*traceYeAdjYe - 1600*Lambda4*M112*
+      traceYeAdjYe - 28800*Lambda2*M222*traceYuAdjYu - 5400*M222*
       traceYuAdjYuYuAdjYu - 4800*M112*AbsSqr(Lambda5) - 1200*M222*AbsSqr(
       Lambda5) - 7200*M112*AbsSqr(Lambda6) + 1200*M222*AbsSqr(Lambda6) - 7200*
       M112*AbsSqr(Lambda7) - 10800*M222*AbsSqr(Lambda7) - 1200*Lambda1*M122*
@@ -128,7 +127,7 @@ double HTHDMIIMSSMBC_soft_parameters::calc_beta_M222_2_loop(const Soft_traces& s
       *Sqr(Mu) - 7200*Quad(g2)*Sqr(Mu)));
 
 
-   return beta_M222;
+   return twoLoop * beta_M222;
 }
 
 /**
@@ -147,7 +146,7 @@ double HTHDMIIMSSMBC_soft_parameters::calc_beta_M222_3_loop(const Soft_traces& s
    beta_M222 = 0;
 
 
-   return beta_M222;
+   return threeLoop * beta_M222;
 }
 
 /**
@@ -166,7 +165,7 @@ double HTHDMIIMSSMBC_soft_parameters::calc_beta_M222_4_loop(const Soft_traces& s
    beta_M222 = 0;
 
 
-   return beta_M222;
+   return fourLoop * beta_M222;
 }
 
 /**
@@ -185,7 +184,7 @@ double HTHDMIIMSSMBC_soft_parameters::calc_beta_M222_5_loop(const Soft_traces& s
    beta_M222 = 0;
 
 
-   return beta_M222;
+   return fiveLoop * beta_M222;
 }
 
 } // namespace flexiblesusy

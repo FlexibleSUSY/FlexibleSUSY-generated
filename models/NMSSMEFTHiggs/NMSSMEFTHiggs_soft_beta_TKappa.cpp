@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:44:18
 
 #include "NMSSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,11 +72,11 @@ double NMSSMEFTHiggs_soft_parameters::calc_beta_TKappa_1_loop(const Soft_traces&
 
    double beta_TKappa;
 
-   beta_TKappa = Re(6*oneOver16PiSqr*(3*AbsSqr(Kappa)*TKappa + AbsSqr(Lambdax)*
-      TKappa + 2*Conj(Lambdax)*Kappa*TLambdax));
+   beta_TKappa = Re(6*(3*AbsSqr(Kappa)*TKappa + AbsSqr(Lambdax)*TKappa + 2*Conj
+      (Lambdax)*Kappa*TLambdax));
 
 
-   return beta_TKappa;
+   return oneLoop * beta_TKappa;
 }
 
 /**
@@ -97,7 +96,7 @@ double NMSSMEFTHiggs_soft_parameters::calc_beta_TKappa_2_loop(const Soft_traces&
 
    double beta_TKappa;
 
-   beta_TKappa = Re(-1.2*twoLoop*(30*traceAdjYdTYd*AbsSqr(Lambdax)*Kappa + 10*
+   beta_TKappa = Re(-1.2*(30*traceAdjYdTYd*AbsSqr(Lambdax)*Kappa + 10*
       traceAdjYeTYe*AbsSqr(Lambdax)*Kappa + 30*traceAdjYuTYu*AbsSqr(Lambdax)*
       Kappa + 6*MassB*AbsSqr(Lambdax)*Kappa*Sqr(g1) + 30*MassWB*AbsSqr(Lambdax)
       *Kappa*Sqr(g2) + 15*traceYdAdjYd*AbsSqr(Lambdax)*TKappa + 5*traceYeAdjYe*
@@ -112,7 +111,7 @@ double NMSSMEFTHiggs_soft_parameters::calc_beta_TKappa_2_loop(const Soft_traces&
       TLambdax));
 
 
-   return beta_TKappa;
+   return twoLoop * beta_TKappa;
 }
 
 /**
@@ -131,7 +130,7 @@ double NMSSMEFTHiggs_soft_parameters::calc_beta_TKappa_3_loop(const Soft_traces&
    beta_TKappa = 0;
 
 
-   return beta_TKappa;
+   return threeLoop * beta_TKappa;
 }
 
 /**
@@ -150,7 +149,7 @@ double NMSSMEFTHiggs_soft_parameters::calc_beta_TKappa_4_loop(const Soft_traces&
    beta_TKappa = 0;
 
 
-   return beta_TKappa;
+   return fourLoop * beta_TKappa;
 }
 
 /**
@@ -169,7 +168,7 @@ double NMSSMEFTHiggs_soft_parameters::calc_beta_TKappa_5_loop(const Soft_traces&
    beta_TKappa = 0;
 
 
-   return beta_TKappa;
+   return fiveLoop * beta_TKappa;
 }
 
 } // namespace flexiblesusy

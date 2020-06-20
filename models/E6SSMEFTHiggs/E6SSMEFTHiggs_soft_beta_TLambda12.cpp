@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:30:46
 
 #include "E6SSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -79,17 +78,17 @@ Eigen::Matrix<double,2,2> E6SSMEFTHiggs_soft_parameters::calc_beta_TLambda12_1_l
 
    Eigen::Matrix<double,2,2> beta_TLambda12;
 
-   beta_TLambda12 = (oneOver16PiSqr*(0.1*(60*traceAdjKappaTKappa*Lambda12 + 40*
+   beta_TLambda12 = (0.1*(60*traceAdjKappaTKappa*Lambda12 + 40*
       traceAdjLambda12TLambda12*Lambda12 + 12*MassB*Lambda12*Sqr(g1) + 60*
       MassWB*Lambda12*Sqr(g2) + 38*MassBp*Lambda12*Sqr(gN) + 40*Conj(Lambdax)*
       Lambda12*TLambdax + 30*traceKappaAdjKappa*TLambda12 + 20*
       traceLambda12AdjLambda12*TLambda12 + 20*AbsSqr(Lambdax)*TLambda12 - 6*Sqr
       (g1)*TLambda12 - 30*Sqr(g2)*TLambda12 - 19*Sqr(gN)*TLambda12) + 3*(
       Lambda12*(Lambda12).adjoint()*TLambda12) + 3*(TLambda12*(Lambda12).
-      adjoint()*Lambda12))).real();
+      adjoint()*Lambda12)).real();
 
 
-   return beta_TLambda12;
+   return oneLoop * beta_TLambda12;
 }
 
 /**
@@ -123,11 +122,11 @@ Eigen::Matrix<double,2,2> E6SSMEFTHiggs_soft_parameters::calc_beta_TLambda12_2_l
 
    Eigen::Matrix<double,2,2> beta_TLambda12;
 
-   beta_TLambda12 = (twoLoop*(0.005*(-4800*traceKappaAdjKappaTKappaAdjKappa*
-      Lambda12 - 3200*traceLambda12AdjLambda12TLambda12AdjLambda12*Lambda12 -
-      2400*traceAdjYdTYd*AbsSqr(Lambdax)*Lambda12 - 800*traceAdjYeTYe*AbsSqr(
-      Lambdax)*Lambda12 - 2400*traceAdjYuTYu*AbsSqr(Lambdax)*Lambda12 - 4752*
-      MassB*Lambda12*Quad(g1) - 13200*MassWB*Lambda12*Quad(g2) - 15732*MassBp*
+   beta_TLambda12 = (0.005*(-4800*traceKappaAdjKappaTKappaAdjKappa*Lambda12 -
+      3200*traceLambda12AdjLambda12TLambda12AdjLambda12*Lambda12 - 2400*
+      traceAdjYdTYd*AbsSqr(Lambdax)*Lambda12 - 800*traceAdjYeTYe*AbsSqr(Lambdax
+      )*Lambda12 - 2400*traceAdjYuTYu*AbsSqr(Lambdax)*Lambda12 - 4752*MassB*
+      Lambda12*Quad(g1) - 13200*MassWB*Lambda12*Quad(g2) - 15732*MassBp*
       Lambda12*Quad(gN) + 320*traceAdjKappaTKappa*Lambda12*Sqr(g1) + 480*
       traceAdjLambda12TLambda12*Lambda12*Sqr(g1) - 320*MassB*traceKappaAdjKappa
       *Lambda12*Sqr(g1) - 480*MassB*traceLambda12AdjLambda12*Lambda12*Sqr(g1) -
@@ -169,10 +168,10 @@ Eigen::Matrix<double,2,2> E6SSMEFTHiggs_soft_parameters::calc_beta_TLambda12_2_l
       Lambda12).adjoint()*Lambda12*(Lambda12).adjoint()*TLambda12) - 4*(
       Lambda12*(Lambda12).adjoint()*TLambda12*(Lambda12).adjoint()*Lambda12) -
       3*(TLambda12*(Lambda12).adjoint()*Lambda12*(Lambda12).adjoint()*Lambda12)
-      )).real();
+      ).real();
 
 
-   return beta_TLambda12;
+   return twoLoop * beta_TLambda12;
 }
 
 /**
@@ -191,7 +190,7 @@ Eigen::Matrix<double,2,2> E6SSMEFTHiggs_soft_parameters::calc_beta_TLambda12_3_l
    beta_TLambda12 = ZEROMATRIX(2,2);
 
 
-   return beta_TLambda12;
+   return threeLoop * beta_TLambda12;
 }
 
 /**
@@ -210,7 +209,7 @@ Eigen::Matrix<double,2,2> E6SSMEFTHiggs_soft_parameters::calc_beta_TLambda12_4_l
    beta_TLambda12 = ZEROMATRIX(2,2);
 
 
-   return beta_TLambda12;
+   return fourLoop * beta_TLambda12;
 }
 
 /**
@@ -229,7 +228,7 @@ Eigen::Matrix<double,2,2> E6SSMEFTHiggs_soft_parameters::calc_beta_TLambda12_5_l
    beta_TLambda12 = ZEROMATRIX(2,2);
 
 
-   return beta_TLambda12;
+   return fiveLoop * beta_TLambda12;
 }
 
 } // namespace flexiblesusy

@@ -16,13 +16,11 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:48:08
 
 /**
  * @file CMSSMSemiAnalytic_l_to_lgamma.cpp
  *
- * This file was generated at Fri 10 Apr 2020 20:48:08 with FlexibleSUSY
- * 2.4.2 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #include <valarray>
@@ -34,6 +32,8 @@
 #include "cxx_qft/CMSSMSemiAnalytic_qft.hpp"
 #include "CMSSMSemiAnalytic_FFV_form_factors.hpp"
 
+#include "lowe.h"
+#include "physical_input.hpp"
 #include "wrappers.hpp"
 
 namespace flexiblesusy {

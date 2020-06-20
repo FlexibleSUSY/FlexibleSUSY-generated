@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:06:47
 
 #include "CE6SSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -74,11 +73,11 @@ Eigen::Matrix<double,2,2> CE6SSM_soft_parameters::calc_beta_msI2_1_loop(const So
 
    Eigen::Matrix<double,2,2> beta_msI2;
 
-   beta_msI2 = (-0.5*gN*oneOver16PiSqr*(-3.1622776601683795*Tr14 + 10*gN*AbsSqr
-      (MassBp))*UNITMATRIX(2)).real();
+   beta_msI2 = (-0.5*gN*(-3.1622776601683795*Tr14 + 10*gN*AbsSqr(MassBp))*
+      UNITMATRIX(2)).real();
 
 
-   return beta_msI2;
+   return oneLoop * beta_msI2;
 }
 
 /**
@@ -94,11 +93,11 @@ Eigen::Matrix<double,2,2> CE6SSM_soft_parameters::calc_beta_msI2_2_loop(const So
 
    Eigen::Matrix<double,2,2> beta_msI2;
 
-   beta_msI2 = (0.25*gN*twoLoop*(20*gN*Tr2U144 + 25.298221281347036*Tr34 + 639*
-      AbsSqr(MassBp)*Cube(gN))*UNITMATRIX(2)).real();
+   beta_msI2 = (0.25*gN*(20*gN*Tr2U144 + 25.298221281347036*Tr34 + 639*AbsSqr(
+      MassBp)*Cube(gN))*UNITMATRIX(2)).real();
 
 
-   return beta_msI2;
+   return twoLoop * beta_msI2;
 }
 
 /**
@@ -117,7 +116,7 @@ Eigen::Matrix<double,2,2> CE6SSM_soft_parameters::calc_beta_msI2_3_loop(const So
    beta_msI2 = ZEROMATRIX(2,2);
 
 
-   return beta_msI2;
+   return threeLoop * beta_msI2;
 }
 
 /**
@@ -136,7 +135,7 @@ Eigen::Matrix<double,2,2> CE6SSM_soft_parameters::calc_beta_msI2_4_loop(const So
    beta_msI2 = ZEROMATRIX(2,2);
 
 
-   return beta_msI2;
+   return fourLoop * beta_msI2;
 }
 
 /**
@@ -155,7 +154,7 @@ Eigen::Matrix<double,2,2> CE6SSM_soft_parameters::calc_beta_msI2_5_loop(const So
    beta_msI2 = ZEROMATRIX(2,2);
 
 
-   return beta_msI2;
+   return fiveLoop * beta_msI2;
 }
 
 } // namespace flexiblesusy

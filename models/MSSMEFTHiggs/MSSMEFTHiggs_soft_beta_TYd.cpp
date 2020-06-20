@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:49:53
 
 #include "MSSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -77,14 +76,14 @@ Eigen::Matrix<double,3,3> MSSMEFTHiggs_soft_parameters::calc_beta_TYd_1_loop(con
 
    Eigen::Matrix<double,3,3> beta_TYd;
 
-   beta_TYd = (oneOver16PiSqr*(0.06666666666666667*(90*traceAdjYdTYd*Yd + 30*
-      traceAdjYeTYe*Yd + 14*MassB*Yd*Sqr(g1) + 90*MassWB*Yd*Sqr(g2) + 160*MassG
-      *Yd*Sqr(g3) + 45*traceYdAdjYd*TYd + 15*traceYeAdjYe*TYd - 7*Sqr(g1)*TYd -
-      45*Sqr(g2)*TYd - 80*Sqr(g3)*TYd) + 4*(Yd*Yd.adjoint()*TYd) + 2*(Yd*Yu.
-      adjoint()*TYu) + 5*(TYd*Yd.adjoint()*Yd) + TYd*Yu.adjoint()*Yu)).real();
+   beta_TYd = (0.06666666666666667*(90*traceAdjYdTYd*Yd + 30*traceAdjYeTYe*Yd +
+      14*MassB*Yd*Sqr(g1) + 90*MassWB*Yd*Sqr(g2) + 160*MassG*Yd*Sqr(g3) + 45*
+      traceYdAdjYd*TYd + 15*traceYeAdjYe*TYd - 7*Sqr(g1)*TYd - 45*Sqr(g2)*TYd -
+      80*Sqr(g3)*TYd) + 4*(Yd*Yd.adjoint()*TYd) + 2*(Yd*Yu.adjoint()*TYu) + 5*(
+      TYd*Yd.adjoint()*Yd) + TYd*Yu.adjoint()*Yu).real();
 
 
-   return beta_TYd;
+   return oneLoop * beta_TYd;
 }
 
 /**
@@ -111,8 +110,8 @@ Eigen::Matrix<double,3,3> MSSMEFTHiggs_soft_parameters::calc_beta_TYd_2_loop(con
 
    Eigen::Matrix<double,3,3> beta_TYd;
 
-   beta_TYd = (twoLoop*(0.011111111111111112*(-3240*traceYdAdjYdTYdAdjYd*Yd -
-      540*traceYdAdjYuTYuAdjYd*Yd - 1080*traceYeAdjYeTYeAdjYe*Yd - 540*
+   beta_TYd = (0.011111111111111112*(-3240*traceYdAdjYdTYdAdjYd*Yd - 540*
+      traceYdAdjYuTYuAdjYd*Yd - 1080*traceYeAdjYeTYeAdjYe*Yd - 540*
       traceYuAdjYdTYdAdjYu*Yd - 1148*MassB*Yd*Quad(g1) - 2700*MassWB*Yd*Quad(g2
       ) + 640*MassG*Yd*Quad(g3) - 72*traceAdjYdTYd*Yd*Sqr(g1) + 216*
       traceAdjYeTYe*Yd*Sqr(g1) + 72*MassB*traceYdAdjYd*Yd*Sqr(g1) - 216*MassB*
@@ -136,10 +135,10 @@ Eigen::Matrix<double,3,3> MSSMEFTHiggs_soft_parameters::calc_beta_TYd_2_loop(con
       adjoint()*Yu*Yu.adjoint()*TYu) - 4*(Yd*Yu.adjoint()*TYu*Yd.adjoint()*Yd)
       - 4*(Yd*Yu.adjoint()*TYu*Yu.adjoint()*Yu) - 6*(TYd*Yd.adjoint()*Yd*Yd.
       adjoint()*Yd) - 4*(TYd*Yu.adjoint()*Yu*Yd.adjoint()*Yd) - 2*(TYd*Yu.
-      adjoint()*Yu*Yu.adjoint()*Yu))).real();
+      adjoint()*Yu*Yu.adjoint()*Yu)).real();
 
 
-   return beta_TYd;
+   return twoLoop * beta_TYd;
 }
 
 /**
@@ -158,7 +157,7 @@ Eigen::Matrix<double,3,3> MSSMEFTHiggs_soft_parameters::calc_beta_TYd_3_loop(con
    beta_TYd = ZEROMATRIX(3,3);
 
 
-   return beta_TYd;
+   return threeLoop * beta_TYd;
 }
 
 /**
@@ -177,7 +176,7 @@ Eigen::Matrix<double,3,3> MSSMEFTHiggs_soft_parameters::calc_beta_TYd_4_loop(con
    beta_TYd = ZEROMATRIX(3,3);
 
 
-   return beta_TYd;
+   return fourLoop * beta_TYd;
 }
 
 /**
@@ -196,7 +195,7 @@ Eigen::Matrix<double,3,3> MSSMEFTHiggs_soft_parameters::calc_beta_TYd_5_loop(con
    beta_TYd = ZEROMATRIX(3,3);
 
 
-   return beta_TYd;
+   return fiveLoop * beta_TYd;
 }
 
 } // namespace flexiblesusy

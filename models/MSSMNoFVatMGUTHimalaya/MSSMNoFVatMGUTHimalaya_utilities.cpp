@@ -16,10 +16,10 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 17:38:34
 
 #include "MSSMNoFVatMGUTHimalaya_utilities.hpp"
 #include "MSSMNoFVatMGUTHimalaya_input_parameters.hpp"
+#include "MSSMNoFVatMGUTHimalaya_mass_eigenstates.hpp"
 #include "MSSMNoFVatMGUTHimalaya_observables.hpp"
 #include "error.hpp"
 #include "logger.hpp"
@@ -39,7 +39,7 @@
 
 namespace flexiblesusy {
 
-namespace utilities {
+namespace {
 
 template <typename Iterable>
 void append(std::vector<std::string>& a, const Iterable& b)
@@ -54,10 +54,6 @@ void append(Eigen::ArrayXd& a, const Eigen::ArrayXd& b)
    a.block(a_rows, 0, b.rows(), 1) = b;
 }
 
-} // namespace utilities
-
-namespace {
-
 std::valarray<double> to_valarray(double v)
 {
    return std::valarray<double>(&v, 1);
@@ -70,6 +66,88 @@ std::valarray<double> to_valarray(const Eigen::Array<Scalar, M, N>& v)
 }
 
 } // anonymous namespace
+
+// MSSMNoFVatMGUTHimalaya_parameter_getter ////////////////////////////////////////
+
+std::vector<std::string> MSSMNoFVatMGUTHimalaya_parameter_getter::get_mass_names(const std::string& head)
+{
+   using namespace MSSMNoFVatMGUTHimalaya_info;
+
+   std::vector<std::string> masses;
+
+   for (int i = 0; i < NUMBER_OF_PARTICLES; i++) {
+      for (int m = 0; m < particle_multiplicities[i]; m++) {
+         masses.push_back(
+            head + "M" + particle_names[i] +
+            (particle_multiplicities[i] == 1 ? "" : "("
+             + std::to_string(static_cast<long long>(m)) + ")"));
+      }
+   }
+
+   masses.shrink_to_fit();
+
+   return masses;
+}
+
+std::array<std::string, MSSMNoFVatMGUTHimalaya_info::NUMBER_OF_MIXINGS> MSSMNoFVatMGUTHimalaya_parameter_getter::get_mixing_names()
+{
+   return MSSMNoFVatMGUTHimalaya_info::particle_mixing_names;
+}
+
+Eigen::ArrayXd MSSMNoFVatMGUTHimalaya_parameter_getter::get_parameters(const MSSMNoFVatMGUTHimalaya_mass_eigenstates& model)
+{
+   return model.get();
+}
+
+std::array<std::string, MSSMNoFVatMGUTHimalaya_info::NUMBER_OF_PARAMETERS> MSSMNoFVatMGUTHimalaya_parameter_getter::get_parameter_names()
+{
+   return MSSMNoFVatMGUTHimalaya_info::parameter_names;
+}
+
+std::array<std::string, MSSMNoFVatMGUTHimalaya_info::NUMBER_OF_PARTICLES> MSSMNoFVatMGUTHimalaya_parameter_getter::get_particle_names()
+{
+   return MSSMNoFVatMGUTHimalaya_info::particle_names;
+}
+
+std::vector<std::string> MSSMNoFVatMGUTHimalaya_parameter_getter::get_DRbar_mass_names()
+{
+   return get_mass_names();
+}
+
+std::vector<std::string> MSSMNoFVatMGUTHimalaya_parameter_getter::get_pole_mass_names()
+{
+   return get_mass_names("Pole");
+}
+
+std::array<std::string, MSSMNoFVatMGUTHimalaya_info::NUMBER_OF_MIXINGS> MSSMNoFVatMGUTHimalaya_parameter_getter::get_DRbar_mixing_names()
+{
+   return get_mixing_names();
+}
+
+std::array<std::string, MSSMNoFVatMGUTHimalaya_info::NUMBER_OF_MIXINGS> MSSMNoFVatMGUTHimalaya_parameter_getter::get_pole_mixing_names()
+{
+   auto mixing_names = get_mixing_names();
+   for (auto& n: mixing_names)
+      n = std::string("Pole") + n;
+   return mixing_names;
+}
+
+std::array<std::string, MSSMNoFVatMGUTHimalaya_info::NUMBER_OF_INPUT_PARAMETERS> MSSMNoFVatMGUTHimalaya_parameter_getter::get_input_parameter_names()
+{
+   return MSSMNoFVatMGUTHimalaya_info::input_parameter_names;
+}
+
+std::array<std::string, MSSMNoFVatMGUTHimalaya_info::NUMBER_OF_EXTRA_PARAMETERS> MSSMNoFVatMGUTHimalaya_parameter_getter::get_extra_parameter_names()
+{
+   return MSSMNoFVatMGUTHimalaya_info::extra_parameter_names;
+}
+
+decltype(MSSMNoFVatMGUTHimalaya_info::NUMBER_OF_MASSES) MSSMNoFVatMGUTHimalaya_parameter_getter::get_number_of_masses()
+{
+   return MSSMNoFVatMGUTHimalaya_info::NUMBER_OF_MASSES;
+}
+
+// MSSMNoFVatMGUTHimalaya_spectrum_plotter ////////////////////////////////////////
 
 MSSMNoFVatMGUTHimalaya_spectrum_plotter::MSSMNoFVatMGUTHimalaya_spectrum_plotter(const MSSMNoFVatMGUTHimalaya_mass_eigenstates& model)
 {
@@ -195,8 +273,6 @@ void to_database(
    const softsusy::QedQcd* qedqcd, const Physical_input* physical_input,
    const MSSMNoFVatMGUTHimalaya_observables* observables)
 {
-   using utilities::append;
-
    std::vector<std::string> names(9,"");
    Eigen::ArrayXd values(9);
 
@@ -221,25 +297,25 @@ void to_database(
    values(8) = model.get_scale();
 
    // fill input parameters
-   append(names, MSSMNoFVatMGUTHimalaya_parameter_getter().get_input_parameter_names());
+   append(names, MSSMNoFVatMGUTHimalaya_parameter_getter::get_input_parameter_names());
    append(values, model.get_input().get());
 
    // fill DR-bar parameters
-   append(names, MSSMNoFVatMGUTHimalaya_parameter_getter().get_parameter_names());
+   append(names, MSSMNoFVatMGUTHimalaya_parameter_getter::get_parameter_names());
    append(values, model.get());
 
    // fill extra parameters
-   append(names, MSSMNoFVatMGUTHimalaya_parameter_getter().get_extra_parameter_names());
+   append(names, MSSMNoFVatMGUTHimalaya_parameter_getter::get_extra_parameter_names());
    append(values, model.get_extra_parameters());
 
    // fill DR-bar masses and mixings
-   append(names, MSSMNoFVatMGUTHimalaya_parameter_getter().get_DRbar_mass_names());
-   append(names, MSSMNoFVatMGUTHimalaya_parameter_getter().get_DRbar_mixing_names());
+   append(names, MSSMNoFVatMGUTHimalaya_parameter_getter::get_DRbar_mass_names());
+   append(names, MSSMNoFVatMGUTHimalaya_parameter_getter::get_DRbar_mixing_names());
    append(values, model.get_DRbar_masses_and_mixings());
 
    // fill pole masses and mixings
-   append(names, MSSMNoFVatMGUTHimalaya_parameter_getter().get_pole_mass_names());
-   append(names, MSSMNoFVatMGUTHimalaya_parameter_getter().get_pole_mixing_names());
+   append(names, MSSMNoFVatMGUTHimalaya_parameter_getter::get_pole_mass_names());
+   append(names, MSSMNoFVatMGUTHimalaya_parameter_getter::get_pole_mixing_names());
    append(values, model.get_physical().get());
 
    // fill low-energy data (optional)
@@ -302,11 +378,9 @@ MSSMNoFVatMGUTHimalaya_mass_eigenstates from_database(
    const std::string& file_name, long long entry, softsusy::QedQcd* qedqcd,
    Physical_input* physical_input, MSSMNoFVatMGUTHimalaya_observables* observables)
 {
-   using utilities::append;
-
    MSSMNoFVatMGUTHimalaya_mass_eigenstates model;
    const auto number_of_parameters = model.get_number_of_parameters();
-   const auto number_of_masses = MSSMNoFVatMGUTHimalaya_parameter_getter().get_number_of_masses();
+   const auto number_of_masses = MSSMNoFVatMGUTHimalaya_parameter_getter::get_number_of_masses();
    const auto number_of_mixings = MSSMNoFVatMGUTHimalaya_info::NUMBER_OF_MIXINGS;
    const auto number_of_input_parameters = MSSMNoFVatMGUTHimalaya_info::NUMBER_OF_INPUT_PARAMETERS;
    const auto number_of_extra_parameters = MSSMNoFVatMGUTHimalaya_info::NUMBER_OF_EXTRA_PARAMETERS;

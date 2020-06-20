@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:53:09
 
 #include "SplitMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -40,12 +39,12 @@ double SplitMSSM_susy_parameters::calc_beta_gYd_1_loop(const Susy_traces& susy_t
 
    double beta_gYd;
 
-   beta_gYd = Re(0.05*oneOver16PiSqr*(60*g2d*g2u*gYu + 60*gYd*traceYdAdjYd + 20
-      *gYd*traceYeAdjYe + 60*gYd*traceYuAdjYu + 25*Cube(gYd) - 9*gYd*Sqr(g1) -
-      45*gYd*Sqr(g2) + 45*gYd*Sqr(g2d) + 30*gYd*Sqr(g2u) + 40*gYd*Sqr(gYu)));
+   beta_gYd = Re(0.05*(60*g2d*g2u*gYu + 60*gYd*traceYdAdjYd + 20*gYd*
+      traceYeAdjYe + 60*gYd*traceYuAdjYu + 25*Cube(gYd) - 9*gYd*Sqr(g1) - 45*
+      gYd*Sqr(g2) + 45*gYd*Sqr(g2d) + 30*gYd*Sqr(g2u) + 40*gYd*Sqr(gYu)));
 
 
-   return beta_gYd;
+   return oneLoop * beta_gYd;
 }
 
 /**
@@ -66,7 +65,7 @@ double SplitMSSM_susy_parameters::calc_beta_gYd_2_loop(const Susy_traces& susy_t
 
    double beta_gYd;
 
-   beta_gYd = Re(0.00125*twoLoop*(-7200*g2d*g2u*gYu*traceYdAdjYd - 5400*gYd*
+   beta_gYd = Re(0.00125*(-7200*g2d*g2u*gYu*traceYdAdjYd - 5400*gYd*
       traceYdAdjYdYdAdjYd + 1200*gYd*traceYdAdjYuYuAdjYd - 2400*g2d*g2u*gYu*
       traceYeAdjYe - 1800*gYd*traceYeAdjYeYeAdjYe - 7200*g2d*g2u*gYu*
       traceYuAdjYu - 5400*gYd*traceYuAdjYuYuAdjYu - 3600*g2u*gYu*Cube(g2d) -
@@ -91,7 +90,7 @@ double SplitMSSM_susy_parameters::calc_beta_gYd_2_loop(const Susy_traces& susy_t
       gYd*Sqr(g2u)*Sqr(gYu) + 1200*gYd*Sqr(Lambdax)));
 
 
-   return beta_gYd;
+   return twoLoop * beta_gYd;
 }
 
 /**
@@ -110,7 +109,7 @@ double SplitMSSM_susy_parameters::calc_beta_gYd_3_loop(const Susy_traces& susy_t
    beta_gYd = 0;
 
 
-   return beta_gYd;
+   return threeLoop * beta_gYd;
 }
 
 /**
@@ -129,7 +128,7 @@ double SplitMSSM_susy_parameters::calc_beta_gYd_4_loop(const Susy_traces& susy_t
    beta_gYd = 0;
 
 
-   return beta_gYd;
+   return fourLoop * beta_gYd;
 }
 
 /**
@@ -148,7 +147,7 @@ double SplitMSSM_susy_parameters::calc_beta_gYd_5_loop(const Susy_traces& susy_t
    beta_gYd = 0;
 
 
-   return beta_gYd;
+   return fiveLoop * beta_gYd;
 }
 
 } // namespace flexiblesusy

@@ -16,13 +16,11 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:45:20
 
 /**
  * @file NMSSMEFTHiggs_l_to_lgamma.cpp
  *
- * This file was generated at Fri 10 Apr 2020 18:45:20 with FlexibleSUSY
- * 2.4.2 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #include <valarray>
@@ -34,6 +32,8 @@
 #include "cxx_qft/NMSSMEFTHiggs_qft.hpp"
 #include "NMSSMEFTHiggs_FFV_form_factors.hpp"
 
+#include "lowe.h"
+#include "physical_input.hpp"
 #include "wrappers.hpp"
 
 namespace flexiblesusy {

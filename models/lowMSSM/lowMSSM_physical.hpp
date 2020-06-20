@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:35:30
 
 #ifndef lowMSSM_PHYSICAL_H
 #define lowMSSM_PHYSICAL_H

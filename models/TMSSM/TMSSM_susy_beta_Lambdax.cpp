@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:53:53
 
 #include "TMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -40,12 +39,11 @@ double TMSSM_susy_parameters::calc_beta_Lambdax_1_loop(const Susy_traces& susy_t
 
    double beta_Lambdax;
 
-   beta_Lambdax = Re(0.2*oneOver16PiSqr*Lambdax*(15*traceYdAdjYd + 5*
-      traceYeAdjYe + 15*traceYuAdjYu + 20*AbsSqr(Lambdax) - 3*Sqr(g1) - 35*Sqr(
-      g2)));
+   beta_Lambdax = Re(0.2*Lambdax*(15*traceYdAdjYd + 5*traceYeAdjYe + 15*
+      traceYuAdjYu + 20*AbsSqr(Lambdax) - 3*Sqr(g1) - 35*Sqr(g2)));
 
 
-   return beta_Lambdax;
+   return oneLoop * beta_Lambdax;
 }
 
 /**
@@ -66,7 +64,7 @@ double TMSSM_susy_parameters::calc_beta_Lambdax_2_loop(const Susy_traces& susy_t
 
    double beta_Lambdax;
 
-   beta_Lambdax = Re(-0.02*twoLoop*Lambdax*(450*traceYdAdjYdYdAdjYd + 300*
+   beta_Lambdax = Re(-0.02*Lambdax*(450*traceYdAdjYdYdAdjYd + 300*
       traceYdAdjYuYuAdjYd + 150*traceYeAdjYeYeAdjYe + 450*traceYuAdjYuYuAdjYu +
       375*traceYdAdjYd*AbsSqr(Lambdax) + 125*traceYeAdjYe*AbsSqr(Lambdax) + 375
       *traceYuAdjYu*AbsSqr(Lambdax) - 207*Quad(g1) - 2075*Quad(g2) + 20*
@@ -76,7 +74,7 @@ double TMSSM_susy_parameters::calc_beta_Lambdax_2_loop(const Susy_traces& susy_t
       Conj(Lambdax))*Sqr(Lambdax)));
 
 
-   return beta_Lambdax;
+   return twoLoop * beta_Lambdax;
 }
 
 /**
@@ -95,7 +93,7 @@ double TMSSM_susy_parameters::calc_beta_Lambdax_3_loop(const Susy_traces& susy_t
    beta_Lambdax = 0;
 
 
-   return beta_Lambdax;
+   return threeLoop * beta_Lambdax;
 }
 
 /**
@@ -114,7 +112,7 @@ double TMSSM_susy_parameters::calc_beta_Lambdax_4_loop(const Susy_traces& susy_t
    beta_Lambdax = 0;
 
 
-   return beta_Lambdax;
+   return fourLoop * beta_Lambdax;
 }
 
 /**
@@ -133,7 +131,7 @@ double TMSSM_susy_parameters::calc_beta_Lambdax_5_loop(const Susy_traces& susy_t
    beta_Lambdax = 0;
 
 
-   return beta_Lambdax;
+   return fiveLoop * beta_Lambdax;
 }
 
 } // namespace flexiblesusy

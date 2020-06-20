@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:48:02
 
 #ifndef CMSSMSemiAnalytic_SOFT_PARAMETERS_CONSTRAINT_H
 #define CMSSMSemiAnalytic_SOFT_PARAMETERS_CONSTRAINT_H

@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:54:37
 
 #ifndef SplitMSSM_LOW_SCALE_CONSTRAINT_H
 #define SplitMSSM_LOW_SCALE_CONSTRAINT_H

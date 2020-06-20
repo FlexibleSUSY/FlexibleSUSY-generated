@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:06:39
 
 #include "CE6SSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -75,14 +74,14 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_ml2_1_loop(const Sof
 
    Eigen::Matrix<double,3,3> beta_ml2;
 
-   beta_ml2 = (oneOver16PiSqr*(2*mHd2*(Ye.adjoint()*Ye) + 2*((TYe).adjoint()*
-      TYe) + ml2*Ye.adjoint()*Ye + 2*(Ye.adjoint()*me2*Ye) + Ye.adjoint()*Ye*
-      ml2 - 0.2*(3.872983346207417*g1*Tr11 - 3.1622776601683795*gN*Tr14 + 6*
-      AbsSqr(MassB)*Sqr(g1) + 30*AbsSqr(MassWB)*Sqr(g2) + 4*AbsSqr(MassBp)*Sqr(
-      gN))*UNITMATRIX(3))).real();
+   beta_ml2 = (2*mHd2*(Ye.adjoint()*Ye) + 2*((TYe).adjoint()*TYe) + ml2*Ye.
+      adjoint()*Ye + 2*(Ye.adjoint()*me2*Ye) + Ye.adjoint()*Ye*ml2 - 0.2*(
+      3.872983346207417*g1*Tr11 - 3.1622776601683795*gN*Tr14 + 6*AbsSqr(MassB)*
+      Sqr(g1) + 30*AbsSqr(MassWB)*Sqr(g2) + 4*AbsSqr(MassBp)*Sqr(gN))*
+      UNITMATRIX(3)).real();
 
 
-   return beta_ml2;
+   return oneLoop * beta_ml2;
 }
 
 /**
@@ -115,7 +114,7 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_ml2_2_loop(const Sof
 
    Eigen::Matrix<double,3,3> beta_ml2;
 
-   beta_ml2 = (twoLoop*(0.2*(-30*traceconjTYdTpTYd - 10*traceconjTYeTpTYe - 30*
+   beta_ml2 = (0.2*(-30*traceconjTYdTpTYd - 10*traceconjTYeTpTYe - 30*
       tracemd2YdAdjYd - 10*traceme2YeAdjYe - 10*traceml2AdjYeYe - 30*
       tracemq2AdjYdYd - 60*mHd2*traceYdAdjYd - 20*mHd2*traceYeAdjYe - 20*mHd2*
       AbsSqr(Lambdax) - 10*mHu2*AbsSqr(Lambdax) - 10*ms2*AbsSqr(Lambdax) - 10*
@@ -147,10 +146,10 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_ml2_2_loop(const Sof
       MassBp*Conj(MassB)*Sqr(g1)*Sqr(gN) + 18*MassB*Conj(MassBp)*Sqr(g1)*Sqr(gN
       ) + 60*AbsSqr(MassBp)*Sqr(g2)*Sqr(gN) + 60*AbsSqr(MassWB)*Sqr(g2)*Sqr(gN)
       + 30*MassWB*Conj(MassBp)*Sqr(g2)*Sqr(gN) + 30*MassBp*Conj(MassWB)*Sqr(g2)
-      *Sqr(gN))*UNITMATRIX(3))).real();
+      *Sqr(gN))*UNITMATRIX(3)).real();
 
 
-   return beta_ml2;
+   return twoLoop * beta_ml2;
 }
 
 /**
@@ -169,7 +168,7 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_ml2_3_loop(const Sof
    beta_ml2 = ZEROMATRIX(3,3);
 
 
-   return beta_ml2;
+   return threeLoop * beta_ml2;
 }
 
 /**
@@ -188,7 +187,7 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_ml2_4_loop(const Sof
    beta_ml2 = ZEROMATRIX(3,3);
 
 
-   return beta_ml2;
+   return fourLoop * beta_ml2;
 }
 
 /**
@@ -207,7 +206,7 @@ Eigen::Matrix<double,3,3> CE6SSM_soft_parameters::calc_beta_ml2_5_loop(const Sof
    beta_ml2 = ZEROMATRIX(3,3);
 
 
-   return beta_ml2;
+   return fiveLoop * beta_ml2;
 }
 
 } // namespace flexiblesusy

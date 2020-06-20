@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:40:55
 
 /**
  * @file CMSSMNoFV_two_scale_model.cpp
@@ -26,8 +25,7 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Fri 10 Apr 2020 20:40:55 with FlexibleSUSY
- * 2.4.2 (git commit: a94199e5620b8684f5d30d0eece5757a5a72c4a4) and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #include "CMSSMNoFV_two_scale_model.hpp"
@@ -36,39 +34,44 @@ namespace flexiblesusy {
 
 #define CLASSNAME CMSSMNoFV<Two_scale>
 
-CLASSNAME::CMSSMNoFV(const CMSSMNoFV_input_parameters& input_)
-   : CMSSMNoFV_mass_eigenstates(input_)
+CLASSNAME::CMSSMNoFV(const CMSSMNoFV_slha& model_, bool do_convert_masses_to_slha)
+   : CMSSMNoFV_slha(model_, do_convert_masses_to_slha)
+{
+}
+
+CLASSNAME::CMSSMNoFV(const CMSSMNoFV_input_parameters& input_, bool do_convert_masses_to_slha)
+   : CMSSMNoFV_slha(input_, do_convert_masses_to_slha)
 {
 }
 
 void CLASSNAME::calculate_spectrum()
 {
-   CMSSMNoFV_mass_eigenstates::calculate_spectrum();
+   CMSSMNoFV_slha::calculate_spectrum();
 }
 
 void CLASSNAME::clear_problems()
 {
-   CMSSMNoFV_mass_eigenstates::clear_problems();
+   CMSSMNoFV_slha::clear_problems();
 }
 
 std::string CLASSNAME::name() const
 {
-   return CMSSMNoFV_mass_eigenstates::name();
+   return CMSSMNoFV_slha::name();
 }
 
 void CLASSNAME::run_to(double scale, double eps)
 {
-   CMSSMNoFV_mass_eigenstates::run_to(scale, eps);
+   CMSSMNoFV_slha::run_to(scale, eps);
 }
 
 void CLASSNAME::print(std::ostream& out) const
 {
-   CMSSMNoFV_mass_eigenstates::print(out);
+   CMSSMNoFV_slha::print(out);
 }
 
 void CLASSNAME::set_precision(double p)
 {
-   CMSSMNoFV_mass_eigenstates::set_precision(p);
+   CMSSMNoFV_slha::set_precision(p);
 }
 
 std::ostream& operator<<(std::ostream& ostr, const CMSSMNoFV<Two_scale>& model)

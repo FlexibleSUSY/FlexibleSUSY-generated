@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:54:39
 
 #ifndef SplitMSSM_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
 #define SplitMSSM_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
@@ -38,6 +37,8 @@ public:
    SplitMSSM_high_scale_constraint() = default;
    SplitMSSM_high_scale_constraint(SplitMSSM<Two_scale>*);
    virtual ~SplitMSSM_high_scale_constraint() = default;
+   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+
    virtual void apply() override;
    virtual double get_scale() const override;
    virtual std::string name() const override { return "SplitMSSM high-scale constraint"; }

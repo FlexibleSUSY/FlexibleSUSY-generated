@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:35:10
 
 #include "MSSMRHN_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -77,14 +76,13 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_TYe_1_loop(const So
 
    Eigen::Matrix<double,3,3> beta_TYe;
 
-   beta_TYe = (oneOver16PiSqr*(0.2*(30*traceAdjYdTYd*Ye + 10*traceAdjYeTYe*Ye +
-      18*MassB*Ye*Sqr(g1) + 30*MassWB*Ye*Sqr(g2) + 15*traceYdAdjYd*TYe + 5*
-      traceYeAdjYe*TYe - 9*Sqr(g1)*TYe - 15*Sqr(g2)*TYe) + 4*(Ye*Ye.adjoint()*
-      TYe) + 2*(Ye*Yv.adjoint()*TYv) + 5*(TYe*Ye.adjoint()*Ye) + TYe*Yv.adjoint
-      ()*Yv)).real();
+   beta_TYe = (0.2*(30*traceAdjYdTYd*Ye + 10*traceAdjYeTYe*Ye + 18*MassB*Ye*Sqr
+      (g1) + 30*MassWB*Ye*Sqr(g2) + 15*traceYdAdjYd*TYe + 5*traceYeAdjYe*TYe -
+      9*Sqr(g1)*TYe - 15*Sqr(g2)*TYe) + 4*(Ye*Ye.adjoint()*TYe) + 2*(Ye*Yv.
+      adjoint()*TYv) + 5*(TYe*Ye.adjoint()*Ye) + TYe*Yv.adjoint()*Yv).real();
 
 
-   return beta_TYe;
+   return oneLoop * beta_TYe;
 }
 
 /**
@@ -116,22 +114,21 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_TYe_2_loop(const So
 
    Eigen::Matrix<double,3,3> beta_TYe;
 
-   beta_TYe = (twoLoop*(0.1*(-360*traceYdAdjYdTYdAdjYd*Ye - 60*
-      traceYdAdjYuTYuAdjYd*Ye - 120*traceYeAdjYeTYeAdjYe*Ye - 20*
-      traceYeAdjYvTYvAdjYe*Ye - 60*traceYuAdjYdTYdAdjYu*Ye - 20*
-      traceYvAdjYeTYeAdjYv*Ye - 540*MassB*Ye*Quad(g1) - 300*MassWB*Ye*Quad(g2)
-      - 8*traceAdjYdTYd*Ye*Sqr(g1) + 24*traceAdjYeTYe*Ye*Sqr(g1) + 8*MassB*
-      traceYdAdjYd*Ye*Sqr(g1) - 24*MassB*traceYeAdjYe*Ye*Sqr(g1) - 36*MassB*Ye*
-      Sqr(g1)*Sqr(g2) - 36*MassWB*Ye*Sqr(g1)*Sqr(g2) + 320*traceAdjYdTYd*Ye*Sqr
-      (g3) - 320*MassG*traceYdAdjYd*Ye*Sqr(g3) - 90*traceYdAdjYdYdAdjYd*TYe -
-      30*traceYdAdjYuYuAdjYd*TYe - 30*traceYeAdjYeYeAdjYe*TYe - 10*
-      traceYeAdjYvYvAdjYe*TYe + 135*Quad(g1)*TYe + 75*Quad(g2)*TYe - 4*
-      traceYdAdjYd*Sqr(g1)*TYe + 12*traceYeAdjYe*Sqr(g1)*TYe + 18*Sqr(g1)*Sqr(
-      g2)*TYe + 160*traceYdAdjYd*Sqr(g3)*TYe) - 6*(3*traceAdjYdTYd +
-      traceAdjYeTYe + 2*MassWB*Sqr(g2))*(Ye*Ye.adjoint()*Ye) + 0.4*(-30*
-      traceYdAdjYd - 10*traceYeAdjYe + 3*Sqr(g1) + 15*Sqr(g2))*(Ye*Ye.adjoint()
-      *TYe) - 2*(3*traceAdjYuTYu + traceAdjYvTYv)*(Ye*Yv.adjoint()*Yv) - 2*(3*
-      traceYuAdjYu + traceYvAdjYv)*(Ye*Yv.adjoint()*TYv) + 0.2*(-75*
+   beta_TYe = (0.1*(-360*traceYdAdjYdTYdAdjYd*Ye - 60*traceYdAdjYuTYuAdjYd*Ye -
+      120*traceYeAdjYeTYeAdjYe*Ye - 20*traceYeAdjYvTYvAdjYe*Ye - 60*
+      traceYuAdjYdTYdAdjYu*Ye - 20*traceYvAdjYeTYeAdjYv*Ye - 540*MassB*Ye*Quad(
+      g1) - 300*MassWB*Ye*Quad(g2) - 8*traceAdjYdTYd*Ye*Sqr(g1) + 24*
+      traceAdjYeTYe*Ye*Sqr(g1) + 8*MassB*traceYdAdjYd*Ye*Sqr(g1) - 24*MassB*
+      traceYeAdjYe*Ye*Sqr(g1) - 36*MassB*Ye*Sqr(g1)*Sqr(g2) - 36*MassWB*Ye*Sqr(
+      g1)*Sqr(g2) + 320*traceAdjYdTYd*Ye*Sqr(g3) - 320*MassG*traceYdAdjYd*Ye*
+      Sqr(g3) - 90*traceYdAdjYdYdAdjYd*TYe - 30*traceYdAdjYuYuAdjYd*TYe - 30*
+      traceYeAdjYeYeAdjYe*TYe - 10*traceYeAdjYvYvAdjYe*TYe + 135*Quad(g1)*TYe +
+      75*Quad(g2)*TYe - 4*traceYdAdjYd*Sqr(g1)*TYe + 12*traceYeAdjYe*Sqr(g1)*
+      TYe + 18*Sqr(g1)*Sqr(g2)*TYe + 160*traceYdAdjYd*Sqr(g3)*TYe) - 6*(3*
+      traceAdjYdTYd + traceAdjYeTYe + 2*MassWB*Sqr(g2))*(Ye*Ye.adjoint()*Ye) +
+      0.4*(-30*traceYdAdjYd - 10*traceYeAdjYe + 3*Sqr(g1) + 15*Sqr(g2))*(Ye*Ye.
+      adjoint()*TYe) - 2*(3*traceAdjYuTYu + traceAdjYvTYv)*(Ye*Yv.adjoint()*Yv)
+      - 2*(3*traceYuAdjYu + traceYvAdjYv)*(Ye*Yv.adjoint()*TYv) + 0.2*(-75*
       traceYdAdjYd - 25*traceYeAdjYe - 6*Sqr(g1) + 60*Sqr(g2))*(TYe*Ye.adjoint(
       )*Ye) + (-3*traceYuAdjYu - traceYvAdjYv)*(TYe*Yv.adjoint()*Yv) - 6*(Ye*Ye
       .adjoint()*Ye*Ye.adjoint()*TYe) - 8*(Ye*Ye.adjoint()*TYe*Ye.adjoint()*Ye)
@@ -139,10 +136,10 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_TYe_2_loop(const So
       adjoint()*TYv) - 4*(Ye*Yv.adjoint()*TYv*Ye.adjoint()*Ye) - 4*(Ye*Yv.
       adjoint()*TYv*Yv.adjoint()*Yv) - 6*(TYe*Ye.adjoint()*Ye*Ye.adjoint()*Ye)
       - 4*(TYe*Yv.adjoint()*Yv*Ye.adjoint()*Ye) - 2*(TYe*Yv.adjoint()*Yv*Yv.
-      adjoint()*Yv))).real();
+      adjoint()*Yv)).real();
 
 
-   return beta_TYe;
+   return twoLoop * beta_TYe;
 }
 
 /**
@@ -161,7 +158,7 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_TYe_3_loop(const So
    beta_TYe = ZEROMATRIX(3,3);
 
 
-   return beta_TYe;
+   return threeLoop * beta_TYe;
 }
 
 /**
@@ -180,7 +177,7 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_TYe_4_loop(const So
    beta_TYe = ZEROMATRIX(3,3);
 
 
-   return beta_TYe;
+   return fourLoop * beta_TYe;
 }
 
 /**
@@ -199,7 +196,7 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_TYe_5_loop(const So
    beta_TYe = ZEROMATRIX(3,3);
 
 
-   return beta_TYe;
+   return fiveLoop * beta_TYe;
 }
 
 } // namespace flexiblesusy

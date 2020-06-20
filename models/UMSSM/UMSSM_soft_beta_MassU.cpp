@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:18:36
 
 #include "UMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -82,12 +81,11 @@ double UMSSM_soft_parameters::calc_beta_MassU_1_loop(const Soft_traces& soft_tra
 
    double beta_MassU;
 
-   beta_MassU = Re(2*MassU*oneOver16PiSqr*Sqr(gp)*(9*Sqr(Qd) + 3*Sqr(Qe) + 2*
-      Sqr(QHd) + 2*Sqr(QHu) + 6*Sqr(Ql) + 18*Sqr(Qq) + Sqr(Qs) + 9*Sqr(Qu) + 3*
-      Sqr(Qv)));
+   beta_MassU = Re(2*MassU*Sqr(gp)*(9*Sqr(Qd) + 3*Sqr(Qe) + 2*Sqr(QHd) + 2*Sqr(
+      QHu) + 6*Sqr(Ql) + 18*Sqr(Qq) + Sqr(Qs) + 9*Sqr(Qu) + 3*Sqr(Qv)));
 
 
-   return beta_MassU;
+   return oneLoop * beta_MassU;
 }
 
 /**
@@ -118,14 +116,14 @@ double UMSSM_soft_parameters::calc_beta_MassU_2_loop(const Soft_traces& soft_tra
 
    double beta_MassU;
 
-   beta_MassU = Re(0.8*twoLoop*Sqr(gp)*(180*MassU*Quad(Qd)*Sqr(gp) + 60*MassU*
-      Quad(Qe)*Sqr(gp) + 40*MassU*Quad(QHd)*Sqr(gp) + 40*MassU*Quad(QHu)*Sqr(gp
-      ) + 120*MassU*Quad(Ql)*Sqr(gp) + 360*MassU*Quad(Qq)*Sqr(gp) + 20*MassU*
-      Quad(Qs)*Sqr(gp) + 180*MassU*Quad(Qu)*Sqr(gp) + 60*MassU*Quad(Qv)*Sqr(gp)
-      + 30*traceAdjYdTYd*Sqr(Qd) - 30*MassU*traceYdAdjYd*Sqr(Qd) + 6*MassB*Sqr(
-      g1)*Sqr(Qd) + 6*MassU*Sqr(g1)*Sqr(Qd) + 120*MassG*Sqr(g3)*Sqr(Qd) + 120*
-      MassU*Sqr(g3)*Sqr(Qd) + 10*traceAdjYeTYe*Sqr(Qe) - 10*MassU*traceYeAdjYe*
-      Sqr(Qe) + 18*MassB*Sqr(g1)*Sqr(Qe) + 18*MassU*Sqr(g1)*Sqr(Qe) + 30*
+   beta_MassU = Re(0.8*Sqr(gp)*(180*MassU*Quad(Qd)*Sqr(gp) + 60*MassU*Quad(Qe)*
+      Sqr(gp) + 40*MassU*Quad(QHd)*Sqr(gp) + 40*MassU*Quad(QHu)*Sqr(gp) + 120*
+      MassU*Quad(Ql)*Sqr(gp) + 360*MassU*Quad(Qq)*Sqr(gp) + 20*MassU*Quad(Qs)*
+      Sqr(gp) + 180*MassU*Quad(Qu)*Sqr(gp) + 60*MassU*Quad(Qv)*Sqr(gp) + 30*
+      traceAdjYdTYd*Sqr(Qd) - 30*MassU*traceYdAdjYd*Sqr(Qd) + 6*MassB*Sqr(g1)*
+      Sqr(Qd) + 6*MassU*Sqr(g1)*Sqr(Qd) + 120*MassG*Sqr(g3)*Sqr(Qd) + 120*MassU
+      *Sqr(g3)*Sqr(Qd) + 10*traceAdjYeTYe*Sqr(Qe) - 10*MassU*traceYeAdjYe*Sqr(
+      Qe) + 18*MassB*Sqr(g1)*Sqr(Qe) + 18*MassU*Sqr(g1)*Sqr(Qe) + 30*
       traceAdjYdTYd*Sqr(QHd) + 10*traceAdjYeTYe*Sqr(QHd) - 30*MassU*
       traceYdAdjYd*Sqr(QHd) - 10*MassU*traceYeAdjYe*Sqr(QHd) - 10*MassU*AbsSqr(
       Lambdax)*Sqr(QHd) + 3*MassB*Sqr(g1)*Sqr(QHd) + 3*MassU*Sqr(g1)*Sqr(QHd) +
@@ -148,7 +146,7 @@ double UMSSM_soft_parameters::calc_beta_MassU_2_loop(const Soft_traces& soft_tra
       (Lambdax)*Sqr(QHu)*TLambdax + 10*Conj(Lambdax)*Sqr(Qs)*TLambdax));
 
 
-   return beta_MassU;
+   return twoLoop * beta_MassU;
 }
 
 /**
@@ -167,7 +165,7 @@ double UMSSM_soft_parameters::calc_beta_MassU_3_loop(const Soft_traces& soft_tra
    beta_MassU = 0;
 
 
-   return beta_MassU;
+   return threeLoop * beta_MassU;
 }
 
 /**
@@ -186,7 +184,7 @@ double UMSSM_soft_parameters::calc_beta_MassU_4_loop(const Soft_traces& soft_tra
    beta_MassU = 0;
 
 
-   return beta_MassU;
+   return fourLoop * beta_MassU;
 }
 
 /**
@@ -205,7 +203,7 @@ double UMSSM_soft_parameters::calc_beta_MassU_5_loop(const Soft_traces& soft_tra
    beta_MassU = 0;
 
 
-   return beta_MassU;
+   return fiveLoop * beta_MassU;
 }
 
 } // namespace flexiblesusy

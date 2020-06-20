@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:02:04
 
 #ifndef E6SSM_soft_parameters_H
 #define E6SSM_soft_parameters_H

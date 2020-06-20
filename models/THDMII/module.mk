@@ -23,16 +23,18 @@ THDMII_SUSY_BETAS_MK := \
 THDMII_SOFT_BETAS_MK := \
 		$(DIR)/soft_betas.mk
 
-THDMII_CXX_QFT_VERTICES_MK := \
+THDMII_CXXQFT_VERTICES_MK := \
 		$(DIR)/cxx_qft/vertices.mk
+
+-include $(THDMII_CXXQFT_VERTICES_MK)
+LIBTHDMII_CXXQFT_VERTICES_SRC ?= ''
 
 THDMII_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
 THDMII_INCLUDE_MK := \
 		$(THDMII_SUSY_BETAS_MK) \
-		$(THDMII_SOFT_BETAS_MK) \
-		$(THDMII_CXX_QFT_VERTICES_MK)
+		$(THDMII_SOFT_BETAS_MK)
 
 THDMII_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.THDMII_generated \
@@ -52,11 +54,15 @@ LIBTHDMII_SRC := \
 		$(DIR)/THDMII_a_muon.cpp \
 		$(DIR)/THDMII_edm.cpp \
 		$(DIR)/THDMII_FFV_form_factors.cpp \
+		$(DIR)/THDMII_f_to_f_conversion.cpp \
 		$(DIR)/THDMII_l_to_lgamma.cpp \
+		$(DIR)/THDMII_b_to_s_gamma.cpp \
 		$(DIR)/THDMII_effective_couplings.cpp \
 		$(DIR)/THDMII_info.cpp \
 		$(DIR)/THDMII_input_parameters.cpp \
 		$(DIR)/THDMII_mass_eigenstates.cpp \
+		$(DIR)/THDMII_mass_eigenstates_decoupling_scheme.cpp \
+		$(DIR)/THDMII_model_slha.cpp \
 		$(DIR)/THDMII_observables.cpp \
 		$(DIR)/THDMII_physical.cpp \
 		$(DIR)/THDMII_slha_io.cpp \
@@ -64,6 +70,8 @@ LIBTHDMII_SRC := \
 		$(DIR)/THDMII_susy_parameters.cpp \
 		$(DIR)/THDMII_utilities.cpp \
 		$(DIR)/THDMII_weinberg_angle.cpp
+
+LIBTHDMII_SRC += $(LIBTHDMII_CXXQFT_VERTICES_SRC)
 
 EXETHDMII_SRC := \
 		$(DIR)/run_THDMII.cpp \
@@ -83,7 +91,9 @@ LIBTHDMII_HDR := \
 		$(DIR)/THDMII_convergence_tester.hpp \
 		$(DIR)/THDMII_edm.hpp \
 		$(DIR)/THDMII_FFV_form_factors.hpp \
+		$(DIR)/THDMII_f_to_f_conversion.hpp \
 		$(DIR)/THDMII_l_to_lgamma.hpp \
+		$(DIR)/THDMII_b_to_s_gamma.hpp \
 		$(DIR)/THDMII_effective_couplings.hpp \
 		$(DIR)/THDMII_ewsb_solver.hpp \
 		$(DIR)/THDMII_ewsb_solver_interface.hpp \
@@ -93,6 +103,8 @@ LIBTHDMII_HDR := \
 		$(DIR)/THDMII_input_parameters.hpp \
 		$(DIR)/THDMII_low_scale_constraint.hpp \
 		$(DIR)/THDMII_mass_eigenstates.hpp \
+		$(DIR)/THDMII_mass_eigenstates_interface.hpp \
+		$(DIR)/THDMII_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/THDMII_model.hpp \
 		$(DIR)/THDMII_model_slha.hpp \
 		$(DIR)/THDMII_observables.hpp \
@@ -111,7 +123,7 @@ LIBTHDMII_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/THDMII_fields.hpp \
 		$(DIR)/cxx_qft/THDMII_vertices.hpp \
 		$(DIR)/cxx_qft/THDMII_context_base.hpp \
-		$(DIR)/cxx_qft/THDMII_npointfunctions.hpp
+		$(DIR)/cxx_qft/THDMII_npointfunctions_wilsoncoeffs.hpp
 
 ifneq ($(findstring two_scale,$(SOLVERS)),)
 -include $(DIR)/two_scale.mk
@@ -129,7 +141,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(THDMII_SUSY_BETAS_MK)
 -include $(THDMII_SOFT_BETAS_MK)
--include $(THDMII_CXX_QFT_VERTICES_MK)
+-include $(THDMII_CXXQFT_VERTICES_MK)
 -include $(THDMII_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
@@ -141,7 +153,7 @@ $(THDMII_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(THDMII_SOFT_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
-$(THDMII_CXX_QFT_VERTICES_MK): run-metacode-$(MODNAME)
+$(THDMII_CXXQFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(THDMII_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
@@ -206,6 +218,7 @@ install-src::
 		$(Q)install -d $(THDMII_INSTALL_DIR)
 		$(Q)install -d $(THDMII_INSTALL_CXXQFT_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(LIBTHDMII_SRC) $(THDMII_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBTHDMII_CXXQFT_VERTICES_SRC) $(THDMII_INSTALL_CXXQFT_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(LIBTHDMII_HDR) $(THDMII_INSTALL_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(LIBTHDMII_CXXQFT_HDR) $(THDMII_INSTALL_CXXQFT_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(EXETHDMII_SRC) $(THDMII_INSTALL_DIR)
@@ -213,6 +226,8 @@ install-src::
 		$(Q)install -m u=rw,g=r,o=r $(LLTHDMII_MMA) $(THDMII_INSTALL_DIR)
 		$(Q)$(INSTALL_STRIPPED) $(THDMII_MK) $(THDMII_INSTALL_DIR) -m u=rw,g=r,o=r
 		$(Q)install -m u=rw,g=r,o=r $(THDMII_INCLUDE_MK) $(THDMII_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(THDMII_CXXQFT_VERTICES_MK) $(THDMII_INSTALL_CXXQFT_DIR)
+
 ifneq ($(THDMII_SLHA_INPUT),)
 		$(Q)install -m u=rw,g=r,o=r $(THDMII_SLHA_INPUT) $(THDMII_INSTALL_DIR)
 endif
@@ -244,6 +259,7 @@ clean-$(MODNAME)-src:
 		$(Q)-rm -f $(LLTHDMII_MMA)
 		$(Q)-rm -f $(METACODE_STAMP_THDMII)
 		$(Q)-rm -f $(THDMII_INCLUDE_MK)
+		$(Q)-rm -f $(THDMII_CXXQFT_VERTICES_MK)
 		$(Q)-rm -f $(THDMII_SLHA_INPUT)
 		$(Q)-rm -f $(THDMII_REFERENCES)
 		$(Q)-rm -f $(THDMII_GNUPLOT)
@@ -270,7 +286,7 @@ pack-$(MODNAME)-src:
 		$(LIBTHDMII_SRC) $(LIBTHDMII_HDR) $(LIBTHDMII_CXXQFT_HDR) \
 		$(EXETHDMII_SRC) \
 		$(LLTHDMII_SRC) $(LLTHDMII_MMA) \
-		$(THDMII_MK) $(THDMII_INCLUDE_MK) \
+		$(THDMII_MK) $(THDMII_INCLUDE_MK) $(THDMII_CXXQFT_VERTICES_MK) \
 		$(THDMII_SLHA_INPUT) $(THDMII_REFERENCES) \
 		$(THDMII_GNUPLOT)
 
@@ -296,7 +312,7 @@ $(METACODE_STAMP_THDMII):
 endif
 
 $(LIBTHDMII_DEP) $(EXETHDMII_DEP) $(LLTHDMII_DEP) $(LIBTHDMII_OBJ) $(EXETHDMII_OBJ) $(LLTHDMII_OBJ) $(LLTHDMII_LIB): \
-	CPPFLAGS += $(MODTHDMII_SUBMOD_INC) $(MODTHDMII_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODTHDMII_SUBMOD_INC) $(MODTHDMII_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS)  $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBTHDMII_DEP) $(EXETHDMII_DEP) $(LLTHDMII_DEP) $(LIBTHDMII_OBJ) $(EXETHDMII_OBJ) $(LLTHDMII_OBJ) $(LLTHDMII_LIB): \
@@ -310,13 +326,13 @@ $(LIBTHDMII): $(LIBTHDMII_OBJ)
 		@$(MSG)
 		$(Q)$(MODULE_MAKE_LIB_CMD) $@ $^
 
-$(DIR)/%.x: $(DIR)/%.o $(LIBTHDMII) $(MODTHDMII_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+$(DIR)/%.x: $(DIR)/%.o $(LIBTHDMII) $(MODTHDMII_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
-$(LLTHDMII_LIB): $(LLTHDMII_OBJ) $(LIBTHDMII) $(MODTHDMII_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+$(LLTHDMII_LIB): $(LLTHDMII_OBJ) $(LIBTHDMII) $(MODTHDMII_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS)
 
 ALLDEP += $(LIBTHDMII_DEP) $(EXETHDMII_DEP)
 ALLSRC += $(LIBTHDMII_SRC) $(EXETHDMII_SRC)

@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:44:17
 
 #include "NMSSMEFTHiggs_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -79,15 +78,15 @@ double NMSSMEFTHiggs_soft_parameters::calc_beta_TLambdax_1_loop(const Soft_trace
 
    double beta_TLambdax;
 
-   beta_TLambdax = Re(0.2*oneOver16PiSqr*(30*traceAdjYdTYd*Lambdax + 10*
-      traceAdjYeTYe*Lambdax + 30*traceAdjYuTYu*Lambdax + 6*MassB*Lambdax*Sqr(g1
-      ) + 30*MassWB*Lambdax*Sqr(g2) + 20*Conj(Kappa)*Lambdax*TKappa + 15*
-      traceYdAdjYd*TLambdax + 5*traceYeAdjYe*TLambdax + 15*traceYuAdjYu*
-      TLambdax + 10*AbsSqr(Kappa)*TLambdax + 60*AbsSqr(Lambdax)*TLambdax - 3*
-      Sqr(g1)*TLambdax - 15*Sqr(g2)*TLambdax));
+   beta_TLambdax = Re(0.2*(30*traceAdjYdTYd*Lambdax + 10*traceAdjYeTYe*Lambdax
+      + 30*traceAdjYuTYu*Lambdax + 6*MassB*Lambdax*Sqr(g1) + 30*MassWB*Lambdax*
+      Sqr(g2) + 20*Conj(Kappa)*Lambdax*TKappa + 15*traceYdAdjYd*TLambdax + 5*
+      traceYeAdjYe*TLambdax + 15*traceYuAdjYu*TLambdax + 10*AbsSqr(Kappa)*
+      TLambdax + 60*AbsSqr(Lambdax)*TLambdax - 3*Sqr(g1)*TLambdax - 15*Sqr(g2)*
+      TLambdax));
 
 
-   return beta_TLambdax;
+   return oneLoop * beta_TLambdax;
 }
 
 /**
@@ -116,7 +115,7 @@ double NMSSMEFTHiggs_soft_parameters::calc_beta_TLambdax_2_loop(const Soft_trace
 
    double beta_TLambdax;
 
-   beta_TLambdax = Re(0.02*twoLoop*(-1800*traceYdAdjYdTYdAdjYd*Lambdax - 600*
+   beta_TLambdax = Re(0.02*(-1800*traceYdAdjYdTYdAdjYd*Lambdax - 600*
       traceYdAdjYuTYuAdjYd*Lambdax - 600*traceYeAdjYeTYeAdjYe*Lambdax - 600*
       traceYuAdjYdTYdAdjYu*Lambdax - 1800*traceYuAdjYuTYuAdjYu*Lambdax - 828*
       MassB*Lambdax*Quad(g1) - 1500*MassWB*Lambdax*Quad(g2) - 40*traceAdjYdTYd*
@@ -144,7 +143,7 @@ double NMSSMEFTHiggs_soft_parameters::calc_beta_TLambdax_2_loop(const Soft_trace
       Lambdax))*Sqr(Lambdax)*TLambdax));
 
 
-   return beta_TLambdax;
+   return twoLoop * beta_TLambdax;
 }
 
 /**
@@ -163,7 +162,7 @@ double NMSSMEFTHiggs_soft_parameters::calc_beta_TLambdax_3_loop(const Soft_trace
    beta_TLambdax = 0;
 
 
-   return beta_TLambdax;
+   return threeLoop * beta_TLambdax;
 }
 
 /**
@@ -182,7 +181,7 @@ double NMSSMEFTHiggs_soft_parameters::calc_beta_TLambdax_4_loop(const Soft_trace
    beta_TLambdax = 0;
 
 
-   return beta_TLambdax;
+   return fourLoop * beta_TLambdax;
 }
 
 /**
@@ -201,7 +200,7 @@ double NMSSMEFTHiggs_soft_parameters::calc_beta_TLambdax_5_loop(const Soft_trace
    beta_TLambdax = 0;
 
 
-   return beta_TLambdax;
+   return fiveLoop * beta_TLambdax;
 }
 
 } // namespace flexiblesusy

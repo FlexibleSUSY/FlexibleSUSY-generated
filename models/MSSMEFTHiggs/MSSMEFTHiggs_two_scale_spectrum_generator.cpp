@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:54:52
 
 #include "MSSMEFTHiggs_two_scale_spectrum_generator.hpp"
 #include "MSSMEFTHiggs_two_scale_convergence_tester.hpp"
@@ -136,6 +135,9 @@ void MSSMEFTHiggs_spectrum_generator<Two_scale>::run_except(const softsusy::QedQ
 
    susy_scale_constraint.initialize();
    low_scale_constraint .initialize();
+
+   low_scale_constraint.set_SM_like_Higgs_index(
+      settings.get(Spectrum_generator_settings::eft_higgs_index));
 
    // convergence tester for MSSMEFTHiggs
    MSSMEFTHiggs_convergence_tester<Two_scale> model_ct(

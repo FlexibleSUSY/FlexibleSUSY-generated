@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:53:08
 
 #include "SplitMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -40,13 +39,13 @@ Eigen::Matrix<double,3,3> SplitMSSM_susy_parameters::calc_beta_Yu_1_loop(const S
 
    Eigen::Matrix<double,3,3> beta_Yu;
 
-   beta_Yu = (oneOver16PiSqr*(-0.05*Yu*(-60*traceYdAdjYd - 20*traceYeAdjYe - 60
-      *traceYuAdjYu + 17*Sqr(g1) + 45*Sqr(g2) - 30*Sqr(g2d) - 30*Sqr(g2u) + 160
-      *Sqr(g3) - 10*Sqr(gYd) - 10*Sqr(gYu)) - 1.5*(Yu*Yd.adjoint()*Yd) + 1.5*(
-      Yu*Yu.adjoint()*Yu))).real();
+   beta_Yu = (-0.05*Yu*(-60*traceYdAdjYd - 20*traceYeAdjYe - 60*traceYuAdjYu +
+      17*Sqr(g1) + 45*Sqr(g2) - 30*Sqr(g2d) - 30*Sqr(g2u) + 160*Sqr(g3) - 10*
+      Sqr(gYd) - 10*Sqr(gYu)) - 1.5*(Yu*Yd.adjoint()*Yd) + 1.5*(Yu*Yu.adjoint()
+      *Yu)).real();
 
 
-   return beta_Yu;
+   return oneLoop * beta_Yu;
 }
 
 /**
@@ -67,7 +66,7 @@ Eigen::Matrix<double,3,3> SplitMSSM_susy_parameters::calc_beta_Yu_2_loop(const S
 
    Eigen::Matrix<double,3,3> beta_Yu;
 
-   beta_Yu = (twoLoop*(0.0008333333333333334*Yu*(-3600*g2d*g2u*gYd*gYu - 8100*
+   beta_Yu = (0.0008333333333333334*Yu*(-3600*g2d*g2u*gYd*gYu - 8100*
       traceYdAdjYdYdAdjYd + 1800*traceYdAdjYuYuAdjYd - 2700*traceYeAdjYeYeAdjYe
        - 8100*traceYuAdjYuYuAdjYu + 2606*Quad(g1) - 5100*Quad(g2) - 3375*Quad(
       g2d) - 3375*Quad(g2u) - 113600*Quad(g3) - 675*Quad(gYd) - 675*Quad(gYu) +
@@ -86,11 +85,11 @@ Eigen::Matrix<double,3,3> SplitMSSM_susy_parameters::calc_beta_Yu_2_loop(const S
       223*Sqr(g1) + 675*Sqr(g2) - 270*Sqr(g2d) - 270*Sqr(g2u) + 1280*Sqr(g3) -
       90*Sqr(gYd) - 90*Sqr(gYu))*(Yu*Yu.adjoint()*Yu) + 2.75*(Yu*Yd.adjoint()*
       Yd*Yd.adjoint()*Yd) - 0.25*(Yu*Yd.adjoint()*Yd*Yu.adjoint()*Yu) - Yu*Yu.
-      adjoint()*Yu*Yd.adjoint()*Yd + 1.5*(Yu*Yu.adjoint()*Yu*Yu.adjoint()*Yu)))
-      .real();
+      adjoint()*Yu*Yd.adjoint()*Yd + 1.5*(Yu*Yu.adjoint()*Yu*Yu.adjoint()*Yu)).
+      real();
 
 
-   return beta_Yu;
+   return twoLoop * beta_Yu;
 }
 
 /**
@@ -109,7 +108,7 @@ Eigen::Matrix<double,3,3> SplitMSSM_susy_parameters::calc_beta_Yu_3_loop(const S
    beta_Yu = ZEROMATRIX(3,3);
 
 
-   return beta_Yu;
+   return threeLoop * beta_Yu;
 }
 
 /**
@@ -128,7 +127,7 @@ Eigen::Matrix<double,3,3> SplitMSSM_susy_parameters::calc_beta_Yu_4_loop(const S
    beta_Yu = ZEROMATRIX(3,3);
 
 
-   return beta_Yu;
+   return fourLoop * beta_Yu;
 }
 
 /**
@@ -147,7 +146,7 @@ Eigen::Matrix<double,3,3> SplitMSSM_susy_parameters::calc_beta_Yu_5_loop(const S
    beta_Yu = ZEROMATRIX(3,3);
 
 
-   return beta_Yu;
+   return fiveLoop * beta_Yu;
 }
 
 } // namespace flexiblesusy

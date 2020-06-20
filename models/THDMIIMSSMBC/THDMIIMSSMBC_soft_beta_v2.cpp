@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:42:52
 
 #include "THDMIIMSSMBC_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -74,10 +73,10 @@ double THDMIIMSSMBC_soft_parameters::calc_beta_v2_1_loop(const Soft_traces& soft
 
    double beta_v2;
 
-   beta_v2 = Re(0.6*oneOver16PiSqr*v2*(-5*traceYuAdjYu + Sqr(g1) + 5*Sqr(g2)));
+   beta_v2 = Re(0.6*v2*(-5*traceYuAdjYu + Sqr(g1) + 5*Sqr(g2)));
 
 
-   return beta_v2;
+   return oneLoop * beta_v2;
 }
 
 /**
@@ -94,22 +93,22 @@ double THDMIIMSSMBC_soft_parameters::calc_beta_v2_2_loop(const Soft_traces& soft
 
    double beta_v2;
 
-   beta_v2 = Re(0.00125*twoLoop*(-1200*Lambda1*Lambda6*v1 - 600*Lambda3*Lambda6
-      *v1 - 600*Lambda4*Lambda6*v1 - 600*Lambda5*Lambda6*v1 - 1200*Lambda2*
-      Lambda7*v1 - 600*Lambda3*Lambda7*v1 - 600*Lambda4*Lambda7*v1 - 600*
-      Lambda5*Lambda7*v1 - 800*Lambda3*Lambda4*v2 + 1800*traceYdAdjYuYuAdjYd*v2
-       + 5400*traceYuAdjYuYuAdjYu*v2 - 1200*v2*AbsSqr(Lambda5) - 1200*v2*AbsSqr
-      (Lambda6) - 3600*v2*AbsSqr(Lambda7) - 1200*Lambda1*v1*Conj(Lambda6) - 600
-      *Lambda3*v1*Conj(Lambda6) - 600*Lambda4*v1*Conj(Lambda6) - 600*v1*Conj(
-      Lambda5)*Conj(Lambda6) - 1200*Lambda2*v1*Conj(Lambda7) - 600*Lambda3*v1*
-      Conj(Lambda7) - 600*Lambda4*v1*Conj(Lambda7) - 600*v1*Conj(Lambda5)*Conj(
+   beta_v2 = Re(0.00125*(-1200*Lambda1*Lambda6*v1 - 600*Lambda3*Lambda6*v1 -
+      600*Lambda4*Lambda6*v1 - 600*Lambda5*Lambda6*v1 - 1200*Lambda2*Lambda7*v1
+       - 600*Lambda3*Lambda7*v1 - 600*Lambda4*Lambda7*v1 - 600*Lambda5*Lambda7*
+      v1 - 800*Lambda3*Lambda4*v2 + 1800*traceYdAdjYuYuAdjYd*v2 + 5400*
+      traceYuAdjYuYuAdjYu*v2 - 1200*v2*AbsSqr(Lambda5) - 1200*v2*AbsSqr(Lambda6
+      ) - 3600*v2*AbsSqr(Lambda7) - 1200*Lambda1*v1*Conj(Lambda6) - 600*Lambda3
+      *v1*Conj(Lambda6) - 600*Lambda4*v1*Conj(Lambda6) - 600*v1*Conj(Lambda5)*
+      Conj(Lambda6) - 1200*Lambda2*v1*Conj(Lambda7) - 600*Lambda3*v1*Conj(
+      Lambda7) - 600*Lambda4*v1*Conj(Lambda7) - 600*v1*Conj(Lambda5)*Conj(
       Lambda7) - 1287*v2*Quad(g1) + 8925*v2*Quad(g2) - 2420*traceYuAdjYu*v2*Sqr
       (g1) - 8100*traceYuAdjYu*v2*Sqr(g2) + 450*v2*Sqr(g1)*Sqr(g2) - 16000*
       traceYuAdjYu*v2*Sqr(g3) - 4800*v2*Sqr(Lambda2) - 800*v2*Sqr(Lambda3) -
       800*v2*Sqr(Lambda4)));
 
 
-   return beta_v2;
+   return twoLoop * beta_v2;
 }
 
 /**
@@ -128,7 +127,7 @@ double THDMIIMSSMBC_soft_parameters::calc_beta_v2_3_loop(const Soft_traces& soft
    beta_v2 = 0;
 
 
-   return beta_v2;
+   return threeLoop * beta_v2;
 }
 
 /**
@@ -147,7 +146,7 @@ double THDMIIMSSMBC_soft_parameters::calc_beta_v2_4_loop(const Soft_traces& soft
    beta_v2 = 0;
 
 
-   return beta_v2;
+   return fourLoop * beta_v2;
 }
 
 /**
@@ -166,7 +165,7 @@ double THDMIIMSSMBC_soft_parameters::calc_beta_v2_5_loop(const Soft_traces& soft
    beta_v2 = 0;
 
 
-   return beta_v2;
+   return fiveLoop * beta_v2;
 }
 
 } // namespace flexiblesusy

@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:24:19
 
 #ifndef HTHDMIIMSSMBC_EWSB_SOLVER_H
 #define HTHDMIIMSSMBC_EWSB_SOLVER_H

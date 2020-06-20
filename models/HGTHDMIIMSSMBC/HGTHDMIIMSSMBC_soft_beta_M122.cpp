@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:25:50
 
 #include "HGTHDMIIMSSMBC_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -76,15 +75,14 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_M122_1_loop(const Soft_traces& 
 
    double beta_M122;
 
-   beta_M122 = Re(0.1*oneOver16PiSqr*(-60*Lambda6*M112 + 20*Lambda3*M122 + 40*
-      Lambda4*M122 - 60*Lambda7*M222 + 30*M122*traceYdAdjYd + 10*M122*
-      traceYeAdjYe + 30*M122*traceYuAdjYu + 60*Conj(Lambda5)*Conj(M122) + 20*
-      g1dp*g2up*MassB*Mu + 60*g1d*g2u*MassWB*Mu - 9*M122*Sqr(g1) + 15*M122*Sqr(
-      g1d) + 5*M122*Sqr(g1dp) - 45*M122*Sqr(g2) + 15*M122*Sqr(g2u) + 5*M122*Sqr
-      (g2up)));
+   beta_M122 = Re(0.1*(-60*Lambda6*M112 + 20*Lambda3*M122 + 40*Lambda4*M122 -
+      60*Lambda7*M222 + 30*M122*traceYdAdjYd + 10*M122*traceYeAdjYe + 30*M122*
+      traceYuAdjYu + 60*Conj(Lambda5)*Conj(M122) + 20*g1dp*g2up*MassB*Mu + 60*
+      g1d*g2u*MassWB*Mu - 9*M122*Sqr(g1) + 15*M122*Sqr(g1d) + 5*M122*Sqr(g1dp)
+      - 45*M122*Sqr(g2) + 15*M122*Sqr(g2u) + 5*M122*Sqr(g2up)));
 
 
-   return beta_M122;
+   return oneLoop * beta_M122;
 }
 
 /**
@@ -105,15 +103,15 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_M122_2_loop(const Soft_traces& 
 
    double beta_M122;
 
-   const double beta_M122_1 = Re(0.0025*twoLoop*(13200*Lambda1*Lambda6*M112 +
-      4200*Lambda3*Lambda6*M112 + 4200*Lambda4*Lambda6*M112 - 1200*Lambda2*
-      Lambda7*M112 + 1800*Lambda3*Lambda7*M112 + 1800*Lambda4*Lambda7*M112 +
-      2400*g1d*g1dp*g2u*g2up*M122 - 4800*Lambda1*Lambda3*M122 - 4800*Lambda2*
-      Lambda3*M122 - 4800*Lambda1*Lambda4*M122 - 4800*Lambda2*Lambda4*M122 -
-      2400*Lambda3*Lambda4*M122 - 1200*Lambda1*Lambda6*M222 + 1800*Lambda3*
-      Lambda6*M222 + 1800*Lambda4*Lambda6*M222 + 13200*Lambda2*Lambda7*M222 +
-      4200*Lambda3*Lambda7*M222 + 4200*Lambda4*Lambda7*M222 + 14400*Lambda6*
-      M112*traceYdAdjYd - 2400*Lambda3*M122*traceYdAdjYd - 4800*Lambda4*M122*
+   const double beta_M122_1 = Re(0.0025*(13200*Lambda1*Lambda6*M112 + 4200*
+      Lambda3*Lambda6*M112 + 4200*Lambda4*Lambda6*M112 - 1200*Lambda2*Lambda7*
+      M112 + 1800*Lambda3*Lambda7*M112 + 1800*Lambda4*Lambda7*M112 + 2400*g1d*
+      g1dp*g2u*g2up*M122 - 4800*Lambda1*Lambda3*M122 - 4800*Lambda2*Lambda3*
+      M122 - 4800*Lambda1*Lambda4*M122 - 4800*Lambda2*Lambda4*M122 - 2400*
+      Lambda3*Lambda4*M122 - 1200*Lambda1*Lambda6*M222 + 1800*Lambda3*Lambda6*
+      M222 + 1800*Lambda4*Lambda6*M222 + 13200*Lambda2*Lambda7*M222 + 4200*
+      Lambda3*Lambda7*M222 + 4200*Lambda4*Lambda7*M222 + 14400*Lambda6*M112*
+      traceYdAdjYd - 2400*Lambda3*M122*traceYdAdjYd - 4800*Lambda4*M122*
       traceYdAdjYd - 2700*M122*traceYdAdjYdYdAdjYd - 6600*M122*
       traceYdAdjYuYuAdjYd + 4800*Lambda6*M112*traceYeAdjYe - 800*Lambda3*M122*
       traceYeAdjYe - 1600*Lambda4*M122*traceYeAdjYe - 900*M122*
@@ -149,13 +147,13 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_M122_2_loop(const Soft_traces& 
       Sqr(g2up) - 450*M122*Sqr(g2u)*Sqr(g2up) + 8000*M122*traceYdAdjYd*Sqr(g3)
       + 8000*M122*traceYuAdjYu*Sqr(g3) + 2400*M122*Sqr(Lambda1) + 2400*M122*Sqr
       (Lambda2)));
-   const double beta_M122_2 = Re(0.3*twoLoop*(10*M122*AbsSqr(Lambda5) - 40*
-      Lambda7*M122*Conj(Lambda6) + 35*M112*Conj(Lambda5)*Conj(Lambda6) + 15*
-      M222*Conj(Lambda5)*Conj(Lambda6) - 40*Lambda6*M122*Conj(Lambda7) + 15*
-      M112*Conj(Lambda5)*Conj(Lambda7) + 35*M222*Conj(Lambda5)*Conj(Lambda7) -
-      40*Lambda6*Lambda7*Conj(M122) - 40*Lambda1*Conj(Lambda5)*Conj(M122) - 40*
-      Lambda2*Conj(Lambda5)*Conj(M122) - 40*Lambda3*Conj(Lambda5)*Conj(M122) -
-      40*Lambda4*Conj(Lambda5)*Conj(M122) - 60*traceYdAdjYd*Conj(Lambda5)*Conj(
+   const double beta_M122_2 = Re(0.3*(10*M122*AbsSqr(Lambda5) - 40*Lambda7*M122
+      *Conj(Lambda6) + 35*M112*Conj(Lambda5)*Conj(Lambda6) + 15*M222*Conj(
+      Lambda5)*Conj(Lambda6) - 40*Lambda6*M122*Conj(Lambda7) + 15*M112*Conj(
+      Lambda5)*Conj(Lambda7) + 35*M222*Conj(Lambda5)*Conj(Lambda7) - 40*Lambda6
+      *Lambda7*Conj(M122) - 40*Lambda1*Conj(Lambda5)*Conj(M122) - 40*Lambda2*
+      Conj(Lambda5)*Conj(M122) - 40*Lambda3*Conj(Lambda5)*Conj(M122) - 40*
+      Lambda4*Conj(Lambda5)*Conj(M122) - 60*traceYdAdjYd*Conj(Lambda5)*Conj(
       M122) - 20*traceYeAdjYe*Conj(Lambda5)*Conj(M122) - 60*traceYuAdjYu*Conj(
       Lambda5)*Conj(M122) - 20*g1dp*g2up*Conj(Lambda5)*Conj(MassB)*Mu - 60*g1d*
       g2u*Conj(Lambda5)*Conj(MassWB)*Mu + 24*Conj(Lambda5)*Conj(M122)*Sqr(g1) -
@@ -167,7 +165,7 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_M122_2_loop(const Soft_traces& 
    beta_M122 = beta_M122_1 + beta_M122_2;
 
 
-   return beta_M122;
+   return twoLoop * beta_M122;
 }
 
 /**
@@ -186,7 +184,7 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_M122_3_loop(const Soft_traces& 
    beta_M122 = 0;
 
 
-   return beta_M122;
+   return threeLoop * beta_M122;
 }
 
 /**
@@ -205,7 +203,7 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_M122_4_loop(const Soft_traces& 
    beta_M122 = 0;
 
 
-   return beta_M122;
+   return fourLoop * beta_M122;
 }
 
 /**
@@ -224,7 +222,7 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_M122_5_loop(const Soft_traces& 
    beta_M122 = 0;
 
 
-   return beta_M122;
+   return fiveLoop * beta_M122;
 }
 
 } // namespace flexiblesusy

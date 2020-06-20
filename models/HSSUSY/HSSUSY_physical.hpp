@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:46:34
 
 #ifndef HSSUSY_PHYSICAL_H
 #define HSSUSY_PHYSICAL_H

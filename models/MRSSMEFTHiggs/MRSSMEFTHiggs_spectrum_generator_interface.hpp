@@ -16,11 +16,11 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:26:59
 
 #ifndef MRSSMEFTHiggs_SPECTRUM_GENERATOR_INTERFACE_H
 #define MRSSMEFTHiggs_SPECTRUM_GENERATOR_INTERFACE_H
 
+#include "MRSSMEFTHiggs_info.hpp"
 #include "MRSSMEFTHiggs_mass_eigenstates.hpp"
 #include "MRSSMEFTHiggs_model.hpp"
 #include "MRSSMEFTHiggs_model_slha.hpp"
@@ -49,15 +49,15 @@ public:
 
    std::tuple<MRSSMEFTHiggs<T>, standard_model::StandardModel<T>> get_models() const
    { return std::make_tuple(model, eft); }
-   std::tuple<MRSSMEFTHiggs_slha<MRSSMEFTHiggs<T>>, standard_model::StandardModel<T>> get_models_slha() const
-   { return std::make_tuple(MRSSMEFTHiggs_slha<MRSSMEFTHiggs<T>>(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.), eft); }
+   std::tuple<MRSSMEFTHiggs<T>, standard_model::StandardModel<T>> get_models_slha() const
+   { return std::make_tuple(MRSSMEFTHiggs<T>(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.), eft); }
 
    const MRSSMEFTHiggs<T>& get_model() const
    { return model; }
    MRSSMEFTHiggs<T>& get_model()
    { return model; }
-   MRSSMEFTHiggs_slha<MRSSMEFTHiggs<T>> get_model_slha() const
-   { return MRSSMEFTHiggs_slha<MRSSMEFTHiggs<T>>(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.); }
+   MRSSMEFTHiggs<T> get_model_slha() const
+   { return MRSSMEFTHiggs<T>(model, settings.get(Spectrum_generator_settings::force_positive_masses) == 0.); }
 
    const standard_model::StandardModel<T>& get_sm() const
    { return eft; }
@@ -154,10 +154,17 @@ void MRSSMEFTHiggs_spectrum_generator_interface<T>::write_running_couplings(
       return;
    }
 
-   MRSSMEFTHiggs_parameter_getter parameter_getter;
-   Coupling_monitor<MRSSMEFTHiggs_mass_eigenstates, MRSSMEFTHiggs_parameter_getter>
-      coupling_monitor(tmp_model, parameter_getter);
+   // returns parameters at given scale
+   auto data_getter = [&tmp_model](double scale) {
+      tmp_model.run_to(scale);
+      return MRSSMEFTHiggs_parameter_getter::get_parameters(tmp_model);
+   };
 
+   std::vector<std::string> parameter_names(
+      std::cbegin(MRSSMEFTHiggs_info::parameter_names),
+      std::cend(MRSSMEFTHiggs_info::parameter_names));
+
+   Coupling_monitor coupling_monitor(data_getter, parameter_names);
    coupling_monitor.run(start, stop, 100, true);
    coupling_monitor.write_to_file(filename);
 }

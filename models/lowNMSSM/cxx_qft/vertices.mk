@@ -17,5 +17,5 @@
 #  ====================================================================
 
 
-LIBlowNMSSM_SRC += \
+LIBlowNMSSM_CXXQFT_VERTICES_SRC := \
 	models/lowNMSSM/cxx_qft/lowNMSSM_vertices_1.cpp

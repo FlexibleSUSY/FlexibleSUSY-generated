@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:20:28
 
 #ifndef lowNMSSMTanBetaAtMZ_soft_parameters_H
 #define lowNMSSMTanBetaAtMZ_soft_parameters_H

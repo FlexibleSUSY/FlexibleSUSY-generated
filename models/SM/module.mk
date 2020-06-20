@@ -23,16 +23,18 @@ SM_SUSY_BETAS_MK := \
 SM_SOFT_BETAS_MK := \
 		$(DIR)/soft_betas.mk
 
-SM_CXX_QFT_VERTICES_MK := \
+SM_CXXQFT_VERTICES_MK := \
 		$(DIR)/cxx_qft/vertices.mk
+
+-include $(SM_CXXQFT_VERTICES_MK)
+LIBSM_CXXQFT_VERTICES_SRC ?= ''
 
 SM_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
 SM_INCLUDE_MK := \
 		$(SM_SUSY_BETAS_MK) \
-		$(SM_SOFT_BETAS_MK) \
-		$(SM_CXX_QFT_VERTICES_MK)
+		$(SM_SOFT_BETAS_MK)
 
 SM_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.SM_generated \
@@ -52,11 +54,15 @@ LIBSM_SRC := \
 		$(DIR)/SM_a_muon.cpp \
 		$(DIR)/SM_edm.cpp \
 		$(DIR)/SM_FFV_form_factors.cpp \
+		$(DIR)/SM_f_to_f_conversion.cpp \
 		$(DIR)/SM_l_to_lgamma.cpp \
+		$(DIR)/SM_b_to_s_gamma.cpp \
 		$(DIR)/SM_effective_couplings.cpp \
 		$(DIR)/SM_info.cpp \
 		$(DIR)/SM_input_parameters.cpp \
 		$(DIR)/SM_mass_eigenstates.cpp \
+		$(DIR)/SM_mass_eigenstates_decoupling_scheme.cpp \
+		$(DIR)/SM_model_slha.cpp \
 		$(DIR)/SM_observables.cpp \
 		$(DIR)/SM_physical.cpp \
 		$(DIR)/SM_slha_io.cpp \
@@ -64,6 +70,8 @@ LIBSM_SRC := \
 		$(DIR)/SM_susy_parameters.cpp \
 		$(DIR)/SM_utilities.cpp \
 		$(DIR)/SM_weinberg_angle.cpp
+
+LIBSM_SRC += $(LIBSM_CXXQFT_VERTICES_SRC)
 
 EXESM_SRC := \
 		$(DIR)/run_SM.cpp \
@@ -83,7 +91,9 @@ LIBSM_HDR := \
 		$(DIR)/SM_convergence_tester.hpp \
 		$(DIR)/SM_edm.hpp \
 		$(DIR)/SM_FFV_form_factors.hpp \
+		$(DIR)/SM_f_to_f_conversion.hpp \
 		$(DIR)/SM_l_to_lgamma.hpp \
+		$(DIR)/SM_b_to_s_gamma.hpp \
 		$(DIR)/SM_effective_couplings.hpp \
 		$(DIR)/SM_ewsb_solver.hpp \
 		$(DIR)/SM_ewsb_solver_interface.hpp \
@@ -93,6 +103,8 @@ LIBSM_HDR := \
 		$(DIR)/SM_input_parameters.hpp \
 		$(DIR)/SM_low_scale_constraint.hpp \
 		$(DIR)/SM_mass_eigenstates.hpp \
+		$(DIR)/SM_mass_eigenstates_interface.hpp \
+		$(DIR)/SM_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/SM_model.hpp \
 		$(DIR)/SM_model_slha.hpp \
 		$(DIR)/SM_observables.hpp \
@@ -111,7 +123,7 @@ LIBSM_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/SM_fields.hpp \
 		$(DIR)/cxx_qft/SM_vertices.hpp \
 		$(DIR)/cxx_qft/SM_context_base.hpp \
-		$(DIR)/cxx_qft/SM_npointfunctions.hpp
+		$(DIR)/cxx_qft/SM_npointfunctions_wilsoncoeffs.hpp
 
 ifneq ($(findstring two_scale,$(SOLVERS)),)
 -include $(DIR)/two_scale.mk
@@ -129,7 +141,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(SM_SUSY_BETAS_MK)
 -include $(SM_SOFT_BETAS_MK)
--include $(SM_CXX_QFT_VERTICES_MK)
+-include $(SM_CXXQFT_VERTICES_MK)
 -include $(SM_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
@@ -141,7 +153,7 @@ $(SM_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(SM_SOFT_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
-$(SM_CXX_QFT_VERTICES_MK): run-metacode-$(MODNAME)
+$(SM_CXXQFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(SM_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
@@ -206,6 +218,7 @@ install-src::
 		$(Q)install -d $(SM_INSTALL_DIR)
 		$(Q)install -d $(SM_INSTALL_CXXQFT_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(LIBSM_SRC) $(SM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(LIBSM_CXXQFT_VERTICES_SRC) $(SM_INSTALL_CXXQFT_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(LIBSM_HDR) $(SM_INSTALL_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(LIBSM_CXXQFT_HDR) $(SM_INSTALL_CXXQFT_DIR)
 		$(Q)install -m u=rw,g=r,o=r $(EXESM_SRC) $(SM_INSTALL_DIR)
@@ -213,6 +226,8 @@ install-src::
 		$(Q)install -m u=rw,g=r,o=r $(LLSM_MMA) $(SM_INSTALL_DIR)
 		$(Q)$(INSTALL_STRIPPED) $(SM_MK) $(SM_INSTALL_DIR) -m u=rw,g=r,o=r
 		$(Q)install -m u=rw,g=r,o=r $(SM_INCLUDE_MK) $(SM_INSTALL_DIR)
+		$(Q)install -m u=rw,g=r,o=r $(SM_CXXQFT_VERTICES_MK) $(SM_INSTALL_CXXQFT_DIR)
+
 ifneq ($(SM_SLHA_INPUT),)
 		$(Q)install -m u=rw,g=r,o=r $(SM_SLHA_INPUT) $(SM_INSTALL_DIR)
 endif
@@ -244,6 +259,7 @@ clean-$(MODNAME)-src:
 		$(Q)-rm -f $(LLSM_MMA)
 		$(Q)-rm -f $(METACODE_STAMP_SM)
 		$(Q)-rm -f $(SM_INCLUDE_MK)
+		$(Q)-rm -f $(SM_CXXQFT_VERTICES_MK)
 		$(Q)-rm -f $(SM_SLHA_INPUT)
 		$(Q)-rm -f $(SM_REFERENCES)
 		$(Q)-rm -f $(SM_GNUPLOT)
@@ -270,7 +286,7 @@ pack-$(MODNAME)-src:
 		$(LIBSM_SRC) $(LIBSM_HDR) $(LIBSM_CXXQFT_HDR) \
 		$(EXESM_SRC) \
 		$(LLSM_SRC) $(LLSM_MMA) \
-		$(SM_MK) $(SM_INCLUDE_MK) \
+		$(SM_MK) $(SM_INCLUDE_MK) $(SM_CXXQFT_VERTICES_MK) \
 		$(SM_SLHA_INPUT) $(SM_REFERENCES) \
 		$(SM_GNUPLOT)
 
@@ -296,7 +312,7 @@ $(METACODE_STAMP_SM):
 endif
 
 $(LIBSM_DEP) $(EXESM_DEP) $(LLSM_DEP) $(LIBSM_OBJ) $(EXESM_OBJ) $(LLSM_OBJ) $(LLSM_LIB): \
-	CPPFLAGS += $(MODSM_SUBMOD_INC) $(MODSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(TSILFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODSM_SUBMOD_INC) $(MODSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS)  $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBSM_DEP) $(EXESM_DEP) $(LLSM_DEP) $(LIBSM_OBJ) $(EXESM_OBJ) $(LLSM_OBJ) $(LLSM_LIB): \
@@ -310,13 +326,13 @@ $(LIBSM): $(LIBSM_OBJ)
 		@$(MSG)
 		$(Q)$(MODULE_MAKE_LIB_CMD) $@ $^
 
-$(DIR)/%.x: $(DIR)/%.o $(LIBSM) $(MODSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+$(DIR)/%.x: $(DIR)/%.o $(LIBSM) $(MODSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
-$(LLSM_LIB): $(LLSM_OBJ) $(LIBSM) $(MODSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS))
+$(LLSM_LIB): $(LLSM_OBJ) $(LIBSM) $(MODSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(BOOSTTHREADLIBS) $(FLIBS) $(SQLITELIBS) $(TSILLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS)
 
 ALLDEP += $(LIBSM_DEP) $(EXESM_DEP)
 ALLSRC += $(LIBSM_SRC) $(EXESM_SRC)

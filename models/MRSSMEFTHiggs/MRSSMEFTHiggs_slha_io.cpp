@@ -16,13 +16,19 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:26:59
 
 #include "MRSSMEFTHiggs_slha_io.hpp"
 #include "MRSSMEFTHiggs_input_parameters.hpp"
+#include "MRSSMEFTHiggs_mass_eigenstates.hpp"
+#include "MRSSMEFTHiggs_model_slha.hpp"
+#include "MRSSMEFTHiggs_observables.hpp"
+#include "MRSSMEFTHiggs_physical.hpp"
+#include "ew_input.hpp"
 #include "logger.hpp"
-#include "wrappers.hpp"
 #include "numerics2.hpp"
+#include "spectrum_generator_problems.hpp"
+#include "standard_model.hpp"
+#include "wrappers.hpp"
 #include "config.h"
 
 #include <array>
@@ -35,11 +41,14 @@
 #define PHYSICAL(p) model.get_physical().p
 #define PHYSICAL_SLHA(p) model.get_physical_slha().p
 #define LOCALPHYSICAL(p) physical.p
+#define MODEL model
 #define MODELPARAMETER(p) model.get_##p()
 #define INPUTPARAMETER(p) input.p
 #define EXTRAPARAMETER(p) model.get_##p()
+#define OBSERVABLES observables
 #define DEFINE_PHYSICAL_PARAMETER(p) decltype(LOCALPHYSICAL(p)) p;
 #define LowEnergyConstant(p) Electroweak_constants::p
+#define SCALES(p) scales.p
 
 namespace flexiblesusy {
 
@@ -57,6 +66,16 @@ void MRSSMEFTHiggs_slha_io::clear()
 void MRSSMEFTHiggs_slha_io::set_print_imaginary_parts_of_majorana_mixings(bool flag)
 {
    print_imaginary_parts_of_majorana_mixings = flag;
+}
+
+/**
+ * Reads DR-bar parameters, pole masses and mixing matrices from a
+ * SLHA output file.
+ */
+void MRSSMEFTHiggs_slha_io::fill(MRSSMEFTHiggs_slha& model) const
+{
+   fill(static_cast<MRSSMEFTHiggs_mass_eigenstates&>(model));
+   fill_physical(model.get_physical_slha());
 }
 
 /**
@@ -396,6 +415,76 @@ void MRSSMEFTHiggs_slha_io::set_pmns(
    slha_io.set_block("IMVPMNS", pmns_matrix.imag(), "Im(PMNS)", scale);
 }
 
+/**
+ * Stores the model (DR-bar) parameters in the SLHA object.
+ *
+ * @param model model class
+ */
+void MRSSMEFTHiggs_slha_io::set_model_parameters(const MRSSMEFTHiggs_slha& model)
+{
+   {
+      std::ostringstream block;
+      block << "Block gauge Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(1, (MODELPARAMETER(g1) * 0.7745966692414834), "g1 * 0.7745966692414834")
+            << FORMAT_ELEMENT(2, (MODELPARAMETER(g2)), "g2")
+            << FORMAT_ELEMENT(3, (MODELPARAMETER(g3)), "g3")
+      ;
+      slha_io.set_block(block);
+   }
+   slha_io.set_block("Yu", ToMatrix(MODELPARAMETER(Yu_slha)), "Yu", model.get_scale());
+   slha_io.set_block("Yd", ToMatrix(MODELPARAMETER(Yd_slha)), "Yd", model.get_scale());
+   slha_io.set_block("Ye", ToMatrix(MODELPARAMETER(Ye_slha)), "Ye", model.get_scale());
+   {
+      std::ostringstream block;
+      block << "Block HMIX Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(1, (MODELPARAMETER(Mu)), "Mu")
+            << FORMAT_ELEMENT(101, (MODELPARAMETER(BMu)), "BMu")
+            << FORMAT_ELEMENT(102, (MODELPARAMETER(vd)), "vd")
+            << FORMAT_ELEMENT(103, (MODELPARAMETER(vu)), "vu")
+            << FORMAT_ELEMENT(310, (MODELPARAMETER(vT)), "vT")
+            << FORMAT_ELEMENT(201, (MODELPARAMETER(MuD)), "MuD")
+            << FORMAT_ELEMENT(202, (MODELPARAMETER(MuU)), "MuU")
+            << FORMAT_ELEMENT(203, (MODELPARAMETER(BMuD)), "BMuD")
+            << FORMAT_ELEMENT(204, (MODELPARAMETER(BMuU)), "BMuU")
+            << FORMAT_ELEMENT(301, (MODELPARAMETER(LamSD)), "LamSD")
+            << FORMAT_ELEMENT(302, (MODELPARAMETER(LamSU)), "LamSU")
+            << FORMAT_ELEMENT(303, (MODELPARAMETER(LamTD)), "LamTD")
+            << FORMAT_ELEMENT(304, (MODELPARAMETER(LamTU)), "LamTU")
+      ;
+      slha_io.set_block(block);
+   }
+   slha_io.set_block("MSQ2", MODELPARAMETER(mq2_slha), "mq2", model.get_scale());
+   slha_io.set_block("MSE2", MODELPARAMETER(me2_slha), "me2", model.get_scale());
+   slha_io.set_block("MSL2", MODELPARAMETER(ml2_slha), "ml2", model.get_scale());
+   slha_io.set_block("MSU2", MODELPARAMETER(mu2_slha), "mu2", model.get_scale());
+   slha_io.set_block("MSD2", MODELPARAMETER(md2_slha), "md2", model.get_scale());
+   {
+      std::ostringstream block;
+      block << "Block MSOFT Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(21, (MODELPARAMETER(mHd2)), "mHd2")
+            << FORMAT_ELEMENT(22, (MODELPARAMETER(mHu2)), "mHu2")
+            << FORMAT_ELEMENT(110, (MODELPARAMETER(mT2)), "mT2")
+            << FORMAT_ELEMENT(111, (MODELPARAMETER(moc2)), "moc2")
+            << FORMAT_ELEMENT(300, (MODELPARAMETER(MDBS)), "MDBS")
+            << FORMAT_ELEMENT(301, (MODELPARAMETER(MDWBT)), "MDWBT")
+            << FORMAT_ELEMENT(302, (MODELPARAMETER(MDGoc)), "MDGoc")
+            << FORMAT_ELEMENT(50, (MODELPARAMETER(mRd2)), "mRd2")
+            << FORMAT_ELEMENT(51, (MODELPARAMETER(mRu2)), "mRu2")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block NMSSMRUN Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(10, (MODELPARAMETER(mS2)), "mS2")
+            << FORMAT_ELEMENT(5, (MODELPARAMETER(vS)), "vS")
+      ;
+      slha_io.set_block(block);
+   }
+
+
+}
+
 void MRSSMEFTHiggs_slha_io::set_model_parameters(const standard_model::Standard_model& model)
 {
    {
@@ -474,6 +563,52 @@ void MRSSMEFTHiggs_slha_io::set_spectrum(const standard_model::Standard_model& m
 }
 
 /**
+ * Stores the model (DR-bar) parameters, masses and mixing matrices in
+ * the SLHA object.
+ *
+ * @param model model class in SLHA convention
+ */
+void MRSSMEFTHiggs_slha_io::set_spectrum(const MRSSMEFTHiggs_slha& model)
+{
+   const MRSSMEFTHiggs_physical physical(model.get_physical_slha());
+   const bool write_sm_masses = model.do_calculate_sm_pole_masses();
+
+   set_model_parameters(model);
+   set_mass(physical, write_sm_masses);
+   set_mixing_matrices(physical, write_sm_masses);
+
+   if (slha_io.get_modsel().quark_flavour_violated)
+      set_ckm(model.get_ckm_matrix(), model.get_scale());
+
+   if (slha_io.get_modsel().lepton_flavour_violated)
+      set_pmns(model.get_pmns_matrix(), model.get_scale());
+}
+
+/**
+ * Writes extra SLHA blocks
+ *
+ * @param model model class
+ * @param scales struct of boundary condition scales
+ * @param observables struct of observables
+ */
+void MRSSMEFTHiggs_slha_io::set_extra(
+   const MRSSMEFTHiggs_slha& model,
+   const MRSSMEFTHiggs_scales& scales,
+   const MRSSMEFTHiggs_observables& observables)
+{
+   const MRSSMEFTHiggs_physical physical(model.get_physical_slha());
+
+   {
+      std::ostringstream block;
+      block << "Block FlexibleSUSYLowEnergy Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(21, (OBSERVABLES.a_muon), "Delta(g-2)_muon/2 FlexibleSUSY")
+      ;
+      slha_io.set_block(block);
+   }
+
+}
+
+/**
  * Write SLHA object to given output.  If output == "-", then the SLHA
  * object is written to std::cout.  Otherwise, output is interpreted
  * as a file name
@@ -486,6 +621,21 @@ void MRSSMEFTHiggs_slha_io::write_to(const std::string& output) const
       write_to_stream(std::cout);
    else
       write_to_file(output);
+}
+
+void MRSSMEFTHiggs_slha_io::write_to_file(const std::string& file_name) const
+{
+   slha_io.write_to_file(file_name);
+}
+
+void MRSSMEFTHiggs_slha_io::write_to_stream() const
+{
+   write_to_stream(std::cout);
+}
+
+void MRSSMEFTHiggs_slha_io::write_to_stream(std::ostream& ostr) const
+{
+   slha_io.write_to_stream(ostr);
 }
 
 /**
@@ -536,19 +686,19 @@ void MRSSMEFTHiggs_slha_io::read_from_stream(std::istream& istr)
  */
 void MRSSMEFTHiggs_slha_io::fill(MRSSMEFTHiggs_input_parameters& input) const
 {
-   SLHA_io::Tuple_processor minpar_processor = [&input, this] (int key, double value) {
+   SLHA_io::Tuple_processor minpar_processor = [&input] (int key, double value) {
       return fill_minpar_tuple(input, key, value);
    };
 
-   SLHA_io::Tuple_processor extpar_processor = [&input, this] (int key, double value) {
+   SLHA_io::Tuple_processor extpar_processor = [&input] (int key, double value) {
       return fill_extpar_tuple(input, key, value);
    };
 
-   SLHA_io::Tuple_processor imminpar_processor = [&input, this] (int key, double value) {
+   SLHA_io::Tuple_processor imminpar_processor = [&input] (int key, double value) {
       return fill_imminpar_tuple(input, key, value);
    };
 
-   SLHA_io::Tuple_processor imextpar_processor = [&input, this] (int key, double value) {
+   SLHA_io::Tuple_processor imextpar_processor = [&input] (int key, double value) {
       return fill_imextpar_tuple(input, key, value);
    };
 

@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:02:40
 
 #ifndef TMSSM_EWSB_SOLVER_H
 #define TMSSM_EWSB_SOLVER_H

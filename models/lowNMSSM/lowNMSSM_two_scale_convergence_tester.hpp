@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:23:29
 
 #ifndef lowNMSSM_TWO_SCALE_CONVERGENCE_TESTER_H
 #define lowNMSSM_TWO_SCALE_CONVERGENCE_TESTER_H

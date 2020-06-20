@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:48:01
 
 #include "CMSSMSemiAnalytic_semi_analytic_convergence_tester.hpp"
 #include <array>

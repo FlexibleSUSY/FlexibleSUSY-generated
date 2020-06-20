@@ -19,8 +19,7 @@
 /**
  * @file THDMII_FFV_form_factors.cpp
  *
- * This file was generated at Fri 10 Apr 2020 19:46:08 with FlexibleSUSY
- * 2.4.2 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #include <complex>
@@ -92,6 +91,23 @@ struct FFV_FFS {
 
 namespace flexiblesusy {
 namespace THDMII_FFV_form_factors {
+std::valarray<std::complex<double>> calculate_Fe_Fe_VP_form_factors (
+   int generationIndex1, int generationIndex2,
+   const THDMII_mass_eigenstates& model, bool discard_SM_contributions) {
+
+   context_base context {model};
+   std::array<int, 1> indices1 = {generationIndex1 };
+   std::array<int, 1> indices2 = {generationIndex2 };
+
+   std::valarray<std::complex<double>> val {0.0, 0.0, 0.0, 0.0};
+
+   val += std::complex<double> {1., 0.} * FFV_FFS<Fe,Fe,VP,Fe,Fe,Ah>::value(indices1, indices2, context, discard_SM_contributions);
+   val += std::complex<double> {1., 0.} * FFV_FFS<Fe,Fe,VP,Fe,Fe,hh>::value(indices1, indices2, context, discard_SM_contributions);
+   val += std::complex<double> {1., 0.} * FFV_SSF<Fe,Fe,VP,Hm,Hm,Fv>::value(indices1, indices2, context, discard_SM_contributions);
+
+   return val;
+}
+
 
 }
 } // namespace flexiblesusy

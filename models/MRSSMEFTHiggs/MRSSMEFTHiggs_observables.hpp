@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:27:37
 
 #ifndef MRSSMEFTHiggs_OBSERVABLES_H
 #define MRSSMEFTHiggs_OBSERVABLES_H

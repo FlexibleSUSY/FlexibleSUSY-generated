@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:54:15
 
 #include "TMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -74,13 +73,13 @@ Eigen::Matrix<double,3,3> TMSSM_soft_parameters::calc_beta_mu2_1_loop(const Soft
 
    Eigen::Matrix<double,3,3> beta_mu2;
 
-   beta_mu2 = (oneOver16PiSqr*(4*mHu2*(Yu*Yu.adjoint()) + 4*(TYu*(TYu).adjoint(
-      )) + 2*(mu2*Yu*Yu.adjoint()) + 4*(Yu*mq2*Yu.adjoint()) + 2*(Yu*Yu.adjoint
-      ()*mu2) - 0.26666666666666666*(3.872983346207417*g1*Tr11 + 8*AbsSqr(MassB
-      )*Sqr(g1) + 40*AbsSqr(MassG)*Sqr(g3))*UNITMATRIX(3))).real();
+   beta_mu2 = (4*mHu2*(Yu*Yu.adjoint()) + 4*(TYu*(TYu).adjoint()) + 2*(mu2*Yu*
+      Yu.adjoint()) + 4*(Yu*mq2*Yu.adjoint()) + 2*(Yu*Yu.adjoint()*mu2) -
+      0.26666666666666666*(3.872983346207417*g1*Tr11 + 8*AbsSqr(MassB)*Sqr(g1)
+      + 40*AbsSqr(MassG)*Sqr(g3))*UNITMATRIX(3)).real();
 
 
-   return beta_mu2;
+   return oneLoop * beta_mu2;
 }
 
 /**
@@ -103,7 +102,7 @@ Eigen::Matrix<double,3,3> TMSSM_soft_parameters::calc_beta_mu2_2_loop(const Soft
 
    Eigen::Matrix<double,3,3> beta_mu2;
 
-   beta_mu2 = (twoLoop*(-0.4*(30*traceconjTYuTpTYu + 30*tracemq2AdjYuYu + 30*
+   beta_mu2 = (-0.4*(30*traceconjTYuTpTYu + 30*tracemq2AdjYuYu + 30*
       tracemu2YuAdjYu + 60*mHu2*traceYuAdjYu + 15*mHd2*AbsSqr(Lambdax) + 30*
       mHu2*AbsSqr(Lambdax) + 15*mT2*AbsSqr(Lambdax) + 15*AbsSqr(TLambdax) + 2*
       mHu2*Sqr(g1) + 4*AbsSqr(MassB)*Sqr(g1) - 30*mHu2*Sqr(g2) - 60*AbsSqr(
@@ -132,10 +131,10 @@ Eigen::Matrix<double,3,3> TMSSM_soft_parameters::calc_beta_mu2_2_loop(const Soft
       g1) + 150*Tr23*Quad(g3) - 600*AbsSqr(MassG)*Quad(g3) + 30*Tr2U111*Sqr(g1)
       + 160*AbsSqr(MassB)*Sqr(g1)*Sqr(g3) + 160*AbsSqr(MassG)*Sqr(g1)*Sqr(g3) +
       80*MassG*Conj(MassB)*Sqr(g1)*Sqr(g3) + 80*MassB*Conj(MassG)*Sqr(g1)*Sqr(
-      g3))*UNITMATRIX(3))).real();
+      g3))*UNITMATRIX(3)).real();
 
 
-   return beta_mu2;
+   return twoLoop * beta_mu2;
 }
 
 /**
@@ -154,7 +153,7 @@ Eigen::Matrix<double,3,3> TMSSM_soft_parameters::calc_beta_mu2_3_loop(const Soft
    beta_mu2 = ZEROMATRIX(3,3);
 
 
-   return beta_mu2;
+   return threeLoop * beta_mu2;
 }
 
 /**
@@ -173,7 +172,7 @@ Eigen::Matrix<double,3,3> TMSSM_soft_parameters::calc_beta_mu2_4_loop(const Soft
    beta_mu2 = ZEROMATRIX(3,3);
 
 
-   return beta_mu2;
+   return fourLoop * beta_mu2;
 }
 
 /**
@@ -192,7 +191,7 @@ Eigen::Matrix<double,3,3> TMSSM_soft_parameters::calc_beta_mu2_5_loop(const Soft
    beta_mu2 = ZEROMATRIX(3,3);
 
 
-   return beta_mu2;
+   return fiveLoop * beta_mu2;
 }
 
 } // namespace flexiblesusy

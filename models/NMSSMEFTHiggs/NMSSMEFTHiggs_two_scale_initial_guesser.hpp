@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:45:15
 
 #ifndef NMSSMEFTHiggs_STANDARD_MODEL_TWO_SCALE_INITIAL_GUESSER_H
 #define NMSSMEFTHiggs_STANDARD_MODEL_TWO_SCALE_INITIAL_GUESSER_H

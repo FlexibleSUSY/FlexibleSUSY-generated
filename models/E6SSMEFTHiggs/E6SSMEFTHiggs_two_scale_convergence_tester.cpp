@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:01:50
 
 #include "E6SSMEFTHiggs_two_scale_convergence_tester.hpp"
 #include <array>

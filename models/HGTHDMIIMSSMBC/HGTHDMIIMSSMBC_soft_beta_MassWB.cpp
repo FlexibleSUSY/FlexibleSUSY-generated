@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:25:49
 
 #include "HGTHDMIIMSSMBC_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,10 +72,10 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_MassWB_1_loop(const Soft_traces
 
    double beta_MassWB;
 
-   beta_MassWB = Re(MassWB*oneOver16PiSqr*(Sqr(g1d) - 12*Sqr(g2) + Sqr(g2u)));
+   beta_MassWB = Re(MassWB*(Sqr(g1d) - 12*Sqr(g2) + Sqr(g2u)));
 
 
-   return beta_MassWB;
+   return oneLoop * beta_MassWB;
 }
 
 /**
@@ -93,8 +92,8 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_MassWB_2_loop(const Soft_traces
 
    double beta_MassWB;
 
-   beta_MassWB = Re(0.025*twoLoop*(-145*MassWB*Quad(g1d) - 2960*MassWB*Quad(g2)
-      - 145*MassWB*Quad(g2u) - 180*MassWB*traceYdAdjYd*Sqr(g1d) - 60*MassWB*
+   beta_MassWB = Re(0.025*(-145*MassWB*Quad(g1d) - 2960*MassWB*Quad(g2) - 145*
+      MassWB*Quad(g2u) - 180*MassWB*traceYdAdjYd*Sqr(g1d) - 60*MassWB*
       traceYeAdjYe*Sqr(g1d) + 51*MassWB*Sqr(g1)*Sqr(g1d) + 40*MassB*Sqr(g1d)*
       Sqr(g1dp) - 35*MassWB*Sqr(g1d)*Sqr(g1dp) + 455*MassWB*Sqr(g1d)*Sqr(g2) -
       180*MassWB*traceYuAdjYu*Sqr(g2u) + 51*MassWB*Sqr(g1)*Sqr(g2u) + 455*
@@ -102,7 +101,7 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_MassWB_2_loop(const Soft_traces
       )*Sqr(g2up)));
 
 
-   return beta_MassWB;
+   return twoLoop * beta_MassWB;
 }
 
 /**
@@ -121,7 +120,7 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_MassWB_3_loop(const Soft_traces
    beta_MassWB = 0;
 
 
-   return beta_MassWB;
+   return threeLoop * beta_MassWB;
 }
 
 /**
@@ -140,7 +139,7 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_MassWB_4_loop(const Soft_traces
    beta_MassWB = 0;
 
 
-   return beta_MassWB;
+   return fourLoop * beta_MassWB;
 }
 
 /**
@@ -159,7 +158,7 @@ double HGTHDMIIMSSMBC_soft_parameters::calc_beta_MassWB_5_loop(const Soft_traces
    beta_MassWB = 0;
 
 
-   return beta_MassWB;
+   return fiveLoop * beta_MassWB;
 }
 
 } // namespace flexiblesusy

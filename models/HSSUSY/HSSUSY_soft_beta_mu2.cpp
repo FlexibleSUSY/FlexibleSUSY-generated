@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:46:27
 
 #include "HSSUSY_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -76,11 +75,11 @@ double HSSUSY_soft_parameters::calc_beta_mu2_1_loop(const Soft_traces& soft_trac
 
    double beta_mu2;
 
-   beta_mu2 = Re(-0.1*mu2*oneOver16PiSqr*(-60*traceYdAdjYd - 20*traceYeAdjYe -
-      60*traceYuAdjYu - 60*Lambdax + 9*Sqr(g1) + 45*Sqr(g2)));
+   beta_mu2 = Re(-0.1*mu2*(-60*traceYdAdjYd - 20*traceYeAdjYe - 60*traceYuAdjYu
+       - 60*Lambdax + 9*Sqr(g1) + 45*Sqr(g2)));
 
 
-   return beta_mu2;
+   return oneLoop * beta_mu2;
 }
 
 /**
@@ -101,7 +100,7 @@ double HSSUSY_soft_parameters::calc_beta_mu2_2_loop(const Soft_traces& soft_trac
 
    double beta_mu2;
 
-   beta_mu2 = Re(0.0025*mu2*twoLoop*(-5400*traceYdAdjYdYdAdjYd - 8400*
+   beta_mu2 = Re(0.0025*mu2*(-5400*traceYdAdjYdYdAdjYd - 8400*
       traceYdAdjYuYuAdjYd - 1800*traceYeAdjYeYeAdjYe - 5400*traceYuAdjYuYuAdjYu
        - 14400*traceYdAdjYd*Lambdax - 4800*traceYeAdjYe*Lambdax - 14400*
       traceYuAdjYu*Lambdax + 1671*Quad(g1) - 3625*Quad(g2) + 500*traceYdAdjYd*
@@ -112,7 +111,7 @@ double HSSUSY_soft_parameters::calc_beta_mu2_2_loop(const Soft_traces& soft_trac
       Lambdax)));
 
 
-   return beta_mu2;
+   return twoLoop * beta_mu2;
 }
 
 /**
@@ -128,17 +127,17 @@ double HSSUSY_soft_parameters::calc_beta_mu2_3_loop(const Soft_traces& soft_trac
 
    double beta_mu2;
 
-   beta_mu2 = Re(16.756629209125986*mu2*threeLoop*(15.30737457986509*Cube(
-      Lambdax) + 1.*Power6(g1) + 36.01244566362596*Power6(g2) +
-      18.429131386172795*Power6(Yd(2,2)) + 0.4139679292425927*Power6(Ye(2,2)) +
-      18.429131386172795*Power6(Yu(2,2)) - 3.927137010147313*Lambdax*Quad(g1) -
-      3.850086285654542*Lambdax*Quad(g2) + 20.73175259456566*Lambdax*Quad(Yd(2,
-      2)) + 9.05898764799418*Lambdax*Quad(Ye(2,2)) + 20.73175259456566*Lambdax*
-      Quad(Yu(2,2)) + 1.1852954889988687*Quad(g2)*Sqr(g1) + 1.4222858389686859*
-      Quad(Yd(2,2))*Sqr(g1) - 1.7965342456882272*Quad(Ye(2,2))*Sqr(g1) -
-      0.8960859852603394*Quad(Yu(2,2))*Sqr(g1) + 1.167061165496437*Quad(g1)*Sqr
-      (g2) - 0.4570467771716553*Quad(Yd(2,2))*Sqr(g2) + 0.3847519367275216*Quad
-      (Ye(2,2))*Sqr(g2) - 0.4570467771716553*Quad(Yu(2,2))*Sqr(g2) -
+   beta_mu2 = Re(16.756629209125986*mu2*(15.30737457986509*Cube(Lambdax) + 1.*
+      Power6(g1) + 36.01244566362596*Power6(g2) + 18.429131386172795*Power6(Yd(
+      2,2)) + 0.4139679292425927*Power6(Ye(2,2)) + 18.429131386172795*Power6(Yu
+      (2,2)) - 3.927137010147313*Lambdax*Quad(g1) - 3.850086285654542*Lambdax*
+      Quad(g2) + 20.73175259456566*Lambdax*Quad(Yd(2,2)) + 9.05898764799418*
+      Lambdax*Quad(Ye(2,2)) + 20.73175259456566*Lambdax*Quad(Yu(2,2)) +
+      1.1852954889988687*Quad(g2)*Sqr(g1) + 1.4222858389686859*Quad(Yd(2,2))*
+      Sqr(g1) - 1.7965342456882272*Quad(Ye(2,2))*Sqr(g1) - 0.8960859852603394*
+      Quad(Yu(2,2))*Sqr(g1) + 1.167061165496437*Quad(g1)*Sqr(g2) -
+      0.4570467771716553*Quad(Yd(2,2))*Sqr(g2) + 0.3847519367275216*Quad(Ye(2,2
+      ))*Sqr(g2) - 0.4570467771716553*Quad(Yu(2,2))*Sqr(g2) -
       2.2572004440579008*Lambdax*Sqr(g1)*Sqr(g2) - 0.5001699678078098*Quad(g1)*
       Sqr(g3) - 3.410249780507793*Quad(g2)*Sqr(g3) - 24.974054450461615*Quad(Yd
       (2,2))*Sqr(g3) - 24.974054450461615*Quad(Yu(2,2))*Sqr(g3) -
@@ -176,7 +175,7 @@ double HSSUSY_soft_parameters::calc_beta_mu2_3_loop(const Soft_traces& soft_trac
       ))));
 
 
-   return beta_mu2;
+   return threeLoop * beta_mu2;
 }
 
 /**
@@ -195,7 +194,7 @@ double HSSUSY_soft_parameters::calc_beta_mu2_4_loop(const Soft_traces& soft_trac
    beta_mu2 = 0;
 
 
-   return beta_mu2;
+   return fourLoop * beta_mu2;
 }
 
 /**
@@ -214,7 +213,7 @@ double HSSUSY_soft_parameters::calc_beta_mu2_5_loop(const Soft_traces& soft_trac
    beta_mu2 = 0;
 
 
-   return beta_mu2;
+   return fiveLoop * beta_mu2;
 }
 
 } // namespace flexiblesusy

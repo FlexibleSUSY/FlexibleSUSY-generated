@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:06:09
 
 #include "CE6SSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -40,13 +39,12 @@ Eigen::Matrix<double,3,3> CE6SSM_susy_parameters::calc_beta_Kappa_1_loop(const S
 
    Eigen::Matrix<double,3,3> beta_Kappa;
 
-   beta_Kappa = (oneOver16PiSqr*(-0.03333333333333333*Kappa*(-90*
-      traceKappaAdjKappa - 60*traceLambda12AdjLambda12 - 60*AbsSqr(Lambdax) + 8
-      *Sqr(g1) + 160*Sqr(g3) + 57*Sqr(gN)) + 2*(Kappa*(Kappa).adjoint()*Kappa))
-      ).real();
+   beta_Kappa = (-0.03333333333333333*Kappa*(-90*traceKappaAdjKappa - 60*
+      traceLambda12AdjLambda12 - 60*AbsSqr(Lambdax) + 8*Sqr(g1) + 160*Sqr(g3) +
+      57*Sqr(gN)) + 2*(Kappa*(Kappa).adjoint()*Kappa)).real();
 
 
-   return beta_Kappa;
+   return oneLoop * beta_Kappa;
 }
 
 /**
@@ -70,7 +68,7 @@ Eigen::Matrix<double,3,3> CE6SSM_susy_parameters::calc_beta_Kappa_2_loop(const S
 
    Eigen::Matrix<double,3,3> beta_Kappa;
 
-   beta_Kappa = (twoLoop*(0.0005555555555555556*Kappa*(-10800*
+   beta_Kappa = (0.0005555555555555556*Kappa*(-10800*
       traceKappaAdjKappaKappaAdjKappa - 7200*
       traceLambda12AdjLambda12Lambda12AdjLambda12 - 10800*traceYdAdjYd*AbsSqr(
       Lambdax) - 3600*traceYeAdjYe*AbsSqr(Lambdax) - 10800*traceYuAdjYu*AbsSqr(
@@ -83,10 +81,10 @@ Eigen::Matrix<double,3,3> CE6SSM_susy_parameters::calc_beta_Kappa_2_loop(const S
       (g1)*Sqr(gN) + 6240*Sqr(g3)*Sqr(gN) - 7200*Sqr(Conj(Lambdax))*Sqr(Lambdax
       )) + 0.5*(-12*traceKappaAdjKappa - 8*traceLambda12AdjLambda12 - 8*AbsSqr(
       Lambdax) + 5*Sqr(gN))*(Kappa*(Kappa).adjoint()*Kappa) - 2*(Kappa*(Kappa).
-      adjoint()*Kappa*(Kappa).adjoint()*Kappa))).real();
+      adjoint()*Kappa*(Kappa).adjoint()*Kappa)).real();
 
 
-   return beta_Kappa;
+   return twoLoop * beta_Kappa;
 }
 
 /**
@@ -105,7 +103,7 @@ Eigen::Matrix<double,3,3> CE6SSM_susy_parameters::calc_beta_Kappa_3_loop(const S
    beta_Kappa = ZEROMATRIX(3,3);
 
 
-   return beta_Kappa;
+   return threeLoop * beta_Kappa;
 }
 
 /**
@@ -124,7 +122,7 @@ Eigen::Matrix<double,3,3> CE6SSM_susy_parameters::calc_beta_Kappa_4_loop(const S
    beta_Kappa = ZEROMATRIX(3,3);
 
 
-   return beta_Kappa;
+   return fourLoop * beta_Kappa;
 }
 
 /**
@@ -143,7 +141,7 @@ Eigen::Matrix<double,3,3> CE6SSM_susy_parameters::calc_beta_Kappa_5_loop(const S
    beta_Kappa = ZEROMATRIX(3,3);
 
 
-   return beta_Kappa;
+   return fiveLoop * beta_Kappa;
 }
 
 } // namespace flexiblesusy

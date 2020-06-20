@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:53:54
 
 #include "TMSSM_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -40,11 +39,11 @@ double TMSSM_susy_parameters::calc_beta_Mu_1_loop(const Susy_traces& susy_traces
 
    double beta_Mu;
 
-   beta_Mu = Re(-0.2*oneOver16PiSqr*Mu*(-15*traceYdAdjYd - 5*traceYeAdjYe - 15*
-      traceYuAdjYu - 15*AbsSqr(Lambdax) + 3*Sqr(g1) + 15*Sqr(g2)));
+   beta_Mu = Re(-0.2*Mu*(-15*traceYdAdjYd - 5*traceYeAdjYe - 15*traceYuAdjYu -
+      15*AbsSqr(Lambdax) + 3*Sqr(g1) + 15*Sqr(g2)));
 
 
-   return beta_Mu;
+   return oneLoop * beta_Mu;
 }
 
 /**
@@ -65,16 +64,16 @@ double TMSSM_susy_parameters::calc_beta_Mu_2_loop(const Susy_traces& susy_traces
 
    double beta_Mu;
 
-   beta_Mu = Re(0.02*twoLoop*Mu*(-450*traceYdAdjYdYdAdjYd - 300*
-      traceYdAdjYuYuAdjYd - 150*traceYeAdjYeYeAdjYe - 450*traceYuAdjYuYuAdjYu -
-      225*traceYdAdjYd*AbsSqr(Lambdax) - 75*traceYeAdjYe*AbsSqr(Lambdax) - 225*
-      traceYuAdjYu*AbsSqr(Lambdax) + 207*Quad(g1) + 675*Quad(g2) - 20*
-      traceYdAdjYd*Sqr(g1) + 60*traceYeAdjYe*Sqr(g1) + 40*traceYuAdjYu*Sqr(g1)
-      + 600*AbsSqr(Lambdax)*Sqr(g2) + 90*Sqr(g1)*Sqr(g2) + 800*traceYdAdjYd*Sqr
-      (g3) + 800*traceYuAdjYu*Sqr(g3) - 375*Sqr(Conj(Lambdax))*Sqr(Lambdax)));
+   beta_Mu = Re(0.02*Mu*(-450*traceYdAdjYdYdAdjYd - 300*traceYdAdjYuYuAdjYd -
+      150*traceYeAdjYeYeAdjYe - 450*traceYuAdjYuYuAdjYu - 225*traceYdAdjYd*
+      AbsSqr(Lambdax) - 75*traceYeAdjYe*AbsSqr(Lambdax) - 225*traceYuAdjYu*
+      AbsSqr(Lambdax) + 207*Quad(g1) + 675*Quad(g2) - 20*traceYdAdjYd*Sqr(g1) +
+      60*traceYeAdjYe*Sqr(g1) + 40*traceYuAdjYu*Sqr(g1) + 600*AbsSqr(Lambdax)*
+      Sqr(g2) + 90*Sqr(g1)*Sqr(g2) + 800*traceYdAdjYd*Sqr(g3) + 800*
+      traceYuAdjYu*Sqr(g3) - 375*Sqr(Conj(Lambdax))*Sqr(Lambdax)));
 
 
-   return beta_Mu;
+   return twoLoop * beta_Mu;
 }
 
 /**
@@ -93,7 +92,7 @@ double TMSSM_susy_parameters::calc_beta_Mu_3_loop(const Susy_traces& susy_traces
    beta_Mu = 0;
 
 
-   return beta_Mu;
+   return threeLoop * beta_Mu;
 }
 
 /**
@@ -112,7 +111,7 @@ double TMSSM_susy_parameters::calc_beta_Mu_4_loop(const Susy_traces& susy_traces
    beta_Mu = 0;
 
 
-   return beta_Mu;
+   return fourLoop * beta_Mu;
 }
 
 /**
@@ -131,7 +130,7 @@ double TMSSM_susy_parameters::calc_beta_Mu_5_loop(const Susy_traces& susy_traces
    beta_Mu = 0;
 
 
-   return beta_Mu;
+   return fiveLoop * beta_Mu;
 }
 
 } // namespace flexiblesusy

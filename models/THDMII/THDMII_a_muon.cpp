@@ -16,13 +16,11 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:46:08
 
 /**
  * @file THDMII_a_muon.cpp
  *
- * This file was generated at Fri 10 Apr 2020 19:46:08 with FlexibleSUSY
- * 2.4.2 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #include "THDMII_a_muon.hpp"
@@ -45,7 +43,7 @@ namespace {
 
 double get_QED_2L(context_base&, const softsusy::QedQcd&);
 
-double get_MSUSY(const THDMII_mass_eigenstates& model)
+double get_MSUSY(const THDMII_mass_eigenstates_interface& model)
 {
    return Min(model.get_MHm().tail<1>().minCoeff());
 }
@@ -97,7 +95,7 @@ double calculate_a_muon_impl(const THDMII_mass_eigenstates& model, const softsus
    
    using namespace THDMII_cxx_diagrams::fields;
 
-   const std::valarray<std::complex<double>> form_factors {0., 0., 0., 0.};
+   const auto form_factors = THDMII_FFV_form_factors::calculate_Fe_Fe_VP_form_factors(1, 1, model, true);
 
    if (!is_zero((form_factors[2] + form_factors[3]).imag())) {
       ERROR("Error in the g-2 calculation! Form factor F2 should be real");

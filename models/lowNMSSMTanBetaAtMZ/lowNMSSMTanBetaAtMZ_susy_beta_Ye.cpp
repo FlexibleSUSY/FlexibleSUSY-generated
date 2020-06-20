@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:20:15
 
 #include "lowNMSSMTanBetaAtMZ_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -39,12 +38,11 @@ Eigen::Matrix<double,3,3> lowNMSSMTanBetaAtMZ_susy_parameters::calc_beta_Ye_1_lo
 
    Eigen::Matrix<double,3,3> beta_Ye;
 
-   beta_Ye = (oneOver16PiSqr*(-0.2*Ye*(-15*traceYdAdjYd - 5*traceYeAdjYe - 5*
-      AbsSqr(Lambdax) + 9*Sqr(g1) + 15*Sqr(g2)) + 3*(Ye*Ye.adjoint()*Ye))).real
-      ();
+   beta_Ye = (-0.2*Ye*(-15*traceYdAdjYd - 5*traceYeAdjYe - 5*AbsSqr(Lambdax) +
+      9*Sqr(g1) + 15*Sqr(g2)) + 3*(Ye*Ye.adjoint()*Ye)).real();
 
 
-   return beta_Ye;
+   return oneLoop * beta_Ye;
 }
 
 /**
@@ -64,16 +62,16 @@ Eigen::Matrix<double,3,3> lowNMSSMTanBetaAtMZ_susy_parameters::calc_beta_Ye_2_lo
 
    Eigen::Matrix<double,3,3> beta_Ye;
 
-   beta_Ye = (twoLoop*(0.1*Ye*(-90*traceYdAdjYdYdAdjYd - 30*traceYdAdjYuYuAdjYd
-       - 30*traceYeAdjYeYeAdjYe - 30*traceYuAdjYu*AbsSqr(Lambdax) - 20*AbsSqr(
-      Kappa)*AbsSqr(Lambdax) + 135*Quad(g1) + 75*Quad(g2) - 4*traceYdAdjYd*Sqr(
-      g1) + 12*traceYeAdjYe*Sqr(g1) + 18*Sqr(g1)*Sqr(g2) + 160*traceYdAdjYd*Sqr
-      (g3) - 30*Sqr(Conj(Lambdax))*Sqr(Lambdax)) + 3*(-3*traceYdAdjYd -
-      traceYeAdjYe - AbsSqr(Lambdax) + 2*Sqr(g2))*(Ye*Ye.adjoint()*Ye) - 4*(Ye*
-      Ye.adjoint()*Ye*Ye.adjoint()*Ye))).real();
+   beta_Ye = (0.1*Ye*(-90*traceYdAdjYdYdAdjYd - 30*traceYdAdjYuYuAdjYd - 30*
+      traceYeAdjYeYeAdjYe - 30*traceYuAdjYu*AbsSqr(Lambdax) - 20*AbsSqr(Kappa)*
+      AbsSqr(Lambdax) + 135*Quad(g1) + 75*Quad(g2) - 4*traceYdAdjYd*Sqr(g1) +
+      12*traceYeAdjYe*Sqr(g1) + 18*Sqr(g1)*Sqr(g2) + 160*traceYdAdjYd*Sqr(g3) -
+      30*Sqr(Conj(Lambdax))*Sqr(Lambdax)) + 3*(-3*traceYdAdjYd - traceYeAdjYe -
+      AbsSqr(Lambdax) + 2*Sqr(g2))*(Ye*Ye.adjoint()*Ye) - 4*(Ye*Ye.adjoint()*Ye
+      *Ye.adjoint()*Ye)).real();
 
 
-   return beta_Ye;
+   return twoLoop * beta_Ye;
 }
 
 /**
@@ -92,7 +90,7 @@ Eigen::Matrix<double,3,3> lowNMSSMTanBetaAtMZ_susy_parameters::calc_beta_Ye_3_lo
    beta_Ye = ZEROMATRIX(3,3);
 
 
-   return beta_Ye;
+   return threeLoop * beta_Ye;
 }
 
 /**
@@ -111,7 +109,7 @@ Eigen::Matrix<double,3,3> lowNMSSMTanBetaAtMZ_susy_parameters::calc_beta_Ye_4_lo
    beta_Ye = ZEROMATRIX(3,3);
 
 
-   return beta_Ye;
+   return fourLoop * beta_Ye;
 }
 
 /**
@@ -130,7 +128,7 @@ Eigen::Matrix<double,3,3> lowNMSSMTanBetaAtMZ_susy_parameters::calc_beta_Ye_5_lo
    beta_Ye = ZEROMATRIX(3,3);
 
 
-   return beta_Ye;
+   return fiveLoop * beta_Ye;
 }
 
 } // namespace flexiblesusy

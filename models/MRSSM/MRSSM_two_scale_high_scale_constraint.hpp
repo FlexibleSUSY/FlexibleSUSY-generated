@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:58:43
 
 #ifndef MRSSM_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
 #define MRSSM_TWO_SCALE_HIGH_SCALE_CONSTRAINT_H
@@ -38,6 +37,8 @@ public:
    MRSSM_high_scale_constraint() = default;
    MRSSM_high_scale_constraint(MRSSM<Two_scale>*);
    virtual ~MRSSM_high_scale_constraint() = default;
+   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+
    virtual void apply() override;
    virtual double get_scale() const override;
    virtual std::string name() const override { return "MRSSM high-scale constraint"; }

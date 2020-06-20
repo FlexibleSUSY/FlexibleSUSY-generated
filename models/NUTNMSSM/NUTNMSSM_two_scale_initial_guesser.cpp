@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:27:56
 
 #include "NUTNMSSM_two_scale_initial_guesser.hpp"
 #include "NUTNMSSM_two_scale_model.hpp"

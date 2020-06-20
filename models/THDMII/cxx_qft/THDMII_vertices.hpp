@@ -16,13 +16,11 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:46:08
 
 /**
  * @file cxx_qft/THDMII_vertices.hpp
  *
- * This file was generated at Fri 10 Apr 2020 19:46:08 with FlexibleSUSY
- * 2.4.2 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #ifndef THDMII_CXXQFT_VERTICES_H
@@ -352,6 +350,86 @@ struct Vertex {
 struct context_base;
 
 namespace detail {
+template<> struct VertexImpl<fields::Ah, typename fields::bar<fields::Fe>::type, fields::Fe>
+{
+   static ChiralVertex evaluate(const std::array<int, 3>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<fields::Fe, fields::Ah, typename fields::bar<fields::Fe>::type>
+{
+   static ChiralVertex evaluate(const std::array<int, 3>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<fields::Fe, fields::hh, typename fields::bar<fields::Fe>::type>
+{
+   static ChiralVertex evaluate(const std::array<int, 3>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<fields::Fe, typename fields::bar<fields::Fv>::type, typename fields::conj<fields::Hm>::type>
+{
+   static ChiralVertex evaluate(const std::array<int, 3>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<fields::hh, typename fields::bar<fields::Fe>::type, fields::Fe>
+{
+   static ChiralVertex evaluate(const std::array<int, 3>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<fields::VP, fields::Fe, typename fields::bar<fields::Fe>::type>
+{
+   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<fields::VP, fields::Hm, typename fields::conj<fields::Hm>::type>
+{
+   static MomentumDifferenceVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<typename fields::bar<fields::Fe>::type, fields::Ah, fields::Fe>
+{
+   static ChiralVertex evaluate(const std::array<int, 3>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fe, fields::Ah>
+{
+   static ChiralVertex evaluate(const std::array<int, 3>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fe, fields::hh>
+{
+   static ChiralVertex evaluate(const std::array<int, 3>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fe, fields::VP>
+{
+   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fv, fields::Hm>
+{
+   static ChiralVertex evaluate(const std::array<int, 3>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<typename fields::bar<fields::Fe>::type, fields::hh, fields::Fe>
+{
+   static ChiralVertex evaluate(const std::array<int, 3>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<typename fields::bar<fields::Fe>::type, fields::Hm, fields::Fv>
+{
+   static ChiralVertex evaluate(const std::array<int, 3>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<typename fields::bar<fields::Fv>::type, typename fields::conj<fields::Hm>::type, fields::Fe>
+{
+   static ChiralVertex evaluate(const std::array<int, 3>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<typename fields::conj<fields::Hm>::type, fields::Hm, fields::VP>
+{
+   static MomentumDifferenceVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+};
+
 
 
 ChiralVertex unit_charge(const context_base& context);

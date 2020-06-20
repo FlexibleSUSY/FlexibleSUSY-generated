@@ -16,13 +16,11 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:23:35
 
 /**
  * @file lowNMSSM_a_muon.hpp
  *
- * This file was generated at Fri 10 Apr 2020 20:23:35 with FlexibleSUSY
- * 2.4.2 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #ifndef lowNMSSM_A_MUON_H

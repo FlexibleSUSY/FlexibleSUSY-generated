@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:26:59
 
 #ifndef MRSSMEFTHiggs_SUSY_SCALE_CONSTRAINT_H
 #define MRSSMEFTHiggs_SUSY_SCALE_CONSTRAINT_H

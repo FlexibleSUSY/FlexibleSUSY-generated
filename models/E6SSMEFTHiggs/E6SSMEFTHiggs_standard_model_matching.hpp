@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:01:37
 
 #ifndef E6SSMEFTHiggs_STANDARD_MODEL_MATCHING_H
 #define E6SSMEFTHiggs_STANDARD_MODEL_MATCHING_H

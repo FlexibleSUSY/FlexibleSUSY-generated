@@ -17,6 +17,6 @@
 #  ====================================================================
 
 
-LIBHGTHDMIIMSSMBC_SRC += \
+LIBHGTHDMIIMSSMBC_CXXQFT_VERTICES_SRC := \
 	models/HGTHDMIIMSSMBC/cxx_qft/HGTHDMIIMSSMBC_vertices_1.cpp \
 	models/HGTHDMIIMSSMBC/cxx_qft/HGTHDMIIMSSMBC_vertices_2.cpp

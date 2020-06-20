@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:45:07
 
 #ifndef NMSSMEFTHiggs_STANDARD_MODEL_MATCHING_H
 #define NMSSMEFTHiggs_STANDARD_MODEL_MATCHING_H

@@ -16,13 +16,11 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:47:34
 
 /**
  * @file SM_a_muon.cpp
  *
- * This file was generated at Fri 10 Apr 2020 19:47:34 with FlexibleSUSY
- * 2.4.2 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #include "SM_a_muon.hpp"
@@ -45,7 +43,7 @@ namespace {
 
 double get_QED_2L(context_base&, const softsusy::QedQcd&);
 
-double get_MSUSY(const SM_mass_eigenstates& model)
+double get_MSUSY(const SM_mass_eigenstates_interface& model)
 {
    return 0.;
 }

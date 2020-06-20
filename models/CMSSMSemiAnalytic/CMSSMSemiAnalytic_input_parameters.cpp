@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:47:29
 
 #include "CMSSMSemiAnalytic_input_parameters.hpp"
 #include "wrappers.hpp"

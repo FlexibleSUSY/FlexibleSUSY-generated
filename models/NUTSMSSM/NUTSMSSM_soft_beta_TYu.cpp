@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:24:43
 
 #include "NUTSMSSM_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -75,15 +74,14 @@ Eigen::Matrix<double,3,3> NUTSMSSM_soft_parameters::calc_beta_TYu_1_loop(const S
 
    Eigen::Matrix<double,3,3> beta_TYu;
 
-   beta_TYu = (oneOver16PiSqr*(0.06666666666666667*(90*traceAdjYuTYu*Yu + 26*
-      MassB*Yu*Sqr(g1) + 90*MassWB*Yu*Sqr(g2) + 160*MassG*Yu*Sqr(g3) + 45*
-      traceYuAdjYu*TYu + 15*AbsSqr(Lambdax)*TYu - 13*Sqr(g1)*TYu - 45*Sqr(g2)*
-      TYu - 80*Sqr(g3)*TYu + 30*Yu*Conj(Lambdax)*TLambdax) + 2*(Yu*Yd.adjoint()
-      *TYd) + 4*(Yu*Yu.adjoint()*TYu) + TYu*Yd.adjoint()*Yd + 5*(TYu*Yu.adjoint
-      ()*Yu))).real();
+   beta_TYu = (0.06666666666666667*(90*traceAdjYuTYu*Yu + 26*MassB*Yu*Sqr(g1) +
+      90*MassWB*Yu*Sqr(g2) + 160*MassG*Yu*Sqr(g3) + 45*traceYuAdjYu*TYu + 15*
+      AbsSqr(Lambdax)*TYu - 13*Sqr(g1)*TYu - 45*Sqr(g2)*TYu - 80*Sqr(g3)*TYu +
+      30*Yu*Conj(Lambdax)*TLambdax) + 2*(Yu*Yd.adjoint()*TYd) + 4*(Yu*Yu.
+      adjoint()*TYu) + TYu*Yd.adjoint()*Yd + 5*(TYu*Yu.adjoint()*Yu)).real();
 
 
-   return beta_TYu;
+   return oneLoop * beta_TYu;
 }
 
 /**
@@ -108,8 +106,8 @@ Eigen::Matrix<double,3,3> NUTSMSSM_soft_parameters::calc_beta_TYu_2_loop(const S
 
    Eigen::Matrix<double,3,3> beta_TYu;
 
-   beta_TYu = (twoLoop*(0.0022222222222222222*(-2700*traceYdAdjYuTYuAdjYd*Yu -
-      2700*traceYuAdjYdTYdAdjYu*Yu - 16200*traceYuAdjYuTYuAdjYu*Yu - 2700*
+   beta_TYu = (0.0022222222222222222*(-2700*traceYdAdjYuTYuAdjYd*Yu - 2700*
+      traceYuAdjYdTYdAdjYu*Yu - 16200*traceYuAdjYuTYuAdjYu*Yu - 2700*
       traceAdjYdTYd*Yu*AbsSqr(Lambdax) - 900*traceAdjYeTYe*Yu*AbsSqr(Lambdax) -
       10972*MassB*Yu*Quad(g1) - 13500*MassWB*Yu*Quad(g2) + 3200*MassG*Yu*Quad(
       g3) + 720*traceAdjYuTYu*Yu*Sqr(g1) - 720*MassB*traceYuAdjYu*Yu*Sqr(g1) -
@@ -139,10 +137,10 @@ Eigen::Matrix<double,3,3> NUTSMSSM_soft_parameters::calc_beta_TYu_2_loop(const S
       - 4*(Yu*Yd.adjoint()*TYd*Yu.adjoint()*Yu) - 6*(Yu*Yu.adjoint()*Yu*Yu.
       adjoint()*TYu) - 8*(Yu*Yu.adjoint()*TYu*Yu.adjoint()*Yu) - 2*(TYu*Yd.
       adjoint()*Yd*Yd.adjoint()*Yd) - 4*(TYu*Yd.adjoint()*Yd*Yu.adjoint()*Yu) -
-      6*(TYu*Yu.adjoint()*Yu*Yu.adjoint()*Yu))).real();
+      6*(TYu*Yu.adjoint()*Yu*Yu.adjoint()*Yu)).real();
 
 
-   return beta_TYu;
+   return twoLoop * beta_TYu;
 }
 
 /**
@@ -161,7 +159,7 @@ Eigen::Matrix<double,3,3> NUTSMSSM_soft_parameters::calc_beta_TYu_3_loop(const S
    beta_TYu = ZEROMATRIX(3,3);
 
 
-   return beta_TYu;
+   return threeLoop * beta_TYu;
 }
 
 /**
@@ -180,7 +178,7 @@ Eigen::Matrix<double,3,3> NUTSMSSM_soft_parameters::calc_beta_TYu_4_loop(const S
    beta_TYu = ZEROMATRIX(3,3);
 
 
-   return beta_TYu;
+   return fourLoop * beta_TYu;
 }
 
 /**
@@ -199,7 +197,7 @@ Eigen::Matrix<double,3,3> NUTSMSSM_soft_parameters::calc_beta_TYu_5_loop(const S
    beta_TYu = ZEROMATRIX(3,3);
 
 
-   return beta_TYu;
+   return fiveLoop * beta_TYu;
 }
 
 } // namespace flexiblesusy

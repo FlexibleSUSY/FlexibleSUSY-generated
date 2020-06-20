@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:48:24
 
 #include "CMSSM_two_scale_initial_guesser.hpp"
 #include "CMSSM_two_scale_model.hpp"

@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:27:17
 
 /**
  * @file MRSSMEFTHiggs_two_scale_model.cpp
@@ -26,8 +25,7 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Fri 10 Apr 2020 18:27:17 with FlexibleSUSY
- * 2.4.2 (git commit: a94199e5620b8684f5d30d0eece5757a5a72c4a4) and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #include "MRSSMEFTHiggs_two_scale_model.hpp"
@@ -36,39 +34,44 @@ namespace flexiblesusy {
 
 #define CLASSNAME MRSSMEFTHiggs<Two_scale>
 
-CLASSNAME::MRSSMEFTHiggs(const MRSSMEFTHiggs_input_parameters& input_)
-   : MRSSMEFTHiggs_mass_eigenstates(input_)
+CLASSNAME::MRSSMEFTHiggs(const MRSSMEFTHiggs_slha& model_, bool do_convert_masses_to_slha)
+   : MRSSMEFTHiggs_slha(model_, do_convert_masses_to_slha)
+{
+}
+
+CLASSNAME::MRSSMEFTHiggs(const MRSSMEFTHiggs_input_parameters& input_, bool do_convert_masses_to_slha)
+   : MRSSMEFTHiggs_slha(input_, do_convert_masses_to_slha)
 {
 }
 
 void CLASSNAME::calculate_spectrum()
 {
-   MRSSMEFTHiggs_mass_eigenstates::calculate_spectrum();
+   MRSSMEFTHiggs_slha::calculate_spectrum();
 }
 
 void CLASSNAME::clear_problems()
 {
-   MRSSMEFTHiggs_mass_eigenstates::clear_problems();
+   MRSSMEFTHiggs_slha::clear_problems();
 }
 
 std::string CLASSNAME::name() const
 {
-   return MRSSMEFTHiggs_mass_eigenstates::name();
+   return MRSSMEFTHiggs_slha::name();
 }
 
 void CLASSNAME::run_to(double scale, double eps)
 {
-   MRSSMEFTHiggs_mass_eigenstates::run_to(scale, eps);
+   MRSSMEFTHiggs_slha::run_to(scale, eps);
 }
 
 void CLASSNAME::print(std::ostream& out) const
 {
-   MRSSMEFTHiggs_mass_eigenstates::print(out);
+   MRSSMEFTHiggs_slha::print(out);
 }
 
 void CLASSNAME::set_precision(double p)
 {
-   MRSSMEFTHiggs_mass_eigenstates::set_precision(p);
+   MRSSMEFTHiggs_slha::set_precision(p);
 }
 
 std::ostream& operator<<(std::ostream& ostr, const MRSSMEFTHiggs<Two_scale>& model)

@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:46:00
 
 #ifndef MSSMatMGUT_EFFECTIVE_COUPLINGS_H
 #define MSSMatMGUT_EFFECTIVE_COUPLINGS_H

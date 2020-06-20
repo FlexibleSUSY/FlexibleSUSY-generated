@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:35:19
 
 #include "MSSMRHN_soft_parameters.hpp"
 #include "wrappers.hpp"
@@ -73,12 +72,12 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_mv2_1_loop(const So
 
    Eigen::Matrix<double,3,3> beta_mv2;
 
-   beta_mv2 = (oneOver16PiSqr*(4*mHu2*(Yv*Yv.adjoint()) + 4*(TYv*(TYv).adjoint(
-      )) + 2*(mv2*Yv*Yv.adjoint()) + 4*(Yv*ml2*Yv.adjoint()) + 2*(Yv*Yv.adjoint
-      ()*mv2))).real();
+   beta_mv2 = (4*mHu2*(Yv*Yv.adjoint()) + 4*(TYv*(TYv).adjoint()) + 2*(mv2*Yv*
+      Yv.adjoint()) + 4*(Yv*ml2*Yv.adjoint()) + 2*(Yv*Yv.adjoint()*mv2)).real()
+      ;
 
 
-   return beta_mv2;
+   return oneLoop * beta_mv2;
 }
 
 /**
@@ -104,7 +103,7 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_mv2_2_loop(const So
 
    Eigen::Matrix<double,3,3> beta_mv2;
 
-   beta_mv2 = (twoLoop*(0.8*(-15*traceconjTYuTpTYu - 5*traceconjTYvTpTYv - 5*
+   beta_mv2 = (0.8*(-15*traceconjTYuTpTYu - 5*traceconjTYvTpTYv - 5*
       traceml2AdjYvYv - 15*tracemq2AdjYuYu - 15*tracemu2YuAdjYu - 5*
       tracemv2YvAdjYv - 30*mHu2*traceYuAdjYu - 10*mHu2*traceYvAdjYv + 3*mHu2*
       Sqr(g1) + 6*AbsSqr(MassB)*Sqr(g1) + 15*mHu2*Sqr(g2) + 30*AbsSqr(MassWB)*
@@ -128,10 +127,10 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_mv2_2_loop(const So
       adjoint()) - 4*(Yv*Ye.adjoint()*me2*Ye*Yv.adjoint()) - 4*(Yv*Ye.adjoint()
       *Ye*ml2*Yv.adjoint()) - 2*(Yv*Ye.adjoint()*Ye*Yv.adjoint()*mv2) - 4*(Yv*
       Yv.adjoint()*mv2*Yv*Yv.adjoint()) - 4*(Yv*Yv.adjoint()*Yv*ml2*Yv.adjoint(
-      )) - 2*(Yv*Yv.adjoint()*Yv*Yv.adjoint()*mv2))).real();
+      )) - 2*(Yv*Yv.adjoint()*Yv*Yv.adjoint()*mv2)).real();
 
 
-   return beta_mv2;
+   return twoLoop * beta_mv2;
 }
 
 /**
@@ -150,7 +149,7 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_mv2_3_loop(const So
    beta_mv2 = ZEROMATRIX(3,3);
 
 
-   return beta_mv2;
+   return threeLoop * beta_mv2;
 }
 
 /**
@@ -169,7 +168,7 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_mv2_4_loop(const So
    beta_mv2 = ZEROMATRIX(3,3);
 
 
-   return beta_mv2;
+   return fourLoop * beta_mv2;
 }
 
 /**
@@ -188,7 +187,7 @@ Eigen::Matrix<double,3,3> MSSMRHN_soft_parameters::calc_beta_mv2_5_loop(const So
    beta_mv2 = ZEROMATRIX(3,3);
 
 
-   return beta_mv2;
+   return fiveLoop * beta_mv2;
 }
 
 } // namespace flexiblesusy

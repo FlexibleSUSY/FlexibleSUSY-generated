@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:27:12
 
 #include "MRSSMEFTHiggs_two_scale_initial_guesser.hpp"
 #include "MRSSMEFTHiggs_two_scale_model.hpp"

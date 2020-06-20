@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 17:35:09
 
 #ifndef MSSMNoFVHimalaya_LOW_SCALE_CONSTRAINT_H
 #define MSSMNoFVHimalaya_LOW_SCALE_CONSTRAINT_H

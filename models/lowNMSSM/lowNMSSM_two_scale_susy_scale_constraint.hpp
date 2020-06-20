@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:23:30
 
 #ifndef lowNMSSM_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
 #define lowNMSSM_TWO_SCALE_SUSY_SCALE_CONSTRAINT_H
@@ -39,6 +38,8 @@ public:
    lowNMSSM_susy_scale_constraint() = default;
    lowNMSSM_susy_scale_constraint(lowNMSSM<Two_scale>*, const softsusy::QedQcd&);
    virtual ~lowNMSSM_susy_scale_constraint() = default;
+   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+
    virtual void apply() override;
    virtual double get_scale() const override;
    virtual std::string name() const override { return "lowNMSSM SUSY-scale constraint"; }

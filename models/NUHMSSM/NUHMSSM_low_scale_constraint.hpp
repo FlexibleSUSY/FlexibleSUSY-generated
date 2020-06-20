@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:37:39
 
 #ifndef NUHMSSM_LOW_SCALE_CONSTRAINT_H
 #define NUHMSSM_LOW_SCALE_CONSTRAINT_H

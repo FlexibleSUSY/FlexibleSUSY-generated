@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 20:05:43
 
 #ifndef E6SSM_WEINBERG_ANGLE_H
 #define E6SSM_WEINBERG_ANGLE_H
@@ -42,6 +41,7 @@ public:
       double mz_pole{0.};        ///< Z pole mass
       double mt_pole{0.};        ///< top quark pole mass
       double alpha_s{0.};        ///< strong coupling constant
+      int higgs_index{0};        ///< index of SM-like Higgs
    };
 
    E6SSM_weinberg_angle(const E6SSM_mass_eigenstates*, const Sm_parameters&);
@@ -56,6 +56,7 @@ public:
 
    /// calculates and returns the sine of the Weinberg angle and the W pole mass
    std::pair<double,double> calculate(double sinThetaW_start = 0.48);
+   double calculate_mw_pole() const;
 
 private:
    int number_of_iterations{20};      ///< maximum number of iterations
@@ -75,6 +76,8 @@ private:
    double calculate_delta_vb_sm(double) const;
    int get_neutrino_index(int) const;
    double calculate_delta_vb_bsm(double) const;
+   double calculate_mw_pole(double) const;
+   double calculate_delta_alpha_hat_bsm(double) const;
 
    std::complex<double> CpAhHpmconjVWm(int gI2, int gI1) const;
    std::complex<double> CphhHpmconjVWm(int gI2, int gI1) const;

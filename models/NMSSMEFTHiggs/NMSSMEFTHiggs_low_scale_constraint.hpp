@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:45:08
 
 #ifndef NMSSMEFTHiggs_LOW_SCALE_CONSTRAINT_H
 #define NMSSMEFTHiggs_LOW_SCALE_CONSTRAINT_H

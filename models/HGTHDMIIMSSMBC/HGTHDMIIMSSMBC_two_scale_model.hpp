@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:28:42
 
 /**
  * @file HGTHDMIIMSSMBC_two_scale_model.hpp
@@ -24,15 +23,15 @@
  *        value problem using the two_scale solver by solving EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated at Fri 10 Apr 2020 19:28:42 with FlexibleSUSY
- * 2.4.2 (git commit: a94199e5620b8684f5d30d0eece5757a5a72c4a4) and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #ifndef HGTHDMIIMSSMBC_TWO_SCALE_H
 #define HGTHDMIIMSSMBC_TWO_SCALE_H
 
 #include "HGTHDMIIMSSMBC_model.hpp"
-#include "HGTHDMIIMSSMBC_mass_eigenstates.hpp"
+#include "HGTHDMIIMSSMBC_model_slha.hpp"
+#include "HGTHDMIIMSSMBC_input_parameters.hpp"
 
 #include "model.hpp"
 
@@ -44,9 +43,10 @@ class Two_scale;
  * @brief model class with routines for determining masses and mixings and EWSB
  */
 template<>
-class HGTHDMIIMSSMBC<Two_scale> : public Model, public HGTHDMIIMSSMBC_mass_eigenstates {
+class HGTHDMIIMSSMBC<Two_scale> : public Model, public HGTHDMIIMSSMBC_slha {
 public:
-   explicit HGTHDMIIMSSMBC(const HGTHDMIIMSSMBC_input_parameters& input_ = HGTHDMIIMSSMBC_input_parameters());
+   explicit HGTHDMIIMSSMBC(const HGTHDMIIMSSMBC_input_parameters& input_ = HGTHDMIIMSSMBC_input_parameters(), bool do_convert_masses_to_slha = true);
+   explicit HGTHDMIIMSSMBC(const HGTHDMIIMSSMBC_slha&, bool do_convert_masses_to_slha = true);
    HGTHDMIIMSSMBC(const HGTHDMIIMSSMBC&) = default;
    HGTHDMIIMSSMBC(HGTHDMIIMSSMBC&&) = default;
    virtual ~HGTHDMIIMSSMBC() = default;
@@ -58,7 +58,7 @@ public:
    virtual void clear_problems() override;
    virtual std::string name() const override;
    virtual void run_to(double scale, double eps = -1.0) override;
-   virtual void print(std::ostream& out = std::cerr) const override;
+   virtual void print(std::ostream&) const override;
    virtual void set_precision(double) override;
 };
 

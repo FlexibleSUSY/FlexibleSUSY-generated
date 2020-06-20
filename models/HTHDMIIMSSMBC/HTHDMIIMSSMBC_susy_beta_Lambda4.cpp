@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:22:05
 
 #include "HTHDMIIMSSMBC_susy_parameters.hpp"
 #include "wrappers.hpp"
@@ -41,15 +40,15 @@ double HTHDMIIMSSMBC_susy_parameters::calc_beta_Lambda4_1_loop(const Susy_traces
 
    double beta_Lambda4;
 
-   beta_Lambda4 = Re(0.2*oneOver16PiSqr*(20*Lambda1*Lambda4 + 20*Lambda2*
-      Lambda4 + 40*Lambda3*Lambda4 + 30*Lambda4*traceYdAdjYd + 60*
-      traceYdAdjYuYuAdjYd + 10*Lambda4*traceYeAdjYe + 30*Lambda4*traceYuAdjYu +
-      40*AbsSqr(Lambda5) + 50*AbsSqr(Lambda6) + 50*AbsSqr(Lambda7) + 10*Lambda7
-      *Conj(Lambda6) + 10*Lambda6*Conj(Lambda7) - 9*Lambda4*Sqr(g1) - 45*
-      Lambda4*Sqr(g2) + 9*Sqr(g1)*Sqr(g2) + 20*Sqr(Lambda4)));
+   beta_Lambda4 = Re(0.2*(20*Lambda1*Lambda4 + 20*Lambda2*Lambda4 + 40*Lambda3*
+      Lambda4 + 30*Lambda4*traceYdAdjYd + 60*traceYdAdjYuYuAdjYd + 10*Lambda4*
+      traceYeAdjYe + 30*Lambda4*traceYuAdjYu + 40*AbsSqr(Lambda5) + 50*AbsSqr(
+      Lambda6) + 50*AbsSqr(Lambda7) + 10*Lambda7*Conj(Lambda6) + 10*Lambda6*
+      Conj(Lambda7) - 9*Lambda4*Sqr(g1) - 45*Lambda4*Sqr(g2) + 9*Sqr(g1)*Sqr(g2
+      ) + 20*Sqr(Lambda4)));
 
 
-   return beta_Lambda4;
+   return oneLoop * beta_Lambda4;
 }
 
 /**
@@ -76,9 +75,9 @@ double HTHDMIIMSSMBC_susy_parameters::calc_beta_Lambda4_2_loop(const Susy_traces
 
    double beta_Lambda4;
 
-   beta_Lambda4 = Re(0.005*twoLoop*(-16000*Lambda1*Lambda3*Lambda4 - 16000*
-      Lambda2*Lambda3*Lambda4 - 9000*Lambda5*Lambda6*Lambda7 - 4800*Lambda1*
-      Lambda4*traceYdAdjYd - 4800*Lambda3*Lambda4*traceYdAdjYd - 2700*Lambda4*
+   beta_Lambda4 = Re(0.005*(-16000*Lambda1*Lambda3*Lambda4 - 16000*Lambda2*
+      Lambda3*Lambda4 - 9000*Lambda5*Lambda6*Lambda7 - 4800*Lambda1*Lambda4*
+      traceYdAdjYd - 4800*Lambda3*Lambda4*traceYdAdjYd - 2700*Lambda4*
       traceYdAdjYdYdAdjYd - 2400*traceYdAdjYdYdAdjYuYuAdjYd - 4800*Lambda3*
       traceYdAdjYuYuAdjYd - 6600*Lambda4*traceYdAdjYuYuAdjYd - 2400*
       traceYdAdjYuYuAdjYdYdAdjYd - 4800*traceYdAdjYuYuAdjYuYuAdjYd - 1600*
@@ -125,7 +124,7 @@ double HTHDMIIMSSMBC_susy_parameters::calc_beta_Lambda4_2_loop(const Susy_traces
       (Conj(Lambda6)) - 7700*Conj(Lambda5)*Sqr(Conj(Lambda7))));
 
 
-   return beta_Lambda4;
+   return twoLoop * beta_Lambda4;
 }
 
 /**
@@ -144,7 +143,7 @@ double HTHDMIIMSSMBC_susy_parameters::calc_beta_Lambda4_3_loop(const Susy_traces
    beta_Lambda4 = 0;
 
 
-   return beta_Lambda4;
+   return threeLoop * beta_Lambda4;
 }
 
 /**
@@ -163,7 +162,7 @@ double HTHDMIIMSSMBC_susy_parameters::calc_beta_Lambda4_4_loop(const Susy_traces
    beta_Lambda4 = 0;
 
 
-   return beta_Lambda4;
+   return fourLoop * beta_Lambda4;
 }
 
 /**
@@ -182,7 +181,7 @@ double HTHDMIIMSSMBC_susy_parameters::calc_beta_Lambda4_5_loop(const Susy_traces
    beta_Lambda4 = 0;
 
 
-   return beta_Lambda4;
+   return fiveLoop * beta_Lambda4;
 }
 
 } // namespace flexiblesusy

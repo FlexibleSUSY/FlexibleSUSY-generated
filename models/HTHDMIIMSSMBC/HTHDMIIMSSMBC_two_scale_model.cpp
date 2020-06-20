@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 19:24:24
 
 /**
  * @file HTHDMIIMSSMBC_two_scale_model.cpp
@@ -26,8 +25,7 @@
  * which solve EWSB and calculate pole masses and mixings from MSbar
  * parameters.
  *
- * This file was generated at Fri 10 Apr 2020 19:24:24 with FlexibleSUSY
- * 2.4.2 (git commit: a94199e5620b8684f5d30d0eece5757a5a72c4a4) and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #include "HTHDMIIMSSMBC_two_scale_model.hpp"
@@ -36,39 +34,44 @@ namespace flexiblesusy {
 
 #define CLASSNAME HTHDMIIMSSMBC<Two_scale>
 
-CLASSNAME::HTHDMIIMSSMBC(const HTHDMIIMSSMBC_input_parameters& input_)
-   : HTHDMIIMSSMBC_mass_eigenstates(input_)
+CLASSNAME::HTHDMIIMSSMBC(const HTHDMIIMSSMBC_slha& model_, bool do_convert_masses_to_slha)
+   : HTHDMIIMSSMBC_slha(model_, do_convert_masses_to_slha)
+{
+}
+
+CLASSNAME::HTHDMIIMSSMBC(const HTHDMIIMSSMBC_input_parameters& input_, bool do_convert_masses_to_slha)
+   : HTHDMIIMSSMBC_slha(input_, do_convert_masses_to_slha)
 {
 }
 
 void CLASSNAME::calculate_spectrum()
 {
-   HTHDMIIMSSMBC_mass_eigenstates::calculate_spectrum();
+   HTHDMIIMSSMBC_slha::calculate_spectrum();
 }
 
 void CLASSNAME::clear_problems()
 {
-   HTHDMIIMSSMBC_mass_eigenstates::clear_problems();
+   HTHDMIIMSSMBC_slha::clear_problems();
 }
 
 std::string CLASSNAME::name() const
 {
-   return HTHDMIIMSSMBC_mass_eigenstates::name();
+   return HTHDMIIMSSMBC_slha::name();
 }
 
 void CLASSNAME::run_to(double scale, double eps)
 {
-   HTHDMIIMSSMBC_mass_eigenstates::run_to(scale, eps);
+   HTHDMIIMSSMBC_slha::run_to(scale, eps);
 }
 
 void CLASSNAME::print(std::ostream& out) const
 {
-   HTHDMIIMSSMBC_mass_eigenstates::print(out);
+   HTHDMIIMSSMBC_slha::print(out);
 }
 
 void CLASSNAME::set_precision(double p)
 {
-   HTHDMIIMSSMBC_mass_eigenstates::set_precision(p);
+   HTHDMIIMSSMBC_slha::set_precision(p);
 }
 
 std::ostream& operator<<(std::ostream& ostr, const HTHDMIIMSSMBC<Two_scale>& model)

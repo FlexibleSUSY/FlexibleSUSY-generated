@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 17:35:18
 
 /**
  * @file MSSMNoFVHimalaya_two_scale_model.cpp
@@ -26,8 +25,7 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated at Fri 10 Apr 2020 17:35:18 with FlexibleSUSY
- * 2.4.2 (git commit: a94199e5620b8684f5d30d0eece5757a5a72c4a4) and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
  */
 
 #include "MSSMNoFVHimalaya_two_scale_model.hpp"
@@ -36,39 +34,44 @@ namespace flexiblesusy {
 
 #define CLASSNAME MSSMNoFVHimalaya<Two_scale>
 
-CLASSNAME::MSSMNoFVHimalaya(const MSSMNoFVHimalaya_input_parameters& input_)
-   : MSSMNoFVHimalaya_mass_eigenstates(input_)
+CLASSNAME::MSSMNoFVHimalaya(const MSSMNoFVHimalaya_slha& model_, bool do_convert_masses_to_slha)
+   : MSSMNoFVHimalaya_slha(model_, do_convert_masses_to_slha)
+{
+}
+
+CLASSNAME::MSSMNoFVHimalaya(const MSSMNoFVHimalaya_input_parameters& input_, bool do_convert_masses_to_slha)
+   : MSSMNoFVHimalaya_slha(input_, do_convert_masses_to_slha)
 {
 }
 
 void CLASSNAME::calculate_spectrum()
 {
-   MSSMNoFVHimalaya_mass_eigenstates::calculate_spectrum();
+   MSSMNoFVHimalaya_slha::calculate_spectrum();
 }
 
 void CLASSNAME::clear_problems()
 {
-   MSSMNoFVHimalaya_mass_eigenstates::clear_problems();
+   MSSMNoFVHimalaya_slha::clear_problems();
 }
 
 std::string CLASSNAME::name() const
 {
-   return MSSMNoFVHimalaya_mass_eigenstates::name();
+   return MSSMNoFVHimalaya_slha::name();
 }
 
 void CLASSNAME::run_to(double scale, double eps)
 {
-   MSSMNoFVHimalaya_mass_eigenstates::run_to(scale, eps);
+   MSSMNoFVHimalaya_slha::run_to(scale, eps);
 }
 
 void CLASSNAME::print(std::ostream& out) const
 {
-   MSSMNoFVHimalaya_mass_eigenstates::print(out);
+   MSSMNoFVHimalaya_slha::print(out);
 }
 
 void CLASSNAME::set_precision(double p)
 {
-   MSSMNoFVHimalaya_mass_eigenstates::set_precision(p);
+   MSSMNoFVHimalaya_slha::set_precision(p);
 }
 
 std::ostream& operator<<(std::ostream& ostr, const MSSMNoFVHimalaya<Two_scale>& model)

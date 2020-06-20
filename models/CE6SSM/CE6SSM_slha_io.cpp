@@ -16,13 +16,19 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:42:50
 
 #include "CE6SSM_slha_io.hpp"
 #include "CE6SSM_input_parameters.hpp"
+#include "CE6SSM_mass_eigenstates.hpp"
+#include "CE6SSM_model_slha.hpp"
+#include "CE6SSM_observables.hpp"
+#include "CE6SSM_physical.hpp"
+#include "ew_input.hpp"
 #include "logger.hpp"
-#include "wrappers.hpp"
 #include "numerics2.hpp"
+#include "spectrum_generator_problems.hpp"
+#include "standard_model.hpp"
+#include "wrappers.hpp"
 #include "config.h"
 
 #include <array>
@@ -35,11 +41,14 @@
 #define PHYSICAL(p) model.get_physical().p
 #define PHYSICAL_SLHA(p) model.get_physical_slha().p
 #define LOCALPHYSICAL(p) physical.p
+#define MODEL model
 #define MODELPARAMETER(p) model.get_##p()
 #define INPUTPARAMETER(p) input.p
 #define EXTRAPARAMETER(p) model.get_##p()
+#define OBSERVABLES observables
 #define DEFINE_PHYSICAL_PARAMETER(p) decltype(LOCALPHYSICAL(p)) p;
 #define LowEnergyConstant(p) Electroweak_constants::p
+#define SCALES(p) scales.p
 
 namespace flexiblesusy {
 
@@ -57,6 +66,16 @@ void CE6SSM_slha_io::clear()
 void CE6SSM_slha_io::set_print_imaginary_parts_of_majorana_mixings(bool flag)
 {
    print_imaginary_parts_of_majorana_mixings = flag;
+}
+
+/**
+ * Reads DR-bar parameters, pole masses and mixing matrices from a
+ * SLHA output file.
+ */
+void CE6SSM_slha_io::fill(CE6SSM_slha& model) const
+{
+   fill(static_cast<CE6SSM_mass_eigenstates&>(model));
+   fill_physical(model.get_physical_slha());
 }
 
 /**
@@ -403,6 +422,95 @@ void CE6SSM_slha_io::set_pmns(
    slha_io.set_block("IMVPMNS", pmns_matrix.imag(), "Im(PMNS)", scale);
 }
 
+/**
+ * Stores the model (DR-bar) parameters in the SLHA object.
+ *
+ * @param model model class
+ */
+void CE6SSM_slha_io::set_model_parameters(const CE6SSM_slha& model)
+{
+   {
+      std::ostringstream block;
+      block << "Block gauge Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(1, (MODELPARAMETER(g1) * 0.7745966692414834), "g1 * 0.7745966692414834")
+            << FORMAT_ELEMENT(2, (MODELPARAMETER(g2)), "g2")
+            << FORMAT_ELEMENT(3, (MODELPARAMETER(g3)), "g3")
+            << FORMAT_ELEMENT(4, (MODELPARAMETER(gN)), "gN")
+      ;
+      slha_io.set_block(block);
+   }
+   slha_io.set_block("Yu", ToMatrix(MODELPARAMETER(Yu_slha)), "Yu", model.get_scale());
+   slha_io.set_block("Yd", ToMatrix(MODELPARAMETER(Yd_slha)), "Yd", model.get_scale());
+   slha_io.set_block("Ye", ToMatrix(MODELPARAMETER(Ye_slha)), "Ye", model.get_scale());
+   slha_io.set_block("Te", MODELPARAMETER(TYe_slha), "TYe", model.get_scale());
+   slha_io.set_block("Td", MODELPARAMETER(TYd_slha), "TYd", model.get_scale());
+   slha_io.set_block("Tu", MODELPARAMETER(TYu_slha), "TYu", model.get_scale());
+   slha_io.set_block("MSQ2", MODELPARAMETER(mq2_slha), "mq2", model.get_scale());
+   slha_io.set_block("MSE2", MODELPARAMETER(me2_slha), "me2", model.get_scale());
+   slha_io.set_block("MSL2", MODELPARAMETER(ml2_slha), "ml2", model.get_scale());
+   slha_io.set_block("MSU2", MODELPARAMETER(mu2_slha), "mu2", model.get_scale());
+   slha_io.set_block("MSD2", MODELPARAMETER(md2_slha), "md2", model.get_scale());
+   {
+      std::ostringstream block;
+      block << "Block MSOFT Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(21, (MODELPARAMETER(mHd2)), "mHd2")
+            << FORMAT_ELEMENT(22, (MODELPARAMETER(mHu2)), "mHu2")
+            << FORMAT_ELEMENT(23, (MODELPARAMETER(ms2)), "ms2")
+            << FORMAT_ELEMENT(24, (MODELPARAMETER(mHp2)), "mHp2")
+            << FORMAT_ELEMENT(25, (MODELPARAMETER(mHpbar2)), "mHpbar2")
+            << FORMAT_ELEMENT(1, (MODELPARAMETER(MassB)), "MassB")
+            << FORMAT_ELEMENT(2, (MODELPARAMETER(MassWB)), "MassWB")
+            << FORMAT_ELEMENT(3, (MODELPARAMETER(MassG)), "MassG")
+            << FORMAT_ELEMENT(4, (MODELPARAMETER(MassBp)), "MassBp")
+      ;
+      slha_io.set_block(block);
+   }
+   slha_io.set_block("mHdInert2", MODELPARAMETER(mH1I2), "mH1I2", model.get_scale());
+   slha_io.set_block("mHuInert2", MODELPARAMETER(mH2I2), "mH2I2", model.get_scale());
+   slha_io.set_block("mX2", MODELPARAMETER(mDx2), "mDx2", model.get_scale());
+   slha_io.set_block("mXBar2", MODELPARAMETER(mDxbar2), "mDxbar2", model.get_scale());
+   slha_io.set_block("msInert2", MODELPARAMETER(msI2), "msI2", model.get_scale());
+   {
+      std::ostringstream block;
+      block << "Block HMIX Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(102, (MODELPARAMETER(vd)), "vd")
+            << FORMAT_ELEMENT(103, (MODELPARAMETER(vu)), "vu")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block ESIXRUN Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(11, (MODELPARAMETER(vs)), "vs")
+            << FORMAT_ELEMENT(1, (MODELPARAMETER(Lambdax)), "Lambdax")
+            << FORMAT_ELEMENT(2, (MODELPARAMETER(TLambdax)), "TLambdax")
+            << FORMAT_ELEMENT(0, (MODELPARAMETER(MuPr)), "MuPr")
+            << FORMAT_ELEMENT(101, (MODELPARAMETER(BMuPr)), "BMuPr")
+      ;
+      slha_io.set_block(block);
+   }
+   slha_io.set_block("ESIXKAPPA", MODELPARAMETER(Kappa), "Kappa", model.get_scale());
+   slha_io.set_block("ESIXTKAPPA", MODELPARAMETER(TKappa), "TKappa", model.get_scale());
+   slha_io.set_block("ESIXLAMBDA", MODELPARAMETER(Lambda12), "Lambda12", model.get_scale());
+   slha_io.set_block("ESIXTLAMBDA", MODELPARAMETER(TLambda12), "TLambda12", model.get_scale());
+
+   {
+      std::ostringstream block;
+      block << "Block Phases Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(1, (Re(MODELPARAMETER(PhaseGlu))), "Re(PhaseGlu)")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block IMPhases Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(1, (Im(MODELPARAMETER(PhaseGlu))), "Im(PhaseGlu)")
+      ;
+      slha_io.set_block(block);
+   }
+
+}
+
 void CE6SSM_slha_io::set_model_parameters(const standard_model::Standard_model& model)
 {
    {
@@ -481,6 +589,135 @@ void CE6SSM_slha_io::set_spectrum(const standard_model::Standard_model& model)
 }
 
 /**
+ * Stores the model (DR-bar) parameters, masses and mixing matrices in
+ * the SLHA object.
+ *
+ * @param model model class in SLHA convention
+ */
+void CE6SSM_slha_io::set_spectrum(const CE6SSM_slha& model)
+{
+   const CE6SSM_physical physical(model.get_physical_slha());
+   const bool write_sm_masses = model.do_calculate_sm_pole_masses();
+
+   set_model_parameters(model);
+   set_mass(physical, write_sm_masses);
+   set_mixing_matrices(physical, write_sm_masses);
+
+   if (slha_io.get_modsel().quark_flavour_violated)
+      set_ckm(model.get_ckm_matrix(), model.get_scale());
+
+   if (slha_io.get_modsel().lepton_flavour_violated)
+      set_pmns(model.get_pmns_matrix(), model.get_scale());
+}
+
+/**
+ * Writes extra SLHA blocks
+ *
+ * @param model model class
+ * @param scales struct of boundary condition scales
+ * @param observables struct of observables
+ */
+void CE6SSM_slha_io::set_extra(
+   const CE6SSM_slha& model,
+   const CE6SSM_scales& scales,
+   const CE6SSM_observables& observables)
+{
+   const CE6SSM_physical physical(model.get_physical_slha());
+
+   {
+      std::ostringstream block;
+      block << "Block FlexibleSUSYOutput" << '\n'
+            << FORMAT_ELEMENT(0, (SCALES(HighScale)), "HighScale")
+            << FORMAT_ELEMENT(1, (SCALES(SUSYScale)), "SUSYScale")
+            << FORMAT_ELEMENT(2, (SCALES(LowScale)), "LowScale")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block FlexibleSUSYLowEnergy Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(21, (OBSERVABLES.a_muon), "Delta(g-2)_muon/2 FlexibleSUSY")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block EWSBOutputs" << '\n'
+            << FORMAT_ELEMENT(1, (EXTRAPARAMETER(m0Sq)), "m0Sq")
+            << FORMAT_ELEMENT(2, (EXTRAPARAMETER(m12)), "m12")
+            << FORMAT_ELEMENT(3, (EXTRAPARAMETER(Azero)), "Azero")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block EFFHIGGSCOUPLINGS" << '\n'
+            << FORMAT_RANK_THREE_TENSOR(25, 22, 22, (Abs(OBSERVABLES.eff_cp_higgs_photon_photon(0))), "Abs(effective H-Photon-Photon coupling)")
+            << FORMAT_RANK_THREE_TENSOR(35, 22, 22, (Abs(OBSERVABLES.eff_cp_higgs_photon_photon(1))), "Abs(effective H-Photon-Photon coupling)")
+            << FORMAT_RANK_THREE_TENSOR(45, 22, 22, (Abs(OBSERVABLES.eff_cp_higgs_photon_photon(2))), "Abs(effective H-Photon-Photon coupling)")
+            << FORMAT_RANK_THREE_TENSOR(25, 21, 21, (Abs(OBSERVABLES.eff_cp_higgs_gluon_gluon(0))), "Abs(effective H-Gluon-Gluon coupling)")
+            << FORMAT_RANK_THREE_TENSOR(35, 21, 21, (Abs(OBSERVABLES.eff_cp_higgs_gluon_gluon(1))), "Abs(effective H-Gluon-Gluon coupling)")
+            << FORMAT_RANK_THREE_TENSOR(45, 21, 21, (Abs(OBSERVABLES.eff_cp_higgs_gluon_gluon(2))), "Abs(effective H-Gluon-Gluon coupling)")
+            << FORMAT_RANK_THREE_TENSOR(36, 22, 22, (Abs(OBSERVABLES.eff_cp_pseudoscalar_photon_photon)), "Abs(effective A-Photon-Photon coupling)")
+            << FORMAT_RANK_THREE_TENSOR(36, 21, 21, (Abs(OBSERVABLES.eff_cp_pseudoscalar_gluon_gluon)), "Abs(effective A-Gluon-Gluon coupling)")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block Au Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_MIXING_MATRIX(1, 1, (MODELPARAMETER(TYu)(0,0)/MODELPARAMETER(Yu)(0,0)), "TYu(1,1)/Yu(1,1)")
+            << FORMAT_MIXING_MATRIX(2, 2, (MODELPARAMETER(TYu)(1,1)/MODELPARAMETER(Yu)(1,1)), "TYu(2,2)/Yu(2,2)")
+            << FORMAT_MIXING_MATRIX(3, 3, (MODELPARAMETER(TYu)(2,2)/MODELPARAMETER(Yu)(2,2)), "TYu(3,3)/Yu(3,3)")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block Ad Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_MIXING_MATRIX(1, 1, (MODELPARAMETER(TYd)(0,0)/MODELPARAMETER(Yd)(0,0)), "TYd(1,1)/Yd(1,1)")
+            << FORMAT_MIXING_MATRIX(2, 2, (MODELPARAMETER(TYd)(1,1)/MODELPARAMETER(Yd)(1,1)), "TYd(2,2)/Yd(2,2)")
+            << FORMAT_MIXING_MATRIX(3, 3, (MODELPARAMETER(TYd)(2,2)/MODELPARAMETER(Yd)(2,2)), "TYd(3,3)/Yd(3,3)")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block Ae Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_MIXING_MATRIX(1, 1, (MODELPARAMETER(TYe)(0,0)/MODELPARAMETER(Ye)(0,0)), "TYe(1,1)/Ye(1,1)")
+            << FORMAT_MIXING_MATRIX(2, 2, (MODELPARAMETER(TYe)(1,1)/MODELPARAMETER(Ye)(1,1)), "TYe(2,2)/Ye(2,2)")
+            << FORMAT_MIXING_MATRIX(3, 3, (MODELPARAMETER(TYe)(2,2)/MODELPARAMETER(Ye)(2,2)), "TYe(3,3)/Ye(3,3)")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block AKappa Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_MIXING_MATRIX(1, 1, (MODELPARAMETER(TKappa)(0,0)/MODELPARAMETER(Kappa)(0,0)), "TKappa(1,1)/Kappa(1,1)")
+            << FORMAT_MIXING_MATRIX(2, 2, (MODELPARAMETER(TKappa)(1,1)/MODELPARAMETER(Kappa)(1,1)), "TKappa(2,2)/Kappa(2,2)")
+            << FORMAT_MIXING_MATRIX(3, 3, (MODELPARAMETER(TKappa)(2,2)/MODELPARAMETER(Kappa)(2,2)), "TKappa(3,3)/Kappa(3,3)")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block ALambda12 Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_MIXING_MATRIX(1, 1, (MODELPARAMETER(TLambda12)(0,0)/MODELPARAMETER(Lambda12)(0,0)), "TLambda12(1,1)/Lambda12(1,1)")
+            << FORMAT_MIXING_MATRIX(2, 2, (MODELPARAMETER(TLambda12)(1,1)/MODELPARAMETER(Lambda12)(1,1)), "TLambda12(2,2)/Lambda12(2,2)")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block ALambda Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(1, (MODELPARAMETER(TLambdax)/MODELPARAMETER(Lambdax)), "TLambdax/Lambdax")
+      ;
+      slha_io.set_block(block);
+   }
+
+}
+
+/**
  * Write SLHA object to given output.  If output == "-", then the SLHA
  * object is written to std::cout.  Otherwise, output is interpreted
  * as a file name
@@ -493,6 +730,21 @@ void CE6SSM_slha_io::write_to(const std::string& output) const
       write_to_stream(std::cout);
    else
       write_to_file(output);
+}
+
+void CE6SSM_slha_io::write_to_file(const std::string& file_name) const
+{
+   slha_io.write_to_file(file_name);
+}
+
+void CE6SSM_slha_io::write_to_stream() const
+{
+   write_to_stream(std::cout);
+}
+
+void CE6SSM_slha_io::write_to_stream(std::ostream& ostr) const
+{
+   slha_io.write_to_stream(ostr);
 }
 
 /**
@@ -543,19 +795,19 @@ void CE6SSM_slha_io::read_from_stream(std::istream& istr)
  */
 void CE6SSM_slha_io::fill(CE6SSM_input_parameters& input) const
 {
-   SLHA_io::Tuple_processor minpar_processor = [&input, this] (int key, double value) {
+   SLHA_io::Tuple_processor minpar_processor = [&input] (int key, double value) {
       return fill_minpar_tuple(input, key, value);
    };
 
-   SLHA_io::Tuple_processor extpar_processor = [&input, this] (int key, double value) {
+   SLHA_io::Tuple_processor extpar_processor = [&input] (int key, double value) {
       return fill_extpar_tuple(input, key, value);
    };
 
-   SLHA_io::Tuple_processor imminpar_processor = [&input, this] (int key, double value) {
+   SLHA_io::Tuple_processor imminpar_processor = [&input] (int key, double value) {
       return fill_imminpar_tuple(input, key, value);
    };
 
-   SLHA_io::Tuple_processor imextpar_processor = [&input, this] (int key, double value) {
+   SLHA_io::Tuple_processor imextpar_processor = [&input] (int key, double value) {
       return fill_imextpar_tuple(input, key, value);
    };
 

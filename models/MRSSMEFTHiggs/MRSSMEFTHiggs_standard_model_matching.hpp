@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 18:26:59
 
 #ifndef MRSSMEFTHiggs_STANDARD_MODEL_MATCHING_H
 #define MRSSMEFTHiggs_STANDARD_MODEL_MATCHING_H

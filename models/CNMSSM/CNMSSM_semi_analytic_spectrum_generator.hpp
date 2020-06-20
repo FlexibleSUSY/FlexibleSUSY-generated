@@ -16,7 +16,6 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-// File generated at Fri 10 Apr 2020 17:56:00
 
 #ifndef CNMSSM_SEMI_ANALYTIC_SPECTRUM_GENERATOR_H
 #define CNMSSM_SEMI_ANALYTIC_SPECTRUM_GENERATOR_H
