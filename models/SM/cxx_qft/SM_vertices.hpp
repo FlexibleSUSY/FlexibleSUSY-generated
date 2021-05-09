@@ -20,7 +20,7 @@
 /**
  * @file cxx_qft/SM_vertices.hpp
  *
- * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.4 .
  */
 
 #ifndef SM_CXXQFT_VERTICES_H

@@ -20,7 +20,7 @@
 /**
  * @file SM_edm.hpp
  *
- * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.4 .
  */
 
 #ifndef SM_EDM_H
