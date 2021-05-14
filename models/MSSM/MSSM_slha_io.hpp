@@ -67,7 +67,7 @@ public:
    void read_from_stream(std::istream&);
    void set_block(const std::string& str, SLHA_io::Position position = SLHA_io::back) { slha_io.set_block(str, position); }
    void set_blocks(const std::vector<std::string>& vec, SLHA_io::Position position = SLHA_io::back) { slha_io.set_blocks(vec, position); }
-   void set_extra(const MSSM_slha&, const MSSM_scales&, const MSSM_observables&);
+   void set_extra(const MSSM_slha&, const MSSM_scales&, const MSSM_observables&, const flexiblesusy::Spectrum_generator_settings&);
    void set_input(const MSSM_input_parameters&);
    void set_modsel(const SLHA_io::Modsel&);
    void set_physical_input(const Physical_input&);
@@ -91,7 +91,7 @@ public:
    static void fill_imextpar_tuple(MSSM_input_parameters&, int, double);
 
    template <class... Ts>
-   void fill(const std::tuple<Ts...>&, const softsusy::QedQcd&, const MSSM_scales&, const MSSM_observables&);
+   void fill(const std::tuple<Ts...>&, const softsusy::QedQcd&, const MSSM_scales&, const MSSM_observables&, const Spectrum_generator_settings&);
 
 private:
    SLHA_io slha_io; ///< SLHA io class
@@ -122,7 +122,8 @@ void MSSM_slha_io::fill(
    const std::tuple<Ts...>& models,
    const softsusy::QedQcd& qedqcd,
    const MSSM_scales& scales,
-   const MSSM_observables& observables)
+   const MSSM_observables& observables,
+   const Spectrum_generator_settings& spectrum_generator_settings)
 {
    const auto& model = std::get<0>(models);
    const auto& problems = model.get_problems();
@@ -132,7 +133,7 @@ void MSSM_slha_io::fill(
    set_input(model.get_input());
    if (!problems.have_problem()) {
       set_spectrum(models);
-      set_extra(model, scales, observables);
+      set_extra(model, scales, observables, spectrum_generator_settings);
    }
 }
 

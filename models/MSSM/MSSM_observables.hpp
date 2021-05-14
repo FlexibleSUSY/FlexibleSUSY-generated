@@ -20,6 +20,7 @@
 #ifndef MSSM_OBSERVABLES_H
 #define MSSM_OBSERVABLES_H
 
+#include "observable_problems.hpp"
 #include <string>
 #include <vector>
 #include <Eigen/Core>
@@ -42,6 +43,7 @@ struct MSSM_observables {
    void clear(); ///< sets all observables to zero
    void set(const Eigen::ArrayXd&); ///< sets all observables from given vector
 
+   Observable_problems problems;
    double a_muon; ///< a_muon = (g-2)/2 of the muon (calculated with FlexibleSUSY)
    double edm_Fe_0; ///< electric dipole moment of Fe(0) [1/GeV]
    double edm_Fe_1; ///< electric dipole moment of Fe(1) [1/GeV]
@@ -51,11 +53,11 @@ struct MSSM_observables {
 };
 
 MSSM_observables calculate_observables(
-   MSSM_mass_eigenstates&, const softsusy::QedQcd&,
+   const MSSM_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&);
 
 MSSM_observables calculate_observables(
-   MSSM_mass_eigenstates&, const softsusy::QedQcd&,
+   const MSSM_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&, double scale);
 
 } // namespace flexiblesusy

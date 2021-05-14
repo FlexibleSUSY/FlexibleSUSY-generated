@@ -312,7 +312,7 @@ $(METACODE_STAMP_CMSSMSemiAnalytic):
 endif
 
 $(LIBCMSSMSemiAnalytic_DEP) $(EXECMSSMSemiAnalytic_DEP) $(LLCMSSMSemiAnalytic_DEP) $(LIBCMSSMSemiAnalytic_OBJ) $(EXECMSSMSemiAnalytic_OBJ) $(LLCMSSMSemiAnalytic_OBJ) $(LLCMSSMSemiAnalytic_LIB): \
-	CPPFLAGS += $(MODCMSSMSemiAnalytic_SUBMOD_INC) $(MODCMSSMSemiAnalytic_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS)  $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODCMSSMSemiAnalytic_SUBMOD_INC) $(MODCMSSMSemiAnalytic_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBCMSSMSemiAnalytic_DEP) $(EXECMSSMSemiAnalytic_DEP) $(LLCMSSMSemiAnalytic_DEP) $(LIBCMSSMSemiAnalytic_OBJ) $(EXECMSSMSemiAnalytic_OBJ) $(LLCMSSMSemiAnalytic_OBJ) $(LLCMSSMSemiAnalytic_LIB): \
@@ -328,11 +328,11 @@ $(LIBCMSSMSemiAnalytic): $(LIBCMSSMSemiAnalytic_OBJ)
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBCMSSMSemiAnalytic) $(MODCMSSMSemiAnalytic_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
 $(LLCMSSMSemiAnalytic_LIB): $(LLCMSSMSemiAnalytic_OBJ) $(LIBCMSSMSemiAnalytic) $(MODCMSSMSemiAnalytic_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
 
 ALLDEP += $(LIBCMSSMSemiAnalytic_DEP) $(EXECMSSMSemiAnalytic_DEP)
 ALLSRC += $(LIBCMSSMSemiAnalytic_SRC) $(EXECMSSMSemiAnalytic_SRC)
