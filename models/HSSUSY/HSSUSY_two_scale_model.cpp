@@ -25,7 +25,7 @@
  * which solve EWSB and calculate pole masses and mixings from MSbar
  * parameters.
  *
- * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.4 .
  */
 
 #include "HSSUSY_two_scale_model.hpp"

@@ -200,6 +200,7 @@ int run_solver(int loop_library, const lowNMSSMTanBetaAtMZ_input_parameters& inp
    Spectrum_generator_settings settings;
    settings.set(Spectrum_generator_settings::precision, 1.0e-4);
    settings.set(Spectrum_generator_settings::loop_library, loop_library);
+   settings.set(Spectrum_generator_settings::calculate_bsm_masses, 1.0);
 
    lowNMSSMTanBetaAtMZ_spectrum_generator<solver_type> spectrum_generator;
    spectrum_generator.set_settings(settings);
@@ -218,7 +219,7 @@ int run_solver(int loop_library, const lowNMSSMTanBetaAtMZ_input_parameters& inp
 
    // SLHA output
    lowNMSSMTanBetaAtMZ_slha_io slha_io;
-   slha_io.fill(models, qedqcd, scales, observables);
+   slha_io.fill(models, qedqcd, scales, observables, settings);
    slha_io.write_to_stream(std::cout);
 
    return spectrum_generator.get_exit_code();

@@ -154,7 +154,7 @@ Eigen::Matrix<double,3,1> calculate_tadpole_over_vevs(
  */
 auto calculate_mh2_tree_level(E6SSMEFTHiggs_mass_eigenstates model) -> decltype(model.get_mass_matrix_hh())
 {
-   model.solve_ewsb_tree_level();
+   model.solve_ewsb_tree_level_custom();
    return model.get_mass_matrix_hh();
 }
 

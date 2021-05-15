@@ -25,7 +25,7 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.4 .
  */
 
 #include "MRSSMEFTHiggs_mass_eigenstates.hpp"
@@ -9477,9 +9477,9 @@ std::complex<double> CLASSNAME::CpbarUChiChiVZPL(int gO1, int gI2) const
 std::complex<double> CLASSNAME::CpbarUCha1barCha2RhPL(int gO2, int gI1, int gI2) const
 {
    
-   const std::complex<double> result = LamTD*Conj(UP2(gI1,0))*SUM(gl1385,0,1,Conj(
-      UM1(gl1385,1))*UP1(gl1385,gO2))*ZHR(gI2,0) - LamTU*Conj(UP2(gI1,1))*SUM(
-      gl1385,0,1,Conj(UM1(gl1385,0))*UP1(gl1385,gO2))*ZHR(gI2,1);
+   const std::complex<double> result = LamTD*Conj(UP2(gI1,0))*SUM(gl1392,0,1,Conj(
+      UM1(gl1392,1))*UP1(gl1392,gO2))*ZHR(gI2,0) - LamTU*Conj(UP2(gI1,1))*SUM(
+      gl1392,0,1,Conj(UM1(gl1392,0))*UP1(gl1392,gO2))*ZHR(gI2,1);
 
    return result;
 }
@@ -9487,9 +9487,9 @@ std::complex<double> CLASSNAME::CpbarUCha1barCha2RhPL(int gO2, int gI1, int gI2)
 std::complex<double> CLASSNAME::CpbarUCha1barCha2RhPR(int gO1, int gI1, int gI2) const
 {
    
-   const std::complex<double> result = -(g2*(SUM(gl1388,0,1,Conj(UM1(gl1388,gO1))*
-      UP1(gl1388,1))*UM2(gI1,0)*ZHR(gI2,0) + SUM(gl1388,0,1,Conj(UM1(gl1388,gO1))*
-      UP1(gl1388,0))*UM2(gI1,1)*ZHR(gI2,1)));
+   const std::complex<double> result = -(g2*(SUM(gl1395,0,1,Conj(UM1(gl1395,gO1))*
+      UP1(gl1395,1))*UM2(gI1,0)*ZHR(gI2,0) + SUM(gl1395,0,1,Conj(UM1(gl1395,gO1))*
+      UP1(gl1395,0))*UM2(gI1,1)*ZHR(gI2,1)));
 
    return result;
 }
@@ -9498,11 +9498,11 @@ std::complex<double> CLASSNAME::CpbarUCha1Cha1AhPL(int gO2, int gI1, int gI2) co
 {
    
    const std::complex<double> result = std::complex<double>(0,0.5)*(g2*Conj(UP1(
-      gI1,0))*(1.4142135623730951*SUM(gl1391,0,1,Conj(UM1(gl1391,1))*UP1(gl1391,
-      gO2))*ZA(gI2,0) + 2*SUM(gl1391,0,1,Conj(UM1(gl1391,0))*UP1(gl1391,gO2))*ZA(
-      gI2,3)) - Conj(UP1(gI1,1))*(1.4142135623730951*LamTD*SUM(gl1391,0,1,Conj(UM1
-      (gl1391,0))*UP1(gl1391,gO2))*ZA(gI2,0) + SUM(gl1391,0,1,Conj(UM1(gl1391,1))*
-      UP1(gl1391,gO2))*(1.4142135623730951*LamSD*ZA(gI2,2) - LamTD*ZA(gI2,3))));
+      gI1,0))*(1.4142135623730951*SUM(gl1398,0,1,Conj(UM1(gl1398,1))*UP1(gl1398,
+      gO2))*ZA(gI2,0) + 2*SUM(gl1398,0,1,Conj(UM1(gl1398,0))*UP1(gl1398,gO2))*ZA(
+      gI2,3)) - Conj(UP1(gI1,1))*(1.4142135623730951*LamTD*SUM(gl1398,0,1,Conj(UM1
+      (gl1398,0))*UP1(gl1398,gO2))*ZA(gI2,0) + SUM(gl1398,0,1,Conj(UM1(gl1398,1))*
+      UP1(gl1398,gO2))*(1.4142135623730951*LamSD*ZA(gI2,2) - LamTD*ZA(gI2,3))));
 
    return result;
 }
@@ -9511,10 +9511,10 @@ std::complex<double> CLASSNAME::CpbarUCha1Cha1AhPR(int gO1, int gI1, int gI2) co
 {
    
    const std::complex<double> result = std::complex<double>(0,0.5)*(
-      1.4142135623730951*Conj(LamSD)*SUM(gl1394,0,1,Conj(UM1(gl1394,gO1))*UP1(
-      gl1394,1))*UM1(gI1,1)*ZA(gI2,2) - g2*SUM(gl1394,0,1,Conj(UM1(gl1394,gO1))*
-      UP1(gl1394,0))*(1.4142135623730951*UM1(gI1,1)*ZA(gI2,0) + 2*UM1(gI1,0)*ZA(
-      gI2,3)) + Conj(LamTD)*SUM(gl1394,0,1,Conj(UM1(gl1394,gO1))*UP1(gl1394,1))*(
+      1.4142135623730951*Conj(LamSD)*SUM(gl1401,0,1,Conj(UM1(gl1401,gO1))*UP1(
+      gl1401,1))*UM1(gI1,1)*ZA(gI2,2) - g2*SUM(gl1401,0,1,Conj(UM1(gl1401,gO1))*
+      UP1(gl1401,0))*(1.4142135623730951*UM1(gI1,1)*ZA(gI2,0) + 2*UM1(gI1,0)*ZA(
+      gI2,3)) + Conj(LamTD)*SUM(gl1401,0,1,Conj(UM1(gl1401,gO1))*UP1(gl1401,1))*(
       1.4142135623730951*UM1(gI1,0)*ZA(gI2,0) - UM1(gI1,1)*ZA(gI2,3)));
 
    return result;
@@ -9523,8 +9523,8 @@ std::complex<double> CLASSNAME::CpbarUCha1Cha1AhPR(int gO1, int gI1, int gI2) co
 std::complex<double> CLASSNAME::CpbarUCha1barFeSvPL(int gO2, int gI1, int gI2) const
 {
    
-   const std::complex<double> result = SUM(gl1397,0,1,Conj(UM1(gl1397,1))*UP1(
-      gl1397,gO2))*SUM(j2,0,2,Conj(ZV(gI2,j2))*SUM(j1,0,2,Conj(ZER(gI1,j1))*Ye(j1,
+   const std::complex<double> result = SUM(gl1404,0,1,Conj(UM1(gl1404,1))*UP1(
+      gl1404,gO2))*SUM(j2,0,2,Conj(ZV(gI2,j2))*SUM(j1,0,2,Conj(ZER(gI1,j1))*Ye(j1,
       j2)));
 
    return result;
@@ -9533,8 +9533,8 @@ std::complex<double> CLASSNAME::CpbarUCha1barFeSvPL(int gO2, int gI1, int gI2) c
 std::complex<double> CLASSNAME::CpbarUCha1barFeSvPR(int gO1, int gI1, int gI2) const
 {
    
-   const std::complex<double> result = -(g2*SUM(gl1400,0,1,Conj(UM1(gl1400,gO1))*
-      UP1(gl1400,0))*SUM(j1,0,2,Conj(ZV(gI2,j1))*ZEL(gI1,j1)));
+   const std::complex<double> result = -(g2*SUM(gl1407,0,1,Conj(UM1(gl1407,gO1))*
+      UP1(gl1407,0))*SUM(j1,0,2,Conj(ZV(gI2,j1))*ZEL(gI1,j1)));
 
    return result;
 }
@@ -9542,8 +9542,8 @@ std::complex<double> CLASSNAME::CpbarUCha1barFeSvPR(int gO1, int gI1, int gI2) c
 std::complex<double> CLASSNAME::CpbarUCha1barFdSuPL(int gO2, int gI1, int gI2) const
 {
    
-   const std::complex<double> result = SUM(gl1403,0,1,Conj(UM1(gl1403,1))*UP1(
-      gl1403,gO2))*SUM(j2,0,2,Conj(ZU(gI2,j2))*SUM(j1,0,2,Conj(ZDR(gI1,j1))*Yd(j1,
+   const std::complex<double> result = SUM(gl1410,0,1,Conj(UM1(gl1410,1))*UP1(
+      gl1410,gO2))*SUM(j2,0,2,Conj(ZU(gI2,j2))*SUM(j1,0,2,Conj(ZDR(gI1,j1))*Yd(j1,
       j2)));
 
    return result;
@@ -9552,8 +9552,8 @@ std::complex<double> CLASSNAME::CpbarUCha1barFdSuPL(int gO2, int gI1, int gI2) c
 std::complex<double> CLASSNAME::CpbarUCha1barFdSuPR(int gO1, int gI1, int gI2) const
 {
    
-   const std::complex<double> result = -(g2*SUM(gl1406,0,1,Conj(UM1(gl1406,gO1))*
-      UP1(gl1406,0))*SUM(j1,0,2,Conj(ZU(gI2,j1))*ZDL(gI1,j1)));
+   const std::complex<double> result = -(g2*SUM(gl1413,0,1,Conj(UM1(gl1413,gO1))*
+      UP1(gl1413,0))*SUM(j1,0,2,Conj(ZU(gI2,j1))*ZDL(gI1,j1)));
 
    return result;
 }
@@ -9562,10 +9562,10 @@ std::complex<double> CLASSNAME::CpbarUCha1Cha1hhPL(int gO2, int gI2, int gI1) co
 {
    
    const std::complex<double> result = 0.5*(-(g2*Conj(UP1(gI2,0))*(
-      1.4142135623730951*SUM(gl1409,0,1,Conj(UM1(gl1409,1))*UP1(gl1409,gO2))*ZH(
-      gI1,0) + 2*SUM(gl1409,0,1,Conj(UM1(gl1409,0))*UP1(gl1409,gO2))*ZH(gI1,3))) -
-      Conj(UP1(gI2,1))*(1.4142135623730951*LamTD*SUM(gl1409,0,1,Conj(UM1(gl1409,0)
-      )*UP1(gl1409,gO2))*ZH(gI1,0) + SUM(gl1409,0,1,Conj(UM1(gl1409,1))*UP1(gl1409
+      1.4142135623730951*SUM(gl1416,0,1,Conj(UM1(gl1416,1))*UP1(gl1416,gO2))*ZH(
+      gI1,0) + 2*SUM(gl1416,0,1,Conj(UM1(gl1416,0))*UP1(gl1416,gO2))*ZH(gI1,3))) -
+      Conj(UP1(gI2,1))*(1.4142135623730951*LamTD*SUM(gl1416,0,1,Conj(UM1(gl1416,0)
+      )*UP1(gl1416,gO2))*ZH(gI1,0) + SUM(gl1416,0,1,Conj(UM1(gl1416,1))*UP1(gl1416
       ,gO2))*(1.4142135623730951*LamSD*ZH(gI1,2) - LamTD*ZH(gI1,3))));
 
    return result;
@@ -9575,10 +9575,10 @@ std::complex<double> CLASSNAME::CpbarUCha1Cha1hhPR(int gO1, int gI2, int gI1) co
 {
    
    const std::complex<double> result = 0.5*(-1.4142135623730951*Conj(LamSD)*SUM(
-      gl1412,0,1,Conj(UM1(gl1412,gO1))*UP1(gl1412,1))*UM1(gI2,1)*ZH(gI1,2) - g2*
-      SUM(gl1412,0,1,Conj(UM1(gl1412,gO1))*UP1(gl1412,0))*(1.4142135623730951*UM1(
-      gI2,1)*ZH(gI1,0) + 2*UM1(gI2,0)*ZH(gI1,3)) + Conj(LamTD)*SUM(gl1412,0,1,Conj
-      (UM1(gl1412,gO1))*UP1(gl1412,1))*(-1.4142135623730951*UM1(gI2,0)*ZH(gI1,0) +
+      gl1419,0,1,Conj(UM1(gl1419,gO1))*UP1(gl1419,1))*UM1(gI2,1)*ZH(gI1,2) - g2*
+      SUM(gl1419,0,1,Conj(UM1(gl1419,gO1))*UP1(gl1419,0))*(1.4142135623730951*UM1(
+      gI2,1)*ZH(gI1,0) + 2*UM1(gI2,0)*ZH(gI1,3)) + Conj(LamTD)*SUM(gl1419,0,1,Conj
+      (UM1(gl1419,gO1))*UP1(gl1419,1))*(-1.4142135623730951*UM1(gI2,0)*ZH(gI1,0) +
       UM1(gI2,1)*ZH(gI1,3)));
 
    return result;
@@ -9588,12 +9588,12 @@ std::complex<double> CLASSNAME::CpbarUCha1ChiconjHpmPL(int gO2, int gI2, int gI1
 {
    
    const std::complex<double> result = 0.5477225575051661*g1*Conj(ZN1(gI2,0))*SUM(
-      gl1415,0,1,Conj(UM1(gl1415,1))*UP1(gl1415,gO2))*ZP(gI1,0) - LamTU*Conj(ZN1(
-      gI2,3))*SUM(gl1415,0,1,Conj(UM1(gl1415,0))*UP1(gl1415,gO2))*ZP(gI1,1) +
-      0.7071067811865475*g2*Conj(ZN1(gI2,1))*(SUM(gl1415,0,1,Conj(UM1(gl1415,1))*
-      UP1(gl1415,gO2))*ZP(gI1,0) + 2*SUM(gl1415,0,1,Conj(UM1(gl1415,0))*UP1(gl1415
-      ,gO2))*ZP(gI1,2)) + LamTD*Conj(ZN1(gI2,2))*SUM(gl1415,0,1,Conj(UM1(gl1415,1)
-      )*UP1(gl1415,gO2))*ZP(gI1,3);
+      gl1422,0,1,Conj(UM1(gl1422,1))*UP1(gl1422,gO2))*ZP(gI1,0) - LamTU*Conj(ZN1(
+      gI2,3))*SUM(gl1422,0,1,Conj(UM1(gl1422,0))*UP1(gl1422,gO2))*ZP(gI1,1) +
+      0.7071067811865475*g2*Conj(ZN1(gI2,1))*(SUM(gl1422,0,1,Conj(UM1(gl1422,1))*
+      UP1(gl1422,gO2))*ZP(gI1,0) + 2*SUM(gl1422,0,1,Conj(UM1(gl1422,0))*UP1(gl1422
+      ,gO2))*ZP(gI1,2)) + LamTD*Conj(ZN1(gI2,2))*SUM(gl1422,0,1,Conj(UM1(gl1422,1)
+      )*UP1(gl1422,gO2))*ZP(gI1,3);
 
    return result;
 }
@@ -9601,11 +9601,11 @@ std::complex<double> CLASSNAME::CpbarUCha1ChiconjHpmPL(int gO2, int gI2, int gI1
 std::complex<double> CLASSNAME::CpbarUCha1ChiconjHpmPR(int gO1, int gI2, int gI1) const
 {
    
-   const std::complex<double> result = -(Conj(LamSD)*SUM(gl1418,0,1,Conj(UM1(
-      gl1418,gO1))*UP1(gl1418,1))*ZN2(gI2,0)*ZP(gI1,0)) + 0.5*Conj(LamTD)*SUM(
-      gl1418,0,1,Conj(UM1(gl1418,gO1))*UP1(gl1418,1))*(1.4142135623730951*ZN2(gI2,
-      1)*ZP(gI1,0) - 2*ZN2(gI2,2)*ZP(gI1,2)) + g2*SUM(gl1418,0,1,Conj(UM1(gl1418,
-      gO1))*UP1(gl1418,0))*(-(ZN2(gI2,3)*ZP(gI1,1)) + 1.4142135623730951*ZN2(gI2,1
+   const std::complex<double> result = -(Conj(LamSD)*SUM(gl1425,0,1,Conj(UM1(
+      gl1425,gO1))*UP1(gl1425,1))*ZN2(gI2,0)*ZP(gI1,0)) + 0.5*Conj(LamTD)*SUM(
+      gl1425,0,1,Conj(UM1(gl1425,gO1))*UP1(gl1425,1))*(1.4142135623730951*ZN2(gI2,
+      1)*ZP(gI1,0) - 2*ZN2(gI2,2)*ZP(gI1,2)) + g2*SUM(gl1425,0,1,Conj(UM1(gl1425,
+      gO1))*UP1(gl1425,0))*(-(ZN2(gI2,3)*ZP(gI1,1)) + 1.4142135623730951*ZN2(gI2,1
       )*ZP(gI1,3));
 
    return result;
@@ -9614,10 +9614,10 @@ std::complex<double> CLASSNAME::CpbarUCha1ChiconjHpmPR(int gO1, int gI2, int gI1
 std::complex<double> CLASSNAME::CpbarUCha1barChiSRdpPL(int gO2, int gI1) const
 {
    
-   const std::complex<double> result = -(LamTD*Conj(ZN2(gI1,2))*SUM(gl1421,0,1,
-      Conj(UM1(gl1421,0))*UP1(gl1421,gO2))) + 0.5*(-2*LamSD*Conj(ZN2(gI1,0)) +
-      1.4142135623730951*LamTD*Conj(ZN2(gI1,1)))*SUM(gl1421,0,1,Conj(UM1(gl1421,1)
-      )*UP1(gl1421,gO2));
+   const std::complex<double> result = -(LamTD*Conj(ZN2(gI1,2))*SUM(gl1428,0,1,
+      Conj(UM1(gl1428,0))*UP1(gl1428,gO2))) + 0.5*(-2*LamSD*Conj(ZN2(gI1,0)) +
+      1.4142135623730951*LamTD*Conj(ZN2(gI1,1)))*SUM(gl1428,0,1,Conj(UM1(gl1428,1)
+      )*UP1(gl1428,gO2));
 
    return result;
 }
@@ -9625,9 +9625,9 @@ std::complex<double> CLASSNAME::CpbarUCha1barChiSRdpPL(int gO2, int gI1) const
 std::complex<double> CLASSNAME::CpbarUCha1barChiSRdpPR(int gO1, int gI1) const
 {
    
-   const std::complex<double> result = -0.1*SUM(gl1424,0,1,Conj(UM1(gl1424,gO1))*
-      UP1(gl1424,1))*(5.477225575051661*g1*ZN1(gI1,0) + 7.0710678118654755*g2*ZN1(
-      gI1,1)) - g2*SUM(gl1424,0,1,Conj(UM1(gl1424,gO1))*UP1(gl1424,0))*ZN1(gI1,2);
+   const std::complex<double> result = -0.1*SUM(gl1431,0,1,Conj(UM1(gl1431,gO1))*
+      UP1(gl1431,1))*(5.477225575051661*g1*ZN1(gI1,0) + 7.0710678118654755*g2*ZN1(
+      gI1,1)) - g2*SUM(gl1431,0,1,Conj(UM1(gl1431,gO1))*UP1(gl1431,0))*ZN1(gI1,2);
 
    return result;
 }
@@ -9635,8 +9635,8 @@ std::complex<double> CLASSNAME::CpbarUCha1barChiSRdpPR(int gO1, int gI1) const
 std::complex<double> CLASSNAME::CpbarUCha1FuconjSdPL(int gO2, int gI2, int gI1) const
 {
    
-   const std::complex<double> result = SUM(gl1427,0,1,Conj(UM1(gl1427,1))*UP1(
-      gl1427,gO2))*SUM(j2,0,2,Conj(ZUL(gI2,j2))*SUM(j1,0,2,Yd(j1,j2)*ZD(gI1,3 + j1
+   const std::complex<double> result = SUM(gl1434,0,1,Conj(UM1(gl1434,1))*UP1(
+      gl1434,gO2))*SUM(j2,0,2,Conj(ZUL(gI2,j2))*SUM(j1,0,2,Yd(j1,j2)*ZD(gI1,3 + j1
       )));
 
    return result;
@@ -9653,8 +9653,8 @@ double CLASSNAME::CpbarUCha1FuconjSdPR(int , int , int ) const
 std::complex<double> CLASSNAME::CpbarUCha1FvconjSePL(int gO2, int gI2, int gI1) const
 {
    
-   const std::complex<double> result = SUM(gl1433,0,1,Conj(UM1(gl1433,1))*UP1(
-      gl1433,gO2))*SUM(j1,0,2,Ye(j1,gI2)*ZE(gI1,3 + j1));
+   const std::complex<double> result = SUM(gl1440,0,1,Conj(UM1(gl1440,1))*UP1(
+      gl1440,gO2))*SUM(j1,0,2,Ye(j1,gI2)*ZE(gI1,3 + j1));
 
    return result;
 }
@@ -9670,10 +9670,10 @@ double CLASSNAME::CpbarUCha1FvconjSePR(int , int , int ) const
 std::complex<double> CLASSNAME::CpbarUCha1Cha1VPPR(int gO2, int gI2) const
 {
    
-   const std::complex<double> result = -(g2*Sin(ThetaW())*SUM(gl1439,0,1,Conj(UM1(
-      gl1439,0))*UP1(gl1439,gO2))*UM1(gI2,0)) - 0.1*(3.872983346207417*g1*Cos(
-      ThetaW()) + 5*g2*Sin(ThetaW()))*SUM(gl1439,0,1,Conj(UM1(gl1439,1))*UP1(
-      gl1439,gO2))*UM1(gI2,1);
+   const std::complex<double> result = -(g2*Sin(ThetaW())*SUM(gl1446,0,1,Conj(UM1(
+      gl1446,0))*UP1(gl1446,gO2))*UM1(gI2,0)) - 0.1*(3.872983346207417*g1*Cos(
+      ThetaW()) + 5*g2*Sin(ThetaW()))*SUM(gl1446,0,1,Conj(UM1(gl1446,1))*UP1(
+      gl1446,gO2))*UM1(gI2,1);
 
    return result;
 }
@@ -9682,9 +9682,9 @@ std::complex<double> CLASSNAME::CpbarUCha1Cha1VPPL(int gO1, int gI2) const
 {
    
    const std::complex<double> result = -(g2*Conj(UP1(gI2,0))*Sin(ThetaW())*SUM(
-      gl1442,0,1,Conj(UM1(gl1442,gO1))*UP1(gl1442,0))) - 0.1*Conj(UP1(gI2,1))*(
-      3.872983346207417*g1*Cos(ThetaW()) + 5*g2*Sin(ThetaW()))*SUM(gl1442,0,1,Conj
-      (UM1(gl1442,gO1))*UP1(gl1442,1));
+      gl1449,0,1,Conj(UM1(gl1449,gO1))*UP1(gl1449,0))) - 0.1*Conj(UP1(gI2,1))*(
+      3.872983346207417*g1*Cos(ThetaW()) + 5*g2*Sin(ThetaW()))*SUM(gl1449,0,1,Conj
+      (UM1(gl1449,gO1))*UP1(gl1449,1));
 
    return result;
 }
@@ -9692,10 +9692,10 @@ std::complex<double> CLASSNAME::CpbarUCha1Cha1VPPL(int gO1, int gI2) const
 std::complex<double> CLASSNAME::CpbarUCha1Cha1VZPR(int gO2, int gI2) const
 {
    
-   const std::complex<double> result = -(g2*Cos(ThetaW())*SUM(gl1445,0,1,Conj(UM1(
-      gl1445,0))*UP1(gl1445,gO2))*UM1(gI2,0)) + 0.1*(-5*g2*Cos(ThetaW()) +
-      3.872983346207417*g1*Sin(ThetaW()))*SUM(gl1445,0,1,Conj(UM1(gl1445,1))*UP1(
-      gl1445,gO2))*UM1(gI2,1);
+   const std::complex<double> result = -(g2*Cos(ThetaW())*SUM(gl1452,0,1,Conj(UM1(
+      gl1452,0))*UP1(gl1452,gO2))*UM1(gI2,0)) + 0.1*(-5*g2*Cos(ThetaW()) +
+      3.872983346207417*g1*Sin(ThetaW()))*SUM(gl1452,0,1,Conj(UM1(gl1452,1))*UP1(
+      gl1452,gO2))*UM1(gI2,1);
 
    return result;
 }
@@ -9704,9 +9704,9 @@ std::complex<double> CLASSNAME::CpbarUCha1Cha1VZPL(int gO1, int gI2) const
 {
    
    const std::complex<double> result = -(g2*Conj(UP1(gI2,0))*Cos(ThetaW())*SUM(
-      gl1448,0,1,Conj(UM1(gl1448,gO1))*UP1(gl1448,0))) + 0.1*Conj(UP1(gI2,1))*(-5*
-      g2*Cos(ThetaW()) + 3.872983346207417*g1*Sin(ThetaW()))*SUM(gl1448,0,1,Conj(
-      UM1(gl1448,gO1))*UP1(gl1448,1));
+      gl1455,0,1,Conj(UM1(gl1455,gO1))*UP1(gl1455,0))) + 0.1*Conj(UP1(gI2,1))*(-5*
+      g2*Cos(ThetaW()) + 3.872983346207417*g1*Sin(ThetaW()))*SUM(gl1455,0,1,Conj(
+      UM1(gl1455,gO1))*UP1(gl1455,1));
 
    return result;
 }
@@ -9714,9 +9714,9 @@ std::complex<double> CLASSNAME::CpbarUCha1Cha1VZPL(int gO1, int gI2) const
 std::complex<double> CLASSNAME::CpbarUCha1ChiconjVWmPR(int gO2, int gI2) const
 {
    
-   const std::complex<double> result = g2*SUM(gl1451,0,1,Conj(UM1(gl1451,0))*UP1(
-      gl1451,gO2))*ZN2(gI2,1) + 0.7071067811865475*g2*SUM(gl1451,0,1,Conj(UM1(
-      gl1451,1))*UP1(gl1451,gO2))*ZN2(gI2,2);
+   const std::complex<double> result = g2*SUM(gl1458,0,1,Conj(UM1(gl1458,0))*UP1(
+      gl1458,gO2))*ZN2(gI2,1) + 0.7071067811865475*g2*SUM(gl1458,0,1,Conj(UM1(
+      gl1458,1))*UP1(gl1458,gO2))*ZN2(gI2,2);
 
    return result;
 }
@@ -9724,9 +9724,9 @@ std::complex<double> CLASSNAME::CpbarUCha1ChiconjVWmPR(int gO2, int gI2) const
 std::complex<double> CLASSNAME::CpbarUCha1ChiconjVWmPL(int gO1, int gI2) const
 {
    
-   const std::complex<double> result = g2*Conj(ZN1(gI2,1))*SUM(gl1454,0,1,Conj(UM1
-      (gl1454,gO1))*UP1(gl1454,0)) - 0.7071067811865475*g2*Conj(ZN1(gI2,2))*SUM(
-      gl1454,0,1,Conj(UM1(gl1454,gO1))*UP1(gl1454,1));
+   const std::complex<double> result = g2*Conj(ZN1(gI2,1))*SUM(gl1461,0,1,Conj(UM1
+      (gl1461,gO1))*UP1(gl1461,0)) - 0.7071067811865475*g2*Conj(ZN1(gI2,2))*SUM(
+      gl1461,0,1,Conj(UM1(gl1461,gO1))*UP1(gl1461,1));
 
    return result;
 }
@@ -12224,9 +12224,9 @@ std::complex<double> CLASSNAME::self_energy_VWm_1loop(double p ) const
    result += A0(Sqr(MSRum))*CpSRumconjSRumconjVWmVWm();
    result += -(AbsSqr(CpconjVWmVPVWm())*(A0(Sqr(MVWm)) + 10*B00(Sqr(p),Sqr(MVWm),0
       ) + B0(Sqr(p),Sqr(MVWm),0)*(Sqr(MVWm) + 4*Sqr(p))));
-   result += -(AbsSqr(CpconjVWmVWmVZ())*(A0(Sqr(MVWm)) + A0(Sqr(MVZ)) + 10*B00(Sqr
-      (p),Sqr(MVZ),Sqr(MVWm)) + B0(Sqr(p),Sqr(MVZ),Sqr(MVWm))*(Sqr(MVWm) + Sqr(MVZ
-      ) + 4*Sqr(p))));
+   result += AbsSqr(CpconjVWmVWmVZ())*(-A0(Sqr(MVWm)) - A0(Sqr(MVZ)) - 10*B00(Sqr(
+      p),Sqr(MVZ),Sqr(MVWm)) - B0(Sqr(p),Sqr(MVZ),Sqr(MVWm))*(Sqr(MVWm) + Sqr(MVZ)
+      + 4*Sqr(p)));
    result += SUM(gI1,0,1,A0(Sqr(MRh(gI1)))*CpRhconjRhconjVWmVWm(gI1,gI1));
    result += -4*SUM(gI1,0,1,AbsSqr(CpSRumconjRhconjVWm(gI1))*B00(Sqr(p),Sqr(MSRum)
       ,Sqr(MRh(gI1))));

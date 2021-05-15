@@ -22,7 +22,7 @@
  *
  * @brief implementation of EWSB solver for semi-analytic iteration
  *
- * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.4 .
  */
 
 #include "CNMSSM_semi_analytic_ewsb_solver.hpp"

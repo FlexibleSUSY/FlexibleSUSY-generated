@@ -106,7 +106,7 @@ int run_solver(flexiblesusy::lowNMSSMTanBetaAtMZ_slha_io& slha_io,
             spectrum_generator_settings.get(
                Spectrum_generator_settings::force_positive_masses));
          slha_io.set_spectrum(models);
-         slha_io.set_extra(std::get<0>(models), scales, observables);
+         slha_io.set_extra(std::get<0>(models), scales, observables, spectrum_generator_settings);
       }
       slha_io.write_to(slha_output_file);
    }
@@ -206,6 +206,13 @@ int main(int argc, char* argv[])
    } catch (const Error& error) {
       ERROR(error.what_detailed());
       return EXIT_FAILURE;
+   }
+
+   if (spectrum_generator_settings.get(Spectrum_generator_settings::calculate_observables) &&
+       !spectrum_generator_settings.get(Spectrum_generator_settings::calculate_bsm_masses)) {
+         WARNING("Calculate observables (flag FlexibleSUSY[15] = 1) requires BSM pole masses. Setting FlexibleSUSY[23] = 1.");
+         spectrum_generator_settings.set(
+            Spectrum_generator_settings::calculate_bsm_masses, 1.0);
    }
 
    const int exit_code

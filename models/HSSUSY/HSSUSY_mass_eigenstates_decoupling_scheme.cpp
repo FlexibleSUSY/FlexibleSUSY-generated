@@ -25,7 +25,7 @@
  * which solve EWSB and calculate masses and mixings from MSbar
  * parameters.
  *
- * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.4 .
  */
 
 #include "HSSUSY_mass_eigenstates_decoupling_scheme.hpp"
@@ -752,8 +752,7 @@ void CLASSNAME::calculate_MVG()
 double CLASSNAME::get_mass_matrix_Hp() const
 {
 
-   const double mass_matrix_Hp = Re(0.25*(4*mu2 + (2*Lambdax + Sqr(g2))*Sqr(v))
-      );
+   const double mass_matrix_Hp = Re(mu2 + 0.25*(2*Lambdax + Sqr(g2))*Sqr(v));
 
    return mass_matrix_Hp;
 }

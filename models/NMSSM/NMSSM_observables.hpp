@@ -20,6 +20,7 @@
 #ifndef NMSSM_OBSERVABLES_H
 #define NMSSM_OBSERVABLES_H
 
+#include "observable_problems.hpp"
 #include <string>
 #include <vector>
 #include <Eigen/Core>
@@ -42,6 +43,7 @@ struct NMSSM_observables {
    void clear(); ///< sets all observables to zero
    void set(const Eigen::ArrayXd&); ///< sets all observables from given vector
 
+   Observable_problems problems;
    double a_muon; ///< a_muon = (g-2)/2 of the muon (calculated with FlexibleSUSY)
    Eigen::Array<std::complex<double>,3,1> eff_cp_higgs_photon_photon; ///< effective H-Photon-Photon coupling
    Eigen::Array<std::complex<double>,3,1> eff_cp_higgs_gluon_gluon; ///< effective H-Gluon-Gluon coupling
@@ -51,11 +53,11 @@ struct NMSSM_observables {
 };
 
 NMSSM_observables calculate_observables(
-   NMSSM_mass_eigenstates&, const softsusy::QedQcd&,
+   const NMSSM_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&);
 
 NMSSM_observables calculate_observables(
-   NMSSM_mass_eigenstates&, const softsusy::QedQcd&,
+   const NMSSM_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&, double scale);
 
 } // namespace flexiblesusy

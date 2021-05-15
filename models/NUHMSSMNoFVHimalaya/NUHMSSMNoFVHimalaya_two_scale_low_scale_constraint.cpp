@@ -30,6 +30,7 @@
 #include "raii.hpp"
 #include "root_finder.hpp"
 #include "threshold_loop_functions.hpp"
+#include "numerics2.hpp"
 #include "mssm_twoloop_mb.hpp"
 #include "mssm_twoloop_mt.hpp"
 #include "mssm_twoloop_mtau.hpp"
@@ -209,7 +210,7 @@ void NUHMSSMNoFVHimalaya_low_scale_constraint<Two_scale>::calculate_threshold_co
 {
    check_model_ptr();
 
-   if (qedqcd.get_scale() != get_scale())
+   if (!is_zero(qedqcd.get_scale() - get_scale()))
       throw SetupError("Error: low-energy data"
           " set is not defined at the same scale as the low-energy"
           " constraint.  You need to run the low-energy data set to this"

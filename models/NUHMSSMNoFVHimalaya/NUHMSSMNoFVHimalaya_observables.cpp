@@ -32,7 +32,7 @@
 #include "lowe.h"
 #include "physical_input.hpp"
 
-#ifdef ENABLE_GM2Calc
+#ifdef ENABLE_GM2CALC
 #include "gm2calc_interface.hpp"
 #endif
 
@@ -117,7 +117,7 @@ void NUHMSSMNoFVHimalaya_observables::set(const Eigen::ArrayXd& vec)
 
 }
 
-NUHMSSMNoFVHimalaya_observables calculate_observables(NUHMSSMNoFVHimalaya_mass_eigenstates& model,
+NUHMSSMNoFVHimalaya_observables calculate_observables(const NUHMSSMNoFVHimalaya_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input,
                                               double scale)
@@ -127,26 +127,32 @@ NUHMSSMNoFVHimalaya_observables calculate_observables(NUHMSSMNoFVHimalaya_mass_e
    if (scale > 0.) {
       try {
          model_at_scale.run_to(scale);
+      } catch (const NonPerturbativeRunningError& e) {
+         NUHMSSMNoFVHimalaya_observables observables;
+         observables.problems.general.flag_non_perturbative_running(scale);
+         return observables;
       } catch (const Error& e) {
-         model.get_problems().flag_thrown(e.what_detailed());
-         return NUHMSSMNoFVHimalaya_observables();
+         NUHMSSMNoFVHimalaya_observables observables;
+         observables.problems.general.flag_thrown(e.what());
+         return observables;
       } catch (const std::exception& e) {
-         model.get_problems().flag_thrown(e.what());
-         return NUHMSSMNoFVHimalaya_observables();
+         NUHMSSMNoFVHimalaya_observables observables;
+         observables.problems.general.flag_thrown(e.what());
+         return observables;
       }
    }
 
    return calculate_observables(model_at_scale, qedqcd, physical_input);
 }
 
-NUHMSSMNoFVHimalaya_observables calculate_observables(NUHMSSMNoFVHimalaya_mass_eigenstates& model,
+NUHMSSMNoFVHimalaya_observables calculate_observables(const NUHMSSMNoFVHimalaya_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input)
 {
    NUHMSSMNoFVHimalaya_observables observables;
 
    try {
-      #ifdef ENABLE_GM2Calc
+      #ifdef ENABLE_GM2CALC
       GM2Calc_data gm2calc_data;
       gm2calc_data.alpha_s_MZ = ALPHA_S_MZ;
       gm2calc_data.MZ    = MZPole;
@@ -182,16 +188,18 @@ NUHMSSMNoFVHimalaya_observables calculate_observables(NUHMSSMNoFVHimalaya_mass_e
 
       observables.AMU = NUHMSSMNoFVHimalaya_a_muon::calculate_a_muon(MODEL, qedqcd);
       observables.AMUUNCERTAINTY = NUHMSSMNoFVHimalaya_a_muon::calculate_a_muon_uncertainty(MODEL, qedqcd);
-      #ifdef ENABLE_GM2Calc
+      #ifdef ENABLE_GM2CALC
       observables.AMUGM2CALC = gm2calc_calculate_amu(gm2calc_data);
       #endif
-      #ifdef ENABLE_GM2Calc
+      #ifdef ENABLE_GM2CALC
       observables.AMUGM2CALCUNCERTAINTY = gm2calc_calculate_amu_uncertainty(gm2calc_data);
       #endif
+   } catch (const NonPerturbativeRunningError& e) {
+      observables.problems.general.flag_non_perturbative_running(e.get_scale());
    } catch (const Error& e) {
-      model.get_problems().flag_thrown(e.what_detailed());
+      observables.problems.general.flag_thrown(e.what());
    } catch (const std::exception& e) {
-      model.get_problems().flag_thrown(e.what());
+      observables.problems.general.flag_thrown(e.what());
    }
 
    return observables;

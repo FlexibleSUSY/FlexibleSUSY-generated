@@ -19,7 +19,7 @@
 /**
  * @file E6SSMEFTHiggs_f_to_f_conversion.hpp
  *
- * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.4 .
  */
 
 #ifndef E6SSMEFTHiggs_FToFConversion_H

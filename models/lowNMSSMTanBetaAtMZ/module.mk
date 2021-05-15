@@ -40,10 +40,10 @@ lowNMSSMTanBetaAtMZ_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.lowNMSSMTanBetaAtMZ_generated \
 		$(DIR)/LesHouches.in.lowNMSSMTanBetaAtMZ \
 		$(DIR)/LesHouches.in.TP4 \
+		$(DIR)/LesHouches.in.TP6 \
 		$(DIR)/LesHouches.in.TP3 \
 		$(DIR)/LesHouches.in.TP5 \
 		$(DIR)/LesHouches.in.TP2 \
-		$(DIR)/LesHouches.in.TP6 \
 		$(DIR)/LesHouches.in.TP1
 
 lowNMSSMTanBetaAtMZ_REFERENCES := \
@@ -318,7 +318,7 @@ $(METACODE_STAMP_lowNMSSMTanBetaAtMZ):
 endif
 
 $(LIBlowNMSSMTanBetaAtMZ_DEP) $(EXElowNMSSMTanBetaAtMZ_DEP) $(LLlowNMSSMTanBetaAtMZ_DEP) $(LIBlowNMSSMTanBetaAtMZ_OBJ) $(EXElowNMSSMTanBetaAtMZ_OBJ) $(LLlowNMSSMTanBetaAtMZ_OBJ) $(LLlowNMSSMTanBetaAtMZ_LIB): \
-	CPPFLAGS += $(MODlowNMSSMTanBetaAtMZ_SUBMOD_INC) $(MODlowNMSSMTanBetaAtMZ_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS)  $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODlowNMSSMTanBetaAtMZ_SUBMOD_INC) $(MODlowNMSSMTanBetaAtMZ_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBlowNMSSMTanBetaAtMZ_DEP) $(EXElowNMSSMTanBetaAtMZ_DEP) $(LLlowNMSSMTanBetaAtMZ_DEP) $(LIBlowNMSSMTanBetaAtMZ_OBJ) $(EXElowNMSSMTanBetaAtMZ_OBJ) $(LLlowNMSSMTanBetaAtMZ_OBJ) $(LLlowNMSSMTanBetaAtMZ_LIB): \
@@ -334,11 +334,11 @@ $(LIBlowNMSSMTanBetaAtMZ): $(LIBlowNMSSMTanBetaAtMZ_OBJ)
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBlowNMSSMTanBetaAtMZ) $(MODlowNMSSMTanBetaAtMZ_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
 $(LLlowNMSSMTanBetaAtMZ_LIB): $(LLlowNMSSMTanBetaAtMZ_OBJ) $(LIBlowNMSSMTanBetaAtMZ) $(MODlowNMSSMTanBetaAtMZ_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
 
 ALLDEP += $(LIBlowNMSSMTanBetaAtMZ_DEP) $(EXElowNMSSMTanBetaAtMZ_DEP)
 ALLSRC += $(LIBlowNMSSMTanBetaAtMZ_SRC) $(EXElowNMSSMTanBetaAtMZ_SRC)

@@ -20,6 +20,7 @@
 #ifndef HSSUSY_OBSERVABLES_H
 #define HSSUSY_OBSERVABLES_H
 
+#include "observable_problems.hpp"
 #include <string>
 #include <vector>
 #include <Eigen/Core>
@@ -42,17 +43,18 @@ struct HSSUSY_observables {
    void clear(); ///< sets all observables to zero
    void set(const Eigen::ArrayXd&); ///< sets all observables from given vector
 
+   Observable_problems problems;
    std::complex<double> eff_cp_higgs_photon_photon; ///< effective H-Photon-Photon coupling
    std::complex<double> eff_cp_higgs_gluon_gluon; ///< effective H-Gluon-Gluon coupling
 
 };
 
 HSSUSY_observables calculate_observables(
-   HSSUSY_mass_eigenstates&, const softsusy::QedQcd&,
+   const HSSUSY_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&);
 
 HSSUSY_observables calculate_observables(
-   HSSUSY_mass_eigenstates&, const softsusy::QedQcd&,
+   const HSSUSY_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&, double scale);
 
 } // namespace flexiblesusy

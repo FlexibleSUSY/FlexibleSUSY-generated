@@ -32,7 +32,7 @@
 #include "lowe.h"
 #include "physical_input.hpp"
 
-#ifdef ENABLE_GM2Calc
+#ifdef ENABLE_GM2CALC
 #include "gm2calc_interface.hpp"
 #endif
 
@@ -140,7 +140,7 @@ void THDMIIMSSMBC_observables::set(const Eigen::ArrayXd& vec)
 
 }
 
-THDMIIMSSMBC_observables calculate_observables(THDMIIMSSMBC_mass_eigenstates& model,
+THDMIIMSSMBC_observables calculate_observables(const THDMIIMSSMBC_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input,
                                               double scale)
@@ -150,19 +150,25 @@ THDMIIMSSMBC_observables calculate_observables(THDMIIMSSMBC_mass_eigenstates& mo
    if (scale > 0.) {
       try {
          model_at_scale.run_to(scale);
+      } catch (const NonPerturbativeRunningError& e) {
+         THDMIIMSSMBC_observables observables;
+         observables.problems.general.flag_non_perturbative_running(scale);
+         return observables;
       } catch (const Error& e) {
-         model.get_problems().flag_thrown(e.what_detailed());
-         return THDMIIMSSMBC_observables();
+         THDMIIMSSMBC_observables observables;
+         observables.problems.general.flag_thrown(e.what());
+         return observables;
       } catch (const std::exception& e) {
-         model.get_problems().flag_thrown(e.what());
-         return THDMIIMSSMBC_observables();
+         THDMIIMSSMBC_observables observables;
+         observables.problems.general.flag_thrown(e.what());
+         return observables;
       }
    }
 
    return calculate_observables(model_at_scale, qedqcd, physical_input);
 }
 
-THDMIIMSSMBC_observables calculate_observables(THDMIIMSSMBC_mass_eigenstates& model,
+THDMIIMSSMBC_observables calculate_observables(const THDMIIMSSMBC_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input)
 {
@@ -179,10 +185,12 @@ THDMIIMSSMBC_observables calculate_observables(THDMIIMSSMBC_mass_eigenstates& mo
       observables.EFFCPHIGGSGLUONGLUON(1) = effective_couplings.get_eff_CphhVGVG(1);
       observables.EFFCPPSEUDOSCALARPHOTONPHOTON = effective_couplings.get_eff_CpAhVPVP(1);
       observables.EFFCPPSEUDOSCALARGLUONGLUON = effective_couplings.get_eff_CpAhVGVG(1);
+   } catch (const NonPerturbativeRunningError& e) {
+      observables.problems.general.flag_non_perturbative_running(e.get_scale());
    } catch (const Error& e) {
-      model.get_problems().flag_thrown(e.what_detailed());
+      observables.problems.general.flag_thrown(e.what());
    } catch (const std::exception& e) {
-      model.get_problems().flag_thrown(e.what());
+      observables.problems.general.flag_thrown(e.what());
    }
 
    return observables;

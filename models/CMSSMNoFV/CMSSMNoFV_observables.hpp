@@ -20,6 +20,7 @@
 #ifndef CMSSMNoFV_OBSERVABLES_H
 #define CMSSMNoFV_OBSERVABLES_H
 
+#include "observable_problems.hpp"
 #include <string>
 #include <vector>
 #include <Eigen/Core>
@@ -42,6 +43,7 @@ struct CMSSMNoFV_observables {
    void clear(); ///< sets all observables to zero
    void set(const Eigen::ArrayXd&); ///< sets all observables from given vector
 
+   Observable_problems problems;
    double a_muon; ///< a_muon = (g-2)/2 of the muon (calculated with FlexibleSUSY)
    double a_muon_uncertainty; ///< uncertainty of a_muon = (g-2)/2 of the muon (calculated with FlexibleSUSY)
    double a_muon_gm2calc; ///< a_muon = (g-2)/2 of the muon (calculated with GM2Calc)
@@ -54,11 +56,11 @@ struct CMSSMNoFV_observables {
 };
 
 CMSSMNoFV_observables calculate_observables(
-   CMSSMNoFV_mass_eigenstates&, const softsusy::QedQcd&,
+   const CMSSMNoFV_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&);
 
 CMSSMNoFV_observables calculate_observables(
-   CMSSMNoFV_mass_eigenstates&, const softsusy::QedQcd&,
+   const CMSSMNoFV_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&, double scale);
 
 } // namespace flexiblesusy

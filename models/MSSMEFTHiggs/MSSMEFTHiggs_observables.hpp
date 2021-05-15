@@ -20,6 +20,7 @@
 #ifndef MSSMEFTHiggs_OBSERVABLES_H
 #define MSSMEFTHiggs_OBSERVABLES_H
 
+#include "observable_problems.hpp"
 #include <string>
 #include <vector>
 #include <Eigen/Core>
@@ -42,16 +43,17 @@ struct MSSMEFTHiggs_observables {
    void clear(); ///< sets all observables to zero
    void set(const Eigen::ArrayXd&); ///< sets all observables from given vector
 
+   Observable_problems problems;
    double a_muon; ///< a_muon = (g-2)/2 of the muon (calculated with FlexibleSUSY)
 
 };
 
 MSSMEFTHiggs_observables calculate_observables(
-   MSSMEFTHiggs_mass_eigenstates&, const softsusy::QedQcd&,
+   const MSSMEFTHiggs_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&);
 
 MSSMEFTHiggs_observables calculate_observables(
-   MSSMEFTHiggs_mass_eigenstates&, const softsusy::QedQcd&,
+   const MSSMEFTHiggs_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&, double scale);
 
 } // namespace flexiblesusy

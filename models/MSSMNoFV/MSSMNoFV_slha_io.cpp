@@ -25,16 +25,20 @@
 #include "MSSMNoFV_physical.hpp"
 #include "ew_input.hpp"
 #include "logger.hpp"
+#include "observable_problems.hpp"
+#include "observable_problems_format_slha.hpp"
 #include "numerics2.hpp"
 #include "spectrum_generator_problems.hpp"
 #include "standard_model.hpp"
 #include "wrappers.hpp"
 #include "config.h"
+#include "spectrum_generator_settings.hpp"
 
 #include <array>
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <iterator>
 #include <string>
 
 #define Pole(p) physical.p
@@ -564,9 +568,18 @@ void MSSMNoFV_slha_io::set_spectrum(const MSSMNoFV_slha& model)
 void MSSMNoFV_slha_io::set_extra(
    const MSSMNoFV_slha& model,
    const MSSMNoFV_scales& scales,
-   const MSSMNoFV_observables& observables)
+   const MSSMNoFV_observables& observables,
+   const flexiblesusy::Spectrum_generator_settings& spectrum_generator_settings)
 {
    const MSSMNoFV_physical physical(model.get_physical_slha());
+
+   if (observables.problems.have_problem()) {
+      std::ostringstream block;
+      block << "Block OBSINFO\n";
+      slha_format_problems_and_warnings(observables.problems,
+                                        std::ostream_iterator<std::string>(block));
+      slha_io.set_block(block);
+   }
 
    {
       std::ostringstream block;
@@ -577,14 +590,16 @@ void MSSMNoFV_slha_io::set_extra(
       ;
       slha_io.set_block(block);
    }
-   {
-      std::ostringstream block;
-      block << "Block FlexibleSUSYLowEnergy" << '\n'
-            << FORMAT_ELEMENT(0, (OBSERVABLES.a_muon), "Delta(g-2)_muon/2 FlexibleSUSY")
-            << FORMAT_ELEMENT(1, (OBSERVABLES.a_muon_gm2calc), "Delta(g-2)_muon/2 GM2Calc")
-            << FORMAT_ELEMENT(2, (OBSERVABLES.a_muon_gm2calc_uncertainty), "Delta(g-2)_muon/2 GM2Calc uncertainty")
-      ;
-      slha_io.set_block(block);
+   if (spectrum_generator_settings.get(Spectrum_generator_settings::calculate_observables)) {
+      {
+         std::ostringstream block;
+         block << "Block FlexibleSUSYLowEnergy" << '\n'
+               << FORMAT_ELEMENT(0, (OBSERVABLES.a_muon), "Delta(g-2)_muon/2 FlexibleSUSY")
+               << FORMAT_ELEMENT(1, (OBSERVABLES.a_muon_gm2calc), "Delta(g-2)_muon/2 GM2Calc")
+               << FORMAT_ELEMENT(2, (OBSERVABLES.a_muon_gm2calc_uncertainty), "Delta(g-2)_muon/2 GM2Calc uncertainty")
+         ;
+         slha_io.set_block(block);
+      }
    }
    {
       std::ostringstream block;

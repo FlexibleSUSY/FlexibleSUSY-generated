@@ -154,7 +154,7 @@ Eigen::Matrix<double,2,1> calculate_tadpole_over_vevs(
  */
 auto calculate_mh2_tree_level(MSSMEFTHiggs_mass_eigenstates model) -> decltype(model.get_mass_matrix_hh())
 {
-   model.solve_ewsb_tree_level();
+   model.solve_ewsb_tree_level_custom();
    return model.get_mass_matrix_hh();
 }
 

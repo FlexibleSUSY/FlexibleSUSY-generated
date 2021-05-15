@@ -23,7 +23,7 @@
  *        value problem using the semi_analytic solver by solving EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.4 .
  */
 
 #ifndef CE6SSM_SEMI_ANALYTIC_MODEL_H

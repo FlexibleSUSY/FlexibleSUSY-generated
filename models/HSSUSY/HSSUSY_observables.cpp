@@ -32,7 +32,7 @@
 #include "lowe.h"
 #include "physical_input.hpp"
 
-#ifdef ENABLE_GM2Calc
+#ifdef ENABLE_GM2CALC
 #include "gm2calc_interface.hpp"
 #endif
 
@@ -111,7 +111,7 @@ void HSSUSY_observables::set(const Eigen::ArrayXd& vec)
 
 }
 
-HSSUSY_observables calculate_observables(HSSUSY_mass_eigenstates& model,
+HSSUSY_observables calculate_observables(const HSSUSY_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input,
                                               double scale)
@@ -121,19 +121,25 @@ HSSUSY_observables calculate_observables(HSSUSY_mass_eigenstates& model,
    if (scale > 0.) {
       try {
          model_at_scale.run_to(scale);
+      } catch (const NonPerturbativeRunningError& e) {
+         HSSUSY_observables observables;
+         observables.problems.general.flag_non_perturbative_running(scale);
+         return observables;
       } catch (const Error& e) {
-         model.get_problems().flag_thrown(e.what_detailed());
-         return HSSUSY_observables();
+         HSSUSY_observables observables;
+         observables.problems.general.flag_thrown(e.what());
+         return observables;
       } catch (const std::exception& e) {
-         model.get_problems().flag_thrown(e.what());
-         return HSSUSY_observables();
+         HSSUSY_observables observables;
+         observables.problems.general.flag_thrown(e.what());
+         return observables;
       }
    }
 
    return calculate_observables(model_at_scale, qedqcd, physical_input);
 }
 
-HSSUSY_observables calculate_observables(HSSUSY_mass_eigenstates& model,
+HSSUSY_observables calculate_observables(const HSSUSY_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input)
 {
@@ -145,10 +151,12 @@ HSSUSY_observables calculate_observables(HSSUSY_mass_eigenstates& model,
 
       observables.EFFCPHIGGSPHOTONPHOTON = effective_couplings.get_eff_CphhVPVP();
       observables.EFFCPHIGGSGLUONGLUON = effective_couplings.get_eff_CphhVGVG();
+   } catch (const NonPerturbativeRunningError& e) {
+      observables.problems.general.flag_non_perturbative_running(e.get_scale());
    } catch (const Error& e) {
-      model.get_problems().flag_thrown(e.what_detailed());
+      observables.problems.general.flag_thrown(e.what());
    } catch (const std::exception& e) {
-      model.get_problems().flag_thrown(e.what());
+      observables.problems.general.flag_thrown(e.what());
    }
 
    return observables;

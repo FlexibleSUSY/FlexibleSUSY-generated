@@ -32,7 +32,7 @@
 #include "lowe.h"
 #include "physical_input.hpp"
 
-#ifdef ENABLE_GM2Calc
+#ifdef ENABLE_GM2CALC
 #include "gm2calc_interface.hpp"
 #endif
 
@@ -155,7 +155,7 @@ void CMSSMNoFV_observables::set(const Eigen::ArrayXd& vec)
 
 }
 
-CMSSMNoFV_observables calculate_observables(CMSSMNoFV_mass_eigenstates& model,
+CMSSMNoFV_observables calculate_observables(const CMSSMNoFV_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input,
                                               double scale)
@@ -165,26 +165,32 @@ CMSSMNoFV_observables calculate_observables(CMSSMNoFV_mass_eigenstates& model,
    if (scale > 0.) {
       try {
          model_at_scale.run_to(scale);
+      } catch (const NonPerturbativeRunningError& e) {
+         CMSSMNoFV_observables observables;
+         observables.problems.general.flag_non_perturbative_running(scale);
+         return observables;
       } catch (const Error& e) {
-         model.get_problems().flag_thrown(e.what_detailed());
-         return CMSSMNoFV_observables();
+         CMSSMNoFV_observables observables;
+         observables.problems.general.flag_thrown(e.what());
+         return observables;
       } catch (const std::exception& e) {
-         model.get_problems().flag_thrown(e.what());
-         return CMSSMNoFV_observables();
+         CMSSMNoFV_observables observables;
+         observables.problems.general.flag_thrown(e.what());
+         return observables;
       }
    }
 
    return calculate_observables(model_at_scale, qedqcd, physical_input);
 }
 
-CMSSMNoFV_observables calculate_observables(CMSSMNoFV_mass_eigenstates& model,
+CMSSMNoFV_observables calculate_observables(const CMSSMNoFV_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input)
 {
    CMSSMNoFV_observables observables;
 
    try {
-      #ifdef ENABLE_GM2Calc
+      #ifdef ENABLE_GM2CALC
       GM2Calc_data gm2calc_data;
       gm2calc_data.alpha_s_MZ = ALPHA_S_MZ;
       gm2calc_data.MZ    = MZPole;
@@ -222,10 +228,10 @@ CMSSMNoFV_observables calculate_observables(CMSSMNoFV_mass_eigenstates& model,
 
       observables.AMU = CMSSMNoFV_a_muon::calculate_a_muon(MODEL, qedqcd);
       observables.AMUUNCERTAINTY = CMSSMNoFV_a_muon::calculate_a_muon_uncertainty(MODEL, qedqcd);
-      #ifdef ENABLE_GM2Calc
+      #ifdef ENABLE_GM2CALC
       observables.AMUGM2CALC = gm2calc_calculate_amu(gm2calc_data);
       #endif
-      #ifdef ENABLE_GM2Calc
+      #ifdef ENABLE_GM2CALC
       observables.AMUGM2CALCUNCERTAINTY = gm2calc_calculate_amu_uncertainty(gm2calc_data);
       #endif
       observables.EFFCPHIGGSPHOTONPHOTON(0) = effective_couplings.get_eff_CphhVPVP(0);
@@ -234,10 +240,12 @@ CMSSMNoFV_observables calculate_observables(CMSSMNoFV_mass_eigenstates& model,
       observables.EFFCPHIGGSGLUONGLUON(1) = effective_couplings.get_eff_CphhVGVG(1);
       observables.EFFCPPSEUDOSCALARPHOTONPHOTON = effective_couplings.get_eff_CpAhVPVP(1);
       observables.EFFCPPSEUDOSCALARGLUONGLUON = effective_couplings.get_eff_CpAhVGVG(1);
+   } catch (const NonPerturbativeRunningError& e) {
+      observables.problems.general.flag_non_perturbative_running(e.get_scale());
    } catch (const Error& e) {
-      model.get_problems().flag_thrown(e.what_detailed());
+      observables.problems.general.flag_thrown(e.what());
    } catch (const std::exception& e) {
-      model.get_problems().flag_thrown(e.what());
+      observables.problems.general.flag_thrown(e.what());
    }
 
    return observables;

@@ -20,7 +20,7 @@
 /**
  * @file cxx_qft/SMSSM_fields.hpp
  *
- * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.4 .
  */
 
 #ifndef SMSSM_CXXQFT_FIELDS_H

@@ -25,16 +25,20 @@
 #include "NUTSMSSM_physical.hpp"
 #include "ew_input.hpp"
 #include "logger.hpp"
+#include "observable_problems.hpp"
+#include "observable_problems_format_slha.hpp"
 #include "numerics2.hpp"
 #include "spectrum_generator_problems.hpp"
 #include "standard_model.hpp"
 #include "wrappers.hpp"
 #include "config.h"
+#include "spectrum_generator_settings.hpp"
 
 #include <array>
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <iterator>
 #include <string>
 
 #define Pole(p) physical.p
@@ -564,9 +568,18 @@ void NUTSMSSM_slha_io::set_spectrum(const NUTSMSSM_slha& model)
 void NUTSMSSM_slha_io::set_extra(
    const NUTSMSSM_slha& model,
    const NUTSMSSM_scales& scales,
-   const NUTSMSSM_observables& observables)
+   const NUTSMSSM_observables& observables,
+   const flexiblesusy::Spectrum_generator_settings& spectrum_generator_settings)
 {
    const NUTSMSSM_physical physical(model.get_physical_slha());
+
+   if (observables.problems.have_problem()) {
+      std::ostringstream block;
+      block << "Block OBSINFO\n";
+      slha_format_problems_and_warnings(observables.problems,
+                                        std::ostream_iterator<std::string>(block));
+      slha_io.set_block(block);
+   }
 
    {
       std::ostringstream block;

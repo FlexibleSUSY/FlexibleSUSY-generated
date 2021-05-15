@@ -25,7 +25,7 @@
  * which solve EWSB and calculate masses and mixings from MSbar
  * parameters.
  *
- * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.4 .
  */
 
 #include "HTHDMIIMSSMBC_mass_eigenstates_decoupling_scheme.hpp"
