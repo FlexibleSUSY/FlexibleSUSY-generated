@@ -58,76 +58,19 @@ Block SMINPUTS               # Standard Model inputs
    23   1.040000000e-01      # ms(2 GeV) MS-bar
    24   1.270000000e+00      # mc(mc) MS-bar
 Block MINPAR
-   3   0   # TanBeta
-Block HMIXIN
-   303   0   # LamTDInput
-   304   0   # LamTUInput
-   301   0   # LamSDInput
-   302   0   # LamSUInput
-   1   0   # MuInput
-   201   0   # MuDInput
-   202   0   # MuUInput
-   310   0   # vTInput
-   101   0   # BMuInput
-   203   0   # BMuDInput
-   204   0   # BMuUInput
-Block NMSSMRUNIN
-   5   0   # vSInput
-Block MSQ2IN
-   1   1   0   # mq2Input(1,1)
-   1   2   0   # mq2Input(1,2)
-   1   3   0   # mq2Input(1,3)
-   2   1   0   # mq2Input(2,1)
-   2   2   0   # mq2Input(2,2)
-   2   3   0   # mq2Input(2,3)
-   3   1   0   # mq2Input(3,1)
-   3   2   0   # mq2Input(3,2)
-   3   3   0   # mq2Input(3,3)
-Block MSL2IN
-   1   1   0   # ml2Input(1,1)
-   1   2   0   # ml2Input(1,2)
-   1   3   0   # ml2Input(1,3)
-   2   1   0   # ml2Input(2,1)
-   2   2   0   # ml2Input(2,2)
-   2   3   0   # ml2Input(2,3)
-   3   1   0   # ml2Input(3,1)
-   3   2   0   # ml2Input(3,2)
-   3   3   0   # ml2Input(3,3)
-Block MSD2IN
-   1   1   0   # md2Input(1,1)
-   1   2   0   # md2Input(1,2)
-   1   3   0   # md2Input(1,3)
-   2   1   0   # md2Input(2,1)
-   2   2   0   # md2Input(2,2)
-   2   3   0   # md2Input(2,3)
-   3   1   0   # md2Input(3,1)
-   3   2   0   # md2Input(3,2)
-   3   3   0   # md2Input(3,3)
-Block MSU2IN
-   1   1   0   # mu2Input(1,1)
-   1   2   0   # mu2Input(1,2)
-   1   3   0   # mu2Input(1,3)
-   2   1   0   # mu2Input(2,1)
-   2   2   0   # mu2Input(2,2)
-   2   3   0   # mu2Input(2,3)
-   3   1   0   # mu2Input(3,1)
-   3   2   0   # mu2Input(3,2)
-   3   3   0   # mu2Input(3,3)
-Block MSE2IN
-   1   1   0   # me2Input(1,1)
-   1   2   0   # me2Input(1,2)
-   1   3   0   # me2Input(1,3)
-   2   1   0   # me2Input(2,1)
-   2   2   0   # me2Input(2,2)
-   2   3   0   # me2Input(2,3)
-   3   1   0   # me2Input(3,1)
-   3   2   0   # me2Input(3,2)
-   3   3   0   # me2Input(3,3)
-Block MSOFTIN
-   111   0   # moc2Input
-   50   0   # mRd2Input
-   51   0   # mRu2Input
-   300   0   # MDBSInput
-   301   0   # MDWBTInput
-   302   0   # MDGocInput
+   1   125 # m0
+   2   500 # m12
+   3   10  # TanBeta
+   4   1   # Sign(Mu)
+   5   0   # Azero
+Block BMvIN
+   1   1   1e6   # BMvInput(1,1)
+   1   2   1e6   # BMvInput(1,2)
+   1   3   1e6   # BMvInput(1,3)
+   2   1   1e6   # BMvInput(2,1)
+   2   2   1e6   # BMvInput(2,2)
+   2   3   1e6   # BMvInput(2,3)
+   3   1   1e6   # BMvInput(3,1)
+   3   2   1e6   # BMvInput(3,2)
+   3   3   1e6   # BMvInput(3,3)
 

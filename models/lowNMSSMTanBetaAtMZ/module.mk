@@ -38,13 +38,13 @@ lowNMSSMTanBetaAtMZ_INCLUDE_MK := \
 
 lowNMSSMTanBetaAtMZ_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.lowNMSSMTanBetaAtMZ_generated \
-		$(DIR)/LesHouches.in.lowNMSSMTanBetaAtMZ \
-		$(DIR)/LesHouches.in.TP4 \
-		$(DIR)/LesHouches.in.TP6 \
-		$(DIR)/LesHouches.in.TP3 \
-		$(DIR)/LesHouches.in.TP5 \
+		$(DIR)/LesHouches.in.TP1 \
 		$(DIR)/LesHouches.in.TP2 \
-		$(DIR)/LesHouches.in.TP1
+		$(DIR)/LesHouches.in.TP5 \
+		$(DIR)/LesHouches.in.TP3 \
+		$(DIR)/LesHouches.in.TP6 \
+		$(DIR)/LesHouches.in.TP4 \
+		$(DIR)/LesHouches.in.lowNMSSMTanBetaAtMZ
 
 lowNMSSMTanBetaAtMZ_REFERENCES := \
 		$(DIR)/lowNMSSMTanBetaAtMZ_references.tex

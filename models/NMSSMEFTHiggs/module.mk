@@ -38,8 +38,8 @@ NMSSMEFTHiggs_INCLUDE_MK := \
 
 NMSSMEFTHiggs_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.NMSSMEFTHiggs_generated \
-		$(DIR)/LesHouches.in.NMSSMEFTHiggs_1507.05093_TP3 \
-		$(DIR)/LesHouches.in.NMSSMEFTHiggs
+		$(DIR)/LesHouches.in.NMSSMEFTHiggs \
+		$(DIR)/LesHouches.in.NMSSMEFTHiggs_1507.05093_TP3
 
 NMSSMEFTHiggs_REFERENCES := \
 		$(DIR)/NMSSMEFTHiggs_references.tex

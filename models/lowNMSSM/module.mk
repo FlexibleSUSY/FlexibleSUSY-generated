@@ -38,13 +38,13 @@ lowNMSSM_INCLUDE_MK := \
 
 lowNMSSM_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.lowNMSSM_generated \
-		$(DIR)/LesHouches.in.TP4 \
-		$(DIR)/LesHouches.in.TP3 \
-		$(DIR)/LesHouches.in.TP5 \
+		$(DIR)/LesHouches.in.TP1 \
 		$(DIR)/LesHouches.in.TP2 \
-		$(DIR)/LesHouches.in.TP6 \
+		$(DIR)/LesHouches.in.TP5 \
 		$(DIR)/LesHouches.in.lowNMSSM \
-		$(DIR)/LesHouches.in.TP1
+		$(DIR)/LesHouches.in.TP3 \
+		$(DIR)/LesHouches.in.TP6 \
+		$(DIR)/LesHouches.in.TP4
 
 lowNMSSM_REFERENCES := \
 		$(DIR)/lowNMSSM_references.tex
@@ -318,7 +318,7 @@ $(METACODE_STAMP_lowNMSSM):
 endif
 
 $(LIBlowNMSSM_DEP) $(EXElowNMSSM_DEP) $(LLlowNMSSM_DEP) $(LIBlowNMSSM_OBJ) $(EXElowNMSSM_OBJ) $(LLlowNMSSM_OBJ) $(LLlowNMSSM_LIB): \
-	CPPFLAGS += $(MODlowNMSSM_SUBMOD_INC) $(MODlowNMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS)  $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODlowNMSSM_SUBMOD_INC) $(MODlowNMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBlowNMSSM_DEP) $(EXElowNMSSM_DEP) $(LLlowNMSSM_DEP) $(LIBlowNMSSM_OBJ) $(EXElowNMSSM_OBJ) $(LLlowNMSSM_OBJ) $(LLlowNMSSM_LIB): \
@@ -334,11 +334,11 @@ $(LIBlowNMSSM): $(LIBlowNMSSM_OBJ)
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBlowNMSSM) $(MODlowNMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
 $(LLlowNMSSM_LIB): $(LLlowNMSSM_OBJ) $(LIBlowNMSSM) $(MODlowNMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
 
 ALLDEP += $(LIBlowNMSSM_DEP) $(EXElowNMSSM_DEP)
 ALLSRC += $(LIBlowNMSSM_SRC) $(EXElowNMSSM_SRC)

@@ -38,7 +38,7 @@ MSSMRHN_INCLUDE_MK := \
 
 MSSMRHN_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.MSSMRHN_generated \
-
+		$(DIR)/LesHouches.in.MSSMRHN
 
 MSSMRHN_REFERENCES := \
 		$(DIR)/MSSMRHN_references.tex

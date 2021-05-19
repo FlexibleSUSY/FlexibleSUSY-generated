@@ -20,6 +20,7 @@
 #ifndef MSSMNoFVatMGUTHimalaya_OBSERVABLES_H
 #define MSSMNoFVatMGUTHimalaya_OBSERVABLES_H
 
+#include "observable_problems.hpp"
 #include <string>
 #include <vector>
 #include <Eigen/Core>
@@ -42,6 +43,7 @@ struct MSSMNoFVatMGUTHimalaya_observables {
    void clear(); ///< sets all observables to zero
    void set(const Eigen::ArrayXd&); ///< sets all observables from given vector
 
+   Observable_problems problems;
    double a_muon; ///< a_muon = (g-2)/2 of the muon (calculated with FlexibleSUSY)
    double a_muon_gm2calc; ///< a_muon = (g-2)/2 of the muon (calculated with GM2Calc)
    double a_muon_gm2calc_uncertainty; ///< uncertainty of (g-2)/2 of the muon (calculated with GM2Calc)
@@ -49,11 +51,11 @@ struct MSSMNoFVatMGUTHimalaya_observables {
 };
 
 MSSMNoFVatMGUTHimalaya_observables calculate_observables(
-   MSSMNoFVatMGUTHimalaya_mass_eigenstates&, const softsusy::QedQcd&,
+   const MSSMNoFVatMGUTHimalaya_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&);
 
 MSSMNoFVatMGUTHimalaya_observables calculate_observables(
-   MSSMNoFVatMGUTHimalaya_mass_eigenstates&, const softsusy::QedQcd&,
+   const MSSMNoFVatMGUTHimalaya_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&, double scale);
 
 } // namespace flexiblesusy

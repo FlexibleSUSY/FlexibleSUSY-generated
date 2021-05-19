@@ -20,6 +20,7 @@
 #ifndef lowNMSSM_OBSERVABLES_H
 #define lowNMSSM_OBSERVABLES_H
 
+#include "observable_problems.hpp"
 #include <string>
 #include <vector>
 #include <Eigen/Core>
@@ -42,15 +43,16 @@ struct lowNMSSM_observables {
    void clear(); ///< sets all observables to zero
    void set(const Eigen::ArrayXd&); ///< sets all observables from given vector
 
+   Observable_problems problems;
 
 };
 
 lowNMSSM_observables calculate_observables(
-   lowNMSSM_mass_eigenstates&, const softsusy::QedQcd&,
+   const lowNMSSM_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&);
 
 lowNMSSM_observables calculate_observables(
-   lowNMSSM_mass_eigenstates&, const softsusy::QedQcd&,
+   const lowNMSSM_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&, double scale);
 
 } // namespace flexiblesusy
