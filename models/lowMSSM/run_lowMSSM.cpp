@@ -25,6 +25,7 @@
 #include "lowMSSM_spectrum_generator.hpp"
 #include "lowMSSM_utilities.hpp"
 
+
 #ifdef ENABLE_TWO_SCALE_SOLVER
 #include "lowMSSM_two_scale_spectrum_generator.hpp"
 #endif
@@ -51,6 +52,7 @@
 template <class solver_type>
 int run_solver(flexiblesusy::lowMSSM_slha_io& slha_io,
                const flexiblesusy::Spectrum_generator_settings& spectrum_generator_settings,
+               
                const std::string& slha_output_file,
                const std::string& database_output_file,
                const std::string& spectrum_file,
@@ -88,12 +90,15 @@ int run_solver(flexiblesusy::lowMSSM_slha_io& slha_io,
    scales.pole_mass_scale = spectrum_generator.get_pole_mass_scale();
 
    lowMSSM_observables observables;
+
    if (spectrum_generator_settings.get(Spectrum_generator_settings::calculate_observables)) {
       if (spectrum_generator_settings.get(Spectrum_generator_settings::force_output) ||
          !problems.have_problem()) {
          observables = calculate_observables(std::get<0>(models), qedqcd, physical_input, scales.pole_mass_scale);
       }
    }
+
+
 
    const bool show_result = !problems.have_problem() ||
       spectrum_generator_settings.get(Spectrum_generator_settings::force_output);
@@ -108,6 +113,9 @@ int run_solver(flexiblesusy::lowMSSM_slha_io& slha_io,
          slha_io.set_spectrum(models);
          slha_io.set_extra(std::get<0>(models), scales, observables, spectrum_generator_settings);
       }
+
+
+
       slha_io.write_to(slha_output_file);
    }
 
@@ -143,6 +151,7 @@ int run_solver(flexiblesusy::lowMSSM_slha_io& slha_io,
 int run(
    flexiblesusy::lowMSSM_slha_io& slha_io,
    const flexiblesusy::Spectrum_generator_settings& spectrum_generator_settings,
+   
    const std::string& slha_output_file,
    const std::string& database_output_file,
    const std::string& spectrum_file,
@@ -194,6 +203,7 @@ int main(int argc, char* argv[])
    lowMSSM_slha_io slha_io;
    Spectrum_generator_settings spectrum_generator_settings;
 
+
    if (slha_input_source.empty()) {
       ERROR("No SLHA input source given!\n"
             "   Please provide one via the option --slha-input-file=");
@@ -203,6 +213,7 @@ int main(int argc, char* argv[])
    try {
       slha_io.read_from_source(slha_input_source);
       slha_io.fill(spectrum_generator_settings);
+
    } catch (const Error& error) {
       ERROR(error.what_detailed());
       return EXIT_FAILURE;
@@ -214,6 +225,8 @@ int main(int argc, char* argv[])
          spectrum_generator_settings.set(
             Spectrum_generator_settings::calculate_bsm_masses, 1.0);
    }
+
+
 
    const int exit_code
       = run(slha_io, spectrum_generator_settings, slha_output_file,

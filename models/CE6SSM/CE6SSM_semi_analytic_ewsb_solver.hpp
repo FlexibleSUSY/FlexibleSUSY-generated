@@ -22,7 +22,7 @@
  *
  * @brief contains class for solving EWSB when semi-analytic algorithm is used
  *
- * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.4 .
+ * This file was generated with FlexibleSUSY 2.6.0 and SARAH 4.14.4 .
  */
 
 #ifndef CE6SSM_SEMI_ANALYTIC_EWSB_SOLVER_H

@@ -90,7 +90,17 @@ void NMSSMEFTHiggs_low_scale_constraint<Two_scale>::apply()
    calculate_DRbar_gauge_couplings();
    calculate_running_SM_masses();
 
-   
+   const auto TanBeta = INPUTPARAMETER(TanBeta);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto g2 = MODELPARAMETER(g2);
+
+   calculate_Yu_DRbar();
+   calculate_Yd_DRbar();
+   calculate_Ye_DRbar();
+   MODEL->set_vd(Re((2*MZDRbar)/(Sqrt(0.6*Sqr(g1) + Sqr(g2))*Sqrt(1 + Sqr(TanBeta)
+      ))));
+   MODEL->set_vu(Re((2*MZDRbar*TanBeta)/(Sqrt(0.6*Sqr(g1) + Sqr(g2))*Sqrt(1 + Sqr(
+      TanBeta)))));
    MODEL->set_g1(new_g1);
    MODEL->set_g2(new_g2);
    MODEL->set_g3(new_g3);
@@ -433,6 +443,8 @@ void NMSSMEFTHiggs_low_scale_constraint<Two_scale>::calculate_Yu_DRbar()
 {
    check_model_ptr();
 
+   const auto vu = MODELPARAMETER(vu);
+   MODEL->set_Yu((((1.4142135623730951*upQuarksDRbar)/vu).transpose()).real());
 
 }
 
@@ -440,6 +452,8 @@ void NMSSMEFTHiggs_low_scale_constraint<Two_scale>::calculate_Yd_DRbar()
 {
    check_model_ptr();
 
+   const auto vd = MODELPARAMETER(vd);
+   MODEL->set_Yd((((1.4142135623730951*downQuarksDRbar)/vd).transpose()).real());
 
 }
 
@@ -447,6 +461,8 @@ void NMSSMEFTHiggs_low_scale_constraint<Two_scale>::calculate_Ye_DRbar()
 {
    check_model_ptr();
 
+   const auto vd = MODELPARAMETER(vd);
+   MODEL->set_Ye((((1.4142135623730951*downLeptonsDRbar)/vd).transpose()).real());
 
 }
 

@@ -23,6 +23,8 @@
 #include "HGTHDMIIMSSMBC_observables.hpp"
 #include "HGTHDMIIMSSMBC_slha_io.hpp"
 #include "HGTHDMIIMSSMBC_spectrum_generator.hpp"
+#include "decays/flexibledecay_settings.hpp"
+
 
 #ifdef ENABLE_TWO_SCALE_SOLVER
 #include "HGTHDMIIMSSMBC_two_scale_spectrum_generator.hpp"
@@ -153,9 +155,12 @@ int run_solver(int loop_library, const HGTHDMIIMSSMBC_input_parameters& input)
    const auto observables = calculate_observables(
       std::get<0>(models), qedqcd, physical_input, scales.pole_mass_scale);
 
+   FlexibleDecay_settings flexibledecay_settings;
+
+
    // SLHA output
    HGTHDMIIMSSMBC_slha_io slha_io;
-   slha_io.fill(models, qedqcd, scales, observables, settings);
+   slha_io.fill(models, qedqcd, scales, observables, settings, flexibledecay_settings);
    slha_io.write_to_stream(std::cout);
 
    return spectrum_generator.get_exit_code();

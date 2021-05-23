@@ -35,7 +35,7 @@ class SMSSM_mass_eigenstates;
 class Physical_input;
 
 struct SMSSM_observables {
-   static const int NUMBER_OF_OBSERVABLES = 20;
+   static const int NUMBER_OF_OBSERVABLES = 0;
 
    SMSSM_observables();
    Eigen::ArrayXd get() const; ///< returns vector of all observables
@@ -44,10 +44,6 @@ struct SMSSM_observables {
    void set(const Eigen::ArrayXd&); ///< sets all observables from given vector
 
    Observable_problems problems;
-   Eigen::Array<std::complex<double>,3,1> eff_cp_higgs_photon_photon; ///< effective H-Photon-Photon coupling
-   Eigen::Array<std::complex<double>,3,1> eff_cp_higgs_gluon_gluon; ///< effective H-Gluon-Gluon coupling
-   Eigen::Array<std::complex<double>,2,1> eff_cp_pseudoscalar_photon_photon; ///< effective A-Photon-Photon coupling
-   Eigen::Array<std::complex<double>,2,1> eff_cp_pseudoscalar_gluon_gluon; ///< effective A-Gluon-Gluon coupling
 
 };
 

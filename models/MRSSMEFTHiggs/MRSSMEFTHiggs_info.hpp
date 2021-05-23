@@ -29,11 +29,11 @@
 namespace flexiblesusy {
 
 namespace MRSSMEFTHiggs_info {
-   enum Particles : int { VG, Glu, Fv, SRdp, SRum, sigmaO, phiO, Sd, Sv, Su, Se,
-      hh, Ah, Rh, Hpm, Chi, Cha1, Cha2, Fe, Fd, Fu, VWm, VP, VZ,
+   enum Particles : int { VG = 0, Glu, Fv, SRdp, SRum, sigmaO, phiO, Sd, Sv, Su,
+      Se, hh, Ah, Rh, Hpm, Chi, Cha1, Cha2, Fe, Fd, Fu, VWm, VP, VZ,
       NUMBER_OF_PARTICLES };
 
-   enum Masses : int { MVG, MGlu, MFv_1, MFv_2, MFv_3, MSRdp, MSRum, MsigmaO,
+   enum Masses : int { MVG = 0, MGlu, MFv_1, MFv_2, MFv_3, MSRdp, MSRum, MsigmaO,
       MphiO, MSd_1, MSd_2, MSd_3, MSd_4, MSd_5, MSd_6, MSv_1, MSv_2, MSv_3, MSu_1,
       MSu_2, MSu_3, MSu_4, MSu_5, MSu_6, MSe_1, MSe_2, MSe_3, MSe_4, MSe_5, MSe_6,
       Mhh_1, Mhh_2, Mhh_3, Mhh_4, MAh_1, MAh_2, MAh_3, MAh_4, MRh_1, MRh_2, MHpm_1
@@ -52,21 +52,21 @@ namespace MRSSMEFTHiggs_info {
       me20_0, me20_1, me20_2, me21_0, me21_1, me21_2, me22_0, me22_1, me22_2, mS2,
       mT2, moc2, mRd2, mRu2, MDBS, MDWBT, MDGoc, NUMBER_OF_PARAMETERS };
 
-   enum Mixings : int { ZD0_0, ZD0_1, ZD0_2, ZD0_3, ZD0_4, ZD0_5, ZD1_0, ZD1_1,
-      ZD1_2, ZD1_3, ZD1_4, ZD1_5, ZD2_0, ZD2_1, ZD2_2, ZD2_3, ZD2_4, ZD2_5, ZD3_0,
-      ZD3_1, ZD3_2, ZD3_3, ZD3_4, ZD3_5, ZD4_0, ZD4_1, ZD4_2, ZD4_3, ZD4_4, ZD4_5,
-      ZD5_0, ZD5_1, ZD5_2, ZD5_3, ZD5_4, ZD5_5, ZV0_0, ZV0_1, ZV0_2, ZV1_0, ZV1_1,
-      ZV1_2, ZV2_0, ZV2_1, ZV2_2, ZU0_0, ZU0_1, ZU0_2, ZU0_3, ZU0_4, ZU0_5, ZU1_0,
-      ZU1_1, ZU1_2, ZU1_3, ZU1_4, ZU1_5, ZU2_0, ZU2_1, ZU2_2, ZU2_3, ZU2_4, ZU2_5,
-      ZU3_0, ZU3_1, ZU3_2, ZU3_3, ZU3_4, ZU3_5, ZU4_0, ZU4_1, ZU4_2, ZU4_3, ZU4_4,
-      ZU4_5, ZU5_0, ZU5_1, ZU5_2, ZU5_3, ZU5_4, ZU5_5, ZE0_0, ZE0_1, ZE0_2, ZE0_3,
-      ZE0_4, ZE0_5, ZE1_0, ZE1_1, ZE1_2, ZE1_3, ZE1_4, ZE1_5, ZE2_0, ZE2_1, ZE2_2,
-      ZE2_3, ZE2_4, ZE2_5, ZE3_0, ZE3_1, ZE3_2, ZE3_3, ZE3_4, ZE3_5, ZE4_0, ZE4_1,
-      ZE4_2, ZE4_3, ZE4_4, ZE4_5, ZE5_0, ZE5_1, ZE5_2, ZE5_3, ZE5_4, ZE5_5, ZH0_0,
-      ZH0_1, ZH0_2, ZH0_3, ZH1_0, ZH1_1, ZH1_2, ZH1_3, ZH2_0, ZH2_1, ZH2_2, ZH2_3,
-      ZH3_0, ZH3_1, ZH3_2, ZH3_3, ZA0_0, ZA0_1, ZA0_2, ZA0_3, ZA1_0, ZA1_1, ZA1_2,
-      ZA1_3, ZA2_0, ZA2_1, ZA2_2, ZA2_3, ZA3_0, ZA3_1, ZA3_2, ZA3_3, ZHR0_0,
-      ZHR0_1, ZHR1_0, ZHR1_1, ZP0_0, ZP0_1, ZP0_2, ZP0_3, ZP1_0, ZP1_1, ZP1_2,
+   enum Mixings : int { ZD0_0 = 0, ZD0_1, ZD0_2, ZD0_3, ZD0_4, ZD0_5, ZD1_0, ZD1_1
+      , ZD1_2, ZD1_3, ZD1_4, ZD1_5, ZD2_0, ZD2_1, ZD2_2, ZD2_3, ZD2_4, ZD2_5,
+      ZD3_0, ZD3_1, ZD3_2, ZD3_3, ZD3_4, ZD3_5, ZD4_0, ZD4_1, ZD4_2, ZD4_3, ZD4_4,
+      ZD4_5, ZD5_0, ZD5_1, ZD5_2, ZD5_3, ZD5_4, ZD5_5, ZV0_0, ZV0_1, ZV0_2, ZV1_0,
+      ZV1_1, ZV1_2, ZV2_0, ZV2_1, ZV2_2, ZU0_0, ZU0_1, ZU0_2, ZU0_3, ZU0_4, ZU0_5,
+      ZU1_0, ZU1_1, ZU1_2, ZU1_3, ZU1_4, ZU1_5, ZU2_0, ZU2_1, ZU2_2, ZU2_3, ZU2_4,
+      ZU2_5, ZU3_0, ZU3_1, ZU3_2, ZU3_3, ZU3_4, ZU3_5, ZU4_0, ZU4_1, ZU4_2, ZU4_3,
+      ZU4_4, ZU4_5, ZU5_0, ZU5_1, ZU5_2, ZU5_3, ZU5_4, ZU5_5, ZE0_0, ZE0_1, ZE0_2,
+      ZE0_3, ZE0_4, ZE0_5, ZE1_0, ZE1_1, ZE1_2, ZE1_3, ZE1_4, ZE1_5, ZE2_0, ZE2_1,
+      ZE2_2, ZE2_3, ZE2_4, ZE2_5, ZE3_0, ZE3_1, ZE3_2, ZE3_3, ZE3_4, ZE3_5, ZE4_0,
+      ZE4_1, ZE4_2, ZE4_3, ZE4_4, ZE4_5, ZE5_0, ZE5_1, ZE5_2, ZE5_3, ZE5_4, ZE5_5,
+      ZH0_0, ZH0_1, ZH0_2, ZH0_3, ZH1_0, ZH1_1, ZH1_2, ZH1_3, ZH2_0, ZH2_1, ZH2_2,
+      ZH2_3, ZH3_0, ZH3_1, ZH3_2, ZH3_3, ZA0_0, ZA0_1, ZA0_2, ZA0_3, ZA1_0, ZA1_1,
+      ZA1_2, ZA1_3, ZA2_0, ZA2_1, ZA2_2, ZA2_3, ZA3_0, ZA3_1, ZA3_2, ZA3_3, ZHR0_0
+      , ZHR0_1, ZHR1_0, ZHR1_1, ZP0_0, ZP0_1, ZP0_2, ZP0_3, ZP1_0, ZP1_1, ZP1_2,
       ZP1_3, ZP2_0, ZP2_1, ZP2_2, ZP2_3, ZP3_0, ZP3_1, ZP3_2, ZP3_3, ReZN10_0,
       ImZN10_0, ReZN10_1, ImZN10_1, ReZN10_2, ImZN10_2, ReZN10_3, ImZN10_3,
       ReZN11_0, ImZN11_0, ReZN11_1, ImZN11_1, ReZN11_2, ImZN11_2, ReZN11_3,
@@ -118,6 +118,7 @@ namespace MRSSMEFTHiggs_info {
    extern const double normalization_g2;
    extern const double normalization_g3;
 
+
    extern const std::array<int, NUMBER_OF_PARTICLES> particle_multiplicities;
    extern const std::array<std::string, NUMBER_OF_PARTICLES> particle_names;
    extern const std::array<std::string, NUMBER_OF_PARTICLES> particle_latex_names;
@@ -131,6 +132,9 @@ namespace MRSSMEFTHiggs_info {
    constexpr bool is_FlexibleEFTHiggs = true;
    constexpr bool is_CP_violating_Higgs_sector {false};
 
+   int get_pdg_code_for_particle(Particles);
+   int get_pdg_code_for_particle(Particles, int);
+   std::string get_particle_name_from_pdg(int);
    void print(std::ostream&);
 
    class MRSSMEFTHiggs_particle_names : public Names {

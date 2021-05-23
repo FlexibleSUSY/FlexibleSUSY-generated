@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.5.0"];
+Print["FlexibleSUSY 2.6.0"];
 Print["lowNMSSM"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -136,9 +136,10 @@ Options[FSlowNMSSMOpenHandle] = {
     Sequence @@ fsDefaultSettings,
     Sequence @@ fsDefaultSMParameters,
     Sequence @@ fslowNMSSMDefaultInputParameters
+
 };
 
-FSlowNMSSMOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters) -> s_List, r___] :=
+FSlowNMSSMOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters ) -> s_List, r___] :=
     FSlowNMSSMOpenHandle[a, Sequence @@ s, r];
 
 FSlowNMSSMOpenHandle[OptionsPattern[]] :=
@@ -239,6 +240,7 @@ FSlowNMSSMOpenHandle[OptionsPattern[]] :=
             OptionValue[ALambdaInput],
             OptionValue[AKappaInput],
             OptionValue[MuEffInput]
+
         }
 ];
 

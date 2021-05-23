@@ -29,10 +29,10 @@
 namespace flexiblesusy {
 
 namespace SM_info {
-   enum Particles : int { VG, Hp, Fv, Ah, hh, Fd, Fu, Fe, VWp, VP, VZ,
+   enum Particles : int { VG = 0, Hp, Fv, Ah, hh, Fd, Fu, Fe, VWp, VP, VZ,
       NUMBER_OF_PARTICLES };
 
-   enum Masses : int { MVG, MHp, MFv_1, MFv_2, MFv_3, MAh, Mhh, MFd_1, MFd_2,
+   enum Masses : int { MVG = 0, MHp, MFv_1, MFv_2, MFv_3, MAh, Mhh, MFd_1, MFd_2,
       MFd_3, MFu_1, MFu_2, MFu_3, MFe_1, MFe_2, MFe_3, MVWp, MVP, MVZ,
       NUMBER_OF_MASSES };
 
@@ -41,7 +41,7 @@ namespace SM_info {
       Yd2_1, Yd2_2, Ye0_0, Ye0_1, Ye0_2, Ye1_0, Ye1_1, Ye1_2, Ye2_0, Ye2_1, Ye2_2,
       mu2, v, NUMBER_OF_PARAMETERS };
 
-   enum Mixings : int { ReVd0_0, ImVd0_0, ReVd0_1, ImVd0_1, ReVd0_2, ImVd0_2,
+   enum Mixings : int { ReVd0_0 = 0, ImVd0_0, ReVd0_1, ImVd0_1, ReVd0_2, ImVd0_2,
       ReVd1_0, ImVd1_0, ReVd1_1, ImVd1_1, ReVd1_2, ImVd1_2, ReVd2_0, ImVd2_0,
       ReVd2_1, ImVd2_1, ReVd2_2, ImVd2_2, ReUd0_0, ImUd0_0, ReUd0_1, ImUd0_1,
       ReUd0_2, ImUd0_2, ReUd1_0, ImUd1_0, ReUd1_1, ImUd1_1, ReUd1_2, ImUd1_2,
@@ -66,6 +66,7 @@ namespace SM_info {
    extern const double normalization_g2;
    extern const double normalization_g3;
 
+
    extern const std::array<int, NUMBER_OF_PARTICLES> particle_multiplicities;
    extern const std::array<std::string, NUMBER_OF_PARTICLES> particle_names;
    extern const std::array<std::string, NUMBER_OF_PARTICLES> particle_latex_names;
@@ -79,6 +80,9 @@ namespace SM_info {
    constexpr bool is_FlexibleEFTHiggs = false;
    constexpr bool is_CP_violating_Higgs_sector {false};
 
+   int get_pdg_code_for_particle(Particles);
+   int get_pdg_code_for_particle(Particles, int);
+   std::string get_particle_name_from_pdg(int);
    void print(std::ostream&);
 
    class SM_particle_names : public Names {

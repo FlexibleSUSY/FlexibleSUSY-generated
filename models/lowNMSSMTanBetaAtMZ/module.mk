@@ -32,6 +32,9 @@ LIBlowNMSSMTanBetaAtMZ_CXXQFT_VERTICES_SRC ?= ''
 lowNMSSMTanBetaAtMZ_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
+lowNMSSMTanBetaAtMZ_FlexibleDecay_MK := \
+		$(DIR)/decays/FlexibleDecay.mk
+
 lowNMSSMTanBetaAtMZ_INCLUDE_MK := \
 		$(lowNMSSMTanBetaAtMZ_SUSY_BETAS_MK) \
 		$(lowNMSSMTanBetaAtMZ_SOFT_BETAS_MK)
@@ -147,6 +150,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(lowNMSSMTanBetaAtMZ_SUSY_BETAS_MK)
 -include $(lowNMSSMTanBetaAtMZ_SOFT_BETAS_MK)
+-include $(lowNMSSMTanBetaAtMZ_FlexibleDecay_MK)
 -include $(lowNMSSMTanBetaAtMZ_CXXQFT_VERTICES_MK)
 -include $(lowNMSSMTanBetaAtMZ_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
@@ -159,6 +163,8 @@ $(lowNMSSMTanBetaAtMZ_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(lowNMSSMTanBetaAtMZ_SOFT_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
+
+$(lowNMSSMTanBetaAtMZ_FlexibleDecay_MK): run-metacode-$(MODNAME)
 $(lowNMSSMTanBetaAtMZ_CXXQFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(lowNMSSMTanBetaAtMZ_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
@@ -294,7 +300,8 @@ pack-$(MODNAME)-src:
 		$(LLlowNMSSMTanBetaAtMZ_SRC) $(LLlowNMSSMTanBetaAtMZ_MMA) \
 		$(lowNMSSMTanBetaAtMZ_MK) $(lowNMSSMTanBetaAtMZ_INCLUDE_MK) $(lowNMSSMTanBetaAtMZ_CXXQFT_VERTICES_MK) \
 		$(lowNMSSMTanBetaAtMZ_SLHA_INPUT) $(lowNMSSMTanBetaAtMZ_REFERENCES) \
-		$(lowNMSSMTanBetaAtMZ_GNUPLOT)
+		$(lowNMSSMTanBetaAtMZ_GNUPLOT) \
+		$(lowNMSSMTanBetaAtMZ_FlexibleDecay_MK)
 
 $(LIBlowNMSSMTanBetaAtMZ_SRC) $(LIBlowNMSSMTanBetaAtMZ_HDR) $(LIBlowNMSSMTanBetaAtMZ_CXXQFT_HDR) $(EXElowNMSSMTanBetaAtMZ_SRC) $(LLlowNMSSMTanBetaAtMZ_SRC) $(LLlowNMSSMTanBetaAtMZ_MMA) \
 : run-metacode-$(MODNAME)

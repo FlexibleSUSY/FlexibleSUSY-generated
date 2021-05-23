@@ -32,6 +32,9 @@ LIBCMSSM_CXXQFT_VERTICES_SRC ?= ''
 CMSSM_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
+CMSSM_FlexibleDecay_MK := \
+		$(DIR)/decays/FlexibleDecay.mk
+
 CMSSM_INCLUDE_MK := \
 		$(CMSSM_SUSY_BETAS_MK) \
 		$(CMSSM_SOFT_BETAS_MK)
@@ -141,6 +144,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(CMSSM_SUSY_BETAS_MK)
 -include $(CMSSM_SOFT_BETAS_MK)
+-include $(CMSSM_FlexibleDecay_MK)
 -include $(CMSSM_CXXQFT_VERTICES_MK)
 -include $(CMSSM_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
@@ -153,6 +157,8 @@ $(CMSSM_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(CMSSM_SOFT_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
+
+$(CMSSM_FlexibleDecay_MK): run-metacode-$(MODNAME)
 $(CMSSM_CXXQFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(CMSSM_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
@@ -288,7 +294,8 @@ pack-$(MODNAME)-src:
 		$(LLCMSSM_SRC) $(LLCMSSM_MMA) \
 		$(CMSSM_MK) $(CMSSM_INCLUDE_MK) $(CMSSM_CXXQFT_VERTICES_MK) \
 		$(CMSSM_SLHA_INPUT) $(CMSSM_REFERENCES) \
-		$(CMSSM_GNUPLOT)
+		$(CMSSM_GNUPLOT) \
+		$(CMSSM_FlexibleDecay_MK)
 
 $(LIBCMSSM_SRC) $(LIBCMSSM_HDR) $(LIBCMSSM_CXXQFT_HDR) $(EXECMSSM_SRC) $(LLCMSSM_SRC) $(LLCMSSM_MMA) \
 : run-metacode-$(MODNAME)

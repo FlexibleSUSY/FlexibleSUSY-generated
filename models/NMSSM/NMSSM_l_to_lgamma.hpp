@@ -20,7 +20,7 @@
 /**
  * @file NMSSM_edm.hpp
  *
- * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.4 .
+ * This file was generated with FlexibleSUSY 2.6.0 and SARAH 4.14.4 .
  */
 
 #ifndef NMSSM_MuToEGamma_H
@@ -39,7 +39,9 @@ template <typename FIn, typename FOut, typename T1, typename T2>
 double lepton_total_decay_width(
       T1 const&, T2 const&, 
       const NMSSM_mass_eigenstates&, const softsusy::QedQcd&);
-
+double calculate_Fe_to_Fe_VP(
+int generationIndex1, int generationIndex2, 
+const NMSSM_mass_eigenstates& model, const softsusy::QedQcd& qedqcd, const Physical_input& physical_input);
 }
 } // namespace flexiblesusy
 

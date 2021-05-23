@@ -40,8 +40,10 @@
 #include "problems_format_mathlink.hpp"
 #include "slha_io.hpp"
 #include "spectrum_generator_settings.hpp"
+#include "decays/flexibledecay_settings.hpp"
 #include "standard_model_two_scale_model.hpp"
 #include "lowe.h"
+#include "loop_libraries/loop_library.hpp"
 
 #include <mathlink.h>
 #include "mathlink_utils.hpp"
@@ -147,14 +149,16 @@ public:
    virtual void put_model_spectra(MLINK link) const = 0;
 
    virtual const Spectrum_generator_problems& get_problems() const = 0;
-   virtual void fill_slha_io(CMSSMSemiAnalytic_slha_io&, const Spectrum_generator_settings&) const = 0;
+   virtual void fill_slha_io(CMSSMSemiAnalytic_slha_io&, const Spectrum_generator_settings&, const FlexibleDecay_settings&) const = 0;
    virtual double get_model_scale() const = 0;
    virtual const CMSSMSemiAnalytic_observables& get_observables() const = 0;
+   virtual const CMSSMSemiAnalytic_decays& get_decays() const = 0;
 
    virtual void calculate_spectrum(
       const Spectrum_generator_settings&, const SLHA_io::Modsel&,
       const softsusy::QedQcd&, const CMSSMSemiAnalytic_input_parameters&) = 0;
    virtual void calculate_model_observables(const softsusy::QedQcd&, const Physical_input&) = 0;
+   virtual void calculate_model_decays(const softsusy::QedQcd&, const Physical_input&, const FlexibleDecay_settings&) = 0;
 };
 
 template <typename Solver_type>
@@ -167,20 +171,23 @@ public:
    virtual void put_model_spectra(MLINK link) const override;
 
    virtual const Spectrum_generator_problems& get_problems() const override { return problems; }
-   virtual void fill_slha_io(CMSSMSemiAnalytic_slha_io&, const Spectrum_generator_settings&) const override;
+   virtual void fill_slha_io(CMSSMSemiAnalytic_slha_io&, const Spectrum_generator_settings&, const FlexibleDecay_settings&) const override;
    virtual double get_model_scale() const override { return std::get<0>(models).get_scale(); }
    virtual const CMSSMSemiAnalytic_observables& get_observables() const override { return observables; }
+   virtual const CMSSMSemiAnalytic_decays& get_decays() const override { return decays; }
 
    virtual void calculate_spectrum(
       const Spectrum_generator_settings&, const SLHA_io::Modsel&,
       const softsusy::QedQcd&, const CMSSMSemiAnalytic_input_parameters&) override;
    virtual void calculate_model_observables(const softsusy::QedQcd&, const Physical_input&) override;
+   virtual void calculate_model_decays(const softsusy::QedQcd&, const Physical_input&, const FlexibleDecay_settings&) override;
 
 private:
    std::tuple<CMSSMSemiAnalytic<Solver_type>> models{};        ///< running parameters and pole masses
    Spectrum_generator_problems problems{};   ///< spectrum generator problems
    CMSSMSemiAnalytic_scales scales{};              ///< scale information
    CMSSMSemiAnalytic_observables observables{};    ///< observables
+   CMSSMSemiAnalytic_decays decays{};              ///< decays
 };
 
 class Model_data {
@@ -196,15 +203,18 @@ public:
    void set_physical_input(const Physical_input& p) { physical_input = p; }
    void set_sm_input_parameters(const softsusy::QedQcd& qedqcd_) { qedqcd = qedqcd_; }
    void set_settings(const Spectrum_generator_settings& s) { settings = s; }
+   void set_fd_settings(const FlexibleDecay_settings& s) { flexibledecay_settings = s; }
    void set_modsel(const SLHA_io::Modsel& m) { modsel = m; }
 
    const Spectrum_generator_settings& get_settings() const { return settings; }
+   const FlexibleDecay_settings& get_fd_settings() const { return flexibledecay_settings; }
 
    void put_settings(MLINK link) const;
    void put_sm_input_parameters(MLINK link) const;
    void put_input_parameters(MLINK link) const;
    void put_observables(MLINK link) const;
    void put_slha(MLINK link) const;
+   void put_decays(MLINK link) const;
 
    void put_problems(MLINK link) const;
    void put_warnings(MLINK link) const;
@@ -212,6 +222,7 @@ public:
    void calculate_spectrum();
    void check_spectrum(MLINK link) const;
    void calculate_model_observables();
+   void calculate_model_decays();
 
    double get_model_scale() const {
       check_spectrum_pointer();
@@ -222,6 +233,7 @@ private:
    Physical_input physical_input{};          ///< extra non-SLHA physical input
    softsusy::QedQcd qedqcd{};                ///< SLHA physical input
    Spectrum_generator_settings settings{};   ///< spectrum generator settings
+   FlexibleDecay_settings flexibledecay_settings {}; ///< FlexibleDecay settings
    SLHA_io::Modsel modsel{};                 ///< MODSEL input
    std::unique_ptr<CMSSMSemiAnalytic_spectrum> spectrum{nullptr};  ///< spectrum information
 
@@ -522,7 +534,7 @@ CMSSMSemiAnalytic_slha_io Model_data::get_slha_io() const
    slha_io.set_print_imaginary_parts_of_majorana_mixings(
       settings.get(Spectrum_generator_settings::force_positive_masses));
 
-   spectrum->fill_slha_io(slha_io, settings);
+   spectrum->fill_slha_io(slha_io, settings, flexibledecay_settings);
 
    return slha_io;
 }
@@ -767,8 +779,18 @@ void CMSSMSemiAnalytic_spectrum_impl<Solver_type>::calculate_model_observables(
 /******************************************************************/
 
 template <typename Solver_type>
+void CMSSMSemiAnalytic_spectrum_impl<Solver_type>::calculate_model_decays(
+   const softsusy::QedQcd& qedqcd, const Physical_input& physical_input, const FlexibleDecay_settings& flexibledecay_settings)
+{
+   decays = CMSSMSemiAnalytic_decays(std::get<0>(models), qedqcd, physical_input, flexibledecay_settings);
+   decays.calculate_decays();
+}
+
+/******************************************************************/
+
+template <typename Solver_type>
 void CMSSMSemiAnalytic_spectrum_impl<Solver_type>::fill_slha_io(CMSSMSemiAnalytic_slha_io& slha_io,
-       const Spectrum_generator_settings& settings) const
+       const Spectrum_generator_settings& settings, const FlexibleDecay_settings& flexibledecay_settings) const
 {
    const auto& problems = std::get<0>(models).get_problems();
    const auto force_output = std::get<0>(models).do_force_output();
@@ -777,6 +799,15 @@ void CMSSMSemiAnalytic_spectrum_impl<Solver_type>::fill_slha_io(CMSSMSemiAnalyti
    if (!problems.have_problem() || force_output) {
       slha_io.set_spectrum(models);
       slha_io.set_extra(std::get<0>(models), scales, observables, settings);
+   }
+
+   const auto& decays_problems = decays.get_problems();
+   const bool loop_library_for_decays =
+      (Loop_library::get_type() == Loop_library::Library::Collier) ||
+      (Loop_library::get_type() == Loop_library::Library::Looptools);
+   if ((!decays_problems.have_problem() && loop_library_for_decays) || force_output) {
+      slha_io.set_dcinfo(decays_problems);
+      slha_io.set_decays(decays.get_decay_table(), flexibledecay_settings);
    }
 }
 
@@ -789,14 +820,56 @@ void Model_data::put_observables(MLINK link) const
 
    MLPutFunction(link, "List", 1);
    MLPutRule(link, CMSSMSemiAnalytic_info::model_name);
-   MLPutFunction(link, "List", 5);
+   MLPutFunction(link, "List", 1);
 
    MLPutRuleTo(link, OBSERVABLE(a_muon), "FlexibleSUSYObservable`aMuon");
-   MLPutRuleTo(link, OBSERVABLE(eff_cp_higgs_photon_photon), "FlexibleSUSYObservable`CpHiggsPhotonPhoton");
-   MLPutRuleTo(link, OBSERVABLE(eff_cp_higgs_gluon_gluon), "FlexibleSUSYObservable`CpHiggsGluonGluon");
-   MLPutRuleTo(link, OBSERVABLE(eff_cp_pseudoscalar_photon_photon), "FlexibleSUSYObservable`CpPseudoScalarPhotonPhoton");
-   MLPutRuleTo(link, OBSERVABLE(eff_cp_pseudoscalar_gluon_gluon), "FlexibleSUSYObservable`CpPseudoScalarGluonGluon");
 
+
+   MLEndPacket(link);
+}
+
+/******************************************************************/
+
+void Model_data::put_decays(MLINK link) const
+{
+   check_spectrum_pointer();
+   CMSSMSemiAnalytic_decays decays = spectrum->get_decays();
+   const auto& decay_table = decays.get_decay_table();
+   const auto number_of_decays = decay_table.size();
+
+   MLPutFunction(link, "List", 1);
+   MLPutRule(link, CMSSMSemiAnalytic_info::model_name);
+   MLPutFunction(link, "List", number_of_decays);
+
+   for (const auto& decays_list : decay_table) {
+      const auto pid = decays_list.get_particle_id();
+      int n_decays = 0;
+      for (const auto& decay : decays_list) {
+         if (!(decays_list.get_total_width() > 0.) || this->get_fd_settings().get(FlexibleDecay_settings::min_br_to_print) > decay.second.get_width()/decays_list.get_total_width()) {
+            continue;
+         }
+         n_decays++;
+      }
+      MLPutRule(link, CMSSMSemiAnalytic_info::get_particle_name_from_pdg(pid), {"Decays"});
+      MLPutFunction(link, "List", 3);
+      MLPut(link, pid);
+      MLPut(link, decays_list.get_total_width());
+      MLPutFunction(link, "List", n_decays);
+
+      for (const auto& decay : decays_list) {
+         if (!(decays_list.get_total_width() > 0.) || this->get_fd_settings().get(FlexibleDecay_settings::min_br_to_print) > decay.second.get_width()/decays_list.get_total_width()) {
+            continue;
+         }
+         const auto& final_states = decay.second.get_final_state_particle_ids();
+         MLPutFunction(link, "List", 3);
+         MLPut(link, pid);
+         MLPutFunction(link, "List", final_states.size());
+         for (const auto id : final_states) {
+            MLPut(link, id);
+         }
+         MLPut(link, decay.second.get_width());
+      }
+   }
 
    MLEndPacket(link);
 }
@@ -851,6 +924,24 @@ void Model_data::calculate_model_observables()
 
 /******************************************************************/
 
+void Model_data::calculate_model_decays()
+{
+   check_spectrum_pointer();
+   const bool loop_library_for_decays =
+      (Loop_library::get_type() == Loop_library::Library::Collier) ||
+      (Loop_library::get_type() == Loop_library::Library::Looptools);
+   if (flexibledecay_settings.get(FlexibleDecay_settings::calculate_decays)) {
+      if (loop_library_for_decays) {
+         spectrum->calculate_model_decays(qedqcd, physical_input, flexibledecay_settings);
+      }
+      else if (!loop_library_for_decays) {
+         WARNING("Decay module requires a dedicated loop library. Configure FlexibleSUSY with Collier or LoopTools and set appropriately flag 31 in Block FlexibleSUSY of the LesHouches input.");
+      }
+   }
+}
+
+/******************************************************************/
+
 template <typename Element_t>
 Model_data make_data(const Dynamic_array_view<Element_t>& pars)
 {
@@ -860,7 +951,8 @@ Model_data make_data(const Dynamic_array_view<Element_t>& pars)
       n_sm_parameters = softsusy::NUMBER_OF_LOW_ENERGY_INPUT_PARAMETERS
                         + Physical_input::NUMBER_OF_INPUT_PARAMETERS,
       n_input_pars = 4;
-   const Index_t n_total = n_settings + n_sm_parameters + n_input_pars;
+   const Index_t n_fd_settings = 4;
+   const Index_t n_total = n_settings + n_sm_parameters + n_input_pars + n_fd_settings;
 
    if (pars.size() != n_total)
       throw EWrongNumberOfParameters(pars.size(), n_total);
@@ -963,6 +1055,11 @@ Model_data make_data(const Dynamic_array_view<Element_t>& pars)
    INPUTPARAMETER(Azero) = pars[c++];
    INPUTPARAMETER(MuInput) = pars[c++];
 
+   FlexibleDecay_settings flexibledecay_settings;
+   flexibledecay_settings.set(FlexibleDecay_settings::min_br_to_print, pars[c++]);
+   flexibledecay_settings.set(FlexibleDecay_settings::include_higher_order_corrections , pars[c++]);
+   flexibledecay_settings.set(FlexibleDecay_settings::use_Thomson_alpha_in_Phigamgam_and_PhigamZ , pars[c++]);
+   flexibledecay_settings.set(FlexibleDecay_settings::offshell_VV_decays , pars[c++]);
 
    Model_data data;
    data.set_settings(settings);
@@ -970,6 +1067,7 @@ Model_data make_data(const Dynamic_array_view<Element_t>& pars)
    data.set_sm_input_parameters(qedqcd);
    data.set_physical_input(physical_input);
    data.set_input_parameters(input);
+   data.set_fd_settings(flexibledecay_settings);
 
    return data;
 }
@@ -1268,6 +1366,52 @@ DLLEXPORT int FSCMSSMSemiAnalyticCalculateObservables(
       data.put_observables(link);
    } catch (const flexiblesusy::Error& e) {
       put_message(link, "FSCMSSMSemiAnalyticCalculateObservables", "error", e.what_detailed());
+      put_error_output(link);
+   }
+
+   return LIBRARY_NO_ERROR;
+}
+
+/******************************************************************/
+
+DLLEXPORT int FSCMSSMSemiAnalyticCalculateDecays(
+   WolframLibraryData /* libData */, MLINK link)
+{
+   using namespace flexiblesusy::CMSSMSemiAnalytic_librarylink;
+
+   if (!check_number_of_args(link, 1, "FSCMSSMSemiAnalyticCalculateDecays"))
+      return LIBRARY_TYPE_ERROR;
+
+   const auto hid = get_handle_from(link);
+
+   try {
+      auto& data = find_data(hid);
+
+      if (data.get_model_scale() == 0.) {
+         put_message(link,
+            "FSCMSSMSemiAnalyticCalculateDecays", "warning",
+            "Renormalization scale is 0.  Did you run "
+            "FSCMSSMSemiAnalyticCalculateSpectrum[]?");
+      }
+
+      {
+         Redirect_output crd(link);
+         auto setting = data.get_settings();
+         if (!static_cast<bool>(setting.get(flexiblesusy::Spectrum_generator_settings::calculate_sm_masses)) ||
+            !static_cast<bool>(setting.get(flexiblesusy::Spectrum_generator_settings::calculate_bsm_masses))) {
+            put_message(link,
+               "FSSMCalculateDecays", "warning", "Need SM and BSM masses. Setting flags FlexlibleSUSY[3] = FlexlibleSUSY[23] = 1.");
+            setting.set(flexiblesusy::Spectrum_generator_settings::calculate_sm_masses, 1.0);
+            setting.set(flexiblesusy::Spectrum_generator_settings::calculate_bsm_masses, 1.0);
+            data.set_settings(setting);
+            data.calculate_spectrum();
+         }
+         data.calculate_model_decays();
+      }
+
+      data.put_decays(link);
+   } catch (const flexiblesusy::Error& e) {
+      put_message(link, "FSCMSSMSemiAnalyticCalculateDecays", "error", e.what());
       put_error_output(link);
    }
 

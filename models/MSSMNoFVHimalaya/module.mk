@@ -32,6 +32,9 @@ LIBMSSMNoFVHimalaya_CXXQFT_VERTICES_SRC ?= ''
 MSSMNoFVHimalaya_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
+MSSMNoFVHimalaya_FlexibleDecay_MK := \
+		$(DIR)/decays/FlexibleDecay.mk
+
 MSSMNoFVHimalaya_INCLUDE_MK := \
 		$(MSSMNoFVHimalaya_SUSY_BETAS_MK) \
 		$(MSSMNoFVHimalaya_SOFT_BETAS_MK)
@@ -141,6 +144,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(MSSMNoFVHimalaya_SUSY_BETAS_MK)
 -include $(MSSMNoFVHimalaya_SOFT_BETAS_MK)
+-include $(MSSMNoFVHimalaya_FlexibleDecay_MK)
 -include $(MSSMNoFVHimalaya_CXXQFT_VERTICES_MK)
 -include $(MSSMNoFVHimalaya_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
@@ -153,6 +157,8 @@ $(MSSMNoFVHimalaya_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(MSSMNoFVHimalaya_SOFT_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
+
+$(MSSMNoFVHimalaya_FlexibleDecay_MK): run-metacode-$(MODNAME)
 $(MSSMNoFVHimalaya_CXXQFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(MSSMNoFVHimalaya_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
@@ -288,7 +294,8 @@ pack-$(MODNAME)-src:
 		$(LLMSSMNoFVHimalaya_SRC) $(LLMSSMNoFVHimalaya_MMA) \
 		$(MSSMNoFVHimalaya_MK) $(MSSMNoFVHimalaya_INCLUDE_MK) $(MSSMNoFVHimalaya_CXXQFT_VERTICES_MK) \
 		$(MSSMNoFVHimalaya_SLHA_INPUT) $(MSSMNoFVHimalaya_REFERENCES) \
-		$(MSSMNoFVHimalaya_GNUPLOT)
+		$(MSSMNoFVHimalaya_GNUPLOT) \
+		$(MSSMNoFVHimalaya_FlexibleDecay_MK)
 
 $(LIBMSSMNoFVHimalaya_SRC) $(LIBMSSMNoFVHimalaya_HDR) $(LIBMSSMNoFVHimalaya_CXXQFT_HDR) $(EXEMSSMNoFVHimalaya_SRC) $(LLMSSMNoFVHimalaya_SRC) $(LLMSSMNoFVHimalaya_MMA) \
 : run-metacode-$(MODNAME)

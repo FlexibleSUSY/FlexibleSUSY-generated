@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.5.0"];
+Print["FlexibleSUSY 2.6.0"];
 Print["HTHDMIIMSSMBC"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -117,9 +117,10 @@ Options[FSHTHDMIIMSSMBCOpenHandle] = {
     Sequence @@ fsDefaultSettings,
     Sequence @@ fsDefaultSMParameters,
     Sequence @@ fsHTHDMIIMSSMBCDefaultInputParameters
+
 };
 
-FSHTHDMIIMSSMBCOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters) -> s_List, r___] :=
+FSHTHDMIIMSSMBCOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters ) -> s_List, r___] :=
     FSHTHDMIIMSSMBCOpenHandle[a, Sequence @@ s, r];
 
 FSHTHDMIIMSSMBCOpenHandle[OptionsPattern[]] :=
@@ -201,6 +202,7 @@ FSHTHDMIIMSSMBCOpenHandle[OptionsPattern[]] :=
             OptionValue[AbInput],
             OptionValue[AtauInput],
             OptionValue[LambdaLoopOrder]
+
         }
 ];
 

@@ -32,6 +32,9 @@ LIBCMSSMSemiAnalytic_CXXQFT_VERTICES_SRC ?= ''
 CMSSMSemiAnalytic_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
+CMSSMSemiAnalytic_FlexibleDecay_MK := \
+		$(DIR)/decays/FlexibleDecay.mk
+
 CMSSMSemiAnalytic_INCLUDE_MK := \
 		$(CMSSMSemiAnalytic_SUSY_BETAS_MK) \
 		$(CMSSMSemiAnalytic_SOFT_BETAS_MK)
@@ -141,6 +144,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(CMSSMSemiAnalytic_SUSY_BETAS_MK)
 -include $(CMSSMSemiAnalytic_SOFT_BETAS_MK)
+-include $(CMSSMSemiAnalytic_FlexibleDecay_MK)
 -include $(CMSSMSemiAnalytic_CXXQFT_VERTICES_MK)
 -include $(CMSSMSemiAnalytic_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
@@ -153,6 +157,8 @@ $(CMSSMSemiAnalytic_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(CMSSMSemiAnalytic_SOFT_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
+
+$(CMSSMSemiAnalytic_FlexibleDecay_MK): run-metacode-$(MODNAME)
 $(CMSSMSemiAnalytic_CXXQFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(CMSSMSemiAnalytic_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
@@ -288,7 +294,8 @@ pack-$(MODNAME)-src:
 		$(LLCMSSMSemiAnalytic_SRC) $(LLCMSSMSemiAnalytic_MMA) \
 		$(CMSSMSemiAnalytic_MK) $(CMSSMSemiAnalytic_INCLUDE_MK) $(CMSSMSemiAnalytic_CXXQFT_VERTICES_MK) \
 		$(CMSSMSemiAnalytic_SLHA_INPUT) $(CMSSMSemiAnalytic_REFERENCES) \
-		$(CMSSMSemiAnalytic_GNUPLOT)
+		$(CMSSMSemiAnalytic_GNUPLOT) \
+		$(CMSSMSemiAnalytic_FlexibleDecay_MK)
 
 $(LIBCMSSMSemiAnalytic_SRC) $(LIBCMSSMSemiAnalytic_HDR) $(LIBCMSSMSemiAnalytic_CXXQFT_HDR) $(EXECMSSMSemiAnalytic_SRC) $(LLCMSSMSemiAnalytic_SRC) $(LLCMSSMSemiAnalytic_MMA) \
 : run-metacode-$(MODNAME)

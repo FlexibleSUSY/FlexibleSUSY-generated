@@ -69,10 +69,6 @@ CMSSMNoFV_observables::CMSSMNoFV_observables()
    , a_muon_uncertainty(0)
    , a_muon_gm2calc(0)
    , a_muon_gm2calc_uncertainty(0)
-   , eff_cp_higgs_photon_photon(Eigen::Array<std::complex<double>,2,1>::Zero())
-   , eff_cp_higgs_gluon_gluon(Eigen::Array<std::complex<double>,2,1>::Zero())
-   , eff_cp_pseudoscalar_photon_photon(0)
-   , eff_cp_pseudoscalar_gluon_gluon(0)
 
 {
 }
@@ -85,18 +81,6 @@ Eigen::ArrayXd CMSSMNoFV_observables::get() const
    vec(1) = a_muon_uncertainty;
    vec(2) = a_muon_gm2calc;
    vec(3) = a_muon_gm2calc_uncertainty;
-   vec(4) = Re(eff_cp_higgs_photon_photon(0));
-   vec(5) = Im(eff_cp_higgs_photon_photon(0));
-   vec(6) = Re(eff_cp_higgs_photon_photon(1));
-   vec(7) = Im(eff_cp_higgs_photon_photon(1));
-   vec(8) = Re(eff_cp_higgs_gluon_gluon(0));
-   vec(9) = Im(eff_cp_higgs_gluon_gluon(0));
-   vec(10) = Re(eff_cp_higgs_gluon_gluon(1));
-   vec(11) = Im(eff_cp_higgs_gluon_gluon(1));
-   vec(12) = Re(eff_cp_pseudoscalar_photon_photon);
-   vec(13) = Im(eff_cp_pseudoscalar_photon_photon);
-   vec(14) = Re(eff_cp_pseudoscalar_gluon_gluon);
-   vec(15) = Im(eff_cp_pseudoscalar_gluon_gluon);
 
    return vec;
 }
@@ -109,18 +93,6 @@ std::vector<std::string> CMSSMNoFV_observables::get_names()
    names[1] = "a_muon_uncertainty";
    names[2] = "a_muon_gm2calc";
    names[3] = "a_muon_gm2calc_uncertainty";
-   names[4] = "Re(eff_cp_higgs_photon_photon(0))";
-   names[5] = "Im(eff_cp_higgs_photon_photon(0))";
-   names[6] = "Re(eff_cp_higgs_photon_photon(1))";
-   names[7] = "Im(eff_cp_higgs_photon_photon(1))";
-   names[8] = "Re(eff_cp_higgs_gluon_gluon(0))";
-   names[9] = "Im(eff_cp_higgs_gluon_gluon(0))";
-   names[10] = "Re(eff_cp_higgs_gluon_gluon(1))";
-   names[11] = "Im(eff_cp_higgs_gluon_gluon(1))";
-   names[12] = "Re(eff_cp_pseudoscalar_photon_photon)";
-   names[13] = "Im(eff_cp_pseudoscalar_photon_photon)";
-   names[14] = "Re(eff_cp_pseudoscalar_gluon_gluon)";
-   names[15] = "Im(eff_cp_pseudoscalar_gluon_gluon)";
 
    return names;
 }
@@ -131,10 +103,6 @@ void CMSSMNoFV_observables::clear()
    a_muon_uncertainty = 0.;
    a_muon_gm2calc = 0.;
    a_muon_gm2calc_uncertainty = 0.;
-   eff_cp_higgs_photon_photon = Eigen::Array<std::complex<double>,2,1>::Zero();
-   eff_cp_higgs_gluon_gluon = Eigen::Array<std::complex<double>,2,1>::Zero();
-   eff_cp_pseudoscalar_photon_photon = std::complex<double>(0.,0.);
-   eff_cp_pseudoscalar_gluon_gluon = std::complex<double>(0.,0.);
 
 }
 
@@ -146,12 +114,6 @@ void CMSSMNoFV_observables::set(const Eigen::ArrayXd& vec)
    a_muon_uncertainty = vec(1);
    a_muon_gm2calc = vec(2);
    a_muon_gm2calc_uncertainty = vec(3);
-   eff_cp_higgs_photon_photon(0) = std::complex<double>(vec(4), vec(5));
-   eff_cp_higgs_photon_photon(1) = std::complex<double>(vec(6), vec(7));
-   eff_cp_higgs_gluon_gluon(0) = std::complex<double>(vec(8), vec(9));
-   eff_cp_higgs_gluon_gluon(1) = std::complex<double>(vec(10), vec(11));
-   eff_cp_pseudoscalar_photon_photon = std::complex<double>(vec(12), vec(13));
-   eff_cp_pseudoscalar_gluon_gluon = std::complex<double>(vec(14), vec(15));
 
 }
 
@@ -223,8 +185,6 @@ CMSSMNoFV_observables calculate_observables(const CMSSMNoFV_mass_eigenstates& mo
       gm2calc_data.Ae    = div_safe(MODEL.get_TYe(), MODEL.get_Ye());
       #endif
 
-      CMSSMNoFV_effective_couplings effective_couplings(model, qedqcd, physical_input);
-      effective_couplings.calculate_effective_couplings();
 
       observables.AMU = CMSSMNoFV_a_muon::calculate_a_muon(MODEL, qedqcd);
       observables.AMUUNCERTAINTY = CMSSMNoFV_a_muon::calculate_a_muon_uncertainty(MODEL, qedqcd);
@@ -234,12 +194,6 @@ CMSSMNoFV_observables calculate_observables(const CMSSMNoFV_mass_eigenstates& mo
       #ifdef ENABLE_GM2CALC
       observables.AMUGM2CALCUNCERTAINTY = gm2calc_calculate_amu_uncertainty(gm2calc_data);
       #endif
-      observables.EFFCPHIGGSPHOTONPHOTON(0) = effective_couplings.get_eff_CphhVPVP(0);
-      observables.EFFCPHIGGSPHOTONPHOTON(1) = effective_couplings.get_eff_CphhVPVP(1);
-      observables.EFFCPHIGGSGLUONGLUON(0) = effective_couplings.get_eff_CphhVGVG(0);
-      observables.EFFCPHIGGSGLUONGLUON(1) = effective_couplings.get_eff_CphhVGVG(1);
-      observables.EFFCPPSEUDOSCALARPHOTONPHOTON = effective_couplings.get_eff_CpAhVPVP(1);
-      observables.EFFCPPSEUDOSCALARGLUONGLUON = effective_couplings.get_eff_CpAhVGVG(1);
    } catch (const NonPerturbativeRunningError& e) {
       observables.problems.general.flag_non_perturbative_running(e.get_scale());
    } catch (const Error& e) {

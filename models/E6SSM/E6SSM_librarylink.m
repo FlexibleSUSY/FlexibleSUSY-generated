@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.5.0"];
+Print["FlexibleSUSY 2.6.0"];
 Print["E6SSM"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -20,12 +20,16 @@ FSE6SSMSetLib = LibraryFunctionLoad[libE6SSM, "FSE6SSMSet", {Integer, {Real,1}},
 
 FSE6SSMCalculateSpectrum = LibraryFunctionLoad[libE6SSM, "FSE6SSMCalculateSpectrum", LinkObject, LinkObject];
 FSE6SSMCalculateObservables = LibraryFunctionLoad[libE6SSM, "FSE6SSMCalculateObservables", LinkObject, LinkObject];
+FSE6SSMCalculateDecays = LibraryFunctionLoad[libE6SSM, "FSE6SSMCalculateDecays", LinkObject, LinkObject];
 
 FSE6SSMCalculateSpectrum::error = "`1`";
 FSE6SSMCalculateSpectrum::warning = "`1`";
 
 FSE6SSMCalculateObservables::error = "`1`";
 FSE6SSMCalculateObservables::warning = "`1`";
+
+FSE6SSMCalculateDecays::error = "`1`";
+FSE6SSMCalculateDecays::warning = "`1`";
 
 FSE6SSM::info = "`1`";
 FSE6SSM::nonum = "Error: `1` is not a numeric input value!";
@@ -101,6 +105,13 @@ fsDefaultSMParameters = {
     Mh -> 125.09
 };
 
+fdDefaultSettings = {
+   minBRtoPrint -> 1*^-5,
+   maxHigherOrderCorrections -> 4,
+   alphaThomson -> 1,
+   offShellVV -> 2
+};
+
 fsE6SSMDefaultInputParameters = {
    m0 -> 0,
    m12 -> 0,
@@ -118,9 +129,10 @@ Options[FSE6SSMOpenHandle] = {
     Sequence @@ fsDefaultSettings,
     Sequence @@ fsDefaultSMParameters,
     Sequence @@ fsE6SSMDefaultInputParameters
+   , Sequence @@ fdDefaultSettings
 };
 
-FSE6SSMOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters) -> s_List, r___] :=
+FSE6SSMOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters | fdSettings) -> s_List, r___] :=
     FSE6SSMOpenHandle[a, Sequence @@ s, r];
 
 FSE6SSMOpenHandle[OptionsPattern[]] :=
@@ -203,6 +215,11 @@ FSE6SSMOpenHandle[OptionsPattern[]] :=
             OptionValue[BmuPrimeInput],
             OptionValue[vSInput],
             OptionValue[Lambda12Input]
+            ,
+            OptionValue[minBRtoPrint],
+            OptionValue[maxHigherOrderCorrections],
+            OptionValue[alphaThomson],
+            OptionValue[offShellVV]
         }
 ];
 

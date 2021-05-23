@@ -65,49 +65,35 @@ namespace flexiblesusy {
 const int HSSUSY_observables::NUMBER_OF_OBSERVABLES;
 
 HSSUSY_observables::HSSUSY_observables()
-   : eff_cp_higgs_photon_photon(0)
-   , eff_cp_higgs_gluon_gluon(0)
 
 {
 }
 
 Eigen::ArrayXd HSSUSY_observables::get() const
 {
-   Eigen::ArrayXd vec(HSSUSY_observables::NUMBER_OF_OBSERVABLES);
+   Eigen::ArrayXd vec(1);
 
-   vec(0) = Re(eff_cp_higgs_photon_photon);
-   vec(1) = Im(eff_cp_higgs_photon_photon);
-   vec(2) = Re(eff_cp_higgs_gluon_gluon);
-   vec(3) = Im(eff_cp_higgs_gluon_gluon);
+   vec(0) = 0.;
 
    return vec;
 }
 
 std::vector<std::string> HSSUSY_observables::get_names()
 {
-   std::vector<std::string> names(HSSUSY_observables::NUMBER_OF_OBSERVABLES);
+   std::vector<std::string> names(1);
 
-   names[0] = "Re(eff_cp_higgs_photon_photon)";
-   names[1] = "Im(eff_cp_higgs_photon_photon)";
-   names[2] = "Re(eff_cp_higgs_gluon_gluon)";
-   names[3] = "Im(eff_cp_higgs_gluon_gluon)";
+   names[0] = "no observables defined";
 
    return names;
 }
 
 void HSSUSY_observables::clear()
 {
-   eff_cp_higgs_photon_photon = std::complex<double>(0.,0.);
-   eff_cp_higgs_gluon_gluon = std::complex<double>(0.,0.);
 
 }
 
 void HSSUSY_observables::set(const Eigen::ArrayXd& vec)
 {
-   assert(vec.rows() == HSSUSY_observables::NUMBER_OF_OBSERVABLES);
-
-   eff_cp_higgs_photon_photon = std::complex<double>(vec(0), vec(1));
-   eff_cp_higgs_gluon_gluon = std::complex<double>(vec(2), vec(3));
 
 }
 
@@ -146,11 +132,8 @@ HSSUSY_observables calculate_observables(const HSSUSY_mass_eigenstates& model,
    HSSUSY_observables observables;
 
    try {
-      HSSUSY_effective_couplings effective_couplings(model, qedqcd, physical_input);
-      effective_couplings.calculate_effective_couplings();
+      
 
-      observables.EFFCPHIGGSPHOTONPHOTON = effective_couplings.get_eff_CphhVPVP();
-      observables.EFFCPHIGGSGLUONGLUON = effective_couplings.get_eff_CphhVGVG();
    } catch (const NonPerturbativeRunningError& e) {
       observables.problems.general.flag_non_perturbative_running(e.get_scale());
    } catch (const Error& e) {

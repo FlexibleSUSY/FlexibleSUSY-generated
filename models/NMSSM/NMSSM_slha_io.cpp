@@ -183,6 +183,16 @@ void NMSSM_slha_io::set_settings(const Spectrum_generator_settings& settings)
 }
 
 /**
+ * Stores the settings (FlexibleSUSY block) in the SLHA object.
+ *
+ * @param settings class of settings
+ */
+void NMSSM_slha_io::set_FlexibleDecay_settings(const FlexibleDecay_settings& settings)
+{
+   slha_io.set_FlexibleDecay_settings(settings);
+}
+
+/**
  * Stores the SMINPUTS input parameters in the SLHA object.
  *
  * @param qedqcd class of Standard Model parameters
@@ -525,6 +535,137 @@ void NMSSM_slha_io::set_spectrum(const standard_model::Standard_model& model)
 }
 
 /**
+ * Stores the decays calculation information in the DCINFO block
+ * in the SLHA object.
+ *
+ * @param problems struct with decays calculation problems
+ */
+void NMSSM_slha_io::set_dcinfo(const FlexibleDecay_problems& problems)
+{
+   set_dcinfo(problems.get_problem_strings(), problems.get_warning_strings());
+}
+
+/**
+ * Stores given problems and warnings in the DCINFO block in the SLHA
+ * object.
+ *
+ * @param problems vector of problem strings
+ * @param warnings vector of warning strings
+ */
+void NMSSM_slha_io::set_dcinfo(
+   const std::vector<std::string>& problems,
+   const std::vector<std::string>& warnings)
+{
+   std::ostringstream dcinfo;
+   dcinfo << "Block DCINFO\n"
+          << FORMAT_SPINFO(1, PKGNAME)
+          << FORMAT_SPINFO(2, FLEXIBLESUSY_VERSION);
+
+   for (const auto& s: warnings)
+      dcinfo << FORMAT_SPINFO(3, s);
+
+   for (const auto& s: problems)
+      dcinfo << FORMAT_SPINFO(4, s);
+
+   dcinfo << FORMAT_SPINFO(5, NMSSM_info::model_name)
+          << FORMAT_SPINFO(9, SARAH_VERSION);
+
+   slha_io.set_block(dcinfo);
+}
+
+/**
+ * Sort decays of every particle according to their width
+ *
+ */
+std::vector<Decay> sort_decays_list(const Decays_list& decays_list) {
+   std::vector<Decay> decays_list_as_vector;
+   for (const auto& el : decays_list) {
+      decays_list_as_vector.push_back(el.second);
+   }
+   std::sort(
+      decays_list_as_vector.begin(),
+      decays_list_as_vector.end(),
+      [](const auto& d1, const auto& d2) {
+         return d1.get_width() > d2.get_width();
+      }
+   );
+   return decays_list_as_vector;
+}
+
+/**
+ * Stores the branching ratios for a given particle in the SLHA
+ * object.
+ *
+ * @param decays struct containing individual particle decays
+ */
+void NMSSM_slha_io::set_decay_block(const Decays_list& decays_list, FlexibleDecay_settings const& flexibledecay_settings)
+{
+   const auto pdg = decays_list.get_particle_id();
+   const auto width = decays_list.get_total_width();
+   const std::string name = NMSSM_info::get_particle_name_from_pdg(pdg);
+   if (std::isnan(width) || std::isinf(width)) {
+      throw std::runtime_error("Total width of " + name + " is " + std::to_string(width));
+   }
+
+   std::ostringstream decay;
+
+   decay << "DECAY "
+         << FORMAT_TOTAL_WIDTH(pdg, width, name + " decays");
+
+   if (!is_zero(width, 1e-100)) {
+      constexpr double NEGATIVE_BR_TOLERANCE = 1e-11;
+      const double MIN_BR_TO_PRINT = flexibledecay_settings.get(FlexibleDecay_settings::min_br_to_print);
+      std::vector<Decay> sorted_decays_list = sort_decays_list(decays_list);
+      for (const auto& channel : sorted_decays_list) {
+         auto const partial_width = channel.get_width();
+         auto branching_ratio = partial_width / width;
+         if (partial_width < 0 && !is_zero(branching_ratio, NEGATIVE_BR_TOLERANCE)) {
+            std::stringstream ss;
+            ss << std::scientific << partial_width;
+            throw std::runtime_error("Error in " + channel.get_proc_string() + ": partial width is negative (" + ss.str() + " GeV).");
+         }
+         else if (partial_width < 0 && is_zero(branching_ratio, NEGATIVE_BR_TOLERANCE)) {
+            branching_ratio = 0;
+         }
+         if (branching_ratio < MIN_BR_TO_PRINT) continue;
+         const auto final_state = channel.get_final_state_particle_ids();
+         std::string comment = "BR(" + name + " ->";
+         for (auto id : final_state) {
+            comment += " " + NMSSM_info::get_particle_name_from_pdg(id);
+         }
+         comment += ")";
+
+         decay << format_decay(branching_ratio, final_state, comment);
+      }
+   }
+
+   slha_io.set_block(decay);
+}
+
+/**
+ * Stores the particle decay branching ratios in the SLHA object.
+ *
+ * @param decays struct containing decays data
+ */
+void NMSSM_slha_io::set_decays(const NMSSM_decay_table& decay_table, FlexibleDecay_settings const& flexibledecay_settings)
+{
+   for (const auto& particle : decay_table) {
+      set_decay_block(particle, flexibledecay_settings);
+   }
+}
+void NMSSM_slha_io::fill_decays_data(const NMSSM_decays& decays, FlexibleDecay_settings const& flexibledecay_settings)
+{
+   const auto& decays_problems = decays.get_problems();
+   const bool decays_error = decays_problems.have_problem();
+
+   set_dcinfo(decays_problems);
+
+   if (!decays_error) {
+      set_decays(decays.get_decay_table(), flexibledecay_settings);
+   }
+}
+
+/**
  * Stores the model (DR-bar) parameters, masses and mixing matrices in
  * the SLHA object.
  *
@@ -582,26 +723,14 @@ void NMSSM_slha_io::set_extra(
       {
          std::ostringstream block;
          block << "Block FlexibleSUSYLowEnergy Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
-               << FORMAT_ELEMENT(0, (OBSERVABLES.a_muon), "Delta(g-2)_muon/2 FlexibleSUSY")
+               << FORMAT_ELEMENT(21, (OBSERVABLES.a_muon), "Delta(g-2)_muon/2 FlexibleSUSY")
+               << FORMAT_ELEMENT(23, (OBSERVABLES.edm_Fe_0), "electric dipole moment of Fe(0) [1/GeV]")
+               << FORMAT_ELEMENT(24, (OBSERVABLES.edm_Fe_1), "electric dipole moment of Fe(1) [1/GeV]")
+               << FORMAT_ELEMENT(25, (OBSERVABLES.edm_Fe_2), "electric dipole moment of Fe(2) [1/GeV]")
+               << FORMAT_ELEMENT(26, (OBSERVABLES.Fe_to_Fe_VP), "BR(Fe1 -> Fe0 VP)")
          ;
          slha_io.set_block(block);
       }
-   }
-   {
-      std::ostringstream block;
-      block << "Block EFFHIGGSCOUPLINGS" << '\n'
-            << FORMAT_RANK_THREE_TENSOR(25, 22, 22, (Abs(OBSERVABLES.eff_cp_higgs_photon_photon(0))), "Abs(effective H-Photon-Photon coupling)")
-            << FORMAT_RANK_THREE_TENSOR(35, 22, 22, (Abs(OBSERVABLES.eff_cp_higgs_photon_photon(1))), "Abs(effective H-Photon-Photon coupling)")
-            << FORMAT_RANK_THREE_TENSOR(45, 22, 22, (Abs(OBSERVABLES.eff_cp_higgs_photon_photon(2))), "Abs(effective H-Photon-Photon coupling)")
-            << FORMAT_RANK_THREE_TENSOR(25, 21, 21, (Abs(OBSERVABLES.eff_cp_higgs_gluon_gluon(0))), "Abs(effective H-Gluon-Gluon coupling)")
-            << FORMAT_RANK_THREE_TENSOR(35, 21, 21, (Abs(OBSERVABLES.eff_cp_higgs_gluon_gluon(1))), "Abs(effective H-Gluon-Gluon coupling)")
-            << FORMAT_RANK_THREE_TENSOR(45, 21, 21, (Abs(OBSERVABLES.eff_cp_higgs_gluon_gluon(2))), "Abs(effective H-Gluon-Gluon coupling)")
-            << FORMAT_RANK_THREE_TENSOR(36, 22, 22, (Abs(OBSERVABLES.eff_cp_pseudoscalar_photon_photon(0))), "Abs(effective A-Photon-Photon coupling)")
-            << FORMAT_RANK_THREE_TENSOR(46, 22, 22, (Abs(OBSERVABLES.eff_cp_pseudoscalar_photon_photon(1))), "Abs(effective A-Photon-Photon coupling)")
-            << FORMAT_RANK_THREE_TENSOR(36, 21, 21, (Abs(OBSERVABLES.eff_cp_pseudoscalar_gluon_gluon(0))), "Abs(effective A-Gluon-Gluon coupling)")
-            << FORMAT_RANK_THREE_TENSOR(46, 21, 21, (Abs(OBSERVABLES.eff_cp_pseudoscalar_gluon_gluon(1))), "Abs(effective A-Gluon-Gluon coupling)")
-      ;
-      slha_io.set_block(block);
    }
    {
       std::ostringstream block;
@@ -837,6 +966,17 @@ void NMSSM_slha_io::fill(Physical_input& input) const
  * @param settings struct of spectrum generator settings to be filled
  */
 void NMSSM_slha_io::fill(Spectrum_generator_settings& settings) const
+{
+   slha_io.fill(settings);
+}
+
+/**
+ * Fill struct of spectrum generator settings from SLHA object
+ * (FlexibleSUSY block)
+ *
+ * @param settings struct of spectrum generator settings to be filled
+ */
+void NMSSM_slha_io::fill(FlexibleDecay_settings& settings) const
 {
    slha_io.fill(settings);
 }

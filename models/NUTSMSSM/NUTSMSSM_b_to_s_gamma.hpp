@@ -20,7 +20,7 @@
 /**
  * @file NUTSMSSM_b_to_s_gamma.hpp
  *
- * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.4 .
+ * This file was generated with FlexibleSUSY 2.6.0 and SARAH 4.14.4 .
  */
 
 #ifndef NUTSMSSM_BToSGamma_H

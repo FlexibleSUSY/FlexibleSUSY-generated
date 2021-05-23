@@ -32,6 +32,9 @@ LIBTHDMII_CXXQFT_VERTICES_SRC ?= ''
 THDMII_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
+THDMII_FlexibleDecay_MK := \
+		$(DIR)/decays/FlexibleDecay.mk
+
 THDMII_INCLUDE_MK := \
 		$(THDMII_SUSY_BETAS_MK) \
 		$(THDMII_SOFT_BETAS_MK)
@@ -141,6 +144,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(THDMII_SUSY_BETAS_MK)
 -include $(THDMII_SOFT_BETAS_MK)
+-include $(THDMII_FlexibleDecay_MK)
 -include $(THDMII_CXXQFT_VERTICES_MK)
 -include $(THDMII_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
@@ -153,6 +157,8 @@ $(THDMII_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(THDMII_SOFT_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
+
+$(THDMII_FlexibleDecay_MK): run-metacode-$(MODNAME)
 $(THDMII_CXXQFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(THDMII_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
@@ -288,7 +294,8 @@ pack-$(MODNAME)-src:
 		$(LLTHDMII_SRC) $(LLTHDMII_MMA) \
 		$(THDMII_MK) $(THDMII_INCLUDE_MK) $(THDMII_CXXQFT_VERTICES_MK) \
 		$(THDMII_SLHA_INPUT) $(THDMII_REFERENCES) \
-		$(THDMII_GNUPLOT)
+		$(THDMII_GNUPLOT) \
+		$(THDMII_FlexibleDecay_MK)
 
 $(LIBTHDMII_SRC) $(LIBTHDMII_HDR) $(LIBTHDMII_CXXQFT_HDR) $(EXETHDMII_SRC) $(LLTHDMII_SRC) $(LLTHDMII_MMA) \
 : run-metacode-$(MODNAME)

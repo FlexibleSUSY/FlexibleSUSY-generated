@@ -33,6 +33,7 @@ handle = FSCMSSMSemiAnalyticOpenHandle[
         higgs3loopCorrectionAtAtAt -> 1,   (* FlexibleSUSY[29] *)
         higgs4loopCorrectionAtAsAsAs -> 1, (* FlexibleSUSY[30] *)
         loopLibrary -> 0,                  (* FlexibleSUSY[31] *)
+        calculateDecays -> 1,              (* FlexibleSUSY[32] *)
         parameterOutputScale -> 0          (* MODSEL[12] *)
     },
     fsSMParameters -> {
@@ -76,6 +77,8 @@ handle = FSCMSSMSemiAnalyticOpenHandle[
 
 spectrum    = FSCMSSMSemiAnalyticCalculateSpectrum[handle];
 observables = FSCMSSMSemiAnalyticCalculateObservables[handle];
+decays      = FSCMSSMSemiAnalyticCalculateDecays[handle];
+
 FSCMSSMSemiAnalyticCloseHandle[handle];
 
 Print[spectrum];

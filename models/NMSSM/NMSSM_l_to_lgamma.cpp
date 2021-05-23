@@ -20,7 +20,7 @@
 /**
  * @file NMSSM_l_to_lgamma.cpp
  *
- * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.4 .
+ * This file was generated with FlexibleSUSY 2.6.0 and SARAH 4.14.4 .
  */
 
 #include <valarray>
@@ -67,7 +67,29 @@ double lepton_total_decay_width(
       //* (1.0 + 0.5 * Alpha * (6.25-Sqr(Pi))/Pi)
 }
 
+double calculate_Fe_to_Fe_VP (
+   int generationIndex1, int generationIndex2, 
+   const NMSSM_mass_eigenstates& model, const softsusy::QedQcd& qedqcd, const Physical_input& physical_input) {
 
+      context_base context {model};
+   std::array<int, 1> indices1 = { generationIndex1 };
+   std::array<int, 1> indices2 = { generationIndex2 };
+
+   const auto form_factors = calculate_Fe_Fe_VP_form_factors (generationIndex1, generationIndex2, model, false);
+   double leptonInMassOS;
+   switch (generationIndex1) {
+      case 0: leptonInMassOS = qedqcd.displayMass(softsusy::mElectron); break;
+      case 1: leptonInMassOS = qedqcd.displayMass(softsusy::mMuon);     break;
+      case 2: leptonInMassOS = qedqcd.displayMass(softsusy::mTau);      break;
+      default: throw std::invalid_argument("Unrecognized lepton");
+   }
+
+   // eq. 51 of arXiv:hep-ph/9510309 (note that we include 'e' in the definition of form_factor)
+   const double partial_width = pow(leptonInMassOS,5)/(16.0*Pi) * (std::norm(form_factors[2]) + std::norm(form_factors[3]));
+   const double total_width = lepton_total_decay_width<Fe, Fe>(indices1, indices2, model, qedqcd);
+
+   return partial_width/total_width;
+}
 
 }
 } // namespace flexiblesusy

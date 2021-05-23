@@ -32,6 +32,9 @@ LIBMRSSMEFTHiggs_CXXQFT_VERTICES_SRC ?= ''
 MRSSMEFTHiggs_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
+MRSSMEFTHiggs_FlexibleDecay_MK := \
+		$(DIR)/decays/FlexibleDecay.mk
+
 MRSSMEFTHiggs_INCLUDE_MK := \
 		$(MRSSMEFTHiggs_SUSY_BETAS_MK) \
 		$(MRSSMEFTHiggs_SOFT_BETAS_MK)
@@ -141,6 +144,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(MRSSMEFTHiggs_SUSY_BETAS_MK)
 -include $(MRSSMEFTHiggs_SOFT_BETAS_MK)
+-include $(MRSSMEFTHiggs_FlexibleDecay_MK)
 -include $(MRSSMEFTHiggs_CXXQFT_VERTICES_MK)
 -include $(MRSSMEFTHiggs_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
@@ -153,6 +157,8 @@ $(MRSSMEFTHiggs_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(MRSSMEFTHiggs_SOFT_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
+
+$(MRSSMEFTHiggs_FlexibleDecay_MK): run-metacode-$(MODNAME)
 $(MRSSMEFTHiggs_CXXQFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(MRSSMEFTHiggs_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
@@ -288,7 +294,8 @@ pack-$(MODNAME)-src:
 		$(LLMRSSMEFTHiggs_SRC) $(LLMRSSMEFTHiggs_MMA) \
 		$(MRSSMEFTHiggs_MK) $(MRSSMEFTHiggs_INCLUDE_MK) $(MRSSMEFTHiggs_CXXQFT_VERTICES_MK) \
 		$(MRSSMEFTHiggs_SLHA_INPUT) $(MRSSMEFTHiggs_REFERENCES) \
-		$(MRSSMEFTHiggs_GNUPLOT)
+		$(MRSSMEFTHiggs_GNUPLOT) \
+		$(MRSSMEFTHiggs_FlexibleDecay_MK)
 
 $(LIBMRSSMEFTHiggs_SRC) $(LIBMRSSMEFTHiggs_HDR) $(LIBMRSSMEFTHiggs_CXXQFT_HDR) $(EXEMRSSMEFTHiggs_SRC) $(LLMRSSMEFTHiggs_SRC) $(LLMRSSMEFTHiggs_MMA) \
 : run-metacode-$(MODNAME)

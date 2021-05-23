@@ -22,7 +22,7 @@
  *
  * @brief Contains the mass eigenstates interface class definition
  *
- * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.4 .
+ * This file was generated with FlexibleSUSY 2.6.0 and SARAH 4.14.4 .
  */
 
 #ifndef lowNMSSMTanBetaAtMZ_MASS_EIGENSTATES_INTERFACE_H

@@ -23,6 +23,11 @@
 #include "SMSSM_observables.hpp"
 #include "SMSSM_slha_io.hpp"
 #include "SMSSM_spectrum_generator.hpp"
+#include "decays/flexibledecay_settings.hpp"
+#include "decays/SMSSM_decays.hpp"
+#include "decays/flexibledecay_problems.hpp"
+#include "SMSSM_mass_eigenstates_decoupling_scheme.hpp"
+#include "loop_libraries/loop_library.hpp"
 
 #ifdef ENABLE_TWO_SCALE_SOLVER
 #include "SMSSM_two_scale_spectrum_generator.hpp"
@@ -149,9 +154,14 @@ int run_solver(int loop_library, const SMSSM_input_parameters& input)
    const auto observables = calculate_observables(
       std::get<0>(models), qedqcd, physical_input, scales.pole_mass_scale);
 
+   FlexibleDecay_settings flexibledecay_settings;
+   SMSSM_decays decays;if (settings.get(Spectrum_generator_settings::calculate_sm_masses)) {
+      decays = SMSSM_decays(std::get<0>(models), qedqcd, physical_input, flexibledecay_settings);
+   }
+
    // SLHA output
    SMSSM_slha_io slha_io;
-   slha_io.fill(models, qedqcd, scales, observables, settings);
+   slha_io.fill(models, qedqcd, scales, observables, settings, flexibledecay_settings, &decays);
    slha_io.write_to_stream(std::cout);
 
    return spectrum_generator.get_exit_code();

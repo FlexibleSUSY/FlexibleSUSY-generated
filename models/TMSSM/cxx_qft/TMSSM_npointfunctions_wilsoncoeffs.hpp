@@ -20,7 +20,7 @@
 /**
  * @file cxx_qft/TMSSM_npointfunctions_wilsoncoeffs.hpp
  *
- * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.4 .
+ * This file was generated with FlexibleSUSY 2.6.0 and SARAH 4.14.4 .
  */
 
 #ifndef TMSSM_CXXQFT_NPOINTFUNCTIONS_H

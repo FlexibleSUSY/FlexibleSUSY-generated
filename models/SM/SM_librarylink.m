@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.5.0"];
+Print["FlexibleSUSY 2.6.0"];
 Print["SM"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -20,12 +20,16 @@ FSSMSetLib = LibraryFunctionLoad[libSM, "FSSMSet", {Integer, {Real,1}}, Void];
 
 FSSMCalculateSpectrum = LibraryFunctionLoad[libSM, "FSSMCalculateSpectrum", LinkObject, LinkObject];
 FSSMCalculateObservables = LibraryFunctionLoad[libSM, "FSSMCalculateObservables", LinkObject, LinkObject];
+FSSMCalculateDecays = LibraryFunctionLoad[libSM, "FSSMCalculateDecays", LinkObject, LinkObject];
 
 FSSMCalculateSpectrum::error = "`1`";
 FSSMCalculateSpectrum::warning = "`1`";
 
 FSSMCalculateObservables::error = "`1`";
 FSSMCalculateObservables::warning = "`1`";
+
+FSSMCalculateDecays::error = "`1`";
+FSSMCalculateDecays::warning = "`1`";
 
 FSSM::info = "`1`";
 FSSM::nonum = "Error: `1` is not a numeric input value!";
@@ -101,6 +105,13 @@ fsDefaultSMParameters = {
     Mh -> 125.09
 };
 
+fdDefaultSettings = {
+   minBRtoPrint -> 1*^-5,
+   maxHigherOrderCorrections -> 4,
+   alphaThomson -> 1,
+   offShellVV -> 2
+};
+
 fsSMDefaultInputParameters = {
    LambdaIN -> 0,
    Qin -> 0,
@@ -111,9 +122,10 @@ Options[FSSMOpenHandle] = {
     Sequence @@ fsDefaultSettings,
     Sequence @@ fsDefaultSMParameters,
     Sequence @@ fsSMDefaultInputParameters
+   , Sequence @@ fdDefaultSettings
 };
 
-FSSMOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters) -> s_List, r___] :=
+FSSMOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters | fdSettings) -> s_List, r___] :=
     FSSMOpenHandle[a, Sequence @@ s, r];
 
 FSSMOpenHandle[OptionsPattern[]] :=
@@ -189,6 +201,11 @@ FSSMOpenHandle[OptionsPattern[]] :=
             OptionValue[LambdaIN],
             OptionValue[Qin],
             OptionValue[QEWSB]
+            ,
+            OptionValue[minBRtoPrint],
+            OptionValue[maxHigherOrderCorrections],
+            OptionValue[alphaThomson],
+            OptionValue[offShellVV]
         }
 ];
 

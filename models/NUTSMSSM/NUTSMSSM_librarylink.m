@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.5.0"];
+Print["FlexibleSUSY 2.6.0"];
 Print["NUTSMSSM"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -120,9 +120,10 @@ Options[FSNUTSMSSMOpenHandle] = {
     Sequence @@ fsDefaultSettings,
     Sequence @@ fsDefaultSMParameters,
     Sequence @@ fsNUTSMSSMDefaultInputParameters
+
 };
 
-FSNUTSMSSMOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters) -> s_List, r___] :=
+FSNUTSMSSMOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters ) -> s_List, r___] :=
     FSNUTSMSSMOpenHandle[a, Sequence @@ s, r];
 
 FSNUTSMSSMOpenHandle[OptionsPattern[]] :=
@@ -207,6 +208,7 @@ FSNUTSMSSMOpenHandle[OptionsPattern[]] :=
             OptionValue[BInput],
             OptionValue[MuInput],
             OptionValue[LInput]
+
         }
 ];
 

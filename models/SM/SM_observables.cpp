@@ -66,8 +66,6 @@ const int SM_observables::NUMBER_OF_OBSERVABLES;
 
 SM_observables::SM_observables()
    : a_muon(0)
-   , eff_cp_higgs_photon_photon(0)
-   , eff_cp_higgs_gluon_gluon(0)
 
 {
 }
@@ -77,10 +75,6 @@ Eigen::ArrayXd SM_observables::get() const
    Eigen::ArrayXd vec(SM_observables::NUMBER_OF_OBSERVABLES);
 
    vec(0) = a_muon;
-   vec(1) = Re(eff_cp_higgs_photon_photon);
-   vec(2) = Im(eff_cp_higgs_photon_photon);
-   vec(3) = Re(eff_cp_higgs_gluon_gluon);
-   vec(4) = Im(eff_cp_higgs_gluon_gluon);
 
    return vec;
 }
@@ -90,10 +84,6 @@ std::vector<std::string> SM_observables::get_names()
    std::vector<std::string> names(SM_observables::NUMBER_OF_OBSERVABLES);
 
    names[0] = "a_muon";
-   names[1] = "Re(eff_cp_higgs_photon_photon)";
-   names[2] = "Im(eff_cp_higgs_photon_photon)";
-   names[3] = "Re(eff_cp_higgs_gluon_gluon)";
-   names[4] = "Im(eff_cp_higgs_gluon_gluon)";
 
    return names;
 }
@@ -101,8 +91,6 @@ std::vector<std::string> SM_observables::get_names()
 void SM_observables::clear()
 {
    a_muon = 0.;
-   eff_cp_higgs_photon_photon = std::complex<double>(0.,0.);
-   eff_cp_higgs_gluon_gluon = std::complex<double>(0.,0.);
 
 }
 
@@ -111,8 +99,6 @@ void SM_observables::set(const Eigen::ArrayXd& vec)
    assert(vec.rows() == SM_observables::NUMBER_OF_OBSERVABLES);
 
    a_muon = vec(0);
-   eff_cp_higgs_photon_photon = std::complex<double>(vec(1), vec(2));
-   eff_cp_higgs_gluon_gluon = std::complex<double>(vec(3), vec(4));
 
 }
 
@@ -151,12 +137,8 @@ SM_observables calculate_observables(const SM_mass_eigenstates& model,
    SM_observables observables;
 
    try {
-      SM_effective_couplings effective_couplings(model, qedqcd, physical_input);
-      effective_couplings.calculate_effective_couplings();
-
+      
       observables.AMU = SM_a_muon::calculate_a_muon(MODEL, qedqcd);
-      observables.EFFCPHIGGSPHOTONPHOTON = effective_couplings.get_eff_CphhVPVP();
-      observables.EFFCPHIGGSGLUONGLUON = effective_couplings.get_eff_CphhVGVG();
    } catch (const NonPerturbativeRunningError& e) {
       observables.problems.general.flag_non_perturbative_running(e.get_scale());
    } catch (const Error& e) {

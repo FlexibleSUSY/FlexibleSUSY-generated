@@ -19,4 +19,5 @@
 
 LIBE6SSM_CXXQFT_VERTICES_SRC := \
 	models/E6SSM/cxx_qft/E6SSM_vertices_1.cpp \
-	models/E6SSM/cxx_qft/E6SSM_vertices_2.cpp
+	models/E6SSM/cxx_qft/E6SSM_vertices_2.cpp \
+	models/E6SSM/cxx_qft/E6SSM_vertices_3.cpp

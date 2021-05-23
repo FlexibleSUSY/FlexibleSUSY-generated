@@ -40,8 +40,10 @@
 #include "problems_format_mathlink.hpp"
 #include "slha_io.hpp"
 #include "spectrum_generator_settings.hpp"
+#include "decays/flexibledecay_settings.hpp"
 #include "standard_model_two_scale_model.hpp"
 #include "lowe.h"
+
 
 #include <mathlink.h>
 #include "mathlink_utils.hpp"
@@ -147,7 +149,7 @@ public:
    virtual void put_model_spectra(MLINK link) const = 0;
 
    virtual const Spectrum_generator_problems& get_problems() const = 0;
-   virtual void fill_slha_io(HTHDMIIMSSMBC_slha_io&, const Spectrum_generator_settings&) const = 0;
+   virtual void fill_slha_io(HTHDMIIMSSMBC_slha_io&, const Spectrum_generator_settings&, const FlexibleDecay_settings&) const = 0;
    virtual double get_model_scale() const = 0;
    virtual const HTHDMIIMSSMBC_observables& get_observables() const = 0;
 
@@ -155,6 +157,7 @@ public:
       const Spectrum_generator_settings&, const SLHA_io::Modsel&,
       const softsusy::QedQcd&, const HTHDMIIMSSMBC_input_parameters&) = 0;
    virtual void calculate_model_observables(const softsusy::QedQcd&, const Physical_input&) = 0;
+
 };
 
 template <typename Solver_type>
@@ -167,7 +170,7 @@ public:
    virtual void put_model_spectra(MLINK link) const override;
 
    virtual const Spectrum_generator_problems& get_problems() const override { return problems; }
-   virtual void fill_slha_io(HTHDMIIMSSMBC_slha_io&, const Spectrum_generator_settings&) const override;
+   virtual void fill_slha_io(HTHDMIIMSSMBC_slha_io&, const Spectrum_generator_settings&, const FlexibleDecay_settings&) const override;
    virtual double get_model_scale() const override { return std::get<0>(models).get_scale(); }
    virtual const HTHDMIIMSSMBC_observables& get_observables() const override { return observables; }
 
@@ -181,6 +184,7 @@ private:
    Spectrum_generator_problems problems{};   ///< spectrum generator problems
    HTHDMIIMSSMBC_scales scales{};              ///< scale information
    HTHDMIIMSSMBC_observables observables{};    ///< observables
+
 };
 
 class Model_data {
@@ -196,9 +200,11 @@ public:
    void set_physical_input(const Physical_input& p) { physical_input = p; }
    void set_sm_input_parameters(const softsusy::QedQcd& qedqcd_) { qedqcd = qedqcd_; }
    void set_settings(const Spectrum_generator_settings& s) { settings = s; }
+   void set_fd_settings(const FlexibleDecay_settings& s) { flexibledecay_settings = s; }
    void set_modsel(const SLHA_io::Modsel& m) { modsel = m; }
 
    const Spectrum_generator_settings& get_settings() const { return settings; }
+   const FlexibleDecay_settings& get_fd_settings() const { return flexibledecay_settings; }
 
    void put_settings(MLINK link) const;
    void put_sm_input_parameters(MLINK link) const;
@@ -222,6 +228,7 @@ private:
    Physical_input physical_input{};          ///< extra non-SLHA physical input
    softsusy::QedQcd qedqcd{};                ///< SLHA physical input
    Spectrum_generator_settings settings{};   ///< spectrum generator settings
+   FlexibleDecay_settings flexibledecay_settings {}; ///< FlexibleDecay settings
    SLHA_io::Modsel modsel{};                 ///< MODSEL input
    std::unique_ptr<HTHDMIIMSSMBC_spectrum> spectrum{nullptr};  ///< spectrum information
 
@@ -527,7 +534,7 @@ HTHDMIIMSSMBC_slha_io Model_data::get_slha_io() const
    slha_io.set_print_imaginary_parts_of_majorana_mixings(
       settings.get(Spectrum_generator_settings::force_positive_masses));
 
-   spectrum->fill_slha_io(slha_io, settings);
+   spectrum->fill_slha_io(slha_io, settings, flexibledecay_settings);
 
    return slha_io;
 }
@@ -744,7 +751,7 @@ void HTHDMIIMSSMBC_spectrum_impl<Solver_type>::calculate_model_observables(
 
 template <typename Solver_type>
 void HTHDMIIMSSMBC_spectrum_impl<Solver_type>::fill_slha_io(HTHDMIIMSSMBC_slha_io& slha_io,
-       const Spectrum_generator_settings& settings) const
+       const Spectrum_generator_settings& settings, const FlexibleDecay_settings& flexibledecay_settings) const
 {
    const auto& problems = std::get<0>(models).get_problems();
    const auto force_output = std::get<0>(models).do_force_output();
@@ -754,6 +761,8 @@ void HTHDMIIMSSMBC_spectrum_impl<Solver_type>::fill_slha_io(HTHDMIIMSSMBC_slha_i
       slha_io.set_spectrum(models);
       slha_io.set_extra(std::get<0>(models), scales, observables, settings);
    }
+
+
 }
 
 /******************************************************************/
@@ -836,7 +845,8 @@ Model_data make_data(const Dynamic_array_view<Element_t>& pars)
       n_sm_parameters = softsusy::NUMBER_OF_LOW_ENERGY_INPUT_PARAMETERS
                         + Physical_input::NUMBER_OF_INPUT_PARAMETERS,
       n_input_pars = 9;
-   const Index_t n_total = n_settings + n_sm_parameters + n_input_pars;
+   const Index_t n_fd_settings = 0;
+   const Index_t n_total = n_settings + n_sm_parameters + n_input_pars + n_fd_settings;
 
    if (pars.size() != n_total)
       throw EWrongNumberOfParameters(pars.size(), n_total);
@@ -951,7 +961,7 @@ Model_data make_data(const Dynamic_array_view<Element_t>& pars)
    data.set_sm_input_parameters(qedqcd);
    data.set_physical_input(physical_input);
    data.set_input_parameters(input);
-
+   
    return data;
 }
 

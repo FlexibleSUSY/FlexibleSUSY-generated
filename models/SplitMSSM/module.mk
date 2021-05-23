@@ -32,6 +32,9 @@ LIBSplitMSSM_CXXQFT_VERTICES_SRC ?= ''
 SplitMSSM_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
+SplitMSSM_FlexibleDecay_MK := \
+		$(DIR)/decays/FlexibleDecay.mk
+
 SplitMSSM_INCLUDE_MK := \
 		$(SplitMSSM_SUSY_BETAS_MK) \
 		$(SplitMSSM_SOFT_BETAS_MK)
@@ -141,6 +144,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(SplitMSSM_SUSY_BETAS_MK)
 -include $(SplitMSSM_SOFT_BETAS_MK)
+-include $(SplitMSSM_FlexibleDecay_MK)
 -include $(SplitMSSM_CXXQFT_VERTICES_MK)
 -include $(SplitMSSM_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
@@ -153,6 +157,8 @@ $(SplitMSSM_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(SplitMSSM_SOFT_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
+
+$(SplitMSSM_FlexibleDecay_MK): run-metacode-$(MODNAME)
 $(SplitMSSM_CXXQFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(SplitMSSM_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
@@ -288,7 +294,8 @@ pack-$(MODNAME)-src:
 		$(LLSplitMSSM_SRC) $(LLSplitMSSM_MMA) \
 		$(SplitMSSM_MK) $(SplitMSSM_INCLUDE_MK) $(SplitMSSM_CXXQFT_VERTICES_MK) \
 		$(SplitMSSM_SLHA_INPUT) $(SplitMSSM_REFERENCES) \
-		$(SplitMSSM_GNUPLOT)
+		$(SplitMSSM_GNUPLOT) \
+		$(SplitMSSM_FlexibleDecay_MK)
 
 $(LIBSplitMSSM_SRC) $(LIBSplitMSSM_HDR) $(LIBSplitMSSM_CXXQFT_HDR) $(EXESplitMSSM_SRC) $(LLSplitMSSM_SRC) $(LLSplitMSSM_MMA) \
 : run-metacode-$(MODNAME)

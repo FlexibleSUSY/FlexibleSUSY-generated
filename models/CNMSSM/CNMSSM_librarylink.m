@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.5.0"];
+Print["FlexibleSUSY 2.6.0"];
 Print["CNMSSM"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -20,12 +20,16 @@ FSCNMSSMSetLib = LibraryFunctionLoad[libCNMSSM, "FSCNMSSMSet", {Integer, {Real,1
 
 FSCNMSSMCalculateSpectrum = LibraryFunctionLoad[libCNMSSM, "FSCNMSSMCalculateSpectrum", LinkObject, LinkObject];
 FSCNMSSMCalculateObservables = LibraryFunctionLoad[libCNMSSM, "FSCNMSSMCalculateObservables", LinkObject, LinkObject];
+FSCNMSSMCalculateDecays = LibraryFunctionLoad[libCNMSSM, "FSCNMSSMCalculateDecays", LinkObject, LinkObject];
 
 FSCNMSSMCalculateSpectrum::error = "`1`";
 FSCNMSSMCalculateSpectrum::warning = "`1`";
 
 FSCNMSSMCalculateObservables::error = "`1`";
 FSCNMSSMCalculateObservables::warning = "`1`";
+
+FSCNMSSMCalculateDecays::error = "`1`";
+FSCNMSSMCalculateDecays::warning = "`1`";
 
 FSCNMSSM::info = "`1`";
 FSCNMSSM::nonum = "Error: `1` is not a numeric input value!";
@@ -101,6 +105,13 @@ fsDefaultSMParameters = {
     Mh -> 125.09
 };
 
+fdDefaultSettings = {
+   minBRtoPrint -> 1*^-5,
+   maxHigherOrderCorrections -> 4,
+   alphaThomson -> 1,
+   offShellVV -> 2
+};
+
 fsCNMSSMDefaultInputParameters = {
    m12 -> 0,
    TanBeta -> 0,
@@ -113,9 +124,10 @@ Options[FSCNMSSMOpenHandle] = {
     Sequence @@ fsDefaultSettings,
     Sequence @@ fsDefaultSMParameters,
     Sequence @@ fsCNMSSMDefaultInputParameters
+   , Sequence @@ fdDefaultSettings
 };
 
-FSCNMSSMOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters) -> s_List, r___] :=
+FSCNMSSMOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters | fdSettings) -> s_List, r___] :=
     FSCNMSSMOpenHandle[a, Sequence @@ s, r];
 
 FSCNMSSMOpenHandle[OptionsPattern[]] :=
@@ -193,6 +205,11 @@ FSCNMSSMOpenHandle[OptionsPattern[]] :=
             OptionValue[SignvS],
             OptionValue[Azero],
             OptionValue[LambdaInput]
+            ,
+            OptionValue[minBRtoPrint],
+            OptionValue[maxHigherOrderCorrections],
+            OptionValue[alphaThomson],
+            OptionValue[offShellVV]
         }
 ];
 

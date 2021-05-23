@@ -35,7 +35,7 @@ class HSSUSY_mass_eigenstates;
 class Physical_input;
 
 struct HSSUSY_observables {
-   static const int NUMBER_OF_OBSERVABLES = 4;
+   static const int NUMBER_OF_OBSERVABLES = 0;
 
    HSSUSY_observables();
    Eigen::ArrayXd get() const; ///< returns vector of all observables
@@ -44,8 +44,6 @@ struct HSSUSY_observables {
    void set(const Eigen::ArrayXd&); ///< sets all observables from given vector
 
    Observable_problems problems;
-   std::complex<double> eff_cp_higgs_photon_photon; ///< effective H-Photon-Photon coupling
-   std::complex<double> eff_cp_higgs_gluon_gluon; ///< effective H-Gluon-Gluon coupling
 
 };
 

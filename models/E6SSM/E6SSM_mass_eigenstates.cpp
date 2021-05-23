@@ -25,7 +25,7 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.4 .
+ * This file was generated with FlexibleSUSY 2.6.0 and SARAH 4.14.4 .
  */
 
 #include "E6SSM_mass_eigenstates.hpp"
@@ -4114,12 +4114,11 @@ std::complex<double> CLASSNAME::CpUSvconjUSvVZVZ(int gO1, int gO2) const
 std::complex<double> CLASSNAME::CpUSvconjUSvVZpVZp(int gO1, int gO2) const
 {
    
-   const std::complex<double> result = 0.1*KroneckerDelta(gO1,gO2)*(-
-      3.1622776601683795*g2*gN*Cos(ThetaW())*Sin(2*ThetaWp()) + 2*Sqr(gN)*Sqr(Cos(
-      ThetaWp())) + 5*Sqr(g2)*Sqr(Cos(ThetaW()))*Sqr(Sin(ThetaWp())) + g1*(-
-      2.449489742783178*gN*Sin(ThetaW())*Sin(2*ThetaWp()) + 3.872983346207417*g2*
-      Sin(2*ThetaW())*Sqr(Sin(ThetaWp())) + 3*g1*Sqr(Sin(ThetaW()))*Sqr(Sin(
-      ThetaWp()))));
+   const std::complex<double> result = 0.1*KroneckerDelta(gO1,gO2)*(-2*Cos(ThetaWp
+      ())*(3.1622776601683795*g2*gN*Cos(ThetaW())*Sin(ThetaWp()) +
+      2.449489742783178*g1*gN*Sin(ThetaW())*Sin(ThetaWp())) + 2*Sqr(gN)*Sqr(Cos(
+      ThetaWp())) + (g1*Sin(ThetaW())*(7.745966692414834*g2*Cos(ThetaW()) + 3*g1*
+      Sin(ThetaW())) + 5*Sqr(g2)*Sqr(Cos(ThetaW())))*Sqr(Sin(ThetaWp())));
 
    return result;
 }
@@ -11781,12 +11780,11 @@ std::complex<double> CLASSNAME::CphhhhVZpVZp(int gI1, int gI2) const
 std::complex<double> CLASSNAME::CpSvconjSvVZpVZp(int gI1, int gI2) const
 {
    
-   const std::complex<double> result = 0.1*KroneckerDelta(gI1,gI2)*(-
-      3.1622776601683795*g2*gN*Cos(ThetaW())*Sin(2*ThetaWp()) + 2*Sqr(gN)*Sqr(Cos(
-      ThetaWp())) + 5*Sqr(g2)*Sqr(Cos(ThetaW()))*Sqr(Sin(ThetaWp())) + g1*(-
-      2.449489742783178*gN*Sin(ThetaW())*Sin(2*ThetaWp()) + 3.872983346207417*g2*
-      Sin(2*ThetaW())*Sqr(Sin(ThetaWp())) + 3*g1*Sqr(Sin(ThetaW()))*Sqr(Sin(
-      ThetaWp()))));
+   const std::complex<double> result = 0.1*KroneckerDelta(gI1,gI2)*(-2*Cos(ThetaWp
+      ())*(3.1622776601683795*g2*gN*Cos(ThetaW())*Sin(ThetaWp()) +
+      2.449489742783178*g1*gN*Sin(ThetaW())*Sin(ThetaWp())) + 2*Sqr(gN)*Sqr(Cos(
+      ThetaWp())) + (g1*Sin(ThetaW())*(7.745966692414834*g2*Cos(ThetaW()) + 3*g1*
+      Sin(ThetaW())) + 5*Sqr(g2)*Sqr(Cos(ThetaW())))*Sqr(Sin(ThetaWp())));
 
    return result;
 }

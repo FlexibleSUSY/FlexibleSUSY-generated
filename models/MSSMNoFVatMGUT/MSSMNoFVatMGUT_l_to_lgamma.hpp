@@ -20,7 +20,7 @@
 /**
  * @file MSSMNoFVatMGUT_edm.hpp
  *
- * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.4 .
+ * This file was generated with FlexibleSUSY 2.6.0 and SARAH 4.14.4 .
  */
 
 #ifndef MSSMNoFVatMGUT_MuToEGamma_H

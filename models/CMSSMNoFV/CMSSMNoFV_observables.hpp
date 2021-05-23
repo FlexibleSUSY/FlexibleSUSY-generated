@@ -35,7 +35,7 @@ class CMSSMNoFV_mass_eigenstates;
 class Physical_input;
 
 struct CMSSMNoFV_observables {
-   static const int NUMBER_OF_OBSERVABLES = 16;
+   static const int NUMBER_OF_OBSERVABLES = 4;
 
    CMSSMNoFV_observables();
    Eigen::ArrayXd get() const; ///< returns vector of all observables
@@ -48,10 +48,6 @@ struct CMSSMNoFV_observables {
    double a_muon_uncertainty; ///< uncertainty of a_muon = (g-2)/2 of the muon (calculated with FlexibleSUSY)
    double a_muon_gm2calc; ///< a_muon = (g-2)/2 of the muon (calculated with GM2Calc)
    double a_muon_gm2calc_uncertainty; ///< uncertainty of (g-2)/2 of the muon (calculated with GM2Calc)
-   Eigen::Array<std::complex<double>,2,1> eff_cp_higgs_photon_photon; ///< effective H-Photon-Photon coupling
-   Eigen::Array<std::complex<double>,2,1> eff_cp_higgs_gluon_gluon; ///< effective H-Gluon-Gluon coupling
-   std::complex<double> eff_cp_pseudoscalar_photon_photon; ///< effective A-Photon-Photon coupling
-   std::complex<double> eff_cp_pseudoscalar_gluon_gluon; ///< effective A-Gluon-Gluon coupling
 
 };
 

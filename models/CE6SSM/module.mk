@@ -32,6 +32,9 @@ LIBCE6SSM_CXXQFT_VERTICES_SRC ?= ''
 CE6SSM_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
+CE6SSM_FlexibleDecay_MK := \
+		$(DIR)/decays/FlexibleDecay.mk
+
 CE6SSM_INCLUDE_MK := \
 		$(CE6SSM_SUSY_BETAS_MK) \
 		$(CE6SSM_SOFT_BETAS_MK)
@@ -141,6 +144,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(CE6SSM_SUSY_BETAS_MK)
 -include $(CE6SSM_SOFT_BETAS_MK)
+-include $(CE6SSM_FlexibleDecay_MK)
 -include $(CE6SSM_CXXQFT_VERTICES_MK)
 -include $(CE6SSM_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
@@ -153,6 +157,8 @@ $(CE6SSM_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(CE6SSM_SOFT_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
+
+$(CE6SSM_FlexibleDecay_MK): run-metacode-$(MODNAME)
 $(CE6SSM_CXXQFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(CE6SSM_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
@@ -288,7 +294,8 @@ pack-$(MODNAME)-src:
 		$(LLCE6SSM_SRC) $(LLCE6SSM_MMA) \
 		$(CE6SSM_MK) $(CE6SSM_INCLUDE_MK) $(CE6SSM_CXXQFT_VERTICES_MK) \
 		$(CE6SSM_SLHA_INPUT) $(CE6SSM_REFERENCES) \
-		$(CE6SSM_GNUPLOT)
+		$(CE6SSM_GNUPLOT) \
+		$(CE6SSM_FlexibleDecay_MK)
 
 $(LIBCE6SSM_SRC) $(LIBCE6SSM_HDR) $(LIBCE6SSM_CXXQFT_HDR) $(EXECE6SSM_SRC) $(LLCE6SSM_SRC) $(LLCE6SSM_MMA) \
 : run-metacode-$(MODNAME)

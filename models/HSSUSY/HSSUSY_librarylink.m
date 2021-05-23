@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.5.0"];
+Print["FlexibleSUSY 2.6.0"];
 Print["HSSUSY"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -136,9 +136,10 @@ Options[FSHSSUSYOpenHandle] = {
     Sequence @@ fsDefaultSettings,
     Sequence @@ fsDefaultSMParameters,
     Sequence @@ fsHSSUSYDefaultInputParameters
+
 };
 
-FSHSSUSYOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters) -> s_List, r___] :=
+FSHSSUSYOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters ) -> s_List, r___] :=
     FSHSSUSYOpenHandle[a, Sequence @@ s, r];
 
 FSHSSUSYOpenHandle[OptionsPattern[]] :=
@@ -279,6 +280,7 @@ FSHSSUSYOpenHandle[OptionsPattern[]] :=
             OptionValue[mse2][[3,1]],
             OptionValue[mse2][[3,2]],
             OptionValue[mse2][[3,3]]
+
         }
 ];
 

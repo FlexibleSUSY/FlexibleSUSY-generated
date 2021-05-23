@@ -19,7 +19,7 @@
 /**
  * @file E6SSMEFTHiggs_f_to_f_conversion.cpp
  *
- * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.4 .
+ * This file was generated with FlexibleSUSY 2.6.0 and SARAH 4.14.4 .
  */
 
 #include <valarray>

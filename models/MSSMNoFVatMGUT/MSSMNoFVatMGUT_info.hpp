@@ -29,15 +29,16 @@
 namespace flexiblesusy {
 
 namespace MSSMNoFVatMGUT_info {
-   enum Particles : int { VG, Glu, Fd, Fs, Fb, Fu, Fc, Ft, Fve, Fvm, Fvt, Fe, Fm,
-      Ftau, SveL, SvmL, SvtL, Sd, Su, Se, Sm, Stau, Ss, Sc, Sb, St, hh, Ah, Hpm,
-      Chi, Cha, VWm, VP, VZ, NUMBER_OF_PARTICLES };
+   enum Particles : int { VG = 0, Glu, Fd, Fs, Fb, Fu, Fc, Ft, Fve, Fvm, Fvt, Fe,
+      Fm, Ftau, SveL, SvmL, SvtL, Sd, Su, Se, Sm, Stau, Ss, Sc, Sb, St, hh, Ah,
+      Hpm, Chi, Cha, VWm, VP, VZ, NUMBER_OF_PARTICLES };
 
-   enum Masses : int { MVG, MGlu, MFd, MFs, MFb, MFu, MFc, MFt, MFve, MFvm, MFvt,
-      MFe, MFm, MFtau, MSveL, MSvmL, MSvtL, MSd_1, MSd_2, MSu_1, MSu_2, MSe_1,
-      MSe_2, MSm_1, MSm_2, MStau_1, MStau_2, MSs_1, MSs_2, MSc_1, MSc_2, MSb_1,
-      MSb_2, MSt_1, MSt_2, Mhh_1, Mhh_2, MAh_1, MAh_2, MHpm_1, MHpm_2, MChi_1,
-      MChi_2, MChi_3, MChi_4, MCha_1, MCha_2, MVWm, MVP, MVZ, NUMBER_OF_MASSES };
+   enum Masses : int { MVG = 0, MGlu, MFd, MFs, MFb, MFu, MFc, MFt, MFve, MFvm,
+      MFvt, MFe, MFm, MFtau, MSveL, MSvmL, MSvtL, MSd_1, MSd_2, MSu_1, MSu_2,
+      MSe_1, MSe_2, MSm_1, MSm_2, MStau_1, MStau_2, MSs_1, MSs_2, MSc_1, MSc_2,
+      MSb_1, MSb_2, MSt_1, MSt_2, Mhh_1, Mhh_2, MAh_1, MAh_2, MHpm_1, MHpm_2,
+      MChi_1, MChi_2, MChi_3, MChi_4, MCha_1, MCha_2, MVWm, MVP, MVZ,
+      NUMBER_OF_MASSES };
 
    enum Parameters : int { Yd0_0, Yd0_1, Yd0_2, Yd1_0, Yd1_1, Yd1_2, Yd2_0, Yd2_1,
       Yd2_2, Ye0_0, Ye0_1, Ye0_2, Ye1_0, Ye1_1, Ye1_2, Ye2_0, Ye2_1, Ye2_2, Yu0_0,
@@ -52,8 +53,8 @@ namespace MSSMNoFVatMGUT_info {
       mu22_2, me20_0, me20_1, me20_2, me21_0, me21_1, me21_2, me22_0, me22_1,
       me22_2, MassB, MassWB, MassG, NUMBER_OF_PARAMETERS };
 
-   enum Mixings : int { ZD0_0, ZD0_1, ZD1_0, ZD1_1, ZU0_0, ZU0_1, ZU1_0, ZU1_1,
-      ZE0_0, ZE0_1, ZE1_0, ZE1_1, ZM0_0, ZM0_1, ZM1_0, ZM1_1, ZTau0_0, ZTau0_1,
+   enum Mixings : int { ZD0_0 = 0, ZD0_1, ZD1_0, ZD1_1, ZU0_0, ZU0_1, ZU1_0, ZU1_1
+      , ZE0_0, ZE0_1, ZE1_0, ZE1_1, ZM0_0, ZM0_1, ZM1_0, ZM1_1, ZTau0_0, ZTau0_1,
       ZTau1_0, ZTau1_1, ZS0_0, ZS0_1, ZS1_0, ZS1_1, ZC0_0, ZC0_1, ZC1_0, ZC1_1,
       ZB0_0, ZB0_1, ZB1_0, ZB1_1, ZT0_0, ZT0_1, ZT1_0, ZT1_1, ZH0_0, ZH0_1, ZH1_0,
       ZH1_1, ZA0_0, ZA0_1, ZA1_0, ZA1_1, ZP0_0, ZP0_1, ZP1_0, ZP1_1, ReZN0_0,
@@ -76,6 +77,7 @@ namespace MSSMNoFVatMGUT_info {
    extern const double normalization_g2;
    extern const double normalization_g3;
 
+
    extern const std::array<int, NUMBER_OF_PARTICLES> particle_multiplicities;
    extern const std::array<std::string, NUMBER_OF_PARTICLES> particle_names;
    extern const std::array<std::string, NUMBER_OF_PARTICLES> particle_latex_names;
@@ -89,6 +91,9 @@ namespace MSSMNoFVatMGUT_info {
    constexpr bool is_FlexibleEFTHiggs = false;
    constexpr bool is_CP_violating_Higgs_sector {false};
 
+   int get_pdg_code_for_particle(Particles);
+   int get_pdg_code_for_particle(Particles, int);
+   std::string get_particle_name_from_pdg(int);
    void print(std::ostream&);
 
    class MSSMNoFVatMGUT_particle_names : public Names {

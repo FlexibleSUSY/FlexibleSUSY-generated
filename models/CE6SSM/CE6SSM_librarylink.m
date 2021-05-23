@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.5.0"];
+Print["FlexibleSUSY 2.6.0"];
 Print["CE6SSM"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -20,12 +20,16 @@ FSCE6SSMSetLib = LibraryFunctionLoad[libCE6SSM, "FSCE6SSMSet", {Integer, {Real,1
 
 FSCE6SSMCalculateSpectrum = LibraryFunctionLoad[libCE6SSM, "FSCE6SSMCalculateSpectrum", LinkObject, LinkObject];
 FSCE6SSMCalculateObservables = LibraryFunctionLoad[libCE6SSM, "FSCE6SSMCalculateObservables", LinkObject, LinkObject];
+FSCE6SSMCalculateDecays = LibraryFunctionLoad[libCE6SSM, "FSCE6SSMCalculateDecays", LinkObject, LinkObject];
 
 FSCE6SSMCalculateSpectrum::error = "`1`";
 FSCE6SSMCalculateSpectrum::warning = "`1`";
 
 FSCE6SSMCalculateObservables::error = "`1`";
 FSCE6SSMCalculateObservables::warning = "`1`";
+
+FSCE6SSMCalculateDecays::error = "`1`";
+FSCE6SSMCalculateDecays::warning = "`1`";
 
 FSCE6SSM::info = "`1`";
 FSCE6SSM::nonum = "Error: `1` is not a numeric input value!";
@@ -101,6 +105,13 @@ fsDefaultSMParameters = {
     Mh -> 125.09
 };
 
+fdDefaultSettings = {
+   minBRtoPrint -> 1*^-5,
+   maxHigherOrderCorrections -> 4,
+   alphaThomson -> 1,
+   offShellVV -> 2
+};
+
 fsCE6SSMDefaultInputParameters = {
    TanBeta -> 0,
    m0SqGuess -> 0,
@@ -118,9 +129,10 @@ Options[FSCE6SSMOpenHandle] = {
     Sequence @@ fsDefaultSettings,
     Sequence @@ fsDefaultSMParameters,
     Sequence @@ fsCE6SSMDefaultInputParameters
+   , Sequence @@ fdDefaultSettings
 };
 
-FSCE6SSMOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters) -> s_List, r___] :=
+FSCE6SSMOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters | fdSettings) -> s_List, r___] :=
     FSCE6SSMOpenHandle[a, Sequence @@ s, r];
 
 FSCE6SSMOpenHandle[OptionsPattern[]] :=
@@ -203,6 +215,11 @@ FSCE6SSMOpenHandle[OptionsPattern[]] :=
             OptionValue[BMuPrimeInput],
             OptionValue[vsInput],
             OptionValue[Lambda12Input]
+            ,
+            OptionValue[minBRtoPrint],
+            OptionValue[maxHigherOrderCorrections],
+            OptionValue[alphaThomson],
+            OptionValue[offShellVV]
         }
 ];
 

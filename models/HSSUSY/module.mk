@@ -32,6 +32,9 @@ LIBHSSUSY_CXXQFT_VERTICES_SRC ?= ''
 HSSUSY_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
+HSSUSY_FlexibleDecay_MK := \
+		$(DIR)/decays/FlexibleDecay.mk
+
 HSSUSY_INCLUDE_MK := \
 		$(HSSUSY_SUSY_BETAS_MK) \
 		$(HSSUSY_SOFT_BETAS_MK)
@@ -141,6 +144,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(HSSUSY_SUSY_BETAS_MK)
 -include $(HSSUSY_SOFT_BETAS_MK)
+-include $(HSSUSY_FlexibleDecay_MK)
 -include $(HSSUSY_CXXQFT_VERTICES_MK)
 -include $(HSSUSY_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
@@ -153,6 +157,8 @@ $(HSSUSY_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(HSSUSY_SOFT_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
+
+$(HSSUSY_FlexibleDecay_MK): run-metacode-$(MODNAME)
 $(HSSUSY_CXXQFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(HSSUSY_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
@@ -288,7 +294,8 @@ pack-$(MODNAME)-src:
 		$(LLHSSUSY_SRC) $(LLHSSUSY_MMA) \
 		$(HSSUSY_MK) $(HSSUSY_INCLUDE_MK) $(HSSUSY_CXXQFT_VERTICES_MK) \
 		$(HSSUSY_SLHA_INPUT) $(HSSUSY_REFERENCES) \
-		$(HSSUSY_GNUPLOT)
+		$(HSSUSY_GNUPLOT) \
+		$(HSSUSY_FlexibleDecay_MK)
 
 $(LIBHSSUSY_SRC) $(LIBHSSUSY_HDR) $(LIBHSSUSY_CXXQFT_HDR) $(EXEHSSUSY_SRC) $(LLHSSUSY_SRC) $(LLHSSUSY_MMA) \
 : run-metacode-$(MODNAME)
