@@ -32,8 +32,8 @@
 #include "numerics2.hpp"
 
 #ifdef ENABLE_HIMALAYA
-#include "HierarchyCalculator.hpp"
-#include "version.hpp"
+#include "himalaya/HierarchyCalculator.hpp"
+#include "himalaya/version.hpp"
 #endif
 
 #include <cmath>
@@ -639,8 +639,8 @@ void HSSUSY_high_scale_constraint<Two_scale>::apply()
       M3Input) + 561.5912736000001*Cube(msq2(2,2))*Power(msd2(0,0)*msd2(1,1)*msq2(
       0,0)*msq2(1,1)*msu2(0,0)*msu2(1,1),0.16666666666666666)*msu2(2,2)*Power6(
       M3Input) - 46.3713937344*Power5(msq2(2,2))*Power6(M3Input) -
-      3.3771358628888852*msu2(2,2)*Power7(msq2(2,2)) + 694.0914523200003*Cube(msu2
-      (2,2))*msq2(2,2)*Power8(M3Input) - 191.01744000000002*Cube(msq2(2,2))*Power(
+      3.377135862888883*msu2(2,2)*Power7(msq2(2,2)) + 694.0914523200003*Cube(msu2(
+      2,2))*msq2(2,2)*Power8(M3Input) - 191.01744000000002*Cube(msq2(2,2))*Power(
       msd2(0,0)*msd2(1,1)*msq2(0,0)*msq2(1,1)*msu2(0,0)*msu2(1,1),
       0.16666666666666666)*Power8(M3Input) - 169.41456000000005*Cube(msu2(2,2))*
       Power(msd2(0,0)*msd2(1,1)*msq2(0,0)*msq2(1,1)*msu2(0,0)*msu2(1,1),
@@ -652,7 +652,7 @@ void HSSUSY_high_scale_constraint<Two_scale>::apply()
       0)*msq2(1,1)*msu2(0,0)*msu2(1,1))*Quad(M3Input) - 93.59854560000002*Cube(
       msq2(2,2))*Cbrt(msd2(0,0)*msd2(1,1)*msq2(0,0)*msq2(1,1)*msu2(0,0)*msu2(1,1))
       *msu2(2,2)*Quad(M3Input) - 248.85981304128003*msu2(2,2)*Power5(msq2(2,2))*
-      Quad(M3Input) + 42.794171932032015*Power6(msq2(2,2))*Quad(M3Input) +
+      Quad(M3Input) + 42.79417193203199*Power6(msq2(2,2))*Quad(M3Input) +
       112.44305278080002*msu2(2,2)*Power6(M3Input)*Quad(msq2(2,2)) + 103.91348736*
       Power8(M3Input)*Quad(msq2(2,2)) - 56.44893139200003*msq2(2,2)*Power6(M3Input
       )*Quad(msu2(2,2)) + 55.34208960000002*Power(msd2(0,0)*msd2(1,1)*msq2(0,0)*
@@ -664,8 +664,8 @@ void HSSUSY_high_scale_constraint<Two_scale>::apply()
       msu2(1,1))*Quad(M3Input)*Quad(msu2(2,2)) + 20.966420154624547*Quad(msq2(2,2)
       )*Quad(msu2(2,2)) + 179.78408638848006*Cube(msq2(2,2))*Cube(msu2(2,2))*Power
       (msd2(0,0)*msd2(1,1)*msq2(0,0)*msq2(1,1)*msu2(0,0)*msu2(1,1),
-      0.16666666666666666)*Sqr(M3Input) + 51.87104103129985*msu2(2,2)*Power6(msq2(
-      2,2))*Sqr(M3Input) - 10.338171008843524*Power7(msq2(2,2))*Sqr(M3Input) -
+      0.16666666666666666)*Sqr(M3Input) + 51.87104103129983*msu2(2,2)*Power6(msq2(
+      2,2))*Sqr(M3Input) - 10.338171008843519*Power7(msq2(2,2))*Sqr(M3Input) -
       121.2344022546317*Cube(msu2(2,2))*Quad(msq2(2,2))*Sqr(M3Input) -
       82.22125550833157*Cube(msq2(2,2))*Quad(msu2(2,2))*Sqr(M3Input) +
       56.44893139200002*msq2(2,2)*Cbrt(msd2(0,0)*msd2(1,1)*msq2(0,0)*msq2(1,1)*
@@ -693,9 +693,9 @@ void HSSUSY_high_scale_constraint<Two_scale>::apply()
       251.62480000000005*Power12(M3Input)*Sqr(msu2(2,2)) - 1534.8913497792005*Cube
       (msq2(2,2))*Power6(M3Input)*Sqr(msu2(2,2)) - 88.16472*msq2(2,2)*Cbrt(msd2(0,
       0)*msd2(1,1)*msq2(0,0)*msq2(1,1)*msu2(0,0)*msu2(1,1))*Power6(M3Input)*Sqr(
-      msu2(2,2)) - 1.081566387461146*Power6(msq2(2,2))*Sqr(msu2(2,2)) + 528.98832*
-      msq2(2,2)*Power(msd2(0,0)*msd2(1,1)*msq2(0,0)*msq2(1,1)*msu2(0,0)*msu2(1,1),
-      0.16666666666666666)*Power8(M3Input)*Sqr(msu2(2,2)) - 259.30800000000005*
+      msu2(2,2)) - 1.0815663874611456*Power6(msq2(2,2))*Sqr(msu2(2,2)) + 528.98832
+      *msq2(2,2)*Power(msd2(0,0)*msd2(1,1)*msq2(0,0)*msq2(1,1)*msu2(0,0)*msu2(1,1)
+      ,0.16666666666666666)*Power8(M3Input)*Sqr(msu2(2,2)) - 259.30800000000005*
       Cbrt(msd2(0,0)*msd2(1,1)*msq2(0,0)*msq2(1,1)*msu2(0,0)*msu2(1,1))*Power8(
       M3Input)*Sqr(msu2(2,2)) - 550.3594481280002*Cube(msq2(2,2))*Power(msd2(0,0)*
       msd2(1,1)*msq2(0,0)*msq2(1,1)*msu2(0,0)*msu2(1,1),0.16666666666666666)*Quad(
@@ -726,8 +726,8 @@ void HSSUSY_high_scale_constraint<Two_scale>::apply()
       8.8326464256*Cube(M3Input)*Power5(msq2(2,2)) + 10.819991871360003*M3Input*
       msu2(2,2)*Power5(msq2(2,2)) - 2.7117623904000006*Cube(M3Input)*Power5(msu2(2
       ,2)) + 2.7659976382080007*M3Input*msq2(2,2)*Power5(msu2(2,2)) -
-      3.378487257792001*M3Input*Power6(msq2(2,2)) - 79.59060000000001*Cube(msq2(2,
-      2))*Power7(M3Input) - 4.705960000000001*Cube(msu2(2,2))*Power7(M3Input) -
+      3.3784872577919995*M3Input*Power6(msq2(2,2)) - 79.59060000000001*Cube(msq2(2
+      ,2))*Power7(M3Input) - 4.705960000000001*Cube(msu2(2,2))*Power7(M3Input) -
       16.9932*msq2(2,2)*msu2(2,2)*Power9(M3Input) - 112.4430527808*Cube(M3Input)*
       msu2(2,2)*Quad(msq2(2,2)) + 35.72026128*Power5(M3Input)*Quad(msq2(2,2)) +
       4.704077616000002*Cube(M3Input)*msq2(2,2)*Quad(msu2(2,2)) +
@@ -822,23 +822,23 @@ void HSSUSY_high_scale_constraint<Two_scale>::apply()
       *Sqr(M3Input)*Sqr(AtInput - MuInput/TanBeta)*Sqr(msu2(2,2)))/(Sqr(-1.02*msq2
       (2,2) + 0.9800000000000001*msu2(2,2))*Sqr(-0.9800000000000001*msu2(2,2) +
       Sqr(M3Input)))) + PolyLog(2,1 - (0.9803921568627451*Sqr(M3Input))/msq2(2,2))
-      *((-0.1111111111111111*(18.977209118784007*Cube(msq2(2,2))*Cube(msu2(2,2)) +
-      299.88*msq2(2,2)*Power10(M3Input) + 339.08000000000004*msu2(2,2)*Power10(
-      M3Input) - 128*Power12(M3Input) + 3.2459975614080006*msu2(2,2)*Power5(msq2(2
-      ,2)) - 9.550872000000002*Cube(msq2(2,2))*Power6(M3Input) +
-      12.235496000000003*Cube(msu2(2,2))*Power6(M3Input) - 901.6392000000001*msq2(
-      2,2)*msu2(2,2)*Power8(M3Input) - 375.3661934400001*Cube(msu2(2,2))*msq2(2,2)
-      *Quad(M3Input) + 157.03755984000006*Cube(msq2(2,2))*msu2(2,2)*Quad(M3Input)
-      - 21.6486432*Quad(M3Input)*Quad(msq2(2,2)) + 34.12762192000001*Quad(M3Input)
-      *Quad(msu2(2,2)) + 9.9367272288*Power5(msq2(2,2))*Sqr(M3Input) -
-      43.492124188800005*msu2(2,2)*Quad(msq2(2,2))*Sqr(M3Input) +
-      31.987727788800015*msq2(2,2)*Quad(msu2(2,2))*Sqr(M3Input) + 255.917592*msu2(
-      2,2)*Power6(M3Input)*Sqr(msq2(2,2)) - 101.9592*Power8(M3Input)*Sqr(msq2(2,2)
-      ) - 22.071532174272008*Quad(msu2(2,2))*Sqr(msq2(2,2)) + 163.52909818560005*
-      Cube(msu2(2,2))*Sqr(M3Input)*Sqr(msq2(2,2)) + 1004.0982000000001*msq2(2,2)*
-      Power6(M3Input)*Sqr(msu2(2,2)) - 268.91200000000003*Power8(M3Input)*Sqr(msu2
-      (2,2)) + 1.0395678464640001*Quad(msq2(2,2))*Sqr(msu2(2,2)) -
-      41.78655069120001*Cube(msq2(2,2))*Sqr(M3Input)*Sqr(msu2(2,2)) -
+      *((0.1111111111111111*(-18.977209118784007*Cube(msq2(2,2))*Cube(msu2(2,2)) -
+      299.88*msq2(2,2)*Power10(M3Input) - 339.08000000000004*msu2(2,2)*Power10(
+      M3Input) + 128*Power12(M3Input) - 3.2459975614080006*msu2(2,2)*Power5(msq2(2
+      ,2)) + 9.550872000000002*Cube(msq2(2,2))*Power6(M3Input) -
+      12.235496000000003*Cube(msu2(2,2))*Power6(M3Input) + 901.6392000000001*msq2(
+      2,2)*msu2(2,2)*Power8(M3Input) + 375.3661934400001*Cube(msu2(2,2))*msq2(2,2)
+      *Quad(M3Input) - 157.03755984000006*Cube(msq2(2,2))*msu2(2,2)*Quad(M3Input)
+      + 21.6486432*Quad(M3Input)*Quad(msq2(2,2)) - 34.12762192000001*Quad(M3Input)
+      *Quad(msu2(2,2)) - 9.9367272288*Power5(msq2(2,2))*Sqr(M3Input) +
+      43.492124188800005*msu2(2,2)*Quad(msq2(2,2))*Sqr(M3Input) -
+      31.987727788800015*msq2(2,2)*Quad(msu2(2,2))*Sqr(M3Input) - 255.917592*msu2(
+      2,2)*Power6(M3Input)*Sqr(msq2(2,2)) + 101.9592*Power8(M3Input)*Sqr(msq2(2,2)
+      ) + 22.071532174272008*Quad(msu2(2,2))*Sqr(msq2(2,2)) - 163.52909818560005*
+      Cube(msu2(2,2))*Sqr(M3Input)*Sqr(msq2(2,2)) - 1004.0982000000001*msq2(2,2)*
+      Power6(M3Input)*Sqr(msu2(2,2)) + 268.91200000000003*Power8(M3Input)*Sqr(msu2
+      (2,2)) - 1.0395678464640001*Quad(msq2(2,2))*Sqr(msu2(2,2)) +
+      41.78655069120001*Cube(msq2(2,2))*Sqr(M3Input)*Sqr(msu2(2,2)) +
       416.6664667200001*Quad(M3Input)*Sqr(msq2(2,2))*Sqr(msu2(2,2))))/(Cube(-
       0.9800000000000001*msu2(2,2) + Sqr(M3Input))*(1.02*msq2(2,2) -
       0.9800000000000001*msu2(2,2))*Sqr(-1.02*msq2(2,2) + Sqr(M3Input))) + (

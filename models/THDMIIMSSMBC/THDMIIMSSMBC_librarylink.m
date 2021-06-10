@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.5.0"];
+Print["FlexibleSUSY 2.6.0"];
 Print["THDMIIMSSMBC"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -117,9 +117,10 @@ Options[FSTHDMIIMSSMBCOpenHandle] = {
     Sequence @@ fsDefaultSettings,
     Sequence @@ fsDefaultSMParameters,
     Sequence @@ fsTHDMIIMSSMBCDefaultInputParameters
+
 };
 
-FSTHDMIIMSSMBCOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters) -> s_List, r___] :=
+FSTHDMIIMSSMBCOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters ) -> s_List, r___] :=
     FSTHDMIIMSSMBCOpenHandle[a, Sequence @@ s, r];
 
 FSTHDMIIMSSMBCOpenHandle[OptionsPattern[]] :=
@@ -201,6 +202,7 @@ FSTHDMIIMSSMBCOpenHandle[OptionsPattern[]] :=
             OptionValue[AbInput],
             OptionValue[AtauInput],
             OptionValue[LambdaLoopOrder]
+
         }
 ];
 
@@ -289,6 +291,7 @@ FSTHDMIIMSSMBCSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[AbInput],
             OptionValue[AtauInput],
             OptionValue[LambdaLoopOrder]
+
         }] /. HoldPattern[OptionValue[param_]] :> param /.
         { p } /.
         FSTHDMIIMSSMBCGetSettings[handle] /.

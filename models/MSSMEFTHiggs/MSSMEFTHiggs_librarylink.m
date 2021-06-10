@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.5.0"];
+Print["FlexibleSUSY 2.6.0"];
 Print["MSSMEFTHiggs"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -20,12 +20,16 @@ FSMSSMEFTHiggsSetLib = LibraryFunctionLoad[libMSSMEFTHiggs, "FSMSSMEFTHiggsSet",
 
 FSMSSMEFTHiggsCalculateSpectrum = LibraryFunctionLoad[libMSSMEFTHiggs, "FSMSSMEFTHiggsCalculateSpectrum", LinkObject, LinkObject];
 FSMSSMEFTHiggsCalculateObservables = LibraryFunctionLoad[libMSSMEFTHiggs, "FSMSSMEFTHiggsCalculateObservables", LinkObject, LinkObject];
+FSMSSMEFTHiggsCalculateDecays = LibraryFunctionLoad[libMSSMEFTHiggs, "FSMSSMEFTHiggsCalculateDecays", LinkObject, LinkObject];
 
 FSMSSMEFTHiggsCalculateSpectrum::error = "`1`";
 FSMSSMEFTHiggsCalculateSpectrum::warning = "`1`";
 
 FSMSSMEFTHiggsCalculateObservables::error = "`1`";
 FSMSSMEFTHiggsCalculateObservables::warning = "`1`";
+
+FSMSSMEFTHiggsCalculateDecays::error = "`1`";
+FSMSSMEFTHiggsCalculateDecays::warning = "`1`";
 
 FSMSSMEFTHiggs::info = "`1`";
 FSMSSMEFTHiggs::nonum = "Error: `1` is not a numeric input value!";
@@ -101,6 +105,13 @@ fsDefaultSMParameters = {
     Mh -> 125.09
 };
 
+fdDefaultSettings = {
+   minBRtoPrint -> 1*^-5,
+   maxHigherOrderCorrections -> 4,
+   alphaThomson -> 1,
+   offShellVV -> 2
+};
+
 fsMSSMEFTHiggsDefaultInputParameters = {
    MSUSY -> 0,
    M1Input -> 0,
@@ -123,9 +134,10 @@ Options[FSMSSMEFTHiggsOpenHandle] = {
     Sequence @@ fsDefaultSettings,
     Sequence @@ fsDefaultSMParameters,
     Sequence @@ fsMSSMEFTHiggsDefaultInputParameters
+   , Sequence @@ fdDefaultSettings
 };
 
-FSMSSMEFTHiggsOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters) -> s_List, r___] :=
+FSMSSMEFTHiggsOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters | fdSettings) -> s_List, r___] :=
     FSMSSMEFTHiggsOpenHandle[a, Sequence @@ s, r];
 
 FSMSSMEFTHiggsOpenHandle[OptionsPattern[]] :=
@@ -277,6 +289,11 @@ FSMSSMEFTHiggsOpenHandle[OptionsPattern[]] :=
             OptionValue[AeInput][[3,1]],
             OptionValue[AeInput][[3,2]],
             OptionValue[AeInput][[3,3]]
+            ,
+            OptionValue[minBRtoPrint],
+            OptionValue[maxHigherOrderCorrections],
+            OptionValue[alphaThomson],
+            OptionValue[offShellVV]
         }
 ];
 
@@ -435,6 +452,11 @@ FSMSSMEFTHiggsSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[AeInput][[3,1]],
             OptionValue[AeInput][[3,2]],
             OptionValue[AeInput][[3,3]]
+            ,
+            OptionValue[minBRtoPrint],
+            OptionValue[maxHigherOrderCorrections],
+            OptionValue[alphaThomson],
+            OptionValue[offShellVV]
         }] /. HoldPattern[OptionValue[param_]] :> param /.
         { p } /.
         FSMSSMEFTHiggsGetSettings[handle] /.

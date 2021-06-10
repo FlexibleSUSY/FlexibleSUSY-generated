@@ -25,16 +25,20 @@
 #include "MSSMNoFVatMGUTHimalaya_physical.hpp"
 #include "ew_input.hpp"
 #include "logger.hpp"
+#include "observable_problems.hpp"
+#include "observable_problems_format_slha.hpp"
 #include "numerics2.hpp"
 #include "spectrum_generator_problems.hpp"
 #include "standard_model.hpp"
 #include "wrappers.hpp"
 #include "config.h"
+#include "spectrum_generator_settings.hpp"
 
 #include <array>
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <iterator>
 #include <string>
 
 #define Pole(p) physical.p
@@ -202,6 +206,16 @@ void MSSMNoFVatMGUTHimalaya_slha_io::set_physical_input(const Physical_input& in
 void MSSMNoFVatMGUTHimalaya_slha_io::set_settings(const Spectrum_generator_settings& settings)
 {
    slha_io.set_settings(settings);
+}
+
+/**
+ * Stores the settings (FlexibleSUSY block) in the SLHA object.
+ *
+ * @param settings class of settings
+ */
+void MSSMNoFVatMGUTHimalaya_slha_io::set_FlexibleDecay_settings(const FlexibleDecay_settings& settings)
+{
+   slha_io.set_FlexibleDecay_settings(settings);
 }
 
 /**
@@ -533,6 +547,117 @@ void MSSMNoFVatMGUTHimalaya_slha_io::set_spectrum(const standard_model::Standard
 }
 
 /**
+ * Stores the decays calculation information in the DCINFO block
+ * in the SLHA object.
+ *
+ * @param problems struct with decays calculation problems
+ */
+void MSSMNoFVatMGUTHimalaya_slha_io::set_dcinfo(const FlexibleDecay_problems& problems)
+{
+   set_dcinfo(problems.get_problem_strings(), problems.get_warning_strings());
+}
+
+/**
+ * Stores given problems and warnings in the DCINFO block in the SLHA
+ * object.
+ *
+ * @param problems vector of problem strings
+ * @param warnings vector of warning strings
+ */
+void MSSMNoFVatMGUTHimalaya_slha_io::set_dcinfo(
+   const std::vector<std::string>& problems,
+   const std::vector<std::string>& warnings)
+{
+   std::ostringstream dcinfo;
+   dcinfo << "Block DCINFO\n"
+          << FORMAT_SPINFO(1, PKGNAME)
+          << FORMAT_SPINFO(2, FLEXIBLESUSY_VERSION);
+
+   for (const auto& s: warnings)
+      dcinfo << FORMAT_SPINFO(3, s);
+
+   for (const auto& s: problems)
+      dcinfo << FORMAT_SPINFO(4, s);
+
+   dcinfo << FORMAT_SPINFO(5, MSSMNoFVatMGUTHimalaya_info::model_name)
+          << FORMAT_SPINFO(9, SARAH_VERSION);
+
+   slha_io.set_block(dcinfo);
+}
+
+/**
+ * Sort decays of every particle according to their width
+ *
+ */
+std::vector<Decay> sort_decays_list(const Decays_list& decays_list) {
+   std::vector<Decay> decays_list_as_vector;
+   for (const auto& el : decays_list) {
+      decays_list_as_vector.push_back(el.second);
+   }
+   std::sort(
+      decays_list_as_vector.begin(),
+      decays_list_as_vector.end(),
+      [](const auto& d1, const auto& d2) {
+         return d1.get_width() > d2.get_width();
+      }
+   );
+   return decays_list_as_vector;
+}
+
+/**
+ * Stores the branching ratios for a given particle in the SLHA
+ * object.
+ *
+ * @param decays struct containing individual particle decays
+ */
+void MSSMNoFVatMGUTHimalaya_slha_io::set_decay_block(const Decays_list& decays_list, FlexibleDecay_settings const& flexibledecay_settings)
+{
+   const auto pdg = decays_list.get_particle_id();
+   const auto width = decays_list.get_total_width();
+   const std::string name = MSSMNoFVatMGUTHimalaya_info::get_particle_name_from_pdg(pdg);
+   if (std::isnan(width) || std::isinf(width)) {
+      throw std::runtime_error("Total width of " + name + " is " + std::to_string(width));
+   }
+
+   std::ostringstream decay;
+
+   decay << "DECAY "
+         << FORMAT_TOTAL_WIDTH(pdg, width, name + " decays");
+
+   if (!is_zero(width, 1e-100)) {
+      constexpr double NEGATIVE_BR_TOLERANCE = 1e-11;
+      const double MIN_BR_TO_PRINT = flexibledecay_settings.get(FlexibleDecay_settings::min_br_to_print);
+      std::vector<Decay> sorted_decays_list = sort_decays_list(decays_list);
+      for (const auto& channel : sorted_decays_list) {
+         auto const partial_width = channel.get_width();
+         auto branching_ratio = partial_width / width;
+         if (partial_width < 0 && !is_zero(branching_ratio, NEGATIVE_BR_TOLERANCE)) {
+            std::stringstream ss;
+            ss << std::scientific << partial_width;
+            throw std::runtime_error("Error in " + channel.get_proc_string() + ": partial width is negative (" + ss.str() + " GeV).");
+         }
+         else if (partial_width < 0 && is_zero(branching_ratio, NEGATIVE_BR_TOLERANCE)) {
+            branching_ratio = 0;
+         }
+         if (branching_ratio < MIN_BR_TO_PRINT) continue;
+         const auto final_state = channel.get_final_state_particle_ids();
+         std::string comment = "BR(" + name + " ->";
+         for (auto id : final_state) {
+            comment += " " + MSSMNoFVatMGUTHimalaya_info::get_particle_name_from_pdg(id);
+         }
+         comment += ")";
+
+         decay << format_decay(branching_ratio, final_state, comment);
+      }
+   }
+
+   slha_io.set_block(decay);
+}
+
+
+
+
+/**
  * Stores the model (DR-bar) parameters, masses and mixing matrices in
  * the SLHA object.
  *
@@ -564,9 +689,18 @@ void MSSMNoFVatMGUTHimalaya_slha_io::set_spectrum(const MSSMNoFVatMGUTHimalaya_s
 void MSSMNoFVatMGUTHimalaya_slha_io::set_extra(
    const MSSMNoFVatMGUTHimalaya_slha& model,
    const MSSMNoFVatMGUTHimalaya_scales& scales,
-   const MSSMNoFVatMGUTHimalaya_observables& observables)
+   const MSSMNoFVatMGUTHimalaya_observables& observables,
+   const flexiblesusy::Spectrum_generator_settings& spectrum_generator_settings)
 {
    const MSSMNoFVatMGUTHimalaya_physical physical(model.get_physical_slha());
+
+   if (observables.problems.have_problem()) {
+      std::ostringstream block;
+      block << "Block OBSINFO\n";
+      slha_format_problems_and_warnings(observables.problems,
+                                        std::ostream_iterator<std::string>(block));
+      slha_io.set_block(block);
+   }
 
    {
       std::ostringstream block;
@@ -577,14 +711,16 @@ void MSSMNoFVatMGUTHimalaya_slha_io::set_extra(
       ;
       slha_io.set_block(block);
    }
-   {
-      std::ostringstream block;
-      block << "Block FlexibleSUSYLowEnergy" << '\n'
-            << FORMAT_ELEMENT(0, (OBSERVABLES.a_muon), "Delta(g-2)_muon/2 FlexibleSUSY")
-            << FORMAT_ELEMENT(1, (OBSERVABLES.a_muon_gm2calc), "Delta(g-2)_muon/2 GM2Calc")
-            << FORMAT_ELEMENT(2, (OBSERVABLES.a_muon_gm2calc_uncertainty), "Delta(g-2)_muon/2 GM2Calc uncertainty")
-      ;
-      slha_io.set_block(block);
+   if (spectrum_generator_settings.get(Spectrum_generator_settings::calculate_observables)) {
+      {
+         std::ostringstream block;
+         block << "Block FlexibleSUSYLowEnergy" << '\n'
+               << FORMAT_ELEMENT(0, (OBSERVABLES.a_muon), "Delta(g-2)_muon/2 FlexibleSUSY")
+               << FORMAT_ELEMENT(1, (OBSERVABLES.a_muon_gm2calc), "Delta(g-2)_muon/2 GM2Calc")
+               << FORMAT_ELEMENT(2, (OBSERVABLES.a_muon_gm2calc_uncertainty), "Delta(g-2)_muon/2 GM2Calc uncertainty")
+         ;
+         slha_io.set_block(block);
+      }
    }
    {
       std::ostringstream block;
@@ -877,6 +1013,17 @@ void MSSMNoFVatMGUTHimalaya_slha_io::fill(Physical_input& input) const
  * @param settings struct of spectrum generator settings to be filled
  */
 void MSSMNoFVatMGUTHimalaya_slha_io::fill(Spectrum_generator_settings& settings) const
+{
+   slha_io.fill(settings);
+}
+
+/**
+ * Fill struct of spectrum generator settings from SLHA object
+ * (FlexibleSUSY block)
+ *
+ * @param settings struct of spectrum generator settings to be filled
+ */
+void MSSMNoFVatMGUTHimalaya_slha_io::fill(FlexibleDecay_settings& settings) const
 {
    slha_io.fill(settings);
 }

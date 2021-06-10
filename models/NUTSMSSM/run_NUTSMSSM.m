@@ -33,6 +33,7 @@ handle = FSNUTSMSSMOpenHandle[
         higgs3loopCorrectionAtAtAt -> 1,   (* FlexibleSUSY[29] *)
         higgs4loopCorrectionAtAsAsAs -> 1, (* FlexibleSUSY[30] *)
         loopLibrary -> 0,                  (* FlexibleSUSY[31] *)
+        calculateDecays -> 1,              (* FlexibleSUSY[32] *)
         parameterOutputScale -> 0          (* MODSEL[12] *)
     },
     fsSMParameters -> {
@@ -84,6 +85,7 @@ handle = FSNUTSMSSMOpenHandle[
 
 spectrum    = FSNUTSMSSMCalculateSpectrum[handle];
 observables = FSNUTSMSSMCalculateObservables[handle];
+
 FSNUTSMSSMCloseHandle[handle];
 
 Print[spectrum];

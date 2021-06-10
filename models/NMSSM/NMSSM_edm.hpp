@@ -20,7 +20,7 @@
 /**
  * @file NMSSM_edm.hpp
  *
- * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.6.0 and SARAH 4.14.5 .
  */
 
 #ifndef NMSSM_EDM_H
@@ -30,7 +30,7 @@ namespace flexiblesusy {
 class NMSSM_mass_eigenstates;
 
 namespace NMSSM_edm {
-
+double calculate_edm_Fe( int generationIndex, const NMSSM_mass_eigenstates& model );
 }
 } // namespace flexiblesusy
 

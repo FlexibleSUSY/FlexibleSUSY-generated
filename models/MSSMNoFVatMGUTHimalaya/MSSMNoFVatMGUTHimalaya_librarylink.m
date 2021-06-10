@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.5.0"];
+Print["FlexibleSUSY 2.6.0"];
 Print["MSSMNoFVatMGUTHimalaya"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -140,9 +140,10 @@ Options[FSMSSMNoFVatMGUTHimalayaOpenHandle] = {
     Sequence @@ fsDefaultSettings,
     Sequence @@ fsDefaultSMParameters,
     Sequence @@ fsMSSMNoFVatMGUTHimalayaDefaultInputParameters
+
 };
 
-FSMSSMNoFVatMGUTHimalayaOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters) -> s_List, r___] :=
+FSMSSMNoFVatMGUTHimalayaOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters ) -> s_List, r___] :=
     FSMSSMNoFVatMGUTHimalayaOpenHandle[a, Sequence @@ s, r];
 
 FSMSSMNoFVatMGUTHimalayaOpenHandle[OptionsPattern[]] :=
@@ -247,6 +248,7 @@ FSMSSMNoFVatMGUTHimalayaOpenHandle[OptionsPattern[]] :=
             OptionValue[md22IN],
             OptionValue[md33IN],
             OptionValue[Mlow]
+
         }
 ];
 
@@ -358,6 +360,7 @@ FSMSSMNoFVatMGUTHimalayaSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[md22IN],
             OptionValue[md33IN],
             OptionValue[Mlow]
+
         }] /. HoldPattern[OptionValue[param_]] :> param /.
         { p } /.
         FSMSSMNoFVatMGUTHimalayaGetSettings[handle] /.

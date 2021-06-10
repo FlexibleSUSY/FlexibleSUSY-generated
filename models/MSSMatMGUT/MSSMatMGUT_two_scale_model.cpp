@@ -25,7 +25,7 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.6.0 and SARAH 4.14.5 .
  */
 
 #include "MSSMatMGUT_two_scale_model.hpp"

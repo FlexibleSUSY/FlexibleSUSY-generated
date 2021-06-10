@@ -25,7 +25,7 @@
  * which solve EWSB and calculate masses and mixings from DRbar
  * parameters.
  *
- * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.6.0 and SARAH 4.14.5 .
  */
 
 #include "MRSSMEFTHiggs_mass_eigenstates_decoupling_scheme.hpp"
@@ -180,7 +180,14 @@ void CLASSNAME::fill_from(const standard_model::Standard_model& sm_input)
    {
       auto& model = *this;
       auto MODEL = this;
-      
+      const auto TanBeta = INPUTPARAMETER(TanBeta);
+      const auto g1 = MODELPARAMETER(g1);
+      const auto g2 = MODELPARAMETER(g2);
+
+      MODEL->set_vd(Re((2*MZDRbar)/(Sqrt(0.6*Sqr(g1) + Sqr(g2))*Sqrt(1 + Sqr(TanBeta)
+         ))));
+      MODEL->set_vu(Re((2*MZDRbar*TanBeta)/(Sqrt(0.6*Sqr(g1) + Sqr(g2))*Sqrt(1 + Sqr(
+         TanBeta)))));
 
    }
 
@@ -188,16 +195,22 @@ void CLASSNAME::fill_from(const standard_model::Standard_model& sm_input)
    {
       auto& model = *this;
       auto MODEL = this;
+      const auto vu = MODELPARAMETER(vu);
+      MODEL->set_Yu((((1.4142135623730951*upQuarksDRbar)/vu).transpose()).real());
 
    }
    {
       auto& model = *this;
       auto MODEL = this;
+      const auto vd = MODELPARAMETER(vd);
+      MODEL->set_Yd((((1.4142135623730951*downQuarksDRbar)/vd).transpose()).real());
 
    }
    {
       auto& model = *this;
       auto MODEL = this;
+      const auto vd = MODELPARAMETER(vd);
+      MODEL->set_Ye((((1.4142135623730951*downLeptonsDRbar)/vd).transpose()).real());
 
    }
 

@@ -20,6 +20,7 @@
 #ifndef MSSMNoFVatMGUT_OBSERVABLES_H
 #define MSSMNoFVatMGUT_OBSERVABLES_H
 
+#include "observable_problems.hpp"
 #include <string>
 #include <vector>
 #include <Eigen/Core>
@@ -42,15 +43,16 @@ struct MSSMNoFVatMGUT_observables {
    void clear(); ///< sets all observables to zero
    void set(const Eigen::ArrayXd&); ///< sets all observables from given vector
 
+   Observable_problems problems;
 
 };
 
 MSSMNoFVatMGUT_observables calculate_observables(
-   MSSMNoFVatMGUT_mass_eigenstates&, const softsusy::QedQcd&,
+   const MSSMNoFVatMGUT_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&);
 
 MSSMNoFVatMGUT_observables calculate_observables(
-   MSSMNoFVatMGUT_mass_eigenstates&, const softsusy::QedQcd&,
+   const MSSMNoFVatMGUT_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&, double scale);
 
 } // namespace flexiblesusy

@@ -23,6 +23,11 @@
 #include "E6SSMEFTHiggs_observables.hpp"
 #include "E6SSMEFTHiggs_slha_io.hpp"
 #include "E6SSMEFTHiggs_spectrum_generator.hpp"
+#include "decays/flexibledecay_settings.hpp"
+#include "decays/E6SSMEFTHiggs_decays.hpp"
+#include "decays/flexibledecay_problems.hpp"
+#include "E6SSMEFTHiggs_mass_eigenstates_decoupling_scheme.hpp"
+#include "loop_libraries/loop_library.hpp"
 
 #ifdef ENABLE_TWO_SCALE_SOLVER
 #include "E6SSMEFTHiggs_two_scale_spectrum_generator.hpp"
@@ -144,6 +149,7 @@ int run_solver(int loop_library, const E6SSMEFTHiggs_input_parameters& input)
    Spectrum_generator_settings settings;
    settings.set(Spectrum_generator_settings::precision, 1.0e-4);
    settings.set(Spectrum_generator_settings::loop_library, loop_library);
+   settings.set(Spectrum_generator_settings::calculate_bsm_masses, 1.0);
 
    E6SSMEFTHiggs_spectrum_generator<solver_type> spectrum_generator;
    spectrum_generator.set_settings(settings);
@@ -160,9 +166,14 @@ int run_solver(int loop_library, const E6SSMEFTHiggs_input_parameters& input)
    const auto observables = calculate_observables(
       std::get<0>(models), qedqcd, physical_input, scales.pole_mass_scale);
 
+   FlexibleDecay_settings flexibledecay_settings;
+   E6SSMEFTHiggs_decays decays;if (settings.get(Spectrum_generator_settings::calculate_sm_masses)) {
+      decays = E6SSMEFTHiggs_decays(std::get<0>(models), qedqcd, physical_input, flexibledecay_settings);
+   }
+
    // SLHA output
    E6SSMEFTHiggs_slha_io slha_io;
-   slha_io.fill(models, qedqcd, scales, observables);
+   slha_io.fill(models, qedqcd, scales, observables, settings, flexibledecay_settings, &decays);
    slha_io.write_to_stream(std::cout);
 
    return spectrum_generator.get_exit_code();

@@ -20,7 +20,7 @@
 /**
  * @file HSSUSY_a_muon.cpp
  *
- * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.6.0 and SARAH 4.14.5 .
  */
 
 #include "HSSUSY_a_muon.hpp"

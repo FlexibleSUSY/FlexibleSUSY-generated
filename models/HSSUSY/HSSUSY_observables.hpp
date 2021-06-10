@@ -20,6 +20,7 @@
 #ifndef HSSUSY_OBSERVABLES_H
 #define HSSUSY_OBSERVABLES_H
 
+#include "observable_problems.hpp"
 #include <string>
 #include <vector>
 #include <Eigen/Core>
@@ -34,7 +35,7 @@ class HSSUSY_mass_eigenstates;
 class Physical_input;
 
 struct HSSUSY_observables {
-   static const int NUMBER_OF_OBSERVABLES = 4;
+   static const int NUMBER_OF_OBSERVABLES = 0;
 
    HSSUSY_observables();
    Eigen::ArrayXd get() const; ///< returns vector of all observables
@@ -42,17 +43,16 @@ struct HSSUSY_observables {
    void clear(); ///< sets all observables to zero
    void set(const Eigen::ArrayXd&); ///< sets all observables from given vector
 
-   std::complex<double> eff_cp_higgs_photon_photon; ///< effective H-Photon-Photon coupling
-   std::complex<double> eff_cp_higgs_gluon_gluon; ///< effective H-Gluon-Gluon coupling
+   Observable_problems problems;
 
 };
 
 HSSUSY_observables calculate_observables(
-   HSSUSY_mass_eigenstates&, const softsusy::QedQcd&,
+   const HSSUSY_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&);
 
 HSSUSY_observables calculate_observables(
-   HSSUSY_mass_eigenstates&, const softsusy::QedQcd&,
+   const HSSUSY_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&, double scale);
 
 } // namespace flexiblesusy

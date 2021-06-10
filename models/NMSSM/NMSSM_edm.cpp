@@ -20,7 +20,7 @@
 /**
  * @file NMSSM_edm.cpp
  *
- * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.6.0 and SARAH 4.14.5 .
  */
 
 #include "NMSSM_edm.hpp"
@@ -87,7 +87,23 @@ struct EDMVertexCorrectionFS {
 
 namespace flexiblesusy {
 namespace NMSSM_edm {
+double calculate_edm_Fe( int generationIndex, const NMSSM_mass_eigenstates& model )
+{
+   context_base context{ model };
+   std::array<int, 1> indices = { generationIndex };
 
+   double val = 0.0;
+
+   using namespace NMSSM_cxx_diagrams::fields;
+
+   val += 1 * EDMVertexCorrectionFS<Fe, typename bar<Fe>::type, Ah>::value(indices, context);
+   val += 1 * EDMVertexCorrectionSF<Fe, typename conj<Se>::type, Chi>::value(indices, context);
+   val += 1 * EDMVertexCorrectionFS<Fe, typename bar<Fe>::type, hh>::value(indices, context);
+   val += 1 * EDMVertexCorrectionSF<Fe, typename conj<Hpm>::type, typename bar<Fv>::type>::value(indices, context);
+   val += 1 * EDMVertexCorrectionFS<Fe, typename bar<Cha>::type, typename conj<Sv>::type>::value(indices, context);
+
+   return val;
+}
 }
 } // namespace flexiblesusy
 

@@ -20,6 +20,7 @@
 #ifndef SMSSM_OBSERVABLES_H
 #define SMSSM_OBSERVABLES_H
 
+#include "observable_problems.hpp"
 #include <string>
 #include <vector>
 #include <Eigen/Core>
@@ -34,7 +35,7 @@ class SMSSM_mass_eigenstates;
 class Physical_input;
 
 struct SMSSM_observables {
-   static const int NUMBER_OF_OBSERVABLES = 20;
+   static const int NUMBER_OF_OBSERVABLES = 0;
 
    SMSSM_observables();
    Eigen::ArrayXd get() const; ///< returns vector of all observables
@@ -42,19 +43,16 @@ struct SMSSM_observables {
    void clear(); ///< sets all observables to zero
    void set(const Eigen::ArrayXd&); ///< sets all observables from given vector
 
-   Eigen::Array<std::complex<double>,3,1> eff_cp_higgs_photon_photon; ///< effective H-Photon-Photon coupling
-   Eigen::Array<std::complex<double>,3,1> eff_cp_higgs_gluon_gluon; ///< effective H-Gluon-Gluon coupling
-   Eigen::Array<std::complex<double>,2,1> eff_cp_pseudoscalar_photon_photon; ///< effective A-Photon-Photon coupling
-   Eigen::Array<std::complex<double>,2,1> eff_cp_pseudoscalar_gluon_gluon; ///< effective A-Gluon-Gluon coupling
+   Observable_problems problems;
 
 };
 
 SMSSM_observables calculate_observables(
-   SMSSM_mass_eigenstates&, const softsusy::QedQcd&,
+   const SMSSM_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&);
 
 SMSSM_observables calculate_observables(
-   SMSSM_mass_eigenstates&, const softsusy::QedQcd&,
+   const SMSSM_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&, double scale);
 
 } // namespace flexiblesusy

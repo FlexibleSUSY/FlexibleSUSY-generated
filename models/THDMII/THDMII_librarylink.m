@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.5.0"];
+Print["FlexibleSUSY 2.6.0"];
 Print["THDMII"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -20,12 +20,16 @@ FSTHDMIISetLib = LibraryFunctionLoad[libTHDMII, "FSTHDMIISet", {Integer, {Real,1
 
 FSTHDMIICalculateSpectrum = LibraryFunctionLoad[libTHDMII, "FSTHDMIICalculateSpectrum", LinkObject, LinkObject];
 FSTHDMIICalculateObservables = LibraryFunctionLoad[libTHDMII, "FSTHDMIICalculateObservables", LinkObject, LinkObject];
+FSTHDMIICalculateDecays = LibraryFunctionLoad[libTHDMII, "FSTHDMIICalculateDecays", LinkObject, LinkObject];
 
 FSTHDMIICalculateSpectrum::error = "`1`";
 FSTHDMIICalculateSpectrum::warning = "`1`";
 
 FSTHDMIICalculateObservables::error = "`1`";
 FSTHDMIICalculateObservables::warning = "`1`";
+
+FSTHDMIICalculateDecays::error = "`1`";
+FSTHDMIICalculateDecays::warning = "`1`";
 
 FSTHDMII::info = "`1`";
 FSTHDMII::nonum = "Error: `1` is not a numeric input value!";
@@ -101,6 +105,13 @@ fsDefaultSMParameters = {
     Mh -> 125.09
 };
 
+fdDefaultSettings = {
+   minBRtoPrint -> 1*^-5,
+   maxHigherOrderCorrections -> 4,
+   alphaThomson -> 1,
+   offShellVV -> 2
+};
+
 fsTHDMIIDefaultInputParameters = {
    Lambda1IN -> 0,
    Lambda2IN -> 0,
@@ -118,9 +129,10 @@ Options[FSTHDMIIOpenHandle] = {
     Sequence @@ fsDefaultSettings,
     Sequence @@ fsDefaultSMParameters,
     Sequence @@ fsTHDMIIDefaultInputParameters
+   , Sequence @@ fdDefaultSettings
 };
 
-FSTHDMIIOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters) -> s_List, r___] :=
+FSTHDMIIOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters | fdSettings) -> s_List, r___] :=
     FSTHDMIIOpenHandle[a, Sequence @@ s, r];
 
 FSTHDMIIOpenHandle[OptionsPattern[]] :=
@@ -203,6 +215,11 @@ FSTHDMIIOpenHandle[OptionsPattern[]] :=
             OptionValue[M122IN],
             OptionValue[TanBeta],
             OptionValue[Qin]
+            ,
+            OptionValue[minBRtoPrint],
+            OptionValue[maxHigherOrderCorrections],
+            OptionValue[alphaThomson],
+            OptionValue[offShellVV]
         }
 ];
 
@@ -292,6 +309,11 @@ FSTHDMIISet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[M122IN],
             OptionValue[TanBeta],
             OptionValue[Qin]
+            ,
+            OptionValue[minBRtoPrint],
+            OptionValue[maxHigherOrderCorrections],
+            OptionValue[alphaThomson],
+            OptionValue[offShellVV]
         }] /. HoldPattern[OptionValue[param_]] :> param /.
         { p } /.
         FSTHDMIIGetSettings[handle] /.

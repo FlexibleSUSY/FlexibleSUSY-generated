@@ -22,7 +22,7 @@
  *
  * @brief implementation of EWSB solver for two-scale iteration
  *
- * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.6.0 and SARAH 4.14.5 .
  */
 
 #include "SMSSM_two_scale_ewsb_solver.hpp"
@@ -261,18 +261,18 @@ int CLASSNAME::solve_tree_level(SMSSM_mass_eigenstates& model)
       - 10*vu*Conj(Kappa)*Lambdax*Sqr(vS) + 20*vd*AbsSqr(Lambdax)*Sqr(vu) - 3*vd*
       Sqr(g1)*Sqr(vu) - 5*vd*Sqr(g2)*Sqr(vu) - 14.142135623730951*vS*vu*TLambdax))
       ))/vd);
-   LL1 = Re(-0.17677669529663687*(4*ms2*vS + 4*vS*AbsSqr(MS) + 2*vS*BMS +
-      2.8284271247461903*MS*Conj(L1) + 2.8284271247461903*L1*Conj(MS) + 2*vS*Conj(
-      BMS) + 4*L1*vS*Conj(Kappa) - 1.4142135623730951*MS*vd*vu*Conj(Lambdax) -
-      1.4142135623730951*vd*vu*Conj(TLambdax) + 4*AbsSqr(Kappa)*Cube(vS) + 4*vS*
-      Conj(L1)*Kappa - 2*vd*vS*vu*Conj(Lambdax)*Kappa - 1.4142135623730951*vd*vu*
-      Conj(MS)*Lambdax - 2*vd*vS*vu*Conj(Kappa)*Lambdax + 2*vS*AbsSqr(Lambdax)*Sqr
-      (vd) + 1.4142135623730951*Mu*Conj(Lambdax)*Sqr(vd) + 1.4142135623730951*Mu*
-      Lambdax*Sqr(vd) + 4.242640687119286*MS*Conj(Kappa)*Sqr(vS) +
-      1.4142135623730951*Conj(TKappa)*Sqr(vS) + 4.242640687119286*Conj(MS)*Kappa*
-      Sqr(vS) + 2*vS*AbsSqr(Lambdax)*Sqr(vu) + 1.4142135623730951*Mu*Conj(Lambdax)
-      *Sqr(vu) + 1.4142135623730951*Mu*Lambdax*Sqr(vu) + 1.4142135623730951*Sqr(vS
-      )*TKappa - 1.4142135623730951*vd*vu*TLambdax));
+   LL1 = Re(0.17677669529663687*(-4*ms2*vS - 4*vS*AbsSqr(MS) - 2*vS*BMS -
+      2.8284271247461903*MS*Conj(L1) - 2.8284271247461903*L1*Conj(MS) - 2*vS*Conj(
+      BMS) - 4*L1*vS*Conj(Kappa) + 1.4142135623730951*MS*vd*vu*Conj(Lambdax) +
+      1.4142135623730951*vd*vu*Conj(TLambdax) - 4*AbsSqr(Kappa)*Cube(vS) - 4*vS*
+      Conj(L1)*Kappa + 2*vd*vS*vu*Conj(Lambdax)*Kappa + 1.4142135623730951*vd*vu*
+      Conj(MS)*Lambdax + 2*vd*vS*vu*Conj(Kappa)*Lambdax - 2*vS*AbsSqr(Lambdax)*Sqr
+      (vd) - 1.4142135623730951*Mu*Conj(Lambdax)*Sqr(vd) - 1.4142135623730951*Mu*
+      Lambdax*Sqr(vd) - 4.242640687119286*MS*Conj(Kappa)*Sqr(vS) -
+      1.4142135623730951*Conj(TKappa)*Sqr(vS) - 4.242640687119286*Conj(MS)*Kappa*
+      Sqr(vS) - 2*vS*AbsSqr(Lambdax)*Sqr(vu) - 1.4142135623730951*Mu*Conj(Lambdax)
+      *Sqr(vu) - 1.4142135623730951*Mu*Lambdax*Sqr(vu) - 1.4142135623730951*Sqr(vS
+      )*TKappa + 1.4142135623730951*vd*vu*TLambdax));
 
    
    const bool is_finite = IsFinite(BMu) && IsFinite(Mu) && IsFinite(LL1);
@@ -380,18 +380,18 @@ CLASSNAME::EWSB_vector_t CLASSNAME::ewsb_step(const SMSSM_mass_eigenstates& mode
       Lambdax)*Kappa*Sqr(vS) - 10*vu*Conj(Kappa)*Lambdax*Sqr(vS) + 20*vd*AbsSqr(
       Lambdax)*Sqr(vu) - 3*vd*Sqr(g1)*Sqr(vu) - 5*vd*Sqr(g2)*Sqr(vu) -
       14.142135623730951*vS*vu*TLambdax))))/vd);
-   LL1 = Re(-0.17677669529663687*(4*ms2*vS + 4*vS*AbsSqr(MS) + 2*vS*BMS +
-      2.8284271247461903*MS*Conj(L1) + 2.8284271247461903*L1*Conj(MS) + 2*vS*Conj(
-      BMS) + 4*L1*vS*Conj(Kappa) - 1.4142135623730951*MS*vd*vu*Conj(Lambdax) -
-      1.4142135623730951*vd*vu*Conj(TLambdax) + 4*AbsSqr(Kappa)*Cube(vS) + 4*vS*
-      Conj(L1)*Kappa - 2*vd*vS*vu*Conj(Lambdax)*Kappa - 1.4142135623730951*vd*vu*
-      Conj(MS)*Lambdax - 2*vd*vS*vu*Conj(Kappa)*Lambdax - 4*tadpole[2] + 2*vS*
-      AbsSqr(Lambdax)*Sqr(vd) + 1.4142135623730951*Mu*Conj(Lambdax)*Sqr(vd) +
-      1.4142135623730951*Mu*Lambdax*Sqr(vd) + 4.242640687119286*MS*Conj(Kappa)*Sqr
-      (vS) + 1.4142135623730951*Conj(TKappa)*Sqr(vS) + 4.242640687119286*Conj(MS)*
-      Kappa*Sqr(vS) + 2*vS*AbsSqr(Lambdax)*Sqr(vu) + 1.4142135623730951*Mu*Conj(
-      Lambdax)*Sqr(vu) + 1.4142135623730951*Mu*Lambdax*Sqr(vu) +
-      1.4142135623730951*Sqr(vS)*TKappa - 1.4142135623730951*vd*vu*TLambdax));
+   LL1 = Re(0.17677669529663687*(-4*ms2*vS - 4*vS*AbsSqr(MS) - 2*vS*BMS -
+      2.8284271247461903*MS*Conj(L1) - 2.8284271247461903*L1*Conj(MS) - 2*vS*Conj(
+      BMS) - 4*L1*vS*Conj(Kappa) + 1.4142135623730951*MS*vd*vu*Conj(Lambdax) +
+      1.4142135623730951*vd*vu*Conj(TLambdax) - 4*AbsSqr(Kappa)*Cube(vS) - 4*vS*
+      Conj(L1)*Kappa + 2*vd*vS*vu*Conj(Lambdax)*Kappa + 1.4142135623730951*vd*vu*
+      Conj(MS)*Lambdax + 2*vd*vS*vu*Conj(Kappa)*Lambdax + 4*tadpole[2] - 2*vS*
+      AbsSqr(Lambdax)*Sqr(vd) - 1.4142135623730951*Mu*Conj(Lambdax)*Sqr(vd) -
+      1.4142135623730951*Mu*Lambdax*Sqr(vd) - 4.242640687119286*MS*Conj(Kappa)*Sqr
+      (vS) - 1.4142135623730951*Conj(TKappa)*Sqr(vS) - 4.242640687119286*Conj(MS)*
+      Kappa*Sqr(vS) - 2*vS*AbsSqr(Lambdax)*Sqr(vu) - 1.4142135623730951*Mu*Conj(
+      Lambdax)*Sqr(vu) - 1.4142135623730951*Mu*Lambdax*Sqr(vu) -
+      1.4142135623730951*Sqr(vS)*TKappa + 1.4142135623730951*vd*vu*TLambdax));
 
    const bool is_finite = IsFinite(BMu) && IsFinite(Mu) && IsFinite(LL1);
 

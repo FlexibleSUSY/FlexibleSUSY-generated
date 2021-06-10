@@ -20,6 +20,7 @@
 #ifndef lowNMSSMTanBetaAtMZ_OBSERVABLES_H
 #define lowNMSSMTanBetaAtMZ_OBSERVABLES_H
 
+#include "observable_problems.hpp"
 #include <string>
 #include <vector>
 #include <Eigen/Core>
@@ -42,15 +43,16 @@ struct lowNMSSMTanBetaAtMZ_observables {
    void clear(); ///< sets all observables to zero
    void set(const Eigen::ArrayXd&); ///< sets all observables from given vector
 
+   Observable_problems problems;
 
 };
 
 lowNMSSMTanBetaAtMZ_observables calculate_observables(
-   lowNMSSMTanBetaAtMZ_mass_eigenstates&, const softsusy::QedQcd&,
+   const lowNMSSMTanBetaAtMZ_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&);
 
 lowNMSSMTanBetaAtMZ_observables calculate_observables(
-   lowNMSSMTanBetaAtMZ_mass_eigenstates&, const softsusy::QedQcd&,
+   const lowNMSSMTanBetaAtMZ_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&, double scale);
 
 } // namespace flexiblesusy

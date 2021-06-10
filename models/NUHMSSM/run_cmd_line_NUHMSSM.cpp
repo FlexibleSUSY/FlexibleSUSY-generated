@@ -23,6 +23,8 @@
 #include "NUHMSSM_observables.hpp"
 #include "NUHMSSM_slha_io.hpp"
 #include "NUHMSSM_spectrum_generator.hpp"
+#include "decays/flexibledecay_settings.hpp"
+
 
 #ifdef ENABLE_TWO_SCALE_SOLVER
 #include "NUHMSSM_two_scale_spectrum_generator.hpp"
@@ -116,6 +118,7 @@ int run_solver(int loop_library, const NUHMSSM_input_parameters& input)
    Spectrum_generator_settings settings;
    settings.set(Spectrum_generator_settings::precision, 1.0e-4);
    settings.set(Spectrum_generator_settings::loop_library, loop_library);
+   settings.set(Spectrum_generator_settings::calculate_bsm_masses, 1.0);
 
    NUHMSSM_spectrum_generator<solver_type> spectrum_generator;
    spectrum_generator.set_settings(settings);
@@ -132,9 +135,12 @@ int run_solver(int loop_library, const NUHMSSM_input_parameters& input)
    const auto observables = calculate_observables(
       std::get<0>(models), qedqcd, physical_input, scales.pole_mass_scale);
 
+   FlexibleDecay_settings flexibledecay_settings;
+
+
    // SLHA output
    NUHMSSM_slha_io slha_io;
-   slha_io.fill(models, qedqcd, scales, observables);
+   slha_io.fill(models, qedqcd, scales, observables, settings, flexibledecay_settings);
    slha_io.write_to_stream(std::cout);
 
    return spectrum_generator.get_exit_code();

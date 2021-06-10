@@ -20,6 +20,7 @@
 #ifndef NMSSM_OBSERVABLES_H
 #define NMSSM_OBSERVABLES_H
 
+#include "observable_problems.hpp"
 #include <string>
 #include <vector>
 #include <Eigen/Core>
@@ -34,7 +35,7 @@ class NMSSM_mass_eigenstates;
 class Physical_input;
 
 struct NMSSM_observables {
-   static const int NUMBER_OF_OBSERVABLES = 21;
+   static const int NUMBER_OF_OBSERVABLES = 5;
 
    NMSSM_observables();
    Eigen::ArrayXd get() const; ///< returns vector of all observables
@@ -42,20 +43,21 @@ struct NMSSM_observables {
    void clear(); ///< sets all observables to zero
    void set(const Eigen::ArrayXd&); ///< sets all observables from given vector
 
+   Observable_problems problems;
    double a_muon; ///< a_muon = (g-2)/2 of the muon (calculated with FlexibleSUSY)
-   Eigen::Array<std::complex<double>,3,1> eff_cp_higgs_photon_photon; ///< effective H-Photon-Photon coupling
-   Eigen::Array<std::complex<double>,3,1> eff_cp_higgs_gluon_gluon; ///< effective H-Gluon-Gluon coupling
-   Eigen::Array<std::complex<double>,2,1> eff_cp_pseudoscalar_photon_photon; ///< effective A-Photon-Photon coupling
-   Eigen::Array<std::complex<double>,2,1> eff_cp_pseudoscalar_gluon_gluon; ///< effective A-Gluon-Gluon coupling
+   double edm_Fe_0; ///< electric dipole moment of Fe(0) [1/GeV]
+   double edm_Fe_1; ///< electric dipole moment of Fe(1) [1/GeV]
+   double edm_Fe_2; ///< electric dipole moment of Fe(2) [1/GeV]
+   double Fe_to_Fe_VP; ///< BR(Fe1 -> Fe0 VP)
 
 };
 
 NMSSM_observables calculate_observables(
-   NMSSM_mass_eigenstates&, const softsusy::QedQcd&,
+   const NMSSM_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&);
 
 NMSSM_observables calculate_observables(
-   NMSSM_mass_eigenstates&, const softsusy::QedQcd&,
+   const NMSSM_mass_eigenstates&, const softsusy::QedQcd&,
    const Physical_input&, double scale);
 
 } // namespace flexiblesusy

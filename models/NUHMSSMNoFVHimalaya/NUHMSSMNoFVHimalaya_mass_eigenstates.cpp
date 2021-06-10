@@ -25,7 +25,7 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.6.0 and SARAH 4.14.5 .
  */
 
 #include "NUHMSSMNoFVHimalaya_mass_eigenstates.hpp"
@@ -52,8 +52,8 @@
 #include "mssm_twoloophiggs.hpp"
 
 #ifdef ENABLE_HIMALAYA
-#include "HierarchyCalculator.hpp"
-#include "version.hpp"
+#include "himalaya/HierarchyCalculator.hpp"
+#include "himalaya/version.hpp"
 #endif
 
 
@@ -12765,9 +12765,9 @@ std::complex<double> CLASSNAME::self_energy_VWm_1loop(double p ) const
       H0(Sqr(p),Sqr(MFvt),Sqr(MFtau));
    result += -(AbsSqr(CpconjVWmVPVWm())*(A0(Sqr(MVWm)) + 10*B00(Sqr(p),Sqr(MVWm),0
       ) + B0(Sqr(p),Sqr(MVWm),0)*(Sqr(MVWm) + 4*Sqr(p))));
-   result += -(AbsSqr(CpconjVWmVWmVZ())*(A0(Sqr(MVWm)) + A0(Sqr(MVZ)) + 10*B00(Sqr
-      (p),Sqr(MVZ),Sqr(MVWm)) + B0(Sqr(p),Sqr(MVZ),Sqr(MVWm))*(Sqr(MVWm) + Sqr(MVZ
-      ) + 4*Sqr(p))));
+   result += AbsSqr(CpconjVWmVWmVZ())*(-A0(Sqr(MVWm)) - A0(Sqr(MVZ)) - 10*B00(Sqr(
+      p),Sqr(MVZ),Sqr(MVWm)) - B0(Sqr(p),Sqr(MVZ),Sqr(MVWm))*(Sqr(MVWm) + Sqr(MVZ)
+      + 4*Sqr(p)));
    result += 3*((AbsSqr(CpbarFcFsconjVWmPL()) + AbsSqr(CpbarFcFsconjVWmPR()))*H0(
       Sqr(p),Sqr(MFc),Sqr(MFs)) + 4*MFc*MFs*B0(Sqr(p),Sqr(MFc),Sqr(MFs))*Re(Conj(
       CpbarFcFsconjVWmPL())*CpbarFcFsconjVWmPR()));

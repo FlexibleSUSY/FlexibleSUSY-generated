@@ -32,7 +32,7 @@
 #include "lowe.h"
 #include "physical_input.hpp"
 
-#ifdef ENABLE_GM2Calc
+#ifdef ENABLE_GM2CALC
 #include "gm2calc_interface.hpp"
 #endif
 
@@ -102,7 +102,7 @@ void MRSSMEFTHiggs_observables::set(const Eigen::ArrayXd& vec)
 
 }
 
-MRSSMEFTHiggs_observables calculate_observables(MRSSMEFTHiggs_mass_eigenstates& model,
+MRSSMEFTHiggs_observables calculate_observables(const MRSSMEFTHiggs_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input,
                                               double scale)
@@ -112,19 +112,25 @@ MRSSMEFTHiggs_observables calculate_observables(MRSSMEFTHiggs_mass_eigenstates& 
    if (scale > 0.) {
       try {
          model_at_scale.run_to(scale);
+      } catch (const NonPerturbativeRunningError& e) {
+         MRSSMEFTHiggs_observables observables;
+         observables.problems.general.flag_non_perturbative_running(scale);
+         return observables;
       } catch (const Error& e) {
-         model.get_problems().flag_thrown(e.what_detailed());
-         return MRSSMEFTHiggs_observables();
+         MRSSMEFTHiggs_observables observables;
+         observables.problems.general.flag_thrown(e.what());
+         return observables;
       } catch (const std::exception& e) {
-         model.get_problems().flag_thrown(e.what());
-         return MRSSMEFTHiggs_observables();
+         MRSSMEFTHiggs_observables observables;
+         observables.problems.general.flag_thrown(e.what());
+         return observables;
       }
    }
 
    return calculate_observables(model_at_scale, qedqcd, physical_input);
 }
 
-MRSSMEFTHiggs_observables calculate_observables(MRSSMEFTHiggs_mass_eigenstates& model,
+MRSSMEFTHiggs_observables calculate_observables(const MRSSMEFTHiggs_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input)
 {
@@ -133,10 +139,12 @@ MRSSMEFTHiggs_observables calculate_observables(MRSSMEFTHiggs_mass_eigenstates& 
    try {
       
       observables.AMU = MRSSMEFTHiggs_a_muon::calculate_a_muon(MODEL, qedqcd);
+   } catch (const NonPerturbativeRunningError& e) {
+      observables.problems.general.flag_non_perturbative_running(e.get_scale());
    } catch (const Error& e) {
-      model.get_problems().flag_thrown(e.what_detailed());
+      observables.problems.general.flag_thrown(e.what());
    } catch (const std::exception& e) {
-      model.get_problems().flag_thrown(e.what());
+      observables.problems.general.flag_thrown(e.what());
    }
 
    return observables;

@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.5.0"];
+Print["FlexibleSUSY 2.6.0"];
 Print["MSSMatMGUT"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -123,9 +123,10 @@ Options[FSMSSMatMGUTOpenHandle] = {
     Sequence @@ fsDefaultSettings,
     Sequence @@ fsDefaultSMParameters,
     Sequence @@ fsMSSMatMGUTDefaultInputParameters
+
 };
 
-FSMSSMatMGUTOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters) -> s_List, r___] :=
+FSMSSMatMGUTOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters ) -> s_List, r___] :=
     FSMSSMatMGUTOpenHandle[a, Sequence @@ s, r];
 
 FSMSSMatMGUTOpenHandle[OptionsPattern[]] :=
@@ -277,6 +278,7 @@ FSMSSMatMGUTOpenHandle[OptionsPattern[]] :=
             OptionValue[MassBInput],
             OptionValue[MassWBInput],
             OptionValue[MassGInput]
+
         }
 ];
 
@@ -435,6 +437,7 @@ FSMSSMatMGUTSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[MassBInput],
             OptionValue[MassWBInput],
             OptionValue[MassGInput]
+
         }] /. HoldPattern[OptionValue[param_]] :> param /.
         { p } /.
         FSMSSMatMGUTGetSettings[handle] /.

@@ -20,9 +20,14 @@
 #ifndef THDMII_SLHA_IO_H
 #define THDMII_SLHA_IO_H
 
+#include "decays/THDMII_decays.hpp"
+
 #include "problems.hpp"
+#include "decays/flexibledecay_problems.hpp"
 #include "slha_io.hpp"
 #include "for_each.hpp"
+#include "decays/decay.hpp"
+#include "decays/flexibledecay_settings.hpp"
 
 #include <Eigen/Core>
 #include <string>
@@ -37,6 +42,7 @@ struct THDMII_physical;
 class THDMII_slha;
 class Spectrum_generator_problems;
 class Spectrum_generator_settings;
+class FlexibleDecay_settings;
 
 namespace standard_model {
 class Standard_model;
@@ -47,6 +53,8 @@ struct THDMII_scales {
    double HighScale{0.}, SUSYScale{0.}, LowScale{0.};
    double pole_mass_scale{0.};
 };
+
+class THDMII_decays;
 
 class THDMII_slha_io {
 public:
@@ -60,6 +68,7 @@ public:
    void fill(THDMII_slha&) const;
    void fill(Physical_input&) const;
    void fill(Spectrum_generator_settings&) const;
+   void fill(FlexibleDecay_settings&) const;
    double get_parameter_output_scale() const;
    const SLHA_io& get_slha_io() const { return slha_io; }
    void read_from_file(const std::string&);
@@ -67,11 +76,16 @@ public:
    void read_from_stream(std::istream&);
    void set_block(const std::string& str, SLHA_io::Position position = SLHA_io::back) { slha_io.set_block(str, position); }
    void set_blocks(const std::vector<std::string>& vec, SLHA_io::Position position = SLHA_io::back) { slha_io.set_blocks(vec, position); }
-   void set_extra(const THDMII_slha&, const THDMII_scales&, const THDMII_observables&);
+   void set_decay_block(const Decays_list&, FlexibleDecay_settings const&);
+   void set_dcinfo(const FlexibleDecay_problems&);
+   void set_dcinfo(const std::vector<std::string>&, const std::vector<std::string>&);
+   void set_decays(const THDMII_decay_table&, FlexibleDecay_settings const&);
+   void set_extra(const THDMII_slha&, const THDMII_scales&, const THDMII_observables&, const flexiblesusy::Spectrum_generator_settings&);
    void set_input(const THDMII_input_parameters&);
    void set_modsel(const SLHA_io::Modsel&);
    void set_physical_input(const Physical_input&);
    void set_settings(const Spectrum_generator_settings&);
+   void set_FlexibleDecay_settings(const FlexibleDecay_settings&);
    void set_sminputs(const softsusy::QedQcd&);
    template <class... Ts> void set_spectrum(const std::tuple<Ts...>&);
    void set_spectrum(const THDMII_slha&);
@@ -90,8 +104,9 @@ public:
    static void fill_imminpar_tuple(THDMII_input_parameters&, int, double);
    static void fill_imextpar_tuple(THDMII_input_parameters&, int, double);
 
+   void fill_decays_data(const THDMII_decays&, FlexibleDecay_settings const&);
    template <class... Ts>
-   void fill(const std::tuple<Ts...>&, const softsusy::QedQcd&, const THDMII_scales&, const THDMII_observables&);
+   void fill(const std::tuple<Ts...>&, const softsusy::QedQcd&, const THDMII_scales&, const THDMII_observables&, const Spectrum_generator_settings&, const FlexibleDecay_settings&, THDMII_decays const * const = nullptr);
 
 private:
    SLHA_io slha_io; ///< SLHA io class
@@ -122,7 +137,10 @@ void THDMII_slha_io::fill(
    const std::tuple<Ts...>& models,
    const softsusy::QedQcd& qedqcd,
    const THDMII_scales& scales,
-   const THDMII_observables& observables)
+   const THDMII_observables& observables,
+   const Spectrum_generator_settings& spectrum_generator_settings,
+   const FlexibleDecay_settings& flexibledecay_settings,
+   THDMII_decays const * const decays)
 {
    const auto& model = std::get<0>(models);
    const auto& problems = model.get_problems();
@@ -132,7 +150,10 @@ void THDMII_slha_io::fill(
    set_input(model.get_input());
    if (!problems.have_problem()) {
       set_spectrum(models);
-      set_extra(model, scales, observables);
+      set_extra(model, scales, observables, spectrum_generator_settings);
+   }
+   if (decays) {
+      fill_decays_data(*decays, flexibledecay_settings);
    }
 }
 

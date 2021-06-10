@@ -25,7 +25,7 @@
  * which solve EWSB and calculate pole masses and mixings from MSbar
  * parameters.
  *
- * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.6.0 and SARAH 4.14.5 .
  */
 
 #include "SM_mass_eigenstates.hpp"
@@ -1021,8 +1021,7 @@ void CLASSNAME::calculate_MVG()
 double CLASSNAME::get_mass_matrix_Hp() const
 {
 
-   const double mass_matrix_Hp = Re(0.25*(4*mu2 + (2*Lambdax + Sqr(g2))*Sqr(v))
-      );
+   const double mass_matrix_Hp = Re(mu2 + 0.25*(2*Lambdax + Sqr(g2))*Sqr(v));
 
    return mass_matrix_Hp;
 }
@@ -2763,14 +2762,14 @@ std::complex<double> CLASSNAME::self_energy_VWp_1loop(double p ) const
    result += AbsSqr(CpHpconjVWpVP())*B0(Sqr(p),0,Sqr(MHp));
    result += AbsSqr(CpHpconjVWpVZ())*B0(Sqr(p),Sqr(MVZ),Sqr(MHp));
    result += 2*CpconjVWpconjVWpVWpVWp2()*Sqr(MVWp);
-   result += -(AbsSqr(CpconjVWpVPVWp())*(A0(Sqr(MVWp)) + 10*B00(Sqr(p),Sqr(MVWp),0
-      ) - 2*Sqr(MVWp) + 0.6666666666666666*Sqr(p) + B0(Sqr(p),Sqr(MVWp),0)*(Sqr(
-      MVWp) + 4*Sqr(p))));
+   result += -0.3333333333333333*AbsSqr(CpconjVWpVPVWp())*(3*A0(Sqr(MVWp)) + 30*
+      B00(Sqr(p),Sqr(MVWp),0) - 6*Sqr(MVWp) + 2*Sqr(p) + 3*B0(Sqr(p),Sqr(MVWp),0)*
+      (Sqr(MVWp) + 4*Sqr(p)));
    result += -0.5*A0(Sqr(MVZ))*(4*CpconjVWpVWpVZVZ1() + CpconjVWpVWpVZVZ2() +
       CpconjVWpVWpVZVZ3()) + CpconjVWpVWpVZVZ1()*Sqr(MVZ);
-   result += -(AbsSqr(CpconjVWpVWpVZ())*(A0(Sqr(MVWp)) + A0(Sqr(MVZ)) + 10*B00(Sqr
-      (p),Sqr(MVZ),Sqr(MVWp)) - 2*(Sqr(MVWp) + Sqr(MVZ) - 0.3333333333333333*Sqr(p
-      )) + B0(Sqr(p),Sqr(MVZ),Sqr(MVWp))*(Sqr(MVWp) + Sqr(MVZ) + 4*Sqr(p))));
+   result += AbsSqr(CpconjVWpVWpVZ())*(-A0(Sqr(MVWp)) - A0(Sqr(MVZ)) - 10*B00(Sqr(
+      p),Sqr(MVZ),Sqr(MVWp)) + 2*(Sqr(MVWp) + Sqr(MVZ) - 0.3333333333333333*Sqr(p)
+      ) - B0(Sqr(p),Sqr(MVZ),Sqr(MVWp))*(Sqr(MVWp) + Sqr(MVZ) + 4*Sqr(p)));
    result += 3*SUM(gI1,0,2,SUM(gI2,0,2,(AbsSqr(CpbarFdFuconjVWpPL(gI1,gI2)) +
       AbsSqr(CpbarFdFuconjVWpPR(gI1,gI2)))*H0(Sqr(p),Sqr(MFd(gI1)),Sqr(MFu(gI2)))
       + 4*B0(Sqr(p),Sqr(MFd(gI1)),Sqr(MFu(gI2)))*MFd(gI1)*MFu(gI2)*Re(Conj(

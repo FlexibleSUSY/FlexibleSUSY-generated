@@ -20,7 +20,7 @@
 /**
  * @file cxx_qft/E6SSMEFTHiggs_vertices.cpp
  *
- * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.6.0 and SARAH 4.14.5 .
  */
 
 #include "E6SSMEFTHiggs_context_base.hpp"
@@ -39,23 +39,894 @@ namespace flexiblesusy {
 namespace E6SSMEFTHiggs_cxx_diagrams {
 namespace detail {
 
-ChiralVertex unit_charge(const context_base& context)
+MomentumDifferenceVertex VertexImpl<fields::VWm, fields::Ah, typename fields::conj<fields::Hpm>::type>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
 {
-   std::array<int, 1> electron_indices = { 0 };
-   std::array<int, 0> photon_indices = {};
-   std::array<int, 2> indices = concatenate(photon_indices, electron_indices, electron_indices);
+   int minuend_index = 1;
+   int subtrahend_index = 2;
 
-      const int gt1 = indices[0];
+   const int gt1 = indices[0];
    const int gt2 = indices[1];
-   const auto g1 = MODELPARAMETER(g1);
    const auto g2 = MODELPARAMETER(g2);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+   const auto ZA = MODELPARAMETER(ZA);
+   const auto ZP = MODELPARAMETER(ZP);
 
-   const std::complex<double> left = 0.5*KroneckerDelta(gt1,gt2)*(0.7745966692414834*g1*Cos(ThetaW) + g2*Sin(ThetaW));
+   const std::complex<double> result = std::complex<double>(0,-0.5)*g2*(ZA(gt1,0)*ZP(gt2,0) + ZA(gt1,1)*ZP(gt2,1));
 
-   const std::complex<double> right = 0.7745966692414834*g1*Cos(ThetaW)*KroneckerDelta(gt1,gt2);
+   return {result, minuend_index, subtrahend_index};
+}
+
+ChiralVertex VertexImpl<fields::VWm, fields::ChiI, typename fields::bar<fields::ChaI>::type>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   const int gt2 = indices[0];
+   const int gt1 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto ZPI = MODELPARAMETER(ZPI);
+   const auto ZNI = MODELPARAMETER(ZNI);
+   const auto ZMI = MODELPARAMETER(ZMI);
+
+   const std::complex<double> left = -0.7071067811865475*g2*SUM(j1,0,1,Conj(ZPI(gt1,j1))*ZNI(gt2,2 + j1));
+
+   const std::complex<double> right = 0.7071067811865475*g2*SUM(j1,0,1,Conj(ZNI(gt2,j1))*ZMI(gt1,j1));
 
    return {left, right};
+}
+
+ChiralVertex VertexImpl<fields::VWm, fields::ChiP, typename fields::bar<fields::ChaP>::type>::evaluate(
+   const std::array<int, 1>& indices, const context_base& context)
+{
+   const int gt2 = indices[0];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto ZNp = MODELPARAMETER(ZNp);
+
+   const std::complex<double> left = -0.7071067811865475*g2*ZNp(gt2,1);
+
+   const std::complex<double> right = 0.7071067811865475*g2*Conj(ZNp(gt2,0));
+
+   return {left, right};
+}
+
+ChiralVertex VertexImpl<fields::VWm, fields::Chi, typename fields::bar<fields::Cha>::type>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   const int gt2 = indices[0];
+   const int gt1 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto UP = MODELPARAMETER(UP);
+   const auto ZN = MODELPARAMETER(ZN);
+   const auto UM = MODELPARAMETER(UM);
+
+   const std::complex<double> left = g2*Conj(UP(gt1,0))*ZN(gt2,1) - 0.7071067811865475*g2*Conj(UP(gt1,1))*ZN(gt2,3);
+
+   const std::complex<double> right = g2*Conj(ZN(gt2,1))*UM(gt1,0) + 0.7071067811865475*g2*Conj(ZN(gt2,2))*UM(gt1,1);
+
+   return {left, right};
+}
+
+MomentumDifferenceVertex VertexImpl<fields::VWm, fields::hh, typename fields::conj<fields::Hpm>::type>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 1;
+   int subtrahend_index = 2;
+
+   const int gt1 = indices[0];
+   const int gt2 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto ZH = MODELPARAMETER(ZH);
+   const auto ZP = MODELPARAMETER(ZP);
+
+   const std::complex<double> result = -0.5*g2*(ZH(gt1,0)*ZP(gt2,0) - ZH(gt1,1)*ZP(gt2,1));
+
+   return {result, minuend_index, subtrahend_index};
+}
+
+InverseMetricVertex VertexImpl<fields::VWm, fields::hh, typename fields::conj<fields::VWm>::type>::evaluate(
+   const std::array<int, 1>& indices, const context_base& context)
+{
+   const int gt1 = indices[0];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto vd = MODELPARAMETER(vd);
+   const auto vu = MODELPARAMETER(vu);
+   const auto ZH = MODELPARAMETER(ZH);
+
+   const std::complex<double> result = 0.5*Sqr(g2)*(vd*ZH(gt1,0) + vu*ZH(gt1,1));
+
+   return {result};
+}
+
+MomentumDifferenceVertex VertexImpl<fields::VWm, fields::SHI0, typename fields::conj<fields::SHIp>::type>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 1;
+   int subtrahend_index = 2;
+
+   const int gt1 = indices[0];
+   const int gt2 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto UHI0 = MODELPARAMETER(UHI0);
+   const auto UHIp = MODELPARAMETER(UHIp);
+
+   const std::complex<double> result = 0.7071067811865475*g2*(-SUM(j1,0,1,Conj(UHI0(gt1,j1))*UHIp(gt2,j1)) + SUM(j1,0,1,Conj(UHI0(gt1,2 + j1))*UHIp(gt2,2 + j1)));
+
+   return {result, minuend_index, subtrahend_index};
+}
+
+MomentumDifferenceVertex VertexImpl<fields::VWm, fields::SHp0, typename fields::conj<fields::SHpp>::type>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 1;
+   int subtrahend_index = 2;
+
+   const int gt1 = indices[0];
+   const int gt2 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto UHp0 = MODELPARAMETER(UHp0);
+   const auto UHpp = MODELPARAMETER(UHpp);
+
+   const std::complex<double> result = 0.7071067811865475*(-(g2*Conj(UHp0(gt1,0))*UHpp(gt2,0)) + g2*Conj(UHp0(gt1,1))*UHpp(gt2,1));
+
+   return {result, minuend_index, subtrahend_index};
+}
+
+MomentumDifferenceVertex VertexImpl<fields::VWm, fields::Su, typename fields::conj<fields::Sd>::type>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 1;
+   int subtrahend_index = 2;
+
+   const int gt1 = indices[0];
+   const int gt2 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto ZU = MODELPARAMETER(ZU);
+   const auto ZD = MODELPARAMETER(ZD);
+
+   const std::complex<double> result = -0.7071067811865475*g2*SUM(j1,0,2,Conj(ZU(gt1,j1))*ZD(gt2,j1));
+
+   return {result, minuend_index, subtrahend_index};
+}
+
+MomentumDifferenceVertex VertexImpl<fields::VWm, fields::Sv, typename fields::conj<fields::Se>::type>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 1;
+   int subtrahend_index = 2;
+
+   const int gt1 = indices[0];
+   const int gt2 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto ZV = MODELPARAMETER(ZV);
+   const auto ZE = MODELPARAMETER(ZE);
+
+   const std::complex<double> result = -0.7071067811865475*g2*SUM(j1,0,2,Conj(ZV(gt1,j1))*ZE(gt2,j1));
+
+   return {result, minuend_index, subtrahend_index};
+}
+
+InverseMetricVertex VertexImpl<fields::VWm, fields::VZp, typename fields::conj<fields::Hpm>::type>::evaluate(
+   const std::array<int, 1>& indices, const context_base& context)
+{
+   const int gt1 = indices[0];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto vd = MODELPARAMETER(vd);
+   const auto gN = MODELPARAMETER(gN);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto vu = MODELPARAMETER(vu);
+   const auto ZP = MODELPARAMETER(ZP);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+
+   const std::complex<double> result = -0.05*g2*(vd*(9.486832980505138*gN*Cos(ThetaWp) + 7.745966692414834*g1*Sin(ThetaW)*Sin(ThetaWp))*ZP(gt1,0) + 2*vu*(3.1622776601683795*gN*Cos(ThetaWp) - 3.872983346207417*g1*Sin(ThetaW)*Sin(ThetaWp))*ZP(gt1,1));
+
+   return {result};
+}
+
+TripleVectorVertex VertexImpl<fields::VWm, fields::VZp, typename fields::conj<fields::VWm>::type>::evaluate(
+   const std::array<int, 0>& indices, const context_base& context)
+{
+   const auto g2 = MODELPARAMETER(g2);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+
+   const std::complex<double> result = g2*Cos(ThetaW)*Sin(ThetaWp);
+
+   return {result, TripleVectorVertex::odd_permutation{}};
+}
+
+ChiralVertex VertexImpl<fields::VWm, typename fields::bar<fields::ChaI>::type, fields::ChiI>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   const int gt1 = indices[0];
+   const int gt2 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto ZNI = MODELPARAMETER(ZNI);
+   const auto ZMI = MODELPARAMETER(ZMI);
+   const auto ZPI = MODELPARAMETER(ZPI);
+
+   const std::complex<double> left = -0.7071067811865475*g2*SUM(j1,0,1,Conj(ZNI(gt2,j1))*ZMI(gt1,j1));
+
+   const std::complex<double> right = 0.7071067811865475*g2*SUM(j1,0,1,Conj(ZPI(gt1,j1))*ZNI(gt2,2 + j1));
+
+   return {left, right};
+}
+
+ChiralVertex VertexImpl<fields::VWm, typename fields::bar<fields::ChaP>::type, fields::ChiP>::evaluate(
+   const std::array<int, 1>& indices, const context_base& context)
+{
+   const int gt2 = indices[0];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto ZNp = MODELPARAMETER(ZNp);
+
+   const std::complex<double> left = -0.7071067811865475*g2*Conj(ZNp(gt2,0));
+
+   const std::complex<double> right = 0.7071067811865475*g2*ZNp(gt2,1);
+
+   return {left, right};
+}
+
+ChiralVertex VertexImpl<fields::VWm, typename fields::bar<fields::Cha>::type, fields::Chi>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   const int gt1 = indices[0];
+   const int gt2 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto ZN = MODELPARAMETER(ZN);
+   const auto UM = MODELPARAMETER(UM);
+   const auto UP = MODELPARAMETER(UP);
+
+   const std::complex<double> left = -0.5*g2*(2*Conj(ZN(gt2,1))*UM(gt1,0) + 1.4142135623730951*Conj(ZN(gt2,2))*UM(gt1,1));
+
+   const std::complex<double> right = -(g2*Conj(UP(gt1,0))*ZN(gt2,1)) + 0.7071067811865475*g2*Conj(UP(gt1,1))*ZN(gt2,3);
+
+   return {left, right};
+}
+
+MomentumDifferenceVertex VertexImpl<fields::VWm, typename fields::conj<fields::Hpm>::type, fields::Ah>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 2;
+   int subtrahend_index = 1;
+
+   const int gt2 = indices[0];
+   const int gt1 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto ZA = MODELPARAMETER(ZA);
+   const auto ZP = MODELPARAMETER(ZP);
+
+   const std::complex<double> result = std::complex<double>(0,-0.5)*g2*(ZA(gt1,0)*ZP(gt2,0) + ZA(gt1,1)*ZP(gt2,1));
+
+   return {result, minuend_index, subtrahend_index};
+}
+
+MomentumDifferenceVertex VertexImpl<fields::VWm, typename fields::conj<fields::Hpm>::type, fields::hh>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 2;
+   int subtrahend_index = 1;
+
+   const int gt2 = indices[0];
+   const int gt1 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto ZH = MODELPARAMETER(ZH);
+   const auto ZP = MODELPARAMETER(ZP);
+
+   const std::complex<double> result = -0.5*g2*(ZH(gt1,0)*ZP(gt2,0) - ZH(gt1,1)*ZP(gt2,1));
+
+   return {result, minuend_index, subtrahend_index};
+}
+
+InverseMetricVertex VertexImpl<fields::VWm, typename fields::conj<fields::Hpm>::type, fields::VP>::evaluate(
+   const std::array<int, 1>& indices, const context_base& context)
+{
+   const int gt1 = indices[0];
+   const auto g1 = MODELPARAMETER(g1);
+   const auto g2 = MODELPARAMETER(g2);
+   const auto vd = MODELPARAMETER(vd);
+   const auto vu = MODELPARAMETER(vu);
+   const auto ZP = MODELPARAMETER(ZP);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+
+   const std::complex<double> result = -0.3872983346207417*g1*g2*Cos(ThetaW)*(vd*ZP(gt1,0) - vu*ZP(gt1,1));
+
+   return {result};
+}
+
+InverseMetricVertex VertexImpl<fields::VWm, typename fields::conj<fields::Hpm>::type, fields::VZp>::evaluate(
+   const std::array<int, 1>& indices, const context_base& context)
+{
+   const int gt1 = indices[0];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto vd = MODELPARAMETER(vd);
+   const auto gN = MODELPARAMETER(gN);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto vu = MODELPARAMETER(vu);
+   const auto ZP = MODELPARAMETER(ZP);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+
+   const std::complex<double> result = -0.05*g2*(vd*(9.486832980505138*gN*Cos(ThetaWp) + 7.745966692414834*g1*Sin(ThetaW)*Sin(ThetaWp))*ZP(gt1,0) + 2*vu*(3.1622776601683795*gN*Cos(ThetaWp) - 3.872983346207417*g1*Sin(ThetaW)*Sin(ThetaWp))*ZP(gt1,1));
+
+   return {result};
+}
+
+InverseMetricVertex VertexImpl<fields::VWm, typename fields::conj<fields::Hpm>::type, fields::VZ>::evaluate(
+   const std::array<int, 1>& indices, const context_base& context)
+{
+   const int gt1 = indices[0];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto vd = MODELPARAMETER(vd);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto gN = MODELPARAMETER(gN);
+   const auto vu = MODELPARAMETER(vu);
+   const auto ZP = MODELPARAMETER(ZP);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+
+   const std::complex<double> result = 0.05*g2*(vd*(7.745966692414834*g1*Cos(ThetaWp)*Sin(ThetaW) - 9.486832980505138*gN*Sin(ThetaWp))*ZP(gt1,0) - 2*vu*(3.872983346207417*g1*Cos(ThetaWp)*Sin(ThetaW) + 3.1622776601683795*gN*Sin(ThetaWp))*ZP(gt1,1));
+
+   return {result};
+}
+
+MomentumDifferenceVertex VertexImpl<fields::VWm, typename fields::conj<fields::Sd>::type, fields::Su>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 2;
+   int subtrahend_index = 1;
+
+   const int gt2 = indices[0];
+   const int gt1 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto ZU = MODELPARAMETER(ZU);
+   const auto ZD = MODELPARAMETER(ZD);
+
+   const std::complex<double> result = -0.7071067811865475*g2*SUM(j1,0,2,Conj(ZU(gt1,j1))*ZD(gt2,j1));
+
+   return {result, minuend_index, subtrahend_index};
+}
+
+MomentumDifferenceVertex VertexImpl<fields::VWm, typename fields::conj<fields::Se>::type, fields::Sv>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 2;
+   int subtrahend_index = 1;
+
+   const int gt2 = indices[0];
+   const int gt1 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto ZV = MODELPARAMETER(ZV);
+   const auto ZE = MODELPARAMETER(ZE);
+
+   const std::complex<double> result = -0.7071067811865475*g2*SUM(j1,0,2,Conj(ZV(gt1,j1))*ZE(gt2,j1));
+
+   return {result, minuend_index, subtrahend_index};
+}
+
+MomentumDifferenceVertex VertexImpl<fields::VWm, typename fields::conj<fields::SHIp>::type, fields::SHI0>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 2;
+   int subtrahend_index = 1;
+
+   const int gt2 = indices[0];
+   const int gt1 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto UHI0 = MODELPARAMETER(UHI0);
+   const auto UHIp = MODELPARAMETER(UHIp);
+
+   const std::complex<double> result = 0.7071067811865475*g2*(-SUM(j1,0,1,Conj(UHI0(gt1,j1))*UHIp(gt2,j1)) + SUM(j1,0,1,Conj(UHI0(gt1,2 + j1))*UHIp(gt2,2 + j1)));
+
+   return {result, minuend_index, subtrahend_index};
+}
+
+MomentumDifferenceVertex VertexImpl<fields::VWm, typename fields::conj<fields::SHpp>::type, fields::SHp0>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 2;
+   int subtrahend_index = 1;
+
+   const int gt2 = indices[0];
+   const int gt1 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto UHp0 = MODELPARAMETER(UHp0);
+   const auto UHpp = MODELPARAMETER(UHpp);
+
+   const std::complex<double> result = 0.7071067811865475*(-(g2*Conj(UHp0(gt1,0))*UHpp(gt2,0)) + g2*Conj(UHp0(gt1,1))*UHpp(gt2,1));
+
+   return {result, minuend_index, subtrahend_index};
+}
+
+InverseMetricVertex VertexImpl<fields::VZ, fields::hh, fields::VZ>::evaluate(
+   const std::array<int, 1>& indices, const context_base& context)
+{
+   const int gt1 = indices[0];
+   const auto vd = MODELPARAMETER(vd);
+   const auto g2 = MODELPARAMETER(g2);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto gN = MODELPARAMETER(gN);
+   const auto vu = MODELPARAMETER(vu);
+   const auto vs = MODELPARAMETER(vs);
+   const auto ZH = MODELPARAMETER(ZH);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+
+   const std::complex<double> result = 0.05*(vd*(-14.696938456699067*g1*gN*Cos(ThetaWp)*Sin(ThetaW)*Sin(ThetaWp) + 10*Sqr(g2)*Sqr(Cos(ThetaW))*Sqr(Cos(ThetaWp)) + Cos(ThetaW)*(-18.973665961010276*g2*gN*Cos(ThetaWp)*Sin(ThetaWp) + 15.491933384829668*g1*g2*Sin(ThetaW)*Sqr(Cos(ThetaWp))) + 6*Sqr(g1)*Sqr(Cos(ThetaWp))*Sqr(Sin(ThetaW)) + 9*Sqr(gN)*Sqr(Sin(ThetaWp)))*ZH(gt1,0) + 2*vu*(3.1622776601683795*g2*gN*Cos(ThetaW)*Sin(2*ThetaWp) + g1*Sin(ThetaW)*(7.745966692414834*g2*Cos(ThetaW) + 3*g1*Sin(ThetaW))*Sqr(Cos(ThetaWp)) + 5*Sqr(g2)*Sqr(Cos(ThetaW))*Sqr(Cos(ThetaWp)) + gN*(2.449489742783178*g1*Sin(ThetaW)*Sin(2*ThetaWp) + 2*gN*Sqr(Sin(ThetaWp))))*ZH(gt1,1) + 25*vs*Sqr(gN)*Sqr(Sin(ThetaWp))*ZH(gt1,2));
+
+   return {result};
+}
+
+InverseMetricVertex VertexImpl<fields::VZ, fields::Hpm, typename fields::conj<fields::VWm>::type>::evaluate(
+   const std::array<int, 1>& indices, const context_base& context)
+{
+   const int gt1 = indices[0];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto vd = MODELPARAMETER(vd);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto gN = MODELPARAMETER(gN);
+   const auto vu = MODELPARAMETER(vu);
+   const auto ZP = MODELPARAMETER(ZP);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+
+   const std::complex<double> result = 0.05*g2*(vd*(7.745966692414834*g1*Cos(ThetaWp)*Sin(ThetaW) - 9.486832980505138*gN*Sin(ThetaWp))*ZP(gt1,0) - 2*vu*(3.872983346207417*g1*Cos(ThetaWp)*Sin(ThetaW) + 3.1622776601683795*gN*Sin(ThetaWp))*ZP(gt1,1));
+
+   return {result};
+}
+
+MomentumDifferenceVertex VertexImpl<fields::VZ, fields::SHI0, typename fields::conj<fields::SHI0>::type>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 1;
+   int subtrahend_index = 2;
+
+   const int gt1 = indices[0];
+   const int gt2 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto gN = MODELPARAMETER(gN);
+   const auto UHI0 = MODELPARAMETER(UHI0);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+
+   const std::complex<double> result = 0.05*((-10*g2*Cos(ThetaW)*Cos(ThetaWp) - 7.745966692414834*g1*Cos(ThetaWp)*Sin(ThetaW) + 9.486832980505138*gN*Sin(ThetaWp))*SUM(j1,0,1,Conj(UHI0(gt1,j1))*UHI0(gt2,j1)) - 2*(5*g2*Cos(ThetaW)*Cos(ThetaWp) + 3.872983346207417*g1*Cos(ThetaWp)*Sin(ThetaW) + 3.1622776601683795*gN*Sin(ThetaWp))*SUM(j1,0,1,Conj(UHI0(gt1,2 + j1))*UHI0(gt2,2 + j1)));
+
+   return {result, minuend_index, subtrahend_index};
+}
+
+MomentumDifferenceVertex VertexImpl<fields::VZ, fields::SHIp, typename fields::conj<fields::SHIp>::type>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 1;
+   int subtrahend_index = 2;
+
+   const int gt1 = indices[0];
+   const int gt2 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto gN = MODELPARAMETER(gN);
+   const auto UHIp = MODELPARAMETER(UHIp);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+
+   const std::complex<double> result = 0.05*((10*g2*Cos(ThetaW)*Cos(ThetaWp) - 7.745966692414834*g1*Cos(ThetaWp)*Sin(ThetaW) + 9.486832980505138*gN*Sin(ThetaWp))*SUM(j1,0,1,Conj(UHIp(gt1,j1))*UHIp(gt2,j1)) + 2*(5*g2*Cos(ThetaW)*Cos(ThetaWp) - 3.872983346207417*g1*Cos(ThetaWp)*Sin(ThetaW) - 3.1622776601683795*gN*Sin(ThetaWp))*SUM(j1,0,1,Conj(UHIp(gt1,2 + j1))*UHIp(gt2,2 + j1)));
+
+   return {result, minuend_index, subtrahend_index};
+}
+
+MomentumDifferenceVertex VertexImpl<fields::VZ, fields::SHp0, typename fields::conj<fields::SHp0>::type>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 1;
+   int subtrahend_index = 2;
+
+   const int gt1 = indices[0];
+   const int gt2 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto gN = MODELPARAMETER(gN);
+   const auto UHp0 = MODELPARAMETER(UHp0);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+
+   const std::complex<double> result = -0.1*(5*g2*Cos(ThetaW)*Cos(ThetaWp) + 3.872983346207417*g1*Cos(ThetaWp)*Sin(ThetaW) + 3.1622776601683795*gN*Sin(ThetaWp))*(Conj(UHp0(gt1,0))*UHp0(gt2,0) + Conj(UHp0(gt1,1))*UHp0(gt2,1));
+
+   return {result, minuend_index, subtrahend_index};
+}
+
+MomentumDifferenceVertex VertexImpl<fields::VZ, fields::SHpp, typename fields::conj<fields::SHpp>::type>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 1;
+   int subtrahend_index = 2;
+
+   const int gt1 = indices[0];
+   const int gt2 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto gN = MODELPARAMETER(gN);
+   const auto UHpp = MODELPARAMETER(UHpp);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+
+   const std::complex<double> result = 0.1*(5*g2*Cos(ThetaW)*Cos(ThetaWp) - 3.872983346207417*g1*Cos(ThetaWp)*Sin(ThetaW) - 3.1622776601683795*gN*Sin(ThetaWp))*(Conj(UHpp(gt1,0))*UHpp(gt2,0) + Conj(UHpp(gt1,1))*UHpp(gt2,1));
+
+   return {result, minuend_index, subtrahend_index};
+}
+
+MomentumDifferenceVertex VertexImpl<fields::VZ, fields::SSI0, typename fields::conj<fields::SSI0>::type>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 1;
+   int subtrahend_index = 2;
+
+   const int gt1 = indices[0];
+   const int gt2 = indices[1];
+   const auto gN = MODELPARAMETER(gN);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+
+   const std::complex<double> result = -0.7905694150420949*gN*KroneckerDelta(gt1,gt2)*Sin(ThetaWp);
+
+   return {result, minuend_index, subtrahend_index};
+}
+
+MomentumDifferenceVertex VertexImpl<fields::VZ, fields::Su, typename fields::conj<fields::Su>::type>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 1;
+   int subtrahend_index = 2;
+
+   const int gt1 = indices[0];
+   const int gt2 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto gN = MODELPARAMETER(gN);
+   const auto ZU = MODELPARAMETER(ZU);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+
+   const std::complex<double> result = 0.016666666666666666*(-((30*g2*Cos(ThetaW)*Cos(ThetaWp) - 7.745966692414834*g1*Cos(ThetaWp)*Sin(ThetaW) + 9.486832980505138*gN*Sin(ThetaWp))*SUM(j1,0,2,Conj(ZU(gt1,j1))*ZU(gt2,j1))) + (30.983866769659336*g1*Cos(ThetaWp)*Sin(ThetaW) + 9.486832980505138*gN*Sin(ThetaWp))*SUM(j1,0,2,Conj(ZU(gt1,3 + j1))*ZU(gt2,3 + j1)));
+
+   return {result, minuend_index, subtrahend_index};
+}
+
+MomentumDifferenceVertex VertexImpl<fields::VZ, fields::Sv, typename fields::conj<fields::Sv>::type>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 1;
+   int subtrahend_index = 2;
+
+   const int gt1 = indices[0];
+   const int gt2 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto gN = MODELPARAMETER(gN);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+
+   const std::complex<double> result = -0.1*KroneckerDelta(gt1,gt2)*(5*g2*Cos(ThetaW)*Cos(ThetaWp) + 3.872983346207417*g1*Cos(ThetaWp)*Sin(ThetaW) + 3.1622776601683795*gN*Sin(ThetaWp));
+
+   return {result, minuend_index, subtrahend_index};
+}
+
+InverseMetricVertex VertexImpl<fields::VZ, fields::VZp, fields::hh>::evaluate(
+   const std::array<int, 1>& indices, const context_base& context)
+{
+   const int gt1 = indices[0];
+   const auto vd = MODELPARAMETER(vd);
+   const auto g2 = MODELPARAMETER(g2);
+   const auto gN = MODELPARAMETER(gN);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto vu = MODELPARAMETER(vu);
+   const auto vs = MODELPARAMETER(vs);
+   const auto ZH = MODELPARAMETER(ZH);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+
+   const std::complex<double> result = 0.05*(-(vd*(9.486832980505138*g2*gN*Cos(ThetaW)*Cos(2*ThetaWp) - 9*Cos(ThetaWp)*Sin(ThetaWp)*Sqr(gN) + 5*Sin(2*ThetaWp)*Sqr(g2)*Sqr(Cos(ThetaW)) + 7.348469228349534*g1*gN*Sin(ThetaW)*Sqr(Cos(ThetaWp)) + g1*(3.872983346207417*g2*Sin(2*ThetaW)*Sin(2*ThetaWp) + 3*g1*Sin(2*ThetaWp)*Sqr(Sin(ThetaW)) - 7.348469228349534*gN*Sin(ThetaW)*Sqr(Sin(ThetaWp))))*ZH(gt1,0)) + vu*(6.324555320336759*g2*gN*Cos(ThetaW)*Cos(2*ThetaWp) + 4*Cos(ThetaWp)*Sin(ThetaWp)*Sqr(gN) - 5*Sin(2*ThetaWp)*Sqr(g2)*Sqr(Cos(ThetaW)) + 4.898979485566356*g1*gN*Sin(ThetaW)*Sqr(Cos(ThetaWp)) - g1*(3.872983346207417*g2*Sin(2*ThetaW)*Sin(2*ThetaWp) + 3*g1*Sin(2*ThetaWp)*Sqr(Sin(ThetaW)) + 4.898979485566356*gN*Sin(ThetaW)*Sqr(Sin(ThetaWp))))*ZH(gt1,1) + 25*vs*Cos(ThetaWp)*Sin(ThetaWp)*Sqr(gN)*ZH(gt1,2));
+
+   return {result};
+}
+
+ChiralVertex VertexImpl<fields::VZ, typename fields::bar<fields::ChaI>::type, fields::ChaI>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   const int gt1 = indices[0];
+   const int gt2 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto gN = MODELPARAMETER(gN);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+
+   const std::complex<double> left = 0.05*KroneckerDelta(gt1,gt2)*(10*g2*Cos(ThetaW)*Cos(ThetaWp) - 7.745966692414834*g1*Cos(ThetaWp)*Sin(ThetaW) + 9.486832980505138*gN*Sin(ThetaWp));
+
+   const std::complex<double> right = 0.1*KroneckerDelta(gt1,gt2)*(5*g2*Cos(ThetaW)*Cos(ThetaWp) - 3.872983346207417*g1*Cos(ThetaWp)*Sin(ThetaW) - 3.1622776601683795*gN*Sin(ThetaWp));
+
+   return {left, right};
+}
+
+ChiralVertex VertexImpl<fields::VZ, typename fields::bar<fields::ChaP>::type, fields::ChaP>::evaluate(
+   const std::array<int, 0>& indices, const context_base& context)
+{
+   const auto g2 = MODELPARAMETER(g2);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto gN = MODELPARAMETER(gN);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+
+   const std::complex<double> left = 0.1*(5*g2*Cos(ThetaW)*Cos(ThetaWp) - 3.872983346207417*g1*Cos(ThetaWp)*Sin(ThetaW) - 3.1622776601683795*gN*Sin(ThetaWp));
+
+   const std::complex<double> right = 0.1*(5*g2*Cos(ThetaW)*Cos(ThetaWp) - 3.872983346207417*g1*Cos(ThetaWp)*Sin(ThetaW) - 3.1622776601683795*gN*Sin(ThetaWp));
+
+   return {left, right};
+}
+
+ChiralVertex VertexImpl<fields::VZ, typename fields::bar<fields::Cha>::type, fields::Cha>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   const int gt1 = indices[0];
+   const int gt2 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto gN = MODELPARAMETER(gN);
+   const auto UM = MODELPARAMETER(UM);
+   const auto UP = MODELPARAMETER(UP);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+
+   const std::complex<double> left = g2*Conj(UM(gt2,0))*Cos(ThetaW)*Cos(ThetaWp)*UM(gt1,0) + 0.05*Conj(UM(gt2,1))*(10*g2*Cos(ThetaW)*Cos(ThetaWp) - 7.745966692414834*g1*Cos(ThetaWp)*Sin(ThetaW) + 9.486832980505138*gN*Sin(ThetaWp))*UM(gt1,1);
+
+   const std::complex<double> right = g2*Conj(UP(gt1,0))*Cos(ThetaW)*Cos(ThetaWp)*UP(gt2,0) + 0.1*Conj(UP(gt1,1))*(5*g2*Cos(ThetaW)*Cos(ThetaWp) - 3.872983346207417*g1*Cos(ThetaWp)*Sin(ThetaW) - 3.1622776601683795*gN*Sin(ThetaWp))*UP(gt2,1);
+
+   return {left, right};
+}
+
+ChiralVertex VertexImpl<fields::VZ, typename fields::bar<fields::FDX>::type, fields::FDX>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   const int gt1 = indices[0];
+   const int gt2 = indices[1];
+   const auto g1 = MODELPARAMETER(g1);
+   const auto gN = MODELPARAMETER(gN);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+
+   const std::complex<double> left = KroneckerDelta(gt1,gt2)*(-0.2581988897471611*g1*Cos(ThetaWp)*Sin(ThetaW) + 0.31622776601683794*gN*Sin(ThetaWp));
+
+   const std::complex<double> right = -0.016666666666666666*KroneckerDelta(gt1,gt2)*(15.491933384829668*g1*Cos(ThetaWp)*Sin(ThetaW) + 28.460498941515414*gN*Sin(ThetaWp));
+
+   return {left, right};
+}
+
+MomentumDifferenceVertex VertexImpl<fields::VZ, typename fields::conj<fields::Hpm>::type, fields::Hpm>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 2;
+   int subtrahend_index = 1;
+
+   const int gt2 = indices[0];
+   const int gt1 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto gN = MODELPARAMETER(gN);
+   const auto ZP = MODELPARAMETER(ZP);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+
+   const std::complex<double> result = 0.05*((10*g2*Cos(ThetaW)*Cos(ThetaWp) - 7.745966692414834*g1*Cos(ThetaWp)*Sin(ThetaW) + 9.486832980505138*gN*Sin(ThetaWp))*ZP(gt1,0)*ZP(gt2,0) + 2*(5*g2*Cos(ThetaW)*Cos(ThetaWp) - 3.872983346207417*g1*Cos(ThetaWp)*Sin(ThetaW) - 3.1622776601683795*gN*Sin(ThetaWp))*ZP(gt1,1)*ZP(gt2,1));
+
+   return {result, minuend_index, subtrahend_index};
+}
+
+InverseMetricVertex VertexImpl<fields::VZ, typename fields::conj<fields::Hpm>::type, fields::VWm>::evaluate(
+   const std::array<int, 1>& indices, const context_base& context)
+{
+   const int gt1 = indices[0];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto vd = MODELPARAMETER(vd);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto gN = MODELPARAMETER(gN);
+   const auto vu = MODELPARAMETER(vu);
+   const auto ZP = MODELPARAMETER(ZP);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+
+   const std::complex<double> result = 0.05*g2*(vd*(7.745966692414834*g1*Cos(ThetaWp)*Sin(ThetaW) - 9.486832980505138*gN*Sin(ThetaWp))*ZP(gt1,0) - 2*vu*(3.872983346207417*g1*Cos(ThetaWp)*Sin(ThetaW) + 3.1622776601683795*gN*Sin(ThetaWp))*ZP(gt1,1));
+
+   return {result};
+}
+
+MomentumDifferenceVertex VertexImpl<fields::VZ, typename fields::conj<fields::Sd>::type, fields::Sd>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 2;
+   int subtrahend_index = 1;
+
+   const int gt2 = indices[0];
+   const int gt1 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto gN = MODELPARAMETER(gN);
+   const auto ZD = MODELPARAMETER(ZD);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+
+   const std::complex<double> result = 0.016666666666666666*((30*g2*Cos(ThetaW)*Cos(ThetaWp) + 7.745966692414834*g1*Cos(ThetaWp)*Sin(ThetaW) - 9.486832980505138*gN*Sin(ThetaWp))*SUM(j1,0,2,Conj(ZD(gt1,j1))*ZD(gt2,j1)) + 2*(-7.745966692414834*g1*Cos(ThetaWp)*Sin(ThetaW) + 9.486832980505138*gN*Sin(ThetaWp))*SUM(j1,0,2,Conj(ZD(gt1,3 + j1))*ZD(gt2,3 + j1)));
+
+   return {result, minuend_index, subtrahend_index};
+}
+
+MomentumDifferenceVertex VertexImpl<fields::VZ, typename fields::conj<fields::SDX>::type, fields::SDX>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 2;
+   int subtrahend_index = 1;
+
+   const int gt2 = indices[0];
+   const int gt1 = indices[1];
+   const auto g1 = MODELPARAMETER(g1);
+   const auto gN = MODELPARAMETER(gN);
+   const auto ZDX = MODELPARAMETER(ZDX);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+
+   const std::complex<double> result = 0.016666666666666666*(-2*(7.745966692414834*g1*Cos(ThetaWp)*Sin(ThetaW) - 9.486832980505138*gN*Sin(ThetaWp))*SUM(j1,0,2,Conj(ZDX(gt1,j1))*ZDX(gt2,j1)) - (15.491933384829668*g1*Cos(ThetaWp)*Sin(ThetaW) + 28.460498941515414*gN*Sin(ThetaWp))*SUM(j1,0,2,Conj(ZDX(gt1,3 + j1))*ZDX(gt2,3 + j1)));
+
+   return {result, minuend_index, subtrahend_index};
+}
+
+MomentumDifferenceVertex VertexImpl<fields::VZ, typename fields::conj<fields::Se>::type, fields::Se>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 2;
+   int subtrahend_index = 1;
+
+   const int gt2 = indices[0];
+   const int gt1 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto gN = MODELPARAMETER(gN);
+   const auto ZE = MODELPARAMETER(ZE);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+
+   const std::complex<double> result = 0.05*(2*(5*g2*Cos(ThetaW)*Cos(ThetaWp) - 3.872983346207417*g1*Cos(ThetaWp)*Sin(ThetaW) - 3.1622776601683795*gN*Sin(ThetaWp))*SUM(j1,0,2,Conj(ZE(gt1,j1))*ZE(gt2,j1)) + (-15.491933384829668*g1*Cos(ThetaWp)*Sin(ThetaW) + 3.1622776601683795*gN*Sin(ThetaWp))*SUM(j1,0,2,Conj(ZE(gt1,3 + j1))*ZE(gt2,3 + j1)));
+
+   return {result, minuend_index, subtrahend_index};
+}
+
+MomentumDifferenceVertex VertexImpl<fields::VZ, typename fields::conj<fields::SHI0>::type, fields::SHI0>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 2;
+   int subtrahend_index = 1;
+
+   const int gt2 = indices[0];
+   const int gt1 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto gN = MODELPARAMETER(gN);
+   const auto UHI0 = MODELPARAMETER(UHI0);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+
+   const std::complex<double> result = 0.05*((-10*g2*Cos(ThetaW)*Cos(ThetaWp) - 7.745966692414834*g1*Cos(ThetaWp)*Sin(ThetaW) + 9.486832980505138*gN*Sin(ThetaWp))*SUM(j1,0,1,Conj(UHI0(gt1,j1))*UHI0(gt2,j1)) - 2*(5*g2*Cos(ThetaW)*Cos(ThetaWp) + 3.872983346207417*g1*Cos(ThetaWp)*Sin(ThetaW) + 3.1622776601683795*gN*Sin(ThetaWp))*SUM(j1,0,1,Conj(UHI0(gt1,2 + j1))*UHI0(gt2,2 + j1)));
+
+   return {result, minuend_index, subtrahend_index};
+}
+
+MomentumDifferenceVertex VertexImpl<fields::VZ, typename fields::conj<fields::SHIp>::type, fields::SHIp>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 2;
+   int subtrahend_index = 1;
+
+   const int gt2 = indices[0];
+   const int gt1 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto gN = MODELPARAMETER(gN);
+   const auto UHIp = MODELPARAMETER(UHIp);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+
+   const std::complex<double> result = 0.05*((10*g2*Cos(ThetaW)*Cos(ThetaWp) - 7.745966692414834*g1*Cos(ThetaWp)*Sin(ThetaW) + 9.486832980505138*gN*Sin(ThetaWp))*SUM(j1,0,1,Conj(UHIp(gt1,j1))*UHIp(gt2,j1)) + 2*(5*g2*Cos(ThetaW)*Cos(ThetaWp) - 3.872983346207417*g1*Cos(ThetaWp)*Sin(ThetaW) - 3.1622776601683795*gN*Sin(ThetaWp))*SUM(j1,0,1,Conj(UHIp(gt1,2 + j1))*UHIp(gt2,2 + j1)));
+
+   return {result, minuend_index, subtrahend_index};
+}
+
+MomentumDifferenceVertex VertexImpl<fields::VZ, typename fields::conj<fields::SHp0>::type, fields::SHp0>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 2;
+   int subtrahend_index = 1;
+
+   const int gt2 = indices[0];
+   const int gt1 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto gN = MODELPARAMETER(gN);
+   const auto UHp0 = MODELPARAMETER(UHp0);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+
+   const std::complex<double> result = -0.1*(5*g2*Cos(ThetaW)*Cos(ThetaWp) + 3.872983346207417*g1*Cos(ThetaWp)*Sin(ThetaW) + 3.1622776601683795*gN*Sin(ThetaWp))*(Conj(UHp0(gt1,0))*UHp0(gt2,0) + Conj(UHp0(gt1,1))*UHp0(gt2,1));
+
+   return {result, minuend_index, subtrahend_index};
+}
+
+MomentumDifferenceVertex VertexImpl<fields::VZ, typename fields::conj<fields::SHpp>::type, fields::SHpp>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 2;
+   int subtrahend_index = 1;
+
+   const int gt2 = indices[0];
+   const int gt1 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto gN = MODELPARAMETER(gN);
+   const auto UHpp = MODELPARAMETER(UHpp);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+
+   const std::complex<double> result = 0.1*(5*g2*Cos(ThetaW)*Cos(ThetaWp) - 3.872983346207417*g1*Cos(ThetaWp)*Sin(ThetaW) - 3.1622776601683795*gN*Sin(ThetaWp))*(Conj(UHpp(gt1,0))*UHpp(gt2,0) + Conj(UHpp(gt1,1))*UHpp(gt2,1));
+
+   return {result, minuend_index, subtrahend_index};
+}
+
+MomentumDifferenceVertex VertexImpl<fields::VZ, typename fields::conj<fields::SSI0>::type, fields::SSI0>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 2;
+   int subtrahend_index = 1;
+
+   const int gt2 = indices[0];
+   const int gt1 = indices[1];
+   const auto gN = MODELPARAMETER(gN);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+
+   const std::complex<double> result = -0.7905694150420949*gN*KroneckerDelta(gt1,gt2)*Sin(ThetaWp);
+
+   return {result, minuend_index, subtrahend_index};
+}
+
+MomentumDifferenceVertex VertexImpl<fields::VZ, typename fields::conj<fields::Su>::type, fields::Su>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 2;
+   int subtrahend_index = 1;
+
+   const int gt2 = indices[0];
+   const int gt1 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto gN = MODELPARAMETER(gN);
+   const auto ZU = MODELPARAMETER(ZU);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+
+   const std::complex<double> result = 0.016666666666666666*(-((30*g2*Cos(ThetaW)*Cos(ThetaWp) - 7.745966692414834*g1*Cos(ThetaWp)*Sin(ThetaW) + 9.486832980505138*gN*Sin(ThetaWp))*SUM(j1,0,2,Conj(ZU(gt1,j1))*ZU(gt2,j1))) + (30.983866769659336*g1*Cos(ThetaWp)*Sin(ThetaW) + 9.486832980505138*gN*Sin(ThetaWp))*SUM(j1,0,2,Conj(ZU(gt1,3 + j1))*ZU(gt2,3 + j1)));
+
+   return {result, minuend_index, subtrahend_index};
+}
+
+MomentumDifferenceVertex VertexImpl<fields::VZ, typename fields::conj<fields::Sv>::type, fields::Sv>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 2;
+   int subtrahend_index = 1;
+
+   const int gt2 = indices[0];
+   const int gt1 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto gN = MODELPARAMETER(gN);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+
+   const std::complex<double> result = -0.1*KroneckerDelta(gt1,gt2)*(5*g2*Cos(ThetaW)*Cos(ThetaWp) + 3.872983346207417*g1*Cos(ThetaWp)*Sin(ThetaW) + 3.1622776601683795*gN*Sin(ThetaWp));
+
+   return {result, minuend_index, subtrahend_index};
 }
 
 } // namespace detail

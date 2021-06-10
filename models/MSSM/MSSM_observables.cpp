@@ -32,7 +32,7 @@
 #include "lowe.h"
 #include "physical_input.hpp"
 
-#ifdef ENABLE_GM2Calc
+#ifdef ENABLE_GM2CALC
 #include "gm2calc_interface.hpp"
 #endif
 
@@ -122,7 +122,7 @@ void MSSM_observables::set(const Eigen::ArrayXd& vec)
 
 }
 
-MSSM_observables calculate_observables(MSSM_mass_eigenstates& model,
+MSSM_observables calculate_observables(const MSSM_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input,
                                               double scale)
@@ -132,19 +132,25 @@ MSSM_observables calculate_observables(MSSM_mass_eigenstates& model,
    if (scale > 0.) {
       try {
          model_at_scale.run_to(scale);
+      } catch (const NonPerturbativeRunningError& e) {
+         MSSM_observables observables;
+         observables.problems.general.flag_non_perturbative_running(scale);
+         return observables;
       } catch (const Error& e) {
-         model.get_problems().flag_thrown(e.what_detailed());
-         return MSSM_observables();
+         MSSM_observables observables;
+         observables.problems.general.flag_thrown(e.what());
+         return observables;
       } catch (const std::exception& e) {
-         model.get_problems().flag_thrown(e.what());
-         return MSSM_observables();
+         MSSM_observables observables;
+         observables.problems.general.flag_thrown(e.what());
+         return observables;
       }
    }
 
    return calculate_observables(model_at_scale, qedqcd, physical_input);
 }
 
-MSSM_observables calculate_observables(MSSM_mass_eigenstates& model,
+MSSM_observables calculate_observables(const MSSM_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input)
 {
@@ -157,10 +163,12 @@ MSSM_observables calculate_observables(MSSM_mass_eigenstates& model,
       observables.EDM1(Fe, 1) = MSSM_edm::calculate_edm_Fe(1, MODEL);
       observables.EDM1(Fe, 2) = MSSM_edm::calculate_edm_Fe(2, MODEL);
       observables.LToLGamma1(Fe, 1, Fe, 0, VP) = MSSM_l_to_lgamma::calculate_Fe_to_Fe_VP(1, 0, MODEL, qedqcd, physical_input);
+   } catch (const NonPerturbativeRunningError& e) {
+      observables.problems.general.flag_non_perturbative_running(e.get_scale());
    } catch (const Error& e) {
-      model.get_problems().flag_thrown(e.what_detailed());
+      observables.problems.general.flag_thrown(e.what());
    } catch (const std::exception& e) {
-      model.get_problems().flag_thrown(e.what());
+      observables.problems.general.flag_thrown(e.what());
    }
 
    return observables;

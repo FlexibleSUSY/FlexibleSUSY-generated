@@ -32,7 +32,7 @@
 #include "lowe.h"
 #include "physical_input.hpp"
 
-#ifdef ENABLE_GM2Calc
+#ifdef ENABLE_GM2CALC
 #include "gm2calc_interface.hpp"
 #endif
 
@@ -102,7 +102,7 @@ void MSSMEFTHiggs_observables::set(const Eigen::ArrayXd& vec)
 
 }
 
-MSSMEFTHiggs_observables calculate_observables(MSSMEFTHiggs_mass_eigenstates& model,
+MSSMEFTHiggs_observables calculate_observables(const MSSMEFTHiggs_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input,
                                               double scale)
@@ -112,19 +112,25 @@ MSSMEFTHiggs_observables calculate_observables(MSSMEFTHiggs_mass_eigenstates& mo
    if (scale > 0.) {
       try {
          model_at_scale.run_to(scale);
+      } catch (const NonPerturbativeRunningError& e) {
+         MSSMEFTHiggs_observables observables;
+         observables.problems.general.flag_non_perturbative_running(scale);
+         return observables;
       } catch (const Error& e) {
-         model.get_problems().flag_thrown(e.what_detailed());
-         return MSSMEFTHiggs_observables();
+         MSSMEFTHiggs_observables observables;
+         observables.problems.general.flag_thrown(e.what());
+         return observables;
       } catch (const std::exception& e) {
-         model.get_problems().flag_thrown(e.what());
-         return MSSMEFTHiggs_observables();
+         MSSMEFTHiggs_observables observables;
+         observables.problems.general.flag_thrown(e.what());
+         return observables;
       }
    }
 
    return calculate_observables(model_at_scale, qedqcd, physical_input);
 }
 
-MSSMEFTHiggs_observables calculate_observables(MSSMEFTHiggs_mass_eigenstates& model,
+MSSMEFTHiggs_observables calculate_observables(const MSSMEFTHiggs_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input)
 {
@@ -133,10 +139,12 @@ MSSMEFTHiggs_observables calculate_observables(MSSMEFTHiggs_mass_eigenstates& mo
    try {
       
       observables.AMU = MSSMEFTHiggs_a_muon::calculate_a_muon(MODEL, qedqcd);
+   } catch (const NonPerturbativeRunningError& e) {
+      observables.problems.general.flag_non_perturbative_running(e.get_scale());
    } catch (const Error& e) {
-      model.get_problems().flag_thrown(e.what_detailed());
+      observables.problems.general.flag_thrown(e.what());
    } catch (const std::exception& e) {
-      model.get_problems().flag_thrown(e.what());
+      observables.problems.general.flag_thrown(e.what());
    }
 
    return observables;

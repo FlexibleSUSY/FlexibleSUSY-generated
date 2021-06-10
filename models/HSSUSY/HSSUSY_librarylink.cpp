@@ -32,12 +32,18 @@
 #endif
 
 #include "array_view.hpp"
+#include "bvp_solver_problems_format_mathlink.hpp"
 #include "error.hpp"
+#include "for_each.hpp"
+#include "observable_problems_format_mathlink.hpp"
 #include "physical_input.hpp"
+#include "problems_format_mathlink.hpp"
 #include "slha_io.hpp"
 #include "spectrum_generator_settings.hpp"
+#include "decays/flexibledecay_settings.hpp"
 #include "standard_model_two_scale_model.hpp"
 #include "lowe.h"
+
 
 #include <mathlink.h>
 #include "mathlink_utils.hpp"
@@ -52,9 +58,6 @@
 #include <string>
 #include <tuple>
 #include <utility>
-
-#include <boost/fusion/include/for_each.hpp>
-#include <boost/fusion/adapted/std_tuple.hpp>
 
 #define INPUTPARAMETER(p) input.p
 #define MODELPARAMETER(p) model.get_##p()
@@ -146,7 +149,7 @@ public:
    virtual void put_model_spectra(MLINK link) const = 0;
 
    virtual const Spectrum_generator_problems& get_problems() const = 0;
-   virtual void fill_slha_io(HSSUSY_slha_io&) const = 0;
+   virtual void fill_slha_io(HSSUSY_slha_io&, const Spectrum_generator_settings&, const FlexibleDecay_settings&) const = 0;
    virtual double get_model_scale() const = 0;
    virtual const HSSUSY_observables& get_observables() const = 0;
 
@@ -154,6 +157,7 @@ public:
       const Spectrum_generator_settings&, const SLHA_io::Modsel&,
       const softsusy::QedQcd&, const HSSUSY_input_parameters&) = 0;
    virtual void calculate_model_observables(const softsusy::QedQcd&, const Physical_input&) = 0;
+
 };
 
 template <typename Solver_type>
@@ -166,7 +170,7 @@ public:
    virtual void put_model_spectra(MLINK link) const override;
 
    virtual const Spectrum_generator_problems& get_problems() const override { return problems; }
-   virtual void fill_slha_io(HSSUSY_slha_io&) const override;
+   virtual void fill_slha_io(HSSUSY_slha_io&, const Spectrum_generator_settings&, const FlexibleDecay_settings&) const override;
    virtual double get_model_scale() const override { return std::get<0>(models).get_scale(); }
    virtual const HSSUSY_observables& get_observables() const override { return observables; }
 
@@ -180,6 +184,7 @@ private:
    Spectrum_generator_problems problems{};   ///< spectrum generator problems
    HSSUSY_scales scales{};              ///< scale information
    HSSUSY_observables observables{};    ///< observables
+
 };
 
 class Model_data {
@@ -195,7 +200,11 @@ public:
    void set_physical_input(const Physical_input& p) { physical_input = p; }
    void set_sm_input_parameters(const softsusy::QedQcd& qedqcd_) { qedqcd = qedqcd_; }
    void set_settings(const Spectrum_generator_settings& s) { settings = s; }
+   void set_fd_settings(const FlexibleDecay_settings& s) { flexibledecay_settings = s; }
    void set_modsel(const SLHA_io::Modsel& m) { modsel = m; }
+
+   const Spectrum_generator_settings& get_settings() const { return settings; }
+   const FlexibleDecay_settings& get_fd_settings() const { return flexibledecay_settings; }
 
    void put_settings(MLINK link) const;
    void put_sm_input_parameters(MLINK link) const;
@@ -204,11 +213,7 @@ public:
    void put_slha(MLINK link) const;
 
    void put_problems(MLINK link) const;
-   void put_problems(MLINK link, const Problems&) const;
-   void put_problems(MLINK link, const BVP_solver_problems&) const;
    void put_warnings(MLINK link) const;
-   void put_warnings(MLINK link, const Problems&) const;
-   void put_warnings(MLINK link, const BVP_solver_problems&) const;
    void put_model_spectra(MLINK link) const;
    void calculate_spectrum();
    void check_spectrum(MLINK link) const;
@@ -223,6 +228,7 @@ private:
    Physical_input physical_input{};          ///< extra non-SLHA physical input
    softsusy::QedQcd qedqcd{};                ///< SLHA physical input
    Spectrum_generator_settings settings{};   ///< spectrum generator settings
+   FlexibleDecay_settings flexibledecay_settings {}; ///< FlexibleDecay settings
    SLHA_io::Modsel modsel{};                 ///< MODSEL input
    std::unique_ptr<HSSUSY_spectrum> spectrum{nullptr};  ///< spectrum information
 
@@ -478,110 +484,6 @@ void Model_data::put_input_parameters(MLINK link) const
 
 /******************************************************************/
 
-int number_of_problems(const Problems& problems)
-{
-   return problems.have_tachyon()
-      + problems.no_ewsb()
-      + (problems.no_perturbative() || problems.have_non_perturbative_parameter())
-      + problems.no_sinThetaW_convergence()
-      + problems.have_thrown()
-      + problems.have_failed_pole_mass_convergence();
-}
-
-/******************************************************************/
-
-int number_of_problems(const BVP_solver_problems& problems)
-{
-   return problems.no_convergence();
-}
-
-/******************************************************************/
-
-int number_of_warnings(const Problems& problems)
-{
-   return problems.have_bad_mass();
-}
-
-/******************************************************************/
-
-int number_of_warnings(const BVP_solver_problems&)
-{
-   return 0; // no warnings yet
-}
-
-/******************************************************************/
-
-template <typename F>
-void put_masses(MLINK link, const F& flags,
-                const std::vector<std::string>& heads = {})
-{
-   for (std::size_t i = 0; i < flags.size(); i++) {
-      if (flags[i]) {
-         MLPutHeads(link, heads);
-         MLPutSymbol(link, HSSUSY_info::particle_names[i].c_str());
-      }
-   }
-}
-
-/******************************************************************/
-
-template <typename F>
-void put_masses(MLINK link, const std::string& rule, const F& flags,
-                const std::vector<std::string>& heads)
-{
-   const auto n_masses = std::count(flags.cbegin(), flags.cend(), true);
-
-   MLPutRule(link, rule);
-   MLPutFunction(link, "List", n_masses);
-   put_masses(link, flags, heads);
-}
-
-/******************************************************************/
-
-template <typename F>
-void put_masses(MLINK link, const std::string& rule,
-                const F& flags1, const std::vector<std::string>& heads1,
-                const F& flags2, const std::vector<std::string>& heads2)
-{
-   const auto n_masses = std::count(flags1.cbegin(), flags1.cend(), true)
-                       + std::count(flags2.cbegin(), flags2.cend(), true);
-
-   MLPutRule(link, rule);
-   MLPutFunction(link, "List", n_masses);
-   put_masses(link, flags1, heads1);
-   put_masses(link, flags2, heads2);
-}
-
-/******************************************************************/
-
-void Model_data::put_problems(MLINK link, const Problems& problems) const
-{
-   if (problems.have_tachyon())
-      put_masses(link, "Tachyons",
-                 problems.get_running_tachyons(), {"M"},
-                 problems.get_pole_tachyons(), {"Pole", "M"});
-   if (problems.no_ewsb())
-      MLPutRuleTo(link, "True", "NoEWSB");
-   if (problems.no_perturbative() || problems.have_non_perturbative_parameter())
-      MLPutRuleTo(link, "True", "NonPerturbative");
-   if (problems.no_sinThetaW_convergence())
-      MLPutRuleTo(link, "True", "NoSinThetaWConvergence");
-   if (problems.have_thrown())
-      MLPutRuleTo(link, "True", "Exceptions");
-   if (problems.have_failed_pole_mass_convergence())
-      put_masses(link, "NoPoleMassConvergence", problems.get_failed_pole_mass_convergence(), {"Pole", "M"});
-}
-
-/******************************************************************/
-
-void Model_data::put_problems(MLINK link, const BVP_solver_problems& problems) const
-{
-   if (problems.no_convergence())
-      MLPutRuleTo(link, "True", "NoConvergence");
-}
-
-/******************************************************************/
-
 void Model_data::put_problems(MLINK link) const
 {
    check_spectrum_pointer();
@@ -590,39 +492,24 @@ void Model_data::put_problems(MLINK link) const
    const auto n_models = models.size();
    const auto solvers = problems.get_bvp_solver_problems();
    const auto n_solvers = solvers.size();
+   const auto observables = spectrum->get_observables().problems;
 
-   MLPutFunction(link, "List", n_models + n_solvers);
+   MLPutFunction(link, "List", n_models + n_solvers + 1);
 
    for (const auto& m: models) {
-      const auto np = number_of_problems(m);
       MLPutRule(link, m.get_model_name());
-      MLPutFunction(link, "List", np);
-      put_problems(link, m);
+      mathlink_format_problems(link, m);
    }
 
    for (const auto& m: solvers) {
-      const auto np = number_of_problems(m);
       MLPutRule(link, m.get_solver_name());
-      MLPutFunction(link, "List", np);
-      put_problems(link, m);
+      mathlink_format_problems(link, m);
    }
 
+   MLPutRule(link, "Observables");
+   mathlink_format_problems(link, observables);
+
    MLEndPacket(link);
-}
-
-/******************************************************************/
-
-void Model_data::put_warnings(MLINK link, const Problems& problems) const
-{
-   if (problems.have_bad_mass())
-      put_masses(link, "ImpreciseMasses", problems.get_bad_masses(), {"M"});
-}
-
-/******************************************************************/
-
-void Model_data::put_warnings(MLINK, const BVP_solver_problems&) const
-{
-   // no warnings yet
 }
 
 /******************************************************************/
@@ -639,17 +526,13 @@ void Model_data::put_warnings(MLINK link) const
    MLPutFunction(link, "List", n_models + n_solvers);
 
    for (const auto& m: models) {
-      const auto nw = number_of_warnings(m);
       MLPutRule(link, m.get_model_name());
-      MLPutFunction(link, "List", nw);
-      put_warnings(link, m);
+      mathlink_format_warnings(link, m);
    }
 
    for (const auto& m: solvers) {
-      const auto nw = number_of_warnings(m);
       MLPutRule(link, m.get_solver_name());
-      MLPutFunction(link, "List", nw);
-      put_warnings(link, m);
+      mathlink_format_problems(link, m);
    }
 
    MLEndPacket(link);
@@ -670,7 +553,7 @@ HSSUSY_slha_io Model_data::get_slha_io() const
    slha_io.set_print_imaginary_parts_of_majorana_mixings(
       settings.get(Spectrum_generator_settings::force_positive_masses));
 
-   spectrum->fill_slha_io(slha_io);
+   spectrum->fill_slha_io(slha_io, settings, flexibledecay_settings);
 
    return slha_io;
 }
@@ -802,23 +685,13 @@ void put_spectrum(const HSSUSY_slha& model, MLINK link)
 
 /******************************************************************/
 
-namespace {
-struct Put_spectrum {
-   MLINK link;
-   explicit Put_spectrum(MLINK link_) : link(link_) {}
-   template<typename T>
-   void operator()(const T& model) const { put_spectrum(model, link); }
-};
-} // anonymous namespace
-
 template<typename... Ts>
 void put_spectra(const std::tuple<Ts...>& models, MLINK link)
 {
    MLPutFunction(link, "List", std::tuple_size<std::tuple<Ts...>>::value);
 
-   // @todo Use generic lambda instead of Put_spectrum in C++14
-   Put_spectrum ps(link);
-   boost::fusion::for_each(models, ps);
+   const auto ps = [link] (const auto& model) { put_spectrum(model, link); };
+   for_each_in_tuple(models, ps);
 
    MLEndPacket(link);
 }
@@ -874,7 +747,8 @@ void HSSUSY_spectrum_impl<Solver_type>::calculate_model_observables(
 /******************************************************************/
 
 template <typename Solver_type>
-void HSSUSY_spectrum_impl<Solver_type>::fill_slha_io(HSSUSY_slha_io& slha_io) const
+void HSSUSY_spectrum_impl<Solver_type>::fill_slha_io(HSSUSY_slha_io& slha_io,
+       const Spectrum_generator_settings& settings, const FlexibleDecay_settings& flexibledecay_settings) const
 {
    const auto& problems = std::get<0>(models).get_problems();
    const auto force_output = std::get<0>(models).do_force_output();
@@ -882,8 +756,10 @@ void HSSUSY_spectrum_impl<Solver_type>::fill_slha_io(HSSUSY_slha_io& slha_io) co
    slha_io.set_spinfo(problems);
    if (!problems.have_problem() || force_output) {
       slha_io.set_spectrum(models);
-      slha_io.set_extra(std::get<0>(models), scales, observables);
+      slha_io.set_extra(std::get<0>(models), scales, observables, settings);
    }
+
+
 }
 
 /******************************************************************/
@@ -895,10 +771,8 @@ void Model_data::put_observables(MLINK link) const
 
    MLPutFunction(link, "List", 1);
    MLPutRule(link, HSSUSY_info::model_name);
-   MLPutFunction(link, "List", 2);
+   MLPutFunction(link, "List", 0);
 
-   MLPutRuleTo(link, OBSERVABLE(eff_cp_higgs_photon_photon), "FlexibleSUSYObservable`CpHiggsPhotonPhoton");
-   MLPutRuleTo(link, OBSERVABLE(eff_cp_higgs_gluon_gluon), "FlexibleSUSYObservable`CpHiggsGluonGluon");
 
 
    MLEndPacket(link);
@@ -963,7 +837,8 @@ Model_data make_data(const Dynamic_array_view<Element_t>& pars)
       n_sm_parameters = softsusy::NUMBER_OF_LOW_ENERGY_INPUT_PARAMETERS
                         + Physical_input::NUMBER_OF_INPUT_PARAMETERS,
       n_input_pars = 68;
-   const Index_t n_total = n_settings + n_sm_parameters + n_input_pars;
+   const Index_t n_fd_settings = 0;
+   const Index_t n_total = n_settings + n_sm_parameters + n_input_pars + n_fd_settings;
 
    if (pars.size() != n_total)
       throw EWrongNumberOfParameters(pars.size(), n_total);
@@ -1137,7 +1012,7 @@ Model_data make_data(const Dynamic_array_view<Element_t>& pars)
    data.set_sm_input_parameters(qedqcd);
    data.set_physical_input(physical_input);
    data.set_input_parameters(input);
-
+   
    return data;
 }
 
@@ -1427,6 +1302,9 @@ DLLEXPORT int FSHSSUSYCalculateObservables(
       {
          Redirect_output crd(link);
          data.calculate_model_observables();
+         auto setting = data.get_settings();
+         setting.set(flexiblesusy::Spectrum_generator_settings::calculate_observables, 1.0);
+         data.set_settings(setting);
       }
 
       data.put_observables(link);

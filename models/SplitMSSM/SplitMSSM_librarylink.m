@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.5.0"];
+Print["FlexibleSUSY 2.6.0"];
 Print["SplitMSSM"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -20,12 +20,16 @@ FSSplitMSSMSetLib = LibraryFunctionLoad[libSplitMSSM, "FSSplitMSSMSet", {Integer
 
 FSSplitMSSMCalculateSpectrum = LibraryFunctionLoad[libSplitMSSM, "FSSplitMSSMCalculateSpectrum", LinkObject, LinkObject];
 FSSplitMSSMCalculateObservables = LibraryFunctionLoad[libSplitMSSM, "FSSplitMSSMCalculateObservables", LinkObject, LinkObject];
+FSSplitMSSMCalculateDecays = LibraryFunctionLoad[libSplitMSSM, "FSSplitMSSMCalculateDecays", LinkObject, LinkObject];
 
 FSSplitMSSMCalculateSpectrum::error = "`1`";
 FSSplitMSSMCalculateSpectrum::warning = "`1`";
 
 FSSplitMSSMCalculateObservables::error = "`1`";
 FSSplitMSSMCalculateObservables::warning = "`1`";
+
+FSSplitMSSMCalculateDecays::error = "`1`";
+FSSplitMSSMCalculateDecays::warning = "`1`";
 
 FSSplitMSSM::info = "`1`";
 FSSplitMSSM::nonum = "Error: `1` is not a numeric input value!";
@@ -101,6 +105,13 @@ fsDefaultSMParameters = {
     Mh -> 125.09
 };
 
+fdDefaultSettings = {
+   minBRtoPrint -> 1*^-5,
+   maxHigherOrderCorrections -> 4,
+   alphaThomson -> 1,
+   offShellVV -> 2
+};
+
 fsSplitMSSMDefaultInputParameters = {
    MSUSY -> 0,
    M1Input -> 0,
@@ -123,9 +134,10 @@ Options[FSSplitMSSMOpenHandle] = {
     Sequence @@ fsDefaultSettings,
     Sequence @@ fsDefaultSMParameters,
     Sequence @@ fsSplitMSSMDefaultInputParameters
+   , Sequence @@ fdDefaultSettings
 };
 
-FSSplitMSSMOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters) -> s_List, r___] :=
+FSSplitMSSMOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters | fdSettings) -> s_List, r___] :=
     FSSplitMSSMOpenHandle[a, Sequence @@ s, r];
 
 FSSplitMSSMOpenHandle[OptionsPattern[]] :=
@@ -253,6 +265,11 @@ FSSplitMSSMOpenHandle[OptionsPattern[]] :=
             OptionValue[mse2][[3,1]],
             OptionValue[mse2][[3,2]],
             OptionValue[mse2][[3,3]]
+            ,
+            OptionValue[minBRtoPrint],
+            OptionValue[maxHigherOrderCorrections],
+            OptionValue[alphaThomson],
+            OptionValue[offShellVV]
         }
 ];
 
@@ -387,6 +404,11 @@ FSSplitMSSMSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[mse2][[3,1]],
             OptionValue[mse2][[3,2]],
             OptionValue[mse2][[3,3]]
+            ,
+            OptionValue[minBRtoPrint],
+            OptionValue[maxHigherOrderCorrections],
+            OptionValue[alphaThomson],
+            OptionValue[offShellVV]
         }] /. HoldPattern[OptionValue[param_]] :> param /.
         { p } /.
         FSSplitMSSMGetSettings[handle] /.

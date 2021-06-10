@@ -32,6 +32,9 @@ LIBMSSMNoFVHimalaya_CXXQFT_VERTICES_SRC ?= ''
 MSSMNoFVHimalaya_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
+MSSMNoFVHimalaya_FlexibleDecay_MK := \
+		$(DIR)/decays/FlexibleDecay.mk
+
 MSSMNoFVHimalaya_INCLUDE_MK := \
 		$(MSSMNoFVHimalaya_SUSY_BETAS_MK) \
 		$(MSSMNoFVHimalaya_SOFT_BETAS_MK)
@@ -141,6 +144,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(MSSMNoFVHimalaya_SUSY_BETAS_MK)
 -include $(MSSMNoFVHimalaya_SOFT_BETAS_MK)
+-include $(MSSMNoFVHimalaya_FlexibleDecay_MK)
 -include $(MSSMNoFVHimalaya_CXXQFT_VERTICES_MK)
 -include $(MSSMNoFVHimalaya_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
@@ -153,6 +157,8 @@ $(MSSMNoFVHimalaya_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(MSSMNoFVHimalaya_SOFT_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
+
+$(MSSMNoFVHimalaya_FlexibleDecay_MK): run-metacode-$(MODNAME)
 $(MSSMNoFVHimalaya_CXXQFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(MSSMNoFVHimalaya_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
@@ -288,7 +294,8 @@ pack-$(MODNAME)-src:
 		$(LLMSSMNoFVHimalaya_SRC) $(LLMSSMNoFVHimalaya_MMA) \
 		$(MSSMNoFVHimalaya_MK) $(MSSMNoFVHimalaya_INCLUDE_MK) $(MSSMNoFVHimalaya_CXXQFT_VERTICES_MK) \
 		$(MSSMNoFVHimalaya_SLHA_INPUT) $(MSSMNoFVHimalaya_REFERENCES) \
-		$(MSSMNoFVHimalaya_GNUPLOT)
+		$(MSSMNoFVHimalaya_GNUPLOT) \
+		$(MSSMNoFVHimalaya_FlexibleDecay_MK)
 
 $(LIBMSSMNoFVHimalaya_SRC) $(LIBMSSMNoFVHimalaya_HDR) $(LIBMSSMNoFVHimalaya_CXXQFT_HDR) $(EXEMSSMNoFVHimalaya_SRC) $(LLMSSMNoFVHimalaya_SRC) $(LLMSSMNoFVHimalaya_MMA) \
 : run-metacode-$(MODNAME)
@@ -312,7 +319,7 @@ $(METACODE_STAMP_MSSMNoFVHimalaya):
 endif
 
 $(LIBMSSMNoFVHimalaya_DEP) $(EXEMSSMNoFVHimalaya_DEP) $(LLMSSMNoFVHimalaya_DEP) $(LIBMSSMNoFVHimalaya_OBJ) $(EXEMSSMNoFVHimalaya_OBJ) $(LLMSSMNoFVHimalaya_OBJ) $(LLMSSMNoFVHimalaya_LIB): \
-	CPPFLAGS += $(MODMSSMNoFVHimalaya_SUBMOD_INC) $(MODMSSMNoFVHimalaya_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS)  $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODMSSMNoFVHimalaya_SUBMOD_INC) $(MODMSSMNoFVHimalaya_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBMSSMNoFVHimalaya_DEP) $(EXEMSSMNoFVHimalaya_DEP) $(LLMSSMNoFVHimalaya_DEP) $(LIBMSSMNoFVHimalaya_OBJ) $(EXEMSSMNoFVHimalaya_OBJ) $(LLMSSMNoFVHimalaya_OBJ) $(LLMSSMNoFVHimalaya_LIB): \
@@ -328,11 +335,11 @@ $(LIBMSSMNoFVHimalaya): $(LIBMSSMNoFVHimalaya_OBJ)
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBMSSMNoFVHimalaya) $(MODMSSMNoFVHimalaya_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
 $(LLMSSMNoFVHimalaya_LIB): $(LLMSSMNoFVHimalaya_OBJ) $(LIBMSSMNoFVHimalaya) $(MODMSSMNoFVHimalaya_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
 
 ALLDEP += $(LIBMSSMNoFVHimalaya_DEP) $(EXEMSSMNoFVHimalaya_DEP)
 ALLSRC += $(LIBMSSMNoFVHimalaya_SRC) $(EXEMSSMNoFVHimalaya_SRC)

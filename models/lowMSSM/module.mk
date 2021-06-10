@@ -32,6 +32,9 @@ LIBlowMSSM_CXXQFT_VERTICES_SRC ?= ''
 lowMSSM_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
+lowMSSM_FlexibleDecay_MK := \
+		$(DIR)/decays/FlexibleDecay.mk
+
 lowMSSM_INCLUDE_MK := \
 		$(lowMSSM_SUSY_BETAS_MK) \
 		$(lowMSSM_SOFT_BETAS_MK)
@@ -141,6 +144,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(lowMSSM_SUSY_BETAS_MK)
 -include $(lowMSSM_SOFT_BETAS_MK)
+-include $(lowMSSM_FlexibleDecay_MK)
 -include $(lowMSSM_CXXQFT_VERTICES_MK)
 -include $(lowMSSM_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
@@ -153,6 +157,8 @@ $(lowMSSM_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(lowMSSM_SOFT_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
+
+$(lowMSSM_FlexibleDecay_MK): run-metacode-$(MODNAME)
 $(lowMSSM_CXXQFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(lowMSSM_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
@@ -288,7 +294,8 @@ pack-$(MODNAME)-src:
 		$(LLlowMSSM_SRC) $(LLlowMSSM_MMA) \
 		$(lowMSSM_MK) $(lowMSSM_INCLUDE_MK) $(lowMSSM_CXXQFT_VERTICES_MK) \
 		$(lowMSSM_SLHA_INPUT) $(lowMSSM_REFERENCES) \
-		$(lowMSSM_GNUPLOT)
+		$(lowMSSM_GNUPLOT) \
+		$(lowMSSM_FlexibleDecay_MK)
 
 $(LIBlowMSSM_SRC) $(LIBlowMSSM_HDR) $(LIBlowMSSM_CXXQFT_HDR) $(EXElowMSSM_SRC) $(LLlowMSSM_SRC) $(LLlowMSSM_MMA) \
 : run-metacode-$(MODNAME)
@@ -312,7 +319,7 @@ $(METACODE_STAMP_lowMSSM):
 endif
 
 $(LIBlowMSSM_DEP) $(EXElowMSSM_DEP) $(LLlowMSSM_DEP) $(LIBlowMSSM_OBJ) $(EXElowMSSM_OBJ) $(LLlowMSSM_OBJ) $(LLlowMSSM_LIB): \
-	CPPFLAGS += $(MODlowMSSM_SUBMOD_INC) $(MODlowMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS)  $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODlowMSSM_SUBMOD_INC) $(MODlowMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBlowMSSM_DEP) $(EXElowMSSM_DEP) $(LLlowMSSM_DEP) $(LIBlowMSSM_OBJ) $(EXElowMSSM_OBJ) $(LLlowMSSM_OBJ) $(LLlowMSSM_LIB): \
@@ -328,11 +335,11 @@ $(LIBlowMSSM): $(LIBlowMSSM_OBJ)
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBlowMSSM) $(MODlowMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
 $(LLlowMSSM_LIB): $(LLlowMSSM_OBJ) $(LIBlowMSSM) $(MODlowMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
 
 ALLDEP += $(LIBlowMSSM_DEP) $(EXElowMSSM_DEP)
 ALLSRC += $(LIBlowMSSM_SRC) $(EXElowMSSM_SRC)

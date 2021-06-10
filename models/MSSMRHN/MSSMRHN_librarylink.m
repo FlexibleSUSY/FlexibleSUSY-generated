@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.5.0"];
+Print["FlexibleSUSY 2.6.0"];
 Print["MSSMRHN"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -20,12 +20,16 @@ FSMSSMRHNSetLib = LibraryFunctionLoad[libMSSMRHN, "FSMSSMRHNSet", {Integer, {Rea
 
 FSMSSMRHNCalculateSpectrum = LibraryFunctionLoad[libMSSMRHN, "FSMSSMRHNCalculateSpectrum", LinkObject, LinkObject];
 FSMSSMRHNCalculateObservables = LibraryFunctionLoad[libMSSMRHN, "FSMSSMRHNCalculateObservables", LinkObject, LinkObject];
+FSMSSMRHNCalculateDecays = LibraryFunctionLoad[libMSSMRHN, "FSMSSMRHNCalculateDecays", LinkObject, LinkObject];
 
 FSMSSMRHNCalculateSpectrum::error = "`1`";
 FSMSSMRHNCalculateSpectrum::warning = "`1`";
 
 FSMSSMRHNCalculateObservables::error = "`1`";
 FSMSSMRHNCalculateObservables::warning = "`1`";
+
+FSMSSMRHNCalculateDecays::error = "`1`";
+FSMSSMRHNCalculateDecays::warning = "`1`";
 
 FSMSSMRHN::info = "`1`";
 FSMSSMRHN::nonum = "Error: `1` is not a numeric input value!";
@@ -101,6 +105,13 @@ fsDefaultSMParameters = {
     Mh -> 125.09
 };
 
+fdDefaultSettings = {
+   minBRtoPrint -> 1*^-5,
+   maxHigherOrderCorrections -> 4,
+   alphaThomson -> 1,
+   offShellVV -> 2
+};
+
 fsMSSMRHNDefaultInputParameters = {
    m0 -> 0,
    m12 -> 0,
@@ -114,9 +125,10 @@ Options[FSMSSMRHNOpenHandle] = {
     Sequence @@ fsDefaultSettings,
     Sequence @@ fsDefaultSMParameters,
     Sequence @@ fsMSSMRHNDefaultInputParameters
+   , Sequence @@ fdDefaultSettings
 };
 
-FSMSSMRHNOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters) -> s_List, r___] :=
+FSMSSMRHNOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters | fdSettings) -> s_List, r___] :=
     FSMSSMRHNOpenHandle[a, Sequence @@ s, r];
 
 FSMSSMRHNOpenHandle[OptionsPattern[]] :=
@@ -203,6 +215,11 @@ FSMSSMRHNOpenHandle[OptionsPattern[]] :=
             OptionValue[BMvInput][[3,1]],
             OptionValue[BMvInput][[3,2]],
             OptionValue[BMvInput][[3,3]]
+            ,
+            OptionValue[minBRtoPrint],
+            OptionValue[maxHigherOrderCorrections],
+            OptionValue[alphaThomson],
+            OptionValue[offShellVV]
         }
 ];
 
@@ -296,6 +313,11 @@ FSMSSMRHNSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[BMvInput][[3,1]],
             OptionValue[BMvInput][[3,2]],
             OptionValue[BMvInput][[3,3]]
+            ,
+            OptionValue[minBRtoPrint],
+            OptionValue[maxHigherOrderCorrections],
+            OptionValue[alphaThomson],
+            OptionValue[offShellVV]
         }] /. HoldPattern[OptionValue[param_]] :> param /.
         { p } /.
         FSMSSMRHNGetSettings[handle] /.

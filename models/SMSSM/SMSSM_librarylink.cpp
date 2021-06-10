@@ -32,12 +32,18 @@
 #endif
 
 #include "array_view.hpp"
+#include "bvp_solver_problems_format_mathlink.hpp"
 #include "error.hpp"
+#include "for_each.hpp"
+#include "observable_problems_format_mathlink.hpp"
 #include "physical_input.hpp"
+#include "problems_format_mathlink.hpp"
 #include "slha_io.hpp"
 #include "spectrum_generator_settings.hpp"
+#include "decays/flexibledecay_settings.hpp"
 #include "standard_model_two_scale_model.hpp"
 #include "lowe.h"
+#include "loop_libraries/loop_library.hpp"
 
 #include <mathlink.h>
 #include "mathlink_utils.hpp"
@@ -52,9 +58,6 @@
 #include <string>
 #include <tuple>
 #include <utility>
-
-#include <boost/fusion/include/for_each.hpp>
-#include <boost/fusion/adapted/std_tuple.hpp>
 
 #define INPUTPARAMETER(p) input.p
 #define MODELPARAMETER(p) model.get_##p()
@@ -146,14 +149,16 @@ public:
    virtual void put_model_spectra(MLINK link) const = 0;
 
    virtual const Spectrum_generator_problems& get_problems() const = 0;
-   virtual void fill_slha_io(SMSSM_slha_io&) const = 0;
+   virtual void fill_slha_io(SMSSM_slha_io&, const Spectrum_generator_settings&, const FlexibleDecay_settings&) const = 0;
    virtual double get_model_scale() const = 0;
    virtual const SMSSM_observables& get_observables() const = 0;
+   virtual const SMSSM_decays& get_decays() const = 0;
 
    virtual void calculate_spectrum(
       const Spectrum_generator_settings&, const SLHA_io::Modsel&,
       const softsusy::QedQcd&, const SMSSM_input_parameters&) = 0;
    virtual void calculate_model_observables(const softsusy::QedQcd&, const Physical_input&) = 0;
+   virtual void calculate_model_decays(const softsusy::QedQcd&, const Physical_input&, const FlexibleDecay_settings&) = 0;
 };
 
 template <typename Solver_type>
@@ -166,20 +171,23 @@ public:
    virtual void put_model_spectra(MLINK link) const override;
 
    virtual const Spectrum_generator_problems& get_problems() const override { return problems; }
-   virtual void fill_slha_io(SMSSM_slha_io&) const override;
+   virtual void fill_slha_io(SMSSM_slha_io&, const Spectrum_generator_settings&, const FlexibleDecay_settings&) const override;
    virtual double get_model_scale() const override { return std::get<0>(models).get_scale(); }
    virtual const SMSSM_observables& get_observables() const override { return observables; }
+   virtual const SMSSM_decays& get_decays() const override { return decays; }
 
    virtual void calculate_spectrum(
       const Spectrum_generator_settings&, const SLHA_io::Modsel&,
       const softsusy::QedQcd&, const SMSSM_input_parameters&) override;
    virtual void calculate_model_observables(const softsusy::QedQcd&, const Physical_input&) override;
+   virtual void calculate_model_decays(const softsusy::QedQcd&, const Physical_input&, const FlexibleDecay_settings&) override;
 
 private:
    std::tuple<SMSSM<Solver_type>> models{};        ///< running parameters and pole masses
    Spectrum_generator_problems problems{};   ///< spectrum generator problems
    SMSSM_scales scales{};              ///< scale information
    SMSSM_observables observables{};    ///< observables
+   SMSSM_decays decays{};              ///< decays
 };
 
 class Model_data {
@@ -195,24 +203,26 @@ public:
    void set_physical_input(const Physical_input& p) { physical_input = p; }
    void set_sm_input_parameters(const softsusy::QedQcd& qedqcd_) { qedqcd = qedqcd_; }
    void set_settings(const Spectrum_generator_settings& s) { settings = s; }
+   void set_fd_settings(const FlexibleDecay_settings& s) { flexibledecay_settings = s; }
    void set_modsel(const SLHA_io::Modsel& m) { modsel = m; }
+
+   const Spectrum_generator_settings& get_settings() const { return settings; }
+   const FlexibleDecay_settings& get_fd_settings() const { return flexibledecay_settings; }
 
    void put_settings(MLINK link) const;
    void put_sm_input_parameters(MLINK link) const;
    void put_input_parameters(MLINK link) const;
    void put_observables(MLINK link) const;
    void put_slha(MLINK link) const;
+   void put_decays(MLINK link) const;
 
    void put_problems(MLINK link) const;
-   void put_problems(MLINK link, const Problems&) const;
-   void put_problems(MLINK link, const BVP_solver_problems&) const;
    void put_warnings(MLINK link) const;
-   void put_warnings(MLINK link, const Problems&) const;
-   void put_warnings(MLINK link, const BVP_solver_problems&) const;
    void put_model_spectra(MLINK link) const;
    void calculate_spectrum();
    void check_spectrum(MLINK link) const;
    void calculate_model_observables();
+   void calculate_model_decays();
 
    double get_model_scale() const {
       check_spectrum_pointer();
@@ -223,6 +233,7 @@ private:
    Physical_input physical_input{};          ///< extra non-SLHA physical input
    softsusy::QedQcd qedqcd{};                ///< SLHA physical input
    Spectrum_generator_settings settings{};   ///< spectrum generator settings
+   FlexibleDecay_settings flexibledecay_settings {}; ///< FlexibleDecay settings
    SLHA_io::Modsel modsel{};                 ///< MODSEL input
    std::unique_ptr<SMSSM_spectrum> spectrum{nullptr};  ///< spectrum information
 
@@ -461,110 +472,6 @@ void Model_data::put_input_parameters(MLINK link) const
 
 /******************************************************************/
 
-int number_of_problems(const Problems& problems)
-{
-   return problems.have_tachyon()
-      + problems.no_ewsb()
-      + (problems.no_perturbative() || problems.have_non_perturbative_parameter())
-      + problems.no_sinThetaW_convergence()
-      + problems.have_thrown()
-      + problems.have_failed_pole_mass_convergence();
-}
-
-/******************************************************************/
-
-int number_of_problems(const BVP_solver_problems& problems)
-{
-   return problems.no_convergence();
-}
-
-/******************************************************************/
-
-int number_of_warnings(const Problems& problems)
-{
-   return problems.have_bad_mass();
-}
-
-/******************************************************************/
-
-int number_of_warnings(const BVP_solver_problems&)
-{
-   return 0; // no warnings yet
-}
-
-/******************************************************************/
-
-template <typename F>
-void put_masses(MLINK link, const F& flags,
-                const std::vector<std::string>& heads = {})
-{
-   for (std::size_t i = 0; i < flags.size(); i++) {
-      if (flags[i]) {
-         MLPutHeads(link, heads);
-         MLPutSymbol(link, SMSSM_info::particle_names[i].c_str());
-      }
-   }
-}
-
-/******************************************************************/
-
-template <typename F>
-void put_masses(MLINK link, const std::string& rule, const F& flags,
-                const std::vector<std::string>& heads)
-{
-   const auto n_masses = std::count(flags.cbegin(), flags.cend(), true);
-
-   MLPutRule(link, rule);
-   MLPutFunction(link, "List", n_masses);
-   put_masses(link, flags, heads);
-}
-
-/******************************************************************/
-
-template <typename F>
-void put_masses(MLINK link, const std::string& rule,
-                const F& flags1, const std::vector<std::string>& heads1,
-                const F& flags2, const std::vector<std::string>& heads2)
-{
-   const auto n_masses = std::count(flags1.cbegin(), flags1.cend(), true)
-                       + std::count(flags2.cbegin(), flags2.cend(), true);
-
-   MLPutRule(link, rule);
-   MLPutFunction(link, "List", n_masses);
-   put_masses(link, flags1, heads1);
-   put_masses(link, flags2, heads2);
-}
-
-/******************************************************************/
-
-void Model_data::put_problems(MLINK link, const Problems& problems) const
-{
-   if (problems.have_tachyon())
-      put_masses(link, "Tachyons",
-                 problems.get_running_tachyons(), {"M"},
-                 problems.get_pole_tachyons(), {"Pole", "M"});
-   if (problems.no_ewsb())
-      MLPutRuleTo(link, "True", "NoEWSB");
-   if (problems.no_perturbative() || problems.have_non_perturbative_parameter())
-      MLPutRuleTo(link, "True", "NonPerturbative");
-   if (problems.no_sinThetaW_convergence())
-      MLPutRuleTo(link, "True", "NoSinThetaWConvergence");
-   if (problems.have_thrown())
-      MLPutRuleTo(link, "True", "Exceptions");
-   if (problems.have_failed_pole_mass_convergence())
-      put_masses(link, "NoPoleMassConvergence", problems.get_failed_pole_mass_convergence(), {"Pole", "M"});
-}
-
-/******************************************************************/
-
-void Model_data::put_problems(MLINK link, const BVP_solver_problems& problems) const
-{
-   if (problems.no_convergence())
-      MLPutRuleTo(link, "True", "NoConvergence");
-}
-
-/******************************************************************/
-
 void Model_data::put_problems(MLINK link) const
 {
    check_spectrum_pointer();
@@ -573,39 +480,24 @@ void Model_data::put_problems(MLINK link) const
    const auto n_models = models.size();
    const auto solvers = problems.get_bvp_solver_problems();
    const auto n_solvers = solvers.size();
+   const auto observables = spectrum->get_observables().problems;
 
-   MLPutFunction(link, "List", n_models + n_solvers);
+   MLPutFunction(link, "List", n_models + n_solvers + 1);
 
    for (const auto& m: models) {
-      const auto np = number_of_problems(m);
       MLPutRule(link, m.get_model_name());
-      MLPutFunction(link, "List", np);
-      put_problems(link, m);
+      mathlink_format_problems(link, m);
    }
 
    for (const auto& m: solvers) {
-      const auto np = number_of_problems(m);
       MLPutRule(link, m.get_solver_name());
-      MLPutFunction(link, "List", np);
-      put_problems(link, m);
+      mathlink_format_problems(link, m);
    }
 
+   MLPutRule(link, "Observables");
+   mathlink_format_problems(link, observables);
+
    MLEndPacket(link);
-}
-
-/******************************************************************/
-
-void Model_data::put_warnings(MLINK link, const Problems& problems) const
-{
-   if (problems.have_bad_mass())
-      put_masses(link, "ImpreciseMasses", problems.get_bad_masses(), {"M"});
-}
-
-/******************************************************************/
-
-void Model_data::put_warnings(MLINK, const BVP_solver_problems&) const
-{
-   // no warnings yet
 }
 
 /******************************************************************/
@@ -622,17 +514,13 @@ void Model_data::put_warnings(MLINK link) const
    MLPutFunction(link, "List", n_models + n_solvers);
 
    for (const auto& m: models) {
-      const auto nw = number_of_warnings(m);
       MLPutRule(link, m.get_model_name());
-      MLPutFunction(link, "List", nw);
-      put_warnings(link, m);
+      mathlink_format_warnings(link, m);
    }
 
    for (const auto& m: solvers) {
-      const auto nw = number_of_warnings(m);
       MLPutRule(link, m.get_solver_name());
-      MLPutFunction(link, "List", nw);
-      put_warnings(link, m);
+      mathlink_format_problems(link, m);
    }
 
    MLEndPacket(link);
@@ -653,7 +541,7 @@ SMSSM_slha_io Model_data::get_slha_io() const
    slha_io.set_print_imaginary_parts_of_majorana_mixings(
       settings.get(Spectrum_generator_settings::force_positive_masses));
 
-   spectrum->fill_slha_io(slha_io);
+   spectrum->fill_slha_io(slha_io, settings, flexibledecay_settings);
 
    return slha_io;
 }
@@ -843,23 +731,13 @@ void put_spectrum(const SMSSM_slha& model, MLINK link)
 
 /******************************************************************/
 
-namespace {
-struct Put_spectrum {
-   MLINK link;
-   explicit Put_spectrum(MLINK link_) : link(link_) {}
-   template<typename T>
-   void operator()(const T& model) const { put_spectrum(model, link); }
-};
-} // anonymous namespace
-
 template<typename... Ts>
 void put_spectra(const std::tuple<Ts...>& models, MLINK link)
 {
    MLPutFunction(link, "List", std::tuple_size<std::tuple<Ts...>>::value);
 
-   // @todo Use generic lambda instead of Put_spectrum in C++14
-   Put_spectrum ps(link);
-   boost::fusion::for_each(models, ps);
+   const auto ps = [link] (const auto& model) { put_spectrum(model, link); };
+   for_each_in_tuple(models, ps);
 
    MLEndPacket(link);
 }
@@ -915,7 +793,18 @@ void SMSSM_spectrum_impl<Solver_type>::calculate_model_observables(
 /******************************************************************/
 
 template <typename Solver_type>
-void SMSSM_spectrum_impl<Solver_type>::fill_slha_io(SMSSM_slha_io& slha_io) const
+void SMSSM_spectrum_impl<Solver_type>::calculate_model_decays(
+   const softsusy::QedQcd& qedqcd, const Physical_input& physical_input, const FlexibleDecay_settings& flexibledecay_settings)
+{
+   decays = SMSSM_decays(std::get<0>(models), qedqcd, physical_input, flexibledecay_settings);
+   decays.calculate_decays();
+}
+
+/******************************************************************/
+
+template <typename Solver_type>
+void SMSSM_spectrum_impl<Solver_type>::fill_slha_io(SMSSM_slha_io& slha_io,
+       const Spectrum_generator_settings& settings, const FlexibleDecay_settings& flexibledecay_settings) const
 {
    const auto& problems = std::get<0>(models).get_problems();
    const auto force_output = std::get<0>(models).do_force_output();
@@ -923,7 +812,16 @@ void SMSSM_spectrum_impl<Solver_type>::fill_slha_io(SMSSM_slha_io& slha_io) cons
    slha_io.set_spinfo(problems);
    if (!problems.have_problem() || force_output) {
       slha_io.set_spectrum(models);
-      slha_io.set_extra(std::get<0>(models), scales, observables);
+      slha_io.set_extra(std::get<0>(models), scales, observables, settings);
+   }
+
+   const auto& decays_problems = decays.get_problems();
+   const bool loop_library_for_decays =
+      (Loop_library::get_type() == Loop_library::Library::Collier) ||
+      (Loop_library::get_type() == Loop_library::Library::Looptools);
+   if ((!decays_problems.have_problem() && loop_library_for_decays) || force_output) {
+      slha_io.set_dcinfo(decays_problems);
+      slha_io.set_decays(decays.get_decay_table(), flexibledecay_settings);
    }
 }
 
@@ -936,13 +834,68 @@ void Model_data::put_observables(MLINK link) const
 
    MLPutFunction(link, "List", 1);
    MLPutRule(link, SMSSM_info::model_name);
-   MLPutFunction(link, "List", 4);
+   MLPutFunction(link, "List", 0);
 
-   MLPutRuleTo(link, OBSERVABLE(eff_cp_higgs_photon_photon), "FlexibleSUSYObservable`CpHiggsPhotonPhoton");
-   MLPutRuleTo(link, OBSERVABLE(eff_cp_higgs_gluon_gluon), "FlexibleSUSYObservable`CpHiggsGluonGluon");
-   MLPutRuleTo(link, OBSERVABLE(eff_cp_pseudoscalar_photon_photon), "FlexibleSUSYObservable`CpPseudoScalarPhotonPhoton");
-   MLPutRuleTo(link, OBSERVABLE(eff_cp_pseudoscalar_gluon_gluon), "FlexibleSUSYObservable`CpPseudoScalarGluonGluon");
 
+
+   MLEndPacket(link);
+}
+
+/******************************************************************/
+
+void Model_data::put_decays(MLINK link) const
+{
+   check_spectrum_pointer();
+   SMSSM_decays decays = spectrum->get_decays();
+   const auto& decay_table = decays.get_decay_table();
+   const auto number_of_decays = decay_table.size();
+
+   MLPutFunction(link, "List", 1);
+   MLPutRule(link, SMSSM_info::model_name);
+   MLPutFunction(link, "List", number_of_decays);
+
+   auto is_invalid_decay = [&] (const auto& decays_list, const auto& decay) {
+      return !(decays_list.get_total_width() > 0.)
+             || this->get_fd_settings().get(FlexibleDecay_settings::min_br_to_print) > decay.second.get_width()/decays_list.get_total_width();
+   };
+
+   for (const auto& decays_list : decay_table) {
+      const auto pid = decays_list.get_particle_id();
+      int n_decays = 0;
+      for (const auto& decay : decays_list) {
+         if (is_invalid_decay(decays_list, decay)) {
+            continue;
+         }
+         n_decays++;
+      }
+      const auto multiplet_and_index_pair = SMSSM_info::get_multiplet_and_index_from_pdg(pid);
+      if (multiplet_and_index_pair.second) {
+         MLPutFunction(link, "Rule", 2);
+         MLPutFunction(link, multiplet_and_index_pair.first.c_str(), 1);
+         MLPutInteger(link, multiplet_and_index_pair.second.get());
+      }
+      else {
+         MLPutRule(link, multiplet_and_index_pair.first.c_str());
+      }
+      MLPutFunction(link, "List", 3);
+      MLPut(link, pid);
+      MLPut(link, decays_list.get_total_width());
+      MLPutFunction(link, "List", n_decays);
+
+      for (const auto& decay : decays_list) {
+         if (is_invalid_decay(decays_list, decay)) {
+            continue;
+         }
+         const auto& final_states = decay.second.get_final_state_particle_ids();
+         MLPutFunction(link, "List", 3);
+         MLPut(link, pid);
+         MLPutFunction(link, "List", final_states.size());
+         for (const auto id : final_states) {
+            MLPut(link, id);
+         }
+         MLPut(link, decay.second.get_width());
+      }
+   }
 
    MLEndPacket(link);
 }
@@ -997,6 +950,24 @@ void Model_data::calculate_model_observables()
 
 /******************************************************************/
 
+void Model_data::calculate_model_decays()
+{
+   check_spectrum_pointer();
+   const bool loop_library_for_decays =
+      (Loop_library::get_type() == Loop_library::Library::Collier) ||
+      (Loop_library::get_type() == Loop_library::Library::Looptools);
+   if (flexibledecay_settings.get(FlexibleDecay_settings::calculate_decays)) {
+      if (loop_library_for_decays) {
+         spectrum->calculate_model_decays(qedqcd, physical_input, flexibledecay_settings);
+      }
+      else if (!loop_library_for_decays) {
+         WARNING("Decay module requires a dedicated loop library. Configure FlexibleSUSY with Collier or LoopTools and set appropriately flag 31 in Block FlexibleSUSY of the LesHouches input.");
+      }
+   }
+}
+
+/******************************************************************/
+
 template <typename Element_t>
 Model_data make_data(const Dynamic_array_view<Element_t>& pars)
 {
@@ -1006,7 +977,8 @@ Model_data make_data(const Dynamic_array_view<Element_t>& pars)
       n_sm_parameters = softsusy::NUMBER_OF_LOW_ENERGY_INPUT_PARAMETERS
                         + Physical_input::NUMBER_OF_INPUT_PARAMETERS,
       n_input_pars = 11;
-   const Index_t n_total = n_settings + n_sm_parameters + n_input_pars;
+   const Index_t n_fd_settings = 4;
+   const Index_t n_total = n_settings + n_sm_parameters + n_input_pars + n_fd_settings;
 
    if (pars.size() != n_total)
       throw EWrongNumberOfParameters(pars.size(), n_total);
@@ -1116,6 +1088,11 @@ Model_data make_data(const Dynamic_array_view<Element_t>& pars)
    INPUTPARAMETER(MSInput) = pars[c++];
    INPUTPARAMETER(BMSInput) = pars[c++];
 
+   FlexibleDecay_settings flexibledecay_settings;
+   flexibledecay_settings.set(FlexibleDecay_settings::min_br_to_print, pars[c++]);
+   flexibledecay_settings.set(FlexibleDecay_settings::include_higher_order_corrections , pars[c++]);
+   flexibledecay_settings.set(FlexibleDecay_settings::use_Thomson_alpha_in_Phigamgam_and_PhigamZ , pars[c++]);
+   flexibledecay_settings.set(FlexibleDecay_settings::offshell_VV_decays , pars[c++]);
 
    Model_data data;
    data.set_settings(settings);
@@ -1123,6 +1100,7 @@ Model_data make_data(const Dynamic_array_view<Element_t>& pars)
    data.set_sm_input_parameters(qedqcd);
    data.set_physical_input(physical_input);
    data.set_input_parameters(input);
+   data.set_fd_settings(flexibledecay_settings);
 
    return data;
 }
@@ -1413,11 +1391,60 @@ DLLEXPORT int FSSMSSMCalculateObservables(
       {
          Redirect_output crd(link);
          data.calculate_model_observables();
+         auto setting = data.get_settings();
+         setting.set(flexiblesusy::Spectrum_generator_settings::calculate_observables, 1.0);
+         data.set_settings(setting);
       }
 
       data.put_observables(link);
    } catch (const flexiblesusy::Error& e) {
       put_message(link, "FSSMSSMCalculateObservables", "error", e.what_detailed());
+      put_error_output(link);
+   }
+
+   return LIBRARY_NO_ERROR;
+}
+
+/******************************************************************/
+
+DLLEXPORT int FSSMSSMCalculateDecays(
+   WolframLibraryData /* libData */, MLINK link)
+{
+   using namespace flexiblesusy::SMSSM_librarylink;
+
+   if (!check_number_of_args(link, 1, "FSSMSSMCalculateDecays"))
+      return LIBRARY_TYPE_ERROR;
+
+   const auto hid = get_handle_from(link);
+
+   try {
+      auto& data = find_data(hid);
+
+      if (data.get_model_scale() == 0.) {
+         put_message(link,
+            "FSSMSSMCalculateDecays", "warning",
+            "Renormalization scale is 0.  Did you run "
+            "FSSMSSMCalculateSpectrum[]?");
+      }
+
+      {
+         Redirect_output crd(link);
+         auto setting = data.get_settings();
+         if (!static_cast<bool>(setting.get(flexiblesusy::Spectrum_generator_settings::calculate_sm_masses)) ||
+            !static_cast<bool>(setting.get(flexiblesusy::Spectrum_generator_settings::calculate_bsm_masses))) {
+            put_message(link,
+               "FSSMCalculateDecays", "warning", "Need SM and BSM masses. Setting flags FlexlibleSUSY[3] = FlexlibleSUSY[23] = 1.");
+            setting.set(flexiblesusy::Spectrum_generator_settings::calculate_sm_masses, 1.0);
+            setting.set(flexiblesusy::Spectrum_generator_settings::calculate_bsm_masses, 1.0);
+            data.set_settings(setting);
+            data.calculate_spectrum();
+         }
+         data.calculate_model_decays();
+      }
+
+      data.put_decays(link);
+   } catch (const flexiblesusy::Error& e) {
+      put_message(link, "FSSMSSMCalculateDecays", "error", e.what());
       put_error_output(link);
    }
 

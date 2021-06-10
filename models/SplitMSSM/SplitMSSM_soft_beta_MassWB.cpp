@@ -93,18 +93,19 @@ double SplitMSSM_soft_parameters::calc_beta_MassWB_2_loop(const Soft_traces& sof
 
    double beta_MassWB;
 
-   beta_MassWB = Re(0.008333333333333333*(-240*g2d*g2u*gYd*gYu*MassB - 360*g2u*
-      Cube(g2d)*Mu - 360*g2d*Cube(g2u)*Mu - 9320*MassWB*Quad(g2) - 435*MassWB*
-      Quad(g2d) - 435*MassWB*Quad(g2u) + 576*g2d*g2u*Mu*Sqr(g1) + 5760*g2d*g2u*
-      Mu*Sqr(g2) - 540*MassWB*traceYdAdjYd*Sqr(g2d) - 180*MassWB*traceYeAdjYe*
-      Sqr(g2d) - 540*MassWB*traceYuAdjYu*Sqr(g2d) + 153*MassWB*Sqr(g1)*Sqr(g2d)
-      + 1365*MassWB*Sqr(g2)*Sqr(g2d) - 540*MassWB*traceYdAdjYd*Sqr(g2u) - 180*
-      MassWB*traceYeAdjYe*Sqr(g2u) - 540*MassWB*traceYuAdjYu*Sqr(g2u) + 153*
-      MassWB*Sqr(g1)*Sqr(g2u) + 1365*MassWB*Sqr(g2)*Sqr(g2u) - 1260*MassWB*Sqr(
-      g2d)*Sqr(g2u) - 120*g2d*g2u*Mu*Sqr(gYd) + 120*MassB*Sqr(g2d)*Sqr(gYd) -
-      105*MassWB*Sqr(g2d)*Sqr(gYd) - 90*MassWB*Sqr(g2u)*Sqr(gYd) - 120*g2d*g2u*
-      Mu*Sqr(gYu) - 90*MassWB*Sqr(g2d)*Sqr(gYu) + 120*MassB*Sqr(g2u)*Sqr(gYu) -
-      105*MassWB*Sqr(g2u)*Sqr(gYu)));
+   beta_MassWB = Re(0.008333333333333333*(-240*g2d*g2u*gYd*gYu*MassB - 1440*g2d
+      *g2u*traceYdAdjYd*Mu - 480*g2d*g2u*traceYeAdjYe*Mu - 1440*g2d*g2u*
+      traceYuAdjYu*Mu - 1080*g2u*Cube(g2d)*Mu - 1080*g2d*Cube(g2u)*Mu - 9320*
+      MassWB*Quad(g2) - 435*MassWB*Quad(g2d) - 435*MassWB*Quad(g2u) + 576*g2d*
+      g2u*Mu*Sqr(g1) + 5760*g2d*g2u*Mu*Sqr(g2) - 540*MassWB*traceYdAdjYd*Sqr(
+      g2d) - 180*MassWB*traceYeAdjYe*Sqr(g2d) - 540*MassWB*traceYuAdjYu*Sqr(g2d
+      ) + 153*MassWB*Sqr(g1)*Sqr(g2d) + 1365*MassWB*Sqr(g2)*Sqr(g2d) - 540*
+      MassWB*traceYdAdjYd*Sqr(g2u) - 180*MassWB*traceYeAdjYe*Sqr(g2u) - 540*
+      MassWB*traceYuAdjYu*Sqr(g2u) + 153*MassWB*Sqr(g1)*Sqr(g2u) + 1365*MassWB*
+      Sqr(g2)*Sqr(g2u) - 1260*MassWB*Sqr(g2d)*Sqr(g2u) - 360*g2d*g2u*Mu*Sqr(gYd
+      ) + 120*MassB*Sqr(g2d)*Sqr(gYd) - 105*MassWB*Sqr(g2d)*Sqr(gYd) - 90*
+      MassWB*Sqr(g2u)*Sqr(gYd) - 360*g2d*g2u*Mu*Sqr(gYu) - 90*MassWB*Sqr(g2d)*
+      Sqr(gYu) + 120*MassB*Sqr(g2u)*Sqr(gYu) - 105*MassWB*Sqr(g2u)*Sqr(gYu)));
 
 
    return twoLoop * beta_MassWB;

@@ -25,16 +25,18 @@
 #include <array>
 #include <iosfwd>
 #include <string>
+#include <utility>
+#include <boost/optional.hpp>
 
 namespace flexiblesusy {
 
 namespace THDMIIMSSMBC_info {
-   enum Particles : int { VG, Fv, hh, Ah, Hm, Fd, Fu, Fe, VWm, VP, VZ,
+   enum Particles : int { VG = 0, Fv, hh, Ah, Hm, Fd, Fu, Fe, VWm, VP, VZ,
       NUMBER_OF_PARTICLES };
 
-   enum Masses : int { MVG, MFv_1, MFv_2, MFv_3, Mhh_1, Mhh_2, MAh_1, MAh_2, MHm_1
-      , MHm_2, MFd_1, MFd_2, MFd_3, MFu_1, MFu_2, MFu_3, MFe_1, MFe_2, MFe_3, MVWm
-      , MVP, MVZ, NUMBER_OF_MASSES };
+   enum Masses : int { MVG = 0, MFv_1, MFv_2, MFv_3, Mhh_1, Mhh_2, MAh_1, MAh_2,
+      MHm_1, MHm_2, MFd_1, MFd_2, MFd_3, MFu_1, MFu_2, MFu_3, MFe_1, MFe_2, MFe_3,
+      MVWm, MVP, MVZ, NUMBER_OF_MASSES };
 
    enum Parameters : int { g1, g2, g3, Lambda6, Lambda5, Lambda7, Lambda1, Lambda4
       , Lambda3, Lambda2, Yu0_0, Yu0_1, Yu0_2, Yu1_0, Yu1_1, Yu1_2, Yu2_0, Yu2_1,
@@ -42,8 +44,8 @@ namespace THDMIIMSSMBC_info {
       Ye0_1, Ye0_2, Ye1_0, Ye1_1, Ye1_2, Ye2_0, Ye2_1, Ye2_2, M122, M112, M222, v1
       , v2, NUMBER_OF_PARAMETERS };
 
-   enum Mixings : int { ZH0_0, ZH0_1, ZH1_0, ZH1_1, ZA0_0, ZA0_1, ZA1_0, ZA1_1,
-      ZP0_0, ZP0_1, ZP1_0, ZP1_1, ReVd0_0, ImVd0_0, ReVd0_1, ImVd0_1, ReVd0_2,
+   enum Mixings : int { ZH0_0 = 0, ZH0_1, ZH1_0, ZH1_1, ZA0_0, ZA0_1, ZA1_0, ZA1_1
+      , ZP0_0, ZP0_1, ZP1_0, ZP1_1, ReVd0_0, ImVd0_0, ReVd0_1, ImVd0_1, ReVd0_2,
       ImVd0_2, ReVd1_0, ImVd1_0, ReVd1_1, ImVd1_1, ReVd1_2, ImVd1_2, ReVd2_0,
       ImVd2_0, ReVd2_1, ImVd2_1, ReVd2_2, ImVd2_2, ReUd0_0, ImUd0_0, ReUd0_1,
       ImUd0_1, ReUd0_2, ImUd0_2, ReUd1_0, ImUd1_0, ReUd1_1, ImUd1_1, ReUd1_2,
@@ -68,6 +70,7 @@ namespace THDMIIMSSMBC_info {
    extern const double normalization_g2;
    extern const double normalization_g3;
 
+
    extern const std::array<int, NUMBER_OF_PARTICLES> particle_multiplicities;
    extern const std::array<std::string, NUMBER_OF_PARTICLES> particle_names;
    extern const std::array<std::string, NUMBER_OF_PARTICLES> particle_latex_names;
@@ -81,6 +84,11 @@ namespace THDMIIMSSMBC_info {
    constexpr bool is_FlexibleEFTHiggs = false;
    constexpr bool is_CP_violating_Higgs_sector {false};
 
+   int get_pdg_code_for_particle(Particles);
+   int get_pdg_code_for_particle(Particles, int);
+   std::string get_particle_name_from_pdg(int);
+   // @todo: replace with std::optional when we move to C++17
+   std::pair<std::string, boost::optional<unsigned int>> get_multiplet_and_index_from_pdg(int);
    void print(std::ostream&);
 
    class THDMIIMSSMBC_particle_names : public Names {

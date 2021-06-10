@@ -19,7 +19,10 @@
 
 #include "lowNMSSMTanBetaAtMZ_info.hpp"
 
+#include "error.hpp"
+
 #include <iostream>
+#include <vector>
 
 namespace flexiblesusy {
 
@@ -134,6 +137,167 @@ namespace lowNMSSMTanBetaAtMZ_info {
        = {};
 
    const std::string model_name = "lowNMSSMTanBetaAtMZ";
+
+int get_pdg_code_for_particle(Particles p)
+{
+   if (particle_multiplicities[p] > 1) {
+      throw OutOfBoundsError(particle_names[p] + " must have a generation index");
+   }
+
+   int pdg = 0;
+   switch (p) {
+
+   case VG: pdg = 21; break;
+   case Glu: pdg = 1000021; break;
+   case VWm: pdg = -24; break;
+   case VP: pdg = 22; break;
+   case VZ: pdg = 23; break;
+
+   default: throw OutOfBoundsError("invalid particle " + std::to_string(p));
+   }
+
+   return pdg;
+}
+
+int get_pdg_code_for_particle(Particles p, int index)
+{
+   if (particle_multiplicities[p] == 1) {
+      throw OutOfBoundsError(particle_names[p] + " does not carry an index");
+   }
+
+   std::vector<int> pdg_codes;
+   switch (p) {
+
+   case Fv: pdg_codes = {12, 14, 16}; break;
+   case Sd: pdg_codes = {1000001, 1000003, 1000005, 2000001, 2000003, 2000005}; break;
+   case Sv: pdg_codes = {1000012, 1000014, 1000016}; break;
+   case Su: pdg_codes = {1000002, 1000004, 1000006, 2000002, 2000004, 2000006}; break;
+   case Se: pdg_codes = {1000011, 1000013, 1000015, 2000011, 2000013, 2000015}; break;
+   case hh: pdg_codes = {25, 35, 45}; break;
+   case Ah: pdg_codes = {0, 36, 46}; break;
+   case Hpm: pdg_codes = {0, -37}; break;
+   case Chi: pdg_codes = {1000022, 1000023, 1000025, 1000035, 1000045}; break;
+   case Cha: pdg_codes = {-1000024, -1000037}; break;
+   case Fe: pdg_codes = {11, 13, 15}; break;
+   case Fd: pdg_codes = {1, 3, 5}; break;
+   case Fu: pdg_codes = {2, 4, 6}; break;
+
+   default: throw OutOfBoundsError("invalid particle " + std::to_string(p));
+   }
+
+   if (index < 0 || index >= pdg_codes.size()) {
+      throw OutOfBoundsError("index " + std::to_string(index) + " out of bounds");
+   }
+
+   return pdg_codes[index];
+}
+
+std::pair<std::string, boost::optional<unsigned int>> get_multiplet_and_index_from_pdg(int pdg)
+{
+   std::pair<std::string, boost::optional<unsigned int>> name;
+
+   switch (pdg) {
+
+   case 21: name = {"VG", {}}; break;
+   case 1000021: name = {"Glu", {}}; break;
+   case 12: name = {"Fv", 1}; break;
+   case 14: name = {"Fv", 2}; break;
+   case 16: name = {"Fv", 3}; break;
+   case 1000001: name = {"Sd", 1}; break;
+   case 1000003: name = {"Sd", 2}; break;
+   case 1000005: name = {"Sd", 3}; break;
+   case 2000001: name = {"Sd", 4}; break;
+   case 2000003: name = {"Sd", 5}; break;
+   case 2000005: name = {"Sd", 6}; break;
+   case 1000012: name = {"Sv", 1}; break;
+   case 1000014: name = {"Sv", 2}; break;
+   case 1000016: name = {"Sv", 3}; break;
+   case 1000002: name = {"Su", 1}; break;
+   case 1000004: name = {"Su", 2}; break;
+   case 1000006: name = {"Su", 3}; break;
+   case 2000002: name = {"Su", 4}; break;
+   case 2000004: name = {"Su", 5}; break;
+   case 2000006: name = {"Su", 6}; break;
+   case 1000011: name = {"Se", 1}; break;
+   case 1000013: name = {"Se", 2}; break;
+   case 1000015: name = {"Se", 3}; break;
+   case 2000011: name = {"Se", 4}; break;
+   case 2000013: name = {"Se", 5}; break;
+   case 2000015: name = {"Se", 6}; break;
+   case 25: name = {"hh", 1}; break;
+   case 35: name = {"hh", 2}; break;
+   case 45: name = {"hh", 3}; break;
+   case 36: name = {"Ah", 2}; break;
+   case 46: name = {"Ah", 3}; break;
+   case -37: name = {"Hpm", 2}; break;
+   case 1000022: name = {"Chi", 1}; break;
+   case 1000023: name = {"Chi", 2}; break;
+   case 1000025: name = {"Chi", 3}; break;
+   case 1000035: name = {"Chi", 4}; break;
+   case 1000045: name = {"Chi", 5}; break;
+   case -1000024: name = {"Cha", 1}; break;
+   case -1000037: name = {"Cha", 2}; break;
+   case 11: name = {"Fe", 1}; break;
+   case 13: name = {"Fe", 2}; break;
+   case 15: name = {"Fe", 3}; break;
+   case 1: name = {"Fd", 1}; break;
+   case 3: name = {"Fd", 2}; break;
+   case 5: name = {"Fd", 3}; break;
+   case 2: name = {"Fu", 1}; break;
+   case 4: name = {"Fu", 2}; break;
+   case 6: name = {"Fu", 3}; break;
+   case -24: name = {"VWm", {}}; break;
+   case 22: name = {"VP", {}}; break;
+   case 23: name = {"VZ", {}}; break;
+   case -12: name = {"barFv", 1}; break;
+   case -14: name = {"barFv", 2}; break;
+   case -16: name = {"barFv", 3}; break;
+   case -1000001: name = {"conjSd", 1}; break;
+   case -1000003: name = {"conjSd", 2}; break;
+   case -1000005: name = {"conjSd", 3}; break;
+   case -2000001: name = {"conjSd", 4}; break;
+   case -2000003: name = {"conjSd", 5}; break;
+   case -2000005: name = {"conjSd", 6}; break;
+   case -1000012: name = {"conjSv", 1}; break;
+   case -1000014: name = {"conjSv", 2}; break;
+   case -1000016: name = {"conjSv", 3}; break;
+   case -1000002: name = {"conjSu", 1}; break;
+   case -1000004: name = {"conjSu", 2}; break;
+   case -1000006: name = {"conjSu", 3}; break;
+   case -2000002: name = {"conjSu", 4}; break;
+   case -2000004: name = {"conjSu", 5}; break;
+   case -2000006: name = {"conjSu", 6}; break;
+   case -1000011: name = {"conjSe", 1}; break;
+   case -1000013: name = {"conjSe", 2}; break;
+   case -1000015: name = {"conjSe", 3}; break;
+   case -2000011: name = {"conjSe", 4}; break;
+   case -2000013: name = {"conjSe", 5}; break;
+   case -2000015: name = {"conjSe", 6}; break;
+   case 37: name = {"conjHpm", 2}; break;
+   case 1000024: name = {"barCha", 1}; break;
+   case 1000037: name = {"barCha", 2}; break;
+   case -11: name = {"barFe", 1}; break;
+   case -13: name = {"barFe", 2}; break;
+   case -15: name = {"barFe", 3}; break;
+   case -1: name = {"barFd", 1}; break;
+   case -3: name = {"barFd", 2}; break;
+   case -5: name = {"barFd", 3}; break;
+   case -2: name = {"barFu", 1}; break;
+   case -4: name = {"barFu", 2}; break;
+   case -6: name = {"barFu", 3}; break;
+   case 24: name = {"conjVWm", {}}; break;
+
+   default: name = {"", {}};
+   }
+
+   return name;
+}
+
+std::string get_particle_name_from_pdg(int pdg)
+{
+   std::pair<std::string, boost::optional<unsigned int>> const pair = get_multiplet_and_index_from_pdg(pdg);
+   return pair.first + (pair.second ? "(" + std::to_string(pair.second.get()) + ")" : "");
+}
 
 void print(std::ostream& ostr)
 {

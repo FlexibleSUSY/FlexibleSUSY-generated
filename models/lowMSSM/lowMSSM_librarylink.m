@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.5.0"];
+Print["FlexibleSUSY 2.6.0"];
 Print["lowMSSM"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -122,9 +122,10 @@ Options[FSlowMSSMOpenHandle] = {
     Sequence @@ fsDefaultSettings,
     Sequence @@ fsDefaultSMParameters,
     Sequence @@ fslowMSSMDefaultInputParameters
+
 };
 
-FSlowMSSMOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters) -> s_List, r___] :=
+FSlowMSSMOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters ) -> s_List, r___] :=
     FSlowMSSMOpenHandle[a, Sequence @@ s, r];
 
 FSlowMSSMOpenHandle[OptionsPattern[]] :=
@@ -275,6 +276,7 @@ FSlowMSSMOpenHandle[OptionsPattern[]] :=
             OptionValue[MassBInput],
             OptionValue[MassWBInput],
             OptionValue[MassGInput]
+
         }
 ];
 
@@ -432,6 +434,7 @@ FSlowMSSMSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[MassBInput],
             OptionValue[MassWBInput],
             OptionValue[MassGInput]
+
         }] /. HoldPattern[OptionValue[param_]] :> param /.
         { p } /.
         FSlowMSSMGetSettings[handle] /.

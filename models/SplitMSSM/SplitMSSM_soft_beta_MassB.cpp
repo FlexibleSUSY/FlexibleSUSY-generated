@@ -92,17 +92,18 @@ double SplitMSSM_soft_parameters::calc_beta_MassB_2_loop(const Soft_traces& soft
 
    double beta_MassB;
 
-   beta_MassB = Re(0.025*(-240*g2d*g2u*gYd*gYu*MassWB - 40*gYu*Cube(gYd)*Mu -
-      40*gYd*Cube(gYu)*Mu + 5*MassB*Quad(gYd) + 5*MassB*Quad(gYu) + 192*gYd*gYu
-      *Mu*Sqr(g1) + 960*gYd*gYu*Mu*Sqr(g2) - 120*gYd*gYu*Mu*Sqr(g2d) - 120*gYd*
-      gYu*Mu*Sqr(g2u) - 180*MassB*traceYdAdjYd*Sqr(gYd) - 60*MassB*traceYeAdjYe
-      *Sqr(gYd) - 180*MassB*traceYuAdjYu*Sqr(gYd) + 51*MassB*Sqr(g1)*Sqr(gYd) +
-      255*MassB*Sqr(g2)*Sqr(gYd) - 105*MassB*Sqr(g2d)*Sqr(gYd) + 120*MassWB*Sqr
-      (g2d)*Sqr(gYd) - 90*MassB*Sqr(g2u)*Sqr(gYd) - 180*MassB*traceYdAdjYd*Sqr(
-      gYu) - 60*MassB*traceYeAdjYe*Sqr(gYu) - 180*MassB*traceYuAdjYu*Sqr(gYu) +
-      51*MassB*Sqr(g1)*Sqr(gYu) + 255*MassB*Sqr(g2)*Sqr(gYu) - 90*MassB*Sqr(g2d
-      )*Sqr(gYu) - 105*MassB*Sqr(g2u)*Sqr(gYu) + 120*MassWB*Sqr(g2u)*Sqr(gYu) -
-      140*MassB*Sqr(gYd)*Sqr(gYu)));
+   beta_MassB = Re(0.025*(-240*g2d*g2u*gYd*gYu*MassWB - 480*gYd*gYu*
+      traceYdAdjYd*Mu - 160*gYd*gYu*traceYeAdjYe*Mu - 480*gYd*gYu*traceYuAdjYu*
+      Mu - 120*gYu*Cube(gYd)*Mu - 120*gYd*Cube(gYu)*Mu + 5*MassB*Quad(gYd) + 5*
+      MassB*Quad(gYu) + 192*gYd*gYu*Mu*Sqr(g1) + 960*gYd*gYu*Mu*Sqr(g2) - 360*
+      gYd*gYu*Mu*Sqr(g2d) - 360*gYd*gYu*Mu*Sqr(g2u) - 180*MassB*traceYdAdjYd*
+      Sqr(gYd) - 60*MassB*traceYeAdjYe*Sqr(gYd) - 180*MassB*traceYuAdjYu*Sqr(
+      gYd) + 51*MassB*Sqr(g1)*Sqr(gYd) + 255*MassB*Sqr(g2)*Sqr(gYd) - 105*MassB
+      *Sqr(g2d)*Sqr(gYd) + 120*MassWB*Sqr(g2d)*Sqr(gYd) - 90*MassB*Sqr(g2u)*Sqr
+      (gYd) - 180*MassB*traceYdAdjYd*Sqr(gYu) - 60*MassB*traceYeAdjYe*Sqr(gYu)
+      - 180*MassB*traceYuAdjYu*Sqr(gYu) + 51*MassB*Sqr(g1)*Sqr(gYu) + 255*MassB
+      *Sqr(g2)*Sqr(gYu) - 90*MassB*Sqr(g2d)*Sqr(gYu) - 105*MassB*Sqr(g2u)*Sqr(
+      gYu) + 120*MassWB*Sqr(g2u)*Sqr(gYu) - 140*MassB*Sqr(gYd)*Sqr(gYu)));
 
 
    return twoLoop * beta_MassB;

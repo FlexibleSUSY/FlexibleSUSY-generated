@@ -32,8 +32,8 @@
 #include "numerics2.hpp"
 
 #ifdef ENABLE_HIMALAYA
-#include "HierarchyCalculator.hpp"
-#include "version.hpp"
+#include "himalaya/HierarchyCalculator.hpp"
+#include "himalaya/version.hpp"
 #endif
 
 #include <cmath>
@@ -207,219 +207,219 @@ bool NUTNMSSM_high_scale_constraint<Two_scale>::check_non_perturbative()
    const auto Kappa = MODELPARAMETER(Kappa);
    const auto Yu = MODELPARAMETER(Yu);
 
-   if (MaxAbsValue(g1) > 3.5449077018110318) {
+   if (MaxAbsValue(g1) > 12.566370614359172) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::g1, MaxAbsValue(g1), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::g1, MaxAbsValue(g1), model->get_scale(), 12.566370614359172);
    } else {
       model->get_problems().unflag_non_perturbative_parameter(NUTNMSSM_info::g1);
    }
-   if (MaxAbsValue(g2) > 3.5449077018110318) {
+   if (MaxAbsValue(g2) > 12.566370614359172) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::g2, MaxAbsValue(g2), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::g2, MaxAbsValue(g2), model->get_scale(), 12.566370614359172);
    } else {
       model->get_problems().unflag_non_perturbative_parameter(NUTNMSSM_info::g2);
    }
-   if (MaxAbsValue(g3) > 3.5449077018110318) {
+   if (MaxAbsValue(g3) > 12.566370614359172) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::g3, MaxAbsValue(g3), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::g3, MaxAbsValue(g3), model->get_scale(), 12.566370614359172);
    } else {
       model->get_problems().unflag_non_perturbative_parameter(NUTNMSSM_info::g3);
    }
-   if (MaxAbsValue(Yd(0,0)) > 3.5449077018110318) {
+   if (MaxAbsValue(Yd(0,0)) > 12.566370614359172) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yd0_0, MaxAbsValue(Yd(0,0)), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yd0_0, MaxAbsValue(Yd(0,0)), model->get_scale(), 12.566370614359172);
    } else {
       model->get_problems().unflag_non_perturbative_parameter(NUTNMSSM_info::Yd0_0);
    }
 
-   if (MaxAbsValue(Yd(0,1)) > 3.5449077018110318) {
+   if (MaxAbsValue(Yd(0,1)) > 12.566370614359172) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yd0_1, MaxAbsValue(Yd(0,1)), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yd0_1, MaxAbsValue(Yd(0,1)), model->get_scale(), 12.566370614359172);
    } else {
       model->get_problems().unflag_non_perturbative_parameter(NUTNMSSM_info::Yd0_1);
    }
 
-   if (MaxAbsValue(Yd(0,2)) > 3.5449077018110318) {
+   if (MaxAbsValue(Yd(0,2)) > 12.566370614359172) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yd0_2, MaxAbsValue(Yd(0,2)), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yd0_2, MaxAbsValue(Yd(0,2)), model->get_scale(), 12.566370614359172);
    } else {
       model->get_problems().unflag_non_perturbative_parameter(NUTNMSSM_info::Yd0_2);
    }
 
-   if (MaxAbsValue(Yd(1,0)) > 3.5449077018110318) {
+   if (MaxAbsValue(Yd(1,0)) > 12.566370614359172) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yd1_0, MaxAbsValue(Yd(1,0)), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yd1_0, MaxAbsValue(Yd(1,0)), model->get_scale(), 12.566370614359172);
    } else {
       model->get_problems().unflag_non_perturbative_parameter(NUTNMSSM_info::Yd1_0);
    }
 
-   if (MaxAbsValue(Yd(1,1)) > 3.5449077018110318) {
+   if (MaxAbsValue(Yd(1,1)) > 12.566370614359172) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yd1_1, MaxAbsValue(Yd(1,1)), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yd1_1, MaxAbsValue(Yd(1,1)), model->get_scale(), 12.566370614359172);
    } else {
       model->get_problems().unflag_non_perturbative_parameter(NUTNMSSM_info::Yd1_1);
    }
 
-   if (MaxAbsValue(Yd(1,2)) > 3.5449077018110318) {
+   if (MaxAbsValue(Yd(1,2)) > 12.566370614359172) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yd1_2, MaxAbsValue(Yd(1,2)), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yd1_2, MaxAbsValue(Yd(1,2)), model->get_scale(), 12.566370614359172);
    } else {
       model->get_problems().unflag_non_perturbative_parameter(NUTNMSSM_info::Yd1_2);
    }
 
-   if (MaxAbsValue(Yd(2,0)) > 3.5449077018110318) {
+   if (MaxAbsValue(Yd(2,0)) > 12.566370614359172) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yd2_0, MaxAbsValue(Yd(2,0)), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yd2_0, MaxAbsValue(Yd(2,0)), model->get_scale(), 12.566370614359172);
    } else {
       model->get_problems().unflag_non_perturbative_parameter(NUTNMSSM_info::Yd2_0);
    }
 
-   if (MaxAbsValue(Yd(2,1)) > 3.5449077018110318) {
+   if (MaxAbsValue(Yd(2,1)) > 12.566370614359172) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yd2_1, MaxAbsValue(Yd(2,1)), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yd2_1, MaxAbsValue(Yd(2,1)), model->get_scale(), 12.566370614359172);
    } else {
       model->get_problems().unflag_non_perturbative_parameter(NUTNMSSM_info::Yd2_1);
    }
 
-   if (MaxAbsValue(Yd(2,2)) > 3.5449077018110318) {
+   if (MaxAbsValue(Yd(2,2)) > 12.566370614359172) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yd2_2, MaxAbsValue(Yd(2,2)), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yd2_2, MaxAbsValue(Yd(2,2)), model->get_scale(), 12.566370614359172);
    } else {
       model->get_problems().unflag_non_perturbative_parameter(NUTNMSSM_info::Yd2_2);
    }
-   if (MaxAbsValue(Ye(0,0)) > 3.5449077018110318) {
+   if (MaxAbsValue(Ye(0,0)) > 12.566370614359172) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Ye0_0, MaxAbsValue(Ye(0,0)), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Ye0_0, MaxAbsValue(Ye(0,0)), model->get_scale(), 12.566370614359172);
    } else {
       model->get_problems().unflag_non_perturbative_parameter(NUTNMSSM_info::Ye0_0);
    }
 
-   if (MaxAbsValue(Ye(0,1)) > 3.5449077018110318) {
+   if (MaxAbsValue(Ye(0,1)) > 12.566370614359172) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Ye0_1, MaxAbsValue(Ye(0,1)), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Ye0_1, MaxAbsValue(Ye(0,1)), model->get_scale(), 12.566370614359172);
    } else {
       model->get_problems().unflag_non_perturbative_parameter(NUTNMSSM_info::Ye0_1);
    }
 
-   if (MaxAbsValue(Ye(0,2)) > 3.5449077018110318) {
+   if (MaxAbsValue(Ye(0,2)) > 12.566370614359172) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Ye0_2, MaxAbsValue(Ye(0,2)), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Ye0_2, MaxAbsValue(Ye(0,2)), model->get_scale(), 12.566370614359172);
    } else {
       model->get_problems().unflag_non_perturbative_parameter(NUTNMSSM_info::Ye0_2);
    }
 
-   if (MaxAbsValue(Ye(1,0)) > 3.5449077018110318) {
+   if (MaxAbsValue(Ye(1,0)) > 12.566370614359172) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Ye1_0, MaxAbsValue(Ye(1,0)), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Ye1_0, MaxAbsValue(Ye(1,0)), model->get_scale(), 12.566370614359172);
    } else {
       model->get_problems().unflag_non_perturbative_parameter(NUTNMSSM_info::Ye1_0);
    }
 
-   if (MaxAbsValue(Ye(1,1)) > 3.5449077018110318) {
+   if (MaxAbsValue(Ye(1,1)) > 12.566370614359172) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Ye1_1, MaxAbsValue(Ye(1,1)), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Ye1_1, MaxAbsValue(Ye(1,1)), model->get_scale(), 12.566370614359172);
    } else {
       model->get_problems().unflag_non_perturbative_parameter(NUTNMSSM_info::Ye1_1);
    }
 
-   if (MaxAbsValue(Ye(1,2)) > 3.5449077018110318) {
+   if (MaxAbsValue(Ye(1,2)) > 12.566370614359172) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Ye1_2, MaxAbsValue(Ye(1,2)), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Ye1_2, MaxAbsValue(Ye(1,2)), model->get_scale(), 12.566370614359172);
    } else {
       model->get_problems().unflag_non_perturbative_parameter(NUTNMSSM_info::Ye1_2);
    }
 
-   if (MaxAbsValue(Ye(2,0)) > 3.5449077018110318) {
+   if (MaxAbsValue(Ye(2,0)) > 12.566370614359172) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Ye2_0, MaxAbsValue(Ye(2,0)), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Ye2_0, MaxAbsValue(Ye(2,0)), model->get_scale(), 12.566370614359172);
    } else {
       model->get_problems().unflag_non_perturbative_parameter(NUTNMSSM_info::Ye2_0);
    }
 
-   if (MaxAbsValue(Ye(2,1)) > 3.5449077018110318) {
+   if (MaxAbsValue(Ye(2,1)) > 12.566370614359172) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Ye2_1, MaxAbsValue(Ye(2,1)), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Ye2_1, MaxAbsValue(Ye(2,1)), model->get_scale(), 12.566370614359172);
    } else {
       model->get_problems().unflag_non_perturbative_parameter(NUTNMSSM_info::Ye2_1);
    }
 
-   if (MaxAbsValue(Ye(2,2)) > 3.5449077018110318) {
+   if (MaxAbsValue(Ye(2,2)) > 12.566370614359172) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Ye2_2, MaxAbsValue(Ye(2,2)), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Ye2_2, MaxAbsValue(Ye(2,2)), model->get_scale(), 12.566370614359172);
    } else {
       model->get_problems().unflag_non_perturbative_parameter(NUTNMSSM_info::Ye2_2);
    }
-   if (MaxAbsValue(Lambdax) > 3.5449077018110318) {
+   if (MaxAbsValue(Lambdax) > 12.566370614359172) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Lambdax, MaxAbsValue(Lambdax), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Lambdax, MaxAbsValue(Lambdax), model->get_scale(), 12.566370614359172);
    } else {
       model->get_problems().unflag_non_perturbative_parameter(NUTNMSSM_info::Lambdax);
    }
-   if (MaxAbsValue(Kappa) > 3.5449077018110318) {
+   if (MaxAbsValue(Kappa) > 12.566370614359172) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Kappa, MaxAbsValue(Kappa), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Kappa, MaxAbsValue(Kappa), model->get_scale(), 12.566370614359172);
    } else {
       model->get_problems().unflag_non_perturbative_parameter(NUTNMSSM_info::Kappa);
    }
-   if (MaxAbsValue(Yu(0,0)) > 3.5449077018110318) {
+   if (MaxAbsValue(Yu(0,0)) > 12.566370614359172) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yu0_0, MaxAbsValue(Yu(0,0)), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yu0_0, MaxAbsValue(Yu(0,0)), model->get_scale(), 12.566370614359172);
    } else {
       model->get_problems().unflag_non_perturbative_parameter(NUTNMSSM_info::Yu0_0);
    }
 
-   if (MaxAbsValue(Yu(0,1)) > 3.5449077018110318) {
+   if (MaxAbsValue(Yu(0,1)) > 12.566370614359172) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yu0_1, MaxAbsValue(Yu(0,1)), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yu0_1, MaxAbsValue(Yu(0,1)), model->get_scale(), 12.566370614359172);
    } else {
       model->get_problems().unflag_non_perturbative_parameter(NUTNMSSM_info::Yu0_1);
    }
 
-   if (MaxAbsValue(Yu(0,2)) > 3.5449077018110318) {
+   if (MaxAbsValue(Yu(0,2)) > 12.566370614359172) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yu0_2, MaxAbsValue(Yu(0,2)), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yu0_2, MaxAbsValue(Yu(0,2)), model->get_scale(), 12.566370614359172);
    } else {
       model->get_problems().unflag_non_perturbative_parameter(NUTNMSSM_info::Yu0_2);
    }
 
-   if (MaxAbsValue(Yu(1,0)) > 3.5449077018110318) {
+   if (MaxAbsValue(Yu(1,0)) > 12.566370614359172) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yu1_0, MaxAbsValue(Yu(1,0)), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yu1_0, MaxAbsValue(Yu(1,0)), model->get_scale(), 12.566370614359172);
    } else {
       model->get_problems().unflag_non_perturbative_parameter(NUTNMSSM_info::Yu1_0);
    }
 
-   if (MaxAbsValue(Yu(1,1)) > 3.5449077018110318) {
+   if (MaxAbsValue(Yu(1,1)) > 12.566370614359172) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yu1_1, MaxAbsValue(Yu(1,1)), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yu1_1, MaxAbsValue(Yu(1,1)), model->get_scale(), 12.566370614359172);
    } else {
       model->get_problems().unflag_non_perturbative_parameter(NUTNMSSM_info::Yu1_1);
    }
 
-   if (MaxAbsValue(Yu(1,2)) > 3.5449077018110318) {
+   if (MaxAbsValue(Yu(1,2)) > 12.566370614359172) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yu1_2, MaxAbsValue(Yu(1,2)), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yu1_2, MaxAbsValue(Yu(1,2)), model->get_scale(), 12.566370614359172);
    } else {
       model->get_problems().unflag_non_perturbative_parameter(NUTNMSSM_info::Yu1_2);
    }
 
-   if (MaxAbsValue(Yu(2,0)) > 3.5449077018110318) {
+   if (MaxAbsValue(Yu(2,0)) > 12.566370614359172) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yu2_0, MaxAbsValue(Yu(2,0)), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yu2_0, MaxAbsValue(Yu(2,0)), model->get_scale(), 12.566370614359172);
    } else {
       model->get_problems().unflag_non_perturbative_parameter(NUTNMSSM_info::Yu2_0);
    }
 
-   if (MaxAbsValue(Yu(2,1)) > 3.5449077018110318) {
+   if (MaxAbsValue(Yu(2,1)) > 12.566370614359172) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yu2_1, MaxAbsValue(Yu(2,1)), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yu2_1, MaxAbsValue(Yu(2,1)), model->get_scale(), 12.566370614359172);
    } else {
       model->get_problems().unflag_non_perturbative_parameter(NUTNMSSM_info::Yu2_1);
    }
 
-   if (MaxAbsValue(Yu(2,2)) > 3.5449077018110318) {
+   if (MaxAbsValue(Yu(2,2)) > 12.566370614359172) {
       problem = true;
-      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yu2_2, MaxAbsValue(Yu(2,2)), model->get_scale(), 3.5449077018110318);
+      model->get_problems().flag_non_perturbative_parameter(NUTNMSSM_info::Yu2_2, MaxAbsValue(Yu(2,2)), model->get_scale(), 12.566370614359172);
    } else {
       model->get_problems().unflag_non_perturbative_parameter(NUTNMSSM_info::Yu2_2);
    }

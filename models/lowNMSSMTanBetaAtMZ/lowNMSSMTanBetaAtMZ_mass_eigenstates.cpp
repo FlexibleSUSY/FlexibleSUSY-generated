@@ -25,7 +25,7 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.6.0 and SARAH 4.14.5 .
  */
 
 #include "lowNMSSMTanBetaAtMZ_mass_eigenstates.hpp"
@@ -7980,9 +7980,9 @@ std::complex<double> CLASSNAME::self_energy_VWm_1loop(double p ) const
       CpconjVWmVWmVZVZ3());
    result += -(AbsSqr(CpconjVWmVPVWm())*(A0(Sqr(MVWm)) + 10*B00(Sqr(p),Sqr(MVWm),0
       ) + B0(Sqr(p),Sqr(MVWm),0)*(Sqr(MVWm) + 4*Sqr(p))));
-   result += -(AbsSqr(CpconjVWmVWmVZ())*(A0(Sqr(MVWm)) + A0(Sqr(MVZ)) + 10*B00(Sqr
-      (p),Sqr(MVZ),Sqr(MVWm)) + B0(Sqr(p),Sqr(MVZ),Sqr(MVWm))*(Sqr(MVWm) + Sqr(MVZ
-      ) + 4*Sqr(p))));
+   result += AbsSqr(CpconjVWmVWmVZ())*(-A0(Sqr(MVWm)) - A0(Sqr(MVZ)) - 10*B00(Sqr(
+      p),Sqr(MVZ),Sqr(MVWm)) - B0(Sqr(p),Sqr(MVZ),Sqr(MVWm))*(Sqr(MVWm) + Sqr(MVZ)
+      + 4*Sqr(p)));
    result += SUM(gI1,0,1,A0(Sqr(MHpm(gI1)))*CpHpmconjHpmconjVWmVWm(gI1,gI1));
    result += -4*SUM(gI1,0,1,SUM(gI2,0,2,AbsSqr(CpAhHpmconjVWm(gI2,gI1))*B00(Sqr(p)
       ,Sqr(MAh(gI2)),Sqr(MHpm(gI1)))));

@@ -32,6 +32,9 @@ LIBSM_CXXQFT_VERTICES_SRC ?= ''
 SM_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
+SM_FlexibleDecay_MK := \
+		$(DIR)/decays/FlexibleDecay.mk
+
 SM_INCLUDE_MK := \
 		$(SM_SUSY_BETAS_MK) \
 		$(SM_SOFT_BETAS_MK)
@@ -141,6 +144,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(SM_SUSY_BETAS_MK)
 -include $(SM_SOFT_BETAS_MK)
+-include $(SM_FlexibleDecay_MK)
 -include $(SM_CXXQFT_VERTICES_MK)
 -include $(SM_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
@@ -153,6 +157,8 @@ $(SM_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(SM_SOFT_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
+
+$(SM_FlexibleDecay_MK): run-metacode-$(MODNAME)
 $(SM_CXXQFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(SM_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
@@ -288,7 +294,8 @@ pack-$(MODNAME)-src:
 		$(LLSM_SRC) $(LLSM_MMA) \
 		$(SM_MK) $(SM_INCLUDE_MK) $(SM_CXXQFT_VERTICES_MK) \
 		$(SM_SLHA_INPUT) $(SM_REFERENCES) \
-		$(SM_GNUPLOT)
+		$(SM_GNUPLOT) \
+		$(SM_FlexibleDecay_MK)
 
 $(LIBSM_SRC) $(LIBSM_HDR) $(LIBSM_CXXQFT_HDR) $(EXESM_SRC) $(LLSM_SRC) $(LLSM_MMA) \
 : run-metacode-$(MODNAME)
@@ -312,7 +319,7 @@ $(METACODE_STAMP_SM):
 endif
 
 $(LIBSM_DEP) $(EXESM_DEP) $(LLSM_DEP) $(LIBSM_OBJ) $(EXESM_OBJ) $(LLSM_OBJ) $(LLSM_LIB): \
-	CPPFLAGS += $(MODSM_SUBMOD_INC) $(MODSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS)  $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODSM_SUBMOD_INC) $(MODSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBSM_DEP) $(EXESM_DEP) $(LLSM_DEP) $(LIBSM_OBJ) $(EXESM_OBJ) $(LLSM_OBJ) $(LLSM_LIB): \
@@ -328,11 +335,11 @@ $(LIBSM): $(LIBSM_OBJ)
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBSM) $(MODSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
 $(LLSM_LIB): $(LLSM_OBJ) $(LIBSM) $(MODSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
 
 ALLDEP += $(LIBSM_DEP) $(EXESM_DEP)
 ALLSRC += $(LIBSM_SRC) $(EXESM_SRC)

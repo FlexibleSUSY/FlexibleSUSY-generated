@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.5.0"];
+Print["FlexibleSUSY 2.6.0"];
 Print["lowNMSSMTanBetaAtMZ"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -136,9 +136,10 @@ Options[FSlowNMSSMTanBetaAtMZOpenHandle] = {
     Sequence @@ fsDefaultSettings,
     Sequence @@ fsDefaultSMParameters,
     Sequence @@ fslowNMSSMTanBetaAtMZDefaultInputParameters
+
 };
 
-FSlowNMSSMTanBetaAtMZOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters) -> s_List, r___] :=
+FSlowNMSSMTanBetaAtMZOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters ) -> s_List, r___] :=
     FSlowNMSSMTanBetaAtMZOpenHandle[a, Sequence @@ s, r];
 
 FSlowNMSSMTanBetaAtMZOpenHandle[OptionsPattern[]] :=
@@ -239,6 +240,7 @@ FSlowNMSSMTanBetaAtMZOpenHandle[OptionsPattern[]] :=
             OptionValue[ALambdaInput],
             OptionValue[AKappaInput],
             OptionValue[MuEffInput]
+
         }
 ];
 
@@ -346,6 +348,7 @@ FSlowNMSSMTanBetaAtMZSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[ALambdaInput],
             OptionValue[AKappaInput],
             OptionValue[MuEffInput]
+
         }] /. HoldPattern[OptionValue[param_]] :> param /.
         { p } /.
         FSlowNMSSMTanBetaAtMZGetSettings[handle] /.

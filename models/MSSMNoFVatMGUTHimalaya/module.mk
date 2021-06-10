@@ -32,6 +32,9 @@ LIBMSSMNoFVatMGUTHimalaya_CXXQFT_VERTICES_SRC ?= ''
 MSSMNoFVatMGUTHimalaya_FlexibleEFTHiggs_MK := \
 		$(DIR)/FlexibleEFTHiggs.mk
 
+MSSMNoFVatMGUTHimalaya_FlexibleDecay_MK := \
+		$(DIR)/decays/FlexibleDecay.mk
+
 MSSMNoFVatMGUTHimalaya_INCLUDE_MK := \
 		$(MSSMNoFVatMGUTHimalaya_SUSY_BETAS_MK) \
 		$(MSSMNoFVatMGUTHimalaya_SOFT_BETAS_MK)
@@ -141,6 +144,7 @@ ifneq ($(MAKECMDGOALS),release)
 ifneq ($(MAKECMDGOALS),doc)
 -include $(MSSMNoFVatMGUTHimalaya_SUSY_BETAS_MK)
 -include $(MSSMNoFVatMGUTHimalaya_SOFT_BETAS_MK)
+-include $(MSSMNoFVatMGUTHimalaya_FlexibleDecay_MK)
 -include $(MSSMNoFVatMGUTHimalaya_CXXQFT_VERTICES_MK)
 -include $(MSSMNoFVatMGUTHimalaya_FlexibleEFTHiggs_MK)
 ifneq ($(MAKECMDGOALS),clean)
@@ -153,6 +157,8 @@ $(MSSMNoFVatMGUTHimalaya_SUSY_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(MSSMNoFVatMGUTHimalaya_SOFT_BETAS_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
+
+$(MSSMNoFVatMGUTHimalaya_FlexibleDecay_MK): run-metacode-$(MODNAME)
 $(MSSMNoFVatMGUTHimalaya_CXXQFT_VERTICES_MK): run-metacode-$(MODNAME)
 		@$(CONVERT_DOS_PATHS) $@
 $(MSSMNoFVatMGUTHimalaya_FlexibleEFTHiggs_MK): run-metacode-$(MODNAME)
@@ -288,7 +294,8 @@ pack-$(MODNAME)-src:
 		$(LLMSSMNoFVatMGUTHimalaya_SRC) $(LLMSSMNoFVatMGUTHimalaya_MMA) \
 		$(MSSMNoFVatMGUTHimalaya_MK) $(MSSMNoFVatMGUTHimalaya_INCLUDE_MK) $(MSSMNoFVatMGUTHimalaya_CXXQFT_VERTICES_MK) \
 		$(MSSMNoFVatMGUTHimalaya_SLHA_INPUT) $(MSSMNoFVatMGUTHimalaya_REFERENCES) \
-		$(MSSMNoFVatMGUTHimalaya_GNUPLOT)
+		$(MSSMNoFVatMGUTHimalaya_GNUPLOT) \
+		$(MSSMNoFVatMGUTHimalaya_FlexibleDecay_MK)
 
 $(LIBMSSMNoFVatMGUTHimalaya_SRC) $(LIBMSSMNoFVatMGUTHimalaya_HDR) $(LIBMSSMNoFVatMGUTHimalaya_CXXQFT_HDR) $(EXEMSSMNoFVatMGUTHimalaya_SRC) $(LLMSSMNoFVatMGUTHimalaya_SRC) $(LLMSSMNoFVatMGUTHimalaya_MMA) \
 : run-metacode-$(MODNAME)
@@ -312,7 +319,7 @@ $(METACODE_STAMP_MSSMNoFVatMGUTHimalaya):
 endif
 
 $(LIBMSSMNoFVatMGUTHimalaya_DEP) $(EXEMSSMNoFVatMGUTHimalaya_DEP) $(LLMSSMNoFVatMGUTHimalaya_DEP) $(LIBMSSMNoFVatMGUTHimalaya_OBJ) $(EXEMSSMNoFVatMGUTHimalaya_OBJ) $(LLMSSMNoFVatMGUTHimalaya_OBJ) $(LLMSSMNoFVatMGUTHimalaya_LIB): \
-	CPPFLAGS += $(MODMSSMNoFVatMGUTHimalaya_SUBMOD_INC) $(MODMSSMNoFVatMGUTHimalaya_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS)  $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODMSSMNoFVatMGUTHimalaya_SUBMOD_INC) $(MODMSSMNoFVatMGUTHimalaya_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBMSSMNoFVatMGUTHimalaya_DEP) $(EXEMSSMNoFVatMGUTHimalaya_DEP) $(LLMSSMNoFVatMGUTHimalaya_DEP) $(LIBMSSMNoFVatMGUTHimalaya_OBJ) $(EXEMSSMNoFVatMGUTHimalaya_OBJ) $(LLMSSMNoFVatMGUTHimalaya_OBJ) $(LLMSSMNoFVatMGUTHimalaya_LIB): \
@@ -328,11 +335,11 @@ $(LIBMSSMNoFVatMGUTHimalaya): $(LIBMSSMNoFVatMGUTHimalaya_OBJ)
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBMSSMNoFVatMGUTHimalaya) $(MODMSSMNoFVatMGUTHimalaya_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
 $(LLMSSMNoFVatMGUTHimalaya_LIB): $(LLMSSMNoFVatMGUTHimalaya_OBJ) $(LIBMSSMNoFVatMGUTHimalaya) $(MODMSSMNoFVatMGUTHimalaya_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^ $(LIBGM2Calc)) $(filter -%,$(LOOPFUNCLIBS)) $(HIMALAYALIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
 
 ALLDEP += $(LIBMSSMNoFVatMGUTHimalaya_DEP) $(EXEMSSMNoFVatMGUTHimalaya_DEP)
 ALLSRC += $(LIBMSSMNoFVatMGUTHimalaya_SRC) $(EXEMSSMNoFVatMGUTHimalaya_SRC)

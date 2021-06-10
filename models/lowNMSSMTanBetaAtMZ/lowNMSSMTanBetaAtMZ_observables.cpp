@@ -32,7 +32,7 @@
 #include "lowe.h"
 #include "physical_input.hpp"
 
-#ifdef ENABLE_GM2Calc
+#ifdef ENABLE_GM2CALC
 #include "gm2calc_interface.hpp"
 #endif
 
@@ -97,7 +97,7 @@ void lowNMSSMTanBetaAtMZ_observables::set(const Eigen::ArrayXd& vec)
 
 }
 
-lowNMSSMTanBetaAtMZ_observables calculate_observables(lowNMSSMTanBetaAtMZ_mass_eigenstates& model,
+lowNMSSMTanBetaAtMZ_observables calculate_observables(const lowNMSSMTanBetaAtMZ_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input,
                                               double scale)
@@ -107,19 +107,25 @@ lowNMSSMTanBetaAtMZ_observables calculate_observables(lowNMSSMTanBetaAtMZ_mass_e
    if (scale > 0.) {
       try {
          model_at_scale.run_to(scale);
+      } catch (const NonPerturbativeRunningError& e) {
+         lowNMSSMTanBetaAtMZ_observables observables;
+         observables.problems.general.flag_non_perturbative_running(scale);
+         return observables;
       } catch (const Error& e) {
-         model.get_problems().flag_thrown(e.what_detailed());
-         return lowNMSSMTanBetaAtMZ_observables();
+         lowNMSSMTanBetaAtMZ_observables observables;
+         observables.problems.general.flag_thrown(e.what());
+         return observables;
       } catch (const std::exception& e) {
-         model.get_problems().flag_thrown(e.what());
-         return lowNMSSMTanBetaAtMZ_observables();
+         lowNMSSMTanBetaAtMZ_observables observables;
+         observables.problems.general.flag_thrown(e.what());
+         return observables;
       }
    }
 
    return calculate_observables(model_at_scale, qedqcd, physical_input);
 }
 
-lowNMSSMTanBetaAtMZ_observables calculate_observables(lowNMSSMTanBetaAtMZ_mass_eigenstates& model,
+lowNMSSMTanBetaAtMZ_observables calculate_observables(const lowNMSSMTanBetaAtMZ_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input)
 {
@@ -128,10 +134,12 @@ lowNMSSMTanBetaAtMZ_observables calculate_observables(lowNMSSMTanBetaAtMZ_mass_e
    try {
       
 
+   } catch (const NonPerturbativeRunningError& e) {
+      observables.problems.general.flag_non_perturbative_running(e.get_scale());
    } catch (const Error& e) {
-      model.get_problems().flag_thrown(e.what_detailed());
+      observables.problems.general.flag_thrown(e.what());
    } catch (const std::exception& e) {
-      model.get_problems().flag_thrown(e.what());
+      observables.problems.general.flag_thrown(e.what());
    }
 
    return observables;

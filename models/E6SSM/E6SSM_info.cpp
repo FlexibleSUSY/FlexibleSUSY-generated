@@ -19,7 +19,10 @@
 
 #include "E6SSM_info.hpp"
 
+#include "error.hpp"
+
 #include <iostream>
+#include <vector>
 
 namespace flexiblesusy {
 
@@ -193,6 +196,241 @@ namespace E6SSM_info {
        = {};
 
    const std::string model_name = "E6SSM";
+
+int get_pdg_code_for_particle(Particles p)
+{
+   if (particle_multiplicities[p] > 1) {
+      throw OutOfBoundsError(particle_names[p] + " must have a generation index");
+   }
+
+   int pdg = 0;
+   switch (p) {
+
+   case VG: pdg = 21; break;
+   case Glu: pdg = 1000021; break;
+   case ChaP: pdg = 1000091; break;
+   case VWm: pdg = -24; break;
+   case VP: pdg = 22; break;
+   case VZ: pdg = 23; break;
+   case VZp: pdg = 31; break;
+
+   default: throw OutOfBoundsError("invalid particle " + std::to_string(p));
+   }
+
+   return pdg;
+}
+
+int get_pdg_code_for_particle(Particles p, int index)
+{
+   if (particle_multiplicities[p] == 1) {
+      throw OutOfBoundsError(particle_names[p] + " does not carry an index");
+   }
+
+   std::vector<int> pdg_codes;
+   switch (p) {
+
+   case Fv: pdg_codes = {12, 14, 16}; break;
+   case Sd: pdg_codes = {1000001, 1000003, 1000005, 2000001, 2000003, 2000005}; break;
+   case Sv: pdg_codes = {1000012, 1000014, 1000016}; break;
+   case Su: pdg_codes = {1000002, 1000004, 1000006, 2000002, 2000004, 2000006}; break;
+   case Se: pdg_codes = {1000011, 1000013, 1000015, 2000011, 2000013, 2000015}; break;
+   case SDX: pdg_codes = {1000051, 2000051, 1000052, 2000052, 1000053, 2000053}; break;
+   case hh: pdg_codes = {25, 35, 45}; break;
+   case Ah: pdg_codes = {0, 0, 36}; break;
+   case Hpm: pdg_codes = {0, -37}; break;
+   case Chi: pdg_codes = {1000022, 1000023, 1000025, 1000035, 1000045, 1000055}; break;
+   case Cha: pdg_codes = {-1000024, -1000037}; break;
+   case Fe: pdg_codes = {11, 13, 15}; break;
+   case Fd: pdg_codes = {1, 3, 5}; break;
+   case Fu: pdg_codes = {2, 4, 6}; break;
+   case FDX: pdg_codes = {51, 52, 53}; break;
+   case SHI0: pdg_codes = {82, 86, 84, 88}; break;
+   case SHIp: pdg_codes = {81, 85, 83, 87}; break;
+   case ChaI: pdg_codes = {1000085, 1000086}; break;
+   case ChiI: pdg_codes = {1000081, 1000082, 1000083, 1000084}; break;
+   case SSI0: pdg_codes = {89, 90}; break;
+   case FSI: pdg_codes = {1000089, 1000090}; break;
+   case SHp0: pdg_codes = {92, 94}; break;
+   case SHpp: pdg_codes = {91, 93}; break;
+   case ChiP: pdg_codes = {1000092, 1000094}; break;
+
+   default: throw OutOfBoundsError("invalid particle " + std::to_string(p));
+   }
+
+   if (index < 0 || index >= pdg_codes.size()) {
+      throw OutOfBoundsError("index " + std::to_string(index) + " out of bounds");
+   }
+
+   return pdg_codes[index];
+}
+
+std::pair<std::string, boost::optional<unsigned int>> get_multiplet_and_index_from_pdg(int pdg)
+{
+   std::pair<std::string, boost::optional<unsigned int>> name;
+
+   switch (pdg) {
+
+   case 21: name = {"VG", {}}; break;
+   case 1000021: name = {"Glu", {}}; break;
+   case 12: name = {"Fv", 1}; break;
+   case 14: name = {"Fv", 2}; break;
+   case 16: name = {"Fv", 3}; break;
+   case 1000091: name = {"ChaP", {}}; break;
+   case 1000001: name = {"Sd", 1}; break;
+   case 1000003: name = {"Sd", 2}; break;
+   case 1000005: name = {"Sd", 3}; break;
+   case 2000001: name = {"Sd", 4}; break;
+   case 2000003: name = {"Sd", 5}; break;
+   case 2000005: name = {"Sd", 6}; break;
+   case 1000012: name = {"Sv", 1}; break;
+   case 1000014: name = {"Sv", 2}; break;
+   case 1000016: name = {"Sv", 3}; break;
+   case 1000002: name = {"Su", 1}; break;
+   case 1000004: name = {"Su", 2}; break;
+   case 1000006: name = {"Su", 3}; break;
+   case 2000002: name = {"Su", 4}; break;
+   case 2000004: name = {"Su", 5}; break;
+   case 2000006: name = {"Su", 6}; break;
+   case 1000011: name = {"Se", 1}; break;
+   case 1000013: name = {"Se", 2}; break;
+   case 1000015: name = {"Se", 3}; break;
+   case 2000011: name = {"Se", 4}; break;
+   case 2000013: name = {"Se", 5}; break;
+   case 2000015: name = {"Se", 6}; break;
+   case 1000051: name = {"SDX", 1}; break;
+   case 2000051: name = {"SDX", 2}; break;
+   case 1000052: name = {"SDX", 3}; break;
+   case 2000052: name = {"SDX", 4}; break;
+   case 1000053: name = {"SDX", 5}; break;
+   case 2000053: name = {"SDX", 6}; break;
+   case 25: name = {"hh", 1}; break;
+   case 35: name = {"hh", 2}; break;
+   case 45: name = {"hh", 3}; break;
+   case 36: name = {"Ah", 3}; break;
+   case -37: name = {"Hpm", 2}; break;
+   case 1000022: name = {"Chi", 1}; break;
+   case 1000023: name = {"Chi", 2}; break;
+   case 1000025: name = {"Chi", 3}; break;
+   case 1000035: name = {"Chi", 4}; break;
+   case 1000045: name = {"Chi", 5}; break;
+   case 1000055: name = {"Chi", 6}; break;
+   case -1000024: name = {"Cha", 1}; break;
+   case -1000037: name = {"Cha", 2}; break;
+   case 11: name = {"Fe", 1}; break;
+   case 13: name = {"Fe", 2}; break;
+   case 15: name = {"Fe", 3}; break;
+   case 1: name = {"Fd", 1}; break;
+   case 3: name = {"Fd", 2}; break;
+   case 5: name = {"Fd", 3}; break;
+   case 2: name = {"Fu", 1}; break;
+   case 4: name = {"Fu", 2}; break;
+   case 6: name = {"Fu", 3}; break;
+   case 51: name = {"FDX", 1}; break;
+   case 52: name = {"FDX", 2}; break;
+   case 53: name = {"FDX", 3}; break;
+   case 82: name = {"SHI0", 1}; break;
+   case 86: name = {"SHI0", 2}; break;
+   case 84: name = {"SHI0", 3}; break;
+   case 88: name = {"SHI0", 4}; break;
+   case 81: name = {"SHIp", 1}; break;
+   case 85: name = {"SHIp", 2}; break;
+   case 83: name = {"SHIp", 3}; break;
+   case 87: name = {"SHIp", 4}; break;
+   case 1000085: name = {"ChaI", 1}; break;
+   case 1000086: name = {"ChaI", 2}; break;
+   case 1000081: name = {"ChiI", 1}; break;
+   case 1000082: name = {"ChiI", 2}; break;
+   case 1000083: name = {"ChiI", 3}; break;
+   case 1000084: name = {"ChiI", 4}; break;
+   case 89: name = {"SSI0", 1}; break;
+   case 90: name = {"SSI0", 2}; break;
+   case 1000089: name = {"FSI", 1}; break;
+   case 1000090: name = {"FSI", 2}; break;
+   case 92: name = {"SHp0", 1}; break;
+   case 94: name = {"SHp0", 2}; break;
+   case 91: name = {"SHpp", 1}; break;
+   case 93: name = {"SHpp", 2}; break;
+   case 1000092: name = {"ChiP", 1}; break;
+   case 1000094: name = {"ChiP", 2}; break;
+   case -24: name = {"VWm", {}}; break;
+   case 22: name = {"VP", {}}; break;
+   case 23: name = {"VZ", {}}; break;
+   case 31: name = {"VZp", {}}; break;
+   case -12: name = {"barFv", 1}; break;
+   case -14: name = {"barFv", 2}; break;
+   case -16: name = {"barFv", 3}; break;
+   case -1000091: name = {"barChaP", {}}; break;
+   case -1000001: name = {"conjSd", 1}; break;
+   case -1000003: name = {"conjSd", 2}; break;
+   case -1000005: name = {"conjSd", 3}; break;
+   case -2000001: name = {"conjSd", 4}; break;
+   case -2000003: name = {"conjSd", 5}; break;
+   case -2000005: name = {"conjSd", 6}; break;
+   case -1000012: name = {"conjSv", 1}; break;
+   case -1000014: name = {"conjSv", 2}; break;
+   case -1000016: name = {"conjSv", 3}; break;
+   case -1000002: name = {"conjSu", 1}; break;
+   case -1000004: name = {"conjSu", 2}; break;
+   case -1000006: name = {"conjSu", 3}; break;
+   case -2000002: name = {"conjSu", 4}; break;
+   case -2000004: name = {"conjSu", 5}; break;
+   case -2000006: name = {"conjSu", 6}; break;
+   case -1000011: name = {"conjSe", 1}; break;
+   case -1000013: name = {"conjSe", 2}; break;
+   case -1000015: name = {"conjSe", 3}; break;
+   case -2000011: name = {"conjSe", 4}; break;
+   case -2000013: name = {"conjSe", 5}; break;
+   case -2000015: name = {"conjSe", 6}; break;
+   case -1000051: name = {"conjSDX", 1}; break;
+   case -2000051: name = {"conjSDX", 2}; break;
+   case -1000052: name = {"conjSDX", 3}; break;
+   case -2000052: name = {"conjSDX", 4}; break;
+   case -1000053: name = {"conjSDX", 5}; break;
+   case -2000053: name = {"conjSDX", 6}; break;
+   case 37: name = {"conjHpm", 2}; break;
+   case 1000024: name = {"barCha", 1}; break;
+   case 1000037: name = {"barCha", 2}; break;
+   case -11: name = {"barFe", 1}; break;
+   case -13: name = {"barFe", 2}; break;
+   case -15: name = {"barFe", 3}; break;
+   case -1: name = {"barFd", 1}; break;
+   case -3: name = {"barFd", 2}; break;
+   case -5: name = {"barFd", 3}; break;
+   case -2: name = {"barFu", 1}; break;
+   case -4: name = {"barFu", 2}; break;
+   case -6: name = {"barFu", 3}; break;
+   case -51: name = {"barFDX", 1}; break;
+   case -52: name = {"barFDX", 2}; break;
+   case -53: name = {"barFDX", 3}; break;
+   case -82: name = {"conjSHI0", 1}; break;
+   case -86: name = {"conjSHI0", 2}; break;
+   case -84: name = {"conjSHI0", 3}; break;
+   case -88: name = {"conjSHI0", 4}; break;
+   case -81: name = {"conjSHIp", 1}; break;
+   case -85: name = {"conjSHIp", 2}; break;
+   case -83: name = {"conjSHIp", 3}; break;
+   case -87: name = {"conjSHIp", 4}; break;
+   case -1000085: name = {"barChaI", 1}; break;
+   case -1000086: name = {"barChaI", 2}; break;
+   case -89: name = {"conjSSI0", 1}; break;
+   case -90: name = {"conjSSI0", 2}; break;
+   case -92: name = {"conjSHp0", 1}; break;
+   case -94: name = {"conjSHp0", 2}; break;
+   case -91: name = {"conjSHpp", 1}; break;
+   case -93: name = {"conjSHpp", 2}; break;
+   case 24: name = {"conjVWm", {}}; break;
+
+   default: name = {"", {}};
+   }
+
+   return name;
+}
+
+std::string get_particle_name_from_pdg(int pdg)
+{
+   std::pair<std::string, boost::optional<unsigned int>> const pair = get_multiplet_and_index_from_pdg(pdg);
+   return pair.first + (pair.second ? "(" + std::to_string(pair.second.get()) + ")" : "");
+}
 
 void print(std::ostream& ostr)
 {

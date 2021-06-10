@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.5.0"];
+Print["FlexibleSUSY 2.6.0"];
 Print["E6SSMEFTHiggs"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -20,12 +20,16 @@ FSE6SSMEFTHiggsSetLib = LibraryFunctionLoad[libE6SSMEFTHiggs, "FSE6SSMEFTHiggsSe
 
 FSE6SSMEFTHiggsCalculateSpectrum = LibraryFunctionLoad[libE6SSMEFTHiggs, "FSE6SSMEFTHiggsCalculateSpectrum", LinkObject, LinkObject];
 FSE6SSMEFTHiggsCalculateObservables = LibraryFunctionLoad[libE6SSMEFTHiggs, "FSE6SSMEFTHiggsCalculateObservables", LinkObject, LinkObject];
+FSE6SSMEFTHiggsCalculateDecays = LibraryFunctionLoad[libE6SSMEFTHiggs, "FSE6SSMEFTHiggsCalculateDecays", LinkObject, LinkObject];
 
 FSE6SSMEFTHiggsCalculateSpectrum::error = "`1`";
 FSE6SSMEFTHiggsCalculateSpectrum::warning = "`1`";
 
 FSE6SSMEFTHiggsCalculateObservables::error = "`1`";
 FSE6SSMEFTHiggsCalculateObservables::warning = "`1`";
+
+FSE6SSMEFTHiggsCalculateDecays::error = "`1`";
+FSE6SSMEFTHiggsCalculateDecays::warning = "`1`";
 
 FSE6SSMEFTHiggs::info = "`1`";
 FSE6SSMEFTHiggs::nonum = "Error: `1` is not a numeric input value!";
@@ -101,6 +105,13 @@ fsDefaultSMParameters = {
     Mh -> 125.09
 };
 
+fdDefaultSettings = {
+   minBRtoPrint -> 1*^-5,
+   maxHigherOrderCorrections -> 4,
+   alphaThomson -> 1,
+   offShellVV -> 2
+};
+
 fsE6SSMEFTHiggsDefaultInputParameters = {
    MSUSY -> 0,
    M1Input -> 0,
@@ -139,9 +150,10 @@ Options[FSE6SSMEFTHiggsOpenHandle] = {
     Sequence @@ fsDefaultSettings,
     Sequence @@ fsDefaultSMParameters,
     Sequence @@ fsE6SSMEFTHiggsDefaultInputParameters
+   , Sequence @@ fdDefaultSettings
 };
 
-FSE6SSMEFTHiggsOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters) -> s_List, r___] :=
+FSE6SSMEFTHiggsOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters | fdSettings) -> s_List, r___] :=
     FSE6SSMEFTHiggsOpenHandle[a, Sequence @@ s, r];
 
 FSE6SSMEFTHiggsOpenHandle[OptionsPattern[]] :=
@@ -356,6 +368,11 @@ FSE6SSMEFTHiggsOpenHandle[OptionsPattern[]] :=
             OptionValue[msI2Input][[1,2]],
             OptionValue[msI2Input][[2,1]],
             OptionValue[msI2Input][[2,2]]
+            ,
+            OptionValue[minBRtoPrint],
+            OptionValue[maxHigherOrderCorrections],
+            OptionValue[alphaThomson],
+            OptionValue[offShellVV]
         }
 ];
 
@@ -577,6 +594,11 @@ FSE6SSMEFTHiggsSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[msI2Input][[1,2]],
             OptionValue[msI2Input][[2,1]],
             OptionValue[msI2Input][[2,2]]
+            ,
+            OptionValue[minBRtoPrint],
+            OptionValue[maxHigherOrderCorrections],
+            OptionValue[alphaThomson],
+            OptionValue[offShellVV]
         }] /. HoldPattern[OptionValue[param_]] :> param /.
         { p } /.
         FSE6SSMEFTHiggsGetSettings[handle] /.

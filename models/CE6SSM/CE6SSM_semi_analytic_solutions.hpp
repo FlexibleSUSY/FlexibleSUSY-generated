@@ -21,7 +21,7 @@
  * @file CE6SSM_semi_analytic_solutions.hpp
  * @brief contains class for computing the semi-analytic solutions
  *
- * This file was generated with FlexibleSUSY 2.5.0 and SARAH 4.14.3 .
+ * This file was generated with FlexibleSUSY 2.6.0 and SARAH 4.14.5 .
  */
 
 #ifndef CE6SSM_SEMI_ANALYTIC_SOLUTIONS_H

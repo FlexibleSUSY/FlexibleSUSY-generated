@@ -32,7 +32,7 @@
 #include "lowe.h"
 #include "physical_input.hpp"
 
-#ifdef ENABLE_GM2Calc
+#ifdef ENABLE_GM2CALC
 #include "gm2calc_interface.hpp"
 #endif
 
@@ -66,12 +66,10 @@ const int NMSSM_observables::NUMBER_OF_OBSERVABLES;
 
 NMSSM_observables::NMSSM_observables()
    : a_muon(0)
-   , eff_cp_higgs_photon_photon(Eigen::Array<std::complex<double>,3,1>::Zero())
-   , eff_cp_higgs_gluon_gluon(Eigen::Array<std::complex<double>,3,1>::Zero())
-   , eff_cp_pseudoscalar_photon_photon(Eigen::Array<std::complex<double>,2,1>::
-      Zero())
-   , eff_cp_pseudoscalar_gluon_gluon(Eigen::Array<std::complex<double>,2,1>::Zero(
-      ))
+   , edm_Fe_0(0)
+   , edm_Fe_1(0)
+   , edm_Fe_2(0)
+   , Fe_to_Fe_VP(0)
 
 {
 }
@@ -81,26 +79,10 @@ Eigen::ArrayXd NMSSM_observables::get() const
    Eigen::ArrayXd vec(NMSSM_observables::NUMBER_OF_OBSERVABLES);
 
    vec(0) = a_muon;
-   vec(1) = Re(eff_cp_higgs_photon_photon(0));
-   vec(2) = Im(eff_cp_higgs_photon_photon(0));
-   vec(3) = Re(eff_cp_higgs_photon_photon(1));
-   vec(4) = Im(eff_cp_higgs_photon_photon(1));
-   vec(5) = Re(eff_cp_higgs_photon_photon(2));
-   vec(6) = Im(eff_cp_higgs_photon_photon(2));
-   vec(7) = Re(eff_cp_higgs_gluon_gluon(0));
-   vec(8) = Im(eff_cp_higgs_gluon_gluon(0));
-   vec(9) = Re(eff_cp_higgs_gluon_gluon(1));
-   vec(10) = Im(eff_cp_higgs_gluon_gluon(1));
-   vec(11) = Re(eff_cp_higgs_gluon_gluon(2));
-   vec(12) = Im(eff_cp_higgs_gluon_gluon(2));
-   vec(13) = Re(eff_cp_pseudoscalar_photon_photon(0));
-   vec(14) = Im(eff_cp_pseudoscalar_photon_photon(0));
-   vec(15) = Re(eff_cp_pseudoscalar_photon_photon(1));
-   vec(16) = Im(eff_cp_pseudoscalar_photon_photon(1));
-   vec(17) = Re(eff_cp_pseudoscalar_gluon_gluon(0));
-   vec(18) = Im(eff_cp_pseudoscalar_gluon_gluon(0));
-   vec(19) = Re(eff_cp_pseudoscalar_gluon_gluon(1));
-   vec(20) = Im(eff_cp_pseudoscalar_gluon_gluon(1));
+   vec(1) = edm_Fe_0;
+   vec(2) = edm_Fe_1;
+   vec(3) = edm_Fe_2;
+   vec(4) = Fe_to_Fe_VP;
 
    return vec;
 }
@@ -110,26 +92,10 @@ std::vector<std::string> NMSSM_observables::get_names()
    std::vector<std::string> names(NMSSM_observables::NUMBER_OF_OBSERVABLES);
 
    names[0] = "a_muon";
-   names[1] = "Re(eff_cp_higgs_photon_photon(0))";
-   names[2] = "Im(eff_cp_higgs_photon_photon(0))";
-   names[3] = "Re(eff_cp_higgs_photon_photon(1))";
-   names[4] = "Im(eff_cp_higgs_photon_photon(1))";
-   names[5] = "Re(eff_cp_higgs_photon_photon(2))";
-   names[6] = "Im(eff_cp_higgs_photon_photon(2))";
-   names[7] = "Re(eff_cp_higgs_gluon_gluon(0))";
-   names[8] = "Im(eff_cp_higgs_gluon_gluon(0))";
-   names[9] = "Re(eff_cp_higgs_gluon_gluon(1))";
-   names[10] = "Im(eff_cp_higgs_gluon_gluon(1))";
-   names[11] = "Re(eff_cp_higgs_gluon_gluon(2))";
-   names[12] = "Im(eff_cp_higgs_gluon_gluon(2))";
-   names[13] = "Re(eff_cp_pseudoscalar_photon_photon(0))";
-   names[14] = "Im(eff_cp_pseudoscalar_photon_photon(0))";
-   names[15] = "Re(eff_cp_pseudoscalar_photon_photon(1))";
-   names[16] = "Im(eff_cp_pseudoscalar_photon_photon(1))";
-   names[17] = "Re(eff_cp_pseudoscalar_gluon_gluon(0))";
-   names[18] = "Im(eff_cp_pseudoscalar_gluon_gluon(0))";
-   names[19] = "Re(eff_cp_pseudoscalar_gluon_gluon(1))";
-   names[20] = "Im(eff_cp_pseudoscalar_gluon_gluon(1))";
+   names[1] = "edm_Fe_0";
+   names[2] = "edm_Fe_1";
+   names[3] = "edm_Fe_2";
+   names[4] = "Fe_to_Fe_VP";
 
    return names;
 }
@@ -137,10 +103,10 @@ std::vector<std::string> NMSSM_observables::get_names()
 void NMSSM_observables::clear()
 {
    a_muon = 0.;
-   eff_cp_higgs_photon_photon = Eigen::Array<std::complex<double>,3,1>::Zero();
-   eff_cp_higgs_gluon_gluon = Eigen::Array<std::complex<double>,3,1>::Zero();
-   eff_cp_pseudoscalar_photon_photon = Eigen::Array<std::complex<double>,2,1>::Zero();
-   eff_cp_pseudoscalar_gluon_gluon = Eigen::Array<std::complex<double>,2,1>::Zero();
+   edm_Fe_0 = 0.;
+   edm_Fe_1 = 0.;
+   edm_Fe_2 = 0.;
+   Fe_to_Fe_VP = 0.;
 
 }
 
@@ -149,20 +115,14 @@ void NMSSM_observables::set(const Eigen::ArrayXd& vec)
    assert(vec.rows() == NMSSM_observables::NUMBER_OF_OBSERVABLES);
 
    a_muon = vec(0);
-   eff_cp_higgs_photon_photon(0) = std::complex<double>(vec(1), vec(2));
-   eff_cp_higgs_photon_photon(1) = std::complex<double>(vec(3), vec(4));
-   eff_cp_higgs_photon_photon(2) = std::complex<double>(vec(5), vec(6));
-   eff_cp_higgs_gluon_gluon(0) = std::complex<double>(vec(7), vec(8));
-   eff_cp_higgs_gluon_gluon(1) = std::complex<double>(vec(9), vec(10));
-   eff_cp_higgs_gluon_gluon(2) = std::complex<double>(vec(11), vec(12));
-   eff_cp_pseudoscalar_photon_photon(0) = std::complex<double>(vec(13), vec(14));
-   eff_cp_pseudoscalar_photon_photon(1) = std::complex<double>(vec(15), vec(16));
-   eff_cp_pseudoscalar_gluon_gluon(0) = std::complex<double>(vec(17), vec(18));
-   eff_cp_pseudoscalar_gluon_gluon(1) = std::complex<double>(vec(19), vec(20));
+   edm_Fe_0 = vec(1);
+   edm_Fe_1 = vec(2);
+   edm_Fe_2 = vec(3);
+   Fe_to_Fe_VP = vec(4);
 
 }
 
-NMSSM_observables calculate_observables(NMSSM_mass_eigenstates& model,
+NMSSM_observables calculate_observables(const NMSSM_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input,
                                               double scale)
@@ -172,43 +132,43 @@ NMSSM_observables calculate_observables(NMSSM_mass_eigenstates& model,
    if (scale > 0.) {
       try {
          model_at_scale.run_to(scale);
+      } catch (const NonPerturbativeRunningError& e) {
+         NMSSM_observables observables;
+         observables.problems.general.flag_non_perturbative_running(scale);
+         return observables;
       } catch (const Error& e) {
-         model.get_problems().flag_thrown(e.what_detailed());
-         return NMSSM_observables();
+         NMSSM_observables observables;
+         observables.problems.general.flag_thrown(e.what());
+         return observables;
       } catch (const std::exception& e) {
-         model.get_problems().flag_thrown(e.what());
-         return NMSSM_observables();
+         NMSSM_observables observables;
+         observables.problems.general.flag_thrown(e.what());
+         return observables;
       }
    }
 
    return calculate_observables(model_at_scale, qedqcd, physical_input);
 }
 
-NMSSM_observables calculate_observables(NMSSM_mass_eigenstates& model,
+NMSSM_observables calculate_observables(const NMSSM_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
                                               const Physical_input& physical_input)
 {
    NMSSM_observables observables;
 
    try {
-      NMSSM_effective_couplings effective_couplings(model, qedqcd, physical_input);
-      effective_couplings.calculate_effective_couplings();
-
+      
       observables.AMU = NMSSM_a_muon::calculate_a_muon(MODEL, qedqcd);
-      observables.EFFCPHIGGSPHOTONPHOTON(0) = effective_couplings.get_eff_CphhVPVP(0);
-      observables.EFFCPHIGGSPHOTONPHOTON(1) = effective_couplings.get_eff_CphhVPVP(1);
-      observables.EFFCPHIGGSPHOTONPHOTON(2) = effective_couplings.get_eff_CphhVPVP(2);
-      observables.EFFCPHIGGSGLUONGLUON(0) = effective_couplings.get_eff_CphhVGVG(0);
-      observables.EFFCPHIGGSGLUONGLUON(1) = effective_couplings.get_eff_CphhVGVG(1);
-      observables.EFFCPHIGGSGLUONGLUON(2) = effective_couplings.get_eff_CphhVGVG(2);
-      observables.EFFCPPSEUDOSCALARPHOTONPHOTON(0) = effective_couplings.get_eff_CpAhVPVP(1);
-      observables.EFFCPPSEUDOSCALARPHOTONPHOTON(1) = effective_couplings.get_eff_CpAhVPVP(2);
-      observables.EFFCPPSEUDOSCALARGLUONGLUON(0) = effective_couplings.get_eff_CpAhVGVG(1);
-      observables.EFFCPPSEUDOSCALARGLUONGLUON(1) = effective_couplings.get_eff_CpAhVGVG(2);
+      observables.EDM1(Fe, 0) = NMSSM_edm::calculate_edm_Fe(0, MODEL);
+      observables.EDM1(Fe, 1) = NMSSM_edm::calculate_edm_Fe(1, MODEL);
+      observables.EDM1(Fe, 2) = NMSSM_edm::calculate_edm_Fe(2, MODEL);
+      observables.LToLGamma1(Fe, 1, Fe, 0, VP) = NMSSM_l_to_lgamma::calculate_Fe_to_Fe_VP(1, 0, MODEL, qedqcd, physical_input);
+   } catch (const NonPerturbativeRunningError& e) {
+      observables.problems.general.flag_non_perturbative_running(e.get_scale());
    } catch (const Error& e) {
-      model.get_problems().flag_thrown(e.what_detailed());
+      observables.problems.general.flag_thrown(e.what());
    } catch (const std::exception& e) {
-      model.get_problems().flag_thrown(e.what());
+      observables.problems.general.flag_thrown(e.what());
    }
 
    return observables;
