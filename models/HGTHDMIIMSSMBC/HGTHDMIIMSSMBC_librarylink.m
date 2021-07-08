@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.6.0"];
+Print["FlexibleSUSY 2.6.1"];
 Print["HGTHDMIIMSSMBC"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];

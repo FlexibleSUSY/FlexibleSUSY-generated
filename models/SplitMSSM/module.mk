@@ -60,7 +60,6 @@ LIBSplitMSSM_SRC := \
 		$(DIR)/SplitMSSM_f_to_f_conversion.cpp \
 		$(DIR)/SplitMSSM_l_to_lgamma.cpp \
 		$(DIR)/SplitMSSM_b_to_s_gamma.cpp \
-		$(DIR)/SplitMSSM_effective_couplings.cpp \
 		$(DIR)/SplitMSSM_info.cpp \
 		$(DIR)/SplitMSSM_input_parameters.cpp \
 		$(DIR)/SplitMSSM_mass_eigenstates.cpp \
@@ -97,7 +96,6 @@ LIBSplitMSSM_HDR := \
 		$(DIR)/SplitMSSM_f_to_f_conversion.hpp \
 		$(DIR)/SplitMSSM_l_to_lgamma.hpp \
 		$(DIR)/SplitMSSM_b_to_s_gamma.hpp \
-		$(DIR)/SplitMSSM_effective_couplings.hpp \
 		$(DIR)/SplitMSSM_ewsb_solver.hpp \
 		$(DIR)/SplitMSSM_ewsb_solver_interface.hpp \
 		$(DIR)/SplitMSSM_high_scale_constraint.hpp \

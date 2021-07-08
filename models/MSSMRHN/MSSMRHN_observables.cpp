@@ -24,7 +24,6 @@
 #include "MSSMRHN_l_to_lgamma.hpp"
 #include "MSSMRHN_b_to_s_gamma.hpp"
 #include "MSSMRHN_f_to_f_conversion.hpp"
-#include "MSSMRHN_effective_couplings.hpp"
 #include "config.h"
 #include "eigen_utils.hpp"
 #include "numerics2.hpp"
@@ -47,10 +46,6 @@
 #define LToLGamma1(pIn,idxIn,pOut,idxOut,spec) pIn ## _to_ ## pOut ## _ ## spec
 #define FToFConversion1(pIn,idxIn,pOut,idxOut,nuclei,qedqcd) pIn ## _to_ ## pOut ## _in_ ## nuclei
 #define BSGAMMA b_to_s_gamma
-#define EFFCPHIGGSPHOTONPHOTON eff_cp_higgs_photon_photon
-#define EFFCPHIGGSGLUONGLUON eff_cp_higgs_gluon_gluon
-#define EFFCPPSEUDOSCALARPHOTONPHOTON eff_cp_pseudoscalar_photon_photon
-#define EFFCPPSEUDOSCALARGLUONGLUON eff_cp_pseudoscalar_gluon_gluon
 
 #define ALPHA_S_MZ qedqcd.displayAlpha(softsusy::ALPHAS)
 #define MWPole qedqcd.displayPoleMW()
@@ -66,10 +61,6 @@ const int MSSMRHN_observables::NUMBER_OF_OBSERVABLES;
 
 MSSMRHN_observables::MSSMRHN_observables()
    : a_muon(0)
-   , eff_cp_higgs_photon_photon(Eigen::Array<std::complex<double>,2,1>::Zero())
-   , eff_cp_higgs_gluon_gluon(Eigen::Array<std::complex<double>,2,1>::Zero())
-   , eff_cp_pseudoscalar_photon_photon(0)
-   , eff_cp_pseudoscalar_gluon_gluon(0)
 
 {
 }
@@ -79,18 +70,6 @@ Eigen::ArrayXd MSSMRHN_observables::get() const
    Eigen::ArrayXd vec(MSSMRHN_observables::NUMBER_OF_OBSERVABLES);
 
    vec(0) = a_muon;
-   vec(1) = Re(eff_cp_higgs_photon_photon(0));
-   vec(2) = Im(eff_cp_higgs_photon_photon(0));
-   vec(3) = Re(eff_cp_higgs_photon_photon(1));
-   vec(4) = Im(eff_cp_higgs_photon_photon(1));
-   vec(5) = Re(eff_cp_higgs_gluon_gluon(0));
-   vec(6) = Im(eff_cp_higgs_gluon_gluon(0));
-   vec(7) = Re(eff_cp_higgs_gluon_gluon(1));
-   vec(8) = Im(eff_cp_higgs_gluon_gluon(1));
-   vec(9) = Re(eff_cp_pseudoscalar_photon_photon);
-   vec(10) = Im(eff_cp_pseudoscalar_photon_photon);
-   vec(11) = Re(eff_cp_pseudoscalar_gluon_gluon);
-   vec(12) = Im(eff_cp_pseudoscalar_gluon_gluon);
 
    return vec;
 }
@@ -100,18 +79,6 @@ std::vector<std::string> MSSMRHN_observables::get_names()
    std::vector<std::string> names(MSSMRHN_observables::NUMBER_OF_OBSERVABLES);
 
    names[0] = "a_muon";
-   names[1] = "Re(eff_cp_higgs_photon_photon(0))";
-   names[2] = "Im(eff_cp_higgs_photon_photon(0))";
-   names[3] = "Re(eff_cp_higgs_photon_photon(1))";
-   names[4] = "Im(eff_cp_higgs_photon_photon(1))";
-   names[5] = "Re(eff_cp_higgs_gluon_gluon(0))";
-   names[6] = "Im(eff_cp_higgs_gluon_gluon(0))";
-   names[7] = "Re(eff_cp_higgs_gluon_gluon(1))";
-   names[8] = "Im(eff_cp_higgs_gluon_gluon(1))";
-   names[9] = "Re(eff_cp_pseudoscalar_photon_photon)";
-   names[10] = "Im(eff_cp_pseudoscalar_photon_photon)";
-   names[11] = "Re(eff_cp_pseudoscalar_gluon_gluon)";
-   names[12] = "Im(eff_cp_pseudoscalar_gluon_gluon)";
 
    return names;
 }
@@ -119,10 +86,6 @@ std::vector<std::string> MSSMRHN_observables::get_names()
 void MSSMRHN_observables::clear()
 {
    a_muon = 0.;
-   eff_cp_higgs_photon_photon = Eigen::Array<std::complex<double>,2,1>::Zero();
-   eff_cp_higgs_gluon_gluon = Eigen::Array<std::complex<double>,2,1>::Zero();
-   eff_cp_pseudoscalar_photon_photon = std::complex<double>(0.,0.);
-   eff_cp_pseudoscalar_gluon_gluon = std::complex<double>(0.,0.);
 
 }
 
@@ -131,12 +94,6 @@ void MSSMRHN_observables::set(const Eigen::ArrayXd& vec)
    assert(vec.rows() == MSSMRHN_observables::NUMBER_OF_OBSERVABLES);
 
    a_muon = vec(0);
-   eff_cp_higgs_photon_photon(0) = std::complex<double>(vec(1), vec(2));
-   eff_cp_higgs_photon_photon(1) = std::complex<double>(vec(3), vec(4));
-   eff_cp_higgs_gluon_gluon(0) = std::complex<double>(vec(5), vec(6));
-   eff_cp_higgs_gluon_gluon(1) = std::complex<double>(vec(7), vec(8));
-   eff_cp_pseudoscalar_photon_photon = std::complex<double>(vec(9), vec(10));
-   eff_cp_pseudoscalar_gluon_gluon = std::complex<double>(vec(11), vec(12));
 
 }
 
@@ -175,16 +132,8 @@ MSSMRHN_observables calculate_observables(const MSSMRHN_mass_eigenstates& model,
    MSSMRHN_observables observables;
 
    try {
-      MSSMRHN_effective_couplings effective_couplings(model, qedqcd, physical_input);
-      effective_couplings.calculate_effective_couplings();
-
+      
       observables.AMU = MSSMRHN_a_muon::calculate_a_muon(MODEL, qedqcd);
-      observables.EFFCPHIGGSPHOTONPHOTON(0) = effective_couplings.get_eff_CphhVPVP(0);
-      observables.EFFCPHIGGSPHOTONPHOTON(1) = effective_couplings.get_eff_CphhVPVP(1);
-      observables.EFFCPHIGGSGLUONGLUON(0) = effective_couplings.get_eff_CphhVGVG(0);
-      observables.EFFCPHIGGSGLUONGLUON(1) = effective_couplings.get_eff_CphhVGVG(1);
-      observables.EFFCPPSEUDOSCALARPHOTONPHOTON = effective_couplings.get_eff_CpAhVPVP(1);
-      observables.EFFCPPSEUDOSCALARGLUONGLUON = effective_couplings.get_eff_CpAhVGVG(1);
    } catch (const NonPerturbativeRunningError& e) {
       observables.problems.general.flag_non_perturbative_running(e.get_scale());
    } catch (const Error& e) {

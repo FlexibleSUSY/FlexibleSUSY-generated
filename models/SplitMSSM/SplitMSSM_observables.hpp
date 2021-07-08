@@ -35,7 +35,7 @@ class SplitMSSM_mass_eigenstates;
 class Physical_input;
 
 struct SplitMSSM_observables {
-   static const int NUMBER_OF_OBSERVABLES = 5;
+   static const int NUMBER_OF_OBSERVABLES = 1;
 
    SplitMSSM_observables();
    Eigen::ArrayXd get() const; ///< returns vector of all observables
@@ -45,8 +45,6 @@ struct SplitMSSM_observables {
 
    Observable_problems problems;
    double a_muon; ///< a_muon = (g-2)/2 of the muon (calculated with FlexibleSUSY)
-   std::complex<double> eff_cp_higgs_photon_photon; ///< effective H-Photon-Photon coupling
-   std::complex<double> eff_cp_higgs_gluon_gluon; ///< effective H-Gluon-Gluon coupling
 
 };
 

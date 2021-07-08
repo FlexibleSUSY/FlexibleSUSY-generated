@@ -60,7 +60,6 @@ LIBE6SSM_SRC := \
 		$(DIR)/E6SSM_f_to_f_conversion.cpp \
 		$(DIR)/E6SSM_l_to_lgamma.cpp \
 		$(DIR)/E6SSM_b_to_s_gamma.cpp \
-		$(DIR)/E6SSM_effective_couplings.cpp \
 		$(DIR)/E6SSM_info.cpp \
 		$(DIR)/E6SSM_input_parameters.cpp \
 		$(DIR)/E6SSM_mass_eigenstates.cpp \
@@ -97,7 +96,6 @@ LIBE6SSM_HDR := \
 		$(DIR)/E6SSM_f_to_f_conversion.hpp \
 		$(DIR)/E6SSM_l_to_lgamma.hpp \
 		$(DIR)/E6SSM_b_to_s_gamma.hpp \
-		$(DIR)/E6SSM_effective_couplings.hpp \
 		$(DIR)/E6SSM_ewsb_solver.hpp \
 		$(DIR)/E6SSM_ewsb_solver_interface.hpp \
 		$(DIR)/E6SSM_high_scale_constraint.hpp \

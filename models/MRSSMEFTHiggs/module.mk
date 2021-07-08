@@ -60,7 +60,6 @@ LIBMRSSMEFTHiggs_SRC := \
 		$(DIR)/MRSSMEFTHiggs_f_to_f_conversion.cpp \
 		$(DIR)/MRSSMEFTHiggs_l_to_lgamma.cpp \
 		$(DIR)/MRSSMEFTHiggs_b_to_s_gamma.cpp \
-		$(DIR)/MRSSMEFTHiggs_effective_couplings.cpp \
 		$(DIR)/MRSSMEFTHiggs_info.cpp \
 		$(DIR)/MRSSMEFTHiggs_input_parameters.cpp \
 		$(DIR)/MRSSMEFTHiggs_mass_eigenstates.cpp \
@@ -97,7 +96,6 @@ LIBMRSSMEFTHiggs_HDR := \
 		$(DIR)/MRSSMEFTHiggs_f_to_f_conversion.hpp \
 		$(DIR)/MRSSMEFTHiggs_l_to_lgamma.hpp \
 		$(DIR)/MRSSMEFTHiggs_b_to_s_gamma.hpp \
-		$(DIR)/MRSSMEFTHiggs_effective_couplings.hpp \
 		$(DIR)/MRSSMEFTHiggs_ewsb_solver.hpp \
 		$(DIR)/MRSSMEFTHiggs_ewsb_solver_interface.hpp \
 		$(DIR)/MRSSMEFTHiggs_high_scale_constraint.hpp \

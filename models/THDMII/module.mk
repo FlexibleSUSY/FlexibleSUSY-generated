@@ -60,7 +60,6 @@ LIBTHDMII_SRC := \
 		$(DIR)/THDMII_f_to_f_conversion.cpp \
 		$(DIR)/THDMII_l_to_lgamma.cpp \
 		$(DIR)/THDMII_b_to_s_gamma.cpp \
-		$(DIR)/THDMII_effective_couplings.cpp \
 		$(DIR)/THDMII_info.cpp \
 		$(DIR)/THDMII_input_parameters.cpp \
 		$(DIR)/THDMII_mass_eigenstates.cpp \
@@ -97,7 +96,6 @@ LIBTHDMII_HDR := \
 		$(DIR)/THDMII_f_to_f_conversion.hpp \
 		$(DIR)/THDMII_l_to_lgamma.hpp \
 		$(DIR)/THDMII_b_to_s_gamma.hpp \
-		$(DIR)/THDMII_effective_couplings.hpp \
 		$(DIR)/THDMII_ewsb_solver.hpp \
 		$(DIR)/THDMII_ewsb_solver_interface.hpp \
 		$(DIR)/THDMII_high_scale_constraint.hpp \

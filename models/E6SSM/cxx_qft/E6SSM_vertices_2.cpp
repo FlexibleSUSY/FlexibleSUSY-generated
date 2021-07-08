@@ -20,7 +20,7 @@
 /**
  * @file cxx_qft/E6SSM_vertices.cpp
  *
- * This file was generated with FlexibleSUSY 2.6.0 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.6.1 and SARAH 4.14.5 .
  */
 
 #include "E6SSM_context_base.hpp"
@@ -449,7 +449,7 @@ InverseMetricVertex VertexImpl<fields::VZ, fields::hh, fields::VZ>::evaluate(
    const auto ThetaW = DERIVEDPARAMETER(ThetaW);
    const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
 
-   const std::complex<double> result = 0.05*(vd*(-14.696938456699067*g1*gN*Cos(ThetaWp)*Sin(ThetaW)*Sin(ThetaWp) + 10*Sqr(g2)*Sqr(Cos(ThetaW))*Sqr(Cos(ThetaWp)) + Cos(ThetaW)*(-9.486832980505138*g2*gN*Sin(2*ThetaWp) + 15.491933384829668*g1*g2*Sin(ThetaW)*Sqr(Cos(ThetaWp))) + 6*Sqr(g1)*Sqr(Cos(ThetaWp))*Sqr(Sin(ThetaW)) + 9*Sqr(gN)*Sqr(Sin(ThetaWp)))*ZH(gt1,0) + 2*vu*(3.1622776601683795*g2*gN*Cos(ThetaW)*Sin(2*ThetaWp) + g1*Sin(ThetaW)*(7.745966692414834*g2*Cos(ThetaW) + 3*g1*Sin(ThetaW))*Sqr(Cos(ThetaWp)) + 5*Sqr(g2)*Sqr(Cos(ThetaW))*Sqr(Cos(ThetaWp)) + gN*(2.449489742783178*g1*Sin(ThetaW)*Sin(2*ThetaWp) + 2*gN*Sqr(Sin(ThetaWp))))*ZH(gt1,1) + 25*vs*Sqr(gN)*Sqr(Sin(ThetaWp))*ZH(gt1,2));
+   const std::complex<double> result = 0.05*(vd*(-14.696938456699067*g1*gN*Cos(ThetaWp)*Sin(ThetaW)*Sin(ThetaWp) + 10*Sqr(g2)*Sqr(Cos(ThetaW))*Sqr(Cos(ThetaWp)) + Cos(ThetaW)*(-18.973665961010276*g2*gN*Cos(ThetaWp)*Sin(ThetaWp) + 15.491933384829668*g1*g2*Sin(ThetaW)*Sqr(Cos(ThetaWp))) + 6*Sqr(g1)*Sqr(Cos(ThetaWp))*Sqr(Sin(ThetaW)) + 9*Sqr(gN)*Sqr(Sin(ThetaWp)))*ZH(gt1,0) + 2*vu*(3.1622776601683795*g2*gN*Cos(ThetaW)*Sin(2*ThetaWp) + g1*Sin(ThetaW)*(7.745966692414834*g2*Cos(ThetaW) + 3*g1*Sin(ThetaW))*Sqr(Cos(ThetaWp)) + 5*Sqr(g2)*Sqr(Cos(ThetaW))*Sqr(Cos(ThetaWp)) + gN*(2.449489742783178*g1*Sin(ThetaW)*Sin(2*ThetaWp) + 2*gN*Sqr(Sin(ThetaWp))))*ZH(gt1,1) + 25*vs*Sqr(gN)*Sqr(Sin(ThetaWp))*ZH(gt1,2));
 
    return {result};
 }

@@ -60,7 +60,6 @@ LIBMSSMatMGUT_SRC := \
 		$(DIR)/MSSMatMGUT_f_to_f_conversion.cpp \
 		$(DIR)/MSSMatMGUT_l_to_lgamma.cpp \
 		$(DIR)/MSSMatMGUT_b_to_s_gamma.cpp \
-		$(DIR)/MSSMatMGUT_effective_couplings.cpp \
 		$(DIR)/MSSMatMGUT_info.cpp \
 		$(DIR)/MSSMatMGUT_input_parameters.cpp \
 		$(DIR)/MSSMatMGUT_mass_eigenstates.cpp \
@@ -97,7 +96,6 @@ LIBMSSMatMGUT_HDR := \
 		$(DIR)/MSSMatMGUT_f_to_f_conversion.hpp \
 		$(DIR)/MSSMatMGUT_l_to_lgamma.hpp \
 		$(DIR)/MSSMatMGUT_b_to_s_gamma.hpp \
-		$(DIR)/MSSMatMGUT_effective_couplings.hpp \
 		$(DIR)/MSSMatMGUT_ewsb_solver.hpp \
 		$(DIR)/MSSMatMGUT_ewsb_solver_interface.hpp \
 		$(DIR)/MSSMatMGUT_high_scale_constraint.hpp \

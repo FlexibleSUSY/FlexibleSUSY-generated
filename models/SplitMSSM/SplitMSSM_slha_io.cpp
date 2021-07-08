@@ -686,14 +686,6 @@ void SplitMSSM_slha_io::set_extra(
          slha_io.set_block(block);
       }
    }
-   {
-      std::ostringstream block;
-      block << "Block EFFHIGGSCOUPLINGS" << '\n'
-            << FORMAT_RANK_THREE_TENSOR(25, 22, 22, (Abs(OBSERVABLES.eff_cp_higgs_photon_photon)), "Abs(effective H-Photon-Photon coupling)")
-            << FORMAT_RANK_THREE_TENSOR(25, 21, 21, (Abs(OBSERVABLES.eff_cp_higgs_gluon_gluon)), "Abs(effective H-Gluon-Gluon coupling)")
-      ;
-      slha_io.set_block(block);
-   }
 
 }
 

@@ -60,7 +60,6 @@ LIBMSSMNoFV_SRC := \
 		$(DIR)/MSSMNoFV_f_to_f_conversion.cpp \
 		$(DIR)/MSSMNoFV_l_to_lgamma.cpp \
 		$(DIR)/MSSMNoFV_b_to_s_gamma.cpp \
-		$(DIR)/MSSMNoFV_effective_couplings.cpp \
 		$(DIR)/MSSMNoFV_info.cpp \
 		$(DIR)/MSSMNoFV_input_parameters.cpp \
 		$(DIR)/MSSMNoFV_mass_eigenstates.cpp \
@@ -97,7 +96,6 @@ LIBMSSMNoFV_HDR := \
 		$(DIR)/MSSMNoFV_f_to_f_conversion.hpp \
 		$(DIR)/MSSMNoFV_l_to_lgamma.hpp \
 		$(DIR)/MSSMNoFV_b_to_s_gamma.hpp \
-		$(DIR)/MSSMNoFV_effective_couplings.hpp \
 		$(DIR)/MSSMNoFV_ewsb_solver.hpp \
 		$(DIR)/MSSMNoFV_ewsb_solver_interface.hpp \
 		$(DIR)/MSSMNoFV_high_scale_constraint.hpp \

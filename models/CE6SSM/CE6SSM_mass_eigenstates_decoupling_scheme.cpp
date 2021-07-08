@@ -25,7 +25,7 @@
  * which solve EWSB and calculate masses and mixings from DRbar
  * parameters.
  *
- * This file was generated with FlexibleSUSY 2.6.0 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.6.1 and SARAH 4.14.5 .
  */
 
 #include "CE6SSM_mass_eigenstates_decoupling_scheme.hpp"

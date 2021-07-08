@@ -20,7 +20,7 @@
 /**
  * @file cxx_qft/SplitMSSM_vertices.cpp
  *
- * This file was generated with FlexibleSUSY 2.6.0 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.6.1 and SARAH 4.14.5 .
  */
 
 #include "SplitMSSM_context_base.hpp"

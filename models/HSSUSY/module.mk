@@ -60,7 +60,6 @@ LIBHSSUSY_SRC := \
 		$(DIR)/HSSUSY_f_to_f_conversion.cpp \
 		$(DIR)/HSSUSY_l_to_lgamma.cpp \
 		$(DIR)/HSSUSY_b_to_s_gamma.cpp \
-		$(DIR)/HSSUSY_effective_couplings.cpp \
 		$(DIR)/HSSUSY_info.cpp \
 		$(DIR)/HSSUSY_input_parameters.cpp \
 		$(DIR)/HSSUSY_mass_eigenstates.cpp \
@@ -97,7 +96,6 @@ LIBHSSUSY_HDR := \
 		$(DIR)/HSSUSY_f_to_f_conversion.hpp \
 		$(DIR)/HSSUSY_l_to_lgamma.hpp \
 		$(DIR)/HSSUSY_b_to_s_gamma.hpp \
-		$(DIR)/HSSUSY_effective_couplings.hpp \
 		$(DIR)/HSSUSY_ewsb_solver.hpp \
 		$(DIR)/HSSUSY_ewsb_solver_interface.hpp \
 		$(DIR)/HSSUSY_high_scale_constraint.hpp \

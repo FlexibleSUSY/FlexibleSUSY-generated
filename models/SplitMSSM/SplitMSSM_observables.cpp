@@ -24,7 +24,6 @@
 #include "SplitMSSM_l_to_lgamma.hpp"
 #include "SplitMSSM_b_to_s_gamma.hpp"
 #include "SplitMSSM_f_to_f_conversion.hpp"
-#include "SplitMSSM_effective_couplings.hpp"
 #include "config.h"
 #include "eigen_utils.hpp"
 #include "numerics2.hpp"
@@ -47,10 +46,6 @@
 #define LToLGamma1(pIn,idxIn,pOut,idxOut,spec) pIn ## _to_ ## pOut ## _ ## spec
 #define FToFConversion1(pIn,idxIn,pOut,idxOut,nuclei,qedqcd) pIn ## _to_ ## pOut ## _in_ ## nuclei
 #define BSGAMMA b_to_s_gamma
-#define EFFCPHIGGSPHOTONPHOTON eff_cp_higgs_photon_photon
-#define EFFCPHIGGSGLUONGLUON eff_cp_higgs_gluon_gluon
-#define EFFCPPSEUDOSCALARPHOTONPHOTON eff_cp_pseudoscalar_photon_photon
-#define EFFCPPSEUDOSCALARGLUONGLUON eff_cp_pseudoscalar_gluon_gluon
 
 #define ALPHA_S_MZ qedqcd.displayAlpha(softsusy::ALPHAS)
 #define MWPole qedqcd.displayPoleMW()
@@ -66,8 +61,6 @@ const int SplitMSSM_observables::NUMBER_OF_OBSERVABLES;
 
 SplitMSSM_observables::SplitMSSM_observables()
    : a_muon(0)
-   , eff_cp_higgs_photon_photon(0)
-   , eff_cp_higgs_gluon_gluon(0)
 
 {
 }
@@ -77,10 +70,6 @@ Eigen::ArrayXd SplitMSSM_observables::get() const
    Eigen::ArrayXd vec(SplitMSSM_observables::NUMBER_OF_OBSERVABLES);
 
    vec(0) = a_muon;
-   vec(1) = Re(eff_cp_higgs_photon_photon);
-   vec(2) = Im(eff_cp_higgs_photon_photon);
-   vec(3) = Re(eff_cp_higgs_gluon_gluon);
-   vec(4) = Im(eff_cp_higgs_gluon_gluon);
 
    return vec;
 }
@@ -90,10 +79,6 @@ std::vector<std::string> SplitMSSM_observables::get_names()
    std::vector<std::string> names(SplitMSSM_observables::NUMBER_OF_OBSERVABLES);
 
    names[0] = "a_muon";
-   names[1] = "Re(eff_cp_higgs_photon_photon)";
-   names[2] = "Im(eff_cp_higgs_photon_photon)";
-   names[3] = "Re(eff_cp_higgs_gluon_gluon)";
-   names[4] = "Im(eff_cp_higgs_gluon_gluon)";
 
    return names;
 }
@@ -101,8 +86,6 @@ std::vector<std::string> SplitMSSM_observables::get_names()
 void SplitMSSM_observables::clear()
 {
    a_muon = 0.;
-   eff_cp_higgs_photon_photon = std::complex<double>(0.,0.);
-   eff_cp_higgs_gluon_gluon = std::complex<double>(0.,0.);
 
 }
 
@@ -111,8 +94,6 @@ void SplitMSSM_observables::set(const Eigen::ArrayXd& vec)
    assert(vec.rows() == SplitMSSM_observables::NUMBER_OF_OBSERVABLES);
 
    a_muon = vec(0);
-   eff_cp_higgs_photon_photon = std::complex<double>(vec(1), vec(2));
-   eff_cp_higgs_gluon_gluon = std::complex<double>(vec(3), vec(4));
 
 }
 
@@ -151,12 +132,8 @@ SplitMSSM_observables calculate_observables(const SplitMSSM_mass_eigenstates& mo
    SplitMSSM_observables observables;
 
    try {
-      SplitMSSM_effective_couplings effective_couplings(model, qedqcd, physical_input);
-      effective_couplings.calculate_effective_couplings();
-
+      
       observables.AMU = SplitMSSM_a_muon::calculate_a_muon(MODEL, qedqcd);
-      observables.EFFCPHIGGSPHOTONPHOTON = effective_couplings.get_eff_CphhVPVP();
-      observables.EFFCPHIGGSGLUONGLUON = effective_couplings.get_eff_CphhVGVG();
    } catch (const NonPerturbativeRunningError& e) {
       observables.problems.general.flag_non_perturbative_running(e.get_scale());
    } catch (const Error& e) {

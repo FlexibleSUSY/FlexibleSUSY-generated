@@ -20,7 +20,7 @@
 /**
  * @file cxx_qft/CE6SSM_vertices.cpp
  *
- * This file was generated with FlexibleSUSY 2.6.0 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.6.1 and SARAH 4.14.5 .
  */
 
 #include "CE6SSM_context_base.hpp"
@@ -2672,7 +2672,7 @@ ScalarVertex VertexImpl<typename fields::bar<fields::gZp>::type, fields::gZp, fi
    const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
    const auto ThetaW = DERIVEDPARAMETER(ThetaW);
 
-   const std::complex<double> result = 0.025*(-(vd*(9*Sqr(gN)*Sqr(Cos(ThetaWp)) + (g2*Cos(ThetaW) + 0.7745966692414834*g1*Sin(ThetaW))*(9.486832980505138*gN*Sin(2*ThetaWp) + 10*g2*Cos(ThetaW)*Sqr(Sin(ThetaWp)) + 7.745966692414834*g1*Sin(ThetaW)*Sqr(Sin(ThetaWp))))*ZH(gt3,0)) - 2*vu*(-3.1622776601683795*g2*gN*Cos(ThetaW)*Sin(2*ThetaWp) + 2*Sqr(gN)*Sqr(Cos(ThetaWp)) + 5*Sqr(g2)*Sqr(Cos(ThetaW))*Sqr(Sin(ThetaWp)) + g1*(-2.449489742783178*gN*Sin(ThetaW)*Sin(2*ThetaWp) + 3.872983346207417*g2*Sin(2*ThetaW)*Sqr(Sin(ThetaWp)) + 3*g1*Sqr(Sin(ThetaW))*Sqr(Sin(ThetaWp))))*ZH(gt3,1) - 25*vs*Sqr(gN)*Sqr(Cos(ThetaWp))*ZH(gt3,2));
+   const std::complex<double> result = 0.025*(-(vd*(9*Sqr(gN)*Sqr(Cos(ThetaWp)) + (g2*Cos(ThetaW) + 0.7745966692414834*g1*Sin(ThetaW))*(9.486832980505138*gN*Sin(2*ThetaWp) + 10*g2*Cos(ThetaW)*Sqr(Sin(ThetaWp)) + 7.745966692414834*g1*Sin(ThetaW)*Sqr(Sin(ThetaWp))))*ZH(gt3,0)) - 2*vu*(-3.1622776601683795*gN*(g2*Cos(ThetaW) + 0.7745966692414834*g1*Sin(ThetaW))*Sin(2*ThetaWp) + 2*Sqr(gN)*Sqr(Cos(ThetaWp)) + 5*Sqr(g2*Cos(ThetaW) + 0.7745966692414834*g1*Sin(ThetaW))*Sqr(Sin(ThetaWp)))*ZH(gt3,1) - 25*vs*Sqr(gN)*Sqr(Cos(ThetaWp))*ZH(gt3,2));
 
    return {result};
 }
@@ -3849,7 +3849,7 @@ InverseMetricVertex VertexImpl<fields::Sv, typename fields::conj<fields::Sv>::ty
    const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
    const auto ThetaW = DERIVEDPARAMETER(ThetaW);
 
-   const std::complex<double> result = 0.1*KroneckerDelta(gt1,gt2)*((g2*Cos(ThetaW) + 0.7745966692414834*g1*Sin(ThetaW))*Sin(ThetaWp)*(-6.324555320336759*gN*Cos(ThetaWp) + (5*g2*Cos(ThetaW) + 3.872983346207417*g1*Sin(ThetaW))*Sin(ThetaWp)) + 2*Sqr(gN)*Sqr(Cos(ThetaWp)));
+   const std::complex<double> result = 0.1*KroneckerDelta(gt1,gt2)*(-3.1622776601683795*gN*(g2*Cos(ThetaW) + 0.7745966692414834*g1*Sin(ThetaW))*Sin(2*ThetaWp) + 2*Sqr(gN)*Sqr(Cos(ThetaWp)) + 5*Sqr(g2*Cos(ThetaW) + 0.7745966692414834*g1*Sin(ThetaW))*Sqr(Sin(ThetaWp)));
 
    return {result};
 }
@@ -4265,7 +4265,7 @@ InverseMetricVertex VertexImpl<fields::Su, typename fields::conj<fields::Su>::ty
    const auto ThetaW = DERIVEDPARAMETER(ThetaW);
    const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
 
-   const std::complex<double> result = 0.016666666666666666*((-2.449489742783178*g1*gN*Sin(ThetaW)*Sin(2*ThetaWp) + 30*Sqr(g2)*Sqr(Cos(ThetaW))*Sqr(Cos(ThetaWp)) + Cos(ThetaW)*(9.486832980505138*g2*gN*Sin(2*ThetaWp) - 15.491933384829668*g1*g2*Sin(ThetaW)*Sqr(Cos(ThetaWp))) + 2*Sqr(g1)*Sqr(Cos(ThetaWp))*Sqr(Sin(ThetaW)) + 3*Sqr(gN)*Sqr(Sin(ThetaWp)))*SUM(j1,0,2,Conj(ZU(gt1,j1))*ZU(gt2,j1)) + (19.595917942265423*g1*gN*Cos(ThetaWp)*Sin(ThetaW)*Sin(ThetaWp) + 32*Sqr(g1)*Sqr(Cos(ThetaWp))*Sqr(Sin(ThetaW)) + 3*Sqr(gN)*Sqr(Sin(ThetaWp)))*SUM(j1,0,2,Conj(ZU(gt1,3 + j1))*ZU(gt2,3 + j1)));
+   const std::complex<double> result = 0.016666666666666666*((-4.898979485566356*g1*gN*Cos(ThetaWp)*Sin(ThetaW)*Sin(ThetaWp) + 30*Sqr(g2)*Sqr(Cos(ThetaW))*Sqr(Cos(ThetaWp)) + Cos(ThetaW)*(9.486832980505138*g2*gN*Sin(2*ThetaWp) - 15.491933384829668*g1*g2*Sin(ThetaW)*Sqr(Cos(ThetaWp))) + 2*Sqr(g1)*Sqr(Cos(ThetaWp))*Sqr(Sin(ThetaW)) + 3*Sqr(gN)*Sqr(Sin(ThetaWp)))*SUM(j1,0,2,Conj(ZU(gt1,j1))*ZU(gt2,j1)) + (19.595917942265423*g1*gN*Cos(ThetaWp)*Sin(ThetaW)*Sin(ThetaWp) + 32*Sqr(g1)*Sqr(Cos(ThetaWp))*Sqr(Sin(ThetaW)) + 3*Sqr(gN)*Sqr(Sin(ThetaWp)))*SUM(j1,0,2,Conj(ZU(gt1,3 + j1))*ZU(gt2,3 + j1)));
 
    return {result};
 }
@@ -4602,7 +4602,7 @@ InverseMetricVertex VertexImpl<fields::Se, typename fields::conj<fields::Se>::ty
    const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
    const auto ThetaW = DERIVEDPARAMETER(ThetaW);
 
-   const std::complex<double> result = 0.05*(2*(2*Sqr(gN)*Sqr(Cos(ThetaWp)) + 5*Sqr(g2)*Sqr(Cos(ThetaW))*Sqr(Sin(ThetaWp)) + g1*Sin(ThetaW)*(-2.449489742783178*gN*Sin(2*ThetaWp) + 3*g1*Sin(ThetaW)*Sqr(Sin(ThetaWp))) + Cos(ThetaW)*(3.1622776601683795*g2*gN*Sin(2*ThetaWp) - 7.745966692414834*g1*g2*Sin(ThetaW)*Sqr(Sin(ThetaWp))))*SUM(j1,0,2,Conj(ZE(gt1,j1))*ZE(gt2,j1)) + (9.797958971132712*g1*gN*Cos(ThetaWp)*Sin(ThetaW)*Sin(ThetaWp) + Sqr(gN)*Sqr(Cos(ThetaWp)) + 24*Sqr(g1)*Sqr(Sin(ThetaW))*Sqr(Sin(ThetaWp)))*SUM(j1,0,2,Conj(ZE(gt1,3 + j1))*ZE(gt2,3 + j1)));
+   const std::complex<double> result = 0.05*(2*(-4.898979485566356*g1*gN*Cos(ThetaWp)*Sin(ThetaW)*Sin(ThetaWp) + 3.1622776601683795*g2*gN*Cos(ThetaW)*Sin(2*ThetaWp) + 2*Sqr(gN)*Sqr(Cos(ThetaWp)) - 7.745966692414834*g1*g2*Cos(ThetaW)*Sin(ThetaW)*Sqr(Sin(ThetaWp)) + 5*Sqr(g2)*Sqr(Cos(ThetaW))*Sqr(Sin(ThetaWp)) + 3*Sqr(g1)*Sqr(Sin(ThetaW))*Sqr(Sin(ThetaWp)))*SUM(j1,0,2,Conj(ZE(gt1,j1))*ZE(gt2,j1)) + (9.797958971132712*g1*gN*Cos(ThetaWp)*Sin(ThetaW)*Sin(ThetaWp) + Sqr(gN)*Sqr(Cos(ThetaWp)) + 24*Sqr(g1)*Sqr(Sin(ThetaW))*Sqr(Sin(ThetaWp)))*SUM(j1,0,2,Conj(ZE(gt1,3 + j1))*ZE(gt2,3 + j1)));
 
    return {result};
 }
@@ -5088,7 +5088,7 @@ InverseMetricVertex VertexImpl<fields::Ah, fields::Ah, fields::VZ, fields::VZ>::
    const auto ThetaW = DERIVEDPARAMETER(ThetaW);
    const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
 
-   const std::complex<double> result = 0.05*((-14.696938456699067*g1*gN*Cos(ThetaWp)*Sin(ThetaW)*Sin(ThetaWp) + 10*Sqr(g2)*Sqr(Cos(ThetaW))*Sqr(Cos(ThetaWp)) + Cos(ThetaW)*(-18.973665961010276*g2*gN*Cos(ThetaWp)*Sin(ThetaWp) + 15.491933384829668*g1*g2*Sin(ThetaW)*Sqr(Cos(ThetaWp))) + 6*Sqr(g1)*Sqr(Cos(ThetaWp))*Sqr(Sin(ThetaW)) + 9*Sqr(gN)*Sqr(Sin(ThetaWp)))*ZA(gt1,0)*ZA(gt2,0) + 2*(3.1622776601683795*g2*gN*Cos(ThetaW)*Sin(2*ThetaWp) + g1*Sin(ThetaW)*(7.745966692414834*g2*Cos(ThetaW) + 3*g1*Sin(ThetaW))*Sqr(Cos(ThetaWp)) + 5*Sqr(g2)*Sqr(Cos(ThetaW))*Sqr(Cos(ThetaWp)) + gN*(2.449489742783178*g1*Sin(ThetaW)*Sin(2*ThetaWp) + 2*gN*Sqr(Sin(ThetaWp))))*ZA(gt1,1)*ZA(gt2,1) + 25*Sqr(gN)*Sqr(Sin(ThetaWp))*ZA(gt1,2)*ZA(gt2,2));
+   const std::complex<double> result = 0.05*((-14.696938456699067*g1*gN*Cos(ThetaWp)*Sin(ThetaW)*Sin(ThetaWp) + 10*Sqr(g2)*Sqr(Cos(ThetaW))*Sqr(Cos(ThetaWp)) + Cos(ThetaW)*(-9.486832980505138*g2*gN*Sin(2*ThetaWp) + 15.491933384829668*g1*g2*Sin(ThetaW)*Sqr(Cos(ThetaWp))) + 6*Sqr(g1)*Sqr(Cos(ThetaWp))*Sqr(Sin(ThetaW)) + 9*Sqr(gN)*Sqr(Sin(ThetaWp)))*ZA(gt1,0)*ZA(gt2,0) + 2*(3.1622776601683795*g2*gN*Cos(ThetaW)*Sin(2*ThetaWp) + g1*Sin(ThetaW)*(7.745966692414834*g2*Cos(ThetaW) + 3*g1*Sin(ThetaW))*Sqr(Cos(ThetaWp)) + 5*Sqr(g2)*Sqr(Cos(ThetaW))*Sqr(Cos(ThetaWp)) + gN*(2.449489742783178*g1*Sin(ThetaW)*Sin(2*ThetaWp) + 2*gN*Sqr(Sin(ThetaWp))))*ZA(gt1,1)*ZA(gt2,1) + 25*Sqr(gN)*Sqr(Sin(ThetaWp))*ZA(gt1,2)*ZA(gt2,2));
 
    return {result};
 }
@@ -5629,7 +5629,7 @@ InverseMetricVertex VertexImpl<fields::Hpm, typename fields::conj<fields::Hpm>::
    const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
    const auto ThetaW = DERIVEDPARAMETER(ThetaW);
 
-   const std::complex<double> result = 0.05*((9*Sqr(gN)*Sqr(Cos(ThetaWp)) + (g2*Cos(ThetaW) - 0.7745966692414834*g1*Sin(ThetaW))*(-9.486832980505138*gN*Sin(2*ThetaWp) + 10*g2*Cos(ThetaW)*Sqr(Sin(ThetaWp)) - 7.745966692414834*g1*Sin(ThetaW)*Sqr(Sin(ThetaWp))))*ZP(gt1,0)*ZP(gt2,0) + 2*(2*Sqr(gN)*Sqr(Cos(ThetaWp)) + 5*Sqr(g2)*Sqr(Cos(ThetaW))*Sqr(Sin(ThetaWp)) + g1*Sin(ThetaW)*(-2.449489742783178*gN*Sin(2*ThetaWp) + 3*g1*Sin(ThetaW)*Sqr(Sin(ThetaWp))) + Cos(ThetaW)*(3.1622776601683795*g2*gN*Sin(2*ThetaWp) - 7.745966692414834*g1*g2*Sin(ThetaW)*Sqr(Sin(ThetaWp))))*ZP(gt1,1)*ZP(gt2,1));
+   const std::complex<double> result = 0.05*((9*Sqr(gN)*Sqr(Cos(ThetaWp)) + (g2*Cos(ThetaW) - 0.7745966692414834*g1*Sin(ThetaW))*(-9.486832980505138*gN*Sin(2*ThetaWp) + 10*g2*Cos(ThetaW)*Sqr(Sin(ThetaWp)) - 7.745966692414834*g1*Sin(ThetaW)*Sqr(Sin(ThetaWp))))*ZP(gt1,0)*ZP(gt2,0) + 2*(-4.898979485566356*g1*gN*Cos(ThetaWp)*Sin(ThetaW)*Sin(ThetaWp) + 2*Sqr(gN)*Sqr(Cos(ThetaWp)) + 5*Sqr(g2)*Sqr(Cos(ThetaW))*Sqr(Sin(ThetaWp)) + 3*Sqr(g1)*Sqr(Sin(ThetaW))*Sqr(Sin(ThetaWp)) + Cos(ThetaW)*(3.1622776601683795*g2*gN*Sin(2*ThetaWp) - 7.745966692414834*g1*g2*Sin(ThetaW)*Sqr(Sin(ThetaWp))))*ZP(gt1,1)*ZP(gt2,1));
 
    return {result};
 }
@@ -6335,7 +6335,7 @@ InverseMetricVertex VertexImpl<fields::SHI0, typename fields::conj<fields::SHI0>
    const auto ThetaW = DERIVEDPARAMETER(ThetaW);
    const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
 
-   const std::complex<double> result = 0.05*((-14.696938456699067*g1*gN*Cos(ThetaWp)*Sin(ThetaW)*Sin(ThetaWp) + 10*Sqr(g2)*Sqr(Cos(ThetaW))*Sqr(Cos(ThetaWp)) + Cos(ThetaW)*(-9.486832980505138*g2*gN*Sin(2*ThetaWp) + 15.491933384829668*g1*g2*Sin(ThetaW)*Sqr(Cos(ThetaWp))) + 6*Sqr(g1)*Sqr(Cos(ThetaWp))*Sqr(Sin(ThetaW)) + 9*Sqr(gN)*Sqr(Sin(ThetaWp)))*SUM(j1,0,1,Conj(UHI0(gt1,j1))*UHI0(gt2,j1)) + 2*(3.1622776601683795*g2*gN*Cos(ThetaW)*Sin(2*ThetaWp) + g1*Sin(ThetaW)*(7.745966692414834*g2*Cos(ThetaW) + 3*g1*Sin(ThetaW))*Sqr(Cos(ThetaWp)) + 5*Sqr(g2)*Sqr(Cos(ThetaW))*Sqr(Cos(ThetaWp)) + gN*(2.449489742783178*g1*Sin(ThetaW)*Sin(2*ThetaWp) + 2*gN*Sqr(Sin(ThetaWp))))*SUM(j1,0,1,Conj(UHI0(gt1,2 + j1))*UHI0(gt2,2 + j1)));
+   const std::complex<double> result = 0.05*((-14.696938456699067*g1*gN*Cos(ThetaWp)*Sin(ThetaW)*Sin(ThetaWp) + 10*Sqr(g2)*Sqr(Cos(ThetaW))*Sqr(Cos(ThetaWp)) + Cos(ThetaW)*(-18.973665961010276*g2*gN*Cos(ThetaWp)*Sin(ThetaWp) + 15.491933384829668*g1*g2*Sin(ThetaW)*Sqr(Cos(ThetaWp))) + 6*Sqr(g1)*Sqr(Cos(ThetaWp))*Sqr(Sin(ThetaW)) + 9*Sqr(gN)*Sqr(Sin(ThetaWp)))*SUM(j1,0,1,Conj(UHI0(gt1,j1))*UHI0(gt2,j1)) + 2*(3.1622776601683795*g2*gN*Cos(ThetaW)*Sin(2*ThetaWp) + g1*Sin(ThetaW)*(7.745966692414834*g2*Cos(ThetaW) + 3*g1*Sin(ThetaW))*Sqr(Cos(ThetaWp)) + 5*Sqr(g2)*Sqr(Cos(ThetaW))*Sqr(Cos(ThetaWp)) + gN*(2.449489742783178*g1*Sin(ThetaW)*Sin(2*ThetaWp) + 2*gN*Sqr(Sin(ThetaWp))))*SUM(j1,0,1,Conj(UHI0(gt1,2 + j1))*UHI0(gt2,2 + j1)));
 
    return {result};
 }
@@ -6889,7 +6889,7 @@ InverseMetricVertex VertexImpl<fields::SHp0, typename fields::conj<fields::SHp0>
    const auto ThetaW = DERIVEDPARAMETER(ThetaW);
    const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
 
-   const std::complex<double> result = 0.0125*(25.298221281347036*g2*gN*Cos(ThetaW)*Cos(2*ThetaWp) - 15.491933384829668*g1*g2*Sin(2*ThetaW)*Sin(2*ThetaWp) + Sin(2*ThetaWp)*(-9*Sqr(g1) + Cos(2*ThetaW)*(3*Sqr(g1) - 5*Sqr(g2)) - 5*Sqr(g2)) + 8*Sin(2*ThetaWp)*Sqr(gN) + 2*Sin(2*ThetaWp)*(3*Sqr(g1) - 5*Sqr(g2))*Sqr(Cos(ThetaW)) + 19.595917942265423*g1*gN*Sin(ThetaW)*Sqr(Cos(ThetaWp)) - 19.595917942265423*g1*gN*Sin(ThetaW)*Sqr(Sin(ThetaWp)))*(Conj(UHp0(gt1,0))*UHp0(gt2,0) + Conj(UHp0(gt1,1))*UHp0(gt2,1));
+   const std::complex<double> result = 0.0125*(25.298221281347036*g2*gN*Cos(ThetaW)*Cos(2*ThetaWp) + Sin(2*ThetaWp)*(-9*Sqr(g1) + Cos(2*ThetaW)*(3*Sqr(g1) - 5*Sqr(g2)) - 5*Sqr(g2) + 8*Sqr(gN)) + 2*Sin(2*ThetaWp)*(3*Sqr(g1) - 5*Sqr(g2))*Sqr(Cos(ThetaW)) + 19.595917942265423*g1*gN*Sin(ThetaW)*Sqr(Cos(ThetaWp)) - 4*(3.872983346207417*g1*g2*Sin(2*ThetaW)*Sin(2*ThetaWp) + 4.898979485566356*g1*gN*Sin(ThetaW)*Sqr(Sin(ThetaWp))))*(Conj(UHp0(gt1,0))*UHp0(gt2,0) + Conj(UHp0(gt1,1))*UHp0(gt2,1));
 
    return {result};
 }

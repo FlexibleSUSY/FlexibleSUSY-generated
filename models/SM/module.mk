@@ -60,7 +60,6 @@ LIBSM_SRC := \
 		$(DIR)/SM_f_to_f_conversion.cpp \
 		$(DIR)/SM_l_to_lgamma.cpp \
 		$(DIR)/SM_b_to_s_gamma.cpp \
-		$(DIR)/SM_effective_couplings.cpp \
 		$(DIR)/SM_info.cpp \
 		$(DIR)/SM_input_parameters.cpp \
 		$(DIR)/SM_mass_eigenstates.cpp \
@@ -97,7 +96,6 @@ LIBSM_HDR := \
 		$(DIR)/SM_f_to_f_conversion.hpp \
 		$(DIR)/SM_l_to_lgamma.hpp \
 		$(DIR)/SM_b_to_s_gamma.hpp \
-		$(DIR)/SM_effective_couplings.hpp \
 		$(DIR)/SM_ewsb_solver.hpp \
 		$(DIR)/SM_ewsb_solver_interface.hpp \
 		$(DIR)/SM_high_scale_constraint.hpp \

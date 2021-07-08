@@ -41,8 +41,8 @@ NMSSMEFTHiggs_INCLUDE_MK := \
 
 NMSSMEFTHiggs_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.NMSSMEFTHiggs_generated \
-		$(DIR)/LesHouches.in.NMSSMEFTHiggs \
-		$(DIR)/LesHouches.in.NMSSMEFTHiggs_1507.05093_TP3
+		$(DIR)/LesHouches.in.NMSSMEFTHiggs_1507.05093_TP3 \
+		$(DIR)/LesHouches.in.NMSSMEFTHiggs
 
 NMSSMEFTHiggs_REFERENCES := \
 		$(DIR)/NMSSMEFTHiggs_references.tex
@@ -61,7 +61,6 @@ LIBNMSSMEFTHiggs_SRC := \
 		$(DIR)/NMSSMEFTHiggs_f_to_f_conversion.cpp \
 		$(DIR)/NMSSMEFTHiggs_l_to_lgamma.cpp \
 		$(DIR)/NMSSMEFTHiggs_b_to_s_gamma.cpp \
-		$(DIR)/NMSSMEFTHiggs_effective_couplings.cpp \
 		$(DIR)/NMSSMEFTHiggs_info.cpp \
 		$(DIR)/NMSSMEFTHiggs_input_parameters.cpp \
 		$(DIR)/NMSSMEFTHiggs_mass_eigenstates.cpp \
@@ -98,7 +97,6 @@ LIBNMSSMEFTHiggs_HDR := \
 		$(DIR)/NMSSMEFTHiggs_f_to_f_conversion.hpp \
 		$(DIR)/NMSSMEFTHiggs_l_to_lgamma.hpp \
 		$(DIR)/NMSSMEFTHiggs_b_to_s_gamma.hpp \
-		$(DIR)/NMSSMEFTHiggs_effective_couplings.hpp \
 		$(DIR)/NMSSMEFTHiggs_ewsb_solver.hpp \
 		$(DIR)/NMSSMEFTHiggs_ewsb_solver_interface.hpp \
 		$(DIR)/NMSSMEFTHiggs_high_scale_constraint.hpp \

@@ -42,11 +42,11 @@ lowNMSSMTanBetaAtMZ_INCLUDE_MK := \
 lowNMSSMTanBetaAtMZ_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.lowNMSSMTanBetaAtMZ_generated \
 		$(DIR)/LesHouches.in.TP1 \
+		$(DIR)/LesHouches.in.TP3 \
+		$(DIR)/LesHouches.in.TP4 \
 		$(DIR)/LesHouches.in.TP2 \
 		$(DIR)/LesHouches.in.TP5 \
-		$(DIR)/LesHouches.in.TP3 \
 		$(DIR)/LesHouches.in.TP6 \
-		$(DIR)/LesHouches.in.TP4 \
 		$(DIR)/LesHouches.in.lowNMSSMTanBetaAtMZ
 
 lowNMSSMTanBetaAtMZ_REFERENCES := \
@@ -66,7 +66,6 @@ LIBlowNMSSMTanBetaAtMZ_SRC := \
 		$(DIR)/lowNMSSMTanBetaAtMZ_f_to_f_conversion.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_l_to_lgamma.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_b_to_s_gamma.cpp \
-		$(DIR)/lowNMSSMTanBetaAtMZ_effective_couplings.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_info.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_input_parameters.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_mass_eigenstates.cpp \
@@ -103,7 +102,6 @@ LIBlowNMSSMTanBetaAtMZ_HDR := \
 		$(DIR)/lowNMSSMTanBetaAtMZ_f_to_f_conversion.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_l_to_lgamma.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_b_to_s_gamma.hpp \
-		$(DIR)/lowNMSSMTanBetaAtMZ_effective_couplings.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_ewsb_solver.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_ewsb_solver_interface.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_high_scale_constraint.hpp \

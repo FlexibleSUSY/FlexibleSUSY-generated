@@ -60,7 +60,6 @@ LIBCMSSMSemiAnalytic_SRC := \
 		$(DIR)/CMSSMSemiAnalytic_f_to_f_conversion.cpp \
 		$(DIR)/CMSSMSemiAnalytic_l_to_lgamma.cpp \
 		$(DIR)/CMSSMSemiAnalytic_b_to_s_gamma.cpp \
-		$(DIR)/CMSSMSemiAnalytic_effective_couplings.cpp \
 		$(DIR)/CMSSMSemiAnalytic_info.cpp \
 		$(DIR)/CMSSMSemiAnalytic_input_parameters.cpp \
 		$(DIR)/CMSSMSemiAnalytic_mass_eigenstates.cpp \
@@ -97,7 +96,6 @@ LIBCMSSMSemiAnalytic_HDR := \
 		$(DIR)/CMSSMSemiAnalytic_f_to_f_conversion.hpp \
 		$(DIR)/CMSSMSemiAnalytic_l_to_lgamma.hpp \
 		$(DIR)/CMSSMSemiAnalytic_b_to_s_gamma.hpp \
-		$(DIR)/CMSSMSemiAnalytic_effective_couplings.hpp \
 		$(DIR)/CMSSMSemiAnalytic_ewsb_solver.hpp \
 		$(DIR)/CMSSMSemiAnalytic_ewsb_solver_interface.hpp \
 		$(DIR)/CMSSMSemiAnalytic_high_scale_constraint.hpp \

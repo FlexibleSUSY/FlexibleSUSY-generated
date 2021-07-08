@@ -60,7 +60,6 @@ LIBlowMSSM_SRC := \
 		$(DIR)/lowMSSM_f_to_f_conversion.cpp \
 		$(DIR)/lowMSSM_l_to_lgamma.cpp \
 		$(DIR)/lowMSSM_b_to_s_gamma.cpp \
-		$(DIR)/lowMSSM_effective_couplings.cpp \
 		$(DIR)/lowMSSM_info.cpp \
 		$(DIR)/lowMSSM_input_parameters.cpp \
 		$(DIR)/lowMSSM_mass_eigenstates.cpp \
@@ -97,7 +96,6 @@ LIBlowMSSM_HDR := \
 		$(DIR)/lowMSSM_f_to_f_conversion.hpp \
 		$(DIR)/lowMSSM_l_to_lgamma.hpp \
 		$(DIR)/lowMSSM_b_to_s_gamma.hpp \
-		$(DIR)/lowMSSM_effective_couplings.hpp \
 		$(DIR)/lowMSSM_ewsb_solver.hpp \
 		$(DIR)/lowMSSM_ewsb_solver_interface.hpp \
 		$(DIR)/lowMSSM_high_scale_constraint.hpp \

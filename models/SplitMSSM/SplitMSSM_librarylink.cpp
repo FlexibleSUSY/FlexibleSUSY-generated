@@ -800,11 +800,9 @@ void Model_data::put_observables(MLINK link) const
 
    MLPutFunction(link, "List", 1);
    MLPutRule(link, SplitMSSM_info::model_name);
-   MLPutFunction(link, "List", 3);
+   MLPutFunction(link, "List", 1);
 
    MLPutRuleTo(link, OBSERVABLE(a_muon), "FlexibleSUSYObservable`aMuon");
-   MLPutRuleTo(link, OBSERVABLE(eff_cp_higgs_photon_photon), "FlexibleSUSYObservable`CpHiggsPhotonPhoton");
-   MLPutRuleTo(link, OBSERVABLE(eff_cp_higgs_gluon_gluon), "FlexibleSUSYObservable`CpHiggsGluonGluon");
 
 
    MLEndPacket(link);

@@ -60,7 +60,6 @@ LIBTMSSM_SRC := \
 		$(DIR)/TMSSM_f_to_f_conversion.cpp \
 		$(DIR)/TMSSM_l_to_lgamma.cpp \
 		$(DIR)/TMSSM_b_to_s_gamma.cpp \
-		$(DIR)/TMSSM_effective_couplings.cpp \
 		$(DIR)/TMSSM_info.cpp \
 		$(DIR)/TMSSM_input_parameters.cpp \
 		$(DIR)/TMSSM_mass_eigenstates.cpp \
@@ -97,7 +96,6 @@ LIBTMSSM_HDR := \
 		$(DIR)/TMSSM_f_to_f_conversion.hpp \
 		$(DIR)/TMSSM_l_to_lgamma.hpp \
 		$(DIR)/TMSSM_b_to_s_gamma.hpp \
-		$(DIR)/TMSSM_effective_couplings.hpp \
 		$(DIR)/TMSSM_ewsb_solver.hpp \
 		$(DIR)/TMSSM_ewsb_solver_interface.hpp \
 		$(DIR)/TMSSM_high_scale_constraint.hpp \

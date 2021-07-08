@@ -19,7 +19,7 @@
 /**
  * @file lowNMSSMTanBetaAtMZ_f_to_f_conversion.hpp
  *
- * This file was generated with FlexibleSUSY 2.6.0 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.6.1 and SARAH 4.14.5 .
  */
 
 #ifndef lowNMSSMTanBetaAtMZ_FToFConversion_H

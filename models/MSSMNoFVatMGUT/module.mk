@@ -60,7 +60,6 @@ LIBMSSMNoFVatMGUT_SRC := \
 		$(DIR)/MSSMNoFVatMGUT_f_to_f_conversion.cpp \
 		$(DIR)/MSSMNoFVatMGUT_l_to_lgamma.cpp \
 		$(DIR)/MSSMNoFVatMGUT_b_to_s_gamma.cpp \
-		$(DIR)/MSSMNoFVatMGUT_effective_couplings.cpp \
 		$(DIR)/MSSMNoFVatMGUT_info.cpp \
 		$(DIR)/MSSMNoFVatMGUT_input_parameters.cpp \
 		$(DIR)/MSSMNoFVatMGUT_mass_eigenstates.cpp \
@@ -97,7 +96,6 @@ LIBMSSMNoFVatMGUT_HDR := \
 		$(DIR)/MSSMNoFVatMGUT_f_to_f_conversion.hpp \
 		$(DIR)/MSSMNoFVatMGUT_l_to_lgamma.hpp \
 		$(DIR)/MSSMNoFVatMGUT_b_to_s_gamma.hpp \
-		$(DIR)/MSSMNoFVatMGUT_effective_couplings.hpp \
 		$(DIR)/MSSMNoFVatMGUT_ewsb_solver.hpp \
 		$(DIR)/MSSMNoFVatMGUT_ewsb_solver_interface.hpp \
 		$(DIR)/MSSMNoFVatMGUT_high_scale_constraint.hpp \

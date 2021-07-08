@@ -24,7 +24,7 @@
  * Contains the definition of SplitMSSM decays class methods,
  * which calculate the decay rates for particles in the model.
  *
- * This file was generated with FlexibleSUSY 2.6.0 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.6.1 and SARAH 4.14.5 .
  */
 
 #include <cmath>
@@ -2473,7 +2473,7 @@ Decay_amplitude_SVV CLASSNAME::calculate_amplitude<hh, VP, VZ>(
                      vertexId1::template indices_of_field<1>(indexId1) == vertexId1::template indices_of_field<0>(indexId1) &&
                      vertexId2::template indices_of_field<1>(indexId2) == vertexId2::template indices_of_field<0>(indexId2) &&
                      vertexId3::template indices_of_field<1>(indexId3) == vertexId3::template indices_of_field<0>(indexId3)
-                     && result.m_decay/mInternal1 < 0.8
+                     && result.m_decay/mInternal1 < 0.8 && result.m_vector_2/result.m_decay < 0.75
                      ) {
                      const double correction_S = 1 - get_alphas(context)/Pi;
                      temp_result.form_factor_g   = correction_S * temp_result.form_factor_g;
@@ -2601,7 +2601,7 @@ Decay_amplitude_SVV CLASSNAME::calculate_amplitude<hh, VP, VZ>(
                      vertexId1::template indices_of_field<1>(indexId1) == vertexId1::template indices_of_field<0>(indexId1) &&
                      vertexId2::template indices_of_field<1>(indexId2) == vertexId2::template indices_of_field<0>(indexId2) &&
                      vertexId3::template indices_of_field<1>(indexId3) == vertexId3::template indices_of_field<0>(indexId3)
-                     && result.m_decay/mInternal1 < 0.8
+                     && result.m_decay/mInternal1 < 0.8 && result.m_vector_2/result.m_decay < 0.75
                      ) {
                      const double correction_S = 1 - get_alphas(context)/Pi;
                      temp_result.form_factor_g   = correction_S * temp_result.form_factor_g;
@@ -3291,7 +3291,7 @@ Decay_amplitude_SVV CLASSNAME::calculate_amplitude<hh, VP, VZ>(
                      vertexId1::template indices_of_field<0>(indexId1) == vertexId1::template indices_of_field<1>(indexId1) &&
                      vertexId2::template indices_of_field<0>(indexId2) == vertexId2::template indices_of_field<1>(indexId2) &&
                      vertexId3::template indices_of_field<0>(indexId3) == vertexId3::template indices_of_field<1>(indexId3)
-                     && result.m_decay/mInternal1 < 0.8
+                     && result.m_decay/mInternal1 < 0.8 && result.m_vector_2/result.m_decay < 0.75
                      ) {
                      const double correction_S = 1 - get_alphas(context)/Pi;
                      temp_result.form_factor_g   = correction_S * temp_result.form_factor_g;
@@ -3419,7 +3419,7 @@ Decay_amplitude_SVV CLASSNAME::calculate_amplitude<hh, VP, VZ>(
                      vertexId1::template indices_of_field<0>(indexId1) == vertexId1::template indices_of_field<1>(indexId1) &&
                      vertexId2::template indices_of_field<0>(indexId2) == vertexId2::template indices_of_field<1>(indexId2) &&
                      vertexId3::template indices_of_field<0>(indexId3) == vertexId3::template indices_of_field<1>(indexId3)
-                     && result.m_decay/mInternal1 < 0.8
+                     && result.m_decay/mInternal1 < 0.8 && result.m_vector_2/result.m_decay < 0.75
                      ) {
                      const double correction_S = 1 - get_alphas(context)/Pi;
                      temp_result.form_factor_g   = correction_S * temp_result.form_factor_g;

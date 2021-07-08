@@ -60,7 +60,6 @@ LIBMSSMRHN_SRC := \
 		$(DIR)/MSSMRHN_f_to_f_conversion.cpp \
 		$(DIR)/MSSMRHN_l_to_lgamma.cpp \
 		$(DIR)/MSSMRHN_b_to_s_gamma.cpp \
-		$(DIR)/MSSMRHN_effective_couplings.cpp \
 		$(DIR)/MSSMRHN_info.cpp \
 		$(DIR)/MSSMRHN_input_parameters.cpp \
 		$(DIR)/MSSMRHN_mass_eigenstates.cpp \
@@ -97,7 +96,6 @@ LIBMSSMRHN_HDR := \
 		$(DIR)/MSSMRHN_f_to_f_conversion.hpp \
 		$(DIR)/MSSMRHN_l_to_lgamma.hpp \
 		$(DIR)/MSSMRHN_b_to_s_gamma.hpp \
-		$(DIR)/MSSMRHN_effective_couplings.hpp \
 		$(DIR)/MSSMRHN_ewsb_solver.hpp \
 		$(DIR)/MSSMRHN_ewsb_solver_interface.hpp \
 		$(DIR)/MSSMRHN_high_scale_constraint.hpp \

@@ -41,12 +41,12 @@ NUTNMSSM_INCLUDE_MK := \
 
 NUTNMSSM_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.NUTNMSSM_generated \
+		$(DIR)/LesHouches.in.NUTNMSSM_1308.1333_BP3 \
 		$(DIR)/LesHouches.in.NUTNMSSM \
 		$(DIR)/LesHouches.in.NUTNMSSM_GTP1 \
-		$(DIR)/LesHouches.in.NUTNMSSM_1308.1333_BP1 \
 		$(DIR)/LesHouches.in.NUTNMSSM_1308.1333_BP2 \
 		$(DIR)/LesHouches.in.NUTNMSSM_GTP2 \
-		$(DIR)/LesHouches.in.NUTNMSSM_1308.1333_BP3
+		$(DIR)/LesHouches.in.NUTNMSSM_1308.1333_BP1
 
 NUTNMSSM_REFERENCES := \
 		$(DIR)/NUTNMSSM_references.tex
@@ -65,7 +65,6 @@ LIBNUTNMSSM_SRC := \
 		$(DIR)/NUTNMSSM_f_to_f_conversion.cpp \
 		$(DIR)/NUTNMSSM_l_to_lgamma.cpp \
 		$(DIR)/NUTNMSSM_b_to_s_gamma.cpp \
-		$(DIR)/NUTNMSSM_effective_couplings.cpp \
 		$(DIR)/NUTNMSSM_info.cpp \
 		$(DIR)/NUTNMSSM_input_parameters.cpp \
 		$(DIR)/NUTNMSSM_mass_eigenstates.cpp \
@@ -102,7 +101,6 @@ LIBNUTNMSSM_HDR := \
 		$(DIR)/NUTNMSSM_f_to_f_conversion.hpp \
 		$(DIR)/NUTNMSSM_l_to_lgamma.hpp \
 		$(DIR)/NUTNMSSM_b_to_s_gamma.hpp \
-		$(DIR)/NUTNMSSM_effective_couplings.hpp \
 		$(DIR)/NUTNMSSM_ewsb_solver.hpp \
 		$(DIR)/NUTNMSSM_ewsb_solver_interface.hpp \
 		$(DIR)/NUTNMSSM_high_scale_constraint.hpp \

@@ -60,7 +60,6 @@ LIBUMSSM_SRC := \
 		$(DIR)/UMSSM_f_to_f_conversion.cpp \
 		$(DIR)/UMSSM_l_to_lgamma.cpp \
 		$(DIR)/UMSSM_b_to_s_gamma.cpp \
-		$(DIR)/UMSSM_effective_couplings.cpp \
 		$(DIR)/UMSSM_info.cpp \
 		$(DIR)/UMSSM_input_parameters.cpp \
 		$(DIR)/UMSSM_mass_eigenstates.cpp \
@@ -97,7 +96,6 @@ LIBUMSSM_HDR := \
 		$(DIR)/UMSSM_f_to_f_conversion.hpp \
 		$(DIR)/UMSSM_l_to_lgamma.hpp \
 		$(DIR)/UMSSM_b_to_s_gamma.hpp \
-		$(DIR)/UMSSM_effective_couplings.hpp \
 		$(DIR)/UMSSM_ewsb_solver.hpp \
 		$(DIR)/UMSSM_ewsb_solver_interface.hpp \
 		$(DIR)/UMSSM_high_scale_constraint.hpp \

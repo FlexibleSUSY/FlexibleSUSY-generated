@@ -60,7 +60,6 @@ LIBCMSSM_SRC := \
 		$(DIR)/CMSSM_f_to_f_conversion.cpp \
 		$(DIR)/CMSSM_l_to_lgamma.cpp \
 		$(DIR)/CMSSM_b_to_s_gamma.cpp \
-		$(DIR)/CMSSM_effective_couplings.cpp \
 		$(DIR)/CMSSM_info.cpp \
 		$(DIR)/CMSSM_input_parameters.cpp \
 		$(DIR)/CMSSM_mass_eigenstates.cpp \
@@ -97,7 +96,6 @@ LIBCMSSM_HDR := \
 		$(DIR)/CMSSM_f_to_f_conversion.hpp \
 		$(DIR)/CMSSM_l_to_lgamma.hpp \
 		$(DIR)/CMSSM_b_to_s_gamma.hpp \
-		$(DIR)/CMSSM_effective_couplings.hpp \
 		$(DIR)/CMSSM_ewsb_solver.hpp \
 		$(DIR)/CMSSM_ewsb_solver_interface.hpp \
 		$(DIR)/CMSSM_high_scale_constraint.hpp \

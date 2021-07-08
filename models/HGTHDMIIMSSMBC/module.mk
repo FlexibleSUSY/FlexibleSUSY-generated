@@ -60,7 +60,6 @@ LIBHGTHDMIIMSSMBC_SRC := \
 		$(DIR)/HGTHDMIIMSSMBC_f_to_f_conversion.cpp \
 		$(DIR)/HGTHDMIIMSSMBC_l_to_lgamma.cpp \
 		$(DIR)/HGTHDMIIMSSMBC_b_to_s_gamma.cpp \
-		$(DIR)/HGTHDMIIMSSMBC_effective_couplings.cpp \
 		$(DIR)/HGTHDMIIMSSMBC_info.cpp \
 		$(DIR)/HGTHDMIIMSSMBC_input_parameters.cpp \
 		$(DIR)/HGTHDMIIMSSMBC_mass_eigenstates.cpp \
@@ -97,7 +96,6 @@ LIBHGTHDMIIMSSMBC_HDR := \
 		$(DIR)/HGTHDMIIMSSMBC_f_to_f_conversion.hpp \
 		$(DIR)/HGTHDMIIMSSMBC_l_to_lgamma.hpp \
 		$(DIR)/HGTHDMIIMSSMBC_b_to_s_gamma.hpp \
-		$(DIR)/HGTHDMIIMSSMBC_effective_couplings.hpp \
 		$(DIR)/HGTHDMIIMSSMBC_ewsb_solver.hpp \
 		$(DIR)/HGTHDMIIMSSMBC_ewsb_solver_interface.hpp \
 		$(DIR)/HGTHDMIIMSSMBC_high_scale_constraint.hpp \

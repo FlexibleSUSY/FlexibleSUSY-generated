@@ -60,7 +60,6 @@ LIBMSSMNoFVatMGUTHimalaya_SRC := \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_f_to_f_conversion.cpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_l_to_lgamma.cpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_b_to_s_gamma.cpp \
-		$(DIR)/MSSMNoFVatMGUTHimalaya_effective_couplings.cpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_info.cpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_input_parameters.cpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_mass_eigenstates.cpp \
@@ -97,7 +96,6 @@ LIBMSSMNoFVatMGUTHimalaya_HDR := \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_f_to_f_conversion.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_l_to_lgamma.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_b_to_s_gamma.hpp \
-		$(DIR)/MSSMNoFVatMGUTHimalaya_effective_couplings.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_ewsb_solver.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_ewsb_solver_interface.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_high_scale_constraint.hpp \

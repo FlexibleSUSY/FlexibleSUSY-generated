@@ -42,12 +42,12 @@ lowNMSSM_INCLUDE_MK := \
 lowNMSSM_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.lowNMSSM_generated \
 		$(DIR)/LesHouches.in.TP1 \
-		$(DIR)/LesHouches.in.TP2 \
-		$(DIR)/LesHouches.in.TP5 \
 		$(DIR)/LesHouches.in.lowNMSSM \
 		$(DIR)/LesHouches.in.TP3 \
-		$(DIR)/LesHouches.in.TP6 \
-		$(DIR)/LesHouches.in.TP4
+		$(DIR)/LesHouches.in.TP4 \
+		$(DIR)/LesHouches.in.TP2 \
+		$(DIR)/LesHouches.in.TP5 \
+		$(DIR)/LesHouches.in.TP6
 
 lowNMSSM_REFERENCES := \
 		$(DIR)/lowNMSSM_references.tex
@@ -66,7 +66,6 @@ LIBlowNMSSM_SRC := \
 		$(DIR)/lowNMSSM_f_to_f_conversion.cpp \
 		$(DIR)/lowNMSSM_l_to_lgamma.cpp \
 		$(DIR)/lowNMSSM_b_to_s_gamma.cpp \
-		$(DIR)/lowNMSSM_effective_couplings.cpp \
 		$(DIR)/lowNMSSM_info.cpp \
 		$(DIR)/lowNMSSM_input_parameters.cpp \
 		$(DIR)/lowNMSSM_mass_eigenstates.cpp \
@@ -103,7 +102,6 @@ LIBlowNMSSM_HDR := \
 		$(DIR)/lowNMSSM_f_to_f_conversion.hpp \
 		$(DIR)/lowNMSSM_l_to_lgamma.hpp \
 		$(DIR)/lowNMSSM_b_to_s_gamma.hpp \
-		$(DIR)/lowNMSSM_effective_couplings.hpp \
 		$(DIR)/lowNMSSM_ewsb_solver.hpp \
 		$(DIR)/lowNMSSM_ewsb_solver_interface.hpp \
 		$(DIR)/lowNMSSM_high_scale_constraint.hpp \
