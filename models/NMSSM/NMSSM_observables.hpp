@@ -48,7 +48,7 @@ struct NMSSM_observables {
    double edm_Fe_0; ///< electric dipole moment of Fe(0) [1/GeV]
    double edm_Fe_1; ///< electric dipole moment of Fe(1) [1/GeV]
    double edm_Fe_2; ///< electric dipole moment of Fe(2) [1/GeV]
-   double Fe_to_Fe_VP; ///< BR(Fe1 -> Fe0 VP)
+   double Fe1_to_Fe0_VP; ///< BR(Fe1 -> Fe0 VP)
 
 };
 

@@ -20,7 +20,7 @@
 /**
  * @file cxx_qft/CMSSMSemiAnalytic_npointfunctions_wilsoncoeffs.hpp
  *
- * This file was generated with FlexibleSUSY 2.6.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.6.2 and SARAH 4.14.5 .
  */
 
 #ifndef CMSSMSemiAnalytic_CXXQFT_NPOINTFUNCTIONS_H

@@ -660,8 +660,28 @@ void lowNMSSM_slha_io::set_decay_block(const Decays_list& decays_list, FlexibleD
    slha_io.set_block(decay);
 }
 
+/**
+ * Stores the particle decay branching ratios in the SLHA object.
+ *
+ * @param decays struct containing decays data
+ */
+void lowNMSSM_slha_io::set_decays(const lowNMSSM_decay_table& decay_table, FlexibleDecay_settings const& flexibledecay_settings)
+{
+   for (const auto& particle : decay_table) {
+      set_decay_block(particle, flexibledecay_settings);
+   }
+}
+void lowNMSSM_slha_io::fill_decays_data(const lowNMSSM_decays& decays, FlexibleDecay_settings const& flexibledecay_settings)
+{
+   const auto& decays_problems = decays.get_problems();
+   const bool decays_error = decays_problems.have_problem();
 
+   set_dcinfo(decays_problems);
 
+   if (!decays_error) {
+      set_decays(decays.get_decay_table(), flexibledecay_settings);
+   }
+}
 
 /**
  * Stores the model (DR-bar) parameters, masses and mixing matrices in

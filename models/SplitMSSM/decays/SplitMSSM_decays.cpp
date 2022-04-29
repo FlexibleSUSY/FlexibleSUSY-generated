@@ -24,7 +24,7 @@
  * Contains the definition of SplitMSSM decays class methods,
  * which calculate the decay rates for particles in the model.
  *
- * This file was generated with FlexibleSUSY 2.6.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.6.2 and SARAH 4.14.5 .
  */
 
 #include <cmath>

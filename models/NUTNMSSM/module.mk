@@ -41,11 +41,11 @@ NUTNMSSM_INCLUDE_MK := \
 
 NUTNMSSM_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.NUTNMSSM_generated \
-		$(DIR)/LesHouches.in.NUTNMSSM_1308.1333_BP3 \
-		$(DIR)/LesHouches.in.NUTNMSSM \
 		$(DIR)/LesHouches.in.NUTNMSSM_GTP1 \
-		$(DIR)/LesHouches.in.NUTNMSSM_1308.1333_BP2 \
+		$(DIR)/LesHouches.in.NUTNMSSM_1308.1333_BP3 \
 		$(DIR)/LesHouches.in.NUTNMSSM_GTP2 \
+		$(DIR)/LesHouches.in.NUTNMSSM_1308.1333_BP2 \
+		$(DIR)/LesHouches.in.NUTNMSSM \
 		$(DIR)/LesHouches.in.NUTNMSSM_1308.1333_BP1
 
 NUTNMSSM_REFERENCES := \

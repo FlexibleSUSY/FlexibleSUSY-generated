@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.6.1"];
+Print["FlexibleSUSY 2.6.2"];
 Print["lowNMSSM"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -20,12 +20,16 @@ FSlowNMSSMSetLib = LibraryFunctionLoad[liblowNMSSM, "FSlowNMSSMSet", {Integer, {
 
 FSlowNMSSMCalculateSpectrum = LibraryFunctionLoad[liblowNMSSM, "FSlowNMSSMCalculateSpectrum", LinkObject, LinkObject];
 FSlowNMSSMCalculateObservables = LibraryFunctionLoad[liblowNMSSM, "FSlowNMSSMCalculateObservables", LinkObject, LinkObject];
+FSlowNMSSMCalculateDecays = LibraryFunctionLoad[liblowNMSSM, "FSlowNMSSMCalculateDecays", LinkObject, LinkObject];
 
 FSlowNMSSMCalculateSpectrum::error = "`1`";
 FSlowNMSSMCalculateSpectrum::warning = "`1`";
 
 FSlowNMSSMCalculateObservables::error = "`1`";
 FSlowNMSSMCalculateObservables::warning = "`1`";
+
+FSlowNMSSMCalculateDecays::error = "`1`";
+FSlowNMSSMCalculateDecays::warning = "`1`";
 
 FSlowNMSSM::info = "`1`";
 FSlowNMSSM::nonum = "Error: `1` is not a numeric input value!";
@@ -101,6 +105,13 @@ fsDefaultSMParameters = {
     Mh -> 125.09
 };
 
+fdDefaultSettings = {
+   minBRtoPrint -> 1*^-5,
+   maxHigherOrderCorrections -> 4,
+   alphaThomson -> 1,
+   offShellVV -> 2
+};
+
 fslowNMSSMDefaultInputParameters = {
    Qin -> 0,
    M1Input -> 0,
@@ -136,10 +147,10 @@ Options[FSlowNMSSMOpenHandle] = {
     Sequence @@ fsDefaultSettings,
     Sequence @@ fsDefaultSMParameters,
     Sequence @@ fslowNMSSMDefaultInputParameters
-
+   , Sequence @@ fdDefaultSettings
 };
 
-FSlowNMSSMOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters ) -> s_List, r___] :=
+FSlowNMSSMOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters | fdSettings) -> s_List, r___] :=
     FSlowNMSSMOpenHandle[a, Sequence @@ s, r];
 
 FSlowNMSSMOpenHandle[OptionsPattern[]] :=
@@ -240,7 +251,11 @@ FSlowNMSSMOpenHandle[OptionsPattern[]] :=
             OptionValue[ALambdaInput],
             OptionValue[AKappaInput],
             OptionValue[MuEffInput]
-
+            ,
+            OptionValue[minBRtoPrint],
+            OptionValue[maxHigherOrderCorrections],
+            OptionValue[alphaThomson],
+            OptionValue[offShellVV]
         }
 ];
 
@@ -348,7 +363,11 @@ FSlowNMSSMSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[ALambdaInput],
             OptionValue[AKappaInput],
             OptionValue[MuEffInput]
-
+            ,
+            OptionValue[minBRtoPrint],
+            OptionValue[maxHigherOrderCorrections],
+            OptionValue[alphaThomson],
+            OptionValue[offShellVV]
         }] /. HoldPattern[OptionValue[param_]] :> param /.
         { p } /.
         FSlowNMSSMGetSettings[handle] /.

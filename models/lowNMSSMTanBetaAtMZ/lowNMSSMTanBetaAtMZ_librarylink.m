@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.6.1"];
+Print["FlexibleSUSY 2.6.2"];
 Print["lowNMSSMTanBetaAtMZ"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -20,12 +20,16 @@ FSlowNMSSMTanBetaAtMZSetLib = LibraryFunctionLoad[liblowNMSSMTanBetaAtMZ, "FSlow
 
 FSlowNMSSMTanBetaAtMZCalculateSpectrum = LibraryFunctionLoad[liblowNMSSMTanBetaAtMZ, "FSlowNMSSMTanBetaAtMZCalculateSpectrum", LinkObject, LinkObject];
 FSlowNMSSMTanBetaAtMZCalculateObservables = LibraryFunctionLoad[liblowNMSSMTanBetaAtMZ, "FSlowNMSSMTanBetaAtMZCalculateObservables", LinkObject, LinkObject];
+FSlowNMSSMTanBetaAtMZCalculateDecays = LibraryFunctionLoad[liblowNMSSMTanBetaAtMZ, "FSlowNMSSMTanBetaAtMZCalculateDecays", LinkObject, LinkObject];
 
 FSlowNMSSMTanBetaAtMZCalculateSpectrum::error = "`1`";
 FSlowNMSSMTanBetaAtMZCalculateSpectrum::warning = "`1`";
 
 FSlowNMSSMTanBetaAtMZCalculateObservables::error = "`1`";
 FSlowNMSSMTanBetaAtMZCalculateObservables::warning = "`1`";
+
+FSlowNMSSMTanBetaAtMZCalculateDecays::error = "`1`";
+FSlowNMSSMTanBetaAtMZCalculateDecays::warning = "`1`";
 
 FSlowNMSSMTanBetaAtMZ::info = "`1`";
 FSlowNMSSMTanBetaAtMZ::nonum = "Error: `1` is not a numeric input value!";
@@ -101,6 +105,13 @@ fsDefaultSMParameters = {
     Mh -> 125.09
 };
 
+fdDefaultSettings = {
+   minBRtoPrint -> 1*^-5,
+   maxHigherOrderCorrections -> 4,
+   alphaThomson -> 1,
+   offShellVV -> 2
+};
+
 fslowNMSSMTanBetaAtMZDefaultInputParameters = {
    TanBeta -> 0,
    Qin -> 0,
@@ -136,10 +147,10 @@ Options[FSlowNMSSMTanBetaAtMZOpenHandle] = {
     Sequence @@ fsDefaultSettings,
     Sequence @@ fsDefaultSMParameters,
     Sequence @@ fslowNMSSMTanBetaAtMZDefaultInputParameters
-
+   , Sequence @@ fdDefaultSettings
 };
 
-FSlowNMSSMTanBetaAtMZOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters ) -> s_List, r___] :=
+FSlowNMSSMTanBetaAtMZOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters | fdSettings) -> s_List, r___] :=
     FSlowNMSSMTanBetaAtMZOpenHandle[a, Sequence @@ s, r];
 
 FSlowNMSSMTanBetaAtMZOpenHandle[OptionsPattern[]] :=
@@ -240,7 +251,11 @@ FSlowNMSSMTanBetaAtMZOpenHandle[OptionsPattern[]] :=
             OptionValue[ALambdaInput],
             OptionValue[AKappaInput],
             OptionValue[MuEffInput]
-
+            ,
+            OptionValue[minBRtoPrint],
+            OptionValue[maxHigherOrderCorrections],
+            OptionValue[alphaThomson],
+            OptionValue[offShellVV]
         }
 ];
 
@@ -348,7 +363,11 @@ FSlowNMSSMTanBetaAtMZSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[ALambdaInput],
             OptionValue[AKappaInput],
             OptionValue[MuEffInput]
-
+            ,
+            OptionValue[minBRtoPrint],
+            OptionValue[maxHigherOrderCorrections],
+            OptionValue[alphaThomson],
+            OptionValue[offShellVV]
         }] /. HoldPattern[OptionValue[param_]] :> param /.
         { p } /.
         FSlowNMSSMTanBetaAtMZGetSettings[handle] /.

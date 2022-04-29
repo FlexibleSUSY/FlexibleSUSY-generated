@@ -20,7 +20,7 @@
 #ifndef lowNMSSM_SLHA_IO_H
 #define lowNMSSM_SLHA_IO_H
 
-
+#include "decays/lowNMSSM_decays.hpp"
 
 #include "problems.hpp"
 #include "decays/flexibledecay_problems.hpp"
@@ -79,7 +79,7 @@ public:
    void set_decay_block(const Decays_list&, FlexibleDecay_settings const&);
    void set_dcinfo(const FlexibleDecay_problems&);
    void set_dcinfo(const std::vector<std::string>&, const std::vector<std::string>&);
-
+   void set_decays(const lowNMSSM_decay_table&, FlexibleDecay_settings const&);
    void set_extra(const lowNMSSM_slha&, const lowNMSSM_scales&, const lowNMSSM_observables&, const flexiblesusy::Spectrum_generator_settings&);
    void set_input(const lowNMSSM_input_parameters&);
    void set_modsel(const SLHA_io::Modsel&);
@@ -104,7 +104,7 @@ public:
    static void fill_imminpar_tuple(lowNMSSM_input_parameters&, int, double);
    static void fill_imextpar_tuple(lowNMSSM_input_parameters&, int, double);
 
-
+   void fill_decays_data(const lowNMSSM_decays&, FlexibleDecay_settings const&);
    template <class... Ts>
    void fill(const std::tuple<Ts...>&, const softsusy::QedQcd&, const lowNMSSM_scales&, const lowNMSSM_observables&, const Spectrum_generator_settings&, const FlexibleDecay_settings&, lowNMSSM_decays const * const = nullptr);
 
@@ -153,7 +153,7 @@ void lowNMSSM_slha_io::fill(
       set_extra(model, scales, observables, spectrum_generator_settings);
    }
    if (decays) {
-      
+      fill_decays_data(*decays, flexibledecay_settings);
    }
 }
 

@@ -19,7 +19,7 @@
 /**
  * @file MSSMEFTHiggs_f_to_f_conversion.hpp
  *
- * This file was generated with FlexibleSUSY 2.6.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.6.2 and SARAH 4.14.5 .
  */
 
 #ifndef MSSMEFTHiggs_FToFConversion_H

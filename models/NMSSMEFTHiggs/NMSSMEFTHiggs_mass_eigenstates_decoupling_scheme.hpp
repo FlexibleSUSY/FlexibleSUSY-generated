@@ -22,7 +22,7 @@
  *
  * @brief Defines model class for Stöckinger/Kotlarski decoupling scheme.
  *
- * This file was generated with FlexibleSUSY 2.6.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.6.2 and SARAH 4.14.5 .
  */
 
 #ifndef NMSSMEFTHiggs_MASS_EIGENSTATES_DECOUPLING_SCHEME_H

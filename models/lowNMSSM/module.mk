@@ -41,13 +41,13 @@ lowNMSSM_INCLUDE_MK := \
 
 lowNMSSM_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.lowNMSSM_generated \
-		$(DIR)/LesHouches.in.TP1 \
-		$(DIR)/LesHouches.in.lowNMSSM \
-		$(DIR)/LesHouches.in.TP3 \
 		$(DIR)/LesHouches.in.TP4 \
-		$(DIR)/LesHouches.in.TP2 \
 		$(DIR)/LesHouches.in.TP5 \
-		$(DIR)/LesHouches.in.TP6
+		$(DIR)/LesHouches.in.TP1 \
+		$(DIR)/LesHouches.in.TP6 \
+		$(DIR)/LesHouches.in.TP2 \
+		$(DIR)/LesHouches.in.lowNMSSM \
+		$(DIR)/LesHouches.in.TP3
 
 lowNMSSM_REFERENCES := \
 		$(DIR)/lowNMSSM_references.tex

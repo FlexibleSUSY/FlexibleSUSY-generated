@@ -29,7 +29,8 @@ namespace flexiblesusy {
 MRSSM2_decay_table::MRSSM2_decay_table()
    : decay_table({Decays_list(25), Decays_list(35), Decays_list(45), Decays_list(
       55), Decays_list(36), Decays_list(46), Decays_list(56), Decays_list(-37),
-      Decays_list(-47), Decays_list(-57)})
+      Decays_list(-47), Decays_list(-57), Decays_list(3000022), Decays_list(
+      3000021)})
 {
 }
 
@@ -150,6 +151,24 @@ const Decays_list& MRSSM2_decay_table::get_Hpm_decays(int gI1) const
    sstr << "invalid particle index " << std::to_string(gI1) << '\n';
 
    throw OutOfBoundsError(sstr.str());
+}
+Decays_list& MRSSM2_decay_table::get_sigmaO_decays()
+{
+   return decay_table[10];
+}
+
+const Decays_list& MRSSM2_decay_table::get_sigmaO_decays() const
+{
+   return decay_table[10];
+}
+Decays_list& MRSSM2_decay_table::get_phiO_decays()
+{
+   return decay_table[11];
+}
+
+const Decays_list& MRSSM2_decay_table::get_phiO_decays() const
+{
+   return decay_table[11];
 }
 
 } // namespace flexiblesusy

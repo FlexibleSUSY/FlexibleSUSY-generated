@@ -101,6 +101,7 @@ handle = FSlowNMSSMOpenHandle[
 
 spectrum    = FSlowNMSSMCalculateSpectrum[handle];
 observables = FSlowNMSSMCalculateObservables[handle];
+decays      = FSlowNMSSMCalculateDecays[handle];
 
 FSlowNMSSMCloseHandle[handle];
 

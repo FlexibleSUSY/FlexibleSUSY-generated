@@ -18,9 +18,9 @@
 
 
 /**
- * @file CE6SSM_edm.hpp
+ * @file CE6SSM_l_to_lgamma.hpp
  *
- * This file was generated with FlexibleSUSY 2.6.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.6.2 and SARAH 4.14.5 .
  */
 
 #ifndef CE6SSM_MuToEGamma_H

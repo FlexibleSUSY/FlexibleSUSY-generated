@@ -20,7 +20,7 @@
 /**
  * @file cxx_qft/UMSSM_vertices.cpp
  *
- * This file was generated with FlexibleSUSY 2.6.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.6.2 and SARAH 4.14.5 .
  */
 
 #include "UMSSM_context_base.hpp"
@@ -421,6 +421,20 @@ ScalarVertex VertexImpl<fields::Ah, fields::hh, fields::Sv, typename fields::con
    return {result};
 }
 
+MomentumDifferenceVertex VertexImpl<fields::Ah, fields::hh, fields::VP>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 0;
+   int subtrahend_index = 1;
+
+   const int gt2505 = indices[0];
+   const int gt2506 = indices[1];
+
+   const std::complex<double> result = 0;
+
+   return {result, minuend_index, subtrahend_index};
+}
+
 MomentumDifferenceVertex VertexImpl<fields::Ah, fields::hh, fields::VZp>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
@@ -721,6 +735,43 @@ ScalarVertex VertexImpl<fields::Ah, fields::Sv, typename fields::conj<fields::Sv
    return {result};
 }
 
+ChiralVertex VertexImpl<fields::Ah, typename fields::bar<fields::Cha>::type, fields::Cha>::evaluate(
+   const std::array<int, 3>& indices, const context_base& context)
+{
+   const int gt3 = indices[0];
+   const int gt1 = indices[1];
+   const int gt2 = indices[2];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto Lambdax = MODELPARAMETER(Lambdax);
+   const auto UM = MODELPARAMETER(UM);
+   const auto UP = MODELPARAMETER(UP);
+   const auto ZA = MODELPARAMETER(ZA);
+
+   const std::complex<double> left = std::complex<double>(0.,0.7071067811865475)*(g2*Conj(UM(gt2,0))*Conj(UP(gt1,1))*Conj(ZA(gt3,1)) + Conj(UM(gt2,1))*(g2*Conj(UP(gt1,0))*Conj(ZA(gt3,0)) - Conj(UP(gt1,1))*Conj(ZA(gt3,2))*Lambdax));
+
+   const std::complex<double> right = std::complex<double>(0.,-0.7071067811865475)*(g2*Conj(ZA(gt3,0))*UM(gt1,1)*UP(gt2,0) + (g2*Conj(ZA(gt3,1))*UM(gt1,0) - Conj(Lambdax)*Conj(ZA(gt3,2))*UM(gt1,1))*UP(gt2,1));
+
+   return {left, right};
+}
+
+ChiralVertex VertexImpl<fields::Ah, typename fields::bar<fields::Fd>::type, fields::Fd>::evaluate(
+   const std::array<int, 3>& indices, const context_base& context)
+{
+   const int gt3 = indices[0];
+   const int gt1 = indices[1];
+   const int gt2 = indices[2];
+   const auto Yd = MODELPARAMETER(Yd);
+   const auto ZA = MODELPARAMETER(ZA);
+   const auto ZDL = MODELPARAMETER(ZDL);
+   const auto ZDR = MODELPARAMETER(ZDR);
+
+   const std::complex<double> left = std::complex<double>(0.,-0.7071067811865475)*Conj(ZA(gt3,0))*SUM(j2,0,2,Conj(ZDL(gt2,j2))*SUM(j1,0,2,Conj(ZDR(gt1,j1))*Yd(j1,j2)));
+
+   const std::complex<double> right = std::complex<double>(0.,0.7071067811865475)*Conj(ZA(gt3,0))*SUM(j2,0,2,SUM(j1,0,2,Conj(Yd(j1,j2))*ZDR(gt2,j1))*ZDL(gt1,j2));
+
+   return {left, right};
+}
+
 ChiralVertex VertexImpl<fields::Ah, typename fields::bar<fields::Fe>::type, fields::Fe>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
@@ -737,6 +788,43 @@ ChiralVertex VertexImpl<fields::Ah, typename fields::bar<fields::Fe>::type, fiel
    const std::complex<double> right = std::complex<double>(0.,0.7071067811865475)*Conj(ZA(gt3,0))*SUM(j2,0,2,SUM(j1,0,2,Conj(Ye(j1,j2))*ZER(gt2,j1))*ZEL(gt1,j2));
 
    return {left, right};
+}
+
+ChiralVertex VertexImpl<fields::Ah, typename fields::bar<fields::Fu>::type, fields::Fu>::evaluate(
+   const std::array<int, 3>& indices, const context_base& context)
+{
+   const int gt3 = indices[0];
+   const int gt1 = indices[1];
+   const int gt2 = indices[2];
+   const auto Yu = MODELPARAMETER(Yu);
+   const auto ZA = MODELPARAMETER(ZA);
+   const auto ZUL = MODELPARAMETER(ZUL);
+   const auto ZUR = MODELPARAMETER(ZUR);
+
+   const std::complex<double> left = std::complex<double>(0.,-0.7071067811865475)*Conj(ZA(gt3,1))*SUM(j2,0,2,Conj(ZUL(gt2,j2))*SUM(j1,0,2,Conj(ZUR(gt1,j1))*Yu(j1,j2)));
+
+   const std::complex<double> right = std::complex<double>(0.,0.7071067811865475)*Conj(ZA(gt3,1))*SUM(j2,0,2,SUM(j1,0,2,Conj(Yu(j1,j2))*ZUR(gt2,j1))*ZUL(gt1,j2));
+
+   return {left, right};
+}
+
+ScalarVertex VertexImpl<fields::Ah, typename fields::conj<fields::Hpm>::type, fields::Hpm>::evaluate(
+   const std::array<int, 3>& indices, const context_base& context)
+{
+   const int gt1 = indices[0];
+   const int gt3 = indices[1];
+   const int gt2 = indices[2];
+   const auto TLambdax = MODELPARAMETER(TLambdax);
+   const auto vu = MODELPARAMETER(vu);
+   const auto g2 = MODELPARAMETER(g2);
+   const auto Lambdax = MODELPARAMETER(Lambdax);
+   const auto vd = MODELPARAMETER(vd);
+   const auto ZA = MODELPARAMETER(ZA);
+   const auto ZP = MODELPARAMETER(ZP);
+
+   const std::complex<double> result = std::complex<double>(0,-0.25)*(vu*Conj(ZA(gt1,0))*(-2*AbsSqr(Lambdax) + Sqr(g2))*(ZP(gt2,1)*ZP(gt3,0) - ZP(gt2,0)*ZP(gt3,1)) + vd*Conj(ZA(gt1,1))*(-2*AbsSqr(Lambdax) + Sqr(g2))*(ZP(gt2,1)*ZP(gt3,0) - ZP(gt2,0)*ZP(gt3,1)) + 2.8284271247461903*Conj(ZA(gt1,2))*(-(Conj(TLambdax)*ZP(gt2,1)*ZP(gt3,0)) + TLambdax*ZP(gt2,0)*ZP(gt3,1)));
+
+   return {result};
 }
 
 InverseMetricVertex VertexImpl<fields::Ah, typename fields::conj<fields::Hpm>::type, fields::VP, fields::VWm>::evaluate(
@@ -810,6 +898,63 @@ MomentumDifferenceVertex VertexImpl<fields::Ah, typename fields::conj<fields::Hp
    const std::complex<double> result = std::complex<double>(0,-0.5)*g2*(Conj(ZA(gt1,0))*ZP(gt2,0) + Conj(ZA(gt1,1))*ZP(gt2,1));
 
    return {result, minuend_index, subtrahend_index};
+}
+
+ScalarVertex VertexImpl<fields::Ah, typename fields::conj<fields::Sd>::type, fields::Sd>::evaluate(
+   const std::array<int, 3>& indices, const context_base& context)
+{
+   const int gt1 = indices[0];
+   const int gt3 = indices[1];
+   const int gt2 = indices[2];
+   const auto TYd = MODELPARAMETER(TYd);
+   const auto Lambdax = MODELPARAMETER(Lambdax);
+   const auto vS = MODELPARAMETER(vS);
+   const auto vu = MODELPARAMETER(vu);
+   const auto Yd = MODELPARAMETER(Yd);
+   const auto ZA = MODELPARAMETER(ZA);
+   const auto ZD = MODELPARAMETER(ZD);
+
+   const std::complex<double> result = std::complex<double>(0,-0.5)*(Conj(Lambdax)*(vS*Conj(ZA(gt1,1)) + vu*Conj(ZA(gt1,2)))*SUM(j2,0,2,Conj(ZD(gt2,j2))*SUM(j1,0,2,Yd(j1,j2)*ZD(gt3,3 + j1))) - (vS*Conj(ZA(gt1,1)) + vu*Conj(ZA(gt1,2)))*Lambdax*SUM(j2,0,2,SUM(j1,0,2,Conj(Yd(j1,j2))*Conj(ZD(gt2,3 + j1)))*ZD(gt3,j2)) + 1.4142135623730951*Conj(ZA(gt1,0))*(SUM(j2,0,2,Conj(ZD(gt2,j2))*SUM(j1,0,2,ZD(gt3,3 + j1)*TYd(j1,j2))) - SUM(j2,0,2,SUM(j1,0,2,Conj(ZD(gt2,3 + j1))*Conj(TYd(j1,j2)))*ZD(gt3,j2))));
+
+   return {result};
+}
+
+ScalarVertex VertexImpl<fields::Ah, typename fields::conj<fields::Se>::type, fields::Se>::evaluate(
+   const std::array<int, 3>& indices, const context_base& context)
+{
+   const int gt1 = indices[0];
+   const int gt3 = indices[1];
+   const int gt2 = indices[2];
+   const auto TYe = MODELPARAMETER(TYe);
+   const auto Lambdax = MODELPARAMETER(Lambdax);
+   const auto vS = MODELPARAMETER(vS);
+   const auto vu = MODELPARAMETER(vu);
+   const auto Ye = MODELPARAMETER(Ye);
+   const auto ZA = MODELPARAMETER(ZA);
+   const auto ZE = MODELPARAMETER(ZE);
+
+   const std::complex<double> result = std::complex<double>(0,-0.5)*(Conj(Lambdax)*(vS*Conj(ZA(gt1,1)) + vu*Conj(ZA(gt1,2)))*SUM(j2,0,2,Conj(ZE(gt2,j2))*SUM(j1,0,2,Ye(j1,j2)*ZE(gt3,3 + j1))) - (vS*Conj(ZA(gt1,1)) + vu*Conj(ZA(gt1,2)))*Lambdax*SUM(j2,0,2,SUM(j1,0,2,Conj(Ye(j1,j2))*Conj(ZE(gt2,3 + j1)))*ZE(gt3,j2)) + 1.4142135623730951*Conj(ZA(gt1,0))*(SUM(j2,0,2,Conj(ZE(gt2,j2))*SUM(j1,0,2,ZE(gt3,3 + j1)*TYe(j1,j2))) - SUM(j2,0,2,SUM(j1,0,2,Conj(ZE(gt2,3 + j1))*Conj(TYe(j1,j2)))*ZE(gt3,j2))));
+
+   return {result};
+}
+
+ScalarVertex VertexImpl<fields::Ah, typename fields::conj<fields::Su>::type, fields::Su>::evaluate(
+   const std::array<int, 3>& indices, const context_base& context)
+{
+   const int gt1 = indices[0];
+   const int gt3 = indices[1];
+   const int gt2 = indices[2];
+   const auto TYu = MODELPARAMETER(TYu);
+   const auto Lambdax = MODELPARAMETER(Lambdax);
+   const auto vS = MODELPARAMETER(vS);
+   const auto vd = MODELPARAMETER(vd);
+   const auto Yu = MODELPARAMETER(Yu);
+   const auto ZA = MODELPARAMETER(ZA);
+   const auto ZU = MODELPARAMETER(ZU);
+
+   const std::complex<double> result = std::complex<double>(0,-0.5)*(Conj(Lambdax)*(vS*Conj(ZA(gt1,0)) + vd*Conj(ZA(gt1,2)))*SUM(j2,0,2,Conj(ZU(gt2,j2))*SUM(j1,0,2,Yu(j1,j2)*ZU(gt3,3 + j1))) - (vS*Conj(ZA(gt1,0)) + vd*Conj(ZA(gt1,2)))*Lambdax*SUM(j2,0,2,SUM(j1,0,2,Conj(Yu(j1,j2))*Conj(ZU(gt2,3 + j1)))*ZU(gt3,j2)) + 1.4142135623730951*Conj(ZA(gt1,1))*(SUM(j2,0,2,Conj(ZU(gt2,j2))*SUM(j1,0,2,ZU(gt3,3 + j1)*TYu(j1,j2))) - SUM(j2,0,2,SUM(j1,0,2,Conj(ZU(gt2,3 + j1))*Conj(TYu(j1,j2)))*ZU(gt3,j2))));
+
+   return {result};
 }
 
 ChiralVertex VertexImpl<fields::Cha, fields::Fu, typename fields::conj<fields::Sd>::type>::evaluate(
@@ -1103,6 +1248,42 @@ ChiralVertex VertexImpl<fields::Chi, typename fields::conj<fields::Se>::type, fi
    const std::complex<double> left = -1.4142135623730951*gp*Ql*Conj(ZN(gt1,0))*SUM(j1,0,2,Conj(ZEL(gt2,j1))*ZE(gt3,j1)) + 0.5477225575051661*g1*Conj(ZN(gt1,1))*SUM(j1,0,2,Conj(ZEL(gt2,j1))*ZE(gt3,j1)) + 0.7071067811865475*g2*Conj(ZN(gt1,2))*SUM(j1,0,2,Conj(ZEL(gt2,j1))*ZE(gt3,j1)) - Conj(ZN(gt1,3))*SUM(j2,0,2,Conj(ZEL(gt2,j2))*SUM(j1,0,2,Ye(j1,j2)*ZE(gt3,3 + j1)));
 
    const std::complex<double> right = -1.4142135623730951*SUM(j1,0,2,ZE(gt3,3 + j1)*ZER(gt2,j1))*(gp*Qe*ZN(gt1,0) + 0.7745966692414834*g1*ZN(gt1,1)) - SUM(j2,0,2,SUM(j1,0,2,Conj(Ye(j1,j2))*ZER(gt2,j1))*ZE(gt3,j2))*ZN(gt1,3);
+
+   return {left, right};
+}
+
+ChiralVertex VertexImpl<fields::Fe, typename fields::bar<fields::Fe>::type, fields::VP>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   const int gt2 = indices[0];
+   const int gt1 = indices[1];
+   const auto g1 = MODELPARAMETER(g1);
+   const auto g2 = MODELPARAMETER(g2);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+
+   const std::complex<double> left = -0.7745966692414834*g1*Cos(ThetaW)*KroneckerDelta(gt1,gt2);
+
+   const std::complex<double> right = -0.5*KroneckerDelta(gt1,gt2)*(0.7745966692414834*g1*Cos(ThetaW) + g2*Sin(ThetaW));
+
+   return {left, right};
+}
+
+ChiralVertex VertexImpl<fields::Fe, typename fields::bar<fields::Fe>::type, fields::VZ>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   const int gt2 = indices[0];
+   const int gt1 = indices[1];
+   const auto Qe = INPUTPARAMETER(Qe);
+   const auto Ql = INPUTPARAMETER(Ql);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto gp = MODELPARAMETER(gp);
+   const auto g2 = MODELPARAMETER(g2);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+
+   const std::complex<double> left = KroneckerDelta(gt1,gt2)*(0.7745966692414834*g1*Cos(ThetaWp)*Sin(ThetaW) - gp*Qe*Sin(ThetaWp));
+
+   const std::complex<double> right = -0.5*KroneckerDelta(gt1,gt2)*(g2*Cos(ThetaW)*Cos(ThetaWp) - 0.7745966692414834*g1*Cos(ThetaWp)*Sin(ThetaW) - 2*gp*Ql*Sin(ThetaWp));
 
    return {left, right};
 }
@@ -1677,6 +1858,16 @@ ScalarVertex VertexImpl<fields::hh, fields::Sv, typename fields::conj<fields::Sv
    return {result};
 }
 
+InverseMetricVertex VertexImpl<fields::hh, fields::VP, fields::VZp>::evaluate(
+   const std::array<int, 1>& indices, const context_base& context)
+{
+   const int gt2514 = indices[0];
+
+   const std::complex<double> result = 0;
+
+   return {result};
+}
+
 InverseMetricVertex VertexImpl<fields::hh, fields::VZ, fields::VZp>::evaluate(
    const std::array<int, 1>& indices, const context_base& context)
 {
@@ -1743,6 +1934,43 @@ InverseMetricVertex VertexImpl<fields::hh, fields::VZp, fields::VZp>::evaluate(
    return {result};
 }
 
+ChiralVertex VertexImpl<fields::hh, typename fields::bar<fields::Cha>::type, fields::Cha>::evaluate(
+   const std::array<int, 3>& indices, const context_base& context)
+{
+   const int gt3 = indices[0];
+   const int gt1 = indices[1];
+   const int gt2 = indices[2];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto Lambdax = MODELPARAMETER(Lambdax);
+   const auto UM = MODELPARAMETER(UM);
+   const auto UP = MODELPARAMETER(UP);
+   const auto ZH = MODELPARAMETER(ZH);
+
+   const std::complex<double> left = -0.7071067811865475*(g2*Conj(UM(gt2,0))*Conj(UP(gt1,1))*Conj(ZH(gt3,1)) + Conj(UM(gt2,1))*(g2*Conj(UP(gt1,0))*Conj(ZH(gt3,0)) + Conj(UP(gt1,1))*Conj(ZH(gt3,2))*Lambdax));
+
+   const std::complex<double> right = -0.7071067811865475*(g2*Conj(ZH(gt3,0))*UM(gt1,1)*UP(gt2,0) + (g2*Conj(ZH(gt3,1))*UM(gt1,0) + Conj(Lambdax)*Conj(ZH(gt3,2))*UM(gt1,1))*UP(gt2,1));
+
+   return {left, right};
+}
+
+ChiralVertex VertexImpl<fields::hh, typename fields::bar<fields::Fd>::type, fields::Fd>::evaluate(
+   const std::array<int, 3>& indices, const context_base& context)
+{
+   const int gt3 = indices[0];
+   const int gt1 = indices[1];
+   const int gt2 = indices[2];
+   const auto Yd = MODELPARAMETER(Yd);
+   const auto ZH = MODELPARAMETER(ZH);
+   const auto ZDL = MODELPARAMETER(ZDL);
+   const auto ZDR = MODELPARAMETER(ZDR);
+
+   const std::complex<double> left = -0.7071067811865475*Conj(ZH(gt3,0))*SUM(j2,0,2,Conj(ZDL(gt2,j2))*SUM(j1,0,2,Conj(ZDR(gt1,j1))*Yd(j1,j2)));
+
+   const std::complex<double> right = -0.7071067811865475*Conj(ZH(gt3,0))*SUM(j2,0,2,SUM(j1,0,2,Conj(Yd(j1,j2))*ZDR(gt2,j1))*ZDL(gt1,j2));
+
+   return {left, right};
+}
+
 ChiralVertex VertexImpl<fields::hh, typename fields::bar<fields::Fe>::type, fields::Fe>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
@@ -1759,6 +1987,49 @@ ChiralVertex VertexImpl<fields::hh, typename fields::bar<fields::Fe>::type, fiel
    const std::complex<double> right = -0.7071067811865475*Conj(ZH(gt3,0))*SUM(j2,0,2,SUM(j1,0,2,Conj(Ye(j1,j2))*ZER(gt2,j1))*ZEL(gt1,j2));
 
    return {left, right};
+}
+
+ChiralVertex VertexImpl<fields::hh, typename fields::bar<fields::Fu>::type, fields::Fu>::evaluate(
+   const std::array<int, 3>& indices, const context_base& context)
+{
+   const int gt3 = indices[0];
+   const int gt1 = indices[1];
+   const int gt2 = indices[2];
+   const auto Yu = MODELPARAMETER(Yu);
+   const auto ZH = MODELPARAMETER(ZH);
+   const auto ZUL = MODELPARAMETER(ZUL);
+   const auto ZUR = MODELPARAMETER(ZUR);
+
+   const std::complex<double> left = -0.7071067811865475*Conj(ZH(gt3,1))*SUM(j2,0,2,Conj(ZUL(gt2,j2))*SUM(j1,0,2,Conj(ZUR(gt1,j1))*Yu(j1,j2)));
+
+   const std::complex<double> right = -0.7071067811865475*Conj(ZH(gt3,1))*SUM(j2,0,2,SUM(j1,0,2,Conj(Yu(j1,j2))*ZUR(gt2,j1))*ZUL(gt1,j2));
+
+   return {left, right};
+}
+
+ScalarVertex VertexImpl<fields::hh, typename fields::conj<fields::Hpm>::type, fields::Hpm>::evaluate(
+   const std::array<int, 3>& indices, const context_base& context)
+{
+   const int gt1 = indices[0];
+   const int gt3 = indices[1];
+   const int gt2 = indices[2];
+   const auto QHu = INPUTPARAMETER(QHu);
+   const auto QHd = INPUTPARAMETER(QHd);
+   const auto Qs = INPUTPARAMETER(Qs);
+   const auto TLambdax = MODELPARAMETER(TLambdax);
+   const auto vd = MODELPARAMETER(vd);
+   const auto g2 = MODELPARAMETER(g2);
+   const auto Lambdax = MODELPARAMETER(Lambdax);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto gp = MODELPARAMETER(gp);
+   const auto vu = MODELPARAMETER(vu);
+   const auto vS = MODELPARAMETER(vS);
+   const auto ZH = MODELPARAMETER(ZH);
+   const auto ZP = MODELPARAMETER(ZP);
+
+   const std::complex<double> result = 0.25*(-(Conj(ZH(gt1,0))*(ZP(gt2,0)*(vd*(0.6*Sqr(g1) + Sqr(g2) + 4*Sqr(gp)*Sqr(QHd))*ZP(gt3,0) + vu*(-2*AbsSqr(Lambdax) + Sqr(g2))*ZP(gt3,1)) + ZP(gt2,1)*(vu*(-2*AbsSqr(Lambdax) + Sqr(g2))*ZP(gt3,0) + vd*(-0.6*Sqr(g1) + Sqr(g2) + 4*QHd*QHu*Sqr(gp))*ZP(gt3,1)))) - Conj(ZH(gt1,1))*(ZP(gt2,0)*(vu*(-0.6*Sqr(g1) + Sqr(g2) + 4*QHd*QHu*Sqr(gp))*ZP(gt3,0) + vd*(-2*AbsSqr(Lambdax) + Sqr(g2))*ZP(gt3,1)) + ZP(gt2,1)*(vd*(-2*AbsSqr(Lambdax) + Sqr(g2))*ZP(gt3,0) + vu*(0.6*Sqr(g1) + Sqr(g2) + 4*Sqr(gp)*Sqr(QHu))*ZP(gt3,1))) - 2*Conj(ZH(gt1,2))*(ZP(gt2,1)*(1.4142135623730951*Conj(TLambdax)*ZP(gt3,0) + 2*vS*(AbsSqr(Lambdax) + QHu*Qs*Sqr(gp))*ZP(gt3,1)) + ZP(gt2,0)*(2*vS*(AbsSqr(Lambdax) + QHd*Qs*Sqr(gp))*ZP(gt3,0) + 1.4142135623730951*TLambdax*ZP(gt3,1))));
+
+   return {result};
 }
 
 InverseMetricVertex VertexImpl<fields::hh, typename fields::conj<fields::Hpm>::type, fields::VP, fields::VWm>::evaluate(
@@ -1832,6 +2103,90 @@ MomentumDifferenceVertex VertexImpl<fields::hh, typename fields::conj<fields::Hp
    const std::complex<double> result = -0.5*g2*(Conj(ZH(gt1,0))*ZP(gt2,0) - Conj(ZH(gt1,1))*ZP(gt2,1));
 
    return {result, minuend_index, subtrahend_index};
+}
+
+ScalarVertex VertexImpl<fields::hh, typename fields::conj<fields::Sd>::type, fields::Sd>::evaluate(
+   const std::array<int, 3>& indices, const context_base& context)
+{
+   const int gt1 = indices[0];
+   const int gt3 = indices[1];
+   const int gt2 = indices[2];
+   const auto Qq = INPUTPARAMETER(Qq);
+   const auto Qs = INPUTPARAMETER(Qs);
+   const auto Qd = INPUTPARAMETER(Qd);
+   const auto QHu = INPUTPARAMETER(QHu);
+   const auto QHd = INPUTPARAMETER(QHd);
+   const auto TYd = MODELPARAMETER(TYd);
+   const auto gp = MODELPARAMETER(gp);
+   const auto vS = MODELPARAMETER(vS);
+   const auto vu = MODELPARAMETER(vu);
+   const auto Lambdax = MODELPARAMETER(Lambdax);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto g2 = MODELPARAMETER(g2);
+   const auto vd = MODELPARAMETER(vd);
+   const auto Yd = MODELPARAMETER(Yd);
+   const auto ZH = MODELPARAMETER(ZH);
+   const auto ZD = MODELPARAMETER(ZD);
+
+   const std::complex<double> result = 0.05*(10*Conj(ZH(gt1,2))*(-2*Qq*Qs*vS*Sqr(gp)*SUM(j1,0,2,Conj(ZD(gt2,j1))*ZD(gt3,j1)) - 2*Qd*Qs*vS*Sqr(gp)*SUM(j1,0,2,Conj(ZD(gt2,3 + j1))*ZD(gt3,3 + j1)) + vu*Conj(Lambdax)*SUM(j2,0,2,Conj(ZD(gt2,j2))*SUM(j1,0,2,Yd(j1,j2)*ZD(gt3,3 + j1))) + vu*Lambdax*SUM(j2,0,2,SUM(j1,0,2,Conj(Yd(j1,j2))*Conj(ZD(gt2,3 + j1)))*ZD(gt3,j2))) - Conj(ZH(gt1,1))*(vu*(Sqr(g1) + 5*(Sqr(g2) + 4*QHu*Qq*Sqr(gp)))*SUM(j1,0,2,Conj(ZD(gt2,j1))*ZD(gt3,j1)) + 2*(vu*(Sqr(g1) + 10*Qd*QHu*Sqr(gp))*SUM(j1,0,2,Conj(ZD(gt2,3 + j1))*ZD(gt3,3 + j1)) - 5*vS*(Conj(Lambdax)*SUM(j2,0,2,Conj(ZD(gt2,j2))*SUM(j1,0,2,Yd(j1,j2)*ZD(gt3,3 + j1))) + Lambdax*SUM(j2,0,2,SUM(j1,0,2,Conj(Yd(j1,j2))*Conj(ZD(gt2,3 + j1)))*ZD(gt3,j2))))) + Conj(ZH(gt1,0))*(vd*(Sqr(g1) + 5*(Sqr(g2) - 4*QHd*Qq*Sqr(gp)))*SUM(j1,0,2,Conj(ZD(gt2,j1))*ZD(gt3,j1)) + 2*(vd*(Sqr(g1) - 10*Qd*QHd*Sqr(gp))*SUM(j1,0,2,Conj(ZD(gt2,3 + j1))*ZD(gt3,3 + j1)) - 5*(1.4142135623730951*SUM(j2,0,2,Conj(ZD(gt2,j2))*SUM(j1,0,2,ZD(gt3,3 + j1)*TYd(j1,j2))) + 1.4142135623730951*SUM(j2,0,2,SUM(j1,0,2,Conj(ZD(gt2,3 + j1))*Conj(TYd(j1,j2)))*ZD(gt3,j2)) + 2*vd*(SUM(j3,0,2,Conj(ZD(gt2,3 + j3))*SUM(j2,0,2,SUM(j1,0,2,Conj(Yd(j3,j1))*Yd(j2,j1))*ZD(gt3,3 + j2))) + SUM(j3,0,2,SUM(j2,0,2,Conj(ZD(gt2,j2))*SUM(j1,0,2,Conj(Yd(j1,j3))*Yd(j1,j2)))*ZD(gt3,j3)))))));
+
+   return {result};
+}
+
+ScalarVertex VertexImpl<fields::hh, typename fields::conj<fields::Se>::type, fields::Se>::evaluate(
+   const std::array<int, 3>& indices, const context_base& context)
+{
+   const int gt1 = indices[0];
+   const int gt3 = indices[1];
+   const int gt2 = indices[2];
+   const auto QHu = INPUTPARAMETER(QHu);
+   const auto Ql = INPUTPARAMETER(Ql);
+   const auto Qe = INPUTPARAMETER(Qe);
+   const auto Qs = INPUTPARAMETER(Qs);
+   const auto QHd = INPUTPARAMETER(QHd);
+   const auto TYe = MODELPARAMETER(TYe);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto g2 = MODELPARAMETER(g2);
+   const auto gp = MODELPARAMETER(gp);
+   const auto vu = MODELPARAMETER(vu);
+   const auto vS = MODELPARAMETER(vS);
+   const auto Lambdax = MODELPARAMETER(Lambdax);
+   const auto vd = MODELPARAMETER(vd);
+   const auto Ye = MODELPARAMETER(Ye);
+   const auto ZH = MODELPARAMETER(ZH);
+   const auto ZE = MODELPARAMETER(ZE);
+
+   const std::complex<double> result = 0.05*(10*Conj(ZH(gt1,2))*(-2*Ql*Qs*vS*Sqr(gp)*SUM(j1,0,2,Conj(ZE(gt2,j1))*ZE(gt3,j1)) - 2*Qe*Qs*vS*Sqr(gp)*SUM(j1,0,2,Conj(ZE(gt2,3 + j1))*ZE(gt3,3 + j1)) + vu*Conj(Lambdax)*SUM(j2,0,2,Conj(ZE(gt2,j2))*SUM(j1,0,2,Ye(j1,j2)*ZE(gt3,3 + j1))) + vu*Lambdax*SUM(j2,0,2,SUM(j1,0,2,Conj(Ye(j1,j2))*Conj(ZE(gt2,3 + j1)))*ZE(gt3,j2))) + Conj(ZH(gt1,1))*(vu*(3*Sqr(g1) - 5*(Sqr(g2) + 4*QHu*Ql*Sqr(gp)))*SUM(j1,0,2,Conj(ZE(gt2,j1))*ZE(gt3,j1)) - 2*vu*(3*Sqr(g1) + 10*Qe*QHu*Sqr(gp))*SUM(j1,0,2,Conj(ZE(gt2,3 + j1))*ZE(gt3,3 + j1)) + 10*vS*(Conj(Lambdax)*SUM(j2,0,2,Conj(ZE(gt2,j2))*SUM(j1,0,2,Ye(j1,j2)*ZE(gt3,3 + j1))) + Lambdax*SUM(j2,0,2,SUM(j1,0,2,Conj(Ye(j1,j2))*Conj(ZE(gt2,3 + j1)))*ZE(gt3,j2)))) - Conj(ZH(gt1,0))*(vd*(3*Sqr(g1) - 5*Sqr(g2) + 20*QHd*Ql*Sqr(gp))*SUM(j1,0,2,Conj(ZE(gt2,j1))*ZE(gt3,j1)) + (-6*vd*Sqr(g1) + 20*Qe*QHd*vd*Sqr(gp))*SUM(j1,0,2,Conj(ZE(gt2,3 + j1))*ZE(gt3,3 + j1)) + 10*(1.4142135623730951*SUM(j2,0,2,Conj(ZE(gt2,j2))*SUM(j1,0,2,ZE(gt3,3 + j1)*TYe(j1,j2))) + 1.4142135623730951*SUM(j2,0,2,SUM(j1,0,2,Conj(ZE(gt2,3 + j1))*Conj(TYe(j1,j2)))*ZE(gt3,j2)) + 2*vd*(SUM(j3,0,2,Conj(ZE(gt2,3 + j3))*SUM(j2,0,2,SUM(j1,0,2,Conj(Ye(j3,j1))*Ye(j2,j1))*ZE(gt3,3 + j2))) + SUM(j3,0,2,SUM(j2,0,2,Conj(ZE(gt2,j2))*SUM(j1,0,2,Conj(Ye(j1,j3))*Ye(j1,j2)))*ZE(gt3,j3))))));
+
+   return {result};
+}
+
+ScalarVertex VertexImpl<fields::hh, typename fields::conj<fields::Su>::type, fields::Su>::evaluate(
+   const std::array<int, 3>& indices, const context_base& context)
+{
+   const int gt1 = indices[0];
+   const int gt3 = indices[1];
+   const int gt2 = indices[2];
+   const auto Qq = INPUTPARAMETER(Qq);
+   const auto Qs = INPUTPARAMETER(Qs);
+   const auto Qu = INPUTPARAMETER(Qu);
+   const auto QHd = INPUTPARAMETER(QHd);
+   const auto QHu = INPUTPARAMETER(QHu);
+   const auto TYu = MODELPARAMETER(TYu);
+   const auto gp = MODELPARAMETER(gp);
+   const auto vS = MODELPARAMETER(vS);
+   const auto vd = MODELPARAMETER(vd);
+   const auto Lambdax = MODELPARAMETER(Lambdax);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto g2 = MODELPARAMETER(g2);
+   const auto vu = MODELPARAMETER(vu);
+   const auto Yu = MODELPARAMETER(Yu);
+   const auto ZH = MODELPARAMETER(ZH);
+   const auto ZU = MODELPARAMETER(ZU);
+
+   const std::complex<double> result = 0.05*(10*Conj(ZH(gt1,2))*(-2*Qq*Qs*vS*Sqr(gp)*SUM(j1,0,2,Conj(ZU(gt2,j1))*ZU(gt3,j1)) - 2*Qs*Qu*vS*Sqr(gp)*SUM(j1,0,2,Conj(ZU(gt2,3 + j1))*ZU(gt3,3 + j1)) + vd*Conj(Lambdax)*SUM(j2,0,2,Conj(ZU(gt2,j2))*SUM(j1,0,2,Yu(j1,j2)*ZU(gt3,3 + j1))) + vd*Lambdax*SUM(j2,0,2,SUM(j1,0,2,Conj(Yu(j1,j2))*Conj(ZU(gt2,3 + j1)))*ZU(gt3,j2))) + Conj(ZH(gt1,0))*(vd*(Sqr(g1) - 5*(Sqr(g2) + 4*QHd*Qq*Sqr(gp)))*SUM(j1,0,2,Conj(ZU(gt2,j1))*ZU(gt3,j1)) - 4*vd*(Sqr(g1) + 5*QHd*Qu*Sqr(gp))*SUM(j1,0,2,Conj(ZU(gt2,3 + j1))*ZU(gt3,3 + j1)) + 10*vS*(Conj(Lambdax)*SUM(j2,0,2,Conj(ZU(gt2,j2))*SUM(j1,0,2,Yu(j1,j2)*ZU(gt3,3 + j1))) + Lambdax*SUM(j2,0,2,SUM(j1,0,2,Conj(Yu(j1,j2))*Conj(ZU(gt2,3 + j1)))*ZU(gt3,j2)))) - Conj(ZH(gt1,1))*(vu*(Sqr(g1) - 5*Sqr(g2) + 20*QHu*Qq*Sqr(gp))*SUM(j1,0,2,Conj(ZU(gt2,j1))*ZU(gt3,j1)) - 4*vu*(Sqr(g1) - 5*QHu*Qu*Sqr(gp))*SUM(j1,0,2,Conj(ZU(gt2,3 + j1))*ZU(gt3,3 + j1)) + 10*(1.4142135623730951*SUM(j2,0,2,Conj(ZU(gt2,j2))*SUM(j1,0,2,ZU(gt3,3 + j1)*TYu(j1,j2))) + 1.4142135623730951*SUM(j2,0,2,SUM(j1,0,2,Conj(ZU(gt2,3 + j1))*Conj(TYu(j1,j2)))*ZU(gt3,j2)) + 2*vu*(SUM(j3,0,2,Conj(ZU(gt2,3 + j3))*SUM(j2,0,2,SUM(j1,0,2,Conj(Yu(j3,j1))*Yu(j2,j1))*ZU(gt3,3 + j2))) + SUM(j3,0,2,SUM(j2,0,2,Conj(ZU(gt2,j2))*SUM(j1,0,2,Conj(Yu(j1,j3))*Yu(j1,j2)))*ZU(gt3,j3))))));
+
+   return {result};
 }
 
 InverseMetricVertex VertexImpl<fields::hh, typename fields::conj<fields::VWm>::type, fields::VWm>::evaluate(
@@ -3571,6 +3926,155 @@ InverseMetricVertex VertexImpl<fields::Sv, typename fields::conj<fields::Sv>::ty
    return {result};
 }
 
+ChiralVertex VertexImpl<fields::VP, fields::Cha, typename fields::bar<fields::Cha>::type>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   const int gt2 = indices[0];
+   const int gt1 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto UP = MODELPARAMETER(UP);
+   const auto UM = MODELPARAMETER(UM);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+
+   const std::complex<double> left = -(g2*Conj(UP(gt1,0))*Sin(ThetaW)*UP(gt2,0)) - 0.5*Conj(UP(gt1,1))*(0.7745966692414834*g1*Cos(ThetaW) + g2*Sin(ThetaW))*UP(gt2,1);
+
+   const std::complex<double> right = -(g2*Conj(UM(gt2,0))*Sin(ThetaW)*UM(gt1,0)) - 0.5*Conj(UM(gt2,1))*(0.7745966692414834*g1*Cos(ThetaW) + g2*Sin(ThetaW))*UM(gt1,1);
+
+   return {left, right};
+}
+
+ChiralVertex VertexImpl<fields::VP, fields::Fd, typename fields::bar<fields::Fd>::type>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   const int gt2 = indices[0];
+   const int gt1 = indices[1];
+   const auto g1 = MODELPARAMETER(g1);
+   const auto g2 = MODELPARAMETER(g2);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+
+   const std::complex<double> left = -0.2581988897471611*g1*Cos(ThetaW)*KroneckerDelta(gt1,gt2);
+
+   const std::complex<double> right = 0.16666666666666666*KroneckerDelta(gt1,gt2)*(0.7745966692414834*g1*Cos(ThetaW) - 3*g2*Sin(ThetaW));
+
+   return {left, right};
+}
+
+ChiralVertex VertexImpl<fields::VP, fields::Fe, typename fields::bar<fields::Fe>::type>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   const int gt2 = indices[0];
+   const int gt1 = indices[1];
+   const auto g1 = MODELPARAMETER(g1);
+   const auto g2 = MODELPARAMETER(g2);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+
+   const std::complex<double> left = -0.7745966692414834*g1*Cos(ThetaW)*KroneckerDelta(gt1,gt2);
+
+   const std::complex<double> right = -0.5*KroneckerDelta(gt1,gt2)*(0.7745966692414834*g1*Cos(ThetaW) + g2*Sin(ThetaW));
+
+   return {left, right};
+}
+
+ChiralVertex VertexImpl<fields::VP, fields::Fu, typename fields::bar<fields::Fu>::type>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   const int gt2 = indices[0];
+   const int gt1 = indices[1];
+   const auto g1 = MODELPARAMETER(g1);
+   const auto g2 = MODELPARAMETER(g2);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+
+   const std::complex<double> left = 0.5163977794943222*g1*Cos(ThetaW)*KroneckerDelta(gt1,gt2);
+
+   const std::complex<double> right = 0.16666666666666666*KroneckerDelta(gt1,gt2)*(0.7745966692414834*g1*Cos(ThetaW) + 3*g2*Sin(ThetaW));
+
+   return {left, right};
+}
+
+MomentumDifferenceVertex VertexImpl<fields::VP, fields::Hpm, typename fields::conj<fields::Hpm>::type>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 1;
+   int subtrahend_index = 2;
+
+   const int gt1 = indices[0];
+   const int gt2 = indices[1];
+   const auto g1 = MODELPARAMETER(g1);
+   const auto g2 = MODELPARAMETER(g2);
+   const auto ZP = MODELPARAMETER(ZP);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+
+   const std::complex<double> result = 0.5*(0.7745966692414834*g1*Cos(ThetaW) + g2*Sin(ThetaW))*(ZP(gt1,0)*ZP(gt2,0) + ZP(gt1,1)*ZP(gt2,1));
+
+   return {result, minuend_index, subtrahend_index};
+}
+
+MomentumDifferenceVertex VertexImpl<fields::VP, fields::Sd, typename fields::conj<fields::Sd>::type>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 1;
+   int subtrahend_index = 2;
+
+   const int gt1 = indices[0];
+   const int gt2 = indices[1];
+   const auto g1 = MODELPARAMETER(g1);
+   const auto g2 = MODELPARAMETER(g2);
+   const auto ZD = MODELPARAMETER(ZD);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+
+   const std::complex<double> result = -0.03333333333333333*(3.872983346207417*g1*Cos(ThetaW) - 15*g2*Sin(ThetaW))*SUM(j1,0,2,Conj(ZD(gt1,j1))*ZD(gt2,j1)) + 0.2581988897471611*g1*Cos(ThetaW)*SUM(j1,0,2,Conj(ZD(gt1,3 + j1))*ZD(gt2,3 + j1));
+
+   return {result, minuend_index, subtrahend_index};
+}
+
+MomentumDifferenceVertex VertexImpl<fields::VP, fields::Se, typename fields::conj<fields::Se>::type>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 1;
+   int subtrahend_index = 2;
+
+   const int gt1 = indices[0];
+   const int gt2 = indices[1];
+   const auto g1 = MODELPARAMETER(g1);
+   const auto g2 = MODELPARAMETER(g2);
+   const auto ZE = MODELPARAMETER(ZE);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+
+   const std::complex<double> result = 0.5*(0.7745966692414834*g1*Cos(ThetaW) + g2*Sin(ThetaW))*SUM(j1,0,2,Conj(ZE(gt1,j1))*ZE(gt2,j1)) + 0.7745966692414834*g1*Cos(ThetaW)*SUM(j1,0,2,Conj(ZE(gt1,3 + j1))*ZE(gt2,3 + j1));
+
+   return {result, minuend_index, subtrahend_index};
+}
+
+MomentumDifferenceVertex VertexImpl<fields::VP, fields::Su, typename fields::conj<fields::Su>::type>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   int minuend_index = 1;
+   int subtrahend_index = 2;
+
+   const int gt1 = indices[0];
+   const int gt2 = indices[1];
+   const auto g1 = MODELPARAMETER(g1);
+   const auto g2 = MODELPARAMETER(g2);
+   const auto ZU = MODELPARAMETER(ZU);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+
+   const std::complex<double> result = -0.16666666666666666*(0.7745966692414834*g1*Cos(ThetaW) + 3*g2*Sin(ThetaW))*SUM(j1,0,2,Conj(ZU(gt1,j1))*ZU(gt2,j1)) - 0.5163977794943222*g1*Cos(ThetaW)*SUM(j1,0,2,Conj(ZU(gt1,3 + j1))*ZU(gt2,3 + j1));
+
+   return {result, minuend_index, subtrahend_index};
+}
+
+TripleVectorVertex VertexImpl<fields::VP, fields::VWm, typename fields::conj<fields::VWm>::type>::evaluate(
+   const std::array<int, 0>& indices, const context_base& context)
+{
+   const auto g2 = MODELPARAMETER(g2);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+
+   const std::complex<double> result = g2*Sin(ThetaW);
+
+   return {result, TripleVectorVertex::odd_permutation{}};
+}
+
 MomentumDifferenceVertex VertexImpl<fields::VWm, fields::Ah, typename fields::conj<fields::Hpm>::type>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
@@ -3911,6 +4415,66 @@ ChiralVertex VertexImpl<fields::VZ, fields::Chi, fields::Chi>::evaluate(
    return {left, right};
 }
 
+ChiralVertex VertexImpl<fields::VZ, fields::Fd, typename fields::bar<fields::Fd>::type>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   const int gt2 = indices[0];
+   const int gt1 = indices[1];
+   const auto Qd = INPUTPARAMETER(Qd);
+   const auto Qq = INPUTPARAMETER(Qq);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto gp = MODELPARAMETER(gp);
+   const auto g2 = MODELPARAMETER(g2);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+
+   const std::complex<double> left = KroneckerDelta(gt1,gt2)*(0.2581988897471611*g1*Cos(ThetaWp)*Sin(ThetaW) - gp*Qd*Sin(ThetaWp));
+
+   const std::complex<double> right = -0.16666666666666666*KroneckerDelta(gt1,gt2)*(3*g2*Cos(ThetaW)*Cos(ThetaWp) + 0.7745966692414834*g1*Cos(ThetaWp)*Sin(ThetaW) - 6*gp*Qq*Sin(ThetaWp));
+
+   return {left, right};
+}
+
+ChiralVertex VertexImpl<fields::VZ, fields::Fe, typename fields::bar<fields::Fe>::type>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   const int gt2 = indices[0];
+   const int gt1 = indices[1];
+   const auto Qe = INPUTPARAMETER(Qe);
+   const auto Ql = INPUTPARAMETER(Ql);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto gp = MODELPARAMETER(gp);
+   const auto g2 = MODELPARAMETER(g2);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+
+   const std::complex<double> left = KroneckerDelta(gt1,gt2)*(0.7745966692414834*g1*Cos(ThetaWp)*Sin(ThetaW) - gp*Qe*Sin(ThetaWp));
+
+   const std::complex<double> right = -0.5*KroneckerDelta(gt1,gt2)*(g2*Cos(ThetaW)*Cos(ThetaWp) - 0.7745966692414834*g1*Cos(ThetaWp)*Sin(ThetaW) - 2*gp*Ql*Sin(ThetaWp));
+
+   return {left, right};
+}
+
+ChiralVertex VertexImpl<fields::VZ, fields::Fu, typename fields::bar<fields::Fu>::type>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   const int gt2 = indices[0];
+   const int gt1 = indices[1];
+   const auto Qu = INPUTPARAMETER(Qu);
+   const auto Qq = INPUTPARAMETER(Qq);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto gp = MODELPARAMETER(gp);
+   const auto g2 = MODELPARAMETER(g2);
+   const auto ThetaWp = DERIVEDPARAMETER(ThetaWp);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+
+   const std::complex<double> left = -0.3333333333333333*KroneckerDelta(gt1,gt2)*(1.5491933384829668*g1*Cos(ThetaWp)*Sin(ThetaW) + 3*gp*Qu*Sin(ThetaWp));
+
+   const std::complex<double> right = 0.16666666666666666*KroneckerDelta(gt1,gt2)*(3*g2*Cos(ThetaW)*Cos(ThetaWp) - 0.7745966692414834*g1*Cos(ThetaWp)*Sin(ThetaW) + 6*gp*Qq*Sin(ThetaWp));
+
+   return {left, right};
+}
+
 MomentumDifferenceVertex VertexImpl<fields::VZ, fields::hh, fields::Ah>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
@@ -3933,6 +4497,16 @@ MomentumDifferenceVertex VertexImpl<fields::VZ, fields::hh, fields::Ah>::evaluat
    const std::complex<double> result = std::complex<double>(0,-0.5)*(2*gp*Qs*Conj(ZA(gt1,2))*Conj(ZH(gt2,2))*Sin(ThetaWp) + Conj(ZA(gt1,0))*Conj(ZH(gt2,0))*(g2*Cos(ThetaW)*Cos(ThetaWp) + 0.7745966692414834*g1*Cos(ThetaWp)*Sin(ThetaW) + 2*gp*QHd*Sin(ThetaWp)) - Conj(ZA(gt1,1))*Conj(ZH(gt2,1))*(g2*Cos(ThetaW)*Cos(ThetaWp) + 0.7745966692414834*g1*Cos(ThetaWp)*Sin(ThetaW) - 2*gp*QHu*Sin(ThetaWp)));
 
    return {result, minuend_index, subtrahend_index};
+}
+
+InverseMetricVertex VertexImpl<fields::VZ, fields::hh, fields::VP>::evaluate(
+   const std::array<int, 1>& indices, const context_base& context)
+{
+   const int gt2523 = indices[0];
+
+   const std::complex<double> result = 0;
+
+   return {result};
 }
 
 InverseMetricVertex VertexImpl<fields::VZ, fields::hh, fields::VZp>::evaluate(

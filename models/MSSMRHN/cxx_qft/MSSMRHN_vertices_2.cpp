@@ -20,7 +20,7 @@
 /**
  * @file cxx_qft/MSSMRHN_vertices.cpp
  *
- * This file was generated with FlexibleSUSY 2.6.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.6.2 and SARAH 4.14.5 .
  */
 
 #include "MSSMRHN_context_base.hpp"

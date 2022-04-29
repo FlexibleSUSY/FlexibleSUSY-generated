@@ -25,7 +25,7 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated with FlexibleSUSY 2.6.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.6.2 and SARAH 4.14.5 .
  */
 
 #include "UMSSM_mass_eigenstates.hpp"
@@ -7624,12 +7624,11 @@ std::complex<double> CLASSNAME::CpAhAhVZpVZp(int gI1, int gI2) const
       QHd*(5*g2*Cos(ThetaW()) + 3.872983346207417*g1*Sin(ThetaW()))*Sin(2*ThetaWp(
       )) + 20*Sqr(gp)*Sqr(QHd)*Sqr(Cos(ThetaWp())) + (g1*Sin(ThetaW())*(
       7.745966692414834*g2*Cos(ThetaW()) + 3*g1*Sin(ThetaW())) + 5*Sqr(g2)*Sqr(Cos
-      (ThetaW())))*Sqr(Sin(ThetaWp()))) + Conj(ZA(gI1,1))*Conj(ZA(gI2,1))*(20*g2*
-      gp*QHu*Cos(ThetaW())*Cos(ThetaWp())*Sin(ThetaWp()) + 20*Sqr(gp)*Sqr(QHu)*Sqr
-      (Cos(ThetaWp())) + 5*Sqr(g2)*Sqr(Cos(ThetaW()))*Sqr(Sin(ThetaWp())) + g1*(
-      7.745966692414834*gp*QHu*Sin(ThetaW())*Sin(2*ThetaWp()) + 3.872983346207417*
-      g2*Sin(2*ThetaW())*Sqr(Sin(ThetaWp())) + 3*g1*Sqr(Sin(ThetaW()))*Sqr(Sin(
-      ThetaWp())))));
+      (ThetaW())))*Sqr(Sin(ThetaWp()))) + Conj(ZA(gI1,1))*Conj(ZA(gI2,1))*(2*gp*
+      QHu*(5*g2*Cos(ThetaW()) + 3.872983346207417*g1*Sin(ThetaW()))*Sin(2*ThetaWp(
+      )) + 20*Sqr(gp)*Sqr(QHu)*Sqr(Cos(ThetaWp())) + (g1*Sin(ThetaW())*(
+      7.745966692414834*g2*Cos(ThetaW()) + 3*g1*Sin(ThetaW())) + 5*Sqr(g2)*Sqr(Cos
+      (ThetaW())))*Sqr(Sin(ThetaWp()))));
 
    return result;
 }
@@ -7645,12 +7644,11 @@ std::complex<double> CLASSNAME::CphhhhVZpVZp(int gI1, int gI2) const
       QHd*(5*g2*Cos(ThetaW()) + 3.872983346207417*g1*Sin(ThetaW()))*Sin(2*ThetaWp(
       )) + 20*Sqr(gp)*Sqr(QHd)*Sqr(Cos(ThetaWp())) + (g1*Sin(ThetaW())*(
       7.745966692414834*g2*Cos(ThetaW()) + 3*g1*Sin(ThetaW())) + 5*Sqr(g2)*Sqr(Cos
-      (ThetaW())))*Sqr(Sin(ThetaWp()))) + Conj(ZH(gI1,1))*Conj(ZH(gI2,1))*(20*g2*
-      gp*QHu*Cos(ThetaW())*Cos(ThetaWp())*Sin(ThetaWp()) + 20*Sqr(gp)*Sqr(QHu)*Sqr
-      (Cos(ThetaWp())) + 5*Sqr(g2)*Sqr(Cos(ThetaW()))*Sqr(Sin(ThetaWp())) + g1*(
-      7.745966692414834*gp*QHu*Sin(ThetaW())*Sin(2*ThetaWp()) + 3.872983346207417*
-      g2*Sin(2*ThetaW())*Sqr(Sin(ThetaWp())) + 3*g1*Sqr(Sin(ThetaW()))*Sqr(Sin(
-      ThetaWp())))));
+      (ThetaW())))*Sqr(Sin(ThetaWp()))) + Conj(ZH(gI1,1))*Conj(ZH(gI2,1))*(2*gp*
+      QHu*(5*g2*Cos(ThetaW()) + 3.872983346207417*g1*Sin(ThetaW()))*Sin(2*ThetaWp(
+      )) + 20*Sqr(gp)*Sqr(QHu)*Sqr(Cos(ThetaWp())) + (g1*Sin(ThetaW())*(
+      7.745966692414834*g2*Cos(ThetaW()) + 3*g1*Sin(ThetaW())) + 5*Sqr(g2)*Sqr(Cos
+      (ThetaW())))*Sqr(Sin(ThetaWp()))));
 
    return result;
 }

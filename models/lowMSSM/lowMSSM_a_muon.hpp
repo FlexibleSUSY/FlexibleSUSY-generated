@@ -20,7 +20,7 @@
 /**
  * @file lowMSSM_a_muon.hpp
  *
- * This file was generated with FlexibleSUSY 2.6.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.6.2 and SARAH 4.14.5 .
  */
 
 #ifndef lowMSSM_A_MUON_H

@@ -18,4 +18,5 @@
 
 
 LIBHSSUSY_CXXQFT_VERTICES_SRC := \
-	models/HSSUSY/cxx_qft/HSSUSY_vertices_1.cpp
+	models/HSSUSY/cxx_qft/HSSUSY_vertices_1.cpp \
+	models/HSSUSY/cxx_qft/HSSUSY_vertices_2.cpp

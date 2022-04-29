@@ -18,4 +18,5 @@
 
 
 LIBlowNMSSM_CXXQFT_VERTICES_SRC := \
-	models/lowNMSSM/cxx_qft/lowNMSSM_vertices_1.cpp
+	models/lowNMSSM/cxx_qft/lowNMSSM_vertices_1.cpp \
+	models/lowNMSSM/cxx_qft/lowNMSSM_vertices_2.cpp

@@ -79,6 +79,8 @@ namespace MSSMNoFVHimalaya_info {
    extern const double normalization_g2;
    extern const double normalization_g3;
 
+   static constexpr int number_of_neutral_goldstones = 1;
+   static constexpr int number_of_charged_goldstones = 1;
 
    extern const std::array<int, NUMBER_OF_PARTICLES> particle_multiplicities;
    extern const std::array<std::string, NUMBER_OF_PARTICLES> particle_names;

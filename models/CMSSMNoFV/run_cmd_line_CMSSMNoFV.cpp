@@ -115,6 +115,7 @@ int run_solver(int loop_library, const CMSSMNoFV_input_parameters& input)
    settings.set(Spectrum_generator_settings::precision, 1.0e-4);
    settings.set(Spectrum_generator_settings::loop_library, loop_library);
    settings.set(Spectrum_generator_settings::calculate_bsm_masses, 1.0);
+   settings.set(Spectrum_generator_settings::calculate_sm_masses, 1.0);
 
    CMSSMNoFV_spectrum_generator<solver_type> spectrum_generator;
    spectrum_generator.set_settings(settings);

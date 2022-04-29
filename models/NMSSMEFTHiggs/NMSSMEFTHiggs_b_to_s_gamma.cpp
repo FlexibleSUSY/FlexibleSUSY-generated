@@ -20,23 +20,23 @@
 /**
  * @file NMSSMEFTHiggs_b_to_s_gamma.cpp
  *
- * This file was generated with FlexibleSUSY 2.6.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.6.2 and SARAH 4.14.5 .
  */
 
 #include <array>
 #include <complex>
-#include <iostream>
+#include <fstream>
+#include <iomanip>
 
 #include "NMSSMEFTHiggs_b_to_s_gamma.hpp"
 #include "NMSSMEFTHiggs_mass_eigenstates.hpp"
-
 #include "cxx_qft/NMSSMEFTHiggs_qft.hpp"
 #include "NMSSMEFTHiggs_FFV_form_factors.hpp"
 
 #include "lowe.h"
 #include "wrappers.hpp"
+#include "json.hpp"
 
-#include <fstream>
 
 #define MODELPARAMETER(p) context.model.get_##p()
 
@@ -56,30 +56,18 @@ void write_wilsoncoeffs(const std::complex<double>& C7NP_bs, const std::complex<
    const std::complex<double>& C8NP_bs, const std::complex<double>& C8pNP_bs,
    const double& matching_scale)
 {
-   std::ofstream wc_json;
-   wc_json.open ("WC_NMSSMEFTHiggs.json");
-   wc_json << "{\n\"eft\": \"WET\",\n";
-   wc_json << "\t\"basis\": \"flavio\",\n";
-   wc_json << "\t\"scale\": \"" << matching_scale << "\",\n";
-   wc_json << "\t\"values\": { \n";
-   wc_json << "\t\t\"C7_bs\": { \n";
-   wc_json << "\t\t\t\"Re\": " << Re(C7NP_bs) << ",\n";
-   wc_json << "\t\t\t\"Im\": " << Im(C7NP_bs) << "\n";
-   wc_json << "\t\t},\n";
-   wc_json << "\t\t\"C7p_bs\": { \n";
-   wc_json << "\t\t\t\"Re\": " << Re(C7pNP_bs) << ",\n";
-   wc_json << "\t\t\t\"Im\": " << Im(C7pNP_bs) << "\n";
-   wc_json << "\t\t},\n";
-   wc_json << "\t\t\"C8_bs\": { \n";
-   wc_json << "\t\t\t\"Re\": " << Re(C8NP_bs) << ",\n";
-   wc_json << "\t\t\t\"Im\": " << Im(C8NP_bs) << "\n";
-   wc_json << "\t\t},\n";
-   wc_json << "\t\t\"C8p_bs\": { \n";
-   wc_json << "\t\t\t\"Re\": " << Re(C8pNP_bs) << ",\n";
-   wc_json << "\t\t\t\"Im\": " << Im(C8pNP_bs) << "\n";
-   wc_json << "\t\t}\n";
-   wc_json << "\t}\n";
-   wc_json << "}";
+   nlohmann::json j;
+   j["eft"] = "WET";
+   j["basis"] = "flavio";
+   j["scale"] = matching_scale;
+   j["values"] = {
+      {"C7_bs",  {{"Re", Re(C7NP_bs)},  {"Im", Im(C7NP_bs)}}},
+      {"C7p_bs", {{"Re", Re(C7pNP_bs)}, {"Im", Im(C7pNP_bs)}}},
+      {"C8_bs",  {{"Re", Re(C8NP_bs)},  {"Im", Im(C8NP_bs)}}},
+      {"C8p_bs", {{"Re", Re(C8pNP_bs)}, {"Im", Im(C8pNP_bs)}}}
+   };
+   std::ofstream wc_json("WC_NMSSMEFTHiggs.json");
+   wc_json << std::setw(4) << j << std::endl;
    wc_json.close();
 }
 

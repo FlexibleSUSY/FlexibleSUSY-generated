@@ -18,4 +18,5 @@
 
 
 LIBMSSMatMGUT_CXXQFT_VERTICES_SRC := \
-	models/MSSMatMGUT/cxx_qft/MSSMatMGUT_vertices_1.cpp
+	models/MSSMatMGUT/cxx_qft/MSSMatMGUT_vertices_1.cpp \
+	models/MSSMatMGUT/cxx_qft/MSSMatMGUT_vertices_2.cpp

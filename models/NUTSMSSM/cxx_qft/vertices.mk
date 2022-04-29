@@ -18,4 +18,5 @@
 
 
 LIBNUTSMSSM_CXXQFT_VERTICES_SRC := \
-	models/NUTSMSSM/cxx_qft/NUTSMSSM_vertices_1.cpp
+	models/NUTSMSSM/cxx_qft/NUTSMSSM_vertices_1.cpp \
+	models/NUTSMSSM/cxx_qft/NUTSMSSM_vertices_2.cpp

@@ -146,6 +146,8 @@ namespace E6SSM_info {
    extern const double normalization_g3;
    extern const double normalization_gN;
 
+   static constexpr int number_of_neutral_goldstones = 2;
+   static constexpr int number_of_charged_goldstones = 1;
 
    extern const std::array<int, NUMBER_OF_PARTICLES> particle_multiplicities;
    extern const std::array<std::string, NUMBER_OF_PARTICLES> particle_names;

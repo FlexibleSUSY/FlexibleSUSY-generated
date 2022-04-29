@@ -31,7 +31,7 @@ namespace flexiblesusy {
 
 class MRSSM2_decay_table {
 private:
-   static const int number_of_decay_particles = 10;
+   static const int number_of_decay_particles = 12;
    using Table_type = std::array<Decays_list, number_of_decay_particles>;
 public:
    using iterator = Table_type::iterator;
@@ -62,6 +62,10 @@ public:
    const Decays_list& get_Ah_decays(int) const;
    Decays_list& get_Hpm_decays(int);
    const Decays_list& get_Hpm_decays(int) const;
+   Decays_list& get_sigmaO_decays();
+   const Decays_list& get_sigmaO_decays() const;
+   Decays_list& get_phiO_decays();
+   const Decays_list& get_phiO_decays() const;
 private:
    Table_type decay_table;
 };

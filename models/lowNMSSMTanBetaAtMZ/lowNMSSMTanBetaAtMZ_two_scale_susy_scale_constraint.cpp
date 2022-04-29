@@ -123,8 +123,6 @@ void lowNMSSMTanBetaAtMZ_susy_scale_constraint<Two_scale>::apply()
    MODEL->set_mq2(0,0,Re(Sqr(mq1Input)));
    MODEL->set_mq2(1,1,Re(Sqr(mq2Input)));
    MODEL->set_mq2(2,2,Re(Sqr(mq3Input)));
-   MODEL->set_me2(0,0,Re(Sqr(me1Input)));
-   MODEL->set_me2(1,1,Re(Sqr(me2Input)));
    MODEL->set_TYu(2,2,Re(AtInput*Yu(2,2)));
    MODEL->set_TYd(2,2,Re(AbInput*Yd(2,2)));
    MODEL->set_TYe(2,2,Re(ATauInput*Ye(2,2)));

@@ -20,7 +20,7 @@
 /**
  * @file THDMII_edm.hpp
  *
- * This file was generated with FlexibleSUSY 2.6.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.6.2 and SARAH 4.14.5 .
  */
 
 #ifndef THDMII_EDM_H

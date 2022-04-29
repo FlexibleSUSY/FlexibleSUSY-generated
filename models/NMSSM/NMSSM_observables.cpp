@@ -43,7 +43,7 @@
 #define EDM0(p) edm_ ## p
 #define EDM1(p,idx) edm_ ## p ## _ ## idx
 #define LToLGamma0(pIn, pOut, spec) pIn ## _to_ ## pOut ## _ ## spec
-#define LToLGamma1(pIn,idxIn,pOut,idxOut,spec) pIn ## _to_ ## pOut ## _ ## spec
+#define LToLGamma1(pIn,idxIn,pOut,idxOut,spec) pIn ## idxIn ## _to_ ## pOut ## idxOut ## _ ## spec
 #define FToFConversion1(pIn,idxIn,pOut,idxOut,nuclei,qedqcd) pIn ## _to_ ## pOut ## _in_ ## nuclei
 #define BSGAMMA b_to_s_gamma
 
@@ -64,7 +64,7 @@ NMSSM_observables::NMSSM_observables()
    , edm_Fe_0(0)
    , edm_Fe_1(0)
    , edm_Fe_2(0)
-   , Fe_to_Fe_VP(0)
+   , Fe1_to_Fe0_VP(0)
 
 {
 }
@@ -77,7 +77,7 @@ Eigen::ArrayXd NMSSM_observables::get() const
    vec(1) = edm_Fe_0;
    vec(2) = edm_Fe_1;
    vec(3) = edm_Fe_2;
-   vec(4) = Fe_to_Fe_VP;
+   vec(4) = Fe1_to_Fe0_VP;
 
    return vec;
 }
@@ -90,7 +90,7 @@ std::vector<std::string> NMSSM_observables::get_names()
    names[1] = "edm_Fe_0";
    names[2] = "edm_Fe_1";
    names[3] = "edm_Fe_2";
-   names[4] = "Fe_to_Fe_VP";
+   names[4] = "Fe1_to_Fe0_VP";
 
    return names;
 }
@@ -101,7 +101,7 @@ void NMSSM_observables::clear()
    edm_Fe_0 = 0.;
    edm_Fe_1 = 0.;
    edm_Fe_2 = 0.;
-   Fe_to_Fe_VP = 0.;
+   Fe1_to_Fe0_VP = 0.;
 
 }
 
@@ -113,7 +113,7 @@ void NMSSM_observables::set(const Eigen::ArrayXd& vec)
    edm_Fe_0 = vec(1);
    edm_Fe_1 = vec(2);
    edm_Fe_2 = vec(3);
-   Fe_to_Fe_VP = vec(4);
+   Fe1_to_Fe0_VP = vec(4);
 
 }
 

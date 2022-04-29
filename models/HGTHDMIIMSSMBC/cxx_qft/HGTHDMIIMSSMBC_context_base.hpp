@@ -20,7 +20,7 @@
 /**
  * @file cxx_qft/HGTHDMIIMSSMBC_context_base.hpp
  *
- * This file was generated with FlexibleSUSY 2.6.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.6.2 and SARAH 4.14.5 .
  */
 
 #ifndef HGTHDMIIMSSMBC_CXXQFT_CONTEXT_BASE_H

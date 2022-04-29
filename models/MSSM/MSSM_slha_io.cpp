@@ -803,7 +803,7 @@ void MSSM_slha_io::set_extra(
                << FORMAT_ELEMENT(23, (OBSERVABLES.edm_Fe_0), "electric dipole moment of Fe(0) [1/GeV]")
                << FORMAT_ELEMENT(24, (OBSERVABLES.edm_Fe_1), "electric dipole moment of Fe(1) [1/GeV]")
                << FORMAT_ELEMENT(25, (OBSERVABLES.edm_Fe_2), "electric dipole moment of Fe(2) [1/GeV]")
-               << FORMAT_ELEMENT(26, (OBSERVABLES.Fe_to_Fe_VP), "BR(Fe1 -> Fe0 VP)")
+               << FORMAT_ELEMENT(26, (OBSERVABLES.Fe1_to_Fe0_VP), "BR(Fe1 -> Fe0 VP)")
          ;
          slha_io.set_block(block);
       }

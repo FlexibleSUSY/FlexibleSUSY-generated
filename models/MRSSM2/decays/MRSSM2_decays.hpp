@@ -22,7 +22,7 @@
  *
  * @brief contains class for calculating particle decays
  *
- * This file was generated with FlexibleSUSY 2.6.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.6.2 and SARAH 4.14.5 .
  */
 
 #ifndef MRSSM2_DECAYS_H
@@ -93,9 +93,15 @@ public:
       get_Ah_decays(i); }
    const Decays_list& get_Hpm_decays(int i) const { return decay_table.
       get_Hpm_decays(i); }
+   const Decays_list& get_sigmaO_decays() const { return decay_table.
+      get_sigmaO_decays(); }
+   const Decays_list& get_phiO_decays() const { return decay_table.get_phiO_decays
+      (); }
    void calculate_hh_decays();
    void calculate_Ah_decays();
    void calculate_Hpm_decays();
+   void calculate_sigmaO_decays();
+   void calculate_phiO_decays();
 
 double partial_width_hh_to_SRdpSRum(MRSSM2_mass_eigenstates_interface*, int) const;
 double partial_width_hh_to_SRdpHpm(MRSSM2_mass_eigenstates_interface*, int, int) const;
@@ -251,6 +257,54 @@ double partial_width_Hpm_to_barChiCha2(MRSSM2_mass_eigenstates_interface*, int, 
 double partial_width_Hpm_to_barFvFe(MRSSM2_mass_eigenstates_interface*, int, int, int) const;
 double partial_width_Hpm_to_barFuFd(MRSSM2_mass_eigenstates_interface*, int, int, int) const;
 double partial_width_Hpm_to_barChibarCha1(MRSSM2_mass_eigenstates_interface*, int, int, int) const;
+double partial_width_sigmaO_to_phiOphiO(MRSSM2_mass_eigenstates_interface*) const;
+double partial_width_sigmaO_to_phiOhh(MRSSM2_mass_eigenstates_interface*, int) const;
+double partial_width_sigmaO_to_phiOAh(MRSSM2_mass_eigenstates_interface*, int) const;
+double partial_width_sigmaO_to_phiORh(MRSSM2_mass_eigenstates_interface*, int) const;
+double partial_width_sigmaO_to_phiOconjRh(MRSSM2_mass_eigenstates_interface*, int) const;
+double partial_width_sigmaO_to_SdconjSd(MRSSM2_mass_eigenstates_interface*, int, int) const;
+double partial_width_sigmaO_to_SuconjSu(MRSSM2_mass_eigenstates_interface*, int, int) const;
+double partial_width_sigmaO_to_hhVG(MRSSM2_mass_eigenstates_interface*, int) const;
+double partial_width_sigmaO_to_AhVG(MRSSM2_mass_eigenstates_interface*, int) const;
+double partial_width_sigmaO_to_RhVG(MRSSM2_mass_eigenstates_interface*, int) const;
+double partial_width_sigmaO_to_conjRhVG(MRSSM2_mass_eigenstates_interface*, int) const;
+double partial_width_sigmaO_to_phiOVP(MRSSM2_mass_eigenstates_interface*) const;
+double partial_width_sigmaO_to_phiOVZ(MRSSM2_mass_eigenstates_interface*) const;
+double partial_width_sigmaO_to_VGVG(MRSSM2_mass_eigenstates_interface*) const;
+double partial_width_sigmaO_to_VGVP(MRSSM2_mass_eigenstates_interface*) const;
+double partial_width_sigmaO_to_VGVZ(MRSSM2_mass_eigenstates_interface*) const;
+double partial_width_sigmaO_to_GluGlu(MRSSM2_mass_eigenstates_interface*) const;
+double partial_width_sigmaO_to_GluChi(MRSSM2_mass_eigenstates_interface*, int) const;
+double partial_width_sigmaO_to_barChiGlu(MRSSM2_mass_eigenstates_interface*, int) const;
+double partial_width_sigmaO_to_barGluChi(MRSSM2_mass_eigenstates_interface*, int) const;
+double partial_width_sigmaO_to_barFdFd(MRSSM2_mass_eigenstates_interface*, int, int) const;
+double partial_width_sigmaO_to_barFuFu(MRSSM2_mass_eigenstates_interface*, int, int) const;
+double partial_width_sigmaO_to_barGlubarGlu(MRSSM2_mass_eigenstates_interface*) const;
+double partial_width_sigmaO_to_barGlubarChi(MRSSM2_mass_eigenstates_interface*, int) const;
+double partial_width_phiO_to_sigmaOsigmaO(MRSSM2_mass_eigenstates_interface*) const;
+double partial_width_phiO_to_sigmaOhh(MRSSM2_mass_eigenstates_interface*, int) const;
+double partial_width_phiO_to_sigmaOAh(MRSSM2_mass_eigenstates_interface*, int) const;
+double partial_width_phiO_to_sigmaORh(MRSSM2_mass_eigenstates_interface*, int) const;
+double partial_width_phiO_to_sigmaOconjRh(MRSSM2_mass_eigenstates_interface*, int) const;
+double partial_width_phiO_to_SdconjSd(MRSSM2_mass_eigenstates_interface*, int, int) const;
+double partial_width_phiO_to_SuconjSu(MRSSM2_mass_eigenstates_interface*, int, int) const;
+double partial_width_phiO_to_hhVG(MRSSM2_mass_eigenstates_interface*, int) const;
+double partial_width_phiO_to_AhVG(MRSSM2_mass_eigenstates_interface*, int) const;
+double partial_width_phiO_to_RhVG(MRSSM2_mass_eigenstates_interface*, int) const;
+double partial_width_phiO_to_conjRhVG(MRSSM2_mass_eigenstates_interface*, int) const;
+double partial_width_phiO_to_sigmaOVP(MRSSM2_mass_eigenstates_interface*) const;
+double partial_width_phiO_to_sigmaOVZ(MRSSM2_mass_eigenstates_interface*) const;
+double partial_width_phiO_to_VGVG(MRSSM2_mass_eigenstates_interface*) const;
+double partial_width_phiO_to_VGVP(MRSSM2_mass_eigenstates_interface*) const;
+double partial_width_phiO_to_VGVZ(MRSSM2_mass_eigenstates_interface*) const;
+double partial_width_phiO_to_GluGlu(MRSSM2_mass_eigenstates_interface*) const;
+double partial_width_phiO_to_GluChi(MRSSM2_mass_eigenstates_interface*, int) const;
+double partial_width_phiO_to_barChiGlu(MRSSM2_mass_eigenstates_interface*, int) const;
+double partial_width_phiO_to_barGluChi(MRSSM2_mass_eigenstates_interface*, int) const;
+double partial_width_phiO_to_barFdFd(MRSSM2_mass_eigenstates_interface*, int, int) const;
+double partial_width_phiO_to_barFuFu(MRSSM2_mass_eigenstates_interface*, int, int) const;
+double partial_width_phiO_to_barGlubarGlu(MRSSM2_mass_eigenstates_interface*) const;
+double partial_width_phiO_to_barGlubarChi(MRSSM2_mass_eigenstates_interface*, int) const;
 
 private:
    MRSSM2_mass_eigenstates model{};
@@ -745,6 +799,150 @@ Decay_amplitude_SFF MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fiel
 template<>
 Decay_amplitude_SFF MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::Hpm, typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Chi>::type, typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Cha1>::type>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::Hpm >::type&, const typename MRSSM2_cxx_diagrams::field_indices<typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Chi>::type >::type&, const typename MRSSM2_cxx_diagrams::field_indices<typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Cha1>::type >::type&) const;
 
+template<>
+Decay_amplitude_SSS MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::sigmaO, MRSSM2_cxx_diagrams::fields::phiO, MRSSM2_cxx_diagrams::fields::phiO>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::sigmaO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::phiO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::phiO >::type&) const;
+
+template<>
+Decay_amplitude_SSS MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::sigmaO, MRSSM2_cxx_diagrams::fields::phiO, MRSSM2_cxx_diagrams::fields::hh>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::sigmaO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::phiO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::hh >::type&) const;
+
+template<>
+Decay_amplitude_SSS MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::sigmaO, MRSSM2_cxx_diagrams::fields::phiO, MRSSM2_cxx_diagrams::fields::Ah>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::sigmaO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::phiO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::Ah >::type&) const;
+
+template<>
+Decay_amplitude_SSS MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::sigmaO, MRSSM2_cxx_diagrams::fields::phiO, MRSSM2_cxx_diagrams::fields::Rh>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::sigmaO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::phiO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::Rh >::type&) const;
+
+template<>
+Decay_amplitude_SSS MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::sigmaO, MRSSM2_cxx_diagrams::fields::phiO, typename MRSSM2_cxx_diagrams::fields::conj<MRSSM2_cxx_diagrams::fields::Rh>::type>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::sigmaO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::phiO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<typename MRSSM2_cxx_diagrams::fields::conj<MRSSM2_cxx_diagrams::fields::Rh>::type >::type&) const;
+
+template<>
+Decay_amplitude_SSS MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::sigmaO, MRSSM2_cxx_diagrams::fields::Sd, typename MRSSM2_cxx_diagrams::fields::conj<MRSSM2_cxx_diagrams::fields::Sd>::type>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::sigmaO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::Sd >::type&, const typename MRSSM2_cxx_diagrams::field_indices<typename MRSSM2_cxx_diagrams::fields::conj<MRSSM2_cxx_diagrams::fields::Sd>::type >::type&) const;
+
+template<>
+Decay_amplitude_SSS MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::sigmaO, MRSSM2_cxx_diagrams::fields::Su, typename MRSSM2_cxx_diagrams::fields::conj<MRSSM2_cxx_diagrams::fields::Su>::type>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::sigmaO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::Su >::type&, const typename MRSSM2_cxx_diagrams::field_indices<typename MRSSM2_cxx_diagrams::fields::conj<MRSSM2_cxx_diagrams::fields::Su>::type >::type&) const;
+
+template<>
+Decay_amplitude_SSV MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::sigmaO, MRSSM2_cxx_diagrams::fields::hh, MRSSM2_cxx_diagrams::fields::VG>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::sigmaO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::hh >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::VG >::type&) const;
+
+template<>
+Decay_amplitude_SSV MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::sigmaO, MRSSM2_cxx_diagrams::fields::Ah, MRSSM2_cxx_diagrams::fields::VG>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::sigmaO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::Ah >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::VG >::type&) const;
+
+template<>
+Decay_amplitude_SSV MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::sigmaO, MRSSM2_cxx_diagrams::fields::Rh, MRSSM2_cxx_diagrams::fields::VG>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::sigmaO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::Rh >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::VG >::type&) const;
+
+template<>
+Decay_amplitude_SSV MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::sigmaO, typename MRSSM2_cxx_diagrams::fields::conj<MRSSM2_cxx_diagrams::fields::Rh>::type, MRSSM2_cxx_diagrams::fields::VG>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::sigmaO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<typename MRSSM2_cxx_diagrams::fields::conj<MRSSM2_cxx_diagrams::fields::Rh>::type >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::VG >::type&) const;
+
+template<>
+Decay_amplitude_SSV MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::sigmaO, MRSSM2_cxx_diagrams::fields::phiO, MRSSM2_cxx_diagrams::fields::VP>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::sigmaO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::phiO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::VP >::type&) const;
+
+template<>
+Decay_amplitude_SSV MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::sigmaO, MRSSM2_cxx_diagrams::fields::phiO, MRSSM2_cxx_diagrams::fields::VZ>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::sigmaO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::phiO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::VZ >::type&) const;
+
+template<>
+Decay_amplitude_SVV MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::sigmaO, MRSSM2_cxx_diagrams::fields::VG, MRSSM2_cxx_diagrams::fields::VG>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::sigmaO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::VG >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::VG >::type&) const;
+
+template<>
+Decay_amplitude_SVV MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::sigmaO, MRSSM2_cxx_diagrams::fields::VG, MRSSM2_cxx_diagrams::fields::VP>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::sigmaO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::VG >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::VP >::type&) const;
+
+template<>
+Decay_amplitude_SVV MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::sigmaO, MRSSM2_cxx_diagrams::fields::VG, MRSSM2_cxx_diagrams::fields::VZ>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::sigmaO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::VG >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::VZ >::type&) const;
+
+template<>
+Decay_amplitude_SFF MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::sigmaO, MRSSM2_cxx_diagrams::fields::Glu, MRSSM2_cxx_diagrams::fields::Glu>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::sigmaO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::Glu >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::Glu >::type&) const;
+
+template<>
+Decay_amplitude_SFF MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::sigmaO, MRSSM2_cxx_diagrams::fields::Glu, MRSSM2_cxx_diagrams::fields::Chi>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::sigmaO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::Glu >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::Chi >::type&) const;
+
+template<>
+Decay_amplitude_SFF MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::sigmaO, typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Chi>::type, MRSSM2_cxx_diagrams::fields::Glu>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::sigmaO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Chi>::type >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::Glu >::type&) const;
+
+template<>
+Decay_amplitude_SFF MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::sigmaO, typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Glu>::type, MRSSM2_cxx_diagrams::fields::Chi>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::sigmaO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Glu>::type >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::Chi >::type&) const;
+
+template<>
+Decay_amplitude_SFF MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::sigmaO, typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Fd>::type, MRSSM2_cxx_diagrams::fields::Fd>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::sigmaO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Fd>::type >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::Fd >::type&) const;
+
+template<>
+Decay_amplitude_SFF MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::sigmaO, typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Fu>::type, MRSSM2_cxx_diagrams::fields::Fu>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::sigmaO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Fu>::type >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::Fu >::type&) const;
+
+template<>
+Decay_amplitude_SFF MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::sigmaO, typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Glu>::type, typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Glu>::type>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::sigmaO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Glu>::type >::type&, const typename MRSSM2_cxx_diagrams::field_indices<typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Glu>::type >::type&) const;
+
+template<>
+Decay_amplitude_SFF MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::sigmaO, typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Glu>::type, typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Chi>::type>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::sigmaO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Glu>::type >::type&, const typename MRSSM2_cxx_diagrams::field_indices<typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Chi>::type >::type&) const;
+
+template<>
+Decay_amplitude_SSS MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::phiO, MRSSM2_cxx_diagrams::fields::sigmaO, MRSSM2_cxx_diagrams::fields::sigmaO>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::phiO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::sigmaO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::sigmaO >::type&) const;
+
+template<>
+Decay_amplitude_SSS MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::phiO, MRSSM2_cxx_diagrams::fields::sigmaO, MRSSM2_cxx_diagrams::fields::hh>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::phiO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::sigmaO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::hh >::type&) const;
+
+template<>
+Decay_amplitude_SSS MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::phiO, MRSSM2_cxx_diagrams::fields::sigmaO, MRSSM2_cxx_diagrams::fields::Ah>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::phiO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::sigmaO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::Ah >::type&) const;
+
+template<>
+Decay_amplitude_SSS MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::phiO, MRSSM2_cxx_diagrams::fields::sigmaO, MRSSM2_cxx_diagrams::fields::Rh>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::phiO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::sigmaO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::Rh >::type&) const;
+
+template<>
+Decay_amplitude_SSS MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::phiO, MRSSM2_cxx_diagrams::fields::sigmaO, typename MRSSM2_cxx_diagrams::fields::conj<MRSSM2_cxx_diagrams::fields::Rh>::type>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::phiO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::sigmaO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<typename MRSSM2_cxx_diagrams::fields::conj<MRSSM2_cxx_diagrams::fields::Rh>::type >::type&) const;
+
+template<>
+Decay_amplitude_SSS MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::phiO, MRSSM2_cxx_diagrams::fields::Sd, typename MRSSM2_cxx_diagrams::fields::conj<MRSSM2_cxx_diagrams::fields::Sd>::type>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::phiO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::Sd >::type&, const typename MRSSM2_cxx_diagrams::field_indices<typename MRSSM2_cxx_diagrams::fields::conj<MRSSM2_cxx_diagrams::fields::Sd>::type >::type&) const;
+
+template<>
+Decay_amplitude_SSS MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::phiO, MRSSM2_cxx_diagrams::fields::Su, typename MRSSM2_cxx_diagrams::fields::conj<MRSSM2_cxx_diagrams::fields::Su>::type>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::phiO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::Su >::type&, const typename MRSSM2_cxx_diagrams::field_indices<typename MRSSM2_cxx_diagrams::fields::conj<MRSSM2_cxx_diagrams::fields::Su>::type >::type&) const;
+
+template<>
+Decay_amplitude_SSV MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::phiO, MRSSM2_cxx_diagrams::fields::hh, MRSSM2_cxx_diagrams::fields::VG>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::phiO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::hh >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::VG >::type&) const;
+
+template<>
+Decay_amplitude_SSV MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::phiO, MRSSM2_cxx_diagrams::fields::Ah, MRSSM2_cxx_diagrams::fields::VG>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::phiO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::Ah >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::VG >::type&) const;
+
+template<>
+Decay_amplitude_SSV MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::phiO, MRSSM2_cxx_diagrams::fields::Rh, MRSSM2_cxx_diagrams::fields::VG>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::phiO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::Rh >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::VG >::type&) const;
+
+template<>
+Decay_amplitude_SSV MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::phiO, typename MRSSM2_cxx_diagrams::fields::conj<MRSSM2_cxx_diagrams::fields::Rh>::type, MRSSM2_cxx_diagrams::fields::VG>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::phiO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<typename MRSSM2_cxx_diagrams::fields::conj<MRSSM2_cxx_diagrams::fields::Rh>::type >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::VG >::type&) const;
+
+template<>
+Decay_amplitude_SSV MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::phiO, MRSSM2_cxx_diagrams::fields::sigmaO, MRSSM2_cxx_diagrams::fields::VP>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::phiO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::sigmaO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::VP >::type&) const;
+
+template<>
+Decay_amplitude_SSV MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::phiO, MRSSM2_cxx_diagrams::fields::sigmaO, MRSSM2_cxx_diagrams::fields::VZ>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::phiO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::sigmaO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::VZ >::type&) const;
+
+template<>
+Decay_amplitude_SVV MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::phiO, MRSSM2_cxx_diagrams::fields::VG, MRSSM2_cxx_diagrams::fields::VG>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::phiO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::VG >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::VG >::type&) const;
+
+template<>
+Decay_amplitude_SVV MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::phiO, MRSSM2_cxx_diagrams::fields::VG, MRSSM2_cxx_diagrams::fields::VP>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::phiO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::VG >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::VP >::type&) const;
+
+template<>
+Decay_amplitude_SVV MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::phiO, MRSSM2_cxx_diagrams::fields::VG, MRSSM2_cxx_diagrams::fields::VZ>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::phiO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::VG >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::VZ >::type&) const;
+
+template<>
+Decay_amplitude_SFF MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::phiO, MRSSM2_cxx_diagrams::fields::Glu, MRSSM2_cxx_diagrams::fields::Glu>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::phiO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::Glu >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::Glu >::type&) const;
+
+template<>
+Decay_amplitude_SFF MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::phiO, MRSSM2_cxx_diagrams::fields::Glu, MRSSM2_cxx_diagrams::fields::Chi>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::phiO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::Glu >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::Chi >::type&) const;
+
+template<>
+Decay_amplitude_SFF MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::phiO, typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Chi>::type, MRSSM2_cxx_diagrams::fields::Glu>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::phiO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Chi>::type >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::Glu >::type&) const;
+
+template<>
+Decay_amplitude_SFF MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::phiO, typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Glu>::type, MRSSM2_cxx_diagrams::fields::Chi>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::phiO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Glu>::type >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::Chi >::type&) const;
+
+template<>
+Decay_amplitude_SFF MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::phiO, typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Fd>::type, MRSSM2_cxx_diagrams::fields::Fd>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::phiO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Fd>::type >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::Fd >::type&) const;
+
+template<>
+Decay_amplitude_SFF MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::phiO, typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Fu>::type, MRSSM2_cxx_diagrams::fields::Fu>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::phiO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Fu>::type >::type&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::Fu >::type&) const;
+
+template<>
+Decay_amplitude_SFF MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::phiO, typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Glu>::type, typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Glu>::type>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::phiO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Glu>::type >::type&, const typename MRSSM2_cxx_diagrams::field_indices<typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Glu>::type >::type&) const;
+
+template<>
+Decay_amplitude_SFF MRSSM2_decays::calculate_amplitude<MRSSM2_cxx_diagrams::fields::phiO, typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Glu>::type, typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Chi>::type>(const MRSSM2_cxx_diagrams::context_base&, const typename MRSSM2_cxx_diagrams::field_indices<MRSSM2_cxx_diagrams::fields::phiO >::type&, const typename MRSSM2_cxx_diagrams::field_indices<typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Glu>::type >::type&, const typename MRSSM2_cxx_diagrams::field_indices<typename MRSSM2_cxx_diagrams::fields::bar<MRSSM2_cxx_diagrams::fields::Chi>::type >::type&) const;
+
 
 template<typename FieldIn, typename FieldOut1, typename FieldOut2>
 double
@@ -870,6 +1068,33 @@ std::enable_if_t<
    ), double
 >
 squared_color_generator() {return 1./2.;}
+
+// 8 -> 8, 8 with identical particles in the final state
+// because of symmetry of the final state it must be proportional to d^2
+template<typename FieldIn, typename FieldOut1, typename FieldOut2>
+constexpr
+std::enable_if_t<
+MRSSM2_cxx_diagrams::fields::is_octet_v<FieldIn> &&
+MRSSM2_cxx_diagrams::fields::is_octet_v<FieldOut1> &&
+MRSSM2_cxx_diagrams::fields::is_octet_v<FieldOut2> &&
+std::is_same<FieldOut1, FieldOut2>::value
+, double>
+// color:   d^2 = (2 (4 - 5 Nc^2 + Nc^4) TR)/Nc = 40/3
+// average: 1/8
+squared_color_generator() {return 40/24.;}
+
+// 8 -> 8, 8 with differnt particles in the final state
+template<typename FieldIn, typename FieldOut1, typename FieldOut2>
+constexpr
+std::enable_if_t<
+MRSSM2_cxx_diagrams::fields::is_octet_v<FieldIn> &&
+MRSSM2_cxx_diagrams::fields::is_octet_v<FieldOut1> &&
+MRSSM2_cxx_diagrams::fields::is_octet_v<FieldOut2> &&
+!std::is_same<FieldOut1, FieldOut2>::value
+, double>
+// color:   f^2 = 2 Nc (-1 + Nc^2) TR = 24
+// average: 1/8
+squared_color_generator() {return 3.;}
 
 // generic decay of FieldIn -> FieldOut1 FieldOut2
 template<typename FieldIn, typename FieldOut1, typename FieldOut2>

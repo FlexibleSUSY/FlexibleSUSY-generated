@@ -20,7 +20,7 @@
 /**
  * @file cxx_qft/SplitMSSM_vertices.hpp
  *
- * This file was generated with FlexibleSUSY 2.6.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.6.2 and SARAH 4.14.5 .
  */
 
 #ifndef SplitMSSM_CXXQFT_VERTICES_H
@@ -380,7 +380,22 @@ template<> struct VertexImpl<fields::Ah, fields::Hp, typename fields::conj<field
    static MomentumDifferenceVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
 };
 
+template<> struct VertexImpl<fields::Ah, typename fields::bar<fields::Cha>::type, fields::Cha>
+{
+   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<fields::Ah, typename fields::bar<fields::Fd>::type, fields::Fd>
+{
+   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+};
+
 template<> struct VertexImpl<fields::Ah, typename fields::bar<fields::Fe>::type, fields::Fe>
+{
+   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<fields::Ah, typename fields::bar<fields::Fu>::type, fields::Fu>
 {
    static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
@@ -411,6 +426,16 @@ template<> struct VertexImpl<fields::Chi, fields::Chi, fields::hh>
 };
 
 template<> struct VertexImpl<fields::Chi, fields::Chi, fields::VZ>
+{
+   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<fields::Fe, typename fields::bar<fields::Fe>::type, fields::VP>
+{
+   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<fields::Fe, typename fields::bar<fields::Fe>::type, fields::VZ>
 {
    static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
@@ -465,9 +490,29 @@ template<> struct VertexImpl<fields::hh, fields::VZ, fields::VZ>
    static InverseMetricVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
 };
 
+template<> struct VertexImpl<fields::hh, typename fields::bar<fields::Cha>::type, fields::Cha>
+{
+   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<fields::hh, typename fields::bar<fields::Fd>::type, fields::Fd>
+{
+   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+};
+
 template<> struct VertexImpl<fields::hh, typename fields::bar<fields::Fe>::type, fields::Fe>
 {
    static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<fields::hh, typename fields::bar<fields::Fu>::type, fields::Fu>
+{
+   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<fields::hh, typename fields::conj<fields::Hp>::type, fields::Hp>
+{
+   static ScalarVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
 };
 
 template<> struct VertexImpl<fields::hh, typename fields::conj<fields::Hp>::type, fields::VP, fields::VWp>
@@ -530,6 +575,36 @@ template<> struct VertexImpl<fields::Hp, typename fields::conj<fields::VWp>::typ
    static InverseMetricVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
 };
 
+template<> struct VertexImpl<fields::VP, fields::Cha, typename fields::bar<fields::Cha>::type>
+{
+   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<fields::VP, fields::Fd, typename fields::bar<fields::Fd>::type>
+{
+   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<fields::VP, fields::Fe, typename fields::bar<fields::Fe>::type>
+{
+   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<fields::VP, fields::Fu, typename fields::bar<fields::Fu>::type>
+{
+   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<fields::VP, fields::Hp, typename fields::conj<fields::Hp>::type>
+{
+   static MomentumDifferenceVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<fields::VP, fields::VWp, typename fields::conj<fields::VWp>::type>
+{
+   static TripleVectorVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+};
+
 template<> struct VertexImpl<fields::VWp, fields::Cha, fields::Chi>
 {
    static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
@@ -546,6 +621,21 @@ template<> struct VertexImpl<fields::VZ, fields::Cha, typename fields::bar<field
 };
 
 template<> struct VertexImpl<fields::VZ, fields::Chi, fields::Chi>
+{
+   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<fields::VZ, fields::Fd, typename fields::bar<fields::Fd>::type>
+{
+   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<fields::VZ, fields::Fe, typename fields::bar<fields::Fe>::type>
+{
+   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<fields::VZ, fields::Fu, typename fields::bar<fields::Fu>::type>
 {
    static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
@@ -798,6 +888,11 @@ template<> struct VertexImpl<typename fields::bar<fields::gWp>::type, fields::gZ
 template<> struct VertexImpl<typename fields::bar<fields::gWp>::type, fields::gZ, fields::VWp>
 {
    static MomentumVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+};
+
+template<> struct VertexImpl<typename fields::bar<fields::gZ>::type, fields::gP, fields::hh>
+{
+   static ScalarVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
 };
 
 template<> struct VertexImpl<typename fields::bar<fields::gZ>::type, fields::gWpC, fields::Hp>

@@ -21,7 +21,7 @@
  * @file CNMSSM_semi_analytic_solutions.hpp
  * @brief contains class for computing the semi-analytic solutions
  *
- * This file was generated with FlexibleSUSY 2.6.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.6.2 and SARAH 4.14.5 .
  */
 
 #ifndef CNMSSM_SEMI_ANALYTIC_SOLUTIONS_H

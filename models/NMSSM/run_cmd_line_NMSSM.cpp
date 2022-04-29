@@ -118,6 +118,7 @@ int run_solver(int loop_library, const NMSSM_input_parameters& input)
    settings.set(Spectrum_generator_settings::precision, 1.0e-4);
    settings.set(Spectrum_generator_settings::loop_library, loop_library);
    settings.set(Spectrum_generator_settings::calculate_bsm_masses, 1.0);
+   settings.set(Spectrum_generator_settings::calculate_sm_masses, 1.0);
 
    NMSSM_spectrum_generator<solver_type> spectrum_generator;
    spectrum_generator.set_settings(settings);
@@ -135,8 +136,12 @@ int run_solver(int loop_library, const NMSSM_input_parameters& input)
       std::get<0>(models), qedqcd, physical_input, scales.pole_mass_scale);
 
    FlexibleDecay_settings flexibledecay_settings;
-   NMSSM_decays decays;if (settings.get(Spectrum_generator_settings::calculate_sm_masses)) {
-      decays = NMSSM_decays(std::get<0>(models), qedqcd, physical_input, flexibledecay_settings);
+   NMSSM_decays decays;decays = NMSSM_decays(std::get<0>(models), qedqcd, physical_input, flexibledecay_settings);
+   const bool loop_library_for_decays =
+      (Loop_library::get_type() == Loop_library::Library::Collier) ||
+      (Loop_library::get_type() == Loop_library::Library::Looptools);
+   if (spectrum_generator.get_exit_code() == 0 && loop_library_for_decays) {
+      decays.calculate_decays();
    }
 
    // SLHA output

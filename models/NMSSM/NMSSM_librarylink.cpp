@@ -829,8 +829,17 @@ void Model_data::put_observables(MLINK link) const
    MLPutRuleTo(link, OBSERVABLE(edm_Fe_0), 1, {"FlexibleSUSYObservable`EDM", "Fe"});
    MLPutRuleTo(link, OBSERVABLE(edm_Fe_1), 2, {"FlexibleSUSYObservable`EDM", "Fe"});
    MLPutRuleTo(link, OBSERVABLE(edm_Fe_2), 3, {"FlexibleSUSYObservable`EDM", "Fe"});
-   MLPutRuleTo(link, OBSERVABLE(Fe_to_Fe_VP), "Fe[1] -> {Fe[0], VP}", {"FlexibleSUSYObservable`BrLToLGamma"});
 
+   MLPutFunction(link, "Rule", 2);
+   MLPutFunction(link, "FlexibleSUSYObservable`BrLToLGamma", 1);
+   MLPutFunction(link, "Rule", 2);
+   MLPutFunction(link, "Fe", 1);
+   MLPutInteger(link, 2);
+   MLPutFunction(link, "List", 2);
+   MLPutFunction(link, "Fe", 1);
+   MLPutInteger(link, 1);
+   MLPutSymbol(link, "VP");
+   MLPutReal(link, OBSERVABLE(Fe1_to_Fe0_VP));
 
    MLEndPacket(link);
 }
