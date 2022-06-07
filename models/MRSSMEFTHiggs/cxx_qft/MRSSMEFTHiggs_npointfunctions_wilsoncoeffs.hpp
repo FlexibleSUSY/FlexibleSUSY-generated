@@ -20,7 +20,7 @@
 /**
  * @file cxx_qft/MRSSMEFTHiggs_npointfunctions_wilsoncoeffs.hpp
  *
- * This file was generated with FlexibleSUSY 2.6.2 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
  */
 
 #ifndef MRSSMEFTHiggs_CXXQFT_NPOINTFUNCTIONS_H

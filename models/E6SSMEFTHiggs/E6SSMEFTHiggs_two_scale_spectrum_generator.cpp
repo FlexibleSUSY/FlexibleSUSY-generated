@@ -233,6 +233,7 @@ void E6SSMEFTHiggs_spectrum_generator<Two_scale>::calculate_spectrum(double Mt, 
 
    eft.set_pole_mass_loop_order(eft_pole_loops);
    eft.set_ewsb_loop_order(eft_ewsb_loops);
+   eft.get_physical().MVWp = MW;
 
    const int index = settings.get(Spectrum_generator_settings::eft_higgs_index);
 

@@ -78,6 +78,16 @@ void CNMSSM_susy_scale_constraint<Semi_analytic>::apply()
    // apply user-defined susy scale constraints
    
 
+   // calculate SM-like Higgs pole mass
+   // for usage in MW calculation at low-energy scale
+   {
+      auto tmp = *MODEL;
+      tmp.do_force_output(true); // enforce calculation of pole masses
+      tmp.solve_ewsb();
+      tmp.calculate_Mhh_pole();
+      MODEL->get_physical().Mhh = tmp.get_physical().Mhh;
+   }
+
 
 
 }

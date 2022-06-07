@@ -20,7 +20,7 @@
 /**
  * @file E6SSMEFTHiggs_a_muon.hpp
  *
- * This file was generated with FlexibleSUSY 2.6.2 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
  */
 
 #ifndef E6SSMEFTHiggs_A_MUON_H

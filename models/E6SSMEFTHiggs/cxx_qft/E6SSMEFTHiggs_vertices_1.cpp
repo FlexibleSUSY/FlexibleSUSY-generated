@@ -20,7 +20,7 @@
 /**
  * @file cxx_qft/E6SSMEFTHiggs_vertices.cpp
  *
- * This file was generated with FlexibleSUSY 2.6.2 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
  */
 
 #include "E6SSMEFTHiggs_context_base.hpp"

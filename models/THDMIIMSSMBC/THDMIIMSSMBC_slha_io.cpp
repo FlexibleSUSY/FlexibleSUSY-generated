@@ -508,9 +508,11 @@ void THDMIIMSSMBC_slha_io::set_dcinfo(
  */
 std::vector<Decay> sort_decays_list(const Decays_list& decays_list) {
    std::vector<Decay> decays_list_as_vector;
+   decays_list_as_vector.reserve(decays_list.size());
    for (const auto& el : decays_list) {
       decays_list_as_vector.push_back(el.second);
    }
+
    std::sort(
       decays_list_as_vector.begin(),
       decays_list_as_vector.end(),
@@ -518,6 +520,7 @@ std::vector<Decay> sort_decays_list(const Decays_list& decays_list) {
          return d1.get_width() > d2.get_width();
       }
    );
+
    return decays_list_as_vector;
 }
 

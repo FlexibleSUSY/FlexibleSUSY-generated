@@ -24,7 +24,7 @@
  * Contains the definition of THDMII decays class methods,
  * which calculate the decay rates for particles in the model.
  *
- * This file was generated with FlexibleSUSY 2.6.2 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
  */
 
 #include <cmath>
@@ -42,9 +42,6 @@
 #include "decays/one_loop_decay_diagrams.hpp"
 #include "concatenate.hpp"
 #include "decays/decay_functions.hpp"
-#include "dilog.hpp"
-#include "trilog.hpp"
-#include "Li4.hpp"
 #include "config.h"
 #include "thread_pool.hpp"
 #include "wrappers.hpp"

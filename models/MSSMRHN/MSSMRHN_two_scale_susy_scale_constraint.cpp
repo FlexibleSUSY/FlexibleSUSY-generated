@@ -73,6 +73,7 @@ void MSSMRHN_susy_scale_constraint<Two_scale>::apply()
    
    MODEL->solve_ewsb();
 
+
 }
 
 double MSSMRHN_susy_scale_constraint<Two_scale>::get_scale() const

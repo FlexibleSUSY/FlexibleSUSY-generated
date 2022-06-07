@@ -20,7 +20,7 @@
 /**
  * @file NUTSMSSM_edm.cpp
  *
- * This file was generated with FlexibleSUSY 2.6.2 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
  */
 
 #include "NUTSMSSM_edm.hpp"

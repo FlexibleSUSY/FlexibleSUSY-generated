@@ -19,7 +19,7 @@
 /**
  * @file MRSSM2_FFV_form_factors.hpp
  *
- * This file was generated with FlexibleSUSY 2.6.2 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
  */
 
 #ifndef MRSSM2_FFVFormFactors_H

@@ -22,7 +22,7 @@
  *
  * @brief implementation of EWSB solver for two-scale iteration
  *
- * This file was generated with FlexibleSUSY 2.6.2 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
  */
 
 #include "MSSMatMGUT_two_scale_ewsb_solver.hpp"
