@@ -21,6 +21,7 @@
 #define MSSMNoFV_OBSERVABLES_H
 
 #include "observable_problems.hpp"
+#include "spectrum_generator_settings.hpp"
 #include <string>
 #include <vector>
 #include <Eigen/Core>
@@ -34,8 +35,9 @@ namespace flexiblesusy {
 class MSSMNoFV_mass_eigenstates;
 class Physical_input;
 
+
 struct MSSMNoFV_observables {
-   static const int NUMBER_OF_OBSERVABLES = 3;
+   static constexpr int NUMBER_OF_OBSERVABLES = 4;
 
    MSSMNoFV_observables();
    Eigen::ArrayXd get() const; ///< returns vector of all observables
@@ -44,19 +46,27 @@ struct MSSMNoFV_observables {
    void set(const Eigen::ArrayXd&); ///< sets all observables from given vector
 
    Observable_problems problems;
-   double a_muon; ///< a_muon = (g-2)/2 of the muon (calculated with FlexibleSUSY)
+   double amm_Fe; ///< Delta(g-2)/2 of Fe (calculated with FlexibleSUSY)
+   double amm_Fm; ///< Delta(g-2)/2 of Fm (calculated with FlexibleSUSY)
    double a_muon_gm2calc; ///< a_muon = (g-2)/2 of the muon (calculated with GM2Calc)
    double a_muon_gm2calc_uncertainty; ///< uncertainty of (g-2)/2 of the muon (calculated with GM2Calc)
 
 };
 
 MSSMNoFV_observables calculate_observables(
-   const MSSMNoFV_mass_eigenstates&, const softsusy::QedQcd&,
-   const Physical_input&);
+   const MSSMNoFV_mass_eigenstates&,
+   const softsusy::QedQcd&,
+   
+   const Physical_input&,
+   const Spectrum_generator_settings&);
 
 MSSMNoFV_observables calculate_observables(
-   const MSSMNoFV_mass_eigenstates&, const softsusy::QedQcd&,
-   const Physical_input&, double scale);
+   const MSSMNoFV_mass_eigenstates&,
+   const softsusy::QedQcd&,
+   
+   const Physical_input&,
+   const Spectrum_generator_settings&,
+   double scale);
 
 } // namespace flexiblesusy
 

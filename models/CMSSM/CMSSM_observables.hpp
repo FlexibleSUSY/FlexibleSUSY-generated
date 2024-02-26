@@ -21,6 +21,7 @@
 #define CMSSM_OBSERVABLES_H
 
 #include "observable_problems.hpp"
+#include "spectrum_generator_settings.hpp"
 #include <string>
 #include <vector>
 #include <Eigen/Core>
@@ -34,8 +35,9 @@ namespace flexiblesusy {
 class CMSSM_mass_eigenstates;
 class Physical_input;
 
+
 struct CMSSM_observables {
-   static const int NUMBER_OF_OBSERVABLES = 1;
+   static constexpr int NUMBER_OF_OBSERVABLES = 3;
 
    CMSSM_observables();
    Eigen::ArrayXd get() const; ///< returns vector of all observables
@@ -44,17 +46,26 @@ struct CMSSM_observables {
    void set(const Eigen::ArrayXd&); ///< sets all observables from given vector
 
    Observable_problems problems;
-   double a_muon; ///< a_muon = (g-2)/2 of the muon (calculated with FlexibleSUSY)
+   double amm_Fe_0; ///< Delta(g-2)/2 of Fe(1) (calculated with FlexibleSUSY)
+   double amm_Fe_1; ///< Delta(g-2)/2 of Fe(2) (calculated with FlexibleSUSY)
+   double amm_Fe_2; ///< Delta(g-2)/2 of Fe(3) (calculated with FlexibleSUSY)
 
 };
 
 CMSSM_observables calculate_observables(
-   const CMSSM_mass_eigenstates&, const softsusy::QedQcd&,
-   const Physical_input&);
+   const CMSSM_mass_eigenstates&,
+   const softsusy::QedQcd&,
+   
+   const Physical_input&,
+   const Spectrum_generator_settings&);
 
 CMSSM_observables calculate_observables(
-   const CMSSM_mass_eigenstates&, const softsusy::QedQcd&,
-   const Physical_input&, double scale);
+   const CMSSM_mass_eigenstates&,
+   const softsusy::QedQcd&,
+   
+   const Physical_input&,
+   const Spectrum_generator_settings&,
+   double scale);
 
 } // namespace flexiblesusy
 

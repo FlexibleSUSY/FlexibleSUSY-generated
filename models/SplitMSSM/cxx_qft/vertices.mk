@@ -18,5 +18,4 @@
 
 
 LIBSplitMSSM_CXXQFT_VERTICES_SRC := \
-	models/SplitMSSM/cxx_qft/SplitMSSM_vertices_1.cpp \
-	models/SplitMSSM/cxx_qft/SplitMSSM_vertices_2.cpp
+	models/SplitMSSM/cxx_qft/SplitMSSM_vertices_1.cpp

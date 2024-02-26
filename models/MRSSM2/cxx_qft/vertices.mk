@@ -19,5 +19,4 @@
 
 LIBMRSSM2_CXXQFT_VERTICES_SRC := \
 	models/MRSSM2/cxx_qft/MRSSM2_vertices_1.cpp \
-	models/MRSSM2/cxx_qft/MRSSM2_vertices_2.cpp \
-	models/MRSSM2/cxx_qft/MRSSM2_vertices_3.cpp
+	models/MRSSM2/cxx_qft/MRSSM2_vertices_2.cpp

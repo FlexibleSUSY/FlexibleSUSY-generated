@@ -54,22 +54,23 @@ MSSMNoFV_TARBALL := \
 		$(MODNAME).tar.gz
 
 LIBMSSMNoFV_SRC := \
-		$(DIR)/MSSMNoFV_a_muon.cpp \
+		$(DIR)/MSSMNoFV_amm.cpp \
 		$(DIR)/MSSMNoFV_edm.cpp \
 		$(DIR)/MSSMNoFV_FFV_form_factors.cpp \
-		$(DIR)/MSSMNoFV_f_to_f_conversion.cpp \
-		$(DIR)/MSSMNoFV_l_to_lgamma.cpp \
+		$(wildcard $(DIR)/observables/MSSMNoFV*.cpp) \
 		$(DIR)/MSSMNoFV_b_to_s_gamma.cpp \
 		$(DIR)/MSSMNoFV_info.cpp \
 		$(DIR)/MSSMNoFV_input_parameters.cpp \
 		$(DIR)/MSSMNoFV_mass_eigenstates.cpp \
 		$(DIR)/MSSMNoFV_mass_eigenstates_decoupling_scheme.cpp \
 		$(DIR)/MSSMNoFV_model_slha.cpp \
+		$(DIR)/MSSMNoFV_lepton_amm_wrapper.cpp \
 		$(DIR)/MSSMNoFV_observables.cpp \
 		$(DIR)/MSSMNoFV_physical.cpp \
 		$(DIR)/MSSMNoFV_slha_io.cpp \
 		$(DIR)/MSSMNoFV_soft_parameters.cpp \
 		$(DIR)/MSSMNoFV_susy_parameters.cpp \
+		$(DIR)/MSSMNoFV_unitarity.cpp \
 		$(DIR)/MSSMNoFV_utilities.cpp \
 		$(DIR)/MSSMNoFV_weinberg_angle.cpp
 
@@ -89,12 +90,11 @@ LLMSSMNoFV_MMA  := \
 		$(DIR)/run_MSSMNoFV.m
 
 LIBMSSMNoFV_HDR := \
-		$(DIR)/MSSMNoFV_a_muon.hpp \
+		$(DIR)/MSSMNoFV_amm.hpp \
 		$(DIR)/MSSMNoFV_convergence_tester.hpp \
 		$(DIR)/MSSMNoFV_edm.hpp \
 		$(DIR)/MSSMNoFV_FFV_form_factors.hpp \
-		$(DIR)/MSSMNoFV_f_to_f_conversion.hpp \
-		$(DIR)/MSSMNoFV_l_to_lgamma.hpp \
+		$(wildcard $(DIR)/observables/MSSMNoFV*.hpp) \
 		$(DIR)/MSSMNoFV_b_to_s_gamma.hpp \
 		$(DIR)/MSSMNoFV_ewsb_solver.hpp \
 		$(DIR)/MSSMNoFV_ewsb_solver_interface.hpp \
@@ -108,6 +108,7 @@ LIBMSSMNoFV_HDR := \
 		$(DIR)/MSSMNoFV_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/MSSMNoFV_model.hpp \
 		$(DIR)/MSSMNoFV_model_slha.hpp \
+		$(DIR)/MSSMNoFV_lepton_amm_wrapper.hpp \
 		$(DIR)/MSSMNoFV_observables.hpp \
 		$(DIR)/MSSMNoFV_physical.hpp \
 		$(DIR)/MSSMNoFV_slha_io.hpp \
@@ -116,12 +117,14 @@ LIBMSSMNoFV_HDR := \
 		$(DIR)/MSSMNoFV_soft_parameters.hpp \
 		$(DIR)/MSSMNoFV_susy_parameters.hpp \
 		$(DIR)/MSSMNoFV_susy_scale_constraint.hpp \
+		$(DIR)/MSSMNoFV_unitarity.hpp \
 		$(DIR)/MSSMNoFV_utilities.hpp \
 		$(DIR)/MSSMNoFV_weinberg_angle.hpp
 
 LIBMSSMNoFV_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/MSSMNoFV_qft.hpp \
 		$(DIR)/cxx_qft/MSSMNoFV_fields.hpp \
+		$(DIR)/cxx_qft/MSSMNoFV_particle_aliases.hpp \
 		$(DIR)/cxx_qft/MSSMNoFV_vertices.hpp \
 		$(DIR)/cxx_qft/MSSMNoFV_context_base.hpp \
 		$(DIR)/cxx_qft/MSSMNoFV_npointfunctions_wilsoncoeffs.hpp
@@ -317,7 +320,7 @@ $(METACODE_STAMP_MSSMNoFV):
 endif
 
 $(LIBMSSMNoFV_DEP) $(EXEMSSMNoFV_DEP) $(LLMSSMNoFV_DEP) $(LIBMSSMNoFV_OBJ) $(EXEMSSMNoFV_OBJ) $(LLMSSMNoFV_OBJ) $(LLMSSMNoFV_LIB): \
-	CPPFLAGS += $(MODMSSMNoFV_SUBMOD_INC) $(MODMSSMNoFV_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODMSSMNoFV_SUBMOD_INC) $(MODMSSMNoFV_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIGGSTOOLSFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBMSSMNoFV_DEP) $(EXEMSSMNoFV_DEP) $(LLMSSMNoFV_DEP) $(LIBMSSMNoFV_OBJ) $(EXEMSSMNoFV_OBJ) $(LLMSSMNoFV_OBJ) $(LLMSSMNoFV_LIB): \
@@ -333,11 +336,11 @@ $(LIBMSSMNoFV): $(LIBMSSMNoFV_OBJ)
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBMSSMNoFV) $(MODMSSMNoFV_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
 $(LLMSSMNoFV_LIB): $(LLMSSMNoFV_OBJ) $(LIBMSSMNoFV) $(MODMSSMNoFV_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
 
 ALLDEP += $(LIBMSSMNoFV_DEP) $(EXEMSSMNoFV_DEP)
 ALLSRC += $(LIBMSSMNoFV_SRC) $(EXEMSSMNoFV_SRC)

@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.7.1"];
+Print["FlexibleSUSY 2.8.0"];
 Print["lowNMSSM"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -20,7 +20,7 @@ FSlowNMSSMSetLib = LibraryFunctionLoad[liblowNMSSM, "FSlowNMSSMSet", {Integer, {
 
 FSlowNMSSMCalculateSpectrum = LibraryFunctionLoad[liblowNMSSM, "FSlowNMSSMCalculateSpectrum", LinkObject, LinkObject];
 FSlowNMSSMCalculateObservables = LibraryFunctionLoad[liblowNMSSM, "FSlowNMSSMCalculateObservables", LinkObject, LinkObject];
-FSlowNMSSMCalculateDecays = LibraryFunctionLoad[liblowNMSSM, "FSlowNMSSMCalculateDecays", LinkObject, LinkObject];
+
 
 FSlowNMSSMCalculateSpectrum::error = "`1`";
 FSlowNMSSMCalculateSpectrum::warning = "`1`";
@@ -28,8 +28,6 @@ FSlowNMSSMCalculateSpectrum::warning = "`1`";
 FSlowNMSSMCalculateObservables::error = "`1`";
 FSlowNMSSMCalculateObservables::warning = "`1`";
 
-FSlowNMSSMCalculateDecays::error = "`1`";
-FSlowNMSSMCalculateDecays::warning = "`1`";
 
 FSlowNMSSM::info = "`1`";
 FSlowNMSSM::nonum = "Error: `1` is not a numeric input value!";
@@ -70,6 +68,7 @@ fsDefaultSettings = {
       higgs3loopCorrectionAtAtAt -> 1,   (* FlexibleSUSY[29] *)
       higgs4loopCorrectionAtAsAsAs -> 1, (* FlexibleSUSY[30] *)
       loopLibrary -> 0,                  (* FlexibleSUSY[31] *)
+      calculateAMM -> 2.0,               (* FlexibleSUSY[32] *)
       parameterOutputScale -> 0          (* MODSEL[12] *)
 };
 
@@ -103,13 +102,6 @@ fsDefaultSMParameters = {
     PMNSAlpha2 -> 0,
     alphaEm0 -> 1/137.035999074,
     Mh -> 125.09
-};
-
-fdDefaultSettings = {
-   minBRtoPrint -> 1*^-5,
-   maxHigherOrderCorrections -> 4,
-   alphaThomson -> 1,
-   offShellVV -> 2
 };
 
 fslowNMSSMDefaultInputParameters = {
@@ -147,10 +139,10 @@ Options[FSlowNMSSMOpenHandle] = {
     Sequence @@ fsDefaultSettings,
     Sequence @@ fsDefaultSMParameters,
     Sequence @@ fslowNMSSMDefaultInputParameters
-   , Sequence @@ fdDefaultSettings
+
 };
 
-FSlowNMSSMOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters | fdSettings) -> s_List, r___] :=
+FSlowNMSSMOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters ) -> s_List, r___] :=
     FSlowNMSSMOpenHandle[a, Sequence @@ s, r];
 
 FSlowNMSSMOpenHandle[OptionsPattern[]] :=
@@ -188,6 +180,7 @@ FSlowNMSSMOpenHandle[OptionsPattern[]] :=
             OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[higgs4loopCorrectionAtAsAsAs],
             OptionValue[loopLibrary],
+            OptionValue[calculateAMM],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)
@@ -251,11 +244,7 @@ FSlowNMSSMOpenHandle[OptionsPattern[]] :=
             OptionValue[ALambdaInput],
             OptionValue[AKappaInput],
             OptionValue[MuEffInput]
-            ,
-            OptionValue[minBRtoPrint],
-            OptionValue[maxHigherOrderCorrections],
-            OptionValue[alphaThomson],
-            OptionValue[offShellVV]
+
         }
 ];
 
@@ -300,6 +289,7 @@ FSlowNMSSMSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[higgs4loopCorrectionAtAsAsAs],
             OptionValue[loopLibrary],
+            OptionValue[calculateAMM],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)
@@ -363,11 +353,7 @@ FSlowNMSSMSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[ALambdaInput],
             OptionValue[AKappaInput],
             OptionValue[MuEffInput]
-            ,
-            OptionValue[minBRtoPrint],
-            OptionValue[maxHigherOrderCorrections],
-            OptionValue[alphaThomson],
-            OptionValue[offShellVV]
+
         }] /. HoldPattern[OptionValue[param_]] :> param /.
         { p } /.
         FSlowNMSSMGetSettings[handle] /.

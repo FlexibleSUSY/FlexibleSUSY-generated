@@ -37,7 +37,6 @@ public:
    MSSMNoFVatMGUT_high_scale_constraint() = default;
    MSSMNoFVatMGUT_high_scale_constraint(MSSMNoFVatMGUT<Two_scale>*);
    virtual ~MSSMNoFVatMGUT_high_scale_constraint() = default;
-   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
    virtual void apply() override;
    virtual double get_scale() const override;

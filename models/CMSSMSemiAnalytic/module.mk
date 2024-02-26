@@ -54,22 +54,23 @@ CMSSMSemiAnalytic_TARBALL := \
 		$(MODNAME).tar.gz
 
 LIBCMSSMSemiAnalytic_SRC := \
-		$(DIR)/CMSSMSemiAnalytic_a_muon.cpp \
+		$(DIR)/CMSSMSemiAnalytic_amm.cpp \
 		$(DIR)/CMSSMSemiAnalytic_edm.cpp \
 		$(DIR)/CMSSMSemiAnalytic_FFV_form_factors.cpp \
-		$(DIR)/CMSSMSemiAnalytic_f_to_f_conversion.cpp \
-		$(DIR)/CMSSMSemiAnalytic_l_to_lgamma.cpp \
+		$(wildcard $(DIR)/observables/CMSSMSemiAnalytic*.cpp) \
 		$(DIR)/CMSSMSemiAnalytic_b_to_s_gamma.cpp \
 		$(DIR)/CMSSMSemiAnalytic_info.cpp \
 		$(DIR)/CMSSMSemiAnalytic_input_parameters.cpp \
 		$(DIR)/CMSSMSemiAnalytic_mass_eigenstates.cpp \
 		$(DIR)/CMSSMSemiAnalytic_mass_eigenstates_decoupling_scheme.cpp \
 		$(DIR)/CMSSMSemiAnalytic_model_slha.cpp \
+		$(DIR)/CMSSMSemiAnalytic_lepton_amm_wrapper.cpp \
 		$(DIR)/CMSSMSemiAnalytic_observables.cpp \
 		$(DIR)/CMSSMSemiAnalytic_physical.cpp \
 		$(DIR)/CMSSMSemiAnalytic_slha_io.cpp \
 		$(DIR)/CMSSMSemiAnalytic_soft_parameters.cpp \
 		$(DIR)/CMSSMSemiAnalytic_susy_parameters.cpp \
+		$(DIR)/CMSSMSemiAnalytic_unitarity.cpp \
 		$(DIR)/CMSSMSemiAnalytic_utilities.cpp \
 		$(DIR)/CMSSMSemiAnalytic_weinberg_angle.cpp
 
@@ -89,12 +90,11 @@ LLCMSSMSemiAnalytic_MMA  := \
 		$(DIR)/run_CMSSMSemiAnalytic.m
 
 LIBCMSSMSemiAnalytic_HDR := \
-		$(DIR)/CMSSMSemiAnalytic_a_muon.hpp \
+		$(DIR)/CMSSMSemiAnalytic_amm.hpp \
 		$(DIR)/CMSSMSemiAnalytic_convergence_tester.hpp \
 		$(DIR)/CMSSMSemiAnalytic_edm.hpp \
 		$(DIR)/CMSSMSemiAnalytic_FFV_form_factors.hpp \
-		$(DIR)/CMSSMSemiAnalytic_f_to_f_conversion.hpp \
-		$(DIR)/CMSSMSemiAnalytic_l_to_lgamma.hpp \
+		$(wildcard $(DIR)/observables/CMSSMSemiAnalytic*.hpp) \
 		$(DIR)/CMSSMSemiAnalytic_b_to_s_gamma.hpp \
 		$(DIR)/CMSSMSemiAnalytic_ewsb_solver.hpp \
 		$(DIR)/CMSSMSemiAnalytic_ewsb_solver_interface.hpp \
@@ -108,6 +108,7 @@ LIBCMSSMSemiAnalytic_HDR := \
 		$(DIR)/CMSSMSemiAnalytic_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/CMSSMSemiAnalytic_model.hpp \
 		$(DIR)/CMSSMSemiAnalytic_model_slha.hpp \
+		$(DIR)/CMSSMSemiAnalytic_lepton_amm_wrapper.hpp \
 		$(DIR)/CMSSMSemiAnalytic_observables.hpp \
 		$(DIR)/CMSSMSemiAnalytic_physical.hpp \
 		$(DIR)/CMSSMSemiAnalytic_slha_io.hpp \
@@ -116,12 +117,14 @@ LIBCMSSMSemiAnalytic_HDR := \
 		$(DIR)/CMSSMSemiAnalytic_soft_parameters.hpp \
 		$(DIR)/CMSSMSemiAnalytic_susy_parameters.hpp \
 		$(DIR)/CMSSMSemiAnalytic_susy_scale_constraint.hpp \
+		$(DIR)/CMSSMSemiAnalytic_unitarity.hpp \
 		$(DIR)/CMSSMSemiAnalytic_utilities.hpp \
 		$(DIR)/CMSSMSemiAnalytic_weinberg_angle.hpp
 
 LIBCMSSMSemiAnalytic_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/CMSSMSemiAnalytic_qft.hpp \
 		$(DIR)/cxx_qft/CMSSMSemiAnalytic_fields.hpp \
+		$(DIR)/cxx_qft/CMSSMSemiAnalytic_particle_aliases.hpp \
 		$(DIR)/cxx_qft/CMSSMSemiAnalytic_vertices.hpp \
 		$(DIR)/cxx_qft/CMSSMSemiAnalytic_context_base.hpp \
 		$(DIR)/cxx_qft/CMSSMSemiAnalytic_npointfunctions_wilsoncoeffs.hpp
@@ -317,7 +320,7 @@ $(METACODE_STAMP_CMSSMSemiAnalytic):
 endif
 
 $(LIBCMSSMSemiAnalytic_DEP) $(EXECMSSMSemiAnalytic_DEP) $(LLCMSSMSemiAnalytic_DEP) $(LIBCMSSMSemiAnalytic_OBJ) $(EXECMSSMSemiAnalytic_OBJ) $(LLCMSSMSemiAnalytic_OBJ) $(LLCMSSMSemiAnalytic_LIB): \
-	CPPFLAGS += $(MODCMSSMSemiAnalytic_SUBMOD_INC) $(MODCMSSMSemiAnalytic_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODCMSSMSemiAnalytic_SUBMOD_INC) $(MODCMSSMSemiAnalytic_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIGGSTOOLSFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBCMSSMSemiAnalytic_DEP) $(EXECMSSMSemiAnalytic_DEP) $(LLCMSSMSemiAnalytic_DEP) $(LIBCMSSMSemiAnalytic_OBJ) $(EXECMSSMSemiAnalytic_OBJ) $(LLCMSSMSemiAnalytic_OBJ) $(LLCMSSMSemiAnalytic_LIB): \
@@ -333,11 +336,11 @@ $(LIBCMSSMSemiAnalytic): $(LIBCMSSMSemiAnalytic_OBJ)
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBCMSSMSemiAnalytic) $(MODCMSSMSemiAnalytic_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
 $(LLCMSSMSemiAnalytic_LIB): $(LLCMSSMSemiAnalytic_OBJ) $(LIBCMSSMSemiAnalytic) $(MODCMSSMSemiAnalytic_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
 
 ALLDEP += $(LIBCMSSMSemiAnalytic_DEP) $(EXECMSSMSemiAnalytic_DEP)
 ALLSRC += $(LIBCMSSMSemiAnalytic_SRC) $(EXECMSSMSemiAnalytic_SRC)

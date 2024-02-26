@@ -16,22 +16,28 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-
 /**
  * @file THDMII_edm.hpp
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #ifndef THDMII_EDM_H
 #define THDMII_EDM_H
 
+#include "THDMII_mass_eigenstates.hpp"
+#include "lowe.h"
+
 namespace flexiblesusy {
+
 class THDMII_mass_eigenstates;
 
 namespace THDMII_edm {
-double calculate_edm_Fe( int generationIndex, const THDMII_mass_eigenstates& model );
-}
+
+template <typename Lepton>
+double calculate_edm(const THDMII_mass_eigenstates&, const softsusy::QedQcd&, int idx);
+
+} // namespace THDMII_edm
 } // namespace flexiblesusy
 
 #endif

@@ -21,6 +21,7 @@
 #define HGTHDMIIMSSMBC_OBSERVABLES_H
 
 #include "observable_problems.hpp"
+#include "spectrum_generator_settings.hpp"
 #include <string>
 #include <vector>
 #include <Eigen/Core>
@@ -34,8 +35,9 @@ namespace flexiblesusy {
 class HGTHDMIIMSSMBC_mass_eigenstates;
 class Physical_input;
 
+
 struct HGTHDMIIMSSMBC_observables {
-   static const int NUMBER_OF_OBSERVABLES = 1;
+   static constexpr int NUMBER_OF_OBSERVABLES = 0;
 
    HGTHDMIIMSSMBC_observables();
    Eigen::ArrayXd get() const; ///< returns vector of all observables
@@ -44,17 +46,23 @@ struct HGTHDMIIMSSMBC_observables {
    void set(const Eigen::ArrayXd&); ///< sets all observables from given vector
 
    Observable_problems problems;
-   double a_muon; ///< a_muon = (g-2)/2 of the muon (calculated with FlexibleSUSY)
 
 };
 
 HGTHDMIIMSSMBC_observables calculate_observables(
-   const HGTHDMIIMSSMBC_mass_eigenstates&, const softsusy::QedQcd&,
-   const Physical_input&);
+   const HGTHDMIIMSSMBC_mass_eigenstates&,
+   const softsusy::QedQcd&,
+   
+   const Physical_input&,
+   const Spectrum_generator_settings&);
 
 HGTHDMIIMSSMBC_observables calculate_observables(
-   const HGTHDMIIMSSMBC_mass_eigenstates&, const softsusy::QedQcd&,
-   const Physical_input&, double scale);
+   const HGTHDMIIMSSMBC_mass_eigenstates&,
+   const softsusy::QedQcd&,
+   
+   const Physical_input&,
+   const Spectrum_generator_settings&,
+   double scale);
 
 } // namespace flexiblesusy
 

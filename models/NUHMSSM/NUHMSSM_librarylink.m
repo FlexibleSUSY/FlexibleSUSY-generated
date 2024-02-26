@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.7.1"];
+Print["FlexibleSUSY 2.8.0"];
 Print["NUHMSSM"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -21,11 +21,13 @@ FSNUHMSSMSetLib = LibraryFunctionLoad[libNUHMSSM, "FSNUHMSSMSet", {Integer, {Rea
 FSNUHMSSMCalculateSpectrum = LibraryFunctionLoad[libNUHMSSM, "FSNUHMSSMCalculateSpectrum", LinkObject, LinkObject];
 FSNUHMSSMCalculateObservables = LibraryFunctionLoad[libNUHMSSM, "FSNUHMSSMCalculateObservables", LinkObject, LinkObject];
 
+
 FSNUHMSSMCalculateSpectrum::error = "`1`";
 FSNUHMSSMCalculateSpectrum::warning = "`1`";
 
 FSNUHMSSMCalculateObservables::error = "`1`";
 FSNUHMSSMCalculateObservables::warning = "`1`";
+
 
 FSNUHMSSM::info = "`1`";
 FSNUHMSSM::nonum = "Error: `1` is not a numeric input value!";
@@ -66,6 +68,7 @@ fsDefaultSettings = {
       higgs3loopCorrectionAtAtAt -> 1,   (* FlexibleSUSY[29] *)
       higgs4loopCorrectionAtAsAsAs -> 1, (* FlexibleSUSY[30] *)
       loopLibrary -> 0,                  (* FlexibleSUSY[31] *)
+      calculateAMM -> 2.0,               (* FlexibleSUSY[32] *)
       parameterOutputScale -> 0          (* MODSEL[12] *)
 };
 
@@ -107,8 +110,8 @@ fsNUHMSSMDefaultInputParameters = {
    TanBeta -> 0,
    SignMu -> 0,
    Azero -> 0,
-   mHd2In -> 0,
-   mHu2In -> 0
+   MuInput -> 0,
+   BInput -> 0
 };
 
 Options[FSNUHMSSMOpenHandle] = {
@@ -156,6 +159,7 @@ FSNUHMSSMOpenHandle[OptionsPattern[]] :=
             OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[higgs4loopCorrectionAtAsAsAs],
             OptionValue[loopLibrary],
+            OptionValue[calculateAMM],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)
@@ -196,8 +200,8 @@ FSNUHMSSMOpenHandle[OptionsPattern[]] :=
             OptionValue[TanBeta],
             OptionValue[SignMu],
             OptionValue[Azero],
-            OptionValue[mHd2In],
-            OptionValue[mHu2In]
+            OptionValue[MuInput],
+            OptionValue[BInput]
 
         }
 ];
@@ -243,6 +247,7 @@ FSNUHMSSMSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[higgs4loopCorrectionAtAsAsAs],
             OptionValue[loopLibrary],
+            OptionValue[calculateAMM],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)
@@ -283,8 +288,8 @@ FSNUHMSSMSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[TanBeta],
             OptionValue[SignMu],
             OptionValue[Azero],
-            OptionValue[mHd2In],
-            OptionValue[mHu2In]
+            OptionValue[MuInput],
+            OptionValue[BInput]
 
         }] /. HoldPattern[OptionValue[param_]] :> param /.
         { p } /.

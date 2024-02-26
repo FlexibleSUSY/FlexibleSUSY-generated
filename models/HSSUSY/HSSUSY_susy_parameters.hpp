@@ -94,7 +94,7 @@ protected:
    HSSUSY_input_parameters input{};
 
 private:
-   static const int numberOfParameters = 31;
+   static constexpr int numberOfParameters = 31;
 
    struct Susy_traces {
       double traceYdAdjYd{};

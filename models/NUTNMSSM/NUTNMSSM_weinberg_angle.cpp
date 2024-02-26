@@ -1043,7 +1043,7 @@ double CLASSNAME::calculate_self_energy_VWm(double p) const
 double CLASSNAME::calculate_self_energy_VZ_top(double p, double mt) const
 {
    const double q  = model->get_scale();
-   const double Nc = 3.0;
+   static constexpr double Nc = 3.0;
    const auto gY = MODEL->get_g1() * NUTNMSSM_info::normalization_g1;
    const auto g2 = MODEL->get_g2() * NUTNMSSM_info::normalization_g2;
    const double gY2 = Sqr(gY);
@@ -1073,7 +1073,7 @@ double CLASSNAME::calculate_self_energy_VWm_top(double p, double mt) const
 {
    const double q  = model->get_scale();
    const double mb = MODEL->get_MFd(2);
-   const double Nc = 3.0;
+   static constexpr double Nc = 3.0;
    const auto g2 = MODEL->get_g2() * NUTNMSSM_info::normalization_g2;
 
    const double self_energy_w_top =

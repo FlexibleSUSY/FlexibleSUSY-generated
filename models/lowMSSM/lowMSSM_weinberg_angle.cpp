@@ -561,6 +561,94 @@ std::complex<double> CLASSNAME::CpChiChaconjVWmPR(int gI1, int gI2) const
    return result;
 }
 
+std::complex<double> CLASSNAME::CpbarChabarFvSePR(int i3, int i4, int i2) const
+{
+   const auto g2 = MODELPARAMETER(g2);
+   const auto Ye = MODELPARAMETER(Ye);
+   const auto ZE = MODELPARAMETER(ZE);
+   const auto UM = MODELPARAMETER(UM);
+
+   const std::complex<double> result = IF(i4 < 3,-(g2*Conj(ZE(i2,i4))*UM(i3,0)),0)
+      + SUM(j1,0,2,Conj(Ye(j1,i4))*Conj(ZE(i2,3 + j1)))*UM(i3,1);
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFeChiSePR(int i4, int i3, int i2) const
+{
+   const auto g1 = MODELPARAMETER(g1);
+   const auto g2 = MODELPARAMETER(g2);
+   const auto Ye = MODELPARAMETER(Ye);
+   const auto ZE = MODELPARAMETER(ZE);
+   const auto ZEL = MODELPARAMETER(ZEL);
+   const auto ZN = MODELPARAMETER(ZN);
+
+   const std::complex<double> result = 0.7071067811865475*SUM(j1,0,2,Conj(ZE(i2,j1
+      ))*ZEL(i4,j1))*(0.7745966692414834*g1*ZN(i3,0) + g2*ZN(i3,1)) - SUM(j2,0,2,
+      SUM(j1,0,2,Conj(Ye(j1,j2))*Conj(ZE(i2,3 + j1)))*ZEL(i4,j2))*ZN(i3,2);
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFeFehhPL(int i1, int i3, int gE2) const
+{
+   const auto Ye = MODELPARAMETER(Ye);
+   const auto ZEL = MODELPARAMETER(ZEL);
+   const auto ZER = MODELPARAMETER(ZER);
+   const auto ZH = MODELPARAMETER(ZH);
+
+   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,Conj(ZEL(i3,
+      j2))*SUM(j1,0,2,Conj(ZER(i1,j1))*Ye(j1,j2)))*ZH(gE2,0);
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFeFehhPR(int i1, int i3, int gE2) const
+{
+   const auto Ye = MODELPARAMETER(Ye);
+   const auto ZER = MODELPARAMETER(ZER);
+   const auto ZEL = MODELPARAMETER(ZEL);
+   const auto ZH = MODELPARAMETER(ZH);
+
+   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,SUM(j1,0,2,
+      Conj(Ye(j1,j2))*ZER(i3,j1))*ZEL(i1,j2))*ZH(gE2,0);
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFeFvHpmPL(int i3, int i4, int i5) const
+{
+   const auto Ye = MODELPARAMETER(Ye);
+   const auto ZER = MODELPARAMETER(ZER);
+   const auto ZP = MODELPARAMETER(ZP);
+
+   const std::complex<double> result = SUM(j1,0,2,Conj(ZER(i3,j1))*Ye(j1,i4))*ZP(
+      i5,0);
+
+   return result;
+}
+
+double CLASSNAME::CpbarFeFvHpmPR(int , int , int ) const
+{
+   
+   const double result = 0;
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFeChaSvPR(int i3, int i4, int i5) const
+{
+   const auto g2 = MODELPARAMETER(g2);
+   const auto ZV = MODELPARAMETER(ZV);
+   const auto ZEL = MODELPARAMETER(ZEL);
+   const auto UP = MODELPARAMETER(UP);
+
+   const std::complex<double> result = -(g2*SUM(j1,0,2,Conj(ZV(i5,j1))*ZEL(i3,j1))
+      *UP(i4,0));
+
+   return result;
+}
+
 double CLASSNAME::CpbarFvFeconjHpmPL(int , int , int ) const
 {
    
@@ -581,19 +669,6 @@ std::complex<double> CLASSNAME::CpbarFvFeconjHpmPR(int gO1, int gI2, int gI1) co
    return result;
 }
 
-std::complex<double> CLASSNAME::CpbarChabarFvSePR(int gI1, int gO1, int gI2) const
-{
-   const auto g2 = MODELPARAMETER(g2);
-   const auto Ye = MODELPARAMETER(Ye);
-   const auto ZE = MODELPARAMETER(ZE);
-   const auto UM = MODELPARAMETER(UM);
-
-   const std::complex<double> result = IF(gO1 < 3,-(g2*Conj(ZE(gI2,gO1))*UM(gI1,0)
-      ),0) + SUM(j1,0,2,Conj(Ye(j1,gO1))*Conj(ZE(gI2,3 + j1)))*UM(gI1,1);
-
-   return result;
-}
-
 std::complex<double> CLASSNAME::CpbarFvChiSvPR(int gO1, int gI2, int gI1) const
 {
    const auto g1 = MODELPARAMETER(g1);
@@ -604,65 +679,6 @@ std::complex<double> CLASSNAME::CpbarFvChiSvPR(int gO1, int gI2, int gI1) const
    const std::complex<double> result = IF(gO1 < 3,0.5477225575051661*g1*Conj(ZV(
       gI1,gO1))*ZN(gI2,0),0) + IF(gO1 < 3,-0.7071067811865475*g2*Conj(ZV(gI1,gO1))
       *ZN(gI2,1),0);
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFeFehhPL(int gO2, int gI2, int gI1) const
-{
-   const auto Ye = MODELPARAMETER(Ye);
-   const auto ZEL = MODELPARAMETER(ZEL);
-   const auto ZER = MODELPARAMETER(ZER);
-   const auto ZH = MODELPARAMETER(ZH);
-
-   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,Conj(ZEL(gI2
-      ,j2))*SUM(j1,0,2,Conj(ZER(gO2,j1))*Ye(j1,j2)))*ZH(gI1,0);
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFeFehhPR(int gO1, int gI2, int gI1) const
-{
-   const auto Ye = MODELPARAMETER(Ye);
-   const auto ZER = MODELPARAMETER(ZER);
-   const auto ZEL = MODELPARAMETER(ZEL);
-   const auto ZH = MODELPARAMETER(ZH);
-
-   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,SUM(j1,0,2,
-      Conj(Ye(j1,j2))*ZER(gI2,j1))*ZEL(gO1,j2))*ZH(gI1,0);
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFeFvHpmPL(int gO2, int gI2, int gI1) const
-{
-   const auto Ye = MODELPARAMETER(Ye);
-   const auto ZER = MODELPARAMETER(ZER);
-   const auto ZP = MODELPARAMETER(ZP);
-
-   const std::complex<double> result = SUM(j1,0,2,Conj(ZER(gO2,j1))*Ye(j1,gI2))*ZP
-      (gI1,0);
-
-   return result;
-}
-
-double CLASSNAME::CpbarFeFvHpmPR(int , int , int ) const
-{
-   
-   const double result = 0;
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFeChaSvPR(int gO1, int gI2, int gI1) const
-{
-   const auto g2 = MODELPARAMETER(g2);
-   const auto ZV = MODELPARAMETER(ZV);
-   const auto ZEL = MODELPARAMETER(ZEL);
-   const auto UP = MODELPARAMETER(UP);
-
-   const std::complex<double> result = -(g2*SUM(j1,0,2,Conj(ZV(gI1,j1))*ZEL(gO1,j1
-      ))*UP(gI2,0));
 
    return result;
 }
@@ -690,22 +706,6 @@ std::complex<double> CLASSNAME::CpbarFeFeAhPR(int gO1, int gI1, int gI2) const
 
    const std::complex<double> result = std::complex<double>(0.,0.7071067811865475)
       *SUM(j2,0,2,SUM(j1,0,2,Conj(Ye(j1,j2))*ZER(gI1,j1))*ZEL(gO1,j2))*ZA(gI2,0);
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFeChiSePR(int gO1, int gI2, int gI1) const
-{
-   const auto g1 = MODELPARAMETER(g1);
-   const auto g2 = MODELPARAMETER(g2);
-   const auto Ye = MODELPARAMETER(Ye);
-   const auto ZE = MODELPARAMETER(ZE);
-   const auto ZEL = MODELPARAMETER(ZEL);
-   const auto ZN = MODELPARAMETER(ZN);
-
-   const std::complex<double> result = 0.7071067811865475*SUM(j1,0,2,Conj(ZE(gI1,
-      j1))*ZEL(gO1,j1))*(0.7745966692414834*g1*ZN(gI2,0) + g2*ZN(gI2,1)) - SUM(j2,
-      0,2,SUM(j1,0,2,Conj(Ye(j1,j2))*Conj(ZE(gI1,3 + j1)))*ZEL(gO1,j2))*ZN(gI2,2);
 
    return result;
 }
@@ -1027,7 +1027,7 @@ double CLASSNAME::calculate_self_energy_VWm(double p) const
 double CLASSNAME::calculate_self_energy_VZ_top(double p, double mt) const
 {
    const double q  = model->get_scale();
-   const double Nc = 3.0;
+   static constexpr double Nc = 3.0;
    const auto gY = MODEL->get_g1() * lowMSSM_info::normalization_g1;
    const auto g2 = MODEL->get_g2() * lowMSSM_info::normalization_g2;
    const double gY2 = Sqr(gY);
@@ -1057,7 +1057,7 @@ double CLASSNAME::calculate_self_energy_VWm_top(double p, double mt) const
 {
    const double q  = model->get_scale();
    const double mb = MODEL->get_MFd(2);
-   const double Nc = 3.0;
+   static constexpr double Nc = 3.0;
    const auto g2 = MODEL->get_g2() * lowMSSM_info::normalization_g2;
 
    const double self_energy_w_top =

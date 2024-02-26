@@ -22,7 +22,7 @@
  *
  * @brief Defines model class for Stöckinger/Kotlarski decoupling scheme.
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #ifndef CE6SSM_MASS_EIGENSTATES_DECOUPLING_SCHEME_H
@@ -68,12 +68,11 @@ public:
    virtual ~CE6SSM_mass_eigenstates_decoupling_scheme() = default;
    CE6SSM_mass_eigenstates_decoupling_scheme& operator=(const CE6SSM_mass_eigenstates_decoupling_scheme&) = default;
    CE6SSM_mass_eigenstates_decoupling_scheme& operator=(CE6SSM_mass_eigenstates_decoupling_scheme&&) = default;
-   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
    std::unique_ptr<CE6SSM_mass_eigenstates_interface> clone() const override;
 
    /// number of EWSB equations
-   static const int number_of_ewsb_equations = 3;
+   static constexpr int number_of_ewsb_equations = 3;
 
    void check_pole_masses_for_tachyons();
    void do_force_output(bool);

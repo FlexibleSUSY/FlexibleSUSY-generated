@@ -39,7 +39,6 @@ public:
    E6SSM_low_scale_constraint() = default;
    E6SSM_low_scale_constraint(E6SSM<Two_scale>*, const softsusy::QedQcd&);
    virtual ~E6SSM_low_scale_constraint() = default;
-   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
    virtual void apply() override;
    virtual double get_scale() const override;

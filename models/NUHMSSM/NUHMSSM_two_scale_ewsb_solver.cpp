@@ -22,7 +22,7 @@
  *
  * @brief implementation of EWSB solver for two-scale iteration
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #include "NUHMSSM_two_scale_ewsb_solver.hpp"
@@ -57,11 +57,11 @@ int CLASSNAME::solve_iteratively(NUHMSSM_mass_eigenstates& model_to_solve)
    model.set_ewsb_loop_order(loop_order);
 
    auto ewsb_stepper = [this, model](const EWSB_vector_t& ewsb_pars) mutable -> EWSB_vector_t {
-      const double BMu = ewsb_pars(0);
-      const double Mu = INPUT(SignMu)*Abs(ewsb_pars(1));
+      const double mHd2 = ewsb_pars(0);
+      const double mHu2 = ewsb_pars(1);
 
-      model.set_BMu(BMu);
-      model.set_Mu(Mu);
+      model.set_mHd2(mHd2);
+      model.set_mHu2(mHu2);
 
 
       if (this->loop_order > 0)
@@ -71,11 +71,11 @@ int CLASSNAME::solve_iteratively(NUHMSSM_mass_eigenstates& model_to_solve)
    };
 
    auto tadpole_stepper = [this, model](const EWSB_vector_t& ewsb_pars) mutable -> EWSB_vector_t {
-      const double BMu = ewsb_pars(0);
-      const double Mu = INPUT(SignMu)*Abs(ewsb_pars(1));
+      const double mHd2 = ewsb_pars(0);
+      const double mHu2 = ewsb_pars(1);
 
-      model.set_BMu(BMu);
-      model.set_Mu(Mu);
+      model.set_mHd2(mHd2);
+      model.set_mHu2(mHu2);
 
 
       if (this->loop_order > 0)
@@ -155,10 +155,10 @@ void CLASSNAME::set_ewsb_solution(NUHMSSM_mass_eigenstates& model, const EWSB_so
 {
    const auto solution = solver->get_solution();
 
-   const double BMu = solution(0);
-   const double Mu = INPUT(SignMu)*Abs(solution(1));
-   model.set_BMu(BMu);
-   model.set_Mu(Mu);
+   const double mHd2 = solution(0);
+   const double mHu2 = solution(1);
+   model.set_mHd2(mHd2);
+   model.set_mHu2(mHu2);
 
 
    model.calculate_DRbar_masses();
@@ -212,29 +212,29 @@ int CLASSNAME::solve_tree_level(NUHMSSM_mass_eigenstates& model)
 {
    int error = EWSB_solver::SUCCESS;
 
+   const auto BMu = MODELPARAMETER(BMu);
    const auto vd = MODELPARAMETER(vd);
-   const auto vu = MODELPARAMETER(vu);
-   const auto mHd2 = MODELPARAMETER(mHd2);
-   const auto mHu2 = MODELPARAMETER(mHu2);
    const auto g1 = MODELPARAMETER(g1);
    const auto g2 = MODELPARAMETER(g2);
+   const auto vu = MODELPARAMETER(vu);
+   const auto Mu = MODELPARAMETER(Mu);
 
-   double BMu;
-   double Mu;
+   double mHd2;
+   double mHu2;
 
-   BMu = Re((0.05*(-20*mHd2*vd*vu + 20*mHu2*vd*vu - 3*vu*Cube(vd)*Sqr(g1) + 3*vd*
-      Cube(vu)*Sqr(g1) - 5*vu*Cube(vd)*Sqr(g2) + 5*vd*Cube(vu)*Sqr(g2)))/(Sqr(vd)
-      - Sqr(vu)));
-   Mu = Re(0.15811388300841897*LOCALINPUT(SignMu)*Sqrt((-40*mHd2*vd + 40*BMu*vu -
-      3*Cube(vd)*Sqr(g1) - 5*Cube(vd)*Sqr(g2) + 3*vd*Sqr(g1)*Sqr(vu) + 5*vd*Sqr(g2
-      )*Sqr(vu))/vd));
+   mHd2 = Re((0.025*(-40*vd*AbsSqr(Mu) + 20*vu*BMu + 20*vu*Conj(BMu) - 3*Cube(vd)*
+      Sqr(g1) - 5*Cube(vd)*Sqr(g2) + 3*vd*Sqr(g1)*Sqr(vu) + 5*vd*Sqr(g2)*Sqr(vu)))
+      /vd);
+   mHu2 = Re((0.025*(-40*vu*AbsSqr(Mu) + 20*vd*BMu + 20*vd*Conj(BMu) - 3*Cube(vu)*
+      Sqr(g1) - 5*Cube(vu)*Sqr(g2) + 3*vu*Sqr(g1)*Sqr(vd) + 5*vu*Sqr(g2)*Sqr(vd)))
+      /vu);
 
    
-   const bool is_finite = IsFinite(BMu) && IsFinite(Mu);
+   const bool is_finite = IsFinite(mHd2) && IsFinite(mHu2);
 
    if (is_finite) {
-      model.set_BMu(BMu);
-      model.set_Mu(Mu);
+      model.set_mHd2(mHd2);
+      model.set_mHu2(mHu2);
       model.get_problems().unflag_no_ewsb_tree_level();
    } else {
       error = EWSB_solver::FAIL;
@@ -247,10 +247,10 @@ CLASSNAME::EWSB_vector_t CLASSNAME::initial_guess(const NUHMSSM_mass_eigenstates
 {
    EWSB_vector_t x_init(EWSB_vector_t::Zero());
 
-   const auto BMu = MODELPARAMETER(BMu);
-   const auto Mu = MODELPARAMETER(Mu);
-   x_init[0] = BMu;
-   x_init[1] = Mu;
+   const auto mHd2 = MODELPARAMETER(mHd2);
+   const auto mHu2 = MODELPARAMETER(mHu2);
+   x_init[0] = mHd2;
+   x_init[1] = mHu2;
 
 
    return x_init;
@@ -288,30 +288,30 @@ CLASSNAME::EWSB_vector_t CLASSNAME::ewsb_step(const NUHMSSM_mass_eigenstates& mo
       }
    }
 
+   const auto BMu = MODELPARAMETER(BMu);
    const auto vd = MODELPARAMETER(vd);
-   const auto vu = MODELPARAMETER(vu);
-   const auto mHd2 = MODELPARAMETER(mHd2);
-   const auto mHu2 = MODELPARAMETER(mHu2);
    const auto g1 = MODELPARAMETER(g1);
    const auto g2 = MODELPARAMETER(g2);
-   double BMu;
-   double Mu;
+   const auto vu = MODELPARAMETER(vu);
+   const auto Mu = MODELPARAMETER(Mu);
+   double mHd2;
+   double mHu2;
 
-   BMu = Re((0.05*(-20*mHd2*vd*vu + 20*mHu2*vd*vu + 20*vu*tadpole[0] - 20*vd*
-      tadpole[1] - 3*vu*Cube(vd)*Sqr(g1) + 3*vd*Cube(vu)*Sqr(g1) - 5*vu*Cube(vd)*
-      Sqr(g2) + 5*vd*Cube(vu)*Sqr(g2)))/(Sqr(vd) - Sqr(vu)));
-   Mu = Re(0.15811388300841897*LOCALINPUT(SignMu)*Sqrt((-40*mHd2*vd + 40*BMu*vu +
-      40*tadpole[0] - 3*Cube(vd)*Sqr(g1) - 5*Cube(vd)*Sqr(g2) + 3*vd*Sqr(g1)*Sqr(
-      vu) + 5*vd*Sqr(g2)*Sqr(vu))/vd));
+   mHd2 = Re((0.025*(-40*vd*AbsSqr(Mu) + 20*vu*BMu + 20*vu*Conj(BMu) + 40*tadpole[
+      0] - 3*Cube(vd)*Sqr(g1) - 5*Cube(vd)*Sqr(g2) + 3*vd*Sqr(g1)*Sqr(vu) + 5*vd*
+      Sqr(g2)*Sqr(vu)))/vd);
+   mHu2 = Re((0.025*(-40*vu*AbsSqr(Mu) + 20*vd*BMu + 20*vd*Conj(BMu) + 40*tadpole[
+      1] - 3*Cube(vu)*Sqr(g1) - 5*Cube(vu)*Sqr(g2) + 3*vu*Sqr(g1)*Sqr(vd) + 5*vu*
+      Sqr(g2)*Sqr(vd)))/vu);
 
-   const bool is_finite = IsFinite(BMu) && IsFinite(Mu);
+   const bool is_finite = IsFinite(mHd2) && IsFinite(mHu2);
 
 
    if (!is_finite)
       throw EEWSBStepFailed();
 
-   ewsb_parameters[0] = BMu;
-   ewsb_parameters[1] = Mu;
+   ewsb_parameters[0] = mHd2;
+   ewsb_parameters[1] = mHu2;
 
 
    return ewsb_parameters;

@@ -39,7 +39,6 @@ public:
    MSSMEFTHiggs_low_scale_constraint() = default;
    MSSMEFTHiggs_low_scale_constraint(MSSMEFTHiggs<Two_scale>*, const softsusy::QedQcd&);
    virtual ~MSSMEFTHiggs_low_scale_constraint() = default;
-   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
    virtual void apply() override;
    virtual double get_scale() const override;

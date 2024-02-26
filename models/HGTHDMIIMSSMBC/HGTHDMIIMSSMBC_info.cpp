@@ -89,7 +89,16 @@ namespace HGTHDMIIMSSMBC_info {
 
    const std::array<std::string, NUMBER_OF_INPUT_PARAMETERS> input_parameter_names
        = {"TanBeta", "MSUSY", "MEWSB", "MuInput", "M1Input", "M2Input", "M3Input",
-      "MAInput", "AtInput", "AbInput", "AtauInput", "LambdaLoopOrder"};
+      "MAInput", "LambdaLoopOrder", "AeInput(0,0)", "AeInput(0,1)", "AeInput(0,2)"
+      , "AeInput(1,0)", "AeInput(1,1)", "AeInput(1,2)", "AeInput(2,0)",
+      "AeInput(2,1)", "AeInput(2,2)", "AdInput(0,0)", "AdInput(0,1)",
+      "AdInput(0,2)", "AdInput(1,0)", "AdInput(1,1)", "AdInput(1,2)",
+      "AdInput(2,0)", "AdInput(2,1)", "AdInput(2,2)", "AuInput(0,0)",
+      "AuInput(0,1)", "AuInput(0,2)", "AuInput(1,0)", "AuInput(1,1)",
+      "AuInput(1,2)", "AuInput(2,0)", "AuInput(2,1)", "AuInput(2,2)",
+      "mslInput(0)", "mslInput(1)", "mslInput(2)", "mseInput(0)", "mseInput(1)",
+      "mseInput(2)", "msqInput(0)", "msqInput(1)", "msqInput(2)", "msdInput(0)",
+      "msdInput(1)", "msdInput(2)", "msuInput(0)", "msuInput(1)", "msuInput(2)"};
 
    const std::array<std::string, NUMBER_OF_EXTRA_PARAMETERS> extra_parameter_names
        = {};
@@ -139,16 +148,16 @@ int get_pdg_code_for_particle(Particles p, int index)
    default: throw OutOfBoundsError("invalid particle " + std::to_string(p));
    }
 
-   if (index < 0 || index >= pdg_codes.size()) {
+   if (index < 0 || std::abs(index) >= pdg_codes.size()) {
       throw OutOfBoundsError("index " + std::to_string(index) + " out of bounds");
    }
 
    return pdg_codes[index];
 }
 
-std::pair<std::string, boost::optional<unsigned int>> get_multiplet_and_index_from_pdg(int pdg)
+std::pair<std::string, std::optional<unsigned int>> get_multiplet_and_index_from_pdg(int pdg)
 {
-   std::pair<std::string, boost::optional<unsigned int>> name;
+   std::pair<std::string, std::optional<unsigned int>> name;
 
    switch (pdg) {
 
@@ -204,8 +213,8 @@ std::pair<std::string, boost::optional<unsigned int>> get_multiplet_and_index_fr
 
 std::string get_particle_name_from_pdg(int pdg)
 {
-   std::pair<std::string, boost::optional<unsigned int>> const pair = get_multiplet_and_index_from_pdg(pdg);
-   return pair.first + (pair.second ? "(" + std::to_string(pair.second.get()) + ")" : "");
+   std::pair<std::string, std::optional<unsigned int>> const pair = get_multiplet_and_index_from_pdg(pdg);
+   return pair.first + (pair.second.has_value() ? "(" + std::to_string(pair.second.value()) + ")" : "");
 }
 
 void print(std::ostream& ostr)

@@ -18,5 +18,4 @@
 
 
 LIBHTHDMIIMSSMBC_CXXQFT_VERTICES_SRC := \
-	models/HTHDMIIMSSMBC/cxx_qft/HTHDMIIMSSMBC_vertices_1.cpp \
-	models/HTHDMIIMSSMBC/cxx_qft/HTHDMIIMSSMBC_vertices_2.cpp
+	models/HTHDMIIMSSMBC/cxx_qft/HTHDMIIMSSMBC_vertices_1.cpp

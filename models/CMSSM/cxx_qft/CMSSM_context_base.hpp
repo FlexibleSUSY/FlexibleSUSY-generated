@@ -20,7 +20,7 @@
 /**
  * @file cxx_qft/CMSSM_context_base.hpp
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #ifndef CMSSM_CXXQFT_CONTEXT_BASE_H
@@ -32,6 +32,8 @@
 namespace flexiblesusy {
 namespace CMSSM_cxx_diagrams {
 
+using cxx_diagrams::field_indices;
+
    struct context_base {
       CMSSM_mass_eigenstates_interface const& model; ///< The model object.
 
@@ -39,14 +41,14 @@ namespace CMSSM_cxx_diagrams {
       double mass(const typename field_indices<Field>::type& indices) const
       {
          using CleanField =
-            typename fields::remove_lorentz_conjugation<Field>::type;
+            typename cxx_diagrams::fields::remove_lorentz_conjugation<Field>::type;
          return mass_impl<CleanField>(indices);
       }
       template<class Field>
       double physical_mass(const typename field_indices<Field>::type& indices) const
       {
          using CleanField =
-            typename fields::remove_lorentz_conjugation<Field>::type;
+            typename cxx_diagrams::fields::remove_lorentz_conjugation<Field>::type;
          return physical_mass_impl<CleanField>(indices);
       }
 

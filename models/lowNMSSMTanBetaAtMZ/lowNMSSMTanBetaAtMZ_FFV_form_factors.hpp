@@ -19,7 +19,7 @@
 /**
  * @file lowNMSSMTanBetaAtMZ_FFV_form_factors.hpp
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #ifndef lowNMSSMTanBetaAtMZ_FFVFormFactors_H
@@ -35,8 +35,11 @@ class lowNMSSMTanBetaAtMZ_mass_eigenstates;
 
 namespace lowNMSSMTanBetaAtMZ_FFV_form_factors {
 
-}
 
+
+
+
+} // namespace lowNMSSMTanBetaAtMZ_FFV_form_factors
 } // namespace flexiblesusy
 
 #endif

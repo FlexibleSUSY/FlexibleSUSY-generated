@@ -37,7 +37,6 @@ public:
    UMSSM_high_scale_constraint() = default;
    UMSSM_high_scale_constraint(UMSSM<Two_scale>*);
    virtual ~UMSSM_high_scale_constraint() = default;
-   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
    virtual void apply() override;
    virtual double get_scale() const override;

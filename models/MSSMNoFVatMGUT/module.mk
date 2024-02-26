@@ -54,22 +54,23 @@ MSSMNoFVatMGUT_TARBALL := \
 		$(MODNAME).tar.gz
 
 LIBMSSMNoFVatMGUT_SRC := \
-		$(DIR)/MSSMNoFVatMGUT_a_muon.cpp \
+		$(DIR)/MSSMNoFVatMGUT_amm.cpp \
 		$(DIR)/MSSMNoFVatMGUT_edm.cpp \
 		$(DIR)/MSSMNoFVatMGUT_FFV_form_factors.cpp \
-		$(DIR)/MSSMNoFVatMGUT_f_to_f_conversion.cpp \
-		$(DIR)/MSSMNoFVatMGUT_l_to_lgamma.cpp \
+		$(wildcard $(DIR)/observables/MSSMNoFVatMGUT*.cpp) \
 		$(DIR)/MSSMNoFVatMGUT_b_to_s_gamma.cpp \
 		$(DIR)/MSSMNoFVatMGUT_info.cpp \
 		$(DIR)/MSSMNoFVatMGUT_input_parameters.cpp \
 		$(DIR)/MSSMNoFVatMGUT_mass_eigenstates.cpp \
 		$(DIR)/MSSMNoFVatMGUT_mass_eigenstates_decoupling_scheme.cpp \
 		$(DIR)/MSSMNoFVatMGUT_model_slha.cpp \
+		$(DIR)/MSSMNoFVatMGUT_lepton_amm_wrapper.cpp \
 		$(DIR)/MSSMNoFVatMGUT_observables.cpp \
 		$(DIR)/MSSMNoFVatMGUT_physical.cpp \
 		$(DIR)/MSSMNoFVatMGUT_slha_io.cpp \
 		$(DIR)/MSSMNoFVatMGUT_soft_parameters.cpp \
 		$(DIR)/MSSMNoFVatMGUT_susy_parameters.cpp \
+		$(DIR)/MSSMNoFVatMGUT_unitarity.cpp \
 		$(DIR)/MSSMNoFVatMGUT_utilities.cpp \
 		$(DIR)/MSSMNoFVatMGUT_weinberg_angle.cpp
 
@@ -89,12 +90,11 @@ LLMSSMNoFVatMGUT_MMA  := \
 		$(DIR)/run_MSSMNoFVatMGUT.m
 
 LIBMSSMNoFVatMGUT_HDR := \
-		$(DIR)/MSSMNoFVatMGUT_a_muon.hpp \
+		$(DIR)/MSSMNoFVatMGUT_amm.hpp \
 		$(DIR)/MSSMNoFVatMGUT_convergence_tester.hpp \
 		$(DIR)/MSSMNoFVatMGUT_edm.hpp \
 		$(DIR)/MSSMNoFVatMGUT_FFV_form_factors.hpp \
-		$(DIR)/MSSMNoFVatMGUT_f_to_f_conversion.hpp \
-		$(DIR)/MSSMNoFVatMGUT_l_to_lgamma.hpp \
+		$(wildcard $(DIR)/observables/MSSMNoFVatMGUT*.hpp) \
 		$(DIR)/MSSMNoFVatMGUT_b_to_s_gamma.hpp \
 		$(DIR)/MSSMNoFVatMGUT_ewsb_solver.hpp \
 		$(DIR)/MSSMNoFVatMGUT_ewsb_solver_interface.hpp \
@@ -108,6 +108,7 @@ LIBMSSMNoFVatMGUT_HDR := \
 		$(DIR)/MSSMNoFVatMGUT_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/MSSMNoFVatMGUT_model.hpp \
 		$(DIR)/MSSMNoFVatMGUT_model_slha.hpp \
+		$(DIR)/MSSMNoFVatMGUT_lepton_amm_wrapper.hpp \
 		$(DIR)/MSSMNoFVatMGUT_observables.hpp \
 		$(DIR)/MSSMNoFVatMGUT_physical.hpp \
 		$(DIR)/MSSMNoFVatMGUT_slha_io.hpp \
@@ -116,12 +117,14 @@ LIBMSSMNoFVatMGUT_HDR := \
 		$(DIR)/MSSMNoFVatMGUT_soft_parameters.hpp \
 		$(DIR)/MSSMNoFVatMGUT_susy_parameters.hpp \
 		$(DIR)/MSSMNoFVatMGUT_susy_scale_constraint.hpp \
+		$(DIR)/MSSMNoFVatMGUT_unitarity.hpp \
 		$(DIR)/MSSMNoFVatMGUT_utilities.hpp \
 		$(DIR)/MSSMNoFVatMGUT_weinberg_angle.hpp
 
 LIBMSSMNoFVatMGUT_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/MSSMNoFVatMGUT_qft.hpp \
 		$(DIR)/cxx_qft/MSSMNoFVatMGUT_fields.hpp \
+		$(DIR)/cxx_qft/MSSMNoFVatMGUT_particle_aliases.hpp \
 		$(DIR)/cxx_qft/MSSMNoFVatMGUT_vertices.hpp \
 		$(DIR)/cxx_qft/MSSMNoFVatMGUT_context_base.hpp \
 		$(DIR)/cxx_qft/MSSMNoFVatMGUT_npointfunctions_wilsoncoeffs.hpp
@@ -317,7 +320,7 @@ $(METACODE_STAMP_MSSMNoFVatMGUT):
 endif
 
 $(LIBMSSMNoFVatMGUT_DEP) $(EXEMSSMNoFVatMGUT_DEP) $(LLMSSMNoFVatMGUT_DEP) $(LIBMSSMNoFVatMGUT_OBJ) $(EXEMSSMNoFVatMGUT_OBJ) $(LLMSSMNoFVatMGUT_OBJ) $(LLMSSMNoFVatMGUT_LIB): \
-	CPPFLAGS += $(MODMSSMNoFVatMGUT_SUBMOD_INC) $(MODMSSMNoFVatMGUT_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODMSSMNoFVatMGUT_SUBMOD_INC) $(MODMSSMNoFVatMGUT_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIGGSTOOLSFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBMSSMNoFVatMGUT_DEP) $(EXEMSSMNoFVatMGUT_DEP) $(LLMSSMNoFVatMGUT_DEP) $(LIBMSSMNoFVatMGUT_OBJ) $(EXEMSSMNoFVatMGUT_OBJ) $(LLMSSMNoFVatMGUT_OBJ) $(LLMSSMNoFVatMGUT_LIB): \
@@ -333,11 +336,11 @@ $(LIBMSSMNoFVatMGUT): $(LIBMSSMNoFVatMGUT_OBJ)
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBMSSMNoFVatMGUT) $(MODMSSMNoFVatMGUT_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
 $(LLMSSMNoFVatMGUT_LIB): $(LLMSSMNoFVatMGUT_OBJ) $(LIBMSSMNoFVatMGUT) $(MODMSSMNoFVatMGUT_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
 
 ALLDEP += $(LIBMSSMNoFVatMGUT_DEP) $(EXEMSSMNoFVatMGUT_DEP)
 ALLSRC += $(LIBMSSMNoFVatMGUT_SRC) $(EXEMSSMNoFVatMGUT_SRC)

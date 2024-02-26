@@ -54,22 +54,23 @@ lowMSSM_TARBALL := \
 		$(MODNAME).tar.gz
 
 LIBlowMSSM_SRC := \
-		$(DIR)/lowMSSM_a_muon.cpp \
+		$(DIR)/lowMSSM_amm.cpp \
 		$(DIR)/lowMSSM_edm.cpp \
 		$(DIR)/lowMSSM_FFV_form_factors.cpp \
-		$(DIR)/lowMSSM_f_to_f_conversion.cpp \
-		$(DIR)/lowMSSM_l_to_lgamma.cpp \
+		$(wildcard $(DIR)/observables/lowMSSM*.cpp) \
 		$(DIR)/lowMSSM_b_to_s_gamma.cpp \
 		$(DIR)/lowMSSM_info.cpp \
 		$(DIR)/lowMSSM_input_parameters.cpp \
 		$(DIR)/lowMSSM_mass_eigenstates.cpp \
 		$(DIR)/lowMSSM_mass_eigenstates_decoupling_scheme.cpp \
 		$(DIR)/lowMSSM_model_slha.cpp \
+		$(DIR)/lowMSSM_lepton_amm_wrapper.cpp \
 		$(DIR)/lowMSSM_observables.cpp \
 		$(DIR)/lowMSSM_physical.cpp \
 		$(DIR)/lowMSSM_slha_io.cpp \
 		$(DIR)/lowMSSM_soft_parameters.cpp \
 		$(DIR)/lowMSSM_susy_parameters.cpp \
+		$(DIR)/lowMSSM_unitarity.cpp \
 		$(DIR)/lowMSSM_utilities.cpp \
 		$(DIR)/lowMSSM_weinberg_angle.cpp
 
@@ -89,12 +90,11 @@ LLlowMSSM_MMA  := \
 		$(DIR)/run_lowMSSM.m
 
 LIBlowMSSM_HDR := \
-		$(DIR)/lowMSSM_a_muon.hpp \
+		$(DIR)/lowMSSM_amm.hpp \
 		$(DIR)/lowMSSM_convergence_tester.hpp \
 		$(DIR)/lowMSSM_edm.hpp \
 		$(DIR)/lowMSSM_FFV_form_factors.hpp \
-		$(DIR)/lowMSSM_f_to_f_conversion.hpp \
-		$(DIR)/lowMSSM_l_to_lgamma.hpp \
+		$(wildcard $(DIR)/observables/lowMSSM*.hpp) \
 		$(DIR)/lowMSSM_b_to_s_gamma.hpp \
 		$(DIR)/lowMSSM_ewsb_solver.hpp \
 		$(DIR)/lowMSSM_ewsb_solver_interface.hpp \
@@ -108,6 +108,7 @@ LIBlowMSSM_HDR := \
 		$(DIR)/lowMSSM_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/lowMSSM_model.hpp \
 		$(DIR)/lowMSSM_model_slha.hpp \
+		$(DIR)/lowMSSM_lepton_amm_wrapper.hpp \
 		$(DIR)/lowMSSM_observables.hpp \
 		$(DIR)/lowMSSM_physical.hpp \
 		$(DIR)/lowMSSM_slha_io.hpp \
@@ -116,12 +117,14 @@ LIBlowMSSM_HDR := \
 		$(DIR)/lowMSSM_soft_parameters.hpp \
 		$(DIR)/lowMSSM_susy_parameters.hpp \
 		$(DIR)/lowMSSM_susy_scale_constraint.hpp \
+		$(DIR)/lowMSSM_unitarity.hpp \
 		$(DIR)/lowMSSM_utilities.hpp \
 		$(DIR)/lowMSSM_weinberg_angle.hpp
 
 LIBlowMSSM_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/lowMSSM_qft.hpp \
 		$(DIR)/cxx_qft/lowMSSM_fields.hpp \
+		$(DIR)/cxx_qft/lowMSSM_particle_aliases.hpp \
 		$(DIR)/cxx_qft/lowMSSM_vertices.hpp \
 		$(DIR)/cxx_qft/lowMSSM_context_base.hpp \
 		$(DIR)/cxx_qft/lowMSSM_npointfunctions_wilsoncoeffs.hpp
@@ -317,7 +320,7 @@ $(METACODE_STAMP_lowMSSM):
 endif
 
 $(LIBlowMSSM_DEP) $(EXElowMSSM_DEP) $(LLlowMSSM_DEP) $(LIBlowMSSM_OBJ) $(EXElowMSSM_OBJ) $(LLlowMSSM_OBJ) $(LLlowMSSM_LIB): \
-	CPPFLAGS += $(MODlowMSSM_SUBMOD_INC) $(MODlowMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODlowMSSM_SUBMOD_INC) $(MODlowMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIGGSTOOLSFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBlowMSSM_DEP) $(EXElowMSSM_DEP) $(LLlowMSSM_DEP) $(LIBlowMSSM_OBJ) $(EXElowMSSM_OBJ) $(LLlowMSSM_OBJ) $(LLlowMSSM_LIB): \
@@ -333,11 +336,11 @@ $(LIBlowMSSM): $(LIBlowMSSM_OBJ)
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBlowMSSM) $(MODlowMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
 $(LLlowMSSM_LIB): $(LLlowMSSM_OBJ) $(LIBlowMSSM) $(MODlowMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
 
 ALLDEP += $(LIBlowMSSM_DEP) $(EXElowMSSM_DEP)
 ALLSRC += $(LIBlowMSSM_SRC) $(EXElowMSSM_SRC)

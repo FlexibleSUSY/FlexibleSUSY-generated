@@ -136,7 +136,7 @@ protected:
    E6SSM_input_parameters input{};
 
 private:
-   static const int numberOfParameters = 49;
+   static constexpr int numberOfParameters = 49;
 
    struct Susy_traces {
       double traceYdAdjYd{};

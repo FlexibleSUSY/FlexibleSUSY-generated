@@ -79,7 +79,6 @@ handle = FSNMSSMOpenHandle[
 
 spectrum    = FSNMSSMCalculateSpectrum[handle];
 observables = FSNMSSMCalculateObservables[handle];
-decays      = FSNMSSMCalculateDecays[handle];
 
 FSNMSSMCloseHandle[handle];
 

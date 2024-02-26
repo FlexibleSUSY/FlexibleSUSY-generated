@@ -38,7 +38,6 @@ public:
    SplitMSSM_susy_scale_constraint() = default;
    SplitMSSM_susy_scale_constraint(SplitMSSM<Two_scale>*, const softsusy::QedQcd&);
    virtual ~SplitMSSM_susy_scale_constraint() = default;
-   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
    virtual void apply() override;
    virtual double get_scale() const override;

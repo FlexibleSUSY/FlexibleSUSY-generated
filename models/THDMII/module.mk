@@ -54,22 +54,23 @@ THDMII_TARBALL := \
 		$(MODNAME).tar.gz
 
 LIBTHDMII_SRC := \
-		$(DIR)/THDMII_a_muon.cpp \
+		$(DIR)/THDMII_amm.cpp \
 		$(DIR)/THDMII_edm.cpp \
 		$(DIR)/THDMII_FFV_form_factors.cpp \
-		$(DIR)/THDMII_f_to_f_conversion.cpp \
-		$(DIR)/THDMII_l_to_lgamma.cpp \
+		$(wildcard $(DIR)/observables/THDMII*.cpp) \
 		$(DIR)/THDMII_b_to_s_gamma.cpp \
 		$(DIR)/THDMII_info.cpp \
 		$(DIR)/THDMII_input_parameters.cpp \
 		$(DIR)/THDMII_mass_eigenstates.cpp \
 		$(DIR)/THDMII_mass_eigenstates_decoupling_scheme.cpp \
 		$(DIR)/THDMII_model_slha.cpp \
+		$(DIR)/THDMII_lepton_amm_wrapper.cpp \
 		$(DIR)/THDMII_observables.cpp \
 		$(DIR)/THDMII_physical.cpp \
 		$(DIR)/THDMII_slha_io.cpp \
 		$(DIR)/THDMII_soft_parameters.cpp \
 		$(DIR)/THDMII_susy_parameters.cpp \
+		$(DIR)/THDMII_unitarity.cpp \
 		$(DIR)/THDMII_utilities.cpp \
 		$(DIR)/THDMII_weinberg_angle.cpp
 
@@ -89,12 +90,11 @@ LLTHDMII_MMA  := \
 		$(DIR)/run_THDMII.m
 
 LIBTHDMII_HDR := \
-		$(DIR)/THDMII_a_muon.hpp \
+		$(DIR)/THDMII_amm.hpp \
 		$(DIR)/THDMII_convergence_tester.hpp \
 		$(DIR)/THDMII_edm.hpp \
 		$(DIR)/THDMII_FFV_form_factors.hpp \
-		$(DIR)/THDMII_f_to_f_conversion.hpp \
-		$(DIR)/THDMII_l_to_lgamma.hpp \
+		$(wildcard $(DIR)/observables/THDMII*.hpp) \
 		$(DIR)/THDMII_b_to_s_gamma.hpp \
 		$(DIR)/THDMII_ewsb_solver.hpp \
 		$(DIR)/THDMII_ewsb_solver_interface.hpp \
@@ -108,6 +108,7 @@ LIBTHDMII_HDR := \
 		$(DIR)/THDMII_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/THDMII_model.hpp \
 		$(DIR)/THDMII_model_slha.hpp \
+		$(DIR)/THDMII_lepton_amm_wrapper.hpp \
 		$(DIR)/THDMII_observables.hpp \
 		$(DIR)/THDMII_physical.hpp \
 		$(DIR)/THDMII_slha_io.hpp \
@@ -116,12 +117,14 @@ LIBTHDMII_HDR := \
 		$(DIR)/THDMII_soft_parameters.hpp \
 		$(DIR)/THDMII_susy_parameters.hpp \
 		$(DIR)/THDMII_susy_scale_constraint.hpp \
+		$(DIR)/THDMII_unitarity.hpp \
 		$(DIR)/THDMII_utilities.hpp \
 		$(DIR)/THDMII_weinberg_angle.hpp
 
 LIBTHDMII_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/THDMII_qft.hpp \
 		$(DIR)/cxx_qft/THDMII_fields.hpp \
+		$(DIR)/cxx_qft/THDMII_particle_aliases.hpp \
 		$(DIR)/cxx_qft/THDMII_vertices.hpp \
 		$(DIR)/cxx_qft/THDMII_context_base.hpp \
 		$(DIR)/cxx_qft/THDMII_npointfunctions_wilsoncoeffs.hpp
@@ -317,7 +320,7 @@ $(METACODE_STAMP_THDMII):
 endif
 
 $(LIBTHDMII_DEP) $(EXETHDMII_DEP) $(LLTHDMII_DEP) $(LIBTHDMII_OBJ) $(EXETHDMII_OBJ) $(LLTHDMII_OBJ) $(LLTHDMII_LIB): \
-	CPPFLAGS += $(MODTHDMII_SUBMOD_INC) $(MODTHDMII_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODTHDMII_SUBMOD_INC) $(MODTHDMII_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIGGSTOOLSFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBTHDMII_DEP) $(EXETHDMII_DEP) $(LLTHDMII_DEP) $(LIBTHDMII_OBJ) $(EXETHDMII_OBJ) $(LLTHDMII_OBJ) $(LLTHDMII_LIB): \
@@ -333,11 +336,11 @@ $(LIBTHDMII): $(LIBTHDMII_OBJ)
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBTHDMII) $(MODTHDMII_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
 $(LLTHDMII_LIB): $(LLTHDMII_OBJ) $(LIBTHDMII) $(MODTHDMII_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
 
 ALLDEP += $(LIBTHDMII_DEP) $(EXETHDMII_DEP)
 ALLSRC += $(LIBTHDMII_SRC) $(EXETHDMII_SRC)

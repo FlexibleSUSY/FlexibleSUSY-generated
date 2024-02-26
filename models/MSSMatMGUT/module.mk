@@ -54,22 +54,23 @@ MSSMatMGUT_TARBALL := \
 		$(MODNAME).tar.gz
 
 LIBMSSMatMGUT_SRC := \
-		$(DIR)/MSSMatMGUT_a_muon.cpp \
+		$(DIR)/MSSMatMGUT_amm.cpp \
 		$(DIR)/MSSMatMGUT_edm.cpp \
 		$(DIR)/MSSMatMGUT_FFV_form_factors.cpp \
-		$(DIR)/MSSMatMGUT_f_to_f_conversion.cpp \
-		$(DIR)/MSSMatMGUT_l_to_lgamma.cpp \
+		$(wildcard $(DIR)/observables/MSSMatMGUT*.cpp) \
 		$(DIR)/MSSMatMGUT_b_to_s_gamma.cpp \
 		$(DIR)/MSSMatMGUT_info.cpp \
 		$(DIR)/MSSMatMGUT_input_parameters.cpp \
 		$(DIR)/MSSMatMGUT_mass_eigenstates.cpp \
 		$(DIR)/MSSMatMGUT_mass_eigenstates_decoupling_scheme.cpp \
 		$(DIR)/MSSMatMGUT_model_slha.cpp \
+		$(DIR)/MSSMatMGUT_lepton_amm_wrapper.cpp \
 		$(DIR)/MSSMatMGUT_observables.cpp \
 		$(DIR)/MSSMatMGUT_physical.cpp \
 		$(DIR)/MSSMatMGUT_slha_io.cpp \
 		$(DIR)/MSSMatMGUT_soft_parameters.cpp \
 		$(DIR)/MSSMatMGUT_susy_parameters.cpp \
+		$(DIR)/MSSMatMGUT_unitarity.cpp \
 		$(DIR)/MSSMatMGUT_utilities.cpp \
 		$(DIR)/MSSMatMGUT_weinberg_angle.cpp
 
@@ -89,12 +90,11 @@ LLMSSMatMGUT_MMA  := \
 		$(DIR)/run_MSSMatMGUT.m
 
 LIBMSSMatMGUT_HDR := \
-		$(DIR)/MSSMatMGUT_a_muon.hpp \
+		$(DIR)/MSSMatMGUT_amm.hpp \
 		$(DIR)/MSSMatMGUT_convergence_tester.hpp \
 		$(DIR)/MSSMatMGUT_edm.hpp \
 		$(DIR)/MSSMatMGUT_FFV_form_factors.hpp \
-		$(DIR)/MSSMatMGUT_f_to_f_conversion.hpp \
-		$(DIR)/MSSMatMGUT_l_to_lgamma.hpp \
+		$(wildcard $(DIR)/observables/MSSMatMGUT*.hpp) \
 		$(DIR)/MSSMatMGUT_b_to_s_gamma.hpp \
 		$(DIR)/MSSMatMGUT_ewsb_solver.hpp \
 		$(DIR)/MSSMatMGUT_ewsb_solver_interface.hpp \
@@ -108,6 +108,7 @@ LIBMSSMatMGUT_HDR := \
 		$(DIR)/MSSMatMGUT_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/MSSMatMGUT_model.hpp \
 		$(DIR)/MSSMatMGUT_model_slha.hpp \
+		$(DIR)/MSSMatMGUT_lepton_amm_wrapper.hpp \
 		$(DIR)/MSSMatMGUT_observables.hpp \
 		$(DIR)/MSSMatMGUT_physical.hpp \
 		$(DIR)/MSSMatMGUT_slha_io.hpp \
@@ -116,12 +117,14 @@ LIBMSSMatMGUT_HDR := \
 		$(DIR)/MSSMatMGUT_soft_parameters.hpp \
 		$(DIR)/MSSMatMGUT_susy_parameters.hpp \
 		$(DIR)/MSSMatMGUT_susy_scale_constraint.hpp \
+		$(DIR)/MSSMatMGUT_unitarity.hpp \
 		$(DIR)/MSSMatMGUT_utilities.hpp \
 		$(DIR)/MSSMatMGUT_weinberg_angle.hpp
 
 LIBMSSMatMGUT_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/MSSMatMGUT_qft.hpp \
 		$(DIR)/cxx_qft/MSSMatMGUT_fields.hpp \
+		$(DIR)/cxx_qft/MSSMatMGUT_particle_aliases.hpp \
 		$(DIR)/cxx_qft/MSSMatMGUT_vertices.hpp \
 		$(DIR)/cxx_qft/MSSMatMGUT_context_base.hpp \
 		$(DIR)/cxx_qft/MSSMatMGUT_npointfunctions_wilsoncoeffs.hpp
@@ -317,7 +320,7 @@ $(METACODE_STAMP_MSSMatMGUT):
 endif
 
 $(LIBMSSMatMGUT_DEP) $(EXEMSSMatMGUT_DEP) $(LLMSSMatMGUT_DEP) $(LIBMSSMatMGUT_OBJ) $(EXEMSSMatMGUT_OBJ) $(LLMSSMatMGUT_OBJ) $(LLMSSMatMGUT_LIB): \
-	CPPFLAGS += $(MODMSSMatMGUT_SUBMOD_INC) $(MODMSSMatMGUT_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODMSSMatMGUT_SUBMOD_INC) $(MODMSSMatMGUT_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIGGSTOOLSFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBMSSMatMGUT_DEP) $(EXEMSSMatMGUT_DEP) $(LLMSSMatMGUT_DEP) $(LIBMSSMatMGUT_OBJ) $(EXEMSSMatMGUT_OBJ) $(LLMSSMatMGUT_OBJ) $(LLMSSMatMGUT_LIB): \
@@ -333,11 +336,11 @@ $(LIBMSSMatMGUT): $(LIBMSSMatMGUT_OBJ)
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBMSSMatMGUT) $(MODMSSMatMGUT_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
 $(LLMSSMatMGUT_LIB): $(LLMSSMatMGUT_OBJ) $(LIBMSSMatMGUT) $(MODMSSMatMGUT_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
 
 ALLDEP += $(LIBMSSMatMGUT_DEP) $(EXEMSSMatMGUT_DEP)
 ALLSRC += $(LIBMSSMatMGUT_SRC) $(EXEMSSMatMGUT_SRC)

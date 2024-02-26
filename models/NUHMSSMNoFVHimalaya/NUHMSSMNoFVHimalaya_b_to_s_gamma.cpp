@@ -20,13 +20,12 @@
 /**
  * @file NUHMSSMNoFVHimalaya_b_to_s_gamma.cpp
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #include <array>
 #include <complex>
 #include <fstream>
-#include <iomanip>
 
 #include "NUHMSSMNoFVHimalaya_b_to_s_gamma.hpp"
 #include "NUHMSSMNoFVHimalaya_mass_eigenstates.hpp"

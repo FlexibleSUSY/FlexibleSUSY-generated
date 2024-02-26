@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.7.1"];
+Print["FlexibleSUSY 2.8.0"];
 Print["lowNMSSMTanBetaAtMZ"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -20,7 +20,7 @@ FSlowNMSSMTanBetaAtMZSetLib = LibraryFunctionLoad[liblowNMSSMTanBetaAtMZ, "FSlow
 
 FSlowNMSSMTanBetaAtMZCalculateSpectrum = LibraryFunctionLoad[liblowNMSSMTanBetaAtMZ, "FSlowNMSSMTanBetaAtMZCalculateSpectrum", LinkObject, LinkObject];
 FSlowNMSSMTanBetaAtMZCalculateObservables = LibraryFunctionLoad[liblowNMSSMTanBetaAtMZ, "FSlowNMSSMTanBetaAtMZCalculateObservables", LinkObject, LinkObject];
-FSlowNMSSMTanBetaAtMZCalculateDecays = LibraryFunctionLoad[liblowNMSSMTanBetaAtMZ, "FSlowNMSSMTanBetaAtMZCalculateDecays", LinkObject, LinkObject];
+
 
 FSlowNMSSMTanBetaAtMZCalculateSpectrum::error = "`1`";
 FSlowNMSSMTanBetaAtMZCalculateSpectrum::warning = "`1`";
@@ -28,8 +28,6 @@ FSlowNMSSMTanBetaAtMZCalculateSpectrum::warning = "`1`";
 FSlowNMSSMTanBetaAtMZCalculateObservables::error = "`1`";
 FSlowNMSSMTanBetaAtMZCalculateObservables::warning = "`1`";
 
-FSlowNMSSMTanBetaAtMZCalculateDecays::error = "`1`";
-FSlowNMSSMTanBetaAtMZCalculateDecays::warning = "`1`";
 
 FSlowNMSSMTanBetaAtMZ::info = "`1`";
 FSlowNMSSMTanBetaAtMZ::nonum = "Error: `1` is not a numeric input value!";
@@ -70,6 +68,7 @@ fsDefaultSettings = {
       higgs3loopCorrectionAtAtAt -> 1,   (* FlexibleSUSY[29] *)
       higgs4loopCorrectionAtAsAsAs -> 1, (* FlexibleSUSY[30] *)
       loopLibrary -> 0,                  (* FlexibleSUSY[31] *)
+      calculateAMM -> 2.0,               (* FlexibleSUSY[32] *)
       parameterOutputScale -> 0          (* MODSEL[12] *)
 };
 
@@ -103,13 +102,6 @@ fsDefaultSMParameters = {
     PMNSAlpha2 -> 0,
     alphaEm0 -> 1/137.035999074,
     Mh -> 125.09
-};
-
-fdDefaultSettings = {
-   minBRtoPrint -> 1*^-5,
-   maxHigherOrderCorrections -> 4,
-   alphaThomson -> 1,
-   offShellVV -> 2
 };
 
 fslowNMSSMTanBetaAtMZDefaultInputParameters = {
@@ -147,10 +139,10 @@ Options[FSlowNMSSMTanBetaAtMZOpenHandle] = {
     Sequence @@ fsDefaultSettings,
     Sequence @@ fsDefaultSMParameters,
     Sequence @@ fslowNMSSMTanBetaAtMZDefaultInputParameters
-   , Sequence @@ fdDefaultSettings
+
 };
 
-FSlowNMSSMTanBetaAtMZOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters | fdSettings) -> s_List, r___] :=
+FSlowNMSSMTanBetaAtMZOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters ) -> s_List, r___] :=
     FSlowNMSSMTanBetaAtMZOpenHandle[a, Sequence @@ s, r];
 
 FSlowNMSSMTanBetaAtMZOpenHandle[OptionsPattern[]] :=
@@ -188,6 +180,7 @@ FSlowNMSSMTanBetaAtMZOpenHandle[OptionsPattern[]] :=
             OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[higgs4loopCorrectionAtAsAsAs],
             OptionValue[loopLibrary],
+            OptionValue[calculateAMM],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)
@@ -251,11 +244,7 @@ FSlowNMSSMTanBetaAtMZOpenHandle[OptionsPattern[]] :=
             OptionValue[ALambdaInput],
             OptionValue[AKappaInput],
             OptionValue[MuEffInput]
-            ,
-            OptionValue[minBRtoPrint],
-            OptionValue[maxHigherOrderCorrections],
-            OptionValue[alphaThomson],
-            OptionValue[offShellVV]
+
         }
 ];
 
@@ -300,6 +289,7 @@ FSlowNMSSMTanBetaAtMZSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[higgs4loopCorrectionAtAsAsAs],
             OptionValue[loopLibrary],
+            OptionValue[calculateAMM],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)
@@ -363,11 +353,7 @@ FSlowNMSSMTanBetaAtMZSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[ALambdaInput],
             OptionValue[AKappaInput],
             OptionValue[MuEffInput]
-            ,
-            OptionValue[minBRtoPrint],
-            OptionValue[maxHigherOrderCorrections],
-            OptionValue[alphaThomson],
-            OptionValue[offShellVV]
+
         }] /. HoldPattern[OptionValue[param_]] :> param /.
         { p } /.
         FSlowNMSSMTanBetaAtMZGetSettings[handle] /.

@@ -54,22 +54,23 @@ NMSSM_TARBALL := \
 		$(MODNAME).tar.gz
 
 LIBNMSSM_SRC := \
-		$(DIR)/NMSSM_a_muon.cpp \
+		$(DIR)/NMSSM_amm.cpp \
 		$(DIR)/NMSSM_edm.cpp \
 		$(DIR)/NMSSM_FFV_form_factors.cpp \
-		$(DIR)/NMSSM_f_to_f_conversion.cpp \
-		$(DIR)/NMSSM_l_to_lgamma.cpp \
+		$(wildcard $(DIR)/observables/NMSSM*.cpp) \
 		$(DIR)/NMSSM_b_to_s_gamma.cpp \
 		$(DIR)/NMSSM_info.cpp \
 		$(DIR)/NMSSM_input_parameters.cpp \
 		$(DIR)/NMSSM_mass_eigenstates.cpp \
 		$(DIR)/NMSSM_mass_eigenstates_decoupling_scheme.cpp \
 		$(DIR)/NMSSM_model_slha.cpp \
+		$(DIR)/NMSSM_lepton_amm_wrapper.cpp \
 		$(DIR)/NMSSM_observables.cpp \
 		$(DIR)/NMSSM_physical.cpp \
 		$(DIR)/NMSSM_slha_io.cpp \
 		$(DIR)/NMSSM_soft_parameters.cpp \
 		$(DIR)/NMSSM_susy_parameters.cpp \
+		$(DIR)/NMSSM_unitarity.cpp \
 		$(DIR)/NMSSM_utilities.cpp \
 		$(DIR)/NMSSM_weinberg_angle.cpp
 
@@ -89,12 +90,11 @@ LLNMSSM_MMA  := \
 		$(DIR)/run_NMSSM.m
 
 LIBNMSSM_HDR := \
-		$(DIR)/NMSSM_a_muon.hpp \
+		$(DIR)/NMSSM_amm.hpp \
 		$(DIR)/NMSSM_convergence_tester.hpp \
 		$(DIR)/NMSSM_edm.hpp \
 		$(DIR)/NMSSM_FFV_form_factors.hpp \
-		$(DIR)/NMSSM_f_to_f_conversion.hpp \
-		$(DIR)/NMSSM_l_to_lgamma.hpp \
+		$(wildcard $(DIR)/observables/NMSSM*.hpp) \
 		$(DIR)/NMSSM_b_to_s_gamma.hpp \
 		$(DIR)/NMSSM_ewsb_solver.hpp \
 		$(DIR)/NMSSM_ewsb_solver_interface.hpp \
@@ -108,6 +108,7 @@ LIBNMSSM_HDR := \
 		$(DIR)/NMSSM_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/NMSSM_model.hpp \
 		$(DIR)/NMSSM_model_slha.hpp \
+		$(DIR)/NMSSM_lepton_amm_wrapper.hpp \
 		$(DIR)/NMSSM_observables.hpp \
 		$(DIR)/NMSSM_physical.hpp \
 		$(DIR)/NMSSM_slha_io.hpp \
@@ -116,12 +117,14 @@ LIBNMSSM_HDR := \
 		$(DIR)/NMSSM_soft_parameters.hpp \
 		$(DIR)/NMSSM_susy_parameters.hpp \
 		$(DIR)/NMSSM_susy_scale_constraint.hpp \
+		$(DIR)/NMSSM_unitarity.hpp \
 		$(DIR)/NMSSM_utilities.hpp \
 		$(DIR)/NMSSM_weinberg_angle.hpp
 
 LIBNMSSM_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/NMSSM_qft.hpp \
 		$(DIR)/cxx_qft/NMSSM_fields.hpp \
+		$(DIR)/cxx_qft/NMSSM_particle_aliases.hpp \
 		$(DIR)/cxx_qft/NMSSM_vertices.hpp \
 		$(DIR)/cxx_qft/NMSSM_context_base.hpp \
 		$(DIR)/cxx_qft/NMSSM_npointfunctions_wilsoncoeffs.hpp
@@ -317,7 +320,7 @@ $(METACODE_STAMP_NMSSM):
 endif
 
 $(LIBNMSSM_DEP) $(EXENMSSM_DEP) $(LLNMSSM_DEP) $(LIBNMSSM_OBJ) $(EXENMSSM_OBJ) $(LLNMSSM_OBJ) $(LLNMSSM_LIB): \
-	CPPFLAGS += $(MODNMSSM_SUBMOD_INC) $(MODNMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODNMSSM_SUBMOD_INC) $(MODNMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIGGSTOOLSFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBNMSSM_DEP) $(EXENMSSM_DEP) $(LLNMSSM_DEP) $(LIBNMSSM_OBJ) $(EXENMSSM_OBJ) $(LLNMSSM_OBJ) $(LLNMSSM_LIB): \
@@ -333,11 +336,11 @@ $(LIBNMSSM): $(LIBNMSSM_OBJ)
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBNMSSM) $(MODNMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
 $(LLNMSSM_LIB): $(LLNMSSM_OBJ) $(LIBNMSSM) $(MODNMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
 
 ALLDEP += $(LIBNMSSM_DEP) $(EXENMSSM_DEP)
 ALLSRC += $(LIBNMSSM_SRC) $(EXENMSSM_SRC)

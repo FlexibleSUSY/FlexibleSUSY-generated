@@ -38,7 +38,6 @@ public:
    HTHDMIIMSSMBC_susy_scale_constraint() = default;
    HTHDMIIMSSMBC_susy_scale_constraint(HTHDMIIMSSMBC<Two_scale>*, const softsusy::QedQcd&);
    virtual ~HTHDMIIMSSMBC_susy_scale_constraint() = default;
-   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
    virtual void apply() override;
    virtual double get_scale() const override;

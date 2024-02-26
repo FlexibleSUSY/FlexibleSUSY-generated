@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.7.1"];
+Print["FlexibleSUSY 2.8.0"];
 Print["CE6SSM"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -20,7 +20,7 @@ FSCE6SSMSetLib = LibraryFunctionLoad[libCE6SSM, "FSCE6SSMSet", {Integer, {Real,1
 
 FSCE6SSMCalculateSpectrum = LibraryFunctionLoad[libCE6SSM, "FSCE6SSMCalculateSpectrum", LinkObject, LinkObject];
 FSCE6SSMCalculateObservables = LibraryFunctionLoad[libCE6SSM, "FSCE6SSMCalculateObservables", LinkObject, LinkObject];
-FSCE6SSMCalculateDecays = LibraryFunctionLoad[libCE6SSM, "FSCE6SSMCalculateDecays", LinkObject, LinkObject];
+
 
 FSCE6SSMCalculateSpectrum::error = "`1`";
 FSCE6SSMCalculateSpectrum::warning = "`1`";
@@ -28,8 +28,6 @@ FSCE6SSMCalculateSpectrum::warning = "`1`";
 FSCE6SSMCalculateObservables::error = "`1`";
 FSCE6SSMCalculateObservables::warning = "`1`";
 
-FSCE6SSMCalculateDecays::error = "`1`";
-FSCE6SSMCalculateDecays::warning = "`1`";
 
 FSCE6SSM::info = "`1`";
 FSCE6SSM::nonum = "Error: `1` is not a numeric input value!";
@@ -70,6 +68,7 @@ fsDefaultSettings = {
       higgs3loopCorrectionAtAtAt -> 1,   (* FlexibleSUSY[29] *)
       higgs4loopCorrectionAtAsAsAs -> 1, (* FlexibleSUSY[30] *)
       loopLibrary -> 0,                  (* FlexibleSUSY[31] *)
+      calculateAMM -> 2.0,               (* FlexibleSUSY[32] *)
       parameterOutputScale -> 0          (* MODSEL[12] *)
 };
 
@@ -105,13 +104,6 @@ fsDefaultSMParameters = {
     Mh -> 125.09
 };
 
-fdDefaultSettings = {
-   minBRtoPrint -> 1*^-5,
-   maxHigherOrderCorrections -> 4,
-   alphaThomson -> 1,
-   offShellVV -> 2
-};
-
 fsCE6SSMDefaultInputParameters = {
    TanBeta -> 0,
    m0SqGuess -> 0,
@@ -129,10 +121,10 @@ Options[FSCE6SSMOpenHandle] = {
     Sequence @@ fsDefaultSettings,
     Sequence @@ fsDefaultSMParameters,
     Sequence @@ fsCE6SSMDefaultInputParameters
-   , Sequence @@ fdDefaultSettings
+
 };
 
-FSCE6SSMOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters | fdSettings) -> s_List, r___] :=
+FSCE6SSMOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters ) -> s_List, r___] :=
     FSCE6SSMOpenHandle[a, Sequence @@ s, r];
 
 FSCE6SSMOpenHandle[OptionsPattern[]] :=
@@ -170,6 +162,7 @@ FSCE6SSMOpenHandle[OptionsPattern[]] :=
             OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[higgs4loopCorrectionAtAsAsAs],
             OptionValue[loopLibrary],
+            OptionValue[calculateAMM],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)
@@ -215,11 +208,7 @@ FSCE6SSMOpenHandle[OptionsPattern[]] :=
             OptionValue[BMuPrimeInput],
             OptionValue[vsInput],
             OptionValue[Lambda12Input]
-            ,
-            OptionValue[minBRtoPrint],
-            OptionValue[maxHigherOrderCorrections],
-            OptionValue[alphaThomson],
-            OptionValue[offShellVV]
+
         }
 ];
 
@@ -264,6 +253,7 @@ FSCE6SSMSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[higgs4loopCorrectionAtAsAsAs],
             OptionValue[loopLibrary],
+            OptionValue[calculateAMM],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)
@@ -309,11 +299,7 @@ FSCE6SSMSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[BMuPrimeInput],
             OptionValue[vsInput],
             OptionValue[Lambda12Input]
-            ,
-            OptionValue[minBRtoPrint],
-            OptionValue[maxHigherOrderCorrections],
-            OptionValue[alphaThomson],
-            OptionValue[offShellVV]
+
         }] /. HoldPattern[OptionValue[param_]] :> param /.
         { p } /.
         FSCE6SSMGetSettings[handle] /.

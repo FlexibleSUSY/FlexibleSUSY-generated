@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.7.1"];
+Print["FlexibleSUSY 2.8.0"];
 Print["NMSSMEFTHiggs"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -20,7 +20,7 @@ FSNMSSMEFTHiggsSetLib = LibraryFunctionLoad[libNMSSMEFTHiggs, "FSNMSSMEFTHiggsSe
 
 FSNMSSMEFTHiggsCalculateSpectrum = LibraryFunctionLoad[libNMSSMEFTHiggs, "FSNMSSMEFTHiggsCalculateSpectrum", LinkObject, LinkObject];
 FSNMSSMEFTHiggsCalculateObservables = LibraryFunctionLoad[libNMSSMEFTHiggs, "FSNMSSMEFTHiggsCalculateObservables", LinkObject, LinkObject];
-FSNMSSMEFTHiggsCalculateDecays = LibraryFunctionLoad[libNMSSMEFTHiggs, "FSNMSSMEFTHiggsCalculateDecays", LinkObject, LinkObject];
+
 
 FSNMSSMEFTHiggsCalculateSpectrum::error = "`1`";
 FSNMSSMEFTHiggsCalculateSpectrum::warning = "`1`";
@@ -28,8 +28,6 @@ FSNMSSMEFTHiggsCalculateSpectrum::warning = "`1`";
 FSNMSSMEFTHiggsCalculateObservables::error = "`1`";
 FSNMSSMEFTHiggsCalculateObservables::warning = "`1`";
 
-FSNMSSMEFTHiggsCalculateDecays::error = "`1`";
-FSNMSSMEFTHiggsCalculateDecays::warning = "`1`";
 
 FSNMSSMEFTHiggs::info = "`1`";
 FSNMSSMEFTHiggs::nonum = "Error: `1` is not a numeric input value!";
@@ -70,6 +68,7 @@ fsDefaultSettings = {
       higgs3loopCorrectionAtAtAt -> 1,   (* FlexibleSUSY[29] *)
       higgs4loopCorrectionAtAsAsAs -> 1, (* FlexibleSUSY[30] *)
       loopLibrary -> 0,                  (* FlexibleSUSY[31] *)
+      calculateAMM -> 2.0,               (* FlexibleSUSY[32] *)
       parameterOutputScale -> 0          (* MODSEL[12] *)
 };
 
@@ -105,13 +104,6 @@ fsDefaultSMParameters = {
     Mh -> 125.09
 };
 
-fdDefaultSettings = {
-   minBRtoPrint -> 1*^-5,
-   maxHigherOrderCorrections -> 4,
-   alphaThomson -> 1,
-   offShellVV -> 2
-};
-
 fsNMSSMEFTHiggsDefaultInputParameters = {
    MSUSY -> 0,
    M1Input -> 0,
@@ -137,10 +129,10 @@ Options[FSNMSSMEFTHiggsOpenHandle] = {
     Sequence @@ fsDefaultSettings,
     Sequence @@ fsDefaultSMParameters,
     Sequence @@ fsNMSSMEFTHiggsDefaultInputParameters
-   , Sequence @@ fdDefaultSettings
+
 };
 
-FSNMSSMEFTHiggsOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters | fdSettings) -> s_List, r___] :=
+FSNMSSMEFTHiggsOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters ) -> s_List, r___] :=
     FSNMSSMEFTHiggsOpenHandle[a, Sequence @@ s, r];
 
 FSNMSSMEFTHiggsOpenHandle[OptionsPattern[]] :=
@@ -178,6 +170,7 @@ FSNMSSMEFTHiggsOpenHandle[OptionsPattern[]] :=
             OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[higgs4loopCorrectionAtAsAsAs],
             OptionValue[loopLibrary],
+            OptionValue[calculateAMM],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)
@@ -295,11 +288,7 @@ FSNMSSMEFTHiggsOpenHandle[OptionsPattern[]] :=
             OptionValue[AeInput][[3,1]],
             OptionValue[AeInput][[3,2]],
             OptionValue[AeInput][[3,3]]
-            ,
-            OptionValue[minBRtoPrint],
-            OptionValue[maxHigherOrderCorrections],
-            OptionValue[alphaThomson],
-            OptionValue[offShellVV]
+
         }
 ];
 
@@ -344,6 +333,7 @@ FSNMSSMEFTHiggsSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[higgs4loopCorrectionAtAsAsAs],
             OptionValue[loopLibrary],
+            OptionValue[calculateAMM],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)
@@ -461,11 +451,7 @@ FSNMSSMEFTHiggsSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[AeInput][[3,1]],
             OptionValue[AeInput][[3,2]],
             OptionValue[AeInput][[3,3]]
-            ,
-            OptionValue[minBRtoPrint],
-            OptionValue[maxHigherOrderCorrections],
-            OptionValue[alphaThomson],
-            OptionValue[offShellVV]
+
         }] /. HoldPattern[OptionValue[param_]] :> param /.
         { p } /.
         FSNMSSMEFTHiggsGetSettings[handle] /.

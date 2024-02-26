@@ -464,18 +464,6 @@ double CLASSNAME::calculate_delta_vb_bsm(double sinThetaW) const
  * \f$\delta_{\text{VB}}^{\text{BSM}}\f$
  */
 
-std::complex<double> CLASSNAME::CpbarFeFehhPL(int gI1, int gI2) const
-{
-   const auto Ye = MODELPARAMETER(Ye);
-   const auto Ve = MODELPARAMETER(Ve);
-   const auto Ue = MODELPARAMETER(Ue);
-
-   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,Conj(Ve(gI2,
-      j2))*SUM(j1,0,2,Conj(Ue(gI1,j1))*Ye(j1,j2)));
-
-   return result;
-}
-
 std::complex<double> CLASSNAME::CpbarFvFeVWpPL(int gO1, int gI2) const
 {
    const auto g2 = MODELPARAMETER(g2);
@@ -498,11 +486,8 @@ std::complex<double> CLASSNAME::delta_vb_wave_Fv(int gO1) const
 
 std::complex<double> CLASSNAME::delta_vb_wave_Fe(int gO1) const
 {
-   const auto Mhh = MODELPARAMETER(Mhh);
-   const auto MFe = MODELPARAMETER(MFe);
-
-   const std::complex<double> result = SUM(gI2,0,2,-(AbsSqr(CpbarFeFehhPL(gI2,gO1)
-      )*B1(0,Sqr(MFe(gI2)),Sqr(Mhh))));
+   
+   const std::complex<double> result = 0;
 
    return result;
 }
@@ -655,7 +640,7 @@ double CLASSNAME::calculate_self_energy_VWp(double p) const
 double CLASSNAME::calculate_self_energy_VZ_top(double p, double mt) const
 {
    const double q  = model->get_scale();
-   const double Nc = 3.0;
+   static constexpr double Nc = 3.0;
    const auto gY = MODEL->get_g1() * SM_info::normalization_g1;
    const auto g2 = MODEL->get_g2() * SM_info::normalization_g2;
    const double gY2 = Sqr(gY);
@@ -685,7 +670,7 @@ double CLASSNAME::calculate_self_energy_VWp_top(double p, double mt) const
 {
    const double q  = model->get_scale();
    const double mb = MODEL->get_MFd(2);
-   const double Nc = 3.0;
+   static constexpr double Nc = 3.0;
    const auto g2 = MODEL->get_g2() * SM_info::normalization_g2;
 
    const double self_energy_w_top =

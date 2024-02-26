@@ -16,22 +16,28 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-
 /**
  * @file MSSMNoFVHimalaya_edm.hpp
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #ifndef MSSMNoFVHimalaya_EDM_H
 #define MSSMNoFVHimalaya_EDM_H
 
+#include "MSSMNoFVHimalaya_mass_eigenstates.hpp"
+#include "lowe.h"
+
 namespace flexiblesusy {
+
 class MSSMNoFVHimalaya_mass_eigenstates;
 
 namespace MSSMNoFVHimalaya_edm {
 
-}
+template <typename Lepton>
+double calculate_edm(const MSSMNoFVHimalaya_mass_eigenstates&, const softsusy::QedQcd&);
+
+} // namespace MSSMNoFVHimalaya_edm
 } // namespace flexiblesusy
 
 #endif

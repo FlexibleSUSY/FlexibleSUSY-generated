@@ -25,7 +25,7 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #include "E6SSM_mass_eigenstates.hpp"
@@ -654,7 +654,11 @@ void CLASSNAME::calculate_pole_masses()
       tp.run_task([this] () { calculate_MFe_pole(); });
       tp.run_task([this] () { calculate_MFd_pole(); });
       tp.run_task([this] () { calculate_MFu_pole(); });
-      tp.run_task([this] () { calculate_MVWm_pole(); });
+      tp.run_task([this] () {
+         if (PHYSICAL(MVWm) == 0.) {
+            calculate_MVWm_pole();
+         }
+      });
    }
 
 #else
@@ -692,7 +696,9 @@ void CLASSNAME::calculate_pole_masses()
       calculate_MFe_pole();
       calculate_MFd_pole();
       calculate_MFu_pole();
-      calculate_MVWm_pole();
+      if (PHYSICAL(MVWm) == 0.) {
+         calculate_MVWm_pole();
+      }
    }
 
 #endif
@@ -5021,12 +5027,12 @@ std::complex<double> CLASSNAME::CpUSeconjUSeVZVZ(int gO1, int gO2) const
 std::complex<double> CLASSNAME::CpUSeconjUSeVZpVZp(int gO1, int gO2) const
 {
    
-   const std::complex<double> result = IF(gO1 < 3,-0.4898979485566356*g1*gN*Cos(
-      ThetaWp())*KroneckerDelta(gO1,gO2)*Sin(ThetaW())*Sin(ThetaWp()),0) + IF(gO1
-      < 3,0.31622776601683794*g2*gN*Cos(ThetaW())*KroneckerDelta(gO1,gO2)*Sin(2*
-      ThetaWp()),0) + IF(gO1 < 3,0.2*KroneckerDelta(gO1,gO2)*Sqr(gN)*Sqr(Cos(
-      ThetaWp())),0) + IF(gO1 < 3,-0.7745966692414834*g1*g2*Cos(ThetaW())*
-      KroneckerDelta(gO1,gO2)*Sin(ThetaW())*Sqr(Sin(ThetaWp())),0) + IF(gO1 < 3,
+   const std::complex<double> result = IF(gO1 < 3,0.6324555320336759*g2*gN*Cos(
+      ThetaW())*Cos(ThetaWp())*KroneckerDelta(gO1,gO2)*Sin(ThetaWp()),0) + IF(gO1
+      < 3,-0.4898979485566356*g1*gN*Cos(ThetaWp())*KroneckerDelta(gO1,gO2)*Sin(
+      ThetaW())*Sin(ThetaWp()),0) + IF(gO1 < 3,0.2*KroneckerDelta(gO1,gO2)*Sqr(gN)
+      *Sqr(Cos(ThetaWp())),0) + IF(gO1 < 3,-0.7745966692414834*g1*g2*Cos(ThetaW())
+      *KroneckerDelta(gO1,gO2)*Sin(ThetaW())*Sqr(Sin(ThetaWp())),0) + IF(gO1 < 3,
       0.5*KroneckerDelta(gO1,gO2)*Sqr(g2)*Sqr(Cos(ThetaW()))*Sqr(Sin(ThetaWp())),0
       ) + IF(gO1 < 3,0.3*KroneckerDelta(gO1,gO2)*Sqr(g1)*Sqr(Sin(ThetaW()))*Sqr(
       Sin(ThetaWp())),0) + 0.4898979485566356*g1*gN*Cos(ThetaWp())*Sin(ThetaW())*
@@ -8955,17 +8961,17 @@ std::complex<double> CLASSNAME::CpUSHIpconjUSHIpVZpVZp(int gO1, int gO2) const
       )*KroneckerDelta(gO1,gO2)*Sin(ThetaW())*Sqr(Sin(ThetaWp())),0) + IF(gO1 < 2,
       0.5*KroneckerDelta(gO1,gO2)*Sqr(g2)*Sqr(Cos(ThetaW()))*Sqr(Sin(ThetaWp())),0
       ) + IF(gO1 < 2,0.3*KroneckerDelta(gO1,gO2)*Sqr(g1)*Sqr(Sin(ThetaW()))*Sqr(
-      Sin(ThetaWp())),0) - 0.4898979485566356*g1*gN*Cos(ThetaWp())*Sin(ThetaW())*
+      Sin(ThetaWp())),0) + 0.6324555320336759*g2*gN*Cos(ThetaW())*Cos(ThetaWp())*
       Sin(ThetaWp())*SUM(j1,0,1,KroneckerDelta(gO1,2 + j1)*KroneckerDelta(gO2,2 +
-      j1)) + 0.31622776601683794*g2*gN*Cos(ThetaW())*Sin(2*ThetaWp())*SUM(j1,0,1,
-      KroneckerDelta(gO1,2 + j1)*KroneckerDelta(gO2,2 + j1)) + 0.2*Sqr(gN)*Sqr(Cos
+      j1)) - 0.4898979485566356*g1*gN*Cos(ThetaWp())*Sin(ThetaW())*Sin(ThetaWp())*
+      SUM(j1,0,1,KroneckerDelta(gO1,2 + j1)*KroneckerDelta(gO2,2 + j1)) + 0.2*Sqr(
+      gN)*Sqr(Cos(ThetaWp()))*SUM(j1,0,1,KroneckerDelta(gO1,2 + j1)*KroneckerDelta
+      (gO2,2 + j1)) - 0.7745966692414834*g1*g2*Cos(ThetaW())*Sin(ThetaW())*Sqr(Sin
       (ThetaWp()))*SUM(j1,0,1,KroneckerDelta(gO1,2 + j1)*KroneckerDelta(gO2,2 + j1
-      )) - 0.7745966692414834*g1*g2*Cos(ThetaW())*Sin(ThetaW())*Sqr(Sin(ThetaWp())
-      )*SUM(j1,0,1,KroneckerDelta(gO1,2 + j1)*KroneckerDelta(gO2,2 + j1)) + 0.5*
-      Sqr(g2)*Sqr(Cos(ThetaW()))*Sqr(Sin(ThetaWp()))*SUM(j1,0,1,KroneckerDelta(gO1
-      ,2 + j1)*KroneckerDelta(gO2,2 + j1)) + 0.3*Sqr(g1)*Sqr(Sin(ThetaW()))*Sqr(
-      Sin(ThetaWp()))*SUM(j1,0,1,KroneckerDelta(gO1,2 + j1)*KroneckerDelta(gO2,2 +
-      j1));
+      )) + 0.5*Sqr(g2)*Sqr(Cos(ThetaW()))*Sqr(Sin(ThetaWp()))*SUM(j1,0,1,
+      KroneckerDelta(gO1,2 + j1)*KroneckerDelta(gO2,2 + j1)) + 0.3*Sqr(g1)*Sqr(Sin
+      (ThetaW()))*Sqr(Sin(ThetaWp()))*SUM(j1,0,1,KroneckerDelta(gO1,2 + j1)*
+      KroneckerDelta(gO2,2 + j1));
 
    return result;
 }
@@ -11750,12 +11756,12 @@ std::complex<double> CLASSNAME::CpAhAhVZpVZp(int gI1, int gI2) const
       2.449489742783178*gN*Sin(2*ThetaWp()) + 2*g1*Sin(ThetaW())*Sqr(Sin(ThetaWp()
       ))) + Cos(ThetaW())*(9.486832980505138*g2*gN*Sin(2*ThetaWp()) +
       15.491933384829668*g1*g2*Sin(ThetaW())*Sqr(Sin(ThetaWp()))))*ZA(gI1,0)*ZA(
-      gI2,0) + 2*(-4.898979485566356*g1*gN*Cos(ThetaWp())*Sin(ThetaW())*Sin(
-      ThetaWp()) - 3.1622776601683795*g2*gN*Cos(ThetaW())*Sin(2*ThetaWp()) + 2*Sqr
-      (gN)*Sqr(Cos(ThetaWp())) + g1*Sin(ThetaW())*(7.745966692414834*g2*Cos(ThetaW
-      ()) + 3*g1*Sin(ThetaW()))*Sqr(Sin(ThetaWp())) + 5*Sqr(g2)*Sqr(Cos(ThetaW()))
-      *Sqr(Sin(ThetaWp())))*ZA(gI1,1)*ZA(gI2,1) + 25*Sqr(gN)*Sqr(Cos(ThetaWp()))*
-      ZA(gI1,2)*ZA(gI2,2));
+      gI2,0) + 2*(-2*Cos(ThetaWp())*(3.1622776601683795*g2*gN*Cos(ThetaW())*Sin(
+      ThetaWp()) + 2.449489742783178*g1*gN*Sin(ThetaW())*Sin(ThetaWp())) + 2*Sqr(
+      gN)*Sqr(Cos(ThetaWp())) + (g1*Sin(ThetaW())*(7.745966692414834*g2*Cos(ThetaW
+      ()) + 3*g1*Sin(ThetaW())) + 5*Sqr(g2)*Sqr(Cos(ThetaW())))*Sqr(Sin(ThetaWp())
+      ))*ZA(gI1,1)*ZA(gI2,1) + 25*Sqr(gN)*Sqr(Cos(ThetaWp()))*ZA(gI1,2)*ZA(gI2,2))
+      ;
 
    return result;
 }
@@ -11768,12 +11774,12 @@ std::complex<double> CLASSNAME::CphhhhVZpVZp(int gI1, int gI2) const
       2.449489742783178*gN*Sin(2*ThetaWp()) + 2*g1*Sin(ThetaW())*Sqr(Sin(ThetaWp()
       ))) + Cos(ThetaW())*(9.486832980505138*g2*gN*Sin(2*ThetaWp()) +
       15.491933384829668*g1*g2*Sin(ThetaW())*Sqr(Sin(ThetaWp()))))*ZH(gI1,0)*ZH(
-      gI2,0) + 2*(-4.898979485566356*g1*gN*Cos(ThetaWp())*Sin(ThetaW())*Sin(
-      ThetaWp()) - 3.1622776601683795*g2*gN*Cos(ThetaW())*Sin(2*ThetaWp()) + 2*Sqr
-      (gN)*Sqr(Cos(ThetaWp())) + g1*Sin(ThetaW())*(7.745966692414834*g2*Cos(ThetaW
-      ()) + 3*g1*Sin(ThetaW()))*Sqr(Sin(ThetaWp())) + 5*Sqr(g2)*Sqr(Cos(ThetaW()))
-      *Sqr(Sin(ThetaWp())))*ZH(gI1,1)*ZH(gI2,1) + 25*Sqr(gN)*Sqr(Cos(ThetaWp()))*
-      ZH(gI1,2)*ZH(gI2,2));
+      gI2,0) + 2*(-2*Cos(ThetaWp())*(3.1622776601683795*g2*gN*Cos(ThetaW())*Sin(
+      ThetaWp()) + 2.449489742783178*g1*gN*Sin(ThetaW())*Sin(ThetaWp())) + 2*Sqr(
+      gN)*Sqr(Cos(ThetaWp())) + (g1*Sin(ThetaW())*(7.745966692414834*g2*Cos(ThetaW
+      ()) + 3*g1*Sin(ThetaW())) + 5*Sqr(g2)*Sqr(Cos(ThetaW())))*Sqr(Sin(ThetaWp())
+      ))*ZH(gI1,1)*ZH(gI2,1) + 25*Sqr(gN)*Sqr(Cos(ThetaWp()))*ZH(gI1,2)*ZH(gI2,2))
+      ;
 
    return result;
 }
@@ -11781,12 +11787,11 @@ std::complex<double> CLASSNAME::CphhhhVZpVZp(int gI1, int gI2) const
 std::complex<double> CLASSNAME::CpSvconjSvVZpVZp(int gI1, int gI2) const
 {
    
-   const std::complex<double> result = 0.1*KroneckerDelta(gI1,gI2)*(-
-      3.1622776601683795*g2*gN*Cos(ThetaW())*Sin(2*ThetaWp()) + 2*Sqr(gN)*Sqr(Cos(
-      ThetaWp())) + 5*Sqr(g2)*Sqr(Cos(ThetaW()))*Sqr(Sin(ThetaWp())) + g1*(-
-      2.449489742783178*gN*Sin(ThetaW())*Sin(2*ThetaWp()) + 3.872983346207417*g2*
-      Sin(2*ThetaW())*Sqr(Sin(ThetaWp())) + 3*g1*Sqr(Sin(ThetaW()))*Sqr(Sin(
-      ThetaWp()))));
+   const std::complex<double> result = 0.1*KroneckerDelta(gI1,gI2)*(-2*Cos(ThetaWp
+      ())*(3.1622776601683795*g2*gN*Cos(ThetaW())*Sin(ThetaWp()) +
+      2.449489742783178*g1*gN*Sin(ThetaW())*Sin(ThetaWp())) + 2*Sqr(gN)*Sqr(Cos(
+      ThetaWp())) + (g1*Sin(ThetaW())*(7.745966692414834*g2*Cos(ThetaW()) + 3*g1*
+      Sin(ThetaW())) + 5*Sqr(g2)*Sqr(Cos(ThetaW())))*Sqr(Sin(ThetaWp())));
 
    return result;
 }
@@ -11917,12 +11922,12 @@ std::complex<double> CLASSNAME::CpSHI0conjSHI0VZpVZp(int gI1, int gI2) const
       2.449489742783178*gN*Sin(2*ThetaWp()) + 2*g1*Sin(ThetaW())*Sqr(Sin(ThetaWp()
       ))) + Cos(ThetaW())*(9.486832980505138*g2*gN*Sin(2*ThetaWp()) +
       15.491933384829668*g1*g2*Sin(ThetaW())*Sqr(Sin(ThetaWp()))))*SUM(j1,0,1,Conj
-      (UHI0(gI1,j1))*UHI0(gI2,j1)) + 2*(-4.898979485566356*g1*gN*Cos(ThetaWp())*
-      Sin(ThetaW())*Sin(ThetaWp()) - 3.1622776601683795*g2*gN*Cos(ThetaW())*Sin(2*
-      ThetaWp()) + 2*Sqr(gN)*Sqr(Cos(ThetaWp())) + g1*Sin(ThetaW())*(
-      7.745966692414834*g2*Cos(ThetaW()) + 3*g1*Sin(ThetaW()))*Sqr(Sin(ThetaWp()))
-      + 5*Sqr(g2)*Sqr(Cos(ThetaW()))*Sqr(Sin(ThetaWp())))*SUM(j1,0,1,Conj(UHI0(gI1
-      ,2 + j1))*UHI0(gI2,2 + j1)));
+      (UHI0(gI1,j1))*UHI0(gI2,j1)) + 2*(-2*Cos(ThetaWp())*(3.1622776601683795*g2*
+      gN*Cos(ThetaW())*Sin(ThetaWp()) + 2.449489742783178*g1*gN*Sin(ThetaW())*Sin(
+      ThetaWp())) + 2*Sqr(gN)*Sqr(Cos(ThetaWp())) + (g1*Sin(ThetaW())*(
+      7.745966692414834*g2*Cos(ThetaW()) + 3*g1*Sin(ThetaW())) + 5*Sqr(g2)*Sqr(Cos
+      (ThetaW())))*Sqr(Sin(ThetaWp())))*SUM(j1,0,1,Conj(UHI0(gI1,2 + j1))*UHI0(gI2
+      ,2 + j1)));
 
    return result;
 }
@@ -20410,7 +20415,8 @@ double CLASSNAME::calculate_MVZ_DRbar(double m_pole) const
    const double mass_sqr = Sqr(m_pole) + self_energy;
 
    if (mass_sqr < 0.) {
-      problems.flag_pole_tachyon(E6SSM_info::VZ);return m_pole;
+      problems.flag_pole_tachyon(E6SSM_info::VZ);
+      return m_pole;
    }
 
    return AbsSqrt(mass_sqr);
@@ -20423,7 +20429,8 @@ double CLASSNAME::calculate_MVWm_DRbar(double m_pole) const
    const double mass_sqr = Sqr(m_pole) + self_energy;
 
    if (mass_sqr < 0.) {
-      problems.flag_pole_tachyon(E6SSM_info::VWm);return m_pole;
+      problems.flag_pole_tachyon(E6SSM_info::VWm);
+      return m_pole;
    }
 
    return AbsSqrt(mass_sqr);

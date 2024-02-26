@@ -205,6 +205,16 @@ void lowNMSSMTanBetaAtMZ_slha_io::set_settings(const Spectrum_generator_settings
 }
 
 /**
+ * Stores the settings (LToLConversion block) in the SLHA object.
+ *
+ * @param settings class of settings
+ */
+void lowNMSSMTanBetaAtMZ_slha_io::set_LToLConversion_settings(const LToLConversion_settings& settings)
+{
+   slha_io.set_LToLConversion_settings(settings);
+}
+
+/**
  * Stores the settings (FlexibleSUSY block) in the SLHA object.
  *
  * @param settings class of settings
@@ -212,6 +222,15 @@ void lowNMSSMTanBetaAtMZ_slha_io::set_settings(const Spectrum_generator_settings
 void lowNMSSMTanBetaAtMZ_slha_io::set_FlexibleDecay_settings(const FlexibleDecay_settings& settings)
 {
    slha_io.set_FlexibleDecay_settings(settings);
+}
+
+/**
+ * Stores the settings (FlexibleSUSYUnitarity block) in the SLHA object.
+ */
+void lowNMSSMTanBetaAtMZ_slha_io::set_unitarity_infinite_s(
+   const flexiblesusy::Spectrum_generator_settings& spectrum_generator_settings, UnitarityInfiniteS const& unitarity)
+{
+   slha_io.set_unitarity_infinite_s(spectrum_generator_settings, unitarity);
 }
 
 /**
@@ -596,28 +615,6 @@ void lowNMSSMTanBetaAtMZ_slha_io::set_dcinfo(
 }
 
 /**
- * Sort decays of every particle according to their width
- *
- */
-std::vector<Decay> sort_decays_list(const Decays_list& decays_list) {
-   std::vector<Decay> decays_list_as_vector;
-   decays_list_as_vector.reserve(decays_list.size());
-   for (const auto& el : decays_list) {
-      decays_list_as_vector.push_back(el.second);
-   }
-
-   std::sort(
-      decays_list_as_vector.begin(),
-      decays_list_as_vector.end(),
-      [](const auto& d1, const auto& d2) {
-         return d1.get_width() > d2.get_width();
-      }
-   );
-
-   return decays_list_as_vector;
-}
-
-/**
  * Stores the branching ratios for a given particle in the SLHA
  * object.
  *
@@ -638,7 +635,7 @@ void lowNMSSMTanBetaAtMZ_slha_io::set_decay_block(const Decays_list& decays_list
          << FORMAT_TOTAL_WIDTH(pdg, width, name + " decays");
 
    if (!is_zero(width, 1e-100)) {
-      constexpr double NEGATIVE_BR_TOLERANCE = 1e-11;
+      static constexpr double NEGATIVE_BR_TOLERANCE = 1e-11;
       const double MIN_BR_TO_PRINT = flexibledecay_settings.get(FlexibleDecay_settings::min_br_to_print);
       std::vector<Decay> sorted_decays_list = sort_decays_list(decays_list);
       for (const auto& channel : sorted_decays_list) {
@@ -667,28 +664,13 @@ void lowNMSSMTanBetaAtMZ_slha_io::set_decay_block(const Decays_list& decays_list
    slha_io.set_block(decay);
 }
 
-/**
- * Stores the particle decay branching ratios in the SLHA object.
- *
- * @param decays struct containing decays data
- */
-void lowNMSSMTanBetaAtMZ_slha_io::set_decays(const lowNMSSMTanBetaAtMZ_decay_table& decay_table, FlexibleDecay_settings const& flexibledecay_settings)
+void lowNMSSMTanBetaAtMZ_slha_io::set_effectivecouplings_block(const std::vector<std::tuple<int, int, int, double, std::string>>& effCouplings)
 {
-   for (const auto& particle : decay_table) {
-      set_decay_block(particle, flexibledecay_settings);
-   }
+   slha_io.set_effectivecouplings_block(effCouplings);
 }
-void lowNMSSMTanBetaAtMZ_slha_io::fill_decays_data(const lowNMSSMTanBetaAtMZ_decays& decays, FlexibleDecay_settings const& flexibledecay_settings)
-{
-   const auto& decays_problems = decays.get_problems();
-   const bool decays_error = decays_problems.have_problem();
 
-   set_dcinfo(decays_problems);
 
-   if (!decays_error) {
-      set_decays(decays.get_decay_table(), flexibledecay_settings);
-   }
-}
+
 
 /**
  * Stores the model (DR-bar) parameters, masses and mixing matrices in
@@ -1049,6 +1031,17 @@ void lowNMSSMTanBetaAtMZ_slha_io::fill(Physical_input& input) const
  * @param settings struct of spectrum generator settings to be filled
  */
 void lowNMSSMTanBetaAtMZ_slha_io::fill(Spectrum_generator_settings& settings) const
+{
+   slha_io.fill(settings);
+}
+
+/**
+ * Fill struct of spectrum generator settings from SLHA object
+ * (LToLConversion block)
+ *
+ * @param settings struct of spectrum generator settings to be filled
+ */
+void lowNMSSMTanBetaAtMZ_slha_io::fill(LToLConversion_settings& settings) const
 {
    slha_io.fill(settings);
 }

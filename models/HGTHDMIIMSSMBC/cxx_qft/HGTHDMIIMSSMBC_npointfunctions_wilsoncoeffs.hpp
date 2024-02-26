@@ -20,7 +20,7 @@
 /**
  * @file cxx_qft/HGTHDMIIMSSMBC_npointfunctions_wilsoncoeffs.hpp
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #ifndef HGTHDMIIMSSMBC_CXXQFT_NPOINTFUNCTIONS_H
@@ -49,6 +49,15 @@
 #include <boost/fusion/functional/adapter/fused.hpp>
 
 #include <boost/functional/value_factory.hpp>
+
+#define NPF_S(args...) context.vertex<args>(lorentz_scalar{},
+#define NPF_L(args...) context.vertex<args>(lorentz_left{},
+#define NPF_R(args...) context.vertex<args>(lorentz_right{},
+#define NPF_G(args...) context.vertex<args>(lorentz_inverse_metric{},
+#define NPF_T(args...) context.vertex<args>(triple_vector{},
+#define NPF_SSV(args...) context.vertex<args>(lorentz_momentum_diff{
+#define NPF_D(i1, i2) i1, i2},
+#define NPF_I(args...) concatenate(args))
 
 namespace flexiblesusy {
 namespace HGTHDMIIMSSMBC_cxx_diagrams {
@@ -87,7 +96,7 @@ namespace detail {
          using namespace boost::mpl;
 
          using field_insertions = typename at_c<InsertionData, 0>::type;
-         static constexpr int combinatorial_factor = at_c<InsertionData, 1>::type::value;
+         static constexpr double combinatorial_factor = at_c<InsertionData, 1>::type::value;
          static constexpr auto colour_factor = at_c<InsertionData, 2>::type::value;
 
          using pairs = typename transform<GenericKeys,
@@ -191,7 +200,7 @@ struct context_with_vertices : context_base {
    std::complex<double> vertex(triple_vector,
       const typename Vertex<Fields...>::indices_type &indices ) const {
       // FIXME: hardcoded odd permutation to agree with SPheno
-      return Vertex<Fields...>::evaluate( indices, model ).value( TripleVectorVertex::odd_permutation{} );
+      return Vertex<Fields...>::evaluate( indices, model ).value( cxx_diagrams::TripleVectorVertex::odd_permutation{} );
    }
 
    double scale( void ) const {

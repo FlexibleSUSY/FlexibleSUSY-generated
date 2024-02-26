@@ -20,7 +20,7 @@
 /**
  * @file cxx_qft/MSSMNoFVatMGUT_qft.hpp
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #ifndef MSSMNoFVatMGUT_CXXQFT_QFT_H

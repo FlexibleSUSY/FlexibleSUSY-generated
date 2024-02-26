@@ -54,22 +54,23 @@ E6SSM_TARBALL := \
 		$(MODNAME).tar.gz
 
 LIBE6SSM_SRC := \
-		$(DIR)/E6SSM_a_muon.cpp \
+		$(DIR)/E6SSM_amm.cpp \
 		$(DIR)/E6SSM_edm.cpp \
 		$(DIR)/E6SSM_FFV_form_factors.cpp \
-		$(DIR)/E6SSM_f_to_f_conversion.cpp \
-		$(DIR)/E6SSM_l_to_lgamma.cpp \
+		$(wildcard $(DIR)/observables/E6SSM*.cpp) \
 		$(DIR)/E6SSM_b_to_s_gamma.cpp \
 		$(DIR)/E6SSM_info.cpp \
 		$(DIR)/E6SSM_input_parameters.cpp \
 		$(DIR)/E6SSM_mass_eigenstates.cpp \
 		$(DIR)/E6SSM_mass_eigenstates_decoupling_scheme.cpp \
 		$(DIR)/E6SSM_model_slha.cpp \
+		$(DIR)/E6SSM_lepton_amm_wrapper.cpp \
 		$(DIR)/E6SSM_observables.cpp \
 		$(DIR)/E6SSM_physical.cpp \
 		$(DIR)/E6SSM_slha_io.cpp \
 		$(DIR)/E6SSM_soft_parameters.cpp \
 		$(DIR)/E6SSM_susy_parameters.cpp \
+		$(DIR)/E6SSM_unitarity.cpp \
 		$(DIR)/E6SSM_utilities.cpp \
 		$(DIR)/E6SSM_weinberg_angle.cpp
 
@@ -89,12 +90,11 @@ LLE6SSM_MMA  := \
 		$(DIR)/run_E6SSM.m
 
 LIBE6SSM_HDR := \
-		$(DIR)/E6SSM_a_muon.hpp \
+		$(DIR)/E6SSM_amm.hpp \
 		$(DIR)/E6SSM_convergence_tester.hpp \
 		$(DIR)/E6SSM_edm.hpp \
 		$(DIR)/E6SSM_FFV_form_factors.hpp \
-		$(DIR)/E6SSM_f_to_f_conversion.hpp \
-		$(DIR)/E6SSM_l_to_lgamma.hpp \
+		$(wildcard $(DIR)/observables/E6SSM*.hpp) \
 		$(DIR)/E6SSM_b_to_s_gamma.hpp \
 		$(DIR)/E6SSM_ewsb_solver.hpp \
 		$(DIR)/E6SSM_ewsb_solver_interface.hpp \
@@ -108,6 +108,7 @@ LIBE6SSM_HDR := \
 		$(DIR)/E6SSM_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/E6SSM_model.hpp \
 		$(DIR)/E6SSM_model_slha.hpp \
+		$(DIR)/E6SSM_lepton_amm_wrapper.hpp \
 		$(DIR)/E6SSM_observables.hpp \
 		$(DIR)/E6SSM_physical.hpp \
 		$(DIR)/E6SSM_slha_io.hpp \
@@ -116,12 +117,14 @@ LIBE6SSM_HDR := \
 		$(DIR)/E6SSM_soft_parameters.hpp \
 		$(DIR)/E6SSM_susy_parameters.hpp \
 		$(DIR)/E6SSM_susy_scale_constraint.hpp \
+		$(DIR)/E6SSM_unitarity.hpp \
 		$(DIR)/E6SSM_utilities.hpp \
 		$(DIR)/E6SSM_weinberg_angle.hpp
 
 LIBE6SSM_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/E6SSM_qft.hpp \
 		$(DIR)/cxx_qft/E6SSM_fields.hpp \
+		$(DIR)/cxx_qft/E6SSM_particle_aliases.hpp \
 		$(DIR)/cxx_qft/E6SSM_vertices.hpp \
 		$(DIR)/cxx_qft/E6SSM_context_base.hpp \
 		$(DIR)/cxx_qft/E6SSM_npointfunctions_wilsoncoeffs.hpp
@@ -317,7 +320,7 @@ $(METACODE_STAMP_E6SSM):
 endif
 
 $(LIBE6SSM_DEP) $(EXEE6SSM_DEP) $(LLE6SSM_DEP) $(LIBE6SSM_OBJ) $(EXEE6SSM_OBJ) $(LLE6SSM_OBJ) $(LLE6SSM_LIB): \
-	CPPFLAGS += $(MODE6SSM_SUBMOD_INC) $(MODE6SSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODE6SSM_SUBMOD_INC) $(MODE6SSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIGGSTOOLSFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBE6SSM_DEP) $(EXEE6SSM_DEP) $(LLE6SSM_DEP) $(LIBE6SSM_OBJ) $(EXEE6SSM_OBJ) $(LLE6SSM_OBJ) $(LLE6SSM_LIB): \
@@ -333,11 +336,11 @@ $(LIBE6SSM): $(LIBE6SSM_OBJ)
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBE6SSM) $(MODE6SSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
 $(LLE6SSM_LIB): $(LLE6SSM_OBJ) $(LIBE6SSM) $(MODE6SSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
 
 ALLDEP += $(LIBE6SSM_DEP) $(EXEE6SSM_DEP)
 ALLSRC += $(LIBE6SSM_SRC) $(EXEE6SSM_SRC)

@@ -41,13 +41,13 @@ lowNMSSM_INCLUDE_MK := \
 
 lowNMSSM_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.lowNMSSM_generated \
-		$(DIR)/LesHouches.in.TP6 \
-		$(DIR)/LesHouches.in.TP5 \
-		$(DIR)/LesHouches.in.TP1 \
 		$(DIR)/LesHouches.in.TP4 \
-		$(DIR)/LesHouches.in.TP2 \
 		$(DIR)/LesHouches.in.TP3 \
-		$(DIR)/LesHouches.in.lowNMSSM
+		$(DIR)/LesHouches.in.TP5 \
+		$(DIR)/LesHouches.in.TP2 \
+		$(DIR)/LesHouches.in.TP6 \
+		$(DIR)/LesHouches.in.lowNMSSM \
+		$(DIR)/LesHouches.in.TP1
 
 lowNMSSM_REFERENCES := \
 		$(DIR)/lowNMSSM_references.tex
@@ -60,22 +60,23 @@ lowNMSSM_TARBALL := \
 		$(MODNAME).tar.gz
 
 LIBlowNMSSM_SRC := \
-		$(DIR)/lowNMSSM_a_muon.cpp \
+		$(DIR)/lowNMSSM_amm.cpp \
 		$(DIR)/lowNMSSM_edm.cpp \
 		$(DIR)/lowNMSSM_FFV_form_factors.cpp \
-		$(DIR)/lowNMSSM_f_to_f_conversion.cpp \
-		$(DIR)/lowNMSSM_l_to_lgamma.cpp \
+		$(wildcard $(DIR)/observables/lowNMSSM*.cpp) \
 		$(DIR)/lowNMSSM_b_to_s_gamma.cpp \
 		$(DIR)/lowNMSSM_info.cpp \
 		$(DIR)/lowNMSSM_input_parameters.cpp \
 		$(DIR)/lowNMSSM_mass_eigenstates.cpp \
 		$(DIR)/lowNMSSM_mass_eigenstates_decoupling_scheme.cpp \
 		$(DIR)/lowNMSSM_model_slha.cpp \
+		$(DIR)/lowNMSSM_lepton_amm_wrapper.cpp \
 		$(DIR)/lowNMSSM_observables.cpp \
 		$(DIR)/lowNMSSM_physical.cpp \
 		$(DIR)/lowNMSSM_slha_io.cpp \
 		$(DIR)/lowNMSSM_soft_parameters.cpp \
 		$(DIR)/lowNMSSM_susy_parameters.cpp \
+		$(DIR)/lowNMSSM_unitarity.cpp \
 		$(DIR)/lowNMSSM_utilities.cpp \
 		$(DIR)/lowNMSSM_weinberg_angle.cpp
 
@@ -95,12 +96,11 @@ LLlowNMSSM_MMA  := \
 		$(DIR)/run_lowNMSSM.m
 
 LIBlowNMSSM_HDR := \
-		$(DIR)/lowNMSSM_a_muon.hpp \
+		$(DIR)/lowNMSSM_amm.hpp \
 		$(DIR)/lowNMSSM_convergence_tester.hpp \
 		$(DIR)/lowNMSSM_edm.hpp \
 		$(DIR)/lowNMSSM_FFV_form_factors.hpp \
-		$(DIR)/lowNMSSM_f_to_f_conversion.hpp \
-		$(DIR)/lowNMSSM_l_to_lgamma.hpp \
+		$(wildcard $(DIR)/observables/lowNMSSM*.hpp) \
 		$(DIR)/lowNMSSM_b_to_s_gamma.hpp \
 		$(DIR)/lowNMSSM_ewsb_solver.hpp \
 		$(DIR)/lowNMSSM_ewsb_solver_interface.hpp \
@@ -114,6 +114,7 @@ LIBlowNMSSM_HDR := \
 		$(DIR)/lowNMSSM_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/lowNMSSM_model.hpp \
 		$(DIR)/lowNMSSM_model_slha.hpp \
+		$(DIR)/lowNMSSM_lepton_amm_wrapper.hpp \
 		$(DIR)/lowNMSSM_observables.hpp \
 		$(DIR)/lowNMSSM_physical.hpp \
 		$(DIR)/lowNMSSM_slha_io.hpp \
@@ -122,12 +123,14 @@ LIBlowNMSSM_HDR := \
 		$(DIR)/lowNMSSM_soft_parameters.hpp \
 		$(DIR)/lowNMSSM_susy_parameters.hpp \
 		$(DIR)/lowNMSSM_susy_scale_constraint.hpp \
+		$(DIR)/lowNMSSM_unitarity.hpp \
 		$(DIR)/lowNMSSM_utilities.hpp \
 		$(DIR)/lowNMSSM_weinberg_angle.hpp
 
 LIBlowNMSSM_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/lowNMSSM_qft.hpp \
 		$(DIR)/cxx_qft/lowNMSSM_fields.hpp \
+		$(DIR)/cxx_qft/lowNMSSM_particle_aliases.hpp \
 		$(DIR)/cxx_qft/lowNMSSM_vertices.hpp \
 		$(DIR)/cxx_qft/lowNMSSM_context_base.hpp \
 		$(DIR)/cxx_qft/lowNMSSM_npointfunctions_wilsoncoeffs.hpp
@@ -323,7 +326,7 @@ $(METACODE_STAMP_lowNMSSM):
 endif
 
 $(LIBlowNMSSM_DEP) $(EXElowNMSSM_DEP) $(LLlowNMSSM_DEP) $(LIBlowNMSSM_OBJ) $(EXElowNMSSM_OBJ) $(LLlowNMSSM_OBJ) $(LLlowNMSSM_LIB): \
-	CPPFLAGS += $(MODlowNMSSM_SUBMOD_INC) $(MODlowNMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODlowNMSSM_SUBMOD_INC) $(MODlowNMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIGGSTOOLSFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBlowNMSSM_DEP) $(EXElowNMSSM_DEP) $(LLlowNMSSM_DEP) $(LIBlowNMSSM_OBJ) $(EXElowNMSSM_OBJ) $(LLlowNMSSM_OBJ) $(LLlowNMSSM_LIB): \
@@ -339,11 +342,11 @@ $(LIBlowNMSSM): $(LIBlowNMSSM_OBJ)
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBlowNMSSM) $(MODlowNMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
 $(LLlowNMSSM_LIB): $(LLlowNMSSM_OBJ) $(LIBlowNMSSM) $(MODlowNMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
 
 ALLDEP += $(LIBlowNMSSM_DEP) $(EXElowNMSSM_DEP)
 ALLSRC += $(LIBlowNMSSM_SRC) $(EXElowNMSSM_SRC)

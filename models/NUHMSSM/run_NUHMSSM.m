@@ -73,8 +73,8 @@ handle = FSNUHMSSMOpenHandle[
         TanBeta -> 0,
         SignMu -> 0,
         Azero -> 0,
-        mHd2In -> 0,
-        mHu2In -> 0
+        MuInput -> 0,
+        BInput -> 0
     }
 ];
 

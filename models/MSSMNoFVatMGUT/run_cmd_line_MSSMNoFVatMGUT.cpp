@@ -217,6 +217,8 @@ int run_solver(int loop_library, const MSSMNoFVatMGUT_input_parameters& input)
    settings.set(Spectrum_generator_settings::calculate_bsm_masses, 1.0);
    settings.set(Spectrum_generator_settings::calculate_sm_masses, 1.0);
 
+   
+
    MSSMNoFVatMGUT_spectrum_generator<solver_type> spectrum_generator;
    spectrum_generator.set_settings(settings);
    spectrum_generator.run(qedqcd, input);
@@ -230,7 +232,9 @@ int run_solver(int loop_library, const MSSMNoFVatMGUT_input_parameters& input)
    auto models = spectrum_generator.get_models_slha();
 
    const auto observables = calculate_observables(
-      std::get<0>(models), qedqcd, physical_input, scales.pole_mass_scale);
+      std::get<0>(models), qedqcd,
+      
+      physical_input, settings, scales.pole_mass_scale);
 
    FlexibleDecay_settings flexibledecay_settings;
 
@@ -238,6 +242,7 @@ int run_solver(int loop_library, const MSSMNoFVatMGUT_input_parameters& input)
    // SLHA output
    MSSMNoFVatMGUT_slha_io slha_io;
    slha_io.fill(models, qedqcd, scales, observables, settings, flexibledecay_settings);
+   
    slha_io.write_to_stream(std::cout);
 
    return spectrum_generator.get_exit_code();

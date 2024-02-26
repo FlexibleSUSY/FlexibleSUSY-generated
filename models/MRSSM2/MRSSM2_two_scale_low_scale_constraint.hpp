@@ -39,7 +39,6 @@ public:
    MRSSM2_low_scale_constraint() = default;
    MRSSM2_low_scale_constraint(MRSSM2<Two_scale>*, const softsusy::QedQcd&);
    virtual ~MRSSM2_low_scale_constraint() = default;
-   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
    virtual void apply() override;
    virtual double get_scale() const override;

@@ -54,9 +54,6 @@ void print_usage()
       "  --M2Input=<value>\n"
       "  --M3Input=<value>\n"
       "  --MAInput=<value>\n"
-      "  --AtInput=<value>\n"
-      "  --AbInput=<value>\n"
-      "  --AtauInput=<value>\n"
       "  --LambdaLoopOrder=<value>\n"
 
       "  --solver-type=<value>             an integer corresponding\n"
@@ -97,15 +94,6 @@ void set_command_line_parameters(const Dynamic_array_view<char*>& args,
          continue;
 
       if(Command_line_options::get_parameter_value(option, "--MAInput=", input.MAInput))
-         continue;
-
-      if(Command_line_options::get_parameter_value(option, "--AtInput=", input.AtInput))
-         continue;
-
-      if(Command_line_options::get_parameter_value(option, "--AbInput=", input.AbInput))
-         continue;
-
-      if(Command_line_options::get_parameter_value(option, "--AtauInput=", input.AtauInput))
          continue;
 
       if(Command_line_options::get_parameter_value(option, "--LambdaLoopOrder=", input.LambdaLoopOrder))

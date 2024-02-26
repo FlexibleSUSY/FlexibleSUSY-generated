@@ -21,6 +21,7 @@
 #define THDMII_OBSERVABLES_H
 
 #include "observable_problems.hpp"
+#include "spectrum_generator_settings.hpp"
 #include <string>
 #include <vector>
 #include <Eigen/Core>
@@ -34,8 +35,9 @@ namespace flexiblesusy {
 class THDMII_mass_eigenstates;
 class Physical_input;
 
+
 struct THDMII_observables {
-   static const int NUMBER_OF_OBSERVABLES = 4;
+   static constexpr int NUMBER_OF_OBSERVABLES = 4;
 
    THDMII_observables();
    Eigen::ArrayXd get() const; ///< returns vector of all observables
@@ -44,20 +46,27 @@ struct THDMII_observables {
    void set(const Eigen::ArrayXd&); ///< sets all observables from given vector
 
    Observable_problems problems;
-   double a_muon; ///< a_muon = (g-2)/2 of the muon (calculated with FlexibleSUSY)
-   double edm_Fe_0; ///< electric dipole moment of Fe(0) [1/GeV]
-   double edm_Fe_1; ///< electric dipole moment of Fe(1) [1/GeV]
-   double edm_Fe_2; ///< electric dipole moment of Fe(2) [1/GeV]
+   double amm_Fe_1; ///< Delta(g-2)/2 of Fe(2) (calculated with FlexibleSUSY)
+   double amm_uncertainty_Fe_1; ///< uncertainty of Delta(g-2)/2 of Fe(2) (calculated with FlexibleSUSY)
+   double a_muon_gm2calc; ///< a_muon = (g-2)/2 of the muon (calculated with GM2Calc)
+   double a_muon_gm2calc_uncertainty; ///< uncertainty of (g-2)/2 of the muon (calculated with GM2Calc)
 
 };
 
 THDMII_observables calculate_observables(
-   const THDMII_mass_eigenstates&, const softsusy::QedQcd&,
-   const Physical_input&);
+   const THDMII_mass_eigenstates&,
+   const softsusy::QedQcd&,
+   
+   const Physical_input&,
+   const Spectrum_generator_settings&);
 
 THDMII_observables calculate_observables(
-   const THDMII_mass_eigenstates&, const softsusy::QedQcd&,
-   const Physical_input&, double scale);
+   const THDMII_mass_eigenstates&,
+   const softsusy::QedQcd&,
+   
+   const Physical_input&,
+   const Spectrum_generator_settings&,
+   double scale);
 
 } // namespace flexiblesusy
 

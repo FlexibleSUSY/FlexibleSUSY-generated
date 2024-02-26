@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.7.1"];
+Print["FlexibleSUSY 2.8.0"];
 Print["E6SSMEFTHiggs"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -20,7 +20,7 @@ FSE6SSMEFTHiggsSetLib = LibraryFunctionLoad[libE6SSMEFTHiggs, "FSE6SSMEFTHiggsSe
 
 FSE6SSMEFTHiggsCalculateSpectrum = LibraryFunctionLoad[libE6SSMEFTHiggs, "FSE6SSMEFTHiggsCalculateSpectrum", LinkObject, LinkObject];
 FSE6SSMEFTHiggsCalculateObservables = LibraryFunctionLoad[libE6SSMEFTHiggs, "FSE6SSMEFTHiggsCalculateObservables", LinkObject, LinkObject];
-FSE6SSMEFTHiggsCalculateDecays = LibraryFunctionLoad[libE6SSMEFTHiggs, "FSE6SSMEFTHiggsCalculateDecays", LinkObject, LinkObject];
+
 
 FSE6SSMEFTHiggsCalculateSpectrum::error = "`1`";
 FSE6SSMEFTHiggsCalculateSpectrum::warning = "`1`";
@@ -28,8 +28,6 @@ FSE6SSMEFTHiggsCalculateSpectrum::warning = "`1`";
 FSE6SSMEFTHiggsCalculateObservables::error = "`1`";
 FSE6SSMEFTHiggsCalculateObservables::warning = "`1`";
 
-FSE6SSMEFTHiggsCalculateDecays::error = "`1`";
-FSE6SSMEFTHiggsCalculateDecays::warning = "`1`";
 
 FSE6SSMEFTHiggs::info = "`1`";
 FSE6SSMEFTHiggs::nonum = "Error: `1` is not a numeric input value!";
@@ -70,6 +68,7 @@ fsDefaultSettings = {
       higgs3loopCorrectionAtAtAt -> 1,   (* FlexibleSUSY[29] *)
       higgs4loopCorrectionAtAsAsAs -> 1, (* FlexibleSUSY[30] *)
       loopLibrary -> 0,                  (* FlexibleSUSY[31] *)
+      calculateAMM -> 2.0,               (* FlexibleSUSY[32] *)
       parameterOutputScale -> 0          (* MODSEL[12] *)
 };
 
@@ -103,13 +102,6 @@ fsDefaultSMParameters = {
     PMNSAlpha2 -> 0,
     alphaEm0 -> 1/137.035999074,
     Mh -> 125.09
-};
-
-fdDefaultSettings = {
-   minBRtoPrint -> 1*^-5,
-   maxHigherOrderCorrections -> 4,
-   alphaThomson -> 1,
-   offShellVV -> 2
 };
 
 fsE6SSMEFTHiggsDefaultInputParameters = {
@@ -150,10 +142,10 @@ Options[FSE6SSMEFTHiggsOpenHandle] = {
     Sequence @@ fsDefaultSettings,
     Sequence @@ fsDefaultSMParameters,
     Sequence @@ fsE6SSMEFTHiggsDefaultInputParameters
-   , Sequence @@ fdDefaultSettings
+
 };
 
-FSE6SSMEFTHiggsOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters | fdSettings) -> s_List, r___] :=
+FSE6SSMEFTHiggsOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters ) -> s_List, r___] :=
     FSE6SSMEFTHiggsOpenHandle[a, Sequence @@ s, r];
 
 FSE6SSMEFTHiggsOpenHandle[OptionsPattern[]] :=
@@ -191,6 +183,7 @@ FSE6SSMEFTHiggsOpenHandle[OptionsPattern[]] :=
             OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[higgs4loopCorrectionAtAsAsAs],
             OptionValue[loopLibrary],
+            OptionValue[calculateAMM],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)
@@ -368,11 +361,7 @@ FSE6SSMEFTHiggsOpenHandle[OptionsPattern[]] :=
             OptionValue[msI2Input][[1,2]],
             OptionValue[msI2Input][[2,1]],
             OptionValue[msI2Input][[2,2]]
-            ,
-            OptionValue[minBRtoPrint],
-            OptionValue[maxHigherOrderCorrections],
-            OptionValue[alphaThomson],
-            OptionValue[offShellVV]
+
         }
 ];
 
@@ -417,6 +406,7 @@ FSE6SSMEFTHiggsSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[higgs4loopCorrectionAtAsAsAs],
             OptionValue[loopLibrary],
+            OptionValue[calculateAMM],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)
@@ -594,11 +584,7 @@ FSE6SSMEFTHiggsSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[msI2Input][[1,2]],
             OptionValue[msI2Input][[2,1]],
             OptionValue[msI2Input][[2,2]]
-            ,
-            OptionValue[minBRtoPrint],
-            OptionValue[maxHigherOrderCorrections],
-            OptionValue[alphaThomson],
-            OptionValue[offShellVV]
+
         }] /. HoldPattern[OptionValue[param_]] :> param /.
         { p } /.
         FSE6SSMEFTHiggsGetSettings[handle] /.

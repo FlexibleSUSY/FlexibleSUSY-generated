@@ -39,7 +39,6 @@ public:
    NUTNMSSM_low_scale_constraint() = default;
    NUTNMSSM_low_scale_constraint(NUTNMSSM<Two_scale>*, const softsusy::QedQcd&);
    virtual ~NUTNMSSM_low_scale_constraint() = default;
-   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
    virtual void apply() override;
    virtual double get_scale() const override;

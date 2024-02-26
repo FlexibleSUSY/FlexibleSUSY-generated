@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.7.1"];
+Print["FlexibleSUSY 2.8.0"];
 Print["CMSSMSemiAnalytic"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -20,7 +20,7 @@ FSCMSSMSemiAnalyticSetLib = LibraryFunctionLoad[libCMSSMSemiAnalytic, "FSCMSSMSe
 
 FSCMSSMSemiAnalyticCalculateSpectrum = LibraryFunctionLoad[libCMSSMSemiAnalytic, "FSCMSSMSemiAnalyticCalculateSpectrum", LinkObject, LinkObject];
 FSCMSSMSemiAnalyticCalculateObservables = LibraryFunctionLoad[libCMSSMSemiAnalytic, "FSCMSSMSemiAnalyticCalculateObservables", LinkObject, LinkObject];
-FSCMSSMSemiAnalyticCalculateDecays = LibraryFunctionLoad[libCMSSMSemiAnalytic, "FSCMSSMSemiAnalyticCalculateDecays", LinkObject, LinkObject];
+
 
 FSCMSSMSemiAnalyticCalculateSpectrum::error = "`1`";
 FSCMSSMSemiAnalyticCalculateSpectrum::warning = "`1`";
@@ -28,8 +28,6 @@ FSCMSSMSemiAnalyticCalculateSpectrum::warning = "`1`";
 FSCMSSMSemiAnalyticCalculateObservables::error = "`1`";
 FSCMSSMSemiAnalyticCalculateObservables::warning = "`1`";
 
-FSCMSSMSemiAnalyticCalculateDecays::error = "`1`";
-FSCMSSMSemiAnalyticCalculateDecays::warning = "`1`";
 
 FSCMSSMSemiAnalytic::info = "`1`";
 FSCMSSMSemiAnalytic::nonum = "Error: `1` is not a numeric input value!";
@@ -70,6 +68,7 @@ fsDefaultSettings = {
       higgs3loopCorrectionAtAtAt -> 1,   (* FlexibleSUSY[29] *)
       higgs4loopCorrectionAtAsAsAs -> 1, (* FlexibleSUSY[30] *)
       loopLibrary -> 0,                  (* FlexibleSUSY[31] *)
+      calculateAMM -> 2.0,               (* FlexibleSUSY[32] *)
       parameterOutputScale -> 0          (* MODSEL[12] *)
 };
 
@@ -105,13 +104,6 @@ fsDefaultSMParameters = {
     Mh -> 125.09
 };
 
-fdDefaultSettings = {
-   minBRtoPrint -> 1*^-5,
-   maxHigherOrderCorrections -> 4,
-   alphaThomson -> 1,
-   offShellVV -> 2
-};
-
 fsCMSSMSemiAnalyticDefaultInputParameters = {
    m12 -> 0,
    TanBeta -> 0,
@@ -123,10 +115,10 @@ Options[FSCMSSMSemiAnalyticOpenHandle] = {
     Sequence @@ fsDefaultSettings,
     Sequence @@ fsDefaultSMParameters,
     Sequence @@ fsCMSSMSemiAnalyticDefaultInputParameters
-   , Sequence @@ fdDefaultSettings
+
 };
 
-FSCMSSMSemiAnalyticOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters | fdSettings) -> s_List, r___] :=
+FSCMSSMSemiAnalyticOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters ) -> s_List, r___] :=
     FSCMSSMSemiAnalyticOpenHandle[a, Sequence @@ s, r];
 
 FSCMSSMSemiAnalyticOpenHandle[OptionsPattern[]] :=
@@ -164,6 +156,7 @@ FSCMSSMSemiAnalyticOpenHandle[OptionsPattern[]] :=
             OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[higgs4loopCorrectionAtAsAsAs],
             OptionValue[loopLibrary],
+            OptionValue[calculateAMM],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)
@@ -203,11 +196,7 @@ FSCMSSMSemiAnalyticOpenHandle[OptionsPattern[]] :=
             OptionValue[TanBeta],
             OptionValue[Azero],
             OptionValue[MuInput]
-            ,
-            OptionValue[minBRtoPrint],
-            OptionValue[maxHigherOrderCorrections],
-            OptionValue[alphaThomson],
-            OptionValue[offShellVV]
+
         }
 ];
 
@@ -252,6 +241,7 @@ FSCMSSMSemiAnalyticSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[higgs4loopCorrectionAtAsAsAs],
             OptionValue[loopLibrary],
+            OptionValue[calculateAMM],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)
@@ -291,11 +281,7 @@ FSCMSSMSemiAnalyticSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[TanBeta],
             OptionValue[Azero],
             OptionValue[MuInput]
-            ,
-            OptionValue[minBRtoPrint],
-            OptionValue[maxHigherOrderCorrections],
-            OptionValue[alphaThomson],
-            OptionValue[offShellVV]
+
         }] /. HoldPattern[OptionValue[param_]] :> param /.
         { p } /.
         FSCMSSMSemiAnalyticGetSettings[handle] /.

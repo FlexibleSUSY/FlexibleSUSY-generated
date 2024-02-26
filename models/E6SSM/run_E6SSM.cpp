@@ -24,10 +24,8 @@
 #include "E6SSM_slha_io.hpp"
 #include "E6SSM_spectrum_generator.hpp"
 #include "E6SSM_utilities.hpp"
-#include "decays/E6SSM_decays.hpp"
-#include "decays/flexibledecay_problems.hpp"
-#include "E6SSM_mass_eigenstates_decoupling_scheme.hpp"
-#include "loop_libraries/loop_library.hpp"
+
+#include "E6SSM_unitarity.hpp"
 
 #ifdef ENABLE_TWO_SCALE_SOLVER
 #include "E6SSM_two_scale_spectrum_generator.hpp"
@@ -55,7 +53,7 @@
 template <class solver_type>
 int run_solver(flexiblesusy::E6SSM_slha_io& slha_io,
                const flexiblesusy::Spectrum_generator_settings& spectrum_generator_settings,
-               const flexiblesusy::FlexibleDecay_settings& flexibledecay_settings,
+               
                const std::string& slha_output_file,
                const std::string& database_output_file,
                const std::string& spectrum_file,
@@ -66,11 +64,13 @@ int run_solver(flexiblesusy::E6SSM_slha_io& slha_io,
    Physical_input physical_input; // extra non-SLHA physical input
    softsusy::QedQcd qedqcd;
    E6SSM_input_parameters input;
+   
 
    try {
       slha_io.fill(qedqcd);
       slha_io.fill(input);
       slha_io.fill(physical_input);
+      
    } catch (const Error& error) {
       ERROR(error.what_detailed());
       return EXIT_FAILURE;
@@ -93,28 +93,21 @@ int run_solver(flexiblesusy::E6SSM_slha_io& slha_io,
    scales.pole_mass_scale = spectrum_generator.get_pole_mass_scale();
 
    E6SSM_observables observables;
-   E6SSM_decays decays(std::get<0>(models), qedqcd, physical_input, flexibledecay_settings);
-   const bool loop_library_for_decays =
-      (Loop_library::get_type() == Loop_library::Library::Collier) ||
-      (Loop_library::get_type() == Loop_library::Library::Looptools);
 
    if (spectrum_generator_settings.get(Spectrum_generator_settings::calculate_observables)) {
       if (spectrum_generator_settings.get(Spectrum_generator_settings::force_output) ||
          !problems.have_problem()) {
-         observables = calculate_observables(std::get<0>(models), qedqcd, physical_input, scales.pole_mass_scale);
+         observables = calculate_observables(
+            std::get<0>(models),
+            qedqcd,
+            
+            physical_input,
+            spectrum_generator_settings,
+            scales.pole_mass_scale);
       }
    }
 
-   if (flexibledecay_settings.get(FlexibleDecay_settings::calculate_decays) &&
-        (spectrum_generator_settings.get(Spectrum_generator_settings::force_output) ||
-         !problems.have_problem())) {
-      if (loop_library_for_decays) {
-         decays.calculate_decays();
-      }
-      else if (!loop_library_for_decays) {
-         WARNING("Decay module requires a dedicated loop library. Configure FlexibleSUSY with Collier or LoopTools and set appropriately flag 31 in Block FlexibleSUSY of the LesHouches input.");
-      }
-   }
+
 
    const bool show_result = !problems.have_problem() ||
       spectrum_generator_settings.get(Spectrum_generator_settings::force_output);
@@ -128,15 +121,10 @@ int run_solver(flexiblesusy::E6SSM_slha_io& slha_io,
                Spectrum_generator_settings::force_positive_masses));
          slha_io.set_spectrum(models);
          slha_io.set_extra(std::get<0>(models), scales, observables, spectrum_generator_settings);
+         
       }
 
-      const bool show_decays = !decays.get_problems().have_problem() ||
-         spectrum_generator_settings.get(Spectrum_generator_settings::force_output);
 
-      if (show_decays && flexibledecay_settings.get(FlexibleDecay_settings::calculate_decays) && loop_library_for_decays) {
-         slha_io.set_dcinfo(decays.get_problems());
-         slha_io.set_decays(decays.get_decay_table(), flexibledecay_settings);
-      }
 
       slha_io.write_to(slha_output_file);
    }
@@ -173,7 +161,7 @@ int run_solver(flexiblesusy::E6SSM_slha_io& slha_io,
 int run(
    flexiblesusy::E6SSM_slha_io& slha_io,
    const flexiblesusy::Spectrum_generator_settings& spectrum_generator_settings,
-   const flexiblesusy::FlexibleDecay_settings& flexibledecay_settings,
+   
    const std::string& slha_output_file,
    const std::string& database_output_file,
    const std::string& spectrum_file,
@@ -191,7 +179,7 @@ int run(
 #ifdef ENABLE_TWO_SCALE_SOLVER
    case 1:
       exit_code = run_solver<Two_scale>(
-         slha_io, spectrum_generator_settings, flexibledecay_settings, slha_output_file,
+         slha_io, spectrum_generator_settings, slha_output_file,
          database_output_file, spectrum_file, rgflow_file);
       if (!exit_code || solver_type != 0) break;
 #endif
@@ -224,7 +212,6 @@ int main(int argc, char* argv[])
    const std::string spectrum_file(options.get_spectrum_file());
    E6SSM_slha_io slha_io;
    Spectrum_generator_settings spectrum_generator_settings;
-   FlexibleDecay_settings flexibledecay_settings;
 
 
    if (slha_input_source.empty()) {
@@ -236,7 +223,6 @@ int main(int argc, char* argv[])
    try {
       slha_io.read_from_source(slha_input_source);
       slha_io.fill(spectrum_generator_settings);
-      slha_io.fill(flexibledecay_settings);
 
    } catch (const Error& error) {
       ERROR(error.what_detailed());
@@ -250,21 +236,10 @@ int main(int argc, char* argv[])
             Spectrum_generator_settings::calculate_bsm_masses, 1.0);
    }
 
-   if (flexibledecay_settings.get(FlexibleDecay_settings::calculate_decays)) {
-      if (!spectrum_generator_settings.get(Spectrum_generator_settings::calculate_sm_masses)) {
-         WARNING("Decay module requires SM pole masses. Setting FlexibleSUSY[3] = 1.");
-         spectrum_generator_settings.set(
-            Spectrum_generator_settings::calculate_sm_masses, 1.0);
-      }
-      if (!spectrum_generator_settings.get(Spectrum_generator_settings::calculate_bsm_masses)) {
-         WARNING("Decay module requires BSM pole masses. Setting FlexibleSUSY[23] = 1.");
-         spectrum_generator_settings.set(
-            Spectrum_generator_settings::calculate_bsm_masses, 1.0);
-      }
-   }
+
 
    const int exit_code
-      = run(slha_io, spectrum_generator_settings, flexibledecay_settings, slha_output_file,
+      = run(slha_io, spectrum_generator_settings, slha_output_file,
             database_output_file, spectrum_file, rgflow_file);
 
    return exit_code;

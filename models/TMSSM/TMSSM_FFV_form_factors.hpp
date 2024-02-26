@@ -19,7 +19,7 @@
 /**
  * @file TMSSM_FFV_form_factors.hpp
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #ifndef TMSSM_FFVFormFactors_H
@@ -34,11 +34,12 @@ namespace flexiblesusy {
 class TMSSM_mass_eigenstates;
 
 namespace TMSSM_FFV_form_factors {
-std::valarray<std::complex<double>> calculate_Fe_Fe_VP_form_factors (
-   int generationIndex1, int generationIndex2,
-   const TMSSM_mass_eigenstates& model, bool discard_SM_contributions);
-}
 
+
+
+
+
+} // namespace TMSSM_FFV_form_factors
 } // namespace flexiblesusy
 
 #endif

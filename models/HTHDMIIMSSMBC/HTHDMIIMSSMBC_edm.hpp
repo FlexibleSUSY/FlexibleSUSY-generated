@@ -16,22 +16,28 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-
 /**
  * @file HTHDMIIMSSMBC_edm.hpp
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #ifndef HTHDMIIMSSMBC_EDM_H
 #define HTHDMIIMSSMBC_EDM_H
 
+#include "HTHDMIIMSSMBC_mass_eigenstates.hpp"
+#include "lowe.h"
+
 namespace flexiblesusy {
+
 class HTHDMIIMSSMBC_mass_eigenstates;
 
 namespace HTHDMIIMSSMBC_edm {
 
-}
+template <typename Lepton>
+double calculate_edm(const HTHDMIIMSSMBC_mass_eigenstates&, const softsusy::QedQcd&, int idx);
+
+} // namespace HTHDMIIMSSMBC_edm
 } // namespace flexiblesusy
 
 #endif

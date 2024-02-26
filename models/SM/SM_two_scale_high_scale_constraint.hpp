@@ -37,7 +37,6 @@ public:
    SM_high_scale_constraint() = default;
    SM_high_scale_constraint(SM<Two_scale>*);
    virtual ~SM_high_scale_constraint() = default;
-   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
    virtual void apply() override;
    virtual double get_scale() const override;

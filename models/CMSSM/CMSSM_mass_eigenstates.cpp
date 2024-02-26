@@ -25,7 +25,7 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #include "CMSSM_mass_eigenstates.hpp"
@@ -588,7 +588,11 @@ void CLASSNAME::calculate_pole_masses()
       tp.run_task([this] () { calculate_MFe_pole(); });
       tp.run_task([this] () { calculate_MFd_pole(); });
       tp.run_task([this] () { calculate_MFu_pole(); });
-      tp.run_task([this] () { calculate_MVWm_pole(); });
+      tp.run_task([this] () {
+         if (PHYSICAL(MVWm) == 0.) {
+            calculate_MVWm_pole();
+         }
+      });
    }
 
 #else
@@ -613,7 +617,9 @@ void CLASSNAME::calculate_pole_masses()
       calculate_MFe_pole();
       calculate_MFd_pole();
       calculate_MFu_pole();
-      calculate_MVWm_pole();
+      if (PHYSICAL(MVWm) == 0.) {
+         calculate_MVWm_pole();
+      }
    }
 
 #endif
@@ -5323,6 +5329,228 @@ double CLASSNAME::CpconjVWmconjVWmVWmVWm3() const
    return result;
 }
 
+std::complex<double> CLASSNAME::CpbarFdFdhhPL(int i1, int i2, int gE2) const
+{
+   
+   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,Conj(ZDL(i2,
+      j2))*SUM(j1,0,2,Conj(ZDR(i1,j1))*Yd(j1,j2)))*ZH(gE2,0);
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFdFdhhPR(int i1, int i2, int gE2) const
+{
+   
+   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,SUM(j1,0,2,
+      Conj(Yd(j1,j2))*ZDR(i2,j1))*ZDL(i1,j2))*ZH(gE2,0);
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFuFuhhPL(int i1, int i2, int gE2) const
+{
+   
+   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,Conj(ZUL(i2,
+      j2))*SUM(j1,0,2,Conj(ZUR(i1,j1))*Yu(j1,j2)))*ZH(gE2,1);
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFuFuhhPR(int i1, int i2, int gE2) const
+{
+   
+   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,SUM(j1,0,2,
+      Conj(Yu(j1,j2))*ZUR(i2,j1))*ZUL(i1,j2))*ZH(gE2,1);
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFdChaSuPL(int i3, int i4, int i2) const
+{
+   
+   const std::complex<double> result = Conj(UM(i4,1))*SUM(j2,0,2,Conj(ZU(i2,j2))*
+      SUM(j1,0,2,Conj(ZDR(i3,j1))*Yd(j1,j2)));
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFdChaSuPR(int i3, int i4, int i2) const
+{
+   
+   const std::complex<double> result = -(g2*SUM(j1,0,2,Conj(ZU(i2,j1))*ZDL(i3,j1))
+      *UP(i4,0)) + SUM(j2,0,2,SUM(j1,0,2,Conj(Yu(j1,j2))*Conj(ZU(i2,3 + j1)))*ZDL(
+      i3,j2))*UP(i4,1);
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarChabarFuSdPL(int i3, int i4, int i2) const
+{
+   
+   const std::complex<double> result = Conj(UP(i3,1))*SUM(j2,0,2,Conj(ZD(i2,j2))*
+      SUM(j1,0,2,Conj(ZUR(i4,j1))*Yu(j1,j2)));
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarChabarFuSdPR(int i3, int i4, int i2) const
+{
+   
+   const std::complex<double> result = -(g2*SUM(j1,0,2,Conj(ZD(i2,j1))*ZUL(i4,j1))
+      *UM(i3,0)) + SUM(j2,0,2,SUM(j1,0,2,Conj(Yd(j1,j2))*Conj(ZD(i2,3 + j1)))*ZUL(
+      i4,j2))*UM(i3,1);
+
+   return result;
+}
+
+double CLASSNAME::CpbarChabarFvSePL(int , int , int ) const
+{
+   
+   const double result = 0;
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarChabarFvSePR(int i3, int i4, int i2) const
+{
+   
+   const std::complex<double> result = IF(i4 < 3,-(g2*Conj(ZE(i2,i4))*UM(i3,0)),0)
+      + SUM(j1,0,2,Conj(Ye(j1,i4))*Conj(ZE(i2,3 + j1)))*UM(i3,1);
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFdChiSdPL(int i4, int i3, int i2) const
+{
+   
+   const std::complex<double> result = -0.3651483716701107*g1*Conj(ZN(i3,0))*SUM(
+      j1,0,2,Conj(ZD(i2,3 + j1))*Conj(ZDR(i4,j1))) - Conj(ZN(i3,2))*SUM(j2,0,2,
+      Conj(ZD(i2,j2))*SUM(j1,0,2,Conj(ZDR(i4,j1))*Yd(j1,j2)));
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFdChiSdPR(int i4, int i3, int i2) const
+{
+   
+   const std::complex<double> result = SUM(j1,0,2,Conj(ZD(i2,j1))*ZDL(i4,j1))*(-
+      0.18257418583505536*g1*ZN(i3,0) + 0.7071067811865475*g2*ZN(i3,1)) - SUM(j2,0
+      ,2,SUM(j1,0,2,Conj(Yd(j1,j2))*Conj(ZD(i2,3 + j1)))*ZDL(i4,j2))*ZN(i3,2);
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFeChiSePL(int i4, int i3, int i2) const
+{
+   
+   const std::complex<double> result = -1.0954451150103321*g1*Conj(ZN(i3,0))*SUM(
+      j1,0,2,Conj(ZE(i2,3 + j1))*Conj(ZER(i4,j1))) - Conj(ZN(i3,2))*SUM(j2,0,2,
+      Conj(ZE(i2,j2))*SUM(j1,0,2,Conj(ZER(i4,j1))*Ye(j1,j2)));
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFeChiSePR(int i4, int i3, int i2) const
+{
+   
+   const std::complex<double> result = 0.7071067811865475*SUM(j1,0,2,Conj(ZE(i2,j1
+      ))*ZEL(i4,j1))*(0.7745966692414834*g1*ZN(i3,0) + g2*ZN(i3,1)) - SUM(j2,0,2,
+      SUM(j1,0,2,Conj(Ye(j1,j2))*Conj(ZE(i2,3 + j1)))*ZEL(i4,j2))*ZN(i3,2);
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFuChiSuPL(int i4, int i3, int i2) const
+{
+   
+   const std::complex<double> result = 0.7302967433402214*g1*Conj(ZN(i3,0))*SUM(j1
+      ,0,2,Conj(ZU(i2,3 + j1))*Conj(ZUR(i4,j1))) - Conj(ZN(i3,3))*SUM(j2,0,2,Conj(
+      ZU(i2,j2))*SUM(j1,0,2,Conj(ZUR(i4,j1))*Yu(j1,j2)));
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFuChiSuPR(int i4, int i3, int i2) const
+{
+   
+   const std::complex<double> result = SUM(j1,0,2,Conj(ZU(i2,j1))*ZUL(i4,j1))*(-
+      0.18257418583505536*g1*ZN(i3,0) - 0.7071067811865475*g2*ZN(i3,1)) - SUM(j2,0
+      ,2,SUM(j1,0,2,Conj(Yu(j1,j2))*Conj(ZU(i2,3 + j1)))*ZUL(i4,j2))*ZN(i3,3);
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFeFehhPL(int i1, int i3, int gE2) const
+{
+   
+   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,Conj(ZEL(i3,
+      j2))*SUM(j1,0,2,Conj(ZER(i1,j1))*Ye(j1,j2)))*ZH(gE2,0);
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFeFehhPR(int i1, int i3, int gE2) const
+{
+   
+   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,SUM(j1,0,2,
+      Conj(Ye(j1,j2))*ZER(i3,j1))*ZEL(i1,j2))*ZH(gE2,0);
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFdFuHpmPL(int i4, int i2, int i5) const
+{
+   
+   const std::complex<double> result = SUM(j2,0,2,Conj(ZUL(i2,j2))*SUM(j1,0,2,Conj
+      (ZDR(i4,j1))*Yd(j1,j2)))*ZP(i5,0);
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFdFuHpmPR(int i4, int i2, int i5) const
+{
+   
+   const std::complex<double> result = SUM(j2,0,2,SUM(j1,0,2,Conj(Yu(j1,j2))*ZUR(
+      i2,j1))*ZDL(i4,j2))*ZP(i5,1);
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFeFvHpmPL(int i3, int i4, int i5) const
+{
+   
+   const std::complex<double> result = SUM(j1,0,2,Conj(ZER(i3,j1))*Ye(j1,i4))*ZP(
+      i5,0);
+
+   return result;
+}
+
+double CLASSNAME::CpbarFeFvHpmPR(int , int , int ) const
+{
+   
+   const double result = 0;
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFeChaSvPL(int i3, int i4, int i5) const
+{
+   
+   const std::complex<double> result = Conj(UM(i4,1))*SUM(j2,0,2,Conj(ZV(i5,j2))*
+      SUM(j1,0,2,Conj(ZER(i3,j1))*Ye(j1,j2)));
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFeChaSvPR(int i3, int i4, int i5) const
+{
+   
+   const std::complex<double> result = -(g2*SUM(j1,0,2,Conj(ZV(i5,j1))*ZEL(i3,j1))
+      *UP(i4,0));
+
+   return result;
+}
+
 std::complex<double> CLASSNAME::CpbarChaUChiHpmPL(int gI1, int gO2, int gI2) const
 {
    
@@ -6431,23 +6659,6 @@ std::complex<double> CLASSNAME::CpbarFvFeconjHpmPR(int gO1, int gI2, int gI1) co
    return result;
 }
 
-double CLASSNAME::CpbarChabarFvSePL(int , int , int ) const
-{
-   
-   const double result = 0;
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarChabarFvSePR(int gI1, int gO1, int gI2) const
-{
-   
-   const std::complex<double> result = IF(gO1 < 3,-(g2*Conj(ZE(gI2,gO1))*UM(gI1,0)
-      ),0) + SUM(j1,0,2,Conj(Ye(j1,gO1))*Conj(ZE(gI2,3 + j1)))*UM(gI1,1);
-
-   return result;
-}
-
 double CLASSNAME::CpbarFvChiSvPL(int , int , int ) const
 {
    
@@ -6462,59 +6673,6 @@ std::complex<double> CLASSNAME::CpbarFvChiSvPR(int gO1, int gI2, int gI1) const
    const std::complex<double> result = IF(gO1 < 3,0.5477225575051661*g1*Conj(ZV(
       gI1,gO1))*ZN(gI2,0),0) + IF(gO1 < 3,-0.7071067811865475*g2*Conj(ZV(gI1,gO1))
       *ZN(gI2,1),0);
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFeFehhPL(int gO2, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,Conj(ZEL(gI2
-      ,j2))*SUM(j1,0,2,Conj(ZER(gO2,j1))*Ye(j1,j2)))*ZH(gI1,0);
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFeFehhPR(int gO1, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,SUM(j1,0,2,
-      Conj(Ye(j1,j2))*ZER(gI2,j1))*ZEL(gO1,j2))*ZH(gI1,0);
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFeFvHpmPL(int gO2, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = SUM(j1,0,2,Conj(ZER(gO2,j1))*Ye(j1,gI2))*ZP
-      (gI1,0);
-
-   return result;
-}
-
-double CLASSNAME::CpbarFeFvHpmPR(int , int , int ) const
-{
-   
-   const double result = 0;
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFeChaSvPL(int gO2, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = Conj(UM(gI2,1))*SUM(j2,0,2,Conj(ZV(gI1,j2))
-      *SUM(j1,0,2,Conj(ZER(gO2,j1))*Ye(j1,j2)));
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFeChaSvPR(int gO1, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = -(g2*SUM(j1,0,2,Conj(ZV(gI1,j1))*ZEL(gO1,j1
-      ))*UP(gI2,0));
 
    return result;
 }
@@ -6538,26 +6696,6 @@ std::complex<double> CLASSNAME::CpbarFeFeAhPR(int gO1, int gI1, int gI2) const
    return result;
 }
 
-std::complex<double> CLASSNAME::CpbarFeChiSePL(int gO2, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = -1.0954451150103321*g1*Conj(ZN(gI2,0))*SUM(
-      j1,0,2,Conj(ZE(gI1,3 + j1))*Conj(ZER(gO2,j1))) - Conj(ZN(gI2,2))*SUM(j2,0,2,
-      Conj(ZE(gI1,j2))*SUM(j1,0,2,Conj(ZER(gO2,j1))*Ye(j1,j2)));
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFeChiSePR(int gO1, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = 0.7071067811865475*SUM(j1,0,2,Conj(ZE(gI1,
-      j1))*ZEL(gO1,j1))*(0.7745966692414834*g1*ZN(gI2,0) + g2*ZN(gI2,1)) - SUM(j2,
-      0,2,SUM(j1,0,2,Conj(Ye(j1,j2))*Conj(ZE(gI1,3 + j1)))*ZEL(gO1,j2))*ZN(gI2,2);
-
-   return result;
-}
-
 double CLASSNAME::CpbarFeFvVWmPR(int , int ) const
 {
    
@@ -6571,42 +6709,6 @@ std::complex<double> CLASSNAME::CpbarFeFvVWmPL(int gO1, int gI2) const
    
    const std::complex<double> result = IF(gI2 < 3,-0.7071067811865475*g2*ZEL(gO1,
       gI2),0);
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFdFdhhPL(int gO2, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,Conj(ZDL(gI2
-      ,j2))*SUM(j1,0,2,Conj(ZDR(gO2,j1))*Yd(j1,j2)))*ZH(gI1,0);
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFdFdhhPR(int gO1, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,SUM(j1,0,2,
-      Conj(Yd(j1,j2))*ZDR(gI2,j1))*ZDL(gO1,j2))*ZH(gI1,0);
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFdFuHpmPL(int gO2, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = SUM(j2,0,2,Conj(ZUL(gI2,j2))*SUM(j1,0,2,
-      Conj(ZDR(gO2,j1))*Yd(j1,j2)))*ZP(gI1,0);
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFdFuHpmPR(int gO1, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = SUM(j2,0,2,SUM(j1,0,2,Conj(Yu(j1,j2))*ZUR(
-      gI2,j1))*ZDL(gO1,j2))*ZP(gI1,1);
 
    return result;
 }
@@ -6626,46 +6728,6 @@ std::complex<double> CLASSNAME::CpbarFdFdAhPR(int gO1, int gI1, int gI2) const
    
    const std::complex<double> result = std::complex<double>(0.,0.7071067811865475)
       *SUM(j2,0,2,SUM(j1,0,2,Conj(Yd(j1,j2))*ZDR(gI1,j1))*ZDL(gO1,j2))*ZA(gI2,0);
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFdChaSuPL(int gO2, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = Conj(UM(gI2,1))*SUM(j2,0,2,Conj(ZU(gI1,j2))
-      *SUM(j1,0,2,Conj(ZDR(gO2,j1))*Yd(j1,j2)));
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFdChaSuPR(int gO1, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = -(g2*SUM(j1,0,2,Conj(ZU(gI1,j1))*ZDL(gO1,j1
-      ))*UP(gI2,0)) + SUM(j2,0,2,SUM(j1,0,2,Conj(Yu(j1,j2))*Conj(ZU(gI1,3 + j1)))*
-      ZDL(gO1,j2))*UP(gI2,1);
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFdChiSdPL(int gO2, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = -0.3651483716701107*g1*Conj(ZN(gI2,0))*SUM(
-      j1,0,2,Conj(ZD(gI1,3 + j1))*Conj(ZDR(gO2,j1))) - Conj(ZN(gI2,2))*SUM(j2,0,2,
-      Conj(ZD(gI1,j2))*SUM(j1,0,2,Conj(ZDR(gO2,j1))*Yd(j1,j2)));
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFdChiSdPR(int gO1, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = SUM(j1,0,2,Conj(ZD(gI1,j1))*ZDL(gO1,j1))*(-
-      0.18257418583505536*g1*ZN(gI2,0) + 0.7071067811865475*g2*ZN(gI2,1)) - SUM(j2
-      ,0,2,SUM(j1,0,2,Conj(Yd(j1,j2))*Conj(ZD(gI1,3 + j1)))*ZDL(gO1,j2))*ZN(gI2,2)
-      ;
 
    return result;
 }
@@ -6705,43 +6767,6 @@ std::complex<double> CLASSNAME::CpbarFuFdconjHpmPR(int gO1, int gI2, int gI1) co
    return result;
 }
 
-std::complex<double> CLASSNAME::CpbarFuFuhhPL(int gO2, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,Conj(ZUL(gI2
-      ,j2))*SUM(j1,0,2,Conj(ZUR(gO2,j1))*Yu(j1,j2)))*ZH(gI1,1);
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFuFuhhPR(int gO1, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,SUM(j1,0,2,
-      Conj(Yu(j1,j2))*ZUR(gI2,j1))*ZUL(gO1,j2))*ZH(gI1,1);
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarChabarFuSdPL(int gI1, int gO2, int gI2) const
-{
-   
-   const std::complex<double> result = Conj(UP(gI1,1))*SUM(j2,0,2,Conj(ZD(gI2,j2))
-      *SUM(j1,0,2,Conj(ZUR(gO2,j1))*Yu(j1,j2)));
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarChabarFuSdPR(int gI1, int gO1, int gI2) const
-{
-   
-   const std::complex<double> result = -(g2*SUM(j1,0,2,Conj(ZD(gI2,j1))*ZUL(gO1,j1
-      ))*UM(gI1,0)) + SUM(j2,0,2,SUM(j1,0,2,Conj(Yd(j1,j2))*Conj(ZD(gI2,3 + j1)))*
-      ZUL(gO1,j2))*UM(gI1,1);
-
-   return result;
-}
-
 std::complex<double> CLASSNAME::CpbarFuFuAhPL(int gO2, int gI1, int gI2) const
 {
    
@@ -6757,27 +6782,6 @@ std::complex<double> CLASSNAME::CpbarFuFuAhPR(int gO1, int gI1, int gI2) const
    
    const std::complex<double> result = std::complex<double>(0.,0.7071067811865475)
       *SUM(j2,0,2,SUM(j1,0,2,Conj(Yu(j1,j2))*ZUR(gI1,j1))*ZUL(gO1,j2))*ZA(gI2,1);
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFuChiSuPL(int gO2, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = 0.7302967433402214*g1*Conj(ZN(gI2,0))*SUM(
-      j1,0,2,Conj(ZU(gI1,3 + j1))*Conj(ZUR(gO2,j1))) - Conj(ZN(gI2,3))*SUM(j2,0,2,
-      Conj(ZU(gI1,j2))*SUM(j1,0,2,Conj(ZUR(gO2,j1))*Yu(j1,j2)));
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFuChiSuPR(int gO1, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = SUM(j1,0,2,Conj(ZU(gI1,j1))*ZUL(gO1,j1))*(-
-      0.18257418583505536*g1*ZN(gI2,0) - 0.7071067811865475*g2*ZN(gI2,1)) - SUM(j2
-      ,0,2,SUM(j1,0,2,Conj(Yu(j1,j2))*Conj(ZU(gI1,3 + j1)))*ZUL(gO1,j2))*ZN(gI2,3)
-      ;
 
    return result;
 }
@@ -9806,7 +9810,8 @@ double CLASSNAME::calculate_MVZ_DRbar(double m_pole) const
    const double mass_sqr = Sqr(m_pole) + self_energy;
 
    if (mass_sqr < 0.) {
-      problems.flag_pole_tachyon(CMSSM_info::VZ);return m_pole;
+      problems.flag_pole_tachyon(CMSSM_info::VZ);
+      return m_pole;
    }
 
    return AbsSqrt(mass_sqr);
@@ -9819,7 +9824,8 @@ double CLASSNAME::calculate_MVWm_DRbar(double m_pole) const
    const double mass_sqr = Sqr(m_pole) + self_energy;
 
    if (mass_sqr < 0.) {
-      problems.flag_pole_tachyon(CMSSM_info::VWm);return m_pole;
+      problems.flag_pole_tachyon(CMSSM_info::VWm);
+      return m_pole;
    }
 
    return AbsSqrt(mass_sqr);

@@ -16,22 +16,28 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-
 /**
  * @file NMSSMEFTHiggs_edm.hpp
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #ifndef NMSSMEFTHiggs_EDM_H
 #define NMSSMEFTHiggs_EDM_H
 
+#include "NMSSMEFTHiggs_mass_eigenstates.hpp"
+#include "lowe.h"
+
 namespace flexiblesusy {
+
 class NMSSMEFTHiggs_mass_eigenstates;
 
 namespace NMSSMEFTHiggs_edm {
 
-}
+template <typename Lepton>
+double calculate_edm(const NMSSMEFTHiggs_mass_eigenstates&, const softsusy::QedQcd&, int idx);
+
+} // namespace NMSSMEFTHiggs_edm
 } // namespace flexiblesusy
 
 #endif

@@ -37,7 +37,6 @@ public:
    HSSUSY_high_scale_constraint() = default;
    HSSUSY_high_scale_constraint(HSSUSY<Two_scale>*);
    virtual ~HSSUSY_high_scale_constraint() = default;
-   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
    virtual void apply() override;
    virtual double get_scale() const override;

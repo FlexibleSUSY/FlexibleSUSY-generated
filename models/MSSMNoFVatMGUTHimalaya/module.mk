@@ -54,22 +54,23 @@ MSSMNoFVatMGUTHimalaya_TARBALL := \
 		$(MODNAME).tar.gz
 
 LIBMSSMNoFVatMGUTHimalaya_SRC := \
-		$(DIR)/MSSMNoFVatMGUTHimalaya_a_muon.cpp \
+		$(DIR)/MSSMNoFVatMGUTHimalaya_amm.cpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_edm.cpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_FFV_form_factors.cpp \
-		$(DIR)/MSSMNoFVatMGUTHimalaya_f_to_f_conversion.cpp \
-		$(DIR)/MSSMNoFVatMGUTHimalaya_l_to_lgamma.cpp \
+		$(wildcard $(DIR)/observables/MSSMNoFVatMGUTHimalaya*.cpp) \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_b_to_s_gamma.cpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_info.cpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_input_parameters.cpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_mass_eigenstates.cpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_mass_eigenstates_decoupling_scheme.cpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_model_slha.cpp \
+		$(DIR)/MSSMNoFVatMGUTHimalaya_lepton_amm_wrapper.cpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_observables.cpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_physical.cpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_slha_io.cpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_soft_parameters.cpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_susy_parameters.cpp \
+		$(DIR)/MSSMNoFVatMGUTHimalaya_unitarity.cpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_utilities.cpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_weinberg_angle.cpp
 
@@ -89,12 +90,11 @@ LLMSSMNoFVatMGUTHimalaya_MMA  := \
 		$(DIR)/run_MSSMNoFVatMGUTHimalaya.m
 
 LIBMSSMNoFVatMGUTHimalaya_HDR := \
-		$(DIR)/MSSMNoFVatMGUTHimalaya_a_muon.hpp \
+		$(DIR)/MSSMNoFVatMGUTHimalaya_amm.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_convergence_tester.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_edm.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_FFV_form_factors.hpp \
-		$(DIR)/MSSMNoFVatMGUTHimalaya_f_to_f_conversion.hpp \
-		$(DIR)/MSSMNoFVatMGUTHimalaya_l_to_lgamma.hpp \
+		$(wildcard $(DIR)/observables/MSSMNoFVatMGUTHimalaya*.hpp) \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_b_to_s_gamma.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_ewsb_solver.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_ewsb_solver_interface.hpp \
@@ -108,6 +108,7 @@ LIBMSSMNoFVatMGUTHimalaya_HDR := \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_model.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_model_slha.hpp \
+		$(DIR)/MSSMNoFVatMGUTHimalaya_lepton_amm_wrapper.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_observables.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_physical.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_slha_io.hpp \
@@ -116,12 +117,14 @@ LIBMSSMNoFVatMGUTHimalaya_HDR := \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_soft_parameters.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_susy_parameters.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_susy_scale_constraint.hpp \
+		$(DIR)/MSSMNoFVatMGUTHimalaya_unitarity.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_utilities.hpp \
 		$(DIR)/MSSMNoFVatMGUTHimalaya_weinberg_angle.hpp
 
 LIBMSSMNoFVatMGUTHimalaya_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/MSSMNoFVatMGUTHimalaya_qft.hpp \
 		$(DIR)/cxx_qft/MSSMNoFVatMGUTHimalaya_fields.hpp \
+		$(DIR)/cxx_qft/MSSMNoFVatMGUTHimalaya_particle_aliases.hpp \
 		$(DIR)/cxx_qft/MSSMNoFVatMGUTHimalaya_vertices.hpp \
 		$(DIR)/cxx_qft/MSSMNoFVatMGUTHimalaya_context_base.hpp \
 		$(DIR)/cxx_qft/MSSMNoFVatMGUTHimalaya_npointfunctions_wilsoncoeffs.hpp
@@ -317,7 +320,7 @@ $(METACODE_STAMP_MSSMNoFVatMGUTHimalaya):
 endif
 
 $(LIBMSSMNoFVatMGUTHimalaya_DEP) $(EXEMSSMNoFVatMGUTHimalaya_DEP) $(LLMSSMNoFVatMGUTHimalaya_DEP) $(LIBMSSMNoFVatMGUTHimalaya_OBJ) $(EXEMSSMNoFVatMGUTHimalaya_OBJ) $(LLMSSMNoFVatMGUTHimalaya_OBJ) $(LLMSSMNoFVatMGUTHimalaya_LIB): \
-	CPPFLAGS += $(MODMSSMNoFVatMGUTHimalaya_SUBMOD_INC) $(MODMSSMNoFVatMGUTHimalaya_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODMSSMNoFVatMGUTHimalaya_SUBMOD_INC) $(MODMSSMNoFVatMGUTHimalaya_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIGGSTOOLSFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBMSSMNoFVatMGUTHimalaya_DEP) $(EXEMSSMNoFVatMGUTHimalaya_DEP) $(LLMSSMNoFVatMGUTHimalaya_DEP) $(LIBMSSMNoFVatMGUTHimalaya_OBJ) $(EXEMSSMNoFVatMGUTHimalaya_OBJ) $(LLMSSMNoFVatMGUTHimalaya_OBJ) $(LLMSSMNoFVatMGUTHimalaya_LIB): \
@@ -333,11 +336,11 @@ $(LIBMSSMNoFVatMGUTHimalaya): $(LIBMSSMNoFVatMGUTHimalaya_OBJ)
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBMSSMNoFVatMGUTHimalaya) $(MODMSSMNoFVatMGUTHimalaya_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
 $(LLMSSMNoFVatMGUTHimalaya_LIB): $(LLMSSMNoFVatMGUTHimalaya_OBJ) $(LIBMSSMNoFVatMGUTHimalaya) $(MODMSSMNoFVatMGUTHimalaya_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
 
 ALLDEP += $(LIBMSSMNoFVatMGUTHimalaya_DEP) $(EXEMSSMNoFVatMGUTHimalaya_DEP)
 ALLSRC += $(LIBMSSMNoFVatMGUTHimalaya_SRC) $(EXEMSSMNoFVatMGUTHimalaya_SRC)

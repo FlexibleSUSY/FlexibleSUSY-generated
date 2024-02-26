@@ -16,22 +16,28 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-
 /**
  * @file NUTNMSSM_edm.hpp
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #ifndef NUTNMSSM_EDM_H
 #define NUTNMSSM_EDM_H
 
+#include "NUTNMSSM_mass_eigenstates.hpp"
+#include "lowe.h"
+
 namespace flexiblesusy {
+
 class NUTNMSSM_mass_eigenstates;
 
 namespace NUTNMSSM_edm {
 
-}
+template <typename Lepton>
+double calculate_edm(const NUTNMSSM_mass_eigenstates&, const softsusy::QedQcd&, int idx);
+
+} // namespace NUTNMSSM_edm
 } // namespace flexiblesusy
 
 #endif

@@ -83,7 +83,6 @@ handle = FSTHDMIIOpenHandle[
 
 spectrum    = FSTHDMIICalculateSpectrum[handle];
 observables = FSTHDMIICalculateObservables[handle];
-decays      = FSTHDMIICalculateDecays[handle];
 
 FSTHDMIICloseHandle[handle];
 

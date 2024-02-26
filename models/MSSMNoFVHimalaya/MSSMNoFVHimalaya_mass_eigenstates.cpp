@@ -25,7 +25,7 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #include "MSSMNoFVHimalaya_mass_eigenstates.hpp"
@@ -643,7 +643,11 @@ void CLASSNAME::calculate_pole_masses()
       tp.run_task([this] () { calculate_MFe_pole(); });
       tp.run_task([this] () { calculate_MFm_pole(); });
       tp.run_task([this] () { calculate_MFtau_pole(); });
-      tp.run_task([this] () { calculate_MVWm_pole(); });
+      tp.run_task([this] () {
+         if (PHYSICAL(MVWm) == 0.) {
+            calculate_MVWm_pole();
+         }
+      });
    }
 
 #else
@@ -684,7 +688,9 @@ void CLASSNAME::calculate_pole_masses()
       calculate_MFe_pole();
       calculate_MFm_pole();
       calculate_MFtau_pole();
-      calculate_MVWm_pole();
+      if (PHYSICAL(MVWm) == 0.) {
+         calculate_MVWm_pole();
+      }
    }
 
 #endif
@@ -14985,12 +14991,12 @@ Eigen::Matrix<double,2,2> CLASSNAME::self_energy_hh_3loop() const
    pars.s2b = Sin(2*theta_b);
 
    #if Himalaya_VERSION_MAJOR < 2
-      pars.At = Re(TYu(2,2)/Yu(2,2));
-      pars.Ab = Re(TYd(2,2)/Yd(2,2));
+      pars.At = Re(Yu(2,2) == 0 ? 0 : TYu(2,2)/Yu(2,2));
+      pars.Ab = Re(Yd(2,2) == 0 ? 0 : TYd(2,2)/Yd(2,2));
    #else
-      pars.Au(2,2) = Re(TYu(2,2)/Yu(2,2));
-      pars.Ad(2,2) = Re(TYd(2,2)/Yd(2,2));
-      pars.Ae(2,2) = Re(TYe(2,2)/Ye(2,2));
+      pars.Au(2,2) = Re(Yu(2,2) == 0 ? 0 : TYu(2,2)/Yu(2,2));
+      pars.Ad(2,2) = Re(Yd(2,2) == 0 ? 0 : TYd(2,2)/Yd(2,2));
+      pars.Ae(2,2) = Re(Ye(2,2) == 0 ? 0 : TYe(2,2)/Ye(2,2));
       pars.ml2 = Re(ml2);
       pars.me2 = Re(me2);
       pars.Mtau = MFtau;
@@ -16208,7 +16214,8 @@ double CLASSNAME::calculate_MVZ_DRbar(double m_pole) const
    const double mass_sqr = Sqr(m_pole) + self_energy;
 
    if (mass_sqr < 0.) {
-      problems.flag_pole_tachyon(MSSMNoFVHimalaya_info::VZ);return m_pole;
+      problems.flag_pole_tachyon(MSSMNoFVHimalaya_info::VZ);
+      return m_pole;
    }
 
    return AbsSqrt(mass_sqr);
@@ -16221,7 +16228,8 @@ double CLASSNAME::calculate_MVWm_DRbar(double m_pole) const
    const double mass_sqr = Sqr(m_pole) + self_energy;
 
    if (mass_sqr < 0.) {
-      problems.flag_pole_tachyon(MSSMNoFVHimalaya_info::VWm);return m_pole;
+      problems.flag_pole_tachyon(MSSMNoFVHimalaya_info::VWm);
+      return m_pole;
    }
 
    return AbsSqrt(mass_sqr);

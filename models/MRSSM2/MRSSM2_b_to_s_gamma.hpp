@@ -20,7 +20,7 @@
 /**
  * @file MRSSM2_b_to_s_gamma.hpp
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #ifndef MRSSM2_BToSGamma_H

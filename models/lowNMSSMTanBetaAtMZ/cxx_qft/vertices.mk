@@ -18,5 +18,4 @@
 
 
 LIBlowNMSSMTanBetaAtMZ_CXXQFT_VERTICES_SRC := \
-	models/lowNMSSMTanBetaAtMZ/cxx_qft/lowNMSSMTanBetaAtMZ_vertices_1.cpp \
-	models/lowNMSSMTanBetaAtMZ/cxx_qft/lowNMSSMTanBetaAtMZ_vertices_2.cpp
+	models/lowNMSSMTanBetaAtMZ/cxx_qft/lowNMSSMTanBetaAtMZ_vertices_1.cpp

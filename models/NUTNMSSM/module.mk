@@ -41,12 +41,12 @@ NUTNMSSM_INCLUDE_MK := \
 
 NUTNMSSM_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.NUTNMSSM_generated \
+		$(DIR)/LesHouches.in.NUTNMSSM_GTP2 \
+		$(DIR)/LesHouches.in.NUTNMSSM_1308.1333_BP1 \
 		$(DIR)/LesHouches.in.NUTNMSSM \
-		$(DIR)/LesHouches.in.NUTNMSSM_GTP1 \
 		$(DIR)/LesHouches.in.NUTNMSSM_1308.1333_BP3 \
 		$(DIR)/LesHouches.in.NUTNMSSM_1308.1333_BP2 \
-		$(DIR)/LesHouches.in.NUTNMSSM_1308.1333_BP1 \
-		$(DIR)/LesHouches.in.NUTNMSSM_GTP2
+		$(DIR)/LesHouches.in.NUTNMSSM_GTP1
 
 NUTNMSSM_REFERENCES := \
 		$(DIR)/NUTNMSSM_references.tex
@@ -59,22 +59,23 @@ NUTNMSSM_TARBALL := \
 		$(MODNAME).tar.gz
 
 LIBNUTNMSSM_SRC := \
-		$(DIR)/NUTNMSSM_a_muon.cpp \
+		$(DIR)/NUTNMSSM_amm.cpp \
 		$(DIR)/NUTNMSSM_edm.cpp \
 		$(DIR)/NUTNMSSM_FFV_form_factors.cpp \
-		$(DIR)/NUTNMSSM_f_to_f_conversion.cpp \
-		$(DIR)/NUTNMSSM_l_to_lgamma.cpp \
+		$(wildcard $(DIR)/observables/NUTNMSSM*.cpp) \
 		$(DIR)/NUTNMSSM_b_to_s_gamma.cpp \
 		$(DIR)/NUTNMSSM_info.cpp \
 		$(DIR)/NUTNMSSM_input_parameters.cpp \
 		$(DIR)/NUTNMSSM_mass_eigenstates.cpp \
 		$(DIR)/NUTNMSSM_mass_eigenstates_decoupling_scheme.cpp \
 		$(DIR)/NUTNMSSM_model_slha.cpp \
+		$(DIR)/NUTNMSSM_lepton_amm_wrapper.cpp \
 		$(DIR)/NUTNMSSM_observables.cpp \
 		$(DIR)/NUTNMSSM_physical.cpp \
 		$(DIR)/NUTNMSSM_slha_io.cpp \
 		$(DIR)/NUTNMSSM_soft_parameters.cpp \
 		$(DIR)/NUTNMSSM_susy_parameters.cpp \
+		$(DIR)/NUTNMSSM_unitarity.cpp \
 		$(DIR)/NUTNMSSM_utilities.cpp \
 		$(DIR)/NUTNMSSM_weinberg_angle.cpp
 
@@ -94,12 +95,11 @@ LLNUTNMSSM_MMA  := \
 		$(DIR)/run_NUTNMSSM.m
 
 LIBNUTNMSSM_HDR := \
-		$(DIR)/NUTNMSSM_a_muon.hpp \
+		$(DIR)/NUTNMSSM_amm.hpp \
 		$(DIR)/NUTNMSSM_convergence_tester.hpp \
 		$(DIR)/NUTNMSSM_edm.hpp \
 		$(DIR)/NUTNMSSM_FFV_form_factors.hpp \
-		$(DIR)/NUTNMSSM_f_to_f_conversion.hpp \
-		$(DIR)/NUTNMSSM_l_to_lgamma.hpp \
+		$(wildcard $(DIR)/observables/NUTNMSSM*.hpp) \
 		$(DIR)/NUTNMSSM_b_to_s_gamma.hpp \
 		$(DIR)/NUTNMSSM_ewsb_solver.hpp \
 		$(DIR)/NUTNMSSM_ewsb_solver_interface.hpp \
@@ -113,6 +113,7 @@ LIBNUTNMSSM_HDR := \
 		$(DIR)/NUTNMSSM_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/NUTNMSSM_model.hpp \
 		$(DIR)/NUTNMSSM_model_slha.hpp \
+		$(DIR)/NUTNMSSM_lepton_amm_wrapper.hpp \
 		$(DIR)/NUTNMSSM_observables.hpp \
 		$(DIR)/NUTNMSSM_physical.hpp \
 		$(DIR)/NUTNMSSM_slha_io.hpp \
@@ -121,12 +122,14 @@ LIBNUTNMSSM_HDR := \
 		$(DIR)/NUTNMSSM_soft_parameters.hpp \
 		$(DIR)/NUTNMSSM_susy_parameters.hpp \
 		$(DIR)/NUTNMSSM_susy_scale_constraint.hpp \
+		$(DIR)/NUTNMSSM_unitarity.hpp \
 		$(DIR)/NUTNMSSM_utilities.hpp \
 		$(DIR)/NUTNMSSM_weinberg_angle.hpp
 
 LIBNUTNMSSM_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/NUTNMSSM_qft.hpp \
 		$(DIR)/cxx_qft/NUTNMSSM_fields.hpp \
+		$(DIR)/cxx_qft/NUTNMSSM_particle_aliases.hpp \
 		$(DIR)/cxx_qft/NUTNMSSM_vertices.hpp \
 		$(DIR)/cxx_qft/NUTNMSSM_context_base.hpp \
 		$(DIR)/cxx_qft/NUTNMSSM_npointfunctions_wilsoncoeffs.hpp
@@ -322,7 +325,7 @@ $(METACODE_STAMP_NUTNMSSM):
 endif
 
 $(LIBNUTNMSSM_DEP) $(EXENUTNMSSM_DEP) $(LLNUTNMSSM_DEP) $(LIBNUTNMSSM_OBJ) $(EXENUTNMSSM_OBJ) $(LLNUTNMSSM_OBJ) $(LLNUTNMSSM_LIB): \
-	CPPFLAGS += $(MODNUTNMSSM_SUBMOD_INC) $(MODNUTNMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODNUTNMSSM_SUBMOD_INC) $(MODNUTNMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIGGSTOOLSFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBNUTNMSSM_DEP) $(EXENUTNMSSM_DEP) $(LLNUTNMSSM_DEP) $(LIBNUTNMSSM_OBJ) $(EXENUTNMSSM_OBJ) $(LLNUTNMSSM_OBJ) $(LLNUTNMSSM_LIB): \
@@ -338,11 +341,11 @@ $(LIBNUTNMSSM): $(LIBNUTNMSSM_OBJ)
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBNUTNMSSM) $(MODNUTNMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
 $(LLNUTNMSSM_LIB): $(LLNUTNMSSM_OBJ) $(LIBNUTNMSSM) $(MODNUTNMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
 
 ALLDEP += $(LIBNUTNMSSM_DEP) $(EXENUTNMSSM_DEP)
 ALLSRC += $(LIBNUTNMSSM_SRC) $(EXENUTNMSSM_SRC)

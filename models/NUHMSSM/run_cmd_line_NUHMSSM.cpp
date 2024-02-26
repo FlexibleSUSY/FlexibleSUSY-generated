@@ -50,8 +50,8 @@ void print_usage()
       "  --TanBeta=<value>\n"
       "  --SignMu=<value>\n"
       "  --Azero=<value>\n"
-      "  --mHd2In=<value>\n"
-      "  --mHu2In=<value>\n"
+      "  --MuInput=<value>\n"
+      "  --BInput=<value>\n"
 
       "  --solver-type=<value>             an integer corresponding\n"
       "                                    to the solver type to use\n"
@@ -84,10 +84,10 @@ void set_command_line_parameters(const Dynamic_array_view<char*>& args,
       if(Command_line_options::get_parameter_value(option, "--Azero=", input.Azero))
          continue;
 
-      if(Command_line_options::get_parameter_value(option, "--mHd2In=", input.mHd2In))
+      if(Command_line_options::get_parameter_value(option, "--MuInput=", input.MuInput))
          continue;
 
-      if(Command_line_options::get_parameter_value(option, "--mHu2In=", input.mHu2In))
+      if(Command_line_options::get_parameter_value(option, "--BInput=", input.BInput))
          continue;
 
       
@@ -121,6 +121,8 @@ int run_solver(int loop_library, const NUHMSSM_input_parameters& input)
    settings.set(Spectrum_generator_settings::calculate_bsm_masses, 1.0);
    settings.set(Spectrum_generator_settings::calculate_sm_masses, 1.0);
 
+   
+
    NUHMSSM_spectrum_generator<solver_type> spectrum_generator;
    spectrum_generator.set_settings(settings);
    spectrum_generator.run(qedqcd, input);
@@ -134,7 +136,9 @@ int run_solver(int loop_library, const NUHMSSM_input_parameters& input)
    auto models = spectrum_generator.get_models_slha();
 
    const auto observables = calculate_observables(
-      std::get<0>(models), qedqcd, physical_input, scales.pole_mass_scale);
+      std::get<0>(models), qedqcd,
+      
+      physical_input, settings, scales.pole_mass_scale);
 
    FlexibleDecay_settings flexibledecay_settings;
 
@@ -142,6 +146,7 @@ int run_solver(int loop_library, const NUHMSSM_input_parameters& input)
    // SLHA output
    NUHMSSM_slha_io slha_io;
    slha_io.fill(models, qedqcd, scales, observables, settings, flexibledecay_settings);
+   
    slha_io.write_to_stream(std::cout);
 
    return spectrum_generator.get_exit_code();

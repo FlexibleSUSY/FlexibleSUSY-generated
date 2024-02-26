@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.7.1"];
+Print["FlexibleSUSY 2.8.0"];
 Print["lowMSSM"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -21,11 +21,13 @@ FSlowMSSMSetLib = LibraryFunctionLoad[liblowMSSM, "FSlowMSSMSet", {Integer, {Rea
 FSlowMSSMCalculateSpectrum = LibraryFunctionLoad[liblowMSSM, "FSlowMSSMCalculateSpectrum", LinkObject, LinkObject];
 FSlowMSSMCalculateObservables = LibraryFunctionLoad[liblowMSSM, "FSlowMSSMCalculateObservables", LinkObject, LinkObject];
 
+
 FSlowMSSMCalculateSpectrum::error = "`1`";
 FSlowMSSMCalculateSpectrum::warning = "`1`";
 
 FSlowMSSMCalculateObservables::error = "`1`";
 FSlowMSSMCalculateObservables::warning = "`1`";
+
 
 FSlowMSSM::info = "`1`";
 FSlowMSSM::nonum = "Error: `1` is not a numeric input value!";
@@ -66,6 +68,7 @@ fsDefaultSettings = {
       higgs3loopCorrectionAtAtAt -> 1,   (* FlexibleSUSY[29] *)
       higgs4loopCorrectionAtAsAsAs -> 1, (* FlexibleSUSY[30] *)
       loopLibrary -> 0,                  (* FlexibleSUSY[31] *)
+      calculateAMM -> 2.0,               (* FlexibleSUSY[32] *)
       parameterOutputScale -> 0          (* MODSEL[12] *)
 };
 
@@ -163,6 +166,7 @@ FSlowMSSMOpenHandle[OptionsPattern[]] :=
             OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[higgs4loopCorrectionAtAsAsAs],
             OptionValue[loopLibrary],
+            OptionValue[calculateAMM],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)
@@ -321,6 +325,7 @@ FSlowMSSMSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[higgs4loopCorrectionAtAsAsAs],
             OptionValue[loopLibrary],
+            OptionValue[calculateAMM],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)

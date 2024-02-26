@@ -113,48 +113,11 @@ double NUHMSSM_soft_parameters::calc_beta_MassWB_3_loop(const Soft_traces& soft_
 {
    DEFINE_PROJECTOR(3,3,3,3)
 
-   const double traceAdjYdYd = TRACE_STRUCT.traceAdjYdYd;
-   const double traceAdjYeYe = TRACE_STRUCT.traceAdjYeYe;
-   const double traceAdjYuYu = TRACE_STRUCT.traceAdjYuYu;
-   const double traceTYdAdjYd = TRACE_STRUCT.traceTYdAdjYd;
-   const double traceTYeAdjYe = TRACE_STRUCT.traceTYeAdjYe;
-   const double traceTYuAdjYu = TRACE_STRUCT.traceTYuAdjYu;
-   const double traceAdjYdYdAdjYdYd = TRACE_STRUCT.traceAdjYdYdAdjYdYd;
-   const double traceAdjYdTYdAdjYdYd = TRACE_STRUCT.traceAdjYdTYdAdjYdYd;
-   const double traceAdjYeYeAdjYeYe = TRACE_STRUCT.traceAdjYeYeAdjYeYe;
-   const double traceAdjYeTYeAdjYeYe = TRACE_STRUCT.traceAdjYeTYeAdjYeYe;
-   const double traceAdjYuYuAdjYdYd = TRACE_STRUCT.traceAdjYuYuAdjYdYd;
-   const double traceAdjYuYuAdjYuYu = TRACE_STRUCT.traceAdjYuYuAdjYuYu;
-   const double traceAdjYuTYuAdjYdYd = TRACE_STRUCT.traceAdjYuTYuAdjYdYd;
-   const double traceAdjYuTYuAdjYuYu = TRACE_STRUCT.traceAdjYuTYuAdjYuYu;
-   const double traceTYdAdjYuYuAdjYd = TRACE_STRUCT.traceTYdAdjYuYuAdjYd;
 
 
    double beta_MassWB;
 
-   beta_MassWB = Re(0.08*Sqr(g2)*(-1200*traceAdjYdTYdAdjYdYd + 600*MassWB*
-      traceAdjYdYdAdjYdYd - 400*traceAdjYeTYeAdjYeYe + 300*MassWB*traceAdjYdYd*
-      traceAdjYeYe + 200*MassWB*traceAdjYeYeAdjYeYe - 300*traceAdjYuTYuAdjYdYd
-      - 1200*traceAdjYuTYuAdjYuYu + 300*MassWB*traceAdjYuYuAdjYdYd + 600*MassWB
-      *traceAdjYuYuAdjYuYu - 900*traceAdjYdYd*traceTYdAdjYd - 300*traceAdjYeYe*
-      traceTYdAdjYd - 300*traceTYdAdjYuYuAdjYd - 300*traceAdjYdYd*traceTYeAdjYe
-       - 100*traceAdjYeYe*traceTYeAdjYe - 900*traceAdjYuYu*traceTYuAdjYu - 914*
-      MassB*Quad(g1) - 457*MassWB*Quad(g1) + 2625*MassWB*Quad(g2) + 2200*MassG*
-      Quad(g3) + 1100*MassWB*Quad(g3) - 55*MassB*traceAdjYdYd*Sqr(g1) - 55*
-      MassWB*traceAdjYdYd*Sqr(g1) - 105*MassB*traceAdjYeYe*Sqr(g1) - 105*MassWB
-      *traceAdjYeYe*Sqr(g1) - 145*MassB*traceAdjYuYu*Sqr(g1) - 145*MassWB*
-      traceAdjYuYu*Sqr(g1) + 55*traceTYdAdjYd*Sqr(g1) + 105*traceTYeAdjYe*Sqr(
-      g1) + 145*traceTYuAdjYu*Sqr(g1) - 1650*MassWB*traceAdjYdYd*Sqr(g2) - 550*
-      MassWB*traceAdjYeYe*Sqr(g2) - 1650*MassWB*traceAdjYuYu*Sqr(g2) + 825*
-      traceTYdAdjYd*Sqr(g2) + 275*traceTYeAdjYe*Sqr(g2) + 825*traceTYuAdjYu*Sqr
-      (g2) + 45*MassB*Sqr(g1)*Sqr(g2) + 90*MassWB*Sqr(g1)*Sqr(g2) - 800*MassG*
-      traceAdjYdYd*Sqr(g3) - 800*MassWB*traceAdjYdYd*Sqr(g3) - 800*MassG*
-      traceAdjYuYu*Sqr(g3) - 800*MassWB*traceAdjYuYu*Sqr(g3) + 800*
-      traceTYdAdjYd*Sqr(g3) + 800*traceTYuAdjYu*Sqr(g3) - 40*MassB*Sqr(g1)*Sqr(
-      g3) - 40*MassG*Sqr(g1)*Sqr(g3) - 40*MassWB*Sqr(g1)*Sqr(g3) + 600*MassG*
-      Sqr(g2)*Sqr(g3) + 1200*MassWB*Sqr(g2)*Sqr(g3) + 450*MassWB*Sqr(
-      traceAdjYdYd) + 50*MassWB*Sqr(traceAdjYeYe) + 450*MassWB*Sqr(traceAdjYuYu
-      )));
+   beta_MassWB = 0;
 
 
    return threeLoop * beta_MassWB;

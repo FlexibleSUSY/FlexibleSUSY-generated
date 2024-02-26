@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.7.1"];
+Print["FlexibleSUSY 2.8.0"];
 Print["MSSMatMGUT"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -21,11 +21,13 @@ FSMSSMatMGUTSetLib = LibraryFunctionLoad[libMSSMatMGUT, "FSMSSMatMGUTSet", {Inte
 FSMSSMatMGUTCalculateSpectrum = LibraryFunctionLoad[libMSSMatMGUT, "FSMSSMatMGUTCalculateSpectrum", LinkObject, LinkObject];
 FSMSSMatMGUTCalculateObservables = LibraryFunctionLoad[libMSSMatMGUT, "FSMSSMatMGUTCalculateObservables", LinkObject, LinkObject];
 
+
 FSMSSMatMGUTCalculateSpectrum::error = "`1`";
 FSMSSMatMGUTCalculateSpectrum::warning = "`1`";
 
 FSMSSMatMGUTCalculateObservables::error = "`1`";
 FSMSSMatMGUTCalculateObservables::warning = "`1`";
+
 
 FSMSSMatMGUT::info = "`1`";
 FSMSSMatMGUT::nonum = "Error: `1` is not a numeric input value!";
@@ -66,6 +68,7 @@ fsDefaultSettings = {
       higgs3loopCorrectionAtAtAt -> 1,   (* FlexibleSUSY[29] *)
       higgs4loopCorrectionAtAsAsAs -> 1, (* FlexibleSUSY[30] *)
       loopLibrary -> 0,                  (* FlexibleSUSY[31] *)
+      calculateAMM -> 2.0,               (* FlexibleSUSY[32] *)
       parameterOutputScale -> 0          (* MODSEL[12] *)
 };
 
@@ -164,6 +167,7 @@ FSMSSMatMGUTOpenHandle[OptionsPattern[]] :=
             OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[higgs4loopCorrectionAtAsAsAs],
             OptionValue[loopLibrary],
+            OptionValue[calculateAMM],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)
@@ -323,6 +327,7 @@ FSMSSMatMGUTSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[higgs4loopCorrectionAtAsAsAs],
             OptionValue[loopLibrary],
+            OptionValue[calculateAMM],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)

@@ -21,6 +21,7 @@
 #define NUTSMSSM_OBSERVABLES_H
 
 #include "observable_problems.hpp"
+#include "spectrum_generator_settings.hpp"
 #include <string>
 #include <vector>
 #include <Eigen/Core>
@@ -34,8 +35,9 @@ namespace flexiblesusy {
 class NUTSMSSM_mass_eigenstates;
 class Physical_input;
 
+
 struct NUTSMSSM_observables {
-   static const int NUMBER_OF_OBSERVABLES = 0;
+   static constexpr int NUMBER_OF_OBSERVABLES = 0;
 
    NUTSMSSM_observables();
    Eigen::ArrayXd get() const; ///< returns vector of all observables
@@ -48,12 +50,19 @@ struct NUTSMSSM_observables {
 };
 
 NUTSMSSM_observables calculate_observables(
-   const NUTSMSSM_mass_eigenstates&, const softsusy::QedQcd&,
-   const Physical_input&);
+   const NUTSMSSM_mass_eigenstates&,
+   const softsusy::QedQcd&,
+   
+   const Physical_input&,
+   const Spectrum_generator_settings&);
 
 NUTSMSSM_observables calculate_observables(
-   const NUTSMSSM_mass_eigenstates&, const softsusy::QedQcd&,
-   const Physical_input&, double scale);
+   const NUTSMSSM_mass_eigenstates&,
+   const softsusy::QedQcd&,
+   
+   const Physical_input&,
+   const Spectrum_generator_settings&,
+   double scale);
 
 } // namespace flexiblesusy
 

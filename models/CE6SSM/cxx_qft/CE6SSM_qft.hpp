@@ -20,7 +20,7 @@
 /**
  * @file cxx_qft/CE6SSM_qft.hpp
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #ifndef CE6SSM_CXXQFT_QFT_H

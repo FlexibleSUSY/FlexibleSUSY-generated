@@ -208,6 +208,16 @@ void MSSMNoFVatMGUT_slha_io::set_settings(const Spectrum_generator_settings& set
 }
 
 /**
+ * Stores the settings (LToLConversion block) in the SLHA object.
+ *
+ * @param settings class of settings
+ */
+void MSSMNoFVatMGUT_slha_io::set_LToLConversion_settings(const LToLConversion_settings& settings)
+{
+   slha_io.set_LToLConversion_settings(settings);
+}
+
+/**
  * Stores the settings (FlexibleSUSY block) in the SLHA object.
  *
  * @param settings class of settings
@@ -215,6 +225,15 @@ void MSSMNoFVatMGUT_slha_io::set_settings(const Spectrum_generator_settings& set
 void MSSMNoFVatMGUT_slha_io::set_FlexibleDecay_settings(const FlexibleDecay_settings& settings)
 {
    slha_io.set_FlexibleDecay_settings(settings);
+}
+
+/**
+ * Stores the settings (FlexibleSUSYUnitarity block) in the SLHA object.
+ */
+void MSSMNoFVatMGUT_slha_io::set_unitarity_infinite_s(
+   const flexiblesusy::Spectrum_generator_settings& spectrum_generator_settings, UnitarityInfiniteS const& unitarity)
+{
+   slha_io.set_unitarity_infinite_s(spectrum_generator_settings, unitarity);
 }
 
 /**
@@ -585,28 +604,6 @@ void MSSMNoFVatMGUT_slha_io::set_dcinfo(
 }
 
 /**
- * Sort decays of every particle according to their width
- *
- */
-std::vector<Decay> sort_decays_list(const Decays_list& decays_list) {
-   std::vector<Decay> decays_list_as_vector;
-   decays_list_as_vector.reserve(decays_list.size());
-   for (const auto& el : decays_list) {
-      decays_list_as_vector.push_back(el.second);
-   }
-
-   std::sort(
-      decays_list_as_vector.begin(),
-      decays_list_as_vector.end(),
-      [](const auto& d1, const auto& d2) {
-         return d1.get_width() > d2.get_width();
-      }
-   );
-
-   return decays_list_as_vector;
-}
-
-/**
  * Stores the branching ratios for a given particle in the SLHA
  * object.
  *
@@ -627,7 +624,7 @@ void MSSMNoFVatMGUT_slha_io::set_decay_block(const Decays_list& decays_list, Fle
          << FORMAT_TOTAL_WIDTH(pdg, width, name + " decays");
 
    if (!is_zero(width, 1e-100)) {
-      constexpr double NEGATIVE_BR_TOLERANCE = 1e-11;
+      static constexpr double NEGATIVE_BR_TOLERANCE = 1e-11;
       const double MIN_BR_TO_PRINT = flexibledecay_settings.get(FlexibleDecay_settings::min_br_to_print);
       std::vector<Decay> sorted_decays_list = sort_decays_list(decays_list);
       for (const auto& channel : sorted_decays_list) {
@@ -654,6 +651,11 @@ void MSSMNoFVatMGUT_slha_io::set_decay_block(const Decays_list& decays_list, Fle
    }
 
    slha_io.set_block(decay);
+}
+
+void MSSMNoFVatMGUT_slha_io::set_effectivecouplings_block(const std::vector<std::tuple<int, int, int, double, std::string>>& effCouplings)
+{
+   slha_io.set_effectivecouplings_block(effCouplings);
 }
 
 
@@ -1053,6 +1055,17 @@ void MSSMNoFVatMGUT_slha_io::fill(Physical_input& input) const
  * @param settings struct of spectrum generator settings to be filled
  */
 void MSSMNoFVatMGUT_slha_io::fill(Spectrum_generator_settings& settings) const
+{
+   slha_io.fill(settings);
+}
+
+/**
+ * Fill struct of spectrum generator settings from SLHA object
+ * (LToLConversion block)
+ *
+ * @param settings struct of spectrum generator settings to be filled
+ */
+void MSSMNoFVatMGUT_slha_io::fill(LToLConversion_settings& settings) const
 {
    slha_io.fill(settings);
 }

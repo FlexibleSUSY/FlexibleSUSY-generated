@@ -22,7 +22,7 @@
  *
  * @brief contains interface for EWSB solver
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #ifndef lowMSSM_EWSB_SOLVER_INTERFACE_H

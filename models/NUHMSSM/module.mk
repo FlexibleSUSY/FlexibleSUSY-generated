@@ -41,7 +41,7 @@ NUHMSSM_INCLUDE_MK := \
 
 NUHMSSM_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.NUHMSSM_generated \
-		$(DIR)/LesHouches.in.NUHMSSM
+		$(DIR)/LesHouches.in.NUHMSSMalt
 
 NUHMSSM_REFERENCES := \
 		$(DIR)/NUHMSSM_references.tex
@@ -54,22 +54,23 @@ NUHMSSM_TARBALL := \
 		$(MODNAME).tar.gz
 
 LIBNUHMSSM_SRC := \
-		$(DIR)/NUHMSSM_a_muon.cpp \
+		$(DIR)/NUHMSSM_amm.cpp \
 		$(DIR)/NUHMSSM_edm.cpp \
 		$(DIR)/NUHMSSM_FFV_form_factors.cpp \
-		$(DIR)/NUHMSSM_f_to_f_conversion.cpp \
-		$(DIR)/NUHMSSM_l_to_lgamma.cpp \
+		$(wildcard $(DIR)/observables/NUHMSSM*.cpp) \
 		$(DIR)/NUHMSSM_b_to_s_gamma.cpp \
 		$(DIR)/NUHMSSM_info.cpp \
 		$(DIR)/NUHMSSM_input_parameters.cpp \
 		$(DIR)/NUHMSSM_mass_eigenstates.cpp \
 		$(DIR)/NUHMSSM_mass_eigenstates_decoupling_scheme.cpp \
 		$(DIR)/NUHMSSM_model_slha.cpp \
+		$(DIR)/NUHMSSM_lepton_amm_wrapper.cpp \
 		$(DIR)/NUHMSSM_observables.cpp \
 		$(DIR)/NUHMSSM_physical.cpp \
 		$(DIR)/NUHMSSM_slha_io.cpp \
 		$(DIR)/NUHMSSM_soft_parameters.cpp \
 		$(DIR)/NUHMSSM_susy_parameters.cpp \
+		$(DIR)/NUHMSSM_unitarity.cpp \
 		$(DIR)/NUHMSSM_utilities.cpp \
 		$(DIR)/NUHMSSM_weinberg_angle.cpp
 
@@ -89,12 +90,11 @@ LLNUHMSSM_MMA  := \
 		$(DIR)/run_NUHMSSM.m
 
 LIBNUHMSSM_HDR := \
-		$(DIR)/NUHMSSM_a_muon.hpp \
+		$(DIR)/NUHMSSM_amm.hpp \
 		$(DIR)/NUHMSSM_convergence_tester.hpp \
 		$(DIR)/NUHMSSM_edm.hpp \
 		$(DIR)/NUHMSSM_FFV_form_factors.hpp \
-		$(DIR)/NUHMSSM_f_to_f_conversion.hpp \
-		$(DIR)/NUHMSSM_l_to_lgamma.hpp \
+		$(wildcard $(DIR)/observables/NUHMSSM*.hpp) \
 		$(DIR)/NUHMSSM_b_to_s_gamma.hpp \
 		$(DIR)/NUHMSSM_ewsb_solver.hpp \
 		$(DIR)/NUHMSSM_ewsb_solver_interface.hpp \
@@ -108,6 +108,7 @@ LIBNUHMSSM_HDR := \
 		$(DIR)/NUHMSSM_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/NUHMSSM_model.hpp \
 		$(DIR)/NUHMSSM_model_slha.hpp \
+		$(DIR)/NUHMSSM_lepton_amm_wrapper.hpp \
 		$(DIR)/NUHMSSM_observables.hpp \
 		$(DIR)/NUHMSSM_physical.hpp \
 		$(DIR)/NUHMSSM_slha_io.hpp \
@@ -116,12 +117,14 @@ LIBNUHMSSM_HDR := \
 		$(DIR)/NUHMSSM_soft_parameters.hpp \
 		$(DIR)/NUHMSSM_susy_parameters.hpp \
 		$(DIR)/NUHMSSM_susy_scale_constraint.hpp \
+		$(DIR)/NUHMSSM_unitarity.hpp \
 		$(DIR)/NUHMSSM_utilities.hpp \
 		$(DIR)/NUHMSSM_weinberg_angle.hpp
 
 LIBNUHMSSM_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/NUHMSSM_qft.hpp \
 		$(DIR)/cxx_qft/NUHMSSM_fields.hpp \
+		$(DIR)/cxx_qft/NUHMSSM_particle_aliases.hpp \
 		$(DIR)/cxx_qft/NUHMSSM_vertices.hpp \
 		$(DIR)/cxx_qft/NUHMSSM_context_base.hpp \
 		$(DIR)/cxx_qft/NUHMSSM_npointfunctions_wilsoncoeffs.hpp
@@ -317,7 +320,7 @@ $(METACODE_STAMP_NUHMSSM):
 endif
 
 $(LIBNUHMSSM_DEP) $(EXENUHMSSM_DEP) $(LLNUHMSSM_DEP) $(LIBNUHMSSM_OBJ) $(EXENUHMSSM_OBJ) $(LLNUHMSSM_OBJ) $(LLNUHMSSM_LIB): \
-	CPPFLAGS += $(MODNUHMSSM_SUBMOD_INC) $(MODNUHMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODNUHMSSM_SUBMOD_INC) $(MODNUHMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIGGSTOOLSFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBNUHMSSM_DEP) $(EXENUHMSSM_DEP) $(LLNUHMSSM_DEP) $(LIBNUHMSSM_OBJ) $(EXENUHMSSM_OBJ) $(LLNUHMSSM_OBJ) $(LLNUHMSSM_LIB): \
@@ -333,11 +336,11 @@ $(LIBNUHMSSM): $(LIBNUHMSSM_OBJ)
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBNUHMSSM) $(MODNUHMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
 $(LLNUHMSSM_LIB): $(LLNUHMSSM_OBJ) $(LIBNUHMSSM) $(MODNUHMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
 
 ALLDEP += $(LIBNUHMSSM_DEP) $(EXENUHMSSM_DEP)
 ALLSRC += $(LIBNUHMSSM_SRC) $(EXENUHMSSM_SRC)

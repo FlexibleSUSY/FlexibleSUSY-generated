@@ -19,11 +19,14 @@
 
 #include "SM_observables.hpp"
 #include "SM_mass_eigenstates.hpp"
-#include "SM_a_muon.hpp"
+#include "SM_amm.hpp"
 #include "SM_edm.hpp"
-#include "SM_l_to_lgamma.hpp"
 #include "SM_b_to_s_gamma.hpp"
-#include "SM_f_to_f_conversion.hpp"
+#include "observables/l_to_l_conversion/settings.hpp"
+#include "observables/SM_br_l_to_3l.hpp"
+#include "observables/SM_br_l_to_l_gamma.hpp"
+#include "observables/SM_l_to_l_conversion.hpp"
+#include "cxx_qft/SM_qft.hpp"
 #include "config.h"
 #include "eigen_utils.hpp"
 #include "numerics2.hpp"
@@ -36,31 +39,54 @@
 #endif
 
 #define MODEL model
-#define AMU a_muon
-#define AMUUNCERTAINTY a_muon_uncertainty
+#define AMM0(p) amm_ ## p
+#define AMM1(p,idx) amm_ ## p ## _ ## idx
+#define AMMUNCERTAINTY0(p) amm_uncertainty_ ## p
+#define AMMUNCERTAINTY1(p,idx) amm_uncertainty_ ## p ## _ ## idx
 #define AMUGM2CALC a_muon_gm2calc
 #define AMUGM2CALCUNCERTAINTY a_muon_gm2calc_uncertainty
+#define DERIVEDPARAMETER(p) model.p()
+#define EXTRAPARAMETER(p) model.get_##p()
+#define INPUTPARAMETER(p) model.get_input().p
+#define MODELPARAMETER(p) model.get_##p()
+#define PHASE(p) model.get_##p()
+#define LowEnergyConstant(p) Electroweak_constants::p
+#define STANDARDDEVIATION(p) Electroweak_constants::Error_##p
+#define Pole(p) model.get_physical().p
 #define EDM0(p) edm_ ## p
 #define EDM1(p,idx) edm_ ## p ## _ ## idx
-#define LToLGamma0(pIn, pOut, spec) pIn ## _to_ ## pOut ## _ ## spec
-#define LToLGamma1(pIn,idxIn,pOut,idxOut,spec) pIn ## idxIn ## _to_ ## pOut ## idxOut ## _ ## spec
-#define FToFConversion1(pIn,idxIn,pOut,idxOut,nuclei,qedqcd) pIn ## _to_ ## pOut ## _in_ ## nuclei
 #define BSGAMMA b_to_s_gamma
 
+#define ALPHA_EM_MZ qedqcd.displayAlpha(softsusy::ALPHA)
+#define ALPHA_EM_0 physical_input.get(Physical_input::alpha_em_0)
 #define ALPHA_S_MZ qedqcd.displayAlpha(softsusy::ALPHAS)
+#define MHPole physical_input.get(Physical_input::mh_pole)
 #define MWPole qedqcd.displayPoleMW()
 #define MZPole qedqcd.displayPoleMZ()
+#define MU2GeV qedqcd.displayMu2GeV()
+#define MS2GeV qedqcd.displayMs2GeV()
 #define MTPole qedqcd.displayPoleMt()
+#define MD2GeV qedqcd.displayMd2GeV()
+#define MCMC qedqcd.displayMcMc()
 #define MBMB qedqcd.displayMbMb()
-#define MTauPole qedqcd.displayPoleMtau()
+#define Mv1Pole qedqcd.displayNeutrinoPoleMass(1)
+#define Mv2Pole qedqcd.displayNeutrinoPoleMass(2)
+#define Mv3Pole qedqcd.displayNeutrinoPoleMass(3)
+#define MEPole qedqcd.displayPoleMel()
 #define MMPole qedqcd.displayPoleMmuon()
+#define MTauPole qedqcd.displayPoleMtau()
+#define CKMInput qedqcd.get_complex_ckm()
 
 namespace flexiblesusy {
 
 const int SM_observables::NUMBER_OF_OBSERVABLES;
 
 SM_observables::SM_observables()
-   : a_muon(0)
+   : amm_Fe_0(0)
+   , amm_Fe_1(0)
+   , amm_Fe_2(0)
+   , Fe2to11bar1_All_1loop(Eigen::Array<std::complex<double>,13,1>::Zero())
+   , Fe2Fe1inAl_All_1loop(Eigen::Array<std::complex<double>,13,1>::Zero())
 
 {
 }
@@ -69,7 +95,61 @@ Eigen::ArrayXd SM_observables::get() const
 {
    Eigen::ArrayXd vec(SM_observables::NUMBER_OF_OBSERVABLES);
 
-   vec(0) = a_muon;
+   vec(0) = amm_Fe_0;
+   vec(1) = amm_Fe_1;
+   vec(2) = amm_Fe_2;
+   vec(3) = Re(Fe2to11bar1_All_1loop(0));
+   vec(4) = Im(Fe2to11bar1_All_1loop(0));
+   vec(5) = Re(Fe2to11bar1_All_1loop(1));
+   vec(6) = Im(Fe2to11bar1_All_1loop(1));
+   vec(7) = Re(Fe2to11bar1_All_1loop(2));
+   vec(8) = Im(Fe2to11bar1_All_1loop(2));
+   vec(9) = Re(Fe2to11bar1_All_1loop(3));
+   vec(10) = Im(Fe2to11bar1_All_1loop(3));
+   vec(11) = Re(Fe2to11bar1_All_1loop(4));
+   vec(12) = Im(Fe2to11bar1_All_1loop(4));
+   vec(13) = Re(Fe2to11bar1_All_1loop(5));
+   vec(14) = Im(Fe2to11bar1_All_1loop(5));
+   vec(15) = Re(Fe2to11bar1_All_1loop(6));
+   vec(16) = Im(Fe2to11bar1_All_1loop(6));
+   vec(17) = Re(Fe2to11bar1_All_1loop(7));
+   vec(18) = Im(Fe2to11bar1_All_1loop(7));
+   vec(19) = Re(Fe2to11bar1_All_1loop(8));
+   vec(20) = Im(Fe2to11bar1_All_1loop(8));
+   vec(21) = Re(Fe2to11bar1_All_1loop(9));
+   vec(22) = Im(Fe2to11bar1_All_1loop(9));
+   vec(23) = Re(Fe2to11bar1_All_1loop(10));
+   vec(24) = Im(Fe2to11bar1_All_1loop(10));
+   vec(25) = Re(Fe2to11bar1_All_1loop(11));
+   vec(26) = Im(Fe2to11bar1_All_1loop(11));
+   vec(27) = Re(Fe2to11bar1_All_1loop(12));
+   vec(28) = Im(Fe2to11bar1_All_1loop(12));
+   vec(29) = Re(Fe2Fe1inAl_All_1loop(0));
+   vec(30) = Im(Fe2Fe1inAl_All_1loop(0));
+   vec(31) = Re(Fe2Fe1inAl_All_1loop(1));
+   vec(32) = Im(Fe2Fe1inAl_All_1loop(1));
+   vec(33) = Re(Fe2Fe1inAl_All_1loop(2));
+   vec(34) = Im(Fe2Fe1inAl_All_1loop(2));
+   vec(35) = Re(Fe2Fe1inAl_All_1loop(3));
+   vec(36) = Im(Fe2Fe1inAl_All_1loop(3));
+   vec(37) = Re(Fe2Fe1inAl_All_1loop(4));
+   vec(38) = Im(Fe2Fe1inAl_All_1loop(4));
+   vec(39) = Re(Fe2Fe1inAl_All_1loop(5));
+   vec(40) = Im(Fe2Fe1inAl_All_1loop(5));
+   vec(41) = Re(Fe2Fe1inAl_All_1loop(6));
+   vec(42) = Im(Fe2Fe1inAl_All_1loop(6));
+   vec(43) = Re(Fe2Fe1inAl_All_1loop(7));
+   vec(44) = Im(Fe2Fe1inAl_All_1loop(7));
+   vec(45) = Re(Fe2Fe1inAl_All_1loop(8));
+   vec(46) = Im(Fe2Fe1inAl_All_1loop(8));
+   vec(47) = Re(Fe2Fe1inAl_All_1loop(9));
+   vec(48) = Im(Fe2Fe1inAl_All_1loop(9));
+   vec(49) = Re(Fe2Fe1inAl_All_1loop(10));
+   vec(50) = Im(Fe2Fe1inAl_All_1loop(10));
+   vec(51) = Re(Fe2Fe1inAl_All_1loop(11));
+   vec(52) = Im(Fe2Fe1inAl_All_1loop(11));
+   vec(53) = Re(Fe2Fe1inAl_All_1loop(12));
+   vec(54) = Im(Fe2Fe1inAl_All_1loop(12));
 
    return vec;
 }
@@ -78,14 +158,72 @@ std::vector<std::string> SM_observables::get_names()
 {
    std::vector<std::string> names(SM_observables::NUMBER_OF_OBSERVABLES);
 
-   names[0] = "a_muon";
+   names[0] = "amm_Fe_0";
+   names[1] = "amm_Fe_1";
+   names[2] = "amm_Fe_2";
+   names[3] = "Re(Fe2to11bar1_All_1loop(0))";
+   names[4] = "Im(Fe2to11bar1_All_1loop(0))";
+   names[5] = "Re(Fe2to11bar1_All_1loop(1))";
+   names[6] = "Im(Fe2to11bar1_All_1loop(1))";
+   names[7] = "Re(Fe2to11bar1_All_1loop(2))";
+   names[8] = "Im(Fe2to11bar1_All_1loop(2))";
+   names[9] = "Re(Fe2to11bar1_All_1loop(3))";
+   names[10] = "Im(Fe2to11bar1_All_1loop(3))";
+   names[11] = "Re(Fe2to11bar1_All_1loop(4))";
+   names[12] = "Im(Fe2to11bar1_All_1loop(4))";
+   names[13] = "Re(Fe2to11bar1_All_1loop(5))";
+   names[14] = "Im(Fe2to11bar1_All_1loop(5))";
+   names[15] = "Re(Fe2to11bar1_All_1loop(6))";
+   names[16] = "Im(Fe2to11bar1_All_1loop(6))";
+   names[17] = "Re(Fe2to11bar1_All_1loop(7))";
+   names[18] = "Im(Fe2to11bar1_All_1loop(7))";
+   names[19] = "Re(Fe2to11bar1_All_1loop(8))";
+   names[20] = "Im(Fe2to11bar1_All_1loop(8))";
+   names[21] = "Re(Fe2to11bar1_All_1loop(9))";
+   names[22] = "Im(Fe2to11bar1_All_1loop(9))";
+   names[23] = "Re(Fe2to11bar1_All_1loop(10))";
+   names[24] = "Im(Fe2to11bar1_All_1loop(10))";
+   names[25] = "Re(Fe2to11bar1_All_1loop(11))";
+   names[26] = "Im(Fe2to11bar1_All_1loop(11))";
+   names[27] = "Re(Fe2to11bar1_All_1loop(12))";
+   names[28] = "Im(Fe2to11bar1_All_1loop(12))";
+   names[29] = "Re(Fe2Fe1inAl_All_1loop(0))";
+   names[30] = "Im(Fe2Fe1inAl_All_1loop(0))";
+   names[31] = "Re(Fe2Fe1inAl_All_1loop(1))";
+   names[32] = "Im(Fe2Fe1inAl_All_1loop(1))";
+   names[33] = "Re(Fe2Fe1inAl_All_1loop(2))";
+   names[34] = "Im(Fe2Fe1inAl_All_1loop(2))";
+   names[35] = "Re(Fe2Fe1inAl_All_1loop(3))";
+   names[36] = "Im(Fe2Fe1inAl_All_1loop(3))";
+   names[37] = "Re(Fe2Fe1inAl_All_1loop(4))";
+   names[38] = "Im(Fe2Fe1inAl_All_1loop(4))";
+   names[39] = "Re(Fe2Fe1inAl_All_1loop(5))";
+   names[40] = "Im(Fe2Fe1inAl_All_1loop(5))";
+   names[41] = "Re(Fe2Fe1inAl_All_1loop(6))";
+   names[42] = "Im(Fe2Fe1inAl_All_1loop(6))";
+   names[43] = "Re(Fe2Fe1inAl_All_1loop(7))";
+   names[44] = "Im(Fe2Fe1inAl_All_1loop(7))";
+   names[45] = "Re(Fe2Fe1inAl_All_1loop(8))";
+   names[46] = "Im(Fe2Fe1inAl_All_1loop(8))";
+   names[47] = "Re(Fe2Fe1inAl_All_1loop(9))";
+   names[48] = "Im(Fe2Fe1inAl_All_1loop(9))";
+   names[49] = "Re(Fe2Fe1inAl_All_1loop(10))";
+   names[50] = "Im(Fe2Fe1inAl_All_1loop(10))";
+   names[51] = "Re(Fe2Fe1inAl_All_1loop(11))";
+   names[52] = "Im(Fe2Fe1inAl_All_1loop(11))";
+   names[53] = "Re(Fe2Fe1inAl_All_1loop(12))";
+   names[54] = "Im(Fe2Fe1inAl_All_1loop(12))";
 
    return names;
 }
 
 void SM_observables::clear()
 {
-   a_muon = 0.;
+   amm_Fe_0 = 0.;
+   amm_Fe_1 = 0.;
+   amm_Fe_2 = 0.;
+   Fe2to11bar1_All_1loop = Eigen::Array<std::complex<double>,13,1>::Zero();
+   Fe2Fe1inAl_All_1loop = Eigen::Array<std::complex<double>,13,1>::Zero();
 
 }
 
@@ -93,13 +231,43 @@ void SM_observables::set(const Eigen::ArrayXd& vec)
 {
    assert(vec.rows() == SM_observables::NUMBER_OF_OBSERVABLES);
 
-   a_muon = vec(0);
+   amm_Fe_0 = vec(0);
+   amm_Fe_1 = vec(1);
+   amm_Fe_2 = vec(2);
+   Fe2to11bar1_All_1loop(0) = std::complex<double>(vec(3), vec(4));
+   Fe2to11bar1_All_1loop(1) = std::complex<double>(vec(5), vec(6));
+   Fe2to11bar1_All_1loop(2) = std::complex<double>(vec(7), vec(8));
+   Fe2to11bar1_All_1loop(3) = std::complex<double>(vec(9), vec(10));
+   Fe2to11bar1_All_1loop(4) = std::complex<double>(vec(11), vec(12));
+   Fe2to11bar1_All_1loop(5) = std::complex<double>(vec(13), vec(14));
+   Fe2to11bar1_All_1loop(6) = std::complex<double>(vec(15), vec(16));
+   Fe2to11bar1_All_1loop(7) = std::complex<double>(vec(17), vec(18));
+   Fe2to11bar1_All_1loop(8) = std::complex<double>(vec(19), vec(20));
+   Fe2to11bar1_All_1loop(9) = std::complex<double>(vec(21), vec(22));
+   Fe2to11bar1_All_1loop(10) = std::complex<double>(vec(23), vec(24));
+   Fe2to11bar1_All_1loop(11) = std::complex<double>(vec(25), vec(26));
+   Fe2to11bar1_All_1loop(12) = std::complex<double>(vec(27), vec(28));
+   Fe2Fe1inAl_All_1loop(0) = std::complex<double>(vec(29), vec(30));
+   Fe2Fe1inAl_All_1loop(1) = std::complex<double>(vec(31), vec(32));
+   Fe2Fe1inAl_All_1loop(2) = std::complex<double>(vec(33), vec(34));
+   Fe2Fe1inAl_All_1loop(3) = std::complex<double>(vec(35), vec(36));
+   Fe2Fe1inAl_All_1loop(4) = std::complex<double>(vec(37), vec(38));
+   Fe2Fe1inAl_All_1loop(5) = std::complex<double>(vec(39), vec(40));
+   Fe2Fe1inAl_All_1loop(6) = std::complex<double>(vec(41), vec(42));
+   Fe2Fe1inAl_All_1loop(7) = std::complex<double>(vec(43), vec(44));
+   Fe2Fe1inAl_All_1loop(8) = std::complex<double>(vec(45), vec(46));
+   Fe2Fe1inAl_All_1loop(9) = std::complex<double>(vec(47), vec(48));
+   Fe2Fe1inAl_All_1loop(10) = std::complex<double>(vec(49), vec(50));
+   Fe2Fe1inAl_All_1loop(11) = std::complex<double>(vec(51), vec(52));
+   Fe2Fe1inAl_All_1loop(12) = std::complex<double>(vec(53), vec(54));
 
 }
 
 SM_observables calculate_observables(const SM_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
+                                              const LToLConversion_settings& ltolconversion_settings,
                                               const Physical_input& physical_input,
+                                              const Spectrum_generator_settings& settings,
                                               double scale)
 {
    auto model_at_scale = model;
@@ -122,18 +290,28 @@ SM_observables calculate_observables(const SM_mass_eigenstates& model,
       }
    }
 
-   return calculate_observables(model_at_scale, qedqcd, physical_input);
+   return calculate_observables(model_at_scale,
+                                qedqcd,
+                                ltolconversion_settings,
+                                physical_input,
+                                settings);
 }
 
 SM_observables calculate_observables(const SM_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
-                                              const Physical_input& physical_input)
+                                              const LToLConversion_settings& ltolconversion_settings,
+                                              const Physical_input& physical_input,
+                                              const Spectrum_generator_settings& settings)
 {
    SM_observables observables;
 
    try {
       
-      observables.AMU = SM_a_muon::calculate_a_muon(MODEL, qedqcd);
+      observables.AMM1(Fe, 0) = SM_amm::calculate_amm<SM_cxx_diagrams::fields::Fe>(MODEL, qedqcd, settings,0);
+      observables.AMM1(Fe, 1) = SM_amm::calculate_amm<SM_cxx_diagrams::fields::Fe>(MODEL, qedqcd, settings,1);
+      observables.AMM1(Fe, 2) = SM_amm::calculate_amm<SM_cxx_diagrams::fields::Fe>(MODEL, qedqcd, settings,2);
+      observables.Fe2to11bar1_All_1loop = SM_br_l_to_3l::calculate_Fe_to_FeFebarFe_for_All_1loop(1, 0, 0, model, qedqcd);
+      observables.Fe2Fe1inAl_All_1loop = SM_l_to_l_conversion::calculate_FeFe_forAll_1loop(1, 0, SM_l_to_l_conversion::Nucleus::Al, model, ltolconversion_settings, qedqcd);
    } catch (const NonPerturbativeRunningError& e) {
       observables.problems.general.flag_non_perturbative_running(e.get_scale());
    } catch (const Error& e) {

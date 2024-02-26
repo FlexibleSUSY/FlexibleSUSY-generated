@@ -82,7 +82,6 @@ handle = FSTMSSMOpenHandle[
 
 spectrum    = FSTMSSMCalculateSpectrum[handle];
 observables = FSTMSSMCalculateObservables[handle];
-decays      = FSTMSSMCalculateDecays[handle];
 
 FSTMSSMCloseHandle[handle];
 

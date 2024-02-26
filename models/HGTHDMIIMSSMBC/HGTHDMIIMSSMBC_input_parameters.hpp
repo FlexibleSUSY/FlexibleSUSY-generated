@@ -35,10 +35,15 @@ struct HGTHDMIIMSSMBC_input_parameters {
    double M2Input{};
    double M3Input{};
    double MAInput{};
-   double AtInput{};
-   double AbInput{};
-   double AtauInput{};
    double LambdaLoopOrder{};
+   Eigen::Matrix<double,3,3> AeInput{Eigen::Matrix<double,3,3>::Zero()};
+   Eigen::Matrix<double,3,3> AdInput{Eigen::Matrix<double,3,3>::Zero()};
+   Eigen::Matrix<double,3,3> AuInput{Eigen::Matrix<double,3,3>::Zero()};
+   Eigen::Matrix<double,3,1> mslInput{Eigen::Matrix<double,3,1>::Zero()};
+   Eigen::Matrix<double,3,1> mseInput{Eigen::Matrix<double,3,1>::Zero()};
+   Eigen::Matrix<double,3,1> msqInput{Eigen::Matrix<double,3,1>::Zero()};
+   Eigen::Matrix<double,3,1> msdInput{Eigen::Matrix<double,3,1>::Zero()};
+   Eigen::Matrix<double,3,1> msuInput{Eigen::Matrix<double,3,1>::Zero()};
 
 
    Eigen::ArrayXd get() const;

@@ -37,7 +37,6 @@ public:
    NMSSMEFTHiggs_high_scale_constraint() = default;
    NMSSMEFTHiggs_high_scale_constraint(NMSSMEFTHiggs<Two_scale>*);
    virtual ~NMSSMEFTHiggs_high_scale_constraint() = default;
-   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
    virtual void apply() override;
    virtual double get_scale() const override;

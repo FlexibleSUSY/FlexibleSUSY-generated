@@ -83,7 +83,6 @@ handle = FSCE6SSMOpenHandle[
 
 spectrum    = FSCE6SSMCalculateSpectrum[handle];
 observables = FSCE6SSMCalculateObservables[handle];
-decays      = FSCE6SSMCalculateDecays[handle];
 
 FSCE6SSMCloseHandle[handle];
 

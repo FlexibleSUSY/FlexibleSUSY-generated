@@ -25,7 +25,7 @@
  * which solve EWSB and calculate pole masses and mixings from MSbar
  * parameters.
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #include "SplitMSSM_mass_eigenstates.hpp"
@@ -553,7 +553,11 @@ void CLASSNAME::calculate_pole_masses()
       tp.run_task([this] () { calculate_MFd_pole(); });
       tp.run_task([this] () { calculate_MFu_pole(); });
       tp.run_task([this] () { calculate_MFe_pole(); });
-      tp.run_task([this] () { calculate_MVWp_pole(); });
+      tp.run_task([this] () {
+         if (PHYSICAL(MVWp) == 0.) {
+            calculate_MVWp_pole();
+         }
+      });
    }
 
 #else
@@ -572,7 +576,9 @@ void CLASSNAME::calculate_pole_masses()
       calculate_MFd_pole();
       calculate_MFu_pole();
       calculate_MFe_pole();
-      calculate_MVWp_pole();
+      if (PHYSICAL(MVWp) == 0.) {
+         calculate_MVWp_pole();
+      }
    }
 
 #endif
@@ -4985,7 +4991,8 @@ double CLASSNAME::calculate_MVZ_DRbar(double m_pole) const
    const double mass_sqr = Sqr(m_pole) + self_energy;
 
    if (mass_sqr < 0.) {
-      problems.flag_pole_tachyon(SplitMSSM_info::VZ);return m_pole;
+      problems.flag_pole_tachyon(SplitMSSM_info::VZ);
+      return m_pole;
    }
 
    return AbsSqrt(mass_sqr);
@@ -4998,7 +5005,8 @@ double CLASSNAME::calculate_MVWp_DRbar(double m_pole) const
    const double mass_sqr = Sqr(m_pole) + self_energy;
 
    if (mass_sqr < 0.) {
-      problems.flag_pole_tachyon(SplitMSSM_info::VWp);return m_pole;
+      problems.flag_pole_tachyon(SplitMSSM_info::VWp);
+      return m_pole;
    }
 
    return AbsSqrt(mass_sqr);

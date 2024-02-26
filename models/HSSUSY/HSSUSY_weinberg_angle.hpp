@@ -83,7 +83,6 @@ private:
    double calculate_mw_pole(double) const;
    double calculate_delta_alpha_hat_bsm(double) const;
 
-   std::complex<double> CpbarFeFehhPL(int gI1, int gI2) const;
    std::complex<double> CpbarFvFeVWpPL(int gO1, int gI2) const;
    std::complex<double> delta_vb_wave_Fv(int gO1) const;
    std::complex<double> delta_vb_wave_Fe(int gO1) const;

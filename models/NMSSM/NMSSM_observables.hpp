@@ -21,6 +21,7 @@
 #define NMSSM_OBSERVABLES_H
 
 #include "observable_problems.hpp"
+#include "spectrum_generator_settings.hpp"
 #include <string>
 #include <vector>
 #include <Eigen/Core>
@@ -34,8 +35,9 @@ namespace flexiblesusy {
 class NMSSM_mass_eigenstates;
 class Physical_input;
 
+
 struct NMSSM_observables {
-   static const int NUMBER_OF_OBSERVABLES = 5;
+   static constexpr int NUMBER_OF_OBSERVABLES = 5;
 
    NMSSM_observables();
    Eigen::ArrayXd get() const; ///< returns vector of all observables
@@ -44,21 +46,28 @@ struct NMSSM_observables {
    void set(const Eigen::ArrayXd&); ///< sets all observables from given vector
 
    Observable_problems problems;
-   double a_muon; ///< a_muon = (g-2)/2 of the muon (calculated with FlexibleSUSY)
-   double edm_Fe_0; ///< electric dipole moment of Fe(0) [1/GeV]
-   double edm_Fe_1; ///< electric dipole moment of Fe(1) [1/GeV]
-   double edm_Fe_2; ///< electric dipole moment of Fe(2) [1/GeV]
-   double Fe1_to_Fe0_VP; ///< BR(Fe1 -> Fe0 VP)
+   double amm_Fe_1; ///< Delta(g-2)/2 of Fe(2) (calculated with FlexibleSUSY)
+   double edm_Fe_0; ///< electric dipole moment of Fe(1) [1/GeV]
+   double edm_Fe_1; ///< electric dipole moment of Fe(2) [1/GeV]
+   double edm_Fe_2; ///< electric dipole moment of Fe(3) [1/GeV]
+   double Fe1_to_Fe0_VP; ///< BR(Fe2 -> Fe1 VP)
 
 };
 
 NMSSM_observables calculate_observables(
-   const NMSSM_mass_eigenstates&, const softsusy::QedQcd&,
-   const Physical_input&);
+   const NMSSM_mass_eigenstates&,
+   const softsusy::QedQcd&,
+   
+   const Physical_input&,
+   const Spectrum_generator_settings&);
 
 NMSSM_observables calculate_observables(
-   const NMSSM_mass_eigenstates&, const softsusy::QedQcd&,
-   const Physical_input&, double scale);
+   const NMSSM_mass_eigenstates&,
+   const softsusy::QedQcd&,
+   
+   const Physical_input&,
+   const Spectrum_generator_settings&,
+   double scale);
 
 } // namespace flexiblesusy
 

@@ -113,7 +113,7 @@ protected:
    HTHDMIIMSSMBC_input_parameters input{};
 
 private:
-   static const int numberOfParameters = 37;
+   static constexpr int numberOfParameters = 37;
 
    struct Susy_traces {
       double traceYdAdjYd{};

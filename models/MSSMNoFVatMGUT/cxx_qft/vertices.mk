@@ -18,5 +18,4 @@
 
 
 LIBMSSMNoFVatMGUT_CXXQFT_VERTICES_SRC := \
-	models/MSSMNoFVatMGUT/cxx_qft/MSSMNoFVatMGUT_vertices_1.cpp \
-	models/MSSMNoFVatMGUT/cxx_qft/MSSMNoFVatMGUT_vertices_2.cpp
+	models/MSSMNoFVatMGUT/cxx_qft/MSSMNoFVatMGUT_vertices_1.cpp

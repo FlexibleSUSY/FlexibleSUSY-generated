@@ -39,7 +39,6 @@ public:
    UMSSM_low_scale_constraint() = default;
    UMSSM_low_scale_constraint(UMSSM<Two_scale>*, const softsusy::QedQcd&);
    virtual ~UMSSM_low_scale_constraint() = default;
-   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
    virtual void apply() override;
    virtual double get_scale() const override;

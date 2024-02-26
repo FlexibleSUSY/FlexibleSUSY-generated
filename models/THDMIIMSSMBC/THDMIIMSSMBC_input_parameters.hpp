@@ -31,11 +31,18 @@ struct THDMIIMSSMBC_input_parameters {
    double MSUSY{};
    double MEWSB{};
    double MuInput{};
+   double M1Input{};
+   double M2Input{};
    double MAInput{};
-   double AtInput{};
-   double AbInput{};
-   double AtauInput{};
    double LambdaLoopOrder{};
+   Eigen::Matrix<double,3,3> AeInput{Eigen::Matrix<double,3,3>::Zero()};
+   Eigen::Matrix<double,3,3> AdInput{Eigen::Matrix<double,3,3>::Zero()};
+   Eigen::Matrix<double,3,3> AuInput{Eigen::Matrix<double,3,3>::Zero()};
+   Eigen::Matrix<double,3,1> mslInput{Eigen::Matrix<double,3,1>::Zero()};
+   Eigen::Matrix<double,3,1> mseInput{Eigen::Matrix<double,3,1>::Zero()};
+   Eigen::Matrix<double,3,1> msqInput{Eigen::Matrix<double,3,1>::Zero()};
+   Eigen::Matrix<double,3,1> msdInput{Eigen::Matrix<double,3,1>::Zero()};
+   Eigen::Matrix<double,3,1> msuInput{Eigen::Matrix<double,3,1>::Zero()};
 
 
    Eigen::ArrayXd get() const;

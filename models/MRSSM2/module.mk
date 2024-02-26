@@ -54,22 +54,23 @@ MRSSM2_TARBALL := \
 		$(MODNAME).tar.gz
 
 LIBMRSSM2_SRC := \
-		$(DIR)/MRSSM2_a_muon.cpp \
+		$(DIR)/MRSSM2_amm.cpp \
 		$(DIR)/MRSSM2_edm.cpp \
 		$(DIR)/MRSSM2_FFV_form_factors.cpp \
-		$(DIR)/MRSSM2_f_to_f_conversion.cpp \
-		$(DIR)/MRSSM2_l_to_lgamma.cpp \
+		$(wildcard $(DIR)/observables/MRSSM2*.cpp) \
 		$(DIR)/MRSSM2_b_to_s_gamma.cpp \
 		$(DIR)/MRSSM2_info.cpp \
 		$(DIR)/MRSSM2_input_parameters.cpp \
 		$(DIR)/MRSSM2_mass_eigenstates.cpp \
 		$(DIR)/MRSSM2_mass_eigenstates_decoupling_scheme.cpp \
 		$(DIR)/MRSSM2_model_slha.cpp \
+		$(DIR)/MRSSM2_lepton_amm_wrapper.cpp \
 		$(DIR)/MRSSM2_observables.cpp \
 		$(DIR)/MRSSM2_physical.cpp \
 		$(DIR)/MRSSM2_slha_io.cpp \
 		$(DIR)/MRSSM2_soft_parameters.cpp \
 		$(DIR)/MRSSM2_susy_parameters.cpp \
+		$(DIR)/MRSSM2_unitarity.cpp \
 		$(DIR)/MRSSM2_utilities.cpp \
 		$(DIR)/MRSSM2_weinberg_angle.cpp
 
@@ -89,12 +90,11 @@ LLMRSSM2_MMA  := \
 		$(DIR)/run_MRSSM2.m
 
 LIBMRSSM2_HDR := \
-		$(DIR)/MRSSM2_a_muon.hpp \
+		$(DIR)/MRSSM2_amm.hpp \
 		$(DIR)/MRSSM2_convergence_tester.hpp \
 		$(DIR)/MRSSM2_edm.hpp \
 		$(DIR)/MRSSM2_FFV_form_factors.hpp \
-		$(DIR)/MRSSM2_f_to_f_conversion.hpp \
-		$(DIR)/MRSSM2_l_to_lgamma.hpp \
+		$(wildcard $(DIR)/observables/MRSSM2*.hpp) \
 		$(DIR)/MRSSM2_b_to_s_gamma.hpp \
 		$(DIR)/MRSSM2_ewsb_solver.hpp \
 		$(DIR)/MRSSM2_ewsb_solver_interface.hpp \
@@ -108,6 +108,7 @@ LIBMRSSM2_HDR := \
 		$(DIR)/MRSSM2_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/MRSSM2_model.hpp \
 		$(DIR)/MRSSM2_model_slha.hpp \
+		$(DIR)/MRSSM2_lepton_amm_wrapper.hpp \
 		$(DIR)/MRSSM2_observables.hpp \
 		$(DIR)/MRSSM2_physical.hpp \
 		$(DIR)/MRSSM2_slha_io.hpp \
@@ -116,12 +117,14 @@ LIBMRSSM2_HDR := \
 		$(DIR)/MRSSM2_soft_parameters.hpp \
 		$(DIR)/MRSSM2_susy_parameters.hpp \
 		$(DIR)/MRSSM2_susy_scale_constraint.hpp \
+		$(DIR)/MRSSM2_unitarity.hpp \
 		$(DIR)/MRSSM2_utilities.hpp \
 		$(DIR)/MRSSM2_weinberg_angle.hpp
 
 LIBMRSSM2_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/MRSSM2_qft.hpp \
 		$(DIR)/cxx_qft/MRSSM2_fields.hpp \
+		$(DIR)/cxx_qft/MRSSM2_particle_aliases.hpp \
 		$(DIR)/cxx_qft/MRSSM2_vertices.hpp \
 		$(DIR)/cxx_qft/MRSSM2_context_base.hpp \
 		$(DIR)/cxx_qft/MRSSM2_npointfunctions_wilsoncoeffs.hpp
@@ -317,7 +320,7 @@ $(METACODE_STAMP_MRSSM2):
 endif
 
 $(LIBMRSSM2_DEP) $(EXEMRSSM2_DEP) $(LLMRSSM2_DEP) $(LIBMRSSM2_OBJ) $(EXEMRSSM2_OBJ) $(LLMRSSM2_OBJ) $(LLMRSSM2_LIB): \
-	CPPFLAGS += $(MODMRSSM2_SUBMOD_INC) $(MODMRSSM2_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODMRSSM2_SUBMOD_INC) $(MODMRSSM2_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIGGSTOOLSFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBMRSSM2_DEP) $(EXEMRSSM2_DEP) $(LLMRSSM2_DEP) $(LIBMRSSM2_OBJ) $(EXEMRSSM2_OBJ) $(LLMRSSM2_OBJ) $(LLMRSSM2_LIB): \
@@ -333,11 +336,11 @@ $(LIBMRSSM2): $(LIBMRSSM2_OBJ)
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBMRSSM2) $(MODMRSSM2_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
 $(LLMRSSM2_LIB): $(LLMRSSM2_OBJ) $(LIBMRSSM2) $(MODMRSSM2_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
 
 ALLDEP += $(LIBMRSSM2_DEP) $(EXEMRSSM2_DEP)
 ALLSRC += $(LIBMRSSM2_SRC) $(EXEMRSSM2_SRC)

@@ -39,7 +39,6 @@ public:
    MSSMNoFV_low_scale_constraint() = default;
    MSSMNoFV_low_scale_constraint(MSSMNoFV<Two_scale>*, const softsusy::QedQcd&);
    virtual ~MSSMNoFV_low_scale_constraint() = default;
-   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
    virtual void apply() override;
    virtual double get_scale() const override;

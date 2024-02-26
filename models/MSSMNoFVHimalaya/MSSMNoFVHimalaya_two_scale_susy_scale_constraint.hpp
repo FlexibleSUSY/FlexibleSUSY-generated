@@ -38,7 +38,6 @@ public:
    MSSMNoFVHimalaya_susy_scale_constraint() = default;
    MSSMNoFVHimalaya_susy_scale_constraint(MSSMNoFVHimalaya<Two_scale>*, const softsusy::QedQcd&);
    virtual ~MSSMNoFVHimalaya_susy_scale_constraint() = default;
-   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
    virtual void apply() override;
    virtual double get_scale() const override;

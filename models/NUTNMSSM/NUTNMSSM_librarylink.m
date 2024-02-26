@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.7.1"];
+Print["FlexibleSUSY 2.8.0"];
 Print["NUTNMSSM"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -20,7 +20,7 @@ FSNUTNMSSMSetLib = LibraryFunctionLoad[libNUTNMSSM, "FSNUTNMSSMSet", {Integer, {
 
 FSNUTNMSSMCalculateSpectrum = LibraryFunctionLoad[libNUTNMSSM, "FSNUTNMSSMCalculateSpectrum", LinkObject, LinkObject];
 FSNUTNMSSMCalculateObservables = LibraryFunctionLoad[libNUTNMSSM, "FSNUTNMSSMCalculateObservables", LinkObject, LinkObject];
-FSNUTNMSSMCalculateDecays = LibraryFunctionLoad[libNUTNMSSM, "FSNUTNMSSMCalculateDecays", LinkObject, LinkObject];
+
 
 FSNUTNMSSMCalculateSpectrum::error = "`1`";
 FSNUTNMSSMCalculateSpectrum::warning = "`1`";
@@ -28,8 +28,6 @@ FSNUTNMSSMCalculateSpectrum::warning = "`1`";
 FSNUTNMSSMCalculateObservables::error = "`1`";
 FSNUTNMSSMCalculateObservables::warning = "`1`";
 
-FSNUTNMSSMCalculateDecays::error = "`1`";
-FSNUTNMSSMCalculateDecays::warning = "`1`";
 
 FSNUTNMSSM::info = "`1`";
 FSNUTNMSSM::nonum = "Error: `1` is not a numeric input value!";
@@ -70,6 +68,7 @@ fsDefaultSettings = {
       higgs3loopCorrectionAtAtAt -> 1,   (* FlexibleSUSY[29] *)
       higgs4loopCorrectionAtAsAsAs -> 1, (* FlexibleSUSY[30] *)
       loopLibrary -> 0,                  (* FlexibleSUSY[31] *)
+      calculateAMM -> 2.0,               (* FlexibleSUSY[32] *)
       parameterOutputScale -> 0          (* MODSEL[12] *)
 };
 
@@ -105,13 +104,6 @@ fsDefaultSMParameters = {
     Mh -> 125.09
 };
 
-fdDefaultSettings = {
-   minBRtoPrint -> 1*^-5,
-   maxHigherOrderCorrections -> 4,
-   alphaThomson -> 1,
-   offShellVV -> 2
-};
-
 fsNUTNMSSMDefaultInputParameters = {
    m0 -> 0,
    m12 -> 0,
@@ -128,10 +120,10 @@ Options[FSNUTNMSSMOpenHandle] = {
     Sequence @@ fsDefaultSettings,
     Sequence @@ fsDefaultSMParameters,
     Sequence @@ fsNUTNMSSMDefaultInputParameters
-   , Sequence @@ fdDefaultSettings
+
 };
 
-FSNUTNMSSMOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters | fdSettings) -> s_List, r___] :=
+FSNUTNMSSMOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters ) -> s_List, r___] :=
     FSNUTNMSSMOpenHandle[a, Sequence @@ s, r];
 
 FSNUTNMSSMOpenHandle[OptionsPattern[]] :=
@@ -169,6 +161,7 @@ FSNUTNMSSMOpenHandle[OptionsPattern[]] :=
             OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[higgs4loopCorrectionAtAsAsAs],
             OptionValue[loopLibrary],
+            OptionValue[calculateAMM],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)
@@ -213,11 +206,7 @@ FSNUTNMSSMOpenHandle[OptionsPattern[]] :=
             OptionValue[ALambdaInput],
             OptionValue[AKappaInput],
             OptionValue[MuEff]
-            ,
-            OptionValue[minBRtoPrint],
-            OptionValue[maxHigherOrderCorrections],
-            OptionValue[alphaThomson],
-            OptionValue[offShellVV]
+
         }
 ];
 
@@ -262,6 +251,7 @@ FSNUTNMSSMSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[higgs4loopCorrectionAtAsAsAs],
             OptionValue[loopLibrary],
+            OptionValue[calculateAMM],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)
@@ -306,11 +296,7 @@ FSNUTNMSSMSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[ALambdaInput],
             OptionValue[AKappaInput],
             OptionValue[MuEff]
-            ,
-            OptionValue[minBRtoPrint],
-            OptionValue[maxHigherOrderCorrections],
-            OptionValue[alphaThomson],
-            OptionValue[offShellVV]
+
         }] /. HoldPattern[OptionValue[param_]] :> param /.
         { p } /.
         FSNUTNMSSMGetSettings[handle] /.

@@ -25,7 +25,7 @@
  * which solve EWSB and calculate pole masses and mixings from DRbar
  * parameters.
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #include "NUHMSSM_mass_eigenstates.hpp"
@@ -588,7 +588,11 @@ void CLASSNAME::calculate_pole_masses()
       tp.run_task([this] () { calculate_MFe_pole(); });
       tp.run_task([this] () { calculate_MFd_pole(); });
       tp.run_task([this] () { calculate_MFu_pole(); });
-      tp.run_task([this] () { calculate_MVWm_pole(); });
+      tp.run_task([this] () {
+         if (PHYSICAL(MVWm) == 0.) {
+            calculate_MVWm_pole();
+         }
+      });
    }
 
 #else
@@ -613,7 +617,9 @@ void CLASSNAME::calculate_pole_masses()
       calculate_MFe_pole();
       calculate_MFd_pole();
       calculate_MFu_pole();
-      calculate_MVWm_pole();
+      if (PHYSICAL(MVWm) == 0.) {
+         calculate_MVWm_pole();
+      }
    }
 
 #endif
@@ -5323,6 +5329,228 @@ double CLASSNAME::CpconjVWmconjVWmVWmVWm3() const
    return result;
 }
 
+std::complex<double> CLASSNAME::CpbarFdFdhhPL(int i1, int i2, int gE2) const
+{
+   
+   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,Conj(ZDL(i2,
+      j2))*SUM(j1,0,2,Conj(ZDR(i1,j1))*Yd(j1,j2)))*ZH(gE2,0);
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFdFdhhPR(int i1, int i2, int gE2) const
+{
+   
+   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,SUM(j1,0,2,
+      Conj(Yd(j1,j2))*ZDR(i2,j1))*ZDL(i1,j2))*ZH(gE2,0);
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFuFuhhPL(int i1, int i2, int gE2) const
+{
+   
+   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,Conj(ZUL(i2,
+      j2))*SUM(j1,0,2,Conj(ZUR(i1,j1))*Yu(j1,j2)))*ZH(gE2,1);
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFuFuhhPR(int i1, int i2, int gE2) const
+{
+   
+   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,SUM(j1,0,2,
+      Conj(Yu(j1,j2))*ZUR(i2,j1))*ZUL(i1,j2))*ZH(gE2,1);
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFdChaSuPL(int i3, int i4, int i2) const
+{
+   
+   const std::complex<double> result = Conj(UM(i4,1))*SUM(j2,0,2,Conj(ZU(i2,j2))*
+      SUM(j1,0,2,Conj(ZDR(i3,j1))*Yd(j1,j2)));
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFdChaSuPR(int i3, int i4, int i2) const
+{
+   
+   const std::complex<double> result = -(g2*SUM(j1,0,2,Conj(ZU(i2,j1))*ZDL(i3,j1))
+      *UP(i4,0)) + SUM(j2,0,2,SUM(j1,0,2,Conj(Yu(j1,j2))*Conj(ZU(i2,3 + j1)))*ZDL(
+      i3,j2))*UP(i4,1);
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarChabarFuSdPL(int i3, int i4, int i2) const
+{
+   
+   const std::complex<double> result = Conj(UP(i3,1))*SUM(j2,0,2,Conj(ZD(i2,j2))*
+      SUM(j1,0,2,Conj(ZUR(i4,j1))*Yu(j1,j2)));
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarChabarFuSdPR(int i3, int i4, int i2) const
+{
+   
+   const std::complex<double> result = -(g2*SUM(j1,0,2,Conj(ZD(i2,j1))*ZUL(i4,j1))
+      *UM(i3,0)) + SUM(j2,0,2,SUM(j1,0,2,Conj(Yd(j1,j2))*Conj(ZD(i2,3 + j1)))*ZUL(
+      i4,j2))*UM(i3,1);
+
+   return result;
+}
+
+double CLASSNAME::CpbarChabarFvSePL(int , int , int ) const
+{
+   
+   const double result = 0;
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarChabarFvSePR(int i3, int i4, int i2) const
+{
+   
+   const std::complex<double> result = IF(i4 < 3,-(g2*Conj(ZE(i2,i4))*UM(i3,0)),0)
+      + SUM(j1,0,2,Conj(Ye(j1,i4))*Conj(ZE(i2,3 + j1)))*UM(i3,1);
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFdChiSdPL(int i4, int i3, int i2) const
+{
+   
+   const std::complex<double> result = -0.3651483716701107*g1*Conj(ZN(i3,0))*SUM(
+      j1,0,2,Conj(ZD(i2,3 + j1))*Conj(ZDR(i4,j1))) - Conj(ZN(i3,2))*SUM(j2,0,2,
+      Conj(ZD(i2,j2))*SUM(j1,0,2,Conj(ZDR(i4,j1))*Yd(j1,j2)));
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFdChiSdPR(int i4, int i3, int i2) const
+{
+   
+   const std::complex<double> result = SUM(j1,0,2,Conj(ZD(i2,j1))*ZDL(i4,j1))*(-
+      0.18257418583505536*g1*ZN(i3,0) + 0.7071067811865475*g2*ZN(i3,1)) - SUM(j2,0
+      ,2,SUM(j1,0,2,Conj(Yd(j1,j2))*Conj(ZD(i2,3 + j1)))*ZDL(i4,j2))*ZN(i3,2);
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFeChiSePL(int i4, int i3, int i2) const
+{
+   
+   const std::complex<double> result = -1.0954451150103321*g1*Conj(ZN(i3,0))*SUM(
+      j1,0,2,Conj(ZE(i2,3 + j1))*Conj(ZER(i4,j1))) - Conj(ZN(i3,2))*SUM(j2,0,2,
+      Conj(ZE(i2,j2))*SUM(j1,0,2,Conj(ZER(i4,j1))*Ye(j1,j2)));
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFeChiSePR(int i4, int i3, int i2) const
+{
+   
+   const std::complex<double> result = 0.7071067811865475*SUM(j1,0,2,Conj(ZE(i2,j1
+      ))*ZEL(i4,j1))*(0.7745966692414834*g1*ZN(i3,0) + g2*ZN(i3,1)) - SUM(j2,0,2,
+      SUM(j1,0,2,Conj(Ye(j1,j2))*Conj(ZE(i2,3 + j1)))*ZEL(i4,j2))*ZN(i3,2);
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFuChiSuPL(int i4, int i3, int i2) const
+{
+   
+   const std::complex<double> result = 0.7302967433402214*g1*Conj(ZN(i3,0))*SUM(j1
+      ,0,2,Conj(ZU(i2,3 + j1))*Conj(ZUR(i4,j1))) - Conj(ZN(i3,3))*SUM(j2,0,2,Conj(
+      ZU(i2,j2))*SUM(j1,0,2,Conj(ZUR(i4,j1))*Yu(j1,j2)));
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFuChiSuPR(int i4, int i3, int i2) const
+{
+   
+   const std::complex<double> result = SUM(j1,0,2,Conj(ZU(i2,j1))*ZUL(i4,j1))*(-
+      0.18257418583505536*g1*ZN(i3,0) - 0.7071067811865475*g2*ZN(i3,1)) - SUM(j2,0
+      ,2,SUM(j1,0,2,Conj(Yu(j1,j2))*Conj(ZU(i2,3 + j1)))*ZUL(i4,j2))*ZN(i3,3);
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFeFehhPL(int i1, int i3, int gE2) const
+{
+   
+   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,Conj(ZEL(i3,
+      j2))*SUM(j1,0,2,Conj(ZER(i1,j1))*Ye(j1,j2)))*ZH(gE2,0);
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFeFehhPR(int i1, int i3, int gE2) const
+{
+   
+   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,SUM(j1,0,2,
+      Conj(Ye(j1,j2))*ZER(i3,j1))*ZEL(i1,j2))*ZH(gE2,0);
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFdFuHpmPL(int i4, int i2, int i5) const
+{
+   
+   const std::complex<double> result = SUM(j2,0,2,Conj(ZUL(i2,j2))*SUM(j1,0,2,Conj
+      (ZDR(i4,j1))*Yd(j1,j2)))*ZP(i5,0);
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFdFuHpmPR(int i4, int i2, int i5) const
+{
+   
+   const std::complex<double> result = SUM(j2,0,2,SUM(j1,0,2,Conj(Yu(j1,j2))*ZUR(
+      i2,j1))*ZDL(i4,j2))*ZP(i5,1);
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFeFvHpmPL(int i3, int i4, int i5) const
+{
+   
+   const std::complex<double> result = SUM(j1,0,2,Conj(ZER(i3,j1))*Ye(j1,i4))*ZP(
+      i5,0);
+
+   return result;
+}
+
+double CLASSNAME::CpbarFeFvHpmPR(int , int , int ) const
+{
+   
+   const double result = 0;
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFeChaSvPL(int i3, int i4, int i5) const
+{
+   
+   const std::complex<double> result = Conj(UM(i4,1))*SUM(j2,0,2,Conj(ZV(i5,j2))*
+      SUM(j1,0,2,Conj(ZER(i3,j1))*Ye(j1,j2)));
+
+   return result;
+}
+
+std::complex<double> CLASSNAME::CpbarFeChaSvPR(int i3, int i4, int i5) const
+{
+   
+   const std::complex<double> result = -(g2*SUM(j1,0,2,Conj(ZV(i5,j1))*ZEL(i3,j1))
+      *UP(i4,0));
+
+   return result;
+}
+
 std::complex<double> CLASSNAME::CpbarChaUChiHpmPL(int gI1, int gO2, int gI2) const
 {
    
@@ -6431,23 +6659,6 @@ std::complex<double> CLASSNAME::CpbarFvFeconjHpmPR(int gO1, int gI2, int gI1) co
    return result;
 }
 
-double CLASSNAME::CpbarChabarFvSePL(int , int , int ) const
-{
-   
-   const double result = 0;
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarChabarFvSePR(int gI1, int gO1, int gI2) const
-{
-   
-   const std::complex<double> result = IF(gO1 < 3,-(g2*Conj(ZE(gI2,gO1))*UM(gI1,0)
-      ),0) + SUM(j1,0,2,Conj(Ye(j1,gO1))*Conj(ZE(gI2,3 + j1)))*UM(gI1,1);
-
-   return result;
-}
-
 double CLASSNAME::CpbarFvChiSvPL(int , int , int ) const
 {
    
@@ -6462,59 +6673,6 @@ std::complex<double> CLASSNAME::CpbarFvChiSvPR(int gO1, int gI2, int gI1) const
    const std::complex<double> result = IF(gO1 < 3,0.5477225575051661*g1*Conj(ZV(
       gI1,gO1))*ZN(gI2,0),0) + IF(gO1 < 3,-0.7071067811865475*g2*Conj(ZV(gI1,gO1))
       *ZN(gI2,1),0);
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFeFehhPL(int gO2, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,Conj(ZEL(gI2
-      ,j2))*SUM(j1,0,2,Conj(ZER(gO2,j1))*Ye(j1,j2)))*ZH(gI1,0);
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFeFehhPR(int gO1, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,SUM(j1,0,2,
-      Conj(Ye(j1,j2))*ZER(gI2,j1))*ZEL(gO1,j2))*ZH(gI1,0);
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFeFvHpmPL(int gO2, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = SUM(j1,0,2,Conj(ZER(gO2,j1))*Ye(j1,gI2))*ZP
-      (gI1,0);
-
-   return result;
-}
-
-double CLASSNAME::CpbarFeFvHpmPR(int , int , int ) const
-{
-   
-   const double result = 0;
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFeChaSvPL(int gO2, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = Conj(UM(gI2,1))*SUM(j2,0,2,Conj(ZV(gI1,j2))
-      *SUM(j1,0,2,Conj(ZER(gO2,j1))*Ye(j1,j2)));
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFeChaSvPR(int gO1, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = -(g2*SUM(j1,0,2,Conj(ZV(gI1,j1))*ZEL(gO1,j1
-      ))*UP(gI2,0));
 
    return result;
 }
@@ -6538,26 +6696,6 @@ std::complex<double> CLASSNAME::CpbarFeFeAhPR(int gO1, int gI1, int gI2) const
    return result;
 }
 
-std::complex<double> CLASSNAME::CpbarFeChiSePL(int gO2, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = -1.0954451150103321*g1*Conj(ZN(gI2,0))*SUM(
-      j1,0,2,Conj(ZE(gI1,3 + j1))*Conj(ZER(gO2,j1))) - Conj(ZN(gI2,2))*SUM(j2,0,2,
-      Conj(ZE(gI1,j2))*SUM(j1,0,2,Conj(ZER(gO2,j1))*Ye(j1,j2)));
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFeChiSePR(int gO1, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = 0.7071067811865475*SUM(j1,0,2,Conj(ZE(gI1,
-      j1))*ZEL(gO1,j1))*(0.7745966692414834*g1*ZN(gI2,0) + g2*ZN(gI2,1)) - SUM(j2,
-      0,2,SUM(j1,0,2,Conj(Ye(j1,j2))*Conj(ZE(gI1,3 + j1)))*ZEL(gO1,j2))*ZN(gI2,2);
-
-   return result;
-}
-
 double CLASSNAME::CpbarFeFvVWmPR(int , int ) const
 {
    
@@ -6571,42 +6709,6 @@ std::complex<double> CLASSNAME::CpbarFeFvVWmPL(int gO1, int gI2) const
    
    const std::complex<double> result = IF(gI2 < 3,-0.7071067811865475*g2*ZEL(gO1,
       gI2),0);
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFdFdhhPL(int gO2, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,Conj(ZDL(gI2
-      ,j2))*SUM(j1,0,2,Conj(ZDR(gO2,j1))*Yd(j1,j2)))*ZH(gI1,0);
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFdFdhhPR(int gO1, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,SUM(j1,0,2,
-      Conj(Yd(j1,j2))*ZDR(gI2,j1))*ZDL(gO1,j2))*ZH(gI1,0);
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFdFuHpmPL(int gO2, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = SUM(j2,0,2,Conj(ZUL(gI2,j2))*SUM(j1,0,2,
-      Conj(ZDR(gO2,j1))*Yd(j1,j2)))*ZP(gI1,0);
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFdFuHpmPR(int gO1, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = SUM(j2,0,2,SUM(j1,0,2,Conj(Yu(j1,j2))*ZUR(
-      gI2,j1))*ZDL(gO1,j2))*ZP(gI1,1);
 
    return result;
 }
@@ -6626,46 +6728,6 @@ std::complex<double> CLASSNAME::CpbarFdFdAhPR(int gO1, int gI1, int gI2) const
    
    const std::complex<double> result = std::complex<double>(0.,0.7071067811865475)
       *SUM(j2,0,2,SUM(j1,0,2,Conj(Yd(j1,j2))*ZDR(gI1,j1))*ZDL(gO1,j2))*ZA(gI2,0);
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFdChaSuPL(int gO2, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = Conj(UM(gI2,1))*SUM(j2,0,2,Conj(ZU(gI1,j2))
-      *SUM(j1,0,2,Conj(ZDR(gO2,j1))*Yd(j1,j2)));
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFdChaSuPR(int gO1, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = -(g2*SUM(j1,0,2,Conj(ZU(gI1,j1))*ZDL(gO1,j1
-      ))*UP(gI2,0)) + SUM(j2,0,2,SUM(j1,0,2,Conj(Yu(j1,j2))*Conj(ZU(gI1,3 + j1)))*
-      ZDL(gO1,j2))*UP(gI2,1);
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFdChiSdPL(int gO2, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = -0.3651483716701107*g1*Conj(ZN(gI2,0))*SUM(
-      j1,0,2,Conj(ZD(gI1,3 + j1))*Conj(ZDR(gO2,j1))) - Conj(ZN(gI2,2))*SUM(j2,0,2,
-      Conj(ZD(gI1,j2))*SUM(j1,0,2,Conj(ZDR(gO2,j1))*Yd(j1,j2)));
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFdChiSdPR(int gO1, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = SUM(j1,0,2,Conj(ZD(gI1,j1))*ZDL(gO1,j1))*(-
-      0.18257418583505536*g1*ZN(gI2,0) + 0.7071067811865475*g2*ZN(gI2,1)) - SUM(j2
-      ,0,2,SUM(j1,0,2,Conj(Yd(j1,j2))*Conj(ZD(gI1,3 + j1)))*ZDL(gO1,j2))*ZN(gI2,2)
-      ;
 
    return result;
 }
@@ -6705,43 +6767,6 @@ std::complex<double> CLASSNAME::CpbarFuFdconjHpmPR(int gO1, int gI2, int gI1) co
    return result;
 }
 
-std::complex<double> CLASSNAME::CpbarFuFuhhPL(int gO2, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,Conj(ZUL(gI2
-      ,j2))*SUM(j1,0,2,Conj(ZUR(gO2,j1))*Yu(j1,j2)))*ZH(gI1,1);
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFuFuhhPR(int gO1, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = -0.7071067811865475*SUM(j2,0,2,SUM(j1,0,2,
-      Conj(Yu(j1,j2))*ZUR(gI2,j1))*ZUL(gO1,j2))*ZH(gI1,1);
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarChabarFuSdPL(int gI1, int gO2, int gI2) const
-{
-   
-   const std::complex<double> result = Conj(UP(gI1,1))*SUM(j2,0,2,Conj(ZD(gI2,j2))
-      *SUM(j1,0,2,Conj(ZUR(gO2,j1))*Yu(j1,j2)));
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarChabarFuSdPR(int gI1, int gO1, int gI2) const
-{
-   
-   const std::complex<double> result = -(g2*SUM(j1,0,2,Conj(ZD(gI2,j1))*ZUL(gO1,j1
-      ))*UM(gI1,0)) + SUM(j2,0,2,SUM(j1,0,2,Conj(Yd(j1,j2))*Conj(ZD(gI2,3 + j1)))*
-      ZUL(gO1,j2))*UM(gI1,1);
-
-   return result;
-}
-
 std::complex<double> CLASSNAME::CpbarFuFuAhPL(int gO2, int gI1, int gI2) const
 {
    
@@ -6757,27 +6782,6 @@ std::complex<double> CLASSNAME::CpbarFuFuAhPR(int gO1, int gI1, int gI2) const
    
    const std::complex<double> result = std::complex<double>(0.,0.7071067811865475)
       *SUM(j2,0,2,SUM(j1,0,2,Conj(Yu(j1,j2))*ZUR(gI1,j1))*ZUL(gO1,j2))*ZA(gI2,1);
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFuChiSuPL(int gO2, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = 0.7302967433402214*g1*Conj(ZN(gI2,0))*SUM(
-      j1,0,2,Conj(ZU(gI1,3 + j1))*Conj(ZUR(gO2,j1))) - Conj(ZN(gI2,3))*SUM(j2,0,2,
-      Conj(ZU(gI1,j2))*SUM(j1,0,2,Conj(ZUR(gO2,j1))*Yu(j1,j2)));
-
-   return result;
-}
-
-std::complex<double> CLASSNAME::CpbarFuChiSuPR(int gO1, int gI2, int gI1) const
-{
-   
-   const std::complex<double> result = SUM(j1,0,2,Conj(ZU(gI1,j1))*ZUL(gO1,j1))*(-
-      0.18257418583505536*g1*ZN(gI2,0) - 0.7071067811865475*g2*ZN(gI2,1)) - SUM(j2
-      ,0,2,SUM(j1,0,2,Conj(Yu(j1,j2))*Conj(ZU(gI1,3 + j1)))*ZUL(gO1,j2))*ZN(gI2,3)
-      ;
 
    return result;
 }
@@ -9092,33 +9096,105 @@ Eigen::Matrix<double,2,1> CLASSNAME::tadpole_hh_2loop() const
 
 void CLASSNAME::calculate_MVG_pole()
 {
-   // diagonalization with medium precision
-   PHYSICAL(MVG) = 0.;
+   // diagonalization with high precision
+   const auto number_of_mass_iterations = get_number_of_mass_iterations();
+   int iteration = 0;
+   double diff = 0.0;
+   decltype(MVG) old_MVG(MVG), new_MVG(MVG);
+
+   do {
+      PHYSICAL(MVG) = 0.;
+
+      new_MVG = PHYSICAL(MVG);
+      diff = MaxRelDiff(new_MVG, old_MVG);
+      old_MVG = new_MVG;
+      iteration++;
+   } while (diff > precision
+            && iteration < number_of_mass_iterations);
+
+   if (diff > precision)
+      problems.flag_no_pole_mass_convergence(NUHMSSM_info::VG);
+   else
+      problems.unflag_no_pole_mass_convergence(NUHMSSM_info::VG);
 }
 
 void CLASSNAME::calculate_MGlu_pole()
 {
-   // diagonalization with medium precision
-   const double M_tree(MGlu);
-   const double p = MGlu;
-   const double self_energy_1  = Re(self_energy_Glu_1loop_1(p));
-   const double self_energy_PL = Re(self_energy_Glu_1loop_PL(p));
-   const double self_energy_PR = Re(self_energy_Glu_1loop_PR(p));
-   const auto M_loop = M_tree - self_energy_1 - M_tree * (self_energy_PL +
-      self_energy_PR);
-   PHYSICAL(MGlu) = calculate_singlet_mass(M_loop);
+   // diagonalization with high precision
+   const auto number_of_mass_iterations = get_number_of_mass_iterations();
+   int iteration = 0;
+   double diff = 0.0;
+   decltype(MGlu) old_MGlu(MGlu), new_MGlu(MGlu);
+
+   do {
+      const double M_tree(MGlu);
+      const double p = old_MGlu;
+      const double self_energy_1  = Re(self_energy_Glu_1loop_1(p));
+      const double self_energy_PL = Re(self_energy_Glu_1loop_PL(p));
+      const double self_energy_PR = Re(self_energy_Glu_1loop_PR(p));
+      const auto M_loop = M_tree - self_energy_1 - M_tree * (self_energy_PL +
+         self_energy_PR);
+      PHYSICAL(MGlu) = calculate_singlet_mass(M_loop);
+
+      new_MGlu = PHYSICAL(MGlu);
+      diff = MaxRelDiff(new_MGlu, old_MGlu);
+      old_MGlu = new_MGlu;
+      iteration++;
+   } while (diff > precision
+            && iteration < number_of_mass_iterations);
+
+   if (diff > precision)
+      problems.flag_no_pole_mass_convergence(NUHMSSM_info::Glu);
+   else
+      problems.unflag_no_pole_mass_convergence(NUHMSSM_info::Glu);
 }
 
 void CLASSNAME::calculate_MFv_pole()
 {
-   // diagonalization with medium precision
-   PHYSICAL(MFv).setConstant(0.);
+   // diagonalization with high precision
+   const auto number_of_mass_iterations = get_number_of_mass_iterations();
+   int iteration = 0;
+   double diff = 0.0;
+   decltype(MFv) old_MFv(MFv), new_MFv(MFv);
+
+   do {
+      PHYSICAL(MFv).setConstant(0.);
+
+      new_MFv = PHYSICAL(MFv);
+      diff = MaxRelDiff(new_MFv, old_MFv);
+      old_MFv = new_MFv;
+      iteration++;
+   } while (diff > precision
+            && iteration < number_of_mass_iterations);
+
+   if (diff > precision)
+      problems.flag_no_pole_mass_convergence(NUHMSSM_info::Fv);
+   else
+      problems.unflag_no_pole_mass_convergence(NUHMSSM_info::Fv);
 }
 
 void CLASSNAME::calculate_MVP_pole()
 {
-   // diagonalization with medium precision
-   PHYSICAL(MVP) = 0.;
+   // diagonalization with high precision
+   const auto number_of_mass_iterations = get_number_of_mass_iterations();
+   int iteration = 0;
+   double diff = 0.0;
+   decltype(MVP) old_MVP(MVP), new_MVP(MVP);
+
+   do {
+      PHYSICAL(MVP) = 0.;
+
+      new_MVP = PHYSICAL(MVP);
+      diff = MaxRelDiff(new_MVP, old_MVP);
+      old_MVP = new_MVP;
+      iteration++;
+   } while (diff > precision
+            && iteration < number_of_mass_iterations);
+
+   if (diff > precision)
+      problems.flag_no_pole_mass_convergence(NUHMSSM_info::VP);
+   else
+      problems.unflag_no_pole_mass_convergence(NUHMSSM_info::VP);
 }
 
 void CLASSNAME::calculate_MVZ_pole()
@@ -9126,17 +9202,35 @@ void CLASSNAME::calculate_MVZ_pole()
    if (!force_output && problems.is_running_tachyon(NUHMSSM_info::VZ))
       return;
 
-   // diagonalization with medium precision
-   const double M_tree(Sqr(MVZ));
-   const double p = MVZ;
-   const double self_energy = Re(self_energy_VZ_1loop(p));
-   const double mass_sqr = M_tree - self_energy;
+   // diagonalization with high precision
+   const auto number_of_mass_iterations = get_number_of_mass_iterations();
+   int iteration = 0;
+   double diff = 0.0;
+   decltype(MVZ) old_MVZ(MVZ), new_MVZ(MVZ);
 
-   if (mass_sqr < 0.) {
-      problems.flag_pole_tachyon(NUHMSSM_info::VZ);
-   }
+   do {
+      const double M_tree(Sqr(MVZ));
+      const double p = old_MVZ;
+      const double self_energy = Re(self_energy_VZ_1loop(p));
+      const double mass_sqr = M_tree - self_energy;
 
-   PHYSICAL(MVZ) = AbsSqrt(mass_sqr);
+      if (mass_sqr < 0.) {
+         problems.flag_pole_tachyon(NUHMSSM_info::VZ);
+      }
+
+      PHYSICAL(MVZ) = AbsSqrt(mass_sqr);
+
+      new_MVZ = PHYSICAL(MVZ);
+      diff = MaxRelDiff(new_MVZ, old_MVZ);
+      old_MVZ = new_MVZ;
+      iteration++;
+   } while (diff > precision
+            && iteration < number_of_mass_iterations);
+
+   if (diff > precision)
+      problems.flag_no_pole_mass_convergence(NUHMSSM_info::VZ);
+   else
+      problems.unflag_no_pole_mass_convergence(NUHMSSM_info::VZ);
 }
 
 void CLASSNAME::calculate_MSd_pole()
@@ -9144,31 +9238,49 @@ void CLASSNAME::calculate_MSd_pole()
    if (!force_output && problems.is_running_tachyon(NUHMSSM_info::Sd))
       return;
 
-   // diagonalization with medium precision
-   const Eigen::Matrix<double,6,6> M_tree(get_mass_matrix_Sd());
+   // diagonalization with high precision
+   const auto number_of_mass_iterations = get_number_of_mass_iterations();
+   int iteration = 0;
+   double diff = 0.0;
+   decltype(MSd) old_MSd(MSd), new_MSd(MSd);
 
-   for (int es = 0; es < 6; ++es) {
-      const double p = Abs(MSd(es));
-      Eigen::Matrix<double,6,6> self_energy = Re(self_energy_Sd_1loop(p));
-      const Eigen::Matrix<double,6,6> M_loop(M_tree - self_energy);
-      Eigen::Array<double,6,1> eigen_values;
-      Eigen::Matrix<double,6,6> mix_ZD;
-      #ifdef CHECK_EIGENVALUE_ERROR
-         double eigenvalue_error;
-         fs_diagonalize_hermitian(M_loop, eigen_values, mix_ZD,
-            eigenvalue_error);
-         problems.flag_bad_mass(NUHMSSM_info::Sd, eigenvalue_error > precision
-            * Abs(eigen_values(0)));
-      #else
+   do {
+      const Eigen::Matrix<double,6,6> M_tree(get_mass_matrix_Sd());
 
-         fs_diagonalize_hermitian(M_loop, eigen_values, mix_ZD);
-      #endif
-         normalize_to_interval(mix_ZD);
+      for (int es = 0; es < 6; ++es) {
+         const double p = Abs(old_MSd(es));
+         Eigen::Matrix<double,6,6> self_energy = Re(self_energy_Sd_1loop(p));
+         const Eigen::Matrix<double,6,6> M_loop(M_tree - self_energy);
+         Eigen::Array<double,6,1> eigen_values;
+         Eigen::Matrix<double,6,6> mix_ZD;
+         #ifdef CHECK_EIGENVALUE_ERROR
+            double eigenvalue_error;
+            fs_diagonalize_hermitian(M_loop, eigen_values, mix_ZD,
+               eigenvalue_error);
+            problems.flag_bad_mass(NUHMSSM_info::Sd, eigenvalue_error >
+               precision * Abs(eigen_values(0)));
+         #else
 
-      PHYSICAL(MSd(es)) = SignedAbsSqrt(eigen_values(es));
-      if (es == 0)
-         PHYSICAL(ZD) = mix_ZD;
-   }
+            fs_diagonalize_hermitian(M_loop, eigen_values, mix_ZD);
+         #endif
+            normalize_to_interval(mix_ZD);
+
+         PHYSICAL(MSd(es)) = SignedAbsSqrt(eigen_values(es));
+         if (es == 0)
+            PHYSICAL(ZD) = mix_ZD;
+      }
+
+      new_MSd = PHYSICAL(MSd);
+      diff = MaxRelDiff(new_MSd, old_MSd);
+      old_MSd = new_MSd;
+      iteration++;
+   } while (diff > precision
+            && iteration < number_of_mass_iterations);
+
+   if (diff > precision)
+      problems.flag_no_pole_mass_convergence(NUHMSSM_info::Sd);
+   else
+      problems.unflag_no_pole_mass_convergence(NUHMSSM_info::Sd);
 }
 
 void CLASSNAME::calculate_MSv_pole()
@@ -9176,31 +9288,49 @@ void CLASSNAME::calculate_MSv_pole()
    if (!force_output && problems.is_running_tachyon(NUHMSSM_info::Sv))
       return;
 
-   // diagonalization with medium precision
-   const Eigen::Matrix<double,3,3> M_tree(get_mass_matrix_Sv());
+   // diagonalization with high precision
+   const auto number_of_mass_iterations = get_number_of_mass_iterations();
+   int iteration = 0;
+   double diff = 0.0;
+   decltype(MSv) old_MSv(MSv), new_MSv(MSv);
 
-   for (int es = 0; es < 3; ++es) {
-      const double p = Abs(MSv(es));
-      Eigen::Matrix<double,3,3> self_energy = Re(self_energy_Sv_1loop(p));
-      const Eigen::Matrix<double,3,3> M_loop(M_tree - self_energy);
-      Eigen::Array<double,3,1> eigen_values;
-      Eigen::Matrix<double,3,3> mix_ZV;
-      #ifdef CHECK_EIGENVALUE_ERROR
-         double eigenvalue_error;
-         fs_diagonalize_hermitian(M_loop, eigen_values, mix_ZV,
-            eigenvalue_error);
-         problems.flag_bad_mass(NUHMSSM_info::Sv, eigenvalue_error > precision
-            * Abs(eigen_values(0)));
-      #else
+   do {
+      const Eigen::Matrix<double,3,3> M_tree(get_mass_matrix_Sv());
 
-         fs_diagonalize_hermitian(M_loop, eigen_values, mix_ZV);
-      #endif
-         normalize_to_interval(mix_ZV);
+      for (int es = 0; es < 3; ++es) {
+         const double p = Abs(old_MSv(es));
+         Eigen::Matrix<double,3,3> self_energy = Re(self_energy_Sv_1loop(p));
+         const Eigen::Matrix<double,3,3> M_loop(M_tree - self_energy);
+         Eigen::Array<double,3,1> eigen_values;
+         Eigen::Matrix<double,3,3> mix_ZV;
+         #ifdef CHECK_EIGENVALUE_ERROR
+            double eigenvalue_error;
+            fs_diagonalize_hermitian(M_loop, eigen_values, mix_ZV,
+               eigenvalue_error);
+            problems.flag_bad_mass(NUHMSSM_info::Sv, eigenvalue_error >
+               precision * Abs(eigen_values(0)));
+         #else
 
-      PHYSICAL(MSv(es)) = SignedAbsSqrt(eigen_values(es));
-      if (es == 0)
-         PHYSICAL(ZV) = mix_ZV;
-   }
+            fs_diagonalize_hermitian(M_loop, eigen_values, mix_ZV);
+         #endif
+            normalize_to_interval(mix_ZV);
+
+         PHYSICAL(MSv(es)) = SignedAbsSqrt(eigen_values(es));
+         if (es == 0)
+            PHYSICAL(ZV) = mix_ZV;
+      }
+
+      new_MSv = PHYSICAL(MSv);
+      diff = MaxRelDiff(new_MSv, old_MSv);
+      old_MSv = new_MSv;
+      iteration++;
+   } while (diff > precision
+            && iteration < number_of_mass_iterations);
+
+   if (diff > precision)
+      problems.flag_no_pole_mass_convergence(NUHMSSM_info::Sv);
+   else
+      problems.unflag_no_pole_mass_convergence(NUHMSSM_info::Sv);
 }
 
 void CLASSNAME::calculate_MSu_pole()
@@ -9208,31 +9338,49 @@ void CLASSNAME::calculate_MSu_pole()
    if (!force_output && problems.is_running_tachyon(NUHMSSM_info::Su))
       return;
 
-   // diagonalization with medium precision
-   const Eigen::Matrix<double,6,6> M_tree(get_mass_matrix_Su());
+   // diagonalization with high precision
+   const auto number_of_mass_iterations = get_number_of_mass_iterations();
+   int iteration = 0;
+   double diff = 0.0;
+   decltype(MSu) old_MSu(MSu), new_MSu(MSu);
 
-   for (int es = 0; es < 6; ++es) {
-      const double p = Abs(MSu(es));
-      Eigen::Matrix<double,6,6> self_energy = Re(self_energy_Su_1loop(p));
-      const Eigen::Matrix<double,6,6> M_loop(M_tree - self_energy);
-      Eigen::Array<double,6,1> eigen_values;
-      Eigen::Matrix<double,6,6> mix_ZU;
-      #ifdef CHECK_EIGENVALUE_ERROR
-         double eigenvalue_error;
-         fs_diagonalize_hermitian(M_loop, eigen_values, mix_ZU,
-            eigenvalue_error);
-         problems.flag_bad_mass(NUHMSSM_info::Su, eigenvalue_error > precision
-            * Abs(eigen_values(0)));
-      #else
+   do {
+      const Eigen::Matrix<double,6,6> M_tree(get_mass_matrix_Su());
 
-         fs_diagonalize_hermitian(M_loop, eigen_values, mix_ZU);
-      #endif
-         normalize_to_interval(mix_ZU);
+      for (int es = 0; es < 6; ++es) {
+         const double p = Abs(old_MSu(es));
+         Eigen::Matrix<double,6,6> self_energy = Re(self_energy_Su_1loop(p));
+         const Eigen::Matrix<double,6,6> M_loop(M_tree - self_energy);
+         Eigen::Array<double,6,1> eigen_values;
+         Eigen::Matrix<double,6,6> mix_ZU;
+         #ifdef CHECK_EIGENVALUE_ERROR
+            double eigenvalue_error;
+            fs_diagonalize_hermitian(M_loop, eigen_values, mix_ZU,
+               eigenvalue_error);
+            problems.flag_bad_mass(NUHMSSM_info::Su, eigenvalue_error >
+               precision * Abs(eigen_values(0)));
+         #else
 
-      PHYSICAL(MSu(es)) = SignedAbsSqrt(eigen_values(es));
-      if (es == 0)
-         PHYSICAL(ZU) = mix_ZU;
-   }
+            fs_diagonalize_hermitian(M_loop, eigen_values, mix_ZU);
+         #endif
+            normalize_to_interval(mix_ZU);
+
+         PHYSICAL(MSu(es)) = SignedAbsSqrt(eigen_values(es));
+         if (es == 0)
+            PHYSICAL(ZU) = mix_ZU;
+      }
+
+      new_MSu = PHYSICAL(MSu);
+      diff = MaxRelDiff(new_MSu, old_MSu);
+      old_MSu = new_MSu;
+      iteration++;
+   } while (diff > precision
+            && iteration < number_of_mass_iterations);
+
+   if (diff > precision)
+      problems.flag_no_pole_mass_convergence(NUHMSSM_info::Su);
+   else
+      problems.unflag_no_pole_mass_convergence(NUHMSSM_info::Su);
 }
 
 void CLASSNAME::calculate_MSe_pole()
@@ -9240,31 +9388,49 @@ void CLASSNAME::calculate_MSe_pole()
    if (!force_output && problems.is_running_tachyon(NUHMSSM_info::Se))
       return;
 
-   // diagonalization with medium precision
-   const Eigen::Matrix<double,6,6> M_tree(get_mass_matrix_Se());
+   // diagonalization with high precision
+   const auto number_of_mass_iterations = get_number_of_mass_iterations();
+   int iteration = 0;
+   double diff = 0.0;
+   decltype(MSe) old_MSe(MSe), new_MSe(MSe);
 
-   for (int es = 0; es < 6; ++es) {
-      const double p = Abs(MSe(es));
-      Eigen::Matrix<double,6,6> self_energy = Re(self_energy_Se_1loop(p));
-      const Eigen::Matrix<double,6,6> M_loop(M_tree - self_energy);
-      Eigen::Array<double,6,1> eigen_values;
-      Eigen::Matrix<double,6,6> mix_ZE;
-      #ifdef CHECK_EIGENVALUE_ERROR
-         double eigenvalue_error;
-         fs_diagonalize_hermitian(M_loop, eigen_values, mix_ZE,
-            eigenvalue_error);
-         problems.flag_bad_mass(NUHMSSM_info::Se, eigenvalue_error > precision
-            * Abs(eigen_values(0)));
-      #else
+   do {
+      const Eigen::Matrix<double,6,6> M_tree(get_mass_matrix_Se());
 
-         fs_diagonalize_hermitian(M_loop, eigen_values, mix_ZE);
-      #endif
-         normalize_to_interval(mix_ZE);
+      for (int es = 0; es < 6; ++es) {
+         const double p = Abs(old_MSe(es));
+         Eigen::Matrix<double,6,6> self_energy = Re(self_energy_Se_1loop(p));
+         const Eigen::Matrix<double,6,6> M_loop(M_tree - self_energy);
+         Eigen::Array<double,6,1> eigen_values;
+         Eigen::Matrix<double,6,6> mix_ZE;
+         #ifdef CHECK_EIGENVALUE_ERROR
+            double eigenvalue_error;
+            fs_diagonalize_hermitian(M_loop, eigen_values, mix_ZE,
+               eigenvalue_error);
+            problems.flag_bad_mass(NUHMSSM_info::Se, eigenvalue_error >
+               precision * Abs(eigen_values(0)));
+         #else
 
-      PHYSICAL(MSe(es)) = SignedAbsSqrt(eigen_values(es));
-      if (es == 0)
-         PHYSICAL(ZE) = mix_ZE;
-   }
+            fs_diagonalize_hermitian(M_loop, eigen_values, mix_ZE);
+         #endif
+            normalize_to_interval(mix_ZE);
+
+         PHYSICAL(MSe(es)) = SignedAbsSqrt(eigen_values(es));
+         if (es == 0)
+            PHYSICAL(ZE) = mix_ZE;
+      }
+
+      new_MSe = PHYSICAL(MSe);
+      diff = MaxRelDiff(new_MSe, old_MSe);
+      old_MSe = new_MSe;
+      iteration++;
+   } while (diff > precision
+            && iteration < number_of_mass_iterations);
+
+   if (diff > precision)
+      problems.flag_no_pole_mass_convergence(NUHMSSM_info::Se);
+   else
+      problems.unflag_no_pole_mass_convergence(NUHMSSM_info::Se);
 }
 
 void CLASSNAME::calculate_Mhh_pole()
@@ -9451,218 +9617,308 @@ void CLASSNAME::calculate_MHpm_pole()
 
 void CLASSNAME::calculate_MChi_pole()
 {
-   // diagonalization with medium precision
-   const Eigen::Matrix<double,4,4> M_tree(get_mass_matrix_Chi());
-   for (int es = 0; es < 4; ++es) {
-      const double p = Abs(MChi(es));
-      const Eigen::Matrix<double,4,4> self_energy_1  = Re(
-         self_energy_Chi_1loop_1(p));
-      const Eigen::Matrix<double,4,4> self_energy_PL = Re(
-         self_energy_Chi_1loop_PL(p));
-      const Eigen::Matrix<double,4,4> self_energy_PR = Re(
-         self_energy_Chi_1loop_PR(p));
-      const Eigen::Matrix<double,4,4> delta_M(- self_energy_PR * M_tree -
-         M_tree * self_energy_PL - self_energy_1);
-      const Eigen::Matrix<double,4,4> M_loop(M_tree + 0.5 * (delta_M + delta_M.
-         transpose()));
-      Eigen::Array<double,4,1> eigen_values;
-      decltype(ZN) mix_ZN;
-      #ifdef CHECK_EIGENVALUE_ERROR
-         double eigenvalue_error;
-         fs_diagonalize_symmetric(M_loop, eigen_values, mix_ZN,
-            eigenvalue_error);
-         problems.flag_bad_mass(NUHMSSM_info::Chi, eigenvalue_error > precision
-             * Abs(eigen_values(0)));
-      #else
+   // diagonalization with high precision
+   const auto number_of_mass_iterations = get_number_of_mass_iterations();
+   int iteration = 0;
+   double diff = 0.0;
+   decltype(MChi) old_MChi(MChi), new_MChi(MChi);
 
-         fs_diagonalize_symmetric(M_loop, eigen_values, mix_ZN);
-      #endif
-         normalize_to_interval(mix_ZN);
-      if (es == 0)
-         PHYSICAL(ZN) = mix_ZN;
-      PHYSICAL(MChi(es)) = Abs(eigen_values(es));
-   }
+   do {
+      const Eigen::Matrix<double,4,4> M_tree(get_mass_matrix_Chi());
+      for (int es = 0; es < 4; ++es) {
+         const double p = Abs(old_MChi(es));
+         const Eigen::Matrix<double,4,4> self_energy_1  = Re(
+            self_energy_Chi_1loop_1(p));
+         const Eigen::Matrix<double,4,4> self_energy_PL = Re(
+            self_energy_Chi_1loop_PL(p));
+         const Eigen::Matrix<double,4,4> self_energy_PR = Re(
+            self_energy_Chi_1loop_PR(p));
+         const Eigen::Matrix<double,4,4> delta_M(- self_energy_PR * M_tree -
+            M_tree * self_energy_PL - self_energy_1);
+         const Eigen::Matrix<double,4,4> M_loop(M_tree + 0.5 * (delta_M +
+            delta_M.transpose()));
+         Eigen::Array<double,4,1> eigen_values;
+         decltype(ZN) mix_ZN;
+         #ifdef CHECK_EIGENVALUE_ERROR
+            double eigenvalue_error;
+            fs_diagonalize_symmetric(M_loop, eigen_values, mix_ZN,
+               eigenvalue_error);
+            problems.flag_bad_mass(NUHMSSM_info::Chi, eigenvalue_error >
+               precision * Abs(eigen_values(0)));
+         #else
+
+            fs_diagonalize_symmetric(M_loop, eigen_values, mix_ZN);
+         #endif
+            normalize_to_interval(mix_ZN);
+         if (es == 0)
+            PHYSICAL(ZN) = mix_ZN;
+         PHYSICAL(MChi(es)) = Abs(eigen_values(es));
+      }
+
+      new_MChi = PHYSICAL(MChi);
+      diff = MaxRelDiff(new_MChi, old_MChi);
+      old_MChi = new_MChi;
+      iteration++;
+   } while (diff > precision
+            && iteration < number_of_mass_iterations);
+
+   if (diff > precision)
+      problems.flag_no_pole_mass_convergence(NUHMSSM_info::Chi);
+   else
+      problems.unflag_no_pole_mass_convergence(NUHMSSM_info::Chi);
 }
 
 void CLASSNAME::calculate_MCha_pole()
 {
-   // diagonalization with medium precision
-   const Eigen::Matrix<double,2,2> M_tree(get_mass_matrix_Cha());
-   for (int es = 0; es < 2; ++es) {
-      const double p = Abs(MCha(es));
-      const Eigen::Matrix<double,2,2> self_energy_1  = Re(
-         self_energy_Cha_1loop_1(p));
-      const Eigen::Matrix<double,2,2> self_energy_PL = Re(
-         self_energy_Cha_1loop_PL(p));
-      const Eigen::Matrix<double,2,2> self_energy_PR = Re(
-         self_energy_Cha_1loop_PR(p));
-      const Eigen::Matrix<double,2,2> delta_M(- self_energy_PR * M_tree -
-         M_tree * self_energy_PL - self_energy_1);
-      const Eigen::Matrix<double,2,2> M_loop(M_tree + delta_M);
-      Eigen::Array<double,2,1> eigen_values;
-      decltype(UM) mix_UM;
-      decltype(UP) mix_UP;
-   #ifdef CHECK_EIGENVALUE_ERROR
-      double eigenvalue_error;
-      fs_svd(M_loop, eigen_values, mix_UM, mix_UP, eigenvalue_error);
-      problems.flag_bad_mass(NUHMSSM_info::Cha, eigenvalue_error > precision *
-         Abs(eigen_values(0)));
-   #else
-      fs_svd(M_loop, eigen_values, mix_UM, mix_UP);
-   #endif
-      if (es == 0) {
-         PHYSICAL(UM) = mix_UM;
-         PHYSICAL(UP) = mix_UP;
+   // diagonalization with high precision
+   const auto number_of_mass_iterations = get_number_of_mass_iterations();
+   int iteration = 0;
+   double diff = 0.0;
+   decltype(MCha) old_MCha(MCha), new_MCha(MCha);
+
+   do {
+      const Eigen::Matrix<double,2,2> M_tree(get_mass_matrix_Cha());
+      for (int es = 0; es < 2; ++es) {
+         const double p = Abs(old_MCha(es));
+         const Eigen::Matrix<double,2,2> self_energy_1  = Re(
+            self_energy_Cha_1loop_1(p));
+         const Eigen::Matrix<double,2,2> self_energy_PL = Re(
+            self_energy_Cha_1loop_PL(p));
+         const Eigen::Matrix<double,2,2> self_energy_PR = Re(
+            self_energy_Cha_1loop_PR(p));
+         const Eigen::Matrix<double,2,2> delta_M(- self_energy_PR * M_tree -
+            M_tree * self_energy_PL - self_energy_1);
+         const Eigen::Matrix<double,2,2> M_loop(M_tree + delta_M);
+         Eigen::Array<double,2,1> eigen_values;
+         decltype(UM) mix_UM;
+         decltype(UP) mix_UP;
+      #ifdef CHECK_EIGENVALUE_ERROR
+         double eigenvalue_error;
+         fs_svd(M_loop, eigen_values, mix_UM, mix_UP, eigenvalue_error);
+         problems.flag_bad_mass(NUHMSSM_info::Cha, eigenvalue_error > precision
+             * Abs(eigen_values(0)));
+      #else
+         fs_svd(M_loop, eigen_values, mix_UM, mix_UP);
+      #endif
+         if (es == 0) {
+            PHYSICAL(UM) = mix_UM;
+            PHYSICAL(UP) = mix_UP;
+         }
+         PHYSICAL(MCha(es)) = Abs(eigen_values(es));
       }
-      PHYSICAL(MCha(es)) = Abs(eigen_values(es));
-   }
+
+      new_MCha = PHYSICAL(MCha);
+      diff = MaxRelDiff(new_MCha, old_MCha);
+      old_MCha = new_MCha;
+      iteration++;
+   } while (diff > precision
+            && iteration < number_of_mass_iterations);
+
+   if (diff > precision)
+      problems.flag_no_pole_mass_convergence(NUHMSSM_info::Cha);
+   else
+      problems.unflag_no_pole_mass_convergence(NUHMSSM_info::Cha);
 }
 
 void CLASSNAME::calculate_MFe_pole()
 {
-   // diagonalization with medium precision
-   const Eigen::Matrix<double,3,3> M_tree(get_mass_matrix_Fe());
-   for (int es = 0; es < 3; ++es) {
-      const double p = Abs(MFe(es));
-      const Eigen::Matrix<double,3,3> self_energy_1  = Re(
-         self_energy_Fe_1loop_1(p));
-      const Eigen::Matrix<double,3,3> self_energy_PL = Re(
-         self_energy_Fe_1loop_PL(p));
-      const Eigen::Matrix<double,3,3> self_energy_PR = Re(
-         self_energy_Fe_1loop_PR(p));
-      const Eigen::Matrix<double,3,3> delta_M(- self_energy_PR * M_tree -
-         M_tree * self_energy_PL - self_energy_1);
-      const Eigen::Matrix<double,3,3> M_loop(M_tree + delta_M);
-      Eigen::Array<double,3,1> eigen_values;
-      decltype(ZEL) mix_ZEL;
-      decltype(ZER) mix_ZER;
-   #ifdef CHECK_EIGENVALUE_ERROR
-      double eigenvalue_error;
-      fs_svd(M_loop, eigen_values, mix_ZEL, mix_ZER, eigenvalue_error);
-      problems.flag_bad_mass(NUHMSSM_info::Fe, eigenvalue_error > precision *
-         Abs(eigen_values(0)));
-   #else
-      fs_svd(M_loop, eigen_values, mix_ZEL, mix_ZER);
-   #endif
-      if (es == 0) {
-         PHYSICAL(ZEL) = mix_ZEL;
-         PHYSICAL(ZER) = mix_ZER;
+   // diagonalization with high precision
+   const auto number_of_mass_iterations = get_number_of_mass_iterations();
+   int iteration = 0;
+   double diff = 0.0;
+   decltype(MFe) old_MFe(MFe), new_MFe(MFe);
+
+   do {
+      const Eigen::Matrix<double,3,3> M_tree(get_mass_matrix_Fe());
+      for (int es = 0; es < 3; ++es) {
+         const double p = Abs(old_MFe(es));
+         const Eigen::Matrix<double,3,3> self_energy_1  = Re(
+            self_energy_Fe_1loop_1(p));
+         const Eigen::Matrix<double,3,3> self_energy_PL = Re(
+            self_energy_Fe_1loop_PL(p));
+         const Eigen::Matrix<double,3,3> self_energy_PR = Re(
+            self_energy_Fe_1loop_PR(p));
+         const Eigen::Matrix<double,3,3> delta_M(- self_energy_PR * M_tree -
+            M_tree * self_energy_PL - self_energy_1);
+         const Eigen::Matrix<double,3,3> M_loop(M_tree + delta_M);
+         Eigen::Array<double,3,1> eigen_values;
+         decltype(ZEL) mix_ZEL;
+         decltype(ZER) mix_ZER;
+      #ifdef CHECK_EIGENVALUE_ERROR
+         double eigenvalue_error;
+         fs_svd(M_loop, eigen_values, mix_ZEL, mix_ZER, eigenvalue_error);
+         problems.flag_bad_mass(NUHMSSM_info::Fe, eigenvalue_error > precision
+            * Abs(eigen_values(0)));
+      #else
+         fs_svd(M_loop, eigen_values, mix_ZEL, mix_ZER);
+      #endif
+         if (es == 0) {
+            PHYSICAL(ZEL) = mix_ZEL;
+            PHYSICAL(ZER) = mix_ZER;
+         }
+         PHYSICAL(MFe(es)) = Abs(eigen_values(es));
       }
-      PHYSICAL(MFe(es)) = Abs(eigen_values(es));
-   }
+
+      new_MFe = PHYSICAL(MFe);
+      diff = MaxRelDiff(new_MFe, old_MFe);
+      old_MFe = new_MFe;
+      iteration++;
+   } while (diff > precision
+            && iteration < number_of_mass_iterations);
+
+   if (diff > precision)
+      problems.flag_no_pole_mass_convergence(NUHMSSM_info::Fe);
+   else
+      problems.unflag_no_pole_mass_convergence(NUHMSSM_info::Fe);
 }
 
 void CLASSNAME::calculate_MFd_pole()
 {
-   // diagonalization with medium precision
-   const Eigen::Matrix<double,3,3> M_tree(get_mass_matrix_Fd());
-   for (int es = 0; es < 3; ++es) {
-      const double p = Abs(MFd(es));
-      const Eigen::Matrix<double,3,3> self_energy_1  = Re(
-         self_energy_Fd_1loop_1(p));
-      const Eigen::Matrix<double,3,3> self_energy_PL = Re(
-         self_energy_Fd_1loop_PL(p));
-      const Eigen::Matrix<double,3,3> self_energy_PR = Re(
-         self_energy_Fd_1loop_PR(p));
-      const Eigen::Matrix<double,3,3> delta_M(- self_energy_PR * M_tree -
-         M_tree * self_energy_PL - self_energy_1);
-      const Eigen::Matrix<double,3,3> M_loop(M_tree + delta_M);
-      Eigen::Array<double,3,1> eigen_values;
-      decltype(ZDL) mix_ZDL;
-      decltype(ZDR) mix_ZDR;
-   #ifdef CHECK_EIGENVALUE_ERROR
-      double eigenvalue_error;
-      fs_svd(M_loop, eigen_values, mix_ZDL, mix_ZDR, eigenvalue_error);
-      problems.flag_bad_mass(NUHMSSM_info::Fd, eigenvalue_error > precision *
-         Abs(eigen_values(0)));
-   #else
-      fs_svd(M_loop, eigen_values, mix_ZDL, mix_ZDR);
-   #endif
-      if (es == 0) {
-         PHYSICAL(ZDL) = mix_ZDL;
-         PHYSICAL(ZDR) = mix_ZDR;
+   // diagonalization with high precision
+   const auto number_of_mass_iterations = get_number_of_mass_iterations();
+   int iteration = 0;
+   double diff = 0.0;
+   decltype(MFd) old_MFd(MFd), new_MFd(MFd);
+
+   do {
+      const Eigen::Matrix<double,3,3> M_tree(get_mass_matrix_Fd());
+      for (int es = 0; es < 3; ++es) {
+         const double p = Abs(old_MFd(es));
+         const Eigen::Matrix<double,3,3> self_energy_1  = Re(
+            self_energy_Fd_1loop_1(p));
+         const Eigen::Matrix<double,3,3> self_energy_PL = Re(
+            self_energy_Fd_1loop_PL(p));
+         const Eigen::Matrix<double,3,3> self_energy_PR = Re(
+            self_energy_Fd_1loop_PR(p));
+         const Eigen::Matrix<double,3,3> delta_M(- self_energy_PR * M_tree -
+            M_tree * self_energy_PL - self_energy_1);
+         const Eigen::Matrix<double,3,3> M_loop(M_tree + delta_M);
+         Eigen::Array<double,3,1> eigen_values;
+         decltype(ZDL) mix_ZDL;
+         decltype(ZDR) mix_ZDR;
+      #ifdef CHECK_EIGENVALUE_ERROR
+         double eigenvalue_error;
+         fs_svd(M_loop, eigen_values, mix_ZDL, mix_ZDR, eigenvalue_error);
+         problems.flag_bad_mass(NUHMSSM_info::Fd, eigenvalue_error > precision
+            * Abs(eigen_values(0)));
+      #else
+         fs_svd(M_loop, eigen_values, mix_ZDL, mix_ZDR);
+      #endif
+         if (es == 0) {
+            PHYSICAL(ZDL) = mix_ZDL;
+            PHYSICAL(ZDR) = mix_ZDR;
+         }
+         PHYSICAL(MFd(es)) = Abs(eigen_values(es));
       }
-      PHYSICAL(MFd(es)) = Abs(eigen_values(es));
-   }
+
+      new_MFd = PHYSICAL(MFd);
+      diff = MaxRelDiff(new_MFd, old_MFd);
+      old_MFd = new_MFd;
+      iteration++;
+   } while (diff > precision
+            && iteration < number_of_mass_iterations);
+
+   if (diff > precision)
+      problems.flag_no_pole_mass_convergence(NUHMSSM_info::Fd);
+   else
+      problems.unflag_no_pole_mass_convergence(NUHMSSM_info::Fd);
 }
 
 void CLASSNAME::calculate_MFu_pole()
 {
-   // diagonalization with medium precision
-   double qcd_1l = 0.;
+   // diagonalization with high precision
+   const auto number_of_mass_iterations = get_number_of_mass_iterations();
+   int iteration = 0;
+   double diff = 0.0;
+   decltype(MFu) old_MFu(MFu), new_MFu(MFu);
 
-   {
-      const double currentScale = get_scale();
-      qcd_1l = 0.008443431970194815*(-5. + 3.*Log(Sqr(MFu(2))/Sqr(currentScale)
-         ))*Sqr(g3);
-   }
+   do {
+      double qcd_1l = 0.;
 
-   double qcd_2l = 0.;
+      {
+         const double currentScale = get_scale();
+         qcd_1l = 0.008443431970194815*(-5. + 3.*Log(Sqr(MFu(2))/Sqr(
+            currentScale)))*Sqr(g3);
+      }
 
-   if (pole_mass_loop_order > 1 && TOP_POLE_QCD_CORRECTION > 0) {
-      const double currentScale = get_scale();
-      qcd_2l = 2.2278607323533713e-6*Quad(g3)*(-2330.129769909197 + 1476.*Log(
-         Sqr(MFu(2))/Sqr(currentScale)) - 396.*Sqr(Log(Sqr(MFu(2))/Sqr(
-         currentScale))));
-   }
+      double qcd_2l = 0.;
 
-   double qcd_3l = 0.;
+      if (pole_mass_loop_order > 1 && TOP_POLE_QCD_CORRECTION > 0) {
+         const double currentScale = get_scale();
+         qcd_2l = 2.2278607323533713e-6*Quad(g3)*(-2330.129769909197 + 1476.*
+            Log(Sqr(MFu(2))/Sqr(currentScale)) - 396.*Sqr(Log(Sqr(MFu(2))/Sqr(
+            currentScale))));
+      }
 
-   if (pole_mass_loop_order > 2 && TOP_POLE_QCD_CORRECTION > 1) {
-      const double currentScale = get_scale();
-      qcd_3l = 0;
-   }
+      double qcd_3l = 0.;
 
-   double qcd_4l = 0.;
+      if (pole_mass_loop_order > 2 && TOP_POLE_QCD_CORRECTION > 1) {
+         const double currentScale = get_scale();
+         qcd_3l = 0;
+      }
 
-   if (pole_mass_loop_order > 3 && TOP_POLE_QCD_CORRECTION > 2) {
-      const double currentScale = get_scale();
-      qcd_4l = 0;
-   }
+      double qcd_4l = 0.;
 
-   const Eigen::Matrix<double,3,3> M_tree(get_mass_matrix_Fu());
-   for (int es = 0; es < 3; ++es) {
-      const double p = Abs(MFu(es));
-      Eigen::Matrix<double,3,3> self_energy_1;
-      Eigen::Matrix<double,3,3> self_energy_PL;
-      Eigen::Matrix<double,3,3> self_energy_PR;
-      for (int i1 = 0; i1 < 3; ++i1) {
-         for (int i2 = 0; i2 < 3; ++i2) {
-            if (i1 == 2 && i2 == 2) {
-               self_energy_1(i1,i2)  = Re(self_energy_Fu_1loop_1_heavy(p,i1,i2)
-                  );
-               self_energy_PL(i1,i2) = Re(self_energy_Fu_1loop_PL_heavy(p,i1,i2
-                  ));
-               self_energy_PR(i1,i2) = Re(self_energy_Fu_1loop_PR_heavy(p,i1,i2
-                  ));
-            } else {
-               self_energy_1(i1,i2)  = Re(self_energy_Fu_1loop_1(p,i1,i2));
-               self_energy_PL(i1,i2) = Re(self_energy_Fu_1loop_PL(p,i1,i2));
-               self_energy_PR(i1,i2) = Re(self_energy_Fu_1loop_PR(p,i1,i2));
+      if (pole_mass_loop_order > 3 && TOP_POLE_QCD_CORRECTION > 2) {
+         const double currentScale = get_scale();
+         qcd_4l = 0;
+      }
+
+      const Eigen::Matrix<double,3,3> M_tree(get_mass_matrix_Fu());
+      for (int es = 0; es < 3; ++es) {
+         const double p = Abs(old_MFu(es));
+         Eigen::Matrix<double,3,3> self_energy_1;
+         Eigen::Matrix<double,3,3> self_energy_PL;
+         Eigen::Matrix<double,3,3> self_energy_PR;
+         for (int i1 = 0; i1 < 3; ++i1) {
+            for (int i2 = 0; i2 < 3; ++i2) {
+               if (i1 == 2 && i2 == 2) {
+                  self_energy_1(i1,i2)  = Re(self_energy_Fu_1loop_1_heavy(p,i1,
+                     i2));
+                  self_energy_PL(i1,i2) = Re(self_energy_Fu_1loop_PL_heavy(p,i1
+                     ,i2));
+                  self_energy_PR(i1,i2) = Re(self_energy_Fu_1loop_PR_heavy(p,i1
+                     ,i2));
+               } else {
+                  self_energy_1(i1,i2)  = Re(self_energy_Fu_1loop_1(p,i1,i2));
+                  self_energy_PL(i1,i2) = Re(self_energy_Fu_1loop_PL(p,i1,i2));
+                  self_energy_PR(i1,i2) = Re(self_energy_Fu_1loop_PR(p,i1,i2));
+               }
             }
          }
+         Eigen::Matrix<double,3,3> delta_M(- self_energy_PR * M_tree - M_tree *
+            self_energy_PL - self_energy_1);
+         delta_M(2,2) -= M_tree(2,2) * (qcd_1l + qcd_2l + qcd_3l + qcd_4l);
+         const Eigen::Matrix<double,3,3> M_loop(M_tree + delta_M);
+         Eigen::Array<double,3,1> eigen_values;
+         decltype(ZUL) mix_ZUL;
+         decltype(ZUR) mix_ZUR;
+      #ifdef CHECK_EIGENVALUE_ERROR
+         double eigenvalue_error;
+         fs_svd(M_loop, eigen_values, mix_ZUL, mix_ZUR, eigenvalue_error);
+         problems.flag_bad_mass(NUHMSSM_info::Fu, eigenvalue_error > precision
+            * Abs(eigen_values(0)));
+      #else
+         fs_svd(M_loop, eigen_values, mix_ZUL, mix_ZUR);
+      #endif
+         if (es == 0) {
+            PHYSICAL(ZUL) = mix_ZUL;
+            PHYSICAL(ZUR) = mix_ZUR;
+         }
+         PHYSICAL(MFu(es)) = Abs(eigen_values(es));
       }
-      Eigen::Matrix<double,3,3> delta_M(- self_energy_PR * M_tree - M_tree *
-         self_energy_PL - self_energy_1);
-      delta_M(2,2) -= M_tree(2,2) * (qcd_1l + qcd_2l + qcd_3l + qcd_4l);
-      const Eigen::Matrix<double,3,3> M_loop(M_tree + delta_M);
-      Eigen::Array<double,3,1> eigen_values;
-      decltype(ZUL) mix_ZUL;
-      decltype(ZUR) mix_ZUR;
-   #ifdef CHECK_EIGENVALUE_ERROR
-      double eigenvalue_error;
-      fs_svd(M_loop, eigen_values, mix_ZUL, mix_ZUR, eigenvalue_error);
-      problems.flag_bad_mass(NUHMSSM_info::Fu, eigenvalue_error > precision *
-         Abs(eigen_values(0)));
-   #else
-      fs_svd(M_loop, eigen_values, mix_ZUL, mix_ZUR);
-   #endif
-      if (es == 0) {
-         PHYSICAL(ZUL) = mix_ZUL;
-         PHYSICAL(ZUR) = mix_ZUR;
-      }
-      PHYSICAL(MFu(es)) = Abs(eigen_values(es));
-   }
+
+      new_MFu = PHYSICAL(MFu);
+      diff = MaxRelDiff(new_MFu, old_MFu);
+      old_MFu = new_MFu;
+      iteration++;
+   } while (diff > precision
+            && iteration < number_of_mass_iterations);
+
+   if (diff > precision)
+      problems.flag_no_pole_mass_convergence(NUHMSSM_info::Fu);
+   else
+      problems.unflag_no_pole_mass_convergence(NUHMSSM_info::Fu);
 }
 
 void CLASSNAME::calculate_MVWm_pole()
@@ -9670,17 +9926,35 @@ void CLASSNAME::calculate_MVWm_pole()
    if (!force_output && problems.is_running_tachyon(NUHMSSM_info::VWm))
       return;
 
-   // diagonalization with medium precision
-   const double M_tree(Sqr(MVWm));
-   const double p = MVWm;
-   const double self_energy = Re(self_energy_VWm_1loop(p));
-   const double mass_sqr = M_tree - self_energy;
+   // diagonalization with high precision
+   const auto number_of_mass_iterations = get_number_of_mass_iterations();
+   int iteration = 0;
+   double diff = 0.0;
+   decltype(MVWm) old_MVWm(MVWm), new_MVWm(MVWm);
 
-   if (mass_sqr < 0.) {
-      problems.flag_pole_tachyon(NUHMSSM_info::VWm);
-   }
+   do {
+      const double M_tree(Sqr(MVWm));
+      const double p = old_MVWm;
+      const double self_energy = Re(self_energy_VWm_1loop(p));
+      const double mass_sqr = M_tree - self_energy;
 
-   PHYSICAL(MVWm) = AbsSqrt(mass_sqr);
+      if (mass_sqr < 0.) {
+         problems.flag_pole_tachyon(NUHMSSM_info::VWm);
+      }
+
+      PHYSICAL(MVWm) = AbsSqrt(mass_sqr);
+
+      new_MVWm = PHYSICAL(MVWm);
+      diff = MaxRelDiff(new_MVWm, old_MVWm);
+      old_MVWm = new_MVWm;
+      iteration++;
+   } while (diff > precision
+            && iteration < number_of_mass_iterations);
+
+   if (diff > precision)
+      problems.flag_no_pole_mass_convergence(NUHMSSM_info::VWm);
+   else
+      problems.unflag_no_pole_mass_convergence(NUHMSSM_info::VWm);
 }
 
 double CLASSNAME::calculate_MVWm_pole(double p)
@@ -9806,7 +10080,8 @@ double CLASSNAME::calculate_MVZ_DRbar(double m_pole) const
    const double mass_sqr = Sqr(m_pole) + self_energy;
 
    if (mass_sqr < 0.) {
-      problems.flag_pole_tachyon(NUHMSSM_info::VZ);return m_pole;
+      problems.flag_pole_tachyon(NUHMSSM_info::VZ);
+      return m_pole;
    }
 
    return AbsSqrt(mass_sqr);
@@ -9819,7 +10094,8 @@ double CLASSNAME::calculate_MVWm_DRbar(double m_pole) const
    const double mass_sqr = Sqr(m_pole) + self_energy;
 
    if (mass_sqr < 0.) {
-      problems.flag_pole_tachyon(NUHMSSM_info::VWm);return m_pole;
+      problems.flag_pole_tachyon(NUHMSSM_info::VWm);
+      return m_pole;
    }
 
    return AbsSqrt(mass_sqr);

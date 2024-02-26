@@ -16,22 +16,28 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-
 /**
  * @file lowNMSSMTanBetaAtMZ_edm.hpp
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #ifndef lowNMSSMTanBetaAtMZ_EDM_H
 #define lowNMSSMTanBetaAtMZ_EDM_H
 
+#include "lowNMSSMTanBetaAtMZ_mass_eigenstates.hpp"
+#include "lowe.h"
+
 namespace flexiblesusy {
+
 class lowNMSSMTanBetaAtMZ_mass_eigenstates;
 
 namespace lowNMSSMTanBetaAtMZ_edm {
 
-}
+template <typename Lepton>
+double calculate_edm(const lowNMSSMTanBetaAtMZ_mass_eigenstates&, const softsusy::QedQcd&, int idx);
+
+} // namespace lowNMSSMTanBetaAtMZ_edm
 } // namespace flexiblesusy
 
 #endif

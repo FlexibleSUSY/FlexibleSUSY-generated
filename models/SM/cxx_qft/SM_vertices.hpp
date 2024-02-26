@@ -20,7 +20,7 @@
 /**
  * @file cxx_qft/SM_vertices.hpp
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #ifndef SM_CXXQFT_VERTICES_H
@@ -30,6 +30,7 @@
 #include "numerics2.hpp"
 
 #include "SM_fields.hpp"
+#include "cxx_qft/vertices.hpp"
 
 #include <array>
 #include <algorithm>
@@ -41,239 +42,6 @@
 
 namespace flexiblesusy {
 namespace SM_cxx_diagrams {
-
-   class ScalarVertex
-   {
-   private:
-      std::complex<double> val;
-
-   public:
-      ScalarVertex(std::complex<double> v) : val(v) {}
-
-      std::complex<double> value() const { return val; }
-
-      bool isZero() const
-      {
-         return (is_zero(val.real()) && is_zero(val.imag()));
-      }
-   };
-
-   class ChiralVertex
-   {
-   private:
-      std::pair<std::complex<double>, std::complex<double>> value;
-
-   public:
-      ChiralVertex(const std::complex<double>& left,
-                   const std::complex<double>& right)
-         : value(left, right)
-      {
-      }
-
-      std::complex<double> left() const { return value.first; }
-      std::complex<double> right() const { return value.second; }
-
-      bool isZero() const
-      {
-         return (is_zero(value.first.real()) && is_zero(value.first.imag()) &&
-                 is_zero(value.second.real()) && is_zero(value.second.imag()));
-      }
-   };
-
-/** \brief A class representing a numerically evaluated
- * tree-level vertex that is proportional to a momentum.
- * It consists of a complex number as well as an index
- * corresponding to the index of the field to whose
- * momentum the vertex is proportional.
- **/
-class MomentumVertex {
-  std::complex<double> val;
-   int ind;
-public:
-   /** \brief Contruct a MomentumVertex from a
-    * complex number representing and a field index.
-    **/
-   MomentumVertex(const std::complex<double>& v, int i)
-      : val(v), ind(i)
-   {}
-
-   /** \brief Retrieve the index of the field to whose
-    * momentum the vertex is proportional.
-    * \returns the appropriate index
-    **/
-   int index() const { return ind; }
-
-   /** \brief Retrieve the numerical value of the vertex
-    * \param i The index of the field to whose momentum
-    * the vertex is proportional.
-    * \returns the coefficient of the even permutation
-    **/
-   std::complex<double> value(int i) const
-   {
-      if (i != ind)
-         throw std::invalid_argument(
-            "MomentumVertex: Wrong index specified");
-
-      return val;
-   }
-
-   bool isZero() const
-   {
-      return (is_zero(val.real()) && is_zero(val.imag()));
-   }
-};
-
-/** \brief A class representing a numerically evaluated
- * tree-level vertex with three vector bosons.
- * It consists of one complex number as well as an \a ordering
- * encoding whether the complex number is taken to be the
- * coefficient of
- *
- * \f{equation}{
- * g[l1, l2] * (p[field1, l3] - p[field2, lIndex3]) +
- * g[l2, l3] * (p[field2, l1] - p[field3, lIndex1]) +
- * g[l1, l3] * (p[field3, l2] - p[field1, lIndex2])
- * \f}
- *
- * or its negative.
- * The former corresponds to the \a even permutation and
- * the latter to the \a odd permutation.
- **/
-class TripleVectorVertex {
-public:
-   struct even_permutation {};
-   struct odd_permutation {};
-private:
-   std::complex<double> val;
-   bool even;
-public:
-   /** \brief Contruct a TripleVectorVertex from a
-    * complex number representing the even coefficient.
-    **/
-   TripleVectorVertex(const std::complex<double>& v,
-                      even_permutation)
-      : val(v), even(true)
-   {}
-
-   /** \brief Contruct a TripleVectorVertex from a
-    * complex number representing the odd coefficient.
-    **/
-   TripleVectorVertex(const std::complex<double>& v,
-                      odd_permutation)
-      : val(v), even(false)
-   {}
-
-   /** \brief Check whether the value in the vertex is stored
-    * as proportional to the even permutation.
-    * \returns true if yes and false otherwise
-    **/
-   bool is_even() const { return even; }
-
-   /** \brief Retrieve the coefficient of the even permutation
-    * \returns the coefficient of the even permutation
-    **/
-   std::complex<double> value(even_permutation) const
-   { return even ? val : - val; }
-
-   /** \brief Retrieve the coefficient of the odd permutation
-    * \returns the coefficient of the odd permutation
-    **/
-   std::complex<double> value(odd_permutation) const
-   { return even ? - val : val; }
-
-   bool isZero() const
-   {
-      return (is_zero(val.real()) && is_zero(val.imag()));
-   }
-};
-
-/** \brief A class representing a numerically evaluated
- * tree-level vertex with four vector bosons.
- * It consists of three complex numbers corresponding to
- * (in order) the basis expansion with respect to the basis:
- *
- * \f{equation}{
- * ( g[l1, l2] g[l3, l4], g[l1, l3] g[l2, l4], g[l1, l4] g[l2, l3] )
- * \f}
- **/
-class QuadrupleVectorVertex {
-   std::complex<double> part1, part2, part3;
-
-public:
-   /** \brief Contruct a QuadrupleVectorVertex from three
-    * complex numbers representing the coefficients in the
-    * basis expansion.
-    **/
-   QuadrupleVectorVertex(const std::complex<double>& p1,
-                         const std::complex<double>& p2,
-                         const std::complex<double>& p3)
-      : part1(p1), part2(p2), part3(p3)
-   {}
-
-   /** \brief Retrieve the coefficient of \f$ g[l1, l2] g[l3, l4] \f$
-    * \returns the corresponding coefficient
-    **/
-   std::complex<double> value1() const { return part1; }
-
-   /** \brief Retrieve the coefficient of \f$ g[l1, l3] g[l2, l4] \f$
-    * \returns the corresponding coefficient
-    **/
-   std::complex<double> value2() const { return part2; }
-
-   /** \brief Retrieve the coefficient of \f$ g[l1, l4] g[l2, l3] \f$
-    * \returns the corresponding coefficient
-    **/
-   std::complex<double> value3() const { return part3; }
-
-   bool isZero() const
-   {
-      return (is_zero(part1.real()) && is_zero(part1.imag()) &&
-              is_zero(part2.real()) && is_zero(part2.imag()) &&
-              is_zero(part3.real()) && is_zero(part3.imag()));
-   }
-};
-
-class MomentumDifferenceVertex {
-   std::complex<double> val;
-   int minuendIndex;
-   int subtrahendIndex;
-public:
-   MomentumDifferenceVertex(std::complex<double> v, int mi, int si)
-      : val(v), minuendIndex(mi), subtrahendIndex(si) {}
-
-   std::complex<double> value(int mi, int si) const
-   {
-      if (mi == minuendIndex && si == subtrahendIndex)
-         return val;
-      if (mi == subtrahendIndex && si == minuendIndex)
-         return -val;
-
-      throw std::invalid_argument(
-         "MomentumDifferenceVertex: Wrong index combination");
-      return 0.0;
-   }
-
-   int incoming_index() const { return minuendIndex; }
-   int outgoing_index() const { return subtrahendIndex; }
-
-   bool isZero() const
-   {
-      return (is_zero(val.real()) && is_zero(val.imag()));
-   }
-};
-
-class InverseMetricVertex {
-   std::complex<double> val;
-public:
-   InverseMetricVertex(std::complex<double> v) : val(v) {}
-
-   std::complex<double> value() const { return val; }
-
-   bool isZero() const
-   {
-      return (is_zero(val.real()) && is_zero(val.imag()));
-   }
-};
 
 namespace detail {
 template<class... Fields> struct VertexImpl;
@@ -296,7 +64,7 @@ struct Vertex {
       >
    >::type;
    using indices_type = std::array<int,
-      detail::total_number_of_field_indices<
+      cxx_diagrams::detail::total_number_of_field_indices<
          boost::mpl::vector<Fields...>
       >::value
    >;
@@ -328,7 +96,7 @@ struct Vertex {
       >::type;
 
       constexpr int offset =
-         detail::total_number_of_field_indices<preceeding_fields>::value;
+         cxx_diagrams::detail::total_number_of_field_indices<preceeding_fields>::value;
       constexpr int length = std::tuple_size<result_type>::value;
 
       result_type result_indices;
@@ -350,530 +118,245 @@ struct Vertex {
 struct context_base;
 
 namespace detail {
-template<> struct VertexImpl<fields::Ah, fields::Ah, fields::hh, fields::hh>
+template<> struct VertexImpl<SM_cxx_diagrams::fields::Ah, typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fd>::type, SM_cxx_diagrams::fields::Fd>
 {
-   static ScalarVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::Ah, fields::Ah, fields::hh>
+template<> struct VertexImpl<SM_cxx_diagrams::fields::Ah, typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fe>::type, SM_cxx_diagrams::fields::Fe>
 {
-   static ScalarVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::Ah, fields::Ah, fields::VZ, fields::VZ>
+template<> struct VertexImpl<SM_cxx_diagrams::fields::Ah, typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fu>::type, SM_cxx_diagrams::fields::Fu>
 {
-   static InverseMetricVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::Ah, fields::Ah, typename fields::conj<fields::VWp>::type, fields::VWp>
+template<> struct VertexImpl<SM_cxx_diagrams::fields::Fe, typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fe>::type, SM_cxx_diagrams::fields::VP>
 {
-   static InverseMetricVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::Ah, fields::hh, fields::VZ>
+template<> struct VertexImpl<SM_cxx_diagrams::fields::Fe, typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fe>::type, SM_cxx_diagrams::fields::VZ>
 {
-   static MomentumDifferenceVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::Ah, fields::Hp, typename fields::conj<fields::VWp>::type>
+template<> struct VertexImpl<SM_cxx_diagrams::fields::hh, typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fd>::type, SM_cxx_diagrams::fields::Fd>
 {
-   static MomentumDifferenceVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::Ah, typename fields::bar<fields::Fd>::type, fields::Fd>
+template<> struct VertexImpl<SM_cxx_diagrams::fields::hh, typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fe>::type, SM_cxx_diagrams::fields::Fe>
 {
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::Ah, typename fields::bar<fields::Fe>::type, fields::Fe>
+template<> struct VertexImpl<SM_cxx_diagrams::fields::hh, typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fu>::type, SM_cxx_diagrams::fields::Fu>
 {
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::Ah, typename fields::bar<fields::Fu>::type, fields::Fu>
+template<> struct VertexImpl<SM_cxx_diagrams::fields::hh, typename SM_cxx_diagrams::fields::conj<SM_cxx_diagrams::fields::Hp>::type, SM_cxx_diagrams::fields::Hp>
 {
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+   static cxx_diagrams::ScalarVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::Ah, typename fields::conj<fields::Hp>::type, fields::VWp>
+template<> struct VertexImpl<SM_cxx_diagrams::fields::hh, typename SM_cxx_diagrams::fields::conj<SM_cxx_diagrams::fields::VWp>::type, SM_cxx_diagrams::fields::VWp>
 {
-   static MomentumDifferenceVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+   static cxx_diagrams::InverseMetricVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::Fe, typename fields::bar<fields::Fe>::type, fields::VP>
+template<> struct VertexImpl<SM_cxx_diagrams::fields::Hp, typename SM_cxx_diagrams::fields::conj<SM_cxx_diagrams::fields::Hp>::type, SM_cxx_diagrams::fields::VP>
 {
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+   static cxx_diagrams::MomentumDifferenceVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::Fe, typename fields::bar<fields::Fe>::type, fields::VZ>
+template<> struct VertexImpl<SM_cxx_diagrams::fields::Hp, typename SM_cxx_diagrams::fields::conj<SM_cxx_diagrams::fields::VWp>::type, SM_cxx_diagrams::fields::VP>
 {
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+   static cxx_diagrams::InverseMetricVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::hh, fields::hh, fields::hh, fields::hh>
+template<> struct VertexImpl<SM_cxx_diagrams::fields::VP, SM_cxx_diagrams::fields::Fd, typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fd>::type>
 {
-   static ScalarVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::hh, fields::hh, fields::hh>
+template<> struct VertexImpl<SM_cxx_diagrams::fields::VP, SM_cxx_diagrams::fields::Fe, typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fe>::type>
 {
-   static ScalarVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::hh, fields::hh, fields::Hp, typename fields::conj<fields::Hp>::type>
+template<> struct VertexImpl<SM_cxx_diagrams::fields::VP, SM_cxx_diagrams::fields::Fu, typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fu>::type>
 {
-   static ScalarVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::hh, fields::hh, fields::VZ, fields::VZ>
+template<> struct VertexImpl<SM_cxx_diagrams::fields::VP, SM_cxx_diagrams::fields::Hp, typename SM_cxx_diagrams::fields::conj<SM_cxx_diagrams::fields::Hp>::type>
 {
-   static InverseMetricVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+   static cxx_diagrams::MomentumDifferenceVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::hh, fields::hh, typename fields::conj<fields::VWp>::type, fields::VWp>
+template<> struct VertexImpl<SM_cxx_diagrams::fields::VP, SM_cxx_diagrams::fields::VWp, typename SM_cxx_diagrams::fields::conj<SM_cxx_diagrams::fields::VWp>::type>
 {
-   static InverseMetricVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+   static cxx_diagrams::TripleVectorVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::hh, fields::Hp, typename fields::conj<fields::Hp>::type>
+template<> struct VertexImpl<SM_cxx_diagrams::fields::VP, typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fe>::type, SM_cxx_diagrams::fields::Fe>
 {
-   static ScalarVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::hh, fields::Hp, typename fields::conj<fields::VWp>::type, fields::VP>
+template<> struct VertexImpl<SM_cxx_diagrams::fields::VWp, typename SM_cxx_diagrams::fields::conj<SM_cxx_diagrams::fields::Hp>::type, SM_cxx_diagrams::fields::VP>
 {
-   static InverseMetricVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+   static cxx_diagrams::InverseMetricVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::hh, fields::Hp, typename fields::conj<fields::VWp>::type, fields::VZ>
+template<> struct VertexImpl<SM_cxx_diagrams::fields::VWp, typename SM_cxx_diagrams::fields::conj<SM_cxx_diagrams::fields::VWp>::type, SM_cxx_diagrams::fields::VP>
 {
-   static InverseMetricVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+   static cxx_diagrams::TripleVectorVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::hh, fields::Hp, typename fields::conj<fields::VWp>::type>
+template<> struct VertexImpl<SM_cxx_diagrams::fields::VZ, SM_cxx_diagrams::fields::Fd, typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fd>::type>
 {
-   static MomentumDifferenceVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::hh, fields::VZ, fields::VZ>
+template<> struct VertexImpl<SM_cxx_diagrams::fields::VZ, SM_cxx_diagrams::fields::Fe, typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fe>::type>
 {
-   static InverseMetricVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::hh, typename fields::bar<fields::Fd>::type, fields::Fd>
+template<> struct VertexImpl<SM_cxx_diagrams::fields::VZ, SM_cxx_diagrams::fields::Fu, typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fu>::type>
 {
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::hh, typename fields::bar<fields::Fe>::type, fields::Fe>
+template<> struct VertexImpl<SM_cxx_diagrams::fields::VZ, typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fe>::type, SM_cxx_diagrams::fields::Fe>
 {
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::hh, typename fields::bar<fields::Fu>::type, fields::Fu>
+template<> struct VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fd>::type, SM_cxx_diagrams::fields::Fd, SM_cxx_diagrams::fields::Ah>
 {
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::hh, typename fields::conj<fields::Hp>::type, fields::Hp>
+template<> struct VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fd>::type, SM_cxx_diagrams::fields::Fd, SM_cxx_diagrams::fields::hh>
 {
-   static ScalarVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::hh, typename fields::conj<fields::Hp>::type, fields::VP, fields::VWp>
+template<> struct VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fd>::type, SM_cxx_diagrams::fields::Fd, SM_cxx_diagrams::fields::VP>
 {
-   static InverseMetricVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::hh, typename fields::conj<fields::Hp>::type, fields::VWp, fields::VZ>
+template<> struct VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fd>::type, SM_cxx_diagrams::fields::Fd, SM_cxx_diagrams::fields::VZ>
 {
-   static InverseMetricVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::hh, typename fields::conj<fields::Hp>::type, fields::VWp>
+template<> struct VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fd>::type, SM_cxx_diagrams::fields::Fu, typename SM_cxx_diagrams::fields::conj<SM_cxx_diagrams::fields::Hp>::type>
 {
-   static MomentumDifferenceVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::hh, typename fields::conj<fields::VWp>::type, fields::VWp>
+template<> struct VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fe>::type, SM_cxx_diagrams::fields::Fe, SM_cxx_diagrams::fields::Ah>
 {
-   static InverseMetricVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::Hp, typename fields::conj<fields::Hp>::type, fields::VP, fields::VP>
+template<> struct VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fe>::type, SM_cxx_diagrams::fields::Fe, SM_cxx_diagrams::fields::hh>
 {
-   static InverseMetricVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::Hp, typename fields::conj<fields::Hp>::type, fields::VP, fields::VZ>
+template<> struct VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fe>::type, SM_cxx_diagrams::fields::Fe, SM_cxx_diagrams::fields::VP>
 {
-   static InverseMetricVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::Hp, typename fields::conj<fields::Hp>::type, fields::VP>
+template<> struct VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fe>::type, SM_cxx_diagrams::fields::Fe, SM_cxx_diagrams::fields::VZ>
 {
-   static MomentumDifferenceVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::Hp, typename fields::conj<fields::Hp>::type, fields::VZ, fields::VZ>
+template<> struct VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fe>::type, SM_cxx_diagrams::fields::Fv, typename SM_cxx_diagrams::fields::conj<SM_cxx_diagrams::fields::Hp>::type>
 {
-   static InverseMetricVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::Hp, typename fields::conj<fields::Hp>::type, fields::VZ>
+template<> struct VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fe>::type, typename SM_cxx_diagrams::fields::conj<SM_cxx_diagrams::fields::Hp>::type, SM_cxx_diagrams::fields::Fv>
 {
-   static MomentumDifferenceVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::Hp, typename fields::conj<fields::Hp>::type, typename fields::conj<fields::VWp>::type, fields::VWp>
+template<> struct VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fe>::type, typename SM_cxx_diagrams::fields::conj<SM_cxx_diagrams::fields::VWp>::type, SM_cxx_diagrams::fields::Fv>
 {
-   static InverseMetricVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::Hp, typename fields::conj<fields::VWp>::type, fields::VP>
+template<> struct VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fu>::type, SM_cxx_diagrams::fields::Fd, SM_cxx_diagrams::fields::Hp>
 {
-   static InverseMetricVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::Hp, typename fields::conj<fields::VWp>::type, fields::VZ>
+template<> struct VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fu>::type, SM_cxx_diagrams::fields::Fu, SM_cxx_diagrams::fields::Ah>
 {
-   static InverseMetricVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::VP, fields::Fd, typename fields::bar<fields::Fd>::type>
+template<> struct VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fu>::type, SM_cxx_diagrams::fields::Fu, SM_cxx_diagrams::fields::hh>
 {
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::VP, fields::Fe, typename fields::bar<fields::Fe>::type>
+template<> struct VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fu>::type, SM_cxx_diagrams::fields::Fu, SM_cxx_diagrams::fields::VP>
 {
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::VP, fields::Fu, typename fields::bar<fields::Fu>::type>
+template<> struct VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fu>::type, SM_cxx_diagrams::fields::Fu, SM_cxx_diagrams::fields::VZ>
 {
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::VP, fields::Hp, typename fields::conj<fields::Hp>::type>
+template<> struct VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fv>::type, SM_cxx_diagrams::fields::Fe, SM_cxx_diagrams::fields::Hp>
 {
-   static MomentumDifferenceVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::VP, fields::VWp, typename fields::conj<fields::VWp>::type>
+template<> struct VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fv>::type, SM_cxx_diagrams::fields::Fv, SM_cxx_diagrams::fields::VZ>
 {
-   static TripleVectorVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::VZ, fields::Fd, typename fields::bar<fields::Fd>::type>
+template<> struct VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fv>::type, SM_cxx_diagrams::fields::Hp, SM_cxx_diagrams::fields::Fe>
 {
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::VZ, fields::Fe, typename fields::bar<fields::Fe>::type>
+template<> struct VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fv>::type, SM_cxx_diagrams::fields::VWp, SM_cxx_diagrams::fields::Fe>
 {
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+   static cxx_diagrams::ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<fields::VZ, fields::Fu, typename fields::bar<fields::Fu>::type>
+template<> struct VertexImpl<typename SM_cxx_diagrams::fields::conj<SM_cxx_diagrams::fields::Hp>::type, SM_cxx_diagrams::fields::Hp, SM_cxx_diagrams::fields::VZ>
 {
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
+   static cxx_diagrams::MomentumDifferenceVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
 };
 
-template<> struct VertexImpl<typename fields::bar<fields::Fd>::type, fields::Fd, fields::Ah>
-{
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::Fd>::type, fields::Fd, fields::hh>
-{
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::Fd>::type, fields::Fd, fields::VG>
-{
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::Fd>::type, fields::Fd, fields::VP>
-{
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::Fd>::type, fields::Fd, fields::VZ>
-{
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::Fd>::type, fields::Fu, typename fields::conj<fields::Hp>::type>
-{
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::Fd>::type, fields::Fu, typename fields::conj<fields::VWp>::type>
-{
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fe, fields::Ah>
-{
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fe, fields::hh>
-{
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fe, fields::VP>
-{
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fe, fields::VZ>
-{
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fv, typename fields::conj<fields::Hp>::type>
-{
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fv, typename fields::conj<fields::VWp>::type>
-{
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::Fe>::type, typename fields::conj<fields::Hp>::type, fields::Fv>
-{
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::Fu>::type, fields::Fd, fields::Hp>
-{
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::Fu>::type, fields::Fd, fields::VWp>
-{
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::Fu>::type, fields::Fu, fields::Ah>
-{
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::Fu>::type, fields::Fu, fields::hh>
-{
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::Fu>::type, fields::Fu, fields::VG>
-{
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::Fu>::type, fields::Fu, fields::VP>
-{
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::Fu>::type, fields::Fu, fields::VZ>
-{
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::Fv>::type, fields::Fe, fields::Hp>
-{
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::Fv>::type, fields::Fe, fields::VWp>
-{
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::Fv>::type, fields::Fv, fields::VZ>
-{
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::Fv>::type, fields::Hp, fields::Fe>
-{
-   static ChiralVertex evaluate(const std::array<int, 2>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::gP>::type, fields::gWpC, fields::VWp>
-{
-   static MomentumVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::gP>::type, fields::gWp, typename fields::conj<fields::VWp>::type>
-{
-   static MomentumVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::gWpC>::type, fields::gP, typename fields::conj<fields::Hp>::type>
-{
-   static ScalarVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::gWpC>::type, fields::gP, typename fields::conj<fields::VWp>::type>
-{
-   static MomentumVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::gWpC>::type, fields::gWpC, fields::Ah>
-{
-   static ScalarVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::gWpC>::type, fields::gWpC, fields::hh>
-{
-   static ScalarVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::gWpC>::type, fields::gWpC, fields::VP>
-{
-   static MomentumVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::gWpC>::type, fields::gWpC, fields::VZ>
-{
-   static MomentumVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::gWpC>::type, fields::gZ, typename fields::conj<fields::Hp>::type>
-{
-   static ScalarVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::gWpC>::type, fields::gZ, typename fields::conj<fields::VWp>::type>
-{
-   static MomentumVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::gWp>::type, fields::gP, fields::Hp>
-{
-   static ScalarVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::gWp>::type, fields::gP, fields::VWp>
-{
-   static MomentumVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::gWp>::type, fields::gWp, fields::Ah>
-{
-   static ScalarVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::gWp>::type, fields::gWp, fields::hh>
-{
-   static ScalarVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::gWp>::type, fields::gWp, fields::VP>
-{
-   static MomentumVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::gWp>::type, fields::gWp, fields::VZ>
-{
-   static MomentumVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::gWp>::type, fields::gZ, fields::Hp>
-{
-   static ScalarVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::gWp>::type, fields::gZ, fields::VWp>
-{
-   static MomentumVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::gZ>::type, fields::gP, fields::hh>
-{
-   static ScalarVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::gZ>::type, fields::gWpC, fields::Hp>
-{
-   static ScalarVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::gZ>::type, fields::gWpC, fields::VWp>
-{
-   static MomentumVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::gZ>::type, fields::gWp, typename fields::conj<fields::Hp>::type>
-{
-   static ScalarVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::gZ>::type, fields::gWp, typename fields::conj<fields::VWp>::type>
-{
-   static MomentumVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::bar<fields::gZ>::type, fields::gZ, fields::hh>
-{
-   static ScalarVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::conj<fields::Hp>::type, fields::VP, fields::VWp>
-{
-   static InverseMetricVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::conj<fields::Hp>::type, fields::VWp, fields::VZ>
-{
-   static InverseMetricVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::conj<fields::VWp>::type, fields::VP, fields::VP, fields::VWp>
-{
-   static QuadrupleVectorVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::conj<fields::VWp>::type, fields::VP, fields::VWp, fields::VZ>
-{
-   static QuadrupleVectorVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::conj<fields::VWp>::type, fields::VP, fields::VWp>
-{
-   static TripleVectorVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::conj<fields::VWp>::type, fields::VWp, fields::VZ, fields::VZ>
-{
-   static QuadrupleVectorVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::conj<fields::VWp>::type, fields::VWp, fields::VZ>
-{
-   static TripleVectorVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
-};
-
-template<> struct VertexImpl<typename fields::conj<fields::VWp>::type, typename fields::conj<fields::VWp>::type, fields::VWp, fields::VWp>
-{
-   static QuadrupleVectorVertex evaluate(const std::array<int, 0>& indices, const context_base& context);
-};
-
 
 
-ChiralVertex unit_charge(const context_base& context);
+cxx_diagrams::ChiralVertex unit_charge(const context_base& context);
 } // namespace detail
 
 inline double unit_charge(const context_base& context)
 {
    return -(detail::unit_charge(context).left().real() /
-            fields::Electron::electric_charge);
+            fields::Electron::electricCharge);
 }
 
 } // namespace SM_cxx_diagrams

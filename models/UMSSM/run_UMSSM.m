@@ -89,7 +89,6 @@ handle = FSUMSSMOpenHandle[
 
 spectrum    = FSUMSSMCalculateSpectrum[handle];
 observables = FSUMSSMCalculateObservables[handle];
-decays      = FSUMSSMCalculateDecays[handle];
 
 FSUMSSMCloseHandle[handle];
 

@@ -54,22 +54,23 @@ MSSM_TARBALL := \
 		$(MODNAME).tar.gz
 
 LIBMSSM_SRC := \
-		$(DIR)/MSSM_a_muon.cpp \
+		$(DIR)/MSSM_amm.cpp \
 		$(DIR)/MSSM_edm.cpp \
 		$(DIR)/MSSM_FFV_form_factors.cpp \
-		$(DIR)/MSSM_f_to_f_conversion.cpp \
-		$(DIR)/MSSM_l_to_lgamma.cpp \
+		$(wildcard $(DIR)/observables/MSSM*.cpp) \
 		$(DIR)/MSSM_b_to_s_gamma.cpp \
 		$(DIR)/MSSM_info.cpp \
 		$(DIR)/MSSM_input_parameters.cpp \
 		$(DIR)/MSSM_mass_eigenstates.cpp \
 		$(DIR)/MSSM_mass_eigenstates_decoupling_scheme.cpp \
 		$(DIR)/MSSM_model_slha.cpp \
+		$(DIR)/MSSM_lepton_amm_wrapper.cpp \
 		$(DIR)/MSSM_observables.cpp \
 		$(DIR)/MSSM_physical.cpp \
 		$(DIR)/MSSM_slha_io.cpp \
 		$(DIR)/MSSM_soft_parameters.cpp \
 		$(DIR)/MSSM_susy_parameters.cpp \
+		$(DIR)/MSSM_unitarity.cpp \
 		$(DIR)/MSSM_utilities.cpp \
 		$(DIR)/MSSM_weinberg_angle.cpp
 
@@ -89,12 +90,11 @@ LLMSSM_MMA  := \
 		$(DIR)/run_MSSM.m
 
 LIBMSSM_HDR := \
-		$(DIR)/MSSM_a_muon.hpp \
+		$(DIR)/MSSM_amm.hpp \
 		$(DIR)/MSSM_convergence_tester.hpp \
 		$(DIR)/MSSM_edm.hpp \
 		$(DIR)/MSSM_FFV_form_factors.hpp \
-		$(DIR)/MSSM_f_to_f_conversion.hpp \
-		$(DIR)/MSSM_l_to_lgamma.hpp \
+		$(wildcard $(DIR)/observables/MSSM*.hpp) \
 		$(DIR)/MSSM_b_to_s_gamma.hpp \
 		$(DIR)/MSSM_ewsb_solver.hpp \
 		$(DIR)/MSSM_ewsb_solver_interface.hpp \
@@ -108,6 +108,7 @@ LIBMSSM_HDR := \
 		$(DIR)/MSSM_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/MSSM_model.hpp \
 		$(DIR)/MSSM_model_slha.hpp \
+		$(DIR)/MSSM_lepton_amm_wrapper.hpp \
 		$(DIR)/MSSM_observables.hpp \
 		$(DIR)/MSSM_physical.hpp \
 		$(DIR)/MSSM_slha_io.hpp \
@@ -116,12 +117,14 @@ LIBMSSM_HDR := \
 		$(DIR)/MSSM_soft_parameters.hpp \
 		$(DIR)/MSSM_susy_parameters.hpp \
 		$(DIR)/MSSM_susy_scale_constraint.hpp \
+		$(DIR)/MSSM_unitarity.hpp \
 		$(DIR)/MSSM_utilities.hpp \
 		$(DIR)/MSSM_weinberg_angle.hpp
 
 LIBMSSM_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/MSSM_qft.hpp \
 		$(DIR)/cxx_qft/MSSM_fields.hpp \
+		$(DIR)/cxx_qft/MSSM_particle_aliases.hpp \
 		$(DIR)/cxx_qft/MSSM_vertices.hpp \
 		$(DIR)/cxx_qft/MSSM_context_base.hpp \
 		$(DIR)/cxx_qft/MSSM_npointfunctions_wilsoncoeffs.hpp
@@ -317,7 +320,7 @@ $(METACODE_STAMP_MSSM):
 endif
 
 $(LIBMSSM_DEP) $(EXEMSSM_DEP) $(LLMSSM_DEP) $(LIBMSSM_OBJ) $(EXEMSSM_OBJ) $(LLMSSM_OBJ) $(LLMSSM_LIB): \
-	CPPFLAGS += $(MODMSSM_SUBMOD_INC) $(MODMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODMSSM_SUBMOD_INC) $(MODMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIGGSTOOLSFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBMSSM_DEP) $(EXEMSSM_DEP) $(LLMSSM_DEP) $(LIBMSSM_OBJ) $(EXEMSSM_OBJ) $(LLMSSM_OBJ) $(LLMSSM_LIB): \
@@ -333,11 +336,11 @@ $(LIBMSSM): $(LIBMSSM_OBJ)
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBMSSM) $(MODMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
 $(LLMSSM_LIB): $(LLMSSM_OBJ) $(LIBMSSM) $(MODMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
 
 ALLDEP += $(LIBMSSM_DEP) $(EXEMSSM_DEP)
 ALLSRC += $(LIBMSSM_SRC) $(EXEMSSM_SRC)

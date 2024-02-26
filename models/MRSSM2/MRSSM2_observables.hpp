@@ -21,6 +21,7 @@
 #define MRSSM2_OBSERVABLES_H
 
 #include "observable_problems.hpp"
+#include "spectrum_generator_settings.hpp"
 #include <string>
 #include <vector>
 #include <Eigen/Core>
@@ -33,9 +34,10 @@ namespace flexiblesusy {
 
 class MRSSM2_mass_eigenstates;
 class Physical_input;
+class LToLConversion_settings;
 
 struct MRSSM2_observables {
-   static const int NUMBER_OF_OBSERVABLES = 5;
+   static constexpr int NUMBER_OF_OBSERVABLES = 60;
 
    MRSSM2_observables();
    Eigen::ArrayXd get() const; ///< returns vector of all observables
@@ -44,21 +46,33 @@ struct MRSSM2_observables {
    void set(const Eigen::ArrayXd&); ///< sets all observables from given vector
 
    Observable_problems problems;
-   double a_muon; ///< a_muon = (g-2)/2 of the muon (calculated with FlexibleSUSY)
-   double edm_Fe_0; ///< electric dipole moment of Fe(0) [1/GeV]
-   double edm_Fe_1; ///< electric dipole moment of Fe(1) [1/GeV]
-   double edm_Fe_2; ///< electric dipole moment of Fe(2) [1/GeV]
-   double Fe1_to_Fe0_VP; ///< BR(Fe1 -> Fe0 VP)
+   double amm_Fe_0; ///< Delta(g-2)/2 of Fe(1) (calculated with FlexibleSUSY)
+   double amm_Fe_1; ///< Delta(g-2)/2 of Fe(2) (calculated with FlexibleSUSY)
+   double amm_Fe_2; ///< Delta(g-2)/2 of Fe(3) (calculated with FlexibleSUSY)
+   double edm_Fe_0; ///< electric dipole moment of Fe(1) [1/GeV]
+   double edm_Fe_1; ///< electric dipole moment of Fe(2) [1/GeV]
+   double edm_Fe_2; ///< electric dipole moment of Fe(3) [1/GeV]
+   double Fe1_to_Fe0_VP; ///< BR(Fe2 -> Fe1 VP)
+   Eigen::Array<std::complex<double>,13,1> Fe2to11bar1_All_1loop; ///< BR(Fe(2)->Fe(1)Fe(1)barFe(1)) for All at 1 loop
+   Eigen::Array<std::complex<double>,13,1> Fe2Fe1inAl_All_1loop; ///< CR(Fe(2)->Fe(1)) in Al for All at 1 loop
+   double amm_uncertainty_Fe_1; ///< uncertainty of Delta(g-2)/2 of Fe(2) (calculated with FlexibleSUSY)
 
 };
 
 MRSSM2_observables calculate_observables(
-   const MRSSM2_mass_eigenstates&, const softsusy::QedQcd&,
-   const Physical_input&);
+   const MRSSM2_mass_eigenstates&,
+   const softsusy::QedQcd&,
+   const LToLConversion_settings& ltolconversion_settings,
+   const Physical_input&,
+   const Spectrum_generator_settings&);
 
 MRSSM2_observables calculate_observables(
-   const MRSSM2_mass_eigenstates&, const softsusy::QedQcd&,
-   const Physical_input&, double scale);
+   const MRSSM2_mass_eigenstates&,
+   const softsusy::QedQcd&,
+   const LToLConversion_settings& ltolconversion_settings,
+   const Physical_input&,
+   const Spectrum_generator_settings&,
+   double scale);
 
 } // namespace flexiblesusy
 

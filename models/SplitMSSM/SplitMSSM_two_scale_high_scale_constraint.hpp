@@ -37,7 +37,6 @@ public:
    SplitMSSM_high_scale_constraint() = default;
    SplitMSSM_high_scale_constraint(SplitMSSM<Two_scale>*);
    virtual ~SplitMSSM_high_scale_constraint() = default;
-   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
    virtual void apply() override;
    virtual double get_scale() const override;

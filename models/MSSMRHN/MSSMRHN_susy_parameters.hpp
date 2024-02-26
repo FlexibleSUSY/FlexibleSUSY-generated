@@ -119,7 +119,7 @@ protected:
    MSSMRHN_input_parameters input{};
 
 private:
-   static const int numberOfParameters = 51;
+   static constexpr int numberOfParameters = 51;
 
    struct Susy_traces {
       double traceYdAdjYd{};

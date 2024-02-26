@@ -99,9 +99,6 @@ void HGTHDMIIMSSMBC_slha_io::set_extpar(const HGTHDMIIMSSMBC_input_parameters& i
    extpar << FORMAT_ELEMENT(4, input.M2Input, "M2Input");
    extpar << FORMAT_ELEMENT(5, input.M3Input, "M3Input");
    extpar << FORMAT_ELEMENT(6, input.MAInput, "MAInput");
-   extpar << FORMAT_ELEMENT(7, input.AtInput, "AtInput");
-   extpar << FORMAT_ELEMENT(8, input.AbInput, "AbInput");
-   extpar << FORMAT_ELEMENT(9, input.AtauInput, "AtauInput");
    extpar << FORMAT_ELEMENT(100, input.LambdaLoopOrder, "LambdaLoopOrder");
    slha_io.set_block(extpar);
 
@@ -164,6 +161,14 @@ void HGTHDMIIMSSMBC_slha_io::set_input(const HGTHDMIIMSSMBC_input_parameters& in
    set_imminpar(input);
    set_imextpar(input);
 
+   slha_io.set_block("AdIN", INPUTPARAMETER(AdInput), "AdInput");
+   slha_io.set_block("AeIN", INPUTPARAMETER(AeInput), "AeInput");
+   slha_io.set_block("AuIN", INPUTPARAMETER(AuInput), "AuInput");
+   slha_io.set_block("MSDIN", INPUTPARAMETER(msdInput), "msdInput");
+   slha_io.set_block("MSEIN", INPUTPARAMETER(mseInput), "mseInput");
+   slha_io.set_block("MSLIN", INPUTPARAMETER(mslInput), "mslInput");
+   slha_io.set_block("MSQIN", INPUTPARAMETER(msqInput), "msqInput");
+   slha_io.set_block("MSUIN", INPUTPARAMETER(msuInput), "msuInput");
 
 }
 
@@ -189,6 +194,16 @@ void HGTHDMIIMSSMBC_slha_io::set_settings(const Spectrum_generator_settings& set
 }
 
 /**
+ * Stores the settings (LToLConversion block) in the SLHA object.
+ *
+ * @param settings class of settings
+ */
+void HGTHDMIIMSSMBC_slha_io::set_LToLConversion_settings(const LToLConversion_settings& settings)
+{
+   slha_io.set_LToLConversion_settings(settings);
+}
+
+/**
  * Stores the settings (FlexibleSUSY block) in the SLHA object.
  *
  * @param settings class of settings
@@ -196,6 +211,15 @@ void HGTHDMIIMSSMBC_slha_io::set_settings(const Spectrum_generator_settings& set
 void HGTHDMIIMSSMBC_slha_io::set_FlexibleDecay_settings(const FlexibleDecay_settings& settings)
 {
    slha_io.set_FlexibleDecay_settings(settings);
+}
+
+/**
+ * Stores the settings (FlexibleSUSYUnitarity block) in the SLHA object.
+ */
+void HGTHDMIIMSSMBC_slha_io::set_unitarity_infinite_s(
+   const flexiblesusy::Spectrum_generator_settings& spectrum_generator_settings, UnitarityInfiniteS const& unitarity)
+{
+   slha_io.set_unitarity_infinite_s(spectrum_generator_settings, unitarity);
 }
 
 /**
@@ -551,28 +575,6 @@ void HGTHDMIIMSSMBC_slha_io::set_dcinfo(
 }
 
 /**
- * Sort decays of every particle according to their width
- *
- */
-std::vector<Decay> sort_decays_list(const Decays_list& decays_list) {
-   std::vector<Decay> decays_list_as_vector;
-   decays_list_as_vector.reserve(decays_list.size());
-   for (const auto& el : decays_list) {
-      decays_list_as_vector.push_back(el.second);
-   }
-
-   std::sort(
-      decays_list_as_vector.begin(),
-      decays_list_as_vector.end(),
-      [](const auto& d1, const auto& d2) {
-         return d1.get_width() > d2.get_width();
-      }
-   );
-
-   return decays_list_as_vector;
-}
-
-/**
  * Stores the branching ratios for a given particle in the SLHA
  * object.
  *
@@ -593,7 +595,7 @@ void HGTHDMIIMSSMBC_slha_io::set_decay_block(const Decays_list& decays_list, Fle
          << FORMAT_TOTAL_WIDTH(pdg, width, name + " decays");
 
    if (!is_zero(width, 1e-100)) {
-      constexpr double NEGATIVE_BR_TOLERANCE = 1e-11;
+      static constexpr double NEGATIVE_BR_TOLERANCE = 1e-11;
       const double MIN_BR_TO_PRINT = flexibledecay_settings.get(FlexibleDecay_settings::min_br_to_print);
       std::vector<Decay> sorted_decays_list = sort_decays_list(decays_list);
       for (const auto& channel : sorted_decays_list) {
@@ -620,6 +622,11 @@ void HGTHDMIIMSSMBC_slha_io::set_decay_block(const Decays_list& decays_list, Fle
    }
 
    slha_io.set_block(decay);
+}
+
+void HGTHDMIIMSSMBC_slha_io::set_effectivecouplings_block(const std::vector<std::tuple<int, int, int, double, std::string>>& effCouplings)
+{
+   slha_io.set_effectivecouplings_block(effCouplings);
 }
 
 
@@ -670,15 +677,6 @@ void HGTHDMIIMSSMBC_slha_io::set_extra(
       slha_io.set_block(block);
    }
 
-   if (spectrum_generator_settings.get(Spectrum_generator_settings::calculate_observables)) {
-      {
-         std::ostringstream block;
-         block << "Block FlexibleSUSYLowEnergy Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
-               << FORMAT_ELEMENT(1, (OBSERVABLES.a_muon), "Delta(g-2)_muon/2 FlexibleSUSY")
-         ;
-         slha_io.set_block(block);
-      }
-   }
 
 }
 
@@ -781,6 +779,14 @@ void HGTHDMIIMSSMBC_slha_io::fill(HGTHDMIIMSSMBC_input_parameters& input) const
    slha_io.read_block("IMMINPAR", imminpar_processor);
    slha_io.read_block("IMEXTPAR", imextpar_processor);
 
+   slha_io.read_block("AdIN", input.AdInput);
+   slha_io.read_block("AeIN", input.AeInput);
+   slha_io.read_block("AuIN", input.AuInput);
+   slha_io.read_block("MSDIN", input.msdInput);
+   slha_io.read_block("MSEIN", input.mseInput);
+   slha_io.read_block("MSLIN", input.mslInput);
+   slha_io.read_block("MSQIN", input.msqInput);
+   slha_io.read_block("MSUIN", input.msuInput);
 
 }
 
@@ -874,6 +880,17 @@ void HGTHDMIIMSSMBC_slha_io::fill(Spectrum_generator_settings& settings) const
 
 /**
  * Fill struct of spectrum generator settings from SLHA object
+ * (LToLConversion block)
+ *
+ * @param settings struct of spectrum generator settings to be filled
+ */
+void HGTHDMIIMSSMBC_slha_io::fill(LToLConversion_settings& settings) const
+{
+   slha_io.fill(settings);
+}
+
+/**
+ * Fill struct of spectrum generator settings from SLHA object
  * (FlexibleSUSY block)
  *
  * @param settings struct of spectrum generator settings to be filled
@@ -904,9 +921,6 @@ void HGTHDMIIMSSMBC_slha_io::fill_extpar_tuple(HGTHDMIIMSSMBC_input_parameters& 
    case 4: input.M2Input = value; break;
    case 5: input.M3Input = value; break;
    case 6: input.MAInput = value; break;
-   case 7: input.AtInput = value; break;
-   case 8: input.AbInput = value; break;
-   case 9: input.AtauInput = value; break;
    case 100: input.LambdaLoopOrder = value; break;
    default: WARNING("Unrecognized entry in block EXTPAR: " << key); break;
    }

@@ -37,7 +37,6 @@ public:
    NMSSM_high_scale_constraint() = default;
    NMSSM_high_scale_constraint(NMSSM<Two_scale>*);
    virtual ~NMSSM_high_scale_constraint() = default;
-   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
    virtual void apply() override;
    virtual double get_scale() const override;

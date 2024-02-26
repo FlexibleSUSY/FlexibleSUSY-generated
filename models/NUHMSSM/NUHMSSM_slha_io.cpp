@@ -89,12 +89,6 @@ void NUHMSSM_slha_io::fill(NUHMSSM_slha& model) const
  */
 void NUHMSSM_slha_io::set_extpar(const NUHMSSM_input_parameters& input)
 {
-   std::ostringstream extpar;
-
-   extpar << "Block EXTPAR\n";
-   extpar << FORMAT_ELEMENT(1, input.mHd2In, "mHd2In");
-   extpar << FORMAT_ELEMENT(2, input.mHu2In, "mHu2In");
-   slha_io.set_block(extpar);
 
 }
 
@@ -143,6 +137,8 @@ void NUHMSSM_slha_io::set_minpar(const NUHMSSM_input_parameters& input)
    minpar << FORMAT_ELEMENT(3, input.TanBeta, "TanBeta");
    minpar << FORMAT_ELEMENT(4, input.SignMu, "SignMu");
    minpar << FORMAT_ELEMENT(5, input.Azero, "Azero");
+   minpar << FORMAT_ELEMENT(6, input.MuInput, "MuInput");
+   minpar << FORMAT_ELEMENT(7, input.BInput, "BInput");
    slha_io.set_block(minpar);
 
 }
@@ -184,6 +180,16 @@ void NUHMSSM_slha_io::set_settings(const Spectrum_generator_settings& settings)
 }
 
 /**
+ * Stores the settings (LToLConversion block) in the SLHA object.
+ *
+ * @param settings class of settings
+ */
+void NUHMSSM_slha_io::set_LToLConversion_settings(const LToLConversion_settings& settings)
+{
+   slha_io.set_LToLConversion_settings(settings);
+}
+
+/**
  * Stores the settings (FlexibleSUSY block) in the SLHA object.
  *
  * @param settings class of settings
@@ -191,6 +197,15 @@ void NUHMSSM_slha_io::set_settings(const Spectrum_generator_settings& settings)
 void NUHMSSM_slha_io::set_FlexibleDecay_settings(const FlexibleDecay_settings& settings)
 {
    slha_io.set_FlexibleDecay_settings(settings);
+}
+
+/**
+ * Stores the settings (FlexibleSUSYUnitarity block) in the SLHA object.
+ */
+void NUHMSSM_slha_io::set_unitarity_infinite_s(
+   const flexiblesusy::Spectrum_generator_settings& spectrum_generator_settings, UnitarityInfiniteS const& unitarity)
+{
+   slha_io.set_unitarity_infinite_s(spectrum_generator_settings, unitarity);
 }
 
 /**
@@ -562,28 +577,6 @@ void NUHMSSM_slha_io::set_dcinfo(
 }
 
 /**
- * Sort decays of every particle according to their width
- *
- */
-std::vector<Decay> sort_decays_list(const Decays_list& decays_list) {
-   std::vector<Decay> decays_list_as_vector;
-   decays_list_as_vector.reserve(decays_list.size());
-   for (const auto& el : decays_list) {
-      decays_list_as_vector.push_back(el.second);
-   }
-
-   std::sort(
-      decays_list_as_vector.begin(),
-      decays_list_as_vector.end(),
-      [](const auto& d1, const auto& d2) {
-         return d1.get_width() > d2.get_width();
-      }
-   );
-
-   return decays_list_as_vector;
-}
-
-/**
  * Stores the branching ratios for a given particle in the SLHA
  * object.
  *
@@ -604,7 +597,7 @@ void NUHMSSM_slha_io::set_decay_block(const Decays_list& decays_list, FlexibleDe
          << FORMAT_TOTAL_WIDTH(pdg, width, name + " decays");
 
    if (!is_zero(width, 1e-100)) {
-      constexpr double NEGATIVE_BR_TOLERANCE = 1e-11;
+      static constexpr double NEGATIVE_BR_TOLERANCE = 1e-11;
       const double MIN_BR_TO_PRINT = flexibledecay_settings.get(FlexibleDecay_settings::min_br_to_print);
       std::vector<Decay> sorted_decays_list = sort_decays_list(decays_list);
       for (const auto& channel : sorted_decays_list) {
@@ -631,6 +624,11 @@ void NUHMSSM_slha_io::set_decay_block(const Decays_list& decays_list, FlexibleDe
    }
 
    slha_io.set_block(decay);
+}
+
+void NUHMSSM_slha_io::set_effectivecouplings_block(const std::vector<std::tuple<int, int, int, double, std::string>>& effCouplings)
+{
+   slha_io.set_effectivecouplings_block(effCouplings);
 }
 
 
@@ -681,14 +679,87 @@ void NUHMSSM_slha_io::set_extra(
       slha_io.set_block(block);
    }
 
-   if (spectrum_generator_settings.get(Spectrum_generator_settings::calculate_observables)) {
-      {
-         std::ostringstream block;
-         block << "Block FlexibleSUSYLowEnergy Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
-               << FORMAT_ELEMENT(1, (OBSERVABLES.a_muon), "Delta(g-2)_muon/2 FlexibleSUSY")
-         ;
-         slha_io.set_block(block);
-      }
+   {
+      std::ostringstream block;
+      block << "Block FlexibleSUSYOutput Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(0, (SCALES(HighScale)), "HighScale")
+            << FORMAT_ELEMENT(1, (SCALES(SUSYScale)), "SUSYScale")
+            << FORMAT_ELEMENT(2, (SCALES(LowScale)), "LowScale")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block ALPHA Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_NUMBER((ArcSin(Pole(ZH(1,1)))), "ArcSin(Pole(ZH(2,2)))")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block HMIX Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(1, (MODELPARAMETER(Mu)), "Mu")
+            << FORMAT_ELEMENT(2, (MODELPARAMETER(vu)/MODELPARAMETER(vd)), "vu/vd")
+            << FORMAT_ELEMENT(3, (Sqrt(Sqr(MODELPARAMETER(vd)) + Sqr(MODELPARAMETER(vu)))), "Sqrt(Sqr(vd) + Sqr(vu))")
+            << FORMAT_ELEMENT(4, (Sqr(MODELPARAMETER(MAh)(1))), "Sqr(MAh(2))")
+            << FORMAT_ELEMENT(101, (MODELPARAMETER(BMu)), "BMu")
+            << FORMAT_ELEMENT(102, (MODELPARAMETER(vd)), "vd")
+            << FORMAT_ELEMENT(103, (MODELPARAMETER(vu)), "vu")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block Au Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_MIXING_MATRIX(1, 1, (MODELPARAMETER(TYu)(0,0)/MODELPARAMETER(Yu)(0,0)), "TYu(1,1)/Yu(1,1)")
+            << FORMAT_MIXING_MATRIX(2, 2, (MODELPARAMETER(TYu)(1,1)/MODELPARAMETER(Yu)(1,1)), "TYu(2,2)/Yu(2,2)")
+            << FORMAT_MIXING_MATRIX(3, 3, (MODELPARAMETER(TYu)(2,2)/MODELPARAMETER(Yu)(2,2)), "TYu(3,3)/Yu(3,3)")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block Ad Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_MIXING_MATRIX(1, 1, (MODELPARAMETER(TYd)(0,0)/MODELPARAMETER(Yd)(0,0)), "TYd(1,1)/Yd(1,1)")
+            << FORMAT_MIXING_MATRIX(2, 2, (MODELPARAMETER(TYd)(1,1)/MODELPARAMETER(Yd)(1,1)), "TYd(2,2)/Yd(2,2)")
+            << FORMAT_MIXING_MATRIX(3, 3, (MODELPARAMETER(TYd)(2,2)/MODELPARAMETER(Yd)(2,2)), "TYd(3,3)/Yd(3,3)")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block Ae Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_MIXING_MATRIX(1, 1, (MODELPARAMETER(TYe)(0,0)/MODELPARAMETER(Ye)(0,0)), "TYe(1,1)/Ye(1,1)")
+            << FORMAT_MIXING_MATRIX(2, 2, (MODELPARAMETER(TYe)(1,1)/MODELPARAMETER(Ye)(1,1)), "TYe(2,2)/Ye(2,2)")
+            << FORMAT_MIXING_MATRIX(3, 3, (MODELPARAMETER(TYe)(2,2)/MODELPARAMETER(Ye)(2,2)), "TYe(3,3)/Ye(3,3)")
+      ;
+      slha_io.set_block(block);
+   }
+   {
+      std::ostringstream block;
+      block << "Block MSOFT Q= " << FORMAT_SCALE(model.get_scale()) << '\n'
+            << FORMAT_ELEMENT(1, (MODELPARAMETER(MassB)), "MassB")
+            << FORMAT_ELEMENT(2, (MODELPARAMETER(MassWB)), "MassWB")
+            << FORMAT_ELEMENT(3, (MODELPARAMETER(MassG)), "MassG")
+            << FORMAT_ELEMENT(21, (MODELPARAMETER(mHd2)), "mHd2")
+            << FORMAT_ELEMENT(22, (MODELPARAMETER(mHu2)), "mHu2")
+            << FORMAT_ELEMENT(31, (SignedAbsSqrt(MODELPARAMETER(ml2)(0,0))), "SignedAbsSqrt(ml2(1,1))")
+            << FORMAT_ELEMENT(32, (SignedAbsSqrt(MODELPARAMETER(ml2)(1,1))), "SignedAbsSqrt(ml2(2,2))")
+            << FORMAT_ELEMENT(33, (SignedAbsSqrt(MODELPARAMETER(ml2)(2,2))), "SignedAbsSqrt(ml2(3,3))")
+            << FORMAT_ELEMENT(34, (SignedAbsSqrt(MODELPARAMETER(me2)(0,0))), "SignedAbsSqrt(me2(1,1))")
+            << FORMAT_ELEMENT(35, (SignedAbsSqrt(MODELPARAMETER(me2)(1,1))), "SignedAbsSqrt(me2(2,2))")
+            << FORMAT_ELEMENT(36, (SignedAbsSqrt(MODELPARAMETER(me2)(2,2))), "SignedAbsSqrt(me2(3,3))")
+            << FORMAT_ELEMENT(41, (SignedAbsSqrt(MODELPARAMETER(mq2)(0,0))), "SignedAbsSqrt(mq2(1,1))")
+            << FORMAT_ELEMENT(42, (SignedAbsSqrt(MODELPARAMETER(mq2)(1,1))), "SignedAbsSqrt(mq2(2,2))")
+            << FORMAT_ELEMENT(43, (SignedAbsSqrt(MODELPARAMETER(mq2)(2,2))), "SignedAbsSqrt(mq2(3,3))")
+            << FORMAT_ELEMENT(44, (SignedAbsSqrt(MODELPARAMETER(mu2)(0,0))), "SignedAbsSqrt(mu2(1,1))")
+            << FORMAT_ELEMENT(45, (SignedAbsSqrt(MODELPARAMETER(mu2)(1,1))), "SignedAbsSqrt(mu2(2,2))")
+            << FORMAT_ELEMENT(46, (SignedAbsSqrt(MODELPARAMETER(mu2)(2,2))), "SignedAbsSqrt(mu2(3,3))")
+            << FORMAT_ELEMENT(47, (SignedAbsSqrt(MODELPARAMETER(md2)(0,0))), "SignedAbsSqrt(md2(1,1))")
+            << FORMAT_ELEMENT(48, (SignedAbsSqrt(MODELPARAMETER(md2)(1,1))), "SignedAbsSqrt(md2(2,2))")
+            << FORMAT_ELEMENT(49, (SignedAbsSqrt(MODELPARAMETER(md2)(2,2))), "SignedAbsSqrt(md2(3,3))")
+      ;
+      slha_io.set_block(block);
    }
 
 }
@@ -914,6 +985,17 @@ void NUHMSSM_slha_io::fill(Spectrum_generator_settings& settings) const
 
 /**
  * Fill struct of spectrum generator settings from SLHA object
+ * (LToLConversion block)
+ *
+ * @param settings struct of spectrum generator settings to be filled
+ */
+void NUHMSSM_slha_io::fill(LToLConversion_settings& settings) const
+{
+   slha_io.fill(settings);
+}
+
+/**
+ * Fill struct of spectrum generator settings from SLHA object
  * (FlexibleSUSY block)
  *
  * @param settings struct of spectrum generator settings to be filled
@@ -932,6 +1014,8 @@ void NUHMSSM_slha_io::fill_minpar_tuple(NUHMSSM_input_parameters& input,
    case 3: input.TanBeta = value; break;
    case 4: input.SignMu = value; break;
    case 5: input.Azero = value; break;
+   case 6: input.MuInput = value; break;
+   case 7: input.BInput = value; break;
    default: WARNING("Unrecognized entry in block MINPAR: " << key); break;
    }
 
@@ -941,8 +1025,6 @@ void NUHMSSM_slha_io::fill_extpar_tuple(NUHMSSM_input_parameters& input,
                                                 int key, double value)
 {
    switch (key) {
-   case 1: input.mHd2In = value; break;
-   case 2: input.mHu2In = value; break;
    default: WARNING("Unrecognized entry in block EXTPAR: " << key); break;
    }
 

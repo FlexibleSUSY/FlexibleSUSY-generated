@@ -38,7 +38,6 @@ public:
    CMSSM_susy_scale_constraint() = default;
    CMSSM_susy_scale_constraint(CMSSM<Two_scale>*, const softsusy::QedQcd&);
    virtual ~CMSSM_susy_scale_constraint() = default;
-   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
    virtual void apply() override;
    virtual double get_scale() const override;

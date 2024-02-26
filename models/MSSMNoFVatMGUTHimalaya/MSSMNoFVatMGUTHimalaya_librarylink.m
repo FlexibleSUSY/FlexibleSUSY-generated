@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.7.1"];
+Print["FlexibleSUSY 2.8.0"];
 Print["MSSMNoFVatMGUTHimalaya"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -21,11 +21,13 @@ FSMSSMNoFVatMGUTHimalayaSetLib = LibraryFunctionLoad[libMSSMNoFVatMGUTHimalaya, 
 FSMSSMNoFVatMGUTHimalayaCalculateSpectrum = LibraryFunctionLoad[libMSSMNoFVatMGUTHimalaya, "FSMSSMNoFVatMGUTHimalayaCalculateSpectrum", LinkObject, LinkObject];
 FSMSSMNoFVatMGUTHimalayaCalculateObservables = LibraryFunctionLoad[libMSSMNoFVatMGUTHimalaya, "FSMSSMNoFVatMGUTHimalayaCalculateObservables", LinkObject, LinkObject];
 
+
 FSMSSMNoFVatMGUTHimalayaCalculateSpectrum::error = "`1`";
 FSMSSMNoFVatMGUTHimalayaCalculateSpectrum::warning = "`1`";
 
 FSMSSMNoFVatMGUTHimalayaCalculateObservables::error = "`1`";
 FSMSSMNoFVatMGUTHimalayaCalculateObservables::warning = "`1`";
+
 
 FSMSSMNoFVatMGUTHimalaya::info = "`1`";
 FSMSSMNoFVatMGUTHimalaya::nonum = "Error: `1` is not a numeric input value!";
@@ -66,6 +68,7 @@ fsDefaultSettings = {
       higgs3loopCorrectionAtAtAt -> 1,   (* FlexibleSUSY[29] *)
       higgs4loopCorrectionAtAsAsAs -> 1, (* FlexibleSUSY[30] *)
       loopLibrary -> 0,                  (* FlexibleSUSY[31] *)
+      calculateAMM -> 2.0,               (* FlexibleSUSY[32] *)
       parameterOutputScale -> 0          (* MODSEL[12] *)
 };
 
@@ -181,6 +184,7 @@ FSMSSMNoFVatMGUTHimalayaOpenHandle[OptionsPattern[]] :=
             OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[higgs4loopCorrectionAtAsAsAs],
             OptionValue[loopLibrary],
+            OptionValue[calculateAMM],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)
@@ -293,6 +297,7 @@ FSMSSMNoFVatMGUTHimalayaSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[higgs4loopCorrectionAtAsAsAs],
             OptionValue[loopLibrary],
+            OptionValue[calculateAMM],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)

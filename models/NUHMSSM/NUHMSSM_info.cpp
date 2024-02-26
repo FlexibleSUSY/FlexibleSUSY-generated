@@ -121,7 +121,7 @@ namespace NUHMSSM_info {
       "ZZ(0,1)", "ZZ(1,0)", "ZZ(1,1)"};
 
    const std::array<std::string, NUMBER_OF_INPUT_PARAMETERS> input_parameter_names
-       = {"m0", "m12", "TanBeta", "Sign(Mu)", "Azero", "mHd2In", "mHu2In"};
+       = {"m0", "m12", "TanBeta", "Sign(Mu)", "Azero", "MuInput", "BInput"};
 
    const std::array<std::string, NUMBER_OF_EXTRA_PARAMETERS> extra_parameter_names
        = {};
@@ -175,16 +175,16 @@ int get_pdg_code_for_particle(Particles p, int index)
    default: throw OutOfBoundsError("invalid particle " + std::to_string(p));
    }
 
-   if (index < 0 || index >= pdg_codes.size()) {
+   if (index < 0 || std::abs(index) >= pdg_codes.size()) {
       throw OutOfBoundsError("index " + std::to_string(index) + " out of bounds");
    }
 
    return pdg_codes[index];
 }
 
-std::pair<std::string, boost::optional<unsigned int>> get_multiplet_and_index_from_pdg(int pdg)
+std::pair<std::string, std::optional<unsigned int>> get_multiplet_and_index_from_pdg(int pdg)
 {
-   std::pair<std::string, boost::optional<unsigned int>> name;
+   std::pair<std::string, std::optional<unsigned int>> name;
 
    switch (pdg) {
 
@@ -282,8 +282,8 @@ std::pair<std::string, boost::optional<unsigned int>> get_multiplet_and_index_fr
 
 std::string get_particle_name_from_pdg(int pdg)
 {
-   std::pair<std::string, boost::optional<unsigned int>> const pair = get_multiplet_and_index_from_pdg(pdg);
-   return pair.first + (pair.second ? "(" + std::to_string(pair.second.get()) + ")" : "");
+   std::pair<std::string, std::optional<unsigned int>> const pair = get_multiplet_and_index_from_pdg(pdg);
+   return pair.first + (pair.second.has_value() ? "(" + std::to_string(pair.second.value()) + ")" : "");
 }
 
 void print(std::ostream& ostr)

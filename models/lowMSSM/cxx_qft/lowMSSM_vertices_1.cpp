@@ -20,7 +20,7 @@
 /**
  * @file cxx_qft/lowMSSM_vertices.cpp
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #include "lowMSSM_context_base.hpp"
@@ -35,11 +35,9 @@
 #define DERIVEDPARAMETER(p) context.model.p()
 #define PHASE(p) context.model.get_##p()
 
-namespace flexiblesusy {
-namespace lowMSSM_cxx_diagrams {
-namespace detail {
+namespace flexiblesusy::lowMSSM_cxx_diagrams::detail {
 
-ChiralVertex VertexImpl<fields::Ah, typename fields::bar<fields::Cha>::type, fields::Cha>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<lowMSSM_cxx_diagrams::fields::Ah, typename lowMSSM_cxx_diagrams::fields::bar<lowMSSM_cxx_diagrams::fields::Cha>::type, lowMSSM_cxx_diagrams::fields::Cha>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt3 = indices[0];
@@ -57,7 +55,7 @@ ChiralVertex VertexImpl<fields::Ah, typename fields::bar<fields::Cha>::type, fie
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::Ah, typename fields::bar<fields::Fd>::type, fields::Fd>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<lowMSSM_cxx_diagrams::fields::Ah, typename lowMSSM_cxx_diagrams::fields::bar<lowMSSM_cxx_diagrams::fields::Fd>::type, lowMSSM_cxx_diagrams::fields::Fd>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt3 = indices[0];
@@ -75,7 +73,7 @@ ChiralVertex VertexImpl<fields::Ah, typename fields::bar<fields::Fd>::type, fiel
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::Ah, typename fields::bar<fields::Fe>::type, fields::Fe>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<lowMSSM_cxx_diagrams::fields::Ah, typename lowMSSM_cxx_diagrams::fields::bar<lowMSSM_cxx_diagrams::fields::Fe>::type, lowMSSM_cxx_diagrams::fields::Fe>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt3 = indices[0];
@@ -93,7 +91,7 @@ ChiralVertex VertexImpl<fields::Ah, typename fields::bar<fields::Fe>::type, fiel
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::Ah, typename fields::bar<fields::Fu>::type, fields::Fu>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<lowMSSM_cxx_diagrams::fields::Ah, typename lowMSSM_cxx_diagrams::fields::bar<lowMSSM_cxx_diagrams::fields::Fu>::type, lowMSSM_cxx_diagrams::fields::Fu>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt3 = indices[0];
@@ -111,7 +109,7 @@ ChiralVertex VertexImpl<fields::Ah, typename fields::bar<fields::Fu>::type, fiel
    return {left, right};
 }
 
-ScalarVertex VertexImpl<fields::Ah, typename fields::conj<fields::Hpm>::type, fields::Hpm>::evaluate(
+cxx_diagrams::ScalarVertex VertexImpl<lowMSSM_cxx_diagrams::fields::Ah, typename lowMSSM_cxx_diagrams::fields::conj<lowMSSM_cxx_diagrams::fields::Hpm>::type, lowMSSM_cxx_diagrams::fields::Hpm>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -128,7 +126,7 @@ ScalarVertex VertexImpl<fields::Ah, typename fields::conj<fields::Hpm>::type, fi
    return {result};
 }
 
-ScalarVertex VertexImpl<fields::Ah, typename fields::conj<fields::Sd>::type, fields::Sd>::evaluate(
+cxx_diagrams::ScalarVertex VertexImpl<lowMSSM_cxx_diagrams::fields::Ah, typename lowMSSM_cxx_diagrams::fields::conj<lowMSSM_cxx_diagrams::fields::Sd>::type, lowMSSM_cxx_diagrams::fields::Sd>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -145,7 +143,7 @@ ScalarVertex VertexImpl<fields::Ah, typename fields::conj<fields::Sd>::type, fie
    return {result};
 }
 
-ScalarVertex VertexImpl<fields::Ah, typename fields::conj<fields::Se>::type, fields::Se>::evaluate(
+cxx_diagrams::ScalarVertex VertexImpl<lowMSSM_cxx_diagrams::fields::Ah, typename lowMSSM_cxx_diagrams::fields::conj<lowMSSM_cxx_diagrams::fields::Se>::type, lowMSSM_cxx_diagrams::fields::Se>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -162,7 +160,7 @@ ScalarVertex VertexImpl<fields::Ah, typename fields::conj<fields::Se>::type, fie
    return {result};
 }
 
-ScalarVertex VertexImpl<fields::Ah, typename fields::conj<fields::Su>::type, fields::Su>::evaluate(
+cxx_diagrams::ScalarVertex VertexImpl<lowMSSM_cxx_diagrams::fields::Ah, typename lowMSSM_cxx_diagrams::fields::conj<lowMSSM_cxx_diagrams::fields::Su>::type, lowMSSM_cxx_diagrams::fields::Su>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -179,7 +177,7 @@ ScalarVertex VertexImpl<fields::Ah, typename fields::conj<fields::Su>::type, fie
    return {result};
 }
 
-ChiralVertex VertexImpl<fields::Chi, typename fields::conj<fields::Se>::type, fields::Fe>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<lowMSSM_cxx_diagrams::fields::Chi, typename lowMSSM_cxx_diagrams::fields::conj<lowMSSM_cxx_diagrams::fields::Se>::type, lowMSSM_cxx_diagrams::fields::Fe>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -200,7 +198,7 @@ ChiralVertex VertexImpl<fields::Chi, typename fields::conj<fields::Se>::type, fi
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::Fe, typename fields::bar<fields::Fe>::type, fields::VP>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<lowMSSM_cxx_diagrams::fields::Fe, typename lowMSSM_cxx_diagrams::fields::bar<lowMSSM_cxx_diagrams::fields::Fe>::type, lowMSSM_cxx_diagrams::fields::VP>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt2 = indices[0];
@@ -216,7 +214,7 @@ ChiralVertex VertexImpl<fields::Fe, typename fields::bar<fields::Fe>::type, fiel
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::Fe, typename fields::bar<fields::Fe>::type, fields::VZ>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<lowMSSM_cxx_diagrams::fields::Fe, typename lowMSSM_cxx_diagrams::fields::bar<lowMSSM_cxx_diagrams::fields::Fe>::type, lowMSSM_cxx_diagrams::fields::VZ>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt2 = indices[0];
@@ -232,7 +230,7 @@ ChiralVertex VertexImpl<fields::Fe, typename fields::bar<fields::Fe>::type, fiel
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::hh, typename fields::bar<fields::Cha>::type, fields::Cha>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<lowMSSM_cxx_diagrams::fields::hh, typename lowMSSM_cxx_diagrams::fields::bar<lowMSSM_cxx_diagrams::fields::Cha>::type, lowMSSM_cxx_diagrams::fields::Cha>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt3 = indices[0];
@@ -250,7 +248,7 @@ ChiralVertex VertexImpl<fields::hh, typename fields::bar<fields::Cha>::type, fie
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::hh, typename fields::bar<fields::Fd>::type, fields::Fd>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<lowMSSM_cxx_diagrams::fields::hh, typename lowMSSM_cxx_diagrams::fields::bar<lowMSSM_cxx_diagrams::fields::Fd>::type, lowMSSM_cxx_diagrams::fields::Fd>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt3 = indices[0];
@@ -268,7 +266,7 @@ ChiralVertex VertexImpl<fields::hh, typename fields::bar<fields::Fd>::type, fiel
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::hh, typename fields::bar<fields::Fe>::type, fields::Fe>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<lowMSSM_cxx_diagrams::fields::hh, typename lowMSSM_cxx_diagrams::fields::bar<lowMSSM_cxx_diagrams::fields::Fe>::type, lowMSSM_cxx_diagrams::fields::Fe>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt3 = indices[0];
@@ -286,7 +284,7 @@ ChiralVertex VertexImpl<fields::hh, typename fields::bar<fields::Fe>::type, fiel
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::hh, typename fields::bar<fields::Fu>::type, fields::Fu>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<lowMSSM_cxx_diagrams::fields::hh, typename lowMSSM_cxx_diagrams::fields::bar<lowMSSM_cxx_diagrams::fields::Fu>::type, lowMSSM_cxx_diagrams::fields::Fu>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt3 = indices[0];
@@ -304,7 +302,7 @@ ChiralVertex VertexImpl<fields::hh, typename fields::bar<fields::Fu>::type, fiel
    return {left, right};
 }
 
-ScalarVertex VertexImpl<fields::hh, typename fields::conj<fields::Hpm>::type, fields::Hpm>::evaluate(
+cxx_diagrams::ScalarVertex VertexImpl<lowMSSM_cxx_diagrams::fields::hh, typename lowMSSM_cxx_diagrams::fields::conj<lowMSSM_cxx_diagrams::fields::Hpm>::type, lowMSSM_cxx_diagrams::fields::Hpm>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -322,7 +320,7 @@ ScalarVertex VertexImpl<fields::hh, typename fields::conj<fields::Hpm>::type, fi
    return {result};
 }
 
-ScalarVertex VertexImpl<fields::hh, typename fields::conj<fields::Sd>::type, fields::Sd>::evaluate(
+cxx_diagrams::ScalarVertex VertexImpl<lowMSSM_cxx_diagrams::fields::hh, typename lowMSSM_cxx_diagrams::fields::conj<lowMSSM_cxx_diagrams::fields::Sd>::type, lowMSSM_cxx_diagrams::fields::Sd>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -343,7 +341,7 @@ ScalarVertex VertexImpl<fields::hh, typename fields::conj<fields::Sd>::type, fie
    return {result};
 }
 
-ScalarVertex VertexImpl<fields::hh, typename fields::conj<fields::Se>::type, fields::Se>::evaluate(
+cxx_diagrams::ScalarVertex VertexImpl<lowMSSM_cxx_diagrams::fields::hh, typename lowMSSM_cxx_diagrams::fields::conj<lowMSSM_cxx_diagrams::fields::Se>::type, lowMSSM_cxx_diagrams::fields::Se>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -364,7 +362,7 @@ ScalarVertex VertexImpl<fields::hh, typename fields::conj<fields::Se>::type, fie
    return {result};
 }
 
-ScalarVertex VertexImpl<fields::hh, typename fields::conj<fields::Su>::type, fields::Su>::evaluate(
+cxx_diagrams::ScalarVertex VertexImpl<lowMSSM_cxx_diagrams::fields::hh, typename lowMSSM_cxx_diagrams::fields::conj<lowMSSM_cxx_diagrams::fields::Su>::type, lowMSSM_cxx_diagrams::fields::Su>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -385,7 +383,7 @@ ScalarVertex VertexImpl<fields::hh, typename fields::conj<fields::Su>::type, fie
    return {result};
 }
 
-InverseMetricVertex VertexImpl<fields::hh, typename fields::conj<fields::VWm>::type, fields::VWm>::evaluate(
+cxx_diagrams::InverseMetricVertex VertexImpl<lowMSSM_cxx_diagrams::fields::hh, typename lowMSSM_cxx_diagrams::fields::conj<lowMSSM_cxx_diagrams::fields::VWm>::type, lowMSSM_cxx_diagrams::fields::VWm>::evaluate(
    const std::array<int, 1>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -399,7 +397,7 @@ InverseMetricVertex VertexImpl<fields::hh, typename fields::conj<fields::VWm>::t
    return {result};
 }
 
-ChiralVertex VertexImpl<fields::VP, fields::Cha, typename fields::bar<fields::Cha>::type>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<lowMSSM_cxx_diagrams::fields::VP, lowMSSM_cxx_diagrams::fields::Cha, typename lowMSSM_cxx_diagrams::fields::bar<lowMSSM_cxx_diagrams::fields::Cha>::type>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt2 = indices[0];
@@ -417,7 +415,7 @@ ChiralVertex VertexImpl<fields::VP, fields::Cha, typename fields::bar<fields::Ch
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::VP, fields::Fd, typename fields::bar<fields::Fd>::type>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<lowMSSM_cxx_diagrams::fields::VP, lowMSSM_cxx_diagrams::fields::Fd, typename lowMSSM_cxx_diagrams::fields::bar<lowMSSM_cxx_diagrams::fields::Fd>::type>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt2 = indices[0];
@@ -433,7 +431,7 @@ ChiralVertex VertexImpl<fields::VP, fields::Fd, typename fields::bar<fields::Fd>
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::VP, fields::Fe, typename fields::bar<fields::Fe>::type>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<lowMSSM_cxx_diagrams::fields::VP, lowMSSM_cxx_diagrams::fields::Fe, typename lowMSSM_cxx_diagrams::fields::bar<lowMSSM_cxx_diagrams::fields::Fe>::type>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt2 = indices[0];
@@ -449,7 +447,7 @@ ChiralVertex VertexImpl<fields::VP, fields::Fe, typename fields::bar<fields::Fe>
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::VP, fields::Fu, typename fields::bar<fields::Fu>::type>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<lowMSSM_cxx_diagrams::fields::VP, lowMSSM_cxx_diagrams::fields::Fu, typename lowMSSM_cxx_diagrams::fields::bar<lowMSSM_cxx_diagrams::fields::Fu>::type>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt2 = indices[0];
@@ -465,7 +463,7 @@ ChiralVertex VertexImpl<fields::VP, fields::Fu, typename fields::bar<fields::Fu>
    return {left, right};
 }
 
-MomentumDifferenceVertex VertexImpl<fields::VP, fields::Hpm, typename fields::conj<fields::Hpm>::type>::evaluate(
+cxx_diagrams::MomentumDifferenceVertex VertexImpl<lowMSSM_cxx_diagrams::fields::VP, lowMSSM_cxx_diagrams::fields::Hpm, typename lowMSSM_cxx_diagrams::fields::conj<lowMSSM_cxx_diagrams::fields::Hpm>::type>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    int minuend_index = 1;
@@ -483,7 +481,7 @@ MomentumDifferenceVertex VertexImpl<fields::VP, fields::Hpm, typename fields::co
    return {result, minuend_index, subtrahend_index};
 }
 
-MomentumDifferenceVertex VertexImpl<fields::VP, fields::Sd, typename fields::conj<fields::Sd>::type>::evaluate(
+cxx_diagrams::MomentumDifferenceVertex VertexImpl<lowMSSM_cxx_diagrams::fields::VP, lowMSSM_cxx_diagrams::fields::Sd, typename lowMSSM_cxx_diagrams::fields::conj<lowMSSM_cxx_diagrams::fields::Sd>::type>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    int minuend_index = 1;
@@ -501,7 +499,7 @@ MomentumDifferenceVertex VertexImpl<fields::VP, fields::Sd, typename fields::con
    return {result, minuend_index, subtrahend_index};
 }
 
-MomentumDifferenceVertex VertexImpl<fields::VP, fields::Se, typename fields::conj<fields::Se>::type>::evaluate(
+cxx_diagrams::MomentumDifferenceVertex VertexImpl<lowMSSM_cxx_diagrams::fields::VP, lowMSSM_cxx_diagrams::fields::Se, typename lowMSSM_cxx_diagrams::fields::conj<lowMSSM_cxx_diagrams::fields::Se>::type>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    int minuend_index = 1;
@@ -519,7 +517,7 @@ MomentumDifferenceVertex VertexImpl<fields::VP, fields::Se, typename fields::con
    return {result, minuend_index, subtrahend_index};
 }
 
-MomentumDifferenceVertex VertexImpl<fields::VP, fields::Su, typename fields::conj<fields::Su>::type>::evaluate(
+cxx_diagrams::MomentumDifferenceVertex VertexImpl<lowMSSM_cxx_diagrams::fields::VP, lowMSSM_cxx_diagrams::fields::Su, typename lowMSSM_cxx_diagrams::fields::conj<lowMSSM_cxx_diagrams::fields::Su>::type>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    int minuend_index = 1;
@@ -537,7 +535,7 @@ MomentumDifferenceVertex VertexImpl<fields::VP, fields::Su, typename fields::con
    return {result, minuend_index, subtrahend_index};
 }
 
-TripleVectorVertex VertexImpl<fields::VP, fields::VWm, typename fields::conj<fields::VWm>::type>::evaluate(
+cxx_diagrams::TripleVectorVertex VertexImpl<lowMSSM_cxx_diagrams::fields::VP, lowMSSM_cxx_diagrams::fields::VWm, typename lowMSSM_cxx_diagrams::fields::conj<lowMSSM_cxx_diagrams::fields::VWm>::type>::evaluate(
    const std::array<int, 0>& indices, const context_base& context)
 {
    const auto g2 = MODELPARAMETER(g2);
@@ -545,10 +543,26 @@ TripleVectorVertex VertexImpl<fields::VP, fields::VWm, typename fields::conj<fie
 
    const std::complex<double> result = g2*Sin(ThetaW);
 
-   return {result, TripleVectorVertex::odd_permutation{}};
+   return {result, cxx_diagrams::TripleVectorVertex::odd_permutation{}};
 }
 
-ChiralVertex VertexImpl<fields::VZ, fields::Cha, typename fields::bar<fields::Cha>::type>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<lowMSSM_cxx_diagrams::fields::VP, typename lowMSSM_cxx_diagrams::fields::bar<lowMSSM_cxx_diagrams::fields::Fe>::type, lowMSSM_cxx_diagrams::fields::Fe>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   const int gt1 = indices[0];
+   const int gt2 = indices[1];
+   const auto g1 = MODELPARAMETER(g1);
+   const auto g2 = MODELPARAMETER(g2);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+
+   const std::complex<double> left = 0.5*KroneckerDelta(gt1,gt2)*(0.7745966692414834*g1*Cos(ThetaW) + g2*Sin(ThetaW));
+
+   const std::complex<double> right = 0.7745966692414834*g1*Cos(ThetaW)*KroneckerDelta(gt1,gt2);
+
+   return {left, right};
+}
+
+cxx_diagrams::ChiralVertex VertexImpl<lowMSSM_cxx_diagrams::fields::VZ, lowMSSM_cxx_diagrams::fields::Cha, typename lowMSSM_cxx_diagrams::fields::bar<lowMSSM_cxx_diagrams::fields::Cha>::type>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt2 = indices[0];
@@ -566,7 +580,7 @@ ChiralVertex VertexImpl<fields::VZ, fields::Cha, typename fields::bar<fields::Ch
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::VZ, fields::Fd, typename fields::bar<fields::Fd>::type>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<lowMSSM_cxx_diagrams::fields::VZ, lowMSSM_cxx_diagrams::fields::Fd, typename lowMSSM_cxx_diagrams::fields::bar<lowMSSM_cxx_diagrams::fields::Fd>::type>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt2 = indices[0];
@@ -582,7 +596,7 @@ ChiralVertex VertexImpl<fields::VZ, fields::Fd, typename fields::bar<fields::Fd>
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::VZ, fields::Fe, typename fields::bar<fields::Fe>::type>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<lowMSSM_cxx_diagrams::fields::VZ, lowMSSM_cxx_diagrams::fields::Fe, typename lowMSSM_cxx_diagrams::fields::bar<lowMSSM_cxx_diagrams::fields::Fe>::type>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt2 = indices[0];
@@ -598,7 +612,7 @@ ChiralVertex VertexImpl<fields::VZ, fields::Fe, typename fields::bar<fields::Fe>
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::VZ, fields::Fu, typename fields::bar<fields::Fu>::type>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<lowMSSM_cxx_diagrams::fields::VZ, lowMSSM_cxx_diagrams::fields::Fu, typename lowMSSM_cxx_diagrams::fields::bar<lowMSSM_cxx_diagrams::fields::Fu>::type>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt2 = indices[0];
@@ -614,7 +628,23 @@ ChiralVertex VertexImpl<fields::VZ, fields::Fu, typename fields::bar<fields::Fu>
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename fields::bar<fields::Cha>::type, fields::Cha, fields::VP>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<lowMSSM_cxx_diagrams::fields::VZ, typename lowMSSM_cxx_diagrams::fields::bar<lowMSSM_cxx_diagrams::fields::Fe>::type, lowMSSM_cxx_diagrams::fields::Fe>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   const int gt1 = indices[0];
+   const int gt2 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+
+   const std::complex<double> left = 0.5*KroneckerDelta(gt1,gt2)*(g2*Cos(ThetaW) - 0.7745966692414834*g1*Sin(ThetaW));
+
+   const std::complex<double> right = -0.7745966692414834*g1*KroneckerDelta(gt1,gt2)*Sin(ThetaW);
+
+   return {left, right};
+}
+
+cxx_diagrams::ChiralVertex VertexImpl<typename lowMSSM_cxx_diagrams::fields::bar<lowMSSM_cxx_diagrams::fields::Cha>::type, lowMSSM_cxx_diagrams::fields::Cha, lowMSSM_cxx_diagrams::fields::VP>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -632,7 +662,7 @@ ChiralVertex VertexImpl<typename fields::bar<fields::Cha>::type, fields::Cha, fi
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Cha, fields::Sv>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<typename lowMSSM_cxx_diagrams::fields::bar<lowMSSM_cxx_diagrams::fields::Fe>::type, lowMSSM_cxx_diagrams::fields::Cha, lowMSSM_cxx_diagrams::fields::Sv>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -653,7 +683,7 @@ ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Cha, fie
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fe, fields::Ah>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<typename lowMSSM_cxx_diagrams::fields::bar<lowMSSM_cxx_diagrams::fields::Fe>::type, lowMSSM_cxx_diagrams::fields::Fe, lowMSSM_cxx_diagrams::fields::Ah>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -671,7 +701,7 @@ ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fe, fiel
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fe, fields::hh>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<typename lowMSSM_cxx_diagrams::fields::bar<lowMSSM_cxx_diagrams::fields::Fe>::type, lowMSSM_cxx_diagrams::fields::Fe, lowMSSM_cxx_diagrams::fields::hh>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -689,7 +719,7 @@ ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fe, fiel
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fe, fields::VP>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<typename lowMSSM_cxx_diagrams::fields::bar<lowMSSM_cxx_diagrams::fields::Fe>::type, lowMSSM_cxx_diagrams::fields::Fe, lowMSSM_cxx_diagrams::fields::VP>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -705,7 +735,23 @@ ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fe, fiel
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Hpm, fields::Fv>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<typename lowMSSM_cxx_diagrams::fields::bar<lowMSSM_cxx_diagrams::fields::Fe>::type, lowMSSM_cxx_diagrams::fields::Fe, lowMSSM_cxx_diagrams::fields::VZ>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   const int gt1 = indices[0];
+   const int gt2 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+
+   const std::complex<double> left = 0.5*KroneckerDelta(gt1,gt2)*(g2*Cos(ThetaW) - 0.7745966692414834*g1*Sin(ThetaW));
+
+   const std::complex<double> right = -0.7745966692414834*g1*KroneckerDelta(gt1,gt2)*Sin(ThetaW);
+
+   return {left, right};
+}
+
+cxx_diagrams::ChiralVertex VertexImpl<typename lowMSSM_cxx_diagrams::fields::bar<lowMSSM_cxx_diagrams::fields::Fe>::type, lowMSSM_cxx_diagrams::fields::Hpm, lowMSSM_cxx_diagrams::fields::Fv>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -722,7 +768,7 @@ ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Hpm, fie
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Se, fields::Chi>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<typename lowMSSM_cxx_diagrams::fields::bar<lowMSSM_cxx_diagrams::fields::Fe>::type, lowMSSM_cxx_diagrams::fields::Se, lowMSSM_cxx_diagrams::fields::Chi>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -743,7 +789,22 @@ ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Se, fiel
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename fields::bar<fields::Fv>::type, typename fields::conj<fields::Hpm>::type, fields::Fe>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<typename lowMSSM_cxx_diagrams::fields::bar<lowMSSM_cxx_diagrams::fields::Fe>::type, lowMSSM_cxx_diagrams::fields::VWm, lowMSSM_cxx_diagrams::fields::Fv>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   const int gt1 = indices[0];
+   const int gt2 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto ZEL = MODELPARAMETER(ZEL);
+
+   const std::complex<double> left = IF(gt2 < 3,-0.7071067811865475*g2*ZEL(gt1,gt2),0);
+
+   const std::complex<double> right = 0;
+
+   return {left, right};
+}
+
+cxx_diagrams::ChiralVertex VertexImpl<typename lowMSSM_cxx_diagrams::fields::bar<lowMSSM_cxx_diagrams::fields::Fv>::type, typename lowMSSM_cxx_diagrams::fields::conj<lowMSSM_cxx_diagrams::fields::Hpm>::type, lowMSSM_cxx_diagrams::fields::Fe>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -760,7 +821,22 @@ ChiralVertex VertexImpl<typename fields::bar<fields::Fv>::type, typename fields:
    return {left, right};
 }
 
-MomentumDifferenceVertex VertexImpl<typename fields::conj<fields::Hpm>::type, fields::Hpm, fields::VP>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<typename lowMSSM_cxx_diagrams::fields::bar<lowMSSM_cxx_diagrams::fields::Fv>::type, typename lowMSSM_cxx_diagrams::fields::conj<lowMSSM_cxx_diagrams::fields::VWm>::type, lowMSSM_cxx_diagrams::fields::Fe>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   const int gt1 = indices[0];
+   const int gt2 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto ZEL = MODELPARAMETER(ZEL);
+
+   const std::complex<double> left = IF(gt1 < 3,-0.7071067811865475*g2*Conj(ZEL(gt2,gt1)),0);
+
+   const std::complex<double> right = 0;
+
+   return {left, right};
+}
+
+cxx_diagrams::MomentumDifferenceVertex VertexImpl<typename lowMSSM_cxx_diagrams::fields::conj<lowMSSM_cxx_diagrams::fields::Hpm>::type, lowMSSM_cxx_diagrams::fields::Hpm, lowMSSM_cxx_diagrams::fields::VP>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    int minuend_index = 1;
@@ -778,7 +854,23 @@ MomentumDifferenceVertex VertexImpl<typename fields::conj<fields::Hpm>::type, fi
    return {result, minuend_index, subtrahend_index};
 }
 
-MomentumDifferenceVertex VertexImpl<typename fields::conj<fields::Se>::type, fields::Se, fields::VP>::evaluate(
+cxx_diagrams::InverseMetricVertex VertexImpl<typename lowMSSM_cxx_diagrams::fields::conj<lowMSSM_cxx_diagrams::fields::Hpm>::type, lowMSSM_cxx_diagrams::fields::VWm, lowMSSM_cxx_diagrams::fields::VP>::evaluate(
+   const std::array<int, 1>& indices, const context_base& context)
+{
+   const int gt1 = indices[0];
+   const auto g1 = MODELPARAMETER(g1);
+   const auto g2 = MODELPARAMETER(g2);
+   const auto vd = MODELPARAMETER(vd);
+   const auto vu = MODELPARAMETER(vu);
+   const auto ZP = MODELPARAMETER(ZP);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+
+   const std::complex<double> result = -0.3872983346207417*g1*g2*Cos(ThetaW)*(vd*ZP(gt1,0) - vu*ZP(gt1,1));
+
+   return {result};
+}
+
+cxx_diagrams::MomentumDifferenceVertex VertexImpl<typename lowMSSM_cxx_diagrams::fields::conj<lowMSSM_cxx_diagrams::fields::Se>::type, lowMSSM_cxx_diagrams::fields::Se, lowMSSM_cxx_diagrams::fields::VP>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    int minuend_index = 1;
@@ -796,7 +888,7 @@ MomentumDifferenceVertex VertexImpl<typename fields::conj<fields::Se>::type, fie
    return {result, minuend_index, subtrahend_index};
 }
 
-ChiralVertex VertexImpl<typename fields::conj<fields::Sv>::type, typename fields::bar<fields::Cha>::type, fields::Fe>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<typename lowMSSM_cxx_diagrams::fields::conj<lowMSSM_cxx_diagrams::fields::Sv>::type, typename lowMSSM_cxx_diagrams::fields::bar<lowMSSM_cxx_diagrams::fields::Cha>::type, lowMSSM_cxx_diagrams::fields::Fe>::evaluate(
    const std::array<int, 3>& indices, const context_base& context)
 {
    const int gt3 = indices[0];
@@ -817,6 +909,31 @@ ChiralVertex VertexImpl<typename fields::conj<fields::Sv>::type, typename fields
    return {left, right};
 }
 
-} // namespace detail
-} // namespace lowMSSM_cxx_diagrams
-} // namespace flexiblesusy
+cxx_diagrams::InverseMetricVertex VertexImpl<typename lowMSSM_cxx_diagrams::fields::conj<lowMSSM_cxx_diagrams::fields::VWm>::type, lowMSSM_cxx_diagrams::fields::Hpm, lowMSSM_cxx_diagrams::fields::VP>::evaluate(
+   const std::array<int, 1>& indices, const context_base& context)
+{
+   const int gt1 = indices[0];
+   const auto g1 = MODELPARAMETER(g1);
+   const auto g2 = MODELPARAMETER(g2);
+   const auto vd = MODELPARAMETER(vd);
+   const auto vu = MODELPARAMETER(vu);
+   const auto ZP = MODELPARAMETER(ZP);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+
+   const std::complex<double> result = -0.3872983346207417*g1*g2*Cos(ThetaW)*(vd*ZP(gt1,0) - vu*ZP(gt1,1));
+
+   return {result};
+}
+
+cxx_diagrams::TripleVectorVertex VertexImpl<typename lowMSSM_cxx_diagrams::fields::conj<lowMSSM_cxx_diagrams::fields::VWm>::type, lowMSSM_cxx_diagrams::fields::VWm, lowMSSM_cxx_diagrams::fields::VP>::evaluate(
+   const std::array<int, 0>& indices, const context_base& context)
+{
+   const auto g2 = MODELPARAMETER(g2);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+
+   const std::complex<double> result = -(g2*Sin(ThetaW));
+
+   return {result, cxx_diagrams::TripleVectorVertex::odd_permutation{}};
+}
+
+} // namespace flexiblesusy::lowMSSM_cxx_diagrams::detail

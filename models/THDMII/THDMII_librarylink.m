@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.7.1"];
+Print["FlexibleSUSY 2.8.0"];
 Print["THDMII"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -20,7 +20,7 @@ FSTHDMIISetLib = LibraryFunctionLoad[libTHDMII, "FSTHDMIISet", {Integer, {Real,1
 
 FSTHDMIICalculateSpectrum = LibraryFunctionLoad[libTHDMII, "FSTHDMIICalculateSpectrum", LinkObject, LinkObject];
 FSTHDMIICalculateObservables = LibraryFunctionLoad[libTHDMII, "FSTHDMIICalculateObservables", LinkObject, LinkObject];
-FSTHDMIICalculateDecays = LibraryFunctionLoad[libTHDMII, "FSTHDMIICalculateDecays", LinkObject, LinkObject];
+
 
 FSTHDMIICalculateSpectrum::error = "`1`";
 FSTHDMIICalculateSpectrum::warning = "`1`";
@@ -28,8 +28,6 @@ FSTHDMIICalculateSpectrum::warning = "`1`";
 FSTHDMIICalculateObservables::error = "`1`";
 FSTHDMIICalculateObservables::warning = "`1`";
 
-FSTHDMIICalculateDecays::error = "`1`";
-FSTHDMIICalculateDecays::warning = "`1`";
 
 FSTHDMII::info = "`1`";
 FSTHDMII::nonum = "Error: `1` is not a numeric input value!";
@@ -70,6 +68,7 @@ fsDefaultSettings = {
       higgs3loopCorrectionAtAtAt -> 1,   (* FlexibleSUSY[29] *)
       higgs4loopCorrectionAtAsAsAs -> 1, (* FlexibleSUSY[30] *)
       loopLibrary -> 0,                  (* FlexibleSUSY[31] *)
+      calculateAMM -> 2.0,               (* FlexibleSUSY[32] *)
       parameterOutputScale -> 0          (* MODSEL[12] *)
 };
 
@@ -105,13 +104,6 @@ fsDefaultSMParameters = {
     Mh -> 125.09
 };
 
-fdDefaultSettings = {
-   minBRtoPrint -> 1*^-5,
-   maxHigherOrderCorrections -> 4,
-   alphaThomson -> 1,
-   offShellVV -> 2
-};
-
 fsTHDMIIDefaultInputParameters = {
    Lambda1IN -> 0,
    Lambda2IN -> 0,
@@ -129,10 +121,10 @@ Options[FSTHDMIIOpenHandle] = {
     Sequence @@ fsDefaultSettings,
     Sequence @@ fsDefaultSMParameters,
     Sequence @@ fsTHDMIIDefaultInputParameters
-   , Sequence @@ fdDefaultSettings
+
 };
 
-FSTHDMIIOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters | fdSettings) -> s_List, r___] :=
+FSTHDMIIOpenHandle[a___, (fsSettings | fsSMParameters | fsModelParameters ) -> s_List, r___] :=
     FSTHDMIIOpenHandle[a, Sequence @@ s, r];
 
 FSTHDMIIOpenHandle[OptionsPattern[]] :=
@@ -170,6 +162,7 @@ FSTHDMIIOpenHandle[OptionsPattern[]] :=
             OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[higgs4loopCorrectionAtAsAsAs],
             OptionValue[loopLibrary],
+            OptionValue[calculateAMM],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)
@@ -215,11 +208,7 @@ FSTHDMIIOpenHandle[OptionsPattern[]] :=
             OptionValue[M122IN],
             OptionValue[TanBeta],
             OptionValue[Qin]
-            ,
-            OptionValue[minBRtoPrint],
-            OptionValue[maxHigherOrderCorrections],
-            OptionValue[alphaThomson],
-            OptionValue[offShellVV]
+
         }
 ];
 
@@ -264,6 +253,7 @@ FSTHDMIISet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[higgs4loopCorrectionAtAsAsAs],
             OptionValue[loopLibrary],
+            OptionValue[calculateAMM],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)
@@ -309,11 +299,7 @@ FSTHDMIISet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[M122IN],
             OptionValue[TanBeta],
             OptionValue[Qin]
-            ,
-            OptionValue[minBRtoPrint],
-            OptionValue[maxHigherOrderCorrections],
-            OptionValue[alphaThomson],
-            OptionValue[offShellVV]
+
         }] /. HoldPattern[OptionValue[param_]] :> param /.
         { p } /.
         FSTHDMIIGetSettings[handle] /.

@@ -38,7 +38,6 @@ public:
    HSSUSY_susy_scale_constraint() = default;
    HSSUSY_susy_scale_constraint(HSSUSY<Two_scale>*, const softsusy::QedQcd&);
    virtual ~HSSUSY_susy_scale_constraint() = default;
-   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
    virtual void apply() override;
    virtual double get_scale() const override;

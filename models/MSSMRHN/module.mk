@@ -54,22 +54,23 @@ MSSMRHN_TARBALL := \
 		$(MODNAME).tar.gz
 
 LIBMSSMRHN_SRC := \
-		$(DIR)/MSSMRHN_a_muon.cpp \
+		$(DIR)/MSSMRHN_amm.cpp \
 		$(DIR)/MSSMRHN_edm.cpp \
 		$(DIR)/MSSMRHN_FFV_form_factors.cpp \
-		$(DIR)/MSSMRHN_f_to_f_conversion.cpp \
-		$(DIR)/MSSMRHN_l_to_lgamma.cpp \
+		$(wildcard $(DIR)/observables/MSSMRHN*.cpp) \
 		$(DIR)/MSSMRHN_b_to_s_gamma.cpp \
 		$(DIR)/MSSMRHN_info.cpp \
 		$(DIR)/MSSMRHN_input_parameters.cpp \
 		$(DIR)/MSSMRHN_mass_eigenstates.cpp \
 		$(DIR)/MSSMRHN_mass_eigenstates_decoupling_scheme.cpp \
 		$(DIR)/MSSMRHN_model_slha.cpp \
+		$(DIR)/MSSMRHN_lepton_amm_wrapper.cpp \
 		$(DIR)/MSSMRHN_observables.cpp \
 		$(DIR)/MSSMRHN_physical.cpp \
 		$(DIR)/MSSMRHN_slha_io.cpp \
 		$(DIR)/MSSMRHN_soft_parameters.cpp \
 		$(DIR)/MSSMRHN_susy_parameters.cpp \
+		$(DIR)/MSSMRHN_unitarity.cpp \
 		$(DIR)/MSSMRHN_utilities.cpp \
 		$(DIR)/MSSMRHN_weinberg_angle.cpp
 
@@ -89,12 +90,11 @@ LLMSSMRHN_MMA  := \
 		$(DIR)/run_MSSMRHN.m
 
 LIBMSSMRHN_HDR := \
-		$(DIR)/MSSMRHN_a_muon.hpp \
+		$(DIR)/MSSMRHN_amm.hpp \
 		$(DIR)/MSSMRHN_convergence_tester.hpp \
 		$(DIR)/MSSMRHN_edm.hpp \
 		$(DIR)/MSSMRHN_FFV_form_factors.hpp \
-		$(DIR)/MSSMRHN_f_to_f_conversion.hpp \
-		$(DIR)/MSSMRHN_l_to_lgamma.hpp \
+		$(wildcard $(DIR)/observables/MSSMRHN*.hpp) \
 		$(DIR)/MSSMRHN_b_to_s_gamma.hpp \
 		$(DIR)/MSSMRHN_ewsb_solver.hpp \
 		$(DIR)/MSSMRHN_ewsb_solver_interface.hpp \
@@ -108,6 +108,7 @@ LIBMSSMRHN_HDR := \
 		$(DIR)/MSSMRHN_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/MSSMRHN_model.hpp \
 		$(DIR)/MSSMRHN_model_slha.hpp \
+		$(DIR)/MSSMRHN_lepton_amm_wrapper.hpp \
 		$(DIR)/MSSMRHN_observables.hpp \
 		$(DIR)/MSSMRHN_physical.hpp \
 		$(DIR)/MSSMRHN_slha_io.hpp \
@@ -116,12 +117,14 @@ LIBMSSMRHN_HDR := \
 		$(DIR)/MSSMRHN_soft_parameters.hpp \
 		$(DIR)/MSSMRHN_susy_parameters.hpp \
 		$(DIR)/MSSMRHN_susy_scale_constraint.hpp \
+		$(DIR)/MSSMRHN_unitarity.hpp \
 		$(DIR)/MSSMRHN_utilities.hpp \
 		$(DIR)/MSSMRHN_weinberg_angle.hpp
 
 LIBMSSMRHN_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/MSSMRHN_qft.hpp \
 		$(DIR)/cxx_qft/MSSMRHN_fields.hpp \
+		$(DIR)/cxx_qft/MSSMRHN_particle_aliases.hpp \
 		$(DIR)/cxx_qft/MSSMRHN_vertices.hpp \
 		$(DIR)/cxx_qft/MSSMRHN_context_base.hpp \
 		$(DIR)/cxx_qft/MSSMRHN_npointfunctions_wilsoncoeffs.hpp
@@ -317,7 +320,7 @@ $(METACODE_STAMP_MSSMRHN):
 endif
 
 $(LIBMSSMRHN_DEP) $(EXEMSSMRHN_DEP) $(LLMSSMRHN_DEP) $(LIBMSSMRHN_OBJ) $(EXEMSSMRHN_OBJ) $(LLMSSMRHN_OBJ) $(LLMSSMRHN_LIB): \
-	CPPFLAGS += $(MODMSSMRHN_SUBMOD_INC) $(MODMSSMRHN_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODMSSMRHN_SUBMOD_INC) $(MODMSSMRHN_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIGGSTOOLSFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBMSSMRHN_DEP) $(EXEMSSMRHN_DEP) $(LLMSSMRHN_DEP) $(LIBMSSMRHN_OBJ) $(EXEMSSMRHN_OBJ) $(LLMSSMRHN_OBJ) $(LLMSSMRHN_LIB): \
@@ -333,11 +336,11 @@ $(LIBMSSMRHN): $(LIBMSSMRHN_OBJ)
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBMSSMRHN) $(MODMSSMRHN_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
 $(LLMSSMRHN_LIB): $(LLMSSMRHN_OBJ) $(LIBMSSMRHN) $(MODMSSMRHN_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
 
 ALLDEP += $(LIBMSSMRHN_DEP) $(EXEMSSMRHN_DEP)
 ALLSRC += $(LIBMSSMRHN_SRC) $(EXEMSSMRHN_SRC)

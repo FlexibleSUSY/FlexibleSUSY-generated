@@ -54,22 +54,23 @@ CE6SSM_TARBALL := \
 		$(MODNAME).tar.gz
 
 LIBCE6SSM_SRC := \
-		$(DIR)/CE6SSM_a_muon.cpp \
+		$(DIR)/CE6SSM_amm.cpp \
 		$(DIR)/CE6SSM_edm.cpp \
 		$(DIR)/CE6SSM_FFV_form_factors.cpp \
-		$(DIR)/CE6SSM_f_to_f_conversion.cpp \
-		$(DIR)/CE6SSM_l_to_lgamma.cpp \
+		$(wildcard $(DIR)/observables/CE6SSM*.cpp) \
 		$(DIR)/CE6SSM_b_to_s_gamma.cpp \
 		$(DIR)/CE6SSM_info.cpp \
 		$(DIR)/CE6SSM_input_parameters.cpp \
 		$(DIR)/CE6SSM_mass_eigenstates.cpp \
 		$(DIR)/CE6SSM_mass_eigenstates_decoupling_scheme.cpp \
 		$(DIR)/CE6SSM_model_slha.cpp \
+		$(DIR)/CE6SSM_lepton_amm_wrapper.cpp \
 		$(DIR)/CE6SSM_observables.cpp \
 		$(DIR)/CE6SSM_physical.cpp \
 		$(DIR)/CE6SSM_slha_io.cpp \
 		$(DIR)/CE6SSM_soft_parameters.cpp \
 		$(DIR)/CE6SSM_susy_parameters.cpp \
+		$(DIR)/CE6SSM_unitarity.cpp \
 		$(DIR)/CE6SSM_utilities.cpp \
 		$(DIR)/CE6SSM_weinberg_angle.cpp
 
@@ -89,12 +90,11 @@ LLCE6SSM_MMA  := \
 		$(DIR)/run_CE6SSM.m
 
 LIBCE6SSM_HDR := \
-		$(DIR)/CE6SSM_a_muon.hpp \
+		$(DIR)/CE6SSM_amm.hpp \
 		$(DIR)/CE6SSM_convergence_tester.hpp \
 		$(DIR)/CE6SSM_edm.hpp \
 		$(DIR)/CE6SSM_FFV_form_factors.hpp \
-		$(DIR)/CE6SSM_f_to_f_conversion.hpp \
-		$(DIR)/CE6SSM_l_to_lgamma.hpp \
+		$(wildcard $(DIR)/observables/CE6SSM*.hpp) \
 		$(DIR)/CE6SSM_b_to_s_gamma.hpp \
 		$(DIR)/CE6SSM_ewsb_solver.hpp \
 		$(DIR)/CE6SSM_ewsb_solver_interface.hpp \
@@ -108,6 +108,7 @@ LIBCE6SSM_HDR := \
 		$(DIR)/CE6SSM_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/CE6SSM_model.hpp \
 		$(DIR)/CE6SSM_model_slha.hpp \
+		$(DIR)/CE6SSM_lepton_amm_wrapper.hpp \
 		$(DIR)/CE6SSM_observables.hpp \
 		$(DIR)/CE6SSM_physical.hpp \
 		$(DIR)/CE6SSM_slha_io.hpp \
@@ -116,12 +117,14 @@ LIBCE6SSM_HDR := \
 		$(DIR)/CE6SSM_soft_parameters.hpp \
 		$(DIR)/CE6SSM_susy_parameters.hpp \
 		$(DIR)/CE6SSM_susy_scale_constraint.hpp \
+		$(DIR)/CE6SSM_unitarity.hpp \
 		$(DIR)/CE6SSM_utilities.hpp \
 		$(DIR)/CE6SSM_weinberg_angle.hpp
 
 LIBCE6SSM_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/CE6SSM_qft.hpp \
 		$(DIR)/cxx_qft/CE6SSM_fields.hpp \
+		$(DIR)/cxx_qft/CE6SSM_particle_aliases.hpp \
 		$(DIR)/cxx_qft/CE6SSM_vertices.hpp \
 		$(DIR)/cxx_qft/CE6SSM_context_base.hpp \
 		$(DIR)/cxx_qft/CE6SSM_npointfunctions_wilsoncoeffs.hpp
@@ -317,7 +320,7 @@ $(METACODE_STAMP_CE6SSM):
 endif
 
 $(LIBCE6SSM_DEP) $(EXECE6SSM_DEP) $(LLCE6SSM_DEP) $(LIBCE6SSM_OBJ) $(EXECE6SSM_OBJ) $(LLCE6SSM_OBJ) $(LLCE6SSM_LIB): \
-	CPPFLAGS += $(MODCE6SSM_SUBMOD_INC) $(MODCE6SSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODCE6SSM_SUBMOD_INC) $(MODCE6SSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIGGSTOOLSFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBCE6SSM_DEP) $(EXECE6SSM_DEP) $(LLCE6SSM_DEP) $(LIBCE6SSM_OBJ) $(EXECE6SSM_OBJ) $(LLCE6SSM_OBJ) $(LLCE6SSM_LIB): \
@@ -333,11 +336,11 @@ $(LIBCE6SSM): $(LIBCE6SSM_OBJ)
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBCE6SSM) $(MODCE6SSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
 $(LLCE6SSM_LIB): $(LLCE6SSM_OBJ) $(LIBCE6SSM) $(MODCE6SSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
 
 ALLDEP += $(LIBCE6SSM_DEP) $(EXECE6SSM_DEP)
 ALLSRC += $(LIBCE6SSM_SRC) $(EXECE6SSM_SRC)

@@ -25,6 +25,7 @@
 #include "HSSUSY_spectrum_generator.hpp"
 #include "HSSUSY_utilities.hpp"
 
+#include "HSSUSY_unitarity.hpp"
 
 #ifdef ENABLE_TWO_SCALE_SOLVER
 #include "HSSUSY_two_scale_spectrum_generator.hpp"
@@ -63,11 +64,13 @@ int run_solver(flexiblesusy::HSSUSY_slha_io& slha_io,
    Physical_input physical_input; // extra non-SLHA physical input
    softsusy::QedQcd qedqcd;
    HSSUSY_input_parameters input;
+   
 
    try {
       slha_io.fill(qedqcd);
       slha_io.fill(input);
       slha_io.fill(physical_input);
+      
    } catch (const Error& error) {
       ERROR(error.what_detailed());
       return EXIT_FAILURE;
@@ -94,7 +97,13 @@ int run_solver(flexiblesusy::HSSUSY_slha_io& slha_io,
    if (spectrum_generator_settings.get(Spectrum_generator_settings::calculate_observables)) {
       if (spectrum_generator_settings.get(Spectrum_generator_settings::force_output) ||
          !problems.have_problem()) {
-         observables = calculate_observables(std::get<0>(models), qedqcd, physical_input, scales.pole_mass_scale);
+         observables = calculate_observables(
+            std::get<0>(models),
+            qedqcd,
+            
+            physical_input,
+            spectrum_generator_settings,
+            scales.pole_mass_scale);
       }
    }
 
@@ -112,6 +121,7 @@ int run_solver(flexiblesusy::HSSUSY_slha_io& slha_io,
                Spectrum_generator_settings::force_positive_masses));
          slha_io.set_spectrum(models);
          slha_io.set_extra(std::get<0>(models), scales, observables, spectrum_generator_settings);
+         
       }
 
 

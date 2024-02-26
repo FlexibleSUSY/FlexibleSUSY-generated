@@ -54,22 +54,23 @@ NUTSMSSM_TARBALL := \
 		$(MODNAME).tar.gz
 
 LIBNUTSMSSM_SRC := \
-		$(DIR)/NUTSMSSM_a_muon.cpp \
+		$(DIR)/NUTSMSSM_amm.cpp \
 		$(DIR)/NUTSMSSM_edm.cpp \
 		$(DIR)/NUTSMSSM_FFV_form_factors.cpp \
-		$(DIR)/NUTSMSSM_f_to_f_conversion.cpp \
-		$(DIR)/NUTSMSSM_l_to_lgamma.cpp \
+		$(wildcard $(DIR)/observables/NUTSMSSM*.cpp) \
 		$(DIR)/NUTSMSSM_b_to_s_gamma.cpp \
 		$(DIR)/NUTSMSSM_info.cpp \
 		$(DIR)/NUTSMSSM_input_parameters.cpp \
 		$(DIR)/NUTSMSSM_mass_eigenstates.cpp \
 		$(DIR)/NUTSMSSM_mass_eigenstates_decoupling_scheme.cpp \
 		$(DIR)/NUTSMSSM_model_slha.cpp \
+		$(DIR)/NUTSMSSM_lepton_amm_wrapper.cpp \
 		$(DIR)/NUTSMSSM_observables.cpp \
 		$(DIR)/NUTSMSSM_physical.cpp \
 		$(DIR)/NUTSMSSM_slha_io.cpp \
 		$(DIR)/NUTSMSSM_soft_parameters.cpp \
 		$(DIR)/NUTSMSSM_susy_parameters.cpp \
+		$(DIR)/NUTSMSSM_unitarity.cpp \
 		$(DIR)/NUTSMSSM_utilities.cpp \
 		$(DIR)/NUTSMSSM_weinberg_angle.cpp
 
@@ -89,12 +90,11 @@ LLNUTSMSSM_MMA  := \
 		$(DIR)/run_NUTSMSSM.m
 
 LIBNUTSMSSM_HDR := \
-		$(DIR)/NUTSMSSM_a_muon.hpp \
+		$(DIR)/NUTSMSSM_amm.hpp \
 		$(DIR)/NUTSMSSM_convergence_tester.hpp \
 		$(DIR)/NUTSMSSM_edm.hpp \
 		$(DIR)/NUTSMSSM_FFV_form_factors.hpp \
-		$(DIR)/NUTSMSSM_f_to_f_conversion.hpp \
-		$(DIR)/NUTSMSSM_l_to_lgamma.hpp \
+		$(wildcard $(DIR)/observables/NUTSMSSM*.hpp) \
 		$(DIR)/NUTSMSSM_b_to_s_gamma.hpp \
 		$(DIR)/NUTSMSSM_ewsb_solver.hpp \
 		$(DIR)/NUTSMSSM_ewsb_solver_interface.hpp \
@@ -108,6 +108,7 @@ LIBNUTSMSSM_HDR := \
 		$(DIR)/NUTSMSSM_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/NUTSMSSM_model.hpp \
 		$(DIR)/NUTSMSSM_model_slha.hpp \
+		$(DIR)/NUTSMSSM_lepton_amm_wrapper.hpp \
 		$(DIR)/NUTSMSSM_observables.hpp \
 		$(DIR)/NUTSMSSM_physical.hpp \
 		$(DIR)/NUTSMSSM_slha_io.hpp \
@@ -116,12 +117,14 @@ LIBNUTSMSSM_HDR := \
 		$(DIR)/NUTSMSSM_soft_parameters.hpp \
 		$(DIR)/NUTSMSSM_susy_parameters.hpp \
 		$(DIR)/NUTSMSSM_susy_scale_constraint.hpp \
+		$(DIR)/NUTSMSSM_unitarity.hpp \
 		$(DIR)/NUTSMSSM_utilities.hpp \
 		$(DIR)/NUTSMSSM_weinberg_angle.hpp
 
 LIBNUTSMSSM_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/NUTSMSSM_qft.hpp \
 		$(DIR)/cxx_qft/NUTSMSSM_fields.hpp \
+		$(DIR)/cxx_qft/NUTSMSSM_particle_aliases.hpp \
 		$(DIR)/cxx_qft/NUTSMSSM_vertices.hpp \
 		$(DIR)/cxx_qft/NUTSMSSM_context_base.hpp \
 		$(DIR)/cxx_qft/NUTSMSSM_npointfunctions_wilsoncoeffs.hpp
@@ -317,7 +320,7 @@ $(METACODE_STAMP_NUTSMSSM):
 endif
 
 $(LIBNUTSMSSM_DEP) $(EXENUTSMSSM_DEP) $(LLNUTSMSSM_DEP) $(LIBNUTSMSSM_OBJ) $(EXENUTSMSSM_OBJ) $(LLNUTSMSSM_OBJ) $(LLNUTSMSSM_LIB): \
-	CPPFLAGS += $(MODNUTSMSSM_SUBMOD_INC) $(MODNUTSMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODNUTSMSSM_SUBMOD_INC) $(MODNUTSMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIGGSTOOLSFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBNUTSMSSM_DEP) $(EXENUTSMSSM_DEP) $(LLNUTSMSSM_DEP) $(LIBNUTSMSSM_OBJ) $(EXENUTSMSSM_OBJ) $(LLNUTSMSSM_OBJ) $(LLNUTSMSSM_LIB): \
@@ -333,11 +336,11 @@ $(LIBNUTSMSSM): $(LIBNUTSMSSM_OBJ)
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBNUTSMSSM) $(MODNUTSMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
 $(LLNUTSMSSM_LIB): $(LLNUTSMSSM_OBJ) $(LIBNUTSMSSM) $(MODNUTSMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
 
 ALLDEP += $(LIBNUTSMSSM_DEP) $(EXENUTSMSSM_DEP)
 ALLSRC += $(LIBNUTSMSSM_SRC) $(EXENUTSMSSM_SRC)

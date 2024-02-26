@@ -54,22 +54,23 @@ HSSUSY_TARBALL := \
 		$(MODNAME).tar.gz
 
 LIBHSSUSY_SRC := \
-		$(DIR)/HSSUSY_a_muon.cpp \
+		$(DIR)/HSSUSY_amm.cpp \
 		$(DIR)/HSSUSY_edm.cpp \
 		$(DIR)/HSSUSY_FFV_form_factors.cpp \
-		$(DIR)/HSSUSY_f_to_f_conversion.cpp \
-		$(DIR)/HSSUSY_l_to_lgamma.cpp \
+		$(wildcard $(DIR)/observables/HSSUSY*.cpp) \
 		$(DIR)/HSSUSY_b_to_s_gamma.cpp \
 		$(DIR)/HSSUSY_info.cpp \
 		$(DIR)/HSSUSY_input_parameters.cpp \
 		$(DIR)/HSSUSY_mass_eigenstates.cpp \
 		$(DIR)/HSSUSY_mass_eigenstates_decoupling_scheme.cpp \
 		$(DIR)/HSSUSY_model_slha.cpp \
+		$(DIR)/HSSUSY_lepton_amm_wrapper.cpp \
 		$(DIR)/HSSUSY_observables.cpp \
 		$(DIR)/HSSUSY_physical.cpp \
 		$(DIR)/HSSUSY_slha_io.cpp \
 		$(DIR)/HSSUSY_soft_parameters.cpp \
 		$(DIR)/HSSUSY_susy_parameters.cpp \
+		$(DIR)/HSSUSY_unitarity.cpp \
 		$(DIR)/HSSUSY_utilities.cpp \
 		$(DIR)/HSSUSY_weinberg_angle.cpp
 
@@ -89,12 +90,11 @@ LLHSSUSY_MMA  := \
 		$(DIR)/run_HSSUSY.m
 
 LIBHSSUSY_HDR := \
-		$(DIR)/HSSUSY_a_muon.hpp \
+		$(DIR)/HSSUSY_amm.hpp \
 		$(DIR)/HSSUSY_convergence_tester.hpp \
 		$(DIR)/HSSUSY_edm.hpp \
 		$(DIR)/HSSUSY_FFV_form_factors.hpp \
-		$(DIR)/HSSUSY_f_to_f_conversion.hpp \
-		$(DIR)/HSSUSY_l_to_lgamma.hpp \
+		$(wildcard $(DIR)/observables/HSSUSY*.hpp) \
 		$(DIR)/HSSUSY_b_to_s_gamma.hpp \
 		$(DIR)/HSSUSY_ewsb_solver.hpp \
 		$(DIR)/HSSUSY_ewsb_solver_interface.hpp \
@@ -108,6 +108,7 @@ LIBHSSUSY_HDR := \
 		$(DIR)/HSSUSY_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/HSSUSY_model.hpp \
 		$(DIR)/HSSUSY_model_slha.hpp \
+		$(DIR)/HSSUSY_lepton_amm_wrapper.hpp \
 		$(DIR)/HSSUSY_observables.hpp \
 		$(DIR)/HSSUSY_physical.hpp \
 		$(DIR)/HSSUSY_slha_io.hpp \
@@ -116,12 +117,14 @@ LIBHSSUSY_HDR := \
 		$(DIR)/HSSUSY_soft_parameters.hpp \
 		$(DIR)/HSSUSY_susy_parameters.hpp \
 		$(DIR)/HSSUSY_susy_scale_constraint.hpp \
+		$(DIR)/HSSUSY_unitarity.hpp \
 		$(DIR)/HSSUSY_utilities.hpp \
 		$(DIR)/HSSUSY_weinberg_angle.hpp
 
 LIBHSSUSY_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/HSSUSY_qft.hpp \
 		$(DIR)/cxx_qft/HSSUSY_fields.hpp \
+		$(DIR)/cxx_qft/HSSUSY_particle_aliases.hpp \
 		$(DIR)/cxx_qft/HSSUSY_vertices.hpp \
 		$(DIR)/cxx_qft/HSSUSY_context_base.hpp \
 		$(DIR)/cxx_qft/HSSUSY_npointfunctions_wilsoncoeffs.hpp
@@ -317,7 +320,7 @@ $(METACODE_STAMP_HSSUSY):
 endif
 
 $(LIBHSSUSY_DEP) $(EXEHSSUSY_DEP) $(LLHSSUSY_DEP) $(LIBHSSUSY_OBJ) $(EXEHSSUSY_OBJ) $(LLHSSUSY_OBJ) $(LLHSSUSY_LIB): \
-	CPPFLAGS += $(MODHSSUSY_SUBMOD_INC) $(MODHSSUSY_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODHSSUSY_SUBMOD_INC) $(MODHSSUSY_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIGGSTOOLSFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBHSSUSY_DEP) $(EXEHSSUSY_DEP) $(LLHSSUSY_DEP) $(LIBHSSUSY_OBJ) $(EXEHSSUSY_OBJ) $(LLHSSUSY_OBJ) $(LLHSSUSY_LIB): \
@@ -333,11 +336,11 @@ $(LIBHSSUSY): $(LIBHSSUSY_OBJ)
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBHSSUSY) $(MODHSSUSY_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
 $(LLHSSUSY_LIB): $(LLHSSUSY_OBJ) $(LIBHSSUSY) $(MODHSSUSY_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
 
 ALLDEP += $(LIBHSSUSY_DEP) $(EXEHSSUSY_DEP)
 ALLSRC += $(LIBHSSUSY_SRC) $(EXEHSSUSY_SRC)

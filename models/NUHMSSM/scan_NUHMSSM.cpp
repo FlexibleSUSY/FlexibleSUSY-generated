@@ -51,8 +51,8 @@ void print_usage()
       "  --TanBeta=<value>\n"
       "  --SignMu=<value>\n"
       "  --Azero=<value>\n"
-      "  --mHd2In=<value>\n"
-      "  --mHu2In=<value>\n"
+      "  --MuInput=<value>\n"
+      "  --BInput=<value>\n"
 
       "  --solver-type=<value>             an integer corresponding\n"
       "                                    to the solver type to use\n"
@@ -85,10 +85,10 @@ void set_command_line_parameters(const Dynamic_array_view<char*>& args,
       if(Command_line_options::get_parameter_value(option, "--Azero=", input.Azero))
          continue;
 
-      if(Command_line_options::get_parameter_value(option, "--mHd2In=", input.mHd2In))
+      if(Command_line_options::get_parameter_value(option, "--MuInput=", input.MuInput))
          continue;
 
-      if(Command_line_options::get_parameter_value(option, "--mHu2In=", input.mHu2In))
+      if(Command_line_options::get_parameter_value(option, "--BInput=", input.BInput))
          continue;
 
       

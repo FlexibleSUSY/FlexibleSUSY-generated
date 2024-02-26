@@ -33,8 +33,8 @@ Eigen::ArrayXd NUHMSSM_input_parameters::get() const
    pars(2) = TanBeta;
    pars(3) = SignMu;
    pars(4) = Azero;
-   pars(5) = mHd2In;
-   pars(6) = mHu2In;
+   pars(5) = MuInput;
+   pars(6) = BInput;
 
    return pars;
 }
@@ -46,8 +46,8 @@ void NUHMSSM_input_parameters::set(const Eigen::ArrayXd& pars)
    TanBeta = pars(2);
    SignMu = pars(3);
    Azero = pars(4);
-   mHd2In = pars(5);
-   mHu2In = pars(6);
+   MuInput = pars(5);
+   BInput = pars(6);
 
 }
 
@@ -58,8 +58,8 @@ std::ostream& operator<<(std::ostream& ostr, const NUHMSSM_input_parameters& inp
    ostr << "TanBeta = " << INPUT(TanBeta) << ", ";
    ostr << "SignMu = " << INPUT(SignMu) << ", ";
    ostr << "Azero = " << INPUT(Azero) << ", ";
-   ostr << "mHd2In = " << INPUT(mHd2In) << ", ";
-   ostr << "mHu2In = " << INPUT(mHu2In) << ", ";
+   ostr << "MuInput = " << INPUT(MuInput) << ", ";
+   ostr << "BInput = " << INPUT(BInput) << ", ";
 
    return ostr;
 }

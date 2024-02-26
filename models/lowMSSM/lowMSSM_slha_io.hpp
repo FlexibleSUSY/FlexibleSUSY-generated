@@ -22,10 +22,12 @@
 
 
 
+
 #include "problems.hpp"
 #include "decays/flexibledecay_problems.hpp"
 #include "slha_io.hpp"
 #include "for_each.hpp"
+#include "observables/l_to_l_conversion/settings.hpp"
 #include "decays/decay.hpp"
 #include "decays/flexibledecay_settings.hpp"
 
@@ -68,6 +70,7 @@ public:
    void fill(lowMSSM_slha&) const;
    void fill(Physical_input&) const;
    void fill(Spectrum_generator_settings&) const;
+   void fill(LToLConversion_settings&) const;
    void fill(FlexibleDecay_settings&) const;
    double get_parameter_output_scale() const;
    const SLHA_io& get_slha_io() const { return slha_io; }
@@ -81,10 +84,12 @@ public:
    void set_dcinfo(const std::vector<std::string>&, const std::vector<std::string>&);
 
    void set_extra(const lowMSSM_slha&, const lowMSSM_scales&, const lowMSSM_observables&, const flexiblesusy::Spectrum_generator_settings&);
+   void set_effectivecouplings_block(const std::vector<std::tuple<int, int, int, double, std::string>>& effCouplings);
    void set_input(const lowMSSM_input_parameters&);
    void set_modsel(const SLHA_io::Modsel&);
    void set_physical_input(const Physical_input&);
    void set_settings(const Spectrum_generator_settings&);
+   void set_LToLConversion_settings(const LToLConversion_settings&);
    void set_FlexibleDecay_settings(const FlexibleDecay_settings&);
    void set_sminputs(const softsusy::QedQcd&);
    template <class... Ts> void set_spectrum(const std::tuple<Ts...>&);
@@ -94,6 +99,7 @@ public:
    void set_spinfo(const Problems&);
    void set_spinfo(const std::vector<std::string>&, const std::vector<std::string>&);
    void set_print_imaginary_parts_of_majorana_mixings(bool);
+   void set_unitarity_infinite_s(Spectrum_generator_settings const&, UnitarityInfiniteS const&);
    void write_to(const std::string&) const;
    void write_to_file(const std::string&) const;
    void write_to_stream() const;

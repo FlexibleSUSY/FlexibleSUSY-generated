@@ -37,7 +37,6 @@ public:
    HGTHDMIIMSSMBC_high_scale_constraint() = default;
    HGTHDMIIMSSMBC_high_scale_constraint(HGTHDMIIMSSMBC<Two_scale>*);
    virtual ~HGTHDMIIMSSMBC_high_scale_constraint() = default;
-   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
    virtual void apply() override;
    virtual double get_scale() const override;

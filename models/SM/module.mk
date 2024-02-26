@@ -54,22 +54,23 @@ SM_TARBALL := \
 		$(MODNAME).tar.gz
 
 LIBSM_SRC := \
-		$(DIR)/SM_a_muon.cpp \
+		$(DIR)/SM_amm.cpp \
 		$(DIR)/SM_edm.cpp \
 		$(DIR)/SM_FFV_form_factors.cpp \
-		$(DIR)/SM_f_to_f_conversion.cpp \
-		$(DIR)/SM_l_to_lgamma.cpp \
+		$(wildcard $(DIR)/observables/SM*.cpp) \
 		$(DIR)/SM_b_to_s_gamma.cpp \
 		$(DIR)/SM_info.cpp \
 		$(DIR)/SM_input_parameters.cpp \
 		$(DIR)/SM_mass_eigenstates.cpp \
 		$(DIR)/SM_mass_eigenstates_decoupling_scheme.cpp \
 		$(DIR)/SM_model_slha.cpp \
+		$(DIR)/SM_lepton_amm_wrapper.cpp \
 		$(DIR)/SM_observables.cpp \
 		$(DIR)/SM_physical.cpp \
 		$(DIR)/SM_slha_io.cpp \
 		$(DIR)/SM_soft_parameters.cpp \
 		$(DIR)/SM_susy_parameters.cpp \
+		$(DIR)/SM_unitarity.cpp \
 		$(DIR)/SM_utilities.cpp \
 		$(DIR)/SM_weinberg_angle.cpp
 
@@ -89,12 +90,11 @@ LLSM_MMA  := \
 		$(DIR)/run_SM.m
 
 LIBSM_HDR := \
-		$(DIR)/SM_a_muon.hpp \
+		$(DIR)/SM_amm.hpp \
 		$(DIR)/SM_convergence_tester.hpp \
 		$(DIR)/SM_edm.hpp \
 		$(DIR)/SM_FFV_form_factors.hpp \
-		$(DIR)/SM_f_to_f_conversion.hpp \
-		$(DIR)/SM_l_to_lgamma.hpp \
+		$(wildcard $(DIR)/observables/SM*.hpp) \
 		$(DIR)/SM_b_to_s_gamma.hpp \
 		$(DIR)/SM_ewsb_solver.hpp \
 		$(DIR)/SM_ewsb_solver_interface.hpp \
@@ -108,6 +108,7 @@ LIBSM_HDR := \
 		$(DIR)/SM_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/SM_model.hpp \
 		$(DIR)/SM_model_slha.hpp \
+		$(DIR)/SM_lepton_amm_wrapper.hpp \
 		$(DIR)/SM_observables.hpp \
 		$(DIR)/SM_physical.hpp \
 		$(DIR)/SM_slha_io.hpp \
@@ -116,12 +117,14 @@ LIBSM_HDR := \
 		$(DIR)/SM_soft_parameters.hpp \
 		$(DIR)/SM_susy_parameters.hpp \
 		$(DIR)/SM_susy_scale_constraint.hpp \
+		$(DIR)/SM_unitarity.hpp \
 		$(DIR)/SM_utilities.hpp \
 		$(DIR)/SM_weinberg_angle.hpp
 
 LIBSM_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/SM_qft.hpp \
 		$(DIR)/cxx_qft/SM_fields.hpp \
+		$(DIR)/cxx_qft/SM_particle_aliases.hpp \
 		$(DIR)/cxx_qft/SM_vertices.hpp \
 		$(DIR)/cxx_qft/SM_context_base.hpp \
 		$(DIR)/cxx_qft/SM_npointfunctions_wilsoncoeffs.hpp
@@ -317,7 +320,7 @@ $(METACODE_STAMP_SM):
 endif
 
 $(LIBSM_DEP) $(EXESM_DEP) $(LLSM_DEP) $(LIBSM_OBJ) $(EXESM_OBJ) $(LLSM_OBJ) $(LLSM_LIB): \
-	CPPFLAGS += $(MODSM_SUBMOD_INC) $(MODSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODSM_SUBMOD_INC) $(MODSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIGGSTOOLSFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBSM_DEP) $(EXESM_DEP) $(LLSM_DEP) $(LIBSM_OBJ) $(EXESM_OBJ) $(LLSM_OBJ) $(LLSM_LIB): \
@@ -333,11 +336,11 @@ $(LIBSM): $(LIBSM_OBJ)
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBSM) $(MODSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
 $(LLSM_LIB): $(LLSM_OBJ) $(LIBSM) $(MODSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
 
 ALLDEP += $(LIBSM_DEP) $(EXESM_DEP)
 ALLSRC += $(LIBSM_SRC) $(EXESM_SRC)

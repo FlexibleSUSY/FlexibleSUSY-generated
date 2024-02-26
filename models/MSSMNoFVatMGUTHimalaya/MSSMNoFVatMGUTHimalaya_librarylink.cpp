@@ -43,6 +43,7 @@
 #include "decays/flexibledecay_settings.hpp"
 #include "standard_model_two_scale_model.hpp"
 #include "lowe.h"
+#include "MSSMNoFVatMGUTHimalaya_unitarity.hpp"
 
 
 #include <mathlink.h>
@@ -153,11 +154,17 @@ public:
    virtual double get_model_scale() const = 0;
    virtual const MSSMNoFVatMGUTHimalaya_observables& get_observables() const = 0;
 
+   virtual const UnitarityInfiniteS& get_unitarity() const = 0;
    virtual void calculate_spectrum(
       const Spectrum_generator_settings&, const SLHA_io::Modsel&,
       const softsusy::QedQcd&, const MSSMNoFVatMGUTHimalaya_input_parameters&) = 0;
-   virtual void calculate_model_observables(const softsusy::QedQcd&, const Physical_input&) = 0;
+   virtual void calculate_model_observables(
+      const softsusy::QedQcd&,
+      
+      const Physical_input&,
+      const Spectrum_generator_settings&) = 0;
 
+   virtual void calculate_unitarity() = 0;
 };
 
 template <typename Solver_type>
@@ -165,7 +172,6 @@ class MSSMNoFVatMGUTHimalaya_spectrum_impl : public MSSMNoFVatMGUTHimalaya_spect
 {
 public:
    virtual ~MSSMNoFVatMGUTHimalaya_spectrum_impl() = default;
-   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
    virtual void put_model_spectra(MLINK link) const override;
 
@@ -174,16 +180,23 @@ public:
    virtual double get_model_scale() const override { return std::get<0>(models).get_scale(); }
    virtual const MSSMNoFVatMGUTHimalaya_observables& get_observables() const override { return observables; }
 
+   virtual const UnitarityInfiniteS& get_unitarity() const { return unitarityData; };
    virtual void calculate_spectrum(
       const Spectrum_generator_settings&, const SLHA_io::Modsel&,
       const softsusy::QedQcd&, const MSSMNoFVatMGUTHimalaya_input_parameters&) override;
-   virtual void calculate_model_observables(const softsusy::QedQcd&, const Physical_input&) override;
+   virtual void calculate_model_observables(
+      const softsusy::QedQcd&,
+      
+      const Physical_input&,
+      const Spectrum_generator_settings&) override;
 
+   virtual void calculate_unitarity() override;
 private:
    std::tuple<MSSMNoFVatMGUTHimalaya<Solver_type>> models{};        ///< running parameters and pole masses
    Spectrum_generator_problems problems{};   ///< spectrum generator problems
    MSSMNoFVatMGUTHimalaya_scales scales{};              ///< scale information
    MSSMNoFVatMGUTHimalaya_observables observables{};    ///< observables
+   UnitarityInfiniteS unitarityData = {};    ///< unitarity constraints
 
 };
 
@@ -200,6 +213,7 @@ public:
    void set_physical_input(const Physical_input& p) { physical_input = p; }
    void set_sm_input_parameters(const softsusy::QedQcd& qedqcd_) { qedqcd = qedqcd_; }
    void set_settings(const Spectrum_generator_settings& s) { settings = s; }
+   
    void set_fd_settings(const FlexibleDecay_settings& s) { flexibledecay_settings = s; }
    void set_modsel(const SLHA_io::Modsel& m) { modsel = m; }
 
@@ -215,22 +229,25 @@ public:
    void put_problems(MLINK link) const;
    void put_warnings(MLINK link) const;
    void put_model_spectra(MLINK link) const;
+   void put_unitarity(MLINK link) const;
    void calculate_spectrum();
    void check_spectrum(MLINK link) const;
    void calculate_model_observables();
 
+   void calculate_unitarity();
    double get_model_scale() const {
       check_spectrum_pointer();
       return spectrum->get_model_scale();
    }
 private:
-   MSSMNoFVatMGUTHimalaya_input_parameters input{};     ///< model input parameters
-   Physical_input physical_input{};          ///< extra non-SLHA physical input
-   softsusy::QedQcd qedqcd{};                ///< SLHA physical input
-   Spectrum_generator_settings settings{};   ///< spectrum generator settings
-   FlexibleDecay_settings flexibledecay_settings {}; ///< FlexibleDecay settings
-   SLHA_io::Modsel modsel{};                 ///< MODSEL input
-   std::unique_ptr<MSSMNoFVatMGUTHimalaya_spectrum> spectrum{nullptr};  ///< spectrum information
+   MSSMNoFVatMGUTHimalaya_input_parameters input{};                    ///< model input parameters
+   Physical_input physical_input{};                         ///< extra non-SLHA physical input
+   softsusy::QedQcd qedqcd{};                               ///< SLHA physical input
+   Spectrum_generator_settings settings{};                  ///< spectrum generator settings
+   FlexibleDecay_settings flexibledecay_settings {};        ///< FlexibleDecay settings
+   SLHA_io::Modsel modsel{};                                ///< MODSEL input
+   
+   std::unique_ptr<MSSMNoFVatMGUTHimalaya_spectrum> spectrum{nullptr}; ///< spectrum information
 
    MSSMNoFVatMGUTHimalaya_slha_io get_slha_io() const;
 
@@ -393,6 +410,7 @@ void Model_data::put_settings(MLINK link) const
    MLPutRuleTo(link, static_cast<int>(settings.get(Spectrum_generator_settings::higgs_3loop_correction_at3)), "higgs3loopCorrectionAtAtAt");
    MLPutRuleTo(link, static_cast<int>(settings.get(Spectrum_generator_settings::higgs_4loop_correction_at_as3)), "higgs4loopCorrectionAtAsAsAs");
    MLPutRuleTo(link, static_cast<int>(settings.get(Spectrum_generator_settings::loop_library)), "loopLibrary");
+   MLPutRuleTo(link, settings.get(Spectrum_generator_settings::calculate_amm), "calculateAMM");
    MLPutRuleTo(link, modsel.parameter_output_scale, "parameterOutputScale");
 
    MLEndPacket(link);
@@ -554,6 +572,7 @@ MSSMNoFVatMGUTHimalaya_slha_io Model_data::get_slha_io() const
    slha_io.set_physical_input(physical_input);
    slha_io.set_modsel(modsel);
    slha_io.set_input(input);
+   
    slha_io.set_print_imaginary_parts_of_majorana_mixings(
       settings.get(Spectrum_generator_settings::force_positive_masses));
 
@@ -821,9 +840,25 @@ void MSSMNoFVatMGUTHimalaya_spectrum_impl<Solver_type>::calculate_spectrum(
 
 template <typename Solver_type>
 void MSSMNoFVatMGUTHimalaya_spectrum_impl<Solver_type>::calculate_model_observables(
-   const softsusy::QedQcd& qedqcd, const Physical_input& physical_input)
+   const softsusy::QedQcd& qedqcd,
+   
+   const Physical_input& physical_input,
+   const Spectrum_generator_settings& settings)
 {
-   observables = calculate_observables(std::get<0>(models), qedqcd, physical_input, scales.pole_mass_scale);
+   observables = calculate_observables(
+      std::get<0>(models),
+      qedqcd,
+      
+      physical_input,
+      settings,
+      scales.pole_mass_scale);
+}
+
+/******************************************************************/
+
+template <typename Solver_type>
+void MSSMNoFVatMGUTHimalaya_spectrum_impl<Solver_type>::calculate_unitarity() {
+   unitarityData = MSSMNoFVatMGUTHimalaya_unitarity::max_scattering_eigenvalue_infinite_s(std::get<0>(models));
 }
 
 /******************************************************************/
@@ -841,6 +876,7 @@ void MSSMNoFVatMGUTHimalaya_spectrum_impl<Solver_type>::fill_slha_io(MSSMNoFVatM
       slha_io.set_extra(std::get<0>(models), scales, observables, settings);
    }
 
+   
 
 }
 
@@ -855,11 +891,27 @@ void Model_data::put_observables(MLINK link) const
    MLPutRule(link, MSSMNoFVatMGUTHimalaya_info::model_name);
    MLPutFunction(link, "List", 3);
 
-   MLPutRuleTo(link, OBSERVABLE(a_muon), "FlexibleSUSYObservable`aMuon");
+   MLPutRuleTo(link, OBSERVABLE(amm_Fm), "Fm", {"FlexibleSUSYObservable`AMM"});
    MLPutRuleTo(link, OBSERVABLE(a_muon_gm2calc), "FlexibleSUSYObservable`aMuonGM2Calc");
    MLPutRuleTo(link, OBSERVABLE(a_muon_gm2calc_uncertainty), "FlexibleSUSYObservable`aMuonGM2CalcUncertainty");
 
 
+   MLEndPacket(link);
+}
+
+
+/******************************************************************/
+
+void Model_data::put_unitarity(MLINK link) const
+{
+   check_spectrum_pointer();
+   const UnitarityInfiniteS unitarityData = spectrum->get_unitarity();
+   MLPutFunction(link, "List", 1);
+   MLPutRule(link, "MSSMNoFVatMGUTHimalaya");
+   MLPutFunction(link, "List", 3);
+   MLPutRuleTo(link, unitarityData.allowed, "FlexibleSUSYUnitarity`Allowed");
+   MLPutRuleTo(link, unitarityData.renScale, "FlexibleSUSYUnitarity`RenormalizationScale");
+   MLPutRuleTo(link, unitarityData.maxAbsReEigenval, "FlexibleSUSYUnitarity`MaxAbsReEigen");
    MLEndPacket(link);
 }
 
@@ -908,7 +960,18 @@ void Model_data::calculate_spectrum()
 void Model_data::calculate_model_observables()
 {
    check_spectrum_pointer();
-   spectrum->calculate_model_observables(qedqcd, physical_input);
+   spectrum->calculate_model_observables(qedqcd,
+      
+      physical_input,
+      settings);
+}
+
+/******************************************************************/
+
+void Model_data::calculate_unitarity()
+{
+   check_spectrum_pointer();
+   spectrum->calculate_unitarity();
 }
 
 /******************************************************************/
@@ -962,6 +1025,7 @@ Model_data make_data(const Dynamic_array_view<Element_t>& pars)
    settings.set(Spectrum_generator_settings::higgs_3loop_correction_at3, pars[c++]);
    settings.set(Spectrum_generator_settings::higgs_4loop_correction_at_as3, pars[c++]);
    settings.set(Spectrum_generator_settings::loop_library, pars[c++]);
+   settings.set(Spectrum_generator_settings::calculate_amm, pars[c++]);
 
    SLHA_io::Modsel modsel;
    modsel.parameter_output_scale = pars[c++];
@@ -1016,6 +1080,9 @@ Model_data make_data(const Dynamic_array_view<Element_t>& pars)
       qedqcd.setPMNS(pmns);
    }
 
+   
+   
+
    Physical_input physical_input;
    physical_input.set(Physical_input::alpha_em_0, pars[c++]);
    physical_input.set(Physical_input::mh_pole, pars[c++]);
@@ -1061,6 +1128,7 @@ Model_data make_data(const Dynamic_array_view<Element_t>& pars)
    data.set_sm_input_parameters(qedqcd);
    data.set_physical_input(physical_input);
    data.set_input_parameters(input);
+   
    
    return data;
 }
@@ -1359,6 +1427,29 @@ DLLEXPORT int FSMSSMNoFVatMGUTHimalayaCalculateObservables(
       data.put_observables(link);
    } catch (const flexiblesusy::Error& e) {
       put_message(link, "FSMSSMNoFVatMGUTHimalayaCalculateObservables", "error", e.what_detailed());
+      put_error_output(link);
+   }
+
+   return LIBRARY_NO_ERROR;
+}
+
+
+DLLEXPORT int FSMSSMNoFVatMGUTHimalayaCalculateUnitarity(
+   WolframLibraryData /* libData */, MLINK link)
+{
+   using namespace flexiblesusy::MSSMNoFVatMGUTHimalaya_librarylink;
+
+   if (!check_number_of_args(link, 1, "FSMSSMNoFVatMGUTHimalayaCalculateUnitarity"))
+      return LIBRARY_TYPE_ERROR;
+
+   const auto hid = get_handle_from(link);
+
+   try {
+      auto& data = find_data(hid);
+      data.calculate_unitarity();
+      data.put_unitarity(link);
+   } catch (const flexiblesusy::Error& e) {
+      put_message(link, "FSMSSMNoFVatMGUTHimalayaCalculateUnitarity", "error", e.what());
       put_error_output(link);
    }
 

@@ -19,11 +19,14 @@
 
 #include "CMSSM_observables.hpp"
 #include "CMSSM_mass_eigenstates.hpp"
-#include "CMSSM_a_muon.hpp"
+#include "CMSSM_amm.hpp"
 #include "CMSSM_edm.hpp"
-#include "CMSSM_l_to_lgamma.hpp"
 #include "CMSSM_b_to_s_gamma.hpp"
-#include "CMSSM_f_to_f_conversion.hpp"
+#include "observables/l_to_l_conversion/settings.hpp"
+#include "observables/CMSSM_br_l_to_3l.hpp"
+#include "observables/CMSSM_br_l_to_l_gamma.hpp"
+#include "observables/CMSSM_l_to_l_conversion.hpp"
+#include "cxx_qft/CMSSM_qft.hpp"
 #include "config.h"
 #include "eigen_utils.hpp"
 #include "numerics2.hpp"
@@ -36,31 +39,52 @@
 #endif
 
 #define MODEL model
-#define AMU a_muon
-#define AMUUNCERTAINTY a_muon_uncertainty
+#define AMM0(p) amm_ ## p
+#define AMM1(p,idx) amm_ ## p ## _ ## idx
+#define AMMUNCERTAINTY0(p) amm_uncertainty_ ## p
+#define AMMUNCERTAINTY1(p,idx) amm_uncertainty_ ## p ## _ ## idx
 #define AMUGM2CALC a_muon_gm2calc
 #define AMUGM2CALCUNCERTAINTY a_muon_gm2calc_uncertainty
+#define DERIVEDPARAMETER(p) model.p()
+#define EXTRAPARAMETER(p) model.get_##p()
+#define INPUTPARAMETER(p) model.get_input().p
+#define MODELPARAMETER(p) model.get_##p()
+#define PHASE(p) model.get_##p()
+#define LowEnergyConstant(p) Electroweak_constants::p
+#define STANDARDDEVIATION(p) Electroweak_constants::Error_##p
+#define Pole(p) model.get_physical().p
 #define EDM0(p) edm_ ## p
 #define EDM1(p,idx) edm_ ## p ## _ ## idx
-#define LToLGamma0(pIn, pOut, spec) pIn ## _to_ ## pOut ## _ ## spec
-#define LToLGamma1(pIn,idxIn,pOut,idxOut,spec) pIn ## idxIn ## _to_ ## pOut ## idxOut ## _ ## spec
-#define FToFConversion1(pIn,idxIn,pOut,idxOut,nuclei,qedqcd) pIn ## _to_ ## pOut ## _in_ ## nuclei
 #define BSGAMMA b_to_s_gamma
 
+#define ALPHA_EM_MZ qedqcd.displayAlpha(softsusy::ALPHA)
+#define ALPHA_EM_0 physical_input.get(Physical_input::alpha_em_0)
 #define ALPHA_S_MZ qedqcd.displayAlpha(softsusy::ALPHAS)
+#define MHPole physical_input.get(Physical_input::mh_pole)
 #define MWPole qedqcd.displayPoleMW()
 #define MZPole qedqcd.displayPoleMZ()
+#define MU2GeV qedqcd.displayMu2GeV()
+#define MS2GeV qedqcd.displayMs2GeV()
 #define MTPole qedqcd.displayPoleMt()
+#define MD2GeV qedqcd.displayMd2GeV()
+#define MCMC qedqcd.displayMcMc()
 #define MBMB qedqcd.displayMbMb()
-#define MTauPole qedqcd.displayPoleMtau()
+#define Mv1Pole qedqcd.displayNeutrinoPoleMass(1)
+#define Mv2Pole qedqcd.displayNeutrinoPoleMass(2)
+#define Mv3Pole qedqcd.displayNeutrinoPoleMass(3)
+#define MEPole qedqcd.displayPoleMel()
 #define MMPole qedqcd.displayPoleMmuon()
+#define MTauPole qedqcd.displayPoleMtau()
+#define CKMInput qedqcd.get_complex_ckm()
 
 namespace flexiblesusy {
 
 const int CMSSM_observables::NUMBER_OF_OBSERVABLES;
 
 CMSSM_observables::CMSSM_observables()
-   : a_muon(0)
+   : amm_Fe_0(0)
+   , amm_Fe_1(0)
+   , amm_Fe_2(0)
 
 {
 }
@@ -69,7 +93,9 @@ Eigen::ArrayXd CMSSM_observables::get() const
 {
    Eigen::ArrayXd vec(CMSSM_observables::NUMBER_OF_OBSERVABLES);
 
-   vec(0) = a_muon;
+   vec(0) = amm_Fe_0;
+   vec(1) = amm_Fe_1;
+   vec(2) = amm_Fe_2;
 
    return vec;
 }
@@ -78,14 +104,18 @@ std::vector<std::string> CMSSM_observables::get_names()
 {
    std::vector<std::string> names(CMSSM_observables::NUMBER_OF_OBSERVABLES);
 
-   names[0] = "a_muon";
+   names[0] = "amm_Fe_0";
+   names[1] = "amm_Fe_1";
+   names[2] = "amm_Fe_2";
 
    return names;
 }
 
 void CMSSM_observables::clear()
 {
-   a_muon = 0.;
+   amm_Fe_0 = 0.;
+   amm_Fe_1 = 0.;
+   amm_Fe_2 = 0.;
 
 }
 
@@ -93,13 +123,17 @@ void CMSSM_observables::set(const Eigen::ArrayXd& vec)
 {
    assert(vec.rows() == CMSSM_observables::NUMBER_OF_OBSERVABLES);
 
-   a_muon = vec(0);
+   amm_Fe_0 = vec(0);
+   amm_Fe_1 = vec(1);
+   amm_Fe_2 = vec(2);
 
 }
 
 CMSSM_observables calculate_observables(const CMSSM_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
+                                              
                                               const Physical_input& physical_input,
+                                              const Spectrum_generator_settings& settings,
                                               double scale)
 {
    auto model_at_scale = model;
@@ -122,18 +156,26 @@ CMSSM_observables calculate_observables(const CMSSM_mass_eigenstates& model,
       }
    }
 
-   return calculate_observables(model_at_scale, qedqcd, physical_input);
+   return calculate_observables(model_at_scale,
+                                qedqcd,
+                                
+                                physical_input,
+                                settings);
 }
 
 CMSSM_observables calculate_observables(const CMSSM_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
-                                              const Physical_input& physical_input)
+                                              
+                                              const Physical_input& physical_input,
+                                              const Spectrum_generator_settings& settings)
 {
    CMSSM_observables observables;
 
    try {
       
-      observables.AMU = CMSSM_a_muon::calculate_a_muon(MODEL, qedqcd);
+      observables.AMM1(Fe, 0) = CMSSM_amm::calculate_amm<CMSSM_cxx_diagrams::fields::Fe>(MODEL, qedqcd, settings,0);
+      observables.AMM1(Fe, 1) = CMSSM_amm::calculate_amm<CMSSM_cxx_diagrams::fields::Fe>(MODEL, qedqcd, settings,1);
+      observables.AMM1(Fe, 2) = CMSSM_amm::calculate_amm<CMSSM_cxx_diagrams::fields::Fe>(MODEL, qedqcd, settings,2);
    } catch (const NonPerturbativeRunningError& e) {
       observables.problems.general.flag_non_perturbative_running(e.get_scale());
    } catch (const Error& e) {

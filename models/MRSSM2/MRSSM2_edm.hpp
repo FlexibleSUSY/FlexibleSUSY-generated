@@ -16,22 +16,28 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-
 /**
  * @file MRSSM2_edm.hpp
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #ifndef MRSSM2_EDM_H
 #define MRSSM2_EDM_H
 
+#include "MRSSM2_mass_eigenstates.hpp"
+#include "lowe.h"
+
 namespace flexiblesusy {
+
 class MRSSM2_mass_eigenstates;
 
 namespace MRSSM2_edm {
-double calculate_edm_Fe( int generationIndex, const MRSSM2_mass_eigenstates& model );
-}
+
+template <typename Lepton>
+double calculate_edm(const MRSSM2_mass_eigenstates&, const softsusy::QedQcd&, int idx);
+
+} // namespace MRSSM2_edm
 } // namespace flexiblesusy
 
 #endif

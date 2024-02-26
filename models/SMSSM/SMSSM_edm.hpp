@@ -16,22 +16,28 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-
 /**
  * @file SMSSM_edm.hpp
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #ifndef SMSSM_EDM_H
 #define SMSSM_EDM_H
 
+#include "SMSSM_mass_eigenstates.hpp"
+#include "lowe.h"
+
 namespace flexiblesusy {
+
 class SMSSM_mass_eigenstates;
 
 namespace SMSSM_edm {
 
-}
+template <typename Lepton>
+double calculate_edm(const SMSSM_mass_eigenstates&, const softsusy::QedQcd&, int idx);
+
+} // namespace SMSSM_edm
 } // namespace flexiblesusy
 
 #endif

@@ -24,9 +24,9 @@
 
 #include <array>
 #include <iosfwd>
+#include <optional>
 #include <string>
 #include <utility>
-#include <boost/optional.hpp>
 
 namespace flexiblesusy {
 
@@ -98,8 +98,7 @@ namespace MSSMNoFVatMGUT_info {
    int get_pdg_code_for_particle(Particles);
    int get_pdg_code_for_particle(Particles, int);
    std::string get_particle_name_from_pdg(int);
-   // @todo: replace with std::optional when we move to C++17
-   std::pair<std::string, boost::optional<unsigned int>> get_multiplet_and_index_from_pdg(int);
+   std::pair<std::string, std::optional<unsigned int>> get_multiplet_and_index_from_pdg(int);
    void print(std::ostream&);
 
    class MSSMNoFVatMGUT_particle_names : public Names {

@@ -77,7 +77,6 @@ handle = FSCMSSMSemiAnalyticOpenHandle[
 
 spectrum    = FSCMSSMSemiAnalyticCalculateSpectrum[handle];
 observables = FSCMSSMSemiAnalyticCalculateObservables[handle];
-decays      = FSCMSSMSemiAnalyticCalculateDecays[handle];
 
 FSCMSSMSemiAnalyticCloseHandle[handle];
 

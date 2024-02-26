@@ -117,7 +117,7 @@ protected:
    TMSSM_input_parameters input{};
 
 private:
-   static const int numberOfParameters = 36;
+   static constexpr int numberOfParameters = 36;
 
    struct Susy_traces {
       double traceYdAdjYd{};

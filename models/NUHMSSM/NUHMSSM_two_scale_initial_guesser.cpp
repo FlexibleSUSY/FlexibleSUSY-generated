@@ -193,9 +193,28 @@ void NUHMSSM_initial_guesser<Two_scale>::calculate_Ye_DRbar()
  * high-scale constraint (HighScaleInput):
  *
  * \code{.cpp}
-   
-   MODEL->set_Mu(Re(1.));
-   MODEL->set_BMu(Re(0.));
+   const auto Azero = INPUTPARAMETER(Azero);
+   const auto MuInput = INPUTPARAMETER(MuInput);
+   const auto BInput = INPUTPARAMETER(BInput);
+   const auto m0 = INPUTPARAMETER(m0);
+   const auto m12 = INPUTPARAMETER(m12);
+   const auto Ye = MODELPARAMETER(Ye);
+   const auto Yd = MODELPARAMETER(Yd);
+   const auto Yu = MODELPARAMETER(Yu);
+
+   MODEL->set_TYe((Azero*Ye).real());
+   MODEL->set_TYd((Azero*Yd).real());
+   MODEL->set_TYu((Azero*Yu).real());
+   MODEL->set_Mu(Re(MuInput));
+   MODEL->set_BMu(Re(BInput));
+   MODEL->set_mq2((Sqr(m0)*UNITMATRIX(3)).real());
+   MODEL->set_ml2((Sqr(m0)*UNITMATRIX(3)).real());
+   MODEL->set_md2((Sqr(m0)*UNITMATRIX(3)).real());
+   MODEL->set_mu2((Sqr(m0)*UNITMATRIX(3)).real());
+   MODEL->set_me2((Sqr(m0)*UNITMATRIX(3)).real());
+   MODEL->set_MassB(Re(m12));
+   MODEL->set_MassWB(Re(m12));
+   MODEL->set_MassG(Re(m12));
 
  * \endcode
  *
@@ -215,9 +234,28 @@ void NUHMSSM_initial_guesser<Two_scale>::guess_soft_parameters()
    high_constraint.apply();
 
    // apply user-defined initial guess at the high scale
-   
-   MODEL->set_Mu(Re(1.));
-   MODEL->set_BMu(Re(0.));
+   const auto Azero = INPUTPARAMETER(Azero);
+   const auto MuInput = INPUTPARAMETER(MuInput);
+   const auto BInput = INPUTPARAMETER(BInput);
+   const auto m0 = INPUTPARAMETER(m0);
+   const auto m12 = INPUTPARAMETER(m12);
+   const auto Ye = MODELPARAMETER(Ye);
+   const auto Yd = MODELPARAMETER(Yd);
+   const auto Yu = MODELPARAMETER(Yu);
+
+   MODEL->set_TYe((Azero*Ye).real());
+   MODEL->set_TYd((Azero*Yd).real());
+   MODEL->set_TYu((Azero*Yu).real());
+   MODEL->set_Mu(Re(MuInput));
+   MODEL->set_BMu(Re(BInput));
+   MODEL->set_mq2((Sqr(m0)*UNITMATRIX(3)).real());
+   MODEL->set_ml2((Sqr(m0)*UNITMATRIX(3)).real());
+   MODEL->set_md2((Sqr(m0)*UNITMATRIX(3)).real());
+   MODEL->set_mu2((Sqr(m0)*UNITMATRIX(3)).real());
+   MODEL->set_me2((Sqr(m0)*UNITMATRIX(3)).real());
+   MODEL->set_MassB(Re(m12));
+   MODEL->set_MassWB(Re(m12));
+   MODEL->set_MassG(Re(m12));
 
 
    model->run_to(low_scale_guess, running_precision);

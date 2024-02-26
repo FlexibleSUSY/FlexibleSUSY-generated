@@ -20,12 +20,14 @@
 #ifndef TMSSM_SLHA_IO_H
 #define TMSSM_SLHA_IO_H
 
-#include "decays/TMSSM_decays.hpp"
+
+
 
 #include "problems.hpp"
 #include "decays/flexibledecay_problems.hpp"
 #include "slha_io.hpp"
 #include "for_each.hpp"
+#include "observables/l_to_l_conversion/settings.hpp"
 #include "decays/decay.hpp"
 #include "decays/flexibledecay_settings.hpp"
 
@@ -68,6 +70,7 @@ public:
    void fill(TMSSM_slha&) const;
    void fill(Physical_input&) const;
    void fill(Spectrum_generator_settings&) const;
+   void fill(LToLConversion_settings&) const;
    void fill(FlexibleDecay_settings&) const;
    double get_parameter_output_scale() const;
    const SLHA_io& get_slha_io() const { return slha_io; }
@@ -79,12 +82,14 @@ public:
    void set_decay_block(const Decays_list&, FlexibleDecay_settings const&);
    void set_dcinfo(const FlexibleDecay_problems&);
    void set_dcinfo(const std::vector<std::string>&, const std::vector<std::string>&);
-   void set_decays(const TMSSM_decay_table&, FlexibleDecay_settings const&);
+
    void set_extra(const TMSSM_slha&, const TMSSM_scales&, const TMSSM_observables&, const flexiblesusy::Spectrum_generator_settings&);
+   void set_effectivecouplings_block(const std::vector<std::tuple<int, int, int, double, std::string>>& effCouplings);
    void set_input(const TMSSM_input_parameters&);
    void set_modsel(const SLHA_io::Modsel&);
    void set_physical_input(const Physical_input&);
    void set_settings(const Spectrum_generator_settings&);
+   void set_LToLConversion_settings(const LToLConversion_settings&);
    void set_FlexibleDecay_settings(const FlexibleDecay_settings&);
    void set_sminputs(const softsusy::QedQcd&);
    template <class... Ts> void set_spectrum(const std::tuple<Ts...>&);
@@ -94,6 +99,7 @@ public:
    void set_spinfo(const Problems&);
    void set_spinfo(const std::vector<std::string>&, const std::vector<std::string>&);
    void set_print_imaginary_parts_of_majorana_mixings(bool);
+   void set_unitarity_infinite_s(Spectrum_generator_settings const&, UnitarityInfiniteS const&);
    void write_to(const std::string&) const;
    void write_to_file(const std::string&) const;
    void write_to_stream() const;
@@ -104,7 +110,7 @@ public:
    static void fill_imminpar_tuple(TMSSM_input_parameters&, int, double);
    static void fill_imextpar_tuple(TMSSM_input_parameters&, int, double);
 
-   void fill_decays_data(const TMSSM_decays&, FlexibleDecay_settings const&);
+
    template <class... Ts>
    void fill(const std::tuple<Ts...>&, const softsusy::QedQcd&, const TMSSM_scales&, const TMSSM_observables&, const Spectrum_generator_settings&, const FlexibleDecay_settings&, TMSSM_decays const * const = nullptr);
 
@@ -153,7 +159,7 @@ void TMSSM_slha_io::fill(
       set_extra(model, scales, observables, spectrum_generator_settings);
    }
    if (decays) {
-      fill_decays_data(*decays, flexibledecay_settings);
+      
    }
 }
 

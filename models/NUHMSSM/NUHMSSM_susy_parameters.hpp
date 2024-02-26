@@ -107,7 +107,7 @@ protected:
    NUHMSSM_input_parameters input{};
 
 private:
-   static const int numberOfParameters = 33;
+   static constexpr int numberOfParameters = 33;
 
    struct Susy_traces {
       double traceYdAdjYd{};
@@ -116,19 +116,7 @@ private:
       double traceYdAdjYuYuAdjYd{};
       double traceYeAdjYeYeAdjYe{};
       double traceYuAdjYu{};
-      double traceAdjYdYd{};
-      double traceAdjYeYe{};
-      double traceAdjYuYu{};
-      double traceAdjYdYdAdjYdYd{};
-      double traceAdjYeYeAdjYeYe{};
-      double traceAdjYuYuAdjYdYd{};
-      double traceAdjYuYuAdjYuYu{};
-      double traceAdjYdYdAdjYdYdAdjYdYd{};
-      double traceAdjYeYeAdjYeYeAdjYeYe{};
-      double traceAdjYuYuAdjYuYuAdjYdYd{};
       double traceYuAdjYuYuAdjYu{};
-      double traceAdjYdYdAdjYuYuAdjYdYd{};
-      double traceAdjYuYuAdjYuYuAdjYuYu{};
 
    };
    Susy_traces calc_susy_traces(int) const;

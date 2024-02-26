@@ -101,7 +101,6 @@ handle = FSlowNMSSMTanBetaAtMZOpenHandle[
 
 spectrum    = FSlowNMSSMTanBetaAtMZCalculateSpectrum[handle];
 observables = FSlowNMSSMTanBetaAtMZCalculateObservables[handle];
-decays      = FSlowNMSSMTanBetaAtMZCalculateDecays[handle];
 
 FSlowNMSSMTanBetaAtMZCloseHandle[handle];
 

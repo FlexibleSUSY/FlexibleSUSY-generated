@@ -19,7 +19,7 @@
 /**
  * @file lowMSSM_FFV_form_factors.hpp
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #ifndef lowMSSM_FFVFormFactors_H
@@ -34,11 +34,20 @@ namespace flexiblesusy {
 class lowMSSM_mass_eigenstates;
 
 namespace lowMSSM_FFV_form_factors {
+
 std::valarray<std::complex<double>> calculate_Fe_Fe_VP_form_factors (
    int generationIndex1, int generationIndex2,
    const lowMSSM_mass_eigenstates& model, bool discard_SM_contributions);
-}
 
+template <typename Fj, typename Fi, typename V>
+std::enable_if_t<
+   std::is_same_v<Fj, lowMSSM_cxx_diagrams::fields::Fe> && std::is_same_v<Fi, lowMSSM_cxx_diagrams::fields::Fe> && std::is_same_v<V, lowMSSM_cxx_diagrams::fields::VP>,
+   std::valarray<std::complex<double>>
+>
+calculate_form_factors(   int, int,
+const lowMSSM_mass_eigenstates&, bool);
+
+} // namespace lowMSSM_FFV_form_factors
 } // namespace flexiblesusy
 
 #endif

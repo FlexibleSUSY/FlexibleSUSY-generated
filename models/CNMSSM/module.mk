@@ -54,22 +54,23 @@ CNMSSM_TARBALL := \
 		$(MODNAME).tar.gz
 
 LIBCNMSSM_SRC := \
-		$(DIR)/CNMSSM_a_muon.cpp \
+		$(DIR)/CNMSSM_amm.cpp \
 		$(DIR)/CNMSSM_edm.cpp \
 		$(DIR)/CNMSSM_FFV_form_factors.cpp \
-		$(DIR)/CNMSSM_f_to_f_conversion.cpp \
-		$(DIR)/CNMSSM_l_to_lgamma.cpp \
+		$(wildcard $(DIR)/observables/CNMSSM*.cpp) \
 		$(DIR)/CNMSSM_b_to_s_gamma.cpp \
 		$(DIR)/CNMSSM_info.cpp \
 		$(DIR)/CNMSSM_input_parameters.cpp \
 		$(DIR)/CNMSSM_mass_eigenstates.cpp \
 		$(DIR)/CNMSSM_mass_eigenstates_decoupling_scheme.cpp \
 		$(DIR)/CNMSSM_model_slha.cpp \
+		$(DIR)/CNMSSM_lepton_amm_wrapper.cpp \
 		$(DIR)/CNMSSM_observables.cpp \
 		$(DIR)/CNMSSM_physical.cpp \
 		$(DIR)/CNMSSM_slha_io.cpp \
 		$(DIR)/CNMSSM_soft_parameters.cpp \
 		$(DIR)/CNMSSM_susy_parameters.cpp \
+		$(DIR)/CNMSSM_unitarity.cpp \
 		$(DIR)/CNMSSM_utilities.cpp \
 		$(DIR)/CNMSSM_weinberg_angle.cpp
 
@@ -89,12 +90,11 @@ LLCNMSSM_MMA  := \
 		$(DIR)/run_CNMSSM.m
 
 LIBCNMSSM_HDR := \
-		$(DIR)/CNMSSM_a_muon.hpp \
+		$(DIR)/CNMSSM_amm.hpp \
 		$(DIR)/CNMSSM_convergence_tester.hpp \
 		$(DIR)/CNMSSM_edm.hpp \
 		$(DIR)/CNMSSM_FFV_form_factors.hpp \
-		$(DIR)/CNMSSM_f_to_f_conversion.hpp \
-		$(DIR)/CNMSSM_l_to_lgamma.hpp \
+		$(wildcard $(DIR)/observables/CNMSSM*.hpp) \
 		$(DIR)/CNMSSM_b_to_s_gamma.hpp \
 		$(DIR)/CNMSSM_ewsb_solver.hpp \
 		$(DIR)/CNMSSM_ewsb_solver_interface.hpp \
@@ -108,6 +108,7 @@ LIBCNMSSM_HDR := \
 		$(DIR)/CNMSSM_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/CNMSSM_model.hpp \
 		$(DIR)/CNMSSM_model_slha.hpp \
+		$(DIR)/CNMSSM_lepton_amm_wrapper.hpp \
 		$(DIR)/CNMSSM_observables.hpp \
 		$(DIR)/CNMSSM_physical.hpp \
 		$(DIR)/CNMSSM_slha_io.hpp \
@@ -116,12 +117,14 @@ LIBCNMSSM_HDR := \
 		$(DIR)/CNMSSM_soft_parameters.hpp \
 		$(DIR)/CNMSSM_susy_parameters.hpp \
 		$(DIR)/CNMSSM_susy_scale_constraint.hpp \
+		$(DIR)/CNMSSM_unitarity.hpp \
 		$(DIR)/CNMSSM_utilities.hpp \
 		$(DIR)/CNMSSM_weinberg_angle.hpp
 
 LIBCNMSSM_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/CNMSSM_qft.hpp \
 		$(DIR)/cxx_qft/CNMSSM_fields.hpp \
+		$(DIR)/cxx_qft/CNMSSM_particle_aliases.hpp \
 		$(DIR)/cxx_qft/CNMSSM_vertices.hpp \
 		$(DIR)/cxx_qft/CNMSSM_context_base.hpp \
 		$(DIR)/cxx_qft/CNMSSM_npointfunctions_wilsoncoeffs.hpp
@@ -317,7 +320,7 @@ $(METACODE_STAMP_CNMSSM):
 endif
 
 $(LIBCNMSSM_DEP) $(EXECNMSSM_DEP) $(LLCNMSSM_DEP) $(LIBCNMSSM_OBJ) $(EXECNMSSM_OBJ) $(LLCNMSSM_OBJ) $(LLCNMSSM_LIB): \
-	CPPFLAGS += $(MODCNMSSM_SUBMOD_INC) $(MODCNMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODCNMSSM_SUBMOD_INC) $(MODCNMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIGGSTOOLSFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBCNMSSM_DEP) $(EXECNMSSM_DEP) $(LLCNMSSM_DEP) $(LIBCNMSSM_OBJ) $(EXECNMSSM_OBJ) $(LLCNMSSM_OBJ) $(LLCNMSSM_LIB): \
@@ -333,11 +336,11 @@ $(LIBCNMSSM): $(LIBCNMSSM_OBJ)
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBCNMSSM) $(MODCNMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
 $(LLCNMSSM_LIB): $(LLCNMSSM_OBJ) $(LIBCNMSSM) $(MODCNMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
 
 ALLDEP += $(LIBCNMSSM_DEP) $(EXECNMSSM_DEP)
 ALLSRC += $(LIBCNMSSM_SRC) $(EXECNMSSM_SRC)

@@ -91,13 +91,14 @@ void UMSSM_low_scale_constraint<Two_scale>::apply()
    calculate_running_SM_masses();
 
    const auto TanBeta = INPUTPARAMETER(TanBeta);
+   const auto vu = MODELPARAMETER(vu);
    const auto g1 = MODELPARAMETER(g1);
    const auto g2 = MODELPARAMETER(g2);
 
    calculate_Yu_DRbar();
    calculate_Yd_DRbar();
    calculate_Ye_DRbar();
-   MODEL->set_Yv((ZEROMATRIX(3,3)).real());
+   MODEL->set_Yv(((1.4142135623730951*neutrinoDRbar)/vu).real());
    MODEL->set_vd(Re((2*MZDRbar)/(Sqrt(0.6*Sqr(g1) + Sqr(g2))*Sqrt(1 + Sqr(TanBeta)
       ))));
    MODEL->set_vu(Re((2*MZDRbar*TanBeta)/(Sqrt(0.6*Sqr(g1) + Sqr(g2))*Sqrt(1 + Sqr(
@@ -281,7 +282,7 @@ double UMSSM_low_scale_constraint<Two_scale>::calculate_theta_w()
 
       if (MODEL->get_thresholds() && MODEL->get_threshold_corrections().
          sin_theta_w > 0)
-         qedqcd.setPoleMW(result.second);
+         Pole(MVWm) = result.second;
 
       MODEL->get_problems().unflag_no_sinThetaW_convergence();
    } catch (const Error& e) {

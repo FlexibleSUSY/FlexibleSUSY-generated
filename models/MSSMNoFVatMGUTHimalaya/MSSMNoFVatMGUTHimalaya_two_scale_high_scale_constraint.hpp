@@ -37,7 +37,6 @@ public:
    MSSMNoFVatMGUTHimalaya_high_scale_constraint() = default;
    MSSMNoFVatMGUTHimalaya_high_scale_constraint(MSSMNoFVatMGUTHimalaya<Two_scale>*);
    virtual ~MSSMNoFVatMGUTHimalaya_high_scale_constraint() = default;
-   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
    virtual void apply() override;
    virtual double get_scale() const override;

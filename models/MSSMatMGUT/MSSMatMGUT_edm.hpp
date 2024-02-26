@@ -16,22 +16,28 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-
 /**
  * @file MSSMatMGUT_edm.hpp
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #ifndef MSSMatMGUT_EDM_H
 #define MSSMatMGUT_EDM_H
 
+#include "MSSMatMGUT_mass_eigenstates.hpp"
+#include "lowe.h"
+
 namespace flexiblesusy {
+
 class MSSMatMGUT_mass_eigenstates;
 
 namespace MSSMatMGUT_edm {
 
-}
+template <typename Lepton>
+double calculate_edm(const MSSMatMGUT_mass_eigenstates&, const softsusy::QedQcd&, int idx);
+
+} // namespace MSSMatMGUT_edm
 } // namespace flexiblesusy
 
 #endif

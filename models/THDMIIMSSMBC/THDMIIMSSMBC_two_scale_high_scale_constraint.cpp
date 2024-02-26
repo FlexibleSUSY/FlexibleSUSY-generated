@@ -164,9 +164,16 @@ void THDMIIMSSMBC_high_scale_constraint<Two_scale>::apply()
    const auto MSUSY = INPUTPARAMETER(MSUSY);
    const auto MuInput = INPUTPARAMETER(MuInput);
    const auto LambdaLoopOrder = INPUTPARAMETER(LambdaLoopOrder);
-   const auto AbInput = INPUTPARAMETER(AbInput);
-   const auto AtauInput = INPUTPARAMETER(AtauInput);
-   const auto AtInput = INPUTPARAMETER(AtInput);
+   const auto M2Input = INPUTPARAMETER(M2Input);
+   const auto M1Input = INPUTPARAMETER(M1Input);
+   const auto mslInput = INPUTPARAMETER(mslInput);
+   const auto msqInput = INPUTPARAMETER(msqInput);
+   const auto msdInput = INPUTPARAMETER(msdInput);
+   const auto mseInput = INPUTPARAMETER(mseInput);
+   const auto msuInput = INPUTPARAMETER(msuInput);
+   const auto AdInput = INPUTPARAMETER(AdInput);
+   const auto AeInput = INPUTPARAMETER(AeInput);
+   const auto AuInput = INPUTPARAMETER(AuInput);
    const auto g1 = MODELPARAMETER(g1);
    const auto g2 = MODELPARAMETER(g2);
    const auto g3 = MODELPARAMETER(g3);
@@ -176,79 +183,6102 @@ void THDMIIMSSMBC_high_scale_constraint<Two_scale>::apply()
 
    MODEL->set_Lambda1(Re(0.5*(0.25*(0.6*Sqr(g1) + Sqr(g2)) - (
       0.000053468657576480914*Quad(MuInput)*Quad(Yu(2,2))*Sqr(g3)*UnitStep(-2 +
-      LambdaLoopOrder))/Quad(MSUSY) + ((-0.0031662869888230555*Quad(MuInput)*Quad(
-      Yu(2,2)))/Quad(MSUSY) + (0.037995443865876666*Quad(Yd(2,2))*Sqr(AbInput)*(1
-      - (0.08333333333333333*Sqr(AbInput))/Sqr(MSUSY)))/Sqr(MSUSY) + (
-      0.012665147955292222*Quad(Ye(2,2))*Sqr(AtauInput)*(1 - (0.08333333333333333*
-      Sqr(AtauInput))/Sqr(MSUSY)))/Sqr(MSUSY) + 0.0015831434944115277*(0.6*Sqr(g1)
-      + Sqr(g2))*((-3*Sqr(AbInput)*Sqr(Yd(2,2)))/Sqr(MSUSY) - (Sqr(AtauInput)*Sqr(
-      Ye(2,2)))/Sqr(MSUSY) + (3*Sqr(MuInput)*Sqr(Yu(2,2)))/Sqr(MSUSY)) -
-      0.0005277144981371759*(0.6*Sqr(g1) + Sqr(g2))*((3*Sqr(AbInput)*Sqr(Yd(2,2)))
-      /Sqr(MSUSY) + (Sqr(AtauInput)*Sqr(Ye(2,2)))/Sqr(MSUSY) + (3*Sqr(MuInput)*Sqr
-      (Yu(2,2)))/Sqr(MSUSY)))*UnitStep(-1 + LambdaLoopOrder))));
+      LambdaLoopOrder))/Quad(MSUSY) + UnitStep(-1 + LambdaLoopOrder)*(0.5*(-
+      0.00037995443865876665*(2*Log(Sqr(Abs(MuInput))/Sqr(SCALE)) +
+      0.3333333333333333*Log(Sqr(msdInput(0))/Sqr(SCALE)) + 0.3333333333333333*Log
+      (Sqr(msdInput(1))/Sqr(SCALE)) + 0.3333333333333333*Log(Sqr(msdInput(2))/Sqr(
+      SCALE)) + Log(Sqr(mseInput(0))/Sqr(SCALE)) + Log(Sqr(mseInput(1))/Sqr(SCALE)
+      ) + Log(Sqr(mseInput(2))/Sqr(SCALE)) + 0.5*Log(Sqr(mslInput(0))/Sqr(SCALE))
+      + 0.5*Log(Sqr(mslInput(1))/Sqr(SCALE)) + 0.5*Log(Sqr(mslInput(2))/Sqr(SCALE)
+      ) + 0.16666666666666666*Log(Sqr(msqInput(0))/Sqr(SCALE)) +
+      0.16666666666666666*Log(Sqr(msqInput(1))/Sqr(SCALE)) + 0.16666666666666666*
+      Log(Sqr(msqInput(2))/Sqr(SCALE)) + 1.3333333333333333*Log(Sqr(msuInput(0))/
+      Sqr(SCALE)) + 1.3333333333333333*Log(Sqr(msuInput(1))/Sqr(SCALE)) +
+      1.3333333333333333*Log(Sqr(msuInput(2))/Sqr(SCALE)))*Quad(g1) -
+      0.0005277144981371759*(-4 + 8*Log(Sqr(M2Input)/Sqr(SCALE)) + 4*Log(Sqr(Abs(
+      MuInput))/Sqr(SCALE)) + Log(Sqr(mslInput(0))/Sqr(SCALE)) + Log(Sqr(mslInput(
+      1))/Sqr(SCALE)) + Log(Sqr(mslInput(2))/Sqr(SCALE)) + 3*Log(Sqr(msqInput(0))/
+      Sqr(SCALE)) + 3*Log(Sqr(msqInput(1))/Sqr(SCALE)) + 3*Log(Sqr(msqInput(2))/
+      Sqr(SCALE)))*Quad(g2)) + Re(0.0031662869888230555*(3*Sqr(AdInput(0,0))*Sqr(
+      Yd(0,0))*TCDB0(msdInput(0),msqInput(0)) + 3*Sqr(AdInput(0,1))*Sqr(Yd(0,1))*
+      TCDB0(msdInput(0),msqInput(1)) + 3*Sqr(AdInput(0,2))*Sqr(Yd(0,2))*TCDB0(
+      msdInput(0),msqInput(2)) + 3*Sqr(AdInput(1,0))*Sqr(Yd(1,0))*TCDB0(msdInput(1
+      ),msqInput(0)) + 3*Sqr(AdInput(1,1))*Sqr(Yd(1,1))*TCDB0(msdInput(1),msqInput
+      (1)) + 3*Sqr(AdInput(1,2))*Sqr(Yd(1,2))*TCDB0(msdInput(1),msqInput(2)) + 3*
+      Sqr(AdInput(2,0))*Sqr(Yd(2,0))*TCDB0(msdInput(2),msqInput(0)) + 3*Sqr(
+      AdInput(2,1))*Sqr(Yd(2,1))*TCDB0(msdInput(2),msqInput(1)) + 3*Sqr(AdInput(2,
+      2))*Sqr(Yd(2,2))*TCDB0(msdInput(2),msqInput(2)) + Sqr(AeInput(0,0))*Sqr(Ye(0
+      ,0))*TCDB0(mseInput(0),mslInput(0)) + Sqr(AeInput(0,1))*Sqr(Ye(0,1))*TCDB0(
+      mseInput(0),mslInput(1)) + Sqr(AeInput(0,2))*Sqr(Ye(0,2))*TCDB0(mseInput(0),
+      mslInput(2)) + Sqr(AeInput(1,0))*Sqr(Ye(1,0))*TCDB0(mseInput(1),mslInput(0))
+      + Sqr(AeInput(1,1))*Sqr(Ye(1,1))*TCDB0(mseInput(1),mslInput(1)) + Sqr(
+      AeInput(1,2))*Sqr(Ye(1,2))*TCDB0(mseInput(1),mslInput(2)) + Sqr(AeInput(2,0)
+      )*Sqr(Ye(2,0))*TCDB0(mseInput(2),mslInput(0)) + Sqr(AeInput(2,1))*Sqr(Ye(2,1
+      ))*TCDB0(mseInput(2),mslInput(1)) + Sqr(AeInput(2,2))*Sqr(Ye(2,2))*TCDB0(
+      mseInput(2),mslInput(2)) + 3*Sqr(Abs(MuInput))*Sqr(Yu(0,0))*TCDB0(msuInput(0
+      ),msqInput(0)) + 3*Sqr(Abs(MuInput))*Sqr(Yu(0,1))*TCDB0(msuInput(0),msqInput
+      (1)) + 3*Sqr(Abs(MuInput))*Sqr(Yu(0,2))*TCDB0(msuInput(0),msqInput(2)) + 3*
+      Sqr(Abs(MuInput))*Sqr(Yu(1,0))*TCDB0(msuInput(1),msqInput(0)) + 3*Sqr(Abs(
+      MuInput))*Sqr(Yu(1,1))*TCDB0(msuInput(1),msqInput(1)) + 3*Sqr(Abs(MuInput))*
+      Sqr(Yu(1,2))*TCDB0(msuInput(1),msqInput(2)) + 3*Sqr(Abs(MuInput))*Sqr(Yu(2,0
+      ))*TCDB0(msuInput(2),msqInput(0)) + 3*Sqr(Abs(MuInput))*Sqr(Yu(2,1))*TCDB0(
+      msuInput(2),msqInput(1)) + 3*Sqr(Abs(MuInput))*Sqr(Yu(2,2))*TCDB0(msuInput(2
+      ),msqInput(2))) - 0.0007915717472057639*(0.6*Sqr(g1)*TCW(Abs(M1Input),Abs(
+      MuInput),SCALE) + 3*Sqr(g2)*TCW(Abs(M2Input),Abs(MuInput),SCALE)))*(0.6*Sqr(
+      g1) + Sqr(g2)) + 0.006332573977646111*((-0.03*Quad(g1) + 0.6*Sqr(g1)*(Sqr(Yd
+      (0,0)) + Sqr(Yd(0,1)) + Sqr(Yd(0,2))) - 3*Sqr(Sqr(Yd(0,0)) + Sqr(Yd(0,1)) +
+      Sqr(Yd(0,2))))*TCB0(msdInput(0),msdInput(0),SCALE) - 3*Sqr(Yd(0,0)*Yd(1,0) +
+      Yd(0,1)*Yd(1,1) + Yd(0,2)*Yd(1,2))*TCB0(msdInput(0),msdInput(1),SCALE) - 3*
+      Sqr(Yd(0,0)*Yd(2,0) + Yd(0,1)*Yd(2,1) + Yd(0,2)*Yd(2,2))*TCB0(msdInput(0),
+      msdInput(2),SCALE) - 3*Sqr(Yd(0,0)*Yd(1,0) + Yd(0,1)*Yd(1,1) + Yd(0,2)*Yd(1,
+      2))*TCB0(msdInput(1),msdInput(0),SCALE) + (-0.03*Quad(g1) + 0.6*Sqr(g1)*(Sqr
+      (Yd(1,0)) + Sqr(Yd(1,1)) + Sqr(Yd(1,2))) - 3*Sqr(Sqr(Yd(1,0)) + Sqr(Yd(1,1))
+      + Sqr(Yd(1,2))))*TCB0(msdInput(1),msdInput(1),SCALE) - 3*Sqr(Yd(1,0)*Yd(2,0)
+      + Yd(1,1)*Yd(2,1) + Yd(1,2)*Yd(2,2))*TCB0(msdInput(1),msdInput(2),SCALE) - 3
+      *Sqr(Yd(0,0)*Yd(2,0) + Yd(0,1)*Yd(2,1) + Yd(0,2)*Yd(2,2))*TCB0(msdInput(2),
+      msdInput(0),SCALE) - 3*Sqr(Yd(1,0)*Yd(2,0) + Yd(1,1)*Yd(2,1) + Yd(1,2)*Yd(2,
+      2))*TCB0(msdInput(2),msdInput(1),SCALE) + (-0.03*Quad(g1) + 0.6*Sqr(g1)*(Sqr
+      (Yd(2,0)) + Sqr(Yd(2,1)) + Sqr(Yd(2,2))) - 3*Sqr(Sqr(Yd(2,0)) + Sqr(Yd(2,1))
+      + Sqr(Yd(2,2))))*TCB0(msdInput(2),msdInput(2),SCALE) + (-0.09*Quad(g1) + 0.6
+      *Sqr(g1)*(Sqr(Ye(0,0)) + Sqr(Ye(0,1)) + Sqr(Ye(0,2))) - Sqr(Sqr(Ye(0,0)) +
+      Sqr(Ye(0,1)) + Sqr(Ye(0,2))))*TCB0(mseInput(0),mseInput(0),SCALE) - Sqr(Ye(0
+      ,0)*Ye(1,0) + Ye(0,1)*Ye(1,1) + Ye(0,2)*Ye(1,2))*TCB0(mseInput(0),mseInput(1
+      ),SCALE) - Sqr(Ye(0,0)*Ye(2,0) + Ye(0,1)*Ye(2,1) + Ye(0,2)*Ye(2,2))*TCB0(
+      mseInput(0),mseInput(2),SCALE) - Sqr(Ye(0,0)*Ye(1,0) + Ye(0,1)*Ye(1,1) + Ye(
+      0,2)*Ye(1,2))*TCB0(mseInput(1),mseInput(0),SCALE) + (-0.09*Quad(g1) + 0.6*
+      Sqr(g1)*(Sqr(Ye(1,0)) + Sqr(Ye(1,1)) + Sqr(Ye(1,2))) - Sqr(Sqr(Ye(1,0)) +
+      Sqr(Ye(1,1)) + Sqr(Ye(1,2))))*TCB0(mseInput(1),mseInput(1),SCALE) - Sqr(Ye(1
+      ,0)*Ye(2,0) + Ye(1,1)*Ye(2,1) + Ye(1,2)*Ye(2,2))*TCB0(mseInput(1),mseInput(2
+      ),SCALE) - Sqr(Ye(0,0)*Ye(2,0) + Ye(0,1)*Ye(2,1) + Ye(0,2)*Ye(2,2))*TCB0(
+      mseInput(2),mseInput(0),SCALE) - Sqr(Ye(1,0)*Ye(2,0) + Ye(1,1)*Ye(2,1) + Ye(
+      1,2)*Ye(2,2))*TCB0(mseInput(2),mseInput(1),SCALE) + (-0.09*Quad(g1) + 0.6*
+      Sqr(g1)*(Sqr(Ye(2,0)) + Sqr(Ye(2,1)) + Sqr(Ye(2,2))) - Sqr(Sqr(Ye(2,0)) +
+      Sqr(Ye(2,1)) + Sqr(Ye(2,2))))*TCB0(mseInput(2),mseInput(2),SCALE) + (0.125*(
+      -0.36*Quad(g1) - Quad(g2)) + 0.5*(-0.6*Sqr(g1) + Sqr(g2))*(Sqr(Ye(0,0)) +
+      Sqr(Ye(1,0)) + Sqr(Ye(2,0))) - Sqr(Sqr(Ye(0,0)) + Sqr(Ye(1,0)) + Sqr(Ye(2,0)
+      )))*TCB0(mslInput(0),mslInput(0),SCALE) - Sqr(Ye(0,0)*Ye(0,1) + Ye(1,0)*Ye(1
+      ,1) + Ye(2,0)*Ye(2,1))*TCB0(mslInput(0),mslInput(1),SCALE) - Sqr(Ye(0,0)*Ye(
+      0,2) + Ye(1,0)*Ye(1,2) + Ye(2,0)*Ye(2,2))*TCB0(mslInput(0),mslInput(2),SCALE
+      ) - Sqr(Ye(0,0)*Ye(0,1) + Ye(1,0)*Ye(1,1) + Ye(2,0)*Ye(2,1))*TCB0(mslInput(1
+      ),mslInput(0),SCALE) + (0.125*(-0.36*Quad(g1) - Quad(g2)) + 0.5*(-0.6*Sqr(g1
+      ) + Sqr(g2))*(Sqr(Ye(0,1)) + Sqr(Ye(1,1)) + Sqr(Ye(2,1))) - Sqr(Sqr(Ye(0,1))
+      + Sqr(Ye(1,1)) + Sqr(Ye(2,1))))*TCB0(mslInput(1),mslInput(1),SCALE) - Sqr(Ye
+      (0,1)*Ye(0,2) + Ye(1,1)*Ye(1,2) + Ye(2,1)*Ye(2,2))*TCB0(mslInput(1),mslInput
+      (2),SCALE) - Sqr(Ye(0,0)*Ye(0,2) + Ye(1,0)*Ye(1,2) + Ye(2,0)*Ye(2,2))*TCB0(
+      mslInput(2),mslInput(0),SCALE) - Sqr(Ye(0,1)*Ye(0,2) + Ye(1,1)*Ye(1,2) + Ye(
+      2,1)*Ye(2,2))*TCB0(mslInput(2),mslInput(1),SCALE) + (0.125*(-0.36*Quad(g1) -
+      Quad(g2)) + 0.5*(-0.6*Sqr(g1) + Sqr(g2))*(Sqr(Ye(0,2)) + Sqr(Ye(1,2)) + Sqr(
+      Ye(2,2))) - Sqr(Sqr(Ye(0,2)) + Sqr(Ye(1,2)) + Sqr(Ye(2,2))))*TCB0(mslInput(2
+      ),mslInput(2),SCALE) + (0.041666666666666664*(-0.36*Quad(g1) - 9*Quad(g2)) +
+      0.5*(0.6*Sqr(g1) + 3*Sqr(g2))*(Sqr(Yd(0,0)) + Sqr(Yd(1,0)) + Sqr(Yd(2,0))) -
+      3*Sqr(Sqr(Yd(0,0)) + Sqr(Yd(1,0)) + Sqr(Yd(2,0))))*TCB0(msqInput(0),msqInput
+      (0),SCALE) - 3*Sqr(Yd(0,0)*Yd(0,1) + Yd(1,0)*Yd(1,1) + Yd(2,0)*Yd(2,1))*TCB0
+      (msqInput(0),msqInput(1),SCALE) - 3*Sqr(Yd(0,0)*Yd(0,2) + Yd(1,0)*Yd(1,2) +
+      Yd(2,0)*Yd(2,2))*TCB0(msqInput(0),msqInput(2),SCALE) - 3*Sqr(Yd(0,0)*Yd(0,1)
+      + Yd(1,0)*Yd(1,1) + Yd(2,0)*Yd(2,1))*TCB0(msqInput(1),msqInput(0),SCALE) + (
+      0.041666666666666664*(-0.36*Quad(g1) - 9*Quad(g2)) + 0.5*(0.6*Sqr(g1) + 3*
+      Sqr(g2))*(Sqr(Yd(0,1)) + Sqr(Yd(1,1)) + Sqr(Yd(2,1))) - 3*Sqr(Sqr(Yd(0,1)) +
+      Sqr(Yd(1,1)) + Sqr(Yd(2,1))))*TCB0(msqInput(1),msqInput(1),SCALE) - 3*Sqr(Yd
+      (0,1)*Yd(0,2) + Yd(1,1)*Yd(1,2) + Yd(2,1)*Yd(2,2))*TCB0(msqInput(1),msqInput
+      (2),SCALE) - 3*Sqr(Yd(0,0)*Yd(0,2) + Yd(1,0)*Yd(1,2) + Yd(2,0)*Yd(2,2))*TCB0
+      (msqInput(2),msqInput(0),SCALE) - 3*Sqr(Yd(0,1)*Yd(0,2) + Yd(1,1)*Yd(1,2) +
+      Yd(2,1)*Yd(2,2))*TCB0(msqInput(2),msqInput(1),SCALE) + (0.041666666666666664
+      *(-0.36*Quad(g1) - 9*Quad(g2)) + 0.5*(0.6*Sqr(g1) + 3*Sqr(g2))*(Sqr(Yd(0,2))
+      + Sqr(Yd(1,2)) + Sqr(Yd(2,2))) - 3*Sqr(Sqr(Yd(0,2)) + Sqr(Yd(1,2)) + Sqr(Yd(
+      2,2))))*TCB0(msqInput(2),msqInput(2),SCALE) - 0.12*Quad(g1)*TCB0(msuInput(0)
+      ,msuInput(0),SCALE) - 0.12*Quad(g1)*TCB0(msuInput(1),msuInput(1),SCALE) -
+      0.12*Quad(g1)*TCB0(msuInput(2),msuInput(2),SCALE) + (0.6*Sqr(g1)*Sqr(AdInput
+      (0,0))*Sqr(Yd(0,0)) - 6*Sqr(AdInput(0,0))*Sqr(Yd(0,0))*(Sqr(Yd(0,0)) + Sqr(
+      Yd(0,1)) + Sqr(Yd(0,2))))*TCC0(msdInput(0),msdInput(0),msqInput(0)) + (0.6*
+      Sqr(g1)*Sqr(AdInput(0,1))*Sqr(Yd(0,1)) - 6*Sqr(AdInput(0,1))*Sqr(Yd(0,1))*(
+      Sqr(Yd(0,0)) + Sqr(Yd(0,1)) + Sqr(Yd(0,2))))*TCC0(msdInput(0),msdInput(0),
+      msqInput(1)) + (0.6*Sqr(g1)*Sqr(AdInput(0,2))*Sqr(Yd(0,2)) - 6*Sqr(AdInput(0
+      ,2))*Sqr(Yd(0,2))*(Sqr(Yd(0,0)) + Sqr(Yd(0,1)) + Sqr(Yd(0,2))))*TCC0(
+      msdInput(0),msdInput(0),msqInput(2)) + (0.5*(0.6*Sqr(g1) + 3*Sqr(g2))*Sqr(
+      AdInput(0,0))*Sqr(Yd(0,0)) - 6*Sqr(AdInput(0,0))*Sqr(Yd(0,0))*(Sqr(Yd(0,0))
+      + Sqr(Yd(1,0)) + Sqr(Yd(2,0))))*TCC0(msdInput(0),msqInput(0),msqInput(0)) +
+      (0.5*(0.6*Sqr(g1) + 3*Sqr(g2))*Sqr(AdInput(0,1))*Sqr(Yd(0,1)) - 6*Sqr(
+      AdInput(0,1))*Sqr(Yd(0,1))*(Sqr(Yd(0,1)) + Sqr(Yd(1,1)) + Sqr(Yd(2,1))))*
+      TCC0(msdInput(0),msqInput(1),msqInput(1)) + (0.5*(0.6*Sqr(g1) + 3*Sqr(g2))*
+      Sqr(AdInput(0,2))*Sqr(Yd(0,2)) - 6*Sqr(AdInput(0,2))*Sqr(Yd(0,2))*(Sqr(Yd(0,
+      2)) + Sqr(Yd(1,2)) + Sqr(Yd(2,2))))*TCC0(msdInput(0),msqInput(2),msqInput(2)
+      ) + (0.6*Sqr(g1)*Sqr(AdInput(1,0))*Sqr(Yd(1,0)) - 6*Sqr(AdInput(1,0))*Sqr(Yd
+      (1,0))*(Sqr(Yd(1,0)) + Sqr(Yd(1,1)) + Sqr(Yd(1,2))))*TCC0(msdInput(1),
+      msdInput(1),msqInput(0)) + (0.6*Sqr(g1)*Sqr(AdInput(1,1))*Sqr(Yd(1,1)) - 6*
+      Sqr(AdInput(1,1))*Sqr(Yd(1,1))*(Sqr(Yd(1,0)) + Sqr(Yd(1,1)) + Sqr(Yd(1,2))))
+      *TCC0(msdInput(1),msdInput(1),msqInput(1)) + (0.6*Sqr(g1)*Sqr(AdInput(1,2))*
+      Sqr(Yd(1,2)) - 6*Sqr(AdInput(1,2))*Sqr(Yd(1,2))*(Sqr(Yd(1,0)) + Sqr(Yd(1,1))
+      + Sqr(Yd(1,2))))*TCC0(msdInput(1),msdInput(1),msqInput(2)) + (0.5*(0.6*Sqr(
+      g1) + 3*Sqr(g2))*Sqr(AdInput(1,0))*Sqr(Yd(1,0)) - 6*Sqr(AdInput(1,0))*Sqr(Yd
+      (1,0))*(Sqr(Yd(0,0)) + Sqr(Yd(1,0)) + Sqr(Yd(2,0))))*TCC0(msdInput(1),
+      msqInput(0),msqInput(0)) + (0.5*(0.6*Sqr(g1) + 3*Sqr(g2))*Sqr(AdInput(1,1))*
+      Sqr(Yd(1,1)) - 6*Sqr(AdInput(1,1))*Sqr(Yd(1,1))*(Sqr(Yd(0,1)) + Sqr(Yd(1,1))
+      + Sqr(Yd(2,1))))*TCC0(msdInput(1),msqInput(1),msqInput(1)) + (0.5*(0.6*Sqr(
+      g1) + 3*Sqr(g2))*Sqr(AdInput(1,2))*Sqr(Yd(1,2)) - 6*Sqr(AdInput(1,2))*Sqr(Yd
+      (1,2))*(Sqr(Yd(0,2)) + Sqr(Yd(1,2)) + Sqr(Yd(2,2))))*TCC0(msdInput(1),
+      msqInput(2),msqInput(2)) + (0.6*Sqr(g1)*Sqr(AdInput(2,0))*Sqr(Yd(2,0)) - 6*
+      Sqr(AdInput(2,0))*Sqr(Yd(2,0))*(Sqr(Yd(2,0)) + Sqr(Yd(2,1)) + Sqr(Yd(2,2))))
+      *TCC0(msdInput(2),msdInput(2),msqInput(0)) + (0.6*Sqr(g1)*Sqr(AdInput(2,1))*
+      Sqr(Yd(2,1)) - 6*Sqr(AdInput(2,1))*Sqr(Yd(2,1))*(Sqr(Yd(2,0)) + Sqr(Yd(2,1))
+      + Sqr(Yd(2,2))))*TCC0(msdInput(2),msdInput(2),msqInput(1)) + (0.6*Sqr(g1)*
+      Sqr(AdInput(2,2))*Sqr(Yd(2,2)) - 6*Sqr(AdInput(2,2))*Sqr(Yd(2,2))*(Sqr(Yd(2,
+      0)) + Sqr(Yd(2,1)) + Sqr(Yd(2,2))))*TCC0(msdInput(2),msdInput(2),msqInput(2)
+      ) + (0.5*(0.6*Sqr(g1) + 3*Sqr(g2))*Sqr(AdInput(2,0))*Sqr(Yd(2,0)) - 6*Sqr(
+      AdInput(2,0))*Sqr(Yd(2,0))*(Sqr(Yd(0,0)) + Sqr(Yd(1,0)) + Sqr(Yd(2,0))))*
+      TCC0(msdInput(2),msqInput(0),msqInput(0)) + (0.5*(0.6*Sqr(g1) + 3*Sqr(g2))*
+      Sqr(AdInput(2,1))*Sqr(Yd(2,1)) - 6*Sqr(AdInput(2,1))*Sqr(Yd(2,1))*(Sqr(Yd(0,
+      1)) + Sqr(Yd(1,1)) + Sqr(Yd(2,1))))*TCC0(msdInput(2),msqInput(1),msqInput(1)
+      ) + (0.5*(0.6*Sqr(g1) + 3*Sqr(g2))*Sqr(AdInput(2,2))*Sqr(Yd(2,2)) - 6*Sqr(
+      AdInput(2,2))*Sqr(Yd(2,2))*(Sqr(Yd(0,2)) + Sqr(Yd(1,2)) + Sqr(Yd(2,2))))*
+      TCC0(msdInput(2),msqInput(2),msqInput(2)) + (0.6*Sqr(g1)*Sqr(AeInput(0,0))*
+      Sqr(Ye(0,0)) - 2*Sqr(AeInput(0,0))*Sqr(Ye(0,0))*(Sqr(Ye(0,0)) + Sqr(Ye(1,0))
+      + Sqr(Ye(2,0))))*TCC0(mseInput(0),mseInput(0),mslInput(0)) + (0.6*Sqr(g1)*
+      Sqr(AeInput(0,1))*Sqr(Ye(0,1)) - 2*Sqr(AeInput(0,1))*Sqr(Ye(0,1))*(Sqr(Ye(0,
+      0)) + Sqr(Ye(1,0)) + Sqr(Ye(2,0))))*TCC0(mseInput(0),mseInput(0),mslInput(1)
+      ) + (0.6*Sqr(g1)*Sqr(AeInput(0,2))*Sqr(Ye(0,2)) - 2*Sqr(AeInput(0,2))*Sqr(Ye
+      (0,2))*(Sqr(Ye(0,0)) + Sqr(Ye(1,0)) + Sqr(Ye(2,0))))*TCC0(mseInput(0),
+      mseInput(0),mslInput(2)) + (0.5*(-0.6*Sqr(g1) + Sqr(g2))*Sqr(AeInput(0,0))*
+      Sqr(Ye(0,0)) - 2*Sqr(AeInput(0,0))*Sqr(Ye(0,0))*(Sqr(Ye(0,0)) + Sqr(Ye(1,0))
+      + Sqr(Ye(2,0))))*TCC0(mseInput(0),mslInput(0),mslInput(0)) + (0.5*(-0.6*Sqr(
+      g1) + Sqr(g2))*Sqr(AeInput(0,1))*Sqr(Ye(0,1)) - 2*Sqr(AeInput(0,1))*Sqr(Ye(0
+      ,1))*(Sqr(Ye(0,1)) + Sqr(Ye(1,1)) + Sqr(Ye(2,1))))*TCC0(mseInput(0),mslInput
+      (1),mslInput(1)) + (0.5*(-0.6*Sqr(g1) + Sqr(g2))*Sqr(AeInput(0,2))*Sqr(Ye(0,
+      2)) - 2*Sqr(AeInput(0,2))*Sqr(Ye(0,2))*(Sqr(Ye(0,2)) + Sqr(Ye(1,2)) + Sqr(Ye
+      (2,2))))*TCC0(mseInput(0),mslInput(2),mslInput(2)) + (0.6*Sqr(g1)*Sqr(
+      AeInput(1,0))*Sqr(Ye(1,0)) - 2*Sqr(AeInput(1,0))*Sqr(Ye(1,0))*(Sqr(Ye(0,1))
+      + Sqr(Ye(1,1)) + Sqr(Ye(2,1))))*TCC0(mseInput(1),mseInput(1),mslInput(0)) +
+      (0.6*Sqr(g1)*Sqr(AeInput(1,1))*Sqr(Ye(1,1)) - 2*Sqr(AeInput(1,1))*Sqr(Ye(1,1
+      ))*(Sqr(Ye(0,1)) + Sqr(Ye(1,1)) + Sqr(Ye(2,1))))*TCC0(mseInput(1),mseInput(1
+      ),mslInput(1)) + (0.6*Sqr(g1)*Sqr(AeInput(1,2))*Sqr(Ye(1,2)) - 2*Sqr(AeInput
+      (1,2))*Sqr(Ye(1,2))*(Sqr(Ye(0,1)) + Sqr(Ye(1,1)) + Sqr(Ye(2,1))))*TCC0(
+      mseInput(1),mseInput(1),mslInput(2)) + (0.5*(-0.6*Sqr(g1) + Sqr(g2))*Sqr(
+      AeInput(1,0))*Sqr(Ye(1,0)) - 2*Sqr(AeInput(1,0))*Sqr(Ye(1,0))*(Sqr(Ye(0,0))
+      + Sqr(Ye(1,0)) + Sqr(Ye(2,0))))*TCC0(mseInput(1),mslInput(0),mslInput(0)) +
+      (0.5*(-0.6*Sqr(g1) + Sqr(g2))*Sqr(AeInput(1,1))*Sqr(Ye(1,1)) - 2*Sqr(AeInput
+      (1,1))*Sqr(Ye(1,1))*(Sqr(Ye(0,1)) + Sqr(Ye(1,1)) + Sqr(Ye(2,1))))*TCC0(
+      mseInput(1),mslInput(1),mslInput(1)) + (0.5*(-0.6*Sqr(g1) + Sqr(g2))*Sqr(
+      AeInput(1,2))*Sqr(Ye(1,2)) - 2*Sqr(AeInput(1,2))*Sqr(Ye(1,2))*(Sqr(Ye(0,2))
+      + Sqr(Ye(1,2)) + Sqr(Ye(2,2))))*TCC0(mseInput(1),mslInput(2),mslInput(2)) +
+      (0.6*Sqr(g1)*Sqr(AeInput(2,0))*Sqr(Ye(2,0)) - 2*Sqr(AeInput(2,0))*Sqr(Ye(2,0
+      ))*(Sqr(Ye(0,2)) + Sqr(Ye(1,2)) + Sqr(Ye(2,2))))*TCC0(mseInput(2),mseInput(2
+      ),mslInput(0)) + (0.6*Sqr(g1)*Sqr(AeInput(2,1))*Sqr(Ye(2,1)) - 2*Sqr(AeInput
+      (2,1))*Sqr(Ye(2,1))*(Sqr(Ye(0,2)) + Sqr(Ye(1,2)) + Sqr(Ye(2,2))))*TCC0(
+      mseInput(2),mseInput(2),mslInput(1)) + (0.6*Sqr(g1)*Sqr(AeInput(2,2))*Sqr(Ye
+      (2,2)) - 2*Sqr(AeInput(2,2))*Sqr(Ye(2,2))*(Sqr(Ye(0,2)) + Sqr(Ye(1,2)) + Sqr
+      (Ye(2,2))))*TCC0(mseInput(2),mseInput(2),mslInput(2)) + (0.5*(-0.6*Sqr(g1) +
+      Sqr(g2))*Sqr(AeInput(2,0))*Sqr(Ye(2,0)) - 2*Sqr(AeInput(2,0))*Sqr(Ye(2,0))*(
+      Sqr(Ye(0,0)) + Sqr(Ye(1,0)) + Sqr(Ye(2,0))))*TCC0(mseInput(2),mslInput(0),
+      mslInput(0)) + (0.5*(-0.6*Sqr(g1) + Sqr(g2))*Sqr(AeInput(2,1))*Sqr(Ye(2,1))
+      - 2*Sqr(AeInput(2,1))*Sqr(Ye(2,1))*(Sqr(Ye(0,1)) + Sqr(Ye(1,1)) + Sqr(Ye(2,1
+      ))))*TCC0(mseInput(2),mslInput(1),mslInput(1)) + (0.5*(-0.6*Sqr(g1) + Sqr(g2
+      ))*Sqr(AeInput(2,2))*Sqr(Ye(2,2)) - 2*Sqr(AeInput(2,2))*Sqr(Ye(2,2))*(Sqr(Ye
+      (0,2)) + Sqr(Ye(1,2)) + Sqr(Ye(2,2))))*TCC0(mseInput(2),mslInput(2),mslInput
+      (2)) + 0.5*(0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(Abs(MuInput))*Sqr(Yu(0,0))*TCC0(
+      msqInput(0),msqInput(0),msuInput(0)) + 0.5*(0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(Abs
+      (MuInput))*Sqr(Yu(1,0))*TCC0(msqInput(0),msqInput(0),msuInput(1)) + 0.5*(0.6
+      *Sqr(g1) - 3*Sqr(g2))*Sqr(Abs(MuInput))*Sqr(Yu(2,0))*TCC0(msqInput(0),
+      msqInput(0),msuInput(2)) - 1.2*Sqr(g1)*Sqr(Abs(MuInput))*Sqr(Yu(0,0))*TCC0(
+      msqInput(0),msuInput(0),msuInput(0)) - 1.2*Sqr(g1)*Sqr(Abs(MuInput))*Sqr(Yu(
+      1,0))*TCC0(msqInput(0),msuInput(1),msuInput(1)) - 1.2*Sqr(g1)*Sqr(Abs(
+      MuInput))*Sqr(Yu(2,0))*TCC0(msqInput(0),msuInput(2),msuInput(2)) + 0.5*(0.6*
+      Sqr(g1) - 3*Sqr(g2))*Sqr(Abs(MuInput))*Sqr(Yu(0,1))*TCC0(msqInput(1),
+      msqInput(1),msuInput(0)) + 0.5*(0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(Abs(MuInput))*
+      Sqr(Yu(1,1))*TCC0(msqInput(1),msqInput(1),msuInput(1)) + 0.5*(0.6*Sqr(g1) -
+      3*Sqr(g2))*Sqr(Abs(MuInput))*Sqr(Yu(2,1))*TCC0(msqInput(1),msqInput(1),
+      msuInput(2)) - 1.2*Sqr(g1)*Sqr(Abs(MuInput))*Sqr(Yu(0,1))*TCC0(msqInput(1),
+      msuInput(0),msuInput(0)) - 1.2*Sqr(g1)*Sqr(Abs(MuInput))*Sqr(Yu(1,1))*TCC0(
+      msqInput(1),msuInput(1),msuInput(1)) - 1.2*Sqr(g1)*Sqr(Abs(MuInput))*Sqr(Yu(
+      2,1))*TCC0(msqInput(1),msuInput(2),msuInput(2)) + 0.5*(0.6*Sqr(g1) - 3*Sqr(
+      g2))*Sqr(Abs(MuInput))*Sqr(Yu(0,2))*TCC0(msqInput(2),msqInput(2),msuInput(0)
+      ) + 0.5*(0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(Abs(MuInput))*Sqr(Yu(1,2))*TCC0(
+      msqInput(2),msqInput(2),msuInput(1)) + 0.5*(0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(Abs
+      (MuInput))*Sqr(Yu(2,2))*TCC0(msqInput(2),msqInput(2),msuInput(2)) - 1.2*Sqr(
+      g1)*Sqr(Abs(MuInput))*Sqr(Yu(0,2))*TCC0(msqInput(2),msuInput(0),msuInput(0))
+      - 1.2*Sqr(g1)*Sqr(Abs(MuInput))*Sqr(Yu(1,2))*TCC0(msqInput(2),msuInput(1),
+      msuInput(1)) - 1.2*Sqr(g1)*Sqr(Abs(MuInput))*Sqr(Yu(2,2))*TCC0(msqInput(2),
+      msuInput(2),msuInput(2)) - 3*Quad(AdInput(0,0))*Quad(Yd(0,0))*TCD0(msdInput(
+      0),msdInput(0),msqInput(0),msqInput(0)) - 3*Sqr(AdInput(0,0))*Sqr(AdInput(0,
+      1))*Sqr(Yd(0,0))*Sqr(Yd(0,1))*TCD0(msdInput(0),msdInput(0),msqInput(0),
+      msqInput(1)) - 3*Sqr(AdInput(0,0))*Sqr(AdInput(0,2))*Sqr(Yd(0,0))*Sqr(Yd(0,2
+      ))*TCD0(msdInput(0),msdInput(0),msqInput(0),msqInput(2)) - 3*Sqr(AdInput(0,0
+      ))*Sqr(AdInput(0,1))*Sqr(Yd(0,0))*Sqr(Yd(0,1))*TCD0(msdInput(0),msdInput(0),
+      msqInput(1),msqInput(0)) - 3*Quad(AdInput(0,1))*Quad(Yd(0,1))*TCD0(msdInput(
+      0),msdInput(0),msqInput(1),msqInput(1)) - 3*Sqr(AdInput(0,1))*Sqr(AdInput(0,
+      2))*Sqr(Yd(0,1))*Sqr(Yd(0,2))*TCD0(msdInput(0),msdInput(0),msqInput(1),
+      msqInput(2)) - 3*Sqr(AdInput(0,0))*Sqr(AdInput(0,2))*Sqr(Yd(0,0))*Sqr(Yd(0,2
+      ))*TCD0(msdInput(0),msdInput(0),msqInput(2),msqInput(0)) - 3*Sqr(AdInput(0,1
+      ))*Sqr(AdInput(0,2))*Sqr(Yd(0,1))*Sqr(Yd(0,2))*TCD0(msdInput(0),msdInput(0),
+      msqInput(2),msqInput(1)) - 3*Quad(AdInput(0,2))*Quad(Yd(0,2))*TCD0(msdInput(
+      0),msdInput(0),msqInput(2),msqInput(2)) - 3*Sqr(AdInput(0,0))*Sqr(AdInput(1,
+      0))*Sqr(Yd(0,0))*Sqr(Yd(1,0))*TCD0(msdInput(0),msdInput(1),msqInput(0),
+      msqInput(0)) - 3*Sqr(AdInput(0,1))*Sqr(AdInput(1,1))*Sqr(Yd(0,1))*Sqr(Yd(1,1
+      ))*TCD0(msdInput(0),msdInput(1),msqInput(1),msqInput(1)) - 3*Sqr(AdInput(0,2
+      ))*Sqr(AdInput(1,2))*Sqr(Yd(0,2))*Sqr(Yd(1,2))*TCD0(msdInput(0),msdInput(1),
+      msqInput(2),msqInput(2)) - 3*Sqr(AdInput(0,0))*Sqr(AdInput(2,0))*Sqr(Yd(0,0)
+      )*Sqr(Yd(2,0))*TCD0(msdInput(0),msdInput(2),msqInput(0),msqInput(0)) - 3*Sqr
+      (AdInput(0,1))*Sqr(AdInput(2,1))*Sqr(Yd(0,1))*Sqr(Yd(2,1))*TCD0(msdInput(0),
+      msdInput(2),msqInput(1),msqInput(1)) - 3*Sqr(AdInput(0,2))*Sqr(AdInput(2,2))
+      *Sqr(Yd(0,2))*Sqr(Yd(2,2))*TCD0(msdInput(0),msdInput(2),msqInput(2),msqInput
+      (2)) - 3*Sqr(AdInput(0,0))*Sqr(AdInput(1,0))*Sqr(Yd(0,0))*Sqr(Yd(1,0))*TCD0(
+      msdInput(1),msdInput(0),msqInput(0),msqInput(0)) - 3*Sqr(AdInput(0,1))*Sqr(
+      AdInput(1,1))*Sqr(Yd(0,1))*Sqr(Yd(1,1))*TCD0(msdInput(1),msdInput(0),
+      msqInput(1),msqInput(1)) - 3*Sqr(AdInput(0,2))*Sqr(AdInput(1,2))*Sqr(Yd(0,2)
+      )*Sqr(Yd(1,2))*TCD0(msdInput(1),msdInput(0),msqInput(2),msqInput(2)) - 3*
+      Quad(AdInput(1,0))*Quad(Yd(1,0))*TCD0(msdInput(1),msdInput(1),msqInput(0),
+      msqInput(0)) - 3*Sqr(AdInput(1,0))*Sqr(AdInput(1,1))*Sqr(Yd(1,0))*Sqr(Yd(1,1
+      ))*TCD0(msdInput(1),msdInput(1),msqInput(0),msqInput(1)) - 3*Sqr(AdInput(1,0
+      ))*Sqr(AdInput(1,2))*Sqr(Yd(1,0))*Sqr(Yd(1,2))*TCD0(msdInput(1),msdInput(1),
+      msqInput(0),msqInput(2)) - 3*Sqr(AdInput(1,0))*Sqr(AdInput(1,1))*Sqr(Yd(1,0)
+      )*Sqr(Yd(1,1))*TCD0(msdInput(1),msdInput(1),msqInput(1),msqInput(0)) - 3*
+      Quad(AdInput(1,1))*Quad(Yd(1,1))*TCD0(msdInput(1),msdInput(1),msqInput(1),
+      msqInput(1)) - 3*Sqr(AdInput(1,1))*Sqr(AdInput(1,2))*Sqr(Yd(1,1))*Sqr(Yd(1,2
+      ))*TCD0(msdInput(1),msdInput(1),msqInput(1),msqInput(2)) - 3*Sqr(AdInput(1,0
+      ))*Sqr(AdInput(1,2))*Sqr(Yd(1,0))*Sqr(Yd(1,2))*TCD0(msdInput(1),msdInput(1),
+      msqInput(2),msqInput(0)) - 3*Sqr(AdInput(1,1))*Sqr(AdInput(1,2))*Sqr(Yd(1,1)
+      )*Sqr(Yd(1,2))*TCD0(msdInput(1),msdInput(1),msqInput(2),msqInput(1)) - 3*
+      Quad(AdInput(1,2))*Quad(Yd(1,2))*TCD0(msdInput(1),msdInput(1),msqInput(2),
+      msqInput(2)) - 3*Sqr(AdInput(1,0))*Sqr(AdInput(2,0))*Sqr(Yd(1,0))*Sqr(Yd(2,0
+      ))*TCD0(msdInput(1),msdInput(2),msqInput(0),msqInput(0)) - 3*Sqr(AdInput(1,1
+      ))*Sqr(AdInput(2,1))*Sqr(Yd(1,1))*Sqr(Yd(2,1))*TCD0(msdInput(1),msdInput(2),
+      msqInput(1),msqInput(1)) - 3*Sqr(AdInput(1,2))*Sqr(AdInput(2,2))*Sqr(Yd(1,2)
+      )*Sqr(Yd(2,2))*TCD0(msdInput(1),msdInput(2),msqInput(2),msqInput(2)) - 3*Sqr
+      (AdInput(0,0))*Sqr(AdInput(2,0))*Sqr(Yd(0,0))*Sqr(Yd(2,0))*TCD0(msdInput(2),
+      msdInput(0),msqInput(0),msqInput(0)) - 3*Sqr(AdInput(0,1))*Sqr(AdInput(2,1))
+      *Sqr(Yd(0,1))*Sqr(Yd(2,1))*TCD0(msdInput(2),msdInput(0),msqInput(1),msqInput
+      (1)) - 3*Sqr(AdInput(0,2))*Sqr(AdInput(2,2))*Sqr(Yd(0,2))*Sqr(Yd(2,2))*TCD0(
+      msdInput(2),msdInput(0),msqInput(2),msqInput(2)) - 3*Sqr(AdInput(1,0))*Sqr(
+      AdInput(2,0))*Sqr(Yd(1,0))*Sqr(Yd(2,0))*TCD0(msdInput(2),msdInput(1),
+      msqInput(0),msqInput(0)) - 3*Sqr(AdInput(1,1))*Sqr(AdInput(2,1))*Sqr(Yd(1,1)
+      )*Sqr(Yd(2,1))*TCD0(msdInput(2),msdInput(1),msqInput(1),msqInput(1)) - 3*Sqr
+      (AdInput(1,2))*Sqr(AdInput(2,2))*Sqr(Yd(1,2))*Sqr(Yd(2,2))*TCD0(msdInput(2),
+      msdInput(1),msqInput(2),msqInput(2)) - 3*Quad(AdInput(2,0))*Quad(Yd(2,0))*
+      TCD0(msdInput(2),msdInput(2),msqInput(0),msqInput(0)) - 3*Sqr(AdInput(2,0))*
+      Sqr(AdInput(2,1))*Sqr(Yd(2,0))*Sqr(Yd(2,1))*TCD0(msdInput(2),msdInput(2),
+      msqInput(0),msqInput(1)) - 3*Sqr(AdInput(2,0))*Sqr(AdInput(2,2))*Sqr(Yd(2,0)
+      )*Sqr(Yd(2,2))*TCD0(msdInput(2),msdInput(2),msqInput(0),msqInput(2)) - 3*Sqr
+      (AdInput(2,0))*Sqr(AdInput(2,1))*Sqr(Yd(2,0))*Sqr(Yd(2,1))*TCD0(msdInput(2),
+      msdInput(2),msqInput(1),msqInput(0)) - 3*Quad(AdInput(2,1))*Quad(Yd(2,1))*
+      TCD0(msdInput(2),msdInput(2),msqInput(1),msqInput(1)) - 3*Sqr(AdInput(2,1))*
+      Sqr(AdInput(2,2))*Sqr(Yd(2,1))*Sqr(Yd(2,2))*TCD0(msdInput(2),msdInput(2),
+      msqInput(1),msqInput(2)) - 3*Sqr(AdInput(2,0))*Sqr(AdInput(2,2))*Sqr(Yd(2,0)
+      )*Sqr(Yd(2,2))*TCD0(msdInput(2),msdInput(2),msqInput(2),msqInput(0)) - 3*Sqr
+      (AdInput(2,1))*Sqr(AdInput(2,2))*Sqr(Yd(2,1))*Sqr(Yd(2,2))*TCD0(msdInput(2),
+      msdInput(2),msqInput(2),msqInput(1)) - 3*Quad(AdInput(2,2))*Quad(Yd(2,2))*
+      TCD0(msdInput(2),msdInput(2),msqInput(2),msqInput(2)) - Quad(AeInput(0,0))*
+      Quad(Ye(0,0))*TCD0(mseInput(0),mseInput(0),mslInput(0),mslInput(0)) - Sqr(
+      AeInput(0,0))*Sqr(AeInput(0,1))*Sqr(Ye(0,0))*Sqr(Ye(0,1))*TCD0(mseInput(0),
+      mseInput(0),mslInput(0),mslInput(1)) - Sqr(AeInput(0,0))*Sqr(AeInput(0,2))*
+      Sqr(Ye(0,0))*Sqr(Ye(0,2))*TCD0(mseInput(0),mseInput(0),mslInput(0),mslInput(
+      2)) - Sqr(AeInput(0,0))*Sqr(AeInput(0,1))*Sqr(Ye(0,0))*Sqr(Ye(0,1))*TCD0(
+      mseInput(0),mseInput(0),mslInput(1),mslInput(0)) - Quad(AeInput(0,1))*Quad(
+      Ye(0,1))*TCD0(mseInput(0),mseInput(0),mslInput(1),mslInput(1)) - Sqr(AeInput
+      (0,1))*Sqr(AeInput(0,2))*Sqr(Ye(0,1))*Sqr(Ye(0,2))*TCD0(mseInput(0),mseInput
+      (0),mslInput(1),mslInput(2)) - Sqr(AeInput(0,0))*Sqr(AeInput(0,2))*Sqr(Ye(0,
+      0))*Sqr(Ye(0,2))*TCD0(mseInput(0),mseInput(0),mslInput(2),mslInput(0)) - Sqr
+      (AeInput(0,1))*Sqr(AeInput(0,2))*Sqr(Ye(0,1))*Sqr(Ye(0,2))*TCD0(mseInput(0),
+      mseInput(0),mslInput(2),mslInput(1)) - Quad(AeInput(0,2))*Quad(Ye(0,2))*TCD0
+      (mseInput(0),mseInput(0),mslInput(2),mslInput(2)) - Sqr(AeInput(0,0))*Sqr(
+      AeInput(1,0))*Sqr(Ye(0,0))*Sqr(Ye(1,0))*TCD0(mseInput(0),mseInput(1),
+      mslInput(0),mslInput(0)) - Sqr(AeInput(0,1))*Sqr(AeInput(1,1))*Sqr(Ye(0,1))*
+      Sqr(Ye(1,1))*TCD0(mseInput(0),mseInput(1),mslInput(1),mslInput(1)) - Sqr(
+      AeInput(0,2))*Sqr(AeInput(1,2))*Sqr(Ye(0,2))*Sqr(Ye(1,2))*TCD0(mseInput(0),
+      mseInput(1),mslInput(2),mslInput(2)) - Sqr(AeInput(0,0))*Sqr(AeInput(2,0))*
+      Sqr(Ye(0,0))*Sqr(Ye(2,0))*TCD0(mseInput(0),mseInput(2),mslInput(0),mslInput(
+      0)) - Sqr(AeInput(0,1))*Sqr(AeInput(2,1))*Sqr(Ye(0,1))*Sqr(Ye(2,1))*TCD0(
+      mseInput(0),mseInput(2),mslInput(1),mslInput(1)) - Sqr(AeInput(0,2))*Sqr(
+      AeInput(2,2))*Sqr(Ye(0,2))*Sqr(Ye(2,2))*TCD0(mseInput(0),mseInput(2),
+      mslInput(2),mslInput(2)) - Sqr(AeInput(0,0))*Sqr(AeInput(1,0))*Sqr(Ye(0,0))*
+      Sqr(Ye(1,0))*TCD0(mseInput(1),mseInput(0),mslInput(0),mslInput(0)) - Sqr(
+      AeInput(0,1))*Sqr(AeInput(1,1))*Sqr(Ye(0,1))*Sqr(Ye(1,1))*TCD0(mseInput(1),
+      mseInput(0),mslInput(1),mslInput(1)) - Sqr(AeInput(0,2))*Sqr(AeInput(1,2))*
+      Sqr(Ye(0,2))*Sqr(Ye(1,2))*TCD0(mseInput(1),mseInput(0),mslInput(2),mslInput(
+      2)) - Quad(AeInput(1,0))*Quad(Ye(1,0))*TCD0(mseInput(1),mseInput(1),mslInput
+      (0),mslInput(0)) - Sqr(AeInput(1,0))*Sqr(AeInput(1,1))*Sqr(Ye(1,0))*Sqr(Ye(1
+      ,1))*TCD0(mseInput(1),mseInput(1),mslInput(0),mslInput(1)) - Sqr(AeInput(1,0
+      ))*Sqr(AeInput(1,2))*Sqr(Ye(1,0))*Sqr(Ye(1,2))*TCD0(mseInput(1),mseInput(1),
+      mslInput(0),mslInput(2)) - Sqr(AeInput(1,0))*Sqr(AeInput(1,1))*Sqr(Ye(1,0))*
+      Sqr(Ye(1,1))*TCD0(mseInput(1),mseInput(1),mslInput(1),mslInput(0)) - Quad(
+      AeInput(1,1))*Quad(Ye(1,1))*TCD0(mseInput(1),mseInput(1),mslInput(1),
+      mslInput(1)) - Sqr(AeInput(1,1))*Sqr(AeInput(1,2))*Sqr(Ye(1,1))*Sqr(Ye(1,2))
+      *TCD0(mseInput(1),mseInput(1),mslInput(1),mslInput(2)) - Sqr(AeInput(1,0))*
+      Sqr(AeInput(1,2))*Sqr(Ye(1,0))*Sqr(Ye(1,2))*TCD0(mseInput(1),mseInput(1),
+      mslInput(2),mslInput(0)) - Sqr(AeInput(1,1))*Sqr(AeInput(1,2))*Sqr(Ye(1,1))*
+      Sqr(Ye(1,2))*TCD0(mseInput(1),mseInput(1),mslInput(2),mslInput(1)) - Quad(
+      AeInput(1,2))*Quad(Ye(1,2))*TCD0(mseInput(1),mseInput(1),mslInput(2),
+      mslInput(2)) - Sqr(AeInput(1,0))*Sqr(AeInput(2,0))*Sqr(Ye(1,0))*Sqr(Ye(2,0))
+      *TCD0(mseInput(1),mseInput(2),mslInput(0),mslInput(0)) - Sqr(AeInput(1,1))*
+      Sqr(AeInput(2,1))*Sqr(Ye(1,1))*Sqr(Ye(2,1))*TCD0(mseInput(1),mseInput(2),
+      mslInput(1),mslInput(1)) - Sqr(AeInput(1,2))*Sqr(AeInput(2,2))*Sqr(Ye(1,2))*
+      Sqr(Ye(2,2))*TCD0(mseInput(1),mseInput(2),mslInput(2),mslInput(2)) - Sqr(
+      AeInput(0,0))*Sqr(AeInput(2,0))*Sqr(Ye(0,0))*Sqr(Ye(2,0))*TCD0(mseInput(2),
+      mseInput(0),mslInput(0),mslInput(0)) - Sqr(AeInput(0,1))*Sqr(AeInput(2,1))*
+      Sqr(Ye(0,1))*Sqr(Ye(2,1))*TCD0(mseInput(2),mseInput(0),mslInput(1),mslInput(
+      1)) - Sqr(AeInput(0,2))*Sqr(AeInput(2,2))*Sqr(Ye(0,2))*Sqr(Ye(2,2))*TCD0(
+      mseInput(2),mseInput(0),mslInput(2),mslInput(2)) - Sqr(AeInput(1,0))*Sqr(
+      AeInput(2,0))*Sqr(Ye(1,0))*Sqr(Ye(2,0))*TCD0(mseInput(2),mseInput(1),
+      mslInput(0),mslInput(0)) - Sqr(AeInput(1,1))*Sqr(AeInput(2,1))*Sqr(Ye(1,1))*
+      Sqr(Ye(2,1))*TCD0(mseInput(2),mseInput(1),mslInput(1),mslInput(1)) - Sqr(
+      AeInput(1,2))*Sqr(AeInput(2,2))*Sqr(Ye(1,2))*Sqr(Ye(2,2))*TCD0(mseInput(2),
+      mseInput(1),mslInput(2),mslInput(2)) - Quad(AeInput(2,0))*Quad(Ye(2,0))*TCD0
+      (mseInput(2),mseInput(2),mslInput(0),mslInput(0)) - Sqr(AeInput(2,0))*Sqr(
+      AeInput(2,1))*Sqr(Ye(2,0))*Sqr(Ye(2,1))*TCD0(mseInput(2),mseInput(2),
+      mslInput(0),mslInput(1)) - Sqr(AeInput(2,0))*Sqr(AeInput(2,2))*Sqr(Ye(2,0))*
+      Sqr(Ye(2,2))*TCD0(mseInput(2),mseInput(2),mslInput(0),mslInput(2)) - Sqr(
+      AeInput(2,0))*Sqr(AeInput(2,1))*Sqr(Ye(2,0))*Sqr(Ye(2,1))*TCD0(mseInput(2),
+      mseInput(2),mslInput(1),mslInput(0)) - Quad(AeInput(2,1))*Quad(Ye(2,1))*TCD0
+      (mseInput(2),mseInput(2),mslInput(1),mslInput(1)) - Sqr(AeInput(2,1))*Sqr(
+      AeInput(2,2))*Sqr(Ye(2,1))*Sqr(Ye(2,2))*TCD0(mseInput(2),mseInput(2),
+      mslInput(1),mslInput(2)) - Sqr(AeInput(2,0))*Sqr(AeInput(2,2))*Sqr(Ye(2,0))*
+      Sqr(Ye(2,2))*TCD0(mseInput(2),mseInput(2),mslInput(2),mslInput(0)) - Sqr(
+      AeInput(2,1))*Sqr(AeInput(2,2))*Sqr(Ye(2,1))*Sqr(Ye(2,2))*TCD0(mseInput(2),
+      mseInput(2),mslInput(2),mslInput(1)) - Quad(AeInput(2,2))*Quad(Ye(2,2))*TCD0
+      (mseInput(2),mseInput(2),mslInput(2),mslInput(2)) - 3*Quad(Abs(MuInput))*
+      Quad(Yu(0,0))*TCD0(msqInput(0),msqInput(0),msuInput(0),msuInput(0)) - 3*Quad
+      (Abs(MuInput))*Sqr(Yu(0,0))*Sqr(Yu(1,0))*TCD0(msqInput(0),msqInput(0),
+      msuInput(0),msuInput(1)) - 3*Quad(Abs(MuInput))*Sqr(Yu(0,0))*Sqr(Yu(2,0))*
+      TCD0(msqInput(0),msqInput(0),msuInput(0),msuInput(2)) - 3*Quad(Abs(MuInput))
+      *Sqr(Yu(0,0))*Sqr(Yu(1,0))*TCD0(msqInput(0),msqInput(0),msuInput(1),msuInput
+      (0)) - 3*Quad(Abs(MuInput))*Quad(Yu(1,0))*TCD0(msqInput(0),msqInput(0),
+      msuInput(1),msuInput(1)) - 3*Quad(Abs(MuInput))*Sqr(Yu(1,0))*Sqr(Yu(2,0))*
+      TCD0(msqInput(0),msqInput(0),msuInput(1),msuInput(2)) - 3*Quad(Abs(MuInput))
+      *Sqr(Yu(0,0))*Sqr(Yu(2,0))*TCD0(msqInput(0),msqInput(0),msuInput(2),msuInput
+      (0)) - 3*Quad(Abs(MuInput))*Sqr(Yu(1,0))*Sqr(Yu(2,0))*TCD0(msqInput(0),
+      msqInput(0),msuInput(2),msuInput(1)) - 3*Quad(Abs(MuInput))*Quad(Yu(2,0))*
+      TCD0(msqInput(0),msqInput(0),msuInput(2),msuInput(2)) - 3*Quad(Abs(MuInput))
+      *Sqr(Yu(0,0))*Sqr(Yu(0,1))*TCD0(msqInput(0),msqInput(1),msuInput(0),msuInput
+      (0)) - 3*Quad(Abs(MuInput))*Sqr(Yu(1,0))*Sqr(Yu(1,1))*TCD0(msqInput(0),
+      msqInput(1),msuInput(1),msuInput(1)) - 3*Quad(Abs(MuInput))*Sqr(Yu(2,0))*Sqr
+      (Yu(2,1))*TCD0(msqInput(0),msqInput(1),msuInput(2),msuInput(2)) - 3*Quad(Abs
+      (MuInput))*Sqr(Yu(0,0))*Sqr(Yu(0,2))*TCD0(msqInput(0),msqInput(2),msuInput(0
+      ),msuInput(0)) - 3*Quad(Abs(MuInput))*Sqr(Yu(1,0))*Sqr(Yu(1,2))*TCD0(
+      msqInput(0),msqInput(2),msuInput(1),msuInput(1)) - 3*Quad(Abs(MuInput))*Sqr(
+      Yu(2,0))*Sqr(Yu(2,2))*TCD0(msqInput(0),msqInput(2),msuInput(2),msuInput(2))
+      - 3*Quad(Abs(MuInput))*Sqr(Yu(0,0))*Sqr(Yu(0,1))*TCD0(msqInput(1),msqInput(0
+      ),msuInput(0),msuInput(0)) - 3*Quad(Abs(MuInput))*Sqr(Yu(1,0))*Sqr(Yu(1,1))*
+      TCD0(msqInput(1),msqInput(0),msuInput(1),msuInput(1)) - 3*Quad(Abs(MuInput))
+      *Sqr(Yu(2,0))*Sqr(Yu(2,1))*TCD0(msqInput(1),msqInput(0),msuInput(2),msuInput
+      (2)) - 3*Quad(Abs(MuInput))*Quad(Yu(0,1))*TCD0(msqInput(1),msqInput(1),
+      msuInput(0),msuInput(0)) - 3*Quad(Abs(MuInput))*Sqr(Yu(0,1))*Sqr(Yu(1,1))*
+      TCD0(msqInput(1),msqInput(1),msuInput(0),msuInput(1)) - 3*Quad(Abs(MuInput))
+      *Sqr(Yu(0,1))*Sqr(Yu(2,1))*TCD0(msqInput(1),msqInput(1),msuInput(0),msuInput
+      (2)) - 3*Quad(Abs(MuInput))*Sqr(Yu(0,1))*Sqr(Yu(1,1))*TCD0(msqInput(1),
+      msqInput(1),msuInput(1),msuInput(0)) - 3*Quad(Abs(MuInput))*Quad(Yu(1,1))*
+      TCD0(msqInput(1),msqInput(1),msuInput(1),msuInput(1)) - 3*Quad(Abs(MuInput))
+      *Sqr(Yu(1,1))*Sqr(Yu(2,1))*TCD0(msqInput(1),msqInput(1),msuInput(1),msuInput
+      (2)) - 3*Quad(Abs(MuInput))*Sqr(Yu(0,1))*Sqr(Yu(2,1))*TCD0(msqInput(1),
+      msqInput(1),msuInput(2),msuInput(0)) - 3*Quad(Abs(MuInput))*Sqr(Yu(1,1))*Sqr
+      (Yu(2,1))*TCD0(msqInput(1),msqInput(1),msuInput(2),msuInput(1)) - 3*Quad(Abs
+      (MuInput))*Quad(Yu(2,1))*TCD0(msqInput(1),msqInput(1),msuInput(2),msuInput(2
+      )) - 3*Quad(Abs(MuInput))*Sqr(Yu(0,1))*Sqr(Yu(0,2))*TCD0(msqInput(1),
+      msqInput(2),msuInput(0),msuInput(0)) - 3*Quad(Abs(MuInput))*Sqr(Yu(1,1))*Sqr
+      (Yu(1,2))*TCD0(msqInput(1),msqInput(2),msuInput(1),msuInput(1)) - 3*Quad(Abs
+      (MuInput))*Sqr(Yu(2,1))*Sqr(Yu(2,2))*TCD0(msqInput(1),msqInput(2),msuInput(2
+      ),msuInput(2)) - 3*Quad(Abs(MuInput))*Sqr(Yu(0,0))*Sqr(Yu(0,2))*TCD0(
+      msqInput(2),msqInput(0),msuInput(0),msuInput(0)) - 3*Quad(Abs(MuInput))*Sqr(
+      Yu(1,0))*Sqr(Yu(1,2))*TCD0(msqInput(2),msqInput(0),msuInput(1),msuInput(1))
+      - 3*Quad(Abs(MuInput))*Sqr(Yu(2,0))*Sqr(Yu(2,2))*TCD0(msqInput(2),msqInput(0
+      ),msuInput(2),msuInput(2)) - 3*Quad(Abs(MuInput))*Sqr(Yu(0,1))*Sqr(Yu(0,2))*
+      TCD0(msqInput(2),msqInput(1),msuInput(0),msuInput(0)) - 3*Quad(Abs(MuInput))
+      *Sqr(Yu(1,1))*Sqr(Yu(1,2))*TCD0(msqInput(2),msqInput(1),msuInput(1),msuInput
+      (1)) - 3*Quad(Abs(MuInput))*Sqr(Yu(2,1))*Sqr(Yu(2,2))*TCD0(msqInput(2),
+      msqInput(1),msuInput(2),msuInput(2)) - 3*Quad(Abs(MuInput))*Quad(Yu(0,2))*
+      TCD0(msqInput(2),msqInput(2),msuInput(0),msuInput(0)) - 3*Quad(Abs(MuInput))
+      *Sqr(Yu(0,2))*Sqr(Yu(1,2))*TCD0(msqInput(2),msqInput(2),msuInput(0),msuInput
+      (1)) - 3*Quad(Abs(MuInput))*Sqr(Yu(0,2))*Sqr(Yu(2,2))*TCD0(msqInput(2),
+      msqInput(2),msuInput(0),msuInput(2)) - 3*Quad(Abs(MuInput))*Sqr(Yu(0,2))*Sqr
+      (Yu(1,2))*TCD0(msqInput(2),msqInput(2),msuInput(1),msuInput(0)) - 3*Quad(Abs
+      (MuInput))*Quad(Yu(1,2))*TCD0(msqInput(2),msqInput(2),msuInput(1),msuInput(1
+      )) - 3*Quad(Abs(MuInput))*Sqr(Yu(1,2))*Sqr(Yu(2,2))*TCD0(msqInput(2),
+      msqInput(2),msuInput(1),msuInput(2)) - 3*Quad(Abs(MuInput))*Sqr(Yu(0,2))*Sqr
+      (Yu(2,2))*TCD0(msqInput(2),msqInput(2),msuInput(2),msuInput(0)) - 3*Quad(Abs
+      (MuInput))*Sqr(Yu(1,2))*Sqr(Yu(2,2))*TCD0(msqInput(2),msqInput(2),msuInput(2
+      ),msuInput(1)) - 3*Quad(Abs(MuInput))*Quad(Yu(2,2))*TCD0(msqInput(2),
+      msqInput(2),msuInput(2),msuInput(2)) + 0.36*Quad(g1)*(-0.25 + 0.5*Sqr(Abs(
+      M1Input))*TCD2t(M1Input,M1Input,Abs(MuInput),Abs(MuInput)) + 0.5*TCD4t(
+      M1Input,M1Input,Abs(MuInput),Abs(MuInput),SCALE)) + 0.6*Sqr(g1)*Sqr(g2)*(-
+      0.5 + M1Input*M2Input*TCD2t(M1Input,M2Input,Abs(MuInput),Abs(MuInput)) +
+      TCD4t(M1Input,M2Input,Abs(MuInput),Abs(MuInput),SCALE)) + Quad(g2)*(-0.75 +
+      0.5*Sqr(Abs(M2Input))*TCD2t(M2Input,M2Input,Abs(MuInput),Abs(MuInput)) + 2.5
+      *TCD4t(M2Input,M2Input,Abs(MuInput),Abs(MuInput),SCALE)) - 3*AdInput(0,0)*
+      AdInput(0,1)*AdInput(1,0)*AdInput(1,1)*TCD0(msdInput(0),msdInput(1),msqInput
+      (0),msqInput(1))*Yd(0,0)*Yd(0,1)*Yd(1,0)*Yd(1,1) - 3*AdInput(0,0)*AdInput(0,
+      1)*AdInput(1,0)*AdInput(1,1)*TCD0(msdInput(0),msdInput(1),msqInput(1),
+      msqInput(0))*Yd(0,0)*Yd(0,1)*Yd(1,0)*Yd(1,1) - 3*AdInput(0,0)*AdInput(0,1)*
+      AdInput(1,0)*AdInput(1,1)*TCD0(msdInput(1),msdInput(0),msqInput(0),msqInput(
+      1))*Yd(0,0)*Yd(0,1)*Yd(1,0)*Yd(1,1) - 3*AdInput(0,0)*AdInput(0,1)*AdInput(1,
+      0)*AdInput(1,1)*TCD0(msdInput(1),msdInput(0),msqInput(1),msqInput(0))*Yd(0,0
+      )*Yd(0,1)*Yd(1,0)*Yd(1,1) - 3*AdInput(0,0)*AdInput(0,2)*AdInput(1,0)*AdInput
+      (1,2)*TCD0(msdInput(0),msdInput(1),msqInput(0),msqInput(2))*Yd(0,0)*Yd(0,2)*
+      Yd(1,0)*Yd(1,2) - 3*AdInput(0,0)*AdInput(0,2)*AdInput(1,0)*AdInput(1,2)*TCD0
+      (msdInput(0),msdInput(1),msqInput(2),msqInput(0))*Yd(0,0)*Yd(0,2)*Yd(1,0)*Yd
+      (1,2) - 3*AdInput(0,0)*AdInput(0,2)*AdInput(1,0)*AdInput(1,2)*TCD0(msdInput(
+      1),msdInput(0),msqInput(0),msqInput(2))*Yd(0,0)*Yd(0,2)*Yd(1,0)*Yd(1,2) - 3*
+      AdInput(0,0)*AdInput(0,2)*AdInput(1,0)*AdInput(1,2)*TCD0(msdInput(1),
+      msdInput(0),msqInput(2),msqInput(0))*Yd(0,0)*Yd(0,2)*Yd(1,0)*Yd(1,2) - 3*
+      AdInput(0,1)*AdInput(0,2)*AdInput(1,1)*AdInput(1,2)*TCD0(msdInput(0),
+      msdInput(1),msqInput(1),msqInput(2))*Yd(0,1)*Yd(0,2)*Yd(1,1)*Yd(1,2) - 3*
+      AdInput(0,1)*AdInput(0,2)*AdInput(1,1)*AdInput(1,2)*TCD0(msdInput(0),
+      msdInput(1),msqInput(2),msqInput(1))*Yd(0,1)*Yd(0,2)*Yd(1,1)*Yd(1,2) - 3*
+      AdInput(0,1)*AdInput(0,2)*AdInput(1,1)*AdInput(1,2)*TCD0(msdInput(1),
+      msdInput(0),msqInput(1),msqInput(2))*Yd(0,1)*Yd(0,2)*Yd(1,1)*Yd(1,2) - 3*
+      AdInput(0,1)*AdInput(0,2)*AdInput(1,1)*AdInput(1,2)*TCD0(msdInput(1),
+      msdInput(0),msqInput(2),msqInput(1))*Yd(0,1)*Yd(0,2)*Yd(1,1)*Yd(1,2) - 6*
+      AdInput(0,0)*AdInput(1,0)*TCC0(msdInput(0),msdInput(1),msqInput(0))*Yd(0,0)*
+      Yd(1,0)*(Yd(0,0)*Yd(1,0) + Yd(0,1)*Yd(1,1) + Yd(0,2)*Yd(1,2)) - 6*AdInput(0,
+      0)*AdInput(1,0)*TCC0(msdInput(1),msdInput(0),msqInput(0))*Yd(0,0)*Yd(1,0)*(
+      Yd(0,0)*Yd(1,0) + Yd(0,1)*Yd(1,1) + Yd(0,2)*Yd(1,2)) - 6*AdInput(0,1)*
+      AdInput(1,1)*TCC0(msdInput(0),msdInput(1),msqInput(1))*Yd(0,1)*Yd(1,1)*(Yd(0
+      ,0)*Yd(1,0) + Yd(0,1)*Yd(1,1) + Yd(0,2)*Yd(1,2)) - 6*AdInput(0,1)*AdInput(1,
+      1)*TCC0(msdInput(1),msdInput(0),msqInput(1))*Yd(0,1)*Yd(1,1)*(Yd(0,0)*Yd(1,0
+      ) + Yd(0,1)*Yd(1,1) + Yd(0,2)*Yd(1,2)) - 6*AdInput(0,2)*AdInput(1,2)*TCC0(
+      msdInput(0),msdInput(1),msqInput(2))*Yd(0,2)*Yd(1,2)*(Yd(0,0)*Yd(1,0) + Yd(0
+      ,1)*Yd(1,1) + Yd(0,2)*Yd(1,2)) - 6*AdInput(0,2)*AdInput(1,2)*TCC0(msdInput(1
+      ),msdInput(0),msqInput(2))*Yd(0,2)*Yd(1,2)*(Yd(0,0)*Yd(1,0) + Yd(0,1)*Yd(1,1
+      ) + Yd(0,2)*Yd(1,2)) - 3*AdInput(0,0)*AdInput(0,1)*AdInput(2,0)*AdInput(2,1)
+      *TCD0(msdInput(0),msdInput(2),msqInput(0),msqInput(1))*Yd(0,0)*Yd(0,1)*Yd(2,
+      0)*Yd(2,1) - 3*AdInput(0,0)*AdInput(0,1)*AdInput(2,0)*AdInput(2,1)*TCD0(
+      msdInput(0),msdInput(2),msqInput(1),msqInput(0))*Yd(0,0)*Yd(0,1)*Yd(2,0)*Yd(
+      2,1) - 3*AdInput(0,0)*AdInput(0,1)*AdInput(2,0)*AdInput(2,1)*TCD0(msdInput(2
+      ),msdInput(0),msqInput(0),msqInput(1))*Yd(0,0)*Yd(0,1)*Yd(2,0)*Yd(2,1) - 3*
+      AdInput(0,0)*AdInput(0,1)*AdInput(2,0)*AdInput(2,1)*TCD0(msdInput(2),
+      msdInput(0),msqInput(1),msqInput(0))*Yd(0,0)*Yd(0,1)*Yd(2,0)*Yd(2,1) - 3*
+      AdInput(1,0)*AdInput(1,1)*AdInput(2,0)*AdInput(2,1)*TCD0(msdInput(1),
+      msdInput(2),msqInput(0),msqInput(1))*Yd(1,0)*Yd(1,1)*Yd(2,0)*Yd(2,1) - 3*
+      AdInput(1,0)*AdInput(1,1)*AdInput(2,0)*AdInput(2,1)*TCD0(msdInput(1),
+      msdInput(2),msqInput(1),msqInput(0))*Yd(1,0)*Yd(1,1)*Yd(2,0)*Yd(2,1) - 3*
+      AdInput(1,0)*AdInput(1,1)*AdInput(2,0)*AdInput(2,1)*TCD0(msdInput(2),
+      msdInput(1),msqInput(0),msqInput(1))*Yd(1,0)*Yd(1,1)*Yd(2,0)*Yd(2,1) - 3*
+      AdInput(1,0)*AdInput(1,1)*AdInput(2,0)*AdInput(2,1)*TCD0(msdInput(2),
+      msdInput(1),msqInput(1),msqInput(0))*Yd(1,0)*Yd(1,1)*Yd(2,0)*Yd(2,1) - 6*
+      AdInput(0,0)*AdInput(0,1)*TCC0(msdInput(0),msqInput(0),msqInput(1))*Yd(0,0)*
+      Yd(0,1)*(Yd(0,0)*Yd(0,1) + Yd(1,0)*Yd(1,1) + Yd(2,0)*Yd(2,1)) - 6*AdInput(0,
+      0)*AdInput(0,1)*TCC0(msdInput(0),msqInput(1),msqInput(0))*Yd(0,0)*Yd(0,1)*(
+      Yd(0,0)*Yd(0,1) + Yd(1,0)*Yd(1,1) + Yd(2,0)*Yd(2,1)) - 6*AdInput(1,0)*
+      AdInput(1,1)*TCC0(msdInput(1),msqInput(0),msqInput(1))*Yd(1,0)*Yd(1,1)*(Yd(0
+      ,0)*Yd(0,1) + Yd(1,0)*Yd(1,1) + Yd(2,0)*Yd(2,1)) - 6*AdInput(1,0)*AdInput(1,
+      1)*TCC0(msdInput(1),msqInput(1),msqInput(0))*Yd(1,0)*Yd(1,1)*(Yd(0,0)*Yd(0,1
+      ) + Yd(1,0)*Yd(1,1) + Yd(2,0)*Yd(2,1)) - 6*AdInput(2,0)*AdInput(2,1)*TCC0(
+      msdInput(2),msqInput(0),msqInput(1))*Yd(2,0)*Yd(2,1)*(Yd(0,0)*Yd(0,1) + Yd(1
+      ,0)*Yd(1,1) + Yd(2,0)*Yd(2,1)) - 6*AdInput(2,0)*AdInput(2,1)*TCC0(msdInput(2
+      ),msqInput(1),msqInput(0))*Yd(2,0)*Yd(2,1)*(Yd(0,0)*Yd(0,1) + Yd(1,0)*Yd(1,1
+      ) + Yd(2,0)*Yd(2,1)) - 3*AdInput(0,0)*AdInput(0,2)*AdInput(2,0)*AdInput(2,2)
+      *TCD0(msdInput(0),msdInput(2),msqInput(0),msqInput(2))*Yd(0,0)*Yd(0,2)*Yd(2,
+      0)*Yd(2,2) - 3*AdInput(0,0)*AdInput(0,2)*AdInput(2,0)*AdInput(2,2)*TCD0(
+      msdInput(0),msdInput(2),msqInput(2),msqInput(0))*Yd(0,0)*Yd(0,2)*Yd(2,0)*Yd(
+      2,2) - 3*AdInput(0,0)*AdInput(0,2)*AdInput(2,0)*AdInput(2,2)*TCD0(msdInput(2
+      ),msdInput(0),msqInput(0),msqInput(2))*Yd(0,0)*Yd(0,2)*Yd(2,0)*Yd(2,2) - 3*
+      AdInput(0,0)*AdInput(0,2)*AdInput(2,0)*AdInput(2,2)*TCD0(msdInput(2),
+      msdInput(0),msqInput(2),msqInput(0))*Yd(0,0)*Yd(0,2)*Yd(2,0)*Yd(2,2) - 3*
+      AdInput(1,0)*AdInput(1,2)*AdInput(2,0)*AdInput(2,2)*TCD0(msdInput(1),
+      msdInput(2),msqInput(0),msqInput(2))*Yd(1,0)*Yd(1,2)*Yd(2,0)*Yd(2,2) - 3*
+      AdInput(1,0)*AdInput(1,2)*AdInput(2,0)*AdInput(2,2)*TCD0(msdInput(1),
+      msdInput(2),msqInput(2),msqInput(0))*Yd(1,0)*Yd(1,2)*Yd(2,0)*Yd(2,2) - 3*
+      AdInput(1,0)*AdInput(1,2)*AdInput(2,0)*AdInput(2,2)*TCD0(msdInput(2),
+      msdInput(1),msqInput(0),msqInput(2))*Yd(1,0)*Yd(1,2)*Yd(2,0)*Yd(2,2) - 3*
+      AdInput(1,0)*AdInput(1,2)*AdInput(2,0)*AdInput(2,2)*TCD0(msdInput(2),
+      msdInput(1),msqInput(2),msqInput(0))*Yd(1,0)*Yd(1,2)*Yd(2,0)*Yd(2,2) - 3*
+      AdInput(0,1)*AdInput(0,2)*AdInput(2,1)*AdInput(2,2)*TCD0(msdInput(0),
+      msdInput(2),msqInput(1),msqInput(2))*Yd(0,1)*Yd(0,2)*Yd(2,1)*Yd(2,2) - 3*
+      AdInput(0,1)*AdInput(0,2)*AdInput(2,1)*AdInput(2,2)*TCD0(msdInput(0),
+      msdInput(2),msqInput(2),msqInput(1))*Yd(0,1)*Yd(0,2)*Yd(2,1)*Yd(2,2) - 3*
+      AdInput(0,1)*AdInput(0,2)*AdInput(2,1)*AdInput(2,2)*TCD0(msdInput(2),
+      msdInput(0),msqInput(1),msqInput(2))*Yd(0,1)*Yd(0,2)*Yd(2,1)*Yd(2,2) - 3*
+      AdInput(0,1)*AdInput(0,2)*AdInput(2,1)*AdInput(2,2)*TCD0(msdInput(2),
+      msdInput(0),msqInput(2),msqInput(1))*Yd(0,1)*Yd(0,2)*Yd(2,1)*Yd(2,2) - 3*
+      AdInput(1,1)*AdInput(1,2)*AdInput(2,1)*AdInput(2,2)*TCD0(msdInput(1),
+      msdInput(2),msqInput(1),msqInput(2))*Yd(1,1)*Yd(1,2)*Yd(2,1)*Yd(2,2) - 3*
+      AdInput(1,1)*AdInput(1,2)*AdInput(2,1)*AdInput(2,2)*TCD0(msdInput(1),
+      msdInput(2),msqInput(2),msqInput(1))*Yd(1,1)*Yd(1,2)*Yd(2,1)*Yd(2,2) - 3*
+      AdInput(1,1)*AdInput(1,2)*AdInput(2,1)*AdInput(2,2)*TCD0(msdInput(2),
+      msdInput(1),msqInput(1),msqInput(2))*Yd(1,1)*Yd(1,2)*Yd(2,1)*Yd(2,2) - 3*
+      AdInput(1,1)*AdInput(1,2)*AdInput(2,1)*AdInput(2,2)*TCD0(msdInput(2),
+      msdInput(1),msqInput(2),msqInput(1))*Yd(1,1)*Yd(1,2)*Yd(2,1)*Yd(2,2) - 6*
+      AdInput(0,0)*AdInput(2,0)*TCC0(msdInput(0),msdInput(2),msqInput(0))*Yd(0,0)*
+      Yd(2,0)*(Yd(0,0)*Yd(2,0) + Yd(0,1)*Yd(2,1) + Yd(0,2)*Yd(2,2)) - 6*AdInput(0,
+      0)*AdInput(2,0)*TCC0(msdInput(2),msdInput(0),msqInput(0))*Yd(0,0)*Yd(2,0)*(
+      Yd(0,0)*Yd(2,0) + Yd(0,1)*Yd(2,1) + Yd(0,2)*Yd(2,2)) - 6*AdInput(0,1)*
+      AdInput(2,1)*TCC0(msdInput(0),msdInput(2),msqInput(1))*Yd(0,1)*Yd(2,1)*(Yd(0
+      ,0)*Yd(2,0) + Yd(0,1)*Yd(2,1) + Yd(0,2)*Yd(2,2)) - 6*AdInput(0,1)*AdInput(2,
+      1)*TCC0(msdInput(2),msdInput(0),msqInput(1))*Yd(0,1)*Yd(2,1)*(Yd(0,0)*Yd(2,0
+      ) + Yd(0,1)*Yd(2,1) + Yd(0,2)*Yd(2,2)) - 6*AdInput(0,2)*AdInput(2,2)*TCC0(
+      msdInput(0),msdInput(2),msqInput(2))*Yd(0,2)*Yd(2,2)*(Yd(0,0)*Yd(2,0) + Yd(0
+      ,1)*Yd(2,1) + Yd(0,2)*Yd(2,2)) - 6*AdInput(0,2)*AdInput(2,2)*TCC0(msdInput(2
+      ),msdInput(0),msqInput(2))*Yd(0,2)*Yd(2,2)*(Yd(0,0)*Yd(2,0) + Yd(0,1)*Yd(2,1
+      ) + Yd(0,2)*Yd(2,2)) - 6*AdInput(1,0)*AdInput(2,0)*TCC0(msdInput(1),msdInput
+      (2),msqInput(0))*Yd(1,0)*Yd(2,0)*(Yd(1,0)*Yd(2,0) + Yd(1,1)*Yd(2,1) + Yd(1,2
+      )*Yd(2,2)) - 6*AdInput(1,0)*AdInput(2,0)*TCC0(msdInput(2),msdInput(1),
+      msqInput(0))*Yd(1,0)*Yd(2,0)*(Yd(1,0)*Yd(2,0) + Yd(1,1)*Yd(2,1) + Yd(1,2)*Yd
+      (2,2)) - 6*AdInput(1,1)*AdInput(2,1)*TCC0(msdInput(1),msdInput(2),msqInput(1
+      ))*Yd(1,1)*Yd(2,1)*(Yd(1,0)*Yd(2,0) + Yd(1,1)*Yd(2,1) + Yd(1,2)*Yd(2,2)) - 6
+      *AdInput(1,1)*AdInput(2,1)*TCC0(msdInput(2),msdInput(1),msqInput(1))*Yd(1,1)
+      *Yd(2,1)*(Yd(1,0)*Yd(2,0) + Yd(1,1)*Yd(2,1) + Yd(1,2)*Yd(2,2)) - 6*AdInput(1
+      ,2)*AdInput(2,2)*TCC0(msdInput(1),msdInput(2),msqInput(2))*Yd(1,2)*Yd(2,2)*(
+      Yd(1,0)*Yd(2,0) + Yd(1,1)*Yd(2,1) + Yd(1,2)*Yd(2,2)) - 6*AdInput(1,2)*
+      AdInput(2,2)*TCC0(msdInput(2),msdInput(1),msqInput(2))*Yd(1,2)*Yd(2,2)*(Yd(1
+      ,0)*Yd(2,0) + Yd(1,1)*Yd(2,1) + Yd(1,2)*Yd(2,2)) - 6*AdInput(0,0)*AdInput(0,
+      2)*TCC0(msdInput(0),msqInput(0),msqInput(2))*Yd(0,0)*Yd(0,2)*(Yd(0,0)*Yd(0,2
+      ) + Yd(1,0)*Yd(1,2) + Yd(2,0)*Yd(2,2)) - 6*AdInput(0,0)*AdInput(0,2)*TCC0(
+      msdInput(0),msqInput(2),msqInput(0))*Yd(0,0)*Yd(0,2)*(Yd(0,0)*Yd(0,2) + Yd(1
+      ,0)*Yd(1,2) + Yd(2,0)*Yd(2,2)) - 6*AdInput(1,0)*AdInput(1,2)*TCC0(msdInput(1
+      ),msqInput(0),msqInput(2))*Yd(1,0)*Yd(1,2)*(Yd(0,0)*Yd(0,2) + Yd(1,0)*Yd(1,2
+      ) + Yd(2,0)*Yd(2,2)) - 6*AdInput(1,0)*AdInput(1,2)*TCC0(msdInput(1),msqInput
+      (2),msqInput(0))*Yd(1,0)*Yd(1,2)*(Yd(0,0)*Yd(0,2) + Yd(1,0)*Yd(1,2) + Yd(2,0
+      )*Yd(2,2)) - 6*AdInput(2,0)*AdInput(2,2)*TCC0(msdInput(2),msqInput(0),
+      msqInput(2))*Yd(2,0)*Yd(2,2)*(Yd(0,0)*Yd(0,2) + Yd(1,0)*Yd(1,2) + Yd(2,0)*Yd
+      (2,2)) - 6*AdInput(2,0)*AdInput(2,2)*TCC0(msdInput(2),msqInput(2),msqInput(0
+      ))*Yd(2,0)*Yd(2,2)*(Yd(0,0)*Yd(0,2) + Yd(1,0)*Yd(1,2) + Yd(2,0)*Yd(2,2)) - 6
+      *AdInput(0,1)*AdInput(0,2)*TCC0(msdInput(0),msqInput(1),msqInput(2))*Yd(0,1)
+      *Yd(0,2)*(Yd(0,1)*Yd(0,2) + Yd(1,1)*Yd(1,2) + Yd(2,1)*Yd(2,2)) - 6*AdInput(0
+      ,1)*AdInput(0,2)*TCC0(msdInput(0),msqInput(2),msqInput(1))*Yd(0,1)*Yd(0,2)*(
+      Yd(0,1)*Yd(0,2) + Yd(1,1)*Yd(1,2) + Yd(2,1)*Yd(2,2)) - 6*AdInput(1,1)*
+      AdInput(1,2)*TCC0(msdInput(1),msqInput(1),msqInput(2))*Yd(1,1)*Yd(1,2)*(Yd(0
+      ,1)*Yd(0,2) + Yd(1,1)*Yd(1,2) + Yd(2,1)*Yd(2,2)) - 6*AdInput(1,1)*AdInput(1,
+      2)*TCC0(msdInput(1),msqInput(2),msqInput(1))*Yd(1,1)*Yd(1,2)*(Yd(0,1)*Yd(0,2
+      ) + Yd(1,1)*Yd(1,2) + Yd(2,1)*Yd(2,2)) - 6*AdInput(2,1)*AdInput(2,2)*TCC0(
+      msdInput(2),msqInput(1),msqInput(2))*Yd(2,1)*Yd(2,2)*(Yd(0,1)*Yd(0,2) + Yd(1
+      ,1)*Yd(1,2) + Yd(2,1)*Yd(2,2)) - 6*AdInput(2,1)*AdInput(2,2)*TCC0(msdInput(2
+      ),msqInput(2),msqInput(1))*Yd(2,1)*Yd(2,2)*(Yd(0,1)*Yd(0,2) + Yd(1,1)*Yd(1,2
+      ) + Yd(2,1)*Yd(2,2)) - AeInput(0,0)*AeInput(0,1)*AeInput(1,0)*AeInput(1,1)*
+      TCD0(mseInput(0),mseInput(1),mslInput(0),mslInput(1))*Ye(0,0)*Ye(0,1)*Ye(1,0
+      )*Ye(1,1) - AeInput(0,0)*AeInput(0,1)*AeInput(1,0)*AeInput(1,1)*TCD0(
+      mseInput(0),mseInput(1),mslInput(1),mslInput(0))*Ye(0,0)*Ye(0,1)*Ye(1,0)*Ye(
+      1,1) - AeInput(0,0)*AeInput(0,1)*AeInput(1,0)*AeInput(1,1)*TCD0(mseInput(1),
+      mseInput(0),mslInput(0),mslInput(1))*Ye(0,0)*Ye(0,1)*Ye(1,0)*Ye(1,1) -
+      AeInput(0,0)*AeInput(0,1)*AeInput(1,0)*AeInput(1,1)*TCD0(mseInput(1),
+      mseInput(0),mslInput(1),mslInput(0))*Ye(0,0)*Ye(0,1)*Ye(1,0)*Ye(1,1) -
+      AeInput(0,0)*AeInput(0,2)*AeInput(1,0)*AeInput(1,2)*TCD0(mseInput(0),
+      mseInput(1),mslInput(0),mslInput(2))*Ye(0,0)*Ye(0,2)*Ye(1,0)*Ye(1,2) -
+      AeInput(0,0)*AeInput(0,2)*AeInput(1,0)*AeInput(1,2)*TCD0(mseInput(0),
+      mseInput(1),mslInput(2),mslInput(0))*Ye(0,0)*Ye(0,2)*Ye(1,0)*Ye(1,2) -
+      AeInput(0,0)*AeInput(0,2)*AeInput(1,0)*AeInput(1,2)*TCD0(mseInput(1),
+      mseInput(0),mslInput(0),mslInput(2))*Ye(0,0)*Ye(0,2)*Ye(1,0)*Ye(1,2) -
+      AeInput(0,0)*AeInput(0,2)*AeInput(1,0)*AeInput(1,2)*TCD0(mseInput(1),
+      mseInput(0),mslInput(2),mslInput(0))*Ye(0,0)*Ye(0,2)*Ye(1,0)*Ye(1,2) -
+      AeInput(0,1)*AeInput(0,2)*AeInput(1,1)*AeInput(1,2)*TCD0(mseInput(0),
+      mseInput(1),mslInput(1),mslInput(2))*Ye(0,1)*Ye(0,2)*Ye(1,1)*Ye(1,2) -
+      AeInput(0,1)*AeInput(0,2)*AeInput(1,1)*AeInput(1,2)*TCD0(mseInput(0),
+      mseInput(1),mslInput(2),mslInput(1))*Ye(0,1)*Ye(0,2)*Ye(1,1)*Ye(1,2) -
+      AeInput(0,1)*AeInput(0,2)*AeInput(1,1)*AeInput(1,2)*TCD0(mseInput(1),
+      mseInput(0),mslInput(1),mslInput(2))*Ye(0,1)*Ye(0,2)*Ye(1,1)*Ye(1,2) -
+      AeInput(0,1)*AeInput(0,2)*AeInput(1,1)*AeInput(1,2)*TCD0(mseInput(1),
+      mseInput(0),mslInput(2),mslInput(1))*Ye(0,1)*Ye(0,2)*Ye(1,1)*Ye(1,2) -
+      AeInput(0,0)*AeInput(0,1)*AeInput(2,0)*AeInput(2,1)*TCD0(mseInput(0),
+      mseInput(2),mslInput(0),mslInput(1))*Ye(0,0)*Ye(0,1)*Ye(2,0)*Ye(2,1) -
+      AeInput(0,0)*AeInput(0,1)*AeInput(2,0)*AeInput(2,1)*TCD0(mseInput(0),
+      mseInput(2),mslInput(1),mslInput(0))*Ye(0,0)*Ye(0,1)*Ye(2,0)*Ye(2,1) -
+      AeInput(0,0)*AeInput(0,1)*AeInput(2,0)*AeInput(2,1)*TCD0(mseInput(2),
+      mseInput(0),mslInput(0),mslInput(1))*Ye(0,0)*Ye(0,1)*Ye(2,0)*Ye(2,1) -
+      AeInput(0,0)*AeInput(0,1)*AeInput(2,0)*AeInput(2,1)*TCD0(mseInput(2),
+      mseInput(0),mslInput(1),mslInput(0))*Ye(0,0)*Ye(0,1)*Ye(2,0)*Ye(2,1) -
+      AeInput(1,0)*AeInput(1,1)*AeInput(2,0)*AeInput(2,1)*TCD0(mseInput(1),
+      mseInput(2),mslInput(0),mslInput(1))*Ye(1,0)*Ye(1,1)*Ye(2,0)*Ye(2,1) -
+      AeInput(1,0)*AeInput(1,1)*AeInput(2,0)*AeInput(2,1)*TCD0(mseInput(1),
+      mseInput(2),mslInput(1),mslInput(0))*Ye(1,0)*Ye(1,1)*Ye(2,0)*Ye(2,1) -
+      AeInput(1,0)*AeInput(1,1)*AeInput(2,0)*AeInput(2,1)*TCD0(mseInput(2),
+      mseInput(1),mslInput(0),mslInput(1))*Ye(1,0)*Ye(1,1)*Ye(2,0)*Ye(2,1) -
+      AeInput(1,0)*AeInput(1,1)*AeInput(2,0)*AeInput(2,1)*TCD0(mseInput(2),
+      mseInput(1),mslInput(1),mslInput(0))*Ye(1,0)*Ye(1,1)*Ye(2,0)*Ye(2,1) - 2*
+      AeInput(0,0)*AeInput(0,1)*TCC0(mseInput(0),mslInput(0),mslInput(1))*Ye(0,0)*
+      Ye(0,1)*(Ye(0,0)*Ye(0,1) + Ye(1,0)*Ye(1,1) + Ye(2,0)*Ye(2,1)) - 2*AeInput(0,
+      0)*AeInput(0,1)*TCC0(mseInput(0),mslInput(1),mslInput(0))*Ye(0,0)*Ye(0,1)*(
+      Ye(0,0)*Ye(0,1) + Ye(1,0)*Ye(1,1) + Ye(2,0)*Ye(2,1)) - 2*AeInput(0,0)*
+      AeInput(1,0)*TCC0(mseInput(0),mseInput(1),mslInput(0))*Ye(0,0)*Ye(1,0)*(Ye(0
+      ,0)*Ye(0,1) + Ye(1,0)*Ye(1,1) + Ye(2,0)*Ye(2,1)) - 2*AeInput(0,0)*AeInput(1,
+      0)*TCC0(mseInput(1),mseInput(0),mslInput(0))*Ye(0,0)*Ye(1,0)*(Ye(0,0)*Ye(0,1
+      ) + Ye(1,0)*Ye(1,1) + Ye(2,0)*Ye(2,1)) - 2*AeInput(0,1)*AeInput(1,1)*TCC0(
+      mseInput(0),mseInput(1),mslInput(1))*Ye(0,1)*Ye(1,1)*(Ye(0,0)*Ye(0,1) + Ye(1
+      ,0)*Ye(1,1) + Ye(2,0)*Ye(2,1)) - 2*AeInput(0,1)*AeInput(1,1)*TCC0(mseInput(1
+      ),mseInput(0),mslInput(1))*Ye(0,1)*Ye(1,1)*(Ye(0,0)*Ye(0,1) + Ye(1,0)*Ye(1,1
+      ) + Ye(2,0)*Ye(2,1)) - 2*AeInput(1,0)*AeInput(1,1)*TCC0(mseInput(1),mslInput
+      (0),mslInput(1))*Ye(1,0)*Ye(1,1)*(Ye(0,0)*Ye(0,1) + Ye(1,0)*Ye(1,1) + Ye(2,0
+      )*Ye(2,1)) - 2*AeInput(1,0)*AeInput(1,1)*TCC0(mseInput(1),mslInput(1),
+      mslInput(0))*Ye(1,0)*Ye(1,1)*(Ye(0,0)*Ye(0,1) + Ye(1,0)*Ye(1,1) + Ye(2,0)*Ye
+      (2,1)) - 2*AeInput(0,2)*AeInput(1,2)*TCC0(mseInput(0),mseInput(1),mslInput(2
+      ))*Ye(0,2)*Ye(1,2)*(Ye(0,0)*Ye(0,1) + Ye(1,0)*Ye(1,1) + Ye(2,0)*Ye(2,1)) - 2
+      *AeInput(0,2)*AeInput(1,2)*TCC0(mseInput(1),mseInput(0),mslInput(2))*Ye(0,2)
+      *Ye(1,2)*(Ye(0,0)*Ye(0,1) + Ye(1,0)*Ye(1,1) + Ye(2,0)*Ye(2,1)) - 2*AeInput(2
+      ,0)*AeInput(2,1)*TCC0(mseInput(2),mslInput(0),mslInput(1))*Ye(2,0)*Ye(2,1)*(
+      Ye(0,0)*Ye(0,1) + Ye(1,0)*Ye(1,1) + Ye(2,0)*Ye(2,1)) - 2*AeInput(2,0)*
+      AeInput(2,1)*TCC0(mseInput(2),mslInput(1),mslInput(0))*Ye(2,0)*Ye(2,1)*(Ye(0
+      ,0)*Ye(0,1) + Ye(1,0)*Ye(1,1) + Ye(2,0)*Ye(2,1)) - AeInput(0,0)*AeInput(0,2)
+      *AeInput(2,0)*AeInput(2,2)*TCD0(mseInput(0),mseInput(2),mslInput(0),mslInput
+      (2))*Ye(0,0)*Ye(0,2)*Ye(2,0)*Ye(2,2) - AeInput(0,0)*AeInput(0,2)*AeInput(2,0
+      )*AeInput(2,2)*TCD0(mseInput(0),mseInput(2),mslInput(2),mslInput(0))*Ye(0,0)
+      *Ye(0,2)*Ye(2,0)*Ye(2,2) - AeInput(0,0)*AeInput(0,2)*AeInput(2,0)*AeInput(2,
+      2)*TCD0(mseInput(2),mseInput(0),mslInput(0),mslInput(2))*Ye(0,0)*Ye(0,2)*Ye(
+      2,0)*Ye(2,2) - AeInput(0,0)*AeInput(0,2)*AeInput(2,0)*AeInput(2,2)*TCD0(
+      mseInput(2),mseInput(0),mslInput(2),mslInput(0))*Ye(0,0)*Ye(0,2)*Ye(2,0)*Ye(
+      2,2) - AeInput(1,0)*AeInput(1,2)*AeInput(2,0)*AeInput(2,2)*TCD0(mseInput(1),
+      mseInput(2),mslInput(0),mslInput(2))*Ye(1,0)*Ye(1,2)*Ye(2,0)*Ye(2,2) -
+      AeInput(1,0)*AeInput(1,2)*AeInput(2,0)*AeInput(2,2)*TCD0(mseInput(1),
+      mseInput(2),mslInput(2),mslInput(0))*Ye(1,0)*Ye(1,2)*Ye(2,0)*Ye(2,2) -
+      AeInput(1,0)*AeInput(1,2)*AeInput(2,0)*AeInput(2,2)*TCD0(mseInput(2),
+      mseInput(1),mslInput(0),mslInput(2))*Ye(1,0)*Ye(1,2)*Ye(2,0)*Ye(2,2) -
+      AeInput(1,0)*AeInput(1,2)*AeInput(2,0)*AeInput(2,2)*TCD0(mseInput(2),
+      mseInput(1),mslInput(2),mslInput(0))*Ye(1,0)*Ye(1,2)*Ye(2,0)*Ye(2,2) -
+      AeInput(0,1)*AeInput(0,2)*AeInput(2,1)*AeInput(2,2)*TCD0(mseInput(0),
+      mseInput(2),mslInput(1),mslInput(2))*Ye(0,1)*Ye(0,2)*Ye(2,1)*Ye(2,2) -
+      AeInput(0,1)*AeInput(0,2)*AeInput(2,1)*AeInput(2,2)*TCD0(mseInput(0),
+      mseInput(2),mslInput(2),mslInput(1))*Ye(0,1)*Ye(0,2)*Ye(2,1)*Ye(2,2) -
+      AeInput(0,1)*AeInput(0,2)*AeInput(2,1)*AeInput(2,2)*TCD0(mseInput(2),
+      mseInput(0),mslInput(1),mslInput(2))*Ye(0,1)*Ye(0,2)*Ye(2,1)*Ye(2,2) -
+      AeInput(0,1)*AeInput(0,2)*AeInput(2,1)*AeInput(2,2)*TCD0(mseInput(2),
+      mseInput(0),mslInput(2),mslInput(1))*Ye(0,1)*Ye(0,2)*Ye(2,1)*Ye(2,2) -
+      AeInput(1,1)*AeInput(1,2)*AeInput(2,1)*AeInput(2,2)*TCD0(mseInput(1),
+      mseInput(2),mslInput(1),mslInput(2))*Ye(1,1)*Ye(1,2)*Ye(2,1)*Ye(2,2) -
+      AeInput(1,1)*AeInput(1,2)*AeInput(2,1)*AeInput(2,2)*TCD0(mseInput(1),
+      mseInput(2),mslInput(2),mslInput(1))*Ye(1,1)*Ye(1,2)*Ye(2,1)*Ye(2,2) -
+      AeInput(1,1)*AeInput(1,2)*AeInput(2,1)*AeInput(2,2)*TCD0(mseInput(2),
+      mseInput(1),mslInput(1),mslInput(2))*Ye(1,1)*Ye(1,2)*Ye(2,1)*Ye(2,2) -
+      AeInput(1,1)*AeInput(1,2)*AeInput(2,1)*AeInput(2,2)*TCD0(mseInput(2),
+      mseInput(1),mslInput(2),mslInput(1))*Ye(1,1)*Ye(1,2)*Ye(2,1)*Ye(2,2) - 2*
+      AeInput(0,0)*AeInput(0,2)*TCC0(mseInput(0),mslInput(0),mslInput(2))*Ye(0,0)*
+      Ye(0,2)*(Ye(0,0)*Ye(0,2) + Ye(1,0)*Ye(1,2) + Ye(2,0)*Ye(2,2)) - 2*AeInput(0,
+      0)*AeInput(0,2)*TCC0(mseInput(0),mslInput(2),mslInput(0))*Ye(0,0)*Ye(0,2)*(
+      Ye(0,0)*Ye(0,2) + Ye(1,0)*Ye(1,2) + Ye(2,0)*Ye(2,2)) - 2*AeInput(1,0)*
+      AeInput(1,2)*TCC0(mseInput(1),mslInput(0),mslInput(2))*Ye(1,0)*Ye(1,2)*(Ye(0
+      ,0)*Ye(0,2) + Ye(1,0)*Ye(1,2) + Ye(2,0)*Ye(2,2)) - 2*AeInput(1,0)*AeInput(1,
+      2)*TCC0(mseInput(1),mslInput(2),mslInput(0))*Ye(1,0)*Ye(1,2)*(Ye(0,0)*Ye(0,2
+      ) + Ye(1,0)*Ye(1,2) + Ye(2,0)*Ye(2,2)) - 2*AeInput(0,0)*AeInput(2,0)*TCC0(
+      mseInput(0),mseInput(2),mslInput(0))*Ye(0,0)*Ye(2,0)*(Ye(0,0)*Ye(0,2) + Ye(1
+      ,0)*Ye(1,2) + Ye(2,0)*Ye(2,2)) - 2*AeInput(0,0)*AeInput(2,0)*TCC0(mseInput(2
+      ),mseInput(0),mslInput(0))*Ye(0,0)*Ye(2,0)*(Ye(0,0)*Ye(0,2) + Ye(1,0)*Ye(1,2
+      ) + Ye(2,0)*Ye(2,2)) - 2*AeInput(0,1)*AeInput(2,1)*TCC0(mseInput(0),mseInput
+      (2),mslInput(1))*Ye(0,1)*Ye(2,1)*(Ye(0,0)*Ye(0,2) + Ye(1,0)*Ye(1,2) + Ye(2,0
+      )*Ye(2,2)) - 2*AeInput(0,1)*AeInput(2,1)*TCC0(mseInput(2),mseInput(0),
+      mslInput(1))*Ye(0,1)*Ye(2,1)*(Ye(0,0)*Ye(0,2) + Ye(1,0)*Ye(1,2) + Ye(2,0)*Ye
+      (2,2)) - 2*AeInput(0,2)*AeInput(2,2)*TCC0(mseInput(0),mseInput(2),mslInput(2
+      ))*Ye(0,2)*Ye(2,2)*(Ye(0,0)*Ye(0,2) + Ye(1,0)*Ye(1,2) + Ye(2,0)*Ye(2,2)) - 2
+      *AeInput(0,2)*AeInput(2,2)*TCC0(mseInput(2),mseInput(0),mslInput(2))*Ye(0,2)
+      *Ye(2,2)*(Ye(0,0)*Ye(0,2) + Ye(1,0)*Ye(1,2) + Ye(2,0)*Ye(2,2)) - 2*AeInput(2
+      ,0)*AeInput(2,2)*TCC0(mseInput(2),mslInput(0),mslInput(2))*Ye(2,0)*Ye(2,2)*(
+      Ye(0,0)*Ye(0,2) + Ye(1,0)*Ye(1,2) + Ye(2,0)*Ye(2,2)) - 2*AeInput(2,0)*
+      AeInput(2,2)*TCC0(mseInput(2),mslInput(2),mslInput(0))*Ye(2,0)*Ye(2,2)*(Ye(0
+      ,0)*Ye(0,2) + Ye(1,0)*Ye(1,2) + Ye(2,0)*Ye(2,2)) - 2*AeInput(0,1)*AeInput(0,
+      2)*TCC0(mseInput(0),mslInput(1),mslInput(2))*Ye(0,1)*Ye(0,2)*(Ye(0,1)*Ye(0,2
+      ) + Ye(1,1)*Ye(1,2) + Ye(2,1)*Ye(2,2)) - 2*AeInput(0,1)*AeInput(0,2)*TCC0(
+      mseInput(0),mslInput(2),mslInput(1))*Ye(0,1)*Ye(0,2)*(Ye(0,1)*Ye(0,2) + Ye(1
+      ,1)*Ye(1,2) + Ye(2,1)*Ye(2,2)) - 2*AeInput(1,1)*AeInput(1,2)*TCC0(mseInput(1
+      ),mslInput(1),mslInput(2))*Ye(1,1)*Ye(1,2)*(Ye(0,1)*Ye(0,2) + Ye(1,1)*Ye(1,2
+      ) + Ye(2,1)*Ye(2,2)) - 2*AeInput(1,1)*AeInput(1,2)*TCC0(mseInput(1),mslInput
+      (2),mslInput(1))*Ye(1,1)*Ye(1,2)*(Ye(0,1)*Ye(0,2) + Ye(1,1)*Ye(1,2) + Ye(2,1
+      )*Ye(2,2)) - 2*AeInput(1,0)*AeInput(2,0)*TCC0(mseInput(1),mseInput(2),
+      mslInput(0))*Ye(1,0)*Ye(2,0)*(Ye(0,1)*Ye(0,2) + Ye(1,1)*Ye(1,2) + Ye(2,1)*Ye
+      (2,2)) - 2*AeInput(1,0)*AeInput(2,0)*TCC0(mseInput(2),mseInput(1),mslInput(0
+      ))*Ye(1,0)*Ye(2,0)*(Ye(0,1)*Ye(0,2) + Ye(1,1)*Ye(1,2) + Ye(2,1)*Ye(2,2)) - 2
+      *AeInput(1,1)*AeInput(2,1)*TCC0(mseInput(1),mseInput(2),mslInput(1))*Ye(1,1)
+      *Ye(2,1)*(Ye(0,1)*Ye(0,2) + Ye(1,1)*Ye(1,2) + Ye(2,1)*Ye(2,2)) - 2*AeInput(1
+      ,1)*AeInput(2,1)*TCC0(mseInput(2),mseInput(1),mslInput(1))*Ye(1,1)*Ye(2,1)*(
+      Ye(0,1)*Ye(0,2) + Ye(1,1)*Ye(1,2) + Ye(2,1)*Ye(2,2)) - 2*AeInput(1,2)*
+      AeInput(2,2)*TCC0(mseInput(1),mseInput(2),mslInput(2))*Ye(1,2)*Ye(2,2)*(Ye(0
+      ,1)*Ye(0,2) + Ye(1,1)*Ye(1,2) + Ye(2,1)*Ye(2,2)) - 2*AeInput(1,2)*AeInput(2,
+      2)*TCC0(mseInput(2),mseInput(1),mslInput(2))*Ye(1,2)*Ye(2,2)*(Ye(0,1)*Ye(0,2
+      ) + Ye(1,1)*Ye(1,2) + Ye(2,1)*Ye(2,2)) - 2*AeInput(2,1)*AeInput(2,2)*TCC0(
+      mseInput(2),mslInput(1),mslInput(2))*Ye(2,1)*Ye(2,2)*(Ye(0,1)*Ye(0,2) + Ye(1
+      ,1)*Ye(1,2) + Ye(2,1)*Ye(2,2)) - 2*AeInput(2,1)*AeInput(2,2)*TCC0(mseInput(2
+      ),mslInput(2),mslInput(1))*Ye(2,1)*Ye(2,2)*(Ye(0,1)*Ye(0,2) + Ye(1,1)*Ye(1,2
+      ) + Ye(2,1)*Ye(2,2)) - 3*Quad(Abs(MuInput))*TCD0(msqInput(0),msqInput(1),
+      msuInput(0),msuInput(1))*Yu(0,0)*Yu(0,1)*Yu(1,0)*Yu(1,1) - 3*Quad(Abs(
+      MuInput))*TCD0(msqInput(0),msqInput(1),msuInput(1),msuInput(0))*Yu(0,0)*Yu(0
+      ,1)*Yu(1,0)*Yu(1,1) - 3*Quad(Abs(MuInput))*TCD0(msqInput(1),msqInput(0),
+      msuInput(0),msuInput(1))*Yu(0,0)*Yu(0,1)*Yu(1,0)*Yu(1,1) - 3*Quad(Abs(
+      MuInput))*TCD0(msqInput(1),msqInput(0),msuInput(1),msuInput(0))*Yu(0,0)*Yu(0
+      ,1)*Yu(1,0)*Yu(1,1) - 3*Quad(Abs(MuInput))*TCD0(msqInput(0),msqInput(2),
+      msuInput(0),msuInput(1))*Yu(0,0)*Yu(0,2)*Yu(1,0)*Yu(1,2) - 3*Quad(Abs(
+      MuInput))*TCD0(msqInput(0),msqInput(2),msuInput(1),msuInput(0))*Yu(0,0)*Yu(0
+      ,2)*Yu(1,0)*Yu(1,2) - 3*Quad(Abs(MuInput))*TCD0(msqInput(2),msqInput(0),
+      msuInput(0),msuInput(1))*Yu(0,0)*Yu(0,2)*Yu(1,0)*Yu(1,2) - 3*Quad(Abs(
+      MuInput))*TCD0(msqInput(2),msqInput(0),msuInput(1),msuInput(0))*Yu(0,0)*Yu(0
+      ,2)*Yu(1,0)*Yu(1,2) - 3*Quad(Abs(MuInput))*TCD0(msqInput(1),msqInput(2),
+      msuInput(0),msuInput(1))*Yu(0,1)*Yu(0,2)*Yu(1,1)*Yu(1,2) - 3*Quad(Abs(
+      MuInput))*TCD0(msqInput(1),msqInput(2),msuInput(1),msuInput(0))*Yu(0,1)*Yu(0
+      ,2)*Yu(1,1)*Yu(1,2) - 3*Quad(Abs(MuInput))*TCD0(msqInput(2),msqInput(1),
+      msuInput(0),msuInput(1))*Yu(0,1)*Yu(0,2)*Yu(1,1)*Yu(1,2) - 3*Quad(Abs(
+      MuInput))*TCD0(msqInput(2),msqInput(1),msuInput(1),msuInput(0))*Yu(0,1)*Yu(0
+      ,2)*Yu(1,1)*Yu(1,2) - 3*Quad(Abs(MuInput))*TCD0(msqInput(0),msqInput(1),
+      msuInput(0),msuInput(2))*Yu(0,0)*Yu(0,1)*Yu(2,0)*Yu(2,1) - 3*Quad(Abs(
+      MuInput))*TCD0(msqInput(0),msqInput(1),msuInput(2),msuInput(0))*Yu(0,0)*Yu(0
+      ,1)*Yu(2,0)*Yu(2,1) - 3*Quad(Abs(MuInput))*TCD0(msqInput(1),msqInput(0),
+      msuInput(0),msuInput(2))*Yu(0,0)*Yu(0,1)*Yu(2,0)*Yu(2,1) - 3*Quad(Abs(
+      MuInput))*TCD0(msqInput(1),msqInput(0),msuInput(2),msuInput(0))*Yu(0,0)*Yu(0
+      ,1)*Yu(2,0)*Yu(2,1) - 3*Quad(Abs(MuInput))*TCD0(msqInput(0),msqInput(1),
+      msuInput(1),msuInput(2))*Yu(1,0)*Yu(1,1)*Yu(2,0)*Yu(2,1) - 3*Quad(Abs(
+      MuInput))*TCD0(msqInput(0),msqInput(1),msuInput(2),msuInput(1))*Yu(1,0)*Yu(1
+      ,1)*Yu(2,0)*Yu(2,1) - 3*Quad(Abs(MuInput))*TCD0(msqInput(1),msqInput(0),
+      msuInput(1),msuInput(2))*Yu(1,0)*Yu(1,1)*Yu(2,0)*Yu(2,1) - 3*Quad(Abs(
+      MuInput))*TCD0(msqInput(1),msqInput(0),msuInput(2),msuInput(1))*Yu(1,0)*Yu(1
+      ,1)*Yu(2,0)*Yu(2,1) - 3*Quad(Abs(MuInput))*TCD0(msqInput(0),msqInput(2),
+      msuInput(0),msuInput(2))*Yu(0,0)*Yu(0,2)*Yu(2,0)*Yu(2,2) - 3*Quad(Abs(
+      MuInput))*TCD0(msqInput(0),msqInput(2),msuInput(2),msuInput(0))*Yu(0,0)*Yu(0
+      ,2)*Yu(2,0)*Yu(2,2) - 3*Quad(Abs(MuInput))*TCD0(msqInput(2),msqInput(0),
+      msuInput(0),msuInput(2))*Yu(0,0)*Yu(0,2)*Yu(2,0)*Yu(2,2) - 3*Quad(Abs(
+      MuInput))*TCD0(msqInput(2),msqInput(0),msuInput(2),msuInput(0))*Yu(0,0)*Yu(0
+      ,2)*Yu(2,0)*Yu(2,2) - 3*Quad(Abs(MuInput))*TCD0(msqInput(0),msqInput(2),
+      msuInput(1),msuInput(2))*Yu(1,0)*Yu(1,2)*Yu(2,0)*Yu(2,2) - 3*Quad(Abs(
+      MuInput))*TCD0(msqInput(0),msqInput(2),msuInput(2),msuInput(1))*Yu(1,0)*Yu(1
+      ,2)*Yu(2,0)*Yu(2,2) - 3*Quad(Abs(MuInput))*TCD0(msqInput(2),msqInput(0),
+      msuInput(1),msuInput(2))*Yu(1,0)*Yu(1,2)*Yu(2,0)*Yu(2,2) - 3*Quad(Abs(
+      MuInput))*TCD0(msqInput(2),msqInput(0),msuInput(2),msuInput(1))*Yu(1,0)*Yu(1
+      ,2)*Yu(2,0)*Yu(2,2) - 3*Quad(Abs(MuInput))*TCD0(msqInput(1),msqInput(2),
+      msuInput(0),msuInput(2))*Yu(0,1)*Yu(0,2)*Yu(2,1)*Yu(2,2) - 3*Quad(Abs(
+      MuInput))*TCD0(msqInput(1),msqInput(2),msuInput(2),msuInput(0))*Yu(0,1)*Yu(0
+      ,2)*Yu(2,1)*Yu(2,2) - 3*Quad(Abs(MuInput))*TCD0(msqInput(2),msqInput(1),
+      msuInput(0),msuInput(2))*Yu(0,1)*Yu(0,2)*Yu(2,1)*Yu(2,2) - 3*Quad(Abs(
+      MuInput))*TCD0(msqInput(2),msqInput(1),msuInput(2),msuInput(0))*Yu(0,1)*Yu(0
+      ,2)*Yu(2,1)*Yu(2,2) - 3*Quad(Abs(MuInput))*TCD0(msqInput(1),msqInput(2),
+      msuInput(1),msuInput(2))*Yu(1,1)*Yu(1,2)*Yu(2,1)*Yu(2,2) - 3*Quad(Abs(
+      MuInput))*TCD0(msqInput(1),msqInput(2),msuInput(2),msuInput(1))*Yu(1,1)*Yu(1
+      ,2)*Yu(2,1)*Yu(2,2) - 3*Quad(Abs(MuInput))*TCD0(msqInput(2),msqInput(1),
+      msuInput(1),msuInput(2))*Yu(1,1)*Yu(1,2)*Yu(2,1)*Yu(2,2) - 3*Quad(Abs(
+      MuInput))*TCD0(msqInput(2),msqInput(1),msuInput(2),msuInput(1))*Yu(1,1)*Yu(1
+      ,2)*Yu(2,1)*Yu(2,2))))));
    MODEL->set_Lambda2(Re(0.5*(0.25*(0.6*Sqr(g1) + Sqr(g2)) + 0.000641623890917771*
-      ((-2*AtInput)/MSUSY + (0.3333333333333333*Cube(AtInput))/Cube(MSUSY) - (
-      0.08333333333333333*Quad(AtInput))/Quad(MSUSY))*Quad(Yu(2,2))*Sqr(g3)*
-      UnitStep(-2 + LambdaLoopOrder) + ((-0.0031662869888230555*Quad(MuInput)*Quad
-      (Yd(2,2)))/Quad(MSUSY) - (0.0010554289962743518*Quad(MuInput)*Quad(Ye(2,2)))
-      /Quad(MSUSY) + (0.037995443865876666*Quad(Yu(2,2))*Sqr(AtInput)*(1 - (
-      0.08333333333333333*Sqr(AtInput))/Sqr(MSUSY)))/Sqr(MSUSY) -
-      0.0015831434944115277*(0.6*Sqr(g1) + Sqr(g2))*((-3*Sqr(MuInput)*Sqr(Yd(2,2))
-      )/Sqr(MSUSY) - (Sqr(MuInput)*Sqr(Ye(2,2)))/Sqr(MSUSY) + (3*Sqr(AtInput)*Sqr(
-      Yu(2,2)))/Sqr(MSUSY)) - 0.0005277144981371759*(0.6*Sqr(g1) + Sqr(g2))*((3*
-      Sqr(MuInput)*Sqr(Yd(2,2)))/Sqr(MSUSY) + (Sqr(MuInput)*Sqr(Ye(2,2)))/Sqr(
-      MSUSY) + (3*Sqr(AtInput)*Sqr(Yu(2,2)))/Sqr(MSUSY)))*UnitStep(-1 +
-      LambdaLoopOrder))));
-   MODEL->set_Lambda3(Re(0.25*(-0.6*Sqr(g1) + Sqr(g2)) + (0.00008020298636472138*
-      AtInput*(1 - (0.5*AtInput)/MSUSY)*Quad(Yu(2,2))*Sqr(g3)*Sqr(MuInput)*
-      UnitStep(-2 + LambdaLoopOrder))/Cube(MSUSY) + ((0.0010554289962743518*(3*
-      Quad(Yd(2,2))*(3 - Sqr(AbInput)/Sqr(MSUSY)) + Quad(Ye(2,2))*(3 - Sqr(
-      AtauInput)/Sqr(MSUSY)) + 3*Quad(Yu(2,2))*(3 - Sqr(AtInput)/Sqr(MSUSY)))*Sqr(
-      MuInput))/Sqr(MSUSY) + 0.0031662869888230555*(3*Sqr(AbInput/MSUSY + AtInput/
-      MSUSY) - (6*Sqr(MuInput))/Sqr(MSUSY) - Sqr(-((AbInput*AtInput)/Sqr(MSUSY)) +
-      Sqr(MuInput)/Sqr(MSUSY)))*Sqr(Yd(2,2))*Sqr(Yu(2,2)) - 0.0007915717472057639*
-      (-0.6*Sqr(g1) + Sqr(g2))*(3*(Sqr(AbInput)/Sqr(MSUSY) - Sqr(MuInput)/Sqr(
-      MSUSY))*Sqr(Yd(2,2)) + (Sqr(AtauInput)/Sqr(MSUSY) - Sqr(MuInput)/Sqr(MSUSY))
-      *Sqr(Ye(2,2)) + 3*(Sqr(AtInput)/Sqr(MSUSY) - Sqr(MuInput)/Sqr(MSUSY))*Sqr(Yu
-      (2,2))) - 0.00026385724906858796*(-0.6*Sqr(g1) + Sqr(g2))*(3*(Sqr(AbInput)/
-      Sqr(MSUSY) + Sqr(MuInput)/Sqr(MSUSY))*Sqr(Yd(2,2)) + (Sqr(AtauInput)/Sqr(
-      MSUSY) + Sqr(MuInput)/Sqr(MSUSY))*Sqr(Ye(2,2)) + 3*(Sqr(AtInput)/Sqr(MSUSY)
-      + Sqr(MuInput)/Sqr(MSUSY))*Sqr(Yu(2,2))))*UnitStep(-1 + LambdaLoopOrder)));
-   MODEL->set_Lambda4(Re(-0.5*Sqr(g2) + (0.00008020298636472138*AtInput*(1 - (0.5*
-      AtInput)/MSUSY)*Quad(Yu(2,2))*Sqr(g3)*Sqr(MuInput)*UnitStep(-2 +
-      LambdaLoopOrder))/Cube(MSUSY) + ((0.0010554289962743518*(3*Quad(Yd(2,2))*(3
-      - Sqr(AbInput)/Sqr(MSUSY)) + Quad(Ye(2,2))*(3 - Sqr(AtauInput)/Sqr(MSUSY)) +
-      3*Quad(Yu(2,2))*(3 - Sqr(AtInput)/Sqr(MSUSY)))*Sqr(MuInput))/Sqr(MSUSY) -
-      0.0031662869888230555*(3*Sqr(AbInput/MSUSY + AtInput/MSUSY) - (6*Sqr(MuInput
-      ))/Sqr(MSUSY) - Sqr(-((AbInput*AtInput)/Sqr(MSUSY)) + Sqr(MuInput)/Sqr(MSUSY
-      )))*Sqr(Yd(2,2))*Sqr(Yu(2,2)) + 0.0015831434944115277*Sqr(g2)*(3*(Sqr(
-      AbInput)/Sqr(MSUSY) - Sqr(MuInput)/Sqr(MSUSY))*Sqr(Yd(2,2)) + (Sqr(AtauInput
-      )/Sqr(MSUSY) - Sqr(MuInput)/Sqr(MSUSY))*Sqr(Ye(2,2)) + 3*(Sqr(AtInput)/Sqr(
-      MSUSY) - Sqr(MuInput)/Sqr(MSUSY))*Sqr(Yu(2,2))) + 0.0005277144981371759*Sqr(
-      g2)*(3*(Sqr(AbInput)/Sqr(MSUSY) + Sqr(MuInput)/Sqr(MSUSY))*Sqr(Yd(2,2)) + (
-      Sqr(AtauInput)/Sqr(MSUSY) + Sqr(MuInput)/Sqr(MSUSY))*Sqr(Ye(2,2)) + 3*(Sqr(
-      AtInput)/Sqr(MSUSY) + Sqr(MuInput)/Sqr(MSUSY))*Sqr(Yu(2,2))))*UnitStep(-1 +
-      LambdaLoopOrder)));
-   MODEL->set_Lambda5(Re((-0.0010554289962743518*((3*Quad(Yd(2,2))*Sqr(AbInput))/
-      Sqr(MSUSY) + (Quad(Ye(2,2))*Sqr(AtauInput))/Sqr(MSUSY) + (3*Quad(Yu(2,2))*
-      Sqr(AtInput))/Sqr(MSUSY))*Sqr(MuInput)*UnitStep(-1 + LambdaLoopOrder))/Sqr(
-      MSUSY)));
-   MODEL->set_Lambda6(Re((0.000053468657576480914*(-1 + AtInput/MSUSY)*Cube(
+      ((-2*AuInput(2,2))/MSUSY + (0.3333333333333333*Cube(AuInput(2,2)))/Cube(
+      MSUSY) - (0.08333333333333333*Quad(AuInput(2,2)))/Quad(MSUSY))*Quad(Yu(2,2))
+      *Sqr(g3)*UnitStep(-2 + LambdaLoopOrder) + UnitStep(-1 + LambdaLoopOrder)*(
+      0.5*(-0.00037995443865876665*(2*Log(Sqr(Abs(MuInput))/Sqr(SCALE)) +
+      0.3333333333333333*Log(Sqr(msdInput(0))/Sqr(SCALE)) + 0.3333333333333333*Log
+      (Sqr(msdInput(1))/Sqr(SCALE)) + 0.3333333333333333*Log(Sqr(msdInput(2))/Sqr(
+      SCALE)) + Log(Sqr(mseInput(0))/Sqr(SCALE)) + Log(Sqr(mseInput(1))/Sqr(SCALE)
+      ) + Log(Sqr(mseInput(2))/Sqr(SCALE)) + 0.5*Log(Sqr(mslInput(0))/Sqr(SCALE))
+      + 0.5*Log(Sqr(mslInput(1))/Sqr(SCALE)) + 0.5*Log(Sqr(mslInput(2))/Sqr(SCALE)
+      ) + 0.16666666666666666*Log(Sqr(msqInput(0))/Sqr(SCALE)) +
+      0.16666666666666666*Log(Sqr(msqInput(1))/Sqr(SCALE)) + 0.16666666666666666*
+      Log(Sqr(msqInput(2))/Sqr(SCALE)) + 1.3333333333333333*Log(Sqr(msuInput(0))/
+      Sqr(SCALE)) + 1.3333333333333333*Log(Sqr(msuInput(1))/Sqr(SCALE)) +
+      1.3333333333333333*Log(Sqr(msuInput(2))/Sqr(SCALE)))*Quad(g1) -
+      0.0005277144981371759*(-4 + 8*Log(Sqr(M2Input)/Sqr(SCALE)) + 4*Log(Sqr(Abs(
+      MuInput))/Sqr(SCALE)) + Log(Sqr(mslInput(0))/Sqr(SCALE)) + Log(Sqr(mslInput(
+      1))/Sqr(SCALE)) + Log(Sqr(mslInput(2))/Sqr(SCALE)) + 3*Log(Sqr(msqInput(0))/
+      Sqr(SCALE)) + 3*Log(Sqr(msqInput(1))/Sqr(SCALE)) + 3*Log(Sqr(msqInput(2))/
+      Sqr(SCALE)))*Quad(g2)) + Re(0.0031662869888230555*(3*Sqr(Abs(MuInput))*Sqr(
+      Yd(0,0))*TCDB0(msdInput(0),msqInput(0)) + 3*Sqr(Abs(MuInput))*Sqr(Yd(0,1))*
+      TCDB0(msdInput(0),msqInput(1)) + 3*Sqr(Abs(MuInput))*Sqr(Yd(0,2))*TCDB0(
+      msdInput(0),msqInput(2)) + 3*Sqr(Abs(MuInput))*Sqr(Yd(1,0))*TCDB0(msdInput(1
+      ),msqInput(0)) + 3*Sqr(Abs(MuInput))*Sqr(Yd(1,1))*TCDB0(msdInput(1),msqInput
+      (1)) + 3*Sqr(Abs(MuInput))*Sqr(Yd(1,2))*TCDB0(msdInput(1),msqInput(2)) + 3*
+      Sqr(Abs(MuInput))*Sqr(Yd(2,0))*TCDB0(msdInput(2),msqInput(0)) + 3*Sqr(Abs(
+      MuInput))*Sqr(Yd(2,1))*TCDB0(msdInput(2),msqInput(1)) + 3*Sqr(Abs(MuInput))*
+      Sqr(Yd(2,2))*TCDB0(msdInput(2),msqInput(2)) + Sqr(Abs(MuInput))*Sqr(Ye(0,0))
+      *TCDB0(mseInput(0),mslInput(0)) + Sqr(Abs(MuInput))*Sqr(Ye(0,1))*TCDB0(
+      mseInput(0),mslInput(1)) + Sqr(Abs(MuInput))*Sqr(Ye(0,2))*TCDB0(mseInput(0),
+      mslInput(2)) + Sqr(Abs(MuInput))*Sqr(Ye(1,0))*TCDB0(mseInput(1),mslInput(0))
+      + Sqr(Abs(MuInput))*Sqr(Ye(1,1))*TCDB0(mseInput(1),mslInput(1)) + Sqr(Abs(
+      MuInput))*Sqr(Ye(1,2))*TCDB0(mseInput(1),mslInput(2)) + Sqr(Abs(MuInput))*
+      Sqr(Ye(2,0))*TCDB0(mseInput(2),mslInput(0)) + Sqr(Abs(MuInput))*Sqr(Ye(2,1))
+      *TCDB0(mseInput(2),mslInput(1)) + Sqr(Abs(MuInput))*Sqr(Ye(2,2))*TCDB0(
+      mseInput(2),mslInput(2)) + 3*Sqr(AuInput(0,0))*Sqr(Yu(0,0))*TCDB0(msuInput(0
+      ),msqInput(0)) + 3*Sqr(AuInput(0,1))*Sqr(Yu(0,1))*TCDB0(msuInput(0),msqInput
+      (1)) + 3*Sqr(AuInput(0,2))*Sqr(Yu(0,2))*TCDB0(msuInput(0),msqInput(2)) + 3*
+      Sqr(AuInput(1,0))*Sqr(Yu(1,0))*TCDB0(msuInput(1),msqInput(0)) + 3*Sqr(
+      AuInput(1,1))*Sqr(Yu(1,1))*TCDB0(msuInput(1),msqInput(1)) + 3*Sqr(AuInput(1,
+      2))*Sqr(Yu(1,2))*TCDB0(msuInput(1),msqInput(2)) + 3*Sqr(AuInput(2,0))*Sqr(Yu
+      (2,0))*TCDB0(msuInput(2),msqInput(0)) + 3*Sqr(AuInput(2,1))*Sqr(Yu(2,1))*
+      TCDB0(msuInput(2),msqInput(1)) + 3*Sqr(AuInput(2,2))*Sqr(Yu(2,2))*TCDB0(
+      msuInput(2),msqInput(2))) - 0.0007915717472057639*(0.6*Sqr(g1)*TCW(Abs(
+      M1Input),Abs(MuInput),SCALE) + 3*Sqr(g2)*TCW(Abs(M2Input),Abs(MuInput),SCALE
+      )))*(0.6*Sqr(g1) + Sqr(g2)) + 0.006332573977646111*(-0.03*Quad(g1)*TCB0(
+      msdInput(0),msdInput(0),SCALE) - 0.03*Quad(g1)*TCB0(msdInput(1),msdInput(1),
+      SCALE) - 0.03*Quad(g1)*TCB0(msdInput(2),msdInput(2),SCALE) - 0.09*Quad(g1)*
+      TCB0(mseInput(0),mseInput(0),SCALE) - 0.09*Quad(g1)*TCB0(mseInput(1),
+      mseInput(1),SCALE) - 0.09*Quad(g1)*TCB0(mseInput(2),mseInput(2),SCALE) +
+      0.125*(-0.36*Quad(g1) - Quad(g2))*TCB0(mslInput(0),mslInput(0),SCALE) +
+      0.125*(-0.36*Quad(g1) - Quad(g2))*TCB0(mslInput(1),mslInput(1),SCALE) +
+      0.125*(-0.36*Quad(g1) - Quad(g2))*TCB0(mslInput(2),mslInput(2),SCALE) + (
+      0.041666666666666664*(-0.36*Quad(g1) - 9*Quad(g2)) + 0.5*(-0.6*Sqr(g1) + 3*
+      Sqr(g2))*(Sqr(Yu(0,0)) + Sqr(Yu(1,0)) + Sqr(Yu(2,0))) - 3*Sqr(Sqr(Yu(0,0)) +
+      Sqr(Yu(1,0)) + Sqr(Yu(2,0))))*TCB0(msqInput(0),msqInput(0),SCALE) - 3*Sqr(Yu
+      (0,0)*Yu(0,1) + Yu(1,0)*Yu(1,1) + Yu(2,0)*Yu(2,1))*TCB0(msqInput(0),msqInput
+      (1),SCALE) - 3*Sqr(Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1,2) + Yu(2,0)*Yu(2,2))*TCB0
+      (msqInput(0),msqInput(2),SCALE) - 3*Sqr(Yu(0,0)*Yu(0,1) + Yu(1,0)*Yu(1,1) +
+      Yu(2,0)*Yu(2,1))*TCB0(msqInput(1),msqInput(0),SCALE) + (0.041666666666666664
+      *(-0.36*Quad(g1) - 9*Quad(g2)) + 0.5*(-0.6*Sqr(g1) + 3*Sqr(g2))*(Sqr(Yu(0,1)
+      ) + Sqr(Yu(1,1)) + Sqr(Yu(2,1))) - 3*Sqr(Sqr(Yu(0,1)) + Sqr(Yu(1,1)) + Sqr(
+      Yu(2,1))))*TCB0(msqInput(1),msqInput(1),SCALE) - 3*Sqr(Yu(0,1)*Yu(0,2) + Yu(
+      1,1)*Yu(1,2) + Yu(2,1)*Yu(2,2))*TCB0(msqInput(1),msqInput(2),SCALE) - 3*Sqr(
+      Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1,2) + Yu(2,0)*Yu(2,2))*TCB0(msqInput(2),
+      msqInput(0),SCALE) - 3*Sqr(Yu(0,1)*Yu(0,2) + Yu(1,1)*Yu(1,2) + Yu(2,1)*Yu(2,
+      2))*TCB0(msqInput(2),msqInput(1),SCALE) + (0.041666666666666664*(-0.36*Quad(
+      g1) - 9*Quad(g2)) + 0.5*(-0.6*Sqr(g1) + 3*Sqr(g2))*(Sqr(Yu(0,2)) + Sqr(Yu(1,
+      2)) + Sqr(Yu(2,2))) - 3*Sqr(Sqr(Yu(0,2)) + Sqr(Yu(1,2)) + Sqr(Yu(2,2))))*
+      TCB0(msqInput(2),msqInput(2),SCALE) + (-0.12*Quad(g1) + 1.2*Sqr(g1)*(Sqr(Yu(
+      0,0)) + Sqr(Yu(0,1)) + Sqr(Yu(0,2))) - 3*Sqr(Sqr(Yu(0,0)) + Sqr(Yu(0,1)) +
+      Sqr(Yu(0,2))))*TCB0(msuInput(0),msuInput(0),SCALE) - 3*Sqr(Yu(0,0)*Yu(1,0) +
+      Yu(0,1)*Yu(1,1) + Yu(0,2)*Yu(1,2))*TCB0(msuInput(0),msuInput(1),SCALE) - 3*
+      Sqr(Yu(0,0)*Yu(2,0) + Yu(0,1)*Yu(2,1) + Yu(0,2)*Yu(2,2))*TCB0(msuInput(0),
+      msuInput(2),SCALE) - 3*Sqr(Yu(0,0)*Yu(1,0) + Yu(0,1)*Yu(1,1) + Yu(0,2)*Yu(1,
+      2))*TCB0(msuInput(1),msuInput(0),SCALE) + (-0.12*Quad(g1) + 1.2*Sqr(g1)*(Sqr
+      (Yu(1,0)) + Sqr(Yu(1,1)) + Sqr(Yu(1,2))) - 3*Sqr(Sqr(Yu(1,0)) + Sqr(Yu(1,1))
+      + Sqr(Yu(1,2))))*TCB0(msuInput(1),msuInput(1),SCALE) - 3*Sqr(Yu(1,0)*Yu(2,0)
+      + Yu(1,1)*Yu(2,1) + Yu(1,2)*Yu(2,2))*TCB0(msuInput(1),msuInput(2),SCALE) - 3
+      *Sqr(Yu(0,0)*Yu(2,0) + Yu(0,1)*Yu(2,1) + Yu(0,2)*Yu(2,2))*TCB0(msuInput(2),
+      msuInput(0),SCALE) - 3*Sqr(Yu(1,0)*Yu(2,0) + Yu(1,1)*Yu(2,1) + Yu(1,2)*Yu(2,
+      2))*TCB0(msuInput(2),msuInput(1),SCALE) + (-0.12*Quad(g1) + 1.2*Sqr(g1)*(Sqr
+      (Yu(2,0)) + Sqr(Yu(2,1)) + Sqr(Yu(2,2))) - 3*Sqr(Sqr(Yu(2,0)) + Sqr(Yu(2,1))
+      + Sqr(Yu(2,2))))*TCB0(msuInput(2),msuInput(2),SCALE) - 0.6*Sqr(g1)*Sqr(Abs(
+      MuInput))*Sqr(Yd(0,0))*TCC0(msdInput(0),msdInput(0),msqInput(0)) - 0.6*Sqr(
+      g1)*Sqr(Abs(MuInput))*Sqr(Yd(0,1))*TCC0(msdInput(0),msdInput(0),msqInput(1))
+      - 0.6*Sqr(g1)*Sqr(Abs(MuInput))*Sqr(Yd(0,2))*TCC0(msdInput(0),msdInput(0),
+      msqInput(2)) + 0.5*(-0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(Abs(MuInput))*Sqr(Yd(0,0))
+      *TCC0(msdInput(0),msqInput(0),msqInput(0)) + 0.5*(-0.6*Sqr(g1) - 3*Sqr(g2))*
+      Sqr(Abs(MuInput))*Sqr(Yd(0,1))*TCC0(msdInput(0),msqInput(1),msqInput(1)) +
+      0.5*(-0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(Abs(MuInput))*Sqr(Yd(0,2))*TCC0(msdInput(
+      0),msqInput(2),msqInput(2)) - 0.6*Sqr(g1)*Sqr(Abs(MuInput))*Sqr(Yd(1,0))*
+      TCC0(msdInput(1),msdInput(1),msqInput(0)) - 0.6*Sqr(g1)*Sqr(Abs(MuInput))*
+      Sqr(Yd(1,1))*TCC0(msdInput(1),msdInput(1),msqInput(1)) - 0.6*Sqr(g1)*Sqr(Abs
+      (MuInput))*Sqr(Yd(1,2))*TCC0(msdInput(1),msdInput(1),msqInput(2)) + 0.5*(-
+      0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(Abs(MuInput))*Sqr(Yd(1,0))*TCC0(msdInput(1),
+      msqInput(0),msqInput(0)) + 0.5*(-0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(Abs(MuInput))*
+      Sqr(Yd(1,1))*TCC0(msdInput(1),msqInput(1),msqInput(1)) + 0.5*(-0.6*Sqr(g1) -
+      3*Sqr(g2))*Sqr(Abs(MuInput))*Sqr(Yd(1,2))*TCC0(msdInput(1),msqInput(2),
+      msqInput(2)) - 0.6*Sqr(g1)*Sqr(Abs(MuInput))*Sqr(Yd(2,0))*TCC0(msdInput(2),
+      msdInput(2),msqInput(0)) - 0.6*Sqr(g1)*Sqr(Abs(MuInput))*Sqr(Yd(2,1))*TCC0(
+      msdInput(2),msdInput(2),msqInput(1)) - 0.6*Sqr(g1)*Sqr(Abs(MuInput))*Sqr(Yd(
+      2,2))*TCC0(msdInput(2),msdInput(2),msqInput(2)) + 0.5*(-0.6*Sqr(g1) - 3*Sqr(
+      g2))*Sqr(Abs(MuInput))*Sqr(Yd(2,0))*TCC0(msdInput(2),msqInput(0),msqInput(0)
+      ) + 0.5*(-0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(Abs(MuInput))*Sqr(Yd(2,1))*TCC0(
+      msdInput(2),msqInput(1),msqInput(1)) + 0.5*(-0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(
+      Abs(MuInput))*Sqr(Yd(2,2))*TCC0(msdInput(2),msqInput(2),msqInput(2)) - 0.6*
+      Sqr(g1)*Sqr(Abs(MuInput))*Sqr(Ye(0,0))*TCC0(mseInput(0),mseInput(0),mslInput
+      (0)) - 0.6*Sqr(g1)*Sqr(Abs(MuInput))*Sqr(Ye(0,1))*TCC0(mseInput(0),mseInput(
+      0),mslInput(1)) - 0.6*Sqr(g1)*Sqr(Abs(MuInput))*Sqr(Ye(0,2))*TCC0(mseInput(0
+      ),mseInput(0),mslInput(2)) + 0.5*(0.6*Sqr(g1) - Sqr(g2))*Sqr(Abs(MuInput))*
+      Sqr(Ye(0,0))*TCC0(mseInput(0),mslInput(0),mslInput(0)) + 0.5*(0.6*Sqr(g1) -
+      Sqr(g2))*Sqr(Abs(MuInput))*Sqr(Ye(0,1))*TCC0(mseInput(0),mslInput(1),
+      mslInput(1)) + 0.5*(0.6*Sqr(g1) - Sqr(g2))*Sqr(Abs(MuInput))*Sqr(Ye(0,2))*
+      TCC0(mseInput(0),mslInput(2),mslInput(2)) - 0.6*Sqr(g1)*Sqr(Abs(MuInput))*
+      Sqr(Ye(1,0))*TCC0(mseInput(1),mseInput(1),mslInput(0)) - 0.6*Sqr(g1)*Sqr(Abs
+      (MuInput))*Sqr(Ye(1,1))*TCC0(mseInput(1),mseInput(1),mslInput(1)) - 0.6*Sqr(
+      g1)*Sqr(Abs(MuInput))*Sqr(Ye(1,2))*TCC0(mseInput(1),mseInput(1),mslInput(2))
+      + 0.5*(0.6*Sqr(g1) - Sqr(g2))*Sqr(Abs(MuInput))*Sqr(Ye(1,0))*TCC0(mseInput(1
+      ),mslInput(0),mslInput(0)) + 0.5*(0.6*Sqr(g1) - Sqr(g2))*Sqr(Abs(MuInput))*
+      Sqr(Ye(1,1))*TCC0(mseInput(1),mslInput(1),mslInput(1)) + 0.5*(0.6*Sqr(g1) -
+      Sqr(g2))*Sqr(Abs(MuInput))*Sqr(Ye(1,2))*TCC0(mseInput(1),mslInput(2),
+      mslInput(2)) - 0.6*Sqr(g1)*Sqr(Abs(MuInput))*Sqr(Ye(2,0))*TCC0(mseInput(2),
+      mseInput(2),mslInput(0)) - 0.6*Sqr(g1)*Sqr(Abs(MuInput))*Sqr(Ye(2,1))*TCC0(
+      mseInput(2),mseInput(2),mslInput(1)) - 0.6*Sqr(g1)*Sqr(Abs(MuInput))*Sqr(Ye(
+      2,2))*TCC0(mseInput(2),mseInput(2),mslInput(2)) + 0.5*(0.6*Sqr(g1) - Sqr(g2)
+      )*Sqr(Abs(MuInput))*Sqr(Ye(2,0))*TCC0(mseInput(2),mslInput(0),mslInput(0)) +
+      0.5*(0.6*Sqr(g1) - Sqr(g2))*Sqr(Abs(MuInput))*Sqr(Ye(2,1))*TCC0(mseInput(2),
+      mslInput(1),mslInput(1)) + 0.5*(0.6*Sqr(g1) - Sqr(g2))*Sqr(Abs(MuInput))*Sqr
+      (Ye(2,2))*TCC0(mseInput(2),mslInput(2),mslInput(2)) + (0.5*(-0.6*Sqr(g1) + 3
+      *Sqr(g2))*Sqr(AuInput(0,0))*Sqr(Yu(0,0)) - 6*Sqr(AuInput(0,0))*Sqr(Yu(0,0))*
+      (Sqr(Yu(0,0)) + Sqr(Yu(1,0)) + Sqr(Yu(2,0))))*TCC0(msqInput(0),msqInput(0),
+      msuInput(0)) + (0.5*(-0.6*Sqr(g1) + 3*Sqr(g2))*Sqr(AuInput(1,0))*Sqr(Yu(1,0)
+      ) - 6*Sqr(AuInput(1,0))*Sqr(Yu(1,0))*(Sqr(Yu(0,0)) + Sqr(Yu(1,0)) + Sqr(Yu(2
+      ,0))))*TCC0(msqInput(0),msqInput(0),msuInput(1)) + (0.5*(-0.6*Sqr(g1) + 3*
+      Sqr(g2))*Sqr(AuInput(2,0))*Sqr(Yu(2,0)) - 6*Sqr(AuInput(2,0))*Sqr(Yu(2,0))*(
+      Sqr(Yu(0,0)) + Sqr(Yu(1,0)) + Sqr(Yu(2,0))))*TCC0(msqInput(0),msqInput(0),
+      msuInput(2)) + (1.2*Sqr(g1)*Sqr(AuInput(0,0))*Sqr(Yu(0,0)) - 6*Sqr(AuInput(0
+      ,0))*Sqr(Yu(0,0))*(Sqr(Yu(0,0)) + Sqr(Yu(0,1)) + Sqr(Yu(0,2))))*TCC0(
+      msqInput(0),msuInput(0),msuInput(0)) + (1.2*Sqr(g1)*Sqr(AuInput(1,0))*Sqr(Yu
+      (1,0)) - 6*Sqr(AuInput(1,0))*Sqr(Yu(1,0))*(Sqr(Yu(1,0)) + Sqr(Yu(1,1)) + Sqr
+      (Yu(1,2))))*TCC0(msqInput(0),msuInput(1),msuInput(1)) + (1.2*Sqr(g1)*Sqr(
+      AuInput(2,0))*Sqr(Yu(2,0)) - 6*Sqr(AuInput(2,0))*Sqr(Yu(2,0))*(Sqr(Yu(2,0))
+      + Sqr(Yu(2,1)) + Sqr(Yu(2,2))))*TCC0(msqInput(0),msuInput(2),msuInput(2)) +
+      (0.5*(-0.6*Sqr(g1) + 3*Sqr(g2))*Sqr(AuInput(0,1))*Sqr(Yu(0,1)) - 6*Sqr(
+      AuInput(0,1))*Sqr(Yu(0,1))*(Sqr(Yu(0,1)) + Sqr(Yu(1,1)) + Sqr(Yu(2,1))))*
+      TCC0(msqInput(1),msqInput(1),msuInput(0)) + (0.5*(-0.6*Sqr(g1) + 3*Sqr(g2))*
+      Sqr(AuInput(1,1))*Sqr(Yu(1,1)) - 6*Sqr(AuInput(1,1))*Sqr(Yu(1,1))*(Sqr(Yu(0,
+      1)) + Sqr(Yu(1,1)) + Sqr(Yu(2,1))))*TCC0(msqInput(1),msqInput(1),msuInput(1)
+      ) + (0.5*(-0.6*Sqr(g1) + 3*Sqr(g2))*Sqr(AuInput(2,1))*Sqr(Yu(2,1)) - 6*Sqr(
+      AuInput(2,1))*Sqr(Yu(2,1))*(Sqr(Yu(0,1)) + Sqr(Yu(1,1)) + Sqr(Yu(2,1))))*
+      TCC0(msqInput(1),msqInput(1),msuInput(2)) + (1.2*Sqr(g1)*Sqr(AuInput(0,1))*
+      Sqr(Yu(0,1)) - 6*Sqr(AuInput(0,1))*Sqr(Yu(0,1))*(Sqr(Yu(0,0)) + Sqr(Yu(0,1))
+      + Sqr(Yu(0,2))))*TCC0(msqInput(1),msuInput(0),msuInput(0)) + (1.2*Sqr(g1)*
+      Sqr(AuInput(1,1))*Sqr(Yu(1,1)) - 6*Sqr(AuInput(1,1))*Sqr(Yu(1,1))*(Sqr(Yu(1,
+      0)) + Sqr(Yu(1,1)) + Sqr(Yu(1,2))))*TCC0(msqInput(1),msuInput(1),msuInput(1)
+      ) + (1.2*Sqr(g1)*Sqr(AuInput(2,1))*Sqr(Yu(2,1)) - 6*Sqr(AuInput(2,1))*Sqr(Yu
+      (2,1))*(Sqr(Yu(2,0)) + Sqr(Yu(2,1)) + Sqr(Yu(2,2))))*TCC0(msqInput(1),
+      msuInput(2),msuInput(2)) + (0.5*(-0.6*Sqr(g1) + 3*Sqr(g2))*Sqr(AuInput(0,2))
+      *Sqr(Yu(0,2)) - 6*Sqr(AuInput(0,2))*Sqr(Yu(0,2))*(Sqr(Yu(0,2)) + Sqr(Yu(1,2)
+      ) + Sqr(Yu(2,2))))*TCC0(msqInput(2),msqInput(2),msuInput(0)) + (0.5*(-0.6*
+      Sqr(g1) + 3*Sqr(g2))*Sqr(AuInput(1,2))*Sqr(Yu(1,2)) - 6*Sqr(AuInput(1,2))*
+      Sqr(Yu(1,2))*(Sqr(Yu(0,2)) + Sqr(Yu(1,2)) + Sqr(Yu(2,2))))*TCC0(msqInput(2),
+      msqInput(2),msuInput(1)) + (0.5*(-0.6*Sqr(g1) + 3*Sqr(g2))*Sqr(AuInput(2,2))
+      *Sqr(Yu(2,2)) - 6*Sqr(AuInput(2,2))*Sqr(Yu(2,2))*(Sqr(Yu(0,2)) + Sqr(Yu(1,2)
+      ) + Sqr(Yu(2,2))))*TCC0(msqInput(2),msqInput(2),msuInput(2)) + (1.2*Sqr(g1)*
+      Sqr(AuInput(0,2))*Sqr(Yu(0,2)) - 6*Sqr(AuInput(0,2))*Sqr(Yu(0,2))*(Sqr(Yu(0,
+      0)) + Sqr(Yu(0,1)) + Sqr(Yu(0,2))))*TCC0(msqInput(2),msuInput(0),msuInput(0)
+      ) + (1.2*Sqr(g1)*Sqr(AuInput(1,2))*Sqr(Yu(1,2)) - 6*Sqr(AuInput(1,2))*Sqr(Yu
+      (1,2))*(Sqr(Yu(1,0)) + Sqr(Yu(1,1)) + Sqr(Yu(1,2))))*TCC0(msqInput(2),
+      msuInput(1),msuInput(1)) + (1.2*Sqr(g1)*Sqr(AuInput(2,2))*Sqr(Yu(2,2)) - 6*
+      Sqr(AuInput(2,2))*Sqr(Yu(2,2))*(Sqr(Yu(2,0)) + Sqr(Yu(2,1)) + Sqr(Yu(2,2))))
+      *TCC0(msqInput(2),msuInput(2),msuInput(2)) - 3*Quad(Abs(MuInput))*Quad(Yd(0,
+      0))*TCD0(msdInput(0),msdInput(0),msqInput(0),msqInput(0)) - 3*Quad(Abs(
+      MuInput))*Sqr(Yd(0,0))*Sqr(Yd(0,1))*TCD0(msdInput(0),msdInput(0),msqInput(0)
+      ,msqInput(1)) - 3*Quad(Abs(MuInput))*Sqr(Yd(0,0))*Sqr(Yd(0,2))*TCD0(msdInput
+      (0),msdInput(0),msqInput(0),msqInput(2)) - 3*Quad(Abs(MuInput))*Sqr(Yd(0,0))
+      *Sqr(Yd(0,1))*TCD0(msdInput(0),msdInput(0),msqInput(1),msqInput(0)) - 3*Quad
+      (Abs(MuInput))*Quad(Yd(0,1))*TCD0(msdInput(0),msdInput(0),msqInput(1),
+      msqInput(1)) - 3*Quad(Abs(MuInput))*Sqr(Yd(0,1))*Sqr(Yd(0,2))*TCD0(msdInput(
+      0),msdInput(0),msqInput(1),msqInput(2)) - 3*Quad(Abs(MuInput))*Sqr(Yd(0,0))*
+      Sqr(Yd(0,2))*TCD0(msdInput(0),msdInput(0),msqInput(2),msqInput(0)) - 3*Quad(
+      Abs(MuInput))*Sqr(Yd(0,1))*Sqr(Yd(0,2))*TCD0(msdInput(0),msdInput(0),
+      msqInput(2),msqInput(1)) - 3*Quad(Abs(MuInput))*Quad(Yd(0,2))*TCD0(msdInput(
+      0),msdInput(0),msqInput(2),msqInput(2)) - 3*Quad(Abs(MuInput))*Sqr(Yd(0,0))*
+      Sqr(Yd(1,0))*TCD0(msdInput(0),msdInput(1),msqInput(0),msqInput(0)) - 3*Quad(
+      Abs(MuInput))*Sqr(Yd(0,1))*Sqr(Yd(1,1))*TCD0(msdInput(0),msdInput(1),
+      msqInput(1),msqInput(1)) - 3*Quad(Abs(MuInput))*Sqr(Yd(0,2))*Sqr(Yd(1,2))*
+      TCD0(msdInput(0),msdInput(1),msqInput(2),msqInput(2)) - 3*Quad(Abs(MuInput))
+      *Sqr(Yd(0,0))*Sqr(Yd(2,0))*TCD0(msdInput(0),msdInput(2),msqInput(0),msqInput
+      (0)) - 3*Quad(Abs(MuInput))*Sqr(Yd(0,1))*Sqr(Yd(2,1))*TCD0(msdInput(0),
+      msdInput(2),msqInput(1),msqInput(1)) - 3*Quad(Abs(MuInput))*Sqr(Yd(0,2))*Sqr
+      (Yd(2,2))*TCD0(msdInput(0),msdInput(2),msqInput(2),msqInput(2)) - 3*Quad(Abs
+      (MuInput))*Sqr(Yd(0,0))*Sqr(Yd(1,0))*TCD0(msdInput(1),msdInput(0),msqInput(0
+      ),msqInput(0)) - 3*Quad(Abs(MuInput))*Sqr(Yd(0,1))*Sqr(Yd(1,1))*TCD0(
+      msdInput(1),msdInput(0),msqInput(1),msqInput(1)) - 3*Quad(Abs(MuInput))*Sqr(
+      Yd(0,2))*Sqr(Yd(1,2))*TCD0(msdInput(1),msdInput(0),msqInput(2),msqInput(2))
+      - 3*Quad(Abs(MuInput))*Quad(Yd(1,0))*TCD0(msdInput(1),msdInput(1),msqInput(0
+      ),msqInput(0)) - 3*Quad(Abs(MuInput))*Sqr(Yd(1,0))*Sqr(Yd(1,1))*TCD0(
+      msdInput(1),msdInput(1),msqInput(0),msqInput(1)) - 3*Quad(Abs(MuInput))*Sqr(
+      Yd(1,0))*Sqr(Yd(1,2))*TCD0(msdInput(1),msdInput(1),msqInput(0),msqInput(2))
+      - 3*Quad(Abs(MuInput))*Sqr(Yd(1,0))*Sqr(Yd(1,1))*TCD0(msdInput(1),msdInput(1
+      ),msqInput(1),msqInput(0)) - 3*Quad(Abs(MuInput))*Quad(Yd(1,1))*TCD0(
+      msdInput(1),msdInput(1),msqInput(1),msqInput(1)) - 3*Quad(Abs(MuInput))*Sqr(
+      Yd(1,1))*Sqr(Yd(1,2))*TCD0(msdInput(1),msdInput(1),msqInput(1),msqInput(2))
+      - 3*Quad(Abs(MuInput))*Sqr(Yd(1,0))*Sqr(Yd(1,2))*TCD0(msdInput(1),msdInput(1
+      ),msqInput(2),msqInput(0)) - 3*Quad(Abs(MuInput))*Sqr(Yd(1,1))*Sqr(Yd(1,2))*
+      TCD0(msdInput(1),msdInput(1),msqInput(2),msqInput(1)) - 3*Quad(Abs(MuInput))
+      *Quad(Yd(1,2))*TCD0(msdInput(1),msdInput(1),msqInput(2),msqInput(2)) - 3*
+      Quad(Abs(MuInput))*Sqr(Yd(1,0))*Sqr(Yd(2,0))*TCD0(msdInput(1),msdInput(2),
+      msqInput(0),msqInput(0)) - 3*Quad(Abs(MuInput))*Sqr(Yd(1,1))*Sqr(Yd(2,1))*
+      TCD0(msdInput(1),msdInput(2),msqInput(1),msqInput(1)) - 3*Quad(Abs(MuInput))
+      *Sqr(Yd(1,2))*Sqr(Yd(2,2))*TCD0(msdInput(1),msdInput(2),msqInput(2),msqInput
+      (2)) - 3*Quad(Abs(MuInput))*Sqr(Yd(0,0))*Sqr(Yd(2,0))*TCD0(msdInput(2),
+      msdInput(0),msqInput(0),msqInput(0)) - 3*Quad(Abs(MuInput))*Sqr(Yd(0,1))*Sqr
+      (Yd(2,1))*TCD0(msdInput(2),msdInput(0),msqInput(1),msqInput(1)) - 3*Quad(Abs
+      (MuInput))*Sqr(Yd(0,2))*Sqr(Yd(2,2))*TCD0(msdInput(2),msdInput(0),msqInput(2
+      ),msqInput(2)) - 3*Quad(Abs(MuInput))*Sqr(Yd(1,0))*Sqr(Yd(2,0))*TCD0(
+      msdInput(2),msdInput(1),msqInput(0),msqInput(0)) - 3*Quad(Abs(MuInput))*Sqr(
+      Yd(1,1))*Sqr(Yd(2,1))*TCD0(msdInput(2),msdInput(1),msqInput(1),msqInput(1))
+      - 3*Quad(Abs(MuInput))*Sqr(Yd(1,2))*Sqr(Yd(2,2))*TCD0(msdInput(2),msdInput(1
+      ),msqInput(2),msqInput(2)) - 3*Quad(Abs(MuInput))*Quad(Yd(2,0))*TCD0(
+      msdInput(2),msdInput(2),msqInput(0),msqInput(0)) - 3*Quad(Abs(MuInput))*Sqr(
+      Yd(2,0))*Sqr(Yd(2,1))*TCD0(msdInput(2),msdInput(2),msqInput(0),msqInput(1))
+      - 3*Quad(Abs(MuInput))*Sqr(Yd(2,0))*Sqr(Yd(2,2))*TCD0(msdInput(2),msdInput(2
+      ),msqInput(0),msqInput(2)) - 3*Quad(Abs(MuInput))*Sqr(Yd(2,0))*Sqr(Yd(2,1))*
+      TCD0(msdInput(2),msdInput(2),msqInput(1),msqInput(0)) - 3*Quad(Abs(MuInput))
+      *Quad(Yd(2,1))*TCD0(msdInput(2),msdInput(2),msqInput(1),msqInput(1)) - 3*
+      Quad(Abs(MuInput))*Sqr(Yd(2,1))*Sqr(Yd(2,2))*TCD0(msdInput(2),msdInput(2),
+      msqInput(1),msqInput(2)) - 3*Quad(Abs(MuInput))*Sqr(Yd(2,0))*Sqr(Yd(2,2))*
+      TCD0(msdInput(2),msdInput(2),msqInput(2),msqInput(0)) - 3*Quad(Abs(MuInput))
+      *Sqr(Yd(2,1))*Sqr(Yd(2,2))*TCD0(msdInput(2),msdInput(2),msqInput(2),msqInput
+      (1)) - 3*Quad(Abs(MuInput))*Quad(Yd(2,2))*TCD0(msdInput(2),msdInput(2),
+      msqInput(2),msqInput(2)) - Quad(Abs(MuInput))*Quad(Ye(0,0))*TCD0(mseInput(0)
+      ,mseInput(0),mslInput(0),mslInput(0)) - Quad(Abs(MuInput))*Sqr(Ye(0,0))*Sqr(
+      Ye(0,1))*TCD0(mseInput(0),mseInput(0),mslInput(0),mslInput(1)) - Quad(Abs(
+      MuInput))*Sqr(Ye(0,0))*Sqr(Ye(0,2))*TCD0(mseInput(0),mseInput(0),mslInput(0)
+      ,mslInput(2)) - Quad(Abs(MuInput))*Sqr(Ye(0,0))*Sqr(Ye(0,1))*TCD0(mseInput(0
+      ),mseInput(0),mslInput(1),mslInput(0)) - Quad(Abs(MuInput))*Quad(Ye(0,1))*
+      TCD0(mseInput(0),mseInput(0),mslInput(1),mslInput(1)) - Quad(Abs(MuInput))*
+      Sqr(Ye(0,1))*Sqr(Ye(0,2))*TCD0(mseInput(0),mseInput(0),mslInput(1),mslInput(
+      2)) - Quad(Abs(MuInput))*Sqr(Ye(0,0))*Sqr(Ye(0,2))*TCD0(mseInput(0),mseInput
+      (0),mslInput(2),mslInput(0)) - Quad(Abs(MuInput))*Sqr(Ye(0,1))*Sqr(Ye(0,2))*
+      TCD0(mseInput(0),mseInput(0),mslInput(2),mslInput(1)) - Quad(Abs(MuInput))*
+      Quad(Ye(0,2))*TCD0(mseInput(0),mseInput(0),mslInput(2),mslInput(2)) - Quad(
+      Abs(MuInput))*Sqr(Ye(0,0))*Sqr(Ye(1,0))*TCD0(mseInput(0),mseInput(1),
+      mslInput(0),mslInput(0)) - Quad(Abs(MuInput))*Sqr(Ye(0,1))*Sqr(Ye(1,1))*TCD0
+      (mseInput(0),mseInput(1),mslInput(1),mslInput(1)) - Quad(Abs(MuInput))*Sqr(
+      Ye(0,2))*Sqr(Ye(1,2))*TCD0(mseInput(0),mseInput(1),mslInput(2),mslInput(2))
+      - Quad(Abs(MuInput))*Sqr(Ye(0,0))*Sqr(Ye(2,0))*TCD0(mseInput(0),mseInput(2),
+      mslInput(0),mslInput(0)) - Quad(Abs(MuInput))*Sqr(Ye(0,1))*Sqr(Ye(2,1))*TCD0
+      (mseInput(0),mseInput(2),mslInput(1),mslInput(1)) - Quad(Abs(MuInput))*Sqr(
+      Ye(0,2))*Sqr(Ye(2,2))*TCD0(mseInput(0),mseInput(2),mslInput(2),mslInput(2))
+      - Quad(Abs(MuInput))*Sqr(Ye(0,0))*Sqr(Ye(1,0))*TCD0(mseInput(1),mseInput(0),
+      mslInput(0),mslInput(0)) - Quad(Abs(MuInput))*Sqr(Ye(0,1))*Sqr(Ye(1,1))*TCD0
+      (mseInput(1),mseInput(0),mslInput(1),mslInput(1)) - Quad(Abs(MuInput))*Sqr(
+      Ye(0,2))*Sqr(Ye(1,2))*TCD0(mseInput(1),mseInput(0),mslInput(2),mslInput(2))
+      - Quad(Abs(MuInput))*Quad(Ye(1,0))*TCD0(mseInput(1),mseInput(1),mslInput(0),
+      mslInput(0)) - Quad(Abs(MuInput))*Sqr(Ye(1,0))*Sqr(Ye(1,1))*TCD0(mseInput(1)
+      ,mseInput(1),mslInput(0),mslInput(1)) - Quad(Abs(MuInput))*Sqr(Ye(1,0))*Sqr(
+      Ye(1,2))*TCD0(mseInput(1),mseInput(1),mslInput(0),mslInput(2)) - Quad(Abs(
+      MuInput))*Sqr(Ye(1,0))*Sqr(Ye(1,1))*TCD0(mseInput(1),mseInput(1),mslInput(1)
+      ,mslInput(0)) - Quad(Abs(MuInput))*Quad(Ye(1,1))*TCD0(mseInput(1),mseInput(1
+      ),mslInput(1),mslInput(1)) - Quad(Abs(MuInput))*Sqr(Ye(1,1))*Sqr(Ye(1,2))*
+      TCD0(mseInput(1),mseInput(1),mslInput(1),mslInput(2)) - Quad(Abs(MuInput))*
+      Sqr(Ye(1,0))*Sqr(Ye(1,2))*TCD0(mseInput(1),mseInput(1),mslInput(2),mslInput(
+      0)) - Quad(Abs(MuInput))*Sqr(Ye(1,1))*Sqr(Ye(1,2))*TCD0(mseInput(1),mseInput
+      (1),mslInput(2),mslInput(1)) - Quad(Abs(MuInput))*Quad(Ye(1,2))*TCD0(
+      mseInput(1),mseInput(1),mslInput(2),mslInput(2)) - Quad(Abs(MuInput))*Sqr(Ye
+      (1,0))*Sqr(Ye(2,0))*TCD0(mseInput(1),mseInput(2),mslInput(0),mslInput(0)) -
+      Quad(Abs(MuInput))*Sqr(Ye(1,1))*Sqr(Ye(2,1))*TCD0(mseInput(1),mseInput(2),
+      mslInput(1),mslInput(1)) - Quad(Abs(MuInput))*Sqr(Ye(1,2))*Sqr(Ye(2,2))*TCD0
+      (mseInput(1),mseInput(2),mslInput(2),mslInput(2)) - Quad(Abs(MuInput))*Sqr(
+      Ye(0,0))*Sqr(Ye(2,0))*TCD0(mseInput(2),mseInput(0),mslInput(0),mslInput(0))
+      - Quad(Abs(MuInput))*Sqr(Ye(0,1))*Sqr(Ye(2,1))*TCD0(mseInput(2),mseInput(0),
+      mslInput(1),mslInput(1)) - Quad(Abs(MuInput))*Sqr(Ye(0,2))*Sqr(Ye(2,2))*TCD0
+      (mseInput(2),mseInput(0),mslInput(2),mslInput(2)) - Quad(Abs(MuInput))*Sqr(
+      Ye(1,0))*Sqr(Ye(2,0))*TCD0(mseInput(2),mseInput(1),mslInput(0),mslInput(0))
+      - Quad(Abs(MuInput))*Sqr(Ye(1,1))*Sqr(Ye(2,1))*TCD0(mseInput(2),mseInput(1),
+      mslInput(1),mslInput(1)) - Quad(Abs(MuInput))*Sqr(Ye(1,2))*Sqr(Ye(2,2))*TCD0
+      (mseInput(2),mseInput(1),mslInput(2),mslInput(2)) - Quad(Abs(MuInput))*Quad(
+      Ye(2,0))*TCD0(mseInput(2),mseInput(2),mslInput(0),mslInput(0)) - Quad(Abs(
+      MuInput))*Sqr(Ye(2,0))*Sqr(Ye(2,1))*TCD0(mseInput(2),mseInput(2),mslInput(0)
+      ,mslInput(1)) - Quad(Abs(MuInput))*Sqr(Ye(2,0))*Sqr(Ye(2,2))*TCD0(mseInput(2
+      ),mseInput(2),mslInput(0),mslInput(2)) - Quad(Abs(MuInput))*Sqr(Ye(2,0))*Sqr
+      (Ye(2,1))*TCD0(mseInput(2),mseInput(2),mslInput(1),mslInput(0)) - Quad(Abs(
+      MuInput))*Quad(Ye(2,1))*TCD0(mseInput(2),mseInput(2),mslInput(1),mslInput(1)
+      ) - Quad(Abs(MuInput))*Sqr(Ye(2,1))*Sqr(Ye(2,2))*TCD0(mseInput(2),mseInput(2
+      ),mslInput(1),mslInput(2)) - Quad(Abs(MuInput))*Sqr(Ye(2,0))*Sqr(Ye(2,2))*
+      TCD0(mseInput(2),mseInput(2),mslInput(2),mslInput(0)) - Quad(Abs(MuInput))*
+      Sqr(Ye(2,1))*Sqr(Ye(2,2))*TCD0(mseInput(2),mseInput(2),mslInput(2),mslInput(
+      1)) - Quad(Abs(MuInput))*Quad(Ye(2,2))*TCD0(mseInput(2),mseInput(2),mslInput
+      (2),mslInput(2)) - 3*Quad(AuInput(0,0))*Quad(Yu(0,0))*TCD0(msqInput(0),
+      msqInput(0),msuInput(0),msuInput(0)) - 3*Sqr(AuInput(0,0))*Sqr(AuInput(1,0))
+      *Sqr(Yu(0,0))*Sqr(Yu(1,0))*TCD0(msqInput(0),msqInput(0),msuInput(0),msuInput
+      (1)) - 3*Sqr(AuInput(0,0))*Sqr(AuInput(2,0))*Sqr(Yu(0,0))*Sqr(Yu(2,0))*TCD0(
+      msqInput(0),msqInput(0),msuInput(0),msuInput(2)) - 3*Sqr(AuInput(0,0))*Sqr(
+      AuInput(1,0))*Sqr(Yu(0,0))*Sqr(Yu(1,0))*TCD0(msqInput(0),msqInput(0),
+      msuInput(1),msuInput(0)) - 3*Quad(AuInput(1,0))*Quad(Yu(1,0))*TCD0(msqInput(
+      0),msqInput(0),msuInput(1),msuInput(1)) - 3*Sqr(AuInput(1,0))*Sqr(AuInput(2,
+      0))*Sqr(Yu(1,0))*Sqr(Yu(2,0))*TCD0(msqInput(0),msqInput(0),msuInput(1),
+      msuInput(2)) - 3*Sqr(AuInput(0,0))*Sqr(AuInput(2,0))*Sqr(Yu(0,0))*Sqr(Yu(2,0
+      ))*TCD0(msqInput(0),msqInput(0),msuInput(2),msuInput(0)) - 3*Sqr(AuInput(1,0
+      ))*Sqr(AuInput(2,0))*Sqr(Yu(1,0))*Sqr(Yu(2,0))*TCD0(msqInput(0),msqInput(0),
+      msuInput(2),msuInput(1)) - 3*Quad(AuInput(2,0))*Quad(Yu(2,0))*TCD0(msqInput(
+      0),msqInput(0),msuInput(2),msuInput(2)) - 3*Sqr(AuInput(0,0))*Sqr(AuInput(0,
+      1))*Sqr(Yu(0,0))*Sqr(Yu(0,1))*TCD0(msqInput(0),msqInput(1),msuInput(0),
+      msuInput(0)) - 3*Sqr(AuInput(1,0))*Sqr(AuInput(1,1))*Sqr(Yu(1,0))*Sqr(Yu(1,1
+      ))*TCD0(msqInput(0),msqInput(1),msuInput(1),msuInput(1)) - 3*Sqr(AuInput(2,0
+      ))*Sqr(AuInput(2,1))*Sqr(Yu(2,0))*Sqr(Yu(2,1))*TCD0(msqInput(0),msqInput(1),
+      msuInput(2),msuInput(2)) - 3*Sqr(AuInput(0,0))*Sqr(AuInput(0,2))*Sqr(Yu(0,0)
+      )*Sqr(Yu(0,2))*TCD0(msqInput(0),msqInput(2),msuInput(0),msuInput(0)) - 3*Sqr
+      (AuInput(1,0))*Sqr(AuInput(1,2))*Sqr(Yu(1,0))*Sqr(Yu(1,2))*TCD0(msqInput(0),
+      msqInput(2),msuInput(1),msuInput(1)) - 3*Sqr(AuInput(2,0))*Sqr(AuInput(2,2))
+      *Sqr(Yu(2,0))*Sqr(Yu(2,2))*TCD0(msqInput(0),msqInput(2),msuInput(2),msuInput
+      (2)) - 3*Sqr(AuInput(0,0))*Sqr(AuInput(0,1))*Sqr(Yu(0,0))*Sqr(Yu(0,1))*TCD0(
+      msqInput(1),msqInput(0),msuInput(0),msuInput(0)) - 3*Sqr(AuInput(1,0))*Sqr(
+      AuInput(1,1))*Sqr(Yu(1,0))*Sqr(Yu(1,1))*TCD0(msqInput(1),msqInput(0),
+      msuInput(1),msuInput(1)) - 3*Sqr(AuInput(2,0))*Sqr(AuInput(2,1))*Sqr(Yu(2,0)
+      )*Sqr(Yu(2,1))*TCD0(msqInput(1),msqInput(0),msuInput(2),msuInput(2)) - 3*
+      Quad(AuInput(0,1))*Quad(Yu(0,1))*TCD0(msqInput(1),msqInput(1),msuInput(0),
+      msuInput(0)) - 3*Sqr(AuInput(0,1))*Sqr(AuInput(1,1))*Sqr(Yu(0,1))*Sqr(Yu(1,1
+      ))*TCD0(msqInput(1),msqInput(1),msuInput(0),msuInput(1)) - 3*Sqr(AuInput(0,1
+      ))*Sqr(AuInput(2,1))*Sqr(Yu(0,1))*Sqr(Yu(2,1))*TCD0(msqInput(1),msqInput(1),
+      msuInput(0),msuInput(2)) - 3*Sqr(AuInput(0,1))*Sqr(AuInput(1,1))*Sqr(Yu(0,1)
+      )*Sqr(Yu(1,1))*TCD0(msqInput(1),msqInput(1),msuInput(1),msuInput(0)) - 3*
+      Quad(AuInput(1,1))*Quad(Yu(1,1))*TCD0(msqInput(1),msqInput(1),msuInput(1),
+      msuInput(1)) - 3*Sqr(AuInput(1,1))*Sqr(AuInput(2,1))*Sqr(Yu(1,1))*Sqr(Yu(2,1
+      ))*TCD0(msqInput(1),msqInput(1),msuInput(1),msuInput(2)) - 3*Sqr(AuInput(0,1
+      ))*Sqr(AuInput(2,1))*Sqr(Yu(0,1))*Sqr(Yu(2,1))*TCD0(msqInput(1),msqInput(1),
+      msuInput(2),msuInput(0)) - 3*Sqr(AuInput(1,1))*Sqr(AuInput(2,1))*Sqr(Yu(1,1)
+      )*Sqr(Yu(2,1))*TCD0(msqInput(1),msqInput(1),msuInput(2),msuInput(1)) - 3*
+      Quad(AuInput(2,1))*Quad(Yu(2,1))*TCD0(msqInput(1),msqInput(1),msuInput(2),
+      msuInput(2)) - 3*Sqr(AuInput(0,1))*Sqr(AuInput(0,2))*Sqr(Yu(0,1))*Sqr(Yu(0,2
+      ))*TCD0(msqInput(1),msqInput(2),msuInput(0),msuInput(0)) - 3*Sqr(AuInput(1,1
+      ))*Sqr(AuInput(1,2))*Sqr(Yu(1,1))*Sqr(Yu(1,2))*TCD0(msqInput(1),msqInput(2),
+      msuInput(1),msuInput(1)) - 3*Sqr(AuInput(2,1))*Sqr(AuInput(2,2))*Sqr(Yu(2,1)
+      )*Sqr(Yu(2,2))*TCD0(msqInput(1),msqInput(2),msuInput(2),msuInput(2)) - 3*Sqr
+      (AuInput(0,0))*Sqr(AuInput(0,2))*Sqr(Yu(0,0))*Sqr(Yu(0,2))*TCD0(msqInput(2),
+      msqInput(0),msuInput(0),msuInput(0)) - 3*Sqr(AuInput(1,0))*Sqr(AuInput(1,2))
+      *Sqr(Yu(1,0))*Sqr(Yu(1,2))*TCD0(msqInput(2),msqInput(0),msuInput(1),msuInput
+      (1)) - 3*Sqr(AuInput(2,0))*Sqr(AuInput(2,2))*Sqr(Yu(2,0))*Sqr(Yu(2,2))*TCD0(
+      msqInput(2),msqInput(0),msuInput(2),msuInput(2)) - 3*Sqr(AuInput(0,1))*Sqr(
+      AuInput(0,2))*Sqr(Yu(0,1))*Sqr(Yu(0,2))*TCD0(msqInput(2),msqInput(1),
+      msuInput(0),msuInput(0)) - 3*Sqr(AuInput(1,1))*Sqr(AuInput(1,2))*Sqr(Yu(1,1)
+      )*Sqr(Yu(1,2))*TCD0(msqInput(2),msqInput(1),msuInput(1),msuInput(1)) - 3*Sqr
+      (AuInput(2,1))*Sqr(AuInput(2,2))*Sqr(Yu(2,1))*Sqr(Yu(2,2))*TCD0(msqInput(2),
+      msqInput(1),msuInput(2),msuInput(2)) - 3*Quad(AuInput(0,2))*Quad(Yu(0,2))*
+      TCD0(msqInput(2),msqInput(2),msuInput(0),msuInput(0)) - 3*Sqr(AuInput(0,2))*
+      Sqr(AuInput(1,2))*Sqr(Yu(0,2))*Sqr(Yu(1,2))*TCD0(msqInput(2),msqInput(2),
+      msuInput(0),msuInput(1)) - 3*Sqr(AuInput(0,2))*Sqr(AuInput(2,2))*Sqr(Yu(0,2)
+      )*Sqr(Yu(2,2))*TCD0(msqInput(2),msqInput(2),msuInput(0),msuInput(2)) - 3*Sqr
+      (AuInput(0,2))*Sqr(AuInput(1,2))*Sqr(Yu(0,2))*Sqr(Yu(1,2))*TCD0(msqInput(2),
+      msqInput(2),msuInput(1),msuInput(0)) - 3*Quad(AuInput(1,2))*Quad(Yu(1,2))*
+      TCD0(msqInput(2),msqInput(2),msuInput(1),msuInput(1)) - 3*Sqr(AuInput(1,2))*
+      Sqr(AuInput(2,2))*Sqr(Yu(1,2))*Sqr(Yu(2,2))*TCD0(msqInput(2),msqInput(2),
+      msuInput(1),msuInput(2)) - 3*Sqr(AuInput(0,2))*Sqr(AuInput(2,2))*Sqr(Yu(0,2)
+      )*Sqr(Yu(2,2))*TCD0(msqInput(2),msqInput(2),msuInput(2),msuInput(0)) - 3*Sqr
+      (AuInput(1,2))*Sqr(AuInput(2,2))*Sqr(Yu(1,2))*Sqr(Yu(2,2))*TCD0(msqInput(2),
+      msqInput(2),msuInput(2),msuInput(1)) - 3*Quad(AuInput(2,2))*Quad(Yu(2,2))*
+      TCD0(msqInput(2),msqInput(2),msuInput(2),msuInput(2)) + 0.36*Quad(g1)*(-0.25
+       + 0.5*Sqr(Abs(M1Input))*TCD2t(M1Input,M1Input,Abs(MuInput),Abs(MuInput)) +
+      0.5*TCD4t(M1Input,M1Input,Abs(MuInput),Abs(MuInput),SCALE)) + 0.6*Sqr(g1)*
+      Sqr(g2)*(-0.5 + M1Input*M2Input*TCD2t(M1Input,M2Input,Abs(MuInput),Abs(
+      MuInput)) + TCD4t(M1Input,M2Input,Abs(MuInput),Abs(MuInput),SCALE)) + Quad(
+      g2)*(-0.75 + 0.5*Sqr(Abs(M2Input))*TCD2t(M2Input,M2Input,Abs(MuInput),Abs(
+      MuInput)) + 2.5*TCD4t(M2Input,M2Input,Abs(MuInput),Abs(MuInput),SCALE)) - 3*
+      Quad(Abs(MuInput))*TCD0(msdInput(0),msdInput(1),msqInput(0),msqInput(1))*Yd(
+      0,0)*Yd(0,1)*Yd(1,0)*Yd(1,1) - 3*Quad(Abs(MuInput))*TCD0(msdInput(0),
+      msdInput(1),msqInput(1),msqInput(0))*Yd(0,0)*Yd(0,1)*Yd(1,0)*Yd(1,1) - 3*
+      Quad(Abs(MuInput))*TCD0(msdInput(1),msdInput(0),msqInput(0),msqInput(1))*Yd(
+      0,0)*Yd(0,1)*Yd(1,0)*Yd(1,1) - 3*Quad(Abs(MuInput))*TCD0(msdInput(1),
+      msdInput(0),msqInput(1),msqInput(0))*Yd(0,0)*Yd(0,1)*Yd(1,0)*Yd(1,1) - 3*
+      Quad(Abs(MuInput))*TCD0(msdInput(0),msdInput(1),msqInput(0),msqInput(2))*Yd(
+      0,0)*Yd(0,2)*Yd(1,0)*Yd(1,2) - 3*Quad(Abs(MuInput))*TCD0(msdInput(0),
+      msdInput(1),msqInput(2),msqInput(0))*Yd(0,0)*Yd(0,2)*Yd(1,0)*Yd(1,2) - 3*
+      Quad(Abs(MuInput))*TCD0(msdInput(1),msdInput(0),msqInput(0),msqInput(2))*Yd(
+      0,0)*Yd(0,2)*Yd(1,0)*Yd(1,2) - 3*Quad(Abs(MuInput))*TCD0(msdInput(1),
+      msdInput(0),msqInput(2),msqInput(0))*Yd(0,0)*Yd(0,2)*Yd(1,0)*Yd(1,2) - 3*
+      Quad(Abs(MuInput))*TCD0(msdInput(0),msdInput(1),msqInput(1),msqInput(2))*Yd(
+      0,1)*Yd(0,2)*Yd(1,1)*Yd(1,2) - 3*Quad(Abs(MuInput))*TCD0(msdInput(0),
+      msdInput(1),msqInput(2),msqInput(1))*Yd(0,1)*Yd(0,2)*Yd(1,1)*Yd(1,2) - 3*
+      Quad(Abs(MuInput))*TCD0(msdInput(1),msdInput(0),msqInput(1),msqInput(2))*Yd(
+      0,1)*Yd(0,2)*Yd(1,1)*Yd(1,2) - 3*Quad(Abs(MuInput))*TCD0(msdInput(1),
+      msdInput(0),msqInput(2),msqInput(1))*Yd(0,1)*Yd(0,2)*Yd(1,1)*Yd(1,2) - 3*
+      Quad(Abs(MuInput))*TCD0(msdInput(0),msdInput(2),msqInput(0),msqInput(1))*Yd(
+      0,0)*Yd(0,1)*Yd(2,0)*Yd(2,1) - 3*Quad(Abs(MuInput))*TCD0(msdInput(0),
+      msdInput(2),msqInput(1),msqInput(0))*Yd(0,0)*Yd(0,1)*Yd(2,0)*Yd(2,1) - 3*
+      Quad(Abs(MuInput))*TCD0(msdInput(2),msdInput(0),msqInput(0),msqInput(1))*Yd(
+      0,0)*Yd(0,1)*Yd(2,0)*Yd(2,1) - 3*Quad(Abs(MuInput))*TCD0(msdInput(2),
+      msdInput(0),msqInput(1),msqInput(0))*Yd(0,0)*Yd(0,1)*Yd(2,0)*Yd(2,1) - 3*
+      Quad(Abs(MuInput))*TCD0(msdInput(1),msdInput(2),msqInput(0),msqInput(1))*Yd(
+      1,0)*Yd(1,1)*Yd(2,0)*Yd(2,1) - 3*Quad(Abs(MuInput))*TCD0(msdInput(1),
+      msdInput(2),msqInput(1),msqInput(0))*Yd(1,0)*Yd(1,1)*Yd(2,0)*Yd(2,1) - 3*
+      Quad(Abs(MuInput))*TCD0(msdInput(2),msdInput(1),msqInput(0),msqInput(1))*Yd(
+      1,0)*Yd(1,1)*Yd(2,0)*Yd(2,1) - 3*Quad(Abs(MuInput))*TCD0(msdInput(2),
+      msdInput(1),msqInput(1),msqInput(0))*Yd(1,0)*Yd(1,1)*Yd(2,0)*Yd(2,1) - 3*
+      Quad(Abs(MuInput))*TCD0(msdInput(0),msdInput(2),msqInput(0),msqInput(2))*Yd(
+      0,0)*Yd(0,2)*Yd(2,0)*Yd(2,2) - 3*Quad(Abs(MuInput))*TCD0(msdInput(0),
+      msdInput(2),msqInput(2),msqInput(0))*Yd(0,0)*Yd(0,2)*Yd(2,0)*Yd(2,2) - 3*
+      Quad(Abs(MuInput))*TCD0(msdInput(2),msdInput(0),msqInput(0),msqInput(2))*Yd(
+      0,0)*Yd(0,2)*Yd(2,0)*Yd(2,2) - 3*Quad(Abs(MuInput))*TCD0(msdInput(2),
+      msdInput(0),msqInput(2),msqInput(0))*Yd(0,0)*Yd(0,2)*Yd(2,0)*Yd(2,2) - 3*
+      Quad(Abs(MuInput))*TCD0(msdInput(1),msdInput(2),msqInput(0),msqInput(2))*Yd(
+      1,0)*Yd(1,2)*Yd(2,0)*Yd(2,2) - 3*Quad(Abs(MuInput))*TCD0(msdInput(1),
+      msdInput(2),msqInput(2),msqInput(0))*Yd(1,0)*Yd(1,2)*Yd(2,0)*Yd(2,2) - 3*
+      Quad(Abs(MuInput))*TCD0(msdInput(2),msdInput(1),msqInput(0),msqInput(2))*Yd(
+      1,0)*Yd(1,2)*Yd(2,0)*Yd(2,2) - 3*Quad(Abs(MuInput))*TCD0(msdInput(2),
+      msdInput(1),msqInput(2),msqInput(0))*Yd(1,0)*Yd(1,2)*Yd(2,0)*Yd(2,2) - 3*
+      Quad(Abs(MuInput))*TCD0(msdInput(0),msdInput(2),msqInput(1),msqInput(2))*Yd(
+      0,1)*Yd(0,2)*Yd(2,1)*Yd(2,2) - 3*Quad(Abs(MuInput))*TCD0(msdInput(0),
+      msdInput(2),msqInput(2),msqInput(1))*Yd(0,1)*Yd(0,2)*Yd(2,1)*Yd(2,2) - 3*
+      Quad(Abs(MuInput))*TCD0(msdInput(2),msdInput(0),msqInput(1),msqInput(2))*Yd(
+      0,1)*Yd(0,2)*Yd(2,1)*Yd(2,2) - 3*Quad(Abs(MuInput))*TCD0(msdInput(2),
+      msdInput(0),msqInput(2),msqInput(1))*Yd(0,1)*Yd(0,2)*Yd(2,1)*Yd(2,2) - 3*
+      Quad(Abs(MuInput))*TCD0(msdInput(1),msdInput(2),msqInput(1),msqInput(2))*Yd(
+      1,1)*Yd(1,2)*Yd(2,1)*Yd(2,2) - 3*Quad(Abs(MuInput))*TCD0(msdInput(1),
+      msdInput(2),msqInput(2),msqInput(1))*Yd(1,1)*Yd(1,2)*Yd(2,1)*Yd(2,2) - 3*
+      Quad(Abs(MuInput))*TCD0(msdInput(2),msdInput(1),msqInput(1),msqInput(2))*Yd(
+      1,1)*Yd(1,2)*Yd(2,1)*Yd(2,2) - 3*Quad(Abs(MuInput))*TCD0(msdInput(2),
+      msdInput(1),msqInput(2),msqInput(1))*Yd(1,1)*Yd(1,2)*Yd(2,1)*Yd(2,2) - Quad(
+      Abs(MuInput))*TCD0(mseInput(0),mseInput(1),mslInput(0),mslInput(1))*Ye(0,0)*
+      Ye(0,1)*Ye(1,0)*Ye(1,1) - Quad(Abs(MuInput))*TCD0(mseInput(0),mseInput(1),
+      mslInput(1),mslInput(0))*Ye(0,0)*Ye(0,1)*Ye(1,0)*Ye(1,1) - Quad(Abs(MuInput)
+      )*TCD0(mseInput(1),mseInput(0),mslInput(0),mslInput(1))*Ye(0,0)*Ye(0,1)*Ye(1
+      ,0)*Ye(1,1) - Quad(Abs(MuInput))*TCD0(mseInput(1),mseInput(0),mslInput(1),
+      mslInput(0))*Ye(0,0)*Ye(0,1)*Ye(1,0)*Ye(1,1) - Quad(Abs(MuInput))*TCD0(
+      mseInput(0),mseInput(1),mslInput(0),mslInput(2))*Ye(0,0)*Ye(0,2)*Ye(1,0)*Ye(
+      1,2) - Quad(Abs(MuInput))*TCD0(mseInput(0),mseInput(1),mslInput(2),mslInput(
+      0))*Ye(0,0)*Ye(0,2)*Ye(1,0)*Ye(1,2) - Quad(Abs(MuInput))*TCD0(mseInput(1),
+      mseInput(0),mslInput(0),mslInput(2))*Ye(0,0)*Ye(0,2)*Ye(1,0)*Ye(1,2) - Quad(
+      Abs(MuInput))*TCD0(mseInput(1),mseInput(0),mslInput(2),mslInput(0))*Ye(0,0)*
+      Ye(0,2)*Ye(1,0)*Ye(1,2) - Quad(Abs(MuInput))*TCD0(mseInput(0),mseInput(1),
+      mslInput(1),mslInput(2))*Ye(0,1)*Ye(0,2)*Ye(1,1)*Ye(1,2) - Quad(Abs(MuInput)
+      )*TCD0(mseInput(0),mseInput(1),mslInput(2),mslInput(1))*Ye(0,1)*Ye(0,2)*Ye(1
+      ,1)*Ye(1,2) - Quad(Abs(MuInput))*TCD0(mseInput(1),mseInput(0),mslInput(1),
+      mslInput(2))*Ye(0,1)*Ye(0,2)*Ye(1,1)*Ye(1,2) - Quad(Abs(MuInput))*TCD0(
+      mseInput(1),mseInput(0),mslInput(2),mslInput(1))*Ye(0,1)*Ye(0,2)*Ye(1,1)*Ye(
+      1,2) - Quad(Abs(MuInput))*TCD0(mseInput(0),mseInput(2),mslInput(0),mslInput(
+      1))*Ye(0,0)*Ye(0,1)*Ye(2,0)*Ye(2,1) - Quad(Abs(MuInput))*TCD0(mseInput(0),
+      mseInput(2),mslInput(1),mslInput(0))*Ye(0,0)*Ye(0,1)*Ye(2,0)*Ye(2,1) - Quad(
+      Abs(MuInput))*TCD0(mseInput(2),mseInput(0),mslInput(0),mslInput(1))*Ye(0,0)*
+      Ye(0,1)*Ye(2,0)*Ye(2,1) - Quad(Abs(MuInput))*TCD0(mseInput(2),mseInput(0),
+      mslInput(1),mslInput(0))*Ye(0,0)*Ye(0,1)*Ye(2,0)*Ye(2,1) - Quad(Abs(MuInput)
+      )*TCD0(mseInput(1),mseInput(2),mslInput(0),mslInput(1))*Ye(1,0)*Ye(1,1)*Ye(2
+      ,0)*Ye(2,1) - Quad(Abs(MuInput))*TCD0(mseInput(1),mseInput(2),mslInput(1),
+      mslInput(0))*Ye(1,0)*Ye(1,1)*Ye(2,0)*Ye(2,1) - Quad(Abs(MuInput))*TCD0(
+      mseInput(2),mseInput(1),mslInput(0),mslInput(1))*Ye(1,0)*Ye(1,1)*Ye(2,0)*Ye(
+      2,1) - Quad(Abs(MuInput))*TCD0(mseInput(2),mseInput(1),mslInput(1),mslInput(
+      0))*Ye(1,0)*Ye(1,1)*Ye(2,0)*Ye(2,1) - Quad(Abs(MuInput))*TCD0(mseInput(0),
+      mseInput(2),mslInput(0),mslInput(2))*Ye(0,0)*Ye(0,2)*Ye(2,0)*Ye(2,2) - Quad(
+      Abs(MuInput))*TCD0(mseInput(0),mseInput(2),mslInput(2),mslInput(0))*Ye(0,0)*
+      Ye(0,2)*Ye(2,0)*Ye(2,2) - Quad(Abs(MuInput))*TCD0(mseInput(2),mseInput(0),
+      mslInput(0),mslInput(2))*Ye(0,0)*Ye(0,2)*Ye(2,0)*Ye(2,2) - Quad(Abs(MuInput)
+      )*TCD0(mseInput(2),mseInput(0),mslInput(2),mslInput(0))*Ye(0,0)*Ye(0,2)*Ye(2
+      ,0)*Ye(2,2) - Quad(Abs(MuInput))*TCD0(mseInput(1),mseInput(2),mslInput(0),
+      mslInput(2))*Ye(1,0)*Ye(1,2)*Ye(2,0)*Ye(2,2) - Quad(Abs(MuInput))*TCD0(
+      mseInput(1),mseInput(2),mslInput(2),mslInput(0))*Ye(1,0)*Ye(1,2)*Ye(2,0)*Ye(
+      2,2) - Quad(Abs(MuInput))*TCD0(mseInput(2),mseInput(1),mslInput(0),mslInput(
+      2))*Ye(1,0)*Ye(1,2)*Ye(2,0)*Ye(2,2) - Quad(Abs(MuInput))*TCD0(mseInput(2),
+      mseInput(1),mslInput(2),mslInput(0))*Ye(1,0)*Ye(1,2)*Ye(2,0)*Ye(2,2) - Quad(
+      Abs(MuInput))*TCD0(mseInput(0),mseInput(2),mslInput(1),mslInput(2))*Ye(0,1)*
+      Ye(0,2)*Ye(2,1)*Ye(2,2) - Quad(Abs(MuInput))*TCD0(mseInput(0),mseInput(2),
+      mslInput(2),mslInput(1))*Ye(0,1)*Ye(0,2)*Ye(2,1)*Ye(2,2) - Quad(Abs(MuInput)
+      )*TCD0(mseInput(2),mseInput(0),mslInput(1),mslInput(2))*Ye(0,1)*Ye(0,2)*Ye(2
+      ,1)*Ye(2,2) - Quad(Abs(MuInput))*TCD0(mseInput(2),mseInput(0),mslInput(2),
+      mslInput(1))*Ye(0,1)*Ye(0,2)*Ye(2,1)*Ye(2,2) - Quad(Abs(MuInput))*TCD0(
+      mseInput(1),mseInput(2),mslInput(1),mslInput(2))*Ye(1,1)*Ye(1,2)*Ye(2,1)*Ye(
+      2,2) - Quad(Abs(MuInput))*TCD0(mseInput(1),mseInput(2),mslInput(2),mslInput(
+      1))*Ye(1,1)*Ye(1,2)*Ye(2,1)*Ye(2,2) - Quad(Abs(MuInput))*TCD0(mseInput(2),
+      mseInput(1),mslInput(1),mslInput(2))*Ye(1,1)*Ye(1,2)*Ye(2,1)*Ye(2,2) - Quad(
+      Abs(MuInput))*TCD0(mseInput(2),mseInput(1),mslInput(2),mslInput(1))*Ye(1,1)*
+      Ye(1,2)*Ye(2,1)*Ye(2,2) - 3*AuInput(0,0)*AuInput(0,1)*AuInput(1,0)*AuInput(1
+      ,1)*TCD0(msqInput(0),msqInput(1),msuInput(0),msuInput(1))*Yu(0,0)*Yu(0,1)*Yu
+      (1,0)*Yu(1,1) - 3*AuInput(0,0)*AuInput(0,1)*AuInput(1,0)*AuInput(1,1)*TCD0(
+      msqInput(0),msqInput(1),msuInput(1),msuInput(0))*Yu(0,0)*Yu(0,1)*Yu(1,0)*Yu(
+      1,1) - 3*AuInput(0,0)*AuInput(0,1)*AuInput(1,0)*AuInput(1,1)*TCD0(msqInput(1
+      ),msqInput(0),msuInput(0),msuInput(1))*Yu(0,0)*Yu(0,1)*Yu(1,0)*Yu(1,1) - 3*
+      AuInput(0,0)*AuInput(0,1)*AuInput(1,0)*AuInput(1,1)*TCD0(msqInput(1),
+      msqInput(0),msuInput(1),msuInput(0))*Yu(0,0)*Yu(0,1)*Yu(1,0)*Yu(1,1) - 3*
+      AuInput(0,0)*AuInput(0,2)*AuInput(1,0)*AuInput(1,2)*TCD0(msqInput(0),
+      msqInput(2),msuInput(0),msuInput(1))*Yu(0,0)*Yu(0,2)*Yu(1,0)*Yu(1,2) - 3*
+      AuInput(0,0)*AuInput(0,2)*AuInput(1,0)*AuInput(1,2)*TCD0(msqInput(0),
+      msqInput(2),msuInput(1),msuInput(0))*Yu(0,0)*Yu(0,2)*Yu(1,0)*Yu(1,2) - 3*
+      AuInput(0,0)*AuInput(0,2)*AuInput(1,0)*AuInput(1,2)*TCD0(msqInput(2),
+      msqInput(0),msuInput(0),msuInput(1))*Yu(0,0)*Yu(0,2)*Yu(1,0)*Yu(1,2) - 3*
+      AuInput(0,0)*AuInput(0,2)*AuInput(1,0)*AuInput(1,2)*TCD0(msqInput(2),
+      msqInput(0),msuInput(1),msuInput(0))*Yu(0,0)*Yu(0,2)*Yu(1,0)*Yu(1,2) - 3*
+      AuInput(0,1)*AuInput(0,2)*AuInput(1,1)*AuInput(1,2)*TCD0(msqInput(1),
+      msqInput(2),msuInput(0),msuInput(1))*Yu(0,1)*Yu(0,2)*Yu(1,1)*Yu(1,2) - 3*
+      AuInput(0,1)*AuInput(0,2)*AuInput(1,1)*AuInput(1,2)*TCD0(msqInput(1),
+      msqInput(2),msuInput(1),msuInput(0))*Yu(0,1)*Yu(0,2)*Yu(1,1)*Yu(1,2) - 3*
+      AuInput(0,1)*AuInput(0,2)*AuInput(1,1)*AuInput(1,2)*TCD0(msqInput(2),
+      msqInput(1),msuInput(0),msuInput(1))*Yu(0,1)*Yu(0,2)*Yu(1,1)*Yu(1,2) - 3*
+      AuInput(0,1)*AuInput(0,2)*AuInput(1,1)*AuInput(1,2)*TCD0(msqInput(2),
+      msqInput(1),msuInput(1),msuInput(0))*Yu(0,1)*Yu(0,2)*Yu(1,1)*Yu(1,2) - 6*
+      AuInput(0,0)*AuInput(1,0)*TCC0(msqInput(0),msuInput(0),msuInput(1))*Yu(0,0)*
+      Yu(1,0)*(Yu(0,0)*Yu(1,0) + Yu(0,1)*Yu(1,1) + Yu(0,2)*Yu(1,2)) - 6*AuInput(0,
+      0)*AuInput(1,0)*TCC0(msqInput(0),msuInput(1),msuInput(0))*Yu(0,0)*Yu(1,0)*(
+      Yu(0,0)*Yu(1,0) + Yu(0,1)*Yu(1,1) + Yu(0,2)*Yu(1,2)) - 6*AuInput(0,1)*
+      AuInput(1,1)*TCC0(msqInput(1),msuInput(0),msuInput(1))*Yu(0,1)*Yu(1,1)*(Yu(0
+      ,0)*Yu(1,0) + Yu(0,1)*Yu(1,1) + Yu(0,2)*Yu(1,2)) - 6*AuInput(0,1)*AuInput(1,
+      1)*TCC0(msqInput(1),msuInput(1),msuInput(0))*Yu(0,1)*Yu(1,1)*(Yu(0,0)*Yu(1,0
+      ) + Yu(0,1)*Yu(1,1) + Yu(0,2)*Yu(1,2)) - 6*AuInput(0,2)*AuInput(1,2)*TCC0(
+      msqInput(2),msuInput(0),msuInput(1))*Yu(0,2)*Yu(1,2)*(Yu(0,0)*Yu(1,0) + Yu(0
+      ,1)*Yu(1,1) + Yu(0,2)*Yu(1,2)) - 6*AuInput(0,2)*AuInput(1,2)*TCC0(msqInput(2
+      ),msuInput(1),msuInput(0))*Yu(0,2)*Yu(1,2)*(Yu(0,0)*Yu(1,0) + Yu(0,1)*Yu(1,1
+      ) + Yu(0,2)*Yu(1,2)) - 3*AuInput(0,0)*AuInput(0,1)*AuInput(2,0)*AuInput(2,1)
+      *TCD0(msqInput(0),msqInput(1),msuInput(0),msuInput(2))*Yu(0,0)*Yu(0,1)*Yu(2,
+      0)*Yu(2,1) - 3*AuInput(0,0)*AuInput(0,1)*AuInput(2,0)*AuInput(2,1)*TCD0(
+      msqInput(0),msqInput(1),msuInput(2),msuInput(0))*Yu(0,0)*Yu(0,1)*Yu(2,0)*Yu(
+      2,1) - 3*AuInput(0,0)*AuInput(0,1)*AuInput(2,0)*AuInput(2,1)*TCD0(msqInput(1
+      ),msqInput(0),msuInput(0),msuInput(2))*Yu(0,0)*Yu(0,1)*Yu(2,0)*Yu(2,1) - 3*
+      AuInput(0,0)*AuInput(0,1)*AuInput(2,0)*AuInput(2,1)*TCD0(msqInput(1),
+      msqInput(0),msuInput(2),msuInput(0))*Yu(0,0)*Yu(0,1)*Yu(2,0)*Yu(2,1) - 3*
+      AuInput(1,0)*AuInput(1,1)*AuInput(2,0)*AuInput(2,1)*TCD0(msqInput(0),
+      msqInput(1),msuInput(1),msuInput(2))*Yu(1,0)*Yu(1,1)*Yu(2,0)*Yu(2,1) - 3*
+      AuInput(1,0)*AuInput(1,1)*AuInput(2,0)*AuInput(2,1)*TCD0(msqInput(0),
+      msqInput(1),msuInput(2),msuInput(1))*Yu(1,0)*Yu(1,1)*Yu(2,0)*Yu(2,1) - 3*
+      AuInput(1,0)*AuInput(1,1)*AuInput(2,0)*AuInput(2,1)*TCD0(msqInput(1),
+      msqInput(0),msuInput(1),msuInput(2))*Yu(1,0)*Yu(1,1)*Yu(2,0)*Yu(2,1) - 3*
+      AuInput(1,0)*AuInput(1,1)*AuInput(2,0)*AuInput(2,1)*TCD0(msqInput(1),
+      msqInput(0),msuInput(2),msuInput(1))*Yu(1,0)*Yu(1,1)*Yu(2,0)*Yu(2,1) - 6*
+      AuInput(0,0)*AuInput(0,1)*TCC0(msqInput(0),msqInput(1),msuInput(0))*Yu(0,0)*
+      Yu(0,1)*(Yu(0,0)*Yu(0,1) + Yu(1,0)*Yu(1,1) + Yu(2,0)*Yu(2,1)) - 6*AuInput(0,
+      0)*AuInput(0,1)*TCC0(msqInput(1),msqInput(0),msuInput(0))*Yu(0,0)*Yu(0,1)*(
+      Yu(0,0)*Yu(0,1) + Yu(1,0)*Yu(1,1) + Yu(2,0)*Yu(2,1)) - 6*AuInput(1,0)*
+      AuInput(1,1)*TCC0(msqInput(0),msqInput(1),msuInput(1))*Yu(1,0)*Yu(1,1)*(Yu(0
+      ,0)*Yu(0,1) + Yu(1,0)*Yu(1,1) + Yu(2,0)*Yu(2,1)) - 6*AuInput(1,0)*AuInput(1,
+      1)*TCC0(msqInput(1),msqInput(0),msuInput(1))*Yu(1,0)*Yu(1,1)*(Yu(0,0)*Yu(0,1
+      ) + Yu(1,0)*Yu(1,1) + Yu(2,0)*Yu(2,1)) - 6*AuInput(2,0)*AuInput(2,1)*TCC0(
+      msqInput(0),msqInput(1),msuInput(2))*Yu(2,0)*Yu(2,1)*(Yu(0,0)*Yu(0,1) + Yu(1
+      ,0)*Yu(1,1) + Yu(2,0)*Yu(2,1)) - 6*AuInput(2,0)*AuInput(2,1)*TCC0(msqInput(1
+      ),msqInput(0),msuInput(2))*Yu(2,0)*Yu(2,1)*(Yu(0,0)*Yu(0,1) + Yu(1,0)*Yu(1,1
+      ) + Yu(2,0)*Yu(2,1)) - 3*AuInput(0,0)*AuInput(0,2)*AuInput(2,0)*AuInput(2,2)
+      *TCD0(msqInput(0),msqInput(2),msuInput(0),msuInput(2))*Yu(0,0)*Yu(0,2)*Yu(2,
+      0)*Yu(2,2) - 3*AuInput(0,0)*AuInput(0,2)*AuInput(2,0)*AuInput(2,2)*TCD0(
+      msqInput(0),msqInput(2),msuInput(2),msuInput(0))*Yu(0,0)*Yu(0,2)*Yu(2,0)*Yu(
+      2,2) - 3*AuInput(0,0)*AuInput(0,2)*AuInput(2,0)*AuInput(2,2)*TCD0(msqInput(2
+      ),msqInput(0),msuInput(0),msuInput(2))*Yu(0,0)*Yu(0,2)*Yu(2,0)*Yu(2,2) - 3*
+      AuInput(0,0)*AuInput(0,2)*AuInput(2,0)*AuInput(2,2)*TCD0(msqInput(2),
+      msqInput(0),msuInput(2),msuInput(0))*Yu(0,0)*Yu(0,2)*Yu(2,0)*Yu(2,2) - 3*
+      AuInput(1,0)*AuInput(1,2)*AuInput(2,0)*AuInput(2,2)*TCD0(msqInput(0),
+      msqInput(2),msuInput(1),msuInput(2))*Yu(1,0)*Yu(1,2)*Yu(2,0)*Yu(2,2) - 3*
+      AuInput(1,0)*AuInput(1,2)*AuInput(2,0)*AuInput(2,2)*TCD0(msqInput(0),
+      msqInput(2),msuInput(2),msuInput(1))*Yu(1,0)*Yu(1,2)*Yu(2,0)*Yu(2,2) - 3*
+      AuInput(1,0)*AuInput(1,2)*AuInput(2,0)*AuInput(2,2)*TCD0(msqInput(2),
+      msqInput(0),msuInput(1),msuInput(2))*Yu(1,0)*Yu(1,2)*Yu(2,0)*Yu(2,2) - 3*
+      AuInput(1,0)*AuInput(1,2)*AuInput(2,0)*AuInput(2,2)*TCD0(msqInput(2),
+      msqInput(0),msuInput(2),msuInput(1))*Yu(1,0)*Yu(1,2)*Yu(2,0)*Yu(2,2) - 3*
+      AuInput(0,1)*AuInput(0,2)*AuInput(2,1)*AuInput(2,2)*TCD0(msqInput(1),
+      msqInput(2),msuInput(0),msuInput(2))*Yu(0,1)*Yu(0,2)*Yu(2,1)*Yu(2,2) - 3*
+      AuInput(0,1)*AuInput(0,2)*AuInput(2,1)*AuInput(2,2)*TCD0(msqInput(1),
+      msqInput(2),msuInput(2),msuInput(0))*Yu(0,1)*Yu(0,2)*Yu(2,1)*Yu(2,2) - 3*
+      AuInput(0,1)*AuInput(0,2)*AuInput(2,1)*AuInput(2,2)*TCD0(msqInput(2),
+      msqInput(1),msuInput(0),msuInput(2))*Yu(0,1)*Yu(0,2)*Yu(2,1)*Yu(2,2) - 3*
+      AuInput(0,1)*AuInput(0,2)*AuInput(2,1)*AuInput(2,2)*TCD0(msqInput(2),
+      msqInput(1),msuInput(2),msuInput(0))*Yu(0,1)*Yu(0,2)*Yu(2,1)*Yu(2,2) - 3*
+      AuInput(1,1)*AuInput(1,2)*AuInput(2,1)*AuInput(2,2)*TCD0(msqInput(1),
+      msqInput(2),msuInput(1),msuInput(2))*Yu(1,1)*Yu(1,2)*Yu(2,1)*Yu(2,2) - 3*
+      AuInput(1,1)*AuInput(1,2)*AuInput(2,1)*AuInput(2,2)*TCD0(msqInput(1),
+      msqInput(2),msuInput(2),msuInput(1))*Yu(1,1)*Yu(1,2)*Yu(2,1)*Yu(2,2) - 3*
+      AuInput(1,1)*AuInput(1,2)*AuInput(2,1)*AuInput(2,2)*TCD0(msqInput(2),
+      msqInput(1),msuInput(1),msuInput(2))*Yu(1,1)*Yu(1,2)*Yu(2,1)*Yu(2,2) - 3*
+      AuInput(1,1)*AuInput(1,2)*AuInput(2,1)*AuInput(2,2)*TCD0(msqInput(2),
+      msqInput(1),msuInput(2),msuInput(1))*Yu(1,1)*Yu(1,2)*Yu(2,1)*Yu(2,2) - 6*
+      AuInput(0,0)*AuInput(2,0)*TCC0(msqInput(0),msuInput(0),msuInput(2))*Yu(0,0)*
+      Yu(2,0)*(Yu(0,0)*Yu(2,0) + Yu(0,1)*Yu(2,1) + Yu(0,2)*Yu(2,2)) - 6*AuInput(0,
+      0)*AuInput(2,0)*TCC0(msqInput(0),msuInput(2),msuInput(0))*Yu(0,0)*Yu(2,0)*(
+      Yu(0,0)*Yu(2,0) + Yu(0,1)*Yu(2,1) + Yu(0,2)*Yu(2,2)) - 6*AuInput(0,1)*
+      AuInput(2,1)*TCC0(msqInput(1),msuInput(0),msuInput(2))*Yu(0,1)*Yu(2,1)*(Yu(0
+      ,0)*Yu(2,0) + Yu(0,1)*Yu(2,1) + Yu(0,2)*Yu(2,2)) - 6*AuInput(0,1)*AuInput(2,
+      1)*TCC0(msqInput(1),msuInput(2),msuInput(0))*Yu(0,1)*Yu(2,1)*(Yu(0,0)*Yu(2,0
+      ) + Yu(0,1)*Yu(2,1) + Yu(0,2)*Yu(2,2)) - 6*AuInput(0,2)*AuInput(2,2)*TCC0(
+      msqInput(2),msuInput(0),msuInput(2))*Yu(0,2)*Yu(2,2)*(Yu(0,0)*Yu(2,0) + Yu(0
+      ,1)*Yu(2,1) + Yu(0,2)*Yu(2,2)) - 6*AuInput(0,2)*AuInput(2,2)*TCC0(msqInput(2
+      ),msuInput(2),msuInput(0))*Yu(0,2)*Yu(2,2)*(Yu(0,0)*Yu(2,0) + Yu(0,1)*Yu(2,1
+      ) + Yu(0,2)*Yu(2,2)) - 6*AuInput(1,0)*AuInput(2,0)*TCC0(msqInput(0),msuInput
+      (1),msuInput(2))*Yu(1,0)*Yu(2,0)*(Yu(1,0)*Yu(2,0) + Yu(1,1)*Yu(2,1) + Yu(1,2
+      )*Yu(2,2)) - 6*AuInput(1,0)*AuInput(2,0)*TCC0(msqInput(0),msuInput(2),
+      msuInput(1))*Yu(1,0)*Yu(2,0)*(Yu(1,0)*Yu(2,0) + Yu(1,1)*Yu(2,1) + Yu(1,2)*Yu
+      (2,2)) - 6*AuInput(1,1)*AuInput(2,1)*TCC0(msqInput(1),msuInput(1),msuInput(2
+      ))*Yu(1,1)*Yu(2,1)*(Yu(1,0)*Yu(2,0) + Yu(1,1)*Yu(2,1) + Yu(1,2)*Yu(2,2)) - 6
+      *AuInput(1,1)*AuInput(2,1)*TCC0(msqInput(1),msuInput(2),msuInput(1))*Yu(1,1)
+      *Yu(2,1)*(Yu(1,0)*Yu(2,0) + Yu(1,1)*Yu(2,1) + Yu(1,2)*Yu(2,2)) - 6*AuInput(1
+      ,2)*AuInput(2,2)*TCC0(msqInput(2),msuInput(1),msuInput(2))*Yu(1,2)*Yu(2,2)*(
+      Yu(1,0)*Yu(2,0) + Yu(1,1)*Yu(2,1) + Yu(1,2)*Yu(2,2)) - 6*AuInput(1,2)*
+      AuInput(2,2)*TCC0(msqInput(2),msuInput(2),msuInput(1))*Yu(1,2)*Yu(2,2)*(Yu(1
+      ,0)*Yu(2,0) + Yu(1,1)*Yu(2,1) + Yu(1,2)*Yu(2,2)) - 6*AuInput(0,0)*AuInput(0,
+      2)*TCC0(msqInput(0),msqInput(2),msuInput(0))*Yu(0,0)*Yu(0,2)*(Yu(0,0)*Yu(0,2
+      ) + Yu(1,0)*Yu(1,2) + Yu(2,0)*Yu(2,2)) - 6*AuInput(0,0)*AuInput(0,2)*TCC0(
+      msqInput(2),msqInput(0),msuInput(0))*Yu(0,0)*Yu(0,2)*(Yu(0,0)*Yu(0,2) + Yu(1
+      ,0)*Yu(1,2) + Yu(2,0)*Yu(2,2)) - 6*AuInput(1,0)*AuInput(1,2)*TCC0(msqInput(0
+      ),msqInput(2),msuInput(1))*Yu(1,0)*Yu(1,2)*(Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1,2
+      ) + Yu(2,0)*Yu(2,2)) - 6*AuInput(1,0)*AuInput(1,2)*TCC0(msqInput(2),msqInput
+      (0),msuInput(1))*Yu(1,0)*Yu(1,2)*(Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1,2) + Yu(2,0
+      )*Yu(2,2)) - 6*AuInput(2,0)*AuInput(2,2)*TCC0(msqInput(0),msqInput(2),
+      msuInput(2))*Yu(2,0)*Yu(2,2)*(Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1,2) + Yu(2,0)*Yu
+      (2,2)) - 6*AuInput(2,0)*AuInput(2,2)*TCC0(msqInput(2),msqInput(0),msuInput(2
+      ))*Yu(2,0)*Yu(2,2)*(Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1,2) + Yu(2,0)*Yu(2,2)) - 6
+      *AuInput(0,1)*AuInput(0,2)*TCC0(msqInput(1),msqInput(2),msuInput(0))*Yu(0,1)
+      *Yu(0,2)*(Yu(0,1)*Yu(0,2) + Yu(1,1)*Yu(1,2) + Yu(2,1)*Yu(2,2)) - 6*AuInput(0
+      ,1)*AuInput(0,2)*TCC0(msqInput(2),msqInput(1),msuInput(0))*Yu(0,1)*Yu(0,2)*(
+      Yu(0,1)*Yu(0,2) + Yu(1,1)*Yu(1,2) + Yu(2,1)*Yu(2,2)) - 6*AuInput(1,1)*
+      AuInput(1,2)*TCC0(msqInput(1),msqInput(2),msuInput(1))*Yu(1,1)*Yu(1,2)*(Yu(0
+      ,1)*Yu(0,2) + Yu(1,1)*Yu(1,2) + Yu(2,1)*Yu(2,2)) - 6*AuInput(1,1)*AuInput(1,
+      2)*TCC0(msqInput(2),msqInput(1),msuInput(1))*Yu(1,1)*Yu(1,2)*(Yu(0,1)*Yu(0,2
+      ) + Yu(1,1)*Yu(1,2) + Yu(2,1)*Yu(2,2)) - 6*AuInput(2,1)*AuInput(2,2)*TCC0(
+      msqInput(1),msqInput(2),msuInput(2))*Yu(2,1)*Yu(2,2)*(Yu(0,1)*Yu(0,2) + Yu(1
+      ,1)*Yu(1,2) + Yu(2,1)*Yu(2,2)) - 6*AuInput(2,1)*AuInput(2,2)*TCC0(msqInput(2
+      ),msqInput(1),msuInput(2))*Yu(2,1)*Yu(2,2)*(Yu(0,1)*Yu(0,2) + Yu(1,1)*Yu(1,2
+      ) + Yu(2,1)*Yu(2,2)))))));
+   MODEL->set_Lambda3(Re(0.25*(-0.6*Sqr(g1) - Sqr(g2)) + 0.5*Sqr(g2) + (
+      0.00008020298636472138*AuInput(2,2)*(1 - (0.5*AuInput(2,2))/MSUSY)*Quad(Yu(2
+      ,2))*Sqr(g3)*Sqr(MuInput)*UnitStep(-2 + LambdaLoopOrder))/Cube(MSUSY) +
+      UnitStep(-1 + LambdaLoopOrder)*(-0.0005277144981371759*(-4 + 8*Log(Sqr(
+      M2Input)/Sqr(SCALE)) + 4*Log(Sqr(Abs(MuInput))/Sqr(SCALE)) + Log(Sqr(
+      mslInput(0))/Sqr(SCALE)) + Log(Sqr(mslInput(1))/Sqr(SCALE)) + Log(Sqr(
+      mslInput(2))/Sqr(SCALE)) + 3*Log(Sqr(msqInput(0))/Sqr(SCALE)) + 3*Log(Sqr(
+      msqInput(1))/Sqr(SCALE)) + 3*Log(Sqr(msqInput(2))/Sqr(SCALE)))*Quad(g2) +
+      0.5*(0.00037995443865876665*(2*Log(Sqr(Abs(MuInput))/Sqr(SCALE)) +
+      0.3333333333333333*Log(Sqr(msdInput(0))/Sqr(SCALE)) + 0.3333333333333333*Log
+      (Sqr(msdInput(1))/Sqr(SCALE)) + 0.3333333333333333*Log(Sqr(msdInput(2))/Sqr(
+      SCALE)) + Log(Sqr(mseInput(0))/Sqr(SCALE)) + Log(Sqr(mseInput(1))/Sqr(SCALE)
+      ) + Log(Sqr(mseInput(2))/Sqr(SCALE)) + 0.5*Log(Sqr(mslInput(0))/Sqr(SCALE))
+      + 0.5*Log(Sqr(mslInput(1))/Sqr(SCALE)) + 0.5*Log(Sqr(mslInput(2))/Sqr(SCALE)
+      ) + 0.16666666666666666*Log(Sqr(msqInput(0))/Sqr(SCALE)) +
+      0.16666666666666666*Log(Sqr(msqInput(1))/Sqr(SCALE)) + 0.16666666666666666*
+      Log(Sqr(msqInput(2))/Sqr(SCALE)) + 1.3333333333333333*Log(Sqr(msuInput(0))/
+      Sqr(SCALE)) + 1.3333333333333333*Log(Sqr(msuInput(1))/Sqr(SCALE)) +
+      1.3333333333333333*Log(Sqr(msuInput(2))/Sqr(SCALE)))*Quad(g1) +
+      0.0005277144981371759*(-4 + 8*Log(Sqr(M2Input)/Sqr(SCALE)) + 4*Log(Sqr(Abs(
+      MuInput))/Sqr(SCALE)) + Log(Sqr(mslInput(0))/Sqr(SCALE)) + Log(Sqr(mslInput(
+      1))/Sqr(SCALE)) + Log(Sqr(mslInput(2))/Sqr(SCALE)) + 3*Log(Sqr(msqInput(0))/
+      Sqr(SCALE)) + 3*Log(Sqr(msqInput(1))/Sqr(SCALE)) + 3*Log(Sqr(msqInput(2))/
+      Sqr(SCALE)))*Quad(g2)) + 0.5*(Re(0.0031662869888230555*(3*Sqr(AdInput(0,0))*
+      Sqr(Yd(0,0))*TCDB0(msdInput(0),msqInput(0)) + 3*Sqr(AdInput(0,1))*Sqr(Yd(0,1
+      ))*TCDB0(msdInput(0),msqInput(1)) + 3*Sqr(AdInput(0,2))*Sqr(Yd(0,2))*TCDB0(
+      msdInput(0),msqInput(2)) + 3*Sqr(AdInput(1,0))*Sqr(Yd(1,0))*TCDB0(msdInput(1
+      ),msqInput(0)) + 3*Sqr(AdInput(1,1))*Sqr(Yd(1,1))*TCDB0(msdInput(1),msqInput
+      (1)) + 3*Sqr(AdInput(1,2))*Sqr(Yd(1,2))*TCDB0(msdInput(1),msqInput(2)) + 3*
+      Sqr(AdInput(2,0))*Sqr(Yd(2,0))*TCDB0(msdInput(2),msqInput(0)) + 3*Sqr(
+      AdInput(2,1))*Sqr(Yd(2,1))*TCDB0(msdInput(2),msqInput(1)) + 3*Sqr(AdInput(2,
+      2))*Sqr(Yd(2,2))*TCDB0(msdInput(2),msqInput(2)) + Sqr(AeInput(0,0))*Sqr(Ye(0
+      ,0))*TCDB0(mseInput(0),mslInput(0)) + Sqr(AeInput(0,1))*Sqr(Ye(0,1))*TCDB0(
+      mseInput(0),mslInput(1)) + Sqr(AeInput(0,2))*Sqr(Ye(0,2))*TCDB0(mseInput(0),
+      mslInput(2)) + Sqr(AeInput(1,0))*Sqr(Ye(1,0))*TCDB0(mseInput(1),mslInput(0))
+      + Sqr(AeInput(1,1))*Sqr(Ye(1,1))*TCDB0(mseInput(1),mslInput(1)) + Sqr(
+      AeInput(1,2))*Sqr(Ye(1,2))*TCDB0(mseInput(1),mslInput(2)) + Sqr(AeInput(2,0)
+      )*Sqr(Ye(2,0))*TCDB0(mseInput(2),mslInput(0)) + Sqr(AeInput(2,1))*Sqr(Ye(2,1
+      ))*TCDB0(mseInput(2),mslInput(1)) + Sqr(AeInput(2,2))*Sqr(Ye(2,2))*TCDB0(
+      mseInput(2),mslInput(2)) + 3*Sqr(Abs(MuInput))*Sqr(Yu(0,0))*TCDB0(msuInput(0
+      ),msqInput(0)) + 3*Sqr(Abs(MuInput))*Sqr(Yu(0,1))*TCDB0(msuInput(0),msqInput
+      (1)) + 3*Sqr(Abs(MuInput))*Sqr(Yu(0,2))*TCDB0(msuInput(0),msqInput(2)) + 3*
+      Sqr(Abs(MuInput))*Sqr(Yu(1,0))*TCDB0(msuInput(1),msqInput(0)) + 3*Sqr(Abs(
+      MuInput))*Sqr(Yu(1,1))*TCDB0(msuInput(1),msqInput(1)) + 3*Sqr(Abs(MuInput))*
+      Sqr(Yu(1,2))*TCDB0(msuInput(1),msqInput(2)) + 3*Sqr(Abs(MuInput))*Sqr(Yu(2,0
+      ))*TCDB0(msuInput(2),msqInput(0)) + 3*Sqr(Abs(MuInput))*Sqr(Yu(2,1))*TCDB0(
+      msuInput(2),msqInput(1)) + 3*Sqr(Abs(MuInput))*Sqr(Yu(2,2))*TCDB0(msuInput(2
+      ),msqInput(2))) - 0.0007915717472057639*(0.6*Sqr(g1)*TCW(Abs(M1Input),Abs(
+      MuInput),SCALE) + 3*Sqr(g2)*TCW(Abs(M2Input),Abs(MuInput),SCALE))) + Re(
+      0.0031662869888230555*(3*Sqr(Abs(MuInput))*Sqr(Yd(0,0))*TCDB0(msdInput(0),
+      msqInput(0)) + 3*Sqr(Abs(MuInput))*Sqr(Yd(0,1))*TCDB0(msdInput(0),msqInput(1
+      )) + 3*Sqr(Abs(MuInput))*Sqr(Yd(0,2))*TCDB0(msdInput(0),msqInput(2)) + 3*Sqr
+      (Abs(MuInput))*Sqr(Yd(1,0))*TCDB0(msdInput(1),msqInput(0)) + 3*Sqr(Abs(
+      MuInput))*Sqr(Yd(1,1))*TCDB0(msdInput(1),msqInput(1)) + 3*Sqr(Abs(MuInput))*
+      Sqr(Yd(1,2))*TCDB0(msdInput(1),msqInput(2)) + 3*Sqr(Abs(MuInput))*Sqr(Yd(2,0
+      ))*TCDB0(msdInput(2),msqInput(0)) + 3*Sqr(Abs(MuInput))*Sqr(Yd(2,1))*TCDB0(
+      msdInput(2),msqInput(1)) + 3*Sqr(Abs(MuInput))*Sqr(Yd(2,2))*TCDB0(msdInput(2
+      ),msqInput(2)) + Sqr(Abs(MuInput))*Sqr(Ye(0,0))*TCDB0(mseInput(0),mslInput(0
+      )) + Sqr(Abs(MuInput))*Sqr(Ye(0,1))*TCDB0(mseInput(0),mslInput(1)) + Sqr(Abs
+      (MuInput))*Sqr(Ye(0,2))*TCDB0(mseInput(0),mslInput(2)) + Sqr(Abs(MuInput))*
+      Sqr(Ye(1,0))*TCDB0(mseInput(1),mslInput(0)) + Sqr(Abs(MuInput))*Sqr(Ye(1,1))
+      *TCDB0(mseInput(1),mslInput(1)) + Sqr(Abs(MuInput))*Sqr(Ye(1,2))*TCDB0(
+      mseInput(1),mslInput(2)) + Sqr(Abs(MuInput))*Sqr(Ye(2,0))*TCDB0(mseInput(2),
+      mslInput(0)) + Sqr(Abs(MuInput))*Sqr(Ye(2,1))*TCDB0(mseInput(2),mslInput(1))
+      + Sqr(Abs(MuInput))*Sqr(Ye(2,2))*TCDB0(mseInput(2),mslInput(2)) + 3*Sqr(
+      AuInput(0,0))*Sqr(Yu(0,0))*TCDB0(msuInput(0),msqInput(0)) + 3*Sqr(AuInput(0,
+      1))*Sqr(Yu(0,1))*TCDB0(msuInput(0),msqInput(1)) + 3*Sqr(AuInput(0,2))*Sqr(Yu
+      (0,2))*TCDB0(msuInput(0),msqInput(2)) + 3*Sqr(AuInput(1,0))*Sqr(Yu(1,0))*
+      TCDB0(msuInput(1),msqInput(0)) + 3*Sqr(AuInput(1,1))*Sqr(Yu(1,1))*TCDB0(
+      msuInput(1),msqInput(1)) + 3*Sqr(AuInput(1,2))*Sqr(Yu(1,2))*TCDB0(msuInput(1
+      ),msqInput(2)) + 3*Sqr(AuInput(2,0))*Sqr(Yu(2,0))*TCDB0(msuInput(2),msqInput
+      (0)) + 3*Sqr(AuInput(2,1))*Sqr(Yu(2,1))*TCDB0(msuInput(2),msqInput(1)) + 3*
+      Sqr(AuInput(2,2))*Sqr(Yu(2,2))*TCDB0(msuInput(2),msqInput(2))) -
+      0.0007915717472057639*(0.6*Sqr(g1)*TCW(Abs(M1Input),Abs(MuInput),SCALE) + 3*
+      Sqr(g2)*TCW(Abs(M2Input),Abs(MuInput),SCALE))))*(-0.6*Sqr(g1) - Sqr(g2)) + (
+      Re(0.0031662869888230555*(3*Sqr(AdInput(0,0))*Sqr(Yd(0,0))*TCDB0(msdInput(0)
+      ,msqInput(0)) + 3*Sqr(AdInput(0,1))*Sqr(Yd(0,1))*TCDB0(msdInput(0),msqInput(
+      1)) + 3*Sqr(AdInput(0,2))*Sqr(Yd(0,2))*TCDB0(msdInput(0),msqInput(2)) + 3*
+      Sqr(AdInput(1,0))*Sqr(Yd(1,0))*TCDB0(msdInput(1),msqInput(0)) + 3*Sqr(
+      AdInput(1,1))*Sqr(Yd(1,1))*TCDB0(msdInput(1),msqInput(1)) + 3*Sqr(AdInput(1,
+      2))*Sqr(Yd(1,2))*TCDB0(msdInput(1),msqInput(2)) + 3*Sqr(AdInput(2,0))*Sqr(Yd
+      (2,0))*TCDB0(msdInput(2),msqInput(0)) + 3*Sqr(AdInput(2,1))*Sqr(Yd(2,1))*
+      TCDB0(msdInput(2),msqInput(1)) + 3*Sqr(AdInput(2,2))*Sqr(Yd(2,2))*TCDB0(
+      msdInput(2),msqInput(2)) + Sqr(AeInput(0,0))*Sqr(Ye(0,0))*TCDB0(mseInput(0),
+      mslInput(0)) + Sqr(AeInput(0,1))*Sqr(Ye(0,1))*TCDB0(mseInput(0),mslInput(1))
+      + Sqr(AeInput(0,2))*Sqr(Ye(0,2))*TCDB0(mseInput(0),mslInput(2)) + Sqr(
+      AeInput(1,0))*Sqr(Ye(1,0))*TCDB0(mseInput(1),mslInput(0)) + Sqr(AeInput(1,1)
+      )*Sqr(Ye(1,1))*TCDB0(mseInput(1),mslInput(1)) + Sqr(AeInput(1,2))*Sqr(Ye(1,2
+      ))*TCDB0(mseInput(1),mslInput(2)) + Sqr(AeInput(2,0))*Sqr(Ye(2,0))*TCDB0(
+      mseInput(2),mslInput(0)) + Sqr(AeInput(2,1))*Sqr(Ye(2,1))*TCDB0(mseInput(2),
+      mslInput(1)) + Sqr(AeInput(2,2))*Sqr(Ye(2,2))*TCDB0(mseInput(2),mslInput(2))
+      + 3*Sqr(Abs(MuInput))*Sqr(Yu(0,0))*TCDB0(msuInput(0),msqInput(0)) + 3*Sqr(
+      Abs(MuInput))*Sqr(Yu(0,1))*TCDB0(msuInput(0),msqInput(1)) + 3*Sqr(Abs(
+      MuInput))*Sqr(Yu(0,2))*TCDB0(msuInput(0),msqInput(2)) + 3*Sqr(Abs(MuInput))*
+      Sqr(Yu(1,0))*TCDB0(msuInput(1),msqInput(0)) + 3*Sqr(Abs(MuInput))*Sqr(Yu(1,1
+      ))*TCDB0(msuInput(1),msqInput(1)) + 3*Sqr(Abs(MuInput))*Sqr(Yu(1,2))*TCDB0(
+      msuInput(1),msqInput(2)) + 3*Sqr(Abs(MuInput))*Sqr(Yu(2,0))*TCDB0(msuInput(2
+      ),msqInput(0)) + 3*Sqr(Abs(MuInput))*Sqr(Yu(2,1))*TCDB0(msuInput(2),msqInput
+      (1)) + 3*Sqr(Abs(MuInput))*Sqr(Yu(2,2))*TCDB0(msuInput(2),msqInput(2))) -
+      0.0007915717472057639*(0.6*Sqr(g1)*TCW(Abs(M1Input),Abs(MuInput),SCALE) + 3*
+      Sqr(g2)*TCW(Abs(M2Input),Abs(MuInput),SCALE))) + Re(0.0031662869888230555*(3
+      *Sqr(Abs(MuInput))*Sqr(Yd(0,0))*TCDB0(msdInput(0),msqInput(0)) + 3*Sqr(Abs(
+      MuInput))*Sqr(Yd(0,1))*TCDB0(msdInput(0),msqInput(1)) + 3*Sqr(Abs(MuInput))*
+      Sqr(Yd(0,2))*TCDB0(msdInput(0),msqInput(2)) + 3*Sqr(Abs(MuInput))*Sqr(Yd(1,0
+      ))*TCDB0(msdInput(1),msqInput(0)) + 3*Sqr(Abs(MuInput))*Sqr(Yd(1,1))*TCDB0(
+      msdInput(1),msqInput(1)) + 3*Sqr(Abs(MuInput))*Sqr(Yd(1,2))*TCDB0(msdInput(1
+      ),msqInput(2)) + 3*Sqr(Abs(MuInput))*Sqr(Yd(2,0))*TCDB0(msdInput(2),msqInput
+      (0)) + 3*Sqr(Abs(MuInput))*Sqr(Yd(2,1))*TCDB0(msdInput(2),msqInput(1)) + 3*
+      Sqr(Abs(MuInput))*Sqr(Yd(2,2))*TCDB0(msdInput(2),msqInput(2)) + Sqr(Abs(
+      MuInput))*Sqr(Ye(0,0))*TCDB0(mseInput(0),mslInput(0)) + Sqr(Abs(MuInput))*
+      Sqr(Ye(0,1))*TCDB0(mseInput(0),mslInput(1)) + Sqr(Abs(MuInput))*Sqr(Ye(0,2))
+      *TCDB0(mseInput(0),mslInput(2)) + Sqr(Abs(MuInput))*Sqr(Ye(1,0))*TCDB0(
+      mseInput(1),mslInput(0)) + Sqr(Abs(MuInput))*Sqr(Ye(1,1))*TCDB0(mseInput(1),
+      mslInput(1)) + Sqr(Abs(MuInput))*Sqr(Ye(1,2))*TCDB0(mseInput(1),mslInput(2))
+      + Sqr(Abs(MuInput))*Sqr(Ye(2,0))*TCDB0(mseInput(2),mslInput(0)) + Sqr(Abs(
+      MuInput))*Sqr(Ye(2,1))*TCDB0(mseInput(2),mslInput(1)) + Sqr(Abs(MuInput))*
+      Sqr(Ye(2,2))*TCDB0(mseInput(2),mslInput(2)) + 3*Sqr(AuInput(0,0))*Sqr(Yu(0,0
+      ))*TCDB0(msuInput(0),msqInput(0)) + 3*Sqr(AuInput(0,1))*Sqr(Yu(0,1))*TCDB0(
+      msuInput(0),msqInput(1)) + 3*Sqr(AuInput(0,2))*Sqr(Yu(0,2))*TCDB0(msuInput(0
+      ),msqInput(2)) + 3*Sqr(AuInput(1,0))*Sqr(Yu(1,0))*TCDB0(msuInput(1),msqInput
+      (0)) + 3*Sqr(AuInput(1,1))*Sqr(Yu(1,1))*TCDB0(msuInput(1),msqInput(1)) + 3*
+      Sqr(AuInput(1,2))*Sqr(Yu(1,2))*TCDB0(msuInput(1),msqInput(2)) + 3*Sqr(
+      AuInput(2,0))*Sqr(Yu(2,0))*TCDB0(msuInput(2),msqInput(0)) + 3*Sqr(AuInput(2,
+      1))*Sqr(Yu(2,1))*TCDB0(msuInput(2),msqInput(1)) + 3*Sqr(AuInput(2,2))*Sqr(Yu
+      (2,2))*TCDB0(msuInput(2),msqInput(2))) - 0.0007915717472057639*(0.6*Sqr(g1)*
+      TCW(Abs(M1Input),Abs(MuInput),SCALE) + 3*Sqr(g2)*TCW(Abs(M2Input),Abs(
+      MuInput),SCALE))))*Sqr(g2) + 0.006332573977646111*((0.03*Quad(g1) - 0.3*Sqr(
+      g1)*(Sqr(Yd(0,0)) + Sqr(Yd(0,1)) + Sqr(Yd(0,2))))*TCB0(msdInput(0),msdInput(
+      0),SCALE) + (0.03*Quad(g1) - 0.3*Sqr(g1)*(Sqr(Yd(1,0)) + Sqr(Yd(1,1)) + Sqr(
+      Yd(1,2))))*TCB0(msdInput(1),msdInput(1),SCALE) + (0.03*Quad(g1) - 0.3*Sqr(g1
+      )*(Sqr(Yd(2,0)) + Sqr(Yd(2,1)) + Sqr(Yd(2,2))))*TCB0(msdInput(2),msdInput(2)
+      ,SCALE) + (0.09*Quad(g1) - 0.3*Sqr(g1)*(Sqr(Ye(0,0)) + Sqr(Ye(0,1)) + Sqr(Ye
+      (0,2))))*TCB0(mseInput(0),mseInput(0),SCALE) + (0.09*Quad(g1) - 0.3*Sqr(g1)*
+      (Sqr(Ye(1,0)) + Sqr(Ye(1,1)) + Sqr(Ye(1,2))))*TCB0(mseInput(1),mseInput(1),
+      SCALE) + (0.09*Quad(g1) - 0.3*Sqr(g1)*(Sqr(Ye(2,0)) + Sqr(Ye(2,1)) + Sqr(Ye(
+      2,2))))*TCB0(mseInput(2),mseInput(2),SCALE) + (0.125*(0.36*Quad(g1) + Quad(
+      g2)) + 0.25*(0.6*Sqr(g1) - Sqr(g2))*(Sqr(Ye(0,0)) + Sqr(Ye(1,0)) + Sqr(Ye(2,
+      0))))*TCB0(mslInput(0),mslInput(0),SCALE) + (0.125*(0.36*Quad(g1) + Quad(g2)
+      ) + 0.25*(0.6*Sqr(g1) - Sqr(g2))*(Sqr(Ye(0,1)) + Sqr(Ye(1,1)) + Sqr(Ye(2,1))
+      ))*TCB0(mslInput(1),mslInput(1),SCALE) + (0.125*(0.36*Quad(g1) + Quad(g2)) +
+      0.25*(0.6*Sqr(g1) - Sqr(g2))*(Sqr(Ye(0,2)) + Sqr(Ye(1,2)) + Sqr(Ye(2,2))))*
+      TCB0(mslInput(2),mslInput(2),SCALE) + (0.041666666666666664*(0.36*Quad(g1) +
+      9*Quad(g2)) + 0.25*(-0.6*Sqr(g1) - 3*Sqr(g2))*(Sqr(Yd(0,0)) + Sqr(Yd(1,0)) +
+      Sqr(Yd(2,0))) + 0.25*(0.6*Sqr(g1) - 3*Sqr(g2))*(Sqr(Yu(0,0)) + Sqr(Yu(1,0))
+      + Sqr(Yu(2,0))))*TCB0(msqInput(0),msqInput(0),SCALE) + (0.041666666666666664
+      *(0.36*Quad(g1) + 9*Quad(g2)) + 0.25*(-0.6*Sqr(g1) - 3*Sqr(g2))*(Sqr(Yd(0,1)
+      ) + Sqr(Yd(1,1)) + Sqr(Yd(2,1))) + 0.25*(0.6*Sqr(g1) - 3*Sqr(g2))*(Sqr(Yu(0,
+      1)) + Sqr(Yu(1,1)) + Sqr(Yu(2,1))))*TCB0(msqInput(1),msqInput(1),SCALE) + (
+      0.041666666666666664*(0.36*Quad(g1) + 9*Quad(g2)) + 0.25*(-0.6*Sqr(g1) - 3*
+      Sqr(g2))*(Sqr(Yd(0,2)) + Sqr(Yd(1,2)) + Sqr(Yd(2,2))) + 0.25*(0.6*Sqr(g1) -
+      3*Sqr(g2))*(Sqr(Yu(0,2)) + Sqr(Yu(1,2)) + Sqr(Yu(2,2))))*TCB0(msqInput(2),
+      msqInput(2),SCALE) + (0.12*Quad(g1) - 0.6*Sqr(g1)*(Sqr(Yu(0,0)) + Sqr(Yu(0,1
+      )) + Sqr(Yu(0,2))))*TCB0(msuInput(0),msuInput(0),SCALE) + (0.12*Quad(g1) -
+      0.6*Sqr(g1)*(Sqr(Yu(1,0)) + Sqr(Yu(1,1)) + Sqr(Yu(1,2))))*TCB0(msuInput(1),
+      msuInput(1),SCALE) + (0.12*Quad(g1) - 0.6*Sqr(g1)*(Sqr(Yu(2,0)) + Sqr(Yu(2,1
+      )) + Sqr(Yu(2,2))))*TCB0(msuInput(2),msuInput(2),SCALE) + (0.3*Sqr(g1)*Sqr(
+      Abs(MuInput))*Sqr(Yd(0,0)) - 0.3*Sqr(g1)*Sqr(AdInput(0,0))*Sqr(Yd(0,0)) - 3*
+      Sqr(Abs(MuInput))*Sqr(Yd(0,0))*(Sqr(Yd(0,0)) + Sqr(Yd(0,1)) + Sqr(Yd(0,2))))
+      *TCC0(msdInput(0),msdInput(0),msqInput(0)) + (0.3*Sqr(g1)*Sqr(Abs(MuInput))*
+      Sqr(Yd(0,1)) - 0.3*Sqr(g1)*Sqr(AdInput(0,1))*Sqr(Yd(0,1)) - 3*Sqr(Abs(
+      MuInput))*Sqr(Yd(0,1))*(Sqr(Yd(0,0)) + Sqr(Yd(0,1)) + Sqr(Yd(0,2))))*TCC0(
+      msdInput(0),msdInput(0),msqInput(1)) + (0.3*Sqr(g1)*Sqr(Abs(MuInput))*Sqr(Yd
+      (0,2)) - 0.3*Sqr(g1)*Sqr(AdInput(0,2))*Sqr(Yd(0,2)) - 3*Sqr(Abs(MuInput))*
+      Sqr(Yd(0,2))*(Sqr(Yd(0,0)) + Sqr(Yd(0,1)) + Sqr(Yd(0,2))))*TCC0(msdInput(0),
+      msdInput(0),msqInput(2)) + (0.25*(0.6*Sqr(g1) + 3*Sqr(g2))*Sqr(Abs(MuInput))
+      *Sqr(Yd(0,0)) + 0.25*(-0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(AdInput(0,0))*Sqr(Yd(0,0
+      )) - 3*Sqr(Abs(MuInput))*Sqr(Yd(0,0))*(Sqr(Yd(0,0)) + Sqr(Yd(1,0)) + Sqr(Yd(
+      2,0))))*TCC0(msdInput(0),msqInput(0),msqInput(0)) + (0.25*(0.6*Sqr(g1) + 3*
+      Sqr(g2))*Sqr(Abs(MuInput))*Sqr(Yd(0,1)) + 0.25*(-0.6*Sqr(g1) - 3*Sqr(g2))*
+      Sqr(AdInput(0,1))*Sqr(Yd(0,1)) - 3*Sqr(Abs(MuInput))*Sqr(Yd(0,1))*(Sqr(Yd(0,
+      1)) + Sqr(Yd(1,1)) + Sqr(Yd(2,1))))*TCC0(msdInput(0),msqInput(1),msqInput(1)
+      ) + (0.25*(0.6*Sqr(g1) + 3*Sqr(g2))*Sqr(Abs(MuInput))*Sqr(Yd(0,2)) + 0.25*(-
+      0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(AdInput(0,2))*Sqr(Yd(0,2)) - 3*Sqr(Abs(MuInput)
+      )*Sqr(Yd(0,2))*(Sqr(Yd(0,2)) + Sqr(Yd(1,2)) + Sqr(Yd(2,2))))*TCC0(msdInput(0
+      ),msqInput(2),msqInput(2)) + (0.3*Sqr(g1)*Sqr(Abs(MuInput))*Sqr(Yd(1,0)) -
+      0.3*Sqr(g1)*Sqr(AdInput(1,0))*Sqr(Yd(1,0)) - 3*Sqr(Abs(MuInput))*Sqr(Yd(1,0)
+      )*(Sqr(Yd(1,0)) + Sqr(Yd(1,1)) + Sqr(Yd(1,2))))*TCC0(msdInput(1),msdInput(1)
+      ,msqInput(0)) + (0.3*Sqr(g1)*Sqr(Abs(MuInput))*Sqr(Yd(1,1)) - 0.3*Sqr(g1)*
+      Sqr(AdInput(1,1))*Sqr(Yd(1,1)) - 3*Sqr(Abs(MuInput))*Sqr(Yd(1,1))*(Sqr(Yd(1,
+      0)) + Sqr(Yd(1,1)) + Sqr(Yd(1,2))))*TCC0(msdInput(1),msdInput(1),msqInput(1)
+      ) + (0.3*Sqr(g1)*Sqr(Abs(MuInput))*Sqr(Yd(1,2)) - 0.3*Sqr(g1)*Sqr(AdInput(1,
+      2))*Sqr(Yd(1,2)) - 3*Sqr(Abs(MuInput))*Sqr(Yd(1,2))*(Sqr(Yd(1,0)) + Sqr(Yd(1
+      ,1)) + Sqr(Yd(1,2))))*TCC0(msdInput(1),msdInput(1),msqInput(2)) + (0.25*(0.6
+      *Sqr(g1) + 3*Sqr(g2))*Sqr(Abs(MuInput))*Sqr(Yd(1,0)) + 0.25*(-0.6*Sqr(g1) -
+      3*Sqr(g2))*Sqr(AdInput(1,0))*Sqr(Yd(1,0)) - 3*Sqr(Abs(MuInput))*Sqr(Yd(1,0))
+      *(Sqr(Yd(0,0)) + Sqr(Yd(1,0)) + Sqr(Yd(2,0))))*TCC0(msdInput(1),msqInput(0),
+      msqInput(0)) + (0.25*(0.6*Sqr(g1) + 3*Sqr(g2))*Sqr(Abs(MuInput))*Sqr(Yd(1,1)
+      ) + 0.25*(-0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(AdInput(1,1))*Sqr(Yd(1,1)) - 3*Sqr(
+      Abs(MuInput))*Sqr(Yd(1,1))*(Sqr(Yd(0,1)) + Sqr(Yd(1,1)) + Sqr(Yd(2,1))))*
+      TCC0(msdInput(1),msqInput(1),msqInput(1)) + (0.25*(0.6*Sqr(g1) + 3*Sqr(g2))*
+      Sqr(Abs(MuInput))*Sqr(Yd(1,2)) + 0.25*(-0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(AdInput
+      (1,2))*Sqr(Yd(1,2)) - 3*Sqr(Abs(MuInput))*Sqr(Yd(1,2))*(Sqr(Yd(0,2)) + Sqr(
+      Yd(1,2)) + Sqr(Yd(2,2))))*TCC0(msdInput(1),msqInput(2),msqInput(2)) + (0.3*
+      Sqr(g1)*Sqr(Abs(MuInput))*Sqr(Yd(2,0)) - 0.3*Sqr(g1)*Sqr(AdInput(2,0))*Sqr(
+      Yd(2,0)) - 3*Sqr(Abs(MuInput))*Sqr(Yd(2,0))*(Sqr(Yd(2,0)) + Sqr(Yd(2,1)) +
+      Sqr(Yd(2,2))))*TCC0(msdInput(2),msdInput(2),msqInput(0)) + (0.3*Sqr(g1)*Sqr(
+      Abs(MuInput))*Sqr(Yd(2,1)) - 0.3*Sqr(g1)*Sqr(AdInput(2,1))*Sqr(Yd(2,1)) - 3*
+      Sqr(Abs(MuInput))*Sqr(Yd(2,1))*(Sqr(Yd(2,0)) + Sqr(Yd(2,1)) + Sqr(Yd(2,2))))
+      *TCC0(msdInput(2),msdInput(2),msqInput(1)) + (0.3*Sqr(g1)*Sqr(Abs(MuInput))*
+      Sqr(Yd(2,2)) - 0.3*Sqr(g1)*Sqr(AdInput(2,2))*Sqr(Yd(2,2)) - 3*Sqr(Abs(
+      MuInput))*Sqr(Yd(2,2))*(Sqr(Yd(2,0)) + Sqr(Yd(2,1)) + Sqr(Yd(2,2))))*TCC0(
+      msdInput(2),msdInput(2),msqInput(2)) + (0.25*(0.6*Sqr(g1) + 3*Sqr(g2))*Sqr(
+      Abs(MuInput))*Sqr(Yd(2,0)) + 0.25*(-0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(AdInput(2,0
+      ))*Sqr(Yd(2,0)) - 3*Sqr(Abs(MuInput))*Sqr(Yd(2,0))*(Sqr(Yd(0,0)) + Sqr(Yd(1,
+      0)) + Sqr(Yd(2,0))))*TCC0(msdInput(2),msqInput(0),msqInput(0)) + (0.25*(0.6*
+      Sqr(g1) + 3*Sqr(g2))*Sqr(Abs(MuInput))*Sqr(Yd(2,1)) + 0.25*(-0.6*Sqr(g1) - 3
+      *Sqr(g2))*Sqr(AdInput(2,1))*Sqr(Yd(2,1)) - 3*Sqr(Abs(MuInput))*Sqr(Yd(2,1))*
+      (Sqr(Yd(0,1)) + Sqr(Yd(1,1)) + Sqr(Yd(2,1))))*TCC0(msdInput(2),msqInput(1),
+      msqInput(1)) + (0.25*(0.6*Sqr(g1) + 3*Sqr(g2))*Sqr(Abs(MuInput))*Sqr(Yd(2,2)
+      ) + 0.25*(-0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(AdInput(2,2))*Sqr(Yd(2,2)) - 3*Sqr(
+      Abs(MuInput))*Sqr(Yd(2,2))*(Sqr(Yd(0,2)) + Sqr(Yd(1,2)) + Sqr(Yd(2,2))))*
+      TCC0(msdInput(2),msqInput(2),msqInput(2)) + (0.3*Sqr(g1)*Sqr(Abs(MuInput))*
+      Sqr(Ye(0,0)) - 0.3*Sqr(g1)*Sqr(AeInput(0,0))*Sqr(Ye(0,0)) - Sqr(Abs(MuInput)
+      )*Sqr(Ye(0,0))*(Sqr(Ye(0,0)) + Sqr(Ye(0,1)) + Sqr(Ye(0,2))))*TCC0(mseInput(0
+      ),mseInput(0),mslInput(0)) + (0.3*Sqr(g1)*Sqr(Abs(MuInput))*Sqr(Ye(0,1)) -
+      0.3*Sqr(g1)*Sqr(AeInput(0,1))*Sqr(Ye(0,1)) - Sqr(Abs(MuInput))*Sqr(Ye(0,1))*
+      (Sqr(Ye(0,0)) + Sqr(Ye(0,1)) + Sqr(Ye(0,2))))*TCC0(mseInput(0),mseInput(0),
+      mslInput(1)) + (0.3*Sqr(g1)*Sqr(Abs(MuInput))*Sqr(Ye(0,2)) - 0.3*Sqr(g1)*Sqr
+      (AeInput(0,2))*Sqr(Ye(0,2)) - Sqr(Abs(MuInput))*Sqr(Ye(0,2))*(Sqr(Ye(0,0)) +
+      Sqr(Ye(0,1)) + Sqr(Ye(0,2))))*TCC0(mseInput(0),mseInput(0),mslInput(2)) + (
+      0.25*(-0.6*Sqr(g1) + Sqr(g2))*Sqr(Abs(MuInput))*Sqr(Ye(0,0)) + 0.25*(0.6*Sqr
+      (g1) - Sqr(g2))*Sqr(AeInput(0,0))*Sqr(Ye(0,0)) - Sqr(Abs(MuInput))*Sqr(Ye(0,
+      0))*(Sqr(Ye(0,0)) + Sqr(Ye(1,0)) + Sqr(Ye(2,0))))*TCC0(mseInput(0),mslInput(
+      0),mslInput(0)) + (0.25*(-0.6*Sqr(g1) + Sqr(g2))*Sqr(Abs(MuInput))*Sqr(Ye(0,
+      1)) + 0.25*(0.6*Sqr(g1) - Sqr(g2))*Sqr(AeInput(0,1))*Sqr(Ye(0,1)) - Sqr(Abs(
+      MuInput))*Sqr(Ye(0,1))*(Sqr(Ye(0,1)) + Sqr(Ye(1,1)) + Sqr(Ye(2,1))))*TCC0(
+      mseInput(0),mslInput(1),mslInput(1)) + (0.25*(-0.6*Sqr(g1) + Sqr(g2))*Sqr(
+      Abs(MuInput))*Sqr(Ye(0,2)) + 0.25*(0.6*Sqr(g1) - Sqr(g2))*Sqr(AeInput(0,2))*
+      Sqr(Ye(0,2)) - Sqr(Abs(MuInput))*Sqr(Ye(0,2))*(Sqr(Ye(0,2)) + Sqr(Ye(1,2)) +
+      Sqr(Ye(2,2))))*TCC0(mseInput(0),mslInput(2),mslInput(2)) + (0.3*Sqr(g1)*Sqr(
+      Abs(MuInput))*Sqr(Ye(1,0)) - 0.3*Sqr(g1)*Sqr(AeInput(1,0))*Sqr(Ye(1,0)) -
+      Sqr(Abs(MuInput))*Sqr(Ye(1,0))*(Sqr(Ye(1,0)) + Sqr(Ye(1,1)) + Sqr(Ye(1,2))))
+      *TCC0(mseInput(1),mseInput(1),mslInput(0)) + (0.3*Sqr(g1)*Sqr(Abs(MuInput))*
+      Sqr(Ye(1,1)) - 0.3*Sqr(g1)*Sqr(AeInput(1,1))*Sqr(Ye(1,1)) - Sqr(Abs(MuInput)
+      )*Sqr(Ye(1,1))*(Sqr(Ye(1,0)) + Sqr(Ye(1,1)) + Sqr(Ye(1,2))))*TCC0(mseInput(1
+      ),mseInput(1),mslInput(1)) + (0.3*Sqr(g1)*Sqr(Abs(MuInput))*Sqr(Ye(1,2)) -
+      0.3*Sqr(g1)*Sqr(AeInput(1,2))*Sqr(Ye(1,2)) - Sqr(Abs(MuInput))*Sqr(Ye(1,2))*
+      (Sqr(Ye(1,0)) + Sqr(Ye(1,1)) + Sqr(Ye(1,2))))*TCC0(mseInput(1),mseInput(1),
+      mslInput(2)) + (0.25*(-0.6*Sqr(g1) + Sqr(g2))*Sqr(Abs(MuInput))*Sqr(Ye(1,0))
+      + 0.25*(0.6*Sqr(g1) - Sqr(g2))*Sqr(AeInput(1,0))*Sqr(Ye(1,0)) - Sqr(Abs(
+      MuInput))*Sqr(Ye(1,0))*(Sqr(Ye(0,0)) + Sqr(Ye(1,0)) + Sqr(Ye(2,0))))*TCC0(
+      mseInput(1),mslInput(0),mslInput(0)) + (0.25*(-0.6*Sqr(g1) + Sqr(g2))*Sqr(
+      Abs(MuInput))*Sqr(Ye(1,1)) + 0.25*(0.6*Sqr(g1) - Sqr(g2))*Sqr(AeInput(1,1))*
+      Sqr(Ye(1,1)) - Sqr(Abs(MuInput))*Sqr(Ye(1,1))*(Sqr(Ye(0,1)) + Sqr(Ye(1,1)) +
+      Sqr(Ye(2,1))))*TCC0(mseInput(1),mslInput(1),mslInput(1)) + (0.25*(-0.6*Sqr(
+      g1) + Sqr(g2))*Sqr(Abs(MuInput))*Sqr(Ye(1,2)) + 0.25*(0.6*Sqr(g1) - Sqr(g2))
+      *Sqr(AeInput(1,2))*Sqr(Ye(1,2)) - Sqr(Abs(MuInput))*Sqr(Ye(1,2))*(Sqr(Ye(0,2
+      )) + Sqr(Ye(1,2)) + Sqr(Ye(2,2))))*TCC0(mseInput(1),mslInput(2),mslInput(2))
+      + (0.3*Sqr(g1)*Sqr(Abs(MuInput))*Sqr(Ye(2,0)) - 0.3*Sqr(g1)*Sqr(AeInput(2,0)
+      )*Sqr(Ye(2,0)) - Sqr(Abs(MuInput))*Sqr(Ye(2,0))*(Sqr(Ye(2,0)) + Sqr(Ye(2,1))
+      + Sqr(Ye(2,2))))*TCC0(mseInput(2),mseInput(2),mslInput(0)) + (0.3*Sqr(g1)*
+      Sqr(Abs(MuInput))*Sqr(Ye(2,1)) - 0.3*Sqr(g1)*Sqr(AeInput(2,1))*Sqr(Ye(2,1))
+      - Sqr(Abs(MuInput))*Sqr(Ye(2,1))*(Sqr(Ye(2,0)) + Sqr(Ye(2,1)) + Sqr(Ye(2,2))
+      ))*TCC0(mseInput(2),mseInput(2),mslInput(1)) + (0.3*Sqr(g1)*Sqr(Abs(MuInput)
+      )*Sqr(Ye(2,2)) - 0.3*Sqr(g1)*Sqr(AeInput(2,2))*Sqr(Ye(2,2)) - Sqr(Abs(
+      MuInput))*Sqr(Ye(2,2))*(Sqr(Ye(2,0)) + Sqr(Ye(2,1)) + Sqr(Ye(2,2))))*TCC0(
+      mseInput(2),mseInput(2),mslInput(2)) + (0.25*(-0.6*Sqr(g1) + Sqr(g2))*Sqr(
+      Abs(MuInput))*Sqr(Ye(2,0)) + 0.25*(0.6*Sqr(g1) - Sqr(g2))*Sqr(AeInput(2,0))*
+      Sqr(Ye(2,0)) - Sqr(Abs(MuInput))*Sqr(Ye(2,0))*(Sqr(Ye(0,0)) + Sqr(Ye(1,0)) +
+      Sqr(Ye(2,0))))*TCC0(mseInput(2),mslInput(0),mslInput(0)) + (0.25*(-0.6*Sqr(
+      g1) + Sqr(g2))*Sqr(Abs(MuInput))*Sqr(Ye(2,1)) + 0.25*(0.6*Sqr(g1) - Sqr(g2))
+      *Sqr(AeInput(2,1))*Sqr(Ye(2,1)) - Sqr(Abs(MuInput))*Sqr(Ye(2,1))*(Sqr(Ye(0,1
+      )) + Sqr(Ye(1,1)) + Sqr(Ye(2,1))))*TCC0(mseInput(2),mslInput(1),mslInput(1))
+      + (0.25*(-0.6*Sqr(g1) + Sqr(g2))*Sqr(Abs(MuInput))*Sqr(Ye(2,2)) + 0.25*(0.6*
+      Sqr(g1) - Sqr(g2))*Sqr(AeInput(2,2))*Sqr(Ye(2,2)) - Sqr(Abs(MuInput))*Sqr(Ye
+      (2,2))*(Sqr(Ye(0,2)) + Sqr(Ye(1,2)) + Sqr(Ye(2,2))))*TCC0(mseInput(2),
+      mslInput(2),mslInput(2)) + (0.25*(-0.6*Sqr(g1) + 3*Sqr(g2))*Sqr(Abs(MuInput)
+      )*Sqr(Yu(0,0)) + 0.25*(0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(AuInput(0,0))*Sqr(Yu(0,0
+      )) - 3*Sqr(Abs(MuInput))*Sqr(Yu(0,0))*(Sqr(Yu(0,0)) + Sqr(Yu(1,0)) + Sqr(Yu(
+      2,0))))*TCC0(msqInput(0),msqInput(0),msuInput(0)) + (0.25*(-0.6*Sqr(g1) + 3*
+      Sqr(g2))*Sqr(Abs(MuInput))*Sqr(Yu(1,0)) + 0.25*(0.6*Sqr(g1) - 3*Sqr(g2))*Sqr
+      (AuInput(1,0))*Sqr(Yu(1,0)) - 3*Sqr(Abs(MuInput))*Sqr(Yu(1,0))*(Sqr(Yu(0,0))
+      + Sqr(Yu(1,0)) + Sqr(Yu(2,0))))*TCC0(msqInput(0),msqInput(0),msuInput(1)) +
+      (0.25*(-0.6*Sqr(g1) + 3*Sqr(g2))*Sqr(Abs(MuInput))*Sqr(Yu(2,0)) + 0.25*(0.6*
+      Sqr(g1) - 3*Sqr(g2))*Sqr(AuInput(2,0))*Sqr(Yu(2,0)) - 3*Sqr(Abs(MuInput))*
+      Sqr(Yu(2,0))*(Sqr(Yu(0,0)) + Sqr(Yu(1,0)) + Sqr(Yu(2,0))))*TCC0(msqInput(0),
+      msqInput(0),msuInput(2)) + (0.6*Sqr(g1)*Sqr(Abs(MuInput))*Sqr(Yu(0,0)) - 0.6
+      *Sqr(g1)*Sqr(AuInput(0,0))*Sqr(Yu(0,0)) - 3*Sqr(Abs(MuInput))*Sqr(Yu(0,0))*(
+      Sqr(Yu(0,0)) + Sqr(Yu(0,1)) + Sqr(Yu(0,2))))*TCC0(msqInput(0),msuInput(0),
+      msuInput(0)) + (0.6*Sqr(g1)*Sqr(Abs(MuInput))*Sqr(Yu(1,0)) - 0.6*Sqr(g1)*Sqr
+      (AuInput(1,0))*Sqr(Yu(1,0)) - 3*Sqr(Abs(MuInput))*Sqr(Yu(1,0))*(Sqr(Yu(1,0))
+      + Sqr(Yu(1,1)) + Sqr(Yu(1,2))))*TCC0(msqInput(0),msuInput(1),msuInput(1)) +
+      (0.6*Sqr(g1)*Sqr(Abs(MuInput))*Sqr(Yu(2,0)) - 0.6*Sqr(g1)*Sqr(AuInput(2,0))*
+      Sqr(Yu(2,0)) - 3*Sqr(Abs(MuInput))*Sqr(Yu(2,0))*(Sqr(Yu(2,0)) + Sqr(Yu(2,1))
+      + Sqr(Yu(2,2))))*TCC0(msqInput(0),msuInput(2),msuInput(2)) + (0.25*(-0.6*Sqr
+      (g1) + 3*Sqr(g2))*Sqr(Abs(MuInput))*Sqr(Yu(0,1)) + 0.25*(0.6*Sqr(g1) - 3*Sqr
+      (g2))*Sqr(AuInput(0,1))*Sqr(Yu(0,1)) - 3*Sqr(Abs(MuInput))*Sqr(Yu(0,1))*(Sqr
+      (Yu(0,1)) + Sqr(Yu(1,1)) + Sqr(Yu(2,1))))*TCC0(msqInput(1),msqInput(1),
+      msuInput(0)) + (0.25*(-0.6*Sqr(g1) + 3*Sqr(g2))*Sqr(Abs(MuInput))*Sqr(Yu(1,1
+      )) + 0.25*(0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(AuInput(1,1))*Sqr(Yu(1,1)) - 3*Sqr(
+      Abs(MuInput))*Sqr(Yu(1,1))*(Sqr(Yu(0,1)) + Sqr(Yu(1,1)) + Sqr(Yu(2,1))))*
+      TCC0(msqInput(1),msqInput(1),msuInput(1)) + (0.25*(-0.6*Sqr(g1) + 3*Sqr(g2))
+      *Sqr(Abs(MuInput))*Sqr(Yu(2,1)) + 0.25*(0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(AuInput
+      (2,1))*Sqr(Yu(2,1)) - 3*Sqr(Abs(MuInput))*Sqr(Yu(2,1))*(Sqr(Yu(0,1)) + Sqr(
+      Yu(1,1)) + Sqr(Yu(2,1))))*TCC0(msqInput(1),msqInput(1),msuInput(2)) + (0.6*
+      Sqr(g1)*Sqr(Abs(MuInput))*Sqr(Yu(0,1)) - 0.6*Sqr(g1)*Sqr(AuInput(0,1))*Sqr(
+      Yu(0,1)) - 3*Sqr(Abs(MuInput))*Sqr(Yu(0,1))*(Sqr(Yu(0,0)) + Sqr(Yu(0,1)) +
+      Sqr(Yu(0,2))))*TCC0(msqInput(1),msuInput(0),msuInput(0)) + (0.6*Sqr(g1)*Sqr(
+      Abs(MuInput))*Sqr(Yu(1,1)) - 0.6*Sqr(g1)*Sqr(AuInput(1,1))*Sqr(Yu(1,1)) - 3*
+      Sqr(Abs(MuInput))*Sqr(Yu(1,1))*(Sqr(Yu(1,0)) + Sqr(Yu(1,1)) + Sqr(Yu(1,2))))
+      *TCC0(msqInput(1),msuInput(1),msuInput(1)) + (0.6*Sqr(g1)*Sqr(Abs(MuInput))*
+      Sqr(Yu(2,1)) - 0.6*Sqr(g1)*Sqr(AuInput(2,1))*Sqr(Yu(2,1)) - 3*Sqr(Abs(
+      MuInput))*Sqr(Yu(2,1))*(Sqr(Yu(2,0)) + Sqr(Yu(2,1)) + Sqr(Yu(2,2))))*TCC0(
+      msqInput(1),msuInput(2),msuInput(2)) + (0.25*(-0.6*Sqr(g1) + 3*Sqr(g2))*Sqr(
+      Abs(MuInput))*Sqr(Yu(0,2)) + 0.25*(0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(AuInput(0,2)
+      )*Sqr(Yu(0,2)) - 3*Sqr(Abs(MuInput))*Sqr(Yu(0,2))*(Sqr(Yu(0,2)) + Sqr(Yu(1,2
+      )) + Sqr(Yu(2,2))))*TCC0(msqInput(2),msqInput(2),msuInput(0)) + (0.25*(-0.6*
+      Sqr(g1) + 3*Sqr(g2))*Sqr(Abs(MuInput))*Sqr(Yu(1,2)) + 0.25*(0.6*Sqr(g1) - 3*
+      Sqr(g2))*Sqr(AuInput(1,2))*Sqr(Yu(1,2)) - 3*Sqr(Abs(MuInput))*Sqr(Yu(1,2))*(
+      Sqr(Yu(0,2)) + Sqr(Yu(1,2)) + Sqr(Yu(2,2))))*TCC0(msqInput(2),msqInput(2),
+      msuInput(1)) + (0.25*(-0.6*Sqr(g1) + 3*Sqr(g2))*Sqr(Abs(MuInput))*Sqr(Yu(2,2
+      )) + 0.25*(0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(AuInput(2,2))*Sqr(Yu(2,2)) - 3*Sqr(
+      Abs(MuInput))*Sqr(Yu(2,2))*(Sqr(Yu(0,2)) + Sqr(Yu(1,2)) + Sqr(Yu(2,2))))*
+      TCC0(msqInput(2),msqInput(2),msuInput(2)) + (0.6*Sqr(g1)*Sqr(Abs(MuInput))*
+      Sqr(Yu(0,2)) - 0.6*Sqr(g1)*Sqr(AuInput(0,2))*Sqr(Yu(0,2)) - 3*Sqr(Abs(
+      MuInput))*Sqr(Yu(0,2))*(Sqr(Yu(0,0)) + Sqr(Yu(0,1)) + Sqr(Yu(0,2))))*TCC0(
+      msqInput(2),msuInput(0),msuInput(0)) + (0.6*Sqr(g1)*Sqr(Abs(MuInput))*Sqr(Yu
+      (1,2)) - 0.6*Sqr(g1)*Sqr(AuInput(1,2))*Sqr(Yu(1,2)) - 3*Sqr(Abs(MuInput))*
+      Sqr(Yu(1,2))*(Sqr(Yu(1,0)) + Sqr(Yu(1,1)) + Sqr(Yu(1,2))))*TCC0(msqInput(2),
+      msuInput(1),msuInput(1)) + (0.6*Sqr(g1)*Sqr(Abs(MuInput))*Sqr(Yu(2,2)) - 0.6
+      *Sqr(g1)*Sqr(AuInput(2,2))*Sqr(Yu(2,2)) - 3*Sqr(Abs(MuInput))*Sqr(Yu(2,2))*(
+      Sqr(Yu(2,0)) + Sqr(Yu(2,1)) + Sqr(Yu(2,2))))*TCC0(msqInput(2),msuInput(2),
+      msuInput(2)) - 6*Quad(Yd(0,0))*Sqr(Abs(MuInput))*Sqr(AdInput(0,0))*TCD0(
+      msdInput(0),msdInput(0),msqInput(0),msqInput(0)) - 6*Quad(Yd(0,1))*Sqr(Abs(
+      MuInput))*Sqr(AdInput(0,1))*TCD0(msdInput(0),msdInput(0),msqInput(1),
+      msqInput(1)) - 6*Quad(Yd(0,2))*Sqr(Abs(MuInput))*Sqr(AdInput(0,2))*TCD0(
+      msdInput(0),msdInput(0),msqInput(2),msqInput(2)) - 6*Quad(Yd(1,0))*Sqr(Abs(
+      MuInput))*Sqr(AdInput(1,0))*TCD0(msdInput(1),msdInput(1),msqInput(0),
+      msqInput(0)) - 6*Quad(Yd(1,1))*Sqr(Abs(MuInput))*Sqr(AdInput(1,1))*TCD0(
+      msdInput(1),msdInput(1),msqInput(1),msqInput(1)) - 6*Quad(Yd(1,2))*Sqr(Abs(
+      MuInput))*Sqr(AdInput(1,2))*TCD0(msdInput(1),msdInput(1),msqInput(2),
+      msqInput(2)) - 6*Quad(Yd(2,0))*Sqr(Abs(MuInput))*Sqr(AdInput(2,0))*TCD0(
+      msdInput(2),msdInput(2),msqInput(0),msqInput(0)) - 6*Quad(Yd(2,1))*Sqr(Abs(
+      MuInput))*Sqr(AdInput(2,1))*TCD0(msdInput(2),msdInput(2),msqInput(1),
+      msqInput(1)) - 6*Quad(Yd(2,2))*Sqr(Abs(MuInput))*Sqr(AdInput(2,2))*TCD0(
+      msdInput(2),msdInput(2),msqInput(2),msqInput(2)) - 2*Quad(Ye(0,0))*Sqr(Abs(
+      MuInput))*Sqr(AeInput(0,0))*TCD0(mseInput(0),mseInput(0),mslInput(0),
+      mslInput(0)) - 2*Quad(Ye(0,1))*Sqr(Abs(MuInput))*Sqr(AeInput(0,1))*TCD0(
+      mseInput(0),mseInput(0),mslInput(1),mslInput(1)) - 2*Quad(Ye(0,2))*Sqr(Abs(
+      MuInput))*Sqr(AeInput(0,2))*TCD0(mseInput(0),mseInput(0),mslInput(2),
+      mslInput(2)) - 2*Quad(Ye(1,0))*Sqr(Abs(MuInput))*Sqr(AeInput(1,0))*TCD0(
+      mseInput(1),mseInput(1),mslInput(0),mslInput(0)) - 2*Quad(Ye(1,1))*Sqr(Abs(
+      MuInput))*Sqr(AeInput(1,1))*TCD0(mseInput(1),mseInput(1),mslInput(1),
+      mslInput(1)) - 2*Quad(Ye(1,2))*Sqr(Abs(MuInput))*Sqr(AeInput(1,2))*TCD0(
+      mseInput(1),mseInput(1),mslInput(2),mslInput(2)) - 2*Quad(Ye(2,0))*Sqr(Abs(
+      MuInput))*Sqr(AeInput(2,0))*TCD0(mseInput(2),mseInput(2),mslInput(0),
+      mslInput(0)) - 2*Quad(Ye(2,1))*Sqr(Abs(MuInput))*Sqr(AeInput(2,1))*TCD0(
+      mseInput(2),mseInput(2),mslInput(1),mslInput(1)) - 2*Quad(Ye(2,2))*Sqr(Abs(
+      MuInput))*Sqr(AeInput(2,2))*TCD0(mseInput(2),mseInput(2),mslInput(2),
+      mslInput(2)) - 6*Quad(Yu(0,0))*Sqr(Abs(MuInput))*Sqr(AuInput(0,0))*TCD0(
+      msqInput(0),msqInput(0),msuInput(0),msuInput(0)) - 6*Quad(Yu(1,0))*Sqr(Abs(
+      MuInput))*Sqr(AuInput(1,0))*TCD0(msqInput(0),msqInput(0),msuInput(1),
+      msuInput(1)) - 6*Quad(Yu(2,0))*Sqr(Abs(MuInput))*Sqr(AuInput(2,0))*TCD0(
+      msqInput(0),msqInput(0),msuInput(2),msuInput(2)) - 6*Quad(Yu(0,1))*Sqr(Abs(
+      MuInput))*Sqr(AuInput(0,1))*TCD0(msqInput(1),msqInput(1),msuInput(0),
+      msuInput(0)) - 6*Quad(Yu(1,1))*Sqr(Abs(MuInput))*Sqr(AuInput(1,1))*TCD0(
+      msqInput(1),msqInput(1),msuInput(1),msuInput(1)) - 6*Quad(Yu(2,1))*Sqr(Abs(
+      MuInput))*Sqr(AuInput(2,1))*TCD0(msqInput(1),msqInput(1),msuInput(2),
+      msuInput(2)) - 6*Quad(Yu(0,2))*Sqr(Abs(MuInput))*Sqr(AuInput(0,2))*TCD0(
+      msqInput(2),msqInput(2),msuInput(0),msuInput(0)) - 6*Quad(Yu(1,2))*Sqr(Abs(
+      MuInput))*Sqr(AuInput(1,2))*TCD0(msqInput(2),msqInput(2),msuInput(1),
+      msuInput(1)) - 6*Quad(Yu(2,2))*Sqr(Abs(MuInput))*Sqr(AuInput(2,2))*TCD0(
+      msqInput(2),msqInput(2),msuInput(2),msuInput(2)) + 0.36*Quad(g1)*(-0.25 + (
+      0.5*Sqr(Abs(M1Input)) + Sqr(Abs(MuInput)))*TCD2t(M1Input,M1Input,Abs(MuInput
+      ),Abs(MuInput)) + 0.5*TCD4t(M1Input,M1Input,Abs(MuInput),Abs(MuInput),SCALE)
+      ) + 0.6*Sqr(g1)*Sqr(g2)*(-0.5 + (M1Input*M2Input + 2*Sqr(Abs(MuInput)))*
+      TCD2t(M1Input,M2Input,Abs(MuInput),Abs(MuInput)) + TCD4t(M1Input,M2Input,Abs
+      (MuInput),Abs(MuInput),SCALE)) + Quad(g2)*(-0.75 + (2.5*Sqr(Abs(M2Input)) +
+      3*Sqr(Abs(MuInput)))*TCD2t(M2Input,M2Input,Abs(MuInput),Abs(MuInput)) + 0.5*
+      TCD4t(M2Input,M2Input,Abs(MuInput),Abs(MuInput),SCALE)) - 3*AdInput(0,1)*Sqr
+      (Abs(MuInput))*TCD0(msdInput(0),msdInput(0),msqInput(0),msqInput(1))*Yd(0,0)
+      *Yd(0,1)*(AdInput(0,0)*Yd(0,0)*Yd(0,1) + AdInput(0,1)*Yd(0,0)*Yd(0,1)) - 3*
+      AdInput(0,0)*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(0),msqInput(1),
+      msqInput(0))*Yd(0,0)*Yd(0,1)*(AdInput(0,0)*Yd(0,0)*Yd(0,1) + AdInput(0,1)*Yd
+      (0,0)*Yd(0,1)) - 3*AdInput(0,2)*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(
+      0),msqInput(0),msqInput(2))*Yd(0,0)*Yd(0,2)*(AdInput(0,0)*Yd(0,0)*Yd(0,2) +
+      AdInput(0,2)*Yd(0,0)*Yd(0,2)) - 3*AdInput(0,0)*Sqr(Abs(MuInput))*TCD0(
+      msdInput(0),msdInput(0),msqInput(2),msqInput(0))*Yd(0,0)*Yd(0,2)*(AdInput(0,
+      0)*Yd(0,0)*Yd(0,2) + AdInput(0,2)*Yd(0,0)*Yd(0,2)) - 3*AdInput(0,2)*Sqr(Abs(
+      MuInput))*TCD0(msdInput(0),msdInput(0),msqInput(1),msqInput(2))*Yd(0,1)*Yd(0
+      ,2)*(AdInput(0,1)*Yd(0,1)*Yd(0,2) + AdInput(0,2)*Yd(0,1)*Yd(0,2)) - 3*
+      AdInput(0,1)*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(0),msqInput(2),
+      msqInput(1))*Yd(0,1)*Yd(0,2)*(AdInput(0,1)*Yd(0,1)*Yd(0,2) + AdInput(0,2)*Yd
+      (0,1)*Yd(0,2)) - 3*AdInput(0,0)*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(
+      1),msqInput(0),msqInput(0))*Yd(0,0)*Yd(1,0)*(AdInput(0,0)*Yd(0,0)*Yd(1,0) +
+      AdInput(1,0)*Yd(0,0)*Yd(1,0)) - 3*AdInput(1,0)*Sqr(Abs(MuInput))*TCD0(
+      msdInput(1),msdInput(0),msqInput(0),msqInput(0))*Yd(0,0)*Yd(1,0)*(AdInput(0,
+      0)*Yd(0,0)*Yd(1,0) + AdInput(1,0)*Yd(0,0)*Yd(1,0)) - 3*AdInput(0,0)*Sqr(Abs(
+      MuInput))*TCD0(msdInput(0),msdInput(1),msqInput(1),msqInput(0))*Yd(0,0)*(
+      AdInput(0,1)*Yd(0,1)*Yd(1,0) + AdInput(1,0)*Yd(0,1)*Yd(1,0))*Yd(1,1) - 3*
+      AdInput(1,1)*Sqr(Abs(MuInput))*TCD0(msdInput(1),msdInput(0),msqInput(0),
+      msqInput(1))*Yd(0,0)*(AdInput(0,1)*Yd(0,1)*Yd(1,0) + AdInput(1,0)*Yd(0,1)*Yd
+      (1,0))*Yd(1,1) - 3*AdInput(0,1)*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(
+      1),msqInput(0),msqInput(1))*Yd(0,1)*Yd(1,0)*(AdInput(0,0)*Yd(0,0)*Yd(1,1) +
+      AdInput(1,1)*Yd(0,0)*Yd(1,1)) - 3*AdInput(1,0)*Sqr(Abs(MuInput))*TCD0(
+      msdInput(1),msdInput(0),msqInput(1),msqInput(0))*Yd(0,1)*Yd(1,0)*(AdInput(0,
+      0)*Yd(0,0)*Yd(1,1) + AdInput(1,1)*Yd(0,0)*Yd(1,1)) - 3*AdInput(0,1)*Sqr(Abs(
+      MuInput))*TCD0(msdInput(0),msdInput(1),msqInput(1),msqInput(1))*Yd(0,1)*Yd(1
+      ,1)*(AdInput(0,1)*Yd(0,1)*Yd(1,1) + AdInput(1,1)*Yd(0,1)*Yd(1,1)) - 3*
+      AdInput(1,1)*Sqr(Abs(MuInput))*TCD0(msdInput(1),msdInput(0),msqInput(1),
+      msqInput(1))*Yd(0,1)*Yd(1,1)*(AdInput(0,1)*Yd(0,1)*Yd(1,1) + AdInput(1,1)*Yd
+      (0,1)*Yd(1,1)) - 3*AdInput(1,1)*Sqr(Abs(MuInput))*TCD0(msdInput(1),msdInput(
+      1),msqInput(0),msqInput(1))*Yd(1,0)*Yd(1,1)*(AdInput(1,0)*Yd(1,0)*Yd(1,1) +
+      AdInput(1,1)*Yd(1,0)*Yd(1,1)) - 3*AdInput(1,0)*Sqr(Abs(MuInput))*TCD0(
+      msdInput(1),msdInput(1),msqInput(1),msqInput(0))*Yd(1,0)*Yd(1,1)*(AdInput(1,
+      0)*Yd(1,0)*Yd(1,1) + AdInput(1,1)*Yd(1,0)*Yd(1,1)) - 3*AdInput(0,0)*Sqr(Abs(
+      MuInput))*TCD0(msdInput(0),msdInput(1),msqInput(2),msqInput(0))*Yd(0,0)*(
+      AdInput(0,2)*Yd(0,2)*Yd(1,0) + AdInput(1,0)*Yd(0,2)*Yd(1,0))*Yd(1,2) - 3*
+      AdInput(1,2)*Sqr(Abs(MuInput))*TCD0(msdInput(1),msdInput(0),msqInput(0),
+      msqInput(2))*Yd(0,0)*(AdInput(0,2)*Yd(0,2)*Yd(1,0) + AdInput(1,0)*Yd(0,2)*Yd
+      (1,0))*Yd(1,2) - 3*AdInput(0,1)*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(
+      1),msqInput(2),msqInput(1))*Yd(0,1)*(AdInput(0,2)*Yd(0,2)*Yd(1,1) + AdInput(
+      1,1)*Yd(0,2)*Yd(1,1))*Yd(1,2) - 3*AdInput(1,2)*Sqr(Abs(MuInput))*TCD0(
+      msdInput(1),msdInput(0),msqInput(1),msqInput(2))*Yd(0,1)*(AdInput(0,2)*Yd(0,
+      2)*Yd(1,1) + AdInput(1,1)*Yd(0,2)*Yd(1,1))*Yd(1,2) - 3*AdInput(0,2)*Sqr(Abs(
+      MuInput))*TCD0(msdInput(0),msdInput(1),msqInput(0),msqInput(2))*Yd(0,2)*Yd(1
+      ,0)*(AdInput(0,0)*Yd(0,0)*Yd(1,2) + AdInput(1,2)*Yd(0,0)*Yd(1,2)) - 3*
+      AdInput(1,0)*Sqr(Abs(MuInput))*TCD0(msdInput(1),msdInput(0),msqInput(2),
+      msqInput(0))*Yd(0,2)*Yd(1,0)*(AdInput(0,0)*Yd(0,0)*Yd(1,2) + AdInput(1,2)*Yd
+      (0,0)*Yd(1,2)) - 3*AdInput(0,2)*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(
+      1),msqInput(1),msqInput(2))*Yd(0,2)*Yd(1,1)*(AdInput(0,1)*Yd(0,1)*Yd(1,2) +
+      AdInput(1,2)*Yd(0,1)*Yd(1,2)) - 3*AdInput(1,1)*Sqr(Abs(MuInput))*TCD0(
+      msdInput(1),msdInput(0),msqInput(2),msqInput(1))*Yd(0,2)*Yd(1,1)*(AdInput(0,
+      1)*Yd(0,1)*Yd(1,2) + AdInput(1,2)*Yd(0,1)*Yd(1,2)) - 3*Sqr(Abs(MuInput))*
+      TCC0(msdInput(0),msdInput(1),msqInput(0))*Yd(0,0)*Yd(1,0)*(Yd(0,0)*Yd(1,0) +
+      Yd(0,1)*Yd(1,1) + Yd(0,2)*Yd(1,2)) - 3*Sqr(Abs(MuInput))*TCC0(msdInput(1),
+      msdInput(0),msqInput(0))*Yd(0,0)*Yd(1,0)*(Yd(0,0)*Yd(1,0) + Yd(0,1)*Yd(1,1)
+      + Yd(0,2)*Yd(1,2)) - 3*Sqr(Abs(MuInput))*TCC0(msdInput(0),msdInput(1),
+      msqInput(1))*Yd(0,1)*Yd(1,1)*(Yd(0,0)*Yd(1,0) + Yd(0,1)*Yd(1,1) + Yd(0,2)*Yd
+      (1,2)) - 3*Sqr(Abs(MuInput))*TCC0(msdInput(1),msdInput(0),msqInput(1))*Yd(0,
+      1)*Yd(1,1)*(Yd(0,0)*Yd(1,0) + Yd(0,1)*Yd(1,1) + Yd(0,2)*Yd(1,2)) - 3*Sqr(Abs
+      (MuInput))*TCC0(msdInput(0),msdInput(1),msqInput(2))*Yd(0,2)*Yd(1,2)*(Yd(0,0
+      )*Yd(1,0) + Yd(0,1)*Yd(1,1) + Yd(0,2)*Yd(1,2)) - 3*Sqr(Abs(MuInput))*TCC0(
+      msdInput(1),msdInput(0),msqInput(2))*Yd(0,2)*Yd(1,2)*(Yd(0,0)*Yd(1,0) + Yd(0
+      ,1)*Yd(1,1) + Yd(0,2)*Yd(1,2)) - 3*AdInput(0,2)*Sqr(Abs(MuInput))*TCD0(
+      msdInput(0),msdInput(1),msqInput(2),msqInput(2))*Yd(0,2)*Yd(1,2)*(AdInput(0,
+      2)*Yd(0,2)*Yd(1,2) + AdInput(1,2)*Yd(0,2)*Yd(1,2)) - 3*AdInput(1,2)*Sqr(Abs(
+      MuInput))*TCD0(msdInput(1),msdInput(0),msqInput(2),msqInput(2))*Yd(0,2)*Yd(1
+      ,2)*(AdInput(0,2)*Yd(0,2)*Yd(1,2) + AdInput(1,2)*Yd(0,2)*Yd(1,2)) - 3*
+      AdInput(1,2)*Sqr(Abs(MuInput))*TCD0(msdInput(1),msdInput(1),msqInput(0),
+      msqInput(2))*Yd(1,0)*Yd(1,2)*(AdInput(1,0)*Yd(1,0)*Yd(1,2) + AdInput(1,2)*Yd
+      (1,0)*Yd(1,2)) - 3*AdInput(1,0)*Sqr(Abs(MuInput))*TCD0(msdInput(1),msdInput(
+      1),msqInput(2),msqInput(0))*Yd(1,0)*Yd(1,2)*(AdInput(1,0)*Yd(1,0)*Yd(1,2) +
+      AdInput(1,2)*Yd(1,0)*Yd(1,2)) - 3*AdInput(1,2)*Sqr(Abs(MuInput))*TCD0(
+      msdInput(1),msdInput(1),msqInput(1),msqInput(2))*Yd(1,1)*Yd(1,2)*(AdInput(1,
+      1)*Yd(1,1)*Yd(1,2) + AdInput(1,2)*Yd(1,1)*Yd(1,2)) - 3*AdInput(1,1)*Sqr(Abs(
+      MuInput))*TCD0(msdInput(1),msdInput(1),msqInput(2),msqInput(1))*Yd(1,1)*Yd(1
+      ,2)*(AdInput(1,1)*Yd(1,1)*Yd(1,2) + AdInput(1,2)*Yd(1,1)*Yd(1,2)) - 3*
+      AdInput(0,0)*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(2),msqInput(0),
+      msqInput(0))*Yd(0,0)*Yd(2,0)*(AdInput(0,0)*Yd(0,0)*Yd(2,0) + AdInput(2,0)*Yd
+      (0,0)*Yd(2,0)) - 3*AdInput(2,0)*Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(
+      0),msqInput(0),msqInput(0))*Yd(0,0)*Yd(2,0)*(AdInput(0,0)*Yd(0,0)*Yd(2,0) +
+      AdInput(2,0)*Yd(0,0)*Yd(2,0)) - 3*AdInput(1,0)*Sqr(Abs(MuInput))*TCD0(
+      msdInput(1),msdInput(2),msqInput(0),msqInput(0))*Yd(1,0)*Yd(2,0)*(AdInput(1,
+      0)*Yd(1,0)*Yd(2,0) + AdInput(2,0)*Yd(1,0)*Yd(2,0)) - 3*AdInput(2,0)*Sqr(Abs(
+      MuInput))*TCD0(msdInput(2),msdInput(1),msqInput(0),msqInput(0))*Yd(1,0)*Yd(2
+      ,0)*(AdInput(1,0)*Yd(1,0)*Yd(2,0) + AdInput(2,0)*Yd(1,0)*Yd(2,0)) - 3*
+      AdInput(0,0)*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(2),msqInput(1),
+      msqInput(0))*Yd(0,0)*(AdInput(0,1)*Yd(0,1)*Yd(2,0) + AdInput(2,0)*Yd(0,1)*Yd
+      (2,0))*Yd(2,1) - 3*AdInput(2,1)*Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(
+      0),msqInput(0),msqInput(1))*Yd(0,0)*(AdInput(0,1)*Yd(0,1)*Yd(2,0) + AdInput(
+      2,0)*Yd(0,1)*Yd(2,0))*Yd(2,1) - 3*AdInput(1,0)*Sqr(Abs(MuInput))*TCD0(
+      msdInput(1),msdInput(2),msqInput(1),msqInput(0))*Yd(1,0)*(AdInput(1,1)*Yd(1,
+      1)*Yd(2,0) + AdInput(2,0)*Yd(1,1)*Yd(2,0))*Yd(2,1) - 3*AdInput(2,1)*Sqr(Abs(
+      MuInput))*TCD0(msdInput(2),msdInput(1),msqInput(0),msqInput(1))*Yd(1,0)*(
+      AdInput(1,1)*Yd(1,1)*Yd(2,0) + AdInput(2,0)*Yd(1,1)*Yd(2,0))*Yd(2,1) - 3*
+      AdInput(0,1)*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(2),msqInput(0),
+      msqInput(1))*Yd(0,1)*Yd(2,0)*(AdInput(0,0)*Yd(0,0)*Yd(2,1) + AdInput(2,1)*Yd
+      (0,0)*Yd(2,1)) - 3*AdInput(2,0)*Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(
+      0),msqInput(1),msqInput(0))*Yd(0,1)*Yd(2,0)*(AdInput(0,0)*Yd(0,0)*Yd(2,1) +
+      AdInput(2,1)*Yd(0,0)*Yd(2,1)) - 3*AdInput(0,1)*Sqr(Abs(MuInput))*TCD0(
+      msdInput(0),msdInput(2),msqInput(1),msqInput(1))*Yd(0,1)*Yd(2,1)*(AdInput(0,
+      1)*Yd(0,1)*Yd(2,1) + AdInput(2,1)*Yd(0,1)*Yd(2,1)) - 3*AdInput(2,1)*Sqr(Abs(
+      MuInput))*TCD0(msdInput(2),msdInput(0),msqInput(1),msqInput(1))*Yd(0,1)*Yd(2
+      ,1)*(AdInput(0,1)*Yd(0,1)*Yd(2,1) + AdInput(2,1)*Yd(0,1)*Yd(2,1)) - 3*
+      AdInput(1,1)*Sqr(Abs(MuInput))*TCD0(msdInput(1),msdInput(2),msqInput(0),
+      msqInput(1))*Yd(1,1)*Yd(2,0)*(AdInput(1,0)*Yd(1,0)*Yd(2,1) + AdInput(2,1)*Yd
+      (1,0)*Yd(2,1)) - 3*AdInput(2,0)*Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(
+      1),msqInput(1),msqInput(0))*Yd(1,1)*Yd(2,0)*(AdInput(1,0)*Yd(1,0)*Yd(2,1) +
+      AdInput(2,1)*Yd(1,0)*Yd(2,1)) - 3*AdInput(1,1)*Sqr(Abs(MuInput))*TCD0(
+      msdInput(1),msdInput(2),msqInput(1),msqInput(1))*Yd(1,1)*Yd(2,1)*(AdInput(1,
+      1)*Yd(1,1)*Yd(2,1) + AdInput(2,1)*Yd(1,1)*Yd(2,1)) - 3*AdInput(2,1)*Sqr(Abs(
+      MuInput))*TCD0(msdInput(2),msdInput(1),msqInput(1),msqInput(1))*Yd(1,1)*Yd(2
+      ,1)*(AdInput(1,1)*Yd(1,1)*Yd(2,1) + AdInput(2,1)*Yd(1,1)*Yd(2,1)) - 3*Sqr(
+      Abs(MuInput))*TCC0(msdInput(0),msqInput(0),msqInput(1))*Yd(0,0)*Yd(0,1)*(Yd(
+      0,0)*Yd(0,1) + Yd(1,0)*Yd(1,1) + Yd(2,0)*Yd(2,1)) - 3*Sqr(Abs(MuInput))*TCC0
+      (msdInput(0),msqInput(1),msqInput(0))*Yd(0,0)*Yd(0,1)*(Yd(0,0)*Yd(0,1) + Yd(
+      1,0)*Yd(1,1) + Yd(2,0)*Yd(2,1)) - 3*Sqr(Abs(MuInput))*TCC0(msdInput(1),
+      msqInput(0),msqInput(1))*Yd(1,0)*Yd(1,1)*(Yd(0,0)*Yd(0,1) + Yd(1,0)*Yd(1,1)
+      + Yd(2,0)*Yd(2,1)) - 3*Sqr(Abs(MuInput))*TCC0(msdInput(1),msqInput(1),
+      msqInput(0))*Yd(1,0)*Yd(1,1)*(Yd(0,0)*Yd(0,1) + Yd(1,0)*Yd(1,1) + Yd(2,0)*Yd
+      (2,1)) - 3*Sqr(Abs(MuInput))*TCC0(msdInput(2),msqInput(0),msqInput(1))*Yd(2,
+      0)*Yd(2,1)*(Yd(0,0)*Yd(0,1) + Yd(1,0)*Yd(1,1) + Yd(2,0)*Yd(2,1)) - 3*Sqr(Abs
+      (MuInput))*TCC0(msdInput(2),msqInput(1),msqInput(0))*Yd(2,0)*Yd(2,1)*(Yd(0,0
+      )*Yd(0,1) + Yd(1,0)*Yd(1,1) + Yd(2,0)*Yd(2,1)) - 3*AdInput(2,1)*Sqr(Abs(
+      MuInput))*TCD0(msdInput(2),msdInput(2),msqInput(0),msqInput(1))*Yd(2,0)*Yd(2
+      ,1)*(AdInput(2,0)*Yd(2,0)*Yd(2,1) + AdInput(2,1)*Yd(2,0)*Yd(2,1)) - 3*
+      AdInput(2,0)*Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(2),msqInput(1),
+      msqInput(0))*Yd(2,0)*Yd(2,1)*(AdInput(2,0)*Yd(2,0)*Yd(2,1) + AdInput(2,1)*Yd
+      (2,0)*Yd(2,1)) - 3*AdInput(0,0)*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(
+      2),msqInput(2),msqInput(0))*Yd(0,0)*(AdInput(0,2)*Yd(0,2)*Yd(2,0) + AdInput(
+      2,0)*Yd(0,2)*Yd(2,0))*Yd(2,2) - 3*AdInput(2,2)*Sqr(Abs(MuInput))*TCD0(
+      msdInput(2),msdInput(0),msqInput(0),msqInput(2))*Yd(0,0)*(AdInput(0,2)*Yd(0,
+      2)*Yd(2,0) + AdInput(2,0)*Yd(0,2)*Yd(2,0))*Yd(2,2) - 3*AdInput(1,0)*Sqr(Abs(
+      MuInput))*TCD0(msdInput(1),msdInput(2),msqInput(2),msqInput(0))*Yd(1,0)*(
+      AdInput(1,2)*Yd(1,2)*Yd(2,0) + AdInput(2,0)*Yd(1,2)*Yd(2,0))*Yd(2,2) - 3*
+      AdInput(2,2)*Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(1),msqInput(0),
+      msqInput(2))*Yd(1,0)*(AdInput(1,2)*Yd(1,2)*Yd(2,0) + AdInput(2,0)*Yd(1,2)*Yd
+      (2,0))*Yd(2,2) - 3*AdInput(0,1)*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(
+      2),msqInput(2),msqInput(1))*Yd(0,1)*(AdInput(0,2)*Yd(0,2)*Yd(2,1) + AdInput(
+      2,1)*Yd(0,2)*Yd(2,1))*Yd(2,2) - 3*AdInput(2,2)*Sqr(Abs(MuInput))*TCD0(
+      msdInput(2),msdInput(0),msqInput(1),msqInput(2))*Yd(0,1)*(AdInput(0,2)*Yd(0,
+      2)*Yd(2,1) + AdInput(2,1)*Yd(0,2)*Yd(2,1))*Yd(2,2) - 3*AdInput(1,1)*Sqr(Abs(
+      MuInput))*TCD0(msdInput(1),msdInput(2),msqInput(2),msqInput(1))*Yd(1,1)*(
+      AdInput(1,2)*Yd(1,2)*Yd(2,1) + AdInput(2,1)*Yd(1,2)*Yd(2,1))*Yd(2,2) - 3*
+      AdInput(2,2)*Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(1),msqInput(1),
+      msqInput(2))*Yd(1,1)*(AdInput(1,2)*Yd(1,2)*Yd(2,1) + AdInput(2,1)*Yd(1,2)*Yd
+      (2,1))*Yd(2,2) - 3*AdInput(0,2)*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(
+      2),msqInput(0),msqInput(2))*Yd(0,2)*Yd(2,0)*(AdInput(0,0)*Yd(0,0)*Yd(2,2) +
+      AdInput(2,2)*Yd(0,0)*Yd(2,2)) - 3*AdInput(2,0)*Sqr(Abs(MuInput))*TCD0(
+      msdInput(2),msdInput(0),msqInput(2),msqInput(0))*Yd(0,2)*Yd(2,0)*(AdInput(0,
+      0)*Yd(0,0)*Yd(2,2) + AdInput(2,2)*Yd(0,0)*Yd(2,2)) - 3*AdInput(0,2)*Sqr(Abs(
+      MuInput))*TCD0(msdInput(0),msdInput(2),msqInput(1),msqInput(2))*Yd(0,2)*Yd(2
+      ,1)*(AdInput(0,1)*Yd(0,1)*Yd(2,2) + AdInput(2,2)*Yd(0,1)*Yd(2,2)) - 3*
+      AdInput(2,1)*Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(0),msqInput(2),
+      msqInput(1))*Yd(0,2)*Yd(2,1)*(AdInput(0,1)*Yd(0,1)*Yd(2,2) + AdInput(2,2)*Yd
+      (0,1)*Yd(2,2)) - 3*Sqr(Abs(MuInput))*TCC0(msdInput(0),msdInput(2),msqInput(0
+      ))*Yd(0,0)*Yd(2,0)*(Yd(0,0)*Yd(2,0) + Yd(0,1)*Yd(2,1) + Yd(0,2)*Yd(2,2)) - 3
+      *Sqr(Abs(MuInput))*TCC0(msdInput(2),msdInput(0),msqInput(0))*Yd(0,0)*Yd(2,0)
+      *(Yd(0,0)*Yd(2,0) + Yd(0,1)*Yd(2,1) + Yd(0,2)*Yd(2,2)) - 3*Sqr(Abs(MuInput))
+      *TCC0(msdInput(0),msdInput(2),msqInput(1))*Yd(0,1)*Yd(2,1)*(Yd(0,0)*Yd(2,0)
+      + Yd(0,1)*Yd(2,1) + Yd(0,2)*Yd(2,2)) - 3*Sqr(Abs(MuInput))*TCC0(msdInput(2),
+      msdInput(0),msqInput(1))*Yd(0,1)*Yd(2,1)*(Yd(0,0)*Yd(2,0) + Yd(0,1)*Yd(2,1)
+      + Yd(0,2)*Yd(2,2)) - 3*Sqr(Abs(MuInput))*TCC0(msdInput(0),msdInput(2),
+      msqInput(2))*Yd(0,2)*Yd(2,2)*(Yd(0,0)*Yd(2,0) + Yd(0,1)*Yd(2,1) + Yd(0,2)*Yd
+      (2,2)) - 3*Sqr(Abs(MuInput))*TCC0(msdInput(2),msdInput(0),msqInput(2))*Yd(0,
+      2)*Yd(2,2)*(Yd(0,0)*Yd(2,0) + Yd(0,1)*Yd(2,1) + Yd(0,2)*Yd(2,2)) - 3*AdInput
+      (0,2)*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(2),msqInput(2),msqInput(2)
+      )*Yd(0,2)*Yd(2,2)*(AdInput(0,2)*Yd(0,2)*Yd(2,2) + AdInput(2,2)*Yd(0,2)*Yd(2,
+      2)) - 3*AdInput(2,2)*Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(0),msqInput
+      (2),msqInput(2))*Yd(0,2)*Yd(2,2)*(AdInput(0,2)*Yd(0,2)*Yd(2,2) + AdInput(2,2
+      )*Yd(0,2)*Yd(2,2)) - 3*AdInput(1,2)*Sqr(Abs(MuInput))*TCD0(msdInput(1),
+      msdInput(2),msqInput(0),msqInput(2))*Yd(1,2)*Yd(2,0)*(AdInput(1,0)*Yd(1,0)*
+      Yd(2,2) + AdInput(2,2)*Yd(1,0)*Yd(2,2)) - 3*AdInput(2,0)*Sqr(Abs(MuInput))*
+      TCD0(msdInput(2),msdInput(1),msqInput(2),msqInput(0))*Yd(1,2)*Yd(2,0)*(
+      AdInput(1,0)*Yd(1,0)*Yd(2,2) + AdInput(2,2)*Yd(1,0)*Yd(2,2)) - 3*AdInput(1,2
+      )*Sqr(Abs(MuInput))*TCD0(msdInput(1),msdInput(2),msqInput(1),msqInput(2))*Yd
+      (1,2)*Yd(2,1)*(AdInput(1,1)*Yd(1,1)*Yd(2,2) + AdInput(2,2)*Yd(1,1)*Yd(2,2))
+      - 3*AdInput(2,1)*Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(1),msqInput(2),
+      msqInput(1))*Yd(1,2)*Yd(2,1)*(AdInput(1,1)*Yd(1,1)*Yd(2,2) + AdInput(2,2)*Yd
+      (1,1)*Yd(2,2)) - 3*Sqr(Abs(MuInput))*TCC0(msdInput(1),msdInput(2),msqInput(0
+      ))*Yd(1,0)*Yd(2,0)*(Yd(1,0)*Yd(2,0) + Yd(1,1)*Yd(2,1) + Yd(1,2)*Yd(2,2)) - 3
+      *Sqr(Abs(MuInput))*TCC0(msdInput(2),msdInput(1),msqInput(0))*Yd(1,0)*Yd(2,0)
+      *(Yd(1,0)*Yd(2,0) + Yd(1,1)*Yd(2,1) + Yd(1,2)*Yd(2,2)) - 3*Sqr(Abs(MuInput))
+      *TCC0(msdInput(1),msdInput(2),msqInput(1))*Yd(1,1)*Yd(2,1)*(Yd(1,0)*Yd(2,0)
+      + Yd(1,1)*Yd(2,1) + Yd(1,2)*Yd(2,2)) - 3*Sqr(Abs(MuInput))*TCC0(msdInput(2),
+      msdInput(1),msqInput(1))*Yd(1,1)*Yd(2,1)*(Yd(1,0)*Yd(2,0) + Yd(1,1)*Yd(2,1)
+      + Yd(1,2)*Yd(2,2)) - 3*Sqr(Abs(MuInput))*TCC0(msdInput(1),msdInput(2),
+      msqInput(2))*Yd(1,2)*Yd(2,2)*(Yd(1,0)*Yd(2,0) + Yd(1,1)*Yd(2,1) + Yd(1,2)*Yd
+      (2,2)) - 3*Sqr(Abs(MuInput))*TCC0(msdInput(2),msdInput(1),msqInput(2))*Yd(1,
+      2)*Yd(2,2)*(Yd(1,0)*Yd(2,0) + Yd(1,1)*Yd(2,1) + Yd(1,2)*Yd(2,2)) - 3*AdInput
+      (1,2)*Sqr(Abs(MuInput))*TCD0(msdInput(1),msdInput(2),msqInput(2),msqInput(2)
+      )*Yd(1,2)*Yd(2,2)*(AdInput(1,2)*Yd(1,2)*Yd(2,2) + AdInput(2,2)*Yd(1,2)*Yd(2,
+      2)) - 3*AdInput(2,2)*Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(1),msqInput
+      (2),msqInput(2))*Yd(1,2)*Yd(2,2)*(AdInput(1,2)*Yd(1,2)*Yd(2,2) + AdInput(2,2
+      )*Yd(1,2)*Yd(2,2)) - 3*Sqr(Abs(MuInput))*TCC0(msdInput(0),msqInput(0),
+      msqInput(2))*Yd(0,0)*Yd(0,2)*(Yd(0,0)*Yd(0,2) + Yd(1,0)*Yd(1,2) + Yd(2,0)*Yd
+      (2,2)) - 3*Sqr(Abs(MuInput))*TCC0(msdInput(0),msqInput(2),msqInput(0))*Yd(0,
+      0)*Yd(0,2)*(Yd(0,0)*Yd(0,2) + Yd(1,0)*Yd(1,2) + Yd(2,0)*Yd(2,2)) - 3*Sqr(Abs
+      (MuInput))*TCC0(msdInput(1),msqInput(0),msqInput(2))*Yd(1,0)*Yd(1,2)*(Yd(0,0
+      )*Yd(0,2) + Yd(1,0)*Yd(1,2) + Yd(2,0)*Yd(2,2)) - 3*Sqr(Abs(MuInput))*TCC0(
+      msdInput(1),msqInput(2),msqInput(0))*Yd(1,0)*Yd(1,2)*(Yd(0,0)*Yd(0,2) + Yd(1
+      ,0)*Yd(1,2) + Yd(2,0)*Yd(2,2)) - 3*Sqr(Abs(MuInput))*TCC0(msdInput(2),
+      msqInput(0),msqInput(2))*Yd(2,0)*Yd(2,2)*(Yd(0,0)*Yd(0,2) + Yd(1,0)*Yd(1,2)
+      + Yd(2,0)*Yd(2,2)) - 3*Sqr(Abs(MuInput))*TCC0(msdInput(2),msqInput(2),
+      msqInput(0))*Yd(2,0)*Yd(2,2)*(Yd(0,0)*Yd(0,2) + Yd(1,0)*Yd(1,2) + Yd(2,0)*Yd
+      (2,2)) - 3*AdInput(2,2)*Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(2),
+      msqInput(0),msqInput(2))*Yd(2,0)*Yd(2,2)*(AdInput(2,0)*Yd(2,0)*Yd(2,2) +
+      AdInput(2,2)*Yd(2,0)*Yd(2,2)) - 3*AdInput(2,0)*Sqr(Abs(MuInput))*TCD0(
+      msdInput(2),msdInput(2),msqInput(2),msqInput(0))*Yd(2,0)*Yd(2,2)*(AdInput(2,
+      0)*Yd(2,0)*Yd(2,2) + AdInput(2,2)*Yd(2,0)*Yd(2,2)) - 3*Sqr(Abs(MuInput))*
+      TCC0(msdInput(0),msqInput(1),msqInput(2))*Yd(0,1)*Yd(0,2)*(Yd(0,1)*Yd(0,2) +
+      Yd(1,1)*Yd(1,2) + Yd(2,1)*Yd(2,2)) - 3*Sqr(Abs(MuInput))*TCC0(msdInput(0),
+      msqInput(2),msqInput(1))*Yd(0,1)*Yd(0,2)*(Yd(0,1)*Yd(0,2) + Yd(1,1)*Yd(1,2)
+      + Yd(2,1)*Yd(2,2)) - 3*Sqr(Abs(MuInput))*TCC0(msdInput(1),msqInput(1),
+      msqInput(2))*Yd(1,1)*Yd(1,2)*(Yd(0,1)*Yd(0,2) + Yd(1,1)*Yd(1,2) + Yd(2,1)*Yd
+      (2,2)) - 3*Sqr(Abs(MuInput))*TCC0(msdInput(1),msqInput(2),msqInput(1))*Yd(1,
+      1)*Yd(1,2)*(Yd(0,1)*Yd(0,2) + Yd(1,1)*Yd(1,2) + Yd(2,1)*Yd(2,2)) - 3*Sqr(Abs
+      (MuInput))*TCC0(msdInput(2),msqInput(1),msqInput(2))*Yd(2,1)*Yd(2,2)*(Yd(0,1
+      )*Yd(0,2) + Yd(1,1)*Yd(1,2) + Yd(2,1)*Yd(2,2)) - 3*Sqr(Abs(MuInput))*TCC0(
+      msdInput(2),msqInput(2),msqInput(1))*Yd(2,1)*Yd(2,2)*(Yd(0,1)*Yd(0,2) + Yd(1
+      ,1)*Yd(1,2) + Yd(2,1)*Yd(2,2)) - 3*AdInput(2,2)*Sqr(Abs(MuInput))*TCD0(
+      msdInput(2),msdInput(2),msqInput(1),msqInput(2))*Yd(2,1)*Yd(2,2)*(AdInput(2,
+      1)*Yd(2,1)*Yd(2,2) + AdInput(2,2)*Yd(2,1)*Yd(2,2)) - 3*AdInput(2,1)*Sqr(Abs(
+      MuInput))*TCD0(msdInput(2),msdInput(2),msqInput(2),msqInput(1))*Yd(2,1)*Yd(2
+      ,2)*(AdInput(2,1)*Yd(2,1)*Yd(2,2) + AdInput(2,2)*Yd(2,1)*Yd(2,2)) - AeInput(
+      0,1)*Sqr(Abs(MuInput))*TCD0(mseInput(0),mseInput(0),mslInput(0),mslInput(1))
+      *Ye(0,0)*Ye(0,1)*(AeInput(0,0)*Ye(0,0)*Ye(0,1) + AeInput(0,1)*Ye(0,0)*Ye(0,1
+      )) - AeInput(0,0)*Sqr(Abs(MuInput))*TCD0(mseInput(0),mseInput(0),mslInput(1)
+      ,mslInput(0))*Ye(0,0)*Ye(0,1)*(AeInput(0,0)*Ye(0,0)*Ye(0,1) + AeInput(0,1)*
+      Ye(0,0)*Ye(0,1)) - AeInput(0,2)*Sqr(Abs(MuInput))*TCD0(mseInput(0),mseInput(
+      0),mslInput(0),mslInput(2))*Ye(0,0)*Ye(0,2)*(AeInput(0,0)*Ye(0,0)*Ye(0,2) +
+      AeInput(0,2)*Ye(0,0)*Ye(0,2)) - AeInput(0,0)*Sqr(Abs(MuInput))*TCD0(mseInput
+      (0),mseInput(0),mslInput(2),mslInput(0))*Ye(0,0)*Ye(0,2)*(AeInput(0,0)*Ye(0,
+      0)*Ye(0,2) + AeInput(0,2)*Ye(0,0)*Ye(0,2)) - AeInput(0,2)*Sqr(Abs(MuInput))*
+      TCD0(mseInput(0),mseInput(0),mslInput(1),mslInput(2))*Ye(0,1)*Ye(0,2)*(
+      AeInput(0,1)*Ye(0,1)*Ye(0,2) + AeInput(0,2)*Ye(0,1)*Ye(0,2)) - AeInput(0,1)*
+      Sqr(Abs(MuInput))*TCD0(mseInput(0),mseInput(0),mslInput(2),mslInput(1))*Ye(0
+      ,1)*Ye(0,2)*(AeInput(0,1)*Ye(0,1)*Ye(0,2) + AeInput(0,2)*Ye(0,1)*Ye(0,2)) -
+      AeInput(0,0)*Sqr(Abs(MuInput))*TCD0(mseInput(0),mseInput(1),mslInput(0),
+      mslInput(0))*Ye(0,0)*Ye(1,0)*(AeInput(0,0)*Ye(0,0)*Ye(1,0) + AeInput(1,0)*Ye
+      (0,0)*Ye(1,0)) - AeInput(1,0)*Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput(0)
+      ,mslInput(0),mslInput(0))*Ye(0,0)*Ye(1,0)*(AeInput(0,0)*Ye(0,0)*Ye(1,0) +
+      AeInput(1,0)*Ye(0,0)*Ye(1,0)) - AeInput(0,0)*Sqr(Abs(MuInput))*TCD0(mseInput
+      (0),mseInput(1),mslInput(1),mslInput(0))*Ye(0,0)*(AeInput(0,1)*Ye(0,1)*Ye(1,
+      0) + AeInput(1,0)*Ye(0,1)*Ye(1,0))*Ye(1,1) - AeInput(1,1)*Sqr(Abs(MuInput))*
+      TCD0(mseInput(1),mseInput(0),mslInput(0),mslInput(1))*Ye(0,0)*(AeInput(0,1)*
+      Ye(0,1)*Ye(1,0) + AeInput(1,0)*Ye(0,1)*Ye(1,0))*Ye(1,1) - AeInput(0,1)*Sqr(
+      Abs(MuInput))*TCD0(mseInput(0),mseInput(1),mslInput(0),mslInput(1))*Ye(0,1)*
+      Ye(1,0)*(AeInput(0,0)*Ye(0,0)*Ye(1,1) + AeInput(1,1)*Ye(0,0)*Ye(1,1)) -
+      AeInput(1,0)*Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput(0),mslInput(1),
+      mslInput(0))*Ye(0,1)*Ye(1,0)*(AeInput(0,0)*Ye(0,0)*Ye(1,1) + AeInput(1,1)*Ye
+      (0,0)*Ye(1,1)) - AeInput(0,1)*Sqr(Abs(MuInput))*TCD0(mseInput(0),mseInput(1)
+      ,mslInput(1),mslInput(1))*Ye(0,1)*Ye(1,1)*(AeInput(0,1)*Ye(0,1)*Ye(1,1) +
+      AeInput(1,1)*Ye(0,1)*Ye(1,1)) - AeInput(1,1)*Sqr(Abs(MuInput))*TCD0(mseInput
+      (1),mseInput(0),mslInput(1),mslInput(1))*Ye(0,1)*Ye(1,1)*(AeInput(0,1)*Ye(0,
+      1)*Ye(1,1) + AeInput(1,1)*Ye(0,1)*Ye(1,1)) - AeInput(1,1)*Sqr(Abs(MuInput))*
+      TCD0(mseInput(1),mseInput(1),mslInput(0),mslInput(1))*Ye(1,0)*Ye(1,1)*(
+      AeInput(1,0)*Ye(1,0)*Ye(1,1) + AeInput(1,1)*Ye(1,0)*Ye(1,1)) - AeInput(1,0)*
+      Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput(1),mslInput(1),mslInput(0))*Ye(1
+      ,0)*Ye(1,1)*(AeInput(1,0)*Ye(1,0)*Ye(1,1) + AeInput(1,1)*Ye(1,0)*Ye(1,1)) -
+      AeInput(0,0)*Sqr(Abs(MuInput))*TCD0(mseInput(0),mseInput(1),mslInput(2),
+      mslInput(0))*Ye(0,0)*(AeInput(0,2)*Ye(0,2)*Ye(1,0) + AeInput(1,0)*Ye(0,2)*Ye
+      (1,0))*Ye(1,2) - AeInput(1,2)*Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput(0)
+      ,mslInput(0),mslInput(2))*Ye(0,0)*(AeInput(0,2)*Ye(0,2)*Ye(1,0) + AeInput(1,
+      0)*Ye(0,2)*Ye(1,0))*Ye(1,2) - AeInput(0,1)*Sqr(Abs(MuInput))*TCD0(mseInput(0
+      ),mseInput(1),mslInput(2),mslInput(1))*Ye(0,1)*(AeInput(0,2)*Ye(0,2)*Ye(1,1)
+      + AeInput(1,1)*Ye(0,2)*Ye(1,1))*Ye(1,2) - AeInput(1,2)*Sqr(Abs(MuInput))*
+      TCD0(mseInput(1),mseInput(0),mslInput(1),mslInput(2))*Ye(0,1)*(AeInput(0,2)*
+      Ye(0,2)*Ye(1,1) + AeInput(1,1)*Ye(0,2)*Ye(1,1))*Ye(1,2) - AeInput(0,2)*Sqr(
+      Abs(MuInput))*TCD0(mseInput(0),mseInput(1),mslInput(0),mslInput(2))*Ye(0,2)*
+      Ye(1,0)*(AeInput(0,0)*Ye(0,0)*Ye(1,2) + AeInput(1,2)*Ye(0,0)*Ye(1,2)) -
+      AeInput(1,0)*Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput(0),mslInput(2),
+      mslInput(0))*Ye(0,2)*Ye(1,0)*(AeInput(0,0)*Ye(0,0)*Ye(1,2) + AeInput(1,2)*Ye
+      (0,0)*Ye(1,2)) - AeInput(0,2)*Sqr(Abs(MuInput))*TCD0(mseInput(0),mseInput(1)
+      ,mslInput(1),mslInput(2))*Ye(0,2)*Ye(1,1)*(AeInput(0,1)*Ye(0,1)*Ye(1,2) +
+      AeInput(1,2)*Ye(0,1)*Ye(1,2)) - AeInput(1,1)*Sqr(Abs(MuInput))*TCD0(mseInput
+      (1),mseInput(0),mslInput(2),mslInput(1))*Ye(0,2)*Ye(1,1)*(AeInput(0,1)*Ye(0,
+      1)*Ye(1,2) + AeInput(1,2)*Ye(0,1)*Ye(1,2)) - Sqr(Abs(MuInput))*TCC0(mseInput
+      (0),mseInput(1),mslInput(0))*Ye(0,0)*Ye(1,0)*(Ye(0,0)*Ye(1,0) + Ye(0,1)*Ye(1
+      ,1) + Ye(0,2)*Ye(1,2)) - Sqr(Abs(MuInput))*TCC0(mseInput(1),mseInput(0),
+      mslInput(0))*Ye(0,0)*Ye(1,0)*(Ye(0,0)*Ye(1,0) + Ye(0,1)*Ye(1,1) + Ye(0,2)*Ye
+      (1,2)) - Sqr(Abs(MuInput))*TCC0(mseInput(0),mseInput(1),mslInput(1))*Ye(0,1)
+      *Ye(1,1)*(Ye(0,0)*Ye(1,0) + Ye(0,1)*Ye(1,1) + Ye(0,2)*Ye(1,2)) - Sqr(Abs(
+      MuInput))*TCC0(mseInput(1),mseInput(0),mslInput(1))*Ye(0,1)*Ye(1,1)*(Ye(0,0)
+      *Ye(1,0) + Ye(0,1)*Ye(1,1) + Ye(0,2)*Ye(1,2)) - Sqr(Abs(MuInput))*TCC0(
+      mseInput(0),mseInput(1),mslInput(2))*Ye(0,2)*Ye(1,2)*(Ye(0,0)*Ye(1,0) + Ye(0
+      ,1)*Ye(1,1) + Ye(0,2)*Ye(1,2)) - Sqr(Abs(MuInput))*TCC0(mseInput(1),mseInput
+      (0),mslInput(2))*Ye(0,2)*Ye(1,2)*(Ye(0,0)*Ye(1,0) + Ye(0,1)*Ye(1,1) + Ye(0,2
+      )*Ye(1,2)) - AeInput(0,2)*Sqr(Abs(MuInput))*TCD0(mseInput(0),mseInput(1),
+      mslInput(2),mslInput(2))*Ye(0,2)*Ye(1,2)*(AeInput(0,2)*Ye(0,2)*Ye(1,2) +
+      AeInput(1,2)*Ye(0,2)*Ye(1,2)) - AeInput(1,2)*Sqr(Abs(MuInput))*TCD0(mseInput
+      (1),mseInput(0),mslInput(2),mslInput(2))*Ye(0,2)*Ye(1,2)*(AeInput(0,2)*Ye(0,
+      2)*Ye(1,2) + AeInput(1,2)*Ye(0,2)*Ye(1,2)) - AeInput(1,2)*Sqr(Abs(MuInput))*
+      TCD0(mseInput(1),mseInput(1),mslInput(0),mslInput(2))*Ye(1,0)*Ye(1,2)*(
+      AeInput(1,0)*Ye(1,0)*Ye(1,2) + AeInput(1,2)*Ye(1,0)*Ye(1,2)) - AeInput(1,0)*
+      Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput(1),mslInput(2),mslInput(0))*Ye(1
+      ,0)*Ye(1,2)*(AeInput(1,0)*Ye(1,0)*Ye(1,2) + AeInput(1,2)*Ye(1,0)*Ye(1,2)) -
+      AeInput(1,2)*Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput(1),mslInput(1),
+      mslInput(2))*Ye(1,1)*Ye(1,2)*(AeInput(1,1)*Ye(1,1)*Ye(1,2) + AeInput(1,2)*Ye
+      (1,1)*Ye(1,2)) - AeInput(1,1)*Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput(1)
+      ,mslInput(2),mslInput(1))*Ye(1,1)*Ye(1,2)*(AeInput(1,1)*Ye(1,1)*Ye(1,2) +
+      AeInput(1,2)*Ye(1,1)*Ye(1,2)) - AeInput(0,0)*Sqr(Abs(MuInput))*TCD0(mseInput
+      (0),mseInput(2),mslInput(0),mslInput(0))*Ye(0,0)*Ye(2,0)*(AeInput(0,0)*Ye(0,
+      0)*Ye(2,0) + AeInput(2,0)*Ye(0,0)*Ye(2,0)) - AeInput(2,0)*Sqr(Abs(MuInput))*
+      TCD0(mseInput(2),mseInput(0),mslInput(0),mslInput(0))*Ye(0,0)*Ye(2,0)*(
+      AeInput(0,0)*Ye(0,0)*Ye(2,0) + AeInput(2,0)*Ye(0,0)*Ye(2,0)) - AeInput(1,0)*
+      Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput(2),mslInput(0),mslInput(0))*Ye(1
+      ,0)*Ye(2,0)*(AeInput(1,0)*Ye(1,0)*Ye(2,0) + AeInput(2,0)*Ye(1,0)*Ye(2,0)) -
+      AeInput(2,0)*Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput(1),mslInput(0),
+      mslInput(0))*Ye(1,0)*Ye(2,0)*(AeInput(1,0)*Ye(1,0)*Ye(2,0) + AeInput(2,0)*Ye
+      (1,0)*Ye(2,0)) - AeInput(0,0)*Sqr(Abs(MuInput))*TCD0(mseInput(0),mseInput(2)
+      ,mslInput(1),mslInput(0))*Ye(0,0)*(AeInput(0,1)*Ye(0,1)*Ye(2,0) + AeInput(2,
+      0)*Ye(0,1)*Ye(2,0))*Ye(2,1) - AeInput(2,1)*Sqr(Abs(MuInput))*TCD0(mseInput(2
+      ),mseInput(0),mslInput(0),mslInput(1))*Ye(0,0)*(AeInput(0,1)*Ye(0,1)*Ye(2,0)
+      + AeInput(2,0)*Ye(0,1)*Ye(2,0))*Ye(2,1) - AeInput(1,0)*Sqr(Abs(MuInput))*
+      TCD0(mseInput(1),mseInput(2),mslInput(1),mslInput(0))*Ye(1,0)*(AeInput(1,1)*
+      Ye(1,1)*Ye(2,0) + AeInput(2,0)*Ye(1,1)*Ye(2,0))*Ye(2,1) - AeInput(2,1)*Sqr(
+      Abs(MuInput))*TCD0(mseInput(2),mseInput(1),mslInput(0),mslInput(1))*Ye(1,0)*
+      (AeInput(1,1)*Ye(1,1)*Ye(2,0) + AeInput(2,0)*Ye(1,1)*Ye(2,0))*Ye(2,1) -
+      AeInput(0,1)*Sqr(Abs(MuInput))*TCD0(mseInput(0),mseInput(2),mslInput(0),
+      mslInput(1))*Ye(0,1)*Ye(2,0)*(AeInput(0,0)*Ye(0,0)*Ye(2,1) + AeInput(2,1)*Ye
+      (0,0)*Ye(2,1)) - AeInput(2,0)*Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput(0)
+      ,mslInput(1),mslInput(0))*Ye(0,1)*Ye(2,0)*(AeInput(0,0)*Ye(0,0)*Ye(2,1) +
+      AeInput(2,1)*Ye(0,0)*Ye(2,1)) - AeInput(0,1)*Sqr(Abs(MuInput))*TCD0(mseInput
+      (0),mseInput(2),mslInput(1),mslInput(1))*Ye(0,1)*Ye(2,1)*(AeInput(0,1)*Ye(0,
+      1)*Ye(2,1) + AeInput(2,1)*Ye(0,1)*Ye(2,1)) - AeInput(2,1)*Sqr(Abs(MuInput))*
+      TCD0(mseInput(2),mseInput(0),mslInput(1),mslInput(1))*Ye(0,1)*Ye(2,1)*(
+      AeInput(0,1)*Ye(0,1)*Ye(2,1) + AeInput(2,1)*Ye(0,1)*Ye(2,1)) - AeInput(1,1)*
+      Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput(2),mslInput(0),mslInput(1))*Ye(1
+      ,1)*Ye(2,0)*(AeInput(1,0)*Ye(1,0)*Ye(2,1) + AeInput(2,1)*Ye(1,0)*Ye(2,1)) -
+      AeInput(2,0)*Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput(1),mslInput(1),
+      mslInput(0))*Ye(1,1)*Ye(2,0)*(AeInput(1,0)*Ye(1,0)*Ye(2,1) + AeInput(2,1)*Ye
+      (1,0)*Ye(2,1)) - AeInput(1,1)*Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput(2)
+      ,mslInput(1),mslInput(1))*Ye(1,1)*Ye(2,1)*(AeInput(1,1)*Ye(1,1)*Ye(2,1) +
+      AeInput(2,1)*Ye(1,1)*Ye(2,1)) - AeInput(2,1)*Sqr(Abs(MuInput))*TCD0(mseInput
+      (2),mseInput(1),mslInput(1),mslInput(1))*Ye(1,1)*Ye(2,1)*(AeInput(1,1)*Ye(1,
+      1)*Ye(2,1) + AeInput(2,1)*Ye(1,1)*Ye(2,1)) - Sqr(Abs(MuInput))*TCC0(mseInput
+      (0),mslInput(0),mslInput(1))*Ye(0,0)*Ye(0,1)*(Ye(0,0)*Ye(0,1) + Ye(1,0)*Ye(1
+      ,1) + Ye(2,0)*Ye(2,1)) - Sqr(Abs(MuInput))*TCC0(mseInput(0),mslInput(1),
+      mslInput(0))*Ye(0,0)*Ye(0,1)*(Ye(0,0)*Ye(0,1) + Ye(1,0)*Ye(1,1) + Ye(2,0)*Ye
+      (2,1)) - Sqr(Abs(MuInput))*TCC0(mseInput(1),mslInput(0),mslInput(1))*Ye(1,0)
+      *Ye(1,1)*(Ye(0,0)*Ye(0,1) + Ye(1,0)*Ye(1,1) + Ye(2,0)*Ye(2,1)) - Sqr(Abs(
+      MuInput))*TCC0(mseInput(1),mslInput(1),mslInput(0))*Ye(1,0)*Ye(1,1)*(Ye(0,0)
+      *Ye(0,1) + Ye(1,0)*Ye(1,1) + Ye(2,0)*Ye(2,1)) - Sqr(Abs(MuInput))*TCC0(
+      mseInput(2),mslInput(0),mslInput(1))*Ye(2,0)*Ye(2,1)*(Ye(0,0)*Ye(0,1) + Ye(1
+      ,0)*Ye(1,1) + Ye(2,0)*Ye(2,1)) - Sqr(Abs(MuInput))*TCC0(mseInput(2),mslInput
+      (1),mslInput(0))*Ye(2,0)*Ye(2,1)*(Ye(0,0)*Ye(0,1) + Ye(1,0)*Ye(1,1) + Ye(2,0
+      )*Ye(2,1)) - AeInput(2,1)*Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput(2),
+      mslInput(0),mslInput(1))*Ye(2,0)*Ye(2,1)*(AeInput(2,0)*Ye(2,0)*Ye(2,1) +
+      AeInput(2,1)*Ye(2,0)*Ye(2,1)) - AeInput(2,0)*Sqr(Abs(MuInput))*TCD0(mseInput
+      (2),mseInput(2),mslInput(1),mslInput(0))*Ye(2,0)*Ye(2,1)*(AeInput(2,0)*Ye(2,
+      0)*Ye(2,1) + AeInput(2,1)*Ye(2,0)*Ye(2,1)) - AeInput(0,0)*Sqr(Abs(MuInput))*
+      TCD0(mseInput(0),mseInput(2),mslInput(2),mslInput(0))*Ye(0,0)*(AeInput(0,2)*
+      Ye(0,2)*Ye(2,0) + AeInput(2,0)*Ye(0,2)*Ye(2,0))*Ye(2,2) - AeInput(2,2)*Sqr(
+      Abs(MuInput))*TCD0(mseInput(2),mseInput(0),mslInput(0),mslInput(2))*Ye(0,0)*
+      (AeInput(0,2)*Ye(0,2)*Ye(2,0) + AeInput(2,0)*Ye(0,2)*Ye(2,0))*Ye(2,2) -
+      AeInput(1,0)*Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput(2),mslInput(2),
+      mslInput(0))*Ye(1,0)*(AeInput(1,2)*Ye(1,2)*Ye(2,0) + AeInput(2,0)*Ye(1,2)*Ye
+      (2,0))*Ye(2,2) - AeInput(2,2)*Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput(1)
+      ,mslInput(0),mslInput(2))*Ye(1,0)*(AeInput(1,2)*Ye(1,2)*Ye(2,0) + AeInput(2,
+      0)*Ye(1,2)*Ye(2,0))*Ye(2,2) - AeInput(0,1)*Sqr(Abs(MuInput))*TCD0(mseInput(0
+      ),mseInput(2),mslInput(2),mslInput(1))*Ye(0,1)*(AeInput(0,2)*Ye(0,2)*Ye(2,1)
+      + AeInput(2,1)*Ye(0,2)*Ye(2,1))*Ye(2,2) - AeInput(2,2)*Sqr(Abs(MuInput))*
+      TCD0(mseInput(2),mseInput(0),mslInput(1),mslInput(2))*Ye(0,1)*(AeInput(0,2)*
+      Ye(0,2)*Ye(2,1) + AeInput(2,1)*Ye(0,2)*Ye(2,1))*Ye(2,2) - AeInput(1,1)*Sqr(
+      Abs(MuInput))*TCD0(mseInput(1),mseInput(2),mslInput(2),mslInput(1))*Ye(1,1)*
+      (AeInput(1,2)*Ye(1,2)*Ye(2,1) + AeInput(2,1)*Ye(1,2)*Ye(2,1))*Ye(2,2) -
+      AeInput(2,2)*Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput(1),mslInput(1),
+      mslInput(2))*Ye(1,1)*(AeInput(1,2)*Ye(1,2)*Ye(2,1) + AeInput(2,1)*Ye(1,2)*Ye
+      (2,1))*Ye(2,2) - AeInput(0,2)*Sqr(Abs(MuInput))*TCD0(mseInput(0),mseInput(2)
+      ,mslInput(0),mslInput(2))*Ye(0,2)*Ye(2,0)*(AeInput(0,0)*Ye(0,0)*Ye(2,2) +
+      AeInput(2,2)*Ye(0,0)*Ye(2,2)) - AeInput(2,0)*Sqr(Abs(MuInput))*TCD0(mseInput
+      (2),mseInput(0),mslInput(2),mslInput(0))*Ye(0,2)*Ye(2,0)*(AeInput(0,0)*Ye(0,
+      0)*Ye(2,2) + AeInput(2,2)*Ye(0,0)*Ye(2,2)) - AeInput(0,2)*Sqr(Abs(MuInput))*
+      TCD0(mseInput(0),mseInput(2),mslInput(1),mslInput(2))*Ye(0,2)*Ye(2,1)*(
+      AeInput(0,1)*Ye(0,1)*Ye(2,2) + AeInput(2,2)*Ye(0,1)*Ye(2,2)) - AeInput(2,1)*
+      Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput(0),mslInput(2),mslInput(1))*Ye(0
+      ,2)*Ye(2,1)*(AeInput(0,1)*Ye(0,1)*Ye(2,2) + AeInput(2,2)*Ye(0,1)*Ye(2,2)) -
+      Sqr(Abs(MuInput))*TCC0(mseInput(0),mseInput(2),mslInput(0))*Ye(0,0)*Ye(2,0)*
+      (Ye(0,0)*Ye(2,0) + Ye(0,1)*Ye(2,1) + Ye(0,2)*Ye(2,2)) - Sqr(Abs(MuInput))*
+      TCC0(mseInput(2),mseInput(0),mslInput(0))*Ye(0,0)*Ye(2,0)*(Ye(0,0)*Ye(2,0) +
+      Ye(0,1)*Ye(2,1) + Ye(0,2)*Ye(2,2)) - Sqr(Abs(MuInput))*TCC0(mseInput(0),
+      mseInput(2),mslInput(1))*Ye(0,1)*Ye(2,1)*(Ye(0,0)*Ye(2,0) + Ye(0,1)*Ye(2,1)
+      + Ye(0,2)*Ye(2,2)) - Sqr(Abs(MuInput))*TCC0(mseInput(2),mseInput(0),mslInput
+      (1))*Ye(0,1)*Ye(2,1)*(Ye(0,0)*Ye(2,0) + Ye(0,1)*Ye(2,1) + Ye(0,2)*Ye(2,2)) -
+      Sqr(Abs(MuInput))*TCC0(mseInput(0),mseInput(2),mslInput(2))*Ye(0,2)*Ye(2,2)*
+      (Ye(0,0)*Ye(2,0) + Ye(0,1)*Ye(2,1) + Ye(0,2)*Ye(2,2)) - Sqr(Abs(MuInput))*
+      TCC0(mseInput(2),mseInput(0),mslInput(2))*Ye(0,2)*Ye(2,2)*(Ye(0,0)*Ye(2,0) +
+      Ye(0,1)*Ye(2,1) + Ye(0,2)*Ye(2,2)) - AeInput(0,2)*Sqr(Abs(MuInput))*TCD0(
+      mseInput(0),mseInput(2),mslInput(2),mslInput(2))*Ye(0,2)*Ye(2,2)*(AeInput(0,
+      2)*Ye(0,2)*Ye(2,2) + AeInput(2,2)*Ye(0,2)*Ye(2,2)) - AeInput(2,2)*Sqr(Abs(
+      MuInput))*TCD0(mseInput(2),mseInput(0),mslInput(2),mslInput(2))*Ye(0,2)*Ye(2
+      ,2)*(AeInput(0,2)*Ye(0,2)*Ye(2,2) + AeInput(2,2)*Ye(0,2)*Ye(2,2)) - AeInput(
+      1,2)*Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput(2),mslInput(0),mslInput(2))
+      *Ye(1,2)*Ye(2,0)*(AeInput(1,0)*Ye(1,0)*Ye(2,2) + AeInput(2,2)*Ye(1,0)*Ye(2,2
+      )) - AeInput(2,0)*Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput(1),mslInput(2)
+      ,mslInput(0))*Ye(1,2)*Ye(2,0)*(AeInput(1,0)*Ye(1,0)*Ye(2,2) + AeInput(2,2)*
+      Ye(1,0)*Ye(2,2)) - AeInput(1,2)*Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput(
+      2),mslInput(1),mslInput(2))*Ye(1,2)*Ye(2,1)*(AeInput(1,1)*Ye(1,1)*Ye(2,2) +
+      AeInput(2,2)*Ye(1,1)*Ye(2,2)) - AeInput(2,1)*Sqr(Abs(MuInput))*TCD0(mseInput
+      (2),mseInput(1),mslInput(2),mslInput(1))*Ye(1,2)*Ye(2,1)*(AeInput(1,1)*Ye(1,
+      1)*Ye(2,2) + AeInput(2,2)*Ye(1,1)*Ye(2,2)) - Sqr(Abs(MuInput))*TCC0(mseInput
+      (1),mseInput(2),mslInput(0))*Ye(1,0)*Ye(2,0)*(Ye(1,0)*Ye(2,0) + Ye(1,1)*Ye(2
+      ,1) + Ye(1,2)*Ye(2,2)) - Sqr(Abs(MuInput))*TCC0(mseInput(2),mseInput(1),
+      mslInput(0))*Ye(1,0)*Ye(2,0)*(Ye(1,0)*Ye(2,0) + Ye(1,1)*Ye(2,1) + Ye(1,2)*Ye
+      (2,2)) - Sqr(Abs(MuInput))*TCC0(mseInput(1),mseInput(2),mslInput(1))*Ye(1,1)
+      *Ye(2,1)*(Ye(1,0)*Ye(2,0) + Ye(1,1)*Ye(2,1) + Ye(1,2)*Ye(2,2)) - Sqr(Abs(
+      MuInput))*TCC0(mseInput(2),mseInput(1),mslInput(1))*Ye(1,1)*Ye(2,1)*(Ye(1,0)
+      *Ye(2,0) + Ye(1,1)*Ye(2,1) + Ye(1,2)*Ye(2,2)) - Sqr(Abs(MuInput))*TCC0(
+      mseInput(1),mseInput(2),mslInput(2))*Ye(1,2)*Ye(2,2)*(Ye(1,0)*Ye(2,0) + Ye(1
+      ,1)*Ye(2,1) + Ye(1,2)*Ye(2,2)) - Sqr(Abs(MuInput))*TCC0(mseInput(2),mseInput
+      (1),mslInput(2))*Ye(1,2)*Ye(2,2)*(Ye(1,0)*Ye(2,0) + Ye(1,1)*Ye(2,1) + Ye(1,2
+      )*Ye(2,2)) - AeInput(1,2)*Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput(2),
+      mslInput(2),mslInput(2))*Ye(1,2)*Ye(2,2)*(AeInput(1,2)*Ye(1,2)*Ye(2,2) +
+      AeInput(2,2)*Ye(1,2)*Ye(2,2)) - AeInput(2,2)*Sqr(Abs(MuInput))*TCD0(mseInput
+      (2),mseInput(1),mslInput(2),mslInput(2))*Ye(1,2)*Ye(2,2)*(AeInput(1,2)*Ye(1,
+      2)*Ye(2,2) + AeInput(2,2)*Ye(1,2)*Ye(2,2)) - Sqr(Abs(MuInput))*TCC0(mseInput
+      (0),mslInput(0),mslInput(2))*Ye(0,0)*Ye(0,2)*(Ye(0,0)*Ye(0,2) + Ye(1,0)*Ye(1
+      ,2) + Ye(2,0)*Ye(2,2)) - Sqr(Abs(MuInput))*TCC0(mseInput(0),mslInput(2),
+      mslInput(0))*Ye(0,0)*Ye(0,2)*(Ye(0,0)*Ye(0,2) + Ye(1,0)*Ye(1,2) + Ye(2,0)*Ye
+      (2,2)) - Sqr(Abs(MuInput))*TCC0(mseInput(1),mslInput(0),mslInput(2))*Ye(1,0)
+      *Ye(1,2)*(Ye(0,0)*Ye(0,2) + Ye(1,0)*Ye(1,2) + Ye(2,0)*Ye(2,2)) - Sqr(Abs(
+      MuInput))*TCC0(mseInput(1),mslInput(2),mslInput(0))*Ye(1,0)*Ye(1,2)*(Ye(0,0)
+      *Ye(0,2) + Ye(1,0)*Ye(1,2) + Ye(2,0)*Ye(2,2)) - Sqr(Abs(MuInput))*TCC0(
+      mseInput(2),mslInput(0),mslInput(2))*Ye(2,0)*Ye(2,2)*(Ye(0,0)*Ye(0,2) + Ye(1
+      ,0)*Ye(1,2) + Ye(2,0)*Ye(2,2)) - Sqr(Abs(MuInput))*TCC0(mseInput(2),mslInput
+      (2),mslInput(0))*Ye(2,0)*Ye(2,2)*(Ye(0,0)*Ye(0,2) + Ye(1,0)*Ye(1,2) + Ye(2,0
+      )*Ye(2,2)) - AeInput(2,2)*Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput(2),
+      mslInput(0),mslInput(2))*Ye(2,0)*Ye(2,2)*(AeInput(2,0)*Ye(2,0)*Ye(2,2) +
+      AeInput(2,2)*Ye(2,0)*Ye(2,2)) - AeInput(2,0)*Sqr(Abs(MuInput))*TCD0(mseInput
+      (2),mseInput(2),mslInput(2),mslInput(0))*Ye(2,0)*Ye(2,2)*(AeInput(2,0)*Ye(2,
+      0)*Ye(2,2) + AeInput(2,2)*Ye(2,0)*Ye(2,2)) - Sqr(Abs(MuInput))*TCC0(mseInput
+      (0),mslInput(1),mslInput(2))*Ye(0,1)*Ye(0,2)*(Ye(0,1)*Ye(0,2) + Ye(1,1)*Ye(1
+      ,2) + Ye(2,1)*Ye(2,2)) - Sqr(Abs(MuInput))*TCC0(mseInput(0),mslInput(2),
+      mslInput(1))*Ye(0,1)*Ye(0,2)*(Ye(0,1)*Ye(0,2) + Ye(1,1)*Ye(1,2) + Ye(2,1)*Ye
+      (2,2)) - Sqr(Abs(MuInput))*TCC0(mseInput(1),mslInput(1),mslInput(2))*Ye(1,1)
+      *Ye(1,2)*(Ye(0,1)*Ye(0,2) + Ye(1,1)*Ye(1,2) + Ye(2,1)*Ye(2,2)) - Sqr(Abs(
+      MuInput))*TCC0(mseInput(1),mslInput(2),mslInput(1))*Ye(1,1)*Ye(1,2)*(Ye(0,1)
+      *Ye(0,2) + Ye(1,1)*Ye(1,2) + Ye(2,1)*Ye(2,2)) - Sqr(Abs(MuInput))*TCC0(
+      mseInput(2),mslInput(1),mslInput(2))*Ye(2,1)*Ye(2,2)*(Ye(0,1)*Ye(0,2) + Ye(1
+      ,1)*Ye(1,2) + Ye(2,1)*Ye(2,2)) - Sqr(Abs(MuInput))*TCC0(mseInput(2),mslInput
+      (2),mslInput(1))*Ye(2,1)*Ye(2,2)*(Ye(0,1)*Ye(0,2) + Ye(1,1)*Ye(1,2) + Ye(2,1
+      )*Ye(2,2)) - AeInput(2,2)*Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput(2),
+      mslInput(1),mslInput(2))*Ye(2,1)*Ye(2,2)*(AeInput(2,1)*Ye(2,1)*Ye(2,2) +
+      AeInput(2,2)*Ye(2,1)*Ye(2,2)) - AeInput(2,1)*Sqr(Abs(MuInput))*TCD0(mseInput
+      (2),mseInput(2),mslInput(2),mslInput(1))*Ye(2,1)*Ye(2,2)*(AeInput(2,1)*Ye(2,
+      1)*Ye(2,2) + AeInput(2,2)*Ye(2,1)*Ye(2,2)) - 3*AuInput(0,1)*Sqr(Abs(MuInput)
+      )*TCD0(msqInput(0),msqInput(1),msuInput(0),msuInput(0))*Yu(0,0)*Yu(0,1)*(
+      AuInput(0,0)*Yu(0,0)*Yu(0,1) + AuInput(0,1)*Yu(0,0)*Yu(0,1)) - 3*AuInput(0,0
+      )*Sqr(Abs(MuInput))*TCD0(msqInput(1),msqInput(0),msuInput(0),msuInput(0))*Yu
+      (0,0)*Yu(0,1)*(AuInput(0,0)*Yu(0,0)*Yu(0,1) + AuInput(0,1)*Yu(0,0)*Yu(0,1))
+      - 3*AuInput(0,2)*Sqr(Abs(MuInput))*TCD0(msqInput(0),msqInput(2),msuInput(0),
+      msuInput(0))*Yu(0,0)*Yu(0,2)*(AuInput(0,0)*Yu(0,0)*Yu(0,2) + AuInput(0,2)*Yu
+      (0,0)*Yu(0,2)) - 3*AuInput(0,0)*Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(
+      0),msuInput(0),msuInput(0))*Yu(0,0)*Yu(0,2)*(AuInput(0,0)*Yu(0,0)*Yu(0,2) +
+      AuInput(0,2)*Yu(0,0)*Yu(0,2)) - 3*AuInput(0,2)*Sqr(Abs(MuInput))*TCD0(
+      msqInput(1),msqInput(2),msuInput(0),msuInput(0))*Yu(0,1)*Yu(0,2)*(AuInput(0,
+      1)*Yu(0,1)*Yu(0,2) + AuInput(0,2)*Yu(0,1)*Yu(0,2)) - 3*AuInput(0,1)*Sqr(Abs(
+      MuInput))*TCD0(msqInput(2),msqInput(1),msuInput(0),msuInput(0))*Yu(0,1)*Yu(0
+      ,2)*(AuInput(0,1)*Yu(0,1)*Yu(0,2) + AuInput(0,2)*Yu(0,1)*Yu(0,2)) - 3*
+      AuInput(1,0)*Sqr(Abs(MuInput))*TCD0(msqInput(0),msqInput(0),msuInput(0),
+      msuInput(1))*Yu(0,0)*Yu(1,0)*(AuInput(0,0)*Yu(0,0)*Yu(1,0) + AuInput(1,0)*Yu
+      (0,0)*Yu(1,0)) - 3*AuInput(0,0)*Sqr(Abs(MuInput))*TCD0(msqInput(0),msqInput(
+      0),msuInput(1),msuInput(0))*Yu(0,0)*Yu(1,0)*(AuInput(0,0)*Yu(0,0)*Yu(1,0) +
+      AuInput(1,0)*Yu(0,0)*Yu(1,0)) - 3*AuInput(1,1)*Sqr(Abs(MuInput))*TCD0(
+      msqInput(0),msqInput(1),msuInput(0),msuInput(1))*Yu(0,0)*(AuInput(0,1)*Yu(0,
+      1)*Yu(1,0) + AuInput(1,0)*Yu(0,1)*Yu(1,0))*Yu(1,1) - 3*AuInput(0,0)*Sqr(Abs(
+      MuInput))*TCD0(msqInput(1),msqInput(0),msuInput(1),msuInput(0))*Yu(0,0)*(
+      AuInput(0,1)*Yu(0,1)*Yu(1,0) + AuInput(1,0)*Yu(0,1)*Yu(1,0))*Yu(1,1) - 3*
+      AuInput(0,1)*Sqr(Abs(MuInput))*TCD0(msqInput(0),msqInput(1),msuInput(1),
+      msuInput(0))*Yu(0,1)*Yu(1,0)*(AuInput(0,0)*Yu(0,0)*Yu(1,1) + AuInput(1,1)*Yu
+      (0,0)*Yu(1,1)) - 3*AuInput(1,0)*Sqr(Abs(MuInput))*TCD0(msqInput(1),msqInput(
+      0),msuInput(0),msuInput(1))*Yu(0,1)*Yu(1,0)*(AuInput(0,0)*Yu(0,0)*Yu(1,1) +
+      AuInput(1,1)*Yu(0,0)*Yu(1,1)) - 3*AuInput(1,1)*Sqr(Abs(MuInput))*TCD0(
+      msqInput(1),msqInput(1),msuInput(0),msuInput(1))*Yu(0,1)*Yu(1,1)*(AuInput(0,
+      1)*Yu(0,1)*Yu(1,1) + AuInput(1,1)*Yu(0,1)*Yu(1,1)) - 3*AuInput(0,1)*Sqr(Abs(
+      MuInput))*TCD0(msqInput(1),msqInput(1),msuInput(1),msuInput(0))*Yu(0,1)*Yu(1
+      ,1)*(AuInput(0,1)*Yu(0,1)*Yu(1,1) + AuInput(1,1)*Yu(0,1)*Yu(1,1)) - 3*
+      AuInput(1,1)*Sqr(Abs(MuInput))*TCD0(msqInput(0),msqInput(1),msuInput(1),
+      msuInput(1))*Yu(1,0)*Yu(1,1)*(AuInput(1,0)*Yu(1,0)*Yu(1,1) + AuInput(1,1)*Yu
+      (1,0)*Yu(1,1)) - 3*AuInput(1,0)*Sqr(Abs(MuInput))*TCD0(msqInput(1),msqInput(
+      0),msuInput(1),msuInput(1))*Yu(1,0)*Yu(1,1)*(AuInput(1,0)*Yu(1,0)*Yu(1,1) +
+      AuInput(1,1)*Yu(1,0)*Yu(1,1)) - 3*AuInput(1,2)*Sqr(Abs(MuInput))*TCD0(
+      msqInput(0),msqInput(2),msuInput(0),msuInput(1))*Yu(0,0)*(AuInput(0,2)*Yu(0,
+      2)*Yu(1,0) + AuInput(1,0)*Yu(0,2)*Yu(1,0))*Yu(1,2) - 3*AuInput(0,0)*Sqr(Abs(
+      MuInput))*TCD0(msqInput(2),msqInput(0),msuInput(1),msuInput(0))*Yu(0,0)*(
+      AuInput(0,2)*Yu(0,2)*Yu(1,0) + AuInput(1,0)*Yu(0,2)*Yu(1,0))*Yu(1,2) - 3*
+      AuInput(1,2)*Sqr(Abs(MuInput))*TCD0(msqInput(1),msqInput(2),msuInput(0),
+      msuInput(1))*Yu(0,1)*(AuInput(0,2)*Yu(0,2)*Yu(1,1) + AuInput(1,1)*Yu(0,2)*Yu
+      (1,1))*Yu(1,2) - 3*AuInput(0,1)*Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(
+      1),msuInput(1),msuInput(0))*Yu(0,1)*(AuInput(0,2)*Yu(0,2)*Yu(1,1) + AuInput(
+      1,1)*Yu(0,2)*Yu(1,1))*Yu(1,2) - 3*AuInput(0,2)*Sqr(Abs(MuInput))*TCD0(
+      msqInput(0),msqInput(2),msuInput(1),msuInput(0))*Yu(0,2)*Yu(1,0)*(AuInput(0,
+      0)*Yu(0,0)*Yu(1,2) + AuInput(1,2)*Yu(0,0)*Yu(1,2)) - 3*AuInput(1,0)*Sqr(Abs(
+      MuInput))*TCD0(msqInput(2),msqInput(0),msuInput(0),msuInput(1))*Yu(0,2)*Yu(1
+      ,0)*(AuInput(0,0)*Yu(0,0)*Yu(1,2) + AuInput(1,2)*Yu(0,0)*Yu(1,2)) - 3*
+      AuInput(0,2)*Sqr(Abs(MuInput))*TCD0(msqInput(1),msqInput(2),msuInput(1),
+      msuInput(0))*Yu(0,2)*Yu(1,1)*(AuInput(0,1)*Yu(0,1)*Yu(1,2) + AuInput(1,2)*Yu
+      (0,1)*Yu(1,2)) - 3*AuInput(1,1)*Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(
+      1),msuInput(0),msuInput(1))*Yu(0,2)*Yu(1,1)*(AuInput(0,1)*Yu(0,1)*Yu(1,2) +
+      AuInput(1,2)*Yu(0,1)*Yu(1,2)) - 3*Sqr(Abs(MuInput))*TCC0(msqInput(0),
+      msuInput(0),msuInput(1))*Yu(0,0)*Yu(1,0)*(Yu(0,0)*Yu(1,0) + Yu(0,1)*Yu(1,1)
+      + Yu(0,2)*Yu(1,2)) - 3*Sqr(Abs(MuInput))*TCC0(msqInput(0),msuInput(1),
+      msuInput(0))*Yu(0,0)*Yu(1,0)*(Yu(0,0)*Yu(1,0) + Yu(0,1)*Yu(1,1) + Yu(0,2)*Yu
+      (1,2)) - 3*Sqr(Abs(MuInput))*TCC0(msqInput(1),msuInput(0),msuInput(1))*Yu(0,
+      1)*Yu(1,1)*(Yu(0,0)*Yu(1,0) + Yu(0,1)*Yu(1,1) + Yu(0,2)*Yu(1,2)) - 3*Sqr(Abs
+      (MuInput))*TCC0(msqInput(1),msuInput(1),msuInput(0))*Yu(0,1)*Yu(1,1)*(Yu(0,0
+      )*Yu(1,0) + Yu(0,1)*Yu(1,1) + Yu(0,2)*Yu(1,2)) - 3*Sqr(Abs(MuInput))*TCC0(
+      msqInput(2),msuInput(0),msuInput(1))*Yu(0,2)*Yu(1,2)*(Yu(0,0)*Yu(1,0) + Yu(0
+      ,1)*Yu(1,1) + Yu(0,2)*Yu(1,2)) - 3*Sqr(Abs(MuInput))*TCC0(msqInput(2),
+      msuInput(1),msuInput(0))*Yu(0,2)*Yu(1,2)*(Yu(0,0)*Yu(1,0) + Yu(0,1)*Yu(1,1)
+      + Yu(0,2)*Yu(1,2)) - 3*AuInput(1,2)*Sqr(Abs(MuInput))*TCD0(msqInput(2),
+      msqInput(2),msuInput(0),msuInput(1))*Yu(0,2)*Yu(1,2)*(AuInput(0,2)*Yu(0,2)*
+      Yu(1,2) + AuInput(1,2)*Yu(0,2)*Yu(1,2)) - 3*AuInput(0,2)*Sqr(Abs(MuInput))*
+      TCD0(msqInput(2),msqInput(2),msuInput(1),msuInput(0))*Yu(0,2)*Yu(1,2)*(
+      AuInput(0,2)*Yu(0,2)*Yu(1,2) + AuInput(1,2)*Yu(0,2)*Yu(1,2)) - 3*AuInput(1,2
+      )*Sqr(Abs(MuInput))*TCD0(msqInput(0),msqInput(2),msuInput(1),msuInput(1))*Yu
+      (1,0)*Yu(1,2)*(AuInput(1,0)*Yu(1,0)*Yu(1,2) + AuInput(1,2)*Yu(1,0)*Yu(1,2))
+      - 3*AuInput(1,0)*Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(0),msuInput(1),
+      msuInput(1))*Yu(1,0)*Yu(1,2)*(AuInput(1,0)*Yu(1,0)*Yu(1,2) + AuInput(1,2)*Yu
+      (1,0)*Yu(1,2)) - 3*AuInput(1,2)*Sqr(Abs(MuInput))*TCD0(msqInput(1),msqInput(
+      2),msuInput(1),msuInput(1))*Yu(1,1)*Yu(1,2)*(AuInput(1,1)*Yu(1,1)*Yu(1,2) +
+      AuInput(1,2)*Yu(1,1)*Yu(1,2)) - 3*AuInput(1,1)*Sqr(Abs(MuInput))*TCD0(
+      msqInput(2),msqInput(1),msuInput(1),msuInput(1))*Yu(1,1)*Yu(1,2)*(AuInput(1,
+      1)*Yu(1,1)*Yu(1,2) + AuInput(1,2)*Yu(1,1)*Yu(1,2)) - 3*AuInput(2,0)*Sqr(Abs(
+      MuInput))*TCD0(msqInput(0),msqInput(0),msuInput(0),msuInput(2))*Yu(0,0)*Yu(2
+      ,0)*(AuInput(0,0)*Yu(0,0)*Yu(2,0) + AuInput(2,0)*Yu(0,0)*Yu(2,0)) - 3*
+      AuInput(0,0)*Sqr(Abs(MuInput))*TCD0(msqInput(0),msqInput(0),msuInput(2),
+      msuInput(0))*Yu(0,0)*Yu(2,0)*(AuInput(0,0)*Yu(0,0)*Yu(2,0) + AuInput(2,0)*Yu
+      (0,0)*Yu(2,0)) - 3*AuInput(2,0)*Sqr(Abs(MuInput))*TCD0(msqInput(0),msqInput(
+      0),msuInput(1),msuInput(2))*Yu(1,0)*Yu(2,0)*(AuInput(1,0)*Yu(1,0)*Yu(2,0) +
+      AuInput(2,0)*Yu(1,0)*Yu(2,0)) - 3*AuInput(1,0)*Sqr(Abs(MuInput))*TCD0(
+      msqInput(0),msqInput(0),msuInput(2),msuInput(1))*Yu(1,0)*Yu(2,0)*(AuInput(1,
+      0)*Yu(1,0)*Yu(2,0) + AuInput(2,0)*Yu(1,0)*Yu(2,0)) - 3*AuInput(2,1)*Sqr(Abs(
+      MuInput))*TCD0(msqInput(0),msqInput(1),msuInput(0),msuInput(2))*Yu(0,0)*(
+      AuInput(0,1)*Yu(0,1)*Yu(2,0) + AuInput(2,0)*Yu(0,1)*Yu(2,0))*Yu(2,1) - 3*
+      AuInput(0,0)*Sqr(Abs(MuInput))*TCD0(msqInput(1),msqInput(0),msuInput(2),
+      msuInput(0))*Yu(0,0)*(AuInput(0,1)*Yu(0,1)*Yu(2,0) + AuInput(2,0)*Yu(0,1)*Yu
+      (2,0))*Yu(2,1) - 3*AuInput(2,1)*Sqr(Abs(MuInput))*TCD0(msqInput(0),msqInput(
+      1),msuInput(1),msuInput(2))*Yu(1,0)*(AuInput(1,1)*Yu(1,1)*Yu(2,0) + AuInput(
+      2,0)*Yu(1,1)*Yu(2,0))*Yu(2,1) - 3*AuInput(1,0)*Sqr(Abs(MuInput))*TCD0(
+      msqInput(1),msqInput(0),msuInput(2),msuInput(1))*Yu(1,0)*(AuInput(1,1)*Yu(1,
+      1)*Yu(2,0) + AuInput(2,0)*Yu(1,1)*Yu(2,0))*Yu(2,1) - 3*AuInput(0,1)*Sqr(Abs(
+      MuInput))*TCD0(msqInput(0),msqInput(1),msuInput(2),msuInput(0))*Yu(0,1)*Yu(2
+      ,0)*(AuInput(0,0)*Yu(0,0)*Yu(2,1) + AuInput(2,1)*Yu(0,0)*Yu(2,1)) - 3*
+      AuInput(2,0)*Sqr(Abs(MuInput))*TCD0(msqInput(1),msqInput(0),msuInput(0),
+      msuInput(2))*Yu(0,1)*Yu(2,0)*(AuInput(0,0)*Yu(0,0)*Yu(2,1) + AuInput(2,1)*Yu
+      (0,0)*Yu(2,1)) - 3*AuInput(2,1)*Sqr(Abs(MuInput))*TCD0(msqInput(1),msqInput(
+      1),msuInput(0),msuInput(2))*Yu(0,1)*Yu(2,1)*(AuInput(0,1)*Yu(0,1)*Yu(2,1) +
+      AuInput(2,1)*Yu(0,1)*Yu(2,1)) - 3*AuInput(0,1)*Sqr(Abs(MuInput))*TCD0(
+      msqInput(1),msqInput(1),msuInput(2),msuInput(0))*Yu(0,1)*Yu(2,1)*(AuInput(0,
+      1)*Yu(0,1)*Yu(2,1) + AuInput(2,1)*Yu(0,1)*Yu(2,1)) - 3*AuInput(1,1)*Sqr(Abs(
+      MuInput))*TCD0(msqInput(0),msqInput(1),msuInput(2),msuInput(1))*Yu(1,1)*Yu(2
+      ,0)*(AuInput(1,0)*Yu(1,0)*Yu(2,1) + AuInput(2,1)*Yu(1,0)*Yu(2,1)) - 3*
+      AuInput(2,0)*Sqr(Abs(MuInput))*TCD0(msqInput(1),msqInput(0),msuInput(1),
+      msuInput(2))*Yu(1,1)*Yu(2,0)*(AuInput(1,0)*Yu(1,0)*Yu(2,1) + AuInput(2,1)*Yu
+      (1,0)*Yu(2,1)) - 3*AuInput(2,1)*Sqr(Abs(MuInput))*TCD0(msqInput(1),msqInput(
+      1),msuInput(1),msuInput(2))*Yu(1,1)*Yu(2,1)*(AuInput(1,1)*Yu(1,1)*Yu(2,1) +
+      AuInput(2,1)*Yu(1,1)*Yu(2,1)) - 3*AuInput(1,1)*Sqr(Abs(MuInput))*TCD0(
+      msqInput(1),msqInput(1),msuInput(2),msuInput(1))*Yu(1,1)*Yu(2,1)*(AuInput(1,
+      1)*Yu(1,1)*Yu(2,1) + AuInput(2,1)*Yu(1,1)*Yu(2,1)) - 3*Sqr(Abs(MuInput))*
+      TCC0(msqInput(0),msqInput(1),msuInput(0))*Yu(0,0)*Yu(0,1)*(Yu(0,0)*Yu(0,1) +
+      Yu(1,0)*Yu(1,1) + Yu(2,0)*Yu(2,1)) - 3*Sqr(Abs(MuInput))*TCC0(msqInput(1),
+      msqInput(0),msuInput(0))*Yu(0,0)*Yu(0,1)*(Yu(0,0)*Yu(0,1) + Yu(1,0)*Yu(1,1)
+      + Yu(2,0)*Yu(2,1)) - 3*Sqr(Abs(MuInput))*TCC0(msqInput(0),msqInput(1),
+      msuInput(1))*Yu(1,0)*Yu(1,1)*(Yu(0,0)*Yu(0,1) + Yu(1,0)*Yu(1,1) + Yu(2,0)*Yu
+      (2,1)) - 3*Sqr(Abs(MuInput))*TCC0(msqInput(1),msqInput(0),msuInput(1))*Yu(1,
+      0)*Yu(1,1)*(Yu(0,0)*Yu(0,1) + Yu(1,0)*Yu(1,1) + Yu(2,0)*Yu(2,1)) - 3*Sqr(Abs
+      (MuInput))*TCC0(msqInput(0),msqInput(1),msuInput(2))*Yu(2,0)*Yu(2,1)*(Yu(0,0
+      )*Yu(0,1) + Yu(1,0)*Yu(1,1) + Yu(2,0)*Yu(2,1)) - 3*Sqr(Abs(MuInput))*TCC0(
+      msqInput(1),msqInput(0),msuInput(2))*Yu(2,0)*Yu(2,1)*(Yu(0,0)*Yu(0,1) + Yu(1
+      ,0)*Yu(1,1) + Yu(2,0)*Yu(2,1)) - 3*AuInput(2,1)*Sqr(Abs(MuInput))*TCD0(
+      msqInput(0),msqInput(1),msuInput(2),msuInput(2))*Yu(2,0)*Yu(2,1)*(AuInput(2,
+      0)*Yu(2,0)*Yu(2,1) + AuInput(2,1)*Yu(2,0)*Yu(2,1)) - 3*AuInput(2,0)*Sqr(Abs(
+      MuInput))*TCD0(msqInput(1),msqInput(0),msuInput(2),msuInput(2))*Yu(2,0)*Yu(2
+      ,1)*(AuInput(2,0)*Yu(2,0)*Yu(2,1) + AuInput(2,1)*Yu(2,0)*Yu(2,1)) - 3*
+      AuInput(2,2)*Sqr(Abs(MuInput))*TCD0(msqInput(0),msqInput(2),msuInput(0),
+      msuInput(2))*Yu(0,0)*(AuInput(0,2)*Yu(0,2)*Yu(2,0) + AuInput(2,0)*Yu(0,2)*Yu
+      (2,0))*Yu(2,2) - 3*AuInput(0,0)*Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(
+      0),msuInput(2),msuInput(0))*Yu(0,0)*(AuInput(0,2)*Yu(0,2)*Yu(2,0) + AuInput(
+      2,0)*Yu(0,2)*Yu(2,0))*Yu(2,2) - 3*AuInput(2,2)*Sqr(Abs(MuInput))*TCD0(
+      msqInput(0),msqInput(2),msuInput(1),msuInput(2))*Yu(1,0)*(AuInput(1,2)*Yu(1,
+      2)*Yu(2,0) + AuInput(2,0)*Yu(1,2)*Yu(2,0))*Yu(2,2) - 3*AuInput(1,0)*Sqr(Abs(
+      MuInput))*TCD0(msqInput(2),msqInput(0),msuInput(2),msuInput(1))*Yu(1,0)*(
+      AuInput(1,2)*Yu(1,2)*Yu(2,0) + AuInput(2,0)*Yu(1,2)*Yu(2,0))*Yu(2,2) - 3*
+      AuInput(2,2)*Sqr(Abs(MuInput))*TCD0(msqInput(1),msqInput(2),msuInput(0),
+      msuInput(2))*Yu(0,1)*(AuInput(0,2)*Yu(0,2)*Yu(2,1) + AuInput(2,1)*Yu(0,2)*Yu
+      (2,1))*Yu(2,2) - 3*AuInput(0,1)*Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(
+      1),msuInput(2),msuInput(0))*Yu(0,1)*(AuInput(0,2)*Yu(0,2)*Yu(2,1) + AuInput(
+      2,1)*Yu(0,2)*Yu(2,1))*Yu(2,2) - 3*AuInput(2,2)*Sqr(Abs(MuInput))*TCD0(
+      msqInput(1),msqInput(2),msuInput(1),msuInput(2))*Yu(1,1)*(AuInput(1,2)*Yu(1,
+      2)*Yu(2,1) + AuInput(2,1)*Yu(1,2)*Yu(2,1))*Yu(2,2) - 3*AuInput(1,1)*Sqr(Abs(
+      MuInput))*TCD0(msqInput(2),msqInput(1),msuInput(2),msuInput(1))*Yu(1,1)*(
+      AuInput(1,2)*Yu(1,2)*Yu(2,1) + AuInput(2,1)*Yu(1,2)*Yu(2,1))*Yu(2,2) - 3*
+      AuInput(0,2)*Sqr(Abs(MuInput))*TCD0(msqInput(0),msqInput(2),msuInput(2),
+      msuInput(0))*Yu(0,2)*Yu(2,0)*(AuInput(0,0)*Yu(0,0)*Yu(2,2) + AuInput(2,2)*Yu
+      (0,0)*Yu(2,2)) - 3*AuInput(2,0)*Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(
+      0),msuInput(0),msuInput(2))*Yu(0,2)*Yu(2,0)*(AuInput(0,0)*Yu(0,0)*Yu(2,2) +
+      AuInput(2,2)*Yu(0,0)*Yu(2,2)) - 3*AuInput(0,2)*Sqr(Abs(MuInput))*TCD0(
+      msqInput(1),msqInput(2),msuInput(2),msuInput(0))*Yu(0,2)*Yu(2,1)*(AuInput(0,
+      1)*Yu(0,1)*Yu(2,2) + AuInput(2,2)*Yu(0,1)*Yu(2,2)) - 3*AuInput(2,1)*Sqr(Abs(
+      MuInput))*TCD0(msqInput(2),msqInput(1),msuInput(0),msuInput(2))*Yu(0,2)*Yu(2
+      ,1)*(AuInput(0,1)*Yu(0,1)*Yu(2,2) + AuInput(2,2)*Yu(0,1)*Yu(2,2)) - 3*Sqr(
+      Abs(MuInput))*TCC0(msqInput(0),msuInput(0),msuInput(2))*Yu(0,0)*Yu(2,0)*(Yu(
+      0,0)*Yu(2,0) + Yu(0,1)*Yu(2,1) + Yu(0,2)*Yu(2,2)) - 3*Sqr(Abs(MuInput))*TCC0
+      (msqInput(0),msuInput(2),msuInput(0))*Yu(0,0)*Yu(2,0)*(Yu(0,0)*Yu(2,0) + Yu(
+      0,1)*Yu(2,1) + Yu(0,2)*Yu(2,2)) - 3*Sqr(Abs(MuInput))*TCC0(msqInput(1),
+      msuInput(0),msuInput(2))*Yu(0,1)*Yu(2,1)*(Yu(0,0)*Yu(2,0) + Yu(0,1)*Yu(2,1)
+      + Yu(0,2)*Yu(2,2)) - 3*Sqr(Abs(MuInput))*TCC0(msqInput(1),msuInput(2),
+      msuInput(0))*Yu(0,1)*Yu(2,1)*(Yu(0,0)*Yu(2,0) + Yu(0,1)*Yu(2,1) + Yu(0,2)*Yu
+      (2,2)) - 3*Sqr(Abs(MuInput))*TCC0(msqInput(2),msuInput(0),msuInput(2))*Yu(0,
+      2)*Yu(2,2)*(Yu(0,0)*Yu(2,0) + Yu(0,1)*Yu(2,1) + Yu(0,2)*Yu(2,2)) - 3*Sqr(Abs
+      (MuInput))*TCC0(msqInput(2),msuInput(2),msuInput(0))*Yu(0,2)*Yu(2,2)*(Yu(0,0
+      )*Yu(2,0) + Yu(0,1)*Yu(2,1) + Yu(0,2)*Yu(2,2)) - 3*AuInput(2,2)*Sqr(Abs(
+      MuInput))*TCD0(msqInput(2),msqInput(2),msuInput(0),msuInput(2))*Yu(0,2)*Yu(2
+      ,2)*(AuInput(0,2)*Yu(0,2)*Yu(2,2) + AuInput(2,2)*Yu(0,2)*Yu(2,2)) - 3*
+      AuInput(0,2)*Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(2),msuInput(2),
+      msuInput(0))*Yu(0,2)*Yu(2,2)*(AuInput(0,2)*Yu(0,2)*Yu(2,2) + AuInput(2,2)*Yu
+      (0,2)*Yu(2,2)) - 3*AuInput(1,2)*Sqr(Abs(MuInput))*TCD0(msqInput(0),msqInput(
+      2),msuInput(2),msuInput(1))*Yu(1,2)*Yu(2,0)*(AuInput(1,0)*Yu(1,0)*Yu(2,2) +
+      AuInput(2,2)*Yu(1,0)*Yu(2,2)) - 3*AuInput(2,0)*Sqr(Abs(MuInput))*TCD0(
+      msqInput(2),msqInput(0),msuInput(1),msuInput(2))*Yu(1,2)*Yu(2,0)*(AuInput(1,
+      0)*Yu(1,0)*Yu(2,2) + AuInput(2,2)*Yu(1,0)*Yu(2,2)) - 3*AuInput(1,2)*Sqr(Abs(
+      MuInput))*TCD0(msqInput(1),msqInput(2),msuInput(2),msuInput(1))*Yu(1,2)*Yu(2
+      ,1)*(AuInput(1,1)*Yu(1,1)*Yu(2,2) + AuInput(2,2)*Yu(1,1)*Yu(2,2)) - 3*
+      AuInput(2,1)*Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(1),msuInput(1),
+      msuInput(2))*Yu(1,2)*Yu(2,1)*(AuInput(1,1)*Yu(1,1)*Yu(2,2) + AuInput(2,2)*Yu
+      (1,1)*Yu(2,2)) - 3*Sqr(Abs(MuInput))*TCC0(msqInput(0),msuInput(1),msuInput(2
+      ))*Yu(1,0)*Yu(2,0)*(Yu(1,0)*Yu(2,0) + Yu(1,1)*Yu(2,1) + Yu(1,2)*Yu(2,2)) - 3
+      *Sqr(Abs(MuInput))*TCC0(msqInput(0),msuInput(2),msuInput(1))*Yu(1,0)*Yu(2,0)
+      *(Yu(1,0)*Yu(2,0) + Yu(1,1)*Yu(2,1) + Yu(1,2)*Yu(2,2)) - 3*Sqr(Abs(MuInput))
+      *TCC0(msqInput(1),msuInput(1),msuInput(2))*Yu(1,1)*Yu(2,1)*(Yu(1,0)*Yu(2,0)
+      + Yu(1,1)*Yu(2,1) + Yu(1,2)*Yu(2,2)) - 3*Sqr(Abs(MuInput))*TCC0(msqInput(1),
+      msuInput(2),msuInput(1))*Yu(1,1)*Yu(2,1)*(Yu(1,0)*Yu(2,0) + Yu(1,1)*Yu(2,1)
+      + Yu(1,2)*Yu(2,2)) - 3*Sqr(Abs(MuInput))*TCC0(msqInput(2),msuInput(1),
+      msuInput(2))*Yu(1,2)*Yu(2,2)*(Yu(1,0)*Yu(2,0) + Yu(1,1)*Yu(2,1) + Yu(1,2)*Yu
+      (2,2)) - 3*Sqr(Abs(MuInput))*TCC0(msqInput(2),msuInput(2),msuInput(1))*Yu(1,
+      2)*Yu(2,2)*(Yu(1,0)*Yu(2,0) + Yu(1,1)*Yu(2,1) + Yu(1,2)*Yu(2,2)) - 3*AuInput
+      (2,2)*Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(2),msuInput(1),msuInput(2)
+      )*Yu(1,2)*Yu(2,2)*(AuInput(1,2)*Yu(1,2)*Yu(2,2) + AuInput(2,2)*Yu(1,2)*Yu(2,
+      2)) - 3*AuInput(1,2)*Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(2),msuInput
+      (2),msuInput(1))*Yu(1,2)*Yu(2,2)*(AuInput(1,2)*Yu(1,2)*Yu(2,2) + AuInput(2,2
+      )*Yu(1,2)*Yu(2,2)) - 3*Sqr(Abs(MuInput))*TCC0(msqInput(0),msqInput(2),
+      msuInput(0))*Yu(0,0)*Yu(0,2)*(Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1,2) + Yu(2,0)*Yu
+      (2,2)) - 3*Sqr(Abs(MuInput))*TCC0(msqInput(2),msqInput(0),msuInput(0))*Yu(0,
+      0)*Yu(0,2)*(Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1,2) + Yu(2,0)*Yu(2,2)) - 3*Sqr(Abs
+      (MuInput))*TCC0(msqInput(0),msqInput(2),msuInput(1))*Yu(1,0)*Yu(1,2)*(Yu(0,0
+      )*Yu(0,2) + Yu(1,0)*Yu(1,2) + Yu(2,0)*Yu(2,2)) - 3*Sqr(Abs(MuInput))*TCC0(
+      msqInput(2),msqInput(0),msuInput(1))*Yu(1,0)*Yu(1,2)*(Yu(0,0)*Yu(0,2) + Yu(1
+      ,0)*Yu(1,2) + Yu(2,0)*Yu(2,2)) - 3*Sqr(Abs(MuInput))*TCC0(msqInput(0),
+      msqInput(2),msuInput(2))*Yu(2,0)*Yu(2,2)*(Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1,2)
+      + Yu(2,0)*Yu(2,2)) - 3*Sqr(Abs(MuInput))*TCC0(msqInput(2),msqInput(0),
+      msuInput(2))*Yu(2,0)*Yu(2,2)*(Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1,2) + Yu(2,0)*Yu
+      (2,2)) - 3*AuInput(2,2)*Sqr(Abs(MuInput))*TCD0(msqInput(0),msqInput(2),
+      msuInput(2),msuInput(2))*Yu(2,0)*Yu(2,2)*(AuInput(2,0)*Yu(2,0)*Yu(2,2) +
+      AuInput(2,2)*Yu(2,0)*Yu(2,2)) - 3*AuInput(2,0)*Sqr(Abs(MuInput))*TCD0(
+      msqInput(2),msqInput(0),msuInput(2),msuInput(2))*Yu(2,0)*Yu(2,2)*(AuInput(2,
+      0)*Yu(2,0)*Yu(2,2) + AuInput(2,2)*Yu(2,0)*Yu(2,2)) - 3*Sqr(Abs(MuInput))*
+      TCC0(msqInput(1),msqInput(2),msuInput(0))*Yu(0,1)*Yu(0,2)*(Yu(0,1)*Yu(0,2) +
+      Yu(1,1)*Yu(1,2) + Yu(2,1)*Yu(2,2)) - 3*Sqr(Abs(MuInput))*TCC0(msqInput(2),
+      msqInput(1),msuInput(0))*Yu(0,1)*Yu(0,2)*(Yu(0,1)*Yu(0,2) + Yu(1,1)*Yu(1,2)
+      + Yu(2,1)*Yu(2,2)) - 3*Sqr(Abs(MuInput))*TCC0(msqInput(1),msqInput(2),
+      msuInput(1))*Yu(1,1)*Yu(1,2)*(Yu(0,1)*Yu(0,2) + Yu(1,1)*Yu(1,2) + Yu(2,1)*Yu
+      (2,2)) - 3*Sqr(Abs(MuInput))*TCC0(msqInput(2),msqInput(1),msuInput(1))*Yu(1,
+      1)*Yu(1,2)*(Yu(0,1)*Yu(0,2) + Yu(1,1)*Yu(1,2) + Yu(2,1)*Yu(2,2)) - 3*Sqr(Abs
+      (MuInput))*TCC0(msqInput(1),msqInput(2),msuInput(2))*Yu(2,1)*Yu(2,2)*(Yu(0,1
+      )*Yu(0,2) + Yu(1,1)*Yu(1,2) + Yu(2,1)*Yu(2,2)) - 3*Sqr(Abs(MuInput))*TCC0(
+      msqInput(2),msqInput(1),msuInput(2))*Yu(2,1)*Yu(2,2)*(Yu(0,1)*Yu(0,2) + Yu(1
+      ,1)*Yu(1,2) + Yu(2,1)*Yu(2,2)) - 3*AuInput(2,2)*Sqr(Abs(MuInput))*TCD0(
+      msqInput(1),msqInput(2),msuInput(2),msuInput(2))*Yu(2,1)*Yu(2,2)*(AuInput(2,
+      1)*Yu(2,1)*Yu(2,2) + AuInput(2,2)*Yu(2,1)*Yu(2,2)) - 3*AuInput(2,1)*Sqr(Abs(
+      MuInput))*TCD0(msqInput(2),msqInput(1),msuInput(2),msuInput(2))*Yu(2,1)*Yu(2
+      ,2)*(AuInput(2,1)*Yu(2,1)*Yu(2,2) + AuInput(2,2)*Yu(2,1)*Yu(2,2))) +
+      0.006332573977646111*(-3*Sqr(Yd(0,0)*Yu(0,0) + Yd(0,1)*Yu(0,1) + Yd(0,2)*Yu(
+      0,2))*TCB0(msdInput(0),msuInput(0),SCALE) - 3*Sqr(Yd(0,0)*Yu(1,0) + Yd(0,1)*
+      Yu(1,1) + Yd(0,2)*Yu(1,2))*TCB0(msdInput(0),msuInput(1),SCALE) - 3*Sqr(Yd(0,
+      0)*Yu(2,0) + Yd(0,1)*Yu(2,1) + Yd(0,2)*Yu(2,2))*TCB0(msdInput(0),msuInput(2)
+      ,SCALE) - 3*Sqr(Yd(1,0)*Yu(0,0) + Yd(1,1)*Yu(0,1) + Yd(1,2)*Yu(0,2))*TCB0(
+      msdInput(1),msuInput(0),SCALE) - 3*Sqr(Yd(1,0)*Yu(1,0) + Yd(1,1)*Yu(1,1) +
+      Yd(1,2)*Yu(1,2))*TCB0(msdInput(1),msuInput(1),SCALE) - 3*Sqr(Yd(1,0)*Yu(2,0)
+      + Yd(1,1)*Yu(2,1) + Yd(1,2)*Yu(2,2))*TCB0(msdInput(1),msuInput(2),SCALE) - 3
+      *Sqr(Yd(2,0)*Yu(0,0) + Yd(2,1)*Yu(0,1) + Yd(2,2)*Yu(0,2))*TCB0(msdInput(2),
+      msuInput(0),SCALE) - 3*Sqr(Yd(2,0)*Yu(1,0) + Yd(2,1)*Yu(1,1) + Yd(2,2)*Yu(1,
+      2))*TCB0(msdInput(2),msuInput(1),SCALE) - 3*Sqr(Yd(2,0)*Yu(2,0) + Yd(2,1)*Yu
+      (2,1) + Yd(2,2)*Yu(2,2))*TCB0(msdInput(2),msuInput(2),SCALE) + (-0.25*Quad(
+      g2) + 0.5*Sqr(g2)*(Sqr(Ye(0,0)) + Sqr(Ye(1,0)) + Sqr(Ye(2,0))))*TCB0(
+      mslInput(0),mslInput(0),SCALE) + (-0.25*Quad(g2) + 0.5*Sqr(g2)*(Sqr(Ye(0,1))
+      + Sqr(Ye(1,1)) + Sqr(Ye(2,1))))*TCB0(mslInput(1),mslInput(1),SCALE) + (-0.25
+      *Quad(g2) + 0.5*Sqr(g2)*(Sqr(Ye(0,2)) + Sqr(Ye(1,2)) + Sqr(Ye(2,2))))*TCB0(
+      mslInput(2),mslInput(2),SCALE) + (-0.75*Quad(g2) + 1.5*Sqr(g2)*(Sqr(Yd(0,0))
+      + Sqr(Yd(1,0)) + Sqr(Yd(2,0))) + 1.5*Sqr(g2)*(Sqr(Yu(0,0)) + Sqr(Yu(1,0)) +
+      Sqr(Yu(2,0))) - 3*(Sqr(Yd(0,0)) + Sqr(Yd(1,0)) + Sqr(Yd(2,0)))*(Sqr(Yu(0,0))
+      + Sqr(Yu(1,0)) + Sqr(Yu(2,0))))*TCB0(msqInput(0),msqInput(0),SCALE) + (-0.75
+      *Quad(g2) + 1.5*Sqr(g2)*(Sqr(Yd(0,1)) + Sqr(Yd(1,1)) + Sqr(Yd(2,1))) + 1.5*
+      Sqr(g2)*(Sqr(Yu(0,1)) + Sqr(Yu(1,1)) + Sqr(Yu(2,1))) - 3*(Sqr(Yd(0,1)) + Sqr
+      (Yd(1,1)) + Sqr(Yd(2,1)))*(Sqr(Yu(0,1)) + Sqr(Yu(1,1)) + Sqr(Yu(2,1))))*TCB0
+      (msqInput(1),msqInput(1),SCALE) + (-0.75*Quad(g2) + 1.5*Sqr(g2)*(Sqr(Yd(0,2)
+      ) + Sqr(Yd(1,2)) + Sqr(Yd(2,2))) + 1.5*Sqr(g2)*(Sqr(Yu(0,2)) + Sqr(Yu(1,2))
+      + Sqr(Yu(2,2))) - 3*(Sqr(Yd(0,2)) + Sqr(Yd(1,2)) + Sqr(Yd(2,2)))*(Sqr(Yu(0,2
+      )) + Sqr(Yu(1,2)) + Sqr(Yu(2,2))))*TCB0(msqInput(2),msqInput(2),SCALE) + (-
+      1.5*Sqr(g2)*Sqr(Abs(MuInput))*Sqr(Yd(0,0)) + 1.5*Sqr(g2)*Sqr(AdInput(0,0))*
+      Sqr(Yd(0,0)) + 3*Sqr(Abs(MuInput))*Sqr(Yd(0,0))*(Sqr(Yd(0,0)) + Sqr(Yd(1,0))
+      + Sqr(Yd(2,0))) - 3*Sqr(AdInput(0,0))*Sqr(Yd(0,0))*(Sqr(Yu(0,0)) + Sqr(Yu(1,
+      0)) + Sqr(Yu(2,0))))*TCC0(msdInput(0),msqInput(0),msqInput(0)) + (-1.5*Sqr(
+      g2)*Sqr(Abs(MuInput))*Sqr(Yd(0,1)) + 1.5*Sqr(g2)*Sqr(AdInput(0,1))*Sqr(Yd(0,
+      1)) + 3*Sqr(Abs(MuInput))*Sqr(Yd(0,1))*(Sqr(Yd(0,1)) + Sqr(Yd(1,1)) + Sqr(Yd
+      (2,1))) - 3*Sqr(AdInput(0,1))*Sqr(Yd(0,1))*(Sqr(Yu(0,1)) + Sqr(Yu(1,1)) +
+      Sqr(Yu(2,1))))*TCC0(msdInput(0),msqInput(1),msqInput(1)) + (-1.5*Sqr(g2)*Sqr
+      (Abs(MuInput))*Sqr(Yd(0,2)) + 1.5*Sqr(g2)*Sqr(AdInput(0,2))*Sqr(Yd(0,2)) + 3
+      *Sqr(Abs(MuInput))*Sqr(Yd(0,2))*(Sqr(Yd(0,2)) + Sqr(Yd(1,2)) + Sqr(Yd(2,2)))
+      - 3*Sqr(AdInput(0,2))*Sqr(Yd(0,2))*(Sqr(Yu(0,2)) + Sqr(Yu(1,2)) + Sqr(Yu(2,2
+      ))))*TCC0(msdInput(0),msqInput(2),msqInput(2)) + (-1.5*Sqr(g2)*Sqr(Abs(
+      MuInput))*Sqr(Yd(1,0)) + 1.5*Sqr(g2)*Sqr(AdInput(1,0))*Sqr(Yd(1,0)) + 3*Sqr(
+      Abs(MuInput))*Sqr(Yd(1,0))*(Sqr(Yd(0,0)) + Sqr(Yd(1,0)) + Sqr(Yd(2,0))) - 3*
+      Sqr(AdInput(1,0))*Sqr(Yd(1,0))*(Sqr(Yu(0,0)) + Sqr(Yu(1,0)) + Sqr(Yu(2,0))))
+      *TCC0(msdInput(1),msqInput(0),msqInput(0)) + (-1.5*Sqr(g2)*Sqr(Abs(MuInput))
+      *Sqr(Yd(1,1)) + 1.5*Sqr(g2)*Sqr(AdInput(1,1))*Sqr(Yd(1,1)) + 3*Sqr(Abs(
+      MuInput))*Sqr(Yd(1,1))*(Sqr(Yd(0,1)) + Sqr(Yd(1,1)) + Sqr(Yd(2,1))) - 3*Sqr(
+      AdInput(1,1))*Sqr(Yd(1,1))*(Sqr(Yu(0,1)) + Sqr(Yu(1,1)) + Sqr(Yu(2,1))))*
+      TCC0(msdInput(1),msqInput(1),msqInput(1)) + (-1.5*Sqr(g2)*Sqr(Abs(MuInput))*
+      Sqr(Yd(1,2)) + 1.5*Sqr(g2)*Sqr(AdInput(1,2))*Sqr(Yd(1,2)) + 3*Sqr(Abs(
+      MuInput))*Sqr(Yd(1,2))*(Sqr(Yd(0,2)) + Sqr(Yd(1,2)) + Sqr(Yd(2,2))) - 3*Sqr(
+      AdInput(1,2))*Sqr(Yd(1,2))*(Sqr(Yu(0,2)) + Sqr(Yu(1,2)) + Sqr(Yu(2,2))))*
+      TCC0(msdInput(1),msqInput(2),msqInput(2)) + (-1.5*Sqr(g2)*Sqr(Abs(MuInput))*
+      Sqr(Yd(2,0)) + 1.5*Sqr(g2)*Sqr(AdInput(2,0))*Sqr(Yd(2,0)) + 3*Sqr(Abs(
+      MuInput))*Sqr(Yd(2,0))*(Sqr(Yd(0,0)) + Sqr(Yd(1,0)) + Sqr(Yd(2,0))) - 3*Sqr(
+      AdInput(2,0))*Sqr(Yd(2,0))*(Sqr(Yu(0,0)) + Sqr(Yu(1,0)) + Sqr(Yu(2,0))))*
+      TCC0(msdInput(2),msqInput(0),msqInput(0)) + (-1.5*Sqr(g2)*Sqr(Abs(MuInput))*
+      Sqr(Yd(2,1)) + 1.5*Sqr(g2)*Sqr(AdInput(2,1))*Sqr(Yd(2,1)) + 3*Sqr(Abs(
+      MuInput))*Sqr(Yd(2,1))*(Sqr(Yd(0,1)) + Sqr(Yd(1,1)) + Sqr(Yd(2,1))) - 3*Sqr(
+      AdInput(2,1))*Sqr(Yd(2,1))*(Sqr(Yu(0,1)) + Sqr(Yu(1,1)) + Sqr(Yu(2,1))))*
+      TCC0(msdInput(2),msqInput(1),msqInput(1)) + (-1.5*Sqr(g2)*Sqr(Abs(MuInput))*
+      Sqr(Yd(2,2)) + 1.5*Sqr(g2)*Sqr(AdInput(2,2))*Sqr(Yd(2,2)) + 3*Sqr(Abs(
+      MuInput))*Sqr(Yd(2,2))*(Sqr(Yd(0,2)) + Sqr(Yd(1,2)) + Sqr(Yd(2,2))) - 3*Sqr(
+      AdInput(2,2))*Sqr(Yd(2,2))*(Sqr(Yu(0,2)) + Sqr(Yu(1,2)) + Sqr(Yu(2,2))))*
+      TCC0(msdInput(2),msqInput(2),msqInput(2)) + (-0.5*Sqr(g2)*Sqr(Abs(MuInput))*
+      Sqr(Ye(0,0)) + 0.5*Sqr(g2)*Sqr(AeInput(0,0))*Sqr(Ye(0,0)) + Sqr(Abs(MuInput)
+      )*Sqr(Ye(0,0))*(Sqr(Ye(0,0)) + Sqr(Ye(1,0)) + Sqr(Ye(2,0))))*TCC0(mseInput(0
+      ),mslInput(0),mslInput(0)) + (-0.5*Sqr(g2)*Sqr(Abs(MuInput))*Sqr(Ye(0,1)) +
+      0.5*Sqr(g2)*Sqr(AeInput(0,1))*Sqr(Ye(0,1)) + Sqr(Abs(MuInput))*Sqr(Ye(0,1))*
+      (Sqr(Ye(0,1)) + Sqr(Ye(1,1)) + Sqr(Ye(2,1))))*TCC0(mseInput(0),mslInput(1),
+      mslInput(1)) + (-0.5*Sqr(g2)*Sqr(Abs(MuInput))*Sqr(Ye(0,2)) + 0.5*Sqr(g2)*
+      Sqr(AeInput(0,2))*Sqr(Ye(0,2)) + Sqr(Abs(MuInput))*Sqr(Ye(0,2))*(Sqr(Ye(0,2)
+      ) + Sqr(Ye(1,2)) + Sqr(Ye(2,2))))*TCC0(mseInput(0),mslInput(2),mslInput(2))
+      + (-0.5*Sqr(g2)*Sqr(Abs(MuInput))*Sqr(Ye(1,0)) + 0.5*Sqr(g2)*Sqr(AeInput(1,0
+      ))*Sqr(Ye(1,0)) + Sqr(Abs(MuInput))*Sqr(Ye(1,0))*(Sqr(Ye(0,0)) + Sqr(Ye(1,0)
+      ) + Sqr(Ye(2,0))))*TCC0(mseInput(1),mslInput(0),mslInput(0)) + (-0.5*Sqr(g2)
+      *Sqr(Abs(MuInput))*Sqr(Ye(1,1)) + 0.5*Sqr(g2)*Sqr(AeInput(1,1))*Sqr(Ye(1,1))
+      + Sqr(Abs(MuInput))*Sqr(Ye(1,1))*(Sqr(Ye(0,1)) + Sqr(Ye(1,1)) + Sqr(Ye(2,1))
+      ))*TCC0(mseInput(1),mslInput(1),mslInput(1)) + (-0.5*Sqr(g2)*Sqr(Abs(MuInput
+      ))*Sqr(Ye(1,2)) + 0.5*Sqr(g2)*Sqr(AeInput(1,2))*Sqr(Ye(1,2)) + Sqr(Abs(
+      MuInput))*Sqr(Ye(1,2))*(Sqr(Ye(0,2)) + Sqr(Ye(1,2)) + Sqr(Ye(2,2))))*TCC0(
+      mseInput(1),mslInput(2),mslInput(2)) + (-0.5*Sqr(g2)*Sqr(Abs(MuInput))*Sqr(
+      Ye(2,0)) + 0.5*Sqr(g2)*Sqr(AeInput(2,0))*Sqr(Ye(2,0)) + Sqr(Abs(MuInput))*
+      Sqr(Ye(2,0))*(Sqr(Ye(0,0)) + Sqr(Ye(1,0)) + Sqr(Ye(2,0))))*TCC0(mseInput(2),
+      mslInput(0),mslInput(0)) + (-0.5*Sqr(g2)*Sqr(Abs(MuInput))*Sqr(Ye(2,1)) +
+      0.5*Sqr(g2)*Sqr(AeInput(2,1))*Sqr(Ye(2,1)) + Sqr(Abs(MuInput))*Sqr(Ye(2,1))*
+      (Sqr(Ye(0,1)) + Sqr(Ye(1,1)) + Sqr(Ye(2,1))))*TCC0(mseInput(2),mslInput(1),
+      mslInput(1)) + (-0.5*Sqr(g2)*Sqr(Abs(MuInput))*Sqr(Ye(2,2)) + 0.5*Sqr(g2)*
+      Sqr(AeInput(2,2))*Sqr(Ye(2,2)) + Sqr(Abs(MuInput))*Sqr(Ye(2,2))*(Sqr(Ye(0,2)
+      ) + Sqr(Ye(1,2)) + Sqr(Ye(2,2))))*TCC0(mseInput(2),mslInput(2),mslInput(2))
+      + (-1.5*Sqr(g2)*Sqr(Abs(MuInput))*Sqr(Yu(0,0)) + 1.5*Sqr(g2)*Sqr(AuInput(0,0
+      ))*Sqr(Yu(0,0)) - 3*Sqr(AuInput(0,0))*(Sqr(Yd(0,0)) + Sqr(Yd(1,0)) + Sqr(Yd(
+      2,0)))*Sqr(Yu(0,0)) + 3*Sqr(Abs(MuInput))*Sqr(Yu(0,0))*(Sqr(Yu(0,0)) + Sqr(
+      Yu(1,0)) + Sqr(Yu(2,0))))*TCC0(msqInput(0),msqInput(0),msuInput(0)) + (-1.5*
+      Sqr(g2)*Sqr(Abs(MuInput))*Sqr(Yu(1,0)) + 1.5*Sqr(g2)*Sqr(AuInput(1,0))*Sqr(
+      Yu(1,0)) - 3*Sqr(AuInput(1,0))*(Sqr(Yd(0,0)) + Sqr(Yd(1,0)) + Sqr(Yd(2,0)))*
+      Sqr(Yu(1,0)) + 3*Sqr(Abs(MuInput))*Sqr(Yu(1,0))*(Sqr(Yu(0,0)) + Sqr(Yu(1,0))
+      + Sqr(Yu(2,0))))*TCC0(msqInput(0),msqInput(0),msuInput(1)) + (-1.5*Sqr(g2)*
+      Sqr(Abs(MuInput))*Sqr(Yu(2,0)) + 1.5*Sqr(g2)*Sqr(AuInput(2,0))*Sqr(Yu(2,0))
+      - 3*Sqr(AuInput(2,0))*(Sqr(Yd(0,0)) + Sqr(Yd(1,0)) + Sqr(Yd(2,0)))*Sqr(Yu(2,
+      0)) + 3*Sqr(Abs(MuInput))*Sqr(Yu(2,0))*(Sqr(Yu(0,0)) + Sqr(Yu(1,0)) + Sqr(Yu
+      (2,0))))*TCC0(msqInput(0),msqInput(0),msuInput(2)) + (-1.5*Sqr(g2)*Sqr(Abs(
+      MuInput))*Sqr(Yu(0,1)) + 1.5*Sqr(g2)*Sqr(AuInput(0,1))*Sqr(Yu(0,1)) - 3*Sqr(
+      AuInput(0,1))*(Sqr(Yd(0,1)) + Sqr(Yd(1,1)) + Sqr(Yd(2,1)))*Sqr(Yu(0,1)) + 3*
+      Sqr(Abs(MuInput))*Sqr(Yu(0,1))*(Sqr(Yu(0,1)) + Sqr(Yu(1,1)) + Sqr(Yu(2,1))))
+      *TCC0(msqInput(1),msqInput(1),msuInput(0)) + (-1.5*Sqr(g2)*Sqr(Abs(MuInput))
+      *Sqr(Yu(1,1)) + 1.5*Sqr(g2)*Sqr(AuInput(1,1))*Sqr(Yu(1,1)) - 3*Sqr(AuInput(1
+      ,1))*(Sqr(Yd(0,1)) + Sqr(Yd(1,1)) + Sqr(Yd(2,1)))*Sqr(Yu(1,1)) + 3*Sqr(Abs(
+      MuInput))*Sqr(Yu(1,1))*(Sqr(Yu(0,1)) + Sqr(Yu(1,1)) + Sqr(Yu(2,1))))*TCC0(
+      msqInput(1),msqInput(1),msuInput(1)) + (-1.5*Sqr(g2)*Sqr(Abs(MuInput))*Sqr(
+      Yu(2,1)) + 1.5*Sqr(g2)*Sqr(AuInput(2,1))*Sqr(Yu(2,1)) - 3*Sqr(AuInput(2,1))*
+      (Sqr(Yd(0,1)) + Sqr(Yd(1,1)) + Sqr(Yd(2,1)))*Sqr(Yu(2,1)) + 3*Sqr(Abs(
+      MuInput))*Sqr(Yu(2,1))*(Sqr(Yu(0,1)) + Sqr(Yu(1,1)) + Sqr(Yu(2,1))))*TCC0(
+      msqInput(1),msqInput(1),msuInput(2)) + (-1.5*Sqr(g2)*Sqr(Abs(MuInput))*Sqr(
+      Yu(0,2)) + 1.5*Sqr(g2)*Sqr(AuInput(0,2))*Sqr(Yu(0,2)) - 3*Sqr(AuInput(0,2))*
+      (Sqr(Yd(0,2)) + Sqr(Yd(1,2)) + Sqr(Yd(2,2)))*Sqr(Yu(0,2)) + 3*Sqr(Abs(
+      MuInput))*Sqr(Yu(0,2))*(Sqr(Yu(0,2)) + Sqr(Yu(1,2)) + Sqr(Yu(2,2))))*TCC0(
+      msqInput(2),msqInput(2),msuInput(0)) + (-1.5*Sqr(g2)*Sqr(Abs(MuInput))*Sqr(
+      Yu(1,2)) + 1.5*Sqr(g2)*Sqr(AuInput(1,2))*Sqr(Yu(1,2)) - 3*Sqr(AuInput(1,2))*
+      (Sqr(Yd(0,2)) + Sqr(Yd(1,2)) + Sqr(Yd(2,2)))*Sqr(Yu(1,2)) + 3*Sqr(Abs(
+      MuInput))*Sqr(Yu(1,2))*(Sqr(Yu(0,2)) + Sqr(Yu(1,2)) + Sqr(Yu(2,2))))*TCC0(
+      msqInput(2),msqInput(2),msuInput(1)) + (-1.5*Sqr(g2)*Sqr(Abs(MuInput))*Sqr(
+      Yu(2,2)) + 1.5*Sqr(g2)*Sqr(AuInput(2,2))*Sqr(Yu(2,2)) - 3*Sqr(AuInput(2,2))*
+      (Sqr(Yd(0,2)) + Sqr(Yd(1,2)) + Sqr(Yd(2,2)))*Sqr(Yu(2,2)) + 3*Sqr(Abs(
+      MuInput))*Sqr(Yu(2,2))*(Sqr(Yu(0,2)) + Sqr(Yu(1,2)) + Sqr(Yu(2,2))))*TCC0(
+      msqInput(2),msqInput(2),msuInput(2)) + 3*Quad(Yd(0,0))*Sqr(Abs(MuInput))*Sqr
+      (AdInput(0,0))*TCD0(msdInput(0),msdInput(0),msqInput(0),msqInput(0)) + 3*
+      AdInput(0,0)*AdInput(0,1)*Sqr(Abs(MuInput))*Sqr(Yd(0,0))*Sqr(Yd(0,1))*TCD0(
+      msdInput(0),msdInput(0),msqInput(0),msqInput(1)) + 3*AdInput(0,0)*AdInput(0,
+      2)*Sqr(Abs(MuInput))*Sqr(Yd(0,0))*Sqr(Yd(0,2))*TCD0(msdInput(0),msdInput(0),
+      msqInput(0),msqInput(2)) + 3*AdInput(0,0)*AdInput(0,1)*Sqr(Abs(MuInput))*Sqr
+      (Yd(0,0))*Sqr(Yd(0,1))*TCD0(msdInput(0),msdInput(0),msqInput(1),msqInput(0))
+      + 3*Quad(Yd(0,1))*Sqr(Abs(MuInput))*Sqr(AdInput(0,1))*TCD0(msdInput(0),
+      msdInput(0),msqInput(1),msqInput(1)) + 3*AdInput(0,1)*AdInput(0,2)*Sqr(Abs(
+      MuInput))*Sqr(Yd(0,1))*Sqr(Yd(0,2))*TCD0(msdInput(0),msdInput(0),msqInput(1)
+      ,msqInput(2)) + 3*AdInput(0,0)*AdInput(0,2)*Sqr(Abs(MuInput))*Sqr(Yd(0,0))*
+      Sqr(Yd(0,2))*TCD0(msdInput(0),msdInput(0),msqInput(2),msqInput(0)) + 3*
+      AdInput(0,1)*AdInput(0,2)*Sqr(Abs(MuInput))*Sqr(Yd(0,1))*Sqr(Yd(0,2))*TCD0(
+      msdInput(0),msdInput(0),msqInput(2),msqInput(1)) + 3*Quad(Yd(0,2))*Sqr(Abs(
+      MuInput))*Sqr(AdInput(0,2))*TCD0(msdInput(0),msdInput(0),msqInput(2),
+      msqInput(2)) + 3*Sqr(Abs(MuInput))*Sqr(AdInput(0,0))*Sqr(Yd(0,0))*Sqr(Yd(1,0
+      ))*TCD0(msdInput(0),msdInput(1),msqInput(0),msqInput(0)) + 3*Sqr(Abs(MuInput
+      ))*Sqr(AdInput(0,1))*Sqr(Yd(0,1))*Sqr(Yd(1,1))*TCD0(msdInput(0),msdInput(1),
+      msqInput(1),msqInput(1)) + 3*Sqr(Abs(MuInput))*Sqr(AdInput(0,2))*Sqr(Yd(0,2)
+      )*Sqr(Yd(1,2))*TCD0(msdInput(0),msdInput(1),msqInput(2),msqInput(2)) + 3*Sqr
+      (Abs(MuInput))*Sqr(AdInput(0,0))*Sqr(Yd(0,0))*Sqr(Yd(2,0))*TCD0(msdInput(0),
+      msdInput(2),msqInput(0),msqInput(0)) + 3*Sqr(Abs(MuInput))*Sqr(AdInput(0,1))
+      *Sqr(Yd(0,1))*Sqr(Yd(2,1))*TCD0(msdInput(0),msdInput(2),msqInput(1),msqInput
+      (1)) + 3*Sqr(Abs(MuInput))*Sqr(AdInput(0,2))*Sqr(Yd(0,2))*Sqr(Yd(2,2))*TCD0(
+      msdInput(0),msdInput(2),msqInput(2),msqInput(2)) - 3*Sqr(-(Sqr(Abs(MuInput))
+      *Yd(0,0)*Yu(0,0)) + AdInput(0,0)*AuInput(0,0)*Yd(0,0)*Yu(0,0))*TCD0(msdInput
+      (0),msqInput(0),msqInput(0),msuInput(0)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(0,0)
+      *Yu(1,0)) + AdInput(0,0)*AuInput(1,0)*Yd(0,0)*Yu(1,0))*TCD0(msdInput(0),
+      msqInput(0),msqInput(0),msuInput(1)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(0,0)*Yu(
+      2,0)) + AdInput(0,0)*AuInput(2,0)*Yd(0,0)*Yu(2,0))*TCD0(msdInput(0),msqInput
+      (0),msqInput(0),msuInput(2)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(0,1)*Yu(0,1)) +
+      AdInput(0,1)*AuInput(0,1)*Yd(0,1)*Yu(0,1))*TCD0(msdInput(0),msqInput(1),
+      msqInput(1),msuInput(0)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(0,1)*Yu(1,1)) +
+      AdInput(0,1)*AuInput(1,1)*Yd(0,1)*Yu(1,1))*TCD0(msdInput(0),msqInput(1),
+      msqInput(1),msuInput(1)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(0,1)*Yu(2,1)) +
+      AdInput(0,1)*AuInput(2,1)*Yd(0,1)*Yu(2,1))*TCD0(msdInput(0),msqInput(1),
+      msqInput(1),msuInput(2)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(0,2)*Yu(0,2)) +
+      AdInput(0,2)*AuInput(0,2)*Yd(0,2)*Yu(0,2))*TCD0(msdInput(0),msqInput(2),
+      msqInput(2),msuInput(0)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(0,2)*Yu(1,2)) +
+      AdInput(0,2)*AuInput(1,2)*Yd(0,2)*Yu(1,2))*TCD0(msdInput(0),msqInput(2),
+      msqInput(2),msuInput(1)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(0,2)*Yu(2,2)) +
+      AdInput(0,2)*AuInput(2,2)*Yd(0,2)*Yu(2,2))*TCD0(msdInput(0),msqInput(2),
+      msqInput(2),msuInput(2)) + 3*Sqr(Abs(MuInput))*Sqr(AdInput(1,0))*Sqr(Yd(0,0)
+      )*Sqr(Yd(1,0))*TCD0(msdInput(1),msdInput(0),msqInput(0),msqInput(0)) + 3*Sqr
+      (Abs(MuInput))*Sqr(AdInput(1,1))*Sqr(Yd(0,1))*Sqr(Yd(1,1))*TCD0(msdInput(1),
+      msdInput(0),msqInput(1),msqInput(1)) + 3*Sqr(Abs(MuInput))*Sqr(AdInput(1,2))
+      *Sqr(Yd(0,2))*Sqr(Yd(1,2))*TCD0(msdInput(1),msdInput(0),msqInput(2),msqInput
+      (2)) + 3*Quad(Yd(1,0))*Sqr(Abs(MuInput))*Sqr(AdInput(1,0))*TCD0(msdInput(1),
+      msdInput(1),msqInput(0),msqInput(0)) + 3*AdInput(1,0)*AdInput(1,1)*Sqr(Abs(
+      MuInput))*Sqr(Yd(1,0))*Sqr(Yd(1,1))*TCD0(msdInput(1),msdInput(1),msqInput(0)
+      ,msqInput(1)) + 3*AdInput(1,0)*AdInput(1,2)*Sqr(Abs(MuInput))*Sqr(Yd(1,0))*
+      Sqr(Yd(1,2))*TCD0(msdInput(1),msdInput(1),msqInput(0),msqInput(2)) + 3*
+      AdInput(1,0)*AdInput(1,1)*Sqr(Abs(MuInput))*Sqr(Yd(1,0))*Sqr(Yd(1,1))*TCD0(
+      msdInput(1),msdInput(1),msqInput(1),msqInput(0)) + 3*Quad(Yd(1,1))*Sqr(Abs(
+      MuInput))*Sqr(AdInput(1,1))*TCD0(msdInput(1),msdInput(1),msqInput(1),
+      msqInput(1)) + 3*AdInput(1,1)*AdInput(1,2)*Sqr(Abs(MuInput))*Sqr(Yd(1,1))*
+      Sqr(Yd(1,2))*TCD0(msdInput(1),msdInput(1),msqInput(1),msqInput(2)) + 3*
+      AdInput(1,0)*AdInput(1,2)*Sqr(Abs(MuInput))*Sqr(Yd(1,0))*Sqr(Yd(1,2))*TCD0(
+      msdInput(1),msdInput(1),msqInput(2),msqInput(0)) + 3*AdInput(1,1)*AdInput(1,
+      2)*Sqr(Abs(MuInput))*Sqr(Yd(1,1))*Sqr(Yd(1,2))*TCD0(msdInput(1),msdInput(1),
+      msqInput(2),msqInput(1)) + 3*Quad(Yd(1,2))*Sqr(Abs(MuInput))*Sqr(AdInput(1,2
+      ))*TCD0(msdInput(1),msdInput(1),msqInput(2),msqInput(2)) + 3*Sqr(Abs(MuInput
+      ))*Sqr(AdInput(1,0))*Sqr(Yd(1,0))*Sqr(Yd(2,0))*TCD0(msdInput(1),msdInput(2),
+      msqInput(0),msqInput(0)) + 3*Sqr(Abs(MuInput))*Sqr(AdInput(1,1))*Sqr(Yd(1,1)
+      )*Sqr(Yd(2,1))*TCD0(msdInput(1),msdInput(2),msqInput(1),msqInput(1)) + 3*Sqr
+      (Abs(MuInput))*Sqr(AdInput(1,2))*Sqr(Yd(1,2))*Sqr(Yd(2,2))*TCD0(msdInput(1),
+      msdInput(2),msqInput(2),msqInput(2)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(1,0)*Yu(
+      0,0)) + AdInput(1,0)*AuInput(0,0)*Yd(1,0)*Yu(0,0))*TCD0(msdInput(1),msqInput
+      (0),msqInput(0),msuInput(0)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(1,0)*Yu(1,0)) +
+      AdInput(1,0)*AuInput(1,0)*Yd(1,0)*Yu(1,0))*TCD0(msdInput(1),msqInput(0),
+      msqInput(0),msuInput(1)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(1,0)*Yu(2,0)) +
+      AdInput(1,0)*AuInput(2,0)*Yd(1,0)*Yu(2,0))*TCD0(msdInput(1),msqInput(0),
+      msqInput(0),msuInput(2)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(1,1)*Yu(0,1)) +
+      AdInput(1,1)*AuInput(0,1)*Yd(1,1)*Yu(0,1))*TCD0(msdInput(1),msqInput(1),
+      msqInput(1),msuInput(0)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(1,1)*Yu(1,1)) +
+      AdInput(1,1)*AuInput(1,1)*Yd(1,1)*Yu(1,1))*TCD0(msdInput(1),msqInput(1),
+      msqInput(1),msuInput(1)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(1,1)*Yu(2,1)) +
+      AdInput(1,1)*AuInput(2,1)*Yd(1,1)*Yu(2,1))*TCD0(msdInput(1),msqInput(1),
+      msqInput(1),msuInput(2)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(1,2)*Yu(0,2)) +
+      AdInput(1,2)*AuInput(0,2)*Yd(1,2)*Yu(0,2))*TCD0(msdInput(1),msqInput(2),
+      msqInput(2),msuInput(0)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(1,2)*Yu(1,2)) +
+      AdInput(1,2)*AuInput(1,2)*Yd(1,2)*Yu(1,2))*TCD0(msdInput(1),msqInput(2),
+      msqInput(2),msuInput(1)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(1,2)*Yu(2,2)) +
+      AdInput(1,2)*AuInput(2,2)*Yd(1,2)*Yu(2,2))*TCD0(msdInput(1),msqInput(2),
+      msqInput(2),msuInput(2)) + 3*Sqr(Abs(MuInput))*Sqr(AdInput(2,0))*Sqr(Yd(0,0)
+      )*Sqr(Yd(2,0))*TCD0(msdInput(2),msdInput(0),msqInput(0),msqInput(0)) + 3*Sqr
+      (Abs(MuInput))*Sqr(AdInput(2,1))*Sqr(Yd(0,1))*Sqr(Yd(2,1))*TCD0(msdInput(2),
+      msdInput(0),msqInput(1),msqInput(1)) + 3*Sqr(Abs(MuInput))*Sqr(AdInput(2,2))
+      *Sqr(Yd(0,2))*Sqr(Yd(2,2))*TCD0(msdInput(2),msdInput(0),msqInput(2),msqInput
+      (2)) + 3*Sqr(Abs(MuInput))*Sqr(AdInput(2,0))*Sqr(Yd(1,0))*Sqr(Yd(2,0))*TCD0(
+      msdInput(2),msdInput(1),msqInput(0),msqInput(0)) + 3*Sqr(Abs(MuInput))*Sqr(
+      AdInput(2,1))*Sqr(Yd(1,1))*Sqr(Yd(2,1))*TCD0(msdInput(2),msdInput(1),
+      msqInput(1),msqInput(1)) + 3*Sqr(Abs(MuInput))*Sqr(AdInput(2,2))*Sqr(Yd(1,2)
+      )*Sqr(Yd(2,2))*TCD0(msdInput(2),msdInput(1),msqInput(2),msqInput(2)) + 3*
+      Quad(Yd(2,0))*Sqr(Abs(MuInput))*Sqr(AdInput(2,0))*TCD0(msdInput(2),msdInput(
+      2),msqInput(0),msqInput(0)) + 3*AdInput(2,0)*AdInput(2,1)*Sqr(Abs(MuInput))*
+      Sqr(Yd(2,0))*Sqr(Yd(2,1))*TCD0(msdInput(2),msdInput(2),msqInput(0),msqInput(
+      1)) + 3*AdInput(2,0)*AdInput(2,2)*Sqr(Abs(MuInput))*Sqr(Yd(2,0))*Sqr(Yd(2,2)
+      )*TCD0(msdInput(2),msdInput(2),msqInput(0),msqInput(2)) + 3*AdInput(2,0)*
+      AdInput(2,1)*Sqr(Abs(MuInput))*Sqr(Yd(2,0))*Sqr(Yd(2,1))*TCD0(msdInput(2),
+      msdInput(2),msqInput(1),msqInput(0)) + 3*Quad(Yd(2,1))*Sqr(Abs(MuInput))*Sqr
+      (AdInput(2,1))*TCD0(msdInput(2),msdInput(2),msqInput(1),msqInput(1)) + 3*
+      AdInput(2,1)*AdInput(2,2)*Sqr(Abs(MuInput))*Sqr(Yd(2,1))*Sqr(Yd(2,2))*TCD0(
+      msdInput(2),msdInput(2),msqInput(1),msqInput(2)) + 3*AdInput(2,0)*AdInput(2,
+      2)*Sqr(Abs(MuInput))*Sqr(Yd(2,0))*Sqr(Yd(2,2))*TCD0(msdInput(2),msdInput(2),
+      msqInput(2),msqInput(0)) + 3*AdInput(2,1)*AdInput(2,2)*Sqr(Abs(MuInput))*Sqr
+      (Yd(2,1))*Sqr(Yd(2,2))*TCD0(msdInput(2),msdInput(2),msqInput(2),msqInput(1))
+      + 3*Quad(Yd(2,2))*Sqr(Abs(MuInput))*Sqr(AdInput(2,2))*TCD0(msdInput(2),
+      msdInput(2),msqInput(2),msqInput(2)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(2,0)*Yu(
+      0,0)) + AdInput(2,0)*AuInput(0,0)*Yd(2,0)*Yu(0,0))*TCD0(msdInput(2),msqInput
+      (0),msqInput(0),msuInput(0)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(2,0)*Yu(1,0)) +
+      AdInput(2,0)*AuInput(1,0)*Yd(2,0)*Yu(1,0))*TCD0(msdInput(2),msqInput(0),
+      msqInput(0),msuInput(1)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(2,0)*Yu(2,0)) +
+      AdInput(2,0)*AuInput(2,0)*Yd(2,0)*Yu(2,0))*TCD0(msdInput(2),msqInput(0),
+      msqInput(0),msuInput(2)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(2,1)*Yu(0,1)) +
+      AdInput(2,1)*AuInput(0,1)*Yd(2,1)*Yu(0,1))*TCD0(msdInput(2),msqInput(1),
+      msqInput(1),msuInput(0)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(2,1)*Yu(1,1)) +
+      AdInput(2,1)*AuInput(1,1)*Yd(2,1)*Yu(1,1))*TCD0(msdInput(2),msqInput(1),
+      msqInput(1),msuInput(1)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(2,1)*Yu(2,1)) +
+      AdInput(2,1)*AuInput(2,1)*Yd(2,1)*Yu(2,1))*TCD0(msdInput(2),msqInput(1),
+      msqInput(1),msuInput(2)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(2,2)*Yu(0,2)) +
+      AdInput(2,2)*AuInput(0,2)*Yd(2,2)*Yu(0,2))*TCD0(msdInput(2),msqInput(2),
+      msqInput(2),msuInput(0)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(2,2)*Yu(1,2)) +
+      AdInput(2,2)*AuInput(1,2)*Yd(2,2)*Yu(1,2))*TCD0(msdInput(2),msqInput(2),
+      msqInput(2),msuInput(1)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(2,2)*Yu(2,2)) +
+      AdInput(2,2)*AuInput(2,2)*Yd(2,2)*Yu(2,2))*TCD0(msdInput(2),msqInput(2),
+      msqInput(2),msuInput(2)) + Quad(Ye(0,0))*Sqr(Abs(MuInput))*Sqr(AeInput(0,0))
+      *TCD0(mseInput(0),mseInput(0),mslInput(0),mslInput(0)) + AeInput(0,0)*
+      AeInput(0,1)*Sqr(Abs(MuInput))*Sqr(Ye(0,0))*Sqr(Ye(0,1))*TCD0(mseInput(0),
+      mseInput(0),mslInput(0),mslInput(1)) + AeInput(0,0)*AeInput(0,2)*Sqr(Abs(
+      MuInput))*Sqr(Ye(0,0))*Sqr(Ye(0,2))*TCD0(mseInput(0),mseInput(0),mslInput(0)
+      ,mslInput(2)) + AeInput(0,0)*AeInput(0,1)*Sqr(Abs(MuInput))*Sqr(Ye(0,0))*Sqr
+      (Ye(0,1))*TCD0(mseInput(0),mseInput(0),mslInput(1),mslInput(0)) + Quad(Ye(0,
+      1))*Sqr(Abs(MuInput))*Sqr(AeInput(0,1))*TCD0(mseInput(0),mseInput(0),
+      mslInput(1),mslInput(1)) + AeInput(0,1)*AeInput(0,2)*Sqr(Abs(MuInput))*Sqr(
+      Ye(0,1))*Sqr(Ye(0,2))*TCD0(mseInput(0),mseInput(0),mslInput(1),mslInput(2))
+      + AeInput(0,0)*AeInput(0,2)*Sqr(Abs(MuInput))*Sqr(Ye(0,0))*Sqr(Ye(0,2))*TCD0
+      (mseInput(0),mseInput(0),mslInput(2),mslInput(0)) + AeInput(0,1)*AeInput(0,2
+      )*Sqr(Abs(MuInput))*Sqr(Ye(0,1))*Sqr(Ye(0,2))*TCD0(mseInput(0),mseInput(0),
+      mslInput(2),mslInput(1)) + Quad(Ye(0,2))*Sqr(Abs(MuInput))*Sqr(AeInput(0,2))
+      *TCD0(mseInput(0),mseInput(0),mslInput(2),mslInput(2)) + Sqr(Abs(MuInput))*
+      Sqr(AeInput(0,0))*Sqr(Ye(0,0))*Sqr(Ye(1,0))*TCD0(mseInput(0),mseInput(1),
+      mslInput(0),mslInput(0)) + Sqr(Abs(MuInput))*Sqr(AeInput(0,1))*Sqr(Ye(0,1))*
+      Sqr(Ye(1,1))*TCD0(mseInput(0),mseInput(1),mslInput(1),mslInput(1)) + Sqr(Abs
+      (MuInput))*Sqr(AeInput(0,2))*Sqr(Ye(0,2))*Sqr(Ye(1,2))*TCD0(mseInput(0),
+      mseInput(1),mslInput(2),mslInput(2)) + Sqr(Abs(MuInput))*Sqr(AeInput(0,0))*
+      Sqr(Ye(0,0))*Sqr(Ye(2,0))*TCD0(mseInput(0),mseInput(2),mslInput(0),mslInput(
+      0)) + Sqr(Abs(MuInput))*Sqr(AeInput(0,1))*Sqr(Ye(0,1))*Sqr(Ye(2,1))*TCD0(
+      mseInput(0),mseInput(2),mslInput(1),mslInput(1)) + Sqr(Abs(MuInput))*Sqr(
+      AeInput(0,2))*Sqr(Ye(0,2))*Sqr(Ye(2,2))*TCD0(mseInput(0),mseInput(2),
+      mslInput(2),mslInput(2)) + Sqr(Abs(MuInput))*Sqr(AeInput(1,0))*Sqr(Ye(0,0))*
+      Sqr(Ye(1,0))*TCD0(mseInput(1),mseInput(0),mslInput(0),mslInput(0)) + Sqr(Abs
+      (MuInput))*Sqr(AeInput(1,1))*Sqr(Ye(0,1))*Sqr(Ye(1,1))*TCD0(mseInput(1),
+      mseInput(0),mslInput(1),mslInput(1)) + Sqr(Abs(MuInput))*Sqr(AeInput(1,2))*
+      Sqr(Ye(0,2))*Sqr(Ye(1,2))*TCD0(mseInput(1),mseInput(0),mslInput(2),mslInput(
+      2)) + Quad(Ye(1,0))*Sqr(Abs(MuInput))*Sqr(AeInput(1,0))*TCD0(mseInput(1),
+      mseInput(1),mslInput(0),mslInput(0)) + AeInput(1,0)*AeInput(1,1)*Sqr(Abs(
+      MuInput))*Sqr(Ye(1,0))*Sqr(Ye(1,1))*TCD0(mseInput(1),mseInput(1),mslInput(0)
+      ,mslInput(1)) + AeInput(1,0)*AeInput(1,2)*Sqr(Abs(MuInput))*Sqr(Ye(1,0))*Sqr
+      (Ye(1,2))*TCD0(mseInput(1),mseInput(1),mslInput(0),mslInput(2)) + AeInput(1,
+      0)*AeInput(1,1)*Sqr(Abs(MuInput))*Sqr(Ye(1,0))*Sqr(Ye(1,1))*TCD0(mseInput(1)
+      ,mseInput(1),mslInput(1),mslInput(0)) + Quad(Ye(1,1))*Sqr(Abs(MuInput))*Sqr(
+      AeInput(1,1))*TCD0(mseInput(1),mseInput(1),mslInput(1),mslInput(1)) +
+      AeInput(1,1)*AeInput(1,2)*Sqr(Abs(MuInput))*Sqr(Ye(1,1))*Sqr(Ye(1,2))*TCD0(
+      mseInput(1),mseInput(1),mslInput(1),mslInput(2)) + AeInput(1,0)*AeInput(1,2)
+      *Sqr(Abs(MuInput))*Sqr(Ye(1,0))*Sqr(Ye(1,2))*TCD0(mseInput(1),mseInput(1),
+      mslInput(2),mslInput(0)) + AeInput(1,1)*AeInput(1,2)*Sqr(Abs(MuInput))*Sqr(
+      Ye(1,1))*Sqr(Ye(1,2))*TCD0(mseInput(1),mseInput(1),mslInput(2),mslInput(1))
+      + Quad(Ye(1,2))*Sqr(Abs(MuInput))*Sqr(AeInput(1,2))*TCD0(mseInput(1),
+      mseInput(1),mslInput(2),mslInput(2)) + Sqr(Abs(MuInput))*Sqr(AeInput(1,0))*
+      Sqr(Ye(1,0))*Sqr(Ye(2,0))*TCD0(mseInput(1),mseInput(2),mslInput(0),mslInput(
+      0)) + Sqr(Abs(MuInput))*Sqr(AeInput(1,1))*Sqr(Ye(1,1))*Sqr(Ye(2,1))*TCD0(
+      mseInput(1),mseInput(2),mslInput(1),mslInput(1)) + Sqr(Abs(MuInput))*Sqr(
+      AeInput(1,2))*Sqr(Ye(1,2))*Sqr(Ye(2,2))*TCD0(mseInput(1),mseInput(2),
+      mslInput(2),mslInput(2)) + Sqr(Abs(MuInput))*Sqr(AeInput(2,0))*Sqr(Ye(0,0))*
+      Sqr(Ye(2,0))*TCD0(mseInput(2),mseInput(0),mslInput(0),mslInput(0)) + Sqr(Abs
+      (MuInput))*Sqr(AeInput(2,1))*Sqr(Ye(0,1))*Sqr(Ye(2,1))*TCD0(mseInput(2),
+      mseInput(0),mslInput(1),mslInput(1)) + Sqr(Abs(MuInput))*Sqr(AeInput(2,2))*
+      Sqr(Ye(0,2))*Sqr(Ye(2,2))*TCD0(mseInput(2),mseInput(0),mslInput(2),mslInput(
+      2)) + Sqr(Abs(MuInput))*Sqr(AeInput(2,0))*Sqr(Ye(1,0))*Sqr(Ye(2,0))*TCD0(
+      mseInput(2),mseInput(1),mslInput(0),mslInput(0)) + Sqr(Abs(MuInput))*Sqr(
+      AeInput(2,1))*Sqr(Ye(1,1))*Sqr(Ye(2,1))*TCD0(mseInput(2),mseInput(1),
+      mslInput(1),mslInput(1)) + Sqr(Abs(MuInput))*Sqr(AeInput(2,2))*Sqr(Ye(1,2))*
+      Sqr(Ye(2,2))*TCD0(mseInput(2),mseInput(1),mslInput(2),mslInput(2)) + Quad(Ye
+      (2,0))*Sqr(Abs(MuInput))*Sqr(AeInput(2,0))*TCD0(mseInput(2),mseInput(2),
+      mslInput(0),mslInput(0)) + AeInput(2,0)*AeInput(2,1)*Sqr(Abs(MuInput))*Sqr(
+      Ye(2,0))*Sqr(Ye(2,1))*TCD0(mseInput(2),mseInput(2),mslInput(0),mslInput(1))
+      + AeInput(2,0)*AeInput(2,2)*Sqr(Abs(MuInput))*Sqr(Ye(2,0))*Sqr(Ye(2,2))*TCD0
+      (mseInput(2),mseInput(2),mslInput(0),mslInput(2)) + AeInput(2,0)*AeInput(2,1
+      )*Sqr(Abs(MuInput))*Sqr(Ye(2,0))*Sqr(Ye(2,1))*TCD0(mseInput(2),mseInput(2),
+      mslInput(1),mslInput(0)) + Quad(Ye(2,1))*Sqr(Abs(MuInput))*Sqr(AeInput(2,1))
+      *TCD0(mseInput(2),mseInput(2),mslInput(1),mslInput(1)) + AeInput(2,1)*
+      AeInput(2,2)*Sqr(Abs(MuInput))*Sqr(Ye(2,1))*Sqr(Ye(2,2))*TCD0(mseInput(2),
+      mseInput(2),mslInput(1),mslInput(2)) + AeInput(2,0)*AeInput(2,2)*Sqr(Abs(
+      MuInput))*Sqr(Ye(2,0))*Sqr(Ye(2,2))*TCD0(mseInput(2),mseInput(2),mslInput(2)
+      ,mslInput(0)) + AeInput(2,1)*AeInput(2,2)*Sqr(Abs(MuInput))*Sqr(Ye(2,1))*Sqr
+      (Ye(2,2))*TCD0(mseInput(2),mseInput(2),mslInput(2),mslInput(1)) + Quad(Ye(2,
+      2))*Sqr(Abs(MuInput))*Sqr(AeInput(2,2))*TCD0(mseInput(2),mseInput(2),
+      mslInput(2),mslInput(2)) + 3*Quad(Yu(0,0))*Sqr(Abs(MuInput))*Sqr(AuInput(0,0
+      ))*TCD0(msqInput(0),msqInput(0),msuInput(0),msuInput(0)) + 3*Sqr(Abs(MuInput
+      ))*Sqr(AuInput(1,0))*Sqr(Yu(0,0))*Sqr(Yu(1,0))*TCD0(msqInput(0),msqInput(0),
+      msuInput(0),msuInput(1)) + 3*Sqr(Abs(MuInput))*Sqr(AuInput(2,0))*Sqr(Yu(0,0)
+      )*Sqr(Yu(2,0))*TCD0(msqInput(0),msqInput(0),msuInput(0),msuInput(2)) + 3*Sqr
+      (Abs(MuInput))*Sqr(AuInput(0,0))*Sqr(Yu(0,0))*Sqr(Yu(1,0))*TCD0(msqInput(0),
+      msqInput(0),msuInput(1),msuInput(0)) + 3*Quad(Yu(1,0))*Sqr(Abs(MuInput))*Sqr
+      (AuInput(1,0))*TCD0(msqInput(0),msqInput(0),msuInput(1),msuInput(1)) + 3*Sqr
+      (Abs(MuInput))*Sqr(AuInput(2,0))*Sqr(Yu(1,0))*Sqr(Yu(2,0))*TCD0(msqInput(0),
+      msqInput(0),msuInput(1),msuInput(2)) + 3*Sqr(Abs(MuInput))*Sqr(AuInput(0,0))
+      *Sqr(Yu(0,0))*Sqr(Yu(2,0))*TCD0(msqInput(0),msqInput(0),msuInput(2),msuInput
+      (0)) + 3*Sqr(Abs(MuInput))*Sqr(AuInput(1,0))*Sqr(Yu(1,0))*Sqr(Yu(2,0))*TCD0(
+      msqInput(0),msqInput(0),msuInput(2),msuInput(1)) + 3*Quad(Yu(2,0))*Sqr(Abs(
+      MuInput))*Sqr(AuInput(2,0))*TCD0(msqInput(0),msqInput(0),msuInput(2),
+      msuInput(2)) + 3*AuInput(0,0)*AuInput(0,1)*Sqr(Abs(MuInput))*Sqr(Yu(0,0))*
+      Sqr(Yu(0,1))*TCD0(msqInput(0),msqInput(1),msuInput(0),msuInput(0)) + 3*
+      AuInput(1,0)*AuInput(1,1)*Sqr(Abs(MuInput))*Sqr(Yu(1,0))*Sqr(Yu(1,1))*TCD0(
+      msqInput(0),msqInput(1),msuInput(1),msuInput(1)) + 3*AuInput(2,0)*AuInput(2,
+      1)*Sqr(Abs(MuInput))*Sqr(Yu(2,0))*Sqr(Yu(2,1))*TCD0(msqInput(0),msqInput(1),
+      msuInput(2),msuInput(2)) + 3*AuInput(0,0)*AuInput(0,2)*Sqr(Abs(MuInput))*Sqr
+      (Yu(0,0))*Sqr(Yu(0,2))*TCD0(msqInput(0),msqInput(2),msuInput(0),msuInput(0))
+      + 3*AuInput(1,0)*AuInput(1,2)*Sqr(Abs(MuInput))*Sqr(Yu(1,0))*Sqr(Yu(1,2))*
+      TCD0(msqInput(0),msqInput(2),msuInput(1),msuInput(1)) + 3*AuInput(2,0)*
+      AuInput(2,2)*Sqr(Abs(MuInput))*Sqr(Yu(2,0))*Sqr(Yu(2,2))*TCD0(msqInput(0),
+      msqInput(2),msuInput(2),msuInput(2)) + 3*AuInput(0,0)*AuInput(0,1)*Sqr(Abs(
+      MuInput))*Sqr(Yu(0,0))*Sqr(Yu(0,1))*TCD0(msqInput(1),msqInput(0),msuInput(0)
+      ,msuInput(0)) + 3*AuInput(1,0)*AuInput(1,1)*Sqr(Abs(MuInput))*Sqr(Yu(1,0))*
+      Sqr(Yu(1,1))*TCD0(msqInput(1),msqInput(0),msuInput(1),msuInput(1)) + 3*
+      AuInput(2,0)*AuInput(2,1)*Sqr(Abs(MuInput))*Sqr(Yu(2,0))*Sqr(Yu(2,1))*TCD0(
+      msqInput(1),msqInput(0),msuInput(2),msuInput(2)) + 3*Quad(Yu(0,1))*Sqr(Abs(
+      MuInput))*Sqr(AuInput(0,1))*TCD0(msqInput(1),msqInput(1),msuInput(0),
+      msuInput(0)) + 3*Sqr(Abs(MuInput))*Sqr(AuInput(1,1))*Sqr(Yu(0,1))*Sqr(Yu(1,1
+      ))*TCD0(msqInput(1),msqInput(1),msuInput(0),msuInput(1)) + 3*Sqr(Abs(MuInput
+      ))*Sqr(AuInput(2,1))*Sqr(Yu(0,1))*Sqr(Yu(2,1))*TCD0(msqInput(1),msqInput(1),
+      msuInput(0),msuInput(2)) + 3*Sqr(Abs(MuInput))*Sqr(AuInput(0,1))*Sqr(Yu(0,1)
+      )*Sqr(Yu(1,1))*TCD0(msqInput(1),msqInput(1),msuInput(1),msuInput(0)) + 3*
+      Quad(Yu(1,1))*Sqr(Abs(MuInput))*Sqr(AuInput(1,1))*TCD0(msqInput(1),msqInput(
+      1),msuInput(1),msuInput(1)) + 3*Sqr(Abs(MuInput))*Sqr(AuInput(2,1))*Sqr(Yu(1
+      ,1))*Sqr(Yu(2,1))*TCD0(msqInput(1),msqInput(1),msuInput(1),msuInput(2)) + 3*
+      Sqr(Abs(MuInput))*Sqr(AuInput(0,1))*Sqr(Yu(0,1))*Sqr(Yu(2,1))*TCD0(msqInput(
+      1),msqInput(1),msuInput(2),msuInput(0)) + 3*Sqr(Abs(MuInput))*Sqr(AuInput(1,
+      1))*Sqr(Yu(1,1))*Sqr(Yu(2,1))*TCD0(msqInput(1),msqInput(1),msuInput(2),
+      msuInput(1)) + 3*Quad(Yu(2,1))*Sqr(Abs(MuInput))*Sqr(AuInput(2,1))*TCD0(
+      msqInput(1),msqInput(1),msuInput(2),msuInput(2)) + 3*AuInput(0,1)*AuInput(0,
+      2)*Sqr(Abs(MuInput))*Sqr(Yu(0,1))*Sqr(Yu(0,2))*TCD0(msqInput(1),msqInput(2),
+      msuInput(0),msuInput(0)) + 3*AuInput(1,1)*AuInput(1,2)*Sqr(Abs(MuInput))*Sqr
+      (Yu(1,1))*Sqr(Yu(1,2))*TCD0(msqInput(1),msqInput(2),msuInput(1),msuInput(1))
+      + 3*AuInput(2,1)*AuInput(2,2)*Sqr(Abs(MuInput))*Sqr(Yu(2,1))*Sqr(Yu(2,2))*
+      TCD0(msqInput(1),msqInput(2),msuInput(2),msuInput(2)) + 3*AuInput(0,0)*
+      AuInput(0,2)*Sqr(Abs(MuInput))*Sqr(Yu(0,0))*Sqr(Yu(0,2))*TCD0(msqInput(2),
+      msqInput(0),msuInput(0),msuInput(0)) + 3*AuInput(1,0)*AuInput(1,2)*Sqr(Abs(
+      MuInput))*Sqr(Yu(1,0))*Sqr(Yu(1,2))*TCD0(msqInput(2),msqInput(0),msuInput(1)
+      ,msuInput(1)) + 3*AuInput(2,0)*AuInput(2,2)*Sqr(Abs(MuInput))*Sqr(Yu(2,0))*
+      Sqr(Yu(2,2))*TCD0(msqInput(2),msqInput(0),msuInput(2),msuInput(2)) + 3*
+      AuInput(0,1)*AuInput(0,2)*Sqr(Abs(MuInput))*Sqr(Yu(0,1))*Sqr(Yu(0,2))*TCD0(
+      msqInput(2),msqInput(1),msuInput(0),msuInput(0)) + 3*AuInput(1,1)*AuInput(1,
+      2)*Sqr(Abs(MuInput))*Sqr(Yu(1,1))*Sqr(Yu(1,2))*TCD0(msqInput(2),msqInput(1),
+      msuInput(1),msuInput(1)) + 3*AuInput(2,1)*AuInput(2,2)*Sqr(Abs(MuInput))*Sqr
+      (Yu(2,1))*Sqr(Yu(2,2))*TCD0(msqInput(2),msqInput(1),msuInput(2),msuInput(2))
+      + 3*Quad(Yu(0,2))*Sqr(Abs(MuInput))*Sqr(AuInput(0,2))*TCD0(msqInput(2),
+      msqInput(2),msuInput(0),msuInput(0)) + 3*Sqr(Abs(MuInput))*Sqr(AuInput(1,2))
+      *Sqr(Yu(0,2))*Sqr(Yu(1,2))*TCD0(msqInput(2),msqInput(2),msuInput(0),msuInput
+      (1)) + 3*Sqr(Abs(MuInput))*Sqr(AuInput(2,2))*Sqr(Yu(0,2))*Sqr(Yu(2,2))*TCD0(
+      msqInput(2),msqInput(2),msuInput(0),msuInput(2)) + 3*Sqr(Abs(MuInput))*Sqr(
+      AuInput(0,2))*Sqr(Yu(0,2))*Sqr(Yu(1,2))*TCD0(msqInput(2),msqInput(2),
+      msuInput(1),msuInput(0)) + 3*Quad(Yu(1,2))*Sqr(Abs(MuInput))*Sqr(AuInput(1,2
+      ))*TCD0(msqInput(2),msqInput(2),msuInput(1),msuInput(1)) + 3*Sqr(Abs(MuInput
+      ))*Sqr(AuInput(2,2))*Sqr(Yu(1,2))*Sqr(Yu(2,2))*TCD0(msqInput(2),msqInput(2),
+      msuInput(1),msuInput(2)) + 3*Sqr(Abs(MuInput))*Sqr(AuInput(0,2))*Sqr(Yu(0,2)
+      )*Sqr(Yu(2,2))*TCD0(msqInput(2),msqInput(2),msuInput(2),msuInput(0)) + 3*Sqr
+      (Abs(MuInput))*Sqr(AuInput(1,2))*Sqr(Yu(1,2))*Sqr(Yu(2,2))*TCD0(msqInput(2),
+      msqInput(2),msuInput(2),msuInput(1)) + 3*Quad(Yu(2,2))*Sqr(Abs(MuInput))*Sqr
+      (AuInput(2,2))*TCD0(msqInput(2),msqInput(2),msuInput(2),msuInput(2)) - 0.36*
+      Quad(g1)*Sqr(Abs(MuInput))*TCD2t(M1Input,M1Input,Abs(MuInput),Abs(MuInput))
+      + 0.6*Sqr(g1)*Sqr(g2)*(1 + (-2*M1Input*M2Input + 2*Sqr(Abs(MuInput)))*TCD2t(
+      M1Input,M2Input,Abs(MuInput),Abs(MuInput)) - 2*TCD4t(M1Input,M2Input,Abs(
+      MuInput),Abs(MuInput),SCALE)) + Quad(g2)*((-2*Sqr(Abs(M2Input)) - 3*Sqr(Abs(
+      MuInput)))*TCD2t(M2Input,M2Input,Abs(MuInput),Abs(MuInput)) + 2*TCD4t(
+      M2Input,M2Input,Abs(MuInput),Abs(MuInput),SCALE)) + 3*AdInput(0,0)*AdInput(0
+      ,1)*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(1),msqInput(0),msqInput(1))*
+      Yd(0,0)*Yd(0,1)*Yd(1,0)*Yd(1,1) + 3*AdInput(0,0)*AdInput(0,1)*Sqr(Abs(
+      MuInput))*TCD0(msdInput(0),msdInput(1),msqInput(1),msqInput(0))*Yd(0,0)*Yd(0
+      ,1)*Yd(1,0)*Yd(1,1) + 3*AdInput(1,0)*AdInput(1,1)*Sqr(Abs(MuInput))*TCD0(
+      msdInput(1),msdInput(0),msqInput(0),msqInput(1))*Yd(0,0)*Yd(0,1)*Yd(1,0)*Yd(
+      1,1) + 3*AdInput(1,0)*AdInput(1,1)*Sqr(Abs(MuInput))*TCD0(msdInput(1),
+      msdInput(0),msqInput(1),msqInput(0))*Yd(0,0)*Yd(0,1)*Yd(1,0)*Yd(1,1) + 3*
+      AdInput(0,0)*AdInput(0,2)*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(1),
+      msqInput(0),msqInput(2))*Yd(0,0)*Yd(0,2)*Yd(1,0)*Yd(1,2) + 3*AdInput(0,0)*
+      AdInput(0,2)*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(1),msqInput(2),
+      msqInput(0))*Yd(0,0)*Yd(0,2)*Yd(1,0)*Yd(1,2) + 3*AdInput(1,0)*AdInput(1,2)*
+      Sqr(Abs(MuInput))*TCD0(msdInput(1),msdInput(0),msqInput(0),msqInput(2))*Yd(0
+      ,0)*Yd(0,2)*Yd(1,0)*Yd(1,2) + 3*AdInput(1,0)*AdInput(1,2)*Sqr(Abs(MuInput))*
+      TCD0(msdInput(1),msdInput(0),msqInput(2),msqInput(0))*Yd(0,0)*Yd(0,2)*Yd(1,0
+      )*Yd(1,2) + 3*AdInput(0,1)*AdInput(0,2)*Sqr(Abs(MuInput))*TCD0(msdInput(0),
+      msdInput(1),msqInput(1),msqInput(2))*Yd(0,1)*Yd(0,2)*Yd(1,1)*Yd(1,2) + 3*
+      AdInput(0,1)*AdInput(0,2)*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(1),
+      msqInput(2),msqInput(1))*Yd(0,1)*Yd(0,2)*Yd(1,1)*Yd(1,2) + 3*AdInput(1,1)*
+      AdInput(1,2)*Sqr(Abs(MuInput))*TCD0(msdInput(1),msdInput(0),msqInput(1),
+      msqInput(2))*Yd(0,1)*Yd(0,2)*Yd(1,1)*Yd(1,2) + 3*AdInput(1,1)*AdInput(1,2)*
+      Sqr(Abs(MuInput))*TCD0(msdInput(1),msdInput(0),msqInput(2),msqInput(1))*Yd(0
+      ,1)*Yd(0,2)*Yd(1,1)*Yd(1,2) + 3*AdInput(0,0)*AdInput(0,1)*Sqr(Abs(MuInput))*
+      TCD0(msdInput(0),msdInput(2),msqInput(0),msqInput(1))*Yd(0,0)*Yd(0,1)*Yd(2,0
+      )*Yd(2,1) + 3*AdInput(0,0)*AdInput(0,1)*Sqr(Abs(MuInput))*TCD0(msdInput(0),
+      msdInput(2),msqInput(1),msqInput(0))*Yd(0,0)*Yd(0,1)*Yd(2,0)*Yd(2,1) + 3*
+      AdInput(2,0)*AdInput(2,1)*Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(0),
+      msqInput(0),msqInput(1))*Yd(0,0)*Yd(0,1)*Yd(2,0)*Yd(2,1) + 3*AdInput(2,0)*
+      AdInput(2,1)*Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(0),msqInput(1),
+      msqInput(0))*Yd(0,0)*Yd(0,1)*Yd(2,0)*Yd(2,1) + 3*AdInput(1,0)*AdInput(1,1)*
+      Sqr(Abs(MuInput))*TCD0(msdInput(1),msdInput(2),msqInput(0),msqInput(1))*Yd(1
+      ,0)*Yd(1,1)*Yd(2,0)*Yd(2,1) + 3*AdInput(1,0)*AdInput(1,1)*Sqr(Abs(MuInput))*
+      TCD0(msdInput(1),msdInput(2),msqInput(1),msqInput(0))*Yd(1,0)*Yd(1,1)*Yd(2,0
+      )*Yd(2,1) + 3*AdInput(2,0)*AdInput(2,1)*Sqr(Abs(MuInput))*TCD0(msdInput(2),
+      msdInput(1),msqInput(0),msqInput(1))*Yd(1,0)*Yd(1,1)*Yd(2,0)*Yd(2,1) + 3*
+      AdInput(2,0)*AdInput(2,1)*Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(1),
+      msqInput(1),msqInput(0))*Yd(1,0)*Yd(1,1)*Yd(2,0)*Yd(2,1) + 3*AdInput(0,0)*
+      AdInput(0,2)*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(2),msqInput(0),
+      msqInput(2))*Yd(0,0)*Yd(0,2)*Yd(2,0)*Yd(2,2) + 3*AdInput(0,0)*AdInput(0,2)*
+      Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(2),msqInput(2),msqInput(0))*Yd(0
+      ,0)*Yd(0,2)*Yd(2,0)*Yd(2,2) + 3*AdInput(2,0)*AdInput(2,2)*Sqr(Abs(MuInput))*
+      TCD0(msdInput(2),msdInput(0),msqInput(0),msqInput(2))*Yd(0,0)*Yd(0,2)*Yd(2,0
+      )*Yd(2,2) + 3*AdInput(2,0)*AdInput(2,2)*Sqr(Abs(MuInput))*TCD0(msdInput(2),
+      msdInput(0),msqInput(2),msqInput(0))*Yd(0,0)*Yd(0,2)*Yd(2,0)*Yd(2,2) + 3*
+      AdInput(1,0)*AdInput(1,2)*Sqr(Abs(MuInput))*TCD0(msdInput(1),msdInput(2),
+      msqInput(0),msqInput(2))*Yd(1,0)*Yd(1,2)*Yd(2,0)*Yd(2,2) + 3*AdInput(1,0)*
+      AdInput(1,2)*Sqr(Abs(MuInput))*TCD0(msdInput(1),msdInput(2),msqInput(2),
+      msqInput(0))*Yd(1,0)*Yd(1,2)*Yd(2,0)*Yd(2,2) + 3*AdInput(2,0)*AdInput(2,2)*
+      Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(1),msqInput(0),msqInput(2))*Yd(1
+      ,0)*Yd(1,2)*Yd(2,0)*Yd(2,2) + 3*AdInput(2,0)*AdInput(2,2)*Sqr(Abs(MuInput))*
+      TCD0(msdInput(2),msdInput(1),msqInput(2),msqInput(0))*Yd(1,0)*Yd(1,2)*Yd(2,0
+      )*Yd(2,2) + 3*AdInput(0,1)*AdInput(0,2)*Sqr(Abs(MuInput))*TCD0(msdInput(0),
+      msdInput(2),msqInput(1),msqInput(2))*Yd(0,1)*Yd(0,2)*Yd(2,1)*Yd(2,2) + 3*
+      AdInput(0,1)*AdInput(0,2)*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(2),
+      msqInput(2),msqInput(1))*Yd(0,1)*Yd(0,2)*Yd(2,1)*Yd(2,2) + 3*AdInput(2,1)*
+      AdInput(2,2)*Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(0),msqInput(1),
+      msqInput(2))*Yd(0,1)*Yd(0,2)*Yd(2,1)*Yd(2,2) + 3*AdInput(2,1)*AdInput(2,2)*
+      Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(0),msqInput(2),msqInput(1))*Yd(0
+      ,1)*Yd(0,2)*Yd(2,1)*Yd(2,2) + 3*AdInput(1,1)*AdInput(1,2)*Sqr(Abs(MuInput))*
+      TCD0(msdInput(1),msdInput(2),msqInput(1),msqInput(2))*Yd(1,1)*Yd(1,2)*Yd(2,1
+      )*Yd(2,2) + 3*AdInput(1,1)*AdInput(1,2)*Sqr(Abs(MuInput))*TCD0(msdInput(1),
+      msdInput(2),msqInput(2),msqInput(1))*Yd(1,1)*Yd(1,2)*Yd(2,1)*Yd(2,2) + 3*
+      AdInput(2,1)*AdInput(2,2)*Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(1),
+      msqInput(1),msqInput(2))*Yd(1,1)*Yd(1,2)*Yd(2,1)*Yd(2,2) + 3*AdInput(2,1)*
+      AdInput(2,2)*Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(1),msqInput(2),
+      msqInput(1))*Yd(1,1)*Yd(1,2)*Yd(2,1)*Yd(2,2) + AeInput(0,0)*AeInput(0,1)*Sqr
+      (Abs(MuInput))*TCD0(mseInput(0),mseInput(1),mslInput(0),mslInput(1))*Ye(0,0)
+      *Ye(0,1)*Ye(1,0)*Ye(1,1) + AeInput(0,0)*AeInput(0,1)*Sqr(Abs(MuInput))*TCD0(
+      mseInput(0),mseInput(1),mslInput(1),mslInput(0))*Ye(0,0)*Ye(0,1)*Ye(1,0)*Ye(
+      1,1) + AeInput(1,0)*AeInput(1,1)*Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput
+      (0),mslInput(0),mslInput(1))*Ye(0,0)*Ye(0,1)*Ye(1,0)*Ye(1,1) + AeInput(1,0)*
+      AeInput(1,1)*Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput(0),mslInput(1),
+      mslInput(0))*Ye(0,0)*Ye(0,1)*Ye(1,0)*Ye(1,1) + AeInput(0,0)*AeInput(0,2)*Sqr
+      (Abs(MuInput))*TCD0(mseInput(0),mseInput(1),mslInput(0),mslInput(2))*Ye(0,0)
+      *Ye(0,2)*Ye(1,0)*Ye(1,2) + AeInput(0,0)*AeInput(0,2)*Sqr(Abs(MuInput))*TCD0(
+      mseInput(0),mseInput(1),mslInput(2),mslInput(0))*Ye(0,0)*Ye(0,2)*Ye(1,0)*Ye(
+      1,2) + AeInput(1,0)*AeInput(1,2)*Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput
+      (0),mslInput(0),mslInput(2))*Ye(0,0)*Ye(0,2)*Ye(1,0)*Ye(1,2) + AeInput(1,0)*
+      AeInput(1,2)*Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput(0),mslInput(2),
+      mslInput(0))*Ye(0,0)*Ye(0,2)*Ye(1,0)*Ye(1,2) + AeInput(0,1)*AeInput(0,2)*Sqr
+      (Abs(MuInput))*TCD0(mseInput(0),mseInput(1),mslInput(1),mslInput(2))*Ye(0,1)
+      *Ye(0,2)*Ye(1,1)*Ye(1,2) + AeInput(0,1)*AeInput(0,2)*Sqr(Abs(MuInput))*TCD0(
+      mseInput(0),mseInput(1),mslInput(2),mslInput(1))*Ye(0,1)*Ye(0,2)*Ye(1,1)*Ye(
+      1,2) + AeInput(1,1)*AeInput(1,2)*Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput
+      (0),mslInput(1),mslInput(2))*Ye(0,1)*Ye(0,2)*Ye(1,1)*Ye(1,2) + AeInput(1,1)*
+      AeInput(1,2)*Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput(0),mslInput(2),
+      mslInput(1))*Ye(0,1)*Ye(0,2)*Ye(1,1)*Ye(1,2) + AeInput(0,0)*AeInput(0,1)*Sqr
+      (Abs(MuInput))*TCD0(mseInput(0),mseInput(2),mslInput(0),mslInput(1))*Ye(0,0)
+      *Ye(0,1)*Ye(2,0)*Ye(2,1) + AeInput(0,0)*AeInput(0,1)*Sqr(Abs(MuInput))*TCD0(
+      mseInput(0),mseInput(2),mslInput(1),mslInput(0))*Ye(0,0)*Ye(0,1)*Ye(2,0)*Ye(
+      2,1) + AeInput(2,0)*AeInput(2,1)*Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput
+      (0),mslInput(0),mslInput(1))*Ye(0,0)*Ye(0,1)*Ye(2,0)*Ye(2,1) + AeInput(2,0)*
+      AeInput(2,1)*Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput(0),mslInput(1),
+      mslInput(0))*Ye(0,0)*Ye(0,1)*Ye(2,0)*Ye(2,1) + AeInput(1,0)*AeInput(1,1)*Sqr
+      (Abs(MuInput))*TCD0(mseInput(1),mseInput(2),mslInput(0),mslInput(1))*Ye(1,0)
+      *Ye(1,1)*Ye(2,0)*Ye(2,1) + AeInput(1,0)*AeInput(1,1)*Sqr(Abs(MuInput))*TCD0(
+      mseInput(1),mseInput(2),mslInput(1),mslInput(0))*Ye(1,0)*Ye(1,1)*Ye(2,0)*Ye(
+      2,1) + AeInput(2,0)*AeInput(2,1)*Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput
+      (1),mslInput(0),mslInput(1))*Ye(1,0)*Ye(1,1)*Ye(2,0)*Ye(2,1) + AeInput(2,0)*
+      AeInput(2,1)*Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput(1),mslInput(1),
+      mslInput(0))*Ye(1,0)*Ye(1,1)*Ye(2,0)*Ye(2,1) + Sqr(Abs(MuInput))*TCC0(
+      mseInput(0),mslInput(0),mslInput(1))*Ye(0,0)*Ye(0,1)*(Ye(0,0)*Ye(0,1) + Ye(1
+      ,0)*Ye(1,1) + Ye(2,0)*Ye(2,1)) + Sqr(Abs(MuInput))*TCC0(mseInput(0),mslInput
+      (1),mslInput(0))*Ye(0,0)*Ye(0,1)*(Ye(0,0)*Ye(0,1) + Ye(1,0)*Ye(1,1) + Ye(2,0
+      )*Ye(2,1)) + Sqr(Abs(MuInput))*TCC0(mseInput(1),mslInput(0),mslInput(1))*Ye(
+      1,0)*Ye(1,1)*(Ye(0,0)*Ye(0,1) + Ye(1,0)*Ye(1,1) + Ye(2,0)*Ye(2,1)) + Sqr(Abs
+      (MuInput))*TCC0(mseInput(1),mslInput(1),mslInput(0))*Ye(1,0)*Ye(1,1)*(Ye(0,0
+      )*Ye(0,1) + Ye(1,0)*Ye(1,1) + Ye(2,0)*Ye(2,1)) + Sqr(Abs(MuInput))*TCC0(
+      mseInput(2),mslInput(0),mslInput(1))*Ye(2,0)*Ye(2,1)*(Ye(0,0)*Ye(0,1) + Ye(1
+      ,0)*Ye(1,1) + Ye(2,0)*Ye(2,1)) + Sqr(Abs(MuInput))*TCC0(mseInput(2),mslInput
+      (1),mslInput(0))*Ye(2,0)*Ye(2,1)*(Ye(0,0)*Ye(0,1) + Ye(1,0)*Ye(1,1) + Ye(2,0
+      )*Ye(2,1)) + AeInput(0,0)*AeInput(0,2)*Sqr(Abs(MuInput))*TCD0(mseInput(0),
+      mseInput(2),mslInput(0),mslInput(2))*Ye(0,0)*Ye(0,2)*Ye(2,0)*Ye(2,2) +
+      AeInput(0,0)*AeInput(0,2)*Sqr(Abs(MuInput))*TCD0(mseInput(0),mseInput(2),
+      mslInput(2),mslInput(0))*Ye(0,0)*Ye(0,2)*Ye(2,0)*Ye(2,2) + AeInput(2,0)*
+      AeInput(2,2)*Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput(0),mslInput(0),
+      mslInput(2))*Ye(0,0)*Ye(0,2)*Ye(2,0)*Ye(2,2) + AeInput(2,0)*AeInput(2,2)*Sqr
+      (Abs(MuInput))*TCD0(mseInput(2),mseInput(0),mslInput(2),mslInput(0))*Ye(0,0)
+      *Ye(0,2)*Ye(2,0)*Ye(2,2) + AeInput(1,0)*AeInput(1,2)*Sqr(Abs(MuInput))*TCD0(
+      mseInput(1),mseInput(2),mslInput(0),mslInput(2))*Ye(1,0)*Ye(1,2)*Ye(2,0)*Ye(
+      2,2) + AeInput(1,0)*AeInput(1,2)*Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput
+      (2),mslInput(2),mslInput(0))*Ye(1,0)*Ye(1,2)*Ye(2,0)*Ye(2,2) + AeInput(2,0)*
+      AeInput(2,2)*Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput(1),mslInput(0),
+      mslInput(2))*Ye(1,0)*Ye(1,2)*Ye(2,0)*Ye(2,2) + AeInput(2,0)*AeInput(2,2)*Sqr
+      (Abs(MuInput))*TCD0(mseInput(2),mseInput(1),mslInput(2),mslInput(0))*Ye(1,0)
+      *Ye(1,2)*Ye(2,0)*Ye(2,2) + AeInput(0,1)*AeInput(0,2)*Sqr(Abs(MuInput))*TCD0(
+      mseInput(0),mseInput(2),mslInput(1),mslInput(2))*Ye(0,1)*Ye(0,2)*Ye(2,1)*Ye(
+      2,2) + AeInput(0,1)*AeInput(0,2)*Sqr(Abs(MuInput))*TCD0(mseInput(0),mseInput
+      (2),mslInput(2),mslInput(1))*Ye(0,1)*Ye(0,2)*Ye(2,1)*Ye(2,2) + AeInput(2,1)*
+      AeInput(2,2)*Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput(0),mslInput(1),
+      mslInput(2))*Ye(0,1)*Ye(0,2)*Ye(2,1)*Ye(2,2) + AeInput(2,1)*AeInput(2,2)*Sqr
+      (Abs(MuInput))*TCD0(mseInput(2),mseInput(0),mslInput(2),mslInput(1))*Ye(0,1)
+      *Ye(0,2)*Ye(2,1)*Ye(2,2) + AeInput(1,1)*AeInput(1,2)*Sqr(Abs(MuInput))*TCD0(
+      mseInput(1),mseInput(2),mslInput(1),mslInput(2))*Ye(1,1)*Ye(1,2)*Ye(2,1)*Ye(
+      2,2) + AeInput(1,1)*AeInput(1,2)*Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput
+      (2),mslInput(2),mslInput(1))*Ye(1,1)*Ye(1,2)*Ye(2,1)*Ye(2,2) + AeInput(2,1)*
+      AeInput(2,2)*Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput(1),mslInput(1),
+      mslInput(2))*Ye(1,1)*Ye(1,2)*Ye(2,1)*Ye(2,2) + AeInput(2,1)*AeInput(2,2)*Sqr
+      (Abs(MuInput))*TCD0(mseInput(2),mseInput(1),mslInput(2),mslInput(1))*Ye(1,1)
+      *Ye(1,2)*Ye(2,1)*Ye(2,2) + Sqr(Abs(MuInput))*TCC0(mseInput(0),mslInput(0),
+      mslInput(2))*Ye(0,0)*Ye(0,2)*(Ye(0,0)*Ye(0,2) + Ye(1,0)*Ye(1,2) + Ye(2,0)*Ye
+      (2,2)) + Sqr(Abs(MuInput))*TCC0(mseInput(0),mslInput(2),mslInput(0))*Ye(0,0)
+      *Ye(0,2)*(Ye(0,0)*Ye(0,2) + Ye(1,0)*Ye(1,2) + Ye(2,0)*Ye(2,2)) + Sqr(Abs(
+      MuInput))*TCC0(mseInput(1),mslInput(0),mslInput(2))*Ye(1,0)*Ye(1,2)*(Ye(0,0)
+      *Ye(0,2) + Ye(1,0)*Ye(1,2) + Ye(2,0)*Ye(2,2)) + Sqr(Abs(MuInput))*TCC0(
+      mseInput(1),mslInput(2),mslInput(0))*Ye(1,0)*Ye(1,2)*(Ye(0,0)*Ye(0,2) + Ye(1
+      ,0)*Ye(1,2) + Ye(2,0)*Ye(2,2)) + Sqr(Abs(MuInput))*TCC0(mseInput(2),mslInput
+      (0),mslInput(2))*Ye(2,0)*Ye(2,2)*(Ye(0,0)*Ye(0,2) + Ye(1,0)*Ye(1,2) + Ye(2,0
+      )*Ye(2,2)) + Sqr(Abs(MuInput))*TCC0(mseInput(2),mslInput(2),mslInput(0))*Ye(
+      2,0)*Ye(2,2)*(Ye(0,0)*Ye(0,2) + Ye(1,0)*Ye(1,2) + Ye(2,0)*Ye(2,2)) + Sqr(Abs
+      (MuInput))*TCC0(mseInput(0),mslInput(1),mslInput(2))*Ye(0,1)*Ye(0,2)*(Ye(0,1
+      )*Ye(0,2) + Ye(1,1)*Ye(1,2) + Ye(2,1)*Ye(2,2)) + Sqr(Abs(MuInput))*TCC0(
+      mseInput(0),mslInput(2),mslInput(1))*Ye(0,1)*Ye(0,2)*(Ye(0,1)*Ye(0,2) + Ye(1
+      ,1)*Ye(1,2) + Ye(2,1)*Ye(2,2)) + Sqr(Abs(MuInput))*TCC0(mseInput(1),mslInput
+      (1),mslInput(2))*Ye(1,1)*Ye(1,2)*(Ye(0,1)*Ye(0,2) + Ye(1,1)*Ye(1,2) + Ye(2,1
+      )*Ye(2,2)) + Sqr(Abs(MuInput))*TCC0(mseInput(1),mslInput(2),mslInput(1))*Ye(
+      1,1)*Ye(1,2)*(Ye(0,1)*Ye(0,2) + Ye(1,1)*Ye(1,2) + Ye(2,1)*Ye(2,2)) + Sqr(Abs
+      (MuInput))*TCC0(mseInput(2),mslInput(1),mslInput(2))*Ye(2,1)*Ye(2,2)*(Ye(0,1
+      )*Ye(0,2) + Ye(1,1)*Ye(1,2) + Ye(2,1)*Ye(2,2)) + Sqr(Abs(MuInput))*TCC0(
+      mseInput(2),mslInput(2),mslInput(1))*Ye(2,1)*Ye(2,2)*(Ye(0,1)*Ye(0,2) + Ye(1
+      ,1)*Ye(1,2) + Ye(2,1)*Ye(2,2)) - 3*TCD0(msdInput(0),msqInput(0),msqInput(1),
+      msuInput(0))*(AdInput(0,0)*AuInput(0,0)*Yd(0,0)*Yu(0,0) - Sqr(Abs(MuInput))*
+      Yd(0,0)*Yu(0,0))*(AdInput(0,1)*AuInput(0,1)*Yd(0,1)*Yu(0,1) - Sqr(Abs(
+      MuInput))*Yd(0,1)*Yu(0,1)) - 3*TCD0(msdInput(0),msqInput(1),msqInput(0),
+      msuInput(0))*(AdInput(0,0)*AuInput(0,0)*Yd(0,0)*Yu(0,0) - Sqr(Abs(MuInput))*
+      Yd(0,0)*Yu(0,0))*(AdInput(0,1)*AuInput(0,1)*Yd(0,1)*Yu(0,1) - Sqr(Abs(
+      MuInput))*Yd(0,1)*Yu(0,1)) - 3*TCD0(msdInput(1),msqInput(0),msqInput(1),
+      msuInput(0))*(AdInput(1,0)*AuInput(0,0)*Yd(1,0)*Yu(0,0) - Sqr(Abs(MuInput))*
+      Yd(1,0)*Yu(0,0))*(AdInput(1,1)*AuInput(0,1)*Yd(1,1)*Yu(0,1) - Sqr(Abs(
+      MuInput))*Yd(1,1)*Yu(0,1)) - 3*TCD0(msdInput(1),msqInput(1),msqInput(0),
+      msuInput(0))*(AdInput(1,0)*AuInput(0,0)*Yd(1,0)*Yu(0,0) - Sqr(Abs(MuInput))*
+      Yd(1,0)*Yu(0,0))*(AdInput(1,1)*AuInput(0,1)*Yd(1,1)*Yu(0,1) - Sqr(Abs(
+      MuInput))*Yd(1,1)*Yu(0,1)) - 3*TCD0(msdInput(2),msqInput(0),msqInput(1),
+      msuInput(0))*(AdInput(2,0)*AuInput(0,0)*Yd(2,0)*Yu(0,0) - Sqr(Abs(MuInput))*
+      Yd(2,0)*Yu(0,0))*(AdInput(2,1)*AuInput(0,1)*Yd(2,1)*Yu(0,1) - Sqr(Abs(
+      MuInput))*Yd(2,1)*Yu(0,1)) - 3*TCD0(msdInput(2),msqInput(1),msqInput(0),
+      msuInput(0))*(AdInput(2,0)*AuInput(0,0)*Yd(2,0)*Yu(0,0) - Sqr(Abs(MuInput))*
+      Yd(2,0)*Yu(0,0))*(AdInput(2,1)*AuInput(0,1)*Yd(2,1)*Yu(0,1) - Sqr(Abs(
+      MuInput))*Yd(2,1)*Yu(0,1)) - 3*TCD0(msdInput(0),msqInput(0),msqInput(2),
+      msuInput(0))*(AdInput(0,0)*AuInput(0,0)*Yd(0,0)*Yu(0,0) - Sqr(Abs(MuInput))*
+      Yd(0,0)*Yu(0,0))*(AdInput(0,2)*AuInput(0,2)*Yd(0,2)*Yu(0,2) - Sqr(Abs(
+      MuInput))*Yd(0,2)*Yu(0,2)) - 3*TCD0(msdInput(0),msqInput(2),msqInput(0),
+      msuInput(0))*(AdInput(0,0)*AuInput(0,0)*Yd(0,0)*Yu(0,0) - Sqr(Abs(MuInput))*
+      Yd(0,0)*Yu(0,0))*(AdInput(0,2)*AuInput(0,2)*Yd(0,2)*Yu(0,2) - Sqr(Abs(
+      MuInput))*Yd(0,2)*Yu(0,2)) - 3*TCD0(msdInput(0),msqInput(1),msqInput(2),
+      msuInput(0))*(AdInput(0,1)*AuInput(0,1)*Yd(0,1)*Yu(0,1) - Sqr(Abs(MuInput))*
+      Yd(0,1)*Yu(0,1))*(AdInput(0,2)*AuInput(0,2)*Yd(0,2)*Yu(0,2) - Sqr(Abs(
+      MuInput))*Yd(0,2)*Yu(0,2)) - 3*TCD0(msdInput(0),msqInput(2),msqInput(1),
+      msuInput(0))*(AdInput(0,1)*AuInput(0,1)*Yd(0,1)*Yu(0,1) - Sqr(Abs(MuInput))*
+      Yd(0,1)*Yu(0,1))*(AdInput(0,2)*AuInput(0,2)*Yd(0,2)*Yu(0,2) - Sqr(Abs(
+      MuInput))*Yd(0,2)*Yu(0,2)) - 3*TCD0(msdInput(1),msqInput(0),msqInput(2),
+      msuInput(0))*(AdInput(1,0)*AuInput(0,0)*Yd(1,0)*Yu(0,0) - Sqr(Abs(MuInput))*
+      Yd(1,0)*Yu(0,0))*(AdInput(1,2)*AuInput(0,2)*Yd(1,2)*Yu(0,2) - Sqr(Abs(
+      MuInput))*Yd(1,2)*Yu(0,2)) - 3*TCD0(msdInput(1),msqInput(2),msqInput(0),
+      msuInput(0))*(AdInput(1,0)*AuInput(0,0)*Yd(1,0)*Yu(0,0) - Sqr(Abs(MuInput))*
+      Yd(1,0)*Yu(0,0))*(AdInput(1,2)*AuInput(0,2)*Yd(1,2)*Yu(0,2) - Sqr(Abs(
+      MuInput))*Yd(1,2)*Yu(0,2)) - 3*TCD0(msdInput(1),msqInput(1),msqInput(2),
+      msuInput(0))*(AdInput(1,1)*AuInput(0,1)*Yd(1,1)*Yu(0,1) - Sqr(Abs(MuInput))*
+      Yd(1,1)*Yu(0,1))*(AdInput(1,2)*AuInput(0,2)*Yd(1,2)*Yu(0,2) - Sqr(Abs(
+      MuInput))*Yd(1,2)*Yu(0,2)) - 3*TCD0(msdInput(1),msqInput(2),msqInput(1),
+      msuInput(0))*(AdInput(1,1)*AuInput(0,1)*Yd(1,1)*Yu(0,1) - Sqr(Abs(MuInput))*
+      Yd(1,1)*Yu(0,1))*(AdInput(1,2)*AuInput(0,2)*Yd(1,2)*Yu(0,2) - Sqr(Abs(
+      MuInput))*Yd(1,2)*Yu(0,2)) - 3*TCD0(msdInput(2),msqInput(0),msqInput(2),
+      msuInput(0))*(AdInput(2,0)*AuInput(0,0)*Yd(2,0)*Yu(0,0) - Sqr(Abs(MuInput))*
+      Yd(2,0)*Yu(0,0))*(AdInput(2,2)*AuInput(0,2)*Yd(2,2)*Yu(0,2) - Sqr(Abs(
+      MuInput))*Yd(2,2)*Yu(0,2)) - 3*TCD0(msdInput(2),msqInput(2),msqInput(0),
+      msuInput(0))*(AdInput(2,0)*AuInput(0,0)*Yd(2,0)*Yu(0,0) - Sqr(Abs(MuInput))*
+      Yd(2,0)*Yu(0,0))*(AdInput(2,2)*AuInput(0,2)*Yd(2,2)*Yu(0,2) - Sqr(Abs(
+      MuInput))*Yd(2,2)*Yu(0,2)) - 3*TCD0(msdInput(2),msqInput(1),msqInput(2),
+      msuInput(0))*(AdInput(2,1)*AuInput(0,1)*Yd(2,1)*Yu(0,1) - Sqr(Abs(MuInput))*
+      Yd(2,1)*Yu(0,1))*(AdInput(2,2)*AuInput(0,2)*Yd(2,2)*Yu(0,2) - Sqr(Abs(
+      MuInput))*Yd(2,2)*Yu(0,2)) - 3*TCD0(msdInput(2),msqInput(2),msqInput(1),
+      msuInput(0))*(AdInput(2,1)*AuInput(0,1)*Yd(2,1)*Yu(0,1) - Sqr(Abs(MuInput))*
+      Yd(2,1)*Yu(0,1))*(AdInput(2,2)*AuInput(0,2)*Yd(2,2)*Yu(0,2) - Sqr(Abs(
+      MuInput))*Yd(2,2)*Yu(0,2)) + TCC0(msdInput(0),msqInput(0),msuInput(0))*(-6*
+      AdInput(0,0)*AuInput(0,0)*Yd(0,0)*Yu(0,0)*(Yd(0,0)*Yu(0,0) + Yd(0,1)*Yu(0,1)
+      + Yd(0,2)*Yu(0,2)) + 6*Sqr(Abs(MuInput))*Yd(0,0)*Yu(0,0)*(Yd(0,0)*Yu(0,0) +
+      Yd(0,1)*Yu(0,1) + Yd(0,2)*Yu(0,2))) + TCC0(msdInput(0),msqInput(1),msuInput(
+      0))*(-6*AdInput(0,1)*AuInput(0,1)*Yd(0,1)*Yu(0,1)*(Yd(0,0)*Yu(0,0) + Yd(0,1)
+      *Yu(0,1) + Yd(0,2)*Yu(0,2)) + 6*Sqr(Abs(MuInput))*Yd(0,1)*Yu(0,1)*(Yd(0,0)*
+      Yu(0,0) + Yd(0,1)*Yu(0,1) + Yd(0,2)*Yu(0,2))) + TCC0(msdInput(0),msqInput(2)
+      ,msuInput(0))*(-6*AdInput(0,2)*AuInput(0,2)*Yd(0,2)*Yu(0,2)*(Yd(0,0)*Yu(0,0)
+      + Yd(0,1)*Yu(0,1) + Yd(0,2)*Yu(0,2)) + 6*Sqr(Abs(MuInput))*Yd(0,2)*Yu(0,2)*(
+      Yd(0,0)*Yu(0,0) + Yd(0,1)*Yu(0,1) + Yd(0,2)*Yu(0,2))) + TCC0(msdInput(1),
+      msqInput(0),msuInput(0))*(-6*AdInput(1,0)*AuInput(0,0)*Yd(1,0)*Yu(0,0)*(Yd(1
+      ,0)*Yu(0,0) + Yd(1,1)*Yu(0,1) + Yd(1,2)*Yu(0,2)) + 6*Sqr(Abs(MuInput))*Yd(1,
+      0)*Yu(0,0)*(Yd(1,0)*Yu(0,0) + Yd(1,1)*Yu(0,1) + Yd(1,2)*Yu(0,2))) + TCC0(
+      msdInput(1),msqInput(1),msuInput(0))*(-6*AdInput(1,1)*AuInput(0,1)*Yd(1,1)*
+      Yu(0,1)*(Yd(1,0)*Yu(0,0) + Yd(1,1)*Yu(0,1) + Yd(1,2)*Yu(0,2)) + 6*Sqr(Abs(
+      MuInput))*Yd(1,1)*Yu(0,1)*(Yd(1,0)*Yu(0,0) + Yd(1,1)*Yu(0,1) + Yd(1,2)*Yu(0,
+      2))) + TCC0(msdInput(1),msqInput(2),msuInput(0))*(-6*AdInput(1,2)*AuInput(0,
+      2)*Yd(1,2)*Yu(0,2)*(Yd(1,0)*Yu(0,0) + Yd(1,1)*Yu(0,1) + Yd(1,2)*Yu(0,2)) + 6
+      *Sqr(Abs(MuInput))*Yd(1,2)*Yu(0,2)*(Yd(1,0)*Yu(0,0) + Yd(1,1)*Yu(0,1) + Yd(1
+      ,2)*Yu(0,2))) + TCC0(msdInput(2),msqInput(0),msuInput(0))*(-6*AdInput(2,0)*
+      AuInput(0,0)*Yd(2,0)*Yu(0,0)*(Yd(2,0)*Yu(0,0) + Yd(2,1)*Yu(0,1) + Yd(2,2)*Yu
+      (0,2)) + 6*Sqr(Abs(MuInput))*Yd(2,0)*Yu(0,0)*(Yd(2,0)*Yu(0,0) + Yd(2,1)*Yu(0
+      ,1) + Yd(2,2)*Yu(0,2))) + TCC0(msdInput(2),msqInput(1),msuInput(0))*(-6*
+      AdInput(2,1)*AuInput(0,1)*Yd(2,1)*Yu(0,1)*(Yd(2,0)*Yu(0,0) + Yd(2,1)*Yu(0,1)
+      + Yd(2,2)*Yu(0,2)) + 6*Sqr(Abs(MuInput))*Yd(2,1)*Yu(0,1)*(Yd(2,0)*Yu(0,0) +
+      Yd(2,1)*Yu(0,1) + Yd(2,2)*Yu(0,2))) + TCC0(msdInput(2),msqInput(2),msuInput(
+      0))*(-6*AdInput(2,2)*AuInput(0,2)*Yd(2,2)*Yu(0,2)*(Yd(2,0)*Yu(0,0) + Yd(2,1)
+      *Yu(0,1) + Yd(2,2)*Yu(0,2)) + 6*Sqr(Abs(MuInput))*Yd(2,2)*Yu(0,2)*(Yd(2,0)*
+      Yu(0,0) + Yd(2,1)*Yu(0,1) + Yd(2,2)*Yu(0,2))) + 3*AuInput(1,0)*AuInput(1,1)*
+      Sqr(Abs(MuInput))*TCD0(msqInput(0),msqInput(1),msuInput(0),msuInput(1))*Yu(0
+      ,0)*Yu(0,1)*Yu(1,0)*Yu(1,1) + 3*AuInput(0,0)*AuInput(0,1)*Sqr(Abs(MuInput))*
+      TCD0(msqInput(0),msqInput(1),msuInput(1),msuInput(0))*Yu(0,0)*Yu(0,1)*Yu(1,0
+      )*Yu(1,1) + 3*AuInput(1,0)*AuInput(1,1)*Sqr(Abs(MuInput))*TCD0(msqInput(1),
+      msqInput(0),msuInput(0),msuInput(1))*Yu(0,0)*Yu(0,1)*Yu(1,0)*Yu(1,1) + 3*
+      AuInput(0,0)*AuInput(0,1)*Sqr(Abs(MuInput))*TCD0(msqInput(1),msqInput(0),
+      msuInput(1),msuInput(0))*Yu(0,0)*Yu(0,1)*Yu(1,0)*Yu(1,1) - 3*TCD0(msdInput(0
+      ),msqInput(0),msqInput(1),msuInput(1))*(AdInput(0,0)*AuInput(1,0)*Yd(0,0)*Yu
+      (1,0) - Sqr(Abs(MuInput))*Yd(0,0)*Yu(1,0))*(AdInput(0,1)*AuInput(1,1)*Yd(0,1
+      )*Yu(1,1) - Sqr(Abs(MuInput))*Yd(0,1)*Yu(1,1)) - 3*TCD0(msdInput(0),msqInput
+      (1),msqInput(0),msuInput(1))*(AdInput(0,0)*AuInput(1,0)*Yd(0,0)*Yu(1,0) -
+      Sqr(Abs(MuInput))*Yd(0,0)*Yu(1,0))*(AdInput(0,1)*AuInput(1,1)*Yd(0,1)*Yu(1,1
+      ) - Sqr(Abs(MuInput))*Yd(0,1)*Yu(1,1)) - 3*TCD0(msdInput(1),msqInput(0),
+      msqInput(1),msuInput(1))*(AdInput(1,0)*AuInput(1,0)*Yd(1,0)*Yu(1,0) - Sqr(
+      Abs(MuInput))*Yd(1,0)*Yu(1,0))*(AdInput(1,1)*AuInput(1,1)*Yd(1,1)*Yu(1,1) -
+      Sqr(Abs(MuInput))*Yd(1,1)*Yu(1,1)) - 3*TCD0(msdInput(1),msqInput(1),msqInput
+      (0),msuInput(1))*(AdInput(1,0)*AuInput(1,0)*Yd(1,0)*Yu(1,0) - Sqr(Abs(
+      MuInput))*Yd(1,0)*Yu(1,0))*(AdInput(1,1)*AuInput(1,1)*Yd(1,1)*Yu(1,1) - Sqr(
+      Abs(MuInput))*Yd(1,1)*Yu(1,1)) - 3*TCD0(msdInput(2),msqInput(0),msqInput(1),
+      msuInput(1))*(AdInput(2,0)*AuInput(1,0)*Yd(2,0)*Yu(1,0) - Sqr(Abs(MuInput))*
+      Yd(2,0)*Yu(1,0))*(AdInput(2,1)*AuInput(1,1)*Yd(2,1)*Yu(1,1) - Sqr(Abs(
+      MuInput))*Yd(2,1)*Yu(1,1)) - 3*TCD0(msdInput(2),msqInput(1),msqInput(0),
+      msuInput(1))*(AdInput(2,0)*AuInput(1,0)*Yd(2,0)*Yu(1,0) - Sqr(Abs(MuInput))*
+      Yd(2,0)*Yu(1,0))*(AdInput(2,1)*AuInput(1,1)*Yd(2,1)*Yu(1,1) - Sqr(Abs(
+      MuInput))*Yd(2,1)*Yu(1,1)) + 3*AuInput(1,0)*AuInput(1,2)*Sqr(Abs(MuInput))*
+      TCD0(msqInput(0),msqInput(2),msuInput(0),msuInput(1))*Yu(0,0)*Yu(0,2)*Yu(1,0
+      )*Yu(1,2) + 3*AuInput(0,0)*AuInput(0,2)*Sqr(Abs(MuInput))*TCD0(msqInput(0),
+      msqInput(2),msuInput(1),msuInput(0))*Yu(0,0)*Yu(0,2)*Yu(1,0)*Yu(1,2) + 3*
+      AuInput(1,0)*AuInput(1,2)*Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(0),
+      msuInput(0),msuInput(1))*Yu(0,0)*Yu(0,2)*Yu(1,0)*Yu(1,2) + 3*AuInput(0,0)*
+      AuInput(0,2)*Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(0),msuInput(1),
+      msuInput(0))*Yu(0,0)*Yu(0,2)*Yu(1,0)*Yu(1,2) + 3*AuInput(1,1)*AuInput(1,2)*
+      Sqr(Abs(MuInput))*TCD0(msqInput(1),msqInput(2),msuInput(0),msuInput(1))*Yu(0
+      ,1)*Yu(0,2)*Yu(1,1)*Yu(1,2) + 3*AuInput(0,1)*AuInput(0,2)*Sqr(Abs(MuInput))*
+      TCD0(msqInput(1),msqInput(2),msuInput(1),msuInput(0))*Yu(0,1)*Yu(0,2)*Yu(1,1
+      )*Yu(1,2) + 3*AuInput(1,1)*AuInput(1,2)*Sqr(Abs(MuInput))*TCD0(msqInput(2),
+      msqInput(1),msuInput(0),msuInput(1))*Yu(0,1)*Yu(0,2)*Yu(1,1)*Yu(1,2) + 3*
+      AuInput(0,1)*AuInput(0,2)*Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(1),
+      msuInput(1),msuInput(0))*Yu(0,1)*Yu(0,2)*Yu(1,1)*Yu(1,2) - 3*TCD0(msdInput(0
+      ),msqInput(0),msqInput(2),msuInput(1))*(AdInput(0,0)*AuInput(1,0)*Yd(0,0)*Yu
+      (1,0) - Sqr(Abs(MuInput))*Yd(0,0)*Yu(1,0))*(AdInput(0,2)*AuInput(1,2)*Yd(0,2
+      )*Yu(1,2) - Sqr(Abs(MuInput))*Yd(0,2)*Yu(1,2)) - 3*TCD0(msdInput(0),msqInput
+      (2),msqInput(0),msuInput(1))*(AdInput(0,0)*AuInput(1,0)*Yd(0,0)*Yu(1,0) -
+      Sqr(Abs(MuInput))*Yd(0,0)*Yu(1,0))*(AdInput(0,2)*AuInput(1,2)*Yd(0,2)*Yu(1,2
+      ) - Sqr(Abs(MuInput))*Yd(0,2)*Yu(1,2)) - 3*TCD0(msdInput(0),msqInput(1),
+      msqInput(2),msuInput(1))*(AdInput(0,1)*AuInput(1,1)*Yd(0,1)*Yu(1,1) - Sqr(
+      Abs(MuInput))*Yd(0,1)*Yu(1,1))*(AdInput(0,2)*AuInput(1,2)*Yd(0,2)*Yu(1,2) -
+      Sqr(Abs(MuInput))*Yd(0,2)*Yu(1,2)) - 3*TCD0(msdInput(0),msqInput(2),msqInput
+      (1),msuInput(1))*(AdInput(0,1)*AuInput(1,1)*Yd(0,1)*Yu(1,1) - Sqr(Abs(
+      MuInput))*Yd(0,1)*Yu(1,1))*(AdInput(0,2)*AuInput(1,2)*Yd(0,2)*Yu(1,2) - Sqr(
+      Abs(MuInput))*Yd(0,2)*Yu(1,2)) - 3*TCD0(msdInput(1),msqInput(0),msqInput(2),
+      msuInput(1))*(AdInput(1,0)*AuInput(1,0)*Yd(1,0)*Yu(1,0) - Sqr(Abs(MuInput))*
+      Yd(1,0)*Yu(1,0))*(AdInput(1,2)*AuInput(1,2)*Yd(1,2)*Yu(1,2) - Sqr(Abs(
+      MuInput))*Yd(1,2)*Yu(1,2)) - 3*TCD0(msdInput(1),msqInput(2),msqInput(0),
+      msuInput(1))*(AdInput(1,0)*AuInput(1,0)*Yd(1,0)*Yu(1,0) - Sqr(Abs(MuInput))*
+      Yd(1,0)*Yu(1,0))*(AdInput(1,2)*AuInput(1,2)*Yd(1,2)*Yu(1,2) - Sqr(Abs(
+      MuInput))*Yd(1,2)*Yu(1,2)) - 3*TCD0(msdInput(1),msqInput(1),msqInput(2),
+      msuInput(1))*(AdInput(1,1)*AuInput(1,1)*Yd(1,1)*Yu(1,1) - Sqr(Abs(MuInput))*
+      Yd(1,1)*Yu(1,1))*(AdInput(1,2)*AuInput(1,2)*Yd(1,2)*Yu(1,2) - Sqr(Abs(
+      MuInput))*Yd(1,2)*Yu(1,2)) - 3*TCD0(msdInput(1),msqInput(2),msqInput(1),
+      msuInput(1))*(AdInput(1,1)*AuInput(1,1)*Yd(1,1)*Yu(1,1) - Sqr(Abs(MuInput))*
+      Yd(1,1)*Yu(1,1))*(AdInput(1,2)*AuInput(1,2)*Yd(1,2)*Yu(1,2) - Sqr(Abs(
+      MuInput))*Yd(1,2)*Yu(1,2)) - 3*TCD0(msdInput(2),msqInput(0),msqInput(2),
+      msuInput(1))*(AdInput(2,0)*AuInput(1,0)*Yd(2,0)*Yu(1,0) - Sqr(Abs(MuInput))*
+      Yd(2,0)*Yu(1,0))*(AdInput(2,2)*AuInput(1,2)*Yd(2,2)*Yu(1,2) - Sqr(Abs(
+      MuInput))*Yd(2,2)*Yu(1,2)) - 3*TCD0(msdInput(2),msqInput(2),msqInput(0),
+      msuInput(1))*(AdInput(2,0)*AuInput(1,0)*Yd(2,0)*Yu(1,0) - Sqr(Abs(MuInput))*
+      Yd(2,0)*Yu(1,0))*(AdInput(2,2)*AuInput(1,2)*Yd(2,2)*Yu(1,2) - Sqr(Abs(
+      MuInput))*Yd(2,2)*Yu(1,2)) - 3*TCD0(msdInput(2),msqInput(1),msqInput(2),
+      msuInput(1))*(AdInput(2,1)*AuInput(1,1)*Yd(2,1)*Yu(1,1) - Sqr(Abs(MuInput))*
+      Yd(2,1)*Yu(1,1))*(AdInput(2,2)*AuInput(1,2)*Yd(2,2)*Yu(1,2) - Sqr(Abs(
+      MuInput))*Yd(2,2)*Yu(1,2)) - 3*TCD0(msdInput(2),msqInput(2),msqInput(1),
+      msuInput(1))*(AdInput(2,1)*AuInput(1,1)*Yd(2,1)*Yu(1,1) - Sqr(Abs(MuInput))*
+      Yd(2,1)*Yu(1,1))*(AdInput(2,2)*AuInput(1,2)*Yd(2,2)*Yu(1,2) - Sqr(Abs(
+      MuInput))*Yd(2,2)*Yu(1,2)) + TCC0(msdInput(0),msqInput(0),msuInput(1))*(-6*
+      AdInput(0,0)*AuInput(1,0)*Yd(0,0)*Yu(1,0)*(Yd(0,0)*Yu(1,0) + Yd(0,1)*Yu(1,1)
+      + Yd(0,2)*Yu(1,2)) + 6*Sqr(Abs(MuInput))*Yd(0,0)*Yu(1,0)*(Yd(0,0)*Yu(1,0) +
+      Yd(0,1)*Yu(1,1) + Yd(0,2)*Yu(1,2))) + TCC0(msdInput(0),msqInput(1),msuInput(
+      1))*(-6*AdInput(0,1)*AuInput(1,1)*Yd(0,1)*Yu(1,1)*(Yd(0,0)*Yu(1,0) + Yd(0,1)
+      *Yu(1,1) + Yd(0,2)*Yu(1,2)) + 6*Sqr(Abs(MuInput))*Yd(0,1)*Yu(1,1)*(Yd(0,0)*
+      Yu(1,0) + Yd(0,1)*Yu(1,1) + Yd(0,2)*Yu(1,2))) + TCC0(msdInput(0),msqInput(2)
+      ,msuInput(1))*(-6*AdInput(0,2)*AuInput(1,2)*Yd(0,2)*Yu(1,2)*(Yd(0,0)*Yu(1,0)
+      + Yd(0,1)*Yu(1,1) + Yd(0,2)*Yu(1,2)) + 6*Sqr(Abs(MuInput))*Yd(0,2)*Yu(1,2)*(
+      Yd(0,0)*Yu(1,0) + Yd(0,1)*Yu(1,1) + Yd(0,2)*Yu(1,2))) + TCC0(msdInput(1),
+      msqInput(0),msuInput(1))*(-6*AdInput(1,0)*AuInput(1,0)*Yd(1,0)*Yu(1,0)*(Yd(1
+      ,0)*Yu(1,0) + Yd(1,1)*Yu(1,1) + Yd(1,2)*Yu(1,2)) + 6*Sqr(Abs(MuInput))*Yd(1,
+      0)*Yu(1,0)*(Yd(1,0)*Yu(1,0) + Yd(1,1)*Yu(1,1) + Yd(1,2)*Yu(1,2))) + TCC0(
+      msdInput(1),msqInput(1),msuInput(1))*(-6*AdInput(1,1)*AuInput(1,1)*Yd(1,1)*
+      Yu(1,1)*(Yd(1,0)*Yu(1,0) + Yd(1,1)*Yu(1,1) + Yd(1,2)*Yu(1,2)) + 6*Sqr(Abs(
+      MuInput))*Yd(1,1)*Yu(1,1)*(Yd(1,0)*Yu(1,0) + Yd(1,1)*Yu(1,1) + Yd(1,2)*Yu(1,
+      2))) + TCC0(msdInput(1),msqInput(2),msuInput(1))*(-6*AdInput(1,2)*AuInput(1,
+      2)*Yd(1,2)*Yu(1,2)*(Yd(1,0)*Yu(1,0) + Yd(1,1)*Yu(1,1) + Yd(1,2)*Yu(1,2)) + 6
+      *Sqr(Abs(MuInput))*Yd(1,2)*Yu(1,2)*(Yd(1,0)*Yu(1,0) + Yd(1,1)*Yu(1,1) + Yd(1
+      ,2)*Yu(1,2))) + TCC0(msdInput(2),msqInput(0),msuInput(1))*(-6*AdInput(2,0)*
+      AuInput(1,0)*Yd(2,0)*Yu(1,0)*(Yd(2,0)*Yu(1,0) + Yd(2,1)*Yu(1,1) + Yd(2,2)*Yu
+      (1,2)) + 6*Sqr(Abs(MuInput))*Yd(2,0)*Yu(1,0)*(Yd(2,0)*Yu(1,0) + Yd(2,1)*Yu(1
+      ,1) + Yd(2,2)*Yu(1,2))) + TCC0(msdInput(2),msqInput(1),msuInput(1))*(-6*
+      AdInput(2,1)*AuInput(1,1)*Yd(2,1)*Yu(1,1)*(Yd(2,0)*Yu(1,0) + Yd(2,1)*Yu(1,1)
+      + Yd(2,2)*Yu(1,2)) + 6*Sqr(Abs(MuInput))*Yd(2,1)*Yu(1,1)*(Yd(2,0)*Yu(1,0) +
+      Yd(2,1)*Yu(1,1) + Yd(2,2)*Yu(1,2))) + TCC0(msdInput(2),msqInput(2),msuInput(
+      1))*(-6*AdInput(2,2)*AuInput(1,2)*Yd(2,2)*Yu(1,2)*(Yd(2,0)*Yu(1,0) + Yd(2,1)
+      *Yu(1,1) + Yd(2,2)*Yu(1,2)) + 6*Sqr(Abs(MuInput))*Yd(2,2)*Yu(1,2)*(Yd(2,0)*
+      Yu(1,0) + Yd(2,1)*Yu(1,1) + Yd(2,2)*Yu(1,2))) + 3*AuInput(2,0)*AuInput(2,1)*
+      Sqr(Abs(MuInput))*TCD0(msqInput(0),msqInput(1),msuInput(0),msuInput(2))*Yu(0
+      ,0)*Yu(0,1)*Yu(2,0)*Yu(2,1) + 3*AuInput(0,0)*AuInput(0,1)*Sqr(Abs(MuInput))*
+      TCD0(msqInput(0),msqInput(1),msuInput(2),msuInput(0))*Yu(0,0)*Yu(0,1)*Yu(2,0
+      )*Yu(2,1) + 3*AuInput(2,0)*AuInput(2,1)*Sqr(Abs(MuInput))*TCD0(msqInput(1),
+      msqInput(0),msuInput(0),msuInput(2))*Yu(0,0)*Yu(0,1)*Yu(2,0)*Yu(2,1) + 3*
+      AuInput(0,0)*AuInput(0,1)*Sqr(Abs(MuInput))*TCD0(msqInput(1),msqInput(0),
+      msuInput(2),msuInput(0))*Yu(0,0)*Yu(0,1)*Yu(2,0)*Yu(2,1) + 3*AuInput(2,0)*
+      AuInput(2,1)*Sqr(Abs(MuInput))*TCD0(msqInput(0),msqInput(1),msuInput(1),
+      msuInput(2))*Yu(1,0)*Yu(1,1)*Yu(2,0)*Yu(2,1) + 3*AuInput(1,0)*AuInput(1,1)*
+      Sqr(Abs(MuInput))*TCD0(msqInput(0),msqInput(1),msuInput(2),msuInput(1))*Yu(1
+      ,0)*Yu(1,1)*Yu(2,0)*Yu(2,1) + 3*AuInput(2,0)*AuInput(2,1)*Sqr(Abs(MuInput))*
+      TCD0(msqInput(1),msqInput(0),msuInput(1),msuInput(2))*Yu(1,0)*Yu(1,1)*Yu(2,0
+      )*Yu(2,1) + 3*AuInput(1,0)*AuInput(1,1)*Sqr(Abs(MuInput))*TCD0(msqInput(1),
+      msqInput(0),msuInput(2),msuInput(1))*Yu(1,0)*Yu(1,1)*Yu(2,0)*Yu(2,1) - 3*
+      TCD0(msdInput(0),msqInput(0),msqInput(1),msuInput(2))*(AdInput(0,0)*AuInput(
+      2,0)*Yd(0,0)*Yu(2,0) - Sqr(Abs(MuInput))*Yd(0,0)*Yu(2,0))*(AdInput(0,1)*
+      AuInput(2,1)*Yd(0,1)*Yu(2,1) - Sqr(Abs(MuInput))*Yd(0,1)*Yu(2,1)) - 3*TCD0(
+      msdInput(0),msqInput(1),msqInput(0),msuInput(2))*(AdInput(0,0)*AuInput(2,0)*
+      Yd(0,0)*Yu(2,0) - Sqr(Abs(MuInput))*Yd(0,0)*Yu(2,0))*(AdInput(0,1)*AuInput(2
+      ,1)*Yd(0,1)*Yu(2,1) - Sqr(Abs(MuInput))*Yd(0,1)*Yu(2,1)) - 3*TCD0(msdInput(1
+      ),msqInput(0),msqInput(1),msuInput(2))*(AdInput(1,0)*AuInput(2,0)*Yd(1,0)*Yu
+      (2,0) - Sqr(Abs(MuInput))*Yd(1,0)*Yu(2,0))*(AdInput(1,1)*AuInput(2,1)*Yd(1,1
+      )*Yu(2,1) - Sqr(Abs(MuInput))*Yd(1,1)*Yu(2,1)) - 3*TCD0(msdInput(1),msqInput
+      (1),msqInput(0),msuInput(2))*(AdInput(1,0)*AuInput(2,0)*Yd(1,0)*Yu(2,0) -
+      Sqr(Abs(MuInput))*Yd(1,0)*Yu(2,0))*(AdInput(1,1)*AuInput(2,1)*Yd(1,1)*Yu(2,1
+      ) - Sqr(Abs(MuInput))*Yd(1,1)*Yu(2,1)) - 3*TCD0(msdInput(2),msqInput(0),
+      msqInput(1),msuInput(2))*(AdInput(2,0)*AuInput(2,0)*Yd(2,0)*Yu(2,0) - Sqr(
+      Abs(MuInput))*Yd(2,0)*Yu(2,0))*(AdInput(2,1)*AuInput(2,1)*Yd(2,1)*Yu(2,1) -
+      Sqr(Abs(MuInput))*Yd(2,1)*Yu(2,1)) - 3*TCD0(msdInput(2),msqInput(1),msqInput
+      (0),msuInput(2))*(AdInput(2,0)*AuInput(2,0)*Yd(2,0)*Yu(2,0) - Sqr(Abs(
+      MuInput))*Yd(2,0)*Yu(2,0))*(AdInput(2,1)*AuInput(2,1)*Yd(2,1)*Yu(2,1) - Sqr(
+      Abs(MuInput))*Yd(2,1)*Yu(2,1)) - 3*TCB0(msqInput(0),msqInput(1),SCALE)*(Yd(0
+      ,0)*Yd(0,1) + Yd(1,0)*Yd(1,1) + Yd(2,0)*Yd(2,1))*(Yu(0,0)*Yu(0,1) + Yu(1,0)*
+      Yu(1,1) + Yu(2,0)*Yu(2,1)) - 3*TCB0(msqInput(1),msqInput(0),SCALE)*(Yd(0,0)*
+      Yd(0,1) + Yd(1,0)*Yd(1,1) + Yd(2,0)*Yd(2,1))*(Yu(0,0)*Yu(0,1) + Yu(1,0)*Yu(1
+      ,1) + Yu(2,0)*Yu(2,1)) + TCC0(msdInput(0),msqInput(0),msqInput(1))*(3*Sqr(
+      Abs(MuInput))*Yd(0,0)*Yd(0,1)*(Yd(0,0)*Yd(0,1) + Yd(1,0)*Yd(1,1) + Yd(2,0)*
+      Yd(2,1)) - 3*AdInput(0,0)*AdInput(0,1)*Yd(0,0)*Yd(0,1)*(Yu(0,0)*Yu(0,1) + Yu
+      (1,0)*Yu(1,1) + Yu(2,0)*Yu(2,1))) + TCC0(msdInput(0),msqInput(1),msqInput(0)
+      )*(3*Sqr(Abs(MuInput))*Yd(0,0)*Yd(0,1)*(Yd(0,0)*Yd(0,1) + Yd(1,0)*Yd(1,1) +
+      Yd(2,0)*Yd(2,1)) - 3*AdInput(0,0)*AdInput(0,1)*Yd(0,0)*Yd(0,1)*(Yu(0,0)*Yu(0
+      ,1) + Yu(1,0)*Yu(1,1) + Yu(2,0)*Yu(2,1))) + TCC0(msdInput(1),msqInput(0),
+      msqInput(1))*(3*Sqr(Abs(MuInput))*Yd(1,0)*Yd(1,1)*(Yd(0,0)*Yd(0,1) + Yd(1,0)
+      *Yd(1,1) + Yd(2,0)*Yd(2,1)) - 3*AdInput(1,0)*AdInput(1,1)*Yd(1,0)*Yd(1,1)*(
+      Yu(0,0)*Yu(0,1) + Yu(1,0)*Yu(1,1) + Yu(2,0)*Yu(2,1))) + TCC0(msdInput(1),
+      msqInput(1),msqInput(0))*(3*Sqr(Abs(MuInput))*Yd(1,0)*Yd(1,1)*(Yd(0,0)*Yd(0,
+      1) + Yd(1,0)*Yd(1,1) + Yd(2,0)*Yd(2,1)) - 3*AdInput(1,0)*AdInput(1,1)*Yd(1,0
+      )*Yd(1,1)*(Yu(0,0)*Yu(0,1) + Yu(1,0)*Yu(1,1) + Yu(2,0)*Yu(2,1))) + TCC0(
+      msdInput(2),msqInput(0),msqInput(1))*(3*Sqr(Abs(MuInput))*Yd(2,0)*Yd(2,1)*(
+      Yd(0,0)*Yd(0,1) + Yd(1,0)*Yd(1,1) + Yd(2,0)*Yd(2,1)) - 3*AdInput(2,0)*
+      AdInput(2,1)*Yd(2,0)*Yd(2,1)*(Yu(0,0)*Yu(0,1) + Yu(1,0)*Yu(1,1) + Yu(2,0)*Yu
+      (2,1))) + TCC0(msdInput(2),msqInput(1),msqInput(0))*(3*Sqr(Abs(MuInput))*Yd(
+      2,0)*Yd(2,1)*(Yd(0,0)*Yd(0,1) + Yd(1,0)*Yd(1,1) + Yd(2,0)*Yd(2,1)) - 3*
+      AdInput(2,0)*AdInput(2,1)*Yd(2,0)*Yd(2,1)*(Yu(0,0)*Yu(0,1) + Yu(1,0)*Yu(1,1)
+      + Yu(2,0)*Yu(2,1))) + TCC0(msqInput(0),msqInput(1),msuInput(0))*(-3*AuInput(
+      0,0)*AuInput(0,1)*(Yd(0,0)*Yd(0,1) + Yd(1,0)*Yd(1,1) + Yd(2,0)*Yd(2,1))*Yu(0
+      ,0)*Yu(0,1) + 3*Sqr(Abs(MuInput))*Yu(0,0)*Yu(0,1)*(Yu(0,0)*Yu(0,1) + Yu(1,0)
+      *Yu(1,1) + Yu(2,0)*Yu(2,1))) + TCC0(msqInput(1),msqInput(0),msuInput(0))*(-3
+      *AuInput(0,0)*AuInput(0,1)*(Yd(0,0)*Yd(0,1) + Yd(1,0)*Yd(1,1) + Yd(2,0)*Yd(2
+      ,1))*Yu(0,0)*Yu(0,1) + 3*Sqr(Abs(MuInput))*Yu(0,0)*Yu(0,1)*(Yu(0,0)*Yu(0,1)
+      + Yu(1,0)*Yu(1,1) + Yu(2,0)*Yu(2,1))) + TCC0(msqInput(0),msqInput(1),
+      msuInput(1))*(-3*AuInput(1,0)*AuInput(1,1)*(Yd(0,0)*Yd(0,1) + Yd(1,0)*Yd(1,1
+      ) + Yd(2,0)*Yd(2,1))*Yu(1,0)*Yu(1,1) + 3*Sqr(Abs(MuInput))*Yu(1,0)*Yu(1,1)*(
+      Yu(0,0)*Yu(0,1) + Yu(1,0)*Yu(1,1) + Yu(2,0)*Yu(2,1))) + TCC0(msqInput(1),
+      msqInput(0),msuInput(1))*(-3*AuInput(1,0)*AuInput(1,1)*(Yd(0,0)*Yd(0,1) + Yd
+      (1,0)*Yd(1,1) + Yd(2,0)*Yd(2,1))*Yu(1,0)*Yu(1,1) + 3*Sqr(Abs(MuInput))*Yu(1,
+      0)*Yu(1,1)*(Yu(0,0)*Yu(0,1) + Yu(1,0)*Yu(1,1) + Yu(2,0)*Yu(2,1))) + TCC0(
+      msqInput(0),msqInput(1),msuInput(2))*(-3*AuInput(2,0)*AuInput(2,1)*(Yd(0,0)*
+      Yd(0,1) + Yd(1,0)*Yd(1,1) + Yd(2,0)*Yd(2,1))*Yu(2,0)*Yu(2,1) + 3*Sqr(Abs(
+      MuInput))*Yu(2,0)*Yu(2,1)*(Yu(0,0)*Yu(0,1) + Yu(1,0)*Yu(1,1) + Yu(2,0)*Yu(2,
+      1))) + TCC0(msqInput(1),msqInput(0),msuInput(2))*(-3*AuInput(2,0)*AuInput(2,
+      1)*(Yd(0,0)*Yd(0,1) + Yd(1,0)*Yd(1,1) + Yd(2,0)*Yd(2,1))*Yu(2,0)*Yu(2,1) + 3
+      *Sqr(Abs(MuInput))*Yu(2,0)*Yu(2,1)*(Yu(0,0)*Yu(0,1) + Yu(1,0)*Yu(1,1) + Yu(2
+      ,0)*Yu(2,1))) + 3*AuInput(2,0)*AuInput(2,2)*Sqr(Abs(MuInput))*TCD0(msqInput(
+      0),msqInput(2),msuInput(0),msuInput(2))*Yu(0,0)*Yu(0,2)*Yu(2,0)*Yu(2,2) + 3*
+      AuInput(0,0)*AuInput(0,2)*Sqr(Abs(MuInput))*TCD0(msqInput(0),msqInput(2),
+      msuInput(2),msuInput(0))*Yu(0,0)*Yu(0,2)*Yu(2,0)*Yu(2,2) + 3*AuInput(2,0)*
+      AuInput(2,2)*Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(0),msuInput(0),
+      msuInput(2))*Yu(0,0)*Yu(0,2)*Yu(2,0)*Yu(2,2) + 3*AuInput(0,0)*AuInput(0,2)*
+      Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(0),msuInput(2),msuInput(0))*Yu(0
+      ,0)*Yu(0,2)*Yu(2,0)*Yu(2,2) + 3*AuInput(2,0)*AuInput(2,2)*Sqr(Abs(MuInput))*
+      TCD0(msqInput(0),msqInput(2),msuInput(1),msuInput(2))*Yu(1,0)*Yu(1,2)*Yu(2,0
+      )*Yu(2,2) + 3*AuInput(1,0)*AuInput(1,2)*Sqr(Abs(MuInput))*TCD0(msqInput(0),
+      msqInput(2),msuInput(2),msuInput(1))*Yu(1,0)*Yu(1,2)*Yu(2,0)*Yu(2,2) + 3*
+      AuInput(2,0)*AuInput(2,2)*Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(0),
+      msuInput(1),msuInput(2))*Yu(1,0)*Yu(1,2)*Yu(2,0)*Yu(2,2) + 3*AuInput(1,0)*
+      AuInput(1,2)*Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(0),msuInput(2),
+      msuInput(1))*Yu(1,0)*Yu(1,2)*Yu(2,0)*Yu(2,2) + 3*AuInput(2,1)*AuInput(2,2)*
+      Sqr(Abs(MuInput))*TCD0(msqInput(1),msqInput(2),msuInput(0),msuInput(2))*Yu(0
+      ,1)*Yu(0,2)*Yu(2,1)*Yu(2,2) + 3*AuInput(0,1)*AuInput(0,2)*Sqr(Abs(MuInput))*
+      TCD0(msqInput(1),msqInput(2),msuInput(2),msuInput(0))*Yu(0,1)*Yu(0,2)*Yu(2,1
+      )*Yu(2,2) + 3*AuInput(2,1)*AuInput(2,2)*Sqr(Abs(MuInput))*TCD0(msqInput(2),
+      msqInput(1),msuInput(0),msuInput(2))*Yu(0,1)*Yu(0,2)*Yu(2,1)*Yu(2,2) + 3*
+      AuInput(0,1)*AuInput(0,2)*Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(1),
+      msuInput(2),msuInput(0))*Yu(0,1)*Yu(0,2)*Yu(2,1)*Yu(2,2) + 3*AuInput(2,1)*
+      AuInput(2,2)*Sqr(Abs(MuInput))*TCD0(msqInput(1),msqInput(2),msuInput(1),
+      msuInput(2))*Yu(1,1)*Yu(1,2)*Yu(2,1)*Yu(2,2) + 3*AuInput(1,1)*AuInput(1,2)*
+      Sqr(Abs(MuInput))*TCD0(msqInput(1),msqInput(2),msuInput(2),msuInput(1))*Yu(1
+      ,1)*Yu(1,2)*Yu(2,1)*Yu(2,2) + 3*AuInput(2,1)*AuInput(2,2)*Sqr(Abs(MuInput))*
+      TCD0(msqInput(2),msqInput(1),msuInput(1),msuInput(2))*Yu(1,1)*Yu(1,2)*Yu(2,1
+      )*Yu(2,2) + 3*AuInput(1,1)*AuInput(1,2)*Sqr(Abs(MuInput))*TCD0(msqInput(2),
+      msqInput(1),msuInput(2),msuInput(1))*Yu(1,1)*Yu(1,2)*Yu(2,1)*Yu(2,2) - 3*
+      TCD0(msdInput(0),msqInput(0),msqInput(2),msuInput(2))*(AdInput(0,0)*AuInput(
+      2,0)*Yd(0,0)*Yu(2,0) - Sqr(Abs(MuInput))*Yd(0,0)*Yu(2,0))*(AdInput(0,2)*
+      AuInput(2,2)*Yd(0,2)*Yu(2,2) - Sqr(Abs(MuInput))*Yd(0,2)*Yu(2,2)) - 3*TCD0(
+      msdInput(0),msqInput(2),msqInput(0),msuInput(2))*(AdInput(0,0)*AuInput(2,0)*
+      Yd(0,0)*Yu(2,0) - Sqr(Abs(MuInput))*Yd(0,0)*Yu(2,0))*(AdInput(0,2)*AuInput(2
+      ,2)*Yd(0,2)*Yu(2,2) - Sqr(Abs(MuInput))*Yd(0,2)*Yu(2,2)) - 3*TCD0(msdInput(0
+      ),msqInput(1),msqInput(2),msuInput(2))*(AdInput(0,1)*AuInput(2,1)*Yd(0,1)*Yu
+      (2,1) - Sqr(Abs(MuInput))*Yd(0,1)*Yu(2,1))*(AdInput(0,2)*AuInput(2,2)*Yd(0,2
+      )*Yu(2,2) - Sqr(Abs(MuInput))*Yd(0,2)*Yu(2,2)) - 3*TCD0(msdInput(0),msqInput
+      (2),msqInput(1),msuInput(2))*(AdInput(0,1)*AuInput(2,1)*Yd(0,1)*Yu(2,1) -
+      Sqr(Abs(MuInput))*Yd(0,1)*Yu(2,1))*(AdInput(0,2)*AuInput(2,2)*Yd(0,2)*Yu(2,2
+      ) - Sqr(Abs(MuInput))*Yd(0,2)*Yu(2,2)) - 3*TCD0(msdInput(1),msqInput(0),
+      msqInput(2),msuInput(2))*(AdInput(1,0)*AuInput(2,0)*Yd(1,0)*Yu(2,0) - Sqr(
+      Abs(MuInput))*Yd(1,0)*Yu(2,0))*(AdInput(1,2)*AuInput(2,2)*Yd(1,2)*Yu(2,2) -
+      Sqr(Abs(MuInput))*Yd(1,2)*Yu(2,2)) - 3*TCD0(msdInput(1),msqInput(2),msqInput
+      (0),msuInput(2))*(AdInput(1,0)*AuInput(2,0)*Yd(1,0)*Yu(2,0) - Sqr(Abs(
+      MuInput))*Yd(1,0)*Yu(2,0))*(AdInput(1,2)*AuInput(2,2)*Yd(1,2)*Yu(2,2) - Sqr(
+      Abs(MuInput))*Yd(1,2)*Yu(2,2)) - 3*TCD0(msdInput(1),msqInput(1),msqInput(2),
+      msuInput(2))*(AdInput(1,1)*AuInput(2,1)*Yd(1,1)*Yu(2,1) - Sqr(Abs(MuInput))*
+      Yd(1,1)*Yu(2,1))*(AdInput(1,2)*AuInput(2,2)*Yd(1,2)*Yu(2,2) - Sqr(Abs(
+      MuInput))*Yd(1,2)*Yu(2,2)) - 3*TCD0(msdInput(1),msqInput(2),msqInput(1),
+      msuInput(2))*(AdInput(1,1)*AuInput(2,1)*Yd(1,1)*Yu(2,1) - Sqr(Abs(MuInput))*
+      Yd(1,1)*Yu(2,1))*(AdInput(1,2)*AuInput(2,2)*Yd(1,2)*Yu(2,2) - Sqr(Abs(
+      MuInput))*Yd(1,2)*Yu(2,2)) - 3*TCD0(msdInput(2),msqInput(0),msqInput(2),
+      msuInput(2))*(AdInput(2,0)*AuInput(2,0)*Yd(2,0)*Yu(2,0) - Sqr(Abs(MuInput))*
+      Yd(2,0)*Yu(2,0))*(AdInput(2,2)*AuInput(2,2)*Yd(2,2)*Yu(2,2) - Sqr(Abs(
+      MuInput))*Yd(2,2)*Yu(2,2)) - 3*TCD0(msdInput(2),msqInput(2),msqInput(0),
+      msuInput(2))*(AdInput(2,0)*AuInput(2,0)*Yd(2,0)*Yu(2,0) - Sqr(Abs(MuInput))*
+      Yd(2,0)*Yu(2,0))*(AdInput(2,2)*AuInput(2,2)*Yd(2,2)*Yu(2,2) - Sqr(Abs(
+      MuInput))*Yd(2,2)*Yu(2,2)) - 3*TCD0(msdInput(2),msqInput(1),msqInput(2),
+      msuInput(2))*(AdInput(2,1)*AuInput(2,1)*Yd(2,1)*Yu(2,1) - Sqr(Abs(MuInput))*
+      Yd(2,1)*Yu(2,1))*(AdInput(2,2)*AuInput(2,2)*Yd(2,2)*Yu(2,2) - Sqr(Abs(
+      MuInput))*Yd(2,2)*Yu(2,2)) - 3*TCD0(msdInput(2),msqInput(2),msqInput(1),
+      msuInput(2))*(AdInput(2,1)*AuInput(2,1)*Yd(2,1)*Yu(2,1) - Sqr(Abs(MuInput))*
+      Yd(2,1)*Yu(2,1))*(AdInput(2,2)*AuInput(2,2)*Yd(2,2)*Yu(2,2) - Sqr(Abs(
+      MuInput))*Yd(2,2)*Yu(2,2)) - 3*TCB0(msqInput(0),msqInput(2),SCALE)*(Yd(0,0)*
+      Yd(0,2) + Yd(1,0)*Yd(1,2) + Yd(2,0)*Yd(2,2))*(Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1
+      ,2) + Yu(2,0)*Yu(2,2)) - 3*TCB0(msqInput(2),msqInput(0),SCALE)*(Yd(0,0)*Yd(0
+      ,2) + Yd(1,0)*Yd(1,2) + Yd(2,0)*Yd(2,2))*(Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1,2)
+      + Yu(2,0)*Yu(2,2)) - 3*TCB0(msqInput(1),msqInput(2),SCALE)*(Yd(0,1)*Yd(0,2)
+      + Yd(1,1)*Yd(1,2) + Yd(2,1)*Yd(2,2))*(Yu(0,1)*Yu(0,2) + Yu(1,1)*Yu(1,2) + Yu
+      (2,1)*Yu(2,2)) - 3*TCB0(msqInput(2),msqInput(1),SCALE)*(Yd(0,1)*Yd(0,2) + Yd
+      (1,1)*Yd(1,2) + Yd(2,1)*Yd(2,2))*(Yu(0,1)*Yu(0,2) + Yu(1,1)*Yu(1,2) + Yu(2,1
+      )*Yu(2,2)) + TCC0(msdInput(0),msqInput(0),msuInput(2))*(-6*AdInput(0,0)*
+      AuInput(2,0)*Yd(0,0)*Yu(2,0)*(Yd(0,0)*Yu(2,0) + Yd(0,1)*Yu(2,1) + Yd(0,2)*Yu
+      (2,2)) + 6*Sqr(Abs(MuInput))*Yd(0,0)*Yu(2,0)*(Yd(0,0)*Yu(2,0) + Yd(0,1)*Yu(2
+      ,1) + Yd(0,2)*Yu(2,2))) + TCC0(msdInput(0),msqInput(1),msuInput(2))*(-6*
+      AdInput(0,1)*AuInput(2,1)*Yd(0,1)*Yu(2,1)*(Yd(0,0)*Yu(2,0) + Yd(0,1)*Yu(2,1)
+      + Yd(0,2)*Yu(2,2)) + 6*Sqr(Abs(MuInput))*Yd(0,1)*Yu(2,1)*(Yd(0,0)*Yu(2,0) +
+      Yd(0,1)*Yu(2,1) + Yd(0,2)*Yu(2,2))) + TCC0(msdInput(0),msqInput(2),msuInput(
+      2))*(-6*AdInput(0,2)*AuInput(2,2)*Yd(0,2)*Yu(2,2)*(Yd(0,0)*Yu(2,0) + Yd(0,1)
+      *Yu(2,1) + Yd(0,2)*Yu(2,2)) + 6*Sqr(Abs(MuInput))*Yd(0,2)*Yu(2,2)*(Yd(0,0)*
+      Yu(2,0) + Yd(0,1)*Yu(2,1) + Yd(0,2)*Yu(2,2))) + TCC0(msdInput(1),msqInput(0)
+      ,msuInput(2))*(-6*AdInput(1,0)*AuInput(2,0)*Yd(1,0)*Yu(2,0)*(Yd(1,0)*Yu(2,0)
+      + Yd(1,1)*Yu(2,1) + Yd(1,2)*Yu(2,2)) + 6*Sqr(Abs(MuInput))*Yd(1,0)*Yu(2,0)*(
+      Yd(1,0)*Yu(2,0) + Yd(1,1)*Yu(2,1) + Yd(1,2)*Yu(2,2))) + TCC0(msdInput(1),
+      msqInput(1),msuInput(2))*(-6*AdInput(1,1)*AuInput(2,1)*Yd(1,1)*Yu(2,1)*(Yd(1
+      ,0)*Yu(2,0) + Yd(1,1)*Yu(2,1) + Yd(1,2)*Yu(2,2)) + 6*Sqr(Abs(MuInput))*Yd(1,
+      1)*Yu(2,1)*(Yd(1,0)*Yu(2,0) + Yd(1,1)*Yu(2,1) + Yd(1,2)*Yu(2,2))) + TCC0(
+      msdInput(1),msqInput(2),msuInput(2))*(-6*AdInput(1,2)*AuInput(2,2)*Yd(1,2)*
+      Yu(2,2)*(Yd(1,0)*Yu(2,0) + Yd(1,1)*Yu(2,1) + Yd(1,2)*Yu(2,2)) + 6*Sqr(Abs(
+      MuInput))*Yd(1,2)*Yu(2,2)*(Yd(1,0)*Yu(2,0) + Yd(1,1)*Yu(2,1) + Yd(1,2)*Yu(2,
+      2))) + TCC0(msdInput(2),msqInput(0),msuInput(2))*(-6*AdInput(2,0)*AuInput(2,
+      0)*Yd(2,0)*Yu(2,0)*(Yd(2,0)*Yu(2,0) + Yd(2,1)*Yu(2,1) + Yd(2,2)*Yu(2,2)) + 6
+      *Sqr(Abs(MuInput))*Yd(2,0)*Yu(2,0)*(Yd(2,0)*Yu(2,0) + Yd(2,1)*Yu(2,1) + Yd(2
+      ,2)*Yu(2,2))) + TCC0(msdInput(2),msqInput(1),msuInput(2))*(-6*AdInput(2,1)*
+      AuInput(2,1)*Yd(2,1)*Yu(2,1)*(Yd(2,0)*Yu(2,0) + Yd(2,1)*Yu(2,1) + Yd(2,2)*Yu
+      (2,2)) + 6*Sqr(Abs(MuInput))*Yd(2,1)*Yu(2,1)*(Yd(2,0)*Yu(2,0) + Yd(2,1)*Yu(2
+      ,1) + Yd(2,2)*Yu(2,2))) + TCC0(msdInput(2),msqInput(2),msuInput(2))*(-6*
+      AdInput(2,2)*AuInput(2,2)*Yd(2,2)*Yu(2,2)*(Yd(2,0)*Yu(2,0) + Yd(2,1)*Yu(2,1)
+      + Yd(2,2)*Yu(2,2)) + 6*Sqr(Abs(MuInput))*Yd(2,2)*Yu(2,2)*(Yd(2,0)*Yu(2,0) +
+      Yd(2,1)*Yu(2,1) + Yd(2,2)*Yu(2,2))) + TCC0(msdInput(0),msqInput(0),msqInput(
+      2))*(3*Sqr(Abs(MuInput))*Yd(0,0)*Yd(0,2)*(Yd(0,0)*Yd(0,2) + Yd(1,0)*Yd(1,2)
+      + Yd(2,0)*Yd(2,2)) - 3*AdInput(0,0)*AdInput(0,2)*Yd(0,0)*Yd(0,2)*(Yu(0,0)*Yu
+      (0,2) + Yu(1,0)*Yu(1,2) + Yu(2,0)*Yu(2,2))) + TCC0(msdInput(0),msqInput(2),
+      msqInput(0))*(3*Sqr(Abs(MuInput))*Yd(0,0)*Yd(0,2)*(Yd(0,0)*Yd(0,2) + Yd(1,0)
+      *Yd(1,2) + Yd(2,0)*Yd(2,2)) - 3*AdInput(0,0)*AdInput(0,2)*Yd(0,0)*Yd(0,2)*(
+      Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1,2) + Yu(2,0)*Yu(2,2))) + TCC0(msdInput(1),
+      msqInput(0),msqInput(2))*(3*Sqr(Abs(MuInput))*Yd(1,0)*Yd(1,2)*(Yd(0,0)*Yd(0,
+      2) + Yd(1,0)*Yd(1,2) + Yd(2,0)*Yd(2,2)) - 3*AdInput(1,0)*AdInput(1,2)*Yd(1,0
+      )*Yd(1,2)*(Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1,2) + Yu(2,0)*Yu(2,2))) + TCC0(
+      msdInput(1),msqInput(2),msqInput(0))*(3*Sqr(Abs(MuInput))*Yd(1,0)*Yd(1,2)*(
+      Yd(0,0)*Yd(0,2) + Yd(1,0)*Yd(1,2) + Yd(2,0)*Yd(2,2)) - 3*AdInput(1,0)*
+      AdInput(1,2)*Yd(1,0)*Yd(1,2)*(Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1,2) + Yu(2,0)*Yu
+      (2,2))) + TCC0(msdInput(2),msqInput(0),msqInput(2))*(3*Sqr(Abs(MuInput))*Yd(
+      2,0)*Yd(2,2)*(Yd(0,0)*Yd(0,2) + Yd(1,0)*Yd(1,2) + Yd(2,0)*Yd(2,2)) - 3*
+      AdInput(2,0)*AdInput(2,2)*Yd(2,0)*Yd(2,2)*(Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1,2)
+      + Yu(2,0)*Yu(2,2))) + TCC0(msdInput(2),msqInput(2),msqInput(0))*(3*Sqr(Abs(
+      MuInput))*Yd(2,0)*Yd(2,2)*(Yd(0,0)*Yd(0,2) + Yd(1,0)*Yd(1,2) + Yd(2,0)*Yd(2,
+      2)) - 3*AdInput(2,0)*AdInput(2,2)*Yd(2,0)*Yd(2,2)*(Yu(0,0)*Yu(0,2) + Yu(1,0)
+      *Yu(1,2) + Yu(2,0)*Yu(2,2))) + TCC0(msqInput(0),msqInput(2),msuInput(0))*(-3
+      *AuInput(0,0)*AuInput(0,2)*(Yd(0,0)*Yd(0,2) + Yd(1,0)*Yd(1,2) + Yd(2,0)*Yd(2
+      ,2))*Yu(0,0)*Yu(0,2) + 3*Sqr(Abs(MuInput))*Yu(0,0)*Yu(0,2)*(Yu(0,0)*Yu(0,2)
+      + Yu(1,0)*Yu(1,2) + Yu(2,0)*Yu(2,2))) + TCC0(msqInput(2),msqInput(0),
+      msuInput(0))*(-3*AuInput(0,0)*AuInput(0,2)*(Yd(0,0)*Yd(0,2) + Yd(1,0)*Yd(1,2
+      ) + Yd(2,0)*Yd(2,2))*Yu(0,0)*Yu(0,2) + 3*Sqr(Abs(MuInput))*Yu(0,0)*Yu(0,2)*(
+      Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1,2) + Yu(2,0)*Yu(2,2))) + TCC0(msqInput(0),
+      msqInput(2),msuInput(1))*(-3*AuInput(1,0)*AuInput(1,2)*(Yd(0,0)*Yd(0,2) + Yd
+      (1,0)*Yd(1,2) + Yd(2,0)*Yd(2,2))*Yu(1,0)*Yu(1,2) + 3*Sqr(Abs(MuInput))*Yu(1,
+      0)*Yu(1,2)*(Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1,2) + Yu(2,0)*Yu(2,2))) + TCC0(
+      msqInput(2),msqInput(0),msuInput(1))*(-3*AuInput(1,0)*AuInput(1,2)*(Yd(0,0)*
+      Yd(0,2) + Yd(1,0)*Yd(1,2) + Yd(2,0)*Yd(2,2))*Yu(1,0)*Yu(1,2) + 3*Sqr(Abs(
+      MuInput))*Yu(1,0)*Yu(1,2)*(Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1,2) + Yu(2,0)*Yu(2,
+      2))) + TCC0(msqInput(0),msqInput(2),msuInput(2))*(-3*AuInput(2,0)*AuInput(2,
+      2)*(Yd(0,0)*Yd(0,2) + Yd(1,0)*Yd(1,2) + Yd(2,0)*Yd(2,2))*Yu(2,0)*Yu(2,2) + 3
+      *Sqr(Abs(MuInput))*Yu(2,0)*Yu(2,2)*(Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1,2) + Yu(2
+      ,0)*Yu(2,2))) + TCC0(msqInput(2),msqInput(0),msuInput(2))*(-3*AuInput(2,0)*
+      AuInput(2,2)*(Yd(0,0)*Yd(0,2) + Yd(1,0)*Yd(1,2) + Yd(2,0)*Yd(2,2))*Yu(2,0)*
+      Yu(2,2) + 3*Sqr(Abs(MuInput))*Yu(2,0)*Yu(2,2)*(Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(
+      1,2) + Yu(2,0)*Yu(2,2))) + TCC0(msdInput(0),msqInput(1),msqInput(2))*(3*Sqr(
+      Abs(MuInput))*Yd(0,1)*Yd(0,2)*(Yd(0,1)*Yd(0,2) + Yd(1,1)*Yd(1,2) + Yd(2,1)*
+      Yd(2,2)) - 3*AdInput(0,1)*AdInput(0,2)*Yd(0,1)*Yd(0,2)*(Yu(0,1)*Yu(0,2) + Yu
+      (1,1)*Yu(1,2) + Yu(2,1)*Yu(2,2))) + TCC0(msdInput(0),msqInput(2),msqInput(1)
+      )*(3*Sqr(Abs(MuInput))*Yd(0,1)*Yd(0,2)*(Yd(0,1)*Yd(0,2) + Yd(1,1)*Yd(1,2) +
+      Yd(2,1)*Yd(2,2)) - 3*AdInput(0,1)*AdInput(0,2)*Yd(0,1)*Yd(0,2)*(Yu(0,1)*Yu(0
+      ,2) + Yu(1,1)*Yu(1,2) + Yu(2,1)*Yu(2,2))) + TCC0(msdInput(1),msqInput(1),
+      msqInput(2))*(3*Sqr(Abs(MuInput))*Yd(1,1)*Yd(1,2)*(Yd(0,1)*Yd(0,2) + Yd(1,1)
+      *Yd(1,2) + Yd(2,1)*Yd(2,2)) - 3*AdInput(1,1)*AdInput(1,2)*Yd(1,1)*Yd(1,2)*(
+      Yu(0,1)*Yu(0,2) + Yu(1,1)*Yu(1,2) + Yu(2,1)*Yu(2,2))) + TCC0(msdInput(1),
+      msqInput(2),msqInput(1))*(3*Sqr(Abs(MuInput))*Yd(1,1)*Yd(1,2)*(Yd(0,1)*Yd(0,
+      2) + Yd(1,1)*Yd(1,2) + Yd(2,1)*Yd(2,2)) - 3*AdInput(1,1)*AdInput(1,2)*Yd(1,1
+      )*Yd(1,2)*(Yu(0,1)*Yu(0,2) + Yu(1,1)*Yu(1,2) + Yu(2,1)*Yu(2,2))) + TCC0(
+      msdInput(2),msqInput(1),msqInput(2))*(3*Sqr(Abs(MuInput))*Yd(2,1)*Yd(2,2)*(
+      Yd(0,1)*Yd(0,2) + Yd(1,1)*Yd(1,2) + Yd(2,1)*Yd(2,2)) - 3*AdInput(2,1)*
+      AdInput(2,2)*Yd(2,1)*Yd(2,2)*(Yu(0,1)*Yu(0,2) + Yu(1,1)*Yu(1,2) + Yu(2,1)*Yu
+      (2,2))) + TCC0(msdInput(2),msqInput(2),msqInput(1))*(3*Sqr(Abs(MuInput))*Yd(
+      2,1)*Yd(2,2)*(Yd(0,1)*Yd(0,2) + Yd(1,1)*Yd(1,2) + Yd(2,1)*Yd(2,2)) - 3*
+      AdInput(2,1)*AdInput(2,2)*Yd(2,1)*Yd(2,2)*(Yu(0,1)*Yu(0,2) + Yu(1,1)*Yu(1,2)
+      + Yu(2,1)*Yu(2,2))) + TCC0(msqInput(1),msqInput(2),msuInput(0))*(-3*AuInput(
+      0,1)*AuInput(0,2)*(Yd(0,1)*Yd(0,2) + Yd(1,1)*Yd(1,2) + Yd(2,1)*Yd(2,2))*Yu(0
+      ,1)*Yu(0,2) + 3*Sqr(Abs(MuInput))*Yu(0,1)*Yu(0,2)*(Yu(0,1)*Yu(0,2) + Yu(1,1)
+      *Yu(1,2) + Yu(2,1)*Yu(2,2))) + TCC0(msqInput(2),msqInput(1),msuInput(0))*(-3
+      *AuInput(0,1)*AuInput(0,2)*(Yd(0,1)*Yd(0,2) + Yd(1,1)*Yd(1,2) + Yd(2,1)*Yd(2
+      ,2))*Yu(0,1)*Yu(0,2) + 3*Sqr(Abs(MuInput))*Yu(0,1)*Yu(0,2)*(Yu(0,1)*Yu(0,2)
+      + Yu(1,1)*Yu(1,2) + Yu(2,1)*Yu(2,2))) + TCC0(msqInput(1),msqInput(2),
+      msuInput(1))*(-3*AuInput(1,1)*AuInput(1,2)*(Yd(0,1)*Yd(0,2) + Yd(1,1)*Yd(1,2
+      ) + Yd(2,1)*Yd(2,2))*Yu(1,1)*Yu(1,2) + 3*Sqr(Abs(MuInput))*Yu(1,1)*Yu(1,2)*(
+      Yu(0,1)*Yu(0,2) + Yu(1,1)*Yu(1,2) + Yu(2,1)*Yu(2,2))) + TCC0(msqInput(2),
+      msqInput(1),msuInput(1))*(-3*AuInput(1,1)*AuInput(1,2)*(Yd(0,1)*Yd(0,2) + Yd
+      (1,1)*Yd(1,2) + Yd(2,1)*Yd(2,2))*Yu(1,1)*Yu(1,2) + 3*Sqr(Abs(MuInput))*Yu(1,
+      1)*Yu(1,2)*(Yu(0,1)*Yu(0,2) + Yu(1,1)*Yu(1,2) + Yu(2,1)*Yu(2,2))) + TCC0(
+      msqInput(1),msqInput(2),msuInput(2))*(-3*AuInput(2,1)*AuInput(2,2)*(Yd(0,1)*
+      Yd(0,2) + Yd(1,1)*Yd(1,2) + Yd(2,1)*Yd(2,2))*Yu(2,1)*Yu(2,2) + 3*Sqr(Abs(
+      MuInput))*Yu(2,1)*Yu(2,2)*(Yu(0,1)*Yu(0,2) + Yu(1,1)*Yu(1,2) + Yu(2,1)*Yu(2,
+      2))) + TCC0(msqInput(2),msqInput(1),msuInput(2))*(-3*AuInput(2,1)*AuInput(2,
+      2)*(Yd(0,1)*Yd(0,2) + Yd(1,1)*Yd(1,2) + Yd(2,1)*Yd(2,2))*Yu(2,1)*Yu(2,2) + 3
+      *Sqr(Abs(MuInput))*Yu(2,1)*Yu(2,2)*(Yu(0,1)*Yu(0,2) + Yu(1,1)*Yu(1,2) + Yu(2
+      ,1)*Yu(2,2)))))));
+   MODEL->set_Lambda4(Re(-0.5*Sqr(g2) + (0.00008020298636472138*AuInput(2,2)*(1 -
+      (0.5*AuInput(2,2))/MSUSY)*Quad(Yu(2,2))*Sqr(g3)*Sqr(MuInput)*UnitStep(-2 +
+      LambdaLoopOrder))/Cube(MSUSY) + UnitStep(-1 + LambdaLoopOrder)*(
+      0.0005277144981371759*(-4 + 8*Log(Sqr(M2Input)/Sqr(SCALE)) + 4*Log(Sqr(Abs(
+      MuInput))/Sqr(SCALE)) + Log(Sqr(mslInput(0))/Sqr(SCALE)) + Log(Sqr(mslInput(
+      1))/Sqr(SCALE)) + Log(Sqr(mslInput(2))/Sqr(SCALE)) + 3*Log(Sqr(msqInput(0))/
+      Sqr(SCALE)) + 3*Log(Sqr(msqInput(1))/Sqr(SCALE)) + 3*Log(Sqr(msqInput(2))/
+      Sqr(SCALE)))*Quad(g2) - (Re(0.0031662869888230555*(3*Sqr(AdInput(0,0))*Sqr(
+      Yd(0,0))*TCDB0(msdInput(0),msqInput(0)) + 3*Sqr(AdInput(0,1))*Sqr(Yd(0,1))*
+      TCDB0(msdInput(0),msqInput(1)) + 3*Sqr(AdInput(0,2))*Sqr(Yd(0,2))*TCDB0(
+      msdInput(0),msqInput(2)) + 3*Sqr(AdInput(1,0))*Sqr(Yd(1,0))*TCDB0(msdInput(1
+      ),msqInput(0)) + 3*Sqr(AdInput(1,1))*Sqr(Yd(1,1))*TCDB0(msdInput(1),msqInput
+      (1)) + 3*Sqr(AdInput(1,2))*Sqr(Yd(1,2))*TCDB0(msdInput(1),msqInput(2)) + 3*
+      Sqr(AdInput(2,0))*Sqr(Yd(2,0))*TCDB0(msdInput(2),msqInput(0)) + 3*Sqr(
+      AdInput(2,1))*Sqr(Yd(2,1))*TCDB0(msdInput(2),msqInput(1)) + 3*Sqr(AdInput(2,
+      2))*Sqr(Yd(2,2))*TCDB0(msdInput(2),msqInput(2)) + Sqr(AeInput(0,0))*Sqr(Ye(0
+      ,0))*TCDB0(mseInput(0),mslInput(0)) + Sqr(AeInput(0,1))*Sqr(Ye(0,1))*TCDB0(
+      mseInput(0),mslInput(1)) + Sqr(AeInput(0,2))*Sqr(Ye(0,2))*TCDB0(mseInput(0),
+      mslInput(2)) + Sqr(AeInput(1,0))*Sqr(Ye(1,0))*TCDB0(mseInput(1),mslInput(0))
+      + Sqr(AeInput(1,1))*Sqr(Ye(1,1))*TCDB0(mseInput(1),mslInput(1)) + Sqr(
+      AeInput(1,2))*Sqr(Ye(1,2))*TCDB0(mseInput(1),mslInput(2)) + Sqr(AeInput(2,0)
+      )*Sqr(Ye(2,0))*TCDB0(mseInput(2),mslInput(0)) + Sqr(AeInput(2,1))*Sqr(Ye(2,1
+      ))*TCDB0(mseInput(2),mslInput(1)) + Sqr(AeInput(2,2))*Sqr(Ye(2,2))*TCDB0(
+      mseInput(2),mslInput(2)) + 3*Sqr(Abs(MuInput))*Sqr(Yu(0,0))*TCDB0(msuInput(0
+      ),msqInput(0)) + 3*Sqr(Abs(MuInput))*Sqr(Yu(0,1))*TCDB0(msuInput(0),msqInput
+      (1)) + 3*Sqr(Abs(MuInput))*Sqr(Yu(0,2))*TCDB0(msuInput(0),msqInput(2)) + 3*
+      Sqr(Abs(MuInput))*Sqr(Yu(1,0))*TCDB0(msuInput(1),msqInput(0)) + 3*Sqr(Abs(
+      MuInput))*Sqr(Yu(1,1))*TCDB0(msuInput(1),msqInput(1)) + 3*Sqr(Abs(MuInput))*
+      Sqr(Yu(1,2))*TCDB0(msuInput(1),msqInput(2)) + 3*Sqr(Abs(MuInput))*Sqr(Yu(2,0
+      ))*TCDB0(msuInput(2),msqInput(0)) + 3*Sqr(Abs(MuInput))*Sqr(Yu(2,1))*TCDB0(
+      msuInput(2),msqInput(1)) + 3*Sqr(Abs(MuInput))*Sqr(Yu(2,2))*TCDB0(msuInput(2
+      ),msqInput(2))) - 0.0007915717472057639*(0.6*Sqr(g1)*TCW(Abs(M1Input),Abs(
+      MuInput),SCALE) + 3*Sqr(g2)*TCW(Abs(M2Input),Abs(MuInput),SCALE))) + Re(
+      0.0031662869888230555*(3*Sqr(Abs(MuInput))*Sqr(Yd(0,0))*TCDB0(msdInput(0),
+      msqInput(0)) + 3*Sqr(Abs(MuInput))*Sqr(Yd(0,1))*TCDB0(msdInput(0),msqInput(1
+      )) + 3*Sqr(Abs(MuInput))*Sqr(Yd(0,2))*TCDB0(msdInput(0),msqInput(2)) + 3*Sqr
+      (Abs(MuInput))*Sqr(Yd(1,0))*TCDB0(msdInput(1),msqInput(0)) + 3*Sqr(Abs(
+      MuInput))*Sqr(Yd(1,1))*TCDB0(msdInput(1),msqInput(1)) + 3*Sqr(Abs(MuInput))*
+      Sqr(Yd(1,2))*TCDB0(msdInput(1),msqInput(2)) + 3*Sqr(Abs(MuInput))*Sqr(Yd(2,0
+      ))*TCDB0(msdInput(2),msqInput(0)) + 3*Sqr(Abs(MuInput))*Sqr(Yd(2,1))*TCDB0(
+      msdInput(2),msqInput(1)) + 3*Sqr(Abs(MuInput))*Sqr(Yd(2,2))*TCDB0(msdInput(2
+      ),msqInput(2)) + Sqr(Abs(MuInput))*Sqr(Ye(0,0))*TCDB0(mseInput(0),mslInput(0
+      )) + Sqr(Abs(MuInput))*Sqr(Ye(0,1))*TCDB0(mseInput(0),mslInput(1)) + Sqr(Abs
+      (MuInput))*Sqr(Ye(0,2))*TCDB0(mseInput(0),mslInput(2)) + Sqr(Abs(MuInput))*
+      Sqr(Ye(1,0))*TCDB0(mseInput(1),mslInput(0)) + Sqr(Abs(MuInput))*Sqr(Ye(1,1))
+      *TCDB0(mseInput(1),mslInput(1)) + Sqr(Abs(MuInput))*Sqr(Ye(1,2))*TCDB0(
+      mseInput(1),mslInput(2)) + Sqr(Abs(MuInput))*Sqr(Ye(2,0))*TCDB0(mseInput(2),
+      mslInput(0)) + Sqr(Abs(MuInput))*Sqr(Ye(2,1))*TCDB0(mseInput(2),mslInput(1))
+      + Sqr(Abs(MuInput))*Sqr(Ye(2,2))*TCDB0(mseInput(2),mslInput(2)) + 3*Sqr(
+      AuInput(0,0))*Sqr(Yu(0,0))*TCDB0(msuInput(0),msqInput(0)) + 3*Sqr(AuInput(0,
+      1))*Sqr(Yu(0,1))*TCDB0(msuInput(0),msqInput(1)) + 3*Sqr(AuInput(0,2))*Sqr(Yu
+      (0,2))*TCDB0(msuInput(0),msqInput(2)) + 3*Sqr(AuInput(1,0))*Sqr(Yu(1,0))*
+      TCDB0(msuInput(1),msqInput(0)) + 3*Sqr(AuInput(1,1))*Sqr(Yu(1,1))*TCDB0(
+      msuInput(1),msqInput(1)) + 3*Sqr(AuInput(1,2))*Sqr(Yu(1,2))*TCDB0(msuInput(1
+      ),msqInput(2)) + 3*Sqr(AuInput(2,0))*Sqr(Yu(2,0))*TCDB0(msuInput(2),msqInput
+      (0)) + 3*Sqr(AuInput(2,1))*Sqr(Yu(2,1))*TCDB0(msuInput(2),msqInput(1)) + 3*
+      Sqr(AuInput(2,2))*Sqr(Yu(2,2))*TCDB0(msuInput(2),msqInput(2))) -
+      0.0007915717472057639*(0.6*Sqr(g1)*TCW(Abs(M1Input),Abs(MuInput),SCALE) + 3*
+      Sqr(g2)*TCW(Abs(M2Input),Abs(MuInput),SCALE))))*Sqr(g2) -
+      0.006332573977646111*(-3*Sqr(Yd(0,0)*Yu(0,0) + Yd(0,1)*Yu(0,1) + Yd(0,2)*Yu(
+      0,2))*TCB0(msdInput(0),msuInput(0),SCALE) - 3*Sqr(Yd(0,0)*Yu(1,0) + Yd(0,1)*
+      Yu(1,1) + Yd(0,2)*Yu(1,2))*TCB0(msdInput(0),msuInput(1),SCALE) - 3*Sqr(Yd(0,
+      0)*Yu(2,0) + Yd(0,1)*Yu(2,1) + Yd(0,2)*Yu(2,2))*TCB0(msdInput(0),msuInput(2)
+      ,SCALE) - 3*Sqr(Yd(1,0)*Yu(0,0) + Yd(1,1)*Yu(0,1) + Yd(1,2)*Yu(0,2))*TCB0(
+      msdInput(1),msuInput(0),SCALE) - 3*Sqr(Yd(1,0)*Yu(1,0) + Yd(1,1)*Yu(1,1) +
+      Yd(1,2)*Yu(1,2))*TCB0(msdInput(1),msuInput(1),SCALE) - 3*Sqr(Yd(1,0)*Yu(2,0)
+      + Yd(1,1)*Yu(2,1) + Yd(1,2)*Yu(2,2))*TCB0(msdInput(1),msuInput(2),SCALE) - 3
+      *Sqr(Yd(2,0)*Yu(0,0) + Yd(2,1)*Yu(0,1) + Yd(2,2)*Yu(0,2))*TCB0(msdInput(2),
+      msuInput(0),SCALE) - 3*Sqr(Yd(2,0)*Yu(1,0) + Yd(2,1)*Yu(1,1) + Yd(2,2)*Yu(1,
+      2))*TCB0(msdInput(2),msuInput(1),SCALE) - 3*Sqr(Yd(2,0)*Yu(2,0) + Yd(2,1)*Yu
+      (2,1) + Yd(2,2)*Yu(2,2))*TCB0(msdInput(2),msuInput(2),SCALE) + (-0.25*Quad(
+      g2) + 0.5*Sqr(g2)*(Sqr(Ye(0,0)) + Sqr(Ye(1,0)) + Sqr(Ye(2,0))))*TCB0(
+      mslInput(0),mslInput(0),SCALE) + (-0.25*Quad(g2) + 0.5*Sqr(g2)*(Sqr(Ye(0,1))
+      + Sqr(Ye(1,1)) + Sqr(Ye(2,1))))*TCB0(mslInput(1),mslInput(1),SCALE) + (-0.25
+      *Quad(g2) + 0.5*Sqr(g2)*(Sqr(Ye(0,2)) + Sqr(Ye(1,2)) + Sqr(Ye(2,2))))*TCB0(
+      mslInput(2),mslInput(2),SCALE) + (-0.75*Quad(g2) + 1.5*Sqr(g2)*(Sqr(Yd(0,0))
+      + Sqr(Yd(1,0)) + Sqr(Yd(2,0))) + 1.5*Sqr(g2)*(Sqr(Yu(0,0)) + Sqr(Yu(1,0)) +
+      Sqr(Yu(2,0))) - 3*(Sqr(Yd(0,0)) + Sqr(Yd(1,0)) + Sqr(Yd(2,0)))*(Sqr(Yu(0,0))
+      + Sqr(Yu(1,0)) + Sqr(Yu(2,0))))*TCB0(msqInput(0),msqInput(0),SCALE) + (-0.75
+      *Quad(g2) + 1.5*Sqr(g2)*(Sqr(Yd(0,1)) + Sqr(Yd(1,1)) + Sqr(Yd(2,1))) + 1.5*
+      Sqr(g2)*(Sqr(Yu(0,1)) + Sqr(Yu(1,1)) + Sqr(Yu(2,1))) - 3*(Sqr(Yd(0,1)) + Sqr
+      (Yd(1,1)) + Sqr(Yd(2,1)))*(Sqr(Yu(0,1)) + Sqr(Yu(1,1)) + Sqr(Yu(2,1))))*TCB0
+      (msqInput(1),msqInput(1),SCALE) + (-0.75*Quad(g2) + 1.5*Sqr(g2)*(Sqr(Yd(0,2)
+      ) + Sqr(Yd(1,2)) + Sqr(Yd(2,2))) + 1.5*Sqr(g2)*(Sqr(Yu(0,2)) + Sqr(Yu(1,2))
+      + Sqr(Yu(2,2))) - 3*(Sqr(Yd(0,2)) + Sqr(Yd(1,2)) + Sqr(Yd(2,2)))*(Sqr(Yu(0,2
+      )) + Sqr(Yu(1,2)) + Sqr(Yu(2,2))))*TCB0(msqInput(2),msqInput(2),SCALE) + (-
+      1.5*Sqr(g2)*Sqr(Abs(MuInput))*Sqr(Yd(0,0)) + 1.5*Sqr(g2)*Sqr(AdInput(0,0))*
+      Sqr(Yd(0,0)) + 3*Sqr(Abs(MuInput))*Sqr(Yd(0,0))*(Sqr(Yd(0,0)) + Sqr(Yd(1,0))
+      + Sqr(Yd(2,0))) - 3*Sqr(AdInput(0,0))*Sqr(Yd(0,0))*(Sqr(Yu(0,0)) + Sqr(Yu(1,
+      0)) + Sqr(Yu(2,0))))*TCC0(msdInput(0),msqInput(0),msqInput(0)) + (-1.5*Sqr(
+      g2)*Sqr(Abs(MuInput))*Sqr(Yd(0,1)) + 1.5*Sqr(g2)*Sqr(AdInput(0,1))*Sqr(Yd(0,
+      1)) + 3*Sqr(Abs(MuInput))*Sqr(Yd(0,1))*(Sqr(Yd(0,1)) + Sqr(Yd(1,1)) + Sqr(Yd
+      (2,1))) - 3*Sqr(AdInput(0,1))*Sqr(Yd(0,1))*(Sqr(Yu(0,1)) + Sqr(Yu(1,1)) +
+      Sqr(Yu(2,1))))*TCC0(msdInput(0),msqInput(1),msqInput(1)) + (-1.5*Sqr(g2)*Sqr
+      (Abs(MuInput))*Sqr(Yd(0,2)) + 1.5*Sqr(g2)*Sqr(AdInput(0,2))*Sqr(Yd(0,2)) + 3
+      *Sqr(Abs(MuInput))*Sqr(Yd(0,2))*(Sqr(Yd(0,2)) + Sqr(Yd(1,2)) + Sqr(Yd(2,2)))
+      - 3*Sqr(AdInput(0,2))*Sqr(Yd(0,2))*(Sqr(Yu(0,2)) + Sqr(Yu(1,2)) + Sqr(Yu(2,2
+      ))))*TCC0(msdInput(0),msqInput(2),msqInput(2)) + (-1.5*Sqr(g2)*Sqr(Abs(
+      MuInput))*Sqr(Yd(1,0)) + 1.5*Sqr(g2)*Sqr(AdInput(1,0))*Sqr(Yd(1,0)) + 3*Sqr(
+      Abs(MuInput))*Sqr(Yd(1,0))*(Sqr(Yd(0,0)) + Sqr(Yd(1,0)) + Sqr(Yd(2,0))) - 3*
+      Sqr(AdInput(1,0))*Sqr(Yd(1,0))*(Sqr(Yu(0,0)) + Sqr(Yu(1,0)) + Sqr(Yu(2,0))))
+      *TCC0(msdInput(1),msqInput(0),msqInput(0)) + (-1.5*Sqr(g2)*Sqr(Abs(MuInput))
+      *Sqr(Yd(1,1)) + 1.5*Sqr(g2)*Sqr(AdInput(1,1))*Sqr(Yd(1,1)) + 3*Sqr(Abs(
+      MuInput))*Sqr(Yd(1,1))*(Sqr(Yd(0,1)) + Sqr(Yd(1,1)) + Sqr(Yd(2,1))) - 3*Sqr(
+      AdInput(1,1))*Sqr(Yd(1,1))*(Sqr(Yu(0,1)) + Sqr(Yu(1,1)) + Sqr(Yu(2,1))))*
+      TCC0(msdInput(1),msqInput(1),msqInput(1)) + (-1.5*Sqr(g2)*Sqr(Abs(MuInput))*
+      Sqr(Yd(1,2)) + 1.5*Sqr(g2)*Sqr(AdInput(1,2))*Sqr(Yd(1,2)) + 3*Sqr(Abs(
+      MuInput))*Sqr(Yd(1,2))*(Sqr(Yd(0,2)) + Sqr(Yd(1,2)) + Sqr(Yd(2,2))) - 3*Sqr(
+      AdInput(1,2))*Sqr(Yd(1,2))*(Sqr(Yu(0,2)) + Sqr(Yu(1,2)) + Sqr(Yu(2,2))))*
+      TCC0(msdInput(1),msqInput(2),msqInput(2)) + (-1.5*Sqr(g2)*Sqr(Abs(MuInput))*
+      Sqr(Yd(2,0)) + 1.5*Sqr(g2)*Sqr(AdInput(2,0))*Sqr(Yd(2,0)) + 3*Sqr(Abs(
+      MuInput))*Sqr(Yd(2,0))*(Sqr(Yd(0,0)) + Sqr(Yd(1,0)) + Sqr(Yd(2,0))) - 3*Sqr(
+      AdInput(2,0))*Sqr(Yd(2,0))*(Sqr(Yu(0,0)) + Sqr(Yu(1,0)) + Sqr(Yu(2,0))))*
+      TCC0(msdInput(2),msqInput(0),msqInput(0)) + (-1.5*Sqr(g2)*Sqr(Abs(MuInput))*
+      Sqr(Yd(2,1)) + 1.5*Sqr(g2)*Sqr(AdInput(2,1))*Sqr(Yd(2,1)) + 3*Sqr(Abs(
+      MuInput))*Sqr(Yd(2,1))*(Sqr(Yd(0,1)) + Sqr(Yd(1,1)) + Sqr(Yd(2,1))) - 3*Sqr(
+      AdInput(2,1))*Sqr(Yd(2,1))*(Sqr(Yu(0,1)) + Sqr(Yu(1,1)) + Sqr(Yu(2,1))))*
+      TCC0(msdInput(2),msqInput(1),msqInput(1)) + (-1.5*Sqr(g2)*Sqr(Abs(MuInput))*
+      Sqr(Yd(2,2)) + 1.5*Sqr(g2)*Sqr(AdInput(2,2))*Sqr(Yd(2,2)) + 3*Sqr(Abs(
+      MuInput))*Sqr(Yd(2,2))*(Sqr(Yd(0,2)) + Sqr(Yd(1,2)) + Sqr(Yd(2,2))) - 3*Sqr(
+      AdInput(2,2))*Sqr(Yd(2,2))*(Sqr(Yu(0,2)) + Sqr(Yu(1,2)) + Sqr(Yu(2,2))))*
+      TCC0(msdInput(2),msqInput(2),msqInput(2)) + (-0.5*Sqr(g2)*Sqr(Abs(MuInput))*
+      Sqr(Ye(0,0)) + 0.5*Sqr(g2)*Sqr(AeInput(0,0))*Sqr(Ye(0,0)) + Sqr(Abs(MuInput)
+      )*Sqr(Ye(0,0))*(Sqr(Ye(0,0)) + Sqr(Ye(1,0)) + Sqr(Ye(2,0))))*TCC0(mseInput(0
+      ),mslInput(0),mslInput(0)) + (-0.5*Sqr(g2)*Sqr(Abs(MuInput))*Sqr(Ye(0,1)) +
+      0.5*Sqr(g2)*Sqr(AeInput(0,1))*Sqr(Ye(0,1)) + Sqr(Abs(MuInput))*Sqr(Ye(0,1))*
+      (Sqr(Ye(0,1)) + Sqr(Ye(1,1)) + Sqr(Ye(2,1))))*TCC0(mseInput(0),mslInput(1),
+      mslInput(1)) + (-0.5*Sqr(g2)*Sqr(Abs(MuInput))*Sqr(Ye(0,2)) + 0.5*Sqr(g2)*
+      Sqr(AeInput(0,2))*Sqr(Ye(0,2)) + Sqr(Abs(MuInput))*Sqr(Ye(0,2))*(Sqr(Ye(0,2)
+      ) + Sqr(Ye(1,2)) + Sqr(Ye(2,2))))*TCC0(mseInput(0),mslInput(2),mslInput(2))
+      + (-0.5*Sqr(g2)*Sqr(Abs(MuInput))*Sqr(Ye(1,0)) + 0.5*Sqr(g2)*Sqr(AeInput(1,0
+      ))*Sqr(Ye(1,0)) + Sqr(Abs(MuInput))*Sqr(Ye(1,0))*(Sqr(Ye(0,0)) + Sqr(Ye(1,0)
+      ) + Sqr(Ye(2,0))))*TCC0(mseInput(1),mslInput(0),mslInput(0)) + (-0.5*Sqr(g2)
+      *Sqr(Abs(MuInput))*Sqr(Ye(1,1)) + 0.5*Sqr(g2)*Sqr(AeInput(1,1))*Sqr(Ye(1,1))
+      + Sqr(Abs(MuInput))*Sqr(Ye(1,1))*(Sqr(Ye(0,1)) + Sqr(Ye(1,1)) + Sqr(Ye(2,1))
+      ))*TCC0(mseInput(1),mslInput(1),mslInput(1)) + (-0.5*Sqr(g2)*Sqr(Abs(MuInput
+      ))*Sqr(Ye(1,2)) + 0.5*Sqr(g2)*Sqr(AeInput(1,2))*Sqr(Ye(1,2)) + Sqr(Abs(
+      MuInput))*Sqr(Ye(1,2))*(Sqr(Ye(0,2)) + Sqr(Ye(1,2)) + Sqr(Ye(2,2))))*TCC0(
+      mseInput(1),mslInput(2),mslInput(2)) + (-0.5*Sqr(g2)*Sqr(Abs(MuInput))*Sqr(
+      Ye(2,0)) + 0.5*Sqr(g2)*Sqr(AeInput(2,0))*Sqr(Ye(2,0)) + Sqr(Abs(MuInput))*
+      Sqr(Ye(2,0))*(Sqr(Ye(0,0)) + Sqr(Ye(1,0)) + Sqr(Ye(2,0))))*TCC0(mseInput(2),
+      mslInput(0),mslInput(0)) + (-0.5*Sqr(g2)*Sqr(Abs(MuInput))*Sqr(Ye(2,1)) +
+      0.5*Sqr(g2)*Sqr(AeInput(2,1))*Sqr(Ye(2,1)) + Sqr(Abs(MuInput))*Sqr(Ye(2,1))*
+      (Sqr(Ye(0,1)) + Sqr(Ye(1,1)) + Sqr(Ye(2,1))))*TCC0(mseInput(2),mslInput(1),
+      mslInput(1)) + (-0.5*Sqr(g2)*Sqr(Abs(MuInput))*Sqr(Ye(2,2)) + 0.5*Sqr(g2)*
+      Sqr(AeInput(2,2))*Sqr(Ye(2,2)) + Sqr(Abs(MuInput))*Sqr(Ye(2,2))*(Sqr(Ye(0,2)
+      ) + Sqr(Ye(1,2)) + Sqr(Ye(2,2))))*TCC0(mseInput(2),mslInput(2),mslInput(2))
+      + (-1.5*Sqr(g2)*Sqr(Abs(MuInput))*Sqr(Yu(0,0)) + 1.5*Sqr(g2)*Sqr(AuInput(0,0
+      ))*Sqr(Yu(0,0)) - 3*Sqr(AuInput(0,0))*(Sqr(Yd(0,0)) + Sqr(Yd(1,0)) + Sqr(Yd(
+      2,0)))*Sqr(Yu(0,0)) + 3*Sqr(Abs(MuInput))*Sqr(Yu(0,0))*(Sqr(Yu(0,0)) + Sqr(
+      Yu(1,0)) + Sqr(Yu(2,0))))*TCC0(msqInput(0),msqInput(0),msuInput(0)) + (-1.5*
+      Sqr(g2)*Sqr(Abs(MuInput))*Sqr(Yu(1,0)) + 1.5*Sqr(g2)*Sqr(AuInput(1,0))*Sqr(
+      Yu(1,0)) - 3*Sqr(AuInput(1,0))*(Sqr(Yd(0,0)) + Sqr(Yd(1,0)) + Sqr(Yd(2,0)))*
+      Sqr(Yu(1,0)) + 3*Sqr(Abs(MuInput))*Sqr(Yu(1,0))*(Sqr(Yu(0,0)) + Sqr(Yu(1,0))
+      + Sqr(Yu(2,0))))*TCC0(msqInput(0),msqInput(0),msuInput(1)) + (-1.5*Sqr(g2)*
+      Sqr(Abs(MuInput))*Sqr(Yu(2,0)) + 1.5*Sqr(g2)*Sqr(AuInput(2,0))*Sqr(Yu(2,0))
+      - 3*Sqr(AuInput(2,0))*(Sqr(Yd(0,0)) + Sqr(Yd(1,0)) + Sqr(Yd(2,0)))*Sqr(Yu(2,
+      0)) + 3*Sqr(Abs(MuInput))*Sqr(Yu(2,0))*(Sqr(Yu(0,0)) + Sqr(Yu(1,0)) + Sqr(Yu
+      (2,0))))*TCC0(msqInput(0),msqInput(0),msuInput(2)) + (-1.5*Sqr(g2)*Sqr(Abs(
+      MuInput))*Sqr(Yu(0,1)) + 1.5*Sqr(g2)*Sqr(AuInput(0,1))*Sqr(Yu(0,1)) - 3*Sqr(
+      AuInput(0,1))*(Sqr(Yd(0,1)) + Sqr(Yd(1,1)) + Sqr(Yd(2,1)))*Sqr(Yu(0,1)) + 3*
+      Sqr(Abs(MuInput))*Sqr(Yu(0,1))*(Sqr(Yu(0,1)) + Sqr(Yu(1,1)) + Sqr(Yu(2,1))))
+      *TCC0(msqInput(1),msqInput(1),msuInput(0)) + (-1.5*Sqr(g2)*Sqr(Abs(MuInput))
+      *Sqr(Yu(1,1)) + 1.5*Sqr(g2)*Sqr(AuInput(1,1))*Sqr(Yu(1,1)) - 3*Sqr(AuInput(1
+      ,1))*(Sqr(Yd(0,1)) + Sqr(Yd(1,1)) + Sqr(Yd(2,1)))*Sqr(Yu(1,1)) + 3*Sqr(Abs(
+      MuInput))*Sqr(Yu(1,1))*(Sqr(Yu(0,1)) + Sqr(Yu(1,1)) + Sqr(Yu(2,1))))*TCC0(
+      msqInput(1),msqInput(1),msuInput(1)) + (-1.5*Sqr(g2)*Sqr(Abs(MuInput))*Sqr(
+      Yu(2,1)) + 1.5*Sqr(g2)*Sqr(AuInput(2,1))*Sqr(Yu(2,1)) - 3*Sqr(AuInput(2,1))*
+      (Sqr(Yd(0,1)) + Sqr(Yd(1,1)) + Sqr(Yd(2,1)))*Sqr(Yu(2,1)) + 3*Sqr(Abs(
+      MuInput))*Sqr(Yu(2,1))*(Sqr(Yu(0,1)) + Sqr(Yu(1,1)) + Sqr(Yu(2,1))))*TCC0(
+      msqInput(1),msqInput(1),msuInput(2)) + (-1.5*Sqr(g2)*Sqr(Abs(MuInput))*Sqr(
+      Yu(0,2)) + 1.5*Sqr(g2)*Sqr(AuInput(0,2))*Sqr(Yu(0,2)) - 3*Sqr(AuInput(0,2))*
+      (Sqr(Yd(0,2)) + Sqr(Yd(1,2)) + Sqr(Yd(2,2)))*Sqr(Yu(0,2)) + 3*Sqr(Abs(
+      MuInput))*Sqr(Yu(0,2))*(Sqr(Yu(0,2)) + Sqr(Yu(1,2)) + Sqr(Yu(2,2))))*TCC0(
+      msqInput(2),msqInput(2),msuInput(0)) + (-1.5*Sqr(g2)*Sqr(Abs(MuInput))*Sqr(
+      Yu(1,2)) + 1.5*Sqr(g2)*Sqr(AuInput(1,2))*Sqr(Yu(1,2)) - 3*Sqr(AuInput(1,2))*
+      (Sqr(Yd(0,2)) + Sqr(Yd(1,2)) + Sqr(Yd(2,2)))*Sqr(Yu(1,2)) + 3*Sqr(Abs(
+      MuInput))*Sqr(Yu(1,2))*(Sqr(Yu(0,2)) + Sqr(Yu(1,2)) + Sqr(Yu(2,2))))*TCC0(
+      msqInput(2),msqInput(2),msuInput(1)) + (-1.5*Sqr(g2)*Sqr(Abs(MuInput))*Sqr(
+      Yu(2,2)) + 1.5*Sqr(g2)*Sqr(AuInput(2,2))*Sqr(Yu(2,2)) - 3*Sqr(AuInput(2,2))*
+      (Sqr(Yd(0,2)) + Sqr(Yd(1,2)) + Sqr(Yd(2,2)))*Sqr(Yu(2,2)) + 3*Sqr(Abs(
+      MuInput))*Sqr(Yu(2,2))*(Sqr(Yu(0,2)) + Sqr(Yu(1,2)) + Sqr(Yu(2,2))))*TCC0(
+      msqInput(2),msqInput(2),msuInput(2)) + 3*Quad(Yd(0,0))*Sqr(Abs(MuInput))*Sqr
+      (AdInput(0,0))*TCD0(msdInput(0),msdInput(0),msqInput(0),msqInput(0)) + 3*
+      AdInput(0,0)*AdInput(0,1)*Sqr(Abs(MuInput))*Sqr(Yd(0,0))*Sqr(Yd(0,1))*TCD0(
+      msdInput(0),msdInput(0),msqInput(0),msqInput(1)) + 3*AdInput(0,0)*AdInput(0,
+      2)*Sqr(Abs(MuInput))*Sqr(Yd(0,0))*Sqr(Yd(0,2))*TCD0(msdInput(0),msdInput(0),
+      msqInput(0),msqInput(2)) + 3*AdInput(0,0)*AdInput(0,1)*Sqr(Abs(MuInput))*Sqr
+      (Yd(0,0))*Sqr(Yd(0,1))*TCD0(msdInput(0),msdInput(0),msqInput(1),msqInput(0))
+      + 3*Quad(Yd(0,1))*Sqr(Abs(MuInput))*Sqr(AdInput(0,1))*TCD0(msdInput(0),
+      msdInput(0),msqInput(1),msqInput(1)) + 3*AdInput(0,1)*AdInput(0,2)*Sqr(Abs(
+      MuInput))*Sqr(Yd(0,1))*Sqr(Yd(0,2))*TCD0(msdInput(0),msdInput(0),msqInput(1)
+      ,msqInput(2)) + 3*AdInput(0,0)*AdInput(0,2)*Sqr(Abs(MuInput))*Sqr(Yd(0,0))*
+      Sqr(Yd(0,2))*TCD0(msdInput(0),msdInput(0),msqInput(2),msqInput(0)) + 3*
+      AdInput(0,1)*AdInput(0,2)*Sqr(Abs(MuInput))*Sqr(Yd(0,1))*Sqr(Yd(0,2))*TCD0(
+      msdInput(0),msdInput(0),msqInput(2),msqInput(1)) + 3*Quad(Yd(0,2))*Sqr(Abs(
+      MuInput))*Sqr(AdInput(0,2))*TCD0(msdInput(0),msdInput(0),msqInput(2),
+      msqInput(2)) + 3*Sqr(Abs(MuInput))*Sqr(AdInput(0,0))*Sqr(Yd(0,0))*Sqr(Yd(1,0
+      ))*TCD0(msdInput(0),msdInput(1),msqInput(0),msqInput(0)) + 3*Sqr(Abs(MuInput
+      ))*Sqr(AdInput(0,1))*Sqr(Yd(0,1))*Sqr(Yd(1,1))*TCD0(msdInput(0),msdInput(1),
+      msqInput(1),msqInput(1)) + 3*Sqr(Abs(MuInput))*Sqr(AdInput(0,2))*Sqr(Yd(0,2)
+      )*Sqr(Yd(1,2))*TCD0(msdInput(0),msdInput(1),msqInput(2),msqInput(2)) + 3*Sqr
+      (Abs(MuInput))*Sqr(AdInput(0,0))*Sqr(Yd(0,0))*Sqr(Yd(2,0))*TCD0(msdInput(0),
+      msdInput(2),msqInput(0),msqInput(0)) + 3*Sqr(Abs(MuInput))*Sqr(AdInput(0,1))
+      *Sqr(Yd(0,1))*Sqr(Yd(2,1))*TCD0(msdInput(0),msdInput(2),msqInput(1),msqInput
+      (1)) + 3*Sqr(Abs(MuInput))*Sqr(AdInput(0,2))*Sqr(Yd(0,2))*Sqr(Yd(2,2))*TCD0(
+      msdInput(0),msdInput(2),msqInput(2),msqInput(2)) - 3*Sqr(-(Sqr(Abs(MuInput))
+      *Yd(0,0)*Yu(0,0)) + AdInput(0,0)*AuInput(0,0)*Yd(0,0)*Yu(0,0))*TCD0(msdInput
+      (0),msqInput(0),msqInput(0),msuInput(0)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(0,0)
+      *Yu(1,0)) + AdInput(0,0)*AuInput(1,0)*Yd(0,0)*Yu(1,0))*TCD0(msdInput(0),
+      msqInput(0),msqInput(0),msuInput(1)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(0,0)*Yu(
+      2,0)) + AdInput(0,0)*AuInput(2,0)*Yd(0,0)*Yu(2,0))*TCD0(msdInput(0),msqInput
+      (0),msqInput(0),msuInput(2)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(0,1)*Yu(0,1)) +
+      AdInput(0,1)*AuInput(0,1)*Yd(0,1)*Yu(0,1))*TCD0(msdInput(0),msqInput(1),
+      msqInput(1),msuInput(0)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(0,1)*Yu(1,1)) +
+      AdInput(0,1)*AuInput(1,1)*Yd(0,1)*Yu(1,1))*TCD0(msdInput(0),msqInput(1),
+      msqInput(1),msuInput(1)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(0,1)*Yu(2,1)) +
+      AdInput(0,1)*AuInput(2,1)*Yd(0,1)*Yu(2,1))*TCD0(msdInput(0),msqInput(1),
+      msqInput(1),msuInput(2)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(0,2)*Yu(0,2)) +
+      AdInput(0,2)*AuInput(0,2)*Yd(0,2)*Yu(0,2))*TCD0(msdInput(0),msqInput(2),
+      msqInput(2),msuInput(0)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(0,2)*Yu(1,2)) +
+      AdInput(0,2)*AuInput(1,2)*Yd(0,2)*Yu(1,2))*TCD0(msdInput(0),msqInput(2),
+      msqInput(2),msuInput(1)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(0,2)*Yu(2,2)) +
+      AdInput(0,2)*AuInput(2,2)*Yd(0,2)*Yu(2,2))*TCD0(msdInput(0),msqInput(2),
+      msqInput(2),msuInput(2)) + 3*Sqr(Abs(MuInput))*Sqr(AdInput(1,0))*Sqr(Yd(0,0)
+      )*Sqr(Yd(1,0))*TCD0(msdInput(1),msdInput(0),msqInput(0),msqInput(0)) + 3*Sqr
+      (Abs(MuInput))*Sqr(AdInput(1,1))*Sqr(Yd(0,1))*Sqr(Yd(1,1))*TCD0(msdInput(1),
+      msdInput(0),msqInput(1),msqInput(1)) + 3*Sqr(Abs(MuInput))*Sqr(AdInput(1,2))
+      *Sqr(Yd(0,2))*Sqr(Yd(1,2))*TCD0(msdInput(1),msdInput(0),msqInput(2),msqInput
+      (2)) + 3*Quad(Yd(1,0))*Sqr(Abs(MuInput))*Sqr(AdInput(1,0))*TCD0(msdInput(1),
+      msdInput(1),msqInput(0),msqInput(0)) + 3*AdInput(1,0)*AdInput(1,1)*Sqr(Abs(
+      MuInput))*Sqr(Yd(1,0))*Sqr(Yd(1,1))*TCD0(msdInput(1),msdInput(1),msqInput(0)
+      ,msqInput(1)) + 3*AdInput(1,0)*AdInput(1,2)*Sqr(Abs(MuInput))*Sqr(Yd(1,0))*
+      Sqr(Yd(1,2))*TCD0(msdInput(1),msdInput(1),msqInput(0),msqInput(2)) + 3*
+      AdInput(1,0)*AdInput(1,1)*Sqr(Abs(MuInput))*Sqr(Yd(1,0))*Sqr(Yd(1,1))*TCD0(
+      msdInput(1),msdInput(1),msqInput(1),msqInput(0)) + 3*Quad(Yd(1,1))*Sqr(Abs(
+      MuInput))*Sqr(AdInput(1,1))*TCD0(msdInput(1),msdInput(1),msqInput(1),
+      msqInput(1)) + 3*AdInput(1,1)*AdInput(1,2)*Sqr(Abs(MuInput))*Sqr(Yd(1,1))*
+      Sqr(Yd(1,2))*TCD0(msdInput(1),msdInput(1),msqInput(1),msqInput(2)) + 3*
+      AdInput(1,0)*AdInput(1,2)*Sqr(Abs(MuInput))*Sqr(Yd(1,0))*Sqr(Yd(1,2))*TCD0(
+      msdInput(1),msdInput(1),msqInput(2),msqInput(0)) + 3*AdInput(1,1)*AdInput(1,
+      2)*Sqr(Abs(MuInput))*Sqr(Yd(1,1))*Sqr(Yd(1,2))*TCD0(msdInput(1),msdInput(1),
+      msqInput(2),msqInput(1)) + 3*Quad(Yd(1,2))*Sqr(Abs(MuInput))*Sqr(AdInput(1,2
+      ))*TCD0(msdInput(1),msdInput(1),msqInput(2),msqInput(2)) + 3*Sqr(Abs(MuInput
+      ))*Sqr(AdInput(1,0))*Sqr(Yd(1,0))*Sqr(Yd(2,0))*TCD0(msdInput(1),msdInput(2),
+      msqInput(0),msqInput(0)) + 3*Sqr(Abs(MuInput))*Sqr(AdInput(1,1))*Sqr(Yd(1,1)
+      )*Sqr(Yd(2,1))*TCD0(msdInput(1),msdInput(2),msqInput(1),msqInput(1)) + 3*Sqr
+      (Abs(MuInput))*Sqr(AdInput(1,2))*Sqr(Yd(1,2))*Sqr(Yd(2,2))*TCD0(msdInput(1),
+      msdInput(2),msqInput(2),msqInput(2)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(1,0)*Yu(
+      0,0)) + AdInput(1,0)*AuInput(0,0)*Yd(1,0)*Yu(0,0))*TCD0(msdInput(1),msqInput
+      (0),msqInput(0),msuInput(0)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(1,0)*Yu(1,0)) +
+      AdInput(1,0)*AuInput(1,0)*Yd(1,0)*Yu(1,0))*TCD0(msdInput(1),msqInput(0),
+      msqInput(0),msuInput(1)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(1,0)*Yu(2,0)) +
+      AdInput(1,0)*AuInput(2,0)*Yd(1,0)*Yu(2,0))*TCD0(msdInput(1),msqInput(0),
+      msqInput(0),msuInput(2)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(1,1)*Yu(0,1)) +
+      AdInput(1,1)*AuInput(0,1)*Yd(1,1)*Yu(0,1))*TCD0(msdInput(1),msqInput(1),
+      msqInput(1),msuInput(0)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(1,1)*Yu(1,1)) +
+      AdInput(1,1)*AuInput(1,1)*Yd(1,1)*Yu(1,1))*TCD0(msdInput(1),msqInput(1),
+      msqInput(1),msuInput(1)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(1,1)*Yu(2,1)) +
+      AdInput(1,1)*AuInput(2,1)*Yd(1,1)*Yu(2,1))*TCD0(msdInput(1),msqInput(1),
+      msqInput(1),msuInput(2)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(1,2)*Yu(0,2)) +
+      AdInput(1,2)*AuInput(0,2)*Yd(1,2)*Yu(0,2))*TCD0(msdInput(1),msqInput(2),
+      msqInput(2),msuInput(0)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(1,2)*Yu(1,2)) +
+      AdInput(1,2)*AuInput(1,2)*Yd(1,2)*Yu(1,2))*TCD0(msdInput(1),msqInput(2),
+      msqInput(2),msuInput(1)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(1,2)*Yu(2,2)) +
+      AdInput(1,2)*AuInput(2,2)*Yd(1,2)*Yu(2,2))*TCD0(msdInput(1),msqInput(2),
+      msqInput(2),msuInput(2)) + 3*Sqr(Abs(MuInput))*Sqr(AdInput(2,0))*Sqr(Yd(0,0)
+      )*Sqr(Yd(2,0))*TCD0(msdInput(2),msdInput(0),msqInput(0),msqInput(0)) + 3*Sqr
+      (Abs(MuInput))*Sqr(AdInput(2,1))*Sqr(Yd(0,1))*Sqr(Yd(2,1))*TCD0(msdInput(2),
+      msdInput(0),msqInput(1),msqInput(1)) + 3*Sqr(Abs(MuInput))*Sqr(AdInput(2,2))
+      *Sqr(Yd(0,2))*Sqr(Yd(2,2))*TCD0(msdInput(2),msdInput(0),msqInput(2),msqInput
+      (2)) + 3*Sqr(Abs(MuInput))*Sqr(AdInput(2,0))*Sqr(Yd(1,0))*Sqr(Yd(2,0))*TCD0(
+      msdInput(2),msdInput(1),msqInput(0),msqInput(0)) + 3*Sqr(Abs(MuInput))*Sqr(
+      AdInput(2,1))*Sqr(Yd(1,1))*Sqr(Yd(2,1))*TCD0(msdInput(2),msdInput(1),
+      msqInput(1),msqInput(1)) + 3*Sqr(Abs(MuInput))*Sqr(AdInput(2,2))*Sqr(Yd(1,2)
+      )*Sqr(Yd(2,2))*TCD0(msdInput(2),msdInput(1),msqInput(2),msqInput(2)) + 3*
+      Quad(Yd(2,0))*Sqr(Abs(MuInput))*Sqr(AdInput(2,0))*TCD0(msdInput(2),msdInput(
+      2),msqInput(0),msqInput(0)) + 3*AdInput(2,0)*AdInput(2,1)*Sqr(Abs(MuInput))*
+      Sqr(Yd(2,0))*Sqr(Yd(2,1))*TCD0(msdInput(2),msdInput(2),msqInput(0),msqInput(
+      1)) + 3*AdInput(2,0)*AdInput(2,2)*Sqr(Abs(MuInput))*Sqr(Yd(2,0))*Sqr(Yd(2,2)
+      )*TCD0(msdInput(2),msdInput(2),msqInput(0),msqInput(2)) + 3*AdInput(2,0)*
+      AdInput(2,1)*Sqr(Abs(MuInput))*Sqr(Yd(2,0))*Sqr(Yd(2,1))*TCD0(msdInput(2),
+      msdInput(2),msqInput(1),msqInput(0)) + 3*Quad(Yd(2,1))*Sqr(Abs(MuInput))*Sqr
+      (AdInput(2,1))*TCD0(msdInput(2),msdInput(2),msqInput(1),msqInput(1)) + 3*
+      AdInput(2,1)*AdInput(2,2)*Sqr(Abs(MuInput))*Sqr(Yd(2,1))*Sqr(Yd(2,2))*TCD0(
+      msdInput(2),msdInput(2),msqInput(1),msqInput(2)) + 3*AdInput(2,0)*AdInput(2,
+      2)*Sqr(Abs(MuInput))*Sqr(Yd(2,0))*Sqr(Yd(2,2))*TCD0(msdInput(2),msdInput(2),
+      msqInput(2),msqInput(0)) + 3*AdInput(2,1)*AdInput(2,2)*Sqr(Abs(MuInput))*Sqr
+      (Yd(2,1))*Sqr(Yd(2,2))*TCD0(msdInput(2),msdInput(2),msqInput(2),msqInput(1))
+      + 3*Quad(Yd(2,2))*Sqr(Abs(MuInput))*Sqr(AdInput(2,2))*TCD0(msdInput(2),
+      msdInput(2),msqInput(2),msqInput(2)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(2,0)*Yu(
+      0,0)) + AdInput(2,0)*AuInput(0,0)*Yd(2,0)*Yu(0,0))*TCD0(msdInput(2),msqInput
+      (0),msqInput(0),msuInput(0)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(2,0)*Yu(1,0)) +
+      AdInput(2,0)*AuInput(1,0)*Yd(2,0)*Yu(1,0))*TCD0(msdInput(2),msqInput(0),
+      msqInput(0),msuInput(1)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(2,0)*Yu(2,0)) +
+      AdInput(2,0)*AuInput(2,0)*Yd(2,0)*Yu(2,0))*TCD0(msdInput(2),msqInput(0),
+      msqInput(0),msuInput(2)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(2,1)*Yu(0,1)) +
+      AdInput(2,1)*AuInput(0,1)*Yd(2,1)*Yu(0,1))*TCD0(msdInput(2),msqInput(1),
+      msqInput(1),msuInput(0)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(2,1)*Yu(1,1)) +
+      AdInput(2,1)*AuInput(1,1)*Yd(2,1)*Yu(1,1))*TCD0(msdInput(2),msqInput(1),
+      msqInput(1),msuInput(1)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(2,1)*Yu(2,1)) +
+      AdInput(2,1)*AuInput(2,1)*Yd(2,1)*Yu(2,1))*TCD0(msdInput(2),msqInput(1),
+      msqInput(1),msuInput(2)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(2,2)*Yu(0,2)) +
+      AdInput(2,2)*AuInput(0,2)*Yd(2,2)*Yu(0,2))*TCD0(msdInput(2),msqInput(2),
+      msqInput(2),msuInput(0)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(2,2)*Yu(1,2)) +
+      AdInput(2,2)*AuInput(1,2)*Yd(2,2)*Yu(1,2))*TCD0(msdInput(2),msqInput(2),
+      msqInput(2),msuInput(1)) - 3*Sqr(-(Sqr(Abs(MuInput))*Yd(2,2)*Yu(2,2)) +
+      AdInput(2,2)*AuInput(2,2)*Yd(2,2)*Yu(2,2))*TCD0(msdInput(2),msqInput(2),
+      msqInput(2),msuInput(2)) + Quad(Ye(0,0))*Sqr(Abs(MuInput))*Sqr(AeInput(0,0))
+      *TCD0(mseInput(0),mseInput(0),mslInput(0),mslInput(0)) + AeInput(0,0)*
+      AeInput(0,1)*Sqr(Abs(MuInput))*Sqr(Ye(0,0))*Sqr(Ye(0,1))*TCD0(mseInput(0),
+      mseInput(0),mslInput(0),mslInput(1)) + AeInput(0,0)*AeInput(0,2)*Sqr(Abs(
+      MuInput))*Sqr(Ye(0,0))*Sqr(Ye(0,2))*TCD0(mseInput(0),mseInput(0),mslInput(0)
+      ,mslInput(2)) + AeInput(0,0)*AeInput(0,1)*Sqr(Abs(MuInput))*Sqr(Ye(0,0))*Sqr
+      (Ye(0,1))*TCD0(mseInput(0),mseInput(0),mslInput(1),mslInput(0)) + Quad(Ye(0,
+      1))*Sqr(Abs(MuInput))*Sqr(AeInput(0,1))*TCD0(mseInput(0),mseInput(0),
+      mslInput(1),mslInput(1)) + AeInput(0,1)*AeInput(0,2)*Sqr(Abs(MuInput))*Sqr(
+      Ye(0,1))*Sqr(Ye(0,2))*TCD0(mseInput(0),mseInput(0),mslInput(1),mslInput(2))
+      + AeInput(0,0)*AeInput(0,2)*Sqr(Abs(MuInput))*Sqr(Ye(0,0))*Sqr(Ye(0,2))*TCD0
+      (mseInput(0),mseInput(0),mslInput(2),mslInput(0)) + AeInput(0,1)*AeInput(0,2
+      )*Sqr(Abs(MuInput))*Sqr(Ye(0,1))*Sqr(Ye(0,2))*TCD0(mseInput(0),mseInput(0),
+      mslInput(2),mslInput(1)) + Quad(Ye(0,2))*Sqr(Abs(MuInput))*Sqr(AeInput(0,2))
+      *TCD0(mseInput(0),mseInput(0),mslInput(2),mslInput(2)) + Sqr(Abs(MuInput))*
+      Sqr(AeInput(0,0))*Sqr(Ye(0,0))*Sqr(Ye(1,0))*TCD0(mseInput(0),mseInput(1),
+      mslInput(0),mslInput(0)) + Sqr(Abs(MuInput))*Sqr(AeInput(0,1))*Sqr(Ye(0,1))*
+      Sqr(Ye(1,1))*TCD0(mseInput(0),mseInput(1),mslInput(1),mslInput(1)) + Sqr(Abs
+      (MuInput))*Sqr(AeInput(0,2))*Sqr(Ye(0,2))*Sqr(Ye(1,2))*TCD0(mseInput(0),
+      mseInput(1),mslInput(2),mslInput(2)) + Sqr(Abs(MuInput))*Sqr(AeInput(0,0))*
+      Sqr(Ye(0,0))*Sqr(Ye(2,0))*TCD0(mseInput(0),mseInput(2),mslInput(0),mslInput(
+      0)) + Sqr(Abs(MuInput))*Sqr(AeInput(0,1))*Sqr(Ye(0,1))*Sqr(Ye(2,1))*TCD0(
+      mseInput(0),mseInput(2),mslInput(1),mslInput(1)) + Sqr(Abs(MuInput))*Sqr(
+      AeInput(0,2))*Sqr(Ye(0,2))*Sqr(Ye(2,2))*TCD0(mseInput(0),mseInput(2),
+      mslInput(2),mslInput(2)) + Sqr(Abs(MuInput))*Sqr(AeInput(1,0))*Sqr(Ye(0,0))*
+      Sqr(Ye(1,0))*TCD0(mseInput(1),mseInput(0),mslInput(0),mslInput(0)) + Sqr(Abs
+      (MuInput))*Sqr(AeInput(1,1))*Sqr(Ye(0,1))*Sqr(Ye(1,1))*TCD0(mseInput(1),
+      mseInput(0),mslInput(1),mslInput(1)) + Sqr(Abs(MuInput))*Sqr(AeInput(1,2))*
+      Sqr(Ye(0,2))*Sqr(Ye(1,2))*TCD0(mseInput(1),mseInput(0),mslInput(2),mslInput(
+      2)) + Quad(Ye(1,0))*Sqr(Abs(MuInput))*Sqr(AeInput(1,0))*TCD0(mseInput(1),
+      mseInput(1),mslInput(0),mslInput(0)) + AeInput(1,0)*AeInput(1,1)*Sqr(Abs(
+      MuInput))*Sqr(Ye(1,0))*Sqr(Ye(1,1))*TCD0(mseInput(1),mseInput(1),mslInput(0)
+      ,mslInput(1)) + AeInput(1,0)*AeInput(1,2)*Sqr(Abs(MuInput))*Sqr(Ye(1,0))*Sqr
+      (Ye(1,2))*TCD0(mseInput(1),mseInput(1),mslInput(0),mslInput(2)) + AeInput(1,
+      0)*AeInput(1,1)*Sqr(Abs(MuInput))*Sqr(Ye(1,0))*Sqr(Ye(1,1))*TCD0(mseInput(1)
+      ,mseInput(1),mslInput(1),mslInput(0)) + Quad(Ye(1,1))*Sqr(Abs(MuInput))*Sqr(
+      AeInput(1,1))*TCD0(mseInput(1),mseInput(1),mslInput(1),mslInput(1)) +
+      AeInput(1,1)*AeInput(1,2)*Sqr(Abs(MuInput))*Sqr(Ye(1,1))*Sqr(Ye(1,2))*TCD0(
+      mseInput(1),mseInput(1),mslInput(1),mslInput(2)) + AeInput(1,0)*AeInput(1,2)
+      *Sqr(Abs(MuInput))*Sqr(Ye(1,0))*Sqr(Ye(1,2))*TCD0(mseInput(1),mseInput(1),
+      mslInput(2),mslInput(0)) + AeInput(1,1)*AeInput(1,2)*Sqr(Abs(MuInput))*Sqr(
+      Ye(1,1))*Sqr(Ye(1,2))*TCD0(mseInput(1),mseInput(1),mslInput(2),mslInput(1))
+      + Quad(Ye(1,2))*Sqr(Abs(MuInput))*Sqr(AeInput(1,2))*TCD0(mseInput(1),
+      mseInput(1),mslInput(2),mslInput(2)) + Sqr(Abs(MuInput))*Sqr(AeInput(1,0))*
+      Sqr(Ye(1,0))*Sqr(Ye(2,0))*TCD0(mseInput(1),mseInput(2),mslInput(0),mslInput(
+      0)) + Sqr(Abs(MuInput))*Sqr(AeInput(1,1))*Sqr(Ye(1,1))*Sqr(Ye(2,1))*TCD0(
+      mseInput(1),mseInput(2),mslInput(1),mslInput(1)) + Sqr(Abs(MuInput))*Sqr(
+      AeInput(1,2))*Sqr(Ye(1,2))*Sqr(Ye(2,2))*TCD0(mseInput(1),mseInput(2),
+      mslInput(2),mslInput(2)) + Sqr(Abs(MuInput))*Sqr(AeInput(2,0))*Sqr(Ye(0,0))*
+      Sqr(Ye(2,0))*TCD0(mseInput(2),mseInput(0),mslInput(0),mslInput(0)) + Sqr(Abs
+      (MuInput))*Sqr(AeInput(2,1))*Sqr(Ye(0,1))*Sqr(Ye(2,1))*TCD0(mseInput(2),
+      mseInput(0),mslInput(1),mslInput(1)) + Sqr(Abs(MuInput))*Sqr(AeInput(2,2))*
+      Sqr(Ye(0,2))*Sqr(Ye(2,2))*TCD0(mseInput(2),mseInput(0),mslInput(2),mslInput(
+      2)) + Sqr(Abs(MuInput))*Sqr(AeInput(2,0))*Sqr(Ye(1,0))*Sqr(Ye(2,0))*TCD0(
+      mseInput(2),mseInput(1),mslInput(0),mslInput(0)) + Sqr(Abs(MuInput))*Sqr(
+      AeInput(2,1))*Sqr(Ye(1,1))*Sqr(Ye(2,1))*TCD0(mseInput(2),mseInput(1),
+      mslInput(1),mslInput(1)) + Sqr(Abs(MuInput))*Sqr(AeInput(2,2))*Sqr(Ye(1,2))*
+      Sqr(Ye(2,2))*TCD0(mseInput(2),mseInput(1),mslInput(2),mslInput(2)) + Quad(Ye
+      (2,0))*Sqr(Abs(MuInput))*Sqr(AeInput(2,0))*TCD0(mseInput(2),mseInput(2),
+      mslInput(0),mslInput(0)) + AeInput(2,0)*AeInput(2,1)*Sqr(Abs(MuInput))*Sqr(
+      Ye(2,0))*Sqr(Ye(2,1))*TCD0(mseInput(2),mseInput(2),mslInput(0),mslInput(1))
+      + AeInput(2,0)*AeInput(2,2)*Sqr(Abs(MuInput))*Sqr(Ye(2,0))*Sqr(Ye(2,2))*TCD0
+      (mseInput(2),mseInput(2),mslInput(0),mslInput(2)) + AeInput(2,0)*AeInput(2,1
+      )*Sqr(Abs(MuInput))*Sqr(Ye(2,0))*Sqr(Ye(2,1))*TCD0(mseInput(2),mseInput(2),
+      mslInput(1),mslInput(0)) + Quad(Ye(2,1))*Sqr(Abs(MuInput))*Sqr(AeInput(2,1))
+      *TCD0(mseInput(2),mseInput(2),mslInput(1),mslInput(1)) + AeInput(2,1)*
+      AeInput(2,2)*Sqr(Abs(MuInput))*Sqr(Ye(2,1))*Sqr(Ye(2,2))*TCD0(mseInput(2),
+      mseInput(2),mslInput(1),mslInput(2)) + AeInput(2,0)*AeInput(2,2)*Sqr(Abs(
+      MuInput))*Sqr(Ye(2,0))*Sqr(Ye(2,2))*TCD0(mseInput(2),mseInput(2),mslInput(2)
+      ,mslInput(0)) + AeInput(2,1)*AeInput(2,2)*Sqr(Abs(MuInput))*Sqr(Ye(2,1))*Sqr
+      (Ye(2,2))*TCD0(mseInput(2),mseInput(2),mslInput(2),mslInput(1)) + Quad(Ye(2,
+      2))*Sqr(Abs(MuInput))*Sqr(AeInput(2,2))*TCD0(mseInput(2),mseInput(2),
+      mslInput(2),mslInput(2)) + 3*Quad(Yu(0,0))*Sqr(Abs(MuInput))*Sqr(AuInput(0,0
+      ))*TCD0(msqInput(0),msqInput(0),msuInput(0),msuInput(0)) + 3*Sqr(Abs(MuInput
+      ))*Sqr(AuInput(1,0))*Sqr(Yu(0,0))*Sqr(Yu(1,0))*TCD0(msqInput(0),msqInput(0),
+      msuInput(0),msuInput(1)) + 3*Sqr(Abs(MuInput))*Sqr(AuInput(2,0))*Sqr(Yu(0,0)
+      )*Sqr(Yu(2,0))*TCD0(msqInput(0),msqInput(0),msuInput(0),msuInput(2)) + 3*Sqr
+      (Abs(MuInput))*Sqr(AuInput(0,0))*Sqr(Yu(0,0))*Sqr(Yu(1,0))*TCD0(msqInput(0),
+      msqInput(0),msuInput(1),msuInput(0)) + 3*Quad(Yu(1,0))*Sqr(Abs(MuInput))*Sqr
+      (AuInput(1,0))*TCD0(msqInput(0),msqInput(0),msuInput(1),msuInput(1)) + 3*Sqr
+      (Abs(MuInput))*Sqr(AuInput(2,0))*Sqr(Yu(1,0))*Sqr(Yu(2,0))*TCD0(msqInput(0),
+      msqInput(0),msuInput(1),msuInput(2)) + 3*Sqr(Abs(MuInput))*Sqr(AuInput(0,0))
+      *Sqr(Yu(0,0))*Sqr(Yu(2,0))*TCD0(msqInput(0),msqInput(0),msuInput(2),msuInput
+      (0)) + 3*Sqr(Abs(MuInput))*Sqr(AuInput(1,0))*Sqr(Yu(1,0))*Sqr(Yu(2,0))*TCD0(
+      msqInput(0),msqInput(0),msuInput(2),msuInput(1)) + 3*Quad(Yu(2,0))*Sqr(Abs(
+      MuInput))*Sqr(AuInput(2,0))*TCD0(msqInput(0),msqInput(0),msuInput(2),
+      msuInput(2)) + 3*AuInput(0,0)*AuInput(0,1)*Sqr(Abs(MuInput))*Sqr(Yu(0,0))*
+      Sqr(Yu(0,1))*TCD0(msqInput(0),msqInput(1),msuInput(0),msuInput(0)) + 3*
+      AuInput(1,0)*AuInput(1,1)*Sqr(Abs(MuInput))*Sqr(Yu(1,0))*Sqr(Yu(1,1))*TCD0(
+      msqInput(0),msqInput(1),msuInput(1),msuInput(1)) + 3*AuInput(2,0)*AuInput(2,
+      1)*Sqr(Abs(MuInput))*Sqr(Yu(2,0))*Sqr(Yu(2,1))*TCD0(msqInput(0),msqInput(1),
+      msuInput(2),msuInput(2)) + 3*AuInput(0,0)*AuInput(0,2)*Sqr(Abs(MuInput))*Sqr
+      (Yu(0,0))*Sqr(Yu(0,2))*TCD0(msqInput(0),msqInput(2),msuInput(0),msuInput(0))
+      + 3*AuInput(1,0)*AuInput(1,2)*Sqr(Abs(MuInput))*Sqr(Yu(1,0))*Sqr(Yu(1,2))*
+      TCD0(msqInput(0),msqInput(2),msuInput(1),msuInput(1)) + 3*AuInput(2,0)*
+      AuInput(2,2)*Sqr(Abs(MuInput))*Sqr(Yu(2,0))*Sqr(Yu(2,2))*TCD0(msqInput(0),
+      msqInput(2),msuInput(2),msuInput(2)) + 3*AuInput(0,0)*AuInput(0,1)*Sqr(Abs(
+      MuInput))*Sqr(Yu(0,0))*Sqr(Yu(0,1))*TCD0(msqInput(1),msqInput(0),msuInput(0)
+      ,msuInput(0)) + 3*AuInput(1,0)*AuInput(1,1)*Sqr(Abs(MuInput))*Sqr(Yu(1,0))*
+      Sqr(Yu(1,1))*TCD0(msqInput(1),msqInput(0),msuInput(1),msuInput(1)) + 3*
+      AuInput(2,0)*AuInput(2,1)*Sqr(Abs(MuInput))*Sqr(Yu(2,0))*Sqr(Yu(2,1))*TCD0(
+      msqInput(1),msqInput(0),msuInput(2),msuInput(2)) + 3*Quad(Yu(0,1))*Sqr(Abs(
+      MuInput))*Sqr(AuInput(0,1))*TCD0(msqInput(1),msqInput(1),msuInput(0),
+      msuInput(0)) + 3*Sqr(Abs(MuInput))*Sqr(AuInput(1,1))*Sqr(Yu(0,1))*Sqr(Yu(1,1
+      ))*TCD0(msqInput(1),msqInput(1),msuInput(0),msuInput(1)) + 3*Sqr(Abs(MuInput
+      ))*Sqr(AuInput(2,1))*Sqr(Yu(0,1))*Sqr(Yu(2,1))*TCD0(msqInput(1),msqInput(1),
+      msuInput(0),msuInput(2)) + 3*Sqr(Abs(MuInput))*Sqr(AuInput(0,1))*Sqr(Yu(0,1)
+      )*Sqr(Yu(1,1))*TCD0(msqInput(1),msqInput(1),msuInput(1),msuInput(0)) + 3*
+      Quad(Yu(1,1))*Sqr(Abs(MuInput))*Sqr(AuInput(1,1))*TCD0(msqInput(1),msqInput(
+      1),msuInput(1),msuInput(1)) + 3*Sqr(Abs(MuInput))*Sqr(AuInput(2,1))*Sqr(Yu(1
+      ,1))*Sqr(Yu(2,1))*TCD0(msqInput(1),msqInput(1),msuInput(1),msuInput(2)) + 3*
+      Sqr(Abs(MuInput))*Sqr(AuInput(0,1))*Sqr(Yu(0,1))*Sqr(Yu(2,1))*TCD0(msqInput(
+      1),msqInput(1),msuInput(2),msuInput(0)) + 3*Sqr(Abs(MuInput))*Sqr(AuInput(1,
+      1))*Sqr(Yu(1,1))*Sqr(Yu(2,1))*TCD0(msqInput(1),msqInput(1),msuInput(2),
+      msuInput(1)) + 3*Quad(Yu(2,1))*Sqr(Abs(MuInput))*Sqr(AuInput(2,1))*TCD0(
+      msqInput(1),msqInput(1),msuInput(2),msuInput(2)) + 3*AuInput(0,1)*AuInput(0,
+      2)*Sqr(Abs(MuInput))*Sqr(Yu(0,1))*Sqr(Yu(0,2))*TCD0(msqInput(1),msqInput(2),
+      msuInput(0),msuInput(0)) + 3*AuInput(1,1)*AuInput(1,2)*Sqr(Abs(MuInput))*Sqr
+      (Yu(1,1))*Sqr(Yu(1,2))*TCD0(msqInput(1),msqInput(2),msuInput(1),msuInput(1))
+      + 3*AuInput(2,1)*AuInput(2,2)*Sqr(Abs(MuInput))*Sqr(Yu(2,1))*Sqr(Yu(2,2))*
+      TCD0(msqInput(1),msqInput(2),msuInput(2),msuInput(2)) + 3*AuInput(0,0)*
+      AuInput(0,2)*Sqr(Abs(MuInput))*Sqr(Yu(0,0))*Sqr(Yu(0,2))*TCD0(msqInput(2),
+      msqInput(0),msuInput(0),msuInput(0)) + 3*AuInput(1,0)*AuInput(1,2)*Sqr(Abs(
+      MuInput))*Sqr(Yu(1,0))*Sqr(Yu(1,2))*TCD0(msqInput(2),msqInput(0),msuInput(1)
+      ,msuInput(1)) + 3*AuInput(2,0)*AuInput(2,2)*Sqr(Abs(MuInput))*Sqr(Yu(2,0))*
+      Sqr(Yu(2,2))*TCD0(msqInput(2),msqInput(0),msuInput(2),msuInput(2)) + 3*
+      AuInput(0,1)*AuInput(0,2)*Sqr(Abs(MuInput))*Sqr(Yu(0,1))*Sqr(Yu(0,2))*TCD0(
+      msqInput(2),msqInput(1),msuInput(0),msuInput(0)) + 3*AuInput(1,1)*AuInput(1,
+      2)*Sqr(Abs(MuInput))*Sqr(Yu(1,1))*Sqr(Yu(1,2))*TCD0(msqInput(2),msqInput(1),
+      msuInput(1),msuInput(1)) + 3*AuInput(2,1)*AuInput(2,2)*Sqr(Abs(MuInput))*Sqr
+      (Yu(2,1))*Sqr(Yu(2,2))*TCD0(msqInput(2),msqInput(1),msuInput(2),msuInput(2))
+      + 3*Quad(Yu(0,2))*Sqr(Abs(MuInput))*Sqr(AuInput(0,2))*TCD0(msqInput(2),
+      msqInput(2),msuInput(0),msuInput(0)) + 3*Sqr(Abs(MuInput))*Sqr(AuInput(1,2))
+      *Sqr(Yu(0,2))*Sqr(Yu(1,2))*TCD0(msqInput(2),msqInput(2),msuInput(0),msuInput
+      (1)) + 3*Sqr(Abs(MuInput))*Sqr(AuInput(2,2))*Sqr(Yu(0,2))*Sqr(Yu(2,2))*TCD0(
+      msqInput(2),msqInput(2),msuInput(0),msuInput(2)) + 3*Sqr(Abs(MuInput))*Sqr(
+      AuInput(0,2))*Sqr(Yu(0,2))*Sqr(Yu(1,2))*TCD0(msqInput(2),msqInput(2),
+      msuInput(1),msuInput(0)) + 3*Quad(Yu(1,2))*Sqr(Abs(MuInput))*Sqr(AuInput(1,2
+      ))*TCD0(msqInput(2),msqInput(2),msuInput(1),msuInput(1)) + 3*Sqr(Abs(MuInput
+      ))*Sqr(AuInput(2,2))*Sqr(Yu(1,2))*Sqr(Yu(2,2))*TCD0(msqInput(2),msqInput(2),
+      msuInput(1),msuInput(2)) + 3*Sqr(Abs(MuInput))*Sqr(AuInput(0,2))*Sqr(Yu(0,2)
+      )*Sqr(Yu(2,2))*TCD0(msqInput(2),msqInput(2),msuInput(2),msuInput(0)) + 3*Sqr
+      (Abs(MuInput))*Sqr(AuInput(1,2))*Sqr(Yu(1,2))*Sqr(Yu(2,2))*TCD0(msqInput(2),
+      msqInput(2),msuInput(2),msuInput(1)) + 3*Quad(Yu(2,2))*Sqr(Abs(MuInput))*Sqr
+      (AuInput(2,2))*TCD0(msqInput(2),msqInput(2),msuInput(2),msuInput(2)) - 0.36*
+      Quad(g1)*Sqr(Abs(MuInput))*TCD2t(M1Input,M1Input,Abs(MuInput),Abs(MuInput))
+      + 0.6*Sqr(g1)*Sqr(g2)*(1 + (-2*M1Input*M2Input + 2*Sqr(Abs(MuInput)))*TCD2t(
+      M1Input,M2Input,Abs(MuInput),Abs(MuInput)) - 2*TCD4t(M1Input,M2Input,Abs(
+      MuInput),Abs(MuInput),SCALE)) + Quad(g2)*((-2*Sqr(Abs(M2Input)) - 3*Sqr(Abs(
+      MuInput)))*TCD2t(M2Input,M2Input,Abs(MuInput),Abs(MuInput)) + 2*TCD4t(
+      M2Input,M2Input,Abs(MuInput),Abs(MuInput),SCALE)) + 3*AdInput(0,0)*AdInput(0
+      ,1)*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(1),msqInput(0),msqInput(1))*
+      Yd(0,0)*Yd(0,1)*Yd(1,0)*Yd(1,1) + 3*AdInput(0,0)*AdInput(0,1)*Sqr(Abs(
+      MuInput))*TCD0(msdInput(0),msdInput(1),msqInput(1),msqInput(0))*Yd(0,0)*Yd(0
+      ,1)*Yd(1,0)*Yd(1,1) + 3*AdInput(1,0)*AdInput(1,1)*Sqr(Abs(MuInput))*TCD0(
+      msdInput(1),msdInput(0),msqInput(0),msqInput(1))*Yd(0,0)*Yd(0,1)*Yd(1,0)*Yd(
+      1,1) + 3*AdInput(1,0)*AdInput(1,1)*Sqr(Abs(MuInput))*TCD0(msdInput(1),
+      msdInput(0),msqInput(1),msqInput(0))*Yd(0,0)*Yd(0,1)*Yd(1,0)*Yd(1,1) + 3*
+      AdInput(0,0)*AdInput(0,2)*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(1),
+      msqInput(0),msqInput(2))*Yd(0,0)*Yd(0,2)*Yd(1,0)*Yd(1,2) + 3*AdInput(0,0)*
+      AdInput(0,2)*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(1),msqInput(2),
+      msqInput(0))*Yd(0,0)*Yd(0,2)*Yd(1,0)*Yd(1,2) + 3*AdInput(1,0)*AdInput(1,2)*
+      Sqr(Abs(MuInput))*TCD0(msdInput(1),msdInput(0),msqInput(0),msqInput(2))*Yd(0
+      ,0)*Yd(0,2)*Yd(1,0)*Yd(1,2) + 3*AdInput(1,0)*AdInput(1,2)*Sqr(Abs(MuInput))*
+      TCD0(msdInput(1),msdInput(0),msqInput(2),msqInput(0))*Yd(0,0)*Yd(0,2)*Yd(1,0
+      )*Yd(1,2) + 3*AdInput(0,1)*AdInput(0,2)*Sqr(Abs(MuInput))*TCD0(msdInput(0),
+      msdInput(1),msqInput(1),msqInput(2))*Yd(0,1)*Yd(0,2)*Yd(1,1)*Yd(1,2) + 3*
+      AdInput(0,1)*AdInput(0,2)*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(1),
+      msqInput(2),msqInput(1))*Yd(0,1)*Yd(0,2)*Yd(1,1)*Yd(1,2) + 3*AdInput(1,1)*
+      AdInput(1,2)*Sqr(Abs(MuInput))*TCD0(msdInput(1),msdInput(0),msqInput(1),
+      msqInput(2))*Yd(0,1)*Yd(0,2)*Yd(1,1)*Yd(1,2) + 3*AdInput(1,1)*AdInput(1,2)*
+      Sqr(Abs(MuInput))*TCD0(msdInput(1),msdInput(0),msqInput(2),msqInput(1))*Yd(0
+      ,1)*Yd(0,2)*Yd(1,1)*Yd(1,2) + 3*AdInput(0,0)*AdInput(0,1)*Sqr(Abs(MuInput))*
+      TCD0(msdInput(0),msdInput(2),msqInput(0),msqInput(1))*Yd(0,0)*Yd(0,1)*Yd(2,0
+      )*Yd(2,1) + 3*AdInput(0,0)*AdInput(0,1)*Sqr(Abs(MuInput))*TCD0(msdInput(0),
+      msdInput(2),msqInput(1),msqInput(0))*Yd(0,0)*Yd(0,1)*Yd(2,0)*Yd(2,1) + 3*
+      AdInput(2,0)*AdInput(2,1)*Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(0),
+      msqInput(0),msqInput(1))*Yd(0,0)*Yd(0,1)*Yd(2,0)*Yd(2,1) + 3*AdInput(2,0)*
+      AdInput(2,1)*Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(0),msqInput(1),
+      msqInput(0))*Yd(0,0)*Yd(0,1)*Yd(2,0)*Yd(2,1) + 3*AdInput(1,0)*AdInput(1,1)*
+      Sqr(Abs(MuInput))*TCD0(msdInput(1),msdInput(2),msqInput(0),msqInput(1))*Yd(1
+      ,0)*Yd(1,1)*Yd(2,0)*Yd(2,1) + 3*AdInput(1,0)*AdInput(1,1)*Sqr(Abs(MuInput))*
+      TCD0(msdInput(1),msdInput(2),msqInput(1),msqInput(0))*Yd(1,0)*Yd(1,1)*Yd(2,0
+      )*Yd(2,1) + 3*AdInput(2,0)*AdInput(2,1)*Sqr(Abs(MuInput))*TCD0(msdInput(2),
+      msdInput(1),msqInput(0),msqInput(1))*Yd(1,0)*Yd(1,1)*Yd(2,0)*Yd(2,1) + 3*
+      AdInput(2,0)*AdInput(2,1)*Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(1),
+      msqInput(1),msqInput(0))*Yd(1,0)*Yd(1,1)*Yd(2,0)*Yd(2,1) + 3*AdInput(0,0)*
+      AdInput(0,2)*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(2),msqInput(0),
+      msqInput(2))*Yd(0,0)*Yd(0,2)*Yd(2,0)*Yd(2,2) + 3*AdInput(0,0)*AdInput(0,2)*
+      Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(2),msqInput(2),msqInput(0))*Yd(0
+      ,0)*Yd(0,2)*Yd(2,0)*Yd(2,2) + 3*AdInput(2,0)*AdInput(2,2)*Sqr(Abs(MuInput))*
+      TCD0(msdInput(2),msdInput(0),msqInput(0),msqInput(2))*Yd(0,0)*Yd(0,2)*Yd(2,0
+      )*Yd(2,2) + 3*AdInput(2,0)*AdInput(2,2)*Sqr(Abs(MuInput))*TCD0(msdInput(2),
+      msdInput(0),msqInput(2),msqInput(0))*Yd(0,0)*Yd(0,2)*Yd(2,0)*Yd(2,2) + 3*
+      AdInput(1,0)*AdInput(1,2)*Sqr(Abs(MuInput))*TCD0(msdInput(1),msdInput(2),
+      msqInput(0),msqInput(2))*Yd(1,0)*Yd(1,2)*Yd(2,0)*Yd(2,2) + 3*AdInput(1,0)*
+      AdInput(1,2)*Sqr(Abs(MuInput))*TCD0(msdInput(1),msdInput(2),msqInput(2),
+      msqInput(0))*Yd(1,0)*Yd(1,2)*Yd(2,0)*Yd(2,2) + 3*AdInput(2,0)*AdInput(2,2)*
+      Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(1),msqInput(0),msqInput(2))*Yd(1
+      ,0)*Yd(1,2)*Yd(2,0)*Yd(2,2) + 3*AdInput(2,0)*AdInput(2,2)*Sqr(Abs(MuInput))*
+      TCD0(msdInput(2),msdInput(1),msqInput(2),msqInput(0))*Yd(1,0)*Yd(1,2)*Yd(2,0
+      )*Yd(2,2) + 3*AdInput(0,1)*AdInput(0,2)*Sqr(Abs(MuInput))*TCD0(msdInput(0),
+      msdInput(2),msqInput(1),msqInput(2))*Yd(0,1)*Yd(0,2)*Yd(2,1)*Yd(2,2) + 3*
+      AdInput(0,1)*AdInput(0,2)*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(2),
+      msqInput(2),msqInput(1))*Yd(0,1)*Yd(0,2)*Yd(2,1)*Yd(2,2) + 3*AdInput(2,1)*
+      AdInput(2,2)*Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(0),msqInput(1),
+      msqInput(2))*Yd(0,1)*Yd(0,2)*Yd(2,1)*Yd(2,2) + 3*AdInput(2,1)*AdInput(2,2)*
+      Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(0),msqInput(2),msqInput(1))*Yd(0
+      ,1)*Yd(0,2)*Yd(2,1)*Yd(2,2) + 3*AdInput(1,1)*AdInput(1,2)*Sqr(Abs(MuInput))*
+      TCD0(msdInput(1),msdInput(2),msqInput(1),msqInput(2))*Yd(1,1)*Yd(1,2)*Yd(2,1
+      )*Yd(2,2) + 3*AdInput(1,1)*AdInput(1,2)*Sqr(Abs(MuInput))*TCD0(msdInput(1),
+      msdInput(2),msqInput(2),msqInput(1))*Yd(1,1)*Yd(1,2)*Yd(2,1)*Yd(2,2) + 3*
+      AdInput(2,1)*AdInput(2,2)*Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(1),
+      msqInput(1),msqInput(2))*Yd(1,1)*Yd(1,2)*Yd(2,1)*Yd(2,2) + 3*AdInput(2,1)*
+      AdInput(2,2)*Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(1),msqInput(2),
+      msqInput(1))*Yd(1,1)*Yd(1,2)*Yd(2,1)*Yd(2,2) + AeInput(0,0)*AeInput(0,1)*Sqr
+      (Abs(MuInput))*TCD0(mseInput(0),mseInput(1),mslInput(0),mslInput(1))*Ye(0,0)
+      *Ye(0,1)*Ye(1,0)*Ye(1,1) + AeInput(0,0)*AeInput(0,1)*Sqr(Abs(MuInput))*TCD0(
+      mseInput(0),mseInput(1),mslInput(1),mslInput(0))*Ye(0,0)*Ye(0,1)*Ye(1,0)*Ye(
+      1,1) + AeInput(1,0)*AeInput(1,1)*Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput
+      (0),mslInput(0),mslInput(1))*Ye(0,0)*Ye(0,1)*Ye(1,0)*Ye(1,1) + AeInput(1,0)*
+      AeInput(1,1)*Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput(0),mslInput(1),
+      mslInput(0))*Ye(0,0)*Ye(0,1)*Ye(1,0)*Ye(1,1) + AeInput(0,0)*AeInput(0,2)*Sqr
+      (Abs(MuInput))*TCD0(mseInput(0),mseInput(1),mslInput(0),mslInput(2))*Ye(0,0)
+      *Ye(0,2)*Ye(1,0)*Ye(1,2) + AeInput(0,0)*AeInput(0,2)*Sqr(Abs(MuInput))*TCD0(
+      mseInput(0),mseInput(1),mslInput(2),mslInput(0))*Ye(0,0)*Ye(0,2)*Ye(1,0)*Ye(
+      1,2) + AeInput(1,0)*AeInput(1,2)*Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput
+      (0),mslInput(0),mslInput(2))*Ye(0,0)*Ye(0,2)*Ye(1,0)*Ye(1,2) + AeInput(1,0)*
+      AeInput(1,2)*Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput(0),mslInput(2),
+      mslInput(0))*Ye(0,0)*Ye(0,2)*Ye(1,0)*Ye(1,2) + AeInput(0,1)*AeInput(0,2)*Sqr
+      (Abs(MuInput))*TCD0(mseInput(0),mseInput(1),mslInput(1),mslInput(2))*Ye(0,1)
+      *Ye(0,2)*Ye(1,1)*Ye(1,2) + AeInput(0,1)*AeInput(0,2)*Sqr(Abs(MuInput))*TCD0(
+      mseInput(0),mseInput(1),mslInput(2),mslInput(1))*Ye(0,1)*Ye(0,2)*Ye(1,1)*Ye(
+      1,2) + AeInput(1,1)*AeInput(1,2)*Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput
+      (0),mslInput(1),mslInput(2))*Ye(0,1)*Ye(0,2)*Ye(1,1)*Ye(1,2) + AeInput(1,1)*
+      AeInput(1,2)*Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput(0),mslInput(2),
+      mslInput(1))*Ye(0,1)*Ye(0,2)*Ye(1,1)*Ye(1,2) + AeInput(0,0)*AeInput(0,1)*Sqr
+      (Abs(MuInput))*TCD0(mseInput(0),mseInput(2),mslInput(0),mslInput(1))*Ye(0,0)
+      *Ye(0,1)*Ye(2,0)*Ye(2,1) + AeInput(0,0)*AeInput(0,1)*Sqr(Abs(MuInput))*TCD0(
+      mseInput(0),mseInput(2),mslInput(1),mslInput(0))*Ye(0,0)*Ye(0,1)*Ye(2,0)*Ye(
+      2,1) + AeInput(2,0)*AeInput(2,1)*Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput
+      (0),mslInput(0),mslInput(1))*Ye(0,0)*Ye(0,1)*Ye(2,0)*Ye(2,1) + AeInput(2,0)*
+      AeInput(2,1)*Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput(0),mslInput(1),
+      mslInput(0))*Ye(0,0)*Ye(0,1)*Ye(2,0)*Ye(2,1) + AeInput(1,0)*AeInput(1,1)*Sqr
+      (Abs(MuInput))*TCD0(mseInput(1),mseInput(2),mslInput(0),mslInput(1))*Ye(1,0)
+      *Ye(1,1)*Ye(2,0)*Ye(2,1) + AeInput(1,0)*AeInput(1,1)*Sqr(Abs(MuInput))*TCD0(
+      mseInput(1),mseInput(2),mslInput(1),mslInput(0))*Ye(1,0)*Ye(1,1)*Ye(2,0)*Ye(
+      2,1) + AeInput(2,0)*AeInput(2,1)*Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput
+      (1),mslInput(0),mslInput(1))*Ye(1,0)*Ye(1,1)*Ye(2,0)*Ye(2,1) + AeInput(2,0)*
+      AeInput(2,1)*Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput(1),mslInput(1),
+      mslInput(0))*Ye(1,0)*Ye(1,1)*Ye(2,0)*Ye(2,1) + Sqr(Abs(MuInput))*TCC0(
+      mseInput(0),mslInput(0),mslInput(1))*Ye(0,0)*Ye(0,1)*(Ye(0,0)*Ye(0,1) + Ye(1
+      ,0)*Ye(1,1) + Ye(2,0)*Ye(2,1)) + Sqr(Abs(MuInput))*TCC0(mseInput(0),mslInput
+      (1),mslInput(0))*Ye(0,0)*Ye(0,1)*(Ye(0,0)*Ye(0,1) + Ye(1,0)*Ye(1,1) + Ye(2,0
+      )*Ye(2,1)) + Sqr(Abs(MuInput))*TCC0(mseInput(1),mslInput(0),mslInput(1))*Ye(
+      1,0)*Ye(1,1)*(Ye(0,0)*Ye(0,1) + Ye(1,0)*Ye(1,1) + Ye(2,0)*Ye(2,1)) + Sqr(Abs
+      (MuInput))*TCC0(mseInput(1),mslInput(1),mslInput(0))*Ye(1,0)*Ye(1,1)*(Ye(0,0
+      )*Ye(0,1) + Ye(1,0)*Ye(1,1) + Ye(2,0)*Ye(2,1)) + Sqr(Abs(MuInput))*TCC0(
+      mseInput(2),mslInput(0),mslInput(1))*Ye(2,0)*Ye(2,1)*(Ye(0,0)*Ye(0,1) + Ye(1
+      ,0)*Ye(1,1) + Ye(2,0)*Ye(2,1)) + Sqr(Abs(MuInput))*TCC0(mseInput(2),mslInput
+      (1),mslInput(0))*Ye(2,0)*Ye(2,1)*(Ye(0,0)*Ye(0,1) + Ye(1,0)*Ye(1,1) + Ye(2,0
+      )*Ye(2,1)) + AeInput(0,0)*AeInput(0,2)*Sqr(Abs(MuInput))*TCD0(mseInput(0),
+      mseInput(2),mslInput(0),mslInput(2))*Ye(0,0)*Ye(0,2)*Ye(2,0)*Ye(2,2) +
+      AeInput(0,0)*AeInput(0,2)*Sqr(Abs(MuInput))*TCD0(mseInput(0),mseInput(2),
+      mslInput(2),mslInput(0))*Ye(0,0)*Ye(0,2)*Ye(2,0)*Ye(2,2) + AeInput(2,0)*
+      AeInput(2,2)*Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput(0),mslInput(0),
+      mslInput(2))*Ye(0,0)*Ye(0,2)*Ye(2,0)*Ye(2,2) + AeInput(2,0)*AeInput(2,2)*Sqr
+      (Abs(MuInput))*TCD0(mseInput(2),mseInput(0),mslInput(2),mslInput(0))*Ye(0,0)
+      *Ye(0,2)*Ye(2,0)*Ye(2,2) + AeInput(1,0)*AeInput(1,2)*Sqr(Abs(MuInput))*TCD0(
+      mseInput(1),mseInput(2),mslInput(0),mslInput(2))*Ye(1,0)*Ye(1,2)*Ye(2,0)*Ye(
+      2,2) + AeInput(1,0)*AeInput(1,2)*Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput
+      (2),mslInput(2),mslInput(0))*Ye(1,0)*Ye(1,2)*Ye(2,0)*Ye(2,2) + AeInput(2,0)*
+      AeInput(2,2)*Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput(1),mslInput(0),
+      mslInput(2))*Ye(1,0)*Ye(1,2)*Ye(2,0)*Ye(2,2) + AeInput(2,0)*AeInput(2,2)*Sqr
+      (Abs(MuInput))*TCD0(mseInput(2),mseInput(1),mslInput(2),mslInput(0))*Ye(1,0)
+      *Ye(1,2)*Ye(2,0)*Ye(2,2) + AeInput(0,1)*AeInput(0,2)*Sqr(Abs(MuInput))*TCD0(
+      mseInput(0),mseInput(2),mslInput(1),mslInput(2))*Ye(0,1)*Ye(0,2)*Ye(2,1)*Ye(
+      2,2) + AeInput(0,1)*AeInput(0,2)*Sqr(Abs(MuInput))*TCD0(mseInput(0),mseInput
+      (2),mslInput(2),mslInput(1))*Ye(0,1)*Ye(0,2)*Ye(2,1)*Ye(2,2) + AeInput(2,1)*
+      AeInput(2,2)*Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput(0),mslInput(1),
+      mslInput(2))*Ye(0,1)*Ye(0,2)*Ye(2,1)*Ye(2,2) + AeInput(2,1)*AeInput(2,2)*Sqr
+      (Abs(MuInput))*TCD0(mseInput(2),mseInput(0),mslInput(2),mslInput(1))*Ye(0,1)
+      *Ye(0,2)*Ye(2,1)*Ye(2,2) + AeInput(1,1)*AeInput(1,2)*Sqr(Abs(MuInput))*TCD0(
+      mseInput(1),mseInput(2),mslInput(1),mslInput(2))*Ye(1,1)*Ye(1,2)*Ye(2,1)*Ye(
+      2,2) + AeInput(1,1)*AeInput(1,2)*Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput
+      (2),mslInput(2),mslInput(1))*Ye(1,1)*Ye(1,2)*Ye(2,1)*Ye(2,2) + AeInput(2,1)*
+      AeInput(2,2)*Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput(1),mslInput(1),
+      mslInput(2))*Ye(1,1)*Ye(1,2)*Ye(2,1)*Ye(2,2) + AeInput(2,1)*AeInput(2,2)*Sqr
+      (Abs(MuInput))*TCD0(mseInput(2),mseInput(1),mslInput(2),mslInput(1))*Ye(1,1)
+      *Ye(1,2)*Ye(2,1)*Ye(2,2) + Sqr(Abs(MuInput))*TCC0(mseInput(0),mslInput(0),
+      mslInput(2))*Ye(0,0)*Ye(0,2)*(Ye(0,0)*Ye(0,2) + Ye(1,0)*Ye(1,2) + Ye(2,0)*Ye
+      (2,2)) + Sqr(Abs(MuInput))*TCC0(mseInput(0),mslInput(2),mslInput(0))*Ye(0,0)
+      *Ye(0,2)*(Ye(0,0)*Ye(0,2) + Ye(1,0)*Ye(1,2) + Ye(2,0)*Ye(2,2)) + Sqr(Abs(
+      MuInput))*TCC0(mseInput(1),mslInput(0),mslInput(2))*Ye(1,0)*Ye(1,2)*(Ye(0,0)
+      *Ye(0,2) + Ye(1,0)*Ye(1,2) + Ye(2,0)*Ye(2,2)) + Sqr(Abs(MuInput))*TCC0(
+      mseInput(1),mslInput(2),mslInput(0))*Ye(1,0)*Ye(1,2)*(Ye(0,0)*Ye(0,2) + Ye(1
+      ,0)*Ye(1,2) + Ye(2,0)*Ye(2,2)) + Sqr(Abs(MuInput))*TCC0(mseInput(2),mslInput
+      (0),mslInput(2))*Ye(2,0)*Ye(2,2)*(Ye(0,0)*Ye(0,2) + Ye(1,0)*Ye(1,2) + Ye(2,0
+      )*Ye(2,2)) + Sqr(Abs(MuInput))*TCC0(mseInput(2),mslInput(2),mslInput(0))*Ye(
+      2,0)*Ye(2,2)*(Ye(0,0)*Ye(0,2) + Ye(1,0)*Ye(1,2) + Ye(2,0)*Ye(2,2)) + Sqr(Abs
+      (MuInput))*TCC0(mseInput(0),mslInput(1),mslInput(2))*Ye(0,1)*Ye(0,2)*(Ye(0,1
+      )*Ye(0,2) + Ye(1,1)*Ye(1,2) + Ye(2,1)*Ye(2,2)) + Sqr(Abs(MuInput))*TCC0(
+      mseInput(0),mslInput(2),mslInput(1))*Ye(0,1)*Ye(0,2)*(Ye(0,1)*Ye(0,2) + Ye(1
+      ,1)*Ye(1,2) + Ye(2,1)*Ye(2,2)) + Sqr(Abs(MuInput))*TCC0(mseInput(1),mslInput
+      (1),mslInput(2))*Ye(1,1)*Ye(1,2)*(Ye(0,1)*Ye(0,2) + Ye(1,1)*Ye(1,2) + Ye(2,1
+      )*Ye(2,2)) + Sqr(Abs(MuInput))*TCC0(mseInput(1),mslInput(2),mslInput(1))*Ye(
+      1,1)*Ye(1,2)*(Ye(0,1)*Ye(0,2) + Ye(1,1)*Ye(1,2) + Ye(2,1)*Ye(2,2)) + Sqr(Abs
+      (MuInput))*TCC0(mseInput(2),mslInput(1),mslInput(2))*Ye(2,1)*Ye(2,2)*(Ye(0,1
+      )*Ye(0,2) + Ye(1,1)*Ye(1,2) + Ye(2,1)*Ye(2,2)) + Sqr(Abs(MuInput))*TCC0(
+      mseInput(2),mslInput(2),mslInput(1))*Ye(2,1)*Ye(2,2)*(Ye(0,1)*Ye(0,2) + Ye(1
+      ,1)*Ye(1,2) + Ye(2,1)*Ye(2,2)) - 3*TCD0(msdInput(0),msqInput(0),msqInput(1),
+      msuInput(0))*(AdInput(0,0)*AuInput(0,0)*Yd(0,0)*Yu(0,0) - Sqr(Abs(MuInput))*
+      Yd(0,0)*Yu(0,0))*(AdInput(0,1)*AuInput(0,1)*Yd(0,1)*Yu(0,1) - Sqr(Abs(
+      MuInput))*Yd(0,1)*Yu(0,1)) - 3*TCD0(msdInput(0),msqInput(1),msqInput(0),
+      msuInput(0))*(AdInput(0,0)*AuInput(0,0)*Yd(0,0)*Yu(0,0) - Sqr(Abs(MuInput))*
+      Yd(0,0)*Yu(0,0))*(AdInput(0,1)*AuInput(0,1)*Yd(0,1)*Yu(0,1) - Sqr(Abs(
+      MuInput))*Yd(0,1)*Yu(0,1)) - 3*TCD0(msdInput(1),msqInput(0),msqInput(1),
+      msuInput(0))*(AdInput(1,0)*AuInput(0,0)*Yd(1,0)*Yu(0,0) - Sqr(Abs(MuInput))*
+      Yd(1,0)*Yu(0,0))*(AdInput(1,1)*AuInput(0,1)*Yd(1,1)*Yu(0,1) - Sqr(Abs(
+      MuInput))*Yd(1,1)*Yu(0,1)) - 3*TCD0(msdInput(1),msqInput(1),msqInput(0),
+      msuInput(0))*(AdInput(1,0)*AuInput(0,0)*Yd(1,0)*Yu(0,0) - Sqr(Abs(MuInput))*
+      Yd(1,0)*Yu(0,0))*(AdInput(1,1)*AuInput(0,1)*Yd(1,1)*Yu(0,1) - Sqr(Abs(
+      MuInput))*Yd(1,1)*Yu(0,1)) - 3*TCD0(msdInput(2),msqInput(0),msqInput(1),
+      msuInput(0))*(AdInput(2,0)*AuInput(0,0)*Yd(2,0)*Yu(0,0) - Sqr(Abs(MuInput))*
+      Yd(2,0)*Yu(0,0))*(AdInput(2,1)*AuInput(0,1)*Yd(2,1)*Yu(0,1) - Sqr(Abs(
+      MuInput))*Yd(2,1)*Yu(0,1)) - 3*TCD0(msdInput(2),msqInput(1),msqInput(0),
+      msuInput(0))*(AdInput(2,0)*AuInput(0,0)*Yd(2,0)*Yu(0,0) - Sqr(Abs(MuInput))*
+      Yd(2,0)*Yu(0,0))*(AdInput(2,1)*AuInput(0,1)*Yd(2,1)*Yu(0,1) - Sqr(Abs(
+      MuInput))*Yd(2,1)*Yu(0,1)) - 3*TCD0(msdInput(0),msqInput(0),msqInput(2),
+      msuInput(0))*(AdInput(0,0)*AuInput(0,0)*Yd(0,0)*Yu(0,0) - Sqr(Abs(MuInput))*
+      Yd(0,0)*Yu(0,0))*(AdInput(0,2)*AuInput(0,2)*Yd(0,2)*Yu(0,2) - Sqr(Abs(
+      MuInput))*Yd(0,2)*Yu(0,2)) - 3*TCD0(msdInput(0),msqInput(2),msqInput(0),
+      msuInput(0))*(AdInput(0,0)*AuInput(0,0)*Yd(0,0)*Yu(0,0) - Sqr(Abs(MuInput))*
+      Yd(0,0)*Yu(0,0))*(AdInput(0,2)*AuInput(0,2)*Yd(0,2)*Yu(0,2) - Sqr(Abs(
+      MuInput))*Yd(0,2)*Yu(0,2)) - 3*TCD0(msdInput(0),msqInput(1),msqInput(2),
+      msuInput(0))*(AdInput(0,1)*AuInput(0,1)*Yd(0,1)*Yu(0,1) - Sqr(Abs(MuInput))*
+      Yd(0,1)*Yu(0,1))*(AdInput(0,2)*AuInput(0,2)*Yd(0,2)*Yu(0,2) - Sqr(Abs(
+      MuInput))*Yd(0,2)*Yu(0,2)) - 3*TCD0(msdInput(0),msqInput(2),msqInput(1),
+      msuInput(0))*(AdInput(0,1)*AuInput(0,1)*Yd(0,1)*Yu(0,1) - Sqr(Abs(MuInput))*
+      Yd(0,1)*Yu(0,1))*(AdInput(0,2)*AuInput(0,2)*Yd(0,2)*Yu(0,2) - Sqr(Abs(
+      MuInput))*Yd(0,2)*Yu(0,2)) - 3*TCD0(msdInput(1),msqInput(0),msqInput(2),
+      msuInput(0))*(AdInput(1,0)*AuInput(0,0)*Yd(1,0)*Yu(0,0) - Sqr(Abs(MuInput))*
+      Yd(1,0)*Yu(0,0))*(AdInput(1,2)*AuInput(0,2)*Yd(1,2)*Yu(0,2) - Sqr(Abs(
+      MuInput))*Yd(1,2)*Yu(0,2)) - 3*TCD0(msdInput(1),msqInput(2),msqInput(0),
+      msuInput(0))*(AdInput(1,0)*AuInput(0,0)*Yd(1,0)*Yu(0,0) - Sqr(Abs(MuInput))*
+      Yd(1,0)*Yu(0,0))*(AdInput(1,2)*AuInput(0,2)*Yd(1,2)*Yu(0,2) - Sqr(Abs(
+      MuInput))*Yd(1,2)*Yu(0,2)) - 3*TCD0(msdInput(1),msqInput(1),msqInput(2),
+      msuInput(0))*(AdInput(1,1)*AuInput(0,1)*Yd(1,1)*Yu(0,1) - Sqr(Abs(MuInput))*
+      Yd(1,1)*Yu(0,1))*(AdInput(1,2)*AuInput(0,2)*Yd(1,2)*Yu(0,2) - Sqr(Abs(
+      MuInput))*Yd(1,2)*Yu(0,2)) - 3*TCD0(msdInput(1),msqInput(2),msqInput(1),
+      msuInput(0))*(AdInput(1,1)*AuInput(0,1)*Yd(1,1)*Yu(0,1) - Sqr(Abs(MuInput))*
+      Yd(1,1)*Yu(0,1))*(AdInput(1,2)*AuInput(0,2)*Yd(1,2)*Yu(0,2) - Sqr(Abs(
+      MuInput))*Yd(1,2)*Yu(0,2)) - 3*TCD0(msdInput(2),msqInput(0),msqInput(2),
+      msuInput(0))*(AdInput(2,0)*AuInput(0,0)*Yd(2,0)*Yu(0,0) - Sqr(Abs(MuInput))*
+      Yd(2,0)*Yu(0,0))*(AdInput(2,2)*AuInput(0,2)*Yd(2,2)*Yu(0,2) - Sqr(Abs(
+      MuInput))*Yd(2,2)*Yu(0,2)) - 3*TCD0(msdInput(2),msqInput(2),msqInput(0),
+      msuInput(0))*(AdInput(2,0)*AuInput(0,0)*Yd(2,0)*Yu(0,0) - Sqr(Abs(MuInput))*
+      Yd(2,0)*Yu(0,0))*(AdInput(2,2)*AuInput(0,2)*Yd(2,2)*Yu(0,2) - Sqr(Abs(
+      MuInput))*Yd(2,2)*Yu(0,2)) - 3*TCD0(msdInput(2),msqInput(1),msqInput(2),
+      msuInput(0))*(AdInput(2,1)*AuInput(0,1)*Yd(2,1)*Yu(0,1) - Sqr(Abs(MuInput))*
+      Yd(2,1)*Yu(0,1))*(AdInput(2,2)*AuInput(0,2)*Yd(2,2)*Yu(0,2) - Sqr(Abs(
+      MuInput))*Yd(2,2)*Yu(0,2)) - 3*TCD0(msdInput(2),msqInput(2),msqInput(1),
+      msuInput(0))*(AdInput(2,1)*AuInput(0,1)*Yd(2,1)*Yu(0,1) - Sqr(Abs(MuInput))*
+      Yd(2,1)*Yu(0,1))*(AdInput(2,2)*AuInput(0,2)*Yd(2,2)*Yu(0,2) - Sqr(Abs(
+      MuInput))*Yd(2,2)*Yu(0,2)) + TCC0(msdInput(0),msqInput(0),msuInput(0))*(-6*
+      AdInput(0,0)*AuInput(0,0)*Yd(0,0)*Yu(0,0)*(Yd(0,0)*Yu(0,0) + Yd(0,1)*Yu(0,1)
+      + Yd(0,2)*Yu(0,2)) + 6*Sqr(Abs(MuInput))*Yd(0,0)*Yu(0,0)*(Yd(0,0)*Yu(0,0) +
+      Yd(0,1)*Yu(0,1) + Yd(0,2)*Yu(0,2))) + TCC0(msdInput(0),msqInput(1),msuInput(
+      0))*(-6*AdInput(0,1)*AuInput(0,1)*Yd(0,1)*Yu(0,1)*(Yd(0,0)*Yu(0,0) + Yd(0,1)
+      *Yu(0,1) + Yd(0,2)*Yu(0,2)) + 6*Sqr(Abs(MuInput))*Yd(0,1)*Yu(0,1)*(Yd(0,0)*
+      Yu(0,0) + Yd(0,1)*Yu(0,1) + Yd(0,2)*Yu(0,2))) + TCC0(msdInput(0),msqInput(2)
+      ,msuInput(0))*(-6*AdInput(0,2)*AuInput(0,2)*Yd(0,2)*Yu(0,2)*(Yd(0,0)*Yu(0,0)
+      + Yd(0,1)*Yu(0,1) + Yd(0,2)*Yu(0,2)) + 6*Sqr(Abs(MuInput))*Yd(0,2)*Yu(0,2)*(
+      Yd(0,0)*Yu(0,0) + Yd(0,1)*Yu(0,1) + Yd(0,2)*Yu(0,2))) + TCC0(msdInput(1),
+      msqInput(0),msuInput(0))*(-6*AdInput(1,0)*AuInput(0,0)*Yd(1,0)*Yu(0,0)*(Yd(1
+      ,0)*Yu(0,0) + Yd(1,1)*Yu(0,1) + Yd(1,2)*Yu(0,2)) + 6*Sqr(Abs(MuInput))*Yd(1,
+      0)*Yu(0,0)*(Yd(1,0)*Yu(0,0) + Yd(1,1)*Yu(0,1) + Yd(1,2)*Yu(0,2))) + TCC0(
+      msdInput(1),msqInput(1),msuInput(0))*(-6*AdInput(1,1)*AuInput(0,1)*Yd(1,1)*
+      Yu(0,1)*(Yd(1,0)*Yu(0,0) + Yd(1,1)*Yu(0,1) + Yd(1,2)*Yu(0,2)) + 6*Sqr(Abs(
+      MuInput))*Yd(1,1)*Yu(0,1)*(Yd(1,0)*Yu(0,0) + Yd(1,1)*Yu(0,1) + Yd(1,2)*Yu(0,
+      2))) + TCC0(msdInput(1),msqInput(2),msuInput(0))*(-6*AdInput(1,2)*AuInput(0,
+      2)*Yd(1,2)*Yu(0,2)*(Yd(1,0)*Yu(0,0) + Yd(1,1)*Yu(0,1) + Yd(1,2)*Yu(0,2)) + 6
+      *Sqr(Abs(MuInput))*Yd(1,2)*Yu(0,2)*(Yd(1,0)*Yu(0,0) + Yd(1,1)*Yu(0,1) + Yd(1
+      ,2)*Yu(0,2))) + TCC0(msdInput(2),msqInput(0),msuInput(0))*(-6*AdInput(2,0)*
+      AuInput(0,0)*Yd(2,0)*Yu(0,0)*(Yd(2,0)*Yu(0,0) + Yd(2,1)*Yu(0,1) + Yd(2,2)*Yu
+      (0,2)) + 6*Sqr(Abs(MuInput))*Yd(2,0)*Yu(0,0)*(Yd(2,0)*Yu(0,0) + Yd(2,1)*Yu(0
+      ,1) + Yd(2,2)*Yu(0,2))) + TCC0(msdInput(2),msqInput(1),msuInput(0))*(-6*
+      AdInput(2,1)*AuInput(0,1)*Yd(2,1)*Yu(0,1)*(Yd(2,0)*Yu(0,0) + Yd(2,1)*Yu(0,1)
+      + Yd(2,2)*Yu(0,2)) + 6*Sqr(Abs(MuInput))*Yd(2,1)*Yu(0,1)*(Yd(2,0)*Yu(0,0) +
+      Yd(2,1)*Yu(0,1) + Yd(2,2)*Yu(0,2))) + TCC0(msdInput(2),msqInput(2),msuInput(
+      0))*(-6*AdInput(2,2)*AuInput(0,2)*Yd(2,2)*Yu(0,2)*(Yd(2,0)*Yu(0,0) + Yd(2,1)
+      *Yu(0,1) + Yd(2,2)*Yu(0,2)) + 6*Sqr(Abs(MuInput))*Yd(2,2)*Yu(0,2)*(Yd(2,0)*
+      Yu(0,0) + Yd(2,1)*Yu(0,1) + Yd(2,2)*Yu(0,2))) + 3*AuInput(1,0)*AuInput(1,1)*
+      Sqr(Abs(MuInput))*TCD0(msqInput(0),msqInput(1),msuInput(0),msuInput(1))*Yu(0
+      ,0)*Yu(0,1)*Yu(1,0)*Yu(1,1) + 3*AuInput(0,0)*AuInput(0,1)*Sqr(Abs(MuInput))*
+      TCD0(msqInput(0),msqInput(1),msuInput(1),msuInput(0))*Yu(0,0)*Yu(0,1)*Yu(1,0
+      )*Yu(1,1) + 3*AuInput(1,0)*AuInput(1,1)*Sqr(Abs(MuInput))*TCD0(msqInput(1),
+      msqInput(0),msuInput(0),msuInput(1))*Yu(0,0)*Yu(0,1)*Yu(1,0)*Yu(1,1) + 3*
+      AuInput(0,0)*AuInput(0,1)*Sqr(Abs(MuInput))*TCD0(msqInput(1),msqInput(0),
+      msuInput(1),msuInput(0))*Yu(0,0)*Yu(0,1)*Yu(1,0)*Yu(1,1) - 3*TCD0(msdInput(0
+      ),msqInput(0),msqInput(1),msuInput(1))*(AdInput(0,0)*AuInput(1,0)*Yd(0,0)*Yu
+      (1,0) - Sqr(Abs(MuInput))*Yd(0,0)*Yu(1,0))*(AdInput(0,1)*AuInput(1,1)*Yd(0,1
+      )*Yu(1,1) - Sqr(Abs(MuInput))*Yd(0,1)*Yu(1,1)) - 3*TCD0(msdInput(0),msqInput
+      (1),msqInput(0),msuInput(1))*(AdInput(0,0)*AuInput(1,0)*Yd(0,0)*Yu(1,0) -
+      Sqr(Abs(MuInput))*Yd(0,0)*Yu(1,0))*(AdInput(0,1)*AuInput(1,1)*Yd(0,1)*Yu(1,1
+      ) - Sqr(Abs(MuInput))*Yd(0,1)*Yu(1,1)) - 3*TCD0(msdInput(1),msqInput(0),
+      msqInput(1),msuInput(1))*(AdInput(1,0)*AuInput(1,0)*Yd(1,0)*Yu(1,0) - Sqr(
+      Abs(MuInput))*Yd(1,0)*Yu(1,0))*(AdInput(1,1)*AuInput(1,1)*Yd(1,1)*Yu(1,1) -
+      Sqr(Abs(MuInput))*Yd(1,1)*Yu(1,1)) - 3*TCD0(msdInput(1),msqInput(1),msqInput
+      (0),msuInput(1))*(AdInput(1,0)*AuInput(1,0)*Yd(1,0)*Yu(1,0) - Sqr(Abs(
+      MuInput))*Yd(1,0)*Yu(1,0))*(AdInput(1,1)*AuInput(1,1)*Yd(1,1)*Yu(1,1) - Sqr(
+      Abs(MuInput))*Yd(1,1)*Yu(1,1)) - 3*TCD0(msdInput(2),msqInput(0),msqInput(1),
+      msuInput(1))*(AdInput(2,0)*AuInput(1,0)*Yd(2,0)*Yu(1,0) - Sqr(Abs(MuInput))*
+      Yd(2,0)*Yu(1,0))*(AdInput(2,1)*AuInput(1,1)*Yd(2,1)*Yu(1,1) - Sqr(Abs(
+      MuInput))*Yd(2,1)*Yu(1,1)) - 3*TCD0(msdInput(2),msqInput(1),msqInput(0),
+      msuInput(1))*(AdInput(2,0)*AuInput(1,0)*Yd(2,0)*Yu(1,0) - Sqr(Abs(MuInput))*
+      Yd(2,0)*Yu(1,0))*(AdInput(2,1)*AuInput(1,1)*Yd(2,1)*Yu(1,1) - Sqr(Abs(
+      MuInput))*Yd(2,1)*Yu(1,1)) + 3*AuInput(1,0)*AuInput(1,2)*Sqr(Abs(MuInput))*
+      TCD0(msqInput(0),msqInput(2),msuInput(0),msuInput(1))*Yu(0,0)*Yu(0,2)*Yu(1,0
+      )*Yu(1,2) + 3*AuInput(0,0)*AuInput(0,2)*Sqr(Abs(MuInput))*TCD0(msqInput(0),
+      msqInput(2),msuInput(1),msuInput(0))*Yu(0,0)*Yu(0,2)*Yu(1,0)*Yu(1,2) + 3*
+      AuInput(1,0)*AuInput(1,2)*Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(0),
+      msuInput(0),msuInput(1))*Yu(0,0)*Yu(0,2)*Yu(1,0)*Yu(1,2) + 3*AuInput(0,0)*
+      AuInput(0,2)*Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(0),msuInput(1),
+      msuInput(0))*Yu(0,0)*Yu(0,2)*Yu(1,0)*Yu(1,2) + 3*AuInput(1,1)*AuInput(1,2)*
+      Sqr(Abs(MuInput))*TCD0(msqInput(1),msqInput(2),msuInput(0),msuInput(1))*Yu(0
+      ,1)*Yu(0,2)*Yu(1,1)*Yu(1,2) + 3*AuInput(0,1)*AuInput(0,2)*Sqr(Abs(MuInput))*
+      TCD0(msqInput(1),msqInput(2),msuInput(1),msuInput(0))*Yu(0,1)*Yu(0,2)*Yu(1,1
+      )*Yu(1,2) + 3*AuInput(1,1)*AuInput(1,2)*Sqr(Abs(MuInput))*TCD0(msqInput(2),
+      msqInput(1),msuInput(0),msuInput(1))*Yu(0,1)*Yu(0,2)*Yu(1,1)*Yu(1,2) + 3*
+      AuInput(0,1)*AuInput(0,2)*Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(1),
+      msuInput(1),msuInput(0))*Yu(0,1)*Yu(0,2)*Yu(1,1)*Yu(1,2) - 3*TCD0(msdInput(0
+      ),msqInput(0),msqInput(2),msuInput(1))*(AdInput(0,0)*AuInput(1,0)*Yd(0,0)*Yu
+      (1,0) - Sqr(Abs(MuInput))*Yd(0,0)*Yu(1,0))*(AdInput(0,2)*AuInput(1,2)*Yd(0,2
+      )*Yu(1,2) - Sqr(Abs(MuInput))*Yd(0,2)*Yu(1,2)) - 3*TCD0(msdInput(0),msqInput
+      (2),msqInput(0),msuInput(1))*(AdInput(0,0)*AuInput(1,0)*Yd(0,0)*Yu(1,0) -
+      Sqr(Abs(MuInput))*Yd(0,0)*Yu(1,0))*(AdInput(0,2)*AuInput(1,2)*Yd(0,2)*Yu(1,2
+      ) - Sqr(Abs(MuInput))*Yd(0,2)*Yu(1,2)) - 3*TCD0(msdInput(0),msqInput(1),
+      msqInput(2),msuInput(1))*(AdInput(0,1)*AuInput(1,1)*Yd(0,1)*Yu(1,1) - Sqr(
+      Abs(MuInput))*Yd(0,1)*Yu(1,1))*(AdInput(0,2)*AuInput(1,2)*Yd(0,2)*Yu(1,2) -
+      Sqr(Abs(MuInput))*Yd(0,2)*Yu(1,2)) - 3*TCD0(msdInput(0),msqInput(2),msqInput
+      (1),msuInput(1))*(AdInput(0,1)*AuInput(1,1)*Yd(0,1)*Yu(1,1) - Sqr(Abs(
+      MuInput))*Yd(0,1)*Yu(1,1))*(AdInput(0,2)*AuInput(1,2)*Yd(0,2)*Yu(1,2) - Sqr(
+      Abs(MuInput))*Yd(0,2)*Yu(1,2)) - 3*TCD0(msdInput(1),msqInput(0),msqInput(2),
+      msuInput(1))*(AdInput(1,0)*AuInput(1,0)*Yd(1,0)*Yu(1,0) - Sqr(Abs(MuInput))*
+      Yd(1,0)*Yu(1,0))*(AdInput(1,2)*AuInput(1,2)*Yd(1,2)*Yu(1,2) - Sqr(Abs(
+      MuInput))*Yd(1,2)*Yu(1,2)) - 3*TCD0(msdInput(1),msqInput(2),msqInput(0),
+      msuInput(1))*(AdInput(1,0)*AuInput(1,0)*Yd(1,0)*Yu(1,0) - Sqr(Abs(MuInput))*
+      Yd(1,0)*Yu(1,0))*(AdInput(1,2)*AuInput(1,2)*Yd(1,2)*Yu(1,2) - Sqr(Abs(
+      MuInput))*Yd(1,2)*Yu(1,2)) - 3*TCD0(msdInput(1),msqInput(1),msqInput(2),
+      msuInput(1))*(AdInput(1,1)*AuInput(1,1)*Yd(1,1)*Yu(1,1) - Sqr(Abs(MuInput))*
+      Yd(1,1)*Yu(1,1))*(AdInput(1,2)*AuInput(1,2)*Yd(1,2)*Yu(1,2) - Sqr(Abs(
+      MuInput))*Yd(1,2)*Yu(1,2)) - 3*TCD0(msdInput(1),msqInput(2),msqInput(1),
+      msuInput(1))*(AdInput(1,1)*AuInput(1,1)*Yd(1,1)*Yu(1,1) - Sqr(Abs(MuInput))*
+      Yd(1,1)*Yu(1,1))*(AdInput(1,2)*AuInput(1,2)*Yd(1,2)*Yu(1,2) - Sqr(Abs(
+      MuInput))*Yd(1,2)*Yu(1,2)) - 3*TCD0(msdInput(2),msqInput(0),msqInput(2),
+      msuInput(1))*(AdInput(2,0)*AuInput(1,0)*Yd(2,0)*Yu(1,0) - Sqr(Abs(MuInput))*
+      Yd(2,0)*Yu(1,0))*(AdInput(2,2)*AuInput(1,2)*Yd(2,2)*Yu(1,2) - Sqr(Abs(
+      MuInput))*Yd(2,2)*Yu(1,2)) - 3*TCD0(msdInput(2),msqInput(2),msqInput(0),
+      msuInput(1))*(AdInput(2,0)*AuInput(1,0)*Yd(2,0)*Yu(1,0) - Sqr(Abs(MuInput))*
+      Yd(2,0)*Yu(1,0))*(AdInput(2,2)*AuInput(1,2)*Yd(2,2)*Yu(1,2) - Sqr(Abs(
+      MuInput))*Yd(2,2)*Yu(1,2)) - 3*TCD0(msdInput(2),msqInput(1),msqInput(2),
+      msuInput(1))*(AdInput(2,1)*AuInput(1,1)*Yd(2,1)*Yu(1,1) - Sqr(Abs(MuInput))*
+      Yd(2,1)*Yu(1,1))*(AdInput(2,2)*AuInput(1,2)*Yd(2,2)*Yu(1,2) - Sqr(Abs(
+      MuInput))*Yd(2,2)*Yu(1,2)) - 3*TCD0(msdInput(2),msqInput(2),msqInput(1),
+      msuInput(1))*(AdInput(2,1)*AuInput(1,1)*Yd(2,1)*Yu(1,1) - Sqr(Abs(MuInput))*
+      Yd(2,1)*Yu(1,1))*(AdInput(2,2)*AuInput(1,2)*Yd(2,2)*Yu(1,2) - Sqr(Abs(
+      MuInput))*Yd(2,2)*Yu(1,2)) + TCC0(msdInput(0),msqInput(0),msuInput(1))*(-6*
+      AdInput(0,0)*AuInput(1,0)*Yd(0,0)*Yu(1,0)*(Yd(0,0)*Yu(1,0) + Yd(0,1)*Yu(1,1)
+      + Yd(0,2)*Yu(1,2)) + 6*Sqr(Abs(MuInput))*Yd(0,0)*Yu(1,0)*(Yd(0,0)*Yu(1,0) +
+      Yd(0,1)*Yu(1,1) + Yd(0,2)*Yu(1,2))) + TCC0(msdInput(0),msqInput(1),msuInput(
+      1))*(-6*AdInput(0,1)*AuInput(1,1)*Yd(0,1)*Yu(1,1)*(Yd(0,0)*Yu(1,0) + Yd(0,1)
+      *Yu(1,1) + Yd(0,2)*Yu(1,2)) + 6*Sqr(Abs(MuInput))*Yd(0,1)*Yu(1,1)*(Yd(0,0)*
+      Yu(1,0) + Yd(0,1)*Yu(1,1) + Yd(0,2)*Yu(1,2))) + TCC0(msdInput(0),msqInput(2)
+      ,msuInput(1))*(-6*AdInput(0,2)*AuInput(1,2)*Yd(0,2)*Yu(1,2)*(Yd(0,0)*Yu(1,0)
+      + Yd(0,1)*Yu(1,1) + Yd(0,2)*Yu(1,2)) + 6*Sqr(Abs(MuInput))*Yd(0,2)*Yu(1,2)*(
+      Yd(0,0)*Yu(1,0) + Yd(0,1)*Yu(1,1) + Yd(0,2)*Yu(1,2))) + TCC0(msdInput(1),
+      msqInput(0),msuInput(1))*(-6*AdInput(1,0)*AuInput(1,0)*Yd(1,0)*Yu(1,0)*(Yd(1
+      ,0)*Yu(1,0) + Yd(1,1)*Yu(1,1) + Yd(1,2)*Yu(1,2)) + 6*Sqr(Abs(MuInput))*Yd(1,
+      0)*Yu(1,0)*(Yd(1,0)*Yu(1,0) + Yd(1,1)*Yu(1,1) + Yd(1,2)*Yu(1,2))) + TCC0(
+      msdInput(1),msqInput(1),msuInput(1))*(-6*AdInput(1,1)*AuInput(1,1)*Yd(1,1)*
+      Yu(1,1)*(Yd(1,0)*Yu(1,0) + Yd(1,1)*Yu(1,1) + Yd(1,2)*Yu(1,2)) + 6*Sqr(Abs(
+      MuInput))*Yd(1,1)*Yu(1,1)*(Yd(1,0)*Yu(1,0) + Yd(1,1)*Yu(1,1) + Yd(1,2)*Yu(1,
+      2))) + TCC0(msdInput(1),msqInput(2),msuInput(1))*(-6*AdInput(1,2)*AuInput(1,
+      2)*Yd(1,2)*Yu(1,2)*(Yd(1,0)*Yu(1,0) + Yd(1,1)*Yu(1,1) + Yd(1,2)*Yu(1,2)) + 6
+      *Sqr(Abs(MuInput))*Yd(1,2)*Yu(1,2)*(Yd(1,0)*Yu(1,0) + Yd(1,1)*Yu(1,1) + Yd(1
+      ,2)*Yu(1,2))) + TCC0(msdInput(2),msqInput(0),msuInput(1))*(-6*AdInput(2,0)*
+      AuInput(1,0)*Yd(2,0)*Yu(1,0)*(Yd(2,0)*Yu(1,0) + Yd(2,1)*Yu(1,1) + Yd(2,2)*Yu
+      (1,2)) + 6*Sqr(Abs(MuInput))*Yd(2,0)*Yu(1,0)*(Yd(2,0)*Yu(1,0) + Yd(2,1)*Yu(1
+      ,1) + Yd(2,2)*Yu(1,2))) + TCC0(msdInput(2),msqInput(1),msuInput(1))*(-6*
+      AdInput(2,1)*AuInput(1,1)*Yd(2,1)*Yu(1,1)*(Yd(2,0)*Yu(1,0) + Yd(2,1)*Yu(1,1)
+      + Yd(2,2)*Yu(1,2)) + 6*Sqr(Abs(MuInput))*Yd(2,1)*Yu(1,1)*(Yd(2,0)*Yu(1,0) +
+      Yd(2,1)*Yu(1,1) + Yd(2,2)*Yu(1,2))) + TCC0(msdInput(2),msqInput(2),msuInput(
+      1))*(-6*AdInput(2,2)*AuInput(1,2)*Yd(2,2)*Yu(1,2)*(Yd(2,0)*Yu(1,0) + Yd(2,1)
+      *Yu(1,1) + Yd(2,2)*Yu(1,2)) + 6*Sqr(Abs(MuInput))*Yd(2,2)*Yu(1,2)*(Yd(2,0)*
+      Yu(1,0) + Yd(2,1)*Yu(1,1) + Yd(2,2)*Yu(1,2))) + 3*AuInput(2,0)*AuInput(2,1)*
+      Sqr(Abs(MuInput))*TCD0(msqInput(0),msqInput(1),msuInput(0),msuInput(2))*Yu(0
+      ,0)*Yu(0,1)*Yu(2,0)*Yu(2,1) + 3*AuInput(0,0)*AuInput(0,1)*Sqr(Abs(MuInput))*
+      TCD0(msqInput(0),msqInput(1),msuInput(2),msuInput(0))*Yu(0,0)*Yu(0,1)*Yu(2,0
+      )*Yu(2,1) + 3*AuInput(2,0)*AuInput(2,1)*Sqr(Abs(MuInput))*TCD0(msqInput(1),
+      msqInput(0),msuInput(0),msuInput(2))*Yu(0,0)*Yu(0,1)*Yu(2,0)*Yu(2,1) + 3*
+      AuInput(0,0)*AuInput(0,1)*Sqr(Abs(MuInput))*TCD0(msqInput(1),msqInput(0),
+      msuInput(2),msuInput(0))*Yu(0,0)*Yu(0,1)*Yu(2,0)*Yu(2,1) + 3*AuInput(2,0)*
+      AuInput(2,1)*Sqr(Abs(MuInput))*TCD0(msqInput(0),msqInput(1),msuInput(1),
+      msuInput(2))*Yu(1,0)*Yu(1,1)*Yu(2,0)*Yu(2,1) + 3*AuInput(1,0)*AuInput(1,1)*
+      Sqr(Abs(MuInput))*TCD0(msqInput(0),msqInput(1),msuInput(2),msuInput(1))*Yu(1
+      ,0)*Yu(1,1)*Yu(2,0)*Yu(2,1) + 3*AuInput(2,0)*AuInput(2,1)*Sqr(Abs(MuInput))*
+      TCD0(msqInput(1),msqInput(0),msuInput(1),msuInput(2))*Yu(1,0)*Yu(1,1)*Yu(2,0
+      )*Yu(2,1) + 3*AuInput(1,0)*AuInput(1,1)*Sqr(Abs(MuInput))*TCD0(msqInput(1),
+      msqInput(0),msuInput(2),msuInput(1))*Yu(1,0)*Yu(1,1)*Yu(2,0)*Yu(2,1) - 3*
+      TCD0(msdInput(0),msqInput(0),msqInput(1),msuInput(2))*(AdInput(0,0)*AuInput(
+      2,0)*Yd(0,0)*Yu(2,0) - Sqr(Abs(MuInput))*Yd(0,0)*Yu(2,0))*(AdInput(0,1)*
+      AuInput(2,1)*Yd(0,1)*Yu(2,1) - Sqr(Abs(MuInput))*Yd(0,1)*Yu(2,1)) - 3*TCD0(
+      msdInput(0),msqInput(1),msqInput(0),msuInput(2))*(AdInput(0,0)*AuInput(2,0)*
+      Yd(0,0)*Yu(2,0) - Sqr(Abs(MuInput))*Yd(0,0)*Yu(2,0))*(AdInput(0,1)*AuInput(2
+      ,1)*Yd(0,1)*Yu(2,1) - Sqr(Abs(MuInput))*Yd(0,1)*Yu(2,1)) - 3*TCD0(msdInput(1
+      ),msqInput(0),msqInput(1),msuInput(2))*(AdInput(1,0)*AuInput(2,0)*Yd(1,0)*Yu
+      (2,0) - Sqr(Abs(MuInput))*Yd(1,0)*Yu(2,0))*(AdInput(1,1)*AuInput(2,1)*Yd(1,1
+      )*Yu(2,1) - Sqr(Abs(MuInput))*Yd(1,1)*Yu(2,1)) - 3*TCD0(msdInput(1),msqInput
+      (1),msqInput(0),msuInput(2))*(AdInput(1,0)*AuInput(2,0)*Yd(1,0)*Yu(2,0) -
+      Sqr(Abs(MuInput))*Yd(1,0)*Yu(2,0))*(AdInput(1,1)*AuInput(2,1)*Yd(1,1)*Yu(2,1
+      ) - Sqr(Abs(MuInput))*Yd(1,1)*Yu(2,1)) - 3*TCD0(msdInput(2),msqInput(0),
+      msqInput(1),msuInput(2))*(AdInput(2,0)*AuInput(2,0)*Yd(2,0)*Yu(2,0) - Sqr(
+      Abs(MuInput))*Yd(2,0)*Yu(2,0))*(AdInput(2,1)*AuInput(2,1)*Yd(2,1)*Yu(2,1) -
+      Sqr(Abs(MuInput))*Yd(2,1)*Yu(2,1)) - 3*TCD0(msdInput(2),msqInput(1),msqInput
+      (0),msuInput(2))*(AdInput(2,0)*AuInput(2,0)*Yd(2,0)*Yu(2,0) - Sqr(Abs(
+      MuInput))*Yd(2,0)*Yu(2,0))*(AdInput(2,1)*AuInput(2,1)*Yd(2,1)*Yu(2,1) - Sqr(
+      Abs(MuInput))*Yd(2,1)*Yu(2,1)) - 3*TCB0(msqInput(0),msqInput(1),SCALE)*(Yd(0
+      ,0)*Yd(0,1) + Yd(1,0)*Yd(1,1) + Yd(2,0)*Yd(2,1))*(Yu(0,0)*Yu(0,1) + Yu(1,0)*
+      Yu(1,1) + Yu(2,0)*Yu(2,1)) - 3*TCB0(msqInput(1),msqInput(0),SCALE)*(Yd(0,0)*
+      Yd(0,1) + Yd(1,0)*Yd(1,1) + Yd(2,0)*Yd(2,1))*(Yu(0,0)*Yu(0,1) + Yu(1,0)*Yu(1
+      ,1) + Yu(2,0)*Yu(2,1)) + TCC0(msdInput(0),msqInput(0),msqInput(1))*(3*Sqr(
+      Abs(MuInput))*Yd(0,0)*Yd(0,1)*(Yd(0,0)*Yd(0,1) + Yd(1,0)*Yd(1,1) + Yd(2,0)*
+      Yd(2,1)) - 3*AdInput(0,0)*AdInput(0,1)*Yd(0,0)*Yd(0,1)*(Yu(0,0)*Yu(0,1) + Yu
+      (1,0)*Yu(1,1) + Yu(2,0)*Yu(2,1))) + TCC0(msdInput(0),msqInput(1),msqInput(0)
+      )*(3*Sqr(Abs(MuInput))*Yd(0,0)*Yd(0,1)*(Yd(0,0)*Yd(0,1) + Yd(1,0)*Yd(1,1) +
+      Yd(2,0)*Yd(2,1)) - 3*AdInput(0,0)*AdInput(0,1)*Yd(0,0)*Yd(0,1)*(Yu(0,0)*Yu(0
+      ,1) + Yu(1,0)*Yu(1,1) + Yu(2,0)*Yu(2,1))) + TCC0(msdInput(1),msqInput(0),
+      msqInput(1))*(3*Sqr(Abs(MuInput))*Yd(1,0)*Yd(1,1)*(Yd(0,0)*Yd(0,1) + Yd(1,0)
+      *Yd(1,1) + Yd(2,0)*Yd(2,1)) - 3*AdInput(1,0)*AdInput(1,1)*Yd(1,0)*Yd(1,1)*(
+      Yu(0,0)*Yu(0,1) + Yu(1,0)*Yu(1,1) + Yu(2,0)*Yu(2,1))) + TCC0(msdInput(1),
+      msqInput(1),msqInput(0))*(3*Sqr(Abs(MuInput))*Yd(1,0)*Yd(1,1)*(Yd(0,0)*Yd(0,
+      1) + Yd(1,0)*Yd(1,1) + Yd(2,0)*Yd(2,1)) - 3*AdInput(1,0)*AdInput(1,1)*Yd(1,0
+      )*Yd(1,1)*(Yu(0,0)*Yu(0,1) + Yu(1,0)*Yu(1,1) + Yu(2,0)*Yu(2,1))) + TCC0(
+      msdInput(2),msqInput(0),msqInput(1))*(3*Sqr(Abs(MuInput))*Yd(2,0)*Yd(2,1)*(
+      Yd(0,0)*Yd(0,1) + Yd(1,0)*Yd(1,1) + Yd(2,0)*Yd(2,1)) - 3*AdInput(2,0)*
+      AdInput(2,1)*Yd(2,0)*Yd(2,1)*(Yu(0,0)*Yu(0,1) + Yu(1,0)*Yu(1,1) + Yu(2,0)*Yu
+      (2,1))) + TCC0(msdInput(2),msqInput(1),msqInput(0))*(3*Sqr(Abs(MuInput))*Yd(
+      2,0)*Yd(2,1)*(Yd(0,0)*Yd(0,1) + Yd(1,0)*Yd(1,1) + Yd(2,0)*Yd(2,1)) - 3*
+      AdInput(2,0)*AdInput(2,1)*Yd(2,0)*Yd(2,1)*(Yu(0,0)*Yu(0,1) + Yu(1,0)*Yu(1,1)
+      + Yu(2,0)*Yu(2,1))) + TCC0(msqInput(0),msqInput(1),msuInput(0))*(-3*AuInput(
+      0,0)*AuInput(0,1)*(Yd(0,0)*Yd(0,1) + Yd(1,0)*Yd(1,1) + Yd(2,0)*Yd(2,1))*Yu(0
+      ,0)*Yu(0,1) + 3*Sqr(Abs(MuInput))*Yu(0,0)*Yu(0,1)*(Yu(0,0)*Yu(0,1) + Yu(1,0)
+      *Yu(1,1) + Yu(2,0)*Yu(2,1))) + TCC0(msqInput(1),msqInput(0),msuInput(0))*(-3
+      *AuInput(0,0)*AuInput(0,1)*(Yd(0,0)*Yd(0,1) + Yd(1,0)*Yd(1,1) + Yd(2,0)*Yd(2
+      ,1))*Yu(0,0)*Yu(0,1) + 3*Sqr(Abs(MuInput))*Yu(0,0)*Yu(0,1)*(Yu(0,0)*Yu(0,1)
+      + Yu(1,0)*Yu(1,1) + Yu(2,0)*Yu(2,1))) + TCC0(msqInput(0),msqInput(1),
+      msuInput(1))*(-3*AuInput(1,0)*AuInput(1,1)*(Yd(0,0)*Yd(0,1) + Yd(1,0)*Yd(1,1
+      ) + Yd(2,0)*Yd(2,1))*Yu(1,0)*Yu(1,1) + 3*Sqr(Abs(MuInput))*Yu(1,0)*Yu(1,1)*(
+      Yu(0,0)*Yu(0,1) + Yu(1,0)*Yu(1,1) + Yu(2,0)*Yu(2,1))) + TCC0(msqInput(1),
+      msqInput(0),msuInput(1))*(-3*AuInput(1,0)*AuInput(1,1)*(Yd(0,0)*Yd(0,1) + Yd
+      (1,0)*Yd(1,1) + Yd(2,0)*Yd(2,1))*Yu(1,0)*Yu(1,1) + 3*Sqr(Abs(MuInput))*Yu(1,
+      0)*Yu(1,1)*(Yu(0,0)*Yu(0,1) + Yu(1,0)*Yu(1,1) + Yu(2,0)*Yu(2,1))) + TCC0(
+      msqInput(0),msqInput(1),msuInput(2))*(-3*AuInput(2,0)*AuInput(2,1)*(Yd(0,0)*
+      Yd(0,1) + Yd(1,0)*Yd(1,1) + Yd(2,0)*Yd(2,1))*Yu(2,0)*Yu(2,1) + 3*Sqr(Abs(
+      MuInput))*Yu(2,0)*Yu(2,1)*(Yu(0,0)*Yu(0,1) + Yu(1,0)*Yu(1,1) + Yu(2,0)*Yu(2,
+      1))) + TCC0(msqInput(1),msqInput(0),msuInput(2))*(-3*AuInput(2,0)*AuInput(2,
+      1)*(Yd(0,0)*Yd(0,1) + Yd(1,0)*Yd(1,1) + Yd(2,0)*Yd(2,1))*Yu(2,0)*Yu(2,1) + 3
+      *Sqr(Abs(MuInput))*Yu(2,0)*Yu(2,1)*(Yu(0,0)*Yu(0,1) + Yu(1,0)*Yu(1,1) + Yu(2
+      ,0)*Yu(2,1))) + 3*AuInput(2,0)*AuInput(2,2)*Sqr(Abs(MuInput))*TCD0(msqInput(
+      0),msqInput(2),msuInput(0),msuInput(2))*Yu(0,0)*Yu(0,2)*Yu(2,0)*Yu(2,2) + 3*
+      AuInput(0,0)*AuInput(0,2)*Sqr(Abs(MuInput))*TCD0(msqInput(0),msqInput(2),
+      msuInput(2),msuInput(0))*Yu(0,0)*Yu(0,2)*Yu(2,0)*Yu(2,2) + 3*AuInput(2,0)*
+      AuInput(2,2)*Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(0),msuInput(0),
+      msuInput(2))*Yu(0,0)*Yu(0,2)*Yu(2,0)*Yu(2,2) + 3*AuInput(0,0)*AuInput(0,2)*
+      Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(0),msuInput(2),msuInput(0))*Yu(0
+      ,0)*Yu(0,2)*Yu(2,0)*Yu(2,2) + 3*AuInput(2,0)*AuInput(2,2)*Sqr(Abs(MuInput))*
+      TCD0(msqInput(0),msqInput(2),msuInput(1),msuInput(2))*Yu(1,0)*Yu(1,2)*Yu(2,0
+      )*Yu(2,2) + 3*AuInput(1,0)*AuInput(1,2)*Sqr(Abs(MuInput))*TCD0(msqInput(0),
+      msqInput(2),msuInput(2),msuInput(1))*Yu(1,0)*Yu(1,2)*Yu(2,0)*Yu(2,2) + 3*
+      AuInput(2,0)*AuInput(2,2)*Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(0),
+      msuInput(1),msuInput(2))*Yu(1,0)*Yu(1,2)*Yu(2,0)*Yu(2,2) + 3*AuInput(1,0)*
+      AuInput(1,2)*Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(0),msuInput(2),
+      msuInput(1))*Yu(1,0)*Yu(1,2)*Yu(2,0)*Yu(2,2) + 3*AuInput(2,1)*AuInput(2,2)*
+      Sqr(Abs(MuInput))*TCD0(msqInput(1),msqInput(2),msuInput(0),msuInput(2))*Yu(0
+      ,1)*Yu(0,2)*Yu(2,1)*Yu(2,2) + 3*AuInput(0,1)*AuInput(0,2)*Sqr(Abs(MuInput))*
+      TCD0(msqInput(1),msqInput(2),msuInput(2),msuInput(0))*Yu(0,1)*Yu(0,2)*Yu(2,1
+      )*Yu(2,2) + 3*AuInput(2,1)*AuInput(2,2)*Sqr(Abs(MuInput))*TCD0(msqInput(2),
+      msqInput(1),msuInput(0),msuInput(2))*Yu(0,1)*Yu(0,2)*Yu(2,1)*Yu(2,2) + 3*
+      AuInput(0,1)*AuInput(0,2)*Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(1),
+      msuInput(2),msuInput(0))*Yu(0,1)*Yu(0,2)*Yu(2,1)*Yu(2,2) + 3*AuInput(2,1)*
+      AuInput(2,2)*Sqr(Abs(MuInput))*TCD0(msqInput(1),msqInput(2),msuInput(1),
+      msuInput(2))*Yu(1,1)*Yu(1,2)*Yu(2,1)*Yu(2,2) + 3*AuInput(1,1)*AuInput(1,2)*
+      Sqr(Abs(MuInput))*TCD0(msqInput(1),msqInput(2),msuInput(2),msuInput(1))*Yu(1
+      ,1)*Yu(1,2)*Yu(2,1)*Yu(2,2) + 3*AuInput(2,1)*AuInput(2,2)*Sqr(Abs(MuInput))*
+      TCD0(msqInput(2),msqInput(1),msuInput(1),msuInput(2))*Yu(1,1)*Yu(1,2)*Yu(2,1
+      )*Yu(2,2) + 3*AuInput(1,1)*AuInput(1,2)*Sqr(Abs(MuInput))*TCD0(msqInput(2),
+      msqInput(1),msuInput(2),msuInput(1))*Yu(1,1)*Yu(1,2)*Yu(2,1)*Yu(2,2) - 3*
+      TCD0(msdInput(0),msqInput(0),msqInput(2),msuInput(2))*(AdInput(0,0)*AuInput(
+      2,0)*Yd(0,0)*Yu(2,0) - Sqr(Abs(MuInput))*Yd(0,0)*Yu(2,0))*(AdInput(0,2)*
+      AuInput(2,2)*Yd(0,2)*Yu(2,2) - Sqr(Abs(MuInput))*Yd(0,2)*Yu(2,2)) - 3*TCD0(
+      msdInput(0),msqInput(2),msqInput(0),msuInput(2))*(AdInput(0,0)*AuInput(2,0)*
+      Yd(0,0)*Yu(2,0) - Sqr(Abs(MuInput))*Yd(0,0)*Yu(2,0))*(AdInput(0,2)*AuInput(2
+      ,2)*Yd(0,2)*Yu(2,2) - Sqr(Abs(MuInput))*Yd(0,2)*Yu(2,2)) - 3*TCD0(msdInput(0
+      ),msqInput(1),msqInput(2),msuInput(2))*(AdInput(0,1)*AuInput(2,1)*Yd(0,1)*Yu
+      (2,1) - Sqr(Abs(MuInput))*Yd(0,1)*Yu(2,1))*(AdInput(0,2)*AuInput(2,2)*Yd(0,2
+      )*Yu(2,2) - Sqr(Abs(MuInput))*Yd(0,2)*Yu(2,2)) - 3*TCD0(msdInput(0),msqInput
+      (2),msqInput(1),msuInput(2))*(AdInput(0,1)*AuInput(2,1)*Yd(0,1)*Yu(2,1) -
+      Sqr(Abs(MuInput))*Yd(0,1)*Yu(2,1))*(AdInput(0,2)*AuInput(2,2)*Yd(0,2)*Yu(2,2
+      ) - Sqr(Abs(MuInput))*Yd(0,2)*Yu(2,2)) - 3*TCD0(msdInput(1),msqInput(0),
+      msqInput(2),msuInput(2))*(AdInput(1,0)*AuInput(2,0)*Yd(1,0)*Yu(2,0) - Sqr(
+      Abs(MuInput))*Yd(1,0)*Yu(2,0))*(AdInput(1,2)*AuInput(2,2)*Yd(1,2)*Yu(2,2) -
+      Sqr(Abs(MuInput))*Yd(1,2)*Yu(2,2)) - 3*TCD0(msdInput(1),msqInput(2),msqInput
+      (0),msuInput(2))*(AdInput(1,0)*AuInput(2,0)*Yd(1,0)*Yu(2,0) - Sqr(Abs(
+      MuInput))*Yd(1,0)*Yu(2,0))*(AdInput(1,2)*AuInput(2,2)*Yd(1,2)*Yu(2,2) - Sqr(
+      Abs(MuInput))*Yd(1,2)*Yu(2,2)) - 3*TCD0(msdInput(1),msqInput(1),msqInput(2),
+      msuInput(2))*(AdInput(1,1)*AuInput(2,1)*Yd(1,1)*Yu(2,1) - Sqr(Abs(MuInput))*
+      Yd(1,1)*Yu(2,1))*(AdInput(1,2)*AuInput(2,2)*Yd(1,2)*Yu(2,2) - Sqr(Abs(
+      MuInput))*Yd(1,2)*Yu(2,2)) - 3*TCD0(msdInput(1),msqInput(2),msqInput(1),
+      msuInput(2))*(AdInput(1,1)*AuInput(2,1)*Yd(1,1)*Yu(2,1) - Sqr(Abs(MuInput))*
+      Yd(1,1)*Yu(2,1))*(AdInput(1,2)*AuInput(2,2)*Yd(1,2)*Yu(2,2) - Sqr(Abs(
+      MuInput))*Yd(1,2)*Yu(2,2)) - 3*TCD0(msdInput(2),msqInput(0),msqInput(2),
+      msuInput(2))*(AdInput(2,0)*AuInput(2,0)*Yd(2,0)*Yu(2,0) - Sqr(Abs(MuInput))*
+      Yd(2,0)*Yu(2,0))*(AdInput(2,2)*AuInput(2,2)*Yd(2,2)*Yu(2,2) - Sqr(Abs(
+      MuInput))*Yd(2,2)*Yu(2,2)) - 3*TCD0(msdInput(2),msqInput(2),msqInput(0),
+      msuInput(2))*(AdInput(2,0)*AuInput(2,0)*Yd(2,0)*Yu(2,0) - Sqr(Abs(MuInput))*
+      Yd(2,0)*Yu(2,0))*(AdInput(2,2)*AuInput(2,2)*Yd(2,2)*Yu(2,2) - Sqr(Abs(
+      MuInput))*Yd(2,2)*Yu(2,2)) - 3*TCD0(msdInput(2),msqInput(1),msqInput(2),
+      msuInput(2))*(AdInput(2,1)*AuInput(2,1)*Yd(2,1)*Yu(2,1) - Sqr(Abs(MuInput))*
+      Yd(2,1)*Yu(2,1))*(AdInput(2,2)*AuInput(2,2)*Yd(2,2)*Yu(2,2) - Sqr(Abs(
+      MuInput))*Yd(2,2)*Yu(2,2)) - 3*TCD0(msdInput(2),msqInput(2),msqInput(1),
+      msuInput(2))*(AdInput(2,1)*AuInput(2,1)*Yd(2,1)*Yu(2,1) - Sqr(Abs(MuInput))*
+      Yd(2,1)*Yu(2,1))*(AdInput(2,2)*AuInput(2,2)*Yd(2,2)*Yu(2,2) - Sqr(Abs(
+      MuInput))*Yd(2,2)*Yu(2,2)) - 3*TCB0(msqInput(0),msqInput(2),SCALE)*(Yd(0,0)*
+      Yd(0,2) + Yd(1,0)*Yd(1,2) + Yd(2,0)*Yd(2,2))*(Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1
+      ,2) + Yu(2,0)*Yu(2,2)) - 3*TCB0(msqInput(2),msqInput(0),SCALE)*(Yd(0,0)*Yd(0
+      ,2) + Yd(1,0)*Yd(1,2) + Yd(2,0)*Yd(2,2))*(Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1,2)
+      + Yu(2,0)*Yu(2,2)) - 3*TCB0(msqInput(1),msqInput(2),SCALE)*(Yd(0,1)*Yd(0,2)
+      + Yd(1,1)*Yd(1,2) + Yd(2,1)*Yd(2,2))*(Yu(0,1)*Yu(0,2) + Yu(1,1)*Yu(1,2) + Yu
+      (2,1)*Yu(2,2)) - 3*TCB0(msqInput(2),msqInput(1),SCALE)*(Yd(0,1)*Yd(0,2) + Yd
+      (1,1)*Yd(1,2) + Yd(2,1)*Yd(2,2))*(Yu(0,1)*Yu(0,2) + Yu(1,1)*Yu(1,2) + Yu(2,1
+      )*Yu(2,2)) + TCC0(msdInput(0),msqInput(0),msuInput(2))*(-6*AdInput(0,0)*
+      AuInput(2,0)*Yd(0,0)*Yu(2,0)*(Yd(0,0)*Yu(2,0) + Yd(0,1)*Yu(2,1) + Yd(0,2)*Yu
+      (2,2)) + 6*Sqr(Abs(MuInput))*Yd(0,0)*Yu(2,0)*(Yd(0,0)*Yu(2,0) + Yd(0,1)*Yu(2
+      ,1) + Yd(0,2)*Yu(2,2))) + TCC0(msdInput(0),msqInput(1),msuInput(2))*(-6*
+      AdInput(0,1)*AuInput(2,1)*Yd(0,1)*Yu(2,1)*(Yd(0,0)*Yu(2,0) + Yd(0,1)*Yu(2,1)
+      + Yd(0,2)*Yu(2,2)) + 6*Sqr(Abs(MuInput))*Yd(0,1)*Yu(2,1)*(Yd(0,0)*Yu(2,0) +
+      Yd(0,1)*Yu(2,1) + Yd(0,2)*Yu(2,2))) + TCC0(msdInput(0),msqInput(2),msuInput(
+      2))*(-6*AdInput(0,2)*AuInput(2,2)*Yd(0,2)*Yu(2,2)*(Yd(0,0)*Yu(2,0) + Yd(0,1)
+      *Yu(2,1) + Yd(0,2)*Yu(2,2)) + 6*Sqr(Abs(MuInput))*Yd(0,2)*Yu(2,2)*(Yd(0,0)*
+      Yu(2,0) + Yd(0,1)*Yu(2,1) + Yd(0,2)*Yu(2,2))) + TCC0(msdInput(1),msqInput(0)
+      ,msuInput(2))*(-6*AdInput(1,0)*AuInput(2,0)*Yd(1,0)*Yu(2,0)*(Yd(1,0)*Yu(2,0)
+      + Yd(1,1)*Yu(2,1) + Yd(1,2)*Yu(2,2)) + 6*Sqr(Abs(MuInput))*Yd(1,0)*Yu(2,0)*(
+      Yd(1,0)*Yu(2,0) + Yd(1,1)*Yu(2,1) + Yd(1,2)*Yu(2,2))) + TCC0(msdInput(1),
+      msqInput(1),msuInput(2))*(-6*AdInput(1,1)*AuInput(2,1)*Yd(1,1)*Yu(2,1)*(Yd(1
+      ,0)*Yu(2,0) + Yd(1,1)*Yu(2,1) + Yd(1,2)*Yu(2,2)) + 6*Sqr(Abs(MuInput))*Yd(1,
+      1)*Yu(2,1)*(Yd(1,0)*Yu(2,0) + Yd(1,1)*Yu(2,1) + Yd(1,2)*Yu(2,2))) + TCC0(
+      msdInput(1),msqInput(2),msuInput(2))*(-6*AdInput(1,2)*AuInput(2,2)*Yd(1,2)*
+      Yu(2,2)*(Yd(1,0)*Yu(2,0) + Yd(1,1)*Yu(2,1) + Yd(1,2)*Yu(2,2)) + 6*Sqr(Abs(
+      MuInput))*Yd(1,2)*Yu(2,2)*(Yd(1,0)*Yu(2,0) + Yd(1,1)*Yu(2,1) + Yd(1,2)*Yu(2,
+      2))) + TCC0(msdInput(2),msqInput(0),msuInput(2))*(-6*AdInput(2,0)*AuInput(2,
+      0)*Yd(2,0)*Yu(2,0)*(Yd(2,0)*Yu(2,0) + Yd(2,1)*Yu(2,1) + Yd(2,2)*Yu(2,2)) + 6
+      *Sqr(Abs(MuInput))*Yd(2,0)*Yu(2,0)*(Yd(2,0)*Yu(2,0) + Yd(2,1)*Yu(2,1) + Yd(2
+      ,2)*Yu(2,2))) + TCC0(msdInput(2),msqInput(1),msuInput(2))*(-6*AdInput(2,1)*
+      AuInput(2,1)*Yd(2,1)*Yu(2,1)*(Yd(2,0)*Yu(2,0) + Yd(2,1)*Yu(2,1) + Yd(2,2)*Yu
+      (2,2)) + 6*Sqr(Abs(MuInput))*Yd(2,1)*Yu(2,1)*(Yd(2,0)*Yu(2,0) + Yd(2,1)*Yu(2
+      ,1) + Yd(2,2)*Yu(2,2))) + TCC0(msdInput(2),msqInput(2),msuInput(2))*(-6*
+      AdInput(2,2)*AuInput(2,2)*Yd(2,2)*Yu(2,2)*(Yd(2,0)*Yu(2,0) + Yd(2,1)*Yu(2,1)
+      + Yd(2,2)*Yu(2,2)) + 6*Sqr(Abs(MuInput))*Yd(2,2)*Yu(2,2)*(Yd(2,0)*Yu(2,0) +
+      Yd(2,1)*Yu(2,1) + Yd(2,2)*Yu(2,2))) + TCC0(msdInput(0),msqInput(0),msqInput(
+      2))*(3*Sqr(Abs(MuInput))*Yd(0,0)*Yd(0,2)*(Yd(0,0)*Yd(0,2) + Yd(1,0)*Yd(1,2)
+      + Yd(2,0)*Yd(2,2)) - 3*AdInput(0,0)*AdInput(0,2)*Yd(0,0)*Yd(0,2)*(Yu(0,0)*Yu
+      (0,2) + Yu(1,0)*Yu(1,2) + Yu(2,0)*Yu(2,2))) + TCC0(msdInput(0),msqInput(2),
+      msqInput(0))*(3*Sqr(Abs(MuInput))*Yd(0,0)*Yd(0,2)*(Yd(0,0)*Yd(0,2) + Yd(1,0)
+      *Yd(1,2) + Yd(2,0)*Yd(2,2)) - 3*AdInput(0,0)*AdInput(0,2)*Yd(0,0)*Yd(0,2)*(
+      Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1,2) + Yu(2,0)*Yu(2,2))) + TCC0(msdInput(1),
+      msqInput(0),msqInput(2))*(3*Sqr(Abs(MuInput))*Yd(1,0)*Yd(1,2)*(Yd(0,0)*Yd(0,
+      2) + Yd(1,0)*Yd(1,2) + Yd(2,0)*Yd(2,2)) - 3*AdInput(1,0)*AdInput(1,2)*Yd(1,0
+      )*Yd(1,2)*(Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1,2) + Yu(2,0)*Yu(2,2))) + TCC0(
+      msdInput(1),msqInput(2),msqInput(0))*(3*Sqr(Abs(MuInput))*Yd(1,0)*Yd(1,2)*(
+      Yd(0,0)*Yd(0,2) + Yd(1,0)*Yd(1,2) + Yd(2,0)*Yd(2,2)) - 3*AdInput(1,0)*
+      AdInput(1,2)*Yd(1,0)*Yd(1,2)*(Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1,2) + Yu(2,0)*Yu
+      (2,2))) + TCC0(msdInput(2),msqInput(0),msqInput(2))*(3*Sqr(Abs(MuInput))*Yd(
+      2,0)*Yd(2,2)*(Yd(0,0)*Yd(0,2) + Yd(1,0)*Yd(1,2) + Yd(2,0)*Yd(2,2)) - 3*
+      AdInput(2,0)*AdInput(2,2)*Yd(2,0)*Yd(2,2)*(Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1,2)
+      + Yu(2,0)*Yu(2,2))) + TCC0(msdInput(2),msqInput(2),msqInput(0))*(3*Sqr(Abs(
+      MuInput))*Yd(2,0)*Yd(2,2)*(Yd(0,0)*Yd(0,2) + Yd(1,0)*Yd(1,2) + Yd(2,0)*Yd(2,
+      2)) - 3*AdInput(2,0)*AdInput(2,2)*Yd(2,0)*Yd(2,2)*(Yu(0,0)*Yu(0,2) + Yu(1,0)
+      *Yu(1,2) + Yu(2,0)*Yu(2,2))) + TCC0(msqInput(0),msqInput(2),msuInput(0))*(-3
+      *AuInput(0,0)*AuInput(0,2)*(Yd(0,0)*Yd(0,2) + Yd(1,0)*Yd(1,2) + Yd(2,0)*Yd(2
+      ,2))*Yu(0,0)*Yu(0,2) + 3*Sqr(Abs(MuInput))*Yu(0,0)*Yu(0,2)*(Yu(0,0)*Yu(0,2)
+      + Yu(1,0)*Yu(1,2) + Yu(2,0)*Yu(2,2))) + TCC0(msqInput(2),msqInput(0),
+      msuInput(0))*(-3*AuInput(0,0)*AuInput(0,2)*(Yd(0,0)*Yd(0,2) + Yd(1,0)*Yd(1,2
+      ) + Yd(2,0)*Yd(2,2))*Yu(0,0)*Yu(0,2) + 3*Sqr(Abs(MuInput))*Yu(0,0)*Yu(0,2)*(
+      Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1,2) + Yu(2,0)*Yu(2,2))) + TCC0(msqInput(0),
+      msqInput(2),msuInput(1))*(-3*AuInput(1,0)*AuInput(1,2)*(Yd(0,0)*Yd(0,2) + Yd
+      (1,0)*Yd(1,2) + Yd(2,0)*Yd(2,2))*Yu(1,0)*Yu(1,2) + 3*Sqr(Abs(MuInput))*Yu(1,
+      0)*Yu(1,2)*(Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1,2) + Yu(2,0)*Yu(2,2))) + TCC0(
+      msqInput(2),msqInput(0),msuInput(1))*(-3*AuInput(1,0)*AuInput(1,2)*(Yd(0,0)*
+      Yd(0,2) + Yd(1,0)*Yd(1,2) + Yd(2,0)*Yd(2,2))*Yu(1,0)*Yu(1,2) + 3*Sqr(Abs(
+      MuInput))*Yu(1,0)*Yu(1,2)*(Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1,2) + Yu(2,0)*Yu(2,
+      2))) + TCC0(msqInput(0),msqInput(2),msuInput(2))*(-3*AuInput(2,0)*AuInput(2,
+      2)*(Yd(0,0)*Yd(0,2) + Yd(1,0)*Yd(1,2) + Yd(2,0)*Yd(2,2))*Yu(2,0)*Yu(2,2) + 3
+      *Sqr(Abs(MuInput))*Yu(2,0)*Yu(2,2)*(Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1,2) + Yu(2
+      ,0)*Yu(2,2))) + TCC0(msqInput(2),msqInput(0),msuInput(2))*(-3*AuInput(2,0)*
+      AuInput(2,2)*(Yd(0,0)*Yd(0,2) + Yd(1,0)*Yd(1,2) + Yd(2,0)*Yd(2,2))*Yu(2,0)*
+      Yu(2,2) + 3*Sqr(Abs(MuInput))*Yu(2,0)*Yu(2,2)*(Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(
+      1,2) + Yu(2,0)*Yu(2,2))) + TCC0(msdInput(0),msqInput(1),msqInput(2))*(3*Sqr(
+      Abs(MuInput))*Yd(0,1)*Yd(0,2)*(Yd(0,1)*Yd(0,2) + Yd(1,1)*Yd(1,2) + Yd(2,1)*
+      Yd(2,2)) - 3*AdInput(0,1)*AdInput(0,2)*Yd(0,1)*Yd(0,2)*(Yu(0,1)*Yu(0,2) + Yu
+      (1,1)*Yu(1,2) + Yu(2,1)*Yu(2,2))) + TCC0(msdInput(0),msqInput(2),msqInput(1)
+      )*(3*Sqr(Abs(MuInput))*Yd(0,1)*Yd(0,2)*(Yd(0,1)*Yd(0,2) + Yd(1,1)*Yd(1,2) +
+      Yd(2,1)*Yd(2,2)) - 3*AdInput(0,1)*AdInput(0,2)*Yd(0,1)*Yd(0,2)*(Yu(0,1)*Yu(0
+      ,2) + Yu(1,1)*Yu(1,2) + Yu(2,1)*Yu(2,2))) + TCC0(msdInput(1),msqInput(1),
+      msqInput(2))*(3*Sqr(Abs(MuInput))*Yd(1,1)*Yd(1,2)*(Yd(0,1)*Yd(0,2) + Yd(1,1)
+      *Yd(1,2) + Yd(2,1)*Yd(2,2)) - 3*AdInput(1,1)*AdInput(1,2)*Yd(1,1)*Yd(1,2)*(
+      Yu(0,1)*Yu(0,2) + Yu(1,1)*Yu(1,2) + Yu(2,1)*Yu(2,2))) + TCC0(msdInput(1),
+      msqInput(2),msqInput(1))*(3*Sqr(Abs(MuInput))*Yd(1,1)*Yd(1,2)*(Yd(0,1)*Yd(0,
+      2) + Yd(1,1)*Yd(1,2) + Yd(2,1)*Yd(2,2)) - 3*AdInput(1,1)*AdInput(1,2)*Yd(1,1
+      )*Yd(1,2)*(Yu(0,1)*Yu(0,2) + Yu(1,1)*Yu(1,2) + Yu(2,1)*Yu(2,2))) + TCC0(
+      msdInput(2),msqInput(1),msqInput(2))*(3*Sqr(Abs(MuInput))*Yd(2,1)*Yd(2,2)*(
+      Yd(0,1)*Yd(0,2) + Yd(1,1)*Yd(1,2) + Yd(2,1)*Yd(2,2)) - 3*AdInput(2,1)*
+      AdInput(2,2)*Yd(2,1)*Yd(2,2)*(Yu(0,1)*Yu(0,2) + Yu(1,1)*Yu(1,2) + Yu(2,1)*Yu
+      (2,2))) + TCC0(msdInput(2),msqInput(2),msqInput(1))*(3*Sqr(Abs(MuInput))*Yd(
+      2,1)*Yd(2,2)*(Yd(0,1)*Yd(0,2) + Yd(1,1)*Yd(1,2) + Yd(2,1)*Yd(2,2)) - 3*
+      AdInput(2,1)*AdInput(2,2)*Yd(2,1)*Yd(2,2)*(Yu(0,1)*Yu(0,2) + Yu(1,1)*Yu(1,2)
+      + Yu(2,1)*Yu(2,2))) + TCC0(msqInput(1),msqInput(2),msuInput(0))*(-3*AuInput(
+      0,1)*AuInput(0,2)*(Yd(0,1)*Yd(0,2) + Yd(1,1)*Yd(1,2) + Yd(2,1)*Yd(2,2))*Yu(0
+      ,1)*Yu(0,2) + 3*Sqr(Abs(MuInput))*Yu(0,1)*Yu(0,2)*(Yu(0,1)*Yu(0,2) + Yu(1,1)
+      *Yu(1,2) + Yu(2,1)*Yu(2,2))) + TCC0(msqInput(2),msqInput(1),msuInput(0))*(-3
+      *AuInput(0,1)*AuInput(0,2)*(Yd(0,1)*Yd(0,2) + Yd(1,1)*Yd(1,2) + Yd(2,1)*Yd(2
+      ,2))*Yu(0,1)*Yu(0,2) + 3*Sqr(Abs(MuInput))*Yu(0,1)*Yu(0,2)*(Yu(0,1)*Yu(0,2)
+      + Yu(1,1)*Yu(1,2) + Yu(2,1)*Yu(2,2))) + TCC0(msqInput(1),msqInput(2),
+      msuInput(1))*(-3*AuInput(1,1)*AuInput(1,2)*(Yd(0,1)*Yd(0,2) + Yd(1,1)*Yd(1,2
+      ) + Yd(2,1)*Yd(2,2))*Yu(1,1)*Yu(1,2) + 3*Sqr(Abs(MuInput))*Yu(1,1)*Yu(1,2)*(
+      Yu(0,1)*Yu(0,2) + Yu(1,1)*Yu(1,2) + Yu(2,1)*Yu(2,2))) + TCC0(msqInput(2),
+      msqInput(1),msuInput(1))*(-3*AuInput(1,1)*AuInput(1,2)*(Yd(0,1)*Yd(0,2) + Yd
+      (1,1)*Yd(1,2) + Yd(2,1)*Yd(2,2))*Yu(1,1)*Yu(1,2) + 3*Sqr(Abs(MuInput))*Yu(1,
+      1)*Yu(1,2)*(Yu(0,1)*Yu(0,2) + Yu(1,1)*Yu(1,2) + Yu(2,1)*Yu(2,2))) + TCC0(
+      msqInput(1),msqInput(2),msuInput(2))*(-3*AuInput(2,1)*AuInput(2,2)*(Yd(0,1)*
+      Yd(0,2) + Yd(1,1)*Yd(1,2) + Yd(2,1)*Yd(2,2))*Yu(2,1)*Yu(2,2) + 3*Sqr(Abs(
+      MuInput))*Yu(2,1)*Yu(2,2)*(Yu(0,1)*Yu(0,2) + Yu(1,1)*Yu(1,2) + Yu(2,1)*Yu(2,
+      2))) + TCC0(msqInput(2),msqInput(1),msuInput(2))*(-3*AuInput(2,1)*AuInput(2,
+      2)*(Yd(0,1)*Yd(0,2) + Yd(1,1)*Yd(1,2) + Yd(2,1)*Yd(2,2))*Yu(2,1)*Yu(2,2) + 3
+      *Sqr(Abs(MuInput))*Yu(2,1)*Yu(2,2)*(Yu(0,1)*Yu(0,2) + Yu(1,1)*Yu(1,2) + Yu(2
+      ,1)*Yu(2,2)))))));
+   MODEL->set_Lambda5(Re(0.006332573977646111*UnitStep(-1 + LambdaLoopOrder)*(0.36
+      *Quad(g1)*Sqr(M1Input)*Sqr(MuInput)*TCD0(M1Input,M1Input,Abs(MuInput),Abs(
+      MuInput)) + 1.2*M1Input*M2Input*Sqr(g1)*Sqr(g2)*Sqr(MuInput)*TCD0(M1Input,
+      M2Input,Abs(MuInput),Abs(MuInput)) + 3*Quad(g2)*Sqr(M2Input)*Sqr(MuInput)*
+      TCD0(M2Input,M2Input,Abs(MuInput),Abs(MuInput)) - 3*Quad(Yd(0,0))*Sqr(
+      MuInput)*Sqr(AdInput(0,0))*TCD0(msdInput(0),msdInput(0),msqInput(0),msqInput
+      (0)) - 3*AdInput(0,0)*AdInput(0,1)*Sqr(MuInput)*Sqr(Yd(0,0))*Sqr(Yd(0,1))*
+      TCD0(msdInput(0),msdInput(0),msqInput(0),msqInput(1)) - 3*AdInput(0,0)*
+      AdInput(0,2)*Sqr(MuInput)*Sqr(Yd(0,0))*Sqr(Yd(0,2))*TCD0(msdInput(0),
+      msdInput(0),msqInput(0),msqInput(2)) - 3*AdInput(0,0)*AdInput(0,1)*Sqr(
+      MuInput)*Sqr(Yd(0,0))*Sqr(Yd(0,1))*TCD0(msdInput(0),msdInput(0),msqInput(1),
+      msqInput(0)) - 3*Quad(Yd(0,1))*Sqr(MuInput)*Sqr(AdInput(0,1))*TCD0(msdInput(
+      0),msdInput(0),msqInput(1),msqInput(1)) - 3*AdInput(0,1)*AdInput(0,2)*Sqr(
+      MuInput)*Sqr(Yd(0,1))*Sqr(Yd(0,2))*TCD0(msdInput(0),msdInput(0),msqInput(1),
+      msqInput(2)) - 3*AdInput(0,0)*AdInput(0,2)*Sqr(MuInput)*Sqr(Yd(0,0))*Sqr(Yd(
+      0,2))*TCD0(msdInput(0),msdInput(0),msqInput(2),msqInput(0)) - 3*AdInput(0,1)
+      *AdInput(0,2)*Sqr(MuInput)*Sqr(Yd(0,1))*Sqr(Yd(0,2))*TCD0(msdInput(0),
+      msdInput(0),msqInput(2),msqInput(1)) - 3*Quad(Yd(0,2))*Sqr(MuInput)*Sqr(
+      AdInput(0,2))*TCD0(msdInput(0),msdInput(0),msqInput(2),msqInput(2)) - 3*
+      AdInput(0,0)*AdInput(1,0)*Sqr(MuInput)*Sqr(Yd(0,0))*Sqr(Yd(1,0))*TCD0(
+      msdInput(0),msdInput(1),msqInput(0),msqInput(0)) - 3*AdInput(0,1)*AdInput(1,
+      1)*Sqr(MuInput)*Sqr(Yd(0,1))*Sqr(Yd(1,1))*TCD0(msdInput(0),msdInput(1),
+      msqInput(1),msqInput(1)) - 3*AdInput(0,2)*AdInput(1,2)*Sqr(MuInput)*Sqr(Yd(0
+      ,2))*Sqr(Yd(1,2))*TCD0(msdInput(0),msdInput(1),msqInput(2),msqInput(2)) - 3*
+      AdInput(0,0)*AdInput(2,0)*Sqr(MuInput)*Sqr(Yd(0,0))*Sqr(Yd(2,0))*TCD0(
+      msdInput(0),msdInput(2),msqInput(0),msqInput(0)) - 3*AdInput(0,1)*AdInput(2,
+      1)*Sqr(MuInput)*Sqr(Yd(0,1))*Sqr(Yd(2,1))*TCD0(msdInput(0),msdInput(2),
+      msqInput(1),msqInput(1)) - 3*AdInput(0,2)*AdInput(2,2)*Sqr(MuInput)*Sqr(Yd(0
+      ,2))*Sqr(Yd(2,2))*TCD0(msdInput(0),msdInput(2),msqInput(2),msqInput(2)) - 3*
+      AdInput(0,0)*AdInput(1,0)*Sqr(MuInput)*Sqr(Yd(0,0))*Sqr(Yd(1,0))*TCD0(
+      msdInput(1),msdInput(0),msqInput(0),msqInput(0)) - 3*AdInput(0,1)*AdInput(1,
+      1)*Sqr(MuInput)*Sqr(Yd(0,1))*Sqr(Yd(1,1))*TCD0(msdInput(1),msdInput(0),
+      msqInput(1),msqInput(1)) - 3*AdInput(0,2)*AdInput(1,2)*Sqr(MuInput)*Sqr(Yd(0
+      ,2))*Sqr(Yd(1,2))*TCD0(msdInput(1),msdInput(0),msqInput(2),msqInput(2)) - 3*
+      Quad(Yd(1,0))*Sqr(MuInput)*Sqr(AdInput(1,0))*TCD0(msdInput(1),msdInput(1),
+      msqInput(0),msqInput(0)) - 3*AdInput(1,0)*AdInput(1,1)*Sqr(MuInput)*Sqr(Yd(1
+      ,0))*Sqr(Yd(1,1))*TCD0(msdInput(1),msdInput(1),msqInput(0),msqInput(1)) - 3*
+      AdInput(1,0)*AdInput(1,2)*Sqr(MuInput)*Sqr(Yd(1,0))*Sqr(Yd(1,2))*TCD0(
+      msdInput(1),msdInput(1),msqInput(0),msqInput(2)) - 3*AdInput(1,0)*AdInput(1,
+      1)*Sqr(MuInput)*Sqr(Yd(1,0))*Sqr(Yd(1,1))*TCD0(msdInput(1),msdInput(1),
+      msqInput(1),msqInput(0)) - 3*Quad(Yd(1,1))*Sqr(MuInput)*Sqr(AdInput(1,1))*
+      TCD0(msdInput(1),msdInput(1),msqInput(1),msqInput(1)) - 3*AdInput(1,1)*
+      AdInput(1,2)*Sqr(MuInput)*Sqr(Yd(1,1))*Sqr(Yd(1,2))*TCD0(msdInput(1),
+      msdInput(1),msqInput(1),msqInput(2)) - 3*AdInput(1,0)*AdInput(1,2)*Sqr(
+      MuInput)*Sqr(Yd(1,0))*Sqr(Yd(1,2))*TCD0(msdInput(1),msdInput(1),msqInput(2),
+      msqInput(0)) - 3*AdInput(1,1)*AdInput(1,2)*Sqr(MuInput)*Sqr(Yd(1,1))*Sqr(Yd(
+      1,2))*TCD0(msdInput(1),msdInput(1),msqInput(2),msqInput(1)) - 3*Quad(Yd(1,2)
+      )*Sqr(MuInput)*Sqr(AdInput(1,2))*TCD0(msdInput(1),msdInput(1),msqInput(2),
+      msqInput(2)) - 3*AdInput(1,0)*AdInput(2,0)*Sqr(MuInput)*Sqr(Yd(1,0))*Sqr(Yd(
+      2,0))*TCD0(msdInput(1),msdInput(2),msqInput(0),msqInput(0)) - 3*AdInput(1,1)
+      *AdInput(2,1)*Sqr(MuInput)*Sqr(Yd(1,1))*Sqr(Yd(2,1))*TCD0(msdInput(1),
+      msdInput(2),msqInput(1),msqInput(1)) - 3*AdInput(1,2)*AdInput(2,2)*Sqr(
+      MuInput)*Sqr(Yd(1,2))*Sqr(Yd(2,2))*TCD0(msdInput(1),msdInput(2),msqInput(2),
+      msqInput(2)) - 3*AdInput(0,0)*AdInput(2,0)*Sqr(MuInput)*Sqr(Yd(0,0))*Sqr(Yd(
+      2,0))*TCD0(msdInput(2),msdInput(0),msqInput(0),msqInput(0)) - 3*AdInput(0,1)
+      *AdInput(2,1)*Sqr(MuInput)*Sqr(Yd(0,1))*Sqr(Yd(2,1))*TCD0(msdInput(2),
+      msdInput(0),msqInput(1),msqInput(1)) - 3*AdInput(0,2)*AdInput(2,2)*Sqr(
+      MuInput)*Sqr(Yd(0,2))*Sqr(Yd(2,2))*TCD0(msdInput(2),msdInput(0),msqInput(2),
+      msqInput(2)) - 3*AdInput(1,0)*AdInput(2,0)*Sqr(MuInput)*Sqr(Yd(1,0))*Sqr(Yd(
+      2,0))*TCD0(msdInput(2),msdInput(1),msqInput(0),msqInput(0)) - 3*AdInput(1,1)
+      *AdInput(2,1)*Sqr(MuInput)*Sqr(Yd(1,1))*Sqr(Yd(2,1))*TCD0(msdInput(2),
+      msdInput(1),msqInput(1),msqInput(1)) - 3*AdInput(1,2)*AdInput(2,2)*Sqr(
+      MuInput)*Sqr(Yd(1,2))*Sqr(Yd(2,2))*TCD0(msdInput(2),msdInput(1),msqInput(2),
+      msqInput(2)) - 3*Quad(Yd(2,0))*Sqr(MuInput)*Sqr(AdInput(2,0))*TCD0(msdInput(
+      2),msdInput(2),msqInput(0),msqInput(0)) - 3*AdInput(2,0)*AdInput(2,1)*Sqr(
+      MuInput)*Sqr(Yd(2,0))*Sqr(Yd(2,1))*TCD0(msdInput(2),msdInput(2),msqInput(0),
+      msqInput(1)) - 3*AdInput(2,0)*AdInput(2,2)*Sqr(MuInput)*Sqr(Yd(2,0))*Sqr(Yd(
+      2,2))*TCD0(msdInput(2),msdInput(2),msqInput(0),msqInput(2)) - 3*AdInput(2,0)
+      *AdInput(2,1)*Sqr(MuInput)*Sqr(Yd(2,0))*Sqr(Yd(2,1))*TCD0(msdInput(2),
+      msdInput(2),msqInput(1),msqInput(0)) - 3*Quad(Yd(2,1))*Sqr(MuInput)*Sqr(
+      AdInput(2,1))*TCD0(msdInput(2),msdInput(2),msqInput(1),msqInput(1)) - 3*
+      AdInput(2,1)*AdInput(2,2)*Sqr(MuInput)*Sqr(Yd(2,1))*Sqr(Yd(2,2))*TCD0(
+      msdInput(2),msdInput(2),msqInput(1),msqInput(2)) - 3*AdInput(2,0)*AdInput(2,
+      2)*Sqr(MuInput)*Sqr(Yd(2,0))*Sqr(Yd(2,2))*TCD0(msdInput(2),msdInput(2),
+      msqInput(2),msqInput(0)) - 3*AdInput(2,1)*AdInput(2,2)*Sqr(MuInput)*Sqr(Yd(2
+      ,1))*Sqr(Yd(2,2))*TCD0(msdInput(2),msdInput(2),msqInput(2),msqInput(1)) - 3*
+      Quad(Yd(2,2))*Sqr(MuInput)*Sqr(AdInput(2,2))*TCD0(msdInput(2),msdInput(2),
+      msqInput(2),msqInput(2)) - Quad(Ye(0,0))*Sqr(MuInput)*Sqr(AeInput(0,0))*TCD0
+      (mseInput(0),mseInput(0),mslInput(0),mslInput(0)) - AeInput(0,0)*AeInput(0,1
+      )*Sqr(MuInput)*Sqr(Ye(0,0))*Sqr(Ye(0,1))*TCD0(mseInput(0),mseInput(0),
+      mslInput(0),mslInput(1)) - AeInput(0,0)*AeInput(0,2)*Sqr(MuInput)*Sqr(Ye(0,0
+      ))*Sqr(Ye(0,2))*TCD0(mseInput(0),mseInput(0),mslInput(0),mslInput(2)) -
+      AeInput(0,0)*AeInput(0,1)*Sqr(MuInput)*Sqr(Ye(0,0))*Sqr(Ye(0,1))*TCD0(
+      mseInput(0),mseInput(0),mslInput(1),mslInput(0)) - Quad(Ye(0,1))*Sqr(MuInput
+      )*Sqr(AeInput(0,1))*TCD0(mseInput(0),mseInput(0),mslInput(1),mslInput(1)) -
+      AeInput(0,1)*AeInput(0,2)*Sqr(MuInput)*Sqr(Ye(0,1))*Sqr(Ye(0,2))*TCD0(
+      mseInput(0),mseInput(0),mslInput(1),mslInput(2)) - AeInput(0,0)*AeInput(0,2)
+      *Sqr(MuInput)*Sqr(Ye(0,0))*Sqr(Ye(0,2))*TCD0(mseInput(0),mseInput(0),
+      mslInput(2),mslInput(0)) - AeInput(0,1)*AeInput(0,2)*Sqr(MuInput)*Sqr(Ye(0,1
+      ))*Sqr(Ye(0,2))*TCD0(mseInput(0),mseInput(0),mslInput(2),mslInput(1)) - Quad
+      (Ye(0,2))*Sqr(MuInput)*Sqr(AeInput(0,2))*TCD0(mseInput(0),mseInput(0),
+      mslInput(2),mslInput(2)) - AeInput(0,0)*AeInput(1,0)*Sqr(MuInput)*Sqr(Ye(0,0
+      ))*Sqr(Ye(1,0))*TCD0(mseInput(0),mseInput(1),mslInput(0),mslInput(0)) -
+      AeInput(0,1)*AeInput(1,1)*Sqr(MuInput)*Sqr(Ye(0,1))*Sqr(Ye(1,1))*TCD0(
+      mseInput(0),mseInput(1),mslInput(1),mslInput(1)) - AeInput(0,2)*AeInput(1,2)
+      *Sqr(MuInput)*Sqr(Ye(0,2))*Sqr(Ye(1,2))*TCD0(mseInput(0),mseInput(1),
+      mslInput(2),mslInput(2)) - AeInput(0,0)*AeInput(2,0)*Sqr(MuInput)*Sqr(Ye(0,0
+      ))*Sqr(Ye(2,0))*TCD0(mseInput(0),mseInput(2),mslInput(0),mslInput(0)) -
+      AeInput(0,1)*AeInput(2,1)*Sqr(MuInput)*Sqr(Ye(0,1))*Sqr(Ye(2,1))*TCD0(
+      mseInput(0),mseInput(2),mslInput(1),mslInput(1)) - AeInput(0,2)*AeInput(2,2)
+      *Sqr(MuInput)*Sqr(Ye(0,2))*Sqr(Ye(2,2))*TCD0(mseInput(0),mseInput(2),
+      mslInput(2),mslInput(2)) - AeInput(0,0)*AeInput(1,0)*Sqr(MuInput)*Sqr(Ye(0,0
+      ))*Sqr(Ye(1,0))*TCD0(mseInput(1),mseInput(0),mslInput(0),mslInput(0)) -
+      AeInput(0,1)*AeInput(1,1)*Sqr(MuInput)*Sqr(Ye(0,1))*Sqr(Ye(1,1))*TCD0(
+      mseInput(1),mseInput(0),mslInput(1),mslInput(1)) - AeInput(0,2)*AeInput(1,2)
+      *Sqr(MuInput)*Sqr(Ye(0,2))*Sqr(Ye(1,2))*TCD0(mseInput(1),mseInput(0),
+      mslInput(2),mslInput(2)) - Quad(Ye(1,0))*Sqr(MuInput)*Sqr(AeInput(1,0))*TCD0
+      (mseInput(1),mseInput(1),mslInput(0),mslInput(0)) - AeInput(1,0)*AeInput(1,1
+      )*Sqr(MuInput)*Sqr(Ye(1,0))*Sqr(Ye(1,1))*TCD0(mseInput(1),mseInput(1),
+      mslInput(0),mslInput(1)) - AeInput(1,0)*AeInput(1,2)*Sqr(MuInput)*Sqr(Ye(1,0
+      ))*Sqr(Ye(1,2))*TCD0(mseInput(1),mseInput(1),mslInput(0),mslInput(2)) -
+      AeInput(1,0)*AeInput(1,1)*Sqr(MuInput)*Sqr(Ye(1,0))*Sqr(Ye(1,1))*TCD0(
+      mseInput(1),mseInput(1),mslInput(1),mslInput(0)) - Quad(Ye(1,1))*Sqr(MuInput
+      )*Sqr(AeInput(1,1))*TCD0(mseInput(1),mseInput(1),mslInput(1),mslInput(1)) -
+      AeInput(1,1)*AeInput(1,2)*Sqr(MuInput)*Sqr(Ye(1,1))*Sqr(Ye(1,2))*TCD0(
+      mseInput(1),mseInput(1),mslInput(1),mslInput(2)) - AeInput(1,0)*AeInput(1,2)
+      *Sqr(MuInput)*Sqr(Ye(1,0))*Sqr(Ye(1,2))*TCD0(mseInput(1),mseInput(1),
+      mslInput(2),mslInput(0)) - AeInput(1,1)*AeInput(1,2)*Sqr(MuInput)*Sqr(Ye(1,1
+      ))*Sqr(Ye(1,2))*TCD0(mseInput(1),mseInput(1),mslInput(2),mslInput(1)) - Quad
+      (Ye(1,2))*Sqr(MuInput)*Sqr(AeInput(1,2))*TCD0(mseInput(1),mseInput(1),
+      mslInput(2),mslInput(2)) - AeInput(1,0)*AeInput(2,0)*Sqr(MuInput)*Sqr(Ye(1,0
+      ))*Sqr(Ye(2,0))*TCD0(mseInput(1),mseInput(2),mslInput(0),mslInput(0)) -
+      AeInput(1,1)*AeInput(2,1)*Sqr(MuInput)*Sqr(Ye(1,1))*Sqr(Ye(2,1))*TCD0(
+      mseInput(1),mseInput(2),mslInput(1),mslInput(1)) - AeInput(1,2)*AeInput(2,2)
+      *Sqr(MuInput)*Sqr(Ye(1,2))*Sqr(Ye(2,2))*TCD0(mseInput(1),mseInput(2),
+      mslInput(2),mslInput(2)) - AeInput(0,0)*AeInput(2,0)*Sqr(MuInput)*Sqr(Ye(0,0
+      ))*Sqr(Ye(2,0))*TCD0(mseInput(2),mseInput(0),mslInput(0),mslInput(0)) -
+      AeInput(0,1)*AeInput(2,1)*Sqr(MuInput)*Sqr(Ye(0,1))*Sqr(Ye(2,1))*TCD0(
+      mseInput(2),mseInput(0),mslInput(1),mslInput(1)) - AeInput(0,2)*AeInput(2,2)
+      *Sqr(MuInput)*Sqr(Ye(0,2))*Sqr(Ye(2,2))*TCD0(mseInput(2),mseInput(0),
+      mslInput(2),mslInput(2)) - AeInput(1,0)*AeInput(2,0)*Sqr(MuInput)*Sqr(Ye(1,0
+      ))*Sqr(Ye(2,0))*TCD0(mseInput(2),mseInput(1),mslInput(0),mslInput(0)) -
+      AeInput(1,1)*AeInput(2,1)*Sqr(MuInput)*Sqr(Ye(1,1))*Sqr(Ye(2,1))*TCD0(
+      mseInput(2),mseInput(1),mslInput(1),mslInput(1)) - AeInput(1,2)*AeInput(2,2)
+      *Sqr(MuInput)*Sqr(Ye(1,2))*Sqr(Ye(2,2))*TCD0(mseInput(2),mseInput(1),
+      mslInput(2),mslInput(2)) - Quad(Ye(2,0))*Sqr(MuInput)*Sqr(AeInput(2,0))*TCD0
+      (mseInput(2),mseInput(2),mslInput(0),mslInput(0)) - AeInput(2,0)*AeInput(2,1
+      )*Sqr(MuInput)*Sqr(Ye(2,0))*Sqr(Ye(2,1))*TCD0(mseInput(2),mseInput(2),
+      mslInput(0),mslInput(1)) - AeInput(2,0)*AeInput(2,2)*Sqr(MuInput)*Sqr(Ye(2,0
+      ))*Sqr(Ye(2,2))*TCD0(mseInput(2),mseInput(2),mslInput(0),mslInput(2)) -
+      AeInput(2,0)*AeInput(2,1)*Sqr(MuInput)*Sqr(Ye(2,0))*Sqr(Ye(2,1))*TCD0(
+      mseInput(2),mseInput(2),mslInput(1),mslInput(0)) - Quad(Ye(2,1))*Sqr(MuInput
+      )*Sqr(AeInput(2,1))*TCD0(mseInput(2),mseInput(2),mslInput(1),mslInput(1)) -
+      AeInput(2,1)*AeInput(2,2)*Sqr(MuInput)*Sqr(Ye(2,1))*Sqr(Ye(2,2))*TCD0(
+      mseInput(2),mseInput(2),mslInput(1),mslInput(2)) - AeInput(2,0)*AeInput(2,2)
+      *Sqr(MuInput)*Sqr(Ye(2,0))*Sqr(Ye(2,2))*TCD0(mseInput(2),mseInput(2),
+      mslInput(2),mslInput(0)) - AeInput(2,1)*AeInput(2,2)*Sqr(MuInput)*Sqr(Ye(2,1
+      ))*Sqr(Ye(2,2))*TCD0(mseInput(2),mseInput(2),mslInput(2),mslInput(1)) - Quad
+      (Ye(2,2))*Sqr(MuInput)*Sqr(AeInput(2,2))*TCD0(mseInput(2),mseInput(2),
+      mslInput(2),mslInput(2)) - 3*Quad(Yu(0,0))*Sqr(MuInput)*Sqr(AuInput(0,0))*
+      TCD0(msqInput(0),msqInput(0),msuInput(0),msuInput(0)) - 3*AuInput(0,0)*
+      AuInput(1,0)*Sqr(MuInput)*Sqr(Yu(0,0))*Sqr(Yu(1,0))*TCD0(msqInput(0),
+      msqInput(0),msuInput(0),msuInput(1)) - 3*AuInput(0,0)*AuInput(2,0)*Sqr(
+      MuInput)*Sqr(Yu(0,0))*Sqr(Yu(2,0))*TCD0(msqInput(0),msqInput(0),msuInput(0),
+      msuInput(2)) - 3*AuInput(0,0)*AuInput(1,0)*Sqr(MuInput)*Sqr(Yu(0,0))*Sqr(Yu(
+      1,0))*TCD0(msqInput(0),msqInput(0),msuInput(1),msuInput(0)) - 3*Quad(Yu(1,0)
+      )*Sqr(MuInput)*Sqr(AuInput(1,0))*TCD0(msqInput(0),msqInput(0),msuInput(1),
+      msuInput(1)) - 3*AuInput(1,0)*AuInput(2,0)*Sqr(MuInput)*Sqr(Yu(1,0))*Sqr(Yu(
+      2,0))*TCD0(msqInput(0),msqInput(0),msuInput(1),msuInput(2)) - 3*AuInput(0,0)
+      *AuInput(2,0)*Sqr(MuInput)*Sqr(Yu(0,0))*Sqr(Yu(2,0))*TCD0(msqInput(0),
+      msqInput(0),msuInput(2),msuInput(0)) - 3*AuInput(1,0)*AuInput(2,0)*Sqr(
+      MuInput)*Sqr(Yu(1,0))*Sqr(Yu(2,0))*TCD0(msqInput(0),msqInput(0),msuInput(2),
+      msuInput(1)) - 3*Quad(Yu(2,0))*Sqr(MuInput)*Sqr(AuInput(2,0))*TCD0(msqInput(
+      0),msqInput(0),msuInput(2),msuInput(2)) - 3*AuInput(0,0)*AuInput(0,1)*Sqr(
+      MuInput)*Sqr(Yu(0,0))*Sqr(Yu(0,1))*TCD0(msqInput(0),msqInput(1),msuInput(0),
+      msuInput(0)) - 3*AuInput(1,0)*AuInput(1,1)*Sqr(MuInput)*Sqr(Yu(1,0))*Sqr(Yu(
+      1,1))*TCD0(msqInput(0),msqInput(1),msuInput(1),msuInput(1)) - 3*AuInput(2,0)
+      *AuInput(2,1)*Sqr(MuInput)*Sqr(Yu(2,0))*Sqr(Yu(2,1))*TCD0(msqInput(0),
+      msqInput(1),msuInput(2),msuInput(2)) - 3*AuInput(0,0)*AuInput(0,2)*Sqr(
+      MuInput)*Sqr(Yu(0,0))*Sqr(Yu(0,2))*TCD0(msqInput(0),msqInput(2),msuInput(0),
+      msuInput(0)) - 3*AuInput(1,0)*AuInput(1,2)*Sqr(MuInput)*Sqr(Yu(1,0))*Sqr(Yu(
+      1,2))*TCD0(msqInput(0),msqInput(2),msuInput(1),msuInput(1)) - 3*AuInput(2,0)
+      *AuInput(2,2)*Sqr(MuInput)*Sqr(Yu(2,0))*Sqr(Yu(2,2))*TCD0(msqInput(0),
+      msqInput(2),msuInput(2),msuInput(2)) - 3*AuInput(0,0)*AuInput(0,1)*Sqr(
+      MuInput)*Sqr(Yu(0,0))*Sqr(Yu(0,1))*TCD0(msqInput(1),msqInput(0),msuInput(0),
+      msuInput(0)) - 3*AuInput(1,0)*AuInput(1,1)*Sqr(MuInput)*Sqr(Yu(1,0))*Sqr(Yu(
+      1,1))*TCD0(msqInput(1),msqInput(0),msuInput(1),msuInput(1)) - 3*AuInput(2,0)
+      *AuInput(2,1)*Sqr(MuInput)*Sqr(Yu(2,0))*Sqr(Yu(2,1))*TCD0(msqInput(1),
+      msqInput(0),msuInput(2),msuInput(2)) - 3*Quad(Yu(0,1))*Sqr(MuInput)*Sqr(
+      AuInput(0,1))*TCD0(msqInput(1),msqInput(1),msuInput(0),msuInput(0)) - 3*
+      AuInput(0,1)*AuInput(1,1)*Sqr(MuInput)*Sqr(Yu(0,1))*Sqr(Yu(1,1))*TCD0(
+      msqInput(1),msqInput(1),msuInput(0),msuInput(1)) - 3*AuInput(0,1)*AuInput(2,
+      1)*Sqr(MuInput)*Sqr(Yu(0,1))*Sqr(Yu(2,1))*TCD0(msqInput(1),msqInput(1),
+      msuInput(0),msuInput(2)) - 3*AuInput(0,1)*AuInput(1,1)*Sqr(MuInput)*Sqr(Yu(0
+      ,1))*Sqr(Yu(1,1))*TCD0(msqInput(1),msqInput(1),msuInput(1),msuInput(0)) - 3*
+      Quad(Yu(1,1))*Sqr(MuInput)*Sqr(AuInput(1,1))*TCD0(msqInput(1),msqInput(1),
+      msuInput(1),msuInput(1)) - 3*AuInput(1,1)*AuInput(2,1)*Sqr(MuInput)*Sqr(Yu(1
+      ,1))*Sqr(Yu(2,1))*TCD0(msqInput(1),msqInput(1),msuInput(1),msuInput(2)) - 3*
+      AuInput(0,1)*AuInput(2,1)*Sqr(MuInput)*Sqr(Yu(0,1))*Sqr(Yu(2,1))*TCD0(
+      msqInput(1),msqInput(1),msuInput(2),msuInput(0)) - 3*AuInput(1,1)*AuInput(2,
+      1)*Sqr(MuInput)*Sqr(Yu(1,1))*Sqr(Yu(2,1))*TCD0(msqInput(1),msqInput(1),
+      msuInput(2),msuInput(1)) - 3*Quad(Yu(2,1))*Sqr(MuInput)*Sqr(AuInput(2,1))*
+      TCD0(msqInput(1),msqInput(1),msuInput(2),msuInput(2)) - 3*AuInput(0,1)*
+      AuInput(0,2)*Sqr(MuInput)*Sqr(Yu(0,1))*Sqr(Yu(0,2))*TCD0(msqInput(1),
+      msqInput(2),msuInput(0),msuInput(0)) - 3*AuInput(1,1)*AuInput(1,2)*Sqr(
+      MuInput)*Sqr(Yu(1,1))*Sqr(Yu(1,2))*TCD0(msqInput(1),msqInput(2),msuInput(1),
+      msuInput(1)) - 3*AuInput(2,1)*AuInput(2,2)*Sqr(MuInput)*Sqr(Yu(2,1))*Sqr(Yu(
+      2,2))*TCD0(msqInput(1),msqInput(2),msuInput(2),msuInput(2)) - 3*AuInput(0,0)
+      *AuInput(0,2)*Sqr(MuInput)*Sqr(Yu(0,0))*Sqr(Yu(0,2))*TCD0(msqInput(2),
+      msqInput(0),msuInput(0),msuInput(0)) - 3*AuInput(1,0)*AuInput(1,2)*Sqr(
+      MuInput)*Sqr(Yu(1,0))*Sqr(Yu(1,2))*TCD0(msqInput(2),msqInput(0),msuInput(1),
+      msuInput(1)) - 3*AuInput(2,0)*AuInput(2,2)*Sqr(MuInput)*Sqr(Yu(2,0))*Sqr(Yu(
+      2,2))*TCD0(msqInput(2),msqInput(0),msuInput(2),msuInput(2)) - 3*AuInput(0,1)
+      *AuInput(0,2)*Sqr(MuInput)*Sqr(Yu(0,1))*Sqr(Yu(0,2))*TCD0(msqInput(2),
+      msqInput(1),msuInput(0),msuInput(0)) - 3*AuInput(1,1)*AuInput(1,2)*Sqr(
+      MuInput)*Sqr(Yu(1,1))*Sqr(Yu(1,2))*TCD0(msqInput(2),msqInput(1),msuInput(1),
+      msuInput(1)) - 3*AuInput(2,1)*AuInput(2,2)*Sqr(MuInput)*Sqr(Yu(2,1))*Sqr(Yu(
+      2,2))*TCD0(msqInput(2),msqInput(1),msuInput(2),msuInput(2)) - 3*Quad(Yu(0,2)
+      )*Sqr(MuInput)*Sqr(AuInput(0,2))*TCD0(msqInput(2),msqInput(2),msuInput(0),
+      msuInput(0)) - 3*AuInput(0,2)*AuInput(1,2)*Sqr(MuInput)*Sqr(Yu(0,2))*Sqr(Yu(
+      1,2))*TCD0(msqInput(2),msqInput(2),msuInput(0),msuInput(1)) - 3*AuInput(0,2)
+      *AuInput(2,2)*Sqr(MuInput)*Sqr(Yu(0,2))*Sqr(Yu(2,2))*TCD0(msqInput(2),
+      msqInput(2),msuInput(0),msuInput(2)) - 3*AuInput(0,2)*AuInput(1,2)*Sqr(
+      MuInput)*Sqr(Yu(0,2))*Sqr(Yu(1,2))*TCD0(msqInput(2),msqInput(2),msuInput(1),
+      msuInput(0)) - 3*Quad(Yu(1,2))*Sqr(MuInput)*Sqr(AuInput(1,2))*TCD0(msqInput(
+      2),msqInput(2),msuInput(1),msuInput(1)) - 3*AuInput(1,2)*AuInput(2,2)*Sqr(
+      MuInput)*Sqr(Yu(1,2))*Sqr(Yu(2,2))*TCD0(msqInput(2),msqInput(2),msuInput(1),
+      msuInput(2)) - 3*AuInput(0,2)*AuInput(2,2)*Sqr(MuInput)*Sqr(Yu(0,2))*Sqr(Yu(
+      2,2))*TCD0(msqInput(2),msqInput(2),msuInput(2),msuInput(0)) - 3*AuInput(1,2)
+      *AuInput(2,2)*Sqr(MuInput)*Sqr(Yu(1,2))*Sqr(Yu(2,2))*TCD0(msqInput(2),
+      msqInput(2),msuInput(2),msuInput(1)) - 3*Quad(Yu(2,2))*Sqr(MuInput)*Sqr(
+      AuInput(2,2))*TCD0(msqInput(2),msqInput(2),msuInput(2),msuInput(2)) - 3*
+      AdInput(0,1)*AdInput(1,0)*Sqr(MuInput)*TCD0(msdInput(0),msdInput(1),msqInput
+      (0),msqInput(1))*Yd(0,0)*Yd(0,1)*Yd(1,0)*Yd(1,1) - 3*AdInput(0,0)*AdInput(1,
+      1)*Sqr(MuInput)*TCD0(msdInput(0),msdInput(1),msqInput(1),msqInput(0))*Yd(0,0
+      )*Yd(0,1)*Yd(1,0)*Yd(1,1) - 3*AdInput(0,0)*AdInput(1,1)*Sqr(MuInput)*TCD0(
+      msdInput(1),msdInput(0),msqInput(0),msqInput(1))*Yd(0,0)*Yd(0,1)*Yd(1,0)*Yd(
+      1,1) - 3*AdInput(0,1)*AdInput(1,0)*Sqr(MuInput)*TCD0(msdInput(1),msdInput(0)
+      ,msqInput(1),msqInput(0))*Yd(0,0)*Yd(0,1)*Yd(1,0)*Yd(1,1) - 3*AdInput(0,2)*
+      AdInput(1,0)*Sqr(MuInput)*TCD0(msdInput(0),msdInput(1),msqInput(0),msqInput(
+      2))*Yd(0,0)*Yd(0,2)*Yd(1,0)*Yd(1,2) - 3*AdInput(0,0)*AdInput(1,2)*Sqr(
+      MuInput)*TCD0(msdInput(0),msdInput(1),msqInput(2),msqInput(0))*Yd(0,0)*Yd(0,
+      2)*Yd(1,0)*Yd(1,2) - 3*AdInput(0,0)*AdInput(1,2)*Sqr(MuInput)*TCD0(msdInput(
+      1),msdInput(0),msqInput(0),msqInput(2))*Yd(0,0)*Yd(0,2)*Yd(1,0)*Yd(1,2) - 3*
+      AdInput(0,2)*AdInput(1,0)*Sqr(MuInput)*TCD0(msdInput(1),msdInput(0),msqInput
+      (2),msqInput(0))*Yd(0,0)*Yd(0,2)*Yd(1,0)*Yd(1,2) - 3*AdInput(0,2)*AdInput(1,
+      1)*Sqr(MuInput)*TCD0(msdInput(0),msdInput(1),msqInput(1),msqInput(2))*Yd(0,1
+      )*Yd(0,2)*Yd(1,1)*Yd(1,2) - 3*AdInput(0,1)*AdInput(1,2)*Sqr(MuInput)*TCD0(
+      msdInput(0),msdInput(1),msqInput(2),msqInput(1))*Yd(0,1)*Yd(0,2)*Yd(1,1)*Yd(
+      1,2) - 3*AdInput(0,1)*AdInput(1,2)*Sqr(MuInput)*TCD0(msdInput(1),msdInput(0)
+      ,msqInput(1),msqInput(2))*Yd(0,1)*Yd(0,2)*Yd(1,1)*Yd(1,2) - 3*AdInput(0,2)*
+      AdInput(1,1)*Sqr(MuInput)*TCD0(msdInput(1),msdInput(0),msqInput(2),msqInput(
+      1))*Yd(0,1)*Yd(0,2)*Yd(1,1)*Yd(1,2) - 3*AdInput(0,1)*AdInput(2,0)*Sqr(
+      MuInput)*TCD0(msdInput(0),msdInput(2),msqInput(0),msqInput(1))*Yd(0,0)*Yd(0,
+      1)*Yd(2,0)*Yd(2,1) - 3*AdInput(0,0)*AdInput(2,1)*Sqr(MuInput)*TCD0(msdInput(
+      0),msdInput(2),msqInput(1),msqInput(0))*Yd(0,0)*Yd(0,1)*Yd(2,0)*Yd(2,1) - 3*
+      AdInput(0,0)*AdInput(2,1)*Sqr(MuInput)*TCD0(msdInput(2),msdInput(0),msqInput
+      (0),msqInput(1))*Yd(0,0)*Yd(0,1)*Yd(2,0)*Yd(2,1) - 3*AdInput(0,1)*AdInput(2,
+      0)*Sqr(MuInput)*TCD0(msdInput(2),msdInput(0),msqInput(1),msqInput(0))*Yd(0,0
+      )*Yd(0,1)*Yd(2,0)*Yd(2,1) - 3*AdInput(1,1)*AdInput(2,0)*Sqr(MuInput)*TCD0(
+      msdInput(1),msdInput(2),msqInput(0),msqInput(1))*Yd(1,0)*Yd(1,1)*Yd(2,0)*Yd(
+      2,1) - 3*AdInput(1,0)*AdInput(2,1)*Sqr(MuInput)*TCD0(msdInput(1),msdInput(2)
+      ,msqInput(1),msqInput(0))*Yd(1,0)*Yd(1,1)*Yd(2,0)*Yd(2,1) - 3*AdInput(1,0)*
+      AdInput(2,1)*Sqr(MuInput)*TCD0(msdInput(2),msdInput(1),msqInput(0),msqInput(
+      1))*Yd(1,0)*Yd(1,1)*Yd(2,0)*Yd(2,1) - 3*AdInput(1,1)*AdInput(2,0)*Sqr(
+      MuInput)*TCD0(msdInput(2),msdInput(1),msqInput(1),msqInput(0))*Yd(1,0)*Yd(1,
+      1)*Yd(2,0)*Yd(2,1) - 3*AdInput(0,2)*AdInput(2,0)*Sqr(MuInput)*TCD0(msdInput(
+      0),msdInput(2),msqInput(0),msqInput(2))*Yd(0,0)*Yd(0,2)*Yd(2,0)*Yd(2,2) - 3*
+      AdInput(0,0)*AdInput(2,2)*Sqr(MuInput)*TCD0(msdInput(0),msdInput(2),msqInput
+      (2),msqInput(0))*Yd(0,0)*Yd(0,2)*Yd(2,0)*Yd(2,2) - 3*AdInput(0,0)*AdInput(2,
+      2)*Sqr(MuInput)*TCD0(msdInput(2),msdInput(0),msqInput(0),msqInput(2))*Yd(0,0
+      )*Yd(0,2)*Yd(2,0)*Yd(2,2) - 3*AdInput(0,2)*AdInput(2,0)*Sqr(MuInput)*TCD0(
+      msdInput(2),msdInput(0),msqInput(2),msqInput(0))*Yd(0,0)*Yd(0,2)*Yd(2,0)*Yd(
+      2,2) - 3*AdInput(1,2)*AdInput(2,0)*Sqr(MuInput)*TCD0(msdInput(1),msdInput(2)
+      ,msqInput(0),msqInput(2))*Yd(1,0)*Yd(1,2)*Yd(2,0)*Yd(2,2) - 3*AdInput(1,0)*
+      AdInput(2,2)*Sqr(MuInput)*TCD0(msdInput(1),msdInput(2),msqInput(2),msqInput(
+      0))*Yd(1,0)*Yd(1,2)*Yd(2,0)*Yd(2,2) - 3*AdInput(1,0)*AdInput(2,2)*Sqr(
+      MuInput)*TCD0(msdInput(2),msdInput(1),msqInput(0),msqInput(2))*Yd(1,0)*Yd(1,
+      2)*Yd(2,0)*Yd(2,2) - 3*AdInput(1,2)*AdInput(2,0)*Sqr(MuInput)*TCD0(msdInput(
+      2),msdInput(1),msqInput(2),msqInput(0))*Yd(1,0)*Yd(1,2)*Yd(2,0)*Yd(2,2) - 3*
+      AdInput(0,2)*AdInput(2,1)*Sqr(MuInput)*TCD0(msdInput(0),msdInput(2),msqInput
+      (1),msqInput(2))*Yd(0,1)*Yd(0,2)*Yd(2,1)*Yd(2,2) - 3*AdInput(0,1)*AdInput(2,
+      2)*Sqr(MuInput)*TCD0(msdInput(0),msdInput(2),msqInput(2),msqInput(1))*Yd(0,1
+      )*Yd(0,2)*Yd(2,1)*Yd(2,2) - 3*AdInput(0,1)*AdInput(2,2)*Sqr(MuInput)*TCD0(
+      msdInput(2),msdInput(0),msqInput(1),msqInput(2))*Yd(0,1)*Yd(0,2)*Yd(2,1)*Yd(
+      2,2) - 3*AdInput(0,2)*AdInput(2,1)*Sqr(MuInput)*TCD0(msdInput(2),msdInput(0)
+      ,msqInput(2),msqInput(1))*Yd(0,1)*Yd(0,2)*Yd(2,1)*Yd(2,2) - 3*AdInput(1,2)*
+      AdInput(2,1)*Sqr(MuInput)*TCD0(msdInput(1),msdInput(2),msqInput(1),msqInput(
+      2))*Yd(1,1)*Yd(1,2)*Yd(2,1)*Yd(2,2) - 3*AdInput(1,1)*AdInput(2,2)*Sqr(
+      MuInput)*TCD0(msdInput(1),msdInput(2),msqInput(2),msqInput(1))*Yd(1,1)*Yd(1,
+      2)*Yd(2,1)*Yd(2,2) - 3*AdInput(1,1)*AdInput(2,2)*Sqr(MuInput)*TCD0(msdInput(
+      2),msdInput(1),msqInput(1),msqInput(2))*Yd(1,1)*Yd(1,2)*Yd(2,1)*Yd(2,2) - 3*
+      AdInput(1,2)*AdInput(2,1)*Sqr(MuInput)*TCD0(msdInput(2),msdInput(1),msqInput
+      (2),msqInput(1))*Yd(1,1)*Yd(1,2)*Yd(2,1)*Yd(2,2) - AeInput(0,1)*AeInput(1,0)
+      *Sqr(MuInput)*TCD0(mseInput(0),mseInput(1),mslInput(0),mslInput(1))*Ye(0,0)*
+      Ye(0,1)*Ye(1,0)*Ye(1,1) - AeInput(0,0)*AeInput(1,1)*Sqr(MuInput)*TCD0(
+      mseInput(0),mseInput(1),mslInput(1),mslInput(0))*Ye(0,0)*Ye(0,1)*Ye(1,0)*Ye(
+      1,1) - AeInput(0,0)*AeInput(1,1)*Sqr(MuInput)*TCD0(mseInput(1),mseInput(0),
+      mslInput(0),mslInput(1))*Ye(0,0)*Ye(0,1)*Ye(1,0)*Ye(1,1) - AeInput(0,1)*
+      AeInput(1,0)*Sqr(MuInput)*TCD0(mseInput(1),mseInput(0),mslInput(1),mslInput(
+      0))*Ye(0,0)*Ye(0,1)*Ye(1,0)*Ye(1,1) - AeInput(0,2)*AeInput(1,0)*Sqr(MuInput)
+      *TCD0(mseInput(0),mseInput(1),mslInput(0),mslInput(2))*Ye(0,0)*Ye(0,2)*Ye(1,
+      0)*Ye(1,2) - AeInput(0,0)*AeInput(1,2)*Sqr(MuInput)*TCD0(mseInput(0),
+      mseInput(1),mslInput(2),mslInput(0))*Ye(0,0)*Ye(0,2)*Ye(1,0)*Ye(1,2) -
+      AeInput(0,0)*AeInput(1,2)*Sqr(MuInput)*TCD0(mseInput(1),mseInput(0),mslInput
+      (0),mslInput(2))*Ye(0,0)*Ye(0,2)*Ye(1,0)*Ye(1,2) - AeInput(0,2)*AeInput(1,0)
+      *Sqr(MuInput)*TCD0(mseInput(1),mseInput(0),mslInput(2),mslInput(0))*Ye(0,0)*
+      Ye(0,2)*Ye(1,0)*Ye(1,2) - AeInput(0,2)*AeInput(1,1)*Sqr(MuInput)*TCD0(
+      mseInput(0),mseInput(1),mslInput(1),mslInput(2))*Ye(0,1)*Ye(0,2)*Ye(1,1)*Ye(
+      1,2) - AeInput(0,1)*AeInput(1,2)*Sqr(MuInput)*TCD0(mseInput(0),mseInput(1),
+      mslInput(2),mslInput(1))*Ye(0,1)*Ye(0,2)*Ye(1,1)*Ye(1,2) - AeInput(0,1)*
+      AeInput(1,2)*Sqr(MuInput)*TCD0(mseInput(1),mseInput(0),mslInput(1),mslInput(
+      2))*Ye(0,1)*Ye(0,2)*Ye(1,1)*Ye(1,2) - AeInput(0,2)*AeInput(1,1)*Sqr(MuInput)
+      *TCD0(mseInput(1),mseInput(0),mslInput(2),mslInput(1))*Ye(0,1)*Ye(0,2)*Ye(1,
+      1)*Ye(1,2) - AeInput(0,1)*AeInput(2,0)*Sqr(MuInput)*TCD0(mseInput(0),
+      mseInput(2),mslInput(0),mslInput(1))*Ye(0,0)*Ye(0,1)*Ye(2,0)*Ye(2,1) -
+      AeInput(0,0)*AeInput(2,1)*Sqr(MuInput)*TCD0(mseInput(0),mseInput(2),mslInput
+      (1),mslInput(0))*Ye(0,0)*Ye(0,1)*Ye(2,0)*Ye(2,1) - AeInput(0,0)*AeInput(2,1)
+      *Sqr(MuInput)*TCD0(mseInput(2),mseInput(0),mslInput(0),mslInput(1))*Ye(0,0)*
+      Ye(0,1)*Ye(2,0)*Ye(2,1) - AeInput(0,1)*AeInput(2,0)*Sqr(MuInput)*TCD0(
+      mseInput(2),mseInput(0),mslInput(1),mslInput(0))*Ye(0,0)*Ye(0,1)*Ye(2,0)*Ye(
+      2,1) - AeInput(1,1)*AeInput(2,0)*Sqr(MuInput)*TCD0(mseInput(1),mseInput(2),
+      mslInput(0),mslInput(1))*Ye(1,0)*Ye(1,1)*Ye(2,0)*Ye(2,1) - AeInput(1,0)*
+      AeInput(2,1)*Sqr(MuInput)*TCD0(mseInput(1),mseInput(2),mslInput(1),mslInput(
+      0))*Ye(1,0)*Ye(1,1)*Ye(2,0)*Ye(2,1) - AeInput(1,0)*AeInput(2,1)*Sqr(MuInput)
+      *TCD0(mseInput(2),mseInput(1),mslInput(0),mslInput(1))*Ye(1,0)*Ye(1,1)*Ye(2,
+      0)*Ye(2,1) - AeInput(1,1)*AeInput(2,0)*Sqr(MuInput)*TCD0(mseInput(2),
+      mseInput(1),mslInput(1),mslInput(0))*Ye(1,0)*Ye(1,1)*Ye(2,0)*Ye(2,1) -
+      AeInput(0,2)*AeInput(2,0)*Sqr(MuInput)*TCD0(mseInput(0),mseInput(2),mslInput
+      (0),mslInput(2))*Ye(0,0)*Ye(0,2)*Ye(2,0)*Ye(2,2) - AeInput(0,0)*AeInput(2,2)
+      *Sqr(MuInput)*TCD0(mseInput(0),mseInput(2),mslInput(2),mslInput(0))*Ye(0,0)*
+      Ye(0,2)*Ye(2,0)*Ye(2,2) - AeInput(0,0)*AeInput(2,2)*Sqr(MuInput)*TCD0(
+      mseInput(2),mseInput(0),mslInput(0),mslInput(2))*Ye(0,0)*Ye(0,2)*Ye(2,0)*Ye(
+      2,2) - AeInput(0,2)*AeInput(2,0)*Sqr(MuInput)*TCD0(mseInput(2),mseInput(0),
+      mslInput(2),mslInput(0))*Ye(0,0)*Ye(0,2)*Ye(2,0)*Ye(2,2) - AeInput(1,2)*
+      AeInput(2,0)*Sqr(MuInput)*TCD0(mseInput(1),mseInput(2),mslInput(0),mslInput(
+      2))*Ye(1,0)*Ye(1,2)*Ye(2,0)*Ye(2,2) - AeInput(1,0)*AeInput(2,2)*Sqr(MuInput)
+      *TCD0(mseInput(1),mseInput(2),mslInput(2),mslInput(0))*Ye(1,0)*Ye(1,2)*Ye(2,
+      0)*Ye(2,2) - AeInput(1,0)*AeInput(2,2)*Sqr(MuInput)*TCD0(mseInput(2),
+      mseInput(1),mslInput(0),mslInput(2))*Ye(1,0)*Ye(1,2)*Ye(2,0)*Ye(2,2) -
+      AeInput(1,2)*AeInput(2,0)*Sqr(MuInput)*TCD0(mseInput(2),mseInput(1),mslInput
+      (2),mslInput(0))*Ye(1,0)*Ye(1,2)*Ye(2,0)*Ye(2,2) - AeInput(0,2)*AeInput(2,1)
+      *Sqr(MuInput)*TCD0(mseInput(0),mseInput(2),mslInput(1),mslInput(2))*Ye(0,1)*
+      Ye(0,2)*Ye(2,1)*Ye(2,2) - AeInput(0,1)*AeInput(2,2)*Sqr(MuInput)*TCD0(
+      mseInput(0),mseInput(2),mslInput(2),mslInput(1))*Ye(0,1)*Ye(0,2)*Ye(2,1)*Ye(
+      2,2) - AeInput(0,1)*AeInput(2,2)*Sqr(MuInput)*TCD0(mseInput(2),mseInput(0),
+      mslInput(1),mslInput(2))*Ye(0,1)*Ye(0,2)*Ye(2,1)*Ye(2,2) - AeInput(0,2)*
+      AeInput(2,1)*Sqr(MuInput)*TCD0(mseInput(2),mseInput(0),mslInput(2),mslInput(
+      1))*Ye(0,1)*Ye(0,2)*Ye(2,1)*Ye(2,2) - AeInput(1,2)*AeInput(2,1)*Sqr(MuInput)
+      *TCD0(mseInput(1),mseInput(2),mslInput(1),mslInput(2))*Ye(1,1)*Ye(1,2)*Ye(2,
+      1)*Ye(2,2) - AeInput(1,1)*AeInput(2,2)*Sqr(MuInput)*TCD0(mseInput(1),
+      mseInput(2),mslInput(2),mslInput(1))*Ye(1,1)*Ye(1,2)*Ye(2,1)*Ye(2,2) -
+      AeInput(1,1)*AeInput(2,2)*Sqr(MuInput)*TCD0(mseInput(2),mseInput(1),mslInput
+      (1),mslInput(2))*Ye(1,1)*Ye(1,2)*Ye(2,1)*Ye(2,2) - AeInput(1,2)*AeInput(2,1)
+      *Sqr(MuInput)*TCD0(mseInput(2),mseInput(1),mslInput(2),mslInput(1))*Ye(1,1)*
+      Ye(1,2)*Ye(2,1)*Ye(2,2) - 3*AuInput(0,0)*AuInput(1,1)*Sqr(MuInput)*TCD0(
+      msqInput(0),msqInput(1),msuInput(0),msuInput(1))*Yu(0,0)*Yu(0,1)*Yu(1,0)*Yu(
+      1,1) - 3*AuInput(0,1)*AuInput(1,0)*Sqr(MuInput)*TCD0(msqInput(0),msqInput(1)
+      ,msuInput(1),msuInput(0))*Yu(0,0)*Yu(0,1)*Yu(1,0)*Yu(1,1) - 3*AuInput(0,1)*
+      AuInput(1,0)*Sqr(MuInput)*TCD0(msqInput(1),msqInput(0),msuInput(0),msuInput(
+      1))*Yu(0,0)*Yu(0,1)*Yu(1,0)*Yu(1,1) - 3*AuInput(0,0)*AuInput(1,1)*Sqr(
+      MuInput)*TCD0(msqInput(1),msqInput(0),msuInput(1),msuInput(0))*Yu(0,0)*Yu(0,
+      1)*Yu(1,0)*Yu(1,1) - 3*AuInput(0,0)*AuInput(1,2)*Sqr(MuInput)*TCD0(msqInput(
+      0),msqInput(2),msuInput(0),msuInput(1))*Yu(0,0)*Yu(0,2)*Yu(1,0)*Yu(1,2) - 3*
+      AuInput(0,2)*AuInput(1,0)*Sqr(MuInput)*TCD0(msqInput(0),msqInput(2),msuInput
+      (1),msuInput(0))*Yu(0,0)*Yu(0,2)*Yu(1,0)*Yu(1,2) - 3*AuInput(0,2)*AuInput(1,
+      0)*Sqr(MuInput)*TCD0(msqInput(2),msqInput(0),msuInput(0),msuInput(1))*Yu(0,0
+      )*Yu(0,2)*Yu(1,0)*Yu(1,2) - 3*AuInput(0,0)*AuInput(1,2)*Sqr(MuInput)*TCD0(
+      msqInput(2),msqInput(0),msuInput(1),msuInput(0))*Yu(0,0)*Yu(0,2)*Yu(1,0)*Yu(
+      1,2) - 3*AuInput(0,1)*AuInput(1,2)*Sqr(MuInput)*TCD0(msqInput(1),msqInput(2)
+      ,msuInput(0),msuInput(1))*Yu(0,1)*Yu(0,2)*Yu(1,1)*Yu(1,2) - 3*AuInput(0,2)*
+      AuInput(1,1)*Sqr(MuInput)*TCD0(msqInput(1),msqInput(2),msuInput(1),msuInput(
+      0))*Yu(0,1)*Yu(0,2)*Yu(1,1)*Yu(1,2) - 3*AuInput(0,2)*AuInput(1,1)*Sqr(
+      MuInput)*TCD0(msqInput(2),msqInput(1),msuInput(0),msuInput(1))*Yu(0,1)*Yu(0,
+      2)*Yu(1,1)*Yu(1,2) - 3*AuInput(0,1)*AuInput(1,2)*Sqr(MuInput)*TCD0(msqInput(
+      2),msqInput(1),msuInput(1),msuInput(0))*Yu(0,1)*Yu(0,2)*Yu(1,1)*Yu(1,2) - 3*
+      AuInput(0,0)*AuInput(2,1)*Sqr(MuInput)*TCD0(msqInput(0),msqInput(1),msuInput
+      (0),msuInput(2))*Yu(0,0)*Yu(0,1)*Yu(2,0)*Yu(2,1) - 3*AuInput(0,1)*AuInput(2,
+      0)*Sqr(MuInput)*TCD0(msqInput(0),msqInput(1),msuInput(2),msuInput(0))*Yu(0,0
+      )*Yu(0,1)*Yu(2,0)*Yu(2,1) - 3*AuInput(0,1)*AuInput(2,0)*Sqr(MuInput)*TCD0(
+      msqInput(1),msqInput(0),msuInput(0),msuInput(2))*Yu(0,0)*Yu(0,1)*Yu(2,0)*Yu(
+      2,1) - 3*AuInput(0,0)*AuInput(2,1)*Sqr(MuInput)*TCD0(msqInput(1),msqInput(0)
+      ,msuInput(2),msuInput(0))*Yu(0,0)*Yu(0,1)*Yu(2,0)*Yu(2,1) - 3*AuInput(1,0)*
+      AuInput(2,1)*Sqr(MuInput)*TCD0(msqInput(0),msqInput(1),msuInput(1),msuInput(
+      2))*Yu(1,0)*Yu(1,1)*Yu(2,0)*Yu(2,1) - 3*AuInput(1,1)*AuInput(2,0)*Sqr(
+      MuInput)*TCD0(msqInput(0),msqInput(1),msuInput(2),msuInput(1))*Yu(1,0)*Yu(1,
+      1)*Yu(2,0)*Yu(2,1) - 3*AuInput(1,1)*AuInput(2,0)*Sqr(MuInput)*TCD0(msqInput(
+      1),msqInput(0),msuInput(1),msuInput(2))*Yu(1,0)*Yu(1,1)*Yu(2,0)*Yu(2,1) - 3*
+      AuInput(1,0)*AuInput(2,1)*Sqr(MuInput)*TCD0(msqInput(1),msqInput(0),msuInput
+      (2),msuInput(1))*Yu(1,0)*Yu(1,1)*Yu(2,0)*Yu(2,1) - 3*AuInput(0,0)*AuInput(2,
+      2)*Sqr(MuInput)*TCD0(msqInput(0),msqInput(2),msuInput(0),msuInput(2))*Yu(0,0
+      )*Yu(0,2)*Yu(2,0)*Yu(2,2) - 3*AuInput(0,2)*AuInput(2,0)*Sqr(MuInput)*TCD0(
+      msqInput(0),msqInput(2),msuInput(2),msuInput(0))*Yu(0,0)*Yu(0,2)*Yu(2,0)*Yu(
+      2,2) - 3*AuInput(0,2)*AuInput(2,0)*Sqr(MuInput)*TCD0(msqInput(2),msqInput(0)
+      ,msuInput(0),msuInput(2))*Yu(0,0)*Yu(0,2)*Yu(2,0)*Yu(2,2) - 3*AuInput(0,0)*
+      AuInput(2,2)*Sqr(MuInput)*TCD0(msqInput(2),msqInput(0),msuInput(2),msuInput(
+      0))*Yu(0,0)*Yu(0,2)*Yu(2,0)*Yu(2,2) - 3*AuInput(1,0)*AuInput(2,2)*Sqr(
+      MuInput)*TCD0(msqInput(0),msqInput(2),msuInput(1),msuInput(2))*Yu(1,0)*Yu(1,
+      2)*Yu(2,0)*Yu(2,2) - 3*AuInput(1,2)*AuInput(2,0)*Sqr(MuInput)*TCD0(msqInput(
+      0),msqInput(2),msuInput(2),msuInput(1))*Yu(1,0)*Yu(1,2)*Yu(2,0)*Yu(2,2) - 3*
+      AuInput(1,2)*AuInput(2,0)*Sqr(MuInput)*TCD0(msqInput(2),msqInput(0),msuInput
+      (1),msuInput(2))*Yu(1,0)*Yu(1,2)*Yu(2,0)*Yu(2,2) - 3*AuInput(1,0)*AuInput(2,
+      2)*Sqr(MuInput)*TCD0(msqInput(2),msqInput(0),msuInput(2),msuInput(1))*Yu(1,0
+      )*Yu(1,2)*Yu(2,0)*Yu(2,2) - 3*AuInput(0,1)*AuInput(2,2)*Sqr(MuInput)*TCD0(
+      msqInput(1),msqInput(2),msuInput(0),msuInput(2))*Yu(0,1)*Yu(0,2)*Yu(2,1)*Yu(
+      2,2) - 3*AuInput(0,2)*AuInput(2,1)*Sqr(MuInput)*TCD0(msqInput(1),msqInput(2)
+      ,msuInput(2),msuInput(0))*Yu(0,1)*Yu(0,2)*Yu(2,1)*Yu(2,2) - 3*AuInput(0,2)*
+      AuInput(2,1)*Sqr(MuInput)*TCD0(msqInput(2),msqInput(1),msuInput(0),msuInput(
+      2))*Yu(0,1)*Yu(0,2)*Yu(2,1)*Yu(2,2) - 3*AuInput(0,1)*AuInput(2,2)*Sqr(
+      MuInput)*TCD0(msqInput(2),msqInput(1),msuInput(2),msuInput(0))*Yu(0,1)*Yu(0,
+      2)*Yu(2,1)*Yu(2,2) - 3*AuInput(1,1)*AuInput(2,2)*Sqr(MuInput)*TCD0(msqInput(
+      1),msqInput(2),msuInput(1),msuInput(2))*Yu(1,1)*Yu(1,2)*Yu(2,1)*Yu(2,2) - 3*
+      AuInput(1,2)*AuInput(2,1)*Sqr(MuInput)*TCD0(msqInput(1),msqInput(2),msuInput
+      (2),msuInput(1))*Yu(1,1)*Yu(1,2)*Yu(2,1)*Yu(2,2) - 3*AuInput(1,2)*AuInput(2,
+      1)*Sqr(MuInput)*TCD0(msqInput(2),msqInput(1),msuInput(1),msuInput(2))*Yu(1,1
+      )*Yu(1,2)*Yu(2,1)*Yu(2,2) - 3*AuInput(1,1)*AuInput(2,2)*Sqr(MuInput)*TCD0(
+      msqInput(2),msqInput(1),msuInput(2),msuInput(1))*Yu(1,1)*Yu(1,2)*Yu(2,1)*Yu(
+      2,2))));
+   MODEL->set_Lambda6(Re((0.000053468657576480914*(-1 + AuInput(2,2)/MSUSY)*Cube(
       MuInput)*Quad(Yu(2,2))*Sqr(g3)*UnitStep(-2 + LambdaLoopOrder))/Cube(MSUSY) +
-      ((0.0010554289962743518*MuInput*((3*AbInput*Quad(Yd(2,2))*(-6 + Sqr(AbInput)
-      /Sqr(MSUSY)))/MSUSY + (AtauInput*Quad(Ye(2,2))*(-6 + Sqr(AtauInput)/Sqr(
-      MSUSY)))/MSUSY + (3*AtInput*Quad(Yu(2,2))*Sqr(MuInput))/Cube(MSUSY)))/MSUSY
-      + (0.0007915717472057639*MuInput*(0.6*Sqr(g1) + Sqr(g2))*((3*AbInput*Sqr(Yd(
-      2,2)))/MSUSY + (AtauInput*Sqr(Ye(2,2)))/MSUSY - (3*AtInput*Sqr(Yu(2,2)))/
-      MSUSY))/MSUSY)*UnitStep(-1 + LambdaLoopOrder)));
+      0.006332573977646111*UnitStep(-1 + LambdaLoopOrder)*((-0.3*MuInput*AdInput(0
+      ,0)*Sqr(g1)*Sqr(Yd(0,0)) + 3*MuInput*AdInput(0,0)*Sqr(Yd(0,0))*(Sqr(Yd(0,0))
+      + Sqr(Yd(0,1)) + Sqr(Yd(0,2))))*TCC0(msdInput(0),msdInput(0),msqInput(0)) +
+      (-0.3*MuInput*AdInput(0,1)*Sqr(g1)*Sqr(Yd(0,1)) + 3*MuInput*AdInput(0,1)*Sqr
+      (Yd(0,1))*(Sqr(Yd(0,0)) + Sqr(Yd(0,1)) + Sqr(Yd(0,2))))*TCC0(msdInput(0),
+      msdInput(0),msqInput(1)) + (-0.3*MuInput*AdInput(0,2)*Sqr(g1)*Sqr(Yd(0,2)) +
+      3*MuInput*AdInput(0,2)*Sqr(Yd(0,2))*(Sqr(Yd(0,0)) + Sqr(Yd(0,1)) + Sqr(Yd(0,
+      2))))*TCC0(msdInput(0),msdInput(0),msqInput(2)) + (0.25*MuInput*AdInput(0,0)
+      *(-0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(Yd(0,0)) + 3*MuInput*AdInput(0,0)*Sqr(Yd(0,0
+      ))*(Sqr(Yd(0,0)) + Sqr(Yd(1,0)) + Sqr(Yd(2,0))))*TCC0(msdInput(0),msqInput(0
+      ),msqInput(0)) + (0.25*MuInput*AdInput(0,1)*(-0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(
+      Yd(0,1)) + 3*MuInput*AdInput(0,1)*Sqr(Yd(0,1))*(Sqr(Yd(0,1)) + Sqr(Yd(1,1))
+      + Sqr(Yd(2,1))))*TCC0(msdInput(0),msqInput(1),msqInput(1)) + (0.25*MuInput*
+      AdInput(0,2)*(-0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(Yd(0,2)) + 3*MuInput*AdInput(0,2
+      )*Sqr(Yd(0,2))*(Sqr(Yd(0,2)) + Sqr(Yd(1,2)) + Sqr(Yd(2,2))))*TCC0(msdInput(0
+      ),msqInput(2),msqInput(2)) + (-0.3*MuInput*AdInput(1,0)*Sqr(g1)*Sqr(Yd(1,0))
+      + 3*MuInput*AdInput(1,0)*Sqr(Yd(1,0))*(Sqr(Yd(1,0)) + Sqr(Yd(1,1)) + Sqr(Yd(
+      1,2))))*TCC0(msdInput(1),msdInput(1),msqInput(0)) + (-0.3*MuInput*AdInput(1,
+      1)*Sqr(g1)*Sqr(Yd(1,1)) + 3*MuInput*AdInput(1,1)*Sqr(Yd(1,1))*(Sqr(Yd(1,0))
+      + Sqr(Yd(1,1)) + Sqr(Yd(1,2))))*TCC0(msdInput(1),msdInput(1),msqInput(1)) +
+      (-0.3*MuInput*AdInput(1,2)*Sqr(g1)*Sqr(Yd(1,2)) + 3*MuInput*AdInput(1,2)*Sqr
+      (Yd(1,2))*(Sqr(Yd(1,0)) + Sqr(Yd(1,1)) + Sqr(Yd(1,2))))*TCC0(msdInput(1),
+      msdInput(1),msqInput(2)) + (0.25*MuInput*AdInput(1,0)*(-0.6*Sqr(g1) - 3*Sqr(
+      g2))*Sqr(Yd(1,0)) + 3*MuInput*AdInput(1,0)*Sqr(Yd(1,0))*(Sqr(Yd(0,0)) + Sqr(
+      Yd(1,0)) + Sqr(Yd(2,0))))*TCC0(msdInput(1),msqInput(0),msqInput(0)) + (0.25*
+      MuInput*AdInput(1,1)*(-0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(Yd(1,1)) + 3*MuInput*
+      AdInput(1,1)*Sqr(Yd(1,1))*(Sqr(Yd(0,1)) + Sqr(Yd(1,1)) + Sqr(Yd(2,1))))*TCC0
+      (msdInput(1),msqInput(1),msqInput(1)) + (0.25*MuInput*AdInput(1,2)*(-0.6*Sqr
+      (g1) - 3*Sqr(g2))*Sqr(Yd(1,2)) + 3*MuInput*AdInput(1,2)*Sqr(Yd(1,2))*(Sqr(Yd
+      (0,2)) + Sqr(Yd(1,2)) + Sqr(Yd(2,2))))*TCC0(msdInput(1),msqInput(2),msqInput
+      (2)) + (-0.3*MuInput*AdInput(2,0)*Sqr(g1)*Sqr(Yd(2,0)) + 3*MuInput*AdInput(2
+      ,0)*Sqr(Yd(2,0))*(Sqr(Yd(2,0)) + Sqr(Yd(2,1)) + Sqr(Yd(2,2))))*TCC0(msdInput
+      (2),msdInput(2),msqInput(0)) + (-0.3*MuInput*AdInput(2,1)*Sqr(g1)*Sqr(Yd(2,1
+      )) + 3*MuInput*AdInput(2,1)*Sqr(Yd(2,1))*(Sqr(Yd(2,0)) + Sqr(Yd(2,1)) + Sqr(
+      Yd(2,2))))*TCC0(msdInput(2),msdInput(2),msqInput(1)) + (-0.3*MuInput*AdInput
+      (2,2)*Sqr(g1)*Sqr(Yd(2,2)) + 3*MuInput*AdInput(2,2)*Sqr(Yd(2,2))*(Sqr(Yd(2,0
+      )) + Sqr(Yd(2,1)) + Sqr(Yd(2,2))))*TCC0(msdInput(2),msdInput(2),msqInput(2))
+      + (0.25*MuInput*AdInput(2,0)*(-0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(Yd(2,0)) + 3*
+      MuInput*AdInput(2,0)*Sqr(Yd(2,0))*(Sqr(Yd(0,0)) + Sqr(Yd(1,0)) + Sqr(Yd(2,0)
+      )))*TCC0(msdInput(2),msqInput(0),msqInput(0)) + (0.25*MuInput*AdInput(2,1)*(
+      -0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(Yd(2,1)) + 3*MuInput*AdInput(2,1)*Sqr(Yd(2,1))
+      *(Sqr(Yd(0,1)) + Sqr(Yd(1,1)) + Sqr(Yd(2,1))))*TCC0(msdInput(2),msqInput(1),
+      msqInput(1)) + (0.25*MuInput*AdInput(2,2)*(-0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(Yd(
+      2,2)) + 3*MuInput*AdInput(2,2)*Sqr(Yd(2,2))*(Sqr(Yd(0,2)) + Sqr(Yd(1,2)) +
+      Sqr(Yd(2,2))))*TCC0(msdInput(2),msqInput(2),msqInput(2)) + (-0.3*MuInput*
+      AeInput(0,0)*Sqr(g1)*Sqr(Ye(0,0)) + MuInput*AeInput(0,0)*Sqr(Ye(0,0))*(Sqr(
+      Ye(0,0)) + Sqr(Ye(0,1)) + Sqr(Ye(0,2))))*TCC0(mseInput(0),mseInput(0),
+      mslInput(0)) + (-0.3*MuInput*AeInput(0,1)*Sqr(g1)*Sqr(Ye(0,1)) + MuInput*
+      AeInput(0,1)*Sqr(Ye(0,1))*(Sqr(Ye(0,0)) + Sqr(Ye(0,1)) + Sqr(Ye(0,2))))*TCC0
+      (mseInput(0),mseInput(0),mslInput(1)) + (-0.3*MuInput*AeInput(0,2)*Sqr(g1)*
+      Sqr(Ye(0,2)) + MuInput*AeInput(0,2)*Sqr(Ye(0,2))*(Sqr(Ye(0,0)) + Sqr(Ye(0,1)
+      ) + Sqr(Ye(0,2))))*TCC0(mseInput(0),mseInput(0),mslInput(2)) + (0.25*MuInput
+      *AeInput(0,0)*(0.6*Sqr(g1) - Sqr(g2))*Sqr(Ye(0,0)) + MuInput*AeInput(0,0)*
+      Sqr(Ye(0,0))*(Sqr(Ye(0,0)) + Sqr(Ye(1,0)) + Sqr(Ye(2,0))))*TCC0(mseInput(0),
+      mslInput(0),mslInput(0)) + (0.25*MuInput*AeInput(0,1)*(0.6*Sqr(g1) - Sqr(g2)
+      )*Sqr(Ye(0,1)) + MuInput*AeInput(0,1)*Sqr(Ye(0,1))*(Sqr(Ye(0,1)) + Sqr(Ye(1,
+      1)) + Sqr(Ye(2,1))))*TCC0(mseInput(0),mslInput(1),mslInput(1)) + (0.25*
+      MuInput*AeInput(0,2)*(0.6*Sqr(g1) - Sqr(g2))*Sqr(Ye(0,2)) + MuInput*AeInput(
+      0,2)*Sqr(Ye(0,2))*(Sqr(Ye(0,2)) + Sqr(Ye(1,2)) + Sqr(Ye(2,2))))*TCC0(
+      mseInput(0),mslInput(2),mslInput(2)) + (-0.3*MuInput*AeInput(1,0)*Sqr(g1)*
+      Sqr(Ye(1,0)) + MuInput*AeInput(1,0)*Sqr(Ye(1,0))*(Sqr(Ye(1,0)) + Sqr(Ye(1,1)
+      ) + Sqr(Ye(1,2))))*TCC0(mseInput(1),mseInput(1),mslInput(0)) + (-0.3*MuInput
+      *AeInput(1,1)*Sqr(g1)*Sqr(Ye(1,1)) + MuInput*AeInput(1,1)*Sqr(Ye(1,1))*(Sqr(
+      Ye(1,0)) + Sqr(Ye(1,1)) + Sqr(Ye(1,2))))*TCC0(mseInput(1),mseInput(1),
+      mslInput(1)) + (-0.3*MuInput*AeInput(1,2)*Sqr(g1)*Sqr(Ye(1,2)) + MuInput*
+      AeInput(1,2)*Sqr(Ye(1,2))*(Sqr(Ye(1,0)) + Sqr(Ye(1,1)) + Sqr(Ye(1,2))))*TCC0
+      (mseInput(1),mseInput(1),mslInput(2)) + (0.25*MuInput*AeInput(1,0)*(0.6*Sqr(
+      g1) - Sqr(g2))*Sqr(Ye(1,0)) + MuInput*AeInput(1,0)*Sqr(Ye(1,0))*(Sqr(Ye(0,0)
+      ) + Sqr(Ye(1,0)) + Sqr(Ye(2,0))))*TCC0(mseInput(1),mslInput(0),mslInput(0))
+      + (0.25*MuInput*AeInput(1,1)*(0.6*Sqr(g1) - Sqr(g2))*Sqr(Ye(1,1)) + MuInput*
+      AeInput(1,1)*Sqr(Ye(1,1))*(Sqr(Ye(0,1)) + Sqr(Ye(1,1)) + Sqr(Ye(2,1))))*TCC0
+      (mseInput(1),mslInput(1),mslInput(1)) + (0.25*MuInput*AeInput(1,2)*(0.6*Sqr(
+      g1) - Sqr(g2))*Sqr(Ye(1,2)) + MuInput*AeInput(1,2)*Sqr(Ye(1,2))*(Sqr(Ye(0,2)
+      ) + Sqr(Ye(1,2)) + Sqr(Ye(2,2))))*TCC0(mseInput(1),mslInput(2),mslInput(2))
+      + (-0.3*MuInput*AeInput(2,0)*Sqr(g1)*Sqr(Ye(2,0)) + MuInput*AeInput(2,0)*Sqr
+      (Ye(2,0))*(Sqr(Ye(2,0)) + Sqr(Ye(2,1)) + Sqr(Ye(2,2))))*TCC0(mseInput(2),
+      mseInput(2),mslInput(0)) + (-0.3*MuInput*AeInput(2,1)*Sqr(g1)*Sqr(Ye(2,1)) +
+      MuInput*AeInput(2,1)*Sqr(Ye(2,1))*(Sqr(Ye(2,0)) + Sqr(Ye(2,1)) + Sqr(Ye(2,2)
+      )))*TCC0(mseInput(2),mseInput(2),mslInput(1)) + (-0.3*MuInput*AeInput(2,2)*
+      Sqr(g1)*Sqr(Ye(2,2)) + MuInput*AeInput(2,2)*Sqr(Ye(2,2))*(Sqr(Ye(2,0)) + Sqr
+      (Ye(2,1)) + Sqr(Ye(2,2))))*TCC0(mseInput(2),mseInput(2),mslInput(2)) + (0.25
+      *MuInput*AeInput(2,0)*(0.6*Sqr(g1) - Sqr(g2))*Sqr(Ye(2,0)) + MuInput*AeInput
+      (2,0)*Sqr(Ye(2,0))*(Sqr(Ye(0,0)) + Sqr(Ye(1,0)) + Sqr(Ye(2,0))))*TCC0(
+      mseInput(2),mslInput(0),mslInput(0)) + (0.25*MuInput*AeInput(2,1)*(0.6*Sqr(
+      g1) - Sqr(g2))*Sqr(Ye(2,1)) + MuInput*AeInput(2,1)*Sqr(Ye(2,1))*(Sqr(Ye(0,1)
+      ) + Sqr(Ye(1,1)) + Sqr(Ye(2,1))))*TCC0(mseInput(2),mslInput(1),mslInput(1))
+      + (0.25*MuInput*AeInput(2,2)*(0.6*Sqr(g1) - Sqr(g2))*Sqr(Ye(2,2)) + MuInput*
+      AeInput(2,2)*Sqr(Ye(2,2))*(Sqr(Ye(0,2)) + Sqr(Ye(1,2)) + Sqr(Ye(2,2))))*TCC0
+      (mseInput(2),mslInput(2),mslInput(2)) + 0.25*MuInput*AuInput(0,0)*(-0.6*Sqr(
+      g1) + 3*Sqr(g2))*Sqr(Yu(0,0))*TCC0(msqInput(0),msqInput(0),msuInput(0)) +
+      0.25*MuInput*AuInput(1,0)*(-0.6*Sqr(g1) + 3*Sqr(g2))*Sqr(Yu(1,0))*TCC0(
+      msqInput(0),msqInput(0),msuInput(1)) + 0.25*MuInput*AuInput(2,0)*(-0.6*Sqr(
+      g1) + 3*Sqr(g2))*Sqr(Yu(2,0))*TCC0(msqInput(0),msqInput(0),msuInput(2)) +
+      0.6*MuInput*AuInput(0,0)*Sqr(g1)*Sqr(Yu(0,0))*TCC0(msqInput(0),msuInput(0),
+      msuInput(0)) + 0.6*MuInput*AuInput(1,0)*Sqr(g1)*Sqr(Yu(1,0))*TCC0(msqInput(0
+      ),msuInput(1),msuInput(1)) + 0.6*MuInput*AuInput(2,0)*Sqr(g1)*Sqr(Yu(2,0))*
+      TCC0(msqInput(0),msuInput(2),msuInput(2)) + 0.25*MuInput*AuInput(0,1)*(-0.6*
+      Sqr(g1) + 3*Sqr(g2))*Sqr(Yu(0,1))*TCC0(msqInput(1),msqInput(1),msuInput(0))
+      + 0.25*MuInput*AuInput(1,1)*(-0.6*Sqr(g1) + 3*Sqr(g2))*Sqr(Yu(1,1))*TCC0(
+      msqInput(1),msqInput(1),msuInput(1)) + 0.25*MuInput*AuInput(2,1)*(-0.6*Sqr(
+      g1) + 3*Sqr(g2))*Sqr(Yu(2,1))*TCC0(msqInput(1),msqInput(1),msuInput(2)) +
+      0.6*MuInput*AuInput(0,1)*Sqr(g1)*Sqr(Yu(0,1))*TCC0(msqInput(1),msuInput(0),
+      msuInput(0)) + 0.6*MuInput*AuInput(1,1)*Sqr(g1)*Sqr(Yu(1,1))*TCC0(msqInput(1
+      ),msuInput(1),msuInput(1)) + 0.6*MuInput*AuInput(2,1)*Sqr(g1)*Sqr(Yu(2,1))*
+      TCC0(msqInput(1),msuInput(2),msuInput(2)) + 0.25*MuInput*AuInput(0,2)*(-0.6*
+      Sqr(g1) + 3*Sqr(g2))*Sqr(Yu(0,2))*TCC0(msqInput(2),msqInput(2),msuInput(0))
+      + 0.25*MuInput*AuInput(1,2)*(-0.6*Sqr(g1) + 3*Sqr(g2))*Sqr(Yu(1,2))*TCC0(
+      msqInput(2),msqInput(2),msuInput(1)) + 0.25*MuInput*AuInput(2,2)*(-0.6*Sqr(
+      g1) + 3*Sqr(g2))*Sqr(Yu(2,2))*TCC0(msqInput(2),msqInput(2),msuInput(2)) +
+      0.6*MuInput*AuInput(0,2)*Sqr(g1)*Sqr(Yu(0,2))*TCC0(msqInput(2),msuInput(0),
+      msuInput(0)) + 0.6*MuInput*AuInput(1,2)*Sqr(g1)*Sqr(Yu(1,2))*TCC0(msqInput(2
+      ),msuInput(1),msuInput(1)) + 0.6*MuInput*AuInput(2,2)*Sqr(g1)*Sqr(Yu(2,2))*
+      TCC0(msqInput(2),msuInput(2),msuInput(2)) + 3*MuInput*Cube(AdInput(0,0))*
+      Quad(Yd(0,0))*TCD0(msdInput(0),msdInput(0),msqInput(0),msqInput(0)) + 3*
+      MuInput*AdInput(0,0)*Sqr(AdInput(0,1))*Sqr(Yd(0,0))*Sqr(Yd(0,1))*TCD0(
+      msdInput(0),msdInput(0),msqInput(0),msqInput(1)) + 3*MuInput*AdInput(0,0)*
+      Sqr(AdInput(0,2))*Sqr(Yd(0,0))*Sqr(Yd(0,2))*TCD0(msdInput(0),msdInput(0),
+      msqInput(0),msqInput(2)) + 3*MuInput*AdInput(0,1)*Sqr(AdInput(0,0))*Sqr(Yd(0
+      ,0))*Sqr(Yd(0,1))*TCD0(msdInput(0),msdInput(0),msqInput(1),msqInput(0)) + 3*
+      MuInput*Cube(AdInput(0,1))*Quad(Yd(0,1))*TCD0(msdInput(0),msdInput(0),
+      msqInput(1),msqInput(1)) + 3*MuInput*AdInput(0,1)*Sqr(AdInput(0,2))*Sqr(Yd(0
+      ,1))*Sqr(Yd(0,2))*TCD0(msdInput(0),msdInput(0),msqInput(1),msqInput(2)) + 3*
+      MuInput*AdInput(0,2)*Sqr(AdInput(0,0))*Sqr(Yd(0,0))*Sqr(Yd(0,2))*TCD0(
+      msdInput(0),msdInput(0),msqInput(2),msqInput(0)) + 3*MuInput*AdInput(0,2)*
+      Sqr(AdInput(0,1))*Sqr(Yd(0,1))*Sqr(Yd(0,2))*TCD0(msdInput(0),msdInput(0),
+      msqInput(2),msqInput(1)) + 3*MuInput*Cube(AdInput(0,2))*Quad(Yd(0,2))*TCD0(
+      msdInput(0),msdInput(0),msqInput(2),msqInput(2)) + 3*MuInput*AdInput(1,0)*
+      Sqr(AdInput(0,0))*Sqr(Yd(0,0))*Sqr(Yd(1,0))*TCD0(msdInput(0),msdInput(1),
+      msqInput(0),msqInput(0)) + 3*MuInput*AdInput(1,1)*Sqr(AdInput(0,1))*Sqr(Yd(0
+      ,1))*Sqr(Yd(1,1))*TCD0(msdInput(0),msdInput(1),msqInput(1),msqInput(1)) + 3*
+      MuInput*AdInput(1,2)*Sqr(AdInput(0,2))*Sqr(Yd(0,2))*Sqr(Yd(1,2))*TCD0(
+      msdInput(0),msdInput(1),msqInput(2),msqInput(2)) + 3*MuInput*AdInput(2,0)*
+      Sqr(AdInput(0,0))*Sqr(Yd(0,0))*Sqr(Yd(2,0))*TCD0(msdInput(0),msdInput(2),
+      msqInput(0),msqInput(0)) + 3*MuInput*AdInput(2,1)*Sqr(AdInput(0,1))*Sqr(Yd(0
+      ,1))*Sqr(Yd(2,1))*TCD0(msdInput(0),msdInput(2),msqInput(1),msqInput(1)) + 3*
+      MuInput*AdInput(2,2)*Sqr(AdInput(0,2))*Sqr(Yd(0,2))*Sqr(Yd(2,2))*TCD0(
+      msdInput(0),msdInput(2),msqInput(2),msqInput(2)) + 3*MuInput*AdInput(0,0)*
+      Sqr(AdInput(1,0))*Sqr(Yd(0,0))*Sqr(Yd(1,0))*TCD0(msdInput(1),msdInput(0),
+      msqInput(0),msqInput(0)) + 3*MuInput*AdInput(0,1)*Sqr(AdInput(1,1))*Sqr(Yd(0
+      ,1))*Sqr(Yd(1,1))*TCD0(msdInput(1),msdInput(0),msqInput(1),msqInput(1)) + 3*
+      MuInput*AdInput(0,2)*Sqr(AdInput(1,2))*Sqr(Yd(0,2))*Sqr(Yd(1,2))*TCD0(
+      msdInput(1),msdInput(0),msqInput(2),msqInput(2)) + 3*MuInput*Cube(AdInput(1,
+      0))*Quad(Yd(1,0))*TCD0(msdInput(1),msdInput(1),msqInput(0),msqInput(0)) + 3*
+      MuInput*AdInput(1,0)*Sqr(AdInput(1,1))*Sqr(Yd(1,0))*Sqr(Yd(1,1))*TCD0(
+      msdInput(1),msdInput(1),msqInput(0),msqInput(1)) + 3*MuInput*AdInput(1,0)*
+      Sqr(AdInput(1,2))*Sqr(Yd(1,0))*Sqr(Yd(1,2))*TCD0(msdInput(1),msdInput(1),
+      msqInput(0),msqInput(2)) + 3*MuInput*AdInput(1,1)*Sqr(AdInput(1,0))*Sqr(Yd(1
+      ,0))*Sqr(Yd(1,1))*TCD0(msdInput(1),msdInput(1),msqInput(1),msqInput(0)) + 3*
+      MuInput*Cube(AdInput(1,1))*Quad(Yd(1,1))*TCD0(msdInput(1),msdInput(1),
+      msqInput(1),msqInput(1)) + 3*MuInput*AdInput(1,1)*Sqr(AdInput(1,2))*Sqr(Yd(1
+      ,1))*Sqr(Yd(1,2))*TCD0(msdInput(1),msdInput(1),msqInput(1),msqInput(2)) + 3*
+      MuInput*AdInput(1,2)*Sqr(AdInput(1,0))*Sqr(Yd(1,0))*Sqr(Yd(1,2))*TCD0(
+      msdInput(1),msdInput(1),msqInput(2),msqInput(0)) + 3*MuInput*AdInput(1,2)*
+      Sqr(AdInput(1,1))*Sqr(Yd(1,1))*Sqr(Yd(1,2))*TCD0(msdInput(1),msdInput(1),
+      msqInput(2),msqInput(1)) + 3*MuInput*Cube(AdInput(1,2))*Quad(Yd(1,2))*TCD0(
+      msdInput(1),msdInput(1),msqInput(2),msqInput(2)) + 3*MuInput*AdInput(2,0)*
+      Sqr(AdInput(1,0))*Sqr(Yd(1,0))*Sqr(Yd(2,0))*TCD0(msdInput(1),msdInput(2),
+      msqInput(0),msqInput(0)) + 3*MuInput*AdInput(2,1)*Sqr(AdInput(1,1))*Sqr(Yd(1
+      ,1))*Sqr(Yd(2,1))*TCD0(msdInput(1),msdInput(2),msqInput(1),msqInput(1)) + 3*
+      MuInput*AdInput(2,2)*Sqr(AdInput(1,2))*Sqr(Yd(1,2))*Sqr(Yd(2,2))*TCD0(
+      msdInput(1),msdInput(2),msqInput(2),msqInput(2)) + 3*MuInput*AdInput(0,0)*
+      Sqr(AdInput(2,0))*Sqr(Yd(0,0))*Sqr(Yd(2,0))*TCD0(msdInput(2),msdInput(0),
+      msqInput(0),msqInput(0)) + 3*MuInput*AdInput(0,1)*Sqr(AdInput(2,1))*Sqr(Yd(0
+      ,1))*Sqr(Yd(2,1))*TCD0(msdInput(2),msdInput(0),msqInput(1),msqInput(1)) + 3*
+      MuInput*AdInput(0,2)*Sqr(AdInput(2,2))*Sqr(Yd(0,2))*Sqr(Yd(2,2))*TCD0(
+      msdInput(2),msdInput(0),msqInput(2),msqInput(2)) + 3*MuInput*AdInput(1,0)*
+      Sqr(AdInput(2,0))*Sqr(Yd(1,0))*Sqr(Yd(2,0))*TCD0(msdInput(2),msdInput(1),
+      msqInput(0),msqInput(0)) + 3*MuInput*AdInput(1,1)*Sqr(AdInput(2,1))*Sqr(Yd(1
+      ,1))*Sqr(Yd(2,1))*TCD0(msdInput(2),msdInput(1),msqInput(1),msqInput(1)) + 3*
+      MuInput*AdInput(1,2)*Sqr(AdInput(2,2))*Sqr(Yd(1,2))*Sqr(Yd(2,2))*TCD0(
+      msdInput(2),msdInput(1),msqInput(2),msqInput(2)) + 3*MuInput*Cube(AdInput(2,
+      0))*Quad(Yd(2,0))*TCD0(msdInput(2),msdInput(2),msqInput(0),msqInput(0)) + 3*
+      MuInput*AdInput(2,0)*Sqr(AdInput(2,1))*Sqr(Yd(2,0))*Sqr(Yd(2,1))*TCD0(
+      msdInput(2),msdInput(2),msqInput(0),msqInput(1)) + 3*MuInput*AdInput(2,0)*
+      Sqr(AdInput(2,2))*Sqr(Yd(2,0))*Sqr(Yd(2,2))*TCD0(msdInput(2),msdInput(2),
+      msqInput(0),msqInput(2)) + 3*MuInput*AdInput(2,1)*Sqr(AdInput(2,0))*Sqr(Yd(2
+      ,0))*Sqr(Yd(2,1))*TCD0(msdInput(2),msdInput(2),msqInput(1),msqInput(0)) + 3*
+      MuInput*Cube(AdInput(2,1))*Quad(Yd(2,1))*TCD0(msdInput(2),msdInput(2),
+      msqInput(1),msqInput(1)) + 3*MuInput*AdInput(2,1)*Sqr(AdInput(2,2))*Sqr(Yd(2
+      ,1))*Sqr(Yd(2,2))*TCD0(msdInput(2),msdInput(2),msqInput(1),msqInput(2)) + 3*
+      MuInput*AdInput(2,2)*Sqr(AdInput(2,0))*Sqr(Yd(2,0))*Sqr(Yd(2,2))*TCD0(
+      msdInput(2),msdInput(2),msqInput(2),msqInput(0)) + 3*MuInput*AdInput(2,2)*
+      Sqr(AdInput(2,1))*Sqr(Yd(2,1))*Sqr(Yd(2,2))*TCD0(msdInput(2),msdInput(2),
+      msqInput(2),msqInput(1)) + 3*MuInput*Cube(AdInput(2,2))*Quad(Yd(2,2))*TCD0(
+      msdInput(2),msdInput(2),msqInput(2),msqInput(2)) + MuInput*Cube(AeInput(0,0)
+      )*Quad(Ye(0,0))*TCD0(mseInput(0),mseInput(0),mslInput(0),mslInput(0)) +
+      MuInput*AeInput(0,0)*Sqr(AeInput(0,1))*Sqr(Ye(0,0))*Sqr(Ye(0,1))*TCD0(
+      mseInput(0),mseInput(0),mslInput(0),mslInput(1)) + MuInput*AeInput(0,0)*Sqr(
+      AeInput(0,2))*Sqr(Ye(0,0))*Sqr(Ye(0,2))*TCD0(mseInput(0),mseInput(0),
+      mslInput(0),mslInput(2)) + MuInput*AeInput(0,1)*Sqr(AeInput(0,0))*Sqr(Ye(0,0
+      ))*Sqr(Ye(0,1))*TCD0(mseInput(0),mseInput(0),mslInput(1),mslInput(0)) +
+      MuInput*Cube(AeInput(0,1))*Quad(Ye(0,1))*TCD0(mseInput(0),mseInput(0),
+      mslInput(1),mslInput(1)) + MuInput*AeInput(0,1)*Sqr(AeInput(0,2))*Sqr(Ye(0,1
+      ))*Sqr(Ye(0,2))*TCD0(mseInput(0),mseInput(0),mslInput(1),mslInput(2)) +
+      MuInput*AeInput(0,2)*Sqr(AeInput(0,0))*Sqr(Ye(0,0))*Sqr(Ye(0,2))*TCD0(
+      mseInput(0),mseInput(0),mslInput(2),mslInput(0)) + MuInput*AeInput(0,2)*Sqr(
+      AeInput(0,1))*Sqr(Ye(0,1))*Sqr(Ye(0,2))*TCD0(mseInput(0),mseInput(0),
+      mslInput(2),mslInput(1)) + MuInput*Cube(AeInput(0,2))*Quad(Ye(0,2))*TCD0(
+      mseInput(0),mseInput(0),mslInput(2),mslInput(2)) + MuInput*AeInput(1,0)*Sqr(
+      AeInput(0,0))*Sqr(Ye(0,0))*Sqr(Ye(1,0))*TCD0(mseInput(0),mseInput(1),
+      mslInput(0),mslInput(0)) + MuInput*AeInput(1,1)*Sqr(AeInput(0,1))*Sqr(Ye(0,1
+      ))*Sqr(Ye(1,1))*TCD0(mseInput(0),mseInput(1),mslInput(1),mslInput(1)) +
+      MuInput*AeInput(1,2)*Sqr(AeInput(0,2))*Sqr(Ye(0,2))*Sqr(Ye(1,2))*TCD0(
+      mseInput(0),mseInput(1),mslInput(2),mslInput(2)) + MuInput*AeInput(2,0)*Sqr(
+      AeInput(0,0))*Sqr(Ye(0,0))*Sqr(Ye(2,0))*TCD0(mseInput(0),mseInput(2),
+      mslInput(0),mslInput(0)) + MuInput*AeInput(2,1)*Sqr(AeInput(0,1))*Sqr(Ye(0,1
+      ))*Sqr(Ye(2,1))*TCD0(mseInput(0),mseInput(2),mslInput(1),mslInput(1)) +
+      MuInput*AeInput(2,2)*Sqr(AeInput(0,2))*Sqr(Ye(0,2))*Sqr(Ye(2,2))*TCD0(
+      mseInput(0),mseInput(2),mslInput(2),mslInput(2)) + MuInput*AeInput(0,0)*Sqr(
+      AeInput(1,0))*Sqr(Ye(0,0))*Sqr(Ye(1,0))*TCD0(mseInput(1),mseInput(0),
+      mslInput(0),mslInput(0)) + MuInput*AeInput(0,1)*Sqr(AeInput(1,1))*Sqr(Ye(0,1
+      ))*Sqr(Ye(1,1))*TCD0(mseInput(1),mseInput(0),mslInput(1),mslInput(1)) +
+      MuInput*AeInput(0,2)*Sqr(AeInput(1,2))*Sqr(Ye(0,2))*Sqr(Ye(1,2))*TCD0(
+      mseInput(1),mseInput(0),mslInput(2),mslInput(2)) + MuInput*Cube(AeInput(1,0)
+      )*Quad(Ye(1,0))*TCD0(mseInput(1),mseInput(1),mslInput(0),mslInput(0)) +
+      MuInput*AeInput(1,0)*Sqr(AeInput(1,1))*Sqr(Ye(1,0))*Sqr(Ye(1,1))*TCD0(
+      mseInput(1),mseInput(1),mslInput(0),mslInput(1)) + MuInput*AeInput(1,0)*Sqr(
+      AeInput(1,2))*Sqr(Ye(1,0))*Sqr(Ye(1,2))*TCD0(mseInput(1),mseInput(1),
+      mslInput(0),mslInput(2)) + MuInput*AeInput(1,1)*Sqr(AeInput(1,0))*Sqr(Ye(1,0
+      ))*Sqr(Ye(1,1))*TCD0(mseInput(1),mseInput(1),mslInput(1),mslInput(0)) +
+      MuInput*Cube(AeInput(1,1))*Quad(Ye(1,1))*TCD0(mseInput(1),mseInput(1),
+      mslInput(1),mslInput(1)) + MuInput*AeInput(1,1)*Sqr(AeInput(1,2))*Sqr(Ye(1,1
+      ))*Sqr(Ye(1,2))*TCD0(mseInput(1),mseInput(1),mslInput(1),mslInput(2)) +
+      MuInput*AeInput(1,2)*Sqr(AeInput(1,0))*Sqr(Ye(1,0))*Sqr(Ye(1,2))*TCD0(
+      mseInput(1),mseInput(1),mslInput(2),mslInput(0)) + MuInput*AeInput(1,2)*Sqr(
+      AeInput(1,1))*Sqr(Ye(1,1))*Sqr(Ye(1,2))*TCD0(mseInput(1),mseInput(1),
+      mslInput(2),mslInput(1)) + MuInput*Cube(AeInput(1,2))*Quad(Ye(1,2))*TCD0(
+      mseInput(1),mseInput(1),mslInput(2),mslInput(2)) + MuInput*AeInput(2,0)*Sqr(
+      AeInput(1,0))*Sqr(Ye(1,0))*Sqr(Ye(2,0))*TCD0(mseInput(1),mseInput(2),
+      mslInput(0),mslInput(0)) + MuInput*AeInput(2,1)*Sqr(AeInput(1,1))*Sqr(Ye(1,1
+      ))*Sqr(Ye(2,1))*TCD0(mseInput(1),mseInput(2),mslInput(1),mslInput(1)) +
+      MuInput*AeInput(2,2)*Sqr(AeInput(1,2))*Sqr(Ye(1,2))*Sqr(Ye(2,2))*TCD0(
+      mseInput(1),mseInput(2),mslInput(2),mslInput(2)) + MuInput*AeInput(0,0)*Sqr(
+      AeInput(2,0))*Sqr(Ye(0,0))*Sqr(Ye(2,0))*TCD0(mseInput(2),mseInput(0),
+      mslInput(0),mslInput(0)) + MuInput*AeInput(0,1)*Sqr(AeInput(2,1))*Sqr(Ye(0,1
+      ))*Sqr(Ye(2,1))*TCD0(mseInput(2),mseInput(0),mslInput(1),mslInput(1)) +
+      MuInput*AeInput(0,2)*Sqr(AeInput(2,2))*Sqr(Ye(0,2))*Sqr(Ye(2,2))*TCD0(
+      mseInput(2),mseInput(0),mslInput(2),mslInput(2)) + MuInput*AeInput(1,0)*Sqr(
+      AeInput(2,0))*Sqr(Ye(1,0))*Sqr(Ye(2,0))*TCD0(mseInput(2),mseInput(1),
+      mslInput(0),mslInput(0)) + MuInput*AeInput(1,1)*Sqr(AeInput(2,1))*Sqr(Ye(1,1
+      ))*Sqr(Ye(2,1))*TCD0(mseInput(2),mseInput(1),mslInput(1),mslInput(1)) +
+      MuInput*AeInput(1,2)*Sqr(AeInput(2,2))*Sqr(Ye(1,2))*Sqr(Ye(2,2))*TCD0(
+      mseInput(2),mseInput(1),mslInput(2),mslInput(2)) + MuInput*Cube(AeInput(2,0)
+      )*Quad(Ye(2,0))*TCD0(mseInput(2),mseInput(2),mslInput(0),mslInput(0)) +
+      MuInput*AeInput(2,0)*Sqr(AeInput(2,1))*Sqr(Ye(2,0))*Sqr(Ye(2,1))*TCD0(
+      mseInput(2),mseInput(2),mslInput(0),mslInput(1)) + MuInput*AeInput(2,0)*Sqr(
+      AeInput(2,2))*Sqr(Ye(2,0))*Sqr(Ye(2,2))*TCD0(mseInput(2),mseInput(2),
+      mslInput(0),mslInput(2)) + MuInput*AeInput(2,1)*Sqr(AeInput(2,0))*Sqr(Ye(2,0
+      ))*Sqr(Ye(2,1))*TCD0(mseInput(2),mseInput(2),mslInput(1),mslInput(0)) +
+      MuInput*Cube(AeInput(2,1))*Quad(Ye(2,1))*TCD0(mseInput(2),mseInput(2),
+      mslInput(1),mslInput(1)) + MuInput*AeInput(2,1)*Sqr(AeInput(2,2))*Sqr(Ye(2,1
+      ))*Sqr(Ye(2,2))*TCD0(mseInput(2),mseInput(2),mslInput(1),mslInput(2)) +
+      MuInput*AeInput(2,2)*Sqr(AeInput(2,0))*Sqr(Ye(2,0))*Sqr(Ye(2,2))*TCD0(
+      mseInput(2),mseInput(2),mslInput(2),mslInput(0)) + MuInput*AeInput(2,2)*Sqr(
+      AeInput(2,1))*Sqr(Ye(2,1))*Sqr(Ye(2,2))*TCD0(mseInput(2),mseInput(2),
+      mslInput(2),mslInput(1)) + MuInput*Cube(AeInput(2,2))*Quad(Ye(2,2))*TCD0(
+      mseInput(2),mseInput(2),mslInput(2),mslInput(2)) + 3*MuInput*AuInput(0,0)*
+      Quad(Yu(0,0))*Sqr(Abs(MuInput))*TCD0(msqInput(0),msqInput(0),msqInput(0),
+      msqInput(0)) + 3*MuInput*AuInput(1,0)*Sqr(Abs(MuInput))*Sqr(Yu(0,0))*Sqr(Yu(
+      1,0))*TCD0(msqInput(0),msqInput(0),msqInput(0),msqInput(1)) + 3*MuInput*
+      AuInput(2,0)*Sqr(Abs(MuInput))*Sqr(Yu(0,0))*Sqr(Yu(2,0))*TCD0(msqInput(0),
+      msqInput(0),msqInput(0),msqInput(2)) + 3*MuInput*AuInput(0,0)*Sqr(Abs(
+      MuInput))*Sqr(Yu(0,0))*Sqr(Yu(1,0))*TCD0(msqInput(0),msqInput(0),msqInput(1)
+      ,msqInput(0)) + 3*MuInput*AuInput(1,0)*Quad(Yu(1,0))*Sqr(Abs(MuInput))*TCD0(
+      msqInput(0),msqInput(0),msqInput(1),msqInput(1)) + 3*MuInput*AuInput(2,0)*
+      Sqr(Abs(MuInput))*Sqr(Yu(1,0))*Sqr(Yu(2,0))*TCD0(msqInput(0),msqInput(0),
+      msqInput(1),msqInput(2)) + 3*MuInput*AuInput(0,0)*Sqr(Abs(MuInput))*Sqr(Yu(0
+      ,0))*Sqr(Yu(2,0))*TCD0(msqInput(0),msqInput(0),msqInput(2),msqInput(0)) + 3*
+      MuInput*AuInput(1,0)*Sqr(Abs(MuInput))*Sqr(Yu(1,0))*Sqr(Yu(2,0))*TCD0(
+      msqInput(0),msqInput(0),msqInput(2),msqInput(1)) + 3*MuInput*AuInput(2,0)*
+      Quad(Yu(2,0))*Sqr(Abs(MuInput))*TCD0(msqInput(0),msqInput(0),msqInput(2),
+      msqInput(2)) + 3*MuInput*AuInput(0,0)*Sqr(Abs(MuInput))*Sqr(Yu(0,0))*Sqr(Yu(
+      0,1))*TCD0(msqInput(0),msqInput(1),msqInput(0),msqInput(0)) + 3*MuInput*
+      AuInput(1,0)*Sqr(Abs(MuInput))*Sqr(Yu(1,0))*Sqr(Yu(1,1))*TCD0(msqInput(0),
+      msqInput(1),msqInput(1),msqInput(1)) + 3*MuInput*AuInput(2,0)*Sqr(Abs(
+      MuInput))*Sqr(Yu(2,0))*Sqr(Yu(2,1))*TCD0(msqInput(0),msqInput(1),msqInput(2)
+      ,msqInput(2)) + 3*MuInput*AuInput(0,0)*Sqr(Abs(MuInput))*Sqr(Yu(0,0))*Sqr(Yu
+      (0,2))*TCD0(msqInput(0),msqInput(2),msqInput(0),msqInput(0)) + 3*MuInput*
+      AuInput(1,0)*Sqr(Abs(MuInput))*Sqr(Yu(1,0))*Sqr(Yu(1,2))*TCD0(msqInput(0),
+      msqInput(2),msqInput(1),msqInput(1)) + 3*MuInput*AuInput(2,0)*Sqr(Abs(
+      MuInput))*Sqr(Yu(2,0))*Sqr(Yu(2,2))*TCD0(msqInput(0),msqInput(2),msqInput(2)
+      ,msqInput(2)) + 3*MuInput*AuInput(0,1)*Sqr(Abs(MuInput))*Sqr(Yu(0,0))*Sqr(Yu
+      (0,1))*TCD0(msqInput(1),msqInput(0),msqInput(0),msqInput(0)) + 3*MuInput*
+      AuInput(1,1)*Sqr(Abs(MuInput))*Sqr(Yu(1,0))*Sqr(Yu(1,1))*TCD0(msqInput(1),
+      msqInput(0),msqInput(1),msqInput(1)) + 3*MuInput*AuInput(2,1)*Sqr(Abs(
+      MuInput))*Sqr(Yu(2,0))*Sqr(Yu(2,1))*TCD0(msqInput(1),msqInput(0),msqInput(2)
+      ,msqInput(2)) + 3*MuInput*AuInput(0,1)*Quad(Yu(0,1))*Sqr(Abs(MuInput))*TCD0(
+      msqInput(1),msqInput(1),msqInput(0),msqInput(0)) + 3*MuInput*AuInput(1,1)*
+      Sqr(Abs(MuInput))*Sqr(Yu(0,1))*Sqr(Yu(1,1))*TCD0(msqInput(1),msqInput(1),
+      msqInput(0),msqInput(1)) + 3*MuInput*AuInput(2,1)*Sqr(Abs(MuInput))*Sqr(Yu(0
+      ,1))*Sqr(Yu(2,1))*TCD0(msqInput(1),msqInput(1),msqInput(0),msqInput(2)) + 3*
+      MuInput*AuInput(0,1)*Sqr(Abs(MuInput))*Sqr(Yu(0,1))*Sqr(Yu(1,1))*TCD0(
+      msqInput(1),msqInput(1),msqInput(1),msqInput(0)) + 3*MuInput*AuInput(1,1)*
+      Quad(Yu(1,1))*Sqr(Abs(MuInput))*TCD0(msqInput(1),msqInput(1),msqInput(1),
+      msqInput(1)) + 3*MuInput*AuInput(2,1)*Sqr(Abs(MuInput))*Sqr(Yu(1,1))*Sqr(Yu(
+      2,1))*TCD0(msqInput(1),msqInput(1),msqInput(1),msqInput(2)) + 3*MuInput*
+      AuInput(0,1)*Sqr(Abs(MuInput))*Sqr(Yu(0,1))*Sqr(Yu(2,1))*TCD0(msqInput(1),
+      msqInput(1),msqInput(2),msqInput(0)) + 3*MuInput*AuInput(1,1)*Sqr(Abs(
+      MuInput))*Sqr(Yu(1,1))*Sqr(Yu(2,1))*TCD0(msqInput(1),msqInput(1),msqInput(2)
+      ,msqInput(1)) + 3*MuInput*AuInput(2,1)*Quad(Yu(2,1))*Sqr(Abs(MuInput))*TCD0(
+      msqInput(1),msqInput(1),msqInput(2),msqInput(2)) + 3*MuInput*AuInput(0,1)*
+      Sqr(Abs(MuInput))*Sqr(Yu(0,1))*Sqr(Yu(0,2))*TCD0(msqInput(1),msqInput(2),
+      msqInput(0),msqInput(0)) + 3*MuInput*AuInput(1,1)*Sqr(Abs(MuInput))*Sqr(Yu(1
+      ,1))*Sqr(Yu(1,2))*TCD0(msqInput(1),msqInput(2),msqInput(1),msqInput(1)) + 3*
+      MuInput*AuInput(2,1)*Sqr(Abs(MuInput))*Sqr(Yu(2,1))*Sqr(Yu(2,2))*TCD0(
+      msqInput(1),msqInput(2),msqInput(2),msqInput(2)) + 3*MuInput*AuInput(0,2)*
+      Sqr(Abs(MuInput))*Sqr(Yu(0,0))*Sqr(Yu(0,2))*TCD0(msqInput(2),msqInput(0),
+      msqInput(0),msqInput(0)) + 3*MuInput*AuInput(1,2)*Sqr(Abs(MuInput))*Sqr(Yu(1
+      ,0))*Sqr(Yu(1,2))*TCD0(msqInput(2),msqInput(0),msqInput(1),msqInput(1)) + 3*
+      MuInput*AuInput(2,2)*Sqr(Abs(MuInput))*Sqr(Yu(2,0))*Sqr(Yu(2,2))*TCD0(
+      msqInput(2),msqInput(0),msqInput(2),msqInput(2)) + 3*MuInput*AuInput(0,2)*
+      Sqr(Abs(MuInput))*Sqr(Yu(0,1))*Sqr(Yu(0,2))*TCD0(msqInput(2),msqInput(1),
+      msqInput(0),msqInput(0)) + 3*MuInput*AuInput(1,2)*Sqr(Abs(MuInput))*Sqr(Yu(1
+      ,1))*Sqr(Yu(1,2))*TCD0(msqInput(2),msqInput(1),msqInput(1),msqInput(1)) + 3*
+      MuInput*AuInput(2,2)*Sqr(Abs(MuInput))*Sqr(Yu(2,1))*Sqr(Yu(2,2))*TCD0(
+      msqInput(2),msqInput(1),msqInput(2),msqInput(2)) + 3*MuInput*AuInput(0,2)*
+      Quad(Yu(0,2))*Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(2),msqInput(0),
+      msqInput(0)) + 3*MuInput*AuInput(1,2)*Sqr(Abs(MuInput))*Sqr(Yu(0,2))*Sqr(Yu(
+      1,2))*TCD0(msqInput(2),msqInput(2),msqInput(0),msqInput(1)) + 3*MuInput*
+      AuInput(2,2)*Sqr(Abs(MuInput))*Sqr(Yu(0,2))*Sqr(Yu(2,2))*TCD0(msqInput(2),
+      msqInput(2),msqInput(0),msqInput(2)) + 3*MuInput*AuInput(0,2)*Sqr(Abs(
+      MuInput))*Sqr(Yu(0,2))*Sqr(Yu(1,2))*TCD0(msqInput(2),msqInput(2),msqInput(1)
+      ,msqInput(0)) + 3*MuInput*AuInput(1,2)*Quad(Yu(1,2))*Sqr(Abs(MuInput))*TCD0(
+      msqInput(2),msqInput(2),msqInput(1),msqInput(1)) + 3*MuInput*AuInput(2,2)*
+      Sqr(Abs(MuInput))*Sqr(Yu(1,2))*Sqr(Yu(2,2))*TCD0(msqInput(2),msqInput(2),
+      msqInput(1),msqInput(2)) + 3*MuInput*AuInput(0,2)*Sqr(Abs(MuInput))*Sqr(Yu(0
+      ,2))*Sqr(Yu(2,2))*TCD0(msqInput(2),msqInput(2),msqInput(2),msqInput(0)) + 3*
+      MuInput*AuInput(1,2)*Sqr(Abs(MuInput))*Sqr(Yu(1,2))*Sqr(Yu(2,2))*TCD0(
+      msqInput(2),msqInput(2),msqInput(2),msqInput(1)) + 3*MuInput*AuInput(2,2)*
+      Quad(Yu(2,2))*Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(2),msqInput(2),
+      msqInput(2)) + 0.36*M1Input*MuInput*Quad(g1)*TCD2t(M1Input,M1Input,Abs(
+      MuInput),Abs(MuInput)) + 0.6*(M1Input + M2Input)*MuInput*Sqr(g1)*Sqr(g2)*
+      TCD2t(M1Input,M2Input,Abs(MuInput),Abs(MuInput)) + 3*M2Input*MuInput*Quad(g2
+      )*TCD2t(M2Input,M2Input,Abs(MuInput),Abs(MuInput)) + 3*MuInput*AdInput(0,0)*
+      AdInput(0,1)*AdInput(1,1)*TCD0(msdInput(0),msdInput(1),msqInput(0),msqInput(
+      1))*Yd(0,0)*Yd(0,1)*Yd(1,0)*Yd(1,1) + 3*MuInput*AdInput(0,0)*AdInput(0,1)*
+      AdInput(1,0)*TCD0(msdInput(0),msdInput(1),msqInput(1),msqInput(0))*Yd(0,0)*
+      Yd(0,1)*Yd(1,0)*Yd(1,1) + 3*MuInput*AdInput(0,1)*AdInput(1,0)*AdInput(1,1)*
+      TCD0(msdInput(1),msdInput(0),msqInput(0),msqInput(1))*Yd(0,0)*Yd(0,1)*Yd(1,0
+      )*Yd(1,1) + 3*MuInput*AdInput(0,0)*AdInput(1,0)*AdInput(1,1)*TCD0(msdInput(1
+      ),msdInput(0),msqInput(1),msqInput(0))*Yd(0,0)*Yd(0,1)*Yd(1,0)*Yd(1,1) + 3*
+      MuInput*AdInput(0,0)*AdInput(0,2)*AdInput(1,2)*TCD0(msdInput(0),msdInput(1),
+      msqInput(0),msqInput(2))*Yd(0,0)*Yd(0,2)*Yd(1,0)*Yd(1,2) + 3*MuInput*AdInput
+      (0,0)*AdInput(0,2)*AdInput(1,0)*TCD0(msdInput(0),msdInput(1),msqInput(2),
+      msqInput(0))*Yd(0,0)*Yd(0,2)*Yd(1,0)*Yd(1,2) + 3*MuInput*AdInput(0,2)*
+      AdInput(1,0)*AdInput(1,2)*TCD0(msdInput(1),msdInput(0),msqInput(0),msqInput(
+      2))*Yd(0,0)*Yd(0,2)*Yd(1,0)*Yd(1,2) + 3*MuInput*AdInput(0,0)*AdInput(1,0)*
+      AdInput(1,2)*TCD0(msdInput(1),msdInput(0),msqInput(2),msqInput(0))*Yd(0,0)*
+      Yd(0,2)*Yd(1,0)*Yd(1,2) + 3*MuInput*AdInput(0,1)*AdInput(0,2)*AdInput(1,2)*
+      TCD0(msdInput(0),msdInput(1),msqInput(1),msqInput(2))*Yd(0,1)*Yd(0,2)*Yd(1,1
+      )*Yd(1,2) + 3*MuInput*AdInput(0,1)*AdInput(0,2)*AdInput(1,1)*TCD0(msdInput(0
+      ),msdInput(1),msqInput(2),msqInput(1))*Yd(0,1)*Yd(0,2)*Yd(1,1)*Yd(1,2) + 3*
+      MuInput*AdInput(0,2)*AdInput(1,1)*AdInput(1,2)*TCD0(msdInput(1),msdInput(0),
+      msqInput(1),msqInput(2))*Yd(0,1)*Yd(0,2)*Yd(1,1)*Yd(1,2) + 3*MuInput*AdInput
+      (0,1)*AdInput(1,1)*AdInput(1,2)*TCD0(msdInput(1),msdInput(0),msqInput(2),
+      msqInput(1))*Yd(0,1)*Yd(0,2)*Yd(1,1)*Yd(1,2) + 3*MuInput*AdInput(0,0)*TCC0(
+      msdInput(0),msdInput(1),msqInput(0))*Yd(0,0)*Yd(1,0)*(Yd(0,0)*Yd(1,0) + Yd(0
+      ,1)*Yd(1,1) + Yd(0,2)*Yd(1,2)) + 3*MuInput*AdInput(1,0)*TCC0(msdInput(1),
+      msdInput(0),msqInput(0))*Yd(0,0)*Yd(1,0)*(Yd(0,0)*Yd(1,0) + Yd(0,1)*Yd(1,1)
+      + Yd(0,2)*Yd(1,2)) + 3*MuInput*AdInput(0,1)*TCC0(msdInput(0),msdInput(1),
+      msqInput(1))*Yd(0,1)*Yd(1,1)*(Yd(0,0)*Yd(1,0) + Yd(0,1)*Yd(1,1) + Yd(0,2)*Yd
+      (1,2)) + 3*MuInput*AdInput(1,1)*TCC0(msdInput(1),msdInput(0),msqInput(1))*Yd
+      (0,1)*Yd(1,1)*(Yd(0,0)*Yd(1,0) + Yd(0,1)*Yd(1,1) + Yd(0,2)*Yd(1,2)) + 3*
+      MuInput*AdInput(0,2)*TCC0(msdInput(0),msdInput(1),msqInput(2))*Yd(0,2)*Yd(1,
+      2)*(Yd(0,0)*Yd(1,0) + Yd(0,1)*Yd(1,1) + Yd(0,2)*Yd(1,2)) + 3*MuInput*AdInput
+      (1,2)*TCC0(msdInput(1),msdInput(0),msqInput(2))*Yd(0,2)*Yd(1,2)*(Yd(0,0)*Yd(
+      1,0) + Yd(0,1)*Yd(1,1) + Yd(0,2)*Yd(1,2)) + 3*MuInput*AdInput(0,0)*AdInput(0
+      ,1)*AdInput(2,1)*TCD0(msdInput(0),msdInput(2),msqInput(0),msqInput(1))*Yd(0,
+      0)*Yd(0,1)*Yd(2,0)*Yd(2,1) + 3*MuInput*AdInput(0,0)*AdInput(0,1)*AdInput(2,0
+      )*TCD0(msdInput(0),msdInput(2),msqInput(1),msqInput(0))*Yd(0,0)*Yd(0,1)*Yd(2
+      ,0)*Yd(2,1) + 3*MuInput*AdInput(0,1)*AdInput(2,0)*AdInput(2,1)*TCD0(msdInput
+      (2),msdInput(0),msqInput(0),msqInput(1))*Yd(0,0)*Yd(0,1)*Yd(2,0)*Yd(2,1) + 3
+      *MuInput*AdInput(0,0)*AdInput(2,0)*AdInput(2,1)*TCD0(msdInput(2),msdInput(0)
+      ,msqInput(1),msqInput(0))*Yd(0,0)*Yd(0,1)*Yd(2,0)*Yd(2,1) + 3*MuInput*
+      AdInput(1,0)*AdInput(1,1)*AdInput(2,1)*TCD0(msdInput(1),msdInput(2),msqInput
+      (0),msqInput(1))*Yd(1,0)*Yd(1,1)*Yd(2,0)*Yd(2,1) + 3*MuInput*AdInput(1,0)*
+      AdInput(1,1)*AdInput(2,0)*TCD0(msdInput(1),msdInput(2),msqInput(1),msqInput(
+      0))*Yd(1,0)*Yd(1,1)*Yd(2,0)*Yd(2,1) + 3*MuInput*AdInput(1,1)*AdInput(2,0)*
+      AdInput(2,1)*TCD0(msdInput(2),msdInput(1),msqInput(0),msqInput(1))*Yd(1,0)*
+      Yd(1,1)*Yd(2,0)*Yd(2,1) + 3*MuInput*AdInput(1,0)*AdInput(2,0)*AdInput(2,1)*
+      TCD0(msdInput(2),msdInput(1),msqInput(1),msqInput(0))*Yd(1,0)*Yd(1,1)*Yd(2,0
+      )*Yd(2,1) + 3*MuInput*AdInput(0,0)*TCC0(msdInput(0),msqInput(0),msqInput(1))
+      *Yd(0,0)*Yd(0,1)*(Yd(0,0)*Yd(0,1) + Yd(1,0)*Yd(1,1) + Yd(2,0)*Yd(2,1)) + 3*
+      MuInput*AdInput(0,1)*TCC0(msdInput(0),msqInput(1),msqInput(0))*Yd(0,0)*Yd(0,
+      1)*(Yd(0,0)*Yd(0,1) + Yd(1,0)*Yd(1,1) + Yd(2,0)*Yd(2,1)) + 3*MuInput*AdInput
+      (1,0)*TCC0(msdInput(1),msqInput(0),msqInput(1))*Yd(1,0)*Yd(1,1)*(Yd(0,0)*Yd(
+      0,1) + Yd(1,0)*Yd(1,1) + Yd(2,0)*Yd(2,1)) + 3*MuInput*AdInput(1,1)*TCC0(
+      msdInput(1),msqInput(1),msqInput(0))*Yd(1,0)*Yd(1,1)*(Yd(0,0)*Yd(0,1) + Yd(1
+      ,0)*Yd(1,1) + Yd(2,0)*Yd(2,1)) + 3*MuInput*AdInput(2,0)*TCC0(msdInput(2),
+      msqInput(0),msqInput(1))*Yd(2,0)*Yd(2,1)*(Yd(0,0)*Yd(0,1) + Yd(1,0)*Yd(1,1)
+      + Yd(2,0)*Yd(2,1)) + 3*MuInput*AdInput(2,1)*TCC0(msdInput(2),msqInput(1),
+      msqInput(0))*Yd(2,0)*Yd(2,1)*(Yd(0,0)*Yd(0,1) + Yd(1,0)*Yd(1,1) + Yd(2,0)*Yd
+      (2,1)) + 3*MuInput*AdInput(0,0)*AdInput(0,2)*AdInput(2,2)*TCD0(msdInput(0),
+      msdInput(2),msqInput(0),msqInput(2))*Yd(0,0)*Yd(0,2)*Yd(2,0)*Yd(2,2) + 3*
+      MuInput*AdInput(0,0)*AdInput(0,2)*AdInput(2,0)*TCD0(msdInput(0),msdInput(2),
+      msqInput(2),msqInput(0))*Yd(0,0)*Yd(0,2)*Yd(2,0)*Yd(2,2) + 3*MuInput*AdInput
+      (0,2)*AdInput(2,0)*AdInput(2,2)*TCD0(msdInput(2),msdInput(0),msqInput(0),
+      msqInput(2))*Yd(0,0)*Yd(0,2)*Yd(2,0)*Yd(2,2) + 3*MuInput*AdInput(0,0)*
+      AdInput(2,0)*AdInput(2,2)*TCD0(msdInput(2),msdInput(0),msqInput(2),msqInput(
+      0))*Yd(0,0)*Yd(0,2)*Yd(2,0)*Yd(2,2) + 3*MuInput*AdInput(1,0)*AdInput(1,2)*
+      AdInput(2,2)*TCD0(msdInput(1),msdInput(2),msqInput(0),msqInput(2))*Yd(1,0)*
+      Yd(1,2)*Yd(2,0)*Yd(2,2) + 3*MuInput*AdInput(1,0)*AdInput(1,2)*AdInput(2,0)*
+      TCD0(msdInput(1),msdInput(2),msqInput(2),msqInput(0))*Yd(1,0)*Yd(1,2)*Yd(2,0
+      )*Yd(2,2) + 3*MuInput*AdInput(1,2)*AdInput(2,0)*AdInput(2,2)*TCD0(msdInput(2
+      ),msdInput(1),msqInput(0),msqInput(2))*Yd(1,0)*Yd(1,2)*Yd(2,0)*Yd(2,2) + 3*
+      MuInput*AdInput(1,0)*AdInput(2,0)*AdInput(2,2)*TCD0(msdInput(2),msdInput(1),
+      msqInput(2),msqInput(0))*Yd(1,0)*Yd(1,2)*Yd(2,0)*Yd(2,2) + 3*MuInput*AdInput
+      (0,1)*AdInput(0,2)*AdInput(2,2)*TCD0(msdInput(0),msdInput(2),msqInput(1),
+      msqInput(2))*Yd(0,1)*Yd(0,2)*Yd(2,1)*Yd(2,2) + 3*MuInput*AdInput(0,1)*
+      AdInput(0,2)*AdInput(2,1)*TCD0(msdInput(0),msdInput(2),msqInput(2),msqInput(
+      1))*Yd(0,1)*Yd(0,2)*Yd(2,1)*Yd(2,2) + 3*MuInput*AdInput(0,2)*AdInput(2,1)*
+      AdInput(2,2)*TCD0(msdInput(2),msdInput(0),msqInput(1),msqInput(2))*Yd(0,1)*
+      Yd(0,2)*Yd(2,1)*Yd(2,2) + 3*MuInput*AdInput(0,1)*AdInput(2,1)*AdInput(2,2)*
+      TCD0(msdInput(2),msdInput(0),msqInput(2),msqInput(1))*Yd(0,1)*Yd(0,2)*Yd(2,1
+      )*Yd(2,2) + 3*MuInput*AdInput(1,1)*AdInput(1,2)*AdInput(2,2)*TCD0(msdInput(1
+      ),msdInput(2),msqInput(1),msqInput(2))*Yd(1,1)*Yd(1,2)*Yd(2,1)*Yd(2,2) + 3*
+      MuInput*AdInput(1,1)*AdInput(1,2)*AdInput(2,1)*TCD0(msdInput(1),msdInput(2),
+      msqInput(2),msqInput(1))*Yd(1,1)*Yd(1,2)*Yd(2,1)*Yd(2,2) + 3*MuInput*AdInput
+      (1,2)*AdInput(2,1)*AdInput(2,2)*TCD0(msdInput(2),msdInput(1),msqInput(1),
+      msqInput(2))*Yd(1,1)*Yd(1,2)*Yd(2,1)*Yd(2,2) + 3*MuInput*AdInput(1,1)*
+      AdInput(2,1)*AdInput(2,2)*TCD0(msdInput(2),msdInput(1),msqInput(2),msqInput(
+      1))*Yd(1,1)*Yd(1,2)*Yd(2,1)*Yd(2,2) + 3*MuInput*AdInput(0,0)*TCC0(msdInput(0
+      ),msdInput(2),msqInput(0))*Yd(0,0)*Yd(2,0)*(Yd(0,0)*Yd(2,0) + Yd(0,1)*Yd(2,1
+      ) + Yd(0,2)*Yd(2,2)) + 3*MuInput*AdInput(2,0)*TCC0(msdInput(2),msdInput(0),
+      msqInput(0))*Yd(0,0)*Yd(2,0)*(Yd(0,0)*Yd(2,0) + Yd(0,1)*Yd(2,1) + Yd(0,2)*Yd
+      (2,2)) + 3*MuInput*AdInput(0,1)*TCC0(msdInput(0),msdInput(2),msqInput(1))*Yd
+      (0,1)*Yd(2,1)*(Yd(0,0)*Yd(2,0) + Yd(0,1)*Yd(2,1) + Yd(0,2)*Yd(2,2)) + 3*
+      MuInput*AdInput(2,1)*TCC0(msdInput(2),msdInput(0),msqInput(1))*Yd(0,1)*Yd(2,
+      1)*(Yd(0,0)*Yd(2,0) + Yd(0,1)*Yd(2,1) + Yd(0,2)*Yd(2,2)) + 3*MuInput*AdInput
+      (0,2)*TCC0(msdInput(0),msdInput(2),msqInput(2))*Yd(0,2)*Yd(2,2)*(Yd(0,0)*Yd(
+      2,0) + Yd(0,1)*Yd(2,1) + Yd(0,2)*Yd(2,2)) + 3*MuInput*AdInput(2,2)*TCC0(
+      msdInput(2),msdInput(0),msqInput(2))*Yd(0,2)*Yd(2,2)*(Yd(0,0)*Yd(2,0) + Yd(0
+      ,1)*Yd(2,1) + Yd(0,2)*Yd(2,2)) + 3*MuInput*AdInput(1,0)*TCC0(msdInput(1),
+      msdInput(2),msqInput(0))*Yd(1,0)*Yd(2,0)*(Yd(1,0)*Yd(2,0) + Yd(1,1)*Yd(2,1)
+      + Yd(1,2)*Yd(2,2)) + 3*MuInput*AdInput(2,0)*TCC0(msdInput(2),msdInput(1),
+      msqInput(0))*Yd(1,0)*Yd(2,0)*(Yd(1,0)*Yd(2,0) + Yd(1,1)*Yd(2,1) + Yd(1,2)*Yd
+      (2,2)) + 3*MuInput*AdInput(1,1)*TCC0(msdInput(1),msdInput(2),msqInput(1))*Yd
+      (1,1)*Yd(2,1)*(Yd(1,0)*Yd(2,0) + Yd(1,1)*Yd(2,1) + Yd(1,2)*Yd(2,2)) + 3*
+      MuInput*AdInput(2,1)*TCC0(msdInput(2),msdInput(1),msqInput(1))*Yd(1,1)*Yd(2,
+      1)*(Yd(1,0)*Yd(2,0) + Yd(1,1)*Yd(2,1) + Yd(1,2)*Yd(2,2)) + 3*MuInput*AdInput
+      (1,2)*TCC0(msdInput(1),msdInput(2),msqInput(2))*Yd(1,2)*Yd(2,2)*(Yd(1,0)*Yd(
+      2,0) + Yd(1,1)*Yd(2,1) + Yd(1,2)*Yd(2,2)) + 3*MuInput*AdInput(2,2)*TCC0(
+      msdInput(2),msdInput(1),msqInput(2))*Yd(1,2)*Yd(2,2)*(Yd(1,0)*Yd(2,0) + Yd(1
+      ,1)*Yd(2,1) + Yd(1,2)*Yd(2,2)) + 3*MuInput*AdInput(0,0)*TCC0(msdInput(0),
+      msqInput(0),msqInput(2))*Yd(0,0)*Yd(0,2)*(Yd(0,0)*Yd(0,2) + Yd(1,0)*Yd(1,2)
+      + Yd(2,0)*Yd(2,2)) + 3*MuInput*AdInput(0,2)*TCC0(msdInput(0),msqInput(2),
+      msqInput(0))*Yd(0,0)*Yd(0,2)*(Yd(0,0)*Yd(0,2) + Yd(1,0)*Yd(1,2) + Yd(2,0)*Yd
+      (2,2)) + 3*MuInput*AdInput(1,0)*TCC0(msdInput(1),msqInput(0),msqInput(2))*Yd
+      (1,0)*Yd(1,2)*(Yd(0,0)*Yd(0,2) + Yd(1,0)*Yd(1,2) + Yd(2,0)*Yd(2,2)) + 3*
+      MuInput*AdInput(1,2)*TCC0(msdInput(1),msqInput(2),msqInput(0))*Yd(1,0)*Yd(1,
+      2)*(Yd(0,0)*Yd(0,2) + Yd(1,0)*Yd(1,2) + Yd(2,0)*Yd(2,2)) + 3*MuInput*AdInput
+      (2,0)*TCC0(msdInput(2),msqInput(0),msqInput(2))*Yd(2,0)*Yd(2,2)*(Yd(0,0)*Yd(
+      0,2) + Yd(1,0)*Yd(1,2) + Yd(2,0)*Yd(2,2)) + 3*MuInput*AdInput(2,2)*TCC0(
+      msdInput(2),msqInput(2),msqInput(0))*Yd(2,0)*Yd(2,2)*(Yd(0,0)*Yd(0,2) + Yd(1
+      ,0)*Yd(1,2) + Yd(2,0)*Yd(2,2)) + 3*MuInput*AdInput(0,1)*TCC0(msdInput(0),
+      msqInput(1),msqInput(2))*Yd(0,1)*Yd(0,2)*(Yd(0,1)*Yd(0,2) + Yd(1,1)*Yd(1,2)
+      + Yd(2,1)*Yd(2,2)) + 3*MuInput*AdInput(0,2)*TCC0(msdInput(0),msqInput(2),
+      msqInput(1))*Yd(0,1)*Yd(0,2)*(Yd(0,1)*Yd(0,2) + Yd(1,1)*Yd(1,2) + Yd(2,1)*Yd
+      (2,2)) + 3*MuInput*AdInput(1,1)*TCC0(msdInput(1),msqInput(1),msqInput(2))*Yd
+      (1,1)*Yd(1,2)*(Yd(0,1)*Yd(0,2) + Yd(1,1)*Yd(1,2) + Yd(2,1)*Yd(2,2)) + 3*
+      MuInput*AdInput(1,2)*TCC0(msdInput(1),msqInput(2),msqInput(1))*Yd(1,1)*Yd(1,
+      2)*(Yd(0,1)*Yd(0,2) + Yd(1,1)*Yd(1,2) + Yd(2,1)*Yd(2,2)) + 3*MuInput*AdInput
+      (2,1)*TCC0(msdInput(2),msqInput(1),msqInput(2))*Yd(2,1)*Yd(2,2)*(Yd(0,1)*Yd(
+      0,2) + Yd(1,1)*Yd(1,2) + Yd(2,1)*Yd(2,2)) + 3*MuInput*AdInput(2,2)*TCC0(
+      msdInput(2),msqInput(2),msqInput(1))*Yd(2,1)*Yd(2,2)*(Yd(0,1)*Yd(0,2) + Yd(1
+      ,1)*Yd(1,2) + Yd(2,1)*Yd(2,2)) + MuInput*AeInput(0,0)*AeInput(0,1)*AeInput(1
+      ,1)*TCD0(mseInput(0),mseInput(1),mslInput(0),mslInput(1))*Ye(0,0)*Ye(0,1)*Ye
+      (1,0)*Ye(1,1) + MuInput*AeInput(0,0)*AeInput(0,1)*AeInput(1,0)*TCD0(mseInput
+      (0),mseInput(1),mslInput(1),mslInput(0))*Ye(0,0)*Ye(0,1)*Ye(1,0)*Ye(1,1) +
+      MuInput*AeInput(0,1)*AeInput(1,0)*AeInput(1,1)*TCD0(mseInput(1),mseInput(0),
+      mslInput(0),mslInput(1))*Ye(0,0)*Ye(0,1)*Ye(1,0)*Ye(1,1) + MuInput*AeInput(0
+      ,0)*AeInput(1,0)*AeInput(1,1)*TCD0(mseInput(1),mseInput(0),mslInput(1),
+      mslInput(0))*Ye(0,0)*Ye(0,1)*Ye(1,0)*Ye(1,1) + MuInput*AeInput(0,0)*AeInput(
+      0,2)*AeInput(1,2)*TCD0(mseInput(0),mseInput(1),mslInput(0),mslInput(2))*Ye(0
+      ,0)*Ye(0,2)*Ye(1,0)*Ye(1,2) + MuInput*AeInput(0,0)*AeInput(0,2)*AeInput(1,0)
+      *TCD0(mseInput(0),mseInput(1),mslInput(2),mslInput(0))*Ye(0,0)*Ye(0,2)*Ye(1,
+      0)*Ye(1,2) + MuInput*AeInput(0,2)*AeInput(1,0)*AeInput(1,2)*TCD0(mseInput(1)
+      ,mseInput(0),mslInput(0),mslInput(2))*Ye(0,0)*Ye(0,2)*Ye(1,0)*Ye(1,2) +
+      MuInput*AeInput(0,0)*AeInput(1,0)*AeInput(1,2)*TCD0(mseInput(1),mseInput(0),
+      mslInput(2),mslInput(0))*Ye(0,0)*Ye(0,2)*Ye(1,0)*Ye(1,2) + MuInput*AeInput(0
+      ,1)*AeInput(0,2)*AeInput(1,2)*TCD0(mseInput(0),mseInput(1),mslInput(1),
+      mslInput(2))*Ye(0,1)*Ye(0,2)*Ye(1,1)*Ye(1,2) + MuInput*AeInput(0,1)*AeInput(
+      0,2)*AeInput(1,1)*TCD0(mseInput(0),mseInput(1),mslInput(2),mslInput(1))*Ye(0
+      ,1)*Ye(0,2)*Ye(1,1)*Ye(1,2) + MuInput*AeInput(0,2)*AeInput(1,1)*AeInput(1,2)
+      *TCD0(mseInput(1),mseInput(0),mslInput(1),mslInput(2))*Ye(0,1)*Ye(0,2)*Ye(1,
+      1)*Ye(1,2) + MuInput*AeInput(0,1)*AeInput(1,1)*AeInput(1,2)*TCD0(mseInput(1)
+      ,mseInput(0),mslInput(2),mslInput(1))*Ye(0,1)*Ye(0,2)*Ye(1,1)*Ye(1,2) +
+      MuInput*AeInput(0,0)*TCC0(mseInput(0),mseInput(1),mslInput(0))*Ye(0,0)*Ye(1,
+      0)*(Ye(0,0)*Ye(1,0) + Ye(0,1)*Ye(1,1) + Ye(0,2)*Ye(1,2)) + MuInput*AeInput(1
+      ,0)*TCC0(mseInput(1),mseInput(0),mslInput(0))*Ye(0,0)*Ye(1,0)*(Ye(0,0)*Ye(1,
+      0) + Ye(0,1)*Ye(1,1) + Ye(0,2)*Ye(1,2)) + MuInput*AeInput(0,1)*TCC0(mseInput
+      (0),mseInput(1),mslInput(1))*Ye(0,1)*Ye(1,1)*(Ye(0,0)*Ye(1,0) + Ye(0,1)*Ye(1
+      ,1) + Ye(0,2)*Ye(1,2)) + MuInput*AeInput(1,1)*TCC0(mseInput(1),mseInput(0),
+      mslInput(1))*Ye(0,1)*Ye(1,1)*(Ye(0,0)*Ye(1,0) + Ye(0,1)*Ye(1,1) + Ye(0,2)*Ye
+      (1,2)) + MuInput*AeInput(0,2)*TCC0(mseInput(0),mseInput(1),mslInput(2))*Ye(0
+      ,2)*Ye(1,2)*(Ye(0,0)*Ye(1,0) + Ye(0,1)*Ye(1,1) + Ye(0,2)*Ye(1,2)) + MuInput*
+      AeInput(1,2)*TCC0(mseInput(1),mseInput(0),mslInput(2))*Ye(0,2)*Ye(1,2)*(Ye(0
+      ,0)*Ye(1,0) + Ye(0,1)*Ye(1,1) + Ye(0,2)*Ye(1,2)) + MuInput*AeInput(0,0)*
+      AeInput(0,1)*AeInput(2,1)*TCD0(mseInput(0),mseInput(2),mslInput(0),mslInput(
+      1))*Ye(0,0)*Ye(0,1)*Ye(2,0)*Ye(2,1) + MuInput*AeInput(0,0)*AeInput(0,1)*
+      AeInput(2,0)*TCD0(mseInput(0),mseInput(2),mslInput(1),mslInput(0))*Ye(0,0)*
+      Ye(0,1)*Ye(2,0)*Ye(2,1) + MuInput*AeInput(0,1)*AeInput(2,0)*AeInput(2,1)*
+      TCD0(mseInput(2),mseInput(0),mslInput(0),mslInput(1))*Ye(0,0)*Ye(0,1)*Ye(2,0
+      )*Ye(2,1) + MuInput*AeInput(0,0)*AeInput(2,0)*AeInput(2,1)*TCD0(mseInput(2),
+      mseInput(0),mslInput(1),mslInput(0))*Ye(0,0)*Ye(0,1)*Ye(2,0)*Ye(2,1) +
+      MuInput*AeInput(1,0)*AeInput(1,1)*AeInput(2,1)*TCD0(mseInput(1),mseInput(2),
+      mslInput(0),mslInput(1))*Ye(1,0)*Ye(1,1)*Ye(2,0)*Ye(2,1) + MuInput*AeInput(1
+      ,0)*AeInput(1,1)*AeInput(2,0)*TCD0(mseInput(1),mseInput(2),mslInput(1),
+      mslInput(0))*Ye(1,0)*Ye(1,1)*Ye(2,0)*Ye(2,1) + MuInput*AeInput(1,1)*AeInput(
+      2,0)*AeInput(2,1)*TCD0(mseInput(2),mseInput(1),mslInput(0),mslInput(1))*Ye(1
+      ,0)*Ye(1,1)*Ye(2,0)*Ye(2,1) + MuInput*AeInput(1,0)*AeInput(2,0)*AeInput(2,1)
+      *TCD0(mseInput(2),mseInput(1),mslInput(1),mslInput(0))*Ye(1,0)*Ye(1,1)*Ye(2,
+      0)*Ye(2,1) + MuInput*AeInput(0,0)*TCC0(mseInput(0),mslInput(0),mslInput(1))*
+      Ye(0,0)*Ye(0,1)*(Ye(0,0)*Ye(0,1) + Ye(1,0)*Ye(1,1) + Ye(2,0)*Ye(2,1)) +
+      MuInput*AeInput(0,1)*TCC0(mseInput(0),mslInput(1),mslInput(0))*Ye(0,0)*Ye(0,
+      1)*(Ye(0,0)*Ye(0,1) + Ye(1,0)*Ye(1,1) + Ye(2,0)*Ye(2,1)) + MuInput*AeInput(1
+      ,0)*TCC0(mseInput(1),mslInput(0),mslInput(1))*Ye(1,0)*Ye(1,1)*(Ye(0,0)*Ye(0,
+      1) + Ye(1,0)*Ye(1,1) + Ye(2,0)*Ye(2,1)) + MuInput*AeInput(1,1)*TCC0(mseInput
+      (1),mslInput(1),mslInput(0))*Ye(1,0)*Ye(1,1)*(Ye(0,0)*Ye(0,1) + Ye(1,0)*Ye(1
+      ,1) + Ye(2,0)*Ye(2,1)) + MuInput*AeInput(2,0)*TCC0(mseInput(2),mslInput(0),
+      mslInput(1))*Ye(2,0)*Ye(2,1)*(Ye(0,0)*Ye(0,1) + Ye(1,0)*Ye(1,1) + Ye(2,0)*Ye
+      (2,1)) + MuInput*AeInput(2,1)*TCC0(mseInput(2),mslInput(1),mslInput(0))*Ye(2
+      ,0)*Ye(2,1)*(Ye(0,0)*Ye(0,1) + Ye(1,0)*Ye(1,1) + Ye(2,0)*Ye(2,1)) + MuInput*
+      AeInput(0,0)*AeInput(0,2)*AeInput(2,2)*TCD0(mseInput(0),mseInput(2),mslInput
+      (0),mslInput(2))*Ye(0,0)*Ye(0,2)*Ye(2,0)*Ye(2,2) + MuInput*AeInput(0,0)*
+      AeInput(0,2)*AeInput(2,0)*TCD0(mseInput(0),mseInput(2),mslInput(2),mslInput(
+      0))*Ye(0,0)*Ye(0,2)*Ye(2,0)*Ye(2,2) + MuInput*AeInput(0,2)*AeInput(2,0)*
+      AeInput(2,2)*TCD0(mseInput(2),mseInput(0),mslInput(0),mslInput(2))*Ye(0,0)*
+      Ye(0,2)*Ye(2,0)*Ye(2,2) + MuInput*AeInput(0,0)*AeInput(2,0)*AeInput(2,2)*
+      TCD0(mseInput(2),mseInput(0),mslInput(2),mslInput(0))*Ye(0,0)*Ye(0,2)*Ye(2,0
+      )*Ye(2,2) + MuInput*AeInput(1,0)*AeInput(1,2)*AeInput(2,2)*TCD0(mseInput(1),
+      mseInput(2),mslInput(0),mslInput(2))*Ye(1,0)*Ye(1,2)*Ye(2,0)*Ye(2,2) +
+      MuInput*AeInput(1,0)*AeInput(1,2)*AeInput(2,0)*TCD0(mseInput(1),mseInput(2),
+      mslInput(2),mslInput(0))*Ye(1,0)*Ye(1,2)*Ye(2,0)*Ye(2,2) + MuInput*AeInput(1
+      ,2)*AeInput(2,0)*AeInput(2,2)*TCD0(mseInput(2),mseInput(1),mslInput(0),
+      mslInput(2))*Ye(1,0)*Ye(1,2)*Ye(2,0)*Ye(2,2) + MuInput*AeInput(1,0)*AeInput(
+      2,0)*AeInput(2,2)*TCD0(mseInput(2),mseInput(1),mslInput(2),mslInput(0))*Ye(1
+      ,0)*Ye(1,2)*Ye(2,0)*Ye(2,2) + MuInput*AeInput(0,1)*AeInput(0,2)*AeInput(2,2)
+      *TCD0(mseInput(0),mseInput(2),mslInput(1),mslInput(2))*Ye(0,1)*Ye(0,2)*Ye(2,
+      1)*Ye(2,2) + MuInput*AeInput(0,1)*AeInput(0,2)*AeInput(2,1)*TCD0(mseInput(0)
+      ,mseInput(2),mslInput(2),mslInput(1))*Ye(0,1)*Ye(0,2)*Ye(2,1)*Ye(2,2) +
+      MuInput*AeInput(0,2)*AeInput(2,1)*AeInput(2,2)*TCD0(mseInput(2),mseInput(0),
+      mslInput(1),mslInput(2))*Ye(0,1)*Ye(0,2)*Ye(2,1)*Ye(2,2) + MuInput*AeInput(0
+      ,1)*AeInput(2,1)*AeInput(2,2)*TCD0(mseInput(2),mseInput(0),mslInput(2),
+      mslInput(1))*Ye(0,1)*Ye(0,2)*Ye(2,1)*Ye(2,2) + MuInput*AeInput(1,1)*AeInput(
+      1,2)*AeInput(2,2)*TCD0(mseInput(1),mseInput(2),mslInput(1),mslInput(2))*Ye(1
+      ,1)*Ye(1,2)*Ye(2,1)*Ye(2,2) + MuInput*AeInput(1,1)*AeInput(1,2)*AeInput(2,1)
+      *TCD0(mseInput(1),mseInput(2),mslInput(2),mslInput(1))*Ye(1,1)*Ye(1,2)*Ye(2,
+      1)*Ye(2,2) + MuInput*AeInput(1,2)*AeInput(2,1)*AeInput(2,2)*TCD0(mseInput(2)
+      ,mseInput(1),mslInput(1),mslInput(2))*Ye(1,1)*Ye(1,2)*Ye(2,1)*Ye(2,2) +
+      MuInput*AeInput(1,1)*AeInput(2,1)*AeInput(2,2)*TCD0(mseInput(2),mseInput(1),
+      mslInput(2),mslInput(1))*Ye(1,1)*Ye(1,2)*Ye(2,1)*Ye(2,2) + MuInput*AeInput(0
+      ,0)*TCC0(mseInput(0),mseInput(2),mslInput(0))*Ye(0,0)*Ye(2,0)*(Ye(0,0)*Ye(2,
+      0) + Ye(0,1)*Ye(2,1) + Ye(0,2)*Ye(2,2)) + MuInput*AeInput(2,0)*TCC0(mseInput
+      (2),mseInput(0),mslInput(0))*Ye(0,0)*Ye(2,0)*(Ye(0,0)*Ye(2,0) + Ye(0,1)*Ye(2
+      ,1) + Ye(0,2)*Ye(2,2)) + MuInput*AeInput(0,1)*TCC0(mseInput(0),mseInput(2),
+      mslInput(1))*Ye(0,1)*Ye(2,1)*(Ye(0,0)*Ye(2,0) + Ye(0,1)*Ye(2,1) + Ye(0,2)*Ye
+      (2,2)) + MuInput*AeInput(2,1)*TCC0(mseInput(2),mseInput(0),mslInput(1))*Ye(0
+      ,1)*Ye(2,1)*(Ye(0,0)*Ye(2,0) + Ye(0,1)*Ye(2,1) + Ye(0,2)*Ye(2,2)) + MuInput*
+      AeInput(0,2)*TCC0(mseInput(0),mseInput(2),mslInput(2))*Ye(0,2)*Ye(2,2)*(Ye(0
+      ,0)*Ye(2,0) + Ye(0,1)*Ye(2,1) + Ye(0,2)*Ye(2,2)) + MuInput*AeInput(2,2)*TCC0
+      (mseInput(2),mseInput(0),mslInput(2))*Ye(0,2)*Ye(2,2)*(Ye(0,0)*Ye(2,0) + Ye(
+      0,1)*Ye(2,1) + Ye(0,2)*Ye(2,2)) + MuInput*AeInput(1,0)*TCC0(mseInput(1),
+      mseInput(2),mslInput(0))*Ye(1,0)*Ye(2,0)*(Ye(1,0)*Ye(2,0) + Ye(1,1)*Ye(2,1)
+      + Ye(1,2)*Ye(2,2)) + MuInput*AeInput(2,0)*TCC0(mseInput(2),mseInput(1),
+      mslInput(0))*Ye(1,0)*Ye(2,0)*(Ye(1,0)*Ye(2,0) + Ye(1,1)*Ye(2,1) + Ye(1,2)*Ye
+      (2,2)) + MuInput*AeInput(1,1)*TCC0(mseInput(1),mseInput(2),mslInput(1))*Ye(1
+      ,1)*Ye(2,1)*(Ye(1,0)*Ye(2,0) + Ye(1,1)*Ye(2,1) + Ye(1,2)*Ye(2,2)) + MuInput*
+      AeInput(2,1)*TCC0(mseInput(2),mseInput(1),mslInput(1))*Ye(1,1)*Ye(2,1)*(Ye(1
+      ,0)*Ye(2,0) + Ye(1,1)*Ye(2,1) + Ye(1,2)*Ye(2,2)) + MuInput*AeInput(1,2)*TCC0
+      (mseInput(1),mseInput(2),mslInput(2))*Ye(1,2)*Ye(2,2)*(Ye(1,0)*Ye(2,0) + Ye(
+      1,1)*Ye(2,1) + Ye(1,2)*Ye(2,2)) + MuInput*AeInput(2,2)*TCC0(mseInput(2),
+      mseInput(1),mslInput(2))*Ye(1,2)*Ye(2,2)*(Ye(1,0)*Ye(2,0) + Ye(1,1)*Ye(2,1)
+      + Ye(1,2)*Ye(2,2)) + MuInput*AeInput(0,0)*TCC0(mseInput(0),mslInput(0),
+      mslInput(2))*Ye(0,0)*Ye(0,2)*(Ye(0,0)*Ye(0,2) + Ye(1,0)*Ye(1,2) + Ye(2,0)*Ye
+      (2,2)) + MuInput*AeInput(0,2)*TCC0(mseInput(0),mslInput(2),mslInput(0))*Ye(0
+      ,0)*Ye(0,2)*(Ye(0,0)*Ye(0,2) + Ye(1,0)*Ye(1,2) + Ye(2,0)*Ye(2,2)) + MuInput*
+      AeInput(1,0)*TCC0(mseInput(1),mslInput(0),mslInput(2))*Ye(1,0)*Ye(1,2)*(Ye(0
+      ,0)*Ye(0,2) + Ye(1,0)*Ye(1,2) + Ye(2,0)*Ye(2,2)) + MuInput*AeInput(1,2)*TCC0
+      (mseInput(1),mslInput(2),mslInput(0))*Ye(1,0)*Ye(1,2)*(Ye(0,0)*Ye(0,2) + Ye(
+      1,0)*Ye(1,2) + Ye(2,0)*Ye(2,2)) + MuInput*AeInput(2,0)*TCC0(mseInput(2),
+      mslInput(0),mslInput(2))*Ye(2,0)*Ye(2,2)*(Ye(0,0)*Ye(0,2) + Ye(1,0)*Ye(1,2)
+      + Ye(2,0)*Ye(2,2)) + MuInput*AeInput(2,2)*TCC0(mseInput(2),mslInput(2),
+      mslInput(0))*Ye(2,0)*Ye(2,2)*(Ye(0,0)*Ye(0,2) + Ye(1,0)*Ye(1,2) + Ye(2,0)*Ye
+      (2,2)) + MuInput*AeInput(0,1)*TCC0(mseInput(0),mslInput(1),mslInput(2))*Ye(0
+      ,1)*Ye(0,2)*(Ye(0,1)*Ye(0,2) + Ye(1,1)*Ye(1,2) + Ye(2,1)*Ye(2,2)) + MuInput*
+      AeInput(0,2)*TCC0(mseInput(0),mslInput(2),mslInput(1))*Ye(0,1)*Ye(0,2)*(Ye(0
+      ,1)*Ye(0,2) + Ye(1,1)*Ye(1,2) + Ye(2,1)*Ye(2,2)) + MuInput*AeInput(1,1)*TCC0
+      (mseInput(1),mslInput(1),mslInput(2))*Ye(1,1)*Ye(1,2)*(Ye(0,1)*Ye(0,2) + Ye(
+      1,1)*Ye(1,2) + Ye(2,1)*Ye(2,2)) + MuInput*AeInput(1,2)*TCC0(mseInput(1),
+      mslInput(2),mslInput(1))*Ye(1,1)*Ye(1,2)*(Ye(0,1)*Ye(0,2) + Ye(1,1)*Ye(1,2)
+      + Ye(2,1)*Ye(2,2)) + MuInput*AeInput(2,1)*TCC0(mseInput(2),mslInput(1),
+      mslInput(2))*Ye(2,1)*Ye(2,2)*(Ye(0,1)*Ye(0,2) + Ye(1,1)*Ye(1,2) + Ye(2,1)*Ye
+      (2,2)) + MuInput*AeInput(2,2)*TCC0(mseInput(2),mslInput(2),mslInput(1))*Ye(2
+      ,1)*Ye(2,2)*(Ye(0,1)*Ye(0,2) + Ye(1,1)*Ye(1,2) + Ye(2,1)*Ye(2,2)) + 3*
+      MuInput*AuInput(1,0)*Sqr(Abs(MuInput))*TCD0(msqInput(0),msqInput(1),msqInput
+      (0),msqInput(1))*Yu(0,0)*Yu(0,1)*Yu(1,0)*Yu(1,1) + 3*MuInput*AuInput(0,0)*
+      Sqr(Abs(MuInput))*TCD0(msqInput(0),msqInput(1),msqInput(1),msqInput(0))*Yu(0
+      ,0)*Yu(0,1)*Yu(1,0)*Yu(1,1) + 3*MuInput*AuInput(1,1)*Sqr(Abs(MuInput))*TCD0(
+      msqInput(1),msqInput(0),msqInput(0),msqInput(1))*Yu(0,0)*Yu(0,1)*Yu(1,0)*Yu(
+      1,1) + 3*MuInput*AuInput(0,1)*Sqr(Abs(MuInput))*TCD0(msqInput(1),msqInput(0)
+      ,msqInput(1),msqInput(0))*Yu(0,0)*Yu(0,1)*Yu(1,0)*Yu(1,1) + 3*MuInput*
+      AuInput(1,0)*Sqr(Abs(MuInput))*TCD0(msqInput(0),msqInput(2),msqInput(0),
+      msqInput(1))*Yu(0,0)*Yu(0,2)*Yu(1,0)*Yu(1,2) + 3*MuInput*AuInput(0,0)*Sqr(
+      Abs(MuInput))*TCD0(msqInput(0),msqInput(2),msqInput(1),msqInput(0))*Yu(0,0)*
+      Yu(0,2)*Yu(1,0)*Yu(1,2) + 3*MuInput*AuInput(1,2)*Sqr(Abs(MuInput))*TCD0(
+      msqInput(2),msqInput(0),msqInput(0),msqInput(1))*Yu(0,0)*Yu(0,2)*Yu(1,0)*Yu(
+      1,2) + 3*MuInput*AuInput(0,2)*Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(0)
+      ,msqInput(1),msqInput(0))*Yu(0,0)*Yu(0,2)*Yu(1,0)*Yu(1,2) + 3*MuInput*
+      AuInput(1,1)*Sqr(Abs(MuInput))*TCD0(msqInput(1),msqInput(2),msqInput(0),
+      msqInput(1))*Yu(0,1)*Yu(0,2)*Yu(1,1)*Yu(1,2) + 3*MuInput*AuInput(0,1)*Sqr(
+      Abs(MuInput))*TCD0(msqInput(1),msqInput(2),msqInput(1),msqInput(0))*Yu(0,1)*
+      Yu(0,2)*Yu(1,1)*Yu(1,2) + 3*MuInput*AuInput(1,2)*Sqr(Abs(MuInput))*TCD0(
+      msqInput(2),msqInput(1),msqInput(0),msqInput(1))*Yu(0,1)*Yu(0,2)*Yu(1,1)*Yu(
+      1,2) + 3*MuInput*AuInput(0,2)*Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(1)
+      ,msqInput(1),msqInput(0))*Yu(0,1)*Yu(0,2)*Yu(1,1)*Yu(1,2) + 3*MuInput*
+      AuInput(2,0)*Sqr(Abs(MuInput))*TCD0(msqInput(0),msqInput(1),msqInput(0),
+      msqInput(2))*Yu(0,0)*Yu(0,1)*Yu(2,0)*Yu(2,1) + 3*MuInput*AuInput(0,0)*Sqr(
+      Abs(MuInput))*TCD0(msqInput(0),msqInput(1),msqInput(2),msqInput(0))*Yu(0,0)*
+      Yu(0,1)*Yu(2,0)*Yu(2,1) + 3*MuInput*AuInput(2,1)*Sqr(Abs(MuInput))*TCD0(
+      msqInput(1),msqInput(0),msqInput(0),msqInput(2))*Yu(0,0)*Yu(0,1)*Yu(2,0)*Yu(
+      2,1) + 3*MuInput*AuInput(0,1)*Sqr(Abs(MuInput))*TCD0(msqInput(1),msqInput(0)
+      ,msqInput(2),msqInput(0))*Yu(0,0)*Yu(0,1)*Yu(2,0)*Yu(2,1) + 3*MuInput*
+      AuInput(2,0)*Sqr(Abs(MuInput))*TCD0(msqInput(0),msqInput(1),msqInput(1),
+      msqInput(2))*Yu(1,0)*Yu(1,1)*Yu(2,0)*Yu(2,1) + 3*MuInput*AuInput(1,0)*Sqr(
+      Abs(MuInput))*TCD0(msqInput(0),msqInput(1),msqInput(2),msqInput(1))*Yu(1,0)*
+      Yu(1,1)*Yu(2,0)*Yu(2,1) + 3*MuInput*AuInput(2,1)*Sqr(Abs(MuInput))*TCD0(
+      msqInput(1),msqInput(0),msqInput(1),msqInput(2))*Yu(1,0)*Yu(1,1)*Yu(2,0)*Yu(
+      2,1) + 3*MuInput*AuInput(1,1)*Sqr(Abs(MuInput))*TCD0(msqInput(1),msqInput(0)
+      ,msqInput(2),msqInput(1))*Yu(1,0)*Yu(1,1)*Yu(2,0)*Yu(2,1) + 3*MuInput*
+      AuInput(2,0)*Sqr(Abs(MuInput))*TCD0(msqInput(0),msqInput(2),msqInput(0),
+      msqInput(2))*Yu(0,0)*Yu(0,2)*Yu(2,0)*Yu(2,2) + 3*MuInput*AuInput(0,0)*Sqr(
+      Abs(MuInput))*TCD0(msqInput(0),msqInput(2),msqInput(2),msqInput(0))*Yu(0,0)*
+      Yu(0,2)*Yu(2,0)*Yu(2,2) + 3*MuInput*AuInput(2,2)*Sqr(Abs(MuInput))*TCD0(
+      msqInput(2),msqInput(0),msqInput(0),msqInput(2))*Yu(0,0)*Yu(0,2)*Yu(2,0)*Yu(
+      2,2) + 3*MuInput*AuInput(0,2)*Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(0)
+      ,msqInput(2),msqInput(0))*Yu(0,0)*Yu(0,2)*Yu(2,0)*Yu(2,2) + 3*MuInput*
+      AuInput(2,0)*Sqr(Abs(MuInput))*TCD0(msqInput(0),msqInput(2),msqInput(1),
+      msqInput(2))*Yu(1,0)*Yu(1,2)*Yu(2,0)*Yu(2,2) + 3*MuInput*AuInput(1,0)*Sqr(
+      Abs(MuInput))*TCD0(msqInput(0),msqInput(2),msqInput(2),msqInput(1))*Yu(1,0)*
+      Yu(1,2)*Yu(2,0)*Yu(2,2) + 3*MuInput*AuInput(2,2)*Sqr(Abs(MuInput))*TCD0(
+      msqInput(2),msqInput(0),msqInput(1),msqInput(2))*Yu(1,0)*Yu(1,2)*Yu(2,0)*Yu(
+      2,2) + 3*MuInput*AuInput(1,2)*Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(0)
+      ,msqInput(2),msqInput(1))*Yu(1,0)*Yu(1,2)*Yu(2,0)*Yu(2,2) + 3*MuInput*
+      AuInput(2,1)*Sqr(Abs(MuInput))*TCD0(msqInput(1),msqInput(2),msqInput(0),
+      msqInput(2))*Yu(0,1)*Yu(0,2)*Yu(2,1)*Yu(2,2) + 3*MuInput*AuInput(0,1)*Sqr(
+      Abs(MuInput))*TCD0(msqInput(1),msqInput(2),msqInput(2),msqInput(0))*Yu(0,1)*
+      Yu(0,2)*Yu(2,1)*Yu(2,2) + 3*MuInput*AuInput(2,2)*Sqr(Abs(MuInput))*TCD0(
+      msqInput(2),msqInput(1),msqInput(0),msqInput(2))*Yu(0,1)*Yu(0,2)*Yu(2,1)*Yu(
+      2,2) + 3*MuInput*AuInput(0,2)*Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(1)
+      ,msqInput(2),msqInput(0))*Yu(0,1)*Yu(0,2)*Yu(2,1)*Yu(2,2) + 3*MuInput*
+      AuInput(2,1)*Sqr(Abs(MuInput))*TCD0(msqInput(1),msqInput(2),msqInput(1),
+      msqInput(2))*Yu(1,1)*Yu(1,2)*Yu(2,1)*Yu(2,2) + 3*MuInput*AuInput(1,1)*Sqr(
+      Abs(MuInput))*TCD0(msqInput(1),msqInput(2),msqInput(2),msqInput(1))*Yu(1,1)*
+      Yu(1,2)*Yu(2,1)*Yu(2,2) + 3*MuInput*AuInput(2,2)*Sqr(Abs(MuInput))*TCD0(
+      msqInput(2),msqInput(1),msqInput(1),msqInput(2))*Yu(1,1)*Yu(1,2)*Yu(2,1)*Yu(
+      2,2) + 3*MuInput*AuInput(1,2)*Sqr(Abs(MuInput))*TCD0(msqInput(2),msqInput(1)
+      ,msqInput(2),msqInput(1))*Yu(1,1)*Yu(1,2)*Yu(2,1)*Yu(2,2))));
    MODEL->set_Lambda7(Re((0.00016040597272944275*MuInput*Quad(Yu(2,2))*Sqr(g3)*(2
-      + (0.3333333333333333*Cube(AtInput))/Cube(MSUSY) - Sqr(AtInput)/Sqr(MSUSY))*
-      UnitStep(-2 + LambdaLoopOrder))/MSUSY + ((0.0010554289962743518*MuInput*((3*
-      AtInput*Quad(Yu(2,2))*(-6 + Sqr(AtInput)/Sqr(MSUSY)))/MSUSY + (3*AbInput*
-      Quad(Yd(2,2))*Sqr(MuInput))/Cube(MSUSY) + (AtauInput*Quad(Ye(2,2))*Sqr(
-      MuInput))/Cube(MSUSY)))/MSUSY - (0.0007915717472057639*MuInput*(0.6*Sqr(g1)
-      + Sqr(g2))*((3*AbInput*Sqr(Yd(2,2)))/MSUSY + (AtauInput*Sqr(Ye(2,2)))/MSUSY
-      - (3*AtInput*Sqr(Yu(2,2)))/MSUSY))/MSUSY)*UnitStep(-1 + LambdaLoopOrder)));
+      + (0.3333333333333333*Cube(AuInput(2,2)))/Cube(MSUSY) - Sqr(AuInput(2,2))/
+      Sqr(MSUSY))*UnitStep(-2 + LambdaLoopOrder))/MSUSY + 0.006332573977646111*
+      UnitStep(-1 + LambdaLoopOrder)*(0.3*MuInput*AdInput(0,0)*Sqr(g1)*Sqr(Yd(0,0)
+      )*TCC0(msdInput(0),msdInput(0),msqInput(0)) + 0.3*MuInput*AdInput(0,1)*Sqr(
+      g1)*Sqr(Yd(0,1))*TCC0(msdInput(0),msdInput(0),msqInput(1)) + 0.3*MuInput*
+      AdInput(0,2)*Sqr(g1)*Sqr(Yd(0,2))*TCC0(msdInput(0),msdInput(0),msqInput(2))
+      + 0.25*MuInput*AdInput(0,0)*(0.6*Sqr(g1) + 3*Sqr(g2))*Sqr(Yd(0,0))*TCC0(
+      msdInput(0),msqInput(0),msqInput(0)) + 0.25*MuInput*AdInput(0,1)*(0.6*Sqr(g1
+      ) + 3*Sqr(g2))*Sqr(Yd(0,1))*TCC0(msdInput(0),msqInput(1),msqInput(1)) + 0.25
+      *MuInput*AdInput(0,2)*(0.6*Sqr(g1) + 3*Sqr(g2))*Sqr(Yd(0,2))*TCC0(msdInput(0
+      ),msqInput(2),msqInput(2)) + 0.3*MuInput*AdInput(1,0)*Sqr(g1)*Sqr(Yd(1,0))*
+      TCC0(msdInput(1),msdInput(1),msqInput(0)) + 0.3*MuInput*AdInput(1,1)*Sqr(g1)
+      *Sqr(Yd(1,1))*TCC0(msdInput(1),msdInput(1),msqInput(1)) + 0.3*MuInput*
+      AdInput(1,2)*Sqr(g1)*Sqr(Yd(1,2))*TCC0(msdInput(1),msdInput(1),msqInput(2))
+      + 0.25*MuInput*AdInput(1,0)*(0.6*Sqr(g1) + 3*Sqr(g2))*Sqr(Yd(1,0))*TCC0(
+      msdInput(1),msqInput(0),msqInput(0)) + 0.25*MuInput*AdInput(1,1)*(0.6*Sqr(g1
+      ) + 3*Sqr(g2))*Sqr(Yd(1,1))*TCC0(msdInput(1),msqInput(1),msqInput(1)) + 0.25
+      *MuInput*AdInput(1,2)*(0.6*Sqr(g1) + 3*Sqr(g2))*Sqr(Yd(1,2))*TCC0(msdInput(1
+      ),msqInput(2),msqInput(2)) + 0.3*MuInput*AdInput(2,0)*Sqr(g1)*Sqr(Yd(2,0))*
+      TCC0(msdInput(2),msdInput(2),msqInput(0)) + 0.3*MuInput*AdInput(2,1)*Sqr(g1)
+      *Sqr(Yd(2,1))*TCC0(msdInput(2),msdInput(2),msqInput(1)) + 0.3*MuInput*
+      AdInput(2,2)*Sqr(g1)*Sqr(Yd(2,2))*TCC0(msdInput(2),msdInput(2),msqInput(2))
+      + 0.25*MuInput*AdInput(2,0)*(0.6*Sqr(g1) + 3*Sqr(g2))*Sqr(Yd(2,0))*TCC0(
+      msdInput(2),msqInput(0),msqInput(0)) + 0.25*MuInput*AdInput(2,1)*(0.6*Sqr(g1
+      ) + 3*Sqr(g2))*Sqr(Yd(2,1))*TCC0(msdInput(2),msqInput(1),msqInput(1)) + 0.25
+      *MuInput*AdInput(2,2)*(0.6*Sqr(g1) + 3*Sqr(g2))*Sqr(Yd(2,2))*TCC0(msdInput(2
+      ),msqInput(2),msqInput(2)) + 0.3*MuInput*AeInput(0,0)*Sqr(g1)*Sqr(Ye(0,0))*
+      TCC0(mseInput(0),mseInput(0),mslInput(0)) + 0.3*MuInput*AeInput(0,1)*Sqr(g1)
+      *Sqr(Ye(0,1))*TCC0(mseInput(0),mseInput(0),mslInput(1)) + 0.3*MuInput*
+      AeInput(0,2)*Sqr(g1)*Sqr(Ye(0,2))*TCC0(mseInput(0),mseInput(0),mslInput(2))
+      + 0.25*MuInput*AeInput(0,0)*(-0.6*Sqr(g1) + Sqr(g2))*Sqr(Ye(0,0))*TCC0(
+      mseInput(0),mslInput(0),mslInput(0)) + 0.25*MuInput*AeInput(0,1)*(-0.6*Sqr(
+      g1) + Sqr(g2))*Sqr(Ye(0,1))*TCC0(mseInput(0),mslInput(1),mslInput(1)) + 0.25
+      *MuInput*AeInput(0,2)*(-0.6*Sqr(g1) + Sqr(g2))*Sqr(Ye(0,2))*TCC0(mseInput(0)
+      ,mslInput(2),mslInput(2)) + 0.3*MuInput*AeInput(1,0)*Sqr(g1)*Sqr(Ye(1,0))*
+      TCC0(mseInput(1),mseInput(1),mslInput(0)) + 0.3*MuInput*AeInput(1,1)*Sqr(g1)
+      *Sqr(Ye(1,1))*TCC0(mseInput(1),mseInput(1),mslInput(1)) + 0.3*MuInput*
+      AeInput(1,2)*Sqr(g1)*Sqr(Ye(1,2))*TCC0(mseInput(1),mseInput(1),mslInput(2))
+      + 0.25*MuInput*AeInput(1,0)*(-0.6*Sqr(g1) + Sqr(g2))*Sqr(Ye(1,0))*TCC0(
+      mseInput(1),mslInput(0),mslInput(0)) + 0.25*MuInput*AeInput(1,1)*(-0.6*Sqr(
+      g1) + Sqr(g2))*Sqr(Ye(1,1))*TCC0(mseInput(1),mslInput(1),mslInput(1)) + 0.25
+      *MuInput*AeInput(1,2)*(-0.6*Sqr(g1) + Sqr(g2))*Sqr(Ye(1,2))*TCC0(mseInput(1)
+      ,mslInput(2),mslInput(2)) + 0.3*MuInput*AeInput(2,0)*Sqr(g1)*Sqr(Ye(2,0))*
+      TCC0(mseInput(2),mseInput(2),mslInput(0)) + 0.3*MuInput*AeInput(2,1)*Sqr(g1)
+      *Sqr(Ye(2,1))*TCC0(mseInput(2),mseInput(2),mslInput(1)) + 0.3*MuInput*
+      AeInput(2,2)*Sqr(g1)*Sqr(Ye(2,2))*TCC0(mseInput(2),mseInput(2),mslInput(2))
+      + 0.25*MuInput*AeInput(2,0)*(-0.6*Sqr(g1) + Sqr(g2))*Sqr(Ye(2,0))*TCC0(
+      mseInput(2),mslInput(0),mslInput(0)) + 0.25*MuInput*AeInput(2,1)*(-0.6*Sqr(
+      g1) + Sqr(g2))*Sqr(Ye(2,1))*TCC0(mseInput(2),mslInput(1),mslInput(1)) + 0.25
+      *MuInput*AeInput(2,2)*(-0.6*Sqr(g1) + Sqr(g2))*Sqr(Ye(2,2))*TCC0(mseInput(2)
+      ,mslInput(2),mslInput(2)) + (0.25*MuInput*AuInput(0,0)*(0.6*Sqr(g1) - 3*Sqr(
+      g2))*Sqr(Yu(0,0)) + 3*MuInput*AuInput(0,0)*Sqr(Yu(0,0))*(Sqr(Yu(0,0)) + Sqr(
+      Yu(1,0)) + Sqr(Yu(2,0))))*TCC0(msqInput(0),msqInput(0),msuInput(0)) + (0.25*
+      MuInput*AuInput(1,0)*(0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(Yu(1,0)) + 3*MuInput*
+      AuInput(1,0)*Sqr(Yu(1,0))*(Sqr(Yu(0,0)) + Sqr(Yu(1,0)) + Sqr(Yu(2,0))))*TCC0
+      (msqInput(0),msqInput(0),msuInput(1)) + (0.25*MuInput*AuInput(2,0)*(0.6*Sqr(
+      g1) - 3*Sqr(g2))*Sqr(Yu(2,0)) + 3*MuInput*AuInput(2,0)*Sqr(Yu(2,0))*(Sqr(Yu(
+      0,0)) + Sqr(Yu(1,0)) + Sqr(Yu(2,0))))*TCC0(msqInput(0),msqInput(0),msuInput(
+      2)) + (-0.6*MuInput*AuInput(0,0)*Sqr(g1)*Sqr(Yu(0,0)) + 3*MuInput*AuInput(0,
+      0)*Sqr(Yu(0,0))*(Sqr(Yu(0,0)) + Sqr(Yu(0,1)) + Sqr(Yu(0,2))))*TCC0(msqInput(
+      0),msuInput(0),msuInput(0)) + (-0.6*MuInput*AuInput(1,0)*Sqr(g1)*Sqr(Yu(1,0)
+      ) + 3*MuInput*AuInput(1,0)*Sqr(Yu(1,0))*(Sqr(Yu(1,0)) + Sqr(Yu(1,1)) + Sqr(
+      Yu(1,2))))*TCC0(msqInput(0),msuInput(1),msuInput(1)) + (-0.6*MuInput*AuInput
+      (2,0)*Sqr(g1)*Sqr(Yu(2,0)) + 3*MuInput*AuInput(2,0)*Sqr(Yu(2,0))*(Sqr(Yu(2,0
+      )) + Sqr(Yu(2,1)) + Sqr(Yu(2,2))))*TCC0(msqInput(0),msuInput(2),msuInput(2))
+      + (0.25*MuInput*AuInput(0,1)*(0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(Yu(0,1)) + 3*
+      MuInput*AuInput(0,1)*Sqr(Yu(0,1))*(Sqr(Yu(0,1)) + Sqr(Yu(1,1)) + Sqr(Yu(2,1)
+      )))*TCC0(msqInput(1),msqInput(1),msuInput(0)) + (0.25*MuInput*AuInput(1,1)*(
+      0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(Yu(1,1)) + 3*MuInput*AuInput(1,1)*Sqr(Yu(1,1))*
+      (Sqr(Yu(0,1)) + Sqr(Yu(1,1)) + Sqr(Yu(2,1))))*TCC0(msqInput(1),msqInput(1),
+      msuInput(1)) + (0.25*MuInput*AuInput(2,1)*(0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(Yu(2
+      ,1)) + 3*MuInput*AuInput(2,1)*Sqr(Yu(2,1))*(Sqr(Yu(0,1)) + Sqr(Yu(1,1)) +
+      Sqr(Yu(2,1))))*TCC0(msqInput(1),msqInput(1),msuInput(2)) + (-0.6*MuInput*
+      AuInput(0,1)*Sqr(g1)*Sqr(Yu(0,1)) + 3*MuInput*AuInput(0,1)*Sqr(Yu(0,1))*(Sqr
+      (Yu(0,0)) + Sqr(Yu(0,1)) + Sqr(Yu(0,2))))*TCC0(msqInput(1),msuInput(0),
+      msuInput(0)) + (-0.6*MuInput*AuInput(1,1)*Sqr(g1)*Sqr(Yu(1,1)) + 3*MuInput*
+      AuInput(1,1)*Sqr(Yu(1,1))*(Sqr(Yu(1,0)) + Sqr(Yu(1,1)) + Sqr(Yu(1,2))))*TCC0
+      (msqInput(1),msuInput(1),msuInput(1)) + (-0.6*MuInput*AuInput(2,1)*Sqr(g1)*
+      Sqr(Yu(2,1)) + 3*MuInput*AuInput(2,1)*Sqr(Yu(2,1))*(Sqr(Yu(2,0)) + Sqr(Yu(2,
+      1)) + Sqr(Yu(2,2))))*TCC0(msqInput(1),msuInput(2),msuInput(2)) + (0.25*
+      MuInput*AuInput(0,2)*(0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(Yu(0,2)) + 3*MuInput*
+      AuInput(0,2)*Sqr(Yu(0,2))*(Sqr(Yu(0,2)) + Sqr(Yu(1,2)) + Sqr(Yu(2,2))))*TCC0
+      (msqInput(2),msqInput(2),msuInput(0)) + (0.25*MuInput*AuInput(1,2)*(0.6*Sqr(
+      g1) - 3*Sqr(g2))*Sqr(Yu(1,2)) + 3*MuInput*AuInput(1,2)*Sqr(Yu(1,2))*(Sqr(Yu(
+      0,2)) + Sqr(Yu(1,2)) + Sqr(Yu(2,2))))*TCC0(msqInput(2),msqInput(2),msuInput(
+      1)) + (0.25*MuInput*AuInput(2,2)*(0.6*Sqr(g1) - 3*Sqr(g2))*Sqr(Yu(2,2)) + 3*
+      MuInput*AuInput(2,2)*Sqr(Yu(2,2))*(Sqr(Yu(0,2)) + Sqr(Yu(1,2)) + Sqr(Yu(2,2)
+      )))*TCC0(msqInput(2),msqInput(2),msuInput(2)) + (-0.6*MuInput*AuInput(0,2)*
+      Sqr(g1)*Sqr(Yu(0,2)) + 3*MuInput*AuInput(0,2)*Sqr(Yu(0,2))*(Sqr(Yu(0,0)) +
+      Sqr(Yu(0,1)) + Sqr(Yu(0,2))))*TCC0(msqInput(2),msuInput(0),msuInput(0)) + (-
+      0.6*MuInput*AuInput(1,2)*Sqr(g1)*Sqr(Yu(1,2)) + 3*MuInput*AuInput(1,2)*Sqr(
+      Yu(1,2))*(Sqr(Yu(1,0)) + Sqr(Yu(1,1)) + Sqr(Yu(1,2))))*TCC0(msqInput(2),
+      msuInput(1),msuInput(1)) + (-0.6*MuInput*AuInput(2,2)*Sqr(g1)*Sqr(Yu(2,2)) +
+      3*MuInput*AuInput(2,2)*Sqr(Yu(2,2))*(Sqr(Yu(2,0)) + Sqr(Yu(2,1)) + Sqr(Yu(2,
+      2))))*TCC0(msqInput(2),msuInput(2),msuInput(2)) + 3*MuInput*AdInput(0,0)*
+      Quad(Yd(0,0))*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(0),msqInput(0),
+      msqInput(0)) + 3*MuInput*AdInput(0,1)*Sqr(Abs(MuInput))*Sqr(Yd(0,0))*Sqr(Yd(
+      0,1))*TCD0(msdInput(0),msdInput(0),msqInput(0),msqInput(1)) + 3*MuInput*
+      AdInput(0,2)*Sqr(Abs(MuInput))*Sqr(Yd(0,0))*Sqr(Yd(0,2))*TCD0(msdInput(0),
+      msdInput(0),msqInput(0),msqInput(2)) + 3*MuInput*AdInput(0,0)*Sqr(Abs(
+      MuInput))*Sqr(Yd(0,0))*Sqr(Yd(0,1))*TCD0(msdInput(0),msdInput(0),msqInput(1)
+      ,msqInput(0)) + 3*MuInput*AdInput(0,1)*Quad(Yd(0,1))*Sqr(Abs(MuInput))*TCD0(
+      msdInput(0),msdInput(0),msqInput(1),msqInput(1)) + 3*MuInput*AdInput(0,2)*
+      Sqr(Abs(MuInput))*Sqr(Yd(0,1))*Sqr(Yd(0,2))*TCD0(msdInput(0),msdInput(0),
+      msqInput(1),msqInput(2)) + 3*MuInput*AdInput(0,0)*Sqr(Abs(MuInput))*Sqr(Yd(0
+      ,0))*Sqr(Yd(0,2))*TCD0(msdInput(0),msdInput(0),msqInput(2),msqInput(0)) + 3*
+      MuInput*AdInput(0,1)*Sqr(Abs(MuInput))*Sqr(Yd(0,1))*Sqr(Yd(0,2))*TCD0(
+      msdInput(0),msdInput(0),msqInput(2),msqInput(1)) + 3*MuInput*AdInput(0,2)*
+      Quad(Yd(0,2))*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(0),msqInput(2),
+      msqInput(2)) + 3*MuInput*AdInput(1,0)*Sqr(Abs(MuInput))*Sqr(Yd(0,0))*Sqr(Yd(
+      1,0))*TCD0(msdInput(0),msdInput(1),msqInput(0),msqInput(0)) + 3*MuInput*
+      AdInput(1,1)*Sqr(Abs(MuInput))*Sqr(Yd(0,1))*Sqr(Yd(1,1))*TCD0(msdInput(0),
+      msdInput(1),msqInput(1),msqInput(1)) + 3*MuInput*AdInput(1,2)*Sqr(Abs(
+      MuInput))*Sqr(Yd(0,2))*Sqr(Yd(1,2))*TCD0(msdInput(0),msdInput(1),msqInput(2)
+      ,msqInput(2)) + 3*MuInput*AdInput(2,0)*Sqr(Abs(MuInput))*Sqr(Yd(0,0))*Sqr(Yd
+      (2,0))*TCD0(msdInput(0),msdInput(2),msqInput(0),msqInput(0)) + 3*MuInput*
+      AdInput(2,1)*Sqr(Abs(MuInput))*Sqr(Yd(0,1))*Sqr(Yd(2,1))*TCD0(msdInput(0),
+      msdInput(2),msqInput(1),msqInput(1)) + 3*MuInput*AdInput(2,2)*Sqr(Abs(
+      MuInput))*Sqr(Yd(0,2))*Sqr(Yd(2,2))*TCD0(msdInput(0),msdInput(2),msqInput(2)
+      ,msqInput(2)) + 3*MuInput*AdInput(0,0)*Sqr(Abs(MuInput))*Sqr(Yd(0,0))*Sqr(Yd
+      (1,0))*TCD0(msdInput(1),msdInput(0),msqInput(0),msqInput(0)) + 3*MuInput*
+      AdInput(0,1)*Sqr(Abs(MuInput))*Sqr(Yd(0,1))*Sqr(Yd(1,1))*TCD0(msdInput(1),
+      msdInput(0),msqInput(1),msqInput(1)) + 3*MuInput*AdInput(0,2)*Sqr(Abs(
+      MuInput))*Sqr(Yd(0,2))*Sqr(Yd(1,2))*TCD0(msdInput(1),msdInput(0),msqInput(2)
+      ,msqInput(2)) + 3*MuInput*AdInput(1,0)*Quad(Yd(1,0))*Sqr(Abs(MuInput))*TCD0(
+      msdInput(1),msdInput(1),msqInput(0),msqInput(0)) + 3*MuInput*AdInput(1,1)*
+      Sqr(Abs(MuInput))*Sqr(Yd(1,0))*Sqr(Yd(1,1))*TCD0(msdInput(1),msdInput(1),
+      msqInput(0),msqInput(1)) + 3*MuInput*AdInput(1,2)*Sqr(Abs(MuInput))*Sqr(Yd(1
+      ,0))*Sqr(Yd(1,2))*TCD0(msdInput(1),msdInput(1),msqInput(0),msqInput(2)) + 3*
+      MuInput*AdInput(1,0)*Sqr(Abs(MuInput))*Sqr(Yd(1,0))*Sqr(Yd(1,1))*TCD0(
+      msdInput(1),msdInput(1),msqInput(1),msqInput(0)) + 3*MuInput*AdInput(1,1)*
+      Quad(Yd(1,1))*Sqr(Abs(MuInput))*TCD0(msdInput(1),msdInput(1),msqInput(1),
+      msqInput(1)) + 3*MuInput*AdInput(1,2)*Sqr(Abs(MuInput))*Sqr(Yd(1,1))*Sqr(Yd(
+      1,2))*TCD0(msdInput(1),msdInput(1),msqInput(1),msqInput(2)) + 3*MuInput*
+      AdInput(1,0)*Sqr(Abs(MuInput))*Sqr(Yd(1,0))*Sqr(Yd(1,2))*TCD0(msdInput(1),
+      msdInput(1),msqInput(2),msqInput(0)) + 3*MuInput*AdInput(1,1)*Sqr(Abs(
+      MuInput))*Sqr(Yd(1,1))*Sqr(Yd(1,2))*TCD0(msdInput(1),msdInput(1),msqInput(2)
+      ,msqInput(1)) + 3*MuInput*AdInput(1,2)*Quad(Yd(1,2))*Sqr(Abs(MuInput))*TCD0(
+      msdInput(1),msdInput(1),msqInput(2),msqInput(2)) + 3*MuInput*AdInput(2,0)*
+      Sqr(Abs(MuInput))*Sqr(Yd(1,0))*Sqr(Yd(2,0))*TCD0(msdInput(1),msdInput(2),
+      msqInput(0),msqInput(0)) + 3*MuInput*AdInput(2,1)*Sqr(Abs(MuInput))*Sqr(Yd(1
+      ,1))*Sqr(Yd(2,1))*TCD0(msdInput(1),msdInput(2),msqInput(1),msqInput(1)) + 3*
+      MuInput*AdInput(2,2)*Sqr(Abs(MuInput))*Sqr(Yd(1,2))*Sqr(Yd(2,2))*TCD0(
+      msdInput(1),msdInput(2),msqInput(2),msqInput(2)) + 3*MuInput*AdInput(0,0)*
+      Sqr(Abs(MuInput))*Sqr(Yd(0,0))*Sqr(Yd(2,0))*TCD0(msdInput(2),msdInput(0),
+      msqInput(0),msqInput(0)) + 3*MuInput*AdInput(0,1)*Sqr(Abs(MuInput))*Sqr(Yd(0
+      ,1))*Sqr(Yd(2,1))*TCD0(msdInput(2),msdInput(0),msqInput(1),msqInput(1)) + 3*
+      MuInput*AdInput(0,2)*Sqr(Abs(MuInput))*Sqr(Yd(0,2))*Sqr(Yd(2,2))*TCD0(
+      msdInput(2),msdInput(0),msqInput(2),msqInput(2)) + 3*MuInput*AdInput(1,0)*
+      Sqr(Abs(MuInput))*Sqr(Yd(1,0))*Sqr(Yd(2,0))*TCD0(msdInput(2),msdInput(1),
+      msqInput(0),msqInput(0)) + 3*MuInput*AdInput(1,1)*Sqr(Abs(MuInput))*Sqr(Yd(1
+      ,1))*Sqr(Yd(2,1))*TCD0(msdInput(2),msdInput(1),msqInput(1),msqInput(1)) + 3*
+      MuInput*AdInput(1,2)*Sqr(Abs(MuInput))*Sqr(Yd(1,2))*Sqr(Yd(2,2))*TCD0(
+      msdInput(2),msdInput(1),msqInput(2),msqInput(2)) + 3*MuInput*AdInput(2,0)*
+      Quad(Yd(2,0))*Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(2),msqInput(0),
+      msqInput(0)) + 3*MuInput*AdInput(2,1)*Sqr(Abs(MuInput))*Sqr(Yd(2,0))*Sqr(Yd(
+      2,1))*TCD0(msdInput(2),msdInput(2),msqInput(0),msqInput(1)) + 3*MuInput*
+      AdInput(2,2)*Sqr(Abs(MuInput))*Sqr(Yd(2,0))*Sqr(Yd(2,2))*TCD0(msdInput(2),
+      msdInput(2),msqInput(0),msqInput(2)) + 3*MuInput*AdInput(2,0)*Sqr(Abs(
+      MuInput))*Sqr(Yd(2,0))*Sqr(Yd(2,1))*TCD0(msdInput(2),msdInput(2),msqInput(1)
+      ,msqInput(0)) + 3*MuInput*AdInput(2,1)*Quad(Yd(2,1))*Sqr(Abs(MuInput))*TCD0(
+      msdInput(2),msdInput(2),msqInput(1),msqInput(1)) + 3*MuInput*AdInput(2,2)*
+      Sqr(Abs(MuInput))*Sqr(Yd(2,1))*Sqr(Yd(2,2))*TCD0(msdInput(2),msdInput(2),
+      msqInput(1),msqInput(2)) + 3*MuInput*AdInput(2,0)*Sqr(Abs(MuInput))*Sqr(Yd(2
+      ,0))*Sqr(Yd(2,2))*TCD0(msdInput(2),msdInput(2),msqInput(2),msqInput(0)) + 3*
+      MuInput*AdInput(2,1)*Sqr(Abs(MuInput))*Sqr(Yd(2,1))*Sqr(Yd(2,2))*TCD0(
+      msdInput(2),msdInput(2),msqInput(2),msqInput(1)) + 3*MuInput*AdInput(2,2)*
+      Quad(Yd(2,2))*Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(2),msqInput(2),
+      msqInput(2)) + MuInput*AeInput(0,0)*Quad(Ye(0,0))*Sqr(Abs(MuInput))*TCD0(
+      mseInput(0),mseInput(0),mslInput(0),mslInput(0)) + MuInput*AeInput(0,1)*Sqr(
+      Abs(MuInput))*Sqr(Ye(0,0))*Sqr(Ye(0,1))*TCD0(mseInput(0),mseInput(0),
+      mslInput(0),mslInput(1)) + MuInput*AeInput(0,2)*Sqr(Abs(MuInput))*Sqr(Ye(0,0
+      ))*Sqr(Ye(0,2))*TCD0(mseInput(0),mseInput(0),mslInput(0),mslInput(2)) +
+      MuInput*AeInput(0,0)*Sqr(Abs(MuInput))*Sqr(Ye(0,0))*Sqr(Ye(0,1))*TCD0(
+      mseInput(0),mseInput(0),mslInput(1),mslInput(0)) + MuInput*AeInput(0,1)*Quad
+      (Ye(0,1))*Sqr(Abs(MuInput))*TCD0(mseInput(0),mseInput(0),mslInput(1),
+      mslInput(1)) + MuInput*AeInput(0,2)*Sqr(Abs(MuInput))*Sqr(Ye(0,1))*Sqr(Ye(0,
+      2))*TCD0(mseInput(0),mseInput(0),mslInput(1),mslInput(2)) + MuInput*AeInput(
+      0,0)*Sqr(Abs(MuInput))*Sqr(Ye(0,0))*Sqr(Ye(0,2))*TCD0(mseInput(0),mseInput(0
+      ),mslInput(2),mslInput(0)) + MuInput*AeInput(0,1)*Sqr(Abs(MuInput))*Sqr(Ye(0
+      ,1))*Sqr(Ye(0,2))*TCD0(mseInput(0),mseInput(0),mslInput(2),mslInput(1)) +
+      MuInput*AeInput(0,2)*Quad(Ye(0,2))*Sqr(Abs(MuInput))*TCD0(mseInput(0),
+      mseInput(0),mslInput(2),mslInput(2)) + MuInput*AeInput(1,0)*Sqr(Abs(MuInput)
+      )*Sqr(Ye(0,0))*Sqr(Ye(1,0))*TCD0(mseInput(0),mseInput(1),mslInput(0),
+      mslInput(0)) + MuInput*AeInput(1,1)*Sqr(Abs(MuInput))*Sqr(Ye(0,1))*Sqr(Ye(1,
+      1))*TCD0(mseInput(0),mseInput(1),mslInput(1),mslInput(1)) + MuInput*AeInput(
+      1,2)*Sqr(Abs(MuInput))*Sqr(Ye(0,2))*Sqr(Ye(1,2))*TCD0(mseInput(0),mseInput(1
+      ),mslInput(2),mslInput(2)) + MuInput*AeInput(2,0)*Sqr(Abs(MuInput))*Sqr(Ye(0
+      ,0))*Sqr(Ye(2,0))*TCD0(mseInput(0),mseInput(2),mslInput(0),mslInput(0)) +
+      MuInput*AeInput(2,1)*Sqr(Abs(MuInput))*Sqr(Ye(0,1))*Sqr(Ye(2,1))*TCD0(
+      mseInput(0),mseInput(2),mslInput(1),mslInput(1)) + MuInput*AeInput(2,2)*Sqr(
+      Abs(MuInput))*Sqr(Ye(0,2))*Sqr(Ye(2,2))*TCD0(mseInput(0),mseInput(2),
+      mslInput(2),mslInput(2)) + MuInput*AeInput(0,0)*Sqr(Abs(MuInput))*Sqr(Ye(0,0
+      ))*Sqr(Ye(1,0))*TCD0(mseInput(1),mseInput(0),mslInput(0),mslInput(0)) +
+      MuInput*AeInput(0,1)*Sqr(Abs(MuInput))*Sqr(Ye(0,1))*Sqr(Ye(1,1))*TCD0(
+      mseInput(1),mseInput(0),mslInput(1),mslInput(1)) + MuInput*AeInput(0,2)*Sqr(
+      Abs(MuInput))*Sqr(Ye(0,2))*Sqr(Ye(1,2))*TCD0(mseInput(1),mseInput(0),
+      mslInput(2),mslInput(2)) + MuInput*AeInput(1,0)*Quad(Ye(1,0))*Sqr(Abs(
+      MuInput))*TCD0(mseInput(1),mseInput(1),mslInput(0),mslInput(0)) + MuInput*
+      AeInput(1,1)*Sqr(Abs(MuInput))*Sqr(Ye(1,0))*Sqr(Ye(1,1))*TCD0(mseInput(1),
+      mseInput(1),mslInput(0),mslInput(1)) + MuInput*AeInput(1,2)*Sqr(Abs(MuInput)
+      )*Sqr(Ye(1,0))*Sqr(Ye(1,2))*TCD0(mseInput(1),mseInput(1),mslInput(0),
+      mslInput(2)) + MuInput*AeInput(1,0)*Sqr(Abs(MuInput))*Sqr(Ye(1,0))*Sqr(Ye(1,
+      1))*TCD0(mseInput(1),mseInput(1),mslInput(1),mslInput(0)) + MuInput*AeInput(
+      1,1)*Quad(Ye(1,1))*Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput(1),mslInput(1
+      ),mslInput(1)) + MuInput*AeInput(1,2)*Sqr(Abs(MuInput))*Sqr(Ye(1,1))*Sqr(Ye(
+      1,2))*TCD0(mseInput(1),mseInput(1),mslInput(1),mslInput(2)) + MuInput*
+      AeInput(1,0)*Sqr(Abs(MuInput))*Sqr(Ye(1,0))*Sqr(Ye(1,2))*TCD0(mseInput(1),
+      mseInput(1),mslInput(2),mslInput(0)) + MuInput*AeInput(1,1)*Sqr(Abs(MuInput)
+      )*Sqr(Ye(1,1))*Sqr(Ye(1,2))*TCD0(mseInput(1),mseInput(1),mslInput(2),
+      mslInput(1)) + MuInput*AeInput(1,2)*Quad(Ye(1,2))*Sqr(Abs(MuInput))*TCD0(
+      mseInput(1),mseInput(1),mslInput(2),mslInput(2)) + MuInput*AeInput(2,0)*Sqr(
+      Abs(MuInput))*Sqr(Ye(1,0))*Sqr(Ye(2,0))*TCD0(mseInput(1),mseInput(2),
+      mslInput(0),mslInput(0)) + MuInput*AeInput(2,1)*Sqr(Abs(MuInput))*Sqr(Ye(1,1
+      ))*Sqr(Ye(2,1))*TCD0(mseInput(1),mseInput(2),mslInput(1),mslInput(1)) +
+      MuInput*AeInput(2,2)*Sqr(Abs(MuInput))*Sqr(Ye(1,2))*Sqr(Ye(2,2))*TCD0(
+      mseInput(1),mseInput(2),mslInput(2),mslInput(2)) + MuInput*AeInput(0,0)*Sqr(
+      Abs(MuInput))*Sqr(Ye(0,0))*Sqr(Ye(2,0))*TCD0(mseInput(2),mseInput(0),
+      mslInput(0),mslInput(0)) + MuInput*AeInput(0,1)*Sqr(Abs(MuInput))*Sqr(Ye(0,1
+      ))*Sqr(Ye(2,1))*TCD0(mseInput(2),mseInput(0),mslInput(1),mslInput(1)) +
+      MuInput*AeInput(0,2)*Sqr(Abs(MuInput))*Sqr(Ye(0,2))*Sqr(Ye(2,2))*TCD0(
+      mseInput(2),mseInput(0),mslInput(2),mslInput(2)) + MuInput*AeInput(1,0)*Sqr(
+      Abs(MuInput))*Sqr(Ye(1,0))*Sqr(Ye(2,0))*TCD0(mseInput(2),mseInput(1),
+      mslInput(0),mslInput(0)) + MuInput*AeInput(1,1)*Sqr(Abs(MuInput))*Sqr(Ye(1,1
+      ))*Sqr(Ye(2,1))*TCD0(mseInput(2),mseInput(1),mslInput(1),mslInput(1)) +
+      MuInput*AeInput(1,2)*Sqr(Abs(MuInput))*Sqr(Ye(1,2))*Sqr(Ye(2,2))*TCD0(
+      mseInput(2),mseInput(1),mslInput(2),mslInput(2)) + MuInput*AeInput(2,0)*Quad
+      (Ye(2,0))*Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput(2),mslInput(0),
+      mslInput(0)) + MuInput*AeInput(2,1)*Sqr(Abs(MuInput))*Sqr(Ye(2,0))*Sqr(Ye(2,
+      1))*TCD0(mseInput(2),mseInput(2),mslInput(0),mslInput(1)) + MuInput*AeInput(
+      2,2)*Sqr(Abs(MuInput))*Sqr(Ye(2,0))*Sqr(Ye(2,2))*TCD0(mseInput(2),mseInput(2
+      ),mslInput(0),mslInput(2)) + MuInput*AeInput(2,0)*Sqr(Abs(MuInput))*Sqr(Ye(2
+      ,0))*Sqr(Ye(2,1))*TCD0(mseInput(2),mseInput(2),mslInput(1),mslInput(0)) +
+      MuInput*AeInput(2,1)*Quad(Ye(2,1))*Sqr(Abs(MuInput))*TCD0(mseInput(2),
+      mseInput(2),mslInput(1),mslInput(1)) + MuInput*AeInput(2,2)*Sqr(Abs(MuInput)
+      )*Sqr(Ye(2,1))*Sqr(Ye(2,2))*TCD0(mseInput(2),mseInput(2),mslInput(1),
+      mslInput(2)) + MuInput*AeInput(2,0)*Sqr(Abs(MuInput))*Sqr(Ye(2,0))*Sqr(Ye(2,
+      2))*TCD0(mseInput(2),mseInput(2),mslInput(2),mslInput(0)) + MuInput*AeInput(
+      2,1)*Sqr(Abs(MuInput))*Sqr(Ye(2,1))*Sqr(Ye(2,2))*TCD0(mseInput(2),mseInput(2
+      ),mslInput(2),mslInput(1)) + MuInput*AeInput(2,2)*Quad(Ye(2,2))*Sqr(Abs(
+      MuInput))*TCD0(mseInput(2),mseInput(2),mslInput(2),mslInput(2)) + 3*MuInput*
+      Cube(AuInput(0,0))*Quad(Yu(0,0))*TCD0(msqInput(0),msqInput(0),msqInput(0),
+      msqInput(0)) + 3*MuInput*AuInput(0,0)*Sqr(AuInput(1,0))*Sqr(Yu(0,0))*Sqr(Yu(
+      1,0))*TCD0(msqInput(0),msqInput(0),msqInput(0),msqInput(1)) + 3*MuInput*
+      AuInput(0,0)*Sqr(AuInput(2,0))*Sqr(Yu(0,0))*Sqr(Yu(2,0))*TCD0(msqInput(0),
+      msqInput(0),msqInput(0),msqInput(2)) + 3*MuInput*AuInput(1,0)*Sqr(AuInput(0,
+      0))*Sqr(Yu(0,0))*Sqr(Yu(1,0))*TCD0(msqInput(0),msqInput(0),msqInput(1),
+      msqInput(0)) + 3*MuInput*Cube(AuInput(1,0))*Quad(Yu(1,0))*TCD0(msqInput(0),
+      msqInput(0),msqInput(1),msqInput(1)) + 3*MuInput*AuInput(1,0)*Sqr(AuInput(2,
+      0))*Sqr(Yu(1,0))*Sqr(Yu(2,0))*TCD0(msqInput(0),msqInput(0),msqInput(1),
+      msqInput(2)) + 3*MuInput*AuInput(2,0)*Sqr(AuInput(0,0))*Sqr(Yu(0,0))*Sqr(Yu(
+      2,0))*TCD0(msqInput(0),msqInput(0),msqInput(2),msqInput(0)) + 3*MuInput*
+      AuInput(2,0)*Sqr(AuInput(1,0))*Sqr(Yu(1,0))*Sqr(Yu(2,0))*TCD0(msqInput(0),
+      msqInput(0),msqInput(2),msqInput(1)) + 3*MuInput*Cube(AuInput(2,0))*Quad(Yu(
+      2,0))*TCD0(msqInput(0),msqInput(0),msqInput(2),msqInput(2)) + 3*MuInput*
+      AuInput(0,0)*Sqr(AuInput(0,1))*Sqr(Yu(0,0))*Sqr(Yu(0,1))*TCD0(msqInput(0),
+      msqInput(1),msqInput(0),msqInput(0)) + 3*MuInput*AuInput(1,0)*Sqr(AuInput(1,
+      1))*Sqr(Yu(1,0))*Sqr(Yu(1,1))*TCD0(msqInput(0),msqInput(1),msqInput(1),
+      msqInput(1)) + 3*MuInput*AuInput(2,0)*Sqr(AuInput(2,1))*Sqr(Yu(2,0))*Sqr(Yu(
+      2,1))*TCD0(msqInput(0),msqInput(1),msqInput(2),msqInput(2)) + 3*MuInput*
+      AuInput(0,0)*Sqr(AuInput(0,2))*Sqr(Yu(0,0))*Sqr(Yu(0,2))*TCD0(msqInput(0),
+      msqInput(2),msqInput(0),msqInput(0)) + 3*MuInput*AuInput(1,0)*Sqr(AuInput(1,
+      2))*Sqr(Yu(1,0))*Sqr(Yu(1,2))*TCD0(msqInput(0),msqInput(2),msqInput(1),
+      msqInput(1)) + 3*MuInput*AuInput(2,0)*Sqr(AuInput(2,2))*Sqr(Yu(2,0))*Sqr(Yu(
+      2,2))*TCD0(msqInput(0),msqInput(2),msqInput(2),msqInput(2)) + 3*MuInput*
+      AuInput(0,1)*Sqr(AuInput(0,0))*Sqr(Yu(0,0))*Sqr(Yu(0,1))*TCD0(msqInput(1),
+      msqInput(0),msqInput(0),msqInput(0)) + 3*MuInput*AuInput(1,1)*Sqr(AuInput(1,
+      0))*Sqr(Yu(1,0))*Sqr(Yu(1,1))*TCD0(msqInput(1),msqInput(0),msqInput(1),
+      msqInput(1)) + 3*MuInput*AuInput(2,1)*Sqr(AuInput(2,0))*Sqr(Yu(2,0))*Sqr(Yu(
+      2,1))*TCD0(msqInput(1),msqInput(0),msqInput(2),msqInput(2)) + 3*MuInput*Cube
+      (AuInput(0,1))*Quad(Yu(0,1))*TCD0(msqInput(1),msqInput(1),msqInput(0),
+      msqInput(0)) + 3*MuInput*AuInput(0,1)*Sqr(AuInput(1,1))*Sqr(Yu(0,1))*Sqr(Yu(
+      1,1))*TCD0(msqInput(1),msqInput(1),msqInput(0),msqInput(1)) + 3*MuInput*
+      AuInput(0,1)*Sqr(AuInput(2,1))*Sqr(Yu(0,1))*Sqr(Yu(2,1))*TCD0(msqInput(1),
+      msqInput(1),msqInput(0),msqInput(2)) + 3*MuInput*AuInput(1,1)*Sqr(AuInput(0,
+      1))*Sqr(Yu(0,1))*Sqr(Yu(1,1))*TCD0(msqInput(1),msqInput(1),msqInput(1),
+      msqInput(0)) + 3*MuInput*Cube(AuInput(1,1))*Quad(Yu(1,1))*TCD0(msqInput(1),
+      msqInput(1),msqInput(1),msqInput(1)) + 3*MuInput*AuInput(1,1)*Sqr(AuInput(2,
+      1))*Sqr(Yu(1,1))*Sqr(Yu(2,1))*TCD0(msqInput(1),msqInput(1),msqInput(1),
+      msqInput(2)) + 3*MuInput*AuInput(2,1)*Sqr(AuInput(0,1))*Sqr(Yu(0,1))*Sqr(Yu(
+      2,1))*TCD0(msqInput(1),msqInput(1),msqInput(2),msqInput(0)) + 3*MuInput*
+      AuInput(2,1)*Sqr(AuInput(1,1))*Sqr(Yu(1,1))*Sqr(Yu(2,1))*TCD0(msqInput(1),
+      msqInput(1),msqInput(2),msqInput(1)) + 3*MuInput*Cube(AuInput(2,1))*Quad(Yu(
+      2,1))*TCD0(msqInput(1),msqInput(1),msqInput(2),msqInput(2)) + 3*MuInput*
+      AuInput(0,1)*Sqr(AuInput(0,2))*Sqr(Yu(0,1))*Sqr(Yu(0,2))*TCD0(msqInput(1),
+      msqInput(2),msqInput(0),msqInput(0)) + 3*MuInput*AuInput(1,1)*Sqr(AuInput(1,
+      2))*Sqr(Yu(1,1))*Sqr(Yu(1,2))*TCD0(msqInput(1),msqInput(2),msqInput(1),
+      msqInput(1)) + 3*MuInput*AuInput(2,1)*Sqr(AuInput(2,2))*Sqr(Yu(2,1))*Sqr(Yu(
+      2,2))*TCD0(msqInput(1),msqInput(2),msqInput(2),msqInput(2)) + 3*MuInput*
+      AuInput(0,2)*Sqr(AuInput(0,0))*Sqr(Yu(0,0))*Sqr(Yu(0,2))*TCD0(msqInput(2),
+      msqInput(0),msqInput(0),msqInput(0)) + 3*MuInput*AuInput(1,2)*Sqr(AuInput(1,
+      0))*Sqr(Yu(1,0))*Sqr(Yu(1,2))*TCD0(msqInput(2),msqInput(0),msqInput(1),
+      msqInput(1)) + 3*MuInput*AuInput(2,2)*Sqr(AuInput(2,0))*Sqr(Yu(2,0))*Sqr(Yu(
+      2,2))*TCD0(msqInput(2),msqInput(0),msqInput(2),msqInput(2)) + 3*MuInput*
+      AuInput(0,2)*Sqr(AuInput(0,1))*Sqr(Yu(0,1))*Sqr(Yu(0,2))*TCD0(msqInput(2),
+      msqInput(1),msqInput(0),msqInput(0)) + 3*MuInput*AuInput(1,2)*Sqr(AuInput(1,
+      1))*Sqr(Yu(1,1))*Sqr(Yu(1,2))*TCD0(msqInput(2),msqInput(1),msqInput(1),
+      msqInput(1)) + 3*MuInput*AuInput(2,2)*Sqr(AuInput(2,1))*Sqr(Yu(2,1))*Sqr(Yu(
+      2,2))*TCD0(msqInput(2),msqInput(1),msqInput(2),msqInput(2)) + 3*MuInput*Cube
+      (AuInput(0,2))*Quad(Yu(0,2))*TCD0(msqInput(2),msqInput(2),msqInput(0),
+      msqInput(0)) + 3*MuInput*AuInput(0,2)*Sqr(AuInput(1,2))*Sqr(Yu(0,2))*Sqr(Yu(
+      1,2))*TCD0(msqInput(2),msqInput(2),msqInput(0),msqInput(1)) + 3*MuInput*
+      AuInput(0,2)*Sqr(AuInput(2,2))*Sqr(Yu(0,2))*Sqr(Yu(2,2))*TCD0(msqInput(2),
+      msqInput(2),msqInput(0),msqInput(2)) + 3*MuInput*AuInput(1,2)*Sqr(AuInput(0,
+      2))*Sqr(Yu(0,2))*Sqr(Yu(1,2))*TCD0(msqInput(2),msqInput(2),msqInput(1),
+      msqInput(0)) + 3*MuInput*Cube(AuInput(1,2))*Quad(Yu(1,2))*TCD0(msqInput(2),
+      msqInput(2),msqInput(1),msqInput(1)) + 3*MuInput*AuInput(1,2)*Sqr(AuInput(2,
+      2))*Sqr(Yu(1,2))*Sqr(Yu(2,2))*TCD0(msqInput(2),msqInput(2),msqInput(1),
+      msqInput(2)) + 3*MuInput*AuInput(2,2)*Sqr(AuInput(0,2))*Sqr(Yu(0,2))*Sqr(Yu(
+      2,2))*TCD0(msqInput(2),msqInput(2),msqInput(2),msqInput(0)) + 3*MuInput*
+      AuInput(2,2)*Sqr(AuInput(1,2))*Sqr(Yu(1,2))*Sqr(Yu(2,2))*TCD0(msqInput(2),
+      msqInput(2),msqInput(2),msqInput(1)) + 3*MuInput*Cube(AuInput(2,2))*Quad(Yu(
+      2,2))*TCD0(msqInput(2),msqInput(2),msqInput(2),msqInput(2)) + 0.36*M1Input*
+      MuInput*Quad(g1)*TCD2t(M1Input,M1Input,Abs(MuInput),Abs(MuInput)) + 0.6*(
+      M1Input + M2Input)*MuInput*Sqr(g1)*Sqr(g2)*TCD2t(M1Input,M2Input,Abs(MuInput
+      ),Abs(MuInput)) + 3*M2Input*MuInput*Quad(g2)*TCD2t(M2Input,M2Input,Abs(
+      MuInput),Abs(MuInput)) + 3*MuInput*AdInput(1,1)*Sqr(Abs(MuInput))*TCD0(
+      msdInput(0),msdInput(1),msqInput(0),msqInput(1))*Yd(0,0)*Yd(0,1)*Yd(1,0)*Yd(
+      1,1) + 3*MuInput*AdInput(1,0)*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(1)
+      ,msqInput(1),msqInput(0))*Yd(0,0)*Yd(0,1)*Yd(1,0)*Yd(1,1) + 3*MuInput*
+      AdInput(0,1)*Sqr(Abs(MuInput))*TCD0(msdInput(1),msdInput(0),msqInput(0),
+      msqInput(1))*Yd(0,0)*Yd(0,1)*Yd(1,0)*Yd(1,1) + 3*MuInput*AdInput(0,0)*Sqr(
+      Abs(MuInput))*TCD0(msdInput(1),msdInput(0),msqInput(1),msqInput(0))*Yd(0,0)*
+      Yd(0,1)*Yd(1,0)*Yd(1,1) + 3*MuInput*AdInput(1,2)*Sqr(Abs(MuInput))*TCD0(
+      msdInput(0),msdInput(1),msqInput(0),msqInput(2))*Yd(0,0)*Yd(0,2)*Yd(1,0)*Yd(
+      1,2) + 3*MuInput*AdInput(1,0)*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(1)
+      ,msqInput(2),msqInput(0))*Yd(0,0)*Yd(0,2)*Yd(1,0)*Yd(1,2) + 3*MuInput*
+      AdInput(0,2)*Sqr(Abs(MuInput))*TCD0(msdInput(1),msdInput(0),msqInput(0),
+      msqInput(2))*Yd(0,0)*Yd(0,2)*Yd(1,0)*Yd(1,2) + 3*MuInput*AdInput(0,0)*Sqr(
+      Abs(MuInput))*TCD0(msdInput(1),msdInput(0),msqInput(2),msqInput(0))*Yd(0,0)*
+      Yd(0,2)*Yd(1,0)*Yd(1,2) + 3*MuInput*AdInput(1,2)*Sqr(Abs(MuInput))*TCD0(
+      msdInput(0),msdInput(1),msqInput(1),msqInput(2))*Yd(0,1)*Yd(0,2)*Yd(1,1)*Yd(
+      1,2) + 3*MuInput*AdInput(1,1)*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(1)
+      ,msqInput(2),msqInput(1))*Yd(0,1)*Yd(0,2)*Yd(1,1)*Yd(1,2) + 3*MuInput*
+      AdInput(0,2)*Sqr(Abs(MuInput))*TCD0(msdInput(1),msdInput(0),msqInput(1),
+      msqInput(2))*Yd(0,1)*Yd(0,2)*Yd(1,1)*Yd(1,2) + 3*MuInput*AdInput(0,1)*Sqr(
+      Abs(MuInput))*TCD0(msdInput(1),msdInput(0),msqInput(2),msqInput(1))*Yd(0,1)*
+      Yd(0,2)*Yd(1,1)*Yd(1,2) + 3*MuInput*AdInput(2,1)*Sqr(Abs(MuInput))*TCD0(
+      msdInput(0),msdInput(2),msqInput(0),msqInput(1))*Yd(0,0)*Yd(0,1)*Yd(2,0)*Yd(
+      2,1) + 3*MuInput*AdInput(2,0)*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(2)
+      ,msqInput(1),msqInput(0))*Yd(0,0)*Yd(0,1)*Yd(2,0)*Yd(2,1) + 3*MuInput*
+      AdInput(0,1)*Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(0),msqInput(0),
+      msqInput(1))*Yd(0,0)*Yd(0,1)*Yd(2,0)*Yd(2,1) + 3*MuInput*AdInput(0,0)*Sqr(
+      Abs(MuInput))*TCD0(msdInput(2),msdInput(0),msqInput(1),msqInput(0))*Yd(0,0)*
+      Yd(0,1)*Yd(2,0)*Yd(2,1) + 3*MuInput*AdInput(2,1)*Sqr(Abs(MuInput))*TCD0(
+      msdInput(1),msdInput(2),msqInput(0),msqInput(1))*Yd(1,0)*Yd(1,1)*Yd(2,0)*Yd(
+      2,1) + 3*MuInput*AdInput(2,0)*Sqr(Abs(MuInput))*TCD0(msdInput(1),msdInput(2)
+      ,msqInput(1),msqInput(0))*Yd(1,0)*Yd(1,1)*Yd(2,0)*Yd(2,1) + 3*MuInput*
+      AdInput(1,1)*Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(1),msqInput(0),
+      msqInput(1))*Yd(1,0)*Yd(1,1)*Yd(2,0)*Yd(2,1) + 3*MuInput*AdInput(1,0)*Sqr(
+      Abs(MuInput))*TCD0(msdInput(2),msdInput(1),msqInput(1),msqInput(0))*Yd(1,0)*
+      Yd(1,1)*Yd(2,0)*Yd(2,1) + 3*MuInput*AdInput(2,2)*Sqr(Abs(MuInput))*TCD0(
+      msdInput(0),msdInput(2),msqInput(0),msqInput(2))*Yd(0,0)*Yd(0,2)*Yd(2,0)*Yd(
+      2,2) + 3*MuInput*AdInput(2,0)*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(2)
+      ,msqInput(2),msqInput(0))*Yd(0,0)*Yd(0,2)*Yd(2,0)*Yd(2,2) + 3*MuInput*
+      AdInput(0,2)*Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(0),msqInput(0),
+      msqInput(2))*Yd(0,0)*Yd(0,2)*Yd(2,0)*Yd(2,2) + 3*MuInput*AdInput(0,0)*Sqr(
+      Abs(MuInput))*TCD0(msdInput(2),msdInput(0),msqInput(2),msqInput(0))*Yd(0,0)*
+      Yd(0,2)*Yd(2,0)*Yd(2,2) + 3*MuInput*AdInput(2,2)*Sqr(Abs(MuInput))*TCD0(
+      msdInput(1),msdInput(2),msqInput(0),msqInput(2))*Yd(1,0)*Yd(1,2)*Yd(2,0)*Yd(
+      2,2) + 3*MuInput*AdInput(2,0)*Sqr(Abs(MuInput))*TCD0(msdInput(1),msdInput(2)
+      ,msqInput(2),msqInput(0))*Yd(1,0)*Yd(1,2)*Yd(2,0)*Yd(2,2) + 3*MuInput*
+      AdInput(1,2)*Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(1),msqInput(0),
+      msqInput(2))*Yd(1,0)*Yd(1,2)*Yd(2,0)*Yd(2,2) + 3*MuInput*AdInput(1,0)*Sqr(
+      Abs(MuInput))*TCD0(msdInput(2),msdInput(1),msqInput(2),msqInput(0))*Yd(1,0)*
+      Yd(1,2)*Yd(2,0)*Yd(2,2) + 3*MuInput*AdInput(2,2)*Sqr(Abs(MuInput))*TCD0(
+      msdInput(0),msdInput(2),msqInput(1),msqInput(2))*Yd(0,1)*Yd(0,2)*Yd(2,1)*Yd(
+      2,2) + 3*MuInput*AdInput(2,1)*Sqr(Abs(MuInput))*TCD0(msdInput(0),msdInput(2)
+      ,msqInput(2),msqInput(1))*Yd(0,1)*Yd(0,2)*Yd(2,1)*Yd(2,2) + 3*MuInput*
+      AdInput(0,2)*Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(0),msqInput(1),
+      msqInput(2))*Yd(0,1)*Yd(0,2)*Yd(2,1)*Yd(2,2) + 3*MuInput*AdInput(0,1)*Sqr(
+      Abs(MuInput))*TCD0(msdInput(2),msdInput(0),msqInput(2),msqInput(1))*Yd(0,1)*
+      Yd(0,2)*Yd(2,1)*Yd(2,2) + 3*MuInput*AdInput(2,2)*Sqr(Abs(MuInput))*TCD0(
+      msdInput(1),msdInput(2),msqInput(1),msqInput(2))*Yd(1,1)*Yd(1,2)*Yd(2,1)*Yd(
+      2,2) + 3*MuInput*AdInput(2,1)*Sqr(Abs(MuInput))*TCD0(msdInput(1),msdInput(2)
+      ,msqInput(2),msqInput(1))*Yd(1,1)*Yd(1,2)*Yd(2,1)*Yd(2,2) + 3*MuInput*
+      AdInput(1,2)*Sqr(Abs(MuInput))*TCD0(msdInput(2),msdInput(1),msqInput(1),
+      msqInput(2))*Yd(1,1)*Yd(1,2)*Yd(2,1)*Yd(2,2) + 3*MuInput*AdInput(1,1)*Sqr(
+      Abs(MuInput))*TCD0(msdInput(2),msdInput(1),msqInput(2),msqInput(1))*Yd(1,1)*
+      Yd(1,2)*Yd(2,1)*Yd(2,2) + MuInput*AeInput(1,1)*Sqr(Abs(MuInput))*TCD0(
+      mseInput(0),mseInput(1),mslInput(0),mslInput(1))*Ye(0,0)*Ye(0,1)*Ye(1,0)*Ye(
+      1,1) + MuInput*AeInput(1,0)*Sqr(Abs(MuInput))*TCD0(mseInput(0),mseInput(1),
+      mslInput(1),mslInput(0))*Ye(0,0)*Ye(0,1)*Ye(1,0)*Ye(1,1) + MuInput*AeInput(0
+      ,1)*Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput(0),mslInput(0),mslInput(1))*
+      Ye(0,0)*Ye(0,1)*Ye(1,0)*Ye(1,1) + MuInput*AeInput(0,0)*Sqr(Abs(MuInput))*
+      TCD0(mseInput(1),mseInput(0),mslInput(1),mslInput(0))*Ye(0,0)*Ye(0,1)*Ye(1,0
+      )*Ye(1,1) + MuInput*AeInput(1,2)*Sqr(Abs(MuInput))*TCD0(mseInput(0),mseInput
+      (1),mslInput(0),mslInput(2))*Ye(0,0)*Ye(0,2)*Ye(1,0)*Ye(1,2) + MuInput*
+      AeInput(1,0)*Sqr(Abs(MuInput))*TCD0(mseInput(0),mseInput(1),mslInput(2),
+      mslInput(0))*Ye(0,0)*Ye(0,2)*Ye(1,0)*Ye(1,2) + MuInput*AeInput(0,2)*Sqr(Abs(
+      MuInput))*TCD0(mseInput(1),mseInput(0),mslInput(0),mslInput(2))*Ye(0,0)*Ye(0
+      ,2)*Ye(1,0)*Ye(1,2) + MuInput*AeInput(0,0)*Sqr(Abs(MuInput))*TCD0(mseInput(1
+      ),mseInput(0),mslInput(2),mslInput(0))*Ye(0,0)*Ye(0,2)*Ye(1,0)*Ye(1,2) +
+      MuInput*AeInput(1,2)*Sqr(Abs(MuInput))*TCD0(mseInput(0),mseInput(1),mslInput
+      (1),mslInput(2))*Ye(0,1)*Ye(0,2)*Ye(1,1)*Ye(1,2) + MuInput*AeInput(1,1)*Sqr(
+      Abs(MuInput))*TCD0(mseInput(0),mseInput(1),mslInput(2),mslInput(1))*Ye(0,1)*
+      Ye(0,2)*Ye(1,1)*Ye(1,2) + MuInput*AeInput(0,2)*Sqr(Abs(MuInput))*TCD0(
+      mseInput(1),mseInput(0),mslInput(1),mslInput(2))*Ye(0,1)*Ye(0,2)*Ye(1,1)*Ye(
+      1,2) + MuInput*AeInput(0,1)*Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput(0),
+      mslInput(2),mslInput(1))*Ye(0,1)*Ye(0,2)*Ye(1,1)*Ye(1,2) + MuInput*AeInput(2
+      ,1)*Sqr(Abs(MuInput))*TCD0(mseInput(0),mseInput(2),mslInput(0),mslInput(1))*
+      Ye(0,0)*Ye(0,1)*Ye(2,0)*Ye(2,1) + MuInput*AeInput(2,0)*Sqr(Abs(MuInput))*
+      TCD0(mseInput(0),mseInput(2),mslInput(1),mslInput(0))*Ye(0,0)*Ye(0,1)*Ye(2,0
+      )*Ye(2,1) + MuInput*AeInput(0,1)*Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput
+      (0),mslInput(0),mslInput(1))*Ye(0,0)*Ye(0,1)*Ye(2,0)*Ye(2,1) + MuInput*
+      AeInput(0,0)*Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput(0),mslInput(1),
+      mslInput(0))*Ye(0,0)*Ye(0,1)*Ye(2,0)*Ye(2,1) + MuInput*AeInput(2,1)*Sqr(Abs(
+      MuInput))*TCD0(mseInput(1),mseInput(2),mslInput(0),mslInput(1))*Ye(1,0)*Ye(1
+      ,1)*Ye(2,0)*Ye(2,1) + MuInput*AeInput(2,0)*Sqr(Abs(MuInput))*TCD0(mseInput(1
+      ),mseInput(2),mslInput(1),mslInput(0))*Ye(1,0)*Ye(1,1)*Ye(2,0)*Ye(2,1) +
+      MuInput*AeInput(1,1)*Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput(1),mslInput
+      (0),mslInput(1))*Ye(1,0)*Ye(1,1)*Ye(2,0)*Ye(2,1) + MuInput*AeInput(1,0)*Sqr(
+      Abs(MuInput))*TCD0(mseInput(2),mseInput(1),mslInput(1),mslInput(0))*Ye(1,0)*
+      Ye(1,1)*Ye(2,0)*Ye(2,1) + MuInput*AeInput(2,2)*Sqr(Abs(MuInput))*TCD0(
+      mseInput(0),mseInput(2),mslInput(0),mslInput(2))*Ye(0,0)*Ye(0,2)*Ye(2,0)*Ye(
+      2,2) + MuInput*AeInput(2,0)*Sqr(Abs(MuInput))*TCD0(mseInput(0),mseInput(2),
+      mslInput(2),mslInput(0))*Ye(0,0)*Ye(0,2)*Ye(2,0)*Ye(2,2) + MuInput*AeInput(0
+      ,2)*Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput(0),mslInput(0),mslInput(2))*
+      Ye(0,0)*Ye(0,2)*Ye(2,0)*Ye(2,2) + MuInput*AeInput(0,0)*Sqr(Abs(MuInput))*
+      TCD0(mseInput(2),mseInput(0),mslInput(2),mslInput(0))*Ye(0,0)*Ye(0,2)*Ye(2,0
+      )*Ye(2,2) + MuInput*AeInput(2,2)*Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput
+      (2),mslInput(0),mslInput(2))*Ye(1,0)*Ye(1,2)*Ye(2,0)*Ye(2,2) + MuInput*
+      AeInput(2,0)*Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput(2),mslInput(2),
+      mslInput(0))*Ye(1,0)*Ye(1,2)*Ye(2,0)*Ye(2,2) + MuInput*AeInput(1,2)*Sqr(Abs(
+      MuInput))*TCD0(mseInput(2),mseInput(1),mslInput(0),mslInput(2))*Ye(1,0)*Ye(1
+      ,2)*Ye(2,0)*Ye(2,2) + MuInput*AeInput(1,0)*Sqr(Abs(MuInput))*TCD0(mseInput(2
+      ),mseInput(1),mslInput(2),mslInput(0))*Ye(1,0)*Ye(1,2)*Ye(2,0)*Ye(2,2) +
+      MuInput*AeInput(2,2)*Sqr(Abs(MuInput))*TCD0(mseInput(0),mseInput(2),mslInput
+      (1),mslInput(2))*Ye(0,1)*Ye(0,2)*Ye(2,1)*Ye(2,2) + MuInput*AeInput(2,1)*Sqr(
+      Abs(MuInput))*TCD0(mseInput(0),mseInput(2),mslInput(2),mslInput(1))*Ye(0,1)*
+      Ye(0,2)*Ye(2,1)*Ye(2,2) + MuInput*AeInput(0,2)*Sqr(Abs(MuInput))*TCD0(
+      mseInput(2),mseInput(0),mslInput(1),mslInput(2))*Ye(0,1)*Ye(0,2)*Ye(2,1)*Ye(
+      2,2) + MuInput*AeInput(0,1)*Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput(0),
+      mslInput(2),mslInput(1))*Ye(0,1)*Ye(0,2)*Ye(2,1)*Ye(2,2) + MuInput*AeInput(2
+      ,2)*Sqr(Abs(MuInput))*TCD0(mseInput(1),mseInput(2),mslInput(1),mslInput(2))*
+      Ye(1,1)*Ye(1,2)*Ye(2,1)*Ye(2,2) + MuInput*AeInput(2,1)*Sqr(Abs(MuInput))*
+      TCD0(mseInput(1),mseInput(2),mslInput(2),mslInput(1))*Ye(1,1)*Ye(1,2)*Ye(2,1
+      )*Ye(2,2) + MuInput*AeInput(1,2)*Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput
+      (1),mslInput(1),mslInput(2))*Ye(1,1)*Ye(1,2)*Ye(2,1)*Ye(2,2) + MuInput*
+      AeInput(1,1)*Sqr(Abs(MuInput))*TCD0(mseInput(2),mseInput(1),mslInput(2),
+      mslInput(1))*Ye(1,1)*Ye(1,2)*Ye(2,1)*Ye(2,2) + 3*MuInput*AuInput(0,1)*
+      AuInput(1,0)*AuInput(1,1)*TCD0(msqInput(0),msqInput(1),msqInput(0),msqInput(
+      1))*Yu(0,0)*Yu(0,1)*Yu(1,0)*Yu(1,1) + 3*MuInput*AuInput(0,0)*AuInput(0,1)*
+      AuInput(1,1)*TCD0(msqInput(0),msqInput(1),msqInput(1),msqInput(0))*Yu(0,0)*
+      Yu(0,1)*Yu(1,0)*Yu(1,1) + 3*MuInput*AuInput(0,0)*AuInput(1,0)*AuInput(1,1)*
+      TCD0(msqInput(1),msqInput(0),msqInput(0),msqInput(1))*Yu(0,0)*Yu(0,1)*Yu(1,0
+      )*Yu(1,1) + 3*MuInput*AuInput(0,0)*AuInput(0,1)*AuInput(1,0)*TCD0(msqInput(1
+      ),msqInput(0),msqInput(1),msqInput(0))*Yu(0,0)*Yu(0,1)*Yu(1,0)*Yu(1,1) + 3*
+      MuInput*AuInput(0,2)*AuInput(1,0)*AuInput(1,2)*TCD0(msqInput(0),msqInput(2),
+      msqInput(0),msqInput(1))*Yu(0,0)*Yu(0,2)*Yu(1,0)*Yu(1,2) + 3*MuInput*AuInput
+      (0,0)*AuInput(0,2)*AuInput(1,2)*TCD0(msqInput(0),msqInput(2),msqInput(1),
+      msqInput(0))*Yu(0,0)*Yu(0,2)*Yu(1,0)*Yu(1,2) + 3*MuInput*AuInput(0,0)*
+      AuInput(1,0)*AuInput(1,2)*TCD0(msqInput(2),msqInput(0),msqInput(0),msqInput(
+      1))*Yu(0,0)*Yu(0,2)*Yu(1,0)*Yu(1,2) + 3*MuInput*AuInput(0,0)*AuInput(0,2)*
+      AuInput(1,0)*TCD0(msqInput(2),msqInput(0),msqInput(1),msqInput(0))*Yu(0,0)*
+      Yu(0,2)*Yu(1,0)*Yu(1,2) + 3*MuInput*AuInput(0,2)*AuInput(1,1)*AuInput(1,2)*
+      TCD0(msqInput(1),msqInput(2),msqInput(0),msqInput(1))*Yu(0,1)*Yu(0,2)*Yu(1,1
+      )*Yu(1,2) + 3*MuInput*AuInput(0,1)*AuInput(0,2)*AuInput(1,2)*TCD0(msqInput(1
+      ),msqInput(2),msqInput(1),msqInput(0))*Yu(0,1)*Yu(0,2)*Yu(1,1)*Yu(1,2) + 3*
+      MuInput*AuInput(0,1)*AuInput(1,1)*AuInput(1,2)*TCD0(msqInput(2),msqInput(1),
+      msqInput(0),msqInput(1))*Yu(0,1)*Yu(0,2)*Yu(1,1)*Yu(1,2) + 3*MuInput*AuInput
+      (0,1)*AuInput(0,2)*AuInput(1,1)*TCD0(msqInput(2),msqInput(1),msqInput(1),
+      msqInput(0))*Yu(0,1)*Yu(0,2)*Yu(1,1)*Yu(1,2) + 3*MuInput*AuInput(0,0)*TCC0(
+      msqInput(0),msuInput(0),msuInput(1))*Yu(0,0)*Yu(1,0)*(Yu(0,0)*Yu(1,0) + Yu(0
+      ,1)*Yu(1,1) + Yu(0,2)*Yu(1,2)) + 3*MuInput*AuInput(1,0)*TCC0(msqInput(0),
+      msuInput(1),msuInput(0))*Yu(0,0)*Yu(1,0)*(Yu(0,0)*Yu(1,0) + Yu(0,1)*Yu(1,1)
+      + Yu(0,2)*Yu(1,2)) + 3*MuInput*AuInput(0,1)*TCC0(msqInput(1),msuInput(0),
+      msuInput(1))*Yu(0,1)*Yu(1,1)*(Yu(0,0)*Yu(1,0) + Yu(0,1)*Yu(1,1) + Yu(0,2)*Yu
+      (1,2)) + 3*MuInput*AuInput(1,1)*TCC0(msqInput(1),msuInput(1),msuInput(0))*Yu
+      (0,1)*Yu(1,1)*(Yu(0,0)*Yu(1,0) + Yu(0,1)*Yu(1,1) + Yu(0,2)*Yu(1,2)) + 3*
+      MuInput*AuInput(0,2)*TCC0(msqInput(2),msuInput(0),msuInput(1))*Yu(0,2)*Yu(1,
+      2)*(Yu(0,0)*Yu(1,0) + Yu(0,1)*Yu(1,1) + Yu(0,2)*Yu(1,2)) + 3*MuInput*AuInput
+      (1,2)*TCC0(msqInput(2),msuInput(1),msuInput(0))*Yu(0,2)*Yu(1,2)*(Yu(0,0)*Yu(
+      1,0) + Yu(0,1)*Yu(1,1) + Yu(0,2)*Yu(1,2)) + 3*MuInput*AuInput(0,1)*AuInput(2
+      ,0)*AuInput(2,1)*TCD0(msqInput(0),msqInput(1),msqInput(0),msqInput(2))*Yu(0,
+      0)*Yu(0,1)*Yu(2,0)*Yu(2,1) + 3*MuInput*AuInput(0,0)*AuInput(0,1)*AuInput(2,1
+      )*TCD0(msqInput(0),msqInput(1),msqInput(2),msqInput(0))*Yu(0,0)*Yu(0,1)*Yu(2
+      ,0)*Yu(2,1) + 3*MuInput*AuInput(0,0)*AuInput(2,0)*AuInput(2,1)*TCD0(msqInput
+      (1),msqInput(0),msqInput(0),msqInput(2))*Yu(0,0)*Yu(0,1)*Yu(2,0)*Yu(2,1) + 3
+      *MuInput*AuInput(0,0)*AuInput(0,1)*AuInput(2,0)*TCD0(msqInput(1),msqInput(0)
+      ,msqInput(2),msqInput(0))*Yu(0,0)*Yu(0,1)*Yu(2,0)*Yu(2,1) + 3*MuInput*
+      AuInput(1,1)*AuInput(2,0)*AuInput(2,1)*TCD0(msqInput(0),msqInput(1),msqInput
+      (1),msqInput(2))*Yu(1,0)*Yu(1,1)*Yu(2,0)*Yu(2,1) + 3*MuInput*AuInput(1,0)*
+      AuInput(1,1)*AuInput(2,1)*TCD0(msqInput(0),msqInput(1),msqInput(2),msqInput(
+      1))*Yu(1,0)*Yu(1,1)*Yu(2,0)*Yu(2,1) + 3*MuInput*AuInput(1,0)*AuInput(2,0)*
+      AuInput(2,1)*TCD0(msqInput(1),msqInput(0),msqInput(1),msqInput(2))*Yu(1,0)*
+      Yu(1,1)*Yu(2,0)*Yu(2,1) + 3*MuInput*AuInput(1,0)*AuInput(1,1)*AuInput(2,0)*
+      TCD0(msqInput(1),msqInput(0),msqInput(2),msqInput(1))*Yu(1,0)*Yu(1,1)*Yu(2,0
+      )*Yu(2,1) + 3*MuInput*AuInput(0,0)*TCC0(msqInput(0),msqInput(1),msuInput(0))
+      *Yu(0,0)*Yu(0,1)*(Yu(0,0)*Yu(0,1) + Yu(1,0)*Yu(1,1) + Yu(2,0)*Yu(2,1)) + 3*
+      MuInput*AuInput(0,1)*TCC0(msqInput(1),msqInput(0),msuInput(0))*Yu(0,0)*Yu(0,
+      1)*(Yu(0,0)*Yu(0,1) + Yu(1,0)*Yu(1,1) + Yu(2,0)*Yu(2,1)) + 3*MuInput*AuInput
+      (1,0)*TCC0(msqInput(0),msqInput(1),msuInput(1))*Yu(1,0)*Yu(1,1)*(Yu(0,0)*Yu(
+      0,1) + Yu(1,0)*Yu(1,1) + Yu(2,0)*Yu(2,1)) + 3*MuInput*AuInput(1,1)*TCC0(
+      msqInput(1),msqInput(0),msuInput(1))*Yu(1,0)*Yu(1,1)*(Yu(0,0)*Yu(0,1) + Yu(1
+      ,0)*Yu(1,1) + Yu(2,0)*Yu(2,1)) + 3*MuInput*AuInput(2,0)*TCC0(msqInput(0),
+      msqInput(1),msuInput(2))*Yu(2,0)*Yu(2,1)*(Yu(0,0)*Yu(0,1) + Yu(1,0)*Yu(1,1)
+      + Yu(2,0)*Yu(2,1)) + 3*MuInput*AuInput(2,1)*TCC0(msqInput(1),msqInput(0),
+      msuInput(2))*Yu(2,0)*Yu(2,1)*(Yu(0,0)*Yu(0,1) + Yu(1,0)*Yu(1,1) + Yu(2,0)*Yu
+      (2,1)) + 3*MuInput*AuInput(0,2)*AuInput(2,0)*AuInput(2,2)*TCD0(msqInput(0),
+      msqInput(2),msqInput(0),msqInput(2))*Yu(0,0)*Yu(0,2)*Yu(2,0)*Yu(2,2) + 3*
+      MuInput*AuInput(0,0)*AuInput(0,2)*AuInput(2,2)*TCD0(msqInput(0),msqInput(2),
+      msqInput(2),msqInput(0))*Yu(0,0)*Yu(0,2)*Yu(2,0)*Yu(2,2) + 3*MuInput*AuInput
+      (0,0)*AuInput(2,0)*AuInput(2,2)*TCD0(msqInput(2),msqInput(0),msqInput(0),
+      msqInput(2))*Yu(0,0)*Yu(0,2)*Yu(2,0)*Yu(2,2) + 3*MuInput*AuInput(0,0)*
+      AuInput(0,2)*AuInput(2,0)*TCD0(msqInput(2),msqInput(0),msqInput(2),msqInput(
+      0))*Yu(0,0)*Yu(0,2)*Yu(2,0)*Yu(2,2) + 3*MuInput*AuInput(1,2)*AuInput(2,0)*
+      AuInput(2,2)*TCD0(msqInput(0),msqInput(2),msqInput(1),msqInput(2))*Yu(1,0)*
+      Yu(1,2)*Yu(2,0)*Yu(2,2) + 3*MuInput*AuInput(1,0)*AuInput(1,2)*AuInput(2,2)*
+      TCD0(msqInput(0),msqInput(2),msqInput(2),msqInput(1))*Yu(1,0)*Yu(1,2)*Yu(2,0
+      )*Yu(2,2) + 3*MuInput*AuInput(1,0)*AuInput(2,0)*AuInput(2,2)*TCD0(msqInput(2
+      ),msqInput(0),msqInput(1),msqInput(2))*Yu(1,0)*Yu(1,2)*Yu(2,0)*Yu(2,2) + 3*
+      MuInput*AuInput(1,0)*AuInput(1,2)*AuInput(2,0)*TCD0(msqInput(2),msqInput(0),
+      msqInput(2),msqInput(1))*Yu(1,0)*Yu(1,2)*Yu(2,0)*Yu(2,2) + 3*MuInput*AuInput
+      (0,2)*AuInput(2,1)*AuInput(2,2)*TCD0(msqInput(1),msqInput(2),msqInput(0),
+      msqInput(2))*Yu(0,1)*Yu(0,2)*Yu(2,1)*Yu(2,2) + 3*MuInput*AuInput(0,1)*
+      AuInput(0,2)*AuInput(2,2)*TCD0(msqInput(1),msqInput(2),msqInput(2),msqInput(
+      0))*Yu(0,1)*Yu(0,2)*Yu(2,1)*Yu(2,2) + 3*MuInput*AuInput(0,1)*AuInput(2,1)*
+      AuInput(2,2)*TCD0(msqInput(2),msqInput(1),msqInput(0),msqInput(2))*Yu(0,1)*
+      Yu(0,2)*Yu(2,1)*Yu(2,2) + 3*MuInput*AuInput(0,1)*AuInput(0,2)*AuInput(2,1)*
+      TCD0(msqInput(2),msqInput(1),msqInput(2),msqInput(0))*Yu(0,1)*Yu(0,2)*Yu(2,1
+      )*Yu(2,2) + 3*MuInput*AuInput(1,2)*AuInput(2,1)*AuInput(2,2)*TCD0(msqInput(1
+      ),msqInput(2),msqInput(1),msqInput(2))*Yu(1,1)*Yu(1,2)*Yu(2,1)*Yu(2,2) + 3*
+      MuInput*AuInput(1,1)*AuInput(1,2)*AuInput(2,2)*TCD0(msqInput(1),msqInput(2),
+      msqInput(2),msqInput(1))*Yu(1,1)*Yu(1,2)*Yu(2,1)*Yu(2,2) + 3*MuInput*AuInput
+      (1,1)*AuInput(2,1)*AuInput(2,2)*TCD0(msqInput(2),msqInput(1),msqInput(1),
+      msqInput(2))*Yu(1,1)*Yu(1,2)*Yu(2,1)*Yu(2,2) + 3*MuInput*AuInput(1,1)*
+      AuInput(1,2)*AuInput(2,1)*TCD0(msqInput(2),msqInput(1),msqInput(2),msqInput(
+      1))*Yu(1,1)*Yu(1,2)*Yu(2,1)*Yu(2,2) + 3*MuInput*AuInput(0,0)*TCC0(msqInput(0
+      ),msuInput(0),msuInput(2))*Yu(0,0)*Yu(2,0)*(Yu(0,0)*Yu(2,0) + Yu(0,1)*Yu(2,1
+      ) + Yu(0,2)*Yu(2,2)) + 3*MuInput*AuInput(2,0)*TCC0(msqInput(0),msuInput(2),
+      msuInput(0))*Yu(0,0)*Yu(2,0)*(Yu(0,0)*Yu(2,0) + Yu(0,1)*Yu(2,1) + Yu(0,2)*Yu
+      (2,2)) + 3*MuInput*AuInput(0,1)*TCC0(msqInput(1),msuInput(0),msuInput(2))*Yu
+      (0,1)*Yu(2,1)*(Yu(0,0)*Yu(2,0) + Yu(0,1)*Yu(2,1) + Yu(0,2)*Yu(2,2)) + 3*
+      MuInput*AuInput(2,1)*TCC0(msqInput(1),msuInput(2),msuInput(0))*Yu(0,1)*Yu(2,
+      1)*(Yu(0,0)*Yu(2,0) + Yu(0,1)*Yu(2,1) + Yu(0,2)*Yu(2,2)) + 3*MuInput*AuInput
+      (0,2)*TCC0(msqInput(2),msuInput(0),msuInput(2))*Yu(0,2)*Yu(2,2)*(Yu(0,0)*Yu(
+      2,0) + Yu(0,1)*Yu(2,1) + Yu(0,2)*Yu(2,2)) + 3*MuInput*AuInput(2,2)*TCC0(
+      msqInput(2),msuInput(2),msuInput(0))*Yu(0,2)*Yu(2,2)*(Yu(0,0)*Yu(2,0) + Yu(0
+      ,1)*Yu(2,1) + Yu(0,2)*Yu(2,2)) + 3*MuInput*AuInput(1,0)*TCC0(msqInput(0),
+      msuInput(1),msuInput(2))*Yu(1,0)*Yu(2,0)*(Yu(1,0)*Yu(2,0) + Yu(1,1)*Yu(2,1)
+      + Yu(1,2)*Yu(2,2)) + 3*MuInput*AuInput(2,0)*TCC0(msqInput(0),msuInput(2),
+      msuInput(1))*Yu(1,0)*Yu(2,0)*(Yu(1,0)*Yu(2,0) + Yu(1,1)*Yu(2,1) + Yu(1,2)*Yu
+      (2,2)) + 3*MuInput*AuInput(1,1)*TCC0(msqInput(1),msuInput(1),msuInput(2))*Yu
+      (1,1)*Yu(2,1)*(Yu(1,0)*Yu(2,0) + Yu(1,1)*Yu(2,1) + Yu(1,2)*Yu(2,2)) + 3*
+      MuInput*AuInput(2,1)*TCC0(msqInput(1),msuInput(2),msuInput(1))*Yu(1,1)*Yu(2,
+      1)*(Yu(1,0)*Yu(2,0) + Yu(1,1)*Yu(2,1) + Yu(1,2)*Yu(2,2)) + 3*MuInput*AuInput
+      (1,2)*TCC0(msqInput(2),msuInput(1),msuInput(2))*Yu(1,2)*Yu(2,2)*(Yu(1,0)*Yu(
+      2,0) + Yu(1,1)*Yu(2,1) + Yu(1,2)*Yu(2,2)) + 3*MuInput*AuInput(2,2)*TCC0(
+      msqInput(2),msuInput(2),msuInput(1))*Yu(1,2)*Yu(2,2)*(Yu(1,0)*Yu(2,0) + Yu(1
+      ,1)*Yu(2,1) + Yu(1,2)*Yu(2,2)) + 3*MuInput*AuInput(0,0)*TCC0(msqInput(0),
+      msqInput(2),msuInput(0))*Yu(0,0)*Yu(0,2)*(Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1,2)
+      + Yu(2,0)*Yu(2,2)) + 3*MuInput*AuInput(0,2)*TCC0(msqInput(2),msqInput(0),
+      msuInput(0))*Yu(0,0)*Yu(0,2)*(Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1,2) + Yu(2,0)*Yu
+      (2,2)) + 3*MuInput*AuInput(1,0)*TCC0(msqInput(0),msqInput(2),msuInput(1))*Yu
+      (1,0)*Yu(1,2)*(Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1,2) + Yu(2,0)*Yu(2,2)) + 3*
+      MuInput*AuInput(1,2)*TCC0(msqInput(2),msqInput(0),msuInput(1))*Yu(1,0)*Yu(1,
+      2)*(Yu(0,0)*Yu(0,2) + Yu(1,0)*Yu(1,2) + Yu(2,0)*Yu(2,2)) + 3*MuInput*AuInput
+      (2,0)*TCC0(msqInput(0),msqInput(2),msuInput(2))*Yu(2,0)*Yu(2,2)*(Yu(0,0)*Yu(
+      0,2) + Yu(1,0)*Yu(1,2) + Yu(2,0)*Yu(2,2)) + 3*MuInput*AuInput(2,2)*TCC0(
+      msqInput(2),msqInput(0),msuInput(2))*Yu(2,0)*Yu(2,2)*(Yu(0,0)*Yu(0,2) + Yu(1
+      ,0)*Yu(1,2) + Yu(2,0)*Yu(2,2)) + 3*MuInput*AuInput(0,1)*TCC0(msqInput(1),
+      msqInput(2),msuInput(0))*Yu(0,1)*Yu(0,2)*(Yu(0,1)*Yu(0,2) + Yu(1,1)*Yu(1,2)
+      + Yu(2,1)*Yu(2,2)) + 3*MuInput*AuInput(0,2)*TCC0(msqInput(2),msqInput(1),
+      msuInput(0))*Yu(0,1)*Yu(0,2)*(Yu(0,1)*Yu(0,2) + Yu(1,1)*Yu(1,2) + Yu(2,1)*Yu
+      (2,2)) + 3*MuInput*AuInput(1,1)*TCC0(msqInput(1),msqInput(2),msuInput(1))*Yu
+      (1,1)*Yu(1,2)*(Yu(0,1)*Yu(0,2) + Yu(1,1)*Yu(1,2) + Yu(2,1)*Yu(2,2)) + 3*
+      MuInput*AuInput(1,2)*TCC0(msqInput(2),msqInput(1),msuInput(1))*Yu(1,1)*Yu(1,
+      2)*(Yu(0,1)*Yu(0,2) + Yu(1,1)*Yu(1,2) + Yu(2,1)*Yu(2,2)) + 3*MuInput*AuInput
+      (2,1)*TCC0(msqInput(1),msqInput(2),msuInput(2))*Yu(2,1)*Yu(2,2)*(Yu(0,1)*Yu(
+      0,2) + Yu(1,1)*Yu(1,2) + Yu(2,1)*Yu(2,2)) + 3*MuInput*AuInput(2,2)*TCC0(
+      msqInput(2),msqInput(1),msuInput(2))*Yu(2,1)*Yu(2,2)*(Yu(0,1)*Yu(0,2) + Yu(1
+      ,1)*Yu(1,2) + Yu(2,1)*Yu(2,2)))));
 
 
    check_non_perturbative();

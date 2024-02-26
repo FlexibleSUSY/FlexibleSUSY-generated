@@ -72,11 +72,18 @@ handle = FSTHDMIIMSSMBCOpenHandle[
         MSUSY -> 0,
         MEWSB -> 0,
         MuInput -> 0,
+        M1Input -> 0,
+        M2Input -> 0,
         MAInput -> 0,
-        AtInput -> 0,
-        AbInput -> 0,
-        AtauInput -> 0,
-        LambdaLoopOrder -> 0
+        LambdaLoopOrder -> 0,
+        AeInput -> {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+        AdInput -> {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+        AuInput -> {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+        mslInput -> {0, 0, 0},
+        mseInput -> {0, 0, 0},
+        msqInput -> {0, 0, 0},
+        msdInput -> {0, 0, 0},
+        msuInput -> {0, 0, 0}
     }
 ];
 

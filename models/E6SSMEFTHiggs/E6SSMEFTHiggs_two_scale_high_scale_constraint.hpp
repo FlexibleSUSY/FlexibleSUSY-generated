@@ -37,7 +37,6 @@ public:
    E6SSMEFTHiggs_high_scale_constraint() = default;
    E6SSMEFTHiggs_high_scale_constraint(E6SSMEFTHiggs<Two_scale>*);
    virtual ~E6SSMEFTHiggs_high_scale_constraint() = default;
-   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
    virtual void apply() override;
    virtual double get_scale() const override;

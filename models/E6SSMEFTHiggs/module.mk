@@ -54,22 +54,23 @@ E6SSMEFTHiggs_TARBALL := \
 		$(MODNAME).tar.gz
 
 LIBE6SSMEFTHiggs_SRC := \
-		$(DIR)/E6SSMEFTHiggs_a_muon.cpp \
+		$(DIR)/E6SSMEFTHiggs_amm.cpp \
 		$(DIR)/E6SSMEFTHiggs_edm.cpp \
 		$(DIR)/E6SSMEFTHiggs_FFV_form_factors.cpp \
-		$(DIR)/E6SSMEFTHiggs_f_to_f_conversion.cpp \
-		$(DIR)/E6SSMEFTHiggs_l_to_lgamma.cpp \
+		$(wildcard $(DIR)/observables/E6SSMEFTHiggs*.cpp) \
 		$(DIR)/E6SSMEFTHiggs_b_to_s_gamma.cpp \
 		$(DIR)/E6SSMEFTHiggs_info.cpp \
 		$(DIR)/E6SSMEFTHiggs_input_parameters.cpp \
 		$(DIR)/E6SSMEFTHiggs_mass_eigenstates.cpp \
 		$(DIR)/E6SSMEFTHiggs_mass_eigenstates_decoupling_scheme.cpp \
 		$(DIR)/E6SSMEFTHiggs_model_slha.cpp \
+		$(DIR)/E6SSMEFTHiggs_lepton_amm_wrapper.cpp \
 		$(DIR)/E6SSMEFTHiggs_observables.cpp \
 		$(DIR)/E6SSMEFTHiggs_physical.cpp \
 		$(DIR)/E6SSMEFTHiggs_slha_io.cpp \
 		$(DIR)/E6SSMEFTHiggs_soft_parameters.cpp \
 		$(DIR)/E6SSMEFTHiggs_susy_parameters.cpp \
+		$(DIR)/E6SSMEFTHiggs_unitarity.cpp \
 		$(DIR)/E6SSMEFTHiggs_utilities.cpp \
 		$(DIR)/E6SSMEFTHiggs_weinberg_angle.cpp
 
@@ -89,12 +90,11 @@ LLE6SSMEFTHiggs_MMA  := \
 		$(DIR)/run_E6SSMEFTHiggs.m
 
 LIBE6SSMEFTHiggs_HDR := \
-		$(DIR)/E6SSMEFTHiggs_a_muon.hpp \
+		$(DIR)/E6SSMEFTHiggs_amm.hpp \
 		$(DIR)/E6SSMEFTHiggs_convergence_tester.hpp \
 		$(DIR)/E6SSMEFTHiggs_edm.hpp \
 		$(DIR)/E6SSMEFTHiggs_FFV_form_factors.hpp \
-		$(DIR)/E6SSMEFTHiggs_f_to_f_conversion.hpp \
-		$(DIR)/E6SSMEFTHiggs_l_to_lgamma.hpp \
+		$(wildcard $(DIR)/observables/E6SSMEFTHiggs*.hpp) \
 		$(DIR)/E6SSMEFTHiggs_b_to_s_gamma.hpp \
 		$(DIR)/E6SSMEFTHiggs_ewsb_solver.hpp \
 		$(DIR)/E6SSMEFTHiggs_ewsb_solver_interface.hpp \
@@ -108,6 +108,7 @@ LIBE6SSMEFTHiggs_HDR := \
 		$(DIR)/E6SSMEFTHiggs_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/E6SSMEFTHiggs_model.hpp \
 		$(DIR)/E6SSMEFTHiggs_model_slha.hpp \
+		$(DIR)/E6SSMEFTHiggs_lepton_amm_wrapper.hpp \
 		$(DIR)/E6SSMEFTHiggs_observables.hpp \
 		$(DIR)/E6SSMEFTHiggs_physical.hpp \
 		$(DIR)/E6SSMEFTHiggs_slha_io.hpp \
@@ -116,12 +117,14 @@ LIBE6SSMEFTHiggs_HDR := \
 		$(DIR)/E6SSMEFTHiggs_soft_parameters.hpp \
 		$(DIR)/E6SSMEFTHiggs_susy_parameters.hpp \
 		$(DIR)/E6SSMEFTHiggs_susy_scale_constraint.hpp \
+		$(DIR)/E6SSMEFTHiggs_unitarity.hpp \
 		$(DIR)/E6SSMEFTHiggs_utilities.hpp \
 		$(DIR)/E6SSMEFTHiggs_weinberg_angle.hpp
 
 LIBE6SSMEFTHiggs_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/E6SSMEFTHiggs_qft.hpp \
 		$(DIR)/cxx_qft/E6SSMEFTHiggs_fields.hpp \
+		$(DIR)/cxx_qft/E6SSMEFTHiggs_particle_aliases.hpp \
 		$(DIR)/cxx_qft/E6SSMEFTHiggs_vertices.hpp \
 		$(DIR)/cxx_qft/E6SSMEFTHiggs_context_base.hpp \
 		$(DIR)/cxx_qft/E6SSMEFTHiggs_npointfunctions_wilsoncoeffs.hpp
@@ -317,7 +320,7 @@ $(METACODE_STAMP_E6SSMEFTHiggs):
 endif
 
 $(LIBE6SSMEFTHiggs_DEP) $(EXEE6SSMEFTHiggs_DEP) $(LLE6SSMEFTHiggs_DEP) $(LIBE6SSMEFTHiggs_OBJ) $(EXEE6SSMEFTHiggs_OBJ) $(LLE6SSMEFTHiggs_OBJ) $(LLE6SSMEFTHiggs_LIB): \
-	CPPFLAGS += $(MODE6SSMEFTHiggs_SUBMOD_INC) $(MODE6SSMEFTHiggs_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODE6SSMEFTHiggs_SUBMOD_INC) $(MODE6SSMEFTHiggs_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIGGSTOOLSFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBE6SSMEFTHiggs_DEP) $(EXEE6SSMEFTHiggs_DEP) $(LLE6SSMEFTHiggs_DEP) $(LIBE6SSMEFTHiggs_OBJ) $(EXEE6SSMEFTHiggs_OBJ) $(LLE6SSMEFTHiggs_OBJ) $(LLE6SSMEFTHiggs_LIB): \
@@ -333,11 +336,11 @@ $(LIBE6SSMEFTHiggs): $(LIBE6SSMEFTHiggs_OBJ)
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBE6SSMEFTHiggs) $(MODE6SSMEFTHiggs_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
 $(LLE6SSMEFTHiggs_LIB): $(LLE6SSMEFTHiggs_OBJ) $(LIBE6SSMEFTHiggs) $(MODE6SSMEFTHiggs_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
 
 ALLDEP += $(LIBE6SSMEFTHiggs_DEP) $(EXEE6SSMEFTHiggs_DEP)
 ALLSRC += $(LIBE6SSMEFTHiggs_SRC) $(EXEE6SSMEFTHiggs_SRC)

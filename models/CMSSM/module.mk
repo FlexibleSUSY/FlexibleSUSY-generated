@@ -54,22 +54,23 @@ CMSSM_TARBALL := \
 		$(MODNAME).tar.gz
 
 LIBCMSSM_SRC := \
-		$(DIR)/CMSSM_a_muon.cpp \
+		$(DIR)/CMSSM_amm.cpp \
 		$(DIR)/CMSSM_edm.cpp \
 		$(DIR)/CMSSM_FFV_form_factors.cpp \
-		$(DIR)/CMSSM_f_to_f_conversion.cpp \
-		$(DIR)/CMSSM_l_to_lgamma.cpp \
+		$(wildcard $(DIR)/observables/CMSSM*.cpp) \
 		$(DIR)/CMSSM_b_to_s_gamma.cpp \
 		$(DIR)/CMSSM_info.cpp \
 		$(DIR)/CMSSM_input_parameters.cpp \
 		$(DIR)/CMSSM_mass_eigenstates.cpp \
 		$(DIR)/CMSSM_mass_eigenstates_decoupling_scheme.cpp \
 		$(DIR)/CMSSM_model_slha.cpp \
+		$(DIR)/CMSSM_lepton_amm_wrapper.cpp \
 		$(DIR)/CMSSM_observables.cpp \
 		$(DIR)/CMSSM_physical.cpp \
 		$(DIR)/CMSSM_slha_io.cpp \
 		$(DIR)/CMSSM_soft_parameters.cpp \
 		$(DIR)/CMSSM_susy_parameters.cpp \
+		$(DIR)/CMSSM_unitarity.cpp \
 		$(DIR)/CMSSM_utilities.cpp \
 		$(DIR)/CMSSM_weinberg_angle.cpp
 
@@ -89,12 +90,11 @@ LLCMSSM_MMA  := \
 		$(DIR)/run_CMSSM.m
 
 LIBCMSSM_HDR := \
-		$(DIR)/CMSSM_a_muon.hpp \
+		$(DIR)/CMSSM_amm.hpp \
 		$(DIR)/CMSSM_convergence_tester.hpp \
 		$(DIR)/CMSSM_edm.hpp \
 		$(DIR)/CMSSM_FFV_form_factors.hpp \
-		$(DIR)/CMSSM_f_to_f_conversion.hpp \
-		$(DIR)/CMSSM_l_to_lgamma.hpp \
+		$(wildcard $(DIR)/observables/CMSSM*.hpp) \
 		$(DIR)/CMSSM_b_to_s_gamma.hpp \
 		$(DIR)/CMSSM_ewsb_solver.hpp \
 		$(DIR)/CMSSM_ewsb_solver_interface.hpp \
@@ -108,6 +108,7 @@ LIBCMSSM_HDR := \
 		$(DIR)/CMSSM_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/CMSSM_model.hpp \
 		$(DIR)/CMSSM_model_slha.hpp \
+		$(DIR)/CMSSM_lepton_amm_wrapper.hpp \
 		$(DIR)/CMSSM_observables.hpp \
 		$(DIR)/CMSSM_physical.hpp \
 		$(DIR)/CMSSM_slha_io.hpp \
@@ -116,12 +117,14 @@ LIBCMSSM_HDR := \
 		$(DIR)/CMSSM_soft_parameters.hpp \
 		$(DIR)/CMSSM_susy_parameters.hpp \
 		$(DIR)/CMSSM_susy_scale_constraint.hpp \
+		$(DIR)/CMSSM_unitarity.hpp \
 		$(DIR)/CMSSM_utilities.hpp \
 		$(DIR)/CMSSM_weinberg_angle.hpp
 
 LIBCMSSM_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/CMSSM_qft.hpp \
 		$(DIR)/cxx_qft/CMSSM_fields.hpp \
+		$(DIR)/cxx_qft/CMSSM_particle_aliases.hpp \
 		$(DIR)/cxx_qft/CMSSM_vertices.hpp \
 		$(DIR)/cxx_qft/CMSSM_context_base.hpp \
 		$(DIR)/cxx_qft/CMSSM_npointfunctions_wilsoncoeffs.hpp
@@ -317,7 +320,7 @@ $(METACODE_STAMP_CMSSM):
 endif
 
 $(LIBCMSSM_DEP) $(EXECMSSM_DEP) $(LLCMSSM_DEP) $(LIBCMSSM_OBJ) $(EXECMSSM_OBJ) $(LLCMSSM_OBJ) $(LLCMSSM_LIB): \
-	CPPFLAGS += $(MODCMSSM_SUBMOD_INC) $(MODCMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODCMSSM_SUBMOD_INC) $(MODCMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIGGSTOOLSFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBCMSSM_DEP) $(EXECMSSM_DEP) $(LLCMSSM_DEP) $(LIBCMSSM_OBJ) $(EXECMSSM_OBJ) $(LLCMSSM_OBJ) $(LLCMSSM_LIB): \
@@ -333,11 +336,11 @@ $(LIBCMSSM): $(LIBCMSSM_OBJ)
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBCMSSM) $(MODCMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
 $(LLCMSSM_LIB): $(LLCMSSM_OBJ) $(LIBCMSSM) $(MODCMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
 
 ALLDEP += $(LIBCMSSM_DEP) $(EXECMSSM_DEP)
 ALLSRC += $(LIBCMSSM_SRC) $(EXECMSSM_SRC)

@@ -104,7 +104,6 @@ handle = FSE6SSMEFTHiggsOpenHandle[
 
 spectrum    = FSE6SSMEFTHiggsCalculateSpectrum[handle];
 observables = FSE6SSMEFTHiggsCalculateObservables[handle];
-decays      = FSE6SSMEFTHiggsCalculateDecays[handle];
 
 FSE6SSMEFTHiggsCloseHandle[handle];
 

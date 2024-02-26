@@ -19,11 +19,14 @@
 
 #include "NUTSMSSM_observables.hpp"
 #include "NUTSMSSM_mass_eigenstates.hpp"
-#include "NUTSMSSM_a_muon.hpp"
+#include "NUTSMSSM_amm.hpp"
 #include "NUTSMSSM_edm.hpp"
-#include "NUTSMSSM_l_to_lgamma.hpp"
 #include "NUTSMSSM_b_to_s_gamma.hpp"
-#include "NUTSMSSM_f_to_f_conversion.hpp"
+#include "observables/l_to_l_conversion/settings.hpp"
+#include "observables/NUTSMSSM_br_l_to_3l.hpp"
+#include "observables/NUTSMSSM_br_l_to_l_gamma.hpp"
+#include "observables/NUTSMSSM_l_to_l_conversion.hpp"
+#include "cxx_qft/NUTSMSSM_qft.hpp"
 #include "config.h"
 #include "eigen_utils.hpp"
 #include "numerics2.hpp"
@@ -36,24 +39,43 @@
 #endif
 
 #define MODEL model
-#define AMU a_muon
-#define AMUUNCERTAINTY a_muon_uncertainty
+#define AMM0(p) amm_ ## p
+#define AMM1(p,idx) amm_ ## p ## _ ## idx
+#define AMMUNCERTAINTY0(p) amm_uncertainty_ ## p
+#define AMMUNCERTAINTY1(p,idx) amm_uncertainty_ ## p ## _ ## idx
 #define AMUGM2CALC a_muon_gm2calc
 #define AMUGM2CALCUNCERTAINTY a_muon_gm2calc_uncertainty
+#define DERIVEDPARAMETER(p) model.p()
+#define EXTRAPARAMETER(p) model.get_##p()
+#define INPUTPARAMETER(p) model.get_input().p
+#define MODELPARAMETER(p) model.get_##p()
+#define PHASE(p) model.get_##p()
+#define LowEnergyConstant(p) Electroweak_constants::p
+#define STANDARDDEVIATION(p) Electroweak_constants::Error_##p
+#define Pole(p) model.get_physical().p
 #define EDM0(p) edm_ ## p
 #define EDM1(p,idx) edm_ ## p ## _ ## idx
-#define LToLGamma0(pIn, pOut, spec) pIn ## _to_ ## pOut ## _ ## spec
-#define LToLGamma1(pIn,idxIn,pOut,idxOut,spec) pIn ## idxIn ## _to_ ## pOut ## idxOut ## _ ## spec
-#define FToFConversion1(pIn,idxIn,pOut,idxOut,nuclei,qedqcd) pIn ## _to_ ## pOut ## _in_ ## nuclei
 #define BSGAMMA b_to_s_gamma
 
+#define ALPHA_EM_MZ qedqcd.displayAlpha(softsusy::ALPHA)
+#define ALPHA_EM_0 physical_input.get(Physical_input::alpha_em_0)
 #define ALPHA_S_MZ qedqcd.displayAlpha(softsusy::ALPHAS)
+#define MHPole physical_input.get(Physical_input::mh_pole)
 #define MWPole qedqcd.displayPoleMW()
 #define MZPole qedqcd.displayPoleMZ()
+#define MU2GeV qedqcd.displayMu2GeV()
+#define MS2GeV qedqcd.displayMs2GeV()
 #define MTPole qedqcd.displayPoleMt()
+#define MD2GeV qedqcd.displayMd2GeV()
+#define MCMC qedqcd.displayMcMc()
 #define MBMB qedqcd.displayMbMb()
-#define MTauPole qedqcd.displayPoleMtau()
+#define Mv1Pole qedqcd.displayNeutrinoPoleMass(1)
+#define Mv2Pole qedqcd.displayNeutrinoPoleMass(2)
+#define Mv3Pole qedqcd.displayNeutrinoPoleMass(3)
+#define MEPole qedqcd.displayPoleMel()
 #define MMPole qedqcd.displayPoleMmuon()
+#define MTauPole qedqcd.displayPoleMtau()
+#define CKMInput qedqcd.get_complex_ckm()
 
 namespace flexiblesusy {
 
@@ -94,7 +116,9 @@ void NUTSMSSM_observables::set(const Eigen::ArrayXd& vec)
 
 NUTSMSSM_observables calculate_observables(const NUTSMSSM_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
+                                              
                                               const Physical_input& physical_input,
+                                              const Spectrum_generator_settings& settings,
                                               double scale)
 {
    auto model_at_scale = model;
@@ -117,12 +141,18 @@ NUTSMSSM_observables calculate_observables(const NUTSMSSM_mass_eigenstates& mode
       }
    }
 
-   return calculate_observables(model_at_scale, qedqcd, physical_input);
+   return calculate_observables(model_at_scale,
+                                qedqcd,
+                                
+                                physical_input,
+                                settings);
 }
 
 NUTSMSSM_observables calculate_observables(const NUTSMSSM_mass_eigenstates& model,
                                               const softsusy::QedQcd& qedqcd,
-                                              const Physical_input& physical_input)
+                                              
+                                              const Physical_input& physical_input,
+                                              const Spectrum_generator_settings& settings)
 {
    NUTSMSSM_observables observables;
 

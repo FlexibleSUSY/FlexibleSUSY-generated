@@ -37,7 +37,6 @@ public:
    MSSMRHN_high_scale_constraint() = default;
    MSSMRHN_high_scale_constraint(MSSMRHN<Two_scale>*);
    virtual ~MSSMRHN_high_scale_constraint() = default;
-   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
    virtual void apply() override;
    virtual double get_scale() const override;

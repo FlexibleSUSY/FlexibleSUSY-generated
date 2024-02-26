@@ -41,13 +41,13 @@ lowNMSSMTanBetaAtMZ_INCLUDE_MK := \
 
 lowNMSSMTanBetaAtMZ_SLHA_INPUT := \
 		$(DIR)/LesHouches.in.lowNMSSMTanBetaAtMZ_generated \
-		$(DIR)/LesHouches.in.TP6 \
-		$(DIR)/LesHouches.in.TP5 \
-		$(DIR)/LesHouches.in.TP1 \
-		$(DIR)/LesHouches.in.TP4 \
 		$(DIR)/LesHouches.in.lowNMSSMTanBetaAtMZ \
+		$(DIR)/LesHouches.in.TP4 \
+		$(DIR)/LesHouches.in.TP3 \
+		$(DIR)/LesHouches.in.TP5 \
 		$(DIR)/LesHouches.in.TP2 \
-		$(DIR)/LesHouches.in.TP3
+		$(DIR)/LesHouches.in.TP6 \
+		$(DIR)/LesHouches.in.TP1
 
 lowNMSSMTanBetaAtMZ_REFERENCES := \
 		$(DIR)/lowNMSSMTanBetaAtMZ_references.tex
@@ -60,22 +60,23 @@ lowNMSSMTanBetaAtMZ_TARBALL := \
 		$(MODNAME).tar.gz
 
 LIBlowNMSSMTanBetaAtMZ_SRC := \
-		$(DIR)/lowNMSSMTanBetaAtMZ_a_muon.cpp \
+		$(DIR)/lowNMSSMTanBetaAtMZ_amm.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_edm.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_FFV_form_factors.cpp \
-		$(DIR)/lowNMSSMTanBetaAtMZ_f_to_f_conversion.cpp \
-		$(DIR)/lowNMSSMTanBetaAtMZ_l_to_lgamma.cpp \
+		$(wildcard $(DIR)/observables/lowNMSSMTanBetaAtMZ*.cpp) \
 		$(DIR)/lowNMSSMTanBetaAtMZ_b_to_s_gamma.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_info.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_input_parameters.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_mass_eigenstates.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_mass_eigenstates_decoupling_scheme.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_model_slha.cpp \
+		$(DIR)/lowNMSSMTanBetaAtMZ_lepton_amm_wrapper.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_observables.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_physical.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_slha_io.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_soft_parameters.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_susy_parameters.cpp \
+		$(DIR)/lowNMSSMTanBetaAtMZ_unitarity.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_utilities.cpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_weinberg_angle.cpp
 
@@ -95,12 +96,11 @@ LLlowNMSSMTanBetaAtMZ_MMA  := \
 		$(DIR)/run_lowNMSSMTanBetaAtMZ.m
 
 LIBlowNMSSMTanBetaAtMZ_HDR := \
-		$(DIR)/lowNMSSMTanBetaAtMZ_a_muon.hpp \
+		$(DIR)/lowNMSSMTanBetaAtMZ_amm.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_convergence_tester.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_edm.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_FFV_form_factors.hpp \
-		$(DIR)/lowNMSSMTanBetaAtMZ_f_to_f_conversion.hpp \
-		$(DIR)/lowNMSSMTanBetaAtMZ_l_to_lgamma.hpp \
+		$(wildcard $(DIR)/observables/lowNMSSMTanBetaAtMZ*.hpp) \
 		$(DIR)/lowNMSSMTanBetaAtMZ_b_to_s_gamma.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_ewsb_solver.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_ewsb_solver_interface.hpp \
@@ -114,6 +114,7 @@ LIBlowNMSSMTanBetaAtMZ_HDR := \
 		$(DIR)/lowNMSSMTanBetaAtMZ_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_model.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_model_slha.hpp \
+		$(DIR)/lowNMSSMTanBetaAtMZ_lepton_amm_wrapper.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_observables.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_physical.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_slha_io.hpp \
@@ -122,12 +123,14 @@ LIBlowNMSSMTanBetaAtMZ_HDR := \
 		$(DIR)/lowNMSSMTanBetaAtMZ_soft_parameters.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_susy_parameters.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_susy_scale_constraint.hpp \
+		$(DIR)/lowNMSSMTanBetaAtMZ_unitarity.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_utilities.hpp \
 		$(DIR)/lowNMSSMTanBetaAtMZ_weinberg_angle.hpp
 
 LIBlowNMSSMTanBetaAtMZ_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/lowNMSSMTanBetaAtMZ_qft.hpp \
 		$(DIR)/cxx_qft/lowNMSSMTanBetaAtMZ_fields.hpp \
+		$(DIR)/cxx_qft/lowNMSSMTanBetaAtMZ_particle_aliases.hpp \
 		$(DIR)/cxx_qft/lowNMSSMTanBetaAtMZ_vertices.hpp \
 		$(DIR)/cxx_qft/lowNMSSMTanBetaAtMZ_context_base.hpp \
 		$(DIR)/cxx_qft/lowNMSSMTanBetaAtMZ_npointfunctions_wilsoncoeffs.hpp
@@ -323,7 +326,7 @@ $(METACODE_STAMP_lowNMSSMTanBetaAtMZ):
 endif
 
 $(LIBlowNMSSMTanBetaAtMZ_DEP) $(EXElowNMSSMTanBetaAtMZ_DEP) $(LLlowNMSSMTanBetaAtMZ_DEP) $(LIBlowNMSSMTanBetaAtMZ_OBJ) $(EXElowNMSSMTanBetaAtMZ_OBJ) $(LLlowNMSSMTanBetaAtMZ_OBJ) $(LLlowNMSSMTanBetaAtMZ_LIB): \
-	CPPFLAGS += $(MODlowNMSSMTanBetaAtMZ_SUBMOD_INC) $(MODlowNMSSMTanBetaAtMZ_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODlowNMSSMTanBetaAtMZ_SUBMOD_INC) $(MODlowNMSSMTanBetaAtMZ_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIGGSTOOLSFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBlowNMSSMTanBetaAtMZ_DEP) $(EXElowNMSSMTanBetaAtMZ_DEP) $(LLlowNMSSMTanBetaAtMZ_DEP) $(LIBlowNMSSMTanBetaAtMZ_OBJ) $(EXElowNMSSMTanBetaAtMZ_OBJ) $(LLlowNMSSMTanBetaAtMZ_OBJ) $(LLlowNMSSMTanBetaAtMZ_LIB): \
@@ -339,11 +342,11 @@ $(LIBlowNMSSMTanBetaAtMZ): $(LIBlowNMSSMTanBetaAtMZ_OBJ)
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBlowNMSSMTanBetaAtMZ) $(MODlowNMSSMTanBetaAtMZ_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
 $(LLlowNMSSMTanBetaAtMZ_LIB): $(LLlowNMSSMTanBetaAtMZ_OBJ) $(LIBlowNMSSMTanBetaAtMZ) $(MODlowNMSSMTanBetaAtMZ_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
 
 ALLDEP += $(LIBlowNMSSMTanBetaAtMZ_DEP) $(EXElowNMSSMTanBetaAtMZ_DEP)
 ALLSRC += $(LIBlowNMSSMTanBetaAtMZ_SRC) $(EXElowNMSSMTanBetaAtMZ_SRC)

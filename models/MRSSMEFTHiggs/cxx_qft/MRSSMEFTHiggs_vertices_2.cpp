@@ -20,7 +20,7 @@
 /**
  * @file cxx_qft/MRSSMEFTHiggs_vertices.cpp
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #include "MRSSMEFTHiggs_context_base.hpp"
@@ -35,11 +35,9 @@
 #define DERIVEDPARAMETER(p) context.model.p()
 #define PHASE(p) context.model.get_##p()
 
-namespace flexiblesusy {
-namespace MRSSMEFTHiggs_cxx_diagrams {
-namespace detail {
+namespace flexiblesusy::MRSSMEFTHiggs_cxx_diagrams::detail {
 
-ChiralVertex unit_charge(const context_base& context)
+cxx_diagrams::ChiralVertex unit_charge(const context_base& context)
 {
    std::array<int, 1> electron_indices = { 0 };
    std::array<int, 0> photon_indices = {};
@@ -58,6 +56,4 @@ ChiralVertex unit_charge(const context_base& context)
    return {left, right};
 }
 
-} // namespace detail
-} // namespace MRSSMEFTHiggs_cxx_diagrams
-} // namespace flexiblesusy
+} // namespace flexiblesusy::MRSSMEFTHiggs_cxx_diagrams::detail

@@ -16,22 +16,28 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-
 /**
  * @file CE6SSM_edm.hpp
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #ifndef CE6SSM_EDM_H
 #define CE6SSM_EDM_H
 
+#include "CE6SSM_mass_eigenstates.hpp"
+#include "lowe.h"
+
 namespace flexiblesusy {
+
 class CE6SSM_mass_eigenstates;
 
 namespace CE6SSM_edm {
 
-}
+template <typename Lepton>
+double calculate_edm(const CE6SSM_mass_eigenstates&, const softsusy::QedQcd&, int idx);
+
+} // namespace CE6SSM_edm
 } // namespace flexiblesusy
 
 #endif

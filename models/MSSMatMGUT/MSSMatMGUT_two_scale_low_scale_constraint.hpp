@@ -39,7 +39,6 @@ public:
    MSSMatMGUT_low_scale_constraint() = default;
    MSSMatMGUT_low_scale_constraint(MSSMatMGUT<Two_scale>*, const softsusy::QedQcd&);
    virtual ~MSSMatMGUT_low_scale_constraint() = default;
-   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
    virtual void apply() override;
    virtual double get_scale() const override;

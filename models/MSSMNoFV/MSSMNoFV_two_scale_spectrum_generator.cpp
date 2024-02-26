@@ -88,7 +88,7 @@ void MSSMNoFV_spectrum_generator<Two_scale>::run_except(const softsusy::QedQcd& 
 
    high_scale_constraint.initialize();
    susy_scale_constraint.initialize();
-   low_scale_constraint .initialize();
+   low_scale_constraint.initialize();
 
    low_scale_constraint.set_SM_like_Higgs_index(
       settings.get(Spectrum_generator_settings::eft_higgs_index));
@@ -139,10 +139,6 @@ void MSSMNoFV_spectrum_generator<Two_scale>::run_except(const softsusy::QedQcd& 
    reached_precision = convergence_tester.get_current_accuracy();
 
    calculate_spectrum();
-
-   // copy calculated W pole mass
-   model.get_physical().MVWm
-      = low_scale_constraint.get_sm_parameters().displayPoleMW();
 
    // run to output scale (if scale > 0)
    if (!is_zero(parameter_output_scale))

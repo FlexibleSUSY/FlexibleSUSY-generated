@@ -209,6 +209,16 @@ void NUHMSSMNoFVHimalaya_slha_io::set_settings(const Spectrum_generator_settings
 }
 
 /**
+ * Stores the settings (LToLConversion block) in the SLHA object.
+ *
+ * @param settings class of settings
+ */
+void NUHMSSMNoFVHimalaya_slha_io::set_LToLConversion_settings(const LToLConversion_settings& settings)
+{
+   slha_io.set_LToLConversion_settings(settings);
+}
+
+/**
  * Stores the settings (FlexibleSUSY block) in the SLHA object.
  *
  * @param settings class of settings
@@ -216,6 +226,15 @@ void NUHMSSMNoFVHimalaya_slha_io::set_settings(const Spectrum_generator_settings
 void NUHMSSMNoFVHimalaya_slha_io::set_FlexibleDecay_settings(const FlexibleDecay_settings& settings)
 {
    slha_io.set_FlexibleDecay_settings(settings);
+}
+
+/**
+ * Stores the settings (FlexibleSUSYUnitarity block) in the SLHA object.
+ */
+void NUHMSSMNoFVHimalaya_slha_io::set_unitarity_infinite_s(
+   const flexiblesusy::Spectrum_generator_settings& spectrum_generator_settings, UnitarityInfiniteS const& unitarity)
+{
+   slha_io.set_unitarity_infinite_s(spectrum_generator_settings, unitarity);
 }
 
 /**
@@ -586,28 +605,6 @@ void NUHMSSMNoFVHimalaya_slha_io::set_dcinfo(
 }
 
 /**
- * Sort decays of every particle according to their width
- *
- */
-std::vector<Decay> sort_decays_list(const Decays_list& decays_list) {
-   std::vector<Decay> decays_list_as_vector;
-   decays_list_as_vector.reserve(decays_list.size());
-   for (const auto& el : decays_list) {
-      decays_list_as_vector.push_back(el.second);
-   }
-
-   std::sort(
-      decays_list_as_vector.begin(),
-      decays_list_as_vector.end(),
-      [](const auto& d1, const auto& d2) {
-         return d1.get_width() > d2.get_width();
-      }
-   );
-
-   return decays_list_as_vector;
-}
-
-/**
  * Stores the branching ratios for a given particle in the SLHA
  * object.
  *
@@ -628,7 +625,7 @@ void NUHMSSMNoFVHimalaya_slha_io::set_decay_block(const Decays_list& decays_list
          << FORMAT_TOTAL_WIDTH(pdg, width, name + " decays");
 
    if (!is_zero(width, 1e-100)) {
-      constexpr double NEGATIVE_BR_TOLERANCE = 1e-11;
+      static constexpr double NEGATIVE_BR_TOLERANCE = 1e-11;
       const double MIN_BR_TO_PRINT = flexibledecay_settings.get(FlexibleDecay_settings::min_br_to_print);
       std::vector<Decay> sorted_decays_list = sort_decays_list(decays_list);
       for (const auto& channel : sorted_decays_list) {
@@ -655,6 +652,11 @@ void NUHMSSMNoFVHimalaya_slha_io::set_decay_block(const Decays_list& decays_list
    }
 
    slha_io.set_block(decay);
+}
+
+void NUHMSSMNoFVHimalaya_slha_io::set_effectivecouplings_block(const std::vector<std::tuple<int, int, int, double, std::string>>& effCouplings)
+{
+   slha_io.set_effectivecouplings_block(effCouplings);
 }
 
 
@@ -718,8 +720,8 @@ void NUHMSSMNoFVHimalaya_slha_io::set_extra(
       {
          std::ostringstream block;
          block << "Block FlexibleSUSYLowEnergy" << '\n'
-               << FORMAT_ELEMENT(0, (OBSERVABLES.a_muon), "Delta(g-2)_muon/2 FlexibleSUSY")
-               << FORMAT_ELEMENT(1, (OBSERVABLES.a_muon_uncertainty), "Delta(g-2)_muon/2 FlexibleSUSY uncertainty")
+               << FORMAT_ELEMENT(0, (OBSERVABLES.amm_Fm), "Delta(g-2)/2 of Fm (calculated with FlexibleSUSY)")
+               << FORMAT_ELEMENT(1, (OBSERVABLES.amm_uncertainty_Fm), "uncertainty of Delta(g-2)/2 of Fm (calculated with FlexibleSUSY)")
                << FORMAT_ELEMENT(2, (OBSERVABLES.a_muon_gm2calc), "Delta(g-2)_muon/2 GM2Calc")
                << FORMAT_ELEMENT(3, (OBSERVABLES.a_muon_gm2calc_uncertainty), "Delta(g-2)_muon/2 GM2Calc uncertainty")
          ;
@@ -1017,6 +1019,17 @@ void NUHMSSMNoFVHimalaya_slha_io::fill(Physical_input& input) const
  * @param settings struct of spectrum generator settings to be filled
  */
 void NUHMSSMNoFVHimalaya_slha_io::fill(Spectrum_generator_settings& settings) const
+{
+   slha_io.fill(settings);
+}
+
+/**
+ * Fill struct of spectrum generator settings from SLHA object
+ * (LToLConversion block)
+ *
+ * @param settings struct of spectrum generator settings to be filled
+ */
+void NUHMSSMNoFVHimalaya_slha_io::fill(LToLConversion_settings& settings) const
 {
    slha_io.fill(settings);
 }

@@ -37,7 +37,6 @@ public:
    THDMIIMSSMBC_high_scale_constraint() = default;
    THDMIIMSSMBC_high_scale_constraint(THDMIIMSSMBC<Two_scale>*);
    virtual ~THDMIIMSSMBC_high_scale_constraint() = default;
-   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
    virtual void apply() override;
    virtual double get_scale() const override;

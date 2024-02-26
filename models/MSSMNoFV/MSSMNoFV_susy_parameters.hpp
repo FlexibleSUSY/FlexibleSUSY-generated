@@ -107,7 +107,7 @@ protected:
    MSSMNoFV_input_parameters input{};
 
 private:
-   static const int numberOfParameters = 33;
+   static constexpr int numberOfParameters = 33;
 
    struct Susy_traces {
       double traceYdAdjYd{};

@@ -22,7 +22,7 @@
  *
  * @brief contains class for solving EWSB when two-scale algorithm is used
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #ifndef MSSMatMGUT_TWO_SCALE_EWSB_SOLVER_H
@@ -61,7 +61,7 @@ public:
 
    virtual int solve(MSSMatMGUT_mass_eigenstates&) override;
 private:
-   static const int number_of_ewsb_equations = 2;
+   static constexpr int number_of_ewsb_equations = 2;
    using EWSB_vector_t = Eigen::Matrix<double,number_of_ewsb_equations,1>;
 
    class EEWSBStepFailed : public Error {

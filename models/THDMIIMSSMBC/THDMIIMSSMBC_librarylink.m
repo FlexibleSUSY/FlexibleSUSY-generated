@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.7.1"];
+Print["FlexibleSUSY 2.8.0"];
 Print["THDMIIMSSMBC"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -21,11 +21,13 @@ FSTHDMIIMSSMBCSetLib = LibraryFunctionLoad[libTHDMIIMSSMBC, "FSTHDMIIMSSMBCSet",
 FSTHDMIIMSSMBCCalculateSpectrum = LibraryFunctionLoad[libTHDMIIMSSMBC, "FSTHDMIIMSSMBCCalculateSpectrum", LinkObject, LinkObject];
 FSTHDMIIMSSMBCCalculateObservables = LibraryFunctionLoad[libTHDMIIMSSMBC, "FSTHDMIIMSSMBCCalculateObservables", LinkObject, LinkObject];
 
+
 FSTHDMIIMSSMBCCalculateSpectrum::error = "`1`";
 FSTHDMIIMSSMBCCalculateSpectrum::warning = "`1`";
 
 FSTHDMIIMSSMBCCalculateObservables::error = "`1`";
 FSTHDMIIMSSMBCCalculateObservables::warning = "`1`";
+
 
 FSTHDMIIMSSMBC::info = "`1`";
 FSTHDMIIMSSMBC::nonum = "Error: `1` is not a numeric input value!";
@@ -66,6 +68,7 @@ fsDefaultSettings = {
       higgs3loopCorrectionAtAtAt -> 1,   (* FlexibleSUSY[29] *)
       higgs4loopCorrectionAtAsAsAs -> 1, (* FlexibleSUSY[30] *)
       loopLibrary -> 0,                  (* FlexibleSUSY[31] *)
+      calculateAMM -> 2.0,               (* FlexibleSUSY[32] *)
       parameterOutputScale -> 0          (* MODSEL[12] *)
 };
 
@@ -106,11 +109,18 @@ fsTHDMIIMSSMBCDefaultInputParameters = {
    MSUSY -> 0,
    MEWSB -> 0,
    MuInput -> 0,
+   M1Input -> 0,
+   M2Input -> 0,
    MAInput -> 0,
-   AtInput -> 0,
-   AbInput -> 0,
-   AtauInput -> 0,
-   LambdaLoopOrder -> 0
+   LambdaLoopOrder -> 0,
+   AeInput -> {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+   AdInput -> {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+   AuInput -> {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+   mslInput -> {0, 0, 0},
+   mseInput -> {0, 0, 0},
+   msqInput -> {0, 0, 0},
+   msdInput -> {0, 0, 0},
+   msuInput -> {0, 0, 0}
 };
 
 Options[FSTHDMIIMSSMBCOpenHandle] = {
@@ -158,6 +168,7 @@ FSTHDMIIMSSMBCOpenHandle[OptionsPattern[]] :=
             OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[higgs4loopCorrectionAtAsAsAs],
             OptionValue[loopLibrary],
+            OptionValue[calculateAMM],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)
@@ -197,11 +208,52 @@ FSTHDMIIMSSMBCOpenHandle[OptionsPattern[]] :=
             OptionValue[MSUSY],
             OptionValue[MEWSB],
             OptionValue[MuInput],
+            OptionValue[M1Input],
+            OptionValue[M2Input],
             OptionValue[MAInput],
-            OptionValue[AtInput],
-            OptionValue[AbInput],
-            OptionValue[AtauInput],
-            OptionValue[LambdaLoopOrder]
+            OptionValue[LambdaLoopOrder],
+            OptionValue[AeInput][[1,1]],
+            OptionValue[AeInput][[1,2]],
+            OptionValue[AeInput][[1,3]],
+            OptionValue[AeInput][[2,1]],
+            OptionValue[AeInput][[2,2]],
+            OptionValue[AeInput][[2,3]],
+            OptionValue[AeInput][[3,1]],
+            OptionValue[AeInput][[3,2]],
+            OptionValue[AeInput][[3,3]],
+            OptionValue[AdInput][[1,1]],
+            OptionValue[AdInput][[1,2]],
+            OptionValue[AdInput][[1,3]],
+            OptionValue[AdInput][[2,1]],
+            OptionValue[AdInput][[2,2]],
+            OptionValue[AdInput][[2,3]],
+            OptionValue[AdInput][[3,1]],
+            OptionValue[AdInput][[3,2]],
+            OptionValue[AdInput][[3,3]],
+            OptionValue[AuInput][[1,1]],
+            OptionValue[AuInput][[1,2]],
+            OptionValue[AuInput][[1,3]],
+            OptionValue[AuInput][[2,1]],
+            OptionValue[AuInput][[2,2]],
+            OptionValue[AuInput][[2,3]],
+            OptionValue[AuInput][[3,1]],
+            OptionValue[AuInput][[3,2]],
+            OptionValue[AuInput][[3,3]],
+            OptionValue[mslInput][[1]],
+            OptionValue[mslInput][[2]],
+            OptionValue[mslInput][[3]],
+            OptionValue[mseInput][[1]],
+            OptionValue[mseInput][[2]],
+            OptionValue[mseInput][[3]],
+            OptionValue[msqInput][[1]],
+            OptionValue[msqInput][[2]],
+            OptionValue[msqInput][[3]],
+            OptionValue[msdInput][[1]],
+            OptionValue[msdInput][[2]],
+            OptionValue[msdInput][[3]],
+            OptionValue[msuInput][[1]],
+            OptionValue[msuInput][[2]],
+            OptionValue[msuInput][[3]]
 
         }
 ];
@@ -247,6 +299,7 @@ FSTHDMIIMSSMBCSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[higgs4loopCorrectionAtAsAsAs],
             OptionValue[loopLibrary],
+            OptionValue[calculateAMM],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)
@@ -286,11 +339,52 @@ FSTHDMIIMSSMBCSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[MSUSY],
             OptionValue[MEWSB],
             OptionValue[MuInput],
+            OptionValue[M1Input],
+            OptionValue[M2Input],
             OptionValue[MAInput],
-            OptionValue[AtInput],
-            OptionValue[AbInput],
-            OptionValue[AtauInput],
-            OptionValue[LambdaLoopOrder]
+            OptionValue[LambdaLoopOrder],
+            OptionValue[AeInput][[1,1]],
+            OptionValue[AeInput][[1,2]],
+            OptionValue[AeInput][[1,3]],
+            OptionValue[AeInput][[2,1]],
+            OptionValue[AeInput][[2,2]],
+            OptionValue[AeInput][[2,3]],
+            OptionValue[AeInput][[3,1]],
+            OptionValue[AeInput][[3,2]],
+            OptionValue[AeInput][[3,3]],
+            OptionValue[AdInput][[1,1]],
+            OptionValue[AdInput][[1,2]],
+            OptionValue[AdInput][[1,3]],
+            OptionValue[AdInput][[2,1]],
+            OptionValue[AdInput][[2,2]],
+            OptionValue[AdInput][[2,3]],
+            OptionValue[AdInput][[3,1]],
+            OptionValue[AdInput][[3,2]],
+            OptionValue[AdInput][[3,3]],
+            OptionValue[AuInput][[1,1]],
+            OptionValue[AuInput][[1,2]],
+            OptionValue[AuInput][[1,3]],
+            OptionValue[AuInput][[2,1]],
+            OptionValue[AuInput][[2,2]],
+            OptionValue[AuInput][[2,3]],
+            OptionValue[AuInput][[3,1]],
+            OptionValue[AuInput][[3,2]],
+            OptionValue[AuInput][[3,3]],
+            OptionValue[mslInput][[1]],
+            OptionValue[mslInput][[2]],
+            OptionValue[mslInput][[3]],
+            OptionValue[mseInput][[1]],
+            OptionValue[mseInput][[2]],
+            OptionValue[mseInput][[3]],
+            OptionValue[msqInput][[1]],
+            OptionValue[msqInput][[2]],
+            OptionValue[msqInput][[3]],
+            OptionValue[msdInput][[1]],
+            OptionValue[msdInput][[2]],
+            OptionValue[msdInput][[3]],
+            OptionValue[msuInput][[1]],
+            OptionValue[msuInput][[2]],
+            OptionValue[msuInput][[3]]
 
         }] /. HoldPattern[OptionValue[param_]] :> param /.
         { p } /.

@@ -71,23 +71,11 @@ double NUHMSSM_susy_parameters::calc_beta_g3_3_loop(const Susy_traces& susy_trac
 {
    DEFINE_PROJECTOR(3,3,3,3)
 
-   const double traceAdjYdYd = TRACE_STRUCT.traceAdjYdYd;
-   const double traceAdjYeYe = TRACE_STRUCT.traceAdjYeYe;
-   const double traceAdjYuYu = TRACE_STRUCT.traceAdjYuYu;
-   const double traceAdjYdYdAdjYdYd = TRACE_STRUCT.traceAdjYdYdAdjYdYd;
-   const double traceAdjYuYuAdjYdYd = TRACE_STRUCT.traceAdjYuYuAdjYdYd;
-   const double traceAdjYuYuAdjYuYu = TRACE_STRUCT.traceAdjYuYuAdjYuYu;
 
 
    double beta_g3;
 
-   beta_g3 = Re(0.013333333333333334*Cube(g3)*(900*traceAdjYdYdAdjYdYd + 450*
-      traceAdjYdYd*traceAdjYeYe + 600*traceAdjYuYuAdjYdYd + 900*
-      traceAdjYuYuAdjYuYu - 1702*Quad(g1) - 2025*Quad(g2) + 8675*Quad(g3) - 160
-      *traceAdjYdYd*Sqr(g1) - 220*traceAdjYuYu*Sqr(g1) - 900*traceAdjYdYd*Sqr(
-      g2) - 900*traceAdjYuYu*Sqr(g2) - 45*Sqr(g1)*Sqr(g2) - 2600*traceAdjYdYd*
-      Sqr(g3) - 2600*traceAdjYuYu*Sqr(g3) + 110*Sqr(g1)*Sqr(g3) + 450*Sqr(g2)*
-      Sqr(g3) + 1350*Sqr(traceAdjYdYd) + 1350*Sqr(traceAdjYuYu)));
+   beta_g3 = 0;
 
 
    return threeLoop * beta_g3;

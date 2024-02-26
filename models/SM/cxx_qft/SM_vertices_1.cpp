@@ -20,7 +20,7 @@
 /**
  * @file cxx_qft/SM_vertices.cpp
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #include "SM_context_base.hpp"
@@ -35,82 +35,9 @@
 #define DERIVEDPARAMETER(p) context.model.p()
 #define PHASE(p) context.model.get_##p()
 
-namespace flexiblesusy {
-namespace SM_cxx_diagrams {
-namespace detail {
+namespace flexiblesusy::SM_cxx_diagrams::detail {
 
-ScalarVertex VertexImpl<fields::Ah, fields::Ah, fields::hh, fields::hh>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto Lambdax = MODELPARAMETER(Lambdax);
-
-   const std::complex<double> result = -Lambdax;
-
-   return {result};
-}
-
-ScalarVertex VertexImpl<fields::Ah, fields::Ah, fields::hh>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto v = MODELPARAMETER(v);
-   const auto Lambdax = MODELPARAMETER(Lambdax);
-
-   const std::complex<double> result = -(v*Lambdax);
-
-   return {result};
-}
-
-InverseMetricVertex VertexImpl<fields::Ah, fields::Ah, fields::VZ, fields::VZ>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g2 = MODELPARAMETER(g2);
-   const auto g1 = MODELPARAMETER(g1);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = 0.5*Sqr(g2*Cos(ThetaW) + 0.7745966692414834*g1*Sin(ThetaW));
-
-   return {result};
-}
-
-InverseMetricVertex VertexImpl<fields::Ah, fields::Ah, typename fields::conj<fields::VWp>::type, fields::VWp>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g2 = MODELPARAMETER(g2);
-
-   const std::complex<double> result = 0.5*Sqr(g2);
-
-   return {result};
-}
-
-MomentumDifferenceVertex VertexImpl<fields::Ah, fields::hh, fields::VZ>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   int minuend_index = 0;
-   int subtrahend_index = 1;
-
-   const auto g2 = MODELPARAMETER(g2);
-   const auto g1 = MODELPARAMETER(g1);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = std::complex<double>(0,0.1)*(5*g2*Cos(ThetaW) + 3.872983346207417*g1*Sin(ThetaW));
-
-   return {result, minuend_index, subtrahend_index};
-}
-
-MomentumDifferenceVertex VertexImpl<fields::Ah, fields::Hp, typename fields::conj<fields::VWp>::type>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   int minuend_index = 0;
-   int subtrahend_index = 1;
-
-   const auto g2 = MODELPARAMETER(g2);
-
-   const std::complex<double> result = std::complex<double>(0,-0.5)*g2;
-
-   return {result, minuend_index, subtrahend_index};
-}
-
-ChiralVertex VertexImpl<fields::Ah, typename fields::bar<fields::Fd>::type, fields::Fd>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<SM_cxx_diagrams::fields::Ah, typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fd>::type, SM_cxx_diagrams::fields::Fd>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -126,7 +53,7 @@ ChiralVertex VertexImpl<fields::Ah, typename fields::bar<fields::Fd>::type, fiel
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::Ah, typename fields::bar<fields::Fe>::type, fields::Fe>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<SM_cxx_diagrams::fields::Ah, typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fe>::type, SM_cxx_diagrams::fields::Fe>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -142,7 +69,7 @@ ChiralVertex VertexImpl<fields::Ah, typename fields::bar<fields::Fe>::type, fiel
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::Ah, typename fields::bar<fields::Fu>::type, fields::Fu>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<SM_cxx_diagrams::fields::Ah, typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fu>::type, SM_cxx_diagrams::fields::Fu>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -158,20 +85,7 @@ ChiralVertex VertexImpl<fields::Ah, typename fields::bar<fields::Fu>::type, fiel
    return {left, right};
 }
 
-MomentumDifferenceVertex VertexImpl<fields::Ah, typename fields::conj<fields::Hp>::type, fields::VWp>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   int minuend_index = 0;
-   int subtrahend_index = 1;
-
-   const auto g2 = MODELPARAMETER(g2);
-
-   const std::complex<double> result = std::complex<double>(0,-0.5)*g2;
-
-   return {result, minuend_index, subtrahend_index};
-}
-
-ChiralVertex VertexImpl<fields::Fe, typename fields::bar<fields::Fe>::type, fields::VP>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<SM_cxx_diagrams::fields::Fe, typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fe>::type, SM_cxx_diagrams::fields::VP>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt2 = indices[0];
@@ -187,7 +101,7 @@ ChiralVertex VertexImpl<fields::Fe, typename fields::bar<fields::Fe>::type, fiel
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::Fe, typename fields::bar<fields::Fe>::type, fields::VZ>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<SM_cxx_diagrams::fields::Fe, typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fe>::type, SM_cxx_diagrams::fields::VZ>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt2 = indices[0];
@@ -203,121 +117,7 @@ ChiralVertex VertexImpl<fields::Fe, typename fields::bar<fields::Fe>::type, fiel
    return {left, right};
 }
 
-ScalarVertex VertexImpl<fields::hh, fields::hh, fields::hh, fields::hh>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto Lambdax = MODELPARAMETER(Lambdax);
-
-   const std::complex<double> result = -3*Lambdax;
-
-   return {result};
-}
-
-ScalarVertex VertexImpl<fields::hh, fields::hh, fields::hh>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto v = MODELPARAMETER(v);
-   const auto Lambdax = MODELPARAMETER(Lambdax);
-
-   const std::complex<double> result = -3*v*Lambdax;
-
-   return {result};
-}
-
-ScalarVertex VertexImpl<fields::hh, fields::hh, fields::Hp, typename fields::conj<fields::Hp>::type>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto Lambdax = MODELPARAMETER(Lambdax);
-
-   const std::complex<double> result = -Lambdax;
-
-   return {result};
-}
-
-InverseMetricVertex VertexImpl<fields::hh, fields::hh, fields::VZ, fields::VZ>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g2 = MODELPARAMETER(g2);
-   const auto g1 = MODELPARAMETER(g1);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = 0.5*Sqr(g2*Cos(ThetaW) + 0.7745966692414834*g1*Sin(ThetaW));
-
-   return {result};
-}
-
-InverseMetricVertex VertexImpl<fields::hh, fields::hh, typename fields::conj<fields::VWp>::type, fields::VWp>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g2 = MODELPARAMETER(g2);
-
-   const std::complex<double> result = 0.5*Sqr(g2);
-
-   return {result};
-}
-
-ScalarVertex VertexImpl<fields::hh, fields::Hp, typename fields::conj<fields::Hp>::type>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto v = MODELPARAMETER(v);
-   const auto Lambdax = MODELPARAMETER(Lambdax);
-
-   const std::complex<double> result = -(v*Lambdax);
-
-   return {result};
-}
-
-InverseMetricVertex VertexImpl<fields::hh, fields::Hp, typename fields::conj<fields::VWp>::type, fields::VP>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g1 = MODELPARAMETER(g1);
-   const auto g2 = MODELPARAMETER(g2);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = 0.3872983346207417*g1*g2*Cos(ThetaW);
-
-   return {result};
-}
-
-InverseMetricVertex VertexImpl<fields::hh, fields::Hp, typename fields::conj<fields::VWp>::type, fields::VZ>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g1 = MODELPARAMETER(g1);
-   const auto g2 = MODELPARAMETER(g2);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = -0.3872983346207417*g1*g2*Sin(ThetaW);
-
-   return {result};
-}
-
-MomentumDifferenceVertex VertexImpl<fields::hh, fields::Hp, typename fields::conj<fields::VWp>::type>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   int minuend_index = 0;
-   int subtrahend_index = 1;
-
-   const auto g2 = MODELPARAMETER(g2);
-
-   const std::complex<double> result = 0.5*g2;
-
-   return {result, minuend_index, subtrahend_index};
-}
-
-InverseMetricVertex VertexImpl<fields::hh, fields::VZ, fields::VZ>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto v = MODELPARAMETER(v);
-   const auto g2 = MODELPARAMETER(g2);
-   const auto g1 = MODELPARAMETER(g1);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = 0.5*v*Sqr(g2*Cos(ThetaW) + 0.7745966692414834*g1*Sin(ThetaW));
-
-   return {result};
-}
-
-ChiralVertex VertexImpl<fields::hh, typename fields::bar<fields::Fd>::type, fields::Fd>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<SM_cxx_diagrams::fields::hh, typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fd>::type, SM_cxx_diagrams::fields::Fd>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -333,7 +133,7 @@ ChiralVertex VertexImpl<fields::hh, typename fields::bar<fields::Fd>::type, fiel
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::hh, typename fields::bar<fields::Fe>::type, fields::Fe>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<SM_cxx_diagrams::fields::hh, typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fe>::type, SM_cxx_diagrams::fields::Fe>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -349,7 +149,7 @@ ChiralVertex VertexImpl<fields::hh, typename fields::bar<fields::Fe>::type, fiel
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::hh, typename fields::bar<fields::Fu>::type, fields::Fu>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<SM_cxx_diagrams::fields::hh, typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fu>::type, SM_cxx_diagrams::fields::Fu>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -365,7 +165,7 @@ ChiralVertex VertexImpl<fields::hh, typename fields::bar<fields::Fu>::type, fiel
    return {left, right};
 }
 
-ScalarVertex VertexImpl<fields::hh, typename fields::conj<fields::Hp>::type, fields::Hp>::evaluate(
+cxx_diagrams::ScalarVertex VertexImpl<SM_cxx_diagrams::fields::hh, typename SM_cxx_diagrams::fields::conj<SM_cxx_diagrams::fields::Hp>::type, SM_cxx_diagrams::fields::Hp>::evaluate(
    const std::array<int, 0>& indices, const context_base& context)
 {
    const auto v = MODELPARAMETER(v);
@@ -376,44 +176,7 @@ ScalarVertex VertexImpl<fields::hh, typename fields::conj<fields::Hp>::type, fie
    return {result};
 }
 
-InverseMetricVertex VertexImpl<fields::hh, typename fields::conj<fields::Hp>::type, fields::VP, fields::VWp>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g1 = MODELPARAMETER(g1);
-   const auto g2 = MODELPARAMETER(g2);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = 0.3872983346207417*g1*g2*Cos(ThetaW);
-
-   return {result};
-}
-
-InverseMetricVertex VertexImpl<fields::hh, typename fields::conj<fields::Hp>::type, fields::VWp, fields::VZ>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g1 = MODELPARAMETER(g1);
-   const auto g2 = MODELPARAMETER(g2);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = -0.3872983346207417*g1*g2*Sin(ThetaW);
-
-   return {result};
-}
-
-MomentumDifferenceVertex VertexImpl<fields::hh, typename fields::conj<fields::Hp>::type, fields::VWp>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   int minuend_index = 0;
-   int subtrahend_index = 1;
-
-   const auto g2 = MODELPARAMETER(g2);
-
-   const std::complex<double> result = -0.5*g2;
-
-   return {result, minuend_index, subtrahend_index};
-}
-
-InverseMetricVertex VertexImpl<fields::hh, typename fields::conj<fields::VWp>::type, fields::VWp>::evaluate(
+cxx_diagrams::InverseMetricVertex VertexImpl<SM_cxx_diagrams::fields::hh, typename SM_cxx_diagrams::fields::conj<SM_cxx_diagrams::fields::VWp>::type, SM_cxx_diagrams::fields::VWp>::evaluate(
    const std::array<int, 0>& indices, const context_base& context)
 {
    const auto g2 = MODELPARAMETER(g2);
@@ -424,31 +187,7 @@ InverseMetricVertex VertexImpl<fields::hh, typename fields::conj<fields::VWp>::t
    return {result};
 }
 
-InverseMetricVertex VertexImpl<fields::Hp, typename fields::conj<fields::Hp>::type, fields::VP, fields::VP>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g1 = MODELPARAMETER(g1);
-   const auto g2 = MODELPARAMETER(g2);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = 0.5*Sqr(0.7745966692414834*g1*Cos(ThetaW) + g2*Sin(ThetaW));
-
-   return {result};
-}
-
-InverseMetricVertex VertexImpl<fields::Hp, typename fields::conj<fields::Hp>::type, fields::VP, fields::VZ>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g1 = MODELPARAMETER(g1);
-   const auto g2 = MODELPARAMETER(g2);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = 0.05*(7.745966692414834*g1*g2*Cos(2*ThetaW) + Sin(2*ThetaW)*(-3*Sqr(g1) + 5*Sqr(g2)));
-
-   return {result};
-}
-
-MomentumDifferenceVertex VertexImpl<fields::Hp, typename fields::conj<fields::Hp>::type, fields::VP>::evaluate(
+cxx_diagrams::MomentumDifferenceVertex VertexImpl<SM_cxx_diagrams::fields::Hp, typename SM_cxx_diagrams::fields::conj<SM_cxx_diagrams::fields::Hp>::type, SM_cxx_diagrams::fields::VP>::evaluate(
    const std::array<int, 0>& indices, const context_base& context)
 {
    int minuend_index = 0;
@@ -463,44 +202,7 @@ MomentumDifferenceVertex VertexImpl<fields::Hp, typename fields::conj<fields::Hp
    return {result, minuend_index, subtrahend_index};
 }
 
-InverseMetricVertex VertexImpl<fields::Hp, typename fields::conj<fields::Hp>::type, fields::VZ, fields::VZ>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g2 = MODELPARAMETER(g2);
-   const auto g1 = MODELPARAMETER(g1);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = 0.5*Sqr(g2*Cos(ThetaW) - 0.7745966692414834*g1*Sin(ThetaW));
-
-   return {result};
-}
-
-MomentumDifferenceVertex VertexImpl<fields::Hp, typename fields::conj<fields::Hp>::type, fields::VZ>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   int minuend_index = 0;
-   int subtrahend_index = 1;
-
-   const auto g2 = MODELPARAMETER(g2);
-   const auto g1 = MODELPARAMETER(g1);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = 0.1*(-5*g2*Cos(ThetaW) + 3.872983346207417*g1*Sin(ThetaW));
-
-   return {result, minuend_index, subtrahend_index};
-}
-
-InverseMetricVertex VertexImpl<fields::Hp, typename fields::conj<fields::Hp>::type, typename fields::conj<fields::VWp>::type, fields::VWp>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g2 = MODELPARAMETER(g2);
-
-   const std::complex<double> result = 0.5*Sqr(g2);
-
-   return {result};
-}
-
-InverseMetricVertex VertexImpl<fields::Hp, typename fields::conj<fields::VWp>::type, fields::VP>::evaluate(
+cxx_diagrams::InverseMetricVertex VertexImpl<SM_cxx_diagrams::fields::Hp, typename SM_cxx_diagrams::fields::conj<SM_cxx_diagrams::fields::VWp>::type, SM_cxx_diagrams::fields::VP>::evaluate(
    const std::array<int, 0>& indices, const context_base& context)
 {
    const auto g1 = MODELPARAMETER(g1);
@@ -513,20 +215,7 @@ InverseMetricVertex VertexImpl<fields::Hp, typename fields::conj<fields::VWp>::t
    return {result};
 }
 
-InverseMetricVertex VertexImpl<fields::Hp, typename fields::conj<fields::VWp>::type, fields::VZ>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g1 = MODELPARAMETER(g1);
-   const auto g2 = MODELPARAMETER(g2);
-   const auto v = MODELPARAMETER(v);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = -0.3872983346207417*g1*g2*v*Sin(ThetaW);
-
-   return {result};
-}
-
-ChiralVertex VertexImpl<fields::VP, fields::Fd, typename fields::bar<fields::Fd>::type>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<SM_cxx_diagrams::fields::VP, SM_cxx_diagrams::fields::Fd, typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fd>::type>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt2 = indices[0];
@@ -542,7 +231,7 @@ ChiralVertex VertexImpl<fields::VP, fields::Fd, typename fields::bar<fields::Fd>
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::VP, fields::Fe, typename fields::bar<fields::Fe>::type>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<SM_cxx_diagrams::fields::VP, SM_cxx_diagrams::fields::Fe, typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fe>::type>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt2 = indices[0];
@@ -558,7 +247,7 @@ ChiralVertex VertexImpl<fields::VP, fields::Fe, typename fields::bar<fields::Fe>
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::VP, fields::Fu, typename fields::bar<fields::Fu>::type>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<SM_cxx_diagrams::fields::VP, SM_cxx_diagrams::fields::Fu, typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fu>::type>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt2 = indices[0];
@@ -574,7 +263,7 @@ ChiralVertex VertexImpl<fields::VP, fields::Fu, typename fields::bar<fields::Fu>
    return {left, right};
 }
 
-MomentumDifferenceVertex VertexImpl<fields::VP, fields::Hp, typename fields::conj<fields::Hp>::type>::evaluate(
+cxx_diagrams::MomentumDifferenceVertex VertexImpl<SM_cxx_diagrams::fields::VP, SM_cxx_diagrams::fields::Hp, typename SM_cxx_diagrams::fields::conj<SM_cxx_diagrams::fields::Hp>::type>::evaluate(
    const std::array<int, 0>& indices, const context_base& context)
 {
    int minuend_index = 1;
@@ -589,7 +278,7 @@ MomentumDifferenceVertex VertexImpl<fields::VP, fields::Hp, typename fields::con
    return {result, minuend_index, subtrahend_index};
 }
 
-TripleVectorVertex VertexImpl<fields::VP, fields::VWp, typename fields::conj<fields::VWp>::type>::evaluate(
+cxx_diagrams::TripleVectorVertex VertexImpl<SM_cxx_diagrams::fields::VP, SM_cxx_diagrams::fields::VWp, typename SM_cxx_diagrams::fields::conj<SM_cxx_diagrams::fields::VWp>::type>::evaluate(
    const std::array<int, 0>& indices, const context_base& context)
 {
    const auto g2 = MODELPARAMETER(g2);
@@ -597,10 +286,50 @@ TripleVectorVertex VertexImpl<fields::VP, fields::VWp, typename fields::conj<fie
 
    const std::complex<double> result = -(g2*Sin(ThetaW));
 
-   return {result, TripleVectorVertex::odd_permutation{}};
+   return {result, cxx_diagrams::TripleVectorVertex::odd_permutation{}};
 }
 
-ChiralVertex VertexImpl<fields::VZ, fields::Fd, typename fields::bar<fields::Fd>::type>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<SM_cxx_diagrams::fields::VP, typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fe>::type, SM_cxx_diagrams::fields::Fe>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   const int gt1 = indices[0];
+   const int gt2 = indices[1];
+   const auto g1 = MODELPARAMETER(g1);
+   const auto g2 = MODELPARAMETER(g2);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+
+   const std::complex<double> left = 0.5*KroneckerDelta(gt1,gt2)*(0.7745966692414834*g1*Cos(ThetaW) + g2*Sin(ThetaW));
+
+   const std::complex<double> right = 0.7745966692414834*g1*Cos(ThetaW)*KroneckerDelta(gt1,gt2);
+
+   return {left, right};
+}
+
+cxx_diagrams::InverseMetricVertex VertexImpl<SM_cxx_diagrams::fields::VWp, typename SM_cxx_diagrams::fields::conj<SM_cxx_diagrams::fields::Hp>::type, SM_cxx_diagrams::fields::VP>::evaluate(
+   const std::array<int, 0>& indices, const context_base& context)
+{
+   const auto g1 = MODELPARAMETER(g1);
+   const auto g2 = MODELPARAMETER(g2);
+   const auto v = MODELPARAMETER(v);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+
+   const std::complex<double> result = 0.3872983346207417*g1*g2*v*Cos(ThetaW);
+
+   return {result};
+}
+
+cxx_diagrams::TripleVectorVertex VertexImpl<SM_cxx_diagrams::fields::VWp, typename SM_cxx_diagrams::fields::conj<SM_cxx_diagrams::fields::VWp>::type, SM_cxx_diagrams::fields::VP>::evaluate(
+   const std::array<int, 0>& indices, const context_base& context)
+{
+   const auto g2 = MODELPARAMETER(g2);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+
+   const std::complex<double> result = -(g2*Sin(ThetaW));
+
+   return {result, cxx_diagrams::TripleVectorVertex::odd_permutation{}};
+}
+
+cxx_diagrams::ChiralVertex VertexImpl<SM_cxx_diagrams::fields::VZ, SM_cxx_diagrams::fields::Fd, typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fd>::type>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt2 = indices[0];
@@ -616,7 +345,7 @@ ChiralVertex VertexImpl<fields::VZ, fields::Fd, typename fields::bar<fields::Fd>
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::VZ, fields::Fe, typename fields::bar<fields::Fe>::type>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<SM_cxx_diagrams::fields::VZ, SM_cxx_diagrams::fields::Fe, typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fe>::type>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt2 = indices[0];
@@ -632,7 +361,7 @@ ChiralVertex VertexImpl<fields::VZ, fields::Fe, typename fields::bar<fields::Fe>
    return {left, right};
 }
 
-ChiralVertex VertexImpl<fields::VZ, fields::Fu, typename fields::bar<fields::Fu>::type>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<SM_cxx_diagrams::fields::VZ, SM_cxx_diagrams::fields::Fu, typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fu>::type>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt2 = indices[0];
@@ -648,7 +377,23 @@ ChiralVertex VertexImpl<fields::VZ, fields::Fu, typename fields::bar<fields::Fu>
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename fields::bar<fields::Fd>::type, fields::Fd, fields::Ah>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<SM_cxx_diagrams::fields::VZ, typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fe>::type, SM_cxx_diagrams::fields::Fe>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   const int gt1 = indices[0];
+   const int gt2 = indices[1];
+   const auto g2 = MODELPARAMETER(g2);
+   const auto g1 = MODELPARAMETER(g1);
+   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+
+   const std::complex<double> left = 0.5*KroneckerDelta(gt1,gt2)*(g2*Cos(ThetaW) - 0.7745966692414834*g1*Sin(ThetaW));
+
+   const std::complex<double> right = -0.7745966692414834*g1*KroneckerDelta(gt1,gt2)*Sin(ThetaW);
+
+   return {left, right};
+}
+
+cxx_diagrams::ChiralVertex VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fd>::type, SM_cxx_diagrams::fields::Fd, SM_cxx_diagrams::fields::Ah>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -664,7 +409,7 @@ ChiralVertex VertexImpl<typename fields::bar<fields::Fd>::type, fields::Fd, fiel
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename fields::bar<fields::Fd>::type, fields::Fd, fields::hh>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fd>::type, SM_cxx_diagrams::fields::Fd, SM_cxx_diagrams::fields::hh>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -680,21 +425,7 @@ ChiralVertex VertexImpl<typename fields::bar<fields::Fd>::type, fields::Fd, fiel
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename fields::bar<fields::Fd>::type, fields::Fd, fields::VG>::evaluate(
-   const std::array<int, 2>& indices, const context_base& context)
-{
-   const int gt1 = indices[0];
-   const int gt2 = indices[1];
-   const auto g3 = MODELPARAMETER(g3);
-
-   const std::complex<double> left = -0.5*g3*KroneckerDelta(gt1,gt2);
-
-   const std::complex<double> right = -0.5*g3*KroneckerDelta(gt1,gt2);
-
-   return {left, right};
-}
-
-ChiralVertex VertexImpl<typename fields::bar<fields::Fd>::type, fields::Fd, fields::VP>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fd>::type, SM_cxx_diagrams::fields::Fd, SM_cxx_diagrams::fields::VP>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -710,7 +441,7 @@ ChiralVertex VertexImpl<typename fields::bar<fields::Fd>::type, fields::Fd, fiel
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename fields::bar<fields::Fd>::type, fields::Fd, fields::VZ>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fd>::type, SM_cxx_diagrams::fields::Fd, SM_cxx_diagrams::fields::VZ>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -726,7 +457,7 @@ ChiralVertex VertexImpl<typename fields::bar<fields::Fd>::type, fields::Fd, fiel
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename fields::bar<fields::Fd>::type, fields::Fu, typename fields::conj<fields::Hp>::type>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fd>::type, SM_cxx_diagrams::fields::Fu, typename SM_cxx_diagrams::fields::conj<SM_cxx_diagrams::fields::Hp>::type>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -745,23 +476,7 @@ ChiralVertex VertexImpl<typename fields::bar<fields::Fd>::type, fields::Fu, type
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename fields::bar<fields::Fd>::type, fields::Fu, typename fields::conj<fields::VWp>::type>::evaluate(
-   const std::array<int, 2>& indices, const context_base& context)
-{
-   const int gt1 = indices[0];
-   const int gt2 = indices[1];
-   const auto g2 = MODELPARAMETER(g2);
-   const auto Vu = MODELPARAMETER(Vu);
-   const auto Vd = MODELPARAMETER(Vd);
-
-   const std::complex<double> left = -0.7071067811865475*g2*SUM(j1,0,2,Conj(Vu(gt2,j1))*Vd(gt1,j1));
-
-   const std::complex<double> right = 0;
-
-   return {left, right};
-}
-
-ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fe, fields::Ah>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fe>::type, SM_cxx_diagrams::fields::Fe, SM_cxx_diagrams::fields::Ah>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -777,7 +492,7 @@ ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fe, fiel
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fe, fields::hh>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fe>::type, SM_cxx_diagrams::fields::Fe, SM_cxx_diagrams::fields::hh>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -793,7 +508,7 @@ ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fe, fiel
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fe, fields::VP>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fe>::type, SM_cxx_diagrams::fields::Fe, SM_cxx_diagrams::fields::VP>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -809,7 +524,7 @@ ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fe, fiel
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fe, fields::VZ>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fe>::type, SM_cxx_diagrams::fields::Fe, SM_cxx_diagrams::fields::VZ>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -825,7 +540,7 @@ ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fe, fiel
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fv, typename fields::conj<fields::Hp>::type>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fe>::type, SM_cxx_diagrams::fields::Fv, typename SM_cxx_diagrams::fields::conj<SM_cxx_diagrams::fields::Hp>::type>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -840,7 +555,22 @@ ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fv, type
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fv, typename fields::conj<fields::VWp>::type>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fe>::type, typename SM_cxx_diagrams::fields::conj<SM_cxx_diagrams::fields::Hp>::type, SM_cxx_diagrams::fields::Fv>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
+{
+   const int gt1 = indices[0];
+   const int gt2 = indices[1];
+   const auto Ye = MODELPARAMETER(Ye);
+   const auto Ue = MODELPARAMETER(Ue);
+
+   const std::complex<double> left = -SUM(j1,0,2,Conj(Ue(gt1,j1))*Ye(j1,gt2));
+
+   const std::complex<double> right = 0;
+
+   return {left, right};
+}
+
+cxx_diagrams::ChiralVertex VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fe>::type, typename SM_cxx_diagrams::fields::conj<SM_cxx_diagrams::fields::VWp>::type, SM_cxx_diagrams::fields::Fv>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -855,22 +585,7 @@ ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, fields::Fv, type
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename fields::bar<fields::Fe>::type, typename fields::conj<fields::Hp>::type, fields::Fv>::evaluate(
-   const std::array<int, 2>& indices, const context_base& context)
-{
-   const int gt1 = indices[0];
-   const int gt2 = indices[1];
-   const auto Ye = MODELPARAMETER(Ye);
-   const auto Ue = MODELPARAMETER(Ue);
-
-   const std::complex<double> left = -SUM(j1,0,2,Conj(Ue(gt1,j1))*Ye(j1,gt2));
-
-   const std::complex<double> right = 0;
-
-   return {left, right};
-}
-
-ChiralVertex VertexImpl<typename fields::bar<fields::Fu>::type, fields::Fd, fields::Hp>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fu>::type, SM_cxx_diagrams::fields::Fd, SM_cxx_diagrams::fields::Hp>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -889,23 +604,7 @@ ChiralVertex VertexImpl<typename fields::bar<fields::Fu>::type, fields::Fd, fiel
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename fields::bar<fields::Fu>::type, fields::Fd, fields::VWp>::evaluate(
-   const std::array<int, 2>& indices, const context_base& context)
-{
-   const int gt1 = indices[0];
-   const int gt2 = indices[1];
-   const auto g2 = MODELPARAMETER(g2);
-   const auto Vd = MODELPARAMETER(Vd);
-   const auto Vu = MODELPARAMETER(Vu);
-
-   const std::complex<double> left = -0.7071067811865475*g2*SUM(j1,0,2,Conj(Vd(gt2,j1))*Vu(gt1,j1));
-
-   const std::complex<double> right = 0;
-
-   return {left, right};
-}
-
-ChiralVertex VertexImpl<typename fields::bar<fields::Fu>::type, fields::Fu, fields::Ah>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fu>::type, SM_cxx_diagrams::fields::Fu, SM_cxx_diagrams::fields::Ah>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -921,7 +620,7 @@ ChiralVertex VertexImpl<typename fields::bar<fields::Fu>::type, fields::Fu, fiel
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename fields::bar<fields::Fu>::type, fields::Fu, fields::hh>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fu>::type, SM_cxx_diagrams::fields::Fu, SM_cxx_diagrams::fields::hh>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -937,21 +636,7 @@ ChiralVertex VertexImpl<typename fields::bar<fields::Fu>::type, fields::Fu, fiel
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename fields::bar<fields::Fu>::type, fields::Fu, fields::VG>::evaluate(
-   const std::array<int, 2>& indices, const context_base& context)
-{
-   const int gt1 = indices[0];
-   const int gt2 = indices[1];
-   const auto g3 = MODELPARAMETER(g3);
-
-   const std::complex<double> left = -0.5*g3*KroneckerDelta(gt1,gt2);
-
-   const std::complex<double> right = -0.5*g3*KroneckerDelta(gt1,gt2);
-
-   return {left, right};
-}
-
-ChiralVertex VertexImpl<typename fields::bar<fields::Fu>::type, fields::Fu, fields::VP>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fu>::type, SM_cxx_diagrams::fields::Fu, SM_cxx_diagrams::fields::VP>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -967,7 +652,7 @@ ChiralVertex VertexImpl<typename fields::bar<fields::Fu>::type, fields::Fu, fiel
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename fields::bar<fields::Fu>::type, fields::Fu, fields::VZ>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fu>::type, SM_cxx_diagrams::fields::Fu, SM_cxx_diagrams::fields::VZ>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -983,7 +668,7 @@ ChiralVertex VertexImpl<typename fields::bar<fields::Fu>::type, fields::Fu, fiel
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename fields::bar<fields::Fv>::type, fields::Fe, fields::Hp>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fv>::type, SM_cxx_diagrams::fields::Fe, SM_cxx_diagrams::fields::Hp>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -998,22 +683,7 @@ ChiralVertex VertexImpl<typename fields::bar<fields::Fv>::type, fields::Fe, fiel
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename fields::bar<fields::Fv>::type, fields::Fe, fields::VWp>::evaluate(
-   const std::array<int, 2>& indices, const context_base& context)
-{
-   const int gt1 = indices[0];
-   const int gt2 = indices[1];
-   const auto g2 = MODELPARAMETER(g2);
-   const auto Ve = MODELPARAMETER(Ve);
-
-   const std::complex<double> left = IF(gt1 < 3,-0.7071067811865475*g2*Conj(Ve(gt2,gt1)),0);
-
-   const std::complex<double> right = 0;
-
-   return {left, right};
-}
-
-ChiralVertex VertexImpl<typename fields::bar<fields::Fv>::type, fields::Fv, fields::VZ>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fv>::type, SM_cxx_diagrams::fields::Fv, SM_cxx_diagrams::fields::VZ>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -1029,7 +699,7 @@ ChiralVertex VertexImpl<typename fields::bar<fields::Fv>::type, fields::Fv, fiel
    return {left, right};
 }
 
-ChiralVertex VertexImpl<typename fields::bar<fields::Fv>::type, fields::Hp, fields::Fe>::evaluate(
+cxx_diagrams::ChiralVertex VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fv>::type, SM_cxx_diagrams::fields::Hp, SM_cxx_diagrams::fields::Fe>::evaluate(
    const std::array<int, 2>& indices, const context_base& context)
 {
    const int gt1 = indices[0];
@@ -1044,393 +714,34 @@ ChiralVertex VertexImpl<typename fields::bar<fields::Fv>::type, fields::Hp, fiel
    return {left, right};
 }
 
-MomentumVertex VertexImpl<typename fields::bar<fields::gP>::type, fields::gWpC, fields::VWp>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
+cxx_diagrams::ChiralVertex VertexImpl<typename SM_cxx_diagrams::fields::bar<SM_cxx_diagrams::fields::Fv>::type, SM_cxx_diagrams::fields::VWp, SM_cxx_diagrams::fields::Fe>::evaluate(
+   const std::array<int, 2>& indices, const context_base& context)
 {
+   const int gt1 = indices[0];
+   const int gt2 = indices[1];
    const auto g2 = MODELPARAMETER(g2);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+   const auto Ve = MODELPARAMETER(Ve);
 
-   const std::complex<double> result = g2*Sin(ThetaW);
+   const std::complex<double> left = IF(gt1 < 3,-0.7071067811865475*g2*Conj(Ve(gt2,gt1)),0);
 
-   return {result, 1};
+   const std::complex<double> right = 0;
+
+   return {left, right};
 }
 
-MomentumVertex VertexImpl<typename fields::bar<fields::gP>::type, fields::gWp, typename fields::conj<fields::VWp>::type>::evaluate(
+cxx_diagrams::MomentumDifferenceVertex VertexImpl<typename SM_cxx_diagrams::fields::conj<SM_cxx_diagrams::fields::Hp>::type, SM_cxx_diagrams::fields::Hp, SM_cxx_diagrams::fields::VZ>::evaluate(
    const std::array<int, 0>& indices, const context_base& context)
 {
-   const auto g2 = MODELPARAMETER(g2);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
+   int minuend_index = 1;
+   int subtrahend_index = 0;
 
-   const std::complex<double> result = -(g2*Sin(ThetaW));
-
-   return {result, 1};
-}
-
-ScalarVertex VertexImpl<typename fields::bar<fields::gWpC>::type, fields::gP, typename fields::conj<fields::Hp>::type>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g2 = MODELPARAMETER(g2);
-   const auto v = MODELPARAMETER(v);
-   const auto g1 = MODELPARAMETER(g1);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = -0.25*g2*v*(0.7745966692414834*g1*Cos(ThetaW) + g2*Sin(ThetaW));
-
-   return {result};
-}
-
-MomentumVertex VertexImpl<typename fields::bar<fields::gWpC>::type, fields::gP, typename fields::conj<fields::VWp>::type>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g2 = MODELPARAMETER(g2);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = g2*Sin(ThetaW);
-
-   return {result, 1};
-}
-
-ScalarVertex VertexImpl<typename fields::bar<fields::gWpC>::type, fields::gWpC, fields::Ah>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g2 = MODELPARAMETER(g2);
-   const auto v = MODELPARAMETER(v);
-
-   const std::complex<double> result = std::complex<double>(0,0.25)*v*Sqr(g2);
-
-   return {result};
-}
-
-ScalarVertex VertexImpl<typename fields::bar<fields::gWpC>::type, fields::gWpC, fields::hh>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g2 = MODELPARAMETER(g2);
-   const auto v = MODELPARAMETER(v);
-
-   const std::complex<double> result = -0.25*v*Sqr(g2);
-
-   return {result};
-}
-
-MomentumVertex VertexImpl<typename fields::bar<fields::gWpC>::type, fields::gWpC, fields::VP>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g2 = MODELPARAMETER(g2);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = -(g2*Sin(ThetaW));
-
-   return {result, 1};
-}
-
-MomentumVertex VertexImpl<typename fields::bar<fields::gWpC>::type, fields::gWpC, fields::VZ>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g2 = MODELPARAMETER(g2);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = -(g2*Cos(ThetaW));
-
-   return {result, 1};
-}
-
-ScalarVertex VertexImpl<typename fields::bar<fields::gWpC>::type, fields::gZ, typename fields::conj<fields::Hp>::type>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g2 = MODELPARAMETER(g2);
-   const auto v = MODELPARAMETER(v);
-   const auto g1 = MODELPARAMETER(g1);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = 0.05*g2*v*(-5*g2*Cos(ThetaW) + 3.872983346207417*g1*Sin(ThetaW));
-
-   return {result};
-}
-
-MomentumVertex VertexImpl<typename fields::bar<fields::gWpC>::type, fields::gZ, typename fields::conj<fields::VWp>::type>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g2 = MODELPARAMETER(g2);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = g2*Cos(ThetaW);
-
-   return {result, 1};
-}
-
-ScalarVertex VertexImpl<typename fields::bar<fields::gWp>::type, fields::gP, fields::Hp>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g2 = MODELPARAMETER(g2);
-   const auto v = MODELPARAMETER(v);
-   const auto g1 = MODELPARAMETER(g1);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = -0.25*g2*v*(0.7745966692414834*g1*Cos(ThetaW) + g2*Sin(ThetaW));
-
-   return {result};
-}
-
-MomentumVertex VertexImpl<typename fields::bar<fields::gWp>::type, fields::gP, fields::VWp>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g2 = MODELPARAMETER(g2);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = -(g2*Sin(ThetaW));
-
-   return {result, 1};
-}
-
-ScalarVertex VertexImpl<typename fields::bar<fields::gWp>::type, fields::gWp, fields::Ah>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g2 = MODELPARAMETER(g2);
-   const auto v = MODELPARAMETER(v);
-
-   const std::complex<double> result = std::complex<double>(0,-0.25)*v*Sqr(g2);
-
-   return {result};
-}
-
-ScalarVertex VertexImpl<typename fields::bar<fields::gWp>::type, fields::gWp, fields::hh>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g2 = MODELPARAMETER(g2);
-   const auto v = MODELPARAMETER(v);
-
-   const std::complex<double> result = -0.25*v*Sqr(g2);
-
-   return {result};
-}
-
-MomentumVertex VertexImpl<typename fields::bar<fields::gWp>::type, fields::gWp, fields::VP>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g2 = MODELPARAMETER(g2);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = g2*Sin(ThetaW);
-
-   return {result, 1};
-}
-
-MomentumVertex VertexImpl<typename fields::bar<fields::gWp>::type, fields::gWp, fields::VZ>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g2 = MODELPARAMETER(g2);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = g2*Cos(ThetaW);
-
-   return {result, 1};
-}
-
-ScalarVertex VertexImpl<typename fields::bar<fields::gWp>::type, fields::gZ, fields::Hp>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g2 = MODELPARAMETER(g2);
-   const auto v = MODELPARAMETER(v);
-   const auto g1 = MODELPARAMETER(g1);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = 0.05*g2*v*(-5*g2*Cos(ThetaW) + 3.872983346207417*g1*Sin(ThetaW));
-
-   return {result};
-}
-
-MomentumVertex VertexImpl<typename fields::bar<fields::gWp>::type, fields::gZ, fields::VWp>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g2 = MODELPARAMETER(g2);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = -(g2*Cos(ThetaW));
-
-   return {result, 1};
-}
-
-ScalarVertex VertexImpl<typename fields::bar<fields::gZ>::type, fields::gP, fields::hh>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto v = MODELPARAMETER(v);
-   const auto g1 = MODELPARAMETER(g1);
-   const auto g2 = MODELPARAMETER(g2);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = 0.025*v*(7.745966692414834*g1*g2*Cos(2*ThetaW) + Sin(2*ThetaW)*(3*Sqr(g1) - 5*Sqr(g2)));
-
-   return {result};
-}
-
-ScalarVertex VertexImpl<typename fields::bar<fields::gZ>::type, fields::gWpC, fields::Hp>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g2 = MODELPARAMETER(g2);
-   const auto v = MODELPARAMETER(v);
-   const auto g1 = MODELPARAMETER(g1);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = 0.25*g2*v*(g2*Cos(ThetaW) + 0.7745966692414834*g1*Sin(ThetaW));
-
-   return {result};
-}
-
-MomentumVertex VertexImpl<typename fields::bar<fields::gZ>::type, fields::gWpC, fields::VWp>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g2 = MODELPARAMETER(g2);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = g2*Cos(ThetaW);
-
-   return {result, 1};
-}
-
-ScalarVertex VertexImpl<typename fields::bar<fields::gZ>::type, fields::gWp, typename fields::conj<fields::Hp>::type>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g2 = MODELPARAMETER(g2);
-   const auto v = MODELPARAMETER(v);
-   const auto g1 = MODELPARAMETER(g1);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = 0.25*g2*v*(g2*Cos(ThetaW) + 0.7745966692414834*g1*Sin(ThetaW));
-
-   return {result};
-}
-
-MomentumVertex VertexImpl<typename fields::bar<fields::gZ>::type, fields::gWp, typename fields::conj<fields::VWp>::type>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g2 = MODELPARAMETER(g2);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = -(g2*Cos(ThetaW));
-
-   return {result, 1};
-}
-
-ScalarVertex VertexImpl<typename fields::bar<fields::gZ>::type, fields::gZ, fields::hh>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto v = MODELPARAMETER(v);
    const auto g2 = MODELPARAMETER(g2);
    const auto g1 = MODELPARAMETER(g1);
    const auto ThetaW = DERIVEDPARAMETER(ThetaW);
 
-   const std::complex<double> result = -0.25*v*Sqr(g2*Cos(ThetaW) + 0.7745966692414834*g1*Sin(ThetaW));
+   const std::complex<double> result = 0.1*(-5*g2*Cos(ThetaW) + 3.872983346207417*g1*Sin(ThetaW));
 
-   return {result};
+   return {result, minuend_index, subtrahend_index};
 }
 
-InverseMetricVertex VertexImpl<typename fields::conj<fields::Hp>::type, fields::VP, fields::VWp>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g1 = MODELPARAMETER(g1);
-   const auto g2 = MODELPARAMETER(g2);
-   const auto v = MODELPARAMETER(v);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = 0.3872983346207417*g1*g2*v*Cos(ThetaW);
-
-   return {result};
-}
-
-InverseMetricVertex VertexImpl<typename fields::conj<fields::Hp>::type, fields::VWp, fields::VZ>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g1 = MODELPARAMETER(g1);
-   const auto g2 = MODELPARAMETER(g2);
-   const auto v = MODELPARAMETER(v);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = -0.3872983346207417*g1*g2*v*Sin(ThetaW);
-
-   return {result};
-}
-
-QuadrupleVectorVertex VertexImpl<typename fields::conj<fields::VWp>::type, fields::VP, fields::VP, fields::VWp>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g2 = MODELPARAMETER(g2);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> part1 = Sqr(g2)*Sqr(Sin(ThetaW));
-
-   const std::complex<double> part2 = Sqr(g2)*Sqr(Sin(ThetaW));
-
-   const std::complex<double> part3 = -2*Sqr(g2)*Sqr(Sin(ThetaW));
-
-   return {part1, part2, part3};
-}
-
-QuadrupleVectorVertex VertexImpl<typename fields::conj<fields::VWp>::type, fields::VP, fields::VWp, fields::VZ>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g2 = MODELPARAMETER(g2);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> part1 = Cos(ThetaW)*Sin(ThetaW)*Sqr(g2);
-
-   const std::complex<double> part2 = -(Sin(2*ThetaW)*Sqr(g2));
-
-   const std::complex<double> part3 = Cos(ThetaW)*Sin(ThetaW)*Sqr(g2);
-
-   return {part1, part2, part3};
-}
-
-TripleVectorVertex VertexImpl<typename fields::conj<fields::VWp>::type, fields::VP, fields::VWp>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g2 = MODELPARAMETER(g2);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = -(g2*Sin(ThetaW));
-
-   return {result, TripleVectorVertex::odd_permutation{}};
-}
-
-QuadrupleVectorVertex VertexImpl<typename fields::conj<fields::VWp>::type, fields::VWp, fields::VZ, fields::VZ>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g2 = MODELPARAMETER(g2);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> part1 = -2*Sqr(g2)*Sqr(Cos(ThetaW));
-
-   const std::complex<double> part2 = Sqr(g2)*Sqr(Cos(ThetaW));
-
-   const std::complex<double> part3 = Sqr(g2)*Sqr(Cos(ThetaW));
-
-   return {part1, part2, part3};
-}
-
-TripleVectorVertex VertexImpl<typename fields::conj<fields::VWp>::type, fields::VWp, fields::VZ>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g2 = MODELPARAMETER(g2);
-   const auto ThetaW = DERIVEDPARAMETER(ThetaW);
-
-   const std::complex<double> result = g2*Cos(ThetaW);
-
-   return {result, TripleVectorVertex::odd_permutation{}};
-}
-
-QuadrupleVectorVertex VertexImpl<typename fields::conj<fields::VWp>::type, typename fields::conj<fields::VWp>::type, fields::VWp, fields::VWp>::evaluate(
-   const std::array<int, 0>& indices, const context_base& context)
-{
-   const auto g2 = MODELPARAMETER(g2);
-
-   const std::complex<double> part1 = 2*Sqr(g2);
-
-   const std::complex<double> part2 = -Sqr(g2);
-
-   const std::complex<double> part3 = -Sqr(g2);
-
-   return {part1, part2, part3};
-}
-
-} // namespace detail
-} // namespace SM_cxx_diagrams
-} // namespace flexiblesusy
+} // namespace flexiblesusy::SM_cxx_diagrams::detail

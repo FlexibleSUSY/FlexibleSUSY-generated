@@ -54,22 +54,23 @@ NUHMSSMNoFVHimalaya_TARBALL := \
 		$(MODNAME).tar.gz
 
 LIBNUHMSSMNoFVHimalaya_SRC := \
-		$(DIR)/NUHMSSMNoFVHimalaya_a_muon.cpp \
+		$(DIR)/NUHMSSMNoFVHimalaya_amm.cpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_edm.cpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_FFV_form_factors.cpp \
-		$(DIR)/NUHMSSMNoFVHimalaya_f_to_f_conversion.cpp \
-		$(DIR)/NUHMSSMNoFVHimalaya_l_to_lgamma.cpp \
+		$(wildcard $(DIR)/observables/NUHMSSMNoFVHimalaya*.cpp) \
 		$(DIR)/NUHMSSMNoFVHimalaya_b_to_s_gamma.cpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_info.cpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_input_parameters.cpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_mass_eigenstates.cpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_mass_eigenstates_decoupling_scheme.cpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_model_slha.cpp \
+		$(DIR)/NUHMSSMNoFVHimalaya_lepton_amm_wrapper.cpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_observables.cpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_physical.cpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_slha_io.cpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_soft_parameters.cpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_susy_parameters.cpp \
+		$(DIR)/NUHMSSMNoFVHimalaya_unitarity.cpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_utilities.cpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_weinberg_angle.cpp
 
@@ -89,12 +90,11 @@ LLNUHMSSMNoFVHimalaya_MMA  := \
 		$(DIR)/run_NUHMSSMNoFVHimalaya.m
 
 LIBNUHMSSMNoFVHimalaya_HDR := \
-		$(DIR)/NUHMSSMNoFVHimalaya_a_muon.hpp \
+		$(DIR)/NUHMSSMNoFVHimalaya_amm.hpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_convergence_tester.hpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_edm.hpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_FFV_form_factors.hpp \
-		$(DIR)/NUHMSSMNoFVHimalaya_f_to_f_conversion.hpp \
-		$(DIR)/NUHMSSMNoFVHimalaya_l_to_lgamma.hpp \
+		$(wildcard $(DIR)/observables/NUHMSSMNoFVHimalaya*.hpp) \
 		$(DIR)/NUHMSSMNoFVHimalaya_b_to_s_gamma.hpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_ewsb_solver.hpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_ewsb_solver_interface.hpp \
@@ -108,6 +108,7 @@ LIBNUHMSSMNoFVHimalaya_HDR := \
 		$(DIR)/NUHMSSMNoFVHimalaya_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_model.hpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_model_slha.hpp \
+		$(DIR)/NUHMSSMNoFVHimalaya_lepton_amm_wrapper.hpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_observables.hpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_physical.hpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_slha_io.hpp \
@@ -116,12 +117,14 @@ LIBNUHMSSMNoFVHimalaya_HDR := \
 		$(DIR)/NUHMSSMNoFVHimalaya_soft_parameters.hpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_susy_parameters.hpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_susy_scale_constraint.hpp \
+		$(DIR)/NUHMSSMNoFVHimalaya_unitarity.hpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_utilities.hpp \
 		$(DIR)/NUHMSSMNoFVHimalaya_weinberg_angle.hpp
 
 LIBNUHMSSMNoFVHimalaya_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/NUHMSSMNoFVHimalaya_qft.hpp \
 		$(DIR)/cxx_qft/NUHMSSMNoFVHimalaya_fields.hpp \
+		$(DIR)/cxx_qft/NUHMSSMNoFVHimalaya_particle_aliases.hpp \
 		$(DIR)/cxx_qft/NUHMSSMNoFVHimalaya_vertices.hpp \
 		$(DIR)/cxx_qft/NUHMSSMNoFVHimalaya_context_base.hpp \
 		$(DIR)/cxx_qft/NUHMSSMNoFVHimalaya_npointfunctions_wilsoncoeffs.hpp
@@ -317,7 +320,7 @@ $(METACODE_STAMP_NUHMSSMNoFVHimalaya):
 endif
 
 $(LIBNUHMSSMNoFVHimalaya_DEP) $(EXENUHMSSMNoFVHimalaya_DEP) $(LLNUHMSSMNoFVHimalaya_DEP) $(LIBNUHMSSMNoFVHimalaya_OBJ) $(EXENUHMSSMNoFVHimalaya_OBJ) $(LLNUHMSSMNoFVHimalaya_OBJ) $(LLNUHMSSMNoFVHimalaya_LIB): \
-	CPPFLAGS += $(MODNUHMSSMNoFVHimalaya_SUBMOD_INC) $(MODNUHMSSMNoFVHimalaya_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODNUHMSSMNoFVHimalaya_SUBMOD_INC) $(MODNUHMSSMNoFVHimalaya_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIGGSTOOLSFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBNUHMSSMNoFVHimalaya_DEP) $(EXENUHMSSMNoFVHimalaya_DEP) $(LLNUHMSSMNoFVHimalaya_DEP) $(LIBNUHMSSMNoFVHimalaya_OBJ) $(EXENUHMSSMNoFVHimalaya_OBJ) $(LLNUHMSSMNoFVHimalaya_OBJ) $(LLNUHMSSMNoFVHimalaya_LIB): \
@@ -333,11 +336,11 @@ $(LIBNUHMSSMNoFVHimalaya): $(LIBNUHMSSMNoFVHimalaya_OBJ)
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBNUHMSSMNoFVHimalaya) $(MODNUHMSSMNoFVHimalaya_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
 $(LLNUHMSSMNoFVHimalaya_LIB): $(LLNUHMSSMNoFVHimalaya_OBJ) $(LIBNUHMSSMNoFVHimalaya) $(MODNUHMSSMNoFVHimalaya_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
 
 ALLDEP += $(LIBNUHMSSMNoFVHimalaya_DEP) $(EXENUHMSSMNoFVHimalaya_DEP)
 ALLSRC += $(LIBNUHMSSMNoFVHimalaya_SRC) $(EXENUHMSSMNoFVHimalaya_SRC)

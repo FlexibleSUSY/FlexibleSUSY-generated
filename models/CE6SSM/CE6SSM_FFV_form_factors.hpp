@@ -19,7 +19,7 @@
 /**
  * @file CE6SSM_FFV_form_factors.hpp
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #ifndef CE6SSM_FFVFormFactors_H
@@ -34,11 +34,20 @@ namespace flexiblesusy {
 class CE6SSM_mass_eigenstates;
 
 namespace CE6SSM_FFV_form_factors {
+
 std::valarray<std::complex<double>> calculate_Fe_Fe_VP_form_factors (
    int generationIndex1, int generationIndex2,
    const CE6SSM_mass_eigenstates& model, bool discard_SM_contributions);
-}
 
+template <typename Fj, typename Fi, typename V>
+std::enable_if_t<
+   std::is_same_v<Fj, CE6SSM_cxx_diagrams::fields::Fe> && std::is_same_v<Fi, CE6SSM_cxx_diagrams::fields::Fe> && std::is_same_v<V, CE6SSM_cxx_diagrams::fields::VP>,
+   std::valarray<std::complex<double>>
+>
+calculate_form_factors(   int, int,
+const CE6SSM_mass_eigenstates&, bool);
+
+} // namespace CE6SSM_FFV_form_factors
 } // namespace flexiblesusy
 
 #endif

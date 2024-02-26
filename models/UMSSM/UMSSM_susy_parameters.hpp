@@ -121,7 +121,7 @@ protected:
    UMSSM_input_parameters input{};
 
 private:
-   static const int numberOfParameters = 44;
+   static constexpr int numberOfParameters = 44;
 
    struct Susy_traces {
       double traceYdAdjYd{};

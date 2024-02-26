@@ -19,7 +19,7 @@
 /**
  * @file CMSSMNoFV_FFV_form_factors.hpp
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #ifndef CMSSMNoFV_FFVFormFactors_H
@@ -34,10 +34,18 @@ namespace flexiblesusy {
 class CMSSMNoFV_mass_eigenstates;
 
 namespace CMSSMNoFV_FFV_form_factors {
+
 std::valarray<std::complex<double>> calculate_Fm_Fm_VP_form_factors (
      const CMSSMNoFV_mass_eigenstates& model, bool discard_SM_contributions);
-}
 
+template <typename Fj, typename Fi, typename V>
+std::enable_if_t<
+   std::is_same_v<Fj, CMSSMNoFV_cxx_diagrams::fields::Fm> && std::is_same_v<Fi, CMSSMNoFV_cxx_diagrams::fields::Fm> && std::is_same_v<V, CMSSMNoFV_cxx_diagrams::fields::VP>,
+   std::valarray<std::complex<double>>
+>
+calculate_form_factors(     const CMSSMNoFV_mass_eigenstates&, bool);
+
+} // namespace CMSSMNoFV_FFV_form_factors
 } // namespace flexiblesusy
 
 #endif

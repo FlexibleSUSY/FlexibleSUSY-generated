@@ -16,22 +16,28 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-
 /**
  * @file SplitMSSM_edm.hpp
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #ifndef SplitMSSM_EDM_H
 #define SplitMSSM_EDM_H
 
+#include "SplitMSSM_mass_eigenstates.hpp"
+#include "lowe.h"
+
 namespace flexiblesusy {
+
 class SplitMSSM_mass_eigenstates;
 
 namespace SplitMSSM_edm {
 
-}
+template <typename Lepton>
+double calculate_edm(const SplitMSSM_mass_eigenstates&, const softsusy::QedQcd&, int idx);
+
+} // namespace SplitMSSM_edm
 } // namespace flexiblesusy
 
 #endif

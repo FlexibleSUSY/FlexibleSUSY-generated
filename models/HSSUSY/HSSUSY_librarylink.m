@@ -1,5 +1,5 @@
 Print["================================"];
-Print["FlexibleSUSY 2.7.1"];
+Print["FlexibleSUSY 2.8.0"];
 Print["HSSUSY"];
 Print["http://flexiblesusy.hepforge.org"];
 Print["================================"];
@@ -21,11 +21,13 @@ FSHSSUSYSetLib = LibraryFunctionLoad[libHSSUSY, "FSHSSUSYSet", {Integer, {Real,1
 FSHSSUSYCalculateSpectrum = LibraryFunctionLoad[libHSSUSY, "FSHSSUSYCalculateSpectrum", LinkObject, LinkObject];
 FSHSSUSYCalculateObservables = LibraryFunctionLoad[libHSSUSY, "FSHSSUSYCalculateObservables", LinkObject, LinkObject];
 
+
 FSHSSUSYCalculateSpectrum::error = "`1`";
 FSHSSUSYCalculateSpectrum::warning = "`1`";
 
 FSHSSUSYCalculateObservables::error = "`1`";
 FSHSSUSYCalculateObservables::warning = "`1`";
+
 
 FSHSSUSY::info = "`1`";
 FSHSSUSY::nonum = "Error: `1` is not a numeric input value!";
@@ -66,6 +68,7 @@ fsDefaultSettings = {
       higgs3loopCorrectionAtAtAt -> 1,   (* FlexibleSUSY[29] *)
       higgs4loopCorrectionAtAsAsAs -> 1, (* FlexibleSUSY[30] *)
       loopLibrary -> 0,                  (* FlexibleSUSY[31] *)
+      calculateAMM -> 2.0,               (* FlexibleSUSY[32] *)
       parameterOutputScale -> 0          (* MODSEL[12] *)
 };
 
@@ -177,6 +180,7 @@ FSHSSUSYOpenHandle[OptionsPattern[]] :=
             OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[higgs4loopCorrectionAtAsAsAs],
             OptionValue[loopLibrary],
+            OptionValue[calculateAMM],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)
@@ -325,6 +329,7 @@ FSHSSUSYSet[handle_Integer, p:OptionsPattern[]] :=
             OptionValue[higgs3loopCorrectionAtAtAt],
             OptionValue[higgs4loopCorrectionAtAsAsAs],
             OptionValue[loopLibrary],
+            OptionValue[calculateAMM],
             OptionValue[parameterOutputScale],
 
             (* Standard Model input parameters *)

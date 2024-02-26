@@ -39,7 +39,6 @@ public:
    NMSSMEFTHiggs_low_scale_constraint() = default;
    NMSSMEFTHiggs_low_scale_constraint(NMSSMEFTHiggs<Two_scale>*, const softsusy::QedQcd&);
    virtual ~NMSSMEFTHiggs_low_scale_constraint() = default;
-   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
    virtual void apply() override;
    virtual double get_scale() const override;

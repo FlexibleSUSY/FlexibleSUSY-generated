@@ -54,22 +54,23 @@ SplitMSSM_TARBALL := \
 		$(MODNAME).tar.gz
 
 LIBSplitMSSM_SRC := \
-		$(DIR)/SplitMSSM_a_muon.cpp \
+		$(DIR)/SplitMSSM_amm.cpp \
 		$(DIR)/SplitMSSM_edm.cpp \
 		$(DIR)/SplitMSSM_FFV_form_factors.cpp \
-		$(DIR)/SplitMSSM_f_to_f_conversion.cpp \
-		$(DIR)/SplitMSSM_l_to_lgamma.cpp \
+		$(wildcard $(DIR)/observables/SplitMSSM*.cpp) \
 		$(DIR)/SplitMSSM_b_to_s_gamma.cpp \
 		$(DIR)/SplitMSSM_info.cpp \
 		$(DIR)/SplitMSSM_input_parameters.cpp \
 		$(DIR)/SplitMSSM_mass_eigenstates.cpp \
 		$(DIR)/SplitMSSM_mass_eigenstates_decoupling_scheme.cpp \
 		$(DIR)/SplitMSSM_model_slha.cpp \
+		$(DIR)/SplitMSSM_lepton_amm_wrapper.cpp \
 		$(DIR)/SplitMSSM_observables.cpp \
 		$(DIR)/SplitMSSM_physical.cpp \
 		$(DIR)/SplitMSSM_slha_io.cpp \
 		$(DIR)/SplitMSSM_soft_parameters.cpp \
 		$(DIR)/SplitMSSM_susy_parameters.cpp \
+		$(DIR)/SplitMSSM_unitarity.cpp \
 		$(DIR)/SplitMSSM_utilities.cpp \
 		$(DIR)/SplitMSSM_weinberg_angle.cpp
 
@@ -89,12 +90,11 @@ LLSplitMSSM_MMA  := \
 		$(DIR)/run_SplitMSSM.m
 
 LIBSplitMSSM_HDR := \
-		$(DIR)/SplitMSSM_a_muon.hpp \
+		$(DIR)/SplitMSSM_amm.hpp \
 		$(DIR)/SplitMSSM_convergence_tester.hpp \
 		$(DIR)/SplitMSSM_edm.hpp \
 		$(DIR)/SplitMSSM_FFV_form_factors.hpp \
-		$(DIR)/SplitMSSM_f_to_f_conversion.hpp \
-		$(DIR)/SplitMSSM_l_to_lgamma.hpp \
+		$(wildcard $(DIR)/observables/SplitMSSM*.hpp) \
 		$(DIR)/SplitMSSM_b_to_s_gamma.hpp \
 		$(DIR)/SplitMSSM_ewsb_solver.hpp \
 		$(DIR)/SplitMSSM_ewsb_solver_interface.hpp \
@@ -108,6 +108,7 @@ LIBSplitMSSM_HDR := \
 		$(DIR)/SplitMSSM_mass_eigenstates_decoupling_scheme.hpp \
 		$(DIR)/SplitMSSM_model.hpp \
 		$(DIR)/SplitMSSM_model_slha.hpp \
+		$(DIR)/SplitMSSM_lepton_amm_wrapper.hpp \
 		$(DIR)/SplitMSSM_observables.hpp \
 		$(DIR)/SplitMSSM_physical.hpp \
 		$(DIR)/SplitMSSM_slha_io.hpp \
@@ -116,12 +117,14 @@ LIBSplitMSSM_HDR := \
 		$(DIR)/SplitMSSM_soft_parameters.hpp \
 		$(DIR)/SplitMSSM_susy_parameters.hpp \
 		$(DIR)/SplitMSSM_susy_scale_constraint.hpp \
+		$(DIR)/SplitMSSM_unitarity.hpp \
 		$(DIR)/SplitMSSM_utilities.hpp \
 		$(DIR)/SplitMSSM_weinberg_angle.hpp
 
 LIBSplitMSSM_CXXQFT_HDR := \
 		$(DIR)/cxx_qft/SplitMSSM_qft.hpp \
 		$(DIR)/cxx_qft/SplitMSSM_fields.hpp \
+		$(DIR)/cxx_qft/SplitMSSM_particle_aliases.hpp \
 		$(DIR)/cxx_qft/SplitMSSM_vertices.hpp \
 		$(DIR)/cxx_qft/SplitMSSM_context_base.hpp \
 		$(DIR)/cxx_qft/SplitMSSM_npointfunctions_wilsoncoeffs.hpp
@@ -317,7 +320,7 @@ $(METACODE_STAMP_SplitMSSM):
 endif
 
 $(LIBSplitMSSM_DEP) $(EXESplitMSSM_DEP) $(LLSplitMSSM_DEP) $(LIBSplitMSSM_OBJ) $(EXESplitMSSM_OBJ) $(LLSplitMSSM_OBJ) $(LLSplitMSSM_LIB): \
-	CPPFLAGS += $(MODSplitMSSM_SUBMOD_INC) $(MODSplitMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIMALAYAFLAGS)
+	CPPFLAGS += $(MODSplitMSSM_SUBMOD_INC) $(MODSplitMSSM_INC) $(GSLFLAGS) $(EIGENFLAGS) $(BOOSTFLAGS) $(GM2CALCFLAGS) $(HIGGSTOOLSFLAGS) $(HIMALAYAFLAGS)
 
 ifneq (,$(findstring yes,$(ENABLE_LOOPTOOLS)$(ENABLE_FFLITE)))
 $(LIBSplitMSSM_DEP) $(EXESplitMSSM_DEP) $(LLSplitMSSM_DEP) $(LIBSplitMSSM_OBJ) $(EXESplitMSSM_OBJ) $(LLSplitMSSM_OBJ) $(LLSplitMSSM_LIB): \
@@ -333,11 +336,11 @@ $(LIBSplitMSSM): $(LIBSplitMSSM_OBJ)
 
 $(DIR)/%.x: $(DIR)/%.o $(LIBSplitMSSM) $(MODSplitMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
+		$(Q)$(CXX) $(LDFLAGS) -o $@ $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(GSLLIBS) $(SQLITELIBS) $(TSILLIBS) $(FLIBS) $(THREADLIBS) $(LDLIBS) $(FUTILIBS)
 
 $(LLSplitMSSM_LIB): $(LLSplitMSSM_OBJ) $(LIBSplitMSSM) $(MODSplitMSSM_LIB) $(LIBFLEXI) $(filter-out -%,$(LOOPFUNCLIBS)) $(FUTILIBS)
 		@$(MSG)
-		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
+		$(Q)$(LIBLNK_MAKE_LIB_CMD) $@ $(CPPFLAGS) $(CFLAGS) $(call abspathx,$(ADDONLIBS) $^) $(filter -%,$(LOOPFUNCLIBS)) $(GM2CALCLIBS) $(HIGGSTOOLSLIBS) $(PYTHONLIBS) $(HIMALAYALIBS) $(TSILLIBS) $(GSLLIBS) $(THREADLIBS) $(LDLIBS) $(LLLIBS) $(FUTILIBS) $(FLIBS)
 
 ALLDEP += $(LIBSplitMSSM_DEP) $(EXESplitMSSM_DEP)
 ALLSRC += $(LIBSplitMSSM_SRC) $(EXESplitMSSM_SRC)

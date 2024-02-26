@@ -25,7 +25,7 @@
  * which solve EWSB and calculate masses and mixings from DRbar
  * parameters.
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #include "MRSSM2_mass_eigenstates_decoupling_scheme.hpp"
@@ -509,6 +509,9 @@ void CLASSNAME::calculate_tree_level_mass_spectrum()
    calculate_MGlu();
    calculate_MVG();
 
+
+   // move goldstone bosons to the front
+   reorder_tree_level_masses();
 }
 
 /**
@@ -520,8 +523,6 @@ void CLASSNAME::calculate_tree_level_mass_spectrum()
 void CLASSNAME::calculate_pole_mass_spectrum()
 {
    calculate_tree_level_mass_spectrum();
-   // move goldstone bosons to the front
-   reorder_tree_level_masses();
    copy_tree_level_masses_to_pole_masses();
    check_pole_masses_for_tachyons();
 }

@@ -24,7 +24,7 @@
  *        value problem using the two_scale solver by solving EWSB
  *        and determine the pole masses and mixings
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #ifndef MRSSM2_MASS_EIGENSTATES_H
@@ -64,12 +64,11 @@ public:
    virtual ~MRSSM2_mass_eigenstates() = default;
    MRSSM2_mass_eigenstates& operator=(const MRSSM2_mass_eigenstates&) = default;
    MRSSM2_mass_eigenstates& operator=(MRSSM2_mass_eigenstates&&) = default;
-   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
    std::unique_ptr<MRSSM2_mass_eigenstates_interface> clone() const override;
 
    /// number of EWSB equations
-   static const int number_of_ewsb_equations = 4;
+   static constexpr int number_of_ewsb_equations = 4;
 
    void calculate_DRbar_masses();
    void calculate_pole_masses();

@@ -167,8 +167,8 @@ void NUHMSSM_high_scale_constraint<Two_scale>::apply()
    update_scale();
 
    const auto Azero = INPUTPARAMETER(Azero);
-   const auto mHd2In = INPUTPARAMETER(mHd2In);
-   const auto mHu2In = INPUTPARAMETER(mHu2In);
+   const auto MuInput = INPUTPARAMETER(MuInput);
+   const auto BInput = INPUTPARAMETER(BInput);
    const auto m0 = INPUTPARAMETER(m0);
    const auto m12 = INPUTPARAMETER(m12);
    const auto Ye = MODELPARAMETER(Ye);
@@ -178,8 +178,8 @@ void NUHMSSM_high_scale_constraint<Two_scale>::apply()
    MODEL->set_TYe((Azero*Ye).real());
    MODEL->set_TYd((Azero*Yd).real());
    MODEL->set_TYu((Azero*Yu).real());
-   MODEL->set_mHd2(Re(mHd2In));
-   MODEL->set_mHu2(Re(mHu2In));
+   MODEL->set_Mu(Re(MuInput));
+   MODEL->set_BMu(Re(BInput));
    MODEL->set_mq2((Sqr(m0)*UNITMATRIX(3)).real());
    MODEL->set_ml2((Sqr(m0)*UNITMATRIX(3)).real());
    MODEL->set_md2((Sqr(m0)*UNITMATRIX(3)).real());

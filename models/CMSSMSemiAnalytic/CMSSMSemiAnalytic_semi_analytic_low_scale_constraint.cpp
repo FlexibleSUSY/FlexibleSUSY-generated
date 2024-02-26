@@ -259,7 +259,7 @@ double CMSSMSemiAnalytic_low_scale_constraint<Semi_analytic>::calculate_theta_w(
 
       if (MODEL->get_thresholds() && MODEL->get_threshold_corrections().
          sin_theta_w > 0)
-         qedqcd.setPoleMW(result.second);
+         Pole(MVWm) = result.second;
 
       MODEL->get_problems().unflag_no_sinThetaW_convergence();
    } catch (const Error& e) {

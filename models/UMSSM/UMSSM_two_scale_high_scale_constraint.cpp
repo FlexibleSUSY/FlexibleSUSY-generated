@@ -187,6 +187,7 @@ void UMSSM_high_scale_constraint<Two_scale>::apply()
    MODEL->set_md2((Sqr(m0)*UNITMATRIX(3)).real());
    MODEL->set_mu2((Sqr(m0)*UNITMATRIX(3)).real());
    MODEL->set_me2((Sqr(m0)*UNITMATRIX(3)).real());
+   MODEL->set_mvR2((Sqr(m0)*UNITMATRIX(3)).real());
    MODEL->set_Lambdax(Re(LambdaInput));
    MODEL->set_TLambdax(Re(ALambdaInput*Lambdax));
    MODEL->set_MassB(Re(m12));

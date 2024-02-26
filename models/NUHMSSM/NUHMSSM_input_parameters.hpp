@@ -32,8 +32,8 @@ struct NUHMSSM_input_parameters {
    double TanBeta{};
    int SignMu{1};
    double Azero{};
-   double mHd2In{};
-   double mHu2In{};
+   double MuInput{};
+   double BInput{};
 
 
    Eigen::ArrayXd get() const;

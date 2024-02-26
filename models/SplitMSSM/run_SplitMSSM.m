@@ -88,7 +88,6 @@ handle = FSSplitMSSMOpenHandle[
 
 spectrum    = FSSplitMSSMCalculateSpectrum[handle];
 observables = FSSplitMSSMCalculateObservables[handle];
-decays      = FSSplitMSSMCalculateDecays[handle];
 
 FSSplitMSSMCloseHandle[handle];
 

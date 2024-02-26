@@ -16,22 +16,28 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-
 /**
  * @file CMSSMSemiAnalytic_edm.hpp
  *
- * This file was generated with FlexibleSUSY 2.7.1 and SARAH 4.14.5 .
+ * This file was generated with FlexibleSUSY 2.8.0 and SARAH 4.15.1 .
  */
 
 #ifndef CMSSMSemiAnalytic_EDM_H
 #define CMSSMSemiAnalytic_EDM_H
 
+#include "CMSSMSemiAnalytic_mass_eigenstates.hpp"
+#include "lowe.h"
+
 namespace flexiblesusy {
+
 class CMSSMSemiAnalytic_mass_eigenstates;
 
 namespace CMSSMSemiAnalytic_edm {
 
-}
+template <typename Lepton>
+double calculate_edm(const CMSSMSemiAnalytic_mass_eigenstates&, const softsusy::QedQcd&, int idx);
+
+} // namespace CMSSMSemiAnalytic_edm
 } // namespace flexiblesusy
 
 #endif

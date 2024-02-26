@@ -136,7 +136,7 @@ protected:
 
 
 private:
-   static const int numberOfParameters = 121;
+   static constexpr int numberOfParameters = 121;
 
    struct Soft_traces {
       double traceAdjYdTYd{};
